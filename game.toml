@@ -1,0 +1,39 @@
+[game]
+name = "Mega Man X6"
+id = "SLUS-01395"
+exe = "mmx6/SLUS_013.95"
+disc = "mmx6/Mega Man X6 (USA) (v1.1).cue"
+load_address = "0x80010000"
+entry_pc = "0x80054AD8"
+text_size = "0x0007F000"
+stack_base = "0x801FFFF0"
+
+[recompiler]
+seeds = "seeds/ghidra_funcs.txt"
+# bios_thunks = "seeds/mmx6_bios_thunks.txt"  # optional; add once BIOS thunks are inventoried
+out_dir = "generated"
+strict = true
+
+[runtime]
+debug_port = 4490
+window_title = "MegaManX6Recomp"
+memcard_dir = "saves"
+
+# ── Audit-specific config (consumed by psxrecomp-v4/tools/*.py and tests) ──
+# Schema mirrors psxrecomp-v4/bios/SCPH1001.toml. Paths are relative to the
+# project root.
+
+[audit]
+# Dynamic discovery — functions are found by walking control flow from
+# entry_pc. No Ghidra function-starts file is required to bootstrap.
+
+# Code region: text segment is contiguous from load_address for text_size bytes.
+[[audit.regions]]
+name        = "Text"
+rom_start   = "0x800"          # offset within the PS-X EXE file (skip header)
+rom_end     = "0x7F800"        # rom_start + text_size
+vaddr_base  = "0x80010000"
+
+# Address normalization: KSEG masking only (game loads contiguously, no remaps).
+[audit.normalize]
+kseg_mask = "0x1FFFFFFF"
