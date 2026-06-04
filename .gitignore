@@ -45,6 +45,9 @@
 *.user
 *.log
 
+# Stdout/stderr redirect dumps from launch/debug helpers (root-level, local-only)
+/_*.txt
+
 # Runtime artifacts from psx-runtime launches
 psx_crash.txt
 psx_last_run_report.json

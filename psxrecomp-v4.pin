@@ -1,2 +1,11 @@
+# Pinned commit of github.com/mstan/psxrecomp (the shared framework) used to
+# build this repo. Bumping this is a deliberate, reviewable change — psxrecomp
+# is a separate repo evolving on its own cadence. Update via:
+#   git -C ../psxrecomp rev-parse master > /tmp/sha && \
+#     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
 branch=master
-sha=4706680c1ce7291b8aba4c68033a1b4c8c5d4340
+sha=ec4306fbb32dcfd738ab05ddc84a34ef0002d329
+# Bumped 2026-06-04: points at psxrecomp master = the mmx6 framework
+# (CD/DMA/MDEC + codegen fixes, commit ec4306f) developed in this repo's
+# bring-up. MMX6 boots BIOS -> game to its intro against this commit, 0
+# dispatch misses. See ISSUES.md #1 (pre-gameplay CD spin) and #2 (input).
