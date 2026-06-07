@@ -3,8 +3,8 @@
 # is a separate repo evolving on its own cadence. Update via:
 #   git -C ../psxrecomp rev-parse master > /tmp/sha && \
 #     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
-branch=master
-sha=d22c9cec4284c9a72ac742ed6a3548722c9abba2
+branch=dev/ape-escape
+sha=834f440161a123c6eff6615bc550494c30c59579
 # Bumped 2026-06-04: points at psxrecomp master = the mmx6 framework
 # (CD/DMA/MDEC + codegen fixes, commit ec4306f) developed in this repo's
 # bring-up. MMX6 boots BIOS -> game to its intro against this commit, 0
