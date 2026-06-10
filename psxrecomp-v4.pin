@@ -4,8 +4,9 @@
 #   git -C ../psxrecomp rev-parse master > /tmp/sha && \
 #     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
 branch=master
-sha=d22c9cec4284c9a72ac742ed6a3548722c9abba2
-# Bumped 2026-06-04: points at psxrecomp master = the mmx6 framework
-# (CD/DMA/MDEC + codegen fixes, commit ec4306f) developed in this repo's
-# bring-up. MMX6 boots BIOS -> game to its intro against this commit, 0
-# dispatch misses. See ISSUES.md #1 (pre-gameplay CD spin) and #2 (input).
+sha=035a9fa9681873887e0de94d65369bbcd3e87d7d
+# Bumped 2026-06-09: psxrecomp master = Bug B frame-pacing fix (ffc1521) +
+# release hygiene (035a9fa). MMX6 verified against it: builds clean
+# (build-master), boots BIOS -> game to the X-vs-Zero intro cutscene,
+# frame-exact 59.94 fps pacing (was ~56), 0 dispatch misses, no watchdog
+# false-positives over a 2-minute soak. ISSUES.md #2 (input) still open.
