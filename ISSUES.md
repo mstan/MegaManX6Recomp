@@ -179,7 +179,22 @@ caused by the contract. Evidence from the always-on rings folded into
 - After ~frame 1241 thread-switching stops and the interp free-spins at RAM
   `0x46xx` (`func 0x3A60`=ROM `0xBFC12F60`) until the watchdog fires.
 
-**Open question / next divergence to chase:** WHY does the scheduler livelock —
+**The ultimate hang (concrete lead):** after frame 1241 thread-switching stops
+and one thread free-spins at RAM `0x46C0` (ROM `0xBFC141C0`), a BIOS pad/card
+**timeout-bounded poll**: loop ≤0x51 tries checking **bit 0x80 of `*s0`** (a
+software completion flag the controller IRQ handler sets), retrying at a higher
+level on timeout. It spins ~74M× because the completion bit never sets — and
+`i_mask=0x0D` means the **controller/SIO IRQ (bit 7) is masked out**, so the
+transfer-complete IRQ can never fire → the handler never sets `*s0` bit 0x80 →
+infinite retry. Causal chain: controller IRQ (bit 7) not enabled/serviced → pad
+completion flag never set → poll-spin at 0xBFC141C0 → threads block/thrash →
+VBlank starves → watchdog. The oracle boots, so on real HW that IRQ IS delivered
+for MMX6's transfer. **Next concrete step:** instrument the SIO/controller IRQ
+raise+i_mask-write path (sio.c / interrupts.c), re-run, find why bit 7 is never
+set in i_mask (or never raised in i_stat) for MMX6's boot transfer — compare the
+i_mask write sequence vs Tomba's working boot.
+
+**Earlier open question (still relevant):** WHY does the scheduler livelock —
 what event are the 3 threads blocked on, and why does it never arrive (VBlank
 can't fire while the interp never yields to the host frame pump; or the garbage
 mode-table at `0x8001D0E4` is itself the first divergence). The garbage
