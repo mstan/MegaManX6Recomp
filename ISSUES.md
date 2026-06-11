@@ -152,6 +152,16 @@ never runtime-only.**
 - BUT the boot still wedges: starvation watchdog aborts after 4s
   (`starvation_dump.jsonl`), ~74M interp insns burned, VBlank never fires.
 
+**User-facing framing (don't misread as a regression):** every run
+deterministically reaches **frame ~1241 (~20s of presented video — the X-vs-Zero
+intro/FMV plays fine)**, then wedges at the **intro→title handoff** (`func_8001D0E4`
+title state machine). The dev **starvation watchdog** then `exit()`s ~4s later,
+which closes the window — that auto-close is the watchdog SURFACING the freeze,
+not a new bug. The pinned 035a9fa build dies at the *same* transition via a hard
+`DISPATCH FATAL` crash; the contract turned that crash into a freeze but did NOT
+move the wall. So it's a failure-MODE change, not a playability regression — the
+game has never reached an interactive, input-responsive title on either build.
+
 **Root cause (2026-06-11, ring-evidenced — supersedes the earlier "SIO IRQ
 storm / bail-aborts-RAM-0xCF0" hypothesis, which was WRONG):** the real failure
 is a **BIOS thread-scheduler livelock at boot**, NOT an SIO bug and NOT
