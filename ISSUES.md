@@ -105,3 +105,80 @@ change; compare the SIO pad init/poll/ack byte sequence against the Beetle
 oracle; and check whether **Tomba** (which reaches an interactive menu) also
 fails input — if Tomba input works, this is MMX6/controller-type-specific; if it
 also fails, it's a framework-wide SIO pad-delivery bug.
+
+---
+
+## #3 — Intro never advances to title; dispatch crash + SIO IRQ storm — OPEN (2026-06-11)
+
+Deep re-investigation against the Beetle oracle (psxref @4380) reframed #1/#2.
+The "input doesn't register" symptom is downstream: **MMX6 never reaches the
+interactive title screen at all.**
+
+**Ground truth (oracle):** boots to the **title screen ("PRESS START BUTTON",
+X6 logo)** by ~frame 2000, *without any input*. Main-mode byte `0x800CD3F8`=0,
+title sub-state `0x800CD3F9`=6, object pool `0x800CD410` (96 slots × 0x60)
+**empty**. The intro→title transition is automatic (timer/scripted), not
+input-gated. So input is NOT what blocks the title.
+
+**Recomp boot/title flow (statically mapped):**
+- `func_8001D0E4` = top-level title/menu state machine. Reads main-mode byte
+  `0x800CD3F8`, dispatches via fn-ptr table `0x800710E8` (`lb state; <<2; +table;
+  lw; jalr`). Sets `[0x800CD405]=1` at entry. Sub-handlers via table `0x8007108C`
+  (sub-state `0x800CD3F9`); sub-state 6 = "PRESS START".
+- `func_8001F65C` = intro object-list spawner (parses a byte list, allocs type
+  0x1F objects via allocator `0x8002C530`). Loop bug: when alloc returns 0 (pool
+  full) it does NOT advance the list pointer → spins.
+- Both reached only via runtime fn-ptr dispatch (no static jal / table ref in
+  the EXE).
+
+**Symptom A — old framework (pin 035a9fa, build-master pre-2026-06-11):**
+`DISPATCH FATAL: misaligned target 0x00000003`, `$ra=0x8001D180` (the `jalr v1`
+in `func_8001D0E4`) — the mode table read a garbage entry (wild jumptable
+dispatch). Same bug *class* as Tomba Bug D.
+
+**Symptom B — runtime-only rebuild against current master (34561b5):** no crash,
+but stuck in the intro: `func_8001D0E4` never runs (`[0x800CD405]`=0), pool
+96/96 full of type-0x1F objects, `ra` parked at `0x8001F6F0` (the spawner's
+alloc call). **Cause of the behavior change:** commit **2439d4d "dispatch call
+contract"** changes BOTH emitters (regen-required) AND runtime. Rebuilding only
+the runtime left stale generated code (no `(ra,sp)` contract checks) mismatched
+against the new runtime. **Lesson: a framework bump REQUIRES regen of BIOS+game,
+never runtime-only.**
+
+**Symptom C — full regen against current master (BIOS+game, contract-aware):**
+- The contract now **catches the `func_8001D0E4` wild dispatch**: telemetry
+  `bail_first=3, bail_flattened=3, bail_anomaly=0`. **No more DISPATCH FATAL.**
+  This is real progress — the crash (#1/Symptom A) is fixed by the contract.
+- BUT exposes the next bug: an **MMX6-specific SIO IRQ storm** during boot/intro.
+  The BIOS spins in `func 0x1794 @ pc 0xBFC112A0` (`in_exc=1`) issuing endless
+  SELECT_ASSERT/BAUD/TX/RX/STAT SIO ops, never making forward progress on the
+  main thread (`current_func 0x3A60`). VBlank heartbeat starves → starvation
+  watchdog aborts after 4s (`starvation_dump.jsonl`). Sometimes hangs at boot,
+  sometimes ~frame 1200 (race-ish). **Tomba boots fine on the same contract+BIOS
+  regen** (commit verified Tomba boot/title/attract, bail counters 0), so this is
+  MMX6-specific.
+
+**Leading hypothesis for the SIO storm:** the contract's dirty_ram_interp change
+("bail aborts the interp run") can abort the **RAM-installed SIO byte handler at
+RAM 0xCF0** (run by `dirty_ram_interp`) mid-execution when a bail fires during
+boot SIO activity → SIO IRQ left unacked → BIOS re-enters the SIO exception
+forever. The 3 boot-time bails coincide with heavy SIO. Needs: confirm a bail
+fires inside the 0xCF0 interp run, and make bail unwind ACK/complete the SIO
+transaction (or never bail inside the SIO handler) — a framework fix that must
+be regression-tested against Tomba.
+
+**State of the branch (`feat/mmx6-input`):** pin left at 035a9fa (validated
+boot-to-intro baseline); `generated/` (gitignored) currently holds a
+current-master contract regen that reaches Symptom C. To reproduce Symptom C:
+build recompiler tools from psxrecomp current master, regen BIOS
+(`psxrecomp-bios --config bios/SCPH1001.toml`) + game
+(`psxrecomp-game --config game.toml`), rebuild `build-master`.
+
+**Tooling added (`tools/`):** `run_mmx6.ps1` (autonomous launcher — BIOS/disc
+baked + quoted, cached to bios.cfg/disc.cfg), `dbg.py` (raw TCP cmd; addr must be
+a hex STRING), `pool.py`/`checkstate.py` (boot-progress probes), `stackwalk.py`,
+`dumpgrep.py`. Oracle: `F:\Projects\psxref\run-mmx6.bat` (Beetle @4380).
+
+**Recommended next step:** fix the contract×SIO-handler interaction (framework),
+re-verify MMX6 reaches the title with bail counters clean AND no SIO storm, THEN
+resume #2 (input) — which can only be tested once the title screen is reached.
