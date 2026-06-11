@@ -108,7 +108,7 @@ also fails, it's a framework-wide SIO pad-delivery bug.
 
 ---
 
-## #3 — Intro never advances to title; dispatch crash + SIO IRQ storm — OPEN (2026-06-11)
+## #3 — Intro never advances to title; boot thread-scheduler livelock — OPEN (2026-06-11)
 
 Deep re-investigation against the Beetle oracle (psxref @4380) reframed #1/#2.
 The "input doesn't register" symptom is downstream: **MMX6 never reaches the
@@ -149,36 +149,65 @@ never runtime-only.**
 - The contract now **catches the `func_8001D0E4` wild dispatch**: telemetry
   `bail_first=3, bail_flattened=3, bail_anomaly=0`. **No more DISPATCH FATAL.**
   This is real progress — the crash (#1/Symptom A) is fixed by the contract.
-- BUT exposes the next bug: an **MMX6-specific SIO IRQ storm** during boot/intro.
-  The BIOS spins in `func 0x1794 @ pc 0xBFC112A0` (`in_exc=1`) issuing endless
-  SELECT_ASSERT/BAUD/TX/RX/STAT SIO ops, never making forward progress on the
-  main thread (`current_func 0x3A60`). VBlank heartbeat starves → starvation
-  watchdog aborts after 4s (`starvation_dump.jsonl`). Sometimes hangs at boot,
-  sometimes ~frame 1200 (race-ish). **Tomba boots fine on the same contract+BIOS
-  regen** (commit verified Tomba boot/title/attract, bail counters 0), so this is
-  MMX6-specific.
+- BUT the boot still wedges: starvation watchdog aborts after 4s
+  (`starvation_dump.jsonl`), ~74M interp insns burned, VBlank never fires.
 
-**Leading hypothesis for the SIO storm:** the contract's dirty_ram_interp change
-("bail aborts the interp run") can abort the **RAM-installed SIO byte handler at
-RAM 0xCF0** (run by `dirty_ram_interp`) mid-execution when a bail fires during
-boot SIO activity → SIO IRQ left unacked → BIOS re-enters the SIO exception
-forever. The 3 boot-time bails coincide with heavy SIO. Needs: confirm a bail
-fires inside the 0xCF0 interp run, and make bail unwind ACK/complete the SIO
-transaction (or never bail inside the SIO handler) — a framework fix that must
-be regression-tested against Tomba.
+**Root cause (2026-06-11, ring-evidenced — supersedes the earlier "SIO IRQ
+storm / bail-aborts-RAM-0xCF0" hypothesis, which was WRONG):** the real failure
+is a **BIOS thread-scheduler livelock at boot**, NOT an SIO bug and NOT
+caused by the contract. Evidence from the always-on rings folded into
+`starvation_dump.jsonl` (`bail_log`-style entries + thread-ctx ring + counters):
+- The "SIO storm" at `func 0x1794 / pc 0xBFC112A0` is the BIOS **scheduler /
+  event-poll loop** (kernel-part-2 RAM, ROM `0xBFC11294`: checks event flags at
+  `*(0x6d40)`, calls DeliverEvent), not an SIO IRQ storm. `i_mask=0x0D`
+  (controller IRQ bit 7 NOT enabled); `in_exc=1` throughout.
+- The **thread-ctx ring** (256 caps, ALL at frames **1230–1241** = hundreds of
+  switches in ~11 frames) shows 3 TCBs thrashing via `ChangeThread` (syscall 3,
+  through the `syscall;jr ra` stub at RAM `0x650`=ROM `0xBFC10150`), all parked
+  at the syscall-return PC **`0x2104`** (=ROM `0xBFC11C04`, after
+  `jal 0xb0000650`,a0=3). 172 restores vs 84 saves (repeated/double restores =
+  no forward progress). TCBs: `0xA000E29C` (parked@0x2104), `0xA000E35C`
+  (game-main: resumes `0x8001D0E4` title machine / `0x2104`), `0xA000E41C`
+  (`0x80013530` / `0x2104`).
+- The **thrash STARTS ~frame 1230, the 3 bails are all at frame 1241** → the
+  scheduler livelock PRECEDES the bails by ~11 frames. The contract bails are a
+  LATE symptom: when game thread `0xE35C` momentarily resumes its title machine
+  `0x8001D0E4`, it reads a garbage mode-table entry → wild jumptable dispatch
+  (bail 1 target `0x800661A8`, a game addr; bail 0/2 at the syscall-return site
+  with `$sp` legitimately shifted +0x48/+0x30 by the context switch). All 3
+  bails have `interp_active=1`. **Fixing the contract would NOT fix the storm.**
+- After ~frame 1241 thread-switching stops and the interp free-spins at RAM
+  `0x46xx` (`func 0x3A60`=ROM `0xBFC12F60`) until the watchdog fires.
 
-**State of the branch (`feat/mmx6-input`):** pin left at 035a9fa (validated
-boot-to-intro baseline); `generated/` (gitignored) currently holds a
-current-master contract regen that reaches Symptom C. To reproduce Symptom C:
+**Open question / next divergence to chase:** WHY does the scheduler livelock —
+what event are the 3 threads blocked on, and why does it never arrive (VBlank
+can't fire while the interp never yields to the host frame pump; or the garbage
+mode-table at `0x8001D0E4` is itself the first divergence). The garbage
+mode-table read is the same latent bug as Symptom A — find where the table is
+populated at boot and compare RAM against the oracle (first-divergence). The
+contract is doing its job; do not weaken it.
+
+**State of the branch (`feat/mmx6-input`):** pin left at 035a9fa; `generated/`
+(gitignored) holds a current-master contract regen reaching Symptom C. Reproduce:
 build recompiler tools from psxrecomp current master, regen BIOS
 (`psxrecomp-bios --config bios/SCPH1001.toml`) + game
-(`psxrecomp-game --config game.toml`), rebuild `build-master`.
+(`psxrecomp-game --config game.toml`), rebuild `build-master`. **psxrecomp
+`feat/mmx6-input` has UNCOMMITTED observability work** (bail-site ring + thread-
+ctx ring + dirty/bail counters folded into the starvation dump; `bail_log` TCP
+cmd) — see below.
 
-**Tooling added (`tools/`):** `run_mmx6.ps1` (autonomous launcher — BIOS/disc
-baked + quoted, cached to bios.cfg/disc.cfg), `dbg.py` (raw TCP cmd; addr must be
-a hex STRING), `pool.py`/`checkstate.py` (boot-progress probes), `stackwalk.py`,
+**Observability added this session (psxrecomp `feat/mmx6-input`, uncommitted):**
+- `psx_bail_record` + 4K bail-site ring + `bail_log` TCP cmd (`debug_server.c`),
+  recorded at BOTH bail-first sites: the `psx_call_contract` inline
+  (`cpu_state.h`) and the emitted dispatch loop (`full_function_emitter.cpp` →
+  BIOS regen). Captures site_ra/site_sp/cur_sp/target/cur_pc/cur_func/kind/
+  **interp_active**/frame.
+- `psx_bail_ring_dump_file` + `psx_thread_ctx_ring_dump_file` (`traps.c`) +
+  bail/dirty counters folded into the watchdog dump meta (`starvation_ring.c`).
+  Why: the TCP server is main-thread-pumped and CANNOT serve during the storm,
+  so the watchdog dump (`starvation_dump.jsonl`) is the only thing that survives.
+- Analysis: `tools/_analyze_sio.py`, `tools/_analyze_tctx.py`.
+
+**Tooling (`tools/`):** `run_mmx6.ps1` (autonomous launcher), `dbg.py` (raw TCP
+cmd; addr must be a hex STRING), `pool.py`/`checkstate.py`, `stackwalk.py`,
 `dumpgrep.py`. Oracle: `F:\Projects\psxref\run-mmx6.bat` (Beetle @4380).
-
-**Recommended next step:** fix the contract×SIO-handler interaction (framework),
-re-verify MMX6 reaches the title with bail counters clean AND no SIO storm, THEN
-resume #2 (input) — which can only be tested once the title screen is reached.
