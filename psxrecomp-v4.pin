@@ -4,7 +4,14 @@
 #   git -C ../psxrecomp rev-parse master > /tmp/sha && \
 #     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
 branch=master
-sha=dbfd92f
+sha=15f5d60
+# Bumped 2026-06-19 (GL sprite Z-order fix): psxrecomp master 15f5d60 = dbfd92f
+#   + the OpenGL opaque-batch draw-order fix. The textured-prim batch split colour
+#   by the per-texel STP bit across the whole batch (for the PSX mask bit), which
+#   reordered overlapping OPAQUE prims (player drew in front of an AP item-block's
+#   letters / behind a save post on GL only). Opaque batches now draw colour in one
+#   ordered pass + a stencil-only mask fixup; semi prims keep the blended two-pass,
+#   isolated per prim. USER-VALIDATED on Tomba GL. Runtime-only, no regen.
 # Bumped 2026-06-19 (turbo-loads fast-load model): psxrecomp master dbfd92f =
 #   prior + turbo-during-loads as the production fast-load path. game.toml ships
 #   disc_speed="1x" (authentic CD timing) + turbo_loads=true: the guest runs every
