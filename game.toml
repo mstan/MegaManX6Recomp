@@ -80,6 +80,33 @@ auto_skip_fmv = true
 default_analog = true
 deadzone       = 12000
 
+# Experimental 16:9 widescreen for a pure-2D sprite engine.
+#
+# MMX6 never emits the 3D sprite-tag hook the framework's gameplay detector keys
+# on, so without full_2d every in-game frame is misclassified as a "full-2D menu"
+# and pillarboxed 4:3. full_2d treats every in-game frame as gameplay so the
+# native-wide present path engages. Pair with [video] aspect_ratio = "16:9"
+# (set in settings.toml / the launcher); at 4:3 this flag is inert. Runtime-only
+# (no regen). The wider field of view itself is an ongoing RE effort (the engine
+# renders a true 4:3 view — there is no overscan to merely "reveal"); this flag
+# is the opt-in switch the FOV work plugs into.
+[widescreen]
+full_2d = true
+
+# True wider FOV for the 2D background. MMX6's per-layer BG renderer (FUN_800270d0)
+# draws 21 (0x15) tile columns x 16 rows from a camera-derived start; these three
+# instruction sites let the recompiler widen that loop (count + start col + start
+# screen-x) so it draws the 16:9 reveal columns on BOTH sides of the 320 view,
+# filling the margins with real adjacent stage. Identity at 4:3 and in the engine's
+# own 512 hi-res mode (psx_ws_mmx6_bg_* helpers in gpu.c). Regen required.
+#   count_site:    0x800271d4  li s6,0x15        (column count)
+#   startcol_site: 0x80027188  andi v1,v1,0x3f   (start tile column)
+#   startx_site:   0x800271a0  sra s4,v0,0x10    (start screen-x)
+[widescreen.bg2d]
+count_site    = "0x800271d4"
+startcol_site = "0x80027188"
+startx_site   = "0x800271a0"
+
 # ── Audit-specific config (consumed by psxrecomp-v4/tools/*.py and tests) ──
 # Schema mirrors psxrecomp-v4/bios/SCPH1001.toml. Paths are relative to the
 # project root.
