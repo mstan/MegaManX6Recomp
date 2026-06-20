@@ -19,6 +19,37 @@ debug_port = 4490
 window_title = "MegaManX6Recomp"
 memcard_dir = "saves"
 
+[video]
+# auto_skip_fmv: auto-skip full-motion videos (XA audio + MDEC). The launcher's
+# Settings → "Skip FMVs" toggle mirrors this and persists to settings.toml.
+# Enabled by default for MMX6 so the X-vs-Zero opening movie fast-forwards.
+#
+# End mechanism — two paths (see runtime/src/main.cpp FMV auto-skip block):
+#  - fmv_skip_total_table set: write the active movie's per-movie frame-total
+#    down so the game's OWN player tears it down next frame — a natural end that
+#    reaches EVERY movie, incl. unskippable ones (this is Tomba's universal path).
+#  - no table (current): generic fallback holds START so a movie whose handler
+#    polls the pad aborts itself. Works for the pad-skippable opening; CANNOT
+#    reach movies the game won't let you skip.
+# TODO(complete): RE MMX6's MDEC player loop (find the per-movie frame-total
+#   table base, the current-movie-id byte, and the teardown frame# >= total-k
+#   condition) and fill fmv_skip_total_table / fmv_skip_movie_id /
+#   fmv_skip_end_total for universal skip, matching Tomba. Until then the generic
+#   START path is active. (MMX6 ISSUES.md tracks this.)
+auto_skip_fmv = true
+
+# Controller defaults. Mega Man X6 probes the pad with the DualShock config
+# command (0x43) at init and will NOT poll buttons (0x42) until it detects an
+# analog-capable controller — a plain digital pad leaves the game with no input.
+# So present a DualShock (analog) by default: default_analog=true pins port 1 to
+# PAD_MODE_ANALOG (id 0x73), which the corrected SIO config state machine
+# (runtime/src/sio.c) now negotiates correctly. The launcher's per-player
+# DualShock toggle / controller-mode selector overrides this (persisted to
+# settings.toml); leaving it analog is the "forced DualShock" default.
+[controller]
+default_analog = true
+deadzone       = 12000
+
 # ── Audit-specific config (consumed by psxrecomp-v4/tools/*.py and tests) ──
 # Schema mirrors psxrecomp-v4/bios/SCPH1001.toml. Paths are relative to the
 # project root.

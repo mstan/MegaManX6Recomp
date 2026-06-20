@@ -5,7 +5,8 @@
 #
 # Usage:  powershell -File tools\run_mmx6.ps1 [-BuildDir build-master]
 param(
-    [string]$BuildDir = "build-master"
+    [string]$BuildDir = "build-master",
+    [switch]$NoLauncher   # boot straight into the game (skip the RmlUi launcher) for scripted/debug runs
 )
 $ErrorActionPreference = "Stop"
 $root = "F:\Projects\psxrecomp\MegaManX6Recomp"
@@ -27,6 +28,7 @@ Start-Sleep -Milliseconds 300
 
 # Build a single arg string with explicit quotes around every path.
 $argline = "--game `"$game`" --bios `"$bios`" --disc `"$disc`""
+if ($NoLauncher) { $argline += " --no-launcher" }
 $p = Start-Process -FilePath $exe -ArgumentList $argline -WorkingDirectory $root `
         -RedirectStandardError  (Join-Path $root "_mmx6_stderr.txt") `
         -RedirectStandardOutput (Join-Path $root "_mmx6_stdout.txt") -PassThru

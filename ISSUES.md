@@ -66,7 +66,28 @@ exits with "no disc image selected".
 
 ---
 
-## #2 — Controller input does not register (keyboard + SDL gamepad) — OPEN (2026-06-04)
+## #2 — Controller input does not register — ✅ FIXED (2026-06-19)
+
+**Root cause (framework SIO bug, not MMX6-specific):** MMX6 probes the pad with
+the DualShock **config command `0x43`** at init and will NOT poll buttons (`0x42`)
+until it detects an analog-capable controller. `runtime/src/sio.c` answered `0x43`
+with `0xF3` (config-mode ID) **unconditionally** — i.e. the emulated pad always
+looked "in config mode." MMX6's detect/exit handshake therefore never completed:
+the SIO TX stream looped `01 43 00 00 …` forever and never reached `0x42`, so no
+input was ever delivered. (Tomba was unaffected — it only sends the plain `0x42`
+poll, never `0x43`.)
+
+**Fix:** proper DualShock config state machine in `sio.c` — track in/out of config
+per slot, report the real pad ID (`0x41` digital / `0x73` analog) when NOT in
+config and `0xF3` only when actually in config, honor the `0x43` enter(0x01)/
+exit(0x00) flag, and gate the config-only commands (0x44–0x4F) so a digital pad
+ignores them like real hardware. MMX6 also defaults to a DualShock now
+(`game.toml [controller] default_analog=true`; launcher can override). Verified:
+SIO went `0x43`-only → `0x42` reads returning `0x73` + 8-byte analog response;
+held CROSS reflected as `73 5A FF BF 80 80 80 80`; game state advanced on input;
+intro story now playable. Runtime-only change (no regen). Original notes below.
+
+## #2 (original) — Controller input does not register (keyboard + SDL gamepad) — was OPEN (2026-06-04)
 
 **Symptom:** In the recompiled MMX6, **no pad input registers at all** — neither
 the keyboard map nor an SDL game controller (tested with a PS5 controller).
