@@ -18,10 +18,16 @@ strict = true
 debug_port = 4490
 window_title = "MegaManX6Recomp"
 memcard_dir = "saves"
-# disc_speed: realistic default for now. "instant" at a FIXED instant_max_per_frame
-# has no value that works across all scenarios (boot tolerates ~20/frame but
-# game-start softlocks at 20) — the fixed cap starves the guest main loop
-# scenario-dependently. Pursuing an ADAPTIVE throttle so "instant" is universally safe.
+# Disc speed. The CD response arbiter (cdrom.c) eliminates the dropped-response
+# race that previously made any non-1x speed unsafe (verified: 0 overwrites at
+# 1x/4x/instant), and command-completion latencies (Pause/Init/Seek/GetID) now
+# use authentic fixed timing instead of scaling with read speed. 1x boots+plays
+# cleanly. "4x"/"instant" still hit a downstream LOAD-TIMING RACE at boot (guest
+# spins with interrupts disabled, VBLANK pending, after a clean Pause near lba
+# 221557) — the game misses an event when sectors arrive faster than 1x. Keep 1x
+# until that race is fixed; flip to "4x"/"instant" to repro. (See memory
+# cd_adaptive_instant_design.)
+disc_speed = "1x"
 # Overlay acceleration: compile the dirty-RAM overlay (ROCK_X6.DAT) to native
 # instead of interpreting it. backend=auto => gcc (full-C overlay DLLs, the
 # production path) since an autocompile cmd is wired. Background pipeline:
