@@ -4,7 +4,14 @@
 #   git -C ../psxrecomp rev-parse master > /tmp/sha && \
 #     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
 branch=master
-sha=035a9fa9681873887e0de94d65369bbcd3e87d7d
+sha=dbfd92f
+# Bumped 2026-06-19 (turbo-loads fast-load model): psxrecomp master dbfd92f =
+#   prior + turbo-during-loads as the production fast-load path. game.toml ships
+#   disc_speed="1x" (authentic CD timing) + turbo_loads=true: the guest runs every
+#   authentic frame at host speed during CD loads (all guest timing preserved, audio
+#   intact), so real load time shrinks with zero timing breakage. Also: CD response
+#   arbiter + authentic command latencies (dormant at 1x, for accelerated modes) and
+#   no turbo audio mute. Runtime/config only, no regen. Supersedes 035a9fa9681873887e0de94d65369bbcd3e87d7d.
 # Bumped 2026-06-09: psxrecomp master = Bug B frame-pacing fix (ffc1521) +
 # release hygiene (035a9fa). MMX6 verified against it: builds clean
 # (build-master), boots BIOS -> game to the X-vs-Zero intro cutscene,
