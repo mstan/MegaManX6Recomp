@@ -4,7 +4,11 @@
 #   git -C ../psxrecomp rev-parse master > /tmp/sha && \
 #     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
 branch=master
-sha=15f5d60
+sha=1951dc2
+# Bumped 2026-06-19 (turbo default ON + launcher UI): psxrecomp master 1951dc2 =
+#   15f5d60 + turbo-loads defaults to ON (mute removed, so it is the right default:
+#   fast loads, audio plays through, guest timing preserved) and the launcher hint
+#   updated. Runtime/launcher only, no regen.
 # Bumped 2026-06-19 (GL sprite Z-order fix): psxrecomp master 15f5d60 = dbfd92f
 #   + the OpenGL opaque-batch draw-order fix. The textured-prim batch split colour
 #   by the per-texel STP bit across the whole batch (for the PSX mask bit), which
