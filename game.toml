@@ -18,6 +18,36 @@ strict = true
 debug_port = 4490
 window_title = "MegaManX6Recomp"
 memcard_dir = "saves"
+# Disc speed + fast loads — the architecturally-correct model.
+#
+# Speeding the GUEST-VISIBLE CD device (disc_speed="4x"/"instant") is
+# fundamentally unsafe: it changes how many VBlanks/callbacks fall between the
+# game's state transitions, so timing-sensitive titles break. MMX6 proves it —
+# at 4x/instant it wedges at boot because its Psy-Q VSync callback (which ticks a
+# counter the loader busy-waits on, func 0x80060ADC / counter 0x8008C8E4) is torn
+# down early when the read completes "too fast", so the counter freezes and the
+# wait never returns. (The CD response arbiter + authentic command latencies in
+# cdrom.c are still correct and shipped; they just can't make device-instant
+# safe.) Mature emulators treat raw CD speedup as best-effort/per-game for this
+# reason.
+#
+# The SAFE way to get fast loads is to keep AUTHENTIC guest CD timing (so nothing
+# breaks) and instead FAST-FORWARD THE WHOLE GUEST TIMELINE during loads — run
+# every authentic VBlank/callback/sector at the host's full speed and skip
+# presentation. That's turbo_loads: cdrom_load_in_progress() detects the CD burst
+# (XA/FMV excluded, post-handoff only) and main.cpp drops wall-clock pacing while
+# it's active. Result: real load time shrinks with zero timing breakage.
+disc_speed   = "1x"     # authentic guest CD timing (never breaks game timing)
+turbo_loads  = true     # fast-forward the machine during CD loads (the real speed lever)
+# Overlay acceleration: compile the dirty-RAM overlay (ROCK_X6.DAT) to native
+# instead of interpreting it. backend=auto => gcc (full-C overlay DLLs, the
+# production path) since an autocompile cmd is wired. Background pipeline:
+# capture overlay candidates -> compile_overlays.py spawns gcc -> DLLs in
+# build-modern/cache/SLUS-01395/ -> loader rescans + loads. --cps matches the
+# CPS-on generated code (REQUIRED or DLLs misbehave); --gcc is the mingw abspath.
+overlay_cache = true
+overlay_backend = "auto"
+overlay_autocompile_cmd = "python ../psxrecomp/tools/compile_overlays.py --captures build-modern/overlay_captures.json --game-toml game.toml --recompiler ../psxrecomp/recompiler/build/psxrecomp-game.exe --runtime-include ../psxrecomp/runtime/include --out-dir build-modern/cache --gcc C:/msys64/mingw64/bin/gcc.exe --cps"
 
 [video]
 # auto_skip_fmv: auto-skip full-motion videos (XA audio + MDEC). The launcher's
