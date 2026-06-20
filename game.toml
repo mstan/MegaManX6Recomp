@@ -18,6 +18,19 @@ strict = true
 debug_port = 4490
 window_title = "MegaManX6Recomp"
 memcard_dir = "saves"
+# disc_speed: realistic default for now. "instant" at a FIXED instant_max_per_frame
+# has no value that works across all scenarios (boot tolerates ~20/frame but
+# game-start softlocks at 20) — the fixed cap starves the guest main loop
+# scenario-dependently. Pursuing an ADAPTIVE throttle so "instant" is universally safe.
+# Overlay acceleration: compile the dirty-RAM overlay (ROCK_X6.DAT) to native
+# instead of interpreting it. backend=auto => gcc (full-C overlay DLLs, the
+# production path) since an autocompile cmd is wired. Background pipeline:
+# capture overlay candidates -> compile_overlays.py spawns gcc -> DLLs in
+# build-modern/cache/SLUS-01395/ -> loader rescans + loads. --cps matches the
+# CPS-on generated code (REQUIRED or DLLs misbehave); --gcc is the mingw abspath.
+overlay_cache = true
+overlay_backend = "auto"
+overlay_autocompile_cmd = "python ../psxrecomp/tools/compile_overlays.py --captures build-modern/overlay_captures.json --game-toml game.toml --recompiler ../psxrecomp/recompiler/build/psxrecomp-game.exe --runtime-include ../psxrecomp/runtime/include --out-dir build-modern/cache --gcc C:/msys64/mingw64/bin/gcc.exe --cps"
 
 [video]
 # auto_skip_fmv: auto-skip full-motion videos (XA audio + MDEC). The launcher's
