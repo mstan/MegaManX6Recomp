@@ -106,6 +106,15 @@ full_2d = true
 count_site    = "0x800271d4"
 startcol_site = "0x80027188"
 startx_site   = "0x800271a0"
+# Tile-ring streamer (FUN_800273e4) leading-edge widen — without this the extra
+# columns the renderer draws fetch un-streamed ring slots (empty=black margin, or
+# stale=old tiles as the camera scrolls). These two addiu compute the left
+# (scrollX-16) and right (scrollX+16, before +width) stream world-X; pushed out by
+# LEFT*16 so the 64-col ring stays valid across the widened window.
+#   stream_left_site:  0x80027424  addiu a1,s1,-0x10
+#   stream_right_site: 0x80027444  addiu a1,s1,0x10
+stream_left_site  = "0x80027424"
+stream_right_site = "0x80027444"
 
 # ── Audit-specific config (consumed by psxrecomp-v4/tools/*.py and tests) ──
 # Schema mirrors psxrecomp-v4/bios/SCPH1001.toml. Paths are relative to the
