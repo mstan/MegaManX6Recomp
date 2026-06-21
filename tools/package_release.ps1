@@ -225,11 +225,12 @@ select = back
 "@ | Set-Content -Encoding ASCII (Join-Path $Stage "input.ini")
 
 @"
-MegaManX6Recomp $Version  (early tech preview)
+MegaManX6Recomp $Version
 
-This is an EARLY preview. Mega Man X6 boots from the PlayStation BIOS, plays the
-opening, and reaches the intro story dialogue with working controller input. It
-is NOT a complete, save-capable port yet - saving does not work in this build.
+Mega Man X6 boots from the PlayStation BIOS and plays - through the opening, into
+stages, with working controller input and memory-card save/load, and no known
+crashes. It has not yet been verified all the way to the end, so treat this first
+release as a very playable preview rather than a certified full playthrough.
 
 This package does not include the Mega Man X6 disc, the PlayStation BIOS, save
 data, or any game assets - you supply those from your own collection, and
@@ -268,8 +269,8 @@ snapshots of the game's own code read from your disc. See README.md for details.
 Keyboard and Xbox-style controller defaults are documented in README.md.
 Controller mappings are configurable in input.ini.
 
-Memory cards are stored in the saves directory (note: saving is not yet
-functional in this preview).
+Memory cards are stored in the saves directory; save and load work with standard
+PS1 .mcd images.
 "@ | Set-Content -Encoding ASCII (Join-Path $Stage "START_HERE.txt")
 
 if (Test-Path $ZipPath) {

@@ -30,25 +30,24 @@ Important files:
 
 ## Status
 
-**Early tech preview — `v0.0.1-alpha`.** This is the *first* public cut, and it
-is genuinely early: the game **boots from the PS1 BIOS, plays the opening, and
-reaches the introductory story dialogue with working controller input**. It is
-**not yet a complete, save-capable port** — treat it as a first look, not a way
-to play through the game.
+**Playable preview — `v0.0.1-alpha`.** This is the *first* public cut. Mega Man
+X6 **boots from the PS1 BIOS and plays** — through the opening, into stages, with
+working controller input and memory-card **save/load**, and **no known crashes**.
+It has not yet been verified all the way to the end, so treat it as a very
+playable preview rather than a certified full playthrough.
 
 | Area | State |
 |---|---|
 | PS1 BIOS boot | Works (real recompiled BIOS) |
 | Disc-detect / boot | Works (loads `ROCK_X6.DAT`, reaches the engine) |
 | X-vs-Zero / Space Colony intro FMV | Plays; auto-skip available |
-| Opening story dialogue | Reaches it; controller input works |
-| Controller | DualShock/analog presented by default (required by MMX6) |
-| Memory-card save / load | **Not working** — card data reads as "invalid" (see `ISSUES.md`) |
-| In-stage gameplay | Not yet confirmed end-to-end; bring-up ongoing |
+| Controller | Works; DualShock/analog presented by default (required by MMX6) |
+| Stage gameplay | Works (not yet verified all the way to the end) |
+| Memory-card save / load | Works (standard PS1 `.mcd`, emulator-compatible) |
 | Renderers | Software **and** OpenGL (GPU); OpenGL is the default |
 | Widescreen 16:9 | Experimental, opt-in (2D wider field of view) |
 
-See `ISSUES.md` for the current open items and root-cause notes.
+See `ISSUES.md` for notes and the remaining enhancement follow-ups.
 
 ## Features
 
@@ -189,12 +188,11 @@ change controller device index, deadzone, or button mapping.
 
 ## Memory Cards
 
-> **Saving does not work yet in this build** — Mega Man X6's card validation
-> rejects its own data as "invalid" (tracked in `ISSUES.md`). Memory-card support
-> is otherwise wired (standard PS1 `.mcd` images, emulator-compatible) and cards
-> are stored in the `saves` directory; the bug is in the recompiled validation
-> path, not the card emulation. Runtime memory-card files are local artifacts and
-> must not be committed.
+Save and load work. The runtime uses standard PS1 memory-card images
+(`.mcd` / `.mcr`) compatible with DuckStation, PCSX-Redux, Mednafen, ePSXe, and
+similar emulators. Cards are stored in the `saves` directory and managed in the
+launcher's memory-card UI. Runtime memory-card files are local artifacts and must
+not be committed.
 
 ## Help make your game faster — just by playing
 
