@@ -4,7 +4,17 @@
 #   git -C ../psxrecomp rev-parse master > /tmp/sha && \
 #     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
 branch=master
-sha=1951dc2
+sha=bb1d990
+# Bumped 2026-06-21 (MMX6 widescreen BG ring-freshness fix): psxrecomp master
+#   bb1d990 = 1951dc2 + the MMX6 16:9 reveal-margin "staircase" fix. The widened
+#   BG drew 4 extra tile columns/side but the engine streamed only 1 col/side/frame,
+#   so on scene entry / fast scroll the inner reveal columns held stale tiles ->
+#   up-left staircase (NOT the packet-budget overflow). Fix re-streams the whole
+#   widened window each frame from a byte-exact clone of the engine's tile-ring fill
+#   (validated 0 mismatch / 1113 cells), gated native-wide so 4:3 is byte-identical.
+#   Also: removed the 2-col reveal cap (full 53px reveal restored). Runtime-only for
+#   the fix; the [widescreen.bg2d] bufbase/cap relocation hooks (parked, gated off)
+#   ride along for the separate dense-stage budget concern. USER-VALIDATED clean 16:9.
 # Bumped 2026-06-19 (turbo default ON + launcher UI): psxrecomp master 1951dc2 =
 #   15f5d60 + turbo-loads defaults to ON (mute removed, so it is the right default:
 #   fast loads, audio plays through, guest timing preserved) and the launcher hint

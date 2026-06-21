@@ -123,6 +123,13 @@ startx_site   = "0x800271a0"
 #   stream_right_site: 0x80027444  addiu a1,s1,0x10
 stream_left_site  = "0x80027424"
 stream_right_site = "0x80027444"
+# Packet-buffer RELOCATION — cures the dense-stage overflow of the engine's BG packet
+# double-buffer (base 0x800B91C0, stride 0x4000 = 1024 slots) + its 1000-tile/frame cap
+# that the widen overruns (void/garbled columns). When the widen is active, relocate the
+# double-buffer to a larger proven-free region + raise the cap (gpu.c psx_ws_mmx6_bg_bufbase
+# / _undercap; identity at 4:3). bufbase_site = driver addu (buffer addr); cap_site = slti.
+bufbase_site = "0x80026dc4"
+cap_site     = "0x80027278"
 
 # ── Audit-specific config (consumed by psxrecomp-v4/tools/*.py and tests) ──
 # Schema mirrors psxrecomp-v4/bios/SCPH1001.toml. Paths are relative to the

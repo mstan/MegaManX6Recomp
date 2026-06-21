@@ -181,3 +181,128 @@ feature is one opt-in toggle.
 3. Verify the 999-sprite cap; bump if truncating.
 4. Mid-stage symmetry + HUD check; broader scene validation; GL renderer path.
 5. Wire the launcher toggle; user sign-off before any master merge (exploratory branch).
+
+---
+
+## 8. BG budget-overflow artifact + host-side reveal-column fix (2026-06-21)
+
+### Status of §7
+- Step 1 (BG widen): DONE + committed. `ws_mmx6_left_cols()`=4 → 21→29 cols.
+- Step 2 (object cull): **NON-ISSUE — closed.** Proven via rings + Ghidra: none of
+  the 4 object render funcs (FUN_800232d4/239cc/241d4/23ed8) have a screen-X cull;
+  the SW renderer mirrors every prim to the full-width wide surface; a 120-frame
+  census shows object prim origin-X spans [-50,363]. Objects already populate both
+  margins. The old "[-4,316]" was the sprite-only `spritex` helper missing quad objects.
+- Step 3 (999 cap): **THIS IS THE ACTIVE BUG.**
+
+### The artifact (16:9-only)
+Vertical column-aligned BG glitches — void (black) columns + stale tiles shifted
+up-left, worse in dense stages. ROOT CAUSE: BG renderer `FUN_800270d0` emits 16×16
+tile prims into a double-buffered packet buffer (driver sets base **0x800B91C0**,
+stride **0x4000** = `bufidx<<14` at 0x80026db0-dcc → exactly **1024 tile slots/buf**),
+guarded by per-frame cap **`if (999 < iRam1f80011c) return`** (counter scratchpad
+**0x1F80011C**, reset at driver 0x80026d68), accumulated across all 3 BG layers.
+The 21→29 widen (+38%) pushes BG tiles over 1024 in dense stages → renderer returns
+early → dropped tiles/layers = void; transient unstreamed widened ring cols = stale
+strips. Measured **925 BG tiles/frame** mid-stage (cap 1000). Buffers are PACKED
+(buf0→buf1→object OT ~0x800C4xxx) so bumping the cap in-place overruns into the
+object OT = RAM corruption. 4:3 stays 21 cols (~670 tiles) → 16:9-only.
+
+### Fix (ChatGPT-recommended #1, user-approved 2026-06-21): host-side wide-only reveal columns
+Constraint: elective opt-in; **4:3 byte-identical for this and ANY game**; no game-
+behavior change. Plan:
+1. **Revert the guest column widen** — `psx_ws_mmx6_bg_cols/startcol/startx` (gpu.c)
+   → IDENTITY so the guest renders its native 21 cols (buffer/OT/cap untouched, can
+   never overflow). **Keep** `psx_ws_mmx6_bg_stream_left/right` (ring stays populated
+   for the reveal cols). Runtime-only revert (no regen for this part).
+2. **Emit the ±4 reveal columns host-side into the wide surface only.** Reveal tiles
+   live in the MARGINS (disjoint from native content) so they only need to be
+   BACKMOST — objects draw over them via the normal OT mirror. Emit all 3 layers
+   (in layer order, for inter-layer transparency) right after the per-frame wide-band
+   clear (`sw_wide_clear`, gpu_sw_renderer.c:1578), reading the guest's LIVE scroll +
+   tilemap ring + attr table.
+
+### Decode chain (gathered 2026-06-21)
+- Per-layer scroll: layer struct `0x800971f8 + layer*0x54`, scrollX +0xa, scrollY +0xe,
+  "parent" byte +0x52 (if ≥0, add parent layer's scroll for linked layers).
+- start_col = scrollX>>4, start_screen_x = -(scrollX&0xf); rows: scrollY>>4 / -(scrollY&0xf).
+- Tilemap ring: `ring16[(col&0x3f)*2 + (row&0x1f)*0x80 + layer*0x1000 + 0x800a21b8]`;
+  entry 0 = empty (skip). bit 0x4000 = flipX, 0x8000 = priority/page group (+3).
+- Tile attr word: `*(u32*)((entry&0x3fff)*4 + [0x1F80000C])`; if (attr>>0x18)==0xFF skip.
+  SPRT16 fields: u0=(attr>>0xc)&0xf0, v0=(attr>>0x10)&0xf0, clut16=((attr&0xf000)>>6)+0x7980
+  +((attr>>0x18)&0x40)*0x10 | (attr>>8)&0xf.
+- **TPAGE INDIRECTION (the wrinkle):** tile texpage is NOT in the packet; it's selected by
+  the OT slot `layer*0x11 + (attr>>0x18 & 0x3f)` (each OT slot carries a pre-set DR_TPAGE).
+  So a from-scratch decoder must also replicate the OT-slot→tpage table.
+- SW raster: `sw_draw_textured_rect(x,y,16,16,u,v,clut_x,clut_y,texpage)`; `raster_textured_rect`
+  (gpu_sw_renderer.c:1207) takes an RTarget → call with `rt_wide()` ONLY (texels always come
+  from native VRAM). GP0 SPRT16 decode reference: gpu.c:1650 (clut_x=(clut&0x3F)*16,
+  clut_y=(clut>>6)&0x1FF, texpage=current_texpage()).
+
+### Two implementation strategies
+- **A. Faithful from-scratch decode** in the runtime — must also RE + replicate the
+  OT-slot→tpage table. More code, more coupling, error-prone. REJECTED.
+- **B. RE-INVOKE the guest renderer into a scratch GPU context (CHOSEN, confirmed buildable).**
+  **CONFIRMED 2026-06-21: the BG renderer IS a callable compiled C symbol `func_800270D0(CPUState* cpu)`**
+  (generated/SLUS_013.95_full.c:68304; a0=layer=cpu->gpr[4]; already a CPS jal target at :67985).
+  So the runtime can re-invoke it directly. Sketch:
+  1. **Scratch reveal-pass mode:** add runtime state `gpu_ws_bg_reveal_pass(side)`; the existing
+     hooks `psx_ws_mmx6_bg_cols/startcol/startx` read it and, in reveal mode, return JUST the 4
+     reveal cols for the given side (left: startcol-4/startx-64/cols=4; right: startcol+21/
+     startx+21·16/cols=4) instead of the 29-col widen. Native (non-reveal) path = identity after
+     the revert (step 1 of §8 fix), so guest renders 21 cols, never overflows.
+  2. **Redirect packet storage, snapshot OT heads:** save scratchpad 0x108 (BG packet ptr) + 0x11c
+     (counter); point 0x108 at a host scratch packet buffer, 0x11c=0. The OT base is hardcoded
+     (0x80098C18 + bufidx·0x198), so DON'T redirect it — instead SNAPSHOT the OT head words before
+     the pass and RESTORE them after (the reveal packets land in the scratch buffer; the OT heads
+     transiently point into it).
+  3. For each layer 0..2 and side L/R: set reveal mode, `cpu->gpr[4]=layer; func_800270D0(cpu);`
+     (~6 calls). Reveal tiles = 4·16·3·2 ≈ 384 slots, well under the baked-in 999 cap → no truncation.
+  4. **Traverse the (scratch-populated) OT exactly as the GPU DMA would** — per slot, follow the
+     linked list in Z order; DR_TPAGE prims set current tpage, SPRT16 prims draw — but rasterize
+     **wide-only** (`raster_textured_rect(rt_wide(), …)`). This consumes the OT-slot→tpage naturally
+     (same as real DMA), so NO tpage re-derivation. Reuse/extend the runtime's existing OT-DMA+GP0
+     decode with a wide-only flag.
+  5. Restore OT heads + 0x108 + 0x11c. Hook point: right after `sw_wide_clear` (per-frame wide band
+     reset) so reveal tiles are backmost; objects then draw over them via the normal mirror.
+  Risk: func_800270D0 re-entrancy/restore correctness — verify it only touches 0x108/0x11c + OT +
+  (read-only) tilemap/scroll, and that the scratch pass leaves guest state byte-identical.
+
+### CHOSEN FIX (2026-06-21, user-approved): BUFFER RELOCATION (#2), not host-side
+Host-side (Strategy A) was BUILT but is the WRONG approach — re-deriving the engine render
+got two things wrong: (1) tpage via clut-cache = garbled tiles; (2) reading the tile ring at
+the GP0 fill (frame start) is BEFORE the streamer refreshes it = stale margins (reintroduced
+the bug the stream hooks fixed). Code left INERT (g_mmx6_hostside default 0). The engine's OWN
+guest-widen render is correct + fresh; its ONLY flaw is the 1024-slot buffer overflow. So KEEP
+it and enlarge the buffer.
+
+**Plan (gen-time, gated on widescreen, 4:3 byte-identical):**
+- **Free RAM PROVEN** (2026-06-21, 133-sample wtrace occupancy union over 0x80090000-0x80200000):
+  big unwritten heap→stack gap **[0x800EA000, 0x801B9000) = 828KB**. Use e.g. RELOC_BASE
+  0x80140000 (mid-gap), STRIDE 0x6000 (1536 slots/buf, was 0x4000=1024), 2 bufs = 0xC000.
+  Red-zone with guard bytes + per-frame assert (ChatGPT); also re-check across boss/menu/
+  transition scenes (this proof was one gameplay stretch). Tool: /tmp/freeram2.py.
+- **Hook 1 — buffer base** at PC **0x80026DCC** (`write_word(gpr[1]+0x108, gpr[3])`; gpr[3] =
+  0x800B91C0 + bufidx·0x4000): wrap `gpr[3] = psx_ws_mmx6_bg_bufbase(gpr[3])` → recover
+  bufidx=(gpr[3]-0x800B91C0)>>14, return RELOC_BASE + bufidx·STRIDE when active, else gpr[3].
+- **Hook 2 — cap compare** at PC **0x80027278** (`gpr[2] = ((int32)gpr[3] < 1000)`, gpr[3] =
+  BG tile counter 0x1F80011C): wrap `gpr[2] = psx_ws_mmx6_bg_undercap(gpr[3])` → counter < 1450
+  when active (≤ STRIDE slots), else < 1000.
+- **⚠ TEMPLATE WRINKLE (must handle):** FUN_800270d0 only updates xy/uv/clut/tpage + read-modify
+  -writes packet+7 bit1; the SPRT **opcode (packet+7) + color (packet+4..6) are a TEMPLATE** set
+  up ONCE at the OLD base (NOT by FUN_800269f4 = tile-ring loader). A relocated buffer has GARBAGE
+  opcodes. FIX: seed the relocated buffer's templates — verify the template is uniform across slots
+  (read packet+4..7 live from 0x800B91C0), then have the bufbase hook one-time-fill RELOC_BASE
+  slots with it (guard with a done-flag); OR find + also-relocate the template-init writes.
+- Both hooks are [widescreen.bg2d]-style register wraps (same mechanism as bg_cols/startcol/startx);
+  add the 2 PCs to MMX6 game.toml + helpers in gpu.c (+ recompiler emit if the wrap shape is new) →
+  **REGEN**. Helpers IDENTITY at 4:3 (4:3 + any other game byte-identical).
+
+### Overflow policy (ChatGPT) + validation
+- The scratch render gets its OWN budget; native path is untouched, so no overflow on the
+  real buffer. If the scratch path nears its own cap, drop the FARTHEST reveal cols first
+  (clip the reveal) — never abort a layer.
+- Gate everything on the widescreen flag (identity at 4:3 → byte-identical for any game).
+- Validate: 320 region pixel-identical to pre-change (diff wide_full center band); margins
+  fill coherently; no void/stale across dense stages (re-check prims/frame ≤ native cap).
+- Don't size any cap from math — instrument max BG tiles across stages first.
