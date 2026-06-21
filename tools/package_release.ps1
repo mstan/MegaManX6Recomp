@@ -137,6 +137,9 @@ aspect_ratio = "4:3"
 [controller]
 default_analog = true
 deadzone = 12000
+# MMX6 requires a DualShock, so the launcher hides the "Hybrid" pad mode and
+# offers only Analog / D-Pad.
+allow_hybrid = false
 
 # ---- Widescreen (experimental 16:9, 2D engine) --------------------------
 # full_2d treats every in-game frame as gameplay so the wide present path engages

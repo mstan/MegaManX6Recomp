@@ -20,7 +20,7 @@ happened.
 
 `auto_skip_fmv=true` currently uses the framework's **generic** path: it holds
 START so a movie whose handler polls the pad aborts itself. That works for the
-pad-skippable opening but cannot reach movies the game won't let you skip.
+pad-skippable opening but cannot skip  movies the game won't let you skip normally.
 
 The **complete** version is Tomba's universal frame-count path: write the active
 movie's per-movie frame-total down so the game's OWN player tears the movie down

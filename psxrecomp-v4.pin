@@ -4,7 +4,12 @@
 #   git -C ../psxrecomp rev-parse master > /tmp/sha && \
 #     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
 branch=master
-sha=bb1d990
+sha=c7939b7
+# Bumped 2026-06-21 (launcher allow_hybrid + turbo-hint removal): psxrecomp master
+#   c7939b7 = bb1d990 + per-game [controller] allow_hybrid (hides the launcher's
+#   "Hybrid" pad mode, leaving Analog | D-Pad — MMX6 hard-requires a DualShock) and
+#   removal of the "much faster loading, audio plays through" turbo-loads subtext.
+#   Launcher/config only, no regen (config_loader parses the flag; emitters unchanged).
 # Bumped 2026-06-21 (MMX6 widescreen BG ring-freshness fix): psxrecomp master
 #   bb1d990 = 1951dc2 + the MMX6 16:9 reveal-margin "staircase" fix. The widened
 #   BG drew 4 extra tile columns/side but the engine streamed only 1 col/side/frame,

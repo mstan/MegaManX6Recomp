@@ -87,6 +87,10 @@ auto_skip_fmv = true
 [controller]
 default_analog = true
 deadzone       = 12000
+# MMX6 hard-requires a DualShock (it won't poll buttons without an analog pad),
+# so the "Hybrid" launcher pad mode doesn't apply — hide it, leaving Analog and
+# D-Pad as the only choices.
+allow_hybrid   = false
 
 # Experimental 16:9 widescreen for a pure-2D sprite engine.
 #
