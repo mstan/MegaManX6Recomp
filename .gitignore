@@ -10,6 +10,9 @@
 # Release packaging artifacts
 /release-stage/
 *.zip
+# Downloaded toolchain artifacts cached by package_release.ps1 (embedded python +
+# tcc zips) — fetched on demand, never committed.
+/tools/_toolchain_cache/
 
 # Local PlayStation assets (disc image, extracted boot EXE, memory cards)
 /mmx6/

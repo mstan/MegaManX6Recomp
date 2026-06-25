@@ -4,7 +4,18 @@
 #   git -C ../psxrecomp rev-parse master > /tmp/sha && \
 #     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
 branch=master
-sha=c7939b7
+sha=1915b5c
+# Bumped 2026-06-25 (tcc overlay tier replacing sljit + Xbox controller fix):
+#   psxrecomp master 1915b5c = c7939b7 + the toolchain-free TinyCC overlay tier and
+#   the SDL HIDAPI-Xbox input fix. Tier order is now static > gcc shard > tcc shard >
+#   (sljit, deprecated/gated-off) > interp; backend "auto" picks gcc when a gcc
+#   toolchain is present (dev/prod shard authoring) else tcc. The tcc tier is fully
+#   self-contained: the runtime spawns a bundled overlay_toolchain/ (embedded Python
+#   + TinyCC + recompiler + compile_overlays.py + headers) -> no system python/gcc on
+#   a player box. Backend policy extracted to overlay_backend.{c,h}. Xbox fix:
+#   SDL_HINT_JOYSTICK_HIDAPI_XBOX=1 (Xbox One/Series pads were dead with RAWINPUT off
+#   + HIDAPI-Xbox off; PS5 worked). v0.0.2-alpha ships the bundle; regenerated against
+#   this master (codegen cg4_7db781d9).
 # Bumped 2026-06-21 (launcher allow_hybrid + turbo-hint removal): psxrecomp master
 #   c7939b7 = bb1d990 + per-game [controller] allow_hybrid (hides the launcher's
 #   "Hybrid" pad mode, leaving Analog | D-Pad — MMX6 hard-requires a DualShock) and

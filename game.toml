@@ -46,8 +46,16 @@ turbo_loads  = true     # fast-forward the machine during CD loads (the real spe
 # build-modern/cache/SLUS-01395/ -> loader rescans + loads. --cps matches the
 # CPS-on generated code (REQUIRED or DLLs misbehave); --gcc is the mingw abspath.
 overlay_cache = true
+# Tier selection: "auto" (default) = gcc if a gcc toolchain is present (dev /
+# production shard authoring), else the bundled toolchain-free tcc. Other values:
+# "gcc", "tcc", "auto-no-gcc" (dev: force tcc even with gcc present, to test the
+# user path). Priority is static > gcc shard > tcc shard > interp.
 overlay_backend = "auto"
 overlay_autocompile_cmd = "python ../psxrecomp/tools/compile_overlays.py --captures build-modern/overlay_captures.json --game-toml game.toml --recompiler ../psxrecomp/recompiler/build/psxrecomp-game.exe --runtime-include ../psxrecomp/runtime/include --out-dir build-modern/cache --gcc C:/msys64/mingw64/bin/gcc.exe --cps"
+# tcc fallback: NO explicit cmd — when the backend resolves to tcc the runtime
+# constructs the command from the self-contained toolchain bundled beside the exe
+# (<exe>/overlay_toolchain/: embedded python + tcc + recompiler + script + headers).
+# An explicit overlay_autocompile_cmd_tcc here would override that (dev escape hatch).
 
 [video]
 # aspect_ratio: native presentation. MMX6 ships 4:3 (authentic); the launcher's

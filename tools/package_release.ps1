@@ -1,5 +1,5 @@
 param(
-    [string]$Version = "v0.0.1-alpha",
+    [string]$Version = "v0.0.2-alpha",
     [string]$BuildDir = "build-release",
     # Where your accumulated overlay cache lives (the dir compile_overlays.py
     # writes to, per game.toml overlay_autocompile_cmd --out-dir). Bundled as a
@@ -63,8 +63,10 @@ Write-Host "Bundled launcher assets: launcher.rml + $fontCount font(s) + $imgCou
 
 # Player-facing game.toml: same effective runtime settings as the dev config,
 # minus dev-only sections ([recompiler] inputs beyond the required block, the
-# overlay autocompile command that needs a local python+gcc toolchain, and the
-# [audit] block). Players can edit the [runtime]/[video] sections post-install.
+# gcc overlay-autocompile command, and the [audit] block). overlay_backend is
+# left at the default "auto": with no gcc toolchain on a player box it resolves
+# to tcc, which fills overlay gaps via the bundled overlay_toolchain/ (no system
+# python or gcc needed). Players can edit [runtime]/[video] post-install.
 @"
 [game]
 name = "Mega Man X6"
@@ -165,12 +167,26 @@ cap_site          = "0x80027278"
 #   gcc/<arch-abi>/cg<N>/<entry8>_<crc8>.dll (+ .ranges)
 # and the loader scans it by that exact path, so the subtree must be preserved.
 # Ship .dll + .ranges only (skip the _patched.c intermediates and the reserved
-# sljit/ namespace, which has no on-disk blobs).
+# sljit/ namespace, which has no on-disk blobs), and ONLY the dir matching THIS
+# build's codegen tag -- a stale-hash dir is dead weight the runtime never loads.
+$RecompTools = Resolve-Path (Join-Path $Root "..\psxrecomp\tools")
+$RecompInc   = Resolve-Path (Join-Path $Root "..\psxrecomp\runtime\include")
+$tagScript = Join-Path $env:TEMP ("psx_cgtag_{0}.py" -f $PID)
+@"
+import importlib.util
+s = importlib.util.spec_from_file_location('co', r'$RecompTools\compile_overlays.py')
+m = importlib.util.module_from_spec(s); s.loader.exec_module(m)
+inc = r'$RecompInc'
+print('cg%d_%08x' % (m.codegen_ver(inc), m.codegen_hash(inc)))
+"@ | Set-Content -Encoding ASCII $tagScript
+$CgTag = (& python $tagScript).Trim()
+Remove-Item -Force $tagScript
+Write-Host "Release codegen tag: $CgTag (only this cache namespace is shipped)"
 $CacheSrc = Join-Path $Root "$CacheBuildDir/cache/SLUS-01395"
 if (Test-Path $CacheSrc) {
     $CacheDst = Join-Path $Stage "cache/SLUS-01395"
     $cacheFiles = Get-ChildItem $CacheSrc -Recurse -File -Include *.dll,*.ranges |
-        Where-Object { $_.FullName -notmatch '[\\/]sljit[\\/]' }
+        Where-Object { $_.FullName -notmatch '[\\/]sljit[\\/]' -and $_.FullName -match "[\\/]$CgTag[\\/]" }
     foreach ($f in $cacheFiles) {
         $rel  = $f.FullName.Substring($CacheSrc.Length).TrimStart('\','/')
         $dest = Join-Path $CacheDst $rel
@@ -182,6 +198,51 @@ if (Test-Path $CacheSrc) {
 } else {
     Write-Warning "No overlay cache found at $CacheSrc - releasing without bundled cache"
 }
+
+# ---- Self-contained overlay toolchain (tcc tier) -------------------------
+# A player box has no gcc AND no Python, so overlay_backend=auto resolves to tcc:
+# the runtime fills overlay gaps the shipped gcc cache misses by spawning this
+# bundled, fully self-contained toolchain. The runtime constructs the command
+# from <exe>/overlay_toolchain/ (see main.cpp): embedded Python + TinyCC + the
+# recompiler + compile_overlays.py + the runtime headers. Every exe here must be
+# self-contained (embedded python + prebuilt tcc are; the recompiler needs its
+# mingw runtime DLLs bundled beside it).
+$Toolchain = Join-Path $Stage "overlay_toolchain"
+New-Item -ItemType Directory -Force $Toolchain | Out-Null
+$DlCache = Join-Path $Root "tools/_toolchain_cache"
+New-Item -ItemType Directory -Force $DlCache | Out-Null
+
+# Embedded Python (fixed version; downloaded once + cached)
+$PyVer = "3.13.1"
+$PyZip = Join-Path $DlCache "python-$PyVer-embed-amd64.zip"
+if (-not (Test-Path $PyZip)) {
+    Invoke-WebRequest -Uri "https://www.python.org/ftp/python/$PyVer/python-$PyVer-embed-amd64.zip" -OutFile $PyZip
+}
+Expand-Archive -Path $PyZip -DestinationPath (Join-Path $Toolchain "python") -Force
+
+# TinyCC prebuilt win64 (fixed version; downloaded once + cached). The zip has a
+# top-level tcc/ dir (tcc.exe + libtcc.dll + include/ + lib/) — ship it whole.
+$TccZip = Join-Path $DlCache "tcc-0.9.27-win64-bin.zip"
+if (-not (Test-Path $TccZip)) {
+    Invoke-WebRequest -Uri "https://download.savannah.gnu.org/releases/tinycc/tcc-0.9.27-win64-bin.zip" -OutFile $TccZip
+}
+$TccTmp = Join-Path $DlCache "tcc_extract"
+if (Test-Path $TccTmp) { Remove-Item -Recurse -Force $TccTmp }
+Expand-Archive -Path $TccZip -DestinationPath $TccTmp -Force
+Copy-Item -Recurse -Force (Join-Path $TccTmp "tcc") (Join-Path $Toolchain "tcc")
+
+# Recompiler (built above) + its mingw runtime DLLs (NOT statically linked) +
+# compile_overlays.py + the runtime headers.
+Copy-Item (Join-Path $RecompDir "psxrecomp-game.exe") $Toolchain
+foreach ($d in @("libgcc_s_seh-1.dll","libstdc++-6.dll","libwinpthread-1.dll")) {
+    Copy-Item (Join-Path $MingwBin $d) $Toolchain
+}
+Copy-Item (Resolve-Path (Join-Path $Root "..\psxrecomp\tools\compile_overlays.py")) $Toolchain
+$ToolInc = Join-Path $Toolchain "include"
+New-Item -ItemType Directory -Force $ToolInc | Out-Null
+Copy-Item (Join-Path (Resolve-Path (Join-Path $Root "..\psxrecomp\runtime\include")) "*.h") $ToolInc
+$tcMB = "{0:N0}" -f ((Get-ChildItem $Toolchain -Recurse -File | Measure-Object Length -Sum).Sum / 1MB)
+Write-Host "Bundled overlay toolchain (embedded python + tcc + recompiler): ~$tcMB MB"
 
 # The Release build is statically linked (PSX_STATIC_RUNTIME defaults ON for
 # MinGW Release), so the exe imports ONLY Windows system DLLs -- nothing to
