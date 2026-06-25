@@ -44,7 +44,7 @@ playable preview rather than a certified full playthrough.
 | Controller | Works; DualShock/analog presented by default (required by MMX6) |
 | Stage gameplay | Works (not yet verified all the way to the end) |
 | Memory-card save / load | Works (standard PS1 `.mcd`, emulator-compatible) |
-| Renderers | Software **and** OpenGL (GPU); OpenGL is the default |
+| Renderers | Software **and** OpenGL (GPU); Software is the default this release (see ISSUES.md #7), OpenGL selectable |
 | Widescreen 16:9 | Experimental, opt-in (2D wider field of view) |
 
 See `ISSUES.md` for notes and the remaining enhancement follow-ups.
@@ -53,8 +53,10 @@ See `ISSUES.md` for notes and the remaining enhancement follow-ups.
 
 These are the framework features that are already working in this build:
 
-- **Two renderers.** A CPU software rasterizer and a GPU-authoritative OpenGL
-  backend (default). Falls back to software automatically if GL init fails.
+- **Two renderers.** A CPU software rasterizer (this release's default) and a
+  GPU-authoritative OpenGL backend, both selectable in the launcher. Software is
+  the default here because OpenGL shows intermittent flicker in this build (see
+  ISSUES.md #7); OpenGL also serves as the automatic fallback path.
 - **Fast loading (turbo loads).** While a load is in progress the whole machine
   fast-forwards at your PC's full speed, then drops back to normal the instant
   it finishes — so disc loads complete far faster while all of the game's

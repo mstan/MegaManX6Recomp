@@ -31,6 +31,30 @@ condition — then fill `fmv_skip_total_table` / `fmv_skip_movie_id` /
 
 ---
 
+## #7 — OpenGL renderer flicker in the release build — OPEN (worked around)
+
+The OpenGL backend shows intermittent black-frame flicker and minor artifacts
+in this packaged release build (most visible around Zero in-game). The software
+renderer is clean, so **v0.0.2-alpha ships with `renderer = "software"` as the
+default**; OpenGL is still selectable in the launcher for anyone who wants to
+try it.
+
+Discrimination so far:
+- **Renderer-specific.** Software is clean; only OpenGL flickers. Both backends
+  consume the same GP0/GP1 stream, so this is not a codegen / recompilation bug.
+- **Not the overlay backend.** Persists with the sljit backend forced, so it is
+  unrelated to the new tcc overlay tier.
+- **Not supersampling / AA.** Persists at supersampling=1 with anti-aliasing off.
+- **Release-config-specific.** The developer build (debug tools on, launcher off)
+  runs OpenGL fine; only the production configuration (debug tools off, launcher
+  on, no toolchain on PATH) flickers. The leading suspects for next session are a
+  GL sync/instrumentation difference that a debug build was masking, and the
+  launcher's RmlUi GL3 context interacting with the game's GL context.
+
+Root-causing and re-enabling OpenGL as the default is tracked for a follow-up.
+
+---
+
 ## Resolved
 
 ### #1 — Pre-gameplay spin: root-dir LBA parsed as 1 (should be 22) — ✅ FIXED
