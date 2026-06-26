@@ -4,7 +4,16 @@
 #   git -C ../psxrecomp rev-parse master > /tmp/sha && \
 #     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
 branch=master
-sha=1915b5c
+sha=e7f7fb6
+# Bumped 2026-06-25 (overlay cache unification + ws_cull DLL fix): psxrecomp
+#   master e7f7fb6 = 1915b5c + two framework fixes for the overlay path. (1) The
+#   runtime injects PSX_OVERLAY_CACHE_DIR/PSX_OVERLAY_CAPTURES so the autocompile
+#   WRITE cache + READ captures are always the loader's canonical <exe>/cache --
+#   the cache location can never drift from where the loader reads (it was a
+#   per-game-config footgun across all titles). (2) The overlay DLL preamble
+#   defines psx_ws_cull_sltiu (only matters for GTE titles with auto_screen_x;
+#   MMX6 is 2D so this is a no-op here, but it ships the unified framework).
+#   Runtime/tooling only; codegen unchanged (cache stays cg4_7db781d9).
 # Bumped 2026-06-25 (tcc overlay tier replacing sljit + Xbox controller fix):
 #   psxrecomp master 1915b5c = c7939b7 + the toolchain-free TinyCC overlay tier and
 #   the SDL HIDAPI-Xbox input fix. Tier order is now static > gcc shard > tcc shard >

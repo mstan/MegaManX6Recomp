@@ -21,13 +21,28 @@ $env:PATH = "$MingwBin;$env:PATH"
 # Regenerate the game's C BEFORE building. The recompiler emits the widescreen
 # sites (2D true-FOV + background streamer) at regen time; the runtime build
 # below just compiles generated/*.c. A stale generated/ would ship without those.
+# cmake writes benign warnings (e.g. freetype's cmake_minimum_required
+# deprecation) to STDERR. Under $ErrorActionPreference='Stop', PowerShell 5.1
+# promotes a native command's stderr write to a TERMINATING error, aborting the
+# release for a non-error. Run the native cmake invocations with the preference
+# relaxed and gate on the real signal -- $LASTEXITCODE -- instead.
+function Invoke-Native {
+    param([scriptblock]$Cmd, [string]$What)
+    $old = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    & $Cmd 2>&1 | Out-Host
+    $code = $LASTEXITCODE
+    $ErrorActionPreference = $old
+    if ($code -ne 0) { throw "$What failed (exit $code)" }
+}
+
 $RecompDir = Resolve-Path (Join-Path $Root "..\psxrecomp\recompiler\build")
-cmake --build $RecompDir --target psxrecomp-game -j $env:NUMBER_OF_PROCESSORS
+Invoke-Native { cmake --build $RecompDir --target psxrecomp-game -j $env:NUMBER_OF_PROCESSORS } "recompiler build"
 & (Join-Path $RecompDir "psxrecomp-game.exe") --config (Join-Path $Root "game.toml")
 if ($LASTEXITCODE -ne 0) { throw "game regen failed" }
 
-cmake -S $Root -B $BuildPath -G Ninja -DCMAKE_BUILD_TYPE=Release -DPSX_DEBUG_TOOLS=OFF -DPSX_LAUNCHER=ON
-cmake --build $BuildPath -j $env:NUMBER_OF_PROCESSORS
+Invoke-Native { cmake -S $Root -B $BuildPath -G Ninja -DCMAKE_BUILD_TYPE=Release -DPSX_DEBUG_TOOLS=OFF -DPSX_LAUNCHER=ON } "cmake configure"
+Invoke-Native { cmake --build $BuildPath -j $env:NUMBER_OF_PROCESSORS } "cmake build"
 
 if (Test-Path $StageRoot) {
     Remove-Item -Recurse -Force $StageRoot

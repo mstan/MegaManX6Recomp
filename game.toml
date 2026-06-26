@@ -51,7 +51,11 @@ overlay_cache = true
 # "gcc", "tcc", "auto-no-gcc" (dev: force tcc even with gcc present, to test the
 # user path). Priority is static > gcc shard > tcc shard > interp.
 overlay_backend = "auto"
-overlay_autocompile_cmd = "python ../psxrecomp/tools/compile_overlays.py --captures build-modern/overlay_captures.json --game-toml game.toml --recompiler ../psxrecomp/recompiler/build/psxrecomp-game.exe --runtime-include ../psxrecomp/runtime/include --out-dir build-modern/cache --gcc C:/msys64/mingw64/bin/gcc.exe --cps"
+# The compile's WRITE cache + READ captures are NOT specified here: the runtime
+# injects PSX_OVERLAY_CACHE_DIR / PSX_OVERLAY_CAPTURES (the loader's canonical
+# <exe>/cache and <exe>/overlay_captures.json) so the write can never drift from
+# where the loader reads. This is just the compile RECIPE (compiler + tool paths).
+overlay_autocompile_cmd = "python ../psxrecomp/tools/compile_overlays.py --game-toml game.toml --recompiler ../psxrecomp/recompiler/build/psxrecomp-game.exe --runtime-include ../psxrecomp/runtime/include --gcc C:/msys64/mingw64/bin/gcc.exe --cps"
 # tcc fallback: NO explicit cmd — when the backend resolves to tcc the runtime
 # constructs the command from the self-contained toolchain bundled beside the exe
 # (<exe>/overlay_toolchain/: embedded python + tcc + recompiler + script + headers).
