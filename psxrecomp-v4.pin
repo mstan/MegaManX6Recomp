@@ -4,7 +4,7 @@
 #   git -C ../psxrecomp rev-parse master > /tmp/sha && \
 #     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
 branch=master
-sha=e7f7fb6
+sha=2ff21c4
 # Bumped 2026-06-25 (overlay cache unification + ws_cull DLL fix): psxrecomp
 #   master e7f7fb6 = 1915b5c + two framework fixes for the overlay path. (1) The
 #   runtime injects PSX_OVERLAY_CACHE_DIR/PSX_OVERLAY_CAPTURES so the autocompile
