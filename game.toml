@@ -86,7 +86,7 @@ aspect_ratio = "4:3"
 #   condition) and fill fmv_skip_total_table / fmv_skip_movie_id /
 #   fmv_skip_end_total for universal skip, matching Tomba. Until then the generic
 #   START path is active. (MMX6 ISSUES.md tracks this.)
-auto_skip_fmv = true
+auto_skip_fmv = false
 
 # Controller defaults. Mega Man X6 probes the pad with the DualShock config
 # command (0x43) at init and will NOT poll buttons (0x42) until it detects an
