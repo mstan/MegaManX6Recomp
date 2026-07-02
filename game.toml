@@ -55,7 +55,7 @@ overlay_backend = "auto"
 # injects PSX_OVERLAY_CACHE_DIR / PSX_OVERLAY_CAPTURES (the loader's canonical
 # <exe>/cache and <exe>/overlay_captures.json) so the write can never drift from
 # where the loader reads. This is just the compile RECIPE (compiler + tool paths).
-overlay_autocompile_cmd = "python F:/Projects/psxrecomp/_wt-tomba2/psxrecomp/tools/compile_overlays.py --game-toml game.toml --recompiler F:/Projects/psxrecomp/_wt-tomba2/psxrecomp/recompiler/build-t2/psxrecomp-game.exe --runtime-include F:/Projects/psxrecomp/_wt-tomba2/psxrecomp/runtime/include --gcc C:/msys64/mingw64/bin/gcc.exe --cps"
+overlay_autocompile_cmd = "python F:/Projects/psxrecomp/psxrecomp/tools/compile_overlays.py --game-toml game.toml --recompiler F:/Projects/psxrecomp/psxrecomp/recompiler/build/psxrecomp-game.exe --runtime-include F:/Projects/psxrecomp/psxrecomp/runtime/include --gcc C:/msys64/mingw64/bin/gcc.exe --cps"
 # tcc fallback: NO explicit cmd — when the backend resolves to tcc the runtime
 # constructs the command from the self-contained toolchain bundled beside the exe
 # (<exe>/overlay_toolchain/: embedded python + tcc + recompiler + script + headers).

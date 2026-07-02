@@ -4,7 +4,15 @@
 #   git -C ../psxrecomp rev-parse master > /tmp/sha && \
 #     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
 branch=master
-sha=2ff21c4
+sha=496d1db
+# Bumped 2026-07-02 (HLE tier + coherent-regen stability): psxrecomp master
+#   496d1db = 0ecf552 + stale-shard guard (13c5e0c) + opt-in HLE BIOS tier
+#   (582aecc: call-HLE B0 event family + HLE boot shell-skip replacing
+#   fast_boot snapshots; LLE stays dev default + oracle) + tier wiring
+#   (496d1db). Codegen hash 0cec55ab (emitter changed -> images + caches
+#   regenerated together). The coherent regen cleared the card-LOAD
+#   regressions ("not found"/"data invalid" — staleness class). Releases ship
+#   bios_hle=true (user directive 2026-07-02).
 # Bumped 2026-06-25 (overlay cache unification + ws_cull DLL fix): psxrecomp
 #   master e7f7fb6 = 1915b5c + two framework fixes for the overlay path. (1) The
 #   runtime injects PSX_OVERLAY_CACHE_DIR/PSX_OVERLAY_CAPTURES so the autocompile

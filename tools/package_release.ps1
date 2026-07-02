@@ -111,7 +111,13 @@ memcard_dir = "saves"
 # whole machine during a load, preserving timing).
 disc_speed = "1x"
 
-# Skip the PlayStation BIOS boot logos (true) or watch them (false).
+# BIOS backend. true (the release default) = HLE: the PlayStation boot
+# animation is skipped (the game's own kernel setup and disc load still run
+# for real, fast-forwarded), and a few kernel services run natively. Set to
+# false for the fully faithful BIOS (real boot logos included).
+bios_hle = true
+
+# Deprecated alias for the HLE boot skip alone (kept for old settings files).
 fast_boot  = false
 
 # Turbo loads: while a load is in progress, run the machine at full host speed so
