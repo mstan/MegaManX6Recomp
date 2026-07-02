@@ -4,8 +4,10 @@
 #   git -C ../psxrecomp rev-parse master > /tmp/sha && \
 #     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
 branch=master
-sha=496d1db
+sha=c3c43e6
 # Bumped 2026-07-02 (HLE tier + coherent-regen stability): psxrecomp master
+#   c3c43e6 = 496d1db + launcher "Skip PSX BIOS" toggle removal (boot skip is
+#   automatic now via bios_hle=true in the shipped game.toml).
 #   496d1db = 0ecf552 + stale-shard guard (13c5e0c) + opt-in HLE BIOS tier
 #   (582aecc: call-HLE B0 event family + HLE boot shell-skip replacing
 #   fast_boot snapshots; LLE stays dev default + oracle) + tier wiring
