@@ -133,7 +133,7 @@ Generate the recompiled C, then build and run:
 
 cmake -S . -B build -G "Unix Makefiles"
 cmake --build build -j16
-./build/psx-runtime.exe
+./build/mmx6-runtime.exe
 ```
 
 To build the redistributable Windows release (regens, builds with the launcher,

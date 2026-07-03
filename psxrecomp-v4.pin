@@ -4,7 +4,17 @@
 #   git -C ../psxrecomp rev-parse master > /tmp/sha && \
 #     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
 branch=master
-sha=c3c43e6
+sha=4cc757f
+# Bumped 2026-07-02 (card "not found" ROOT FIX + loud dispatch): psxrecomp
+#   master 4cc757f = c3c43e6 + 30 ROM-resident kernel-table seeds (A0:2B
+#   memset @0xBFC02B8C was undiscovered -> dispatch silently no-op'd ->
+#   MMX6 save-scan died before firstfile; card I/O + events were always
+#   correct). BIOS regen 4406->4439 dispatch entries; CONTINUE lists+loads
+#   saves (user-validated). Unknown dispatch is now FATAL by default
+#   (PSX_FAIL_FAST_UNKNOWN_DISPATCH=0 to opt out). runtime.cmake gains
+#   EXE_NAME: this repo builds mmx6-runtime.exe so Tomba2/other dev sweeps
+#   of psx-runtime.exe no longer kill MMX6 instances. BIOS image regen
+#   required after pulling (seeds are recompile-time input).
 # Bumped 2026-07-02 (HLE tier + coherent-regen stability): psxrecomp master
 #   c3c43e6 = 496d1db + launcher "Skip PSX BIOS" toggle removal (boot skip is
 #   automatic now via bios_hle=true in the shipped game.toml).

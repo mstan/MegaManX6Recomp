@@ -50,7 +50,10 @@ if (Test-Path $StageRoot) {
 New-Item -ItemType Directory -Force $Stage | Out-Null
 New-Item -ItemType Directory -Force (Join-Path $Stage "saves") | Out-Null
 
-Copy-Item (Join-Path $BuildPath "psx-runtime.exe") (Join-Path $Stage "MegaManX6Recomp.exe")
+# Dev exe is mmx6-runtime.exe (per-game EXE_NAME); accept the pre-rename name too.
+$DevExe = Join-Path $BuildPath "mmx6-runtime.exe"
+if (-not (Test-Path $DevExe)) { $DevExe = Join-Path $BuildPath "psx-runtime.exe" }
+Copy-Item $DevExe (Join-Path $Stage "MegaManX6Recomp.exe")
 Copy-Item (Join-Path $Root "README.md") $Stage
 Copy-Item (Join-Path $Root "LICENSE") $Stage
 if (Test-Path (Join-Path $Root "RELEASE_NOTES.md")) {

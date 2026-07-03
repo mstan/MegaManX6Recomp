@@ -21,6 +21,7 @@ psxrecomp_v4_add_runtime_target(psx-runtime
     WINDOW_TITLE "MegaManX6Recomp"
     DEFAULT_BIOS_PATH "${PSXRECOMP_V4_ROOT}/bios/SCPH1001.BIN"
     DEFAULT_GAME_CONFIG_PATH "game.toml"
+    EXE_NAME "mmx6-runtime"
 )
 
 # First-divergence co-sim oracle build (COSIM_ORACLE.md): clean, deterministic,
