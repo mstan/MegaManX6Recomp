@@ -4,7 +4,17 @@
 #   git -C ../psxrecomp rev-parse master > /tmp/sha && \
 #     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
 branch=master
-sha=4cc757f
+sha=010a281
+# Bumped 2026-07-03 (renderer arc merged): psxrecomp master 010a281 = 4cc757f +
+#   the OpenGL black-frame-flicker fix (exact pending-upload rects, ISSUES #7 —
+#   the reason MMX6 shipped software), native-wide 16:9 GL perf/band fixes, the
+#   Vulkan (3rd) backend, and the R3 validation sweep. Runtime-only; codegen
+#   (MIPS->C) UNCHANGED -> hash 0cec55ab holds, NO regen, overlay caches valid.
+#   Validation: MMX6 GL 4:3 PASS incl Rainy Turtloid (flicker gone); GL 16:9 +
+#   Vulkan = YELLOW (rain-area perf). Vulkan hidden by default (dev/CLI-only);
+#   widescreen EXPERIMENTAL in launcher. MMX6 shipping default still SOFTWARE —
+#   flip to opengl + close ISSUES #7 is the pending follow-up. No release cut.
+#   See psxrecomp ENHANCEMENTS.md R1/R1b/R2/R3.
 # Bumped 2026-07-02 (card "not found" ROOT FIX + loud dispatch): psxrecomp
 #   master 4cc757f = c3c43e6 + 30 ROM-resident kernel-table seeds (A0:2B
 #   memset @0xBFC02B8C was undiscovered -> dispatch silently no-op'd ->
