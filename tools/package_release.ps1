@@ -145,12 +145,13 @@ supersampling = 2
 antialiasing  = true
 # texture_filtering: "nearest" = native PSX look; "bilinear" = smooths textures.
 texture_filtering = "nearest"
-# renderer: "software" = CPU renderer (this release's default). "opengl" =
-# hardware GPU renderer. Software is shipped as the default because the OpenGL
-# backend exhibits intermittent black-frame flicker in this build (see ISSUES.md
-# #7); software is clean. OpenGL is still selectable in the launcher for anyone
-# who prefers it. Also set in the launcher (Settings -> Renderer).
-renderer = "software"
+# renderer: "opengl" = hardware GPU renderer (this release's default as of
+# 2026-07-03). "software" = CPU renderer. The OpenGL black-frame flicker that
+# made software the old default (ISSUES.md #7) was root-caused and fixed in
+# psxrecomp (exact pending-upload rects); GL is now validated clean incl. the
+# Rainy Turtloid repro. Software is still selectable in the launcher
+# (Settings -> Renderer) for anyone who prefers it.
+renderer = "opengl"
 # auto_skip_fmv: skip full-motion videos (e.g. the X-vs-Zero opening). When on, a
 # video is skipped the instant it starts. On by default for MMX6; toggleable in
 # the launcher (Settings -> "Skip FMVs").

@@ -31,31 +31,24 @@ condition — then fill `fmv_skip_total_table` / `fmv_skip_movie_id` /
 
 ---
 
-## #7 — OpenGL renderer flicker in the release build — OPEN (worked around)
-
-The OpenGL backend shows intermittent black-frame flicker and minor artifacts
-in this packaged release build (most visible around Zero in-game). The software
-renderer is clean, so **v0.0.2-alpha ships with `renderer = "software"` as the
-default**; OpenGL is still selectable in the launcher for anyone who wants to
-try it.
-
-Discrimination so far:
-- **Renderer-specific.** Software is clean; only OpenGL flickers. Both backends
-  consume the same GP0/GP1 stream, so this is not a codegen / recompilation bug.
-- **Not the overlay backend.** Persists with the sljit backend forced, so it is
-  unrelated to the new tcc overlay tier.
-- **Not supersampling / AA.** Persists at supersampling=1 with anti-aliasing off.
-- **Release-config-specific.** The developer build (debug tools on, launcher off)
-  runs OpenGL fine; only the production configuration (debug tools off, launcher
-  on, no toolchain on PATH) flickers. The leading suspects for next session are a
-  GL sync/instrumentation difference that a debug build was masking, and the
-  launcher's RmlUi GL3 context interacting with the game's GL context.
-
-Root-causing and re-enabling OpenGL as the default is tracked for a follow-up.
-
----
-
 ## Resolved
+
+### #7 — OpenGL renderer flicker in the release build — ✅ FIXED
+Root-caused and fixed in psxrecomp (2026-07-03, master `010a281`). Mechanism:
+`flush_cpu_upload()` merged all pending CPU→VRAM writes into ONE union bounding
+box; a frame with two disjoint uploads produced a union spanning the display
+framebuffers, which the flush painted from the **stale CPU VRAM mirror** (the FBO
+is authoritative under GL) — stomping live frames black (two black presents per
+incident, one per double-buffer parity). The software renderer was immune because
+its CPU array is authoritative, which is why it was the safe default. Fix = an
+exact pending-rect list (merge only when zero uncovered pixels are added;
+wrap-aware GP0(A0) split; overflow → order-preserving flush-all), proven by a
+20k-randomized-rect host unit test plus the new always-on `gl_present_ring`.
+Validated: ~18-min MMX6 GL attract soak (~1600 window captures, zero isolated
+black frames, zero GL errors) + the R3 validation playthrough (GL 4:3 PASS incl.
+the Rainy Turtloid standing-still repro). **MMX6 now ships `renderer = "opengl"`
+by default** (game.toml); software stays selectable in the launcher. See
+psxrecomp `ENHANCEMENTS.md` R1.
 
 ### #1 — Pre-gameplay spin: root-dir LBA parsed as 1 (should be 22) — ✅ FIXED
 Early boot couldn't load `ROCK_X6.DAT` because the ISO9660 path-table parse

@@ -62,6 +62,14 @@ overlay_autocompile_cmd = "python F:/Projects/psxrecomp/psxrecomp/tools/compile_
 # An explicit overlay_autocompile_cmd_tcc here would override that (dev escape hatch).
 
 [video]
+# renderer: GPU-authoritative OpenGL is the DEFAULT as of 2026-07-03. The
+# intermittent black-frame flicker (ISSUES.md #7 — the reason v0.0.2 shipped
+# software) was root-caused and fixed in psxrecomp: flush_cpu_upload merged
+# disjoint CPU→VRAM uploads into one union box painted from the stale CPU mirror;
+# fix = exact pending-rect list. GL is now validated clean incl. the Rainy
+# Turtloid repro. Software stays selectable in the launcher (Settings → Renderer).
+renderer = "opengl"
+
 # aspect_ratio: native presentation. MMX6 ships 4:3 (authentic); the launcher's
 # Settings → "Widescreen (EXPERIMENTAL)" toggle flips this to "16:9" in
 # settings.toml to opt into the experimental 2D widescreen (real wider field of
