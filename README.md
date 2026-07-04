@@ -235,3 +235,13 @@ data, and no BIOS image — those are always read from files you supply. The
 release executable and the bundled `cache` folder do contain statically
 recompiled (machine-translated) builds of the game's code, the same distribution
 model used by other static recompilation projects such as N64: Recompiled.
+
+---
+
+<p align="center">
+  <sub><b>R.A.I.D. — Retro AI Development</b> · a Discord for AI-assisted retro reverse-engineering, decomp &amp; recomp</sub>
+</p>
+
+<p align="center">
+  <a href="https://discord.gg/Ad9BwSzctP"><img src=".github/raid-discord.png" alt="Join the Retro AI Development (R.A.I.D.) Discord" width="200"></a>
+</p>
