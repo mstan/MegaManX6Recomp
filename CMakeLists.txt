@@ -9,10 +9,18 @@ set(PSXRECOMP_V4_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/psxrecomp-v4" CACHE PATH
 
 include("${PSXRECOMP_V4_ROOT}/runtime/runtime.cmake")
 
+# Generated-C directory. Defaults to "generated" (the vanilla recompile). A
+# variant build (e.g. a "MMX6 Tweaks" patched-input recompile) sets
+# -DGAME_GENERATED_DIR=generated-tweaks to consume a parallel regen without
+# disturbing the vanilla generated/ or its build dir. See mmx6-tweaks/ + the
+# game.tweaks.toml variant config.
+set(GAME_GENERATED_DIR "generated" CACHE STRING
+    "Directory (relative to source) holding the recompiled game C")
+
 set(GAME_GENERATED_FULL
-    "${CMAKE_CURRENT_SOURCE_DIR}/generated/SLUS_013.95_full.c")
+    "${CMAKE_CURRENT_SOURCE_DIR}/${GAME_GENERATED_DIR}/SLUS_013.95_full.c")
 set(GAME_GENERATED_DISPATCH
-    "${CMAKE_CURRENT_SOURCE_DIR}/generated/SLUS_013.95_dispatch.c")
+    "${CMAKE_CURRENT_SOURCE_DIR}/${GAME_GENERATED_DIR}/SLUS_013.95_dispatch.c")
 
 psxrecomp_v4_add_runtime_target(psx-runtime
     GAME_GENERATED_FULL_C "${GAME_GENERATED_FULL}"
