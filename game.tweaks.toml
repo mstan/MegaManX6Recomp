@@ -7,6 +7,7 @@
 [game]
 name = "Mega Man X6"
 id = "SLUS-01395"
+variant = "tweaks-c22ca4c0"  # ROM-hack variant tag: namespaces cache + saves (crc of patched EXE)
 exe = "mmx6-tweaks/rom/SLUS_013.95"
 disc = "mmx6-tweaks/Mega Man X6 (USA) (v1.1) [Tweaks+Loc+Art v2.6].cue"
 load_address = "0x80010000"
