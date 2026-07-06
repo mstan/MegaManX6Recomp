@@ -99,6 +99,7 @@ if (DryRunArg = "dump") {
     NoWriteMode = 1
     DumpMode := 1
 }
+SaveMode := (DryRunArg = "save")   ; load the profile, ProfileSave it, exit (no patch)
 DebugBatchPatch = 1      ; skip the success MsgBox at PatchEnd
 PatchShowWin = 0         ; Run xdelta3/error_recalc hidden
 Versioning = 1           ; force OutputFileNext auto-numbering (never the overwrite prompt)
@@ -148,6 +149,13 @@ if (ProfileString = "") {
 }
 ProfileLoad(ProfileString)
 TR("profile loaded: " ProfileArg)
+
+; ---- Save mode: dump the fully-resolved profile (VarList=values) and exit ----
+if (SaveMode) {
+    ProfileSave(ResultArg)
+    FileAppend, SAVE OK: %ResultArg%`n, *
+    ExitApp, 0
+}
 
 ; ---- Apply ---------------------------------------------------------------
 GoSub Patch

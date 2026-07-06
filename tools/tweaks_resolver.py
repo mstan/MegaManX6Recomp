@@ -60,6 +60,9 @@ VANILLA_MD5 = "237b6feddd1a88e86ab1cddc8822f03f"
 # relative #Include lines resolve). See tools/tweaks/_headless.ahk.
 HEADLESS_DRIVER = PROJECT_ROOT / "tools" / "tweaks" / "_headless.ahk"
 
+# Baseline profile (all option vars at their GUI defaults) — selections overlay it.
+DEFAULT_PROFILE = DEFAULT_RUN_EXTRACTED / "profiles" / "default.x6tweaksprofile"
+
 # The SLUS boot EXE inside the disc image (ISO9660 name; ';1' stripped).
 SLUS_NAME = "SLUS_013.95"
 # ISO extractor: prefer the tracked copy under tools/tweaks/, fall back to the
@@ -353,15 +356,17 @@ def _var_of(opts: str) -> str | None:
 
 def _ddl_choices(text: str):
     """(choices, default) from an AHK DropDownList item string ('a||b|c'). The
-    item before the first '||' (empty split) is the default. Returns (None,None)
-    when the list is a %Var% reference (dynamic; resolve from _dat.ahk later)."""
+    item before the first '||' (empty split) is the default. Items are kept RAW
+    (quotes included where present) because the profile stores the exact item
+    string (e.g. `"RESCUED"` vs `Lv. 1`); a UI may strip quotes for display.
+    Returns (None,%Var%) when the list is a dynamic %Var% reference."""
     t = text.strip()
     if t.startswith("%") and t.endswith("%"):
         return None, t.strip("%")
     default = None
     if "||" in t:
-        default = t.split("||", 1)[0].split("|")[-1].strip().strip('"')
-    items = [p.strip().strip('"') for p in t.split("|") if p.strip()]
+        default = t.split("||", 1)[0].split("|")[-1].strip()
+    items = [p.strip() for p in t.split("|") if p.strip()]
     return items, default
 
 
@@ -556,6 +561,77 @@ def cmd_deps(db: TweaksDB, args) -> int:
 
 
 # --------------------------------------------------------------------------
+# Profile generation (UI selection -> .x6tweaksprofile)
+# --------------------------------------------------------------------------
+#
+# A .x6tweaksprofile is `VarName=value` for every option var (the GUI's VarList).
+# The shipped default profile is the baseline (all vars at their defaults); an
+# arbitrary selection = default profile with the user's changed vars overridden.
+# Value encoding (from the shipped profiles): checkbox/radio = 0|1 (one 1 per
+# radio group), dropdown = the exact item string (quoted iff quoted in gui.ahk,
+# e.g. "RESCUED" vs D vs Lv. 1), edit/slider = the number.
+
+def load_profile(path: Path) -> "OrderedDict[str,str]":
+    od: "OrderedDict[str,str]" = OrderedDict()
+    for ln in Path(path).read_text(encoding="utf-8-sig").splitlines():
+        if "=" in ln and not ln.lstrip().startswith(";"):
+            k, _, v = ln.partition("=")
+            od[k.strip()] = v.strip()
+    return od
+
+
+def emit_profile(od: "OrderedDict[str,str]") -> str:
+    return "\n".join(f"{k}={v}" for k, v in od.items())
+
+
+def generate_profile(base: Path, overrides: dict) -> str:
+    """default profile + {var: value} overrides -> profile text (ProfileLoad reads
+    lines order-independently, so emit order is irrelevant to the apply)."""
+    od = load_profile(base)
+    for k, v in overrides.items():
+        od[str(k)] = str(v)
+    return emit_profile(od)
+
+
+def selection_to_overrides(catalog: list[dict], selection: dict) -> dict:
+    """Translate a UI selection into profile var overrides.
+
+    selection maps an option var -> the user's chosen value in UI terms:
+      checkbox -> bool/0/1;  radio -> the chosen radio var (sets it 1, its
+      group siblings 0);  dropdown -> the chosen item string;  edit/slider ->
+      number. Only options present in `selection` are changed; everything else
+      stays at the base profile's default.
+    """
+    by_var = {o["var"]: o for o in catalog}
+    # radio groups: (tab, group) -> [vars]
+    groups: dict = defaultdict(list)
+    for o in catalog:
+        if o["type"] == "radio":
+            groups[(o["tab"], o.get("group"))].append(o["var"])
+
+    ov: dict = {}
+    for var, val in selection.items():
+        o = by_var.get(var)
+        if o is None:
+            ov[var] = val            # pass-through (caller knows what it's doing)
+            continue
+        t = o["type"]
+        if t == "checkbox":
+            ov[var] = "1" if (val in (True, 1, "1", "on", "true")) else "0"
+        elif t == "radio":
+            # `val` truthy => this radio is the selected one in its group.
+            if val in (True, 1, "1", "on", "true"):
+                for sib in groups[(o["tab"], o.get("group"))]:
+                    ov[sib] = "0"
+                ov[var] = "1"
+        elif t == "dropdownlist":
+            ov[var] = str(val)       # exact item string (with quotes if quoted)
+        else:                         # edit / slider
+            ov[var] = str(val)
+    return ov
+
+
+# --------------------------------------------------------------------------
 # APPLY pipeline
 # --------------------------------------------------------------------------
 #
@@ -670,8 +746,10 @@ def run_engine(profile: str, vanilla: Path, work_dir: Path,
         result_file.unlink()
 
     # exec form for THIS python + Windows-form args (the native AHK parses them).
+    # A profile PATH must be Windows-form for the native AHK; a preset name passes through.
+    prof_arg = profile if profile in PRESET_PROFILES else _win(profile)
     env = dict(os.environ, MSYS2_ARG_CONV_EXCL="*")
-    cmd = [_exec(ahk), _win(driver), profile, _win(staged_vanilla),
+    cmd = [_exec(ahk), _win(driver), prof_arg, _win(staged_vanilla),
            _win(result_file), _win(run_extracted)]
     if dry_run:
         cmd.append("nowrite")
@@ -722,16 +800,38 @@ def emit_variant_toml(template: Path, out_toml: Path, variant: str,
 
 
 def cmd_apply(db: TweaksDB, args) -> int:
-    # --- resolve inputs ---------------------------------------------------
-    profile = args.profile
-    if profile in PRESET_PROFILES:
-        pass
-    elif Path(profile).exists():
-        profile = str(Path(profile).resolve())
+    # --- resolve the profile: a preset name, a .x6tweaksprofile file, or a UI
+    #     selection JSON ({var: value}) turned into a generated profile --------
+    work_dir = Path(args.work_dir) if args.work_dir else (DEFAULT_PATCHER_BASE / "_worktmp")
+    if args.selection:
+        base = Path(args.base_profile) if args.base_profile else DEFAULT_PROFILE
+        if not base.exists():
+            print(f"apply: base profile not found: {base} (needed for --selection)",
+                  file=sys.stderr)
+            return 2
+        sel_path = Path(args.selection)
+        try:
+            selection = json.loads(sel_path.read_text() if sel_path.exists() else args.selection)
+        except (OSError, json.JSONDecodeError) as e:
+            print(f"apply: --selection must be a JSON object or a path to one: {e}",
+                  file=sys.stderr)
+            return 2
+        catalog = parse_gui_catalog(Path(args.patcher_src), db)
+        overrides = selection_to_overrides(catalog, selection)
+        work_dir.mkdir(parents=True, exist_ok=True)
+        gen = work_dir / "_selection.x6tweaksprofile"
+        gen.write_text(generate_profile(base, overrides), encoding="utf-8")
+        profile = str(gen)
+        print(f"[apply] selection: {len(selection)} options -> {len(overrides)} "
+              f"var overrides -> {gen.name}")
+    elif args.profile in PRESET_PROFILES:
+        profile = args.profile
+    elif args.profile and Path(args.profile).exists():
+        profile = str(Path(args.profile).resolve())
     else:
-        print(f"apply: profile must be a preset {sorted(PRESET_PROFILES)} "
-              f"or a path to a .x6tweaksprofile file (got {profile!r})",
-              file=sys.stderr)
+        print(f"apply: need --selection <json>, or --profile as a preset "
+              f"{sorted(PRESET_PROFILES)} or a .x6tweaksprofile path "
+              f"(got {args.profile!r})", file=sys.stderr)
         return 2
 
     vanilla = Path(args.vanilla) if args.vanilla else DEFAULT_VANILLA
@@ -761,10 +861,8 @@ def cmd_apply(db: TweaksDB, args) -> int:
               file=sys.stderr)
         return 2
 
-    work_dir = Path(args.work_dir) if args.work_dir else (DEFAULT_PATCHER_BASE / "_worktmp")
-
     # --- 1. drive the engine ---------------------------------------------
-    print(f"[apply] engine: profile={args.profile} via {ahk.name}")
+    print(f"[apply] engine via {ahk.name}")
     patched = run_engine(profile, vanilla, work_dir, src_dir, run_extracted, ahk)
     print(f"[apply] patched BIN: {patched} ({patched.stat().st_size} bytes)")
 
@@ -846,9 +944,15 @@ def main() -> int:
     p = sub.add_parser(
         "apply",
         help="produce a patched BIN + variant toml by driving acediez's engine")
-    p.add_argument("--profile", required=True,
+    p.add_argument("--profile", default="",
                    help="preset (default|tweaks|tweaks_l|tweaks_l_c) or a "
                         "path to a .x6tweaksprofile file")
+    p.add_argument("--selection", default="",
+                   help="UI selection: a JSON object {var: value} or a path to "
+                        "one; overlaid on the default profile (--base-profile)")
+    p.add_argument("--base-profile", default="",
+                   help="baseline .x6tweaksprofile for --selection (default: "
+                        "the shipped default.x6tweaksprofile)")
     p.add_argument("--vanilla", default="",
                    help=f"vanilla BIN (default: {DEFAULT_VANILLA})")
     p.add_argument("--run-extracted", default="",
