@@ -90,8 +90,15 @@ PatchMsg_Success3 =
 ; Headless flags
 DebugMode = 0
 NoWriteMode = 0
+DumpMode := 0
 if (DryRunArg = "nowrite")
     NoWriteMode = 1
+if (DryRunArg = "dump") {
+    ; Oracle mode for the Python port: build the mod list but write no BIN, then
+    ; dump the engine's final WriteList (data,offset) + file inserts + base patch.
+    NoWriteMode = 1
+    DumpMode := 1
+}
 DebugBatchPatch = 1      ; skip the success MsgBox at PatchEnd
 PatchShowWin = 0         ; Run xdelta3/error_recalc hidden
 Versioning = 1           ; force OutputFileNext auto-numbering (never the overwrite prompt)
@@ -147,6 +154,20 @@ GoSub Patch
 TR("patch done: " OutputPath)
 
 ; ---- Report --------------------------------------------------------------
+if (DumpMode = 1) {
+    ; Emit the ground-truth apply plan for the Python port to match:
+    ;   PATCHFILE=<b01|s02>   (base xdelta3 selected by ScriptPatch)
+    ;   [WRITELIST]  data,offset  (hex writes; offset per OutputDec)
+    ;   [FILES]      varname,filepath  (asset inserts, ECC-split at write time)
+    FileDelete, %ResultArg%
+    FileAppend, PATCHFILE=%PatchFile%`n, %ResultArg%
+    FileAppend, [WRITELIST]`n, %ResultArg%
+    FileAppend, %WriteList%, %ResultArg%
+    FileAppend, `n[FILES]`n, %ResultArg%
+    FileAppend, %PatchList_Files%, %ResultArg%
+    FileAppend, DUMP OK: %ResultArg%`n, *
+    ExitApp, 0
+}
 if (NoWriteMode = 1) {
     FileDelete, %ResultArg%
     FileAppend, %OutputPath%, %ResultArg%

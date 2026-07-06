@@ -298,6 +298,199 @@ class TweaksDB:
 # CLI
 # --------------------------------------------------------------------------
 
+# --------------------------------------------------------------------------
+# GUI catalog (parse _gui/gui.ahk into the launcher's tickbox tree)
+# --------------------------------------------------------------------------
+#
+# gui.ahk is a hand-laid AHK GUI: 8 tabs, each a block after `Gui, Main:Tab, N`.
+# Section headers are Text controls emitted while font is %f1% (section) or %f2%
+# (subsection). Interactive options are Add lines of type Checkbox / Radio /
+# DropDownList / Edit / Slider carrying a `v<Var>` token. See the structural
+# spec this parser was written against (tab order is physical 1,2,3,8,4,5,6,7).
+
+GUI_TAB_TITLES = {
+    1: "General Tweaks", 2: "Player Mechanics", 3: "Balance",
+    4: "New Game Status", 5: "Localization + Custom Art", 6: "Stages",
+    7: "Damage Tables", 8: "Boss Attacks",
+}
+_OPTION_TYPES = {"checkbox", "radio", "droplist", "dropdownlist", "edit", "slider", "combobox"}
+_TYPE_NORM = {"dropdownlist": "dropdownlist", "droplist": "dropdownlist",
+              "combobox": "dropdownlist"}
+
+
+def _strip_ahk_comments(text: str) -> list[str]:
+    """Drop /* */ line-anchored blocks, full-line ; comments, and trailing ' ;'."""
+    text = re.sub(r"(?ms)^[ \t]*/\*.*?^[ \t]*\*/[ \t]*$", "", text)
+    out = []
+    for ln in text.splitlines():
+        s = ln.lstrip()
+        if s.startswith(";"):
+            out.append("")
+            continue
+        # trailing ' ;' comment (AHK: ';' preceded by whitespace)
+        m = re.search(r"\s;", ln)
+        if m:
+            ln = ln[:m.start()]
+        out.append(ln)
+    return out
+
+
+def _ahk_add_match(line: str):
+    """Return (type, opts, text) for a `Gui, Main:Add, Type, opts[, text]` line."""
+    m = re.match(r"\s*Gui,\s*Main:Add,\s*(\w+)\s*,\s*(.*)$", line, re.I)
+    if not m:
+        return None
+    ctype = m.group(1).lower()
+    rest = m.group(2)
+    opts, _, text = rest.partition(",")
+    return ctype, opts.strip(), text.strip()
+
+
+def _var_of(opts: str) -> str | None:
+    m = re.search(r"(?:^|\s)v([A-Za-z_]\w*)", opts)
+    return m.group(1) if m else None
+
+
+def _ddl_choices(text: str):
+    """(choices, default) from an AHK DropDownList item string ('a||b|c'). The
+    item before the first '||' (empty split) is the default. Returns (None,None)
+    when the list is a %Var% reference (dynamic; resolve from _dat.ahk later)."""
+    t = text.strip()
+    if t.startswith("%") and t.endswith("%"):
+        return None, t.strip("%")
+    default = None
+    if "||" in t:
+        default = t.split("||", 1)[0].split("|")[-1].strip().strip('"')
+    items = [p.strip().strip('"') for p in t.split("|") if p.strip()]
+    return items, default
+
+
+def parse_gui_catalog(src_dir: Path, db: "TweaksDB") -> list[dict]:
+    """Parse gui.ahk into an ordered option catalog grouped by tab & section."""
+    gui = src_dir / "_gui" / "gui.ahk"
+    lines = _strip_ahk_comments(gui.read_text(encoding="utf-8-sig", errors="replace"))
+
+    cur_tab = None
+    font = None            # 'section' | 'subsection' | None
+    section = subsection = None
+    last_label = None      # nearest preceding Text (labels numeric inputs)
+    radio_group = 0
+    prev_was_radio = False
+    opts_out: list[dict] = []
+
+    for raw in lines:
+        line = raw.rstrip()
+        if not line.strip():
+            continue
+
+        mf = re.match(r"\s*Gui,\s*Main:Font(?:,\s*(.*))?$", line, re.I)
+        if mf:
+            arg = (mf.group(1) or "").strip()
+            if arg in ("%f1%", "s10") or arg.startswith("%f1%"):
+                font = "section"
+            elif arg in ("%f2%", "Underline") or arg.startswith("%f2%"):
+                font = "subsection"
+            elif arg == "":
+                font = None
+            else:
+                font = None  # cosmetic (colors, sizes)
+            continue
+
+        mt = re.match(r"\s*Gui,\s*Main:Tab,\s*(\d+)", line, re.I)
+        if mt:
+            cur_tab = int(mt.group(1))
+            section = subsection = None
+            prev_was_radio = False
+            continue
+
+        add = _ahk_add_match(line)
+        if not add:
+            continue
+        ctype, opts, text = add
+
+        if ctype == "text":
+            if font == "section":
+                section, subsection = text.strip(), None
+            elif font == "subsection":
+                subsection = text.strip()
+            else:
+                last_label = text.strip()
+            prev_was_radio = False
+            continue
+
+        if ctype not in _OPTION_TYPES:
+            prev_was_radio = False
+            continue
+
+        var = _var_of(opts)
+        if not var:
+            prev_was_radio = False
+            continue
+
+        ntype = _TYPE_NORM.get(ctype, ctype)
+        rec = {"tab": cur_tab, "tab_title": GUI_TAB_TITLES.get(cur_tab, str(cur_tab)),
+               "section": section, "subsection": subsection,
+               "type": ntype, "var": var}
+
+        if ntype in ("checkbox", "radio"):
+            rec["label"] = text.strip()
+            rec["default_on"] = bool(re.search(r"(?:^|\s)Checked(?:\s|$)", opts, re.I))
+            if ntype == "radio":
+                if not prev_was_radio:
+                    radio_group += 1
+                rec["group"] = radio_group
+        elif ntype == "dropdownlist":
+            rec["label"] = last_label
+            choices, default = _ddl_choices(text)
+            rec["choices"] = choices
+            rec["default"] = default
+        else:  # edit / slider (numeric)
+            rec["label"] = last_label
+            # default / range are usually %Var_Default% / %Var_Range% -> _dat.ahk
+            dv = db.dat.get(var + "_Default")
+            rec["default"] = dv if dv is not None else (text.strip() or None)
+            rng = db.dat.get(var + "_Range")
+            if rng:
+                rec["range"] = rng
+
+        opts_out.append(rec)
+        prev_was_radio = (ntype == "radio")
+
+    return opts_out
+
+
+def cmd_catalog(db: TweaksDB, args) -> int:
+    cat = parse_gui_catalog(Path(args.patcher_src), db)
+    if args.json:
+        print(json.dumps(cat, indent=2))
+        return 0
+    # human summary
+    by_tab: dict = OrderedDict()
+    for o in cat:
+        by_tab.setdefault(o["tab"], []).append(o)
+    print(f"# GUI catalog: {len(cat)} interactive options across {len(by_tab)} tabs")
+    for tab in sorted(by_tab):
+        opts = by_tab[tab]
+        print(f"\n=== Tab {tab}: {GUI_TAB_TITLES.get(tab, tab)} ({len(opts)} options) ===")
+        cur = None
+        for o in opts:
+            sec = f"{o['section'] or ''}" + (f" › {o['subsection']}" if o['subsection'] else "")
+            if sec != cur:
+                print(f"  [{sec}]")
+                cur = sec
+            extra = ""
+            if o["type"] == "dropdownlist" and o.get("choices"):
+                extra = f"  choices={o['choices']} default={o.get('default')}"
+            elif o["type"] in ("checkbox", "radio"):
+                extra = "  (on)" if o.get("default_on") else ""
+                if o["type"] == "radio":
+                    extra += f"  grp={o.get('group')}"
+            elif o.get("default") is not None:
+                extra = f"  default={o.get('default')}"
+            print(f"    {o['type']:12s} {o['var']:26s} {o.get('label') or ''}{extra}")
+    return 0
+
+
 def cmd_list(db: TweaksDB, args) -> int:
     print(f"# MMX6 Tweaks catalog ({len(db.general_list)} var-sets, "
           f"{len(db.options)} payload records)")
@@ -645,6 +838,8 @@ def main() -> int:
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("list", help="print the option catalog")
     sub.add_parser("audit", help="database coverage statistics")
+    p = sub.add_parser("catalog", help="parse gui.ahk into the tickbox tree")
+    p.add_argument("--json", action="store_true", help="emit JSON for the launcher")
     p = sub.add_parser("deps", help="dependency closure + write order")
     p.add_argument("--select", default="", help="comma-separated option instances")
 
@@ -675,7 +870,7 @@ def main() -> int:
     args = ap.parse_args()
 
     db = TweaksDB(args.patcher_src)
-    return {"list": cmd_list, "audit": cmd_audit,
+    return {"list": cmd_list, "audit": cmd_audit, "catalog": cmd_catalog,
             "deps": cmd_deps, "apply": cmd_apply}[args.cmd](db, args)
 
 
