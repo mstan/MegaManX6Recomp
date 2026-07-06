@@ -468,13 +468,30 @@ def _rml_escape(s: str) -> str:
     return (s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
+def _ddl_display(raw: str) -> str:
+    """Human-readable form of a raw DropDownList item string (drops the quotes
+    the profile keeps, e.g. `"RESCUED"` -> RESCUED). Selection still travels by
+    index (see the `@N` sentinel), so display stripping never loses fidelity."""
+    s = (raw or "").strip()
+    if len(s) >= 2 and s[0] == s[-1] and s[0] in ("\"", "'"):
+        s = s[1:-1]
+    return s
+
+
 def catalog_to_rml(cat: list[dict]) -> str:
     """Emit the catalog as an RML fragment the launcher injects via data-rml.
 
-    Interactive options are checkboxes and radios (the bulk of the tree); each is
-    a clickable row carrying data-var / data-group / data-type so a single C++
-    handler can toggle it and collect the selection. Dropdowns/edits are shown
-    read-only for now (they need select/text widgets — a later pass)."""
+    Every option is fully interactive:
+      * checkbox  -> a clickable row that toggles its own `on` class.
+      * radio     -> a group renders as a segmented pill row (either/or picker);
+                     tw_toggle makes the clicked pill the sole `on` in its group.
+      * dropdown  -> an inline accordion: a value field that expands a choice
+                     list below it (accordion, not an absolute popup, so it is
+                     never clipped by the scrollable tree). The chosen index
+                     rides in `data-value` as an `@N` sentinel.
+      * edit/slider and dynamic (%Var%) dropdowns stay read-only for now.
+    Each interactive element carries data-var / data-type (+ data-group for
+    radios) so the C++ apply walk can collect the selection uniformly."""
     out: list[str] = []
     by_tab: dict = OrderedDict()
     for o in cat:
@@ -484,7 +501,10 @@ def catalog_to_rml(cat: list[dict]) -> str:
         out.append(f'<div class="tw-tab-block"><div class="tw-tab-hd">'
                    f'{_rml_escape(GUI_TAB_TITLES.get(tab, str(tab)))}</div>')
         cur = None
-        for o in opts:
+        i = 0
+        n = len(opts)
+        while i < n:
+            o = opts[i]
             sec = (o.get("section") or "")
             if o.get("subsection"):
                 sec = f"{sec} › {o['subsection']}" if sec else o["subsection"]
@@ -492,21 +512,68 @@ def catalog_to_rml(cat: list[dict]) -> str:
                 if sec:
                     out.append(f'<div class="tw-sec-hd">{_rml_escape(sec)}</div>')
                 cur = sec
+            t = o["type"]
             var = o["var"]
             label = _rml_escape(o.get("label") or var)
-            t = o["type"]
-            if t in ("checkbox", "radio"):
-                grp = f"{o['tab']}:{o.get('group')}" if t == "radio" else ""
+
+            if t == "radio":
+                # Fold consecutive radios sharing this group into one pill row so
+                # tw_toggle's sibling-exclusivity (same parent + data-group) holds.
+                grp = o.get("group")
+                gid = f"{o['tab']}:{grp}"
+                row = ['<span class="tw-radio-row">']
+                while i < n and opts[i]["type"] == "radio" and opts[i].get("group") == grp:
+                    p = opts[i]
+                    on = " on" if p.get("default_on") else ""
+                    plbl = _rml_escape(p.get("label") or p["var"])
+                    row.append(
+                        f'<span class="tw-pill{on}" data-var="{p["var"]}" '
+                        f'data-group="{gid}" data-type="radio" '
+                        f'data-event-click="tw_click">{plbl}</span>')
+                    i += 1
+                row.append('</span>')
+                out.append("".join(row))
+                continue
+
+            if t == "checkbox":
                 on = " on" if o.get("default_on") else ""
                 out.append(
-                    f'<span class="tw-opt{on}" data-var="{var}" data-group="{grp}" '
-                    f'data-type="{t}" data-event-click="tw_toggle">'
+                    f'<span class="tw-opt{on}" data-var="{var}" data-group="" '
+                    f'data-type="checkbox" data-event-click="tw_click">'
                     f'<span class="tw-box"></span><span class="tw-lbl">{label}</span></span>')
-            else:  # dropdown / edit / slider — read-only for now
+
+            elif t == "dropdownlist" and o.get("choices"):
+                choices = o["choices"]
+                didx = 0
+                default = o.get("default")
+                if default is not None:
+                    for k, c in enumerate(choices):
+                        if c == default:
+                            didx = k
+                            break
+                cur_disp = _rml_escape(_ddl_display(choices[didx]))
+                dd = [f'<span class="tw-opt tw-dd" data-var="{var}" '
+                      f'data-type="dropdownlist" data-value="@{didx}">']
+                dd.append(f'<span class="tw-dd-field" data-event-click="tw_click">'
+                          f'<span class="tw-lbl">{label}</span>'
+                          f'<span class="tw-dd-cur">{cur_disp}</span>'
+                          f'<span class="tw-dd-caret"></span></span>')
+                dd.append('<span class="tw-dd-panel">')
+                for k, c in enumerate(choices):
+                    on = " on" if k == didx else ""
+                    dd.append(f'<span class="tw-dd-choice{on}" data-idx="{k}" '
+                              f'data-event-click="tw_click">'
+                              f'{_rml_escape(_ddl_display(c))}</span>')
+                dd.append('</span></span>')
+                out.append("".join(dd))
+
+            else:  # edit / slider / dynamic dropdown — read-only for now
                 val = o.get("default")
                 extra = f" = {_rml_escape(str(val))}" if val is not None else ""
                 out.append(f'<span class="tw-opt ro"><span class="tw-box adv"></span>'
-                           f'<span class="tw-lbl">{label}<span class="tw-adv">{_rml_escape(t)}{extra}</span></span></span>')
+                           f'<span class="tw-lbl">{label}<span class="tw-adv">'
+                           f'{_rml_escape(t)}{extra}</span></span></span>')
+            i += 1
         out.append('</div>')
     return "".join(out)
 
@@ -675,7 +742,16 @@ def selection_to_overrides(catalog: list[dict], selection: dict) -> dict:
                     ov[sib] = "0"
                 ov[var] = "1"
         elif t == "dropdownlist":
-            ov[var] = str(val)       # exact item string (with quotes if quoted)
+            # The UI sends the chosen index as an `@N` sentinel (unambiguous vs
+            # item strings that could themselves be digits). Resolve it to the
+            # exact raw item string the profile stores. A bare string is still
+            # accepted (pass-through) for hand-written selections.
+            choices = o.get("choices") or []
+            if isinstance(val, str) and val.startswith("@") and val[1:].isdigit():
+                idx = int(val[1:])
+                ov[var] = str(choices[idx]) if 0 <= idx < len(choices) else str(val)
+            else:
+                ov[var] = str(val)   # exact item string (with quotes if quoted)
         else:                         # edit / slider
             ov[var] = str(val)
     return ov
