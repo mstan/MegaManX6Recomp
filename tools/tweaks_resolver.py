@@ -33,15 +33,41 @@ apply_selection).
 from __future__ import annotations
 import argparse
 import json
+import os
 import re
+import shutil
+import subprocess
 import sys
+import zlib
 from collections import OrderedDict, defaultdict
 from pathlib import Path
 
-DEFAULT_PATCHER_SRC = Path(
-    r"F:\Projects\psxrecomp\MegaManX6Recomp\mmx6-tweaks\_patcher\src_extracted"
-    r"\Mega Man X6 Tweaks Patcher (v2.6.1)\_src"
+# Project root = parent of tools/ (this file lives in <root>/tools/).
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+
+# The user-supplied, extracted patcher tree. Local-only (mmx6-tweaks/ is not
+# tracked); the resolver reads acediez's engine + payloads in place.
+DEFAULT_PATCHER_BASE = PROJECT_ROOT / "mmx6-tweaks" / "_patcher"
+DEFAULT_PATCHER_SRC = (
+    DEFAULT_PATCHER_BASE / "src_extracted"
+    / "Mega Man X6 Tweaks Patcher (v2.6.1)" / "_src"
 )
+DEFAULT_RUN_EXTRACTED = DEFAULT_PATCHER_BASE / "run_extracted"
+DEFAULT_VANILLA = PROJECT_ROOT / "mmx6-tweaks" / "Mega Man X6 (USA) (v1.1).bin"
+VANILLA_MD5 = "237b6feddd1a88e86ab1cddc8822f03f"
+
+# The tracked headless driver (copied into the patcher _src at apply time so its
+# relative #Include lines resolve). See tools/tweaks/_headless.ahk.
+HEADLESS_DRIVER = PROJECT_ROOT / "tools" / "tweaks" / "_headless.ahk"
+
+# The SLUS boot EXE inside the disc image (ISO9660 name; ';1' stripped).
+SLUS_NAME = "SLUS_013.95"
+# ISO extractor: prefer the tracked copy under tools/tweaks/, fall back to the
+# lab copy that ships with the extracted patcher.
+_ISO_TRACKED = PROJECT_ROOT / "tools" / "tweaks" / "iso_extract.py"
+ISO_EXTRACT = _ISO_TRACKED if _ISO_TRACKED.exists() else (DEFAULT_PATCHER_BASE / "iso_extract.py")
+
+PRESET_PROFILES = {"default", "tweaks", "tweaks_l", "tweaks_l_c"}
 
 # --------------------------------------------------------------------------
 # AHK data parsing
@@ -336,27 +362,280 @@ def cmd_deps(db: TweaksDB, args) -> int:
     return 0
 
 
+# --------------------------------------------------------------------------
+# APPLY pipeline
+# --------------------------------------------------------------------------
+#
+# Rather than re-derive acediez's ~2000-line exception-heavy AHK applicator in
+# Python (a byte-for-byte debug loop with permanent divergence risk), we drive
+# his ACTUAL engine headlessly via AutoHotkey (tools/tweaks/_headless.ahk). It
+# is byte-identical by construction and covers arbitrary selections, not just
+# the shipped presets. Proven byte-identical (MD5) against all three v2.6
+# standalone patches, incl. the maximal mugshot-assembly + art-file-insert path.
+#
+# Pipeline:  profile -> [engine: base xdelta3 + hex writes + error_recalc]
+#                    -> patched BIN -> extract SLUS -> crc32 -> variant id
+#                    -> stage variants/<id>/{rom/SLUS, disc.bin, disc.cue}
+#                    -> emit game.<id>.toml  -> (optional) regen
+
+# Path forms differ by Python flavor. A NATIVE Windows python (mingw / python.org)
+# execs Windows paths and str(Path) is already Windows-form. An msys2/cygwin
+# python execs POSIX paths. Either way the NATIVE AutoHotkey exe needs its file
+# ARGS in Windows form. Detect the flavor and convert only when needed (cygpath
+# is available under msys/cygwin; under native python no conversion is needed, so
+# cygpath's absence there never matters).
+IS_WIN_NATIVE = (sys.platform == "win32")
+
+
+def _cygpath(mode: str, p) -> str:
+    try:
+        r = subprocess.run(["cygpath", mode, str(p)],
+                           capture_output=True, text=True)
+        if r.returncode == 0 and r.stdout.strip():
+            return r.stdout.strip()
+    except FileNotFoundError:
+        pass
+    return str(p)
+
+
+def _exec(p) -> str:
+    """Path form to exec (argv[0]) under the running Python."""
+    return str(p) if IS_WIN_NATIVE else _cygpath("-u", p)
+
+
+def _win(p) -> str:
+    """Windows-form path for the native AutoHotkey / tool exes' args."""
+    return str(p) if IS_WIN_NATIVE else _cygpath("-w", p)
+
+
+def _from_win(s: str) -> Path:
+    """A Windows path string (from AutoHotkey) -> Path usable by this Python."""
+    return Path(s) if IS_WIN_NATIVE else Path(_cygpath("-u", s))
+
+
+def find_autohotkey(explicit: str | None) -> Path | None:
+    if explicit:
+        p = Path(explicit)
+        return p if p.exists() else None
+    candidates = [
+        r"C:\Program Files\AutoHotkey\v1.1.37.02\AutoHotkeyU64.exe",
+        r"C:\Program Files\AutoHotkey\AutoHotkeyU64.exe",
+        r"C:\Program Files\AutoHotkey\AutoHotkey.exe",
+        r"C:\Program Files (x86)\AutoHotkey\AutoHotkeyU64.exe",
+    ]
+    for c in candidates:
+        if Path(c).exists():
+            return Path(c)
+    # any v1.1.* dir
+    base = Path(r"C:\Program Files\AutoHotkey")
+    if base.exists():
+        for d in sorted(base.glob("v1.1.*"), reverse=True):
+            for exe in ("AutoHotkeyU64.exe", "AutoHotkeyU32.exe"):
+                if (d / exe).exists():
+                    return d / exe
+    return None
+
+
+def _md5(path: Path) -> str:
+    import hashlib
+    h = hashlib.md5()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def _hardlink_or_copy(src: Path, dst: Path) -> None:
+    if dst.exists():
+        dst.unlink()
+    try:
+        os.link(src, dst)           # instant on same NTFS volume
+    except OSError:
+        shutil.copy2(src, dst)
+
+
+def run_engine(profile: str, vanilla: Path, work_dir: Path,
+               src_dir: Path, run_extracted: Path, ahk: Path,
+               dry_run: bool = False) -> Path:
+    """Drive acediez's engine headlessly; return the produced BIN path.
+
+    Output lands next to the input (the engine derives OutputDir from InputDir),
+    so we run against a hardlinked vanilla inside work_dir.
+    """
+    work_dir.mkdir(parents=True, exist_ok=True)
+    staged_vanilla = work_dir / "Mega Man X6 (USA) (v1.1).bin"
+    _hardlink_or_copy(vanilla, staged_vanilla)
+    # clear stale outputs
+    for f in work_dir.glob("Mega Man X6 (USA) (v1.1) [Tweaks*"):
+        f.unlink()
+
+    driver = src_dir / "_headless.ahk"
+    shutil.copy2(HEADLESS_DRIVER, driver)      # tracked driver -> in-place _src
+
+    result_file = work_dir / "_apply_result.txt"
+    if result_file.exists():
+        result_file.unlink()
+
+    # exec form for THIS python + Windows-form args (the native AHK parses them).
+    env = dict(os.environ, MSYS2_ARG_CONV_EXCL="*")
+    cmd = [_exec(ahk), _win(driver), profile, _win(staged_vanilla),
+           _win(result_file), _win(run_extracted)]
+    if dry_run:
+        cmd.append("nowrite")
+    proc = subprocess.run(cmd, capture_output=True, text=True, env=env)
+    if not result_file.exists():
+        trace = src_dir / "_headless_trace.log"
+        raise RuntimeError(
+            f"engine failed (exit {proc.returncode}): {proc.stdout}{proc.stderr}\n"
+            f"trace: {trace.read_text() if trace.exists() else '(none)'}")
+    out = _from_win(result_file.read_text(encoding="utf-8-sig").strip())
+    if not out.exists():
+        raise RuntimeError(f"engine reported {out} but it does not exist")
+    return out
+
+
+def extract_slus(bin_path: Path, out_path: Path) -> bytes:
+    """Extract the SLUS boot EXE from the patched disc image; return its bytes."""
+    proc = subprocess.run(
+        [sys.executable, str(ISO_EXTRACT), str(bin_path), SLUS_NAME, str(out_path)],
+        capture_output=True, text=True)
+    if proc.returncode != 0 or not out_path.exists():
+        raise RuntimeError(f"iso_extract failed: {proc.stdout}{proc.stderr}")
+    return out_path.read_bytes()
+
+
+def variant_id_for(slus_bytes: bytes) -> str:
+    return "tweaks-%08x" % (zlib.crc32(slus_bytes) & 0xFFFFFFFF)
+
+
+def emit_variant_toml(template: Path, out_toml: Path, variant: str,
+                      exe_rel: str, disc_rel: str) -> None:
+    """Derive game.<variant>.toml from game.tweaks.toml, repointing the variant
+    identity + inputs + output dir, and de-absolutizing the overlay cmd."""
+    text = template.read_text(encoding="utf-8")
+    text = re.sub(r'^(\s*variant\s*=\s*")[^"]*(")',
+                  rf'\g<1>{variant}\g<2>', text, count=1, flags=re.M)
+    text = re.sub(r'^(\s*exe\s*=\s*")[^"]*(")',
+                  rf'\g<1>{exe_rel}\g<2>', text, count=1, flags=re.M)
+    text = re.sub(r'^(\s*disc\s*=\s*")[^"]*(")',
+                  rf'\g<1>{disc_rel}\g<2>', text, count=1, flags=re.M)
+    text = re.sub(r'^(\s*out_dir\s*=\s*")[^"]*(")',
+                  rf'\g<1>generated-{variant}\g<2>', text, count=1, flags=re.M)
+    # De-absolutize the overlay autocompile command onto the psxrecomp-v4 junction
+    # so a variant toml is worktree-portable (issue #5 in the running log).
+    text = text.replace("F:/Projects/psxrecomp/psxrecomp/", "psxrecomp-v4/")
+    text = text.replace("--game-toml game.toml", f"--game-toml {out_toml.name}")
+    out_toml.write_text(text, encoding="utf-8")
+
+
 def cmd_apply(db: TweaksDB, args) -> int:
-    # TODO(next session): the apply pipeline. Steps, all data already parsed:
-    #   1. base image: xdelta3 -d -s vanilla.bin (b01|s02 by ScriptPatch) -> work.bin
-    #      (mmx6-tweaks/_patcher/run_extracted/data/xdelta3/{b01,s02}.xdelta3,
-    #       tools/xdelta3/xdelta3-3.0.11-i686.exe — needs WINDOWS paths)
-    #   2. selection -> resolve_dependencies -> + PatchList_Base
-    #      (+ PatchList_Script when ScriptPatch selected) -> write_order
-    #   3. per option: ASM slots paired by slot number (bytes + offset,
-    #      offset chosen by set: COMMON or B01/S02 to match the base patch);
-    #      direct values converted per Text/NumWord/NumHalfword/NumByte/Add
-    #      filters, written little-endian at Var_Offset (+ mirror at
-    #      offset+4 for halfword-with-echo cases per patchapply.ahk);
-    #      File slots copy asset payloads from _patcher/run_extracted/data/.
-    #   4. error_recalc.exe over work.bin (EDC/ECC).
-    #   5. iso_extract.py -> SLUS_013.95, crc32 -> variant id, emit
-    #      game.<variant>.toml, optionally kick regen.
-    # VALIDATION GATE before this ships: applying the "everything" selection
-    # must reproduce the standalone [Tweaks+Loc+Art v2.6].bin byte-for-byte.
-    print("apply: not implemented yet — parse/deps layer only. "
-          "See TODO in cmd_apply.", file=sys.stderr)
-    return 2
+    # --- resolve inputs ---------------------------------------------------
+    profile = args.profile
+    if profile in PRESET_PROFILES:
+        pass
+    elif Path(profile).exists():
+        profile = str(Path(profile).resolve())
+    else:
+        print(f"apply: profile must be a preset {sorted(PRESET_PROFILES)} "
+              f"or a path to a .x6tweaksprofile file (got {profile!r})",
+              file=sys.stderr)
+        return 2
+
+    vanilla = Path(args.vanilla) if args.vanilla else DEFAULT_VANILLA
+    if not vanilla.exists():
+        print(f"apply: vanilla BIN not found: {vanilla}", file=sys.stderr)
+        return 2
+    if not args.skip_md5_check:
+        got = _md5(vanilla)
+        if got != VANILLA_MD5:
+            print(f"apply: vanilla MD5 mismatch: got {got}, need {VANILLA_MD5}\n"
+                  f"       (need the REDUMP 'Mega Man X6 (USA) (v1.1).bin'; "
+                  f"pass --skip-md5-check to override)", file=sys.stderr)
+            return 2
+
+    src_dir = Path(args.patcher_src)
+    run_extracted = Path(args.run_extracted) if args.run_extracted else DEFAULT_RUN_EXTRACTED
+    for label, p in [("patcher _src", src_dir), ("run_extracted", run_extracted),
+                     ("iso_extract.py", ISO_EXTRACT), ("headless driver", HEADLESS_DRIVER)]:
+        if not p.exists():
+            print(f"apply: {label} not found: {p}", file=sys.stderr)
+            return 2
+
+    ahk = find_autohotkey(args.ahk)
+    if ahk is None:
+        print("apply: AutoHotkey v1.1 not found (needed to drive the patcher "
+              "engine). Install AutoHotkey 1.1 or pass --ahk <path>.",
+              file=sys.stderr)
+        return 2
+
+    work_dir = Path(args.work_dir) if args.work_dir else (DEFAULT_PATCHER_BASE / "_worktmp")
+
+    # --- 1. drive the engine ---------------------------------------------
+    print(f"[apply] engine: profile={args.profile} via {ahk.name}")
+    patched = run_engine(profile, vanilla, work_dir, src_dir, run_extracted, ahk)
+    print(f"[apply] patched BIN: {patched} ({patched.stat().st_size} bytes)")
+
+    # --- 2. extract SLUS + variant id ------------------------------------
+    slus_tmp = work_dir / "SLUS_013.95"
+    slus_bytes = extract_slus(patched, slus_tmp)
+    variant = variant_id_for(slus_bytes)
+    print(f"[apply] SLUS {len(slus_bytes)} bytes -> variant id {variant}")
+
+    # --- 3. stage variants/<id>/ -----------------------------------------
+    staging = Path(args.staging) if args.staging else (
+        PROJECT_ROOT / "mmx6-tweaks" / "variants" / variant)
+    (staging / "rom").mkdir(parents=True, exist_ok=True)
+    disc_base = f"Mega Man X6 (USA) (v1.1) [{variant}]"
+    disc_bin = staging / f"{disc_base}.bin"
+    disc_cue = staging / f"{disc_base}.cue"
+    slus_dst = staging / "rom" / SLUS_NAME
+
+    shutil.move(str(patched), str(disc_bin))
+    disc_cue.write_text(
+        f'FILE "{disc_base}.bin" BINARY\n'
+        f"  TRACK 01 MODE2/2352\n"
+        f"    INDEX 01 00:00:00\n", encoding="utf-8")
+    shutil.move(str(slus_tmp), str(slus_dst))
+    # drop the engine's own .cue (references the build-dated name)
+    for stray in work_dir.glob("Mega Man X6 (USA) (v1.1) [Tweaks*.cue"):
+        stray.unlink()
+    print(f"[apply] staged: {staging}")
+
+    # --- 4. emit game.<variant>.toml -------------------------------------
+    exe_rel = f"mmx6-tweaks/variants/{variant}/rom/{SLUS_NAME}"
+    disc_rel = f"mmx6-tweaks/variants/{variant}/{disc_base}.cue"
+    out_toml = PROJECT_ROOT / f"game.{variant}.toml"
+    if args.emit_toml:
+        template = PROJECT_ROOT / "game.tweaks.toml"
+        if not template.exists():
+            print(f"apply: template {template} missing; skipping toml emit",
+                  file=sys.stderr)
+        else:
+            emit_variant_toml(template, out_toml, variant, exe_rel, disc_rel)
+            print(f"[apply] wrote {out_toml.name}")
+
+    # --- 5. optional regen -----------------------------------------------
+    if args.regen:
+        recompiler = Path(args.recompiler) if args.recompiler else (
+            PROJECT_ROOT / "psxrecomp-v4" / "recompiler" / "build" / "psxrecomp-game.exe")
+        if not recompiler.exists():
+            print(f"apply: recompiler not found: {recompiler} (skipping regen)",
+                  file=sys.stderr)
+        else:
+            print(f"[apply] regen: {recompiler.name} --config {out_toml.name}")
+            rc = subprocess.run([str(recompiler), "--config", str(out_toml)],
+                                cwd=str(PROJECT_ROOT))
+            if rc.returncode != 0:
+                print(f"apply: regen failed (exit {rc.returncode})", file=sys.stderr)
+                return 1
+
+    print(f"\n[apply] done. variant={variant}")
+    print(f"        toml : game.{variant}.toml")
+    print(f"        disc : {disc_rel}")
+    print(f"        exe  : {exe_rel}")
+    if not args.regen:
+        print(f"        next : regen with  psxrecomp-game.exe --config game.{variant}.toml")
+    return 0
 
 
 def main() -> int:
@@ -368,8 +647,31 @@ def main() -> int:
     sub.add_parser("audit", help="database coverage statistics")
     p = sub.add_parser("deps", help="dependency closure + write order")
     p.add_argument("--select", default="", help="comma-separated option instances")
-    p = sub.add_parser("apply", help="produce a patched BIN (not implemented)")
-    p.add_argument("--select", default="")
+
+    p = sub.add_parser(
+        "apply",
+        help="produce a patched BIN + variant toml by driving acediez's engine")
+    p.add_argument("--profile", required=True,
+                   help="preset (default|tweaks|tweaks_l|tweaks_l_c) or a "
+                        "path to a .x6tweaksprofile file")
+    p.add_argument("--vanilla", default="",
+                   help=f"vanilla BIN (default: {DEFAULT_VANILLA})")
+    p.add_argument("--run-extracted", default="",
+                   help="patcher run-extracted dir (tools/ + data/)")
+    p.add_argument("--staging", default="",
+                   help="variant staging dir (default: mmx6-tweaks/variants/<id>)")
+    p.add_argument("--work-dir", default="",
+                   help="scratch dir for the engine run (default: _patcher/_worktmp)")
+    p.add_argument("--ahk", default="", help="AutoHotkey v1.1 exe (autodetected)")
+    p.add_argument("--recompiler", default="",
+                   help="psxrecomp-game.exe for --regen")
+    p.add_argument("--no-emit-toml", dest="emit_toml", action="store_false",
+                   help="do not write game.<variant>.toml")
+    p.add_argument("--regen", action="store_true",
+                   help="run the recompiler on the emitted toml after staging")
+    p.add_argument("--skip-md5-check", action="store_true",
+                   help="do not verify the vanilla BIN MD5")
+
     args = ap.parse_args()
 
     db = TweaksDB(args.patcher_src)

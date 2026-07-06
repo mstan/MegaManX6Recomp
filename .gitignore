@@ -74,3 +74,9 @@ __pycache__/
 /_*.c
 /_*.dll
 /_*.exe
+
+# MMX6 Tweaks variant tooling — local inputs/outputs (see tools/tweaks/, tools/tweaks_resolver.py)
+/mmx6-tweaks/
+/generated-tweaks/
+/build-tweaks/
+/game.tweaks-*.toml

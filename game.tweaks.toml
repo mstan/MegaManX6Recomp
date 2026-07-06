@@ -5,7 +5,7 @@
 # Build: regen with --config game.tweaks.toml; CMake -DGAME_GENERATED_DIR=generated-tweaks.
 
 [game]
-name = "Mega Man X6"
+name = "Megaman X6 Recompiled (Tweaks)"
 id = "SLUS-01395"
 variant = "tweaks-c22ca4c0"  # ROM-hack variant tag: namespaces cache + saves (crc of patched EXE)
 exe = "mmx6-tweaks/rom/SLUS_013.95"
@@ -23,7 +23,7 @@ strict = true
 
 [runtime]
 debug_port = 4490
-window_title = "MegaManX6Recomp"
+window_title = "Megaman X6 Recompiled (Tweaks)"
 memcard_dir = "saves"
 # Disc speed + fast loads — the architecturally-correct model.
 #
