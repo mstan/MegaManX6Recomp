@@ -464,10 +464,60 @@ def parse_gui_catalog(src_dir: Path, db: "TweaksDB") -> list[dict]:
     return opts_out
 
 
+def _rml_escape(s: str) -> str:
+    return (s or "").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def catalog_to_rml(cat: list[dict]) -> str:
+    """Emit the catalog as an RML fragment the launcher injects via data-rml.
+
+    Interactive options are checkboxes and radios (the bulk of the tree); each is
+    a clickable row carrying data-var / data-group / data-type so a single C++
+    handler can toggle it and collect the selection. Dropdowns/edits are shown
+    read-only for now (they need select/text widgets — a later pass)."""
+    out: list[str] = []
+    by_tab: dict = OrderedDict()
+    for o in cat:
+        by_tab.setdefault(o["tab"], []).append(o)
+    for tab in sorted(by_tab):
+        opts = by_tab[tab]
+        out.append(f'<div class="tw-tab-block"><div class="tw-tab-hd">'
+                   f'{_rml_escape(GUI_TAB_TITLES.get(tab, str(tab)))}</div>')
+        cur = None
+        for o in opts:
+            sec = (o.get("section") or "")
+            if o.get("subsection"):
+                sec = f"{sec} › {o['subsection']}" if sec else o["subsection"]
+            if sec != cur:
+                if sec:
+                    out.append(f'<div class="tw-sec-hd">{_rml_escape(sec)}</div>')
+                cur = sec
+            var = o["var"]
+            label = _rml_escape(o.get("label") or var)
+            t = o["type"]
+            if t in ("checkbox", "radio"):
+                grp = f"{o['tab']}:{o.get('group')}" if t == "radio" else ""
+                on = " on" if o.get("default_on") else ""
+                out.append(
+                    f'<span class="tw-opt{on}" data-var="{var}" data-group="{grp}" '
+                    f'data-type="{t}" data-event-click="tw_toggle">'
+                    f'<span class="tw-box"></span><span class="tw-lbl">{label}</span></span>')
+            else:  # dropdown / edit / slider — read-only for now
+                val = o.get("default")
+                extra = f" = {_rml_escape(str(val))}" if val is not None else ""
+                out.append(f'<span class="tw-opt ro"><span class="tw-box adv"></span>'
+                           f'<span class="tw-lbl">{label}<span class="tw-adv">{_rml_escape(t)}{extra}</span></span></span>')
+        out.append('</div>')
+    return "".join(out)
+
+
 def cmd_catalog(db: TweaksDB, args) -> int:
     cat = parse_gui_catalog(Path(args.patcher_src), db)
     if args.json:
         print(json.dumps(cat, indent=2))
+        return 0
+    if args.rml:
+        print(catalog_to_rml(cat))
         return 0
     # human summary
     by_tab: dict = OrderedDict()
@@ -818,9 +868,20 @@ def cmd_apply(db: TweaksDB, args) -> int:
             return 2
         catalog = parse_gui_catalog(Path(args.patcher_src), db)
         overrides = selection_to_overrides(catalog, selection)
+        base_od = load_profile(base)
+        merged = OrderedDict(base_od)
+        for k, v in overrides.items():
+            merged[str(k)] = str(v)
+        # Guard the no-changes case: an empty / all-default selection yields the
+        # default profile, which the engine rejects with a "No changes made"
+        # dialog (it hangs headless, and would build only vanilla anyway).
+        if merged == base_od:
+            print("apply: selection makes no changes vs the default — nothing to "
+                  "build. Tick at least one option.", file=sys.stderr)
+            return 3
         work_dir.mkdir(parents=True, exist_ok=True)
         gen = work_dir / "_selection.x6tweaksprofile"
-        gen.write_text(generate_profile(base, overrides), encoding="utf-8")
+        gen.write_text(emit_profile(merged), encoding="utf-8")
         profile = str(gen)
         print(f"[apply] selection: {len(selection)} options -> {len(overrides)} "
               f"var overrides -> {gen.name}")
@@ -930,6 +991,12 @@ def cmd_apply(db: TweaksDB, args) -> int:
 
 
 def main() -> int:
+    # The catalog RML/JSON contains non-ASCII (∞, ›); force UTF-8 stdout so it
+    # survives a cp1252 Windows console (the launcher captures our stdout).
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--patcher-src", type=Path, default=DEFAULT_PATCHER_SRC,
                     help="path to the extracted patcher _src dir")
@@ -938,6 +1005,7 @@ def main() -> int:
     sub.add_parser("audit", help="database coverage statistics")
     p = sub.add_parser("catalog", help="parse gui.ahk into the tickbox tree")
     p.add_argument("--json", action="store_true", help="emit JSON for the launcher")
+    p.add_argument("--rml", action="store_true", help="emit an RML fragment for the launcher")
     p = sub.add_parser("deps", help="dependency closure + write order")
     p.add_argument("--select", default="", help="comma-separated option instances")
 
