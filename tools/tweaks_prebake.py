@@ -375,6 +375,47 @@ def cmd_selection(args):
         sys.stdout.write(toml)
 
 
+def cmd_state(args):
+    """Emit the runtime `tweaks.state` file (the grammar tweak_runtime.c parses)
+    for a selection. Guarded code variants are NOT applied at runtime (they need
+    the Phase-3 bake) — their flag bits are emitted, plus param + poke directives
+    that DO take effect immediately. Disc-only writes are noted, not emitted."""
+    db = _db()
+    geom = Geometry(twr.DEFAULT_VANILLA)
+    cm = CodeMap(RANGES)
+    base = OrderedDict(twr.load_profile(twr.DEFAULT_PROFILE))
+    base_set = _base_set(db, base)
+    sel = json.loads(args.selection)
+    writes = _writes_for(db, base, sel)
+    c = classify_writes(geom, cm, writes, base_set)
+    out = ["# tweaks.state — runtime tweak directives (tweaks_prebake state).",
+           "format_version=1"]
+    # flags: one bit per guarded site (Phase-3 bake selects the variant). Until the
+    # bake lands these are inert; emitted so the flag surface is exercised end-to-end.
+    if c["guarded"]:
+        out.append("flags=0x%X" % ((1 << len(c["guarded"])) - 1))
+    for i, (wa, van, pat) in enumerate(c["param"]):
+        pat_imm = int(pat[0:2] + pat[2:4], 16)          # LE low halfword
+        out.append(f"param {i} 0x{pat_imm:04X}")
+    # Chunk poke runs to <=32 bytes/line (bounded line length; the runtime applies
+    # many pokes at consecutive addresses identically to one long run).
+    CHUNK = 32
+    for ram, hexb in c["poke"]:
+        nb = len(hexb) // 2
+        for off in range(0, nb, CHUNK):
+            seg = hexb[off * 2:(off + CHUNK) * 2]
+            out.append(f"poke 0x{ram + off:08X} {seg}")
+    text = "\n".join(out) + "\n"
+    if c["disc"]:
+        text += f"# note: + {len(c['disc'])} disc-image patch run(s) (handled by the disc, not this file)\n"
+    if args.out:
+        Path(args.out).write_text(text, encoding="utf-8")
+        print(f"wrote {args.out}  (guarded={len(c['guarded'])} param={len(c['param'])} "
+              f"poke={len(c['poke'])} disc={len(c['disc'])})")
+    else:
+        sys.stdout.write(text)
+
+
 def main():
     try:
         sys.stdout.reconfigure(encoding="utf-8")
@@ -385,8 +426,10 @@ def main():
     sub.add_parser("summary")
     p = sub.add_parser("manifest"); p.add_argument("--out", default="")
     p = sub.add_parser("selection"); p.add_argument("selection"); p.add_argument("--out", default="")
+    p = sub.add_parser("state"); p.add_argument("selection"); p.add_argument("--out", default="")
     args = ap.parse_args()
-    {"summary": cmd_summary, "manifest": cmd_manifest, "selection": cmd_selection}[args.cmd](args)
+    {"summary": cmd_summary, "manifest": cmd_manifest,
+     "selection": cmd_selection, "state": cmd_state}[args.cmd](args)
 
 
 if __name__ == "__main__":

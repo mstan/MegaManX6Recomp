@@ -156,7 +156,35 @@ store-intercept (`init_store_pc`) reusing `psx_game_option_store`
 
 ---
 
-## 7. Runtime loader (extend `game_options.c`)
+## 7a. Phase 2 status — BUILT + mechanism-validated
+
+`runtime/src/tweak_runtime.{c,h}` + `main.cpp` wiring + a `tweaks` debug command +
+`tweaks_prebake.py state` (emits the state-file grammar). Validated live over the
+debug server (own instance on a private `--debug-port`, never the default — another
+game may hold it): state parsed (`have=1`), `flags`/`param`/`poke` loaded, a 512-byte
+table correctly chunked to 32-byte poke lines (`n_poke=17`), `applied=1` at game
+start, and a scratch poke **landed in guest RAM** (`0x80180000` → `deadbeef`), proving
+`psx_write_byte` from the apply path works.
+
+**Poke-timing finding (the recompute-vs-read gotcha, confirmed):** the apply runs
+*post-frame* once `fntrace_is_game_started()` is true, i.e. after the game has already
+executed its entry frame. A data value the game **reads/copies during that first boot
+frame** (e.g. DefOptions) is consumed *before* the poke lands, so its RAM reads vanilla.
+Three fixes, in preference order:
+1. **Apply BEFORE game entry** — poke right after the BIOS EXE loader fills the data
+   section into RAM but before the first game instruction. Overwrites the loaded
+   defaults before any game code reads them; makes every "game reads it" value work.
+   Needs a pre-entry hook (the EXE-handoff point near `main.cpp:2611`), not the
+   post-frame `fntrace_is_game_started` gate. **Recommended.**
+2. **Store-intercept** (`init_store_pc`, the existing `game_options` mechanism) for
+   values the game *recomputes* each boot — the recompiler rewrites that store to
+   substitute our value. Needed only for recomputed values, not plain reads.
+3. Disc-image patch (always works; the fallback the Python engine already produces).
+
+Values the game reads LATE (menus, New Game) already work with the current post-frame
+apply. Improving to (1) is the next Phase-2 refinement.
+
+## 7b. Runtime loader (extend `game_options.c`)
 
 Add a `g_tweak_flags` (u64/bitset) + `g_tweak_param[]` array + a poke list as
 `main.cpp` file-scope globals (alongside `g_video_aspect_*`, `g_ws_*`, etc.,
