@@ -33,9 +33,13 @@ Coverage so far (each increment guarded by a byte-for-byte, order-aware oracle d
      (assembled ASM blob at 4 offsets) and LivesValue04 (Max Lives cap: clamp 99,
      LivesDisplay01 when >9, companion LivesValue04b = DEC2HEX_LE(cap+1,4)) — via a
      `synth` side channel of exception-built writes.
+  5. ScriptPatch s02/s03 (Localization base): ScriptPatch02/03 in the changed set
+     selects the s02/s03 base xdelta3 and prepends PatchList_Script; vars with a
+     _Offset_S02 variant then resolve to the S02 set. (ScriptPatchControl's Mugshot
+     option edits are dead code — wrong var names — so no Mugshot coupling.)
 Still TODO: AddFilter (CharAdd/HeartTank/PartsSet — Exception_B coupled), other
-value-dependent Exception_A/_B (Mugshot assembly, MachDash combos, Zero hints,
-BossHealth, New Game/RescRep), ScriptPatch s02/s03, external file inserts.
+value-dependent Exception_A/_B (Saber Anim OFF-writes, Mugshot assembly, MachDash
+combos, Zero hints, BossHealth, New Game/RescRep), external file inserts.
 """
 from __future__ import annotations
 
@@ -605,9 +609,21 @@ def build_patchlist(db, merged: dict, base: dict) -> tuple[str, list[str], dict]
     # base list is NOT prepended and PATCHFILE stays unset.
     if not active or active == ["CharAdd01"]:
         return "", [], {}
-    # PATCHFILE + base prepend (Exception_A). No ScriptPatch support yet -> b01.
-    patchfile = "b01"
-    pl = list(db.patchlist_base) + active
+    # PATCHFILE + base prepend (Exception_A ScriptPatch block). ScriptPatch02 in
+    # the changed set selects the s02 (Localization) base xdelta3 and prepends
+    # PatchList_Script; ScriptPatch03 -> s03 (defined in the engine but absent from
+    # v2.6.1's data). Otherwise the b01 base. The ScriptPatchNN selectors carry no
+    # writes and are dropped by VerifyFilter (no offset). Offsets for vars with a
+    # _Offset_S02 variant resolve to the S02 set under s02/s03 (see _offsets_for_*).
+    if "ScriptPatch02" in active:
+        patchfile = "s02"
+        pl = list(db.patchlist_base) + list(db.patchlist_script) + active
+    elif "ScriptPatch03" in active:
+        patchfile = "s03"
+        pl = list(db.patchlist_base) + list(db.patchlist_script) + active
+    else:
+        patchfile = "b01"
+        pl = list(db.patchlist_base) + active
     synth: dict = {}
     apply_exception_a(db, merged, pl, synth, patchfile)
     apply_prereq(db, pl)
