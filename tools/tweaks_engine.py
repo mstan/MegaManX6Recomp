@@ -19,10 +19,15 @@ Coverage so far (each increment guarded by a byte-for-byte, order-aware oracle d
   1. STATIC _ASMnn payloads (checkboxes, static radios), base prepend, ECC split.
   2. GuiControlAll VALUE-FORCING normalization (ArmorByPart/LivesSwitch/... control
      interlocks) + the empty-PatchList "No changes" guard; CreateList in TotalList
-     order; PreReqFilter + ReorderFilter; ordered (overlap-safe) WriteList.
-Still TODO: value-dependent Exception_A/_B (Lives cap, LowerDef, Mugshot assembly,
-MachDash, Zero hints, BossHealth), numeric/text filters, ScriptPatch s02/s03,
-external file inserts.
+     order (payload-less selector checkboxes included); PreReqFilter + ReorderFilter;
+     ordered (overlap-safe) WriteList.
+  3. Checkbox-combo Exception_A transforms: LowerDef (LowerDef01/02 + ArmorByPart01
+     -> LowerDef_<X|Zero|All>_<A|B> direct variant) and DashGlobal01+ArmorByPart01
+     -> DashGlobal01_ArmorByPart. expand_entry now also emits `direct` value+offset
+     writes (not just _ASMnn).
+Still TODO: value-dependent Exception_A/_B (Lives cap, Mugshot assembly, MachDash,
+Zero hints, BossHealth, New Game/RescRep), numeric/text filters, ScriptPatch
+s02/s03, external file inserts.
 """
 from __future__ import annotations
 
@@ -267,18 +272,43 @@ def _offsets_for_slot(asm_entries: list, slot: int, patchfile: str) -> list[str]
     return out
 
 
+def _offsets_for_direct(direct_entries: list, patchfile: str) -> list[str]:
+    """Ordered offset-hex list for a DIRECT var (bare `Var = value` + `Var_Offset`
+    [+ `_Offset2`/`_B01`/`_S02`]) — same set/nth/multi-line rules as _ASM offsets."""
+    prefer = {"b01": "B01", "s02": "S02", "s03": "S02"}.get(patchfile, "COMMON")
+    by_nth: dict[int, dict[str, str]] = {}
+    for d in direct_entries:
+        if d.get("kind") == "offset":
+            by_nth.setdefault(d["nth"], {})[d["set"]] = d["offset"]
+    out = []
+    for nth in sorted(by_nth):
+        sets = by_nth[nth]
+        chosen = sets.get(prefer) or sets.get("COMMON") or next(iter(sets.values()))
+        for off in str(chosen).splitlines():
+            if off.strip():
+                out.append(off.strip())
+    return out
+
+
 def expand_entry(db, var: str, patchfile: str) -> list[tuple[str, int]]:
-    """Expand one base-var into its (hex data, decimal offset) writes from its
-    static _ASMnn payloads. Returns [] for vars with no static ASM (those need a
-    filter/exception — handled elsewhere)."""
+    """Expand one PatchList var into its (hex data, decimal offset) writes.
+    Handles static `_ASMnn` payloads (checkboxes, base hacks) AND `direct`
+    vars — a bare `Var = value` paired with `Var_Offset` (used by exception-
+    selected variants, e.g. LowerDef_X_A). Returns [] for vars with neither."""
     o = db.options.get(var)
     if not o:
         return []
-    byte_slots = {a["slot"]: a["hex"] for a in o["asm"] if a.get("kind") == "bytes"}
     writes: list[tuple[str, int]] = []
+    byte_slots = {a["slot"]: a["hex"] for a in o["asm"] if a.get("kind") == "bytes"}
     for slot in sorted(byte_slots):
         data = byte_slots[slot].replace(" ", "")
         for off_hex in _offsets_for_slot(o["asm"], slot, patchfile):
+            writes.append((data, hex2dec(off_hex)))
+    # direct value writes: one value at each of its offset(s)
+    values = [d["value"] for d in o["direct"] if d.get("kind") == "value"]
+    if values:
+        data = str(values[0]).replace(" ", "")
+        for off_hex in _offsets_for_direct(o["direct"], patchfile):
             writes.append((data, hex2dec(off_hex)))
     return writes
 
@@ -319,8 +349,11 @@ def active_options(db, merged: dict, base: dict) -> list[str]:
     active: list[str] = []
     for varset in total_list_order(db):
         for inst in _instances_ordered(db, varset):
-            o = db.options.get(inst)
-            if not o or (not o["asm"] and not o["direct"]):
+            # CreateList adds ANY changed instance, even payload-less "selector"
+            # checkboxes (e.g. LowerDef01/02) whose effect is applied by an
+            # exception — expand_entry yields no write for those on its own, and
+            # VerifyFilter would drop them, so keeping them is harmless + faithful.
+            if inst not in db.options:
                 continue
             if str(merged.get(inst, "")).strip() != str(base.get(inst, "")).strip():
                 active.append(inst)
@@ -380,12 +413,47 @@ def apply_reorder(db, pl: list[str]) -> None:
         _pl_add(pl, moved, first, "After")
 
 
+def apply_exception_a(db, merged: dict, pl: list[str]) -> None:
+    """Value/combination-dependent Exception_A transforms (the ones ported so far;
+    exception_a.ahk runs AFTER the base prepend, BEFORE PreReq/Reorder). Mutates
+    the ordered PatchList in place. `merged` is the normalized profile."""
+    def on(v):
+        return _truthy(merged.get(v, _dat_default(db, v)))
+
+    # LowerDef (Lower Defense): LowerDef01 (X) / LowerDef02 (Zero) default ON;
+    # turning either off selects a defense variant, keyed by the two values and
+    # by whether ArmorByPart01 is on (_A: no armor-by-part, _B: with it). The
+    # chosen LowerDef_<X|Zero|All>_<A|B> is a direct value+offset var. LowerDef01
+    # and LowerDef02 are replaced by it. (Both-on can't reach here — then neither
+    # is in the PatchList.)
+    if "LowerDef01" in pl or "LowerDef02" in pl:
+        d01, d02 = on("LowerDef01"), on("LowerDef02")
+        variant = None
+        if not d01 and d02:
+            variant = "LowerDef_X"
+        elif d01 and not d02:
+            variant = "LowerDef_Zero"
+        elif not d01 and not d02:
+            variant = "LowerDef_All"
+        if variant:
+            variant += "_B" if on("ArmorByPart01") else "_A"
+            _pl_add(pl, [variant], "LowerDef01", "After")
+            _pl_remove(pl, "LowerDef01")
+            _pl_remove(pl, "LowerDef02")
+
+    # Dash unlock + Armor by part: X's Air Dash unlock has a distinct payload when
+    # incomplete armors are active -> swap DashGlobal01 for the combined variant.
+    if "ArmorByPart01" in pl and "DashGlobal01" in pl:
+        _pl_add(pl, ["DashGlobal01_ArmorByPart"], "DashGlobal01", "After")
+        _pl_remove(pl, "DashGlobal01")
+
+
 def build_patchlist(db, merged: dict, base: dict) -> tuple[str, list[str]]:
-    """Assemble the ordered PatchList (var names) the way the AHK pipeline does,
-    for the COMMON case: CreateList (TotalList order) -> Exception_A base prepend
-    + PATCHFILE -> PreReqFilter -> ReorderFilter. BaseFilter is debug-only.
-    (Value-dependent Exception_A/_B transforms and numeric/script filters are
-    added in later increments.)"""
+    """Assemble the ordered PatchList (var names) the way the AHK pipeline does:
+    CreateList (TotalList order) -> Exception_A (base prepend + PATCHFILE + the
+    ported value/combo transforms) -> PreReqFilter -> ReorderFilter. BaseFilter is
+    debug-only. (Numeric/text filters, ScriptPatch s02/s03, and the remaining
+    exceptions are added in later increments.)"""
     active = active_options(db, merged, base)
     # PatchList Check 1 (patch.ahk): no changed options (or only the always-on
     # CharAdd01 sentinel) -> "No changes made"; Exception_A never runs, so the
@@ -395,6 +463,7 @@ def build_patchlist(db, merged: dict, base: dict) -> tuple[str, list[str]]:
     # PATCHFILE + base prepend (Exception_A). No ScriptPatch support yet -> b01.
     patchfile = "b01"
     pl = list(db.patchlist_base) + active
+    apply_exception_a(db, merged, pl)
     apply_prereq(db, pl)
     apply_reorder(db, pl)
     return patchfile, pl
