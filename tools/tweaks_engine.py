@@ -25,9 +25,17 @@ Coverage so far (each increment guarded by a byte-for-byte, order-aware oracle d
      -> LowerDef_<X|Zero|All>_<A|B> direct variant) and DashGlobal01+ArmorByPart01
      -> DashGlobal01_ArmorByPart. expand_entry now also emits `direct` value+offset
      writes (not just _ASMnn).
-Still TODO: value-dependent Exception_A/_B (Lives cap, Mugshot assembly, MachDash,
-Zero hints, BossHealth, New Game/RescRep), numeric/text filters, ScriptPatch
-s02/s03, external file inserts.
+  4. Numeric/text input-conversion filters (filter.ahk): TextFilter (TextFilterTable
+     lookup), NumWordFilter_Value+NumWordFilter_Offset (DEC2HEX(,8) then LE-swapped
+     W1/W2 halfword pair at Offset/Offset+4), NumHalfwordFilter (DEC2HEX_LE(,4)),
+     NumByteFilter (DEC2HEX(,2)). The GUI value becomes the BIN write.
+     Plus the two numeric-consuming Exception_A transforms — NightmareMod01
+     (assembled ASM blob at 4 offsets) and LivesValue04 (Max Lives cap: clamp 99,
+     LivesDisplay01 when >9, companion LivesValue04b = DEC2HEX_LE(cap+1,4)) — via a
+     `synth` side channel of exception-built writes.
+Still TODO: AddFilter (CharAdd/HeartTank/PartsSet — Exception_B coupled), other
+value-dependent Exception_A/_B (Mugshot assembly, MachDash combos, Zero hints,
+BossHealth, New Game/RescRep), ScriptPatch s02/s03, external file inserts.
 """
 from __future__ import annotations
 
@@ -46,6 +54,30 @@ _spec.loader.exec_module(twr)
 
 def hex2dec(h: str) -> int:
     return int(str(h).strip(), 16)
+
+
+# --------------------------------------------------------------------------
+# Hex conversion primitives (port of _lib/_HexLib.ahk DEC2HEX/DEC2HEX_LE/
+# EndianSwap/Padd). The value filters (filter.ahk) run every GUI-supplied
+# number/text through these before it becomes a BIN write.
+# --------------------------------------------------------------------------
+def _dec2hex(num, padding: int = 0) -> str:
+    """DEC2HEX(Num,Padding): uppercase hex, left zero-padded to `padding` chars
+    (Padd only pads — never truncates, matching AHK)."""
+    s = format(int(str(num).strip()), "X")
+    return s.rjust(padding, "0") if padding else s
+
+
+def _endian_swap(s: str) -> str:
+    """EndianSwap: pad to even length, then reverse byte (2-char) order."""
+    if len(s) % 2:
+        s = "0" + s
+    return "".join(s[i:i + 2] for i in range(len(s) - 2, -1, -2))
+
+
+def _dec2hex_le(num, padding: int = 1) -> str:
+    """DEC2HEX_LE(Input,Padding): DEC2HEX then EndianSwap (little-endian bytes)."""
+    return _endian_swap(_dec2hex(num, padding))
 
 
 # --------------------------------------------------------------------------
@@ -290,24 +322,50 @@ def _offsets_for_direct(direct_entries: list, patchfile: str) -> list[str]:
     return out
 
 
-def expand_entry(db, var: str, patchfile: str) -> list[tuple[str, int]]:
+def expand_entry(db, var: str, patchfile: str, values: dict | None = None,
+                 synth: dict | None = None) -> list[tuple[str, int]]:
     """Expand one PatchList var into its (hex data, decimal offset) writes.
-    Handles static `_ASMnn` payloads (checkboxes, base hacks) AND `direct`
-    vars — a bare `Var = value` paired with `Var_Offset` (used by exception-
-    selected variants, e.g. LowerDef_X_A). Returns [] for vars with neither."""
+    Handles synthesized exception vars (`synth[var]` — fully-resolved writes for
+    vars an Exception_A transform builds, e.g. NightmareMod0100), static `_ASMnn`
+    payloads (checkboxes, base hacks), static `direct` vars (a bare `Var = value`
+    paired with `Var_Offset`, e.g. LowerDef_X_A), AND filtered-value vars — a
+    numeric/text option whose write value came from the GUI and was converted by
+    apply_value_filters (`values[var]`). Returns [] for vars with none of these."""
+    synth = synth or {}
+    if var in synth:            # exception-synthesized var: writes already resolved
+        return list(synth[var])
     o = db.options.get(var)
     if not o:
         return []
+    values = values or {}
     writes: list[tuple[str, int]] = []
     byte_slots = {a["slot"]: a["hex"] for a in o["asm"] if a.get("kind") == "bytes"}
     for slot in sorted(byte_slots):
         data = byte_slots[slot].replace(" ", "")
         for off_hex in _offsets_for_slot(o["asm"], slot, patchfile):
             writes.append((data, hex2dec(off_hex)))
-    # direct value writes: one value at each of its offset(s)
-    values = [d["value"] for d in o["direct"] if d.get("kind") == "value"]
-    if values:
-        data = str(values[0]).replace(" ", "")
+    # Filtered GUI value (numeric/text option): its converted value is written at
+    # the var's direct offset(s). NumWord vars split into a W1/W2 halfword pair
+    # (LE-swapped) at Var_Offset and Var_Offset+4 (filter.ahk NumWordFilter_Offset).
+    fv = values.get(var)
+    if fv is not None:
+        data = str(fv).replace(" ", "")
+        offs = _offsets_for_direct(o["direct"], patchfile)
+        if var in db.num_word_vars:
+            w1 = data[2:4] + data[0:2]
+            w2 = data[6:8] + data[4:6]
+            for off_hex in offs:
+                base = hex2dec(off_hex)
+                writes.append((w1, base))
+                writes.append((w2, base + 4))
+        else:
+            for off_hex in offs:
+                writes.append((data, hex2dec(off_hex)))
+        return writes
+    # Static direct value writes: one value at each of its offset(s)
+    static = [d["value"] for d in o["direct"] if d.get("kind") == "value"]
+    if static:
+        data = str(static[0]).replace(" ", "")
         for off_hex in _offsets_for_direct(o["direct"], patchfile):
             writes.append((data, hex2dec(off_hex)))
     return writes
@@ -413,12 +471,51 @@ def apply_reorder(db, pl: list[str]) -> None:
         _pl_add(pl, moved, first, "After")
 
 
-def apply_exception_a(db, merged: dict, pl: list[str]) -> None:
+def apply_exception_a(db, merged: dict, pl: list[str], synth: dict,
+                      patchfile: str) -> None:
     """Value/combination-dependent Exception_A transforms (the ones ported so far;
     exception_a.ahk runs AFTER the base prepend, BEFORE PreReq/Reorder). Mutates
-    the ordered PatchList in place. `merged` is the normalized profile."""
+    the ordered PatchList and `synth` (exception-built writes) in place, and may
+    clamp values in `merged`. `merged` is the normalized profile."""
     def on(v):
         return _truthy(merged.get(v, _dat_default(db, v)))
+
+    def _num(v):
+        return int(str(merged.get(v, _dat_default(db, v))).strip())
+
+    # NightmareMod01 (max Nightmare "dark" intensity). Assemble a tiny ASM blob
+    # embedding the value and value-1 as immediates: <val>00422802004014<val-1>000224,
+    # written at every NightmareMod01 offset. The synthesized var NightmareMod0100
+    # replaces NightmareMod01 in the list. (exception_a.ahk:28-52)
+    if "NightmareMod01" in pl:
+        nm = _num("NightmareMod01")
+        hi, lo = _dec2hex(nm), _dec2hex(nm - 1)
+        if len(hi) != 2:
+            hi = "0" + hi
+        if len(lo) != 2:
+            lo = "0" + lo
+        val = hi + "00422802004014" + lo + "000224"
+        offs = _offsets_for_direct(db.options["NightmareMod01"]["direct"], patchfile)
+        synth["NightmareMod0100"] = [(val, hex2dec(o)) for o in offs]
+        _pl_add(pl, ["NightmareMod0100"], "NightmareMod01", "After")
+        _pl_remove(pl, "NightmareMod01")
+
+    # LivesValue04 (Max Lives cap). Clamp to 99; when >9, also patch the 2-digit
+    # lives display (LivesDisplay01, static ASM). Write a companion "cap+1" limit
+    # var LivesValue04b = DEC2HEX_LE(cap+1,4). LivesValue04 itself stays in the list
+    # and is NumHalfword-filtered downstream (it sees the clamped value via merged).
+    # (exception_a.ahk:55-64)
+    if "LivesValue04" in pl:
+        cap = _num("LivesValue04")
+        if cap > 99:
+            cap = 99
+        merged["LivesValue04"] = str(cap)
+        if cap > 9:
+            _pl_add(pl, ["LivesDisplay01"], "LivesValue04", "Before")
+        b_val = _dec2hex_le(cap + 1, 4)
+        offs = _offsets_for_direct(db.options["LivesValue04b"]["direct"], patchfile)
+        synth["LivesValue04b"] = [(b_val, hex2dec(o)) for o in offs]
+        _pl_add(pl, ["LivesValue04b"], "LivesValue04", "After")
 
     # LowerDef (Lower Defense): LowerDef01 (X) / LowerDef02 (Zero) default ON;
     # turning either off selects a defense variant, keyed by the two values and
@@ -448,35 +545,85 @@ def apply_exception_a(db, merged: dict, pl: list[str]) -> None:
         _pl_remove(pl, "DashGlobal01")
 
 
-def build_patchlist(db, merged: dict, base: dict) -> tuple[str, list[str]]:
+def _text_filter_value(db, raw: str) -> str:
+    """TextFilter: map a var's GUI value through TextFilterTable (case-insensitive
+    `=` compare, like AHK). The resolver stores the table with quotes stripped
+    from keys, so a quoted profile value (e.g. `"RESCUED"`) is matched both raw
+    and unquoted. Unmapped values pass through unchanged (AHK leaves %Var% as-is)."""
+    tbl = db.text_filter_table
+    lower = {k.lower(): v for k, v in tbl.items()}
+    cands = [raw]
+    if len(raw) >= 2 and raw[0] == raw[-1] and raw[0] in "\"'":
+        cands.append(raw[1:-1])
+    for c in cands:
+        if c in tbl:
+            return tbl[c]
+        if c.lower() in lower:
+            return lower[c.lower()]
+    return raw
+
+
+def apply_value_filters(db, merged: dict, pl: list[str]) -> dict:
+    """Numeric/text input-conversion filters (filter.ahk TextFilter,
+    NumWordFilter_Value, NumHalfwordFilter, NumByteFilter). Returns
+    {var: post-filter WRITE VALUE (hex string)} for every PatchList var that
+    belongs to a filter list. The value is the GUI-submitted value (in `merged`)
+    converted to the BIN's byte form:
+      * NumWord (individual vars): DEC2HEX(dec, 8)  -> later split W1/W2 in expand
+      * NumHalfword (var-sets):    DEC2HEX_LE(dec, 4)
+      * NumByte (var-sets):        DEC2HEX(dec, 2)
+      * Text (var-sets):           TextFilterTable lookup
+    AddFilter is intentionally deferred (it collapses instances into a group var
+    and is Exception_B/New-Game coupled)."""
+    values: dict = {}
+    for var in pl:
+        raw = merged.get(var)
+        if raw is None:
+            continue
+        vs2 = var[:-2]                       # var-set = instance minus 2-digit suffix
+        if var in db.num_word_vars:          # NumWordFilterList = individual names
+            values[var] = _dec2hex(raw, 8)
+        elif vs2 in db.num_half_vars:
+            values[var] = _dec2hex_le(raw, 4)
+        elif vs2 in db.num_byte_vars:
+            values[var] = _dec2hex(raw, 2)
+        elif vs2 in db.text_filter_vars:
+            values[var] = _text_filter_value(db, raw)
+    return values
+
+
+def build_patchlist(db, merged: dict, base: dict) -> tuple[str, list[str], dict]:
     """Assemble the ordered PatchList (var names) the way the AHK pipeline does:
     CreateList (TotalList order) -> Exception_A (base prepend + PATCHFILE + the
     ported value/combo transforms) -> PreReqFilter -> ReorderFilter. BaseFilter is
-    debug-only. (Numeric/text filters, ScriptPatch s02/s03, and the remaining
-    exceptions are added in later increments.)"""
+    debug-only. Returns (patchfile, patchlist, synth) where `synth` holds writes
+    an exception built for a synthesized var. (ScriptPatch s02/s03 and the
+    remaining exceptions are added in later increments.)"""
     active = active_options(db, merged, base)
     # PatchList Check 1 (patch.ahk): no changed options (or only the always-on
     # CharAdd01 sentinel) -> "No changes made"; Exception_A never runs, so the
     # base list is NOT prepended and PATCHFILE stays unset.
     if not active or active == ["CharAdd01"]:
-        return "", []
+        return "", [], {}
     # PATCHFILE + base prepend (Exception_A). No ScriptPatch support yet -> b01.
     patchfile = "b01"
     pl = list(db.patchlist_base) + active
-    apply_exception_a(db, merged, pl)
+    synth: dict = {}
+    apply_exception_a(db, merged, pl, synth, patchfile)
     apply_prereq(db, pl)
     apply_reorder(db, pl)
-    return patchfile, pl
+    return patchfile, pl, synth
 
 
 def build_writelist(db, merged: dict, base: dict):
     """(PATCHFILE, ordered [(hexdata, offset_dec), ...]) for a merged profile.
     Order follows the assembled PatchList (matters for overlapping writes)."""
     merged = gui_control_all(db, merged)     # ProfileLoad normalization
-    patchfile, pl = build_patchlist(db, merged, base)
+    patchfile, pl, synth = build_patchlist(db, merged, base)
+    values = apply_value_filters(db, merged, pl)   # numeric/text input conversion
     writes: list[tuple[str, int]] = []
     for var in pl:
-        for data, off in expand_entry(db, var, patchfile):
+        for data, off in expand_entry(db, var, patchfile, values, synth):
             writes += ecc_split(data, off)      # split writes crossing an ECC boundary
     return patchfile, writes
 
