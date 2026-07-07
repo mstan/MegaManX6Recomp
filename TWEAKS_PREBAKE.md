@@ -45,20 +45,29 @@ option, EXE-offset mapped against `generated-tweaks/SLUS_013.95_full.ranges`). S
 loads at `0x80010000`, size 522240 B, disc range `0x1D91FF60..0x1D9B2630`; 12,308
 recompiled functions total.
 
+Refined by `tools/tweaks_prebake.py` (Phase 1, built) — it splits "SLUS code" into
+value-immediates (parameterizable) vs logic (guarded) via a per-word MIPS check (a
+diff confined to bytes 0-1, the immediate field, is a value; a diff in bytes 2-3,
+opcode/rs/rt, is logic):
+
 | Bucket | Count | Recompiler work |
 |---|---|---|
-| **1 — Disc data** (outside the SLUS EXE: art, game-data tables) | 94 | none — patch disc / poke RAM |
-| **3 — SLUS data-section** (tables/values, not instructions) | 15 | none — value param / boot poke |
-| **2 — SLUS code** (instructions) | 158 | guarded variant (one-time bake) |
-| *(no-op-when-toggled-alone — New Game combos; mostly bucket 2)* | 65 | — |
+| **disc** — write outside the SLUS EXE (art, game-data) | 90 | none — disc-image patch |
+| **poke** — SLUS data-section value (game reads from RAM) | 15 | none — boot-time RAM poke |
+| **param** — value that is an instruction immediate | 28 | none per change (one regen to insert the read) |
+| **guarded** — SLUS code logic change | 130 | one-time bake (guarded variant) |
+| *(no-op-when-alone — New Game/combo context)* | 66 | mostly guarded in context |
 
-- **~109 options (buckets 1+3) need ZERO recompiler work** — pure config / disc data.
-- Bucket 2's 158 options touch only **105 recompiled functions** (of 12,308),
-  ~3,600 code bytes. That is the entire one-time pre-bake surface.
+- **105 options (disc + poke) work with the CURRENT binary** — pure config / disc patch.
+- **+28 param + 130 guarded** unlock with **one** dev-side regen (which inserts the
+  param reads AND bakes the guarded variants), after which all are runtime config.
+- The guarded surface is only **95-105 recompiled functions** of 12,308. **39 of ~95
+  functions are touched by >1 guarded option** — but mostly composable (different
+  byte regions, e.g. New Game init), not same-instruction conflicts.
+- Finding: **the entire Boss Attacks tab (17 options) is disc-data** — zero recompile.
 
-Regenerate the numbers: the inventory scripts are ad-hoc (scratch); rebuild from
-`tweaks_engine.build_writelist` per option + the `.ranges` `R <lo> <len>` code map +
-the SLUS geometry above.
+Regenerate anytime: `python tools/tweaks_prebake.py summary` (buckets) /
+`manifest --out m.json` (per-option) / `selection '{...}'` (emit the `[tweaks]` toml).
 
 ---
 
@@ -162,19 +171,26 @@ Persist/restore + range-validate exactly like `game_options.c` (`atexit` save,
 
 ---
 
-## 8. Metadata bridge (Python → recompiler)
+## 8. Metadata bridge (Python → recompiler) — **BUILT (Phase 1)**
 
-`tools/tweaks_engine.py` already produces, per option, the exact `(EXE offset, patched
-bytes)` writelist. Add an emitter that, per option, classifies each write (EXE-addr map +
-`.ranges`) and emits the `[tweaks]` inputs:
-- code-range write, on/off option → a `flags` entry + the `(addr, patched bytes)` for the
-  guarded variant.
-- code-range write that is an immediate in a value option → a `[[tweak.param]]` site.
-- data-section write → a `[[tweak.poke]]` (with `init_store_pc` if the game recomputes).
-- outside-SLUS write → disc-image patch (unchanged; the Python engine already does it) or
-  a large-asset side-file loader (future).
+`tools/tweaks_prebake.py` classifies every option's writes (`tweaks_engine.build_writelist`
+→ EXE-addr map → `.ranges` code map → per-word MIPS immediate check) into
+disc / poke / param / guarded, and emits:
+- `summary` — the bucket counts (validates the split).
+- `manifest --out m.json` — per-option `{bucket, n_disc/poke/param/guarded, funcs}`.
+- `selection '{...}'` — the `[tweaks]` toml fragment for a build: `[[tweak.param]]`
+  (addr/index/value, with the vanilla immediate), `[[tweak.poke]]` (addr/size/value),
+  the guarded-variant sites (addr, vanilla→patched word, owning func), and a note of the
+  disc-patch runs.
 
-This is the concrete low-risk first piece — it's pure Python over machinery that exists.
+The guarded sites carry `(word_addr, vanilla_word, patched_word, func)` — exactly the
+input the Phase-3 recompiler pass needs to translate the patched bytes under a flag. The
+disc/poke/param outputs are what the Phase-2 runtime loader consumes.
+
+Caveat: per-option classification toggles each option ALONE, so New Game/combo options
+that need context show as `no-op`; the real per-build classification (the `selection`
+command) is correct. The param-vs-guarded split is conservative — an ambiguous word
+(any diff outside the immediate field) is `guarded`.
 
 ---
 
