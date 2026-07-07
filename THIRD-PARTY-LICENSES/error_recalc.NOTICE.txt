@@ -1,0 +1,31 @@
+error_recalc  (PlayStation 2352-byte RAW image EDC/ECC recalculator)
+--------------------------------------------------------------------
+Distributed under the GNU General Public License, version 3 or later.
+A copy of the license is provided in this directory as "GPL-3.0.txt".
+
+error_recalc is based on Neill Corlett's EDC/ECC code from his "cmdpack"
+command-line utility suite:
+
+    ecm.c — "Encoder/decoder for Error Code Modeler format"
+    Copyright (C) 2002-2011 Neill Corlett
+    "GNU General Public License ... version 3 of the License, or (at your
+     option) any later version."
+
+Because error_recalc derives from that GPLv3-or-later code, error_recalc is
+itself GPLv3-or-later.
+
+Sources / provenance:
+    - error_recalc: RomHacking.net utility #1264
+      https://www.romhacking.net/utilities/1264/
+    - cmdpack (Neill Corlett): https://github.com/cmdpack/cmdpack
+
+Use in this project: the "error_recalc" executable is invoked as a separate
+process to recompute EDC/ECC after the hex writes. This is mere aggregation --
+its GPL terms do NOT extend to this project's own (PolyForm Noncommercial) code.
+Any release that ships the error_recalc binary must make its corresponding
+source available under GPLv3 (GPLv3 section 6).
+
+STATUS: this dependency is slated for removal. The EDC/ECC recompute is being
+reimplemented clean-room in pure Python from the ECMA-130 CD-ROM standard (the
+EDC CRC and P/Q Reed-Solomon ECC parity), which is not a derivative of this
+code. Once that lands, error_recalc.exe and this notice are removed.
