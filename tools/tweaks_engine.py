@@ -722,6 +722,36 @@ def apply_exception_b(db, merged: dict, pl: list[str], synth: dict,
         raw = merged.get("DmgTableGateDmg01", _dat_default(db, "DmgTableGateDmg01"))
         values["DmgTableGateDmg01"] = _hexsub(raw)
 
+    # Rank -> Souls: each selected CharRank0X (its byte value is the TextFilter'd
+    # rank code) also writes the matching soul count Souls0X = RankSouls<rank+1>
+    # (a NumHalfword table value), inserted right after the rank. (exception_b:226)
+    for idx in (1, 2):
+        cr = f"CharRank0{idx}"
+        if cr in pl:
+            rank_code = values.get(cr)
+            if rank_code is None:
+                rank_code = _text_filter_value(db, _dat_default(db, cr))
+            rank_plus = int(rank_code) + 1
+            souls_src = f"RankSouls{rank_plus:02d}"
+            souls_var = f"Souls0{idx}"
+            values[souls_var] = _dec2hex_le(int(_dat_default(db, souls_src)), 4)
+            _pl_add(pl, [souls_var], cr, "After")
+
+    # SubTankAdd: nibble-swap the AddFilter bitmask (exception_b.ahk:239-242).
+    if "SubtankAdd" in pl and values.get("SubtankAdd"):
+        v = values["SubtankAdd"]
+        values["SubtankAdd"] = v[1] + v[0]
+
+    # LifeUp / EnergyUp: scale the NumByte value (x2 + base). LifeUp base 0x20,
+    # EnergyUp base 0x30. (exception_b.ahk:268-284)
+    for n in ("01", "02"):
+        lu = f"LifeUp{n}"
+        if lu in pl and lu in values:
+            values[lu] = _dec2hex(hex2dec(values[lu]) * 2 + 0x20, 2)
+        eu = f"EnergyUp{n}"
+        if eu in pl and eu in values:
+            values[eu] = _dec2hex(hex2dec(values[eu]) * 2 + 0x30, 2)
+
     # New Game base: any New Game option shares a foundation ASM block. If any
     # NewGameList var appears in the list, prepend the static `NewGame` var (3 ASM
     # writes) to the front of the whole PatchList. Must run LAST in Exception_B so
