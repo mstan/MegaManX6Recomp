@@ -55,11 +55,15 @@ Coverage so far (each increment guarded by a byte-for-byte, order-aware oracle d
   7. New Game base (exception_b.ahk): any NewGameList option prepends the shared
      `NewGame` ASM foundation — this alone fully covers UnlockCode. Plus the Mach
      Dash hybrid Input03+Cancel03/04 combined-ASM variant (exception_a.ahk).
-Still TODO: AddFilter (CharAdd/HeartTank/SubtankAdd/PartsSet/PartsLifeUp/
-PartsEnergyUp accumulation), the rest of the New Game/RescRep block (Rank/Souls,
-SubTank/CharAdd/ArmorParts, LifeUp/EnergyUp, PartsSet packing, RescRep tables incl
-PartsRandom [non-deterministic]), other Exception_A (Mugshot assembly, Zero hints,
-BossHealth), external file inserts.
+  8. AddFilter (filter.ahk): AddList groups (HeartTankAdd, SubtankAdd, CharAdd,
+     PartsLifeUp/EnergyUp, PartsSetNN) collapse selected instances into one group
+     var = little-endian bitmask (2^(i-1) per selected instance). HeartTankAdd is
+     byte-identical on its own; SubtankAdd/CharAdd/PartsSet also need their
+     Exception_B transforms (below) to finish.
+Still TODO: the rest of the New Game/RescRep Exception_B block (Rank/Souls,
+SubTank swap, CharAdd/ArmorParts, LifeUp/EnergyUp, PartsSet packing, RescRep tables
+incl PartsRandom [non-deterministic]), other Exception_A (Mugshot assembly, Zero
+hints, BossHealth), external file inserts.
 """
 from __future__ import annotations
 
@@ -583,6 +587,31 @@ def apply_exception_a(db, merged: dict, pl: list[str], synth: dict,
         _pl_add(pl, ["MachDashInput03_Cancel03"], "MachDashInput03", "After")
 
 
+def apply_add_filter(db, merged: dict, pl: list[str], values: dict) -> None:
+    """AddFilter (filter.ahk:101-207) — the last value filter, before Exception_B.
+    Each AddList group (HeartTankAdd, SubtankAdd, CharAdd, PartsLifeUp,
+    PartsEnergyUp, PartsSetNN) collapses its selected instances into ONE group var
+    whose value is a little-endian bitmask: instance i (1-based) contributes 2^(i-1)
+    when it is in the PatchList or its _Default is 1, counting up to the highest
+    selected instance. The instances are removed and the group var appended to the
+    list end. Mutates pl and writes the group value into `values`."""
+    for group in db._lines("AddList"):
+        present = [v for v in pl
+                   if v[:-2] == group and v[len(group):].isdigit()]
+        if not present:
+            continue
+        last = max(int(v[len(group):]) for v in present)
+        total = 0
+        for i in range(1, last + 1):
+            inst = f"{group}{i:02d}"
+            if inst in pl or _dat_default(db, inst) == "1":
+                total += 1 << (i - 1)
+        values[group] = _endian_swap(_dec2hex(total, 2))
+        for v in present:
+            _pl_remove(pl, v)
+        _pl_add(pl, [group], None, "After")     # append group to list end
+
+
 def _text_filter_value(db, raw: str) -> str:
     """TextFilter: map a var's GUI value through TextFilterTable (case-insensitive
     `=` compare, like AHK). The resolver stores the table with quotes stripped
@@ -744,6 +773,7 @@ def build_writelist(db, merged: dict, base: dict):
     # Exception_B -> PreReq -> Reorder -> expand.
     patchfile, pl, synth = build_patchlist(db, merged, base)
     values = apply_value_filters(db, merged, pl)   # numeric/text input conversion
+    apply_add_filter(db, merged, pl, values)       # AddList bitmask accumulation
     apply_exception_b(db, merged, pl, synth, values, patchfile)
     apply_prereq(db, pl)
     apply_reorder(db, pl)
