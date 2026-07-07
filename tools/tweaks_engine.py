@@ -585,17 +585,14 @@ def active_options(db, merged: dict, base: dict = None) -> list[str]:
 # Option-name PREFIXES whose Exception_B / file-insert handling is still
 # unported or only oracle-PENDING (see the module docstring "Still TODO" and the
 # port memo). A changed option whose name starts with any of these is PARKED.
-# Prefix (not exact var-set) matching is used because these families number their
-# instances irregularly — PartsSetNN groups instances as PartsSet0101, so a
-# var-set match on "PartsSet" would miss them.
-# NEARLY the whole tool is now ported + oracle-validated: the full New Game Status
-# tab (CharAdd/CharStart/ArmorParts, SubtankAdd, LifeUp/EnergyUp, RescRepStatus, and
-# the deterministic PartsSet packing + RescRepFoundTable incl PartsLifeUp/PartsEnergyUp
-# + RescRepFound marks) AND the Title/Load-screen art-file inserts (build_filelist +
-# apply_bin ECC-aware file write). Only two families remain parked:
-PARKED_PREFIXES = (
-    "Mugshot",            # custom-art file inserts + assembly-ASM subsystem — not ported
-)
+# The ENTIRE tool is now ported + oracle-validated (whole-BIN MD5 == AHK): the full
+# New Game Status tab (CharAdd/CharStart/ArmorParts, SubtankAdd, LifeUp/EnergyUp,
+# RescRepStatus, PartsSet packing + RescRepFoundTable), the PartsRandom randomizer
+# (seeded), the Title/Load-screen art-file inserts, AND the Mugshot custom-portrait
+# assembly (MugshotAssembly StringRewrite + per-mugshot ASM + art inserts). No option
+# family is parked by name any more; the only residual gate is on file-insert vars
+# whose art source is missing on disk (e.g. a custom mugshot the user hasn't supplied).
+PARKED_PREFIXES = ()
 
 
 def coverage_gaps(db, merged: dict, base: dict) -> list[tuple[str, str]]:
@@ -747,10 +744,66 @@ def apply_exception_a(db, merged: dict, pl: list[str], synth: dict,
         _pl_add(pl, ["DashGlobal01_ArmorByPart"], "DashGlobal01", "After")
         _pl_remove(pl, "DashGlobal01")
 
+    # Mugshot custom-portrait assembly (exception_a.ahk:100-172).
+    _mugshot_assembly(db, merged, pl, synth, patchfile)
+
     # Mach Dash hybrid (Hold/Release): Input03 combined with Cancel03/04 adds a
     # distinct combined-ASM variant. (exception_a.ahk:178-183)
     if "MachDashInput03" in pl and ("MachDashCancel03" in pl or "MachDashCancel04" in pl):
         _pl_add(pl, ["MachDashInput03_Cancel03"], "MachDashInput03", "After")
+
+
+def _mugshot_assembly(db, merged: dict, pl: list[str], synth: dict, patchfile: str) -> None:
+    """Mugshot custom-portrait assembly (exception_a.ahk:100-172). When any
+    MugshotCustom is active, read the two assembly blobs (assembly.bin/assembly_07
+    .bin), StringRewrite each selected mugshot's blink/talk tile addresses into
+    them, then write ASM01 at its 22 disc offsets + ASM02 at its 1 (per PATCHFILE).
+    StringRewrite = positional OVERWRITE of len(insert) hex chars at a char index.
+    The per-mugshot ASM (MugshotCustomNN_ASM) and the [FILES] art inserts are
+    handled by the normal expand_entry / build_filelist paths."""
+    if not any(v.startswith("MugshotCustom") for v in pl):
+        return
+    ma = db.options.get("MugshotAssembly")
+    if not ma:
+        return
+    f1 = EXT_DATA_DIR / db.dat["MugshotAssembly_File01"].replace("\\", "/").strip()
+    f2 = EXT_DATA_DIR / db.dat["MugshotAssembly_File02"].replace("\\", "/").strip()
+    asm01 = f1.read_bytes().hex().upper()
+    asm02 = f2.read_bytes().hex().upper()
+
+    def rewrite(s, insert, pos):              # StringRewrite: overwrite at char pos
+        return s[:pos] + insert + s[pos + len(insert):]
+
+    n = 1
+    while True:
+        lst = db.dat.get(f"MugshotAssembly_List{n}")
+        if not lst:
+            break
+        blink = (db.dat.get(f"MugshotAssembly_List{n}_Blink") or "").strip()
+        talk = (db.dat.get(f"MugshotAssembly_List{n}_Talk") or "").strip()
+        rb = (db.dat.get(f"MugshotAssembly_List{n}_RelOffset_Blink") or "").strip()
+        rt = (db.dat.get(f"MugshotAssembly_List{n}_RelOffset_Talk") or "").strip()
+        for mid in [x.strip() for x in lst.split(",") if x.strip()]:
+            if f"MugshotCustom{mid}" not in pl:
+                continue
+            set_off = hex2dec(db.dat[f"MugshotAssembly_RelOffset_Mugshot{mid}"])
+            if blink and rb:
+                for bo in [x.strip() for x in rb.split(",") if x.strip()]:
+                    pos = (set_off + hex2dec(bo) * 4 + 2) * 2
+                    asm01 = rewrite(asm01, blink, pos)
+                    asm02 = rewrite(asm02, blink, pos)
+            if talk and rt:
+                for to in [x.strip() for x in rt.split(",") if x.strip()]:
+                    pos = (set_off + hex2dec(to) * 4 + 2) * 2
+                    asm01 = rewrite(asm01, talk, pos)
+                    asm02 = rewrite(asm02, talk, pos)
+        n += 1
+    writes = []
+    for slot, data in ((1, asm01), (2, asm02)):
+        for off_hex in _offsets_for_slot(ma["asm"], slot, patchfile):
+            writes.append((data, hex2dec(off_hex)))
+    synth["MugshotAssembly"] = writes
+    _pl_add(pl, ["MugshotAssembly"], None, "After")
 
 
 def apply_add_filter(db, merged: dict, pl: list[str], values: dict) -> None:
