@@ -567,7 +567,21 @@ def catalog_to_rml(cat: list[dict]) -> str:
                 dd.append('</span></span>')
                 out.append("".join(dd))
 
-            else:  # edit / slider / dynamic dropdown — read-only for now
+            elif t in ("edit", "slider"):
+                # Numeric value entry: a text input seeded with the profile
+                # default. The apply walk reads the input's live value by data-var
+                # /data-type; selection_to_overrides writes it straight through.
+                default = _rml_escape(str(o.get("default") or ""))
+                rng = o.get("range")
+                hint = (f'<span class="tw-num-range">{_rml_escape(str(rng))}</span>'
+                        if rng else "")
+                out.append(
+                    f'<span class="tw-opt tw-num" data-var="{var}" data-type="{t}">'
+                    f'<span class="tw-lbl">{label}</span>'
+                    f'<input type="text" class="tw-num-input" value="{default}"/>'
+                    f'{hint}</span>')
+
+            else:  # dynamic (%Var%) dropdown / unknown — read-only for now
                 val = o.get("default")
                 extra = f" = {_rml_escape(str(val))}" if val is not None else ""
                 out.append(f'<span class="tw-opt ro"><span class="tw-box adv"></span>'
