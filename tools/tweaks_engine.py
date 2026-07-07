@@ -15,6 +15,13 @@ _src/_patch/{createlist,exception_a,exception_b,filter,patchapply}.ahk):
   ASMFilter    -> expand each base-var into its _ASMnn (hex, offset) entries
   PatchApply   -> write %entry% at HEX2DEC(%entry%_Offset)
 
+apply_bin/apply_selection additionally reproduce patchapply.ahk in pure Python
+(xdelta3 base + hex writes + error_recalc), so the launcher can build a patched
+BIN with NO AutoHotkey. Proven byte-identical to the AHK engine by whole-BIN MD5
+across the b01 and s02 bases. This is AHK-free for any selection the engine fully
+covers; selections touching still-unported options (New Game/RescRep, Mugshot
+file inserts — see TODO) must not be routed through it until those land.
+
 Coverage so far (each increment guarded by a byte-for-byte, order-aware oracle diff):
   1. STATIC _ASMnn payloads (checkboxes, static radios), base prepend, ECC split.
   2. GuiControlAll VALUE-FORCING normalization (ArmorByPart/LivesSwitch/... control
@@ -54,6 +61,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import subprocess
 import sys
 from collections import OrderedDict
 from pathlib import Path
@@ -727,6 +735,62 @@ def build_writelist(db, merged: dict, base: dict):
         for data, off in expand_entry(db, var, patchfile, values, synth):
             writes += ecc_split(data, off)      # split writes crossing an ECC boundary
     return patchfile, writes
+
+
+# --------------------------------------------------------------------------
+# Pure-Python apply (no AutoHotkey) — port of patchapply.ahk. Proven byte-
+# identical to the AHK engine by whole-BIN MD5 across the b01 and s02 bases.
+# error_recalc.exe is a separate EDC/ECC tool (not AHK); a clean-room Python
+# replacement is a follow-up. Path constants come from the run-extracted patcher.
+# --------------------------------------------------------------------------
+_RUN_EXTRACTED = twr.DEFAULT_RUN_EXTRACTED
+XDELTA3_EXE = _RUN_EXTRACTED / "tools" / "xdelta3" / "xdelta3-3.0.11-i686.exe"
+ERROR_RECALC_EXE = _RUN_EXTRACTED / "tools" / "error_recalc" / "error_recalc.exe"
+BASE_PATCH_DIR = _RUN_EXTRACTED / "data" / "xdelta3"
+
+
+def apply_bin(db, merged: dict, base: dict, out, *, vanilla=None,
+              error_recalc: bool = True) -> tuple[str, int]:
+    """Build the patched BIN entirely in Python (patchapply.ahk):
+      1. apply the base xdelta3 (b01/s02) to vanilla -> `out`
+      2. write each WriteList entry (hex data at its absolute BIN offset; the
+         WriteList is already ECC-split so writes never land in a sector trailer)
+      3. recompute EDC/ECC (error_recalc.exe, in place)
+    Returns (patchfile, n_writes). Raises on a no-change selection or if the
+    selection needs file inserts (Mugshot custom art — not yet ported)."""
+    vanilla = Path(vanilla) if vanilla else twr.DEFAULT_VANILLA
+    patchfile, writes = build_writelist(db, merged, base)
+    if not patchfile:
+        raise ValueError("selection makes no changes vs the default profile")
+    out = Path(out)
+    if out.exists():
+        out.unlink()
+    patch = BASE_PATCH_DIR / f"{patchfile}.xdelta3"
+    r = subprocess.run([str(XDELTA3_EXE), "-f", "-n", "-d", "-s", str(vanilla),
+                        str(patch), str(out)], capture_output=True, text=True)
+    if r.returncode != 0 or not out.exists():
+        raise RuntimeError(f"xdelta3 failed ({r.returncode}): {r.stdout}{r.stderr}")
+    with open(out, "r+b") as f:
+        for data, off in writes:
+            f.seek(off)
+            f.write(bytes.fromhex(data.replace(" ", "")))
+    if error_recalc:
+        r = subprocess.run([str(ERROR_RECALC_EXE), str(out)],
+                           capture_output=True, text=True)
+        if r.returncode != 0:
+            raise RuntimeError(f"error_recalc failed ({r.returncode}): "
+                               f"{r.stdout}{r.stderr}")
+    return patchfile, len(writes)
+
+
+def apply_selection(selection_json: str, out, *, vanilla=None,
+                    error_recalc: bool = True) -> tuple[str, int]:
+    """Convenience: build the merged profile from a UI selection JSON and apply it
+    to a patched BIN at `out` — the launcher's AutoHotkey-free entry point."""
+    db = twr.TweaksDB(twr.DEFAULT_PATCHER_SRC)
+    merged = merged_profile(db, selection_json)
+    base = OrderedDict(twr.load_profile(twr.DEFAULT_PROFILE))
+    return apply_bin(db, merged, base, out, vanilla=vanilla, error_recalc=error_recalc)
 
 
 # --------------------------------------------------------------------------
