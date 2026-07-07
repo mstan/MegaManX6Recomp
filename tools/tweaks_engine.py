@@ -42,10 +42,13 @@ Coverage so far (each increment guarded by a byte-for-byte, order-aware oracle d
      an Anim frame filtered to "00" -> "01" plus a companion "00" at each offset+2,
      with the AHK set/frame loop's break semantics (a first frame AnimSS01 set to 0
      is AHK-falsy and suppresses the whole set).
-Still TODO: AddFilter (CharAdd/HeartTank/PartsSet — Exception_B coupled), the rest
-of Exception_B (DmgTableGateDmg HexSub, New Game/RescRep: PartsSet, Rank/Souls,
-SubTank/CharAdd/ArmorParts, LifeUp/EnergyUp, NewGame base), other Exception_A
-(Mugshot assembly, MachDash combos, Zero hints, BossHealth), external file inserts.
+     with the AHK set/frame loop's break semantics (a first frame AnimSS01 set to 0
+     is AHK-falsy and suppresses the whole set). Plus the DmgTableGateDmg01 HexSub
+     (max-complement) scalar.
+Still TODO: AddFilter (CharAdd/HeartTank/PartsSet — Exception_B coupled), the New
+Game/RescRep Exception_B block (PartsSet, Rank/Souls, SubTank/CharAdd/ArmorParts,
+LifeUp/EnergyUp, NewGame base), other Exception_A (Mugshot assembly, MachDash
+combos, Zero hints, BossHealth), external file inserts.
 """
 from __future__ import annotations
 
@@ -88,6 +91,14 @@ def _endian_swap(s: str) -> str:
 def _dec2hex_le(num, padding: int = 1) -> str:
     """DEC2HEX_LE(Input,Padding): DEC2HEX then EndianSwap (little-endian bytes)."""
     return _endian_swap(_dec2hex(num, padding))
+
+
+def _hexsub(inp, padding: int = 4) -> str:
+    """HexSub (filter.ahk): EndianSwap(DEC2HEX(HEX2DEC('F'*padding) - Input + 1,
+    padding)) — a little-endian 'max - value' complement (used to invert a
+    damage/gate scalar)."""
+    top = hex2dec("F" * padding)
+    return _endian_swap(_dec2hex(top - int(str(inp).strip()) + 1, padding))
 
 
 # --------------------------------------------------------------------------
@@ -658,6 +669,12 @@ def apply_exception_b(db, merged: dict, pl: list[str], synth: dict,
                     _pl_add(pl, off_vars, var, "After")
                 frame_i += 1
             set_i += 1
+
+    # Damage Table Gate damage scalar: HexSub the GUI value (a max-complement),
+    # written at DmgTableGateDmg01_Offset. (exception_b.ahk:39-40)
+    if "DmgTableGateDmg01" in pl:
+        raw = merged.get("DmgTableGateDmg01", _dat_default(db, "DmgTableGateDmg01"))
+        values["DmgTableGateDmg01"] = _hexsub(raw)
 
 
 def build_patchlist(db, merged: dict, base: dict) -> tuple[str, list[str], dict]:
