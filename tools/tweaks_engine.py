@@ -52,10 +52,14 @@ Coverage so far (each increment guarded by a byte-for-byte, order-aware oracle d
      with the AHK set/frame loop's break semantics (a first frame AnimSS01 set to 0
      is AHK-falsy and suppresses the whole set). Plus the DmgTableGateDmg01 HexSub
      (max-complement) scalar.
-Still TODO: AddFilter (CharAdd/HeartTank/PartsSet — Exception_B coupled), the New
-Game/RescRep Exception_B block (PartsSet, Rank/Souls, SubTank/CharAdd/ArmorParts,
-LifeUp/EnergyUp, NewGame base), other Exception_A (Mugshot assembly, MachDash
-combos, Zero hints, BossHealth), external file inserts.
+  7. New Game base (exception_b.ahk): any NewGameList option prepends the shared
+     `NewGame` ASM foundation — this alone fully covers UnlockCode. Plus the Mach
+     Dash hybrid Input03+Cancel03/04 combined-ASM variant (exception_a.ahk).
+Still TODO: AddFilter (CharAdd/HeartTank/SubtankAdd/PartsSet/PartsLifeUp/
+PartsEnergyUp accumulation), the rest of the New Game/RescRep block (Rank/Souls,
+SubTank/CharAdd/ArmorParts, LifeUp/EnergyUp, PartsSet packing, RescRep tables incl
+PartsRandom [non-deterministic]), other Exception_A (Mugshot assembly, Zero hints,
+BossHealth), external file inserts.
 """
 from __future__ import annotations
 
@@ -573,6 +577,11 @@ def apply_exception_a(db, merged: dict, pl: list[str], synth: dict,
         _pl_add(pl, ["DashGlobal01_ArmorByPart"], "DashGlobal01", "After")
         _pl_remove(pl, "DashGlobal01")
 
+    # Mach Dash hybrid (Hold/Release): Input03 combined with Cancel03/04 adds a
+    # distinct combined-ASM variant. (exception_a.ahk:178-183)
+    if "MachDashInput03" in pl and ("MachDashCancel03" in pl or "MachDashCancel04" in pl):
+        _pl_add(pl, ["MachDashInput03_Cancel03"], "MachDashInput03", "After")
+
 
 def _text_filter_value(db, raw: str) -> str:
     """TextFilter: map a var's GUI value through TextFilterTable (case-insensitive
@@ -683,6 +692,14 @@ def apply_exception_b(db, merged: dict, pl: list[str], synth: dict,
     if "DmgTableGateDmg01" in pl:
         raw = merged.get("DmgTableGateDmg01", _dat_default(db, "DmgTableGateDmg01"))
         values["DmgTableGateDmg01"] = _hexsub(raw)
+
+    # New Game base: any New Game option shares a foundation ASM block. If any
+    # NewGameList var appears in the list, prepend the static `NewGame` var (3 ASM
+    # writes) to the front of the whole PatchList. Must run LAST in Exception_B so
+    # New-Game-added vars (Souls/ArmorParts/PartsSetA/...) are already present.
+    # (exception_b.ahk:288-309; AHK PatchListAdd("NewGame","0","Before").)
+    if any(ng in v for v in pl for ng in db.newgame_list):
+        _pl_add(pl, ["NewGame"], None, "Before")
 
 
 def build_patchlist(db, merged: dict, base: dict) -> tuple[str, list[str], dict]:
