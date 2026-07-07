@@ -24,10 +24,12 @@ This tool only re-implements the *applicator* so selections integrate with
 the recompiler's variant pipeline. Payload data is never redistributed —
 users supply the patcher archive; we read its data files in place.
 
-Current state: PARSE + CATALOG complete (list/audit/deps).  APPLY pipeline
-is scaffolded but intentionally refuses to run until validated against the
-standalone [Tweaks+Loc+Art v2.6].xdelta output byte-for-byte (see TODO in
-apply_selection).
+Current state: PARSE + CATALOG complete (list/audit/deps). APPLY defaults to the
+pure-Python engine (tools/tweaks_engine.py apply_bin — no AutoHotkey), gated by
+a coverage check that parks the still-unported options (Mugshot/Title file
+inserts + the New Game transforms) to the reference AHK engine (--engine ahk).
+The Python WriteList is proven byte-identical to the AHK `dump` oracle across the
+covered surface, and the built BIN is whole-file MD5-identical to the AHK build.
 """
 
 from __future__ import annotations
@@ -218,9 +220,15 @@ class TweaksDB:
         asm_off_re = re.compile(r"^(.*?)_ASM(\d+)_Offset(\d*)(?:_(B01|S02))?$")
         file_re = re.compile(r"^(.*?)_File(\d+)$")
         file_off_re = re.compile(r"^(.*?)_File(\d+)_Offset(\d*)(?:_(B01|S02))?$")
+        file_path_re = re.compile(r"^(.*?)_File(\d+)_Path$")
         direct_off_re = re.compile(r"^(.*?)_Offset(\d*)(?:_(B01|S02))?$")
 
         for key, val in self.dat.items():
+            m = file_path_re.match(key)         # Var_File0N_Path (art-insert source)
+            if m:
+                opt(m.group(1))["files"].append(
+                    {"slot": int(m.group(2)), "kind": "path", "path": val})
+                continue
             m = asm_off_re.match(key)
             if m:
                 opt(m.group(1))["asm"].append(
@@ -751,7 +759,8 @@ def generate_profile(base: Path, overrides: dict) -> str:
     return emit_profile(od)
 
 
-def selection_to_overrides(catalog: list[dict], selection: dict) -> dict:
+def selection_to_overrides(catalog: list[dict], selection: dict,
+                           canonical=None) -> dict:
     """Translate a UI selection into profile var overrides.
 
     selection maps an option var -> the user's chosen value in UI terms:
@@ -759,6 +768,12 @@ def selection_to_overrides(catalog: list[dict], selection: dict) -> dict:
       group siblings 0);  dropdown -> the chosen item string;  edit/slider ->
       number. Only options present in `selection` are changed; everything else
       stays at the base profile's default.
+
+    `canonical` (optional) is the authoritative option-var name set (e.g.
+    db.options): output keys are remapped to its exact casing. AHK variable names
+    are case-INSENSITIVE, so gui.ahk and _dat.ahk can spell the same option
+    differently (e.g. GUI `SubTankAdd0N` vs data `SubtankAdd0N`); canonicalizing
+    keeps the profile/CreateList (case-sensitive Python) lookups aligned.
     """
     by_var = {o["var"]: o for o in catalog}
     # radio groups: (tab, group) -> [vars]
@@ -795,6 +810,9 @@ def selection_to_overrides(catalog: list[dict], selection: dict) -> dict:
                 ov[var] = str(val)   # exact item string (with quotes if quoted)
         else:                         # edit / slider
             ov[var] = str(val)
+    if canonical:
+        cmap = {c.lower(): c for c in canonical}
+        ov = {cmap.get(k.lower(), k): v for k, v in ov.items()}
     return ov
 
 
@@ -995,10 +1013,41 @@ def emit_variant_toml(template: Path, out_toml: Path, variant: str,
     out_toml.write_text(text, encoding="utf-8")
 
 
+_ENGINE = None
+
+
+def _load_engine():
+    """Lazily load tools/tweaks_engine.py (the pure-Python apply engine). Loaded
+    on demand — and only inside the *main* resolver process — so the engine's own
+    top-level `import tweaks_resolver` (a fresh copy) never re-triggers this and
+    recurses. Its apply_bin/coverage_gaps take a `db` argument, so the db built by
+    this module is passed straight through (duck-typed, no cross-module identity)."""
+    global _ENGINE
+    if _ENGINE is None:
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "tweaks_engine", Path(__file__).with_name("tweaks_engine.py"))
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        _ENGINE = mod
+    return _ENGINE
+
+
 def cmd_apply(db: TweaksDB, args) -> int:
-    # --- resolve the profile: a preset name, a .x6tweaksprofile file, or a UI
-    #     selection JSON ({var: value}) turned into a generated profile --------
+    # --- resolve the input into: a `profile` arg for the AHK engine, and (when
+    #     the input is buildable in pure Python) a (merged, py_base) profile pair
+    #     for the Python engine. --engine selects which builds the BIN:
+    #       python (default) — no AutoHotkey; parked options are refused
+    #       ahk              — drive acediez's engine headlessly (reference/oracle)
+    #       auto             — Python, falling back to AHK for parked options -----
+    engine = getattr(args, "engine", "python")
+    # PartsRandom seed (optional): threads to the pure-Python engine via the env var
+    # it reads at build time, so the same seed reproduces the same randomized layout.
+    if getattr(args, "parts_seed", ""):
+        os.environ["MMX6_PARTS_SEED"] = args.parts_seed
     work_dir = Path(args.work_dir) if args.work_dir else (DEFAULT_PATCHER_BASE / "_worktmp")
+    profile = None                  # AHK-engine profile arg (name or path)
+    merged = py_base = None         # Python-engine inputs (None => AHK only)
     if args.selection:
         base = Path(args.base_profile) if args.base_profile else DEFAULT_PROFILE
         if not base.exists():
@@ -1013,15 +1062,15 @@ def cmd_apply(db: TweaksDB, args) -> int:
                   file=sys.stderr)
             return 2
         catalog = parse_gui_catalog(Path(args.patcher_src), db)
-        overrides = selection_to_overrides(catalog, selection)
-        base_od = load_profile(base)
-        merged = OrderedDict(base_od)
+        overrides = selection_to_overrides(catalog, selection, db.options)
+        py_base = load_profile(base)
+        merged = OrderedDict(py_base)
         for k, v in overrides.items():
             merged[str(k)] = str(v)
         # Guard the no-changes case: an empty / all-default selection yields the
         # default profile, which the engine rejects with a "No changes made"
         # dialog (it hangs headless, and would build only vanilla anyway).
-        if merged == base_od:
+        if merged == py_base:
             print("apply: selection makes no changes vs the default — nothing to "
                   "build. Tick at least one option.", file=sys.stderr)
             return 3
@@ -1033,8 +1082,16 @@ def cmd_apply(db: TweaksDB, args) -> int:
               f"var overrides -> {gen.name}")
     elif args.profile in PRESET_PROFILES:
         profile = args.profile
+        # Only the 'default' preset has an on-disk profile the Python engine can
+        # load; the other presets are AHK-internal (no .x6tweaksprofile), so the
+        # Python path can't build them — leave merged/py_base unset (AHK only).
+        if args.profile == "default":
+            py_base = load_profile(DEFAULT_PROFILE)
+            merged = OrderedDict(py_base)
     elif args.profile and Path(args.profile).exists():
         profile = str(Path(args.profile).resolve())
+        py_base = load_profile(DEFAULT_PROFILE)
+        merged = OrderedDict(load_profile(profile))
     else:
         print(f"apply: need --selection <json>, or --profile as a preset "
               f"{sorted(PRESET_PROFILES)} or a .x6tweaksprofile path "
@@ -1055,22 +1112,59 @@ def cmd_apply(db: TweaksDB, args) -> int:
 
     src_dir = Path(args.patcher_src)
     run_extracted = Path(args.run_extracted) if args.run_extracted else DEFAULT_RUN_EXTRACTED
-    for label, p in [("patcher _src", src_dir), ("run_extracted", run_extracted),
-                     ("iso_extract.py", ISO_EXTRACT), ("headless driver", HEADLESS_DRIVER)]:
+    # Checks needed by BOTH engines (the Python engine's xdelta3/error_recalc live
+    # under run_extracted; iso_extract pulls the SLUS from the patched BIN).
+    for label, p in [("run_extracted", run_extracted), ("iso_extract.py", ISO_EXTRACT)]:
         if not p.exists():
             print(f"apply: {label} not found: {p}", file=sys.stderr)
             return 2
 
-    ahk = find_autohotkey(args.ahk)
-    if ahk is None:
-        print("apply: AutoHotkey v1.1 not found (needed to drive the patcher "
-              "engine). Install AutoHotkey 1.1 or pass --ahk <path>.",
-              file=sys.stderr)
+    # --- choose the engine and produce the patched BIN -----------------------
+    if engine == "python" and merged is None:
+        print(f"apply: --engine python cannot build preset {args.profile!r} (no "
+              f".x6tweaksprofile on disk). Use --engine ahk, or pass a profile "
+              f"path / --selection.", file=sys.stderr)
         return 2
 
-    # --- 1. drive the engine ---------------------------------------------
-    print(f"[apply] engine via {ahk.name}")
-    patched = run_engine(profile, vanilla, work_dir, src_dir, run_extracted, ahk)
+    patched = None
+    if engine in ("python", "auto") and merged is not None:
+        eng = _load_engine()
+        gaps = eng.coverage_gaps(db, merged, py_base)
+        if gaps:
+            names = "\n".join(f"        - {v}: {why}" for v, why in gaps)
+            if engine == "python":
+                print("apply: this selection changes options the pure-Python engine\n"
+                      "       does not yet build byte-identically (PARKED):\n"
+                      f"{names}\n"
+                      "       Build it with the reference engine: --engine ahk.",
+                      file=sys.stderr)
+                return 3
+            print(f"[apply] parked options present; falling back to --engine ahk:\n{names}")
+        else:
+            out_bin = work_dir / "Mega Man X6 (USA) (v1.1) [tweaks-py].bin"
+            work_dir.mkdir(parents=True, exist_ok=True)
+            print("[apply] engine: pure-Python (no AutoHotkey)")
+            try:
+                pf, nwrites = eng.apply_bin(db, merged, py_base, out_bin, vanilla=vanilla)
+            except ValueError as e:      # no-change / unexpected gap
+                print(f"apply: {e}", file=sys.stderr)
+                return 3
+            patched = out_bin
+            print(f"[apply] built via base {pf}: {nwrites} writes")
+
+    if patched is None:                  # engine == ahk, or auto fell back
+        for label, p in [("patcher _src", src_dir), ("headless driver", HEADLESS_DRIVER)]:
+            if not p.exists():
+                print(f"apply: {label} not found: {p}", file=sys.stderr)
+                return 2
+        ahk = find_autohotkey(args.ahk)
+        if ahk is None:
+            print("apply: AutoHotkey v1.1 not found (needed to drive the reference "
+                  "patcher engine). Install AutoHotkey 1.1 or pass --ahk <path>.",
+                  file=sys.stderr)
+            return 2
+        print(f"[apply] engine: reference (AutoHotkey {ahk.name})")
+        patched = run_engine(profile, vanilla, work_dir, src_dir, run_extracted, ahk)
     print(f"[apply] patched BIN: {patched} ({patched.stat().st_size} bytes)")
 
     # --- 2. extract SLUS + variant id ------------------------------------
@@ -1155,7 +1249,7 @@ def cmd_dump(db: TweaksDB, args) -> int:
             return 2
         catalog = parse_gui_catalog(Path(args.patcher_src), db)
         merged = OrderedDict(load_profile(base))
-        for k, v in selection_to_overrides(catalog, selection).items():
+        for k, v in selection_to_overrides(catalog, selection, db.options).items():
             merged[str(k)] = str(v)
         work_dir.mkdir(parents=True, exist_ok=True)
         gen = work_dir / "_dump_selection.x6tweaksprofile"
@@ -1211,7 +1305,16 @@ def main() -> int:
 
     p = sub.add_parser(
         "apply",
-        help="produce a patched BIN + variant toml by driving acediez's engine")
+        help="produce a patched BIN + variant toml (pure-Python engine by default; "
+             "--engine ahk drives acediez's reference engine)")
+    p.add_argument("--engine", choices=("python", "ahk", "auto"), default="python",
+                   help="which engine builds the BIN: python (default, no "
+                        "AutoHotkey; parked options refused), ahk (reference "
+                        "engine), or auto (python, falling back to ahk for parked "
+                        "options)")
+    p.add_argument("--parts-seed", default="",
+                   help="seed for the PartsRandom parts randomizer (same seed -> "
+                        "same layout -> reproducible build; default is a fixed seed)")
     p.add_argument("--profile", default="",
                    help="preset (default|tweaks|tweaks_l|tweaks_l_c) or a "
                         "path to a .x6tweaksprofile file")

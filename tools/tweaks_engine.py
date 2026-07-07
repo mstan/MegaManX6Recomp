@@ -60,19 +60,47 @@ Coverage so far (each increment guarded by a byte-for-byte, order-aware oracle d
      var = little-endian bitmask (2^(i-1) per selected instance). HeartTankAdd is
      byte-identical on its own; SubtankAdd/CharAdd/PartsSet also need their
      Exception_B transforms (below) to finish.
-Still TODO: the rest of the New Game/RescRep Exception_B block (Rank/Souls,
-SubTank swap, CharAdd/ArmorParts, LifeUp/EnergyUp, PartsSet packing, RescRep tables
-incl PartsRandom [non-deterministic]), other Exception_A (Mugshot assembly, Zero
-hints, BossHealth), external file inserts.
+  9. CreateList baseline fix + CharAdd/ArmorParts (exception_b.ahk:244-266).
+     active_options now compares the submitted value against the `_dat` `_Default`
+     (faithful CreateList) with AHK `=` semantics (numeric-aware, quote-normalized,
+     empty->default) instead of the default profile — so the always-on CharAdd01
+     sentinel is universally active. The CharAdd Exception_B removes the "01"-only
+     group (net zero for non-New-Game selections) or, when CharStart01 is picked,
+     builds ArmorParts = SH+BL (F if Shadow/Blade selected) + appends MenuDefaultSel01
+     when Falcon (CharAdd01) is off. expand_entry now emits a var's direct/filtered
+     write BEFORE its _ASMnn (ASMFilter order) — matters only for CharStart01, the
+     one var carrying both. Oracle-validated byte-identical across 10 CharAdd/CharStart
+     cases + whole-BIN MD5-identical to the AHK build.
+Still TODO: the rest of the New Game/RescRep Exception_B block (SubTank swap,
+LifeUp/EnergyUp, PartsSet packing, RescRep tables incl PartsRandom
+[non-deterministic], RescRepStatus New-Game gating), other Exception_A (Mugshot
+assembly, Zero hints, BossHealth), external file inserts.
 """
 from __future__ import annotations
 
 import importlib.util
 import json
+import os
+import random
 import subprocess
 import sys
 from collections import OrderedDict
 from pathlib import Path
+
+# PartsRandom (RescRep parts randomizer) is non-deterministic by design — it
+# scrambles where reploid parts live, so byte-matching the AHK oracle is
+# meaningless (the AHK itself re-rolls every run). We SEED the shuffle so a build
+# is reproducible (stable variant id => one recompile, and shareable), overridable
+# per-player via the MMX6_PARTS_SEED env var (the launcher's seed field / the
+# resolver's --parts-seed set it). Faithful to Sort,,Random in shape, not in the
+# exact permutation.
+DEFAULT_PARTS_SEED = "mmx6-tweaks-default"
+
+
+def _parts_seed() -> str:
+    """The active PartsRandom seed, read at build time so a caller can set
+    MMX6_PARTS_SEED (via --parts-seed / the launcher field) before apply."""
+    return os.environ.get("MMX6_PARTS_SEED") or DEFAULT_PARTS_SEED
 
 # Load the resolver as a module (it owns TweaksDB + the AHK dump oracle).
 _spec = importlib.util.spec_from_file_location(
@@ -359,6 +387,50 @@ def _offsets_for_direct(direct_entries: list, patchfile: str) -> list[str]:
     return out
 
 
+def _offsets_for_file(file_entries: list, slot: int, patchfile: str) -> list[str]:
+    """Ordered offset-hex list for one file slot (Var_File0N_Offset[_B01|_S02]),
+    choosing the SET by PATCHFILE like _offsets_for_slot."""
+    prefer = {"b01": "B01", "s02": "S02", "s03": "S02"}.get(patchfile, "COMMON")
+    by_nth: dict[int, dict[str, str]] = {}
+    for f in file_entries:
+        if f.get("kind") == "offset" and f["slot"] == slot:
+            by_nth.setdefault(f["nth"], {})[f["set"]] = f["offset"]
+    out = []
+    for nth in sorted(by_nth):
+        sets = by_nth[nth]
+        chosen = sets.get(prefer) or sets.get("COMMON") or next(iter(sets.values()))
+        for off in str(chosen).splitlines():
+            if off.strip():
+                out.append(off.strip())
+    return out
+
+
+# ExtDataDir (the patcher's art-asset root) — Var_File0N_Path values resolve here.
+EXT_DATA_DIR = twr.DEFAULT_RUN_EXTRACTED / "data"
+
+
+def _file_inserts(db, var: str, patchfile: str, merged: dict) -> list[tuple[str, str, int]]:
+    """File inserts for one PatchList var: [(file_var, filepath, offset_dec), ...].
+    A var with a `_File0N_Path` payload contributes one insert per slot; the source
+    is ExtDataDir/<path> (Mugshot appends `_<OptionID>.bin`, OptionID = the last
+    char of the var's value — SubStr(%Var%,0) in FileFilter)."""
+    o = db.options.get(var)
+    if not o:
+        return []
+    paths = {f["slot"]: f["path"] for f in o["files"] if f.get("kind") == "path"}
+    if not paths:
+        return []
+    option_id = str(merged.get(var, "") or "")[-1:]
+    is_mugshot = "Mugshot" in var
+    out: list[tuple[str, str, int]] = []
+    for slot in sorted(paths):
+        rel = paths[slot].replace("\\", "/").strip()
+        fp = EXT_DATA_DIR / (rel + "_" + option_id + ".bin" if is_mugshot else rel)
+        for off_hex in _offsets_for_file(o["files"], slot, patchfile):
+            out.append((f"{var}_File{slot:02d}", str(fp), hex2dec(off_hex)))
+    return out
+
+
 def expand_entry(db, var: str, patchfile: str, values: dict | None = None,
                  synth: dict | None = None) -> list[tuple[str, int]]:
     """Expand one PatchList var into its (hex data, decimal offset) writes.
@@ -375,17 +447,17 @@ def expand_entry(db, var: str, patchfile: str, values: dict | None = None,
     if not o:
         return []
     values = values or {}
-    writes: list[tuple[str, int]] = []
-    byte_slots = {a["slot"]: a["hex"] for a in o["asm"] if a.get("kind") == "bytes"}
-    for slot in sorted(byte_slots):
-        data = byte_slots[slot].replace(" ", "")
-        for off_hex in _offsets_for_slot(o["asm"], slot, patchfile):
-            writes.append((data, hex2dec(off_hex)))
-    # Filtered GUI value (numeric/text option): its converted value is written at
-    # the var's direct offset(s). NumWord vars split into a W1/W2 halfword pair
-    # (LE-swapped) at Var_Offset and Var_Offset+4 (filter.ahk NumWordFilter_Offset).
+    # Emit order = ASMFilter order: the var's OWN direct/filtered write (%Var% at
+    # %Var%_Offset) comes FIRST, then its `_ASMnn` entries — ASMFilter inserts the
+    # ASM lines *After* the base var, so PatchApply writes the base var before them.
+    # CharStart01 is the only var carrying both (a TextFiltered code AND an ASM), so
+    # this ordering only matters there; every other var has just one kind.
+    direct_writes: list[tuple[str, int]] = []
     fv = values.get(var)
     if fv is not None:
+        # Filtered GUI value (numeric/text option) written at the var's direct
+        # offset(s). NumWord vars split into a W1/W2 halfword pair (LE-swapped) at
+        # Var_Offset and Var_Offset+4 (filter.ahk NumWordFilter_Offset).
         data = str(fv).replace(" ", "")
         offs = _offsets_for_direct(o["direct"], patchfile)
         if var in db.num_word_vars:
@@ -393,19 +465,25 @@ def expand_entry(db, var: str, patchfile: str, values: dict | None = None,
             w2 = data[6:8] + data[4:6]
             for off_hex in offs:
                 base = hex2dec(off_hex)
-                writes.append((w1, base))
-                writes.append((w2, base + 4))
+                direct_writes.append((w1, base))
+                direct_writes.append((w2, base + 4))
         else:
             for off_hex in offs:
-                writes.append((data, hex2dec(off_hex)))
-        return writes
-    # Static direct value writes: one value at each of its offset(s)
-    static = [d["value"] for d in o["direct"] if d.get("kind") == "value"]
-    if static:
-        data = str(static[0]).replace(" ", "")
-        for off_hex in _offsets_for_direct(o["direct"], patchfile):
-            writes.append((data, hex2dec(off_hex)))
-    return writes
+                direct_writes.append((data, hex2dec(off_hex)))
+    else:
+        # Static direct value writes: a bare `Var = value` at each of its offset(s).
+        static = [d["value"] for d in o["direct"] if d.get("kind") == "value"]
+        if static:
+            data = str(static[0]).replace(" ", "")
+            for off_hex in _offsets_for_direct(o["direct"], patchfile):
+                direct_writes.append((data, hex2dec(off_hex)))
+    asm_writes: list[tuple[str, int]] = []
+    byte_slots = {a["slot"]: a["hex"] for a in o["asm"] if a.get("kind") == "bytes"}
+    for slot in sorted(byte_slots):
+        data = byte_slots[slot].replace(" ", "")
+        for off_hex in _offsets_for_slot(o["asm"], slot, patchfile):
+            asm_writes.append((data, hex2dec(off_hex)))
+    return direct_writes + asm_writes
 
 
 def total_list_order(db) -> list[str]:
@@ -434,25 +512,113 @@ def _instances_ordered(db, varset: str) -> list[str]:
     return sorted(db.instances_of(varset), key=_suf)
 
 
-def active_options(db, merged: dict, base: dict) -> list[str]:
-    """CreateList: option instances whose value differs from default, in TotalList
-    var-set order then numeric instance order. Reference is the shipped default
-    profile (the true normalized "no changes" state) — the AHK engine compares
-    against `_Default` after GuiControlAll normalization; comparing the already-
-    normalized merged profile against the (normalized) default profile is
-    equivalent and sidesteps the _dat default's formatting quirks."""
+def _ahk_number(s):
+    """AHK numeric coercion: float if `s` is a pure number (optional sign/decimal),
+    else None. Empty and hex-with-letters (offsets) coerce to None -> string compare."""
+    s = str(s).strip()
+    if s == "":
+        return None
+    try:
+        return float(s)
+    except ValueError:
+        return None
+
+
+def _cmp_dequote(v: str) -> str:
+    """Strip surrounding quotes + whitespace. AHK stores `Var = "RESCUED"` WITH the
+    quotes on BOTH the profile value and the _dat _Default, so the AHK compare is
+    quote-vs-quote (equal). The resolver's parser strips quotes from _dat only, so
+    strip both sides here to reproduce the AHK equality."""
+    v = str(v).strip()
+    if len(v) >= 2 and v[0] == v[-1] and v[0] in "\"'":
+        v = v[1:-1]
+    return v
+
+
+def _ahk_eq(a, b) -> bool:
+    """AHK `=` equality: numeric compare when both look numeric (so `+0` == `0`,
+    `01` == `1`), else case-insensitive string compare (quote/space-normalized)."""
+    a, b = _cmp_dequote(a), _cmp_dequote(b)
+    na, nb = _ahk_number(a), _ahk_number(b)
+    if na is not None and nb is not None:
+        return na == nb
+    return a.lower() == b.lower()
+
+
+def active_options(db, merged: dict, base: dict = None) -> list[str]:
+    """CreateList (createlist.ahk): option instances whose SUBMITTED value differs
+    from its `_dat` `_Default`, in TotalList var-set order then numeric instance
+    order. Faithful to the AHK loop: an empty value is treated as its default (so
+    it is not counted), and the compare uses AHK `=` semantics (numeric-aware,
+    case-insensitive, quote-normalized — see `_ahk_eq`).
+
+    The reference is the `_dat` `_Default`, NOT the default profile: they diverge
+    for a handful of instances (GUI 'Checked Disabled' + `+0`/quoted/empty profile
+    artifacts). Only ONE of those diverging instances survives normalization as
+    genuinely active — the always-on CharAdd01 sentinel (submitted `1`, _dat
+    default `0`) — which the CharAdd Exception_B (removes the "01"-only group) and
+    the no-change guard absorb, keeping every non-New-Game selection byte-identical.
+    `base` is accepted but ignored (kept for existing callers)."""
     active: list[str] = []
     for varset in total_list_order(db):
         for inst in _instances_ordered(db, varset):
             # CreateList adds ANY changed instance, even payload-less "selector"
-            # checkboxes (e.g. LowerDef01/02) whose effect is applied by an
-            # exception — expand_entry yields no write for those on its own, and
-            # VerifyFilter would drop them, so keeping them is harmless + faithful.
+            # checkboxes whose effect is applied by an exception — expand_entry
+            # yields no write for those and VerifyFilter drops them, so faithful.
             if inst not in db.options:
                 continue
-            if str(merged.get(inst, "")).strip() != str(base.get(inst, "")).strip():
+            val = str(merged.get(inst, "")).strip()
+            dflt = str(db.dat.get(inst + "_Default", "")).strip()
+            if val == "":                       # AHK: empty -> treat as _Default
+                val = dflt
+            if not _ahk_eq(val, dflt):
                 active.append(inst)
     return active
+
+
+# --------------------------------------------------------------------------
+# Coverage gate (Phase C): which changed options the pure-Python engine does
+# NOT yet reproduce byte-identically. cmd_apply consults this before routing a
+# selection through apply_bin, so a parked option is refused (with a pointer to
+# --engine ahk) rather than silently emitting a divergent / incomplete BIN.
+# --------------------------------------------------------------------------
+# Option-name PREFIXES whose Exception_B / file-insert handling is still
+# unported or only oracle-PENDING (see the module docstring "Still TODO" and the
+# port memo). A changed option whose name starts with any of these is PARKED.
+# Prefix (not exact var-set) matching is used because these families number their
+# instances irregularly — PartsSetNN groups instances as PartsSet0101, so a
+# var-set match on "PartsSet" would miss them.
+# NEARLY the whole tool is now ported + oracle-validated: the full New Game Status
+# tab (CharAdd/CharStart/ArmorParts, SubtankAdd, LifeUp/EnergyUp, RescRepStatus, and
+# the deterministic PartsSet packing + RescRepFoundTable incl PartsLifeUp/PartsEnergyUp
+# + RescRepFound marks) AND the Title/Load-screen art-file inserts (build_filelist +
+# apply_bin ECC-aware file write). Only two families remain parked:
+PARKED_PREFIXES = (
+    "Mugshot",            # custom-art file inserts + assembly-ASM subsystem — not ported
+)
+
+
+def coverage_gaps(db, merged: dict, base: dict) -> list[tuple[str, str]]:
+    """Return [(option_instance, reason)] for changed options the pure-Python
+    engine cannot yet build byte-identically. Empty list => fully covered, safe
+    to route through apply_bin. `merged` is the raw merged profile (this
+    normalizes it the same way build_writelist does before comparing)."""
+    merged_n = gui_control_all(db, merged)
+    gaps: list[tuple[str, str]] = []
+    for inst in active_options(db, merged_n, base):
+        pref = next((p for p in PARKED_PREFIXES if inst.startswith(p)), None)
+        if pref:
+            gaps.append((inst, f"{pref}: unported / non-deterministic"))
+            continue
+        # File-insert vars (Title/Load screens) are supported, but only if their
+        # art sources exist on disk (Mugshot custom art is parked above by prefix).
+        o = db.options.get(inst)
+        if o and any(f.get("kind") == "path" for f in o.get("files", [])):
+            for _fv, fp, _off in _file_inserts(db, inst, "b01", merged_n):
+                if not Path(fp).exists():
+                    gaps.append((inst, f"art-insert source missing: {Path(fp).name}"))
+                    break
+    return gaps
 
 
 # --------------------------------------------------------------------------
@@ -722,6 +888,99 @@ def apply_exception_b(db, merged: dict, pl: list[str], synth: dict,
         raw = merged.get("DmgTableGateDmg01", _dat_default(db, "DmgTableGateDmg01"))
         values["DmgTableGateDmg01"] = _hexsub(raw)
 
+    # New Game: PartsSet packing + PartsRandom + RescRep "found reploids" table
+    # (exception_b.ahk 44-224). AddFilter has already collapsed the PartsSet
+    # instances into per-set group values (values["PartsSet0N"], a 2-hex bitmask)
+    # and the PartsLifeUp/PartsEnergyUp groups (which write their own bitmask via
+    # expand_entry); the individual instance flags are still in `merged`.
+    partsset_in = any(v.startswith("PartsSet") for v in pl)
+    # -- PartsSet packing: per-set low nibbles -> PartsSetA / PartsSetB --
+    if partsset_in:
+        nib = {}
+        for i in range(1, 8):
+            v = values.get(f"PartsSet0{i}") or ""
+            if v == "" or _ahk_eq(v, "0"):        # AHK: !PartsSet0i or (=0) -> "00"
+                v = "00"
+            if len(v) == 2:                       # keep the low nibble (2nd char)
+                v = v[1]
+            nib[i] = v
+        parts_a = nib[1] + nib[2] + nib[3] + nib[4]
+        parts_b = nib[5] + nib[6] + "0" + nib[7]
+        if not _ahk_eq(merged.get("RescRepFoundMarkOnly01", "0"), "1"):
+            synth["PartsSetA"] = [(parts_a, hex2dec(db.dat["PartsSetA_Offset"]))]
+            synth["PartsSetB"] = [(parts_b, hex2dec(db.dat["PartsSetB_Offset"]))]
+            _pl_add(pl, ["PartsSetA", "PartsSetB"], None, "After")
+    # -- PartsRandom (exception_b.ahk:69-122): shuffle where parts live. Seeded
+    #    (see PARTS_RANDOM_SEED) so a build is reproducible. `resc_table` (128 codes)
+    #    feeds the RescRepFoundTable build below; when unset it uses the fixed
+    #    RescRepPartsTable_Original. The shuffled table is itself written (concatenated,
+    #    no byte-swap) at RescRepPartsTable_Offset. --
+    resc_table = None
+    pr01 = _ahk_eq(merged.get("PartsRandom01", "0"), "1")
+    pr02 = _ahk_eq(merged.get("PartsRandom02", "0"), "1")
+    if ("PartsRandom01" in pl or "PartsRandom02" in pl) and (pr01 or pr02):
+        rng = random.Random(_parts_seed())
+        orig = [t.strip() for t in db.dat["RescRepPartsTable_Original"].splitlines() if t.strip()]
+        if pr02:                                   # Random All: shuffle every slot
+            resc_table = orig[:]
+            rng.shuffle(resc_table)
+        else:                                      # Random ignore no-parts slots
+            only = [t.strip() for t in db.dat["RescRepPartsTable_OnlyParts"].splitlines() if t.strip()]
+            rng.shuffle(only)
+            npidx = {int(x) for x in db.dat["RescRepParts_NoPartsIndex"].split(",") if x.strip()}
+            it = iter(only)
+            resc_table = ["00000000" if m in npidx else next(it) for m in range(1, 129)]
+        synth["RescRepPartsTable"] = [("".join(resc_table),
+                                       hex2dec(db.dat["RescRepPartsTable_Offset"]))]
+        _pl_add(pl, ["RescRepPartsTable"], None, "After")
+    # -- RescRepFoundTable: 128 nibbles (mark / "0"), then byte-swap pairs --
+    partslife_in = any(v.startswith("PartsLifeUp") for v in pl)
+    partsenergy_in = any(v.startswith("PartsEnergyUp") for v in pl)
+    noitem = _ahk_eq(merged.get("RescRepFoundNoItem01", "0"), "1")
+    if partsset_in or partslife_in or partsenergy_in or noitem:
+        _pl_add(pl, ["RescRepFoundTable"], "NewGame", "After")   # NewGame absent -> append
+        mark = values.get("RescRepFoundMark01")
+        if mark is None:
+            mark = _text_filter_value(db, _dat_default(db, "RescRepFoundMark01"))
+        if len(mark) > 1:                         # RescRepFoundMark01 code -> low nibble
+            mark = mark[1]
+        part_codes = set()
+        for i in range(1, 8):
+            for j in range(1, 5):
+                inst = f"PartsSet0{i}0{j}"
+                if _ahk_eq(merged.get(inst, "0"), "1"):
+                    code = db.dat.get(inst + "_Code")
+                    if code:
+                        part_codes.add(code.strip())
+        lifeup_sel = {k for k in range(1, 9)
+                      if _ahk_eq(merged.get(f"PartsLifeUp{k:02d}", "0"), "1")}
+        energy_sel = {k for k in range(1, 9)
+                      if _ahk_eq(merged.get(f"PartsEnergyUp{k:02d}", "0"), "1")}
+        table = resc_table if resc_table is not None else [
+            t.strip() for t in db.dat.get("RescRepPartsTable_Original", "").splitlines()
+            if t.strip()]
+        out, li, ei = [], 0, 0
+        for entry in table:
+            if entry in part_codes:
+                out.append(mark)
+            elif entry == "00000000" and noitem:
+                out.append(mark)
+            elif entry == "01000000":             # LifeUp slot
+                li += 1
+                out.append(mark if li in lifeup_sel else "0")
+            elif entry == "02000000":             # EnergyUp slot
+                ei += 1
+                out.append(mark if ei in energy_sel else "0")
+            else:
+                out.append("0")
+        s = "".join(out)                          # 128 nibbles
+        swapped = "".join(s[k + 1] + s[k] for k in range(0, len(s) - 1, 2))
+        synth["RescRepFoundTable"] = [(swapped, hex2dec(db.dat["RescRepFoundTable_Offset"]))]
+    else:
+        _pl_remove(pl, "RescRepFoundMark01")
+        _pl_remove(pl, "RescRepFoundMarkOnly01")
+        _pl_remove(pl, "RescRepFoundNoItem01")
+
     # Rank -> Souls: each selected CharRank0X (its byte value is the TextFilter'd
     # rank code) also writes the matching soul count Souls0X = RankSouls<rank+1>
     # (a NumHalfword table value), inserted right after the rank. (exception_b:226)
@@ -741,6 +1000,35 @@ def apply_exception_b(db, merged: dict, pl: list[str], synth: dict,
     if "SubtankAdd" in pl and values.get("SubtankAdd"):
         v = values["SubtankAdd"]
         values["SubtankAdd"] = v[1] + v[0]
+
+    # CharAdd - Armor Pieces (exception_b.ahk:244-266). Reads the post-AddFilter
+    # group value (values["CharAdd"], e.g. "01"/"03"/"07"), the still-set individual
+    # CharAdd0N raw values (merged — AddFilter clears them from the PatchList, not the
+    # profile), and the TextFiltered CharStart01 code (values["CharStart01"], e.g.
+    # Shadow Armor -> "02"). CharAdd01 is the always-on sentinel (universally active),
+    # so the group is present for EVERY selection: for a non-New-Game selection the
+    # group is "01"-only and gets removed here (net zero), which is what keeps those
+    # selections byte-identical after the CreateList baseline fix.
+    charadd_in = "CharAdd" in pl
+    charstart_in = "CharStart01" in pl
+
+    def _cadd(n):     # individual CharAdd0N truthy (== 1), AHK-numeric
+        return _ahk_eq(merged.get(f"CharAdd0{n}", _dat_default(db, f"CharAdd0{n}")), "1")
+
+    if charadd_in and not charstart_in:
+        if values.get("CharAdd") == "01":              # only the CharAdd01 bit set
+            _pl_remove(pl, "CharAdd")
+    elif charadd_in or charstart_in:                   # CharStart present (±CharAdd)
+        cs = values.get("CharStart01")
+        sh = "F" if (_cadd(2) or cs == "02") else "0"  # Shadow Armor pieces
+        bl = "F" if (_cadd(3) or cs == "03") else "0"  # Blade Armor pieces
+        offs = _offsets_for_direct(db.options["ArmorParts"]["direct"], patchfile)
+        synth["ArmorParts"] = [(sh + bl, hex2dec(o)) for o in offs]
+        _pl_add(pl, ["ArmorParts"], None, "After")     # append ArmorParts to end
+    # MenuDefaultSel01 when Falcon (CharAdd01) is turned off — the game defaults the
+    # stage-select cursor to Falcon, so remember-last-selection is patched in instead.
+    if not _cadd(1) and "MenuDefaultSel01" not in pl:
+        _pl_add(pl, ["MenuDefaultSel01"], None, "After")
 
     # LifeUp / EnergyUp: scale the NumByte value (x2 + base). LifeUp base 0x20,
     # EnergyUp base 0x30. (exception_b.ahk:268-284)
@@ -795,23 +1083,45 @@ def build_patchlist(db, merged: dict, base: dict) -> tuple[str, list[str], dict]
     return patchfile, pl, synth
 
 
-def build_writelist(db, merged: dict, base: dict):
-    """(PATCHFILE, ordered [(hexdata, offset_dec), ...]) for a merged profile.
-    Order follows the assembled PatchList (matters for overlapping writes)."""
-    merged = gui_control_all(db, merged)     # ProfileLoad normalization
-    # Pipeline order mirrors patch.ahk: CreateList+Exception_A -> value filters ->
-    # Exception_B -> PreReq -> Reorder -> expand.
+def _assemble(db, merged: dict, base: dict):
+    """Run the full patch pipeline and return (merged_norm, patchfile, pl, values,
+    synth) — the assembled PatchList state shared by build_writelist (hex writes)
+    and build_filelist (art-file inserts). Order mirrors patch.ahk: ProfileLoad
+    normalization -> CreateList+Exception_A -> value filters -> AddFilter ->
+    Exception_B -> PreReq -> Reorder."""
+    merged = gui_control_all(db, merged)
     patchfile, pl, synth = build_patchlist(db, merged, base)
-    values = apply_value_filters(db, merged, pl)   # numeric/text input conversion
-    apply_add_filter(db, merged, pl, values)       # AddList bitmask accumulation
+    values = apply_value_filters(db, merged, pl)
+    apply_add_filter(db, merged, pl, values)
     apply_exception_b(db, merged, pl, synth, values, patchfile)
     apply_prereq(db, pl)
     apply_reorder(db, pl)
+    return merged, patchfile, pl, values, synth
+
+
+def build_writelist(db, merged: dict, base: dict):
+    """(PATCHFILE, ordered [(hexdata, offset_dec), ...]) for a merged profile.
+    Order follows the assembled PatchList (matters for overlapping writes)."""
+    _m, patchfile, pl, values, synth = _assemble(db, merged, base)
     writes: list[tuple[str, int]] = []
     for var in pl:
         for data, off in expand_entry(db, var, patchfile, values, synth):
             writes += ecc_split(data, off)      # split writes crossing an ECC boundary
     return patchfile, writes
+
+
+def build_filelist(db, merged: dict, base: dict):
+    """(PATCHFILE, [(file_var, filepath, offset_dec), ...]) — the art-file inserts
+    (Title/Load screens, Mugshot custom art) for a merged profile. Port of
+    FileFilter (filter.ahk:436-500): a PatchList var carrying a `_File0N_Path`
+    payload expands into one insert per slot, its source resolved under
+    ExtDataDir (Mugshot appends `_<OptionID>.bin`, OptionID = the var value's last
+    char). apply_bin streams each file into the BIN skipping ECC trailers."""
+    m, patchfile, pl, _values, _synth = _assemble(db, merged, base)
+    files: list[tuple[str, str, int]] = []
+    for var in pl:
+        files += _file_inserts(db, var, patchfile, m)
+    return patchfile, files
 
 
 # --------------------------------------------------------------------------
@@ -827,14 +1137,25 @@ BASE_PATCH_DIR = _RUN_EXTRACTED / "data" / "xdelta3"
 
 
 def apply_bin(db, merged: dict, base: dict, out, *, vanilla=None,
-              error_recalc: bool = True) -> tuple[str, int]:
+              error_recalc: bool = True, force: bool = False) -> tuple[str, int]:
     """Build the patched BIN entirely in Python (patchapply.ahk):
       1. apply the base xdelta3 (b01/s02) to vanilla -> `out`
       2. write each WriteList entry (hex data at its absolute BIN offset; the
          WriteList is already ECC-split so writes never land in a sector trailer)
       3. recompute EDC/ECC (error_recalc.exe, in place)
-    Returns (patchfile, n_writes). Raises on a no-change selection or if the
-    selection needs file inserts (Mugshot custom art — not yet ported)."""
+    Returns (patchfile, n_writes). Raises on a no-change selection, or (unless
+    force=True) if the selection changes a PARKED option the port cannot yet
+    build byte-identically (coverage_gaps — Mugshot/Title file inserts and the
+    unported New Game transforms). The gate makes a wrong BIN impossible rather
+    than silently dropping the unported writes/files."""
+    if not force:
+        gaps = coverage_gaps(db, merged, base)
+        if gaps:
+            names = ", ".join(f"{v} ({why})" for v, why in gaps)
+            raise ValueError(
+                "selection changes options the pure-Python engine does not yet "
+                f"cover byte-identically: {names}. Build these with the reference "
+                "engine (--engine ahk) until they are ported.")
     vanilla = Path(vanilla) if vanilla else twr.DEFAULT_VANILLA
     patchfile, writes = build_writelist(db, merged, base)
     if not patchfile:
@@ -847,10 +1168,13 @@ def apply_bin(db, merged: dict, base: dict, out, *, vanilla=None,
                         str(patch), str(out)], capture_output=True, text=True)
     if r.returncode != 0 or not out.exists():
         raise RuntimeError(f"xdelta3 failed ({r.returncode}): {r.stdout}{r.stderr}")
+    _pf2, files = build_filelist(db, merged, base)
     with open(out, "r+b") as f:
         for data, off in writes:
             f.seek(off)
             f.write(bytes.fromhex(data.replace(" ", "")))
+        for _var, filepath, off in files:
+            _write_file_insert(f, filepath, off)
     if error_recalc:
         r = subprocess.run([str(ERROR_RECALC_EXE), str(out)],
                            capture_output=True, text=True)
@@ -858,6 +1182,34 @@ def apply_bin(db, merged: dict, base: dict, out, *, vanilla=None,
             raise RuntimeError(f"error_recalc failed ({r.returncode}): "
                                f"{r.stdout}{r.stderr}")
     return patchfile, len(writes)
+
+
+def _write_file_insert(f, filepath, offset: int) -> None:
+    """Stream an art file into the open BIN at `offset`, skipping the 304-byte
+    EDC/ECC trailer between 2048-byte data regions (port of patchapply.ahk
+    114-141). The first block fills the remainder of the data sector `offset`
+    lands in; subsequent blocks are full 2048-byte data regions."""
+    import math
+    filepath = Path(filepath)
+    if not filepath.exists():
+        raise FileNotFoundError(f"art-insert source missing: {filepath}")
+    size = filepath.stat().st_size
+    sector_mult = math.ceil((offset - _HEADER) / _SECTOR)
+    datablock_next = _HEADER + _SECTOR * sector_mult
+    diff = _DATA - (datablock_next - _ECC - offset)
+    if diff == _SECTOR:                 # exact start-of-sector (Ceil overshoot)
+        diff = 0
+    with open(filepath, "rb") as src:
+        f.seek(offset)
+        left = size
+        while left > 0:
+            chunk = src.read(_DATA - diff)
+            diff = 0
+            if not chunk:
+                break
+            f.write(chunk)
+            f.seek(_ECC, 1)             # skip the EDC/ECC trailer
+            left -= len(chunk)
 
 
 def apply_selection(selection_json: str, out, *, vanilla=None,
@@ -881,7 +1233,7 @@ def merged_profile(db, selection_json: str) -> "OrderedDict":
     sel = json.loads(selection_json)
     merged = OrderedDict(twr.load_profile(twr.DEFAULT_PROFILE))
     catalog = twr.parse_gui_catalog(twr.DEFAULT_PATCHER_SRC, db)
-    for k, v in twr.selection_to_overrides(catalog, sel).items():
+    for k, v in twr.selection_to_overrides(catalog, sel, db.options).items():
         merged[str(k)] = str(v)
     return merged
 
