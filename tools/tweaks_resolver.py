@@ -932,6 +932,35 @@ def run_engine(profile: str, vanilla: Path, work_dir: Path,
     return out
 
 
+def dump_engine(profile: str, vanilla: Path, work_dir: Path,
+                src_dir: Path, run_extracted: Path, ahk: Path) -> str:
+    """Drive the engine in DUMP mode: build the mod list, write no BIN, and
+    return the ground-truth apply plan a pure-Python port must reproduce:
+        PATCHFILE=<b01|s02>
+        [WRITELIST]  data,offset   (hex writes, offset per OutputDec)
+        [FILES]      varname,filepath
+    This is the oracle target for the port (byte-for-byte)."""
+    work_dir.mkdir(parents=True, exist_ok=True)
+    staged_vanilla = work_dir / "Mega Man X6 (USA) (v1.1).bin"
+    _hardlink_or_copy(vanilla, staged_vanilla)
+    driver = src_dir / "_headless.ahk"
+    shutil.copy2(HEADLESS_DRIVER, driver)      # tracked driver -> in-place _src
+    result_file = work_dir / "_dump_result.txt"
+    if result_file.exists():
+        result_file.unlink()
+    prof_arg = profile if profile in PRESET_PROFILES else _win(profile)
+    env = dict(os.environ, MSYS2_ARG_CONV_EXCL="*")
+    cmd = [_exec(ahk), _win(driver), prof_arg, _win(staged_vanilla),
+           _win(result_file), _win(run_extracted), "dump"]
+    proc = subprocess.run(cmd, capture_output=True, text=True, env=env)
+    if not result_file.exists():
+        trace = src_dir / "_headless_trace.log"
+        raise RuntimeError(
+            f"engine dump failed (exit {proc.returncode}): {proc.stdout}{proc.stderr}\n"
+            f"trace: {trace.read_text() if trace.exists() else '(none)'}")
+    return result_file.read_text(encoding="utf-8-sig")
+
+
 def extract_slus(bin_path: Path, out_path: Path) -> bytes:
     """Extract the SLUS boot EXE from the patched disc image; return its bytes."""
     proc = subprocess.run(
@@ -1107,6 +1136,60 @@ def cmd_apply(db: TweaksDB, args) -> int:
     return 0
 
 
+def cmd_dump(db: TweaksDB, args) -> int:
+    """Emit the engine's ground-truth apply plan (PATCHFILE / WRITELIST / FILES)
+    for a profile — the byte-exact oracle a pure-Python engine port validates
+    against. Same profile inputs as `apply`; builds no BIN."""
+    work_dir = Path(args.work_dir) if args.work_dir else (DEFAULT_PATCHER_BASE / "_worktmp")
+    # profile: preset name | .x6tweaksprofile path | UI selection JSON
+    if args.selection:
+        base = Path(args.base_profile) if args.base_profile else DEFAULT_PROFILE
+        if not base.exists():
+            print(f"dump: base profile not found: {base}", file=sys.stderr)
+            return 2
+        sel_path = Path(args.selection)
+        try:
+            selection = json.loads(sel_path.read_text() if sel_path.exists() else args.selection)
+        except (OSError, json.JSONDecodeError) as e:
+            print(f"dump: --selection must be JSON or a path to one: {e}", file=sys.stderr)
+            return 2
+        catalog = parse_gui_catalog(Path(args.patcher_src), db)
+        merged = OrderedDict(load_profile(base))
+        for k, v in selection_to_overrides(catalog, selection).items():
+            merged[str(k)] = str(v)
+        work_dir.mkdir(parents=True, exist_ok=True)
+        gen = work_dir / "_dump_selection.x6tweaksprofile"
+        gen.write_text(emit_profile(merged), encoding="utf-8")
+        profile = str(gen)
+    elif args.profile in PRESET_PROFILES:
+        profile = args.profile
+    elif args.profile and Path(args.profile).exists():
+        profile = str(Path(args.profile).resolve())
+    else:
+        print(f"dump: need --selection <json>, or --profile as a preset "
+              f"{sorted(PRESET_PROFILES)} or a .x6tweaksprofile path", file=sys.stderr)
+        return 2
+
+    vanilla = Path(args.vanilla) if args.vanilla else DEFAULT_VANILLA
+    if not vanilla.exists():
+        print(f"dump: vanilla BIN not found: {vanilla}", file=sys.stderr)
+        return 2
+    src_dir = Path(args.patcher_src)
+    run_extracted = Path(args.run_extracted) if args.run_extracted else DEFAULT_RUN_EXTRACTED
+    ahk = find_autohotkey(args.ahk)
+    if ahk is None:
+        print("dump: AutoHotkey v1.1 not found (pass --ahk <path>).", file=sys.stderr)
+        return 2
+
+    plan = dump_engine(profile, vanilla, work_dir, src_dir, run_extracted, ahk)
+    if args.out:
+        Path(args.out).write_text(plan, encoding="utf-8")
+        print(f"[dump] wrote {args.out} ({len(plan)} bytes)")
+    else:
+        sys.stdout.write(plan)
+    return 0
+
+
 def main() -> int:
     # The catalog RML/JSON contains non-ASCII (∞, ›); force UTF-8 stdout so it
     # survives a cp1252 Windows console (the launcher captures our stdout).
@@ -1156,11 +1239,28 @@ def main() -> int:
     p.add_argument("--skip-md5-check", action="store_true",
                    help="do not verify the vanilla BIN MD5")
 
+    p = sub.add_parser(
+        "dump",
+        help="emit the engine's ground-truth apply plan (WRITELIST/FILES) — the "
+             "byte-exact oracle for the pure-Python engine port")
+    p.add_argument("--profile", default="",
+                   help="preset (default|tweaks|tweaks_l|tweaks_l_c) or a "
+                        ".x6tweaksprofile path")
+    p.add_argument("--selection", default="",
+                   help="UI selection JSON {var: value} or a path to one")
+    p.add_argument("--base-profile", default="",
+                   help="baseline profile for --selection (default: shipped default)")
+    p.add_argument("--vanilla", default="", help=f"vanilla BIN (default: {DEFAULT_VANILLA})")
+    p.add_argument("--run-extracted", default="", help="patcher run-extracted dir")
+    p.add_argument("--work-dir", default="", help="scratch dir for the engine run")
+    p.add_argument("--ahk", default="", help="AutoHotkey v1.1 exe (autodetected)")
+    p.add_argument("--out", default="", help="write the plan here (default: stdout)")
+
     args = ap.parse_args()
 
     db = TweaksDB(args.patcher_src)
     return {"list": cmd_list, "audit": cmd_audit, "catalog": cmd_catalog,
-            "deps": cmd_deps, "apply": cmd_apply}[args.cmd](db, args)
+            "deps": cmd_deps, "apply": cmd_apply, "dump": cmd_dump}[args.cmd](db, args)
 
 
 if __name__ == "__main__":
