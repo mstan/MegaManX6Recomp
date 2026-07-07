@@ -354,6 +354,27 @@ def _var_of(opts: str) -> str | None:
     return m.group(1) if m else None
 
 
+def _resolve_dat_refs(text: str, dat, depth: int = 6) -> str:
+    """Expand %Var% references against the _dat.ahk table, recursively (bounded),
+    e.g. `%MugshotCustom01_Options%` -> `%MugshotCustom01_Default%||Custom A|...`
+    -> `None||Custom A|Custom B`. Unknown vars are left verbatim."""
+    for _ in range(depth):
+        changed = False
+
+        def _sub(m):
+            nonlocal changed
+            v = dat.get(m.group(1))
+            if v is None:
+                return m.group(0)
+            changed = True
+            return str(v)
+
+        text = re.sub(r"%([A-Za-z0-9_]+)%", _sub, text)
+        if not changed:
+            break
+    return text
+
+
 def _ddl_choices(text: str):
     """(choices, default) from an AHK DropDownList item string ('a||b|c'). The
     item before the first '||' (empty split) is the default. Items are kept RAW
@@ -447,6 +468,12 @@ def parse_gui_catalog(src_dir: Path, db: "TweaksDB") -> list[dict]:
         elif ntype == "dropdownlist":
             rec["label"] = last_label
             choices, default = _ddl_choices(text)
+            if choices is None:
+                # dynamic %Var%_Options list (e.g. Mugshots) -> expand the
+                # reference (and its nested %Var%_Default%) from _dat.ahk, reparse.
+                resolved = _resolve_dat_refs(text, db.dat)
+                if resolved != text:
+                    choices, default = _ddl_choices(resolved)
             rec["choices"] = choices
             rec["default"] = default
         else:  # edit / slider (numeric)
