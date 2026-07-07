@@ -37,9 +37,15 @@ Coverage so far (each increment guarded by a byte-for-byte, order-aware oracle d
      selects the s02/s03 base xdelta3 and prepends PatchList_Script; vars with a
      _Offset_S02 variant then resolve to the S02 set. (ScriptPatchControl's Mugshot
      option edits are dead code — wrong var names — so no Mugshot coupling.)
-Still TODO: AddFilter (CharAdd/HeartTank/PartsSet — Exception_B coupled), other
-value-dependent Exception_A/_B (Saber Anim OFF-writes, Mugshot assembly, MachDash
-combos, Zero hints, BossHealth, New Game/RescRep), external file inserts.
+  6. Pipeline reordered to match patch.ahk exactly (Exception_A -> value filters ->
+     Exception_B -> PreReq -> Reorder). Exception_B started with Saber Animations:
+     an Anim frame filtered to "00" -> "01" plus a companion "00" at each offset+2,
+     with the AHK set/frame loop's break semantics (a first frame AnimSS01 set to 0
+     is AHK-falsy and suppresses the whole set).
+Still TODO: AddFilter (CharAdd/HeartTank/PartsSet — Exception_B coupled), the rest
+of Exception_B (DmgTableGateDmg HexSub, New Game/RescRep: PartsSet, Rank/Souls,
+SubTank/CharAdd/ArmorParts, LifeUp/EnergyUp, NewGame base), other Exception_A
+(Mugshot assembly, MachDash combos, Zero hints, BossHealth), external file inserts.
 """
 from __future__ import annotations
 
@@ -596,13 +602,70 @@ def apply_value_filters(db, merged: dict, pl: list[str]) -> dict:
     return values
 
 
+def _is_anim_frame(var: str) -> bool:
+    """An Anim frame instance name AnimSSFF (8 chars: 'Anim' + 4 digits)."""
+    return var.startswith("Anim") and len(var) == 8 and var[4:].isdigit()
+
+
+def _anim_frame_value(db, merged: dict, var: str) -> str | None:
+    """Post-NumByteFilter value of an Anim frame: DEC2HEX(GUI-or-default dec, 2).
+    Returns None if the frame has no _Default (i.e. doesn't exist), matching the
+    AHK loop's existence test."""
+    dflt = db.dat.get(var + "_Default")
+    if dflt is None:
+        return None
+    return _dec2hex(merged.get(var, dflt), 2)
+
+
+def apply_exception_b(db, merged: dict, pl: list[str], synth: dict,
+                      values: dict, patchfile: str) -> None:
+    """Post-filter Exception_B transforms (exception_b.ahk), run AFTER the value
+    filters and BEFORE PreReq/Reorder. Mutates pl / synth / values in place.
+    Ported subset: Saber Animations. Deferred: DmgTableGateDmg HexSub, and the
+    whole New Game block (PartsSet, PartsRandom/RescRep tables, Rank/Souls,
+    SubTankAdd, CharAdd/ArmorParts, LifeUp/EnergyUp, NewGame base prepend)."""
+    # Saber Animations (exception_b.ahk:6-36). Faithful port of the set/frame loop:
+    #   for each set SS (01,02,...) WHILE its first frame AnimSS01 is truthy (a "00"
+    #   value is AHK-falsy, so a first frame set to 0 STOPS all sets):
+    #     for each frame FF (01,02,...) WHILE AnimSSFF exists:
+    #       if AnimSSFF == "00": rewrite it to "01" and write a companion "00" byte
+    #       at each of its offsets + 2 (an `AnimSSFF_OFF_i` entry after the frame).
+    # Only fires when some Anim frame is in the list (the AHK `InStr(PatchList,Anim)`
+    # gate); a "00" frame is always a user change (no Anim default is 0), so it is
+    # in the PatchList and PatchListAdd's anchor exists.
+    if any(_is_anim_frame(v) for v in pl):
+        set_i = 1
+        while True:
+            ss = f"{set_i:02d}"
+            first = _anim_frame_value(db, merged, f"Anim{ss}01")
+            if not first or first == "00":       # first frame missing/falsy -> stop
+                break
+            frame_i = 1
+            while True:
+                var = f"Anim{ss}{frame_i:02d}"
+                val = _anim_frame_value(db, merged, var)
+                if val is None:                  # frame doesn't exist -> next set
+                    break
+                if val == "00":
+                    values[var] = "01"
+                    o = db.options.get(var)
+                    offs = _offsets_for_direct(o["direct"], patchfile) if o else []
+                    off_vars = []
+                    for i, off_hex in enumerate(offs, 1):
+                        ov = f"{var}_OFF_{i}"
+                        synth[ov] = [("00", hex2dec(off_hex) + 2)]
+                        off_vars.append(ov)
+                    _pl_add(pl, off_vars, var, "After")
+                frame_i += 1
+            set_i += 1
+
+
 def build_patchlist(db, merged: dict, base: dict) -> tuple[str, list[str], dict]:
-    """Assemble the ordered PatchList (var names) the way the AHK pipeline does:
-    CreateList (TotalList order) -> Exception_A (base prepend + PATCHFILE + the
-    ported value/combo transforms) -> PreReqFilter -> ReorderFilter. BaseFilter is
-    debug-only. Returns (patchfile, patchlist, synth) where `synth` holds writes
-    an exception built for a synthesized var. (ScriptPatch s02/s03 and the
-    remaining exceptions are added in later increments.)"""
+    """CreateList (TotalList order) + Exception_A (base prepend + PATCHFILE + the
+    ported value/combo transforms). Returns (patchfile, patchlist, synth) where
+    `synth` holds writes an exception built for a synthesized var. The value
+    filters, Exception_B, and PreReq/ReorderFilter run in build_writelist to keep
+    the AHK pipeline order. BaseFilter is debug-only."""
     active = active_options(db, merged, base)
     # PatchList Check 1 (patch.ahk): no changed options (or only the always-on
     # CharAdd01 sentinel) -> "No changes made"; Exception_A never runs, so the
@@ -626,8 +689,8 @@ def build_patchlist(db, merged: dict, base: dict) -> tuple[str, list[str], dict]
         pl = list(db.patchlist_base) + active
     synth: dict = {}
     apply_exception_a(db, merged, pl, synth, patchfile)
-    apply_prereq(db, pl)
-    apply_reorder(db, pl)
+    # PreReq/Reorder are applied by build_writelist AFTER the value filters and
+    # Exception_B, matching the AHK pipeline order (patch.ahk).
     return patchfile, pl, synth
 
 
@@ -635,8 +698,13 @@ def build_writelist(db, merged: dict, base: dict):
     """(PATCHFILE, ordered [(hexdata, offset_dec), ...]) for a merged profile.
     Order follows the assembled PatchList (matters for overlapping writes)."""
     merged = gui_control_all(db, merged)     # ProfileLoad normalization
+    # Pipeline order mirrors patch.ahk: CreateList+Exception_A -> value filters ->
+    # Exception_B -> PreReq -> Reorder -> expand.
     patchfile, pl, synth = build_patchlist(db, merged, base)
     values = apply_value_filters(db, merged, pl)   # numeric/text input conversion
+    apply_exception_b(db, merged, pl, synth, values, patchfile)
+    apply_prereq(db, pl)
+    apply_reorder(db, pl)
     writes: list[tuple[str, int]] = []
     for var in pl:
         for data, off in expand_entry(db, var, patchfile, values, synth):
