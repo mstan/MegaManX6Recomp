@@ -572,6 +572,46 @@ def cmd_state(args):
         sys.stdout.write(text)
 
 
+def cmd_artdisc(args):
+    """Produce an ART-ONLY patched disc (<stock-stem>.tweaks.bin + .tweaks.cue) for
+    a selection: vanilla + art file-inserts only, NO code. The recomp mounts it via
+    disc-swap (resolve_tweaks_disc_sibling in main.cpp). Fail-closed on scratch-
+    region inserts (code-injection class) unless --allow-scratch."""
+    db = _db()
+    base = OrderedDict(twr.load_profile(twr.DEFAULT_PROFILE))
+    json.loads(args.selection)  # validate it is JSON before the heavy path
+    merged = eng.merged_profile(db, args.selection)
+    vanilla = Path(args.vanilla) if args.vanilla else Path(twr.DEFAULT_VANILLA)
+
+    # Output next to the STOCK disc (--stock-disc) so disc-swap finds the sibling;
+    # default = beside the vanilla the engine used. The sibling stem MUST equal the
+    # stock disc filename stem the runtime resolves.
+    stock = Path(args.stock_disc) if args.stock_disc else vanilla
+    out_bin = stock.parent / (stock.stem + ".tweaks.bin")
+    if args.out:
+        out_bin = Path(args.out)
+
+    report = eng.apply_art_only(db, merged, base, out_bin, vanilla=vanilla,
+                                error_recalc=not args.no_ecc,
+                                allow_scratch=args.allow_scratch)
+
+    # Emit the sibling cue referencing the .tweaks.bin (single MODE2/2352 track,
+    # matching the stock cue this game ships).
+    cue = out_bin.with_suffix(".cue")
+    cue.write_text(
+        f'FILE "{out_bin.name}" BINARY\n'
+        f'  TRACK 01 MODE2/2352\n'
+        f'    INDEX 01 00:00:00\n', encoding="utf-8")
+
+    print(f"wrote {out_bin}  ({out_bin.stat().st_size} bytes)")
+    print(f"wrote {cue}")
+    print(f"  inserts={len(report['inserts'])}  dropped_code_writes="
+          f"{report['dropped_code_writes']}  scratch={report['scratch']}")
+    for ins in report["inserts"]:
+        print(f"    {ins['var']:22} off=0x{ins['off']:08X} size={ins['size']:7d} "
+              f"[{ins['region']}]  {Path(ins['src']).name}")
+
+
 def main():
     try:
         sys.stdout.reconfigure(encoding="utf-8")
@@ -584,9 +624,17 @@ def main():
     p = sub.add_parser("selection"); p.add_argument("selection"); p.add_argument("--out", default="")
     p = sub.add_parser("state"); p.add_argument("selection"); p.add_argument("--out", default="")
     p = sub.add_parser("bake"); p.add_argument("--out", default="")
+    p = sub.add_parser("artdisc")
+    p.add_argument("selection")
+    p.add_argument("--out", default="", help="explicit output .bin path (default: <stock-stem>.tweaks.bin)")
+    p.add_argument("--stock-disc", default="", help="stock disc the runtime mounts; sibling is written beside it")
+    p.add_argument("--vanilla", default="", help="vanilla BIN source (default: engine DEFAULT_VANILLA)")
+    p.add_argument("--allow-scratch", action="store_true", help="write scratch-region inserts anyway (will not render)")
+    p.add_argument("--no-ecc", action="store_true", help="skip error_recalc EDC/ECC recompute (debug only)")
     args = ap.parse_args()
     {"summary": cmd_summary, "manifest": cmd_manifest,
-     "selection": cmd_selection, "state": cmd_state, "bake": cmd_bake}[args.cmd](args)
+     "selection": cmd_selection, "state": cmd_state, "bake": cmd_bake,
+     "artdisc": cmd_artdisc}[args.cmd](args)
 
 
 if __name__ == "__main__":

@@ -80,6 +80,29 @@ PRESET_PROFILES = {"default", "tweaks", "tweaks_l", "tweaks_l_c"}
 
 _ASSIGN_RE = re.compile(r"^\s*([A-Za-z0-9_]+)\s*=\s*(.*?)\s*$")
 _BLOCK_VAR_RE = re.compile(r"^\s*([A-Za-z0-9_]+)\s*=\s*$")
+_EXPR_ASSIGN_RE = re.compile(r"^\s*([A-Za-z0-9_]+)\s*:=\s*(.*?)\s*$")
+
+
+def _eval_ahk_concat(expr: str, result: "OrderedDict[str, str]"):
+    """Evaluate a restricted AHK expression: dot-concatenation (`A . B . "lit"`)
+    of already-defined variables, quoted string literals, and numeric literals.
+    Returns the concatenated string, or None if any token is unsupported / an
+    identifier is undefined (in which case the caller leaves the var unset, as
+    before). This is exactly the subset the payload-assembly `:=` lines use."""
+    out = []
+    for tok in expr.split("."):
+        t = tok.strip()
+        if not t:
+            return None
+        if len(t) >= 2 and t[0] == '"' and t[-1] == '"':
+            out.append(t[1:-1])
+        elif t.isdigit():
+            out.append(t)
+        elif re.fullmatch(r"[A-Za-z0-9_]+", t) and t in result:
+            out.append(result[t])
+        else:
+            return None
+    return "".join(out)
 
 
 def _strip_comment(line: str) -> str:
@@ -133,6 +156,18 @@ def parse_ahk_assignments(path: Path) -> "OrderedDict[str, str]":
                     block.append(bl)
                 i += 1
             result[name] = "\n".join(block)
+            i += 1
+            continue
+        # `Name := <expr>` expression assignments. Most are list-assembly we don't
+        # need, but payload vars are assembled by dot-concatenation of already-
+        # defined hex sub-vars (e.g. `X_ASM01 := X_ASM01_1 . X_ASM01_2`). The AHK
+        # `dump` oracle evaluates these natively; we must too, or the option's
+        # payload is silently dropped (was: TitleLoading02/03 slot-1 write missing).
+        me = _EXPR_ASSIGN_RE.match(line)
+        if me:
+            val = _eval_ahk_concat(me.group(2), result)
+            if val is not None:
+                result[me.group(1)] = val
             i += 1
             continue
         m = _ASSIGN_RE.match(line)

@@ -168,10 +168,31 @@ def _dat_default(db, var: str) -> str:
     return str(db.dat.get(var + "_Default", ""))
 
 
+def _radio_siblings(db):
+    """{radio var: [other vars in its radio group]}. The AHK GUI auto-clears a
+    radio group when one member is set (`GuiControl, Main:, radio, 1`); force()
+    replicates that. Cached on db."""
+    cache = getattr(db, "_radio_sib_cache", None)
+    if cache is not None:
+        return cache
+    from collections import defaultdict
+    groups = defaultdict(list)
+    for c in twr.parse_gui_catalog(db.src_dir, db):
+        if c.get("type") == "radio" and c.get("var") and c.get("group") is not None:
+            groups[c["group"]].append(c["var"])
+    cache = {}
+    for members in groups.values():
+        for v in members:
+            cache[v] = [x for x in members if x != v]
+    db._radio_sib_cache = cache
+    return cache
+
+
 def gui_control_all(db, m: dict) -> dict:
     """Return a normalized copy of a merged profile, applying the value-forcing
     subs of GuiControlAll in their AHK order. `m` maps VarName -> string value."""
     m = dict(m)
+    _sib = _radio_siblings(db)
 
     def val(v):
         return m.get(v, _dat_default(db, v))
@@ -181,6 +202,9 @@ def gui_control_all(db, m: dict) -> dict:
 
     def force(v, value):
         m[v] = str(value)
+        if _truthy(value):                      # setting a radio clears its group,
+            for s in _sib.get(v, ()):           # exactly like the AHK GUI does
+                m[s] = "0"
 
     # ZeroGuardShellInputControl (called standalone at the end, and from the
     # ZeroEnsuizan* subs). FocusV is empty headless, so the focus-gated resets
@@ -271,6 +295,15 @@ def gui_control_all(db, m: dict) -> dict:
     elif on("ZeroEnsuizanInput03"):
         if on("ZeroSentsuizanInput01"):
             force("ZeroSentsuizanInput02", 1)
+
+    # ZeroYammarInput coupling (guicontrol ZeroYammarInput_Disable, 341-410): Yammar01
+    # is forced on when the resolved input is ZeroEnsuizanInput02 or ZeroSentsuizanInput03
+    # (they share Yammar's input button). Checked AFTER the cross-forcing above so a
+    # ZeroSentsuizanInput02 selection — which cascades to ZeroEnsuizanInput02 — is seen.
+    # (The buried force at ZeroEnsuizanInput02's elif above is missed when Input01 is
+    # also on, since force() does not clear radio siblings the way the AHK GUI does.)
+    if on("ZeroEnsuizanInput02") or on("ZeroSentsuizanInput03"):
+        force("ZeroYammarInput01", 1)
     zero_guard_shell()
 
     # 9. RescRepRandomControl
@@ -479,10 +512,23 @@ def expand_entry(db, var: str, patchfile: str, values: dict | None = None,
                 direct_writes.append((data, hex2dec(off_hex)))
     asm_writes: list[tuple[str, int]] = []
     byte_slots = {a["slot"]: a["hex"] for a in o["asm"] if a.get("kind") == "bytes"}
-    for slot in sorted(byte_slots):
-        data = byte_slots[slot].replace(" ", "")
+    # Replicate VarCount("<var>_ASM", 2) (createlist.ahk:54): enumerate slots from 1
+    # and STOP at the first that doesn't "exist" — an empty ASMnn that is not "0" and
+    # has no _Default / _01_ASM override. An empty ASMnn is the AHK author's list
+    # terminator; slots after it are dead (e.g. HoverUnlock02_ASM10="" caps the list
+    # at 9, dropping 10-18). Iterating all present slots over-produces those writes.
+    slot = 1
+    while slot in byte_slots:
+        hexv = byte_slots[slot]
+        exists = (bool(hexv) or hexv == "0"
+                  or db.dat.get(f"{var}_ASM{slot:02d}_Default", "") != ""
+                  or db.dat.get(f"{var}_ASM{slot:02d}_01_ASM", "") != "")
+        if not exists:
+            break
+        data = hexv.replace(" ", "")
         for off_hex in _offsets_for_slot(o["asm"], slot, patchfile):
             asm_writes.append((data, hex2dec(off_hex)))
+        slot += 1
     return direct_writes + asm_writes
 
 
@@ -751,6 +797,115 @@ def apply_exception_a(db, merged: dict, pl: list[str], synth: dict,
     # distinct combined-ASM variant. (exception_a.ahk:178-183)
     if "MachDashInput03" in pl and ("MachDashCancel03" in pl or "MachDashCancel04" in pl):
         _pl_add(pl, ["MachDashInput03_Cancel03"], "MachDashInput03", "After")
+
+    _zero_input_hints(db, pl, synth, patchfile, on)
+    _zero_move_exceptions(db, merged, pl, synth, on)
+
+
+def _zero_input_hints(db, pl, synth, patchfile, on):
+    """ZeroHints (exception_a.ahk:184-220): on the Localization base (s02/s03, i.e.
+    PatchFile != b01), add on-screen input-hint glyph strings for each Zero air move
+    present in the PatchList, keyed by the resolved input. Written at the move's
+    _Offset_S02. Runs BEFORE the Mode blocks (which remove the input from the list)."""
+    if patchfile == "b01":
+        return
+
+    def _d(n):
+        return (db.dat.get(n) or "").strip()
+
+    up, down, air = _d("ZeroInputHint_Up"), _d("ZeroInputHint_Down"), _d("ZeroInputHint_Air")
+    plus = _d("ZeroInputHint_Plus")
+    atk, spc, giga = (_d("ZeroInputHint_Attack"), _d("ZeroInputHint_Special"),
+                      _d("ZeroInputHint_Giga"))
+
+    def has(prefix):
+        return any(v.startswith(prefix) for v in pl)
+
+    def add_hint(name, value):
+        synth[name] = [(value, hex2dec(_d(f"{name}_Offset_S02")))]
+        _pl_add(pl, [name], None, "After")
+
+    if has("ZeroSentsuizanInput"):
+        v = (up + plus + atk if on("ZeroSentsuizanInput01")
+             else down + plus + spc if on("ZeroSentsuizanInput02")
+             else up + plus + spc if on("ZeroSentsuizanInput03") else "")
+        add_hint("ZeroInputHint_Sentsuizan", v)
+    if has("ZeroEnsuizanInput"):
+        v = (down + plus + spc if on("ZeroEnsuizanInput01")
+             else up + plus + spc if on("ZeroEnsuizanInput02")
+             else up + plus + atk if on("ZeroEnsuizanInput03")
+             else air + plus + spc if on("ZeroEnsuizanInput04") else "")
+        add_hint("ZeroInputHint_Ensuizan", v)
+    if has("ZeroGuardShellInput"):
+        v = (down + plus + spc if on("ZeroGuardShellInput04")
+             else up + plus + giga if on("ZeroGuardShellInput05") else "")
+        add_hint("ZeroInputHint_GuardShell", v)
+    if "ZeroYammarInput01" in pl:
+        add_hint("ZeroInputHint_Yammar", _d("ZeroInputHint_Yammar"))
+
+
+def _zero_move_exceptions(db, merged, pl, synth, on):
+    """Zero air-move exceptions (exception_a.ahk:226-289): ZeroSentsuizanMode03 and
+    ZeroEnsuizanMode01 synthesize input-dependent direction/button writes on top of
+    the move's base code. The selected input defaults to 01 (the input radios are
+    default-on, so `on()` reflects the gui-control forcing done upstream)."""
+    def _d(name):                                     # _dat constant, stripped
+        return (db.dat.get(name) or "").strip()
+
+    def _sum_byte(a, b):                              # DEC2HEX(HEX2DEC(a)+HEX2DEC(b),1)
+        h = _dec2hex(int(a, 16) + int(b, 16))
+        return ("0" + h) if len(h) < 2 else h
+
+    dir_up, dir_down = _d("Direction_Up"), _d("Direction_Down")
+    btn_attack, btn_special = _d("Button_Attack"), _d("Button_Special")
+
+    # ZeroSentsuizanMode03: AND-trigger + AND-to-hold, keyed by the Sentsuizan input
+    # (exception_a.ahk:226-242). Added AFTER ZeroSentsuizanMode03 in the list.
+    if on("ZeroSentsuizanMode03"):
+        if on("ZeroSentsuizanInput01"):
+            and1, and2 = btn_attack, _sum_byte(dir_up, btn_attack)
+        elif on("ZeroSentsuizanInput02"):
+            and1, and2 = btn_special, _sum_byte(dir_down, btn_special)
+        elif on("ZeroSentsuizanInput03"):
+            and1, and2 = btn_special, _sum_byte(dir_up, btn_special)
+        else:
+            and1 = and2 = None
+        if and1 is not None:
+            synth["ZeroSentsuizanInput_AND_1"] = [(and1, hex2dec(_d("ZeroSentsuizanInput_AND_1_Offset")))]
+            synth["ZeroSentsuizanInput_AND_2"] = [(and2, hex2dec(_d("ZeroSentsuizanInput_AND_2_Offset")))]
+            _pl_add(pl, ["ZeroSentsuizanInput_AND_1", "ZeroSentsuizanInput_AND_2"],
+                    "ZeroSentsuizanMode03", "After")
+
+    # ZeroEnsuizanMode01: identify the Ensuizan input (default 01, written anyway),
+    # remove it from normal processing, and add the air direction/button (+ a fixed
+    # "direction required" instruction for inputs 01-03). (exception_a.ahk:244-289)
+    if on("ZeroEnsuizanMode01"):
+        ens = next((n for n in ("01", "02", "03", "04") if on("ZeroEnsuizanInput" + n)), None)
+        if ens is None:
+            ens = "01"                                # default, but needs to be written
+        else:
+            _pl_remove(pl, "ZeroEnsuizanInput" + ens)
+        dir_off = hex2dec(_d("ZeroEnsuizanAirDirection_Offset"))
+        btn_off = hex2dec(_d("ZeroEnsuizanAirButton_Offset"))
+        add_req = True
+        if ens == "01":
+            air_dir, air_btn = dir_down, btn_special
+        elif ens == "02":
+            air_dir, air_btn = dir_up, btn_special
+        elif ens == "03":
+            air_dir, air_btn = dir_up, btn_attack
+        else:                                          # "04": Sentsuizan-dependent dir, no Req
+            air_dir = dir_down if "ZeroSentsuizanInput01" in pl else dir_up
+            air_btn = _d("ZeroEnsuizanAirButton_Special")  # undefined in _dat -> empty (no write)
+            add_req = False
+        synth["ZeroEnsuizanAirDirection"] = [(air_dir, dir_off)]
+        synth["ZeroEnsuizanAirButton"] = [(air_btn, btn_off)]
+        adds = ["ZeroEnsuizanAirDirection", "ZeroEnsuizanAirButton"]
+        if add_req:
+            synth["ZeroEnsuizanAirDirectionReq"] = [
+                (_d("ZeroEnsuizanAirDirectionReq"), hex2dec(_d("ZeroEnsuizanAirDirectionReq_Offset")))]
+            adds = ["ZeroEnsuizanAirDirectionReq"] + adds
+        _pl_add(pl, adds, None, "After")
 
 
 def _mugshot_assembly(db, merged: dict, pl: list[str], synth: dict, patchfile: str) -> None:
@@ -1037,6 +1192,8 @@ def apply_exception_b(db, merged: dict, pl: list[str], synth: dict,
     # Rank -> Souls: each selected CharRank0X (its byte value is the TextFilter'd
     # rank code) also writes the matching soul count Souls0X = RankSouls<rank+1>
     # (a NumHalfword table value), inserted right after the rank. (exception_b:226)
+    # The soul count is the RankSouls<n> EDIT field's CURRENT value (AHK reads the
+    # live var, so an edited count wins) — falling back to its _Default when unset.
     for idx in (1, 2):
         cr = f"CharRank0{idx}"
         if cr in pl:
@@ -1046,7 +1203,8 @@ def apply_exception_b(db, merged: dict, pl: list[str], synth: dict,
             rank_plus = int(rank_code) + 1
             souls_src = f"RankSouls{rank_plus:02d}"
             souls_var = f"Souls0{idx}"
-            values[souls_var] = _dec2hex_le(int(_dat_default(db, souls_src)), 4)
+            souls_val = merged.get(souls_src, _dat_default(db, souls_src))
+            values[souls_var] = _dec2hex_le(int(souls_val), 4)
             _pl_add(pl, [souls_var], cr, "After")
 
     # SubTankAdd: nibble-swap the AddFilter bitmask (exception_b.ahk:239-242).
@@ -1136,6 +1294,43 @@ def build_patchlist(db, merged: dict, base: dict) -> tuple[str, list[str], dict]
     return patchfile, pl, synth
 
 
+def apply_selection_filter(db, merged: dict, pl: list, synth: dict, patchfile: str) -> None:
+    """Port of SelFilter (filter.ahk:394-431). A dropdown var whose value's LAST
+    character is an ID with a `<var>_SELECT_<ID>` block takes that block's ASM
+    payloads — the per-choice data lives INSIDE the block (a continuation block),
+    not as flat `<var>_ASMnn` keys, so expand_entry would otherwise emit nothing.
+    Parse the matching block's `<var>_ASMnn = hex` lines and emit them as synth
+    writes at the var's ASM offsets, VarCount-style (stop at the first empty slot)."""
+    for var in list(pl):
+        if var in synth:
+            continue
+        val = str(merged.get(var, _dat_default(db, var)))
+        block = db.dat.get(f"{var}_SELECT_{val[-1:]}") if val else None
+        if block is None:
+            continue
+        prefix = f"{var}_ASM"
+        asm: dict[int, str] = {}
+        for line in block.splitlines():
+            line = line.strip()
+            if not line or line.startswith(";") or "=" not in line:
+                continue
+            k, _, v = line.partition("=")
+            k = k.strip()
+            if k.startswith(prefix) and k[len(prefix):].isdigit():
+                asm[int(k[len(prefix):])] = v.strip().replace(" ", "")
+        o = db.options.get(var) or {}
+        writes: list[tuple[str, int]] = []
+        slot = 1
+        while slot in asm:
+            if not asm[slot]:                       # VarCount-style list terminator
+                break
+            for off_hex in _offsets_for_slot(o.get("asm", []), slot, patchfile):
+                writes.append((asm[slot], hex2dec(off_hex)))
+            slot += 1
+        if writes:
+            synth[var] = writes                     # expand_entry returns synth[var]
+
+
 def _assemble(db, merged: dict, base: dict):
     """Run the full patch pipeline and return (merged_norm, patchfile, pl, values,
     synth) — the assembled PatchList state shared by build_writelist (hex writes)
@@ -1144,6 +1339,7 @@ def _assemble(db, merged: dict, base: dict):
     Exception_B -> PreReq -> Reorder."""
     merged = gui_control_all(db, merged)
     patchfile, pl, synth = build_patchlist(db, merged, base)
+    apply_selection_filter(db, merged, pl, synth, patchfile)
     values = apply_value_filters(db, merged, pl)
     apply_add_filter(db, merged, pl, values)
     apply_exception_b(db, merged, pl, synth, values, patchfile)
@@ -1273,6 +1469,88 @@ def apply_selection(selection_json: str, out, *, vanilla=None,
     merged = merged_profile(db, selection_json)
     base = OrderedDict(twr.load_profile(twr.DEFAULT_PROFILE))
     return apply_bin(db, merged, base, out, vanilla=vanilla, error_recalc=error_recalc)
+
+
+# --------------------------------------------------------------------------
+# Art-only disc producer (disc-swap-safe: data-only, never code)
+# --------------------------------------------------------------------------
+def _vanilla_region_class(vanilla_path, off: int, size: int, sample: int = 512) -> str:
+    """Classify an insert target in the VANILLA image as 'inplace' or 'scratch'.
+
+    'inplace' => vanilla already holds real data at `off` (the game's loader reads
+    these sectors during normal play), so overwriting them swaps the asset the game
+    actually shows. 'scratch' => vanilla is zero padding here (an unused region);
+    the asset is only reachable via a loader-redirect code patch, so an art-only
+    disc that drops the code would leave the game reading the ORIGINAL asset from
+    its native LBA. Coarse zero/non-zero probe of the first `sample` user bytes at
+    `off` (the insert always begins inside a data region, so no ECC skip needed for
+    a probe this small)."""
+    with open(vanilla_path, "rb") as f:
+        f.seek(off)
+        b = f.read(min(size, sample))
+    nz = sum(1 for x in b if x)
+    return "inplace" if nz > len(b) * 0.10 else "scratch"
+
+
+def apply_art_only(db, merged: dict, base: dict, out, *, vanilla=None,
+                   error_recalc: bool = True, allow_scratch: bool = False) -> dict:
+    """Produce an ART-ONLY disc image: a raw copy of the vanilla BIN with ONLY the
+    selection's art file-inserts written in place, then EDC/ECC recomputed.
+
+    It deliberately DOES NOT apply the base xdelta3 or any hex code-writes — those
+    are the acediez framework's code injection, which the recompiler cannot take
+    via disc-swap (it surfaces as an unknown-dispatch crash). This producer changes
+    only graphics/text DATA at fixed disc offsets; SLUS + overlay code stay vanilla,
+    so the stock recompiled binary mounts it and runs.
+
+    Fail-closed on scratch: an insert whose vanilla target is a SCRATCH region
+    (zero padding the vanilla loader never reads — the data is reachable only via
+    the dropped loader-redirect code) is REFUSED, because writing it is theater —
+    the disc looks patched but the game still reads the original asset from its
+    native LBA. Pass allow_scratch=True to write it anyway (it will NOT render).
+
+    Returns a report dict: {patchfile, inserts:[{var,off,size,src,region}],
+    dropped_code_writes, scratch:[var,...]}."""
+    import shutil
+    vanilla = Path(vanilla) if vanilla else twr.DEFAULT_VANILLA
+    out = Path(out)
+    _pf, files = build_filelist(db, merged, base)
+    if not files:
+        raise ValueError("selection carries no art file-inserts; there is nothing "
+                         "to build as an art-only disc")
+    _pf2, writes = build_writelist(db, merged, base)  # reported, never applied
+    report = {"patchfile": _pf, "inserts": [], "dropped_code_writes": len(writes),
+              "scratch": []}
+    for var, fp, off in files:
+        fp = Path(fp)
+        if not fp.exists():
+            raise FileNotFoundError(f"art-insert source missing: {fp}")
+        sz = fp.stat().st_size
+        region = _vanilla_region_class(vanilla, off, sz)
+        report["inserts"].append({"var": var, "off": off, "size": sz,
+                                   "src": str(fp), "region": region})
+        if region == "scratch":
+            report["scratch"].append(var)
+    if report["scratch"] and not allow_scratch:
+        raise ValueError(
+            "art-only refused: these inserts target vanilla SCRATCH regions that "
+            "only the dropped loader-redirect code reads, so they will NOT render "
+            f"on an art-only disc: {', '.join(report['scratch'])}. This asset is "
+            "code-injection class (needs the guarded-variant codegen path, not "
+            "disc-swap). Pass allow_scratch=True to write it anyway (won't render).")
+    if out.exists():
+        out.unlink()
+    shutil.copyfile(vanilla, out)
+    with open(out, "r+b") as f:
+        for _var, fp, off in files:
+            _write_file_insert(f, Path(fp), off)
+    if error_recalc:
+        r = subprocess.run([str(ERROR_RECALC_EXE), str(out)],
+                           capture_output=True, text=True)
+        if r.returncode != 0:
+            raise RuntimeError(f"error_recalc failed ({r.returncode}): "
+                               f"{r.stdout}{r.stderr}")
+    return report
 
 
 # --------------------------------------------------------------------------
