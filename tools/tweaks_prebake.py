@@ -390,6 +390,54 @@ def _param_catalog(db, geom, cm, base, base_set):
     return {wa: (i, sites[wa][0], sites[wa][1]) for i, wa in enumerate(sorted(sites))}
 
 
+# --------------------------------------------------------------------------
+# Control-flow function-variants (TWEAKS_PREBAKE.md §13, dual-source).
+# A CF option (patches a j/jal/branch — a hook) can't be an instruction-level
+# guard, so the recompiler bakes the WHOLE function as vanilla + patched-body
+# variants selected at entry by a flag bit. Rollout is incremental: this M1
+# allowlist proves the path on ONE clean Case-A option (an in-place hook, no
+# injected routine, unshared function). M2 replaces it with the general Case-A
+# catalog. Flag bits share the inline-guard namespace (assigned AFTER it).
+# --------------------------------------------------------------------------
+FUNC_VARIANT_OPTS = {"LivesSwitch04"}
+
+
+def _combined_flag_bits(db, geom, cm, base, base_set):
+    """Unified g_tweak_flags bit map: the inline-guard options (from
+    _guarded_catalog) keep bits 0..N-1; CF function-variant options get bits
+    appended after, stable + non-overlapping. Both the bake manifest and the
+    runtime `flag <n>` state use this map so they always agree."""
+    bits, _rows = _guarded_catalog(db, geom, cm, base, base_set)
+    nb = (max(bits.values()) + 1) if bits else 0
+    for v in sorted(FUNC_VARIANT_OPTS):
+        if v not in bits:            # CF opts are excluded from _guarded_catalog
+            bits[v] = nb; nb += 1
+    return bits
+
+
+def _func_variant_catalog(db, geom, cm, base, base_set, bits):
+    """Rows [(func, addr, van_word, bit, pat_word)] for the FUNC_VARIANT_OPTS.
+    Case-A only: every patched word overrides an existing real instruction
+    (vanilla != 0) inside a known code function. Fails loud on a violated
+    assumption so a bad rollout can't silently emit a broken bake."""
+    rows = []
+    for o in cat_of(db):
+        v = o["var"]
+        if v not in FUNC_VARIANT_OPTS:
+            continue
+        c = classify_writes(geom, cm, _writes_for(db, base, {v: True}), base_set)
+        for wa, van_hex, pat_hex in c["guarded"]:
+            van_word = int.from_bytes(bytes.fromhex(van_hex), "little")
+            pat_word = int.from_bytes(bytes.fromhex(pat_hex), "little")
+            f = cm.func_of(wa)
+            if van_word == 0 or f is None or not cm.is_code(wa):
+                raise SystemExit(f"func_variant {v}: site 0x{wa:08X} is not Case-A "
+                                 f"(van=0x{van_word:08X} func={f}) — not M1-eligible")
+            rows.append((f, wa, van_word, bits[v], pat_word))
+    rows.sort(key=lambda r: (r[0], r[3], r[1]))
+    return rows
+
+
 def cmd_bake(args):
     db = _db()
     geom = Geometry(twr.DEFAULT_VANILLA)
@@ -398,12 +446,15 @@ def cmd_bake(args):
     base_set = _base_set(db, base)
     bits, rows = _guarded_catalog(db, geom, cm, base, base_set)
     params = _param_catalog(db, geom, cm, base, base_set)
+    allbits = _combined_flag_bits(db, geom, cm, base, base_set)
+    fv_rows = _func_variant_catalog(db, geom, cm, base, base_set, allbits)
     out = ["# tweaks_bake.toml — compile-free Tweaks guarded-variant manifest",
            "# (tweaks_prebake bake). Consumed by psxrecomp-game --tweaks-bake.",
            "format_version = 1", ""]
     out.append("# option -> flag bit (runtime `flag <n>` in tweaks.state selects it)")
-    for v in sorted(bits):
-        out.append(f"#   bit {bits[v]:3} = {v}")
+    for v in sorted(allbits):
+        kind = " (func-variant)" if v in FUNC_VARIANT_OPTS else ""
+        out.append(f"#   bit {allbits[v]:3} = {v}{kind}")
     out.append("")
     for addr, van_word, bit, pat_word in rows:
         out.append("[[guarded]]")
@@ -419,11 +470,20 @@ def cmd_bake(args):
         out.append(f"  index = {idx}")
         out.append(f'  imm   = "0x{imm:04X}"')
         out.append(f"  def   = {default}")
+    out.append("")
+    out.append(f"# control-flow function-variants ({len(fv_rows)} row(s)) — dual-source §13")
+    for func, addr, van_word, bit, pat_word in fv_rows:
+        out.append("[[func_variant]]")
+        out.append(f'  func = "0x{func:08X}"')
+        out.append(f'  addr = "0x{addr:08X}"')
+        out.append(f'  van  = "0x{van_word:08X}"')
+        out.append(f"  bit  = {bit}")
+        out.append(f'  word = "0x{pat_word:08X}"')
     text = "\n".join(out) + "\n"
     if args.out:
         Path(args.out).write_text(text, encoding="utf-8")
         print(f"wrote {args.out}  ({len(bits)} guarded options, {len(rows)} guarded rows, "
-              f"{len(params)} param sites)")
+              f"{len(params)} param sites, {len(fv_rows)} func-variant rows)")
     else:
         sys.stdout.write(text)
 
@@ -527,7 +587,7 @@ def cmd_state(args):
     # flags: one `flag <bit>` per ACTIVE guarded option, using the same bit
     # assignment the bake manifest baked (both from _guarded_catalog, so the
     # runtime selects exactly the variants the superset binary carries).
-    bits, _rows = _guarded_catalog(db, geom, cm, base, base_set)
+    bits = _combined_flag_bits(db, geom, cm, base, base_set)
     def _active(val):
         if val in (False, 0, 0.0, None):
             return False

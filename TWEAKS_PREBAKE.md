@@ -274,3 +274,121 @@ sets register the same way.
 - **Immediate detection**: reliably distinguishing "value immediate" from "code change"
   per site needs the decoder's view of the patched bytes; the metadata bridge must be
   conservative (treat ambiguous as a guarded variant).
+
+---
+
+# 13. SUPERSEDING DESIGN — dual-source function-variants (2026-07-08)
+
+**Status:** §§2–12 above describe the shipped Model-1 subset (values + inline guards +
+poke/disc/art), which capped code tweaks at the ~24–28 *control-flow-clean* options and
+left the 104 control-flow-injection options stranded. This section supersedes that scope.
+It is the AUTHORITATIVE plan going forward. The Phase-1/2/3 machinery below it still ships
+and is reused wholesale; this only changes how the **104 CF options** get baked and, with
+them, the whole delivery model. Product decisions are LOCKED (see auto-memory
+`tweaks_delivery_model_locked`).
+
+## 13.1 Delivery model (locked)
+- **Two builds.** *Stock* = pure vanilla recompile (no tweak machinery). *Tweaks* = ONE
+  superset holding the vanilla base + every option's code; player mixes freely; **all-off =
+  true vanilla.**
+- **Apply = RELAUNCH** (no mid-session toggling). Toggle in launcher → flags/values file →
+  relaunch. Code/value tweaks instant; art tweaks = one-time few-min `.tweaks` disc rebuild.
+- **Non-destructive disc (invariant):** never patch the stock ISO in place; always
+  regenerate `<name>.tweaks.{iso,bin,cue}` FROM stock; `resolve_tweaks_disc_sibling` loads
+  it when present, stock otherwise. Stock is read-only forever.
+- **Why dual-source at all:** a static recomp bakes code at build time, so every selectable
+  code behavior must be pre-baked. Recompiling the *patched* ISO alone is all-or-nothing —
+  it discards the vanilla substrate, so un-selected tweaks can't fall back to vanilla.
+  Mix-and-match REQUIRES holding vanilla + each variant and selecting at runtime.
+
+## 13.2 The clean reduction (kills the "2^68" fear)
+Every acediez patch is one (or both) of:
+- **Case A — edit to an EXISTING function F** (an inline logic change, OR a hook that
+  overwrites an in-F instruction with a `j/jal` into an injected routine). F exists in
+  vanilla; patched F differs. → emit F with a **guarded entry**: vanilla body vs patched
+  body, chosen by `psx_tweak_on(bit)`. Multiple tweaks on one F → ordered chain.
+- **Case B — an INJECTED routine G** placed in scratch/nop-padding (did not exist in
+  vanilla). → compile G **unconditionally** as its own func at its entry address. G is only
+  ever reached via a Case-A hook, so it is dead code when that hook's bit is off. **No guard,
+  no variant.**
+
+The apparent `2^68`/`2^71` hot functions (CharAdd/Unlockables) are **Case B**: scratch
+arenas (vanilla = `sll $0` = nop) where many options' injected routines live. They were
+mis-attributed to a shared *edited* function. Under this reduction they cost **one func
+each**, not `2^k`. So the only combinatorial surface is Case-A functions touched by >1
+COMBINABLE tweak — the bounded ~27 (see 13.6).
+
+## 13.3 Delta-ingestion pipeline (chosen build strategy — internal, invisible to product)
+No physical "superset ISO" is built (that would collide in shared scratch). Instead:
+
+**Producer (Python, extend `tools/tweaks_prebake.py`):** from each option's writelist emit a
+bake manifest entry:
+- `bit` (deterministic sorted-var → flag bit, as `_guarded_catalog` already does),
+- Case-A sites: `[(func_entry, word_addr, van_word, pat_word)]` (reuse `classify_writes`;
+  a site whose patched opcode `_is_cf` is a hook, still Case A — it edits F),
+- Case-B routines: `[(entry_addr, bytes)]` — a contiguous injected run whose vanilla bytes
+  are nop/scratch (or outside exec ranges) and that a Case-A hook targets; `entry_addr` =
+  the hook's jump target.
+- (values/art/poke unchanged — existing buckets.)
+
+**Recompiler (C++, extend `load_tweak_bake` + `code_generator.cpp`, `tweak_sites.h` in
+recompiler/src):**
+1. Add every Case-B `entry_addr` to the function worklist and translate it from PATCHED
+   bytes → an ordinary `func_<entry>`. Its internal absolute refs (`j/jal`, `lui/ori`
+   address pairs, data pointers) are fixed up by the normal translator because it's compiled
+   at its true guest address — **linear, not combinatorial**.
+2. For each Case-A function F: synthesize each patched variant body by applying the relevant
+   option deltas onto F's vanilla bytes, then translate BOTH; emit F as
+   `if (psx_tweak_on(bitF)) { <patched> } else { <vanilla> }` at function entry (chain for
+   combos). Dispatch at ENTRY avoids all mid-block CFG-guard surgery.
+
+## 13.4 Runtime (unchanged — reuse Phase-2/3 verbatim)
+`g_tweak_flags[4]` (256-bit) + `psx_tweak_on(bit)`; `tweaks.state` grammar `flag <n>` /
+`param <i> <v>` / `poke <addr> <hex>`, read at boot (relaunch model), applied at the
+`s_game_started` gate (fntrace.c) with `dirty_ram_text_bless` for pokes. Disc via
+`resolve_tweaks_disc_sibling`.
+
+## 13.5 Combo handling for shared Case-A functions (~27 funcs, 2–5 tweaks each)
+Ordered entry chain; radio/PreReq mutex ⇒ ≤1 active (use `_radio_siblings`). For genuinely
+combinable pairs on the same F, the producer enumerates the REACHABLE combinations (mutex
+graph prunes them) and emits a combined patched body per reachable combo, selected when all
+its bits are on. Bounded: worst real case is single-digit combos per function.
+
+## 13.6 Mapping evidence (2026-07-08) — recompute if stale
+`tools/tweaks_map_pressure.py` + `tools/tweaks_probe_hot.py` (run from repo root; reuse
+`tweaks_prebake.py` internals). Findings: **132 code-tier options
+(28 inline, 104 CF)** touching **93 distinct funcs** → **61 single-tweak (trivial),
+~27 with 2–5 combinable, the rest are Case-B scratch arenas** (the `2^68` artifact).
+Value tier (~43 param/poke) + the 28 inline already mix at runtime today.
+
+## 13.7 Milestones
+1. **Prove one CF option end-to-end** — a single hook: delta → Case-B routine emitted as a
+   func → Case-A guarded entry in F → validate `off = vanilla`, `on = tweak`. De-risks the
+   whole subsystem before scaling.
+2. **Scale to all 104** + the ~27 combo functions.
+3. **Launcher (stb — see memory `launcher_rmlui_stb_divergence`)**: tweaks menu → flags/
+   values file + trigger `.tweaks` art-disc rebuild.
+4. **Full-catalog validation** (per-option + representative combos; user does final play).
+
+## 13.8 Code sites to touch
+- Framework: `recompiler/src/code_generator.cpp` (`translate_instruction`/`_raw`,
+  `generate_function`), `load_tweak_bake` + `codegen_config`, `recompiler/src/tweak_sites.h`;
+  runtime `tweak_runtime.{c,h}` (already supports the grammar); `main.cpp`
+  `resolve_tweaks_disc_sibling`; `fntrace.c` apply gate.
+- Game: `tools/tweaks_prebake.py` (add Case-A/Case-B manifest + `bake` extension),
+  `tweaks_engine.py`/`tweaks_resolver.py` (writelists — DONE, AHK-parity), the art producer
+  `artdisc`.
+
+## 13.9 Risks specific to dual-source
+- **Case-B entry discovery:** an injected routine may sit in the tail-padding of an existing
+  func range (so `func_of` mislabels it) — the producer must declare its entry explicitly
+  from the hook target, not infer from `.ranges`.
+- **Delta application correctness:** synthesizing a patched function body = applying the
+  right subset of deltas to vanilla bytes; must match the byte-identical Python engine
+  output (oracle: `tweaks_engine.apply_bin`). Cross-check the synthesized bytes vs the
+  engine's patched image before translating.
+- **Binary size / compile time:** +~93 guarded bodies +N injected routines on top of the
+  34–42 MB superset; expected negligible but measure (prod-emit is on).
+- **Same-word combinable conflict** (two combinable tweaks write the SAME instruction word
+  differently): rare after mutex; where real, needs the combined-body path (13.5), not a
+  chain. Producer must flag these explicitly.
