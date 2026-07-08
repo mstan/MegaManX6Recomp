@@ -351,6 +351,45 @@ def _guarded_catalog(db, geom, cm, base, base_set):
     return bits, rows
 
 
+def _param_catalog(db, geom, cm, base, base_set):
+    """Return {addr: (index, imm_raw_u16, default_i32)} for every parameterizable
+    value-immediate site across all options. Only real value opcodes are taken
+    (addiu/addi/slti/sltiu/ori-li); masks, load/store offsets, control flow, and
+    register-form (opcode 0) words are excluded. Index = sorted-addr order, so the
+    bake manifest and the runtime `param <index>` lines agree without a side channel.
+    The default is sign- or zero-extended per opcode so an unset param == vanilla."""
+    SAFE = {0x08, 0x09, 0x0A, 0x0B}   # addi, addiu, slti, sltiu  (value opcodes)
+    sites = {}   # addr -> (imm_raw, default)
+    for o in cat_of(db):
+        v, t = o["var"], o["type"]
+        if t in ("checkbox", "radio"):
+            sels = [{v: True}]
+        elif t == "dropdownlist" and o.get("choices") and len(o["choices"]) > 1:
+            sels = [{v: "@1"}]
+        elif t in ("edit", "slider"):
+            sels = [{v: "5"}]
+        else:
+            continue
+        for sel in sels:
+            try:
+                c = classify_writes(geom, cm, _writes_for(db, base, sel), base_set)
+            except Exception:
+                continue
+            for wa, van_hex, _pat in c["param"]:
+                vw = int.from_bytes(bytes.fromhex(van_hex), "little")
+                op = (vw >> 26) & 0x3F
+                rs = (vw >> 21) & 0x1F
+                imm = vw & 0xFFFF
+                if op in SAFE:
+                    default = imm - 0x10000 if (imm & 0x8000) else imm   # sign-extend
+                elif op == 0x0D and rs == 0:                              # ori li-form
+                    default = imm                                        # zero-extend
+                else:
+                    continue                                             # not parameterizable
+                sites.setdefault(wa, (imm, default))
+    return {wa: (i, sites[wa][0], sites[wa][1]) for i, wa in enumerate(sorted(sites))}
+
+
 def cmd_bake(args):
     db = _db()
     geom = Geometry(twr.DEFAULT_VANILLA)
@@ -358,6 +397,7 @@ def cmd_bake(args):
     base = OrderedDict(twr.load_profile(twr.DEFAULT_PROFILE))
     base_set = _base_set(db, base)
     bits, rows = _guarded_catalog(db, geom, cm, base, base_set)
+    params = _param_catalog(db, geom, cm, base, base_set)
     out = ["# tweaks_bake.toml — compile-free Tweaks guarded-variant manifest",
            "# (tweaks_prebake bake). Consumed by psxrecomp-game --tweaks-bake.",
            "format_version = 1", ""]
@@ -371,10 +411,19 @@ def cmd_bake(args):
         out.append(f'  van  = "0x{van_word:08X}"')
         out.append(f"  bit  = {bit}")
         out.append(f'  word = "0x{pat_word:08X}"')
+    out.append("")
+    out.append(f"# parameterized value immediates ({len(params)} sites): index -> addr")
+    for addr, (idx, imm, default) in sorted(params.items(), key=lambda kv: kv[1][0]):
+        out.append("[[param]]")
+        out.append(f'  addr  = "0x{addr:08X}"')
+        out.append(f"  index = {idx}")
+        out.append(f'  imm   = "0x{imm:04X}"')
+        out.append(f"  def   = {default}")
     text = "\n".join(out) + "\n"
     if args.out:
         Path(args.out).write_text(text, encoding="utf-8")
-        print(f"wrote {args.out}  ({len(bits)} options, {len(rows)} guarded rows)")
+        print(f"wrote {args.out}  ({len(bits)} guarded options, {len(rows)} guarded rows, "
+              f"{len(params)} param sites)")
     else:
         sys.stdout.write(text)
 
@@ -488,9 +537,22 @@ def cmd_state(args):
     for v in sorted(sel):
         if v in bits and _active(sel[v]):
             out.append(f"flag {bits[v]}")
-    for i, (wa, van, pat) in enumerate(c["param"]):
-        pat_imm = int(pat[0:2] + pat[2:4], 16)          # LE low halfword
-        out.append(f"param {i} 0x{pat_imm:04X}")
+    # param overrides: use the SAME global index the bake assigned (so the runtime
+    # writes the baked g_tweak_param[index] the superset reads), and sign/zero-extend
+    # the patched value per opcode to match the emitted read.
+    pcat = _param_catalog(db, geom, cm, base, base_set)   # {addr: (index, imm, default)}
+    for wa, van, pat in c["param"]:
+        if wa not in pcat:
+            continue                                      # not a baked (safe-opcode) param site
+        pw = int.from_bytes(bytes.fromhex(pat), "little")
+        op = (pw >> 26) & 0x3F; rs = (pw >> 21) & 0x1F; pimm = pw & 0xFFFF
+        if op in (0x08, 0x09, 0x0A, 0x0B):
+            val = pimm - 0x10000 if (pimm & 0x8000) else pimm
+        elif op == 0x0D and rs == 0:
+            val = pimm
+        else:
+            continue
+        out.append(f"param {pcat[wa][0]} {val}")
     # Chunk poke runs to <=32 bytes/line (bounded line length; the runtime applies
     # many pokes at consecutive addresses identically to one long run).
     CHUNK = 32
