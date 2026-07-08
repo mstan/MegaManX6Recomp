@@ -295,6 +295,91 @@ def build_manifest(db, geom, cm):
 
 
 # --------------------------------------------------------------------------
+# Guarded-variant bake (Phase 3): deterministic option->flag-bit assignment +
+# per-site patched-word rows. v1 scope = checkbox/radio options that produce a
+# GUARDED (logic) diff; dropdown multi-choice + edit/slider (param) are the
+# documented follow-up on the same machinery.
+# --------------------------------------------------------------------------
+def _guarded_catalog(db, geom, cm, base, base_set):
+    """Return (bits, rows): bits = {var: flag_bit} for every checkbox/radio option
+    whose 'on' value patches instruction logic; rows = [(addr, van_word, bit,
+    pat_word)] the recompiler bakes. Bit assignment is the sorted var order, so
+    the bake manifest and the runtime `flag <n>` lines agree without a side channel."""
+    def _is_cf(w):
+        # Control-flow words cannot be represented as a per-instruction guarded
+        # variant: translate_instruction emits mid-block statements only, and the
+        # block structure is baked from vanilla, so a patched j/jal/branch can't
+        # restructure control flow. Options that inject such words (acediez hooks
+        # into new routines) must use the disc-patch / function-variant path.
+        op = (w >> 26) & 0x3F
+        if op in (0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07):
+            return True                       # regimm / j / jal / beq / bne / blez / bgtz
+        if op == 0x00 and (w & 0x3F) in (0x08, 0x09):
+            return True                       # jr / jalr
+        return False
+
+    cat = cat_of(db)
+    per_opt = {}     # var -> [(addr, van_word, pat_word)]
+    for o in cat:
+        v, t = o["var"], o["type"]
+        if t not in ("checkbox", "radio"):
+            continue
+        try:
+            c = classify_writes(geom, cm, _writes_for(db, base, {v: True}), base_set)
+        except Exception:
+            continue
+        if not c["guarded"]:
+            continue
+        sites = []
+        cf = False
+        for wa, van_hex, pat_hex in c["guarded"]:
+            van_word = int.from_bytes(bytes.fromhex(van_hex), "little")
+            pat_word = int.from_bytes(bytes.fromhex(pat_hex), "little")
+            if _is_cf(pat_word):
+                cf = True
+                break
+            sites.append((wa, van_word, pat_word))
+        if cf:
+            continue    # whole option excluded (has a control-flow injection site)
+        per_opt[v] = sites
+    bits = {v: i for i, v in enumerate(sorted(per_opt))}
+    rows = []
+    for v in sorted(per_opt):
+        for addr, van_word, pat_word in per_opt[v]:
+            rows.append((addr, van_word, bits[v], pat_word))
+    rows.sort(key=lambda r: (r[0], r[2]))
+    return bits, rows
+
+
+def cmd_bake(args):
+    db = _db()
+    geom = Geometry(twr.DEFAULT_VANILLA)
+    cm = CodeMap(RANGES)
+    base = OrderedDict(twr.load_profile(twr.DEFAULT_PROFILE))
+    base_set = _base_set(db, base)
+    bits, rows = _guarded_catalog(db, geom, cm, base, base_set)
+    out = ["# tweaks_bake.toml — compile-free Tweaks guarded-variant manifest",
+           "# (tweaks_prebake bake). Consumed by psxrecomp-game --tweaks-bake.",
+           "format_version = 1", ""]
+    out.append("# option -> flag bit (runtime `flag <n>` in tweaks.state selects it)")
+    for v in sorted(bits):
+        out.append(f"#   bit {bits[v]:3} = {v}")
+    out.append("")
+    for addr, van_word, bit, pat_word in rows:
+        out.append("[[guarded]]")
+        out.append(f'  addr = "0x{addr:08X}"')
+        out.append(f'  van  = "0x{van_word:08X}"')
+        out.append(f"  bit  = {bit}")
+        out.append(f'  word = "0x{pat_word:08X}"')
+    text = "\n".join(out) + "\n"
+    if args.out:
+        Path(args.out).write_text(text, encoding="utf-8")
+        print(f"wrote {args.out}  ({len(bits)} options, {len(rows)} guarded rows)")
+    else:
+        sys.stdout.write(text)
+
+
+# --------------------------------------------------------------------------
 # CLI
 # --------------------------------------------------------------------------
 def cmd_summary(args):
@@ -390,10 +475,19 @@ def cmd_state(args):
     c = classify_writes(geom, cm, writes, base_set)
     out = ["# tweaks.state — runtime tweak directives (tweaks_prebake state).",
            "format_version=1"]
-    # flags: one bit per guarded site (Phase-3 bake selects the variant). Until the
-    # bake lands these are inert; emitted so the flag surface is exercised end-to-end.
-    if c["guarded"]:
-        out.append("flags=0x%X" % ((1 << len(c["guarded"])) - 1))
+    # flags: one `flag <bit>` per ACTIVE guarded option, using the same bit
+    # assignment the bake manifest baked (both from _guarded_catalog, so the
+    # runtime selects exactly the variants the superset binary carries).
+    bits, _rows = _guarded_catalog(db, geom, cm, base, base_set)
+    def _active(val):
+        if val in (False, 0, 0.0, None):
+            return False
+        if isinstance(val, str) and val.strip().lower() in ("", "0", "false", "off"):
+            return False
+        return True
+    for v in sorted(sel):
+        if v in bits and _active(sel[v]):
+            out.append(f"flag {bits[v]}")
     for i, (wa, van, pat) in enumerate(c["param"]):
         pat_imm = int(pat[0:2] + pat[2:4], 16)          # LE low halfword
         out.append(f"param {i} 0x{pat_imm:04X}")
@@ -427,9 +521,10 @@ def main():
     p = sub.add_parser("manifest"); p.add_argument("--out", default="")
     p = sub.add_parser("selection"); p.add_argument("selection"); p.add_argument("--out", default="")
     p = sub.add_parser("state"); p.add_argument("selection"); p.add_argument("--out", default="")
+    p = sub.add_parser("bake"); p.add_argument("--out", default="")
     args = ap.parse_args()
     {"summary": cmd_summary, "manifest": cmd_manifest,
-     "selection": cmd_selection, "state": cmd_state}[args.cmd](args)
+     "selection": cmd_selection, "state": cmd_state, "bake": cmd_bake}[args.cmd](args)
 
 
 if __name__ == "__main__":
