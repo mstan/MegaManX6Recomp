@@ -3,8 +3,14 @@
 # is a separate repo evolving on its own cadence. Update via:
 #   git -C ../psxrecomp rev-parse master > /tmp/sha && \
 #     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
-branch=master
-sha=03c3f79
+branch=feat/mmx6-widescreen
+sha=79cdb12
+# Bumped 2026-07-10 (MMX6 true-wide completion): finite-map reveal sides clear
+#   once per stage generation at GPU linked-list start; only off-map BG packets
+#   are suppressed, so valid opposite-side art and persistent HUD survive. A
+#   targeted HUD packet range re-anchors health/abilities without moving 2D
+#   scenery. Launcher gains a distinct opt-in 21:9 experimental row. OpenGL
+#   screenshot-validated at stage entry and gameplay in both 16:9 and 21:9.
 # Bumped 2026-07-09 (GL/VK mirrored-sprite sliver fix, ISSUES #8): 03c3f79 =
 #   010a281 + exactly four runtime-only commits (merged to psxrecomp master as
 #   184a18a; pinned at the pre-merge head so the tree stays 010a281-lineage —

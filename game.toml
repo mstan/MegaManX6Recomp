@@ -124,6 +124,18 @@ allow_hybrid   = false
 # is the opt-in switch the FOV work plugs into.
 [widescreen]
 full_2d = true
+offer_ultrawide = true # separate launcher row; still experimental
+# The native-wide compositor margins do not exist in PS1 VRAM. At MMX6's finite
+# map edge, clear each synthetic framebuffer side once per stage generation and
+# suppress only off-map BG packets that would repaint stale ring slots. Ordinary
+# valid reveal persistence and the canonical 4:3 frame are untouched.
+clear_reveal = true
+# The health/ability meter is assembled from a stable ordering-table packet
+# pool distinct from the stage tile packets. Move only that half-open source
+# range to the true native-wide left edge; the broad nw_hud_corners heuristic
+# is intentionally left off because MMX6 also draws scenery as fixed sprites.
+nw_left_hud_packet_lo = "0x000E3400"
+nw_left_hud_packet_hi = "0x000E4100"
 
 # True wider FOV for the 2D background. MMX6's per-layer BG renderer (FUN_800270d0)
 # draws 21 (0x15) tile columns x 16 rows from a camera-derived start; these three
@@ -154,6 +166,10 @@ stream_right_site = "0x80027444"
 # / _undercap; identity at 4:3). bufbase_site = driver addu (buffer addr); cap_site = slti.
 bufbase_site = "0x80026dc4"
 cap_site     = "0x80027278"
+# Full tile-ring initializer. Its entry is the precise stage/background dirty
+# event used to invalidate only the old host-side reveal pixels before the new
+# stage submits its background (regen required).
+init_func    = "0x800269f4"
 
 # ── Audit-specific config (consumed by psxrecomp-v4/tools/*.py and tests) ──
 # Schema mirrors psxrecomp-v4/bios/SCPH1001.toml. Paths are relative to the
