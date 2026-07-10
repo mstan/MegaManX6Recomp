@@ -3,9 +3,9 @@
 # is a separate repo evolving on its own cadence. Update via:
 #   git -C ../psxrecomp rev-parse master > /tmp/sha && \
 #     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
-branch=feat/mmx6-widescreen
-sha=e9ca97a
-# Bumped 2026-07-10 (MMX6 true-wide completion): stage init clears synthetic
+branch=master
+sha=c3f4aab
+# Bumped 2026-07-10 (MMX6 true-wide completion, merged framework c3f4aab): stage init clears synthetic
 #   reveal margins once, but the uncertain finite-map packet mask was removed
 #   after screenshot validation exposed black trim over authored stage art.
 #   Targeted HUD packets now anchor by side (player left, enemy right), and the
