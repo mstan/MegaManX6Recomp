@@ -47,7 +47,8 @@ playable preview rather than a certified full playthrough.
 | Renderers | Software **and** OpenGL (GPU); Software is the default this release (see ISSUES.md #7), OpenGL selectable |
 | Widescreen 16:9 | Experimental, opt-in (2D wider field of view) |
 
-See `ISSUES.md` for notes and the remaining enhancement follow-ups.
+Known issues: see [`ISSUES.md`](ISSUES.md) for the current issue log (including
+renderer notes) and the remaining enhancement follow-ups.
 
 ## Features
 

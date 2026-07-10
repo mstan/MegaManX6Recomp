@@ -31,6 +31,16 @@ condition — then fill `fmv_skip_total_table` / `fmv_skip_movie_id` /
 
 ---
 
+## #8 — OpenGL renderer: sprite visual artifacts — OPEN
+
+On the OpenGL renderer, thin stray lines/dashes of sprite-colored pixels can
+appear around some sprites (e.g. around X and near effect sprites). It's
+noticeable during gameplay and in the attract demo. The software renderer does
+not exhibit the artifacting — workaround: select the **software** renderer in
+the launcher. Under active investigation.
+
+---
+
 ## Resolved
 
 ### #7 — OpenGL renderer flicker in the release build — ✅ FIXED
