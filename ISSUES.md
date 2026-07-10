@@ -31,17 +31,27 @@ condition — then fill `fmv_skip_total_table` / `fmv_skip_movie_id` /
 
 ---
 
-## #8 — OpenGL renderer: sprite visual artifacts — OPEN
-
-On the OpenGL renderer, thin stray lines/dashes of sprite-colored pixels can
-appear around some sprites (e.g. around X and near effect sprites). It's
-noticeable during gameplay and in the attract demo. The software renderer does
-not exhibit the artifacting — workaround: select the **software** renderer in
-the launcher. Under active investigation.
-
 ---
 
 ## Resolved
+
+### #8 — OpenGL renderer: sprite visual artifacts — ✅ FIXED
+Root-caused and fixed in psxrecomp (2026-07-09, pinned `03c3f79`, merged to
+master as `184a18a`). Symptom: thin stray lines/dashes of sprite-colored pixels
+around some sprites (worst on right-facing/crouching X, effect sprites, the
+rolling wheel mechaniloids); software renderer unaffected. Mechanism: modern
+GPUs interpolate at fragment centers while the PS1 DDA latches the pixel's
+top-left corner — with the GL/VK sample-grid shift, any **mirrored** (X/Y-
+flipped) 2D sprite sampled one texel low along its flipped axis, painting the
+cel's never-sampled edge row/column as a detached 1px sliver. Fixed with the
+Beetle-PSX `Calc_UVOffsets` model (+1 uv along each decreasing axis) in BOTH
+prim paths (the engine's flipped quads reach the renderer as scaled rects, not
+polys — the first fix missed that), and the whole uv-sampling model was then
+consolidated into one shared `gpu_uv.h` used by GL, Vulkan and software so the
+backends cannot drift again. Verified frame-exact against the software renderer
+(3707 differing pixels → 0 at the deterministic attract frame), user-validated
+in live play, and cross-title regression-gated on Tomba (GL). Ships with the
+next build against pin `03c3f79`+.
 
 ### #7 — OpenGL renderer flicker in the release build — ✅ FIXED
 Root-caused and fixed in psxrecomp (2026-07-03, master `010a281`). Mechanism:

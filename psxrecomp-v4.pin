@@ -4,7 +4,23 @@
 #   git -C ../psxrecomp rev-parse master > /tmp/sha && \
 #     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
 branch=master
-sha=010a281
+sha=03c3f79
+# Bumped 2026-07-09 (GL/VK mirrored-sprite sliver fix, ISSUES #8): 03c3f79 =
+#   010a281 + exactly four runtime-only commits (merged to psxrecomp master as
+#   184a18a; pinned at the pre-merge head so the tree stays 010a281-lineage —
+#   it excludes master's stb-launcher link blocker and any post-010a281
+#   emitter drift). Fix: modern-GPU center-sampled interpolation floored one
+#   texel low on u/v-DECREASING (X/Y-flipped) 2D sprites — thin stray
+#   sprite-colored lines around right-facing/crouching X, effect sprites, the
+#   wheel mechaniloids; GL/VK only, software was always correct. Two fix sites
+#   (gpu.c converts axis-aligned mirrored quads to rect_scaled, so the poly
+#   AND rect paths), then the whole uv model extracted to one shared gpu_uv.h
+#   for GL/VK/SW so the backends can't drift again. Also: always-on display
+#   ring (display_ring_get/aux) for frame-exact cross-renderer forensics.
+#   Validation: frame-exact GL-vs-software diff 3707px -> 0px in the gameplay
+#   area at the deterministic attract frame; MMX6 GL USER-VALIDATED clean;
+#   cross-title gate Tomba GL boot+attract PASS against this exact tree.
+#   Runtime-only; codegen (MIPS->C) UNCHANGED -> NO regen, overlay caches valid.
 # Bumped 2026-07-03 (renderer arc merged): psxrecomp master 010a281 = 4cc757f +
 #   the OpenGL black-frame-flicker fix (exact pending-upload rects, ISSUES #7 —
 #   the reason MMX6 shipped software), native-wide 16:9 GL perf/band fixes, the
