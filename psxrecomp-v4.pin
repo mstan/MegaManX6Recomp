@@ -3,8 +3,14 @@
 # is a separate repo evolving on its own cadence. Update via:
 #   git -C ../psxrecomp rev-parse master > /tmp/sha && \
 #     sed -i "s|^sha=.*|sha=$(cat /tmp/sha)|" psxrecomp-v4.pin
-branch=master
-sha=03c3f79
+branch=feat/mmx6-widescreen
+sha=e9ca97a
+# Bumped 2026-07-10 (MMX6 true-wide completion): stage init clears synthetic
+#   reveal margins once, but the uncertain finite-map packet mask was removed
+#   after screenshot validation exposed black trim over authored stage art.
+#   Targeted HUD packets now anchor by side (player left, enemy right), and the
+#   intro overlay actor cull carries an aspect margin plus a 32px guard. Launcher
+#   retains distinct opt-in 16:9 and 21:9 modes. OpenGL user-validated.
 # Bumped 2026-07-09 (GL/VK mirrored-sprite sliver fix, ISSUES #8): 03c3f79 =
 #   010a281 + exactly four runtime-only commits (merged to psxrecomp master as
 #   184a18a; pinned at the pre-merge head so the tree stays 010a281-lineage —

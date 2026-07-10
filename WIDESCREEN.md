@@ -1,8 +1,37 @@
 # Mega Man X6 — 16:9 Widescreen (true wider FOV)
 
-Status: **in progress** on branch `feat/mmx6-widescreen` (psxrecomp + MegaManX6Recomp).
+Status: **validated prototype** on branch `feat/mmx6-widescreen` (psxrecomp + MegaManX6Recomp).
 Elective "diverge-from-native" enhancement, opt-in like Tomba. Renderer/runtime +
 one gen-time recompiler hook (no gameplay logic changes).
+
+---
+
+## Stage-entry stale reveal cleanup (2026-07-09 spike)
+
+The native-wide compositor persists like VRAM, but its synthetic side margins
+have no PS1-owned pixels underneath them. If MMX6 does not redraw those columns
+on the first frames of a stage transition, the margins can retain pixels from
+the previous scene. This is distinct from the tile-ring freshness bug below.
+
+The prototype adds `[widescreen] clear_reveal = true` plus the exact MMX6
+`[widescreen.bg2d] init_func = "0x800269f4"` stage-generation hook. The hook
+clears both synthetic margins once when a background generation begins. The
+later finite-map side mask was removed: at the intro boundary it could not
+distinguish authored layers entering the reveal from stale ring slots and
+produced a moving black trim over real stage art. The conservative policy now
+prefers a possible stale reveal tile over suppressing valid content. The
+canonical 320-wide image is untouched. The health/ability assembly is identified
+by its stable packet pool `[0x000E3400,0x000E4100)` and corner-anchored by side.
+
+Screenshot validation on OpenGL (1280-wide window):
+
+- 16:9 stage entry: no black boundary mask over authored stage pixels.
+- 16:9 gameplay: HUD at the true left edge; valid right reveal intact.
+- 21:9 gameplay: larger invalid left reveal black, HUD at the true ultrawide
+  edge, canonical/right region intact. A 20-frame motion burst stayed live.
+
+The launcher exposes 21:9 as a separate `Ultrawide (EXPERIMENTAL)` option only
+when `[widescreen] offer_ultrawide = true`; 16:9 remains its own toggle.
 
 ---
 
