@@ -14,16 +14,18 @@ on the first frames of a stage transition, the margins can retain pixels from
 the previous scene. This is distinct from the tile-ring freshness bug below.
 
 The prototype adds `[widescreen] clear_reveal = true` plus the exact MMX6
-`[widescreen.bg2d] init_func = "0x800269f4"` stage-generation hook. At DMA
-ordering-table start, each wide framebuffer's proven finite-map side is cleared
-once; off-map BG packets are suppressed so stale ring slots cannot repaint it.
-Valid opposite-side tiles and the canonical 320-wide image are untouched. The
-health/ability assembly is identified by its stable packet pool
-`[0x000E3400,0x000E4100)` and re-anchored independently to the true wide left.
+`[widescreen.bg2d] init_func = "0x800269f4"` stage-generation hook. The hook
+clears both synthetic margins once when a background generation begins. The
+later finite-map side mask was removed: at the intro boundary it could not
+distinguish authored layers entering the reveal from stale ring slots and
+produced a moving black trim over real stage art. The conservative policy now
+prefers a possible stale reveal tile over suppressing valid content. The
+canonical 320-wide image is untouched. The health/ability assembly is identified
+by its stable packet pool `[0x000E3400,0x000E4100)` and corner-anchored by side.
 
 Screenshot validation on OpenGL (1280-wide window):
 
-- 16:9 stage entry: invalid left reveal black, dialogue/canonical center intact.
+- 16:9 stage entry: no black boundary mask over authored stage pixels.
 - 16:9 gameplay: HUD at the true left edge; valid right reveal intact.
 - 21:9 gameplay: larger invalid left reveal black, HUD at the true ultrawide
   edge, canonical/right region intact. A 20-frame motion burst stayed live.

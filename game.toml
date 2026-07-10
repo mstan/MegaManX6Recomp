@@ -125,17 +125,29 @@ allow_hybrid   = false
 [widescreen]
 full_2d = true
 offer_ultrawide = true # separate launcher row; still experimental
-# The native-wide compositor margins do not exist in PS1 VRAM. At MMX6's finite
-# map edge, clear each synthetic framebuffer side once per stage generation and
-# suppress only off-map BG packets that would repaint stale ring slots. Ordinary
-# valid reveal persistence and the canonical 4:3 frame are untouched.
+# The native-wide compositor margins do not exist in PS1 VRAM. Clear them once
+# when MMX6 starts a new background generation, but do not keep masking a guessed
+# finite-map side afterward: authored layers enter the reveal at different times,
+# and the ongoing mask caused black trim over real stage art. Prefer a possible
+# stale reveal tile over suppressing valid content.
 clear_reveal = true
-# The health/ability meter is assembled from a stable ordering-table packet
-# pool distinct from the stage tile packets. Move only that half-open source
-# range to the true native-wide left edge; the broad nw_hud_corners heuristic
-# is intentionally left off because MMX6 also draws scenery as fixed sprites.
+# The player and enemy health/ability meters share a stable ordering-table
+# packet pool distinct from the stage tile packets. Corner-anchor only that
+# half-open source range (left-third packets left, right-third packets right);
+# the broad heuristic stays off because MMX6 also draws scenery as fixed sprites.
 nw_left_hud_packet_lo = "0x000E3400"
 nw_left_hud_packet_hi = "0x000E4100"
+
+# Intro-stage overlay actor deactivation. The green robot's 32px bounds are
+# discarded at the native 320px viewport, so its whole sprite pops while still
+# visible in the reveal. Move the left bias and signed right compare out by the
+# live widescreen margin, plus a 32px off-screen guard (roughly an 18:9 keepalive
+# window while presenting 16:9). Overlay variants with different bytes at these
+# addresses remain untouched; all hooks are identity at 4:3.
+[widescreen.cull]
+guard_pixels = 32
+bias_sites = ["0x801F2118"]
+slti_sites = ["0x801F210C"]
 
 # True wider FOV for the 2D background. MMX6's per-layer BG renderer (FUN_800270d0)
 # draws 21 (0x15) tile columns x 16 rows from a camera-derived start; these three
