@@ -28,7 +28,10 @@ This project inherits, in order:
   per-game `game.toml` config — never in `generated/*.c`. A fix that only this
   game needs is a smell; prefer a class fix that the next title inherits.
 - After every run, resolve all dispatch misses before any other debugging.
-- The framework version this project builds against is pinned in
-  `psxrecomp-v4.pin`. The source disc is the **v1.1** revision — record its
+- The framework version this project builds against is recorded as the
+  `psxrecomp-v4` git submodule pointer (see `.gitmodules`); the former
+  `psxrecomp-v4.pin` file was retired in favor of the submodule (its changelog
+  is preserved in `docs/framework_pin_history.md`). The source disc is the
+  **v1.1** revision — record its
   hashes (see `ghidra/instructions.txt`) so a future dump can be verified
   identical before blaming a regression.
