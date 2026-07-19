@@ -1,5 +1,11 @@
 # MegaManX6Recomp
 
+> _Mega Man X6 Recompiled is a byproduct of developing **psxrecomp**, the
+> static-recompilation framework it's built on. Driving the framework forward is
+> the priority, so my time for this particular title is limited — I ask for your
+> patience with its continued development, and community contributions are warmly
+> welcomed._
+
 Mega Man X6 (USA, SLUS-01395, disc revision **v1.1**) statically recompiled to a
 native PC executable with [PSXRecomp](https://github.com/mstan/psxrecomp) — the
 same framework behind [TombaRecomp](https://github.com/mstan/TombaRecomp).
