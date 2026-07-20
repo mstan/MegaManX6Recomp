@@ -17,8 +17,19 @@ include("${PSXRECOMP_V4_ROOT}/runtime/runtime.cmake")
 set(GAME_GENERATED_DIR "generated" CACHE STRING
     "Directory (relative to source) holding the recompiled game C")
 
-set(GAME_GENERATED_FULL
-    "${CMAKE_CURRENT_SOURCE_DIR}/${GAME_GENERATED_DIR}/SLUS_013.95_full.c")
+# The current recompiler emits the game as split translation units. Keep the
+# monolithic fallback for older generated/ directories used by variant builds.
+file(GLOB GAME_GENERATED_FULL_SHARDS CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/${GAME_GENERATED_DIR}/SLUS_013.95_full_*.c")
+if(GAME_GENERATED_FULL_SHARDS)
+    set(GAME_GENERATED_FULL ${GAME_GENERATED_FULL_SHARDS})
+    list(POP_FRONT GAME_GENERATED_FULL GAME_GENERATED_PRIMARY)
+    set(GAME_GENERATED_EXTRAS ${GAME_GENERATED_FULL})
+    set(GAME_GENERATED_FULL ${GAME_GENERATED_PRIMARY})
+else()
+    set(GAME_GENERATED_FULL
+        "${CMAKE_CURRENT_SOURCE_DIR}/${GAME_GENERATED_DIR}/SLUS_013.95_full.c")
+endif()
 set(GAME_GENERATED_DISPATCH
     "${CMAKE_CURRENT_SOURCE_DIR}/${GAME_GENERATED_DIR}/SLUS_013.95_dispatch.c")
 
@@ -30,6 +41,7 @@ psxrecomp_v4_add_runtime_target(psx-runtime
     DEFAULT_BIOS_PATH "${PSXRECOMP_V4_ROOT}/bios/SCPH1001.BIN"
     DEFAULT_GAME_CONFIG_PATH "game.toml"
     EXE_NAME "mmx6-runtime"
+    EXTRAS_SOURCES ${GAME_GENERATED_EXTRAS}
 )
 
 # Shared recomp-ui Dear ImGui launcher. Wires in the PSX-themed launcher UI
@@ -56,6 +68,7 @@ if(PSX_BUILD_COSIM)
         WINDOW_TITLE "MMX6-cosim"
         DEFAULT_BIOS_PATH "${PSXRECOMP_V4_ROOT}/bios/SCPH1001.BIN"
         DEFAULT_GAME_CONFIG_PATH "game.toml"
+        EXTRAS_SOURCES ${GAME_GENERATED_EXTRAS}
         COSIM
     )
 endif()

@@ -1,5 +1,5 @@
 param(
-    [string]$Version = "v0.0.2-alpha",
+    [string]$Version = "v0.0.6-alpha",
     [string]$BuildDir = "build-release",
     # Where your accumulated overlay cache lives (the dir compile_overlays.py
     # writes to, per game.toml overlay_autocompile_cmd --out-dir). Bundled as a
@@ -215,7 +215,7 @@ if (Test-Path $CacheSrc) {
         New-Item -ItemType Directory -Force (Split-Path $dest) | Out-Null
         Copy-Item $f.FullName $dest
     }
-    $dllCount = (Get-ChildItem $CacheDst -Recurse -Filter *.dll).Count
+    $dllCount = @($cacheFiles | Where-Object { $_.Extension -eq ".dll" }).Count
     Write-Host "Bundled overlay cache: $dllCount native overlay DLL(s)"
 } else {
     Write-Warning "No overlay cache found at $CacheSrc - releasing without bundled cache"

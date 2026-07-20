@@ -55,3 +55,21 @@ required) and broader controller support.
   launches.
 - The overlay cache grows as you play; please keep `overlay_captures.json`
   private — it contains game code read from your disc (see README).
+
+# Mega Man X6 Recompiled — v0.0.6-alpha
+
+This release replaces the old RmlUi launcher with the shared Dear ImGui
+`recomp-ui` launcher. Its DPI-independent layout keeps launcher text, settings,
+and the Launch button readable and reachable on Steam Deck and high-resolution
+or scaled Windows displays, addressing issues #1 and #3.
+
+## Launcher and packaging
+
+- Uses the current shared `recomp-ui` PSX profile for BIOS, disc, controller,
+  renderer, memory-card, and game-option configuration.
+- Bundles the matching launcher fonts and game-specific art beside the
+  executable.
+- Keeps the complete settings surface accessible without relying on the old
+  fixed-size RmlUi document layout.
+
+All existing alpha caveats and game-compatibility notes above still apply.
