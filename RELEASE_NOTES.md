@@ -1,3 +1,20 @@
+# Mega Man X6 Recompiled - v0.0.7-alpha
+
+This release focuses on the fullscreen launch path. The launcher now exposes the
+shared tri-state fullscreen picker for MMX6: windowed, borderless windowed
+fullscreen, or exclusive fullscreen.
+
+## New in v0.0.7-alpha
+
+- **Borderless windowed fullscreen.** MMX6 now uses the same multi-option
+  fullscreen picker as the shared launcher surface, with borderless windowed and
+  exclusive fullscreen available separately.
+- **CUE startup fallback.** If a selected `.cue` has a same-named `.bin` beside
+  it, the runtime launches with that `.bin` path. This avoids startup failures
+  from CUE files that validate but do not mount cleanly in the runtime path.
+
+All existing alpha caveats and game-compatibility notes below still apply.
+
 # Mega Man X6 Recompiled — v0.0.2-alpha
 
 A maintenance release on top of the first public build. Mega Man X6 still boots

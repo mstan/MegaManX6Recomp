@@ -1,5 +1,5 @@
 param(
-    [string]$Version = "v0.0.6-alpha",
+    [string]$Version = "v0.0.7-alpha",
     [string]$BuildDir = "build-release",
     # Where your accumulated overlay cache lives (the dir compile_overlays.py
     # writes to, per game.toml overlay_autocompile_cmd --out-dir). Bundled as a
@@ -36,7 +36,11 @@ function Invoke-Native {
     if ($code -ne 0) { throw "$What failed (exit $code)" }
 }
 
-$RecompDir = Resolve-Path (Join-Path $Root "..\psxrecomp\recompiler\build")
+$FrameworkRoot = Join-Path $Root "psxrecomp-v4"
+if (-not (Test-Path $FrameworkRoot)) {
+    $FrameworkRoot = Join-Path $Root "..\psxrecomp"
+}
+$RecompDir = Resolve-Path (Join-Path $FrameworkRoot "recompiler\build")
 Invoke-Native { cmake --build $RecompDir --target psxrecomp-game -j $env:NUMBER_OF_PROCESSORS } "recompiler build"
 & (Join-Path $RecompDir "psxrecomp-game.exe") --config (Join-Path $Root "game.toml")
 if ($LASTEXITCODE -ne 0) { throw "game regen failed" }
@@ -191,8 +195,8 @@ cap_site          = "0x80027278"
 # Ship .dll + .ranges only (skip the _patched.c intermediates and the reserved
 # sljit/ namespace, which has no on-disk blobs), and ONLY the dir matching THIS
 # build's codegen tag -- a stale-hash dir is dead weight the runtime never loads.
-$RecompTools = Resolve-Path (Join-Path $Root "..\psxrecomp\tools")
-$RecompInc   = Resolve-Path (Join-Path $Root "..\psxrecomp\runtime\include")
+$RecompTools = Resolve-Path (Join-Path $FrameworkRoot "tools")
+$RecompInc   = Resolve-Path (Join-Path $FrameworkRoot "runtime\include")
 $tagScript = Join-Path $env:TEMP ("psx_cgtag_{0}.py" -f $PID)
 @"
 import importlib.util
