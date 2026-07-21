@@ -112,8 +112,8 @@ memcard_dir = "saves"
 # whole machine during a load, preserving timing).
 disc_speed = "1x"
 
-# BIOS backend. false = boot through the selected retail SCPH1001.BIN BIOS.
-bios_hle = false
+# BIOS backend. true skips the PlayStation boot animation with the HLE path.
+bios_hle = true
 
 # Deprecated alias for the HLE boot skip alone (kept for old settings files).
 fast_boot  = false
