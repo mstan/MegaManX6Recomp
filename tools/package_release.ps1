@@ -112,11 +112,8 @@ memcard_dir = "saves"
 # whole machine during a load, preserving timing).
 disc_speed = "1x"
 
-# BIOS backend. true (the release default) = HLE: the PlayStation boot
-# animation is skipped (the game's own kernel setup and disc load still run
-# for real, fast-forwarded), and a few kernel services run natively. Set to
-# false for the fully faithful BIOS (real boot logos included).
-bios_hle = true
+# BIOS backend. false = boot through the selected retail SCPH1001.BIN BIOS.
+bios_hle = false
 
 # Deprecated alias for the HLE boot skip alone (kept for old settings files).
 fast_boot  = false
