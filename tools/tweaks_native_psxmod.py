@@ -6,15 +6,18 @@ changes have been assigned to stable stock-disc ranges or guarded executable
 operations.  Reference patched images are conversion oracles, never runtime
 payloads.
 
-The current reviewed slice contains Title Screen -> Rockman X6 (Japan) and the
-English Retranslation. The latter is converted as logical ROCK_X6.DAT records,
-not as the s02 rebuilt container, and includes only its owned
-ScriptTextDisplay/ScriptMenuAlign executable edits.
+The reviewed slice contains independent title, script, intro/demo, and
+Nightmare-effect features. The retranslation is converted as logical
+ROCK_X6.DAT records, not as the s02 rebuilt container, and includes only its
+owned ScriptTextDisplay/ScriptMenuAlign executable edits. Every simple Tweaks
+option is re-resolved from the patcher's source database at conversion time;
+PatchList_Base writes are evidence only and are never inherited implicitly.
 """
 
 from __future__ import annotations
 
 import argparse
+from contextlib import ExitStack
 import hashlib
 import json
 import re
@@ -50,6 +53,7 @@ DEFAULT_TWEAKS = first_existing(
 )
 DEFAULT_STOCK = DEFAULT_TWEAKS / "Mega Man X6 (USA) (v1.1).bin"
 DEFAULT_ORACLE_DIR = ROOT / "build-mod-platform" / "test-mod-variants"
+DEFAULT_MATRIX_DIR = DEFAULT_ORACLE_DIR / "tweaks-matrix"
 DEFAULT_PATCHER_DATA = DEFAULT_TWEAKS / "_patcher" / "run_extracted" / "data"
 DEFAULT_PATCHER_SOURCE = (
     DEFAULT_TWEAKS
@@ -179,6 +183,147 @@ class Patch:
     replace: bytes
 
 
+@dataclass(frozen=True)
+class FeatureSpec:
+    """One user-facing feature and its exact reviewed Tweaks source closure."""
+
+    feature_id: str
+    name: str
+    description: str
+    group: str
+    source_option: str
+    target: str
+    expected_writes: tuple[tuple[int, str], ...]
+
+
+@dataclass(frozen=True)
+class IndexedMember:
+    member_id: int
+    file_offset: int
+    payload: bytes
+
+
+INTRO_FEATURES = (
+    FeatureSpec(
+        "skip_capcom_video",
+        "Skip Capcom Video",
+        "Skip the Capcom logo video during boot.",
+        "Game Intro",
+        "IntroSkip01",
+        "main_exe",
+        (
+            (0x1D92F1B8, "00000000"),
+            (0x1D92F200, "00000000"),
+        ),
+    ),
+    FeatureSpec(
+        "skip_opening_video",
+        "Skip Opening Video",
+        "Skip the opening movie during boot.",
+        "Game Intro",
+        "IntroSkip02",
+        "main_exe",
+        ((0x1D92FB78, "00000000"),),
+    ),
+    FeatureSpec(
+        "disable_title_demos",
+        "Disable Title Demos",
+        "Keep the title-screen demo countdown from starting attract-mode demos.",
+        "Game Intro",
+        "IntroSkip03",
+        "main_exe",
+        ((0x1D93082C, "00000000"),),
+    ),
+)
+
+NIGHTMARE_FEATURES = (
+    FeatureSpec(
+        "disable_nightmare_bug",
+        "Disable Nightmare Bug",
+        "Disable the Nightmare Bug stage effect.",
+        "Nightmare Effects",
+        "NightmareDisable01",
+        "rock_x6_bin",
+        ((0x1DA95A0C, "000000"),),
+    ),
+    FeatureSpec(
+        "disable_nightmare_ice",
+        "Disable Nightmare Ice",
+        "Disable the Nightmare Ice stage effect.",
+        "Nightmare Effects",
+        "NightmareDisable02",
+        "rock_x6_bin",
+        ((0x1DA95A0F, "000000"),),
+    ),
+    FeatureSpec(
+        "disable_nightmare_fire",
+        "Disable Nightmare Fire",
+        "Disable the Nightmare Fire effect, including the North Pole walls.",
+        "Nightmare Effects",
+        "NightmareDisable03",
+        "rock_x6_bin",
+        (
+            (0x1DA95A12, "000000"),
+            (0x1D9F3AD8, "2FBC030800000000"),
+            (0x1DB00414, "A1B50308"),
+        ),
+    ),
+    FeatureSpec(
+        "disable_nightmare_iron",
+        "Disable Nightmare Iron",
+        "Disable the Nightmare Iron stage effect.",
+        "Nightmare Effects",
+        "NightmareDisable04",
+        "rock_x6_bin",
+        ((0x1DA95A15, "000000"),),
+    ),
+    FeatureSpec(
+        "disable_nightmare_cube",
+        "Disable Nightmare Cube",
+        "Disable the Nightmare Cube stage effect.",
+        "Nightmare Effects",
+        "NightmareDisable05",
+        "rock_x6_bin",
+        ((0x1DA95A18, "000000"),),
+    ),
+    FeatureSpec(
+        "disable_nightmare_rain",
+        "Disable Nightmare Rain",
+        "Disable the Nightmare Rain stage effect.",
+        "Nightmare Effects",
+        "NightmareDisable06",
+        "rock_x6_bin",
+        ((0x1DA95A1B, "000000"),),
+    ),
+    FeatureSpec(
+        "disable_nightmare_mirror",
+        "Disable Nightmare Mirror",
+        "Disable the Nightmare Mirror stage effect.",
+        "Nightmare Effects",
+        "NightmareDisable07",
+        "rock_x6_bin",
+        ((0x1DA95A1E, "000000"),),
+    ),
+    FeatureSpec(
+        "disable_nightmare_dark",
+        "Disable Nightmare Dark",
+        "Disable the Nightmare Dark stage effect.",
+        "Nightmare Effects",
+        "NightmareDisable08",
+        "rock_x6_bin",
+        ((0x1DA95A21, "000000"),),
+    ),
+)
+
+SIMPLE_FEATURES = INTRO_FEATURES + NIGHTMARE_FEATURES
+FEATURE_SPECS = {item.feature_id: item for item in SIMPLE_FEATURES}
+ALL_FEATURE_IDS = (
+    "title_screen",
+    "retranslation",
+    *(item.feature_id for item in SIMPLE_FEATURES),
+)
+
+
 TITLE_ASSETS = (
     (
         "background_tileset",
@@ -236,6 +381,286 @@ def raw_to_user_offset(raw_offset: int) -> int:
 def require_file(path: Path, description: str) -> None:
     if not path.is_file():
         raise FileNotFoundError(f"{description} not found: {path}")
+
+
+def indexed_archive_members(data: bytes) -> dict[int, IndexedMember]:
+    """Parse the strict {id,size} table used by ROCK_X6.BIN.
+
+    The table occupies the first 0x800-byte sector. Payloads follow in table
+    order and are independently rounded up to 0x800 bytes. Requiring the entire
+    layout prevents a plausible-looking raw offset from becoming ownership.
+    """
+    if len(data) < 2 * USER_SECTOR or len(data) % USER_SECTOR:
+        raise ValueError("indexed archive is not sector aligned")
+    entries: list[tuple[int, int]] = []
+    for offset in range(0, USER_SECTOR, 8):
+        member_id, size = struct.unpack_from("<II", data, offset)
+        if member_id == 0 and size == 0:
+            break
+        if (
+            member_id == 0
+            or size < 4
+            or size > 2_000_000
+            or (entries and member_id <= entries[-1][0])
+        ):
+            raise ValueError("invalid indexed archive table")
+        entries.append((member_id, size))
+    if len(entries) < 4:
+        raise ValueError("indexed archive has too few members")
+    cursor = USER_SECTOR
+    members: dict[int, IndexedMember] = {}
+    for member_id, size in entries:
+        if cursor + size > len(data):
+            raise ValueError(f"indexed member {member_id} is truncated")
+        members[member_id] = IndexedMember(
+            member_id, cursor, data[cursor : cursor + size]
+        )
+        cursor = (cursor + size + USER_SECTOR - 1) // USER_SECTOR * USER_SECTOR
+    if cursor > len(data) or len(data) - cursor > USER_SECTOR:
+        raise ValueError("indexed archive layout does not account for the file")
+    return members
+
+
+def containing_member(
+    members: dict[int, IndexedMember], file_offset: int, size: int
+) -> tuple[IndexedMember, int]:
+    for member in members.values():
+        begin = member.file_offset
+        if begin <= file_offset and file_offset + size <= begin + len(member.payload):
+            return member, file_offset - begin
+    raise ValueError(
+        f"ROCK_X6.BIN range 0x{file_offset:X}+0x{size:X} has no member owner"
+    )
+
+
+def read_iso_file_range(
+    image: RawMode2Image, name: str, file_offset: int, size: int
+) -> bytes:
+    entry = image.entries[name]
+    if file_offset < 0 or file_offset + size > entry.size:
+        raise ValueError(
+            f"{name} range 0x{file_offset:X}+0x{size:X} is outside the file"
+        )
+    return image.read_user(entry.lba * USER_SECTOR + file_offset, size)
+
+
+def resolve_source_writes(
+    specs: tuple[FeatureSpec, ...],
+    patcher_source: Path,
+    patcher_data: Path,
+) -> dict[str, list[tuple[int, bytes]]]:
+    """Resolve each feature through the ported Tweaks engine, fail closed.
+
+    The source closure must be exactly the selected option after removing the
+    patcher's shared B01 base list. This is the guard against accidentally
+    converting common hacks merely because they appear in a patched image.
+    """
+    if not specs:
+        return {}
+    try:
+        import tweaks_engine as engine
+    except ImportError as error:
+        raise RuntimeError("cannot import tools/tweaks_engine.py") from error
+
+    src_dir = patcher_source.parent.parent
+    profile_path = patcher_data.parent / "profiles" / "default.x6tweaksprofile"
+    require_file(profile_path, "Tweaks default profile")
+    db = engine.twr.TweaksDB(src_dir)
+    base = engine.twr.load_profile(profile_path)
+    result: dict[str, list[tuple[int, bytes]]] = {}
+    for spec in specs:
+        merged = dict(base)
+        merged[spec.source_option] = "1"
+        _normalized, patchfile, patch_list, values, synth = engine._assemble(
+            db, merged, base
+        )
+        inherited = set(db.patchlist_base) | set(db.patchlist_script)
+        owned = [name for name in patch_list if name not in inherited]
+        if patchfile != "b01" or owned != [spec.source_option]:
+            raise AssertionError(
+                f"{spec.source_option} source closure changed: "
+                f"patchfile={patchfile!r}, owned={owned!r}"
+            )
+        writes: list[tuple[int, bytes]] = []
+        for name in owned:
+            for data_hex, raw_offset in engine.expand_entry(
+                db, name, patchfile, values, synth
+            ):
+                for split_hex, split_offset in engine.ecc_split(
+                    data_hex, raw_offset
+                ):
+                    writes.append((split_offset, bytes.fromhex(split_hex)))
+        expected = tuple(
+            (offset, bytes.fromhex(payload))
+            for offset, payload in spec.expected_writes
+        )
+        if tuple(writes) != expected:
+            actual = [(f"0x{o:X}", data.hex().upper()) for o, data in writes]
+            raise AssertionError(
+                f"{spec.source_option} source writes changed: {actual!r}"
+            )
+        result[spec.feature_id] = writes
+    return result
+
+
+def build_simple_feature_ops(
+    stock: RawMode2Image,
+    b01_base: RawMode2Image,
+    intro_oracles: tuple[RawMode2Image, ...],
+    nightmare_oracles: tuple[RawMode2Image, ...],
+    specs: tuple[FeatureSpec, ...],
+    patcher_source: Path,
+    patcher_data: Path,
+) -> tuple[list[Patch], list[Overlay], dict]:
+    """Convert reviewed single-option features by semantic stock identity."""
+    source_writes = resolve_source_writes(specs, patcher_source, patcher_data)
+    stock_load = struct.unpack("<I", stock.read_file(SLUS_NAME)[0x18:0x1C])[0]
+    b01_bin = b01_base.read_file("ROCK_X6.BIN")
+    stock_bin = stock.read_file("ROCK_X6.BIN")
+    b01_members = indexed_archive_members(b01_bin)
+    stock_members = indexed_archive_members(stock_bin)
+    oracle_member_sets = [
+        indexed_archive_members(image.read_file("ROCK_X6.BIN"))
+        for image in nightmare_oracles
+    ]
+    patches: list[Patch] = []
+    overlays: list[Overlay] = []
+    evidence: dict[str, dict] = {}
+    for spec in specs:
+        operations = []
+        for raw_offset, replacement in source_writes[spec.feature_id]:
+            b01_user_offset = raw_to_user_offset(raw_offset)
+            entry, b01_file_offset = b01_base.containing_file(
+                b01_user_offset, len(replacement)
+            )
+            if spec.target == "main_exe":
+                if entry.name != SLUS_NAME:
+                    raise AssertionError(
+                        f"{spec.source_option} targets {entry.name}, expected {SLUS_NAME}"
+                    )
+                expected = read_iso_file_range(
+                    b01_base, entry.name, b01_file_offset, len(replacement)
+                )
+                stock_expected = read_iso_file_range(
+                    stock, entry.name, b01_file_offset, len(replacement)
+                )
+                if stock_expected != expected:
+                    raise AssertionError(
+                        f"{spec.source_option} depends on a B01 SLUS rewrite"
+                    )
+                for oracle in intro_oracles:
+                    if (
+                        read_iso_file_range(
+                            oracle, entry.name, b01_file_offset, len(replacement)
+                        )
+                        != replacement
+                    ):
+                        raise AssertionError(
+                            f"{oracle.path.name} lacks {spec.source_option}"
+                        )
+                address = stock_load + b01_file_offset - USER_SECTOR
+                patches.append(
+                    Patch(
+                        spec.feature_id,
+                        spec.source_option,
+                        address,
+                        expected,
+                        replacement,
+                    )
+                )
+                operations.append(
+                    {
+                        "kind": "guarded-main-exe-patch",
+                        "source_raw_offset": raw_offset,
+                        "iso_file": entry.name,
+                        "file_offset": b01_file_offset,
+                        "guest_address": address,
+                        "size": len(replacement),
+                        "expected": expected.hex().upper(),
+                        "replace": replacement.hex().upper(),
+                    }
+                )
+                continue
+
+            if spec.target != "rock_x6_bin" or entry.name != "ROCK_X6.BIN":
+                raise AssertionError(
+                    f"{spec.source_option} has unsupported target {entry.name}"
+                )
+            source_member, relative_offset = containing_member(
+                b01_members, b01_file_offset, len(replacement)
+            )
+            stock_member = stock_members.get(source_member.member_id)
+            if stock_member is None:
+                raise AssertionError(
+                    f"stock lacks ROCK_X6.BIN member {source_member.member_id}"
+                )
+            expected = source_member.payload[
+                relative_offset : relative_offset + len(replacement)
+            ]
+            stock_expected = stock_member.payload[
+                relative_offset : relative_offset + len(replacement)
+            ]
+            if stock_expected != expected:
+                raise AssertionError(
+                    f"{spec.source_option} depends on a B01 member rewrite"
+                )
+            for oracle, members in zip(nightmare_oracles, oracle_member_sets):
+                oracle_member = members.get(source_member.member_id)
+                if (
+                    oracle_member is None
+                    or oracle_member.payload[
+                        relative_offset : relative_offset + len(replacement)
+                    ]
+                    != replacement
+                ):
+                    raise AssertionError(
+                        f"{oracle.path.name} lacks {spec.source_option} at "
+                        f"member {source_member.member_id}+0x{relative_offset:X}"
+                    )
+            file_offset = stock_member.file_offset + relative_offset
+            user_offset = (
+                stock.entries["ROCK_X6.BIN"].lba * USER_SECTOR + file_offset
+            )
+            overlays.append(
+                Overlay(
+                    spec.feature_id,
+                    spec.source_option,
+                    user_offset,
+                    expected,
+                    replacement,
+                    source=spec.source_option,
+                    raw_offset=raw_offset,
+                    iso_file="ROCK_X6.BIN",
+                    file_offset=file_offset,
+                )
+            )
+            operations.append(
+                {
+                    "kind": "guarded-indexed-member-overlay",
+                    "source_raw_offset": raw_offset,
+                    "iso_file": "ROCK_X6.BIN",
+                    "member_id": source_member.member_id,
+                    "member_relative_offset": relative_offset,
+                    "file_offset": file_offset,
+                    "disc_user_offset": user_offset,
+                    "size": len(replacement),
+                    "expected": expected.hex().upper(),
+                    "replace": replacement.hex().upper(),
+                    "stock_member_sha256": sha256(stock_member.payload),
+                }
+            )
+        evidence[spec.feature_id] = {
+            "status": "ready-pending-live-smoke"
+            if spec in INTRO_FEATURES
+            else "ready",
+            "source_selection": {spec.source_option: 1},
+            "common_base_writes_inherited": 0,
+            "semantic_operations": operations,
+            "oracle_count": (
+                len(intro_oracles) if spec in INTRO_FEATURES else len(nightmare_oracles)
+            ),
+        }
+    return patches, overlays, evidence
 
 
 def build_title_overlays(
@@ -602,6 +1027,7 @@ def build_retranslation_ops(
         raise AssertionError("s02 base unexpectedly changes ROCK_X6.BIN")
     stock_records = dat_records(stock_dat)
     s02_records = dat_records(s02_dat)
+    script_records = dat_records(script_oracle.read_file("ROCK_X6.DAT"))
     if len(SCRIPT_SUBASSETS) != 61:
         raise AssertionError("reviewed script outer-record count changed")
     if sum(len(items) for items in SCRIPT_SUBASSETS.values()) != 82:
@@ -614,12 +1040,15 @@ def build_retranslation_ops(
         raise AssertionError("reviewed script record modes are inconsistent")
 
     custom_records: dict[int, bytes] = {}
+    owned_replacements: dict[int, dict[int, Subasset]] = {}
     subasset_evidence = []
     for record_id, owned in sorted(SCRIPT_SUBASSETS.items()):
         original = stock_records[record_id]
         source = s02_records[record_id]
+        oracle = script_records[record_id]
         stock_subassets = parse_subassets(original)
         s02_subassets = parse_subassets(source)
+        oracle_subassets = parse_subassets(oracle)
         # Prove the canonical builder preserves a stock outer exactly before
         # changing any feature-owned nested asset.
         if build_outer_record(stock_subassets) != original.payload:
@@ -627,6 +1056,7 @@ def build_retranslation_ops(
                 f"stock outer record {record_id} is not canonical"
             )
         custom_subassets = list(stock_subassets)
+        owned_replacements[record_id] = {}
         for index, (expected_type, expected_size) in sorted(owned.items()):
             replacement = s02_subassets[index]
             if replacement.asset_type != expected_type:
@@ -643,7 +1073,22 @@ def build_retranslation_ops(
                     f"0x{len(replacement.payload):X}, "
                     f"expected 0x{expected_size:X}"
                 )
+            try:
+                oracle_replacement = oracle_subassets[index]
+            except IndexError as error:
+                raise AssertionError(
+                    f"script oracle lacks record {record_id} subasset {index}"
+                ) from error
+            if (
+                oracle_replacement.asset_type != replacement.asset_type
+                or oracle_replacement.payload != replacement.payload
+            ):
+                raise AssertionError(
+                    f"script oracle does not contain owned record "
+                    f"{record_id} subasset {index}"
+                )
             custom_subassets[index] = replacement
+            owned_replacements[record_id][index] = replacement
             subasset_evidence.append(
                 {
                     "record_id": record_id,
@@ -673,24 +1118,88 @@ def build_retranslation_ops(
         if len(target_payload) == original.size:
             equal_size_ids.append(record_id)
             record_start = stock_dat_start + original.sector * USER_SECTOR
-            overlays.append(
-                Overlay(
-                    feature="retranslation",
-                    label=f"record-{record_id:03d}",
-                    user_offset=record_start,
-                    expected=original.payload,
-                    replace=target_payload,
-                    iso_file="ROCK_X6.DAT",
-                    file_offset=original.sector * USER_SECTOR,
-                )
+            stock_subassets = parse_subassets(original)
+            target_record = DatRecord(
+                record_id, original.sector, original.size, target_payload
             )
+            for subasset_index, replacement in sorted(
+                owned_replacements[record_id].items()
+            ):
+                stock_payload_offset = subasset_payload_offset(
+                    original, subasset_index
+                )
+                target_payload_offset = subasset_payload_offset(
+                    target_record, subasset_index
+                )
+                if stock_payload_offset != target_payload_offset:
+                    raise AssertionError(
+                        f"in-place record {record_id} subasset "
+                        f"{subasset_index} shifts later assets"
+                    )
+                expected = stock_subassets[subasset_index].payload
+                stock_allocation = (
+                    len(expected) + USER_SECTOR - 1
+                ) // USER_SECTOR * USER_SECTOR
+                target_allocation = (
+                    len(replacement.payload) + USER_SECTOR - 1
+                ) // USER_SECTOR * USER_SECTOR
+                if stock_allocation != target_allocation:
+                    raise AssertionError(
+                        f"in-place record {record_id} subasset "
+                        f"{subasset_index} changes its allocation"
+                    )
+                expected_slot = original.payload[
+                    stock_payload_offset : stock_payload_offset + stock_allocation
+                ]
+                replacement_slot = target_payload[
+                    target_payload_offset : target_payload_offset + target_allocation
+                ]
+                overlays.append(
+                    Overlay(
+                        feature="retranslation",
+                        label=(
+                            f"record-{record_id:03d}-"
+                            f"subasset-{subasset_index:02d}"
+                        ),
+                        user_offset=record_start + stock_payload_offset,
+                        expected=expected_slot,
+                        replace=replacement_slot,
+                        iso_file="ROCK_X6.DAT",
+                        file_offset=(
+                            original.sector * USER_SECTOR + stock_payload_offset
+                        ),
+                    )
+                )
+                if len(expected) != len(replacement.payload):
+                    size_offset = 8 + subasset_index * 8 + 4
+                    overlays.append(
+                        Overlay(
+                            feature="retranslation",
+                            label=(
+                                f"record-{record_id:03d}-"
+                                f"subasset-{subasset_index:02d}-size"
+                            ),
+                            user_offset=record_start + size_offset,
+                            expected=struct.pack("<I", len(expected)),
+                            replace=struct.pack("<I", len(replacement.payload)),
+                            iso_file="ROCK_X6.DAT",
+                            file_offset=(
+                                original.sector * USER_SECTOR + size_offset
+                            ),
+                        )
+                    )
             record_evidence.append(
                 {
                     "id": record_id,
-                    "mode": "in-place",
+                    "mode": "owned-subassets-in-place",
                     "stock_sector": original.sector,
-                    "size": len(target_payload),
-                    "sha256": sha256(target_payload),
+                    "owned_subasset_indices": sorted(
+                        owned_replacements[record_id]
+                    ),
+                    "owned_bytes": sum(
+                        len(item.payload)
+                        for item in owned_replacements[record_id].values()
+                    ),
                 }
             )
             continue
@@ -828,6 +1337,12 @@ def build_retranslation_ops(
         "relocated_start_sector": pack_first_sector,
         "relocated_sectors": packed_sectors,
         "stock_znull_sectors": znull_sectors,
+        "composition_limit": (
+            "The 25 growing records share one reviewed ZNULL allocation and "
+            "logical DAT-size redirect. Features that grow or touch these "
+            "records remain deferred until the resolver owns a container "
+            "composer/allocator."
+        ),
         "owned_source_main_exe_writes": len(source_patches),
         "canonical_main_exe_ranges": len(patches),
         "owned_main_exe_bytes": sum(len(item.replace) for item in patches),
@@ -919,6 +1434,22 @@ def validate_composition(
             identical_overlap_bytes += end - begin
 
     ordered_patches = sorted(patches, key=lambda item: item.address)
+    stock_slus = stock.read_file(SLUS_NAME)
+    load_address = struct.unpack("<I", stock_slus[0x18:0x1C])[0]
+    for item in ordered_patches:
+        file_offset = item.address - load_address + USER_SECTOR
+        if (
+            file_offset < 0
+            or file_offset + len(item.expected) > len(stock_slus)
+        ):
+            raise AssertionError(
+                f"main-EXE patch {item.label} is outside {SLUS_NAME}"
+            )
+        actual = stock_slus[file_offset : file_offset + len(item.expected)]
+        if actual != item.expected:
+            raise AssertionError(
+                f"stock main-EXE guard failed for {item.feature}/{item.label}"
+            )
     for index, left in enumerate(ordered_patches):
         left_end = left.address + len(left.replace)
         for right in ordered_patches[index + 1 :]:
@@ -973,6 +1504,7 @@ def validate_composition(
         "incompatible_overlap_bytes": 0,
         "plan_fingerprint": fingerprint,
         "stock_guards_verified": True,
+        "stock_main_exe_guards_verified": True,
     }
 
 
@@ -985,11 +1517,12 @@ def build_manifest(
     patches: list[Patch],
     overlays: list[Overlay],
     asset_paths: dict[int, str],
+    package_version: str,
 ) -> str:
     lines = [
         "format_version = 1",
         'id = "mmx6.tweaks.native"',
-        'version = "1.0.1"',
+        f"version = {q(package_version)}",
         'name = "Mega Man X6 Tweaks"',
         'author = "acediez, DuoDynamo, NectarHime; PSXRecomp integration"',
         'description = "Independent native MMX6 Tweaks features."',
@@ -1047,6 +1580,18 @@ def build_manifest(
             'value = "english_retranslation"',
             'label = "English Retranslation"',
         ]
+    for spec in SIMPLE_FEATURES:
+        if spec.feature_id not in features:
+            continue
+        lines += [
+            "",
+            "[[feature]]",
+            f"id = {q(spec.feature_id)}",
+            f"name = {q(spec.name)}",
+            f"description = {q(spec.description)}",
+            f"group = {q(spec.group)}",
+            "default_enabled = false",
+        ]
     for patch in patches:
         lines += [
             "",
@@ -1057,14 +1602,10 @@ def build_manifest(
             f"expected = {q(patch.expected.hex().upper())}",
             f"replace = {q(patch.replace.hex().upper())}",
             "order = 0",
-            'when = { script = "english_retranslation" }',
         ]
+        if patch.feature == "retranslation":
+            lines.append('when = { script = "english_retranslation" }')
     for index, overlay in enumerate(overlays):
-        condition = (
-            'variant = "rockman_japan"'
-            if overlay.feature == "title_screen"
-            else 'script = "english_retranslation"'
-        )
         lines += [
             "",
             "[[overlay]]",
@@ -1075,8 +1616,11 @@ def build_manifest(
             f"sha256 = {q(sha256(overlay.replace))}",
             f"expected_sha256 = {q(sha256(overlay.expected))}",
             "order = 0",
-            f"when = {{ {condition} }}",
         ]
+        if overlay.feature == "title_screen":
+            lines.append('when = { variant = "rockman_japan" }')
+        elif overlay.feature == "retranslation":
+            lines.append('when = { script = "english_retranslation" }')
     return "\n".join(lines) + "\n"
 
 
@@ -1086,24 +1630,37 @@ def write_package(
     patches: list[Patch],
     overlays: list[Overlay],
     report: dict,
+    package_version: str,
 ) -> None:
     asset_paths = {
         index: f"assets/{overlay.feature}/{index:03d}-{overlay.label}.bin"
         for index, overlay in enumerate(overlays)
     }
-    manifest = build_manifest(features, patches, overlays, asset_paths)
+    manifest = build_manifest(
+        features, patches, overlays, asset_paths, package_version
+    )
     out.parent.mkdir(parents=True, exist_ok=True)
+
+    def member(name: str, payload: bytes | str) -> zipfile.ZipInfo:
+        info = zipfile.ZipInfo(name, (1980, 1, 1, 0, 0, 0))
+        info.compress_type = zipfile.ZIP_DEFLATED
+        info.external_attr = 0o100644 << 16
+        archive.writestr(
+            info, payload.encode("utf-8") if isinstance(payload, str) else payload
+        )
+        return info
+
     with zipfile.ZipFile(
         out, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9
     ) as archive:
-        archive.writestr("manifest.toml", manifest)
+        member("manifest.toml", manifest)
         for index, overlay in enumerate(overlays):
-            archive.writestr(asset_paths[index], overlay.replace)
-        archive.writestr(
+            member(asset_paths[index], overlay.replace)
+        member(
             "conversion-report.json",
             json.dumps(report, indent=2, sort_keys=True) + "\n",
         )
-        archive.writestr(
+        member(
             "README.txt",
             "Generated locally from a verified stock MMX6 image and a "
             "user-supplied MMX6 Tweaks extraction.\n"
@@ -1116,6 +1673,12 @@ def write_package(
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--stock", type=Path, default=DEFAULT_STOCK)
+    parser.add_argument(
+        "--b01-base",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "base.bin",
+        help="isolated B01 base oracle used only to resolve source identities",
+    )
     parser.add_argument(
         "--title-oracle",
         type=Path,
@@ -1137,15 +1700,39 @@ def main() -> int:
         default=DEFAULT_ORACLE_DIR / "s02-base.bin",
         help="local result of applying data/xdelta3/s02.xdelta3 to stock",
     )
+    parser.add_argument(
+        "--intro-oracle",
+        type=Path,
+        default=DEFAULT_MATRIX_DIR
+        / "mega_man_usa__original__skip_intros.bin",
+    )
+    parser.add_argument(
+        "--combined-intro-oracle",
+        type=Path,
+        default=DEFAULT_MATRIX_DIR
+        / "rockman_japan__retranslation__skip_intros.bin",
+    )
+    parser.add_argument(
+        "--nightmare-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "no-nightmare-effects.bin",
+    )
+    parser.add_argument(
+        "--combined-nightmare-oracle",
+        type=Path,
+        default=DEFAULT_MATRIX_DIR
+        / "rockman_japan__retranslation__no_nightmare_effects.bin",
+    )
     parser.add_argument("--patcher-data", type=Path, default=DEFAULT_PATCHER_DATA)
     parser.add_argument(
         "--patcher-source", type=Path, default=DEFAULT_PATCHER_SOURCE
     )
     parser.add_argument(
         "--feature",
-        choices=("all", "title_screen", "retranslation"),
+        choices=("all", *ALL_FEATURE_IDS),
         default="all",
     )
+    parser.add_argument("--package-version", default="1.1.0")
     parser.add_argument("--audit-retranslation", action="store_true")
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--out", type=Path)
@@ -1157,107 +1744,208 @@ def main() -> int:
         raise ValueError(
             f"unsupported stock image: {stock_digest}; expected {STOCK_SHA256}"
         )
-    require_file(args.title_oracle, "title-only conversion oracle")
-    combined_path = args.combined_oracle if args.combined_oracle.is_file() else None
-    wants_retranslation = args.feature in ("all", "retranslation")
+    if not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", args.package_version):
+        raise ValueError("--package-version must be numeric semantic version X.Y.Z")
+    enabled_features = (
+        set(ALL_FEATURE_IDS) if args.feature == "all" else {args.feature}
+    )
+    wants_title = "title_screen" in enabled_features
+    wants_retranslation = "retranslation" in enabled_features
+    simple_specs = tuple(
+        spec for spec in SIMPLE_FEATURES if spec.feature_id in enabled_features
+    )
+    wants_intro = any(spec in INTRO_FEATURES for spec in simple_specs)
+    wants_nightmare = any(spec in NIGHTMARE_FEATURES for spec in simple_specs)
+    if wants_title:
+        require_file(args.title_oracle, "title-only conversion oracle")
+    combined_path = (
+        args.combined_oracle
+        if wants_title and args.combined_oracle.is_file()
+        else None
+    )
     if wants_retranslation or args.audit_retranslation:
         require_file(args.script_oracle, "retranslation conversion oracle")
     if wants_retranslation:
         require_file(args.s02_base, "s02 base conversion oracle")
         require_file(args.patcher_source, "Tweaks _dat.ahk")
-    script_path = (
-        args.script_oracle
-        if wants_retranslation or args.audit_retranslation
-        else None
-    )
-    with RawMode2Image(args.stock) as stock, RawMode2Image(
-        args.title_oracle
-    ) as title:
-        combined = RawMode2Image(combined_path) if combined_path else None
-        script = RawMode2Image(script_path) if script_path else None
-        s02_base = RawMode2Image(args.s02_base) if wants_retranslation else None
-        try:
-            title_overlays = build_title_overlays(
-                stock, title, combined, args.patcher_data
+    if simple_specs:
+        require_file(args.b01_base, "B01 base conversion oracle")
+        require_file(args.patcher_source, "Tweaks _dat.ahk")
+        require_file(
+            args.patcher_data.parent / "profiles" / "default.x6tweaksprofile",
+            "Tweaks default profile",
+        )
+    if wants_intro:
+        require_file(args.intro_oracle, "intro conversion oracle")
+        require_file(
+            args.combined_intro_oracle, "combined intro conversion oracle"
+        )
+    if wants_nightmare:
+        require_file(args.nightmare_oracle, "Nightmare conversion oracle")
+        require_file(
+            args.combined_nightmare_oracle,
+            "combined Nightmare conversion oracle",
+        )
+
+    with ExitStack() as stack:
+        stock = stack.enter_context(RawMode2Image(args.stock))
+        title = (
+            stack.enter_context(RawMode2Image(args.title_oracle))
+            if wants_title
+            else None
+        )
+        combined = (
+            stack.enter_context(RawMode2Image(combined_path))
+            if combined_path
+            else None
+        )
+        script = (
+            stack.enter_context(RawMode2Image(args.script_oracle))
+            if wants_retranslation or args.audit_retranslation
+            else None
+        )
+        s02_base = (
+            stack.enter_context(RawMode2Image(args.s02_base))
+            if wants_retranslation
+            else None
+        )
+        b01_base = (
+            stack.enter_context(RawMode2Image(args.b01_base))
+            if simple_specs
+            else None
+        )
+        intro_oracles = tuple(
+            stack.enter_context(RawMode2Image(path))
+            for path in (
+                (args.intro_oracle, args.combined_intro_oracle)
+                if wants_intro
+                else ()
             )
-            enabled_features = (
-                {"title_screen", "retranslation"}
-                if args.feature == "all"
-                else {args.feature}
+        )
+        nightmare_oracles = tuple(
+            stack.enter_context(RawMode2Image(path))
+            for path in (
+                (args.nightmare_oracle, args.combined_nightmare_oracle)
+                if wants_nightmare
+                else ()
             )
-            patches: list[Patch] = []
-            overlays = (
-                list(title_overlays)
-                if "title_screen" in enabled_features
-                else []
-            )
-            report = {
-                "status": "reviewed-native-feature-slice",
-                "stock_sha256": stock_digest,
-                "title_oracle_sha256": file_sha256(args.title_oracle),
-                "combined_oracle_sha256": (
+        )
+
+        title_overlays = (
+            build_title_overlays(stock, title, combined, args.patcher_data)
+            if wants_title
+            else []
+        )
+        patches: list[Patch] = []
+        overlays = list(title_overlays)
+        report = {
+            "status": "reviewed-native-feature-slice",
+            "package_version": args.package_version,
+            "stock_sha256": stock_digest,
+            "converter_sha256": file_sha256(Path(__file__)),
+            "enabled_features": [
+                feature
+                for feature in ALL_FEATURE_IDS
+                if feature in enabled_features
+            ],
+            "provenance": {
+                "title_oracle_sha256": (
+                    file_sha256(args.title_oracle) if wants_title else None
+                ),
+                "combined_title_script_oracle_sha256": (
                     file_sha256(combined_path) if combined_path else None
                 ),
-                "features": {
-                    "title_screen": {
-                        "status": "ready",
-                        "selection": {"TitleScreen02": 1},
-                        "operations": [
-                            {
-                                "label": item.label,
-                                "source": item.source,
-                                "iso_file": item.iso_file,
-                                "file_offset": item.file_offset,
-                                "disc_user_offset": item.user_offset,
-                                "dat_record_id": TITLE_ASSETS[index][2],
-                                "subasset_index": TITLE_ASSETS[index][3],
-                                "subasset_type": TITLE_ASSETS[index][4],
-                                "raw_oracle_offset": item.raw_offset,
-                                "size": len(item.replace),
-                                "stock_sha256": sha256(item.expected),
-                                "replacement_sha256": sha256(item.replace),
-                                "title_only_read_path_verified": True,
-                                "combined_read_path_verified": combined is not None,
-                            }
-                            for index, item in enumerate(title_overlays)
-                        ],
+                "patcher_source_sha256": (
+                    file_sha256(args.patcher_source)
+                    if args.patcher_source.is_file()
+                    else None
+                ),
+            },
+            "features": {},
+            "forbidden_runtime_payloads": {
+                "derived_disc": False,
+                "vcdiff": False,
+                "patched_oracle": False,
+            },
+        }
+        if wants_title:
+            report["features"]["title_screen"] = {
+                "status": "ready",
+                "selection": {"TitleScreen02": 1},
+                "operations": [
+                    {
+                        "label": item.label,
+                        "source": item.source,
+                        "iso_file": item.iso_file,
+                        "file_offset": item.file_offset,
+                        "disc_user_offset": item.user_offset,
+                        "dat_record_id": TITLE_ASSETS[index][2],
+                        "subasset_index": TITLE_ASSETS[index][3],
+                        "subasset_type": TITLE_ASSETS[index][4],
+                        "raw_oracle_offset": item.raw_offset,
+                        "size": len(item.replace),
+                        "stock_sha256": sha256(item.expected),
+                        "replacement_sha256": sha256(item.replace),
+                        "title_only_read_path_verified": True,
+                        "combined_read_path_verified": combined is not None,
                     }
-                },
-                "forbidden_runtime_payloads": {
-                    "derived_disc": False,
-                    "vcdiff": False,
-                    "patched_oracle": False,
-                },
+                    for index, item in enumerate(title_overlays)
+                ],
             }
-            if wants_retranslation:
-                script_patches, script_overlays, evidence = (
-                    build_retranslation_ops(
-                        stock,
-                        s02_base,
-                        script,
-                        args.patcher_source,
-                        title_overlays,
-                    )
-                )
-                patches += script_patches
-                overlays += script_overlays
-                report["features"]["retranslation"] = evidence
-                report["s02_base_oracle_sha256"] = file_sha256(args.s02_base)
-                report["script_oracle_sha256"] = file_sha256(args.script_oracle)
-            elif script is not None:
-                report["features"]["retranslation"] = audit_retranslation(
-                    stock, script, args.patcher_source
-                )
-            report["composition"] = validate_composition(
-                stock, patches, overlays
+        if wants_retranslation:
+            script_patches, script_overlays, evidence = build_retranslation_ops(
+                stock,
+                s02_base,
+                script,
+                args.patcher_source,
+                title_overlays,
             )
-        finally:
-            if combined is not None:
-                combined.close()
-            if script is not None:
-                script.close()
-            if s02_base is not None:
-                s02_base.close()
+            patches += script_patches
+            overlays += script_overlays
+            report["features"]["retranslation"] = evidence
+            report["provenance"]["s02_base_oracle_sha256"] = file_sha256(
+                args.s02_base
+            )
+            report["provenance"]["script_oracle_sha256"] = file_sha256(
+                args.script_oracle
+            )
+        elif script is not None:
+            report["features"]["retranslation"] = audit_retranslation(
+                stock, script, args.patcher_source
+            )
+        if simple_specs:
+            simple_patches, simple_overlays, simple_evidence = (
+                build_simple_feature_ops(
+                    stock,
+                    b01_base,
+                    intro_oracles,
+                    nightmare_oracles,
+                    simple_specs,
+                    args.patcher_source,
+                    args.patcher_data,
+                )
+            )
+            patches += simple_patches
+            overlays += simple_overlays
+            report["features"].update(simple_evidence)
+            report["provenance"]["b01_base_oracle_sha256"] = file_sha256(
+                args.b01_base
+            )
+            if wants_intro:
+                report["provenance"]["intro_oracle_sha256"] = file_sha256(
+                    args.intro_oracle
+                )
+                report["provenance"][
+                    "combined_intro_oracle_sha256"
+                ] = file_sha256(args.combined_intro_oracle)
+            if wants_nightmare:
+                report["provenance"]["nightmare_oracle_sha256"] = file_sha256(
+                    args.nightmare_oracle
+                )
+                report["provenance"][
+                    "combined_nightmare_oracle_sha256"
+                ] = file_sha256(args.combined_nightmare_oracle)
+        report["composition"] = validate_composition(stock, patches, overlays)
 
     print(json.dumps(report, indent=2, sort_keys=True))
     if not args.verify_only:
@@ -1267,7 +1955,14 @@ def main() -> int:
             / "test-psxmods"
             / "MMX6-Tweaks-Native.psxmod"
         )
-        write_package(out, enabled_features, patches, overlays, report)
+        write_package(
+            out,
+            enabled_features,
+            patches,
+            overlays,
+            report,
+            args.package_version,
+        )
         print(f"wrote {out}")
     return 0
 
