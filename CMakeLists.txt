@@ -39,6 +39,11 @@ set(GAME_GENERATED_DISPATCH
 file(GLOB MMX6_MOD_PLUGIN_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/*.c")
 
+# Game-owned trusted mod resolvers live in independent source files so feature
+# domains can be developed and reviewed without editing one central registry.
+file(GLOB GAME_MOD_RESOLVER_SOURCES CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/*.cpp")
+
 psxrecomp_v4_add_runtime_target(psx-runtime
     GAME_GENERATED_FULL_C "${GAME_GENERATED_FULL}"
     GAME_GENERATED_DISPATCH_C "${GAME_GENERATED_DISPATCH}"
@@ -47,7 +52,10 @@ psxrecomp_v4_add_runtime_target(psx-runtime
     DEFAULT_GAME_CONFIG_PATH "game.toml"
     EXE_NAME "mmx6-runtime"
     LAUNCHER_BOXART "${CMAKE_SOURCE_DIR}/recomp/launcher/boxart.tga"
-    EXTRAS_SOURCES ${GAME_GENERATED_EXTRAS} ${MMX6_MOD_PLUGIN_SOURCES}
+    EXTRAS_SOURCES
+        ${GAME_GENERATED_EXTRAS}
+        ${MMX6_MOD_PLUGIN_SOURCES}
+        ${GAME_MOD_RESOLVER_SOURCES}
 )
 
 # Ship the game-owned mod catalog beside the executable. Every feature stays
@@ -72,7 +80,7 @@ if(PSX_BUILD_COSIM)
         GAME_GENERATED_DISPATCH_C "${GAME_GENERATED_DISPATCH}"
         WINDOW_TITLE "MMX6-cosim"
         DEFAULT_GAME_CONFIG_PATH "game.toml"
-        EXTRAS_SOURCES ${GAME_GENERATED_EXTRAS}
+        EXTRAS_SOURCES ${GAME_GENERATED_EXTRAS} ${GAME_MOD_RESOLVER_SOURCES}
         COSIM
     )
 endif()
