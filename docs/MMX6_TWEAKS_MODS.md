@@ -426,10 +426,39 @@ deferred when they crossed a product boundary:
 - the remaining player/stage radios require scratch-code injection or hidden
   prerequisite closures.
 
-Open-ended edits and sliders are not part of this easy tranche. Although the
-manifest and launcher already display bounded integers, the declarative
-resolver cannot yet encode an integer into replacement bytes. That general
-parametric-patch design is the first complicated decision after v1.7.
+### First bounded-integer tranche
+
+Version 1.8 raises the native package from 73 to 93 feature rows. It adds 20
+independent numeric controls:
+
+- seven Commander Yammark and Blizzard Wolfang damage values;
+- six Nightmare Soul orb values;
+- four normal and Hyper Dash duration values; and
+- three starting-lives values.
+
+These features use the format-v2 `replace_from` operation. The resolver encodes
+one bounded integer option as `u8` or `u16le` during preboot resolution, then
+feeds the result through the ordinary guarded write plan. It adds no in-game
+dispatch or CD-read work.
+
+Every feature was exercised at its minimum, an interior value, and its maximum
+through the ported Tweaks engine. The converter proves exact one-option closure,
+fixed write topology, direct unsigned encoding, no file inserts or synthesis,
+and a stock-no-op default. Executable immediates guard the complete four-byte
+MIPS instruction even though only the immediate field varies. Indexed
+`ROCK_X6.BIN` data is mapped by member identity rather than copied from the
+derived B01 layout.
+
+The complete v1.8 plan contains 33 parametric operations guarding 80 stock
+bytes. It composes without overlap with all 63 existing executable patches and
+231 existing disc overlays. Numeric UI editing uses signed 64-bit bounds and
+commits canonical values only when editing completes, avoiding partial text
+states and 32-bit truncation.
+
+This tranche deliberately excludes values whose source representation is
+split across instructions, whose bounds are not semantically established, or
+whose behavior is coupled to injected code. Those belong to later primitives,
+not looser use of `replace_from`.
 
 ## Four-image algebra
 

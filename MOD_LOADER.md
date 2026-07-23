@@ -97,6 +97,14 @@ A feature may write data to a known guest address after verifying the expected
 stock value. Expected-value guards prevent a patch from silently applying to an
 unsupported revision or on top of an incompatible operation.
 
+Bounded integer options resolve before boot into the same guarded writes. A
+format-v2 patch may encode one integer option as `u8`, `u16le`, or `u32le`
+inside a fully guarded replacement record. The manifest supplies explicit
+minimum, maximum, step, default, field offset, and optional checked addend.
+There is no expression evaluator, host-endian encoding, or per-frame integer
+dispatcher. A default value that reproduces the expected bytes resolves to no
+write, so enabling a numeric feature at its stock value remains a true no-op.
+
 ### Code and behavior hooks
 
 A feature may replace or wrap a known recompiled function, call site, or
