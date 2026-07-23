@@ -357,6 +357,50 @@ def byte_changed_runs(before: bytes, after: bytes) -> list[tuple[int, int]]:
     return result
 
 
+def coalesce_patches(patches: list[Patch]) -> list[Patch]:
+    """Merge adjacent/compatible source writes into canonical guarded ranges."""
+    result: list[Patch] = []
+    for item in sorted(patches, key=lambda patch: patch.address):
+        if not result:
+            result.append(item)
+            continue
+        previous = result[-1]
+        previous_end = previous.address + len(previous.replace)
+        if item.address > previous_end:
+            result.append(item)
+            continue
+        begin = previous.address
+        end = max(previous_end, item.address + len(item.replace))
+        expected: list[int | None] = [None] * (end - begin)
+        replace: list[int | None] = [None] * (end - begin)
+        for patch in (previous, item):
+            offset = patch.address - begin
+            for index, value in enumerate(patch.expected):
+                at = offset + index
+                if expected[at] is not None and expected[at] != value:
+                    raise AssertionError(
+                        f"incompatible expected bytes at 0x{begin + at:08X}"
+                    )
+                expected[at] = value
+            for index, value in enumerate(patch.replace):
+                at = offset + index
+                if replace[at] is not None and replace[at] != value:
+                    raise AssertionError(
+                        f"incompatible replacements at 0x{begin + at:08X}"
+                    )
+                replace[at] = value
+        if any(value is None for value in expected + replace):
+            raise AssertionError("patch coalescing created an unguarded gap")
+        result[-1] = Patch(
+            feature=previous.feature,
+            label=f"{previous.label}+{item.label}",
+            address=begin,
+            expected=bytes(expected),
+            replace=bytes(replace),
+        )
+    return result
+
+
 def build_retranslation_ops(
     stock: RawMode2Image,
     s02_base: RawMode2Image,
@@ -519,10 +563,34 @@ def build_retranslation_ops(
             "reviewed record 107 ownership changed: expected 21 "
             f"retranslation bytes, got {record107_emitted_bytes}"
         )
+    # The guest ISO lookup must expose the virtual DAT extent through the final
+    # relocated record. Keep the stock LBA and update both ISO9660 byte orders.
+    logical_dat_size = pack_sector * USER_SECTOR
+    if logical_dat_size != 0x04243000:
+        raise AssertionError(
+            f"reviewed virtual DAT extent changed: 0x{logical_dat_size:08X}"
+        )
+    iso_size_offset = 0xB0A6
+    iso_size_expected = stock.read_user(iso_size_offset, 8)
+    if iso_size_expected != bytes.fromhex("00E008030308E000"):
+        raise AssertionError(
+            "stock ROCK_X6.DAT ISO size record does not match USA v1.1"
+        )
+    overlays.append(
+        Overlay(
+            feature="retranslation",
+            label="rock-x6-dat-logical-size",
+            user_offset=iso_size_offset,
+            expected=iso_size_expected,
+            replace=bytes.fromhex("0030240404243000"),
+            iso_file="ISO9660 root directory",
+            file_offset=iso_size_offset,
+        )
+    )
 
     stock_slus_entry = stock.entries[SLUS_NAME]
     load_address = struct.unpack("<I", stock.read_file(SLUS_NAME)[0x18:0x1C])[0]
-    patches = []
+    source_patches = []
     for name, raw_offset, replacement in parse_owned_script_writes(
         patcher_source
     ):
@@ -533,7 +601,7 @@ def build_retranslation_ops(
         expected = stock.read_user(user_offset, len(replacement))
         if script_oracle.read_user(user_offset, len(replacement)) != replacement:
             raise AssertionError(f"script oracle does not contain {name}")
-        patches.append(
+        source_patches.append(
             Patch(
                 feature="retranslation",
                 label=name,
@@ -541,6 +609,13 @@ def build_retranslation_ops(
                 expected=expected,
                 replace=replacement,
             )
+        )
+    patches = coalesce_patches(source_patches)
+    if len(source_patches) != 15 or len(patches) != 12:
+        raise AssertionError(
+            "reviewed script patch canonicalization changed: expected "
+            f"15 source writes -> 12 ranges, got "
+            f"{len(source_patches)} -> {len(patches)}"
         )
 
     # Prove every operation is disjoint from the title feature, except identical
@@ -561,7 +636,8 @@ def build_retranslation_ops(
         "relocated_start_sector": pack_first_sector,
         "relocated_sectors": packed_sectors,
         "stock_znull_sectors": znull_sectors,
-        "owned_main_exe_writes": len(patches),
+        "owned_source_main_exe_writes": len(source_patches),
+        "canonical_main_exe_ranges": len(patches),
         "owned_main_exe_bytes": sum(len(item.replace) for item in patches),
         "records": record_evidence,
         "no_rock_x6_bin_changes": True,
