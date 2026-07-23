@@ -38,22 +38,12 @@ psxrecomp_v4_add_runtime_target(psx-runtime
     GAME_GENERATED_DISPATCH_C "${GAME_GENERATED_DISPATCH}"
     DEBUG_PORT 4490
     WINDOW_TITLE "MegaManX6Recomp"
-    DEFAULT_BIOS_PATH "${PSXRECOMP_V4_ROOT}/bios/SCPH1001.BIN"
     DEFAULT_GAME_CONFIG_PATH "game.toml"
     EXE_NAME "mmx6-runtime"
+    LAUNCHER_BOXART "${CMAKE_SOURCE_DIR}/recomp/launcher/boxart.tga"
+    LAUNCHER_PAD "${CMAKE_SOURCE_DIR}/recomp/launcher/pad.tga"
+    LAUNCHER_BRAND "${CMAKE_SOURCE_DIR}/recomp/launcher/brand.tga"
     EXTRAS_SOURCES ${GAME_GENERATED_EXTRAS}
-)
-
-# Shared recomp-ui Dear ImGui launcher. Wires in the PSX-themed launcher UI
-# (see main.cpp RECOMP_LAUNCHER gate) instead of the framework's default RmlUi
-# launcher. recomp-ui is a real git submodule (github.com/mstan/recomp-ui,
-# pinned via the recomp-ui gitlink); locally it is a directory junction to the
-# working checkout so builds stay offline and reproducible like everything else.
-include("${CMAKE_SOURCE_DIR}/recomp-ui/recomp_ui.cmake")
-recomp_target_launcher_ui(psx-runtime
-    BOXART "${CMAKE_SOURCE_DIR}/recomp/launcher/boxart.tga"
-    PAD    "${CMAKE_SOURCE_DIR}/recomp/launcher/pad.tga"
-    BRAND  "${CMAKE_SOURCE_DIR}/recomp/launcher/brand.tga"
 )
 
 # First-divergence co-sim oracle build (COSIM_ORACLE.md): clean, deterministic,
@@ -66,7 +56,6 @@ if(PSX_BUILD_COSIM)
         GAME_GENERATED_FULL_C "${GAME_GENERATED_FULL}"
         GAME_GENERATED_DISPATCH_C "${GAME_GENERATED_DISPATCH}"
         WINDOW_TITLE "MMX6-cosim"
-        DEFAULT_BIOS_PATH "${PSXRECOMP_V4_ROOT}/bios/SCPH1001.BIN"
         DEFAULT_GAME_CONFIG_PATH "game.toml"
         EXTRAS_SOURCES ${GAME_GENERATED_EXTRAS}
         COSIM
