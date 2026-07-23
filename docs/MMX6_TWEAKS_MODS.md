@@ -369,6 +369,68 @@ kill/orb/reform loop, and both the stage and rematch forms of Yammark and
 Wolfang across difficulties. The static guards and composition proof make the
 batch safe to ship for testing; they do not replace those behavior checks.
 
+### Exhausted low-risk static and bounded-choice tranche
+
+Version 1.7 raises the native package from 44 to 73 feature rows. The review
+mechanically exercised every remaining checkbox, radio group, and finite
+dropdown in the 329-variable Tweaks catalog. Twenty-nine features passed the
+strict easy-conversion gate:
+
+- eight independent Normal Part slot choices, one for each Hunter Rank;
+- eight independent Limited Part enable/disable toggles;
+- eight independent boss-level choices, one for each Hunter Rank;
+- Commander Yammark's isolated always-Xtreme behavior toggle;
+- Amazon Area's blind-jump ceiling extension;
+- the Secret Lab 2-2 platform;
+- Secret Lab 1 spike removal as one two-choice feature; and
+- Recycle Lab ceiling extension as one two-choice feature.
+
+The rank and boss-level dropdowns contain only non-stock choices. Disabling a
+row therefore always restores stock behavior; enabling it always makes a
+material change. A source dropdown with only one non-stock value is represented
+as a left-pane checkbox, matching the general launcher UX rule.
+
+All 71 non-stock variants are reassembled independently through the ported
+Tweaks engine. Each must retain exact option closure, exact raw write identity,
+no synthesis, no file insert, and stock-equal B01 guards. First- and last-choice
+aggregate oracles, both alone and composed with the complete v1.6 selection,
+exercise the extreme variants. Intermediate values remain protected by exact
+source payload checks and the same stock semantic mapping.
+
+Stage edits are never emitted at their Tweaks/B01 raw offsets.
+`StageMod01`, `StageMod02`, `StageMod0302/0303`, and
+`StageMod0402/0403` map to stock `ROCK_X6.DAT` by record ID, subasset index,
+asset type, and subasset-relative range. Their source and stock range hashes
+are pinned independently. The two radio pairs become two configurable feature
+rows, not four mutually exclusive rows.
+
+The Title Screen feature now exposes all four bundled non-stock variants:
+Rockman Japan, Rockman China, Mega Man Custom A, and Mega Man Custom B. They
+share one left-pane feature and one artwork dropdown. Every variant is mapped
+to the same four logical title subassets; the China variant intentionally owns
+only the two background assets and leaves the stock Press Start assets intact.
+
+The nonnumeric easy gate is now exhausted. Exact-looking candidates were still
+deferred when they crossed a product boundary:
+
+- dialogue toggles and Nightmare Fire interact with the future in-game options
+  hook;
+- Shared Stats changes progression/save semantics;
+- Zero Yammar input synthesizes an extra hint when combined with the
+  retranslation;
+- DashGlobal01 changes closure when incomplete-armor support is present;
+- Yammark idle time is a ten-site behavior rewrite needing phase coverage;
+- the Recycle Lab hidden teleport crosses apparent object records;
+- loading-logo choices silently pull Disable Title Demos;
+- mugshots and palettes use file insertion plus dynamic assembly; and
+- the remaining player/stage radios require scratch-code injection or hidden
+  prerequisite closures.
+
+Open-ended edits and sliders are not part of this easy tranche. Although the
+manifest and launcher already display bounded integers, the declarative
+resolver cannot yet encode an integer into replacement bytes. That general
+parametric-patch design is the first complicated decision after v1.7.
+
 ## Four-image algebra
 
 `tools/tweaks_diff_algebra.cpp` compares four local reference images:
