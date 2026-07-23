@@ -41,19 +41,8 @@ psxrecomp_v4_add_runtime_target(psx-runtime
     DEFAULT_BIOS_PATH "${PSXRECOMP_V4_ROOT}/bios/SCPH1001.BIN"
     DEFAULT_GAME_CONFIG_PATH "game.toml"
     EXE_NAME "mmx6-runtime"
+    LAUNCHER_BOXART "${CMAKE_SOURCE_DIR}/recomp/launcher/boxart.tga"
     EXTRAS_SOURCES ${GAME_GENERATED_EXTRAS}
-)
-
-# Shared recomp-ui Dear ImGui launcher. Wires in the PSX-themed launcher UI
-# (see main.cpp RECOMP_LAUNCHER gate) instead of the framework's default RmlUi
-# launcher. recomp-ui is a real git submodule (github.com/mstan/recomp-ui,
-# pinned via the recomp-ui gitlink); locally it is a directory junction to the
-# working checkout so builds stay offline and reproducible like everything else.
-include("${CMAKE_SOURCE_DIR}/recomp-ui/recomp_ui.cmake")
-recomp_target_launcher_ui(psx-runtime
-    BOXART "${CMAKE_SOURCE_DIR}/recomp/launcher/boxart.tga"
-    PAD    "${CMAKE_SOURCE_DIR}/recomp/launcher/pad.tga"
-    BRAND  "${CMAKE_SOURCE_DIR}/recomp/launcher/brand.tga"
 )
 
 # First-divergence co-sim oracle build (COSIM_ORACLE.md): clean, deterministic,
@@ -71,18 +60,4 @@ if(PSX_BUILD_COSIM)
         EXTRAS_SOURCES ${GAME_GENERATED_EXTRAS}
         COSIM
     )
-endif()
-
-# Per-game launcher art override. The framework copies its shared launcher assets
-# (img/disc.png etc. — the default is Tomba's disc) next to the exe; this copies
-# this repo's launcher_art/ on top AFTERWARD so the launcher shows MMX6's disc.
-# POST_BUILD commands run in add order, and the framework's copy is added inside
-# psxrecomp_v4_add_runtime_target above, so this override wins. Drop official art
-# into launcher_art/img/ to replace the generated placeholder.
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/launcher_art")
-    add_custom_command(TARGET psx-runtime POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-            "${CMAKE_CURRENT_SOURCE_DIR}/launcher_art"
-            "$<TARGET_FILE_DIR:psx-runtime>"
-        COMMENT "Overriding launcher art with MegaManX6Recomp/launcher_art")
 endif()

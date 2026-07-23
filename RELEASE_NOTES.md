@@ -75,7 +75,7 @@ required) and broader controller support.
 
 # Mega Man X6 Recompiled — v0.0.6-alpha
 
-This release replaces the old RmlUi launcher with the shared Dear ImGui
+This release replaces the old in-tree launcher with the shared Dear ImGui
 `recomp-ui` launcher. Its DPI-independent layout keeps launcher text, settings,
 and the Launch button readable and reachable on Steam Deck and high-resolution
 or scaled Windows displays, addressing issues #1 and #3.
@@ -87,6 +87,6 @@ or scaled Windows displays, addressing issues #1 and #3.
 - Bundles the matching launcher fonts and game-specific art beside the
   executable.
 - Keeps the complete settings surface accessible without relying on the old
-  fixed-size RmlUi document layout.
+  fixed-size legacy document layout.
 
 All existing alpha caveats and game-compatibility notes above still apply.
