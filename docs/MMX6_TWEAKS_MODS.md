@@ -35,5 +35,11 @@ internally. Changing an option produces a different fingerprint/cache.
 This profile-package bridge supports every permutation without requiring every
 permutation to be compiled into the executable. VCDIFF is used because Tweaks
 can change disc geometry; representing that structural transform as hundreds
-of thousands of sparse sector replacements would be wasteful. Packages may
-declare launcher options and conditionally select derived-disc recipes.
+of thousands of sparse sector replacements would be wasteful.
+
+For user-facing distribution, Tweaks should be represented as one structural
+owner package with many options, not as one package per option. Mutually
+exclusive choices such as US vs. Japanese title screen live inside that package
+as dropdown values. Independent non-structural mods can still be separate
+packages; the runtime rejects overlapping guarded writes and rejects more than
+one active full-disc recipe after option resolution.
