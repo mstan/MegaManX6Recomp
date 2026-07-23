@@ -280,6 +280,43 @@ stages, both characters, fresh and loaded saves, actual return destinations,
 choice persistence while disabled, and switching from Everywhere back to Main
 Stages.
 
+### Narrow combat, audio, and boss data
+
+Five more independent features are accepted as narrow guarded operations,
+pending their behavior and audio smoke tests:
+
+| Feature ID | Tweaks source | Semantic operations |
+| --- | --- | --- |
+| `shadow_saber_cancellable` | `SaberCancellable02` | `ROCK_X6.BIN` member 24 at `+0x149/+0x14D/+0x151/+0x155`: `02/01/00/00 → 42/41/40/40` |
+| `restore_x_charged_shot_voice` | `VoiceClip03` | SLUS `0x8003FAE8`, sound-ID immediate `06 → 08` |
+| `restore_zero_giga_attack_voice` | `VoiceClip04` | member `24+0xF2C`, sound-ID immediate `07 → 0A` |
+| `yammark_firefly_resistance` | `BossMod0106` | members `73+0x8ABC` and `662+0x2BDC`, mirrored immediate `08 → 60` |
+| `indestructible_yammark_orbs` | `BossMod0102` | members `73+0xAC00` and `662+0x4D20`, mirrored pointer low half `FC4B → 1C4A` |
+
+The Saber edits set bit `0x40` in four consecutive Shadow Armor attack-table
+records. The two voice edits change existing sound-call arguments without
+injecting code. Yammark's resistance edit changes the byte stored into the
+stage/rematch firefly actor, while the orb edit redirects an existing pointer
+from `0x80074BFC` to the stock no-contact table at `0x80074A1C`. All mappings
+are independently resolved in both mirrored boss members.
+
+`small-data-core.bin` and `small-data-current-combined.bin` provide focused
+aggregate and current-package composition evidence. The converter emits only
+the ten source-declared narrow ranges, never whole member 24, 73, or 662
+overlays. This is important because the Saber and Zero voice features share
+member 24 but own disjoint data.
+
+Live tests must cover all four Shadow Saber attacks and cancellation windows;
+X charged shots across armor/charge states; Zero's Giga Attack without
+duplicate or incorrect playback; Yammark's stage and rematch fights; both
+characters and varied weapons; and combinations with Retranslation and the
+other restored voice clip. Frame pacing should be checked on the frequently
+reached charged-shot function.
+
+`StageMod0404` remains deferred: its eight-byte write crosses two apparent
+Recycle Lab object records, and the stage-object schema has not yet proven
+that both changed fields belong solely to the teleport.
+
 ## Four-image algebra
 
 `tools/tweaks_diff_algebra.cpp` compares four local reference images:

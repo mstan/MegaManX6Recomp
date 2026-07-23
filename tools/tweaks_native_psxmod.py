@@ -454,8 +454,71 @@ MOVEMENT_FEATURES = (
     ),
 )
 
+SMALL_DATA_FEATURES = (
+    FeatureSpec(
+        "shadow_saber_cancellable",
+        "Shadow Saber Cancellable",
+        "Enable cancellation flags on Shadow Armor's four saber attacks.",
+        "Combat",
+        "SaberCancellable02",
+        "rock_x6_bin",
+        (
+            (0x1D9BFAE1, "42"),
+            (0x1D9BFAE5, "41"),
+            (0x1D9BFAE9, "40"),
+            (0x1D9BFAED, "40"),
+        ),
+    ),
+    FeatureSpec(
+        "restore_x_charged_shot_voice",
+        "Restore X Charged-Shot Voice",
+        "Use the restored voice clip ID for X's charged shot.",
+        "Audio",
+        "VoiceClip03",
+        "main_exe",
+        ((0x1D957460, "08"),),
+    ),
+    FeatureSpec(
+        "restore_zero_giga_attack_voice",
+        "Restore Zero Giga-Attack Voice",
+        "Use the restored voice clip ID for Zero's Giga Attack.",
+        "Audio",
+        "VoiceClip04",
+        "rock_x6_bin",
+        ((0x1D9C09F4, "0A"),),
+    ),
+    FeatureSpec(
+        "yammark_firefly_resistance",
+        "Increase Yammark Firefly Resistance",
+        "Increase the resistance value used by Commander Yammark's fireflies.",
+        "Bosses",
+        "BossMod0106",
+        "rock_x6_bin",
+        (
+            (0x1D9E5AB4, "60"),
+            (0x1DB31104, "60"),
+        ),
+    ),
+    FeatureSpec(
+        "indestructible_yammark_orbs",
+        "Indestructible Yammark Green Orbs",
+        "Use the no-contact damage table for Yammark's green orbs.",
+        "Bosses",
+        "BossMod0102",
+        "rock_x6_bin",
+        (
+            (0x1D9E80B8, "1C4A"),
+            (0x1DB33708, "1C4A"),
+        ),
+    ),
+)
+
 SIMPLE_FEATURES = (
-    INTRO_FEATURES + NIGHTMARE_FEATURES + QOL_FEATURES + MOVEMENT_FEATURES
+    INTRO_FEATURES
+    + NIGHTMARE_FEATURES
+    + QOL_FEATURES
+    + MOVEMENT_FEATURES
+    + SMALL_DATA_FEATURES
 )
 EXIT_STAGE_VARIANTS = {
     "main_stages": {
@@ -668,6 +731,7 @@ def build_simple_feature_ops(
     nightmare_oracles: tuple[RawMode2Image, ...],
     qol_oracles: tuple[RawMode2Image, ...],
     movement_oracles: tuple[RawMode2Image, ...],
+    small_data_oracles: tuple[RawMode2Image, ...],
     specs: tuple[FeatureSpec, ...],
     patcher_source: Path,
     patcher_data: Path,
@@ -693,6 +757,8 @@ def build_simple_feature_ops(
             feature_oracles = qol_oracles
         elif spec in MOVEMENT_FEATURES:
             feature_oracles = movement_oracles
+        elif spec in SMALL_DATA_FEATURES:
+            feature_oracles = small_data_oracles
         else:
             raise AssertionError(f"no oracle group for {spec.feature_id}")
         for raw_offset, replacement in source_writes[spec.feature_id]:
@@ -827,6 +893,7 @@ def build_simple_feature_ops(
                 spec in INTRO_FEATURES
                 or spec in QOL_FEATURES
                 or spec in MOVEMENT_FEATURES
+                or spec in SMALL_DATA_FEATURES
             )
             else "ready",
             "source_selection": {spec.source_option: 1},
@@ -2087,6 +2154,16 @@ def main() -> int:
         default=DEFAULT_ORACLE_DIR / "movement-current-combined.bin",
     )
     parser.add_argument(
+        "--small-data-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "small-data-core.bin",
+    )
+    parser.add_argument(
+        "--combined-small-data-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "small-data-current-combined.bin",
+    )
+    parser.add_argument(
         "--exit-main-oracle",
         type=Path,
         default=DEFAULT_ORACLE_DIR / "exit-main-stages.bin",
@@ -2115,7 +2192,7 @@ def main() -> int:
         choices=("all", *ALL_FEATURE_IDS),
         default="all",
     )
-    parser.add_argument("--package-version", default="1.4.0")
+    parser.add_argument("--package-version", default="1.5.0")
     parser.add_argument("--audit-retranslation", action="store_true")
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--out", type=Path)
@@ -2142,6 +2219,9 @@ def main() -> int:
     wants_nightmare = any(spec in NIGHTMARE_FEATURES for spec in simple_specs)
     wants_qol = any(spec in QOL_FEATURES for spec in simple_specs)
     wants_movement = any(spec in MOVEMENT_FEATURES for spec in simple_specs)
+    wants_small_data = any(
+        spec in SMALL_DATA_FEATURES for spec in simple_specs
+    )
     if wants_title:
         require_file(args.title_oracle, "title-only conversion oracle")
     combined_path = (
@@ -2182,6 +2262,12 @@ def main() -> int:
         require_file(
             args.combined_movement_oracle,
             "combined movement conversion oracle",
+        )
+    if wants_small_data:
+        require_file(args.small_data_oracle, "small-data conversion oracle")
+        require_file(
+            args.combined_small_data_oracle,
+            "combined small-data conversion oracle",
         )
     if wants_exit:
         for path, description in (
@@ -2254,6 +2340,14 @@ def main() -> int:
             for path in (
                 (args.movement_oracle, args.combined_movement_oracle)
                 if wants_movement
+                else ()
+            )
+        )
+        small_data_oracles = tuple(
+            stack.enter_context(RawMode2Image(path))
+            for path in (
+                (args.small_data_oracle, args.combined_small_data_oracle)
+                if wants_small_data
                 else ()
             )
         )
@@ -2365,6 +2459,7 @@ def main() -> int:
                     nightmare_oracles,
                     qol_oracles,
                     movement_oracles,
+                    small_data_oracles,
                     simple_specs,
                     args.patcher_source,
                     args.patcher_data,
@@ -2404,6 +2499,13 @@ def main() -> int:
                 report["provenance"][
                     "combined_movement_oracle_sha256"
                 ] = file_sha256(args.combined_movement_oracle)
+            if wants_small_data:
+                report["provenance"][
+                    "small_data_oracle_sha256"
+                ] = file_sha256(args.small_data_oracle)
+                report["provenance"][
+                    "combined_small_data_oracle_sha256"
+                ] = file_sha256(args.combined_small_data_oracle)
         if wants_exit:
             exit_patches, exit_evidence = build_exit_stage_ops(
                 stock,
