@@ -20,17 +20,21 @@ owns four artwork inserts and no WriteList entries:
 - `PRESS START` tileset; and
 - `PRESS START` assembly.
 
-All four destinations are populated, same-size ranges inside the stock
-`ROCK_X6.DAT`. The converter verifies that the source payload is read at the
-same destination in both the title-only oracle and, when available, the
-title-plus-retranslation oracle. It emits four guarded `disc_user` overlays.
-No Tweaks `PatchList_Base` writes are included.
+All four replacements are populated, same-size subassets inside
+`ROCK_X6.DAT`. The converter identifies them by outer-record ID, subasset
+index, and type: palette `26:0`, plus title assets `107:1`, `107:3`, and
+`107:8`. It independently resolves those identities in the stock disc, the
+title-only oracle, and, when available, the title-plus-retranslation oracle.
+This is required because Tweaks' B01-derived image moves record 107 by
+`0x40` sectors; B01 raw offsets are conversion evidence, never stock runtime
+destinations. The converter emits four guarded overlays at the corresponding
+stock locations. No Tweaks `PatchList_Base` writes are included.
 
 Generate and verify the local package with your own extracted Tweaks data and
 reference oracle:
 
 ```powershell
-python tools/tweaks_native_psxmod.py `
+py -3 tools/tweaks_native_psxmod.py `
   --stock "F:\path\to\Mega Man X6 (USA) (v1.1).bin" `
   --title-oracle "build-mod-platform\test-mod-variants\rockman-jp-title.bin" `
   --combined-oracle "build-mod-platform\test-mod-variants\rockman-jp-title-retranslation.bin" `

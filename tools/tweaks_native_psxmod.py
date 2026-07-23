@@ -183,21 +183,33 @@ TITLE_ASSETS = (
     (
         "background_tileset",
         "title/bg_tileset_jpn/09 - 10014.bin",
+        107,
+        8,
+        0x10014,
         0x1F165968,
     ),
     (
         "background_palette",
         "title/bg_palette_jpn/00 - 5.bin",
+        26,
+        0,
+        0x5,
         0x1DC0DE58,
     ),
     (
         "press_start_tileset",
         "title/start_tileset_jpn/01 - 10016.bin",
+        107,
+        1,
+        0x10016,
         0x1F112538,
     ),
     (
         "press_start_assembly",
         "title/start_assembly_jpn/03 - A.bin",
+        107,
+        3,
+        0xA,
         0x1F12E768,
     ),
 )
@@ -232,33 +244,96 @@ def build_title_overlays(
     combined_oracle: RawMode2Image | None,
     patcher_data: Path,
 ) -> list[Overlay]:
-    """Build and prove the four TitleScreen02-owned stock replacements."""
+    """Map the four TitleScreen02 assets by semantic DAT identity.
+
+    Tweaks' offsets describe its B01-derived image.  Record 107 is relocated in
+    that image, so those offsets are conversion evidence only and must never be
+    reused as stock-disc destinations.
+    """
+    stock_dat_entry = stock.entries["ROCK_X6.DAT"]
+    stock_records = dat_records(stock.read_file("ROCK_X6.DAT"))
+    title_records = dat_records(title_oracle.read_file("ROCK_X6.DAT"))
+    combined_records = (
+        dat_records(combined_oracle.read_file("ROCK_X6.DAT"))
+        if combined_oracle is not None
+        else None
+    )
     overlays: list[Overlay] = []
     occupied: list[tuple[int, int, str]] = []
-    for label, source, raw_offset in TITLE_ASSETS:
+    for (
+        label,
+        source,
+        record_id,
+        subasset_index,
+        asset_type,
+        raw_offset,
+    ) in TITLE_ASSETS:
         source_path = patcher_data / source
         require_file(source_path, f"title asset {label}")
         payload = source_path.read_bytes()
-        user_offset = raw_to_user_offset(raw_offset)
-        entry, file_offset = stock.containing_file(user_offset, len(payload))
-        if entry.name != "ROCK_X6.DAT":
+
+        try:
+            stock_record = stock_records[record_id]
+            title_record = title_records[record_id]
+            stock_subassets = parse_subassets(stock_record)
+            title_subassets = parse_subassets(title_record)
+            stock_subasset = stock_subassets[subasset_index]
+            title_subasset = title_subassets[subasset_index]
+        except (KeyError, IndexError) as error:
             raise AssertionError(
-                f"{label} targets {entry.name}, expected ROCK_X6.DAT"
+                f"{label} semantic DAT identity "
+                f"{record_id}:{subasset_index} is missing"
+            ) from error
+
+        if stock_subasset.asset_type != asset_type:
+            raise AssertionError(
+                f"{label} stock type is 0x{stock_subasset.asset_type:X}, "
+                f"expected 0x{asset_type:X}"
             )
-        expected = stock.read_user(user_offset, len(payload))
+        if title_subasset.asset_type != asset_type:
+            raise AssertionError(
+                f"{label} title-oracle type is 0x{title_subasset.asset_type:X}, "
+                f"expected 0x{asset_type:X}"
+            )
+        if len(stock_subasset.payload) != len(payload):
+            raise AssertionError(
+                f"{label} stock size is 0x{len(stock_subasset.payload):X}, "
+                f"payload is 0x{len(payload):X}"
+            )
+        if title_subasset.payload != payload:
+            raise AssertionError(
+                f"title-only oracle does not contain {label} at semantic DAT "
+                f"identity {record_id}:{subasset_index}"
+            )
+        if combined_records is not None:
+            try:
+                combined_subasset = parse_subassets(
+                    combined_records[record_id]
+                )[subasset_index]
+            except (KeyError, IndexError) as error:
+                raise AssertionError(
+                    f"{label} is missing from combined oracle at semantic DAT "
+                    f"identity {record_id}:{subasset_index}"
+                ) from error
+            if (
+                combined_subasset.asset_type != asset_type
+                or combined_subasset.payload != payload
+            ):
+                raise AssertionError(
+                    f"combined oracle does not contain {label} at semantic DAT "
+                    f"identity {record_id}:{subasset_index}"
+                )
+
+        subasset_offset = subasset_payload_offset(
+            stock_record, subasset_index
+        )
+        file_offset = stock_record.sector * USER_SECTOR + subasset_offset
+        user_offset = stock_dat_entry.lba * USER_SECTOR + file_offset
+        expected = stock_subasset.payload
         if not any(expected):
             raise AssertionError(f"{label} stock range is empty")
         if expected == payload:
             raise AssertionError(f"{label} does not change the stock range")
-        if title_oracle.read_user(user_offset, len(payload)) != payload:
-            raise AssertionError(
-                f"title-only oracle does not read {label} at its destination"
-            )
-        if combined_oracle is not None:
-            if combined_oracle.read_user(user_offset, len(payload)) != payload:
-                raise AssertionError(
-                    f"combined oracle does not read {label} at its destination"
-                )
         begin, end = user_offset, user_offset + len(payload)
         for other_begin, other_end, other_label in occupied:
             if begin < other_end and other_begin < end:
@@ -273,7 +348,7 @@ def build_title_overlays(
                 user_offset=user_offset,
                 expected=expected,
                 replace=payload,
-                iso_file=entry.name,
+                iso_file=stock_dat_entry.name,
                 file_offset=file_offset,
             )
         )
@@ -433,6 +508,20 @@ def parse_subassets(record: DatRecord) -> list[Subasset]:
             f"outer ends at 0x{len(record.payload):X}"
         )
     return result
+
+
+def subasset_payload_offset(record: DatRecord, wanted_index: int) -> int:
+    """Return a subasset's byte offset within its outer DAT record."""
+    subassets = parse_subassets(record)
+    if not 0 <= wanted_index < len(subassets):
+        raise IndexError(wanted_index)
+    cursor = USER_SECTOR
+    for index, subasset in enumerate(subassets):
+        if index == wanted_index:
+            return cursor
+        cursor += len(subasset.payload)
+        cursor = (cursor + USER_SECTOR - 1) // USER_SECTOR * USER_SECTOR
+    raise AssertionError("unreachable subasset lookup")
 
 
 def build_outer_record(subassets: list[Subasset]) -> bytes:
@@ -900,7 +989,7 @@ def build_manifest(
     lines = [
         "format_version = 1",
         'id = "mmx6.tweaks.native"',
-        'version = "1.0.0"',
+        'version = "1.0.1"',
         'name = "Mega Man X6 Tweaks"',
         'author = "acediez, DuoDynamo, NectarHime; PSXRecomp integration"',
         'description = "Independent native MMX6 Tweaks features."',
@@ -1120,6 +1209,9 @@ def main() -> int:
                                 "iso_file": item.iso_file,
                                 "file_offset": item.file_offset,
                                 "disc_user_offset": item.user_offset,
+                                "dat_record_id": TITLE_ASSETS[index][2],
+                                "subasset_index": TITLE_ASSETS[index][3],
+                                "subasset_type": TITLE_ASSETS[index][4],
                                 "raw_oracle_offset": item.raw_offset,
                                 "size": len(item.replace),
                                 "stock_sha256": sha256(item.expected),
@@ -1127,7 +1219,7 @@ def main() -> int:
                                 "title_only_read_path_verified": True,
                                 "combined_read_path_verified": combined is not None,
                             }
-                            for item in title_overlays
+                            for index, item in enumerate(title_overlays)
                         ],
                     }
                 },
