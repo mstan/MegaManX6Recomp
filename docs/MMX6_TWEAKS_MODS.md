@@ -460,18 +460,52 @@ split across instructions, whose bounds are not semantically established, or
 whose behavior is coupled to injected code. Those belong to later primitives,
 not looser use of `replace_from`.
 
-## Burndown after version 1.8
+### Parametric completion and Reploid statuses
+
+Version 1.9 raises the package from 93 to 100 feature rows and represents 117
+Tweaks source controls. It adds:
+
+- four independent Reploid outcome-status choices;
+- one seven-field ordered `Rank Soul Thresholds` feature;
+- two independent initial-dash speed features; and
+- a full `Ceiling Jump Height` integer control in place of the earlier fixed
+  Higher Ceiling Jump checkbox.
+
+The rank thresholds are an exact packed `u16le` data table. The feature is
+valid only when C <= B <= A <= SA <= GA <= PA <= UH; equality is allowed.
+The loader enforces this while enabled and blocks re-enabling an invalid
+disabled draft.
+
+Initial Dash constants use format-v3's guarded
+`mips_lui_ori_u32` transform. It validates one linked LUI/ORI pair and writes
+the raw high and low 16-bit halves. Normal Initial Dash owns two pairs; Hyper
+Dash Initial Speed Bonus owns one. Tweaks declares 425984 as the normal
+control's default/no-op even though the second stock site loads 270336.
+Therefore the selected default emits no writes and preserves asymmetric stock;
+any nondefault selection intentionally writes both pairs.
+
+Changing executable instructions can send the containing functions through
+the runtime's dirty-code path. The conversion is exact and guarded, but the
+normal and Hyper Dash paths still need live performance and branch coverage
+before claiming zero runtime cost.
+
+The complete v1.9 plan contains 44 parametric operations guarding 122 stock
+bytes, 74 fixed executable patches, and 231 disc overlays. The converter
+re-resolved all accepted values through Tweaks and reported no incompatible
+overlaps.
+
+## Burndown after version 1.9
 
 The v2.6.1 source parser finds 329 unique user controls across 332 catalog
-entries. Version 1.8 represents 104 of those source controls as 93 feature
-rows; combined and configurable rows account for the difference. Exactly 225
+entries. Version 1.9 represents 117 of those source controls as 100 feature
+rows; combined and configurable rows account for the difference. Exactly 212
 unique controls remain:
 
 | Tweaks area | Remaining controls |
 |---|---:|
-| New Game | 74 |
-| Player Mechanics | 71 |
-| General | 27 |
+| New Game | 67 |
+| Player Mechanics | 69 |
+| General | 23 |
 | Localization and Art | 23 |
 | Balance | 12 |
 | Damage Tables | 12 |
@@ -481,38 +515,32 @@ unique controls remain:
 The next work is grouped by the runtime or conversion primitive it retires,
 not by arbitrary source-file order:
 
-1. **Small parametric completion:** seven rank-soul thresholds and two
-   split-immediate initial-dash speeds, plus migration of the existing fixed
-   High Jump row to its full slider. The thresholds need one descending-vector
-   invariant; the speeds need an explicit split-word encoding.
-2. **Conditional multi-write templates:** 27 animation timing cells and four
+1. **Conditional multi-write templates:** 27 animation timing cells and four
    nearby derived scalars. Zero has compound meaning for several timings, so
    these are not honest direct integers.
-3. **Registered hook and code-foundation allocation:** an exact known core of
+2. **Registered hook and code-foundation allocation:** an exact known core of
    26 controls: 18 Mach Dash controls, two continuous-dash-speed controls, two
    cutscene-soul controls, and four remaining voice controls. Another 20–40
    controls may reuse this foundation, but that reuse count remains an estimate
    until each closure is classified.
-4. **Typed asset slots:** 14 mugshots, three loading logos, and two sprite
+3. **Typed asset slots:** 14 mugshots, three loading logos, and two sprite
    palettes. These need asset identity, palette/VRAM metadata, and dependency
    composition rather than blind file insertion.
-5. **Declarative new-game and progression state:** all 74 New Game controls.
-   A related exact set of 16 General controls covers unlockables, Reploid
-   statuses, incomplete armor, and shared stats. This requires typed bitfields,
-   dependency validation, save semantics, and deterministic randomization.
-6. **Typed tables:** 61 active boss-health cells followed by 33 damage tables.
+4. **Declarative new-game and progression state:** the remaining 67 New Game
+   controls. A related General set covers unlockables, incomplete armor, and
+   shared stats. This requires typed bitfields, dependency validation, save
+   semantics, and deterministic randomization.
+5. **Typed tables:** 61 active boss-health cells followed by 33 damage tables.
    Each damage table exposes 63 attack records, or 2,079 underlying records.
    That record count measures data scale; it is not 2,079 ordinary feature
    rows. The editor needs table schemas, derived-field validation, and
    row-level ownership.
-7. **Typed stage objects:** five remaining stage controls whose current source
+6. **Typed stage objects:** five remaining stage controls whose current source
    closures cross object or apparent record boundaries.
 
-There is also a small existing-operation cleanup queue: four Reploid-status
-choices and Commander Yammark's ten-site idle-time rewrite. The status rows
-need no new loader primitive. Yammark's rewrite is byte-isolated, but remains
-deferred until its stage and rematch phase transitions receive live behavior
-coverage.
+There is also a small existing-operation cleanup queue: Commander Yammark's
+ten-site idle-time rewrite. It is byte-isolated, but remains deferred until its
+stage and rematch phase transitions receive live behavior coverage.
 
 The size ranking differs from the implementation order. New-game state and
 damage tables cover the most controls and records, but building them before
