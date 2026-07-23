@@ -181,6 +181,7 @@ class Patch:
     address: int
     expected: bytes
     replace: bytes
+    when: tuple[str, str] | None = None
 
 
 @dataclass(frozen=True)
@@ -377,12 +378,107 @@ QOL_FEATURES = (
     ),
 )
 
-SIMPLE_FEATURES = INTRO_FEATURES + NIGHTMARE_FEATURES + QOL_FEATURES
+MOVEMENT_FEATURES = (
+    FeatureSpec(
+        "air_moves_after_dash_jump",
+        "Air Moves After Dash Jump",
+        "Allow air actions after a ground or wall dash jump.",
+        "Movement",
+        "DashGlobal02",
+        "main_exe",
+        (
+            (0x1D951D0C, "860020A2"),
+            (0x1D952358, "860020A2"),
+        ),
+    ),
+    FeatureSpec(
+        "unlimited_air_moves",
+        "Unlimited Air Moves",
+        "Remove the normal once-per-airtime movement limit.",
+        "Movement",
+        "DashGlobal03",
+        "main_exe",
+        ((0x1D94FA9C, "00000000"),),
+    ),
+    FeatureSpec(
+        "disable_double_tap_dash",
+        "Disable Double-Tap Dash",
+        "Disable dashing from double-tapping a direction; the dash button remains.",
+        "Movement",
+        "DashGlobal04",
+        "main_exe",
+        ((0x1D950ADC, "0000023400000334"),),
+    ),
+    FeatureSpec(
+        "unlimited_dash_duration",
+        "Unlimited Dash Duration",
+        "Prevent dash-duration counters from expiring.",
+        "Movement",
+        "DashDurationUnlimited01",
+        "mixed",
+        (
+            (0x1D950CE8, "00000000"),
+            (0x1D950DD4, "00000000"),
+            (0x1D9B60D8, "00000000"),
+        ),
+    ),
+    FeatureSpec(
+        "unlock_x_hover",
+        "Unlock X's Hover",
+        "Allow X's hover action without its normal armor restriction.",
+        "Movement",
+        "HoverUnlock01",
+        "main_exe",
+        ((0x1D956A60, "00000000"),),
+    ),
+    FeatureSpec(
+        "unlimited_high_jump",
+        "Unlimited High Jump",
+        "Prevent the High Jump attachment's duration counters from expiring.",
+        "Movement",
+        "HighJumpUnlimited01",
+        "mixed",
+        (
+            (0x1D94C988, "00000000"),
+            (0x1D9C33E4, "00000000"),
+        ),
+    ),
+    FeatureSpec(
+        "always_drop_nightmare_orbs",
+        "Always Drop Nightmare Orbs",
+        "Make defeated Nightmare Viruses drop orbs on every defeat.",
+        "Nightmare Effects",
+        "OrbSwitch01",
+        "main_exe",
+        ((0x1D95AE2C, "000080A0"),),
+    ),
+)
+
+SIMPLE_FEATURES = (
+    INTRO_FEATURES + NIGHTMARE_FEATURES + QOL_FEATURES + MOVEMENT_FEATURES
+)
+EXIT_STAGE_VARIANTS = {
+    "main_stages": {
+        "label": "Main Stages",
+        "source_option": "ExitButton02",
+        "writes": ((0x1D948BE8, "00000000"),),
+    },
+    "everywhere": {
+        "label": "Everywhere",
+        "source_option": "ExitButton03",
+        "writes": (
+            (0x1D948BCC, "00000000"),
+            (0x1D948BE8, "00000000"),
+        ),
+    },
+}
 FEATURE_SPECS = {item.feature_id: item for item in SIMPLE_FEATURES}
+EXIT_STAGE_FEATURE_ID = "exit_stage_availability"
 ALL_FEATURE_IDS = (
     "title_screen",
     "retranslation",
     *(item.feature_id for item in SIMPLE_FEATURES),
+    EXIT_STAGE_FEATURE_ID,
 )
 
 
@@ -571,6 +667,7 @@ def build_simple_feature_ops(
     intro_oracles: tuple[RawMode2Image, ...],
     nightmare_oracles: tuple[RawMode2Image, ...],
     qol_oracles: tuple[RawMode2Image, ...],
+    movement_oracles: tuple[RawMode2Image, ...],
     specs: tuple[FeatureSpec, ...],
     patcher_source: Path,
     patcher_data: Path,
@@ -582,10 +679,7 @@ def build_simple_feature_ops(
     stock_bin = stock.read_file("ROCK_X6.BIN")
     b01_members = indexed_archive_members(b01_bin)
     stock_members = indexed_archive_members(stock_bin)
-    oracle_member_sets = [
-        indexed_archive_members(image.read_file("ROCK_X6.BIN"))
-        for image in nightmare_oracles
-    ]
+    oracle_member_cache: dict[Path, dict[int, IndexedMember]] = {}
     patches: list[Patch] = []
     overlays: list[Overlay] = []
     evidence: dict[str, dict] = {}
@@ -597,6 +691,8 @@ def build_simple_feature_ops(
             feature_oracles = nightmare_oracles
         elif spec in QOL_FEATURES:
             feature_oracles = qol_oracles
+        elif spec in MOVEMENT_FEATURES:
+            feature_oracles = movement_oracles
         else:
             raise AssertionError(f"no oracle group for {spec.feature_id}")
         for raw_offset, replacement in source_writes[spec.feature_id]:
@@ -604,11 +700,7 @@ def build_simple_feature_ops(
             entry, b01_file_offset = b01_base.containing_file(
                 b01_user_offset, len(replacement)
             )
-            if spec.target == "main_exe":
-                if entry.name != SLUS_NAME:
-                    raise AssertionError(
-                        f"{spec.source_option} targets {entry.name}, expected {SLUS_NAME}"
-                    )
+            if entry.name == SLUS_NAME and spec.target in ("main_exe", "mixed"):
                 expected = read_iso_file_range(
                     b01_base, entry.name, b01_file_offset, len(replacement)
                 )
@@ -653,7 +745,10 @@ def build_simple_feature_ops(
                 )
                 continue
 
-            if spec.target != "rock_x6_bin" or entry.name != "ROCK_X6.BIN":
+            if (
+                entry.name != "ROCK_X6.BIN"
+                or spec.target not in ("rock_x6_bin", "mixed")
+            ):
                 raise AssertionError(
                     f"{spec.source_option} has unsupported target {entry.name}"
                 )
@@ -675,7 +770,13 @@ def build_simple_feature_ops(
                 raise AssertionError(
                     f"{spec.source_option} depends on a B01 member rewrite"
                 )
-            for oracle, members in zip(feature_oracles, oracle_member_sets):
+            for oracle in feature_oracles:
+                members = oracle_member_cache.get(oracle.path)
+                if members is None:
+                    members = indexed_archive_members(
+                        oracle.read_file("ROCK_X6.BIN")
+                    )
+                    oracle_member_cache[oracle.path] = members
                 oracle_member = members.get(source_member.member_id)
                 if (
                     oracle_member is None
@@ -722,7 +823,11 @@ def build_simple_feature_ops(
             )
         evidence[spec.feature_id] = {
             "status": "ready-pending-live-smoke"
-            if spec in INTRO_FEATURES or spec in QOL_FEATURES
+            if (
+                spec in INTRO_FEATURES
+                or spec in QOL_FEATURES
+                or spec in MOVEMENT_FEATURES
+            )
             else "ready",
             "source_selection": {spec.source_option: 1},
             "common_base_writes_inherited": 0,
@@ -732,6 +837,171 @@ def build_simple_feature_ops(
             ),
         }
     return patches, overlays, evidence
+
+
+def resolve_exit_stage_writes(
+    patcher_source: Path, patcher_data: Path
+) -> dict[str, list[tuple[int, bytes]]]:
+    """Resolve the three-state ExitButton radio group without exposing helpers."""
+    try:
+        import tweaks_engine as engine
+    except ImportError as error:
+        raise RuntimeError("cannot import tools/tweaks_engine.py") from error
+
+    src_dir = patcher_source.parent.parent
+    profile_path = patcher_data.parent / "profiles" / "default.x6tweaksprofile"
+    require_file(profile_path, "Tweaks default profile")
+    db = engine.twr.TweaksDB(src_dir)
+    base = engine.twr.load_profile(profile_path)
+    result: dict[str, list[tuple[int, bytes]]] = {}
+    for value, variant in EXIT_STAGE_VARIANTS.items():
+        merged = dict(base)
+        for name in ("ExitButton01", "ExitButton02", "ExitButton03"):
+            merged[name] = "1" if name == variant["source_option"] else "0"
+        _normalized, patchfile, patch_list, values, synth = engine._assemble(
+            db, merged, base
+        )
+        inherited = set(db.patchlist_base) | set(db.patchlist_script)
+        owned = [name for name in patch_list if name not in inherited]
+        expected_closure = ["ExitButton01", variant["source_option"]]
+        if patchfile != "b01" or owned != expected_closure:
+            raise AssertionError(
+                f"Exit Stage {value} closure changed: "
+                f"patchfile={patchfile!r}, owned={owned!r}"
+            )
+        if engine.expand_entry(
+            db, "ExitButton01", patchfile, values, synth
+        ):
+            raise AssertionError("stock ExitButton01 helper gained a payload")
+        writes: list[tuple[int, bytes]] = []
+        for data_hex, raw_offset in engine.expand_entry(
+            db, variant["source_option"], patchfile, values, synth
+        ):
+            for split_hex, split_offset in engine.ecc_split(
+                data_hex, raw_offset
+            ):
+                writes.append((split_offset, bytes.fromhex(split_hex)))
+        expected = [
+            (offset, bytes.fromhex(payload))
+            for offset, payload in variant["writes"]
+        ]
+        if writes != expected:
+            raise AssertionError(
+                f"Exit Stage {value} source writes changed: "
+                f"{[(hex(o), b.hex()) for o, b in writes]!r}"
+            )
+        result[value] = writes
+    return result
+
+
+def build_exit_stage_ops(
+    stock: RawMode2Image,
+    b01_base: RawMode2Image,
+    variant_oracles: dict[str, tuple[RawMode2Image, ...]],
+    patcher_source: Path,
+    patcher_data: Path,
+) -> tuple[list[Patch], dict]:
+    """Build one configurable feature from the ExitButton radio group."""
+    writes = resolve_exit_stage_writes(patcher_source, patcher_data)
+    main_by_offset = dict(writes["main_stages"])
+    everywhere_by_offset = dict(writes["everywhere"])
+    common_raw = 0x1D948BE8
+    everywhere_raw = 0x1D948BCC
+    if (
+        main_by_offset != {common_raw: bytes(4)}
+        or everywhere_by_offset
+        != {everywhere_raw: bytes(4), common_raw: bytes(4)}
+    ):
+        raise AssertionError("Exit Stage reviewed choice relationship changed")
+
+    stock_load = struct.unpack("<I", stock.read_file(SLUS_NAME)[0x18:0x1C])[0]
+    patches: list[Patch] = []
+    operations = []
+    for raw_offset, replacement, condition, label in (
+        (common_raw, bytes(4), None, "main-stages-and-everywhere"),
+        (
+            everywhere_raw,
+            bytes(4),
+            ("availability", "everywhere"),
+            "everywhere-extra",
+        ),
+    ):
+        source_user_offset = raw_to_user_offset(raw_offset)
+        entry, file_offset = b01_base.containing_file(
+            source_user_offset, len(replacement)
+        )
+        if entry.name != SLUS_NAME:
+            raise AssertionError(f"Exit Stage targets {entry.name}, expected SLUS")
+        expected = read_iso_file_range(
+            b01_base, SLUS_NAME, file_offset, len(replacement)
+        )
+        if (
+            read_iso_file_range(stock, SLUS_NAME, file_offset, len(replacement))
+            != expected
+        ):
+            raise AssertionError("Exit Stage depends on a B01 SLUS rewrite")
+
+        for value, oracles in variant_oracles.items():
+            wanted = (
+                replacement
+                if raw_offset == common_raw or value == "everywhere"
+                else expected
+            )
+            for oracle in oracles:
+                actual = read_iso_file_range(
+                    oracle, SLUS_NAME, file_offset, len(replacement)
+                )
+                if actual != wanted:
+                    state = "replacement" if wanted == replacement else "stock"
+                    raise AssertionError(
+                        f"{oracle.path.name} does not contain Exit Stage "
+                        f"{value} {state} bytes at 0x{file_offset:X}"
+                    )
+
+        address = stock_load + file_offset - USER_SECTOR
+        patches.append(
+            Patch(
+                EXIT_STAGE_FEATURE_ID,
+                label,
+                address,
+                expected,
+                replacement,
+                condition,
+            )
+        )
+        operations.append(
+            {
+                "kind": "guarded-main-exe-patch",
+                "label": label,
+                "source_raw_offset": raw_offset,
+                "iso_file": SLUS_NAME,
+                "file_offset": file_offset,
+                "guest_address": address,
+                "size": len(replacement),
+                "expected": expected.hex().upper(),
+                "replace": replacement.hex().upper(),
+                "when": (
+                    {condition[0]: condition[1]} if condition is not None else None
+                ),
+            }
+        )
+    return patches, {
+        "status": "ready-pending-live-smoke",
+        "source_selections": {
+            value: {variant["source_option"]: 1}
+            for value, variant in EXIT_STAGE_VARIANTS.items()
+        },
+        "payloadless_stock_helper": "ExitButton01",
+        "common_base_writes_inherited": 0,
+        "semantic_operations": operations,
+        "oracle_count_per_choice": {
+            value: len(oracles) for value, oracles in variant_oracles.items()
+        },
+        "deferred_interaction": (
+            "LivesSwitch01 forces Everywhere in the source patcher and remains "
+            "deferred until that relationship has an explicit product policy."
+        ),
+    }
 
 
 def build_title_overlays(
@@ -1637,6 +1907,36 @@ def build_manifest(
             f"group = {q(spec.group)}",
             "default_enabled = false",
         ]
+    if EXIT_STAGE_FEATURE_ID in features:
+        lines += [
+            "",
+            "[[feature]]",
+            f"id = {q(EXIT_STAGE_FEATURE_ID)}",
+            'name = "Exit Stage Availability"',
+            (
+                'description = "Choose where Exit Stage is available while '
+                'the feature is enabled."'
+            ),
+            'group = "Stage Rules"',
+            "default_enabled = false",
+            "",
+            "[[option]]",
+            f"feature = {q(EXIT_STAGE_FEATURE_ID)}",
+            'id = "availability"',
+            'label = "Available in"',
+            'description = "Stages where the Exit Stage command is available."',
+            'group = "Stage Rules"',
+            'type = "choice"',
+            'default = "main_stages"',
+            "",
+            "[[option.choice]]",
+            'value = "main_stages"',
+            'label = "Main Stages"',
+            "",
+            "[[option.choice]]",
+            'value = "everywhere"',
+            'label = "Everywhere"',
+        ]
     for patch in patches:
         lines += [
             "",
@@ -1648,6 +1948,10 @@ def build_manifest(
             f"replace = {q(patch.replace.hex().upper())}",
             "order = 0",
         ]
+        if patch.when is not None:
+            lines.append(
+                f"when = {{ {patch.when[0]} = {q(patch.when[1])} }}"
+            )
     for index, overlay in enumerate(overlays):
         lines += [
             "",
@@ -1772,6 +2076,36 @@ def main() -> int:
         type=Path,
         default=DEFAULT_ORACLE_DIR / "qol-current-combined.bin",
     )
+    parser.add_argument(
+        "--movement-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "movement-core.bin",
+    )
+    parser.add_argument(
+        "--combined-movement-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "movement-current-combined.bin",
+    )
+    parser.add_argument(
+        "--exit-main-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "exit-main-stages.bin",
+    )
+    parser.add_argument(
+        "--combined-exit-main-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "exit-current-combined-main-stages.bin",
+    )
+    parser.add_argument(
+        "--exit-everywhere-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "exit-everywhere.bin",
+    )
+    parser.add_argument(
+        "--combined-exit-everywhere-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "exit-current-combined-everywhere.bin",
+    )
     parser.add_argument("--patcher-data", type=Path, default=DEFAULT_PATCHER_DATA)
     parser.add_argument(
         "--patcher-source", type=Path, default=DEFAULT_PATCHER_SOURCE
@@ -1781,7 +2115,7 @@ def main() -> int:
         choices=("all", *ALL_FEATURE_IDS),
         default="all",
     )
-    parser.add_argument("--package-version", default="1.3.0")
+    parser.add_argument("--package-version", default="1.4.0")
     parser.add_argument("--audit-retranslation", action="store_true")
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--out", type=Path)
@@ -1800,12 +2134,14 @@ def main() -> int:
     )
     wants_title = "title_screen" in enabled_features
     wants_retranslation = "retranslation" in enabled_features
+    wants_exit = EXIT_STAGE_FEATURE_ID in enabled_features
     simple_specs = tuple(
         spec for spec in SIMPLE_FEATURES if spec.feature_id in enabled_features
     )
     wants_intro = any(spec in INTRO_FEATURES for spec in simple_specs)
     wants_nightmare = any(spec in NIGHTMARE_FEATURES for spec in simple_specs)
     wants_qol = any(spec in QOL_FEATURES for spec in simple_specs)
+    wants_movement = any(spec in MOVEMENT_FEATURES for spec in simple_specs)
     if wants_title:
         require_file(args.title_oracle, "title-only conversion oracle")
     combined_path = (
@@ -1818,7 +2154,7 @@ def main() -> int:
     if wants_retranslation:
         require_file(args.s02_base, "s02 base conversion oracle")
         require_file(args.patcher_source, "Tweaks _dat.ahk")
-    if simple_specs:
+    if simple_specs or wants_exit:
         require_file(args.b01_base, "B01 base conversion oracle")
         require_file(args.patcher_source, "Tweaks _dat.ahk")
         require_file(
@@ -1841,6 +2177,26 @@ def main() -> int:
         require_file(
             args.combined_qol_oracle, "combined QoL conversion oracle"
         )
+    if wants_movement:
+        require_file(args.movement_oracle, "movement conversion oracle")
+        require_file(
+            args.combined_movement_oracle,
+            "combined movement conversion oracle",
+        )
+    if wants_exit:
+        for path, description in (
+            (args.exit_main_oracle, "Exit Stage Main Stages oracle"),
+            (
+                args.combined_exit_main_oracle,
+                "combined Exit Stage Main Stages oracle",
+            ),
+            (args.exit_everywhere_oracle, "Exit Stage Everywhere oracle"),
+            (
+                args.combined_exit_everywhere_oracle,
+                "combined Exit Stage Everywhere oracle",
+            ),
+        ):
+            require_file(path, description)
 
     with ExitStack() as stack:
         stock = stack.enter_context(RawMode2Image(args.stock))
@@ -1866,7 +2222,7 @@ def main() -> int:
         )
         b01_base = (
             stack.enter_context(RawMode2Image(args.b01_base))
-            if simple_specs
+            if simple_specs or wants_exit
             else None
         )
         intro_oracles = tuple(
@@ -1893,6 +2249,30 @@ def main() -> int:
                 else ()
             )
         )
+        movement_oracles = tuple(
+            stack.enter_context(RawMode2Image(path))
+            for path in (
+                (args.movement_oracle, args.combined_movement_oracle)
+                if wants_movement
+                else ()
+            )
+        )
+        exit_variant_oracles = {
+            "main_stages": tuple(
+                stack.enter_context(RawMode2Image(path))
+                for path in (
+                    args.exit_main_oracle,
+                    args.combined_exit_main_oracle,
+                )
+            ),
+            "everywhere": tuple(
+                stack.enter_context(RawMode2Image(path))
+                for path in (
+                    args.exit_everywhere_oracle,
+                    args.combined_exit_everywhere_oracle,
+                )
+            ),
+        } if wants_exit else {}
 
         title_overlays = (
             build_title_overlays(stock, title, combined, args.patcher_data)
@@ -1984,6 +2364,7 @@ def main() -> int:
                     intro_oracles,
                     nightmare_oracles,
                     qol_oracles,
+                    movement_oracles,
                     simple_specs,
                     args.patcher_source,
                     args.patcher_data,
@@ -2016,6 +2397,39 @@ def main() -> int:
                 report["provenance"][
                     "combined_qol_oracle_sha256"
                 ] = file_sha256(args.combined_qol_oracle)
+            if wants_movement:
+                report["provenance"][
+                    "movement_oracle_sha256"
+                ] = file_sha256(args.movement_oracle)
+                report["provenance"][
+                    "combined_movement_oracle_sha256"
+                ] = file_sha256(args.combined_movement_oracle)
+        if wants_exit:
+            exit_patches, exit_evidence = build_exit_stage_ops(
+                stock,
+                b01_base,
+                exit_variant_oracles,
+                args.patcher_source,
+                args.patcher_data,
+            )
+            patches += exit_patches
+            report["features"][EXIT_STAGE_FEATURE_ID] = exit_evidence
+            report["provenance"].update(
+                {
+                    "exit_main_oracle_sha256": file_sha256(
+                        args.exit_main_oracle
+                    ),
+                    "combined_exit_main_oracle_sha256": file_sha256(
+                        args.combined_exit_main_oracle
+                    ),
+                    "exit_everywhere_oracle_sha256": file_sha256(
+                        args.exit_everywhere_oracle
+                    ),
+                    "combined_exit_everywhere_oracle_sha256": file_sha256(
+                        args.combined_exit_everywhere_oracle
+                    ),
+                }
+            )
         report["composition"] = validate_composition(stock, patches, overlays)
 
     print(json.dumps(report, indent=2, sort_keys=True))

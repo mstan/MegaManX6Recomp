@@ -213,6 +213,73 @@ and Exit Button helpers into its source closure. `DialogueDisable01` through
 design. Their patcher order is not permission to implement an arbitrary
 last-writer-wins rule.
 
+### Movement controls
+
+Seven movement features are independently accepted, pending live behavior
+smoke tests. Each resolves to exactly its named source option, inherits no
+common-base write, maps to identical stock/B01 guards, and is disjoint from
+the current package and the other six features.
+
+| Feature ID | Tweaks source | Semantic operations |
+| --- | --- | --- |
+| `air_moves_after_dash_jump` | `DashGlobal02` | SLUS `0x8003AF74`: `860022A2 → 860020A2`; `0x8003B490`: `860023A2 → 860020A2` |
+| `unlimited_air_moves` | `DashGlobal03` | SLUS `0x80039094`: `60004014 → 00000000` |
+| `disable_double_tap_dash` | `DashGlobal04` | SLUS `0x80039FA4`: `8800A2808800A390 → 0000023400000334` |
+| `unlimited_dash_duration` | `DashDurationUnlimited01` | SLUS `0x8003A080` and `0x8003A16C`: `FFFF4224 → 00000000`; `ROCK_X6.BIN` member `2+0x2B70`: same |
+| `unlock_x_hover` | `HoverUnlock01` | SLUS `0x8003F218`: `18006214 → 00000000` |
+| `unlimited_high_jump` | `HighJumpUnlimited01` | SLUS `0x800366A0`: `FFFF8224 → 00000000`; `ROCK_X6.BIN` member `24+0x332C`: `FFFF6224 → 00000000` |
+| `always_drop_nightmare_orbs` | `OrbSwitch01` | SLUS `0x80042D94`: `000083A0 → 000080A0` |
+
+`movement-core.bin` and `movement-current-combined.bin` contain all eleven
+owned replacements. The focused aggregate is contaminated relative to the old
+B01 control by unrelated legacy-patcher bytes, so it is never used as a
+whole-diff ownership oracle. The converter admits only source-declared writes,
+maps each one independently, and checks the combined image at those semantic
+targets. The current combined image is otherwise byte-exact when the eleven
+movement writes are applied to the preceding QoL combined control.
+
+Future `HoverUnlock02` repeats the Unlimited Air Moves and hover-duration
+writes byte-identically and also requires Unlock X's Hover. Those are shared
+capabilities, not mutual exclusions; that feature remains deferred until the
+resolver can represent its prerequisite closure without duplicating or hiding
+ownership.
+
+Live checks must cover ground and wall dash jumps, landing resets, armor and
+character differences, double-tap versus dash-button input, dash cancellation
+and stage transitions, both High Jump execution paths, and repeated Nightmare
+Virus defeat/reform cycles. The final orb label must be confirmed against
+visible behavior because the upstream source describes the behavior as
+"always reappear."
+
+### Exit Stage Availability
+
+`ExitButton01`, `ExitButton02`, and `ExitButton03` are represented as one
+configurable feature, not three checkboxes:
+
+- disabled is the stock Normal behavior;
+- enabled with `Main Stages` NOPs the guard at `0x80033020`
+  (`03006010 → 00000000`); and
+- enabled with `Everywhere` also NOPs `0x80033004`
+  (`0B004010 → 00000000`).
+
+The stock `ExitButton01` selector is payloadless and is recorded only as
+source-closure evidence. The common patch has no option condition because both
+enabled choices need it; the additional patch is conditioned on
+`availability = "everywhere"`. Focused and current-combined oracles verify
+both choices, including the negative proof that Main Stages retains the
+Everywhere-only stock guard.
+
+`LivesSwitch01` remains deferred. The original GUI forcibly selects
+`ExitButton03`, so converting Infinite Lives naively would make the visible
+Exit Stage choice lie. It must either be proven safe without that coupling or
+declare an explicit, user-visible requirement; persisted Exit Stage state must
+never be changed silently.
+
+Live tests must exercise the main eight stages, intro and hidden areas, final
+stages, both characters, fresh and loaded saves, actual return destinations,
+choice persistence while disabled, and switching from Everywhere back to Main
+Stages.
+
 ## Four-image algebra
 
 `tools/tweaks_diff_algebra.cpp` compares four local reference images:
