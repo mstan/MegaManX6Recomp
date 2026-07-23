@@ -51,29 +51,32 @@ offset to a guarded stock main-EXE address and proves that the retranslation
 oracle contains the replacement. Adjacent and byte-identical overlapping
 writes are coalesced into 12 canonical runtime ranges.
 
-`ROCK_X6.DAT` begins with a stable logical-record table. Entry `id * 8` contains
-the record's sector offset from the start of the DAT and its byte size. The s02
-base changes exactly 67 reviewed records:
+`ROCK_X6.DAT` begins with a stable outer-record table. Entry `id * 8` contains
+the record's sector offset from the start of the DAT and its byte size. Each
+outer record has another table describing its typed, sector-aligned subassets.
+The converter rebuilds 61 custom outer records from stock plus exactly 82
+retranslation-owned s02 subassets:
 
-- 32 existing equal-size records are replaced in place;
-- 30 grown records and five new records are packed into the beginning of the
-  stock `ZNULL.DAT` padding area; and
-- only the corresponding 8-byte table entries are redirected to the packed
-  records.
+- 36 custom records remain the same size and are replaced in place;
+- 25 grown custom records are packed into the beginning of the stock
+  `ZNULL.DAT` padding area; and
+- only those 25 outer table entries are redirected to the packed records.
 
-The relocated payload uses `0x236A` of the stock padding area's `0x46A8`
-sectors. `ROCK_X6.BIN` is byte-identical between stock and s02. The 36-byte
-s02 SLUS base delta is only rebuilt-image LBA scaffolding and is deliberately
-omitted.
+The relocated payload uses `0x1ABE` of the stock padding area's `0x46A8`
+sectors. Records 107 and 243–247, including their common b01 scaffolding, are
+not emitted. `ROCK_X6.BIN` is byte-identical between stock and s02. The
+36-byte s02 SLUS base delta is only rebuilt-image LBA scaffolding and is also
+deliberately omitted.
 
 The ISO root record keeps the stock DAT LBA and reports the virtual
-`0x04243000` byte extent in both little- and big-endian fields. This lets the
+`0x03DED000` byte extent in both little- and big-endian fields. This lets the
 guest's normal `CdSearchFile` path reach relocated records without changing the
 physical stock image.
 
-Record 107 also contains three title-screen ranges. Retranslation emits only
-its 21 changed bytes outside those ranges, so `Title Screen` and
-`Retranslation` remain independent features and can be enabled together.
+Record 107 contains three title-screen ranges and no uniquely owned
+retranslation subasset, so the retranslation feature does not claim it.
+`Title Screen` and `Retranslation` remain independent and can be enabled
+together.
 
 ## Four-image algebra
 

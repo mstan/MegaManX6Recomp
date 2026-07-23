@@ -317,9 +317,71 @@ class DatRecord:
     payload: bytes
 
 
-SCRIPT_RECORD_IDS = frozenset(
-    (*range(85, 90), 106, 107, 110, 111, *range(149, 162), *range(203, 248))
+SCRIPT_SUBASSETS: dict[int, dict[int, tuple[int, int | None]]] = {
+    **{
+        record_id: {7: (0x10001, 0x8000), 9: (0x12, 0x2600)}
+        for record_id in range(85, 90)
+    },
+    106: {0: (0x10001, 0x8000), 14: (0x15, 0x1600)},
+    110: {0: (0x10001, 0x8000), 12: (0x15, 0x3000)},
+    111: {0: (0x10001, 0x8000), 12: (0x15, 0x3000)},
+    **{
+        record_id: {
+            0: (0x10001, 0x8000),
+            (
+                15
+                if record_id in (149, 153, 157)
+                else 12
+                if record_id == 158
+                else 11
+                if record_id in (152, 161)
+                else 14
+            ): (0x15, 0x12000),
+        }
+        for record_id in range(149, 162)
+    },
+    **{
+        record_id: {0: (0x15, None)}
+        for record_id in range(203, 243)
+    },
+}
+
+SCRIPT_IN_PLACE_IDS = frozenset(
+    (
+        *range(85, 90),
+        *range(203, 207),
+        *range(208, 213),
+        *range(214, 221),
+        *range(223, 227),
+        *range(229, 235),
+        *range(236, 239),
+        240,
+        242,
+    )
 )
+SCRIPT_RELOCATED_IDS = frozenset(
+    (
+        106,
+        110,
+        111,
+        *range(149, 162),
+        207,
+        213,
+        221,
+        222,
+        227,
+        228,
+        235,
+        239,
+        241,
+    )
+)
+
+
+@dataclass(frozen=True)
+class Subasset:
+    asset_type: int
+    payload: bytes
 
 
 def dat_records(data: bytes) -> dict[int, DatRecord]:
@@ -341,20 +403,54 @@ def dat_records(data: bytes) -> dict[int, DatRecord]:
     return records
 
 
-def byte_changed_runs(before: bytes, after: bytes) -> list[tuple[int, int]]:
-    if len(before) != len(after):
-        raise ValueError("changed-run inputs must have equal size")
+def parse_subassets(record: DatRecord) -> list[Subasset]:
+    if len(record.payload) < USER_SECTOR:
+        raise ValueError(f"DAT record {record.record_id} has no subasset header")
+    count, outer_size = struct.unpack_from("<II", record.payload, 0)
+    if outer_size != len(record.payload):
+        raise ValueError(
+            f"DAT record {record.record_id} outer size is "
+            f"0x{outer_size:X}, expected 0x{len(record.payload):X}"
+        )
+    if 8 + count * 8 > USER_SECTOR:
+        raise ValueError(f"DAT record {record.record_id} table is too large")
+    cursor = USER_SECTOR
     result = []
-    begin = None
-    for index, (old, new) in enumerate(zip(before, after)):
-        if old != new and begin is None:
-            begin = index
-        elif old == new and begin is not None:
-            result.append((begin, index))
-            begin = None
-    if begin is not None:
-        result.append((begin, len(before)))
+    for index in range(count):
+        asset_type, size = struct.unpack_from(
+            "<II", record.payload, 8 + index * 8
+        )
+        end = cursor + size
+        if end > len(record.payload):
+            raise ValueError(
+                f"DAT record {record.record_id} subasset {index} is truncated"
+            )
+        result.append(Subasset(asset_type, record.payload[cursor:end]))
+        cursor = (end + USER_SECTOR - 1) // USER_SECTOR * USER_SECTOR
+    if cursor != len(record.payload):
+        raise ValueError(
+            f"DAT record {record.record_id} subassets end at 0x{cursor:X}, "
+            f"outer ends at 0x{len(record.payload):X}"
+        )
     return result
+
+
+def build_outer_record(subassets: list[Subasset]) -> bytes:
+    if 8 + len(subassets) * 8 > USER_SECTOR:
+        raise ValueError("subasset table does not fit one sector")
+    result = bytearray(USER_SECTOR)
+    for index, subasset in enumerate(subassets):
+        struct.pack_into(
+            "<II",
+            result,
+            8 + index * 8,
+            subasset.asset_type,
+            len(subasset.payload),
+        )
+        result += subasset.payload
+        result += bytes((-len(result)) % USER_SECTOR)
+    struct.pack_into("<II", result, 0, len(subassets), len(result))
+    return bytes(result)
 
 
 def coalesce_patches(patches: list[Patch]) -> list[Patch]:
@@ -408,7 +504,7 @@ def build_retranslation_ops(
     patcher_source: Path,
     title_overlays: list[Overlay],
 ) -> tuple[list[Patch], list[Overlay], dict]:
-    """Repack only changed logical s02 records into the immutable stock image."""
+    """Build custom stock outers containing only owned s02 subassets."""
     stock_dat_entry = stock.entries["ROCK_X6.DAT"]
     stock_dat_start = stock_dat_entry.lba * USER_SECTOR
     stock_dat = stock.read_file("ROCK_X6.DAT")
@@ -417,22 +513,58 @@ def build_retranslation_ops(
         raise AssertionError("s02 base unexpectedly changes ROCK_X6.BIN")
     stock_records = dat_records(stock_dat)
     s02_records = dat_records(s02_dat)
-    changed_ids = {
-        record_id
-        for record_id in set(stock_records) | set(s02_records)
-        if (
-            record_id not in stock_records
-            or record_id not in s02_records
-            or stock_records[record_id].size != s02_records[record_id].size
-            or stock_records[record_id].payload
-            != s02_records[record_id].payload
-        )
-    }
-    if changed_ids != SCRIPT_RECORD_IDS:
-        raise AssertionError(
-            "unreviewed s02 record set: expected "
-            f"{sorted(SCRIPT_RECORD_IDS)}, got {sorted(changed_ids)}"
-        )
+    if len(SCRIPT_SUBASSETS) != 61:
+        raise AssertionError("reviewed script outer-record count changed")
+    if sum(len(items) for items in SCRIPT_SUBASSETS.values()) != 82:
+        raise AssertionError("reviewed script subasset count changed")
+    if (
+        set(SCRIPT_SUBASSETS)
+        != SCRIPT_IN_PLACE_IDS | SCRIPT_RELOCATED_IDS
+        or SCRIPT_IN_PLACE_IDS & SCRIPT_RELOCATED_IDS
+    ):
+        raise AssertionError("reviewed script record modes are inconsistent")
+
+    custom_records: dict[int, bytes] = {}
+    subasset_evidence = []
+    for record_id, owned in sorted(SCRIPT_SUBASSETS.items()):
+        original = stock_records[record_id]
+        source = s02_records[record_id]
+        stock_subassets = parse_subassets(original)
+        s02_subassets = parse_subassets(source)
+        # Prove the canonical builder preserves a stock outer exactly before
+        # changing any feature-owned nested asset.
+        if build_outer_record(stock_subassets) != original.payload:
+            raise AssertionError(
+                f"stock outer record {record_id} is not canonical"
+            )
+        custom_subassets = list(stock_subassets)
+        for index, (expected_type, expected_size) in sorted(owned.items()):
+            replacement = s02_subassets[index]
+            if replacement.asset_type != expected_type:
+                raise AssertionError(
+                    f"record {record_id} subasset {index} type is "
+                    f"0x{replacement.asset_type:X}, expected 0x{expected_type:X}"
+                )
+            if (
+                expected_size is not None
+                and len(replacement.payload) != expected_size
+            ):
+                raise AssertionError(
+                    f"record {record_id} subasset {index} size is "
+                    f"0x{len(replacement.payload):X}, "
+                    f"expected 0x{expected_size:X}"
+                )
+            custom_subassets[index] = replacement
+            subasset_evidence.append(
+                {
+                    "record_id": record_id,
+                    "subasset_index": index,
+                    "type": replacement.asset_type,
+                    "size": len(replacement.payload),
+                    "sha256": sha256(replacement.payload),
+                }
+            )
+        custom_records[record_id] = build_outer_record(custom_subassets)
 
     protected = [
         (item.user_offset, item.user_offset + len(item.replace), item.label)
@@ -442,83 +574,55 @@ def build_retranslation_ops(
     equal_size_ids = []
     relocated_ids = []
     record_evidence = []
-    record107_emitted_bytes = 0
 
     if stock_dat_entry.size % USER_SECTOR:
         raise AssertionError("stock ROCK_X6.DAT is not sector aligned")
     pack_sector = stock_dat_entry.size // USER_SECTOR
     pack_first_sector = pack_sector
-    for record_id in sorted(changed_ids):
-        target = s02_records[record_id]
-        original = stock_records.get(record_id)
-        if original is not None and original.size == target.size:
+    for record_id, target_payload in sorted(custom_records.items()):
+        original = stock_records[record_id]
+        if len(target_payload) == original.size:
             equal_size_ids.append(record_id)
             record_start = stock_dat_start + original.sector * USER_SECTOR
-            if record_id == 107:
-                # Three title assets share record 107.  The script owns only 21
-                # bytes outside those asset ranges, so emit its exact runs and
-                # leave all title-owned bytes unclaimed.
-                ranges = byte_changed_runs(original.payload, target.payload)
-                for begin, end in ranges:
-                    absolute_begin = record_start + begin
-                    absolute_end = record_start + end
-                    if any(
-                        absolute_begin < p_end and p_begin < absolute_end
-                        for p_begin, p_end, _label in protected
-                    ):
-                        continue
-                    overlays.append(
-                        Overlay(
-                            feature="retranslation",
-                            label=f"record-{record_id:03d}-{begin:06x}",
-                            user_offset=absolute_begin,
-                            expected=original.payload[begin:end],
-                            replace=target.payload[begin:end],
-                            iso_file="ROCK_X6.DAT",
-                            file_offset=original.sector * USER_SECTOR + begin,
-                        )
-                    )
-                    record107_emitted_bytes += end - begin
-            else:
-                overlays.append(
-                    Overlay(
-                        feature="retranslation",
-                        label=f"record-{record_id:03d}",
-                        user_offset=record_start,
-                        expected=original.payload,
-                        replace=target.payload,
-                        iso_file="ROCK_X6.DAT",
-                        file_offset=original.sector * USER_SECTOR,
-                    )
+            overlays.append(
+                Overlay(
+                    feature="retranslation",
+                    label=f"record-{record_id:03d}",
+                    user_offset=record_start,
+                    expected=original.payload,
+                    replace=target_payload,
+                    iso_file="ROCK_X6.DAT",
+                    file_offset=original.sector * USER_SECTOR,
                 )
+            )
             record_evidence.append(
                 {
                     "id": record_id,
                     "mode": "in-place",
                     "stock_sector": original.sector,
-                    "size": target.size,
-                    "sha256": sha256(target.payload),
+                    "size": len(target_payload),
+                    "sha256": sha256(target_payload),
                 }
             )
             continue
 
         relocated_ids.append(record_id)
         packed_offset = stock_dat_start + pack_sector * USER_SECTOR
-        expected_backing = stock.read_user(packed_offset, target.size)
+        expected_backing = stock.read_user(packed_offset, len(target_payload))
         overlays.append(
             Overlay(
                 feature="retranslation",
                 label=f"record-{record_id:03d}-relocated",
                 user_offset=packed_offset,
                 expected=expected_backing,
-                replace=target.payload,
+                replace=target_payload,
                 iso_file="ZNULL.DAT",
                 file_offset=packed_offset
                 - stock.entries["ZNULL.DAT"].lba * USER_SECTOR,
             )
         )
         old_table = stock_dat[record_id * 8 : record_id * 8 + 8]
-        new_table = struct.pack("<II", pack_sector, target.size)
+        new_table = struct.pack("<II", pack_sector, len(target_payload))
         overlays.append(
             Overlay(
                 feature="retranslation",
@@ -534,39 +638,37 @@ def build_retranslation_ops(
             {
                 "id": record_id,
                 "mode": "relocated",
-                "stock_sector": original.sector if original else None,
+                "stock_sector": original.sector,
                 "packed_sector": pack_sector,
-                "size": target.size,
-                "sha256": sha256(target.payload),
+                "size": len(target_payload),
+                "sha256": sha256(target_payload),
             }
         )
-        pack_sector += (target.size + USER_SECTOR - 1) // USER_SECTOR
+        pack_sector += len(target_payload) // USER_SECTOR
 
     znull_sectors = (
         stock.entries["ZNULL.DAT"].size + USER_SECTOR - 1
     ) // USER_SECTOR
     packed_sectors = pack_sector - pack_first_sector
-    if packed_sectors != 0x236A:
+    if packed_sectors != 0x1ABE:
         raise AssertionError(
             f"reviewed relocated payload was 0x{packed_sectors:X} sectors, "
-            "expected 0x236A"
+            "expected 0x1ABE"
         )
     if packed_sectors > znull_sectors:
         raise AssertionError("relocated script records do not fit stock ZNULL")
-    if len(equal_size_ids) != 32 or len(relocated_ids) != 35:
+    if (
+        set(equal_size_ids) != SCRIPT_IN_PLACE_IDS
+        or set(relocated_ids) != SCRIPT_RELOCATED_IDS
+    ):
         raise AssertionError(
-            "reviewed record modes changed: expected 32 in-place and 35 "
-            f"relocated, got {len(equal_size_ids)} and {len(relocated_ids)}"
-        )
-    if record107_emitted_bytes != 21:
-        raise AssertionError(
-            "reviewed record 107 ownership changed: expected 21 "
-            f"retranslation bytes, got {record107_emitted_bytes}"
+            "reviewed nested record modes changed: got in-place "
+            f"{equal_size_ids}, relocated {relocated_ids}"
         )
     # The guest ISO lookup must expose the virtual DAT extent through the final
     # relocated record. Keep the stock LBA and update both ISO9660 byte orders.
     logical_dat_size = pack_sector * USER_SECTOR
-    if logical_dat_size != 0x04243000:
+    if logical_dat_size != 0x03DED000:
         raise AssertionError(
             f"reviewed virtual DAT extent changed: 0x{logical_dat_size:08X}"
         )
@@ -582,13 +684,12 @@ def build_retranslation_ops(
             label="rock-x6-dat-logical-size",
             user_offset=iso_size_offset,
             expected=iso_size_expected,
-            replace=bytes.fromhex("0030240404243000"),
+            replace=bytes.fromhex("00D0DE0303DED000"),
             iso_file="ISO9660 root directory",
             file_offset=iso_size_offset,
         )
     )
 
-    stock_slus_entry = stock.entries[SLUS_NAME]
     load_address = struct.unpack("<I", stock.read_file(SLUS_NAME)[0x18:0x1C])[0]
     source_patches = []
     for name, raw_offset, replacement in parse_owned_script_writes(
@@ -630,7 +731,9 @@ def build_retranslation_ops(
     evidence = {
         "status": "ready",
         "selection": {"ScriptPatch02": 1},
-        "logical_record_ids": sorted(changed_ids),
+        "logical_record_ids": sorted(custom_records),
+        "owned_subasset_count": len(subasset_evidence),
+        "owned_subassets": subasset_evidence,
         "in_place_record_ids": equal_size_ids,
         "relocated_record_ids": relocated_ids,
         "relocated_start_sector": pack_first_sector,
@@ -642,7 +745,7 @@ def build_retranslation_ops(
         "records": record_evidence,
         "no_rock_x6_bin_changes": True,
         "title_ranges_unclaimed": True,
-        "record_107_emitted_bytes": record107_emitted_bytes,
+        "omitted_base_outer_record_ids": [107, 243, 244, 245, 246, 247],
     }
     return patches, overlays, evidence
 
@@ -652,8 +755,7 @@ def audit_retranslation(
     script_oracle: RawMode2Image,
     patcher_source: Path,
 ) -> dict:
-    """Prove owned executable edits while refusing unclassified s02 records."""
-    stock_slus = stock.entries[SLUS_NAME]
+    """Prove the source-level executable edits without building assets."""
     load_address = struct.unpack("<I", stock.read_file(SLUS_NAME)[0x18:0x1C])[0]
     writes = []
     for name, raw_offset, replacement in parse_owned_script_writes(
@@ -682,20 +784,16 @@ def audit_retranslation(
             }
         )
     return {
-        "status": "blocked-unclassified-script-records",
+        "status": "main-exe-audit-only",
         "reason": (
-            "The 15 ScriptTextDisplay/ScriptMenuAlign writes are isolated, but "
-            "the s02 script/font records are still entangled with a rebuilt "
-            "ROCK_X6.DAT layout and PatchList_Base. Emitting the whole s02 "
-            "container would violate the native stock-disc contract."
+            "This audit mode reports only ScriptTextDisplay/ScriptMenuAlign. "
+            "Normal retranslation generation separately rebuilds 61 stock "
+            "outer records from 82 owned s02 subassets."
         ),
         "owned_main_exe_writes": writes,
         "owned_main_exe_write_count": len(writes),
         "owned_main_exe_bytes": sum(item["size"] for item in writes),
-        "missing_primitive_or_mapping": (
-            "stable ROCK_X6.DAT logical-record identity plus a same-size asset "
-            "overlay or registered asset-read redirect for variable-size records"
-        ),
+        "asset_mapping_status": "implemented-by-nested-record-repacker",
     }
 
 
