@@ -269,7 +269,7 @@ Choose the narrowest supported primitive:
 | Same-size file or subasset payload | Guarded `disc_user` or `disc_raw` overlay at the stock-derived range |
 | Startup data or code in the main executable | Guarded guest-memory write at a proven lifecycle point |
 | Repeated or contextual behavior | Stable game-registered hook |
-| Configurable scalar | Bounded feature option resolved into a guarded write or hook value |
+| Direct bounded unsigned scalar | Format-v2 `replace_from` patch using `u8`, `u16le`, or `u32le` |
 | Grown record or container | Resolver-owned semantic container composer; otherwise defer |
 | Injected routine or shared scratch use | Registered hook/code allocator with relocation support; otherwise defer |
 
@@ -277,6 +277,54 @@ Large payloads should be file-backed and hash-verified. Disc overlays must be
 indexed before launch; do not scan installed features on every CD read. Hooks
 must dispatch through stable IDs and should have negligible cost when disabled.
 Packages do not load arbitrary native code.
+
+### Bounded integer conversion
+
+Use `replace_from` only when the upstream option is a direct bounded unsigned
+scalar. The option declaration owns the range and default; the patch declares
+the encoding and exact guarded record:
+
+```toml
+format_version = 2
+
+[[option]]
+feature = "normal_ground_dash_duration"
+id = "frames"
+label = "Frames"
+type = "integer"
+min = 10
+max = 100
+step = 1
+default = 30
+
+[[patch]]
+feature = "normal_ground_dash_duration"
+target = "main_exe"
+address = 2147723944
+expected = "1E000224"
+replace_from = { option = "frames", encoding = "u16le", offset = 0 }
+```
+
+The replacement begins as the complete `expected` byte sequence, then the
+encoded field replaces the bytes at `offset`. Guard a complete instruction or
+semantic record when possible, even if the value occupies fewer bytes.
+
+Before conversion, prove all of the following:
+
+- the stock/default selection is a no-op;
+- minimum, one interior value, and maximum retain exact source closure and
+  write topology;
+- every emitted payload is exactly the declared unsigned encoding;
+- the complete declared range, plus any addend, fits that encoding;
+- executable writes map independently to a stock guest address;
+- container writes map independently to a stock member or subasset identity;
+- the dynamic guard range does not overlap another enabled operation; and
+- default, minimum, maximum, malformed, and out-of-range values are tested by
+  the real resolver.
+
+Do not use this primitive for split immediates, bitfields, signed arithmetic,
+tables, expressions, code injection, or a value whose valid behavioral range
+is unknown. Add a narrower typed primitive or hook for those cases.
 
 ## Dependencies and collisions
 

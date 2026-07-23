@@ -186,6 +186,23 @@ class Patch:
 
 
 @dataclass(frozen=True)
+class ParamPatch:
+    feature: str
+    label: str
+    target: str
+    location: int
+    expected: bytes
+    option_id: str
+    encoding: str
+    value_offset: int = 0
+    addend: int = 0
+    source: str = ""
+    raw_offset: int | None = None
+    iso_file: str = ""
+    file_offset: int | None = None
+
+
+@dataclass(frozen=True)
 class FeatureSpec:
     """One user-facing feature and its exact reviewed Tweaks source closure."""
 
@@ -226,6 +243,24 @@ class ConfigFeatureSpec:
     variants: tuple[ConfigVariant, ...]
     option_id: str = ""
     option_label: str = ""
+
+
+@dataclass(frozen=True)
+class ParamFeatureSpec:
+    feature_id: str
+    name: str
+    description: str
+    group: str
+    source_option: str
+    option_id: str
+    option_label: str
+    minimum: int
+    maximum: int
+    default: int
+    encoding: str
+    target: str
+    expected_raw_offsets: tuple[int, ...]
+    samples: tuple[int, ...]
 
 
 @dataclass(frozen=True)
@@ -1061,6 +1096,329 @@ CONFIG_FEATURES = (
     + STAGE_CONFIG_FEATURES
 )
 
+PARAM_FEATURES = (
+    ParamFeatureSpec(
+        "yammark_contact_damage",
+        "Yammark Contact Damage",
+        "Set damage from touching Commander Yammark.",
+        "Boss Damage",
+        "BossDmg0101",
+        "damage",
+        "Damage",
+        1,
+        99,
+        4,
+        "u8",
+        "rock_x6_bin",
+        (0x1D9E34E8, 0x1DB2EB38),
+        (1, 50, 99),
+    ),
+    ParamFeatureSpec(
+        "yammark_firefly_damage",
+        "Yammark Firefly Damage",
+        "Set contact damage from Commander Yammark's fireflies.",
+        "Boss Damage",
+        "BossDmg0102",
+        "damage",
+        "Damage",
+        1,
+        99,
+        2,
+        "u8",
+        "rock_x6_bin",
+        (0x1D9E5ABC, 0x1DB3110C),
+        (1, 50, 99),
+    ),
+    ParamFeatureSpec(
+        "yammark_green_orb_damage",
+        "Yammark Green Orb Damage",
+        "Set damage from Commander Yammark's green projectiles.",
+        "Boss Damage",
+        "BossDmg0103",
+        "damage",
+        "Damage",
+        1,
+        99,
+        2,
+        "u8",
+        "rock_x6_bin",
+        (0x1D9E81FC, 0x1DB3384C),
+        (1, 50, 99),
+    ),
+    ParamFeatureSpec(
+        "wolfang_contact_damage",
+        "Wolfang Contact Damage",
+        "Set damage from touching Blizzard Wolfang and his spike sub-actor.",
+        "Boss Damage",
+        "BossDmg0201",
+        "damage",
+        "Damage",
+        1,
+        99,
+        4,
+        "u8",
+        "rock_x6_bin",
+        (0x1D9F7A20, 0x1D9F66FC, 0x1DB385A8, 0x1DB37284),
+        (1, 50, 99),
+    ),
+    ParamFeatureSpec(
+        "wolfang_ice_block_damage",
+        "Wolfang Ice Block Damage",
+        "Set damage from Blizzard Wolfang's ice blocks.",
+        "Boss Damage",
+        "BossDmg0202",
+        "damage",
+        "Damage",
+        1,
+        99,
+        4,
+        "u8",
+        "rock_x6_bin",
+        (0x1D9F7BF4, 0x1DB3877C),
+        (1, 50, 99),
+    ),
+    ParamFeatureSpec(
+        "wolfang_ice_debris_damage",
+        "Wolfang Ice Debris Damage",
+        "Set damage from Blizzard Wolfang's ice-block debris.",
+        "Boss Damage",
+        "BossDmg0203",
+        "damage",
+        "Damage",
+        1,
+        99,
+        2,
+        "u8",
+        "rock_x6_bin",
+        (0x1D9F7E8C, 0x1DB388E4),
+        (1, 50, 99),
+    ),
+    ParamFeatureSpec(
+        "wolfang_ice_spike_damage",
+        "Wolfang Ice Spike Damage",
+        "Set damage from Blizzard Wolfang's ice spikes.",
+        "Boss Damage",
+        "BossDmg0204",
+        "damage",
+        "Damage",
+        1,
+        99,
+        6,
+        "u8",
+        "rock_x6_bin",
+        (0x1D9F6838, 0x1DB373C0),
+        (1, 50, 99),
+    ),
+    ParamFeatureSpec(
+        "reploid_small_orb_value",
+        "Reploid Small Orb Value",
+        "Set the Nightmare Soul value of small blue orbs from Reploids.",
+        "Nightmare Souls",
+        "OrbValue06",
+        "souls",
+        "Souls",
+        0,
+        9999,
+        4,
+        "u16le",
+        "main_exe",
+        (0x1D95A220,),
+        (0, 1, 9999),
+    ),
+    ParamFeatureSpec(
+        "virus_small_orb_value",
+        "Virus Small Orb Value",
+        "Set the Nightmare Soul value of small blue orbs from Nightmare Viruses.",
+        "Nightmare Souls",
+        "OrbValue01",
+        "souls",
+        "Souls",
+        0,
+        9999,
+        4,
+        "u16le",
+        "main_exe",
+        (0x1D95A360,),
+        (0, 1, 9999),
+    ),
+    ParamFeatureSpec(
+        "virus_big_orb_value",
+        "Virus Big Orb Value",
+        "Set the Nightmare Soul value of large blue orbs from Nightmare Viruses.",
+        "Nightmare Souls",
+        "OrbValue02",
+        "souls",
+        "Souls",
+        0,
+        9999,
+        8,
+        "u16le",
+        "main_exe",
+        (0x1D95A244,),
+        (0, 1, 9999),
+    ),
+    ParamFeatureSpec(
+        "main_boss_red_orb_value",
+        "Main Boss Red Orb Value",
+        "Set the Nightmare Soul value of red orbs from main bosses.",
+        "Nightmare Souls",
+        "OrbValue03",
+        "souls",
+        "Souls",
+        0,
+        9999,
+        100,
+        "u16le",
+        "main_exe",
+        (0x1D95819C,),
+        (0, 1, 9999),
+    ),
+    ParamFeatureSpec(
+        "main_boss_green_orb_value",
+        "Main Boss Green Orb Value",
+        "Set the Nightmare Soul value of green orbs from main bosses.",
+        "Nightmare Souls",
+        "OrbValue04",
+        "souls",
+        "Souls",
+        0,
+        9999,
+        200,
+        "u16le",
+        "main_exe",
+        (0x1D958190,),
+        (0, 1, 9999),
+    ),
+    ParamFeatureSpec(
+        "dynamo_green_orb_value",
+        "Dynamo Green Orb Value",
+        "Set the Nightmare Soul value of Dynamo's green orbs.",
+        "Nightmare Souls",
+        "OrbValue05",
+        "souls",
+        "Souls",
+        0,
+        9999,
+        200,
+        "u16le",
+        "main_exe",
+        (0x1D95A238,),
+        (0, 1, 9999),
+    ),
+    ParamFeatureSpec(
+        "normal_ground_dash_duration",
+        "Normal Ground Dash Duration",
+        "Set the normal ground-dash duration in frames.",
+        "Movement",
+        "DashDurationGround01",
+        "frames",
+        "Frames",
+        10,
+        100,
+        30,
+        "u16le",
+        "main_exe",
+        (0x1D951840,),
+        (10, 55, 100),
+    ),
+    ParamFeatureSpec(
+        "hyper_ground_dash_duration",
+        "Hyper Ground Dash Duration",
+        "Set the Hyper Dash ground duration in frames.",
+        "Movement",
+        "DashDurationGround02",
+        "frames",
+        "Frames",
+        10,
+        100,
+        15,
+        "u16le",
+        "main_exe",
+        (0x1D95183C,),
+        (10, 55, 100),
+    ),
+    ParamFeatureSpec(
+        "normal_air_dash_duration",
+        "Normal Air Dash Duration",
+        "Set the normal air-dash duration in frames.",
+        "Movement",
+        "DashDurationAir01",
+        "frames",
+        "Frames",
+        10,
+        100,
+        18,
+        "u16le",
+        "main_exe",
+        (0x1D95219C,),
+        (10, 55, 100),
+    ),
+    ParamFeatureSpec(
+        "hyper_air_dash_duration",
+        "Hyper Air Dash Duration",
+        "Set the Hyper Dash air duration in frames.",
+        "Movement",
+        "DashDurationAir02",
+        "frames",
+        "Frames",
+        10,
+        100,
+        10,
+        "u16le",
+        "main_exe",
+        (0x1D9521A0,),
+        (10, 55, 100),
+    ),
+    ParamFeatureSpec(
+        "new_game_starting_lives",
+        "New Game Starting Lives",
+        "Set the lives counter when starting a new game.",
+        "Lives",
+        "LivesValue01",
+        "lives",
+        "Lives",
+        0,
+        99,
+        2,
+        "u16le",
+        "main_exe",
+        (0x1D930A7C,),
+        (0, 50, 99),
+    ),
+    ParamFeatureSpec(
+        "normal_starting_lives",
+        "Normal Starting Lives",
+        "Set the normal lives value used by intro, continue, and save paths.",
+        "Lives",
+        "LivesValue02",
+        "lives",
+        "Lives",
+        0,
+        99,
+        2,
+        "u16le",
+        "mixed",
+        (0x1D93276C, 0x1D931D60, 0x1DA9C8D8),
+        (0, 50, 99),
+    ),
+    ParamFeatureSpec(
+        "ex_tank_starting_lives",
+        "EX Tank Starting Lives",
+        "Set the lives value used with the EX Tank.",
+        "Lives",
+        "LivesValue03",
+        "lives",
+        "Lives",
+        0,
+        99,
+        4,
+        "u16le",
+        "mixed",
+        (0x1D932768, 0x1D931D5C, 0x1DA9C8DC),
+        (0, 50, 99),
+    ),
+)
+
 STAGE_DAT_ROUTES = {
     route.raw_offset: route
     for route in (
@@ -1155,12 +1513,14 @@ EXIT_STAGE_VARIANTS = {
 }
 FEATURE_SPECS = {item.feature_id: item for item in SIMPLE_FEATURES}
 CONFIG_FEATURE_SPECS = {item.feature_id: item for item in CONFIG_FEATURES}
+PARAM_FEATURE_SPECS = {item.feature_id: item for item in PARAM_FEATURES}
 EXIT_STAGE_FEATURE_ID = "exit_stage_availability"
 ALL_FEATURE_IDS = (
     "title_screen",
     "retranslation",
     *(item.feature_id for item in SIMPLE_FEATURES),
     *(item.feature_id for item in CONFIG_FEATURES),
+    *(item.feature_id for item in PARAM_FEATURES),
     EXIT_STAGE_FEATURE_ID,
 )
 
@@ -1518,6 +1878,266 @@ def build_simple_feature_ops(
             ),
         }
     return patches, overlays, evidence
+
+
+def encode_param_value(spec: ParamFeatureSpec, value: int) -> bytes:
+    if not spec.minimum <= value <= spec.maximum:
+        raise ValueError(
+            f"{spec.source_option} value {value} is outside "
+            f"{spec.minimum}..{spec.maximum}"
+        )
+    if spec.encoding == "u8":
+        return value.to_bytes(1, "little")
+    if spec.encoding == "u16le":
+        return value.to_bytes(2, "little")
+    if spec.encoding == "u32le":
+        return value.to_bytes(4, "little")
+    raise ValueError(f"unsupported param encoding {spec.encoding}")
+
+
+def resolve_param_source_writes(
+    specs: tuple[ParamFeatureSpec, ...],
+    patcher_source: Path,
+    patcher_data: Path,
+) -> dict[str, tuple[int, ...]]:
+    """Prove finite samples keep one exact numeric source closure/topology."""
+    if not specs:
+        return {}
+    try:
+        import tweaks_engine as engine
+    except ImportError as error:
+        raise RuntimeError("cannot import tools/tweaks_engine.py") from error
+
+    src_dir = patcher_source.parent.parent
+    profile_path = patcher_data.parent / "profiles" / "default.x6tweaksprofile"
+    require_file(profile_path, "Tweaks default profile")
+    db = engine.twr.TweaksDB(src_dir)
+    base = engine.twr.load_profile(profile_path)
+    inherited = set(db.patchlist_base) | set(db.patchlist_script)
+    result: dict[str, tuple[int, ...]] = {}
+
+    for spec in specs:
+        for value in (spec.default, *spec.samples):
+            merged = dict(base)
+            merged[spec.source_option] = str(value)
+            _normalized, patchfile, patch_list, values, synth = engine._assemble(
+                db, merged, base
+            )
+            owned = [name for name in patch_list if name not in inherited]
+            if value == spec.default:
+                if owned:
+                    raise AssertionError(
+                        f"{spec.source_option} stock default is not a no-op: "
+                        f"{owned!r}"
+                    )
+                continue
+            if patchfile != "b01" or owned != [spec.source_option]:
+                raise AssertionError(
+                    f"{spec.source_option}={value} source closure changed: "
+                    f"patchfile={patchfile!r}, owned={owned!r}"
+                )
+            if synth:
+                raise AssertionError(
+                    f"{spec.source_option}={value} unexpectedly synthesizes "
+                    f"{sorted(synth)!r}"
+                )
+            _file_patch, file_entries = engine.build_filelist(db, merged, base)
+            if file_entries:
+                raise AssertionError(
+                    f"{spec.source_option}={value} unexpectedly inserts files: "
+                    f"{file_entries!r}"
+                )
+            writes: list[tuple[int, bytes]] = []
+            for data_hex, raw_offset in engine.expand_entry(
+                db, spec.source_option, patchfile, values, synth
+            ):
+                for split_hex, split_offset in engine.ecc_split(
+                    data_hex, raw_offset
+                ):
+                    writes.append((split_offset, bytes.fromhex(split_hex)))
+            offsets = tuple(offset for offset, _payload in writes)
+            if offsets != spec.expected_raw_offsets:
+                raise AssertionError(
+                    f"{spec.source_option}={value} topology changed: "
+                    f"{[f'0x{item:X}' for item in offsets]!r}"
+                )
+            encoded = encode_param_value(spec, value)
+            if any(payload != encoded for _offset, payload in writes):
+                raise AssertionError(
+                    f"{spec.source_option}={value} is not a direct "
+                    f"{spec.encoding} encoding"
+                )
+        result[spec.feature_id] = spec.expected_raw_offsets
+    return result
+
+
+def build_param_feature_ops(
+    stock: RawMode2Image,
+    b01_base: RawMode2Image,
+    specs: tuple[ParamFeatureSpec, ...],
+    patcher_source: Path,
+    patcher_data: Path,
+) -> tuple[list[ParamPatch], dict]:
+    """Convert reviewed bounded numeric controls to format-v2 writes."""
+    source_offsets = resolve_param_source_writes(
+        specs, patcher_source, patcher_data
+    )
+    stock_load = struct.unpack("<I", stock.read_file(SLUS_NAME)[0x18:0x1C])[0]
+    b01_bin = b01_base.read_file("ROCK_X6.BIN")
+    stock_bin = stock.read_file("ROCK_X6.BIN")
+    b01_members = indexed_archive_members(b01_bin)
+    stock_members = indexed_archive_members(stock_bin)
+    patches: list[ParamPatch] = []
+    evidence: dict[str, dict] = {}
+
+    for spec in specs:
+        operations = []
+        encoded_default = encode_param_value(spec, spec.default)
+        for raw_offset in source_offsets[spec.feature_id]:
+            b01_user_offset = raw_to_user_offset(raw_offset)
+            entry, b01_file_offset = b01_base.containing_file(
+                b01_user_offset, len(encoded_default)
+            )
+            if entry.name == SLUS_NAME and spec.target in ("main_exe", "mixed"):
+                guard_file_offset = b01_file_offset & ~3
+                value_offset = b01_file_offset - guard_file_offset
+                if value_offset + len(encoded_default) > 4:
+                    raise AssertionError(
+                        f"{spec.source_option} crosses a MIPS instruction"
+                    )
+                expected = read_iso_file_range(
+                    b01_base, entry.name, guard_file_offset, 4
+                )
+                stock_expected = read_iso_file_range(
+                    stock, entry.name, guard_file_offset, 4
+                )
+                if stock_expected != expected:
+                    raise AssertionError(
+                        f"{spec.source_option} depends on a B01 SLUS rewrite"
+                    )
+                if (
+                    expected[
+                        value_offset : value_offset + len(encoded_default)
+                    ]
+                    != encoded_default
+                ):
+                    raise AssertionError(
+                        f"{spec.source_option} stock immediate is not its default"
+                    )
+                address = stock_load + guard_file_offset - USER_SECTOR
+                patches.append(
+                    ParamPatch(
+                        spec.feature_id,
+                        spec.source_option,
+                        "main_exe",
+                        address,
+                        expected,
+                        spec.option_id,
+                        spec.encoding,
+                        value_offset=value_offset,
+                        source=spec.source_option,
+                        raw_offset=raw_offset,
+                        iso_file=entry.name,
+                        file_offset=guard_file_offset,
+                    )
+                )
+                operations.append(
+                    {
+                        "kind": "bounded-integer-main-exe-patch",
+                        "source_raw_offset": raw_offset,
+                        "iso_file": entry.name,
+                        "file_offset": guard_file_offset,
+                        "guest_address": address,
+                        "guard_size": len(expected),
+                        "value_offset": value_offset,
+                        "encoding": spec.encoding,
+                        "expected": expected.hex().upper(),
+                    }
+                )
+                continue
+
+            if (
+                entry.name != "ROCK_X6.BIN"
+                or spec.target not in ("rock_x6_bin", "mixed")
+            ):
+                raise AssertionError(
+                    f"{spec.source_option} has unsupported target {entry.name}"
+                )
+            source_member, relative_offset = containing_member(
+                b01_members, b01_file_offset, len(encoded_default)
+            )
+            stock_member = stock_members.get(source_member.member_id)
+            if stock_member is None:
+                raise AssertionError(
+                    f"stock lacks ROCK_X6.BIN member {source_member.member_id}"
+                )
+            expected = source_member.payload[
+                relative_offset : relative_offset + len(encoded_default)
+            ]
+            stock_expected = stock_member.payload[
+                relative_offset : relative_offset + len(encoded_default)
+            ]
+            if stock_expected != expected:
+                raise AssertionError(
+                    f"{spec.source_option} depends on a B01 member rewrite"
+                )
+            if expected != encoded_default:
+                raise AssertionError(
+                    f"{spec.source_option} stock member value is not its default"
+                )
+            file_offset = stock_member.file_offset + relative_offset
+            user_offset = (
+                stock.entries["ROCK_X6.BIN"].lba * USER_SECTOR + file_offset
+            )
+            patches.append(
+                ParamPatch(
+                    spec.feature_id,
+                    spec.source_option,
+                    "disc_user",
+                    user_offset,
+                    expected,
+                    spec.option_id,
+                    spec.encoding,
+                    source=spec.source_option,
+                    raw_offset=raw_offset,
+                    iso_file="ROCK_X6.BIN",
+                    file_offset=file_offset,
+                )
+            )
+            operations.append(
+                {
+                    "kind": "bounded-integer-indexed-member-patch",
+                    "source_raw_offset": raw_offset,
+                    "iso_file": "ROCK_X6.BIN",
+                    "member_id": source_member.member_id,
+                    "member_relative_offset": relative_offset,
+                    "file_offset": file_offset,
+                    "disc_user_offset": user_offset,
+                    "guard_size": len(expected),
+                    "value_offset": 0,
+                    "encoding": spec.encoding,
+                    "expected": expected.hex().upper(),
+                    "stock_member_sha256": sha256(stock_member.payload),
+                }
+            )
+        evidence[spec.feature_id] = {
+            "status": "ready-pending-live-smoke",
+            "source_option": spec.source_option,
+            "option": {
+                "id": spec.option_id,
+                "min": spec.minimum,
+                "max": spec.maximum,
+                "default": spec.default,
+                "encoding": spec.encoding,
+            },
+            "sample_values_verified": sorted(
+                set((spec.default, *spec.samples))
+            ),
+            "default_is_stock_noop": True,
+            "common_base_writes_inherited": 0,
+            "semantic_operations": operations,
+        }
+    return patches, evidence
 
 
 def resolve_config_source_writes(
@@ -2890,7 +3510,10 @@ def audit_retranslation(
 
 
 def validate_composition(
-    stock: RawMode2Image, patches: list[Patch], overlays: list[Overlay]
+    stock: RawMode2Image,
+    patches: list[Patch],
+    overlays: list[Overlay],
+    param_patches: list[ParamPatch],
 ) -> dict:
     """Validate stock guards and compatible partial overlaps before packaging."""
     def can_coexist(left, right) -> bool:
@@ -2972,6 +3595,80 @@ def validate_composition(
                 )
             identical_overlap_bytes += end - begin
 
+    ordered_param_main = sorted(
+        (item for item in param_patches if item.target == "main_exe"),
+        key=lambda item: item.location,
+    )
+    ordered_param_disc = sorted(
+        (item for item in param_patches if item.target == "disc_user"),
+        key=lambda item: item.location,
+    )
+    if len(ordered_param_main) + len(ordered_param_disc) != len(param_patches):
+        raise AssertionError("bounded integer patch has unsupported target")
+    for item in ordered_param_main:
+        file_offset = item.location - load_address + USER_SECTOR
+        if (
+            file_offset < 0
+            or file_offset + len(item.expected) > len(stock_slus)
+        ):
+            raise AssertionError(
+                f"bounded integer patch {item.label} is outside {SLUS_NAME}"
+            )
+        actual = stock_slus[file_offset : file_offset + len(item.expected)]
+        if actual != item.expected:
+            raise AssertionError(
+                f"stock bounded integer guard failed for "
+                f"{item.feature}/{item.label}"
+            )
+    for item in ordered_param_disc:
+        actual = stock.read_user(item.location, len(item.expected))
+        if actual != item.expected:
+            raise AssertionError(
+                f"stock bounded integer guard failed for "
+                f"{item.feature}/{item.label}"
+            )
+
+    def reject_dynamic_overlap(
+        dynamic: list[ParamPatch],
+        static: list,
+        static_location,
+        static_size,
+        target: str,
+    ) -> None:
+        for index, left in enumerate(dynamic):
+            left_end = left.location + len(left.expected)
+            for right in dynamic[index + 1 :]:
+                if right.location >= left_end:
+                    break
+                raise AssertionError(
+                    f"{target} bounded integer collision at "
+                    f"0x{right.location:X}: {left.feature} vs {right.feature}"
+                )
+            for right in static:
+                right_begin = static_location(right)
+                right_end = right_begin + static_size(right)
+                if left.location < right_end and right_begin < left_end:
+                    raise AssertionError(
+                        f"{target} bounded/static collision: "
+                        f"{left.feature}/{left.label} vs "
+                        f"{right.feature}/{right.label}"
+                    )
+
+    reject_dynamic_overlap(
+        ordered_param_main,
+        ordered_patches,
+        lambda item: item.address,
+        lambda item: len(item.replace),
+        "main-EXE",
+    )
+    reject_dynamic_overlap(
+        ordered_param_disc,
+        ordered_overlays,
+        lambda item: item.user_offset,
+        lambda item: len(item.replace),
+        "disc",
+    )
+
     fingerprint_input = [
         (
             "patch",
@@ -2994,6 +3691,20 @@ def validate_composition(
             item.when,
         )
         for item in ordered_overlays
+    ] + [
+        (
+            "param-patch",
+            item.feature,
+            item.target,
+            item.location,
+            len(item.expected),
+            sha256(item.expected),
+            item.option_id,
+            item.encoding,
+            item.value_offset,
+            item.addend,
+        )
+        for item in (*ordered_param_main, *ordered_param_disc)
     ]
     fingerprint = sha256(
         json.dumps(fingerprint_input, separators=(",", ":")).encode()
@@ -3003,6 +3714,10 @@ def validate_composition(
         "patch_bytes": sum(len(item.replace) for item in patches),
         "overlay_operations": len(overlays),
         "overlay_bytes": sum(len(item.replace) for item in overlays),
+        "parametric_patch_operations": len(param_patches),
+        "parametric_patch_guard_bytes": sum(
+            len(item.expected) for item in param_patches
+        ),
         "identical_overlap_bytes": identical_overlap_bytes,
         "incompatible_overlap_bytes": 0,
         "plan_fingerprint": fingerprint,
@@ -3019,11 +3734,12 @@ def build_manifest(
     features: set[str],
     patches: list[Patch],
     overlays: list[Overlay],
+    param_patches: list[ParamPatch],
     asset_paths: dict[int, str],
     package_version: str,
 ) -> str:
     lines = [
-        "format_version = 1",
+        f"format_version = {2 if param_patches else 1}",
         'id = "mmx6.tweaks.native"',
         f"version = {q(package_version)}",
         'name = "Mega Man X6 Tweaks"',
@@ -3116,6 +3832,30 @@ def build_manifest(
                     f"value = {q(variant.value)}",
                     f"label = {q(variant.label)}",
                 ]
+    for spec in PARAM_FEATURES:
+        if spec.feature_id not in features:
+            continue
+        lines += [
+            "",
+            "[[feature]]",
+            f"id = {q(spec.feature_id)}",
+            f"name = {q(spec.name)}",
+            f"description = {q(spec.description)}",
+            f"group = {q(spec.group)}",
+            "default_enabled = false",
+            "",
+            "[[option]]",
+            f"feature = {q(spec.feature_id)}",
+            f"id = {q(spec.option_id)}",
+            f"label = {q(spec.option_label)}",
+            f"description = {q(spec.description)}",
+            f"group = {q(spec.group)}",
+            'type = "integer"',
+            f"min = {spec.minimum}",
+            f"max = {spec.maximum}",
+            "step = 1",
+            f"default = {spec.default}",
+        ]
     if EXIT_STAGE_FEATURE_ID in features:
         lines += [
             "",
@@ -3177,6 +3917,29 @@ def build_manifest(
             lines.append(
                 f"when = {{ {overlay.when[0]} = {q(overlay.when[1])} }}"
             )
+    for patch in param_patches:
+        transform = [
+            f"option = {q(patch.option_id)}",
+            f"encoding = {q(patch.encoding)}",
+        ]
+        if patch.value_offset:
+            transform.append(f"offset = {patch.value_offset}")
+        if patch.addend:
+            transform.append(f"addend = {patch.addend}")
+        lines += [
+            "",
+            "[[patch]]",
+            f"feature = {q(patch.feature)}",
+            f"target = {q(patch.target)}",
+            (
+                f"address = {patch.location}"
+                if patch.target == "main_exe"
+                else f"offset = {patch.location}"
+            ),
+            f"expected = {q(patch.expected.hex().upper())}",
+            f"replace_from = {{ {', '.join(transform)} }}",
+            "order = 0",
+        ]
     return "\n".join(lines) + "\n"
 
 
@@ -3185,6 +3948,7 @@ def write_package(
     features: set[str],
     patches: list[Patch],
     overlays: list[Overlay],
+    param_patches: list[ParamPatch],
     report: dict,
     package_version: str,
 ) -> None:
@@ -3193,7 +3957,12 @@ def write_package(
         for index, overlay in enumerate(overlays)
     }
     manifest = build_manifest(
-        features, patches, overlays, asset_paths, package_version
+        features,
+        patches,
+        overlays,
+        param_patches,
+        asset_paths,
+        package_version,
     )
     out.parent.mkdir(parents=True, exist_ok=True)
 
@@ -3368,7 +4137,7 @@ def main() -> int:
         choices=("all", *ALL_FEATURE_IDS),
         default="all",
     )
-    parser.add_argument("--package-version", default="1.7.0")
+    parser.add_argument("--package-version", default="1.8.0")
     parser.add_argument("--audit-retranslation", action="store_true")
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--out", type=Path)
@@ -3394,6 +4163,9 @@ def main() -> int:
     config_specs = tuple(
         spec for spec in CONFIG_FEATURES if spec.feature_id in enabled_features
     )
+    param_specs = tuple(
+        spec for spec in PARAM_FEATURES if spec.feature_id in enabled_features
+    )
     wants_intro = any(spec in INTRO_FEATURES for spec in simple_specs)
     wants_nightmare = any(spec in NIGHTMARE_FEATURES for spec in simple_specs)
     wants_qol = any(spec in QOL_FEATURES for spec in simple_specs)
@@ -3417,7 +4189,7 @@ def main() -> int:
     if wants_retranslation:
         require_file(args.s02_base, "s02 base conversion oracle")
         require_file(args.patcher_source, "Tweaks _dat.ahk")
-    if simple_specs or config_specs or wants_exit:
+    if simple_specs or config_specs or param_specs or wants_exit:
         require_file(args.b01_base, "B01 base conversion oracle")
         require_file(args.patcher_source, "Tweaks _dat.ahk")
         require_file(
@@ -3511,7 +4283,7 @@ def main() -> int:
         )
         b01_base = (
             stack.enter_context(RawMode2Image(args.b01_base))
-            if simple_specs or config_specs or wants_exit
+            if simple_specs or config_specs or param_specs or wants_exit
             else None
         )
         intro_oracles = tuple(
@@ -3618,6 +4390,7 @@ def main() -> int:
             else []
         )
         patches: list[Patch] = []
+        param_patches: list[ParamPatch] = []
         overlays = list(title_overlays)
         report = {
             "status": "reviewed-native-feature-slice",
@@ -3807,6 +4580,18 @@ def main() -> int:
                     ),
                 }
             )
+        if param_specs:
+            param_patches, param_evidence = build_param_feature_ops(
+                stock,
+                b01_base,
+                param_specs,
+                args.patcher_source,
+                args.patcher_data,
+            )
+            report["features"].update(param_evidence)
+            report["provenance"]["b01_base_oracle_sha256"] = file_sha256(
+                args.b01_base
+            )
         if wants_exit:
             exit_patches, exit_evidence = build_exit_stage_ops(
                 stock,
@@ -3833,7 +4618,9 @@ def main() -> int:
                     ),
                 }
             )
-        report["composition"] = validate_composition(stock, patches, overlays)
+        report["composition"] = validate_composition(
+            stock, patches, overlays, param_patches
+        )
 
     print(json.dumps(report, indent=2, sort_keys=True))
     if not args.verify_only:
@@ -3848,6 +4635,7 @@ def main() -> int:
             enabled_features,
             patches,
             overlays,
+            param_patches,
             report,
             args.package_version,
         )
