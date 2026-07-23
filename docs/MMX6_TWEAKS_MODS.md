@@ -45,10 +45,11 @@ redistribute Tweaks artwork or patched game data.
 
 ## Retranslation record repacking
 
-The converter audits and emits the retranslation's 15 active
+The converter audits the retranslation's 15 active
 `ScriptTextDisplay`/`ScriptMenuAlign` writes. It maps each Tweaks raw-disc
 offset to a guarded stock main-EXE address and proves that the retranslation
-oracle contains the replacement.
+oracle contains the replacement. Adjacent and byte-identical overlapping
+writes are coalesced into 12 canonical runtime ranges.
 
 `ROCK_X6.DAT` begins with a stable logical-record table. Entry `id * 8` contains
 the record's sector offset from the start of the DAT and its byte size. The s02
@@ -64,6 +65,11 @@ The relocated payload uses `0x236A` of the stock padding area's `0x46A8`
 sectors. `ROCK_X6.BIN` is byte-identical between stock and s02. The 36-byte
 s02 SLUS base delta is only rebuilt-image LBA scaffolding and is deliberately
 omitted.
+
+The ISO root record keeps the stock DAT LBA and reports the virtual
+`0x04243000` byte extent in both little- and big-endian fields. This lets the
+guest's normal `CdSearchFile` path reach relocated records without changing the
+physical stock image.
 
 Record 107 also contains three title-screen ranges. Retranslation emits only
 its 21 changed bytes outside those ranges, so `Title Screen` and
