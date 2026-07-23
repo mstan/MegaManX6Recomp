@@ -315,7 +315,69 @@ NIGHTMARE_FEATURES = (
     ),
 )
 
-SIMPLE_FEATURES = INTRO_FEATURES + NIGHTMARE_FEATURES
+QOL_FEATURES = (
+    FeatureSpec(
+        "alternate_default_controls",
+        "Alternate Default Controls",
+        "Use the MMX6 Tweaks alternate controller layout as the default.",
+        "Controls",
+        "DefOptions01",
+        "main_exe",
+        (
+            (
+                0x1D98BB90,
+                "8000100008004000040002000100",
+            ),
+        ),
+    ),
+    FeatureSpec(
+        "faster_cutscene_text",
+        "Faster Cutscene Text",
+        "Reduce the delay between voiced cutscene text characters.",
+        "Dialogue",
+        "CutsceneVoice02",
+        "main_exe",
+        ((0x1D935A40, "02000224"),),
+    ),
+    FeatureSpec(
+        "mute_navigator_alerts",
+        "Mute Navigator Alerts",
+        "Mute the Navigator voice call used for stage alerts.",
+        "Dialogue",
+        "DialogueDisable07",
+        "main_exe",
+        ((0x1D96D92C, "00000000"),),
+    ),
+    FeatureSpec(
+        "disable_rescue_extra_lives",
+        "No Extra Lives From Reploids",
+        "Rescuing a Reploid does not add an extra life.",
+        "Lives and Pickups",
+        "LivesSwitch02",
+        "main_exe",
+        ((0x1D968C74, "00000000"),),
+    ),
+    FeatureSpec(
+        "disable_pickup_extra_lives",
+        "No Extra Lives From Pickups",
+        "Extra-life pickups do not increase the life counter.",
+        "Lives and Pickups",
+        "LivesSwitch03",
+        "main_exe",
+        ((0x1D96807C, "00000000"),),
+    ),
+    FeatureSpec(
+        "disable_rescue_health_refill",
+        "No Health Refill From Reploids",
+        "Rescuing a Reploid does not refill the active character's health.",
+        "Lives and Pickups",
+        "LivesSwitch04",
+        "main_exe",
+        ((0x1D968968, "463B0108"),),
+    ),
+)
+
+SIMPLE_FEATURES = INTRO_FEATURES + NIGHTMARE_FEATURES + QOL_FEATURES
 FEATURE_SPECS = {item.feature_id: item for item in SIMPLE_FEATURES}
 ALL_FEATURE_IDS = (
     "title_screen",
@@ -508,6 +570,7 @@ def build_simple_feature_ops(
     b01_base: RawMode2Image,
     intro_oracles: tuple[RawMode2Image, ...],
     nightmare_oracles: tuple[RawMode2Image, ...],
+    qol_oracles: tuple[RawMode2Image, ...],
     specs: tuple[FeatureSpec, ...],
     patcher_source: Path,
     patcher_data: Path,
@@ -528,6 +591,14 @@ def build_simple_feature_ops(
     evidence: dict[str, dict] = {}
     for spec in specs:
         operations = []
+        if spec in INTRO_FEATURES:
+            feature_oracles = intro_oracles
+        elif spec in NIGHTMARE_FEATURES:
+            feature_oracles = nightmare_oracles
+        elif spec in QOL_FEATURES:
+            feature_oracles = qol_oracles
+        else:
+            raise AssertionError(f"no oracle group for {spec.feature_id}")
         for raw_offset, replacement in source_writes[spec.feature_id]:
             b01_user_offset = raw_to_user_offset(raw_offset)
             entry, b01_file_offset = b01_base.containing_file(
@@ -548,7 +619,7 @@ def build_simple_feature_ops(
                     raise AssertionError(
                         f"{spec.source_option} depends on a B01 SLUS rewrite"
                     )
-                for oracle in intro_oracles:
+                for oracle in feature_oracles:
                     if (
                         read_iso_file_range(
                             oracle, entry.name, b01_file_offset, len(replacement)
@@ -604,7 +675,7 @@ def build_simple_feature_ops(
                 raise AssertionError(
                     f"{spec.source_option} depends on a B01 member rewrite"
                 )
-            for oracle, members in zip(nightmare_oracles, oracle_member_sets):
+            for oracle, members in zip(feature_oracles, oracle_member_sets):
                 oracle_member = members.get(source_member.member_id)
                 if (
                     oracle_member is None
@@ -651,13 +722,13 @@ def build_simple_feature_ops(
             )
         evidence[spec.feature_id] = {
             "status": "ready-pending-live-smoke"
-            if spec in INTRO_FEATURES
+            if spec in INTRO_FEATURES or spec in QOL_FEATURES
             else "ready",
             "source_selection": {spec.source_option: 1},
             "common_base_writes_inherited": 0,
             "semantic_operations": operations,
             "oracle_count": (
-                len(intro_oracles) if spec in INTRO_FEATURES else len(nightmare_oracles)
+                len(feature_oracles)
             ),
         }
     return patches, overlays, evidence
@@ -1691,6 +1762,16 @@ def main() -> int:
         default=DEFAULT_MATRIX_DIR
         / "rockman_japan__retranslation__no_nightmare_effects.bin",
     )
+    parser.add_argument(
+        "--qol-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "qol-core.bin",
+    )
+    parser.add_argument(
+        "--combined-qol-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "qol-current-combined.bin",
+    )
     parser.add_argument("--patcher-data", type=Path, default=DEFAULT_PATCHER_DATA)
     parser.add_argument(
         "--patcher-source", type=Path, default=DEFAULT_PATCHER_SOURCE
@@ -1700,7 +1781,7 @@ def main() -> int:
         choices=("all", *ALL_FEATURE_IDS),
         default="all",
     )
-    parser.add_argument("--package-version", default="1.2.0")
+    parser.add_argument("--package-version", default="1.3.0")
     parser.add_argument("--audit-retranslation", action="store_true")
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--out", type=Path)
@@ -1724,6 +1805,7 @@ def main() -> int:
     )
     wants_intro = any(spec in INTRO_FEATURES for spec in simple_specs)
     wants_nightmare = any(spec in NIGHTMARE_FEATURES for spec in simple_specs)
+    wants_qol = any(spec in QOL_FEATURES for spec in simple_specs)
     if wants_title:
         require_file(args.title_oracle, "title-only conversion oracle")
     combined_path = (
@@ -1753,6 +1835,11 @@ def main() -> int:
         require_file(
             args.combined_nightmare_oracle,
             "combined Nightmare conversion oracle",
+        )
+    if wants_qol:
+        require_file(args.qol_oracle, "QoL conversion oracle")
+        require_file(
+            args.combined_qol_oracle, "combined QoL conversion oracle"
         )
 
     with ExitStack() as stack:
@@ -1795,6 +1882,14 @@ def main() -> int:
             for path in (
                 (args.nightmare_oracle, args.combined_nightmare_oracle)
                 if wants_nightmare
+                else ()
+            )
+        )
+        qol_oracles = tuple(
+            stack.enter_context(RawMode2Image(path))
+            for path in (
+                (args.qol_oracle, args.combined_qol_oracle)
+                if wants_qol
                 else ()
             )
         )
@@ -1888,6 +1983,7 @@ def main() -> int:
                     b01_base,
                     intro_oracles,
                     nightmare_oracles,
+                    qol_oracles,
                     simple_specs,
                     args.patcher_source,
                     args.patcher_data,
@@ -1913,6 +2009,13 @@ def main() -> int:
                 report["provenance"][
                     "combined_nightmare_oracle_sha256"
                 ] = file_sha256(args.combined_nightmare_oracle)
+            if wants_qol:
+                report["provenance"]["qol_oracle_sha256"] = file_sha256(
+                    args.qol_oracle
+                )
+                report["provenance"][
+                    "combined_qol_oracle_sha256"
+                ] = file_sha256(args.combined_qol_oracle)
         report["composition"] = validate_composition(stock, patches, overlays)
 
     print(json.dumps(report, indent=2, sort_keys=True))
