@@ -30,6 +30,13 @@ This is required because Tweaks' B01-derived image moves record 107 by
 destinations. The converter emits four guarded overlays at the corresponding
 stock locations. No Tweaks `PatchList_Base` writes are included.
 
+Both reviewed localization features are boolean at the launcher boundary.
+Disabled means the untouched stock USA title/script; enabled applies the one
+available replacement. A one-value dropdown would duplicate enabled state and
+is deliberately not emitted. If a future feature offers two or more non-stock
+variants, those variants belong in one right-pane choice control under that
+single left-pane feature.
+
 Generate and verify the local package with your own extracted Tweaks data and
 reference oracle:
 

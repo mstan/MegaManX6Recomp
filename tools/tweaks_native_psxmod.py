@@ -1540,22 +1540,9 @@ def build_manifest(
             "[[feature]]",
             'id = "title_screen"',
             'name = "Title Screen"',
-            'description = "Choose the stock or original Japanese title artwork."',
+            'description = "Use the original Japanese Rockman X6 title artwork."',
             'group = "Localization"',
             "default_enabled = false",
-            "",
-            "[[option]]",
-            'feature = "title_screen"',
-            'id = "variant"',
-            'label = "Title artwork"',
-            'description = "Artwork used by the title-screen asset requests."',
-            'group = "Localization"',
-            'type = "choice"',
-            'default = "rockman_japan"',
-            "",
-            "[[option.choice]]",
-            'value = "rockman_japan"',
-            'label = "Rockman X6 (Japan)"',
         ]
     if "retranslation" in features:
         lines += [
@@ -1566,19 +1553,6 @@ def build_manifest(
             'description = "English retranslation, VFW font, and menu alignment."',
             'group = "Localization"',
             "default_enabled = false",
-            "",
-            "[[option]]",
-            'feature = "retranslation"',
-            'id = "script"',
-            'label = "English script"',
-            'description = "English script used by dialogue and menus."',
-            'group = "Localization"',
-            'type = "choice"',
-            'default = "english_retranslation"',
-            "",
-            "[[option.choice]]",
-            'value = "english_retranslation"',
-            'label = "English Retranslation"',
         ]
     for spec in SIMPLE_FEATURES:
         if spec.feature_id not in features:
@@ -1603,8 +1577,6 @@ def build_manifest(
             f"replace = {q(patch.replace.hex().upper())}",
             "order = 0",
         ]
-        if patch.feature == "retranslation":
-            lines.append('when = { script = "english_retranslation" }')
     for index, overlay in enumerate(overlays):
         lines += [
             "",
@@ -1617,10 +1589,6 @@ def build_manifest(
             f"expected_sha256 = {q(sha256(overlay.expected))}",
             "order = 0",
         ]
-        if overlay.feature == "title_screen":
-            lines.append('when = { variant = "rockman_japan" }')
-        elif overlay.feature == "retranslation":
-            lines.append('when = { script = "english_retranslation" }')
     return "\n".join(lines) + "\n"
 
 
@@ -1732,7 +1700,7 @@ def main() -> int:
         choices=("all", *ALL_FEATURE_IDS),
         default="all",
     )
-    parser.add_argument("--package-version", default="1.1.0")
+    parser.add_argument("--package-version", default="1.2.0")
     parser.add_argument("--audit-retranslation", action="store_true")
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--out", type=Path)
