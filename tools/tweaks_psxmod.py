@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Convert any MMX6 Tweaks selection into a portable .psxmod package.
+"""Convert any MMX6 Tweaks selection into a stock-targeted .psxmod package.
 
-The output contains a sparse, expected-byte-guarded raw-disc overlay. It does
-not modify the user's disc and it does not require rebuilding the static
-recomp. The runtime routes changed executable code through its live-RAM
-fallback, while unchanged code remains native.
+The output contains a data-only VCDIFF recipe from the verified stock image to
+the selected Tweaks result. At launch the runtime materializes a fingerprinted
+private cache and mounts it internally. The user's selected stock disc is never
+changed or replaced in settings.
 
 The acediez patcher data/assets are not redistributed. Point the existing
 Tweaks tools at a user-supplied patcher extraction, or provide a BIN already
@@ -23,7 +23,6 @@ import zipfile
 from collections import OrderedDict
 from pathlib import Path
 
-SECTOR_SIZE = 2352
 GAME_ID = "SLUS-01395"
 
 
@@ -40,18 +39,16 @@ def _quote(value: str) -> str:
     return json.dumps(value, ensure_ascii=False)
 
 
-def build_manifest(base_path: Path, patched_path: Path, *, package_id: str,
-                   version: str, name: str, selection: dict) -> str:
-    base_size = base_path.stat().st_size
+def build_manifest(vanilla_path: Path, patched_path: Path, delta_path: Path, *,
+                   package_id: str, version: str, name: str,
+                   selection: dict) -> str:
+    with vanilla_path.open("rb") as source:
+        vanilla_sha256 = hashlib.file_digest(source, "sha256").hexdigest()
     patched_size = patched_path.stat().st_size
-    if base_size != patched_size:
-        raise ValueError(
-            "base and patched BIN sizes differ; use --base-bin with the common "
-            "Tweaks xdelta base, or use --selection-file so it is generated")
-    if base_size % SECTOR_SIZE:
-        raise ValueError("raw BIN size is not a multiple of 2352 bytes")
-    with base_path.open("rb") as source:
-        base_sha256 = hashlib.file_digest(source, "sha256").hexdigest()
+    with patched_path.open("rb") as source:
+        patched_sha256 = hashlib.file_digest(source, "sha256").hexdigest()
+    with delta_path.open("rb") as source:
+        delta_sha256 = hashlib.file_digest(source, "sha256").hexdigest()
 
     lines = [
         "format_version = 1",
@@ -59,37 +56,26 @@ def build_manifest(base_path: Path, patched_path: Path, *, package_id: str,
         f"version = {_quote(version)}",
         f"name = {_quote(name)}",
         'author = "acediez (Tweaks); PSXRecomp package generated locally"',
-        'description = "Local MMX6 Tweaks profile; applies at boot without changing the disc."',
+        'description = "Local MMX6 Tweaks profile; derives a private image from the verified stock disc."',
         'resolver = "declarative"',
         'save_compatibility = "shared"',
         "",
         "[[target]]",
         f"game_id = {_quote(GAME_ID)}",
-        f"disc_sha256 = {_quote(base_sha256)}",
+        f"disc_sha256 = {_quote(vanilla_sha256)}",
         "",
         "[source]",
         'kind = "mmx6-tweaks-profile"',
         f"selection_json = {_quote(json.dumps(selection, sort_keys=True, separators=(',', ':')))}",
+        "",
+        "[[derived_disc]]",
+        'kind = "vcdiff"',
+        'patch = "assets/profile.xdelta3"',
+        f"patch_sha256 = {_quote(delta_sha256)}",
+        f"output_size = {patched_size}",
+        f"output_sha256 = {_quote(patched_sha256)}",
     ]
-    changed = 0
-    with base_path.open("rb") as base, patched_path.open("rb") as patched:
-        for offset in range(0, base_size, SECTOR_SIZE):
-            before = base.read(SECTOR_SIZE)
-            after = patched.read(SECTOR_SIZE)
-            if before == after:
-                continue
-            changed += 1
-            lines += [
-                "",
-                "[[patch]]",
-                'target = "disc_raw"',
-                f"offset = {offset}",
-                f"expected = {_quote(before.hex())}",
-                f"replace = {_quote(after.hex())}",
-            ]
-    if not changed:
-        raise ValueError("the selected profile produces no changes")
-    lines += ["", "[package_stats]", f"changed_raw_sectors = {changed}", ""]
+    lines += ["", "[package_stats]", f"derived_image_bytes = {patched_size}", ""]
     return "\n".join(lines)
 
 
@@ -105,10 +91,6 @@ def main() -> int:
     source.add_argument("--selection-file", type=Path,
                         help="Path to Tweaks selection JSON; avoids shell quoting")
     parser.add_argument("--out", required=True, type=Path)
-    parser.add_argument("--base-bin", type=Path,
-                        help="Tweaks common xdelta base used as the runtime disc")
-    parser.add_argument("--base-out", type=Path,
-                        help="Where --selection-file writes that common base")
     parser.add_argument("--id", dest="package_id")
     parser.add_argument("--version", default="1.0.0")
     parser.add_argument("--name", default="Mega Man X6 Tweaks Profile")
@@ -117,34 +99,29 @@ def main() -> int:
     selection_text = (args.selection_file.read_text(encoding="utf-8")
                       if args.selection_file else args.selection)
     selection = json.loads(selection_text) if selection_text else {}
-    if args.patched_bin:
-        patched_path = args.patched_bin
-        base_path = args.base_bin or args.vanilla
-    else:
-        engine = _load_engine()
-        with tempfile.TemporaryDirectory(prefix="mmx6-tweaks-") as temporary:
-            produced = Path(temporary) / "patched.bin"
+    engine = _load_engine()
+    with tempfile.TemporaryDirectory(prefix="mmx6-tweaks-") as temporary:
+        temporary_path = Path(temporary)
+        if args.patched_bin:
+            produced = args.patched_bin
+        else:
+            produced = temporary_path / "patched.bin"
             patchfile, _ = engine.apply_selection(
                 selection_text, produced, vanilla=args.vanilla)
-            base_path = args.base_out or args.out.with_suffix(".base.bin")
-            base_path.parent.mkdir(parents=True, exist_ok=True)
-            patch = engine.BASE_PATCH_DIR / f"{patchfile}.xdelta3"
-            result = subprocess.run(
-                [str(engine.XDELTA3_EXE), "-f", "-n", "-d", "-s",
-                 str(args.vanilla), str(patch), str(base_path)],
-                capture_output=True, text=True)
-            if result.returncode != 0 or not base_path.exists():
-                raise RuntimeError(
-                    f"xdelta3 base generation failed ({result.returncode}): "
-                    f"{result.stdout}{result.stderr}")
-            _write_package(args, base_path, produced, selection)
-            print(f"runtime base disc: {base_path}")
-            return 0
-    _write_package(args, base_path, patched_path, selection)
+        delta = temporary_path / "profile.xdelta3"
+        result = subprocess.run(
+            [str(engine.XDELTA3_EXE), "-f", "-9", "-S", "lzma", "-e",
+             "-s", str(args.vanilla), str(produced), str(delta)],
+            capture_output=True, text=True)
+        if result.returncode != 0 or not delta.exists():
+            raise RuntimeError(
+                f"xdelta3 package generation failed ({result.returncode}): "
+                f"{result.stdout}{result.stderr}")
+        _write_package(args, produced, delta, selection)
     return 0
 
 
-def _write_package(args, base_path: Path, patched_path: Path,
+def _write_package(args, patched_path: Path, delta_path: Path,
                    selection: dict) -> None:
     with patched_path.open("rb") as patched_file:
         patched_digest = hashlib.file_digest(patched_file, "sha256").digest()
@@ -153,8 +130,8 @@ def _write_package(args, base_path: Path, patched_path: Path,
         patched_digest).hexdigest()[:16]
     package_id = args.package_id or f"mmx6.tweaks.{identity}"
     manifest = build_manifest(
-        base_path, patched_path, package_id=package_id, version=args.version,
-        name=args.name, selection=selection)
+        args.vanilla, patched_path, delta_path, package_id=package_id,
+        version=args.version, name=args.name, selection=selection)
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(args.out, "w", compression=zipfile.ZIP_DEFLATED,
@@ -162,6 +139,7 @@ def _write_package(args, base_path: Path, patched_path: Path,
         archive.writestr("manifest.toml", manifest)
         archive.writestr("selection.json",
                          json.dumps(selection, indent=2, sort_keys=True) + "\n")
+        archive.write(delta_path, "assets/profile.xdelta3")
         archive.writestr(
             "README.txt",
             "Generated locally from a user-supplied MMX6 Tweaks profile.\n"
