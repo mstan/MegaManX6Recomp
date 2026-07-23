@@ -172,6 +172,7 @@ class Overlay:
     raw_offset: int | None = None
     iso_file: str = ""
     file_offset: int | None = None
+    when: tuple[str, str] | None = None
 
 
 @dataclass(frozen=True)
@@ -196,6 +197,46 @@ class FeatureSpec:
     target: str
     expected_writes: tuple[tuple[int, str], ...]
     source_value: str = "1"
+
+
+@dataclass(frozen=True)
+class ExpectedSourceWrite:
+    raw_offset: int
+    size: int
+    payload_hex: str = ""
+    payload_sha256: str = ""
+
+
+@dataclass(frozen=True)
+class ConfigVariant:
+    value: str
+    label: str
+    selection: tuple[tuple[str, str], ...]
+    expected_owned: tuple[str, ...]
+    expected_writes: tuple[ExpectedSourceWrite, ...]
+
+
+@dataclass(frozen=True)
+class ConfigFeatureSpec:
+    feature_id: str
+    name: str
+    description: str
+    group: str
+    target: str
+    variants: tuple[ConfigVariant, ...]
+    option_id: str = ""
+    option_label: str = ""
+
+
+@dataclass(frozen=True)
+class DatRoute:
+    raw_offset: int
+    record_id: int
+    subasset_index: int
+    asset_type: int
+    relative_offset: int
+    size: int
+    stock_sha256: str
 
 
 @dataclass(frozen=True)
@@ -657,6 +698,438 @@ STATIC_SPIKE_FEATURES = (
     ),
 )
 
+
+def _expected_byte(raw_offset: int, value: int) -> ExpectedSourceWrite:
+    return ExpectedSourceWrite(raw_offset, 1, f"{value:02X}")
+
+
+def _nearest_nonstock(stock_value: int, values: range) -> tuple[int, ...]:
+    return tuple(
+        sorted(
+            (value for value in values if value != stock_value),
+            key=lambda value: (abs(value - stock_value), value),
+        )
+    )
+
+
+RANK_CONFIG = (
+    ("uh", "UH", 4, 1),
+    ("pa", "PA", 3, 1),
+    ("ga", "GA", 2, 1),
+    ("sa", "SA", 2, 0),
+    ("a", "A", 1, 0),
+    ("b", "B", 0, 0),
+    ("c", "C", 0, 0),
+    ("d", "D", 0, 0),
+)
+
+RANK_NORMAL_PART_FEATURES = tuple(
+    ConfigFeatureSpec(
+        f"normal_part_slots_rank_{rank_id}",
+        f"Normal Part Slots at Rank {rank_label}",
+        f"Change the number of normal Parts available at rank {rank_label}.",
+        "Rank and Progression",
+        "rock_x6_bin",
+        tuple(
+            ConfigVariant(
+                str(value),
+                f"{value} Part" if value == 1 else f"{value} Parts",
+                ((f"RankNPart{index:02d}", str(value)),),
+                (f"RankNPart{index:02d}",),
+                (
+                    _expected_byte(
+                        0x1DA959CB + index,
+                        value,
+                    ),
+                ),
+            )
+            for value in _nearest_nonstock(stock_normal, range(5))
+        ),
+        option_id="slots",
+        option_label="Normal Part slots",
+    )
+    for index, (rank_id, rank_label, stock_normal, _stock_limited) in enumerate(
+        RANK_CONFIG, 1
+    )
+)
+
+RANK_LIMITED_PART_FEATURES = tuple(
+    ConfigFeatureSpec(
+        (
+            f"disable_limited_parts_rank_{rank_id}"
+            if stock_limited
+            else f"enable_limited_parts_rank_{rank_id}"
+        ),
+        (
+            f"Disable Limited Parts at Rank {rank_label}"
+            if stock_limited
+            else f"Enable Limited Parts at Rank {rank_label}"
+        ),
+        (
+            f"Prevent Limited Parts from being equipped at rank {rank_label}."
+            if stock_limited
+            else f"Allow one Limited Part to be equipped at rank {rank_label}."
+        ),
+        "Rank and Progression",
+        "rock_x6_bin",
+        (
+            ConfigVariant(
+                "",
+                "",
+                ((f"RankLPart{index:02d}", str(1 - stock_limited)),),
+                (f"RankLPart{index:02d}",),
+                (
+                    _expected_byte(
+                        0x1DA959D3 + index,
+                        1 - stock_limited,
+                    ),
+                ),
+            ),
+        ),
+    )
+    for index, (rank_id, rank_label, _stock_normal, stock_limited) in enumerate(
+        RANK_CONFIG, 1
+    )
+)
+
+BOSS_RANK_CONFIG = (
+    ("d", "D", 1),
+    ("c", "C", 1),
+    ("b", "B", 1),
+    ("a", "A", 1),
+    ("sa", "SA", 2),
+    ("ga", "GA", 3),
+    ("pa", "PA", 4),
+    ("uh", "UH", 4),
+)
+
+BOSS_RANK_FEATURES = tuple(
+    ConfigFeatureSpec(
+        f"boss_level_rank_{rank_id}",
+        f"Boss Level at Rank {rank_label}",
+        f"Change the boss level used while the Hunter Rank is {rank_label}.",
+        "Rank and Progression",
+        "main_exe",
+        tuple(
+            ConfigVariant(
+                f"level_{level}",
+                f"Level {level}",
+                ((f"BossRank{index:02d}", f"Lv. {level}"),),
+                (f"BossRank{index:02d}",),
+                (
+                    _expected_byte(
+                        0x1D990DC0 - index,
+                        level - 1,
+                    ),
+                ),
+            )
+            for level in _nearest_nonstock(stock_level, range(1, 5))
+        ),
+        option_id="level",
+        option_label="Boss level",
+    )
+    for index, (rank_id, rank_label, stock_level) in enumerate(
+        BOSS_RANK_CONFIG, 1
+    )
+)
+
+STAGE_CONFIG_FEATURES = (
+    ConfigFeatureSpec(
+        "amazon_area_extended_ceiling",
+        "Extend Amazon Area Ceiling",
+        "Extend the ceiling above Amazon Area's blind-jump section.",
+        "Stages",
+        "mixed",
+        (
+            ConfigVariant(
+                "",
+                "",
+                (("StageMod01", "1"),),
+                ("StageMod01",),
+                (
+                    ExpectedSourceWrite(
+                        0x1E644298,
+                        320,
+                        payload_sha256=(
+                            "f52e5b0264519565d5742b130d1fbdc457bd193385a5dcce4"
+                            "f383faae9f34349"
+                        ),
+                    ),
+                    ExpectedSourceWrite(
+                        0x1E6469C8,
+                        160,
+                        payload_sha256=(
+                            "4e15f65d6458c1caa5945906251c492af97ed0c06c3933767"
+                            "2c46dee4c662207"
+                        ),
+                    ),
+                    ExpectedSourceWrite(
+                        0x1D9EB058,
+                        24,
+                        "00040000EA09E00600040000A00A600700040000700A3007",
+                    ),
+                ),
+            ),
+        ),
+    ),
+    ConfigFeatureSpec(
+        "secret_lab_2_platform",
+        "Add Secret Lab 2-2 Platform",
+        "Add the platform that removes the Parts or Armor requirement for X.",
+        "Stages",
+        "mixed",
+        (
+            ConfigVariant(
+                "",
+                "",
+                (("StageMod02", "1"),),
+                ("StageMod02",),
+                (
+                    ExpectedSourceWrite(
+                        0x1F7068D8,
+                        512,
+                        payload_sha256=(
+                            "82ca44f60f2c271224aaefbfd8e10db36caa5fad4ad0c19d"
+                            "f1d4aeddd0a60712"
+                        ),
+                    ),
+                ),
+            ),
+        ),
+    ),
+    ConfigFeatureSpec(
+        "secret_lab_1_spikes",
+        "Secret Lab 1 Spikes",
+        "Choose how many spikes to remove from Secret Lab 1.",
+        "Stages",
+        "mixed",
+        (
+            ConfigVariant(
+                "remove_some",
+                "Remove Some",
+                (
+                    ("StageMod0301", "0"),
+                    ("StageMod0302", "1"),
+                    ("StageMod0303", "0"),
+                ),
+                ("StageMod0301", "StageMod0302"),
+                (
+                    ExpectedSourceWrite(
+                        0x1F517208,
+                        512,
+                        payload_sha256=(
+                            "5785b17d0a897a13b7f5b33e916d668dc9acdcbbce795227"
+                            "797ae4c0a48cda98"
+                        ),
+                    ),
+                    ExpectedSourceWrite(
+                        0x1F518998,
+                        512,
+                        payload_sha256=(
+                            "ca0d30ef0f5a354a6e0fa3a6fa7c2c98c5ac4775003362b"
+                            "5a871cabc23be4fc0"
+                        ),
+                    ),
+                    ExpectedSourceWrite(
+                        0x1F519DF8,
+                        512,
+                        payload_sha256=(
+                            "6c016c855cc0b78e11b73ec235ab220e608fade7f510f9c3"
+                            "4e144aa1697f92eb"
+                        ),
+                    ),
+                ),
+            ),
+            ConfigVariant(
+                "remove_more",
+                "Remove More",
+                (
+                    ("StageMod0301", "0"),
+                    ("StageMod0302", "0"),
+                    ("StageMod0303", "1"),
+                ),
+                ("StageMod0301", "StageMod0303"),
+                (
+                    ExpectedSourceWrite(
+                        0x1F517208,
+                        512,
+                        payload_sha256=(
+                            "1f8d55f821b42e3eefca48054e21c201db54dd7e3a9788ff"
+                            "e8549a266ae0324a"
+                        ),
+                    ),
+                    ExpectedSourceWrite(
+                        0x1F518998,
+                        512,
+                        payload_sha256=(
+                            "d8fc60f73ba4811e514a43aac8e4ca282ca27065fcd4ff7a"
+                            "a64f8f3c18dc7c04"
+                        ),
+                    ),
+                    ExpectedSourceWrite(
+                        0x1F519DF8,
+                        512,
+                        payload_sha256=(
+                            "b570c2108d63baf40a8de523cd9cf0efd68a28fb538819ae"
+                            "ee6153bfb57fd044"
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        option_id="removal",
+        option_label="Spike layout",
+    ),
+    ConfigFeatureSpec(
+        "recycle_lab_ceiling_extension",
+        "Recycle Lab Ceiling Extension",
+        "Extend the Recycle Lab ceiling section by one or two tiles.",
+        "Stages",
+        "mixed",
+        (
+            ConfigVariant(
+                "one_tile",
+                "One Tile",
+                (
+                    ("StageMod0401", "0"),
+                    ("StageMod0402", "1"),
+                    ("StageMod0403", "0"),
+                ),
+                ("StageMod0401", "StageMod0402"),
+                (
+                    ExpectedSourceWrite(
+                        0x1E956388,
+                        288,
+                        payload_sha256=(
+                            "d3ded7ce0793b63af79fb256994554e2eff21d06e6111fd75"
+                            "97bc7e2c4370a32"
+                        ),
+                    ),
+                ),
+            ),
+            ConfigVariant(
+                "two_tiles",
+                "Two Tiles",
+                (
+                    ("StageMod0401", "0"),
+                    ("StageMod0402", "0"),
+                    ("StageMod0403", "1"),
+                ),
+                ("StageMod0401", "StageMod0403"),
+                (
+                    ExpectedSourceWrite(
+                        0x1E956388,
+                        288,
+                        payload_sha256=(
+                            "7e67eaafac9ec652854dbce9901aae528a00a0761d0768d3d"
+                            "8d3a5e46ab938d1"
+                        ),
+                    ),
+                ),
+            ),
+        ),
+        option_id="extension",
+        option_label="Extension",
+    ),
+)
+
+CONFIG_FEATURES = (
+    RANK_NORMAL_PART_FEATURES
+    + RANK_LIMITED_PART_FEATURES
+    + BOSS_RANK_FEATURES
+    + (
+        ConfigFeatureSpec(
+            "yammark_xtreme_behavior",
+            "Yammark Xtreme Behavior",
+            "Make Commander Yammark always use the Xtreme behavior path.",
+            "Bosses",
+            "rock_x6_bin",
+            (
+                ConfigVariant(
+                    "",
+                    "",
+                    (("BossMod0101", "1"),),
+                    ("BossMod0101",),
+                    (
+                        ExpectedSourceWrite(0x1D9E80F4, 4, "02000434"),
+                        ExpectedSourceWrite(0x1DB33744, 4, "02000434"),
+                    ),
+                ),
+            ),
+        ),
+    )
+    + STAGE_CONFIG_FEATURES
+)
+
+STAGE_DAT_ROUTES = {
+    route.raw_offset: route
+    for route in (
+        DatRoute(
+            0x1E644298,
+            95,
+            7,
+            0,
+            0x7EC0,
+            320,
+            "bc43bab0635f0965bbd696e68111d3ce11d9987fdfed462591421ebae6b2778f",
+        ),
+        DatRoute(
+            0x1E6469C8,
+            95,
+            7,
+            0,
+            0xA000,
+            160,
+            "52c8425a2753ab3496a71ba240212fc8e584d1d8f02627d4cf60088fad43c097",
+        ),
+        DatRoute(
+            0x1F7068D8,
+            114,
+            9,
+            0,
+            0x7C00,
+            512,
+            "c5cb8ee4196dc5184cd734a4fd460c06016cd74fdf5f20dbc772639c4bce1fac",
+        ),
+        DatRoute(
+            0x1F517208,
+            112,
+            9,
+            0,
+            0x8E00,
+            512,
+            "7d50a6d50120affb4a5537b0ba89b6effaa61e5188915c7c239afbb3f6ea494e",
+        ),
+        DatRoute(
+            0x1F518998,
+            112,
+            9,
+            0,
+            0xA200,
+            512,
+            "224f2929bd8f6fc4c909d8d7a533f9e17c9ca6b33b5306114cf2cb51e1767537",
+        ),
+        DatRoute(
+            0x1F519DF8,
+            112,
+            9,
+            0,
+            0xB400,
+            512,
+            "c19f938c9627ffea3c985ee0ba327a27560e79e26e9a30c31d8b91e0e183f44f",
+        ),
+        DatRoute(
+            0x1E956388,
+            98,
+            7,
+            0,
+            0x9600,
+            288,
+            "2cd2cf021e2afa4e2eeedfba2765163ed1a164203ebf59c55f4b2f09de5c215b",
+        ),
+    )
+}
+
 SIMPLE_FEATURES = (
     INTRO_FEATURES
     + NIGHTMARE_FEATURES
@@ -681,49 +1154,30 @@ EXIT_STAGE_VARIANTS = {
     },
 }
 FEATURE_SPECS = {item.feature_id: item for item in SIMPLE_FEATURES}
+CONFIG_FEATURE_SPECS = {item.feature_id: item for item in CONFIG_FEATURES}
 EXIT_STAGE_FEATURE_ID = "exit_stage_availability"
 ALL_FEATURE_IDS = (
     "title_screen",
     "retranslation",
     *(item.feature_id for item in SIMPLE_FEATURES),
+    *(item.feature_id for item in CONFIG_FEATURES),
     EXIT_STAGE_FEATURE_ID,
 )
 
 
-TITLE_ASSETS = (
-    (
-        "background_tileset",
-        "title/bg_tileset_jpn/09 - 10014.bin",
-        107,
-        8,
-        0x10014,
-        0x1F165968,
-    ),
-    (
-        "background_palette",
-        "title/bg_palette_jpn/00 - 5.bin",
-        26,
-        0,
-        0x5,
-        0x1DC0DE58,
-    ),
-    (
-        "press_start_tileset",
-        "title/start_tileset_jpn/01 - 10016.bin",
-        107,
-        1,
-        0x10016,
-        0x1F112538,
-    ),
-    (
-        "press_start_assembly",
-        "title/start_assembly_jpn/03 - A.bin",
-        107,
-        3,
-        0xA,
-        0x1F12E768,
-    ),
+TITLE_SCREEN_VARIANTS = (
+    ("rockman_japan", "Rockman (Japan)", "TitleScreen02"),
+    ("rockman_china", "Rockman (China)", "TitleScreen05"),
+    ("mega_man_custom_a", "Mega Man (Custom A)", "TitleScreen04"),
+    ("mega_man_custom_b", "Mega Man (Custom B)", "TitleScreen03"),
 )
+
+TITLE_ASSET_ROUTES = {
+    0x1F165968: ("background_tileset", 107, 8, 0x10014),
+    0x1DC0DE58: ("background_palette", 26, 0, 0x5),
+    0x1F112538: ("press_start_tileset", 107, 1, 0x10016),
+    0x1F12E768: ("press_start_assembly", 107, 3, 0xA),
+}
 
 
 def sha256(data: bytes) -> str:
@@ -1066,6 +1520,433 @@ def build_simple_feature_ops(
     return patches, overlays, evidence
 
 
+def resolve_config_source_writes(
+    specs: tuple[ConfigFeatureSpec, ...],
+    patcher_source: Path,
+    patcher_data: Path,
+) -> dict[tuple[str, str], list[tuple[int, bytes]]]:
+    """Resolve every bounded configuration variant through Tweaks itself."""
+    if not specs:
+        return {}
+    try:
+        import tweaks_engine as engine
+    except ImportError as error:
+        raise RuntimeError("cannot import tools/tweaks_engine.py") from error
+
+    src_dir = patcher_source.parent.parent
+    profile_path = patcher_data.parent / "profiles" / "default.x6tweaksprofile"
+    require_file(profile_path, "Tweaks default profile")
+    db = engine.twr.TweaksDB(src_dir)
+    base = engine.twr.load_profile(profile_path)
+    result: dict[tuple[str, str], list[tuple[int, bytes]]] = {}
+    for spec in specs:
+        for variant in spec.variants:
+            merged = dict(base)
+            merged.update(variant.selection)
+            _normalized, patchfile, patch_list, values, synth = engine._assemble(
+                db, merged, base
+            )
+            inherited = set(db.patchlist_base) | set(db.patchlist_script)
+            owned = tuple(
+                name for name in patch_list if name not in inherited
+            )
+            if patchfile != "b01" or owned != variant.expected_owned:
+                raise AssertionError(
+                    f"{spec.feature_id}/{variant.value} closure changed: "
+                    f"patchfile={patchfile!r}, owned={owned!r}"
+                )
+            if synth:
+                raise AssertionError(
+                    f"{spec.feature_id}/{variant.value} unexpectedly "
+                    f"synthesizes {sorted(synth)!r}"
+                )
+            _file_patch, file_entries = engine.build_filelist(db, merged, base)
+            if file_entries:
+                raise AssertionError(
+                    f"{spec.feature_id}/{variant.value} unexpectedly inserts "
+                    f"files: {file_entries!r}"
+                )
+            writes: list[tuple[int, bytes]] = []
+            for name in owned:
+                for data_hex, raw_offset in engine.expand_entry(
+                    db, name, patchfile, values, synth
+                ):
+                    for split_hex, split_offset in engine.ecc_split(
+                        data_hex, raw_offset
+                    ):
+                        writes.append(
+                            (split_offset, bytes.fromhex(split_hex))
+                        )
+            if len(writes) != len(variant.expected_writes):
+                raise AssertionError(
+                    f"{spec.feature_id}/{variant.value} write count changed: "
+                    f"{len(writes)} != {len(variant.expected_writes)}"
+                )
+            for (raw_offset, payload), expected in zip(
+                writes, variant.expected_writes
+            ):
+                if (
+                    raw_offset != expected.raw_offset
+                    or len(payload) != expected.size
+                ):
+                    raise AssertionError(
+                        f"{spec.feature_id}/{variant.value} write identity "
+                        f"changed at 0x{raw_offset:X}+0x{len(payload):X}"
+                    )
+                if (
+                    expected.payload_hex
+                    and payload != bytes.fromhex(expected.payload_hex)
+                ):
+                    raise AssertionError(
+                        f"{spec.feature_id}/{variant.value} payload changed at "
+                        f"0x{raw_offset:X}"
+                    )
+                if (
+                    expected.payload_sha256
+                    and sha256(payload) != expected.payload_sha256
+                ):
+                    raise AssertionError(
+                        f"{spec.feature_id}/{variant.value} payload hash "
+                        f"changed at 0x{raw_offset:X}"
+                    )
+            result[(spec.feature_id, variant.value)] = writes
+    return result
+
+
+def build_config_feature_ops(
+    stock: RawMode2Image,
+    b01_base: RawMode2Image,
+    config_oracles: tuple[tuple[RawMode2Image, str], ...],
+    specs: tuple[ConfigFeatureSpec, ...],
+    patcher_source: Path,
+    patcher_data: Path,
+) -> tuple[list[Patch], list[Overlay], dict]:
+    """Convert bounded choices and semantic stage edits without interpolation."""
+    source_writes = resolve_config_source_writes(
+        specs, patcher_source, patcher_data
+    )
+    stock_load = struct.unpack("<I", stock.read_file(SLUS_NAME)[0x18:0x1C])[0]
+    b01_bin = b01_base.read_file("ROCK_X6.BIN")
+    stock_bin = stock.read_file("ROCK_X6.BIN")
+    b01_members = indexed_archive_members(b01_bin)
+    stock_members = indexed_archive_members(stock_bin)
+    stock_dat_records = dat_records(stock.read_file("ROCK_X6.DAT"))
+    stock_dat_start = stock.entries["ROCK_X6.DAT"].lba * USER_SECTOR
+    oracle_member_cache: dict[Path, dict[int, IndexedMember]] = {}
+    oracle_dat_cache: dict[Path, dict[int, DatRecord]] = {}
+    patches: list[Patch] = []
+    overlays: list[Overlay] = []
+    evidence: dict[str, dict] = {}
+
+    def variant_selected(
+        spec: ConfigFeatureSpec, variant_index: int, mode: str
+    ) -> bool:
+        if len(spec.variants) == 1:
+            return True
+        return (
+            variant_index == 0
+            if mode == "first"
+            else variant_index == len(spec.variants) - 1
+        )
+
+    for spec in specs:
+        feature_operations = []
+        for variant_index, variant in enumerate(spec.variants):
+            when = (
+                (spec.option_id, variant.value)
+                if spec.option_id
+                else None
+            )
+            variant_operations = []
+            for raw_offset, replacement in source_writes[
+                (spec.feature_id, variant.value)
+            ]:
+                route = STAGE_DAT_ROUTES.get(raw_offset)
+                if route is not None:
+                    if len(replacement) != route.size:
+                        raise AssertionError(
+                            f"{spec.feature_id} stage route size changed at "
+                            f"0x{raw_offset:X}"
+                        )
+                    b01_user_offset = raw_to_user_offset(raw_offset)
+                    b01_entry, b01_file_offset = b01_base.containing_file(
+                        b01_user_offset, len(replacement)
+                    )
+                    if b01_entry.name != "ROCK_X6.DAT":
+                        raise AssertionError(
+                            f"{spec.feature_id} stage source left ROCK_X6.DAT"
+                        )
+                    b01_expected = read_iso_file_range(
+                        b01_base,
+                        b01_entry.name,
+                        b01_file_offset,
+                        len(replacement),
+                    )
+                    if sha256(b01_expected) != route.stock_sha256:
+                        raise AssertionError(
+                            f"{spec.feature_id} B01 stage identity changed at "
+                            f"0x{raw_offset:X}"
+                        )
+                    record = stock_dat_records[route.record_id]
+                    subassets = parse_subassets(record)
+                    subasset = subassets[route.subasset_index]
+                    if subasset.asset_type != route.asset_type:
+                        raise AssertionError(
+                            f"{spec.feature_id} stock DAT type changed for "
+                            f"{route.record_id}:{route.subasset_index}"
+                        )
+                    end = route.relative_offset + len(replacement)
+                    if end > len(subasset.payload):
+                        raise AssertionError(
+                            f"{spec.feature_id} stage range exceeds semantic "
+                            f"subasset {route.record_id}:{route.subasset_index}"
+                        )
+                    expected = subasset.payload[
+                        route.relative_offset : end
+                    ]
+                    if sha256(expected) != route.stock_sha256:
+                        raise AssertionError(
+                            f"{spec.feature_id} stock stage guard changed for "
+                            f"{route.record_id}:{route.subasset_index}"
+                        )
+                    for oracle, mode in config_oracles:
+                        if not variant_selected(spec, variant_index, mode):
+                            continue
+                        records = oracle_dat_cache.get(oracle.path)
+                        if records is None:
+                            records = dat_records(
+                                oracle.read_file("ROCK_X6.DAT")
+                            )
+                            oracle_dat_cache[oracle.path] = records
+                        oracle_subasset = parse_subassets(
+                            records[route.record_id]
+                        )[route.subasset_index]
+                        if (
+                            oracle_subasset.payload[
+                                route.relative_offset : end
+                            ]
+                            != replacement
+                        ):
+                            raise AssertionError(
+                                f"{oracle.path.name} lacks "
+                                f"{spec.feature_id}/{variant.value}"
+                            )
+                    payload_offset = subasset_payload_offset(
+                        record, route.subasset_index
+                    )
+                    user_offset = (
+                        stock_dat_start
+                        + record.sector * USER_SECTOR
+                        + payload_offset
+                        + route.relative_offset
+                    )
+                    overlays.append(
+                        Overlay(
+                            spec.feature_id,
+                            (
+                                f"{variant.value}-"
+                                if variant.value
+                                else ""
+                            )
+                            + f"record-{route.record_id:03d}-"
+                            + f"subasset-{route.subasset_index:02d}-"
+                            + f"{route.relative_offset:05X}",
+                            user_offset,
+                            expected,
+                            replacement,
+                            source=",".join(variant.expected_owned),
+                            raw_offset=raw_offset,
+                            iso_file="ROCK_X6.DAT",
+                            file_offset=(
+                                record.sector * USER_SECTOR
+                                + payload_offset
+                                + route.relative_offset
+                            ),
+                            when=when,
+                        )
+                    )
+                    variant_operations.append(
+                        {
+                            "kind": "guarded-dat-subasset-overlay",
+                            "source_raw_offset": raw_offset,
+                            "record_id": route.record_id,
+                            "subasset_index": route.subasset_index,
+                            "subasset_type": route.asset_type,
+                            "subasset_relative_offset": route.relative_offset,
+                            "disc_user_offset": user_offset,
+                            "size": len(replacement),
+                            "expected_sha256": sha256(expected),
+                            "replacement_sha256": sha256(replacement),
+                        }
+                    )
+                    continue
+
+                b01_user_offset = raw_to_user_offset(raw_offset)
+                entry, b01_file_offset = b01_base.containing_file(
+                    b01_user_offset, len(replacement)
+                )
+                if (
+                    entry.name == SLUS_NAME
+                    and spec.target in ("main_exe", "mixed")
+                ):
+                    expected = read_iso_file_range(
+                        b01_base,
+                        entry.name,
+                        b01_file_offset,
+                        len(replacement),
+                    )
+                    stock_expected = read_iso_file_range(
+                        stock,
+                        entry.name,
+                        b01_file_offset,
+                        len(replacement),
+                    )
+                    if stock_expected != expected:
+                        raise AssertionError(
+                            f"{spec.feature_id} depends on a B01 SLUS rewrite"
+                        )
+                    for oracle, mode in config_oracles:
+                        if (
+                            variant_selected(spec, variant_index, mode)
+                            and read_iso_file_range(
+                                oracle,
+                                entry.name,
+                                b01_file_offset,
+                                len(replacement),
+                            )
+                            != replacement
+                        ):
+                            raise AssertionError(
+                                f"{oracle.path.name} lacks "
+                                f"{spec.feature_id}/{variant.value}"
+                            )
+                    address = stock_load + b01_file_offset - USER_SECTOR
+                    patches.append(
+                        Patch(
+                            spec.feature_id,
+                            ",".join(variant.expected_owned),
+                            address,
+                            expected,
+                            replacement,
+                            when=when,
+                        )
+                    )
+                    variant_operations.append(
+                        {
+                            "kind": "guarded-main-exe-patch",
+                            "source_raw_offset": raw_offset,
+                            "file_offset": b01_file_offset,
+                            "guest_address": address,
+                            "size": len(replacement),
+                            "expected": expected.hex().upper(),
+                            "replace": replacement.hex().upper(),
+                        }
+                    )
+                    continue
+
+                if (
+                    entry.name != "ROCK_X6.BIN"
+                    or spec.target not in ("rock_x6_bin", "mixed")
+                ):
+                    raise AssertionError(
+                        f"{spec.feature_id} has unsupported target "
+                        f"{entry.name}"
+                    )
+                source_member, relative_offset = containing_member(
+                    b01_members, b01_file_offset, len(replacement)
+                )
+                stock_member = stock_members.get(source_member.member_id)
+                if stock_member is None:
+                    raise AssertionError(
+                        f"stock lacks ROCK_X6.BIN member "
+                        f"{source_member.member_id}"
+                    )
+                expected = source_member.payload[
+                    relative_offset : relative_offset + len(replacement)
+                ]
+                stock_expected = stock_member.payload[
+                    relative_offset : relative_offset + len(replacement)
+                ]
+                if stock_expected != expected:
+                    raise AssertionError(
+                        f"{spec.feature_id} depends on a B01 member rewrite"
+                    )
+                for oracle, mode in config_oracles:
+                    if not variant_selected(spec, variant_index, mode):
+                        continue
+                    members = oracle_member_cache.get(oracle.path)
+                    if members is None:
+                        members = indexed_archive_members(
+                            oracle.read_file("ROCK_X6.BIN")
+                        )
+                        oracle_member_cache[oracle.path] = members
+                    oracle_member = members.get(source_member.member_id)
+                    if (
+                        oracle_member is None
+                        or oracle_member.payload[
+                            relative_offset :
+                            relative_offset + len(replacement)
+                        ]
+                        != replacement
+                    ):
+                        raise AssertionError(
+                            f"{oracle.path.name} lacks "
+                            f"{spec.feature_id}/{variant.value}"
+                        )
+                file_offset = stock_member.file_offset + relative_offset
+                user_offset = (
+                    stock.entries["ROCK_X6.BIN"].lba * USER_SECTOR
+                    + file_offset
+                )
+                overlays.append(
+                    Overlay(
+                        spec.feature_id,
+                        (
+                            f"{variant.value}-"
+                            if variant.value
+                            else ""
+                        )
+                        + ",".join(variant.expected_owned),
+                        user_offset,
+                        expected,
+                        replacement,
+                        source=",".join(variant.expected_owned),
+                        raw_offset=raw_offset,
+                        iso_file="ROCK_X6.BIN",
+                        file_offset=file_offset,
+                        when=when,
+                    )
+                )
+                variant_operations.append(
+                    {
+                        "kind": "guarded-indexed-member-overlay",
+                        "source_raw_offset": raw_offset,
+                        "member_id": source_member.member_id,
+                        "member_relative_offset": relative_offset,
+                        "disc_user_offset": user_offset,
+                        "size": len(replacement),
+                        "expected": expected.hex().upper(),
+                        "replace": replacement.hex().upper(),
+                    }
+                )
+            feature_operations.append(
+                {
+                    "value": variant.value or "enabled",
+                    "label": variant.label or spec.name,
+                    "source_selection": dict(variant.selection),
+                    "semantic_operations": variant_operations,
+                }
+            )
+        evidence[spec.feature_id] = {
+            "status": "ready-pending-live-smoke",
+            "bounded_choice": bool(spec.option_id),
+            "variants": feature_operations,
+            "common_base_writes_inherited": 0,
+            "oracle_modes": [mode for _oracle, mode in config_oracles],
+        }
+    return patches, overlays, evidence
+
+
 def resolve_exit_stage_writes(
     patcher_source: Path, patcher_data: Path
 ) -> dict[str, list[tuple[int, bytes]]]:
@@ -1235,14 +2116,25 @@ def build_title_overlays(
     stock: RawMode2Image,
     title_oracle: RawMode2Image,
     combined_oracle: RawMode2Image | None,
+    patcher_source: Path,
     patcher_data: Path,
 ) -> list[Overlay]:
-    """Map the four TitleScreen02 assets by semantic DAT identity.
+    """Map every bundled title variant by semantic DAT identity.
 
     Tweaks' offsets describe its B01-derived image.  Record 107 is relocated in
     that image, so those offsets are conversion evidence only and must never be
     reused as stock-disc destinations.
     """
+    try:
+        import tweaks_engine as engine
+    except ImportError as error:
+        raise RuntimeError("cannot import tools/tweaks_engine.py") from error
+
+    src_dir = patcher_source.parent.parent
+    profile_path = patcher_data.parent / "profiles" / "default.x6tweaksprofile"
+    require_file(profile_path, "Tweaks default profile")
+    db = engine.twr.TweaksDB(src_dir)
+    base = engine.twr.load_profile(profile_path)
     stock_dat_entry = stock.entries["ROCK_X6.DAT"]
     stock_records = dat_records(stock.read_file("ROCK_X6.DAT"))
     title_records = dat_records(title_oracle.read_file("ROCK_X6.DAT"))
@@ -1252,99 +2144,127 @@ def build_title_overlays(
         else None
     )
     overlays: list[Overlay] = []
-    occupied: list[tuple[int, int, str]] = []
-    for (
-        label,
-        source,
-        record_id,
-        subasset_index,
-        asset_type,
-        raw_offset,
-    ) in TITLE_ASSETS:
-        source_path = patcher_data / source
-        require_file(source_path, f"title asset {label}")
-        payload = source_path.read_bytes()
-
-        try:
-            stock_record = stock_records[record_id]
-            title_record = title_records[record_id]
-            stock_subassets = parse_subassets(stock_record)
-            title_subassets = parse_subassets(title_record)
-            stock_subasset = stock_subassets[subasset_index]
-            title_subasset = title_subassets[subasset_index]
-        except (KeyError, IndexError) as error:
+    title_group = (
+        "TitleScreen01",
+        "TitleScreen02",
+        "TitleScreen03",
+        "TitleScreen04",
+        "TitleScreen05",
+    )
+    for value, variant_label, source_option in TITLE_SCREEN_VARIANTS:
+        merged = dict(base)
+        for name in title_group:
+            merged[name] = "1" if name == source_option else "0"
+        _normalized, patchfile, patch_list, _values, synth = engine._assemble(
+            db, merged, base
+        )
+        inherited = set(db.patchlist_base) | set(db.patchlist_script)
+        owned = [name for name in patch_list if name not in inherited]
+        if (
+            patchfile != "b01"
+            or owned != ["TitleScreen01", source_option]
+            or synth
+        ):
             raise AssertionError(
-                f"{label} semantic DAT identity "
-                f"{record_id}:{subasset_index} is missing"
-            ) from error
-
-        if stock_subasset.asset_type != asset_type:
-            raise AssertionError(
-                f"{label} stock type is 0x{stock_subasset.asset_type:X}, "
-                f"expected 0x{asset_type:X}"
+                f"{source_option} title closure changed: "
+                f"patchfile={patchfile!r}, owned={owned!r}, "
+                f"synth={sorted(synth)!r}"
             )
-        if title_subasset.asset_type != asset_type:
+        _file_patch, file_entries = engine.build_filelist(db, merged, base)
+        expected_count = 2 if source_option == "TitleScreen05" else 4
+        if len(file_entries) != expected_count:
             raise AssertionError(
-                f"{label} title-oracle type is 0x{title_subasset.asset_type:X}, "
-                f"expected 0x{asset_type:X}"
+                f"{source_option} title file count changed: "
+                f"{len(file_entries)} != {expected_count}"
             )
-        if len(stock_subasset.payload) != len(payload):
-            raise AssertionError(
-                f"{label} stock size is 0x{len(stock_subasset.payload):X}, "
-                f"payload is 0x{len(payload):X}"
-            )
-        if title_subasset.payload != payload:
-            raise AssertionError(
-                f"title-only oracle does not contain {label} at semantic DAT "
-                f"identity {record_id}:{subasset_index}"
-            )
-        if combined_records is not None:
+        occupied: list[tuple[int, int, str]] = []
+        for file_var, source, raw_offset in file_entries:
+            route = TITLE_ASSET_ROUTES.get(raw_offset)
+            if route is None:
+                raise AssertionError(
+                    f"{source_option} has unknown title route 0x{raw_offset:X}"
+                )
+            label, record_id, subasset_index, asset_type = route
+            source_path = Path(source)
+            require_file(source_path, f"title asset {file_var}")
+            payload = source_path.read_bytes()
             try:
-                combined_subasset = parse_subassets(
-                    combined_records[record_id]
-                )[subasset_index]
+                stock_record = stock_records[record_id]
+                stock_subasset = parse_subassets(stock_record)[subasset_index]
             except (KeyError, IndexError) as error:
                 raise AssertionError(
-                    f"{label} is missing from combined oracle at semantic DAT "
-                    f"identity {record_id}:{subasset_index}"
+                    f"{variant_label}/{label} semantic DAT identity "
+                    f"{record_id}:{subasset_index} is missing"
                 ) from error
-            if (
-                combined_subasset.asset_type != asset_type
-                or combined_subasset.payload != payload
-            ):
+            if stock_subasset.asset_type != asset_type:
                 raise AssertionError(
-                    f"combined oracle does not contain {label} at semantic DAT "
-                    f"identity {record_id}:{subasset_index}"
+                    f"{variant_label}/{label} stock type is "
+                    f"0x{stock_subasset.asset_type:X}, expected "
+                    f"0x{asset_type:X}"
                 )
-
-        subasset_offset = subasset_payload_offset(
-            stock_record, subasset_index
-        )
-        file_offset = stock_record.sector * USER_SECTOR + subasset_offset
-        user_offset = stock_dat_entry.lba * USER_SECTOR + file_offset
-        expected = stock_subasset.payload
-        if not any(expected):
-            raise AssertionError(f"{label} stock range is empty")
-        if expected == payload:
-            raise AssertionError(f"{label} does not change the stock range")
-        begin, end = user_offset, user_offset + len(payload)
-        for other_begin, other_end, other_label in occupied:
-            if begin < other_end and other_begin < end:
-                raise AssertionError(f"{label} overlaps {other_label}")
-        occupied.append((begin, end, label))
-        overlays.append(
-            Overlay(
-                feature="title_screen",
-                label=label,
-                source=source,
-                raw_offset=raw_offset,
-                user_offset=user_offset,
-                expected=expected,
-                replace=payload,
-                iso_file=stock_dat_entry.name,
-                file_offset=file_offset,
+            if len(stock_subasset.payload) != len(payload):
+                raise AssertionError(
+                    f"{variant_label}/{label} stock size is "
+                    f"0x{len(stock_subasset.payload):X}, payload is "
+                    f"0x{len(payload):X}"
+                )
+            if source_option == "TitleScreen02":
+                title_subasset = parse_subassets(
+                    title_records[record_id]
+                )[subasset_index]
+                if (
+                    title_subasset.asset_type != asset_type
+                    or title_subasset.payload != payload
+                ):
+                    raise AssertionError(
+                        f"title-only oracle lacks {variant_label}/{label}"
+                    )
+                if combined_records is not None:
+                    combined_subasset = parse_subassets(
+                        combined_records[record_id]
+                    )[subasset_index]
+                    if (
+                        combined_subasset.asset_type != asset_type
+                        or combined_subasset.payload != payload
+                    ):
+                        raise AssertionError(
+                            f"combined oracle lacks {variant_label}/{label}"
+                        )
+            subasset_offset = subasset_payload_offset(
+                stock_record, subasset_index
             )
-        )
+            file_offset = stock_record.sector * USER_SECTOR + subasset_offset
+            user_offset = stock_dat_entry.lba * USER_SECTOR + file_offset
+            expected = stock_subasset.payload
+            if not any(expected):
+                raise AssertionError(
+                    f"{variant_label}/{label} stock range is empty"
+                )
+            if expected == payload:
+                raise AssertionError(
+                    f"{variant_label}/{label} does not change stock"
+                )
+            begin, end = user_offset, user_offset + len(payload)
+            for other_begin, other_end, other_label in occupied:
+                if begin < other_end and other_begin < end:
+                    raise AssertionError(
+                        f"{variant_label}/{label} overlaps {other_label}"
+                    )
+            occupied.append((begin, end, label))
+            overlays.append(
+                Overlay(
+                    feature="title_screen",
+                    label=f"{value}-{label}",
+                    source=str(source_path),
+                    raw_offset=raw_offset,
+                    user_offset=user_offset,
+                    expected=expected,
+                    replace=payload,
+                    iso_file=stock_dat_entry.name,
+                    file_offset=file_offset,
+                    when=("variant", value),
+                )
+            )
     return overlays
 
 
@@ -1973,6 +2893,15 @@ def validate_composition(
     stock: RawMode2Image, patches: list[Patch], overlays: list[Overlay]
 ) -> dict:
     """Validate stock guards and compatible partial overlaps before packaging."""
+    def can_coexist(left, right) -> bool:
+        return not (
+            left.feature == right.feature
+            and left.when is not None
+            and right.when is not None
+            and left.when[0] == right.when[0]
+            and left.when[1] != right.when[1]
+        )
+
     identical_overlap_bytes = 0
     ordered_overlays = sorted(overlays, key=lambda item: item.user_offset)
     for item in ordered_overlays:
@@ -1984,6 +2913,8 @@ def validate_composition(
         for right in ordered_overlays[index + 1 :]:
             if right.user_offset >= left_end:
                 break
+            if not can_coexist(left, right):
+                continue
             right_end = right.user_offset + len(right.replace)
             begin = max(left.user_offset, right.user_offset)
             end = min(left_end, right_end)
@@ -2023,6 +2954,8 @@ def validate_composition(
         for right in ordered_patches[index + 1 :]:
             if right.address >= left_end:
                 break
+            if not can_coexist(left, right):
+                continue
             right_end = right.address + len(right.replace)
             begin = max(left.address, right.address)
             end = min(left_end, right_end)
@@ -2047,6 +2980,7 @@ def validate_composition(
             len(item.replace),
             sha256(item.expected),
             sha256(item.replace),
+            item.when,
         )
         for item in ordered_patches
     ] + [
@@ -2057,6 +2991,7 @@ def validate_composition(
             len(item.replace),
             sha256(item.expected),
             sha256(item.replace),
+            item.when,
         )
         for item in ordered_overlays
     ]
@@ -2108,10 +3043,26 @@ def build_manifest(
             "[[feature]]",
             'id = "title_screen"',
             'name = "Title Screen"',
-            'description = "Use the original Japanese Rockman X6 title artwork."',
+            'description = "Replace the stock title-screen artwork."',
             'group = "Localization"',
             "default_enabled = false",
+            "",
+            "[[option]]",
+            'feature = "title_screen"',
+            'id = "variant"',
+            'label = "Artwork"',
+            'description = "Choose the replacement title-screen artwork."',
+            'group = "Localization"',
+            'type = "choice"',
+            f"default = {q(TITLE_SCREEN_VARIANTS[0][0])}",
         ]
+        for value, label, _source_option in TITLE_SCREEN_VARIANTS:
+            lines += [
+                "",
+                "[[option.choice]]",
+                f"value = {q(value)}",
+                f"label = {q(label)}",
+            ]
     if "retranslation" in features:
         lines += [
             "",
@@ -2134,6 +3085,37 @@ def build_manifest(
             f"group = {q(spec.group)}",
             "default_enabled = false",
         ]
+    for spec in CONFIG_FEATURES:
+        if spec.feature_id not in features:
+            continue
+        lines += [
+            "",
+            "[[feature]]",
+            f"id = {q(spec.feature_id)}",
+            f"name = {q(spec.name)}",
+            f"description = {q(spec.description)}",
+            f"group = {q(spec.group)}",
+            "default_enabled = false",
+        ]
+        if spec.option_id:
+            lines += [
+                "",
+                "[[option]]",
+                f"feature = {q(spec.feature_id)}",
+                f"id = {q(spec.option_id)}",
+                f"label = {q(spec.option_label)}",
+                f"description = {q(spec.description)}",
+                f"group = {q(spec.group)}",
+                'type = "choice"',
+                f"default = {q(spec.variants[0].value)}",
+            ]
+            for variant in spec.variants:
+                lines += [
+                    "",
+                    "[[option.choice]]",
+                    f"value = {q(variant.value)}",
+                    f"label = {q(variant.label)}",
+                ]
     if EXIT_STAGE_FEATURE_ID in features:
         lines += [
             "",
@@ -2191,6 +3173,10 @@ def build_manifest(
             f"expected_sha256 = {q(sha256(overlay.expected))}",
             "order = 0",
         ]
+        if overlay.when is not None:
+            lines.append(
+                f"when = {{ {overlay.when[0]} = {q(overlay.when[1])} }}"
+            )
     return "\n".join(lines) + "\n"
 
 
@@ -2334,6 +3320,26 @@ def main() -> int:
         default=DEFAULT_ORACLE_DIR / "static-spike-current-combined.bin",
     )
     parser.add_argument(
+        "--easy-config-first-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "easy-config-first.bin",
+    )
+    parser.add_argument(
+        "--easy-config-last-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "easy-config-last.bin",
+    )
+    parser.add_argument(
+        "--combined-easy-config-first-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "easy-config-current-combined-first.bin",
+    )
+    parser.add_argument(
+        "--combined-easy-config-last-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "easy-config-current-combined-last.bin",
+    )
+    parser.add_argument(
         "--exit-main-oracle",
         type=Path,
         default=DEFAULT_ORACLE_DIR / "exit-main-stages.bin",
@@ -2362,7 +3368,7 @@ def main() -> int:
         choices=("all", *ALL_FEATURE_IDS),
         default="all",
     )
-    parser.add_argument("--package-version", default="1.6.0")
+    parser.add_argument("--package-version", default="1.7.0")
     parser.add_argument("--audit-retranslation", action="store_true")
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--out", type=Path)
@@ -2385,6 +3391,9 @@ def main() -> int:
     simple_specs = tuple(
         spec for spec in SIMPLE_FEATURES if spec.feature_id in enabled_features
     )
+    config_specs = tuple(
+        spec for spec in CONFIG_FEATURES if spec.feature_id in enabled_features
+    )
     wants_intro = any(spec in INTRO_FEATURES for spec in simple_specs)
     wants_nightmare = any(spec in NIGHTMARE_FEATURES for spec in simple_specs)
     wants_qol = any(spec in QOL_FEATURES for spec in simple_specs)
@@ -2395,6 +3404,7 @@ def main() -> int:
     wants_static_spike = any(
         spec in STATIC_SPIKE_FEATURES for spec in simple_specs
     )
+    wants_config = bool(config_specs)
     if wants_title:
         require_file(args.title_oracle, "title-only conversion oracle")
     combined_path = (
@@ -2407,7 +3417,7 @@ def main() -> int:
     if wants_retranslation:
         require_file(args.s02_base, "s02 base conversion oracle")
         require_file(args.patcher_source, "Tweaks _dat.ahk")
-    if simple_specs or wants_exit:
+    if simple_specs or config_specs or wants_exit:
         require_file(args.b01_base, "B01 base conversion oracle")
         require_file(args.patcher_source, "Tweaks _dat.ahk")
         require_file(
@@ -2448,6 +3458,20 @@ def main() -> int:
             args.combined_static_spike_oracle,
             "combined static-spike conversion oracle",
         )
+    if wants_config:
+        for path, description in (
+            (args.easy_config_first_oracle, "easy-config first oracle"),
+            (args.easy_config_last_oracle, "easy-config last oracle"),
+            (
+                args.combined_easy_config_first_oracle,
+                "combined easy-config first oracle",
+            ),
+            (
+                args.combined_easy_config_last_oracle,
+                "combined easy-config last oracle",
+            ),
+        ):
+            require_file(path, description)
     if wants_exit:
         for path, description in (
             (args.exit_main_oracle, "Exit Stage Main Stages oracle"),
@@ -2487,7 +3511,7 @@ def main() -> int:
         )
         b01_base = (
             stack.enter_context(RawMode2Image(args.b01_base))
-            if simple_specs or wants_exit
+            if simple_specs or config_specs or wants_exit
             else None
         )
         intro_oracles = tuple(
@@ -2541,6 +3565,30 @@ def main() -> int:
                 else ()
             )
         )
+        config_oracles = tuple(
+            (
+                stack.enter_context(RawMode2Image(path)),
+                mode,
+            )
+            for path, mode in (
+                (
+                    args.easy_config_first_oracle,
+                    "first",
+                ),
+                (
+                    args.combined_easy_config_first_oracle,
+                    "first",
+                ),
+                (
+                    args.easy_config_last_oracle,
+                    "last",
+                ),
+                (
+                    args.combined_easy_config_last_oracle,
+                    "last",
+                ),
+            )
+        ) if wants_config else ()
         exit_variant_oracles = {
             "main_stages": tuple(
                 stack.enter_context(RawMode2Image(path))
@@ -2559,7 +3607,13 @@ def main() -> int:
         } if wants_exit else {}
 
         title_overlays = (
-            build_title_overlays(stock, title, combined, args.patcher_data)
+            build_title_overlays(
+                stock,
+                title,
+                combined,
+                args.patcher_source,
+                args.patcher_data,
+            )
             if wants_title
             else []
         )
@@ -2598,7 +3652,10 @@ def main() -> int:
         if wants_title:
             report["features"]["title_screen"] = {
                 "status": "ready",
-                "selection": {"TitleScreen02": 1},
+                "variants": {
+                    value: {"source_selection": {source_option: 1}}
+                    for value, _label, source_option in TITLE_SCREEN_VARIANTS
+                },
                 "operations": [
                     {
                         "label": item.label,
@@ -2606,17 +3663,33 @@ def main() -> int:
                         "iso_file": item.iso_file,
                         "file_offset": item.file_offset,
                         "disc_user_offset": item.user_offset,
-                        "dat_record_id": TITLE_ASSETS[index][2],
-                        "subasset_index": TITLE_ASSETS[index][3],
-                        "subasset_type": TITLE_ASSETS[index][4],
+                        "dat_record_id": TITLE_ASSET_ROUTES[
+                            item.raw_offset
+                        ][1],
+                        "subasset_index": TITLE_ASSET_ROUTES[
+                            item.raw_offset
+                        ][2],
+                        "subasset_type": TITLE_ASSET_ROUTES[
+                            item.raw_offset
+                        ][3],
+                        "when": (
+                            {item.when[0]: item.when[1]}
+                            if item.when is not None
+                            else None
+                        ),
                         "raw_oracle_offset": item.raw_offset,
                         "size": len(item.replace),
                         "stock_sha256": sha256(item.expected),
                         "replacement_sha256": sha256(item.replace),
-                        "title_only_read_path_verified": True,
-                        "combined_read_path_verified": combined is not None,
+                        "title_only_read_path_verified": (
+                            item.when == ("variant", "rockman_japan")
+                        ),
+                        "combined_read_path_verified": (
+                            combined is not None
+                            and item.when == ("variant", "rockman_japan")
+                        ),
                     }
-                    for index, item in enumerate(title_overlays)
+                    for item in title_overlays
                 ],
             }
         if wants_retranslation:
@@ -2704,6 +3777,36 @@ def main() -> int:
                 report["provenance"][
                     "combined_static_spike_oracle_sha256"
                 ] = file_sha256(args.combined_static_spike_oracle)
+        if config_specs:
+            config_patches, config_overlays, config_evidence = (
+                build_config_feature_ops(
+                    stock,
+                    b01_base,
+                    config_oracles,
+                    config_specs,
+                    args.patcher_source,
+                    args.patcher_data,
+                )
+            )
+            patches += config_patches
+            overlays += config_overlays
+            report["features"].update(config_evidence)
+            report["provenance"].update(
+                {
+                    "easy_config_first_oracle_sha256": file_sha256(
+                        args.easy_config_first_oracle
+                    ),
+                    "easy_config_last_oracle_sha256": file_sha256(
+                        args.easy_config_last_oracle
+                    ),
+                    "combined_easy_config_first_oracle_sha256": file_sha256(
+                        args.combined_easy_config_first_oracle
+                    ),
+                    "combined_easy_config_last_oracle_sha256": file_sha256(
+                        args.combined_easy_config_last_oracle
+                    ),
+                }
+            )
         if wants_exit:
             exit_patches, exit_evidence = build_exit_stage_ops(
                 stock,
