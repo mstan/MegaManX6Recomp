@@ -270,6 +270,8 @@ Choose the narrowest supported primitive:
 | Startup data or code in the main executable | Guarded guest-memory write at a proven lifecycle point |
 | Repeated or contextual behavior | Stable game-registered hook |
 | Direct bounded unsigned scalar | Format-v2 `replace_from` patch using `u8`, `u16le`, or `u32le` |
+| Linked MIPS LUI/ORI constant | Format-v3 `mips_lui_ori_u32` transform with a complete instruction-pair guard |
+| Related ordered scalars | One feature with a format-v3 `ordered_integer` constraint |
 | Grown record or container | Resolver-owned semantic container composer; otherwise defer |
 | Injected routine or shared scratch use | Registered hook/code allocator with relocation support; otherwise defer |
 
@@ -322,9 +324,22 @@ Before conversion, prove all of the following:
 - default, minimum, maximum, malformed, and out-of-range values are tested by
   the real resolver.
 
-Do not use this primitive for split immediates, bitfields, signed arithmetic,
-tables, expressions, code injection, or a value whose valid behavioral range
-is unknown. Add a narrower typed primitive or hook for those cases.
+Do not use this primitive for bitfields, signed arithmetic, tables,
+expressions, code injection, or a value whose valid behavioral range is
+unknown. Add a narrower typed primitive or hook for those cases.
+
+For a constant constructed by a linked MIPS LUI/ORI pair, format 3's
+`mips_lui_ori_u32` transform is the supported narrow exception. Guard the
+complete aligned pair and prove both opcodes and register linkage. The
+transform uses raw high/low halves, not signed-ADDIU carry rules. If the source
+tool's declared default means “emit no writes,” use `omit_when_default`; do
+not normalize asymmetric stock sites merely because the source UI displays
+one default value.
+
+Related integer fields with a semantic ordering invariant belong in one
+feature and one `ordered_integer` constraint. Choose the option order and
+`nondecreasing`/`nonincreasing` direction from the domain, explicitly decide
+whether equality is valid, and test defaults plus boundary and invalid vectors.
 
 ## Dependencies and collisions
 

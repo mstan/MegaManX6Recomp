@@ -105,6 +105,13 @@ There is no expression evaluator, host-endian encoding, or per-frame integer
 dispatcher. A default value that reproduces the expected bytes resolves to no
 write, so enabling a numeric feature at its stock value remains a true no-op.
 
+Format 3 additionally supports feature-local ordered-integer constraints and
+a typed `mips_lui_ori_u32` transform for a fully guarded, register-linked
+instruction pair. `omit_when_default` models source controls whose displayed
+default means “leave every destination untouched,” including asymmetric stock
+sites. These remain preboot plan operations; they do not add a per-frame mod
+dispatcher.
+
 ### Code and behavior hooks
 
 A feature may replace or wrap a known recompiled function, call site, or

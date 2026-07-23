@@ -196,6 +196,7 @@ class ParamPatch:
     encoding: str
     value_offset: int = 0
     addend: int = 0
+    omit_when_default: bool = False
     source: str = ""
     raw_offset: int | None = None
     iso_file: str = ""
@@ -243,6 +244,8 @@ class ConfigFeatureSpec:
     variants: tuple[ConfigVariant, ...]
     option_id: str = ""
     option_label: str = ""
+    verify_aggregate_oracles: bool = True
+    guard_main_instruction: bool = False
 
 
 @dataclass(frozen=True)
@@ -261,6 +264,16 @@ class ParamFeatureSpec:
     target: str
     expected_raw_offsets: tuple[int, ...]
     samples: tuple[int, ...]
+    manifest_default: int | None = None
+    omit_when_default: bool = False
+    guard_main_instruction: bool = True
+
+
+@dataclass(frozen=True)
+class ParamConstraintSpec:
+    feature_id: str
+    direction: str
+    option_ids: tuple[str, ...]
 
 
 @dataclass(frozen=True)
@@ -611,16 +624,6 @@ STATIC_SPIKE_FEATURES = (
         source_value="0",
     ),
     FeatureSpec(
-        "higher_ceiling_jump",
-        "Higher Ceiling Jump",
-        "Use the reviewed MMX6 Tweaks preset for a higher ceiling jump.",
-        "Movement",
-        "HighJumpHeight01",
-        "main_exe",
-        ((0x1D94C884, "C000"),),
-        source_value="192",
-    ),
-    FeatureSpec(
         "disable_x_saber_cancelling",
         "Disable X Saber Cancelling",
         "Disable cancellation flags on X's four standard saber attacks.",
@@ -868,6 +871,89 @@ BOSS_RANK_FEATURES = tuple(
     )
 )
 
+REPLOID_STATUS_CONFIG = (
+    (
+        "reploid_status_rescued_by_player",
+        "Reploid Status: Rescued by Player",
+        "Choose the status assigned when the player rescues a Reploid.",
+        "RescRepStatus01",
+        0x1D968C5C,
+        (
+            ("unchanged", "Leave Current Status Unchanged", "No change", 0x00),
+            ("missing", "Missing", "MISSING", 0x04),
+            ("dead", "Dead", "DEAD", 0x03),
+        ),
+    ),
+    (
+        "reploid_status_infected_by_nightmare",
+        "Reploid Status: Infected by Nightmare",
+        "Choose the status assigned when a Reploid is infected by a Nightmare.",
+        "RescRepStatus02",
+        0x1D968888,
+        (
+            ("unchanged", "Leave Current Status Unchanged", "No change", 0x00),
+            ("rescued", "Rescued", "RESCUED", 0x02),
+            ("dead", "Dead", "DEAD", 0x03),
+        ),
+    ),
+    (
+        "reploid_status_infected_lost_offscreen",
+        "Reploid Status: Infected, Lost Offscreen",
+        "Choose the status assigned when an infected Reploid is lost offscreen.",
+        "RescRepStatus03",
+        0x1D969B9C,
+        (
+            ("unchanged", "Leave Current Status Unchanged", "No change", 0x00),
+            ("rescued", "Rescued", "RESCUED", 0x02),
+            ("dead", "Dead", "DEAD", 0x03),
+        ),
+    ),
+    (
+        "reploid_status_infected_killed_by_player",
+        "Reploid Status: Infected, Killed by Player",
+        "Choose the status assigned when the player kills an infected Reploid.",
+        "RescRepStatus04",
+        0x1D969B30,
+        (
+            ("unchanged", "Leave Current Status Unchanged", "No change", 0x00),
+            ("rescued", "Rescued", "RESCUED", 0x02),
+            ("missing", "Missing", "MISSING", 0x04),
+        ),
+    ),
+)
+
+REPLOID_STATUS_FEATURES = tuple(
+    ConfigFeatureSpec(
+        feature_id,
+        name,
+        description,
+        "Rescuable Reploids",
+        "main_exe",
+        tuple(
+            ConfigVariant(
+                value,
+                label,
+                ((source_option, source_value),),
+                (source_option,),
+                (_expected_byte(raw_offset, payload),),
+            )
+            for value, label, source_value, payload in variants
+        ),
+        option_id="status",
+        option_label="Status",
+        verify_aggregate_oracles=False,
+        guard_main_instruction=True,
+    )
+    for (
+        feature_id,
+        name,
+        description,
+        source_option,
+        raw_offset,
+        variants,
+    ) in REPLOID_STATUS_CONFIG
+)
+
 STAGE_CONFIG_FEATURES = (
     ConfigFeatureSpec(
         "amazon_area_extended_ceiling",
@@ -1072,6 +1158,7 @@ CONFIG_FEATURES = (
     RANK_NORMAL_PART_FEATURES
     + RANK_LIMITED_PART_FEATURES
     + BOSS_RANK_FEATURES
+    + REPLOID_STATUS_FEATURES
     + (
         ConfigFeatureSpec(
             "yammark_xtreme_behavior",
@@ -1417,7 +1504,234 @@ PARAM_FEATURES = (
         (0x1D932768, 0x1D931D5C, 0x1DA9C8DC),
         (0, 50, 99),
     ),
+    ParamFeatureSpec(
+        "higher_ceiling_jump",
+        "Ceiling Jump Height",
+        "Set the maximum height used by the ceiling-jump behavior.",
+        "Movement",
+        "HighJumpHeight01",
+        "height",
+        "Jump Height",
+        144,
+        480,
+        144,
+        "u16le",
+        "main_exe",
+        (0x1D94C884,),
+        (145, 192, 255, 256, 312, 479, 480),
+        manifest_default=192,
+    ),
+    ParamFeatureSpec(
+        "rank_soul_thresholds",
+        "Rank Soul Thresholds",
+        "Set the Nightmare Soul thresholds for Hunter Ranks C through UH.",
+        "Rank and Progression",
+        "RankSouls07",
+        "rank_c",
+        "Rank C",
+        0,
+        9999,
+        200,
+        "u16le",
+        "main_exe",
+        (0x1D98BBB8,),
+        (0, 100, 9999),
+        guard_main_instruction=False,
+    ),
+    ParamFeatureSpec(
+        "rank_soul_thresholds",
+        "Rank Soul Thresholds",
+        "Set the Nightmare Soul thresholds for Hunter Ranks C through UH.",
+        "Rank and Progression",
+        "RankSouls06",
+        "rank_b",
+        "Rank B",
+        0,
+        9999,
+        300,
+        "u16le",
+        "main_exe",
+        (0x1D98BBB6,),
+        (0, 250, 9999),
+        guard_main_instruction=False,
+    ),
+    ParamFeatureSpec(
+        "rank_soul_thresholds",
+        "Rank Soul Thresholds",
+        "Set the Nightmare Soul thresholds for Hunter Ranks C through UH.",
+        "Rank and Progression",
+        "RankSouls05",
+        "rank_a",
+        "Rank A",
+        0,
+        9999,
+        500,
+        "u16le",
+        "main_exe",
+        (0x1D98BBB4,),
+        (0, 400, 9999),
+        guard_main_instruction=False,
+    ),
+    ParamFeatureSpec(
+        "rank_soul_thresholds",
+        "Rank Soul Thresholds",
+        "Set the Nightmare Soul thresholds for Hunter Ranks C through UH.",
+        "Rank and Progression",
+        "RankSouls04",
+        "rank_sa",
+        "Rank SA",
+        0,
+        9999,
+        800,
+        "u16le",
+        "main_exe",
+        (0x1D98BBB2,),
+        (0, 700, 9999),
+        guard_main_instruction=False,
+    ),
+    ParamFeatureSpec(
+        "rank_soul_thresholds",
+        "Rank Soul Thresholds",
+        "Set the Nightmare Soul thresholds for Hunter Ranks C through UH.",
+        "Rank and Progression",
+        "RankSouls03",
+        "rank_ga",
+        "Rank GA",
+        0,
+        9999,
+        1200,
+        "u16le",
+        "main_exe",
+        (0x1D98BBB0,),
+        (0, 1000, 9999),
+        guard_main_instruction=False,
+    ),
+    ParamFeatureSpec(
+        "rank_soul_thresholds",
+        "Rank Soul Thresholds",
+        "Set the Nightmare Soul thresholds for Hunter Ranks C through UH.",
+        "Rank and Progression",
+        "RankSouls02",
+        "rank_pa",
+        "Rank PA",
+        0,
+        9999,
+        5000,
+        "u16le",
+        "main_exe",
+        (0x1D98BBAE,),
+        (0, 4000, 9999),
+        guard_main_instruction=False,
+    ),
+    ParamFeatureSpec(
+        "rank_soul_thresholds",
+        "Rank Soul Thresholds",
+        "Set the Nightmare Soul thresholds for Hunter Ranks C through UH.",
+        "Rank and Progression",
+        "RankSouls01",
+        "rank_uh",
+        "Rank UH",
+        0,
+        9999,
+        9999,
+        "u16le",
+        "main_exe",
+        (0x1D98BBAC,),
+        (0, 9000, 9999),
+        guard_main_instruction=False,
+    ),
+    ParamFeatureSpec(
+        "normal_initial_dash_speed",
+        "Normal Initial Dash Speed",
+        "Set the initial normal ground and air Dash speed.",
+        "Movement",
+        "DashSpeedInit01",
+        "normal_speed",
+        "Normal Speed",
+        200000,
+        600000,
+        425984,
+        "mips_lui_ori_u32",
+        "main_exe",
+        (0x1D952D30, 0x1D952D34, 0x1D952D38, 0x1D952D3C),
+        (200000, 425985, 600000),
+        omit_when_default=True,
+    ),
+    ParamFeatureSpec(
+        "hyper_dash_initial_speed_bonus",
+        "Hyper Dash Initial Speed Bonus",
+        "Set the Hyper Dash speed added to the normal initial Dash speed.",
+        "Movement",
+        "DashSpeedInit02",
+        "hyper_bonus",
+        "Hyper Dash Bonus",
+        60000,
+        160000,
+        106496,
+        "mips_lui_ori_u32",
+        "main_exe",
+        (0x1D954A14, 0x1D954A18),
+        (60000, 106497, 160000),
+        omit_when_default=True,
+    ),
 )
+
+PARAM_CONSTRAINTS = (
+    ParamConstraintSpec(
+        "rank_soul_thresholds",
+        "nondecreasing",
+        (
+            "rank_c",
+            "rank_b",
+            "rank_a",
+            "rank_sa",
+            "rank_ga",
+            "rank_pa",
+            "rank_uh",
+        ),
+    ),
+)
+
+PARAM_GROUP_SAMPLES = {
+    "rank_soul_thresholds": (
+        {
+            "rank_c": 200,
+            "rank_b": 300,
+            "rank_a": 500,
+            "rank_sa": 800,
+            "rank_ga": 1200,
+            "rank_pa": 5000,
+            "rank_uh": 9999,
+        },
+        {
+            "rank_c": 0,
+            "rank_b": 0,
+            "rank_a": 0,
+            "rank_sa": 0,
+            "rank_ga": 0,
+            "rank_pa": 0,
+            "rank_uh": 0,
+        },
+        {
+            "rank_c": 9999,
+            "rank_b": 9999,
+            "rank_a": 9999,
+            "rank_sa": 9999,
+            "rank_ga": 9999,
+            "rank_pa": 9999,
+            "rank_uh": 9999,
+        },
+        {
+            "rank_c": 0,
+            "rank_b": 1000,
+            "rank_a": 2000,
+            "rank_sa": 3000,
+            "rank_ga": 5000,
+            "rank_pa": 7000,
+            "rank_uh": 9000,
+        },
+    ),
+}
 
 STAGE_DAT_ROUTES = {
     route.raw_offset: route
@@ -1513,15 +1827,26 @@ EXIT_STAGE_VARIANTS = {
 }
 FEATURE_SPECS = {item.feature_id: item for item in SIMPLE_FEATURES}
 CONFIG_FEATURE_SPECS = {item.feature_id: item for item in CONFIG_FEATURES}
-PARAM_FEATURE_SPECS = {item.feature_id: item for item in PARAM_FEATURES}
+PARAM_FEATURE_SPECS = {
+    feature_id: tuple(
+        item for item in PARAM_FEATURES if item.feature_id == feature_id
+    )
+    for feature_id in dict.fromkeys(
+        item.feature_id for item in PARAM_FEATURES
+    )
+}
 EXIT_STAGE_FEATURE_ID = "exit_stage_availability"
-ALL_FEATURE_IDS = (
-    "title_screen",
-    "retranslation",
-    *(item.feature_id for item in SIMPLE_FEATURES),
-    *(item.feature_id for item in CONFIG_FEATURES),
-    *(item.feature_id for item in PARAM_FEATURES),
-    EXIT_STAGE_FEATURE_ID,
+ALL_FEATURE_IDS = tuple(
+    dict.fromkeys(
+        (
+            "title_screen",
+            "retranslation",
+            *(item.feature_id for item in SIMPLE_FEATURES),
+            *(item.feature_id for item in CONFIG_FEATURES),
+            *(item.feature_id for item in PARAM_FEATURES),
+            EXIT_STAGE_FEATURE_ID,
+        )
+    )
 )
 
 
@@ -1892,14 +2217,35 @@ def encode_param_value(spec: ParamFeatureSpec, value: int) -> bytes:
         return value.to_bytes(2, "little")
     if spec.encoding == "u32le":
         return value.to_bytes(4, "little")
+    if spec.encoding == "mips_lui_ori_u32":
+        return value.to_bytes(4, "little")
     raise ValueError(f"unsupported param encoding {spec.encoding}")
+
+
+def param_source_payloads(
+    spec: ParamFeatureSpec, value: int
+) -> tuple[bytes, ...]:
+    encoded = encode_param_value(spec, value)
+    if spec.encoding != "mips_lui_ori_u32":
+        return tuple(encoded for _offset in spec.expected_raw_offsets)
+    if len(spec.expected_raw_offsets) % 2:
+        raise AssertionError(
+            f"{spec.source_option} has an incomplete MIPS LUI/ORI pair"
+        )
+    high = ((value >> 16) & 0xFFFF).to_bytes(2, "little")
+    low = (value & 0xFFFF).to_bytes(2, "little")
+    return tuple(
+        payload
+        for _index in range(len(spec.expected_raw_offsets) // 2)
+        for payload in (high, low)
+    )
 
 
 def resolve_param_source_writes(
     specs: tuple[ParamFeatureSpec, ...],
     patcher_source: Path,
     patcher_data: Path,
-) -> dict[str, tuple[int, ...]]:
+) -> dict[tuple[str, str], tuple[int, ...]]:
     """Prove finite samples keep one exact numeric source closure/topology."""
     if not specs:
         return {}
@@ -1914,7 +2260,7 @@ def resolve_param_source_writes(
     db = engine.twr.TweaksDB(src_dir)
     base = engine.twr.load_profile(profile_path)
     inherited = set(db.patchlist_base) | set(db.patchlist_script)
-    result: dict[str, tuple[int, ...]] = {}
+    result: dict[tuple[str, str], tuple[int, ...]] = {}
 
     for spec in specs:
         for value in (spec.default, *spec.samples):
@@ -1961,13 +2307,85 @@ def resolve_param_source_writes(
                     f"{spec.source_option}={value} topology changed: "
                     f"{[f'0x{item:X}' for item in offsets]!r}"
                 )
-            encoded = encode_param_value(spec, value)
-            if any(payload != encoded for _offset, payload in writes):
+            expected_payloads = param_source_payloads(spec, value)
+            if tuple(payload for _offset, payload in writes) != (
+                expected_payloads
+            ):
                 raise AssertionError(
                     f"{spec.source_option}={value} is not a direct "
                     f"{spec.encoding} encoding"
                 )
-        result[spec.feature_id] = spec.expected_raw_offsets
+        result[(spec.feature_id, spec.option_id)] = (
+            spec.expected_raw_offsets
+        )
+
+    for feature_id, samples in PARAM_GROUP_SAMPLES.items():
+        group_specs = tuple(
+            spec for spec in specs if spec.feature_id == feature_id
+        )
+        if not group_specs:
+            continue
+        by_option = {spec.option_id: spec for spec in group_specs}
+        for sample in samples:
+            if set(sample) != set(by_option):
+                raise AssertionError(
+                    f"{feature_id} group sample does not name every option"
+                )
+            merged = dict(base)
+            expected_writes: dict[int, bytes] = {}
+            expected_owned = set()
+            for option_id, value in sample.items():
+                spec = by_option[option_id]
+                merged[spec.source_option] = str(value)
+                if value == spec.default:
+                    continue
+                expected_owned.add(spec.source_option)
+                expected_writes.update(
+                    zip(
+                        spec.expected_raw_offsets,
+                        param_source_payloads(spec, value),
+                    )
+                )
+            _normalized, patchfile, patch_list, values, synth = (
+                engine._assemble(db, merged, base)
+            )
+            owned = [
+                name for name in patch_list if name not in inherited
+            ]
+            if set(owned) != expected_owned or (
+                expected_owned and patchfile != "b01"
+            ) or (not expected_owned and patchfile):
+                raise AssertionError(
+                    f"{feature_id} group closure changed: "
+                    f"patchfile={patchfile!r}, owned={owned!r}"
+                )
+            if synth:
+                raise AssertionError(
+                    f"{feature_id} group sample synthesizes "
+                    f"{sorted(synth)!r}"
+                )
+            _file_patch, file_entries = engine.build_filelist(
+                db, merged, base
+            )
+            if file_entries:
+                raise AssertionError(
+                    f"{feature_id} group sample inserts {file_entries!r}"
+                )
+            actual_writes: dict[int, bytes] = {}
+            for name in owned:
+                for data_hex, raw_offset in engine.expand_entry(
+                    db, name, patchfile, values, synth
+                ):
+                    for split_hex, split_offset in engine.ecc_split(
+                        data_hex, raw_offset
+                    ):
+                        actual_writes[split_offset] = bytes.fromhex(
+                            split_hex
+                        )
+            if actual_writes != expected_writes:
+                raise AssertionError(
+                    f"{feature_id} group write payload changed"
+                )
     return result
 
 
@@ -1978,7 +2396,7 @@ def build_param_feature_ops(
     patcher_source: Path,
     patcher_data: Path,
 ) -> tuple[list[ParamPatch], dict]:
-    """Convert reviewed bounded numeric controls to format-v2 writes."""
+    """Convert reviewed bounded numeric controls to declarative writes."""
     source_offsets = resolve_param_source_writes(
         specs, patcher_source, patcher_data
     )
@@ -1993,23 +2411,142 @@ def build_param_feature_ops(
     for spec in specs:
         operations = []
         encoded_default = encode_param_value(spec, spec.default)
-        for raw_offset in source_offsets[spec.feature_id]:
+        source_key = (spec.feature_id, spec.option_id)
+        if spec.encoding == "mips_lui_ori_u32":
+            offsets = source_offsets[source_key]
+            for pair_index in range(0, len(offsets), 2):
+                high_raw_offset = offsets[pair_index]
+                low_raw_offset = offsets[pair_index + 1]
+                if low_raw_offset != high_raw_offset + 4:
+                    raise AssertionError(
+                        f"{spec.source_option} LUI/ORI pair is not adjacent"
+                    )
+                b01_user_offset = raw_to_user_offset(high_raw_offset)
+                entry, b01_file_offset = b01_base.containing_file(
+                    b01_user_offset, 8
+                )
+                if (
+                    entry.name != SLUS_NAME
+                    or spec.target not in ("main_exe", "mixed")
+                    or b01_file_offset % 4
+                ):
+                    raise AssertionError(
+                        f"{spec.source_option} has an invalid MIPS pair target"
+                    )
+                expected = read_iso_file_range(
+                    b01_base, entry.name, b01_file_offset, 8
+                )
+                stock_expected = read_iso_file_range(
+                    stock, entry.name, b01_file_offset, 8
+                )
+                if stock_expected != expected:
+                    raise AssertionError(
+                        f"{spec.source_option} depends on a B01 SLUS rewrite"
+                    )
+                lui, ori = struct.unpack("<II", expected)
+                lui_rt = (lui >> 16) & 0x1F
+                if (
+                    lui >> 26 != 0x0F
+                    or ((lui >> 21) & 0x1F) != 0
+                    or lui_rt == 0
+                    or ori >> 26 != 0x0D
+                    or ((ori >> 21) & 0x1F) != lui_rt
+                    or ((ori >> 16) & 0x1F) != lui_rt
+                ):
+                    raise AssertionError(
+                        f"{spec.source_option} guard is not a linked LUI/ORI pair"
+                    )
+                address = stock_load + b01_file_offset - USER_SECTOR
+                patches.append(
+                    ParamPatch(
+                        spec.feature_id,
+                        spec.source_option,
+                        "main_exe",
+                        address,
+                        expected,
+                        spec.option_id,
+                        spec.encoding,
+                        omit_when_default=spec.omit_when_default,
+                        source=spec.source_option,
+                        raw_offset=high_raw_offset,
+                        iso_file=entry.name,
+                        file_offset=b01_file_offset,
+                    )
+                )
+                operations.append(
+                    {
+                        "kind": "bounded-mips-lui-ori-patch",
+                        "source_raw_offsets": [
+                            high_raw_offset,
+                            low_raw_offset,
+                        ],
+                        "iso_file": entry.name,
+                        "file_offset": b01_file_offset,
+                        "guest_address": address,
+                        "guard_size": 8,
+                        "encoding": spec.encoding,
+                        "omit_when_default": spec.omit_when_default,
+                        "expected": expected.hex().upper(),
+                    }
+                )
+            feature_evidence = evidence.setdefault(
+                spec.feature_id,
+                {
+                    "status": "ready-pending-live-smoke",
+                    "source_options": [],
+                    "options": [],
+                    "source_defaults_are_stock_noops": True,
+                    "common_base_writes_inherited": 0,
+                    "semantic_operations": [],
+                },
+            )
+            feature_evidence["source_options"].append(spec.source_option)
+            feature_evidence["options"].append(
+                {
+                    "id": spec.option_id,
+                    "min": spec.minimum,
+                    "max": spec.maximum,
+                    "source_default": spec.default,
+                    "manifest_default": (
+                        spec.manifest_default
+                        if spec.manifest_default is not None
+                        else spec.default
+                    ),
+                    "encoding": spec.encoding,
+                    "sample_values_verified": sorted(
+                        set((spec.default, *spec.samples))
+                    ),
+                }
+            )
+            feature_evidence["semantic_operations"].extend(operations)
+            continue
+
+        for raw_offset in source_offsets[source_key]:
             b01_user_offset = raw_to_user_offset(raw_offset)
             entry, b01_file_offset = b01_base.containing_file(
                 b01_user_offset, len(encoded_default)
             )
             if entry.name == SLUS_NAME and spec.target in ("main_exe", "mixed"):
-                guard_file_offset = b01_file_offset & ~3
+                guard_file_offset = (
+                    b01_file_offset & ~3
+                    if spec.guard_main_instruction
+                    else b01_file_offset
+                )
                 value_offset = b01_file_offset - guard_file_offset
-                if value_offset + len(encoded_default) > 4:
+                guard_size = (
+                    4
+                    if spec.guard_main_instruction
+                    else len(encoded_default)
+                )
+                if value_offset + len(encoded_default) > guard_size:
                     raise AssertionError(
-                        f"{spec.source_option} crosses a MIPS instruction"
+                        f"{spec.source_option} crosses its main-EXE guard"
                     )
                 expected = read_iso_file_range(
-                    b01_base, entry.name, guard_file_offset, 4
+                    b01_base, entry.name, guard_file_offset, guard_size
                 )
                 stock_expected = read_iso_file_range(
-                    stock, entry.name, guard_file_offset, 4
+                    stock, entry.name, guard_file_offset, guard_size
                 )
                 if stock_expected != expected:
                     raise AssertionError(
@@ -2035,6 +2572,7 @@ def build_param_feature_ops(
                         spec.option_id,
                         spec.encoding,
                         value_offset=value_offset,
+                        omit_when_default=spec.omit_when_default,
                         source=spec.source_option,
                         raw_offset=raw_offset,
                         iso_file=entry.name,
@@ -2098,6 +2636,7 @@ def build_param_feature_ops(
                     expected,
                     spec.option_id,
                     spec.encoding,
+                    omit_when_default=spec.omit_when_default,
                     source=spec.source_option,
                     raw_offset=raw_offset,
                     iso_file="ROCK_X6.BIN",
@@ -2120,23 +2659,47 @@ def build_param_feature_ops(
                     "stock_member_sha256": sha256(stock_member.payload),
                 }
             )
-        evidence[spec.feature_id] = {
-            "status": "ready-pending-live-smoke",
-            "source_option": spec.source_option,
-            "option": {
+        feature_evidence = evidence.setdefault(
+            spec.feature_id,
+            {
+                "status": "ready-pending-live-smoke",
+                "source_options": [],
+                "options": [],
+                "source_defaults_are_stock_noops": True,
+                "common_base_writes_inherited": 0,
+                "semantic_operations": [],
+            },
+        )
+        feature_evidence["source_options"].append(spec.source_option)
+        feature_evidence["options"].append(
+            {
                 "id": spec.option_id,
                 "min": spec.minimum,
                 "max": spec.maximum,
-                "default": spec.default,
+                "source_default": spec.default,
+                "manifest_default": (
+                    spec.manifest_default
+                    if spec.manifest_default is not None
+                    else spec.default
+                ),
                 "encoding": spec.encoding,
-            },
-            "sample_values_verified": sorted(
-                set((spec.default, *spec.samples))
-            ),
-            "default_is_stock_noop": True,
-            "common_base_writes_inherited": 0,
-            "semantic_operations": operations,
-        }
+                "sample_values_verified": sorted(
+                    set((spec.default, *spec.samples))
+                ),
+            }
+        )
+        feature_evidence["semantic_operations"].extend(operations)
+    for constraint in PARAM_CONSTRAINTS:
+        if constraint.feature_id in evidence:
+            evidence[constraint.feature_id].setdefault(
+                "constraints", []
+            ).append(
+                {
+                    "kind": "ordered_integer",
+                    "direction": constraint.direction,
+                    "options": list(constraint.option_ids),
+                }
+            )
     return patches, evidence
 
 
@@ -2329,7 +2892,11 @@ def build_config_feature_ops(
                             f"{spec.feature_id} stock stage guard changed for "
                             f"{route.record_id}:{route.subasset_index}"
                         )
-                    for oracle, mode in config_oracles:
+                    for oracle, mode in (
+                        config_oracles
+                        if spec.verify_aggregate_oracles
+                        else ()
+                    ):
                         if not variant_selected(spec, variant_index, mode):
                             continue
                         records = oracle_dat_cache.get(oracle.path)
@@ -2409,45 +2976,70 @@ def build_config_feature_ops(
                     entry.name == SLUS_NAME
                     and spec.target in ("main_exe", "mixed")
                 ):
+                    guard_file_offset = (
+                        b01_file_offset & ~3
+                        if spec.guard_main_instruction
+                        else b01_file_offset
+                    )
+                    value_offset = b01_file_offset - guard_file_offset
+                    guard_size = (
+                        4 if spec.guard_main_instruction
+                        else len(replacement)
+                    )
+                    if value_offset + len(replacement) > guard_size:
+                        raise AssertionError(
+                            f"{spec.feature_id} crosses its main-EXE guard"
+                        )
                     expected = read_iso_file_range(
                         b01_base,
                         entry.name,
-                        b01_file_offset,
-                        len(replacement),
+                        guard_file_offset,
+                        guard_size,
                     )
                     stock_expected = read_iso_file_range(
                         stock,
                         entry.name,
-                        b01_file_offset,
-                        len(replacement),
+                        guard_file_offset,
+                        guard_size,
                     )
                     if stock_expected != expected:
                         raise AssertionError(
                             f"{spec.feature_id} depends on a B01 SLUS rewrite"
                         )
-                    for oracle, mode in config_oracles:
+                    guarded_replacement = bytearray(expected)
+                    guarded_replacement[
+                        value_offset : value_offset + len(replacement)
+                    ] = replacement
+                    guarded_replacement = bytes(guarded_replacement)
+                    for oracle, mode in (
+                        config_oracles
+                        if spec.verify_aggregate_oracles
+                        else ()
+                    ):
                         if (
                             variant_selected(spec, variant_index, mode)
                             and read_iso_file_range(
                                 oracle,
                                 entry.name,
-                                b01_file_offset,
-                                len(replacement),
+                                guard_file_offset,
+                                guard_size,
                             )
-                            != replacement
+                            != guarded_replacement
                         ):
                             raise AssertionError(
                                 f"{oracle.path.name} lacks "
                                 f"{spec.feature_id}/{variant.value}"
                             )
-                    address = stock_load + b01_file_offset - USER_SECTOR
+                    address = (
+                        stock_load + guard_file_offset - USER_SECTOR
+                    )
                     patches.append(
                         Patch(
                             spec.feature_id,
                             ",".join(variant.expected_owned),
                             address,
                             expected,
-                            replacement,
+                            guarded_replacement,
                             when=when,
                         )
                     )
@@ -2455,11 +3047,12 @@ def build_config_feature_ops(
                         {
                             "kind": "guarded-main-exe-patch",
                             "source_raw_offset": raw_offset,
-                            "file_offset": b01_file_offset,
+                            "file_offset": guard_file_offset,
                             "guest_address": address,
-                            "size": len(replacement),
+                            "size": len(guarded_replacement),
+                            "value_offset": value_offset,
                             "expected": expected.hex().upper(),
-                            "replace": replacement.hex().upper(),
+                            "replace": guarded_replacement.hex().upper(),
                         }
                     )
                     continue
@@ -2491,7 +3084,11 @@ def build_config_feature_ops(
                     raise AssertionError(
                         f"{spec.feature_id} depends on a B01 member rewrite"
                     )
-                for oracle, mode in config_oracles:
+                for oracle, mode in (
+                    config_oracles
+                    if spec.verify_aggregate_oracles
+                    else ()
+                ):
                     if not variant_selected(spec, variant_index, mode):
                         continue
                     members = oracle_member_cache.get(oracle.path)
@@ -2562,7 +3159,11 @@ def build_config_feature_ops(
             "bounded_choice": bool(spec.option_id),
             "variants": feature_operations,
             "common_base_writes_inherited": 0,
-            "oracle_modes": [mode for _oracle, mode in config_oracles],
+            "oracle_modes": (
+                [mode for _oracle, mode in config_oracles]
+                if spec.verify_aggregate_oracles
+                else []
+            ),
         }
     return patches, overlays, evidence
 
@@ -3703,6 +4304,7 @@ def validate_composition(
             item.encoding,
             item.value_offset,
             item.addend,
+            item.omit_when_default,
         )
         for item in (*ordered_param_main, *ordered_param_disc)
     ]
@@ -3738,8 +4340,23 @@ def build_manifest(
     asset_paths: dict[int, str],
     package_version: str,
 ) -> str:
+    manifest_constraints = tuple(
+        constraint
+        for constraint in PARAM_CONSTRAINTS
+        if constraint.feature_id in features
+    )
+    format_version = (
+        3
+        if manifest_constraints
+        or any(
+            patch.encoding == "mips_lui_ori_u32"
+            or patch.omit_when_default
+            for patch in param_patches
+        )
+        else 2 if param_patches else 1
+    )
     lines = [
-        f"format_version = {2 if param_patches else 1}",
+        f"format_version = {format_version}",
         'id = "mmx6.tweaks.native"',
         f"version = {q(package_version)}",
         'name = "Mega Man X6 Tweaks"',
@@ -3832,17 +4449,27 @@ def build_manifest(
                     f"value = {q(variant.value)}",
                     f"label = {q(variant.label)}",
                 ]
+    declared_param_features: set[str] = set()
     for spec in PARAM_FEATURES:
         if spec.feature_id not in features:
             continue
+        if spec.feature_id not in declared_param_features:
+            lines += [
+                "",
+                "[[feature]]",
+                f"id = {q(spec.feature_id)}",
+                f"name = {q(spec.name)}",
+                f"description = {q(spec.description)}",
+                f"group = {q(spec.group)}",
+                "default_enabled = false",
+            ]
+            declared_param_features.add(spec.feature_id)
+        manifest_default = (
+            spec.manifest_default
+            if spec.manifest_default is not None
+            else spec.default
+        )
         lines += [
-            "",
-            "[[feature]]",
-            f"id = {q(spec.feature_id)}",
-            f"name = {q(spec.name)}",
-            f"description = {q(spec.description)}",
-            f"group = {q(spec.group)}",
-            "default_enabled = false",
             "",
             "[[option]]",
             f"feature = {q(spec.feature_id)}",
@@ -3854,7 +4481,17 @@ def build_manifest(
             f"min = {spec.minimum}",
             f"max = {spec.maximum}",
             "step = 1",
-            f"default = {spec.default}",
+            f"default = {manifest_default}",
+        ]
+    for constraint in manifest_constraints:
+        options = ", ".join(q(value) for value in constraint.option_ids)
+        lines += [
+            "",
+            "[[constraint]]",
+            f"feature = {q(constraint.feature_id)}",
+            'kind = "ordered_integer"',
+            f"direction = {q(constraint.direction)}",
+            f"options = [{options}]",
         ]
     if EXIT_STAGE_FEATURE_ID in features:
         lines += [
@@ -3926,6 +4563,8 @@ def build_manifest(
             transform.append(f"offset = {patch.value_offset}")
         if patch.addend:
             transform.append(f"addend = {patch.addend}")
+        if patch.omit_when_default:
+            transform.append("omit_when_default = true")
         lines += [
             "",
             "[[patch]]",
@@ -4137,7 +4776,7 @@ def main() -> int:
         choices=("all", *ALL_FEATURE_IDS),
         default="all",
     )
-    parser.add_argument("--package-version", default="1.8.0")
+    parser.add_argument("--package-version", default="1.9.0")
     parser.add_argument("--audit-retranslation", action="store_true")
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--out", type=Path)
