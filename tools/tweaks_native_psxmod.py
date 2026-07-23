@@ -195,6 +195,7 @@ class FeatureSpec:
     source_option: str
     target: str
     expected_writes: tuple[tuple[int, str], ...]
+    source_value: str = "1"
 
 
 @dataclass(frozen=True)
@@ -513,12 +514,176 @@ SMALL_DATA_FEATURES = (
     ),
 )
 
+STATIC_SPIKE_FEATURES = (
+    FeatureSpec(
+        "blade_mach_dash_unlimited_repetitions",
+        "Unlimited Blade Mach Dash Repetitions",
+        "Allow Blade Armor to repeat Mach Dash without landing first.",
+        "Movement",
+        "MachDashUnlimited01",
+        "main_exe",
+        ((0x1D956BE4, "00000000"),),
+    ),
+    FeatureSpec(
+        "disable_falcon_jump_air_dash",
+        "Disable Falcon Jump Air Dash",
+        "Prevent Falcon Armor's jump input from starting an air dash.",
+        "Movement",
+        "FalconDash01",
+        "main_exe",
+        ((0x1D956AE4, "00000234"),),
+        source_value="0",
+    ),
+    FeatureSpec(
+        "higher_ceiling_jump",
+        "Higher Ceiling Jump",
+        "Use the reviewed MMX6 Tweaks preset for a higher ceiling jump.",
+        "Movement",
+        "HighJumpHeight01",
+        "main_exe",
+        ((0x1D94C884, "C000"),),
+        source_value="192",
+    ),
+    FeatureSpec(
+        "disable_x_saber_cancelling",
+        "Disable X Saber Cancelling",
+        "Disable cancellation flags on X's four standard saber attacks.",
+        "Combat",
+        "SaberCancellable01",
+        "rock_x6_bin",
+        (
+            (0x1D9BFAC1, "02"),
+            (0x1D9BFAC5, "00"),
+            (0x1D9BFAC9, "00"),
+            (0x1D9BFACD, "00"),
+        ),
+        source_value="0",
+    ),
+    FeatureSpec(
+        "allow_xtreme_item_drops",
+        "Allow Item Drops on Xtreme",
+        "Allow enemies to drop health and weapon-energy items on Xtreme.",
+        "Game Rules",
+        "DifficultySwitch01",
+        "main_exe",
+        ((0x1D9682A8, "00000000"),),
+        source_value="0",
+    ),
+    FeatureSpec(
+        "prevent_nightmare_orb_reversion",
+        "Prevent Nightmare Orb Reversion",
+        "Keep Nightmare Viruses from reverting after their orb is left alone.",
+        "Nightmare Effects",
+        "OrbSwitch02",
+        "main_exe",
+        ((0x1D95A3D0, "31000234"),),
+        source_value="0",
+    ),
+    FeatureSpec(
+        "yammark_speed_orbs_easy_normal",
+        "Faster Yammark Orbs on Easy and Normal",
+        "Increase green-orb movement speed in Yammark fights on Easy and Normal.",
+        "Bosses",
+        "BossMod0103",
+        "rock_x6_bin",
+        (
+            (0x1D9E8118, "0400"),
+            (0x1DB33768, "0400"),
+            (0x1D9E812C, "FCFF"),
+            (0x1DB3377C, "FCFF"),
+        ),
+    ),
+    FeatureSpec(
+        "yammark_speed_orbs_xtreme",
+        "Faster Yammark Orbs on Xtreme",
+        "Increase green-orb movement speed in Yammark fights on Xtreme.",
+        "Bosses",
+        "BossMod0104",
+        "rock_x6_bin",
+        (
+            (0x1D9E81B0, "80180200"),
+            (0x1DB33800, "80180200"),
+        ),
+    ),
+    FeatureSpec(
+        "yammark_reduce_idle_time",
+        "Reduce Yammark Idle Time",
+        "Reduce Commander Yammark's idle time between actions.",
+        "Bosses",
+        "BossMod0105",
+        "rock_x6_bin",
+        (
+            (0x1D9E8FB8, "1000"),
+            (0x1DB34608, "1000"),
+            (0x1D9E8FD4, "1000"),
+            (0x1DB34624, "1000"),
+            (0x1D9E43C8, "1000"),
+            (0x1DB2FB48, "1000"),
+            (0x1D9E4680, "F000"),
+            (0x1DB2FCD0, "F000"),
+            (0x1D9E6F64, "00000000"),
+            (0x1DB325B4, "00000000"),
+        ),
+    ),
+    FeatureSpec(
+        "wolfang_debris_all_difficulties",
+        "Wolfang Debris on All Difficulties",
+        "Enable Blizzard Wolfang's falling ice debris on every difficulty.",
+        "Bosses",
+        "BossMod0201",
+        "rock_x6_bin",
+        (
+            (0x1D9F80D4, "00000000"),
+            (0x1DB38B2C, "00000000"),
+        ),
+    ),
+    FeatureSpec(
+        "wolfang_ice_spikes_all_levels",
+        "Wolfang Ice Spikes at All Levels",
+        "Enable Blizzard Wolfang's ice-spike attack at every boss level.",
+        "Bosses",
+        "BossMod0202",
+        "rock_x6_bin",
+        (
+            (0x1D9F6814, "03000234"),
+            (0x1DB3739C, "03000234"),
+        ),
+    ),
+    FeatureSpec(
+        "wolfang_indestructible_ice_blocks",
+        "Indestructible Wolfang Ice Blocks",
+        "Make Blizzard Wolfang's ice blocks and debris indestructible.",
+        "Bosses",
+        "BossMod0203",
+        "rock_x6_bin",
+        (
+            (0x1D9F7C64, "3C43"),
+            (0x1DB387EC, "3C43"),
+            (0x1D9F7E84, "3C43"),
+            (0x1DB388DC, "3C43"),
+        ),
+    ),
+    FeatureSpec(
+        "wolfang_indestructible_ice_spikes",
+        "Indestructible Wolfang Ice Spikes",
+        "Make Blizzard Wolfang's ice-spike projectiles indestructible.",
+        "Bosses",
+        "BossMod0204",
+        "rock_x6_bin",
+        (
+            (0x1D9F6834, "00000000"),
+            (0x1DB373BC, "00000000"),
+        ),
+    ),
+)
+
 SIMPLE_FEATURES = (
     INTRO_FEATURES
     + NIGHTMARE_FEATURES
     + QOL_FEATURES
     + MOVEMENT_FEATURES
     + SMALL_DATA_FEATURES
+    + STATIC_SPIKE_FEATURES
 )
 EXIT_STAGE_VARIANTS = {
     "main_stages": {
@@ -691,7 +856,7 @@ def resolve_source_writes(
     result: dict[str, list[tuple[int, bytes]]] = {}
     for spec in specs:
         merged = dict(base)
-        merged[spec.source_option] = "1"
+        merged[spec.source_option] = spec.source_value
         _normalized, patchfile, patch_list, values, synth = engine._assemble(
             db, merged, base
         )
@@ -701,6 +866,17 @@ def resolve_source_writes(
             raise AssertionError(
                 f"{spec.source_option} source closure changed: "
                 f"patchfile={patchfile!r}, owned={owned!r}"
+            )
+        if synth:
+            raise AssertionError(
+                f"{spec.source_option} unexpectedly synthesizes "
+                f"{sorted(synth)!r}"
+            )
+        _file_patch, file_entries = engine.build_filelist(db, merged, base)
+        if file_entries:
+            raise AssertionError(
+                f"{spec.source_option} unexpectedly inserts files: "
+                f"{file_entries!r}"
             )
         writes: list[tuple[int, bytes]] = []
         for name in owned:
@@ -732,6 +908,7 @@ def build_simple_feature_ops(
     qol_oracles: tuple[RawMode2Image, ...],
     movement_oracles: tuple[RawMode2Image, ...],
     small_data_oracles: tuple[RawMode2Image, ...],
+    static_spike_oracles: tuple[RawMode2Image, ...],
     specs: tuple[FeatureSpec, ...],
     patcher_source: Path,
     patcher_data: Path,
@@ -759,6 +936,8 @@ def build_simple_feature_ops(
             feature_oracles = movement_oracles
         elif spec in SMALL_DATA_FEATURES:
             feature_oracles = small_data_oracles
+        elif spec in STATIC_SPIKE_FEATURES:
+            feature_oracles = static_spike_oracles
         else:
             raise AssertionError(f"no oracle group for {spec.feature_id}")
         for raw_offset, replacement in source_writes[spec.feature_id]:
@@ -894,9 +1073,10 @@ def build_simple_feature_ops(
                 or spec in QOL_FEATURES
                 or spec in MOVEMENT_FEATURES
                 or spec in SMALL_DATA_FEATURES
+                or spec in STATIC_SPIKE_FEATURES
             )
             else "ready",
-            "source_selection": {spec.source_option: 1},
+            "source_selection": {spec.source_option: spec.source_value},
             "common_base_writes_inherited": 0,
             "semantic_operations": operations,
             "oracle_count": (
@@ -2164,6 +2344,16 @@ def main() -> int:
         default=DEFAULT_ORACLE_DIR / "small-data-current-combined.bin",
     )
     parser.add_argument(
+        "--static-spike-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "static-spike-core.bin",
+    )
+    parser.add_argument(
+        "--combined-static-spike-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "static-spike-current-combined.bin",
+    )
+    parser.add_argument(
         "--exit-main-oracle",
         type=Path,
         default=DEFAULT_ORACLE_DIR / "exit-main-stages.bin",
@@ -2192,7 +2382,7 @@ def main() -> int:
         choices=("all", *ALL_FEATURE_IDS),
         default="all",
     )
-    parser.add_argument("--package-version", default="1.5.0")
+    parser.add_argument("--package-version", default="1.6.0")
     parser.add_argument("--audit-retranslation", action="store_true")
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--out", type=Path)
@@ -2221,6 +2411,9 @@ def main() -> int:
     wants_movement = any(spec in MOVEMENT_FEATURES for spec in simple_specs)
     wants_small_data = any(
         spec in SMALL_DATA_FEATURES for spec in simple_specs
+    )
+    wants_static_spike = any(
+        spec in STATIC_SPIKE_FEATURES for spec in simple_specs
     )
     if wants_title:
         require_file(args.title_oracle, "title-only conversion oracle")
@@ -2268,6 +2461,12 @@ def main() -> int:
         require_file(
             args.combined_small_data_oracle,
             "combined small-data conversion oracle",
+        )
+    if wants_static_spike:
+        require_file(args.static_spike_oracle, "static-spike conversion oracle")
+        require_file(
+            args.combined_static_spike_oracle,
+            "combined static-spike conversion oracle",
         )
     if wants_exit:
         for path, description in (
@@ -2348,6 +2547,17 @@ def main() -> int:
             for path in (
                 (args.small_data_oracle, args.combined_small_data_oracle)
                 if wants_small_data
+                else ()
+            )
+        )
+        static_spike_oracles = tuple(
+            stack.enter_context(RawMode2Image(path))
+            for path in (
+                (
+                    args.static_spike_oracle,
+                    args.combined_static_spike_oracle,
+                )
+                if wants_static_spike
                 else ()
             )
         )
@@ -2460,6 +2670,7 @@ def main() -> int:
                     qol_oracles,
                     movement_oracles,
                     small_data_oracles,
+                    static_spike_oracles,
                     simple_specs,
                     args.patcher_source,
                     args.patcher_data,
@@ -2506,6 +2717,13 @@ def main() -> int:
                 report["provenance"][
                     "combined_small_data_oracle_sha256"
                 ] = file_sha256(args.combined_small_data_oracle)
+            if wants_static_spike:
+                report["provenance"][
+                    "static_spike_oracle_sha256"
+                ] = file_sha256(args.static_spike_oracle)
+                report["provenance"][
+                    "combined_static_spike_oracle_sha256"
+                ] = file_sha256(args.combined_static_spike_oracle)
         if wants_exit:
             exit_patches, exit_evidence = build_exit_stage_ops(
                 stock,

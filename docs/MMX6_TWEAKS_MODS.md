@@ -317,6 +317,57 @@ reached charged-shot function.
 Recycle Lab object records, and the stage-object schema has not yet proven
 that both changed fields belong solely to the teleport.
 
+### Guarded static inclusion spike
+
+Version 1.6 adds thirteen more independent feature rows after an adversarial
+review of movement, combat, Nightmare, and early-boss candidates:
+
+| Feature ID | Tweaks source | Scope |
+| --- | --- | --- |
+| `blade_mach_dash_unlimited_repetitions` | `MachDashUnlimited01` | one guarded SLUS instruction |
+| `disable_falcon_jump_air_dash` | `FalconDash01=0` | one guarded SLUS instruction; native label describes the inverted action |
+| `higher_ceiling_jump` | `HighJumpHeight01=192` | the reviewed Tweaks 192-height preset, not an unconstrained scalar |
+| `disable_x_saber_cancelling` | `SaberCancellable01=0` | four bytes in member 24; disjoint from Shadow Saber cancelling |
+| `allow_xtreme_item_drops` | `DifficultySwitch01=0` | one guarded SLUS branch |
+| `prevent_nightmare_orb_reversion` | `OrbSwitch02=0` | one guarded SLUS instruction; disjoint from Always Drop Orbs |
+| `yammark_speed_orbs_easy_normal` | `BossMod0103` | four mirrored member 73/662 values |
+| `yammark_speed_orbs_xtreme` | `BossMod0104` | two mirrored member 73/662 instructions |
+| `yammark_reduce_idle_time` | `BossMod0105` | ten mirrored member 73/662 timer/branch edits |
+| `wolfang_debris_all_difficulties` | `BossMod0201` | two mirrored member 103/677 branches |
+| `wolfang_ice_spikes_all_levels` | `BossMod0202` | two mirrored member 103/677 instructions |
+| `wolfang_indestructible_ice_blocks` | `BossMod0203` | four mirrored member 103/677 halfwords |
+| `wolfang_indestructible_ice_spikes` | `BossMod0204` | two mirrored member 103/677 instructions |
+
+Every accepted source selection has exact one-option closure, stock-equal B01
+guards, stable SLUS or indexed-member ownership, and no file insertion,
+scratch-code injection, archive growth, prerequisite, synthesis, or byte
+overlap with the existing native features or another spike feature. The two
+default-on source checkboxes are deliberately inverted into positively named
+native features: disabled is stock, and enabled applies the reviewed `0`
+selection. The height edit is exposed as one boolean preset until bounded
+numeric configuration has its own schema and validation.
+
+`static-spike-core.bin` proves the thirteen-source aggregate. The
+current-combined oracle proves all thirteen compose with the existing title,
+retranslation, intro, Nightmare, quality-of-life, movement, combat, audio, and
+Exit Stage selections without causing a hidden synthesized write. Aggregate
+oracles are presence/composition evidence only; each emitted range is still
+owned by its exact source closure and guarded against stock bytes.
+
+The same review intentionally deferred code-cave injections, options with
+hidden prerequisites or exception rewrites, unconstrained numeric fields,
+ambiguous stage tables, save-progression rewrites, and hundreds of coupled
+animation timings. A superficially clean Zero Yammar-input candidate was also
+removed from this spike when the full current-package combination synthesized
+an additional input-hint rewrite. This is the intended failure mode: shrink a
+batch when composition reveals coupling, rather than silently reproduce it.
+
+Live smoke coverage should include Blade and Falcon movement, ceiling
+collision, X's four saber actions, Xtreme drops, a Nightmare Virus
+kill/orb/reform loop, and both the stage and rematch forms of Yammark and
+Wolfang across difficulties. The static guards and composition proof make the
+batch safe to ship for testing; they do not replace those behavior checks.
+
 ## Four-image algebra
 
 `tools/tweaks_diff_algebra.cpp` compares four local reference images:
