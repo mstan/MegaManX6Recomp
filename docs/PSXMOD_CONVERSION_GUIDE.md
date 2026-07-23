@@ -20,6 +20,8 @@ A native conversion must preserve these rules:
 - Enabling one feature never silently enables, disables, or reconfigures
   another feature.
 - Disabling a feature removes only that feature's operations.
+- Disabled is the stock behavior. Do not add a one-choice option whose only
+  purpose is to name the enabled behavior.
 - Mutually exclusive values of one concept are options inside one feature.
 - Runtime cost scales with enabled operations, not possible configurations.
 - Every operation is guarded against the exact supported stock revision.
@@ -67,13 +69,18 @@ A good feature has:
 
 Examples:
 
-- `Title Screen`, with a `USA` or `Rockman X6 (Japan)` choice;
-- `Retranslation`, with a script choice;
+- `Rockman X6 Title Screen`, as a boolean feature: disabled is stock USA art;
+- `Retranslation`, as a boolean feature when there is only one translated
+  script;
+- `Translation`, with a choice only when two or more non-stock translations
+  are actually available;
 - `Disable Nightmare Rain`, with a boolean enabled state.
 
-USA and Japanese title art are values of the same feature because they control
-one resource. Title art and a retranslation are separate features because a
-player can reasonably enable either, both, or neither.
+Stock versus one replacement is the feature's disabled/enabled state, not a
+dropdown. Two or more replacement variants are mutually exclusive values in
+one feature because they control one resource. Title art and a retranslation
+are separate features because a player can reasonably enable either, both, or
+neither.
 
 Do not expose implementation helpers, common patcher bases, scratch arenas, or
 container relocation records as user-facing features. Determine whether each
