@@ -319,7 +319,7 @@ that both changed fields belong solely to the teleport.
 
 ### Guarded static inclusion spike
 
-Version 1.6 adds thirteen more independent feature rows after an adversarial
+Version 1.6 adds twelve more independent feature rows after an adversarial
 review of movement, combat, Nightmare, and early-boss candidates:
 
 | Feature ID | Tweaks source | Scope |
@@ -332,7 +332,6 @@ review of movement, combat, Nightmare, and early-boss candidates:
 | `prevent_nightmare_orb_reversion` | `OrbSwitch02=0` | one guarded SLUS instruction; disjoint from Always Drop Orbs |
 | `yammark_speed_orbs_easy_normal` | `BossMod0103` | four mirrored member 73/662 values |
 | `yammark_speed_orbs_xtreme` | `BossMod0104` | two mirrored member 73/662 instructions |
-| `yammark_reduce_idle_time` | `BossMod0105` | ten mirrored member 73/662 timer/branch edits |
 | `wolfang_debris_all_difficulties` | `BossMod0201` | two mirrored member 103/677 branches |
 | `wolfang_ice_spikes_all_levels` | `BossMod0202` | two mirrored member 103/677 instructions |
 | `wolfang_indestructible_ice_blocks` | `BossMod0203` | four mirrored member 103/677 halfwords |
@@ -347,8 +346,8 @@ native features: disabled is stock, and enabled applies the reviewed `0`
 selection. The height edit is exposed as one boolean preset until bounded
 numeric configuration has its own schema and validation.
 
-`static-spike-core.bin` proves the thirteen-source aggregate. The
-current-combined oracle proves all thirteen compose with the existing title,
+`static-spike-core.bin` proves the twelve-source aggregate. The
+current-combined oracle proves all twelve compose with the existing title,
 retranslation, intro, Nightmare, quality-of-life, movement, combat, audio, and
 Exit Stage selections without causing a hidden synthesized write. Aggregate
 oracles are presence/composition evidence only; each emitted range is still
@@ -357,10 +356,12 @@ owned by its exact source closure and guarded against stock bytes.
 The same review intentionally deferred code-cave injections, options with
 hidden prerequisites or exception rewrites, unconstrained numeric fields,
 ambiguous stage tables, save-progression rewrites, and hundreds of coupled
-animation timings. A superficially clean Zero Yammar-input candidate was also
-removed from this spike when the full current-package combination synthesized
-an additional input-hint rewrite. This is the intended failure mode: shrink a
-batch when composition reveals coupling, rather than silently reproduce it.
+animation timings. Yammark's ten-site idle-time rewrite was deferred because
+its branch removal needs broader phase testing than this spike's other boss
+edits. A superficially clean Zero Yammar-input candidate was also removed when
+the full current-package combination synthesized an additional input-hint
+rewrite. This is the intended failure mode: shrink a batch when composition
+reveals coupling, rather than silently reproduce it.
 
 Live smoke coverage should include Blade and Falcon movement, ceiling
 collision, X's four saber actions, Xtreme drops, a Nightmare Virus
