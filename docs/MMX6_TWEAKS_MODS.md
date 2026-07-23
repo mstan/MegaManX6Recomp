@@ -172,6 +172,47 @@ The top-level `skip-intros.bin` is stale and omits `IntroSkip03`; it is not a
 valid ownership oracle. Only the source declarations plus the factorial
 controls and combined outputs justify these four guarded operations.
 
+### Core quality-of-life controls
+
+The next six features are accepted as independent, default-disabled
+checkboxes, pending their listed live smoke tests. Each isolated engine
+selection resolves to exactly its one source option after excluding
+`PatchList_Base`; stock, B01, and s02 contain identical guard bytes; and none
+overlaps another native feature.
+
+| Feature ID | Tweaks source | SLUS offset / guest address | Stock guard | Replacement |
+| --- | --- | --- | --- | --- |
+| `alternate_default_controls` | `DefOptions01` | `0x5DE08` / `0x8006D608` | `8000100002004000200008000400` | `8000100008004000040002000100` |
+| `faster_cutscene_text` | `CutsceneVoice02` | `0x12ED8` / `0x800226D8` | `04000224` | `02000224` |
+| `mute_navigator_alerts` | `DialogueDisable07` | `0x43964` / `0x80053164` | `125B000C` | `00000000` |
+| `disable_rescue_extra_lives` | `LivesSwitch02` | `0x3F75C` / `0x8004EF5C` | `01004224` | `00000000` |
+| `disable_pickup_extra_lives` | `LivesSwitch03` | `0x3EC94` / `0x8004E494` | `01004224` | `00000000` |
+| `disable_rescue_health_refill` | `LivesSwitch04` | `0x3F450` / `0x8004EC50` | `31004014` | `463B0108` |
+
+`qol-core.bin` is the focused six-feature conversion oracle.
+`qol-current-combined.bin` enables the same six selections together with the
+current title, retranslation, intro, and Nightmare selections. Both are local
+development artifacts produced deterministically through the independently
+validated Python port of the Tweaks write pipeline; neither ships in the
+package. The converter re-resolves every source closure and verifies both
+oracles at the stock semantic SLUS offsets.
+
+Required live checks remain intentionally visible in the conversion status:
+
+- alternate defaults on a fresh/no-memory-card configuration and with an
+  existing saved controller layout;
+- several original and retranslated voiced cutscenes at both text speeds;
+- multiple Navigator alert paths, confirming only the voice call is muted;
+- item life pickups at ordinary and counter-boundary values;
+- rescued-Reploid extra-life rewards separately from health rewards; and
+- rescued-Reploid health behavior at low and full health for both characters.
+
+The broader audit deferred `LivesSwitch01` because it silently pulls display
+and Exit Button helpers into its source closure. `DialogueDisable01` through
+`04` remain deferred behind the `IngameOptions01` conditional-ownership
+design. Their patcher order is not permission to implement an arbitrary
+last-writer-wins rule.
+
 ## Four-image algebra
 
 `tools/tweaks_diff_algebra.cpp` compares four local reference images:
