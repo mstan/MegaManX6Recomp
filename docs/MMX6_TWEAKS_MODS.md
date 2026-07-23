@@ -460,6 +460,66 @@ split across instructions, whose bounds are not semantically established, or
 whose behavior is coupled to injected code. Those belong to later primitives,
 not looser use of `replace_from`.
 
+## Burndown after version 1.8
+
+The v2.6.1 source parser finds 329 unique user controls across 332 catalog
+entries. Version 1.8 represents 104 of those source controls as 93 feature
+rows; combined and configurable rows account for the difference. Exactly 225
+unique controls remain:
+
+| Tweaks area | Remaining controls |
+|---|---:|
+| New Game | 74 |
+| Player Mechanics | 71 |
+| General | 27 |
+| Localization and Art | 23 |
+| Balance | 12 |
+| Damage Tables | 12 |
+| Stages | 5 |
+| Boss Attacks | 1 |
+
+The next work is grouped by the runtime or conversion primitive it retires,
+not by arbitrary source-file order:
+
+1. **Small parametric completion:** seven rank-soul thresholds and two
+   split-immediate initial-dash speeds, plus migration of the existing fixed
+   High Jump row to its full slider. The thresholds need one descending-vector
+   invariant; the speeds need an explicit split-word encoding.
+2. **Conditional multi-write templates:** 27 animation timing cells and four
+   nearby derived scalars. Zero has compound meaning for several timings, so
+   these are not honest direct integers.
+3. **Registered hook and code-foundation allocation:** an exact known core of
+   26 controls: 18 Mach Dash controls, two continuous-dash-speed controls, two
+   cutscene-soul controls, and four remaining voice controls. Another 20–40
+   controls may reuse this foundation, but that reuse count remains an estimate
+   until each closure is classified.
+4. **Typed asset slots:** 14 mugshots, three loading logos, and two sprite
+   palettes. These need asset identity, palette/VRAM metadata, and dependency
+   composition rather than blind file insertion.
+5. **Declarative new-game and progression state:** all 74 New Game controls.
+   A related exact set of 16 General controls covers unlockables, Reploid
+   statuses, incomplete armor, and shared stats. This requires typed bitfields,
+   dependency validation, save semantics, and deterministic randomization.
+6. **Typed tables:** 61 active boss-health cells followed by 33 damage tables.
+   Each damage table exposes 63 attack records, or 2,079 underlying records.
+   That record count measures data scale; it is not 2,079 ordinary feature
+   rows. The editor needs table schemas, derived-field validation, and
+   row-level ownership.
+7. **Typed stage objects:** five remaining stage controls whose current source
+   closures cross object or apparent record boundaries.
+
+There is also a small existing-operation cleanup queue: four Reploid-status
+choices and Commander Yammark's ten-site idle-time rewrite. The status rows
+need no new loader primitive. Yammark's rewrite is byte-isolated, but remains
+deferred until its stage and rematch phase transitions receive live behavior
+coverage.
+
+The size ranking differs from the implementation order. New-game state and
+damage tables cover the most controls and records, but building them before
+the smaller typed primitives would force their semantics into generic byte
+patches. The sequence above deliberately establishes reusable invariants,
+templates, hooks, assets, state, and table ownership first.
+
 ## Four-image algebra
 
 `tools/tweaks_diff_algebra.cpp` compares four local reference images:
