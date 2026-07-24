@@ -4332,6 +4332,33 @@ def q(value: str) -> str:
     return json.dumps(value, ensure_ascii=False)
 
 
+def represented_source_controls(
+    *,
+    wants_title: bool,
+    wants_retranslation: bool,
+    wants_exit: bool,
+    simple_specs: tuple[FeatureSpec, ...],
+    config_specs: tuple[ConfigFeatureSpec, ...],
+    param_specs: tuple[ParamFeatureSpec, ...],
+) -> list[str]:
+    controls = {spec.source_option for spec in simple_specs}
+    controls.update(spec.source_option for spec in param_specs)
+    for spec in config_specs:
+        for variant in spec.variants:
+            controls.update(name for name, _value in variant.selection)
+    if wants_title:
+        controls.add("TitleScreen01")
+        controls.update(
+            source_option
+            for _value, _label, source_option in TITLE_SCREEN_VARIANTS
+        )
+    if wants_retranslation:
+        controls.update(("ScriptPatch01", "ScriptPatch02"))
+    if wants_exit:
+        controls.update(("ExitButton01", "ExitButton02", "ExitButton03"))
+    return sorted(controls)
+
+
 def build_manifest(
     features: set[str],
     patches: list[Patch],
@@ -5041,6 +5068,14 @@ def main() -> int:
                 for feature in ALL_FEATURE_IDS
                 if feature in enabled_features
             ],
+            "source_controls": represented_source_controls(
+                wants_title=wants_title,
+                wants_retranslation=wants_retranslation,
+                wants_exit=wants_exit,
+                simple_specs=simple_specs,
+                config_specs=config_specs,
+                param_specs=param_specs,
+            ),
             "provenance": {
                 "title_oracle_sha256": (
                     file_sha256(args.title_oracle) if wants_title else None
