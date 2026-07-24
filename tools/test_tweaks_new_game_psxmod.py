@@ -22,12 +22,12 @@ import tweaks_new_game_psxmod as new_game
 
 class CatalogTests(unittest.TestCase):
     def test_feature_rows_are_independent(self) -> None:
-        self.assertEqual(len(new_game.FEATURES), 65)
+        self.assertEqual(len(new_game.FEATURES), 67)
         self.assertEqual(
-            len({item.feature_id for item in new_game.FEATURES}), 65
+            len({item.feature_id for item in new_game.FEATURES}), 67
         )
         self.assertEqual(
-            len({item.source_control for item in new_game.FEATURES}), 65
+            len({item.source_control for item in new_game.FEATURES}), 67
         )
         self.assertEqual(
             len([item for item in new_game.FEATURES if item.kind == "integer"]),
@@ -44,6 +44,12 @@ class CatalogTests(unittest.TestCase):
         )
         self.assertEqual(
             len([item for item in new_game.FEATURES if item.kind == "table"]), 1
+        )
+        self.assertEqual(
+            len([item for item in new_game.FEATURES if item.kind == "mark_status"]), 1
+        )
+        self.assertEqual(
+            len([item for item in new_game.FEATURES if item.kind == "mark_only"]), 1
         )
 
     def test_bit_domains_match_upstream_masks(self) -> None:
@@ -73,9 +79,10 @@ class CatalogTests(unittest.TestCase):
             *(f"PartsSet0{group}0{index}"
               for group in range(3, 7) for index in range(1, 5)),
             "PartsSet0701", "PartsSet0702",
+            "RescRepFoundMark01", "RescRepFoundMarkOnly01",
         }
         self.assertEqual(added, expected)
-        self.assertEqual(len(added), 47)
+        self.assertEqual(len(added), 49)
 
 
 @unittest.skipUnless(
@@ -88,10 +95,10 @@ class PackageIntegrationTests(unittest.TestCase):
             Path(os.environ["MMX6_NEW_GAME_TEST_STOCK"])
         )
         self.assertEqual(report["package"]["catalog_control_count"], 74)
-        self.assertEqual(report["package"]["source_control_count"], 65)
+        self.assertEqual(report["package"]["source_control_count"], 67)
         self.assertEqual(report["package"]["excluded_control_count"], 4)
-        self.assertEqual(report["package"]["deferred_control_count"], 5)
-        self.assertEqual(len(report["source_controls"]), 65)
+        self.assertEqual(report["package"]["deferred_control_count"], 3)
+        self.assertEqual(len(report["source_controls"]), 67)
         self.assertEqual(len(report["source_control_ledger"]), 74)
         self.assertEqual(
             report["excluded_source_controls"],
@@ -137,7 +144,6 @@ class PackageIntegrationTests(unittest.TestCase):
         }
         self.assertEqual(deferred, {
             "PartsRandom01", "PartsRandom02", "PartsRandomTitle01",
-            "RescRepFoundMark01", "RescRepFoundMarkOnly01",
         })
         excluded = {
             item["source_control"]
@@ -214,8 +220,8 @@ class PackageIntegrationTests(unittest.TestCase):
                 manifest["resolver"],
                 f"builtin:{new_game.RESOLVER_ID}",
             )
-            self.assertEqual(len(manifest["feature"]), 65)
-            self.assertEqual(len(manifest["option"]), 7)
+            self.assertEqual(len(manifest["feature"]), 67)
+            self.assertEqual(len(manifest["option"]), 8)
             self.assertNotIn("patch", manifest)
             self.assertNotIn("overlay", manifest)
             self.assertTrue(
@@ -263,12 +269,12 @@ class ResolverCompileTests(unittest.TestCase):
                 '    package.options.push_back(ModOption{}); '
                 f'package.options.back().feature_id = "{feature.feature_id}"; '
                 f'package.options.back().id = "'
-                f'{"count" if feature.kind == "integer" else "rank" if feature.kind == "rank" else "armor"}"; '
+                f'{"count" if feature.kind == "integer" else "rank" if feature.kind == "rank" else "armor" if feature.kind == "choice" else "status"}"; '
                 f'package.options.back().default_value = "'
-                f'{"1" if feature.kind == "integer" else "C" if feature.kind == "rank" else "none"}";'
+                f'{"1" if feature.kind == "integer" else "C" if feature.kind == "rank" else "none" if feature.kind == "choice" else "dead"}";'
             )
             for feature in new_game.FEATURES
-            if feature.kind in {"integer", "rank", "choice"}
+            if feature.kind in {"integer", "rank", "choice", "mark_status"}
         )
         template_block = re.search(
             r"kTemplateReplace\s*=\s*((?:\s*\"[0-9A-F]+\")+);",
@@ -280,17 +286,33 @@ class ResolverCompileTests(unittest.TestCase):
         )
         isolated_cases = []
         for index, feature in enumerate(new_game.FEATURES[18:], 1):
+            isolated_value = (
+                "none"
+                if feature.kind == "choice"
+                else "dead"
+                if feature.kind == "mark_status"
+                else 1
+            )
+            isolated_selection = {feature.feature_id: isolated_value}
+            if feature.kind in {"mark_status", "mark_only"}:
+                isolated_selection = {
+                    "part_hyper_dash": 1,
+                    feature.feature_id: isolated_value,
+                }
             expected_middle, expected_table = new_game.compose_state(
-                {feature.feature_id: 1}, template_base
+                isolated_selection, template_base
             )
             expected_writes = 4 if (
                 feature.table_offset >= 0 or
-                feature.kind in {"table", "choice"}
+                feature.kind in {"table", "choice", "mark_status", "mark_only"}
             ) else 3
             table_check = (
                 f' || writes[3].replacement != '
                 f'hex_bytes("{expected_table.hex().upper()}")'
-                if feature.table_offset >= 0 or feature.kind == "table"
+                if (
+                    feature.table_offset >= 0 or
+                    feature.kind in {"table", "mark_status", "mark_only"}
+                )
                 else ""
             )
             isolated_cases.append(f'''
@@ -299,6 +321,9 @@ class ResolverCompileTests(unittest.TestCase):
         auto& feature = isolated.features["{feature.feature_id}"];
         feature.has_enabled = true;
         feature.enabled = true;
+{('        feature.values["armor"] = "none";' if feature.kind == "choice" else '')}
+{('        feature.values["status"] = "dead";' if feature.kind == "mark_status" else '')}
+{('        auto& part = isolated.features["part_hyper_dash"]; part.has_enabled = true; part.enabled = true;' if feature.kind in {"mark_status", "mark_only"} else '')}
         writes.clear();
         errors.clear();
         if (!captured(package, isolated, writes, errors)) return {40 + index};
@@ -313,6 +338,7 @@ class ResolverCompileTests(unittest.TestCase):
 #include "mod_packages.h"
 #include <string>
 #include <vector>
+#include <iostream>
 
 static PSXRecompV4::ModBuiltinResolver captured;
 bool PSXRecompV4::mod_register_builtin_resolver(
@@ -329,7 +355,7 @@ int main() {
     using namespace PSXRecompV4;
     ModPackage package;
     package.id = "mmx6.tweaks.new-game";
-    package.version = "1.2.0";
+    package.version = "__PACKAGE_VERSION__";
     package.resolver = "builtin:mmx6-new-game";
 __FEATURES__
 __OPTIONS__
@@ -338,7 +364,10 @@ __OPTIONS__
     ModSelection disabled;
     std::vector<ModResolution::Write> writes;
     std::vector<std::string> errors;
-    if (!captured(package, disabled, writes, errors)) return 2;
+    if (!captured(package, disabled, writes, errors)) {
+        for (const auto& error : errors) std::cerr << error << "\n";
+        return 2;
+    }
     if (!writes.empty() || !errors.empty()) return 3;
 
     ModSelection selected;
@@ -416,6 +445,8 @@ __ISOLATED_CASES__
     return 0;
 }
 '''.replace("__RESOLVER__", source).replace(
+            "__PACKAGE_VERSION__", new_game.PACKAGE_VERSION
+        ).replace(
             "__FEATURES__", feature_setup
         ).replace("__OPTIONS__", option_setup).replace(
             "__ISOLATED_CASES__", isolated_setup
@@ -444,12 +475,12 @@ __ISOLATED_CASES__
                 text=True,
             )
             self.assertEqual(compiled.returncode, 0, compiled.stderr)
-            subprocess.run(
+            executed = subprocess.run(
                 [str(executable)],
-                check=True,
                 capture_output=True,
                 text=True,
             )
+            self.assertEqual(executed.returncode, 0, executed.stderr)
 
 
 if __name__ == "__main__":

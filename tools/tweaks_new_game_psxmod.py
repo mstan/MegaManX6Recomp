@@ -24,7 +24,7 @@ import tweaks_native_psxmod as native
 
 
 PACKAGE_ID = "mmx6.tweaks.new-game"
-PACKAGE_VERSION = "1.2.0"
+PACKAGE_VERSION = "1.3.0"
 RESOLVER_ID = "mmx6-new-game"
 FOUNDATION_RAWS = (0x1D930B9C, 0x1D9965F8, 0x1D99A630)
 INTRO_ARMOR_RAW = 0x1D930B4C
@@ -205,6 +205,20 @@ FEATURES = (
         "table",
         -1,
     ),
+    Feature(
+        "found_reploid_mark_status",
+        "Found Reploid Mark Status",
+        "RescRepFoundMark01",
+        "mark_status",
+        -1,
+    ),
+    Feature(
+        "mark_reploids_only",
+        "Mark Reploids Only",
+        "RescRepFoundMarkOnly01",
+        "mark_only",
+        -1,
+    ),
 )
 FEATURE_BY_ID = {item.feature_id: item for item in FEATURES}
 RANK_VALUES = {
@@ -221,6 +235,10 @@ CHAR_START_VALUES = {
     "blade": ("Blade Armor", "Blade Armor", 0x03, 0x05, 0x0F),
     "shadow": ("Shadow Armor", "Shadow Armor", 0x02, 0x03, 0xF0),
     "ultimate": ("Ultimate Armor", "Ultimate Armor", 0x04, 0x09, 0x00),
+}
+FOUND_MARK_VALUES = {
+    "dead": ("DEAD", "Dead", 0x03),
+    "missing": ("MISSING", "Missing", 0x04),
 }
 
 
@@ -279,6 +297,8 @@ def source_selection(feature: Feature, value=1) -> dict[str, str]:
     )
     if feature.kind == "choice":
         source_value = CHAR_START_VALUES[str(value)][0]
+    elif feature.kind == "mark_status":
+        source_value = FOUND_MARK_VALUES[str(value)][0]
     else:
         source_value = (
             value
@@ -296,6 +316,26 @@ def compose_state(
     template = bytearray(base)
     found_table = bytearray(FOUND_TABLE_SIZE)
     masks: dict[int, int] = {}
+    mark = 0x02
+    if "found_reploid_mark_status" in selection:
+        mark = FOUND_MARK_VALUES[str(selection["found_reploid_mark_status"])][2]
+    mark_only = bool(selection.get("mark_reploids_only"))
+
+    def marked_table_bit(table_bit: int) -> int:
+        if table_bit == 0x02:
+            return mark
+        if table_bit == 0x20:
+            return mark << 4
+        raise AssertionError(f"unexpected found-table mark bit 0x{table_bit:02X}")
+
+    def remark_table(table: bytes) -> bytes:
+        result = bytearray(table)
+        for index, value in enumerate(result):
+            low = mark if (value & 0x02) else 0
+            high = (mark << 4) if (value & 0x20) else 0
+            result[index] = low | high
+        return bytes(result)
+
     for feature_id in sorted(selection):
         feature = FEATURE_BY_ID[feature_id]
         value = selection[feature_id]
@@ -319,16 +359,24 @@ def compose_state(
             if armor_parts:
                 template[feature.aux_offset] |= armor_parts
         elif feature.kind == "table":
-            for offset, value in enumerate(NO_ITEM_FOUND_TABLE):
+            for offset, value in enumerate(remark_table(NO_ITEM_FOUND_TABLE)):
                 found_table[offset] |= value
+        elif feature.kind in {"mark_status", "mark_only"}:
+            pass
         else:
-            masks[feature.field_offset] = (
-                masks.get(feature.field_offset, 0) | feature.bit
-            )
+            if not (
+                mark_only and
+                feature.source_control.startswith("PartsSet")
+            ):
+                masks[feature.field_offset] = (
+                    masks.get(feature.field_offset, 0) | feature.bit
+                )
             if feature.source_control.startswith("CharAdd"):
                 masks[feature.field_offset] |= 0x01
             if feature.table_offset >= 0:
-                found_table[feature.table_offset] |= feature.table_bit
+                found_table[feature.table_offset] |= marked_table_bit(
+                    feature.table_bit
+                )
     for offset, value in masks.items():
         template[offset] |= value
     if "intro_stage_armor" in selection:
@@ -391,11 +439,20 @@ def validate_source_parity(db, profile: dict, foundation):
             values = tuple(RANK_VALUES)
         elif feature.kind == "choice":
             values = tuple(CHAR_START_VALUES)
+        elif feature.kind == "mark_status":
+            values = tuple(FOUND_MARK_VALUES)
         else:
             values = (1,)
         cases = []
         for value in dict.fromkeys(values):
             selection = source_selection(feature, value)
+            composer_selection = {feature.feature_id: value}
+            if feature.kind in {"mark_status", "mark_only"}:
+                selection = {"PartsSet0101": "1", **selection}
+                composer_selection = {
+                    "part_hyper_dash": 1,
+                    feature.feature_id: value,
+                }
             merged = engine.merged_profile(db, json.dumps(selection))
             _norm, _pf, patch_list, _values, synth = engine._assemble(
                 db, merged, profile
@@ -428,6 +485,22 @@ def validate_source_parity(db, profile: dict, foundation):
                 if feature.kind == "choice"
                 else [
                     "NewGame",
+                    "RescRepFoundMark01",
+                    "PartsSet01",
+                    "PartsSetA",
+                    "PartsSetB",
+                    "RescRepFoundTable",
+                ]
+                if feature.kind == "mark_status"
+                else [
+                    "NewGame",
+                    "RescRepFoundMarkOnly01",
+                    "PartsSet01",
+                    "RescRepFoundTable",
+                ]
+                if feature.kind == "mark_only"
+                else [
+                    "NewGame",
                     "HeartTankAdd"
                     if feature.field_offset == 0x88
                     else "SubtankAdd"
@@ -445,6 +518,12 @@ def validate_source_parity(db, profile: dict, foundation):
                 expected_synth = {"RescRepFoundTable"}
             elif feature.kind == "choice":
                 expected_synth = {"ArmorParts"}
+            elif feature.kind == "mark_status":
+                expected_synth = {
+                    "PartsSetA", "PartsSetB", "RescRepFoundTable"
+                }
+            elif feature.kind == "mark_only":
+                expected_synth = {"RescRepFoundTable"}
             elif feature.table_offset >= 0:
                 if feature.source_control.startswith("PartsSet"):
                     expected_owned += [
@@ -465,7 +544,7 @@ def validate_source_parity(db, profile: dict, foundation):
             writes, _ = upstream_final_writes(db, profile, selection)
             final = apply_owned_writes(foundation, writes)
             composed, found_table = compose_state(
-                {feature.feature_id: value}, foundation[1]
+                composer_selection, foundation[1]
             )
             if final != (
                 foundation[0], composed, foundation[2], found_table
@@ -500,6 +579,8 @@ def validate_combinations(db, profile: dict, foundation):
                 if item.kind == "rank"
                 else "none"
                 if item.kind == "choice"
+                else "dead"
+                if item.kind == "mark_status"
                 else 1
             )
             for item in FEATURES
@@ -512,6 +593,8 @@ def validate_combinations(db, profile: dict, foundation):
                 if item.kind == "rank"
                 else "ultimate"
                 if item.kind == "choice"
+                else "missing"
+                if item.kind == "mark_status"
                 else 1
             )
             for item in FEATURES
@@ -793,6 +876,25 @@ def build_manifest(version: str) -> str:
             for value, (_source, label, _char, _availability, _armor_parts) in (
                 CHAR_START_VALUES.items()
             ):
+                lines += [
+                    "",
+                    "[[option.choice]]",
+                    f"value = {q(value)}",
+                    f"label = {q(label)}",
+                ]
+        elif feature.kind == "mark_status":
+            lines += [
+                "",
+                "[[option]]",
+                f"feature = {q(feature.feature_id)}",
+                'id = "status"',
+                'label = "Status"',
+                'description = "Status to apply to matching Reploids."',
+                'group = "New Game Status"',
+                'type = "choice"',
+                'default = "dead"',
+            ]
+            for value, (_source, label, _mark) in FOUND_MARK_VALUES.items():
                 lines += [
                     "",
                     "[[option.choice]]",
