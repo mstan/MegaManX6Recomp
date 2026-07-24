@@ -658,8 +658,8 @@ algebra, and `ZeroDebug`.
 ### General shared-foundation package
 
 `tools/tweaks_general_foundations_psxmod.py` produces the resolver-backed
-`mmx6.tweaks.general-foundations` package. Version 1.0 represents the two
-Mission Report rank-unlock controls as independent left-pane rows:
+`mmx6.tweaks.general-foundations` package. Version 1.2 represents six
+General/Balance controls as independent left-pane rows:
 
 | Feature row | Tweaks control | Runtime composition |
 |---|---|---|
@@ -667,6 +667,8 @@ Mission Report rank-unlock controls as independent left-pane rows:
 | Rank UH Unlocks Black Zero | `MissRepUnlocksRank02` | shared Mission Report foundation plus the Black Zero unlock hook |
 | Normalize Unarmored X Defense | `LowerDef01` | shared Lower Defense span, X-normalized variant |
 | Normalize Zero Defense | `LowerDef02` | shared Lower Defense span, Zero-normalized variant |
+| Gate Revealed Souls | `CutsceneSouls01` | shared Cutscene Souls foundation plus five threshold halfword writes |
+| Gate Revealed Refight Souls | `CutsceneSouls02` | shared Cutscene Souls foundation plus two threshold halfword writes |
 
 The source patcher writes both features through `MissRepUnlocksBase01`, so
 declarative rows would collide on the same 324-byte executable allocation.
@@ -681,19 +683,24 @@ and red Zero take extra damage; enabling a row normalizes that character's
 defense. Enabling both composes to the source `LowerDef_All_A` variant over
 the same guarded 12-byte span.
 
+Version 1.2 adds the two Cutscene Souls threshold controls. The resolver owns
+the shared `CutsceneSouls_Base` executable foundation and emits it once when
+either threshold is non-stock. Each enabled row exposes a bounded integer
+`Souls` option matching the Tweaks UI range; disabled remains stock.
+
 ### Current modular coverage checkpoint
 
 After the modular New Game, domain, timing, player, title/retranslation, and
-hook packages installed in this worktree, the coverage ledger classifies 285
-of 329 unique Tweaks source controls: 274 represented and 11 explicitly
-excluded as GUI/patcher artifacts. Forty-four controls remain:
+hook packages installed in this worktree, the coverage ledger classifies 287
+of 329 unique Tweaks source controls: 276 represented and 11 explicitly
+excluded as GUI/patcher artifacts. Forty-two controls remain:
 
 | Tweaks area | Remaining controls |
 |---|---:|
 | Player Mechanics | 22 |
 | General Tweaks | 6 |
 | New Game Status | 8 |
-| Balance | 3 |
+| Balance | 1 |
 | Localization + Custom Art | 5 |
 
 ## Burndown after version 1.9

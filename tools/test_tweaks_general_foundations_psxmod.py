@@ -29,7 +29,17 @@ class GeneralFoundationTests(unittest.TestCase):
                 "black_zero_rank_unlock",
                 "normalize_unarmored_x_defense",
                 "normalize_zero_defense",
+                "gate_revealed_souls",
+                "gate_revealed_refight_souls",
             ],
+        )
+        self.assertEqual(
+            [option["feature"] for option in manifest["option"]],
+            ["gate_revealed_souls", "gate_revealed_refight_souls"],
+        )
+        self.assertEqual(
+            [option["default"] for option in manifest["option"]],
+            [256, 256],
         )
         self.assertNotIn("patch", manifest)
         self.assertNotIn("overlay", manifest)
@@ -48,8 +58,11 @@ class GeneralFoundationTests(unittest.TestCase):
                 "MissRepUnlocksRank02",
                 "LowerDef01",
                 "LowerDef02",
+                "CutsceneSouls01",
+                "CutsceneSouls02",
             ],
         )
+        self.assertEqual(report["deferred_source_controls"], [])
         self.assertEqual(
             report["validation"]["cases"]["both_rank_unlocks"][
                 "source_closure"
@@ -65,6 +78,16 @@ class GeneralFoundationTests(unittest.TestCase):
                 "source_closure"
             ],
             ["LowerDef_All_A"],
+        )
+        self.assertEqual(
+            report["validation"]["cases"]["both_gate_revealed_souls"][
+                "source_closure"
+            ],
+            [
+                "CutsceneSouls_Base",
+                "CutsceneSouls01",
+                "CutsceneSouls02",
+            ],
         )
         with tempfile.TemporaryDirectory(prefix="mmx6-foundations-") as temp:
             first = Path(temp) / "first.psxmod"

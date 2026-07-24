@@ -59,8 +59,6 @@ The other accepted domains are the four ceiling-mode controls above,
 - `LivesSwitch01` silently adds lives-display and Exit Stage helpers.
 - `IngameOptions01` is visible in the source GUI, but its standalone selection
   is normalized away. It needs typed ownership with dependent settings.
-- `CutsceneSouls01` and `CutsceneSouls02` write executable bytes in member 797's
-  padded allocation outside its logical payload.
 - `MugshotCustom01` and `MugshotCustom02` are real Hunter and Dr. Light asset
   choices. Both synthesize a large shared `MugshotAssembly` closure across many
   records. They remain out until that composer proves simultaneous
