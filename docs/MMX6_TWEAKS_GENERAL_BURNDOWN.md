@@ -82,3 +82,10 @@ The following Damage Tables catalog entries must never become launcher rows:
 
 The actual damage-table surface is thousands of typed records, not twelve
 ordinary toggles.
+
+## Source no-ops
+
+`DebugStageStart`, `DebugCheckpointStart`, and `ZeroDebug` are excluded from
+the modular launcher surface. Under the normal submitted profile path, each
+emits no patchfile, owned writes, or synthesized payload, so exposing them as
+mods would create dead UI rows rather than real game changes.

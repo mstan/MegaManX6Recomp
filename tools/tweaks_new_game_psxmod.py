@@ -604,13 +604,20 @@ def build_report(stock_path: Path) -> dict:
             "selecting the Tweaks control alone emits no patchfile, owned "
             "writes, or synthesized payload."
         ),
+        "DebugCheckpointStart": (
+            "Hidden debug-start control emits no patchfile, owned writes, or "
+            "synthesized payload through the normal submitted profile path."
+        ),
+        "DebugStageStart": (
+            "Hidden debug-start control emits no patchfile, owned writes, or "
+            "synthesized payload through the normal submitted profile path."
+        ),
+        "ZeroDebug": (
+            "Hidden Zero debug-start control emits no patchfile, owned writes, "
+            "or synthesized payload through the normal submitted profile path."
+        ),
     }
     def deferred_reason(control: str) -> str:
-        if control.startswith("Debug") or control == "ZeroDebug":
-            return (
-                "hidden DebugMode gate makes the normal submitted control a "
-                "no-op; unsafe to infer runtime semantics"
-            )
         if control.startswith("PartsRandom"):
             return (
                 "seeded shuffle mutates the separate 512-byte carrier table; "
@@ -861,7 +868,8 @@ def main() -> int:
         "archive_members": members,
         "features": len(FEATURES),
         "converted_source_controls": len(FEATURES),
-        "deferred_source_controls": 74 - len(FEATURES),
+        "excluded_source_controls": report["package"]["excluded_control_count"],
+        "deferred_source_controls": report["package"]["deferred_control_count"],
     }, indent=2, sort_keys=True))
     return 0
 
