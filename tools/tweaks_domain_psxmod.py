@@ -55,6 +55,20 @@ class Feature:
     option_max: int = 0
     option_step: int = 1
     option_default: str = ""
+    options: tuple["OptionSpec", ...] = ()
+
+
+@dataclass(frozen=True)
+class OptionSpec:
+    option_id: str
+    label: str
+    description: str
+    group: str
+    option_type: str = "integer"
+    option_min: int = 32
+    option_max: int = 127
+    option_step: int = 1
+    option_default: str = ""
 
 
 @dataclass(frozen=True)
@@ -302,6 +316,48 @@ BOSS_ATTACKS = Domain(
     ),
 )
 
+BOSS_HEALTH_ROWS = (
+    ("d1000", "D-1000", (32, None, None, None)),
+    ("nightmare_snake", "Nightmare Snake", (127, None, None, None)),
+    ("nightmare_pressure", "Nightmare Pressure", (48, None, None, None)),
+    ("illumina", "Illumina", (64, None, None, None)),
+    ("commander_yammark", "Commander Yammark", (32, 38, 44, 48)),
+    ("blizzard_wolfang", "Blizzard Wolfang", (48, 50, 52, 54)),
+    ("blaze_heatnix", "Blaze Heatnix", (48, None, 52, 56)),
+    ("metal_shark_player", "Metal Shark Player", (48, 48, 52, 56)),
+    ("ground_scaravich", "Ground Scaravich", (40, None, None, None)),
+    ("rainy_turtloid", "Rainy Turtloid", (56, 56, 60, 64)),
+    ("shield_sheldon", "Shield Sheldon", (32, 36, 40, 48)),
+    ("infinity_mijinion", "Infinity Mijinion", (48, 52, 54, 56)),
+    ("nightmare_zero", "Nightmare Zero", (48, 50, 52, 56)),
+    ("high_max_hidden_area", "High Max (Hidden Area)", (48, 52, 56, 64)),
+    ("dynamo", "Dynamo", (50, 58, 62, 66)),
+    ("nightmare_mother", "Nightmare Mother", (120, 122, 124, 125)),
+    ("high_max_secret_lab", "High Max (Secret Lab)", (48, 52, 56, 64)),
+    ("gate", "Gate", (52, 54, 56, 58)),
+    ("sigma", "Sigma", (48, 50, 52, 54)),
+    ("sigma_second_form", "Sigma (Second Form)", (127, None, None, None)),
+)
+
+
+def boss_health_options() -> tuple[OptionSpec, ...]:
+    options: list[OptionSpec] = []
+    for row_id, boss_name, defaults in BOSS_HEALTH_ROWS:
+        for index, default in enumerate(defaults, start=1):
+            if default is None:
+                continue
+            options.append(
+                OptionSpec(
+                    f"{row_id}_level_{index}",
+                    f"{boss_name} Lv.{index}",
+                    "Boss health must remain between 32 and 127.",
+                    "Boss Health by Level",
+                    option_default=str(default),
+                )
+            )
+    return tuple(options)
+
+
 DAMAGE_RULES = Domain(
     "mmx6.tweaks.damage-rules",
     "Mega Man X6 Damage Rules",
@@ -348,6 +404,25 @@ DAMAGE_RULES = Domain(
             1,
             "4",
         ),
+        Feature(
+            "boss_health_by_level",
+            "Boss Health by Level",
+            (
+                "Set boss health totals by level using the reviewed MMX6 "
+                "Tweaks v2.6.1 health-table algebra."
+            ),
+            "Difficulty Progression",
+            ("BossHealth",),
+            (
+                Variant(
+                    "table",
+                    "Table",
+                    (("BossHealth0101", "32"),),
+                    (),
+                ),
+            ),
+            options=boss_health_options(),
+        ),
     ),
     (),
     (
@@ -382,7 +457,7 @@ DAMAGE_RULES = Domain(
         ),
     ),
     "builtin:mmx6-damage-rules",
-    "1.1.0",
+    "1.2.0",
 )
 
 DOMAINS = (GENERAL, STAGES, BOSS_ATTACKS, DAMAGE_RULES)
@@ -645,22 +720,37 @@ def manifest_text(domain: Domain, patches: list[Patch]) -> str:
                 "default_enabled = false",
             )
         )
+        emitted_options = list(feature.options)
         if feature.option_id:
+            emitted_options.append(
+                OptionSpec(
+                    feature.option_id,
+                    feature.option_label,
+                    feature.description,
+                    feature.group,
+                    feature.option_type,
+                    feature.option_min,
+                    feature.option_max,
+                    feature.option_step,
+                    feature.option_default or feature.variants[0].value,
+                )
+            )
+        for emitted in emitted_options:
             lines.extend(
                 (
                     "",
                     "[[option]]",
                     f"feature = {toml_quote(feature.feature_id)}",
-                    f"id = {toml_quote(feature.option_id)}",
-                    f"label = {toml_quote(feature.option_label)}",
-                    f"description = {toml_quote(feature.description)}",
-                    f"group = {toml_quote(feature.group)}",
-                    f"type = {toml_quote(feature.option_type)}",
+                    f"id = {toml_quote(emitted.option_id)}",
+                    f"label = {toml_quote(emitted.label)}",
+                    f"description = {toml_quote(emitted.description)}",
+                    f"group = {toml_quote(emitted.group)}",
+                    f"type = {toml_quote(emitted.option_type)}",
                 )
             )
-            if feature.option_type == "choice":
+            if emitted.option_type == "choice":
                 lines.append(
-                    f"default = {toml_quote(feature.option_default or feature.variants[0].value)}"
+                    f"default = {toml_quote(emitted.option_default)}"
                 )
                 for variant in feature.variants:
                     lines.extend(
@@ -671,18 +761,18 @@ def manifest_text(domain: Domain, patches: list[Patch]) -> str:
                             f"label = {toml_quote(variant.label)}",
                         )
                     )
-            elif feature.option_type == "integer":
+            elif emitted.option_type == "integer":
                 lines.extend(
                     (
-                        f"min = {feature.option_min}",
-                        f"max = {feature.option_max}",
-                        f"step = {feature.option_step}",
-                        f"default = {feature.option_default or feature.variants[0].value}",
+                        f"min = {emitted.option_min}",
+                        f"max = {emitted.option_max}",
+                        f"step = {emitted.option_step}",
+                        f"default = {emitted.option_default}",
                     )
                 )
             else:
                 raise ValueError(
-                    f"unsupported option type {feature.option_type!r}"
+                    f"unsupported option type {emitted.option_type!r}"
                 )
     if domain.resolver != "declarative":
         return "\n".join(lines) + "\n"

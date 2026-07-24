@@ -30,7 +30,7 @@ class DomainPackageTests(unittest.TestCase):
         )
         self.assertEqual(
             [len(item.features) for item in domain.DOMAINS],
-            [13, 2, 1, 2],
+            [13, 2, 1, 3],
         )
         represented = {
             control
@@ -38,7 +38,7 @@ class DomainPackageTests(unittest.TestCase):
             for feature in item.features
             for control in feature.source_controls
         }
-        self.assertEqual(len(represented), 21)
+        self.assertEqual(len(represented), 22)
         self.assertTrue(
             {
                 "SharedStats01",
@@ -51,6 +51,7 @@ class DomainPackageTests(unittest.TestCase):
                 "StageMod0404",
                 "DmgTableGate01",
                 "DmgTableGateDmg01",
+                "BossHealth",
             }.issubset(represented)
         )
         fake_controls = {
@@ -64,7 +65,6 @@ class DomainPackageTests(unittest.TestCase):
             "ErrorRecalc",
             "PatchList_BaseHacks",
             "HelpButton",
-            "BossHealth",
         }
         self.assertTrue(represented.isdisjoint(fake_controls))
 
@@ -172,7 +172,7 @@ class DomainPackageTests(unittest.TestCase):
             parsed = tomllib.loads(manifest)
             self.assertEqual(parsed["id"], item.package_id)
             if item is domain.DAMAGE_RULES:
-                self.assertEqual(parsed["version"], "1.1.0")
+                self.assertEqual(parsed["version"], "1.2.0")
                 self.assertEqual(
                     parsed["resolver"], "builtin:mmx6-damage-rules"
                 )
@@ -181,6 +181,14 @@ class DomainPackageTests(unittest.TestCase):
                 self.assertEqual(parsed["option"][0]["min"], 1)
                 self.assertEqual(parsed["option"][0]["max"], 127)
                 self.assertEqual(parsed["option"][0]["default"], 4)
+                boss_options = [
+                    option for option in parsed["option"]
+                    if option["feature"] == "boss_health_by_level"
+                ]
+                self.assertEqual(len(boss_options), 61)
+                self.assertTrue(
+                    all(option["min"] == 32 for option in boss_options)
+                )
             else:
                 self.assertEqual(parsed["resolver"], "declarative")
             self.assertEqual(
