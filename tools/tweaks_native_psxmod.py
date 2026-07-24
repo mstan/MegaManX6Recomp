@@ -35,6 +35,9 @@ SLUS_NAME = "SLUS_013.95"
 STOCK_SHA256 = (
     "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
 )
+HELPER_SOURCE_CONTROLS = {
+    "ShadowBase01",
+}
 
 ROOT = Path(__file__).absolute().parent.parent
 MAIN_CHECKOUT = ROOT.parent / "MegaManX6Recomp"
@@ -219,6 +222,13 @@ class FeatureSpec:
 
     def owned_source_controls(self) -> tuple[str, ...]:
         return self.source_closure or (self.source_option,)
+
+    def ledger_source_controls(self) -> tuple[str, ...]:
+        return tuple(
+            source_control
+            for source_control in self.owned_source_controls()
+            if source_control not in HELPER_SOURCE_CONTROLS
+        )
 
 
 @dataclass(frozen=True)
@@ -4394,7 +4404,7 @@ def represented_source_controls(
     controls = {
         source_control
         for spec in simple_specs
-        for source_control in spec.owned_source_controls()
+        for source_control in spec.ledger_source_controls()
     }
     controls.update(spec.source_option for spec in param_specs)
     for spec in config_specs:
@@ -4857,7 +4867,7 @@ def main() -> int:
         choices=("all", *ALL_FEATURE_IDS),
         default="all",
     )
-    parser.add_argument("--package-version", default="1.10.2")
+    parser.add_argument("--package-version", default="1.10.3")
     parser.add_argument("--audit-retranslation", action="store_true")
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--out", type=Path)
