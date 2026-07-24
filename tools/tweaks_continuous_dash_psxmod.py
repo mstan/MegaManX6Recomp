@@ -79,6 +79,15 @@ def halves(value: int) -> tuple[bytes, bytes]:
     )
 
 
+def validate_foundation_control_flow() -> None:
+    for offset in range(0, len(FOUNDATION), 4):
+        instruction = int.from_bytes(FOUNDATION[offset : offset + 4], "little")
+        if instruction >> 26 in {2, 3}:
+            raise AssertionError(
+                "continuous-dash foundation gained an unowned J/JAL target"
+            )
+
+
 def compose(
     normal: int | None, hyper: int | None
 ) -> list[tuple[int, bytes]]:
@@ -106,6 +115,7 @@ def final_byte_map(writes: list[tuple[int, bytes]]) -> dict[int, int]:
 def validate_source(
     source_dir: Path, profile_path: Path
 ) -> list[dict]:
+    validate_foundation_control_flow()
     if sha256_file(source_dir / "data" / "_dat.ahk") != DAT_SHA256:
         raise ValueError("MMX6 Tweaks _dat.ahk is not reviewed v2.6.1")
     if sha256_file(source_dir / "data" / "_dat_init.ahk") != INIT_SHA256:
@@ -301,6 +311,7 @@ def report(
             "hot_path_has_no_runtime_selection_lookup": True,
             "all_feature_composition_order_independent": True,
             "fixed_stock_guard_ownership": True,
+            "foundation_contains_no_j_or_jal": True,
         },
     }
 

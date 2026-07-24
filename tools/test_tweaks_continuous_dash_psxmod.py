@@ -18,6 +18,7 @@ import tweaks_continuous_dash_psxmod as dash
 
 class ContinuousDashTests(unittest.TestCase):
     def test_numword_encoding_and_composition(self) -> None:
+        dash.validate_foundation_control_flow()
         self.assertEqual(
             dash.halves(0x00042000),
             (bytes.fromhex("0400"), bytes.fromhex("0020")),

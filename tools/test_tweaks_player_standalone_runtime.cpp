@@ -59,7 +59,6 @@ int main(int argc, char** argv) {
     const std::vector<std::string> features = {
         "unlock_x_air_dash",
         "guard_shell_bug_fix",
-        "shadow_wall_slide",
         "zero_weapon_autoselect",
     };
     for (const std::string& feature : features)
@@ -72,13 +71,11 @@ int main(int argc, char** argv) {
         forward.ok,
         "resolve all features: " +
             (forward.errors.empty() ? std::string{} : forward.errors.front()));
-    check(forward.writes.size() == 27, "all features emit 27 owned writes");
+    check(forward.writes.size() == 18, "all features emit 18 owned writes");
     check(count_feature(forward, "unlock_x_air_dash") == 1,
           "air dash exact closure");
     check(count_feature(forward, "guard_shell_bug_fix") == 2,
           "Guard Shell exact closure");
-    check(count_feature(forward, "shadow_wall_slide") == 9,
-          "Shadow slide includes two foundation writes");
     check(count_feature(forward, "zero_weapon_autoselect") == 15,
           "Zero autoselect includes two common writes");
     for (const ModResolution::Write& write : forward.writes) {

@@ -397,17 +397,16 @@ batch safe to ship for testing; they do not replace those behavior checks.
 ### Standalone Player Mechanics package
 
 `mmx6.tweaks.player-standalone` is the first adversarial Player Mechanics
-burndown package. It admits four independent, default-disabled rows:
+burndown package. It admits three independent, default-disabled rows:
 
 | Feature row | Source control | Exact source closure |
 | --- | --- | --- |
 | Unlock X's Air Dash | `DashGlobal01` | `DashGlobal01` |
 | Guard Shell Bug Fix | `GuardShellFix01` | `GuardShellFix01` |
-| Shadow Armor Wall Slide | `ShadowSlide01` | `ShadowBase01`, `ShadowSlide01` |
 | Zero Weapon Auto-select | `ZeroAutoselect01` | `ZeroAutoselect_Common`, `ZeroAutoselect01` |
 
-All 27 writes have complete USA v1.1 stock guards and one semantic owner. The
-four closures are byte-disjoint, so enabling all rows is deterministic and
+All 18 writes have complete USA v1.1 stock guards and one semantic owner. The
+three closures are byte-disjoint, so enabling all rows is deterministic and
 order independent. Disabled rows emit nothing. The archive contains only
 declarative guarded writes and uses the stock BIN/CUE at runtime.
 
@@ -416,6 +415,13 @@ silently forces `HoverUnlock01`, so it is not an independent behavior, and the
 empty `HoverUnlock02_ASM10` entry terminates the live payload after slot 9.
 Importing all later-looking assignments or omitting the forced control would
 both be false source closure.
+
+`ShadowSlide01` was also removed after cross-review followed its replacement
+JAL to guest `0x8007A5DC`. Stock contains zeroes there; the callee belongs to
+`ArmorByPart_Common`, inherited through the old `PatchList_Base` rather than
+the apparent `ShadowBase01` prerequisite. Until a resolver owns and composes
+that shared armor foundation, installing only the visible Shadow writes would
+jump into absent code.
 
 Generate the package from local, user-supplied v2.6.1 source:
 
@@ -427,7 +433,7 @@ py -3 tools/tweaks_player_standalone_psxmod.py `
 ```
 
 The conversion report carries a string-only `source_controls` ledger for the
-four admitted controls plus a 49-control Player Mechanics decision ledger.
+three admitted controls plus a 49-control Player Mechanics decision ledger.
 Mach Dash, continuous dash, and Zero-technique state machines are named as
 separate resolver domains; `Anim0301`, `Anim0401` through `Anim0407`, and the
 three quarantined Mach Dash scalars remain explicit non-admissions.

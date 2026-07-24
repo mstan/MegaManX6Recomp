@@ -107,13 +107,6 @@ FEATURES = (
         ("GuardShellFix01",),
     ),
     FeatureSpec(
-        "shadow_wall_slide",
-        "Shadow Armor Wall Slide",
-        'Slide down walls while holding "Down" with Shadow Armor.',
-        "ShadowSlide01",
-        ("ShadowBase01", "ShadowSlide01"),
-    ),
-    FeatureSpec(
         "zero_weapon_autoselect",
         "Zero Weapon Auto-select",
         "Automatically select Zero's matching weapon after acquiring a technique.",
@@ -239,6 +232,7 @@ def resolve_patches(
                     )
                 )
     _validate_disjoint(patches)
+    _validate_code_targets(patches, stock_path)
     return tuple(patches)
 
 
@@ -256,6 +250,45 @@ def _validate_disjoint(patches: list[FixedPatch]) -> None:
                     f"{patch.feature_id} at {patch.target}:0x{location:X}"
                 )
             ownership[key] = patch.feature_id
+
+
+def _validate_code_targets(
+    patches: list[FixedPatch], stock_path: Path
+) -> None:
+    """Reject J/JAL replacements that target an unowned zero allocation."""
+    owned_main = [
+        (patch.location, patch.location + len(patch.replacement))
+        for patch in patches
+        if patch.target == "main_exe"
+    ]
+    with native.RawMode2Image(stock_path) as stock:
+        executable = stock.read_file(native.SLUS_NAME)
+        load = int.from_bytes(executable[0x18:0x1C], "little")
+        guest_end = load + len(executable) - native.USER_SECTOR
+        for patch in patches:
+            for offset in range(0, len(patch.replacement) - 3, 4):
+                instruction = int.from_bytes(
+                    patch.replacement[offset : offset + 4], "little"
+                )
+                if instruction >> 26 not in {2, 3}:
+                    continue
+                target = 0x80000000 | (
+                    (instruction & 0x03FFFFFF) << 2
+                )
+                if any(begin <= target < end for begin, end in owned_main):
+                    continue
+                if not load <= target <= guest_end - 4:
+                    raise ValueError(
+                        f"{patch.source_var} jumps outside owned/main code: "
+                        f"0x{target:X}"
+                    )
+                file_offset = native.USER_SECTOR + target - load
+                stock_target = executable[file_offset : file_offset + 4]
+                if stock_target == bytes(4):
+                    raise ValueError(
+                        f"{patch.source_var} jumps into unowned zero stock "
+                        f"allocation 0x{target:X}"
+                    )
 
 
 def manifest_text(patches: tuple[FixedPatch, ...]) -> str:
@@ -318,6 +351,11 @@ def _deferred_reason(control: str) -> str:
         return (
             "not standalone: GUI forces HoverUnlock01 and ASM10 terminates "
             "the live source payload after slot 9"
+        )
+    if control == "ShadowSlide01":
+        return (
+            "hidden PatchList_Base dependency: callsite JAL targets the absent "
+            "stock ArmorByPart_Common foundation at guest 0x8007A5DC"
         )
     if control.startswith("DashSpeedCont"):
         return "shared parameterized continuous-dash resolver domain"
@@ -382,6 +420,7 @@ def conversion_report(
             "exact_source_closure": True,
             "all_feature_byte_ownership_disjoint": True,
             "composition_order_independent": True,
+            "jump_targets_owned_or_nonzero_stock_code": True,
         },
     }
 
