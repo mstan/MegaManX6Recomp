@@ -567,22 +567,22 @@ overlaps.
 
 `tools/tweaks_timing_psxmod.py` deliberately produces a second package,
 `mmx6.tweaks.timing`, instead of adding more special cases to the monolithic
-native converter. The package contains five independent, default-disabled
+native converter. Version 1.1 contains six independent, default-disabled
 feature rows:
 
 | Feature row | Right-pane values | Tweaks controls |
 |---|---:|---|
 | X Saber Timing | seven integers, 1-99 | `Anim0101`-`Anim0107` |
 | Shadow Saber Timing | seven integers, 1-99 | `Anim0201`-`Anim0207` |
-| Zero Saber Cooldown Timing | six integers, 1-99 | editable `Anim0302`-`Anim0307` |
+| Zero Saber Cooldown Timing | seven integers, 1-99 | `Anim0301`-`Anim0307` |
+| Zero Z-Buster Timing | seven integers, 1-99 | `Anim0401`-`Anim0407` |
 | Maximum Lives | one integer, 0-99 | `LivesValue04` |
 | Nightmare Dark Opacity | one integer, 1-64 | `NightmareMod01` |
 
-The left pane therefore has five coherent controls, not 22 rows and not one
+The left pane therefore has six coherent controls, not 30 rows and not one
 package-sized mega-feature. The right pane contains only the actual values.
 There is no redundant enabled option; the feature checkbox already supplies
-that state. `Anim0301` remains fixed because the Tweaks GUI itself disables
-that field.
+that state.
 
 All operations use package format 4. A patch guards the complete stock
 instruction or four-byte animation record, but owns only its declared dynamic
@@ -601,18 +601,16 @@ split into guarded 8-byte and 4-byte patches.
 The converter re-runs the ported Tweaks pipeline at boundary and interior
 samples, rejects source-closure or topology drift, verifies complete B01 and
 stock guards, and writes every accepted source field to
-`conversion-report.json` under `source_controls`. Its reviewed plan has 48
-sparse operations, 220 complete guard bytes, and 58 owned bytes. This proves
+`conversion-report.json` under `source_controls`. Its reviewed plan has 56
+sparse operations, 252 complete guard bytes, and 66 owned bytes. This proves
 exact source-write conversion; gameplay timing and visual behavior remain
 marked pending live smoke tests.
 
-Two tempting expansions remain explicitly deferred:
+One tempting expansion remains explicitly deferred:
 
 - animation value zero is not a direct byte. Tweaks converts it to a `01`
   sentinel plus an `offset + 2` companion zero, and a zero first frame can
-  terminate processing of later animation sets; and
-- all seven `Anim04` Z-Buster cells remain out until the surrounding allocation
-  padding and record ownership are proven.
+  terminate processing of later animation sets.
 
 Generate the package locally:
 
@@ -630,8 +628,48 @@ zero-byte literals, boundary templates, manifest shape, report contents, and
 byte-deterministic archive construction. The C++ integration test in
 `tools/test_tweaks_timing_runtime.cpp` installs the generated archive through
 the real package manager, rejects deferred/out-of-range values, resolves all
-22 controls together, verifies the 48-write/51-field plan, and exercises the
+30 controls together, verifies the 56-write/59-field plan, and exercises the
 Maximum Lives 9/10 predicate boundary.
+
+### New Game status modular package
+
+`tools/tweaks_new_game_psxmod.py` produces the resolver-backed
+`mmx6.tweaks.new-game` package. Version 1.2 represents 65 Tweaks source
+controls as 65 independent left-pane rows. Integer and rank rows use right-pane
+options; bit rows use only the feature checkbox. `CharStart01` is represented
+as one `Intro Stage Starting Armor` row with a local armor dropdown, because
+its choices are mutually exclusive within that one feature rather than across
+packages.
+
+The resolver composes all enabled New Game rows into the shared New Game
+foundation and the optional found-Reploid table. `CharStart01` also emits a
+separate guarded intro-stage call-site write; the selected intro armor and the
+Blade/Shadow `ArmorParts` byte are composed to match the original Tweaks
+source closure. Falcon Armor remains the stock disabled state; enabling the
+row offers the non-stock choices None, Blade, Shadow, and Ultimate.
+
+The local integration test replays every admitted source control through the
+ported Tweaks engine, checks isolated parity, checks minimum/maximum combined
+composition, verifies the embedded C++ stock guards, and builds a deterministic
+archive. Remaining New Game controls are deferred only where semantics are not
+yet product-ready: debug starts, random starting parts, found-Reploid mark
+algebra, and `ZeroDebug`.
+
+### Current modular coverage checkpoint
+
+After the modular New Game, domain, timing, player, title/retranslation, and
+hook packages installed in this worktree, the coverage ledger classifies 280
+of 329 unique Tweaks source controls: 269 represented and 11 explicitly
+excluded as GUI/patcher artifacts. Forty-nine controls remain:
+
+| Tweaks area | Remaining controls |
+|---|---:|
+| Player Mechanics | 22 |
+| General Tweaks | 8 |
+| New Game Status | 8 |
+| Balance | 5 |
+| Localization + Custom Art | 5 |
+| Stages | 1 |
 
 ## Burndown after version 1.9
 

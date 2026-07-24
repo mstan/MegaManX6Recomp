@@ -33,13 +33,15 @@ size_t package_writes(const ModResolution& plan, const std::string& id) {
 }
 
 bool install(ModPackageManager& manager, const fs::path& archive,
-             const std::string& expected_id, std::string& error) {
+             const std::string& expected_id,
+             const std::string& expected_version,
+             std::string& error) {
     std::string id;
     std::string version;
     if (!manager.install_archive(
             archive, &id, &version, &error))
         return false;
-    return id == expected_id && version == "1.0.0";
+    return id == expected_id && version == expected_version;
 }
 
 } // namespace
@@ -59,15 +61,20 @@ int main(int argc, char** argv) {
     ModPackageManager manager(root);
     std::string error;
 
-    const std::vector<std::pair<std::string, fs::path>> packages = {
-        {"mmx6.tweaks.general", argv[1]},
-        {"mmx6.tweaks.stage-modes", argv[2]},
-        {"mmx6.tweaks.boss-attacks", argv[3]},
-        {"mmx6.tweaks.damage-rules", argv[4]},
+    struct PackageInput {
+        std::string id;
+        std::string version;
+        fs::path archive;
     };
-    for (const auto& [id, archive] : packages)
-        check(install(manager, archive, id, error),
-              "install " + id + ": " + error);
+    const std::vector<PackageInput> packages = {
+        {"mmx6.tweaks.general", "1.0.0", argv[1]},
+        {"mmx6.tweaks.stage-modes", "1.0.0", argv[2]},
+        {"mmx6.tweaks.boss-attacks", "1.0.0", argv[3]},
+        {"mmx6.tweaks.damage-rules", "1.1.0", argv[4]},
+    };
+    for (const PackageInput& package : packages)
+        check(install(manager, package.archive, package.id, package.version, error),
+              "install " + package.id + ": " + error);
 
     check(manager.load_state(&error), "load state: " + error);
     ModResolution disabled = manager.resolve(kGame, {}, kDisc);
@@ -109,15 +116,31 @@ int main(int argc, char** argv) {
               "mmx6.tweaks.damage-rules",
               "gate_vulnerable_to_normal_attacks", true, &error),
           "enable Gate vulnerability: " + error);
+    check(manager.set_feature_enabled(
+              "mmx6.tweaks.damage-rules",
+              "gate_orb_explosion_damage", true, &error),
+          "enable Gate orb damage: " + error);
+    check(manager.set_feature_option(
+              "mmx6.tweaks.damage-rules",
+              "gate_orb_explosion_damage", "damage", "5", &error),
+          "set Gate orb damage: " + error);
 
     ModResolution combined = manager.resolve(kGame, {}, kDisc);
     check(combined.ok, "all new domain packages compose: " +
           (combined.errors.empty() ? std::string() : combined.errors.front()));
-    for (const auto& [id, _archive] : packages)
-        check(package_writes(combined, id) > 0,
-              id + " contributes owned writes");
+    for (const PackageInput& package : packages)
+        check(package_writes(combined, package.id) > 0,
+              package.id + " contributes owned writes");
     check(combined.diagnostics.empty(),
           "new domain packages have no collision diagnostics");
+    check(!manager.set_feature_option(
+              "mmx6.tweaks.damage-rules",
+              "gate_orb_explosion_damage", "damage", "0", &error),
+          "Gate orb damage lower bound enforced");
+    check(!manager.set_feature_option(
+              "mmx6.tweaks.damage-rules",
+              "gate_orb_explosion_damage", "damage", "128", &error),
+          "Gate orb damage upper bound enforced");
 
     check(!manager.set_feature_option(
               "mmx6.tweaks.stage-modes",

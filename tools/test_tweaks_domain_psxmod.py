@@ -30,7 +30,7 @@ class DomainPackageTests(unittest.TestCase):
         )
         self.assertEqual(
             [len(item.features) for item in domain.DOMAINS],
-            [13, 1, 1, 1],
+            [13, 1, 1, 2],
         )
         represented = {
             control
@@ -38,7 +38,7 @@ class DomainPackageTests(unittest.TestCase):
             for feature in item.features
             for control in feature.source_controls
         }
-        self.assertEqual(len(represented), 19)
+        self.assertEqual(len(represented), 20)
         self.assertTrue(
             {
                 "SharedStats01",
@@ -49,6 +49,7 @@ class DomainPackageTests(unittest.TestCase):
                 "AutoCrouching03",
                 "RecycleCeiling01",
                 "DmgTableGate01",
+                "DmgTableGateDmg01",
             }.issubset(represented)
         )
         fake_controls = {
@@ -102,7 +103,6 @@ class DomainPackageTests(unittest.TestCase):
                 "MissRepUnlocksRank01",
                 "MissRepUnlocksRank02",
                 "StageMod0404",
-                "DmgTableGateDmg01",
             },
         )
         self.assertTrue(
@@ -166,6 +166,18 @@ class DomainPackageTests(unittest.TestCase):
             manifest = domain.manifest_text(item, patches)
             parsed = tomllib.loads(manifest)
             self.assertEqual(parsed["id"], item.package_id)
+            if item is domain.DAMAGE_RULES:
+                self.assertEqual(parsed["version"], "1.1.0")
+                self.assertEqual(
+                    parsed["resolver"], "builtin:mmx6-damage-rules"
+                )
+                self.assertNotIn("patch", parsed)
+                self.assertEqual(parsed["option"][0]["type"], "integer")
+                self.assertEqual(parsed["option"][0]["min"], 1)
+                self.assertEqual(parsed["option"][0]["max"], 127)
+                self.assertEqual(parsed["option"][0]["default"], 4)
+            else:
+                self.assertEqual(parsed["resolver"], "declarative")
             self.assertEqual(
                 [feature["id"] for feature in parsed["feature"]],
                 [feature.feature_id for feature in item.features],

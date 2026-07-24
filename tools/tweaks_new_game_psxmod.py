@@ -24,9 +24,15 @@ import tweaks_native_psxmod as native
 
 
 PACKAGE_ID = "mmx6.tweaks.new-game"
-PACKAGE_VERSION = "1.1.0"
+PACKAGE_VERSION = "1.2.0"
 RESOLVER_ID = "mmx6-new-game"
 FOUNDATION_RAWS = (0x1D930B9C, 0x1D9965F8, 0x1D99A630)
+INTRO_ARMOR_RAW = 0x1D930B4C
+INTRO_ARMOR_SIZE = 40
+INTRO_ARMOR_HOOK = bytes.fromhex(
+    "010002245F00A2A05E00A2A03031478D040003340400E314303144250800"
+    "42245F00A2A05E00A3A0"
+)
 FOUND_TABLE_RAW = 0x1D9965B8
 FOUND_TABLE_SIZE = 64
 NO_ITEM_FOUND_TABLE = bytes.fromhex(
@@ -102,6 +108,8 @@ FEATURES = (
             "bit", 0x34, bit=0x10),
     Feature("available_black_zero", "Black Zero Available", "CharAdd06",
             "bit", 0x34, bit=0x20),
+    Feature("intro_stage_armor", "Intro Stage Starting Armor", "CharStart01",
+            "choice", 0x34, aux_offset=0x4C),
     *tuple(
         Feature(
             f"parts_life_up_{index}",
@@ -208,6 +216,12 @@ RANK_VALUES = {
     "PA": (1, 5000),
     "UH": (0, 9999),
 }
+CHAR_START_VALUES = {
+    "none": ("None", "No Armor", 0x00, 0x01, 0x00),
+    "blade": ("Blade Armor", "Blade Armor", 0x03, 0x05, 0x0F),
+    "shadow": ("Shadow Armor", "Shadow Armor", 0x02, 0x03, 0xF0),
+    "ultimate": ("Ultimate Armor", "Ultimate Armor", 0x04, 0x09, 0x00),
+}
 
 
 def sha256(data: bytes) -> str:
@@ -263,10 +277,16 @@ def source_selection(feature: Feature, value=1) -> dict[str, str]:
     engine_control = feature.source_control.replace(
         "SubTankAdd", "SubtankAdd"
     )
-    return {
-        engine_control: str(
-            value if feature.kind in {"integer", "rank"} else 1
+    if feature.kind == "choice":
+        source_value = CHAR_START_VALUES[str(value)][0]
+    else:
+        source_value = (
+            value
+            if feature.kind in {"integer", "rank"}
+            else 1
         )
+    return {
+        engine_control: str(source_value)
     }
 
 
@@ -291,6 +311,13 @@ def compose_state(
             template[feature.aux_offset : feature.aux_offset + 2] = (
                 souls.to_bytes(2, "little")
             )
+        elif feature.kind == "choice":
+            _source_value, _label, _char, availability, armor_parts = (
+                CHAR_START_VALUES[str(value)]
+            )
+            template[feature.field_offset] |= availability
+            if armor_parts:
+                template[feature.aux_offset] |= armor_parts
         elif feature.kind == "table":
             for offset, value in enumerate(NO_ITEM_FOUND_TABLE):
                 found_table[offset] |= value
@@ -304,6 +331,11 @@ def compose_state(
                 found_table[feature.table_offset] |= feature.table_bit
     for offset, value in masks.items():
         template[offset] |= value
+    if "intro_stage_armor" in selection:
+        if "available_shadow_armor" in selection:
+            template[0x4C] |= 0xF0
+        if "available_blade_armor" in selection:
+            template[0x4C] |= 0x0F
     return bytes(template), bytes(found_table)
 
 
@@ -349,12 +381,18 @@ def apply_owned_writes(
 def validate_source_parity(db, profile: dict, foundation):
     feature_evidence = []
     for feature in FEATURES:
-        values = (
-            (feature.minimum, (feature.minimum + feature.maximum) // 2,
-             feature.maximum)
-            if feature.kind == "integer"
-            else tuple(RANK_VALUES) if feature.kind == "rank" else (1,)
-        )
+        if feature.kind == "integer":
+            values = (
+                feature.minimum,
+                (feature.minimum + feature.maximum) // 2,
+                feature.maximum,
+            )
+        elif feature.kind == "rank":
+            values = tuple(RANK_VALUES)
+        elif feature.kind == "choice":
+            values = tuple(CHAR_START_VALUES)
+        else:
+            values = (1,)
         cases = []
         for value in dict.fromkeys(values):
             selection = source_selection(feature, value)
@@ -383,6 +421,13 @@ def validate_source_parity(db, profile: dict, foundation):
                 if feature.kind == "table"
                 else [
                     "NewGame",
+                    "CharStart01",
+                    "CharAdd",
+                    "ArmorParts",
+                ]
+                if feature.kind == "choice"
+                else [
+                    "NewGame",
                     "HeartTankAdd"
                     if feature.field_offset == 0x88
                     else "SubtankAdd"
@@ -398,6 +443,8 @@ def validate_source_parity(db, profile: dict, foundation):
             )
             if feature.kind == "table":
                 expected_synth = {"RescRepFoundTable"}
+            elif feature.kind == "choice":
+                expected_synth = {"ArmorParts"}
             elif feature.table_offset >= 0:
                 if feature.source_control.startswith("PartsSet"):
                     expected_owned += [
@@ -451,6 +498,8 @@ def validate_combinations(db, profile: dict, foundation):
                 if item.kind == "integer"
                 else "C"
                 if item.kind == "rank"
+                else "none"
+                if item.kind == "choice"
                 else 1
             )
             for item in FEATURES
@@ -461,6 +510,8 @@ def validate_combinations(db, profile: dict, foundation):
                 if item.kind == "integer"
                 else "UH"
                 if item.kind == "rank"
+                else "ultimate"
+                if item.kind == "choice"
                 else 1
             )
             for item in FEATURES
@@ -555,11 +606,6 @@ def build_report(stock_path: Path) -> dict:
         ),
     }
     def deferred_reason(control: str) -> str:
-        if control == "CharStart01":
-            return (
-                "choice couples intro armor, CharAdd availability, ArmorParts, "
-                "and a separate guarded call-site"
-            )
         if control.startswith("Debug") or control == "ZeroDebug":
             return (
                 "hidden DebugMode gate makes the normal submitted control a "
@@ -724,6 +770,27 @@ def build_manifest(version: str) -> str:
                     "[[option.choice]]",
                     f"value = {q(value)}",
                     f"label = {q(value)}",
+                ]
+        elif feature.kind == "choice":
+            lines += [
+                "",
+                "[[option]]",
+                f"feature = {q(feature.feature_id)}",
+                'id = "armor"',
+                'label = "Armor"',
+                'description = "Intro Stage starting armor while enabled."',
+                'group = "New Game Status"',
+                'type = "choice"',
+                'default = "none"',
+            ]
+            for value, (_source, label, _char, _availability, _armor_parts) in (
+                CHAR_START_VALUES.items()
+            ):
+                lines += [
+                    "",
+                    "[[option.choice]]",
+                    f"value = {q(value)}",
+                    f"label = {q(label)}",
                 ]
     return "\n".join(lines) + "\n"
 

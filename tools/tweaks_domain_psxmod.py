@@ -50,6 +50,11 @@ class Feature:
     variants: tuple[Variant, ...]
     option_id: str = ""
     option_label: str = ""
+    option_type: str = "choice"
+    option_min: int = 0
+    option_max: int = 0
+    option_step: int = 1
+    option_default: str = ""
 
 
 @dataclass(frozen=True)
@@ -60,6 +65,8 @@ class Domain:
     features: tuple[Feature, ...]
     deferred: tuple[tuple[str, str], ...] = ()
     excluded: tuple[tuple[str, str], ...] = ()
+    resolver: str = "declarative"
+    version: str = VERSION
 
 
 @dataclass(frozen=True)
@@ -313,14 +320,42 @@ DAMAGE_RULES = Domain(
             "Allow ordinary attacks to damage Gate.",
             "Gate",
         ),
-    ),
-    (
-        (
-            "DmgTableGateDmg01",
-            "Real Gate Orb Explosion value, but source encodes a derived "
-            "16-bit complement and needs a typed table transform.",
+        Feature(
+            "gate_orb_explosion_damage",
+            "Gate Orb Explosion Damage",
+            "Set the damage dealt by Gate's own orb explosions.",
+            "Gate",
+            ("DmgTableGateDmg01",),
+            (
+                Variant(
+                    "4",
+                    "Stock",
+                    (("DmgTableGateDmg01", "4"),),
+                    (),
+                ),
+                Variant(
+                    "1",
+                    "Minimum",
+                    (("DmgTableGateDmg01", "1"),),
+                    ("DmgTableGateDmg01",),
+                ),
+                Variant(
+                    "127",
+                    "Maximum",
+                    (("DmgTableGateDmg01", "127"),),
+                    ("DmgTableGateDmg01",),
+                ),
+            ),
+            "damage",
+            "Damage",
+            "integer",
+            1,
+            127,
+            1,
+            "4",
         ),
     ),
+    (),
     (
         *tuple(
             (
@@ -352,6 +387,8 @@ DAMAGE_RULES = Domain(
             "GUI help action; not a game control.",
         ),
     ),
+    "builtin:mmx6-damage-rules",
+    "1.1.0",
 )
 
 DOMAINS = (GENERAL, STAGES, BOSS_ATTACKS, DAMAGE_RULES)
@@ -540,7 +577,7 @@ def build_domain(
     report = {
         "package": {
             "id": domain.package_id,
-            "version": VERSION,
+            "version": domain.version,
             "feature_rows": len(domain.features),
         },
         "source_controls": sorted(
@@ -583,7 +620,7 @@ def manifest_text(domain: Domain, patches: list[Patch]) -> str:
     lines = [
         "format_version = 3",
         f"id = {toml_quote(domain.package_id)}",
-        f"version = {toml_quote(VERSION)}",
+        f"version = {toml_quote(domain.version)}",
         f"name = {toml_quote(domain.name)}",
         (
             'author = "acediez; PSXRecomp integration by '
@@ -594,7 +631,7 @@ def manifest_text(domain: Domain, patches: list[Patch]) -> str:
             'features."'
         ),
         'license = "Generated locally; original credits retained"',
-        'resolver = "declarative"',
+        f"resolver = {toml_quote(domain.resolver)}",
         'save_compatibility = "shared"',
         "",
         "[[target]]",
@@ -624,19 +661,37 @@ def manifest_text(domain: Domain, patches: list[Patch]) -> str:
                     f"label = {toml_quote(feature.option_label)}",
                     f"description = {toml_quote(feature.description)}",
                     f"group = {toml_quote(feature.group)}",
-                    'type = "choice"',
-                    f"default = {toml_quote(feature.variants[0].value)}",
+                    f"type = {toml_quote(feature.option_type)}",
                 )
             )
-            for variant in feature.variants:
+            if feature.option_type == "choice":
+                lines.append(
+                    f"default = {toml_quote(feature.option_default or feature.variants[0].value)}"
+                )
+                for variant in feature.variants:
+                    lines.extend(
+                        (
+                            "",
+                            "[[option.choice]]",
+                            f"value = {toml_quote(variant.value)}",
+                            f"label = {toml_quote(variant.label)}",
+                        )
+                    )
+            elif feature.option_type == "integer":
                 lines.extend(
                     (
-                        "",
-                        "[[option.choice]]",
-                        f"value = {toml_quote(variant.value)}",
-                        f"label = {toml_quote(variant.label)}",
+                        f"min = {feature.option_min}",
+                        f"max = {feature.option_max}",
+                        f"step = {feature.option_step}",
+                        f"default = {feature.option_default or feature.variants[0].value}",
                     )
                 )
+            else:
+                raise ValueError(
+                    f"unsupported option type {feature.option_type!r}"
+                )
+    if domain.resolver != "declarative":
+        return "\n".join(lines) + "\n"
     for patch in patches:
         feature = by_feature[patch.feature_id]
         lines.extend(

@@ -61,7 +61,7 @@ int main(int argc, char** argv) {
         manager.install_archive(
             argv[1], &installed_id, &installed_version, &error),
         "package install: " + error);
-    check(installed_id == kPackage && installed_version == "1.0.0",
+    check(installed_id == kPackage && installed_version == "1.1.0",
           "installed package identity");
     check(manager.load_state(&error), "load state: " + error);
 
@@ -73,6 +73,7 @@ int main(int argc, char** argv) {
         "x_saber_timing",
         "shadow_saber_timing",
         "zero_saber_cooldown_timing",
+        "zero_z_buster_timing",
         "maximum_lives",
         "nightmare_dark_opacity",
     };
@@ -104,12 +105,18 @@ int main(int argc, char** argv) {
                     manager, feature, "timing_" + std::to_string(index),
                     "50", error),
                 "set " + feature + " timing");
-    for (int index = 2; index <= 7; ++index)
+    for (int index = 1; index <= 7; ++index)
         check(
             set_value(
                 manager, "zero_saber_cooldown_timing",
                 "timing_" + std::to_string(index), "50", error),
             "set Zero cooldown timing");
+    for (int index = 1; index <= 7; ++index)
+        check(
+            set_value(
+                manager, "zero_z_buster_timing",
+                "timing_" + std::to_string(index), "50", error),
+            "set Zero Z-Buster timing");
     check(set_value(
               manager, "maximum_lives", "maximum", "10", error),
           "set Maximum Lives");
@@ -120,13 +127,15 @@ int main(int argc, char** argv) {
     ModResolution all = manager.resolve(kGame, {}, kDisc);
     check(all.ok, "all admitted controls resolve: " +
                       (all.errors.empty() ? std::string{} : all.errors[0]));
-    check(all.writes.size() == 48, "complete selected plan has 48 writes");
+    check(all.writes.size() == 56, "complete selected plan has 56 writes");
     check(feature_writes(all, "x_saber_timing") == 10,
           "X Saber has ten semantic occurrences");
     check(feature_writes(all, "shadow_saber_timing") == 10,
           "Shadow Saber has ten semantic occurrences");
-    check(feature_writes(all, "zero_saber_cooldown_timing") == 18,
-          "Zero cooldown has eighteen semantic occurrences");
+    check(feature_writes(all, "zero_saber_cooldown_timing") == 19,
+          "Zero cooldown has nineteen semantic occurrences");
+    check(feature_writes(all, "zero_z_buster_timing") == 7,
+          "Zero Z-Buster has seven semantic occurrences");
     check(feature_writes(all, "maximum_lives") == 5,
           "Maximum Lives includes four values and the >9 helper");
     check(feature_writes(all, "nightmare_dark_opacity") == 5,
@@ -168,7 +177,7 @@ int main(int argc, char** argv) {
             }
         }
     }
-    check(owned_fields == 51, "48 writes resolve to 51 disjoint fields");
+    check(owned_fields == 59, "56 writes resolve to 59 disjoint fields");
     check(saw_animation && saw_cap && saw_cap_plus_one &&
               saw_display_helper && saw_opacity && saw_opacity_minus_one,
           "resolved bytes reproduce direct, additive, and conditional values");

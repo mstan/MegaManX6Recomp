@@ -14,7 +14,7 @@ namespace {
 using namespace PSXRecompV4;
 
 constexpr std::string_view kPackageId = "mmx6.tweaks.new-game";
-constexpr std::string_view kPackageVersion = "1.1.0";
+constexpr std::string_view kPackageVersion = "1.2.0";
 constexpr std::string_view kResolverId = "mmx6-new-game";
 constexpr std::string_view kSharedOwner = "new_game_foundation";
 
@@ -78,6 +78,12 @@ constexpr std::string_view kTailReplace =
 constexpr std::string_view kFoundTableExpected =
     "0000000000000000000000000000000000000000000000000000000000000000"
     "0000000000000000000000000000000000000000000000000000000000000000";
+constexpr std::string_view kIntroArmorExpected =
+    "09000724010002245F00A2A05E00A2A03031428D040003240300431430314425"
+    "5F00A7A05E00A3A0";
+constexpr std::string_view kIntroArmorReplace =
+    "01000224000000005E00A2A03031478D040003340400E3143031442508004224"
+    "5F00A2A05E00A3A0";
 
 std::vector<uint8_t> hex_bytes(std::string_view text) {
     auto digit = [](char value) -> int {
@@ -119,6 +125,7 @@ std::set<std::string> expected_feature_ids() {
         result.insert(std::string(id));
     for (std::string_view id : kCharacterFeatureIds)
         result.insert(std::string(id));
+    result.insert("intro_stage_armor");
     for (std::string_view id : kPartFeatureIds)
         result.insert(std::string(id));
     result.insert("mark_no_item_reploids");
@@ -340,6 +347,42 @@ bool resolve_new_game(
             );
         }
     }
+    std::vector<uint8_t> intro_armor_replacement;
+    if (enabled(selection, "intro_stage_armor")) {
+        const std::string armor = option_value(
+            package, selection, "intro_stage_armor", "armor"
+        );
+        uint8_t intro_character = 0;
+        if (armor == "none") {
+            intro_character = 0x00;
+            composed[0x34] |= 0x01;
+        } else if (armor == "blade") {
+            intro_character = 0x03;
+            composed[0x34] |= 0x05;
+            composed[0x4C] |= 0x0F;
+        } else if (armor == "shadow") {
+            intro_character = 0x02;
+            composed[0x34] |= 0x03;
+            composed[0x4C] |= 0xF0;
+        } else if (armor == "ultimate") {
+            intro_character = 0x04;
+            composed[0x34] |= 0x09;
+        } else {
+            errors.push_back(package.id + "/intro_stage_armor: "
+                             "armor is outside the trusted domain");
+            return false;
+        }
+        if (enabled(selection, "available_shadow_armor"))
+            composed[0x4C] |= 0xF0;
+        if (enabled(selection, "available_blade_armor"))
+            composed[0x4C] |= 0x0F;
+        intro_armor_replacement = hex_bytes(kIntroArmorReplace);
+        if (intro_armor_replacement.size() != 40) {
+            errors.push_back(package.id + ": invalid intro armor hook");
+            return false;
+        }
+        intro_armor_replacement[0] = intro_character;
+    }
 
     std::vector<uint8_t> found_table(64, 0);
     bool found_table_active = false;
@@ -443,6 +486,12 @@ bool resolve_new_game(
     writes.push_back(make_write(
         0x8007A1C8, hex_bytes(kTailExpected), hex_bytes(kTailReplace)
     ));
+    if (!intro_armor_replacement.empty()) {
+        writes.push_back(make_write(
+            0x8001E164, hex_bytes(kIntroArmorExpected),
+            std::move(intro_armor_replacement)
+        ));
+    }
     if (found_table_active) {
         writes.push_back(make_write(
             0x800769A0, hex_bytes(kFoundTableExpected),

@@ -29,13 +29,14 @@ class TimingPackageTests(unittest.TestCase):
                 "x_saber_timing",
                 "shadow_saber_timing",
                 "zero_saber_cooldown_timing",
+                "zero_z_buster_timing",
                 "maximum_lives",
                 "nightmare_dark_opacity",
             ],
         )
         self.assertEqual(
             [len(feature.controls) for feature in timing.ANIMATION_FEATURES],
-            [7, 7, 6],
+            [7, 7, 7, 7],
         )
         source_ids = [
             control.source_id
@@ -43,14 +44,14 @@ class TimingPackageTests(unittest.TestCase):
             for control in feature.controls
         ]
         self.assertEqual(len(source_ids), len(set(source_ids)))
-        self.assertNotIn("Anim0301", source_ids)
-        self.assertFalse(any(source.startswith("Anim04") for source in source_ids))
+        self.assertIn("Anim0301", source_ids)
+        self.assertTrue(all(f"Anim040{index}" in source_ids for index in range(1, 8)))
         for feature in timing.ANIMATION_FEATURES:
             for control in feature.controls:
                 self.assertEqual((control.minimum, control.maximum), (1, 99))
                 self.assertGreaterEqual(control.default, 1)
         report_controls = timing.source_controls_report()
-        self.assertEqual(len(report_controls), 22)
+        self.assertEqual(len(report_controls), 30)
         self.assertTrue(
             all(
                 item["conversion_status"]
@@ -132,7 +133,7 @@ class TimingPackageTests(unittest.TestCase):
         parsed = tomllib.loads(manifest)
         self.assertEqual(parsed["format_version"], 4)
         self.assertEqual(parsed["id"], timing.PACKAGE_ID)
-        self.assertEqual(len(parsed["feature"]), 5)
+        self.assertEqual(len(parsed["feature"]), 6)
         self.assertTrue(
             all(not feature["default_enabled"] for feature in parsed["feature"])
         )
@@ -209,10 +210,31 @@ class TimingPackageTests(unittest.TestCase):
                     archived_report["package_id"], timing.PACKAGE_ID
                 )
                 self.assertIn("source_controls", archived_report)
-                self.assertEqual(
-                    archived_report["deferred"]["Anim04"]["status"],
-                    "deferred",
-                )
+                self.assertNotIn("Anim04", archived_report["deferred"])
+
+    @unittest.skipUnless(
+        timing.DEFAULT_STOCK.is_file() and timing.DEFAULT_B01_BASE.is_file(),
+        "local stock image and isolated B01 base oracle are required",
+    )
+    def test_zero_z_buster_timing_uses_only_reviewed_unindexed_table(self) -> None:
+        with timing.native.RawMode2Image(timing.DEFAULT_STOCK) as stock, (
+            timing.native.RawMode2Image(timing.DEFAULT_B01_BASE)
+        ) as b01_base:
+            operations = timing.build_operations(stock, b01_base)
+        z_buster = [
+            operation
+            for operation in operations
+            if operation.feature_id == "zero_z_buster_timing"
+        ]
+        self.assertEqual(len(z_buster), 7)
+        self.assertEqual(
+            {operation.semantic_owner for operation in z_buster},
+            {"ROCK_X6.BIN unindexed Zero Z-Buster timing table"},
+        )
+        self.assertEqual(
+            [operation.semantic_offset for operation in z_buster],
+            list(range(0x11600, 0x1161C, 4)),
+        )
 
 
 if __name__ == "__main__":
