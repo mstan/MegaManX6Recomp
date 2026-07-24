@@ -634,9 +634,9 @@ Maximum Lives 9/10 predicate boundary.
 ### New Game status modular package
 
 `tools/tweaks_new_game_psxmod.py` produces the resolver-backed
-`mmx6.tweaks.new-game` package. Version 1.2 represents 65 Tweaks source
-controls as 65 independent left-pane rows. Integer and rank rows use right-pane
-options; bit rows use only the feature checkbox. `CharStart01` is represented
+`mmx6.tweaks.new-game` package. Version 1.3 represents 67 Tweaks source
+controls as 67 independent left-pane rows. Integer, rank, and mark-status rows
+use right-pane options; bit rows use only the feature checkbox. `CharStart01` is represented
 as one `Intro Stage Starting Armor` row with a local armor dropdown, because
 its choices are mutually exclusive within that one feature rather than across
 packages.
@@ -651,9 +651,10 @@ row offers the non-stock choices None, Blade, Shadow, and Ultimate.
 The local integration test replays every admitted source control through the
 ported Tweaks engine, checks isolated parity, checks minimum/maximum combined
 composition, verifies the embedded C++ stock guards, and builds a deterministic
-archive. Remaining New Game controls are deferred only where semantics are not
-yet product-ready: random starting parts and found-Reploid mark algebra. The
-hidden debug-start controls are explicitly excluded because the normal
+archive. Version 1.3 adds the found-Reploid mark status and mark-only
+modifiers, including their dependent composition with the found-Reploid table.
+Remaining New Game controls are deferred only where semantics are not yet
+product-ready: random starting parts. The hidden debug-start controls are explicitly excluded because the normal
 submitted profile path emits no writes for them.
 
 ### General shared-foundation package
@@ -692,16 +693,16 @@ either threshold is non-stock. Each enabled row exposes a bounded integer
 ### Current modular coverage checkpoint
 
 After the modular New Game, domain, timing, player, title/retranslation, and
-hook packages installed in this worktree, the coverage ledger classifies 290
-of 329 unique Tweaks source controls: 276 represented and 14 explicitly
-excluded as GUI/patcher artifacts or source no-ops. Thirty-nine controls
+hook packages installed in this worktree, the coverage ledger classifies 292
+of 329 unique Tweaks source controls: 278 represented and 14 explicitly
+excluded as GUI/patcher artifacts or source no-ops. Thirty-seven controls
 remain:
 
 | Tweaks area | Remaining controls |
 |---|---:|
 | Player Mechanics | 22 |
 | General Tweaks | 6 |
-| New Game Status | 5 |
+| New Game Status | 3 |
 | Balance | 1 |
 | Localization + Custom Art | 5 |
 

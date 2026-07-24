@@ -1,7 +1,7 @@
 # MMX6 Tweaks New Game composer
 
 `mmx6.tweaks.new-game` is a resolver-backed package for independently
-configurable starting-status changes. Version 1.1.0 contains 64 of the 74
+configurable starting-status changes. Version 1.3.0 contains 67 of the 74
 controls in MMX6 Tweaks v2.6.1's **New Game Status** tab:
 
 - X and Zero starting Life Up counts;
@@ -11,8 +11,10 @@ controls in MMX6 Tweaks v2.6.1's **New Game Status** tab:
 - four independent Sub Tank checkboxes;
 - Shadow, Blade, Ultimate, Zero, and Black Zero availability;
 - all 16 Life Up/Energy Up part flags;
-- all 24 exposed normal, X, Zero, and limited Parts Set flags; and
-- marking Reploids that carry no item as rescued.
+- all 24 exposed normal, X, Zero, and limited Parts Set flags;
+- marking Reploids that carry no item as rescued; and
+- found-Reploid status modifiers, including mark-only behavior for Parts Set
+  rows.
 
 Every item is its own left-pane feature. Upgrade counts are right-pane integer
 choices only while their feature is enabled. Disabled means the upstream
@@ -52,6 +54,8 @@ The converted fields are:
 | `PartsEnergyUp01..08` | `+0xA0` | independent bits plus matching found-Reploid entries |
 | 24 exposed `PartsSet*` controls | `+0x7C..+0x81` | packed set bits plus matching found-Reploid entries |
 | `RescRepFoundNoItem01` | 64-byte table | marks every no-item Reploid as rescued |
+| `RescRepFoundMark01` | 64-byte table | changes matching found-Reploid entries from rescued to dead or missing |
+| `RescRepFoundMarkOnly01` | 64-byte table | marks selected Parts Set Reploids without granting those parts |
 
 ## Generation and validation
 
@@ -66,7 +70,7 @@ The deterministic archive contains only a manifest, conversion report, and
 README. It contains no package-supplied code, declarative patch duplicates,
 asset payloads, or derived disc.
 
-The converter reparses the complete 74-control GUI catalog. It writes the 64
+The converter reparses the complete 74-control GUI catalog. It writes the 67
 accepted strings to `source_controls` and records every catalog control as
 `converted` or `deferred` in `source_control_ledger`. For each converted
 integer it exercises minimum, interior, and maximum values. For each
@@ -86,15 +90,13 @@ py -3 -m unittest tools.test_tweaks_new_game_psxmod -v
 
 ## Deferred ledger
 
-The remaining 10 catalog controls stay visible in the conversion report rather
+The remaining 7 catalog controls stay visible in the conversion report rather
 than disappearing into a broad TODO. Important reasons include:
 
 - `CharAdd01` is the stock Falcon sentinel forced by the default `CharStart`;
   it has no independent enabled-state delta;
 - `CharStart01` couples intro armor, character availability, `ArmorParts`, and
   a separate call-site;
-- `RescRepFoundMark01` and `RescRepFoundMarkOnly01` are dependent modifiers
-  whose standalone product semantics remain unproven;
 - Parts randomization mutates a separate 512-byte carrier table with seeded
   shuffle semantics not yet represented by the runtime; and
 - debug stage/checkpoint and Zero debug controls are hidden behind

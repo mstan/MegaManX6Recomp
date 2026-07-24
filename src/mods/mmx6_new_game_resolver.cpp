@@ -14,7 +14,7 @@ namespace {
 using namespace PSXRecompV4;
 
 constexpr std::string_view kPackageId = "mmx6.tweaks.new-game";
-constexpr std::string_view kPackageVersion = "1.2.0";
+constexpr std::string_view kPackageVersion = "1.3.0";
 constexpr std::string_view kResolverId = "mmx6-new-game";
 constexpr std::string_view kSharedOwner = "new_game_foundation";
 
@@ -129,6 +129,8 @@ std::set<std::string> expected_feature_ids() {
     for (std::string_view id : kPartFeatureIds)
         result.insert(std::string(id));
     result.insert("mark_no_item_reploids");
+    result.insert("found_reploid_mark_status");
+    result.insert("mark_reploids_only");
     for (int index = 1; index <= 8; ++index) {
         result.insert("parts_life_up_" + std::to_string(index));
         result.insert("parts_energy_up_" + std::to_string(index));
@@ -386,6 +388,27 @@ bool resolve_new_game(
 
     std::vector<uint8_t> found_table(64, 0);
     bool found_table_active = false;
+    uint8_t found_mark = 0x02;
+    if (enabled(selection, "found_reploid_mark_status")) {
+        const std::string status = option_value(
+            package, selection, "found_reploid_mark_status", "status"
+        );
+        if (status == "dead") {
+            found_mark = 0x03;
+        } else if (status == "missing") {
+            found_mark = 0x04;
+        } else {
+            errors.push_back(package.id + "/found_reploid_mark_status: "
+                             "status is outside the trusted domain");
+            return false;
+        }
+    }
+    const bool mark_only = enabled(selection, "mark_reploids_only");
+    const auto marked_table_bit = [&](uint8_t table_mask) -> uint8_t {
+        return table_mask == 0x02
+            ? found_mark
+            : static_cast<uint8_t>(found_mark << 4);
+    };
     if (enabled(selection, "mark_no_item_reploids")) {
         constexpr std::string_view no_item_table =
             "2020202202222220222000222220022202222222022200202222022222000220"
@@ -394,6 +417,15 @@ bool resolve_new_game(
         if (found_table.size() != 64) {
             errors.push_back(package.id + ": invalid no-item table");
             return false;
+        }
+        if (found_mark != 0x02) {
+            for (uint8_t& value : found_table) {
+                const uint8_t low = (value & 0x02) ? found_mark : 0;
+                const uint8_t high = (value & 0x20)
+                    ? static_cast<uint8_t>(found_mark << 4)
+                    : 0;
+                value = static_cast<uint8_t>(low | high);
+            }
         }
         found_table_active = true;
     }
@@ -406,7 +438,7 @@ bool resolve_new_game(
     ) {
         if (!enabled(selection, feature_id)) return;
         composed[template_offset] |= template_mask;
-        found_table[table_offset] |= table_mask;
+        found_table[table_offset] |= marked_table_bit(table_mask);
         found_table_active = true;
     };
     constexpr std::array<size_t, 8> life_table_offsets = {
@@ -471,11 +503,19 @@ bool resolve_new_game(
         {"part_master_saber", 0x7D, 0x02, 0x3D, 0x02},
     }};
     for (const PartField& field : part_fields) {
-        apply_part(
-            field.feature, field.template_offset, field.template_mask,
-            field.table_offset, field.table_mask
-        );
+        if (!enabled(selection, field.feature)) continue;
+        if (!mark_only)
+            composed[field.template_offset] |= field.template_mask;
+        found_table[field.table_offset] |= marked_table_bit(field.table_mask);
+        found_table_active = true;
     }
+
+    if (
+        composed == hex_bytes(kTemplateReplace) &&
+        intro_armor_replacement.empty() &&
+        !found_table_active
+    )
+        return true;
 
     writes.push_back(make_write(
         0x8001E1B4, hex_bytes(kHookExpected), hex_bytes(kHookReplace)
