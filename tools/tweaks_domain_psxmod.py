@@ -283,14 +283,18 @@ STAGES = Domain(
             "mode",
             "Behavior",
         ),
-    ),
-    (
-        (
+        toggle(
+            "move_recycle_lab_hidden_teleport",
             "StageMod0404",
-            "Hidden-area teleport crosses apparent stage-object records; no "
-            "typed object owner has been proven.",
+            "Move Hidden Area Teleport",
+            (
+                "Move the Recycle Lab hidden-area teleport to the left side "
+                "of the long jump."
+            ),
+            "Recycle Lab",
         ),
     ),
+    (),
 )
 
 BOSS_ATTACKS = Domain(
