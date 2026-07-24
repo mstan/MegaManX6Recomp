@@ -22,12 +22,12 @@ import tweaks_new_game_psxmod as new_game
 
 class CatalogTests(unittest.TestCase):
     def test_feature_rows_are_independent(self) -> None:
-        self.assertEqual(len(new_game.FEATURES), 67)
+        self.assertEqual(len(new_game.FEATURES), 68)
         self.assertEqual(
-            len({item.feature_id for item in new_game.FEATURES}), 67
+            len({item.feature_id for item in new_game.FEATURES}), 68
         )
         self.assertEqual(
-            len({item.source_control for item in new_game.FEATURES}), 67
+            len({item.source_control for item in new_game.FEATURES}), 68
         )
         self.assertEqual(
             len([item for item in new_game.FEATURES if item.kind == "integer"]),
@@ -51,6 +51,9 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(
             len([item for item in new_game.FEATURES if item.kind == "mark_only"]), 1
         )
+        self.assertEqual(
+            len([item for item in new_game.FEATURES if item.kind == "parts_randomizer"]), 1
+        )
 
     def test_bit_domains_match_upstream_masks(self) -> None:
         hearts = [
@@ -68,6 +71,7 @@ class CatalogTests(unittest.TestCase):
 
     def test_burndown_scope_is_explicit(self) -> None:
         added = {item.source_control for item in new_game.FEATURES[18:]}
+        added.update(new_game.PARTS_RANDOM_SOURCE_CONTROLS)
         expected = {
             *(f"CharAdd{index:02d}" for index in range(2, 7)),
             "CharStart01",
@@ -80,9 +84,10 @@ class CatalogTests(unittest.TestCase):
               for group in range(3, 7) for index in range(1, 5)),
             "PartsSet0701", "PartsSet0702",
             "RescRepFoundMark01", "RescRepFoundMarkOnly01",
+            "PartsRandomTitle01", "PartsRandom01", "PartsRandom02",
         }
         self.assertEqual(added, expected)
-        self.assertEqual(len(added), 49)
+        self.assertEqual(len(added), 52)
 
 
 @unittest.skipUnless(
@@ -95,10 +100,10 @@ class PackageIntegrationTests(unittest.TestCase):
             Path(os.environ["MMX6_NEW_GAME_TEST_STOCK"])
         )
         self.assertEqual(report["package"]["catalog_control_count"], 74)
-        self.assertEqual(report["package"]["source_control_count"], 67)
+        self.assertEqual(report["package"]["source_control_count"], 70)
         self.assertEqual(report["package"]["excluded_control_count"], 4)
-        self.assertEqual(report["package"]["deferred_control_count"], 3)
-        self.assertEqual(len(report["source_controls"]), 67)
+        self.assertEqual(report["package"]["deferred_control_count"], 0)
+        self.assertEqual(len(report["source_controls"]), 70)
         self.assertEqual(len(report["source_control_ledger"]), 74)
         self.assertEqual(
             report["excluded_source_controls"],
@@ -142,9 +147,7 @@ class PackageIntegrationTests(unittest.TestCase):
             for item in report["source_control_ledger"]
             if item["status"] == "deferred"
         }
-        self.assertEqual(deferred, {
-            "PartsRandom01", "PartsRandom02", "PartsRandomTitle01",
-        })
+        self.assertEqual(deferred, set())
         excluded = {
             item["source_control"]
             for item in report["source_control_ledger"]
@@ -155,12 +158,15 @@ class PackageIntegrationTests(unittest.TestCase):
             {"CharAdd01", "DebugCheckpointStart", "DebugStageStart", "ZeroDebug"},
         )
         table = report["composed_resources"]["found_reploid_table"]
+        parts_table = report["composed_resources"]["reploid_parts_table"]
         middle = report["foundation"][1]
         self.assertEqual(
             table["source_raw_offset"] + table["size"],
             middle["source_raw_offset"],
         )
         self.assertTrue(report["validation"]["stock_guards_verified"])
+        self.assertEqual(parts_table["source_raw_offset"], new_game.PARTS_TABLE_RAW)
+        self.assertEqual(parts_table["size"], new_game.PARTS_TABLE_WRITE_SIZE)
         self.assertTrue(report["validation"]["isolated_source_parity"])
         for proof in report["validation"]["representative_combinations"]:
             self.assertTrue(proof["upstream_parity"])
@@ -200,6 +206,16 @@ class PackageIntegrationTests(unittest.TestCase):
                 report["composed_resources"]["found_reploid_table"]["expected"]
             ),
         )
+        self.assertEqual(
+            cpp_hex("kPartsTableExpected")[:new_game.PARTS_TABLE_WRITE_SIZE],
+            bytes.fromhex(
+                report["composed_resources"]["reploid_parts_table"]["expected"]
+            ),
+        )
+        self.assertIn(
+            f"constexpr size_t kPartsTableWriteSize = {new_game.PARTS_TABLE_WRITE_SIZE};",
+            resolver_text,
+        )
 
         with tempfile.TemporaryDirectory(prefix="mmx6-new-game-test-") as temp:
             first = Path(temp) / "first.psxmod"
@@ -220,8 +236,8 @@ class PackageIntegrationTests(unittest.TestCase):
                 manifest["resolver"],
                 f"builtin:{new_game.RESOLVER_ID}",
             )
-            self.assertEqual(len(manifest["feature"]), 67)
-            self.assertEqual(len(manifest["option"]), 8)
+            self.assertEqual(len(manifest["feature"]), 68)
+            self.assertEqual(len(manifest["option"]), 9)
             self.assertNotIn("patch", manifest)
             self.assertNotIn("overlay", manifest)
             self.assertTrue(
@@ -264,17 +280,35 @@ class ResolverCompileTests(unittest.TestCase):
             )
             for feature in new_game.FEATURES
         )
-        option_setup = "\n".join(
-            (
+        def option_declaration(feature) -> str:
+            option_id = {
+                "integer": "count",
+                "rank": "rank",
+                "choice": "armor",
+                "mark_status": "status",
+                "parts_randomizer": "mode",
+            }[feature.kind]
+            default_value = {
+                "integer": "1",
+                "rank": "C",
+                "choice": "none",
+                "mark_status": "dead",
+                "parts_randomizer": "only_parts",
+            }[feature.kind]
+            return (
                 '    package.options.push_back(ModOption{}); '
                 f'package.options.back().feature_id = "{feature.feature_id}"; '
-                f'package.options.back().id = "'
-                f'{"count" if feature.kind == "integer" else "rank" if feature.kind == "rank" else "armor" if feature.kind == "choice" else "status"}"; '
-                f'package.options.back().default_value = "'
-                f'{"1" if feature.kind == "integer" else "C" if feature.kind == "rank" else "none" if feature.kind == "choice" else "dead"}";'
+                f'package.options.back().id = "{option_id}"; '
+                f'package.options.back().default_value = "{default_value}";'
             )
+
+        option_setup = "\n".join(
+            option_declaration(feature)
             for feature in new_game.FEATURES
-            if feature.kind in {"integer", "rank", "choice", "mark_status"}
+            if feature.kind in {
+                "integer", "rank", "choice", "mark_status",
+                "parts_randomizer",
+            }
         )
         template_block = re.search(
             r"kTemplateReplace\s*=\s*((?:\s*\"[0-9A-F]+\")+);",
@@ -291,6 +325,8 @@ class ResolverCompileTests(unittest.TestCase):
                 if feature.kind == "choice"
                 else "dead"
                 if feature.kind == "mark_status"
+                else "only_parts"
+                if feature.kind == "parts_randomizer"
                 else 1
             )
             isolated_selection = {feature.feature_id: isolated_value}
@@ -299,12 +335,15 @@ class ResolverCompileTests(unittest.TestCase):
                     "part_hyper_dash": 1,
                     feature.feature_id: isolated_value,
                 }
-            expected_middle, expected_table = new_game.compose_state(
+            expected_middle, expected_table, expected_parts, expected_parts_active = new_game.compose_full_state(
                 isolated_selection, template_base
             )
             expected_writes = 4 if (
                 feature.table_offset >= 0 or
-                feature.kind in {"table", "choice", "mark_status", "mark_only"}
+                feature.kind in {
+                    "table", "choice", "mark_status", "mark_only",
+                    "parts_randomizer",
+                }
             ) else 3
             table_check = (
                 f' || writes[3].replacement != '
@@ -313,6 +352,11 @@ class ResolverCompileTests(unittest.TestCase):
                     feature.table_offset >= 0 or
                     feature.kind in {"table", "mark_status", "mark_only"}
                 )
+                else (
+                    f' || writes[3].replacement != '
+                    f'hex_bytes("{expected_parts[:new_game.PARTS_TABLE_WRITE_SIZE].hex().upper()}")'
+                )
+                if expected_parts_active
                 else ""
             )
             isolated_cases.append(f'''
@@ -323,6 +367,7 @@ class ResolverCompileTests(unittest.TestCase):
         feature.enabled = true;
 {('        feature.values["armor"] = "none";' if feature.kind == "choice" else '')}
 {('        feature.values["status"] = "dead";' if feature.kind == "mark_status" else '')}
+{('        feature.values["mode"] = "only_parts";' if feature.kind == "parts_randomizer" else '')}
 {('        auto& part = isolated.features["part_hyper_dash"]; part.has_enabled = true; part.enabled = true;' if feature.kind in {"mark_status", "mark_only"} else '')}
         writes.clear();
         errors.clear();
