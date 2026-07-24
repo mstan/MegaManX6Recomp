@@ -215,6 +215,10 @@ class FeatureSpec:
     target: str
     expected_writes: tuple[tuple[int, str], ...]
     source_value: str = "1"
+    source_closure: tuple[str, ...] = ()
+
+    def owned_source_controls(self) -> tuple[str, ...]:
+        return self.source_closure or (self.source_option,)
 
 
 @dataclass(frozen=True)
@@ -520,6 +524,30 @@ MOVEMENT_FEATURES = (
         "HoverUnlock01",
         "main_exe",
         ((0x1D956A60, "00000000"),),
+    ),
+    FeatureSpec(
+        "x_hover_mode",
+        "X Hover Mode",
+        (
+            "Let Blade Armor use X's hover behavior, including the required "
+            "hover unlock and air-move helper patches."
+        ),
+        "Movement",
+        "HoverUnlock02",
+        "mixed",
+        (
+            (0x1D956A60, "00000000"),
+            (0x1D94FADC, "7C001B96CBFC000C000004360000000000107B334B00401400000000"),
+            (0x1D956B84, "00000234"),
+            (0x1D94FA9C, "00000000"),
+            (0x1D956BE4, "00000000"),
+            (0x1D956A98, "00000000"),
+            (0x1D9B6188, "0400033C"),
+            (0x1D9B61BC, "0400033C"),
+            (0x1D9B60D8, "00000000"),
+            (0x1D9B5DD4, "1BE4000C"),
+        ),
+        source_closure=("HoverUnlock01", "HoverUnlock02"),
     ),
     FeatureSpec(
         "unlimited_high_jump",
@@ -1981,7 +2009,8 @@ def resolve_source_writes(
         )
         inherited = set(db.patchlist_base) | set(db.patchlist_script)
         owned = [name for name in patch_list if name not in inherited]
-        if patchfile != "b01" or owned != [spec.source_option]:
+        expected_owned = list(spec.owned_source_controls())
+        if patchfile != "b01" or owned != expected_owned:
             raise AssertionError(
                 f"{spec.source_option} source closure changed: "
                 f"patchfile={patchfile!r}, owned={owned!r}"
@@ -2196,6 +2225,7 @@ def build_simple_feature_ops(
             )
             else "ready",
             "source_selection": {spec.source_option: spec.source_value},
+            "source_closure": list(spec.owned_source_controls()),
             "common_base_writes_inherited": 0,
             "semantic_operations": operations,
             "oracle_count": (
@@ -4341,7 +4371,11 @@ def represented_source_controls(
     config_specs: tuple[ConfigFeatureSpec, ...],
     param_specs: tuple[ParamFeatureSpec, ...],
 ) -> list[str]:
-    controls = {spec.source_option for spec in simple_specs}
+    controls = {
+        source_control
+        for spec in simple_specs
+        for source_control in spec.owned_source_controls()
+    }
     controls.update(spec.source_option for spec in param_specs)
     for spec in config_specs:
         for variant in spec.variants:
@@ -4803,7 +4837,7 @@ def main() -> int:
         choices=("all", *ALL_FEATURE_IDS),
         default="all",
     )
-    parser.add_argument("--package-version", default="1.9.0")
+    parser.add_argument("--package-version", default="1.10.1")
     parser.add_argument("--audit-retranslation", action="store_true")
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--out", type=Path)
