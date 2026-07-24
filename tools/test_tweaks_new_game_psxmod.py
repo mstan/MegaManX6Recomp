@@ -22,12 +22,12 @@ import tweaks_new_game_psxmod as new_game
 
 class CatalogTests(unittest.TestCase):
     def test_feature_rows_are_independent(self) -> None:
-        self.assertEqual(len(new_game.FEATURES), 64)
+        self.assertEqual(len(new_game.FEATURES), 65)
         self.assertEqual(
-            len({item.feature_id for item in new_game.FEATURES}), 64
+            len({item.feature_id for item in new_game.FEATURES}), 65
         )
         self.assertEqual(
-            len({item.source_control for item in new_game.FEATURES}), 64
+            len({item.source_control for item in new_game.FEATURES}), 65
         )
         self.assertEqual(
             len([item for item in new_game.FEATURES if item.kind == "integer"]),
@@ -38,6 +38,9 @@ class CatalogTests(unittest.TestCase):
         )
         self.assertEqual(
             len([item for item in new_game.FEATURES if item.kind == "rank"]), 2
+        )
+        self.assertEqual(
+            len([item for item in new_game.FEATURES if item.kind == "choice"]), 1
         )
         self.assertEqual(
             len([item for item in new_game.FEATURES if item.kind == "table"]), 1
@@ -61,6 +64,7 @@ class CatalogTests(unittest.TestCase):
         added = {item.source_control for item in new_game.FEATURES[18:]}
         expected = {
             *(f"CharAdd{index:02d}" for index in range(2, 7)),
+            "CharStart01",
             *(f"PartsLifeUp{index:02d}" for index in range(1, 9)),
             *(f"PartsEnergyUp{index:02d}" for index in range(1, 9)),
             "RescRepFoundNoItem01",
@@ -71,7 +75,7 @@ class CatalogTests(unittest.TestCase):
             "PartsSet0701", "PartsSet0702",
         }
         self.assertEqual(added, expected)
-        self.assertEqual(len(added), 46)
+        self.assertEqual(len(added), 47)
 
 
 @unittest.skipUnless(
@@ -84,10 +88,10 @@ class PackageIntegrationTests(unittest.TestCase):
             Path(os.environ["MMX6_NEW_GAME_TEST_STOCK"])
         )
         self.assertEqual(report["package"]["catalog_control_count"], 74)
-        self.assertEqual(report["package"]["source_control_count"], 64)
+        self.assertEqual(report["package"]["source_control_count"], 65)
         self.assertEqual(report["package"]["excluded_control_count"], 1)
-        self.assertEqual(report["package"]["deferred_control_count"], 9)
-        self.assertEqual(len(report["source_controls"]), 64)
+        self.assertEqual(report["package"]["deferred_control_count"], 8)
+        self.assertEqual(len(report["source_controls"]), 65)
         self.assertEqual(len(report["source_control_ledger"]), 74)
         self.assertEqual(
             report["excluded_source_controls"],
@@ -108,7 +112,7 @@ class PackageIntegrationTests(unittest.TestCase):
             if item["status"] == "deferred"
         }
         self.assertEqual(deferred, {
-            "CharStart01", "DebugCheckpointStart", "DebugStageStart",
+            "DebugCheckpointStart", "DebugStageStart",
             "PartsRandom01", "PartsRandom02", "PartsRandomTitle01",
             "RescRepFoundMark01", "RescRepFoundMarkOnly01", "ZeroDebug",
         })
@@ -184,8 +188,8 @@ class PackageIntegrationTests(unittest.TestCase):
                 manifest["resolver"],
                 f"builtin:{new_game.RESOLVER_ID}",
             )
-            self.assertEqual(len(manifest["feature"]), 64)
-            self.assertEqual(len(manifest["option"]), 6)
+            self.assertEqual(len(manifest["feature"]), 65)
+            self.assertEqual(len(manifest["option"]), 7)
             self.assertNotIn("patch", manifest)
             self.assertNotIn("overlay", manifest)
             self.assertTrue(
@@ -233,12 +237,12 @@ class ResolverCompileTests(unittest.TestCase):
                 '    package.options.push_back(ModOption{}); '
                 f'package.options.back().feature_id = "{feature.feature_id}"; '
                 f'package.options.back().id = "'
-                f'{"count" if feature.kind == "integer" else "rank"}"; '
+                f'{"count" if feature.kind == "integer" else "rank" if feature.kind == "rank" else "armor"}"; '
                 f'package.options.back().default_value = "'
-                f'{"1" if feature.kind == "integer" else "C"}";'
+                f'{"1" if feature.kind == "integer" else "C" if feature.kind == "rank" else "none"}";'
             )
             for feature in new_game.FEATURES
-            if feature.kind in {"integer", "rank"}
+            if feature.kind in {"integer", "rank", "choice"}
         )
         template_block = re.search(
             r"kTemplateReplace\s*=\s*((?:\s*\"[0-9A-F]+\")+);",
@@ -254,12 +258,13 @@ class ResolverCompileTests(unittest.TestCase):
                 {feature.feature_id: 1}, template_base
             )
             expected_writes = 4 if (
-                feature.table_offset >= 0 or feature.kind == "table"
+                feature.table_offset >= 0 or
+                feature.kind in {"table", "choice"}
             ) else 3
             table_check = (
                 f' || writes[3].replacement != '
                 f'hex_bytes("{expected_table.hex().upper()}")'
-                if expected_writes == 4
+                if feature.table_offset >= 0 or feature.kind == "table"
                 else ""
             )
             isolated_cases.append(f'''
@@ -298,7 +303,7 @@ int main() {
     using namespace PSXRecompV4;
     ModPackage package;
     package.id = "mmx6.tweaks.new-game";
-    package.version = "1.1.0";
+    package.version = "1.2.0";
     package.resolver = "builtin:mmx6-new-game";
 __FEATURES__
 __OPTIONS__

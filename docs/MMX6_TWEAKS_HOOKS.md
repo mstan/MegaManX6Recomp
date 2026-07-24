@@ -107,10 +107,10 @@ that replaces silent source-GUI forcing.
 
 This branch converts 19 of the exact 49-control Player Mechanics ledger:
 three fixed standalone controls, two continuous-dash controls, and fourteen
-Mach Dash controls. Thirty remain, all with explicit reasons:
+Mach Dash controls. The timing package later converts eight more animation
+controls. Twenty-two remain, all with explicit reasons:
 
 - 17 Zero-technique controls at the independent-row boundary above;
-- `Anim0301` and `Anim0401` through `Anim0407`;
 - quarantined `MachDashDuration02`, `MachDashSpeed02`, and
   `MachDashSpeed03`;
 - `HoverUnlock02`, whose GUI also forces the already-separate

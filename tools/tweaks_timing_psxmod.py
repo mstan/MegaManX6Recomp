@@ -24,7 +24,7 @@ import tweaks_native_psxmod as native
 
 PACKAGE_ID = "mmx6.tweaks.timing"
 PACKAGE_NAME = "Mega Man X6 Timing and Status Tweaks"
-PACKAGE_VERSION = "1.0.0"
+PACKAGE_VERSION = "1.1.0"
 
 ROOT = Path(__file__).absolute().parent.parent
 DEFAULT_TWEAKS = native.DEFAULT_TWEAKS
@@ -166,7 +166,7 @@ ANIMATION_FEATURES = (
         "zero_saber_cooldown_timing",
         "Zero Saber Cooldown Timing",
         (
-            "Set the six editable positive cooldown values after Zero's "
+            "Set the seven positive cooldown values after Zero's "
             "ground Saber combo."
         ),
         "Animation Timing",
@@ -182,7 +182,25 @@ ANIMATION_FEATURES = (
                 (0x1D9C5ED4, 0x1D9C5D6C, 0x1D9C5D30),
                 (0x1D9C5ED8, 0x1D9C5D70, 0x1D9C5D34),
             ),
-            first_editable=2,
+        ),
+    ),
+    FeatureSpec(
+        "zero_z_buster_timing",
+        "Zero Z-Buster Timing",
+        "Set the seven positive timing values for Zero's Z-Buster animation.",
+        "Animation Timing",
+        _anim_controls(
+            4,
+            (1, 2, 2, 4, 6, 6, 4),
+            (
+                (0x1D9C64A8,),
+                (0x1D9C64AC,),
+                (0x1D9C64B0,),
+                (0x1D9C64B4,),
+                (0x1D9C64B8,),
+                (0x1D9C64BC,),
+                (0x1D9C64C0,),
+            ),
         ),
     ),
 )
@@ -232,6 +250,7 @@ FEATURES = (
     NIGHTMARE_OPACITY_FEATURE,
 )
 FEATURE_BY_ID = {feature.feature_id: feature for feature in FEATURES}
+ZERO_Z_BUSTER_TIMING_TABLE = range(0x11600, 0x1161C)
 
 
 def _sha256(data: bytes) -> str:
@@ -541,9 +560,39 @@ class StockMapper:
             raise AssertionError(
                 f"guard at 0x{raw_offset:X} targets unsupported {entry.name}"
             )
-        source_member, relative_offset = native.containing_member(
-            self.b01_members, file_offset, guard_size
-        )
+        try:
+            source_member, relative_offset = native.containing_member(
+                self.b01_members, file_offset, guard_size
+            )
+        except ValueError:
+            if (
+                file_offset in ZERO_Z_BUSTER_TIMING_TABLE
+                and file_offset + guard_size <= ZERO_Z_BUSTER_TIMING_TABLE.stop
+            ):
+                expected = native.read_iso_file_range(
+                    self.b01_base, entry.name, file_offset, guard_size
+                )
+                stock_expected = native.read_iso_file_range(
+                    self.stock, entry.name, file_offset, guard_size
+                )
+                if expected != stock_expected:
+                    raise AssertionError(
+                        f"guard at 0x{raw_offset:X} depends on a B01 "
+                        "unindexed ROCK_X6.BIN rewrite"
+                    )
+                location = self.stock_bin_entry.lba * native.USER_SECTOR + file_offset
+                if location % native.USER_SECTOR + guard_size > native.USER_SECTOR:
+                    raise AssertionError(
+                        f"guard at 0x{raw_offset:X} crosses a runtime sector"
+                    )
+                return (
+                    "disc_user",
+                    location,
+                    expected,
+                    "ROCK_X6.BIN unindexed Zero Z-Buster timing table",
+                    file_offset,
+                )
+            raise
         stock_member = self.stock_members.get(source_member.member_id)
         if stock_member is None:
             raise AssertionError(
@@ -949,13 +998,6 @@ def build_report(
                     "Tweaks rewrites zero to a 01 sentinel plus an offset+2 "
                     "companion byte, and a zero first frame can terminate the "
                     "set loop. Positive values only are admitted."
-                ),
-            },
-            "Anim04": {
-                "status": "deferred",
-                "reason": (
-                    "The Z-Buster table is not admitted until its apparent "
-                    "allocation padding and record ownership are proven."
                 ),
             },
         },
