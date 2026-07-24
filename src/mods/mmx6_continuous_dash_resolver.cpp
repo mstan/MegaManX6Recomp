@@ -128,25 +128,27 @@ void add_full(
     writes.push_back(std::move(write));
 }
 
-void add_speed_fields(
+bool add_speed_fields(
     std::vector<ModResolution::Write>& writes, uint64_t address,
-    std::string_view expected, uint32_t speed
+    std::string_view expected, uint32_t speed, std::vector<std::string>& errors
 ) {
     ModResolution::Write write;
     write.target = ModPatchTarget::MainExe;
     write.location = address;
     write.expected = hex_bytes(expected);
+    write.replacement = write.expected;
     const auto high = upper_half(speed);
     const auto low = lower_half(speed);
-    write.fields.push_back({
-        0, std::vector<uint8_t>(high.begin(), high.end())
-    });
-    write.fields.push_back({
-        4, std::vector<uint8_t>(low.begin(), low.end())
-    });
+    if (write.replacement.size() != 8) {
+        errors.push_back("continuous dash speed write has invalid guard size");
+        return false;
+    }
+    std::copy(high.begin(), high.end(), write.replacement.begin());
+    std::copy(low.begin(), low.end(), write.replacement.begin() + 4);
     write.package_id = std::string(kPackageId);
     write.feature_id = "continuous_dash_speed_normal";
     writes.push_back(std::move(write));
+    return true;
 }
 
 bool validate_package(
@@ -237,10 +239,12 @@ bool resolve_continuous_dash(
         std::move(foundation), "continuous_dash_foundation");
 
     if (normal_enabled) {
-        add_speed_fields(
-            writes, 0x8003D5A8, "0600093C00802935", normal);
-        add_speed_fields(
-            writes, 0x8003D5B0, "04000B3C00206B35", normal);
+        if (!add_speed_fields(
+                writes, 0x8003D5A8, "0600093C00802935", normal, errors))
+            return false;
+        if (!add_speed_fields(
+                writes, 0x8003D5B0, "04000B3C00206B35", normal, errors))
+            return false;
     }
     return true;
 }
