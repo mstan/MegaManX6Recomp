@@ -26,7 +26,6 @@ class PlayerStandaloneTests(unittest.TestCase):
             [
                 "DashGlobal01",
                 "GuardShellFix01",
-                "ShadowSlide01",
                 "ZeroAutoselect01",
             ],
         )
@@ -37,6 +36,10 @@ class PlayerStandaloneTests(unittest.TestCase):
         self.assertIn(
             "GUI forces HoverUnlock01",
             player._deferred_reason("HoverUnlock02"),
+        )
+        self.assertIn(
+            "ArmorByPart_Common",
+            player._deferred_reason("ShadowSlide01"),
         )
         for control in (
             "MachDashDuration02",
@@ -62,7 +65,7 @@ class PlayerStandaloneTests(unittest.TestCase):
         parsed = tomllib.loads(player.manifest_text(patches))
         self.assertEqual(parsed["format_version"], 3)
         self.assertNotIn("resolver", parsed)
-        self.assertEqual(len(parsed["feature"]), 4)
+        self.assertEqual(len(parsed["feature"]), 3)
         self.assertTrue(
             all(not feature["default_enabled"] for feature in parsed["feature"])
         )
