@@ -52,22 +52,45 @@ install test covers disabled no-op, each row alone, both rows together,
 out-of-range rejection, one-foundation ownership, and deterministic repeated
 resolution.
 
+## Blade Mach Dash state-machine resolver
+
+`mmx6.tweaks.mach-dash` represents fourteen source controls as one coherent
+left-pane behavior row. The right pane contains the three Input alternatives,
+four Stop alternatives, four Cancellation alternatives, and bounded Duration,
+Speed, and Immunity values. That shape is intentional: these controls rewrite
+the same routines and allocations, so pretending they are independent rows
+would make valid-looking combinations overwrite one another.
+
+The resolver reproduces the upstream `GuiControl` rules before emitting bytes.
+Hybrid plus No Stop resolves to Normal input and restores the stock
+Duration/Speed values; No Cancel restores stock Immunity. Operation order is
+resolved once before play. Twenty fixed source operations are composed into
+one byte map, stock guards must agree on every overlap, and the final plan owns
+each contiguous range once.
+
+The converter mechanically compares those twenty trusted C++ operations with
+the v2.6.1 source payloads, exercises five representative upstream closures,
+and audits 22 J/JAL edges. Targets must land in package-owned allocations,
+nonzero stock main-executable code, or nonzero code in `ROCK_X6.BIN` member 2
+at its proven `0x801E9800` load address. The actual runtime archive test covers
+disabled and enabled stock no-op, all options together, exact Duration/Speed/
+Immunity bytes, normalization order independence, collision-free repeated
+resolution, and every numeric boundary.
+
 ## Deliberately deferred
 
 The following IDs are not declared by package version 1.0.0:
 
 - `DashSpeedCont01`, `DashSpeedCont02` are no longer deferred; they are owned by
   the composed continuous-dash resolver above.
-- `MachDashDuration01`, `MachDashSpeed01`, `MachDashInput01` through
-  `MachDashInput03`, `MachDashWait01` through `MachDashWait04`, and
-  `MachDashCancel01` through `MachDashCancel04`: these require a coherent Blade
-  Mach Dash state model and overlap tests. Radio alternatives should become
-  three dropdown features, not mutually conflicting packages.
+- `MachDashDuration01`, `MachDashSpeed01`, `MachDashImmunity01`,
+  `MachDashInput01` through `MachDashInput03`, `MachDashWait01` through
+  `MachDashWait04`, and `MachDashCancel01` through `MachDashCancel04` are no
+  longer deferred. They are one coherent behavior in the resolver above.
 - `MachDashDuration02`, `MachDashSpeed02`, `MachDashSpeed03`: quarantined.
   The source writes do not provably target code installed by the combinations
   that expose the controls. Byte-for-byte conversion is not accepted as
   behavior proof.
-- `MachDashImmunity01`: deferred with the cancellation foundation.
 - `CutsceneSouls01`, `CutsceneSouls02`: deferred because the shared source
   foundation writes executable bytes in member 797's padded allocation outside
   its logical payload. No owner is claimed until that lifecycle is explicit.
