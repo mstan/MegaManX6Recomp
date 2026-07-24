@@ -12,16 +12,55 @@ import sys
 import tweaks_resolver as resolver
 
 
+def semantic_version_key(path: Path) -> tuple[int, int, int]:
+    parts = path.name.split(".")
+    if len(parts) != 3 or any(not part.isdigit() for part in parts):
+        raise ValueError(
+            f"package version directory is not numeric X.Y.Z: {path}"
+        )
+    return tuple(int(part) for part in parts)
+
+
+def discover_latest_reports(mods_root: Path) -> list[Path]:
+    packages = mods_root / "packages"
+    if not packages.is_dir():
+        raise ValueError(f"mods root lacks packages directory: {mods_root}")
+    reports: list[Path] = []
+    for package in sorted(path for path in packages.iterdir() if path.is_dir()):
+        versions = [
+            version
+            for version in package.iterdir()
+            if version.is_dir()
+            and (version / "conversion-report.json").is_file()
+        ]
+        if not versions:
+            continue
+        latest = max(versions, key=semantic_version_key)
+        reports.append(latest / "conversion-report.json")
+    return reports
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "reports",
-        nargs="+",
+        nargs="*",
         type=Path,
         help="conversion-report.json files whose source_controls are complete",
     )
+    parser.add_argument(
+        "--mods-root",
+        type=Path,
+        help="also use the latest installed version of every package",
+    )
     parser.add_argument("--out", type=Path)
     args = parser.parse_args()
+    report_paths = list(args.reports)
+    if args.mods_root:
+        report_paths.extend(discover_latest_reports(args.mods_root))
+    report_paths = list(dict.fromkeys(path.resolve() for path in report_paths))
+    if not report_paths:
+        raise ValueError("provide reports or --mods-root")
 
     db = resolver.TweaksDB(resolver.DEFAULT_PATCHER_SRC)
     catalog = resolver.parse_gui_catalog(resolver.DEFAULT_PATCHER_SRC, db)
@@ -33,7 +72,7 @@ def main() -> int:
 
     represented: set[str] = set()
     report_packages = []
-    for path in args.reports:
+    for path in report_paths:
         report = json.loads(path.read_text(encoding="utf-8"))
         controls = report.get("source_controls")
         if not isinstance(controls, list) or not all(

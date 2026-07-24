@@ -110,13 +110,13 @@ package reports with:
 
 ```powershell
 py -3 tools/mmx6_tweaks_coverage.py `
-  build-mod-platform/mods/packages/mmx6.tweaks.native/1.9.0/conversion-report.json `
-  build-mod-platform/assets-conversion-report.json `
+  --mods-root build-mod-platform/mods `
   --out build-mod-platform/mmx6-tweaks-coverage.json
 ```
 
-The ledger fails closed when a report lacks `source_controls`; estimates do
-not silently enter the represented count.
+The installed-package scan selects the latest numeric version of every
+package. The ledger fails closed when a discovered report lacks
+`source_controls`; estimates do not silently enter the represented count.
 
 ### Nightmare-effect toggles
 
