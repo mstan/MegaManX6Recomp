@@ -1,14 +1,18 @@
 # MMX6 Tweaks New Game composer
 
 `mmx6.tweaks.new-game` is a resolver-backed package for independently
-configurable starting-status changes. The first reviewed tranche contains 18
-of the 74 controls in MMX6 Tweaks v2.6.1's **New Game Status** tab:
+configurable starting-status changes. Version 1.1.0 contains 64 of the 74
+controls in MMX6 Tweaks v2.6.1's **New Game Status** tab:
 
 - X and Zero starting Life Up counts;
 - X and Zero starting Energy Up counts;
 - X and Zero starting Hunter Rank with the matching Soul count;
 - eight independent Heart Tank checkboxes; and
-- four independent Sub Tank checkboxes.
+- four independent Sub Tank checkboxes;
+- Shadow, Blade, Ultimate, Zero, and Black Zero availability;
+- all 16 Life Up/Energy Up part flags;
+- all 24 exposed normal, X, Zero, and limited Parts Set flags; and
+- marking Reploids that carry no item as rescued.
 
 Every item is its own left-pane feature. Upgrade counts are right-pane integer
 choices only while their feature is enabled. Disabled means the upstream
@@ -29,6 +33,9 @@ make resolution depend on feature order. The game-owned
 `src/mods/mmx6_new_game_resolver.cpp` instead registers
 `builtin:mmx6-new-game`. It reads all enabled rows, composes one final 180-byte
 template, and emits the three fully guarded foundation writes exactly once.
+Part-related rows additionally compose one adjacent, fully guarded 64-byte
+found-Reploid table. The ranges are adjacent but do not overlap:
+`0x1D9965B8..0x1D9965F7` and `0x1D9965F8..0x1D9966AB`.
 Packages cannot supply or replace this native resolver.
 
 The converted fields are:
@@ -40,6 +47,11 @@ The converted fields are:
 | `CharRank01`, `CharRank02` | `+0x5C/+0x6C`, `+0x60/+0x70` | rank byte plus its upstream-derived `u16le` Soul threshold |
 | `HeartTankAdd01..08` | `+0x88` | independent bits `0x01..0x80` |
 | `SubTankAdd01..04` | `+0x50` | independent bits `0x10..0x80` |
+| `CharAdd02..06` | `+0x34` | stock Falcon sentinel plus independent availability bits |
+| `PartsLifeUp01..08` | `+0x90` | independent bits plus matching found-Reploid entries |
+| `PartsEnergyUp01..08` | `+0xA0` | independent bits plus matching found-Reploid entries |
+| 24 exposed `PartsSet*` controls | `+0x7C..+0x81` | packed set bits plus matching found-Reploid entries |
+| `RescRepFoundNoItem01` | 64-byte table | marks every no-item Reploid as rescued |
 
 ## Generation and validation
 
@@ -54,10 +66,12 @@ The deterministic archive contains only a manifest, conversion report, and
 README. It contains no package-supplied code, declarative patch duplicates,
 asset payloads, or derived disc.
 
-The converter reparses the complete 74-control GUI catalog and writes every
-control to `source_controls` in the report as `converted` or `deferred`. For
-each converted integer it exercises minimum, interior, and maximum values. For
-each checkbox it exercises the enabled value. Every isolated result must have
+The converter reparses the complete 74-control GUI catalog. It writes the 64
+accepted strings to `source_controls` and records every catalog control as
+`converted` or `deferred` in `source_control_ledger`. For each converted
+integer it exercises minimum, interior, and maximum values. For each
+checkbox/table feature it exercises the enabled value. Every isolated result
+must have
 the exact upstream closure and must produce the same final foundation bytes.
 All-feature minimum and maximum combinations must also match upstream and
 remain identical when feature order is reversed.
@@ -72,18 +86,19 @@ py -3 -m unittest tools.test_tweaks_new_game_psxmod -v
 
 ## Deferred ledger
 
-The remaining 56 catalog controls stay visible in the conversion report rather
+The remaining 10 catalog controls stay visible in the conversion report rather
 than disappearing into a broad TODO. Important reasons include:
 
-- rescued-Reploid Life/Energy parts also synthesize `RescRepFoundTable`; their
-  foundation bits alone are not full parity;
-- character availability derives `ArmorParts`, menu defaults, and starting
-  character state;
-- rank and Soul fields must remain one feature; independent raw Soul editing is
-  intentionally not exposed;
-- Parts Set controls pack several related fields;
-- rescue marking, randomized parts, debug stage/checkpoint, and Zero debug
-  controls have state, determinism, or product-semantics questions.
+- `CharAdd01` is the stock Falcon sentinel forced by the default `CharStart`;
+  it has no independent enabled-state delta;
+- `CharStart01` couples intro armor, character availability, `ArmorParts`, and
+  a separate call-site;
+- `RescRepFoundMark01` and `RescRepFoundMarkOnly01` are dependent modifiers
+  whose standalone product semantics remain unproven;
+- Parts randomization mutates a separate 512-byte carrier table with seeded
+  shuffle semantics not yet represented by the runtime; and
+- debug stage/checkpoint and Zero debug controls are hidden behind
+  `DebugMode`; normal submitted values are no-ops.
 
 Those controls can join this package only when their complete isolated and
 combined source algebra is proven. The resolver is intentionally structured so
