@@ -916,7 +916,12 @@ def build_report(
             "b01_base_sha256": b01_sha256,
             "patcher_source_sha256": source_sha256,
         },
-        "source_controls": source_controls_report(),
+        "source_controls": sorted(
+            control.source_id
+            for feature in FEATURES
+            for control in feature.controls
+        ),
+        "source_control_details": source_controls_report(),
         "features": by_feature,
         "composition": {
             "sparse_patch_operations": len(operations),
