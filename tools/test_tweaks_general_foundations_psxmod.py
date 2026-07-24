@@ -27,6 +27,8 @@ class GeneralFoundationTests(unittest.TestCase):
             [
                 "ultimate_armor_rank_unlock",
                 "black_zero_rank_unlock",
+                "normalize_unarmored_x_defense",
+                "normalize_zero_defense",
             ],
         )
         self.assertNotIn("patch", manifest)
@@ -41,7 +43,12 @@ class GeneralFoundationTests(unittest.TestCase):
         report = foundations.report(stock)
         self.assertEqual(
             report["source_controls"],
-            ["MissRepUnlocksRank01", "MissRepUnlocksRank02"],
+            [
+                "MissRepUnlocksRank01",
+                "MissRepUnlocksRank02",
+                "LowerDef01",
+                "LowerDef02",
+            ],
         )
         self.assertEqual(
             report["validation"]["cases"]["both_rank_unlocks"][
@@ -52,6 +59,12 @@ class GeneralFoundationTests(unittest.TestCase):
                 "MissRepUnlocksRank01",
                 "MissRepUnlocksRank02",
             ],
+        )
+        self.assertEqual(
+            report["validation"]["cases"]["normalize_x_and_zero_defense"][
+                "source_closure"
+            ],
+            ["LowerDef_All_A"],
         )
         with tempfile.TemporaryDirectory(prefix="mmx6-foundations-") as temp:
             first = Path(temp) / "first.psxmod"

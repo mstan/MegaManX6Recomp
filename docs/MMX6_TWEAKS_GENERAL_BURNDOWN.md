@@ -61,10 +61,6 @@ The other accepted domains are the four ceiling-mode controls above,
   is normalized away. It needs typed ownership with dependent settings.
 - `CutsceneSouls01` and `CutsceneSouls02` write executable bytes in member 797's
   padded allocation outside its logical payload.
-- `LowerDef01` and `LowerDef02` default checked and emit no isolated source
-  writes. Their unchecked A/B corrections assume the unowned common B01
-  defense foundation, so applying those corrections directly to stock would
-  invert the source contract.
 - `MugshotCustom01` and `MugshotCustom02` are real Hunter and Dr. Light asset
   choices. Both synthesize a large shared `MugshotAssembly` closure across many
   records. They remain out until that composer proves simultaneous

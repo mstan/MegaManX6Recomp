@@ -665,6 +665,8 @@ Mission Report rank-unlock controls as independent left-pane rows:
 |---|---|---|
 | Rank UH Unlocks Ultimate Armor | `MissRepUnlocksRank01` | shared Mission Report foundation plus the Ultimate Armor unlock hook |
 | Rank UH Unlocks Black Zero | `MissRepUnlocksRank02` | shared Mission Report foundation plus the Black Zero unlock hook |
+| Normalize Unarmored X Defense | `LowerDef01` | shared Lower Defense span, X-normalized variant |
+| Normalize Zero Defense | `LowerDef02` | shared Lower Defense span, Zero-normalized variant |
 
 The source patcher writes both features through `MissRepUnlocksBase01`, so
 declarative rows would collide on the same 324-byte executable allocation.
@@ -673,19 +675,25 @@ rank-specific eight-byte hooks into their owned offsets. This preserves the
 left-pane UX: either unlock can be enabled independently, and enabling both is
 one valid composed plan rather than two conflicting patches.
 
+Version 1.1 also represents the two default-checked Lower Defense controls as
+positive modular rows. Disabled is the stock/Tweaks default where unarmored X
+and red Zero take extra damage; enabling a row normalizes that character's
+defense. Enabling both composes to the source `LowerDef_All_A` variant over
+the same guarded 12-byte span.
+
 ### Current modular coverage checkpoint
 
 After the modular New Game, domain, timing, player, title/retranslation, and
-hook packages installed in this worktree, the coverage ledger classifies 283
-of 329 unique Tweaks source controls: 272 represented and 11 explicitly
-excluded as GUI/patcher artifacts. Forty-six controls remain:
+hook packages installed in this worktree, the coverage ledger classifies 285
+of 329 unique Tweaks source controls: 274 represented and 11 explicitly
+excluded as GUI/patcher artifacts. Forty-four controls remain:
 
 | Tweaks area | Remaining controls |
 |---|---:|
 | Player Mechanics | 22 |
 | General Tweaks | 6 |
 | New Game Status | 8 |
-| Balance | 5 |
+| Balance | 3 |
 | Localization + Custom Art | 5 |
 
 ## Burndown after version 1.9

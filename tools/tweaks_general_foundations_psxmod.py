@@ -20,11 +20,13 @@ import tweaks_native_psxmod as native
 
 
 PACKAGE_ID = "mmx6.tweaks.general-foundations"
-PACKAGE_VERSION = "1.0.0"
+PACKAGE_VERSION = "1.1.0"
 RESOLVER_ID = "mmx6-general-foundations"
 SOURCE_CONTROLS = (
     "MissRepUnlocksRank01",
     "MissRepUnlocksRank02",
+    "LowerDef01",
+    "LowerDef02",
 )
 
 
@@ -69,6 +71,18 @@ def validate_source(stock_path: Path) -> dict:
                 "MissRepUnlocksRank01",
                 "MissRepUnlocksRank02",
             ),
+        ),
+        "normalize_x_defense": (
+            {"LowerDef01": "0"},
+            ("LowerDef_X_A",),
+        ),
+        "normalize_zero_defense": (
+            {"LowerDef02": "0"},
+            ("LowerDef_Zero_A",),
+        ),
+        "normalize_x_and_zero_defense": (
+            {"LowerDef01": "0", "LowerDef02": "0"},
+            ("LowerDef_All_A",),
         ),
     }
     for label, (selection, expected) in expected_closures.items():
@@ -138,6 +152,26 @@ def manifest_text() -> str:
         ),
         'group = "Mission Report"',
         "default_enabled = false",
+        "",
+        "[[feature]]",
+        'id = "normalize_unarmored_x_defense"',
+        'name = "Normalize Unarmored X Defense"',
+        (
+            'description = "Give unarmored X the same defense as armored X '
+            'and Black Zero."'
+        ),
+        'group = "Defense"',
+        "default_enabled = false",
+        "",
+        "[[feature]]",
+        'id = "normalize_zero_defense"',
+        'name = "Normalize Zero Defense"',
+        (
+            'description = "Give red Zero the same defense as armored X and '
+            'Black Zero."'
+        ),
+        'group = "Defense"',
+        "default_enabled = false",
     ]
     return "\n".join(lines) + "\n"
 
@@ -148,7 +182,7 @@ def report(stock_path: Path) -> dict:
         "package": {
             "id": PACKAGE_ID,
             "version": PACKAGE_VERSION,
-            "feature_rows": 2,
+            "feature_rows": 4,
             "resolver": f"builtin:{RESOLVER_ID}",
         },
         "source_controls": list(SOURCE_CONTROLS),
@@ -160,6 +194,12 @@ def report(stock_path: Path) -> dict:
             },
             "black_zero_rank_unlock": {
                 "source_controls": ["MissRepUnlocksRank02"],
+            },
+            "normalize_unarmored_x_defense": {
+                "source_controls": ["LowerDef01"],
+            },
+            "normalize_zero_defense": {
+                "source_controls": ["LowerDef02"],
             },
         },
         "validation": {
@@ -212,7 +252,7 @@ def inspect_package(path: Path):
             manifest["id"] != PACKAGE_ID
             or manifest["version"] != PACKAGE_VERSION
             or manifest["resolver"] != f"builtin:{RESOLVER_ID}"
-            or len(manifest["feature"]) != 2
+            or len(manifest["feature"]) != 4
         ):
             raise AssertionError("generated manifest shape changed")
         if "patch" in manifest or "overlay" in manifest:
