@@ -59,10 +59,6 @@ The other accepted domains are the four ceiling-mode controls above,
 - `LivesSwitch01` silently adds lives-display and Exit Stage helpers.
 - `IngameOptions01` is visible in the source GUI, but its standalone selection
   is normalized away. It needs typed ownership with dependent settings.
-- `MissRepUnlocksRank01` and `MissRepUnlocksRank02` independently overwrite
-  different bytes inside one Mission Report unlock foundation. Enabling both
-  naïve declarative rows produces a real collision; they need a game-owned
-  shared-foundation composer.
 - `CutsceneSouls01` and `CutsceneSouls02` write executable bytes in member 797's
   padded allocation outside its logical payload.
 - `LowerDef01` and `LowerDef02` default checked and emit no isolated source
