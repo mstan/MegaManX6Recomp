@@ -14,6 +14,7 @@ namespace {
 using namespace PSXRecompV4;
 
 constexpr std::string_view kPackageId = "mmx6.tweaks.new-game";
+constexpr std::string_view kPackageVersion = "1.1.0";
 constexpr std::string_view kResolverId = "mmx6-new-game";
 constexpr std::string_view kSharedOwner = "new_game_foundation";
 
@@ -223,6 +224,7 @@ bool resolve_new_game(
 ) {
     if (
         package.id != kPackageId ||
+        package.version != kPackageVersion ||
         package.resolver != "builtin:" + std::string(kResolverId)
     ) {
         errors.push_back("MMX6 New Game resolver package identity mismatch");
