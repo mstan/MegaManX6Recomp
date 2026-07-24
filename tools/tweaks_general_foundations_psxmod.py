@@ -20,13 +20,17 @@ import tweaks_native_psxmod as native
 
 
 PACKAGE_ID = "mmx6.tweaks.general-foundations"
-PACKAGE_VERSION = "1.2.0"
+PACKAGE_VERSION = "1.3.0"
 RESOLVER_ID = "mmx6-general-foundations"
 SOURCE_CONTROLS = (
     "MissRepUnlocksRank01",
     "MissRepUnlocksRank02",
     "LowerDef01",
     "LowerDef02",
+    "ArmorByPart01",
+    "ArmorByPart02",
+    "ArmorByPart03",
+    "ArmorByPart04",
     "CutsceneSouls01",
     "CutsceneSouls02",
 )
@@ -85,6 +89,81 @@ def validate_source(stock_path: Path) -> dict:
         "normalize_x_and_zero_defense": (
             {"LowerDef01": "0", "LowerDef02": "0"},
             ("LowerDef_All_A",),
+        ),
+        "incomplete_armors_complete": (
+            {"ArmorByPart01": "1", "ArmorByPart02": "1"},
+            (
+                "MissRepUnlocksBase01",
+                "ShadowBase01",
+                "ArmorByPart01",
+                "ArmorByPart02",
+            ),
+        ),
+        "incomplete_armors_unarmored": (
+            {"ArmorByPart01": "1", "ArmorByPart03": "1"},
+            (
+                "MissRepUnlocksBase01",
+                "ShadowBase01",
+                "ArmorByPart01",
+                "ArmorByPart03",
+            ),
+        ),
+        "incomplete_armors_complete_shadow_palette": (
+            {
+                "ArmorByPart01": "1",
+                "ArmorByPart02": "1",
+                "ArmorByPart04": "1",
+            },
+            (
+                "MissRepUnlocksBase01",
+                "ShadowBase01",
+                "ArmorByPart01",
+                "ArmorByPart02",
+                "ArmorByPart04",
+            ),
+        ),
+        "incomplete_armors_unarmored_shadow_palette": (
+            {
+                "ArmorByPart01": "1",
+                "ArmorByPart03": "1",
+                "ArmorByPart04": "1",
+            },
+            (
+                "MissRepUnlocksBase01",
+                "ShadowBase01",
+                "ArmorByPart01",
+                "ArmorByPart03",
+                "ArmorByPart04",
+            ),
+        ),
+        "incomplete_armors_lower_defense": (
+            {
+                "ArmorByPart01": "1",
+                "ArmorByPart02": "1",
+                "LowerDef01": "0",
+                "LowerDef02": "0",
+            },
+            (
+                "MissRepUnlocksBase01",
+                "ShadowBase01",
+                "ArmorByPart01",
+                "ArmorByPart02",
+                "LowerDef_All_B",
+            ),
+        ),
+        "incomplete_armors_air_dash": (
+            {
+                "ArmorByPart01": "1",
+                "ArmorByPart02": "1",
+                "DashGlobal01": "1",
+            },
+            (
+                "MissRepUnlocksBase01",
+                "ShadowBase01",
+                "ArmorByPart01",
+                "ArmorByPart02",
+                "DashGlobal01_ArmorByPart",
+            ),
         ),
         "gate_revealed_souls": (
             {"CutsceneSouls01": "256"},
@@ -192,6 +271,48 @@ def manifest_text() -> str:
         "default_enabled = false",
         "",
         "[[feature]]",
+        'id = "incomplete_armors_by_part"',
+        'name = "Incomplete Armors by Part"',
+        (
+            'description = "Allow incomplete armor sets to activate by '
+            'individual part, matching MMX6 Tweaks Armor By Part behavior."'
+        ),
+        'group = "Incomplete Armors"',
+        "default_enabled = false",
+        "",
+        "[[option]]",
+        'feature = "incomplete_armors_by_part"',
+        'id = "appearance"',
+        'label = "Appearance"',
+        (
+            'description = "Choose whether incomplete sets display their '
+            'complete armor body or unarmored X."'
+        ),
+        'group = "Incomplete Armors"',
+        'type = "choice"',
+        'default = "complete_armor"',
+        "",
+        "[[option.choice]]",
+        'value = "complete_armor"',
+        'label = "Complete Armor"',
+        "",
+        "[[option.choice]]",
+        'value = "unarmored_x"',
+        'label = "Unarmored X"',
+        "",
+        "[[option]]",
+        'feature = "incomplete_armors_by_part"',
+        'id = "shadow_saber_palette"',
+        'label = "Shadow Saber Palette"',
+        (
+            'description = "Use the Shadow Armor saber palette adjustment '
+            'included with the Armor By Part tweak."'
+        ),
+        'group = "Incomplete Armors"',
+        'type = "boolean"',
+        "default = false",
+        "",
+        "[[feature]]",
         'id = "gate_revealed_souls"',
         'name = "Gate Revealed Souls"',
         (
@@ -244,7 +365,7 @@ def report(stock_path: Path) -> dict:
         "package": {
             "id": PACKAGE_ID,
             "version": PACKAGE_VERSION,
-            "feature_rows": 6,
+            "feature_rows": 7,
             "resolver": f"builtin:{RESOLVER_ID}",
         },
         "source_controls": list(SOURCE_CONTROLS),
@@ -262,6 +383,18 @@ def report(stock_path: Path) -> dict:
             },
             "normalize_zero_defense": {
                 "source_controls": ["LowerDef02"],
+            },
+            "incomplete_armors_by_part": {
+                "source_controls": [
+                    "ArmorByPart01",
+                    "ArmorByPart02",
+                    "ArmorByPart03",
+                    "ArmorByPart04",
+                ],
+                "options": {
+                    "appearance": ["complete_armor", "unarmored_x"],
+                    "shadow_saber_palette": [False, True],
+                },
             },
             "gate_revealed_souls": {
                 "source_controls": ["CutsceneSouls01"],
@@ -330,8 +463,8 @@ def inspect_package(path: Path):
             manifest["id"] != PACKAGE_ID
             or manifest["version"] != PACKAGE_VERSION
             or manifest["resolver"] != f"builtin:{RESOLVER_ID}"
-            or len(manifest["feature"]) != 6
-            or len(manifest.get("option", [])) != 2
+            or len(manifest["feature"]) != 7
+            or len(manifest.get("option", [])) != 4
         ):
             raise AssertionError("generated manifest shape changed")
         if "patch" in manifest or "overlay" in manifest:

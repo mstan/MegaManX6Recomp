@@ -48,7 +48,7 @@ class PlayerStandaloneTests(unittest.TestCase):
         ):
             self.assertIn("quarantined", player._deferred_reason(control))
 
-    def test_manifest_is_default_disabled_and_has_no_resolver(self) -> None:
+    def test_manifest_is_default_disabled_and_resolver_backed(self) -> None:
         patches = (
             player.FixedPatch(
                 "unlock_x_air_dash",
@@ -64,13 +64,12 @@ class PlayerStandaloneTests(unittest.TestCase):
         )
         parsed = tomllib.loads(player.manifest_text(patches))
         self.assertEqual(parsed["format_version"], 3)
-        self.assertNotIn("resolver", parsed)
+        self.assertEqual(parsed["resolver"], f"builtin:{player.RESOLVER_ID}")
         self.assertEqual(len(parsed["feature"]), 3)
         self.assertTrue(
             all(not feature["default_enabled"] for feature in parsed["feature"])
         )
-        self.assertEqual(parsed["patch"][0]["expected"], "0102")
-        self.assertEqual(parsed["patch"][0]["replace"], "0304")
+        self.assertNotIn("patch", parsed)
 
     def test_disjointness_fails_closed(self) -> None:
         first = player.FixedPatch(

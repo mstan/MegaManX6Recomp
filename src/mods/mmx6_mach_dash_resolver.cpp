@@ -303,9 +303,11 @@ bool validate(
 
 bool resolve_mach_dash(
     const ModPackage& package, const ModSelection& selection,
+    const PSXRecompV4::ModBuiltinResolverContext& context,
     std::vector<ModResolution::Write>& writes,
     std::vector<std::string>& errors
 ) {
+    (void)context;
     if (!validate(package, errors)) return false;
     for (const auto& [id, feature] : selection.features) {
         if (id != kFeatureId) {

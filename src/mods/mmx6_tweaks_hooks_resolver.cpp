@@ -223,8 +223,10 @@ void append_write(std::vector<ModResolution::Write>& writes,
 }
 
 bool resolve_impl(const ModPackage& package, const ModSelection& selection,
+                  const PSXRecompV4::ModBuiltinResolverContext& context,
                   std::vector<ModResolution::Write>& writes,
                   std::vector<std::string>& errors) {
+    (void)context;
     if (!validate_package(package, errors)) return false;
     if (!selection.values.empty() ||
         (!selection.version.empty() &&
@@ -299,11 +301,12 @@ bool resolve_impl(const ModPackage& package, const ModSelection& selection,
 
 bool resolve_tweaks_hooks(
     const ModPackage& package, const ModSelection& selection,
+    const PSXRecompV4::ModBuiltinResolverContext& context,
     std::vector<ModResolution::Write>& writes,
     std::vector<std::string>& errors) {
     const size_t write_begin = writes.size();
     const size_t error_begin = errors.size();
-    if (resolve_impl(package, selection, writes, errors)) return true;
+    if (resolve_impl(package, selection, context, writes, errors)) return true;
     writes.resize(write_begin);
     if (errors.size() == error_begin)
         fail(package, errors, "trusted resolver failed");

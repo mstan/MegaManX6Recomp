@@ -11,6 +11,7 @@ inline constexpr const char* kTweaksHooksResolverId = "mmx6.tweaks.hooks";
 bool resolve_tweaks_hooks(
     const PSXRecompV4::ModPackage& package,
     const PSXRecompV4::ModSelection& selection,
+    const PSXRecompV4::ModBuiltinResolverContext& context,
     std::vector<PSXRecompV4::ModResolution::Write>& writes,
     std::vector<std::string>& errors);
 

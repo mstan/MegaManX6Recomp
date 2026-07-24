@@ -29,17 +29,23 @@ class GeneralFoundationTests(unittest.TestCase):
                 "black_zero_rank_unlock",
                 "normalize_unarmored_x_defense",
                 "normalize_zero_defense",
+                "incomplete_armors_by_part",
                 "gate_revealed_souls",
                 "gate_revealed_refight_souls",
             ],
         )
         self.assertEqual(
             [option["feature"] for option in manifest["option"]],
-            ["gate_revealed_souls", "gate_revealed_refight_souls"],
+            [
+                "incomplete_armors_by_part",
+                "incomplete_armors_by_part",
+                "gate_revealed_souls",
+                "gate_revealed_refight_souls",
+            ],
         )
         self.assertEqual(
-            [option["default"] for option in manifest["option"]],
-            [256, 256],
+            [str(option["default"]).lower() for option in manifest["option"]],
+            ["complete_armor", "false", "256", "256"],
         )
         self.assertNotIn("patch", manifest)
         self.assertNotIn("overlay", manifest)
@@ -58,6 +64,10 @@ class GeneralFoundationTests(unittest.TestCase):
                 "MissRepUnlocksRank02",
                 "LowerDef01",
                 "LowerDef02",
+                "ArmorByPart01",
+                "ArmorByPart02",
+                "ArmorByPart03",
+                "ArmorByPart04",
                 "CutsceneSouls01",
                 "CutsceneSouls02",
             ],
@@ -71,6 +81,41 @@ class GeneralFoundationTests(unittest.TestCase):
                 "MissRepUnlocksBase01",
                 "MissRepUnlocksRank01",
                 "MissRepUnlocksRank02",
+            ],
+        )
+        self.assertEqual(
+            report["validation"]["cases"]["incomplete_armors_complete"][
+                "source_closure"
+            ],
+            [
+                "MissRepUnlocksBase01",
+                "ShadowBase01",
+                "ArmorByPart01",
+                "ArmorByPart02",
+            ],
+        )
+        self.assertEqual(
+            report["validation"]["cases"]["incomplete_armors_lower_defense"][
+                "source_closure"
+            ],
+            [
+                "MissRepUnlocksBase01",
+                "ShadowBase01",
+                "ArmorByPart01",
+                "ArmorByPart02",
+                "LowerDef_All_B",
+            ],
+        )
+        self.assertEqual(
+            report["validation"]["cases"]["incomplete_armors_air_dash"][
+                "source_closure"
+            ],
+            [
+                "MissRepUnlocksBase01",
+                "ShadowBase01",
+                "ArmorByPart01",
+                "ArmorByPart02",
+                "DashGlobal01_ArmorByPart",
             ],
         )
         self.assertEqual(
