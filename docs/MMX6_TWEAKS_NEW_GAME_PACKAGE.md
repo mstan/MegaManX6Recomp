@@ -1,7 +1,7 @@
 # MMX6 Tweaks New Game composer
 
 `mmx6.tweaks.new-game` is a resolver-backed package for independently
-configurable starting-status changes. Version 1.3.0 contains 67 of the 74
+configurable starting-status changes. Version 1.4.0 contains 70 of the 74
 controls in MMX6 Tweaks v2.6.1's **New Game Status** tab:
 
 - X and Zero starting Life Up counts;
@@ -14,7 +14,9 @@ controls in MMX6 Tweaks v2.6.1's **New Game Status** tab:
 - all 24 exposed normal, X, Zero, and limited Parts Set flags;
 - marking Reploids that carry no item as rescued; and
 - found-Reploid status modifiers, including mark-only behavior for Parts Set
-  rows.
+  rows; and
+- deterministic Reploid-carried Parts randomization, represented as one row
+  with a right-pane mode dropdown.
 
 Every item is its own left-pane feature. Upgrade counts are right-pane integer
 choices only while their feature is enabled. Disabled means the upstream
@@ -36,8 +38,11 @@ make resolution depend on feature order. The game-owned
 `builtin:mmx6-new-game`. It reads all enabled rows, composes one final 180-byte
 template, and emits the three fully guarded foundation writes exactly once.
 Part-related rows additionally compose one adjacent, fully guarded 64-byte
-found-Reploid table. The ranges are adjacent but do not overlap:
-`0x1D9965B8..0x1D9965F7` and `0x1D9965F8..0x1D9966AB`.
+found-Reploid table. The randomizer also emits the reviewed 396-byte prefix of
+the Reploid parts carrier table at `0x8006D674`; the remaining stock tail is
+preserved because the Tweaks source emits only that prefix. The found-Reploid
+table is composed against the full deterministic virtual shuffle, matching the
+ported source algebra.
 Packages cannot supply or replace this native resolver.
 
 The converted fields are:
@@ -56,6 +61,7 @@ The converted fields are:
 | `RescRepFoundNoItem01` | 64-byte table | marks every no-item Reploid as rescued |
 | `RescRepFoundMark01` | 64-byte table | changes matching found-Reploid entries from rescued to dead or missing |
 | `RescRepFoundMarkOnly01` | 64-byte table | marks selected Parts Set Reploids without granting those parts |
+| `PartsRandomTitle01/01/02` | 396-byte carrier-table prefix | one deterministic randomizer row with `only_parts` and `all_reploids` modes |
 
 ## Generation and validation
 
@@ -70,9 +76,9 @@ The deterministic archive contains only a manifest, conversion report, and
 README. It contains no package-supplied code, declarative patch duplicates,
 asset payloads, or derived disc.
 
-The converter reparses the complete 74-control GUI catalog. It writes the 67
+The converter reparses the complete 74-control GUI catalog. It writes the 70
 accepted strings to `source_controls` and records every catalog control as
-`converted` or `deferred` in `source_control_ledger`. For each converted
+`converted` or `excluded` in `source_control_ledger`. For each converted
 integer it exercises minimum, interior, and maximum values. For each
 checkbox/table feature it exercises the enabled value. Every isolated result
 must have
@@ -88,21 +94,16 @@ $env:PSXRECOMP_RUNTIME_INCLUDE = "F:\path\psxrecomp\runtime\include"
 py -3 -m unittest tools.test_tweaks_new_game_psxmod -v
 ```
 
-## Deferred ledger
+## Excluded ledger
 
-The remaining 7 catalog controls stay visible in the conversion report rather
+The remaining 4 catalog controls stay visible in the conversion report rather
 than disappearing into a broad TODO. Important reasons include:
 
 - `CharAdd01` is the stock Falcon sentinel forced by the default `CharStart`;
   it has no independent enabled-state delta;
-- `CharStart01` couples intro armor, character availability, `ArmorParts`, and
-  a separate call-site;
-- Parts randomization mutates a separate 512-byte carrier table with seeded
-  shuffle semantics not yet represented by the runtime; and
 - debug stage/checkpoint and Zero debug controls are hidden behind
   `DebugMode`; normal submitted values are no-ops.
 
-Those controls can join this package only when their complete isolated and
-combined source algebra is proven. The resolver is intentionally structured so
-new reviewed fields can be added to the one shared template without changing
-the independence of existing rows.
+There are no deferred New Game Status controls after version 1.4. The resolver
+is intentionally structured so new reviewed fields can be added to the one
+shared template without changing the independence of existing rows.

@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import random
 import re
 import struct
 import sys
@@ -24,7 +25,7 @@ import tweaks_native_psxmod as native
 
 
 PACKAGE_ID = "mmx6.tweaks.new-game"
-PACKAGE_VERSION = "1.3.0"
+PACKAGE_VERSION = "1.4.0"
 RESOLVER_ID = "mmx6-new-game"
 FOUNDATION_RAWS = (0x1D930B9C, 0x1D9965F8, 0x1D99A630)
 INTRO_ARMOR_RAW = 0x1D930B4C
@@ -35,6 +36,9 @@ INTRO_ARMOR_HOOK = bytes.fromhex(
 )
 FOUND_TABLE_RAW = 0x1D9965B8
 FOUND_TABLE_SIZE = 64
+PARTS_TABLE_RAW = 0x1D98BBFC
+PARTS_TABLE_SIZE = 512
+PARTS_TABLE_WRITE_SIZE = PARTS_TABLE_SIZE
 NO_ITEM_FOUND_TABLE = bytes.fromhex(
     "2020202202222220222000222220022202222222022200202222022222000220"
     "2222202020222002222222200202022020222220222002202202222002202022"
@@ -219,6 +223,13 @@ FEATURES = (
         "mark_only",
         -1,
     ),
+    Feature(
+        "randomize_reploid_parts",
+        "Randomize Reploid Parts",
+        "PartsRandomTitle01",
+        "parts_randomizer",
+        -1,
+    ),
 )
 FEATURE_BY_ID = {item.feature_id: item for item in FEATURES}
 RANK_VALUES = {
@@ -240,6 +251,19 @@ FOUND_MARK_VALUES = {
     "dead": ("DEAD", "Dead", 0x03),
     "missing": ("MISSING", "Missing", 0x04),
 }
+PARTS_RANDOM_VALUES = {
+    "only_parts": (
+        "PartsRandom01",
+        "Between Reploids already carrying Parts",
+    ),
+    "all_reploids": (
+        "PartsRandom02",
+        "Between all Reploids",
+    ),
+}
+PARTS_RANDOM_SOURCE_CONTROLS = (
+    "PartsRandomTitle01", "PartsRandom01", "PartsRandom02",
+)
 
 
 def sha256(data: bytes) -> str:
@@ -249,6 +273,108 @@ def sha256(data: bytes) -> str:
 def file_sha256(path: Path) -> str:
     with path.open("rb") as source:
         return hashlib.file_digest(source, "sha256").hexdigest()
+
+
+def _source_db():
+    return engine.twr.TweaksDB(engine.twr.DEFAULT_PATCHER_SRC)
+
+
+def _table_entries(name: str) -> tuple[str, ...]:
+    entries = tuple(
+        item.strip()
+        for item in _source_db().dat[name].splitlines()
+        if item.strip()
+    )
+    if any(len(item) != 8 for item in entries):
+        raise AssertionError(f"{name} contains a non-u32 table entry")
+    return entries
+
+
+def parts_table_original() -> tuple[str, ...]:
+    entries = _table_entries("RescRepPartsTable_Original")
+    if len(entries) != 128:
+        raise AssertionError("RescRepPartsTable_Original changed size")
+    return entries
+
+
+def parts_table_only_parts() -> tuple[str, ...]:
+    entries = _table_entries("RescRepPartsTable_OnlyParts")
+    if len(entries) != 40:
+        raise AssertionError("RescRepPartsTable_OnlyParts changed size")
+    return entries
+
+
+def parts_table_no_part_indices() -> set[int]:
+    result = {
+        int(item)
+        for item in _source_db().dat["RescRepParts_NoPartsIndex"].split(",")
+        if item.strip()
+    }
+    if len(result) != 88:
+        raise AssertionError("RescRepParts_NoPartsIndex changed size")
+    return result
+
+
+def random_parts_table(mode: str) -> tuple[str, ...]:
+    if mode not in PARTS_RANDOM_VALUES:
+        raise AssertionError(f"unsupported randomizer mode: {mode}")
+    rng = random.Random(engine.DEFAULT_PARTS_SEED)
+    if mode == "all_reploids":
+        table = list(parts_table_original())
+        rng.shuffle(table)
+        return tuple(table)
+    shuffled = list(parts_table_only_parts())
+    rng.shuffle(shuffled)
+    no_part_indices = parts_table_no_part_indices()
+    iterator = iter(shuffled)
+    return tuple(
+        "00000000" if index in no_part_indices else next(iterator)
+        for index in range(1, 129)
+    )
+
+
+def parts_table_bytes(table: tuple[str, ...]) -> bytes:
+    if len(table) != 128 or any(len(item) != 8 for item in table):
+        raise AssertionError("invalid Reploid parts table shape")
+    return bytes.fromhex("".join(table))
+
+
+def parts_table_final_image(virtual_table: tuple[str, ...], active: bool) -> bytes:
+    original = bytearray(parts_table_bytes(parts_table_original()))
+    if active:
+        original[:PARTS_TABLE_WRITE_SIZE] = parts_table_bytes(
+            virtual_table
+        )[:PARTS_TABLE_WRITE_SIZE]
+    return bytes(original)
+
+
+def selected_random_mode(selection: dict[str, object]) -> str | None:
+    value = selection.get("randomize_reploid_parts")
+    if value is None:
+        return None
+    if isinstance(value, dict):
+        value = value.get("mode", "only_parts")
+    mode = str(value)
+    if mode not in PARTS_RANDOM_VALUES:
+        raise AssertionError(f"unsupported randomizer mode: {mode}")
+    return mode
+
+
+def carrier_table_for_selection(selection: dict[str, object]) -> tuple[str, ...]:
+    mode = selected_random_mode(selection)
+    return parts_table_original() if mode is None else random_parts_table(mode)
+
+
+def part_code_by_feature() -> dict[str, str]:
+    db = _source_db()
+    return {
+        feature.feature_id: db.dat[feature.source_control + "_Code"].strip()
+        for feature in FEATURES
+        if (
+            feature.source_control.startswith("PartsSet")
+            and feature.source_control + "_Code" in db.dat
+        )
+    }
 
 
 def source_catalog(db) -> list[str]:
@@ -299,6 +425,14 @@ def source_selection(feature: Feature, value=1) -> dict[str, str]:
         source_value = CHAR_START_VALUES[str(value)][0]
     elif feature.kind == "mark_status":
         source_value = FOUND_MARK_VALUES[str(value)][0]
+    elif feature.kind == "parts_randomizer":
+        mode = str(value)
+        source_control = PARTS_RANDOM_VALUES[mode][0]
+        return {
+            "PartsRandomTitle01": "1",
+            "PartsRandom01": "1" if source_control == "PartsRandom01" else "0",
+            "PartsRandom02": "1" if source_control == "PartsRandom02" else "0",
+        }
     else:
         source_value = (
             value
@@ -310,9 +444,9 @@ def source_selection(feature: Feature, value=1) -> dict[str, str]:
     }
 
 
-def compose_state(
+def compose_full_state(
     selection: dict[str, object], base: bytes
-) -> tuple[bytes, bytes]:
+) -> tuple[bytes, bytes, bytes, bool]:
     template = bytearray(base)
     found_table = bytearray(FOUND_TABLE_SIZE)
     masks: dict[int, int] = {}
@@ -335,6 +469,49 @@ def compose_state(
             high = (mark << 4) if (value & 0x20) else 0
             result[index] = low | high
         return bytes(result)
+
+    def found_table_from_carrier(table: tuple[str, ...]) -> tuple[bytes, bool]:
+        selected_codes = {
+            code
+            for feature_id, code in part_code_by_feature().items()
+            if feature_id in selection
+        }
+        selected_life = {
+            int(feature_id.rsplit("_", 1)[1])
+            for feature_id in selection
+            if feature_id.startswith("parts_life_up_")
+        }
+        selected_energy = {
+            int(feature_id.rsplit("_", 1)[1])
+            for feature_id in selection
+            if feature_id.startswith("parts_energy_up_")
+        }
+        no_item = "mark_no_item_reploids" in selection
+        active = bool(selected_codes or selected_life or selected_energy or no_item)
+        if not active:
+            return bytes(FOUND_TABLE_SIZE), False
+        nibbles: list[int] = []
+        life_index = 0
+        energy_index = 0
+        for entry in table:
+            if entry in selected_codes:
+                nibbles.append(mark)
+            elif entry == "00000000" and no_item:
+                nibbles.append(mark)
+            elif entry == "01000000":
+                life_index += 1
+                nibbles.append(mark if life_index in selected_life else 0)
+            elif entry == "02000000":
+                energy_index += 1
+                nibbles.append(mark if energy_index in selected_energy else 0)
+            else:
+                nibbles.append(0)
+        if len(nibbles) != 128:
+            raise AssertionError("invalid found-table nibble count")
+        return bytes(
+            (nibbles[index + 1] << 4) | nibbles[index]
+            for index in range(0, len(nibbles), 2)
+        ), True
 
     for feature_id in sorted(selection):
         feature = FEATURE_BY_ID[feature_id]
@@ -361,7 +538,7 @@ def compose_state(
         elif feature.kind == "table":
             for offset, value in enumerate(remark_table(NO_ITEM_FOUND_TABLE)):
                 found_table[offset] |= value
-        elif feature.kind in {"mark_status", "mark_only"}:
+        elif feature.kind in {"mark_status", "mark_only", "parts_randomizer"}:
             pass
         else:
             if not (
@@ -384,7 +561,26 @@ def compose_state(
             template[0x4C] |= 0xF0
         if "available_blade_armor" in selection:
             template[0x4C] |= 0x0F
-    return bytes(template), bytes(found_table)
+    parts_table = carrier_table_for_selection(selection)
+    parts_table_active = selected_random_mode(selection) is not None
+    if parts_table_active:
+        found_table_bytes, _active = found_table_from_carrier(parts_table)
+        found_table = bytearray(found_table_bytes)
+    return (
+        bytes(template),
+        bytes(found_table),
+        parts_table_final_image(parts_table, parts_table_active),
+        parts_table_active,
+    )
+
+
+def compose_state(
+    selection: dict[str, object], base: bytes
+) -> tuple[bytes, bytes]:
+    template, found_table, _parts_table, _parts_active = compose_full_state(
+        selection, base
+    )
+    return template, found_table
 
 
 def compose_template(selection: dict[str, object], base: bytes) -> bytes:
@@ -396,7 +592,7 @@ def upstream_final_writes(db, profile: dict, selection: dict[str, str]):
     patchfile, writes = engine.build_writelist(db, merged, profile)
     owned = {}
     for data, raw in writes:
-        if raw == FOUND_TABLE_RAW or raw in FOUNDATION_RAWS or (
+        if raw in {FOUND_TABLE_RAW, PARTS_TABLE_RAW} or raw in FOUNDATION_RAWS or (
             FOUNDATION_RAWS[1] <= raw < FOUNDATION_RAWS[1] + 180
         ):
             owned[raw] = bytes.fromhex(data)
@@ -408,14 +604,16 @@ def upstream_final_writes(db, profile: dict, selection: dict[str, str]):
 def apply_owned_writes(
     foundation: tuple[bytes, bytes, bytes],
     writes: list[tuple[str, int]],
-) -> tuple[bytes, bytes, bytes, bytes]:
+) -> tuple[bytes, bytes, bytes, bytes, bytes]:
     first, middle, third = map(bytearray, foundation)
     found_table = bytearray(FOUND_TABLE_SIZE)
+    parts_table = bytearray(parts_table_bytes(parts_table_original()))
     buffers = [
         (FOUNDATION_RAWS[0], first),
         (FOUNDATION_RAWS[1], middle),
         (FOUNDATION_RAWS[2], third),
         (FOUND_TABLE_RAW, found_table),
+        (PARTS_TABLE_RAW, parts_table),
     ]
     for data_hex, raw in writes:
         data = bytes.fromhex(data_hex)
@@ -423,7 +621,10 @@ def apply_owned_writes(
             if begin <= raw and raw + len(data) <= begin + len(buffer):
                 buffer[raw - begin : raw - begin + len(data)] = data
                 break
-    return bytes(first), bytes(middle), bytes(third), bytes(found_table)
+    return (
+        bytes(first), bytes(middle), bytes(third),
+        bytes(found_table), bytes(parts_table),
+    )
 
 
 def validate_source_parity(db, profile: dict, foundation):
@@ -441,6 +642,8 @@ def validate_source_parity(db, profile: dict, foundation):
             values = tuple(CHAR_START_VALUES)
         elif feature.kind == "mark_status":
             values = tuple(FOUND_MARK_VALUES)
+        elif feature.kind == "parts_randomizer":
+            values = tuple(PARTS_RANDOM_VALUES)
         else:
             values = (1,)
         cases = []
@@ -501,6 +704,13 @@ def validate_source_parity(db, profile: dict, foundation):
                 if feature.kind == "mark_only"
                 else [
                     "NewGame",
+                    "PartsRandomTitle01",
+                    PARTS_RANDOM_VALUES[str(value)][0],
+                    "RescRepPartsTable",
+                ]
+                if feature.kind == "parts_randomizer"
+                else [
+                    "NewGame",
                     "HeartTankAdd"
                     if feature.field_offset == 0x88
                     else "SubtankAdd"
@@ -524,6 +734,8 @@ def validate_source_parity(db, profile: dict, foundation):
                 }
             elif feature.kind == "mark_only":
                 expected_synth = {"RescRepFoundTable"}
+            elif feature.kind == "parts_randomizer":
+                expected_synth = {"RescRepPartsTable"}
             elif feature.table_offset >= 0:
                 if feature.source_control.startswith("PartsSet"):
                     expected_owned += [
@@ -543,11 +755,11 @@ def validate_source_parity(db, profile: dict, foundation):
                 )
             writes, _ = upstream_final_writes(db, profile, selection)
             final = apply_owned_writes(foundation, writes)
-            composed, found_table = compose_state(
+            composed, found_table, parts_table, _parts_table_active = compose_full_state(
                 composer_selection, foundation[1]
             )
             if final != (
-                foundation[0], composed, foundation[2], found_table
+                foundation[0], composed, foundation[2], found_table, parts_table
             ):
                 raise AssertionError(
                     f"{feature.source_control}={value} composer parity failed"
@@ -581,6 +793,8 @@ def validate_combinations(db, profile: dict, foundation):
                 if item.kind == "choice"
                 else "dead"
                 if item.kind == "mark_status"
+                else "only_parts"
+                if item.kind == "parts_randomizer"
                 else 1
             )
             for item in FEATURES
@@ -595,6 +809,8 @@ def validate_combinations(db, profile: dict, foundation):
                 if item.kind == "choice"
                 else "missing"
                 if item.kind == "mark_status"
+                else "all_reploids"
+                if item.kind == "parts_randomizer"
                 else 1
             )
             for item in FEATURES
@@ -608,11 +824,12 @@ def validate_combinations(db, profile: dict, foundation):
         writes, _ = upstream_final_writes(db, profile, source)
         final = apply_owned_writes(foundation, writes)
         composed = compose_state(values, foundation[1])
+        full = compose_full_state(values, foundation[1])
         reverse = compose_state(
             dict(reversed(list(values.items()))), foundation[1]
         )
         if final != (
-            foundation[0], composed[0], foundation[2], composed[1]
+            foundation[0], full[0], foundation[2], full[1], full[2]
         ):
             raise AssertionError(f"{label} combination parity failed")
         if reverse != composed:
@@ -678,9 +895,40 @@ def build_report(stock_path: Path) -> dict:
             "expected": table_expected.hex().upper(),
             "expected_sha256": sha256(table_expected),
         }
+        parts_user_offset = native.raw_to_user_offset(PARTS_TABLE_RAW)
+        parts_entry, parts_file_offset = stock_image.containing_file(
+            parts_user_offset, PARTS_TABLE_WRITE_SIZE
+        )
+        if parts_entry.name != native.SLUS_NAME:
+            raise AssertionError("Reploid parts table left main executable")
+        parts_expected = stock_image.read_user(
+            parts_user_offset, PARTS_TABLE_WRITE_SIZE
+        )
+        expected_original = parts_table_bytes(parts_table_original())
+        if parts_expected != expected_original[:PARTS_TABLE_WRITE_SIZE]:
+            raise AssertionError("stock Reploid parts table changed")
+        parts_guard = {
+            "source_raw_offset": PARTS_TABLE_RAW,
+            "guest_address": load_address + parts_file_offset - 2048,
+            "size": PARTS_TABLE_WRITE_SIZE,
+            "expected": parts_expected.hex().upper(),
+            "expected_sha256": sha256(parts_expected),
+            "default_seed": engine.DEFAULT_PARTS_SEED,
+            "only_parts_sha256": sha256(
+                parts_table_bytes(random_parts_table("only_parts"))[
+                    :PARTS_TABLE_WRITE_SIZE
+                ]
+            ),
+            "all_reploids_sha256": sha256(
+                parts_table_bytes(random_parts_table("all_reploids"))[
+                    :PARTS_TABLE_WRITE_SIZE
+                ]
+            ),
+        }
     evidence = validate_source_parity(db, profile, foundation)
     combinations = validate_combinations(db, profile, foundation)
     converted = {item.source_control for item in FEATURES}
+    converted.update(PARTS_RANDOM_SOURCE_CONTROLS)
     excluded = {
         "CharAdd01": (
             "Falcon Armor availability is already the stock New Game state; "
@@ -701,18 +949,6 @@ def build_report(stock_path: Path) -> dict:
         ),
     }
     def deferred_reason(control: str) -> str:
-        if control.startswith("PartsRandom"):
-            return (
-                "seeded shuffle mutates the separate 512-byte carrier table; "
-                "runtime seed and persistence semantics remain unspecified"
-            )
-        if control in {
-            "RescRepFoundMark01", "RescRepFoundMarkOnly01",
-        }:
-            return (
-                "modifier changes found-table algebra only with other "
-                "part selections; coherent standalone product semantics unproven"
-            )
         return "source closure is not fully proven by this tranche"
 
     ledger = [
@@ -780,6 +1016,7 @@ def build_report(stock_path: Path) -> dict:
         ],
         "composed_resources": {
             "found_reploid_table": table_guard,
+            "reploid_parts_table": parts_guard,
         },
         "features": evidence,
         "source_controls": sorted(converted),
@@ -901,6 +1138,28 @@ def build_manifest(version: str) -> str:
                     f"value = {q(value)}",
                     f"label = {q(label)}",
                 ]
+        elif feature.kind == "parts_randomizer":
+            lines += [
+                "",
+                "[[option]]",
+                f"feature = {q(feature.feature_id)}",
+                'id = "mode"',
+                'label = "Mode"',
+                (
+                    'description = "Which Reploid slots participate in the '
+                    'deterministic shuffle."'
+                ),
+                'group = "New Game Status"',
+                'type = "choice"',
+                'default = "only_parts"',
+            ]
+            for value, (_source, label) in PARTS_RANDOM_VALUES.items():
+                lines += [
+                    "",
+                    "[[option.choice]]",
+                    f"value = {q(value)}",
+                    f"label = {q(label)}",
+                ]
     return "\n".join(lines) + "\n"
 
 
@@ -969,7 +1228,7 @@ def main() -> int:
         "sha256": sha256(first),
         "archive_members": members,
         "features": len(FEATURES),
-        "converted_source_controls": len(FEATURES),
+        "converted_source_controls": report["package"]["source_control_count"],
         "excluded_source_controls": report["package"]["excluded_control_count"],
         "deferred_source_controls": report["package"]["deferred_control_count"],
     }, indent=2, sort_keys=True))
