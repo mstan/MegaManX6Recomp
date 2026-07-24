@@ -435,8 +435,8 @@ py -3 tools/tweaks_player_standalone_psxmod.py `
 The conversion report carries a string-only `source_controls` ledger for the
 three admitted controls plus a 49-control Player Mechanics decision ledger.
 Mach Dash, continuous dash, and Zero-technique state machines are named as
-separate resolver domains; `Anim0301`, `Anim0401` through `Anim0407`, and the
-three quarantined Mach Dash scalars remain explicit non-admissions.
+separate resolver domains; `Anim0301` and `Anim0401` through `Anim0407` are
+handled by the timing package.
 
 ### Exhausted low-risk static and bounded-choice tranche
 
@@ -693,14 +693,14 @@ either threshold is non-stock. Each enabled row exposes a bounded integer
 ### Current modular coverage checkpoint
 
 After the modular New Game, domain, timing, player, title/retranslation, and
-hook packages installed in this worktree, the coverage ledger classifies 292
-of 329 unique Tweaks source controls: 278 represented and 14 explicitly
-excluded as GUI/patcher artifacts or source no-ops. Thirty-seven controls
+hook packages installed in this worktree, the coverage ledger classifies 295
+of 329 unique Tweaks source controls: 281 represented and 14 explicitly
+excluded as GUI/patcher artifacts or source no-ops. Thirty-four controls
 remain:
 
 | Tweaks area | Remaining controls |
 |---|---:|
-| Player Mechanics | 22 |
+| Player Mechanics | 19 |
 | General Tweaks | 6 |
 | New Game Status | 3 |
 | Balance | 1 |
