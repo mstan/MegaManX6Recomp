@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import sys
 import tempfile
 import unittest
@@ -60,6 +61,56 @@ class InstalledReportDiscoveryTests(unittest.TestCase):
             report.write_text("{}\n", encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "numeric X.Y.Z"):
                 coverage.discover_latest_reports(root)
+
+
+class ReportLedgerTests(unittest.TestCase):
+    def write_report(self, root: Path, name: str, value: dict) -> Path:
+        path = root / name
+        path.write_text(json.dumps(value), encoding="utf-8")
+        return path
+
+    def test_collects_distinct_implemented_and_excluded_controls(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            report = self.write_report(
+                root,
+                "report.json",
+                {
+                    "package_version": "1.0.0",
+                    "source_controls": ["Implemented01"],
+                    "excluded_source_controls": [
+                        {
+                            "source_control": "InternalWidget01",
+                            "reason": "GUI navigation state, not a game tweak",
+                        }
+                    ],
+                },
+            )
+            represented, excluded, packages = (
+                coverage.collect_report_ledgers([report])
+            )
+            self.assertEqual(represented, {"Implemented01"})
+            self.assertEqual(
+                excluded,
+                {"InternalWidget01": "GUI navigation state, not a game tweak"},
+            )
+            self.assertEqual(packages[0]["excluded_source_controls"], 1)
+
+    def test_rejects_overlap_between_implemented_and_excluded(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            report = self.write_report(
+                root,
+                "report.json",
+                {
+                    "source_controls": ["Same01"],
+                    "excluded_source_controls": [
+                        {"source_control": "Same01", "reason": "invalid overlap"}
+                    ],
+                },
+            )
+            with self.assertRaisesRegex(ValueError, "both represented"):
+                coverage.collect_report_ledgers([report])
 
 
 if __name__ == "__main__":
