@@ -655,17 +655,35 @@ archive. Remaining New Game controls are deferred only where semantics are not
 yet product-ready: debug starts, random starting parts, found-Reploid mark
 algebra, and `ZeroDebug`.
 
+### General shared-foundation package
+
+`tools/tweaks_general_foundations_psxmod.py` produces the resolver-backed
+`mmx6.tweaks.general-foundations` package. Version 1.0 represents the two
+Mission Report rank-unlock controls as independent left-pane rows:
+
+| Feature row | Tweaks control | Runtime composition |
+|---|---|---|
+| Rank UH Unlocks Ultimate Armor | `MissRepUnlocksRank01` | shared Mission Report foundation plus the Ultimate Armor unlock hook |
+| Rank UH Unlocks Black Zero | `MissRepUnlocksRank02` | shared Mission Report foundation plus the Black Zero unlock hook |
+
+The source patcher writes both features through `MissRepUnlocksBase01`, so
+declarative rows would collide on the same 324-byte executable allocation.
+The resolver emits that foundation exactly once and composes the two
+rank-specific eight-byte hooks into their owned offsets. This preserves the
+left-pane UX: either unlock can be enabled independently, and enabling both is
+one valid composed plan rather than two conflicting patches.
+
 ### Current modular coverage checkpoint
 
 After the modular New Game, domain, timing, player, title/retranslation, and
-hook packages installed in this worktree, the coverage ledger classifies 281
-of 329 unique Tweaks source controls: 270 represented and 11 explicitly
-excluded as GUI/patcher artifacts. Forty-eight controls remain:
+hook packages installed in this worktree, the coverage ledger classifies 283
+of 329 unique Tweaks source controls: 272 represented and 11 explicitly
+excluded as GUI/patcher artifacts. Forty-six controls remain:
 
 | Tweaks area | Remaining controls |
 |---|---:|
 | Player Mechanics | 22 |
-| General Tweaks | 8 |
+| General Tweaks | 6 |
 | New Game Status | 8 |
 | Balance | 5 |
 | Localization + Custom Art | 5 |

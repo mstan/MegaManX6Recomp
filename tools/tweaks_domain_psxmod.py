@@ -231,16 +231,6 @@ GENERAL = Domain(
             "Source normalization makes the standalone selection payloadless; "
             "it needs typed ownership with its dependent settings.",
         ),
-        (
-            "MissRepUnlocksRank01",
-            "Shares an ordered Mission Report foundation with the Black Zero "
-            "rank unlock; independent rows need a game-owned composer.",
-        ),
-        (
-            "MissRepUnlocksRank02",
-            "Shares an ordered Mission Report foundation with the Ultimate "
-            "Armor rank unlock; independent rows need a game-owned composer.",
-        ),
     ),
 )
 

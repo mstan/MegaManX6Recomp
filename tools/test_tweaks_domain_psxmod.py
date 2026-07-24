@@ -108,8 +108,6 @@ class DomainPackageTests(unittest.TestCase):
                 "ArmorByPart04",
                 "LivesSwitch01",
                 "IngameOptions01",
-                "MissRepUnlocksRank01",
-                "MissRepUnlocksRank02",
             },
         )
         self.assertTrue(
