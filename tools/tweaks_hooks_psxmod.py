@@ -304,6 +304,9 @@ def conversion_report(
         "stock_sha256": sha256_file(stock),
         "b01_sha256": sha256_file(b01),
         "source_sha256": sha256_file(source),
+        "source_controls": sorted(
+            spec.source_option for spec in VOICE_SPECS
+        ),
         "foundation": {
             "id": "voice_code_foundation",
             "target": "main_exe",

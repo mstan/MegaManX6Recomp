@@ -113,5 +113,12 @@ if(BUILD_TESTING)
         psxrecomp-v4/runtime/include
         psxrecomp-v4/recompiler/lib/toml11
     )
-    add_test(NAME mmx6_tweaks_hooks_test COMMAND mmx6_tweaks_hooks_test)
+    add_test(
+        NAME mmx6_tweaks_hooks_test
+        COMMAND "./$<TARGET_FILE_NAME:mmx6_tweaks_hooks_test>"
+    )
+    set_tests_properties(
+        mmx6_tweaks_hooks_test
+        PROPERTIES WORKING_DIRECTORY "$<TARGET_FILE_DIR:mmx6_tweaks_hooks_test>"
+    )
 endif()

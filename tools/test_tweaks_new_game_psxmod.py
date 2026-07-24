@@ -67,7 +67,8 @@ class PackageIntegrationTests(unittest.TestCase):
         self.assertEqual(report["package"]["catalog_control_count"], 74)
         self.assertEqual(report["package"]["source_control_count"], 18)
         self.assertEqual(report["package"]["deferred_control_count"], 56)
-        self.assertEqual(len(report["source_controls"]), 74)
+        self.assertEqual(len(report["source_controls"]), 18)
+        self.assertEqual(len(report["source_control_ledger"]), 74)
         self.assertTrue(report["validation"]["stock_guards_verified"])
         self.assertTrue(report["validation"]["isolated_source_parity"])
         for proof in report["validation"]["representative_combinations"]:

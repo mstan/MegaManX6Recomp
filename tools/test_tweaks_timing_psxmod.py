@@ -5,10 +5,15 @@ from __future__ import annotations
 
 import hashlib
 import json
+import sys
 import tempfile
 import tomllib
 import unittest
 from pathlib import Path
+
+TOOLS = Path(__file__).absolute().parent
+if str(TOOLS) not in sys.path:
+    sys.path.insert(0, str(TOOLS))
 
 import tweaks_timing_psxmod as timing
 

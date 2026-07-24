@@ -416,7 +416,8 @@ def build_report(stock_path: Path) -> dict:
             )
         ],
         "features": evidence,
-        "source_controls": ledger,
+        "source_controls": sorted(converted),
+        "source_control_ledger": ledger,
         "validation": {
             "disabled_selection_emits_no_writes": True,
             "isolated_source_parity": True,
