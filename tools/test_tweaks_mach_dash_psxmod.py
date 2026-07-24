@@ -18,11 +18,11 @@ import tweaks_mach_dash_psxmod as mach
 
 class MachDashPackageTests(unittest.TestCase):
     def test_exact_control_inventory_and_quarantine(self) -> None:
-        self.assertEqual(len(mach.SOURCE_CONTROLS), 14)
-        self.assertEqual(len(set(mach.SOURCE_CONTROLS)), 14)
-        self.assertNotIn("MachDashDuration02", mach.SOURCE_CONTROLS)
+        self.assertEqual(len(mach.SOURCE_CONTROLS), 17)
+        self.assertEqual(len(set(mach.SOURCE_CONTROLS)), 17)
+        self.assertIn("MachDashDuration02", mach.SOURCE_CONTROLS)
         self.assertEqual(
-            mach.QUARANTINED,
+            mach.GUI_SLIDER_CONTROLS,
             ("MachDashDuration02", "MachDashSpeed02", "MachDashSpeed03"),
         )
 

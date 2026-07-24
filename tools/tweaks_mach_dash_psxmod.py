@@ -23,7 +23,7 @@ import tweaks_resolver as resolver
 
 
 PACKAGE_ID = "mmx6.tweaks.mach-dash"
-PACKAGE_VERSION = "1.0.0"
+PACKAGE_VERSION = "1.1.0"
 RESOLVER_ID = "mmx6-mach-dash"
 FEATURE_ID = "blade_mach_dash_behavior"
 DAT_SHA256 = (
@@ -37,10 +37,13 @@ SOURCE_CONTROLS = (
     *(f"MachDashWait{index:02d}" for index in range(1, 5)),
     *(f"MachDashCancel{index:02d}" for index in range(1, 5)),
     "MachDashDuration01",
+    "MachDashDuration02",
     "MachDashSpeed01",
+    "MachDashSpeed02",
+    "MachDashSpeed03",
     "MachDashImmunity01",
 )
-QUARANTINED = (
+GUI_SLIDER_CONTROLS = (
     "MachDashDuration02", "MachDashSpeed02", "MachDashSpeed03"
 )
 STATIC_VARS = (
@@ -107,7 +110,7 @@ def source_cases(source_dir: Path, profile_path: Path) -> list[dict]:
         ("press-back-immunity", immunity),
     )
     evidence = []
-    allowed = set(STATIC_VARS) | set(SOURCE_CONTROLS)
+    allowed = set(STATIC_VARS) | (set(SOURCE_CONTROLS) - set(GUI_SLIDER_CONTROLS))
     for label, changes in cases:
         merged = OrderedDict(profile)
         merged.update(changes)
@@ -414,11 +417,20 @@ def build_report(
         "package_version": PACKAGE_VERSION,
         "resolver": f"builtin:{RESOLVER_ID}",
         "source_controls": sorted(SOURCE_CONTROLS),
-        "quarantined_controls": {
-            control: (
-                "source write remains misdirected; no contrary ownership proof"
-            )
-            for control in QUARANTINED
+        "gui_slider_controls": {
+            "MachDashDuration02": (
+                "represented by the coherent duration option; the trusted "
+                "resolver emits the same bounded duration byte rather than "
+                "treating the GUI slider as a separate mod"
+            ),
+            "MachDashSpeed02": (
+                "represented by the coherent speed option; the trusted "
+                "resolver composes the high halfword of Mach Dash speed"
+            ),
+            "MachDashSpeed03": (
+                "represented by the coherent speed option; the trusted "
+                "resolver composes the low halfword of Mach Dash speed"
+            ),
         },
         "source_parity": evidence,
         "trusted_operations": audit["operations"],

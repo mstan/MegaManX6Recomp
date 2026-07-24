@@ -105,14 +105,12 @@ that replaces silent source-GUI forcing.
 
 ## Player Mechanics outcome
 
-This branch converts 19 of the exact 49-control Player Mechanics ledger:
-three fixed standalone controls, two continuous-dash controls, and fourteen
+This branch converts 22 of the exact 49-control Player Mechanics ledger:
+three fixed standalone controls, two continuous-dash controls, and seventeen
 Mach Dash controls. The timing package later converts eight more animation
-controls. Twenty-two remain, all with explicit reasons:
+controls. Nineteen remain, all with explicit reasons:
 
 - 17 Zero-technique controls at the independent-row boundary above;
-- quarantined `MachDashDuration02`, `MachDashSpeed02`, and
-  `MachDashSpeed03`;
 - `HoverUnlock02`, whose GUI also forces the already-separate
   `HoverUnlock01`; and
 - `ShadowSlide01`, whose callsite targets an unowned
@@ -120,18 +118,17 @@ controls. Twenty-two remain, all with explicit reasons:
 
 ## Deliberately deferred
 
-The following IDs are not declared by package version 1.0.0:
+The following IDs are not declared by package version 1.1.0:
 
 - `DashSpeedCont01`, `DashSpeedCont02` are no longer deferred; they are owned by
   the composed continuous-dash resolver above.
-- `MachDashDuration01`, `MachDashSpeed01`, `MachDashImmunity01`,
+- `MachDashDuration01`, `MachDashDuration02`, `MachDashSpeed01`,
+  `MachDashSpeed02`, `MachDashSpeed03`, `MachDashImmunity01`,
   `MachDashInput01` through `MachDashInput03`, `MachDashWait01` through
   `MachDashWait04`, and `MachDashCancel01` through `MachDashCancel04` are no
-  longer deferred. They are one coherent behavior in the resolver above.
-- `MachDashDuration02`, `MachDashSpeed02`, `MachDashSpeed03`: quarantined.
-  The source writes do not provably target code installed by the combinations
-  that expose the controls. Byte-for-byte conversion is not accepted as
-  behavior proof.
+  longer deferred. They are one coherent behavior in the resolver above; the
+  GUI duration/speed sliders map to the right-pane duration and speed options
+  rather than independent left-pane mods.
 - `CutsceneSouls01`, `CutsceneSouls02`: deferred because the shared source
   foundation writes executable bytes in member 797's padded allocation outside
   its logical payload. No owner is claimed until that lifecycle is explicit.

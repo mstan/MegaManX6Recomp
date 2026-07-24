@@ -16,7 +16,7 @@ namespace {
 using namespace PSXRecompV4;
 
 constexpr std::string_view kPackageId = "mmx6.tweaks.mach-dash";
-constexpr std::string_view kVersion = "1.0.0";
+constexpr std::string_view kVersion = "1.1.0";
 constexpr std::string_view kResolverId = "mmx6-mach-dash";
 constexpr std::string_view kFeatureId = "blade_mach_dash_behavior";
 constexpr std::string_view kGameId = "SLUS-01395";
