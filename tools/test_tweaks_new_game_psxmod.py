@@ -357,7 +357,6 @@ __ISOLATED_CASES__
     life.values["count"] = "17";
     if (captured(package, selected, writes, errors)) return 16;
     if (!writes.empty() || errors.size() != 1) return 17;
-
     package.version = "1.0.0";
     life.values["count"] = "16";
     writes.clear();
