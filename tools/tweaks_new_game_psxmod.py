@@ -547,12 +547,14 @@ def build_report(stock_path: Path) -> dict:
     evidence = validate_source_parity(db, profile, foundation)
     combinations = validate_combinations(db, profile, foundation)
     converted = {item.source_control for item in FEATURES}
+    excluded = {
+        "CharAdd01": (
+            "Falcon Armor availability is already the stock New Game state; "
+            "selecting the Tweaks control alone emits no patchfile, owned "
+            "writes, or synthesized payload."
+        ),
+    }
     def deferred_reason(control: str) -> str:
-        if control == "CharAdd01":
-            return (
-                "stock Falcon sentinel is forced by CharStart; no independent "
-                "enabled-state delta"
-            )
         if control == "CharStart01":
             return (
                 "choice couples intro armor, CharAdd availability, ArmorParts, "
@@ -580,10 +582,16 @@ def build_report(stock_path: Path) -> dict:
     ledger = [
         {
             "source_control": control,
-            "status": "converted" if control in converted else "deferred",
+            "status": (
+                "converted" if control in converted
+                else "excluded" if control in excluded
+                else "deferred"
+            ),
             "reason": (
                 "exact shared composer field/table composition implemented"
                 if control in converted
+                else excluded[control]
+                if control in excluded
                 else deferred_reason(control)
             ),
         }
@@ -597,8 +605,15 @@ def build_report(stock_path: Path) -> dict:
             "feature_count": len(FEATURES),
             "source_control_count": len(converted),
             "catalog_control_count": len(controls),
-            "deferred_control_count": len(controls) - len(converted),
+            "excluded_control_count": len(excluded),
+            "deferred_control_count": (
+                len(controls) - len(converted) - len(excluded)
+            ),
         },
+        "excluded_source_controls": [
+            {"source_control": control, "reason": reason}
+            for control, reason in sorted(excluded.items())
+        ],
         "provenance": {
             "stock_sha256": native.STOCK_SHA256,
             "patcher_version": "MMX6 Tweaks v2.6.1",

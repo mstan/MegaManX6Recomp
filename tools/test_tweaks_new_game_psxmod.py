@@ -85,20 +85,39 @@ class PackageIntegrationTests(unittest.TestCase):
         )
         self.assertEqual(report["package"]["catalog_control_count"], 74)
         self.assertEqual(report["package"]["source_control_count"], 64)
-        self.assertEqual(report["package"]["deferred_control_count"], 10)
+        self.assertEqual(report["package"]["excluded_control_count"], 1)
+        self.assertEqual(report["package"]["deferred_control_count"], 9)
         self.assertEqual(len(report["source_controls"]), 64)
         self.assertEqual(len(report["source_control_ledger"]), 74)
+        self.assertEqual(
+            report["excluded_source_controls"],
+            [
+                {
+                    "source_control": "CharAdd01",
+                    "reason": (
+                        "Falcon Armor availability is already the stock New "
+                        "Game state; selecting the Tweaks control alone emits "
+                        "no patchfile, owned writes, or synthesized payload."
+                    ),
+                }
+            ],
+        )
         deferred = {
             item["source_control"]
             for item in report["source_control_ledger"]
             if item["status"] == "deferred"
         }
         self.assertEqual(deferred, {
-            "CharAdd01", "CharStart01", "DebugCheckpointStart",
-            "DebugStageStart", "PartsRandom01", "PartsRandom02",
-            "PartsRandomTitle01", "RescRepFoundMark01",
-            "RescRepFoundMarkOnly01", "ZeroDebug",
+            "CharStart01", "DebugCheckpointStart", "DebugStageStart",
+            "PartsRandom01", "PartsRandom02", "PartsRandomTitle01",
+            "RescRepFoundMark01", "RescRepFoundMarkOnly01", "ZeroDebug",
         })
+        excluded = {
+            item["source_control"]
+            for item in report["source_control_ledger"]
+            if item["status"] == "excluded"
+        }
+        self.assertEqual(excluded, {"CharAdd01"})
         table = report["composed_resources"]["found_reploid_table"]
         middle = report["foundation"][1]
         self.assertEqual(
