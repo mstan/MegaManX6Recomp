@@ -20,13 +20,15 @@ import tweaks_native_psxmod as native
 
 
 PACKAGE_ID = "mmx6.tweaks.general-foundations"
-PACKAGE_VERSION = "1.1.0"
+PACKAGE_VERSION = "1.2.0"
 RESOLVER_ID = "mmx6-general-foundations"
 SOURCE_CONTROLS = (
     "MissRepUnlocksRank01",
     "MissRepUnlocksRank02",
     "LowerDef01",
     "LowerDef02",
+    "CutsceneSouls01",
+    "CutsceneSouls02",
 )
 
 
@@ -83,6 +85,22 @@ def validate_source(stock_path: Path) -> dict:
         "normalize_x_and_zero_defense": (
             {"LowerDef01": "0", "LowerDef02": "0"},
             ("LowerDef_All_A",),
+        ),
+        "gate_revealed_souls": (
+            {"CutsceneSouls01": "256"},
+            ("CutsceneSouls_Base", "CutsceneSouls01"),
+        ),
+        "gate_revealed_refight_souls": (
+            {"CutsceneSouls02": "256"},
+            ("CutsceneSouls_Base", "CutsceneSouls02"),
+        ),
+        "both_gate_revealed_souls": (
+            {"CutsceneSouls01": "256", "CutsceneSouls02": "9999"},
+            (
+                "CutsceneSouls_Base",
+                "CutsceneSouls01",
+                "CutsceneSouls02",
+            ),
         ),
     }
     for label, (selection, expected) in expected_closures.items():
@@ -172,6 +190,50 @@ def manifest_text() -> str:
         ),
         'group = "Defense"',
         "default_enabled = false",
+        "",
+        "[[feature]]",
+        'id = "gate_revealed_souls"',
+        'name = "Gate Revealed Souls"',
+        (
+            'description = "Set the Nightmare Souls threshold for the first '
+            'Gate-revealed cutscene."'
+        ),
+        'group = "Nightmare Souls and Rank"',
+        "default_enabled = false",
+        "",
+        "[[option]]",
+        'feature = "gate_revealed_souls"',
+        'id = "souls"',
+        'label = "Souls"',
+        'description = "Bounded threshold from MMX6 Tweaks; 3000 is stock."',
+        'group = "Nightmare Souls and Rank"',
+        'type = "integer"',
+        "min = 256",
+        "max = 9999",
+        "step = 1",
+        "default = 256",
+        "",
+        "[[feature]]",
+        'id = "gate_revealed_refight_souls"',
+        'name = "Gate Revealed Refight Souls"',
+        (
+            'description = "Set the Nightmare Souls threshold for the later '
+            'Gate-revealed cutscene path."'
+        ),
+        'group = "Nightmare Souls and Rank"',
+        "default_enabled = false",
+        "",
+        "[[option]]",
+        'feature = "gate_revealed_refight_souls"',
+        'id = "souls"',
+        'label = "Souls"',
+        'description = "Bounded threshold from MMX6 Tweaks; 3000 is stock."',
+        'group = "Nightmare Souls and Rank"',
+        'type = "integer"',
+        "min = 256",
+        "max = 9999",
+        "step = 1",
+        "default = 256",
     ]
     return "\n".join(lines) + "\n"
 
@@ -182,7 +244,7 @@ def report(stock_path: Path) -> dict:
         "package": {
             "id": PACKAGE_ID,
             "version": PACKAGE_VERSION,
-            "feature_rows": 4,
+            "feature_rows": 6,
             "resolver": f"builtin:{RESOLVER_ID}",
         },
         "source_controls": list(SOURCE_CONTROLS),
@@ -201,10 +263,26 @@ def report(stock_path: Path) -> dict:
             "normalize_zero_defense": {
                 "source_controls": ["LowerDef02"],
             },
+            "gate_revealed_souls": {
+                "source_controls": ["CutsceneSouls01"],
+                "option": "souls",
+                "stock_value": 3000,
+                "minimum": 256,
+                "maximum": 9999,
+                "default": 256,
+            },
+            "gate_revealed_refight_souls": {
+                "source_controls": ["CutsceneSouls02"],
+                "option": "souls",
+                "stock_value": 3000,
+                "minimum": 256,
+                "maximum": 9999,
+                "default": 256,
+            },
         },
         "validation": {
             "source_closures_exact": True,
-            "shared_foundation_composed_once": True,
+            "shared_foundations_composed_once": True,
             "stock_guards_embedded_in_resolver": True,
             "cases": cases,
         },
@@ -252,7 +330,8 @@ def inspect_package(path: Path):
             manifest["id"] != PACKAGE_ID
             or manifest["version"] != PACKAGE_VERSION
             or manifest["resolver"] != f"builtin:{RESOLVER_ID}"
-            or len(manifest["feature"]) != 4
+            or len(manifest["feature"]) != 6
+            or len(manifest.get("option", [])) != 2
         ):
             raise AssertionError("generated manifest shape changed")
         if "patch" in manifest or "overlay" in manifest:
