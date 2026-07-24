@@ -271,48 +271,6 @@ def manifest_text() -> str:
         "default_enabled = false",
         "",
         "[[feature]]",
-        'id = "incomplete_armors_by_part"',
-        'name = "Incomplete Armors by Part"',
-        (
-            'description = "Allow incomplete armor sets to activate by '
-            'individual part, matching MMX6 Tweaks Armor By Part behavior."'
-        ),
-        'group = "Incomplete Armors"',
-        "default_enabled = false",
-        "",
-        "[[option]]",
-        'feature = "incomplete_armors_by_part"',
-        'id = "appearance"',
-        'label = "Appearance"',
-        (
-            'description = "Choose whether incomplete sets display their '
-            'complete armor body or unarmored X."'
-        ),
-        'group = "Incomplete Armors"',
-        'type = "choice"',
-        'default = "complete_armor"',
-        "",
-        "[[option.choice]]",
-        'value = "complete_armor"',
-        'label = "Complete Armor"',
-        "",
-        "[[option.choice]]",
-        'value = "unarmored_x"',
-        'label = "Unarmored X"',
-        "",
-        "[[option]]",
-        'feature = "incomplete_armors_by_part"',
-        'id = "shadow_saber_palette"',
-        'label = "Shadow Saber Palette"',
-        (
-            'description = "Use the Shadow Armor saber palette adjustment '
-            'included with the Armor By Part tweak."'
-        ),
-        'group = "Incomplete Armors"',
-        'type = "boolean"',
-        "default = false",
-        "",
-        "[[feature]]",
         'id = "gate_revealed_souls"',
         'name = "Gate Revealed Souls"',
         (
@@ -365,12 +323,27 @@ def report(stock_path: Path) -> dict:
         "package": {
             "id": PACKAGE_ID,
             "version": PACKAGE_VERSION,
-            "feature_rows": 7,
+            "feature_rows": 6,
             "resolver": f"builtin:{RESOLVER_ID}",
         },
         "source_controls": list(SOURCE_CONTROLS),
         "excluded_source_controls": [],
-        "deferred_source_controls": [],
+        "deferred_source_controls": [
+            {
+                "source_controls": [
+                    "ArmorByPart01",
+                    "ArmorByPart02",
+                    "ArmorByPart03",
+                    "ArmorByPart04",
+                ],
+                "feature": "incomplete_armors_by_part",
+                "reason": (
+                    "Temporarily omitted from enable-all: the converted hook "
+                    "calls an ArmorByPart common foundation payload that is "
+                    "not yet emitted, causing a spawn-time unknown dispatch."
+                ),
+            }
+        ],
         "features": {
             "ultimate_armor_rank_unlock": {
                 "source_controls": ["MissRepUnlocksRank01"],
@@ -383,18 +356,6 @@ def report(stock_path: Path) -> dict:
             },
             "normalize_zero_defense": {
                 "source_controls": ["LowerDef02"],
-            },
-            "incomplete_armors_by_part": {
-                "source_controls": [
-                    "ArmorByPart01",
-                    "ArmorByPart02",
-                    "ArmorByPart03",
-                    "ArmorByPart04",
-                ],
-                "options": {
-                    "appearance": ["complete_armor", "unarmored_x"],
-                    "shadow_saber_palette": [False, True],
-                },
             },
             "gate_revealed_souls": {
                 "source_controls": ["CutsceneSouls01"],

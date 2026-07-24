@@ -263,7 +263,6 @@ bool validate(const ModPackage& package, std::vector<std::string>& errors) {
         "black_zero_rank_unlock",
         "normalize_unarmored_x_defense",
         "normalize_zero_defense",
-        "incomplete_armors_by_part",
         "gate_revealed_souls",
         "gate_revealed_refight_souls",
     };
@@ -275,28 +274,14 @@ bool validate(const ModPackage& package, std::vector<std::string>& errors) {
         package, "gate_revealed_souls", "souls");
     const ModOption* refight_souls = option(
         package, "gate_revealed_refight_souls", "souls");
-    const ModOption* armor_appearance = option(
-        package, "incomplete_armors_by_part", "appearance");
-    const ModOption* shadow_saber_palette = option(
-        package, "incomplete_armors_by_part", "shadow_saber_palette");
     if (
-        package.options.size() != 4 || !gate_souls || !refight_souls ||
-        !armor_appearance || !shadow_saber_palette ||
+        package.options.size() != 2 || !gate_souls || !refight_souls ||
         gate_souls->type != ModOptionType::Integer ||
         refight_souls->type != ModOptionType::Integer ||
-        armor_appearance->type != ModOptionType::Choice ||
-        shadow_saber_palette->type != ModOptionType::Boolean ||
         gate_souls->default_value != "256" ||
         refight_souls->default_value != "256" ||
         gate_souls->min_value != 256 || refight_souls->min_value != 256 ||
-        gate_souls->max_value != 9999 || refight_souls->max_value != 9999 ||
-        armor_appearance->default_value != "complete_armor" ||
-        shadow_saber_palette->default_value != "false" ||
-        armor_appearance->choices.size() != 2 ||
-        armor_appearance->choices[0].value != "complete_armor" ||
-        armor_appearance->choices[0].label != "Complete Armor" ||
-        armor_appearance->choices[1].value != "unarmored_x" ||
-        armor_appearance->choices[1].label != "Unarmored X"
+        gate_souls->max_value != 9999 || refight_souls->max_value != 9999
     ) {
         errors.push_back(package.id + ": trusted option inventory mismatch");
         return false;
@@ -317,20 +302,18 @@ bool resolve_general_foundations(
             id != "black_zero_rank_unlock" &&
             id != "normalize_unarmored_x_defense" &&
             id != "normalize_zero_defense" &&
-            id != "incomplete_armors_by_part" &&
             id != "gate_revealed_souls" &&
             id != "gate_revealed_refight_souls"
         ) {
+            if (id == "incomplete_armors_by_part")
+                continue; /* stale selection from older local package */
             errors.push_back(package.id + ": unknown selected feature " + id);
             return false;
         }
         const bool soul_feature =
             id == "gate_revealed_souls" ||
             id == "gate_revealed_refight_souls";
-        const bool armor_feature = id == "incomplete_armors_by_part";
-        if (
-            !soul_feature && !armor_feature && !feature.values.empty()
-        ) {
+        if (!soul_feature && !feature.values.empty()) {
             errors.push_back(package.id + ": selected feature has no options");
             return false;
         }
@@ -344,19 +327,6 @@ bool resolve_general_foundations(
                 }
             }
         }
-        if (armor_feature) {
-            for (const auto& [option_id, _value] : feature.values) {
-                if (
-                    option_id != "appearance" &&
-                    option_id != "shadow_saber_palette"
-                ) {
-                    errors.push_back(
-                        package.id + ": selected armor feature has unknown option"
-                    );
-                    return false;
-                }
-            }
-        }
     }
 
     const bool ultimate = enabled(selection, "ultimate_armor_rank_unlock");
@@ -364,8 +334,7 @@ bool resolve_general_foundations(
     const bool normalize_x =
         enabled(selection, "normalize_unarmored_x_defense");
     const bool normalize_zero = enabled(selection, "normalize_zero_defense");
-    const bool armor_by_part =
-        enabled(selection, "incomplete_armors_by_part");
+    const bool armor_by_part = false;
     const bool gate_souls_enabled =
         enabled(selection, "gate_revealed_souls");
     const bool refight_souls_enabled =
