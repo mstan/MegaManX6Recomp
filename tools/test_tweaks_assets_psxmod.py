@@ -42,6 +42,27 @@ class CatalogTests(unittest.TestCase):
             "MugshotCustom02",
             {item.source_option for item in assets.FEATURES},
         )
+        self.assertEqual(
+            sorted(item.source_option for item in assets.FEATURES),
+            sorted(
+                {
+                    "MugshotCustom03",
+                    "MugshotCustom04",
+                    "MugshotCustom05",
+                    "MugshotCustom06",
+                    "MugshotCustom07",
+                    "MugshotCustom08",
+                    "MugshotCustom09",
+                    "MugshotCustom10",
+                    "MugshotCustom11",
+                    "MugshotCustom12",
+                    "MugshotCustom13",
+                    "MugshotCustom14",
+                    "SpritePalette01",
+                    "SpritePalette02",
+                }
+            ),
+        )
 
     def test_only_real_variant_domains_get_options(self) -> None:
         configurable = {
@@ -96,6 +117,10 @@ class LocalIntegrationTests(unittest.TestCase):
 
         self.assertEqual(len(overlays), 1440)
         self.assertEqual(report["operations"]["overlay_bytes"], 379813)
+        self.assertEqual(
+            report["source_controls"],
+            sorted(item.source_option for item in assets.FEATURES),
+        )
         self.assertEqual(
             report["operations"]["mugshot_assembly_source_bytes_replayed"], 0
         )

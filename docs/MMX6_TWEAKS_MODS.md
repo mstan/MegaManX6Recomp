@@ -97,6 +97,27 @@ matches the common base at that member, and both a focused oracle and an
 available combined-feature oracle contain the replacement. Whole-image
 differences are never accepted as ownership evidence.
 
+The upstream GUI catalog contains 332 entries and 329 unique source-control
+IDs. The native 1.9.0 package explicitly represents 117 of those IDs, leaving
+212 before the modular packages described below. These are source controls,
+not necessarily launcher rows: mutually exclusive upstream radio buttons are
+one coherent launcher feature, while independently enabled controls remain
+independent rows.
+
+Every converter writes its complete upstream IDs to `source_controls` in its
+conversion report. Produce an exact, duplicate-aware burndown across installed
+package reports with:
+
+```powershell
+py -3 tools/mmx6_tweaks_coverage.py `
+  build-mod-platform/mods/packages/mmx6.tweaks.native/1.9.0/conversion-report.json `
+  build-mod-platform/assets-conversion-report.json `
+  --out build-mod-platform/mmx6-tweaks-coverage.json
+```
+
+The ledger fails closed when a report lacks `source_controls`; estimates do
+not silently enter the represented count.
+
 ### Nightmare-effect toggles
 
 `NightmareDisable01` through `NightmareDisable08` are accepted as eight
@@ -503,11 +524,11 @@ unique controls remain:
 
 | Tweaks area | Remaining controls |
 |---|---:|
-| New Game | 67 |
+| New Game | 74 |
 | Player Mechanics | 69 |
 | General | 23 |
 | Localization and Art | 23 |
-| Balance | 12 |
+| Balance | 5 |
 | Damage Tables | 12 |
 | Stages | 5 |
 | Boss Attacks | 1 |
@@ -519,14 +540,14 @@ not by arbitrary source-file order:
    nearby derived scalars. Zero has compound meaning for several timings, so
    these are not honest direct integers.
 2. **Registered hook and code-foundation allocation:** an exact known core of
-   26 controls: 18 Mach Dash controls, two continuous-dash-speed controls, two
+   25 remaining controls: 17 not-yet-native Mach Dash controls, two
    cutscene-soul controls, and four remaining voice controls. Another 20–40
    controls may reuse this foundation, but that reuse count remains an estimate
    until each closure is classified.
 3. **Typed asset slots:** 14 mugshots, three loading logos, and two sprite
    palettes. These need asset identity, palette/VRAM metadata, and dependency
    composition rather than blind file insertion.
-4. **Declarative new-game and progression state:** the remaining 67 New Game
+4. **Declarative new-game and progression state:** all 74 New Game
    controls. A related General set covers unlockables, incomplete armor, and
    shared stats. This requires typed bitfields, dependency validation, save
    semantics, and deterministic randomization.

@@ -1081,6 +1081,9 @@ def build_assets(
         for item in overlays
     ]
     report = {
+        "source_controls": sorted(
+            feature.source_option for feature in FEATURES
+        ),
         "package": {
             "id": PACKAGE_ID,
             "version": PACKAGE_VERSION,
