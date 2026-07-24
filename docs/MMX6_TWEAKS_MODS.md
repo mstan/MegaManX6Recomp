@@ -515,6 +515,76 @@ bytes, 74 fixed executable patches, and 231 disc overlays. The converter
 re-resolved all accepted values through Tweaks and reported no incompatible
 overlaps.
 
+### Standalone timing and status tranche
+
+`tools/tweaks_timing_psxmod.py` deliberately produces a second package,
+`mmx6.tweaks.timing`, instead of adding more special cases to the monolithic
+native converter. The package contains five independent, default-disabled
+feature rows:
+
+| Feature row | Right-pane values | Tweaks controls |
+|---|---:|---|
+| X Saber Timing | seven integers, 1-99 | `Anim0101`-`Anim0107` |
+| Shadow Saber Timing | seven integers, 1-99 | `Anim0201`-`Anim0207` |
+| Zero Saber Cooldown Timing | six integers, 1-99 | editable `Anim0302`-`Anim0307` |
+| Maximum Lives | one integer, 0-99 | `LivesValue04` |
+| Nightmare Dark Opacity | one integer, 1-64 | `NightmareMod01` |
+
+The left pane therefore has five coherent controls, not 22 rows and not one
+package-sized mega-feature. The right pane contains only the actual values.
+There is no redundant enabled option; the feature checkbox already supplies
+that state. `Anim0301` remains fixed because the Tweaks GUI itself disables
+that field.
+
+All operations use package format 4. A patch guards the complete stock
+instruction or four-byte animation record, but owns only its declared dynamic
+field. This matters for the Saber records: cancellability flags occupy adjacent
+bytes and must remain independently composable with timing. The converter
+maps every B01 source offset back to stock `SLUS_013.95` or a stable
+`ROCK_X6.BIN` member before emitting a runtime destination.
+
+Maximum Lives exactly reproduces both cap sites and both `cap + 1` comparison
+sites. For values above 9 it conditionally NOPs `LivesDisplay01`, matching
+Tweaks' protection against a one-digit pause-menu graphic. Nightmare Dark
+reproduces the four 12-byte source templates as `opacity` and `opacity - 1`
+fields. One template crosses a 2048-byte runtime sector and is explicitly
+split into guarded 8-byte and 4-byte patches.
+
+The converter re-runs the ported Tweaks pipeline at boundary and interior
+samples, rejects source-closure or topology drift, verifies complete B01 and
+stock guards, and writes every accepted source field to
+`conversion-report.json` under `source_controls`. Its reviewed plan has 48
+sparse operations, 220 complete guard bytes, and 58 owned bytes. This proves
+exact source-write conversion; gameplay timing and visual behavior remain
+marked pending live smoke tests.
+
+Two tempting expansions remain explicitly deferred:
+
+- animation value zero is not a direct byte. Tweaks converts it to a `01`
+  sentinel plus an `offset + 2` companion zero, and a zero first frame can
+  terminate processing of later animation sets; and
+- all seven `Anim04` Z-Buster cells remain out until the surrounding allocation
+  padding and record ownership are proven.
+
+Generate the package locally:
+
+```powershell
+py -3 tools/tweaks_timing_psxmod.py `
+  --stock "F:\path\to\Mega Man X6 (USA) (v1.1).bin" `
+  --b01-base "build-mod-platform\test-mod-variants\base.bin" `
+  --patcher-data "F:\path\to\Tweaks\run_extracted\data" `
+  --patcher-source "F:\path\to\Tweaks\_src\data\_dat.ahk" `
+  --out "build-mod-platform\test-psxmods\MMX6-Tweaks-Timing.psxmod"
+```
+
+`tools/test_tweaks_timing_psxmod.py` covers the admitted control surface,
+zero-byte literals, boundary templates, manifest shape, report contents, and
+byte-deterministic archive construction. The C++ integration test in
+`tools/test_tweaks_timing_runtime.cpp` installs the generated archive through
+the real package manager, rejects deferred/out-of-range values, resolves all
+22 controls together, verifies the 48-write/51-field plan, and exercises the
+Maximum Lives 9/10 predicate boundary.
+
 ## Burndown after version 1.9
 
 The v2.6.1 source parser finds 329 unique user controls across 332 catalog
@@ -533,12 +603,17 @@ unique controls remain:
 | Stages | 5 |
 | Boss Attacks | 1 |
 
+This table is the version-1.9 monolithic-package snapshot. The standalone
+timing/status package above subsequently represents 22 of those controls
+without changing the historical v1.9 counts.
+
 The next work is grouped by the runtime or conversion primitive it retires,
 not by arbitrary source-file order:
 
-1. **Conditional multi-write templates:** 27 animation timing cells and four
-   nearby derived scalars. Zero has compound meaning for several timings, so
-   these are not honest direct integers.
+1. **Conditional multi-write templates:** the seven deferred `Anim04` cells,
+   zero-value support for the 20 admitted animation cells, and remaining
+   derived scalars. Zero has compound meaning for several timings and remains
+   outside the direct positive-integer contract.
 2. **Registered hook and code-foundation allocation:** an exact known core of
    25 remaining controls: 17 not-yet-native Mach Dash controls, two
    cutscene-soul controls, and four remaining voice controls. Another 20–40

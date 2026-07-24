@@ -112,6 +112,15 @@ default means “leave every destination untouched,” including asymmetric stoc
 sites. These remain preboot plan operations; they do not add a per-frame mod
 dispatcher.
 
+Format 4 separates a complete expected-byte guard from the exact fields a
+feature owns. Literal or bounded-integer fields may share a semantic record
+without claiming adjacent flags or padding; compatible features compose when
+their complete guards agree and their owned fields are disjoint. Typed
+`eq`/`ne`/`lt`/`le`/`gt`/`ge` integer predicates select bounded patch templates
+before boot. Runtime validation checks every complete guard before applying
+any field, so a guard-only mismatch rejects the plan without partial writes.
+There is no general expression VM or compatibility fallback.
+
 ### Code and behavior hooks
 
 A feature may replace or wrap a known recompiled function, call site, or
