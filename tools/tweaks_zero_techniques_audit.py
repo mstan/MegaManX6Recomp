@@ -156,9 +156,18 @@ def build_audit(source_dir: Path, profile_path: Path) -> dict:
             "status": "deferred",
             "reason": (
                 "The current package resolver receives only its own selection. "
-                "It cannot honestly present four independent behavior rows "
-                "while reproducing upstream cross-forcing and conditional "
-                "Retranslation input-hint writes."
+                "A single Zero-techniques feature could contain the upstream "
+                "Sentsuizan, Ensuizan, Guard Shell, and Yammar input coupling, "
+                "but it still cannot faithfully reproduce the conditional "
+                "Retranslation input-hint writes without seeing the resolved "
+                "localization/script feature state."
+            ),
+            "product_boundary": (
+                "Do not expose the original four input groups as independent "
+                "left-pane rows. They silently force each other in Tweaks. The "
+                "acceptable UX is one coherent Zero-techniques feature with "
+                "validated option combinations, once cross-feature hint "
+                "composition exists."
             ),
             "required_primitive": (
                 "cross-package resolved context or a typed input-hint provider, "
