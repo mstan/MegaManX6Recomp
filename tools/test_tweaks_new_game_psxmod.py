@@ -279,6 +279,7 @@ int main() {
     using namespace PSXRecompV4;
     ModPackage package;
     package.id = "mmx6.tweaks.new-game";
+    package.version = "1.1.0";
     package.resolver = "builtin:mmx6-new-game";
 __FEATURES__
 __OPTIONS__
@@ -356,6 +357,13 @@ __ISOLATED_CASES__
     life.values["count"] = "17";
     if (captured(package, selected, writes, errors)) return 16;
     if (!writes.empty() || errors.size() != 1) return 17;
+
+    package.version = "1.0.0";
+    life.values["count"] = "16";
+    writes.clear();
+    errors.clear();
+    if (captured(package, selected, writes, errors)) return 18;
+    if (!writes.empty() || errors.size() != 1) return 19;
     return 0;
 }
 '''.replace("__RESOLVER__", source).replace(
