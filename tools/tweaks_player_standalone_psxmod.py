@@ -29,7 +29,8 @@ import tweaks_resolver as resolver
 
 
 PACKAGE_ID = "mmx6.tweaks.player-standalone"
-PACKAGE_VERSION = "1.0.0"
+PACKAGE_VERSION = "1.1.0"
+RESOLVER_ID = "mmx6-player-standalone"
 PATCHER_DAT_SHA256 = (
     "6e78b35142f30548c5bf6760a835773110d0cece863052a4b278722476a46707"
 )
@@ -292,6 +293,7 @@ def _validate_code_targets(
 
 
 def manifest_text(patches: tuple[FixedPatch, ...]) -> str:
+    del patches
     lines = [
         "format_version = 3",
         f"id = {q(PACKAGE_ID)}",
@@ -306,6 +308,7 @@ def manifest_text(patches: tuple[FixedPatch, ...]) -> str:
             'USA v1.1 disc."'
         ),
         'license = "Generated locally; original credits retained"',
+        f"resolver = {q('builtin:' + RESOLVER_ID)}",
         'save_compatibility = "shared"',
         "",
         "[[target]]",
@@ -321,21 +324,6 @@ def manifest_text(patches: tuple[FixedPatch, ...]) -> str:
             f"description = {q(spec.description)}",
             'group = "Player Mechanics"',
             "default_enabled = false",
-        ]
-    for patch in patches:
-        lines += [
-            "",
-            "[[patch]]",
-            f"feature = {q(patch.feature_id)}",
-            f"target = {q(patch.target)}",
-            (
-                f"address = {patch.location}"
-                if patch.target == "main_exe"
-                else f"offset = {patch.location}"
-            ),
-            f"expected = {q(patch.expected.hex().upper())}",
-            f"replace = {q(patch.replacement.hex().upper())}",
-            "order = 0",
         ]
     return "\n".join(lines) + "\n"
 

@@ -71,8 +71,9 @@ ModSelection selection(std::initializer_list<const char*> ids) {
 bool resolve(const ModPackage& package, const ModSelection& selected,
              std::vector<ModResolution::Write>& writes,
              std::vector<std::string>& errors) {
+    ModBuiltinResolverContext context;
     return MMX6Mods::resolve_tweaks_hooks(
-        package, selected, writes, errors);
+        package, selected, context, writes, errors);
 }
 
 const ModResolution::Write* find_write(

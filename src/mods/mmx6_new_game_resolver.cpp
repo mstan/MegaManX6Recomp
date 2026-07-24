@@ -281,9 +281,11 @@ ModResolution::Write make_write(
 bool resolve_new_game(
     const ModPackage& package,
     const ModSelection& selection,
+    const PSXRecompV4::ModBuiltinResolverContext& context,
     std::vector<ModResolution::Write>& writes,
     std::vector<std::string>& errors
 ) {
+    (void)context;
     if (
         package.id != kPackageId ||
         package.version != kPackageVersion ||

@@ -36,6 +36,8 @@ STOCK_SHA256 = (
     "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
 )
 HELPER_SOURCE_CONTROLS = {
+    "LivesDisplay01",
+    "LivesDisplay02",
     "ShadowBase01",
 }
 
@@ -50,7 +52,32 @@ def first_existing(*paths: Path) -> Path:
     return paths[0]
 
 
-DEFAULT_TWEAKS = first_existing(
+def first_valid_tweaks(*paths: Path) -> Path:
+    for path in paths:
+        if (
+            (path / "Mega Man X6 (USA) (v1.1).bin").is_file()
+            and (
+                path
+                / "_patcher"
+                / "src_extracted"
+                / "Mega Man X6 Tweaks Patcher (v2.6.1)"
+                / "_src"
+                / "data"
+                / "_dat.ahk"
+            ).is_file()
+            and (
+                path
+                / "_patcher"
+                / "run_extracted"
+                / "profiles"
+                / "default.x6tweaksprofile"
+            ).is_file()
+        ):
+            return path
+    return paths[0]
+
+
+DEFAULT_TWEAKS = first_valid_tweaks(
     MAIN_CHECKOUT / "mmx6-tweaks",
     ROOT / "mmx6-tweaks",
 )
@@ -1894,11 +1921,15 @@ PARAM_FEATURE_SPECS = {
     )
 }
 EXIT_STAGE_FEATURE_ID = "exit_stage_availability"
+INFINITE_LIVES_FEATURE_ID = "infinite_lives_no_continues"
+LOADING_LOGO_FEATURE_ID = "loading_logo"
 ALL_FEATURE_IDS = tuple(
     dict.fromkeys(
         (
             "title_screen",
+            LOADING_LOGO_FEATURE_ID,
             "retranslation",
+            INFINITE_LIVES_FEATURE_ID,
             *(item.feature_id for item in SIMPLE_FEATURES),
             *(item.feature_id for item in CONFIG_FEATURES),
             *(item.feature_id for item in PARAM_FEATURES),
@@ -1920,6 +1951,18 @@ TITLE_ASSET_ROUTES = {
     0x1DC0DE58: ("background_palette", 26, 0, 0x5),
     0x1F112538: ("press_start_tileset", 107, 1, 0x10016),
     0x1F12E768: ("press_start_assembly", 107, 3, 0xA),
+}
+
+LOADING_LOGO_VARIANTS = (
+    ("rockman_japan", "Rockman (Japan)", "TitleLoading02"),
+    ("mega_man_custom_a", "Mega Man (Custom A)", "TitleLoading03"),
+)
+LOADING_LOGO_ROUTE = {
+    "record_id": 74,
+    "subasset_index": 0,
+    "subasset_type": 0x10008,
+    "subasset_relative_offset": 0x2820,
+    "source_raw_offset": 0x1DD05F78,
 }
 
 
@@ -2085,6 +2128,8 @@ def build_simple_feature_ops(
     nightmare_oracles: tuple[RawMode2Image, ...],
     qol_oracles: tuple[RawMode2Image, ...],
     movement_oracles: tuple[RawMode2Image, ...],
+    hover_mode_oracles: tuple[RawMode2Image, ...],
+    shadow_slide_oracles: tuple[RawMode2Image, ...],
     small_data_oracles: tuple[RawMode2Image, ...],
     static_spike_oracles: tuple[RawMode2Image, ...],
     specs: tuple[FeatureSpec, ...],
@@ -2110,6 +2155,10 @@ def build_simple_feature_ops(
             feature_oracles = nightmare_oracles
         elif spec in QOL_FEATURES:
             feature_oracles = qol_oracles
+        elif spec.feature_id == "x_hover_mode":
+            feature_oracles = hover_mode_oracles
+        elif spec.feature_id == "shadow_slide_by_holding_down":
+            feature_oracles = shadow_slide_oracles
         elif spec in MOVEMENT_FEATURES:
             feature_oracles = movement_oracles
         elif spec in SMALL_DATA_FEATURES:
@@ -3283,6 +3332,165 @@ def resolve_exit_stage_writes(
     return result
 
 
+def resolve_infinite_lives_writes(
+    patcher_source: Path, patcher_data: Path
+) -> tuple[list[tuple[int, bytes]], dict]:
+    """Resolve LivesSwitch01 while treating forced Exit Stage as a dependency."""
+    try:
+        import tweaks_engine as engine
+    except ImportError as error:
+        raise RuntimeError("cannot import tools/tweaks_engine.py") from error
+
+    src_dir = patcher_source.parent.parent
+    profile_path = patcher_data.parent / "profiles" / "default.x6tweaksprofile"
+    require_file(profile_path, "Tweaks default profile")
+    db = engine.twr.TweaksDB(src_dir)
+    base = engine.twr.load_profile(profile_path)
+    merged = dict(base)
+    merged["LivesSwitch01"] = "1"
+    _normalized, patchfile, patch_list, values, synth = engine._assemble(
+        db, merged, base
+    )
+    inherited = set(db.patchlist_base) | set(db.patchlist_script)
+    owned = [name for name in patch_list if name not in inherited]
+    expected_closure = [
+        "LivesDisplay01",
+        "LivesDisplay02",
+        "LivesSwitch01",
+        "ExitButton01",
+        "ExitButton03",
+    ]
+    if patchfile != "b01" or owned != expected_closure:
+        raise AssertionError(
+            "LivesSwitch01 source closure changed: "
+            f"patchfile={patchfile!r}, owned={owned!r}"
+        )
+    if synth:
+        raise AssertionError(
+            f"LivesSwitch01 unexpectedly synthesizes {sorted(synth)!r}"
+        )
+    if engine.expand_entry(db, "ExitButton01", patchfile, values, synth):
+        raise AssertionError("stock ExitButton01 helper gained a payload")
+
+    lives_names = ("LivesDisplay01", "LivesDisplay02", "LivesSwitch01")
+    writes: list[tuple[int, bytes]] = []
+    writes_by_name: dict[str, list[tuple[int, bytes]]] = {}
+    for name in (*lives_names, "ExitButton03"):
+        entries: list[tuple[int, bytes]] = []
+        for data_hex, raw_offset in engine.expand_entry(
+            db, name, patchfile, values, synth
+        ):
+            for split_hex, split_offset in engine.ecc_split(
+                data_hex, raw_offset
+            ):
+                entries.append((split_offset, bytes.fromhex(split_hex)))
+        writes_by_name[name] = entries
+        if name in lives_names:
+            writes.extend(entries)
+
+    expected_lives = [
+        (0x1D92B588, bytes.fromhex("00000000")),
+        (0x1D937F4C, bytes.fromhex("00000000")),
+        (0x1D937F6C, bytes.fromhex("00000000")),
+        (0x1D931024, bytes.fromhex("00000000")),
+    ]
+    if writes != expected_lives:
+        actual = [(f"0x{o:X}", data.hex().upper()) for o, data in writes]
+        raise AssertionError(f"LivesSwitch01 writes changed: {actual!r}")
+
+    expected_exit = [
+        (offset, bytes.fromhex(payload))
+        for offset, payload in EXIT_STAGE_VARIANTS["everywhere"]["writes"]
+    ]
+    if writes_by_name["ExitButton03"] != expected_exit:
+        actual = [
+            (f"0x{o:X}", data.hex().upper())
+            for o, data in writes_by_name["ExitButton03"]
+        ]
+        raise AssertionError(
+            "LivesSwitch01 no longer forces the reviewed Exit Stage "
+            f"Everywhere writes: {actual!r}"
+        )
+
+    return writes, {
+        "status": "ready-pending-live-smoke",
+        "source_selection": {"LivesSwitch01": "1"},
+        "source_closure": expected_closure,
+        "source_controls_owned_by_feature": [
+            "LivesDisplay01",
+            "LivesDisplay02",
+            "LivesSwitch01",
+        ],
+        "source_controls_asserted_as_dependency": ["ExitButton01", "ExitButton03"],
+        "requires_feature": {
+            "feature": EXIT_STAGE_FEATURE_ID,
+            "option": "availability",
+            "value": "everywhere",
+        },
+        "forced_exit_stage_writes_verified": [
+            {"raw_offset": raw_offset, "replace": replacement.hex().upper()}
+            for raw_offset, replacement in expected_exit
+        ],
+        "common_base_writes_inherited": 0,
+    }
+
+
+def build_infinite_lives_ops(
+    stock: RawMode2Image,
+    b01_base: RawMode2Image,
+    patcher_source: Path,
+    patcher_data: Path,
+) -> tuple[list[Patch], dict]:
+    """Build Infinite Lives without owning the forced Exit Stage writes."""
+    source_writes, evidence = resolve_infinite_lives_writes(
+        patcher_source, patcher_data
+    )
+    stock_load = struct.unpack("<I", stock.read_file(SLUS_NAME)[0x18:0x1C])[0]
+    patches: list[Patch] = []
+    operations = []
+    for raw_offset, replacement in source_writes:
+        source_user_offset = raw_to_user_offset(raw_offset)
+        entry, file_offset = b01_base.containing_file(
+            source_user_offset, len(replacement)
+        )
+        if entry.name != SLUS_NAME:
+            raise AssertionError(
+                f"LivesSwitch01 targets {entry.name}, expected SLUS"
+            )
+        expected = read_iso_file_range(
+            b01_base, SLUS_NAME, file_offset, len(replacement)
+        )
+        stock_expected = read_iso_file_range(
+            stock, SLUS_NAME, file_offset, len(replacement)
+        )
+        if stock_expected != expected:
+            raise AssertionError("LivesSwitch01 depends on a B01 SLUS rewrite")
+        address = stock_load + file_offset - USER_SECTOR
+        patches.append(
+            Patch(
+                INFINITE_LIVES_FEATURE_ID,
+                "LivesSwitch01",
+                address,
+                expected,
+                replacement,
+            )
+        )
+        operations.append(
+            {
+                "kind": "guarded-main-exe-patch",
+                "source_raw_offset": raw_offset,
+                "iso_file": SLUS_NAME,
+                "file_offset": file_offset,
+                "guest_address": address,
+                "size": len(replacement),
+                "expected": expected.hex().upper(),
+                "replace": replacement.hex().upper(),
+            }
+        )
+    evidence["semantic_operations"] = operations
+    return patches, evidence
+
+
 def build_exit_stage_ops(
     stock: RawMode2Image,
     b01_base: RawMode2Image,
@@ -3386,10 +3594,6 @@ def build_exit_stage_ops(
         "oracle_count_per_choice": {
             value: len(oracles) for value, oracles in variant_oracles.items()
         },
-        "deferred_interaction": (
-            "LivesSwitch01 forces Everywhere in the source patcher and remains "
-            "deferred until that relationship has an explicit product policy."
-        ),
     }
 
 
@@ -3547,6 +3751,208 @@ def build_title_overlays(
                 )
             )
     return overlays
+
+
+def build_loading_logo_ops(
+    stock: RawMode2Image,
+    b01_base: RawMode2Image,
+    patcher_source: Path,
+    patcher_data: Path,
+) -> tuple[list[Patch], list[Overlay], dict]:
+    """Build the loading-logo choice feature from source assets."""
+    try:
+        import tweaks_engine as engine
+    except ImportError as error:
+        raise RuntimeError("cannot import tools/tweaks_engine.py") from error
+
+    src_dir = patcher_source.parent.parent
+    profile_path = patcher_data.parent / "profiles" / "default.x6tweaksprofile"
+    require_file(profile_path, "Tweaks default profile")
+    db = engine.twr.TweaksDB(src_dir)
+    base = engine.twr.load_profile(profile_path)
+    stock_load = struct.unpack("<I", stock.read_file(SLUS_NAME)[0x18:0x1C])[0]
+    stock_dat_entry = stock.entries["ROCK_X6.DAT"]
+    stock_record = dat_records(stock.read_file("ROCK_X6.DAT"))[
+        LOADING_LOGO_ROUTE["record_id"]
+    ]
+    stock_subasset = parse_subassets(stock_record)[
+        LOADING_LOGO_ROUTE["subasset_index"]
+    ]
+    if stock_subasset.asset_type != LOADING_LOGO_ROUTE["subasset_type"]:
+        raise AssertionError("loading logo stock DAT route type changed")
+    stock_slice_begin = LOADING_LOGO_ROUTE["subasset_relative_offset"]
+    title_group = ("TitleLoading01", "TitleLoading02", "TitleLoading03")
+    stock_merged = dict(base)
+    for name in title_group:
+        stock_merged[name] = "1" if name == "TitleLoading01" else "0"
+    _normalized, patchfile, patch_list, _values, synth = engine._assemble(
+        db, stock_merged, base
+    )
+    inherited = set(db.patchlist_base) | set(db.patchlist_script)
+    if patchfile or [name for name in patch_list if name not in inherited] or synth:
+        raise AssertionError("stock loading-logo choice is no longer a no-op")
+
+    disable_intro_payload = tuple(
+        (offset, bytes.fromhex(payload))
+        for offset, payload in INTRO_FEATURES[2].expected_writes
+    )
+    patches: list[Patch] = []
+    overlays: list[Overlay] = []
+    variants: dict[str, dict] = {}
+    for value, label, source_option in LOADING_LOGO_VARIANTS:
+        merged = dict(base)
+        for name in title_group:
+            merged[name] = "1" if name == source_option else "0"
+        _normalized, patchfile, patch_list, values, synth = engine._assemble(
+            db, merged, base
+        )
+        owned = [name for name in patch_list if name not in inherited]
+        expected_owned = ["IntroSkip03", "TitleLoading01", source_option]
+        if patchfile != "b01" or owned != expected_owned or synth:
+            raise AssertionError(
+                f"{source_option} loading-logo closure changed: "
+                f"patchfile={patchfile!r}, owned={owned!r}, "
+                f"synth={sorted(synth)!r}"
+            )
+        intro_writes = []
+        for data_hex, raw_offset in engine.expand_entry(
+            db, "IntroSkip03", patchfile, values, synth
+        ):
+            for split_hex, split_offset in engine.ecc_split(
+                data_hex, raw_offset
+            ):
+                intro_writes.append((split_offset, bytes.fromhex(split_hex)))
+        if tuple(intro_writes) != disable_intro_payload:
+            raise AssertionError(
+                f"{source_option} no longer forces reviewed IntroSkip03"
+            )
+        _file_patch, file_entries = engine.build_filelist(db, merged, base)
+        if len(file_entries) != 1:
+            raise AssertionError(
+                f"{source_option} loading-logo file count changed"
+            )
+        file_var, source, raw_offset = file_entries[0]
+        if raw_offset != LOADING_LOGO_ROUTE["source_raw_offset"]:
+            raise AssertionError(
+                f"{source_option} loading-logo raw route changed: "
+                f"0x{raw_offset:X}"
+            )
+        source_path = Path(source)
+        require_file(source_path, f"loading logo asset {file_var}")
+        payload = source_path.read_bytes()
+        stock_slice_end = stock_slice_begin + len(payload)
+        if stock_slice_end > len(stock_subasset.payload):
+            raise AssertionError(f"{source_option} loading logo exceeds stock asset")
+        expected = stock_subasset.payload[stock_slice_begin:stock_slice_end]
+        if expected == payload or not any(expected):
+            raise AssertionError(f"{source_option} loading logo is not a stock change")
+        subasset_offset = subasset_payload_offset(
+            stock_record, LOADING_LOGO_ROUTE["subasset_index"]
+        )
+        file_offset = (
+            stock_record.sector * USER_SECTOR
+            + subasset_offset
+            + stock_slice_begin
+        )
+        user_offset = stock_dat_entry.lba * USER_SECTOR + file_offset
+        overlays.append(
+            Overlay(
+                feature=LOADING_LOGO_FEATURE_ID,
+                label=f"{value}-logo",
+                source=str(source_path),
+                raw_offset=raw_offset,
+                user_offset=user_offset,
+                expected=expected,
+                replace=payload,
+                iso_file=stock_dat_entry.name,
+                file_offset=file_offset,
+                when=("variant", value),
+            )
+        )
+
+        descriptor_ops = []
+        for source_var in (source_option,):
+            for data_hex, raw_offset in engine.expand_entry(
+                db, source_var, patchfile, values, synth
+            ):
+                for split_hex, split_offset in engine.ecc_split(
+                    data_hex, raw_offset
+                ):
+                    replacement = bytes.fromhex(split_hex)
+                    source_user_offset = raw_to_user_offset(split_offset)
+                    entry, slus_file_offset = b01_base.containing_file(
+                        source_user_offset, len(replacement)
+                    )
+                    if entry.name != SLUS_NAME:
+                        raise AssertionError(
+                            f"{source_option} descriptor targets {entry.name}"
+                        )
+                    expected_slus = read_iso_file_range(
+                        b01_base, SLUS_NAME, slus_file_offset, len(replacement)
+                    )
+                    stock_expected = read_iso_file_range(
+                        stock, SLUS_NAME, slus_file_offset, len(replacement)
+                    )
+                    if stock_expected != expected_slus:
+                        raise AssertionError(
+                            f"{source_option} descriptor depends on B01 SLUS rewrite"
+                        )
+                    address = stock_load + slus_file_offset - USER_SECTOR
+                    patches.append(
+                        Patch(
+                            LOADING_LOGO_FEATURE_ID,
+                            source_option,
+                            address,
+                            expected_slus,
+                            replacement,
+                            when=("variant", value),
+                        )
+                    )
+                    descriptor_ops.append(
+                        {
+                            "kind": "guarded-main-exe-patch",
+                            "source_raw_offset": split_offset,
+                            "iso_file": SLUS_NAME,
+                            "file_offset": slus_file_offset,
+                            "guest_address": address,
+                            "size": len(replacement),
+                            "expected": expected_slus.hex().upper(),
+                            "replace": replacement.hex().upper(),
+                        }
+                    )
+        variants[value] = {
+            "label": label,
+            "source_selection": {source_option: 1},
+            "asset_operation": {
+                "kind": "guarded-dat-subasset-slice-overlay",
+                "source": str(source_path),
+                "raw_oracle_offset": raw_offset,
+                "iso_file": stock_dat_entry.name,
+                "record_id": LOADING_LOGO_ROUTE["record_id"],
+                "subasset_index": LOADING_LOGO_ROUTE["subasset_index"],
+                "subasset_type": LOADING_LOGO_ROUTE["subasset_type"],
+                "subasset_relative_offset": stock_slice_begin,
+                "file_offset": file_offset,
+                "disc_user_offset": user_offset,
+                "size": len(payload),
+                "stock_sha256": sha256(expected),
+                "replacement_sha256": sha256(payload),
+            },
+            "descriptor_operations": descriptor_ops,
+        }
+    return patches, overlays, {
+        "status": "ready-pending-live-smoke",
+        "source_closure_per_variant": {
+            source_option: ["IntroSkip03", "TitleLoading01", source_option]
+            for _value, _label, source_option in LOADING_LOGO_VARIANTS
+        },
+        "requires_feature": {
+            "feature": "disable_title_demos",
+        },
+        "stock_choice_payloadless": "TitleLoading01",
+        "common_base_writes_inherited": 0,
+        "variants": variants,
+    }
 
 
 def parse_owned_script_writes(source_path: Path) -> list[tuple[str, int, bytes]]:
@@ -4034,8 +4440,14 @@ def build_retranslation_ops(
         )
     # The guest ISO lookup must expose the virtual DAT extent through the final
     # relocated record. Keep the stock LBA and update both ISO9660 byte orders.
-    logical_dat_size = pack_sector * USER_SECTOR
-    if logical_dat_size != 0x03DED000:
+    #
+    # Reserve ten additional sectors for modular DAT records 243-246. The
+    # Hunter/Dr. Light mugshot package writes those records at this fixed tail
+    # position so it composes with Retranslation without needing to rewrite the
+    # retranslation allocator's existing records.
+    reserved_extra_mugshot_sectors = 10
+    logical_dat_size = (pack_sector + reserved_extra_mugshot_sectors) * USER_SECTOR
+    if logical_dat_size != 0x03DF2000:
         raise AssertionError(
             f"reviewed virtual DAT extent changed: 0x{logical_dat_size:08X}"
         )
@@ -4051,7 +4463,7 @@ def build_retranslation_ops(
             label="rock-x6-dat-logical-size",
             user_offset=iso_size_offset,
             expected=iso_size_expected,
-            replace=bytes.fromhex("00D0DE0303DED000"),
+            replace=bytes.fromhex("0020DF0303DF2000"),
             iso_file="ISO9660 root directory",
             file_offset=iso_size_offset,
         )
@@ -4105,12 +4517,15 @@ def build_retranslation_ops(
         "relocated_record_ids": relocated_ids,
         "relocated_start_sector": pack_first_sector,
         "relocated_sectors": packed_sectors,
+        "reserved_extra_mugshot_record_sectors": reserved_extra_mugshot_sectors,
+        "logical_dat_size": logical_dat_size,
         "stock_znull_sectors": znull_sectors,
         "composition_limit": (
             "The 25 growing records share one reviewed ZNULL allocation and "
-            "logical DAT-size redirect. Features that grow or touch these "
-            "records remain deferred until the resolver owns a container "
-            "composer/allocator."
+            "logical DAT-size redirect. Ten tail sectors are reserved for "
+            "modular Hunter/Dr. Light mugshot records 243-246. Other features "
+            "that grow or touch relocated records remain deferred until the "
+            "resolver owns a general container composer/allocator."
         ),
         "owned_source_main_exe_writes": len(source_patches),
         "canonical_main_exe_ranges": len(patches),
@@ -4395,8 +4810,10 @@ def q(value: str) -> str:
 def represented_source_controls(
     *,
     wants_title: bool,
+    wants_loading_logo: bool,
     wants_retranslation: bool,
     wants_exit: bool,
+    wants_infinite_lives: bool,
     simple_specs: tuple[FeatureSpec, ...],
     config_specs: tuple[ConfigFeatureSpec, ...],
     param_specs: tuple[ParamFeatureSpec, ...],
@@ -4416,10 +4833,20 @@ def represented_source_controls(
             source_option
             for _value, _label, source_option in TITLE_SCREEN_VARIANTS
         )
+    if wants_loading_logo:
+        controls.update(
+            ("TitleLoading01",)
+            + tuple(
+                source_option
+                for _value, _label, source_option in LOADING_LOGO_VARIANTS
+            )
+        )
     if wants_retranslation:
         controls.update(("ScriptPatch01", "ScriptPatch02"))
     if wants_exit:
         controls.update(("ExitButton01", "ExitButton02", "ExitButton03"))
+    if wants_infinite_lives:
+        controls.add("LivesSwitch01")
     return sorted(controls)
 
 
@@ -4436,7 +4863,14 @@ def build_manifest(
         for constraint in PARAM_CONSTRAINTS
         if constraint.feature_id in features
     )
+    has_feature_requirements = (
+        INFINITE_LIVES_FEATURE_ID in features
+        or LOADING_LOGO_FEATURE_ID in features
+    )
     format_version = (
+        4
+        if has_feature_requirements
+        else
         3
         if manifest_constraints
         or any(
@@ -4487,6 +4921,35 @@ def build_manifest(
                 f"value = {q(value)}",
                 f"label = {q(label)}",
             ]
+    if LOADING_LOGO_FEATURE_ID in features:
+        lines += [
+            "",
+            "[[feature]]",
+            f"id = {q(LOADING_LOGO_FEATURE_ID)}",
+            'name = "Loading Screen Logo"',
+            (
+                'description = "Replace the pre-stage loading-screen logo; '
+                'requires Disable Title Demos."'
+            ),
+            'group = "Localization"',
+            "default_enabled = false",
+            "",
+            "[[option]]",
+            f"feature = {q(LOADING_LOGO_FEATURE_ID)}",
+            'id = "variant"',
+            'label = "Logo"',
+            'description = "Choose the replacement loading-screen logo."',
+            'group = "Localization"',
+            'type = "choice"',
+            f"default = {q(LOADING_LOGO_VARIANTS[0][0])}",
+        ]
+        for value, label, _source_option in LOADING_LOGO_VARIANTS:
+            lines += [
+                "",
+                "[[option.choice]]",
+                f"value = {q(value)}",
+                f"label = {q(label)}",
+            ]
     if "retranslation" in features:
         lines += [
             "",
@@ -4495,6 +4958,19 @@ def build_manifest(
             'name = "Retranslation"',
             'description = "English retranslation, VFW font, and menu alignment."',
             'group = "Localization"',
+            "default_enabled = false",
+        ]
+    if INFINITE_LIVES_FEATURE_ID in features:
+        lines += [
+            "",
+            "[[feature]]",
+            f"id = {q(INFINITE_LIVES_FEATURE_ID)}",
+            'name = "Infinite Lives (No Continues)"',
+            (
+                'description = "Keep the lives counter from decrementing; '
+                'requires Exit Stage Availability set to Everywhere."'
+            ),
+            'group = "Lives and Pickups"',
             "default_enabled = false",
         ]
     for spec in SIMPLE_FEATURES:
@@ -4613,6 +5089,24 @@ def build_manifest(
             "[[option.choice]]",
             'value = "everywhere"',
             'label = "Everywhere"',
+        ]
+    if INFINITE_LIVES_FEATURE_ID in features:
+        lines += [
+            "",
+            "[[constraint]]",
+            f"feature = {q(INFINITE_LIVES_FEATURE_ID)}",
+            'kind = "requires_feature"',
+            f"requires_feature = {q(EXIT_STAGE_FEATURE_ID)}",
+            'requires_option = "availability"',
+            'requires_value = "everywhere"',
+        ]
+    if LOADING_LOGO_FEATURE_ID in features:
+        lines += [
+            "",
+            "[[constraint]]",
+            f"feature = {q(LOADING_LOGO_FEATURE_ID)}",
+            'kind = "requires_feature"',
+            'requires_feature = "disable_title_demos"',
         ]
     for patch in patches:
         lines += [
@@ -4799,6 +5293,21 @@ def main() -> int:
         default=DEFAULT_ORACLE_DIR / "movement-current-combined.bin",
     )
     parser.add_argument(
+        "--hover-mode-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "hover-mode-core.bin",
+    )
+    parser.add_argument(
+        "--combined-hover-mode-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "movement-core-hover.bin",
+    )
+    parser.add_argument(
+        "--shadow-slide-oracle",
+        type=Path,
+        default=DEFAULT_ORACLE_DIR / "shadow-slide-core.bin",
+    )
+    parser.add_argument(
         "--small-data-oracle",
         type=Path,
         default=DEFAULT_ORACLE_DIR / "small-data-core.bin",
@@ -4867,7 +5376,7 @@ def main() -> int:
         choices=("all", *ALL_FEATURE_IDS),
         default="all",
     )
-    parser.add_argument("--package-version", default="1.10.3")
+    parser.add_argument("--package-version", default="1.10.5")
     parser.add_argument("--audit-retranslation", action="store_true")
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--out", type=Path)
@@ -4884,9 +5393,16 @@ def main() -> int:
     enabled_features = (
         set(ALL_FEATURE_IDS) if args.feature == "all" else {args.feature}
     )
+    requested_features = set(enabled_features)
+    if INFINITE_LIVES_FEATURE_ID in enabled_features:
+        enabled_features.add(EXIT_STAGE_FEATURE_ID)
+    if LOADING_LOGO_FEATURE_ID in enabled_features:
+        enabled_features.add("disable_title_demos")
     wants_title = "title_screen" in enabled_features
+    wants_loading_logo = LOADING_LOGO_FEATURE_ID in enabled_features
     wants_retranslation = "retranslation" in enabled_features
     wants_exit = EXIT_STAGE_FEATURE_ID in enabled_features
+    wants_infinite_lives = INFINITE_LIVES_FEATURE_ID in enabled_features
     simple_specs = tuple(
         spec for spec in SIMPLE_FEATURES if spec.feature_id in enabled_features
     )
@@ -4900,6 +5416,13 @@ def main() -> int:
     wants_nightmare = any(spec in NIGHTMARE_FEATURES for spec in simple_specs)
     wants_qol = any(spec in QOL_FEATURES for spec in simple_specs)
     wants_movement = any(spec in MOVEMENT_FEATURES for spec in simple_specs)
+    wants_hover_mode = any(
+        spec.feature_id == "x_hover_mode" for spec in simple_specs
+    )
+    wants_shadow_slide = any(
+        spec.feature_id == "shadow_slide_by_holding_down"
+        for spec in simple_specs
+    )
     wants_small_data = any(
         spec in SMALL_DATA_FEATURES for spec in simple_specs
     )
@@ -4919,7 +5442,14 @@ def main() -> int:
     if wants_retranslation:
         require_file(args.s02_base, "s02 base conversion oracle")
         require_file(args.patcher_source, "Tweaks _dat.ahk")
-    if simple_specs or config_specs or param_specs or wants_exit:
+    if (
+        simple_specs
+        or config_specs
+        or param_specs
+        or wants_exit
+        or wants_infinite_lives
+        or wants_loading_logo
+    ):
         require_file(args.b01_base, "B01 base conversion oracle")
         require_file(args.patcher_source, "Tweaks _dat.ahk")
         require_file(
@@ -4948,6 +5478,14 @@ def main() -> int:
             args.combined_movement_oracle,
             "combined movement conversion oracle",
         )
+    if wants_hover_mode:
+        require_file(args.hover_mode_oracle, "hover-mode conversion oracle")
+        require_file(
+            args.combined_hover_mode_oracle,
+            "combined hover-mode conversion oracle",
+        )
+    if wants_shadow_slide:
+        require_file(args.shadow_slide_oracle, "shadow-slide conversion oracle")
     if wants_small_data:
         require_file(args.small_data_oracle, "small-data conversion oracle")
         require_file(
@@ -5013,7 +5551,14 @@ def main() -> int:
         )
         b01_base = (
             stack.enter_context(RawMode2Image(args.b01_base))
-            if simple_specs or config_specs or param_specs or wants_exit
+            if (
+                simple_specs
+                or config_specs
+                or param_specs
+                or wants_exit
+                or wants_infinite_lives
+                or wants_loading_logo
+            )
             else None
         )
         intro_oracles = tuple(
@@ -5045,6 +5590,22 @@ def main() -> int:
             for path in (
                 (args.movement_oracle, args.combined_movement_oracle)
                 if wants_movement
+                else ()
+            )
+        )
+        hover_mode_oracles = tuple(
+            stack.enter_context(RawMode2Image(path))
+            for path in (
+                (args.hover_mode_oracle, args.combined_hover_mode_oracle)
+                if wants_hover_mode
+                else ()
+            )
+        )
+        shadow_slide_oracles = tuple(
+            stack.enter_context(RawMode2Image(path))
+            for path in (
+                (args.shadow_slide_oracle,)
+                if wants_shadow_slide
                 else ()
             )
         )
@@ -5132,10 +5693,17 @@ def main() -> int:
                 for feature in ALL_FEATURE_IDS
                 if feature in enabled_features
             ],
+            "requested_features": [
+                feature
+                for feature in ALL_FEATURE_IDS
+                if feature in requested_features
+            ],
             "source_controls": represented_source_controls(
                 wants_title=wants_title,
+                wants_loading_logo=wants_loading_logo,
                 wants_retranslation=wants_retranslation,
                 wants_exit=wants_exit,
+                wants_infinite_lives=wants_infinite_lives,
                 simple_specs=simple_specs,
                 config_specs=config_specs,
                 param_specs=param_specs,
@@ -5203,6 +5771,21 @@ def main() -> int:
                     for item in title_overlays
                 ],
             }
+        if wants_loading_logo:
+            loading_patches, loading_overlays, loading_evidence = (
+                build_loading_logo_ops(
+                    stock,
+                    b01_base,
+                    args.patcher_source,
+                    args.patcher_data,
+                )
+            )
+            patches += loading_patches
+            overlays += loading_overlays
+            report["features"][LOADING_LOGO_FEATURE_ID] = loading_evidence
+            report["provenance"]["b01_base_oracle_sha256"] = file_sha256(
+                args.b01_base
+            )
         if wants_retranslation:
             script_patches, script_overlays, evidence = build_retranslation_ops(
                 stock,
@@ -5233,6 +5816,8 @@ def main() -> int:
                     nightmare_oracles,
                     qol_oracles,
                     movement_oracles,
+                    hover_mode_oracles,
+                    shadow_slide_oracles,
                     small_data_oracles,
                     static_spike_oracles,
                     simple_specs,
@@ -5274,6 +5859,17 @@ def main() -> int:
                 report["provenance"][
                     "combined_movement_oracle_sha256"
                 ] = file_sha256(args.combined_movement_oracle)
+            if wants_hover_mode:
+                report["provenance"][
+                    "hover_mode_oracle_sha256"
+                ] = file_sha256(args.hover_mode_oracle)
+                report["provenance"][
+                    "combined_hover_mode_oracle_sha256"
+                ] = file_sha256(args.combined_hover_mode_oracle)
+            if wants_shadow_slide:
+                report["provenance"][
+                    "shadow_slide_oracle_sha256"
+                ] = file_sha256(args.shadow_slide_oracle)
             if wants_small_data:
                 report["provenance"][
                     "small_data_oracle_sha256"
@@ -5327,6 +5923,18 @@ def main() -> int:
                 args.patcher_data,
             )
             report["features"].update(param_evidence)
+            report["provenance"]["b01_base_oracle_sha256"] = file_sha256(
+                args.b01_base
+            )
+        if wants_infinite_lives:
+            lives_patches, lives_evidence = build_infinite_lives_ops(
+                stock,
+                b01_base,
+                args.patcher_source,
+                args.patcher_data,
+            )
+            patches += lives_patches
+            report["features"][INFINITE_LIVES_FEATURE_ID] = lives_evidence
             report["provenance"]["b01_base_oracle_sha256"] = file_sha256(
                 args.b01_base
             )

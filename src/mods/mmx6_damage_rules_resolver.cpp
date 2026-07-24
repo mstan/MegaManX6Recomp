@@ -518,9 +518,11 @@ bool validate(const ModPackage& package, std::vector<std::string>& errors) {
 
 bool resolve_damage_rules(
     const ModPackage& package, const ModSelection& selection,
+    const PSXRecompV4::ModBuiltinResolverContext& context,
     std::vector<ModResolution::Write>& writes,
     std::vector<std::string>& errors
 ) {
+    (void)context;
     if (!validate(package, errors)) return false;
     for (const auto& [id, feature] : selection.features) {
         if (id != "gate_vulnerable_to_normal_attacks" &&

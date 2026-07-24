@@ -184,9 +184,11 @@ bool validate_package(
 
 bool resolve_continuous_dash(
     const ModPackage& package, const ModSelection& selection,
+    const PSXRecompV4::ModBuiltinResolverContext& context,
     std::vector<ModResolution::Write>& writes,
     std::vector<std::string>& errors
 ) {
+    (void)context;
     if (!validate_package(package, errors)) return false;
     for (const auto& [id, value] : selection.features) {
         if (std::find(kFeatures.begin(), kFeatures.end(), id) ==
