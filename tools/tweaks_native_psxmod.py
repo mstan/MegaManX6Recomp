@@ -1895,6 +1895,18 @@ SIMPLE_FEATURES = (
     + SMALL_DATA_FEATURES
     + STATIC_SPIKE_FEATURES
 )
+OMITTED_FEATURES = {
+    # This standalone patch rewrites the same Shadow/Armor hook site as
+    # general-foundations/incomplete_armors_by_part. Until there is a proven
+    # combined payload, do not emit it as an enable-all selectable row.
+    "shadow_slide_by_holding_down": (
+        "omitted: overlaps incomplete_armors_by_part at main_exe:0x8003B560 "
+        "and needs a reviewed combined hook"
+    ),
+}
+SIMPLE_FEATURES = tuple(
+    spec for spec in SIMPLE_FEATURES if spec.feature_id not in OMITTED_FEATURES
+)
 EXIT_STAGE_VARIANTS = {
     "main_stages": {
         "label": "Main Stages",
@@ -5722,6 +5734,7 @@ def main() -> int:
                 ),
             },
             "features": {},
+            "omitted_features": OMITTED_FEATURES,
             "forbidden_runtime_payloads": {
                 "derived_disc": False,
                 "vcdiff": False,
