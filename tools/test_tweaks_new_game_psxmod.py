@@ -89,8 +89,8 @@ class PackageIntegrationTests(unittest.TestCase):
         )
         self.assertEqual(report["package"]["catalog_control_count"], 74)
         self.assertEqual(report["package"]["source_control_count"], 65)
-        self.assertEqual(report["package"]["excluded_control_count"], 1)
-        self.assertEqual(report["package"]["deferred_control_count"], 8)
+        self.assertEqual(report["package"]["excluded_control_count"], 4)
+        self.assertEqual(report["package"]["deferred_control_count"], 5)
         self.assertEqual(len(report["source_controls"]), 65)
         self.assertEqual(len(report["source_control_ledger"]), 74)
         self.assertEqual(
@@ -103,7 +103,31 @@ class PackageIntegrationTests(unittest.TestCase):
                         "Game state; selecting the Tweaks control alone emits "
                         "no patchfile, owned writes, or synthesized payload."
                     ),
-                }
+                },
+                {
+                    "source_control": "DebugCheckpointStart",
+                    "reason": (
+                        "Hidden debug-start control emits no patchfile, owned "
+                        "writes, or synthesized payload through the normal "
+                        "submitted profile path."
+                    ),
+                },
+                {
+                    "source_control": "DebugStageStart",
+                    "reason": (
+                        "Hidden debug-start control emits no patchfile, owned "
+                        "writes, or synthesized payload through the normal "
+                        "submitted profile path."
+                    ),
+                },
+                {
+                    "source_control": "ZeroDebug",
+                    "reason": (
+                        "Hidden Zero debug-start control emits no patchfile, "
+                        "owned writes, or synthesized payload through the "
+                        "normal submitted profile path."
+                    ),
+                },
             ],
         )
         deferred = {
@@ -112,16 +136,18 @@ class PackageIntegrationTests(unittest.TestCase):
             if item["status"] == "deferred"
         }
         self.assertEqual(deferred, {
-            "DebugCheckpointStart", "DebugStageStart",
             "PartsRandom01", "PartsRandom02", "PartsRandomTitle01",
-            "RescRepFoundMark01", "RescRepFoundMarkOnly01", "ZeroDebug",
+            "RescRepFoundMark01", "RescRepFoundMarkOnly01",
         })
         excluded = {
             item["source_control"]
             for item in report["source_control_ledger"]
             if item["status"] == "excluded"
         }
-        self.assertEqual(excluded, {"CharAdd01"})
+        self.assertEqual(
+            excluded,
+            {"CharAdd01", "DebugCheckpointStart", "DebugStageStart", "ZeroDebug"},
+        )
         table = report["composed_resources"]["found_reploid_table"]
         middle = report["foundation"][1]
         self.assertEqual(

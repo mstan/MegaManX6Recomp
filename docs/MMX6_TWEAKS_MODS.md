@@ -652,8 +652,9 @@ The local integration test replays every admitted source control through the
 ported Tweaks engine, checks isolated parity, checks minimum/maximum combined
 composition, verifies the embedded C++ stock guards, and builds a deterministic
 archive. Remaining New Game controls are deferred only where semantics are not
-yet product-ready: debug starts, random starting parts, found-Reploid mark
-algebra, and `ZeroDebug`.
+yet product-ready: random starting parts and found-Reploid mark algebra. The
+hidden debug-start controls are explicitly excluded because the normal
+submitted profile path emits no writes for them.
 
 ### General shared-foundation package
 
@@ -691,15 +692,16 @@ either threshold is non-stock. Each enabled row exposes a bounded integer
 ### Current modular coverage checkpoint
 
 After the modular New Game, domain, timing, player, title/retranslation, and
-hook packages installed in this worktree, the coverage ledger classifies 287
-of 329 unique Tweaks source controls: 276 represented and 11 explicitly
-excluded as GUI/patcher artifacts. Forty-two controls remain:
+hook packages installed in this worktree, the coverage ledger classifies 290
+of 329 unique Tweaks source controls: 276 represented and 14 explicitly
+excluded as GUI/patcher artifacts or source no-ops. Thirty-nine controls
+remain:
 
 | Tweaks area | Remaining controls |
 |---|---:|
 | Player Mechanics | 22 |
 | General Tweaks | 6 |
-| New Game Status | 8 |
+| New Game Status | 5 |
 | Balance | 1 |
 | Localization + Custom Art | 5 |
 
