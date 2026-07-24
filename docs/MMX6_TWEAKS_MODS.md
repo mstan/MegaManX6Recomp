@@ -394,6 +394,44 @@ kill/orb/reform loop, and both the stage and rematch forms of Yammark and
 Wolfang across difficulties. The static guards and composition proof make the
 batch safe to ship for testing; they do not replace those behavior checks.
 
+### Standalone Player Mechanics package
+
+`mmx6.tweaks.player-standalone` is the first adversarial Player Mechanics
+burndown package. It admits four independent, default-disabled rows:
+
+| Feature row | Source control | Exact source closure |
+| --- | --- | --- |
+| Unlock X's Air Dash | `DashGlobal01` | `DashGlobal01` |
+| Guard Shell Bug Fix | `GuardShellFix01` | `GuardShellFix01` |
+| Shadow Armor Wall Slide | `ShadowSlide01` | `ShadowBase01`, `ShadowSlide01` |
+| Zero Weapon Auto-select | `ZeroAutoselect01` | `ZeroAutoselect_Common`, `ZeroAutoselect01` |
+
+All 27 writes have complete USA v1.1 stock guards and one semantic owner. The
+four closures are byte-disjoint, so enabling all rows is deterministic and
+order independent. Disabled rows emit nothing. The archive contains only
+declarative guarded writes and uses the stock BIN/CUE at runtime.
+
+`HoverUnlock02` was rejected from this supposedly safe slice. The upstream GUI
+silently forces `HoverUnlock01`, so it is not an independent behavior, and the
+empty `HoverUnlock02_ASM10` entry terminates the live payload after slot 9.
+Importing all later-looking assignments or omitting the forced control would
+both be false source closure.
+
+Generate the package from local, user-supplied v2.6.1 source:
+
+```powershell
+py -3 tools/tweaks_player_standalone_psxmod.py `
+  --stock "F:\path\to\Mega Man X6 (USA) (v1.1).bin" `
+  --patcher-source "F:\path\to\Tweaks\_src" `
+  --out "build-local\MMX6-Tweaks-Player-Standalone.psxmod"
+```
+
+The conversion report carries a string-only `source_controls` ledger for the
+four admitted controls plus a 49-control Player Mechanics decision ledger.
+Mach Dash, continuous dash, and Zero-technique state machines are named as
+separate resolver domains; `Anim0301`, `Anim0401` through `Anim0407`, and the
+three quarantined Mach Dash scalars remain explicit non-admissions.
+
 ### Exhausted low-risk static and bounded-choice tranche
 
 Version 1.7 raises the native package from 44 to 73 feature rows. The review
