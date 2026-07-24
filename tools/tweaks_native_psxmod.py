@@ -550,6 +550,26 @@ MOVEMENT_FEATURES = (
         source_closure=("HoverUnlock01", "HoverUnlock02"),
     ),
     FeatureSpec(
+        "shadow_slide_by_holding_down",
+        "Shadow Slide by Holding Down",
+        "Allow Shadow Armor to slide down walls while holding Down.",
+        "Movement",
+        "ShadowSlide01",
+        "mixed",
+        (
+            (0x1D954A00, "00000000"),
+            (0x1D9533E8, "00000000"),
+            (0x1D952428, "77E9010C80000434E0EA01087C000392"),
+            (0x1D99B118, "030040100800633003006010000000005CED0008000004365FED000800000000"),
+            (0x1D94D398, "E8EA010C"),
+            (0x1D9B4850, "E8EA010C"),
+            (0x1D99B138, "1001028E0000FB37240002AE77E9010C80000434800003920800401008006330020060107C000692AFF4000C000004360800C6300300C0100000000074B5000C00000436CADA010800000000"),
+            (0x1D962588, "FBEA0108FF00063C"),
+            (0x1D99B184, "77E9010C800004347C002392050040100800633003006014000000007B250108000004366225010800FFC234"),
+        ),
+        source_closure=("ShadowBase01", "ShadowSlide01"),
+    ),
+    FeatureSpec(
         "unlimited_high_jump",
         "Unlimited High Jump",
         "Prevent the High Jump attachment's duration counters from expiring.",
@@ -4837,7 +4857,7 @@ def main() -> int:
         choices=("all", *ALL_FEATURE_IDS),
         default="all",
     )
-    parser.add_argument("--package-version", default="1.10.1")
+    parser.add_argument("--package-version", default="1.10.2")
     parser.add_argument("--audit-retranslation", action="store_true")
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--out", type=Path)
