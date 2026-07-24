@@ -77,6 +77,47 @@ disabled and enabled stock no-op, all options together, exact Duration/Speed/
 Immunity bytes, normalization order independence, collision-free repeated
 resolution, and every numeric boundary.
 
+## Zero-technique independent-row boundary
+
+The remaining 17 Zero-technique controls are deliberately not claimed as
+converted. `tools/tweaks_zero_techniques_audit.py` pins six source cases that
+show why four attractive left-pane rows would currently be dishonest:
+
+- selecting Sentsuizan Down + Special silently changes the Ensuizan input and
+  forces Yammar activation;
+- selecting Ensuizan Up + Special also forces Yammar activation;
+- Guard Shell Down + Special is silently cleared while normal Ensuizan is
+  active;
+- Air Ensuizan synthesizes direction/button writes from both Ensuizan and
+  Sentsuizan input state;
+- Hold/Release Sentsuizan synthesizes two input-dependent AND writes; and
+- with Retranslation active, those same choices synthesize different
+  `ZeroInputHint_*` data writes.
+
+The current built-in resolver receives its package and its package's selection,
+not the resolved selections of another package. It therefore cannot know that
+the Retranslation package is active, and separate enabled checkboxes would
+silently mutate one another to match the old GUI. The audit publishes
+`rejected_source_controls`, not `source_controls`, so the coverage ledger
+correctly leaves all 17 open. Conversion needs either cross-package resolved
+context or a typed input-hint provider, followed by an explicit UX decision
+that replaces silent source-GUI forcing.
+
+## Player Mechanics outcome
+
+This branch converts 19 of the exact 49-control Player Mechanics ledger:
+three fixed standalone controls, two continuous-dash controls, and fourteen
+Mach Dash controls. Thirty remain, all with explicit reasons:
+
+- 17 Zero-technique controls at the independent-row boundary above;
+- `Anim0301` and `Anim0401` through `Anim0407`;
+- quarantined `MachDashDuration02`, `MachDashSpeed02`, and
+  `MachDashSpeed03`;
+- `HoverUnlock02`, whose GUI also forces the already-separate
+  `HoverUnlock01`; and
+- `ShadowSlide01`, whose callsite targets an unowned
+  `ArmorByPart_Common` zero allocation in stock.
+
 ## Deliberately deferred
 
 The following IDs are not declared by package version 1.0.0:
