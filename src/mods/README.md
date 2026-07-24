@@ -18,3 +18,9 @@ Prefer declarative package operations. A trusted resolver belongs here only
 when several independent features must compose into a shared bitfield, table,
 routine, allocation, or other semantic record that cannot be represented by
 ordinary non-overlapping writes.
+
+Registered domains:
+
+- `mmx6.tweaks.hooks` — composes four independent voice-restoration features
+  into one guarded, fixed-slice code allocation. See
+  `docs/MMX6_TWEAKS_HOOKS.md`.
