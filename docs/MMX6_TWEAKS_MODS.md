@@ -693,9 +693,9 @@ either threshold is non-stock. Each enabled row exposes a bounded integer
 ### Current modular coverage checkpoint
 
 After the modular New Game, domain, timing, player, title/retranslation, and
-hook packages installed in this worktree, the coverage ledger classifies 295
-of 329 unique Tweaks source controls: 281 represented and 14 explicitly
-excluded as GUI/patcher artifacts or source no-ops. Thirty-four controls
+hook packages installed in this worktree, the coverage ledger classifies 296
+of 329 unique Tweaks source controls: 282 represented and 14 explicitly
+excluded as GUI/patcher artifacts or source no-ops. Thirty-three controls
 remain:
 
 | Tweaks area | Remaining controls |
@@ -703,7 +703,6 @@ remain:
 | Player Mechanics | 19 |
 | General Tweaks | 6 |
 | New Game Status | 3 |
-| Balance | 1 |
 | Localization + Custom Art | 5 |
 
 ## Burndown after version 1.9

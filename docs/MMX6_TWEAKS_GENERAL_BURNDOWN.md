@@ -4,7 +4,7 @@ This audit starts from the post-package remainder: General 21, Balance 5,
 Boss Attacks 1, Stages 5, Damage Tables 12, and Localization + Art 5. Those
 numbers are parser catalog entries, not automatically valid launcher rows.
 
-`tools/tweaks_domain_psxmod.py` converts 21 real source controls into 18
+`tools/tweaks_domain_psxmod.py` converts 22 real source controls into 19
 feature rows across four independent packages:
 
 | Package | Feature rows | Source controls |
@@ -12,7 +12,7 @@ feature rows across four independent packages:
 | `mmx6.tweaks.general` | 13 | 13 |
 | `mmx6.tweaks.stage-modes` | 2 | 5 |
 | `mmx6.tweaks.boss-attacks` | 1 | 1 |
-| `mmx6.tweaks.damage-rules` | 2 | 2 |
+| `mmx6.tweaks.damage-rules` | 3 | 3 |
 
 The stage package deliberately represents `AutoCrouching01`,
 `AutoCrouching02`, `AutoCrouching03`, and `RecycleCeiling01` as one enabled
@@ -50,6 +50,13 @@ The other accepted domains are the four ceiling-mode controls above,
 `StageMod0404`, `BossMod0105`, `DmgTableGate01`, and
 `DmgTableGateDmg01`.
 
+Version 1.2 of `mmx6.tweaks.damage-rules` also accepts `BossHealth` as one
+`Boss Health by Level` feature row with 61 bounded integer fields. Disabled is
+stock. Enabled applies the reviewed v2.6.1 table algebra for single-value
+bosses, fixed-level bosses, Nightmare Snake's derived halfwords, Dynamo's
+halfword delta table, Nightmare Mother's relocated base/bonus values, and the
+common base-plus-delta byte tables.
+
 ## Real controls still deferred
 
 - `ArmorByPart01` through `ArmorByPart04` need one incomplete-armor composer.
@@ -65,9 +72,6 @@ The other accepted domains are the four ceiling-mode controls above,
   retranslation and existing-asset-package use.
 - `TitleLoading01` through `TitleLoading03` are one real loading-logo choice,
   but remain deferred while the known demo-return behavior is wrong.
-
-`BossHealth` is a dynamic boss-health table editor template, not one scalar
-control. The underlying table needs typed record ownership.
 
 ## GUI and patcher artifacts
 
