@@ -117,6 +117,10 @@ py -3 tools/mmx6_tweaks_coverage.py `
 The installed-package scan selects the latest numeric version of every
 package. The ledger fails closed when a discovered report lacks
 `source_controls`; estimates do not silently enter the represented count.
+Converters may separately classify upstream GUI plumbing through
+`excluded_source_controls`, with a non-empty reason for every entry. Excluded
+widgets reduce the implementation backlog but never inflate the implemented
+count, and a control cannot be both represented and excluded.
 
 ### Nightmare-effect toggles
 

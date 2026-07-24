@@ -40,6 +40,60 @@ def discover_latest_reports(mods_root: Path) -> list[Path]:
     return reports
 
 
+def collect_report_ledgers(
+    report_paths: list[Path],
+) -> tuple[set[str], dict[str, str], list[dict]]:
+    represented: set[str] = set()
+    excluded: dict[str, str] = {}
+    report_packages = []
+    for path in report_paths:
+        report = json.loads(path.read_text(encoding="utf-8"))
+        controls = report.get("source_controls")
+        if not isinstance(controls, list) or not all(
+            isinstance(value, str) for value in controls
+        ):
+            raise ValueError(f"{path} lacks a string source_controls ledger")
+        represented.update(controls)
+        exclusions = report.get("excluded_source_controls", [])
+        if not isinstance(exclusions, list):
+            raise ValueError(
+                f"{path} has a non-list excluded_source_controls ledger"
+            )
+        for exclusion in exclusions:
+            if (
+                not isinstance(exclusion, dict)
+                or not isinstance(exclusion.get("source_control"), str)
+                or not isinstance(exclusion.get("reason"), str)
+                or not exclusion["reason"].strip()
+            ):
+                raise ValueError(
+                    f"{path} has an invalid excluded_source_controls entry"
+                )
+            control = exclusion["source_control"]
+            reason = exclusion["reason"].strip()
+            previous = excluded.get(control)
+            if previous is not None and previous != reason:
+                raise ValueError(
+                    f"conflicting exclusion reasons for {control}"
+                )
+            excluded[control] = reason
+        report_packages.append(
+            {
+                "path": str(path),
+                "package_version": report.get("package_version"),
+                "source_controls": len(set(controls)),
+                "excluded_source_controls": len(exclusions),
+            }
+        )
+    overlap = represented & set(excluded)
+    if overlap:
+        raise ValueError(
+            "controls cannot be both represented and excluded: "
+            + ", ".join(sorted(overlap))
+        )
+    return represented, excluded, report_packages
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -70,26 +124,12 @@ def main() -> int:
         duplicate_entries[row["var"]] += 1
         by_id.setdefault(row["var"], row)
 
-    represented: set[str] = set()
-    report_packages = []
-    for path in report_paths:
-        report = json.loads(path.read_text(encoding="utf-8"))
-        controls = report.get("source_controls")
-        if not isinstance(controls, list) or not all(
-            isinstance(value, str) for value in controls
-        ):
-            raise ValueError(f"{path} lacks a string source_controls ledger")
-        represented.update(controls)
-        report_packages.append(
-            {
-                "path": str(path),
-                "package_version": report.get("package_version"),
-                "source_controls": len(set(controls)),
-            }
-        )
+    represented, excluded, report_packages = collect_report_ledgers(
+        report_paths
+    )
 
     catalog_ids = set(by_id)
-    remaining = catalog_ids - represented
+    remaining = catalog_ids - represented - set(excluded)
     grouped = Counter(by_id[var]["tab_title"] for var in remaining)
     result = {
         "catalog_entries": len(catalog),
@@ -100,9 +140,23 @@ def main() -> int:
             if count > 1
         },
         "represented_source_controls": len(represented & catalog_ids),
+        "excluded_source_controls": len(set(excluded) & catalog_ids),
+        "classified_source_controls": len(
+            (represented | set(excluded)) & catalog_ids
+        ),
         "remaining_source_controls": len(remaining),
         "remaining_by_tab": dict(sorted(grouped.items())),
-        "unknown_report_controls": sorted(represented - catalog_ids),
+        "unknown_report_controls": sorted(
+            (represented | set(excluded)) - catalog_ids
+        ),
+        "excluded": [
+            {
+                "var": var,
+                "tab": by_id[var]["tab_title"] if var in by_id else None,
+                "reason": reason,
+            }
+            for var, reason in sorted(excluded.items())
+        ],
         "reports": report_packages,
         "remaining": [
             {
