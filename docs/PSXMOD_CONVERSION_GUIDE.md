@@ -233,6 +233,17 @@ For each executable write:
 4. Decode or otherwise review the expected and replacement instructions.
 5. Prove the replacement in the isolated oracle.
 6. Use an expected-byte guard at the supported lifecycle point.
+7. Decode every replacement `J`/`JAL` target and prove that its callee is
+   stock code or an explicitly emitted, fully guarded resolver allocation.
+
+A clean source closure is not enough when a patcher applies a common base.
+The feature delta may contain a call into code installed only by that omitted
+base. In particular, do not filter `PatchList_Base` or an equivalent inherited
+foundation and then accept a surviving call site without auditing its target.
+Treat a jump into stock padding, zero-filled space, another feature's private
+allocation, or an unregistered hook as a missing dependency and reject the
+conversion. Automate this audit for fixed MIPS writes and retain the decoded
+target/owner evidence in the conversion report.
 
 Do not emit a whole record merely because rebuilding the record was convenient.
 If one same-size subasset changed, own that subasset's payload range. A
