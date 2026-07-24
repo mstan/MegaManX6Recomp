@@ -24,9 +24,15 @@ import tweaks_native_psxmod as native
 
 
 PACKAGE_ID = "mmx6.tweaks.new-game"
-PACKAGE_VERSION = "1.0.0"
+PACKAGE_VERSION = "1.1.0"
 RESOLVER_ID = "mmx6-new-game"
 FOUNDATION_RAWS = (0x1D930B9C, 0x1D9965F8, 0x1D99A630)
+FOUND_TABLE_RAW = 0x1D9965B8
+FOUND_TABLE_SIZE = 64
+NO_ITEM_FOUND_TABLE = bytes.fromhex(
+    "2020202202222220222000222220022202222222022200202222022222000220"
+    "2222202020222002222222200202022020222220222002202202222002202022"
+)
 FOUNDATION_HASHES = (
     "650ea19428557bf4849f703b30a7daf8c75486655f8c3f7d5ead17b6adc7f159",
     "951fae5d7f169f3381d16d607f6a0cbb7de2b117573f4dd003c43a11c6b73154",
@@ -47,6 +53,8 @@ class Feature:
     multiplier: int = 1
     bit: int = 0
     aux_offset: int = 0
+    table_offset: int = -1
+    table_bit: int = 0
 
 
 FEATURES = (
@@ -83,6 +91,111 @@ FEATURES = (
             bit=1 << (index + 3),
         )
         for index in range(1, 5)
+    ),
+    Feature("available_shadow_armor", "Shadow Armor Available", "CharAdd02",
+            "bit", 0x34, bit=0x02),
+    Feature("available_blade_armor", "Blade Armor Available", "CharAdd03",
+            "bit", 0x34, bit=0x04),
+    Feature("available_ultimate_armor", "Ultimate Armor Available", "CharAdd04",
+            "bit", 0x34, bit=0x08),
+    Feature("available_zero", "Zero Available", "CharAdd05",
+            "bit", 0x34, bit=0x10),
+    Feature("available_black_zero", "Black Zero Available", "CharAdd06",
+            "bit", 0x34, bit=0x20),
+    *tuple(
+        Feature(
+            f"parts_life_up_{index}",
+            f"Start with Life Up Part {index}",
+            f"PartsLifeUp{index:02d}",
+            "bit",
+            0x90,
+            bit=1 << (index - 1),
+            table_offset=offset,
+            table_bit=bit,
+        )
+        for index, (offset, bit) in enumerate((
+            (0x00, 0x02), (0x0D, 0x02), (0x14, 0x20), (0x1E, 0x20),
+            (0x22, 0x02), (0x2C, 0x20), (0x30, 0x02), (0x3C, 0x20),
+        ), 1)
+    ),
+    *tuple(
+        Feature(
+            f"parts_energy_up_{index}",
+            f"Start with Energy Up Part {index}",
+            f"PartsEnergyUp{index:02d}",
+            "bit",
+            0xA0,
+            bit=1 << (index - 1),
+            table_offset=offset,
+            table_bit=bit,
+        )
+        for index, (offset, bit) in enumerate((
+            (0x01, 0x02), (0x0A, 0x02), (0x16, 0x02), (0x1A, 0x20),
+            (0x26, 0x02), (0x2B, 0x02), (0x33, 0x02), (0x3E, 0x02),
+        ), 1)
+    ),
+    *tuple(
+        Feature(feature_id, name, source, "bit", offset, bit=bit,
+                table_offset=table_offset, table_bit=table_bit)
+        for (
+            feature_id, name, source, offset, bit, table_offset, table_bit
+        ) in (
+            ("part_hyper_dash", "Start with Hyper Dash", "PartsSet0101",
+             0x80, 0x10, 0x2E, 0x20),
+            ("part_energy_saver", "Start with Energy Saver", "PartsSet0102",
+             0x80, 0x20, 0x35, 0x02),
+            ("part_super_recover", "Start with Super Recover", "PartsSet0103",
+             0x80, 0x40, 0x04, 0x20),
+            ("part_buster_plus", "Start with Buster Plus", "PartsSet0104",
+             0x80, 0x80, 0x10, 0x20),
+            ("part_speedster", "Start with Speedster", "PartsSet0203",
+             0x80, 0x04, 0x23, 0x02),
+            ("part_jumper", "Start with Jumper", "PartsSet0204",
+             0x80, 0x08, 0x0E, 0x20),
+            ("part_hyperdrive", "Start with Hyperdrive", "PartsSet0301",
+             0x81, 0x10, 0x1D, 0x20),
+            ("part_power_drive", "Start with Power Drive", "PartsSet0302",
+             0x81, 0x20, 0x16, 0x20),
+            ("part_weapon_driver", "Start with Weapon Driver", "PartsSet0303",
+             0x81, 0x40, 0x0A, 0x20),
+            ("part_life_recover", "Start with Life Recover", "PartsSet0304",
+             0x81, 0x80, 0x02, 0x02),
+            ("part_speed_shot", "Start with Speed Shot", "PartsSet0401",
+             0x81, 0x01, 0x3B, 0x02),
+            ("part_shock_buffer", "Start with Shock Buffer", "PartsSet0402",
+             0x81, 0x02, 0x1D, 0x02),
+            ("part_d_barrier", "Start with D-Barrier", "PartsSet0403",
+             0x81, 0x04, 0x36, 0x20),
+            ("part_d_converter", "Start with D-Converter", "PartsSet0404",
+             0x81, 0x08, 0x39, 0x20),
+            ("part_quick_charge", "Start with Quick Charge", "PartsSet0501",
+             0x7C, 0x10, 0x24, 0x02),
+            ("part_weapon_plus", "Start with Weapon Plus", "PartsSet0502",
+             0x7C, 0x20, 0x37, 0x02),
+            ("part_saber_plus", "Start with Saber Plus", "PartsSet0503",
+             0x7C, 0x40, 0x2F, 0x02),
+            ("part_saber_extend", "Start with Saber Extend", "PartsSet0504",
+             0x7C, 0x80, 0x1F, 0x02),
+            ("part_weapon_recover", "Start with Weapon Recover", "PartsSet0601",
+             0x7C, 0x01, 0x2D, 0x20),
+            ("part_over_drive", "Start with Over Drive", "PartsSet0602",
+             0x7C, 0x02, 0x27, 0x20),
+            ("part_rapid_5", "Start with Rapid 5", "PartsSet0603",
+             0x7C, 0x04, 0x07, 0x02),
+            ("part_ultimate_buster", "Start with Ultimate Buster",
+             "PartsSet0604", 0x7C, 0x08, 0x17, 0x02),
+            ("part_shot_eraser", "Start with Shot Eraser", "PartsSet0701",
+             0x7D, 0x01, 0x09, 0x02),
+            ("part_master_saber", "Start with Master Saber", "PartsSet0702",
+             0x7D, 0x02, 0x3D, 0x02),
+        )
+    ),
+    Feature(
+        "mark_no_item_reploids",
+        "Mark No-Item Reploids as Rescued",
+        "RescRepFoundNoItem01",
+        "table",
+        -1,
     ),
 )
 FEATURE_BY_ID = {item.feature_id: item for item in FEATURES}
@@ -157,8 +270,11 @@ def source_selection(feature: Feature, value=1) -> dict[str, str]:
     }
 
 
-def compose_template(selection: dict[str, object], base: bytes) -> bytes:
+def compose_state(
+    selection: dict[str, object], base: bytes
+) -> tuple[bytes, bytes]:
     template = bytearray(base)
+    found_table = bytearray(FOUND_TABLE_SIZE)
     masks: dict[int, int] = {}
     for feature_id in sorted(selection):
         feature = FEATURE_BY_ID[feature_id]
@@ -175,13 +291,24 @@ def compose_template(selection: dict[str, object], base: bytes) -> bytes:
             template[feature.aux_offset : feature.aux_offset + 2] = (
                 souls.to_bytes(2, "little")
             )
+        elif feature.kind == "table":
+            for offset, value in enumerate(NO_ITEM_FOUND_TABLE):
+                found_table[offset] |= value
         else:
             masks[feature.field_offset] = (
                 masks.get(feature.field_offset, 0) | feature.bit
             )
+            if feature.source_control.startswith("CharAdd"):
+                masks[feature.field_offset] |= 0x01
+            if feature.table_offset >= 0:
+                found_table[feature.table_offset] |= feature.table_bit
     for offset, value in masks.items():
-        template[offset] = value
-    return bytes(template)
+        template[offset] |= value
+    return bytes(template), bytes(found_table)
+
+
+def compose_template(selection: dict[str, object], base: bytes) -> bytes:
+    return compose_state(selection, base)[0]
 
 
 def upstream_final_writes(db, profile: dict, selection: dict[str, str]):
@@ -189,7 +316,7 @@ def upstream_final_writes(db, profile: dict, selection: dict[str, str]):
     patchfile, writes = engine.build_writelist(db, merged, profile)
     owned = {}
     for data, raw in writes:
-        if raw in FOUNDATION_RAWS or (
+        if raw == FOUND_TABLE_RAW or raw in FOUNDATION_RAWS or (
             FOUNDATION_RAWS[1] <= raw < FOUNDATION_RAWS[1] + 180
         ):
             owned[raw] = bytes.fromhex(data)
@@ -201,12 +328,14 @@ def upstream_final_writes(db, profile: dict, selection: dict[str, str]):
 def apply_owned_writes(
     foundation: tuple[bytes, bytes, bytes],
     writes: list[tuple[str, int]],
-) -> tuple[bytes, bytes, bytes]:
+) -> tuple[bytes, bytes, bytes, bytes]:
     first, middle, third = map(bytearray, foundation)
+    found_table = bytearray(FOUND_TABLE_SIZE)
     buffers = [
         (FOUNDATION_RAWS[0], first),
         (FOUNDATION_RAWS[1], middle),
         (FOUNDATION_RAWS[2], third),
+        (FOUND_TABLE_RAW, found_table),
     ]
     for data_hex, raw in writes:
         data = bytes.fromhex(data_hex)
@@ -214,7 +343,7 @@ def apply_owned_writes(
             if begin <= raw and raw + len(data) <= begin + len(buffer):
                 buffer[raw - begin : raw - begin + len(data)] = data
                 break
-    return bytes(first), bytes(middle), bytes(third)
+    return bytes(first), bytes(middle), bytes(third), bytes(found_table)
 
 
 def validate_source_parity(db, profile: dict, foundation):
@@ -248,19 +377,52 @@ def validate_source_parity(db, profile: dict, foundation):
                 if feature.kind == "rank"
                 else [
                     "NewGame",
+                    feature.source_control,
+                    "RescRepFoundTable",
+                ]
+                if feature.kind == "table"
+                else [
+                    "NewGame",
                     "HeartTankAdd"
                     if feature.field_offset == 0x88
-                    else "SubtankAdd",
+                    else "SubtankAdd"
+                    if feature.field_offset == 0x50
+                    else "CharAdd"
+                    if feature.source_control.startswith("CharAdd")
+                    else "PartsLifeUp"
+                    if feature.source_control.startswith("PartsLifeUp")
+                    else "PartsEnergyUp"
+                    if feature.source_control.startswith("PartsEnergyUp")
+                    else feature.source_control[:10],
                 ]
             )
-            if owned != expected_owned or synth:
+            if feature.kind == "table":
+                expected_synth = {"RescRepFoundTable"}
+            elif feature.table_offset >= 0:
+                if feature.source_control.startswith("PartsSet"):
+                    expected_owned += [
+                        "PartsSetA", "PartsSetB", "RescRepFoundTable"
+                    ]
+                    expected_synth = {
+                        "PartsSetA", "PartsSetB", "RescRepFoundTable"
+                    }
+                else:
+                    expected_owned += ["RescRepFoundTable"]
+                    expected_synth = {"RescRepFoundTable"}
+            else:
+                expected_synth = set()
+            if owned != expected_owned or set(synth) != expected_synth:
                 raise AssertionError(
                     f"{feature.source_control} closure changed: {owned}, {synth}"
                 )
             writes, _ = upstream_final_writes(db, profile, selection)
             final = apply_owned_writes(foundation, writes)
-            composed = compose_template({feature.feature_id: value}, foundation[1])
-            if final != (foundation[0], composed, foundation[2]):
+            composed, found_table = compose_state(
+                {feature.feature_id: value}, foundation[1]
+            )
+            if final != (
+                foundation[0], composed, foundation[2], found_table
+            ):
                 raise AssertionError(
                     f"{feature.source_control}={value} composer parity failed"
                 )
@@ -311,11 +473,13 @@ def validate_combinations(db, profile: dict, foundation):
             source.update(source_selection(FEATURE_BY_ID[feature_id], value))
         writes, _ = upstream_final_writes(db, profile, source)
         final = apply_owned_writes(foundation, writes)
-        composed = compose_template(values, foundation[1])
-        reverse = compose_template(
+        composed = compose_state(values, foundation[1])
+        reverse = compose_state(
             dict(reversed(list(values.items()))), foundation[1]
         )
-        if final != (foundation[0], composed, foundation[2]):
+        if final != (
+            foundation[0], composed[0], foundation[2], composed[1]
+        ):
             raise AssertionError(f"{label} combination parity failed")
         if reverse != composed:
             raise AssertionError(f"{label} composition is order-dependent")
@@ -323,7 +487,8 @@ def validate_combinations(db, profile: dict, foundation):
             {
                 "label": label,
                 "enabled_features": len(values),
-                "middle_sha256": sha256(composed),
+                "middle_sha256": sha256(composed[0]),
+                "found_table_sha256": sha256(composed[1]),
                 "upstream_parity": True,
                 "order_independent": True,
             }
@@ -361,18 +526,65 @@ def build_report(stock_path: Path) -> dict:
                     "expected_sha256": sha256(expected),
                 }
             )
+        table_user_offset = native.raw_to_user_offset(FOUND_TABLE_RAW)
+        table_entry, table_file_offset = stock_image.containing_file(
+            table_user_offset, FOUND_TABLE_SIZE
+        )
+        if table_entry.name != native.SLUS_NAME:
+            raise AssertionError("found-Reploid table left main executable")
+        table_expected = stock_image.read_user(
+            table_user_offset, FOUND_TABLE_SIZE
+        )
+        if table_expected != bytes(FOUND_TABLE_SIZE):
+            raise AssertionError("found-Reploid stock table changed")
+        table_guard = {
+            "source_raw_offset": FOUND_TABLE_RAW,
+            "guest_address": load_address + table_file_offset - 2048,
+            "size": FOUND_TABLE_SIZE,
+            "expected": table_expected.hex().upper(),
+            "expected_sha256": sha256(table_expected),
+        }
     evidence = validate_source_parity(db, profile, foundation)
     combinations = validate_combinations(db, profile, foundation)
     converted = {item.source_control for item in FEATURES}
+    def deferred_reason(control: str) -> str:
+        if control == "CharAdd01":
+            return (
+                "stock Falcon sentinel is forced by CharStart; no independent "
+                "enabled-state delta"
+            )
+        if control == "CharStart01":
+            return (
+                "choice couples intro armor, CharAdd availability, ArmorParts, "
+                "and a separate guarded call-site"
+            )
+        if control.startswith("Debug") or control == "ZeroDebug":
+            return (
+                "hidden DebugMode gate makes the normal submitted control a "
+                "no-op; unsafe to infer runtime semantics"
+            )
+        if control.startswith("PartsRandom"):
+            return (
+                "seeded shuffle mutates the separate 512-byte carrier table; "
+                "runtime seed and persistence semantics remain unspecified"
+            )
+        if control in {
+            "RescRepFoundMark01", "RescRepFoundMarkOnly01",
+        }:
+            return (
+                "modifier changes found-table algebra only with other "
+                "part selections; coherent standalone product semantics unproven"
+            )
+        return "source closure is not fully proven by this tranche"
+
     ledger = [
         {
             "source_control": control,
             "status": "converted" if control in converted else "deferred",
             "reason": (
-                "exact shared-foundation field composition implemented"
+                "exact shared composer field/table composition implemented"
                 if control in converted
-                else "field semantics or coupled New Game/RescRep composition "
-                "not yet proven by this tranche"
+                else deferred_reason(control)
             ),
         }
         for control in controls
@@ -415,6 +627,9 @@ def build_report(stock_path: Path) -> dict:
                 FOUNDATION_RAWS, foundation, stock_guards
             )
         ],
+        "composed_resources": {
+            "found_reploid_table": table_guard,
+        },
         "features": evidence,
         "source_controls": sorted(converted),
         "source_control_ledger": ledger,

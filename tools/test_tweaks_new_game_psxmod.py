@@ -22,22 +22,25 @@ import tweaks_new_game_psxmod as new_game
 
 class CatalogTests(unittest.TestCase):
     def test_feature_rows_are_independent(self) -> None:
-        self.assertEqual(len(new_game.FEATURES), 18)
+        self.assertEqual(len(new_game.FEATURES), 64)
         self.assertEqual(
-            len({item.feature_id for item in new_game.FEATURES}), 18
+            len({item.feature_id for item in new_game.FEATURES}), 64
         )
         self.assertEqual(
-            len({item.source_control for item in new_game.FEATURES}), 18
+            len({item.source_control for item in new_game.FEATURES}), 64
         )
         self.assertEqual(
             len([item for item in new_game.FEATURES if item.kind == "integer"]),
             4,
         )
         self.assertEqual(
-            len([item for item in new_game.FEATURES if item.kind == "bit"]), 12
+            len([item for item in new_game.FEATURES if item.kind == "bit"]), 57
         )
         self.assertEqual(
             len([item for item in new_game.FEATURES if item.kind == "rank"]), 2
+        )
+        self.assertEqual(
+            len([item for item in new_game.FEATURES if item.kind == "table"]), 1
         )
 
     def test_bit_domains_match_upstream_masks(self) -> None:
@@ -54,6 +57,22 @@ class CatalogTests(unittest.TestCase):
         self.assertEqual(hearts, [1, 2, 4, 8, 16, 32, 64, 128])
         self.assertEqual(subtanks, [16, 32, 64, 128])
 
+    def test_burndown_scope_is_explicit(self) -> None:
+        added = {item.source_control for item in new_game.FEATURES[18:]}
+        expected = {
+            *(f"CharAdd{index:02d}" for index in range(2, 7)),
+            *(f"PartsLifeUp{index:02d}" for index in range(1, 9)),
+            *(f"PartsEnergyUp{index:02d}" for index in range(1, 9)),
+            "RescRepFoundNoItem01",
+            "PartsSet0101", "PartsSet0102", "PartsSet0103",
+            "PartsSet0104", "PartsSet0203", "PartsSet0204",
+            *(f"PartsSet0{group}0{index}"
+              for group in range(3, 7) for index in range(1, 5)),
+            "PartsSet0701", "PartsSet0702",
+        }
+        self.assertEqual(added, expected)
+        self.assertEqual(len(added), 46)
+
 
 @unittest.skipUnless(
     os.environ.get("MMX6_NEW_GAME_TEST_STOCK"),
@@ -65,10 +84,27 @@ class PackageIntegrationTests(unittest.TestCase):
             Path(os.environ["MMX6_NEW_GAME_TEST_STOCK"])
         )
         self.assertEqual(report["package"]["catalog_control_count"], 74)
-        self.assertEqual(report["package"]["source_control_count"], 18)
-        self.assertEqual(report["package"]["deferred_control_count"], 56)
-        self.assertEqual(len(report["source_controls"]), 18)
+        self.assertEqual(report["package"]["source_control_count"], 64)
+        self.assertEqual(report["package"]["deferred_control_count"], 10)
+        self.assertEqual(len(report["source_controls"]), 64)
         self.assertEqual(len(report["source_control_ledger"]), 74)
+        deferred = {
+            item["source_control"]
+            for item in report["source_control_ledger"]
+            if item["status"] == "deferred"
+        }
+        self.assertEqual(deferred, {
+            "CharAdd01", "CharStart01", "DebugCheckpointStart",
+            "DebugStageStart", "PartsRandom01", "PartsRandom02",
+            "PartsRandomTitle01", "RescRepFoundMark01",
+            "RescRepFoundMarkOnly01", "ZeroDebug",
+        })
+        table = report["composed_resources"]["found_reploid_table"]
+        middle = report["foundation"][1]
+        self.assertEqual(
+            table["source_raw_offset"] + table["size"],
+            middle["source_raw_offset"],
+        )
         self.assertTrue(report["validation"]["stock_guards_verified"])
         self.assertTrue(report["validation"]["isolated_source_parity"])
         for proof in report["validation"]["representative_combinations"]:
@@ -103,6 +139,12 @@ class PackageIntegrationTests(unittest.TestCase):
             cpp_hex("kTailExpected"),
             bytes.fromhex(report["foundation"][2]["expected"]),
         )
+        self.assertEqual(
+            cpp_hex("kFoundTableExpected"),
+            bytes.fromhex(
+                report["composed_resources"]["found_reploid_table"]["expected"]
+            ),
+        )
 
         with tempfile.TemporaryDirectory(prefix="mmx6-new-game-test-") as temp:
             first = Path(temp) / "first.psxmod"
@@ -123,7 +165,7 @@ class PackageIntegrationTests(unittest.TestCase):
                 manifest["resolver"],
                 f"builtin:{new_game.RESOLVER_ID}",
             )
-            self.assertEqual(len(manifest["feature"]), 18)
+            self.assertEqual(len(manifest["feature"]), 64)
             self.assertEqual(len(manifest["option"]), 6)
             self.assertNotIn("patch", manifest)
             self.assertNotIn("overlay", manifest)
@@ -179,6 +221,44 @@ class ResolverCompileTests(unittest.TestCase):
             for feature in new_game.FEATURES
             if feature.kind in {"integer", "rank"}
         )
+        template_block = re.search(
+            r"kTemplateReplace\s*=\s*((?:\s*\"[0-9A-F]+\")+);",
+            source,
+        )
+        self.assertIsNotNone(template_block)
+        template_base = bytes.fromhex(
+            "".join(re.findall(r'"([0-9A-F]+)"', template_block.group(1)))
+        )
+        isolated_cases = []
+        for index, feature in enumerate(new_game.FEATURES[18:], 1):
+            expected_middle, expected_table = new_game.compose_state(
+                {feature.feature_id: 1}, template_base
+            )
+            expected_writes = 4 if (
+                feature.table_offset >= 0 or feature.kind == "table"
+            ) else 3
+            table_check = (
+                f' || writes[3].replacement != '
+                f'hex_bytes("{expected_table.hex().upper()}")'
+                if expected_writes == 4
+                else ""
+            )
+            isolated_cases.append(f'''
+    {{
+        ModSelection isolated;
+        auto& feature = isolated.features["{feature.feature_id}"];
+        feature.has_enabled = true;
+        feature.enabled = true;
+        writes.clear();
+        errors.clear();
+        if (!captured(package, isolated, writes, errors)) return {40 + index};
+        if (
+            !errors.empty() || writes.size() != {expected_writes} ||
+            writes[1].replacement !=
+                hex_bytes("{expected_middle.hex().upper()}"){table_check}
+        ) return {110 + index};
+    }}''')
+        isolated_setup = "\n".join(isolated_cases)
         harness = r'''
 #include "mod_packages.h"
 #include <string>
@@ -244,16 +324,45 @@ __OPTIONS__
         ) return 10;
     }
 
+__ISOLATED_CASES__
+
+    writes.clear();
+    errors.clear();
+    auto& life_part = selected.features["parts_life_up_3"];
+    life_part.has_enabled = true;
+    life_part.enabled = true;
+    auto& hyper_dash = selected.features["part_hyper_dash"];
+    hyper_dash.has_enabled = true;
+    hyper_dash.enabled = true;
+    auto& no_item = selected.features["mark_no_item_reploids"];
+    no_item.has_enabled = true;
+    no_item.enabled = true;
+    if (!captured(package, selected, writes, errors)) return 11;
+    if (!errors.empty() || writes.size() != 4) return 12;
+    if (writes[3].location != 0x800769A0) return 13;
+    if (
+        writes[1].replacement[0x90] != 0x04 ||
+        writes[1].replacement[0x80] != 0x10
+    ) return 14;
+    if (
+        writes[3].replacement.size() != 64 ||
+        writes[3].replacement[0x00] != 0x20 ||
+        writes[3].replacement[0x14] != 0x22 ||
+        writes[3].replacement[0x2E] != 0x22
+    ) return 15;
+
     writes.clear();
     errors.clear();
     life.values["count"] = "17";
-    if (captured(package, selected, writes, errors)) return 11;
-    if (!writes.empty() || errors.size() != 1) return 12;
+    if (captured(package, selected, writes, errors)) return 16;
+    if (!writes.empty() || errors.size() != 1) return 17;
     return 0;
 }
 '''.replace("__RESOLVER__", source).replace(
             "__FEATURES__", feature_setup
-        ).replace("__OPTIONS__", option_setup)
+        ).replace("__OPTIONS__", option_setup).replace(
+            "__ISOLATED_CASES__", isolated_setup
+        )
         with tempfile.TemporaryDirectory(
             prefix="mmx6-new-game-resolver-"
         ) as temp:
