@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 project(MegaManX6Recomp C CXX)
+include(CTest)
 
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD 17)
@@ -83,4 +84,34 @@ if(PSX_BUILD_COSIM)
         EXTRAS_SOURCES ${GAME_GENERATED_EXTRAS} ${GAME_MOD_RESOLVER_SOURCES}
         COSIM
     )
+endif()
+
+# Per-game launcher art override. The framework copies its shared launcher assets
+# (img/disc.png etc. — the default is Tomba's disc) next to the exe; this copies
+# this repo's launcher_art/ on top AFTERWARD so the launcher shows MMX6's disc.
+# POST_BUILD commands run in add order, and the framework's copy is added inside
+# psxrecomp_v4_add_runtime_target above, so this override wins. Drop official art
+# into launcher_art/img/ to replace the generated placeholder.
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/launcher_art")
+    add_custom_command(TARGET psx-runtime POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            "${CMAKE_CURRENT_SOURCE_DIR}/launcher_art"
+            "$<TARGET_FILE_DIR:psx-runtime>"
+        COMMENT "Overriding launcher art with MegaManX6Recomp/launcher_art")
+endif()
+
+if(BUILD_TESTING)
+    add_executable(mmx6_tweaks_hooks_test
+        tests/test_mmx6_tweaks_hooks.cpp
+        src/mods/mmx6_tweaks_hooks_resolver.cpp
+        psxrecomp-v4/runtime/src/mod_packages.cpp
+        psxrecomp-v4/runtime/src/crc32.c
+        psxrecomp-v4/runtime/src/psx_sha256.c
+    )
+    target_include_directories(mmx6_tweaks_hooks_test PRIVATE
+        src/mods
+        psxrecomp-v4/runtime/include
+        psxrecomp-v4/recompiler/lib/toml11
+    )
+    add_test(NAME mmx6_tweaks_hooks_test COMMAND mmx6_tweaks_hooks_test)
 endif()
