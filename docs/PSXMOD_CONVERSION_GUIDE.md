@@ -272,6 +272,8 @@ Choose the narrowest supported primitive:
 | Direct bounded unsigned scalar | Format-v2 `replace_from` patch using `u8`, `u16le`, or `u32le` |
 | Linked MIPS LUI/ORI constant | Format-v3 `mips_lui_ori_u32` transform with a complete instruction-pair guard |
 | Related ordered scalars | One feature with a format-v3 `ordered_integer` constraint |
+| Independent fields sharing one semantic record | Format-v4 `fields`, with a complete guard and exact owned ranges |
+| Bounded integer branch between fixed templates | Format-v4 `when_integer` on separate guarded patches |
 | Grown record or container | Resolver-owned semantic container composer; otherwise defer |
 | Injected routine or shared scratch use | Registered hook/code allocator with relocation support; otherwise defer |
 
@@ -340,6 +342,80 @@ Related integer fields with a semantic ordering invariant belong in one
 feature and one `ordered_integer` constraint. Choose the option order and
 `nondecreasing`/`nonincreasing` direction from the domain, explicitly decide
 whether equality is valid, and test defaults plus boundary and invalid vectors.
+
+### Sparse record fields and bounded branches
+
+Use format 4 when several independently configurable values live in one
+semantic instruction or data record. Keep the complete stock record in
+`expected`, but declare only the bytes the feature owns:
+
+```toml
+format_version = 4
+
+[[option]]
+feature = "x_saber_timing"
+id = "timing_4"
+label = "Timing 4"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 3
+
+[[patch]]
+feature = "x_saber_timing"
+target = "disc_user"
+offset = 432554280
+expected = "03420132"
+fields = [
+  { offset = 0, option = "timing_4", encoding = "u8" },
+]
+```
+
+The guard is compatibility evidence, not ownership. Runtime resolution checks
+all four stock bytes before any mutation, while collision detection and
+writing claim only byte zero. Another feature may own byte one of the same
+record if its complete guard agrees. Do not shrink the guard to avoid a
+collision, and do not claim neighboring flags or padding merely because the
+source tool rewrites a convenient allocation unit.
+
+Each field must be either non-empty literal bytes or one bounded integer option
+from the same feature, using `u8`, `u16le`, `u32le`, or the reviewed linked
+MIPS encoding. A checked `addend` can represent narrow relationships such as
+`cap + 1` or `opacity - 1`. If the source requires more than that, do not
+smuggle an expression language into the manifest.
+
+For one bounded source value that selects different fixed templates, use
+separate guarded patches with a typed predicate:
+
+```toml
+[[patch]]
+feature = "maximum_lives"
+target = "main_exe"
+address = 2147587968
+expected = "CC68000C"
+fields = [
+  { offset = 0, replace = "00000000" },
+]
+when_integer = { option = "maximum", op = "gt", value = 9 }
+```
+
+`when_integer` supports only `eq`, `ne`, `lt`, `le`, `gt`, and `ge` against a
+constant inside the referenced option's bounds. It is resolved before boot and
+may be ANDed with existing string conditions. It is not an expression VM or a
+per-frame dispatcher.
+
+Adversarial tests for a sparse conversion must include:
+
+- two enabled features owning adjacent fields under the same complete guard;
+- a real same-field collision with different replacements;
+- failure caused by a changed guard-only byte before any write is applied;
+- stock/default per-field no-op elision;
+- minimum, interior, maximum, and every bounded branch boundary;
+- additive encoding overflow rejection;
+- sector-boundary splitting for disc guards; and
+- deterministic report entries that distinguish guarded bytes from owned
+  bytes.
 
 ## Dependencies and collisions
 
