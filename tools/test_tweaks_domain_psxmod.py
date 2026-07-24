@@ -30,7 +30,7 @@ class DomainPackageTests(unittest.TestCase):
         )
         self.assertEqual(
             [len(item.features) for item in domain.DOMAINS],
-            [13, 1, 1, 2],
+            [13, 2, 1, 2],
         )
         represented = {
             control
@@ -38,7 +38,7 @@ class DomainPackageTests(unittest.TestCase):
             for feature in item.features
             for control in feature.source_controls
         }
-        self.assertEqual(len(represented), 20)
+        self.assertEqual(len(represented), 21)
         self.assertTrue(
             {
                 "SharedStats01",
@@ -48,6 +48,7 @@ class DomainPackageTests(unittest.TestCase):
                 "AutoCrouching02",
                 "AutoCrouching03",
                 "RecycleCeiling01",
+                "StageMod0404",
                 "DmgTableGate01",
                 "DmgTableGateDmg01",
             }.issubset(represented)
@@ -79,6 +80,13 @@ class DomainPackageTests(unittest.TestCase):
             feature.variants[1].closure,
             ("AutoCrouching02", "AutoCrouching03"),
         )
+        teleport = domain.STAGES.features[1]
+        self.assertEqual(
+            teleport.feature_id,
+            "move_recycle_lab_hidden_teleport",
+        )
+        self.assertEqual(teleport.source_controls, ("StageMod0404",))
+        self.assertEqual(teleport.variants[0].closure, ("StageMod0404",))
 
     def test_deferred_and_excluded_ledgers_are_distinct(self) -> None:
         excluded = {
@@ -102,7 +110,6 @@ class DomainPackageTests(unittest.TestCase):
                 "IngameOptions01",
                 "MissRepUnlocksRank01",
                 "MissRepUnlocksRank02",
-                "StageMod0404",
             },
         )
         self.assertTrue(

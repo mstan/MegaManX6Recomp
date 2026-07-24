@@ -658,9 +658,9 @@ algebra, and `ZeroDebug`.
 ### Current modular coverage checkpoint
 
 After the modular New Game, domain, timing, player, title/retranslation, and
-hook packages installed in this worktree, the coverage ledger classifies 280
-of 329 unique Tweaks source controls: 269 represented and 11 explicitly
-excluded as GUI/patcher artifacts. Forty-nine controls remain:
+hook packages installed in this worktree, the coverage ledger classifies 281
+of 329 unique Tweaks source controls: 270 represented and 11 explicitly
+excluded as GUI/patcher artifacts. Forty-eight controls remain:
 
 | Tweaks area | Remaining controls |
 |---|---:|
@@ -669,7 +669,6 @@ excluded as GUI/patcher artifacts. Forty-nine controls remain:
 | New Game Status | 8 |
 | Balance | 5 |
 | Localization + Custom Art | 5 |
-| Stages | 1 |
 
 ## Burndown after version 1.9
 

@@ -4,13 +4,13 @@ This audit starts from the post-package remainder: General 21, Balance 5,
 Boss Attacks 1, Stages 5, Damage Tables 12, and Localization + Art 5. Those
 numbers are parser catalog entries, not automatically valid launcher rows.
 
-`tools/tweaks_domain_psxmod.py` converts 20 real source controls into 17
+`tools/tweaks_domain_psxmod.py` converts 21 real source controls into 18
 feature rows across four independent packages:
 
 | Package | Feature rows | Source controls |
 |---|---:|---:|
 | `mmx6.tweaks.general` | 13 | 13 |
-| `mmx6.tweaks.stage-modes` | 1 | 4 |
+| `mmx6.tweaks.stage-modes` | 2 | 5 |
 | `mmx6.tweaks.boss-attacks` | 1 | 1 |
 | `mmx6.tweaks.damage-rules` | 2 | 2 |
 
@@ -47,7 +47,8 @@ General accepts:
 - `MenuDefaultSel01`.
 
 The other accepted domains are the four ceiling-mode controls above,
-`BossMod0105`, `DmgTableGate01`, and `DmgTableGateDmg01`.
+`StageMod0404`, `BossMod0105`, `DmgTableGate01`, and
+`DmgTableGateDmg01`.
 
 ## Real controls still deferred
 
@@ -68,8 +69,6 @@ The other accepted domains are the four ceiling-mode controls above,
   writes. Their unchecked A/B corrections assume the unowned common B01
   defense foundation, so applying those corrections directly to stock would
   invert the source contract.
-- `StageMod0404` crosses apparent Recycle Lab stage-object records. It remains
-  out until a typed teleport/object owner is proven.
 - `MugshotCustom01` and `MugshotCustom02` are real Hunter and Dr. Light asset
   choices. Both synthesize a large shared `MugshotAssembly` closure across many
   records. They remain out until that composer proves simultaneous
