@@ -58,9 +58,11 @@ int main(int argc, char** argv) {
     if (normal.writes.size() == 3) {
         check(normal.writes[0].replacement.size() == 24,
               "foundation is one fixed composed write");
-        check(normal.writes[1].fields.size() == 2 &&
-                  normal.writes[2].fields.size() == 2,
-              "normal sites own only two immediate fields each");
+        check(normal.writes[1].expected.size() == 8 &&
+                  normal.writes[1].replacement.size() == 8 &&
+                  normal.writes[2].expected.size() == 8 &&
+                  normal.writes[2].replacement.size() == 8,
+              "normal sites emit complete guarded runtime writes");
     }
 
     check(manager.set_feature_enabled(
