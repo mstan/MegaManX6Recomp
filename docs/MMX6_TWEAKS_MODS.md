@@ -403,7 +403,7 @@ burndown package. It admits three independent, default-disabled rows:
 | --- | --- | --- |
 | Unlock X's Air Dash | `DashGlobal01` | `DashGlobal01` |
 | Guard Shell Bug Fix | `GuardShellFix01` | `GuardShellFix01` |
-| Zero Weapon Auto-select | `ZeroAutoselect01` | `ZeroAutoselect_Common`, `ZeroAutoselect01` |
+| Disable Zero Weapon Auto-select | `ZeroAutoselect01` | `ZeroAutoselect_Common`, `ZeroAutoselect01` |
 
 All 18 writes have complete USA v1.1 stock guards and one semantic owner. The
 three closures are byte-disjoint, so enabling all rows is deterministic and

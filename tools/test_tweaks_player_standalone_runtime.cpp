@@ -59,7 +59,7 @@ int main(int argc, char** argv) {
     const std::vector<std::string> features = {
         "unlock_x_air_dash",
         "guard_shell_bug_fix",
-        "zero_weapon_autoselect",
+        "disable_zero_weapon_autoselect",
     };
     for (const std::string& feature : features)
         check(
@@ -76,7 +76,7 @@ int main(int argc, char** argv) {
           "air dash exact closure");
     check(count_feature(forward, "guard_shell_bug_fix") == 2,
           "Guard Shell exact closure");
-    check(count_feature(forward, "zero_weapon_autoselect") == 15,
+    check(count_feature(forward, "disable_zero_weapon_autoselect") == 15,
           "Zero autoselect includes two common writes");
     for (const ModResolution::Write& write : forward.writes) {
         check(!write.expected.empty(), "every write has a complete stock guard");

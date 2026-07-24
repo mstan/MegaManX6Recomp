@@ -107,9 +107,9 @@ FEATURES = (
         ("GuardShellFix01",),
     ),
     FeatureSpec(
-        "zero_weapon_autoselect",
-        "Zero Weapon Auto-select",
-        "Automatically select Zero's matching weapon after acquiring a technique.",
+        "disable_zero_weapon_autoselect",
+        "Disable Zero Weapon Auto-select",
+        "Stop Zero techniques from automatically selecting their matching weapon.",
         "ZeroAutoselect01",
         ("ZeroAutoselect_Common", "ZeroAutoselect01"),
     ),
