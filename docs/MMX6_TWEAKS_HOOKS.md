@@ -36,13 +36,28 @@ The generator verifies the stock SHA-256, exact source payloads and offsets,
 strict indexed-member ownership, complete stock ranges, and deterministic
 archive bytes before writing `MMX6-Tweaks-Hooks.psxmod`.
 
+## Continuous dash speed resolver
+
+`mmx6.tweaks.continuous-dash` converts `DashSpeedCont01` and
+`DashSpeedCont02` into two independent, default-disabled rows with bounded
+integer options. A game-owned resolver emits the 24-byte hook foundation once,
+composes the Hyper immediate into that foundation, and emits two guarded sparse
+immediate pairs for Normal speed. No option lookup or package scan occurs on
+the movement hot path; resolution happens before play.
+
+The converter validates the exact `DashSpeedCont_Base` prerequisite closure,
+the original `200000..600000` and `60000..160000` domains, five upstream
+composition cases, and three complete USA v1.1 stock guards. The actual runtime
+install test covers disabled no-op, each row alone, both rows together,
+out-of-range rejection, one-foundation ownership, and deterministic repeated
+resolution.
+
 ## Deliberately deferred
 
 The following IDs are not declared by package version 1.0.0:
 
-- `DashSpeedCont01`, `DashSpeedCont02`: their source implementation has an
-  intentional shared rewrite/overwrite and belongs in a later composed
-  continuous-dash resolver after hot-path behavior tests.
+- `DashSpeedCont01`, `DashSpeedCont02` are no longer deferred; they are owned by
+  the composed continuous-dash resolver above.
 - `MachDashDuration01`, `MachDashSpeed01`, `MachDashInput01` through
   `MachDashInput03`, `MachDashWait01` through `MachDashWait04`, and
   `MachDashCancel01` through `MachDashCancel04`: these require a coherent Blade
