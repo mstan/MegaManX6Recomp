@@ -192,6 +192,13 @@ std::vector<uint8_t> halfword_le(int value) {
     };
 }
 
+enum class LowerDefenseMode {
+    None,
+    X,
+    Zero,
+    All,
+};
+
 void add_write(
     std::vector<ModResolution::Write>& writes, ModPatchTarget target,
     uint64_t location, std::string_view expected,
@@ -363,6 +370,14 @@ bool resolve_general_foundations(
         enabled(selection, "gate_revealed_souls");
     const bool refight_souls_enabled =
         enabled(selection, "gate_revealed_refight_souls");
+    const LowerDefenseMode lower_defense_mode =
+        normalize_x && normalize_zero
+            ? LowerDefenseMode::All
+            : normalize_x
+                ? LowerDefenseMode::X
+                : normalize_zero
+                    ? LowerDefenseMode::Zero
+                    : LowerDefenseMode::None;
     if (
         !ultimate && !black && !normalize_x && !normalize_zero &&
         !armor_by_part && !gate_souls_enabled && !refight_souls_enabled
@@ -404,9 +419,10 @@ bool resolve_general_foundations(
             hex_bytes("A5E9010C01000534");
         std::copy(hook.begin(), hook.end(), allocation.begin() + 12);
     }
+    const std::string allocation_expected(allocation.size() * 2, '0');
     add_write(
         writes, ModPatchTarget::MainExe, 0x8007A670,
-        "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        allocation_expected,
         std::move(allocation), kSharedOwner);
     }
     if (armor_by_part) {
@@ -424,7 +440,7 @@ bool resolve_general_foundations(
         )
             return false;
         emit_ShadowBase01(writes);
-        emit_ArmorByPart01(writes);
+        emit_ArmorByPart01(writes, lower_defense_mode);
         if (armor_appearance == "unarmored_x")
             emit_ArmorByPart03(writes);
         if (shadow_saber_palette)
@@ -440,12 +456,7 @@ bool resolve_general_foundations(
     }
     if (normalize_x || normalize_zero) {
         if (armor_by_part) {
-            if (normalize_x && normalize_zero)
-                emit_LowerDef_All_B(writes);
-            else if (normalize_x)
-                emit_LowerDef_X_B(writes);
-            else
-                emit_LowerDef_Zero_B(writes);
+            /* Merged into ArmorByPart01's large status-code write above. */
         } else {
             const std::string_view replacement =
                 normalize_x && normalize_zero
@@ -508,10 +519,19 @@ bool resolve_general_foundations(
             "000000000000000000000000",
             "FCFF63240800E0035A01A3A0",
             kCutsceneSoulsOwner);
+        std::vector<uint8_t> mission_report_replacement = hex_bytes(
+            "5A0123920B000224D0CE62A2010020A20100053410006014020020A238002282000000004010020021102202D200438400000000B80B6328070060141300022405000324D0CE62A21D0023A2010020A2020020A65A0125A2");
+        if (gate_souls_active) {
+            const std::vector<uint8_t> replacement =
+                halfword_le(gate_souls);
+            std::copy(
+                replacement.begin(), replacement.end(),
+                mission_report_replacement.begin() + 0x34);
+        }
         add_write(
             writes, ModPatchTarget::MainExe, 0x800347A4,
             "660023920B000224D0CE62A2010020A20300632C10006010020020A238002282000000004010020021102202D200438400000000B80B6328070060141300022405000324D0CE62A21D0023A2010020A2020020A2030020A2",
-            "5A0123920B000224D0CE62A2010020A20100053410006014020020A238002282000000004010020021102202D200438400000000B80B6328070060141300022405000324D0CE62A21D0023A2010020A2020020A65A0125A2",
+            std::move(mission_report_replacement),
             kCutsceneSoulsOwner);
         add_write(
             writes, ModPatchTarget::DiscUser, 0x19E06D78,
@@ -534,9 +554,6 @@ bool resolve_general_foundations(
                 "B80B", replacement, kCutsceneSoulsOwner);
             add_write(
                 writes, ModPatchTarget::MainExe, 0x8001F194,
-                "B80B", replacement, kCutsceneSoulsOwner);
-            add_write(
-                writes, ModPatchTarget::MainExe, 0x800347D8,
                 "B80B", replacement, kCutsceneSoulsOwner);
             add_write(
                 writes, ModPatchTarget::DiscUser, 0x19E06D98,

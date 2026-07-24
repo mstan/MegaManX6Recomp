@@ -3,7 +3,7 @@
     add_write(writes, ModPatchTarget::MainExe, 0x8003C2C0, "100100AE", "00000000", kArmorByPartOwner);
 }
 
-void emit_ArmorByPart01(std::vector<ModResolution::Write>& writes) {
+void emit_ArmorByPart01(std::vector<ModResolution::Write>& writes, LowerDefenseMode lower_defense_mode) {
     add_write(writes, ModPatchTarget::MainExe, 0x8003B560, "E7000392020002240400621021200002", "77E9010C800004340500401400000234", kArmorByPartOwner);
     add_write(writes, ModPatchTarget::MainExe, 0x8003A8C0, "E70003920000000028006214", "77E9010C8000043428004010", kArmorByPartOwner);
     add_write(writes, ModPatchTarget::MainExe, 0x80030B5C, "0980023C8771449002000324EDFF831001000224C8C200087900E2A0", "77E9010C80000434D8FF401401000234FFFF0224B2C200087900E2A0", kArmorByPartOwner);
@@ -15,7 +15,17 @@ void emit_ArmorByPart01(std::vector<ModResolution::Write>& writes) {
     add_write(writes, ModPatchTarget::MainExe, 0x8003E3A0, "E700039200000000", "52E9010CE7000392", kArmorByPartOwner);
     add_write(writes, ModPatchTarget::MainExe, 0x80032EC0, "E70022920000000022004010", "52E9010CE700239222006010", kArmorByPartOwner);
     add_write(writes, ModPatchTarget::MainExe, 0x80030DE8, "00000000", "0000FB37", kArmorByPartOwner);
-    add_write(writes, ModPatchTarget::MainExe, 0x80030E54, "E700839000000000FFFF62240400422C0E004014213000000500022406006214D0CEE3245F00629000000000200042300600401400000000EC00828C", "52E9010CE700839000007F37FFFF62240400422C0D004014000006340500023405006214D0CEE3245F006290000000002000423005004014EC00028E", kArmorByPartOwner);
+    std::string armor_status_replacement = "52E9010CE700839000007F37FFFF62240400422C0D004014000006340500023405006214D0CEE3245F006290000000002000423005004014EC00028E";
+    const char* lower_defense_replacement = nullptr;
+    if (lower_defense_mode == LowerDefenseMode::X)
+        lower_defense_replacement = "05000234000000000D006214";
+    else if (lower_defense_mode == LowerDefenseMode::Zero)
+        lower_defense_replacement = "FFFF62240400422C0D006014";
+    else if (lower_defense_mode == LowerDefenseMode::All)
+        lower_defense_replacement = "FFFF62240400422CA8C30008";
+    if (lower_defense_replacement)
+        armor_status_replacement.replace(32, 24, lower_defense_replacement);
+    add_write(writes, ModPatchTarget::MainExe, 0x80030E54, "E700839000000000FFFF62240400422C0E004014213000000500022406006214D0CEE3245F00629000000000200042300600401400000000EC00828C", armor_status_replacement, kArmorByPartOwner);
     add_write(writes, ModPatchTarget::MainExe, 0x800310FC, "E700039200000000", "52E9010CE7000392", kArmorByPartOwner);
     add_write(writes, ModPatchTarget::MainExe, 0x8003EF30, "01000224E70023920000000005006210", "010005344BE9010CE700239205006510", kArmorByPartOwner);
     add_write(writes, ModPatchTarget::MainExe, 0x8003EC14, "E700C49001000224", "C7EA010800006534", kArmorByPartOwner);
