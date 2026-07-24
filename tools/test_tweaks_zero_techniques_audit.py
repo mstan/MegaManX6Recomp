@@ -30,6 +30,27 @@ class ZeroTechniqueAuditTests(unittest.TestCase):
             "ZeroSentsuizanInput03": "0",
         })
 
+    def test_decision_names_single_feature_boundary(self) -> None:
+        source = Path(
+            r"F:\Projects\psxrecomp\_wt-mmx6-mod-packages\mmx6-tweaks"
+            r"\_patcher\src_extracted"
+            r"\Mega Man X6 Tweaks Patcher (v2.6.1)\_src"
+        )
+        profile = Path(
+            r"F:\Projects\psxrecomp\_wt-mmx6-mod-packages\mmx6-tweaks"
+            r"\_patcher\run_extracted\profiles\default.x6tweaksprofile"
+        )
+        if not source.exists() or not profile.exists():
+            self.skipTest("reviewed MMX6 Tweaks extraction is not available")
+        report = audit.build_audit(source, profile)
+        decision = report["decision"]
+        self.assertIn("single Zero-techniques feature", decision["reason"])
+        self.assertIn(
+            "one coherent Zero-techniques feature",
+            decision["product_boundary"],
+        )
+        self.assertIn("cross-package", decision["required_primitive"])
+
 
 if __name__ == "__main__":
     unittest.main()
