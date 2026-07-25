@@ -71,6 +71,20 @@ def byte(addr):
     return int(r["hex"], 16) if r.get("ok") else -1
 
 
+def width():
+    """Display width: 512 on every front-end screen (title, title menu, FILE
+    SELECT, stage select, PLAYER SELECT), 320 once a stage is running.
+
+    This exists because the scene byte CANNOT tell the title menu from the
+    intro stage -- both read 6. Without a second discriminator, tapping START
+    one time too many at the title falls through into GAME START, and the
+    script happily reports "reached the title menu" while actually standing in
+    the intro stage, which is always X. Every stage/character measurement taken
+    after that point is measuring the wrong thing."""
+    r = send({"cmd": "gpu_state"})
+    return r.get("width", 0) if r.get("ok") else 0
+
+
 def word(addr):
     r = send({"cmd": "read_ram", "addr": hex(addr), "len": 4})
     return r["hex"] if r.get("ok") else ""
@@ -117,9 +131,18 @@ def main():
     # Re-entrant: a session already past the title (scene 7 covers everything
     # from FILE SELECT to in-stage) resumes at the probe-driven stage below
     # rather than demanding a fresh boot.
+    # Only scenes 6/7 at 320 wide mean "a stage is running": the opening movie
+    # (0) and the attract demo (2) are also 320 and are both escapable.
+    if byte(SCENE) in (6, 7) and width() == 320:
+        sys.exit("[nav] a stage is already running (scene %d). This script "
+                 "cannot get back to PLAYER SELECT from inside a stage -- "
+                 "relaunch the runtime." % byte(SCENE))
     if byte(SCENE) == 7:
         print("[nav] already past the title; resuming at the select screens")
         return finish(a)
+    if byte(SCENE) == 6:
+        print("[nav] already at the title menu; resuming there")
+        return from_menu(a)
 
     # 1. Opening movie -> title. START skips; the title also times out into the
     #    attract demo, so keep tapping until the title is actually up.
@@ -132,22 +155,29 @@ def main():
         sys.exit("[nav] never reached the title screen")
 
     # 2. The title takes a few seconds to finish loading before it accepts
-    #    START; too early and it falls through into the attract demo.
+    #    START; too early and it falls through into the attract demo. Tap it
+    #    EXACTLY ONCE and then verify, because a second START activates GAME
+    #    START and drops us in the intro stage -- which reads scene 6 exactly
+    #    like the menu does and is always X.
     time.sleep(5.0)
-    tap("start", wait=1.2)
-    if byte(SCENE) != 6:
-        print("[nav] title press missed (scene %d); retrying" % byte(SCENE))
-        for _ in range(12):
-            tap("start", wait=1.0)
-            if byte(SCENE) == 6:
-                break
-            if byte(SCENE) == 2:            # fell into the demo -- break out
-                tap("start", wait=1.5)
-                wait_scene({1}, 25)
-                time.sleep(5.0)
-    if byte(SCENE) != 6:
+    for attempt in range(12):
+        tap("start", wait=1.5)
+        s, w = byte(SCENE), width()
+        if s == 6 and w == 512:
+            break                            # title menu
+        if w == 320:
+            sys.exit("[nav] overshot into a stage (scene %d) -- relaunch" % s)
+        if s == 2:                           # fell into the attract demo
+            tap("start", wait=1.5)
+            wait_scene({1}, 25)
+            time.sleep(5.0)
+    if not (byte(SCENE) == 6 and width() == 512):
         sys.exit("[nav] never reached the title menu")
 
+    return from_menu(a)
+
+
+def from_menu(a):
     # 3. GAME START / CONTINUE / OPTION -> CONTINUE -> load from memory card.
     print("[nav] title menu -> continue from memory card ...")
     tap("down", wait=0.4)
@@ -193,11 +223,13 @@ def finish(a):
     if byte(CHAR_ID) != want:
         print("[nav] WARNING: character id is %d, wanted %d" % (byte(CHAR_ID), want))
     tap("cross", wait=4.0)
-    for _ in range(20):         # stage load
-        if word(PLAYER_X) not in ("00000000", ""):
+    for _ in range(25):         # stage load: front-end is 512 wide, stages 320
+        if width() == 320:
             break
         time.sleep(1.0)
-    time.sleep(2.0)
+    if width() != 320:
+        sys.exit("[nav] stage never started")
+    time.sleep(3.0)
 
     ok, before, after = alive()
     print("[nav] scene=%d char=%d playerX %s -> %s  %s"
