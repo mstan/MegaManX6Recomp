@@ -239,33 +239,64 @@ kseg_mask = "0x1FFFFFFF"
 #
 # Delete this whole block for pristine gen with zero co-op bytes.
 [coop]
+#
+# The pipeline's 23 calls, read straight out of the generated translation of
+# FUN_80020C40 (block leader -> jal target). PER-ACTOR entries are the ones
+# whose callee forms the player pointer 0x800970A0; the rest are shared and are
+# deliberately absent -- replaying the shared FUN_80020A08 ran physics twice and
+# dropped the player through the floor.
+#
+#   leader      jal target   role
+#   80020C40    8002E84C     shared
+#   80020C50    8003CD44     per-actor: pad-input processing. REPLAYED, with
+#                            the actor's raw pad substituted at the port-1 pad
+#                            buffer (runtime `coop raw_pad=`), so the engine
+#                            derives that actor's +0x7C/+0x7E/+0x80 itself. It
+#                            does NOT store the pad in SIO bit order -- LEFT is
+#                            0x0002, CROSS is 0x0080 -- so feeding a processed
+#                            word from outside means transcribing the whole
+#                            remap, and an actor fed SIO-order bits reads LEFT
+#                            as JUMP.
+#   80020C58    80020A08     shared
+#   80020C60    80034DCC     per-actor: state dispatch
+#   80020C68    8002012C     per-actor
+#   80020C70    800208EC     shared
+#   80020C78    8002000C     per-actor
+#   80020C80    80020258     per-actor
+#   80020C88    80020378     shared
+#   80020C90    800205A0     per-actor
+#   80020C98    800206C0     shared
+#   80020CA0    800207D4     shared
+#   80020CA8    80029D18     shared
+#   80020CB0    8002048C     shared
+#   80020CB8    80020D18     shared
+#   80020CC0    8002F288     per-actor
+#   80020CC8    8002927C     per-actor
+#   80020CD0    8002935C     shared
+#   80020CD8    800293CC     shared
+#   80020CE0    8002ACA8     shared
+#   80020CE8    80020D74     shared
+#   80020CF0    80020DC8     shared
+#   80020CF8    80017B04     per-actor: sprite submission
+#
+# Each entry below is the DELAY SLOT of that leader's jal.
 replay_sites = [
-    "0x80020C64",   # jal 0x80034DCC  state dispatch (safe)
-    "0x80020D04",   # jal 0x80017B04  sprite submission (safe)
+    "0x80020C54",   # -> FUN_8003CD44  pad-input processing
+    "0x80020C64",   # -> FUN_80034DCC  state dispatch
+    "0x80020C6C",   # -> FUN_8002012C
+    "0x80020C7C",   # -> FUN_8002000C
+    "0x80020C84",   # -> FUN_80020258
+    "0x80020C94",   # -> FUN_800205A0
+    "0x80020CC4",   # -> FUN_8002F288
+    "0x80020CCC",   # -> FUN_8002927C
+    "0x80020D04",   # -> FUN_80017B04  sprite submission
 ]
-# Every instruction that forms the actor pointer 0x800970A0: inside the stages,
-# plus the pipeline driver's own (stages that take the pointer as an argument
-# inherit it from there).
-actor_base_sites = [
-    "0x80020C5C",   # FUN_80020C40 driver: addiu s0,s0,0x70A0
-    "0x80020014",   # FUN_8002000C
-    "0x80020134",   # FUN_8002012C
-    "0x80020260",   # FUN_80020258
-    "0x800205A8",   # FUN_800205A0
-    "0x800292A4",   # FUN_8002927C
-    "0x8002F31C",   # FUN_8002F288
-    "0x80034DD8",   # FUN_80034DCC  state dispatch
-    "0x8003CD58",   # FUN_8003CD44  pad-input processing
-    "0x8003D088",   # FUN_8003D07C  damage-to-player. WITHOUT this, a hit on the
-                    # companion subtracted from PLAYER 1's HP: the function forms
-                    # the actor pointer here and then works struct-relative
-                    # (lbu 0x5C(s0) = HP, sb 0xCA(s0)), so leaving it unhooked
-                    # aimed every hit at player 1. Observed as player 1 "dying"
-                    # at about half health while an off-camera companion was
-                    # being chewed on. (A decompiler view of this function folds
-                    # s0 into absolute DAT_ addresses and reads as if it were
-                    # hardcoded to player 1 -- it is not.)
-]
+# NOTE: there is deliberately no actor-pointer site list. The actor being run is
+# swapped into 0x800970A0 itself, so every access finds it however it is
+# addressed. The previous design enumerated the addiu at each site and had to
+# keep growing: the damage function FUN_8003D07C formed the pointer at
+# 0x8003D088 and, until that one site was added, every hit on the companion
+# subtracted from PLAYER 1's HP. Swapping removes the whole class of miss.
 # Global side effects only player 1 may cause. Redirecting the actor pointer
 # cannot fix these: the write target is a game-state global, not a field of the
 # actor struct.
