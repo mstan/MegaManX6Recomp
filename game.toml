@@ -7,6 +7,17 @@ load_address = "0x80010000"
 entry_pc = "0x80054AD8"
 text_size = "0x0007F000"
 stack_base = "0x801FFFF0"
+# Two-player co-op bring-up (X on port 1, Zero on port 2). `players` is read by
+# config_loader.cpp and only fans out to the launcher: it unhides the P2
+# controller-card row and flips on the netplay-supported flag (recompiler/src
+# /config_loader.cpp:678-679, runtime/src/main.cpp:4634,5421,5459). It does NOT
+# by itself plug in SIO slot 1 — that still needs a `p2_device` (e.g. "auto" or
+# a keyboard/controller id), which is a settings.toml/launcher-only key (there
+# is no game.toml equivalent; parse_runtime_block's [controller] block never
+# reads p1_device/p2_device, only load_user_settings does). In a launcher-less
+# run, port 2 stays disconnected until a settings.toml `[controller] p2_device`
+# is supplied alongside this.
+players = 2
 
 [recompiler]
 seeds = "seeds/ghidra_funcs.txt"
@@ -201,3 +212,52 @@ vaddr_base  = "0x80010000"
 # Address normalization: KSEG masking only (game loads contiguously, no remaps).
 [audit.normalize]
 kseg_mask = "0x1FFFFFFF"
+
+# ---------------------------------------------------------------------------
+# [coop] — simultaneous X + Zero second player (ENHANCEMENT, default OFF).
+#
+# The per-frame player update is FUN_80020C40, a 23-call pipeline. Only SOME of
+# those calls are per-player; co-op replays each per-player stage once per actor
+# with the actor pointer redirected.
+#
+# ⚠ NOT a contiguous span — learned by breaking the game. A span that swept in
+# the shared stage FUN_80020A08 ran it twice per frame, drawing X's spawn beam
+# as a column of duplicated sprites and stepping physics twice so he fell
+# through the floor forever. Only stages proven per-actor (i.e. they appear in
+# actor_base_sites, or take the pointer as an argument) may be replayed.
+#
+# replay_sites = the DELAY SLOT of each per-actor stage's jal in FUN_80020C40.
+#   Classification came from listing every pipeline call and checking which ones
+#   build the actor pointer; the shared ones (0x8002E84C, 0x80020A08, 0x800208EC,
+#   0x80020378, 0x800206C0, 0x800207D4, 0x80029D18, 0x8002048C, 0x80020D18,
+#   0x8002935C, 0x800293CC, 0x8002ACA8, 0x80020D74, 0x80020DC8) are deliberately
+#   NOT listed.
+#
+# The demo/attract pipeline (FUN_80021500) is deliberately NOT declared: attract
+# replays a recorded 2500-frame pad table at 0x801F68DC against simulation
+# state, so an extra actor there would desync the recording.
+#
+# Delete this whole block for pristine gen with zero co-op bytes.
+[coop]
+replay_sites = [
+    # BISECTING. Replaying all 7 per-actor stages WEDGED the game (starvation
+    # watchdog: 6s without a heartbeat, aborted). Some stage does not tolerate
+    # re-entry. Start from the minimum that could make a companion visible —
+    # state dispatch + sprite submission — and add one stage at a time.
+    "0x80020C64",   # jal 0x80034DCC  state-machine dispatch (known safe)
+    "0x80020D04",   # jal 0x80017B04(&actor,0x140,0) — sprite submission (draw)
+]
+# Every instruction that forms the actor pointer 0x800970A0: inside the stages,
+# plus the pipeline driver's own (stages that take the pointer as an argument
+# inherit it from there).
+actor_base_sites = [
+    "0x80020C5C",   # FUN_80020C40 driver: addiu s0,s0,0x70A0
+    "0x80020014",   # FUN_8002000C
+    "0x80020134",   # FUN_8002012C
+    "0x80020260",   # FUN_80020258
+    "0x800205A8",   # FUN_800205A0
+    "0x800292A4",   # FUN_8002927C
+    "0x8002F31C",   # FUN_8002F288
+    "0x80034DD8",   # FUN_80034DCC  state dispatch
+    "0x8003CD58",   # FUN_8003CD44  pad-input processing
+]
