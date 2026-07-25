@@ -240,8 +240,8 @@ kseg_mask = "0x1FFFFFFF"
 # Delete this whole block for pristine gen with zero co-op bytes.
 [coop]
 replay_sites = [
-    "0x80020C64",   # jal 0x80034DCC  state dispatch (known safe)
-    "0x80020D04",   # jal 0x80017B04  sprite submission (known safe)
+    "0x80020C64",   # jal 0x80034DCC  state dispatch (safe)
+    "0x80020D04",   # jal 0x80017B04  sprite submission (safe)
 ]
 # Every instruction that forms the actor pointer 0x800970A0: inside the stages,
 # plus the pipeline driver's own (stages that take the pointer as an argument
@@ -256,4 +256,44 @@ actor_base_sites = [
     "0x8002F31C",   # FUN_8002F288
     "0x80034DD8",   # FUN_80034DCC  state dispatch
     "0x8003CD58",   # FUN_8003CD44  pad-input processing
+    "0x8003D088",   # FUN_8003D07C  damage-to-player. WITHOUT this, a hit on the
+                    # companion subtracted from PLAYER 1's HP: the function forms
+                    # the actor pointer here and then works struct-relative
+                    # (lbu 0x5C(s0) = HP, sb 0xCA(s0)), so leaving it unhooked
+                    # aimed every hit at player 1. Observed as player 1 "dying"
+                    # at about half health while an off-camera companion was
+                    # being chewed on. (A decompiler view of this function folds
+                    # s0 into absolute DAT_ addresses and reads as if it were
+                    # hardcoded to player 1 -- it is not.)
+]
+# Global side effects only player 1 may cause. Redirecting the actor pointer
+# cannot fix these: the write target is a game-state global, not a field of the
+# actor struct.
+suppress_sites = [
+    # Every WRITE site of the stage-fail/death flag 0x800CCEEC (20 of them,
+    # across 21 functions incl. player state-table entries). A companion must
+    # NEVER set it: player 1 kept full health but lost all control when a
+    # companion died, because the game believed the player was dead.
+    # Suppressing only the damage function's own store was not enough -- the
+    # death STATE sets it too.
+    "0x8003D0F4",
+    "0x8003B8A4",
+    "0x80035238",
+    "0x8003C37C",
+    "0x80039314",
+    "0x8003946C",
+    "0x800503BC",
+    "0x800532BC",
+    "0x8003D32C",
+    "0x8003D348",
+    "0x8003E5F8",
+    "0x80037C28",
+    "0x800214DC",
+    "0x8003FCA4",
+    "0x8003FD4C",
+    "0x8003102C",
+    "0x80031218",
+    "0x80050FF0",
+    "0x80053FF8",
+    "0x80021670",
 ]
