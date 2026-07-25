@@ -1,4 +1,4 @@
-[game]
+﻿[game]
 name = "Mega Man X6"
 id = "SLUS-01395"
 exe = "mmx6/SLUS_013.95"
@@ -11,7 +11,7 @@ stack_base = "0x801FFFF0"
 # config_loader.cpp and only fans out to the launcher: it unhides the P2
 # controller-card row and flips on the netplay-supported flag (recompiler/src
 # /config_loader.cpp:678-679, runtime/src/main.cpp:4634,5421,5459). It does NOT
-# by itself plug in SIO slot 1 — that still needs a `p2_device` (e.g. "auto" or
+# by itself plug in SIO slot 1 â€” that still needs a `p2_device` (e.g. "auto" or
 # a keyboard/controller id), which is a settings.toml/launcher-only key (there
 # is no game.toml equivalent; parse_runtime_block's [controller] block never
 # reads p1_device/p2_device, only load_user_settings does). In a launcher-less
@@ -29,11 +29,11 @@ strict = true
 debug_port = 4490
 window_title = "MegaManX6Recomp"
 memcard_dir = "saves"
-# Disc speed + fast loads — the architecturally-correct model.
+# Disc speed + fast loads â€” the architecturally-correct model.
 #
 # Speeding the GUEST-VISIBLE CD device (disc_speed="4x"/"instant") is
 # fundamentally unsafe: it changes how many VBlanks/callbacks fall between the
-# game's state transitions, so timing-sensitive titles break. MMX6 proves it —
+# game's state transitions, so timing-sensitive titles break. MMX6 proves it â€”
 # at 4x/instant it wedges at boot because its Psy-Q VSync callback (which ticks a
 # counter the loader busy-waits on, func 0x80060ADC / counter 0x8008C8E4) is torn
 # down early when the read completes "too fast", so the counter freezes and the
@@ -43,7 +43,7 @@ memcard_dir = "saves"
 # reason.
 #
 # The SAFE way to get fast loads is to keep AUTHENTIC guest CD timing (so nothing
-# breaks) and instead FAST-FORWARD THE WHOLE GUEST TIMELINE during loads — run
+# breaks) and instead FAST-FORWARD THE WHOLE GUEST TIMELINE during loads â€” run
 # every authentic VBlank/callback/sector at the host's full speed and skip
 # presentation. That's turbo_loads: cdrom_load_in_progress() detects the CD burst
 # (XA/FMV excluded, post-handoff only) and main.cpp drops wall-clock pacing while
@@ -67,35 +67,35 @@ overlay_backend = "auto"
 # <exe>/cache and <exe>/overlay_captures.json) so the write can never drift from
 # where the loader reads. This is just the compile RECIPE (compiler + tool paths).
 overlay_autocompile_cmd = "python F:/Projects/psxrecomp/psxrecomp/tools/compile_overlays.py --game-toml game.toml --recompiler F:/Projects/psxrecomp/psxrecomp/recompiler/build/psxrecomp-game.exe --runtime-include F:/Projects/psxrecomp/psxrecomp/runtime/include --gcc C:/msys64/mingw64/bin/gcc.exe --cps"
-# tcc fallback: NO explicit cmd — when the backend resolves to tcc the runtime
+# tcc fallback: NO explicit cmd â€” when the backend resolves to tcc the runtime
 # constructs the command from the self-contained toolchain bundled beside the exe
 # (<exe>/overlay_toolchain/: embedded python + tcc + recompiler + script + headers).
 # An explicit overlay_autocompile_cmd_tcc here would override that (dev escape hatch).
 
 [video]
 # renderer: GPU-authoritative OpenGL is the DEFAULT as of 2026-07-03. The
-# intermittent black-frame flicker (ISSUES.md #7 — the reason v0.0.2 shipped
+# intermittent black-frame flicker (ISSUES.md #7 â€” the reason v0.0.2 shipped
 # software) was root-caused and fixed in psxrecomp: flush_cpu_upload merged
-# disjoint CPU→VRAM uploads into one union box painted from the stale CPU mirror;
+# disjoint CPUâ†’VRAM uploads into one union box painted from the stale CPU mirror;
 # fix = exact pending-rect list. GL is now validated clean incl. the Rainy
-# Turtloid repro. Software stays selectable in the launcher (Settings → Renderer).
+# Turtloid repro. Software stays selectable in the launcher (Settings â†’ Renderer).
 renderer = "opengl"
 
 # aspect_ratio: native presentation. MMX6 ships 4:3 (authentic); the launcher's
-# Settings → "Widescreen (EXPERIMENTAL)" toggle flips this to "16:9" in
+# Settings â†’ "Widescreen (EXPERIMENTAL)" toggle flips this to "16:9" in
 # settings.toml to opt into the experimental 2D widescreen (real wider field of
-# view — see WIDESCREEN.md / [widescreen] below). Off by default; the toggle is
+# view â€” see WIDESCREEN.md / [widescreen] below). Off by default; the toggle is
 # the single user control (the [widescreen] full_2d + bg2d hooks are always
 # compiled in and stay inert at 4:3).
 aspect_ratio = "4:3"
 
 # auto_skip_fmv: auto-skip full-motion videos (XA audio + MDEC). The launcher's
-# Settings → "Skip FMVs" toggle mirrors this and persists to settings.toml.
+# Settings â†’ "Skip FMVs" toggle mirrors this and persists to settings.toml.
 # Enabled by default for MMX6 so the X-vs-Zero opening movie fast-forwards.
 #
-# End mechanism — two paths (see runtime/src/main.cpp FMV auto-skip block):
+# End mechanism â€” two paths (see runtime/src/main.cpp FMV auto-skip block):
 #  - fmv_skip_total_table set: write the active movie's per-movie frame-total
-#    down so the game's OWN player tears it down next frame — a natural end that
+#    down so the game's OWN player tears it down next frame â€” a natural end that
 #    reaches EVERY movie, incl. unskippable ones (this is Tomba's universal path).
 #  - no table (current): generic fallback holds START so a movie whose handler
 #    polls the pad aborts itself. Works for the pad-skippable opening; CANNOT
@@ -109,7 +109,7 @@ auto_skip_fmv = false
 
 # Controller defaults. Mega Man X6 probes the pad with the DualShock config
 # command (0x43) at init and will NOT poll buttons (0x42) until it detects an
-# analog-capable controller — a plain digital pad leaves the game with no input.
+# analog-capable controller â€” a plain digital pad leaves the game with no input.
 # So present a DualShock (analog) by default: default_analog=true pins port 1 to
 # PAD_MODE_ANALOG (id 0x73), which the corrected SIO config state machine
 # (runtime/src/sio.c) now negotiates correctly. The launcher's per-player
@@ -119,7 +119,7 @@ auto_skip_fmv = false
 default_analog = true
 deadzone       = 12000
 # MMX6 hard-requires a DualShock (it won't poll buttons without an analog pad),
-# so the "Hybrid" launcher pad mode doesn't apply — hide it, leaving Analog and
+# so the "Hybrid" launcher pad mode doesn't apply â€” hide it, leaving Analog and
 # D-Pad as the only choices.
 allow_hybrid   = false
 
@@ -131,7 +131,7 @@ allow_hybrid   = false
 # native-wide present path engages. Pair with [video] aspect_ratio = "16:9"
 # (set in settings.toml / the launcher); at 4:3 this flag is inert. Runtime-only
 # (no regen). The wider field of view itself is an ongoing RE effort (the engine
-# renders a true 4:3 view — there is no overscan to merely "reveal"); this flag
+# renders a true 4:3 view â€” there is no overscan to merely "reveal"); this flag
 # is the opt-in switch the FOV work plugs into.
 [widescreen]
 full_2d = true
@@ -173,7 +173,7 @@ slti_sites = ["0x801F210C"]
 count_site    = "0x800271d4"
 startcol_site = "0x80027188"
 startx_site   = "0x800271a0"
-# Tile-ring streamer (FUN_800273e4) leading-edge widen — without this the extra
+# Tile-ring streamer (FUN_800273e4) leading-edge widen â€” without this the extra
 # columns the renderer draws fetch un-streamed ring slots (empty=black margin, or
 # stale=old tiles as the camera scrolls). These two addiu compute the left
 # (scrollX-16) and right (scrollX+16, before +width) stream world-X; pushed out by
@@ -182,7 +182,7 @@ startx_site   = "0x800271a0"
 #   stream_right_site: 0x80027444  addiu a1,s1,0x10
 stream_left_site  = "0x80027424"
 stream_right_site = "0x80027444"
-# Packet-buffer RELOCATION — cures the dense-stage overflow of the engine's BG packet
+# Packet-buffer RELOCATION â€” cures the dense-stage overflow of the engine's BG packet
 # double-buffer (base 0x800B91C0, stride 0x4000 = 1024 slots) + its 1000-tile/frame cap
 # that the widen overruns (void/garbled columns). When the widen is active, relocate the
 # double-buffer to a larger proven-free region + raise the cap (gpu.c psx_ws_mmx6_bg_bufbase
@@ -194,12 +194,12 @@ cap_site     = "0x80027278"
 # stage submits its background (regen required).
 init_func    = "0x800269f4"
 
-# ── Audit-specific config (consumed by psxrecomp-v4/tools/*.py and tests) ──
+# â”€â”€ Audit-specific config (consumed by psxrecomp-v4/tools/*.py and tests) â”€â”€
 # Schema mirrors psxrecomp-v4/bios/SCPH1001.toml. Paths are relative to the
 # project root.
 
 [audit]
-# Dynamic discovery — functions are found by walking control flow from
+# Dynamic discovery â€” functions are found by walking control flow from
 # entry_pc. No Ghidra function-starts file is required to bootstrap.
 
 # Code region: text segment is contiguous from load_address for text_size bytes.
@@ -214,13 +214,13 @@ vaddr_base  = "0x80010000"
 kseg_mask = "0x1FFFFFFF"
 
 # ---------------------------------------------------------------------------
-# [coop] — simultaneous X + Zero second player (ENHANCEMENT, default OFF).
+# [coop] â€” simultaneous X + Zero second player (ENHANCEMENT, default OFF).
 #
 # The per-frame player update is FUN_80020C40, a 23-call pipeline. Only SOME of
 # those calls are per-player; co-op replays each per-player stage once per actor
 # with the actor pointer redirected.
 #
-# ⚠ NOT a contiguous span — learned by breaking the game. A span that swept in
+# âš  NOT a contiguous span â€” learned by breaking the game. A span that swept in
 # the shared stage FUN_80020A08 ran it twice per frame, drawing X's spawn beam
 # as a column of duplicated sprites and stepping physics twice so he fell
 # through the floor forever. Only stages proven per-actor (i.e. they appear in
@@ -240,12 +240,8 @@ kseg_mask = "0x1FFFFFFF"
 # Delete this whole block for pristine gen with zero co-op bytes.
 [coop]
 replay_sites = [
-    # BISECTING. Replaying all 7 per-actor stages WEDGED the game (starvation
-    # watchdog: 6s without a heartbeat, aborted). Some stage does not tolerate
-    # re-entry. Start from the minimum that could make a companion visible —
-    # state dispatch + sprite submission — and add one stage at a time.
-    "0x80020C64",   # jal 0x80034DCC  state-machine dispatch (known safe)
-    "0x80020D04",   # jal 0x80017B04(&actor,0x140,0) — sprite submission (draw)
+    "0x80020C64",   # jal 0x80034DCC  state dispatch (known safe)
+    "0x80020D04",   # jal 0x80017B04  sprite submission (known safe)
 ]
 # Every instruction that forms the actor pointer 0x800970A0: inside the stages,
 # plus the pipeline driver's own (stages that take the pointer as an argument

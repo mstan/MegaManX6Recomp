@@ -26,7 +26,14 @@ else:
             k, v = kv.split("=", 1)
             # addr/hex fields must be sent as STRINGS (server parses the hex
             # string); only len-like fields are ints.
-            if k in ("addr", "hex", "lo", "hi", "target"):
+            # Keys the server parses with json_get_str() must stay STRINGS.
+            # Sending them as ints silently fails the handler's hex parse, which
+            # surfaces as an unrelated-looking error ("unknown command" when a
+            # whole payload is malformed), so keep this list in sync with the
+            # handlers that take hex arguments.
+            if k in ("addr", "hex", "lo", "hi", "target", "val",
+                     "primary", "scratch", "mode_addr", "zero1", "zero2",
+                     "in_global", "base"):
                 obj[k] = v
             else:
                 try:
