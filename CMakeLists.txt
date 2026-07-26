@@ -100,6 +100,19 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/launcher_art")
         COMMENT "Overriding launcher art with MegaManX6Recomp/launcher_art")
 endif()
 
+# This review branch carries the latest converted MMX6 Tweaks package catalog
+# so every loader feature is visible without a separate install step. Features
+# remain disabled until the player opts in. See mods/preloaded/README.md for the
+# unresolved redistribution status of the Tweaks-derived payloads.
+set(MMX6_PRELOADED_MODS "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded")
+if(EXISTS "${MMX6_PRELOADED_MODS}/packages")
+    add_custom_command(TARGET psx-runtime POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            "${MMX6_PRELOADED_MODS}"
+            "$<TARGET_FILE_DIR:psx-runtime>/mods"
+        COMMENT "Preloading the MMX6 Tweaks mod catalog")
+endif()
+
 if(BUILD_TESTING)
     add_executable(mmx6_tweaks_hooks_test
         tests/test_mmx6_tweaks_hooks.cpp
@@ -120,5 +133,63 @@ if(BUILD_TESTING)
     set_tests_properties(
         mmx6_tweaks_hooks_test
         PROPERTIES WORKING_DIRECTORY "$<TARGET_FILE_DIR:mmx6_tweaks_hooks_test>"
+    )
+
+    add_executable(mmx6_preloaded_mods_test
+        tests/test_preloaded_mods.cpp
+        ${GAME_MOD_RESOLVER_SOURCES}
+        psxrecomp-v4/runtime/src/mod_packages.cpp
+        psxrecomp-v4/runtime/src/crc32.c
+        psxrecomp-v4/runtime/src/psx_sha256.c
+    )
+    target_include_directories(mmx6_preloaded_mods_test PRIVATE
+        src/mods
+        psxrecomp-v4/runtime/include
+        psxrecomp-v4/recompiler/lib/toml11
+    )
+    add_test(
+        NAME mmx6_preloaded_mods_test
+        COMMAND "$<TARGET_FILE:mmx6_preloaded_mods_test>"
+                "${MMX6_PRELOADED_MODS}"
+    )
+
+    find_package(Python3 REQUIRED COMPONENTS Interpreter)
+    set(MMX6_TIMING_PACKAGE_DIR
+        "${MMX6_PRELOADED_MODS}/packages/mmx6.tweaks.timing/1.1.0")
+    set(MMX6_TIMING_TEST_ARCHIVE
+        "${CMAKE_CURRENT_BINARY_DIR}/test-packages/MMX6-Tweaks-Timing.psxmod")
+    file(GLOB_RECURSE MMX6_TIMING_PACKAGE_FILES CONFIGURE_DEPENDS
+        "${MMX6_TIMING_PACKAGE_DIR}/*")
+    add_custom_command(
+        OUTPUT "${MMX6_TIMING_TEST_ARCHIVE}"
+        COMMAND "${Python3_EXECUTABLE}"
+                "${PSXRECOMP_V4_ROOT}/tools/psxmod_pack.py"
+                "${MMX6_TIMING_PACKAGE_DIR}"
+                "${MMX6_TIMING_TEST_ARCHIVE}"
+        DEPENDS
+            ${MMX6_TIMING_PACKAGE_FILES}
+            "${PSXRECOMP_V4_ROOT}/tools/psxmod_pack.py"
+        COMMENT "Packing the preloaded MMX6 timing test package"
+        VERBATIM
+    )
+    add_custom_target(mmx6_timing_test_package
+        DEPENDS "${MMX6_TIMING_TEST_ARCHIVE}")
+
+    add_executable(mmx6_tweaks_timing_runtime_test
+        tools/test_tweaks_timing_runtime.cpp
+        psxrecomp-v4/runtime/src/mod_packages.cpp
+        psxrecomp-v4/runtime/src/crc32.c
+        psxrecomp-v4/runtime/src/psx_sha256.c
+    )
+    add_dependencies(mmx6_tweaks_timing_runtime_test
+        mmx6_timing_test_package)
+    target_include_directories(mmx6_tweaks_timing_runtime_test PRIVATE
+        psxrecomp-v4/runtime/include
+        psxrecomp-v4/recompiler/lib/toml11
+    )
+    add_test(
+        NAME mmx6_tweaks_timing_runtime_test
+        COMMAND "$<TARGET_FILE:mmx6_tweaks_timing_runtime_test>"
+                "${MMX6_TIMING_TEST_ARCHIVE}"
     )
 endif()

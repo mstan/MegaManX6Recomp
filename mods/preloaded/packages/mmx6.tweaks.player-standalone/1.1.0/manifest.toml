@@ -1,0 +1,34 @@
+format_version = 3
+id = "mmx6.tweaks.player-standalone"
+version = "1.1.0"
+name = "Mega Man X6 Standalone Player Tweaks"
+author = "acediez and MMX6 Tweaks contributors; PSXRecomp integration"
+description = "Independent fixed player behaviors for a stock USA v1.1 disc."
+license = "Generated locally; original credits retained"
+resolver = "builtin:mmx6-player-standalone"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+[[feature]]
+id = "unlock_x_air_dash"
+name = "Unlock X's Air Dash"
+description = "Allow X to use the air dash without its normal armor restriction."
+group = "Player Mechanics"
+default_enabled = false
+
+[[feature]]
+id = "guard_shell_bug_fix"
+name = "Guard Shell Bug Fix"
+description = "Apply the reviewed Guard Shell hit-detection correction."
+group = "Player Mechanics"
+default_enabled = false
+
+[[feature]]
+id = "disable_zero_weapon_autoselect"
+name = "Disable Zero Weapon Auto-select"
+description = "Stop Zero techniques from automatically selecting their matching weapon."
+group = "Player Mechanics"
+default_enabled = false

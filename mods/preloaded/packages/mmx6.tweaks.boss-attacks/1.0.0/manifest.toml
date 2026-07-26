@@ -1,0 +1,100 @@
+format_version = 3
+id = "mmx6.tweaks.boss-attacks"
+version = "1.0.0"
+name = "Mega Man X6 Boss Attack Tweaks"
+author = "acediez; PSXRecomp integration by DuoDynamo and NectarHime"
+description = "Independent exact stock-disc MMX6 Tweaks features."
+license = "Generated locally; original credits retained"
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+[[feature]]
+id = "yammark_reduce_idle_time"
+name = "Commander Yammark: Reduce Idle Time"
+description = "Reduce idle time between Commander Yammark attacks."
+group = "Commander Yammark"
+default_enabled = false
+
+[[patch]]
+feature = "yammark_reduce_idle_time"
+target = "disc_user"
+offset = 432684896
+expected = "7800"
+replace = "1000"
+order = 0
+
+[[patch]]
+feature = "yammark_reduce_idle_time"
+target = "disc_user"
+offset = 432685288
+expected = "5802"
+replace = "F000"
+order = 0
+
+[[patch]]
+feature = "yammark_reduce_idle_time"
+target = "disc_user"
+offset = 432694540
+expected = "8E016214"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "yammark_reduce_idle_time"
+target = "disc_user"
+offset = 432701600
+expected = "7800"
+replace = "1000"
+order = 0
+
+[[patch]]
+feature = "yammark_reduce_idle_time"
+target = "disc_user"
+offset = 432701628
+expected = "F401"
+replace = "1000"
+order = 0
+
+[[patch]]
+feature = "yammark_reduce_idle_time"
+target = "disc_user"
+offset = 433866880
+expected = "7800"
+replace = "1000"
+order = 0
+
+[[patch]]
+feature = "yammark_reduce_idle_time"
+target = "disc_user"
+offset = 433867272
+expected = "5802"
+replace = "F000"
+order = 0
+
+[[patch]]
+feature = "yammark_reduce_idle_time"
+target = "disc_user"
+offset = 433876524
+expected = "8E016214"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "yammark_reduce_idle_time"
+target = "disc_user"
+offset = 433883584
+expected = "7800"
+replace = "1000"
+order = 0
+
+[[patch]]
+feature = "yammark_reduce_idle_time"
+target = "disc_user"
+offset = 433883612
+expected = "F401"
+replace = "1000"
+order = 0

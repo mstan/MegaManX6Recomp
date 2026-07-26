@@ -1,0 +1,778 @@
+format_version = 3
+id = "mmx6.tweaks.damage-rules"
+version = "1.2.0"
+name = "Mega Man X6 Damage Rules"
+author = "acediez; PSXRecomp integration by DuoDynamo and NectarHime"
+description = "Independent exact stock-disc MMX6 Tweaks features."
+license = "Generated locally; original credits retained"
+resolver = "builtin:mmx6-damage-rules"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+[[feature]]
+id = "gate_vulnerable_to_normal_attacks"
+name = "Gate Vulnerable to Normal Attacks"
+description = "Allow ordinary attacks to damage Gate."
+group = "Gate"
+default_enabled = false
+
+[[feature]]
+id = "gate_orb_explosion_damage"
+name = "Gate Orb Explosion Damage"
+description = "Set the damage dealt by Gate's own orb explosions."
+group = "Gate"
+default_enabled = false
+
+[[option]]
+feature = "gate_orb_explosion_damage"
+id = "damage"
+label = "Damage"
+description = "Set the damage dealt by Gate's own orb explosions."
+group = "Gate"
+type = "integer"
+min = 1
+max = 127
+step = 1
+default = 4
+
+[[feature]]
+id = "boss_health_by_level"
+name = "Boss Health by Level"
+description = "Set boss health totals by level using the reviewed MMX6 Tweaks v2.6.1 health-table algebra."
+group = "Difficulty Progression"
+default_enabled = false
+
+[[option]]
+feature = "boss_health_by_level"
+id = "d1000_level_1"
+label = "D-1000 Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 32
+
+[[option]]
+feature = "boss_health_by_level"
+id = "nightmare_snake_level_1"
+label = "Nightmare Snake Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 127
+
+[[option]]
+feature = "boss_health_by_level"
+id = "nightmare_pressure_level_1"
+label = "Nightmare Pressure Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 48
+
+[[option]]
+feature = "boss_health_by_level"
+id = "illumina_level_1"
+label = "Illumina Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 64
+
+[[option]]
+feature = "boss_health_by_level"
+id = "commander_yammark_level_1"
+label = "Commander Yammark Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 32
+
+[[option]]
+feature = "boss_health_by_level"
+id = "commander_yammark_level_2"
+label = "Commander Yammark Lv.2"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 38
+
+[[option]]
+feature = "boss_health_by_level"
+id = "commander_yammark_level_3"
+label = "Commander Yammark Lv.3"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 44
+
+[[option]]
+feature = "boss_health_by_level"
+id = "commander_yammark_level_4"
+label = "Commander Yammark Lv.4"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 48
+
+[[option]]
+feature = "boss_health_by_level"
+id = "blizzard_wolfang_level_1"
+label = "Blizzard Wolfang Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 48
+
+[[option]]
+feature = "boss_health_by_level"
+id = "blizzard_wolfang_level_2"
+label = "Blizzard Wolfang Lv.2"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 50
+
+[[option]]
+feature = "boss_health_by_level"
+id = "blizzard_wolfang_level_3"
+label = "Blizzard Wolfang Lv.3"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 52
+
+[[option]]
+feature = "boss_health_by_level"
+id = "blizzard_wolfang_level_4"
+label = "Blizzard Wolfang Lv.4"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 54
+
+[[option]]
+feature = "boss_health_by_level"
+id = "blaze_heatnix_level_1"
+label = "Blaze Heatnix Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 48
+
+[[option]]
+feature = "boss_health_by_level"
+id = "blaze_heatnix_level_3"
+label = "Blaze Heatnix Lv.3"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 52
+
+[[option]]
+feature = "boss_health_by_level"
+id = "blaze_heatnix_level_4"
+label = "Blaze Heatnix Lv.4"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 56
+
+[[option]]
+feature = "boss_health_by_level"
+id = "metal_shark_player_level_1"
+label = "Metal Shark Player Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 48
+
+[[option]]
+feature = "boss_health_by_level"
+id = "metal_shark_player_level_2"
+label = "Metal Shark Player Lv.2"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 48
+
+[[option]]
+feature = "boss_health_by_level"
+id = "metal_shark_player_level_3"
+label = "Metal Shark Player Lv.3"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 52
+
+[[option]]
+feature = "boss_health_by_level"
+id = "metal_shark_player_level_4"
+label = "Metal Shark Player Lv.4"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 56
+
+[[option]]
+feature = "boss_health_by_level"
+id = "ground_scaravich_level_1"
+label = "Ground Scaravich Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 40
+
+[[option]]
+feature = "boss_health_by_level"
+id = "rainy_turtloid_level_1"
+label = "Rainy Turtloid Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 56
+
+[[option]]
+feature = "boss_health_by_level"
+id = "rainy_turtloid_level_2"
+label = "Rainy Turtloid Lv.2"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 56
+
+[[option]]
+feature = "boss_health_by_level"
+id = "rainy_turtloid_level_3"
+label = "Rainy Turtloid Lv.3"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 60
+
+[[option]]
+feature = "boss_health_by_level"
+id = "rainy_turtloid_level_4"
+label = "Rainy Turtloid Lv.4"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 64
+
+[[option]]
+feature = "boss_health_by_level"
+id = "shield_sheldon_level_1"
+label = "Shield Sheldon Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 32
+
+[[option]]
+feature = "boss_health_by_level"
+id = "shield_sheldon_level_2"
+label = "Shield Sheldon Lv.2"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 36
+
+[[option]]
+feature = "boss_health_by_level"
+id = "shield_sheldon_level_3"
+label = "Shield Sheldon Lv.3"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 40
+
+[[option]]
+feature = "boss_health_by_level"
+id = "shield_sheldon_level_4"
+label = "Shield Sheldon Lv.4"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 48
+
+[[option]]
+feature = "boss_health_by_level"
+id = "infinity_mijinion_level_1"
+label = "Infinity Mijinion Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 48
+
+[[option]]
+feature = "boss_health_by_level"
+id = "infinity_mijinion_level_2"
+label = "Infinity Mijinion Lv.2"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 52
+
+[[option]]
+feature = "boss_health_by_level"
+id = "infinity_mijinion_level_3"
+label = "Infinity Mijinion Lv.3"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 54
+
+[[option]]
+feature = "boss_health_by_level"
+id = "infinity_mijinion_level_4"
+label = "Infinity Mijinion Lv.4"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 56
+
+[[option]]
+feature = "boss_health_by_level"
+id = "nightmare_zero_level_1"
+label = "Nightmare Zero Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 48
+
+[[option]]
+feature = "boss_health_by_level"
+id = "nightmare_zero_level_2"
+label = "Nightmare Zero Lv.2"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 50
+
+[[option]]
+feature = "boss_health_by_level"
+id = "nightmare_zero_level_3"
+label = "Nightmare Zero Lv.3"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 52
+
+[[option]]
+feature = "boss_health_by_level"
+id = "nightmare_zero_level_4"
+label = "Nightmare Zero Lv.4"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 56
+
+[[option]]
+feature = "boss_health_by_level"
+id = "high_max_hidden_area_level_1"
+label = "High Max (Hidden Area) Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 48
+
+[[option]]
+feature = "boss_health_by_level"
+id = "high_max_hidden_area_level_2"
+label = "High Max (Hidden Area) Lv.2"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 52
+
+[[option]]
+feature = "boss_health_by_level"
+id = "high_max_hidden_area_level_3"
+label = "High Max (Hidden Area) Lv.3"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 56
+
+[[option]]
+feature = "boss_health_by_level"
+id = "high_max_hidden_area_level_4"
+label = "High Max (Hidden Area) Lv.4"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 64
+
+[[option]]
+feature = "boss_health_by_level"
+id = "dynamo_level_1"
+label = "Dynamo Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 50
+
+[[option]]
+feature = "boss_health_by_level"
+id = "dynamo_level_2"
+label = "Dynamo Lv.2"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 58
+
+[[option]]
+feature = "boss_health_by_level"
+id = "dynamo_level_3"
+label = "Dynamo Lv.3"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 62
+
+[[option]]
+feature = "boss_health_by_level"
+id = "dynamo_level_4"
+label = "Dynamo Lv.4"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 66
+
+[[option]]
+feature = "boss_health_by_level"
+id = "nightmare_mother_level_1"
+label = "Nightmare Mother Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 120
+
+[[option]]
+feature = "boss_health_by_level"
+id = "nightmare_mother_level_2"
+label = "Nightmare Mother Lv.2"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 122
+
+[[option]]
+feature = "boss_health_by_level"
+id = "nightmare_mother_level_3"
+label = "Nightmare Mother Lv.3"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 124
+
+[[option]]
+feature = "boss_health_by_level"
+id = "nightmare_mother_level_4"
+label = "Nightmare Mother Lv.4"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 125
+
+[[option]]
+feature = "boss_health_by_level"
+id = "high_max_secret_lab_level_1"
+label = "High Max (Secret Lab) Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 48
+
+[[option]]
+feature = "boss_health_by_level"
+id = "high_max_secret_lab_level_2"
+label = "High Max (Secret Lab) Lv.2"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 52
+
+[[option]]
+feature = "boss_health_by_level"
+id = "high_max_secret_lab_level_3"
+label = "High Max (Secret Lab) Lv.3"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 56
+
+[[option]]
+feature = "boss_health_by_level"
+id = "high_max_secret_lab_level_4"
+label = "High Max (Secret Lab) Lv.4"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 64
+
+[[option]]
+feature = "boss_health_by_level"
+id = "gate_level_1"
+label = "Gate Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 52
+
+[[option]]
+feature = "boss_health_by_level"
+id = "gate_level_2"
+label = "Gate Lv.2"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 54
+
+[[option]]
+feature = "boss_health_by_level"
+id = "gate_level_3"
+label = "Gate Lv.3"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 56
+
+[[option]]
+feature = "boss_health_by_level"
+id = "gate_level_4"
+label = "Gate Lv.4"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 58
+
+[[option]]
+feature = "boss_health_by_level"
+id = "sigma_level_1"
+label = "Sigma Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 48
+
+[[option]]
+feature = "boss_health_by_level"
+id = "sigma_level_2"
+label = "Sigma Lv.2"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 50
+
+[[option]]
+feature = "boss_health_by_level"
+id = "sigma_level_3"
+label = "Sigma Lv.3"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 52
+
+[[option]]
+feature = "boss_health_by_level"
+id = "sigma_level_4"
+label = "Sigma Lv.4"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 54
+
+[[option]]
+feature = "boss_health_by_level"
+id = "sigma_second_form_level_1"
+label = "Sigma (Second Form) Lv.1"
+description = "Boss health must remain between 32 and 127."
+group = "Boss Health by Level"
+type = "integer"
+min = 32
+max = 127
+step = 1
+default = 127

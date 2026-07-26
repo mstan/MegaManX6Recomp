@@ -1,0 +1,670 @@
+format_version = 1
+id = "mmx6.tweaks.new-game"
+version = "1.4.0"
+name = "Mega Man X6 Tweaks — New Game Status"
+author = "acediez and MMX6 Tweaks contributors; PSXRecomp integration"
+description = "Independent starting-status features composed by a trusted game resolver."
+license = "Generated locally; original credits retained"
+resolver = "builtin:mmx6-new-game"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+[[feature]]
+id = "x_life_upgrades"
+name = "X Starting Life Upgrades"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[option]]
+feature = "x_life_upgrades"
+id = "count"
+label = "Count"
+description = "Starting upgrade count while enabled."
+group = "New Game Status"
+type = "integer"
+min = 1
+max = 16
+step = 1
+default = 1
+
+[[feature]]
+id = "zero_life_upgrades"
+name = "Zero Starting Life Upgrades"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[option]]
+feature = "zero_life_upgrades"
+id = "count"
+label = "Count"
+description = "Starting upgrade count while enabled."
+group = "New Game Status"
+type = "integer"
+min = 1
+max = 16
+step = 1
+default = 1
+
+[[feature]]
+id = "x_energy_upgrades"
+name = "X Starting Energy Upgrades"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[option]]
+feature = "x_energy_upgrades"
+id = "count"
+label = "Count"
+description = "Starting upgrade count while enabled."
+group = "New Game Status"
+type = "integer"
+min = 1
+max = 8
+step = 1
+default = 1
+
+[[feature]]
+id = "zero_energy_upgrades"
+name = "Zero Starting Energy Upgrades"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[option]]
+feature = "zero_energy_upgrades"
+id = "count"
+label = "Count"
+description = "Starting upgrade count while enabled."
+group = "New Game Status"
+type = "integer"
+min = 1
+max = 8
+step = 1
+default = 1
+
+[[feature]]
+id = "x_starting_rank"
+name = "X Starting Rank"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[option]]
+feature = "x_starting_rank"
+id = "rank"
+label = "Rank"
+description = "Starting Hunter Rank and matching Soul count."
+group = "New Game Status"
+type = "choice"
+default = "C"
+
+[[option.choice]]
+value = "C"
+label = "C"
+
+[[option.choice]]
+value = "B"
+label = "B"
+
+[[option.choice]]
+value = "A"
+label = "A"
+
+[[option.choice]]
+value = "SA"
+label = "SA"
+
+[[option.choice]]
+value = "GA"
+label = "GA"
+
+[[option.choice]]
+value = "PA"
+label = "PA"
+
+[[option.choice]]
+value = "UH"
+label = "UH"
+
+[[feature]]
+id = "zero_starting_rank"
+name = "Zero Starting Rank"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[option]]
+feature = "zero_starting_rank"
+id = "rank"
+label = "Rank"
+description = "Starting Hunter Rank and matching Soul count."
+group = "New Game Status"
+type = "choice"
+default = "C"
+
+[[option.choice]]
+value = "C"
+label = "C"
+
+[[option.choice]]
+value = "B"
+label = "B"
+
+[[option.choice]]
+value = "A"
+label = "A"
+
+[[option.choice]]
+value = "SA"
+label = "SA"
+
+[[option.choice]]
+value = "GA"
+label = "GA"
+
+[[option.choice]]
+value = "PA"
+label = "PA"
+
+[[option.choice]]
+value = "UH"
+label = "UH"
+
+[[feature]]
+id = "heart_tank_1"
+name = "Start with Heart Tank 1"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "heart_tank_2"
+name = "Start with Heart Tank 2"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "heart_tank_3"
+name = "Start with Heart Tank 3"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "heart_tank_4"
+name = "Start with Heart Tank 4"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "heart_tank_5"
+name = "Start with Heart Tank 5"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "heart_tank_6"
+name = "Start with Heart Tank 6"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "heart_tank_7"
+name = "Start with Heart Tank 7"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "heart_tank_8"
+name = "Start with Heart Tank 8"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "sub_tank_1"
+name = "Start with Sub Tank 1"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "sub_tank_2"
+name = "Start with Sub Tank 2"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "sub_tank_3"
+name = "Start with Sub Tank 3"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "sub_tank_4"
+name = "Start with Sub Tank 4"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "available_shadow_armor"
+name = "Shadow Armor Available"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "available_blade_armor"
+name = "Blade Armor Available"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "available_ultimate_armor"
+name = "Ultimate Armor Available"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "available_zero"
+name = "Zero Available"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "available_black_zero"
+name = "Black Zero Available"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "intro_stage_armor"
+name = "Intro Stage Starting Armor"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[option]]
+feature = "intro_stage_armor"
+id = "armor"
+label = "Armor"
+description = "Intro Stage starting armor while enabled."
+group = "New Game Status"
+type = "choice"
+default = "none"
+
+[[option.choice]]
+value = "none"
+label = "No Armor"
+
+[[option.choice]]
+value = "blade"
+label = "Blade Armor"
+
+[[option.choice]]
+value = "shadow"
+label = "Shadow Armor"
+
+[[option.choice]]
+value = "ultimate"
+label = "Ultimate Armor"
+
+[[feature]]
+id = "parts_life_up_1"
+name = "Start with Life Up Part 1"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "parts_life_up_2"
+name = "Start with Life Up Part 2"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "parts_life_up_3"
+name = "Start with Life Up Part 3"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "parts_life_up_4"
+name = "Start with Life Up Part 4"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "parts_life_up_5"
+name = "Start with Life Up Part 5"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "parts_life_up_6"
+name = "Start with Life Up Part 6"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "parts_life_up_7"
+name = "Start with Life Up Part 7"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "parts_life_up_8"
+name = "Start with Life Up Part 8"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "parts_energy_up_1"
+name = "Start with Energy Up Part 1"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "parts_energy_up_2"
+name = "Start with Energy Up Part 2"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "parts_energy_up_3"
+name = "Start with Energy Up Part 3"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "parts_energy_up_4"
+name = "Start with Energy Up Part 4"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "parts_energy_up_5"
+name = "Start with Energy Up Part 5"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "parts_energy_up_6"
+name = "Start with Energy Up Part 6"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "parts_energy_up_7"
+name = "Start with Energy Up Part 7"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "parts_energy_up_8"
+name = "Start with Energy Up Part 8"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_hyper_dash"
+name = "Start with Hyper Dash"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_energy_saver"
+name = "Start with Energy Saver"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_super_recover"
+name = "Start with Super Recover"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_buster_plus"
+name = "Start with Buster Plus"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_speedster"
+name = "Start with Speedster"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_jumper"
+name = "Start with Jumper"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_hyperdrive"
+name = "Start with Hyperdrive"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_power_drive"
+name = "Start with Power Drive"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_weapon_driver"
+name = "Start with Weapon Driver"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_life_recover"
+name = "Start with Life Recover"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_speed_shot"
+name = "Start with Speed Shot"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_shock_buffer"
+name = "Start with Shock Buffer"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_d_barrier"
+name = "Start with D-Barrier"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_d_converter"
+name = "Start with D-Converter"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_quick_charge"
+name = "Start with Quick Charge"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_weapon_plus"
+name = "Start with Weapon Plus"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_saber_plus"
+name = "Start with Saber Plus"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_saber_extend"
+name = "Start with Saber Extend"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_weapon_recover"
+name = "Start with Weapon Recover"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_over_drive"
+name = "Start with Over Drive"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_rapid_5"
+name = "Start with Rapid 5"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_ultimate_buster"
+name = "Start with Ultimate Buster"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_shot_eraser"
+name = "Start with Shot Eraser"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "part_master_saber"
+name = "Start with Master Saber"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "mark_no_item_reploids"
+name = "Mark No-Item Reploids as Rescued"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "found_reploid_mark_status"
+name = "Found Reploid Mark Status"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[option]]
+feature = "found_reploid_mark_status"
+id = "status"
+label = "Status"
+description = "Status to apply to matching Reploids."
+group = "New Game Status"
+type = "choice"
+default = "dead"
+
+[[option.choice]]
+value = "dead"
+label = "Dead"
+
+[[option.choice]]
+value = "missing"
+label = "Missing"
+
+[[feature]]
+id = "mark_reploids_only"
+name = "Mark Reploids Only"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[feature]]
+id = "randomize_reploid_parts"
+name = "Randomize Reploid Parts"
+description = "Apply this starting status without changing other New Game features."
+group = "New Game Status"
+default_enabled = false
+
+[[option]]
+feature = "randomize_reploid_parts"
+id = "mode"
+label = "Mode"
+description = "Which Reploid slots participate in the deterministic shuffle."
+group = "New Game Status"
+type = "choice"
+default = "only_parts"
+
+[[option.choice]]
+value = "only_parts"
+label = "Between Reploids already carrying Parts"
+
+[[option.choice]]
+value = "all_reploids"
+label = "Between all Reploids"

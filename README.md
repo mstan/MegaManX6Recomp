@@ -27,9 +27,17 @@ game code, or any decompiled game C. Release builds include the MIT-licensed
 OpenBIOS from PCSX-Redux; game data and an optional retail BIOS come from your
 own legally obtained assets.
 
+This mod-loader review branch also preloads converted packages based on
+**Mega Man X6 Tweaks**, authored by acediez, so the complete loader workflow can
+be exercised without installing packages individually. Every tweak is disabled
+by default. Redistribution permission for the Tweaks-derived assets is not yet
+clear, and acediez's consent has been requested; this branch must not be merged
+or released until that is resolved. See `mods/preloaded/README.md`.
+
 Important files:
 
 - `game.toml`: runtime / recompiler / video / controller / widescreen config.
+- `mods/preloaded/`: latest MMX6 Tweaks package catalog used by this review branch.
 - `seeds/`: Ghidra-derived function starts and game-specific seed data.
 - `tools/regen.ps1`: regenerates the recompiled C output.
 - `tools/package_release.ps1`: builds the redistributable release zip.
@@ -89,6 +97,9 @@ These are the framework features that are already working in this build:
 - **Graphical launcher.** OpenBIOS works out of the box. Pick your disc and
   memory cards, optionally select your own verified retail BIOS, and configure
   renderer / supersampling / widescreen / controller before launching.
+- **Feature-oriented mod loader.** This review branch preloads 15 MMX6 Tweaks
+  package families as 217 independently configurable, default-disabled feature
+  rows in the launcher.
 
 ## Setup
 

@@ -1,0 +1,79 @@
+format_version = 1
+id = "mmx6.tweaks.general-foundations"
+version = "1.3.0"
+name = "Mega Man X6 General Shared Foundations"
+author = "acediez; PSXRecomp integration by DuoDynamo and NectarHime"
+description = "Resolver-backed MMX6 Tweaks controls that share General/Balance executable foundations."
+license = "Generated locally; original credits retained"
+resolver = "builtin:mmx6-general-foundations"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+[[feature]]
+id = "ultimate_armor_rank_unlock"
+name = "Rank UH Unlocks Ultimate Armor"
+description = "Unlock Ultimate Armor when X reaches Hunter Rank UH."
+group = "Mission Report"
+default_enabled = false
+
+[[feature]]
+id = "black_zero_rank_unlock"
+name = "Rank UH Unlocks Black Zero"
+description = "Unlock Black Zero when Zero reaches Hunter Rank UH."
+group = "Mission Report"
+default_enabled = false
+
+[[feature]]
+id = "normalize_unarmored_x_defense"
+name = "Normalize Unarmored X Defense"
+description = "Give unarmored X the same defense as armored X and Black Zero."
+group = "Defense"
+default_enabled = false
+
+[[feature]]
+id = "normalize_zero_defense"
+name = "Normalize Zero Defense"
+description = "Give red Zero the same defense as armored X and Black Zero."
+group = "Defense"
+default_enabled = false
+
+[[feature]]
+id = "gate_revealed_souls"
+name = "Gate Revealed Souls"
+description = "Set the Nightmare Souls threshold for the first Gate-revealed cutscene."
+group = "Nightmare Souls and Rank"
+default_enabled = false
+
+[[option]]
+feature = "gate_revealed_souls"
+id = "souls"
+label = "Souls"
+description = "Bounded threshold from MMX6 Tweaks; 3000 is stock."
+group = "Nightmare Souls and Rank"
+type = "integer"
+min = 256
+max = 9999
+step = 1
+default = 256
+
+[[feature]]
+id = "gate_revealed_refight_souls"
+name = "Gate Revealed Refight Souls"
+description = "Set the Nightmare Souls threshold for the later Gate-revealed cutscene path."
+group = "Nightmare Souls and Rank"
+default_enabled = false
+
+[[option]]
+feature = "gate_revealed_refight_souls"
+id = "souls"
+label = "Souls"
+description = "Bounded threshold from MMX6 Tweaks; 3000 is stock."
+group = "Nightmare Souls and Rank"
+type = "integer"
+min = 256
+max = 9999
+step = 1
+default = 256

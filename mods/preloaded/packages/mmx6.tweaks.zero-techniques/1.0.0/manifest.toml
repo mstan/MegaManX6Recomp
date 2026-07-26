@@ -1,0 +1,142 @@
+format_version = 3
+id = "mmx6.tweaks.zero-techniques"
+version = "1.0.0"
+name = "Mega Man X6 Zero Techniques"
+author = "acediez and MMX6 Tweaks contributors; PSXRecomp integration"
+description = "Resolver-backed coupled Zero technique input and behavior controls."
+license = "Generated locally; original credits retained"
+resolver = "builtin:mmx6-zero-techniques"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+[[feature]]
+id = "zero_techniques"
+name = "Zero Techniques"
+description = "Configure Sentsuizan, Ensuizan, Guard Shell, and Yammar Option inputs as one coupled Tweaks domain."
+group = "Player Mechanics"
+default_enabled = false
+
+[[option]]
+feature = "zero_techniques"
+id = "sentsuizan_input"
+label = "Sentsuizan Input"
+description = "Input command for Sentsuizan."
+group = "Zero Techniques"
+type = "choice"
+default = "up_attack"
+
+[[option.choice]]
+value = "up_attack"
+label = "Up + Attack"
+
+[[option.choice]]
+value = "down_special"
+label = "Down + Special"
+
+[[option.choice]]
+value = "up_special"
+label = "Up + Special"
+
+[[option]]
+feature = "zero_techniques"
+id = "sentsuizan_mode"
+label = "Sentsuizan Mode"
+description = "Execution/cancel behavior for Sentsuizan."
+group = "Zero Techniques"
+type = "choice"
+default = "press_no_cancel"
+
+[[option.choice]]
+value = "press_no_cancel"
+label = "Press / No Cancel"
+
+[[option.choice]]
+value = "press_back"
+label = "Press / Back"
+
+[[option.choice]]
+value = "hold_release"
+label = "Hold / Release"
+
+[[option]]
+feature = "zero_techniques"
+id = "ensuizan_input"
+label = "Ensuizan Input"
+description = "Input command for Ensuizan."
+group = "Zero Techniques"
+type = "choice"
+default = "down_special"
+
+[[option.choice]]
+value = "down_special"
+label = "Down + Special"
+
+[[option.choice]]
+value = "up_special"
+label = "Up + Special"
+
+[[option.choice]]
+value = "up_attack"
+label = "Up + Attack"
+
+[[option.choice]]
+value = "air_special"
+label = "Special"
+
+[[option]]
+feature = "zero_techniques"
+id = "ensuizan_air_mode"
+label = "Ensuizan Air Move Mode"
+description = "Enable Tweaks air-move Ensuizan behavior."
+group = "Zero Techniques"
+type = "boolean"
+default = false
+
+[[option]]
+feature = "zero_techniques"
+id = "ensuizan_reps"
+label = "Ensuizan Repetitions"
+description = "Execution/cancelling count while Air Move Mode is enabled."
+group = "Zero Techniques"
+type = "integer"
+min = 1
+max = 255
+step = 1
+default = 3
+
+[[option]]
+feature = "zero_techniques"
+id = "guard_shell_activation"
+label = "Guard Shell Activation"
+description = "Guard Shell activation command."
+group = "Zero Techniques"
+type = "choice"
+default = "menu"
+
+[[option.choice]]
+value = "menu"
+label = "Menu Activation"
+
+[[option.choice]]
+value = "like_x"
+label = "Activate like X"
+
+[[option.choice]]
+value = "down_special"
+label = "Down + Special"
+
+[[option.choice]]
+value = "up_giga"
+label = "Up + Giga Attack"
+
+[[option]]
+feature = "zero_techniques"
+id = "yammar_like_x"
+label = "Yammar Option Like X"
+description = "Activate Yammar Option like X."
+group = "Zero Techniques"
+type = "boolean"
+default = false

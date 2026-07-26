@@ -60,6 +60,12 @@ if (-not (Test-Path $DevExe)) { $DevExe = Join-Path $BuildPath "psx-runtime.exe"
 Copy-Item $DevExe (Join-Path $Stage "MegaManX6Recomp.exe")
 Copy-Item (Join-Path $Root "README.md") $Stage
 Copy-Item (Join-Path $Root "LICENSE") $Stage
+$PreloadedMods = Join-Path $Root "mods/preloaded"
+if (Test-Path (Join-Path $PreloadedMods "packages")) {
+    Copy-Item -Recurse -Force $PreloadedMods (Join-Path $Stage "mods")
+    $preloadedCount = (Get-ChildItem (Join-Path $Stage "mods/packages") -Directory).Count
+    Write-Host "Bundled preloaded mod catalog: $preloadedCount package family/families"
+}
 $BundledBiosSrc = Join-Path $BuildPath "bios"
 if (!(Test-Path (Join-Path $BundledBiosSrc "openbios.bin")) -or
     (Get-Item (Join-Path $BundledBiosSrc "openbios.bin")).Length -ne 524288 -or

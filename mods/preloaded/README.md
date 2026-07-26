@@ -1,11 +1,9 @@
 # Preloaded Mega Man X6 mods
 
-These packages describe default-disabled features whose trusted native
-implementations are compiled into MegaManX6Recomp (`src/mods/`). Package
-archives do not contain or load native code — a manifest selects an
-implementation by its stable plugin id.
+This directory contains the built-in, default-disabled Mega Man X6 mod catalog.
+CMake and the release packager copy it to `mods/packages` beside the runtime.
 
-Both packages here own features that used to live in the launcher's generic
+Two enhancement packages own features that used to live in the launcher's generic
 Settings pages:
 
 | Package | Replaces |
@@ -18,3 +16,15 @@ Settings pages:
 the runtime ignores any value a previous build persisted into `settings.toml`.
 That keeps exactly one control per feature: a game-specific enhancement is
 presented as an opt-in change to the game, not as a display preference.
+
+The catalog also contains the latest converted runtime package for each
+supported Mega Man X6 Tweaks feature family. Every Tweaks feature remains
+disabled until the player enables it.
+
+Mega Man X6 Tweaks was authored by acediez. The converted packages also retain
+the contributor and PSXRecomp integration credits recorded in their manifests.
+See `ATTRIBUTION.md` for source links and permission status.
+
+Generated conversion reports are intentionally excluded because they contain
+development-machine paths. Superseded versions, launcher state, and temporary
+manifest backups are also excluded.
