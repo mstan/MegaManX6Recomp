@@ -60,6 +60,16 @@ if (-not (Test-Path $DevExe)) { $DevExe = Join-Path $BuildPath "psx-runtime.exe"
 Copy-Item $DevExe (Join-Path $Stage "MegaManX6Recomp.exe")
 Copy-Item (Join-Path $Root "README.md") $Stage
 Copy-Item (Join-Path $Root "LICENSE") $Stage
+$BundledBiosSrc = Join-Path $BuildPath "bios"
+if (!(Test-Path (Join-Path $BundledBiosSrc "openbios.bin")) -or
+    (Get-Item (Join-Path $BundledBiosSrc "openbios.bin")).Length -ne 524288 -or
+    !(Test-Path (Join-Path $BundledBiosSrc "OpenBIOS.LICENSE"))) {
+    throw "Runtime build did not stage OpenBIOS and its MIT notice"
+}
+$BundledBiosDst = Join-Path $Stage "bios"
+New-Item -ItemType Directory -Force $BundledBiosDst | Out-Null
+Copy-Item (Join-Path $BundledBiosSrc "openbios.bin") $BundledBiosDst
+Copy-Item (Join-Path $BundledBiosSrc "OpenBIOS.LICENSE") $BundledBiosDst
 if (Test-Path (Join-Path $Root "RELEASE_NOTES.md")) {
     Copy-Item (Join-Path $Root "RELEASE_NOTES.md") $Stage
 }
@@ -319,17 +329,14 @@ stages, with working controller input and memory-card save/load, and no known
 crashes. It has not yet been verified all the way to the end, so treat this first
 release as a very playable preview rather than a certified full playthrough.
 
-This package does not include the Mega Man X6 disc, the PlayStation BIOS, save
-data, or any game assets - you supply those from your own collection, and
-MegaManX6Recomp asks for them one at a time (each dialog says which one it
-wants). The executable and the cache folder contain statically recompiled
-(machine-translated) builds of the game's code, the same distribution model
-used by other static recompilation projects such as N64: Recompiled.
+This package includes the MIT-licensed OpenBIOS from PCSX-Redux and its notice
+in bios/OpenBIOS.LICENSE. It does not include the Mega Man X6 disc, a retail
+PlayStation BIOS, save data, or game assets.
 
 First launch:
 1. Run MegaManX6Recomp.exe. A launcher window opens.
-2. In the launcher, set your PlayStation BIOS: select your legally obtained
-   SCPH1001.BIN (a 512 KB file dumped from your own console).
+2. OpenBIOS is selected automatically. You may optionally select your legally
+   obtained SCPH1001.BIN in the BIOS row.
 3. Set the game disc: select your legally obtained Mega Man X6 (USA) (v1.1,
    SLUS-01395) disc image.
 4. Adjust any options you like (renderer, supersampling, screen look,
@@ -341,8 +348,8 @@ Disc image formats:
 Do NOT convert to a 2048-byte "cooked" .iso - it discards the XA sectors MMX6
 streams its FMV/audio from.
 
-The selected BIOS path is saved in bios.cfg and the selected disc path is saved
-in disc.cfg next to the executable. Delete those files to pick different files.
+An optional retail BIOS choice and the selected disc path are saved next to the
+executable. Clear the BIOS row to return to OpenBIOS.
 
 Options such as turbo loads, FMV skip, widescreen, and disc speed can be changed
 in the launcher Settings or in game.toml ([runtime]/[video]) with any text editor.

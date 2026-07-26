@@ -22,9 +22,10 @@ compiled into a real Windows program that runs the game's own logic on a
 faithful simulation of the PS1 hardware (GPU, SPU, GTE, memory cards) plus the
 real, recompiled PS1 BIOS — no high-level emulation shims.
 
-It does **not** contain the Mega Man X6 disc image, the PS1 BIOS, generated game
-code, or any decompiled game C. Those are produced locally from your own legally
-obtained assets.
+It does **not** contain the Mega Man X6 disc image, a retail PS1 BIOS, generated
+game code, or any decompiled game C. Release builds include the MIT-licensed
+OpenBIOS from PCSX-Redux; game data and an optional retail BIOS come from your
+own legally obtained assets.
 
 Important files:
 
@@ -85,9 +86,9 @@ These are the framework features that are already working in this build:
   Adjustable stick deadzone; per-player override in the launcher.
 - **Supersampling + anti-aliasing.** Internal-resolution SSAA (1×–4×) with
   optional linear present filtering for clean edges.
-- **Graphical launcher.** Pick your BIOS, disc, and memory cards; verify the
-  disc; configure renderer / supersampling / widescreen / controller, with live
-  settings persistence — then press Launch.
+- **Graphical launcher.** OpenBIOS works out of the box. Pick your disc and
+  memory cards, optionally select your own verified retail BIOS, and configure
+  renderer / supersampling / widescreen / controller before launching.
 
 ## Setup
 
@@ -95,8 +96,8 @@ These are the framework features that are already working in this build:
 
 1. Download `MegaManX6Recomp-v*-windows-x64.zip` from Releases and extract it.
 2. Run `MegaManX6Recomp.exe`. A **launcher window** opens.
-3. Set your PlayStation **BIOS**: select your legally obtained `SCPH1001.BIN`
-   (a 512 KB file dumped from your own console).
+3. OpenBIOS is selected automatically. Optionally select your legally obtained
+   `SCPH1001.BIN` in the BIOS row.
 4. Set the game **disc**: select your legally obtained Mega Man X6 (USA, v1.1,
    SLUS-01395) disc image. The launcher verifies the ISO9660 header, region, and
    serial.
@@ -108,8 +109,8 @@ Accepted disc formats: `.cue` + `.bin` (preferred — pick the `.cue`) and `.bin
 Mode-2 Form-2 XA sectors MMX6 streams its FMV/audio from. If the header or game
 ID does not match `SLUS-01395`, the launcher warns and tries to run it anyway.
 
-Selected paths persist next to the executable (`bios.cfg` / `disc.cfg` and
-`settings.toml`). Delete those to pick different files or reset settings.
+Selected paths persist next to the executable (`disc.cfg` and `settings.toml`).
+Clear the BIOS row to return from an optional retail selection to OpenBIOS.
 
 ### Building From Source
 
@@ -120,7 +121,7 @@ Requirements:
 - A C/C++ toolchain (MSYS2 `mingw-w64-x86_64`) and CMake 3.20+.
 - Mega Man X6 (USA, v1.1, SLUS-01395) disc image (`.cue` + `.bin` or `.bin`). Not
   included. Verify it against `DISC.md` before reporting regressions.
-- Sony SCPH1001 BIOS ROM (`SCPH1001.BIN`). Not included.
+- Optional Sony SCPH1001 BIOS ROM (`SCPH1001.BIN`). Not included.
 - The `psxrecomp` framework available at the sibling path `../psxrecomp` (linked
   in as the `psxrecomp-v4` junction at the `psxrecomp-v4.pin` SHA), plus a
   recompiled BIOS in `psxrecomp/generated/` (see the framework README).
@@ -240,11 +241,10 @@ keep it on your own machine, alongside your disc image.
 PolyForm Noncommercial 1.0.0. See `LICENSE`.
 
 Mega Man X6 is copyright Capcom. This repository contains none of the game's
-original binaries or assets. Release packages contain no game assets, no disc
-data, and no BIOS image — those are always read from files you supply. The
-release executable and the bundled `cache` folder do contain statically
-recompiled (machine-translated) builds of the game's code, the same distribution
-model used by other static recompilation projects such as N64: Recompiled.
+original binaries or assets. Release packages include PCSX-Redux OpenBIOS under
+the MIT notice in `bios/OpenBIOS.LICENSE`; they contain no retail BIOS, game
+assets, or disc data. The release executable and bundled `cache` folder contain
+statically recompiled (machine-translated) builds of the game's code.
 
 ---
 
