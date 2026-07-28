@@ -20,7 +20,7 @@
 
 static void mmx6_frame_interpolation_activate(void) {
     char rate[16];
-    unsigned long fps = 0ul;   /* 0 = uncapped / follow the display */
+    unsigned long fps = 0ul;   /* 0 = follow the measured display refresh */
 
     /* An unreadable or unrecognised value falls back to the manifest default
      * ("display"), which is the conservative choice: it follows the monitor
