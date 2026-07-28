@@ -147,6 +147,10 @@ cmake --build build -j16
 ./build/mmx6-runtime.exe
 ```
 
+SDL3 is the default host backend. To build the explicit SDL2 compatibility
+fallback, add `-DPSX_SDL_BACKEND=SDL2` to the configure command above. CMake
+prints the selected backend and never silently changes it.
+
 To build the redistributable Windows release (regens, builds with the launcher,
 bundles assets + cache, and zips it): `pwsh tools/package_release.ps1`.
 
