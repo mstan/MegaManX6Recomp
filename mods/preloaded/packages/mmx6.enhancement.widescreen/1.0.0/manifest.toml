@@ -1,0 +1,45 @@
+format_version = 5
+id = "mmx6.enhancement.widescreen"
+version = "1.0.0"
+name = "Mega Man X6 Widescreen"
+author = "mstan"
+description = "Renders Mega Man X6 with a wider 16:9 or 21:9 field of view using the game-specific 2D full-frame, background-widening, and cull hooks."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+# One feature, one option. The launcher used to carry this as two separate
+# Settings rows (an aspect selector plus a distinct experimental 21:9 row),
+# which let a player set a wide aspect with no indication that it is a
+# game-specific enhancement rather than a display preference. Both now live
+# here, where the experimental status is stated and the default is off.
+[[feature]]
+id = "widescreen"
+name = "Widescreen"
+description = "Enable Mega Man X6's game-specific wide field of view. Experimental: the engine renders a true 4:3 view, so the extra width is reconstructed by widening the background tile loop and relaxing actor culling."
+group = "Display"
+default_enabled = false
+
+[[option]]
+feature = "widescreen"
+id = "aspect"
+label = "Aspect"
+description = "16:9 presents a fixed wide view. 21:9 (adaptive) follows the window up to 21:9, which is the more experimental of the two."
+group = "Display"
+type = "choice"
+default = "16:9"
+
+[[option.choice]]
+value = "16:9"
+label = "16:9"
+
+[[option.choice]]
+value = "21:9"
+label = "21:9 (adaptive, experimental)"
+
+[[plugin]]
+feature = "widescreen"
+id = "mmx6.widescreen"

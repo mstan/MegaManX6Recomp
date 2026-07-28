@@ -33,6 +33,12 @@ endif()
 set(GAME_GENERATED_DISPATCH
     "${CMAKE_CURRENT_SOURCE_DIR}/${GAME_GENERATED_DIR}/SLUS_013.95_dispatch.c")
 
+# Trusted, statically linked mod plugin implementations. A package manifest in
+# mods/preloaded selects one by its stable plugin id; archives never carry or
+# load native code.
+file(GLOB MMX6_MOD_PLUGIN_SOURCES CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/*.c")
+
 psxrecomp_v4_add_runtime_target(psx-runtime
     GAME_GENERATED_FULL_C "${GAME_GENERATED_FULL}"
     GAME_GENERATED_DISPATCH_C "${GAME_GENERATED_DISPATCH}"
@@ -42,8 +48,19 @@ psxrecomp_v4_add_runtime_target(psx-runtime
     DEFAULT_GAME_CONFIG_PATH "game.toml"
     EXE_NAME "mmx6-runtime"
     LAUNCHER_BOXART "${CMAKE_SOURCE_DIR}/recomp/launcher/boxart.tga"
-    EXTRAS_SOURCES ${GAME_GENERATED_EXTRAS}
+    EXTRAS_SOURCES ${GAME_GENERATED_EXTRAS} ${MMX6_MOD_PLUGIN_SOURCES}
 )
+
+# Ship the game-owned mod catalog beside the executable. Every feature stays
+# disabled until selected on the launcher's Mods page.
+set(MMX6_PRELOADED_MODS "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded")
+if(EXISTS "${MMX6_PRELOADED_MODS}/packages")
+    add_custom_command(TARGET psx-runtime POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            "${MMX6_PRELOADED_MODS}"
+            "$<TARGET_FILE_DIR:psx-runtime>/mods"
+        COMMENT "Preloading the Mega Man X6 mod catalog")
+endif()
 
 # First-divergence co-sim oracle build (COSIM_ORACLE.md): clean, deterministic,
 # PSX_NO_DEBUG_TOOLS + PSX_COSIM. Two of these (one normal, one PSX_FORCE_INTERP=1)

@@ -70,13 +70,23 @@ overlay_autocompile_cmd = "python F:/Projects/psxrecomp/psxrecomp/tools/compile_
 # Turtloid repro. Software stays selectable in the launcher (Settings → Renderer).
 renderer = "opengl"
 
-# aspect_ratio: native presentation. MMX6 ships 4:3 (authentic); the launcher's
-# Settings → "Widescreen (EXPERIMENTAL)" toggle flips this to "16:9" in
-# settings.toml to opt into the experimental 2D widescreen (real wider field of
-# view — see WIDESCREEN.md / [widescreen] below). Off by default; the toggle is
-# the single user control (the [widescreen] full_2d + bg2d hooks are always
-# compiled in and stay inert at 4:3).
+# aspect_ratio: native presentation. MMX6 ships 4:3 (authentic).
+#
+# Widescreen is now owned by the mods/preloaded mmx6.enhancement.widescreen
+# package (see [widescreen] offer below), not by a Settings row — the
+# mmx6.widescreen activation plugin selects 16:9 or adaptive 21:9 after the mod
+# plan commits. This value stays the authentic default and is what a player
+# gets with the mod disabled; the [widescreen] full_2d + bg2d hooks are always
+# compiled in and stay inert at 4:3.
 aspect_ratio = "4:3"
+
+# offer_frame_interpolation = false: presentation-only frame interpolation is
+# owned by the mods/preloaded mmx6.enhancement.frame-interpolation package, so
+# the launcher omits its Settings row (the shared PSX launcher profile turns
+# that row on for every title) and the runtime ignores a value an older build
+# persisted into settings.toml. The mmx6.frame-interpolation plugin applies the
+# selected output rate. One control per feature.
+offer_frame_interpolation = false
 
 # auto_skip_fmv: auto-skip full-motion videos (XA audio + MDEC). The launcher's
 # Settings → "Skip FMVs" toggle mirrors this and persists to settings.toml.
@@ -124,7 +134,18 @@ allow_hybrid   = false
 # is the opt-in switch the FOV work plugs into.
 [widescreen]
 full_2d = true
-offer_ultrawide = true # separate launcher row; still experimental
+# offer = false: widescreen activation belongs to the mod catalog, not generic
+# Settings. The launcher omits the aspect rows entirely and the runtime ignores
+# a 16:9/21:9 that an older build persisted into settings.toml; the
+# mmx6.widescreen plugin applies the player's choice after the mod plan commits
+# (framework: runtime/src/main.cpp, psx_mod_set_fixed_display_aspect).
+offer = false
+# offer_ultrawide no longer draws its own launcher row (offer = false above
+# removes the whole aspect surface). Kept only so the runtime's default
+# adaptive ceiling stays 21:9 rather than 16:9; when the player picks 21:9 the
+# plugin sets that cap explicitly via psx_mod_set_adaptive_display_aspect, so
+# nothing depends on this value being read first.
+offer_ultrawide = true
 # The native-wide compositor margins do not exist in PS1 VRAM. Clear them once
 # when MMX6 starts a new background generation, but do not keep masking a guessed
 # finite-map side afterward: authored layers enter the reveal at different times,

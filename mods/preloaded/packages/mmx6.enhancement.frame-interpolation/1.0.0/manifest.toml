@@ -1,0 +1,58 @@
+format_version = 5
+id = "mmx6.enhancement.frame-interpolation"
+version = "1.0.0"
+name = "Mega Man X6 Frame Interpolation"
+author = "mstan"
+description = "Presents blended intermediate frames above the game's 60Hz output. Guest VBlank, game logic, timers, and audio stay at their stock cadence."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+# Presentation only: this does NOT change machine speed. The distinct
+# native-VBlank-rate mechanism does, and is deliberately not exposed here.
+[[feature]]
+id = "frame-interpolation"
+name = "Frame Interpolation"
+description = "Blend between completed guest frames to present above 60Hz. Presentation only — the game still simulates at its stock rate, so this changes smoothness, not speed or timing. Requires the OpenGL renderer, which it selects, and runs without vsync."
+group = "Display"
+default_enabled = false
+
+[[option]]
+feature = "frame-interpolation"
+id = "rate"
+label = "Output rate"
+description = "Presentation rate. 'Display refresh' follows the monitor uncapped; the fixed rates pace presentation at that many frames per second."
+group = "Display"
+type = "choice"
+default = "display"
+
+[[option.choice]]
+value = "display"
+label = "Display refresh"
+
+[[option.choice]]
+value = "90"
+label = "90 FPS"
+
+[[option.choice]]
+value = "120"
+label = "120 FPS"
+
+[[option.choice]]
+value = "144"
+label = "144 FPS"
+
+[[option.choice]]
+value = "165"
+label = "165 FPS"
+
+[[option.choice]]
+value = "240"
+label = "240 FPS"
+
+[[plugin]]
+feature = "frame-interpolation"
+id = "mmx6.frame-interpolation"
