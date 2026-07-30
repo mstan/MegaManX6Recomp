@@ -28,16 +28,18 @@ OpenBIOS from PCSX-Redux; game data and an optional retail BIOS come from your
 own legally obtained assets.
 
 This mod-loader review branch also preloads converted packages based on
-**Mega Man X6 Tweaks**, authored by acediez, so the complete loader workflow can
-be exercised without installing packages individually. Every tweak is disabled
-by default. Redistribution permission for the Tweaks-derived assets is not yet
-clear, and acediez's consent has been requested; this branch must not be merged
-or released until that is resolved. See `mods/preloaded/README.md`.
+**Mega Man X6 Tweaks**, authored by
+[acediez](https://twitter.com/acediez) ([RHDN project thread](https://www.romhacking.net/forum/index.php?topic=26507.0)),
+so the complete loader workflow can be exercised without installing packages
+individually. Every tweak is disabled by default. acediez has approved this use;
+permission for the portrait/palette art and retranslation remains TBD. This
+branch must not be merged or released until those approvals are resolved. See
+[`mods/preloaded/ATTRIBUTION.md`](mods/preloaded/ATTRIBUTION.md).
 
 Important files:
 
 - `game.toml`: runtime / recompiler / video / controller / widescreen config.
-- `mods/preloaded/`: latest MMX6 Tweaks package catalog used by this review branch.
+- `mods/preloaded/`: built-in mod catalog and attribution/permission ledger.
 - `seeds/`: Ghidra-derived function starts and game-specific seed data.
 - `tools/regen.ps1`: regenerates the recompiled C output.
 - `tools/package_release.ps1`: builds the redistributable release zip.

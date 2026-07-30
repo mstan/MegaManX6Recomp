@@ -6,8 +6,8 @@
 
 namespace {
 
-constexpr size_t kExpectedPackages = 15;
-constexpr size_t kExpectedFeatures = 217;
+constexpr size_t kExpectedPackages = 17;
+constexpr size_t kExpectedFeatures = 219;
 constexpr const char* kGameId = "SLUS-01395";
 constexpr const char* kStockDiscSha256 =
     "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318";

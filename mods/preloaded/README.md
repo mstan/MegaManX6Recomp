@@ -21,9 +21,12 @@ The catalog also contains the latest converted runtime package for each
 supported Mega Man X6 Tweaks feature family. Every Tweaks feature remains
 disabled until the player enables it.
 
-Mega Man X6 Tweaks was authored by acediez. The converted packages also retain
-the contributor and PSXRecomp integration credits recorded in their manifests.
-See `ATTRIBUTION.md` for source links and permission status.
+Mega Man X6 Tweaks was authored by
+[acediez](https://twitter.com/acediez) ([RHDN project thread](https://www.romhacking.net/forum/index.php?topic=26507.0)).
+acediez has approved this use. The portrait/palette art and retranslation
+permissions remain TBD, so the Tweaks catalog is still review-only and must not
+be merged or released. See [`ATTRIBUTION.md`](ATTRIBUTION.md) for the complete
+credit and permission ledger.
 
 Generated conversion reports are intentionally excluded because they contain
 development-machine paths. Superseded versions, launcher state, and temporary

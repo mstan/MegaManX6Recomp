@@ -100,19 +100,6 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/launcher_art")
         COMMENT "Overriding launcher art with MegaManX6Recomp/launcher_art")
 endif()
 
-# This review branch carries the latest converted MMX6 Tweaks package catalog
-# so every loader feature is visible without a separate install step. Features
-# remain disabled until the player opts in. See mods/preloaded/README.md for the
-# unresolved redistribution status of the Tweaks-derived payloads.
-set(MMX6_PRELOADED_MODS "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded")
-if(EXISTS "${MMX6_PRELOADED_MODS}/packages")
-    add_custom_command(TARGET psx-runtime POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-            "${MMX6_PRELOADED_MODS}"
-            "$<TARGET_FILE_DIR:psx-runtime>/mods"
-        COMMENT "Preloading the MMX6 Tweaks mod catalog")
-endif()
-
 if(BUILD_TESTING)
     add_executable(mmx6_tweaks_hooks_test
         tests/test_mmx6_tweaks_hooks.cpp

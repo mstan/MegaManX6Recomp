@@ -29,7 +29,6 @@ class GeneralFoundationTests(unittest.TestCase):
                 "black_zero_rank_unlock",
                 "normalize_unarmored_x_defense",
                 "normalize_zero_defense",
-                "incomplete_armors_by_part",
                 "gate_revealed_souls",
                 "gate_revealed_refight_souls",
             ],
@@ -37,15 +36,13 @@ class GeneralFoundationTests(unittest.TestCase):
         self.assertEqual(
             [option["feature"] for option in manifest["option"]],
             [
-                "incomplete_armors_by_part",
-                "incomplete_armors_by_part",
                 "gate_revealed_souls",
                 "gate_revealed_refight_souls",
             ],
         )
         self.assertEqual(
             [str(option["default"]).lower() for option in manifest["option"]],
-            ["complete_armor", "false", "256", "256"],
+            ["256", "256"],
         )
         self.assertNotIn("patch", manifest)
         self.assertNotIn("overlay", manifest)
