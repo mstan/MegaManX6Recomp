@@ -9,6 +9,7 @@
 
 # Release packaging artifacts
 /release-stage/
+/MegaManX6Recomp-*-windows-x64/
 *.zip
 # Downloaded toolchain artifacts cached by package_release.ps1 (embedded python +
 # tcc zips) — fetched on demand, never committed.
