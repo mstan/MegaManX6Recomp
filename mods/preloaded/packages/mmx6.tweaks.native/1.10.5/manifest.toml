@@ -2,12 +2,20 @@ format_version = 4
 id = "mmx6.tweaks.native"
 version = "1.10.5"
 name = "Mega Man X6 Tweaks"
-author = "acediez, DuoDynamo, NectarHime; PSXRecomp integration"
+author = "acediez"
 description = "Independent native MMX6 Tweaks features."
 license = "Generated locally; original credits retained"
 resolver = "declarative"
 save_compatibility = "shared"
+source_name = "Mega Man X6 Tweaks"
+source_url = "https://www.romhacking.net/hacks/4035/"
 
+[[author_link]]
+name = "acediez"
+url = "https://twitter.com/acediez"
+[[author_link]]
+name = "DuoDynamo"
+url = "https://twitter.com/DuoDynamo"
 [[target]]
 game_id = "SLUS-01395"
 disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
@@ -71,6 +79,7 @@ label = "Mega Man (Custom A)"
 [[feature]]
 id = "retranslation"
 name = "Retranslation"
+author = "acediez, DuoDynamo"
 description = "English retranslation, VFW font, and menu alignment."
 group = "Localization"
 default_enabled = false

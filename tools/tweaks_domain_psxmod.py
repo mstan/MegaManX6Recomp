@@ -311,7 +311,7 @@ BOSS_ATTACKS = Domain(
             "BossMod0105",
             "Commander Yammark: Reduce Idle Time",
             "Reduce idle time between Commander Yammark attacks.",
-            "Commander Yammark",
+            "Bosses",
         ),
     ),
 )
@@ -368,13 +368,13 @@ DAMAGE_RULES = Domain(
             "DmgTableGate01",
             "Gate Vulnerable to Normal Attacks",
             "Allow ordinary attacks to damage Gate.",
-            "Gate",
+            "Bosses",
         ),
         Feature(
             "gate_orb_explosion_damage",
             "Gate Orb Explosion Damage",
             "Set the damage dealt by Gate's own orb explosions.",
-            "Gate",
+            "Bosses",
             ("DmgTableGateDmg01",),
             (
                 Variant(
@@ -691,10 +691,7 @@ def manifest_text(domain: Domain, patches: list[Patch]) -> str:
         f"id = {toml_quote(domain.package_id)}",
         f"version = {toml_quote(domain.version)}",
         f"name = {toml_quote(domain.name)}",
-        (
-            'author = "acediez; PSXRecomp integration by '
-            'DuoDynamo and NectarHime"'
-        ),
+        'author = "acediez"',
         (
             'description = "Independent exact stock-disc MMX6 Tweaks '
             'features."'
@@ -702,6 +699,12 @@ def manifest_text(domain: Domain, patches: list[Patch]) -> str:
         'license = "Generated locally; original credits retained"',
         f"resolver = {toml_quote(domain.resolver)}",
         'save_compatibility = "shared"',
+        'source_name = "Mega Man X6 Tweaks"',
+        'source_url = "https://www.romhacking.net/hacks/4035/"',
+        "",
+        "[[author_link]]",
+        'name = "acediez"',
+        'url = "https://twitter.com/acediez"',
         "",
         "[[target]]",
         f"game_id = {toml_quote(native.GAME_ID)}",

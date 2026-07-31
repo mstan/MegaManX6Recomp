@@ -1018,10 +1018,7 @@ def build_manifest(
         f"id = {_q(PACKAGE_ID)}",
         f"version = {_q(package_version)}",
         f"name = {_q(PACKAGE_NAME)}",
-        (
-            'author = "acediez, DuoDynamo, NectarHime; '
-            'PSXRecomp integration"'
-        ),
+        'author = "acediez"',
         (
             'description = "Independent bounded timing and status controls '
             'converted from MMX6 Tweaks."'
@@ -1029,6 +1026,12 @@ def build_manifest(
         'license = "Generated locally; original credits retained"',
         'resolver = "declarative"',
         'save_compatibility = "shared"',
+        'source_name = "Mega Man X6 Tweaks"',
+        'source_url = "https://www.romhacking.net/hacks/4035/"',
+        "",
+        "[[author_link]]",
+        'name = "acediez"',
+        'url = "https://twitter.com/acediez"',
         "",
         "[[target]]",
         f"game_id = {_q(native.GAME_ID)}",

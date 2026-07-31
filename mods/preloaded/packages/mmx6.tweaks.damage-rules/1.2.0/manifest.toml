@@ -2,12 +2,17 @@ format_version = 3
 id = "mmx6.tweaks.damage-rules"
 version = "1.2.0"
 name = "Mega Man X6 Damage Rules"
-author = "acediez; PSXRecomp integration by DuoDynamo and NectarHime"
+author = "acediez"
 description = "Independent exact stock-disc MMX6 Tweaks features."
 license = "Generated locally; original credits retained"
 resolver = "builtin:mmx6-damage-rules"
 save_compatibility = "shared"
+source_name = "Mega Man X6 Tweaks"
+source_url = "https://www.romhacking.net/hacks/4035/"
 
+[[author_link]]
+name = "acediez"
+url = "https://twitter.com/acediez"
 [[target]]
 game_id = "SLUS-01395"
 disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
@@ -16,14 +21,14 @@ disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
 id = "gate_vulnerable_to_normal_attacks"
 name = "Gate Vulnerable to Normal Attacks"
 description = "Allow ordinary attacks to damage Gate."
-group = "Gate"
+group = "Bosses"
 default_enabled = false
 
 [[feature]]
 id = "gate_orb_explosion_damage"
 name = "Gate Orb Explosion Damage"
 description = "Set the damage dealt by Gate's own orb explosions."
-group = "Gate"
+group = "Bosses"
 default_enabled = false
 
 [[option]]
@@ -31,7 +36,7 @@ feature = "gate_orb_explosion_damage"
 id = "damage"
 label = "Damage"
 description = "Set the damage dealt by Gate's own orb explosions."
-group = "Gate"
+group = "Bosses"
 type = "integer"
 min = 1
 max = 127

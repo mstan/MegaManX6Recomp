@@ -2,12 +2,17 @@ format_version = 1
 id = "mmx6.tweaks.new-game"
 version = "1.4.0"
 name = "Mega Man X6 Tweaks — New Game Status"
-author = "acediez and MMX6 Tweaks contributors; PSXRecomp integration"
+author = "acediez"
 description = "Independent starting-status features composed by a trusted game resolver."
 license = "Generated locally; original credits retained"
 resolver = "builtin:mmx6-new-game"
 save_compatibility = "shared"
+source_name = "Mega Man X6 Tweaks"
+source_url = "https://www.romhacking.net/hacks/4035/"
 
+[[author_link]]
+name = "acediez"
+url = "https://twitter.com/acediez"
 [[target]]
 game_id = "SLUS-01395"
 disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"

@@ -2,12 +2,17 @@ format_version = 3
 id = "mmx6.tweaks.boss-attacks"
 version = "1.0.0"
 name = "Mega Man X6 Boss Attack Tweaks"
-author = "acediez; PSXRecomp integration by DuoDynamo and NectarHime"
+author = "acediez"
 description = "Independent exact stock-disc MMX6 Tweaks features."
 license = "Generated locally; original credits retained"
 resolver = "declarative"
 save_compatibility = "shared"
+source_name = "Mega Man X6 Tweaks"
+source_url = "https://www.romhacking.net/hacks/4035/"
 
+[[author_link]]
+name = "acediez"
+url = "https://twitter.com/acediez"
 [[target]]
 game_id = "SLUS-01395"
 disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
@@ -16,7 +21,7 @@ disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
 id = "yammark_reduce_idle_time"
 name = "Commander Yammark: Reduce Idle Time"
 description = "Reduce idle time between Commander Yammark attacks."
-group = "Commander Yammark"
+group = "Bosses"
 default_enabled = false
 
 [[patch]]

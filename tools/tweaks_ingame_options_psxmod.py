@@ -39,7 +39,7 @@ def manifest_text() -> str:
         f"id = {q(PACKAGE_ID)}",
         f"version = {q(PACKAGE_VERSION)}",
         'name = "Mega Man X6 In-Game Settings Menu"',
-        'author = "acediez; PSXRecomp integration"',
+        'author = "acediez"',
         (
             'description = "Adds the MMX6 Tweaks custom options to the '
             'in-game Settings menu. Requires Retranslation."'
@@ -47,6 +47,12 @@ def manifest_text() -> str:
         'license = "Generated locally; original credits retained"',
         f"resolver = {q('builtin:' + RESOLVER_ID)}",
         'save_compatibility = "shared"',
+        'source_name = "Mega Man X6 Tweaks"',
+        'source_url = "https://www.romhacking.net/hacks/4035/"',
+        "",
+        "[[author_link]]",
+        'name = "acediez"',
+        'url = "https://twitter.com/acediez"',
         "",
         "[[dependency]]",
         'id = "mmx6.tweaks.native"',

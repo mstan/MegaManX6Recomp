@@ -299,10 +299,7 @@ def manifest_text(patches: tuple[FixedPatch, ...]) -> str:
         f"id = {q(PACKAGE_ID)}",
         f"version = {q(PACKAGE_VERSION)}",
         'name = "Mega Man X6 Standalone Player Tweaks"',
-        (
-            'author = "acediez and MMX6 Tweaks contributors; '
-            'PSXRecomp integration"'
-        ),
+        'author = "acediez"',
         (
             'description = "Independent fixed player behaviors for a stock '
             'USA v1.1 disc."'
@@ -310,6 +307,12 @@ def manifest_text(patches: tuple[FixedPatch, ...]) -> str:
         'license = "Generated locally; original credits retained"',
         f"resolver = {q('builtin:' + RESOLVER_ID)}",
         'save_compatibility = "shared"',
+        'source_name = "Mega Man X6 Tweaks"',
+        'source_url = "https://www.romhacking.net/hacks/4035/"',
+        "",
+        "[[author_link]]",
+        'name = "acediez"',
+        'url = "https://twitter.com/acediez"',
         "",
         "[[target]]",
         f"game_id = {q(native.GAME_ID)}",

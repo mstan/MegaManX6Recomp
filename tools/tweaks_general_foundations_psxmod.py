@@ -217,7 +217,7 @@ def manifest_text() -> str:
         f"id = {q(PACKAGE_ID)}",
         f"version = {q(PACKAGE_VERSION)}",
         'name = "Mega Man X6 General Shared Foundations"',
-        'author = "acediez; PSXRecomp integration by DuoDynamo and NectarHime"',
+        'author = "acediez"',
         (
             'description = "Resolver-backed MMX6 Tweaks controls that share '
             'General/Balance executable foundations."'
@@ -225,6 +225,12 @@ def manifest_text() -> str:
         'license = "Generated locally; original credits retained"',
         f"resolver = {q('builtin:' + RESOLVER_ID)}",
         'save_compatibility = "shared"',
+        'source_name = "Mega Man X6 Tweaks"',
+        'source_url = "https://www.romhacking.net/hacks/4035/"',
+        "",
+        "[[author_link]]",
+        'name = "acediez"',
+        'url = "https://twitter.com/acediez"',
         "",
         "[[target]]",
         f"game_id = {q(native.GAME_ID)}",

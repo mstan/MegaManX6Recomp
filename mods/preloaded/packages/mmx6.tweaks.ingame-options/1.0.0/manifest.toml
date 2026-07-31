@@ -2,12 +2,17 @@ format_version = 1
 id = "mmx6.tweaks.ingame-options"
 version = "1.0.0"
 name = "Mega Man X6 In-Game Settings Menu"
-author = "acediez; PSXRecomp integration"
+author = "acediez"
 description = "Adds the MMX6 Tweaks custom options to the in-game Settings menu. Requires Retranslation."
 license = "Generated locally; original credits retained"
 resolver = "builtin:mmx6-ingame-options"
 save_compatibility = "shared"
+source_name = "Mega Man X6 Tweaks"
+source_url = "https://www.romhacking.net/hacks/4035/"
 
+[[author_link]]
+name = "acediez"
+url = "https://twitter.com/acediez"
 [[dependency]]
 id = "mmx6.tweaks.native"
 version = ">=1.10.4"

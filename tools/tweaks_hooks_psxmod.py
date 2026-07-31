@@ -264,16 +264,19 @@ def manifest_text() -> str:
         f"id = {toml_quote(PACKAGE_ID)}",
         f"version = {toml_quote(PACKAGE_VERSION)}",
         'name = "Mega Man X6 Voice Hooks"',
-        (
-            'author = "acediez; PSXRecomp integration by '
-            'DuoDynamo and NectarHime"'
-        ),
+        'author = "acediez"',
         (
             'description = "Independent stock-disc voice restoration hooks."'
         ),
         'license = "Generated locally; original credits retained"',
         f"resolver = {toml_quote(RESOLVER)}",
         'save_compatibility = "shared"',
+        'source_name = "Mega Man X6 Tweaks"',
+        'source_url = "https://www.romhacking.net/hacks/4035/"',
+        "",
+        "[[author_link]]",
+        'name = "acediez"',
+        'url = "https://twitter.com/acediez"',
         "",
         "[[target]]",
         f"game_id = {toml_quote(native.GAME_ID)}",

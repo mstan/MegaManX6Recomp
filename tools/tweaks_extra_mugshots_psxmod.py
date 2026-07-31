@@ -383,7 +383,7 @@ def build_manifest(overlays: list[Overlay], asset_paths: dict[int, str]) -> str:
         f"id = {q(PACKAGE_ID)}",
         f"version = {q(PACKAGE_VERSION)}",
         f"name = {q(PACKAGE_NAME)}",
-        'author = "acediez, MMX6 Tweaks contributors; PSXRecomp integration"',
+        'author = "acediez, Metalwario64"',
         (
             'description = "Adds Hunter and Dr. Light custom mugshots using '
             'the native Retranslation reserved DAT extent."'
@@ -391,6 +391,15 @@ def build_manifest(overlays: list[Overlay], asset_paths: dict[int, str]) -> str:
         'license = "Generated locally; original credits retained"',
         'resolver = "declarative"',
         'save_compatibility = "shared"',
+        'source_name = "Mega Man X6 Tweaks"',
+        'source_url = "https://www.romhacking.net/hacks/4035/"',
+        "",
+        "[[author_link]]",
+        'name = "acediez"',
+        'url = "https://twitter.com/acediez"',
+        "[[author_link]]",
+        'name = "Metalwario64"',
+        'url = "https://x.com/metalwario64"',
         "",
         "[[target]]",
         f"game_id = {q(native.GAME_ID)}",

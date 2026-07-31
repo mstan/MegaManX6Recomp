@@ -1163,10 +1163,7 @@ def build_manifest(
         f"id = {q(PACKAGE_ID)}",
         f"version = {q(package_version)}",
         f"name = {q(PACKAGE_NAME)}",
-        (
-            'author = "acediez, Metalwario64, MMX6 Tweaks contributors; '
-            'PSXRecomp integration"'
-        ),
+        'author = "acediez, Metalwario64"',
         (
             'description = "Independent stock-disc portrait and palette '
             'replacements from MMX6 Tweaks."'
@@ -1174,6 +1171,15 @@ def build_manifest(
         'license = "Generated locally; original credits retained"',
         'resolver = "declarative"',
         'save_compatibility = "shared"',
+        'source_name = "Mega Man X6 Tweaks"',
+        'source_url = "https://www.romhacking.net/hacks/4035/"',
+        "",
+        "[[author_link]]",
+        'name = "acediez"',
+        'url = "https://twitter.com/acediez"',
+        "[[author_link]]",
+        'name = "Metalwario64"',
+        'url = "https://x.com/metalwario64"',
         "",
         "[[target]]",
         f"game_id = {q(native.GAME_ID)}",
