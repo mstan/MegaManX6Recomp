@@ -4,7 +4,8 @@ param(
     # Where your accumulated overlay cache lives (the dir compile_overlays.py
     # writes to, per game.toml overlay_autocompile_cmd --out-dir). Bundled as a
     # head start; optional.
-    [string]$CacheBuildDir = "build-modern"
+    [string]$CacheBuildDir = "build-modern",
+    [switch]$SkipRegen
 )
 
 $ErrorActionPreference = "Stop"
@@ -41,9 +42,13 @@ if (-not (Test-Path $FrameworkRoot)) {
     $FrameworkRoot = Join-Path $Root "..\psxrecomp"
 }
 $RecompDir = Resolve-Path (Join-Path $FrameworkRoot "recompiler\build")
-Invoke-Native { cmake --build $RecompDir --target psxrecomp-game -j $env:NUMBER_OF_PROCESSORS } "recompiler build"
-& (Join-Path $RecompDir "psxrecomp-game.exe") --config (Join-Path $Root "game.toml")
-if ($LASTEXITCODE -ne 0) { throw "game regen failed" }
+if (-not $SkipRegen) {
+    Invoke-Native { cmake --build $RecompDir --target psxrecomp-game -j $env:NUMBER_OF_PROCESSORS } "recompiler build"
+    & (Join-Path $RecompDir "psxrecomp-game.exe") --config (Join-Path $Root "game.toml")
+    if ($LASTEXITCODE -ne 0) { throw "game regen failed" }
+} else {
+    Write-Host "Skipping game C regeneration; packaging the existing generated sources"
+}
 
 Invoke-Native { cmake -S $Root -B $BuildPath -G Ninja -DCMAKE_BUILD_TYPE=Release -DPSX_DEBUG_TOOLS=OFF } "cmake configure"
 Invoke-Native { cmake --build $BuildPath -j $env:NUMBER_OF_PROCESSORS } "cmake build"
@@ -276,10 +281,10 @@ Copy-Item (Join-Path $RecompDir "psxrecomp-game.exe") $Toolchain
 foreach ($d in @("libgcc_s_seh-1.dll","libstdc++-6.dll","libwinpthread-1.dll")) {
     Copy-Item (Join-Path $MingwBin $d) $Toolchain
 }
-Copy-Item (Resolve-Path (Join-Path $Root "..\psxrecomp\tools\compile_overlays.py")) $Toolchain
+Copy-Item (Resolve-Path (Join-Path $FrameworkRoot "tools\compile_overlays.py")) $Toolchain
 $ToolInc = Join-Path $Toolchain "include"
 New-Item -ItemType Directory -Force $ToolInc | Out-Null
-Copy-Item (Join-Path (Resolve-Path (Join-Path $Root "..\psxrecomp\runtime\include")) "*.h") $ToolInc
+Copy-Item (Join-Path (Resolve-Path (Join-Path $FrameworkRoot "runtime\include")) "*.h") $ToolInc
 $tcMB = "{0:N0}" -f ((Get-ChildItem $Toolchain -Recurse -File | Measure-Object Length -Sum).Sum / 1MB)
 Write-Host "Bundled overlay toolchain (embedded python + tcc + recompiler): ~$tcMB MB"
 
