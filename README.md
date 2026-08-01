@@ -27,15 +27,16 @@ game code, or any decompiled game C. Release builds include the MIT-licensed
 OpenBIOS from PCSX-Redux; game data and an optional retail BIOS come from your
 own legally obtained assets.
 
-This repository also preloads converted packages based on
-**Mega Man X6 Tweaks**, authored by
-[acediez](https://twitter.com/acediez) ([RHDN project thread](https://www.romhacking.net/forum/index.php?topic=26507.0)),
-so the complete loader workflow can be exercised without installing packages
-individually. Every included tweak is disabled by default, and acediez has
-approved this use. The portrait/palette packages and retranslation are withheld
-from the public catalog and release until their collaborators give direct
-redistribution approval; their conversion tooling remains for later
-restoration. See
+The Mods catalog incorporates an adaptation of **Mega Man X6 Tweaks**, authored
+by [acediez](https://twitter.com/acediez) ([RHDN project thread](https://www.romhacking.net/forum/index.php?topic=26507.0)).
+acediez explicitly granted permission to adapt and ship his work as part of
+Mega Man X6 Recompiled. Every included tweak remains opt-in and disabled by
+default.
+
+The English retranslation credited to NeoDynamo and the extra portrait/palette
+work credited to MetalWario64 are neither included nor enabled while their
+separate approvals are pending. Their adaptations are staged for a possible
+future release if permission is granted. See
 [`mods/preloaded/ATTRIBUTION.md`](mods/preloaded/ATTRIBUTION.md).
 
 Important files:
@@ -101,9 +102,9 @@ These are the framework features that are already working in this build:
 - **Graphical launcher.** OpenBIOS works out of the box. Pick your disc and
   memory cards, optionally select your own verified retail BIOS, and configure
   renderer / supersampling / widescreen / controller before launching.
-- **Feature-oriented mod loader.** This review branch preloads 15 MMX6 Tweaks
-  package families as 217 independently configurable, default-disabled feature
-  rows in the launcher.
+- **Feature-oriented mod loader.** The release preloads the adapted MMX6 Tweaks
+  catalog as 14 package families with 201 independently configurable,
+  default-disabled feature rows in the launcher.
 
 ## Setup
 
