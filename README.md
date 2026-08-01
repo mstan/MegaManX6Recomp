@@ -27,13 +27,15 @@ game code, or any decompiled game C. Release builds include the MIT-licensed
 OpenBIOS from PCSX-Redux; game data and an optional retail BIOS come from your
 own legally obtained assets.
 
-This mod-loader review branch also preloads converted packages based on
+This repository also preloads converted packages based on
 **Mega Man X6 Tweaks**, authored by
 [acediez](https://twitter.com/acediez) ([RHDN project thread](https://www.romhacking.net/forum/index.php?topic=26507.0)),
 so the complete loader workflow can be exercised without installing packages
-individually. Every tweak is disabled by default. acediez has approved this use;
-permission for the portrait/palette art and retranslation remains TBD. This
-branch must not be merged or released until those approvals are resolved. See
+individually. Every included tweak is disabled by default, and acediez has
+approved this use. The portrait/palette packages and retranslation are withheld
+from the public catalog and release until their collaborators give direct
+redistribution approval; their conversion tooling remains for later
+restoration. See
 [`mods/preloaded/ATTRIBUTION.md`](mods/preloaded/ATTRIBUTION.md).
 
 Important files:

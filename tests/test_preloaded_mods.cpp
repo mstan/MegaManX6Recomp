@@ -6,9 +6,9 @@
 
 namespace {
 
-constexpr size_t kExpectedPackages = 17;
-constexpr size_t kExpectedFeatures = 219;
-constexpr size_t kExpectedTweaksPackages = 15;
+constexpr size_t kExpectedPackages = 14;
+constexpr size_t kExpectedFeatures = 201;
+constexpr size_t kExpectedTweaksPackages = 12;
 constexpr const char* kGameId = "SLUS-01395";
 constexpr const char* kStockDiscSha256 =
     "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318";
@@ -57,14 +57,17 @@ int main(int argc, char** argv) {
 
     size_t feature_count = 0;
     size_t linked_tweaks_packages = 0;
-    bool found_retranslation_credit = false;
-    bool found_artwork_credit = false;
     for (const auto& [id, versions] : manager.packages()) {
         if (versions.size() != 1) {
             return fail(id + " must preload exactly one package version");
         }
         const PSXRecompV4::ModPackage* package = manager.selected_package(id);
         if (!package) return fail(id + " has no selected package version");
+        if (id == "mmx6.tweaks.assets" ||
+            id == "mmx6.tweaks.extra-mugshots" ||
+            id == "mmx6.tweaks.ingame-options") {
+            return fail(id + " is permission-gated and must remain withheld");
+        }
         if (id.rfind("mmx6.tweaks.", 0) == 0) {
             ++linked_tweaks_packages;
             if (package->source_name != "Mega Man X6 Tweaks" ||
@@ -83,29 +86,8 @@ int main(int argc, char** argv) {
                     return fail(id + " incorrectly credits NectarHime");
                 }
             }
-            const bool artwork_package =
-                id == "mmx6.tweaks.assets" ||
-                id == "mmx6.tweaks.extra-mugshots";
-            const bool native_package = id == "mmx6.tweaks.native";
-            const size_t expected_links =
-                artwork_package || native_package ? 2u : 1u;
-            if (package->author_links.size() != expected_links) {
+            if (package->author_links.size() != 1u) {
                 return fail(id + " has incorrectly scoped author links");
-            }
-            if (artwork_package) {
-                const auto& metalwario = package->author_links[1];
-                if (metalwario.name != "Metalwario64" ||
-                    metalwario.url != "https://x.com/metalwario64") {
-                    return fail(id + " is missing Metalwario64 artwork credit");
-                }
-                found_artwork_credit = true;
-            }
-            if (native_package) {
-                const auto& duo = package->author_links[1];
-                if (duo.name != "DuoDynamo" ||
-                    duo.url != "https://twitter.com/DuoDynamo") {
-                    return fail(id + " is missing DuoDynamo retranslation link");
-                }
             }
         }
         feature_count += package->features.size();
@@ -124,14 +106,12 @@ int main(int argc, char** argv) {
                 id == "mmx6.tweaks.native" &&
                 feature.id == "retranslation";
             if (retranslation) {
-                if (displayed_author.find("DuoDynamo") == std::string::npos) {
-                    return fail("retranslation is missing DuoDynamo credit");
-                }
-                found_retranslation_credit = true;
-            } else if (displayed_author.find("DuoDynamo") !=
-                       std::string::npos) {
+                return fail("retranslation must remain withheld");
+            }
+            if (displayed_author.find("DuoDynamo") != std::string::npos ||
+                displayed_author.find("Metalwario64") != std::string::npos) {
                 return fail(id + "/" + feature.id +
-                            " incorrectly credits DuoDynamo");
+                            " exposes permission-gated collaborator content");
             }
             if (feature.default_enabled) {
                 return fail(id + "/" + feature.id + " is enabled by default");
@@ -147,8 +127,10 @@ int main(int argc, char** argv) {
                     " linked Tweaks packages, found " +
                     std::to_string(linked_tweaks_packages));
     }
-    if (!found_retranslation_credit || !found_artwork_credit) {
-        return fail("role-specific Tweaks credits were not found");
+    if (std::filesystem::exists(
+            root / "packages" / "mmx6.tweaks.native" / "1.10.5" /
+            "assets" / "retranslation")) {
+        return fail("retranslation payload must remain withheld");
     }
 
     for (const auto& [package_id, selection] : manager.selections()) {
