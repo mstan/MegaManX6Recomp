@@ -1,0 +1,56 @@
+format_version = 1
+id = "mmx6.tweaks.continuous-dash"
+version = "1.0.0"
+name = "Mega Man X6 Continuous Dash Speeds"
+author = "acediez"
+description = "Independently configurable normal and Hyper continuous-dash speeds."
+license = "Generated locally; original credits retained"
+resolver = "builtin:mmx6-continuous-dash"
+save_compatibility = "shared"
+source_name = "Mega Man X6 Tweaks"
+source_url = "https://www.romhacking.net/hacks/4035/"
+
+[[author_link]]
+name = "acediez"
+url = "https://twitter.com/acediez"
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+[[feature]]
+id = "continuous_dash_speed_normal"
+name = "Continuous Dash Speed — Normal"
+description = "Set normal ground/air continuous dash speed."
+group = "Player Mechanics / Dash Speed"
+default_enabled = false
+
+[[option]]
+feature = "continuous_dash_speed_normal"
+id = "speed"
+label = "Speed"
+description = "Fixed-point speed value while this row is enabled."
+group = "Player Mechanics / Dash Speed"
+type = "integer"
+min = 200000
+max = 600000
+step = 1
+default = 270336
+
+[[feature]]
+id = "continuous_dash_speed_hyper"
+name = "Continuous Dash Speed — Hyper"
+description = "Set the added Hyper Dash speed component."
+group = "Player Mechanics / Dash Speed"
+default_enabled = false
+
+[[option]]
+feature = "continuous_dash_speed_hyper"
+id = "speed"
+label = "Speed"
+description = "Fixed-point speed value while this row is enabled."
+group = "Player Mechanics / Dash Speed"
+type = "integer"
+min = 60000
+max = 160000
+step = 1
+default = 67584

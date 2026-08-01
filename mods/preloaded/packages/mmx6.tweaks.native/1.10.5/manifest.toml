@@ -1,0 +1,3747 @@
+format_version = 4
+id = "mmx6.tweaks.native"
+version = "1.10.5"
+name = "Mega Man X6 Tweaks"
+author = "acediez"
+description = "Independent native MMX6 Tweaks features."
+license = "Generated locally; original credits retained"
+resolver = "declarative"
+save_compatibility = "shared"
+source_name = "Mega Man X6 Tweaks"
+source_url = "https://www.romhacking.net/hacks/4035/"
+
+[[author_link]]
+name = "acediez"
+url = "https://twitter.com/acediez"
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+[[feature]]
+id = "title_screen"
+name = "Title Screen"
+description = "Replace the stock title-screen artwork."
+group = "Localization"
+default_enabled = false
+
+[[option]]
+feature = "title_screen"
+id = "variant"
+label = "Artwork"
+description = "Choose the replacement title-screen artwork."
+group = "Localization"
+type = "choice"
+default = "rockman_japan"
+
+[[option.choice]]
+value = "rockman_japan"
+label = "Rockman (Japan)"
+
+[[option.choice]]
+value = "rockman_china"
+label = "Rockman (China)"
+
+[[option.choice]]
+value = "mega_man_custom_a"
+label = "Mega Man (Custom A)"
+
+[[option.choice]]
+value = "mega_man_custom_b"
+label = "Mega Man (Custom B)"
+
+[[feature]]
+id = "loading_logo"
+name = "Loading Screen Logo"
+description = "Replace the pre-stage loading-screen logo; requires Disable Title Demos."
+group = "Localization"
+default_enabled = false
+
+[[option]]
+feature = "loading_logo"
+id = "variant"
+label = "Logo"
+description = "Choose the replacement loading-screen logo."
+group = "Localization"
+type = "choice"
+default = "rockman_japan"
+
+[[option.choice]]
+value = "rockman_japan"
+label = "Rockman (Japan)"
+
+[[option.choice]]
+value = "mega_man_custom_a"
+label = "Mega Man (Custom A)"
+
+[[feature]]
+id = "infinite_lives_no_continues"
+name = "Infinite Lives (No Continues)"
+description = "Keep the lives counter from decrementing; requires Exit Stage Availability set to Everywhere."
+group = "Lives and Pickups"
+default_enabled = false
+
+[[feature]]
+id = "skip_capcom_video"
+name = "Skip Capcom Video"
+description = "Skip the Capcom logo video during boot."
+group = "Game Intro"
+default_enabled = false
+
+[[feature]]
+id = "skip_opening_video"
+name = "Skip Opening Video"
+description = "Skip the opening movie during boot."
+group = "Game Intro"
+default_enabled = false
+
+[[feature]]
+id = "disable_title_demos"
+name = "Disable Title Demos"
+description = "Keep the title-screen demo countdown from starting attract-mode demos."
+group = "Game Intro"
+default_enabled = false
+
+[[feature]]
+id = "disable_nightmare_bug"
+name = "Disable Nightmare Bug"
+description = "Disable the Nightmare Bug stage effect."
+group = "Nightmare Effects"
+default_enabled = false
+
+[[feature]]
+id = "disable_nightmare_ice"
+name = "Disable Nightmare Ice"
+description = "Disable the Nightmare Ice stage effect."
+group = "Nightmare Effects"
+default_enabled = false
+
+[[feature]]
+id = "disable_nightmare_fire"
+name = "Disable Nightmare Fire"
+description = "Disable the Nightmare Fire effect, including the North Pole walls."
+group = "Nightmare Effects"
+default_enabled = false
+
+[[feature]]
+id = "disable_nightmare_iron"
+name = "Disable Nightmare Iron"
+description = "Disable the Nightmare Iron stage effect."
+group = "Nightmare Effects"
+default_enabled = false
+
+[[feature]]
+id = "disable_nightmare_cube"
+name = "Disable Nightmare Cube"
+description = "Disable the Nightmare Cube stage effect."
+group = "Nightmare Effects"
+default_enabled = false
+
+[[feature]]
+id = "disable_nightmare_rain"
+name = "Disable Nightmare Rain"
+description = "Disable the Nightmare Rain stage effect."
+group = "Nightmare Effects"
+default_enabled = false
+
+[[feature]]
+id = "disable_nightmare_mirror"
+name = "Disable Nightmare Mirror"
+description = "Disable the Nightmare Mirror stage effect."
+group = "Nightmare Effects"
+default_enabled = false
+
+[[feature]]
+id = "disable_nightmare_dark"
+name = "Disable Nightmare Dark"
+description = "Disable the Nightmare Dark stage effect."
+group = "Nightmare Effects"
+default_enabled = false
+
+[[feature]]
+id = "alternate_default_controls"
+name = "Alternate Default Controls"
+description = "Use the MMX6 Tweaks alternate controller layout as the default."
+group = "Controls"
+default_enabled = false
+
+[[feature]]
+id = "faster_cutscene_text"
+name = "Faster Cutscene Text"
+description = "Reduce the delay between voiced cutscene text characters."
+group = "Dialogue"
+default_enabled = false
+
+[[feature]]
+id = "mute_navigator_alerts"
+name = "Mute Navigator Alerts"
+description = "Mute the Navigator voice call used for stage alerts."
+group = "Dialogue"
+default_enabled = false
+
+[[feature]]
+id = "disable_rescue_extra_lives"
+name = "No Extra Lives From Reploids"
+description = "Rescuing a Reploid does not add an extra life."
+group = "Lives and Pickups"
+default_enabled = false
+
+[[feature]]
+id = "disable_pickup_extra_lives"
+name = "No Extra Lives From Pickups"
+description = "Extra-life pickups do not increase the life counter."
+group = "Lives and Pickups"
+default_enabled = false
+
+[[feature]]
+id = "disable_rescue_health_refill"
+name = "No Health Refill From Reploids"
+description = "Rescuing a Reploid does not refill the active character's health."
+group = "Lives and Pickups"
+default_enabled = false
+
+[[feature]]
+id = "air_moves_after_dash_jump"
+name = "Air Moves After Dash Jump"
+description = "Allow air actions after a ground or wall dash jump."
+group = "Movement"
+default_enabled = false
+
+[[feature]]
+id = "unlimited_air_moves"
+name = "Unlimited Air Moves"
+description = "Remove the normal once-per-airtime movement limit."
+group = "Movement"
+default_enabled = false
+
+[[feature]]
+id = "disable_double_tap_dash"
+name = "Disable Double-Tap Dash"
+description = "Disable dashing from double-tapping a direction; the dash button remains."
+group = "Movement"
+default_enabled = false
+
+[[feature]]
+id = "unlimited_dash_duration"
+name = "Unlimited Dash Duration"
+description = "Prevent dash-duration counters from expiring."
+group = "Movement"
+default_enabled = false
+
+[[feature]]
+id = "unlock_x_hover"
+name = "Unlock X's Hover"
+description = "Allow X's hover action without its normal armor restriction."
+group = "Movement"
+default_enabled = false
+
+[[feature]]
+id = "x_hover_mode"
+name = "X Hover Mode"
+description = "Let Blade Armor use X's hover behavior, including the required hover unlock and air-move helper patches."
+group = "Movement"
+default_enabled = false
+
+[[feature]]
+id = "unlimited_high_jump"
+name = "Unlimited High Jump"
+description = "Prevent the High Jump attachment's duration counters from expiring."
+group = "Movement"
+default_enabled = false
+
+[[feature]]
+id = "always_drop_nightmare_orbs"
+name = "Always Drop Nightmare Orbs"
+description = "Make defeated Nightmare Viruses drop orbs on every defeat."
+group = "Nightmare Effects"
+default_enabled = false
+
+[[feature]]
+id = "shadow_saber_cancellable"
+name = "Shadow Saber Cancellable"
+description = "Enable cancellation flags on Shadow Armor's four saber attacks."
+group = "Combat"
+default_enabled = false
+
+[[feature]]
+id = "restore_x_charged_shot_voice"
+name = "Restore X Charged-Shot Voice"
+description = "Use the restored voice clip ID for X's charged shot."
+group = "Audio"
+default_enabled = false
+
+[[feature]]
+id = "restore_zero_giga_attack_voice"
+name = "Restore Zero Giga-Attack Voice"
+description = "Use the restored voice clip ID for Zero's Giga Attack."
+group = "Audio"
+default_enabled = false
+
+[[feature]]
+id = "yammark_firefly_resistance"
+name = "Increase Yammark Firefly Resistance"
+description = "Increase the resistance value used by Commander Yammark's fireflies."
+group = "Bosses"
+default_enabled = false
+
+[[feature]]
+id = "indestructible_yammark_orbs"
+name = "Indestructible Yammark Green Orbs"
+description = "Use the no-contact damage table for Yammark's green orbs."
+group = "Bosses"
+default_enabled = false
+
+[[feature]]
+id = "blade_mach_dash_unlimited_repetitions"
+name = "Unlimited Blade Mach Dash Repetitions"
+description = "Allow Blade Armor to repeat Mach Dash without landing first."
+group = "Movement"
+default_enabled = false
+
+[[feature]]
+id = "disable_falcon_jump_air_dash"
+name = "Disable Falcon Jump Air Dash"
+description = "Prevent Falcon Armor's jump input from starting an air dash."
+group = "Movement"
+default_enabled = false
+
+[[feature]]
+id = "disable_x_saber_cancelling"
+name = "Disable X Saber Cancelling"
+description = "Disable cancellation flags on X's four standard saber attacks."
+group = "Combat"
+default_enabled = false
+
+[[feature]]
+id = "allow_xtreme_item_drops"
+name = "Allow Item Drops on Xtreme"
+description = "Allow enemies to drop health and weapon-energy items on Xtreme."
+group = "Game Rules"
+default_enabled = false
+
+[[feature]]
+id = "prevent_nightmare_orb_reversion"
+name = "Prevent Nightmare Orb Reversion"
+description = "Keep Nightmare Viruses from reverting after their orb is left alone."
+group = "Nightmare Effects"
+default_enabled = false
+
+[[feature]]
+id = "yammark_speed_orbs_easy_normal"
+name = "Faster Yammark Orbs on Easy and Normal"
+description = "Increase green-orb movement speed in Yammark fights on Easy and Normal."
+group = "Bosses"
+default_enabled = false
+
+[[feature]]
+id = "yammark_speed_orbs_xtreme"
+name = "Faster Yammark Orbs on Xtreme"
+description = "Increase green-orb movement speed in Yammark fights on Xtreme."
+group = "Bosses"
+default_enabled = false
+
+[[feature]]
+id = "wolfang_debris_all_difficulties"
+name = "Wolfang Debris on All Difficulties"
+description = "Enable Blizzard Wolfang's falling ice debris on every difficulty."
+group = "Bosses"
+default_enabled = false
+
+[[feature]]
+id = "wolfang_ice_spikes_all_levels"
+name = "Wolfang Ice Spikes at All Levels"
+description = "Enable Blizzard Wolfang's ice-spike attack at every boss level."
+group = "Bosses"
+default_enabled = false
+
+[[feature]]
+id = "wolfang_indestructible_ice_blocks"
+name = "Indestructible Wolfang Ice Blocks"
+description = "Make Blizzard Wolfang's ice blocks and debris indestructible."
+group = "Bosses"
+default_enabled = false
+
+[[feature]]
+id = "wolfang_indestructible_ice_spikes"
+name = "Indestructible Wolfang Ice Spikes"
+description = "Make Blizzard Wolfang's ice-spike projectiles indestructible."
+group = "Bosses"
+default_enabled = false
+
+[[feature]]
+id = "normal_part_slots_rank_uh"
+name = "Normal Part Slots at Rank UH"
+description = "Change the number of normal Parts available at rank UH."
+group = "Rank and Progression"
+default_enabled = false
+
+[[option]]
+feature = "normal_part_slots_rank_uh"
+id = "slots"
+label = "Normal Part slots"
+description = "Change the number of normal Parts available at rank UH."
+group = "Rank and Progression"
+type = "choice"
+default = "3"
+
+[[option.choice]]
+value = "3"
+label = "3 Parts"
+
+[[option.choice]]
+value = "2"
+label = "2 Parts"
+
+[[option.choice]]
+value = "1"
+label = "1 Part"
+
+[[option.choice]]
+value = "0"
+label = "0 Parts"
+
+[[feature]]
+id = "normal_part_slots_rank_pa"
+name = "Normal Part Slots at Rank PA"
+description = "Change the number of normal Parts available at rank PA."
+group = "Rank and Progression"
+default_enabled = false
+
+[[option]]
+feature = "normal_part_slots_rank_pa"
+id = "slots"
+label = "Normal Part slots"
+description = "Change the number of normal Parts available at rank PA."
+group = "Rank and Progression"
+type = "choice"
+default = "2"
+
+[[option.choice]]
+value = "2"
+label = "2 Parts"
+
+[[option.choice]]
+value = "4"
+label = "4 Parts"
+
+[[option.choice]]
+value = "1"
+label = "1 Part"
+
+[[option.choice]]
+value = "0"
+label = "0 Parts"
+
+[[feature]]
+id = "normal_part_slots_rank_ga"
+name = "Normal Part Slots at Rank GA"
+description = "Change the number of normal Parts available at rank GA."
+group = "Rank and Progression"
+default_enabled = false
+
+[[option]]
+feature = "normal_part_slots_rank_ga"
+id = "slots"
+label = "Normal Part slots"
+description = "Change the number of normal Parts available at rank GA."
+group = "Rank and Progression"
+type = "choice"
+default = "1"
+
+[[option.choice]]
+value = "1"
+label = "1 Part"
+
+[[option.choice]]
+value = "3"
+label = "3 Parts"
+
+[[option.choice]]
+value = "0"
+label = "0 Parts"
+
+[[option.choice]]
+value = "4"
+label = "4 Parts"
+
+[[feature]]
+id = "normal_part_slots_rank_sa"
+name = "Normal Part Slots at Rank SA"
+description = "Change the number of normal Parts available at rank SA."
+group = "Rank and Progression"
+default_enabled = false
+
+[[option]]
+feature = "normal_part_slots_rank_sa"
+id = "slots"
+label = "Normal Part slots"
+description = "Change the number of normal Parts available at rank SA."
+group = "Rank and Progression"
+type = "choice"
+default = "1"
+
+[[option.choice]]
+value = "1"
+label = "1 Part"
+
+[[option.choice]]
+value = "3"
+label = "3 Parts"
+
+[[option.choice]]
+value = "0"
+label = "0 Parts"
+
+[[option.choice]]
+value = "4"
+label = "4 Parts"
+
+[[feature]]
+id = "normal_part_slots_rank_a"
+name = "Normal Part Slots at Rank A"
+description = "Change the number of normal Parts available at rank A."
+group = "Rank and Progression"
+default_enabled = false
+
+[[option]]
+feature = "normal_part_slots_rank_a"
+id = "slots"
+label = "Normal Part slots"
+description = "Change the number of normal Parts available at rank A."
+group = "Rank and Progression"
+type = "choice"
+default = "0"
+
+[[option.choice]]
+value = "0"
+label = "0 Parts"
+
+[[option.choice]]
+value = "2"
+label = "2 Parts"
+
+[[option.choice]]
+value = "3"
+label = "3 Parts"
+
+[[option.choice]]
+value = "4"
+label = "4 Parts"
+
+[[feature]]
+id = "normal_part_slots_rank_b"
+name = "Normal Part Slots at Rank B"
+description = "Change the number of normal Parts available at rank B."
+group = "Rank and Progression"
+default_enabled = false
+
+[[option]]
+feature = "normal_part_slots_rank_b"
+id = "slots"
+label = "Normal Part slots"
+description = "Change the number of normal Parts available at rank B."
+group = "Rank and Progression"
+type = "choice"
+default = "1"
+
+[[option.choice]]
+value = "1"
+label = "1 Part"
+
+[[option.choice]]
+value = "2"
+label = "2 Parts"
+
+[[option.choice]]
+value = "3"
+label = "3 Parts"
+
+[[option.choice]]
+value = "4"
+label = "4 Parts"
+
+[[feature]]
+id = "normal_part_slots_rank_c"
+name = "Normal Part Slots at Rank C"
+description = "Change the number of normal Parts available at rank C."
+group = "Rank and Progression"
+default_enabled = false
+
+[[option]]
+feature = "normal_part_slots_rank_c"
+id = "slots"
+label = "Normal Part slots"
+description = "Change the number of normal Parts available at rank C."
+group = "Rank and Progression"
+type = "choice"
+default = "1"
+
+[[option.choice]]
+value = "1"
+label = "1 Part"
+
+[[option.choice]]
+value = "2"
+label = "2 Parts"
+
+[[option.choice]]
+value = "3"
+label = "3 Parts"
+
+[[option.choice]]
+value = "4"
+label = "4 Parts"
+
+[[feature]]
+id = "normal_part_slots_rank_d"
+name = "Normal Part Slots at Rank D"
+description = "Change the number of normal Parts available at rank D."
+group = "Rank and Progression"
+default_enabled = false
+
+[[option]]
+feature = "normal_part_slots_rank_d"
+id = "slots"
+label = "Normal Part slots"
+description = "Change the number of normal Parts available at rank D."
+group = "Rank and Progression"
+type = "choice"
+default = "1"
+
+[[option.choice]]
+value = "1"
+label = "1 Part"
+
+[[option.choice]]
+value = "2"
+label = "2 Parts"
+
+[[option.choice]]
+value = "3"
+label = "3 Parts"
+
+[[option.choice]]
+value = "4"
+label = "4 Parts"
+
+[[feature]]
+id = "disable_limited_parts_rank_uh"
+name = "Disable Limited Parts at Rank UH"
+description = "Prevent Limited Parts from being equipped at rank UH."
+group = "Rank and Progression"
+default_enabled = false
+
+[[feature]]
+id = "disable_limited_parts_rank_pa"
+name = "Disable Limited Parts at Rank PA"
+description = "Prevent Limited Parts from being equipped at rank PA."
+group = "Rank and Progression"
+default_enabled = false
+
+[[feature]]
+id = "disable_limited_parts_rank_ga"
+name = "Disable Limited Parts at Rank GA"
+description = "Prevent Limited Parts from being equipped at rank GA."
+group = "Rank and Progression"
+default_enabled = false
+
+[[feature]]
+id = "enable_limited_parts_rank_sa"
+name = "Enable Limited Parts at Rank SA"
+description = "Allow one Limited Part to be equipped at rank SA."
+group = "Rank and Progression"
+default_enabled = false
+
+[[feature]]
+id = "enable_limited_parts_rank_a"
+name = "Enable Limited Parts at Rank A"
+description = "Allow one Limited Part to be equipped at rank A."
+group = "Rank and Progression"
+default_enabled = false
+
+[[feature]]
+id = "enable_limited_parts_rank_b"
+name = "Enable Limited Parts at Rank B"
+description = "Allow one Limited Part to be equipped at rank B."
+group = "Rank and Progression"
+default_enabled = false
+
+[[feature]]
+id = "enable_limited_parts_rank_c"
+name = "Enable Limited Parts at Rank C"
+description = "Allow one Limited Part to be equipped at rank C."
+group = "Rank and Progression"
+default_enabled = false
+
+[[feature]]
+id = "enable_limited_parts_rank_d"
+name = "Enable Limited Parts at Rank D"
+description = "Allow one Limited Part to be equipped at rank D."
+group = "Rank and Progression"
+default_enabled = false
+
+[[feature]]
+id = "boss_level_rank_d"
+name = "Boss Level at Rank D"
+description = "Change the boss level used while the Hunter Rank is D."
+group = "Rank and Progression"
+default_enabled = false
+
+[[option]]
+feature = "boss_level_rank_d"
+id = "level"
+label = "Boss level"
+description = "Change the boss level used while the Hunter Rank is D."
+group = "Rank and Progression"
+type = "choice"
+default = "level_2"
+
+[[option.choice]]
+value = "level_2"
+label = "Level 2"
+
+[[option.choice]]
+value = "level_3"
+label = "Level 3"
+
+[[option.choice]]
+value = "level_4"
+label = "Level 4"
+
+[[feature]]
+id = "boss_level_rank_c"
+name = "Boss Level at Rank C"
+description = "Change the boss level used while the Hunter Rank is C."
+group = "Rank and Progression"
+default_enabled = false
+
+[[option]]
+feature = "boss_level_rank_c"
+id = "level"
+label = "Boss level"
+description = "Change the boss level used while the Hunter Rank is C."
+group = "Rank and Progression"
+type = "choice"
+default = "level_2"
+
+[[option.choice]]
+value = "level_2"
+label = "Level 2"
+
+[[option.choice]]
+value = "level_3"
+label = "Level 3"
+
+[[option.choice]]
+value = "level_4"
+label = "Level 4"
+
+[[feature]]
+id = "boss_level_rank_b"
+name = "Boss Level at Rank B"
+description = "Change the boss level used while the Hunter Rank is B."
+group = "Rank and Progression"
+default_enabled = false
+
+[[option]]
+feature = "boss_level_rank_b"
+id = "level"
+label = "Boss level"
+description = "Change the boss level used while the Hunter Rank is B."
+group = "Rank and Progression"
+type = "choice"
+default = "level_2"
+
+[[option.choice]]
+value = "level_2"
+label = "Level 2"
+
+[[option.choice]]
+value = "level_3"
+label = "Level 3"
+
+[[option.choice]]
+value = "level_4"
+label = "Level 4"
+
+[[feature]]
+id = "boss_level_rank_a"
+name = "Boss Level at Rank A"
+description = "Change the boss level used while the Hunter Rank is A."
+group = "Rank and Progression"
+default_enabled = false
+
+[[option]]
+feature = "boss_level_rank_a"
+id = "level"
+label = "Boss level"
+description = "Change the boss level used while the Hunter Rank is A."
+group = "Rank and Progression"
+type = "choice"
+default = "level_2"
+
+[[option.choice]]
+value = "level_2"
+label = "Level 2"
+
+[[option.choice]]
+value = "level_3"
+label = "Level 3"
+
+[[option.choice]]
+value = "level_4"
+label = "Level 4"
+
+[[feature]]
+id = "boss_level_rank_sa"
+name = "Boss Level at Rank SA"
+description = "Change the boss level used while the Hunter Rank is SA."
+group = "Rank and Progression"
+default_enabled = false
+
+[[option]]
+feature = "boss_level_rank_sa"
+id = "level"
+label = "Boss level"
+description = "Change the boss level used while the Hunter Rank is SA."
+group = "Rank and Progression"
+type = "choice"
+default = "level_1"
+
+[[option.choice]]
+value = "level_1"
+label = "Level 1"
+
+[[option.choice]]
+value = "level_3"
+label = "Level 3"
+
+[[option.choice]]
+value = "level_4"
+label = "Level 4"
+
+[[feature]]
+id = "boss_level_rank_ga"
+name = "Boss Level at Rank GA"
+description = "Change the boss level used while the Hunter Rank is GA."
+group = "Rank and Progression"
+default_enabled = false
+
+[[option]]
+feature = "boss_level_rank_ga"
+id = "level"
+label = "Boss level"
+description = "Change the boss level used while the Hunter Rank is GA."
+group = "Rank and Progression"
+type = "choice"
+default = "level_2"
+
+[[option.choice]]
+value = "level_2"
+label = "Level 2"
+
+[[option.choice]]
+value = "level_4"
+label = "Level 4"
+
+[[option.choice]]
+value = "level_1"
+label = "Level 1"
+
+[[feature]]
+id = "boss_level_rank_pa"
+name = "Boss Level at Rank PA"
+description = "Change the boss level used while the Hunter Rank is PA."
+group = "Rank and Progression"
+default_enabled = false
+
+[[option]]
+feature = "boss_level_rank_pa"
+id = "level"
+label = "Boss level"
+description = "Change the boss level used while the Hunter Rank is PA."
+group = "Rank and Progression"
+type = "choice"
+default = "level_3"
+
+[[option.choice]]
+value = "level_3"
+label = "Level 3"
+
+[[option.choice]]
+value = "level_2"
+label = "Level 2"
+
+[[option.choice]]
+value = "level_1"
+label = "Level 1"
+
+[[feature]]
+id = "boss_level_rank_uh"
+name = "Boss Level at Rank UH"
+description = "Change the boss level used while the Hunter Rank is UH."
+group = "Rank and Progression"
+default_enabled = false
+
+[[option]]
+feature = "boss_level_rank_uh"
+id = "level"
+label = "Boss level"
+description = "Change the boss level used while the Hunter Rank is UH."
+group = "Rank and Progression"
+type = "choice"
+default = "level_3"
+
+[[option.choice]]
+value = "level_3"
+label = "Level 3"
+
+[[option.choice]]
+value = "level_2"
+label = "Level 2"
+
+[[option.choice]]
+value = "level_1"
+label = "Level 1"
+
+[[feature]]
+id = "reploid_status_rescued_by_player"
+name = "Reploid Status: Rescued by Player"
+description = "Choose the status assigned when the player rescues a Reploid."
+group = "Rescuable Reploids"
+default_enabled = false
+
+[[option]]
+feature = "reploid_status_rescued_by_player"
+id = "status"
+label = "Status"
+description = "Choose the status assigned when the player rescues a Reploid."
+group = "Rescuable Reploids"
+type = "choice"
+default = "unchanged"
+
+[[option.choice]]
+value = "unchanged"
+label = "Leave Current Status Unchanged"
+
+[[option.choice]]
+value = "missing"
+label = "Missing"
+
+[[option.choice]]
+value = "dead"
+label = "Dead"
+
+[[feature]]
+id = "reploid_status_infected_by_nightmare"
+name = "Reploid Status: Infected by Nightmare"
+description = "Choose the status assigned when a Reploid is infected by a Nightmare."
+group = "Rescuable Reploids"
+default_enabled = false
+
+[[option]]
+feature = "reploid_status_infected_by_nightmare"
+id = "status"
+label = "Status"
+description = "Choose the status assigned when a Reploid is infected by a Nightmare."
+group = "Rescuable Reploids"
+type = "choice"
+default = "unchanged"
+
+[[option.choice]]
+value = "unchanged"
+label = "Leave Current Status Unchanged"
+
+[[option.choice]]
+value = "rescued"
+label = "Rescued"
+
+[[option.choice]]
+value = "dead"
+label = "Dead"
+
+[[feature]]
+id = "reploid_status_infected_lost_offscreen"
+name = "Reploid Status: Infected, Lost Offscreen"
+description = "Choose the status assigned when an infected Reploid is lost offscreen."
+group = "Rescuable Reploids"
+default_enabled = false
+
+[[option]]
+feature = "reploid_status_infected_lost_offscreen"
+id = "status"
+label = "Status"
+description = "Choose the status assigned when an infected Reploid is lost offscreen."
+group = "Rescuable Reploids"
+type = "choice"
+default = "unchanged"
+
+[[option.choice]]
+value = "unchanged"
+label = "Leave Current Status Unchanged"
+
+[[option.choice]]
+value = "rescued"
+label = "Rescued"
+
+[[option.choice]]
+value = "dead"
+label = "Dead"
+
+[[feature]]
+id = "reploid_status_infected_killed_by_player"
+name = "Reploid Status: Infected, Killed by Player"
+description = "Choose the status assigned when the player kills an infected Reploid."
+group = "Rescuable Reploids"
+default_enabled = false
+
+[[option]]
+feature = "reploid_status_infected_killed_by_player"
+id = "status"
+label = "Status"
+description = "Choose the status assigned when the player kills an infected Reploid."
+group = "Rescuable Reploids"
+type = "choice"
+default = "unchanged"
+
+[[option.choice]]
+value = "unchanged"
+label = "Leave Current Status Unchanged"
+
+[[option.choice]]
+value = "rescued"
+label = "Rescued"
+
+[[option.choice]]
+value = "missing"
+label = "Missing"
+
+[[feature]]
+id = "yammark_xtreme_behavior"
+name = "Yammark Xtreme Behavior"
+description = "Make Commander Yammark always use the Xtreme behavior path."
+group = "Bosses"
+default_enabled = false
+
+[[feature]]
+id = "amazon_area_extended_ceiling"
+name = "Extend Amazon Area Ceiling"
+description = "Extend the ceiling above Amazon Area's blind-jump section."
+group = "Stages"
+default_enabled = false
+
+[[feature]]
+id = "secret_lab_2_platform"
+name = "Add Secret Lab 2-2 Platform"
+description = "Add the platform that removes the Parts or Armor requirement for X."
+group = "Stages"
+default_enabled = false
+
+[[feature]]
+id = "secret_lab_1_spikes"
+name = "Secret Lab 1 Spikes"
+description = "Choose how many spikes to remove from Secret Lab 1."
+group = "Stages"
+default_enabled = false
+
+[[option]]
+feature = "secret_lab_1_spikes"
+id = "removal"
+label = "Spike layout"
+description = "Choose how many spikes to remove from Secret Lab 1."
+group = "Stages"
+type = "choice"
+default = "remove_some"
+
+[[option.choice]]
+value = "remove_some"
+label = "Remove Some"
+
+[[option.choice]]
+value = "remove_more"
+label = "Remove More"
+
+[[feature]]
+id = "recycle_lab_ceiling_extension"
+name = "Recycle Lab Ceiling Extension"
+description = "Extend the Recycle Lab ceiling section by one or two tiles."
+group = "Stages"
+default_enabled = false
+
+[[option]]
+feature = "recycle_lab_ceiling_extension"
+id = "extension"
+label = "Extension"
+description = "Extend the Recycle Lab ceiling section by one or two tiles."
+group = "Stages"
+type = "choice"
+default = "one_tile"
+
+[[option.choice]]
+value = "one_tile"
+label = "One Tile"
+
+[[option.choice]]
+value = "two_tiles"
+label = "Two Tiles"
+
+[[feature]]
+id = "yammark_contact_damage"
+name = "Yammark Contact Damage"
+description = "Set damage from touching Commander Yammark."
+group = "Boss Damage"
+default_enabled = false
+
+[[option]]
+feature = "yammark_contact_damage"
+id = "damage"
+label = "Damage"
+description = "Set damage from touching Commander Yammark."
+group = "Boss Damage"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 4
+
+[[feature]]
+id = "yammark_firefly_damage"
+name = "Yammark Firefly Damage"
+description = "Set contact damage from Commander Yammark's fireflies."
+group = "Boss Damage"
+default_enabled = false
+
+[[option]]
+feature = "yammark_firefly_damage"
+id = "damage"
+label = "Damage"
+description = "Set contact damage from Commander Yammark's fireflies."
+group = "Boss Damage"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 2
+
+[[feature]]
+id = "yammark_green_orb_damage"
+name = "Yammark Green Orb Damage"
+description = "Set damage from Commander Yammark's green projectiles."
+group = "Boss Damage"
+default_enabled = false
+
+[[option]]
+feature = "yammark_green_orb_damage"
+id = "damage"
+label = "Damage"
+description = "Set damage from Commander Yammark's green projectiles."
+group = "Boss Damage"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 2
+
+[[feature]]
+id = "wolfang_contact_damage"
+name = "Wolfang Contact Damage"
+description = "Set damage from touching Blizzard Wolfang and his spike sub-actor."
+group = "Boss Damage"
+default_enabled = false
+
+[[option]]
+feature = "wolfang_contact_damage"
+id = "damage"
+label = "Damage"
+description = "Set damage from touching Blizzard Wolfang and his spike sub-actor."
+group = "Boss Damage"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 4
+
+[[feature]]
+id = "wolfang_ice_block_damage"
+name = "Wolfang Ice Block Damage"
+description = "Set damage from Blizzard Wolfang's ice blocks."
+group = "Boss Damage"
+default_enabled = false
+
+[[option]]
+feature = "wolfang_ice_block_damage"
+id = "damage"
+label = "Damage"
+description = "Set damage from Blizzard Wolfang's ice blocks."
+group = "Boss Damage"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 4
+
+[[feature]]
+id = "wolfang_ice_debris_damage"
+name = "Wolfang Ice Debris Damage"
+description = "Set damage from Blizzard Wolfang's ice-block debris."
+group = "Boss Damage"
+default_enabled = false
+
+[[option]]
+feature = "wolfang_ice_debris_damage"
+id = "damage"
+label = "Damage"
+description = "Set damage from Blizzard Wolfang's ice-block debris."
+group = "Boss Damage"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 2
+
+[[feature]]
+id = "wolfang_ice_spike_damage"
+name = "Wolfang Ice Spike Damage"
+description = "Set damage from Blizzard Wolfang's ice spikes."
+group = "Boss Damage"
+default_enabled = false
+
+[[option]]
+feature = "wolfang_ice_spike_damage"
+id = "damage"
+label = "Damage"
+description = "Set damage from Blizzard Wolfang's ice spikes."
+group = "Boss Damage"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 6
+
+[[feature]]
+id = "reploid_small_orb_value"
+name = "Reploid Small Orb Value"
+description = "Set the Nightmare Soul value of small blue orbs from Reploids."
+group = "Nightmare Souls"
+default_enabled = false
+
+[[option]]
+feature = "reploid_small_orb_value"
+id = "souls"
+label = "Souls"
+description = "Set the Nightmare Soul value of small blue orbs from Reploids."
+group = "Nightmare Souls"
+type = "integer"
+min = 0
+max = 9999
+step = 1
+default = 4
+
+[[feature]]
+id = "virus_small_orb_value"
+name = "Virus Small Orb Value"
+description = "Set the Nightmare Soul value of small blue orbs from Nightmare Viruses."
+group = "Nightmare Souls"
+default_enabled = false
+
+[[option]]
+feature = "virus_small_orb_value"
+id = "souls"
+label = "Souls"
+description = "Set the Nightmare Soul value of small blue orbs from Nightmare Viruses."
+group = "Nightmare Souls"
+type = "integer"
+min = 0
+max = 9999
+step = 1
+default = 4
+
+[[feature]]
+id = "virus_big_orb_value"
+name = "Virus Big Orb Value"
+description = "Set the Nightmare Soul value of large blue orbs from Nightmare Viruses."
+group = "Nightmare Souls"
+default_enabled = false
+
+[[option]]
+feature = "virus_big_orb_value"
+id = "souls"
+label = "Souls"
+description = "Set the Nightmare Soul value of large blue orbs from Nightmare Viruses."
+group = "Nightmare Souls"
+type = "integer"
+min = 0
+max = 9999
+step = 1
+default = 8
+
+[[feature]]
+id = "main_boss_red_orb_value"
+name = "Main Boss Red Orb Value"
+description = "Set the Nightmare Soul value of red orbs from main bosses."
+group = "Nightmare Souls"
+default_enabled = false
+
+[[option]]
+feature = "main_boss_red_orb_value"
+id = "souls"
+label = "Souls"
+description = "Set the Nightmare Soul value of red orbs from main bosses."
+group = "Nightmare Souls"
+type = "integer"
+min = 0
+max = 9999
+step = 1
+default = 100
+
+[[feature]]
+id = "main_boss_green_orb_value"
+name = "Main Boss Green Orb Value"
+description = "Set the Nightmare Soul value of green orbs from main bosses."
+group = "Nightmare Souls"
+default_enabled = false
+
+[[option]]
+feature = "main_boss_green_orb_value"
+id = "souls"
+label = "Souls"
+description = "Set the Nightmare Soul value of green orbs from main bosses."
+group = "Nightmare Souls"
+type = "integer"
+min = 0
+max = 9999
+step = 1
+default = 200
+
+[[feature]]
+id = "dynamo_green_orb_value"
+name = "Dynamo Green Orb Value"
+description = "Set the Nightmare Soul value of Dynamo's green orbs."
+group = "Nightmare Souls"
+default_enabled = false
+
+[[option]]
+feature = "dynamo_green_orb_value"
+id = "souls"
+label = "Souls"
+description = "Set the Nightmare Soul value of Dynamo's green orbs."
+group = "Nightmare Souls"
+type = "integer"
+min = 0
+max = 9999
+step = 1
+default = 200
+
+[[feature]]
+id = "normal_ground_dash_duration"
+name = "Normal Ground Dash Duration"
+description = "Set the normal ground-dash duration in frames."
+group = "Movement"
+default_enabled = false
+
+[[option]]
+feature = "normal_ground_dash_duration"
+id = "frames"
+label = "Frames"
+description = "Set the normal ground-dash duration in frames."
+group = "Movement"
+type = "integer"
+min = 10
+max = 100
+step = 1
+default = 30
+
+[[feature]]
+id = "hyper_ground_dash_duration"
+name = "Hyper Ground Dash Duration"
+description = "Set the Hyper Dash ground duration in frames."
+group = "Movement"
+default_enabled = false
+
+[[option]]
+feature = "hyper_ground_dash_duration"
+id = "frames"
+label = "Frames"
+description = "Set the Hyper Dash ground duration in frames."
+group = "Movement"
+type = "integer"
+min = 10
+max = 100
+step = 1
+default = 15
+
+[[feature]]
+id = "normal_air_dash_duration"
+name = "Normal Air Dash Duration"
+description = "Set the normal air-dash duration in frames."
+group = "Movement"
+default_enabled = false
+
+[[option]]
+feature = "normal_air_dash_duration"
+id = "frames"
+label = "Frames"
+description = "Set the normal air-dash duration in frames."
+group = "Movement"
+type = "integer"
+min = 10
+max = 100
+step = 1
+default = 18
+
+[[feature]]
+id = "hyper_air_dash_duration"
+name = "Hyper Air Dash Duration"
+description = "Set the Hyper Dash air duration in frames."
+group = "Movement"
+default_enabled = false
+
+[[option]]
+feature = "hyper_air_dash_duration"
+id = "frames"
+label = "Frames"
+description = "Set the Hyper Dash air duration in frames."
+group = "Movement"
+type = "integer"
+min = 10
+max = 100
+step = 1
+default = 10
+
+[[feature]]
+id = "new_game_starting_lives"
+name = "New Game Starting Lives"
+description = "Set the lives counter when starting a new game."
+group = "Lives"
+default_enabled = false
+
+[[option]]
+feature = "new_game_starting_lives"
+id = "lives"
+label = "Lives"
+description = "Set the lives counter when starting a new game."
+group = "Lives"
+type = "integer"
+min = 0
+max = 99
+step = 1
+default = 2
+
+[[feature]]
+id = "normal_starting_lives"
+name = "Normal Starting Lives"
+description = "Set the normal lives value used by intro, continue, and save paths."
+group = "Lives"
+default_enabled = false
+
+[[option]]
+feature = "normal_starting_lives"
+id = "lives"
+label = "Lives"
+description = "Set the normal lives value used by intro, continue, and save paths."
+group = "Lives"
+type = "integer"
+min = 0
+max = 99
+step = 1
+default = 2
+
+[[feature]]
+id = "ex_tank_starting_lives"
+name = "EX Tank Starting Lives"
+description = "Set the lives value used with the EX Tank."
+group = "Lives"
+default_enabled = false
+
+[[option]]
+feature = "ex_tank_starting_lives"
+id = "lives"
+label = "Lives"
+description = "Set the lives value used with the EX Tank."
+group = "Lives"
+type = "integer"
+min = 0
+max = 99
+step = 1
+default = 4
+
+[[feature]]
+id = "higher_ceiling_jump"
+name = "Ceiling Jump Height"
+description = "Set the maximum height used by the ceiling-jump behavior."
+group = "Movement"
+default_enabled = false
+
+[[option]]
+feature = "higher_ceiling_jump"
+id = "height"
+label = "Jump Height"
+description = "Set the maximum height used by the ceiling-jump behavior."
+group = "Movement"
+type = "integer"
+min = 144
+max = 480
+step = 1
+default = 192
+
+[[feature]]
+id = "rank_soul_thresholds"
+name = "Rank Soul Thresholds"
+description = "Set the Nightmare Soul thresholds for Hunter Ranks C through UH."
+group = "Rank and Progression"
+default_enabled = false
+
+[[option]]
+feature = "rank_soul_thresholds"
+id = "rank_c"
+label = "Rank C"
+description = "Set the Nightmare Soul thresholds for Hunter Ranks C through UH."
+group = "Rank and Progression"
+type = "integer"
+min = 0
+max = 9999
+step = 1
+default = 200
+
+[[option]]
+feature = "rank_soul_thresholds"
+id = "rank_b"
+label = "Rank B"
+description = "Set the Nightmare Soul thresholds for Hunter Ranks C through UH."
+group = "Rank and Progression"
+type = "integer"
+min = 0
+max = 9999
+step = 1
+default = 300
+
+[[option]]
+feature = "rank_soul_thresholds"
+id = "rank_a"
+label = "Rank A"
+description = "Set the Nightmare Soul thresholds for Hunter Ranks C through UH."
+group = "Rank and Progression"
+type = "integer"
+min = 0
+max = 9999
+step = 1
+default = 500
+
+[[option]]
+feature = "rank_soul_thresholds"
+id = "rank_sa"
+label = "Rank SA"
+description = "Set the Nightmare Soul thresholds for Hunter Ranks C through UH."
+group = "Rank and Progression"
+type = "integer"
+min = 0
+max = 9999
+step = 1
+default = 800
+
+[[option]]
+feature = "rank_soul_thresholds"
+id = "rank_ga"
+label = "Rank GA"
+description = "Set the Nightmare Soul thresholds for Hunter Ranks C through UH."
+group = "Rank and Progression"
+type = "integer"
+min = 0
+max = 9999
+step = 1
+default = 1200
+
+[[option]]
+feature = "rank_soul_thresholds"
+id = "rank_pa"
+label = "Rank PA"
+description = "Set the Nightmare Soul thresholds for Hunter Ranks C through UH."
+group = "Rank and Progression"
+type = "integer"
+min = 0
+max = 9999
+step = 1
+default = 5000
+
+[[option]]
+feature = "rank_soul_thresholds"
+id = "rank_uh"
+label = "Rank UH"
+description = "Set the Nightmare Soul thresholds for Hunter Ranks C through UH."
+group = "Rank and Progression"
+type = "integer"
+min = 0
+max = 9999
+step = 1
+default = 9999
+
+[[feature]]
+id = "normal_initial_dash_speed"
+name = "Normal Initial Dash Speed"
+description = "Set the initial normal ground and air Dash speed."
+group = "Movement"
+default_enabled = false
+
+[[option]]
+feature = "normal_initial_dash_speed"
+id = "normal_speed"
+label = "Normal Speed"
+description = "Set the initial normal ground and air Dash speed."
+group = "Movement"
+type = "integer"
+min = 200000
+max = 600000
+step = 1
+default = 425984
+
+[[feature]]
+id = "hyper_dash_initial_speed_bonus"
+name = "Hyper Dash Initial Speed Bonus"
+description = "Set the Hyper Dash speed added to the normal initial Dash speed."
+group = "Movement"
+default_enabled = false
+
+[[option]]
+feature = "hyper_dash_initial_speed_bonus"
+id = "hyper_bonus"
+label = "Hyper Dash Bonus"
+description = "Set the Hyper Dash speed added to the normal initial Dash speed."
+group = "Movement"
+type = "integer"
+min = 60000
+max = 160000
+step = 1
+default = 106496
+
+[[constraint]]
+feature = "rank_soul_thresholds"
+kind = "ordered_integer"
+direction = "nondecreasing"
+options = ["rank_c", "rank_b", "rank_a", "rank_sa", "rank_ga", "rank_pa", "rank_uh"]
+
+[[feature]]
+id = "exit_stage_availability"
+name = "Exit Stage Availability"
+description = "Choose where Exit Stage is available while the feature is enabled."
+group = "Stage Rules"
+default_enabled = false
+
+[[option]]
+feature = "exit_stage_availability"
+id = "availability"
+label = "Available in"
+description = "Stages where the Exit Stage command is available."
+group = "Stage Rules"
+type = "choice"
+default = "main_stages"
+
+[[option.choice]]
+value = "main_stages"
+label = "Main Stages"
+
+[[option.choice]]
+value = "everywhere"
+label = "Everywhere"
+
+[[constraint]]
+feature = "infinite_lives_no_continues"
+kind = "requires_feature"
+requires_feature = "exit_stage_availability"
+requires_option = "availability"
+requires_value = "everywhere"
+
+[[constraint]]
+feature = "loading_logo"
+kind = "requires_feature"
+requires_feature = "disable_title_demos"
+
+[[patch]]
+feature = "loading_logo"
+target = "main_exe"
+address = 2147935144
+expected = "0000428CA59809A96BB5CEBD10C652CAB5D618E32CE16EE5EFE571EA13F797FB00000180099D10C24684AB8430899590FB8C7891FA997D8E1E9397C61BDBDFFB"
+replace = "00006DFFC7FAE7E508D1A6B44498BEE7DFD33F8F578E6F8DCC8808809C9054880000D28ECE85688504858384FFFB7FC73F8F7E92D98955853FB63D999484AA88"
+order = 0
+when = { variant = "rockman_japan" }
+
+[[patch]]
+feature = "loading_logo"
+target = "main_exe"
+address = 2147934692
+expected = "CA00B90054010103DA00B9007A020103FA00B90076040103BA00C90055020103DA00C90061020103FA00C900C20101030A01C90086030103BA00D90063080103"
+replace = "FA00C000760302032A01D0007A0101032A01C0007901010300000000000000000000000000000000000000000000000000000000000000000000000000000000"
+order = 0
+when = { variant = "rockman_japan" }
+
+[[patch]]
+feature = "loading_logo"
+target = "main_exe"
+address = 2147935144
+expected = "0000428CA59809A96BB5CEBD10C652CAB5D618E32CE16EE5EFE571EA13F797FB00000180099D10C24684AB8430899590FB8C7891FA997D8E1E9397C61BDBDFFB"
+replace = "0000FF7F330805506871AC7E937F1663944A7E477D065105860CAD04860CBA0C0000D28ECE85688504858384FFFB7FC73F8F7E92D98955853FB63D999484AA88"
+order = 0
+when = { variant = "mega_man_custom_a" }
+
+[[patch]]
+feature = "loading_logo"
+target = "main_exe"
+address = 2147934692
+expected = "CA00B90054010103DA00B9007A020103FA00B90076040103BA00C90055020103DA00C90061020103FA00C900C20101030A01C90086030103BA00D90063080103"
+replace = "FA00C000760302032A01D0007A0101032A01C0007901010300000000000000000000000000000000000000000000000000000000000000000000000000000000"
+order = 0
+when = { variant = "mega_man_custom_a" }
+
+[[patch]]
+feature = "skip_capcom_video"
+target = "main_exe"
+address = 2147601248
+expected = "F872000C"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "skip_capcom_video"
+target = "main_exe"
+address = 2147601320
+expected = "7A4F000C"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "skip_opening_video"
+target = "main_exe"
+address = 2147603440
+expected = "B369000C"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "disable_title_demos"
+target = "main_exe"
+address = 2147606388
+expected = "FFFF4224"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "alternate_default_controls"
+target = "main_exe"
+address = 2147931656
+expected = "8000100002004000200008000400"
+replace = "8000100008004000040002000100"
+order = 0
+
+[[patch]]
+feature = "faster_cutscene_text"
+target = "main_exe"
+address = 2147624664
+expected = "04000224"
+replace = "02000224"
+order = 0
+
+[[patch]]
+feature = "mute_navigator_alerts"
+target = "main_exe"
+address = 2147823972
+expected = "125B000C"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "disable_rescue_extra_lives"
+target = "main_exe"
+address = 2147807068
+expected = "01004224"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "disable_pickup_extra_lives"
+target = "main_exe"
+address = 2147804308
+expected = "01004224"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "disable_rescue_health_refill"
+target = "main_exe"
+address = 2147806288
+expected = "31004014"
+replace = "463B0108"
+order = 0
+
+[[patch]]
+feature = "air_moves_after_dash_jump"
+target = "main_exe"
+address = 2147725172
+expected = "860022A2"
+replace = "860020A2"
+order = 0
+
+[[patch]]
+feature = "air_moves_after_dash_jump"
+target = "main_exe"
+address = 2147726480
+expected = "860023A2"
+replace = "860020A2"
+order = 0
+
+[[patch]]
+feature = "unlimited_air_moves"
+target = "main_exe"
+address = 2147717268
+expected = "60004014"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "disable_double_tap_dash"
+target = "main_exe"
+address = 2147721124
+expected = "8800A2808800A390"
+replace = "0000023400000334"
+order = 0
+
+[[patch]]
+feature = "unlimited_dash_duration"
+target = "main_exe"
+address = 2147721344
+expected = "FFFF4224"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "unlimited_dash_duration"
+target = "main_exe"
+address = 2147721580
+expected = "FFFF4224"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "unlock_x_hover"
+target = "main_exe"
+address = 2147742232
+expected = "18006214"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "x_hover_mode"
+target = "main_exe"
+address = 2147742232
+expected = "18006214"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "x_hover_mode"
+target = "main_exe"
+address = 2147717332
+expected = "00000000CBFC000C212000020D0040100100022486E4000800000000"
+replace = "7C001B96CBFC000C000004360000000000107B334B00401400000000"
+order = 0
+
+[[patch]]
+feature = "x_hover_mode"
+target = "main_exe"
+address = 2147742524
+expected = "80000296"
+replace = "00000234"
+order = 0
+
+[[patch]]
+feature = "x_hover_mode"
+target = "main_exe"
+address = 2147717268
+expected = "60004014"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "x_hover_mode"
+target = "main_exe"
+address = 2147742620
+expected = "860002A2"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "x_hover_mode"
+target = "main_exe"
+address = 2147742288
+expected = "860003A2"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "unlimited_high_jump"
+target = "main_exe"
+address = 2147706528
+expected = "FFFF8224"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "always_drop_nightmare_orbs"
+target = "main_exe"
+address = 2147757460
+expected = "000083A0"
+replace = "000080A0"
+order = 0
+
+[[patch]]
+feature = "restore_x_charged_shot_voice"
+target = "main_exe"
+address = 2147744488
+expected = "06"
+replace = "08"
+order = 0
+
+[[patch]]
+feature = "blade_mach_dash_unlimited_repetitions"
+target = "main_exe"
+address = 2147742620
+expected = "860002A2"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "disable_falcon_jump_air_dash"
+target = "main_exe"
+address = 2147742364
+expected = "80000296"
+replace = "00000234"
+order = 0
+
+[[patch]]
+feature = "allow_xtreme_item_drops"
+target = "main_exe"
+address = 2147804864
+expected = "2A004010"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "prevent_nightmare_orb_reversion"
+target = "main_exe"
+address = 2147755112
+expected = "02000282"
+replace = "31000234"
+order = 0
+
+[[patch]]
+feature = "boss_level_rank_d"
+target = "main_exe"
+address = 2147949959
+expected = "00"
+replace = "01"
+order = 0
+when = { level = "level_2" }
+
+[[patch]]
+feature = "boss_level_rank_d"
+target = "main_exe"
+address = 2147949959
+expected = "00"
+replace = "02"
+order = 0
+when = { level = "level_3" }
+
+[[patch]]
+feature = "boss_level_rank_d"
+target = "main_exe"
+address = 2147949959
+expected = "00"
+replace = "03"
+order = 0
+when = { level = "level_4" }
+
+[[patch]]
+feature = "boss_level_rank_c"
+target = "main_exe"
+address = 2147949958
+expected = "00"
+replace = "01"
+order = 0
+when = { level = "level_2" }
+
+[[patch]]
+feature = "boss_level_rank_c"
+target = "main_exe"
+address = 2147949958
+expected = "00"
+replace = "02"
+order = 0
+when = { level = "level_3" }
+
+[[patch]]
+feature = "boss_level_rank_c"
+target = "main_exe"
+address = 2147949958
+expected = "00"
+replace = "03"
+order = 0
+when = { level = "level_4" }
+
+[[patch]]
+feature = "boss_level_rank_b"
+target = "main_exe"
+address = 2147949957
+expected = "00"
+replace = "01"
+order = 0
+when = { level = "level_2" }
+
+[[patch]]
+feature = "boss_level_rank_b"
+target = "main_exe"
+address = 2147949957
+expected = "00"
+replace = "02"
+order = 0
+when = { level = "level_3" }
+
+[[patch]]
+feature = "boss_level_rank_b"
+target = "main_exe"
+address = 2147949957
+expected = "00"
+replace = "03"
+order = 0
+when = { level = "level_4" }
+
+[[patch]]
+feature = "boss_level_rank_a"
+target = "main_exe"
+address = 2147949956
+expected = "00"
+replace = "01"
+order = 0
+when = { level = "level_2" }
+
+[[patch]]
+feature = "boss_level_rank_a"
+target = "main_exe"
+address = 2147949956
+expected = "00"
+replace = "02"
+order = 0
+when = { level = "level_3" }
+
+[[patch]]
+feature = "boss_level_rank_a"
+target = "main_exe"
+address = 2147949956
+expected = "00"
+replace = "03"
+order = 0
+when = { level = "level_4" }
+
+[[patch]]
+feature = "boss_level_rank_sa"
+target = "main_exe"
+address = 2147949955
+expected = "01"
+replace = "00"
+order = 0
+when = { level = "level_1" }
+
+[[patch]]
+feature = "boss_level_rank_sa"
+target = "main_exe"
+address = 2147949955
+expected = "01"
+replace = "02"
+order = 0
+when = { level = "level_3" }
+
+[[patch]]
+feature = "boss_level_rank_sa"
+target = "main_exe"
+address = 2147949955
+expected = "01"
+replace = "03"
+order = 0
+when = { level = "level_4" }
+
+[[patch]]
+feature = "boss_level_rank_ga"
+target = "main_exe"
+address = 2147949954
+expected = "02"
+replace = "01"
+order = 0
+when = { level = "level_2" }
+
+[[patch]]
+feature = "boss_level_rank_ga"
+target = "main_exe"
+address = 2147949954
+expected = "02"
+replace = "03"
+order = 0
+when = { level = "level_4" }
+
+[[patch]]
+feature = "boss_level_rank_ga"
+target = "main_exe"
+address = 2147949954
+expected = "02"
+replace = "00"
+order = 0
+when = { level = "level_1" }
+
+[[patch]]
+feature = "boss_level_rank_pa"
+target = "main_exe"
+address = 2147949953
+expected = "03"
+replace = "02"
+order = 0
+when = { level = "level_3" }
+
+[[patch]]
+feature = "boss_level_rank_pa"
+target = "main_exe"
+address = 2147949953
+expected = "03"
+replace = "01"
+order = 0
+when = { level = "level_2" }
+
+[[patch]]
+feature = "boss_level_rank_pa"
+target = "main_exe"
+address = 2147949953
+expected = "03"
+replace = "00"
+order = 0
+when = { level = "level_1" }
+
+[[patch]]
+feature = "boss_level_rank_uh"
+target = "main_exe"
+address = 2147949952
+expected = "03"
+replace = "02"
+order = 0
+when = { level = "level_3" }
+
+[[patch]]
+feature = "boss_level_rank_uh"
+target = "main_exe"
+address = 2147949952
+expected = "03"
+replace = "01"
+order = 0
+when = { level = "level_2" }
+
+[[patch]]
+feature = "boss_level_rank_uh"
+target = "main_exe"
+address = 2147949952
+expected = "03"
+replace = "00"
+order = 0
+when = { level = "level_1" }
+
+[[patch]]
+feature = "reploid_status_rescued_by_player"
+target = "main_exe"
+address = 2147807044
+expected = "02000524"
+replace = "00000524"
+order = 0
+when = { status = "unchanged" }
+
+[[patch]]
+feature = "reploid_status_rescued_by_player"
+target = "main_exe"
+address = 2147807044
+expected = "02000524"
+replace = "04000524"
+order = 0
+when = { status = "missing" }
+
+[[patch]]
+feature = "reploid_status_rescued_by_player"
+target = "main_exe"
+address = 2147807044
+expected = "02000524"
+replace = "03000524"
+order = 0
+when = { status = "dead" }
+
+[[patch]]
+feature = "reploid_status_infected_by_nightmare"
+target = "main_exe"
+address = 2147806064
+expected = "04000524"
+replace = "00000524"
+order = 0
+when = { status = "unchanged" }
+
+[[patch]]
+feature = "reploid_status_infected_by_nightmare"
+target = "main_exe"
+address = 2147806064
+expected = "04000524"
+replace = "02000524"
+order = 0
+when = { status = "rescued" }
+
+[[patch]]
+feature = "reploid_status_infected_by_nightmare"
+target = "main_exe"
+address = 2147806064
+expected = "04000524"
+replace = "03000524"
+order = 0
+when = { status = "dead" }
+
+[[patch]]
+feature = "reploid_status_infected_lost_offscreen"
+target = "main_exe"
+address = 2147810340
+expected = "04000524"
+replace = "00000524"
+order = 0
+when = { status = "unchanged" }
+
+[[patch]]
+feature = "reploid_status_infected_lost_offscreen"
+target = "main_exe"
+address = 2147810340
+expected = "04000524"
+replace = "02000524"
+order = 0
+when = { status = "rescued" }
+
+[[patch]]
+feature = "reploid_status_infected_lost_offscreen"
+target = "main_exe"
+address = 2147810340
+expected = "04000524"
+replace = "03000524"
+order = 0
+when = { status = "dead" }
+
+[[patch]]
+feature = "reploid_status_infected_killed_by_player"
+target = "main_exe"
+address = 2147810232
+expected = "03000524"
+replace = "00000524"
+order = 0
+when = { status = "unchanged" }
+
+[[patch]]
+feature = "reploid_status_infected_killed_by_player"
+target = "main_exe"
+address = 2147810232
+expected = "03000524"
+replace = "02000524"
+order = 0
+when = { status = "rescued" }
+
+[[patch]]
+feature = "reploid_status_infected_killed_by_player"
+target = "main_exe"
+address = 2147810232
+expected = "03000524"
+replace = "04000524"
+order = 0
+when = { status = "missing" }
+
+[[patch]]
+feature = "infinite_lives_no_continues"
+target = "main_exe"
+address = 2147587968
+expected = "CC68000C"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "infinite_lives_no_continues"
+target = "main_exe"
+address = 2147632932
+expected = "3093000C"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "infinite_lives_no_continues"
+target = "main_exe"
+address = 2147632964
+expected = "3093000C"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "infinite_lives_no_continues"
+target = "main_exe"
+address = 2147608124
+expected = "FFFF4224"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "exit_stage_availability"
+target = "main_exe"
+address = 2147692576
+expected = "03006010"
+replace = "00000000"
+order = 0
+
+[[patch]]
+feature = "exit_stage_availability"
+target = "main_exe"
+address = 2147692548
+expected = "0B004010"
+replace = "00000000"
+order = 0
+when = { availability = "everywhere" }
+
+[[overlay]]
+feature = "title_screen"
+target = "disc_user"
+offset = 454014976
+file = "assets/title_screen/000-rockman_japan-background_tileset.bin"
+sha256 = "fe14014f0076f1eccf99c0423d46bf463abc90e7f933bf4cd52859f0062ef6ee"
+expected_sha256 = "d9bbd035933759a94c615c0389a06704b5f61b5fbf6a5179859f31812ad25686"
+order = 0
+when = { variant = "rockman_japan" }
+
+[[overlay]]
+feature = "title_screen"
+target = "disc_user"
+offset = 434659328
+file = "assets/title_screen/001-rockman_japan-background_palette.bin"
+sha256 = "125ae536df3e3fcc7c2d6fa01ff52819d3f41bfadb9b761b2fb4e3c66a6f2b66"
+expected_sha256 = "0c581083b047b5b073758182547e999fe4efe766e9bc1e05ece82fde880443df"
+order = 0
+when = { variant = "rockman_japan" }
+
+[[overlay]]
+feature = "title_screen"
+target = "disc_user"
+offset = 453718016
+file = "assets/title_screen/002-rockman_japan-press_start_tileset.bin"
+sha256 = "2d3e695d4206b35fff531fab86ce37cc301eef837fe794bf6bb900aa2f040cf4"
+expected_sha256 = "2b016b66c571e4cfa088b852259a25c67bdf9d70308d49827a343c6eccb4d0d2"
+order = 0
+when = { variant = "rockman_japan" }
+
+[[overlay]]
+feature = "title_screen"
+target = "disc_user"
+offset = 453818368
+file = "assets/title_screen/003-rockman_japan-press_start_assembly.bin"
+sha256 = "705387abb5750314eb1ecf36892d9bcfa5d54aae5d86ebe700e4f215bd9e5b7a"
+expected_sha256 = "09900d6a0b8bc0b78f3c435291d044fb2ce114e3c1a1921696f44db084280ded"
+order = 0
+when = { variant = "rockman_japan" }
+
+[[overlay]]
+feature = "title_screen"
+target = "disc_user"
+offset = 454014976
+file = "assets/title_screen/004-rockman_china-background_tileset.bin"
+sha256 = "eadf8c82e2e222bd5fdbf5ee3653a59e56a3a98132dead597e0fd7011e40cfd4"
+expected_sha256 = "d9bbd035933759a94c615c0389a06704b5f61b5fbf6a5179859f31812ad25686"
+order = 0
+when = { variant = "rockman_china" }
+
+[[overlay]]
+feature = "title_screen"
+target = "disc_user"
+offset = 434659328
+file = "assets/title_screen/005-rockman_china-background_palette.bin"
+sha256 = "71dd6ffa223a31552661741753a37eb9fa34c5701faa5ce7efc1632db97f851e"
+expected_sha256 = "0c581083b047b5b073758182547e999fe4efe766e9bc1e05ece82fde880443df"
+order = 0
+when = { variant = "rockman_china" }
+
+[[overlay]]
+feature = "title_screen"
+target = "disc_user"
+offset = 454014976
+file = "assets/title_screen/006-mega_man_custom_a-background_tileset.bin"
+sha256 = "0abe5d6e713d2c1c7572f267b23776197bdaea3a8ae0a8de9ff1f758c59356af"
+expected_sha256 = "d9bbd035933759a94c615c0389a06704b5f61b5fbf6a5179859f31812ad25686"
+order = 0
+when = { variant = "mega_man_custom_a" }
+
+[[overlay]]
+feature = "title_screen"
+target = "disc_user"
+offset = 434659328
+file = "assets/title_screen/007-mega_man_custom_a-background_palette.bin"
+sha256 = "de32b9194915d0b0b44134bda22859d2dc15b89364fc9641aedfcc9c7bea33c6"
+expected_sha256 = "0c581083b047b5b073758182547e999fe4efe766e9bc1e05ece82fde880443df"
+order = 0
+when = { variant = "mega_man_custom_a" }
+
+[[overlay]]
+feature = "title_screen"
+target = "disc_user"
+offset = 453718016
+file = "assets/title_screen/008-mega_man_custom_a-press_start_tileset.bin"
+sha256 = "2d3e695d4206b35fff531fab86ce37cc301eef837fe794bf6bb900aa2f040cf4"
+expected_sha256 = "2b016b66c571e4cfa088b852259a25c67bdf9d70308d49827a343c6eccb4d0d2"
+order = 0
+when = { variant = "mega_man_custom_a" }
+
+[[overlay]]
+feature = "title_screen"
+target = "disc_user"
+offset = 453818368
+file = "assets/title_screen/009-mega_man_custom_a-press_start_assembly.bin"
+sha256 = "705387abb5750314eb1ecf36892d9bcfa5d54aae5d86ebe700e4f215bd9e5b7a"
+expected_sha256 = "09900d6a0b8bc0b78f3c435291d044fb2ce114e3c1a1921696f44db084280ded"
+order = 0
+when = { variant = "mega_man_custom_a" }
+
+[[overlay]]
+feature = "title_screen"
+target = "disc_user"
+offset = 454014976
+file = "assets/title_screen/010-mega_man_custom_b-background_tileset.bin"
+sha256 = "c14943b06375f79d79e8b3f13f0131f73c87307427f8e8fc026e2c814ea96a7d"
+expected_sha256 = "d9bbd035933759a94c615c0389a06704b5f61b5fbf6a5179859f31812ad25686"
+order = 0
+when = { variant = "mega_man_custom_b" }
+
+[[overlay]]
+feature = "title_screen"
+target = "disc_user"
+offset = 434659328
+file = "assets/title_screen/011-mega_man_custom_b-background_palette.bin"
+sha256 = "125ae536df3e3fcc7c2d6fa01ff52819d3f41bfadb9b761b2fb4e3c66a6f2b66"
+expected_sha256 = "0c581083b047b5b073758182547e999fe4efe766e9bc1e05ece82fde880443df"
+order = 0
+when = { variant = "mega_man_custom_b" }
+
+[[overlay]]
+feature = "title_screen"
+target = "disc_user"
+offset = 453718016
+file = "assets/title_screen/012-mega_man_custom_b-press_start_tileset.bin"
+sha256 = "2d3e695d4206b35fff531fab86ce37cc301eef837fe794bf6bb900aa2f040cf4"
+expected_sha256 = "2b016b66c571e4cfa088b852259a25c67bdf9d70308d49827a343c6eccb4d0d2"
+order = 0
+when = { variant = "mega_man_custom_b" }
+
+[[overlay]]
+feature = "title_screen"
+target = "disc_user"
+offset = 453818368
+file = "assets/title_screen/013-mega_man_custom_b-press_start_assembly.bin"
+sha256 = "705387abb5750314eb1ecf36892d9bcfa5d54aae5d86ebe700e4f215bd9e5b7a"
+expected_sha256 = "09900d6a0b8bc0b78f3c435291d044fb2ce114e3c1a1921696f44db084280ded"
+order = 0
+when = { variant = "mega_man_custom_b" }
+
+[[overlay]]
+feature = "loading_logo"
+target = "disc_user"
+offset = 435544096
+file = "assets/loading_logo/014-rockman_japan-logo.bin"
+sha256 = "041809fad7cc4f9997ccf2f0ddb6264d008527a83a2086c2185a2a95ba179990"
+expected_sha256 = "f0b043bba3a17c3527d27fe6d129b750e81c1a96ec258b41f1178fa9b03abc3c"
+order = 0
+when = { variant = "rockman_japan" }
+
+[[overlay]]
+feature = "loading_logo"
+target = "disc_user"
+offset = 435544096
+file = "assets/loading_logo/015-mega_man_custom_a-logo.bin"
+sha256 = "1ff7f2766808c118db90ef612f24b031528bcf00d036e6f55aaa9543d44ca154"
+expected_sha256 = "e1dc925dbcdea9d91ba10de6e1930fe80c07f75f4fb5fafd4fa44dbb9bd042c3"
+order = 0
+when = { variant = "mega_man_custom_a" }
+
+[[overlay]]
+feature = "disable_nightmare_bug"
+target = "disc_user"
+offset = 433317556
+file = "assets/disable_nightmare_bug/138-NightmareDisable01.bin"
+sha256 = "709e80c88487a2411e1ee4dfb9f22a861492d20c4765150c0c794abd70f8147c"
+expected_sha256 = "0bee44f9174d7616c6a03cdf1a121e16a690fec4b9f962cf43d4aa58c6f50d9b"
+order = 0
+
+[[overlay]]
+feature = "disable_nightmare_ice"
+target = "disc_user"
+offset = 433317559
+file = "assets/disable_nightmare_ice/139-NightmareDisable02.bin"
+sha256 = "709e80c88487a2411e1ee4dfb9f22a861492d20c4765150c0c794abd70f8147c"
+expected_sha256 = "2151a2ed168f57d4dde577520ef2ce9104fa145a8ed82eb000a414a19ee733d7"
+order = 0
+
+[[overlay]]
+feature = "disable_nightmare_fire"
+target = "disc_user"
+offset = 433317562
+file = "assets/disable_nightmare_fire/140-NightmareDisable03.bin"
+sha256 = "709e80c88487a2411e1ee4dfb9f22a861492d20c4765150c0c794abd70f8147c"
+expected_sha256 = "6d7435f0bdcd9b0d6e9c109ee17da27acb307435ee4bd58626ddff49fd970e73"
+order = 0
+
+[[overlay]]
+feature = "disable_nightmare_fire"
+target = "disc_user"
+offset = 432739936
+file = "assets/disable_nightmare_fire/141-NightmareDisable03.bin"
+sha256 = "6b26003b82a7e0d87327482d7e377d0b8c2863504874c6a2536cb142a4b8499f"
+expected_sha256 = "28b67cb8dc30765f1c2ea76972dac92e9de273f79220fa04e8ea97a6613e35cc"
+order = 0
+
+[[overlay]]
+feature = "disable_nightmare_fire"
+target = "disc_user"
+offset = 433697756
+file = "assets/disable_nightmare_fire/142-NightmareDisable03.bin"
+sha256 = "3cb1e4016601217d9bb452cfb47da930a2be77dfce4c0eb2bf15484ede545e20"
+expected_sha256 = "0127491c7be0fd329d88f7b951833b8fb95a3856a620fa06dd4a7cce86afa24a"
+order = 0
+
+[[overlay]]
+feature = "disable_nightmare_iron"
+target = "disc_user"
+offset = 433317565
+file = "assets/disable_nightmare_iron/143-NightmareDisable04.bin"
+sha256 = "709e80c88487a2411e1ee4dfb9f22a861492d20c4765150c0c794abd70f8147c"
+expected_sha256 = "0c8793d2e215ca02e3a7ac63648e4283ff1a5605fb9dd56fd77628065650c62a"
+order = 0
+
+[[overlay]]
+feature = "disable_nightmare_cube"
+target = "disc_user"
+offset = 433317568
+file = "assets/disable_nightmare_cube/144-NightmareDisable05.bin"
+sha256 = "709e80c88487a2411e1ee4dfb9f22a861492d20c4765150c0c794abd70f8147c"
+expected_sha256 = "5a34728ce0313414e5566a64a0e0492206bb0a0f9d7b1c310f4acad4710c0d6e"
+order = 0
+
+[[overlay]]
+feature = "disable_nightmare_rain"
+target = "disc_user"
+offset = 433317571
+file = "assets/disable_nightmare_rain/145-NightmareDisable06.bin"
+sha256 = "709e80c88487a2411e1ee4dfb9f22a861492d20c4765150c0c794abd70f8147c"
+expected_sha256 = "f7ab364f71366ddfe681bde0dd39d58f5dc6c9eeb44edddd1b0752b56655c63c"
+order = 0
+
+[[overlay]]
+feature = "disable_nightmare_mirror"
+target = "disc_user"
+offset = 433317574
+file = "assets/disable_nightmare_mirror/146-NightmareDisable07.bin"
+sha256 = "709e80c88487a2411e1ee4dfb9f22a861492d20c4765150c0c794abd70f8147c"
+expected_sha256 = "529b91346a49c9373fac3acc708562fd8ce6635b6874c7c44769b76980e19f4b"
+order = 0
+
+[[overlay]]
+feature = "disable_nightmare_dark"
+target = "disc_user"
+offset = 433317577
+file = "assets/disable_nightmare_dark/147-NightmareDisable08.bin"
+sha256 = "709e80c88487a2411e1ee4dfb9f22a861492d20c4765150c0c794abd70f8147c"
+expected_sha256 = "d22b3a68d313c9fe0aafaeec6f989b085e5b2e890d4ce5933f0b7cefca19a21e"
+order = 0
+
+[[overlay]]
+feature = "unlimited_dash_duration"
+target = "disc_user"
+offset = 432520048
+file = "assets/unlimited_dash_duration/148-DashDurationUnlimited01.bin"
+sha256 = "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+expected_sha256 = "23ae79fa549eebded7fc40badc3432dd2ee3a29ace3c6c7420daefb469057161"
+order = 0
+
+[[overlay]]
+feature = "x_hover_mode"
+target = "disc_user"
+offset = 432520224
+file = "assets/x_hover_mode/149-HoverUnlock02.bin"
+sha256 = "879ed50c3d9f0c8830d985dea6107a362940972c31f36ac042d2e3c7b7778b26"
+expected_sha256 = "7cf6118249b522d7f5ba5e64203c4e4616e0dfdb3a99091a7a8dec32c2b8e8d8"
+order = 0
+
+[[overlay]]
+feature = "x_hover_mode"
+target = "disc_user"
+offset = 432520276
+file = "assets/x_hover_mode/150-HoverUnlock02.bin"
+sha256 = "879ed50c3d9f0c8830d985dea6107a362940972c31f36ac042d2e3c7b7778b26"
+expected_sha256 = "7cf6118249b522d7f5ba5e64203c4e4616e0dfdb3a99091a7a8dec32c2b8e8d8"
+order = 0
+
+[[overlay]]
+feature = "x_hover_mode"
+target = "disc_user"
+offset = 432520048
+file = "assets/x_hover_mode/151-HoverUnlock02.bin"
+sha256 = "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+expected_sha256 = "23ae79fa549eebded7fc40badc3432dd2ee3a29ace3c6c7420daefb469057161"
+order = 0
+
+[[overlay]]
+feature = "x_hover_mode"
+target = "disc_user"
+offset = 432519276
+file = "assets/x_hover_mode/152-HoverUnlock02.bin"
+sha256 = "47772a681b2793a770b1a4dfc689bce702d572c49986f9f81bab7b30b7cecec2"
+expected_sha256 = "d5620d06226665266e58c34ea36a78392892ccf41bbd2277cf8bc1e1baccaa84"
+order = 0
+
+[[overlay]]
+feature = "unlimited_high_jump"
+target = "disc_user"
+offset = 432567084
+file = "assets/unlimited_high_jump/154-HighJumpUnlimited01.bin"
+sha256 = "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+expected_sha256 = "918c47fd97ac2ca1c34a94b729c0a1817ffd7df50c2db76dc807f23a5cd9d8ec"
+order = 0
+
+[[overlay]]
+feature = "shadow_saber_cancellable"
+target = "disc_user"
+offset = 432554313
+file = "assets/shadow_saber_cancellable/155-SaberCancellable02.bin"
+sha256 = "df7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c"
+expected_sha256 = "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+order = 0
+
+[[overlay]]
+feature = "shadow_saber_cancellable"
+target = "disc_user"
+offset = 432554317
+file = "assets/shadow_saber_cancellable/156-SaberCancellable02.bin"
+sha256 = "559aead08264d5795d3909718cdd05abd49572e84fe55590eef31a88a08fdffd"
+expected_sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+order = 0
+
+[[overlay]]
+feature = "shadow_saber_cancellable"
+target = "disc_user"
+offset = 432554321
+file = "assets/shadow_saber_cancellable/157-SaberCancellable02.bin"
+sha256 = "c3641f8544d7c02f3580b07c0f9887f0c6a27ff5ab1d4a3e29caf197cfc299ae"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+
+[[overlay]]
+feature = "shadow_saber_cancellable"
+target = "disc_user"
+offset = 432554325
+file = "assets/shadow_saber_cancellable/158-SaberCancellable02.bin"
+sha256 = "c3641f8544d7c02f3580b07c0f9887f0c6a27ff5ab1d4a3e29caf197cfc299ae"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+
+[[overlay]]
+feature = "restore_zero_giga_attack_voice"
+target = "disc_user"
+offset = 432557868
+file = "assets/restore_zero_giga_attack_voice/159-VoiceClip04.bin"
+sha256 = "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+expected_sha256 = "ca358758f6d27e6cf45272937977a748fd88391db679ceda7dc7bf1f005ee879"
+order = 0
+
+[[overlay]]
+feature = "yammark_firefly_resistance"
+target = "disc_user"
+offset = 432689852
+file = "assets/yammark_firefly_resistance/160-BossMod0106.bin"
+sha256 = "8d33f520a3c4cef80d2453aef81b612bfe1cb44c8b2025630ad38662763f13d3"
+expected_sha256 = "beead77994cf573341ec17b58bbf7eb34d2711c993c1d976b128b3188dc1829a"
+order = 0
+
+[[overlay]]
+feature = "yammark_firefly_resistance"
+target = "disc_user"
+offset = 433871836
+file = "assets/yammark_firefly_resistance/161-BossMod0106.bin"
+sha256 = "8d33f520a3c4cef80d2453aef81b612bfe1cb44c8b2025630ad38662763f13d3"
+expected_sha256 = "beead77994cf573341ec17b58bbf7eb34d2711c993c1d976b128b3188dc1829a"
+order = 0
+
+[[overlay]]
+feature = "indestructible_yammark_orbs"
+target = "disc_user"
+offset = 432698368
+file = "assets/indestructible_yammark_orbs/162-BossMod0102.bin"
+sha256 = "5586a8b8bdf542a2d0bcb16b4a98617148f27874efe32be46e215c30907b1220"
+expected_sha256 = "f7aeb1e6ec03ea2c7e1d43180ad955643600d4468297074d976c493287691efd"
+order = 0
+
+[[overlay]]
+feature = "indestructible_yammark_orbs"
+target = "disc_user"
+offset = 433880352
+file = "assets/indestructible_yammark_orbs/163-BossMod0102.bin"
+sha256 = "5586a8b8bdf542a2d0bcb16b4a98617148f27874efe32be46e215c30907b1220"
+expected_sha256 = "f7aeb1e6ec03ea2c7e1d43180ad955643600d4468297074d976c493287691efd"
+order = 0
+
+[[overlay]]
+feature = "disable_x_saber_cancelling"
+target = "disc_user"
+offset = 432554281
+file = "assets/disable_x_saber_cancelling/164-SaberCancellable01.bin"
+sha256 = "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+expected_sha256 = "df7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c"
+order = 0
+
+[[overlay]]
+feature = "disable_x_saber_cancelling"
+target = "disc_user"
+offset = 432554285
+file = "assets/disable_x_saber_cancelling/165-SaberCancellable01.bin"
+sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+expected_sha256 = "c3641f8544d7c02f3580b07c0f9887f0c6a27ff5ab1d4a3e29caf197cfc299ae"
+order = 0
+
+[[overlay]]
+feature = "disable_x_saber_cancelling"
+target = "disc_user"
+offset = 432554289
+file = "assets/disable_x_saber_cancelling/166-SaberCancellable01.bin"
+sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+expected_sha256 = "c3641f8544d7c02f3580b07c0f9887f0c6a27ff5ab1d4a3e29caf197cfc299ae"
+order = 0
+
+[[overlay]]
+feature = "disable_x_saber_cancelling"
+target = "disc_user"
+offset = 432554293
+file = "assets/disable_x_saber_cancelling/167-SaberCancellable01.bin"
+sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+expected_sha256 = "c3641f8544d7c02f3580b07c0f9887f0c6a27ff5ab1d4a3e29caf197cfc299ae"
+order = 0
+
+[[overlay]]
+feature = "yammark_speed_orbs_easy_normal"
+target = "disc_user"
+offset = 432698464
+file = "assets/yammark_speed_orbs_easy_normal/168-BossMod0103.bin"
+sha256 = "c0ba8a33ac67f44abff5984dfbb6f56c46b880ac2b86e1f23e7fa9c402c53ae7"
+expected_sha256 = "9b4fb24edd6d1d8830e272398263cdbf026b97392cc35387b991dc0248a628f9"
+order = 0
+
+[[overlay]]
+feature = "yammark_speed_orbs_easy_normal"
+target = "disc_user"
+offset = 433880448
+file = "assets/yammark_speed_orbs_easy_normal/169-BossMod0103.bin"
+sha256 = "c0ba8a33ac67f44abff5984dfbb6f56c46b880ac2b86e1f23e7fa9c402c53ae7"
+expected_sha256 = "9b4fb24edd6d1d8830e272398263cdbf026b97392cc35387b991dc0248a628f9"
+order = 0
+
+[[overlay]]
+feature = "yammark_speed_orbs_easy_normal"
+target = "disc_user"
+offset = 432698484
+file = "assets/yammark_speed_orbs_easy_normal/170-BossMod0103.bin"
+sha256 = "1a2f6d609ce7efe5eaf0edb904df64fec5cf81ad873d5a39a1850c9b28022b0f"
+expected_sha256 = "15cc44da5e294721a0fc16c8fb952382d4dc51dbaa28950d9903acfbac0ccee5"
+order = 0
+
+[[overlay]]
+feature = "yammark_speed_orbs_easy_normal"
+target = "disc_user"
+offset = 433880468
+file = "assets/yammark_speed_orbs_easy_normal/171-BossMod0103.bin"
+sha256 = "1a2f6d609ce7efe5eaf0edb904df64fec5cf81ad873d5a39a1850c9b28022b0f"
+expected_sha256 = "15cc44da5e294721a0fc16c8fb952382d4dc51dbaa28950d9903acfbac0ccee5"
+order = 0
+
+[[overlay]]
+feature = "yammark_speed_orbs_xtreme"
+target = "disc_user"
+offset = 432698616
+file = "assets/yammark_speed_orbs_xtreme/172-BossMod0104.bin"
+sha256 = "70d25a8989705fb8ada1858da4748ed13dc70a5b734af4c7367e83c9231980a1"
+expected_sha256 = "0c7713c62cf5739c1d503122b4ee6c2dd70fc80240a562cb0985650eeb5b94b2"
+order = 0
+
+[[overlay]]
+feature = "yammark_speed_orbs_xtreme"
+target = "disc_user"
+offset = 433880600
+file = "assets/yammark_speed_orbs_xtreme/173-BossMod0104.bin"
+sha256 = "70d25a8989705fb8ada1858da4748ed13dc70a5b734af4c7367e83c9231980a1"
+expected_sha256 = "0c7713c62cf5739c1d503122b4ee6c2dd70fc80240a562cb0985650eeb5b94b2"
+order = 0
+
+[[overlay]]
+feature = "wolfang_debris_all_difficulties"
+target = "disc_user"
+offset = 432755420
+file = "assets/wolfang_debris_all_difficulties/174-BossMod0201.bin"
+sha256 = "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+expected_sha256 = "be41dd9d242a32c8bea287bd29d8fe5cf2882dd6e31a6153c52d28dda89e3453"
+order = 0
+
+[[overlay]]
+feature = "wolfang_debris_all_difficulties"
+target = "disc_user"
+offset = 433899156
+file = "assets/wolfang_debris_all_difficulties/175-BossMod0201.bin"
+sha256 = "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+expected_sha256 = "be41dd9d242a32c8bea287bd29d8fe5cf2882dd6e31a6153c52d28dda89e3453"
+order = 0
+
+[[overlay]]
+feature = "wolfang_ice_spikes_all_levels"
+target = "disc_user"
+offset = 432749996
+file = "assets/wolfang_ice_spikes_all_levels/176-BossMod0202.bin"
+sha256 = "705eced60c868ce2822ea3cf9da90f3586a893104b45dd74a5e4abf498cc7818"
+expected_sha256 = "3d0d28de04f547bcc2c4d3b137f9448b3db1431be9bba24ff3fd2cb4c7bbecef"
+order = 0
+
+[[overlay]]
+feature = "wolfang_ice_spikes_all_levels"
+target = "disc_user"
+offset = 433893732
+file = "assets/wolfang_ice_spikes_all_levels/177-BossMod0202.bin"
+sha256 = "705eced60c868ce2822ea3cf9da90f3586a893104b45dd74a5e4abf498cc7818"
+expected_sha256 = "3d0d28de04f547bcc2c4d3b137f9448b3db1431be9bba24ff3fd2cb4c7bbecef"
+order = 0
+
+[[overlay]]
+feature = "wolfang_indestructible_ice_blocks"
+target = "disc_user"
+offset = 432754588
+file = "assets/wolfang_indestructible_ice_blocks/178-BossMod0203.bin"
+sha256 = "feab9fe9a6429e06450a7a346353150a8f318e1ac056b1321da6ae3385cb69bd"
+expected_sha256 = "9445848446bf70cf5b5f68ead32cb22c99270eb05ecadef12477c5960411fe8f"
+order = 0
+
+[[overlay]]
+feature = "wolfang_indestructible_ice_blocks"
+target = "disc_user"
+offset = 433898324
+file = "assets/wolfang_indestructible_ice_blocks/179-BossMod0203.bin"
+sha256 = "feab9fe9a6429e06450a7a346353150a8f318e1ac056b1321da6ae3385cb69bd"
+expected_sha256 = "9445848446bf70cf5b5f68ead32cb22c99270eb05ecadef12477c5960411fe8f"
+order = 0
+
+[[overlay]]
+feature = "wolfang_indestructible_ice_blocks"
+target = "disc_user"
+offset = 432754828
+file = "assets/wolfang_indestructible_ice_blocks/180-BossMod0203.bin"
+sha256 = "feab9fe9a6429e06450a7a346353150a8f318e1ac056b1321da6ae3385cb69bd"
+expected_sha256 = "9445848446bf70cf5b5f68ead32cb22c99270eb05ecadef12477c5960411fe8f"
+order = 0
+
+[[overlay]]
+feature = "wolfang_indestructible_ice_blocks"
+target = "disc_user"
+offset = 433898564
+file = "assets/wolfang_indestructible_ice_blocks/181-BossMod0203.bin"
+sha256 = "feab9fe9a6429e06450a7a346353150a8f318e1ac056b1321da6ae3385cb69bd"
+expected_sha256 = "9445848446bf70cf5b5f68ead32cb22c99270eb05ecadef12477c5960411fe8f"
+order = 0
+
+[[overlay]]
+feature = "wolfang_indestructible_ice_spikes"
+target = "disc_user"
+offset = 432750028
+file = "assets/wolfang_indestructible_ice_spikes/182-BossMod0204.bin"
+sha256 = "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+expected_sha256 = "eaa1bcabbbfb5373e20fd9ddbe8a6a7f1e74041e44555e051d1514e22c4a4729"
+order = 0
+
+[[overlay]]
+feature = "wolfang_indestructible_ice_spikes"
+target = "disc_user"
+offset = 433893764
+file = "assets/wolfang_indestructible_ice_spikes/183-BossMod0204.bin"
+sha256 = "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+expected_sha256 = "eaa1bcabbbfb5373e20fd9ddbe8a6a7f1e74041e44555e051d1514e22c4a4729"
+order = 0
+
+[[overlay]]
+feature = "normal_part_slots_rank_uh"
+target = "disc_user"
+offset = 433317492
+file = "assets/normal_part_slots_rank_uh/184-3-RankNPart01.bin"
+sha256 = "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+expected_sha256 = "e52d9c508c502347344d8c07ad91cbd6068afc75ff6292f062a09ca381c89e71"
+order = 0
+when = { slots = "3" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_uh"
+target = "disc_user"
+offset = 433317492
+file = "assets/normal_part_slots_rank_uh/185-2-RankNPart01.bin"
+sha256 = "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+expected_sha256 = "e52d9c508c502347344d8c07ad91cbd6068afc75ff6292f062a09ca381c89e71"
+order = 0
+when = { slots = "2" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_uh"
+target = "disc_user"
+offset = 433317492
+file = "assets/normal_part_slots_rank_uh/186-1-RankNPart01.bin"
+sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+expected_sha256 = "e52d9c508c502347344d8c07ad91cbd6068afc75ff6292f062a09ca381c89e71"
+order = 0
+when = { slots = "1" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_uh"
+target = "disc_user"
+offset = 433317492
+file = "assets/normal_part_slots_rank_uh/187-0-RankNPart01.bin"
+sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+expected_sha256 = "e52d9c508c502347344d8c07ad91cbd6068afc75ff6292f062a09ca381c89e71"
+order = 0
+when = { slots = "0" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_pa"
+target = "disc_user"
+offset = 433317493
+file = "assets/normal_part_slots_rank_pa/188-2-RankNPart02.bin"
+sha256 = "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+expected_sha256 = "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+order = 0
+when = { slots = "2" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_pa"
+target = "disc_user"
+offset = 433317493
+file = "assets/normal_part_slots_rank_pa/189-4-RankNPart02.bin"
+sha256 = "e52d9c508c502347344d8c07ad91cbd6068afc75ff6292f062a09ca381c89e71"
+expected_sha256 = "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+order = 0
+when = { slots = "4" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_pa"
+target = "disc_user"
+offset = 433317493
+file = "assets/normal_part_slots_rank_pa/190-1-RankNPart02.bin"
+sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+expected_sha256 = "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+order = 0
+when = { slots = "1" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_pa"
+target = "disc_user"
+offset = 433317493
+file = "assets/normal_part_slots_rank_pa/191-0-RankNPart02.bin"
+sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+expected_sha256 = "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+order = 0
+when = { slots = "0" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_ga"
+target = "disc_user"
+offset = 433317494
+file = "assets/normal_part_slots_rank_ga/192-1-RankNPart03.bin"
+sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+expected_sha256 = "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+order = 0
+when = { slots = "1" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_ga"
+target = "disc_user"
+offset = 433317494
+file = "assets/normal_part_slots_rank_ga/193-3-RankNPart03.bin"
+sha256 = "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+expected_sha256 = "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+order = 0
+when = { slots = "3" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_ga"
+target = "disc_user"
+offset = 433317494
+file = "assets/normal_part_slots_rank_ga/194-0-RankNPart03.bin"
+sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+expected_sha256 = "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+order = 0
+when = { slots = "0" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_ga"
+target = "disc_user"
+offset = 433317494
+file = "assets/normal_part_slots_rank_ga/195-4-RankNPart03.bin"
+sha256 = "e52d9c508c502347344d8c07ad91cbd6068afc75ff6292f062a09ca381c89e71"
+expected_sha256 = "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+order = 0
+when = { slots = "4" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_sa"
+target = "disc_user"
+offset = 433317495
+file = "assets/normal_part_slots_rank_sa/196-1-RankNPart04.bin"
+sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+expected_sha256 = "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+order = 0
+when = { slots = "1" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_sa"
+target = "disc_user"
+offset = 433317495
+file = "assets/normal_part_slots_rank_sa/197-3-RankNPart04.bin"
+sha256 = "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+expected_sha256 = "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+order = 0
+when = { slots = "3" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_sa"
+target = "disc_user"
+offset = 433317495
+file = "assets/normal_part_slots_rank_sa/198-0-RankNPart04.bin"
+sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+expected_sha256 = "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+order = 0
+when = { slots = "0" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_sa"
+target = "disc_user"
+offset = 433317495
+file = "assets/normal_part_slots_rank_sa/199-4-RankNPart04.bin"
+sha256 = "e52d9c508c502347344d8c07ad91cbd6068afc75ff6292f062a09ca381c89e71"
+expected_sha256 = "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+order = 0
+when = { slots = "4" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_a"
+target = "disc_user"
+offset = 433317496
+file = "assets/normal_part_slots_rank_a/200-0-RankNPart05.bin"
+sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+expected_sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+order = 0
+when = { slots = "0" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_a"
+target = "disc_user"
+offset = 433317496
+file = "assets/normal_part_slots_rank_a/201-2-RankNPart05.bin"
+sha256 = "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+expected_sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+order = 0
+when = { slots = "2" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_a"
+target = "disc_user"
+offset = 433317496
+file = "assets/normal_part_slots_rank_a/202-3-RankNPart05.bin"
+sha256 = "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+expected_sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+order = 0
+when = { slots = "3" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_a"
+target = "disc_user"
+offset = 433317496
+file = "assets/normal_part_slots_rank_a/203-4-RankNPart05.bin"
+sha256 = "e52d9c508c502347344d8c07ad91cbd6068afc75ff6292f062a09ca381c89e71"
+expected_sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+order = 0
+when = { slots = "4" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_b"
+target = "disc_user"
+offset = 433317497
+file = "assets/normal_part_slots_rank_b/204-1-RankNPart06.bin"
+sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+when = { slots = "1" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_b"
+target = "disc_user"
+offset = 433317497
+file = "assets/normal_part_slots_rank_b/205-2-RankNPart06.bin"
+sha256 = "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+when = { slots = "2" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_b"
+target = "disc_user"
+offset = 433317497
+file = "assets/normal_part_slots_rank_b/206-3-RankNPart06.bin"
+sha256 = "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+when = { slots = "3" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_b"
+target = "disc_user"
+offset = 433317497
+file = "assets/normal_part_slots_rank_b/207-4-RankNPart06.bin"
+sha256 = "e52d9c508c502347344d8c07ad91cbd6068afc75ff6292f062a09ca381c89e71"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+when = { slots = "4" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_c"
+target = "disc_user"
+offset = 433317498
+file = "assets/normal_part_slots_rank_c/208-1-RankNPart07.bin"
+sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+when = { slots = "1" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_c"
+target = "disc_user"
+offset = 433317498
+file = "assets/normal_part_slots_rank_c/209-2-RankNPart07.bin"
+sha256 = "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+when = { slots = "2" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_c"
+target = "disc_user"
+offset = 433317498
+file = "assets/normal_part_slots_rank_c/210-3-RankNPart07.bin"
+sha256 = "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+when = { slots = "3" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_c"
+target = "disc_user"
+offset = 433317498
+file = "assets/normal_part_slots_rank_c/211-4-RankNPart07.bin"
+sha256 = "e52d9c508c502347344d8c07ad91cbd6068afc75ff6292f062a09ca381c89e71"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+when = { slots = "4" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_d"
+target = "disc_user"
+offset = 433317499
+file = "assets/normal_part_slots_rank_d/212-1-RankNPart08.bin"
+sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+when = { slots = "1" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_d"
+target = "disc_user"
+offset = 433317499
+file = "assets/normal_part_slots_rank_d/213-2-RankNPart08.bin"
+sha256 = "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+when = { slots = "2" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_d"
+target = "disc_user"
+offset = 433317499
+file = "assets/normal_part_slots_rank_d/214-3-RankNPart08.bin"
+sha256 = "084fed08b978af4d7d196a7446a86b58009e636b611db16211b65a9aadff29c5"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+when = { slots = "3" }
+
+[[overlay]]
+feature = "normal_part_slots_rank_d"
+target = "disc_user"
+offset = 433317499
+file = "assets/normal_part_slots_rank_d/215-4-RankNPart08.bin"
+sha256 = "e52d9c508c502347344d8c07ad91cbd6068afc75ff6292f062a09ca381c89e71"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+when = { slots = "4" }
+
+[[overlay]]
+feature = "disable_limited_parts_rank_uh"
+target = "disc_user"
+offset = 433317500
+file = "assets/disable_limited_parts_rank_uh/216-RankLPart01.bin"
+sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+expected_sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+order = 0
+
+[[overlay]]
+feature = "disable_limited_parts_rank_pa"
+target = "disc_user"
+offset = 433317501
+file = "assets/disable_limited_parts_rank_pa/217-RankLPart02.bin"
+sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+expected_sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+order = 0
+
+[[overlay]]
+feature = "disable_limited_parts_rank_ga"
+target = "disc_user"
+offset = 433317502
+file = "assets/disable_limited_parts_rank_ga/218-RankLPart03.bin"
+sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+expected_sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+order = 0
+
+[[overlay]]
+feature = "enable_limited_parts_rank_sa"
+target = "disc_user"
+offset = 433317503
+file = "assets/enable_limited_parts_rank_sa/219-RankLPart04.bin"
+sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+
+[[overlay]]
+feature = "enable_limited_parts_rank_a"
+target = "disc_user"
+offset = 433317504
+file = "assets/enable_limited_parts_rank_a/220-RankLPart05.bin"
+sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+
+[[overlay]]
+feature = "enable_limited_parts_rank_b"
+target = "disc_user"
+offset = 433317505
+file = "assets/enable_limited_parts_rank_b/221-RankLPart06.bin"
+sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+
+[[overlay]]
+feature = "enable_limited_parts_rank_c"
+target = "disc_user"
+offset = 433317506
+file = "assets/enable_limited_parts_rank_c/222-RankLPart07.bin"
+sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+
+[[overlay]]
+feature = "enable_limited_parts_rank_d"
+target = "disc_user"
+offset = 433317507
+file = "assets/enable_limited_parts_rank_d/223-RankLPart08.bin"
+sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+expected_sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+order = 0
+
+[[overlay]]
+feature = "yammark_xtreme_behavior"
+target = "disc_user"
+offset = 432698428
+file = "assets/yammark_xtreme_behavior/224-BossMod0101.bin"
+sha256 = "5c6312b54f4583ac289875908feea3434ed066a8d31be594c75b7df8f241a74f"
+expected_sha256 = "8265680c36edc5bc7997dbb31ea11014b01d66c61967aa975e6d5c0ecb7d1a17"
+order = 0
+
+[[overlay]]
+feature = "yammark_xtreme_behavior"
+target = "disc_user"
+offset = 433880412
+file = "assets/yammark_xtreme_behavior/225-BossMod0101.bin"
+sha256 = "5c6312b54f4583ac289875908feea3434ed066a8d31be594c75b7df8f241a74f"
+expected_sha256 = "8265680c36edc5bc7997dbb31ea11014b01d66c61967aa975e6d5c0ecb7d1a17"
+order = 0
+
+[[overlay]]
+feature = "amazon_area_extended_ceiling"
+target = "disc_user"
+offset = 443854528
+file = "assets/amazon_area_extended_ceiling/226-record-095-subasset-07-07EC0.bin"
+sha256 = "f52e5b0264519565d5742b130d1fbdc457bd193385a5dcce4f383faae9f34349"
+expected_sha256 = "bc43bab0635f0965bbd696e68111d3ce11d9987fdfed462591421ebae6b2778f"
+order = 0
+
+[[overlay]]
+feature = "amazon_area_extended_ceiling"
+target = "disc_user"
+offset = 443863040
+file = "assets/amazon_area_extended_ceiling/227-record-095-subasset-07-0A000.bin"
+sha256 = "4e15f65d6458c1caa5945906251c492af97ed0c06c39337672c46dee4c662207"
+expected_sha256 = "52c8425a2753ab3496a71ba240212fc8e584d1d8f02627d4cf60088fad43c097"
+order = 0
+
+[[overlay]]
+feature = "amazon_area_extended_ceiling"
+target = "disc_user"
+offset = 432709040
+file = "assets/amazon_area_extended_ceiling/228-StageMod01.bin"
+sha256 = "e4e420de5fcd16af6c080d310da45b0252990318736afdc84021116f0a7b625a"
+expected_sha256 = "2d3acb8985152a5e4f4b803a7fb8457db33a2c2eabc16418c629283f47b4ab0f"
+order = 0
+
+[[overlay]]
+feature = "secret_lab_2_platform"
+target = "disc_user"
+offset = 459150336
+file = "assets/secret_lab_2_platform/229-record-114-subasset-09-07C00.bin"
+sha256 = "82ca44f60f2c271224aaefbfd8e10db36caa5fad4ad0c19df1d4aeddd0a60712"
+expected_sha256 = "c5cb8ee4196dc5184cd734a4fd460c06016cd74fdf5f20dbc772639c4bce1fac"
+order = 0
+
+[[overlay]]
+feature = "secret_lab_1_spikes"
+target = "disc_user"
+offset = 457383424
+file = "assets/secret_lab_1_spikes/230-remove_some-record-112-subasset-09-08E00.bin"
+sha256 = "5785b17d0a897a13b7f5b33e916d668dc9acdcbbce795227797ae4c0a48cda98"
+expected_sha256 = "7d50a6d50120affb4a5537b0ba89b6effaa61e5188915c7c239afbb3f6ea494e"
+order = 0
+when = { removal = "remove_some" }
+
+[[overlay]]
+feature = "secret_lab_1_spikes"
+target = "disc_user"
+offset = 457388544
+file = "assets/secret_lab_1_spikes/231-remove_some-record-112-subasset-09-0A200.bin"
+sha256 = "ca0d30ef0f5a354a6e0fa3a6fa7c2c98c5ac4775003362b5a871cabc23be4fc0"
+expected_sha256 = "224f2929bd8f6fc4c909d8d7a533f9e17c9ca6b33b5306114cf2cb51e1767537"
+order = 0
+when = { removal = "remove_some" }
+
+[[overlay]]
+feature = "secret_lab_1_spikes"
+target = "disc_user"
+offset = 457393152
+file = "assets/secret_lab_1_spikes/232-remove_some-record-112-subasset-09-0B400.bin"
+sha256 = "6c016c855cc0b78e11b73ec235ab220e608fade7f510f9c34e144aa1697f92eb"
+expected_sha256 = "c19f938c9627ffea3c985ee0ba327a27560e79e26e9a30c31d8b91e0e183f44f"
+order = 0
+when = { removal = "remove_some" }
+
+[[overlay]]
+feature = "secret_lab_1_spikes"
+target = "disc_user"
+offset = 457383424
+file = "assets/secret_lab_1_spikes/233-remove_more-record-112-subasset-09-08E00.bin"
+sha256 = "1f8d55f821b42e3eefca48054e21c201db54dd7e3a9788ffe8549a266ae0324a"
+expected_sha256 = "7d50a6d50120affb4a5537b0ba89b6effaa61e5188915c7c239afbb3f6ea494e"
+order = 0
+when = { removal = "remove_more" }
+
+[[overlay]]
+feature = "secret_lab_1_spikes"
+target = "disc_user"
+offset = 457388544
+file = "assets/secret_lab_1_spikes/234-remove_more-record-112-subasset-09-0A200.bin"
+sha256 = "d8fc60f73ba4811e514a43aac8e4ca282ca27065fcd4ff7aa64f8f3c18dc7c04"
+expected_sha256 = "224f2929bd8f6fc4c909d8d7a533f9e17c9ca6b33b5306114cf2cb51e1767537"
+order = 0
+when = { removal = "remove_more" }
+
+[[overlay]]
+feature = "secret_lab_1_spikes"
+target = "disc_user"
+offset = 457393152
+file = "assets/secret_lab_1_spikes/235-remove_more-record-112-subasset-09-0B400.bin"
+sha256 = "b570c2108d63baf40a8de523cd9cf0efd68a28fb538819aeee6153bfb57fd044"
+expected_sha256 = "c19f938c9627ffea3c985ee0ba327a27560e79e26e9a30c31d8b91e0e183f44f"
+order = 0
+when = { removal = "remove_more" }
+
+[[overlay]]
+feature = "recycle_lab_ceiling_extension"
+target = "disc_user"
+offset = 446658048
+file = "assets/recycle_lab_ceiling_extension/236-one_tile-record-098-subasset-07-09600.bin"
+sha256 = "d3ded7ce0793b63af79fb256994554e2eff21d06e6111fd7597bc7e2c4370a32"
+expected_sha256 = "2cd2cf021e2afa4e2eeedfba2765163ed1a164203ebf59c55f4b2f09de5c215b"
+order = 0
+when = { extension = "one_tile" }
+
+[[overlay]]
+feature = "recycle_lab_ceiling_extension"
+target = "disc_user"
+offset = 446658048
+file = "assets/recycle_lab_ceiling_extension/237-two_tiles-record-098-subasset-07-09600.bin"
+sha256 = "7e67eaafac9ec652854dbce9901aae528a00a0761d0768d3d8d3a5e46ab938d1"
+expected_sha256 = "2cd2cf021e2afa4e2eeedfba2765163ed1a164203ebf59c55f4b2f09de5c215b"
+order = 0
+when = { extension = "two_tiles" }
+
+[[patch]]
+feature = "yammark_contact_damage"
+target = "disc_user"
+offset = 432681392
+expected = "04"
+replace_from = { option = "damage", encoding = "u8" }
+order = 0
+
+[[patch]]
+feature = "yammark_contact_damage"
+target = "disc_user"
+offset = 433863376
+expected = "04"
+replace_from = { option = "damage", encoding = "u8" }
+order = 0
+
+[[patch]]
+feature = "yammark_firefly_damage"
+target = "disc_user"
+offset = 432689860
+expected = "02"
+replace_from = { option = "damage", encoding = "u8" }
+order = 0
+
+[[patch]]
+feature = "yammark_firefly_damage"
+target = "disc_user"
+offset = 433871844
+expected = "02"
+replace_from = { option = "damage", encoding = "u8" }
+order = 0
+
+[[patch]]
+feature = "yammark_green_orb_damage"
+target = "disc_user"
+offset = 432698692
+expected = "02"
+replace_from = { option = "damage", encoding = "u8" }
+order = 0
+
+[[patch]]
+feature = "yammark_green_orb_damage"
+target = "disc_user"
+offset = 433880676
+expected = "02"
+replace_from = { option = "damage", encoding = "u8" }
+order = 0
+
+[[patch]]
+feature = "wolfang_contact_damage"
+target = "disc_user"
+offset = 432754008
+expected = "04"
+replace_from = { option = "damage", encoding = "u8" }
+order = 0
+
+[[patch]]
+feature = "wolfang_contact_damage"
+target = "disc_user"
+offset = 432749716
+expected = "04"
+replace_from = { option = "damage", encoding = "u8" }
+order = 0
+
+[[patch]]
+feature = "wolfang_contact_damage"
+target = "disc_user"
+offset = 433897744
+expected = "04"
+replace_from = { option = "damage", encoding = "u8" }
+order = 0
+
+[[patch]]
+feature = "wolfang_contact_damage"
+target = "disc_user"
+offset = 433893452
+expected = "04"
+replace_from = { option = "damage", encoding = "u8" }
+order = 0
+
+[[patch]]
+feature = "wolfang_ice_block_damage"
+target = "disc_user"
+offset = 432754476
+expected = "04"
+replace_from = { option = "damage", encoding = "u8" }
+order = 0
+
+[[patch]]
+feature = "wolfang_ice_block_damage"
+target = "disc_user"
+offset = 433898212
+expected = "04"
+replace_from = { option = "damage", encoding = "u8" }
+order = 0
+
+[[patch]]
+feature = "wolfang_ice_debris_damage"
+target = "disc_user"
+offset = 432754836
+expected = "02"
+replace_from = { option = "damage", encoding = "u8" }
+order = 0
+
+[[patch]]
+feature = "wolfang_ice_debris_damage"
+target = "disc_user"
+offset = 433898572
+expected = "02"
+replace_from = { option = "damage", encoding = "u8" }
+order = 0
+
+[[patch]]
+feature = "wolfang_ice_spike_damage"
+target = "disc_user"
+offset = 432750032
+expected = "06"
+replace_from = { option = "damage", encoding = "u8" }
+order = 0
+
+[[patch]]
+feature = "wolfang_ice_spike_damage"
+target = "disc_user"
+offset = 433893768
+expected = "06"
+replace_from = { option = "damage", encoding = "u8" }
+order = 0
+
+[[patch]]
+feature = "reploid_small_orb_value"
+target = "main_exe"
+address = 2147754680
+expected = "04000224"
+replace_from = { option = "souls", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "virus_small_orb_value"
+target = "main_exe"
+address = 2147755000
+expected = "04000224"
+replace_from = { option = "souls", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "virus_big_orb_value"
+target = "main_exe"
+address = 2147754716
+expected = "08000224"
+replace_from = { option = "souls", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "main_boss_red_orb_value"
+target = "main_exe"
+address = 2147747572
+expected = "64000224"
+replace_from = { option = "souls", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "main_boss_green_orb_value"
+target = "main_exe"
+address = 2147747560
+expected = "C8000224"
+replace_from = { option = "souls", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "dynamo_green_orb_value"
+target = "main_exe"
+address = 2147754704
+expected = "C8000224"
+replace_from = { option = "souls", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "normal_ground_dash_duration"
+target = "main_exe"
+address = 2147723944
+expected = "1E000224"
+replace_from = { option = "frames", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "hyper_ground_dash_duration"
+target = "main_exe"
+address = 2147723940
+expected = "0F000224"
+replace_from = { option = "frames", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "normal_air_dash_duration"
+target = "main_exe"
+address = 2147726036
+expected = "12000224"
+replace_from = { option = "frames", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "hyper_air_dash_duration"
+target = "main_exe"
+address = 2147726040
+expected = "0A000224"
+replace_from = { option = "frames", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "new_game_starting_lives"
+target = "main_exe"
+address = 2147606676
+expected = "02000224"
+replace_from = { option = "lives", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "normal_starting_lives"
+target = "main_exe"
+address = 2147613172
+expected = "02000224"
+replace_from = { option = "lives", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "normal_starting_lives"
+target = "main_exe"
+address = 2147610904
+expected = "02000224"
+replace_from = { option = "lives", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "normal_starting_lives"
+target = "disc_user"
+offset = 433342272
+expected = "0200"
+replace_from = { option = "lives", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "ex_tank_starting_lives"
+target = "main_exe"
+address = 2147613168
+expected = "04000224"
+replace_from = { option = "lives", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "ex_tank_starting_lives"
+target = "main_exe"
+address = 2147610900
+expected = "04000224"
+replace_from = { option = "lives", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "ex_tank_starting_lives"
+target = "disc_user"
+offset = 433342276
+expected = "0400"
+replace_from = { option = "lives", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "higher_ceiling_jump"
+target = "main_exe"
+address = 2147706268
+expected = "90004228"
+replace_from = { option = "height", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "rank_soul_thresholds"
+target = "main_exe"
+address = 2147931696
+expected = "C800"
+replace_from = { option = "rank_c", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "rank_soul_thresholds"
+target = "main_exe"
+address = 2147931694
+expected = "2C01"
+replace_from = { option = "rank_b", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "rank_soul_thresholds"
+target = "main_exe"
+address = 2147931692
+expected = "F401"
+replace_from = { option = "rank_a", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "rank_soul_thresholds"
+target = "main_exe"
+address = 2147931690
+expected = "2003"
+replace_from = { option = "rank_sa", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "rank_soul_thresholds"
+target = "main_exe"
+address = 2147931688
+expected = "B004"
+replace_from = { option = "rank_ga", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "rank_soul_thresholds"
+target = "main_exe"
+address = 2147931686
+expected = "8813"
+replace_from = { option = "rank_pa", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "rank_soul_thresholds"
+target = "main_exe"
+address = 2147931684
+expected = "0F27"
+replace_from = { option = "rank_uh", encoding = "u16le" }
+order = 0
+
+[[patch]]
+feature = "normal_initial_dash_speed"
+target = "main_exe"
+address = 2147728696
+expected = "0600083C00800835"
+replace_from = { option = "normal_speed", encoding = "mips_lui_ori_u32", omit_when_default = true }
+order = 0
+
+[[patch]]
+feature = "normal_initial_dash_speed"
+target = "main_exe"
+address = 2147728704
+expected = "04000A3C00204A35"
+replace_from = { option = "normal_speed", encoding = "mips_lui_ori_u32", omit_when_default = true }
+order = 0
+
+[[patch]]
+feature = "hyper_dash_initial_speed_bonus"
+target = "main_exe"
+address = 2147735180
+expected = "0100033C00A06334"
+replace_from = { option = "hyper_bonus", encoding = "mips_lui_ori_u32", omit_when_default = true }
+order = 0

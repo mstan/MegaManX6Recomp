@@ -1,0 +1,132 @@
+format_version = 1
+id = "mmx6.tweaks.mach-dash"
+version = "1.1.0"
+name = "Mega Man X6 Blade Mach Dash"
+author = "acediez"
+description = "One coherent Blade Mach Dash behavior with internally composed controls."
+license = "Generated locally; original credits retained"
+resolver = "builtin:mmx6-mach-dash"
+save_compatibility = "shared"
+source_name = "Mega Man X6 Tweaks"
+source_url = "https://www.romhacking.net/hacks/4035/"
+
+[[author_link]]
+name = "acediez"
+url = "https://twitter.com/acediez"
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+[[feature]]
+id = "blade_mach_dash_behavior"
+name = "Blade Mach Dash Behavior"
+description = "Configure the coupled input, stop, cancellation, duration, speed, and immunity state machine."
+group = "Player Mechanics / Blade Armor"
+default_enabled = false
+
+[[option]]
+feature = "blade_mach_dash_behavior"
+id = "input"
+label = "Input"
+description = "Radio alternatives from MMX6 Tweaks v2.6.1."
+group = "Blade Mach Dash"
+type = "choice"
+default = "normal"
+
+[[option.choice]]
+value = "normal"
+label = "Normal"
+
+[[option.choice]]
+value = "disabled"
+label = "Disabled"
+
+[[option.choice]]
+value = "hybrid"
+label = "Hybrid"
+
+[[option]]
+feature = "blade_mach_dash_behavior"
+id = "wait"
+label = "Stop behavior"
+description = "Radio alternatives from MMX6 Tweaks v2.6.1."
+group = "Blade Mach Dash"
+type = "choice"
+default = "normal"
+
+[[option.choice]]
+value = "normal"
+label = "Normal"
+
+[[option.choice]]
+value = "unlimited"
+label = "Unlimited"
+
+[[option.choice]]
+value = "minimum"
+label = "Minimum"
+
+[[option.choice]]
+value = "no_stop"
+label = "No Stop"
+
+[[option]]
+feature = "blade_mach_dash_behavior"
+id = "cancel"
+label = "Cancellation"
+description = "Radio alternatives from MMX6 Tweaks v2.6.1."
+group = "Blade Mach Dash"
+type = "choice"
+default = "no_cancel"
+
+[[option.choice]]
+value = "no_cancel"
+label = "No Cancel"
+
+[[option.choice]]
+value = "press_back"
+label = "Press / Back"
+
+[[option.choice]]
+value = "hold_release"
+label = "Hold / Release"
+
+[[option.choice]]
+value = "infinite"
+label = "Infinite"
+
+[[option]]
+feature = "blade_mach_dash_behavior"
+id = "duration"
+label = "Duration"
+description = "Bounded source value while Mach Dash is enabled."
+group = "Blade Mach Dash"
+type = "integer"
+min = 10
+max = 50
+step = 1
+default = 15
+
+[[option]]
+feature = "blade_mach_dash_behavior"
+id = "speed"
+label = "Speed"
+description = "Bounded source value while Mach Dash is enabled."
+group = "Blade Mach Dash"
+type = "integer"
+min = 200000
+max = 600000
+step = 1
+default = 540672
+
+[[option]]
+feature = "blade_mach_dash_behavior"
+id = "immunity"
+label = "Immunity"
+description = "Bounded source value while Mach Dash is enabled."
+group = "Blade Mach Dash"
+type = "integer"
+min = 4
+max = 50
+step = 1
+default = 9

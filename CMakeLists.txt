@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 project(MegaManX6Recomp C CXX)
+include(CTest)
 
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD 17)
@@ -39,16 +40,23 @@ set(GAME_GENERATED_DISPATCH
 file(GLOB MMX6_MOD_PLUGIN_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/*.c")
 
+# Game-owned trusted mod resolvers live in independent source files so feature
+# domains can be developed and reviewed without editing one central registry.
+file(GLOB GAME_MOD_RESOLVER_SOURCES CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/*.cpp")
+
 psxrecomp_v4_add_runtime_target(psx-runtime
     GAME_GENERATED_FULL_C "${GAME_GENERATED_FULL}"
     GAME_GENERATED_DISPATCH_C "${GAME_GENERATED_DISPATCH}"
     DEBUG_PORT 4490
     WINDOW_TITLE "MegaManX6Recomp"
-    DEFAULT_BIOS_PATH "${PSXRECOMP_V4_ROOT}/bios/SCPH1001.BIN"
     DEFAULT_GAME_CONFIG_PATH "game.toml"
     EXE_NAME "mmx6-runtime"
     LAUNCHER_BOXART "${CMAKE_SOURCE_DIR}/recomp/launcher/boxart.tga"
-    EXTRAS_SOURCES ${GAME_GENERATED_EXTRAS} ${MMX6_MOD_PLUGIN_SOURCES}
+    EXTRAS_SOURCES
+        ${GAME_GENERATED_EXTRAS}
+        ${MMX6_MOD_PLUGIN_SOURCES}
+        ${GAME_MOD_RESOLVER_SOURCES}
 )
 
 # Ship the game-owned mod catalog beside the executable. Every feature stays
@@ -72,9 +80,103 @@ if(PSX_BUILD_COSIM)
         GAME_GENERATED_FULL_C "${GAME_GENERATED_FULL}"
         GAME_GENERATED_DISPATCH_C "${GAME_GENERATED_DISPATCH}"
         WINDOW_TITLE "MMX6-cosim"
-        DEFAULT_BIOS_PATH "${PSXRECOMP_V4_ROOT}/bios/SCPH1001.BIN"
         DEFAULT_GAME_CONFIG_PATH "game.toml"
-        EXTRAS_SOURCES ${GAME_GENERATED_EXTRAS}
+        EXTRAS_SOURCES ${GAME_GENERATED_EXTRAS} ${GAME_MOD_RESOLVER_SOURCES}
         COSIM
+    )
+endif()
+
+# Per-game launcher art override. The framework copies its shared launcher assets
+# (img/disc.png etc. — the default is Tomba's disc) next to the exe; this copies
+# this repo's launcher_art/ on top AFTERWARD so the launcher shows MMX6's disc.
+# POST_BUILD commands run in add order, and the framework's copy is added inside
+# psxrecomp_v4_add_runtime_target above, so this override wins. Drop official art
+# into launcher_art/img/ to replace the generated placeholder.
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/launcher_art")
+    add_custom_command(TARGET psx-runtime POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+            "${CMAKE_CURRENT_SOURCE_DIR}/launcher_art"
+            "$<TARGET_FILE_DIR:psx-runtime>"
+        COMMENT "Overriding launcher art with MegaManX6Recomp/launcher_art")
+endif()
+
+if(BUILD_TESTING)
+    add_executable(mmx6_tweaks_hooks_test
+        tests/test_mmx6_tweaks_hooks.cpp
+        src/mods/mmx6_tweaks_hooks_resolver.cpp
+        psxrecomp-v4/runtime/src/mod_packages.cpp
+        psxrecomp-v4/runtime/src/crc32.c
+        psxrecomp-v4/runtime/src/psx_sha256.c
+    )
+    target_include_directories(mmx6_tweaks_hooks_test PRIVATE
+        src/mods
+        psxrecomp-v4/runtime/include
+        psxrecomp-v4/recompiler/lib/toml11
+    )
+    add_test(
+        NAME mmx6_tweaks_hooks_test
+        COMMAND "./$<TARGET_FILE_NAME:mmx6_tweaks_hooks_test>"
+    )
+    set_tests_properties(
+        mmx6_tweaks_hooks_test
+        PROPERTIES WORKING_DIRECTORY "$<TARGET_FILE_DIR:mmx6_tweaks_hooks_test>"
+    )
+
+    add_executable(mmx6_preloaded_mods_test
+        tests/test_preloaded_mods.cpp
+        ${GAME_MOD_RESOLVER_SOURCES}
+        psxrecomp-v4/runtime/src/mod_packages.cpp
+        psxrecomp-v4/runtime/src/crc32.c
+        psxrecomp-v4/runtime/src/psx_sha256.c
+    )
+    target_include_directories(mmx6_preloaded_mods_test PRIVATE
+        src/mods
+        psxrecomp-v4/runtime/include
+        psxrecomp-v4/recompiler/lib/toml11
+    )
+    add_test(
+        NAME mmx6_preloaded_mods_test
+        COMMAND "$<TARGET_FILE:mmx6_preloaded_mods_test>"
+                "${MMX6_PRELOADED_MODS}"
+    )
+
+    find_package(Python3 REQUIRED COMPONENTS Interpreter)
+    set(MMX6_TIMING_PACKAGE_DIR
+        "${MMX6_PRELOADED_MODS}/packages/mmx6.tweaks.timing/1.1.0")
+    set(MMX6_TIMING_TEST_ARCHIVE
+        "${CMAKE_CURRENT_BINARY_DIR}/test-packages/MMX6-Tweaks-Timing.psxmod")
+    file(GLOB_RECURSE MMX6_TIMING_PACKAGE_FILES CONFIGURE_DEPENDS
+        "${MMX6_TIMING_PACKAGE_DIR}/*")
+    add_custom_command(
+        OUTPUT "${MMX6_TIMING_TEST_ARCHIVE}"
+        COMMAND "${Python3_EXECUTABLE}"
+                "${PSXRECOMP_V4_ROOT}/tools/psxmod_pack.py"
+                "${MMX6_TIMING_PACKAGE_DIR}"
+                "${MMX6_TIMING_TEST_ARCHIVE}"
+        DEPENDS
+            ${MMX6_TIMING_PACKAGE_FILES}
+            "${PSXRECOMP_V4_ROOT}/tools/psxmod_pack.py"
+        COMMENT "Packing the preloaded MMX6 timing test package"
+        VERBATIM
+    )
+    add_custom_target(mmx6_timing_test_package
+        DEPENDS "${MMX6_TIMING_TEST_ARCHIVE}")
+
+    add_executable(mmx6_tweaks_timing_runtime_test
+        tools/test_tweaks_timing_runtime.cpp
+        psxrecomp-v4/runtime/src/mod_packages.cpp
+        psxrecomp-v4/runtime/src/crc32.c
+        psxrecomp-v4/runtime/src/psx_sha256.c
+    )
+    add_dependencies(mmx6_tweaks_timing_runtime_test
+        mmx6_timing_test_package)
+    target_include_directories(mmx6_tweaks_timing_runtime_test PRIVATE
+        psxrecomp-v4/runtime/include
+        psxrecomp-v4/recompiler/lib/toml11
+    )
+    add_test(
+        NAME mmx6_tweaks_timing_runtime_test
+        COMMAND "$<TARGET_FILE:mmx6_tweaks_timing_runtime_test>"
+                "${MMX6_TIMING_TEST_ARCHIVE}"
     )
 endif()

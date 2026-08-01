@@ -1,0 +1,187 @@
+format_version = 3
+id = "mmx6.tweaks.stage-modes"
+version = "1.0.0"
+name = "Mega Man X6 Stage Modes"
+author = "acediez"
+description = "Independent exact stock-disc MMX6 Tweaks features."
+license = "Generated locally; original credits retained"
+resolver = "declarative"
+save_compatibility = "shared"
+source_name = "Mega Man X6 Tweaks"
+source_url = "https://www.romhacking.net/hacks/4035/"
+
+[[author_link]]
+name = "acediez"
+url = "https://twitter.com/acediez"
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+[[feature]]
+id = "falling_ceiling_behavior"
+name = "Falling Ceiling Behavior"
+description = "Choose crouching behavior under the Recycle Lab falling ceiling."
+group = "Recycle Lab"
+default_enabled = false
+
+[[option]]
+feature = "falling_ceiling_behavior"
+id = "mode"
+label = "Behavior"
+description = "Choose crouching behavior under the Recycle Lab falling ceiling."
+group = "Recycle Lab"
+type = "choice"
+default = "automatic"
+
+[[option.choice]]
+value = "automatic"
+label = "Automatic Crouching"
+
+[[option.choice]]
+value = "manual"
+label = "Hold Manual Crouch"
+
+[[option.choice]]
+value = "disable_ceiling"
+label = "Disable Ceiling Movement"
+
+[[feature]]
+id = "move_recycle_lab_hidden_teleport"
+name = "Move Hidden Area Teleport"
+description = "Move the Recycle Lab hidden-area teleport to the left side of the long jump."
+group = "Recycle Lab"
+default_enabled = false
+
+[[patch]]
+feature = "falling_ceiling_behavior"
+target = "main_exe"
+address = 2147704788
+expected = "7C0022960000000008004230"
+replace = "D10123926EEA01087C002296"
+order = 0
+when = { mode = "automatic" }
+
+[[patch]]
+feature = "falling_ceiling_behavior"
+target = "main_exe"
+address = 2147717836
+expected = "8900039200000000"
+replace = "60EA0108D1010392"
+order = 0
+when = { mode = "automatic" }
+
+[[patch]]
+feature = "falling_ceiling_behavior"
+target = "main_exe"
+address = 2147717960
+expected = "0D80033CD0CE6324"
+replace = "40EA01080D80033C"
+order = 0
+when = { mode = "automatic" }
+
+[[patch]]
+feature = "falling_ceiling_behavior"
+target = "main_exe"
+address = 2147732824
+expected = "A07031266C450496"
+replace = "74EA0108A0703126"
+order = 0
+when = { mode = "automatic" }
+
+[[patch]]
+feature = "falling_ceiling_behavior"
+target = "main_exe"
+address = 2147985664
+expected = "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+replace = "04000234DCCE4492D1010692020082100E0042240600821405001B921A001C340500C0100000000003007C1700000000D4E40008D0CE6324670000A28C0000A28E0000A26BEE000C00000436EEFF9C277C001CA689001CA2F9FF9C2706001CA2D1011CA2BA011B96FEE40008D2011BA6"
+order = 0
+when = { mode = "automatic" }
+
+[[patch]]
+feature = "falling_ceiling_behavior"
+target = "main_exe"
+address = 2147985792
+expected = "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+replace = "BA01059608006010D2010396000000002328A3000600A5280300A01400000000D10100A2D20100A60300053489000392B5E400080C0006340300601400000000F8D700080800423012D80008FFFF033CD101239200000000030060100000000063F300080000000058F300086C450496"
+order = 0
+when = { mode = "automatic" }
+
+[[patch]]
+feature = "falling_ceiling_behavior"
+target = "main_exe"
+address = 2147704788
+expected = "7C0022960000000008004230"
+replace = "D10123926EEA01087C002296"
+order = 0
+when = { mode = "manual" }
+
+[[patch]]
+feature = "falling_ceiling_behavior"
+target = "main_exe"
+address = 2147717836
+expected = "8900039200000000"
+replace = "60EA0108D1010392"
+order = 0
+when = { mode = "manual" }
+
+[[patch]]
+feature = "falling_ceiling_behavior"
+target = "main_exe"
+address = 2147717960
+expected = "0D80033CD0CE6324"
+replace = "40EA01080D80033C"
+order = 0
+when = { mode = "manual" }
+
+[[patch]]
+feature = "falling_ceiling_behavior"
+target = "main_exe"
+address = 2147732824
+expected = "A07031266C450496"
+replace = "74EA0108A0703126"
+order = 0
+when = { mode = "manual" }
+
+[[patch]]
+feature = "falling_ceiling_behavior"
+target = "main_exe"
+address = 2147985664
+expected = "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+replace = "04000234DCCE4492D1010692020082100E0042240600821405001B921A001C34000000000000000003007C1300000000D4E40008D0CE6324670000A28C0000A28E0000A26BEE000C00000436EEFF9C277C001CA689001CA2F9FF9C2706001CA2D1011CA2BA011B96FEE40008D2011BA6"
+order = 0
+when = { mode = "manual" }
+
+[[patch]]
+feature = "falling_ceiling_behavior"
+target = "main_exe"
+address = 2147985792
+expected = "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+replace = "BA01059608006010D2010396000000002328A3000600A5280300A01400000000D10100A2D20100A60300053489000392B5E400080C0006340300601400000000F8D700080800423012D80008FFFF033CD101239200000000030060100000000063F300080000000058F300086C450496"
+order = 0
+when = { mode = "manual" }
+
+[[patch]]
+feature = "falling_ceiling_behavior"
+target = "main_exe"
+address = 2147775708
+expected = "1400029600000000FFFF4224140002A6"
+replace = "140002961A00049638D9010C01000334"
+order = 0
+when = { mode = "disable_ceiling" }
+
+[[patch]]
+feature = "falling_ceiling_behavior"
+target = "main_exe"
+address = 2147968224
+expected = "0000000000000000000000000000000000000000"
+replace = "02006410FFFF4224140002A60800E00300000000"
+order = 0
+when = { mode = "disable_ceiling" }
+
+[[patch]]
+feature = "move_recycle_lab_hidden_teleport"
+target = "disc_user"
+offset = 432857772
+expected = "001C010010063006"
+replace = "001C011050023006"
+order = 0

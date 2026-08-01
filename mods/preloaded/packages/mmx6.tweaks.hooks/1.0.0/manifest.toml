@@ -1,0 +1,46 @@
+format_version = 3
+id = "mmx6.tweaks.hooks"
+version = "1.0.0"
+name = "Mega Man X6 Voice Hooks"
+author = "acediez"
+description = "Independent stock-disc voice restoration hooks."
+license = "Generated locally; original credits retained"
+resolver = "builtin:mmx6.tweaks.hooks"
+save_compatibility = "shared"
+source_name = "Mega Man X6 Tweaks"
+source_url = "https://www.romhacking.net/hacks/4035/"
+
+[[author_link]]
+name = "acediez"
+url = "https://twitter.com/acediez"
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+[[feature]]
+id = "voice_title"
+name = "Title Screen Voice (\"Rockman X6\")"
+description = "Play the \"Rockman X6\" voice clip on the title screen."
+group = "Audio"
+default_enabled = false
+
+[[feature]]
+id = "voice_boss_intros"
+name = "Boss Intro Voices"
+description = "Restore voice clips during boss introductions."
+group = "Audio"
+default_enabled = false
+
+[[feature]]
+id = "voice_low_health"
+name = "Low Health Voices"
+description = "Restore the X and Zero low-health voice clips."
+group = "Audio"
+default_enabled = false
+
+[[feature]]
+id = "voice_boss_warning"
+name = "Boss Warning Voice"
+description = "Restore the voice clip on the boss warning screen."
+group = "Audio"
+default_enabled = false

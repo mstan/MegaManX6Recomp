@@ -1,0 +1,984 @@
+format_version = 4
+id = "mmx6.tweaks.timing"
+version = "1.1.0"
+name = "Mega Man X6 Timing and Status Tweaks"
+author = "acediez"
+description = "Independent bounded timing and status controls converted from MMX6 Tweaks."
+license = "Generated locally; original credits retained"
+resolver = "declarative"
+save_compatibility = "shared"
+source_name = "Mega Man X6 Tweaks"
+source_url = "https://www.romhacking.net/hacks/4035/"
+
+[[author_link]]
+name = "acediez"
+url = "https://twitter.com/acediez"
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+[[feature]]
+id = "x_saber_timing"
+name = "X Saber Timing"
+description = "Set the seven positive timing values for X's normal Saber animation."
+group = "Animation Timing"
+default_enabled = false
+
+[[option]]
+feature = "x_saber_timing"
+id = "timing_1"
+label = "Timing 1"
+description = "Set the seven positive timing values for X's normal Saber animation."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 3
+
+[[option]]
+feature = "x_saber_timing"
+id = "timing_2"
+label = "Timing 2"
+description = "Set the seven positive timing values for X's normal Saber animation."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 2
+
+[[option]]
+feature = "x_saber_timing"
+id = "timing_3"
+label = "Timing 3"
+description = "Set the seven positive timing values for X's normal Saber animation."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 2
+
+[[option]]
+feature = "x_saber_timing"
+id = "timing_4"
+label = "Timing 4"
+description = "Set the seven positive timing values for X's normal Saber animation."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 3
+
+[[option]]
+feature = "x_saber_timing"
+id = "timing_5"
+label = "Timing 5"
+description = "Set the seven positive timing values for X's normal Saber animation."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 22
+
+[[option]]
+feature = "x_saber_timing"
+id = "timing_6"
+label = "Timing 6"
+description = "Set the seven positive timing values for X's normal Saber animation."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 4
+
+[[option]]
+feature = "x_saber_timing"
+id = "timing_7"
+label = "Timing 7"
+description = "Set the seven positive timing values for X's normal Saber animation."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 4
+
+[[feature]]
+id = "shadow_saber_timing"
+name = "Shadow Saber Timing"
+description = "Set the seven positive timing values for X's Shadow Armor Saber."
+group = "Animation Timing"
+default_enabled = false
+
+[[option]]
+feature = "shadow_saber_timing"
+id = "timing_1"
+label = "Timing 1"
+description = "Set the seven positive timing values for X's Shadow Armor Saber."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 2
+
+[[option]]
+feature = "shadow_saber_timing"
+id = "timing_2"
+label = "Timing 2"
+description = "Set the seven positive timing values for X's Shadow Armor Saber."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 1
+
+[[option]]
+feature = "shadow_saber_timing"
+id = "timing_3"
+label = "Timing 3"
+description = "Set the seven positive timing values for X's Shadow Armor Saber."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 1
+
+[[option]]
+feature = "shadow_saber_timing"
+id = "timing_4"
+label = "Timing 4"
+description = "Set the seven positive timing values for X's Shadow Armor Saber."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 2
+
+[[option]]
+feature = "shadow_saber_timing"
+id = "timing_5"
+label = "Timing 5"
+description = "Set the seven positive timing values for X's Shadow Armor Saber."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 19
+
+[[option]]
+feature = "shadow_saber_timing"
+id = "timing_6"
+label = "Timing 6"
+description = "Set the seven positive timing values for X's Shadow Armor Saber."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 4
+
+[[option]]
+feature = "shadow_saber_timing"
+id = "timing_7"
+label = "Timing 7"
+description = "Set the seven positive timing values for X's Shadow Armor Saber."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 4
+
+[[feature]]
+id = "zero_saber_cooldown_timing"
+name = "Zero Saber Cooldown Timing"
+description = "Set the seven positive cooldown values after Zero's ground Saber combo."
+group = "Animation Timing"
+default_enabled = false
+
+[[option]]
+feature = "zero_saber_cooldown_timing"
+id = "timing_1"
+label = "Timing 1"
+description = "Set the seven positive cooldown values after Zero's ground Saber combo."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 12
+
+[[option]]
+feature = "zero_saber_cooldown_timing"
+id = "timing_2"
+label = "Timing 2"
+description = "Set the seven positive cooldown values after Zero's ground Saber combo."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 4
+
+[[option]]
+feature = "zero_saber_cooldown_timing"
+id = "timing_3"
+label = "Timing 3"
+description = "Set the seven positive cooldown values after Zero's ground Saber combo."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 4
+
+[[option]]
+feature = "zero_saber_cooldown_timing"
+id = "timing_4"
+label = "Timing 4"
+description = "Set the seven positive cooldown values after Zero's ground Saber combo."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 4
+
+[[option]]
+feature = "zero_saber_cooldown_timing"
+id = "timing_5"
+label = "Timing 5"
+description = "Set the seven positive cooldown values after Zero's ground Saber combo."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 10
+
+[[option]]
+feature = "zero_saber_cooldown_timing"
+id = "timing_6"
+label = "Timing 6"
+description = "Set the seven positive cooldown values after Zero's ground Saber combo."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 6
+
+[[option]]
+feature = "zero_saber_cooldown_timing"
+id = "timing_7"
+label = "Timing 7"
+description = "Set the seven positive cooldown values after Zero's ground Saber combo."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 4
+
+[[feature]]
+id = "zero_z_buster_timing"
+name = "Zero Z-Buster Timing"
+description = "Set the seven positive timing values for Zero's Z-Buster animation."
+group = "Animation Timing"
+default_enabled = false
+
+[[option]]
+feature = "zero_z_buster_timing"
+id = "timing_1"
+label = "Timing 1"
+description = "Set the seven positive timing values for Zero's Z-Buster animation."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 1
+
+[[option]]
+feature = "zero_z_buster_timing"
+id = "timing_2"
+label = "Timing 2"
+description = "Set the seven positive timing values for Zero's Z-Buster animation."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 2
+
+[[option]]
+feature = "zero_z_buster_timing"
+id = "timing_3"
+label = "Timing 3"
+description = "Set the seven positive timing values for Zero's Z-Buster animation."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 2
+
+[[option]]
+feature = "zero_z_buster_timing"
+id = "timing_4"
+label = "Timing 4"
+description = "Set the seven positive timing values for Zero's Z-Buster animation."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 4
+
+[[option]]
+feature = "zero_z_buster_timing"
+id = "timing_5"
+label = "Timing 5"
+description = "Set the seven positive timing values for Zero's Z-Buster animation."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 6
+
+[[option]]
+feature = "zero_z_buster_timing"
+id = "timing_6"
+label = "Timing 6"
+description = "Set the seven positive timing values for Zero's Z-Buster animation."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 6
+
+[[option]]
+feature = "zero_z_buster_timing"
+id = "timing_7"
+label = "Timing 7"
+description = "Set the seven positive timing values for Zero's Z-Buster animation."
+group = "Animation Timing"
+type = "integer"
+min = 1
+max = 99
+step = 1
+default = 4
+
+[[feature]]
+id = "maximum_lives"
+name = "Maximum Lives"
+description = "Set the exact lives cap. Values above 9 also hide the pause-menu counter, matching Tweaks."
+group = "Lives"
+default_enabled = false
+
+[[option]]
+feature = "maximum_lives"
+id = "maximum"
+label = "Maximum"
+description = "Set the exact lives cap. Values above 9 also hide the pause-menu counter, matching Tweaks."
+group = "Lives"
+type = "integer"
+min = 0
+max = 99
+step = 1
+default = 9
+
+[[feature]]
+id = "nightmare_dark_opacity"
+name = "Nightmare Dark Opacity"
+description = "Set the exact 1-64 opacity/intensity value used by Nightmare Dark."
+group = "Nightmare Effects"
+default_enabled = false
+
+[[option]]
+feature = "nightmare_dark_opacity"
+id = "opacity"
+label = "Opacity"
+description = "Set the exact 1-64 opacity/intensity value used by Nightmare Dark."
+group = "Nightmare Effects"
+type = "integer"
+min = 1
+max = 64
+step = 1
+default = 64
+
+[[patch]]
+feature = "x_saber_timing"
+target = "disc_user"
+offset = 432554268
+expected = "0300012F"
+fields = [
+  { offset = 0, option = "timing_1", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "x_saber_timing"
+target = "disc_user"
+offset = 432554272
+expected = "02800130"
+fields = [
+  { offset = 0, option = "timing_2", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "x_saber_timing"
+target = "main_exe"
+address = 2147972664
+expected = "02000100"
+fields = [
+  { offset = 0, option = "timing_2", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "x_saber_timing"
+target = "disc_user"
+offset = 432554276
+expected = "02000131"
+fields = [
+  { offset = 0, option = "timing_3", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "x_saber_timing"
+target = "main_exe"
+address = 2147972668
+expected = "02010101"
+fields = [
+  { offset = 0, option = "timing_3", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "x_saber_timing"
+target = "disc_user"
+offset = 432554280
+expected = "03420132"
+fields = [
+  { offset = 0, option = "timing_4", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "x_saber_timing"
+target = "main_exe"
+address = 2147972672
+expected = "03420102"
+fields = [
+  { offset = 0, option = "timing_4", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "x_saber_timing"
+target = "disc_user"
+offset = 432554284
+expected = "16400133"
+fields = [
+  { offset = 0, option = "timing_5", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "x_saber_timing"
+target = "disc_user"
+offset = 432554288
+expected = "04400134"
+fields = [
+  { offset = 0, option = "timing_6", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "x_saber_timing"
+target = "disc_user"
+offset = 432554292
+expected = "04400135"
+fields = [
+  { offset = 0, option = "timing_7", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "shadow_saber_timing"
+target = "disc_user"
+offset = 432554300
+expected = "0200012F"
+fields = [
+  { offset = 0, option = "timing_1", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "shadow_saber_timing"
+target = "disc_user"
+offset = 432554304
+expected = "01800130"
+fields = [
+  { offset = 0, option = "timing_2", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "shadow_saber_timing"
+target = "main_exe"
+address = 2147972712
+expected = "01000100"
+fields = [
+  { offset = 0, option = "timing_2", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "shadow_saber_timing"
+target = "disc_user"
+offset = 432554308
+expected = "01000131"
+fields = [
+  { offset = 0, option = "timing_3", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "shadow_saber_timing"
+target = "main_exe"
+address = 2147972716
+expected = "01010101"
+fields = [
+  { offset = 0, option = "timing_3", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "shadow_saber_timing"
+target = "disc_user"
+offset = 432554312
+expected = "02020132"
+fields = [
+  { offset = 0, option = "timing_4", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "shadow_saber_timing"
+target = "main_exe"
+address = 2147972720
+expected = "02020102"
+fields = [
+  { offset = 0, option = "timing_4", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "shadow_saber_timing"
+target = "disc_user"
+offset = 432554316
+expected = "13010133"
+fields = [
+  { offset = 0, option = "timing_5", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "shadow_saber_timing"
+target = "disc_user"
+offset = 432554320
+expected = "04000134"
+fields = [
+  { offset = 0, option = "timing_6", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "shadow_saber_timing"
+target = "disc_user"
+offset = 432554324
+expected = "04000135"
+fields = [
+  { offset = 0, option = "timing_7", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576536
+expected = "0C000167"
+fields = [
+  { offset = 0, option = "timing_1", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576540
+expected = "04000178"
+fields = [
+  { offset = 0, option = "timing_2", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576484
+expected = "04300178"
+fields = [
+  { offset = 0, option = "timing_2", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576424
+expected = "04300178"
+fields = [
+  { offset = 0, option = "timing_2", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576544
+expected = "0400017A"
+fields = [
+  { offset = 0, option = "timing_3", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576488
+expected = "0430017A"
+fields = [
+  { offset = 0, option = "timing_3", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576428
+expected = "0430017A"
+fields = [
+  { offset = 0, option = "timing_3", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576548
+expected = "0440017C"
+fields = [
+  { offset = 0, option = "timing_4", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576492
+expected = "0440017C"
+fields = [
+  { offset = 0, option = "timing_4", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576432
+expected = "0440017C"
+fields = [
+  { offset = 0, option = "timing_4", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576552
+expected = "0A40017D"
+fields = [
+  { offset = 0, option = "timing_5", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576496
+expected = "0A40017D"
+fields = [
+  { offset = 0, option = "timing_5", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576436
+expected = "0A40017D"
+fields = [
+  { offset = 0, option = "timing_5", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576556
+expected = "0640017E"
+fields = [
+  { offset = 0, option = "timing_6", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576500
+expected = "0640017E"
+fields = [
+  { offset = 0, option = "timing_6", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576440
+expected = "0640017E"
+fields = [
+  { offset = 0, option = "timing_6", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576560
+expected = "0440017F"
+fields = [
+  { offset = 0, option = "timing_7", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576504
+expected = "0440017F"
+fields = [
+  { offset = 0, option = "timing_7", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_saber_cooldown_timing"
+target = "disc_user"
+offset = 432576444
+expected = "0440017F"
+fields = [
+  { offset = 0, option = "timing_7", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_z_buster_timing"
+target = "disc_user"
+offset = 432578048
+expected = "01000142"
+fields = [
+  { offset = 0, option = "timing_1", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_z_buster_timing"
+target = "disc_user"
+offset = 432578052
+expected = "02000143"
+fields = [
+  { offset = 0, option = "timing_2", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_z_buster_timing"
+target = "disc_user"
+offset = 432578056
+expected = "02800144"
+fields = [
+  { offset = 0, option = "timing_3", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_z_buster_timing"
+target = "disc_user"
+offset = 432578060
+expected = "04000145"
+fields = [
+  { offset = 0, option = "timing_4", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_z_buster_timing"
+target = "disc_user"
+offset = 432578064
+expected = "06000146"
+fields = [
+  { offset = 0, option = "timing_5", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_z_buster_timing"
+target = "disc_user"
+offset = 432578068
+expected = "06000147"
+fields = [
+  { offset = 0, option = "timing_6", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "zero_z_buster_timing"
+target = "disc_user"
+offset = 432578072
+expected = "04000148"
+fields = [
+  { offset = 0, option = "timing_7", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "maximum_lives"
+target = "main_exe"
+address = 2147804336
+expected = "09000224"
+fields = [
+  { offset = 0, option = "maximum", encoding = "u16le" },
+]
+order = 0
+
+[[patch]]
+feature = "maximum_lives"
+target = "main_exe"
+address = 2147807096
+expected = "09000224"
+fields = [
+  { offset = 0, option = "maximum", encoding = "u16le" },
+]
+order = 0
+
+[[patch]]
+feature = "maximum_lives"
+target = "main_exe"
+address = 2147804324
+expected = "0A004228"
+fields = [
+  { offset = 0, option = "maximum", encoding = "u16le", addend = 1 },
+]
+order = 0
+
+[[patch]]
+feature = "maximum_lives"
+target = "main_exe"
+address = 2147807084
+expected = "0A004228"
+fields = [
+  { offset = 0, option = "maximum", encoding = "u16le", addend = 1 },
+]
+order = 0
+
+[[patch]]
+feature = "maximum_lives"
+target = "main_exe"
+address = 2147587968
+expected = "CC68000C"
+fields = [
+  { offset = 0, replace = "00000000" },
+]
+order = 0
+when_integer = { option = "maximum", op = "gt", value = 9 }
+
+[[patch]]
+feature = "nightmare_dark_opacity"
+target = "disc_user"
+offset = 432675788
+expected = "40004228020040143F000224"
+fields = [
+  { offset = 0, option = "opacity", encoding = "u8" },
+  { offset = 8, option = "opacity", encoding = "u8", addend = -1 },
+]
+order = 0
+
+[[patch]]
+feature = "nightmare_dark_opacity"
+target = "disc_user"
+offset = 433009916
+expected = "40004228020040143F000224"
+fields = [
+  { offset = 0, option = "opacity", encoding = "u8" },
+  { offset = 8, option = "opacity", encoding = "u8", addend = -1 },
+]
+order = 0
+
+[[patch]]
+feature = "nightmare_dark_opacity"
+target = "disc_user"
+offset = 433676280
+expected = "4000422802004014"
+fields = [
+  { offset = 0, option = "opacity", encoding = "u8" },
+]
+order = 0
+
+[[patch]]
+feature = "nightmare_dark_opacity"
+target = "disc_user"
+offset = 433676288
+expected = "3F000224"
+fields = [
+  { offset = 0, option = "opacity", encoding = "u8", addend = -1 },
+]
+order = 0
+
+[[patch]]
+feature = "nightmare_dark_opacity"
+target = "disc_user"
+offset = 433792408
+expected = "40004228020040143F000224"
+fields = [
+  { offset = 0, option = "opacity", encoding = "u8" },
+  { offset = 8, option = "opacity", encoding = "u8", addend = -1 },
+]
+order = 0
