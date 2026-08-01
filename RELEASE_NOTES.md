@@ -1,92 +1,77 @@
-# Mega Man X6 Recompiled - v0.0.7-alpha
+# MMX v1.0.0
 
-This release focuses on the fullscreen launch path. The launcher now exposes the
-shared tri-state fullscreen picker for MMX6: windowed, borderless windowed
-fullscreen, or exclusive fullscreen.
+MMX v1.0.0 is the largest Mega Man X6 Recompiled update yet, adding a
+full runtime mod catalog based on Mega Man X6 Tweaks alongside substantial
+PSXRecomp framework, launcher, and performance improvements.
 
-## New in v0.0.7-alpha
+## Mega Man X6 Tweaks
 
-- **Borderless windowed fullscreen.** MMX6 now uses the same multi-option
-  fullscreen picker as the shared launcher surface, with borderless windowed and
-  exclusive fullscreen available separately.
-- **CUE startup fallback.** If a selected `.cue` has a same-named `.bin` beside
-  it, the runtime launches with that `.bin` path. This avoids startup failures
-  from CUE files that validate but do not mount cleanly in the runtime path.
+- Added 14 mod package families containing 201 individually configurable
+  features.
+- Tweaks are applied at runtime without modifying your original disc image.
+- Features are opt-in and disabled by default, with dependency and conflict
+  handling built into the mod loader.
+- Mod authors and original sources are linked directly from the launcher.
 
-All existing alpha caveats and game-compatibility notes below still apply.
+acediez has explicitly granted permission to adapt and ship his Mega Man X6
+Tweaks work as part of Mega Man X6 Recompiled. I am grateful for both his work
+and his approval of this adaptation.
 
-# Mega Man X6 Recompiled — v0.0.2-alpha
+## Display enhancements are now mods
 
-A maintenance release on top of the first public build. Mega Man X6 still boots
-from the real PlayStation BIOS and **plays** as a native Windows program with no
-emulator behind it, on the [PSXRecomp](https://github.com/mstan/psxrecomp)
-framework — now with a self-contained overlay toolchain (no developer tools
-required) and broader controller support.
+Experimental widescreen has moved from the generic Display settings into the
+Mods view. Widescreen reconstructs game-specific rendering behavior rather
+than merely stretching the output, so presenting it as a mod better reflects
+what it changes.
 
-## ✨ New in v0.0.2-alpha
+Presentation-only frame interpolation is now handled the same way, with
+selectable output rates while preserving the game's original logic, audio,
+and VBlank timing.
 
-- **Self-contained overlay compilation (no toolchain required).** As you explore
-  new areas, the runtime converts the game's overlay code to native code in the
-  background. Previously that needed a developer toolchain on your PC; this
-  release bundles a fully self-contained one (an embedded Python + TinyCC), so
-  newly visited areas are accelerated on any machine with nothing to install.
-- **Xbox controller fix.** Physical Xbox One / Series pads now work. They were
-  previously claimed by no driver (the runtime forces HIDAPI for Steam virtual
-  controllers, and HIDAPI's Xbox sub-driver is off by default on Windows); the
-  runtime now enables it. PlayStation DualSense pads continue to work.
-- **Software renderer is the default this release.** The OpenGL backend shows
-  intermittent flicker in this build, so the clean software renderer ships as the
-  default. OpenGL is still selectable in the launcher. See **Known issues** below
-  and `ISSUES.md` #7.
+## OpenBIOS is included and selected by default
 
-## ✅ What works (unchanged from v0.0.1)
+OpenBIOS is bundled with this release and is used automatically when no retail
+BIOS is selected. A legally obtained retail PlayStation BIOS remains optional.
+Selecting **Use OpenBIOS** in first-run setup, or clearing a retail BIOS from
+Settings, returns to the default OpenBIOS path.
 
-- **Boots and plays.** PS1 BIOS → disc detect → engine load (`ROCK_X6.DAT`) →
-  opening → stage gameplay, with **no known crashes**.
-- **Memory-card save / load.** Standard PS1 `.mcd` images, emulator-compatible.
-- **Controller input.** MMX6 requires an analog pad before it reads buttons, so
-  the runtime presents a DualShock by default. Keyboard and SDL gamepads both
-  work; per-player override in the launcher.
-- **Fast loading (turbo loads)**, **FMV auto-skip**, **experimental 16:9
-  widescreen** (opt-in), supersampling + anti-aliasing, and the **graphical
-  launcher** for BIOS / disc / memory-card selection and settings.
+## Performance and framework updates
 
-## ⚠️ Known issues
+This release incorporates numerous PSXRecomp improvements since v0.0.7-alpha,
+including:
 
-- **OpenGL flicker (worked around).** The OpenGL renderer shows intermittent
-  black-frame flicker in this build (most visible around Zero). The software
-  renderer is clean and is the default; OpenGL remains selectable if you want to
-  try it. Root-cause is tracked in `ISSUES.md` #7.
-- **Not yet verified end-to-end.** Gameplay works with no known crashes, but a
-  full start-to-finish playthrough hasn't been confirmed — please report where it
-  happened if you hit something deep in a stage or boss.
-- **Widescreen is experimental** and off by default — expect some 2D / HUD / FMV
-  / background rough edges.
+- optimized MDEC/FMV hot paths and batched cycle accounting;
+- faster launcher, game-start, and save-state paths;
+- safer overlay caching and on-demand native overlay compilation;
+- SDL3 as the default host backend;
+- renderer upload and Vulkan batching improvements;
+- improved CD, BIOS, and disc-path handling;
+- corrected PlayStation load-delay behavior and additional audio/CDDA fixes.
 
-## 📝 Setup
+## Not included in this release
 
-- As always, **bring your own** PlayStation BIOS and Mega Man X6 (USA, v1.1,
-  SLUS-01395) disc image — the launcher asks for each. Verify your disc against
-  `DISC.md`.
-- Options live in the launcher's **Settings** and are remembered between
-  launches.
-- The overlay cache grows as you play; please keep `overlay_captures.json`
-  private — it contains game code read from your disc (see README).
+The following work is intentionally withheld:
 
-# Mega Man X6 Recompiled — v0.0.6-alpha
+- **Incomplete Armors by Part**, including its Shadow Saber Palette option. Its
+  adaptation depends on a shared `ArmorByPart_Common` foundation that could not
+  yet be emitted safely; the incomplete conversion caused an unknown dispatch
+  during character spawning.
+- **English retranslation**, pending direct approval from NeoDynamo.
+- **Extra portraits and related palette work**, pending direct approval from
+  MetalWario64.
+- **In-game Tweaks options**, because that package currently depends on the
+  withheld retranslation.
 
-This release replaces the old in-tree launcher with the shared Dear ImGui
-`recomp-ui` launcher. Its DPI-independent layout keeps launcher text, settings,
-and the Launch button readable and reachable on Steam Deck and high-resolution
-or scaled Windows displays, addressing issues #1 and #3.
+The retranslation and portrait adaptations are staged for a future release and
+will be enabled if their respective authors grant approval. None of that
+collaborator-owned content is included in this package.
 
-## Launcher and packaging
+## Setup and compatibility
 
-- Uses the current shared `recomp-ui` PSX profile for BIOS, disc, controller,
-  renderer, memory-card, and game-option configuration.
-- Bundles the matching launcher fonts and game-specific art beside the
-  executable.
-- Keeps the complete settings surface accessible without relying on the old
-  fixed-size legacy document layout.
-
-All existing alpha caveats and game-compatibility notes above still apply.
+- Bring your own legally obtained Mega Man X6 USA v1.1 disc image
+  (`SLUS-01395`).
+- OpenBIOS is included and selected by default; a retail PlayStation BIOS is
+  optional.
+- Existing memory cards remain compatible.
+- End-to-end completion has not yet been recertified on this build, so please
+  report any regressions.

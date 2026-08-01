@@ -172,9 +172,12 @@ renderer = "opengl"
 # video is skipped the instant it starts. On by default for MMX6; toggleable in
 # the launcher (Settings -> "Skip FMVs").
 auto_skip_fmv = true
-# aspect_ratio: "4:3" (native, default) or "16:9" (EXPERIMENTAL widescreen). Also
-# toggleable in the launcher (Settings -> Widescreen), which overrides this.
+# aspect_ratio stays at the authentic 4:3 default. Widescreen and presentation
+# frame interpolation are game-specific enhancements exposed through Mods, not
+# generic display settings. Their trusted activation plugins apply the selected
+# values after the mod plan commits.
 aspect_ratio = "4:3"
+offer_frame_interpolation = false
 
 # ---- Controller ---------------------------------------------------------
 # default_analog: MMX6 will not poll buttons until it detects an analog pad, so
@@ -195,6 +198,8 @@ allow_hybrid = false
 # must match the build the cache was made for.
 [widescreen]
 full_2d = true
+offer = false
+offer_ultrawide = true
 
 [widescreen.bg2d]
 count_site        = "0x800271d4"
@@ -335,10 +340,10 @@ select = back
 @"
 MegaManX6Recomp $Version
 
-Mega Man X6 boots from the PlayStation BIOS and plays - through the opening, into
-stages, with working controller input and memory-card save/load, and no known
-crashes. It has not yet been verified all the way to the end, so treat this first
-release as a very playable preview rather than a certified full playthrough.
+Mega Man X6 boots from the PlayStation BIOS and plays through the opening and
+stages with working controller input and memory-card save/load. End-to-end
+completion has not yet been recertified for this build, so please report any
+regressions you encounter.
 
 This package includes the MIT-licensed OpenBIOS from PCSX-Redux and its notice
 in bios/OpenBIOS.LICENSE. It does not include the Mega Man X6 disc, a retail
@@ -362,8 +367,9 @@ streams its FMV/audio from.
 An optional retail BIOS choice and the selected disc path are saved next to the
 executable. Clear the BIOS row to return to OpenBIOS.
 
-Options such as turbo loads, FMV skip, widescreen, and disc speed can be changed
-in the launcher Settings or in game.toml ([runtime]/[video]) with any text editor.
+Turbo loads, FMV skip, and disc speed can be changed in launcher Settings or in
+game.toml. Widescreen, frame interpolation, and Mega Man X6 Tweaks options live
+in the launcher's Mods view.
 
 The cache folder contains pre-converted native code for game areas covered so
 far; those run at full speed from your first visit. As you play, newly visited
