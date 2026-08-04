@@ -13,6 +13,9 @@ source_url = "https://www.romhacking.net/hacks/4035/"
 [[author_link]]
 name = "acediez"
 url = "https://twitter.com/acediez"
+[[author_link]]
+name = "DuoDynamo"
+url = "https://twitter.com/DuoDynamo"
 [[target]]
 game_id = "SLUS-01395"
 disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
@@ -72,6 +75,14 @@ label = "Rockman (Japan)"
 [[option.choice]]
 value = "mega_man_custom_a"
 label = "Mega Man (Custom A)"
+
+[[feature]]
+id = "retranslation"
+name = "Retranslation"
+author = "acediez, DuoDynamo"
+description = "English retranslation, VFW font, and menu alignment."
+group = "Localization"
+default_enabled = false
 
 [[feature]]
 id = "infinite_lives_no_continues"
@@ -1691,6 +1702,102 @@ order = 0
 when = { variant = "mega_man_custom_a" }
 
 [[patch]]
+feature = "retranslation"
+target = "main_exe"
+address = 2147556184
+expected = "0A00000000000000444D4120535441545553204552524F522025780A00000000000000000000000043646C52656164530000000043646C5365656B500000000043646C5365656B4C0000000043646C47657454440000000043646C476574544E0000000043646C4765746C6F6350000043646C4765746C6F634C00003F00000043646C5365746D6F6465000043646C53657466696C7465720000000043646C44656D75746500000043646C4D7574650043646C52657365740000000043646C506175736500000000"
+replace = "05050505050505060405050605060203060505050505060606060506060602060505050505040505020305050206030205050505050504050506050605050204050405050505050505050507060606080B0B0B0C0A0A0B0C060A0A0B0A0E05090B0B0B0C0B0B0B0B0C0E0A0C0B0B050A0B0A080A0A07090B05060A09050C05050B0A0A0A0909080A0A0E0A0B0A0A050A0B060B0B0B0B0B0B0B0B0A0C0C0A0D0E0400249201801C3C581B9C370000000021E084030000839300001C34211862000800E00304002496"
+order = 0
+
+[[patch]]
+feature = "retranslation"
+target = "main_exe"
+address = 2147621412
+expected = "040002961D000324"
+replace = "B9DA010C04000296"
+order = 0
+
+[[patch]]
+feature = "retranslation"
+target = "main_exe"
+address = 2147623260
+expected = "0E0062921D000324"
+replace = "B9DA010C0E006292"
+order = 0
+
+[[patch]]
+feature = "retranslation"
+target = "main_exe"
+address = 2147624276
+expected = "080023861D000224"
+replace = "C3DA010C08002386"
+order = 0
+
+[[patch]]
+feature = "retranslation"
+target = "main_exe"
+address = 2147624504
+expected = "06002296000000000B004324FF0182304000422C03004010"
+replace = "FE46000C0600229600000000FF0182304000422C00000000"
+order = 0
+
+[[patch]]
+feature = "retranslation"
+target = "main_exe"
+address = 2147624876
+expected = "C500"
+replace = "C600"
+order = 0
+
+[[patch]]
+feature = "retranslation"
+target = "main_exe"
+address = 2147657204
+expected = "10000324"
+replace = "4C000324"
+order = 0
+
+[[patch]]
+feature = "retranslation"
+target = "main_exe"
+address = 2147946924
+expected = "30"
+replace = "60"
+order = 0
+
+[[patch]]
+feature = "retranslation"
+target = "main_exe"
+address = 2147946929
+expected = "70"
+replace = "68"
+order = 0
+
+[[patch]]
+feature = "retranslation"
+target = "main_exe"
+address = 2147946936
+expected = "30"
+replace = "60"
+order = 0
+
+[[patch]]
+feature = "retranslation"
+target = "main_exe"
+address = 2147946944
+expected = "90"
+replace = "80"
+order = 0
+
+[[patch]]
+feature = "retranslation"
+target = "main_exe"
+address = 2147969764
+expected = "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+replace = "0C80033CD0CE633414001B340000639000000000020063171C000334200003340800E00300000000FCFFBFAFB9DA010C00007934FCFFBF8F000062340800E00300002337"
+order = 0
+
+[[patch]]
 feature = "skip_capcom_video"
 target = "main_exe"
 address = 2147601248
@@ -2462,6 +2569,1104 @@ sha256 = "1ff7f2766808c118db90ef612f24b031528bcf00d036e6f55aaa9543d44ca154"
 expected_sha256 = "e1dc925dbcdea9d91ba10de6e1930fe80c07f75f4fb5fafd4fa44dbb9bd042c3"
 order = 0
 when = { variant = "mega_man_custom_a" }
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 438382592
+file = "assets/retranslation/016-record-085-subasset-07.bin"
+sha256 = "345c000cfc445fae0ba55f6fba9dec451080a9fd1bd689a45bc98dee7e6465d3"
+expected_sha256 = "cca2294ce750673a91a405659a92a2d6646d9821f7bc77e60dd3b4262d81984a"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 438417408
+file = "assets/retranslation/017-record-085-subasset-09.bin"
+sha256 = "12a6aada8e26f188fd376accd956fc3c588340fb6dbb9ab9692da8c8dc8389ef"
+expected_sha256 = "06122f0dc35efeefb56617ade1b16fd5bffe7063b0ef9331b028cafdf011479f"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 437821524
+file = "assets/retranslation/018-record-085-subasset-09-size.bin"
+sha256 = "5507c283da998c563f134b4305afe59750e0b2ba89c8d7e0f5044705c00df0e8"
+expected_sha256 = "ce14cab3b3a60e94b5f04d8755dc0801bdd6d9c63336fab88242d7cc0eec52f9"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 439228416
+file = "assets/retranslation/019-record-086-subasset-07.bin"
+sha256 = "345c000cfc445fae0ba55f6fba9dec451080a9fd1bd689a45bc98dee7e6465d3"
+expected_sha256 = "cca2294ce750673a91a405659a92a2d6646d9821f7bc77e60dd3b4262d81984a"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 439263232
+file = "assets/retranslation/020-record-086-subasset-09.bin"
+sha256 = "bdc058e1f1a53d5e20f53b0806c6270752c24ea0ba93ac5ccb103f5e2dc29c86"
+expected_sha256 = "d86f40c1287b79085bdd3558893a0c966ff21c7f8165dedcaaed8951e94c0602"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 438653012
+file = "assets/retranslation/021-record-086-subasset-09-size.bin"
+sha256 = "5507c283da998c563f134b4305afe59750e0b2ba89c8d7e0f5044705c00df0e8"
+expected_sha256 = "902ee7133b47c96f192e0213aa1f57361a0116accdc20329fcdd5cdef29232fc"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 440150016
+file = "assets/retranslation/022-record-087-subasset-07.bin"
+sha256 = "345c000cfc445fae0ba55f6fba9dec451080a9fd1bd689a45bc98dee7e6465d3"
+expected_sha256 = "cca2294ce750673a91a405659a92a2d6646d9821f7bc77e60dd3b4262d81984a"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 440184832
+file = "assets/retranslation/023-record-087-subasset-09.bin"
+sha256 = "44c317001dae3250cb2bc75a8e1100935ab3123cce46b8f6b77cf370b79950d7"
+expected_sha256 = "07baaa994570a404f4db20ff1e9319d381add72a786bae1c9aa54467f7c64931"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 439556180
+file = "assets/retranslation/024-record-087-subasset-09-size.bin"
+sha256 = "5507c283da998c563f134b4305afe59750e0b2ba89c8d7e0f5044705c00df0e8"
+expected_sha256 = "bf7ce8b2f49af41c73acb6570bfc33a10bf4ce6888d0fcf00d3f23dda197e95e"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 441051136
+file = "assets/retranslation/025-record-088-subasset-07.bin"
+sha256 = "345c000cfc445fae0ba55f6fba9dec451080a9fd1bd689a45bc98dee7e6465d3"
+expected_sha256 = "cca2294ce750673a91a405659a92a2d6646d9821f7bc77e60dd3b4262d81984a"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 441085952
+file = "assets/retranslation/026-record-088-subasset-09.bin"
+sha256 = "bdc058e1f1a53d5e20f53b0806c6270752c24ea0ba93ac5ccb103f5e2dc29c86"
+expected_sha256 = "d86f40c1287b79085bdd3558893a0c966ff21c7f8165dedcaaed8951e94c0602"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 440488020
+file = "assets/retranslation/027-record-088-subasset-09-size.bin"
+sha256 = "5507c283da998c563f134b4305afe59750e0b2ba89c8d7e0f5044705c00df0e8"
+expected_sha256 = "902ee7133b47c96f192e0213aa1f57361a0116accdc20329fcdd5cdef29232fc"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 441888768
+file = "assets/retranslation/028-record-089-subasset-07.bin"
+sha256 = "345c000cfc445fae0ba55f6fba9dec451080a9fd1bd689a45bc98dee7e6465d3"
+expected_sha256 = "cca2294ce750673a91a405659a92a2d6646d9821f7bc77e60dd3b4262d81984a"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 441923584
+file = "assets/retranslation/029-record-089-subasset-09.bin"
+sha256 = "bdc058e1f1a53d5e20f53b0806c6270752c24ea0ba93ac5ccb103f5e2dc29c86"
+expected_sha256 = "d86f40c1287b79085bdd3558893a0c966ff21c7f8165dedcaaed8951e94c0602"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 441294932
+file = "assets/retranslation/030-record-089-subasset-09-size.bin"
+sha256 = "5507c283da998c563f134b4305afe59750e0b2ba89c8d7e0f5044705c00df0e8"
+expected_sha256 = "902ee7133b47c96f192e0213aa1f57361a0116accdc20329fcdd5cdef29232fc"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485085184
+file = "assets/retranslation/031-record-106-relocated.bin"
+sha256 = "37190cb226f8b850cfce8d3418a986f02289cb45764e3845543049efeff80508"
+expected_sha256 = "34df8a8a6135f7acea78f441d965ba011efc94570cff951aeb350a365e59d87d"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434172752
+file = "assets/retranslation/032-record-106-table.bin"
+sha256 = "024eb5e798cf52d468d24b91b8b016bcdd897cac5d28d1edb22a5ae3eb912fe0"
+expected_sha256 = "7ab692a9153916e965cba9b41d1fa4f95e397fc3fd9bab9932608e61dfcc9bf7"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485791744
+file = "assets/retranslation/033-record-110-relocated.bin"
+sha256 = "4575e08ae62caa9d0cd4c209d2d71d7ccc7f5dac85ab3cffb9757e91cc1798e4"
+expected_sha256 = "b2ff8b9921712bccf64d34b6385115d6ceed734984eb4f04fd6333e33e9e0a96"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434172784
+file = "assets/retranslation/034-record-110-table.bin"
+sha256 = "3d52e0909f302a4235a5fd88ac7444055d03acf560b7ae4fbb4fbf9fd15f3937"
+expected_sha256 = "fc143d523a1103b83968db5653b30fd8a8bb73884d2882b51e1b87d5ff35f567"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 486361088
+file = "assets/retranslation/035-record-111-relocated.bin"
+sha256 = "4575e08ae62caa9d0cd4c209d2d71d7ccc7f5dac85ab3cffb9757e91cc1798e4"
+expected_sha256 = "b2ff8b9921712bccf64d34b6385115d6ceed734984eb4f04fd6333e33e9e0a96"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434172792
+file = "assets/retranslation/036-record-111-table.bin"
+sha256 = "e58c94d42dc954004ab282e7befaa509c3fddd3d3fb09ed91208808e0fc5aad0"
+expected_sha256 = "2bc3c9c5d284a53579919af6085d49d4de53892160b5573c48db5a0af941a5a6"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 486930432
+file = "assets/retranslation/037-record-149-relocated.bin"
+sha256 = "42e2e096ed14be6c7befdfa56a7eadf1f6b87a8ee8107a8e3b57c21aac3658c0"
+expected_sha256 = "aca99948e23c6b16b752867285930253e5d614a236eb23fe5b7d8d71984a31f4"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173096
+file = "assets/retranslation/038-record-149-table.bin"
+sha256 = "ee25f7c722ce19bd9b05622b0128e87baa34c51ecbe8f8b145aa74670eeed277"
+expected_sha256 = "05dc39badffd73e9f27d335997958db15d2e3c889e6643fe823d42074190c3e8"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 487983104
+file = "assets/retranslation/039-record-150-relocated.bin"
+sha256 = "0b385764a723bfec430e82ee3d3fb0d707e19eb6465de0daee97b0e023a7f2a8"
+expected_sha256 = "3304175feb009c6db5a8807564aabf97abef08583771e5e16cdb5b4e416c9d6c"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173104
+file = "assets/retranslation/040-record-150-table.bin"
+sha256 = "c869f305360f5d0f9a56da235853a8fd70f4cb618040cbcba04bc7491b13e582"
+expected_sha256 = "0bfe3ae78589ce7988a9f4b750b8e2036276b638b8c985e9d194ebbec363a17a"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 488949760
+file = "assets/retranslation/041-record-151-relocated.bin"
+sha256 = "687d92b93a97b0253117789626d41052aac4af4266d8811cb95fe88a9cc5e862"
+expected_sha256 = "0b150fd32588b1daca5569992ebe559c0102c837306b1af4c44d35128ec58366"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173112
+file = "assets/retranslation/042-record-151-table.bin"
+sha256 = "0f0d8611b7026bceac4244128785002b1e8733214ef4fbe23886a515c8d459f9"
+expected_sha256 = "6b5fe8564dbed0c89c48dd77f5f625ade66ae2b809c4f37549066bf08b00c645"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 489871360
+file = "assets/retranslation/043-record-152-relocated.bin"
+sha256 = "517a6f64781f53f2e29876de11ed0ae0abfe9a87ec20e053924cf9b7371e6c6e"
+expected_sha256 = "a491f9dc260817bf2b2aba8ffd11949eb8bdcafab61fce102444b22cc199080b"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173120
+file = "assets/retranslation/044-record-152-table.bin"
+sha256 = "72af7fa8b614c56ff914ffc840fce2bce415676573523e21821699505780c8ed"
+expected_sha256 = "2ac8eede0e074bf5b8252f19ddf0861fcdd3fb66e732d6b2bc423443d4889178"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 490672128
+file = "assets/retranslation/045-record-153-relocated.bin"
+sha256 = "2f91017698f2575b5a21d5b1ad82c087f85ec1f86a50c08a1ebf39c63fc46c5a"
+expected_sha256 = "ad6cc51d48b7346f7ea74a4d893d07dcca97abb0b5f02357f95ae8755b5bf5cd"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173128
+file = "assets/retranslation/046-record-153-table.bin"
+sha256 = "5cf588ccfad9ac865ec1f337e3c4875d805e56b9132768d0c0f4070bca4b5985"
+expected_sha256 = "17c9fd34fe7e2dc2847c059a517836dc48f9384d59b0980dc0c8ba7754bcd834"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 491671552
+file = "assets/retranslation/047-record-154-relocated.bin"
+sha256 = "6e0dc73f9b75e3ca41e6dc924d34c43e7b552033150500d55d7e91d4628154d0"
+expected_sha256 = "9b732fa7361523d898c9f0ad03de882f1dee5f436db1212fd55833b3c76ca2d2"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173136
+file = "assets/retranslation/048-record-154-table.bin"
+sha256 = "2e43ea78b08dc6ccdc8a1ad74b356875627694653fc01e5771f67e2372c2b4c8"
+expected_sha256 = "01b783ac52e97b35abc41b9b78e5729f7af9dc7048a37ad456bc265625045676"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 492552192
+file = "assets/retranslation/049-record-155-relocated.bin"
+sha256 = "34f4137485d71db27494a8fb12688f32722f96a94e5990a91888f6bc2a7c98a3"
+expected_sha256 = "76749dc60d15802d8c800d87ae9913eb7ff5af04f3559c14c5c628c41e9ec302"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173144
+file = "assets/retranslation/050-record-155-table.bin"
+sha256 = "0e849854070720f1a5533a5310b9be4da425972955e921c476e07d36ad5ec3d3"
+expected_sha256 = "3f40e67bbfca3b63e371e0a779b3aedfa9be8dca0985c149bf5f74bdb78ccf39"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 493512704
+file = "assets/retranslation/051-record-156-relocated.bin"
+sha256 = "389369c4a76d33b8c874e5531ae5032f64d19a998326eef5e211be9396cdd19d"
+expected_sha256 = "1d0fd3ac73a4fce02a849f44b6c328b4812c608551a00238a1c0940e480ffc13"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173152
+file = "assets/retranslation/052-record-156-table.bin"
+sha256 = "88dbe0fa075a7dbea14e3b6ca7d65180e9a795faa9dc0225e57f57c2fab9d32d"
+expected_sha256 = "5aac8abfd7e4684e52d6bf4a9adde5532ffefec3f600b650b5ce3658f0e1715d"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 494471168
+file = "assets/retranslation/053-record-157-relocated.bin"
+sha256 = "7c9f4ecbf1b9cdbb918ba88b2dce5c6c08a596a9f63e66e345eac66c1d439fd4"
+expected_sha256 = "30e14955ebf1352266dc2ff8067e68104607e750abb9d3b36582b8af909fcb58"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173160
+file = "assets/retranslation/054-record-157-table.bin"
+sha256 = "ec4cd79f6e44a73492de5009ebccd7d20894dcbdc9c47f88bde276f93573e845"
+expected_sha256 = "25e8c6f7bedb92538ee9760797b624d99af8407c2ab0bdba7bee13b981144009"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 495519744
+file = "assets/retranslation/055-record-158-relocated.bin"
+sha256 = "457cc460ded8ae6e2b92d4257fc1616eb8a15b3633a074d51efc61fa095e89c9"
+expected_sha256 = "4ffc8996edd2df55ff7681f057d87d0837c4622dfaa5f695570034dd9a53528d"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173168
+file = "assets/retranslation/056-record-158-table.bin"
+sha256 = "f628e55cdd46e2eb1ce2a1e11e566c29556c48cfad5d2dd45dbb62fe99760182"
+expected_sha256 = "9c044c29d9ba7f102de955c9cab1487af49f44dadab6c620d641658ea4eeee56"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 496373760
+file = "assets/retranslation/057-record-159-relocated.bin"
+sha256 = "65d48f9a22bbbec20eff22abb1906ea1b9dd74f7c661702073744812f6c95c7f"
+expected_sha256 = "2b67bdc1c5b4a629286b2d2660022a460db5e82402fa7f1132c2d2d679f93ea6"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173176
+file = "assets/retranslation/058-record-159-table.bin"
+sha256 = "36211ea84a738dddbf690498f0d3a29e927f8b76d65a408fbe52376f5cd05d7a"
+expected_sha256 = "069b9b19a1dc6fdf388da887808bebf8ef819dbfa715027103de1b34c7aa5b4f"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 497309696
+file = "assets/retranslation/059-record-160-relocated.bin"
+sha256 = "c228a077f01803011a518b424e611bb4991f7c6cd864174848ae3662abab3d11"
+expected_sha256 = "2b67bdc1c5b4a629286b2d2660022a460db5e82402fa7f1132c2d2d679f93ea6"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173184
+file = "assets/retranslation/060-record-160-table.bin"
+sha256 = "39b04dabec262a28dc3a111f5fea754ea8db2be2c2555157f0f57a53cfba1824"
+expected_sha256 = "ed81f231c0f4ebe499d10ad1c81ef2bc640284531c48bbf8f4ce18ae97ed0a21"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 498245632
+file = "assets/retranslation/061-record-161-relocated.bin"
+sha256 = "b451785276c6a8fc8ada78a75522fefec1bb44765c8ace8b56850f3eb501e202"
+expected_sha256 = "a491f9dc260817bf2b2aba8ffd11949eb8bdcafab61fce102444b22cc199080b"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173192
+file = "assets/retranslation/062-record-161-table.bin"
+sha256 = "09ef1ab22b179dc7a33c689933cebb635a91106296d8f22351e2e0e8313ee6b7"
+expected_sha256 = "39972f45869a57c47e7185fe660557631cd4e4acf6262aef9b90104030ef418c"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484872192
+file = "assets/retranslation/063-record-203-subasset-00.bin"
+sha256 = "9ea0775655db502b226599b98bce13f8d60057cffe20889f0241ba55f2c62501"
+expected_sha256 = "f01e90279192289af00c0c9ea2f44113a22bfcd0cbc38e59d35af0479ac4f8e6"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484870156
+file = "assets/retranslation/064-record-203-subasset-00-size.bin"
+sha256 = "d5ec3e82e1cfade25194bb86c3d11e7b0c39cf8915dd5919bed4f750ed3b5e1a"
+expected_sha256 = "90fd174d7c57afa15103ebfe0a89526c5d50515f7a3896daf9bff18c204235a5"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484878336
+file = "assets/retranslation/065-record-204-subasset-00.bin"
+sha256 = "23567d9bd4c1d0afd42c634fb49bc81cd047a11f3cf39a5ee5d6ec4024f4420c"
+expected_sha256 = "2df184a94d3016cd66f9563673c0e8700ccea76a7b5b62a7eb691ba0b2b32128"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484876300
+file = "assets/retranslation/066-record-204-subasset-00-size.bin"
+sha256 = "085b68ab7ee0701aab716b0f2b05074cb6d2c4f22020dec649f35bc240960364"
+expected_sha256 = "061db80505b81f80d0ea31f277ceca84ba72c09e4631d7e4812f3dc5a393166c"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484884480
+file = "assets/retranslation/067-record-205-subasset-00.bin"
+sha256 = "17498754b2e3e30689f87e29faf811f8955ec5bb23b605c382dee13155277830"
+expected_sha256 = "940e7d1042eaa063a2a92b39f16d9d7ae1a8660528dd719e176085351f5151a0"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484890624
+file = "assets/retranslation/068-record-206-subasset-00.bin"
+sha256 = "e94134e010920832f0db9b7365bac5dc1fdba6aaf13c9657214fcf460385a198"
+expected_sha256 = "cb45114e12f85a2be7d0302da63ee10f56982fa9a6efd202ec5b552a2138ff21"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484888588
+file = "assets/retranslation/069-record-206-subasset-00-size.bin"
+sha256 = "540b6deb70aac2a483afcfc681b3802e63b53349727038707b0a96b8926f9360"
+expected_sha256 = "e5f937f3f7c5e26fccb7d7310d4a62818f4689b0cddfc30d2602d8f4b8f23b83"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 499046400
+file = "assets/retranslation/070-record-207-relocated.bin"
+sha256 = "c421e584732590cb1890f9a9306902ae424c4ca6ab73f73096f66e60c7b8b7ad"
+expected_sha256 = "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173560
+file = "assets/retranslation/071-record-207-table.bin"
+sha256 = "0131d3a6f7fc97fa01ccb1579a1c17f649649a8aac6b80fde8bd6d215b2ef3ca"
+expected_sha256 = "32971698efbd0e5b43e57f5d4a2db4ed7d5415cbff88fdccecbd70340c1b126b"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484904960
+file = "assets/retranslation/072-record-208-subasset-00.bin"
+sha256 = "36fcbb97b31a71253f3e83080ac3b5a953a73def9148c6afe0a1d0f8c14a23b3"
+expected_sha256 = "03b78cecfc38e04a273f621f150e5dd69c4f3368d0c0de3938c50a48d66fe834"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484902924
+file = "assets/retranslation/073-record-208-subasset-00-size.bin"
+sha256 = "9d3da9daf119081abcb06b42309b6ec7d6cdaa3b11d3556ffc1a0ff8f36a5676"
+expected_sha256 = "d8db559f16cc87d6f2d30a0c5482506c28dbef9c2805e6cb0e353604f58c5c56"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484911104
+file = "assets/retranslation/074-record-209-subasset-00.bin"
+sha256 = "241e7ae06f545990f621c166b6d9f5a8e878124b672b5571058d344d32aaa5c6"
+expected_sha256 = "ef147631924c387f6da1eb4c60c942a9379fa05b57912a6e2723151a813ec672"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484909068
+file = "assets/retranslation/075-record-209-subasset-00-size.bin"
+sha256 = "b6e353a07275ff8d492bf5eeed5271a1ff387a2071717409a27317b3c12f4d28"
+expected_sha256 = "34f5cec169ee797a1cac8d710af2a629d940d4d38476f9b697308234fdb0b30b"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484917248
+file = "assets/retranslation/076-record-210-subasset-00.bin"
+sha256 = "7334adaf66e230e7baa8ca71bd878ef727b3aa27df954fb0a6059e7017653495"
+expected_sha256 = "2392d69347e6c1e3b0f3b7b23f12627ba02fe0e9d4956a2a5f3bbe7b52770d4d"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484915212
+file = "assets/retranslation/077-record-210-subasset-00-size.bin"
+sha256 = "93a40c9a88e174b5dbed2f78fe8f4467ace80a62925de9891885ad06125485b2"
+expected_sha256 = "786c4a0bfa0027919700c0fcd5ed53b7d0dd29abef13b432c47010e529738eb3"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484923392
+file = "assets/retranslation/078-record-211-subasset-00.bin"
+sha256 = "adefc7b7911afe6b8a5a5c29649ac4afa328064b341cef8b58fb94226c9a8267"
+expected_sha256 = "53e009e970184000ff258dcf27332502d8de9e3aec33257439c12754331d0fa8"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484921356
+file = "assets/retranslation/079-record-211-subasset-00-size.bin"
+sha256 = "0ccbd6bc8e227316829d2f8c0a66e6760b5d87f9ef8b640016be578218e6702c"
+expected_sha256 = "bf94fc7095d5440fd3e78bbb0a25908b819dccbcfd660eab53975d018bddef57"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484929536
+file = "assets/retranslation/080-record-212-subasset-00.bin"
+sha256 = "02baad03674201638cf995917bb81f32732fe767601da165bcdb68c1f63c1acb"
+expected_sha256 = "ecb7c3a9c17e6746a09a103edc137282c14b91c83636e0139a12b4ad55e69a6d"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484927500
+file = "assets/retranslation/081-record-212-subasset-00-size.bin"
+sha256 = "e8ef28e73fdca29e436d4febd4be2d5c8896aa9c951bccc5d5549ef20ace5bd9"
+expected_sha256 = "a033b1b1e79e8295d85e943fc29d1134a91b6e06ec31e8a593d72210c3b4199e"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 499054592
+file = "assets/retranslation/082-record-213-relocated.bin"
+sha256 = "fd53ede93d7289584a6be693098e8183506644ad342db8586e14e123f069b858"
+expected_sha256 = "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173608
+file = "assets/retranslation/083-record-213-table.bin"
+sha256 = "0d5e11a0e7c88bb5d1d9294bb08aadc4870e9e91b2a55e64c375bff513b63654"
+expected_sha256 = "540301bae0d0c737fb2617069506cfd8689d7e9e124717ae7442ebebd8de6166"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484941824
+file = "assets/retranslation/084-record-214-subasset-00.bin"
+sha256 = "ab6cf9fef6d7fb012f9e8480487cbf60c4519954e5a95e26811466fa028f00dd"
+expected_sha256 = "f2a102035ffad40c143d66f63e17f18d479a8683d4b997d781de72b4b89c0f63"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484950016
+file = "assets/retranslation/085-record-215-subasset-00.bin"
+sha256 = "a3329ddc850ddcadc3c6e458b068542f19df3358b4e1a7ba7096e38340122120"
+expected_sha256 = "2847cea2ad00dad0116f9b626f5eff8d0f5a58b2e5c8e9cf4665258e5d4220a7"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484958208
+file = "assets/retranslation/086-record-216-subasset-00.bin"
+sha256 = "097d1536eb869e2fa02ecd796235dade0fdbc192a30a5204615298dc0af07482"
+expected_sha256 = "7f042a8c12e02e44499f465c652c5940bda07091693dbaf860bf8c4097b3aeef"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484966400
+file = "assets/retranslation/087-record-217-subasset-00.bin"
+sha256 = "e13987df435488c1e7f8ce2cd16a1ea357ded948ec38d40fc5d08a6cbe3ea840"
+expected_sha256 = "0f6e90ce0d904f7abfceba330f37e4f2e79aa17cb5be31894b2a160551418c26"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484974592
+file = "assets/retranslation/088-record-218-subasset-00.bin"
+sha256 = "5f83ad1fe2355a8886f083c16e8ad84088ca1da027db9cc7b3c1203d0a071127"
+expected_sha256 = "cb7afd1a207f62e0534ee0031dcb6d7ccc734ddf482408a1b65c301e532b7f45"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484982784
+file = "assets/retranslation/089-record-219-subasset-00.bin"
+sha256 = "67bfea2da55fcdee7209598a81298298e8dca9a16821f5008d31dd68ea548aac"
+expected_sha256 = "78cbb808f4288862b3f67ceefdf1afaf1bfff4500c628ade9ca1f4b2ae3088e8"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484980748
+file = "assets/retranslation/090-record-219-subasset-00-size.bin"
+sha256 = "2041d5c995af72199862c9aac0d00484b7ea8c000e83ed845215278cf2b724a2"
+expected_sha256 = "dc52a59656749f3536ad29d7487985504b655db0704a65267c5095c2fd430732"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484988928
+file = "assets/retranslation/091-record-220-subasset-00.bin"
+sha256 = "344d67ba847e164b9cf54eac5451e4357211fb311e27a2b796673584031227bd"
+expected_sha256 = "19aef24ffb77bf53a9de82e6e2b2203d621f9d067598744268ceeea7c8010923"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 484986892
+file = "assets/retranslation/092-record-220-subasset-00-size.bin"
+sha256 = "c3547cc2612cb36997aec773f48c8f6590a5f08225c8b741ec8b1d0f96f8c066"
+expected_sha256 = "9e46ee2e369018c86c14b72bc5094a0b015f189d69ee99d6edcade802e848627"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 499062784
+file = "assets/retranslation/093-record-221-relocated.bin"
+sha256 = "0156f2a43c850676358d85b1a26a42eabe0c0dd71796f34ce32c7bd189359aa8"
+expected_sha256 = "fd9243e1ba57263ed469c3bdbd7ade6ec5254e7ed924a9f5737fa44749933cc0"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173672
+file = "assets/retranslation/094-record-221-table.bin"
+sha256 = "109aae8d1a86c409de89b54c47de45741a10efd805854c605620fc1202158bca"
+expected_sha256 = "3796aa8bd78a9dfa5341a2bb6ed258f1ab1b05d71888e4e40d7a304f90538d81"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 499068928
+file = "assets/retranslation/095-record-222-relocated.bin"
+sha256 = "44d52da02d8aadea893b94c88e79f7b3202c826e0973728419a7980a9672c899"
+expected_sha256 = "fd9243e1ba57263ed469c3bdbd7ade6ec5254e7ed924a9f5737fa44749933cc0"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173680
+file = "assets/retranslation/096-record-222-table.bin"
+sha256 = "b0d793f26681ea679010a736ac12c84594b7e50d87e679917d14d97a8cd63216"
+expected_sha256 = "5accd6b739c0deeafbc9b38c9f6f46a4fd5f6c2037aaed44c11188856b26fe22"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485003264
+file = "assets/retranslation/097-record-223-subasset-00.bin"
+sha256 = "e15bd5319e9e2ea4bc7e15d6642ecd04ad0c1ba2372abfe25f99b77212c83866"
+expected_sha256 = "3a153ade7aea3b9be0bf1af56c563f9461635b532f9cbf69e5c9ddef07df84b5"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485001228
+file = "assets/retranslation/098-record-223-subasset-00-size.bin"
+sha256 = "8c67e44b13935e0d2bdb54558bbaeb57d537c02f390c623072bd0cf55d7d6de8"
+expected_sha256 = "381d81db6bb40fbc192b0a0af42395a58bdc19918ff6e650080bd64bb2886c14"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485007360
+file = "assets/retranslation/099-record-224-subasset-00.bin"
+sha256 = "15da9570fdc7e25c260bb6075fbf778f42f175c4b925d221e188f45c89228579"
+expected_sha256 = "6e8d34c4c847ec94b296d85f027dc3d88926ff7d8f773718f6660efbab68f9a3"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485005324
+file = "assets/retranslation/100-record-224-subasset-00-size.bin"
+sha256 = "edee3fdb0953b0affed5c0d55dcddfd28fdc67b7661d6bd7d534ffc3b59b968b"
+expected_sha256 = "c5b162f6db3e60ec9048411e05834dade818219fe88b27644d82bbb42c9807ba"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485011456
+file = "assets/retranslation/101-record-225-subasset-00.bin"
+sha256 = "dc2cd847a2682f7f1ca0d043f2f1904ab1e596872b7ed7939989164fa20d4724"
+expected_sha256 = "d8ea6e675809a1d198388e23f4428a0703a8c19c459845761c75fc8c0565e2a0"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485009420
+file = "assets/retranslation/102-record-225-subasset-00-size.bin"
+sha256 = "1c96f23a5d6eb46604392197f3d343cc765d4d00a4c4e4e70332c42598548a30"
+expected_sha256 = "6f93aa3e82d0f18172fd46c20f816a4560378a8ba9ca76b8976ff868105b9a3f"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485015552
+file = "assets/retranslation/103-record-226-subasset-00.bin"
+sha256 = "38eb65ae774347fe8e3705f26a25c5b5401233778f761d08c31aa28276f627ac"
+expected_sha256 = "1a0670d99534cb46fb6d86c47550b67e25538d92e3c82af9c53970307f46a802"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485013516
+file = "assets/retranslation/104-record-226-subasset-00-size.bin"
+sha256 = "e70708b99d63b2032d74d6ed05c03222d9ec331d6d5aec641af00799435a2e33"
+expected_sha256 = "4ad01200979690fc5e5efb0e72e5a719cbcc8a24876329b6b0bad9d31095928d"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 499075072
+file = "assets/retranslation/105-record-227-relocated.bin"
+sha256 = "33c1057733d3acb404023fa9a4b1584e03861aa1c252916af9cc5476307cc30b"
+expected_sha256 = "fd9243e1ba57263ed469c3bdbd7ade6ec5254e7ed924a9f5737fa44749933cc0"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173720
+file = "assets/retranslation/106-record-227-table.bin"
+sha256 = "e21ec66986dcdce2bde486517de5b60b0bc7b63ddb56c85d0d40aeec288a1d79"
+expected_sha256 = "e26c3c2d674b49d786a39a7b81220a9feb8298d2cce260042b01f4be4fc8b3c4"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 499081216
+file = "assets/retranslation/107-record-228-relocated.bin"
+sha256 = "026b8fa207e735bba84efee243cbf02fdce297ca1c56a711794a27e039f44b8d"
+expected_sha256 = "fd9243e1ba57263ed469c3bdbd7ade6ec5254e7ed924a9f5737fa44749933cc0"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173728
+file = "assets/retranslation/108-record-228-table.bin"
+sha256 = "1b15494a822171f0397d0a42d9709f5c47d7f6ce5986d1d215e0c90977504e67"
+expected_sha256 = "0398b3c2142618fb3efef65b52515b521a1aa3a79dd3cf9efa8bb5011a326a81"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485027840
+file = "assets/retranslation/109-record-229-subasset-00.bin"
+sha256 = "1d56ab243deb753b9bda326ec4892b8eaf67455606d5ef1657ccc142a2eb5a5b"
+expected_sha256 = "b64f87e6bba2ee25651db85a08e86df96c638a89af01a859e6c23ee1da6edd54"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485025804
+file = "assets/retranslation/110-record-229-subasset-00-size.bin"
+sha256 = "9c4a6dd9c1c96d040ba7bbed6881693f9d3595282bd030821344f02ad986e785"
+expected_sha256 = "25ab56988c86ef0d2ba915f17b3eb7037336b5347a52306befe21f8b88cafc65"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485031936
+file = "assets/retranslation/111-record-230-subasset-00.bin"
+sha256 = "7ead95d51eae8967f8c0b5d4206f1fb64adf800c9a0a3c5d59a5fa0251890df7"
+expected_sha256 = "bf2a2d3f94a304a4480f22e33bc97b3fc022caa15ea1d02c5db8bdb56ca12f9c"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485029900
+file = "assets/retranslation/112-record-230-subasset-00-size.bin"
+sha256 = "ade0937cbf77e0e32b18b7ee80e947ac8f16b75b6ec534aa7fab849288c020cb"
+expected_sha256 = "a64fc015e70118ac3331d76bf6c29df952d6d16c5261c598779000acf0a9522d"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485036032
+file = "assets/retranslation/113-record-231-subasset-00.bin"
+sha256 = "4d4fe140b48133bd0987484d3cd641eb6fd509a6a6dab7d62ccff131371a96f2"
+expected_sha256 = "4773bb89a44d12c946d45bf6564ab23e6ec6bf38b0e801d536e895188b541ec8"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485033996
+file = "assets/retranslation/114-record-231-subasset-00-size.bin"
+sha256 = "4a50ac22c46d3ea34bcb697cdfea3f2925ebebdf5ea0fdc70650714869f1cb3f"
+expected_sha256 = "70d447ee569695e2ec85639b7c9eb8ef13dcc1a4443de28b3f2f200476f3461e"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485040128
+file = "assets/retranslation/115-record-232-subasset-00.bin"
+sha256 = "7f54079575048364d1331358aeab999aa3c0207f526064d3ce9e054d95ce9d7b"
+expected_sha256 = "9a09c83a0f649ab43447a45d136c61430f155d949703a3d0e7cd4b834d3924e0"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485038092
+file = "assets/retranslation/116-record-232-subasset-00-size.bin"
+sha256 = "61cb6c2a04bd52ad292a54ff87af561ca27c5b09061b32a2308cad4e39069c83"
+expected_sha256 = "e7bd487cc25313b09c99f2d2621d4b59642e3538f9c3e10a597b771ecc6d2ac6"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485044224
+file = "assets/retranslation/117-record-233-subasset-00.bin"
+sha256 = "13c786e37247fc3f607a383440f3e42839dfcbe657ac831124e5da5c081e4156"
+expected_sha256 = "5d73c47cd947361d107915efdad0eb3453ad9dfd2b787591e4182e4c5fa0512e"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485042188
+file = "assets/retranslation/118-record-233-subasset-00-size.bin"
+sha256 = "ec892a94ec8d84741adfb67adf108521b011ba1caaaa95c8eee8645581f9f962"
+expected_sha256 = "e7bd487cc25313b09c99f2d2621d4b59642e3538f9c3e10a597b771ecc6d2ac6"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485048320
+file = "assets/retranslation/119-record-234-subasset-00.bin"
+sha256 = "8d91cc04ccfb1673495c8a57d176e25b81f34a76226396bb86eb79b548ce5639"
+expected_sha256 = "aa39a86dc5eb71740d4c001efebc08e1ebf37f34529f0132e4c4def4f6957ce4"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485046284
+file = "assets/retranslation/120-record-234-subasset-00-size.bin"
+sha256 = "2e58ceae611193fc954f3f17648ea9b84e5fe1fec48f177a359fef63cb413d10"
+expected_sha256 = "0e829d5f1d9af0212dc80a3399fbce29a7f602c19f14261e87ad7503a8c6e264"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 499087360
+file = "assets/retranslation/121-record-235-relocated.bin"
+sha256 = "a79466c13e6b0bbc23f854df117052065af0dfcd8894c4c206c9aa6fd06f81ec"
+expected_sha256 = "fd9243e1ba57263ed469c3bdbd7ade6ec5254e7ed924a9f5737fa44749933cc0"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173784
+file = "assets/retranslation/122-record-235-table.bin"
+sha256 = "4177f574da8220f60d9dfb3d8b74962f42d0717a2386c697d400e8c6b8b43324"
+expected_sha256 = "720686897e109198dd220060bdbaafc901612eaa8587188935830019f26fa36d"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485056512
+file = "assets/retranslation/123-record-236-subasset-00.bin"
+sha256 = "5f8471dee0edc9d1d383a4a6d040e422581e9ae11c848c67c57d7b5dde6fffaf"
+expected_sha256 = "4be6581901264dd8120f8a49520abc5ebe157d03e051c4f21e74efed631dd864"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485054476
+file = "assets/retranslation/124-record-236-subasset-00-size.bin"
+sha256 = "128c5eae900242315ea1509840764466b9d1780486574533f364842ebcd08f1f"
+expected_sha256 = "e5e50437479fcf236bfc9b389593cc709ba27da1a83d8dc5a61da0f573670788"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485060608
+file = "assets/retranslation/125-record-237-subasset-00.bin"
+sha256 = "bbfa20f11fa7f1bc03e2f97599e58a737c2c4c8286e022c25a5ca02c13aa3ec6"
+expected_sha256 = "fadc3add92cf3cb2cef5cb7bc555cef9d4f8e10901804c65a2f3139ef4988bcc"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485058572
+file = "assets/retranslation/126-record-237-subasset-00-size.bin"
+sha256 = "19a01f09af652d230cf1fa87b14a0852f3f6a091906e34493920ce3fedaa8fbe"
+expected_sha256 = "8b811c4504e6a7339e4fa0d9d8d03b5455c212ea6a373cf4fde84a1dfc1495d8"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485064704
+file = "assets/retranslation/127-record-238-subasset-00.bin"
+sha256 = "f6038fa482c6bde0fa59f44429c4c26f798d7d48c4588e522163d586cec407d1"
+expected_sha256 = "e97e4bcc50578643b14fb19724cc25eb3b6388d83844e13d7c44a5dc05cadf04"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485062668
+file = "assets/retranslation/128-record-238-subasset-00-size.bin"
+sha256 = "147758819921559306381eee761e1bc93638b687d600989797468145c54462ea"
+expected_sha256 = "a6246ee40149d8701c64240f8fa77d429aac33cc9c1de8acac31e9a595e12cc1"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 499093504
+file = "assets/retranslation/129-record-239-relocated.bin"
+sha256 = "60ff8081e53065f42a1b14a213aa02b8334c6af6a1821ceab9bcac53f64fe06d"
+expected_sha256 = "fd9243e1ba57263ed469c3bdbd7ade6ec5254e7ed924a9f5737fa44749933cc0"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173816
+file = "assets/retranslation/130-record-239-table.bin"
+sha256 = "9f8798dc1f79ee705245ee04f2d907394df0e4fd84c07770396756020feaada6"
+expected_sha256 = "ba2b2391bc08a1da2c4194a3f8b2a50221cd4dab1c47982b5ecc0bd56f2fe512"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485072896
+file = "assets/retranslation/131-record-240-subasset-00.bin"
+sha256 = "442de5eee065f0848b79e761150cfacbb02c09d08d67a3c121e7338d972e41c2"
+expected_sha256 = "ef8582af237f2303908d8030343c3a5a9c49bd1c5da1f44b6c36fbe56893cb0d"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485070860
+file = "assets/retranslation/132-record-240-subasset-00-size.bin"
+sha256 = "00da57252b1ebef055d77c8aed9dee5f876976e3d938efefe70a3cd7d7f13a7f"
+expected_sha256 = "3bed6b63471d2d7e56a45a29fa0334473f9a5d1d77d33411af62bf26312f84bd"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 499099648
+file = "assets/retranslation/133-record-241-relocated.bin"
+sha256 = "f1b0ff97afc71fecefd14f43efce1db0e0bba11d4d2182b2127588cd11fd20d9"
+expected_sha256 = "fd9243e1ba57263ed469c3bdbd7ade6ec5254e7ed924a9f5737fa44749933cc0"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 434173832
+file = "assets/retranslation/134-record-241-table.bin"
+sha256 = "e09417cd8c6baa7f4e52bbbc1221f0cb27a0026dde830390adf90dfa8daeb23f"
+expected_sha256 = "160854ba6d3b4a891a4786e0d608807d22bfef5fde1fa110dccb45f0aaaad283"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485081088
+file = "assets/retranslation/135-record-242-subasset-00.bin"
+sha256 = "d747969cb6a6757a0f2f6e2a69d828fe25f250122987d5a6993bef6112b161d2"
+expected_sha256 = "53790ec40aee3eec8225dbf0645a95b8543b259347756ece0df3da1a7050d7d3"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 485079052
+file = "assets/retranslation/136-record-242-subasset-00-size.bin"
+sha256 = "dba2e96bdd223968617f24fd4e2466ed7e49c9600c59135ae39bd0072e54cec5"
+expected_sha256 = "0f778ce0a3bdbce9b8059c778c3a8110828f5119fccae89764ad3bd2c6d06d7b"
+order = 0
+
+[[overlay]]
+feature = "retranslation"
+target = "disc_user"
+offset = 45222
+file = "assets/retranslation/137-rock-x6-dat-logical-size.bin"
+sha256 = "4cb5c3dc77809fc282b4efdcc830036dacd33f8bb844be69c7767595d3eede79"
+expected_sha256 = "eb231fa6edac5564246ef85fa215dcecff4f6c49f2beee7bd764164995426379"
+order = 0
 
 [[overlay]]
 feature = "disable_nightmare_bug"

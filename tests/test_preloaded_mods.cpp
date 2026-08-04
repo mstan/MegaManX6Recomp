@@ -6,9 +6,9 @@
 
 namespace {
 
-constexpr size_t kExpectedPackages = 14;
-constexpr size_t kExpectedFeatures = 201;
-constexpr size_t kExpectedTweaksPackages = 12;
+constexpr size_t kExpectedPackages = 15;
+constexpr size_t kExpectedFeatures = 203;
+constexpr size_t kExpectedTweaksPackages = 13;
 constexpr const char* kGameId = "SLUS-01395";
 constexpr const char* kStockDiscSha256 =
     "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318";
@@ -64,8 +64,7 @@ int main(int argc, char** argv) {
         const PSXRecompV4::ModPackage* package = manager.selected_package(id);
         if (!package) return fail(id + " has no selected package version");
         if (id == "mmx6.tweaks.assets" ||
-            id == "mmx6.tweaks.extra-mugshots" ||
-            id == "mmx6.tweaks.ingame-options") {
+            id == "mmx6.tweaks.extra-mugshots") {
             return fail(id + " is permission-gated and must remain withheld");
         }
         if (id.rfind("mmx6.tweaks.", 0) == 0) {
@@ -86,8 +85,16 @@ int main(int argc, char** argv) {
                     return fail(id + " incorrectly credits NectarHime");
                 }
             }
-            if (package->author_links.size() != 1u) {
+            const size_t expected_author_links =
+                id == "mmx6.tweaks.native" ? 2u : 1u;
+            if (package->author_links.size() != expected_author_links) {
                 return fail(id + " has incorrectly scoped author links");
+            }
+            if (id == "mmx6.tweaks.native" &&
+                (package->author_links[1].name != "DuoDynamo" ||
+                 package->author_links[1].url !=
+                     "https://twitter.com/DuoDynamo")) {
+                return fail(id + " is missing DuoDynamo's author link");
             }
         }
         feature_count += package->features.size();
@@ -105,11 +112,12 @@ int main(int argc, char** argv) {
             const bool retranslation =
                 id == "mmx6.tweaks.native" &&
                 feature.id == "retranslation";
-            if (retranslation) {
-                return fail("retranslation must remain withheld");
+            if (!retranslation &&
+                displayed_author.find("DuoDynamo") != std::string::npos) {
+                return fail(id + "/" + feature.id +
+                            " incorrectly credits DuoDynamo");
             }
-            if (displayed_author.find("DuoDynamo") != std::string::npos ||
-                displayed_author.find("Metalwario64") != std::string::npos) {
+            if (displayed_author.find("Metalwario64") != std::string::npos) {
                 return fail(id + "/" + feature.id +
                             " exposes permission-gated collaborator content");
             }
@@ -127,10 +135,10 @@ int main(int argc, char** argv) {
                     " linked Tweaks packages, found " +
                     std::to_string(linked_tweaks_packages));
     }
-    if (std::filesystem::exists(
+    if (!std::filesystem::exists(
             root / "packages" / "mmx6.tweaks.native" / "1.10.5" /
             "assets" / "retranslation")) {
-        return fail("retranslation payload must remain withheld");
+        return fail("approved retranslation payload is missing");
     }
 
     for (const auto& [package_id, selection] : manager.selections()) {

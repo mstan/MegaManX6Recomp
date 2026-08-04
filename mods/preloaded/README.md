@@ -25,12 +25,12 @@ Mega Man X6 Tweaks was authored by
 [acediez](https://twitter.com/acediez) ([RHDN project thread](https://www.romhacking.net/forum/index.php?topic=26507.0)).
 acediez has approved this use. Portrait and palette artwork by
 [Metalwario64](https://x.com/metalwario64) and retranslation work by
-[DuoDynamo](https://twitter.com/DuoDynamo) have separate permissions that
-remain TBD. Those package families, the retranslation feature and payload, and
-the retranslation-dependent in-game Settings package are therefore withheld
-from this public catalog and release. The conversion tooling remains available
-for restoration after approval. See [`ATTRIBUTION.md`](ATTRIBUTION.md) for the
-complete credit and permission ledger.
+[DuoDynamo](https://twitter.com/DuoDynamo) have separate permissions.
+DuoDynamo has approved redistribution, so the retranslation feature, payload,
+and dependent in-game Settings package are included and disabled by default.
+The portrait and palette package families remain withheld pending MetalWario64's
+approval. See [`ATTRIBUTION.md`](ATTRIBUTION.md) for the complete credit and
+permission ledger.
 
 Generated conversion reports are intentionally excluded because they contain
 development-machine paths. Superseded versions, launcher state, and temporary

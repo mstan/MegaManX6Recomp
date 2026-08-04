@@ -33,10 +33,11 @@ acediez explicitly granted permission to adapt and ship his work as part of
 Mega Man X6 Recompiled. Every included tweak remains opt-in and disabled by
 default.
 
-The English retranslation credited to NeoDynamo and the extra portrait/palette
-work credited to MetalWario64 are neither included nor enabled while their
-separate approvals are pending. Their adaptations are staged for a possible
-future release if permission is granted. See
+The English retranslation by
+[DuoDynamo](https://twitter.com/DuoDynamo) is included with his direct
+redistribution approval and remains opt-in and disabled by default. The extra
+portrait/palette work credited to MetalWario64 is neither included nor enabled
+while separate approval remains pending. See
 [`mods/preloaded/ATTRIBUTION.md`](mods/preloaded/ATTRIBUTION.md).
 
 Important files:
@@ -128,7 +129,7 @@ These are the framework features that are already working in this build:
   memory cards, optionally select your own verified retail BIOS, and configure
   renderer / supersampling / widescreen / controller before launching.
 - **Feature-oriented mod loader.** The release preloads the adapted MMX6 Tweaks
-  catalog as 14 package families with 201 independently configurable,
+  catalog as 15 package families with 203 independently configurable,
   default-disabled feature rows in the launcher.
 
 ## Setup
