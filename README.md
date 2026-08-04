@@ -73,6 +73,31 @@ playable preview rather than a certified full playthrough.
 Known issues: see [`ISSUES.md`](ISSUES.md) for the current issue log (including
 renderer notes) and the remaining enhancement follow-ups.
 
+## Enhancements
+
+MegaManX6Recomp supports opt-in enhancement packages without permanently
+patching your disc. Mega Man X6 Tweaks-derived packages expose their changes as
+individual launcher features, including configurable animation timing, status
+adjustments, and optional voice hooks.
+
+<table>
+  <tr>
+    <td width="50%"><img src=".github/screenshots/mmx6-tweaks-title-screen.png" alt="Mega Man X6 Tweaks alternate title screen"></td>
+    <td width="50%"><img src=".github/screenshots/mmx6-tweaks-launcher.png" alt="Mega Man X6 Tweaks features in the launcher"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>An alternate Japanese-style title screen from Mega Man X6 Tweaks.</sub></td>
+    <td align="center"><sub>Tweaks are enabled and configured feature-by-feature in the launcher.</sub></td>
+  </tr>
+</table>
+
+The experimental widescreen package renders a genuinely wider 2D field of view
+instead of stretching the original 4:3 picture.
+
+<p align="center">
+  <img src=".github/screenshots/mmx6-widescreen-gameplay.png" alt="Mega Man X6 gameplay rendered with the experimental 16:9 widescreen enhancement">
+</p>
+
 ## Features
 
 These are the framework features that are already working in this build:
