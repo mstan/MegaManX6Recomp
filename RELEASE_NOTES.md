@@ -1,34 +1,26 @@
-# MMX v1.0.1
+# MMX v1.0.3
 
-MMX v1.0.1 is a focused follow-up to v1.0.0 that restores the approved English
-retranslation content staged during the original Mega Man X6 Tweaks conversion.
+MMX v1.0.3 is a hotfix for the v1.0.2 player packages.
 
-## English retranslation
+## Widescreen HUD fix
 
-- Added the English retranslation by DuoDynamo as an opt-in, default-disabled
-  feature in the Mods catalog.
-- Restored the retranslation's script, font, menu-alignment, and disc-overlay
-  payloads.
-- Restored the retranslation-dependent in-game Tweaks Settings package.
-- Added DuoDynamo's linked credit and recorded his direct redistribution
-  approval.
+- Restored the MMX6 HUD packet range to the player-facing `game.toml`, so the
+  health and ability meters anchor to the true widescreen corners.
+- Restored the reveal initializer and intro-stage culling hooks that had also
+  drifted out of the release config.
+- Added a release-packaging parity check. Windows and Linux packaging now fail
+  if the complete `[widescreen]` section differs from the development config.
 
-The release now contains 15 mod package families with 203 independently
-configurable features. As before, all Tweaks features are disabled by default
-and are applied at runtime without modifying the player's original disc image.
+The development config already contained these settings, which is why local
+builds worked while the downloadable v1.0.2 packages did not.
 
-## Still not included
+## Carried forward from v1.0.2
 
-- **Extra portraits, mugshots, and related palette work** remain withheld
-  pending direct approval from MetalWario64.
-- **Incomplete Armors by Part**, including its Shadow Saber Palette option,
-  remains omitted because its shared foundation has not yet been converted
-  safely.
+- Windows and Linux x86_64 packages with prebuilt native overlay shards.
+- Experimental Linux AppImage support.
+- MIT-licensed OpenBIOS bundled and selected by default.
+- The full acediez Tweaks catalog, including DuoDynamo's approved English
+  retranslation, plus the framework-owned loading-speed mods.
 
-## Setup and compatibility
-
-- Bring your own legally obtained Mega Man X6 USA v1.1 disc image
-  (`SLUS-01395`).
-- OpenBIOS is included and selected by default; a retail PlayStation BIOS is
-  optional.
-- Existing settings, saves, and memory cards remain compatible.
+All enhancements remain opt-in. Saves, memory cards, settings, and the player's
+original disc image remain compatible with v1.0.2.
