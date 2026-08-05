@@ -1,10 +1,12 @@
 param(
-    [string]$Version = "v0.0.7-alpha",
+    [string]$Version = "v1.0.2",
     [string]$BuildDir = "build-release",
+    # Ship without a bundled overlay cache; off by default.
+    [switch]$AllowNoCache,
     # Where your accumulated overlay cache lives (the dir compile_overlays.py
     # writes to, per game.toml overlay_autocompile_cmd --out-dir). Bundled as a
     # head start; optional.
-    [string]$CacheBuildDir = "build-modern",
+    [string]$CacheBuildDir = "build-stable",
     [switch]$SkipRegen
 )
 
@@ -65,11 +67,23 @@ if (-not (Test-Path $DevExe)) { $DevExe = Join-Path $BuildPath "psx-runtime.exe"
 Copy-Item $DevExe (Join-Path $Stage "MegaManX6Recomp.exe")
 Copy-Item (Join-Path $Root "README.md") $Stage
 Copy-Item (Join-Path $Root "LICENSE") $Stage
-$PreloadedMods = Join-Path $Root "mods/preloaded"
-if (Test-Path (Join-Path $PreloadedMods "packages")) {
-    Copy-Item -Recurse -Force $PreloadedMods (Join-Path $Stage "mods")
+# Stage the mod catalog from the BUILD OUTPUT, not from mods/preloaded. The
+# build output is the authoritative catalog: it is this repo's own packages
+# PLUS the ones the framework stages for every game (loading speed). Copying
+# the source tree instead silently drops the framework's mods from the
+# release, so players get a Mods page missing entries the dev build shows.
+$ModsSrc = Join-Path $BuildPath "mods"
+if (Test-Path (Join-Path $ModsSrc "packages")) {
+    Copy-Item -Recurse -Force $ModsSrc (Join-Path $Stage "mods")
     $preloadedCount = (Get-ChildItem (Join-Path $Stage "mods/packages") -Directory).Count
-    Write-Host "Bundled preloaded mod catalog: $preloadedCount package family/families"
+    Write-Host "Bundled mod catalog: $preloadedCount package family/families"
+    if ($preloadedCount -lt 16) {
+        throw ("Expected the game's 15 packages plus the framework's " +
+               "loading-speed mods, found $preloadedCount. The framework " +
+               "catalog is missing from $ModsSrc.")
+    }
+} else {
+    throw "No mod catalog staged at $ModsSrc - build the runtime first"
 }
 $BundledBiosSrc = Join-Path $BuildPath "bios"
 if (!(Test-Path (Join-Path $BundledBiosSrc "openbios.bin")) -or
@@ -104,112 +118,11 @@ Write-Host "Bundled recomp-ui launcher assets: $fontCount font(s) + $imgCount im
 # left at the default "auto": with no gcc toolchain on a player box it resolves
 # to tcc, which fills overlay gaps via the bundled overlay_toolchain/ (no system
 # python or gcc needed). Players can edit [runtime]/[video] post-install.
-@"
-[game]
-name = "Mega Man X6"
-id = "SLUS-01395"
-exe = "mmx6/SLUS_013.95"
-disc = "mmx6/Mega Man X6 (USA) (v1.1).cue"
-load_address = "0x80010000"
-entry_pc = "0x80054AD8"
-text_size = "0x0007F000"
-stack_base = "0x801FFFF0"
-
-# Required block; used only by the developer recompiler tool, not at runtime.
-[recompiler]
-seeds = "seeds/ghidra_funcs.txt"
-out_dir = "generated"
-
-# ---- Player-adjustable options ------------------------------------------
-# Edit, save, and restart MegaManX6Recomp.exe to apply.
-[runtime]
-window_title = "Mega Man X6 Recompiled"
-memcard_dir = "saves"
-
-# Disc read speed. "1x" is authentic PlayStation timing and is the safe default:
-# speeding up the emulated CD device changes how many frames pass between the
-# game's internal steps, which desyncs streamed audio and (for MMX6) wedges the
-# boot. Fast loads instead come from turbo_loads below (which fast-forwards the
-# whole machine during a load, preserving timing).
-disc_speed = "1x"
-
-# BIOS backend. true skips the PlayStation boot animation with the HLE path.
-bios_hle = true
-
-# Deprecated alias for the HLE boot skip alone (kept for old settings files).
-fast_boot  = false
-
-# Turbo loads: while a load is in progress, run the machine at full host speed so
-# loading finishes much faster, with all game timing preserved. Audio plays
-# through normally. On by default. Toggleable in the launcher (Settings -> Turbo
-# loads).
-turbo_loads = true
-
-# Overlay cache: keeps converted native code for game areas in the cache folder,
-# and records newly visited areas into overlay_captures.json so your own cache
-# grows as you play. Keep that file private - it contains game code from your
-# disc (see README).
-overlay_cache = true
-
-# ---- Visual quality -----------------------------------------------------
-[video]
-# supersampling: render at this multiple of native resolution and downsample,
-# for higher detail and anti-aliased edges. 1 = native PSX look, 2 = recommended,
-# 3-4 = sharper (needs a faster CPU to hold full speed).
-supersampling = 2
-# antialiasing: smooth (linear) scaling to the window. false = sharp pixels.
-antialiasing  = true
-# texture_filtering: "nearest" = native PSX look; "bilinear" = smooths textures.
-texture_filtering = "nearest"
-# renderer: "opengl" = hardware GPU renderer (this release's default as of
-# 2026-07-03). "software" = CPU renderer. The OpenGL black-frame flicker that
-# made software the old default (ISSUES.md #7) was root-caused and fixed in
-# psxrecomp (exact pending-upload rects); GL is now validated clean incl. the
-# Rainy Turtloid repro. Software is still selectable in the launcher
-# (Settings -> Renderer) for anyone who prefers it.
-renderer = "opengl"
-# auto_skip_fmv: skip full-motion videos (e.g. the X-vs-Zero opening). When on, a
-# video is skipped the instant it starts. On by default for MMX6; toggleable in
-# the launcher (Settings -> "Skip FMVs").
-auto_skip_fmv = true
-# aspect_ratio stays at the authentic 4:3 default. Widescreen and presentation
-# frame interpolation are game-specific enhancements exposed through Mods, not
-# generic display settings. Their trusted activation plugins apply the selected
-# values after the mod plan commits.
-aspect_ratio = "4:3"
-offer_frame_interpolation = false
-
-# ---- Controller ---------------------------------------------------------
-# default_analog: MMX6 will not poll buttons until it detects an analog pad, so
-# present a DualShock by default. Per-player toggle in the launcher. deadzone:
-# analog stick dead-band (0..32767; ~12000 = 37%), also adjustable in the launcher.
-[controller]
-default_analog = true
-deadzone = 12000
-# MMX6 requires a DualShock, so the launcher hides the "Hybrid" pad mode and
-# offers only Analog / D-Pad.
-allow_hybrid = false
-
-# ---- Widescreen (experimental 16:9, 2D engine) --------------------------
-# full_2d treats every in-game frame as gameplay so the wide present path engages
-# (MMX6 never emits the 3D sprite-tag the gameplay detector keys on). The bg2d
-# hooks widen the per-layer 2D background renderer for a true wider field of view.
-# All inert at 4:3. Addresses are specific to MMX6 (USA, v1.1, SLUS-01395) and
-# must match the build the cache was made for.
-[widescreen]
-full_2d = true
-offer = false
-offer_ultrawide = true
-
-[widescreen.bg2d]
-count_site        = "0x800271d4"
-startcol_site     = "0x80027188"
-startx_site       = "0x800271a0"
-stream_left_site  = "0x80027424"
-stream_right_site = "0x80027444"
-bufbase_site      = "0x80026dc4"
-cap_site          = "0x80027278"
-"@ | Set-Content -Encoding ASCII (Join-Path $Stage "game.toml")
+# Player-facing game.toml comes from packaging/release/game.toml, the same
+# file tools/package_appimage.sh ships. Generating it here instead let the
+# two platforms drift: they produced different configs, hence different
+# overlay codegen tags, so a cache built for one did not load on the other.
+Copy-Item -Force (Join-Path $Root "packaging/release/game.toml") (Join-Path $Stage "game.toml")
 
 # Prebuilt overlay cache: native code for the game areas contributed so far.
 # The cache is namespaced per backend/arch/codegen-version:
@@ -226,7 +139,12 @@ import importlib.util
 s = importlib.util.spec_from_file_location('co', r'$RecompTools\compile_overlays.py')
 m = importlib.util.module_from_spec(s); s.loader.exec_module(m)
 inc = r'$RecompInc'
-print('cg%d_%08x' % (m.codegen_ver(inc), m.codegen_hash(inc)))
+print('cg%d_%08x_gc%08x' % (
+    m.codegen_ver(inc),
+    m.codegen_hash(inc),
+    m.overlay_config_hash(
+        r'$(Join-Path $RecompDir "psxrecomp-game.exe")',
+        r'$(Join-Path $Stage "game.toml")')))
 "@ | Set-Content -Encoding ASCII $tagScript
 $CgTag = (& python $tagScript).Trim()
 Remove-Item -Force $tagScript
@@ -244,8 +162,27 @@ if (Test-Path $CacheSrc) {
     }
     $dllCount = @($cacheFiles | Where-Object { $_.Extension -eq ".dll" }).Count
     Write-Host "Bundled overlay cache: $dllCount native overlay DLL(s)"
+    if ($dllCount -eq 0 -and -not $AllowNoCache) {
+        # The directory existing is not enough: the tag folds in a hash of the
+        # PACKAGED game.toml, so a cache built against any other config lands
+        # under a different tag and matches nothing. Fail instead of quietly
+        # shipping a package whose first session runs entirely interpreted.
+        throw ("Overlay cache at $CacheSrc has no shards for tag $CgTag. " +
+               "Rebuild it with compile_overlays.py using the PACKAGED " +
+               "game.toml (release-stage/*/game.toml), or pass -AllowNoCache.")
+    }
 } else {
-    Write-Warning "No overlay cache found at $CacheSrc - releasing without bundled cache"
+    if ($AllowNoCache) {
+        Write-Warning "No overlay cache at $CacheSrc - shipping without one because -AllowNoCache was given"
+    } else {
+        # A cache-less package makes every player's first session run overlays
+        # interpreted. This used to be a warning that scrolled past, while the
+        # tag computed above had drifted from the one the runtime actually uses
+        # (it was missing the overlay-config hash), so the match never hit.
+        throw ("No overlay cache found at $CacheSrc for tag $CgTag. Build one " +
+               "with compile_overlays.py against the PACKAGED game.toml, or " +
+               "pass -AllowNoCache to ship without one.")
+    }
 }
 
 # ---- Self-contained overlay toolchain (tcc tier) -------------------------

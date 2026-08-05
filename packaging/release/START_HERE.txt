@@ -1,0 +1,37 @@
+MegaManX6Recomp - Mega Man X6, recompiled
+==========================================================
+
+WHAT YOU NEED
+  Your own Mega Man X6 (USA, SLUS-01395) disc image. A .cue + .bin pair is
+  preferred; a bare .bin or .iso also works. The disc is NOT included.
+
+  A PlayStation BIOS is NOT required. This package bundles the MIT-licensed
+  OpenBIOS from PCSX-Redux (bios/openbios.bin, notice in bios/OpenBIOS.LICENSE).
+  You may optionally select your own legally obtained SCPH1001.BIN instead.
+
+FIRST RUN
+  1. Launch the game. The launcher window opens.
+  2. Set the Disc row to your Tomba! 2 image. The launcher verifies the
+     ISO9660 header, region, and serial before accepting it.
+  3. Optionally visit Mods for the bundled enhancements (widescreen, Skip
+     FMVs, interpolated frame rate). They ship disabled; the default
+     presentation is the authentic 4:3 one.
+  4. Press Launch. Your choices are remembered for next time.
+
+WHERE THINGS LIVE
+  saves/     memory cards
+  cache/     converted native code, grows as you play
+  mods/      bundled and user-installed mod packages
+  input.ini  controller mapping (yours after first launch)
+
+  On Linux the AppImage seeds these into ~/.local/share/mmx6-runtime
+  (override with MMX6_RECOMP_DATA_DIR).
+
+PRIVACY NOTE
+  overlay_captures.json and the cache folder contain code converted from
+  YOUR disc. Do not redistribute them.
+
+TROUBLESHOOTING
+  Slow performance: lower Supersampling to 1 in the launcher.
+  Controller not detected: check input.ini, or use the launcher's controller
+  row to pick the device.

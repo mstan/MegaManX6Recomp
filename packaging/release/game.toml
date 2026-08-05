@@ -1,0 +1,104 @@
+[game]
+name = "Mega Man X6"
+id = "SLUS-01395"
+exe = "mmx6/SLUS_013.95"
+disc = "mmx6/Mega Man X6 (USA) (v1.1).cue"
+load_address = "0x80010000"
+entry_pc = "0x80054AD8"
+text_size = "0x0007F000"
+stack_base = "0x801FFFF0"
+
+# Required block; used only by the developer recompiler tool, not at runtime.
+[recompiler]
+seeds = "seeds/ghidra_funcs.txt"
+out_dir = "generated"
+
+# ---- Player-adjustable options ------------------------------------------
+# Edit, save, and restart MegaManX6Recomp.exe to apply.
+[runtime]
+window_title = "Mega Man X6 Recompiled"
+memcard_dir = "saves"
+
+# Disc read speed. "1x" is authentic PlayStation timing and is the safe default:
+# speeding up the emulated CD device changes how many frames pass between the
+# game's internal steps, which desyncs streamed audio and (for MMX6) wedges the
+# boot. Fast loads instead come from turbo_loads below (which fast-forwards the
+# whole machine during a load, preserving timing).
+disc_speed = "1x"
+
+# BIOS backend. true skips the PlayStation boot animation with the HLE path.
+bios_hle = true
+
+# Deprecated alias for the HLE boot skip alone (kept for old settings files).
+fast_boot  = false
+
+# Turbo loads: while a load is in progress, run the machine at full host speed so
+# loading finishes much faster, with all game timing preserved. Audio plays
+# through normally. On by default. Toggleable in the launcher (Settings -> Turbo
+# loads).
+turbo_loads = true
+
+# Overlay cache: keeps converted native code for game areas in the cache folder,
+# and records newly visited areas into overlay_captures.json so your own cache
+# grows as you play. Keep that file private - it contains game code from your
+# disc (see README).
+overlay_cache = true
+
+# ---- Visual quality -----------------------------------------------------
+[video]
+# supersampling: render at this multiple of native resolution and downsample,
+# for higher detail and anti-aliased edges. 1 = native PSX look, 2 = recommended,
+# 3-4 = sharper (needs a faster CPU to hold full speed).
+supersampling = 2
+# antialiasing: smooth (linear) scaling to the window. false = sharp pixels.
+antialiasing  = true
+# texture_filtering: "nearest" = native PSX look; "bilinear" = smooths textures.
+texture_filtering = "nearest"
+# renderer: "opengl" = hardware GPU renderer (this release's default as of
+# 2026-07-03). "software" = CPU renderer. The OpenGL black-frame flicker that
+# made software the old default (ISSUES.md #7) was root-caused and fixed in
+# psxrecomp (exact pending-upload rects); GL is now validated clean incl. the
+# Rainy Turtloid repro. Software is still selectable in the launcher
+# (Settings -> Renderer) for anyone who prefers it.
+renderer = "opengl"
+# auto_skip_fmv: skip full-motion videos (e.g. the X-vs-Zero opening). When on, a
+# video is skipped the instant it starts. On by default for MMX6; toggleable in
+# the launcher (Settings -> "Skip FMVs").
+auto_skip_fmv = true
+# aspect_ratio stays at the authentic 4:3 default. Widescreen and presentation
+# frame interpolation are game-specific enhancements exposed through Mods, not
+# generic display settings. Their trusted activation plugins apply the selected
+# values after the mod plan commits.
+aspect_ratio = "4:3"
+offer_frame_interpolation = false
+
+# ---- Controller ---------------------------------------------------------
+# default_analog: MMX6 will not poll buttons until it detects an analog pad, so
+# present a DualShock by default. Per-player toggle in the launcher. deadzone:
+# analog stick dead-band (0..32767; ~12000 = 37%), also adjustable in the launcher.
+[controller]
+default_analog = true
+deadzone = 12000
+# MMX6 requires a DualShock, so the launcher hides the "Hybrid" pad mode and
+# offers only Analog / D-Pad.
+allow_hybrid = false
+
+# ---- Widescreen (experimental 16:9, 2D engine) --------------------------
+# full_2d treats every in-game frame as gameplay so the wide present path engages
+# (MMX6 never emits the 3D sprite-tag the gameplay detector keys on). The bg2d
+# hooks widen the per-layer 2D background renderer for a true wider field of view.
+# All inert at 4:3. Addresses are specific to MMX6 (USA, v1.1, SLUS-01395) and
+# must match the build the cache was made for.
+[widescreen]
+full_2d = true
+offer = false
+offer_ultrawide = true
+
+[widescreen.bg2d]
+count_site        = "0x800271d4"
+startcol_site     = "0x80027188"
+startx_site       = "0x800271a0"
+stream_left_site  = "0x80027424"
+stream_right_site = "0x80027444"
+bufbase_site      = "0x80026dc4"
+cap_site          = "0x80027278"
