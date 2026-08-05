@@ -1,5 +1,5 @@
 param(
-    [string]$Version = "v1.0.2",
+    [string]$Version = "v1.0.3",
     [string]$BuildDir = "build-release",
     # Ship without a bundled overlay cache; off by default.
     [switch]$AllowNoCache,
@@ -38,6 +38,12 @@ function Invoke-Native {
     $ErrorActionPreference = $old
     if ($code -ne 0) { throw "$What failed (exit $code)" }
 }
+
+# The executable is generated from the developer config but runs against the
+# player config. Keep widescreen codegen and runtime gates identical.
+Invoke-Native {
+    py -3 (Join-Path $Root "tools\check_release_config.py")
+} "release config parity check"
 
 $FrameworkRoot = Join-Path $Root "psxrecomp-v4"
 if (-not (Test-Path $FrameworkRoot)) {

@@ -75,6 +75,10 @@ if [ "$nice_level" -gt 0 ] && [ "${RECOMP_APPIMAGE_RENICED:-0}" != "1" ] \
     exec nice -n "$nice_level" "$0" ${orig_args[@]+"${orig_args[@]}"}
 fi
 
+# The executable is generated from the developer config but runs against the
+# player config. Keep widescreen codegen and runtime gates identical.
+python3 "$root/tools/check_release_config.py"
+
 [ -n "$version" ] || version=$(tr -d ' \t\r\n' < "$root/packaging/release/VERSION")
 [ -n "$version" ] || { echo "empty version" >&2; exit 1; }
 

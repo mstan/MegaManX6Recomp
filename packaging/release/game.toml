@@ -93,6 +93,18 @@ allow_hybrid = false
 full_2d = true
 offer = false
 offer_ultrawide = true
+clear_reveal = true
+# Anchor the stable health/ability ordering-table packet pool to the native-wide
+# corners. Without this range the release keeps the HUD at its 4:3 coordinates.
+nw_left_hud_packet_lo = "0x000E3400"
+nw_left_hud_packet_hi = "0x000E4100"
+
+# Intro-stage overlay actor deactivation. Keep actors alive through the added
+# reveal plus a small off-screen guard. These hooks are identity at 4:3.
+[widescreen.cull]
+guard_pixels = 32
+bias_sites = ["0x801F2118"]
+slti_sites = ["0x801F210C"]
 
 [widescreen.bg2d]
 count_site        = "0x800271d4"
@@ -102,3 +114,4 @@ stream_left_site  = "0x80027424"
 stream_right_site = "0x80027444"
 bufbase_site      = "0x80026dc4"
 cap_site          = "0x80027278"
+init_func          = "0x800269f4"
