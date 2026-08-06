@@ -62,7 +62,8 @@ if (-not $SkipRegen) {
 }
 
 $DebugTools = if ($FullscreenDiagnostics) { "ON" } else { "OFF" }
-Invoke-Native { cmake -S $Root -B $BuildPath -G Ninja -DCMAKE_BUILD_TYPE=Release -DPSX_DEBUG_TOOLS=$DebugTools } "cmake configure"
+$DebugToolsArg = "-DPSX_DEBUG_TOOLS=$DebugTools"
+Invoke-Native { cmake -S $Root -B $BuildPath -G Ninja -DCMAKE_BUILD_TYPE=Release $DebugToolsArg } "cmake configure"
 Invoke-Native { cmake --build $BuildPath -j $env:NUMBER_OF_PROCESSORS } "cmake build"
 
 if (Test-Path $StageRoot) {
