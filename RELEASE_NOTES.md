@@ -1,26 +1,27 @@
-# MMX v1.0.3
+# v1.0.4-borderless-test.1
 
-MMX v1.0.3 is a hotfix for the v1.0.2 player packages.
+This is a Windows diagnostic pre-release for investigating issue #2. It is not
+intended to replace v1.0.3 yet.
 
-## Widescreen HUD fix
+Tentative fixes:
 
-- Restored the MMX6 HUD packet range to the player-facing `game.toml`, so the
-  health and ability meters anchor to the true widescreen corners.
-- Restored the reveal initializer and intro-stage culling hooks that had also
-  drifted out of the release config.
-- Added a release-packaging parity check. Windows and Linux packaging now fail
-  if the complete `[widescreen]` section differs from the development config.
+- Borderless uses a monitor-sized undecorated window without the SDL fullscreen
+  flag, preventing drivers from treating Borderless like Exclusive.
+- Exclusive requests an explicit desktop-sized display mode.
+- The cursor is hidden while a fullscreen game window has focus and restored
+  when focus is lost.
+- Alt+Enter and Ctrl+F track the applied tri-state mode correctly.
 
-The development config already contained these settings, which is why local
-builds worked while the downloadable v1.0.2 packages did not.
+Diagnostics:
 
-## Carried forward from v1.0.2
+- The runtime keeps a bounded history of window, focus, minimize, restore,
+  display-change, pixel-size, and fullscreen transition events.
+- Reports include SDL/Win32 window flags and styles, logical and pixel sizes,
+  monitor bounds, desktop/current modes and refresh rates, DPI, and cursor state.
+- Run `COLLECT_FULLSCREEN_DIAGNOSTICS.bat` while the game is open to create an
+  attachable JSON report. The collector excludes disc, BIOS, save, controller,
+  and user-directory paths.
 
-- Windows and Linux x86_64 packages with prebuilt native overlay shards.
-- Experimental Linux AppImage support.
-- MIT-licensed OpenBIOS bundled and selected by default.
-- The full acediez Tweaks catalog, including DuoDynamo's approved English
-  retranslation, plus the framework-owned loading-speed mods.
-
-All enhancements remain opt-in. Saves, memory cards, settings, and the player's
-original disc image remain compatible with v1.0.2.
+This diagnostic package intentionally omits the prebuilt overlay cache. Its
+bundled self-contained toolchain fills the cache during play, so first visits
+to game areas may load more slowly than in v1.0.3.

@@ -7,7 +7,10 @@ param(
     # writes to, per game.toml overlay_autocompile_cmd --out-dir). Bundled as a
     # head start; optional.
     [string]$CacheBuildDir = "build-stable",
-    [switch]$SkipRegen
+    [switch]$SkipRegen,
+    # Diagnostic pre-releases expose the localhost debug protocol and bundle
+    # the fullscreen report collector. Normal release behavior is unchanged.
+    [switch]$FullscreenDiagnostics
 )
 
 $ErrorActionPreference = "Stop"
@@ -58,7 +61,8 @@ if (-not $SkipRegen) {
     Write-Host "Skipping game C regeneration; packaging the existing generated sources"
 }
 
-Invoke-Native { cmake -S $Root -B $BuildPath -G Ninja -DCMAKE_BUILD_TYPE=Release -DPSX_DEBUG_TOOLS=OFF } "cmake configure"
+$DebugTools = if ($FullscreenDiagnostics) { "ON" } else { "OFF" }
+Invoke-Native { cmake -S $Root -B $BuildPath -G Ninja -DCMAKE_BUILD_TYPE=Release -DPSX_DEBUG_TOOLS=$DebugTools } "cmake configure"
 Invoke-Native { cmake --build $BuildPath -j $env:NUMBER_OF_PROCESSORS } "cmake build"
 
 if (Test-Path $StageRoot) {
@@ -103,6 +107,16 @@ Copy-Item (Join-Path $BundledBiosSrc "openbios.bin") $BundledBiosDst
 Copy-Item (Join-Path $BundledBiosSrc "OpenBIOS.LICENSE") $BundledBiosDst
 if (Test-Path (Join-Path $Root "RELEASE_NOTES.md")) {
     Copy-Item (Join-Path $Root "RELEASE_NOTES.md") $Stage
+}
+if ($FullscreenDiagnostics) {
+    $DiagnosticsSrc = Join-Path $Root "tools\fullscreen_diagnostics"
+    foreach ($name in @(
+        "COLLECT_FULLSCREEN_DIAGNOSTICS.bat",
+        "COLLECT_FULLSCREEN_DIAGNOSTICS.ps1",
+        "FULLSCREEN_DIAGNOSTICS_README.txt"
+    )) {
+        Copy-Item (Join-Path $DiagnosticsSrc $name) $Stage
+    }
 }
 
 # Launcher assets: this build ships the shared recomp-ui Dear ImGui launcher
@@ -326,6 +340,17 @@ Controller mappings are configurable in input.ini.
 Memory cards are stored in the saves directory; save and load work with standard
 PS1 .mcd images.
 "@ | Set-Content -Encoding ASCII (Join-Path $Stage "START_HERE.txt")
+
+if ($FullscreenDiagnostics) {
+@"
+
+DIAGNOSTIC PRE-RELEASE:
+This package is for fullscreen testing and intentionally has no prebuilt overlay
+cache. First visits to game areas may load more slowly than in the stable build.
+After reproducing the issue, keep the game running and double-click
+COLLECT_FULLSCREEN_DIAGNOSTICS.bat, then attach the generated JSON report.
+"@ | Add-Content -Encoding ASCII (Join-Path $Stage "START_HERE.txt")
+}
 
 if (Test-Path $ZipPath) {
     Remove-Item -Force $ZipPath
