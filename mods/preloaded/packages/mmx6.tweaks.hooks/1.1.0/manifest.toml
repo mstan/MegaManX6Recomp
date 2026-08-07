@@ -1,0 +1,137 @@
+format_version = 4
+id = "mmx6.tweaks.hooks"
+version = "1.1.0"
+name = "Mega Man X6 Voice Hooks"
+author = "acediez"
+description = "Independent stock-disc voice restoration hooks."
+license = "Generated locally; original credits retained"
+resolver = "builtin:mmx6.tweaks.hooks"
+save_compatibility = "shared"
+source_name = "Mega Man X6 Tweaks"
+source_url = "https://www.romhacking.net/hacks/4035/"
+
+[[author_link]]
+name = "acediez"
+url = "https://twitter.com/acediez"
+
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+[[feature]]
+id = "voice_title"
+name = "Title Screen Voice (\"Rockman X6\")"
+description = "Play the \"Rockman X6\" voice clip on the title screen."
+group = "Audio"
+default_enabled = false
+
+[[feature]]
+id = "voice_boss_intros"
+name = "Boss Intro Voices"
+description = "Restore voice clips during boss introductions."
+group = "Audio"
+default_enabled = false
+
+[[feature]]
+id = "voice_low_health"
+name = "Low Health Voices"
+description = "Restore the X and Zero low-health voice clips."
+group = "Audio"
+default_enabled = false
+
+[[feature]]
+id = "voice_boss_warning"
+name = "Boss Warning Voice"
+description = "Restore the voice clip on the boss warning screen."
+group = "Audio"
+default_enabled = false
+
+[[overlay]]
+feature = "voice_boss_warning"
+target = "disc_user"
+offset = 499126272
+file = "assets/warning/record-085-stock-script.bin"
+sha256 = "4a29d770fd4d335b6faa1e161395d4fa55fc08904e26e82294148ff35dc91400"
+expected_sha256 = "faa6bea73bd03cdcf2d58dcf7e02488b7c1146ebb1031083aa8106cc82533717"
+when_feature = { package = "mmx6.tweaks.native", feature = "retranslation", enabled = false }
+
+[[overlay]]
+feature = "voice_boss_warning"
+target = "disc_user"
+offset = 499126272
+file = "assets/warning/record-085-retranslation.bin"
+sha256 = "c81aa441f53fd1b8cc9f4edca76e82d9210a5ea10bca71c0847210cb3d460bc8"
+expected_sha256 = "faa6bea73bd03cdcf2d58dcf7e02488b7c1146ebb1031083aa8106cc82533717"
+when_feature = { package = "mmx6.tweaks.native", feature = "retranslation", enabled = true }
+
+[[overlay]]
+feature = "voice_boss_warning"
+target = "disc_user"
+offset = 499968000
+file = "assets/warning/record-086-stock-script.bin"
+sha256 = "929b02d80e2342830b202eea10cc9a9ad39cb45fbb47e976cdf799c74a9d883a"
+expected_sha256 = "a6e10f1f48c9b0bb4eb3374fb6a7c8ff74cc07d21155ed1a7a32611dde0f57ea"
+when_feature = { package = "mmx6.tweaks.native", feature = "retranslation", enabled = false }
+
+[[overlay]]
+feature = "voice_boss_warning"
+target = "disc_user"
+offset = 499968000
+file = "assets/warning/record-086-retranslation.bin"
+sha256 = "6b3f4ba36faf8a833ced63fc055300bca9d90b14cb2e0ba129f9af08b7c93325"
+expected_sha256 = "a6e10f1f48c9b0bb4eb3374fb6a7c8ff74cc07d21155ed1a7a32611dde0f57ea"
+when_feature = { package = "mmx6.tweaks.native", feature = "retranslation", enabled = true }
+
+[[overlay]]
+feature = "voice_boss_warning"
+target = "disc_user"
+offset = 500881408
+file = "assets/warning/record-087-stock-script.bin"
+sha256 = "3d64c9f78bfa79a3d19570909c831d37a3e380301233d9cbcceb888d1a2ccb19"
+expected_sha256 = "10d8ce3cfcdff65c514699ea99b8c3a2543fef67f7485b25c58f426229b9c589"
+when_feature = { package = "mmx6.tweaks.native", feature = "retranslation", enabled = false }
+
+[[overlay]]
+feature = "voice_boss_warning"
+target = "disc_user"
+offset = 500881408
+file = "assets/warning/record-087-retranslation.bin"
+sha256 = "2a0094bac3a650e04cef98c514ab7f35c469a5eb04c01fb40391695728f24666"
+expected_sha256 = "10d8ce3cfcdff65c514699ea99b8c3a2543fef67f7485b25c58f426229b9c589"
+when_feature = { package = "mmx6.tweaks.native", feature = "retranslation", enabled = true }
+
+[[overlay]]
+feature = "voice_boss_warning"
+target = "disc_user"
+offset = 501823488
+file = "assets/warning/record-088-stock-script.bin"
+sha256 = "c7021afb77529023d93d000f1baf2700f17313478c6e4fdff3a83b242cbb3e57"
+expected_sha256 = "207fdcc5799cf911bd20210f9e6273e369cbc9570669fd7d5b0929b2bdfb372e"
+when_feature = { package = "mmx6.tweaks.native", feature = "retranslation", enabled = false }
+
+[[overlay]]
+feature = "voice_boss_warning"
+target = "disc_user"
+offset = 501823488
+file = "assets/warning/record-088-retranslation.bin"
+sha256 = "c21fd0d59971f34cef78ad3304ff8fc23a97901d3d1d84e73cd241870a6fc970"
+expected_sha256 = "207fdcc5799cf911bd20210f9e6273e369cbc9570669fd7d5b0929b2bdfb372e"
+when_feature = { package = "mmx6.tweaks.native", feature = "retranslation", enabled = true }
+
+[[overlay]]
+feature = "voice_boss_warning"
+target = "disc_user"
+offset = 502640640
+file = "assets/warning/record-089-stock-script.bin"
+sha256 = "a7a4476b6449a013683e86facca7139ae4dc871013ec141fdda33ab9bfa3399b"
+expected_sha256 = "32bac2734c9376ba35b3663544947fb98fad53931d0721e24bbb0aefabfabd43"
+when_feature = { package = "mmx6.tweaks.native", feature = "retranslation", enabled = false }
+
+[[overlay]]
+feature = "voice_boss_warning"
+target = "disc_user"
+offset = 502640640
+file = "assets/warning/record-089-retranslation.bin"
+sha256 = "20f3c92498858b315643b737d410f241ca1c9ff4d5df4a334ccf2ac4b73dddf8"
+expected_sha256 = "32bac2734c9376ba35b3663544947fb98fad53931d0721e24bbb0aefabfabd43"
+when_feature = { package = "mmx6.tweaks.native", feature = "retranslation", enabled = true }

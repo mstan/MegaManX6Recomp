@@ -27,7 +27,7 @@ void check(bool value, const char* message) {
 
 ModPackage valid_package(bool reverse_features = false) {
     ModPackage package;
-    package.format_version = 3;
+    package.format_version = 4;
     package.id = MMX6Mods::kTweaksHooksPackageId;
     package.version = MMX6Mods::kTweaksHooksPackageVersion;
     package.name = "Mega Man X6 Voice Hooks";
@@ -53,6 +53,52 @@ ModPackage valid_package(bool reverse_features = false) {
     }
     if (reverse_features)
         std::reverse(package.features.begin(), package.features.end());
+    struct Asset {
+        uint64_t location;
+        uint64_t size;
+        const char* backing;
+        const char* voice;
+        const char* retranslation;
+    };
+    const Asset assets[] = {
+        {0x1DC01000, 0xCD800,
+         "faa6bea73bd03cdcf2d58dcf7e02488b7c1146ebb1031083aa8106cc82533717",
+         "4a29d770fd4d335b6faa1e161395d4fa55fc08904e26e82294148ff35dc91400",
+         "c81aa441f53fd1b8cc9f4edca76e82d9210a5ea10bca71c0847210cb3d460bc8"},
+        {0x1DCCE800, 0xDF000,
+         "a6e10f1f48c9b0bb4eb3374fb6a7c8ff74cc07d21155ed1a7a32611dde0f57ea",
+         "929b02d80e2342830b202eea10cc9a9ad39cb45fbb47e976cdf799c74a9d883a",
+         "6b3f4ba36faf8a833ced63fc055300bca9d90b14cb2e0ba129f9af08b7c93325"},
+        {0x1DDAD800, 0xE6000,
+         "10d8ce3cfcdff65c514699ea99b8c3a2543fef67f7485b25c58f426229b9c589",
+         "3d64c9f78bfa79a3d19570909c831d37a3e380301233d9cbcceb888d1a2ccb19",
+         "2a0094bac3a650e04cef98c514ab7f35c469a5eb04c01fb40391695728f24666"},
+        {0x1DE93800, 0xC7800,
+         "207fdcc5799cf911bd20210f9e6273e369cbc9570669fd7d5b0929b2bdfb372e",
+         "c7021afb77529023d93d000f1baf2700f17313478c6e4fdff3a83b242cbb3e57",
+         "c21fd0d59971f34cef78ad3304ff8fc23a97901d3d1d84e73cd241870a6fc970"},
+        {0x1DF5B000, 0xE3800,
+         "32bac2734c9376ba35b3663544947fb98fad53931d0721e24bbb0aefabfabd43",
+         "a7a4476b6449a013683e86facca7139ae4dc871013ec141fdda33ab9bfa3399b",
+         "20f3c92498858b315643b737d410f241ca1c9ff4d5df4a334ccf2ac4b73dddf8"},
+    };
+    for (const Asset& asset : assets) {
+        for (bool retranslation : {false, true}) {
+            ModOverlay overlay;
+            overlay.feature_id = "voice_boss_warning";
+            overlay.target = ModPatchTarget::DiscUser;
+            overlay.location = asset.location;
+            overlay.size = asset.size;
+            overlay.sha256 = retranslation
+                ? asset.retranslation : asset.voice;
+            overlay.expected_sha256 = asset.backing;
+            overlay.when_feature.present = true;
+            overlay.when_feature.package_id = "mmx6.tweaks.native";
+            overlay.when_feature.feature_id = "retranslation";
+            overlay.when_feature.enabled = retranslation;
+            package.overlays.push_back(std::move(overlay));
+        }
+    }
     return package;
 }
 
@@ -111,8 +157,8 @@ void test_independent_composition() {
               writes, errors),
           "disjoint voice features must resolve together");
     check(errors.empty(), "disjoint voice features must have no errors");
-    check(writes.size() == 4,
-          "two voices must emit one foundation and three hook sites");
+    check(writes.size() == 10,
+          "title and warning must emit hooks plus six DAT redirects");
 
     const ModResolution::Write* code =
         find_write(writes, ModPatchTarget::MainExe, 0x80076440ull);
@@ -140,6 +186,10 @@ void test_independent_composition() {
               writes, ModPatchTarget::MainExe, 0x80053874ull) != nullptr,
           "warning hook must include its full callsite");
     check(find_write(
+              writes, ModPatchTarget::DiscUser, 0x19E0F2A8ull) != nullptr &&
+              find_write(writes, ModPatchTarget::DiscUser, 0xB0A6ull) != nullptr,
+          "warning must redirect its sound records and expose the DAT tail");
+    check(find_write(
               writes, ModPatchTarget::DiscUser, 0x19D3FE18ull) == nullptr,
           "disabled boss-intro member must emit no operation");
 }
@@ -155,8 +205,8 @@ void test_all_stock_guards_and_order() {
     });
     check(resolve(valid_package(), all, writes, errors),
           "all voices must compose");
-    check(writes.size() == 6,
-          "all voices must emit one foundation and five sites");
+    check(writes.size() == 12,
+          "all voices must emit one foundation, five sites, and six redirects");
     const ModResolution::Write* intro =
         find_write(writes, ModPatchTarget::DiscUser, 0x19D3FE18ull);
     check(intro && intro->expected.size() == 12 &&
@@ -265,34 +315,22 @@ void test_manager_integration() {
         fs::temp_directory_path() / "mmx6-tweaks-hooks-resolver-test";
     std::error_code ec;
     fs::remove_all(root, ec);
-    const fs::path manifest =
-        root / "packages" / "mmx6.tweaks.hooks" / "1.0.0" /
-        "manifest.toml";
-    fs::create_directories(manifest.parent_path(), ec);
-    std::ofstream out(manifest);
-    out <<
-        "format_version = 3\n"
-        "id = \"mmx6.tweaks.hooks\"\n"
-        "version = \"1.0.0\"\n"
-        "name = \"Mega Man X6 Voice Hooks\"\n"
-        "resolver = \"builtin:mmx6.tweaks.hooks\"\n"
-        "[[target]]\n"
-        "game_id = \"SLUS-01395\"\n"
-        "disc_sha256 = "
-        "\"91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318\"\n"
-        "[[feature]]\n"
-        "id = \"voice_boss_intros\"\n"
-        "name = \"Boss Intro Voices\"\n"
-        "[[feature]]\n"
-        "id = \"voice_boss_warning\"\n"
-        "name = \"Boss Warning Voice\"\n"
-        "[[feature]]\n"
-        "id = \"voice_low_health\"\n"
-        "name = \"Low Health Voices\"\n"
-        "[[feature]]\n"
-        "id = \"voice_title\"\n"
-        "name = \"Title Voice\"\n";
-    out.close();
+    const fs::path source = fs::path(__FILE__).parent_path().parent_path() /
+        "mods" / "preloaded" / "packages" / "mmx6.tweaks.hooks" / "1.1.0";
+    const fs::path destination = root / "packages" /
+        "mmx6.tweaks.hooks" / "1.1.0";
+    fs::create_directories(destination.parent_path(), ec);
+    fs::copy(source, destination, fs::copy_options::recursive, ec);
+    check(!ec, "preloaded trusted hook package must copy into test root");
+    const fs::path native_source =
+        fs::path(__FILE__).parent_path().parent_path() / "mods" /
+        "preloaded" / "packages" / "mmx6.tweaks.native" / "1.10.5";
+    const fs::path native_destination = root / "packages" /
+        "mmx6.tweaks.native" / "1.10.5";
+    fs::create_directories(native_destination.parent_path(), ec);
+    fs::copy(
+        native_source, native_destination, fs::copy_options::recursive, ec);
+    check(!ec, "native retranslation package must copy into test root");
 
     ModPackageManager manager(root);
     std::string error;
@@ -303,17 +341,38 @@ void test_manager_integration() {
     check(manager.set_feature_enabled(
               "mmx6.tweaks.hooks", "voice_title", true, &error),
           "manager must independently enable a second hook feature");
+    check(manager.set_feature_enabled(
+              "mmx6.tweaks.hooks", "voice_boss_warning", true, &error),
+          "manager must enable warning assets");
     const ModResolution resolved = manager.resolve(
         "SLUS-01395", "",
         "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318");
     check(resolved.ok,
           "package manager must invoke the registered trusted resolver");
-    check(resolved.writes.size() == 4,
-          "manager plan must contain one foundation and selected hook sites");
+    check(resolved.writes.size() == 11 && resolved.overlays.size() == 5,
+          "manager plan must contain hooks, redirects, and five warning banks");
     check(find_write(
               resolved.writes, ModPatchTarget::DiscUser,
               0x19D3FE18ull) != nullptr,
           "manager plan must retain boss-intro member lifecycle write");
+    check(!resolved.overlays.empty() &&
+              resolved.overlays[0].payload_sha256 ==
+                  "4a29d770fd4d335b6faa1e161395d4fa55fc08904e26e82294148ff35dc91400",
+          "disabled retranslation must select stock-script warning banks");
+    check(manager.set_feature_enabled(
+              "mmx6.tweaks.native", "retranslation", true, &error),
+          "manager must enable the external retranslation feature");
+    const ModResolution translated = manager.resolve(
+        "SLUS-01395", "",
+        "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318");
+    const bool found_composed = std::any_of(
+        translated.overlays.begin(), translated.overlays.end(),
+        [](const ModResolution::Overlay& overlay) {
+            return overlay.payload_sha256 ==
+                "c81aa441f53fd1b8cc9f4edca76e82d9210a5ea10bca71c0847210cb3d460bc8";
+        });
+    check(translated.ok && found_composed,
+          "enabled retranslation must select composed warning banks");
     fs::remove_all(root, ec);
 }
 
@@ -332,7 +391,7 @@ void test_local_archive_when_supplied() {
               archive, &installed_id, &installed_version, &error),
           "locally generated hook archive must install");
     check(installed_id == "mmx6.tweaks.hooks" &&
-              installed_version == "1.0.0",
+              installed_version == "1.1.0",
           "local archive must retain its trusted identity");
     check(manager.set_feature_enabled(
               installed_id, "voice_title", true, &error),

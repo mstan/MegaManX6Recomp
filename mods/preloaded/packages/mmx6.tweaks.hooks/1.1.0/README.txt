@@ -1,0 +1,1 @@
+The MMX6 runtime owns and validates all trusted hook bytes. The boss-warning feature also carries five minimal prototype sound-bank records, composed for stock or the separate retranslation feature. It targets a stock USA v1.1 BIN/CUE and does not contain a derived disc.

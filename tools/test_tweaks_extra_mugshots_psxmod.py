@@ -35,7 +35,7 @@ class ExtraMugshotPackageTests(unittest.TestCase):
         self.assertEqual(records[244], (extra.RESERVED_BASE_SECTOR + 4, 512))
         self.assertEqual(records[245], (extra.RESERVED_BASE_SECTOR + 5, 8192))
         self.assertEqual(records[246], (extra.RESERVED_BASE_SECTOR + 9, 512))
-        self.assertEqual(extra.RESERVED_LOGICAL_SIZE, 0x03DF2000)
+        self.assertEqual(extra.RESERVED_LOGICAL_SIZE, 0x0422F800)
 
     @unittest.skipUnless(
         Path("mmx6-tweaks/Mega Man X6 (USA) (v1.1).bin").is_file(),

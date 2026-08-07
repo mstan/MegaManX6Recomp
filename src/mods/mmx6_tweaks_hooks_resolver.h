@@ -5,7 +5,7 @@
 namespace MMX6Mods {
 
 inline constexpr const char* kTweaksHooksPackageId = "mmx6.tweaks.hooks";
-inline constexpr const char* kTweaksHooksPackageVersion = "1.0.0";
+inline constexpr const char* kTweaksHooksPackageVersion = "1.1.0";
 inline constexpr const char* kTweaksHooksResolverId = "mmx6.tweaks.hooks";
 
 bool resolve_tweaks_hooks(

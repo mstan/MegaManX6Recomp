@@ -17,6 +17,7 @@ PatchList_Base writes are evidence only and are never inherited implicitly.
 from __future__ import annotations
 
 import argparse
+from collections import Counter
 from contextlib import ExitStack
 import hashlib
 import json
@@ -4046,6 +4047,27 @@ SCRIPT_IN_PLACE_IDS = frozenset(
         242,
     )
 )
+
+# The upstream Retranslation base hard-wires Metalwario64's optional Hunter and
+# Dr. Light portraits into its rebuilt type-0x15 dialogue scripts.  Its GUI
+# acknowledges the coupling in ScriptPatchControl by removing the "None"
+# choices for MugshotCustom01/02 and forcing Custom A whenever ScriptPatch02 is
+# selected.  The public recomp package intentionally withholds those portrait
+# assets, so retaining the hard-wired command makes the game fetch nonexistent
+# DAT records 243-246 and display stale VRAM instead.
+#
+# Restore the stock no-portrait command in the translated scripts.  Keep this
+# as an exact record ledger rather than a global byte replacement: these are the
+# 2 Hunter and 16 Dr. Light sites owned by the two withheld controls.
+EXTRA_MUGSHOT_FORCED_COMMAND = bytes.fromhex("3080")
+EXTRA_MUGSHOT_NONE_COMMAND = bytes.fromhex("10C0")
+RETRANSLATION_EXTRA_MUGSHOT_RECORDS = {
+    203: "hunter",
+    204: "hunter",
+    **{record_id: "dr_light" for record_id in range(205, 219)},
+    241: "dr_light",
+    242: "dr_light",
+}
 SCRIPT_RELOCATED_IDS = frozenset(
     (
         106,
@@ -4069,6 +4091,52 @@ SCRIPT_RELOCATED_IDS = frozenset(
 class Subasset:
     asset_type: int
     payload: bytes
+
+
+def restore_retranslation_extra_mugshot_none(
+    record_id: int,
+    subasset_index: int,
+    subasset: Subasset,
+) -> tuple[Subasset, dict | None]:
+    """Decouple translated dialogue from withheld custom portrait assets."""
+    if subasset.asset_type != 0x15:
+        if record_id in RETRANSLATION_EXTRA_MUGSHOT_RECORDS:
+            raise AssertionError(
+                f"extra mugshot record {record_id} is no longer a type-0x15 "
+                "dialogue script"
+            )
+        return subasset, None
+
+    matches = subasset.payload.count(EXTRA_MUGSHOT_FORCED_COMMAND)
+    expected = int(
+        subasset_index == 0
+        and record_id in RETRANSLATION_EXTRA_MUGSHOT_RECORDS
+    )
+    if matches != expected:
+        raise AssertionError(
+            f"record {record_id} subasset {subasset_index} contains {matches} "
+            f"forced extra-mugshot commands, expected {expected}"
+        )
+    if not expected:
+        return subasset, None
+
+    offset = subasset.payload.index(EXTRA_MUGSHOT_FORCED_COMMAND)
+    payload = (
+        subasset.payload[:offset]
+        + EXTRA_MUGSHOT_NONE_COMMAND
+        + subasset.payload[offset + len(EXTRA_MUGSHOT_FORCED_COMMAND) :]
+    )
+    return (
+        Subasset(subasset.asset_type, payload),
+        {
+            "record_id": record_id,
+            "subasset_index": subasset_index,
+            "character": RETRANSLATION_EXTRA_MUGSHOT_RECORDS[record_id],
+            "relative_offset": offset,
+            "expected": EXTRA_MUGSHOT_FORCED_COMMAND.hex().upper(),
+            "replace": EXTRA_MUGSHOT_NONE_COMMAND.hex().upper(),
+        },
+    )
 
 
 def dat_records(data: bytes) -> dict[int, DatRecord]:
@@ -4229,6 +4297,7 @@ def build_retranslation_ops(
     custom_records: dict[int, bytes] = {}
     owned_replacements: dict[int, dict[int, Subasset]] = {}
     subasset_evidence = []
+    extra_mugshot_restores = []
     for record_id, owned in sorted(SCRIPT_SUBASSETS.items()):
         original = stock_records[record_id]
         source = s02_records[record_id]
@@ -4274,6 +4343,13 @@ def build_retranslation_ops(
                     f"script oracle does not contain owned record "
                     f"{record_id} subasset {index}"
                 )
+            replacement, restore_evidence = (
+                restore_retranslation_extra_mugshot_none(
+                    record_id, index, replacement
+                )
+            )
+            if restore_evidence is not None:
+                extra_mugshot_restores.append(restore_evidence)
             custom_subassets[index] = replacement
             owned_replacements[record_id][index] = replacement
             subasset_evidence.append(
@@ -4286,6 +4362,21 @@ def build_retranslation_ops(
                 }
             )
         custom_records[record_id] = build_outer_record(custom_subassets)
+
+    expected_restore_count = len(RETRANSLATION_EXTRA_MUGSHOT_RECORDS)
+    if len(extra_mugshot_restores) != expected_restore_count:
+        raise AssertionError(
+            "retranslation extra-mugshot restore count changed: "
+            f"{len(extra_mugshot_restores)}, expected {expected_restore_count}"
+        )
+    restore_characters = Counter(
+        item["character"] for item in extra_mugshot_restores
+    )
+    if restore_characters != Counter({"hunter": 2, "dr_light": 16}):
+        raise AssertionError(
+            "retranslation extra-mugshot character ledger changed: "
+            f"{dict(restore_characters)}"
+        )
 
     protected = [
         (item.user_offset, item.user_offset + len(item.replace), item.label)
@@ -4458,8 +4549,13 @@ def build_retranslation_ops(
     # position so it composes with Retranslation without needing to rewrite the
     # retranslation allocator's existing records.
     reserved_extra_mugshot_sectors = 10
-    logical_dat_size = (pack_sector + reserved_extra_mugshot_sectors) * USER_SECTOR
-    if logical_dat_size != 0x03DF2000:
+    warning_voice_reserved_sectors = 0x87B
+    logical_dat_size = (
+        pack_sector
+        + reserved_extra_mugshot_sectors
+        + warning_voice_reserved_sectors
+    ) * USER_SECTOR
+    if logical_dat_size != 0x0422F800:
         raise AssertionError(
             f"reviewed virtual DAT extent changed: 0x{logical_dat_size:08X}"
         )
@@ -4475,7 +4571,7 @@ def build_retranslation_ops(
             label="rock-x6-dat-logical-size",
             user_offset=iso_size_offset,
             expected=iso_size_expected,
-            replace=bytes.fromhex("0020DF0303DF2000"),
+            replace=bytes.fromhex("00F822040422F800"),
             iso_file="ISO9660 root directory",
             file_offset=iso_size_offset,
         )
@@ -4525,11 +4621,14 @@ def build_retranslation_ops(
         "logical_record_ids": sorted(custom_records),
         "owned_subasset_count": len(subasset_evidence),
         "owned_subassets": subasset_evidence,
+        "withheld_extra_mugshot_commands_restored": extra_mugshot_restores,
+        "withheld_extra_mugshot_command_count": len(extra_mugshot_restores),
         "in_place_record_ids": equal_size_ids,
         "relocated_record_ids": relocated_ids,
         "relocated_start_sector": pack_first_sector,
         "relocated_sectors": packed_sectors,
         "reserved_extra_mugshot_record_sectors": reserved_extra_mugshot_sectors,
+        "reserved_warning_voice_record_sectors": warning_voice_reserved_sectors,
         "logical_dat_size": logical_dat_size,
         "stock_znull_sectors": znull_sectors,
         "composition_limit": (

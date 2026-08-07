@@ -14,6 +14,7 @@ import hashlib
 import io
 import json
 import re
+import struct
 import sys
 import zipfile
 from dataclasses import dataclass
@@ -24,7 +25,7 @@ import tweaks_native_psxmod as native
 
 ROOT = Path(__file__).resolve().parent.parent
 PACKAGE_ID = "mmx6.tweaks.hooks"
-PACKAGE_VERSION = "1.0.0"
+PACKAGE_VERSION = "1.1.0"
 RESOLVER = "builtin:mmx6.tweaks.hooks"
 STOCK_SHA256 = native.STOCK_SHA256
 B01_SHA256 = "7b3b7ad59fc2a3e936154685bf1062e8707188e37b182a9481c9d847397031e6"
@@ -47,6 +48,12 @@ DEFAULT_OUT = (
     / "test-psxmods"
     / "MMX6-Tweaks-Hooks.psxmod"
 )
+DEFAULT_S02_BASE = (
+    ROOT / "build-mod-platform" / "test-mod-variants" / "s02-base.bin"
+)
+WARNING_RECORD_IDS = tuple(range(85, 90))
+WARNING_FIRST_SECTOR = 0x7BE4
+WARNING_LOGICAL_SIZE = 0x0422F800
 
 
 @dataclass(frozen=True)
@@ -67,6 +74,16 @@ class VoiceSpec:
     name: str
     description: str
     writes: tuple[tuple[int, str], ...]
+
+
+@dataclass(frozen=True)
+class WarningAsset:
+    record_id: int
+    variant: str
+    sector: int
+    user_offset: int
+    payload: bytes
+    expected: bytes
 
 
 VOICE_SPECS = (
@@ -248,6 +265,168 @@ def resolve_writes(stock_path: Path, b01_path: Path) -> dict[str, list[SourceWri
     return resolved
 
 
+def build_warning_assets(
+    stock_path: Path, b01_path: Path, s02_path: Path
+) -> tuple[list[WarningAsset], list[dict]]:
+    """Compose the prototype warning sample into the five stage sound banks."""
+    assets: list[WarningAsset] = []
+    evidence: list[dict] = []
+    with native.RawMode2Image(stock_path) as stock, native.RawMode2Image(
+        b01_path
+    ) as b01, native.RawMode2Image(s02_path) as s02:
+        stock_entry = stock.entries["ROCK_X6.DAT"]
+        stock_dat = stock.read_file("ROCK_X6.DAT")
+        stock_records = native.dat_records(stock_dat)
+        b01_records = native.dat_records(b01.read_file("ROCK_X6.DAT"))
+        s02_records = native.dat_records(s02.read_file("ROCK_X6.DAT"))
+        sector = WARNING_FIRST_SECTOR
+        for record_id in WARNING_RECORD_IDS:
+            stock_record = stock_records[record_id]
+            stock_subassets = native.parse_subassets(stock_record)
+            b01_subassets = native.parse_subassets(b01_records[record_id])
+            s02_subassets = native.parse_subassets(s02_records[record_id])
+            if native.build_outer_record(stock_subassets) != stock_record.payload:
+                raise AssertionError(
+                    f"stock warning record {record_id} is not canonical"
+                )
+            if set(native.SCRIPT_SUBASSETS[record_id]) != {7, 9}:
+                raise AssertionError(
+                    f"record {record_id} retranslation ownership changed"
+                )
+            stock_bank = stock_subassets[4]
+            prototype_bank = b01_subassets[4]
+            if (
+                stock_bank.asset_type != 4
+                or prototype_bank.asset_type != 4
+                or len(stock_bank.payload) != 0x14D8
+                or len(prototype_bank.payload) != 0x29B0
+                or stock_bank.payload[:4] != bytes.fromhex("B8000000")
+                or prototype_bank.payload[:4] != bytes.fromhex("BC000000")
+            ):
+                raise AssertionError(
+                    f"record {record_id} warning-bank identity changed"
+                )
+            coupled_identities = (
+                (4, 4, 0x14D8, 0x29B0),
+                (5, 0x20000, 0x21D70, 0x22E10),
+                (6, 0x10007, 0x8000, 0x8000),
+            )
+            for index, asset_type, stock_size, prototype_size in (
+                coupled_identities
+            ):
+                stock_asset = stock_subassets[index]
+                prototype_asset = b01_subassets[index]
+                if (
+                    stock_asset.asset_type != asset_type
+                    or prototype_asset.asset_type != asset_type
+                    or len(stock_asset.payload) != stock_size
+                    or len(prototype_asset.payload) != prototype_size
+                    or stock_asset.payload == prototype_asset.payload
+                ):
+                    raise AssertionError(
+                        f"record {record_id} warning sound-bank component "
+                        f"{index} identity changed"
+                    )
+
+            voice_subassets = list(stock_subassets)
+            for index, _, _, _ in coupled_identities:
+                voice_subassets[index] = b01_subassets[index]
+            voice_payload = native.build_outer_record(voice_subassets)
+            if (
+                record_id != 88
+                and voice_payload != b01_records[record_id].payload
+            ):
+                raise AssertionError(
+                    f"record {record_id} does not reproduce the B01 "
+                    "sound-bank record"
+                )
+
+            combined_subassets = list(voice_subassets)
+            for index in sorted(native.SCRIPT_SUBASSETS[record_id]):
+                replacement, restore = (
+                    native.restore_retranslation_extra_mugshot_none(
+                        record_id, index, s02_subassets[index]
+                    )
+                )
+                if restore is not None:
+                    raise AssertionError(
+                        "intro warning records unexpectedly own extra portraits"
+                    )
+                combined_subassets[index] = replacement
+            combined_payload = native.build_outer_record(combined_subassets)
+            if len(combined_payload) != len(voice_payload):
+                raise AssertionError(
+                    f"record {record_id} warning variants differ in size"
+                )
+
+            user_offset = stock_entry.lba * native.USER_SECTOR + (
+                sector * native.USER_SECTOR
+            )
+            expected = stock.read_user(user_offset, len(voice_payload))
+            for variant, payload in (
+                ("stock-script", voice_payload),
+                ("retranslation", combined_payload),
+            ):
+                assets.append(
+                    WarningAsset(
+                        record_id,
+                        variant,
+                        sector,
+                        user_offset,
+                        payload,
+                        expected,
+                    )
+                )
+            evidence.append(
+                {
+                    "record_id": record_id,
+                    "stock_sector": stock_record.sector,
+                    "relocated_sector": sector,
+                    "size": len(voice_payload),
+                    "table_expected": stock_dat[
+                        record_id * 8 : record_id * 8 + 8
+                    ].hex().upper(),
+                    "table_replacement": struct.pack(
+                        "<II", sector, len(voice_payload)
+                    ).hex().upper(),
+                    "coupled_subassets": [
+                        {
+                            "index": index,
+                            "asset_type": asset_type,
+                            "stock_size": stock_size,
+                            "prototype_size": prototype_size,
+                            "stock_sha256": hashlib.sha256(
+                                stock_subassets[index].payload
+                            ).hexdigest(),
+                            "prototype_sha256": hashlib.sha256(
+                                b01_subassets[index].payload
+                            ).hexdigest(),
+                        }
+                        for index, asset_type, stock_size, prototype_size in (
+                            coupled_identities
+                        )
+                    ],
+                    "voice_sha256": hashlib.sha256(
+                        voice_payload
+                    ).hexdigest(),
+                    "retranslation_sha256": hashlib.sha256(
+                        combined_payload
+                    ).hexdigest(),
+                }
+            )
+            sector += len(voice_payload) // native.USER_SECTOR
+        if sector * native.USER_SECTOR != WARNING_LOGICAL_SIZE:
+            raise AssertionError(
+                f"warning DAT extent changed: 0x{sector * native.USER_SECTOR:X}"
+            )
+        znull = stock.entries["ZNULL.DAT"]
+        if assets[-1].user_offset + len(assets[-1].payload) > (
+            znull.lba * native.USER_SECTOR + znull.size
+        ):
+            raise AssertionError("warning records do not fit stock ZNULL.DAT")
+    return assets, evidence
+
+
 def toml_quote(value: str) -> str:
     escaped = (
         value.replace("\\", "\\\\")
@@ -258,9 +437,16 @@ def toml_quote(value: str) -> str:
     return f'"{escaped}"'
 
 
-def manifest_text() -> str:
+def warning_asset_path(asset: WarningAsset) -> str:
+    return (
+        f"assets/warning/record-{asset.record_id:03d}-"
+        f"{asset.variant}.bin"
+    )
+
+
+def manifest_text(assets: list[WarningAsset]) -> str:
     lines = [
-        "format_version = 3",
+        "format_version = 4",
         f"id = {toml_quote(PACKAGE_ID)}",
         f"version = {toml_quote(PACKAGE_VERSION)}",
         'name = "Mega Man X6 Voice Hooks"',
@@ -294,12 +480,30 @@ def manifest_text() -> str:
                 "default_enabled = false",
             )
         )
+    for asset in assets:
+        lines.extend(
+            (
+                "",
+                "[[overlay]]",
+                'feature = "voice_boss_warning"',
+                'target = "disc_user"',
+                f"offset = {asset.user_offset}",
+                f"file = {toml_quote(warning_asset_path(asset))}",
+                f"sha256 = {toml_quote(hashlib.sha256(asset.payload).hexdigest())}",
+                f"expected_sha256 = {toml_quote(hashlib.sha256(asset.expected).hexdigest())}",
+                "when_feature = { package = \"mmx6.tweaks.native\", "
+                "feature = \"retranslation\", enabled = "
+                + ("true" if asset.variant == "retranslation" else "false")
+                + " }",
+            )
+        )
     return "\n".join(lines) + "\n"
 
 
 def conversion_report(
     stock: Path, b01: Path, source: Path,
     resolved: dict[str, list[SourceWrite]],
+    warning_evidence: list[dict],
 ) -> dict:
     return {
         "package_id": PACKAGE_ID,
@@ -343,30 +547,49 @@ def conversion_report(
             }
             for spec in VOICE_SPECS
         },
+        "boss_warning_sound_banks": {
+            "source": (
+                "B01 prototype base ROCK_X6.DAT coupled sound-bank "
+                "subassets 4, 5, and 6"
+            ),
+            "record_ids": list(WARNING_RECORD_IDS),
+            "relocated_first_sector": WARNING_FIRST_SECTOR,
+            "logical_dat_size": WARNING_LOGICAL_SIZE,
+            "records": warning_evidence,
+        },
     }
 
 
-def archive_bytes(manifest: str, report: dict) -> bytes:
+def archive_bytes(
+    manifest: str, report: dict, warning_assets: list[WarningAsset]
+) -> bytes:
     output = io.BytesIO()
     with zipfile.ZipFile(
         output, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=9
     ) as archive:
         members = {
             "README.txt": (
-                "This package contains declarations only. The MMX6 runtime "
-                "owns and validates all trusted hook bytes. It targets a "
-                "stock USA v1.1 BIN/CUE and does not contain a derived disc.\n"
+                "The MMX6 runtime owns and validates all trusted hook bytes. "
+                "The boss-warning feature also carries five minimal "
+                "prototype sound-bank records, composed for stock or the "
+                "separate retranslation feature. It targets a stock USA "
+                "v1.1 BIN/CUE and does not contain a derived disc.\n"
             ),
             "conversion-report.json": (
                 json.dumps(report, indent=2, sort_keys=True) + "\n"
             ),
             "manifest.toml": manifest,
         }
+        for asset in warning_assets:
+            members[warning_asset_path(asset)] = asset.payload
         for name in sorted(members):
             info = zipfile.ZipInfo(name, (1980, 1, 1, 0, 0, 0))
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = 0o100644 << 16
-            archive.writestr(info, members[name].encode("utf-8"))
+            payload = members[name]
+            if isinstance(payload, str):
+                payload = payload.encode("utf-8")
+            archive.writestr(info, payload)
     return output.getvalue()
 
 
@@ -379,6 +602,12 @@ def main() -> int:
         required=True,
         help="isolated Tweaks B01 base image used only as a conversion oracle",
     )
+    parser.add_argument(
+        "--s02-base",
+        type=Path,
+        default=DEFAULT_S02_BASE,
+        help="isolated Tweaks S02 base used to compose retranslation banks",
+    )
     parser.add_argument("--patcher-source", type=Path, default=DEFAULT_SOURCE)
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT)
     parser.add_argument("--verify-only", action="store_true")
@@ -387,6 +616,7 @@ def main() -> int:
     for path, label in (
         (args.stock, "stock image"),
         (args.b01_base, "B01 base oracle"),
+        (args.s02_base, "S02 base oracle"),
         (args.patcher_source, "Tweaks source database"),
     ):
         if not path.is_file():
@@ -394,12 +624,19 @@ def main() -> int:
 
     verify_source(args.patcher_source)
     resolved = resolve_writes(args.stock, args.b01_base)
-    report = conversion_report(
-        args.stock, args.b01_base, args.patcher_source, resolved
+    warning_assets, warning_evidence = build_warning_assets(
+        args.stock, args.b01_base, args.s02_base
     )
-    manifest = manifest_text()
-    first = archive_bytes(manifest, report)
-    second = archive_bytes(manifest, report)
+    report = conversion_report(
+        args.stock,
+        args.b01_base,
+        args.patcher_source,
+        resolved,
+        warning_evidence,
+    )
+    manifest = manifest_text(warning_assets)
+    first = archive_bytes(manifest, report, warning_assets)
+    second = archive_bytes(manifest, report, warning_assets)
     if first != second:
         raise AssertionError("package archive is not deterministic")
 

@@ -1,17 +1,18 @@
 # MMX6 Tweaks trusted hooks
 
 `mmx6.tweaks.hooks` is a stock-disc package resolved by game-owned code. The
-package contains feature declarations, not native code or a derived image.
+package contains feature declarations and narrowly owned source assets, not
+native code or a derived image.
 Each feature is a separate left-pane entry and can be enabled independently.
 
-## Implemented in 1.0.0
+## Implemented in 1.1.0
 
 | Feature ID | Tweaks source ID | Runtime ownership |
 |---|---|---|
 | `voice_title` | `VoiceClip01` | two guarded SLUS sites plus allocation slice `0x8007647C..0x80076493` |
 | `voice_boss_intros` | `VoiceClip02` | guarded `ROCK_X6.BIN` member 398 overlay plus allocation slice `0x80076458..0x8007647B` |
 | `voice_low_health` | `VoiceClip05` | one guarded SLUS range plus allocation slice `0x80076440..0x80076457` |
-| `voice_boss_warning` | `VoiceClip06` | one guarded SLUS site plus allocation slice `0x80076494..0x800764B3` |
+| `voice_boss_warning` | `VoiceClip06` + B01 prototype bank | one guarded SLUS site, allocation slice `0x80076494..0x800764B3`, and five relocated `ROCK_X6.DAT` records |
 
 The four fixed slices form one named 116-byte allocation at
 `0x80076440..0x800764B3`. If any voice feature is enabled, the resolver emits
@@ -23,13 +24,25 @@ The boss-intro operation targets canonical `disc_user` offset `0x19D3FE18`.
 It therefore participates in the normal CD overlay lifecycle when member 398 is
 loaded; it does not depend on a permanently patched or derived disc.
 
-Generate the local package only from the supported stock image, an isolated B01
-base oracle, and the user-supplied Tweaks source:
+The warning hook requests sound index 44. Stock stage banks contain only
+indices 0 through 43, so the original hook by itself is incomplete. Version
+1.1.0 ports the B01 prototype bank's three coupled components (subassets 4, 5,
+and 6, including entry `0x04400480` and its voice sample) into records 85
+through 89. Those records are placed in the stock
+`ZNULL.DAT` backing range and the runtime redirects the DAT table to them.
+The package carries stock-script and retranslation-composed variants; an
+external feature predicate selects exactly one variant from the active
+`mmx6.tweaks.native/retranslation` state. The virtual DAT extent is shared at
+`0x0422F800`, after the retranslation and extra-mugshot reservations.
+
+Generate the local package only from the supported stock image, isolated B01
+and S02 base oracles, and the user-supplied Tweaks source:
 
 ```powershell
 python tools/tweaks_hooks_psxmod.py `
   --stock "mmx6-tweaks/Mega Man X6 (USA) (v1.1).bin" `
-  --b01-base "path/to/isolated/base.bin"
+  --b01-base "path/to/isolated/base.bin" `
+  --s02-base "path/to/isolated/s02-base.bin"
 ```
 
 The generator verifies the stock SHA-256, exact source payloads and offsets,

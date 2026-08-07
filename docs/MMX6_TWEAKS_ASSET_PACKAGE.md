@@ -116,7 +116,10 @@ This generator fails closed instead of absorbing nearby controls:
 - **Hunter and Dr. Light mugshots** need new DAT records 243–246. Their portrait
   references live in script records also rebuilt by Retranslation. They require
   a DAT allocator/virtual asset registry and a script-aware portrait-reference
-  transform, not raw overlays.
+  transform, not raw overlays. The public Retranslation conversion restores all
+  eighteen of those forced references to the stock no-portrait command while
+  this artwork remains withheld, preventing missing records from exposing stale
+  VRAM as a phantom dialogue portrait.
 - **Loading logos** are acknowledged by the upstream patcher as incomplete
   when title demos return to the title screen. The patcher silently forces
   Disable Demos. They remain deferred until the demo-return path is correctly

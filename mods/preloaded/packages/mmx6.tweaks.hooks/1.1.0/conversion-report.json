@@ -1,0 +1,302 @@
+{
+  "b01_sha256": "7b3b7ad59fc2a3e936154685bf1062e8707188e37b182a9481c9d847397031e6",
+  "boss_warning_sound_banks": {
+    "logical_dat_size": 69400576,
+    "record_ids": [
+      85,
+      86,
+      87,
+      88,
+      89
+    ],
+    "records": [
+      {
+        "coupled_subassets": [
+          {
+            "asset_type": 4,
+            "index": 4,
+            "prototype_sha256": "6a37ee5d245247606c1d0910f7b21cfa98b7392a7a8488382c790a34b3f76bc4",
+            "prototype_size": 10672,
+            "stock_sha256": "66ed1d5a9fa7afd9d56b551709fa673bc2da600d80dc41c0bc278539b2866365",
+            "stock_size": 5336
+          },
+          {
+            "asset_type": 131072,
+            "index": 5,
+            "prototype_sha256": "5b3756f49ad8709548ba88f2a5f8211544be245347c1c5ae4b8cf206493860de",
+            "prototype_size": 142864,
+            "stock_sha256": "bf2e666f782d8c5eb6fc4d552ce7550728fe6fdc16463b66b296f4b4f81f8a9b",
+            "stock_size": 138608
+          },
+          {
+            "asset_type": 65543,
+            "index": 6,
+            "prototype_sha256": "7fad36ec0f8ae0661c32429c604cb61648546bdf6eaa2a2b64f6e7828d6b81cc",
+            "prototype_size": 32768,
+            "stock_sha256": "9bed37c05a7a31e9ebbfbf86d1ffecd28f7d54f1e2314e8d1750182df70d9346",
+            "stock_size": 32768
+          }
+        ],
+        "record_id": 85,
+        "relocated_sector": 31716,
+        "retranslation_sha256": "c81aa441f53fd1b8cc9f4edca76e82d9210a5ea10bca71c0847210cb3d460bc8",
+        "size": 841728,
+        "stock_sector": 1782,
+        "table_expected": "F606000000B00C00",
+        "table_replacement": "E47B000000D80C00",
+        "voice_sha256": "4a29d770fd4d335b6faa1e161395d4fa55fc08904e26e82294148ff35dc91400"
+      },
+      {
+        "coupled_subassets": [
+          {
+            "asset_type": 4,
+            "index": 4,
+            "prototype_sha256": "6a37ee5d245247606c1d0910f7b21cfa98b7392a7a8488382c790a34b3f76bc4",
+            "prototype_size": 10672,
+            "stock_sha256": "66ed1d5a9fa7afd9d56b551709fa673bc2da600d80dc41c0bc278539b2866365",
+            "stock_size": 5336
+          },
+          {
+            "asset_type": 131072,
+            "index": 5,
+            "prototype_sha256": "5b3756f49ad8709548ba88f2a5f8211544be245347c1c5ae4b8cf206493860de",
+            "prototype_size": 142864,
+            "stock_sha256": "bf2e666f782d8c5eb6fc4d552ce7550728fe6fdc16463b66b296f4b4f81f8a9b",
+            "stock_size": 138608
+          },
+          {
+            "asset_type": 65543,
+            "index": 6,
+            "prototype_sha256": "cd4a56d2fbfb0e502190de8411f0c082cf78cb5183c4cd734b64f5c770a42b86",
+            "prototype_size": 32768,
+            "stock_sha256": "af4ad996491f141db60d88766ac6a2cf9c580e361d40e76463ce5b9e3b5e0be3",
+            "stock_size": 32768
+          }
+        ],
+        "record_id": 86,
+        "relocated_sector": 32127,
+        "retranslation_sha256": "6b3f4ba36faf8a833ced63fc055300bca9d90b14cb2e0ba129f9af08b7c93325",
+        "size": 913408,
+        "stock_sector": 2188,
+        "table_expected": "8C08000000C80D00",
+        "table_replacement": "7F7D000000F00D00",
+        "voice_sha256": "929b02d80e2342830b202eea10cc9a9ad39cb45fbb47e976cdf799c74a9d883a"
+      },
+      {
+        "coupled_subassets": [
+          {
+            "asset_type": 4,
+            "index": 4,
+            "prototype_sha256": "6a37ee5d245247606c1d0910f7b21cfa98b7392a7a8488382c790a34b3f76bc4",
+            "prototype_size": 10672,
+            "stock_sha256": "66ed1d5a9fa7afd9d56b551709fa673bc2da600d80dc41c0bc278539b2866365",
+            "stock_size": 5336
+          },
+          {
+            "asset_type": 131072,
+            "index": 5,
+            "prototype_sha256": "5b3756f49ad8709548ba88f2a5f8211544be245347c1c5ae4b8cf206493860de",
+            "prototype_size": 142864,
+            "stock_sha256": "bf2e666f782d8c5eb6fc4d552ce7550728fe6fdc16463b66b296f4b4f81f8a9b",
+            "stock_size": 138608
+          },
+          {
+            "asset_type": 65543,
+            "index": 6,
+            "prototype_sha256": "cd4a56d2fbfb0e502190de8411f0c082cf78cb5183c4cd734b64f5c770a42b86",
+            "prototype_size": 32768,
+            "stock_sha256": "2f5913d5aae6304b951ea1ee11b276e41416ac2e2196df02d460ee95fdfa1a41",
+            "stock_size": 32768
+          }
+        ],
+        "record_id": 87,
+        "relocated_sector": 32573,
+        "retranslation_sha256": "2a0094bac3a650e04cef98c514ab7f35c469a5eb04c01fb40391695728f24666",
+        "size": 942080,
+        "stock_sector": 2629,
+        "table_expected": "450A000000380E00",
+        "table_replacement": "3D7F000000600E00",
+        "voice_sha256": "3d64c9f78bfa79a3d19570909c831d37a3e380301233d9cbcceb888d1a2ccb19"
+      },
+      {
+        "coupled_subassets": [
+          {
+            "asset_type": 4,
+            "index": 4,
+            "prototype_sha256": "6a37ee5d245247606c1d0910f7b21cfa98b7392a7a8488382c790a34b3f76bc4",
+            "prototype_size": 10672,
+            "stock_sha256": "66ed1d5a9fa7afd9d56b551709fa673bc2da600d80dc41c0bc278539b2866365",
+            "stock_size": 5336
+          },
+          {
+            "asset_type": 131072,
+            "index": 5,
+            "prototype_sha256": "5b3756f49ad8709548ba88f2a5f8211544be245347c1c5ae4b8cf206493860de",
+            "prototype_size": 142864,
+            "stock_sha256": "bf2e666f782d8c5eb6fc4d552ce7550728fe6fdc16463b66b296f4b4f81f8a9b",
+            "stock_size": 138608
+          },
+          {
+            "asset_type": 65543,
+            "index": 6,
+            "prototype_sha256": "cd4a56d2fbfb0e502190de8411f0c082cf78cb5183c4cd734b64f5c770a42b86",
+            "prototype_size": 32768,
+            "stock_sha256": "af4ad996491f141db60d88766ac6a2cf9c580e361d40e76463ce5b9e3b5e0be3",
+            "stock_size": 32768
+          }
+        ],
+        "record_id": 88,
+        "relocated_sector": 33033,
+        "retranslation_sha256": "c21fd0d59971f34cef78ad3304ff8fc23a97901d3d1d84e73cd241870a6fc970",
+        "size": 817152,
+        "stock_sector": 3084,
+        "table_expected": "0C0C000000500C00",
+        "table_replacement": "0981000000780C00",
+        "voice_sha256": "c7021afb77529023d93d000f1baf2700f17313478c6e4fdff3a83b242cbb3e57"
+      },
+      {
+        "coupled_subassets": [
+          {
+            "asset_type": 4,
+            "index": 4,
+            "prototype_sha256": "6a37ee5d245247606c1d0910f7b21cfa98b7392a7a8488382c790a34b3f76bc4",
+            "prototype_size": 10672,
+            "stock_sha256": "66ed1d5a9fa7afd9d56b551709fa673bc2da600d80dc41c0bc278539b2866365",
+            "stock_size": 5336
+          },
+          {
+            "asset_type": 131072,
+            "index": 5,
+            "prototype_sha256": "5b3756f49ad8709548ba88f2a5f8211544be245347c1c5ae4b8cf206493860de",
+            "prototype_size": 142864,
+            "stock_sha256": "bf2e666f782d8c5eb6fc4d552ce7550728fe6fdc16463b66b296f4b4f81f8a9b",
+            "stock_size": 138608
+          },
+          {
+            "asset_type": 65543,
+            "index": 6,
+            "prototype_sha256": "cd4a56d2fbfb0e502190de8411f0c082cf78cb5183c4cd734b64f5c770a42b86",
+            "prototype_size": 32768,
+            "stock_sha256": "af4ad996491f141db60d88766ac6a2cf9c580e361d40e76463ce5b9e3b5e0be3",
+            "stock_size": 32768
+          }
+        ],
+        "record_id": 89,
+        "relocated_sector": 33432,
+        "retranslation_sha256": "20f3c92498858b315643b737d410f241ca1c9ff4d5df4a334ccf2ac4b73dddf8",
+        "size": 931840,
+        "stock_sector": 3478,
+        "table_expected": "960D000000100E00",
+        "table_replacement": "9882000000380E00",
+        "voice_sha256": "a7a4476b6449a013683e86facca7139ae4dc871013ec141fdda33ab9bfa3399b"
+      }
+    ],
+    "relocated_first_sector": 31716,
+    "source": "B01 prototype base ROCK_X6.DAT coupled sound-bank subassets 4, 5, and 6"
+  },
+  "features": {
+    "voice_boss_intros": {
+      "source_option": "VoiceClip02",
+      "writes": [
+        {
+          "expected": "01004224010082A00800E003",
+          "location": 433323544,
+          "member_id": 398,
+          "member_relative_offset": 3608,
+          "replace": "16D9010801004224B3A60308",
+          "source_raw_offset": "0x1DA97500",
+          "target": "disc_user"
+        },
+        {
+          "expected": "000000000000000000000000000000000000000000000000000000000000000000000000",
+          "location": 2147968088,
+          "replace": "010082A0260082800000063421104800FFFF4590125B000C00000434A0A7030800000000",
+          "source_raw_offset": "0x1D995F40",
+          "target": "main_exe"
+        }
+      ]
+    },
+    "voice_boss_warning": {
+      "source_option": "VoiceClip06",
+      "writes": [
+        {
+          "expected": "125B000C",
+          "location": 2147825780,
+          "replace": "25D90108",
+          "source_raw_offset": "0x1D96E16C",
+          "target": "main_exe"
+        },
+        {
+          "expected": "0000000000000000000000000000000000000000000000000000000000000000",
+          "location": 2147968148,
+          "replace": "125B000C00000634000004342C000534125B000C000006341F4E01083C000334",
+          "source_raw_offset": "0x1D995F7C",
+          "target": "main_exe"
+        }
+      ]
+    },
+    "voice_low_health": {
+      "source_option": "VoiceClip05",
+      "writes": [
+        {
+          "expected": "1010000023104300001602005C00C380031602002A18620002006010780002248D00C2A00800E00300000000",
+          "location": 2147733584,
+          "replace": "10D901081010000006006010030004340F000534125B000C00000634780002248D0002A242DE000800000000",
+          "source_raw_offset": "0x1D9543D8",
+          "target": "main_exe"
+        },
+        {
+          "expected": "000000000000000000000000000000000000000000000000",
+          "location": 2147968064,
+          "replace": "23104300001602005C00C3800316020016F400082A186200",
+          "source_raw_offset": "0x1D995F28",
+          "target": "main_exe"
+        }
+      ]
+    },
+    "voice_title": {
+      "source_option": "VoiceClip01",
+      "writes": [
+        {
+          "expected": "1000B0AF21800000",
+          "location": 2147606212,
+          "replace": "1FD901081000B0AF",
+          "source_raw_offset": "0x1D93077C",
+          "target": "main_exe"
+        },
+        {
+          "expected": "0800E003",
+          "location": 2147606356,
+          "replace": "14780008",
+          "source_raw_offset": "0x1D93080C",
+          "target": "main_exe"
+        },
+        {
+          "expected": "000000000000000000000000000000000000000000000000",
+          "location": 2147968124,
+          "replace": "0500043400000534125B000C00000634B377000800001034",
+          "source_raw_offset": "0x1D995F64",
+          "target": "main_exe"
+        }
+      ]
+    }
+  },
+  "foundation": {
+    "address": 2147968064,
+    "allocation_policy": "one composed write; fixed disjoint slices",
+    "expected": "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "id": "voice_code_foundation",
+    "size": 116,
+    "target": "main_exe"
+  },
+  "package_id": "mmx6.tweaks.hooks",
+  "package_version": "1.1.0",
+  "source_controls": [
+    "VoiceClip01",
+    "VoiceClip02",
+    "VoiceClip05",
+    "VoiceClip06"
+  ],
+  "source_sha256": "6e78b35142f30548c5bf6760a835773110d0cece863052a4b278722476a46707",
+  "stock_sha256": "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+}

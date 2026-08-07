@@ -47,6 +47,46 @@ struct VoiceFeature {
     size_t site_count;
 };
 
+struct WarningRecord {
+    uint32_t id;
+    uint64_t table_location;
+    const char* table_expected;
+    const char* table_replacement;
+    uint64_t payload_location;
+    uint64_t payload_size;
+    const char* backing_sha256;
+    const char* voice_sha256;
+    const char* retranslation_sha256;
+};
+
+constexpr WarningRecord kWarningRecords[] = {
+    {85, 0x19E0F2A8ull, "F606000000B00C00", "E47B000000D80C00",
+     0x1DC01000ull, 0xCD800ull,
+     "faa6bea73bd03cdcf2d58dcf7e02488b7c1146ebb1031083aa8106cc82533717",
+     "4a29d770fd4d335b6faa1e161395d4fa55fc08904e26e82294148ff35dc91400",
+     "c81aa441f53fd1b8cc9f4edca76e82d9210a5ea10bca71c0847210cb3d460bc8"},
+    {86, 0x19E0F2B0ull, "8C08000000C80D00", "7F7D000000F00D00",
+     0x1DCCE800ull, 0xDF000ull,
+     "a6e10f1f48c9b0bb4eb3374fb6a7c8ff74cc07d21155ed1a7a32611dde0f57ea",
+     "929b02d80e2342830b202eea10cc9a9ad39cb45fbb47e976cdf799c74a9d883a",
+     "6b3f4ba36faf8a833ced63fc055300bca9d90b14cb2e0ba129f9af08b7c93325"},
+    {87, 0x19E0F2B8ull, "450A000000380E00", "3D7F000000600E00",
+     0x1DDAD800ull, 0xE6000ull,
+     "10d8ce3cfcdff65c514699ea99b8c3a2543fef67f7485b25c58f426229b9c589",
+     "3d64c9f78bfa79a3d19570909c831d37a3e380301233d9cbcceb888d1a2ccb19",
+     "2a0094bac3a650e04cef98c514ab7f35c469a5eb04c01fb40391695728f24666"},
+    {88, 0x19E0F2C0ull, "0C0C000000500C00", "0981000000780C00",
+     0x1DE93800ull, 0xC7800ull,
+     "207fdcc5799cf911bd20210f9e6273e369cbc9570669fd7d5b0929b2bdfb372e",
+     "c7021afb77529023d93d000f1baf2700f17313478c6e4fdff3a83b242cbb3e57",
+     "c21fd0d59971f34cef78ad3304ff8fc23a97901d3d1d84e73cd241870a6fc970"},
+    {89, 0x19E0F2C8ull, "960D000000100E00", "9882000000380E00",
+     0x1DF5B000ull, 0xE3800ull,
+     "32bac2734c9376ba35b3663544947fb98fad53931d0721e24bbb0aefabfabd43",
+     "a7a4476b6449a013683e86facca7139ae4dc871013ec141fdda33ab9bfa3399b",
+     "20f3c92498858b315643b737d410f241ca1c9ff4d5df4a334ccf2ac4b73dddf8"},
+};
+
 constexpr Site kTitleSites[] = {
     {
         ModPatchTarget::MainExe,
@@ -160,7 +200,7 @@ bool validate_package(const ModPackage& package,
         fail(package, errors, "unsupported trusted resolver package version");
         return false;
     }
-    if (package.format_version != 3 || package.resolver != kResolverName) {
+    if (package.format_version != 4 || package.resolver != kResolverName) {
         fail(package, errors, "trusted resolver manifest contract mismatch");
         return false;
     }
@@ -171,7 +211,7 @@ bool validate_package(const ModPackage& package,
         package.targets[0].disc_sha256 != kStockDiscSha256 ||
         !package.dependencies.empty() || !package.conflicts.empty() ||
         !package.options.empty() || !package.constraints.empty() ||
-        !package.patches.empty() || !package.overlays.empty() ||
+        !package.patches.empty() ||
         !package.derived_discs.empty()) {
         fail(package, errors, "trusted resolver target or payload mismatch");
         return false;
@@ -190,6 +230,39 @@ bool validate_package(const ModPackage& package,
     if (actual != expected) {
         fail(package, errors, "trusted feature inventory mismatch");
         return false;
+    }
+    if (package.overlays.size() != std::size(kWarningRecords) * 2) {
+        fail(package, errors, "trusted warning asset inventory mismatch");
+        return false;
+    }
+    for (const WarningRecord& record : kWarningRecords) {
+        for (bool retranslation : {false, true}) {
+            const auto found = std::find_if(
+                package.overlays.begin(), package.overlays.end(),
+                [&](const PSXRecompV4::ModOverlay& overlay) {
+                    return overlay.location == record.payload_location &&
+                        overlay.when_feature.present &&
+                        overlay.when_feature.enabled == retranslation;
+                });
+            const char* payload_sha256 = retranslation
+                ? record.retranslation_sha256 : record.voice_sha256;
+            if (found == package.overlays.end() ||
+                found->feature_id != "voice_boss_warning" ||
+                found->target != ModPatchTarget::DiscUser ||
+                found->location != record.payload_location ||
+                found->size != record.payload_size ||
+                found->sha256 != payload_sha256 ||
+                found->expected_sha256 != record.backing_sha256 ||
+                !found->when.empty() ||
+                !found->when_feature.present ||
+                found->when_feature.package_id != "mmx6.tweaks.native" ||
+                found->when_feature.feature_id != "retranslation" ||
+                found->when_feature.enabled != retranslation) {
+                fail(package, errors,
+                     "trusted warning asset declaration mismatch");
+                return false;
+            }
+        }
     }
     return true;
 }
@@ -293,6 +366,33 @@ bool resolve_impl(const ModPackage& package, const ModSelection& selection,
                 writes, site.target, site.location, std::move(expected),
                 std::move(replacement), kVoices[i].id);
         }
+    }
+    if (enabled[3]) {
+        for (const WarningRecord& record : kWarningRecords) {
+            std::vector<uint8_t> expected;
+            std::vector<uint8_t> replacement;
+            if (!decode_hex(record.table_expected, expected) ||
+                !decode_hex(record.table_replacement, replacement)) {
+                fail(package, errors,
+                     "trusted warning record table bytes are invalid");
+                return false;
+            }
+            append_write(
+                writes, ModPatchTarget::DiscUser, record.table_location,
+                std::move(expected), std::move(replacement),
+                "voice_boss_warning");
+        }
+        std::vector<uint8_t> expected;
+        std::vector<uint8_t> replacement;
+        if (!decode_hex("00E008030308E000", expected) ||
+            !decode_hex("00F822040422F800", replacement)) {
+            fail(package, errors, "trusted warning DAT extent is invalid");
+            return false;
+        }
+        append_write(
+            writes, ModPatchTarget::DiscUser, 0xB0A6ull,
+            std::move(expected), std::move(replacement),
+            "voice_boss_warning");
     }
     return true;
 }
