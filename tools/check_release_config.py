@@ -13,6 +13,11 @@ ROOT = Path(__file__).resolve().parent.parent
 DEV_CONFIG = ROOT / "game.toml"
 RELEASE_CONFIG = ROOT / "packaging" / "release" / "game.toml"
 PARITY_SECTIONS = ("widescreen",)
+MOD_OWNED_VIDEO_KEYS = {
+    "auto_skip_fmv": False,
+    "offer_skip_fmv": False,
+    "offer_frame_interpolation": False,
+}
 
 
 def load_toml(path: Path) -> dict[str, Any]:
@@ -50,6 +55,14 @@ def main() -> int:
                     f"release={release_values[key]!r}"
                 )
 
+    for key, expected in MOD_OWNED_VIDEO_KEYS.items():
+        for label, config in (("dev", dev), ("release", release)):
+            actual = config.get("video", {}).get(key)
+            if actual != expected:
+                failures.append(
+                    f"video.{key}: {label}={actual!r}, expected {expected!r}"
+                )
+
     if failures:
         print(
             "release game.toml has drifted from game.toml in a "
@@ -61,7 +74,7 @@ def main() -> int:
         return 1
 
     sections = ", ".join(f"[{name}]" for name in PARITY_SECTIONS)
-    print(f"release config parity passed for {sections}")
+    print(f"release config parity passed for {sections} and mod-owned video keys")
     return 0
 
 

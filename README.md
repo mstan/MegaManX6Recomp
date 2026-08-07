@@ -64,8 +64,8 @@ playable preview rather than a certified full playthrough.
 |---|---|
 | PS1 BIOS boot | Works (real recompiled BIOS) |
 | Disc-detect / boot | Works (loads `ROCK_X6.DAT`, reaches the engine) |
-| X-vs-Zero / Space Colony intro FMV | Plays; auto-skip available |
-| Controller | Works; DualShock/analog presented by default (required by MMX6) |
+| X-vs-Zero / Space Colony intro FMV | Plays; opt-in skip features available under Mods |
+| Controller | Works; DualShock/analog and rumble supported |
 | Stage gameplay | Works (not yet verified all the way to the end) |
 | Memory-card save / load | Works (standard PS1 `.mcd`, emulator-compatible) |
 | Renderers | Software **and** OpenGL (GPU); Software is the default this release (see ISSUES.md #7), OpenGL selectable |
@@ -113,9 +113,9 @@ These are the framework features that are already working in this build:
   internal timing (and audio) stays correct. Authentic 1× disc timing is kept;
   the speed comes from the load fast-forward, not from speeding up the emulated
   CD (which would break timing). On by default; toggleable in the launcher.
-- **FMV auto-skip.** Full-motion videos (the X-vs-Zero opening) can be skipped
-  the instant they start. On by default for this build; toggleable in the
-  launcher (Settings → "Skip FMVs").
+- **Opt-in FMV skips.** The Capcom logo and opening movie play by default.
+  Separate skip features are available under **Mods**; the deprecated generic
+  Settings toggle is disabled.
 - **Experimental widescreen (16:9).** A genuine wider field of view for the 2D
   stage engine — more of the scene is drawn on both sides, not a stretched
   picture. Opt-in and experimental; some 2D/HUD/FMV elements and background
@@ -202,8 +202,7 @@ Most options are exposed in the launcher and persist to `settings.toml`. The
 underlying defaults live in `game.toml`:
 
 - `[video]` — `renderer` (`opengl` / `software`), `supersampling` (1–4),
-  `antialiasing`, `texture_filtering`, `aspect_ratio` (`4:3` / `16:9`),
-  `auto_skip_fmv`.
+  `antialiasing`, `texture_filtering`, `aspect_ratio` (`4:3` / `16:9`).
 - `[controller]` — `default_analog` (DualShock on by default), `deadzone`.
 - `[runtime]` — `disc_speed` (kept at `1x`), `turbo_loads`, `fast_boot`,
   `overlay_cache`.

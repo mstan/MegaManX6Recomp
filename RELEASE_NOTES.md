@@ -1,32 +1,26 @@
-# MegaManX6Recomp v1.0.4
+# MegaManX6Recomp v1.0.5
 
-v1.0.4 is a patch release for the MMX6 Tweaks audio and retranslation
-integrations.
+v1.0.5 is a controller and video-behavior patch release.
 
-## Boss warning voice
+## Controller rumble
 
-- Restored the spoken "Warning" voice used when X enters a boss encounter.
-- Ported the complete three-part prototype sound bank from MMX6 Tweaks rather
-  than only the sequence table. This avoids the loading softlock produced by
-  the incomplete bank and supplies the missing sample data for sound index 44.
-- Added stock-script and English-retranslation variants of all five affected
-  stage banks so the voice composes correctly with either localization state.
+- Implemented the PlayStation DualShock `0x4D` motor-map negotiation used by
+  Mega Man X6 and routed subsequent small/large motor values to SDL3.
+- Added per-controller stop, disconnect, and capability handling so vibration
+  cannot remain active after the game stops requesting it.
+- Preserved compatibility with v1.0.4 and older savestates; older states load
+  with the standard DualShock motor map and both motors safely stopped.
 
-## Retranslation portrait fix
+## FMV defaults
 
-- Removed the phantom Alia-shaped portrait shown for Hunter and Dr. Light
-  dialogue when Retranslation was enabled but the optional custom portrait
-  package was disabled.
-- The translated scripts now retain the original no-portrait command until the
-  separately permission-gated portrait assets are implemented and enabled.
+- The Capcom logo and opening video now play normally when their skip mods are
+  disabled.
+- Removed the deprecated generic **Skip FMVs** launcher setting from this game.
+  The separate opt-in Capcom and opening skip features under **Mods** are now
+  the only controls for this behavior.
+- Added a release-config regression check so packaged builds cannot silently
+  re-enable the legacy auto-skip value.
 
-## Runtime integration
-
-- Enabled trusted mod assets to select variants from another package's active
-  feature state.
-- Reapply enabled executable mod patches after loading a savestate, preventing
-  a stock checkpoint from silently disabling the current mod selection.
-
-Windows x64 and Linux x86_64 AppImage packages are provided. All enhancements
-remain opt-in. Existing saves, memory cards, settings, and legally obtained
-disc images remain compatible with v1.0.3.
+Windows x64 and Linux x86_64 AppImage packages are provided. Existing memory
+cards, settings, legally obtained disc images, and older savestates remain
+compatible with v1.0.5.

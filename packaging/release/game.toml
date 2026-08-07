@@ -61,10 +61,10 @@ texture_filtering = "nearest"
 # Rainy Turtloid repro. Software is still selectable in the launcher
 # (Settings -> Renderer) for anyone who prefers it.
 renderer = "opengl"
-# auto_skip_fmv: skip full-motion videos (e.g. the X-vs-Zero opening). When on, a
-# video is skipped the instant it starts. On by default for MMX6; toggleable in
-# the launcher (Settings -> "Skip FMVs").
-auto_skip_fmv = true
+# FMV skipping is owned by opt-in Tweaks mod features. Disable and hide the
+# deprecated generic launcher toggle, including stale persisted settings.
+auto_skip_fmv = false
+offer_skip_fmv = false
 # aspect_ratio stays at the authentic 4:3 default. Widescreen and presentation
 # frame interpolation are game-specific enhancements exposed through Mods, not
 # generic display settings. Their trusted activation plugins apply the selected

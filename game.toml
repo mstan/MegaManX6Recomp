@@ -88,23 +88,12 @@ aspect_ratio = "4:3"
 # selected output rate. One control per feature.
 offer_frame_interpolation = false
 
-# auto_skip_fmv: auto-skip full-motion videos (XA audio + MDEC). The launcher's
-# Settings → "Skip FMVs" toggle mirrors this and persists to settings.toml.
-# Enabled by default for MMX6 so the X-vs-Zero opening movie fast-forwards.
-#
-# End mechanism — two paths (see runtime/src/main.cpp FMV auto-skip block):
-#  - fmv_skip_total_table set: write the active movie's per-movie frame-total
-#    down so the game's OWN player tears it down next frame — a natural end that
-#    reaches EVERY movie, incl. unskippable ones (this is Tomba's universal path).
-#  - no table (current): generic fallback holds START so a movie whose handler
-#    polls the pad aborts itself. Works for the pad-skippable opening; CANNOT
-#    reach movies the game won't let you skip.
-# TODO(complete): RE MMX6's MDEC player loop (find the per-movie frame-total
-#   table base, the current-movie-id byte, and the teardown frame# >= total-k
-#   condition) and fill fmv_skip_total_table / fmv_skip_movie_id /
-#   fmv_skip_end_total for universal skip, matching Tomba. Until then the generic
-#   START path is active. (MMX6 ISSUES.md tracks this.)
+# FMV skipping belongs exclusively to the opt-in Tweaks mod features for the
+# Capcom logo and opening movie. Keep the deprecated generic runtime switch off,
+# hide its launcher row, and ignore any stale value left in settings.toml by an
+# older release.
 auto_skip_fmv = false
+offer_skip_fmv = false
 
 # Controller defaults. Mega Man X6 probes the pad with the DualShock config
 # command (0x43) at init and will NOT poll buttons (0x42) until it detects an
