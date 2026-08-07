@@ -1,5 +1,5 @@
 param(
-    [string]$Version = "v1.0.3",
+    [string]$Version = "v1.0.4",
     [string]$BuildDir = "build-release",
     # Ship without a bundled overlay cache; off by default.
     [switch]$AllowNoCache,

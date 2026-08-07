@@ -1,26 +1,32 @@
-# MMX v1.0.3
+# MegaManX6Recomp v1.0.4
 
-MMX v1.0.3 is a hotfix for the v1.0.2 player packages.
+v1.0.4 is a patch release for the MMX6 Tweaks audio and retranslation
+integrations.
 
-## Widescreen HUD fix
+## Boss warning voice
 
-- Restored the MMX6 HUD packet range to the player-facing `game.toml`, so the
-  health and ability meters anchor to the true widescreen corners.
-- Restored the reveal initializer and intro-stage culling hooks that had also
-  drifted out of the release config.
-- Added a release-packaging parity check. Windows and Linux packaging now fail
-  if the complete `[widescreen]` section differs from the development config.
+- Restored the spoken "Warning" voice used when X enters a boss encounter.
+- Ported the complete three-part prototype sound bank from MMX6 Tweaks rather
+  than only the sequence table. This avoids the loading softlock produced by
+  the incomplete bank and supplies the missing sample data for sound index 44.
+- Added stock-script and English-retranslation variants of all five affected
+  stage banks so the voice composes correctly with either localization state.
 
-The development config already contained these settings, which is why local
-builds worked while the downloadable v1.0.2 packages did not.
+## Retranslation portrait fix
 
-## Carried forward from v1.0.2
+- Removed the phantom Alia-shaped portrait shown for Hunter and Dr. Light
+  dialogue when Retranslation was enabled but the optional custom portrait
+  package was disabled.
+- The translated scripts now retain the original no-portrait command until the
+  separately permission-gated portrait assets are implemented and enabled.
 
-- Windows and Linux x86_64 packages with prebuilt native overlay shards.
-- Experimental Linux AppImage support.
-- MIT-licensed OpenBIOS bundled and selected by default.
-- The full acediez Tweaks catalog, including DuoDynamo's approved English
-  retranslation, plus the framework-owned loading-speed mods.
+## Runtime integration
 
-All enhancements remain opt-in. Saves, memory cards, settings, and the player's
-original disc image remain compatible with v1.0.2.
+- Enabled trusted mod assets to select variants from another package's active
+  feature state.
+- Reapply enabled executable mod patches after loading a savestate, preventing
+  a stock checkpoint from silently disabling the current mod selection.
+
+Windows x64 and Linux x86_64 AppImage packages are provided. All enhancements
+remain opt-in. Existing saves, memory cards, settings, and legally obtained
+disc images remain compatible with v1.0.3.
