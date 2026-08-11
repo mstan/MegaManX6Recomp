@@ -32,11 +32,15 @@ bios_hle = true
 # Deprecated alias for the HLE boot skip alone (kept for old settings files).
 fast_boot  = false
 
-# Turbo loads: while a load is in progress, run the machine at full host speed so
-# loading finishes much faster, with all game timing preserved. Audio plays
-# through normally. On by default. Toggleable in the launcher (Settings -> Turbo
-# loads).
-turbo_loads = true
+# Load acceleration is OFF by default and is owned by Mods, not by this file.
+# Players who want faster loads enable "Fast Loading (host pacing)" (runs the
+# machine faster during a load, all game timing preserved) or "CD Speed" (makes
+# the emulated drive deliver sectors sooner) under Mods -> Quality of Life.
+#
+# The old `turbo_loads = true` key used to live here. It is deprecated and the
+# framework now ignores it. Do not put it back: the launcher draws no Turbo row,
+# so a value set here was unreachable for players and forced fast-forward
+# through the WARNING screen and other timed scenes (issue #14).
 
 # Overlay cache: keeps converted native code for game areas in the cache folder,
 # and records newly visited areas into overlay_captures.json so your own cache
