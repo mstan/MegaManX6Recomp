@@ -1,11 +1,17 @@
 param(
-    [string]$Version = "v1.0.5",
+    # Empty => read packaging/release/VERSION, the single source of truth that
+    # tools/package_appimage.sh already uses. Do NOT reintroduce a hardcoded
+    # default: this used to say "v1.0.5", so bumping VERSION for a release
+    # silently produced a Windows zip named after the PREVIOUS version while the
+    # AppImage picked up the new one. Per-platform version drift is exactly the
+    # release-packager defect class this repo has been bitten by before.
+    [string]$Version = "",
     [string]$BuildDir = "build-release",
     # Ship without a bundled overlay cache; off by default.
     [switch]$AllowNoCache,
     # Where your accumulated overlay cache lives (the dir compile_overlays.py
     # writes to, per game.toml overlay_autocompile_cmd --out-dir). Bundled as a
-    # head start; optional.
+    # head start.
     [string]$CacheBuildDir = "build-stable",
     [switch]$SkipRegen
 )
@@ -13,6 +19,18 @@ param(
 $ErrorActionPreference = "Stop"
 
 $Root = Resolve-Path (Join-Path $PSScriptRoot "..")
+
+if ([string]::IsNullOrWhiteSpace($Version)) {
+    $VersionFile = Join-Path $Root "packaging/release/VERSION"
+    if (-not (Test-Path $VersionFile)) {
+        throw "no -Version given and $VersionFile is missing"
+    }
+    $Version = (Get-Content -Raw $VersionFile).Trim()
+    if ([string]::IsNullOrWhiteSpace($Version)) {
+        throw "$VersionFile is empty"
+    }
+    Write-Host "Release version from packaging/release/VERSION: $Version"
+}
 $BuildPath = Join-Path $Root $BuildDir
 $StageRoot = Join-Path $Root "release-stage"
 $Stage = Join-Path $StageRoot "MegaManX6Recomp-windows-x64"
