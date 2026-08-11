@@ -1,11 +1,17 @@
 param(
-    [string]$Version = "v1.0.5",
+    # Empty => read packaging/release/VERSION, the single source of truth that
+    # tools/package_appimage.sh already uses. Do NOT reintroduce a hardcoded
+    # default: this used to say "v1.0.5", so bumping VERSION for a release
+    # silently produced a Windows zip named after the PREVIOUS version while the
+    # AppImage picked up the new one. Per-platform version drift is exactly the
+    # release-packager defect class this repo has been bitten by before.
+    [string]$Version = "",
     [string]$BuildDir = "build-release",
     # Ship without a bundled overlay cache; off by default.
     [switch]$AllowNoCache,
     # Where your accumulated overlay cache lives (the dir compile_overlays.py
     # writes to, per game.toml overlay_autocompile_cmd --out-dir). Bundled as a
-    # head start; optional.
+    # head start.
     [string]$CacheBuildDir = "build-stable",
     [switch]$SkipRegen
 )
@@ -13,6 +19,18 @@ param(
 $ErrorActionPreference = "Stop"
 
 $Root = Resolve-Path (Join-Path $PSScriptRoot "..")
+
+if ([string]::IsNullOrWhiteSpace($Version)) {
+    $VersionFile = Join-Path $Root "packaging/release/VERSION"
+    if (-not (Test-Path $VersionFile)) {
+        throw "no -Version given and $VersionFile is missing"
+    }
+    $Version = (Get-Content -Raw $VersionFile).Trim()
+    if ([string]::IsNullOrWhiteSpace($Version)) {
+        throw "$VersionFile is empty"
+    }
+    Write-Host "Release version from packaging/release/VERSION: $Version"
+}
 $BuildPath = Join-Path $Root $BuildDir
 $StageRoot = Join-Path $Root "release-stage"
 $Stage = Join-Path $StageRoot "MegaManX6Recomp-windows-x64"
@@ -157,6 +175,15 @@ Remove-Item -Force $tagScript
 Write-Host "Release codegen tag: $CgTag (only this cache namespace is shipped)"
 $CacheSrc = Join-Path $Root "$CacheBuildDir/cache/SLUS-01395"
 if (Test-Path $CacheSrc) {
+    # NORMALISE before any Substring(): $CacheBuildDir may legitimately contain
+    # '..' (a cache built outside the repo), and Join-Path does NOT collapse it.
+    # The unresolved string is then LONGER than the real prefix of $f.FullName,
+    # so Substring($CacheSrc.Length) ate part of the subtree and produced
+    # cache/SLUS-01395/9a4721_gc4f033776/... instead of
+    # cache/SLUS-01395/gcc/win-x64/cg9_0e9a4721_gc4f033776/... . The loader
+    # scans by that exact path, so every shard silently failed to load while
+    # the packager still reported a healthy shard count.
+    $CacheSrc = (Resolve-Path $CacheSrc).Path
     $CacheDst = Join-Path $Stage "cache/SLUS-01395"
     $cacheFiles = Get-ChildItem $CacheSrc -Recurse -File -Include *.dll,*.ranges |
         Where-Object { $_.FullName -notmatch '[\\/]sljit[\\/]' -and $_.FullName -match "[\\/]$CgTag[\\/]" }
@@ -168,6 +195,19 @@ if (Test-Path $CacheSrc) {
     }
     $dllCount = @($cacheFiles | Where-Object { $_.Extension -eq ".dll" }).Count
     Write-Host "Bundled overlay cache: $dllCount native overlay DLL(s)"
+
+    # Assert the STAGED LAYOUT, not just the copied count. A shard the loader
+    # cannot find is worth exactly as much as no shard at all, and the count
+    # above cannot tell the difference.
+    if ($dllCount -gt 0) {
+        $staged = @(Get-ChildItem (Join-Path $CacheDst "gcc") -Recurse -File -Filter *.dll -ErrorAction SilentlyContinue |
+                    Where-Object { $_.FullName -match "[\\/]$CgTag[\\/]" })
+        if ($staged.Count -ne $dllCount) {
+            throw ("Staged overlay cache layout is wrong: expected $dllCount shard(s) under " +
+                   "cache/SLUS-01395/gcc/<arch-abi>/$CgTag/ but found $($staged.Count). " +
+                   "The loader scans that exact path, so the bundled cache would never load.")
+        }
+    }
     if ($dllCount -eq 0 -and -not $AllowNoCache) {
         # The directory existing is not enough: the tag folds in a hash of the
         # PACKAGED game.toml, so a cache built against any other config lands

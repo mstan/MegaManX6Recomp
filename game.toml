@@ -34,11 +34,16 @@ memcard_dir = "saves"
 # The SAFE way to get fast loads is to keep AUTHENTIC guest CD timing (so nothing
 # breaks) and instead FAST-FORWARD THE WHOLE GUEST TIMELINE during loads — run
 # every authentic VBlank/callback/sector at the host's full speed and skip
-# presentation. That's turbo_loads: cdrom_load_in_progress() detects the CD burst
-# (XA/FMV excluded, post-handoff only) and main.cpp drops wall-clock pacing while
-# it's active. Result: real load time shrinks with zero timing breakage.
+# presentation. cdrom_load_in_progress() detects the CD burst (XA/FMV excluded,
+# post-handoff only) and main.cpp drops wall-clock pacing while it's active.
+# Result: real load time shrinks with zero timing breakage.
+#
+# That mechanism is now reached ONLY through the Mods catalog — "Fast Loading
+# (host pacing)" / "CD Speed", both default-off. The old `turbo_loads = true`
+# key here is deprecated and ignored by the framework; do not reinstate it. It
+# had no launcher control, so players could not turn it off, and it fast-
+# forwarded the WARNING screen and other timed scenes (issue #14).
 disc_speed   = "1x"     # authentic guest CD timing (never breaks game timing)
-turbo_loads  = true     # fast-forward the machine during CD loads (the real speed lever)
 # Overlay acceleration: compile the dirty-RAM overlay (ROCK_X6.DAT) to native
 # instead of interpreting it. backend=auto => gcc (full-C overlay DLLs, the
 # production path) since an autocompile cmd is wired. Background pipeline:
@@ -121,6 +126,7 @@ allow_hybrid   = false
 # (no regen). The wider field of view itself is an ongoing RE effort (the engine
 # renders a true 4:3 view — there is no overscan to merely "reveal"); this flag
 # is the opt-in switch the FOV work plugs into.
+multitap_analog = false
 [widescreen]
 full_2d = true
 # offer = false: widescreen activation belongs to the mod catalog, not generic
