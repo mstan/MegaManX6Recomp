@@ -1,60 +1,44 @@
-# MegaManX6Recomp v1.0.6
+# MegaManX6Recomp v1.0.7
 
-v1.0.6 is a patch release. It fixes fast-forwarding that could not be turned
-off, and ships a much larger bundled overlay cache.
+v1.0.7 is a patch release for launcher hotkeys and audio settings.
 
-## Turbo loads is off, and stays off
+## Hotkey rebinding fixes
 
-The game no longer fast-forwards through loads unless you ask it to.
+Launcher hotkey rebinding now applies to the PSX runtime actions players can
+actually use:
 
-Earlier builds shipped with load acceleration enabled in `game.toml`, and the
-launcher had already stopped drawing a control for it — so there was nothing a
-player could switch off. It ran the machine at host speed whenever a load was
-detected, which also sped through timed screens: the **WARNING** screen at the
-start of a new game advanced by itself, and loading icons spun too fast.
+- Fullscreen
+- Fast-forward
+- Volume up / down
+- FPS readout
+- Rewind
+- Save states menu
 
-Reported by **Arquivista** in [#14](https://github.com/mstan/MegaManX6Recomp/issues/14).
+Defaults no longer continue firing after a hotkey is rebound. For example,
+rebinding fast-forward from Tab to Q makes Q fast-forward and stops Tab from
+doing it.
 
-**If you played v1.0.4 or v1.0.5, this affects you even though you never turned
-anything on.** Those builds wrote the setting into your `settings.toml`, and the
-old runtime restored it on every launch — so it outranked any later change and
-could not be undone by updating the game files alone. v1.0.6 ignores that stored
-value and drops it the next time settings are saved. No action needed on your
-part; you do not have to delete anything.
+The unsupported Reset, Pause, and Toggle Renderer rows have been removed from
+the PlayStation hotkey list.
 
-Want faster loads back? They live in **Mods → Quality of Life**, where you get
-real control instead of one hidden switch:
+## Visible FPS readout
 
-- **Fast Loading (host pacing)** — runs the machine faster while a load is in
-  progress. Every guest frame, CD interrupt and callback still happens on
-  schedule, so the game cannot desync. It does speed the game up during a load,
-  which some speedrun routes rely on *not* happening.
-- **CD Speed** — makes the emulated drive deliver data sooner while the game
-  itself keeps running at normal speed. Better if you want shorter loads without
-  the game moving faster.
+The FPS readout now appears in the in-game OSD instead of only changing the
+native window title. This makes it visible in fullscreen and in window modes
+where the title bar is not visible.
 
-Both ship disabled. FMV and CD audio keep authentic timing either way.
+## Audio sample rate persistence
 
-## Larger bundled overlay cache
+Changing the launcher audio sample rate now persists correctly. Selecting
+48 kHz and reopening the launcher should keep 48 kHz selected.
 
-The package now includes **559** precompiled native code shards on Windows and
-**558** on Linux, up from 72. More of the game runs as native code the first
-time you reach it, instead of being interpreted until your own cache builds up.
-This is a startup-smoothness improvement; it does not change behaviour.
+## Rewind build contract
 
-## Also in this release
-
-- The Windows packager now takes its version from a single source shared with
-  the Linux packager, so the two platforms can no longer disagree about which
-  release they are.
-- Fixed a packaging bug that placed the bundled overlay cache in a directory the
-  loader does not scan. A package built that way looked correct and reported a
-  healthy shard count, but every overlay would have run interpreted.
-- Refreshed the recompiled BIOS fingerprint. The generated BIOS code itself is
-  byte-for-byte identical to v1.0.5 — only the staleness marker was out of date,
-  so nothing about how the game runs changes.
+Rewind remains available in this release. The framework now requires the rewind
+snapshot backend whenever Rewind is exposed, so future builds cannot ship a
+visible F8 rewind hotkey that silently does nothing.
 
 ## Compatibility
 
-Save files, memory cards and savestates from v1.0.4 and v1.0.5 continue to work.
-Your disc image is unchanged and is still not included.
+Save files, memory cards and savestates from v1.0.6 continue to work. Your disc
+image is unchanged and is still not included.
