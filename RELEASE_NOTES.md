@@ -19,3 +19,7 @@ authority, which avoids dissolving sprite borders into transparent neighbours.
 
 Save files, memory cards and savestates from v1.0.8 continue to work. Your disc
 image is unchanged and is still not included.
+
+This hotfix package does not include a prewarmed overlay cache for the new
+framework codegen tag. It still includes the bundled overlay toolchain, so cache
+entries will be built locally as you play.
