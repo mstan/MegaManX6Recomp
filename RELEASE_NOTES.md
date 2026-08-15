@@ -1,36 +1,21 @@
-# MegaManX6Recomp v1.0.8
+# MegaManX6Recomp v1.0.9
 
-v1.0.8 is a patch release for the save-state and rewind controls reported in
-GitHub issue #18.
+v1.0.9 is a patch release for the bilinear texture filtering bug reported in
+GitHub issue #20.
 
-## Save-state and rewind controls
+## Bilinear texture filtering
 
-The save-state menu now shows controller-first PlayStation-style glyph prompts
-for slot selection, load, save, and back. The Cross glyph has been cleaned up so
-it reads as a thin button icon instead of a blocky X.
+The OpenGL bilinear path no longer draws grid seams through the title-sequence
+dialogue panel, portraits, and other textures assembled from small PS1 texture
+rectangles.
 
-The rewind filmstrip now uses the same glyph prompt style for seek, load, and
-close, so the in-game instructions are consistent across both overlays.
-
-F7 remains the default save-state menu key and F8 remains the default rewind
-key. The old F1-F12 quick-slot behavior is not restored.
-
-## Fast-forward and FPS readout
-
-Manual fast-forward is bounded by default so the game visibly advances while it
-is held. Advanced users can still set `PSX_FAST_FORWARD_SPEED=max` to restore
-the old unbounded behavior, or use values from 2 through 16 for a specific cap.
-
-When the FPS readout is enabled, interpolation builds now distinguish game
-speed from display refresh in the title and OSD instead of presenting one
-ambiguous FPS value.
-
-## Launcher settings
-
-The PlayStation hotkeys section is kept reachable in the settings layout at the
-reported launcher window size, instead of being pushed below the visible area.
+The fix recenters the bilinear sample footprint on the same PS1 sampling grid
+used by the renderer's primitive alignment, so 1x texture tiles sample their own
+texels instead of blending against the previous row or column at tile
+boundaries. Transparent cutout edges also keep the nearest texel as the
+authority, which avoids dissolving sprite borders into transparent neighbours.
 
 ## Compatibility
 
-Save files, memory cards and savestates from v1.0.7 continue to work. Your disc
+Save files, memory cards and savestates from v1.0.8 continue to work. Your disc
 image is unchanged and is still not included.
