@@ -63,11 +63,15 @@ psxrecomp_v4_add_runtime_target(psx-runtime
 # disabled until selected on the launcher's Mods page.
 set(MMX6_PRELOADED_MODS "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded")
 if(EXISTS "${MMX6_PRELOADED_MODS}/packages")
-    add_custom_command(TARGET psx-runtime POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-            "${MMX6_PRELOADED_MODS}"
-            "$<TARGET_FILE_DIR:psx-runtime>/mods"
-        COMMENT "Preloading the Mega Man X6 mod catalog")
+    foreach(MMX6_RUNTIME_TARGET psx-runtime psx-runtime-pgxp)
+        if(TARGET ${MMX6_RUNTIME_TARGET})
+            add_custom_command(TARGET ${MMX6_RUNTIME_TARGET} POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_directory
+                    "${MMX6_PRELOADED_MODS}"
+                    "$<TARGET_FILE_DIR:${MMX6_RUNTIME_TARGET}>/mods"
+                COMMENT "Preloading the Mega Man X6 mod catalog")
+        endif()
+    endforeach()
 endif()
 
 # First-divergence co-sim oracle build (COSIM_ORACLE.md): clean, deterministic,
@@ -93,11 +97,15 @@ endif()
 # psxrecomp_v4_add_runtime_target above, so this override wins. Drop official art
 # into launcher_art/img/ to replace the generated placeholder.
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/launcher_art")
-    add_custom_command(TARGET psx-runtime POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-            "${CMAKE_CURRENT_SOURCE_DIR}/launcher_art"
-            "$<TARGET_FILE_DIR:psx-runtime>"
-        COMMENT "Overriding launcher art with MegaManX6Recomp/launcher_art")
+    foreach(MMX6_RUNTIME_TARGET psx-runtime psx-runtime-pgxp)
+        if(TARGET ${MMX6_RUNTIME_TARGET})
+            add_custom_command(TARGET ${MMX6_RUNTIME_TARGET} POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_directory
+                    "${CMAKE_CURRENT_SOURCE_DIR}/launcher_art"
+                    "$<TARGET_FILE_DIR:${MMX6_RUNTIME_TARGET}>"
+                COMMENT "Overriding launcher art with MegaManX6Recomp/launcher_art")
+        endif()
+    endforeach()
 endif()
 
 if(BUILD_TESTING)

@@ -3,6 +3,7 @@
 #include <filesystem>
 #include <iostream>
 #include <string>
+#include <utility>
 
 namespace {
 
@@ -17,6 +18,8 @@ int fail(const std::string& message) {
     std::cerr << "FAIL: " << message << "\n";
     return 1;
 }
+
+void no_op_plugin() {}
 
 }  // namespace
 
@@ -166,6 +169,44 @@ int main(int argc, char** argv) {
     if (!plan.writes.empty() || !plan.overlays.empty() ||
         !plan.derived_discs.empty()) {
         return fail("default-disabled catalog produced runtime operations");
+    }
+
+    PSXRecompV4::mod_clear_plugins_for_tests();
+    for (const char* id : {
+             "mmx6.framerate.60",
+             "mmx6.framerate.120",
+             "mmx6.framerate.144",
+             "mmx6.framerate.165",
+             "mmx6.framerate.uncapped"}) {
+        if (!PSXRecompV4::mod_register_activation_plugin(id, no_op_plugin)) {
+            return fail(std::string("could not register test plugin ") + id);
+        }
+    }
+    if (!manager.set_feature_enabled(
+            "mmx6.enhancement.frame-interpolation", "frame-interpolation",
+            true, &error)) {
+        return fail(error);
+    }
+    for (const auto& [choice, plugin] :
+         {std::pair{"60", "mmx6.framerate.60"},
+          std::pair{"120", "mmx6.framerate.120"},
+          std::pair{"144", "mmx6.framerate.144"},
+          std::pair{"165", "mmx6.framerate.165"},
+          std::pair{"uncapped", "mmx6.framerate.uncapped"}}) {
+        if (!manager.set_feature_option(
+                "mmx6.enhancement.frame-interpolation",
+                "frame-interpolation", "rate", choice, &error)) {
+            return fail(error);
+        }
+        const PSXRecompV4::ModResolution frame_plan =
+            manager.resolve(kGameId, "", kStockDiscSha256);
+        if (!frame_plan.ok || !frame_plan.writes.empty() ||
+            !frame_plan.overlays.empty() || !frame_plan.derived_discs.empty() ||
+            frame_plan.plugins.size() != 1 ||
+            frame_plan.plugins.front().id != plugin) {
+            return fail("wrong interpolated frame-rate plan for " +
+                        std::string(choice));
+        }
     }
 
     std::cout << "preloaded mods: " << manager.packages().size()
