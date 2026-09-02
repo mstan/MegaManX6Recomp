@@ -96,19 +96,29 @@ Copy-Item (Join-Path $Root "LICENSE") $Stage
 # PLUS the ones the framework stages for every game (loading speed). Copying
 # the source tree instead silently drops the framework's mods from the
 # release, so players get a Mods page missing entries the dev build shows.
-$ModsSrc = Join-Path $BuildPath "mods"
-if (Test-Path (Join-Path $ModsSrc "packages")) {
-    Copy-Item -Recurse -Force $ModsSrc (Join-Path $Stage "mods")
-    $preloadedCount = (Get-ChildItem (Join-Path $Stage "mods/packages") -Directory).Count
-    Write-Host "Bundled mod catalog: $preloadedCount package family/families"
-    if ($preloadedCount -lt 16) {
-        throw ("Expected the game's 15 packages plus the framework's " +
-               "loading-speed mods, found $preloadedCount. The framework " +
-               "catalog is missing from $ModsSrc.")
-    }
-} else {
-    throw "No mod catalog staged at $ModsSrc - build the runtime first"
-}
+#
+# Routed through the framework's shared Add-ModCatalog. The hand-written block
+# that used to live here was wrong twice over:
+#
+#   * it globbed mods/packages, the PRE-SPLIT layout. Framework 4cc04be3 moved
+#     staged build output to mods/bundled and nothing in this repo followed, so
+#     at framework master this threw "No mod catalog staged ... build the
+#     runtime first" -- a message that blames the build for a layout rename
+#     (bead beads-eio.3.101);
+#   * it asserted "at least 16 package families". A count describes only one
+#     side of a catalog two repositories contribute to, so it goes stale the
+#     moment either side gains a mod. The identical assertion made Tomba 2
+#     unreleasable on 2026-09-01 when the framework gained a fifth builtin.
+#
+# Add-ModCatalog asserts the invariant instead: every package the SOURCES
+# define -- this repo's mods/preloaded/packages and the framework's
+# mods/builtin/packages -- must survive into the staged catalog. It also strips
+# the two things under mods/ that belong to this machine (installed/ and
+# state.toml) rather than leaving them to be noticed later.
+. (Join-Path $FrameworkRoot "tools\release_overlay_stage.ps1")
+Add-ModCatalog -BuildPath $BuildPath -Stage $Stage `
+               -GameModSource (Join-Path $Root "mods\preloaded") `
+               -FrameworkModSource (Join-Path $FrameworkRoot "mods\builtin") | Out-Null
 $BundledBiosSrc = Join-Path $BuildPath "bios"
 if (!(Test-Path (Join-Path $BundledBiosSrc "openbios.bin")) -or
     (Get-Item (Join-Path $BundledBiosSrc "openbios.bin")).Length -ne 524288 -or

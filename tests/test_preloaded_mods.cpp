@@ -23,10 +23,37 @@ int fail(const std::string& message) {
 int main(int argc, char** argv) {
     if (argc != 2) return fail("expected the preloaded mods root");
 
-    const std::filesystem::path root(argv[1]);
+    // Work on a COPY, never on the repository.
+    //
+    // ModPackageManager::scan() calls migrate_legacy_root(), which treats
+    // <root>/packages as the pre-split build-output layout and relocates every
+    // package it finds there into <root>/installed. The source convention for a
+    // title's own catalog is mods/preloaded/PACKAGES -- the same directory name
+    // -- so pointing the manager straight at argv[1] made this test DELETE the
+    // repository's mod catalog: measured 2026-09-02, all 15 package families
+    // (278 tracked files, including the approved retranslation payload) moved
+    // out of mods/preloaded/packages into mods/preloaded/installed on the first
+    // ctest run, after which the test failed on its own vandalism with
+    // "approved retranslation payload is missing". A green run only ever
+    // happened because nobody ran it twice in the same checkout.
+    //
+    // ApeEscapeRecomp's and Tomba2Recomp's equivalents already copy first. This
+    // does the same, and scans only the copy so no path in the repo is touched.
+    const std::filesystem::path source(argv[1]);
+    const std::filesystem::path root =
+        std::filesystem::temp_directory_path() / "mmx6-preloaded-mods-test";
+    std::error_code copy_ec;
+    std::filesystem::remove_all(root, copy_ec);
+    std::filesystem::copy(source, root,
+                          std::filesystem::copy_options::recursive, copy_ec);
+    if (copy_ec) {
+        return fail("could not stage a copy of " + source.string() + ": " +
+                    copy_ec.message());
+    }
+
     size_t manifest_count = 0;
     for (const std::filesystem::directory_entry& entry :
-         std::filesystem::recursive_directory_iterator(root / "packages")) {
+         std::filesystem::recursive_directory_iterator(source / "packages")) {
         if (!entry.is_regular_file() ||
             entry.path().filename() != "manifest.toml") {
             continue;
@@ -135,8 +162,12 @@ int main(int argc, char** argv) {
                     " linked Tweaks packages, found " +
                     std::to_string(linked_tweaks_packages));
     }
+    // Against the SOURCE tree, not the scanned copy: scan() has by now
+    // migrated <root>/packages away (see the note in main()), so asserting the
+    // on-disk shape of packages/ after a scan asserts the shape of a directory
+    // the scan just emptied. This assertion is about what the repository ships.
     if (!std::filesystem::exists(
-            root / "packages" / "mmx6.tweaks.native" / "1.10.5" /
+            source / "packages" / "mmx6.tweaks.native" / "1.10.5" /
             "assets" / "retranslation")) {
         return fail("approved retranslation payload is missing");
     }
