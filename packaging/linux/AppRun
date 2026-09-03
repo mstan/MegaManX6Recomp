@@ -94,7 +94,29 @@ fi
 
 launcher=$data_dir/.@EXE_NAME@-runtime
 ln -sfn "$runtime" "$launcher"
-export @ENV_PREFIX@_APPIMAGE_PATH=${APPIMAGE:-}
+appimage_path=${APPIMAGE:-}
+export @ENV_PREFIX@_APPIMAGE_PATH=$appimage_path
+export RECOMP_APPIMAGE_PATH=$appimage_path
+
+# An explicit validation/runtime override may preselect a disc without baking
+# a developer path into the reproducible release configuration.
+disc_override=${@ENV_PREFIX@_DISC:-}
+if [ -n "$disc_override" ] && [ -f "$disc_override" ]; then
+    config_tmp=$data_dir/.game.toml.tmp
+    awk -v disc="$disc_override" '
+        BEGIN { inserted = 0 }
+        /^[[:space:]]*disc[[:space:]]*=/ { next }
+        /^\[/ && $0 != "[game]" && !inserted {
+            escaped = disc
+            gsub(/\\/, "\\\\", escaped)
+            gsub(/"/, "\\\"", escaped)
+            print "disc = \"" escaped "\""
+            inserted = 1
+        }
+        { print }
+    ' "$data_dir/game.toml" > "$config_tmp"
+    mv "$config_tmp" "$data_dir/game.toml"
+fi
 unset APPIMAGE
 
 export PATH="$APPDIR/usr/bin${PATH:+:$PATH}"

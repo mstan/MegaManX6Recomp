@@ -10,7 +10,7 @@ param(
     # Where your accumulated overlay cache lives (the dir compile_overlays.py
     # writes to, per game.toml overlay_autocompile_cmd --out-dir). Bundled as a
     # head start.
-    [string]$CacheBuildDir = "build-stable",
+    [string]$CacheBuildDir = "build-release",
     [switch]$SkipRegen
 )
 
@@ -73,6 +73,42 @@ function Get-TomlScalar {
     }
     return $null
 }
+
+function Ensure-BiosBackends {
+    param([Parameter(Mandatory)][string]$FrameworkRoot)
+    $stems = @()
+    if (Test-Path -LiteralPath (Join-Path $FrameworkRoot "bios\OpenBIOS.toml")) {
+        $stems += ,@("OpenBIOS", "bios/OpenBIOS.toml")
+    }
+    if (Test-Path -LiteralPath (Join-Path $FrameworkRoot "bios\SCPH1001.BIN")) {
+        $stems += ,@("SCPH1001", "bios/SCPH1001.toml")
+    }
+    if (-not $stems) { throw "No BIOS profile available under $FrameworkRoot\bios" }
+
+    $missing = @($stems | Where-Object {
+        -not (Test-Path -LiteralPath (Join-Path $FrameworkRoot ("generated\{0}_dispatch.c" -f $_[0])))
+    })
+    if (-not $missing) { return }
+
+    $bash = $null
+    foreach ($cand in @("C:\msys64\usr\bin\bash.exe", "C:\msys64\mingw64\bin\bash.exe")) {
+        if (Test-Path -LiteralPath $cand) { $bash = $cand; break }
+    }
+    if (-not $bash) {
+        throw ("Missing recompiled BIOS backend(s): {0}. Install MSYS2 or run " +
+               "psxrecomp-v4/tools/regen_bios.sh manually." -f (($missing | ForEach-Object { $_[0] }) -join ', '))
+    }
+
+    $cygpath = Join-Path (Split-Path -Parent $bash) "cygpath.exe"
+    $posixRoot = (& $cygpath -u $FrameworkRoot).Trim()
+    $posixMingw = (& $cygpath -u $MingwBin).Trim()
+    foreach ($stem in $missing) {
+        Write-Host "Generating recompiled BIOS backend: $($stem[0])"
+        $biosShellCmd = "export PATH='$posixMingw':`$PATH; cd '$posixRoot' && " +
+                        "PSXRECOMP_BIOS_BUILD=recompiler/build tools/regen_bios.sh --config $($stem[1])"
+        Invoke-Native { & $bash -c $biosShellCmd } "regen_bios ($($stem[0]))"
+    }
+}
 # The executable is generated from the developer config but runs against the
 # player config. Keep widescreen codegen and runtime gates identical.
 Invoke-Native {
@@ -86,9 +122,11 @@ if (-not (Test-Path $FrameworkRoot)) {
 $RecompDir = Resolve-Path (Join-Path $FrameworkRoot "recompiler\build")
 if (-not $SkipRegen) {
     Invoke-Native { cmake --build $RecompDir --target psxrecomp-game -j $env:NUMBER_OF_PROCESSORS } "recompiler build"
+    Ensure-BiosBackends -FrameworkRoot $FrameworkRoot
     & (Join-Path $RecompDir "psxrecomp-game.exe") --config (Join-Path $Root "game.toml")
     if ($LASTEXITCODE -ne 0) { throw "game regen failed" }
 } else {
+    Ensure-BiosBackends -FrameworkRoot $FrameworkRoot
     Write-Host "Skipping game C regeneration; packaging the existing generated sources"
 }
 
