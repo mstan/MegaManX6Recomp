@@ -7,8 +7,6 @@ param(
     # release-packager defect class this repo has been bitten by before.
     [string]$Version = "",
     [string]$BuildDir = "build-release",
-    # Ship without a bundled overlay cache; off by default.
-    [switch]$AllowNoCache,
     # Where your accumulated overlay cache lives (the dir compile_overlays.py
     # writes to, per game.toml overlay_autocompile_cmd --out-dir). Bundled as a
     # head start.
@@ -57,6 +55,24 @@ function Invoke-Native {
     if ($code -ne 0) { throw "$What failed (exit $code)" }
 }
 
+function Get-TomlScalar {
+    param(
+        [Parameter(Mandatory)][string]$GameToml,
+        [Parameter(Mandatory)][string]$Table,
+        [Parameter(Mandatory)][string]$Key
+    )
+    $section = ""
+    foreach ($raw in (Get-Content -LiteralPath $GameToml)) {
+        $line = $raw.Trim()
+        if (-not $line -or $line.StartsWith("#")) { continue }
+        if ($line -match '^\[\[?([^\]]+)\]\]?$') { $section = $Matches[1].Trim(); continue }
+        if ($section -ne $Table) { continue }
+        if ($line -match ('^' + [regex]::Escape($Key) + '\s*=\s*(.+?)\s*(?:#.*)?$')) {
+            return $Matches[1].Trim().Trim('"').Trim("'")
+        }
+    }
+    return $null
+}
 # The executable is generated from the developer config but runs against the
 # player config. Keep widescreen codegen and runtime gates identical.
 Invoke-Native {
@@ -158,177 +174,44 @@ Write-Host "Bundled recomp-ui launcher assets: $fontCount font(s) + $imgCount im
 # overlay codegen tags, so a cache built for one did not load on the other.
 Copy-Item -Force (Join-Path $Root "packaging/release/game.toml") (Join-Path $Stage "game.toml")
 
-# Prebuilt overlay cache: native code for the game areas contributed so far.
-# The cache is namespaced per backend/arch/codegen-version:
-#   gcc/<arch-abi>/cg<N>/<entry8>_<crc8>.dll (+ .ranges)
-# and the loader scans it by that exact path, so the subtree must be preserved.
-# Ship .dll + .ranges only (skip the _patched.c intermediates and the reserved
-# sljit/ namespace, which has no on-disk blobs), and ONLY the dir matching THIS
-# build's codegen tag -- a stale-hash dir is dead weight the runtime never loads.
-$RecompTools = Resolve-Path (Join-Path $FrameworkRoot "tools")
-$RecompInc   = Resolve-Path (Join-Path $FrameworkRoot "runtime\include")
-$tagScript = Join-Path $env:TEMP ("psx_cgtag_{0}.py" -f $PID)
-@"
-import importlib.util
-s = importlib.util.spec_from_file_location('co', r'$RecompTools\compile_overlays.py')
-m = importlib.util.module_from_spec(s); s.loader.exec_module(m)
-inc = r'$RecompInc'
-print('cg%d_%08x_gc%08x' % (
-    m.codegen_ver(inc),
-    m.codegen_hash(inc),
-    m.overlay_config_hash(
-        r'$(Join-Path $RecompDir "psxrecomp-game.exe")',
-        r'$(Join-Path $Stage "game.toml")')))
-"@ | Set-Content -Encoding ASCII $tagScript
-$CgTag = (& python $tagScript).Trim()
-Remove-Item -Force $tagScript
-Write-Host "Release codegen tag: $CgTag (only this cache namespace is shipped)"
-$CacheSrc = Join-Path $Root "$CacheBuildDir/cache/SLUS-01395"
-if (Test-Path $CacheSrc) {
-    # NORMALISE before any Substring(): $CacheBuildDir may legitimately contain
-    # '..' (a cache built outside the repo), and Join-Path does NOT collapse it.
-    # The unresolved string is then LONGER than the real prefix of $f.FullName,
-    # so Substring($CacheSrc.Length) ate part of the subtree and produced
-    # cache/SLUS-01395/9a4721_gc4f033776/... instead of
-    # cache/SLUS-01395/gcc/win-x64/cg9_0e9a4721_gc4f033776/... . The loader
-    # scans by that exact path, so every shard silently failed to load while
-    # the packager still reported a healthy shard count.
-    $CacheSrc = (Resolve-Path $CacheSrc).Path
-    $CacheDst = Join-Path $Stage "cache/SLUS-01395"
-    $cacheFiles = Get-ChildItem $CacheSrc -Recurse -File -Include *.dll,*.ranges |
-        Where-Object { $_.FullName -notmatch '[\\/]sljit[\\/]' -and $_.FullName -match "[\\/]$CgTag[\\/]" }
-    foreach ($f in $cacheFiles) {
-        $rel  = $f.FullName.Substring($CacheSrc.Length).TrimStart('\','/')
-        $dest = Join-Path $CacheDst $rel
-        New-Item -ItemType Directory -Force (Split-Path $dest) | Out-Null
-        Copy-Item $f.FullName $dest
-    }
-    $dllCount = @($cacheFiles | Where-Object { $_.Extension -eq ".dll" }).Count
-    Write-Host "Bundled overlay cache: $dllCount native overlay DLL(s)"
+# Prebuilt overlay cache + self-contained overlay toolchain, both staged by the
+# shared framework implementation. The cache-required decision is read from the
+# STAGED game.toml, since that file is folded into the tag and is the contract
+# the released executable actually loads.
+$RecompTools = (Resolve-Path (Join-Path $FrameworkRoot "tools")).Path
+$RecompInc   = (Resolve-Path (Join-Path $FrameworkRoot "runtime\include")).Path
+$StagedGameToml = Join-Path $Stage "game.toml"
+$CacheGameId = Get-TomlScalar -GameToml $StagedGameToml -Table "game" -Key "id"
+if (-not $CacheGameId) { throw "Could not read [game] id from $StagedGameToml" }
 
-    # Assert the STAGED LAYOUT, not just the copied count. A shard the loader
-    # cannot find is worth exactly as much as no shard at all, and the count
-    # above cannot tell the difference.
-    if ($dllCount -gt 0) {
-        $staged = @(Get-ChildItem (Join-Path $CacheDst "gcc") -Recurse -File -Filter *.dll -ErrorAction SilentlyContinue |
-                    Where-Object { $_.FullName -match "[\\/]$CgTag[\\/]" })
-        if ($staged.Count -ne $dllCount) {
-            throw ("Staged overlay cache layout is wrong: expected $dllCount shard(s) under " +
-                   "cache/SLUS-01395/gcc/<arch-abi>/$CgTag/ but found $($staged.Count). " +
-                   "The loader scans that exact path, so the bundled cache would never load.")
-        }
-    }
-    if ($dllCount -eq 0 -and -not $AllowNoCache) {
-        # The directory existing is not enough: the tag folds in a hash of the
-        # PACKAGED game.toml, so a cache built against any other config lands
-        # under a different tag and matches nothing. Fail instead of quietly
-        # shipping a package whose first session runs entirely interpreted.
-        throw ("Overlay cache at $CacheSrc has no shards for tag $CgTag. " +
-               "Rebuild it with compile_overlays.py using the PACKAGED " +
-               "game.toml (release-stage/*/game.toml), or pass -AllowNoCache.")
-    }
+$CacheSrcRoot = if ([System.IO.Path]::IsPathRooted($CacheBuildDir)) {
+    $CacheBuildDir
 } else {
-    if ($AllowNoCache) {
-        Write-Warning "No overlay cache at $CacheSrc - shipping without one because -AllowNoCache was given"
-    } else {
-        # A cache-less package makes every player's first session run overlays
-        # interpreted. This used to be a warning that scrolled past, while the
-        # tag computed above had drifted from the one the runtime actually uses
-        # (it was missing the overlay-config hash), so the match never hit.
-        throw ("No overlay cache found at $CacheSrc for tag $CgTag. Build one " +
-               "with compile_overlays.py against the PACKAGED game.toml, or " +
-               "pass -AllowNoCache to ship without one.")
-    }
+    Join-Path $Root $CacheBuildDir
 }
-
-# ---- Self-contained overlay toolchain (tcc tier) -------------------------
-# A player box has no gcc AND no Python, so overlay_backend=auto resolves to tcc:
-# the runtime fills overlay gaps the shipped gcc cache misses by spawning this
-# bundled, fully self-contained toolchain. The runtime constructs the command
-# from <exe>/overlay_toolchain/ (see main.cpp): embedded Python + TinyCC + the
-# recompiler + compile_overlays.py + the runtime headers. Every exe here must be
-# self-contained (embedded python + prebuilt tcc are; the recompiler needs its
-# mingw runtime DLLs bundled beside it).
-$Toolchain = Join-Path $Stage "overlay_toolchain"
-New-Item -ItemType Directory -Force $Toolchain | Out-Null
-$DlCache = Join-Path $Root "tools/_toolchain_cache"
-New-Item -ItemType Directory -Force $DlCache | Out-Null
-
-# Pin every fetched archive by SHA256 and verify on EVERY use, including cache
-# hits. Without this a release trusts whatever the mirror served that day, and a
-# corrupted/tampered file already in tools/_toolchain_cache is reused forever
-# because the old code only checked Test-Path. Mirrors (python.org, savannah)
-# both 502 periodically, so transient failures retry instead of losing a build.
-function Get-PinnedArchive {
-    param(
-        [Parameter(Mandatory)][string]$Uri,
-        [Parameter(Mandatory)][string]$Sha256,
-        [Parameter(Mandatory)][string]$Destination,
-        [int]$Retries = 4
-    )
-    $name = Split-Path -Leaf $Destination
-    if (Test-Path -LiteralPath $Destination) {
-        $have = (Get-FileHash -LiteralPath $Destination -Algorithm SHA256).Hash.ToLower()
-        if ($have -eq $Sha256.ToLower()) { return $Destination }
-        Write-Warning "$name in the download cache has SHA256 $have (expected $Sha256); refetching"
-        Remove-Item -LiteralPath $Destination -Force
-    }
-    for ($attempt = 1; $attempt -le $Retries; $attempt++) {
-        try {
-            $tmp = "$Destination.tmp"
-            if (Test-Path -LiteralPath $tmp) { Remove-Item -LiteralPath $tmp -Force }
-            Invoke-WebRequest -Uri $Uri -OutFile $tmp -UseBasicParsing
-            $got = (Get-FileHash -LiteralPath $tmp -Algorithm SHA256).Hash.ToLower()
-            if ($got -ne $Sha256.ToLower()) {
-                Remove-Item -LiteralPath $tmp -Force
-                throw "SHA256 mismatch for $name : got $got, expected $Sha256"
-            }
-            Move-Item -LiteralPath $tmp -Destination $Destination -Force
-            return $Destination
-        } catch {
-            if ($attempt -eq $Retries) {
-                throw ("Failed to fetch $name after $Retries attempts: $($_.Exception.Message). " +
-                       "Place a verified copy at $Destination and re-run.")
-            }
-            $delay = [Math]::Min(30, [Math]::Pow(2, $attempt))
-            Write-Warning "$name fetch attempt $attempt failed ($($_.Exception.Message)); retrying in ${delay}s"
-            Start-Sleep -Seconds $delay
-        }
-    }
+foreach ($p in @($CacheSrcRoot, (Resolve-Path -LiteralPath $CacheSrcRoot -ErrorAction SilentlyContinue).Path)) {
+    if ($p -and $p -match 'QUARANTINE') { throw "Refusing quarantined overlay cache source: $p" }
 }
+$CacheSrcRoot = Join-Path $CacheSrcRoot "cache"
 
-# Embedded Python (fixed version; downloaded once + cached)
-$PyVer = "3.13.1"
-$PyZip = Get-PinnedArchive `
-    -Uri "https://www.python.org/ftp/python/$PyVer/python-$PyVer-embed-amd64.zip" `
-    -Sha256 "7b7923ff0183a8b8fca90f6047184b419b108cb437f75fc1c002f9d2f8bcec16" `
-    -Destination (Join-Path $DlCache "python-$PyVer-embed-amd64.zip")
-Expand-Archive -Path $PyZip -DestinationPath (Join-Path $Toolchain "python") -Force
+$CgTag = Get-OverlayCgTag -RecompTools $RecompTools -RecompInc $RecompInc `
+                          -GameExe (Join-Path $RecompDir "psxrecomp-game.exe") `
+                          -GameToml $StagedGameToml `
+                          -BuildPath $BuildPath -RuntimeTarget "psx-runtime"
+Write-Host "Release codegen tag: $CgTag (only this cache namespace is shipped)"
 
-# TinyCC prebuilt win64 (fixed version; downloaded once + cached). The zip has a
-# top-level tcc/ dir (tcc.exe + libtcc.dll + include/ + lib/) — ship it whole.
-$TccZip = Get-PinnedArchive `
-    -Uri "https://download.savannah.gnu.org/releases/tinycc/tcc-0.9.27-win64-bin.zip" `
-    -Sha256 "34a721949a2583fdff725312da092fa0f5f1f284b702e6f811c6954714faabb2" `
-    -Destination (Join-Path $DlCache "tcc-0.9.27-win64-bin.zip")
-$TccTmp = Join-Path $DlCache "tcc_extract"
-if (Test-Path $TccTmp) { Remove-Item -Recurse -Force $TccTmp }
-Expand-Archive -Path $TccZip -DestinationPath $TccTmp -Force
-Copy-Item -Recurse -Force (Join-Path $TccTmp "tcc") (Join-Path $Toolchain "tcc")
-
-# Recompiler (built above) + its mingw runtime DLLs (NOT statically linked) +
-# compile_overlays.py + the runtime headers.
-Copy-Item (Join-Path $RecompDir "psxrecomp-game.exe") $Toolchain
-foreach ($d in @("libgcc_s_seh-1.dll","libstdc++-6.dll","libwinpthread-1.dll")) {
-    Copy-Item (Join-Path $MingwBin $d) $Toolchain
+$OverlayCacheDeclared =
+    ((Get-TomlScalar -GameToml $StagedGameToml -Table "runtime" -Key "overlay_cache") -eq "true")
+if ($OverlayCacheDeclared) {
+    Write-Host "Staged game.toml declares overlay_cache = true; a shard cache is required"
+    Add-OverlayCache -GameId $CacheGameId -CacheSrcRoot $CacheSrcRoot `
+                     -Stage $Stage -CgTag $CgTag | Out-Null
+} else {
+    Write-Host "Staged game.toml does not declare overlay_cache; staging no shard cache"
 }
-Copy-Item (Resolve-Path (Join-Path $FrameworkRoot "tools\compile_overlays.py")) $Toolchain
-$ToolInc = Join-Path $Toolchain "include"
-New-Item -ItemType Directory -Force $ToolInc | Out-Null
-Copy-Item (Join-Path (Resolve-Path (Join-Path $FrameworkRoot "runtime\include")) "*.h") $ToolInc
-$tcMB = "{0:N0}" -f ((Get-ChildItem $Toolchain -Recurse -File | Measure-Object Length -Sum).Sum / 1MB)
-Write-Host "Bundled overlay toolchain (embedded python + tcc + recompiler): ~$tcMB MB"
-
+Add-OverlayToolchain -Stage $Stage -RecompDir $RecompDir -RecompTools $RecompTools `
+                     -RecompInc $RecompInc -MingwBin $MingwBin `
+                     -DlCache (Join-Path $Root "tools\_toolchain_cache") | Out-Null
 # The Release build is statically linked (PSX_STATIC_RUNTIME defaults ON for
 # MinGW Release), so the exe imports ONLY Windows system DLLs -- nothing to
 # bundle. Assert self-containment rather than trust it (mismatched side-by-side
