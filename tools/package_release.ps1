@@ -254,20 +254,63 @@ New-Item -ItemType Directory -Force $Toolchain | Out-Null
 $DlCache = Join-Path $Root "tools/_toolchain_cache"
 New-Item -ItemType Directory -Force $DlCache | Out-Null
 
+# Pin every fetched archive by SHA256 and verify on EVERY use, including cache
+# hits. Without this a release trusts whatever the mirror served that day, and a
+# corrupted/tampered file already in tools/_toolchain_cache is reused forever
+# because the old code only checked Test-Path. Mirrors (python.org, savannah)
+# both 502 periodically, so transient failures retry instead of losing a build.
+function Get-PinnedArchive {
+    param(
+        [Parameter(Mandatory)][string]$Uri,
+        [Parameter(Mandatory)][string]$Sha256,
+        [Parameter(Mandatory)][string]$Destination,
+        [int]$Retries = 4
+    )
+    $name = Split-Path -Leaf $Destination
+    if (Test-Path -LiteralPath $Destination) {
+        $have = (Get-FileHash -LiteralPath $Destination -Algorithm SHA256).Hash.ToLower()
+        if ($have -eq $Sha256.ToLower()) { return $Destination }
+        Write-Warning "$name in the download cache has SHA256 $have (expected $Sha256); refetching"
+        Remove-Item -LiteralPath $Destination -Force
+    }
+    for ($attempt = 1; $attempt -le $Retries; $attempt++) {
+        try {
+            $tmp = "$Destination.tmp"
+            if (Test-Path -LiteralPath $tmp) { Remove-Item -LiteralPath $tmp -Force }
+            Invoke-WebRequest -Uri $Uri -OutFile $tmp -UseBasicParsing
+            $got = (Get-FileHash -LiteralPath $tmp -Algorithm SHA256).Hash.ToLower()
+            if ($got -ne $Sha256.ToLower()) {
+                Remove-Item -LiteralPath $tmp -Force
+                throw "SHA256 mismatch for $name : got $got, expected $Sha256"
+            }
+            Move-Item -LiteralPath $tmp -Destination $Destination -Force
+            return $Destination
+        } catch {
+            if ($attempt -eq $Retries) {
+                throw ("Failed to fetch $name after $Retries attempts: $($_.Exception.Message). " +
+                       "Place a verified copy at $Destination and re-run.")
+            }
+            $delay = [Math]::Min(30, [Math]::Pow(2, $attempt))
+            Write-Warning "$name fetch attempt $attempt failed ($($_.Exception.Message)); retrying in ${delay}s"
+            Start-Sleep -Seconds $delay
+        }
+    }
+}
+
 # Embedded Python (fixed version; downloaded once + cached)
 $PyVer = "3.13.1"
-$PyZip = Join-Path $DlCache "python-$PyVer-embed-amd64.zip"
-if (-not (Test-Path $PyZip)) {
-    Invoke-WebRequest -Uri "https://www.python.org/ftp/python/$PyVer/python-$PyVer-embed-amd64.zip" -OutFile $PyZip
-}
+$PyZip = Get-PinnedArchive `
+    -Uri "https://www.python.org/ftp/python/$PyVer/python-$PyVer-embed-amd64.zip" `
+    -Sha256 "7b7923ff0183a8b8fca90f6047184b419b108cb437f75fc1c002f9d2f8bcec16" `
+    -Destination (Join-Path $DlCache "python-$PyVer-embed-amd64.zip")
 Expand-Archive -Path $PyZip -DestinationPath (Join-Path $Toolchain "python") -Force
 
 # TinyCC prebuilt win64 (fixed version; downloaded once + cached). The zip has a
 # top-level tcc/ dir (tcc.exe + libtcc.dll + include/ + lib/) — ship it whole.
-$TccZip = Join-Path $DlCache "tcc-0.9.27-win64-bin.zip"
-if (-not (Test-Path $TccZip)) {
-    Invoke-WebRequest -Uri "https://download.savannah.gnu.org/releases/tinycc/tcc-0.9.27-win64-bin.zip" -OutFile $TccZip
-}
+$TccZip = Get-PinnedArchive `
+    -Uri "https://download.savannah.gnu.org/releases/tinycc/tcc-0.9.27-win64-bin.zip" `
+    -Sha256 "34a721949a2583fdff725312da092fa0f5f1f284b702e6f811c6954714faabb2" `
+    -Destination (Join-Path $DlCache "tcc-0.9.27-win64-bin.zip")
 $TccTmp = Join-Path $DlCache "tcc_extract"
 if (Test-Path $TccTmp) { Remove-Item -Recurse -Force $TccTmp }
 Expand-Archive -Path $TccZip -DestinationPath $TccTmp -Force
