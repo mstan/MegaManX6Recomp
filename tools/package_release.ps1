@@ -260,7 +260,8 @@ $imports = & $objdump -p (Join-Path $Stage "MegaManX6Recomp.exe") |
 $systemDlls = @("kernel32.dll","user32.dll","gdi32.dll","shell32.dll","msvcrt.dll",
                 "advapi32.dll","ws2_32.dll","comdlg32.dll","dbghelp.dll","ole32.dll",
                 "oleaut32.dll","winmm.dll","imm32.dll","version.dll","setupapi.dll",
-                "dinput8.dll","rpcrt4.dll","hid.dll","cfgmgr32.dll","opengl32.dll")
+                "dinput8.dll","rpcrt4.dll","hid.dll","cfgmgr32.dll","opengl32.dll",
+                "d2d1.dll","dwrite.dll")
 $nonSystem = $imports | Where-Object { $systemDlls -notcontains $_.ToLower() }
 if ($nonSystem) {
     throw "Release exe is NOT self-contained -- imports non-system DLL(s): $($nonSystem -join ', ')"
