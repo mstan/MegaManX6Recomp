@@ -156,6 +156,16 @@ if(BUILD_TESTING)
     )
 
     find_package(Python3 REQUIRED COMPONENTS Interpreter)
+
+    # Clean-room CD-ROM EDC/ECC recompute (tools/edc_ecc.py) — the Tweaks apply
+    # path's replacement for the former GPLv3 error_recalc.exe. Pure Python, no
+    # disc image needed: the suite checks the Reed-Solomon syndromes directly.
+    add_test(
+        NAME mmx6_edc_ecc_test
+        COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_edc_ecc.py"
+    )
+
     set(MMX6_TIMING_PACKAGE_DIR
         "${MMX6_PRELOADED_MODS}/packages/mmx6.tweaks.timing/1.1.0")
     set(MMX6_TIMING_TEST_ARCHIVE

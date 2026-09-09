@@ -7,7 +7,7 @@ headless pipeline the launcher can drive:
     tickbox selection -> validated option set (PreReq/Reorder)
                       -> base xdelta3 (b01, or s02 when ScriptPatch is on)
                       -> hex writes at BIN offsets (_dat.ahk database)
-                      -> error_recalc (EDC/ECC)
+                      -> edc_ecc (EDC/ECC recompute)
                       -> patched BIN + cue + extracted SLUS EXE
                       -> variant id "tweaks-<crc32(exe)>" -> game.<variant>.toml -> regen
 
@@ -862,7 +862,7 @@ def selection_to_overrides(catalog: list[dict], selection: dict,
 # the shipped presets. Proven byte-identical (MD5) against all three v2.6
 # standalone patches, incl. the maximal mugshot-assembly + art-file-insert path.
 #
-# Pipeline:  profile -> [engine: base xdelta3 + hex writes + error_recalc]
+# Pipeline:  profile -> [engine: base xdelta3 + hex writes + edc_ecc recompute]
 #                    -> patched BIN -> extract SLUS -> crc32 -> variant id
 #                    -> stage variants/<id>/{rom/SLUS, disc.bin, disc.cue}
 #                    -> emit game.<id>.toml  -> (optional) regen
@@ -1147,7 +1147,7 @@ def cmd_apply(db: TweaksDB, args) -> int:
 
     src_dir = Path(args.patcher_src)
     run_extracted = Path(args.run_extracted) if args.run_extracted else DEFAULT_RUN_EXTRACTED
-    # Checks needed by BOTH engines (the Python engine's xdelta3/error_recalc live
+    # Checks needed by BOTH engines (the Python engine's xdelta3 lives
     # under run_extracted; iso_extract pulls the SLUS from the patched BIN).
     for label, p in [("run_extracted", run_extracted), ("iso_extract.py", ISO_EXTRACT)]:
         if not p.exists():

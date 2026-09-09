@@ -1,12 +1,15 @@
 # Third-party licenses (MMX6 Tweaks apply path)
 
 This project (MegaManX6Recomp) is licensed **PolyForm Noncommercial 1.0.0**
-(see the repository-root `LICENSE`). The **Tweaks apply** feature invokes a
-small number of external tools as **separate processes** ("mere aggregation" —
-the invoked tool keeps its own license; it does not change the license of this
-project's code). Their licenses and attributions are recorded here.
+(see the repository-root `LICENSE`). The **Tweaks apply** feature invokes one
+external tool as a **separate process** ("mere aggregation" — the invoked tool
+keeps its own license; it does not change the license of this project's code).
+Its license and attribution are recorded here.
 
 Nothing of acediez's patcher data is redistributed — see *Attribution* below.
+
+**There is no GPL dependency in this project.** The apply path is one
+Apache-2.0 bundled exe (xdelta3) plus pure Python.
 
 ## Bundled / invoked tools
 
@@ -21,30 +24,37 @@ Nothing of acediez's patcher data is redistributed — see *Attribution* below.
 - License text: [`Apache-2.0.txt`](Apache-2.0.txt). NOTICE:
   [`xdelta3.NOTICE.txt`](xdelta3.NOTICE.txt).
 
-### error_recalc — GPL v3-or-later  *(slated for removal — see below)*
-- Recomputes the disc image's EDC/ECC after the hex writes.
-- Derived from **Neill Corlett's EDC/ECC code** (cmdpack `ecm.c`,
-  Copyright (C) 2002–2011 Neill Corlett), which is **GPLv3-or-later**; therefore
-  error_recalc is distributed under **GPLv3-or-later**.
-- License text: [`GPL-3.0.txt`](GPL-3.0.txt). NOTICE:
-  [`error_recalc.NOTICE.txt`](error_recalc.NOTICE.txt).
-- Because it is a **separate process**, its GPL terms do **not** extend to this
-  project's PolyForm-NC code. If a release ships the error_recalc binary before
-  the replacement below lands, that release must also make the error_recalc
-  source available per GPLv3 (§6).
+## EDC/ECC recompute — ours, no third-party code
 
-## Planned: remove the one GPL dependency
+Recomputing the disc image's EDC/ECC after the hex writes is
+[`tools/edc_ecc.py`](../tools/edc_ecc.py): a clean-room, pure-Python
+implementation written from the published CD-ROM standard (ECMA-130, 2nd
+edition — clause 14 for the sector layout, Annex A for the EDC CRC-32
+polynomial and the P/Q Reed–Solomon product code). An algorithm published as a
+standard is not copyrightable, so a from-specification implementation carries
+no third-party license.
 
-The EDC/ECC recompute is being reimplemented **clean-room in pure Python** from
-the published CD-ROM standard (ECMA-130 / "Yellow Book": the EDC CRC-32 and the
-P/Q Reed–Solomon ECC parity). The *algorithm* is a standard and is not
-copyrightable — only Corlett's specific code is — so a from-spec implementation
-carries **no license** and is not a derivative of error_recalc.
+It replaces the external `error_recalc.exe` this project used to invoke, which
+was **GPLv3-or-later** (derived from Neill Corlett's cmdpack `ecm.c` EDC/ECC
+code). That tool is no longer invoked, shipped, or referenced, so the GPLv3
+source-availability obligation no longer applies to any release.
 
-Once that lands, `error_recalc.exe`, `GPL-3.0.txt`, and
-`error_recalc.NOTICE.txt` are removed, leaving the apply path as:
-**one Apache-2.0 bundled exe (xdelta3) + pure-Python everything else** — no GPL,
-no AutoHotkey.
+Correctness is established two ways, both in
+[`tools/test_edc_ecc.py`](../tools/test_edc_ecc.py):
+
+- **From the definition** — after a recompute, both Reed–Solomon syndromes of
+  every P and Q vector are zero, and the EDC table matches a bit-at-a-time CRC
+  over the ECMA-130 polynomial. The fast whole-row path is diffed against a
+  scalar reference implementation of the same algebra.
+- **Against real media** — recomputing a known-good retail PS1 image must
+  change nothing. Verified over a full disc (144,972 Mode 2 Form 1 sectors,
+  zero differences). Disc images are never committed, so that test reads a
+  local image named by `MMX6_EDC_ECC_REF_BIN` and skips when it is unset:
+
+      py -3 tools/edc_ecc.py --verify "path\to\Some Game (USA).bin"
+
+Mode 2 Form 2 sectors, Mode 1 sectors, and CD-DA audio sectors carry no P/Q
+parity and are left untouched.
 
 ## Attribution (not a bundled tool)
 

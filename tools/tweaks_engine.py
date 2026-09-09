@@ -16,8 +16,8 @@ _src/_patch/{createlist,exception_a,exception_b,filter,patchapply}.ahk):
   PatchApply   -> write %entry% at HEX2DEC(%entry%_Offset)
 
 apply_bin/apply_selection additionally reproduce patchapply.ahk in pure Python
-(xdelta3 base + hex writes + error_recalc), so the launcher can build a patched
-BIN with NO AutoHotkey. Proven byte-identical to the AHK engine by whole-BIN MD5
+(xdelta3 base + hex writes + clean-room EDC/ECC), so the launcher can build a
+patched BIN with NO AutoHotkey. Proven byte-identical to the AHK engine by whole-BIN MD5
 across the b01 and s02 bases. This is AHK-free for any selection the engine fully
 covers; selections touching still-unported options (New Game/RescRep, Mugshot
 file inserts — see TODO) must not be routed through it until those land.
@@ -107,6 +107,12 @@ _spec = importlib.util.spec_from_file_location(
     "tweaks_resolver", Path(__file__).with_name("tweaks_resolver.py"))
 twr = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(twr)
+
+# Clean-room CD-ROM EDC/ECC recompute (replaces the external error_recalc.exe).
+_ecc_spec = importlib.util.spec_from_file_location(
+    "edc_ecc", Path(__file__).with_name("edc_ecc.py"))
+edc_ecc = importlib.util.module_from_spec(_ecc_spec)
+_ecc_spec.loader.exec_module(edc_ecc)
 
 
 def hex2dec(h: str) -> int:
@@ -1376,22 +1382,23 @@ def build_filelist(db, merged: dict, base: dict):
 # --------------------------------------------------------------------------
 # Pure-Python apply (no AutoHotkey) — port of patchapply.ahk. Proven byte-
 # identical to the AHK engine by whole-BIN MD5 across the b01 and s02 bases.
-# error_recalc.exe is a separate EDC/ECC tool (not AHK); a clean-room Python
-# replacement is a follow-up. Path constants come from the run-extracted patcher.
+# The EDC/ECC recompute is `edc_ecc.py`, our clean-room implementation from
+# ECMA-130; the external error_recalc.exe (GPLv3) is no longer invoked, so the
+# apply path's only bundled tool is Apache-2.0 xdelta3. Path constants come
+# from the run-extracted patcher.
 # --------------------------------------------------------------------------
 _RUN_EXTRACTED = twr.DEFAULT_RUN_EXTRACTED
 XDELTA3_EXE = _RUN_EXTRACTED / "tools" / "xdelta3" / "xdelta3-3.0.11-i686.exe"
-ERROR_RECALC_EXE = _RUN_EXTRACTED / "tools" / "error_recalc" / "error_recalc.exe"
 BASE_PATCH_DIR = _RUN_EXTRACTED / "data" / "xdelta3"
 
 
 def apply_bin(db, merged: dict, base: dict, out, *, vanilla=None,
-              error_recalc: bool = True, force: bool = False) -> tuple[str, int]:
+              recompute_ecc: bool = True, force: bool = False) -> tuple[str, int]:
     """Build the patched BIN entirely in Python (patchapply.ahk):
       1. apply the base xdelta3 (b01/s02) to vanilla -> `out`
       2. write each WriteList entry (hex data at its absolute BIN offset; the
          WriteList is already ECC-split so writes never land in a sector trailer)
-      3. recompute EDC/ECC (error_recalc.exe, in place)
+      3. recompute EDC/ECC in place (edc_ecc.py, clean-room ECMA-130)
     Returns (patchfile, n_writes). Raises on a no-change selection, or (unless
     force=True) if the selection changes a PARKED option the port cannot yet
     build byte-identically (coverage_gaps — Mugshot/Title file inserts and the
@@ -1424,12 +1431,8 @@ def apply_bin(db, merged: dict, base: dict, out, *, vanilla=None,
             f.write(bytes.fromhex(data.replace(" ", "")))
         for _var, filepath, off in files:
             _write_file_insert(f, filepath, off)
-    if error_recalc:
-        r = subprocess.run([str(ERROR_RECALC_EXE), str(out)],
-                           capture_output=True, text=True)
-        if r.returncode != 0:
-            raise RuntimeError(f"error_recalc failed ({r.returncode}): "
-                               f"{r.stdout}{r.stderr}")
+    if recompute_ecc:
+        edc_ecc.recompute_image(out)
     return patchfile, len(writes)
 
 
@@ -1462,13 +1465,13 @@ def _write_file_insert(f, filepath, offset: int) -> None:
 
 
 def apply_selection(selection_json: str, out, *, vanilla=None,
-                    error_recalc: bool = True) -> tuple[str, int]:
+                    recompute_ecc: bool = True) -> tuple[str, int]:
     """Convenience: build the merged profile from a UI selection JSON and apply it
     to a patched BIN at `out` — the launcher's AutoHotkey-free entry point."""
     db = twr.TweaksDB(twr.DEFAULT_PATCHER_SRC)
     merged = merged_profile(db, selection_json)
     base = OrderedDict(twr.load_profile(twr.DEFAULT_PROFILE))
-    return apply_bin(db, merged, base, out, vanilla=vanilla, error_recalc=error_recalc)
+    return apply_bin(db, merged, base, out, vanilla=vanilla, recompute_ecc=recompute_ecc)
 
 
 # --------------------------------------------------------------------------
@@ -1493,7 +1496,7 @@ def _vanilla_region_class(vanilla_path, off: int, size: int, sample: int = 512) 
 
 
 def apply_art_only(db, merged: dict, base: dict, out, *, vanilla=None,
-                   error_recalc: bool = True, allow_scratch: bool = False) -> dict:
+                   recompute_ecc: bool = True, allow_scratch: bool = False) -> dict:
     """Produce an ART-ONLY disc image: a raw copy of the vanilla BIN with ONLY the
     selection's art file-inserts written in place, then EDC/ECC recomputed.
 
@@ -1544,12 +1547,8 @@ def apply_art_only(db, merged: dict, base: dict, out, *, vanilla=None,
     with open(out, "r+b") as f:
         for _var, fp, off in files:
             _write_file_insert(f, Path(fp), off)
-    if error_recalc:
-        r = subprocess.run([str(ERROR_RECALC_EXE), str(out)],
-                           capture_output=True, text=True)
-        if r.returncode != 0:
-            raise RuntimeError(f"error_recalc failed ({r.returncode}): "
-                               f"{r.stdout}{r.stderr}")
+    if recompute_ecc:
+        edc_ecc.recompute_image(out)
     return report
 
 
