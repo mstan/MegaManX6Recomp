@@ -96,10 +96,68 @@ The reverse-direction check at camera658 also shows the robot drawing across
 the right reveal edge. The game regression exercises both callbacks with
 4:3/centered/anchored margins and world/UI selectors; it verifies that only
 the horizontal argument changes, with no object-memory writes. This is
-engineering verification, pending the owner's final gameplay verdict.
+engineering verification. The owner subsequently validated the launched 16:9
+build: "definitely fixed." The separate spawn follow-up below remains pending.
 
 Review executable: `build-anchor-enemies/mmx6-runtime.exe`, built from
 `generated-enemies` and the equivalent `game.enemies-review.toml`. The prior
 owner run/config (`build-anchor-next`, `game.anchor-next.toml`, port4492)
 remain untouched. Ask when the owner is ready to switch; never inject input
 or load a state into their runtime. Private evidence used private save slots.
+
+## Spawn activation follow-up (beads-eio.1.8)
+
+The retail placement driver `80029D18` scans camera-relative strips: right
+X+336..368, left X-48..-16, with full X bounds for vertical movement.
+`8002A3E8` performs the initial full scan. Shared scanner `80029F38` also uses
+an independent X-48..368 interval when advancing respawn latches. Widening
+only the scanner arguments would leave this second interval inconsistent.
+
+Ten configured ADDIU sites now expand the outer horizontal strip edges, both
+X edges of initial/vertical scans, and both respawn-reset edges by the same
+constant activation margin (138 pixels for 16:9 edge anchoring). Inner strip
+edges remain native to retain scan coverage across jumps and reversals.
+Placement offsets, active flags, difficulty/respawn rules and vertical bounds
+execute the original instructions. The guest camera is read, never changed.
+
+The framework adds the opt-in `widescreen.cull.bias_lower_sites` counterpart
+to positive bias sites, including native/dirty-RAM parity and cache identity.
+Both bias forms preserve native PGXP source capture and ALU shadow updates;
+the original early-return emitter had skipped those even with margin zero.
+
+Private write traces in `_triage/anchor/spawn` correlate the actual spawn
+write at `8002A178` with camera writes, ordered by sequence number:
+
+| Placement X | Previous spawn camera X | Updated spawn camera X |
+|---|---:|---:|
+| 560 | 194 | 58 |
+| 608 | 244 | 103 |
+| 800 | 436 | 297 |
+| 1024 | 657 | 519 |
+
+Returning left, the X608 and X416 robots spawn at camera790 and601,
+respectively, approximately 130 pixels outside the visible left edge. Each
+placement spawned once in that measured return pass. Screenshots accompany
+both traversals; `baseline-spawns.json`, `fixed-spawns.json`, `reverse-spawns.json`
+and their filtered traces retain the measurements. This is intro-stage
+engineering evidence; other stages and the final gameplay verdict need the owner.
+
+Validation: compiler parser/emission/cache tests pass, as do executable
+ADDI/ADDIU checks for both endpoints, margin-zero identity, unrelated sites,
+register preservation, and the GPU site registry. The existing game hook
+regression passes. Zero dispatch misses occurred during private traversal;
+native overlay dispatch was active. Comparing all 32 generated game shards
+against the accepted enemy build finds exactly ten changed X-bound expressions:
+setting the new margin terms to zero reproduces every original shard byte,
+including PGXP instrumentation. Generated output is never hand-edited.
+
+The compiler hash change makes older private checkpoints incompatible; a
+fresh boot and new private checkpoints were used, with completion receipts
+checked before input. The review boots normally with no state loading:
+`build-anchor-spawns/mmx6-runtime.exe`, `game.spawns-review.toml`, port4494,
+`saves-spawn-review`, widescreen mod enabled at fixed 16:9, camera `edges`.
+The owner decides when to launch and performs final validation.
+
+Spawn framework pin: `33e3ed78` on `feat/mmx6-view-anchor`; UI remains at
+`2298545959c30cf74defd1b8153b7fdeb6b2daa1`. Review executable SHA256:
+`69CE7489B6A31C4603F7C468A72D3F5ADEF234CF2FF45F50F8E6C2C4764C87A6`.
