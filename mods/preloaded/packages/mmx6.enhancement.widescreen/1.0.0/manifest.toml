@@ -40,6 +40,23 @@ label = "16:9"
 value = "21:9"
 label = "21:9 (adaptive, experimental)"
 
+[[option]]
+feature = "widescreen"
+id = "camera"
+label = "View anchoring"
+description = "Keep the wider view within the room at its edges. The original game camera and controls stay unchanged."
+group = "Display"
+type = "choice"
+default = "edges"
+
+[[option.choice]]
+value = "edges"
+label = "Room edges"
+
+[[option.choice]]
+value = "centered"
+label = "Centered (original widescreen)"
+
 [[plugin]]
 feature = "widescreen"
 id = "mmx6.widescreen"

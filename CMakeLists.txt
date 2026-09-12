@@ -116,6 +116,11 @@ endif()
 # A title that cannot be built against framework master cannot be checked
 # against it either.
 if(BUILD_TESTING)
+    add_executable(mmx6_widescreen_view_test tests/test_widescreen_view.c)
+    target_include_directories(mmx6_widescreen_view_test PRIVATE
+        "${PSXRECOMP_V4_ROOT}/runtime/include")
+    add_test(NAME mmx6_widescreen_view_test COMMAND mmx6_widescreen_view_test)
+
     add_executable(mmx6_tweaks_hooks_test
         tests/test_mmx6_tweaks_hooks.cpp
         src/mods/mmx6_tweaks_hooks_resolver.cpp
