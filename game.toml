@@ -14,9 +14,9 @@ seeds = "seeds/ghidra_funcs.txt"
 # bios_thunks = "seeds/mmx6_bios_thunks.txt"  # optional; add once BIOS thunks are inventoried
 out_dir = "generated"
 strict = true
-# Presentation-only widescreen producer hooks: BG layer bounds and screen-space
-# dialogue classification. Callbacks are inactive with the enhancement off.
-mod_function_entry_funcs = ["0x800270D0", "0x80026ECC", "0x800232D4", "0x800239CC", "0x80023ED8", "0x800241D4", "0x80022E44"]
+# Widescreen hooks: BG layer bounds, screen-space dialogue classification, and
+# paired actor draw/lifetime extents. Inactive with the enhancement off.
+mod_function_entry_funcs = ["0x800270D0", "0x80026ECC", "0x800232D4", "0x800239CC", "0x80023ED8", "0x800241D4", "0x80022E44", "0x8002CBFC", "0x8002CCB0"]
 
 [runtime]
 debug_port = 4490

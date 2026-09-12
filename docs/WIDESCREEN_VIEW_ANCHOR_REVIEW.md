@@ -1,10 +1,11 @@
 # MMX6 view anchoring review
 
-Status: owner gameplay validation pending. Branch `feat/widescreen-view-anchor`
+Status: owner accepted camera/background/dialogue anchoring; enemy visibility
+follow-up awaits owner validation. Branch `feat/widescreen-view-anchor`
 on game `ea39946`; framework branch `feat/mmx6-view-anchor` at `20286bd9`
 (based on `0baf7bb1`);
 UI `2298545959c30cf74defd1b8153b7fdeb6b2daa1`. Nothing pushed.
-Tracking: `beads-eio.1.5` and framework `beads-eio.3.146`.
+Tracking: `beads-eio.1.5`, follow-up `beads-eio.1.7`, framework `beads-eio.3.146`.
 
 The Widescreen mod defaults its camera option to room-edge anchoring. The
 centered option retains the prior widescreen behavior. Guest camera values are
@@ -63,3 +64,42 @@ are now in tracked `game.toml`; normal `generated` is regenerated from it.
 The separately built review uses the equivalent `game.anchor-next.toml` and
 `generated-next`. Neither generated output, retail assets, evidence captures,
 saves nor the local review shortcut belong in commits.
+
+## Enemy cutoff follow-up (beads-eio.1.7)
+
+The owner's next playtest showed an intro-stage robot disappearing while part
+of it still occupied the left reveal. A read-only RAM capture found camera
+X1092 and actor X1024. Private function tracing identified its actual calls:
+`800EADD0 -> 8002CBFC` (lifetime check, horizontal radius64) and
+`800EADE4 -> 8002CCB0` (draw visibility, horizontal radius32). The old
+`801F2094` overlay-specific deactivation fix does not cover this actor path.
+
+Retail `8002CBFC` returns outside the native 320-pixel rectangle;
+`8002CCB0` writes object byte `+3` to control draw submission. Both copy `a1`
+as horizontal radius and use `a2` independently for vertical bounds. New
+function-entry callbacks add the constant widescreen margin to `a1` in both
+classifiers, for world objects only (`object+14 >= 0`). Negative-selector UI,
+vertical extents and margin-zero 4:3 calls are unchanged. The hooks apply to
+both centered and edge-anchored widescreen and are absent when the mod is off.
+Generated/interpreted function-entry paths share the existing plugin contract.
+
+Private before/after evidence in `_triage/anchor/enemy-pop`:
+
+| Native camera X | Previous build | Fixed build |
+|---|---|---|
+| 1062–1068 | Actor alive, draw flag0 despite visible overlap | Draw flag1; visible sprite portion retained |
+| 1093–1097 | Actor removed | Actor retained; remaining sprite clipped naturally at frame edge |
+| 1165–1171 | Actor removed | Retained outside frame inside the guard region |
+| 1236–1246 | Actor removed | Actor removed after leaving the guard region |
+
+The reverse-direction check at camera658 also shows the robot drawing across
+the right reveal edge. The game regression exercises both callbacks with
+4:3/centered/anchored margins and world/UI selectors; it verifies that only
+the horizontal argument changes, with no object-memory writes. This is
+engineering verification, pending the owner's final gameplay verdict.
+
+Review executable: `build-anchor-enemies/mmx6-runtime.exe`, built from
+`generated-enemies` and the equivalent `game.enemies-review.toml`. The prior
+owner run/config (`build-anchor-next`, `game.anchor-next.toml`, port4492)
+remain untouched. Ask when the owner is ready to switch; never inject input
+or load a state into their runtime. Private evidence used private save slots.

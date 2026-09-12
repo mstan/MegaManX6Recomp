@@ -9,11 +9,13 @@
 #include "../src/mods/mmx6_widescreen_plugin.c"
 
 static PSXModActivationCallback activate;
-static struct { uint32_t pc; PSXModFunctionEntryCallback fn; } hooks[8];
+static struct { uint32_t pc; PSXModFunctionEntryCallback fn; } hooks[10];
 static unsigned hook_count, tag_count, anchor_calls;
 static uint32_t tags[8], packet;
 static uint8_t object[128];
 static const char *camera_option = "edges";
+static int32_t reveal_margin;
+int32_t psx_mod_widescreen_x_margin(void) { return reveal_margin; }
 
 int psx_mod_register_activation_plugin(const char *id, PSXModActivationCallback fn) {
     assert(strcmp(id, "mmx6.widescreen") == 0);
@@ -22,7 +24,7 @@ int psx_mod_register_activation_plugin(const char *id, PSXModActivationCallback 
 }
 int psx_mod_register_function_entry_plugin(const char *id, uint32_t pc,
                                            PSXModFunctionEntryCallback fn) {
-    assert(strcmp(id, "mmx6.widescreen") == 0 && hook_count < 8);
+    assert(strcmp(id, "mmx6.widescreen") == 0 && hook_count < 10);
     hooks[hook_count].pc = pc; hooks[hook_count++].fn = fn;
     return 1;
 }
@@ -70,7 +72,7 @@ static void enter(uint32_t pc, CPUState *cpu) {
 int main(void) {
     assert(activate);
     activate();
-    assert(hook_count == 7 && anchor_calls == 1);
+    assert(hook_count == 9 && anchor_calls == 1);
     CPUState cpu = {0};
     cpu.gpr[4] = 2;
     enter(0x800270d0u, &cpu);
@@ -101,7 +103,28 @@ int main(void) {
     hook_count = anchor_calls = 0;
     camera_option = "centered";
     activate();
-    assert(hook_count == 0 && anchor_calls == 0);
-    puts("mmx6_widescreen_view: dialogue centered, world props untouched, centered mode inactive PASS");
+    assert(hook_count == 2 && anchor_calls == 0);
+    /* Exercise both shared functions through the registered callback surface.
+     * Only the horizontal radius changes; UI and the 4:3 path are identities. */
+    const uint32_t bounds[] = {0x8002cbfcu, 0x8002ccb0u};
+    const int32_t margins[] = {0, 85, 138, 234};
+    for (unsigned f = 0; f < 2; f++)
+        for (unsigned m = 0; m < 4; m++)
+            for (int selector = -1; selector <= 2; selector++) {
+                memset(&cpu, 0, sizeof cpu);
+                cpu.gpr[4] = 0x80091000u;
+                cpu.gpr[5] = f == 0 ? 64 : 32;
+                cpu.gpr[6] = 32;
+                object[0x14] = (uint8_t)selector;
+                uint8_t before_object[sizeof object];
+                memcpy(before_object, object, sizeof object);
+                CPUState expected = cpu;
+                reveal_margin = margins[m];
+                if (selector >= 0) expected.gpr[5] += margins[m];
+                enter(bounds[f], &cpu);
+                assert(memcmp(&expected, &cpu, sizeof cpu) == 0);
+                assert(memcmp(before_object, object, sizeof object) == 0);
+            }
+    puts("mmx6_widescreen_view: centered dialogue, paired actor bounds, vertical/UI/4:3 identity PASS");
     return 0;
 }
