@@ -97,6 +97,7 @@ ln -sfn "$runtime" "$launcher"
 appimage_path=${APPIMAGE:-}
 export @ENV_PREFIX@_APPIMAGE_PATH=$appimage_path
 export RECOMP_APPIMAGE_PATH=$appimage_path
+export RECOMP_UI_BUILTIN_FILE_PICKER=1
 
 # An explicit validation/runtime override may preselect a disc without baking
 # a developer path into the reproducible release configuration.
