@@ -652,7 +652,7 @@ def cmd_artdisc(args):
         out_bin = Path(args.out)
 
     report = eng.apply_art_only(db, merged, base, out_bin, vanilla=vanilla,
-                                error_recalc=not args.no_ecc,
+                                recompute_ecc=not args.no_ecc,
                                 allow_scratch=args.allow_scratch)
 
     # Emit the sibling cue referencing the .tweaks.bin (single MODE2/2352 track,
@@ -690,7 +690,7 @@ def main():
     p.add_argument("--stock-disc", default="", help="stock disc the runtime mounts; sibling is written beside it")
     p.add_argument("--vanilla", default="", help="vanilla BIN source (default: engine DEFAULT_VANILLA)")
     p.add_argument("--allow-scratch", action="store_true", help="write scratch-region inserts anyway (will not render)")
-    p.add_argument("--no-ecc", action="store_true", help="skip error_recalc EDC/ECC recompute (debug only)")
+    p.add_argument("--no-ecc", action="store_true", help="skip the EDC/ECC recompute (debug only)")
     args = ap.parse_args()
     {"summary": cmd_summary, "manifest": cmd_manifest,
      "selection": cmd_selection, "state": cmd_state, "bake": cmd_bake,

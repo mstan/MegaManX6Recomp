@@ -40,7 +40,7 @@ mkdir -p "$data_dir" "$data_dir/saves" "$data_dir/cache" "$data_dir/mods"
 # Release-owned resources: refreshed every launch so an AppImage update can
 # repair or extend its bundled catalog without touching user settings, memory
 # cards, installed third-party mods, or generated cache data.
-for tree in assets bios licenses; do
+for tree in assets bios licenses docs; do
     if [ -d "$payload/$tree" ]; then
         mkdir -p "$data_dir/$tree"
         cp -a "$payload/$tree/." "$data_dir/$tree/"
@@ -63,7 +63,14 @@ if [ -d "$payload/cache" ]; then
     chmod -R u+rwX "$data_dir/cache"
 fi
 
-for file in game.toml LICENSE README.md RELEASE.txt START_HERE.txt; do
+# Link the read-only bundled overlay toolchain into the writable data directory.
+# The runtime looks beside argv[0], and argv[0] is the launcher symlink below.
+if [ -d "$payload/overlay_toolchain" ]; then
+    if [ -L "$data_dir/overlay_toolchain" ] || [ ! -e "$data_dir/overlay_toolchain" ]; then
+        ln -sfn "$payload/overlay_toolchain" "$data_dir/overlay_toolchain"
+    fi
+fi
+for file in game.toml LICENSE README.md RELEASE.txt START_HERE.txt AOT_CACHE_AUDIT.json; do
     if [ -f "$payload/$file" ]; then
         cp -f "$payload/$file" "$data_dir/$file"
         chmod u+rw "$data_dir/$file"
@@ -87,7 +94,29 @@ fi
 
 launcher=$data_dir/.@EXE_NAME@-runtime
 ln -sfn "$runtime" "$launcher"
-export @ENV_PREFIX@_APPIMAGE_PATH=${APPIMAGE:-}
+appimage_path=${APPIMAGE:-}
+export @ENV_PREFIX@_APPIMAGE_PATH=$appimage_path
+export RECOMP_APPIMAGE_PATH=$appimage_path
+
+# An explicit validation/runtime override may preselect a disc without baking
+# a developer path into the reproducible release configuration.
+disc_override=${@ENV_PREFIX@_DISC:-}
+if [ -n "$disc_override" ] && [ -f "$disc_override" ]; then
+    config_tmp=$data_dir/.game.toml.tmp
+    awk -v disc="$disc_override" '
+        BEGIN { inserted = 0 }
+        /^[[:space:]]*disc[[:space:]]*=/ { next }
+        /^\[/ && $0 != "[game]" && !inserted {
+            escaped = disc
+            gsub(/\\/, "\\\\", escaped)
+            gsub(/"/, "\\\"", escaped)
+            print "disc = \"" escaped "\""
+            inserted = 1
+        }
+        { print }
+    ' "$data_dir/game.toml" > "$config_tmp"
+    mv "$config_tmp" "$data_dir/game.toml"
+fi
 unset APPIMAGE
 
 export PATH="$APPDIR/usr/bin${PATH:+:$PATH}"

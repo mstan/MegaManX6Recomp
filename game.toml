@@ -9,10 +9,14 @@ text_size = "0x0007F000"
 stack_base = "0x801FFFF0"
 
 [recompiler]
+bios_config = "psxrecomp-v4/bios/SCPH1001.toml"
 seeds = "seeds/ghidra_funcs.txt"
 # bios_thunks = "seeds/mmx6_bios_thunks.txt"  # optional; add once BIOS thunks are inventoried
 out_dir = "generated"
 strict = true
+# Widescreen hooks: BG layer bounds, screen-space dialogue classification, and
+# paired actor draw/lifetime extents. Inactive with the enhancement off.
+mod_function_entry_funcs = ["0x800270D0", "0x80026ECC", "0x800232D4", "0x800239CC", "0x80023ED8", "0x800241D4", "0x80022E44", "0x8002CBFC", "0x8002CCB0"]
 
 [runtime]
 debug_port = 4490
@@ -162,7 +166,14 @@ nw_left_hud_packet_hi = "0x000E4100"
 # addresses remain untouched; all hooks are identity at 4:3.
 [widescreen.cull]
 guard_pixels = 32
-bias_sites = ["0x801F2118"]
+# Resident placement scans: widen the OUTER edge of each horizontal strip,
+# both X edges of vertical/initial scans, and the matching respawn-reset bounds.
+# Retain the inner strip edge so camera jumps/reversals cannot leave a gap.
+# FUN_80029F38 retains placement offsets, active flags and authored respawn rules.
+bias_sites = ["0x801F2118", "0x80029D50", "0x80029E14", "0x80029E5C",
+              "0x8002A410", "0x80029FDC"]
+bias_lower_sites = ["0x80029D8C", "0x80029E08", "0x80029E50",
+                    "0x8002A404", "0x80029FD0"]
 slti_sites = ["0x801F210C"]
 
 # True wider FOV for the 2D background. MMX6's per-layer BG renderer (FUN_800270d0)

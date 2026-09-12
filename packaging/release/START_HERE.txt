@@ -35,3 +35,6 @@ TROUBLESHOOTING
   Slow performance: lower Supersampling to 1 in the launcher.
   Controller not detected: check input.ini, or use the launcher's controller
   row to pick the device.
+
+Native shards are freshly extracted from 56 original-disc code images.
+See docs/AOT_OVERLAYS.md and AOT_CACHE_AUDIT.json for coverage and limits.

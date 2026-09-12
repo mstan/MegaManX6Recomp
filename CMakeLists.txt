@@ -45,6 +45,23 @@ file(GLOB MMX6_MOD_PLUGIN_SOURCES CONFIGURE_DEPENDS
 file(GLOB GAME_MOD_RESOLVER_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/*.cpp")
 
+# The game-owned mod catalog (the two presentation enhancements plus the
+# acediez Tweaks set). Every feature stays disabled until selected on the
+# launcher's Mods page.
+#
+# The FRAMEWORK stages it: PRELOADED_MODS_DIR below hands the directory to
+# psxrecomp_add_runtime_target(), which wipes <exe-dir>/mods/bundled and copies
+# both its own mods/builtin/packages and these packages into it, plus
+# mods/preloaded/README.md -> mods/README.md. This repo must NOT copy the tree
+# itself. It used to, with a hand-written POST_BUILD copy_directory into
+# <exe-dir>/mods, and because that named the destination as a STRING, framework
+# commit 4cc04be3's rename of the staged catalog from mods/packages to
+# mods/bundled broke it silently -- nothing a configure, compile or link step
+# can see. The 15 mmx6.* packages went on landing in mods/packages, which
+# neither the launcher nor the release packager's Add-ModCatalog reads.
+# Bead beads-eio.3.101.
+set(MMX6_PRELOADED_MODS "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded")
+
 psxrecomp_v4_add_runtime_target(psx-runtime
     GAME_GENERATED_FULL_C "${GAME_GENERATED_FULL}"
     GAME_GENERATED_DISPATCH_C "${GAME_GENERATED_DISPATCH}"
@@ -53,26 +70,12 @@ psxrecomp_v4_add_runtime_target(psx-runtime
     DEFAULT_GAME_CONFIG_PATH "game.toml"
     EXE_NAME "mmx6-runtime"
     LAUNCHER_BOXART "${CMAKE_SOURCE_DIR}/recomp/launcher/boxart.tga"
+    PRELOADED_MODS_DIR "${MMX6_PRELOADED_MODS}"
     EXTRAS_SOURCES
         ${GAME_GENERATED_EXTRAS}
         ${MMX6_MOD_PLUGIN_SOURCES}
         ${GAME_MOD_RESOLVER_SOURCES}
 )
-
-# Ship the game-owned mod catalog beside the executable. Every feature stays
-# disabled until selected on the launcher's Mods page.
-set(MMX6_PRELOADED_MODS "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded")
-if(EXISTS "${MMX6_PRELOADED_MODS}/packages")
-    foreach(MMX6_RUNTIME_TARGET psx-runtime psx-runtime-pgxp)
-        if(TARGET ${MMX6_RUNTIME_TARGET})
-            add_custom_command(TARGET ${MMX6_RUNTIME_TARGET} POST_BUILD
-                COMMAND ${CMAKE_COMMAND} -E copy_directory
-                    "${MMX6_PRELOADED_MODS}"
-                    "$<TARGET_FILE_DIR:${MMX6_RUNTIME_TARGET}>/mods"
-                COMMENT "Preloading the Mega Man X6 mod catalog")
-        endif()
-    endforeach()
-endif()
 
 # First-divergence co-sim oracle build (COSIM_ORACLE.md): clean, deterministic,
 # PSX_NO_DEBUG_TOOLS + PSX_COSIM. Two of these (one normal, one PSX_FORCE_INTERP=1)
@@ -108,18 +111,31 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/launcher_art")
     endforeach()
 endif()
 
+# Framework sources these tests compile in are addressed through
+# ${PSXRECOMP_V4_ROOT}, not the bare relative path "psxrecomp-v4/...". The
+# relative spelling only resolved when the submodule/junction was populated
+# in-tree, so `-DPSXRECOMP_V4_ROOT=<worktree>` -- the way a title is validated
+# against a framework branch without moving its submodule pin -- failed to
+# generate at all ("No SOURCES given to target: mmx6_preloaded_mods_test").
+# A title that cannot be built against framework master cannot be checked
+# against it either.
 if(BUILD_TESTING)
+    add_executable(mmx6_widescreen_view_test tests/test_widescreen_view.c)
+    target_include_directories(mmx6_widescreen_view_test PRIVATE
+        "${PSXRECOMP_V4_ROOT}/runtime/include")
+    add_test(NAME mmx6_widescreen_view_test COMMAND mmx6_widescreen_view_test)
+
     add_executable(mmx6_tweaks_hooks_test
         tests/test_mmx6_tweaks_hooks.cpp
         src/mods/mmx6_tweaks_hooks_resolver.cpp
-        psxrecomp-v4/runtime/src/mod_packages.cpp
-        psxrecomp-v4/runtime/src/crc32.c
-        psxrecomp-v4/runtime/src/psx_sha256.c
+        "${PSXRECOMP_V4_ROOT}/runtime/src/mod_packages.cpp"
+        "${PSXRECOMP_V4_ROOT}/runtime/src/crc32.c"
+        "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c"
     )
     target_include_directories(mmx6_tweaks_hooks_test PRIVATE
         src/mods
-        psxrecomp-v4/runtime/include
-        psxrecomp-v4/recompiler/lib/toml11
+        "${PSXRECOMP_V4_ROOT}/runtime/include"
+        "${PSXRECOMP_V4_ROOT}/recompiler/lib/toml11"
     )
     add_test(
         NAME mmx6_tweaks_hooks_test
@@ -133,14 +149,14 @@ if(BUILD_TESTING)
     add_executable(mmx6_preloaded_mods_test
         tests/test_preloaded_mods.cpp
         ${GAME_MOD_RESOLVER_SOURCES}
-        psxrecomp-v4/runtime/src/mod_packages.cpp
-        psxrecomp-v4/runtime/src/crc32.c
-        psxrecomp-v4/runtime/src/psx_sha256.c
+        "${PSXRECOMP_V4_ROOT}/runtime/src/mod_packages.cpp"
+        "${PSXRECOMP_V4_ROOT}/runtime/src/crc32.c"
+        "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c"
     )
     target_include_directories(mmx6_preloaded_mods_test PRIVATE
         src/mods
-        psxrecomp-v4/runtime/include
-        psxrecomp-v4/recompiler/lib/toml11
+        "${PSXRECOMP_V4_ROOT}/runtime/include"
+        "${PSXRECOMP_V4_ROOT}/recompiler/lib/toml11"
     )
     add_test(
         NAME mmx6_preloaded_mods_test
@@ -149,6 +165,16 @@ if(BUILD_TESTING)
     )
 
     find_package(Python3 REQUIRED COMPONENTS Interpreter)
+
+    # Clean-room CD-ROM EDC/ECC recompute (tools/edc_ecc.py) — the Tweaks apply
+    # path's replacement for the former GPLv3 error_recalc.exe. Pure Python, no
+    # disc image needed: the suite checks the Reed-Solomon syndromes directly.
+    add_test(
+        NAME mmx6_edc_ecc_test
+        COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_edc_ecc.py"
+    )
+
     set(MMX6_TIMING_PACKAGE_DIR
         "${MMX6_PRELOADED_MODS}/packages/mmx6.tweaks.timing/1.1.0")
     set(MMX6_TIMING_TEST_ARCHIVE
@@ -172,15 +198,15 @@ if(BUILD_TESTING)
 
     add_executable(mmx6_tweaks_timing_runtime_test
         tools/test_tweaks_timing_runtime.cpp
-        psxrecomp-v4/runtime/src/mod_packages.cpp
-        psxrecomp-v4/runtime/src/crc32.c
-        psxrecomp-v4/runtime/src/psx_sha256.c
+        "${PSXRECOMP_V4_ROOT}/runtime/src/mod_packages.cpp"
+        "${PSXRECOMP_V4_ROOT}/runtime/src/crc32.c"
+        "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c"
     )
     add_dependencies(mmx6_tweaks_timing_runtime_test
         mmx6_timing_test_package)
     target_include_directories(mmx6_tweaks_timing_runtime_test PRIVATE
-        psxrecomp-v4/runtime/include
-        psxrecomp-v4/recompiler/lib/toml11
+        "${PSXRECOMP_V4_ROOT}/runtime/include"
+        "${PSXRECOMP_V4_ROOT}/recompiler/lib/toml11"
     )
     add_test(
         NAME mmx6_tweaks_timing_runtime_test

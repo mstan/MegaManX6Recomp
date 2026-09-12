@@ -7,12 +7,8 @@ param(
     # release-packager defect class this repo has been bitten by before.
     [string]$Version = "",
     [string]$BuildDir = "build-release",
-    # Ship without a bundled overlay cache; off by default.
-    [switch]$AllowNoCache,
-    # Where your accumulated overlay cache lives (the dir compile_overlays.py
-    # writes to, per game.toml overlay_autocompile_cmd --out-dir). Bundled as a
-    # head start.
-    [string]$CacheBuildDir = "build-stable",
+    [string]$RecompilerBuildDir = "recompiler/build",
+    [int]$Jobs = 8,
     [switch]$SkipRegen
 )
 
@@ -38,6 +34,7 @@ $ZipPath = Join-Path $Root ("MegaManX6Recomp-{0}-windows-x64.zip" -f $Version)
 $MingwBin = "C:\msys64\mingw64\bin"
 
 $env:PATH = "$MingwBin;$env:PATH"
+$CMake = Join-Path $MingwBin "cmake.exe"
 
 # Regenerate the game's C BEFORE building. The recompiler emits the widescreen
 # sites (2D true-FOV + background streamer) at regen time; the runtime build
@@ -57,6 +54,60 @@ function Invoke-Native {
     if ($code -ne 0) { throw "$What failed (exit $code)" }
 }
 
+function Get-TomlScalar {
+    param(
+        [Parameter(Mandatory)][string]$GameToml,
+        [Parameter(Mandatory)][string]$Table,
+        [Parameter(Mandatory)][string]$Key
+    )
+    $section = ""
+    foreach ($raw in (Get-Content -LiteralPath $GameToml)) {
+        $line = $raw.Trim()
+        if (-not $line -or $line.StartsWith("#")) { continue }
+        if ($line -match '^\[\[?([^\]]+)\]\]?$') { $section = $Matches[1].Trim(); continue }
+        if ($section -ne $Table) { continue }
+        if ($line -match ('^' + [regex]::Escape($Key) + '\s*=\s*(.+?)\s*(?:#.*)?$')) {
+            return $Matches[1].Trim().Trim('"').Trim("'")
+        }
+    }
+    return $null
+}
+
+function Ensure-BiosBackends {
+    param([Parameter(Mandatory)][string]$FrameworkRoot)
+    $stems = @()
+    if (Test-Path -LiteralPath (Join-Path $FrameworkRoot "bios\OpenBIOS.toml")) {
+        $stems += ,@("OpenBIOS", "bios/OpenBIOS.toml")
+    }
+    if (Test-Path -LiteralPath (Join-Path $FrameworkRoot "bios\SCPH1001.BIN")) {
+        $stems += ,@("SCPH1001", "bios/SCPH1001.toml")
+    }
+    if (-not $stems) { throw "No BIOS profile available under $FrameworkRoot\bios" }
+
+    $missing = @($stems | Where-Object {
+        -not (Test-Path -LiteralPath (Join-Path $FrameworkRoot ("generated\{0}_dispatch.c" -f $_[0])))
+    })
+    if (-not $missing) { return }
+
+    $bash = $null
+    foreach ($cand in @("C:\msys64\usr\bin\bash.exe", "C:\msys64\mingw64\bin\bash.exe")) {
+        if (Test-Path -LiteralPath $cand) { $bash = $cand; break }
+    }
+    if (-not $bash) {
+        throw ("Missing recompiled BIOS backend(s): {0}. Install MSYS2 or run " +
+               "psxrecomp-v4/tools/regen_bios.sh manually." -f (($missing | ForEach-Object { $_[0] }) -join ', '))
+    }
+
+    $cygpath = Join-Path (Split-Path -Parent $bash) "cygpath.exe"
+    $posixRoot = (& $cygpath -u $FrameworkRoot).Trim()
+    $posixMingw = (& $cygpath -u $MingwBin).Trim()
+    foreach ($stem in $missing) {
+        Write-Host "Generating recompiled BIOS backend: $($stem[0])"
+        $biosShellCmd = "export PATH='$posixMingw':`$PATH; cd '$posixRoot' && " +
+                        "PSXRECOMP_BIOS_BUILD=recompiler/build tools/regen_bios.sh --config $($stem[1])"
+        Invoke-Native { & $bash -c $biosShellCmd } "regen_bios ($($stem[0]))"
+    }
+}
 # The executable is generated from the developer config but runs against the
 # player config. Keep widescreen codegen and runtime gates identical.
 Invoke-Native {
@@ -67,20 +118,35 @@ $FrameworkRoot = Join-Path $Root "psxrecomp-v4"
 if (-not (Test-Path $FrameworkRoot)) {
     $FrameworkRoot = Join-Path $Root "..\psxrecomp"
 }
-$RecompDir = Resolve-Path (Join-Path $FrameworkRoot "recompiler\build")
+$RecompSourceDir = Join-Path $FrameworkRoot "recompiler"
+$RecompDir = if ([System.IO.Path]::IsPathRooted($RecompilerBuildDir)) {
+    $RecompilerBuildDir
+} else { Join-Path $FrameworkRoot $RecompilerBuildDir }
+$RecompBin = Join-Path $RecompDir "psxrecomp-game.exe"
+if (-not (Test-Path -LiteralPath (Join-Path $RecompDir "build.ninja"))) {
+    Invoke-Native {
+        & $CMake -S $RecompSourceDir -B $RecompDir -G Ninja -DCMAKE_BUILD_TYPE=Release
+    } "recompiler configure"
+}
+Invoke-Native {
+    & $CMake --build $RecompDir --target psxrecomp-game psxrecomp-bios -j $Jobs
+} "recompiler build"
+
+Ensure-BiosBackends -FrameworkRoot $FrameworkRoot
 if (-not $SkipRegen) {
-    Invoke-Native { cmake --build $RecompDir --target psxrecomp-game -j $env:NUMBER_OF_PROCESSORS } "recompiler build"
-    & (Join-Path $RecompDir "psxrecomp-game.exe") --config (Join-Path $Root "game.toml")
-    if ($LASTEXITCODE -ne 0) { throw "game regen failed" }
-} else {
-    Write-Host "Skipping game C regeneration; packaging the existing generated sources"
+    Invoke-Native { & $RecompBin --config (Join-Path $Root 'game.toml') } 'base game regeneration'
 }
 
-Invoke-Native { cmake -S $Root -B $BuildPath -G Ninja -DCMAKE_BUILD_TYPE=Release -DPSX_DEBUG_TOOLS=OFF } "cmake configure"
-Invoke-Native { cmake --build $BuildPath -j $env:NUMBER_OF_PROCESSORS } "cmake build"
+Invoke-Native { & $CMake -S $Root -B $BuildPath -G Ninja -DCMAKE_BUILD_TYPE=Release -DPSX_DEBUG_TOOLS=OFF -DPSX_PGXP_VARIANT=OFF -DPSX_SDL_BACKEND=SDL3 "-DPSX_GAME_VERSION=$Version" } "cmake configure"
+Invoke-Native { & $CMake --build $BuildPath --target psx-runtime -j $Jobs } "cmake build"
 
 if (Test-Path $StageRoot) {
-    Remove-Item -Recurse -Force $StageRoot
+    $resolvedRoot = (Resolve-Path $Root).Path.TrimEnd('\')
+    $resolvedStage = (Resolve-Path $StageRoot).Path.TrimEnd('\')
+    if (-not $resolvedStage.StartsWith($resolvedRoot + "\", [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "Refusing to delete stage path outside repo root: $resolvedStage"
+    }
+    Remove-Item -LiteralPath $StageRoot -Recurse -Force
 }
 New-Item -ItemType Directory -Force $Stage | Out-Null
 New-Item -ItemType Directory -Force (Join-Path $Stage "saves") | Out-Null
@@ -91,24 +157,36 @@ if (-not (Test-Path $DevExe)) { $DevExe = Join-Path $BuildPath "psx-runtime.exe"
 Copy-Item $DevExe (Join-Path $Stage "MegaManX6Recomp.exe")
 Copy-Item (Join-Path $Root "README.md") $Stage
 Copy-Item (Join-Path $Root "LICENSE") $Stage
+New-Item -ItemType Directory -Force (Join-Path $Stage "docs") | Out-Null
+Copy-Item (Join-Path $Root "docs/AOT_OVERLAYS.md") (Join-Path $Stage "docs")
 # Stage the mod catalog from the BUILD OUTPUT, not from mods/preloaded. The
 # build output is the authoritative catalog: it is this repo's own packages
 # PLUS the ones the framework stages for every game (loading speed). Copying
 # the source tree instead silently drops the framework's mods from the
 # release, so players get a Mods page missing entries the dev build shows.
-$ModsSrc = Join-Path $BuildPath "mods"
-if (Test-Path (Join-Path $ModsSrc "packages")) {
-    Copy-Item -Recurse -Force $ModsSrc (Join-Path $Stage "mods")
-    $preloadedCount = (Get-ChildItem (Join-Path $Stage "mods/packages") -Directory).Count
-    Write-Host "Bundled mod catalog: $preloadedCount package family/families"
-    if ($preloadedCount -lt 16) {
-        throw ("Expected the game's 15 packages plus the framework's " +
-               "loading-speed mods, found $preloadedCount. The framework " +
-               "catalog is missing from $ModsSrc.")
-    }
-} else {
-    throw "No mod catalog staged at $ModsSrc - build the runtime first"
-}
+#
+# Routed through the framework's shared Add-ModCatalog. The hand-written block
+# that used to live here was wrong twice over:
+#
+#   * it globbed mods/packages, the PRE-SPLIT layout. Framework 4cc04be3 moved
+#     staged build output to mods/bundled and nothing in this repo followed, so
+#     at framework master this threw "No mod catalog staged ... build the
+#     runtime first" -- a message that blames the build for a layout rename
+#     (bead beads-eio.3.101);
+#   * it asserted "at least 16 package families". A count describes only one
+#     side of a catalog two repositories contribute to, so it goes stale the
+#     moment either side gains a mod. The identical assertion made Tomba 2
+#     unreleasable on 2026-09-01 when the framework gained a fifth builtin.
+#
+# Add-ModCatalog asserts the invariant instead: every package the SOURCES
+# define -- this repo's mods/preloaded/packages and the framework's
+# mods/builtin/packages -- must survive into the staged catalog. It also strips
+# the two things under mods/ that belong to this machine (installed/ and
+# state.toml) rather than leaving them to be noticed later.
+. (Join-Path $FrameworkRoot "tools\release_overlay_stage.ps1")
+Add-ModCatalog -BuildPath $BuildPath -Stage $Stage `
+               -GameModSource (Join-Path $Root "mods\preloaded") `
+               -FrameworkModSource (Join-Path $FrameworkRoot "mods\builtin") | Out-Null
 $BundledBiosSrc = Join-Path $BuildPath "bios"
 if (!(Test-Path (Join-Path $BundledBiosSrc "openbios.bin")) -or
     (Get-Item (Join-Path $BundledBiosSrc "openbios.bin")).Length -ne 524288 -or
@@ -148,134 +226,22 @@ Write-Host "Bundled recomp-ui launcher assets: $fontCount font(s) + $imgCount im
 # overlay codegen tags, so a cache built for one did not load on the other.
 Copy-Item -Force (Join-Path $Root "packaging/release/game.toml") (Join-Path $Stage "game.toml")
 
-# Prebuilt overlay cache: native code for the game areas contributed so far.
-# The cache is namespaced per backend/arch/codegen-version:
-#   gcc/<arch-abi>/cg<N>/<entry8>_<crc8>.dll (+ .ranges)
-# and the loader scans it by that exact path, so the subtree must be preserved.
-# Ship .dll + .ranges only (skip the _patched.c intermediates and the reserved
-# sljit/ namespace, which has no on-disk blobs), and ONLY the dir matching THIS
-# build's codegen tag -- a stale-hash dir is dead weight the runtime never loads.
-$RecompTools = Resolve-Path (Join-Path $FrameworkRoot "tools")
-$RecompInc   = Resolve-Path (Join-Path $FrameworkRoot "runtime\include")
-$tagScript = Join-Path $env:TEMP ("psx_cgtag_{0}.py" -f $PID)
-@"
-import importlib.util
-s = importlib.util.spec_from_file_location('co', r'$RecompTools\compile_overlays.py')
-m = importlib.util.module_from_spec(s); s.loader.exec_module(m)
-inc = r'$RecompInc'
-print('cg%d_%08x_gc%08x' % (
-    m.codegen_ver(inc),
-    m.codegen_hash(inc),
-    m.overlay_config_hash(
-        r'$(Join-Path $RecompDir "psxrecomp-game.exe")',
-        r'$(Join-Path $Stage "game.toml")')))
-"@ | Set-Content -Encoding ASCII $tagScript
-$CgTag = (& python $tagScript).Trim()
-Remove-Item -Force $tagScript
-Write-Host "Release codegen tag: $CgTag (only this cache namespace is shipped)"
-$CacheSrc = Join-Path $Root "$CacheBuildDir/cache/SLUS-01395"
-if (Test-Path $CacheSrc) {
-    # NORMALISE before any Substring(): $CacheBuildDir may legitimately contain
-    # '..' (a cache built outside the repo), and Join-Path does NOT collapse it.
-    # The unresolved string is then LONGER than the real prefix of $f.FullName,
-    # so Substring($CacheSrc.Length) ate part of the subtree and produced
-    # cache/SLUS-01395/9a4721_gc4f033776/... instead of
-    # cache/SLUS-01395/gcc/win-x64/cg9_0e9a4721_gc4f033776/... . The loader
-    # scans by that exact path, so every shard silently failed to load while
-    # the packager still reported a healthy shard count.
-    $CacheSrc = (Resolve-Path $CacheSrc).Path
-    $CacheDst = Join-Path $Stage "cache/SLUS-01395"
-    $cacheFiles = Get-ChildItem $CacheSrc -Recurse -File -Include *.dll,*.ranges |
-        Where-Object { $_.FullName -notmatch '[\\/]sljit[\\/]' -and $_.FullName -match "[\\/]$CgTag[\\/]" }
-    foreach ($f in $cacheFiles) {
-        $rel  = $f.FullName.Substring($CacheSrc.Length).TrimStart('\','/')
-        $dest = Join-Path $CacheDst $rel
-        New-Item -ItemType Directory -Force (Split-Path $dest) | Out-Null
-        Copy-Item $f.FullName $dest
-    }
-    $dllCount = @($cacheFiles | Where-Object { $_.Extension -eq ".dll" }).Count
-    Write-Host "Bundled overlay cache: $dllCount native overlay DLL(s)"
-
-    # Assert the STAGED LAYOUT, not just the copied count. A shard the loader
-    # cannot find is worth exactly as much as no shard at all, and the count
-    # above cannot tell the difference.
-    if ($dllCount -gt 0) {
-        $staged = @(Get-ChildItem (Join-Path $CacheDst "gcc") -Recurse -File -Filter *.dll -ErrorAction SilentlyContinue |
-                    Where-Object { $_.FullName -match "[\\/]$CgTag[\\/]" })
-        if ($staged.Count -ne $dllCount) {
-            throw ("Staged overlay cache layout is wrong: expected $dllCount shard(s) under " +
-                   "cache/SLUS-01395/gcc/<arch-abi>/$CgTag/ but found $($staged.Count). " +
-                   "The loader scans that exact path, so the bundled cache would never load.")
-        }
-    }
-    if ($dllCount -eq 0 -and -not $AllowNoCache) {
-        # The directory existing is not enough: the tag folds in a hash of the
-        # PACKAGED game.toml, so a cache built against any other config lands
-        # under a different tag and matches nothing. Fail instead of quietly
-        # shipping a package whose first session runs entirely interpreted.
-        throw ("Overlay cache at $CacheSrc has no shards for tag $CgTag. " +
-               "Rebuild it with compile_overlays.py using the PACKAGED " +
-               "game.toml (release-stage/*/game.toml), or pass -AllowNoCache.")
-    }
-} else {
-    if ($AllowNoCache) {
-        Write-Warning "No overlay cache at $CacheSrc - shipping without one because -AllowNoCache was given"
-    } else {
-        # A cache-less package makes every player's first session run overlays
-        # interpreted. This used to be a warning that scrolled past, while the
-        # tag computed above had drifted from the one the runtime actually uses
-        # (it was missing the overlay-config hash), so the match never hit.
-        throw ("No overlay cache found at $CacheSrc for tag $CgTag. Build one " +
-               "with compile_overlays.py against the PACKAGED game.toml, or " +
-               "pass -AllowNoCache to ship without one.")
-    }
-}
-
-# ---- Self-contained overlay toolchain (tcc tier) -------------------------
-# A player box has no gcc AND no Python, so overlay_backend=auto resolves to tcc:
-# the runtime fills overlay gaps the shipped gcc cache misses by spawning this
-# bundled, fully self-contained toolchain. The runtime constructs the command
-# from <exe>/overlay_toolchain/ (see main.cpp): embedded Python + TinyCC + the
-# recompiler + compile_overlays.py + the runtime headers. Every exe here must be
-# self-contained (embedded python + prebuilt tcc are; the recompiler needs its
-# mingw runtime DLLs bundled beside it).
-$Toolchain = Join-Path $Stage "overlay_toolchain"
-New-Item -ItemType Directory -Force $Toolchain | Out-Null
-$DlCache = Join-Path $Root "tools/_toolchain_cache"
-New-Item -ItemType Directory -Force $DlCache | Out-Null
-
-# Embedded Python (fixed version; downloaded once + cached)
-$PyVer = "3.13.1"
-$PyZip = Join-Path $DlCache "python-$PyVer-embed-amd64.zip"
-if (-not (Test-Path $PyZip)) {
-    Invoke-WebRequest -Uri "https://www.python.org/ftp/python/$PyVer/python-$PyVer-embed-amd64.zip" -OutFile $PyZip
-}
-Expand-Archive -Path $PyZip -DestinationPath (Join-Path $Toolchain "python") -Force
-
-# TinyCC prebuilt win64 (fixed version; downloaded once + cached). The zip has a
-# top-level tcc/ dir (tcc.exe + libtcc.dll + include/ + lib/) — ship it whole.
-$TccZip = Join-Path $DlCache "tcc-0.9.27-win64-bin.zip"
-if (-not (Test-Path $TccZip)) {
-    Invoke-WebRequest -Uri "https://download.savannah.gnu.org/releases/tinycc/tcc-0.9.27-win64-bin.zip" -OutFile $TccZip
-}
-$TccTmp = Join-Path $DlCache "tcc_extract"
-if (Test-Path $TccTmp) { Remove-Item -Recurse -Force $TccTmp }
-Expand-Archive -Path $TccZip -DestinationPath $TccTmp -Force
-Copy-Item -Recurse -Force (Join-Path $TccTmp "tcc") (Join-Path $Toolchain "tcc")
-
-# Recompiler (built above) + its mingw runtime DLLs (NOT statically linked) +
-# compile_overlays.py + the runtime headers.
-Copy-Item (Join-Path $RecompDir "psxrecomp-game.exe") $Toolchain
-foreach ($d in @("libgcc_s_seh-1.dll","libstdc++-6.dll","libwinpthread-1.dll")) {
-    Copy-Item (Join-Path $MingwBin $d) $Toolchain
-}
-Copy-Item (Resolve-Path (Join-Path $FrameworkRoot "tools\compile_overlays.py")) $Toolchain
-$ToolInc = Join-Path $Toolchain "include"
-New-Item -ItemType Directory -Force $ToolInc | Out-Null
-Copy-Item (Join-Path (Resolve-Path (Join-Path $FrameworkRoot "runtime\include")) "*.h") $ToolInc
-$tcMB = "{0:N0}" -f ((Get-ChildItem $Toolchain -Recurse -File | Measure-Object Length -Sum).Sum / 1MB)
-Write-Host "Bundled overlay toolchain (embedded python + tcc + recompiler): ~$tcMB MB"
-
+# Fresh original-disc AOT is mandatory, including when base regeneration is skipped.
+$RecompTools = (Resolve-Path -LiteralPath (Join-Path $FrameworkRoot "tools")).Path
+$RecompInc = (Resolve-Path -LiteralPath (Join-Path $FrameworkRoot "runtime/include")).Path
+$StagedGameToml = Join-Path $Stage 'game.toml'
+$AotPython = Join-Path $MingwBin 'python.exe'
+Invoke-Native {
+    & $AotPython (Join-Path $RecompTools 'aot_overlay_pipeline.py') release `
+        --profile (Join-Path $Root 'aot/overlays.json') `
+        --game-toml (Join-Path $Root 'game.toml') --runtime-config $StagedGameToml `
+        --runtime-build-dir $BuildPath --runtime-target psx-runtime `
+        --recompiler $RecompBin --work-dir (Join-Path $Root 'build-aot') `
+        --stage $Stage --gcc (Join-Path $MingwBin 'gcc.exe') --workers 3
+} 'original-disc AOT extraction, compilation and audit'
+Add-OverlayToolchain -Stage $Stage -RecompDir $RecompDir -RecompTools $RecompTools `
+                     -RecompInc $RecompInc -MingwBin $MingwBin `
+                     -DlCache (Join-Path $Root "tools\_toolchain_cache") | Out-Null
 # The Release build is statically linked (PSX_STATIC_RUNTIME defaults ON for
 # MinGW Release), so the exe imports ONLY Windows system DLLs -- nothing to
 # bundle. Assert self-containment rather than trust it (mismatched side-by-side
@@ -286,8 +252,9 @@ $imports = & $objdump -p (Join-Path $Stage "MegaManX6Recomp.exe") |
 $systemDlls = @("kernel32.dll","user32.dll","gdi32.dll","shell32.dll","msvcrt.dll",
                 "advapi32.dll","ws2_32.dll","comdlg32.dll","dbghelp.dll","ole32.dll",
                 "oleaut32.dll","winmm.dll","imm32.dll","version.dll","setupapi.dll",
-                "dinput8.dll","rpcrt4.dll","hid.dll","cfgmgr32.dll","opengl32.dll")
-$nonSystem = $imports | Where-Object { $systemDlls -notcontains $_.ToLower() }
+                "dinput8.dll","rpcrt4.dll","hid.dll","cfgmgr32.dll","opengl32.dll",
+                "d2d1.dll","dwrite.dll","ntdll.dll","bcrypt.dll","dwmapi.dll","shlwapi.dll","ucrtbase.dll")
+$nonSystem = $imports | Where-Object { $systemDlls -notcontains $_.ToLower() -and $_ -notmatch '^api-ms-win-crt-[a-z0-9-]+\.dll$' }
 if ($nonSystem) {
     throw "Release exe is NOT self-contained -- imports non-system DLL(s): $($nonSystem -join ', ')"
 }
@@ -354,11 +321,9 @@ Turbo loads, FMV skip, and disc speed can be changed in launcher Settings or in
 game.toml. Widescreen, frame interpolation, and Mega Man X6 Tweaks options live
 in the launcher's Mods view.
 
-The cache folder contains pre-converted native code for game areas covered so
-far; those run at full speed from your first visit. As you play, newly visited
-areas are recorded into overlay_captures.json and your local cache grows
-automatically. Do NOT post overlay_captures.json publicly - it contains
-snapshots of the game's own code read from your disc. See README.md for details.
+The package includes native shards extracted from all 56 identified code
+images in the original disc archive. Interpreter and runtime compilation
+fallback remain enabled. See docs/AOT_OVERLAYS.md and AOT_CACHE_AUDIT.json.
 
 Keyboard and Xbox-style controller defaults are documented in README.md.
 Controller mappings are configurable in input.ini.

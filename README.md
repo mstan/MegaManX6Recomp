@@ -300,3 +300,5 @@ statically recompiled (machine-translated) builds of the game's code.
 <p align="center">
   <a href="https://discord.gg/Ad9BwSzctP"><img src=".github/raid-discord.png" alt="Join the Retro AI Development (R.A.I.D.) Discord" width="200"></a>
 </p>
+
+See [original-disc AOT overlays](docs/AOT_OVERLAYS.md) for the verified inventory, reusable extraction method, release checks, and coverage limits.
