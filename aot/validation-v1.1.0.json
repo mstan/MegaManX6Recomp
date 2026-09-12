@@ -1,0 +1,41 @@
+{
+  "version": "v1.1.0",
+  "framework_commit": "0e0644631094805071740e51dc398c49c2ed869e",
+  "platforms": [
+    "windows-x64",
+    "linux-x86_64"
+  ],
+  "game_images": 56,
+  "archive_members": 59,
+  "recipes": 57,
+  "pairs_per_platform": 71,
+  "manifest_rows_per_platform": 21342,
+  "full_static_coverage_proven": false,
+  "excluded_members": [
+    13,
+    41,
+    42
+  ],
+  "source": "Original disc files and loader instructions; no runtime capture inputs",
+  "checks": [
+    "18 shared method tests passed",
+    "Existing AOT base-recovery regression suite passed",
+    "5 game CTest checks passed",
+    "Windows ZIP audit hashes verified",
+    "Linux AppImage seeding and audit hashes verified",
+    "Windows and Linux boot smoke checks with runtime compilation disabled"
+  ],
+  "gameplay_spot_checks": "Awaiting owner",
+  "artifacts": [
+    {
+      "name": "MegaManX6Recomp-v1.1.0-windows-x64.zip",
+      "sha256": "762e6364ef19b3cb2ab91a23c4d22f8c604196b44b1b7bdfef33dfa2cfaa321d",
+      "bytes": 52896397
+    },
+    {
+      "name": "MegaManX6Recomp-v1.1.0-linux-x86_64.AppImage",
+      "sha256": "86c9068a7dd14df6057dc3f4141b6172cfd01023818e6af80a422348b6c24345",
+      "bytes": 56711672
+    }
+  ]
+}

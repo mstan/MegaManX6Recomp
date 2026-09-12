@@ -40,7 +40,7 @@ mkdir -p "$data_dir" "$data_dir/saves" "$data_dir/cache" "$data_dir/mods"
 # Release-owned resources: refreshed every launch so an AppImage update can
 # repair or extend its bundled catalog without touching user settings, memory
 # cards, installed third-party mods, or generated cache data.
-for tree in assets bios licenses; do
+for tree in assets bios licenses docs; do
     if [ -d "$payload/$tree" ]; then
         mkdir -p "$data_dir/$tree"
         cp -a "$payload/$tree/." "$data_dir/$tree/"
@@ -70,7 +70,7 @@ if [ -d "$payload/overlay_toolchain" ]; then
         ln -sfn "$payload/overlay_toolchain" "$data_dir/overlay_toolchain"
     fi
 fi
-for file in game.toml LICENSE README.md RELEASE.txt START_HERE.txt; do
+for file in game.toml LICENSE README.md RELEASE.txt START_HERE.txt AOT_CACHE_AUDIT.json; do
     if [ -f "$payload/$file" ]; then
         cp -f "$payload/$file" "$data_dir/$file"
         chmod u+rw "$data_dir/$file"

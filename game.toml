@@ -9,6 +9,7 @@ text_size = "0x0007F000"
 stack_base = "0x801FFFF0"
 
 [recompiler]
+bios_config = "psxrecomp-v4/bios/SCPH1001.toml"
 seeds = "seeds/ghidra_funcs.txt"
 # bios_thunks = "seeds/mmx6_bios_thunks.txt"  # optional; add once BIOS thunks are inventoried
 out_dir = "generated"
