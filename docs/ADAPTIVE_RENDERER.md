@@ -1,8 +1,8 @@
 # Adaptive Custom Renderer review
 
-September 19, 2026. Local feature branches: `feat/mmx6-adaptive-renderer`
-in the game and framework. Framework pin: `be961603` (function filters and
-snapshot guards in `69570b47`, plus CTest registration). This is an experimental
+September 20, 2026. Local feature branches: `feat/mmx6-adaptive-renderer`
+in the game and framework. Framework pin: `86af4b94` (retains the completed
+frontbuffer during recurring host background rebuilds). This is an experimental
 review build, not a release or a completed whole-game compatibility claim.
 
 ## Player behavior
@@ -80,6 +80,50 @@ Foreground terrain and actors retain their authored world positions.
   code were regenerated with matching tools and were not hand-edited.
 
 ## Validation
+
+### Roaming stage-select, rain and narrow-room fixes
+
+Latest owner UI slots 1–5 are copied under `build-review/stage-fixes/`.
+The interactive roaming process and memory cards were left untouched during
+testing; port 4520, a separate settings file, copied cards and copied states
+were used by hidden test processes.
+
+- Stage select uses native 4:3 presentation. Retail main state `800CCED0=0A`
+  selects gameplay; the stage-select carousel (`0404`) no longer exposes its
+  neighboring menu pages. Development and packaged configs agree, including
+  the native placement-strip sites fixed in the previous review.
+- Recurring ring initialization cleared both framebuffer bands. With a host
+  tile arena, cleanup now waits for that backbuffer's first draw. Turtloid's
+  exterior and the museum edge no longer alternate between art and black.
+  Before/after frame sequences reproduce the fault and its correction; museum
+  edge pixels stayed present in all 15 captures at both 32:9 and 64:9.
+- Turtloid's layer1/mode5 is a 320px weather-frame atlas, not world scenery.
+  Only its selected frame repeats across the visible room, so blank weather
+  frames cannot expose neighboring inactive rain. Its five texture frames
+  are retained from the stage's guest VRAM upload for immutable-bank batching;
+  row animation, live CLUT fades, semi-transparency and OT order remain native.
+  A fresh-process snapshot can rebuild bank `6003` from restored VRAM.
+- Stage6 enemy type0A water pursuers keep native activation, lifetime and
+  respawn-reset bounds. Type0E rain-generator encounters also keep native
+  activation/reset/lifetime bounds: starting a later generator early overwrote
+  the shared weather index at `800F6BA0`, disabling rain in the current room.
+  Draw bounds remain expanded for actors that have legitimately activated.
+- Replaying the approach from owner UI3 reaches the first generator room with
+  rain flag `800CCEF6=1`, generator index 0, and animated rain across the view.
+  **Old UI4 already contains two initialized generators and the wrong shared
+  index.** That saved guest state is preserved, not silently rewritten. Replay
+  from UI3 or re-enter the stage to test rain. Private UI6 records the normal
+  approach (test-only HP healing); it is not installed over an owner slot.
+
+Seven CTest cases and release-config parity pass. The rain optimization moved
+the two-second 64:9 slot3 check from about 19 to 60 submitted frames/second;
+the active-rain room also reached 60. These are local paced measurements,
+not an isolated GPU benchmark. Short snapshot/capture sweeps include debugger
+overhead. Original-disc AOT audit: 71 valid pairs, 21,342 manifest rows, 57
+recipes, all guards verified; full static coverage is not claimed. Cache tag
+remains `cg13_2caa7102_gc90252311_f0` because code generation did not change.
+Evidence: `build-review/stage-fixes/final-matrix.json`, `rain-approach.json`,
+before/after PNG sequences and `build-aot/stage-fixes/disc-aot-6ua71pvo/`.
 
 ### Latest prop visibility and NPC preview regression pass
 
@@ -273,7 +317,14 @@ rescue refs include game `2d227b9`, framework `d94fd537`, nested runtime
 `41e92d8a` merges current origin/master with the accepted local MMX6 changes.
 No source was pushed, released or merged into master for this review.
 
-Updated executable: `build-review/playtest-4/mmx6-runtime.exe`.
+Current executable: `build-review/playtest-5/mmx6-runtime.exe`.
+SHA256: `4B1B65D512918635724AEA2691047C2383F8CDF553A5A8D19851DA135E6DCEE9`.
+Use **MMX6 Adaptive** on the desktop or `F:/Projects/psxrecomp/Play MMX6 Adaptive.lnk`.
+It opens recomp-ui with the current roaming memory-card copy, PS5 controller
+settings and `game.adaptive-roaming-local.toml`. No state loads automatically.
+The original non-worktree card and all owner slots remain preserved.
+
+Previous prop executable: `build-review/playtest-4/mmx6-runtime.exe`.
 SHA256: `849B04CF1D22F0A643B401F2EF03DAEFFB6AAE440E5DE04A57715947963043E4`.
 Use the desktop **MMX6 Prop Fixes** shortcut, or
 `F:/Projects/psxrecomp/Play MMX6 Prop Fixes.lnk`. It selects the isolated

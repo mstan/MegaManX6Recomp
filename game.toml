@@ -125,6 +125,10 @@ multitap_analog = false
 # fixed 16:9, 21:9 and 32:9 choices remain available. Disabled stays stock 4:3.
 [widescreen]
 full_2d = true
+# Retail main state 0A owns the stage loop. Menus, including the 512px
+# stage-select carousel, keep their native frame and hide neighboring pages.
+gameplay_state_addr = "0x800CCED0"
+gameplay_state_values = ["0x0000000A"]
 # offer = false: widescreen activation belongs to the mod catalog, not generic
 # Settings. The launcher omits the aspect rows entirely and the runtime ignores
 # a 16:9/21:9 that an older build persisted into settings.toml; the

@@ -53,13 +53,26 @@ static void mmx6_object_view_end(CPUState *cpu, uint32_t address) {
     (void)cpu; (void)address;
     mmx6_finish_ui_packets(psx_mod_read_word(0x1f800100u));
 }
+static int mmx6_native_enemy(unsigned category, unsigned type) {
+    /* Type0E owns the room's rain generator, children and shared weather
+     * index at 800F6BA0. Initializing the next room early corrupts this one. */
+    return psx_mod_read_byte(0x800ccedcu) == 6u && category < 3u &&
+           (type == 0x0au || type == 0x0eu);
+}
 /* Retail common bounds classifiers: 8002CBFC returns outside-view for actor
  * lifetime decisions; 8002CCB0 sets object+3 for drawing. Both copy a1 as the
  * horizontal radius and use a2 only vertically. Widen both with the same
  * constant envelope, so an actor cannot disappear while its sprite is in the
  * revealed view. Negative camera selectors denote screen-space UI. */
 static void mmx6_actor_view_bounds(CPUState *cpu, uint32_t address) {
-    (void)address;
+    /* Rainy Turtloid's type0A water pursuer uses the common lifetime helper
+     * at 800EAD64. Its native 64px guard is part of the encounter, not just
+     * rendering. Keep drawing visible survivors, but never extend pursuit. */
+    uint32_t actor = cpu->gpr[4];
+    if (address == 0x8002cbfcu &&
+        actor >= 0x8008ef48u && actor < 0x80090c88u &&
+        (actor - 0x8008ef48u) % 0x9cu == 0 &&
+        mmx6_native_enemy(0, psx_mod_read_byte(actor + 1u))) return;
     int32_t margin = psx_mod_widescreen_x_margin();
     if (margin > 0 && (int8_t)psx_mod_read_byte(cpu->gpr[4] + 0x14u) >= 0)
         cpu->gpr[5] += (uint32_t)margin;
@@ -121,7 +134,7 @@ static int mmx6_extra_placement_filter(CPUState *cpu, uint32_t address) {
     unsigned type = psx_mod_read_byte(record + 1u);
     int intro = mmx6_intro_scene();
     int boss = intro && type == 0x30;
-    if (category < 3u && !boss) return 0;
+    if (category < 3u && !boss && !mmx6_native_enemy(category, type)) return 0;
     if (category == 4u && (type == 8u || (intro && type == 2u))) return 0;
     if (intro && category == 5u && type == 8u &&
         psx_mod_read_byte(record + 2u) == 0u) return 0;
@@ -130,6 +143,28 @@ static int mmx6_extra_placement_filter(CPUState *cpu, uint32_t address) {
 }
 static int signed_bound(int value) {
     return value < -32768 ? -32768 : value > 32767 ? 32767 : value;
+}
+/* The generated scan widens respawn-reset bounds for visible ordinary actors.
+ * Restore retail reset semantics for native encounters only: inactive records,
+ * outside the closed native reset rectangle, advance 10/30/50 -> 20/40/60.
+ * Active and permanent-disabled placements remain untouched. */
+static void mmx6_reset_native_placements(int x, int y) {
+    if (psx_mod_read_byte(0x800ccedcu) != 6u) return;
+    unsigned area = psx_mod_read_byte(0x800cceddu);
+    if (area > 1) return;
+    uint32_t p = psx_mod_read_word(0x8007349cu + 6u * 8u + area * 4u);
+    for (unsigned i = 0; i < 2048u && mmx6_ram_range(p, 8u); ++i, p += 8u) {
+        unsigned flags = psx_mod_read_byte(p + 3u);
+        if (flags == 15u) break;
+        if ((psx_mod_read_byte(p) & 0x81u) ||
+            !mmx6_native_enemy(flags & 15u, psx_mod_read_byte(p + 1u))) continue;
+        int px = (int16_t)psx_mod_read_half(p + 4u);
+        int py = (int16_t)psx_mod_read_half(p + 6u);
+        unsigned latch = flags & 0xf0u;
+        if ((px < x - 48 || px > x + 368 || py < y - 48 || py > y + 288) &&
+            (latch == 0x10u || latch == 0x30u || latch == 0x50u))
+            psx_mod_write_byte(p + 3u, (uint8_t)(flags + 0x10u));
+    }
 }
 /* Keep retail activation unmodified. Scan the revealed strips separately so
  * enemies can become visible on movement or stationary resize, while script
@@ -144,6 +179,7 @@ static void mmx6_resize_placement_scan(CPUState *cpu, uint32_t address) {
     if (margin <= 0) return;
     int x = (int16_t)psx_mod_read_half(0x80097202u);
     int y = (int16_t)psx_mod_read_half(0x80097206u);
+    mmx6_reset_native_placements(x, y);
     CPUState saved = *cpu;
     for (unsigned side = 0; side < 2; ++side) {
         *cpu = saved;

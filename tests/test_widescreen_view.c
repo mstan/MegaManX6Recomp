@@ -41,6 +41,9 @@ void psx_mod_write_word(uint32_t p, uint32_t v) {
     if(p>=0x9f000000u && p<=0x9f000004u) scan_state[(p-0x9f000000u)/4]=v;
     else { assert(p==0x801ffef0u); stack_arg=v; }
 }
+void psx_mod_write_byte(uint32_t p, uint8_t v) {
+    assert(p == 0x80092003u); placement[3] = v;
+}
 void psx_dispatch_call(CPUState *cpu, uint32_t p, uint32_t r) {
     if(p==0x8002ccb0u) {
         assert(r==cpu->gpr[31]);
@@ -97,10 +100,13 @@ uint8_t psx_mod_read_byte(uint32_t addr) {
     if (addr==0x800ccedcu) return stage;
     if (addr==0x800cceddu) return area;
     if (addr>=0x80092000u && addr<0x80092008u) return placement[addr-0x80092000u];
+    if (addr==0x8009200bu) return 15;
+    if (addr>=0x8008ef48u && addr<0x8008efc8u) return object[addr-0x8008ef48u];
     assert(addr >= 0x80091000u && addr < 0x80091080u);
     return object[addr - 0x80091000u];
 }
 uint32_t psx_mod_read_word(uint32_t addr) {
+    if(addr==0x800734ccu) return 0x80092000u;
     if(addr==0x80091010u) return actor_record;
     if(addr>=0x9f000000u && addr<=0x9f000004u) return scan_state[(addr-0x9f000000u)/4];
     if(addr==0x801ffef0u) return stack_arg;
@@ -223,6 +229,31 @@ int main(void) {
             assert(placement_filter(&cpu,0x80029e7cu)==!visible);
         }
     stage=area=0; supplemental_scan=0;
+    /* Rain pursuers and generators retain native activation, lifetime and
+     * respawn-reset bounds. Ordinary enemies and other stages stay wide. */
+    for (stage=5;stage<=6;++stage) for(unsigned type=9;type<=15;++type) {
+        object[1]=(uint8_t)type; object[3]=0; object[0x14]=0;
+        cpu.gpr[4]=0x8008ef48u; cpu.gpr[5]=64; reveal_margin=566;
+        mmx6_actor_view_bounds(&cpu,0x8002cbfcu);
+        int native=stage==6 && (type==10 || type==14);
+        assert(cpu.gpr[5]==(native?64u:630u));
+        cpu.gpr[5]=32; mmx6_actor_view_bounds(&cpu,0x8002ccb0u);
+        assert(cpu.gpr[5]==598);
+        supplemental_scan=1; assert(placement_filter(&cpu,0x80029e7cu)==native);
+        supplemental_scan=0; assert(!placement_filter(&cpu,0x80029e7cu));
+    }
+    stage=6; area=0; placement[1]=10; placement[4]=0; placement[5]=0;
+    placement[6]=0; placement[7]=0;
+    for(unsigned active=0;active<2;++active) for(unsigned latch=0;latch<8;++latch) {
+        placement[0]=(uint8_t)active; placement[3]=(uint8_t)(latch*16);
+        mmx6_reset_native_placements(500,0);
+        unsigned expected=latch*16;
+        if(!active && (latch==1 || latch==3 || latch==5)) expected+=16;
+        assert(placement[3]==expected);
+    }
+    placement[0]=0; placement[3]=0x10;
+    mmx6_reset_native_placements(48,0); assert(placement[3]==0x10); /* Closed edge. */
+    stage=area=0;
     /* Fixed-radius draw helpers delegate to the same native wide classifier,
      * preserving their own vertical radii. Off/4:3 and UI keep every register. */
     for(unsigned f=0;f<2;++f) for(unsigned m=0;m<4;++m) for(int selector=-1;selector<3;++selector) {

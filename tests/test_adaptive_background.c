@@ -9,9 +9,14 @@
 static uint8_t ram[0x200000], extra[ARENA_BYTES];
 static WsViewAnchor test_view;
 static int support_banks;
+static uint16_t test_vram[1024u*512u];
+const uint16_t *gpu_get_vram(void) { return test_vram; }
 int psx_mod_texture_banks_supported(void) { return support_banks; }
 int psx_mod_read_disc_file(const char *p,void *b,uint32_t c,uint32_t *n) { (void)p;(void)b;(void)c;(void)n;return 0; }
-int psx_mod_define_texture_bank(uint16_t id,uint32_t w,uint32_t h,const uint16_t *p) { (void)id;(void)w;(void)h;(void)p;return 0; }
+int psx_mod_define_texture_bank(uint16_t id,uint32_t w,uint32_t h,const uint16_t *p) {
+    if(id!=WEATHER_BANK) return 0;
+    assert(w==1024 && h==512 && p==test_vram); return 1;
+}
 void psx_mod_set_texture_bank_resolver(PSXModTextureBankResolver r) { assert(r); }
 void psx_mod_set_texture_bank_batching(int e) { assert(e); }
 void gpu_ws_set_view_bounds_override(int e,int lo,int hi) { (void)e; assert(lo==0 && hi==7872); }
@@ -165,6 +170,29 @@ int main(void) {
     assert(psx_mod_read_word(0x800b91c0u)==0x03000000u);
     fixture(); test_view=(WsViewAnchor){0}; mmx6_adaptive_background_end(0,0x800b91c0u);
     for(unsigned i=0;i<sizeof extra;++i) assert(!extra[i]);
+    /* Weather is a frame atlas: inactive neighboring art must never leak,
+     * while an active frame repeats without gaps at extreme aspects. */
+    for (unsigned banked=0;banked<2;++banked) for (unsigned active=0;active<2;++active) {
+        fixture(); test_view=(WsViewAnchor){694,694,0,0,0};
+        support_banks=(int)banked;
+        ram[0xccedc]=6; ram[0x9724f]=1; ram[0x97250]=5;
+        ram[0x9729e]=255; ram[0x9729a]=31;
+        half(0x80097256u,active?0:320);
+        memset(ram+0x100000+128,0,128);
+        ram[0x100000+128]=3; ram[0x100000+129]=4;
+        for(unsigned row=0;row<16;++row) for(unsigned col=0;col<16;++col) {
+            half(0x80110600u+row*32+col*2,1);
+            half(0x80110800u+row*32+col*2,col<4?1:0);
+        }
+        mmx6_adaptive_background_end(1,0x800b91c0u);
+        unsigned count=0;
+        for(unsigned p=LAYER_BYTES;p<2*LAYER_BYTES && extra[p+7];p+=32) {
+            assert(psx_mod_read_word(0x80800000u+p+12)==mmx6_tile_uvclut(0x01123000u));
+            assert(psx_mod_read_word(0x80800000u+p+16)==(banked?WEATHER_BANK<<16:0));
+            ++count;
+        }
+        assert(count==(active?(21+44+44)*16:0));
+    }
     /* Original-disc parser and the two different native upload layouts. */
     static uint8_t dat[2048u*2u+0x40000u];
     static uint16_t pixels[1024u*512u];

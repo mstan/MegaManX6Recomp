@@ -13,8 +13,10 @@
 #define ARENA_BYTES (6u * LAYER_BYTES)
 static uint32_t arena;
 static int intro_banks;
+static int weather_bank;
 #define INTRO_BANK 0x6001u
 #define FACTORY_BANK 0x6002u
+#define WEATHER_BANK 0x6003u
 
 static int load_intro_banks(uint16_t id) {
     if (id != INTRO_BANK && id != FACTORY_BANK) return 0;
@@ -41,6 +43,21 @@ static int load_intro_banks(uint16_t id) {
     return ok;
 }
 
+static int load_background_bank(uint16_t id) {
+    if (id != WEATHER_BANK) return load_intro_banks(id);
+    if (weather_bank) return 1;
+    if (psx_mod_read_byte(0x800ccedcu) != 6u ||
+        psx_mod_read_byte(0x800cceddu) != 0u) return 0;
+    /* Turtloid uploads all five rain frames with the stage textures. Its
+     * controller (800ED510) only selects a row and animates the live CLUT;
+     * the indices are static. Retain those uploaded indices for the existing
+     * immutable-bank batching path, keeping palette fades and OT order live.
+     * The CPU VRAM mirror contains guest uploads and is restored by snapshots,
+     * so a restored pending weather packet can resolve this bank as well. */
+    weather_bank = psx_mod_define_texture_bank(WEATHER_BANK, 1024u, 512u, gpu_get_vram());
+    return weather_bank;
+}
+
 /* The intro's foreground switches texture ownership inside a shared pillar
  * at x=2048, its near background at x=1088. The native texture-swap flag is
  * insufficient: a wide view sees both regions at once, in either direction.
@@ -64,7 +81,7 @@ int mmx6_adaptive_background_activate(void) {
         return 0;
     }
     gpu_ws_bg2d_set_host_arena(arena, ARENA_BYTES);
-    psx_mod_set_texture_bank_resolver(load_intro_banks);
+    psx_mod_set_texture_bank_resolver(load_background_bank);
     psx_mod_set_texture_bank_batching(1);
     return 1;
 }
@@ -120,6 +137,21 @@ void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
             view = intro_parallax_view(foreground, layer,
                 (int16_t)psx_mod_read_half(0x80097202u));
     }
+    /* Turtloid layer1 mode5 is an externally selected 320px weather frame,
+     * not a world map. X=320 selects the blank frame; rows select animation
+     * artwork. Revealing adjacent cells exposes inactive rain at the left
+     * edge. Repeat only the selected native frame, with screen-space phase. */
+    int weather = layer == 1 && parent < 0 &&
+        psx_mod_read_byte(0x800ccedcu) == 6u && psx_mod_read_byte(0x800cceddu) == 0u &&
+        psx_mod_read_byte(b + 4u) == 5u;
+    if (weather) {
+        WsViewAnchor world;
+        if (gpu_ws_bg2d_get_view(0, &world)) {
+            int extra = (world.left + world.right + world.pad_left + world.pad_right) / 2;
+            view = (WsViewAnchor){extra - world.pad_left, extra - world.pad_right,
+                                  0, world.pad_left, world.pad_right};
+        }
+    }
     Mmx6TileMap map = {
         psx_mod_read_word(0x1f800004u), psx_mod_read_word(0x1f800008u),
         psx_mod_read_word(0x1f80000cu), psx_mod_read_byte(0x800cd338u),
@@ -144,6 +176,7 @@ void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
     int panorama_width = parent < 0 ? intro_panorama_width(layer) : 0;
     int intro = psx_mod_read_byte(0x800ccedcu) == 0 && psx_mod_read_byte(0x800cceddu) == 0;
     int banks = intro && psx_mod_texture_banks_supported() && load_intro_banks(INTRO_BANK);
+    int rain_bank = weather && psx_mod_texture_banks_supported() && load_background_bank(WEATHER_BANK);
     /* Replace this layer's current OT lists, including its central 21 columns.
      * Mixing unchanged native columns with reflected extras leaves a moving
      * gap at the panorama edge. Keep the other display buffer and guest ring
@@ -157,6 +190,7 @@ void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
     for (int row = 0; row < 16; ++row) {
         for (int col = -left; col < 21 + right; ++col) {
             int tile_x = (start_col + col) * 16, flipped = 0;
+            if (weather) tile_x = start_col * 16 + ((col % 20 + 20) % 20) * 16;
             int factory = layer == 0 ? tile_x >= 2048 : layer == 1 ? tile_x >= 1088 : tile_x >= 1280;
             if (panorama_width) {
                 factory = 0;
@@ -183,6 +217,7 @@ void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
             psx_mod_write_word(cursor + 8u, (uint16_t)x | ((uint32_t)(uint16_t)y << 16));
             psx_mod_write_word(cursor + 12u, mmx6_tile_uvclut(desc));
             uint16_t bank = banks && bucket < 12u ? (factory ? FACTORY_BANK : INTRO_BANK) : 0;
+            if (rain_bank) bank = WEATHER_BANK;
             psx_mod_write_word(cursor + 16u, bank ? (uint16_t)view.shift | (uint32_t)bank << 16 : (uint32_t)view.shift);
             psx_mod_write_word(cursor + 20u, (uint32_t)view.pad_left);
             psx_mod_write_word(cursor + 24u, (uint32_t)view.pad_right);
