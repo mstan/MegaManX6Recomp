@@ -16,7 +16,7 @@ out_dir = "generated"
 strict = true
 # Widescreen hooks: BG layer bounds, screen-space dialogue classification, and
 # paired actor draw/lifetime extents. Inactive with the enhancement off.
-mod_function_entry_funcs = ["0x800270D0", "0x80026ECC", "0x800232D4", "0x800239CC", "0x80023ED8", "0x800241D4", "0x80022E44", "0x8002CBFC", "0x8002CCB0", "0x80029D18", "0x80029E7C"]
+mod_function_entry_funcs = ["0x800270D0", "0x80026ECC", "0x800232D4", "0x800239CC", "0x80023ED8", "0x800241D4", "0x80022E44", "0x8002CBFC", "0x8002CCB0", "0x80029D18", "0x80029E7C", "0x8002CB50", "0x8002CD6C", "0x800F9334"]
 
 [runtime]
 debug_port = 4490

@@ -10,10 +10,16 @@
 
 static PSXModActivationCallback activate;
 static PSXModFunctionFilterCallback placement_filter;
+static PSXModFunctionFilterCallback fixed_view_filter, npc_start_filter;
 static struct { uint32_t pc; PSXModFunctionEntryCallback fn; } hooks[10];
 static unsigned hook_count, tag_count, anchor_calls;
 static uint32_t tags[8], packet;
 static uint8_t object[128];
+static uint8_t placement[8], stage, area;
+static uint32_t actor_record;
+static int camera_x=500, camera_y=944;
+static unsigned fixed_view_calls;
+static uint32_t fixed_view_radii[2];
 static const char *camera_option = "edges";
 static const char *aspect_option = "16:9";
 static unsigned fixed_num, adaptive_calls;
@@ -26,13 +32,23 @@ void mmx6_adaptive_background_begin(unsigned layer) { assert(layer == 2); }
 void mmx6_adaptive_background_end(unsigned layer, uint32_t p) { assert(layer == 2 && p == packet); }
 uint32_t psx_mod_alloc_guest_memory(uint32_t n, uint32_t a) { assert(n==8 && a==4); return 0x9f000000u; }
 uint16_t psx_mod_read_half(uint32_t p) {
-    assert(p==0x80097202u || p==0x80097206u); return p==0x80097202u ? 500 : 944;
+    if(p==0x80092004u || p==0x80092006u)
+        return (uint16_t)(placement[p-0x80092000u] | placement[p-0x80092000u+1u]<<8);
+    assert(p==0x80097202u || p==0x80097206u);
+    return (uint16_t)(p==0x80097202u ? camera_x : camera_y);
 }
 void psx_mod_write_word(uint32_t p, uint32_t v) {
     if(p>=0x9f000000u && p<=0x9f000004u) scan_state[(p-0x9f000000u)/4]=v;
     else { assert(p==0x801ffef0u); stack_arg=v; }
 }
 void psx_dispatch_call(CPUState *cpu, uint32_t p, uint32_t r) {
+    if(p==0x8002ccb0u) {
+        assert(r==cpu->gpr[31]);
+        ++fixed_view_calls;
+        fixed_view_radii[0]=cpu->gpr[5]; fixed_view_radii[1]=cpu->gpr[6];
+        mmx6_actor_view_bounds(cpu,p);
+        return;
+    }
     assert(p==0x80029f38u && (r==0x80029d84u || r==0x80029dccu));
     assert(scan_calls<2 && cpu->gpr[29]==0x801ffee0u);
     for(unsigned i=0;i<4;++i) scan_bounds[scan_calls][i]=(int32_t)cpu->gpr[4+i];
@@ -50,8 +66,11 @@ int psx_mod_register_activation_plugin(const char *id, PSXModActivationCallback 
 }
 int psx_mod_register_function_filter_plugin(const char *id, uint32_t pc,
                                              PSXModFunctionFilterCallback fn) {
-    assert(strcmp(id,"mmx6.widescreen")==0 && pc==0x80029e7cu);
-    placement_filter=fn; return 1;
+    assert(strcmp(id,"mmx6.widescreen")==0);
+    if(pc==0x80029e7cu) placement_filter=fn;
+    else if(pc==0x8002cb50u || pc==0x8002cd6cu) fixed_view_filter=fn;
+    else { assert(pc==0x800f9334u); npc_start_filter=fn; }
+    return 1;
 }
 int psx_mod_register_function_entry_plugin(const char *id, uint32_t pc,
                                            PSXModFunctionEntryCallback fn) {
@@ -75,11 +94,14 @@ int psx_mod_set_adaptive_display_aspect(uint32_t n, uint32_t d) {
     assert(n == 0 && d == 0); ++adaptive_calls; return 1;
 }
 uint8_t psx_mod_read_byte(uint32_t addr) {
-    if (addr==0x800ccedcu || addr==0x800cceddu) return 0;
+    if (addr==0x800ccedcu) return stage;
+    if (addr==0x800cceddu) return area;
+    if (addr>=0x80092000u && addr<0x80092008u) return placement[addr-0x80092000u];
     assert(addr >= 0x80091000u && addr < 0x80091080u);
     return object[addr - 0x80091000u];
 }
 uint32_t psx_mod_read_word(uint32_t addr) {
+    if(addr==0x80091010u) return actor_record;
     if(addr>=0x9f000000u && addr<=0x9f000004u) return scan_state[(addr-0x9f000000u)/4];
     if(addr==0x801ffef0u) return stack_arg;
     assert(addr == 0x1f800100u || addr == 0x1f800108u); return packet;
@@ -174,8 +196,8 @@ int main(void) {
     scan_calls=0;
     enter(0x80029d18u,&cpu); assert(scan_calls==2); /* Also stationary. */
     reveal_margin=0; enter(0x80029d18u,&cpu); assert(scan_calls==2);
-    /* No changes to native eligibility. Extra scans reject controllers/NPCs
-     * and the intro boss, but leave ordinary enemy difficulty/latches native. */
+    /* Original scans stay native. Supplemental scans admit audited visible
+     * props and the NPC with a separate sequence gate, never other controllers. */
     for (unsigned category=0;category<8;++category) {
         for (unsigned boss=0;boss<2;++boss) {
             object[3]=(uint8_t)category; object[1]=boss?0x30:2;
@@ -184,11 +206,60 @@ int main(void) {
             assert(!placement_filter(&cpu,0x80029e7cu) && cpu.gpr[2]==0x1234);
             supplemental_scan=1;
             int deferred=placement_filter(&cpu,0x80029e7cu);
-            assert(deferred==(category>=3 || boss));
+            assert(deferred==((category>=3 && category!=4) || boss));
             assert(cpu.gpr[2]==(deferred?1:0x1234));
         }
     }
     supplemental_scan=0;
+    const unsigned visible_types[]={2,8,9,0x30};
+    for(stage=0;stage<2;++stage) for(area=0;area<2;++area)
+        for(unsigned cat=3;cat<7;++cat) for(unsigned t=0;t<4;++t) {
+            object[3]=(uint8_t)cat; object[1]=(uint8_t)visible_types[t]; object[2]=0;
+            cpu.gpr[4]=0x80091000u; cpu.gpr[2]=0x1234;
+            supplemental_scan=1;
+            int intro=!stage&&!area;
+            int visible=(cat==4 && (visible_types[t]==8 || (intro&&visible_types[t]==2))) ||
+                        (intro && cat==5 && visible_types[t]==8);
+            assert(placement_filter(&cpu,0x80029e7cu)==!visible);
+        }
+    stage=area=0; supplemental_scan=0;
+    /* Fixed-radius draw helpers delegate to the same native wide classifier,
+     * preserving their own vertical radii. Off/4:3 and UI keep every register. */
+    for(unsigned f=0;f<2;++f) for(unsigned m=0;m<4;++m) for(int selector=-1;selector<3;++selector) {
+        memset(&cpu,0,sizeof cpu); cpu.gpr[4]=0x80091000u; cpu.gpr[31]=0x80050e48u;
+        object[0x14]=(uint8_t)selector; reveal_margin=margins[m];
+        CPUState before=cpu; unsigned calls=fixed_view_calls;
+        int handled=fixed_view_filter(&cpu,f?0x8002cd6cu:0x8002cb50u);
+        assert(handled==(selector>=0 && reveal_margin>0));
+        if(!handled) assert(!memcmp(&before,&cpu,sizeof cpu) && calls==fixed_view_calls);
+        else {
+            assert(fixed_view_calls==calls+1 && fixed_view_radii[0]==(f?96u:32u));
+            assert(fixed_view_radii[1]==(f?80u:32u));
+            assert(cpu.gpr[5]==fixed_view_radii[0]+(uint32_t)reveal_margin);
+            assert(cpu.gpr[6]==fixed_view_radii[1] && cpu.gpr[31]==before.gpr[31]);
+        }
+    }
+    memset(object,0,sizeof object); memset(placement,0,sizeof placement);
+    object[1]=placement[1]=8; object[4]=1; placement[3]=5;
+    actor_record=0x80092000u; cpu.gpr[4]=0x80091000u;
+    placement[4]=6000&255; placement[5]=6000>>8;
+    placement[6]=416&255; placement[7]=416>>8;
+    const int cam_xs[]={5000,5632,5633,6047,6048};
+    const int cam_ys[]={128,129,463,464};
+    for(unsigned m=0;m<4;++m) for(unsigned x=0;x<5;++x) for(unsigned y=0;y<4;++y) {
+        reveal_margin=margins[m]; camera_x=cam_xs[x]; camera_y=cam_ys[y];
+        CPUState before=cpu;
+        int outside=6000<=camera_x-48 || 6000>=camera_x+368 ||
+                    416<=camera_y-48 || 416>=camera_y+288;
+        assert(npc_start_filter(&cpu,0x800f9334u)==outside);
+        assert(!memcmp(&before,&cpu,sizeof cpu));
+    }
+    camera_x=5000; camera_y=300; /* Outside, but unrelated/reused actors stay native. */
+    object[2]=1; assert(!npc_start_filter(&cpu,0x800f9334u)); object[2]=0;
+    object[5]=1; assert(!npc_start_filter(&cpu,0x800f9334u)); object[5]=0;
+    actor_record=0; assert(!npc_start_filter(&cpu,0x800f9334u)); actor_record=0x80092000u;
+    stage=1; assert(!npc_start_filter(&cpu,0x800f9334u)); stage=0;
+    area=1; assert(!npc_start_filter(&cpu,0x800f9334u)); area=0;
     const char *aspects[] = {"Fit", "16:9", "21:9", "32:9", "old-invalid", NULL};
     const unsigned numerators[] = {16, 16, 21, 32, 16, 16};
     for (unsigned i = 0; i < 6; ++i) {

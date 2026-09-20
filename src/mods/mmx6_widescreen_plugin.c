@@ -7,7 +7,7 @@
 
 /* Default-off Custom Renderer. Native producers stay within their ring/budget;
  * the host replaces each layer's tile lists with a continuous expanded view.
- * Visibility, lifetime and activation share the live view. */
+ * Visible actors share the live view; scene triggers retain native reach. */
 #define PKG "mmx6.enhancement.widescreen"
 #define FEATURE "widescreen"
 
@@ -64,22 +64,67 @@ static void mmx6_actor_view_bounds(CPUState *cpu, uint32_t address) {
     if (margin > 0 && (int8_t)psx_mod_read_byte(cpu->gpr[4] + 0x14u) >= 0)
         cpu->gpr[5] += (uint32_t)margin;
 }
+/* Retail's fixed-radius draw classifiers duplicate 8002CCB0 with radii
+ * (32,32) and (96,80). Doors use the former; frozen actors use the latter.
+ * Delegate to that native parameterized helper and its existing wide hook,
+ * keeping the vertical test, live display width and screen-space UI native. */
+static int mmx6_fixed_actor_view_filter(CPUState *cpu, uint32_t address) {
+    if (psx_mod_widescreen_x_margin() <= 0 ||
+        (int8_t)psx_mod_read_byte(cpu->gpr[4] + 0x14u) < 0) return 0;
+    cpu->gpr[5] = address == 0x8002cb50u ? 32u : 96u;
+    cpu->gpr[6] = address == 0x8002cb50u ? 32u : 80u;
+    uint32_t caller = cpu->gpr[31];
+    psx_dispatch_call(cpu, 0x8002ccb0u, caller);
+    return 1;
+}
+static int mmx6_intro_scene(void) {
+    return psx_mod_read_byte(0x800ccedcu) == 0 &&
+           psx_mod_read_byte(0x800cceddu) == 0;
+}
+/* Intro type8 initializes its sprite independently, then phase0 at 800F9334
+ * takes control of X immediately. Hold only that phase until its placement
+ * enters the original scan rectangle. Native animation/drawing continues.
+ * Keep this guard after shrinking to 4:3: an already-previewed actor must not
+ * start a cutscene merely because the window changed size. */
+static int mmx6_intro_npc_start_filter(CPUState *cpu, uint32_t address) {
+    (void)address;
+    uint32_t actor = cpu->gpr[4];
+    if (!mmx6_intro_scene() || psx_mod_read_byte(actor + 1u) != 8u ||
+        psx_mod_read_byte(actor + 2u) != 0u ||
+        psx_mod_read_byte(actor + 4u) != 1u ||
+        psx_mod_read_byte(actor + 5u) != 0u) return 0;
+    uint32_t record = psx_mod_read_word(actor + 0x10u);
+    if ((record & 0xffe00000u) != 0x80000000u ||
+        psx_mod_read_byte(record + 1u) != 8u ||
+        (psx_mod_read_byte(record + 3u) & 15u) != 5u) return 0;
+    int x = (int16_t)psx_mod_read_half(record + 4u);
+    int y = (int16_t)psx_mod_read_half(record + 6u);
+    int camera_x = (int16_t)psx_mod_read_half(0x80097202u);
+    int camera_y = (int16_t)psx_mod_read_half(0x80097206u);
+    return x <= camera_x - 48 || x >= camera_x + 368 ||
+           y <= camera_y - 48 || y >= camera_y + 288;
+}
 static uint32_t resize_state;
 static int supplemental_scan;
 /* Categories 0..2 are difficulty-gated enemies. Other categories allocate
  * event, NPC and effect pools whose constructors may immediately take control
  * of X. Intro enemy 0x30 is the boss, also started by placement activation.
- * Only supplemental scans are filtered: retail scans keep their exact strips,
- * offsets, difficulty and latch rules, including subsequent activation. */
+ * Audited visible exceptions: resident type8 doors trigger on player contact;
+ * intro type2 breakable blocks have ordinary damage/lifetime logic; intro
+ * type8 NPCs have a separate guarded sequence phase. Other scene controllers
+ * remain native. Retail scans retain offsets, difficulty and latch rules. */
 static int mmx6_extra_placement_filter(CPUState *cpu, uint32_t address) {
     (void)address;
     if (!supplemental_scan) return 0;
     uint32_t record = cpu->gpr[4];
     unsigned category = psx_mod_read_byte(record + 3u) & 15u;
-    int boss = psx_mod_read_byte(0x800ccedcu) == 0 &&
-               psx_mod_read_byte(0x800cceddu) == 0 &&
-               psx_mod_read_byte(record + 1u) == 0x30;
+    unsigned type = psx_mod_read_byte(record + 1u);
+    int intro = mmx6_intro_scene();
+    int boss = intro && type == 0x30;
     if (category < 3u && !boss) return 0;
+    if (category == 4u && (type == 8u || (intro && type == 2u))) return 0;
+    if (intro && category == 5u && type == 8u &&
+        psx_mod_read_byte(record + 2u) == 0u) return 0;
     cpu->gpr[2] = 1; /* Native eligibility result: defer this placement. */
     return 1;
 }
@@ -129,6 +174,9 @@ static void mmx6_widescreen_activate(void) {
     if (resize_state)
         (void)psx_mod_register_function_entry_plugin("mmx6.widescreen", 0x80029d18u, mmx6_resize_placement_scan);
     (void)psx_mod_register_function_filter_plugin("mmx6.widescreen", 0x80029e7cu, mmx6_extra_placement_filter);
+    (void)psx_mod_register_function_filter_plugin("mmx6.widescreen", 0x8002cb50u, mmx6_fixed_actor_view_filter);
+    (void)psx_mod_register_function_filter_plugin("mmx6.widescreen", 0x8002cd6cu, mmx6_fixed_actor_view_filter);
+    (void)psx_mod_register_function_filter_plugin("mmx6.widescreen", 0x800f9334u, mmx6_intro_npc_start_filter);
     if (!psx_mod_option_value(PKG, FEATURE, "camera", camera, sizeof camera))
         strcpy(camera, "edges");
     /* SLUS-01395 v1.1 FUN_8002820C clamps layer0+0xA between +0x1E

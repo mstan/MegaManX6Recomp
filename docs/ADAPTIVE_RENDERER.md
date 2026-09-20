@@ -40,9 +40,17 @@ Foreground terrain and actors retain their authored world positions.
   envelope. Original placement strips remain unchanged. Each frame, separate
   supplemental strips invoke the retail scanner for ordinary enemies in the
   extra view, preserving registers, load pipeline, stack arguments and charged
-  hardware timing. A scoped eligibility filter defers nonenemy categories and
-  the intro boss controller to the original strips. NPC dialogue and boss
-  sequences therefore retain their native activation positions.
+  hardware timing. A scoped eligibility filter defers unaudited controllers
+  and the intro boss to the original strips. Audited visible exceptions are
+  resident type8 doors, intro type2 breakable blocks and the intro type8 NPC.
+  Doors keep their native contact trigger. The NPC initializes/animates its
+  sprite early; only the phase that takes control of X waits for its original
+  placement rectangle. That guard also survives resizing back to 4:3.
+- Doors and frozen actors use additional fixed-radius draw classifiers
+  (`8002CB50`, `8002CD6C`). While widened, they delegate to the existing native
+  parameterized classifier (`8002CCB0`) with their original 32x32 and 96x80
+  radii, then apply the shared horizontal extension. Vertical bounds, live
+  display width and screen-space UI retain their native behavior.
 - Framework entry filters are opt-in; existing entry observers keep their
   callback contract. Generated code, native overlays and the interpreter honor
   handled returns consistently. Overlay ABI 24 rejects the old callback signature.
@@ -73,7 +81,48 @@ Foreground terrain and actors retain their authored world positions.
 
 ## Validation
 
-### Latest parallax and scene-trigger regression pass
+### Latest prop visibility and NPC preview regression pass
+
+The next owner review identified missing props in new UI slots 1/2 and a
+disappearing boss door in new UI slot 4. The blanket nonenemy placement filter
+also excluded harmless visible props. The door additionally used a fixed-radius
+draw helper that had not been widened.
+
+Native code was inspected from captured RAM for SLUS-01395 v1.1. The intro
+breakable block is category4/type2 at placement `800FA374` (X=5488); its native
+constructor/update handles ordinary damage and lifetime. Category4/type8 doors
+at X=5744 and 6064 initialize their graphics separately and start transitions
+only on player contact (`80050C88`). Category5/type8 at placement `800FA29C`
+initializes its NPC graphics in `800F90FC`; phase0 at `800F9334` immediately
+requests control of X. The new guard holds that phase outside the original
+open scan rectangle, camera X-48..X+368 and Y-48..Y+288. Animation and draw
+classification continue through the surrounding native update.
+
+| Check | Result |
+|---|---|
+| New UI slots 1/2, 32:9 and 64:9 | Breakable block visible before entering native view |
+| New UI slot 4, walk left | Door remains drawn in expanded view |
+| Early NPC, wide and resize back to 4:3 | Sprite initialized; sequence stays at phase0; X remains controllable |
+| Original 4:3 placement/draw | Block/NPC remain unspawned where the original scan has not reached |
+| Same three saves, 32:9/64:9/4:3 | About 60 gameplay submissions/s (1.2s samples, 59.15-60.69 range) |
+| Early-spawned block, normal saber attacks | Destroyed; X walks through to X=5516 |
+| Normal approach from new UI4 at 64:9 | Door transition, NPC dialogue, second door and boss fight complete |
+| NPC preview save/load | Three cycles and fresh-process restore pass without starting the sequence |
+
+The separate no-native-overlay run also reproduced the corrected block/door
+visibility and NPC deferral. Unit coverage includes allowed actor categories,
+original-scan fallthrough, both fixed-radius helpers, UI/4:3 identity, native
+trigger X/Y boundaries and a previously-previewed NPC after shrinking the view.
+All seven game CTest cases pass. Original-disc AOT was rebuilt and audited:
+71 valid pairs / 21,342 manifest rows, tag `cg13_2caa7102_gc90252311_f0`.
+
+The owner process was left interactive throughout this investigation. Latest
+save copies were backed up under `build-review/prop-fixes/original-saves`;
+their bytes need no ABI/header migration for this build. Private combat checks
+restored HP to avoid drill deaths; they used no warps or trigger-state patches.
+Gameplay progress and diagnostic saves stay in the separate test directory.
+
+### Earlier parallax and scene-trigger regression pass
 
 The owner's subsequent slot 3 wall-climb reproduction isolated premature
 activation: widened original placement strips spawned the NPC around X=5115
@@ -224,17 +273,18 @@ rescue refs include game `2d227b9`, framework `d94fd537`, nested runtime
 `41e92d8a` merges current origin/master with the accepted local MMX6 changes.
 No source was pushed, released or merged into master for this review.
 
-Updated executable: `build-review/playtest-3/mmx6-runtime.exe`.
-SHA256: `0FB8E26A0D8D74F699B4FA9331451F24CBD71FDC91D3525EC93F398E5E142334`.
-Use the desktop **MMX6 Trigger Fixes** shortcut, or
-`F:/Projects/psxrecomp/Play MMX6 Trigger Fixes.lnk`. It selects the isolated
-`game.adaptive-trigger-review-local.toml`: enabled Custom Renderer, Fit,
-room edges, port 4518 and copies of the owner review saves/memory cards under
-`build-review/trigger-fixes/test-saves`. Window title: **MMX6 Trigger Review**.
+Updated executable: `build-review/playtest-4/mmx6-runtime.exe`.
+SHA256: `849B04CF1D22F0A643B401F2EF03DAEFFB6AAE440E5DE04A57715947963043E4`.
+Use the desktop **MMX6 Prop Fixes** shortcut, or
+`F:/Projects/psxrecomp/Play MMX6 Prop Fixes.lnk`. It selects the isolated
+`game.adaptive-prop-review-local.toml`: enabled Custom Renderer, Fit,
+room edges, port 4519 and copies of the latest owner saves/memory cards under
+`build-review/prop-fixes/test-saves`. Window title: **MMX6 Prop Review**.
 It boots normally and does not load a state. Close the older review first.
-For review, use slot 1 for scroll, slot 3 for the climb/NPC/boss route, and
-slot 6 for the recovered version of slot 4. The older `review-next` and
-`playtest-2` executables/shortcuts remain available and unchanged.
+For review, use latest slots 1/2 for the block, and slot 4 for door visibility
+while walking left and the NPC/boss approach. Historical slot numbers above
+refer to saves as they existed during each earlier review. The older
+executables and shortcuts remain available and unchanged.
 Resize the window to the desired aspect; 64:9 is an extreme coverage check.
 
 Captures and measurements are under `build-review/review-next/`:
@@ -247,13 +297,21 @@ The new regression evidence is under `build-review/scene-fixes/`:
 `interp-restored.json`, `verified-64-slot1.png` through `verified-64-slot5.png`.
 These private artifacts and game assets are not committed.
 
-Latest evidence is under `build-review/trigger-fixes/`:
+Earlier trigger evidence is under `build-review/trigger-fixes/`:
 `final-validation.json`, `final-{32,64,43}-slot{1,3,5,6}.png`,
 `parallax-motion.json`, `fallback-climb.png`, `trigger-ab.json`,
 `proper-npc-16.png`, `npc-after-dialogue.png`, `proper-boss-19.png`,
 `save-migration.json` and `slot4-recovery.json`. Original-disc AOT provenance
 is under `build-aot/trigger-fixes/disc-aot-xphfq3me/`; the staged receipt is
 `build-review/playtest-3/AOT_CACHE_AUDIT.json`.
+
+Latest prop evidence is under `build-review/prop-fixes/`: `baseline.json`,
+`interp-baseline.json`, `interp-left.json`, `native-aspects.json`,
+`native-approach.json`, `native-dialogue.json`, `native-boss-route.json`,
+`block-destruction.json`, `native-overlay-status.json`, corresponding PNGs
+and the original RAM captures. Original-disc provenance is under
+`build-aot/prop-fixes/disc-aot-tjhetrki/`; the staged audit receipt is
+`build-review/playtest-4/AOT_CACHE_AUDIT.json`.
 
 ## Remaining review scope
 
