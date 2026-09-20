@@ -26,6 +26,12 @@ static unsigned fixed_num, adaptive_calls;
 static uint32_t scan_state[2], stack_arg=0x1234;
 static unsigned scan_calls, world_count;
 static int32_t scan_bounds[2][4];
+static int (*native_scene)(void);
+static uint32_t main_state;
+static uint8_t player_state[8];
+static unsigned mask_tags;
+void gpu_ws_set_native_scene_predicate(int (*p)(void)) { native_scene=p; }
+void gpu_ws_tag_screen_mask_quad(uint32_t p) { (void)p; ++mask_tags; }
 static uint32_t scan_directions[2];
 int mmx6_adaptive_background_activate(void) { return 1; }
 void mmx6_adaptive_background_begin(unsigned layer) { assert(layer == 2); }
@@ -97,6 +103,8 @@ int psx_mod_set_adaptive_display_aspect(uint32_t n, uint32_t d) {
     assert(n == 0 && d == 0); ++adaptive_calls; return 1;
 }
 uint8_t psx_mod_read_byte(uint32_t addr) {
+    if (addr >= 0x800970a0u && addr < 0x800970a8u) return player_state[addr-0x800970a0u];
+    if (addr >= 0x8009cad0u && addr < 0x8009cb30u) return object[addr-0x8009cad0u];
     if (addr==0x800ccedcu) return stage;
     if (addr==0x800cceddu) return area;
     if (addr>=0x80092000u && addr<0x80092008u) return placement[addr-0x80092000u];
@@ -106,6 +114,7 @@ uint8_t psx_mod_read_byte(uint32_t addr) {
     return object[addr - 0x80091000u];
 }
 uint32_t psx_mod_read_word(uint32_t addr) {
+    if (addr==0x800cced0u) return main_state;
     if(addr==0x800734ccu) return 0x80092000u;
     if(addr==0x80091010u) return actor_record;
     if(addr>=0x9f000000u && addr<=0x9f000004u) return scan_state[(addr-0x9f000000u)/4];
@@ -300,6 +309,23 @@ int main(void) {
         assert(fixed_num == numerators[i]);
         assert(adaptive_calls == (i == 0 || i >= 4));
     }
-    puts("mmx6_widescreen_view: adaptive choices, dialogue, actor bounds, vertical/UI/4:3 identity PASS");
+    main_state=0xa; player_state[0]=player_state[4]=1;
+    for(unsigned state=0;state<128;++state) {
+        player_state[5]=(uint8_t)state;
+        assert(native_scene()==(state==0x4d));
+    }
+    player_state[5]=0x4d; main_state=0x404; assert(!native_scene());
+    main_state=0xa; player_state[4]=2; assert(!native_scene());
+    memset(object,0,sizeof object); object[0x37]=255; object[1]=5; object[2]=0x13;
+    cpu.gpr[4]=0x8009cad0u;
+    for(stage=0;stage<8;++stage) {
+        tag_count=0; mask_tags=0; packet=0x800a51b8u;
+        enter(0x80023ed8u,&cpu); packet+=0x28; enter(0x80022e44u,&cpu);
+        assert(mask_tags==(stage==6));
+    }
+    stage=6; object[2]=1; mask_tags=tag_count=0;
+    enter(0x80023ed8u,&cpu); packet+=0x28; enter(0x80022e44u,&cpu);
+    assert(!mask_tags);
+    puts("mmx6_widescreen_view: adaptive choices, dialogue, actor bounds, native special attack and darkness mask PASS");
     return 0;
 }

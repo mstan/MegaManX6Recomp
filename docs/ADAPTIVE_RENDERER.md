@@ -317,8 +317,8 @@ rescue refs include game `2d227b9`, framework `d94fd537`, nested runtime
 `41e92d8a` merges current origin/master with the accepted local MMX6 changes.
 No source was pushed, released or merged into master for this review.
 
-Current executable: `build-review/playtest-5/mmx6-runtime.exe`.
-SHA256: `4B1B65D512918635724AEA2691047C2383F8CDF553A5A8D19851DA135E6DCEE9`.
+Current executable: `build-review/playtest-6/mmx6-runtime.exe`.
+SHA256: `B26F1143646727D2DB600DE99CB71314D445904A4B154213EDC7080F83C1728A`.
 Use **MMX6 Adaptive** on the desktop or `F:/Projects/psxrecomp/Play MMX6 Adaptive.lnk`.
 It opens recomp-ui with the current roaming memory-card copy, PS5 controller
 settings and `game.adaptive-roaming-local.toml`. No state loads automatically.
@@ -363,6 +363,47 @@ Latest prop evidence is under `build-review/prop-fixes/`: `baseline.json`,
 and the original RAM captures. Original-disc provenance is under
 `build-aot/prop-fixes/disc-aot-tjhetrki/`; the staged audit receipt is
 `build-review/playtest-4/AOT_CACHE_AUDIT.json`.
+
+## September 20 effects review (playtest 6)
+
+These slot numbers refer to the owner's new saves from September 20 at
+11:31–11:36, preserved separately from all earlier reviews.
+
+- UI2: Turtloid's Nightmare darkness uses category6/type5 screen polygons,
+  subtypes 13/23/33/43. Their fixed outer edges were -96 and 416. A guarded
+  framework tag extends those vertical edges with subtractive bands at the
+  same ordering-table position. The moving light openings, fade strength,
+  canonical framebuffer and HUD are preserved. Tags expire and reset on load.
+- UI3: Amazon's layer2 jungle art ends at x896. Reflect that finite panorama
+  and its individual tile pixels, using the foreground camera's half-speed
+  projection. Near scenery and terrain still come from their original maps.
+- UI4: X state4D's yellow attack uses six native screen sprites (effect
+  type11/subtype2). A pure native-scene predicate temporarily presents this
+  sequence at 4:3, then restores adaptive gameplay. Simulation and camera RAM
+  are unchanged. The predicate is inactive when Custom Renderer is off.
+- UI5: the first cave panorama occupies x768–1408 in the same distant-layer
+  atlas. Reflect that panel rather than exposing its gutter/neighboring art.
+  Apply the same half-speed projection, including room-edge padding. During
+  a short leftward movement at 64:9, the clamped scenery crop remained pixel
+  identical while the native camera moved from 1598 to 1595.
+
+Validation: private copies of current cards/states, controller disconnected,
+port 4520; 4:3, 32:9 and 64:9 captures; approximately 60 FPS in two-second Amazon
+samples at both wide aspects; native attack and return to wide gameplay;
+fresh-process darkness/attack/cave restore and native overlay dispatch;
+stage-select remains pillarboxed; previous intro prop scene smoke check.
+All seven game CTests and release-config parity pass. Framework mask geometry,
+packet-reuse guards and production scene-classifier tests also pass.
+
+Framework commit: `39ee7d79400e500eeb3ea26e3d2c35d889e9d5b5`.
+Evidence: `build-review/effects-fixes/`, including `fixed-validation.json`,
+`motion-validation.json`, `attack-duration.json`, `final-smoke.json` and PNGs.
+Original-disc AOT provenance: `build-aot/effects-fixes/disc-aot-t8rqi8nz/`.
+All 71 native pairs / 21342 manifest rows pass hash and original-byte guards;
+tag `cg13_2caa7102_gc90252311_f0`, static coverage still not complete.
+The first staging attempt encountered a DLL locked by the private test; after
+closing it, the audited cache was staged and every artifact hash rechecked.
+Current receipt: `build-review/playtest-6/AOT_CACHE_AUDIT.json`.
 
 ## Remaining review scope
 

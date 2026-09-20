@@ -29,13 +29,14 @@ static void mmx6_bg_view_end(CPUState *cpu, uint32_t address) {
  * This preserves dialogue composites as one centered group without confusing
  * foreground props in the same packet arena with UI. */
 static uint32_t ui_packet_begin;
-static int ui_packet_pending, ui_packet_screen;
+static int ui_packet_pending, ui_packet_screen, ui_packet_mask;
 static void mmx6_finish_ui_packets(uint32_t end) {
     if (ui_packet_pending && end >= ui_packet_begin &&
         end - ui_packet_begin <= 1000u * 0x28u) {
         for (uint32_t p = ui_packet_begin; p < end; p += 0x28u) {
             psx_mod_tag_world_primitive(p, !ui_packet_screen);
             if (ui_packet_screen) gpu_ws_tag_hud_prim(p, 0);
+            if (ui_packet_mask) gpu_ws_tag_screen_mask_quad(p);
         }
     }
     ui_packet_pending = 0;
@@ -46,6 +47,16 @@ static void mmx6_object_view_begin(CPUState *cpu, uint32_t address) {
     unsigned selector = (address == 0x800232d4u || address == 0x800239ccu)
                       ? 0x14u : 0x37u;
     ui_packet_screen = (int8_t)psx_mod_read_byte(cpu->gpr[4] + selector) < 0;
+    /* Turtloid Nightmare darkness: four category6/type5 polygons, subtypes
+     * 13/23/33/43. Only their outer vertical edges extend; the animated light
+     * openings and subtractive blend remain exactly as authored. */
+    uint32_t actor = cpu->gpr[4];
+    ui_packet_mask = address == 0x80023ed8u && ui_packet_screen &&
+        psx_mod_read_byte(0x800ccedcu) == 6u &&
+        actor >= 0x8009c9b0u && actor < 0x8009e1b0u &&
+        (actor - 0x8009c9b0u) % 0x60u == 0 &&
+        psx_mod_read_byte(actor + 1u) == 5u &&
+        (psx_mod_read_byte(actor + 2u) & 15u) == 3u;
     ui_packet_pending = 1;
     ui_packet_begin = packet;
 }
@@ -203,9 +214,20 @@ static void mmx6_resize_placement_scan(CPUState *cpu, uint32_t address) {
     }
     *cpu = saved;
 }
+static int mmx6_native_attack_scene(void) {
+    /* X's state4D owns the screen-filling yellow special-attack sequence.
+     * Its six screen sprites (effect type11/subtype2) form one native 320px
+     * animation. Present it faithfully through startup, flash and recovery;
+     * never change the attack's simulation, enemy reach or guest camera. */
+    return psx_mod_read_word(0x800cced0u) == 0xau &&
+        psx_mod_read_byte(0x800970a0u) != 0 &&
+        psx_mod_read_byte(0x800970a4u) == 1u &&
+        psx_mod_read_byte(0x800970a5u) == 0x4du;
+}
 static void mmx6_widescreen_activate(void) {
     char aspect[16], camera[16];
     if (!mmx6_adaptive_background_activate()) return;
+    gpu_ws_set_native_scene_predicate(mmx6_native_attack_scene);
     resize_state = psx_mod_alloc_guest_memory(8u, 4u);
     if (resize_state)
         (void)psx_mod_register_function_entry_plugin("mmx6.widescreen", 0x80029d18u, mmx6_resize_placement_scan);

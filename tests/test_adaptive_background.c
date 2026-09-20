@@ -159,6 +159,39 @@ int main(void) {
         p=psx_mod_read_word(p)&0xffffffu; assert(++count<=16*108);
     }
     assert(count==16*108);
+    /* Amazon selects one atlas panel, with signed reflection on both sides.
+     * The cave's gutter and the next panel must never become texture sources. */
+    fixture(); ram[0xccedc]=1;
+    ram[0x972a3]=1; ram[0x972a4]=1; ram[0x972eb]=8;
+    ram[0x972f2]=255; ram[0x972ee]=31;
+    int origin=-1;
+    assert(amazon_panorama(2,0,112,&origin)==896 && origin==0);
+    assert(amazon_panorama(2,799,824,&origin)==640 && origin==768);
+    assert(!amazon_panorama(1,799,824,&origin));
+    assert(!amazon_panorama(2,1600,824,&origin));
+    ram[0xccedc]=6; assert(!amazon_panorama(2,799,824,&origin)); ram[0xccedc]=1;
+    half(0x80097202u,1598); half(0x800972aau,799); half(0x800972aeu,768);
+    ram[0x100000+2*128+3*32+4]=2;
+    test_view=(WsViewAnchor){382,1006,-312,0,0};
+    mmx6_adaptive_background_end(2,0x800b91c0u);
+    WsViewAnchor amazon_view=parallax_view(test_view,2,1598);
+    assert(amazon_view.left==191 && amazon_view.shift==-503);
+    for(unsigned bucket=1;bucket<=2;++bucket) {
+        uint32_t q=psx_mod_read_word(0x80090e78u+2*68+bucket*4)&0xffffffu;
+        while(q) {
+            int x=(int16_t)psx_mod_read_word(q+8);
+            int source=768+mmx6_mirror_tile_x(x+799-768,640,&flip);
+            assert(source>=768 && source<1408);
+            assert(bucket==(source>=1024&&source<1280?2u:1u));
+            assert(psx_mod_read_word(q+16)==(uint32_t)amazon_view.shift);
+            assert(psx_mod_read_word(q+28)==(GPU_WS_BG2D_PACKET_MAGIC|(flip?GPU_WS_BG2D_MIRROR_X:0u)));
+            q=psx_mod_read_word(q)&0xffffffu;
+        }
+    }
+    WsViewAnchor narrow=ws_view_anchor(694,0,0,1200);
+    WsViewAnchor far=parallax_view(narrow,2,0);
+    assert(far.pad_left==narrow.pad_left && far.pad_right==narrow.pad_right);
+    assert(far.left-far.pad_left==0); /* Original first scenery pixel at room edge. */
     /* A stale native packet at the reflection edge must not survive alongside
      * the new full-width list, or it reintroduces the moving black seam. */
     fixture(); half(0x80097202u,339);

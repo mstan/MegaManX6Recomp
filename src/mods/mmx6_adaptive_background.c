@@ -104,14 +104,33 @@ void mmx6_adaptive_background_begin(unsigned layer) {
 static int floor_div(int value, int divisor) {
     return value >= 0 ? value / divisor : -((-value + divisor - 1) / divisor);
 }
-static WsViewAnchor intro_parallax_view(WsViewAnchor foreground, unsigned layer, int camera) {
+static WsViewAnchor parallax_view(WsViewAnchor foreground, int divisor, int camera) {
     int extra = (foreground.left + foreground.right +
                  foreground.pad_left + foreground.pad_right) / 2;
-    int divisor = layer == 1 ? 2 : 4;
     int origin = floor_div(camera, divisor) -
-                 floor_div(camera - extra - foreground.shift, divisor);
-    WsViewAnchor v = {origin, 2 * extra - origin, origin - extra, 0, 0};
+                 floor_div(camera - foreground.left, divisor) + foreground.pad_left;
+    WsViewAnchor v = {origin, 2 * extra - origin, origin - extra,
+                      foreground.pad_left, foreground.pad_right};
     return v;
+}
+static WsViewAnchor intro_parallax_view(WsViewAnchor foreground, unsigned layer, int camera) {
+    return parallax_view(foreground, layer == 1 ? 2 : 4, camera);
+}
+
+/* Amazon's independent half-speed layer is an atlas of separate panoramas.
+ * The jungle occupies x=[0,896), the first cave panel x=[768,1408).
+ * Reflect the selected panel, never the empty atlas gutter or the next room's
+ * artwork. Foreground and the full-speed near scenery remain authored maps. */
+static int amazon_panorama(unsigned layer, int sx, int sy, int *origin) {
+    uint32_t b = 0x800972a0u;
+    if (layer != 2 || psx_mod_read_byte(0x800ccedcu) != 1u ||
+        psx_mod_read_byte(0x800cceddu) != 0u ||
+        psx_mod_read_byte(b + 4u) != 1u || psx_mod_read_byte(b + 0x4bu) != 8u ||
+        psx_mod_read_half(b + 0x40u) || psx_mod_read_half(b + 0x42u) ||
+        (int8_t)psx_mod_read_byte(b + 0x52u) >= 0) return 0;
+    if (sy >= 0 && sy < 512 && sx < 896) { *origin = 0; return 896; }
+    if (sy >= 768 && sy < 1024 && sx < 1408) { *origin = 768; return 640; }
+    return 0;
 }
 
 void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
@@ -135,6 +154,14 @@ void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
         WsViewAnchor foreground;
         if (gpu_ws_bg2d_get_view(0, &foreground))
             view = intro_parallax_view(foreground, layer,
+                (int16_t)psx_mod_read_half(0x80097202u));
+    }
+    int panorama_origin = 0;
+    int amazon_width = amazon_panorama(layer, sx, sy, &panorama_origin);
+    if (amazon_width) {
+        WsViewAnchor foreground;
+        if (gpu_ws_bg2d_get_view(0, &foreground))
+            view = parallax_view(foreground, 2,
                 (int16_t)psx_mod_read_half(0x80097202u));
     }
     /* Turtloid layer1 mode5 is an externally selected 320px weather frame,
@@ -174,6 +201,7 @@ void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
     int start_col = sx / 16, start_row = sy / 16;
     int screen_x = -(sx & 15), screen_y = -(sy & 15);
     int panorama_width = parent < 0 ? intro_panorama_width(layer) : 0;
+    if (amazon_width) panorama_width = amazon_width;
     int intro = psx_mod_read_byte(0x800ccedcu) == 0 && psx_mod_read_byte(0x800cceddu) == 0;
     int banks = intro && psx_mod_texture_banks_supported() && load_intro_banks(INTRO_BANK);
     int rain_bank = weather && psx_mod_texture_banks_supported() && load_background_bank(WEATHER_BANK);
@@ -194,7 +222,8 @@ void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
             int factory = layer == 0 ? tile_x >= 2048 : layer == 1 ? tile_x >= 1088 : tile_x >= 1280;
             if (panorama_width) {
                 factory = 0;
-                tile_x = mmx6_mirror_tile_x(tile_x, panorama_width, &flipped);
+                tile_x = panorama_origin + mmx6_mirror_tile_x(
+                    tile_x - panorama_origin, panorama_width, &flipped);
             }
             uint16_t tile = mmx6_map_tile(&map, tile_x,
                 (start_row + row) * 16, psx_mod_read_byte, psx_mod_read_half);
