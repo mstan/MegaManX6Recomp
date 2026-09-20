@@ -1,7 +1,8 @@
 # Adaptive Custom Renderer review
 
 September 19, 2026. Local feature branches: `feat/mmx6-adaptive-renderer`
-in the game and framework. Framework pin: `73fd9402`. This is an experimental
+in the game and framework. Framework pin: `be961603` (function filters and
+snapshot guards in `69570b47`, plus CTest registration). This is an experimental
 review build, not a release or a completed whole-game compatibility claim.
 
 ## Player behavior
@@ -35,10 +36,18 @@ Foreground terrain and actors retain their authored world positions.
 - Background generations clear the revealed strips once per submission and
   draw band, including centered mode. Independent parallax layers retain
   their own scroll and map bounds. Finite rooms can have symmetric padding.
-- Lifetime, draw, initial placement, moving placement and respawn bounds all
-  use the live activation envelope. A stationary expansion invokes the retail
-  placement scanner for newly exposed strips, preserving registers, load
-  pipeline, stack arguments and charged hardware timing.
+- Enemy lifetime, draw and respawn-reset bounds use the live activation
+  envelope. Original placement strips remain unchanged. Each frame, separate
+  supplemental strips invoke the retail scanner for ordinary enemies in the
+  extra view, preserving registers, load pipeline, stack arguments and charged
+  hardware timing. A scoped eligibility filter defers nonenemy categories and
+  the intro boss controller to the original strips. NPC dialogue and boss
+  sequences therefore retain their native activation positions.
+- Framework entry filters are opt-in; existing entry observers keep their
+  callback contract. Generated code, native overlays and the interpreter honor
+  handled returns consistently. Overlay ABI 24 rejects the old callback signature.
+  Save/load operations defer while an entry callback retains host stack state;
+  device and interrupt timing continue normally.
 - The intro panorama profile recognizes stage/area zero and the live far
   layer's mode, base scroll and parent selector. It reflects the opening
   far strip at 640px. The near layer stays in authored order: wreckage gives
@@ -49,9 +58,12 @@ Foreground terrain and actors retain their authored world positions.
   row-major layout. Live guest CLUTs preserve fades/colour animation. Banks
   are reconstructed on demand after loading a save in a fresh process.
 - Intro camera locks inside the continuous exterior/factory scene no longer
-  redefine its visible edges. The renderer uses the original x=0..5440 scene
-  extent while that parallax setup is active. Native camera/trigger state is
-  unchanged; other rooms retain their normal anchoring.
+  redefine its visible edges. The renderer reads the original foreground map
+  bounds (x=0..6656, maximum camera X=6336) while that parallax setup is active.
+  Near and far layers map the host camera's left edge through their native
+  half-speed and quarter-speed scroll, including rounding phase. This avoids
+  excess motion and one-pixel crawling at a clamped view edge. Native camera
+  state is unchanged; other rooms retain their normal anchoring.
 - Framework `04c6dc38` caches loaded-DLL path membership per indexed artifact
   until the append-only loaded set grows. This removes repeated long path
   comparisons during lazy overlay discovery, preserving all live-byte and
@@ -61,7 +73,52 @@ Foreground terrain and actors retain their authored world positions.
 
 ## Validation
 
-### Owner save-slot regression pass
+### Latest parallax and scene-trigger regression pass
+
+The owner's subsequent slot 3 wall-climb reproduction isolated premature
+activation: widened original placement strips spawned the NPC around X=5115
+and put X into forced-walk state 0x1d before the climb. That sequence waits
+for X>=5824, leaving X stranded on the earlier geometry. The same inputs
+with native placement bounds climbed normally without activating the NPC.
+The intro boss controller had the same early-activation exposure.
+
+With separate filtered supplemental strips, normal injected controls completed
+the wall climb, breakable barrier, NPC dialogue and boss entry in the proper
+arena. HP was periodically restored in the private combat run to avoid drill
+deaths; the route used no position warps or trigger patches. A native-overlay
+fallback climb also reached X=5430 without premature NPC activation.
+
+| Check | Result |
+|---|---|
+| UI slots 1, 3, 5 and recovered 6 at 32:9 | 59.85-59.89 gameplay submissions/s |
+| Same four saves at 64:9 | 59.06-60.68 gameplay submissions/s |
+| Same four saves at 4:3 | About 59.8 gameplay submissions/s |
+| Foreground camera X=4322 to 4431 | Near scroll 2161 to 2215; far scroll 1080 to 1107 |
+| Repeated load, move, save and reload | Six cycles passed with callback snapshot guards |
+| Recovered slot 6, fresh process | Movement works; X=5130 to 5101 after left input |
+
+Cadence samples are approximately 1.2 seconds, with one-frame boundary
+variation. All seven game CTest cases pass. Function-filter registry execution,
+overlay callback forwarding, interpreter entry guards, snapshot protocol guards
+and all five overlay publication/dedup scenarios pass. The earlier GL readback
+results below cover the unchanged retained-bank rendering implementation.
+
+Private copies of the owner's latest UI slots 1-5 were migrated from codegen
+`2fd4824f` / ABI 23 to `2caa7102` / ABI 24 after auditing that CPU, hardware and
+arena snapshot layouts are identical. Only header bytes 16-23 changed; snapshot
+payloads are byte-identical. `save-migration.json` records old/new and payload
+hashes. Runtime compatibility guards remain intact. Original saves and an
+additional backup remain unchanged.
+
+Original slot 4 already serializes the faulty forced-walk sequence. The new
+activation policy prevents that sequence starting early, but does not rewrite
+an already-stuck snapshot. UI slot 6 is a recovered copy: cancel the premature
+NPC with its native respawnable-delete effects, clear its forced-control flags
+and return X to normal idle state. No health, camera or position fields were
+patched in that recovery. The original slot 4 remains available for reproduction.
+Slots 7-9 are private diagnostics, not the requested player review route.
+
+### Earlier scene-artwork and performance regression pass
 
 The first intro-only review missed a seam between native and mirrored tiles,
 the factory's texture replacement, internal camera locks and a later runtime
@@ -149,7 +206,9 @@ changes were introduced.
 The original-disc AOT audit covers 56 extracted images, 57 recipes, 71 valid
 published pairs and 21,342 manifest rows. All guards match known input bytes;
 `full_static_coverage_proven` remains false. Cache tag:
-`cg13_2fd4824f_gcc5a1db89_f0`.
+`cg13_2fd4824f_gcc5a1db89_f0` for that earlier build. The latest build repeats
+the original-disc audit with the same coverage counts under
+`cg13_2caa7102_gc961830ce_f0`; all published pairs and guards validate.
 
 ## Local review artifacts and worktrees
 
@@ -165,14 +224,17 @@ rescue refs include game `2d227b9`, framework `d94fd537`, nested runtime
 `41e92d8a` merges current origin/master with the accepted local MMX6 changes.
 No source was pushed, released or merged into master for this review.
 
-Updated executable: `build-review/playtest-2/mmx6-runtime.exe`.
-SHA256: `D1326842BDD6A0DF063085E98295CE0EE3903DB6C3E2E1E14446CDC2701AF4F1`.
-Use the desktop **MMX6 Scene Fixes** shortcut, or
-`F:/Projects/psxrecomp/Play MMX6 Scene Fixes.lnk`. It selects the isolated
-`game.adaptive-scene-review-local.toml`: enabled Custom Renderer, Fit,
-room edges, port 4516 and copies of the owner review saves/memory cards.
+Updated executable: `build-review/playtest-3/mmx6-runtime.exe`.
+SHA256: `0FB8E26A0D8D74F699B4FA9331451F24CBD71FDC91D3525EC93F398E5E142334`.
+Use the desktop **MMX6 Trigger Fixes** shortcut, or
+`F:/Projects/psxrecomp/Play MMX6 Trigger Fixes.lnk`. It selects the isolated
+`game.adaptive-trigger-review-local.toml`: enabled Custom Renderer, Fit,
+room edges, port 4518 and copies of the owner review saves/memory cards under
+`build-review/trigger-fixes/test-saves`. Window title: **MMX6 Trigger Review**.
 It boots normally and does not load a state. Close the older review first.
-The older `review-next` executable/shortcut remains available and unchanged.
+For review, use slot 1 for scroll, slot 3 for the climb/NPC/boss route, and
+slot 6 for the recovered version of slot 4. The older `review-next` and
+`playtest-2` executables/shortcuts remain available and unchanged.
 Resize the window to the desired aspect; 64:9 is an extreme coverage check.
 
 Captures and measurements are under `build-review/review-next/`:
@@ -185,9 +247,18 @@ The new regression evidence is under `build-review/scene-fixes/`:
 `interp-restored.json`, `verified-64-slot1.png` through `verified-64-slot5.png`.
 These private artifacts and game assets are not committed.
 
+Latest evidence is under `build-review/trigger-fixes/`:
+`final-validation.json`, `final-{32,64,43}-slot{1,3,5,6}.png`,
+`parallax-motion.json`, `fallback-climb.png`, `trigger-ab.json`,
+`proper-npc-16.png`, `npc-after-dialogue.png`, `proper-boss-19.png`,
+`save-migration.json` and `slot4-recovery.json`. Original-disc AOT provenance
+is under `build-aot/trigger-fixes/disc-aot-xphfq3me/`; the staged receipt is
+`build-review/playtest-3/AOT_CACHE_AUDIT.json`.
+
 ## Remaining review scope
 
-The reported save-slot problems are fixed in the tested OpenGL paths. The entire game, every narrow
+The reported problems pass the described automated OpenGL checks; owner
+playtesting of the latest changes is pending. The entire game, every narrow
 room, boss arena, transition, respawn path and alternate character has not
 been played through at these widths. Other finite panoramas may need their
 own scene profiles. Mirrored wreckage is deliberately repetitive at 64:9;

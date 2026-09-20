@@ -9,6 +9,7 @@
 #include "../src/mods/mmx6_widescreen_plugin.c"
 
 static PSXModActivationCallback activate;
+static PSXModFunctionFilterCallback placement_filter;
 static struct { uint32_t pc; PSXModFunctionEntryCallback fn; } hooks[10];
 static unsigned hook_count, tag_count, anchor_calls;
 static uint32_t tags[8], packet;
@@ -47,6 +48,11 @@ int psx_mod_register_activation_plugin(const char *id, PSXModActivationCallback 
     activate = fn;
     return 1;
 }
+int psx_mod_register_function_filter_plugin(const char *id, uint32_t pc,
+                                             PSXModFunctionFilterCallback fn) {
+    assert(strcmp(id,"mmx6.widescreen")==0 && pc==0x80029e7cu);
+    placement_filter=fn; return 1;
+}
 int psx_mod_register_function_entry_plugin(const char *id, uint32_t pc,
                                            PSXModFunctionEntryCallback fn) {
     assert(strcmp(id, "mmx6.widescreen") == 0 && hook_count < 10);
@@ -69,6 +75,7 @@ int psx_mod_set_adaptive_display_aspect(uint32_t n, uint32_t d) {
     assert(n == 0 && d == 0); ++adaptive_calls; return 1;
 }
 uint8_t psx_mod_read_byte(uint32_t addr) {
+    if (addr==0x800ccedcu || addr==0x800cceddu) return 0;
     assert(addr >= 0x80091000u && addr < 0x80091080u);
     return object[addr - 0x80091000u];
 }
@@ -156,17 +163,32 @@ int main(void) {
     assert(world_count==4); /* One world prop per retail producer family. */
     memset(&cpu,0,sizeof cpu); cpu.gpr[29]=0x801fff00u;
     CPUState expected=cpu;
-    reveal_margin=138; enter(0x80029d18u,&cpu); assert(!scan_calls);
     reveal_margin=566; enter(0x80029d18u,&cpu);
     assert(scan_calls==2 && stack_arg==0x1234);
-    assert(scan_bounds[0][0]==958 && scan_bounds[0][1]==1434);
-    assert(scan_bounds[1][0]==-114 && scan_bounds[1][1]==362);
+    assert(scan_bounds[0][0]==868 && scan_bounds[0][1]==1434);
+    assert(scan_bounds[1][0]==-114 && scan_bounds[1][1]==452);
     assert(scan_bounds[0][2]==896 && scan_bounds[0][3]==1232);
     assert(scan_directions[0]==1 && scan_directions[1]==2);
     expected.muldiv_ts_done=123;
     assert(!memcmp(&cpu,&expected,sizeof cpu));
-    enter(0x80029d18u,&cpu); assert(scan_calls==2);
+    scan_calls=0;
+    enter(0x80029d18u,&cpu); assert(scan_calls==2); /* Also stationary. */
     reveal_margin=0; enter(0x80029d18u,&cpu); assert(scan_calls==2);
+    /* No changes to native eligibility. Extra scans reject controllers/NPCs
+     * and the intro boss, but leave ordinary enemy difficulty/latches native. */
+    for (unsigned category=0;category<8;++category) {
+        for (unsigned boss=0;boss<2;++boss) {
+            object[3]=(uint8_t)category; object[1]=boss?0x30:2;
+            cpu.gpr[4]=0x80091000u; cpu.gpr[2]=0x1234;
+            supplemental_scan=0;
+            assert(!placement_filter(&cpu,0x80029e7cu) && cpu.gpr[2]==0x1234);
+            supplemental_scan=1;
+            int deferred=placement_filter(&cpu,0x80029e7cu);
+            assert(deferred==(category>=3 || boss));
+            assert(cpu.gpr[2]==(deferred?1:0x1234));
+        }
+    }
+    supplemental_scan=0;
     const char *aspects[] = {"Fit", "16:9", "21:9", "32:9", "old-invalid", NULL};
     const unsigned numerators[] = {16, 16, 21, 32, 16, 16};
     for (unsigned i = 0; i < 6; ++i) {

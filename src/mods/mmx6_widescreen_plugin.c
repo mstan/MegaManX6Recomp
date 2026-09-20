@@ -65,20 +65,38 @@ static void mmx6_actor_view_bounds(CPUState *cpu, uint32_t address) {
         cpu->gpr[5] += (uint32_t)margin;
 }
 static uint32_t resize_state;
+static int supplemental_scan;
+/* Categories 0..2 are difficulty-gated enemies. Other categories allocate
+ * event, NPC and effect pools whose constructors may immediately take control
+ * of X. Intro enemy 0x30 is the boss, also started by placement activation.
+ * Only supplemental scans are filtered: retail scans keep their exact strips,
+ * offsets, difficulty and latch rules, including subsequent activation. */
+static int mmx6_extra_placement_filter(CPUState *cpu, uint32_t address) {
+    (void)address;
+    if (!supplemental_scan) return 0;
+    uint32_t record = cpu->gpr[4];
+    unsigned category = psx_mod_read_byte(record + 3u) & 15u;
+    int boss = psx_mod_read_byte(0x800ccedcu) == 0 &&
+               psx_mod_read_byte(0x800cceddu) == 0 &&
+               psx_mod_read_byte(record + 1u) == 0x30;
+    if (category < 3u && !boss) return 0;
+    cpu->gpr[2] = 1; /* Native eligibility result: defer this placement. */
+    return 1;
+}
 static int signed_bound(int value) {
     return value < -32768 ? -32768 : value > 32767 ? 32767 : value;
 }
-/* Native placement scans run only when the camera moves. On a stationary
- * expansion, scan the two newly exposed strips through the original scanner,
- * with its directional placement offsets, latches and allocator checks. */
+/* Keep retail activation unmodified. Scan the revealed strips separately so
+ * enemies can become visible on movement or stationary resize, while script
+ * controllers wait for the original scan to reach them. No persistent pending
+ * list: restored saves and changing aspect use the same guest placement flags. */
 static void mmx6_resize_placement_scan(CPUState *cpu, uint32_t address) {
     (void)address;
     int margin = psx_mod_widescreen_x_margin();
-    int previous = (int32_t)psx_mod_read_word(resize_state + 4u);
-    int initialized = psx_mod_read_word(resize_state) == 0x58365253u;
+    /* Preserve the existing allocation layout for earlier review saves. */
     psx_mod_write_word(resize_state, 0x58365253u);
     psx_mod_write_word(resize_state + 4u, (uint32_t)margin);
-    if (!initialized || margin <= previous || margin <= 0) return;
+    if (margin <= 0) return;
     int x = (int16_t)psx_mod_read_half(0x80097202u);
     int y = (int16_t)psx_mod_read_half(0x80097206u);
     CPUState saved = *cpu;
@@ -87,13 +105,15 @@ static void mmx6_resize_placement_scan(CPUState *cpu, uint32_t address) {
         cpu->gpr[29] -= 32u;
         uint32_t arg = cpu->gpr[29] + 16u;
         uint32_t original_arg = psx_mod_read_word(arg);
-        cpu->gpr[4] = (uint32_t)signed_bound(side ? x - 48 - margin : x + 320 + previous);
-        cpu->gpr[5] = (uint32_t)signed_bound(side ? x - previous : x + 368 + margin);
+        cpu->gpr[4] = (uint32_t)signed_bound(side ? x - 48 - margin : x + 368);
+        cpu->gpr[5] = (uint32_t)signed_bound(side ? x - 48 : x + 368 + margin);
         cpu->gpr[6] = (uint32_t)signed_bound(y - 48);
         cpu->gpr[7] = (uint32_t)signed_bound(y + 288);
         psx_mod_write_word(arg, side ? 2u : 1u);
         cpu->gpr[31] = side ? 0x80029dccu : 0x80029d84u;
+        supplemental_scan = 1;
         psx_dispatch_call(cpu, 0x80029f38u, cpu->gpr[31]);
+        supplemental_scan = 0;
         psx_mod_write_word(arg, original_arg);
         /* Keep hardware completion deadlines and all globally charged cycles;
          * restore the interrupted caller's registers and load pipeline. */
@@ -108,6 +128,7 @@ static void mmx6_widescreen_activate(void) {
     resize_state = psx_mod_alloc_guest_memory(8u, 4u);
     if (resize_state)
         (void)psx_mod_register_function_entry_plugin("mmx6.widescreen", 0x80029d18u, mmx6_resize_placement_scan);
+    (void)psx_mod_register_function_filter_plugin("mmx6.widescreen", 0x80029e7cu, mmx6_extra_placement_filter);
     if (!psx_mod_option_value(PKG, FEATURE, "camera", camera, sizeof camera))
         strcpy(camera, "edges");
     /* SLUS-01395 v1.1 FUN_8002820C clamps layer0+0xA between +0x1E

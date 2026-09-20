@@ -71,12 +71,30 @@ int mmx6_adaptive_background_activate(void) {
 
 void mmx6_adaptive_background_begin(unsigned layer) {
     if (layer) return;
-    /* Intro exterior/factory is one continuous authored scene, x=0..5440.
-     * Its ladder/event actors tighten native camera locks inside this scene;
-     * those locks must not suddenly move the widescreen origin. Use the
-     * original scene edges until the parallax setup changes for another room.
-     * Derive the selection from guest state every frame (also after loads). */
-    gpu_ws_set_view_bounds_override(intro_panorama_width(2) != 0, 0, 5120);
+    /* Ladder/event locks are internal to this continuous stage. Its original
+     * map bounds include the final tower and boss room; the initial camera
+     * maximum (5120) stops before them and is not the scene's right edge. */
+    int lo = psx_mod_read_byte(0x80097245u) * 256;
+    int hi = (psx_mod_read_byte(0x80097246u) + 1) * 256 - 320;
+    gpu_ws_set_view_bounds_override(intro_panorama_width(2) != 0, lo, hi);
+}
+
+/* Retail intro scroll functions derive X from foreground X / 2 and X / 4.
+ * Apply that same mapping to the host camera's left edge. Copying a full-speed
+ * foreground shift (then clamping each layer separately) changes parallax when
+ * the view approaches an edge. This also preserves the original artwork at
+ * the stage's left edge as the viewport expands. */
+static int floor_div(int value, int divisor) {
+    return value >= 0 ? value / divisor : -((-value + divisor - 1) / divisor);
+}
+static WsViewAnchor intro_parallax_view(WsViewAnchor foreground, unsigned layer, int camera) {
+    int extra = (foreground.left + foreground.right +
+                 foreground.pad_left + foreground.pad_right) / 2;
+    int divisor = layer == 1 ? 2 : 4;
+    int origin = floor_div(camera, divisor) -
+                 floor_div(camera - extra - foreground.shift, divisor);
+    WsViewAnchor v = {origin, 2 * extra - origin, origin - extra, 0, 0};
+    return v;
 }
 
 void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
@@ -95,6 +113,12 @@ void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
         uint32_t p = 0x800971f8u + (unsigned)parent * 0x54u;
         sx += (int16_t)psx_mod_read_half(p + 10u);
         sy += (int16_t)psx_mod_read_half(p + 14u);
+    }
+    if (layer && parent < 0 && intro_panorama_width(2)) {
+        WsViewAnchor foreground;
+        if (gpu_ws_bg2d_get_view(0, &foreground))
+            view = intro_parallax_view(foreground, layer,
+                (int16_t)psx_mod_read_half(0x80097202u));
     }
     Mmx6TileMap map = {
         psx_mod_read_word(0x1f800004u), psx_mod_read_word(0x1f800008u),

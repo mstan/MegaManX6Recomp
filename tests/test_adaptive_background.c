@@ -14,7 +14,7 @@ int psx_mod_read_disc_file(const char *p,void *b,uint32_t c,uint32_t *n) { (void
 int psx_mod_define_texture_bank(uint16_t id,uint32_t w,uint32_t h,const uint16_t *p) { (void)id;(void)w;(void)h;(void)p;return 0; }
 void psx_mod_set_texture_bank_resolver(PSXModTextureBankResolver r) { assert(r); }
 void psx_mod_set_texture_bank_batching(int e) { assert(e); }
-void gpu_ws_set_view_bounds_override(int e,int lo,int hi) { (void)e; assert(lo==0 && hi==5120); }
+void gpu_ws_set_view_bounds_override(int e,int lo,int hi) { (void)e; assert(lo==0 && hi==7872); }
 static uint8_t *memory(uint32_t p, unsigned n) {
     p &= 0x1fffffffu;
     if (p >= 0x800000u && p - 0x800000u <= sizeof extra - n) return extra + p - 0x800000u;
@@ -59,6 +59,24 @@ static void fixture(void) {
 }
 int main(void) {
     assert(mmx6_adaptive_background_activate()); fixture();
+    mmx6_adaptive_background_begin(0);
+    for (int extra=85;extra<=2048;extra+=157) {
+        for (unsigned layer=1;layer<=2;++layer) {
+            int divisor=layer==1?2:4;
+            /* At the left edge original artwork stays at its original X. */
+            WsViewAnchor fg=ws_view_anchor(extra,0,0,6336);
+            WsViewAnchor bg=intro_parallax_view(fg,layer,0);
+            assert(bg.shift==-extra && bg.left==0 && bg.right==extra*2);
+            /* A stationary host camera at the right edge cannot make slower
+             * layers crawl or jitter while the native camera keeps moving. */
+            for (int camera=6336-extra;camera<=6336;++camera) {
+                fg=ws_view_anchor(extra,camera,0,6336);
+                bg=intro_parallax_view(fg,layer,camera);
+                assert(camera/divisor-bg.left==(6336-extra*2)/divisor);
+                assert(bg.left+bg.right==extra*2);
+            }
+        }
+    }
     Mmx6TileMap m={0x80100000u,0x80110000u,0x80140000u,32,128,0,0,31};
     assert(mmx6_map_tile(&m,0,0,psx_mod_read_byte,psx_mod_read_half)==1);
     assert(mmx6_map_tile(&m,1024,0,psx_mod_read_byte,psx_mod_read_half)==2);
