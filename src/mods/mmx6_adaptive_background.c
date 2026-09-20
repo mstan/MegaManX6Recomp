@@ -1,7 +1,9 @@
 #include "mmx6_adaptive_background.h"
+#include "mmx6_adaptive_assets.h"
 #include "mod_plugins.h"
 #include "gpu.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 /* Separate 1MiB per layer per guest display buffer. At 32 bytes per packet,
  * each slice holds 2048 columns x16 rows: the full 32768px signed-coordinate
@@ -10,14 +12,40 @@
 #define LAYER_BYTES (1024u * 1024u)
 #define ARENA_BYTES (6u * LAYER_BYTES)
 static uint32_t arena;
+static int intro_banks;
+#define INTRO_BANK 0x6001u
+#define FACTORY_BANK 0x6002u
 
-/* The intro map is also an atlas for later camera scenes. Its opening
- * panorama is 640px wide (+one streaming guard tile), and the nearer wreckage
- * ends at 1088px, where tiles requiring a different scene's palettes begin.
- * Repeat only these two backdrops while the game's opening parallax setup is
- * active. Terrain, native packets, other stages and later scenes stay direct.
- * Matching the live scroll setup makes this survive snapshots/transitions
- * without a host-side "current scene" cache. */
+static int load_intro_banks(uint16_t id) {
+    if (id != INTRO_BANK && id != FACTORY_BANK) return 0;
+    if (intro_banks) return intro_banks > 0;
+    intro_banks = -1;
+    uint32_t size = 0;
+    if (!psx_mod_read_disc_file("ROCK_X6.DAT", NULL, 0, &size) || size > 128u * 1024u * 1024u) return 0;
+    uint8_t *data = (uint8_t *)malloc(size);
+    uint16_t *pixels = (uint16_t *)calloc(1024u * 512u, sizeof(uint16_t));
+    int ok = 0;
+    if (data && pixels && psx_mod_read_disc_file("ROCK_X6.DAT", data, size, &size)) {
+        const uint8_t *opening = mmx6_intro_asset(data, size, 0x10000u);
+        const uint8_t *factory = mmx6_intro_asset(data, size, 0x16u);
+        if (opening && factory) {
+            mmx6_unpack_intro_bank(pixels, opening, 0);
+            ok = psx_mod_define_texture_bank(INTRO_BANK, 1024u, 512u, pixels);
+            mmx6_unpack_intro_bank(pixels, factory, 1);
+            ok = psx_mod_define_texture_bank(FACTORY_BANK, 1024u, 512u, pixels) && ok;
+        }
+    }
+    free(pixels); free(data);
+    intro_banks = ok ? 1 : -1;
+    if (!ok) fprintf(stderr, "MMX6 Custom Renderer: original intro texture assets unavailable\n");
+    return ok;
+}
+
+/* The intro's foreground switches texture ownership inside a shared pillar
+ * at x=2048, its near background at x=1088. The native texture-swap flag is
+ * insufficient: a wide view sees both regions at once, in either direction.
+ * Only the distant opening panorama repeats; the near layer contains authored
+ * factory machinery beyond the wreckage, which must never be reflected. */
 static int intro_panorama_width(unsigned layer) {
     if (layer == 0 || psx_mod_read_byte(0x800ccedcu) != 0 ||
         psx_mod_read_byte(0x800cceddu) != 0) return 0;
@@ -26,7 +54,7 @@ static int intro_panorama_width(unsigned layer) {
         psx_mod_read_half(far + 0x40u) != 0 ||
         psx_mod_read_half(far + 0x42u) != 640 ||
         (int8_t)psx_mod_read_byte(far + 0x52u) >= 0) return 0;
-    return layer == 2 ? 640 : 1088;
+    return layer == 2 ? 640 : 0;
 }
 
 int mmx6_adaptive_background_activate(void) {
@@ -36,7 +64,19 @@ int mmx6_adaptive_background_activate(void) {
         return 0;
     }
     gpu_ws_bg2d_set_host_arena(arena, ARENA_BYTES);
+    psx_mod_set_texture_bank_resolver(load_intro_banks);
+    psx_mod_set_texture_bank_batching(1);
     return 1;
+}
+
+void mmx6_adaptive_background_begin(unsigned layer) {
+    if (layer) return;
+    /* Intro exterior/factory is one continuous authored scene, x=0..5440.
+     * Its ladder/event actors tighten native camera locks inside this scene;
+     * those locks must not suddenly move the widescreen origin. Use the
+     * original scene edges until the parallax setup changes for another room.
+     * Derive the selection from guest state every frame (also after loads). */
+    gpu_ws_set_view_bounds_override(intro_panorama_width(2) != 0, 0, 5120);
 }
 
 void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
@@ -65,7 +105,7 @@ void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
     if (!mmx6_ram_range(map.map, 1) || !mmx6_ram_range(map.metatiles, 512) ||
         !mmx6_ram_range(map.descriptors, 4)) return;
     int left = (view.left + 15) / 16, right = (view.right + 15) / 16;
-    if (left + right > 2048 || left > 2048 || right > 2027) {
+    if (left + 21 + right > 2048 || left > 2048 || right > 2027) {
         fprintf(stderr, "MMX6 Custom Renderer: viewport exceeds signed packet coordinates\n");
         return;
     }
@@ -78,12 +118,26 @@ void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
     int start_col = sx / 16, start_row = sy / 16;
     int screen_x = -(sx & 15), screen_y = -(sy & 15);
     int panorama_width = parent < 0 ? intro_panorama_width(layer) : 0;
+    int intro = psx_mod_read_byte(0x800ccedcu) == 0 && psx_mod_read_byte(0x800cceddu) == 0;
+    int banks = intro && psx_mod_texture_banks_supported() && load_intro_banks(INTRO_BANK);
+    /* Replace this layer's current OT lists, including its central 21 columns.
+     * Mixing unchanged native columns with reflected extras leaves a moving
+     * gap at the panorama edge. Keep the other display buffer and guest ring
+     * untouched. All fallible setup/capacity checks precede this operation. */
+    for (unsigned g = layer; g <= layer + 3u; g += 3u) for (unsigned i = 0; i < 17u; ++i) {
+        uint32_t offset = buffer * 408u + g * 68u + i * 4u;
+        uint32_t head = 0x80090e78u + offset;
+        psx_mod_write_word(head, 0);
+        psx_mod_write_word(0x8008ec18u + offset, head);
+    }
     for (int row = 0; row < 16; ++row) {
         for (int col = -left; col < 21 + right; ++col) {
-            if (col >= 0 && col < 21) continue; /* Native tiles already submitted. */
             int tile_x = (start_col + col) * 16, flipped = 0;
-            if (panorama_width)
+            int factory = layer == 0 ? tile_x >= 2048 : layer == 1 ? tile_x >= 1088 : tile_x >= 1280;
+            if (panorama_width) {
+                factory = 0;
                 tile_x = mmx6_mirror_tile_x(tile_x, panorama_width, &flipped);
+            }
             uint16_t tile = mmx6_map_tile(&map, tile_x,
                 (start_row + row) * 16, psx_mod_read_byte, psx_mod_read_half);
             if (!tile) continue;
@@ -104,10 +158,11 @@ void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
                 ((tile & 0x4000u) ? 0x02000000u : 0u));
             psx_mod_write_word(cursor + 8u, (uint16_t)x | ((uint32_t)(uint16_t)y << 16));
             psx_mod_write_word(cursor + 12u, mmx6_tile_uvclut(desc));
-            psx_mod_write_word(cursor + 16u, (uint32_t)view.shift);
+            uint16_t bank = banks && bucket < 12u ? (factory ? FACTORY_BANK : INTRO_BANK) : 0;
+            psx_mod_write_word(cursor + 16u, bank ? (uint16_t)view.shift | (uint32_t)bank << 16 : (uint32_t)view.shift);
             psx_mod_write_word(cursor + 20u, (uint32_t)view.pad_left);
             psx_mod_write_word(cursor + 24u, (uint32_t)view.pad_right);
-            psx_mod_write_word(cursor + 28u, GPU_WS_BG2D_PACKET_MAGIC |
+            psx_mod_write_word(cursor + 28u, (bank ? GPU_WS_BG2D_BANK_PACKET_MAGIC : GPU_WS_BG2D_PACKET_MAGIC) |
                 (flipped ? GPU_WS_BG2D_MIRROR_X : 0u));
             psx_mod_write_word(tail, (psx_mod_read_word(tail) & 0xff000000u) | (cursor & 0xffffffu));
             psx_mod_write_word(tail_slot, cursor);

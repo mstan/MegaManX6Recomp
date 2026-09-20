@@ -21,6 +21,7 @@ static unsigned scan_calls, world_count;
 static int32_t scan_bounds[2][4];
 static uint32_t scan_directions[2];
 int mmx6_adaptive_background_activate(void) { return 1; }
+void mmx6_adaptive_background_begin(unsigned layer) { assert(layer == 2); }
 void mmx6_adaptive_background_end(unsigned layer, uint32_t p) { assert(layer == 2 && p == packet); }
 uint32_t psx_mod_alloc_guest_memory(uint32_t n, uint32_t a) { assert(n==8 && a==4); return 0x9f000000u; }
 uint16_t psx_mod_read_half(uint32_t p) {

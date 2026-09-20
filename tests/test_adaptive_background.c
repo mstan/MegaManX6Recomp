@@ -8,6 +8,13 @@
 
 static uint8_t ram[0x200000], extra[ARENA_BYTES];
 static WsViewAnchor test_view;
+static int support_banks;
+int psx_mod_texture_banks_supported(void) { return support_banks; }
+int psx_mod_read_disc_file(const char *p,void *b,uint32_t c,uint32_t *n) { (void)p;(void)b;(void)c;(void)n;return 0; }
+int psx_mod_define_texture_bank(uint16_t id,uint32_t w,uint32_t h,const uint16_t *p) { (void)id;(void)w;(void)h;(void)p;return 0; }
+void psx_mod_set_texture_bank_resolver(PSXModTextureBankResolver r) { assert(r); }
+void psx_mod_set_texture_bank_batching(int e) { assert(e); }
+void gpu_ws_set_view_bounds_override(int e,int lo,int hi) { (void)e; assert(lo==0 && hi==5120); }
 static uint8_t *memory(uint32_t p, unsigned n) {
     p &= 0x1fffffffu;
     if (p >= 0x800000u && p - 0x800000u <= sizeof extra - n) return extra + p - 0x800000u;
@@ -68,7 +75,7 @@ int main(void) {
     assert(!intro_panorama_width(2));
     ram[0x972a4]=3; ram[0x972f2]=255;
     half(0x800972e2u,640);
-    assert(intro_panorama_width(2)==640 && intro_panorama_width(1)==1088);
+    assert(intro_panorama_width(2)==640 && intro_panorama_width(1)==0);
     assert(!intro_panorama_width(0));
     ram[0xccedc]=1; assert(!intro_panorama_width(2)); ram[0xccedc]=0;
     half(0x800972e0u,1280); assert(!intro_panorama_width(2));
@@ -85,17 +92,34 @@ int main(void) {
             assert(p>=0x800000u && p<0x900000u && !(p&31));
             uint32_t xy=psx_mod_read_word(p+8u);
             int x=(int16_t)xy;
-            assert(x>=336 && x<1728);
+            assert(x>=0 && x<1728);
             assert(psx_mod_read_word(p+12u)==mmx6_tile_uvclut(bucket==1?0x01123000u:0x02564000u));
             assert(psx_mod_read_word(p+16u)==(uint32_t)-693);
             assert(psx_mod_read_word(p+28u)==0x58364247u);
             if(x>=1024 && x<1280) { assert(bucket==2); saw_far=1; }
-            p=psx_mod_read_word(p)&0xffffffu; assert(++count<=16*87);
+            p=psx_mod_read_word(p)&0xffffffu; assert(++count<=16*108);
         }
     }
-    assert(saw_far && count==16*87);
-    /* This backdrop's extra packets must reflect active-scene art, including
-     * pixel orientation, instead of reading another scene beyond x=1088. */
+    assert(saw_far && count==16*108);
+    /* Scene textures coexist across the transition, including a restored
+     * packet's signed view shift. Ordinary upper VRAM pages stay unbanked. */
+    fixture(); support_banks=1; intro_banks=1;
+    half(0x80097202u, 1536);
+    mmx6_adaptive_background_end(0,0x800b91c0u);
+    uint32_t bankp=psx_mod_read_word(0x80090e7cu)&0xffffffu;
+    int saw_opening=0,saw_factory=0;
+    while(bankp) {
+        int x=(int16_t)psx_mod_read_word(bankp+8u);
+        uint32_t meta=psx_mod_read_word(bankp+16u);
+        assert((int16_t)meta==-693);
+        assert((meta>>16)==(x+1536>=2048?FACTORY_BANK:INTRO_BANK));
+        assert(psx_mod_read_word(bankp+28u)==GPU_WS_BG2D_BANK_PACKET_MAGIC);
+        if(x+1536>=2048)saw_factory=1;else saw_opening=1;
+        bankp=psx_mod_read_word(bankp)&0xffffffu;
+    }
+    assert(saw_opening && saw_factory);support_banks=0;
+    /* Both native-center columns and the extension reflect the same panorama,
+     * including its internal pixel orientation. */
     fixture();
     ram[0x972a3]=1; ram[0x972a4]=3; ram[0x972f2]=255; ram[0x972ee]=31;
     half(0x800972e2u,640);
@@ -109,10 +133,36 @@ int main(void) {
         assert(psx_mod_read_word(p+12u)==mmx6_tile_uvclut(0x01123000u));
         assert(psx_mod_read_word(p+28u)==(GPU_WS_BG2D_PACKET_MAGIC |
             (flip?GPU_WS_BG2D_MIRROR_X:0u)));
-        p=psx_mod_read_word(p)&0xffffffu; assert(++count<=16*87);
+        p=psx_mod_read_word(p)&0xffffffu; assert(++count<=16*108);
     }
-    assert(count==16*87);
+    assert(count==16*108);
+    /* A stale native packet at the reflection edge must not survive alongside
+     * the new full-width list, or it reintroduces the moving black seam. */
+    fixture(); half(0x80097202u,339);
+    psx_mod_write_word(0x80090e7cu,0x000b91c0u);
+    psx_mod_write_word(0x8008ec1cu,0x800b91c0u);
+    psx_mod_write_word(0x800b91c0u,0x03000000u);
+    mmx6_adaptive_background_end(0,0x800b91c0u);
+    assert((psx_mod_read_word(0x80090e7cu)&0xffffffu)>=0x800000u);
+    assert(psx_mod_read_word(0x800b91c0u)==0x03000000u);
     fixture(); test_view=(WsViewAnchor){0}; mmx6_adaptive_background_end(0,0x800b91c0u);
     for(unsigned i=0;i<sizeof extra;++i) assert(!extra[i]);
+    /* Original-disc parser and the two different native upload layouts. */
+    static uint8_t dat[2048u*2u+0x40000u];
+    static uint16_t pixels[1024u*512u];
+    uint32_t sector=1,length=2048u+0x40000u,type=0x10000u,n=0x40000u,one=1;
+    memcpy(dat+94*8,&sector,4);memcpy(dat+94*8+4,&length,4);
+    memcpy(dat+2048,&one,4);memcpy(dat+2052,&length,4);
+    memcpy(dat+2056,&type,4);memcpy(dat+2060,&n,4);
+    const uint8_t *asset=mmx6_intro_asset(dat,sizeof dat,type);
+    assert(asset==dat+4096);
+    assert(!mmx6_intro_asset(dat,sizeof dat-1,type));
+    assert(!mmx6_intro_asset(dat,sizeof dat,0x16u));
+    dat[4096+32768]=0xad;dat[4096+32769]=0xba;
+    mmx6_unpack_intro_bank(pixels,asset,0);
+    assert(pixels[256u*1024u+384u]==0xbaad);
+    memset(pixels,0,sizeof pixels);mmx6_unpack_intro_bank(pixels,asset,1);
+    assert(pixels[288u*1024u+320u]==0xbaad);
+    assert(pixels[256u*1024u+384u]==0);
     puts("adaptive background: >64-ring columns, texture buckets, packet metadata, finite maps, native ring and 4:3 identity PASS");
 }

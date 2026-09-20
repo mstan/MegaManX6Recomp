@@ -5,14 +5,15 @@
 
 #include <string.h>
 
-/* Default-off Custom Renderer. Native background packets stay within the
- * original ring/budget; the host appends extra authored tiles to their native
- * texture buckets. Visibility, lifetime and activation share the live view. */
+/* Default-off Custom Renderer. Native producers stay within their ring/budget;
+ * the host replaces each layer's tile lists with a continuous expanded view.
+ * Visibility, lifetime and activation share the live view. */
 #define PKG "mmx6.enhancement.widescreen"
 #define FEATURE "widescreen"
 
 static void mmx6_bg_view_begin(CPUState *cpu, uint32_t address) {
     (void)address;
+    mmx6_adaptive_background_begin(cpu->gpr[4]);
     gpu_ws_bg2d_begin_view_layer(cpu->gpr[4], psx_mod_read_word(0x1f800108u), 6u);
 }
 static void mmx6_bg_view_end(CPUState *cpu, uint32_t address) {

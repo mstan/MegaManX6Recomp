@@ -48,5 +48,6 @@ static inline int mmx6_mirror_tile_x(int x, int width, int *flipped) {
 }
 
 int mmx6_adaptive_background_activate(void);
+void mmx6_adaptive_background_begin(unsigned layer);
 void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet);
 #endif
