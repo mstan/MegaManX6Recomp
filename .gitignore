@@ -17,6 +17,7 @@
 
 # Local PlayStation assets (disc image, extracted boot EXE, memory cards)
 /mmx6/
+/mmx6
 /isos/
 /saves/
 
@@ -76,5 +77,6 @@ __pycache__/
 /generated-tweaks/
 /build-tweaks/
 /game.tweaks-*.toml
+/game.*-local.toml
 # tweaks_engine.py port-validation scratch (staged vanilla bin, generated profiles, dumps)
 /_portcheck/

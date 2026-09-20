@@ -47,7 +47,7 @@ Important files:
 - `seeds/`: Ghidra-derived function starts and game-specific seed data.
 - `tools/regen.ps1`: regenerates the recompiled C output.
 - `tools/package_release.ps1`: builds the redistributable release zip.
-- `psxrecomp-v4.pin`: framework commit this project is known-good against.
+- `psxrecomp-v4` Git submodule: the pinned framework revision.
 - `ISSUES.md`: game-specific issue log.
 - `DISC.md`: source-disc identity and verification hashes.
 - `WIDESCREEN.md`: design notes for the experimental 16:9 mode.
@@ -69,7 +69,7 @@ playable preview rather than a certified full playthrough.
 | Stage gameplay | Works (not yet verified all the way to the end) |
 | Memory-card save / load | Works (standard PS1 `.mcd`, emulator-compatible) |
 | Renderers | Software **and** OpenGL (GPU); Software is the default this release (see ISSUES.md #7), OpenGL selectable |
-| Widescreen 16:9 | Experimental, opt-in (2D wider field of view) |
+| Custom Renderer | Experimental, opt-in; adaptive Fit or fixed 16:9 / 21:9 / 32:9 |
 
 Known issues: see [`ISSUES.md`](ISSUES.md) for the current issue log (including
 renderer notes) and the remaining enhancement follow-ups.
@@ -116,10 +116,10 @@ These are the framework features that are already working in this build:
 - **Opt-in FMV skips.** The Capcom logo and opening movie play by default.
   Separate skip features are available under **Mods**; the deprecated generic
   Settings toggle is disabled.
-- **Experimental widescreen (16:9).** A genuine wider field of view for the 2D
-  stage engine — more of the scene is drawn on both sides, not a stretched
-  picture. Opt-in and experimental; some 2D/HUD/FMV elements and background
-  seams can still look off. See `WIDESCREEN.md`.
+- **Custom Renderer.** Enable it in **Mods** for an adaptive 2D field of view.
+  **Fit** follows the window without an aspect ceiling; fixed 16:9, 21:9 and
+  32:9 choices are also available. The default remains stock 4:3. This is an
+  experimental review build; see [validation and known limits](docs/ADAPTIVE_RENDERER.md).
 - **DualShock controller by default.** MMX6 will not poll buttons until it
   detects an analog-capable pad, so the runtime presents a DualShock by default.
   Adjustable stick deadzone; per-player override in the launcher.

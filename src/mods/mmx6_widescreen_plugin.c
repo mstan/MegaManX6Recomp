@@ -1,21 +1,13 @@
 #include "mod_plugins.h"
 #include "gpu.h"
 #include "cpu_state.h"
+#include "mmx6_adaptive_background.h"
 
 #include <string.h>
 
-/*
- * Mega Man X6's widescreen hooks (full_2d gameplay classification, the widened
- * bg2d tile loop + streamer, reveal-clear, HUD corner-anchor range, intro-stage
- * cull relaxes) live in generated/runtime code and are identity at 4:3. Only
- * their player-facing ACTIVATION moves here, out of generic recomp-ui Settings
- * and into the mod catalog — game.toml sets [widescreen] offer = false so the
- * launcher no longer carries an aspect row for this title.
- *
- * The package declares one choice option instead of the two Settings rows it
- * replaces (aspect + a separate experimental 21:9 row), so 16:9 and 21:9 are
- * presented as what they are: two settings of one experimental enhancement.
- */
+/* Default-off Custom Renderer. Native background packets stay within the
+ * original ring/budget; the host appends extra authored tiles to their native
+ * texture buckets. Visibility, lifetime and activation share the live view. */
 #define PKG "mmx6.enhancement.widescreen"
 #define FEATURE "widescreen"
 
@@ -25,7 +17,9 @@ static void mmx6_bg_view_begin(CPUState *cpu, uint32_t address) {
 }
 static void mmx6_bg_view_end(CPUState *cpu, uint32_t address) {
     (void)address;
-    gpu_ws_bg2d_end_view_layer(cpu->gpr[4], psx_mod_read_word(0x1f800108u));
+    uint32_t packet = psx_mod_read_word(0x1f800108u);
+    gpu_ws_bg2d_end_view_layer(cpu->gpr[4], packet);
+    mmx6_adaptive_background_end(cpu->gpr[4], packet);
 }
 /* The four object renderers select screen coordinates when their camera
  * selector is negative: +0x14 for sprite objects, +0x37 for polygon objects.
@@ -34,12 +28,14 @@ static void mmx6_bg_view_end(CPUState *cpu, uint32_t address) {
  * This preserves dialogue composites as one centered group without confusing
  * foreground props in the same packet arena with UI. */
 static uint32_t ui_packet_begin;
-static int ui_packet_pending;
+static int ui_packet_pending, ui_packet_screen;
 static void mmx6_finish_ui_packets(uint32_t end) {
     if (ui_packet_pending && end >= ui_packet_begin &&
         end - ui_packet_begin <= 1000u * 0x28u) {
-        for (uint32_t p = ui_packet_begin; p < end; p += 0x28u)
-            gpu_ws_tag_hud_prim(p, 0);
+        for (uint32_t p = ui_packet_begin; p < end; p += 0x28u) {
+            psx_mod_tag_world_primitive(p, !ui_packet_screen);
+            if (ui_packet_screen) gpu_ws_tag_hud_prim(p, 0);
+        }
     }
     ui_packet_pending = 0;
 }
@@ -48,7 +44,8 @@ static void mmx6_object_view_begin(CPUState *cpu, uint32_t address) {
     mmx6_finish_ui_packets(packet);
     unsigned selector = (address == 0x800232d4u || address == 0x800239ccu)
                       ? 0x14u : 0x37u;
-    ui_packet_pending = (int8_t)psx_mod_read_byte(cpu->gpr[4] + selector) < 0;
+    ui_packet_screen = (int8_t)psx_mod_read_byte(cpu->gpr[4] + selector) < 0;
+    ui_packet_pending = 1;
     ui_packet_begin = packet;
 }
 static void mmx6_object_view_end(CPUState *cpu, uint32_t address) {
@@ -66,39 +63,79 @@ static void mmx6_actor_view_bounds(CPUState *cpu, uint32_t address) {
     if (margin > 0 && (int8_t)psx_mod_read_byte(cpu->gpr[4] + 0x14u) >= 0)
         cpu->gpr[5] += (uint32_t)margin;
 }
+static uint32_t resize_state;
+static int signed_bound(int value) {
+    return value < -32768 ? -32768 : value > 32767 ? 32767 : value;
+}
+/* Native placement scans run only when the camera moves. On a stationary
+ * expansion, scan the two newly exposed strips through the original scanner,
+ * with its directional placement offsets, latches and allocator checks. */
+static void mmx6_resize_placement_scan(CPUState *cpu, uint32_t address) {
+    (void)address;
+    int margin = psx_mod_widescreen_x_margin();
+    int previous = (int32_t)psx_mod_read_word(resize_state + 4u);
+    int initialized = psx_mod_read_word(resize_state) == 0x58365253u;
+    psx_mod_write_word(resize_state, 0x58365253u);
+    psx_mod_write_word(resize_state + 4u, (uint32_t)margin);
+    if (!initialized || margin <= previous || margin <= 0) return;
+    int x = (int16_t)psx_mod_read_half(0x80097202u);
+    int y = (int16_t)psx_mod_read_half(0x80097206u);
+    CPUState saved = *cpu;
+    for (unsigned side = 0; side < 2; ++side) {
+        *cpu = saved;
+        cpu->gpr[29] -= 32u;
+        uint32_t arg = cpu->gpr[29] + 16u;
+        uint32_t original_arg = psx_mod_read_word(arg);
+        cpu->gpr[4] = (uint32_t)signed_bound(side ? x - 48 - margin : x + 320 + previous);
+        cpu->gpr[5] = (uint32_t)signed_bound(side ? x - previous : x + 368 + margin);
+        cpu->gpr[6] = (uint32_t)signed_bound(y - 48);
+        cpu->gpr[7] = (uint32_t)signed_bound(y + 288);
+        psx_mod_write_word(arg, side ? 2u : 1u);
+        cpu->gpr[31] = side ? 0x80029dccu : 0x80029d84u;
+        psx_dispatch_call(cpu, 0x80029f38u, cpu->gpr[31]);
+        psx_mod_write_word(arg, original_arg);
+        /* Keep hardware completion deadlines and all globally charged cycles;
+         * restore the interrupted caller's registers and load pipeline. */
+        if (cpu->muldiv_ts_done > saved.muldiv_ts_done) saved.muldiv_ts_done = cpu->muldiv_ts_done;
+        if (cpu->gte_ts_done > saved.gte_ts_done) saved.gte_ts_done = cpu->gte_ts_done;
+    }
+    *cpu = saved;
+}
 static void mmx6_widescreen_activate(void) {
     char aspect[16], camera[16];
+    if (!mmx6_adaptive_background_activate()) return;
+    resize_state = psx_mod_alloc_guest_memory(8u, 4u);
+    if (resize_state)
+        (void)psx_mod_register_function_entry_plugin("mmx6.widescreen", 0x80029d18u, mmx6_resize_placement_scan);
     if (!psx_mod_option_value(PKG, FEATURE, "camera", camera, sizeof camera))
         strcpy(camera, "edges");
     /* SLUS-01395 v1.1 FUN_8002820C clamps layer0+0xA between +0x1E
      * (minimum) and +0x1C (maximum). This is read-only host presentation. */
     if (strcmp(camera, "edges") == 0) {
         gpu_ws_set_view_anchor(0x80097202u, 0x80097216u, 0x80097214u, 0x800971F8u);
-        (void)psx_mod_register_function_entry_plugin("mmx6.widescreen", 0x800270d0u, mmx6_bg_view_begin);
-        (void)psx_mod_register_function_entry_plugin("mmx6.widescreen", 0x80026eccu, mmx6_bg_view_end);
-        static const uint32_t object_renderers[] = {
-            0x800232d4u, 0x800239ccu, 0x80023ed8u, 0x800241d4u
-        };
-        for (unsigned i = 0; i < sizeof object_renderers / sizeof object_renderers[0]; i++)
-            (void)psx_mod_register_function_entry_plugin("mmx6.widescreen",
-                object_renderers[i], mmx6_object_view_begin);
-        (void)psx_mod_register_function_entry_plugin("mmx6.widescreen", 0x80022e44u, mmx6_object_view_end);
     }
+    (void)psx_mod_register_function_entry_plugin("mmx6.widescreen", 0x800270d0u, mmx6_bg_view_begin);
+    (void)psx_mod_register_function_entry_plugin("mmx6.widescreen", 0x80026eccu, mmx6_bg_view_end);
+    static const uint32_t object_renderers[] = {
+        0x800232d4u, 0x800239ccu, 0x80023ed8u, 0x800241d4u
+    };
+    for (unsigned i = 0; i < sizeof object_renderers / sizeof object_renderers[0]; i++)
+        (void)psx_mod_register_function_entry_plugin("mmx6.widescreen",
+            object_renderers[i], mmx6_object_view_begin);
+    (void)psx_mod_register_function_entry_plugin("mmx6.widescreen", 0x80022e44u, mmx6_object_view_end);
     /* Applies to both edge-anchored and original centered widescreen. */
     (void)psx_mod_register_function_entry_plugin("mmx6.widescreen", 0x8002cbfcu, mmx6_actor_view_bounds);
     (void)psx_mod_register_function_entry_plugin("mmx6.widescreen", 0x8002ccb0u, mmx6_actor_view_bounds);
 
-    /* Fall back to the manifest default rather than guessing wide, so a failed
-     * read can only ever under-apply. 21:9 is requested as ADAPTIVE (follows
-     * the window up to that cap) because a hard 21:9 letterboxes players whose
-     * display is narrower; the fixed selection sets the initial window, which
-     * is why it is applied first in both branches. */
+    /* Fit follows the live drawable with no aspect ceiling. Fixed choices
+     * request the same renderer at an explicit aspect. */
     if (!psx_mod_option_value(PKG, FEATURE, "aspect", aspect, sizeof aspect))
-        strcpy(aspect, "16:9");
-
-    (void)psx_mod_set_fixed_display_aspect(16u, 9u);
-    if (strcmp(aspect, "21:9") == 0)
-        (void)psx_mod_set_adaptive_display_aspect(21u, 9u);
+        strcpy(aspect, "Fit");
+    unsigned numerator = strcmp(aspect, "21:9") == 0 ? 21u :
+        strcmp(aspect, "32:9") == 0 ? 32u : 16u;
+    (void)psx_mod_set_fixed_display_aspect(numerator, 9u);
+    if (strcmp(aspect, "16:9") && strcmp(aspect, "21:9") && strcmp(aspect, "32:9"))
+        (void)psx_mod_set_adaptive_display_aspect(0u, 0u);
 }
 
 PSX_MOD_CONSTRUCTOR(mmx6_register_widescreen_plugin) {
