@@ -1,8 +1,8 @@
 # Adaptive Custom Renderer review
 
-September 20, 2026. Local feature branches: `feat/mmx6-adaptive-renderer`
-in the game and framework. Framework pin: `86af4b94` (retains the completed
-frontbuffer during recurring host background rebuilds). This is an experimental
+September 20, 2026. Feature branches: `feat/mmx6-adaptive-renderer`
+in the game and framework. Framework pin: `39ee7d79` (adaptive screen masks
+and native effect presentation, including the earlier frontbuffer fix). This is an experimental
 review build, not a release or a completed whole-game compatibility claim.
 
 ## Player behavior
@@ -405,16 +405,36 @@ The first staging attempt encountered a DLL locked by the private test; after
 closing it, the audited cache was staged and every artifact hash rechecked.
 Current receipt: `build-review/playtest-6/AOT_CACHE_AUDIT.json`.
 
-## Remaining review scope
+## Parked draft and remaining work
 
-The reported problems pass the described automated OpenGL checks; owner
-playtesting of the latest changes is pending. The entire game, every narrow
-room, boss arena, transition, respawn path and alternate character has not
-been played through at these widths. Other finite panoramas may need their
-own scene profiles. Mirrored wreckage is deliberately repetitive at 64:9;
-it is not newly authored scenery. Retained texture banks currently require
-OpenGL; other renderers have not received the same scene-residency fix/review.
-Keep the renderer experimental until broader owner review is complete.
+The owner requested parking the complete renderer work in a draft MMX6 PR
+after the September 20 playtest. Resume from `feat/mmx6-adaptive-renderer`
+and its pinned framework revision; preserve the isolated worktrees, review
+build, current roaming cards and save slots. This is an experimental review
+snapshot, not a release or full-game acceptance.
+
+Owner results for playtest 6:
+
+- UI2: the saved darkness section now fills the adaptive width. Continuing
+  into the **next section with darkness and rain together** restores the old
+  roughly 16:9-sized mask. The darkness fix is partial. Reproduce by advancing
+  from slot 2 into that combined effect, then identify its producer/profile;
+  the four polygons covered by the current fix are not sufficient evidence
+  for every darkness variant.
+- UI3: the main Amazon jungle panorama is fixed. A **lower row to the right**,
+  barely visible in the expanded view, still has a black background. Capture
+  its layer coordinates and authored artwork before extending that region.
+- UI4: the special-attack presentation is confirmed good.
+- UI5: the cave backdrop and scrolling correction are confirmed good.
+
+The two remaining reports above are recorded for the next session and have
+not been investigated or fixed in this parked snapshot. The entire game,
+every narrow room, boss arena, transition, respawn path and alternate
+character has not been played through at these widths. Other finite
+panoramas may need their own scene profiles. Mirrored wreckage is
+deliberately repetitive at 64:9; it is not newly authored scenery. Retained
+texture banks currently require OpenGL; other renderers have not received
+the same scene-residency fix/review.
 
 Central tracking remains `beads-eio.1.9` (game) and `beads-eio.3.168`
 (framework). Local updates are durable; central Dolt push encountered a
