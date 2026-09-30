@@ -101,6 +101,31 @@ static int mmx6_fixed_actor_view_filter(CPUState *cpu, uint32_t address) {
     psx_dispatch_call(cpu, 0x8002ccb0u, caller);
     return 1;
 }
+/* Recycle Lab's ride armor clears its draw flag before calling the common
+ * widened draw classifier. Its stage update first uses 8002CAB4, a separate
+ * fixed 4:3 box test, and skips that classifier when the armor is just left of
+ * the native view. Keep the vertical and 4:3 tests native; widen only this
+ * ride armor's early horizontal update gate. */
+static int mmx6_recycle_ride_armor_view_filter(CPUState *cpu, uint32_t address) {
+    (void)address;
+    int margin = psx_mod_widescreen_x_margin();
+    uint32_t actor = cpu->gpr[4];
+    if (margin <= 0 || psx_mod_read_byte(0x800ccedcu) != 4u ||
+        psx_mod_read_byte(0x800cceddu) != 0u ||
+        !mmx6_ram_range(actor, 0x18u)) return 0;
+    uint32_t record = psx_mod_read_word(actor + 0x10u);
+    if (!mmx6_ram_range(record, 8u) ||
+        psx_mod_read_byte(record + 1u) != 0x1eu ||
+        (psx_mod_read_byte(record + 3u) & 15u) != 3u) return 0;
+    int selector = (int8_t)psx_mod_read_byte(actor + 0x14u);
+    if (selector < 0 || selector >= 3) return 0;
+    uint32_t layer = 0x800971f8u + (unsigned)selector * 0x54u;
+    int dx = (int16_t)(psx_mod_read_half(actor + 10u) - psx_mod_read_half(layer + 10u));
+    int dy = (int16_t)(psx_mod_read_half(actor + 14u) - psx_mod_read_half(layer + 14u));
+    cpu->gpr[2] = (dx < -64 - margin || dx >= 384 + margin ||
+                   (uint16_t)(dy + 64) >= 368u) ? 1u : 0u;
+    return 1;
+}
 static int mmx6_intro_scene(void) {
     return psx_mod_read_byte(0x800ccedcu) == 0 &&
            psx_mod_read_byte(0x800cceddu) == 0;
@@ -234,6 +259,7 @@ static void mmx6_widescreen_activate(void) {
     (void)psx_mod_register_function_filter_plugin("mmx6.widescreen", 0x80029e7cu, mmx6_extra_placement_filter);
     (void)psx_mod_register_function_filter_plugin("mmx6.widescreen", 0x8002cb50u, mmx6_fixed_actor_view_filter);
     (void)psx_mod_register_function_filter_plugin("mmx6.widescreen", 0x8002cd6cu, mmx6_fixed_actor_view_filter);
+    (void)psx_mod_register_function_filter_plugin("mmx6.widescreen", 0x8002cab4u, mmx6_recycle_ride_armor_view_filter);
     (void)psx_mod_register_function_filter_plugin("mmx6.widescreen", 0x800f9334u, mmx6_intro_npc_start_filter);
     if (!psx_mod_option_value(PKG, FEATURE, "camera", camera, sizeof camera))
         strcpy(camera, "edges");
@@ -255,10 +281,10 @@ static void mmx6_widescreen_activate(void) {
     (void)psx_mod_register_function_entry_plugin("mmx6.widescreen", 0x8002cbfcu, mmx6_actor_view_bounds);
     (void)psx_mod_register_function_entry_plugin("mmx6.widescreen", 0x8002ccb0u, mmx6_actor_view_bounds);
 
-    /* Fit follows the live drawable with no aspect ceiling. Fixed choices
+    /* Adaptive follows the live drawable with no aspect ceiling. Fixed choices
      * request the same renderer at an explicit aspect. */
     if (!psx_mod_option_value(PKG, FEATURE, "aspect", aspect, sizeof aspect))
-        strcpy(aspect, "Fit");
+        strcpy(aspect, "adaptive");
     unsigned numerator = strcmp(aspect, "21:9") == 0 ? 21u :
         strcmp(aspect, "32:9") == 0 ? 32u : 16u;
     (void)psx_mod_set_fixed_display_aspect(numerator, 9u);

@@ -192,6 +192,22 @@ int main(void) {
     WsViewAnchor far=parallax_view(narrow,2,0);
     assert(far.pad_left==narrow.pad_left && far.pad_right==narrow.pad_right);
     assert(far.left-far.pad_left==0); /* Original first scenery pixel at room edge. */
+    /* Recycle Lab's half-speed layer must hold the same source edge as the
+     * foreground camera slides along the room's minimum. */
+    for (int camera=1740;camera<=1840;camera+=100) {
+        fixture(); ram[0xccedc]=4; ram[0xccedd]=0;
+        ram[0x972a3]=1; ram[0x972a4]=4; ram[0x972f2]=255;
+        ram[0x972ee]=31;
+        half(0x80097202u,(uint16_t)camera);
+        half(0x800972aau,(uint16_t)(camera/2));
+        test_view=(WsViewAnchor){camera-1600,1422-(camera-1600),
+                                 camera-1600-711,0,0};
+        mmx6_adaptive_background_end(2,0x800b91c0u);
+        WsViewAnchor lab_view=parallax_view(test_view,2,camera);
+        assert(camera/2-lab_view.left==800);
+        uint32_t labp=psx_mod_read_word(0x80090e78u+2*68+4)&0xffffffu;
+        assert(labp && psx_mod_read_word(labp+16u)==(uint32_t)lab_view.shift);
+    }
     /* A stale native packet at the reflection edge must not survive alongside
      * the new full-width list, or it reintroduces the moving black seam. */
     fixture(); half(0x80097202u,339);

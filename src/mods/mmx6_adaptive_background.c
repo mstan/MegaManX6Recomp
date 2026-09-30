@@ -158,7 +158,15 @@ void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
     }
     int panorama_origin = 0;
     int amazon_width = amazon_panorama(layer, sx, sy, &panorama_origin);
-    if (amazon_width) {
+    /* Recycle Lab's distant machinery scrolls at half foreground speed.
+     * At the room's left edge the foreground view shifts right as the camera
+     * moves, but copying that full shift to this layer pulls its artwork away
+     * from the left side and leaves a growing black strip. */
+    int recycle_half_scroll = layer == 2 && parent < 0 &&
+        psx_mod_read_byte(0x800ccedcu) == 4u &&
+        psx_mod_read_byte(0x800cceddu) == 0u &&
+        psx_mod_read_byte(b + 4u) == 4u;
+    if (amazon_width || recycle_half_scroll) {
         WsViewAnchor foreground;
         if (gpu_ws_bg2d_get_view(0, &foreground))
             view = parallax_view(foreground, 2,

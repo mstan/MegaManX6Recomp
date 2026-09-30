@@ -10,7 +10,7 @@
 
 static PSXModActivationCallback activate;
 static PSXModFunctionFilterCallback placement_filter;
-static PSXModFunctionFilterCallback fixed_view_filter, npc_start_filter;
+static PSXModFunctionFilterCallback fixed_view_filter, ride_armor_filter, npc_start_filter;
 static struct { uint32_t pc; PSXModFunctionEntryCallback fn; } hooks[10];
 static unsigned hook_count, tag_count, anchor_calls;
 static uint32_t tags[8], packet;
@@ -38,6 +38,8 @@ void mmx6_adaptive_background_begin(unsigned layer) { assert(layer == 2); }
 void mmx6_adaptive_background_end(unsigned layer, uint32_t p) { assert(layer == 2 && p == packet); }
 uint32_t psx_mod_alloc_guest_memory(uint32_t n, uint32_t a) { assert(n==8 && a==4); return 0x9f000000u; }
 uint16_t psx_mod_read_half(uint32_t p) {
+    if (p==0x8009100au || p==0x8009100eu)
+        return (uint16_t)(object[p-0x80091000u] | object[p-0x80091000u+1u]<<8);
     if(p==0x80092004u || p==0x80092006u)
         return (uint16_t)(placement[p-0x80092000u] | placement[p-0x80092000u+1u]<<8);
     assert(p==0x80097202u || p==0x80097206u);
@@ -78,6 +80,7 @@ int psx_mod_register_function_filter_plugin(const char *id, uint32_t pc,
     assert(strcmp(id,"mmx6.widescreen")==0);
     if(pc==0x80029e7cu) placement_filter=fn;
     else if(pc==0x8002cb50u || pc==0x8002cd6cu) fixed_view_filter=fn;
+    else if(pc==0x8002cab4u) ride_armor_filter=fn;
     else { assert(pc==0x800f9334u); npc_start_filter=fn; }
     return 1;
 }
@@ -279,6 +282,33 @@ int main(void) {
             assert(cpu.gpr[6]==fixed_view_radii[1] && cpu.gpr[31]==before.gpr[31]);
         }
     }
+    /* The saved Recycle Lab armor is 78px left of the native camera and was
+     * skipped before its widened draw helper. The early gate must admit it at
+     * wide aspects without changing 4:3, other objects or vertical reach. */
+    memset(object,0,sizeof object); memset(placement,0,sizeof placement);
+    stage=4; area=0; actor_record=0x80092000u;
+    placement[1]=0x1e; placement[3]=3;
+    camera_x=3135; camera_y=224;
+    object[10]=0xf1; object[11]=0x0b; /* x=3057 */
+    object[14]=0x80; object[15]=0x01; /* y=384 */
+    cpu.gpr[4]=0x80091000u; cpu.gpr[2]=0x1234;
+    reveal_margin=0;
+    assert(!ride_armor_filter(&cpu,0x8002cab4u) && cpu.gpr[2]==0x1234);
+    reveal_margin=138;
+    assert(ride_armor_filter(&cpu,0x8002cab4u) && cpu.gpr[2]==0);
+    object[10]=0xff; object[11]=0x0a; /* x=2815, outside the wide guard */
+    assert(ride_armor_filter(&cpu,0x8002cab4u) && cpu.gpr[2]==1);
+    object[10]=0xf1; object[11]=0x0b;
+    object[14]=0x20; object[15]=0x02; /* y=544, outside vertically */
+    assert(ride_armor_filter(&cpu,0x8002cab4u) && cpu.gpr[2]==1);
+    object[14]=0x80; object[15]=0x01;
+    placement[1]=0x0b; cpu.gpr[2]=0x1234;
+    assert(!ride_armor_filter(&cpu,0x8002cab4u) && cpu.gpr[2]==0x1234);
+    placement[1]=0x1e;
+    stage=0; assert(!ride_armor_filter(&cpu,0x8002cab4u));
+    stage=4; object[0x14]=255;
+    assert(!ride_armor_filter(&cpu,0x8002cab4u));
+    stage=area=0;
     memset(object,0,sizeof object); memset(placement,0,sizeof placement);
     object[1]=placement[1]=8; object[4]=1; placement[3]=5;
     actor_record=0x80092000u; cpu.gpr[4]=0x80091000u;

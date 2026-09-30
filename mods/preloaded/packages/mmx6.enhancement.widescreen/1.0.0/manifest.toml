@@ -1,9 +1,9 @@
 format_version = 5
 id = "mmx6.enhancement.widescreen"
 version = "1.0.0"
-name = "Mega Man X6 Custom Renderer"
+name = "Mega Man X6 Widescreen"
 author = "mstan"
-description = "An adaptive field of view with expanded terrain, anchored HUD and room-edge framing. Fit to Window follows the current window without an aspect limit."
+description = "An adaptive field of view with expanded terrain, anchored HUD and room-edge framing. Adaptive follows the current window without an aspect limit."
 resolver = "declarative"
 save_compatibility = "shared"
 
@@ -18,7 +18,7 @@ disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
 # here, where the experimental status is stated and the default is off.
 [[feature]]
 id = "widescreen"
-name = "Custom Renderer"
+name = "Widescreen"
 description = "Expand the view with adjacent terrain and actors. Experimental: stage and object coverage is still being validated."
 group = "Display"
 default_enabled = false
@@ -27,14 +27,14 @@ default_enabled = false
 feature = "widescreen"
 id = "aspect"
 label = "Aspect"
-description = "Fit to Window follows live resizing. Fixed choices retain their selected aspect."
+description = "Adaptive follows live resizing. Fixed choices retain their selected aspect."
 group = "Display"
 type = "choice"
-default = "Fit"
+default = "adaptive"
 
 [[option.choice]]
-value = "Fit"
-label = "Fit to Window"
+value = "adaptive"
+label = "Adaptive"
 
 [[option.choice]]
 value = "16:9"
