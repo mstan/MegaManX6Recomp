@@ -170,6 +170,12 @@ if(BUILD_TESTING)
 
     find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
+    add_test(
+        NAME mmx6_release_config_test
+        COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_release_config.py"
+    )
+
     # Clean-room CD-ROM EDC/ECC recompute (tools/edc_ecc.py) — the Tweaks apply
     # path's replacement for the former GPLv3 error_recalc.exe. Pure Python, no
     # disc image needed: the suite checks the Reed-Solomon syndromes directly.

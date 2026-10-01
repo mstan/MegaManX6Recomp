@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DEV_CONFIG = ROOT / "game.toml"
 RELEASE_CONFIG = ROOT / "packaging" / "release" / "game.toml"
 PARITY_SECTIONS = ("widescreen",)
+PARITY_RECOMPILER_KEYS = ("mod_function_entry_funcs",)
 MOD_OWNED_VIDEO_KEYS = {
     "auto_skip_fmv": False,
     "offer_skip_fmv": False,
@@ -55,6 +56,14 @@ def main() -> int:
                     f"release={release_values[key]!r}"
                 )
 
+    for key in PARITY_RECOMPILER_KEYS:
+        dev_value = dev.get("recompiler", {}).get(key)
+        release_value = release.get("recompiler", {}).get(key)
+        if dev_value != release_value:
+            failures.append(
+                f"recompiler.{key}: dev={dev_value!r}, release={release_value!r}"
+            )
+
     for key, expected in MOD_OWNED_VIDEO_KEYS.items():
         for label, config in (("dev", dev), ("release", release)):
             actual = config.get("video", {}).get(key)
@@ -74,7 +83,7 @@ def main() -> int:
         return 1
 
     sections = ", ".join(f"[{name}]" for name in PARITY_SECTIONS)
-    print(f"release config parity passed for {sections} and mod-owned video keys")
+    print(f"release config parity passed for {sections}, overlay hooks and mod-owned video keys")
     return 0
 
 
