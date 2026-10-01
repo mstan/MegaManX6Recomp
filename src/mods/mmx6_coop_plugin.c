@@ -1,0 +1,375 @@
+/* Milestone-one development plugin. Not part of the preloaded release catalog.
+ * The native world still runs once. A second player pass projects a host-owned
+ * context into the game's singleton player addresses, then restores P1.
+ * Resource evidence: SLUS-01395 USA v1.1, Tweaks workbook IngameTable and
+ * FilesIndex; instruction boundaries verified against the original executable.
+ */
+#include "mod_plugins.h"
+#include "cpu_state.h"
+#include "sio.h"
+#include "mmx6_coop_assets.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define PLAYER 0x800970A0u
+#define PLAY 0x800CCED0u
+#define OVERLAY 0x801EA000u
+#define OVERLAY_SIZE 0xB000u
+#define SCRATCH 0x1F800000u
+#define ASSET_SPACE 0x80000u
+#define FRAME_ARENA 0x20000u
+
+typedef struct {
+    uint8_t body[0x158];
+    uint8_t shots[0x1400];
+    uint8_t trails[0x120];
+    uint8_t effects[0xF0];
+} PlayerContext;
+typedef struct { uint32_t source; uint16_t id; uint8_t colors[32]; } SpriteBank;
+static PlayerContext p2, p1;
+static uint8_t saved_overlay[OVERLAY_SIZE], zero_overlay[OVERLAY_SIZE];
+static uint8_t saved_play[0xE0], saved_camera[0x100];
+static uint8_t *zero_compressed;
+static size_t compressed_size;
+static uint32_t assets, assembly, palette_source, active_palette, packets, diagnostic;
+static uint32_t saved_resources[4], frame_count;
+static uint8_t saved_palette_dirty;
+static uint16_t previous_input;
+static SpriteBank banks[1024];
+static unsigned bank_count;
+static int inside, ready, enrolled, failed;
+
+static uint32_t le32(const uint8_t *p) {
+    return (uint32_t)p[0] | ((uint32_t)p[1]<<8) |
+           ((uint32_t)p[2]<<16) | ((uint32_t)p[3]<<24);
+}
+static void capture(uint32_t addr, void *data, size_t n) {
+    uint8_t *p = data;
+    for (size_t i=0;i<n;++i) p[i]=psx_mod_read_byte(addr+(uint32_t)i);
+}
+static void project(uint32_t addr, const void *data, size_t n) {
+    const uint8_t *p = data;
+    for (size_t i=0;i<n;++i) psx_mod_write_byte(addr+(uint32_t)i,p[i]);
+}
+static void capture_player(PlayerContext *p) {
+    capture(PLAYER,p->body,sizeof p->body);
+    capture(0x800950A0,p->shots,sizeof p->shots);
+    capture(0x800972F8,p->trails,sizeof p->trails);
+    capture(0x800911A8,p->effects,sizeof p->effects);
+}
+static void project_player(const PlayerContext *p) {
+    project(PLAYER,p->body,sizeof p->body);
+    project(0x800950A0,p->shots,sizeof p->shots);
+    project(0x800972F8,p->trails,sizeof p->trails);
+    project(0x800911A8,p->effects,sizeof p->effects);
+}
+static void code_bank(const uint8_t *p) {
+    for (unsigned i=0;i<OVERLAY_SIZE;i+=4) {
+        uint32_t v=le32(p+i);
+        if (psx_mod_read_word(OVERLAY+i)!=v)
+            psx_mod_write_code_word(OVERLAY+i,v);
+    }
+}
+static uint32_t guest(CPUState *cpu, uint32_t address, uint32_t a0, uint32_t a1) {
+    /* Preserve the caller's architectural registers, not elapsed guest time.
+     * Dispatch handles nested calls, interrupts and compiled/interpreted code. */
+    uint32_t regs[32], data[32], ctrl[32];
+    uint32_t pc=cpu->pc, hi=cpu->hi, lo=cpu->lo;
+    memcpy(regs,cpu->gpr,sizeof regs);
+    memcpy(data,cpu->gte_data,sizeof data);
+    memcpy(ctrl,cpu->gte_ctrl,sizeof ctrl);
+    cpu->pc=0; cpu->gpr[4]=a0; cpu->gpr[5]=a1;
+    psx_dispatch_call(cpu,address,regs[31]);
+    uint32_t result=cpu->gpr[2];
+    memcpy(cpu->gpr,regs,sizeof regs);
+    memcpy(cpu->gte_data,data,sizeof data);
+    memcpy(cpu->gte_ctrl,ctrl,sizeof ctrl);
+    cpu->pc=pc; cpu->hi=hi; cpu->lo=lo;
+    return result;
+}
+
+static uint8_t *disc_file(const char *name, uint32_t *size) {
+    uint8_t *p;
+    if (!psx_mod_read_disc_file(name,NULL,0,size) || !*size) return NULL;
+    p=malloc(*size);
+    if (!p) return NULL;
+    if (!psx_mod_read_disc_file(name,p,*size,size)) { free(p); return NULL; }
+    return p;
+}
+static int load_assets(void) {
+    uint32_t n;
+    uint8_t *file=disc_file("ROCK_X6.BIN",&n);
+    Mmx6AssetView v, graphics, sprites, palette;
+    if (!file) return 0;
+    if (!mmx6_coop_overlay(file,n,1,&v) || v.size>sizeof zero_overlay || v.type!=0x3D) {
+        free(file); return 0;
+    }
+    memcpy(zero_overlay,v.data,v.size);
+    free(file);
+    file=disc_file("ROCK_X6.DAT",&n);
+    if (!file) return 0;
+    if (!mmx6_coop_dat_asset(file,n,85,3,&graphics) || graphics.type!=2 ||
+        !mmx6_coop_dat_asset(file,n,85,10,&sprites) || sprites.type!=3 ||
+        !mmx6_coop_dat_asset(file,n,85,0,&palette) || palette.type!=9 ||
+        graphics.size+sprites.size+palette.size+0x4040>ASSET_SPACE) { free(file); return 0; }
+    zero_compressed=malloc(graphics.size);
+    if (!zero_compressed) { free(file); return 0; }
+    memcpy(zero_compressed,graphics.data,graphics.size); compressed_size=graphics.size;
+    assembly=assets+(((uint32_t)graphics.size+15u) & ~15u);
+    palette_source=assembly+(((uint32_t)sprites.size+15u) & ~15u);
+    active_palette=palette_source+(((uint32_t)palette.size+15u) & ~15u);
+    project(assets,graphics.data,graphics.size);
+    project(assembly,sprites.data,sprites.size);
+    project(palette_source,palette.data,palette.size);
+    project(active_palette,palette.data,palette.size);
+    free(file);
+    fprintf(stdout,"mmx6 co-op: Zero resources loaded; status/input at %08X\n",diagnostic);
+    fflush(stdout);
+    return 1;
+}
+static void enter_zero(void) {
+    capture_player(&p1);
+    capture(OVERLAY,saved_overlay,sizeof saved_overlay);
+    capture(PLAY,saved_play,sizeof saved_play);
+    capture(0x800971F8,saved_camera,sizeof saved_camera);
+    saved_resources[0]=psx_mod_read_word(SCRATCH+0x14);
+    saved_resources[1]=psx_mod_read_word(SCRATCH+0x1C);
+    saved_resources[2]=psx_mod_read_word(SCRATCH+0x24);
+    saved_resources[3]=psx_mod_read_word(SCRATCH+0x28);
+    saved_palette_dirty=psx_mod_read_byte(0x800C4560);
+    project_player(&p2);
+    code_bank(zero_overlay);
+    psx_mod_write_word(SCRATCH+0x14,assets);
+    psx_mod_write_word(SCRATCH+0x1C,assembly);
+    psx_mod_write_word(SCRATCH+0x24,palette_source);
+    psx_mod_write_word(SCRATCH+0x28,active_palette);
+    psx_mod_write_byte(PLAY+0x38,1);
+    psx_mod_write_byte(PLAY+0x5E,5);
+}
+static void leave_zero(void) {
+    capture_player(&p2);
+    project_player(&p1);
+    code_bank(saved_overlay);
+    psx_mod_write_word(SCRATCH+0x14,saved_resources[0]);
+    psx_mod_write_word(SCRATCH+0x1C,saved_resources[1]);
+    psx_mod_write_word(SCRATCH+0x24,saved_resources[2]);
+    psx_mod_write_word(SCRATCH+0x28,saved_resources[3]);
+    psx_mod_write_byte(0x800C4560,saved_palette_dirty);
+    /* Prototype keeps scripts and progression owned by P1. The later lifecycle
+     * milestone replaces this blanket rollback with explicit per-owner fields. */
+    project(PLAY,saved_play,sizeof saved_play);
+    project(0x800971F8,saved_camera,sizeof saved_camera);
+}
+static void enroll(CPUState *cpu) {
+    uint32_t x=psx_mod_read_word(PLAYER+8), y=psx_mod_read_word(PLAYER+12);
+    memset(&p2,0,sizeof p2);
+    enter_zero();
+    psx_mod_write_byte(PLAY+0x1E,0);
+    guest(cpu,0x8003BD24,0,0); /* Native actor initialization, including animation table. */
+    psx_mod_write_word(PLAYER+8,x+(24u<<16));
+    psx_mod_write_word(PLAYER+12,y);
+    psx_mod_write_word(PLAYER+0x18,x+(24u<<16));
+    psx_mod_write_word(PLAYER+0x1C,y);
+    psx_mod_write_byte(PLAYER+3,1);
+    psx_mod_write_byte(PLAYER+4,1);
+    guest(cpu,0x8003D718,PLAYER,0); /* Character's own unlocks/parts. */
+    guest(cpu,0x8003D630,PLAYER,0);
+    guest(cpu,0x8003AD18,PLAYER,0); /* Native idle transition. */
+    leave_zero();
+    enrolled=1; previous_input=0;
+    fprintf(stdout,"mmx6 co-op: Zero enrolled at (%u,%u)\n",x>>16,y>>16);
+    fflush(stdout);
+}
+static void controller(CPUState *cpu, uint32_t address) {
+    (void)address;
+    if (inside || failed) return;
+    /* Only the normal gameplay driver's post-player boundary. */
+    if (cpu->gpr[31]!=0x80020C70u) return;
+    if (psx_mod_read_byte(PLAY)!=0x0A || !psx_mod_read_byte(PLAYER)) {
+        enrolled=0; return;
+    }
+    if (psx_mod_read_byte(PLAYER+4)!=1 || psx_mod_read_byte(PLAYER+5)<2 ||
+        psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C)) return;
+    inside=1;
+    if (!ready) {
+        ready=load_assets();
+        if (!ready) { failed=1; fprintf(stderr,"mmx6 co-op: resource validation failed\n"); }
+    }
+    if (ready && !enrolled) enroll(cpu);
+    if (ready && enrolled) {
+        uint16_t raw=(uint16_t)~sio_get_pad_buttons_slot(1);
+        uint8_t saved_input[6];
+        if (psx_mod_read_byte(diagnostic+0x30))
+            raw=(uint16_t)~psx_mod_read_half(diagnostic+0x34);
+        raw=(uint16_t)((raw<<8)|(raw>>8)); /* Native PadRead byte order. */
+        capture(0x800C456C,saved_input,sizeof saved_input);
+        enter_zero();
+        psx_mod_write_half(0x800C456C,raw);
+        psx_mod_write_half(0x800C456E,previous_input);
+        psx_mod_write_half(0x800C4570,(uint16_t)(raw & ~previous_input));
+        previous_input=raw;
+        guest(cpu,0x8003CD44,0,0);
+        guest(cpu,0x80034DCC,0,0);
+        guest(cpu,0x8002012C,0,0); /* This player's attack pool, never enemies/world. */
+        guest(cpu,0x8002F288,PLAYER,0); /* Native terrain/platform contact. */
+        leave_zero();
+        project(0x800C456C,saved_input,sizeof saved_input);
+        ++frame_count;
+        psx_mod_write_word(diagnostic,0x434F4F50);
+        psx_mod_write_word(diagnostic+4,frame_count);
+        project(diagnostic+8,p2.body+8,8);
+        project(diagnostic+16,p2.body+2,6);
+        psx_mod_write_byte(diagnostic+24,p2.body[0x5C]);
+        psx_mod_write_half(diagnostic+26,raw);
+        psx_mod_write_word(diagnostic+36,psx_mod_read_word(PLAY+0x90));
+        project(diagnostic+0x100,p2.body,sizeof p2.body);
+        project(diagnostic+0x300,p2.shots,sizeof p2.shots);
+    }
+    inside=0;
+}
+
+static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut) {
+    uint32_t offset, packed, source;
+    uint8_t decoded[32768];
+    uint16_t pixels[256*256];
+    size_t written, palette_offset;
+    unsigned tiles;
+    uint8_t colors[32];
+    if (table<assets || table-assets>=compressed_size ||
+        (size_t)frame*4+4>compressed_size-(table-assets) || clut<0x7800) return 0;
+    offset=table-assets;
+    packed=le32(zero_compressed+offset+frame*4);
+    source=offset+(packed&0xFFFFF); tiles=packed>>20;
+    palette_offset=(size_t)(clut-0x7800)*32;
+    if (!tiles || tiles>256 || source>=compressed_size ||
+        palette_offset+32>0x4000) return 0;
+    capture(active_palette+(uint32_t)palette_offset,colors,sizeof colors);
+    for (unsigned i=0;i<bank_count;++i)
+        if (banks[i].source==source && !memcmp(banks[i].colors,colors,sizeof colors)) return banks[i].id;
+    if (bank_count==1024 || !mmx6_coop_decode_sprite(zero_compressed+source,
+            compressed_size-source,decoded,sizeof decoded,&written) || written!=(size_t)tiles*128)
+        return 0;
+    memset(pixels,0,sizeof pixels);
+    /* The native upload emits full 256-pixel rows, then a partial 16-high row. */
+    unsigned remaining=tiles, row=0, in=0;
+    while (remaining) {
+        unsigned chunk=remaining<16?remaining:16, width=chunk*16;
+        for (unsigned y=0;y<16;++y) for (unsigned x=0;x<width;++x) {
+            unsigned byte=decoded[in+(y*width+x)/2];
+            unsigned index=(byte>>((x&1)*4))&15;
+            const uint8_t *p=colors+index*2;
+            pixels[(row+y)*256+x]=(uint16_t)(p[0]|p[1]<<8);
+        }
+        in+=chunk*128; row+=16; remaining-=chunk;
+    }
+    uint16_t id=(uint16_t)(0x6000+bank_count);
+    if (!psx_mod_define_texture_bank(id,256,256,pixels)) return 0;
+    banks[bank_count].source=source; banks[bank_count].id=id;
+    memcpy(banks[bank_count++].colors,colors,sizeof colors);
+    return id;
+}
+static void triangle(uint32_t dst, uint32_t next, const uint32_t *q,
+                     unsigned a, unsigned b, unsigned c, uint16_t bank) {
+    uint32_t color=q[1]&0xFFFFFF;
+    unsigned v[3]={a,b,c};
+    psx_mod_write_word(dst,0x09000000u|(next&0xFFFFFF));
+    for (unsigned i=0;i<3;++i) {
+        uint32_t tag=i==0 ? (0x34000000u|(q[1]&0x03000000u)) :
+                     i==1 ? (uint32_t)(bank&255)<<24 : (uint32_t)(bank>>8)<<24;
+        uint32_t uv=q[3+v[i]*2]&0xFFFF;
+        if(i==1) uv|=(0x100u|((q[5]>>16)&0x60u))<<16; /* Host bank is 16-bit color. */
+        psx_mod_write_word(dst+4+i*12,tag|color);
+        psx_mod_write_word(dst+8+i*12,q[2+v[i]*2]);
+        psx_mod_write_word(dst+12+i*12,uv);
+    }
+}
+static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
+    uint32_t base=psx_mod_read_word(SCRATCH+0x100);
+    guest(cpu,0x800232D4,actor,0);
+    uint32_t end=psx_mod_read_word(SCRATCH+0x100);
+    if (end<base || end-arena>40000 || (end-base)%40) {
+        failed=1; return;
+    }
+    uint32_t table=psx_mod_read_word(actor+0x38);
+    unsigned frame=psx_mod_read_byte(actor+0x47);
+    /* Native saber actors share the player's uploaded frame, with their own
+     * assembly and palette (801ED4F4); they have no decompression pointer. */
+    if (!table && psx_mod_read_word(actor+0x3C)==le32(p2.body+0x3C) &&
+        psx_mod_read_half(actor+0x40)==(uint16_t)(p2.body[0x40]|p2.body[0x41]<<8)) {
+        table=le32(p2.body+0x38); frame=p2.body[0x47];
+    }
+    /* Common effects use the stage's already resident textures. Only native
+     * Zero frames need the retained host bank instead of X's texture slot. */
+    if (table<assets || table-assets>=compressed_size) return;
+    uint32_t expanded=arena+40000+(base-arena)*2;
+    for (uint32_t at=base;at<end;at+=40,expanded+=80) {
+        uint32_t q[10];
+        for (unsigned i=0;i<10;++i) q[i]=psx_mod_read_word(at+i*4);
+        uint16_t bank=sprite_bank(table,frame,(uint16_t)(q[3]>>16));
+        /* Native OT links still address the original tag. Turn it into a
+         * zero-command link to two tagged GT3 packets in our own DMA arena. */
+        if (bank && (q[1]>>26)==0xB) {
+            triangle(expanded,expanded+40,q,0,1,2,bank);
+            triangle(expanded+40,q[0],q,2,1,3,bank);
+            psx_mod_write_word(at,expanded&0xFFFFFF);
+        } else {
+            psx_mod_write_word(at,q[0]&0xFFFFFF);
+        }
+    }
+}
+static void render(CPUState *cpu, uint32_t address) {
+    (void)address;
+    if (inside || failed || !enrolled || cpu->gpr[4]!=PLAYER || !p2.body[3] ||
+        psx_mod_read_byte(PLAY)!=0x0A || !psx_mod_texture_banks_supported()) return;
+    inside=1;
+    uint32_t original=psx_mod_read_word(SCRATCH+0x100);
+    uint32_t base=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
+    capture_player(&p1);
+    project_player(&p2);
+    psx_mod_write_word(SCRATCH+0x100,base);
+    render_actor(cpu,PLAYER,base);
+    for (unsigned i=0;i<32 && !failed;++i) {
+        uint32_t actor=0x800950A0u+i*0xA0;
+        if (psx_mod_read_byte(actor+3)) render_actor(cpu,actor,base);
+    }
+    uint32_t end=psx_mod_read_word(SCRATCH+0x100);
+    psx_mod_write_word(SCRATCH+0x100,original);
+    project_player(&p1);
+    psx_mod_write_word(diagnostic+28,bank_count);
+    psx_mod_write_word(diagnostic+32,(end-base)/40);
+    inside=0;
+}
+static int enemy_hit(CPUState *cpu, uint32_t address) {
+    if (inside || !enrolled || failed || psx_mod_read_byte(PLAY)!=0x0A) return 0;
+    inside=1;
+    /* The caller owns enemy AI, invulnerability and applying this result.
+     * Check P1 first; only a miss tries P2 with Zero's native hitbox tables.
+     * Nested dispatch declines this replacement and executes the stock body. */
+    uint32_t enemy=cpu->gpr[4], result=guest(cpu,address,enemy,cpu->gpr[5]);
+    if (!result && p2.body[0x5C]) {
+        enter_zero();
+        result=guest(cpu,address,enemy,cpu->gpr[5]);
+        leave_zero();
+        if (result) psx_mod_write_word(diagnostic+40,psx_mod_read_word(diagnostic+40)+1);
+    }
+    cpu->gpr[2]=result;
+    inside=0;
+    return 1;
+}
+static void activate(void) {
+    free(zero_compressed); zero_compressed=NULL; compressed_size=0;
+    inside=ready=enrolled=failed=0;
+    bank_count=frame_count=0; previous_input=0;
+    assets=psx_mod_alloc_guest_memory(ASSET_SPACE,16);
+    diagnostic=psx_mod_alloc_guest_memory(0x2000,16);
+    packets=psx_mod_alloc_texture_packet_memory(FRAME_ARENA*2,16);
+    failed=!(assets && diagnostic && packets);
+    if (!psx_mod_set_function_replacement(0x80031474,enemy_hit)) failed=1;
+    fprintf(stdout,"mmx6 co-op: development prototype active (OpenGL rendering required)\n");
+}
+PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
+    psx_mod_register_activation_plugin("mmx6.local-coop.prototype",activate);
+    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002012C,controller);
+    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800232D4,render);
+}

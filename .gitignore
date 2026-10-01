@@ -78,3 +78,6 @@ __pycache__/
 /game.tweaks-*.toml
 # tweaks_engine.py port-validation scratch (staged vanilla bin, generated profiles, dumps)
 /_portcheck/
+
+# Private source-reference extraction and local reverse-engineering captures.
+/_research/
