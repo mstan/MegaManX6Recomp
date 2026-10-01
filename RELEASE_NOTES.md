@@ -1,11 +1,21 @@
-# MegaManX6Recomp v1.2.0-rc1
+# MegaManX6Recomp v1.2.0-rc2
 
 This Windows validation candidate includes the adaptive widescreen integration
-and the Weapon Center / Ilumina rendering fixes. The latest stable release
+and the Weapon Center / Ilumina rendering fixes, plus fullscreen and launcher
+improvements from rc1. The latest stable release
 remains v1.1.0. A full playthrough has not been recertified for this candidate.
 
 ## Changes
 
+- Windows borderless fullscreen uses a desktop-sized window without switching
+  display modes. Exclusive fullscreen remains a separate option, including
+  after reopening the launcher.
+- The launcher remembers its resized dimensions across launches and fits them
+  to the display's scaling and work area. Hotkey settings remain scrollable
+  when the window is small.
+- Release packaging checks its framework and output paths and includes
+  `BUILD_PROVENANCE.json`, preventing a stale development cache from silently
+  selecting an older framework worktree.
 - Optional widescreen now offers Adaptive, 16:9, 21:9, and 32:9, in that order.
   Adaptive follows the window's aspect ratio. Enable it in Mods; it is off by
   default.
@@ -28,6 +38,13 @@ Those results do not establish performance on the Intel hardware in the reports.
 
 If you reported either slowdown, please retry this candidate and report the
 encounter, renderer, supersampling, enabled mods, CPU/GPU, and observed FPS.
+
+Issue #22's savestate failure was not reproduced: 132 save/load operations
+across 11 locations and a separate 20-minute active session with F7-menu saves
+and loads passed. Please report the exact stage, BIOS and settings if it
+persists. Issue #2's flashing on the reported 360 Hz display and issue #1's
+Steam Deck Gaming Mode controller selection/rumble need hardware revalidation;
+they are not certified resolved by the local tests.
 
 ## Compatibility and known limitations
 
