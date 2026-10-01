@@ -7,6 +7,7 @@
 #include "mod_plugins.h"
 #include "cpu_state.h"
 #include "sio.h"
+#include "gpu.h"
 #include "mmx6_coop_assets.h"
 #include "mmx6_coop_lifecycle.h"
 #include <stdio.h>
@@ -34,7 +35,9 @@ static uint8_t saved_play[0xE0], saved_camera[0x100];
 static uint8_t *zero_compressed;
 static size_t compressed_size;
 static uint32_t assets, assembly, palette_source, active_palette, packets, diagnostic;
-static uint32_t saved_resources[4], frame_count;
+static uint32_t saved_resources[6], frame_count;
+static uint32_t menu_memory, menu_assembly;
+static int zero_menu_loaded;
 static uint8_t saved_palette_dirty;
 static uint16_t previous_input;
 static SpriteBank banks[1024];
@@ -45,7 +48,14 @@ static uint8_t returning_body[0x158];
 static unsigned join_phase;
 static int32_t join_y;
 static int player_call, stage_call, zero_world, world_render;
+static int pause_owner = -1, p2_start_previous;
 static uint32_t world_packets;
+static uint32_t hud_packets;
+static int hud_call, hud_seat;
+static uint16_t *zero_ui_pixels;
+typedef struct { uint16_t page, clut, uv, id; } UiBank;
+static UiBank ui_banks[512];
+static unsigned ui_bank_count;
 static int render_x_death, effect_call;
 typedef struct { uint32_t x,y,assembly; uint8_t layer,valid; } DeathEffectOrigin;
 static DeathEffectOrigin death_effect[96];
@@ -111,6 +121,25 @@ static uint8_t *disc_file(const char *name, uint32_t *size) {
     if (!psx_mod_read_disc_file(name,p,*size,size)) { free(p); return NULL; }
     return p;
 }
+static int ui_upload(const Mmx6AssetView *asset) {
+    /* Native DAT loader 8001574C: 64-word by 16-row strips, with placement
+     * from 8006E2EC and strip progression from 8001004C. Preserve the actual
+     * original graphic pixels in host memory; never manufacture HUD art. */
+    unsigned type=asset->type&255, layout=(asset->type>>8)&255;
+    if (type>=13 || (layout!=0 && layout!=2) || asset->size%2048) return 0;
+    unsigned x=psx_mod_read_half(0x8006E2EC+type*4);
+    unsigned y=psx_mod_read_half(0x8006E2EEu+type*4), base_y=y&256;
+    for (size_t at=0;at<asset->size;at+=2048) {
+        if (x+64>1024 || y+16>512) return 0;
+        for (unsigned r=0;r<16;++r) for (unsigned c=0;c<64;++c) {
+            const uint8_t *p=asset->data+at+(r*64+c)*2;
+            zero_ui_pixels[(y+r)*1024+x+c]=(uint16_t)(p[0]|p[1]<<8);
+        }
+        if (y==base_y+240) { x+=64; y=layout==2?176:base_y; }
+        else y+=16;
+    }
+    return 1;
+}
 static int load_assets(void) {
     uint32_t n;
     uint8_t *file=disc_file("ROCK_X6.BIN",&n);
@@ -137,6 +166,24 @@ static int load_assets(void) {
     project(assembly,sprites.data,sprites.size);
     project(palette_source,palette.data,palette.size);
     project(active_palette,palette.data,palette.size);
+    Mmx6AssetView menu_gfx, menu_font, menu_colors, menu_layout;
+    if (!mmx6_coop_dat_asset(file,n,85,6,&menu_gfx) || menu_gfx.size!=0x8000 ||
+        !mmx6_coop_dat_asset(file,n,85,7,&menu_font) || menu_font.size!=0x8000 ||
+        !mmx6_coop_dat_asset(file,n,85,8,&menu_colors) || menu_colors.size!=0x800 ||
+        !mmx6_coop_dat_asset(file,n,85,9,&menu_layout)) { free(file); return 0; }
+    menu_assembly=active_palette+0x4000;
+    if (menu_assembly-assets+menu_layout.size>ASSET_SPACE) { free(file); return 0; }
+    project(menu_memory,menu_gfx.data,menu_gfx.size);
+    project(menu_memory+0x8000,menu_font.data,menu_font.size);
+    project(menu_memory+0x10000,menu_colors.data,menu_colors.size);
+    project(menu_assembly,menu_layout.data,menu_layout.size);
+    zero_ui_pixels=calloc(1024*512,sizeof *zero_ui_pixels);
+    Mmx6AssetView common, icons;
+    if (!zero_ui_pixels || !mmx6_coop_dat_asset(file,n,85,1,&common) ||
+        !mmx6_coop_dat_asset(file,n,85,2,&icons) || !ui_upload(&common) ||
+        !ui_upload(&icons) || !ui_upload(&menu_gfx) || !ui_upload(&menu_font)) {
+        free(file); return 0;
+    }
     free(file);
     fprintf(stdout,"mmx6 co-op: Zero resources loaded; status/input at %08X\n",diagnostic);
     fflush(stdout);
@@ -151,6 +198,8 @@ static void enter_zero(void) {
     saved_resources[1]=psx_mod_read_word(SCRATCH+0x1C);
     saved_resources[2]=psx_mod_read_word(SCRATCH+0x24);
     saved_resources[3]=psx_mod_read_word(SCRATCH+0x28);
+    saved_resources[4]=psx_mod_read_word(SCRATCH+0x38);
+    saved_resources[5]=psx_mod_read_word(SCRATCH+0x3C);
     saved_palette_dirty=psx_mod_read_byte(0x800C4560);
     project_player(&p2);
     code_bank(zero_overlay);
@@ -158,6 +207,8 @@ static void enter_zero(void) {
     psx_mod_write_word(SCRATCH+0x1C,assembly);
     psx_mod_write_word(SCRATCH+0x24,palette_source);
     psx_mod_write_word(SCRATCH+0x28,active_palette);
+    psx_mod_write_word(SCRATCH+0x38,menu_memory+0x10000);
+    psx_mod_write_word(SCRATCH+0x3C,menu_assembly);
     psx_mod_write_byte(PLAY+0x38,1);
     psx_mod_write_byte(PLAY+0x5E,5);
 }
@@ -169,6 +220,8 @@ static void leave_zero_context(int shared_world) {
     psx_mod_write_word(SCRATCH+0x1C,saved_resources[1]);
     psx_mod_write_word(SCRATCH+0x24,saved_resources[2]);
     psx_mod_write_word(SCRATCH+0x28,saved_resources[3]);
+    psx_mod_write_word(SCRATCH+0x38,saved_resources[4]);
+    psx_mod_write_word(SCRATCH+0x3C,saved_resources[5]);
     psx_mod_write_byte(0x800C4560,saved_palette_dirty);
     if (shared_world) {
         /* A surviving Zero owns this entire native stage pass. Keep the one
@@ -285,6 +338,23 @@ static void join_animation(CPUState *cpu) {
     }
     leave_zero();
 }
+static void retain_surviving_zero(CPUState *cpu) {
+    if (life.status[1]!=MMX6_COOP_LEAVING && life.status[1]!=MMX6_COOP_JOINING) return;
+    /* The departure request was legal while X lived. If X dies during the
+     * beam, keep the remaining player at the departure/landing position with
+     * their saved health. Never let native out-of-stage mode end this run. */
+    if (life.status[1]==MMX6_COOP_LEAVING) memcpy(p2.body,returning_body,sizeof returning_body);
+    else put32(p2.body+12,(uint32_t)join_y);
+    p2.body[3]=p2.body[4]=1;
+    enter_zero();
+    guest(cpu,0x8003A980,PLAYER,0);
+    guest(cpu,0x8003AD18,PLAYER,0);
+    psx_mod_write_byte(PLAYER+0x61,60);
+    leave_zero();
+    life.status[1]=MMX6_COOP_ALIVE;
+    life.select_frames=life.select_armed=0;
+    join_phase=0;
+}
 static void diagnostics(uint16_t input) {
     ++frame_count;
     psx_mod_write_word(diagnostic,0x434F4F50);
@@ -298,6 +368,7 @@ static void diagnostics(uint16_t input) {
     psx_mod_write_byte(diagnostic+0x39,(uint8_t)life.status[1]);
     psx_mod_write_byte(diagnostic+0x3A,(uint8_t)life.select_frames);
     psx_mod_write_byte(diagnostic+0x3B,life.wipe);
+    psx_mod_write_byte(diagnostic+0x3C,(uint8_t)(pause_owner+1));
     project(diagnostic+0x100,p2.body,sizeof p2.body);
     project(diagnostic+0x300,p2.shots,sizeof p2.shots);
     /* Stable P1 snapshot: a debugger may otherwise observe PLAYER while a
@@ -330,6 +401,34 @@ static void route_p2_input(uint16_t raw) {
     psx_mod_write_half(0x800C4570,(uint16_t)(raw & ~previous_input));
     previous_input=raw;
 }
+static void menu_vram(CPUState *cpu, int zero) {
+    if (zero==zero_menu_loaded) return;
+    /* These are the original PL00 menu/font upload pages, from native loader
+     * table 8006E2EC (types 7/1), plus its 8006D9D4 menu palette rectangle.
+     * Only one pause menu is visible, so preserve the exact resident X pages
+     * on the host and exchange them after native DrawSync. Body rendering
+     * continues to use retained banks. Block DMA is limited to guest RAM, so
+     * submit the retained pixels through GP0's normal upload command. */
+    static const unsigned x[3]={896,960,256}, y[3]={256,256,496};
+    static const unsigned height[3]={256,256,16}, offset[3]={0,0x8000,0x10000};
+    guest(cpu,0x80066150,0,0);
+    for (unsigned i=0;i<3;++i) {
+        uint32_t backup=menu_memory+0x10800+offset[i];
+        if (zero) {
+            const uint16_t *vram=gpu_get_vram();
+            for (unsigned row=0;row<height[i];++row) for (unsigned col=0;col<64;++col)
+                psx_mod_write_half(backup+2*(row*64+col),vram[(y[i]+row)*1024+x[i]+col]);
+        }
+        uint32_t source=zero?menu_memory+offset[i]:backup;
+        gpu_set_gp0_source(0);
+        gpu_write_gp0(0xA0000000);
+        gpu_write_gp0(x[i]|(y[i]<<16));
+        gpu_write_gp0(64|(height[i]<<16));
+        for (unsigned p=0;p<64*height[i]*2;p+=4)
+            gpu_write_gp0(psx_mod_read_word(source+p));
+    }
+    zero_menu_loaded=zero;
+}
 static int player_tick(CPUState *cpu, uint32_t address) {
     if (inside || player_call || !enrolled || failed) return 0;
     uint8_t freeze[11];
@@ -348,15 +447,37 @@ static int player_tick(CPUState *cpu, uint32_t address) {
     return 1;
 }
 static int stage_tick(CPUState *cpu, uint32_t address) {
-    if (stage_call || inside || !enrolled || failed ||
-        (life.wipe && life.wipe!=2) ||
-        (life.status[0]!=MMX6_COOP_DYING && life.status[0]!=MMX6_COOP_FALLEN) ||
-        life.status[1]==MMX6_COOP_ABSENT || (!life.wipe && life.status[1]==MMX6_COOP_FALLEN)) return 0;
+    if (stage_call || inside || !enrolled || failed) return 0;
+    uint16_t raw=p2_input();
+    int start=!!(raw&8), pressed=start&&!p2_start_previous;
+    unsigned phase=psx_mod_read_byte(PLAY+1);
+    p2_start_previous=start;
+    if (!phase) {
+        pause_owner=-1;
+        /* Match the native pause gate. Simultaneous requests go to P1; an
+         * absent/dead/departing actor cannot become the menu's owner. */
+        if (!psx_mod_read_byte(PLAY+0x1C) && !psx_mod_read_byte(PLAY+0x10) &&
+            !psx_mod_read_byte(PLAY+0x0F) && !psx_mod_read_byte(0x80097424)) {
+            if (life.status[0]==MMX6_COOP_ALIVE && (psx_mod_read_half(0x800C4570)&0x0800))
+                pause_owner=0;
+            else if (life.status[1]==MMX6_COOP_ALIVE && pressed) pause_owner=1;
+        }
+    } else if (phase==2) {
+        life.select_frames=0;
+        if (pause_owner<0) pause_owner=mmx6_coop_living(&life,0)?0:1;
+    }
+    psx_mod_write_byte(diagnostic+0x3C,(uint8_t)(pause_owner+1));
+    int survivor=(!life.wipe || life.wipe==2) &&
+        (life.status[0]==MMX6_COOP_DYING || life.status[0]==MMX6_COOP_FALLEN) &&
+        life.status[1]!=MMX6_COOP_ABSENT && (life.wipe || life.status[1]!=MMX6_COOP_FALLEN);
+    if (!survivor && pause_owner!=1) return 0;
     stage_call=inside=1;
+    if (pause_owner==1 && !zero_menu_loaded) menu_vram(cpu,1);
     diagnostic_setup();
+    if (survivor && !life.wipe) retain_surviving_zero(cpu);
     /* Finish X's native death pose/orbs without spending a life, freezing
      * enemies, or advancing the shared clock a second time. */
-    if (psx_mod_read_byte(PLAYER+4)==2 && mmx6_coop_living(&life,1)) {
+    if (!phase && psx_mod_read_byte(PLAYER+4)==2 && mmx6_coop_living(&life,1)) {
         uint8_t flags[11];
         uint32_t timer=psx_mod_read_word(PLAY+0x90), total=psx_mod_read_word(PLAY+0xCC);
         capture(PLAY+0x12,flags,sizeof flags);
@@ -368,7 +489,6 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     }
     uint8_t input[6];
     capture(0x800C456C,input,sizeof input);
-    uint16_t raw=p2_input();
     raw=(uint16_t)((raw<<8)|(raw>>8));
     enter_zero();
     route_p2_input(raw);
@@ -382,6 +502,7 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     leave_zero_context(1);
     project(0x800C456C,input,sizeof input);
     diagnostics(raw);
+    if (zero_menu_loaded && psx_mod_read_byte(PLAY+1)!=2) menu_vram(cpu,0);
     if (psx_mod_read_byte(PLAY)!=0x0A) enrolled=0;
     cpu->gpr[2]=result;
     stage_call=inside=0;
@@ -394,6 +515,7 @@ static void native_player_init(CPUState *cpu, uint32_t address) {
      * an ordinary door. The host body is enrolled after the new X body lands. */
     enrolled=0;
     mmx6_coop_lifecycle_respawn(&life);
+    pause_owner=-1; p2_start_previous=0;
 }
 static void controller(CPUState *cpu, uint32_t address) {
     (void)address;
@@ -686,17 +808,144 @@ static int player_contact(CPUState *cpu, uint32_t address) {
     inside=0;
     return 1;
 }
+/* Retain each original 16x16 HUD tile with its original palette. Tile-local
+ * UVs also avoid the 8-bit UV wrap at the edge of a native texture page. */
+static uint16_t hud_tile_bank(uint16_t page, uint16_t clut, uint16_t uv) {
+    for (unsigned i=0;i<ui_bank_count;++i)
+        if (ui_banks[i].page==page && ui_banks[i].clut==clut && ui_banks[i].uv==uv)
+            return ui_banks[i].id;
+    if (ui_bank_count==512 || (page&0x180)) return 0;
+    uint16_t colors[16], pixels[16*16];
+    unsigned cx=(clut&63)*16, cy=clut>>6;
+    for (unsigned i=0;i<16;++i) {
+        if (cy>=496 && cy<512 && cx>=256 && cx+16<=320)
+            colors[i]=psx_mod_read_half(menu_memory+0x10000+((cy-496)*64+cx-256+i)*2);
+        else if (clut>=0x7800 && (unsigned)(clut-0x7800)*32+32<=0xA60)
+            colors[i]=psx_mod_read_half(palette_source+(clut-0x7800)*32+i*2);
+        else return 0;
+    }
+    unsigned base_x=(page&15)*64, base_y=(page&16)*16;
+    for (unsigned y=0;y<16;++y) for (unsigned x=0;x<16;++x) {
+        unsigned u=((uv&255)+x)&255, v=((uv>>8)+y)&255;
+        unsigned word=zero_ui_pixels[(base_y+v)*1024+base_x+u/4];
+        pixels[y*16+x]=colors[(word>>((u&3)*4))&15];
+    }
+    uint16_t id=(uint16_t)(0x7000+ui_bank_count);
+    if (!psx_mod_define_texture_bank(id,16,16,pixels)) return 0;
+    ui_banks[ui_bank_count++]=(UiBank){page,clut,uv,id};
+    return id;
+}
+static int hud_icon(CPUState *cpu, uint32_t address) {
+    (void)address;
+    /* The life pool is shared. Keep its original P1 display, without a
+     * duplicate beneath Zero's meters. All frames/icons remain native. */
+    if (hud_seat!=1 || (cpu->gpr[4]!=3 && cpu->gpr[4]!=4)) return 0;
+    cpu->gpr[2]=0;
+    return 1;
+}
+static void hud_empty_ammo(CPUState *cpu) {
+    if (psx_mod_read_byte(PLAYER+0x93)) return;
+    /* Native routines hide ammo with a resource-free weapon selected. Keep
+     * the four columns stable using that same native frame, without fill. */
+    int frame=153+((int)psx_mod_read_half(PLAYER+0x14A)/6-48)/2;
+    if (frame<153) frame=153;
+    if (frame>161) frame=161;
+    guest(cpu,0x80024CC0,2,(uint32_t)frame);
+}
+static void hud_zero_packets(uint32_t arena) {
+    uint32_t sprites=psx_mod_read_word(SCRATCH+0x108);
+    uint32_t modes=psx_mod_read_word(SCRATCH+0x10C);
+    uint32_t bars=psx_mod_read_word(SCRATCH+0x110);
+    if (sprites<arena || sprites>arena+0x1000 || (sprites-arena)%16 ||
+        modes<arena+0x1000 || modes>arena+0x2000 ||
+        (modes-arena-0x1000)!=(sprites-arena)/2 ||
+        bars<arena+0x2000 || bars>arena+0x3000 || (bars-arena-0x2000)%36) {
+        failed=1; return;
+    }
+    uint32_t expanded=arena+0x3000, mode=arena+0x1000;
+    for (uint32_t at=arena;at<sprites;at+=16,mode+=8,expanded+=80) {
+        uint32_t link=psx_mod_read_word(at), uv=psx_mod_read_word(at+12);
+        uint16_t page=(uint16_t)psx_mod_read_word(mode+4);
+        uint16_t bank=hud_tile_bank(page,(uint16_t)(uv>>16),(uint16_t)uv);
+        if (!bank || expanded+80>arena+0x8000) { failed=1; return; }
+        int x=(int16_t)psx_mod_read_half(at+8)+44;
+        int y=(int16_t)psx_mod_read_half(at+10);
+        uint32_t q[10]={link,0x2D808080,0,0,0,0,0,0,0,0};
+        for (unsigned i=0;i<4;++i) {
+            q[2+i*2]=(uint16_t)(x+(i&1)*16)|((uint32_t)(uint16_t)(y+(i>>1)*16)<<16);
+            q[3+i*2]=(i&1)*16|((i>>1)*16<<8);
+        }
+        triangle(expanded,expanded+40,q,0,1,2,bank);
+        triangle(expanded+40,link,q,2,1,3,bank);
+        psx_mod_tag_hud_primitive(expanded,-1);
+        psx_mod_tag_hud_primitive(expanded+40,-1);
+        psx_mod_write_word(at,expanded&0xFFFFFF);
+    }
+    for (uint32_t at=arena+0x2000;at<bars;at+=36) {
+        for (unsigned xy=8;xy<=32;xy+=8)
+            psx_mod_write_half(at+xy,(uint16_t)(psx_mod_read_half(at+xy)+44));
+        psx_mod_tag_hud_primitive(at,-1);
+    }
+}
+static int draw_coop_hud(CPUState *cpu, uint32_t address) {
+    if (hud_call || !enrolled || failed || psx_mod_read_byte(PLAY)!=0x0A) return 0;
+    hud_call=1;
+    uint8_t current[sizeof p2.body];
+    capture(PLAYER,current,sizeof current);
+    uint32_t sprites_now=psx_mod_read_word(SCRATCH+0x1C);
+    uint32_t menu_now=psx_mod_read_word(SCRATCH+0x3C);
+    if (zero_world) {
+        project(PLAYER,p1.body,sizeof p1.body);
+        psx_mod_write_word(SCRATCH+0x1C,saved_resources[1]);
+        psx_mod_write_word(SCRATCH+0x3C,saved_resources[5]);
+    }
+    /* P1 and the boss HUD execute their original draw path exactly once. */
+    uint32_t result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
+    if (psx_mod_read_byte(PLAY+0x1F)) hud_empty_ammo(cpu);
+    if (zero_world) capture(PLAYER,p1.body,sizeof p1.body);
+    else capture(PLAYER,current,sizeof current);
+    if (psx_mod_read_byte(PLAY+0x1F)) {
+        project(PLAYER,zero_world?current:p2.body,sizeof p2.body);
+        psx_mod_write_word(SCRATCH+0x1C,assembly);
+        psx_mod_write_word(SCRATCH+0x3C,menu_assembly);
+        uint32_t pools[3];
+        for (unsigned i=0;i<3;++i) pools[i]=psx_mod_read_word(SCRATCH+0x108+i*4);
+        uint32_t arena=hud_packets+(psx_mod_read_word(SCRATCH)&1u)*0x8000;
+        for (unsigned i=0;i<3;++i) psx_mod_write_word(SCRATCH+0x108+i*4,arena+i*0x1000);
+        hud_seat=1;
+        guest(cpu,0x80024F90,PLAYER,0);
+        guest(cpu,0x800249D4,PLAYER,0);
+        hud_empty_ammo(cpu);
+        hud_seat=0;
+        hud_zero_packets(arena);
+        for (unsigned i=0;i<3;++i) psx_mod_write_word(SCRATCH+0x108+i*4,pools[i]);
+        if (zero_world) capture(PLAYER,current,sizeof current);
+        else capture(PLAYER,p2.body,sizeof p2.body);
+    }
+    project(PLAYER,current,sizeof current);
+    psx_mod_write_word(SCRATCH+0x1C,sprites_now);
+    psx_mod_write_word(SCRATCH+0x3C,menu_now);
+    cpu->gpr[2]=result;
+    hud_call=0;
+    return 1;
+}
 static void activate(void) {
     free(zero_compressed); zero_compressed=NULL; compressed_size=0;
+    free(zero_ui_pixels); zero_ui_pixels=NULL; ui_bank_count=0;
     inside=ready=enrolled=failed=0;
     bank_count=frame_count=0; previous_input=0;
     mmx6_coop_lifecycle_init(&life); join_phase=0;
     player_call=stage_call=zero_world=world_render=0;
+    pause_owner=-1; p2_start_previous=0;
     render_x_death=effect_call=0; memset(death_effect,0,sizeof death_effect);
+    hud_call=hud_seat=0;
+    zero_menu_loaded=0;
     assets=psx_mod_alloc_guest_memory(ASSET_SPACE,16);
     diagnostic=psx_mod_alloc_guest_memory(0x2000,16);
     packets=psx_mod_alloc_texture_packet_memory(FRAME_ARENA*2,16);
-    failed=!(assets && diagnostic && packets);
+    hud_packets=psx_mod_alloc_texture_packet_memory(0x10000,16);
+    menu_memory=psx_mod_alloc_gpu_dma_memory(0x21010,16);
+    failed=!(assets && diagnostic && packets && hud_packets && menu_memory);
     if (!psx_mod_set_function_replacement(0x80031474,enemy_hit)) failed=1;
     if (!psx_mod_set_function_replacement(0x80029598,camera_target) ||
         !psx_mod_set_function_replacement(0x80029658,camera_target)) failed=1;
@@ -704,6 +953,8 @@ static void activate(void) {
         !psx_mod_set_function_replacement(0x8001E9EC,stage_tick) ||
         !psx_mod_set_function_replacement(0x800232D4,render_survivor)) failed=1;
     if (!psx_mod_set_function_replacement(0x80030ECC,player_contact)) failed=1;
+    if (!psx_mod_set_function_replacement(0x800244C0,draw_coop_hud) ||
+        !psx_mod_set_function_replacement(0x80024CC0,hud_icon)) failed=1;
     if (!psx_mod_set_function_replacement(0x8002C530,death_effect_allocate) ||
         !psx_mod_set_function_replacement(0x80047E34,death_effect_init)) failed=1;
     fprintf(stdout,"mmx6 co-op: development prototype active (OpenGL rendering required)\n");

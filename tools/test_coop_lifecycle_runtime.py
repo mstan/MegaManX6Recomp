@@ -77,8 +77,8 @@ def main():
         p2(0xFFFF)
         fixture(1, 11)
         wait(lambda s: s['hp'] == 11)
-        fixture(2, 0x700)
-        before = wait(lambda s: s['ammo'] == '0007'*9)
+        fixture(2, 0x90)  # Half the native 0x120 capacity.
+        before = wait(lambda s: s['ammo'] == '9000'*9)
         p2(0xFFFE)
         wait(lambda s: s['status'][1] == 1)
         wait(lambda s: s['status'][1] == 2)
