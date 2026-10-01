@@ -353,6 +353,7 @@ static int nightmare_soul(CPUState *cpu, uint32_t address) {
     pickup_call=0;
     return 1;
 }
+static void begin_join(CPUState *cpu, uint32_t x, uint32_t y);
 static void enroll(CPUState *cpu) {
     uint32_t x=psx_mod_read_word(PLAYER+8), y=psx_mod_read_word(PLAYER+12);
     memset(&p2,0,sizeof p2);
@@ -371,7 +372,10 @@ static void enroll(CPUState *cpu) {
     leave_zero();
     enrolled=1; previous_input=0;
     mmx6_coop_lifecycle_respawn(&life);
-    join_phase=0;
+    /* Initialize resources offscreen, then use the same native arrival as a
+     * voluntary return. This also covers new stages and checkpoint retries. */
+    p2_hud_fade=0;
+    begin_join(cpu,x+(24u<<16),y);
     fprintf(stdout,"mmx6 co-op: Zero enrolled at (%u,%u)\n",x>>16,y>>16);
     fflush(stdout);
 }
@@ -448,10 +452,9 @@ static void start_leave(CPUState *cpu) {
     psx_mod_write_word(PLAYER+0x54,0);
     leave_zero();
 }
-static void start_join(CPUState *cpu) {
-    memcpy(p2.body,returning_body,sizeof returning_body);
-    put32(p2.body+8,psx_mod_read_word(PLAYER+8));
-    join_y=(int32_t)psx_mod_read_word(PLAYER+12);
+static void begin_join(CPUState *cpu, uint32_t x, uint32_t y) {
+    put32(p2.body+8,x);
+    join_y=(int32_t)y;
     int32_t top=(int16_t)psx_mod_read_half(0x80097206)-40;
     put32(p2.body+12,(uint32_t)(top*65536));
     put32(p2.body+0x18,le32(p2.body+8));
@@ -464,7 +467,12 @@ static void start_join(CPUState *cpu) {
     psx_mod_write_word(PLAYER+0x68,0);
     psx_mod_write_word(PLAYER+0x54,0);
     leave_zero();
+    life.status[1]=MMX6_COOP_JOINING;
     join_phase=1;
+}
+static void start_join(CPUState *cpu) {
+    memcpy(p2.body,returning_body,sizeof returning_body);
+    begin_join(cpu,psx_mod_read_word(PLAYER+8),psx_mod_read_word(PLAYER+12));
 }
 static void join_animation(CPUState *cpu) {
     enter_zero();
@@ -1381,7 +1389,7 @@ static void hud_zero_packets(uint32_t arena) {
 static int draw_coop_hud(CPUState *cpu, uint32_t address) {
     if (hud_call || !enrolled || failed || psx_mod_read_byte(PLAY)!=0x0A) return 0;
     hud_call=1;
-    /* Only voluntary presence changes fade this HUD. Dead players retain
+    /* Arrival and voluntary departure fade this HUD. Dead players retain
      * their meters, making the shared-life/survivor state visible. */
     if (life.status[1]==MMX6_COOP_LEAVING || life.status[1]==MMX6_COOP_ABSENT)
         p2_hud_fade=p2_hud_fade>8?p2_hud_fade-8:0;
