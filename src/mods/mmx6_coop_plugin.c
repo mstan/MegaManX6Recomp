@@ -405,6 +405,34 @@ static int camera_target(CPUState *cpu, uint32_t address) {
     inside=0;
     return 1;
 }
+static void pit_death(unsigned seat, int bottom) {
+    int resident=!seat || zero_world;
+    unsigned phase=resident?psx_mod_read_byte(PLAYER+4):p2.body[4];
+    unsigned action=resident?psx_mod_read_byte(PLAYER+5):p2.body[5];
+    unsigned hp=resident?psx_mod_read_byte(PLAYER+0x5C):p2.body[0x5C];
+    int y=(int16_t)(resident?psx_mod_read_half(PLAYER+14):le32(p2.body+12)>>16);
+    if (life.status[seat]!=MMX6_COOP_ALIVE || phase!=1 || action<2 ||
+        !hp || hp==0x80 || y-8<bottom) return;
+    /* 800282F0: retain the native fatal flag and damage bookkeeping. The
+     * next native player update enters death; the existing co-op lifecycle
+     * then keeps the survivor active and spends a life only on a team wipe. */
+    if (resident) psx_mod_write_byte(PLAYER+0x5C,0x80);
+    else p2.body[0x5C]=0x80;
+    psx_mod_write_word(PLAY+0x98,psx_mod_read_word(PLAY+0x98)+(hp&0x7F));
+}
+static void camera_pits(CPUState *cpu, uint32_t address) {
+    (void)address;
+    if (!enrolled || failed || (inside && !zero_world) || scene_owner ||
+        cpu->gpr[4]!=0x800971F8u || psx_mod_read_byte(PLAY)!=0x0A ||
+        psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C)) return;
+    /* Native 8002820C owns pit death as part of camera clamping, outside
+     * the player update. Use the current room's authored bottom limit for
+     * each player, independent of whether their shared camera reached it.
+     * This is not the visible screen bottom: vertical rooms remain playable. */
+    int bottom=(int16_t)(psx_mod_read_half(0x800971F8u+0x20)+256);
+    if (!zero_world) pit_death(0,bottom);
+    pit_death(1,bottom);
+}
 static void clear_p2_combat(void) {
     memset(p2.shots,0,sizeof p2.shots);
     memset(p2.trails,0,sizeof p2.trails);
@@ -1444,4 +1472,5 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800232D4,render);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8003BD24,native_player_init);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8003D308,script_begin);
+    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002820C,camera_pits);
 }
