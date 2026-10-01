@@ -179,7 +179,14 @@ void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
     int weather = layer == 1 && parent < 0 &&
         psx_mod_read_byte(0x800ccedcu) == 6u && psx_mod_read_byte(0x800cceddu) == 0u &&
         psx_mod_read_byte(b + 4u) == 5u;
-    if (weather) {
+    /* Weapon Center's mode5 backdrop is a selected screen-space panorama.
+     * Ilumina's independently animated parts are screen-space too. Keep the
+     * native 320px panel centered with them and reflect only that panel into
+     * the reveal, never the empty neighboring cells of its atlas. */
+    int illumina = layer == 2 && parent < 0 &&
+        psx_mod_read_byte(0x800ccedcu) == 8u && psx_mod_read_byte(0x800cceddu) == 0u &&
+        psx_mod_read_byte(b + 4u) == 5u;
+    if (weather || illumina) {
         WsViewAnchor world;
         if (gpu_ws_bg2d_get_view(0, &world)) {
             int extra = (world.left + world.right + world.pad_left + world.pad_right) / 2;
@@ -210,6 +217,10 @@ void mmx6_adaptive_background_end(unsigned layer, uint32_t native_packet) {
     int screen_x = -(sx & 15), screen_y = -(sy & 15);
     int panorama_width = parent < 0 ? intro_panorama_width(layer) : 0;
     if (amazon_width) panorama_width = amazon_width;
+    if (illumina) {
+        panorama_origin = start_col * 16;
+        panorama_width = 320;
+    }
     int intro = psx_mod_read_byte(0x800ccedcu) == 0 && psx_mod_read_byte(0x800cceddu) == 0;
     int banks = intro && psx_mod_texture_banks_supported() && load_intro_banks(INTRO_BANK);
     int rain_bank = weather && psx_mod_texture_banks_supported() && load_background_bank(WEATHER_BANK);

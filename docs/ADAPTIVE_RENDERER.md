@@ -480,3 +480,23 @@ snapshots were rekeyed; original user snapshots and normal runtime rejection
 remain intact. Idle intro measurements were about 60 FPS and do not rule out
 the enemy-triggered stutter in GitHub #32 or Ilumina phase-two slowdown in #31.
 The combined darkness/rain mask remains a separate follow-up, `beads-eio.1.15`.
+
+## Weapon Center follow-up
+
+Ilumina exposed two separate rendering defects. Its screen-space composite
+exceeded the framework's 256 HUD packet tags, so early arm pieces inherited
+the world camera shift while the torso stayed centered. Framework PR #450
+raises capacity to retain both pending 1000-packet display buffers. The game
+also centers Weapon Center's layer-2 mode-5 panorama with Ilumina and reflects
+only its selected native 320px atlas panel into the reveal. Adjacent empty
+atlas cells no longer appear as a black gutter.
+
+The framework pin is `fd019bbc`. All eight game tests, the 2000-packet HUD
+regression, executable GPU view-anchor fixture, and 23 tests for the upstream
+recomp-net update pass. Both Ilumina phases were inspected at 4:3, 16:9, 21:9
+and 32:9 in OpenGL; both phases also render correctly at 32:9 in software.
+A fresh-process 30-second Ultimate X phase-two run at
+32:9 held 59.95 guest FPS with no stale native blocks or persistent overlay
+misses. The active intro encounters also held about 60 FPS. These results
+do not establish performance on the reporters' Intel integrated graphics;
+GitHub #31 and #32 remain open for revalidation.
