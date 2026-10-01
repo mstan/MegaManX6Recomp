@@ -100,11 +100,15 @@ endif()
 # psxrecomp_v4_add_runtime_target above, so this override wins. Drop official art
 # into launcher_art/img/ to replace the generated placeholder.
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/launcher_art")
-    add_custom_command(TARGET psx-runtime POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-            "${CMAKE_CURRENT_SOURCE_DIR}/launcher_art"
-            "$<TARGET_FILE_DIR:psx-runtime>"
-        COMMENT "Overriding launcher art with MegaManX6Recomp/launcher_art")
+    foreach(MMX6_RUNTIME_TARGET psx-runtime psx-runtime-pgxp)
+        if(TARGET ${MMX6_RUNTIME_TARGET})
+            add_custom_command(TARGET ${MMX6_RUNTIME_TARGET} POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_directory
+                    "${CMAKE_CURRENT_SOURCE_DIR}/launcher_art"
+                    "$<TARGET_FILE_DIR:${MMX6_RUNTIME_TARGET}>"
+                COMMENT "Overriding launcher art with MegaManX6Recomp/launcher_art")
+        endif()
+    endforeach()
 endif()
 
 # Framework sources these tests compile in are addressed through
@@ -116,6 +120,15 @@ endif()
 # A title that cannot be built against framework master cannot be checked
 # against it either.
 if(BUILD_TESTING)
+    add_executable(mmx6_adaptive_background_test tests/test_adaptive_background.c)
+    target_include_directories(mmx6_adaptive_background_test PRIVATE
+        "${PSXRECOMP_V4_ROOT}/runtime/include")
+    add_test(NAME mmx6_adaptive_background_test COMMAND mmx6_adaptive_background_test)
+    add_executable(mmx6_widescreen_view_test tests/test_widescreen_view.c)
+    target_include_directories(mmx6_widescreen_view_test PRIVATE
+        "${PSXRECOMP_V4_ROOT}/runtime/include")
+    add_test(NAME mmx6_widescreen_view_test COMMAND mmx6_widescreen_view_test)
+
     add_executable(mmx6_tweaks_hooks_test
         tests/test_mmx6_tweaks_hooks.cpp
         src/mods/mmx6_tweaks_hooks_resolver.cpp
