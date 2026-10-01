@@ -1313,14 +1313,21 @@ static int solid_player_collision(CPUState *cpu, uint32_t address) {
         result=guest(cpu,address,actor,cpu->gpr[5]);
         if (life.status[1]==MMX6_COOP_ALIVE && !scene_passenger(1) && p2.body[4]==1) {
             inside=1;
-            enter_zero();
+            /* 31DA8 and its terrain/box helpers use the player body and the
+             * common EXE hitbox tables. They never execute character overlay
+             * code or touch the attack pools. Project only that body: swapping
+             * the 44 KiB overlay for every solid made Recycle Lab CPU-bound. */
+            uint8_t body[sizeof p2.body];
+            capture(PLAYER,body,sizeof body);
+            project(PLAYER,p2.body,sizeof p2.body);
             /* 31DA8 also resolves the shared ride armor. That part already
              * ran above; the extra call handles only the second player. */
             uint8_t ride=psx_mod_read_byte(0x800CD340);
             psx_mod_write_byte(0x800CD340,0);
             solid_as_zero(cpu,address,actor,contact);
             psx_mod_write_byte(0x800CD340,ride);
-            leave_zero();
+            capture(PLAYER,p2.body,sizeof p2.body);
+            project(PLAYER,body,sizeof body);
             inside=0;
         } else memset(contact,0,sizeof *contact);
     }
