@@ -405,15 +405,24 @@ The first staging attempt encountered a DLL locked by the private test; after
 closing it, the audited cache was staged and every artifact hash rechecked.
 Current receipt: `build-review/playtest-6/AOT_CACHE_AUDIT.json`.
 
-## Parked draft and remaining work
+## Draft status and remaining work
 
-The owner requested parking the complete renderer work in a draft MMX6 PR
-after the September 20 playtest. Resume from `feat/mmx6-adaptive-renderer`
-and its pinned framework revision; preserve the isolated worktrees, review
-build, current roaming cards and save slots. This is an experimental review
-snapshot, not a release or full-game acceptance.
+PR #33 remains an experimental draft. The September 30 follow-up is on the
+same `feat/mmx6-adaptive-renderer` branch:
 
-Owner results for playtest 6:
+- Game commit `c936396` keeps the Recycle Lab ride armor visible in the wide
+  view and anchors its half-speed distant machinery so walking right does not
+  expose a growing black strip on the left. The previously reported trash
+  block remains visible. Owner playtest 7 and isolated OpenGL/software checks
+  covered adaptive, 16:9, 21:9 and 32:9 views at the affected saves.
+- Framework commit `ca14a118` grows the software-present staging buffer and
+  texture for wide frames instead of relying on the original 640-pixel canvas.
+  Game commit `60b34ca` pins that framework fix. This removes the buffer
+  overflow behind the adaptive startup crash observed before playtest 7.
+- The widescreen mod picker now defaults to Adaptive, followed by 16:9, 21:9
+  and 32:9, without the old experimental labels.
+
+The earlier owner results from playtest 6 still require follow-up:
 
 - UI2: the saved darkness section now fills the adaptive width. Continuing
   into the **next section with darkness and rain together** restores the old
@@ -427,15 +436,21 @@ Owner results for playtest 6:
 - UI4: the special-attack presentation is confirmed good.
 - UI5: the cave backdrop and scrolling correction are confirmed good.
 
-The two remaining reports above are recorded for the next session and have
-not been investigated or fixed in this parked snapshot. The entire game,
-every narrow room, boss arena, transition, respawn path and alternate
-character has not been played through at these widths. Other finite
-panoramas may need their own scene profiles. Mirrored wreckage is
-deliberately repetitive at 64:9; it is not newly authored scenery. Retained
-texture banks currently require OpenGL; other renderers have not received
-the same scene-residency fix/review.
+Additional September 30 Amazon Forest saves 05, 06 and 07 reproduce at a
+2048×521 adaptive window. The first two expose rectangular empty map regions
+while X falls vertically. Slot 07 shows black on both sides of the cave,
+although the native-wide renderer is active; it is not a 4:3 present. The
+read-only map census found no layer-2 tiles through the relevant 512–768 Y
+band, and only a short 880–944 Y strip in the later cave panel. These are
+authored map limits that 4:3 usually hides. A scene-specific cosmetic fill
+needs artwork and depth review: repeating the foreground map would imply
+platforms or walls where the game has none. The pause menu still correctly
+uses native 4:3; it is unrelated to slot 07's black sides.
 
-Central tracking remains `beads-eio.1.9` (game) and `beads-eio.3.168`
-(framework). Local updates are durable; central Dolt push encountered a
-missing remote data ref. This source task did not alter the tracker remote.
+The entire game, every narrow room, boss arena, transition, respawn path and
+alternate character has not been played through at these widths. Other finite
+panoramas may need their own scene profiles. Mirrored wreckage is deliberately
+repetitive at 64:9; it is not newly authored scenery. Retained texture banks
+currently require OpenGL; other renderers have not received the same
+scene-residency review. Central tracking remains `beads-eio.1.9` (game) and
+`beads-eio.3.168` (framework).
