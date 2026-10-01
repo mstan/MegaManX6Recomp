@@ -116,6 +116,11 @@ endif()
 # A title that cannot be built against framework master cannot be checked
 # against it either.
 if(BUILD_TESTING)
+    add_executable(mmx6_coop_lifecycle_test
+        tests/test_mmx6_coop_lifecycle.c src/mods/mmx6_coop_lifecycle.c)
+    target_include_directories(mmx6_coop_lifecycle_test PRIVATE src/mods)
+    add_test(NAME mmx6_coop_lifecycle_test COMMAND "$<TARGET_FILE:mmx6_coop_lifecycle_test>")
+
     add_executable(mmx6_coop_assets_test
         tests/test_mmx6_coop_assets.c src/mods/mmx6_coop_assets.c)
     target_include_directories(mmx6_coop_assets_test PRIVATE src/mods)
