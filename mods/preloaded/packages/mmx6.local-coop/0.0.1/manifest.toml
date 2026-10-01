@@ -1,0 +1,24 @@
+format_version = 5
+id = "mmx6.local-coop"
+version = "0.0.1"
+name = "Mega Man X6 X + Zero Co-op"
+author = "mstan"
+description = "Experimental two-player X + Zero co-op, locally or through Netplay. Ready for playtesting; full campaign and Internet sessions are still being validated."
+resolver = "declarative"
+save_compatibility = "isolated"
+channel = "experimental"
+
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+[[feature]]
+id = "prototype"
+name = "X + Zero Co-op"
+description = "Play together as X and Zero with shared lives and separate health. Experimental 0.0.1: enable for local play; Netplay enables co-op automatically. Requires OpenGL, a fresh boot and rewind disabled. Save states are not supported. Uses isolated saves."
+group = "Gameplay"
+default_enabled = false
+
+[[plugin]]
+feature = "prototype"
+id = "mmx6.local-coop.prototype"

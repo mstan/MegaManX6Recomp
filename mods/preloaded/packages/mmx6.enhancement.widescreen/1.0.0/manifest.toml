@@ -3,7 +3,7 @@ id = "mmx6.enhancement.widescreen"
 version = "1.0.0"
 name = "Mega Man X6 Widescreen"
 author = "mstan"
-description = "Renders Mega Man X6 with a wider 16:9 or 21:9 field of view using the game-specific 2D full-frame, background-widening, and cull hooks."
+description = "An adaptive field of view with expanded terrain, anchored HUD and room-edge framing. Adaptive follows the current window without an aspect limit."
 resolver = "declarative"
 save_compatibility = "shared"
 
@@ -19,7 +19,7 @@ disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
 [[feature]]
 id = "widescreen"
 name = "Widescreen"
-description = "Enable Mega Man X6's game-specific wide field of view. Experimental: the engine renders a true 4:3 view, so the extra width is reconstructed by widening the background tile loop and relaxing actor culling."
+description = "Expand the view with adjacent terrain and actors. Experimental: stage and object coverage is still being validated."
 group = "Display"
 default_enabled = false
 
@@ -27,10 +27,14 @@ default_enabled = false
 feature = "widescreen"
 id = "aspect"
 label = "Aspect"
-description = "16:9 presents a fixed wide view. 21:9 (adaptive) follows the window up to 21:9, which is the more experimental of the two."
+description = "Adaptive follows live resizing. Fixed choices retain their selected aspect."
 group = "Display"
 type = "choice"
-default = "16:9"
+default = "adaptive"
+
+[[option.choice]]
+value = "adaptive"
+label = "Adaptive"
 
 [[option.choice]]
 value = "16:9"
@@ -38,7 +42,28 @@ label = "16:9"
 
 [[option.choice]]
 value = "21:9"
-label = "21:9 (adaptive, experimental)"
+label = "21:9"
+
+[[option.choice]]
+value = "32:9"
+label = "32:9"
+
+[[option]]
+feature = "widescreen"
+id = "camera"
+label = "View anchoring"
+description = "Keep the wider view within the room at its edges. The original game camera and controls stay unchanged."
+group = "Display"
+type = "choice"
+default = "edges"
+
+[[option.choice]]
+value = "edges"
+label = "Room edges"
+
+[[option.choice]]
+value = "centered"
+label = "Centered (original widescreen)"
 
 [[plugin]]
 feature = "widescreen"

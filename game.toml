@@ -16,7 +16,7 @@ seeds = "seeds/ghidra_funcs.txt"
 # bios_thunks = "seeds/mmx6_bios_thunks.txt"  # optional; add once BIOS thunks are inventoried
 out_dir = "generated"
 strict = true
-mod_function_entry_funcs = ["0x8002012C", "0x800232D4", "0x80031474", "0x80029598", "0x80029658", "0x80034DCC", "0x8001E9EC", "0x8003BD24", "0x80030ECC", "0x8002C530", "0x80047E34", "0x800244C0", "0x80024CC0", "0x8004E26C", "0x8004DCB8", "0x8004EECC", "0x8004EC30", "0x80050250", "0x8003D308", "0x80051924", "0x80052F64", "0x80040800", "0x80031DA8", "0x8002C4C4", "0x8002820C", "0x800E9898"]
+mod_function_entry_funcs = ["0x8002012C", "0x800232D4", "0x80031474", "0x80029598", "0x80029658", "0x80034DCC", "0x8001E9EC", "0x8003BD24", "0x80030ECC", "0x8002C530", "0x80047E34", "0x800244C0", "0x80024CC0", "0x8004E26C", "0x8004DCB8", "0x8004EECC", "0x8004EC30", "0x80050250", "0x8003D308", "0x80051924", "0x80052F64", "0x80040800", "0x80031DA8", "0x8002C4C4", "0x8002820C", "0x800E9898", "0x800270D0", "0x80026ECC", "0x800239CC", "0x80023ED8", "0x800241D4", "0x80022E44", "0x8002CBFC", "0x8002CCB0", "0x8002CAB4", "0x80029D18", "0x80029E7C", "0x8002CB50", "0x8002CD6C", "0x800F9334"]
 
 [runtime]
 # Bundled OpenBIOS is the default; an explicit retail selection still works.
@@ -87,7 +87,7 @@ renderer = "opengl"
 #
 # Widescreen is now owned by the mods/preloaded mmx6.enhancement.widescreen
 # package (see [widescreen] offer below), not by a Settings row — the
-# mmx6.widescreen activation plugin selects 16:9 or adaptive 21:9 after the mod
+# mmx6.widescreen activation plugin selects Adaptive or a fixed ratio after the mod
 # plan commits. This value stays the authentic default and is what a player
 # gets with the mod disabled; the [widescreen] full_2d + bg2d hooks are always
 # compiled in and stay inert at 4:3.
@@ -124,36 +124,25 @@ deadzone       = 12000
 # D-Pad as the only choices.
 allow_hybrid   = false
 
-# Experimental 16:9 widescreen for a pure-2D sprite engine.
-#
-# MMX6 never emits the 3D sprite-tag hook the framework's gameplay detector keys
-# on, so without full_2d every in-game frame is misclassified as a "full-2D menu"
-# and pillarboxed 4:3. full_2d treats every in-game frame as gameplay so the
-# native-wide present path engages. Pair with [video] aspect_ratio = "16:9"
-# (set in settings.toml / the launcher); at 4:3 this flag is inert. Runtime-only
-# (no regen). The wider field of view itself is an ongoing RE effort (the engine
-# renders a true 4:3 view — there is no overscan to merely "reveal"); this flag
-# is the opt-in switch the FOV work plugs into.
 multitap_analog = false
+# Custom Renderer is enabled through Mods. Fit follows the live drawable;
+# fixed 16:9, 21:9 and 32:9 choices remain available. Disabled stays stock 4:3.
 [widescreen]
 full_2d = true
+# Retail main state 0A owns the stage loop. Menus, including the 512px
+# stage-select carousel, keep their native frame and hide neighboring pages.
+gameplay_state_addr = "0x800CCED0"
+gameplay_state_values = ["0x0000000A"]
 # offer = false: widescreen activation belongs to the mod catalog, not generic
 # Settings. The launcher omits the aspect rows entirely and the runtime ignores
 # a 16:9/21:9 that an older build persisted into settings.toml; the
 # mmx6.widescreen plugin applies the player's choice after the mod plan commits
 # (framework: runtime/src/main.cpp, psx_mod_set_fixed_display_aspect).
 offer = false
-# offer_ultrawide no longer draws its own launcher row (offer = false above
-# removes the whole aspect surface). Kept only so the runtime's default
-# adaptive ceiling stays 21:9 rather than 16:9; when the player picks 21:9 the
-# plugin sets that cap explicitly via psx_mod_set_adaptive_display_aspect, so
-# nothing depends on this value being read first.
+# The plugin supplies the aspect policy, including uncapped Fit (0, 0).
 offer_ultrawide = true
-# The native-wide compositor margins do not exist in PS1 VRAM. Clear them once
-# when MMX6 starts a new background generation, but do not keep masking a guessed
-# finite-map side afterward: authored layers enter the reveal at different times,
-# and the ongoing mask caused black trim over real stage art. Prefer a possible
-# stale reveal tile over suppressing valid content.
+# Clear reveal pixels at background initialization. Host packet mode also clears
+# each submitted background generation so resizing cannot retain old geometry.
 clear_reveal = true
 # The player and enemy health/ability meters share a stable ordering-table
 # packet pool distinct from the stage tile packets. Corner-anchor only that
@@ -165,20 +154,21 @@ nw_left_hud_packet_hi = "0x000E4100"
 # Intro-stage overlay actor deactivation. The green robot's 32px bounds are
 # discarded at the native 320px viewport, so its whole sprite pops while still
 # visible in the reveal. Move the left bias and signed right compare out by the
-# live widescreen margin, plus a 32px off-screen guard (roughly an 18:9 keepalive
-# window while presenting 16:9). Overlay variants with different bytes at these
+# live widescreen margin, plus a 32px off-screen guard. Overlay variants with different bytes at these
 # addresses remain untouched; all hooks are identity at 4:3.
 [widescreen.cull]
 guard_pixels = 32
-bias_sites = ["0x801F2118"]
+# Only widen enemy lifetime and respawn-reset bounds. Native placement strips
+# must remain exact: widening them starts NPC/boss scripts before X arrives.
+# The plugin runs filtered supplemental enemy scans for the revealed space.
+bias_sites = ["0x801F2118", "0x80029FDC"]
+bias_lower_sites = ["0x80029FD0"]
 slti_sites = ["0x801F210C"]
 
-# True wider FOV for the 2D background. MMX6's per-layer BG renderer (FUN_800270d0)
-# draws 21 (0x15) tile columns x 16 rows from a camera-derived start; these three
-# instruction sites let the recompiler widen that loop (count + start col + start
-# screen-x) so it draws the 16:9 reveal columns on BOTH sides of the 320 view,
-# filling the margins with real adjacent stage. Identity at 4:3 and in the engine's
-# own 512 hi-res mode (psx_ws_mmx6_bg_* helpers in gpu.c). Regen required.
+# Legacy background helper sites remain in generated code. Custom Renderer
+# registers a separate DMA arena, making these helpers identity: the native
+# producer keeps its 21-column loop and 64-column ring. Extra authored tiles
+# are appended by src/mods/mmx6_adaptive_background.c. Regen after site changes.
 #   count_site:    0x800271d4  li s6,0x15        (column count)
 #   startcol_site: 0x80027188  andi v1,v1,0x3f   (start tile column)
 #   startx_site:   0x800271a0  sra s4,v0,0x10    (start screen-x)
@@ -186,20 +176,13 @@ slti_sites = ["0x801F210C"]
 count_site    = "0x800271d4"
 startcol_site = "0x80027188"
 startx_site   = "0x800271a0"
-# Tile-ring streamer (FUN_800273e4) leading-edge widen — without this the extra
-# columns the renderer draws fetch un-streamed ring slots (empty=black margin, or
-# stale=old tiles as the camera scrolls). These two addiu compute the left
-# (scrollX-16) and right (scrollX+16, before +width) stream world-X; pushed out by
-# LEFT*16 so the 64-col ring stays valid across the widened window.
+# Legacy leading-edge helpers, also identity with the custom packet arena.
 #   stream_left_site:  0x80027424  addiu a1,s1,-0x10
 #   stream_right_site: 0x80027444  addiu a1,s1,0x10
 stream_left_site  = "0x80027424"
 stream_right_site = "0x80027444"
-# Packet-buffer RELOCATION — cures the dense-stage overflow of the engine's BG packet
-# double-buffer (base 0x800B91C0, stride 0x4000 = 1024 slots) + its 1000-tile/frame cap
-# that the widen overruns (void/garbled columns). When the widen is active, relocate the
-# double-buffer to a larger proven-free region + raise the cap (gpu.c psx_ws_mmx6_bg_bufbase
-# / _undercap; identity at 4:3). bufbase_site = driver addu (buffer addr); cap_site = slti.
+# Custom mode keeps the original packet base and 1000-tile budget. Extra tiles
+# occupy checked, double-buffered host slices, never the legacy relocated RAM.
 bufbase_site = "0x80026dc4"
 cap_site     = "0x80027278"
 # Full tile-ring initializer. Its entry is the precise stage/background dirty

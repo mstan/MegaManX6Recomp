@@ -76,9 +76,11 @@ renderer notes) and the remaining enhancement follow-ups.
 
 ## Enhancements
 
-### X + Zero co-op netplay branch
+### X + Zero co-op (experimental 0.0.1)
 
-On `feat/local-coop-x-zero`, Netplay uses the shared PSX delay-sync transport
+Enable **X + Zero Co-op** on the launcher's Mods page for local play. The bundled
+mod is marked **Experimental**, version **0.0.1**, and disabled by default.
+Netplay uses the shared PSX delay-sync transport
 with X as P1 and Zero as P2. The built-in co-op logic is enabled for both peers;
 ordinary offline mod selections remain separate. Use identical builds and the
 supported v1.1 disc and OpenGL renderer. Select your local controller on the launcher's P1/Netplay
@@ -86,8 +88,11 @@ card, then host or join through **Netplay**.
 
 **Settings → Display → Netplay aspect** offers fixed 4:3, 16:9, and 21:9.
 Choose it before hosting; the host's choice applies to both peers. Adaptive is
-excluded. Both native HUDs anchor to the left edge with their normal spacing.
-Offline widescreen continues to use its existing Mods selection.
+excluded. The wide choices use the full enhanced renderer: host background
+packets, room-edge framing, guarded enemy activation, and native dialogue/effect
+handling. Window resizing cannot change the match's view or activation bounds.
+Both native HUDs anchor to the left edge with their normal spacing. Offline
+widescreen continues to use its Mods selection, including adaptive Fit.
 
 Bundled OpenBIOS is the default. Co-op netplay skips the BIOS shell animation
 while running kernel initialization and disc loading normally. A selected retail
@@ -101,7 +106,8 @@ native Zero/HUD rendering, and fixed 4:3/16:9/21:9 output. Logged core/device
 checksums matched across each run. Internet latency/loss, full campaign play,
 and runtime rematches still need separate validation. The repeatable input test
 is `tools/test_coop_netplay_runtime.py` (requires two private debug-enabled peers;
-use `--expected-width 426` for 16:9 or `560` for 21:9).
+use `--expected-width 426` for 16:9 or `560` for 21:9; add `--enhanced` to
+check both HUD positions and the intro robot beyond the native view).
 
 MegaManX6Recomp supports opt-in enhancement packages without permanently
 patching your disc. Mega Man X6 Tweaks-derived packages expose their changes as

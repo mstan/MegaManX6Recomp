@@ -6,8 +6,8 @@
 
 namespace {
 
-constexpr size_t kExpectedPackages = 15;
-constexpr size_t kExpectedFeatures = 203;
+constexpr size_t kExpectedPackages = 16;
+constexpr size_t kExpectedFeatures = 204;
 constexpr size_t kExpectedTweaksPackages = 13;
 constexpr const char* kGameId = "SLUS-01395";
 constexpr const char* kStockDiscSha256 =
@@ -90,6 +90,13 @@ int main(int argc, char** argv) {
         }
         const PSXRecompV4::ModPackage* package = manager.selected_package(id);
         if (!package) return fail(id + " has no selected package version");
+        if (id == "mmx6.local-coop" &&
+            (package->version != "0.0.1" ||
+             package->channel != PSXRecompV4::ModChannel::Experimental ||
+             package->features.size() != 1 ||
+             package->features[0].channel != PSXRecompV4::ModChannel::Experimental)) {
+            return fail("co-op must ship as experimental 0.0.1");
+        }
         if (id == "mmx6.tweaks.assets" ||
             id == "mmx6.tweaks.extra-mugshots") {
             return fail(id + " is permission-gated and must remain withheld");

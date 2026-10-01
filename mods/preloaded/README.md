@@ -3,6 +3,11 @@
 This directory contains the built-in, default-disabled Mega Man X6 mod catalog.
 CMake and the release packager copy it to `mods/packages` beside the runtime.
 
+`mmx6.local-coop` provides **X + Zero Co-op**, version **0.0.1**, with the
+launcher's standard **Experimental** badge. Enable it for local co-op; Netplay
+enables co-op automatically. Campaign coverage and Internet sessions remain
+under playtest. OpenGL is required; rewind and save states are unsupported.
+
 Two enhancement packages own features that used to live in the launcher's generic
 Settings pages:
 

@@ -1136,6 +1136,8 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
         if (bank) {
             triangle(expanded,expanded+40,q,0,1,2,bank);
             triangle(expanded+40,q[0],q,2,1,3,bank);
+            psx_mod_tag_world_primitive(expanded,1);
+            psx_mod_tag_world_primitive(expanded+40,1);
             psx_mod_write_word(at,expanded&0xFFFFFF);
             /* Native actor lists append through a saved tail tag. Retarget
              * that tail too, or the next actor overwrites our link and drops
@@ -1519,7 +1521,8 @@ static void activate(void) {
 }
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
-        "mmx6.local-coop.prototype", "mmx6-x-zero-delay-v3", 0, 0, 1, 7
+        "mmx6.local-coop.prototype", "mmx6-x-zero-delay-v4", 0, 0, 1, 7,
+        "mmx6.widescreen"
     };
     psx_mod_register_netplay_profile(&netplay_profile);
     psx_mod_register_activation_plugin("mmx6.local-coop.prototype",activate);

@@ -18,6 +18,7 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--in-game', action='store_true', help='Start in already-idle intro gameplay')
     parser.add_argument('--expected-width', type=int, default=320)
+    parser.add_argument('--enhanced', action='store_true', help='Check enhanced intro rendering and actor visibility')
     args = parser.parse_args()
     ports = [args.host_port, args.guest_port]
     args.output.mkdir(parents=True, exist_ok=True)
@@ -110,8 +111,31 @@ def main():
         print('PASS remote P2 voluntary leave/rejoin preserves health on both peers', flush=True)
         results.append({'rejoined': [snapshot(p) for p in (0, 1)]})
         for peer in (0, 1):
-            shot = request(peer, 'screenshot', path=str((args.output/f'peer{peer}.png').resolve()))
+            path = (args.output/f'peer{peer}.png').resolve()
+            shot = request(peer, 'screenshot', path=str(path))
             assert shot['width'] == args.expected_width, shot
+            if args.enhanced:
+                from PIL import Image
+                ws = request(peer, 'gpu_state')['ws']
+                assert ws['view_anchor'] and ws['bg2d_generations'] > 0, ws
+                pixels = Image.open(path).convert('RGB')
+                for x in (23, 49):
+                    greens = sum(g > r+32 and g > b+32 for r, g, b in
+                                 (pixels.getpixel((x, y)) for y in range(24, 100)))
+                    assert greens >= 8, ('native player HUD missing or misplaced', peer, x, greens)
+                camera = struct.unpack('<h', read(peer, 0x80097202, 2))[0]
+                actors = read(peer, 0x8008EF48, 0x1D40)
+                revealed = []
+                for offset in range(0, len(actors), 0x9C):
+                    actor = actors[offset:offset+0x9C]
+                    x = struct.unpack_from('<h', actor, 10)[0]
+                    if actor[0] and actor[1] == 1 and actor[3] and \
+                            camera+320 < x < camera+320+ws['view_right']:
+                        revealed.append(x)
+                assert revealed, ('intro robot should draw in the right reveal', camera, ws)
+                results.append({'peer': peer, 'enhanced': ws, 'revealed_robots': revealed})
+        if args.enhanced:
+            print('PASS enhanced background, both native HUDs, and intro robot outside the native view', flush=True)
         (args.output/'result.json').write_text(json.dumps(results, indent=2))
     finally:
         for peer in (0, 1):

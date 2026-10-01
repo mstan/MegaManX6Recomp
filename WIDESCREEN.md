@@ -8,14 +8,29 @@ one gen-time recompiler hook (no gameplay logic changes).
 
 ## Stage-entry stale reveal cleanup (2026-07-09 spike)
 
-Co-op netplay update (2026-10-01): the local-coop branch offers fixed 4:3,
-16:9 and 21:9 through **Settings → Display → Netplay aspect**. The host's choice
-is shared at launch; no adaptive choice is offered. OpenGL dual-raster sessions
-render the same native HUD textures for both players. Two-peer captures at
-320, 426 and 560 pixels wide place X's health fill at x=22..24 and Zero's at
-x=48..50 in every view. Zero's existing explicit left-anchor tags cover both
-his HUD artwork and fill primitives. The finite-map reveal limitations below
-still apply. Offline Mods retain their existing widescreen behavior.
+Co-op netplay update (2026-10-01): fixed 16:9 and 21:9 now use the complete
+Custom/Adaptive Renderer imported from MMX6 abbf97d, with framework integration
+7c7133fb and the subsequent composite HUD fix. The older centered reveal path
+in the historical notes below does not describe these netplay views.
+
+The host chooses the ratio before launch. The trusted netplay profile enables
+both co-op and the enhanced renderer, ignores offline aspect/camera preferences,
+and never enables window-driven aspect changes. Background packets, guarded
+supplemental enemy scans, room-edge origins, dialogue and effect handling are
+shared with offline Custom Renderer. Scene triggers retain native reach.
+
+Co-op adaptations reserve separate background texture IDs (5001..5003), tag
+Zero's retained sprite packets as world geometry, and exempt his host-DMA HUD
+from world-origin shifts. The software netplay pass samples retained background
+indices with live guest palettes. Texture and packet allocations survive rematches.
+Compatibility is now mmx6-x-zero-delay-v4; both peers need the same build.
+
+Private two-peer tests passed at 426x240 and 560x240: transported movement,
+leave/rejoin with health retained, both native HUDs at x=22..24 and 48..50,
+and the intro robot drawing beyond the original 320px view. At 21:9, three host
+window sizes kept 560px presentation and 272px activation margin on both peers;
+387 core/device checkpoints matched. Real OpenGL checks passed at 1x and 4x.
+Internet conditions, other stages and longer sessions remain owner playtests.
 
 The native-wide compositor persists like VRAM, but its synthetic side margins
 have no PS1-owned pixels underneath them. If MMX6 does not redraw those columns
