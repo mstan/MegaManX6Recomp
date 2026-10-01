@@ -242,6 +242,33 @@ int main(void) {
         }
         assert(count==(active?(21+44+44)*16:0));
     }
+    /* Ilumina's selected 320px atlas panel stays centered with its sprite
+     * composite at a room edge. Distinct neighboring art must not leak. */
+    fixture(); support_banks=0;
+    test_view=(WsViewAnchor){0,534,-267,0,0};
+    ram[0xccedc]=8; ram[0x972a3]=1; ram[0x972a4]=5;
+    ram[0x972f2]=255; ram[0x972ee]=31;
+    half(0x800972aau,320); half(0x800972aeu,256);
+    ram[0x100000+256+32+1]=3;
+    ram[0x100000+256+32+2]=4;
+    for(unsigned row=0;row<16;++row) for(unsigned col=0;col<16;++col) {
+        half(0x80110600u+row*32+col*2,col>=4?1:2);
+        half(0x80110800u+row*32+col*2,col<8?1:2);
+    }
+    mmx6_adaptive_background_end(2,0x800b91c0u);
+    count=0;
+    for(unsigned off=2*LAYER_BYTES;off<3*LAYER_BYTES && extra[off+7];off+=32) {
+        uint32_t packet=0x80800000u+off;
+        int x=(int16_t)psx_mod_read_word(packet+8);
+        int source=320+mmx6_mirror_tile_x(x,320,&flip);
+        assert(source>=320 && source<640);
+        assert(psx_mod_read_word(packet+12)==mmx6_tile_uvclut(0x01123000u));
+        assert(psx_mod_read_word(packet+16)==0);
+        assert(psx_mod_read_word(packet+28)==(GPU_WS_BG2D_PACKET_MAGIC|
+            (flip?GPU_WS_BG2D_MIRROR_X:0u)));
+        ++count;
+    }
+    assert(count==(21+17+17)*16);
     /* Original-disc parser and the two different native upload layouts. */
     static uint8_t dat[2048u*2u+0x40000u];
     static uint16_t pixels[1024u*512u];
