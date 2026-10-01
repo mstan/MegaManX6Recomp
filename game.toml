@@ -83,7 +83,7 @@ renderer = "opengl"
 #
 # Widescreen is now owned by the mods/preloaded mmx6.enhancement.widescreen
 # package (see [widescreen] offer below), not by a Settings row — the
-# mmx6.widescreen activation plugin selects 16:9 or adaptive 21:9 after the mod
+# mmx6.widescreen activation plugin selects Adaptive or a fixed ratio after the mod
 # plan commits. This value stays the authentic default and is what a player
 # gets with the mod disabled; the [widescreen] full_2d + bg2d hooks are always
 # compiled in and stay inert at 4:3.

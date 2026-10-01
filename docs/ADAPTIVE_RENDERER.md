@@ -1,14 +1,14 @@
 # Adaptive Custom Renderer review
 
-September 20, 2026. Feature branches: `feat/mmx6-adaptive-renderer`
-in the game and framework. Framework pin: `39ee7d79` (adaptive screen masks
-and native effect presentation, including the earlier frontbuffer fix). This is an experimental
-review build, not a release or a completed whole-game compatibility claim.
+September 30, 2026. The framework integration is merged in
+[psxrecomp PR #448](https://github.com/RetroPortingToolKit/psxrecomp/pull/448),
+and the game pins master commit `93f2a709`. The renderer remains experimental
+and off by default. Integration does not claim whole-game compatibility.
 
 ## Player behavior
 
 The mod remains off by default, with stock 4:3 presentation. Enable **Custom
-Renderer** under Mods. **Fit to Window** follows live resizing without a
+Renderer** under Mods. **Adaptive** follows live resizing without a
 16:9, 21:9 or 32:9 ceiling. Fixed 16:9, 21:9 and 32:9 choices are also available.
 Room-edge anchoring is the default; centered anchoring remains selectable.
 
@@ -456,3 +456,27 @@ repetitive at 64:9; it is not newly authored scenery. Retained texture banks
 currently require OpenGL; other renderers have not received the same
 scene-residency review. Central tracking remains `beads-eio.1.9` (game) and
 `beads-eio.3.168` (framework).
+
+## Framework integration validation
+
+The maintained framework pin combines the adaptive changes with current
+segmented dispatch and active-plan mod hooks. Overlay ABI 25 preserves the
+upstream store-PC pointer and adds handled function filters. Filters execute
+only for enabled plugins; snapshots defer until their host callbacks return.
+The matching reachable recomp-ui pin is `2991976`.
+
+Windows validation passed 123 enabled compiler tests, the 126-case enabled
+runtime suite (one existing platform skip), 27 UI tests, seven game tests and
+release-config parity. Fresh original-disc AOT produced 71 audited native
+pairs and 21,714 manifest rows with matching hashes and original-byte guards;
+complete static coverage is not claimed. Clang Release builds and isolated
+OpenGL/software restores covered all four aspect choices, Recycle Lab armor
+and background, the first darkness section, the special attack and adaptive
+recovery, stage select, intro snapshots, and fresh snapshot save/load.
+
+The framework update changes cache and snapshot compatibility keys. Memory
+cards are unchanged. Only private validation copies of compatible v7/v8 stage
+snapshots were rekeyed; original user snapshots and normal runtime rejection
+remain intact. Idle intro measurements were about 60 FPS and do not rule out
+the enemy-triggered stutter in GitHub #32 or Ilumina phase-two slowdown in #31.
+The combined darkness/rain mask remains a separate follow-up, `beads-eio.1.15`.

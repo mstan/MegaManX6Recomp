@@ -69,7 +69,7 @@ playable preview rather than a certified full playthrough.
 | Stage gameplay | Works (not yet verified all the way to the end) |
 | Memory-card save / load | Works (standard PS1 `.mcd`, emulator-compatible) |
 | Renderers | Software **and** OpenGL (GPU); Software is the default this release (see ISSUES.md #7), OpenGL selectable |
-| Custom Renderer | Experimental, opt-in; adaptive Fit or fixed 16:9 / 21:9 / 32:9 |
+| Custom Renderer | Experimental, opt-in; Adaptive or fixed 16:9 / 21:9 / 32:9 |
 
 Known issues: see [`ISSUES.md`](ISSUES.md) for the current issue log (including
 renderer notes) and the remaining enhancement follow-ups.
