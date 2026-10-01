@@ -13,6 +13,7 @@ import time
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--port', type=int, required=True)
+    parser.add_argument('--souls', action='store_true', help='Also spawn native Nightmare cores (stage resources required)')
     args = parser.parse_args()
     diag = 0x9F080000
 
@@ -90,6 +91,30 @@ def main():
             assert after[seat] != before[seat], 'Collector got no ammo'
             assert after[seat ^ 1] == before[seat ^ 1], 'Partner got collector ammo'
             print(f'PASS P{seat+1} ammo remains collector-only', flush=True)
+
+        # Distinct uncollected stage IDs for each fixture; native collection
+        # flags remain shared, while the permanent increase is collector-only.
+        for seat in (1, 0):
+            for base, kind, label in ((0x800CCF2B, seat, 'Heart Tank'),
+                                      (0x800CCF31, 16+seat, 'weapon capacity')):
+                before = list(read(base, 2))
+                # This is a disposable fixture, so make these IDs collectible.
+                flags = 0x800CCF3C+(0 if kind < 16 else 2)
+                write(flags, read(flags)[0] & ~(1 << seat))
+                pickup(kind, seat)
+                before[seat] += 2
+                assert list(read(base, 2)) == before, f'{label} ownership changed'
+                print(f'PASS P{seat+1} {label} stays character-specific', flush=True)
+
+        if args.souls:
+            for seat in (1, 0):
+                before = list(struct.unpack('<HH', read(0x800CCFA2, 4)))
+                write(diag+0x51, 0xF0)  # Native small Nightmare core, type 0x31.
+                write(diag+0x52, seat)
+                command(3)
+                before[seat] += 4
+                wait(lambda: list(struct.unpack('<HH', read(0x800CCFA2, 4))) == before)
+                print(f'PASS P{seat+1} Nightmare Souls stay character-specific', flush=True)
 
         lives = read(0x800CCF09)[0]
         pickup(38, 1)

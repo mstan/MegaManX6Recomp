@@ -42,7 +42,7 @@ enum { MENU_PORTRAIT=0x10800, MENU_PORTRAIT_COLORS=0x12800, MENU_BYTES=0x12A00 }
 static uint8_t saved_portrait_colors[0x200];
 static int zero_menu_loaded;
 static uint8_t saved_palette_dirty;
-static uint16_t previous_input;
+static uint16_t previous_input, p2_edges;
 static SpriteBank banks[4096];
 static unsigned bank_count;
 static int inside, ready, enrolled, failed;
@@ -67,6 +67,14 @@ static DeathEffectOrigin death_effect[96];
 typedef struct { uint32_t actor; uint8_t seat; } PickupOwner;
 static PickupOwner pickup_owners[128];
 static int pickup_call;
+/* Scene transport is independent of voluntary absence and death. The owner
+ * occupies the native singleton for the one world pass until control returns. */
+static unsigned scene_owner, scene_phase;
+static uint8_t scene_body[0x158];
+static int32_t scene_y;
+static int scene_call, zero_projected;
+
+static int scene_passenger(unsigned seat) { return scene_phase && scene_owner!=seat+1; }
 
 static void put32(uint8_t *p, uint32_t v) {
     for (unsigned i=0;i<4;++i) p[i]=(uint8_t)(v>>(8*i));
@@ -227,6 +235,7 @@ static void enter_zero(void) {
     if (zero_menu_loaded) psx_mod_write_word(SCRATCH+0xA8,menu_memory+MENU_PORTRAIT_COLORS);
     psx_mod_write_byte(PLAY+0x38,1);
     psx_mod_write_byte(PLAY+0x5E,5);
+    zero_projected=1;
 }
 static void leave_zero_context(int shared_world) {
     capture_player(&p2);
@@ -249,6 +258,7 @@ static void leave_zero_context(int shared_world) {
         project(PLAY,saved_play,sizeof saved_play);
         project(0x800971F8,saved_camera,sizeof saved_camera);
     }
+    zero_projected=0;
 }
 static void leave_zero(void) { leave_zero_context(0); }
 
@@ -279,7 +289,7 @@ static int pickup_collect(CPUState *cpu, uint32_t address) {
     /* Preserve deterministic P1 priority only when both actually overlap.
      * Native overlap, item effects and capacity handling remain unchanged. */
     for (unsigned seat=0;seat<2;++seat) {
-        if (life.status[seat]!=MMX6_COOP_ALIVE) continue;
+        if (life.status[seat]!=MMX6_COOP_ALIVE || scene_passenger(seat)) continue;
         result=pickup_as_seat(cpu,address,actor,seat);
         unsigned mode=psx_mod_read_byte(actor+4);
         if (mode==1) continue;
@@ -310,6 +320,34 @@ static int pickup_tick(CPUState *cpu, uint32_t address) {
     }
     return 0;
 }
+static uint32_t pickup_overlap(CPUState *cpu, uint32_t actor, unsigned seat) {
+    if (seat==(unsigned)(zero_world?1:0)) return guest(cpu,0x8002DCF4,actor,PLAYER);
+    uint8_t body[sizeof p2.body];
+    capture(PLAYER,body,sizeof body);
+    project(PLAYER,seat?p2.body:p1.body,sizeof body);
+    uint32_t result=guest(cpu,0x8002DCF4,actor,PLAYER);
+    project(PLAYER,body,sizeof body);
+    return result;
+}
+static int nightmare_soul(CPUState *cpu, uint32_t address) {
+    uint32_t actor=cpu->gpr[4];
+    if (pickup_call || !enrolled || failed || psx_mod_read_byte(actor+5)!=5 ||
+        !psx_mod_read_byte(actor+0x8E)) return 0;
+    pickup_call=1;
+    unsigned seat=zero_world?1:0;
+    uint32_t box=psx_mod_read_word(actor+0x68);
+    psx_mod_write_word(actor+0x68,0x80075EE0); /* Native collectible soul box. */
+    for (unsigned candidate=0;candidate<2;++candidate) {
+        if (life.status[candidate]==MMX6_COOP_ALIVE && !scene_passenger(candidate) &&
+            pickup_overlap(cpu,actor,candidate)) { seat=candidate; break; }
+    }
+    psx_mod_write_word(actor+0x68,box);
+    /* Run this entity once. The original routine selects PLAY+D2/D4 from
+     * the collector's character, retaining native soul values and rank data. */
+    cpu->gpr[2]=pickup_as_seat(cpu,address,actor,seat);
+    pickup_call=0;
+    return 1;
+}
 static void enroll(CPUState *cpu) {
     uint32_t x=psx_mod_read_word(PLAYER+8), y=psx_mod_read_word(PLAYER+12);
     memset(&p2,0,sizeof p2);
@@ -334,7 +372,7 @@ static void enroll(CPUState *cpu) {
 }
 
 static int shared_camera(void) {
-    return enrolled && life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE &&
+    return enrolled && !scene_owner && life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE &&
         psx_mod_read_byte(PLAYER+4)==1 && psx_mod_read_byte(PLAYER+5)>=2 &&
         !psx_mod_read_byte(PLAY+0x10) && !psx_mod_read_byte(PLAY+0x1C);
 }
@@ -446,6 +484,8 @@ static void diagnostics(uint16_t input) {
     psx_mod_write_byte(diagnostic+0x3B,life.wipe);
     psx_mod_write_byte(diagnostic+0x3C,(uint8_t)(pause_owner+1));
     psx_mod_write_byte(diagnostic+0x3D,(uint8_t)p2_hud_fade);
+    psx_mod_write_byte(diagnostic+0x3E,(uint8_t)scene_owner);
+    psx_mod_write_byte(diagnostic+0x3F,(uint8_t)scene_phase);
     project(diagnostic+0x100,p2.body,sizeof p2.body);
     project(diagnostic+0x300,p2.shots,sizeof p2.shots);
     /* Stable P1 snapshot: a debugger may otherwise observe PLAYER while a
@@ -458,6 +498,194 @@ static uint16_t p2_input(void) {
     uint16_t raw=(uint16_t)~sio_get_pad_buttons_slot(1);
     if (psx_mod_read_byte(diagnostic+0x30)) raw=(uint16_t)~psx_mod_read_half(diagnostic+0x34);
     return raw;
+}
+static void scene_begin(unsigned seat, uint32_t source) {
+    if (scene_owner || !enrolled || life.status[seat]!=MMX6_COOP_ALIVE) return;
+    scene_owner=seat+1;
+    scene_phase=0;
+    life.select_frames=0;
+    psx_mod_write_word(diagnostic+0x70,psx_mod_read_word(diagnostic+0x70)+1);
+    psx_mod_write_word(diagnostic+0x74,source);
+    /* Animation starts at the end of this world pass, after all projections
+     * have unwound. A dead or voluntarily absent partner never joins it. */
+    if (life.status[seat^1]==MMX6_COOP_ALIVE ||
+        (seat==0 && life.status[1]==MMX6_COOP_JOINING)) scene_phase=1;
+}
+static void script_begin(CPUState *cpu, uint32_t address) {
+    (void)cpu;
+    if (!scene_call && !failed) scene_begin(zero_projected?1:0,address);
+}
+static int door_begin(CPUState *cpu, uint32_t address) {
+    if (scene_call || inside || !enrolled || failed || scene_owner) return 0;
+    uint32_t actor=cpu->gpr[4];
+    scene_call=1;
+    unsigned seat=0;
+    uint32_t hit=life.status[0]==MMX6_COOP_ALIVE?guest(cpu,0x80050C88,actor,0):0;
+    if (!hit && life.status[1]==MMX6_COOP_ALIVE) {
+        inside=1;
+        enter_zero();
+        hit=guest(cpu,0x80050C88,actor,0);
+        leave_zero();
+        inside=0;
+        if (hit) seat=1;
+    }
+    /* Probe only the pure native overlap test. Door AI, effects and room
+     * changes still execute once, under the touching player's context. */
+    if (seat) { inside=1; enter_zero(); }
+    uint32_t result=guest(cpu,address,actor,cpu->gpr[5]);
+    if (hit && psx_mod_read_byte(PLAYER+0xD4)) scene_begin(seat,address);
+    if (seat) { leave_zero_context(1); inside=0; }
+    scene_call=0;
+    cpu->gpr[2]=result;
+    return 1;
+}
+static int interaction_inside(uint32_t address, uint32_t actor, unsigned seat) {
+    int x=seat?(int32_t)le32(p2.body+8)>>16:(int16_t)psx_mod_read_half(PLAYER+10);
+    int y=seat?(int32_t)le32(p2.body+12)>>16:(int16_t)psx_mod_read_half(PLAYER+14);
+    if (address==0x80051924) {
+        int dx=x-(int16_t)psx_mod_read_half(actor+10);
+        int dy=y-(int16_t)psx_mod_read_half(actor+14);
+        return dx>=-64 && dx<=64 && dy>=-104 && dy<=16;
+    }
+    unsigned stage=psx_mod_read_byte(PLAY+12), sub=psx_mod_read_byte(PLAY+13);
+    unsigned row=psx_mod_read_byte(0x8007A124+stage*2+sub);
+    uint32_t bounds=0x8007A154+row*128+(psx_mod_read_byte(actor+2)&15)*8;
+    return x>(int16_t)psx_mod_read_half(bounds) && x<(int16_t)psx_mod_read_half(bounds+2) &&
+        y>(int16_t)psx_mod_read_half(bounds+4) && y<(int16_t)psx_mod_read_half(bounds+6);
+}
+static int interaction_begin(CPUState *cpu, uint32_t address) {
+    if (scene_call || inside || !enrolled || failed || scene_owner) return 0;
+    uint32_t actor=cpu->gpr[4];
+    int first=life.status[0]==MMX6_COOP_ALIVE && interaction_inside(address,actor,0);
+    int second=life.status[1]==MMX6_COOP_ALIVE && interaction_inside(address,actor,1);
+    int optional=address==0x80052F64 && (psx_mod_read_byte(actor+2)&0xF0);
+    unsigned seat=second && (!first || (optional && (p2_edges&0x100) &&
+        !(psx_mod_read_half(0x800C4570)&0x100)));
+    scene_call=1;
+    uint8_t input[6];
+    if (seat) {
+        inside=1;
+        capture(0x800C456C,input,sizeof input);
+        enter_zero();
+        uint16_t raw=p2_input(); raw=(uint16_t)((raw<<8)|(raw>>8));
+        psx_mod_write_half(0x800C456C,raw);
+        psx_mod_write_half(0x800C4570,p2_edges);
+    }
+    uint32_t result=guest(cpu,address,actor,cpu->gpr[5]);
+    if (psx_mod_read_byte(PLAYER+0xD0) || psx_mod_read_byte(PLAY+0x10)==2)
+        scene_begin(seat,address);
+    if (seat) {
+        leave_zero_context(1);
+        project(0x800C456C,input,sizeof input);
+        inside=0;
+    }
+    scene_call=0;
+    cpu->gpr[2]=result;
+    return 1;
+}
+static int scene_locked(const uint8_t *owner) {
+    return owner[0xD0] || owner[0xD4] || owner[0x7A] ||
+        psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C) ||
+        psx_mod_read_byte(0x8008EAFC);
+}
+static void scene_tick(CPUState *cpu) {
+    if (!scene_owner || !enrolled) return;
+    unsigned seat=scene_owner-1, passenger=seat^1;
+    uint8_t owner[sizeof scene_body];
+    if (seat) memcpy(owner,p2.body,sizeof owner);
+    else capture(PLAYER,owner,sizeof owner);
+    int locked=scene_locked(owner);
+    if (!scene_phase) {
+        /* A voluntary departure already in flight still finishes, even if
+         * native gameplay is now frozen for the other player's dialogue. */
+        if (!seat && life.status[1]==MMX6_COOP_LEAVING) {
+            int prior_inside=inside;
+            inside=1;
+            enter_zero();
+            guest(cpu,0x8003674C,PLAYER,0);
+            leave_zero();
+            inside=prior_inside;
+            if (p2.body[4]==3) mmx6_coop_teleport_done(&life);
+        }
+        if (!locked) scene_owner=0;
+        return;
+    }
+    if (locked && scene_phase>=4) scene_phase=1;
+    /* Wait for an actual grounded, controllable destination. Native door
+     * and script locks, including chained boss dialogue, must all release. */
+    int landing=!locked && owner[4]==1 && owner[5]>=2 &&
+        !owner[0x67] && (owner[0x70]&8) && owner[0x5C];
+    if (scene_phase==3 && !landing) return;
+    int prior_inside=inside;
+    inside=scene_call=1;
+    uint8_t play[sizeof saved_play], camera[sizeof saved_camera];
+    capture(PLAY,play,sizeof play);
+    capture(0x800971F8,camera,sizeof camera);
+    if (passenger) enter_zero();
+    if (scene_phase==1) {
+        if (passenger && life.status[1]==MMX6_COOP_JOINING) {
+            uint32_t x=psx_mod_read_word(PLAYER+8);
+            project(PLAYER,returning_body,sizeof returning_body);
+            psx_mod_write_word(PLAYER+8,x);
+            psx_mod_write_word(PLAYER+12,(uint32_t)join_y);
+            life.status[1]=MMX6_COOP_ALIVE;
+            join_phase=0;
+        }
+        capture(PLAYER,scene_body,sizeof scene_body);
+        if (passenger) clear_p2_combat();
+        /* Clear the resident pools too; they will be captured on projection
+         * exit. Otherwise a cancelled saber can survive the teleport. */
+        for (unsigned i=0;i<sizeof p2.shots;i+=4) psx_mod_write_word(0x800950A0+i,0);
+        for (unsigned i=0;i<sizeof p2.trails;i+=4) psx_mod_write_word(0x800972F8+i,0);
+        for (unsigned i=0;i<sizeof p2.effects;i+=4) psx_mod_write_word(0x800911A8+i,0);
+        guest(cpu,0x8003A980,PLAYER,0);
+        guest(cpu,0x8003BA04,PLAYER,3);
+        guest(cpu,0x8003B954,PLAYER,0);
+        psx_mod_write_word(PLAYER+0x54,0);
+        scene_phase=2;
+    } else if (scene_phase==2) {
+        guest(cpu,0x8003674C,PLAYER,0); /* Original outgoing beam animation. */
+        if (psx_mod_read_byte(PLAYER+4)==3) scene_phase=3;
+    } else if (scene_phase==3) {
+        project(PLAYER,scene_body,sizeof scene_body);
+        psx_mod_write_word(PLAYER+8,le32(owner+8));
+        scene_y=(int32_t)le32(owner+12);
+        int32_t top=(int16_t)psx_mod_read_half(0x80097206)-40;
+        psx_mod_write_word(PLAYER+12,(uint32_t)(top*65536));
+        psx_mod_write_word(PLAYER+0x18,le32(owner+8));
+        psx_mod_write_word(PLAYER+0x1C,(uint32_t)(top*65536));
+        psx_mod_write_byte(PLAYER+3,1);
+        psx_mod_write_byte(PLAYER+4,1);
+        psx_mod_write_byte(PLAYER+0x14,owner[0x14]);
+        psx_mod_write_byte(PLAYER+0x15,owner[0x15]);
+        guest(cpu,0x8003A980,PLAYER,0);
+        guest(cpu,0x8003BA04,PLAYER,1);
+        psx_mod_write_word(PLAYER+0x68,0);
+        psx_mod_write_word(PLAYER+0x54,0);
+        scene_phase=4;
+    } else {
+        guest(cpu,0x80017A04,PLAYER,0);
+        if (scene_phase==4) {
+            int32_t y=(int32_t)psx_mod_read_word(PLAYER+12)+8*65536;
+            if (y>=scene_y) {
+                y=scene_y;
+                guest(cpu,0x8003BA04,PLAYER,2);
+                scene_phase=5;
+            }
+            psx_mod_write_word(PLAYER+12,(uint32_t)y);
+        } else if (!psx_mod_read_byte(PLAYER+0x46)) {
+            guest(cpu,0x8003AD18,PLAYER,0);
+            guest(cpu,0x8003CCBC,PLAYER,0);
+            psx_mod_write_byte(PLAYER+0x61,60);
+            scene_owner=scene_phase=0;
+            life.select_frames=0;
+        }
+    }
+    if (passenger) leave_zero();
+    project(PLAY,play,sizeof play);
+    project(0x800971F8,camera,sizeof camera);
+    inside=prior_inside;
+    scene_call=0;
 }
 static void diagnostic_setup(CPUState *cpu) {
     unsigned command=psx_mod_read_byte(diagnostic+0x50);
@@ -476,12 +704,31 @@ static void diagnostic_setup(CPUState *cpu) {
         if (actor) {
             unsigned seat=psx_mod_read_byte(diagnostic+0x52)&1;
             psx_mod_write_byte(actor,0x21);
-            psx_mod_write_byte(actor+1,0x2F);
-            psx_mod_write_byte(actor+2,psx_mod_read_byte(diagnostic+0x51));
+            unsigned kind=psx_mod_read_byte(diagnostic+0x51);
+            psx_mod_write_byte(actor+1,kind==0xF0?0x0F:0x2F);
+            psx_mod_write_byte(actor+2,kind==0xF0?0x31:kind);
             psx_mod_write_word(actor+8,seat?le32(p2.body+8):psx_mod_read_word(PLAYER+8));
             psx_mod_write_word(actor+12,seat?le32(p2.body+12):psx_mod_read_word(PLAYER+12));
         }
         psx_mod_write_word(diagnostic+0x68,actor);
+    }
+    if (command==4) {
+        /* Atomic private placement, avoiding debug writes during projection. */
+        unsigned seat=psx_mod_read_byte(diagnostic+0x52)&1;
+        uint32_t x=psx_mod_read_word(diagnostic+0x54), y=psx_mod_read_word(diagnostic+0x58);
+        if (seat) {
+            put32(p2.body+8,x); put32(p2.body+12,y);
+            put32(p2.body+0x18,x); put32(p2.body+0x1C,y);
+        } else {
+            psx_mod_write_word(PLAYER+8,x); psx_mod_write_word(PLAYER+12,y);
+            psx_mod_write_word(PLAYER+0x18,x); psx_mod_write_word(PLAYER+0x1C,y);
+        }
+    }
+    if (command==5 || command==6) {
+        unsigned seat=command==5?(psx_mod_read_byte(diagnostic+0x52)&1):scene_owner==2;
+        if (seat) enter_zero();
+        guest(cpu,command==5?0x8003D308:0x8003D330,0x14,0x40);
+        if (seat) leave_zero_context(1);
     }
     if (command) psx_mod_write_byte(diagnostic+0x50,0);
 }
@@ -552,6 +799,7 @@ static int player_tick(CPUState *cpu, uint32_t address) {
 }
 static int stage_tick(CPUState *cpu, uint32_t address) {
     if (stage_call || inside || !enrolled || failed) return 0;
+    diagnostic_setup(cpu);
     uint16_t raw=p2_input();
     int start=!!(raw&8), pressed=start&&!p2_start_previous;
     unsigned phase=psx_mod_read_byte(PLAY+1);
@@ -560,7 +808,7 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
         pause_owner=-1;
         /* Match the native pause gate. Simultaneous requests go to P1; an
          * absent/dead/departing actor cannot become the menu's owner. */
-        if (!psx_mod_read_byte(PLAY+0x1C) && !psx_mod_read_byte(PLAY+0x10) &&
+        if (!scene_owner && !psx_mod_read_byte(PLAY+0x1C) && !psx_mod_read_byte(PLAY+0x10) &&
             !psx_mod_read_byte(PLAY+0x0F) && !psx_mod_read_byte(0x80097424)) {
             if (life.status[0]==MMX6_COOP_ALIVE && (psx_mod_read_half(0x800C4570)&0x0800))
                 pause_owner=0;
@@ -574,10 +822,18 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     int survivor=(!life.wipe || life.wipe==2) &&
         (life.status[0]==MMX6_COOP_DYING || life.status[0]==MMX6_COOP_FALLEN) &&
         life.status[1]!=MMX6_COOP_ABSENT && (life.wipe || life.status[1]!=MMX6_COOP_FALLEN);
-    if (!survivor && pause_owner!=1) return 0;
+    if (!survivor && pause_owner!=1 && scene_owner!=2) {
+        stage_call=1;
+        uint32_t result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
+        if (!psx_mod_read_byte(PLAY+1)) scene_tick(cpu);
+        diagnostics((uint16_t)((raw<<8)|(raw>>8)));
+        if (psx_mod_read_byte(PLAY)!=0x0A) enrolled=0;
+        cpu->gpr[2]=result;
+        stage_call=0;
+        return 1;
+    }
     stage_call=inside=1;
     if (pause_owner==1 && !zero_menu_loaded) menu_vram(cpu,1);
-    diagnostic_setup(cpu);
     if (survivor && !life.wipe) retain_surviving_zero(cpu);
     /* Finish X's native death pose/orbs without spending a life, freezing
      * enemies, or advancing the shared clock a second time. */
@@ -605,6 +861,7 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     zero_world=0;
     leave_zero_context(1);
     project(0x800C456C,input,sizeof input);
+    if (!psx_mod_read_byte(PLAY+1)) scene_tick(cpu);
     diagnostics(raw);
     if (zero_menu_loaded && psx_mod_read_byte(PLAY+1)!=2) menu_vram(cpu,0);
     if (psx_mod_read_byte(PLAY)!=0x0A) enrolled=0;
@@ -618,6 +875,7 @@ static void native_player_init(CPUState *cpu, uint32_t address) {
     /* This is the native fresh-stage/checkpoint-respawn initialization, never
      * an ordinary door. The host body is enrolled after the new X body lands. */
     enrolled=0;
+    scene_owner=scene_phase=0;
     memset(pickup_owners,0,sizeof pickup_owners);
     mmx6_coop_lifecycle_respawn(&life);
     pause_owner=-1; p2_start_previous=0;
@@ -627,6 +885,7 @@ static void controller(CPUState *cpu, uint32_t address) {
     if (inside || failed) return;
     /* Only the normal gameplay driver's post-player boundary. */
     if (cpu->gpr[31]!=0x80020C70u) return;
+    if (scene_owner) { life.select_frames=0; return; }
     if (psx_mod_read_byte(PLAY)!=0x0A || !psx_mod_read_byte(PLAYER)) {
         enrolled=0; return;
     }
@@ -648,7 +907,7 @@ static void controller(CPUState *cpu, uint32_t address) {
         constrain_player(0);
         uint16_t raw=p2_input();
         uint8_t saved_input[6];
-        diagnostic_setup(cpu);
+        if (!stage_call) diagnostic_setup(cpu);
         int safe=!psx_mod_read_byte(PLAYER+0x67) && (psx_mod_read_byte(PLAYER+0x70)&8);
         Mmx6CoopJoinAction action=mmx6_coop_join_input(&life,raw&1,1,safe);
         if (action==MMX6_COOP_LEAVE) start_leave(cpu);
@@ -656,11 +915,11 @@ static void controller(CPUState *cpu, uint32_t address) {
         raw=(uint16_t)((raw<<8)|(raw>>8)); /* Native PadRead byte order. */
         if (life.status[1]==MMX6_COOP_JOINING) {
             join_animation(cpu);
-            diagnostics(raw);
+            if (!stage_call) diagnostics(raw);
             inside=0; return;
         }
         if (life.status[1]==MMX6_COOP_ABSENT || life.status[1]==MMX6_COOP_FALLEN) {
-            diagnostics(raw);
+            if (!stage_call) diagnostics(raw);
             inside=0; return;
         }
         capture(0x800C456C,saved_input,sizeof saved_input);
@@ -668,6 +927,7 @@ static void controller(CPUState *cpu, uint32_t address) {
         psx_mod_write_half(0x800C456C,life.status[1]==MMX6_COOP_LEAVING?0:raw);
         psx_mod_write_half(0x800C456E,previous_input);
         psx_mod_write_half(0x800C4570,(uint16_t)(raw & ~previous_input));
+        p2_edges=(uint16_t)(raw & ~previous_input);
         previous_input=raw;
         guest(cpu,0x8003CD44,0,0);
         guest(cpu,0x80034DCC,0,0);
@@ -680,7 +940,7 @@ static void controller(CPUState *cpu, uint32_t address) {
         if (life.status[1]==MMX6_COOP_DYING && p2.body[4]==3) life.status[1]=MMX6_COOP_FALLEN;
         constrain_player(1);
         project(0x800C456C,saved_input,sizeof saved_input);
-        diagnostics(raw);
+        if (!stage_call) diagnostics(raw);
     }
     inside=0;
 }
@@ -847,7 +1107,7 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
     uint32_t arena=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
     psx_mod_write_word(SCRATCH+0x100,world_packets);
     render_actor(cpu,actor,arena);
-    if (actor==PLAYER && life.status[0]==MMX6_COOP_DYING && p1.body[3]) {
+    if (actor==PLAYER && (life.status[0]==MMX6_COOP_DYING || scene_passenger(0)) && p1.body[3]) {
         uint8_t zero_body[sizeof p2.body];
         capture(PLAYER,zero_body,sizeof zero_body);
         project(PLAYER,p1.body,sizeof p1.body);
@@ -902,7 +1162,7 @@ static int death_effect_init(CPUState *cpu, uint32_t address) {
     return 1;
 }
 static int enemy_hit(CPUState *cpu, uint32_t address) {
-    if (inside || !enrolled || failed || life.status[1]!=MMX6_COOP_ALIVE ||
+    if (inside || !enrolled || failed || scene_owner || life.status[1]!=MMX6_COOP_ALIVE ||
         psx_mod_read_byte(PLAY)!=0x0A) return 0;
     inside=1;
     /* The caller owns enemy AI, invulnerability and applying this result.
@@ -920,7 +1180,7 @@ static int enemy_hit(CPUState *cpu, uint32_t address) {
     return 1;
 }
 static int player_contact(CPUState *cpu, uint32_t address) {
-    if (inside || !enrolled || failed || life.status[1]!=MMX6_COOP_ALIVE ||
+    if (inside || !enrolled || failed || scene_owner || life.status[1]!=MMX6_COOP_ALIVE ||
         psx_mod_read_byte(PLAY)!=0x0A) return 0;
     inside=1;
     /* Native contact applies damage/knockback/iframes, then its caller handles
@@ -1080,7 +1340,7 @@ static void activate(void) {
     free(zero_compressed); zero_compressed=NULL; compressed_size=0;
     free(zero_ui_pixels); zero_ui_pixels=NULL; ui_bank_count=0;
     inside=ready=enrolled=failed=0;
-    bank_count=frame_count=0; previous_input=0;
+    bank_count=frame_count=0; previous_input=p2_edges=0;
     mmx6_coop_lifecycle_init(&life); join_phase=0;
     player_call=stage_call=zero_world=world_render=0;
     pause_owner=-1; p2_start_previous=0;
@@ -1088,6 +1348,7 @@ static void activate(void) {
     hud_call=hud_seat=0;
     p2_hud_fade=128;
     pickup_call=0; memset(pickup_owners,0,sizeof pickup_owners);
+    scene_owner=scene_phase=0; scene_call=zero_projected=0;
     zero_menu_loaded=0;
     assets=psx_mod_alloc_guest_memory(ASSET_SPACE,16);
     diagnostic=psx_mod_alloc_guest_memory(0x2000,16);
@@ -1104,6 +1365,10 @@ static void activate(void) {
     if (!psx_mod_set_function_replacement(0x80030ECC,player_contact)) failed=1;
     if (!psx_mod_set_function_replacement(0x8004E26C,pickup_collect) ||
         !psx_mod_set_function_replacement(0x8004DCB8,pickup_tick)) failed=1;
+    if (!psx_mod_set_function_replacement(0x80040800,nightmare_soul)) failed=1;
+    if (!psx_mod_set_function_replacement(0x80050250,door_begin)) failed=1;
+    if (!psx_mod_set_function_replacement(0x80051924,interaction_begin) ||
+        !psx_mod_set_function_replacement(0x80052F64,interaction_begin)) failed=1;
     if (!psx_mod_set_function_replacement(0x800244C0,draw_coop_hud) ||
         !psx_mod_set_function_replacement(0x80024CC0,hud_icon)) failed=1;
     if (!psx_mod_set_function_replacement(0x8002C530,death_effect_allocate) ||
@@ -1115,4 +1380,5 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002012C,controller);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800232D4,render);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8003BD24,native_player_init);
+    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8003D308,script_begin);
 }
