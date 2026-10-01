@@ -12,6 +12,9 @@ typedef struct {
     uint32_t type;
 } Mmx6AssetView;
 
+/* Raw DAT records include portrait pixels/palettes without a subasset header. */
+int mmx6_coop_dat_record(const uint8_t *dat, size_t size, unsigned record,
+                        Mmx6AssetView *out);
 int mmx6_coop_dat_asset(const uint8_t *dat, size_t size, unsigned record,
                         unsigned asset, Mmx6AssetView *out);
 int mmx6_coop_overlay(const uint8_t *bin, size_t size, unsigned index,

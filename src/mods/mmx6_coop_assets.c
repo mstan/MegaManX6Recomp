@@ -7,16 +7,25 @@ static uint32_t u32(const uint8_t *p) {
     return (uint32_t)u16(p) | ((uint32_t)u16(p + 2) << 16);
 }
 
-int mmx6_coop_dat_asset(const uint8_t *dat, size_t size, unsigned record,
-                        unsigned asset, Mmx6AssetView *out) {
-    size_t begin, bytes, cursor, i;
-    uint32_t count;
+int mmx6_coop_dat_record(const uint8_t *dat, size_t size, unsigned record,
+                        Mmx6AssetView *out) {
+    size_t begin, bytes;
     if (!dat || !out || record >= 256 || size < 2048) return 0;
     begin = (size_t)u32(dat + record * 8) * 2048;
     bytes = u32(dat + record * 8 + 4);
-    if (begin < 2048 || begin > size || bytes > size - begin || bytes < 2048)
+    if (begin < 2048 || begin > size || !bytes || bytes > size - begin)
         return 0;
-    dat += begin;
+    out->data=dat+begin; out->size=bytes; out->type=0;
+    return 1;
+}
+
+int mmx6_coop_dat_asset(const uint8_t *dat, size_t size, unsigned record,
+                        unsigned asset, Mmx6AssetView *out) {
+    Mmx6AssetView entry;
+    size_t bytes, cursor, i;
+    uint32_t count;
+    if (!out || !mmx6_coop_dat_record(dat,size,record,&entry) || entry.size<2048) return 0;
+    dat=entry.data; bytes=entry.size;
     count = u32(dat);
     if (count > 255 || asset >= count || u32(dat + 4) != bytes) return 0;
     cursor = 2048;

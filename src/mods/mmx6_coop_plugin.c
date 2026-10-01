@@ -10,6 +10,7 @@
 #include "gpu.h"
 #include "mmx6_coop_assets.h"
 #include "mmx6_coop_lifecycle.h"
+#include "mmx6_coop_sprite_packet.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -28,19 +29,21 @@ typedef struct {
     uint8_t trails[0x120];
     uint8_t effects[0xF0];
 } PlayerContext;
-typedef struct { uint32_t source; uint16_t id; uint8_t colors[32]; } SpriteBank;
+typedef struct { uint32_t source; uint16_t id, tile; uint8_t colors[32]; } SpriteBank;
 static PlayerContext p2, p1;
 static uint8_t saved_overlay[OVERLAY_SIZE], zero_overlay[OVERLAY_SIZE];
 static uint8_t saved_play[0xE0], saved_camera[0x100];
 static uint8_t *zero_compressed;
 static size_t compressed_size;
 static uint32_t assets, assembly, palette_source, active_palette, packets, diagnostic;
-static uint32_t saved_resources[6], frame_count;
+static uint32_t saved_resources[7], frame_count;
 static uint32_t menu_memory, menu_assembly;
+enum { MENU_PORTRAIT=0x10800, MENU_PORTRAIT_COLORS=0x12800, MENU_BYTES=0x12A00 };
+static uint8_t saved_portrait_colors[0x200];
 static int zero_menu_loaded;
 static uint8_t saved_palette_dirty;
 static uint16_t previous_input;
-static SpriteBank banks[1024];
+static SpriteBank banks[4096];
 static unsigned bank_count;
 static int inside, ready, enrolled, failed;
 static Mmx6CoopLifecycle life;
@@ -53,8 +56,8 @@ static uint32_t world_packets;
 static uint32_t hud_packets;
 static int hud_call, hud_seat;
 static uint16_t *zero_ui_pixels;
-typedef struct { uint16_t page, clut, uv, id; } UiBank;
-static UiBank ui_banks[512];
+typedef struct { uint16_t page, clut, uv, id, colors[16]; } UiBank;
+static UiBank ui_banks[4096];
 static unsigned ui_bank_count;
 static int render_x_death, effect_call;
 typedef struct { uint32_t x,y,assembly; uint8_t layer,valid; } DeathEffectOrigin;
@@ -166,16 +169,22 @@ static int load_assets(void) {
     project(assembly,sprites.data,sprites.size);
     project(palette_source,palette.data,palette.size);
     project(active_palette,palette.data,palette.size);
-    Mmx6AssetView menu_gfx, menu_font, menu_colors, menu_layout;
+    Mmx6AssetView menu_gfx, menu_font, menu_colors, menu_layout, portrait, portrait_colors;
     if (!mmx6_coop_dat_asset(file,n,85,6,&menu_gfx) || menu_gfx.size!=0x8000 ||
         !mmx6_coop_dat_asset(file,n,85,7,&menu_font) || menu_font.size!=0x8000 ||
         !mmx6_coop_dat_asset(file,n,85,8,&menu_colors) || menu_colors.size!=0x800 ||
-        !mmx6_coop_dat_asset(file,n,85,9,&menu_layout)) { free(file); return 0; }
+        !mmx6_coop_dat_asset(file,n,85,9,&menu_layout) ||
+        !mmx6_coop_dat_record(file,n,165,&portrait) || portrait.size!=0x2000 ||
+        !mmx6_coop_dat_record(file,n,166,&portrait_colors) || portrait_colors.size!=0x200) {
+        free(file); return 0;
+    }
     menu_assembly=active_palette+0x4000;
     if (menu_assembly-assets+menu_layout.size>ASSET_SPACE) { free(file); return 0; }
     project(menu_memory,menu_gfx.data,menu_gfx.size);
     project(menu_memory+0x8000,menu_font.data,menu_font.size);
     project(menu_memory+0x10000,menu_colors.data,menu_colors.size);
+    project(menu_memory+MENU_PORTRAIT,portrait.data,portrait.size);
+    project(menu_memory+MENU_PORTRAIT_COLORS,portrait_colors.data,portrait_colors.size);
     project(menu_assembly,menu_layout.data,menu_layout.size);
     zero_ui_pixels=calloc(1024*512,sizeof *zero_ui_pixels);
     Mmx6AssetView common, icons;
@@ -200,6 +209,7 @@ static void enter_zero(void) {
     saved_resources[3]=psx_mod_read_word(SCRATCH+0x28);
     saved_resources[4]=psx_mod_read_word(SCRATCH+0x38);
     saved_resources[5]=psx_mod_read_word(SCRATCH+0x3C);
+    saved_resources[6]=psx_mod_read_word(SCRATCH+0xA8);
     saved_palette_dirty=psx_mod_read_byte(0x800C4560);
     project_player(&p2);
     code_bank(zero_overlay);
@@ -209,6 +219,7 @@ static void enter_zero(void) {
     psx_mod_write_word(SCRATCH+0x28,active_palette);
     psx_mod_write_word(SCRATCH+0x38,menu_memory+0x10000);
     psx_mod_write_word(SCRATCH+0x3C,menu_assembly);
+    if (zero_menu_loaded) psx_mod_write_word(SCRATCH+0xA8,menu_memory+MENU_PORTRAIT_COLORS);
     psx_mod_write_byte(PLAY+0x38,1);
     psx_mod_write_byte(PLAY+0x5E,5);
 }
@@ -222,6 +233,7 @@ static void leave_zero_context(int shared_world) {
     psx_mod_write_word(SCRATCH+0x28,saved_resources[3]);
     psx_mod_write_word(SCRATCH+0x38,saved_resources[4]);
     psx_mod_write_word(SCRATCH+0x3C,saved_resources[5]);
+    psx_mod_write_word(SCRATCH+0xA8,saved_resources[6]);
     psx_mod_write_byte(0x800C4560,saved_palette_dirty);
     if (shared_world) {
         /* A surviving Zero owns this entire native stage pass. Keep the one
@@ -409,22 +421,36 @@ static void menu_vram(CPUState *cpu, int zero) {
      * on the host and exchange them after native DrawSync. Body rendering
      * continues to use retained banks. Block DMA is limited to guest RAM, so
      * submit the retained pixels through GP0's normal upload command. */
-    static const unsigned x[3]={896,960,256}, y[3]={256,256,496};
-    static const unsigned height[3]={256,256,16}, offset[3]={0,0x8000,0x10000};
+    /* The native stage loader also installs four 8bpp portrait strips and
+     * one 256-color CLUT. These must follow the pause owner with the menu. */
+    static const unsigned x[8]={896,960,256,384,448,512,576,0};
+    static const unsigned y[8]={256,256,496,0,0,0,0,510};
+    static const unsigned width[8]={64,64,64,64,64,64,64,256};
+    static const unsigned height[8]={256,256,16,16,16,16,16,1};
+    static const unsigned offset[8]={0,0x8000,0x10000,MENU_PORTRAIT,
+        MENU_PORTRAIT+0x800,MENU_PORTRAIT+0x1000,MENU_PORTRAIT+0x1800,MENU_PORTRAIT_COLORS};
     guest(cpu,0x80066150,0,0);
-    for (unsigned i=0;i<3;++i) {
-        uint32_t backup=menu_memory+0x10800+offset[i];
+    uint32_t resident_colors=psx_mod_read_word(SCRATCH+0x28)+0x3C00;
+    if (zero) {
+        uint8_t colors[0x200];
+        capture(resident_colors,saved_portrait_colors,sizeof saved_portrait_colors);
+        capture(menu_memory+MENU_PORTRAIT_COLORS,colors,sizeof colors);
+        /* Native end-of-frame palette uploads use the resident X context. */
+        project(resident_colors,colors,sizeof colors);
+    } else project(resident_colors,saved_portrait_colors,sizeof saved_portrait_colors);
+    for (unsigned i=0;i<8;++i) {
+        uint32_t backup=menu_memory+MENU_BYTES+offset[i];
         if (zero) {
             const uint16_t *vram=gpu_get_vram();
-            for (unsigned row=0;row<height[i];++row) for (unsigned col=0;col<64;++col)
-                psx_mod_write_half(backup+2*(row*64+col),vram[(y[i]+row)*1024+x[i]+col]);
+            for (unsigned row=0;row<height[i];++row) for (unsigned col=0;col<width[i];++col)
+                psx_mod_write_half(backup+2*(row*width[i]+col),vram[(y[i]+row)*1024+x[i]+col]);
         }
         uint32_t source=zero?menu_memory+offset[i]:backup;
         gpu_set_gp0_source(0);
         gpu_write_gp0(0xA0000000);
         gpu_write_gp0(x[i]|(y[i]<<16));
-        gpu_write_gp0(64|(height[i]<<16));
-        for (unsigned p=0;p<64*height[i]*2;p+=4)
+        gpu_write_gp0(width[i]|(height[i]<<16));
+        for (unsigned p=0;p<width[i]*height[i]*2;p+=4)
             gpu_write_gp0(psx_mod_read_word(source+p));
     }
     zero_menu_loaded=zero;
@@ -577,7 +603,7 @@ static void controller(CPUState *cpu, uint32_t address) {
     inside=0;
 }
 
-static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut) {
+static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut, uint16_t tile) {
     uint32_t offset, packed, source;
     uint8_t decoded[32768];
     uint16_t pixels[256*256];
@@ -612,9 +638,10 @@ static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut) {
         palette_offset+32>0x4000) return 0;
     capture((render_x_death?saved_resources[3]:active_palette)+(uint32_t)palette_offset,colors,sizeof colors);
     for (unsigned i=0;i<bank_count;++i)
-        if (banks[i].source==source && !memcmp(banks[i].colors,colors,sizeof colors)) return banks[i].id;
+        if (banks[i].source==source && banks[i].tile==tile &&
+            !memcmp(banks[i].colors,colors,sizeof colors)) return banks[i].id;
     if (render_x_death) capture(source,x_compressed,available);
-    if (bank_count==1024 || !mmx6_coop_decode_sprite(compressed,
+    if (bank_count==4096 || !mmx6_coop_decode_sprite(compressed,
             available,decoded,sizeof decoded,&written) || written!=(size_t)tiles*128)
         return 0;
     memset(pixels,0,sizeof pixels);
@@ -631,8 +658,14 @@ static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut) {
         in+=chunk*128; row+=16; remaining-=chunk;
     }
     uint16_t id=(uint16_t)(0x6000+bank_count);
-    if (!psx_mod_define_texture_bank(id,256,256,pixels)) return 0;
+    if (tile!=UINT16_MAX) {
+        uint16_t tile_pixels[16*16];
+        for (unsigned y=0;y<16;++y) for (unsigned x=0;x<16;++x)
+            tile_pixels[y*16+x]=pixels[(((tile>>8)+y)&255)*256+(((tile&255)+x)&255)];
+        if (!psx_mod_define_texture_bank(id,16,16,tile_pixels)) return 0;
+    } else if (!psx_mod_define_texture_bank(id,256,256,pixels)) return 0;
     banks[bank_count].source=source; banks[bank_count].id=id;
+    banks[bank_count].tile=tile;
     memcpy(banks[bank_count++].colors,colors,sizeof colors);
     return id;
 }
@@ -653,6 +686,7 @@ static void triangle(uint32_t dst, uint32_t next, const uint32_t *q,
 }
 static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
     uint32_t base=psx_mod_read_word(SCRATCH+0x100);
+    uint32_t mode=psx_mod_read_word(SCRATCH+0x104);
     guest(cpu,0x800232D4,actor,0);
     uint32_t end=psx_mod_read_word(SCRATCH+0x100);
     if (end<base || end-arena>40000 || (end-base)%40) {
@@ -671,16 +705,29 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
      * Zero frames need the retained host bank instead of X's texture slot. */
     if (!render_x_death && (table<assets || table-assets>=compressed_size)) return;
     uint32_t expanded=arena+40000+(base-arena)*2;
-    for (uint32_t at=base;at<end;at+=40,expanded+=80) {
+    for (uint32_t at=base;at<end;at+=40,expanded+=80,mode+=8) {
         uint32_t q[10];
         for (unsigned i=0;i<10;++i) q[i]=psx_mod_read_word(at+i*4);
-        uint16_t bank=sprite_bank(table,frame,(uint16_t)(q[3]>>16));
+        uint16_t tile;
+        int supported=mmx6_coop_sprite_quad(q,&tile);
+        if (tile!=UINT16_MAX)
+            q[5]|=(psx_mod_read_word(mode+4)&0x60u)<<16;
+        uint16_t bank=supported?sprite_bank(table,frame,(uint16_t)(q[3]>>16),tile):0;
         /* Native OT links still address the original tag. Turn it into a
          * zero-command link to two tagged GT3 packets in our own DMA arena. */
-        if (bank && (q[1]>>26)==0xB) {
+        if (bank) {
             triangle(expanded,expanded+40,q,0,1,2,bank);
             triangle(expanded+40,q[0],q,2,1,3,bank);
             psx_mod_write_word(at,expanded&0xFFFFFF);
+            /* Native actor lists append through a saved tail tag. Retarget
+             * that tail too, or the next actor overwrites our link and drops
+             * this actor's last tile (Zero's boot in the idle pose). */
+            unsigned priority=psx_mod_read_byte(actor+0x16);
+            if (priority!=0xFF) {
+                uint32_t tail=0x8008EB08u+(psx_mod_read_word(SCRATCH)&1u)*128+
+                              (priority>>4)*32+(priority&7)*4;
+                if (psx_mod_read_word(tail)==at) psx_mod_write_word(tail,expanded+40);
+            }
         } else {
             psx_mod_write_word(at,q[0]&0xFFFFFF);
         }
@@ -811,19 +858,21 @@ static int player_contact(CPUState *cpu, uint32_t address) {
 /* Retain each original 16x16 HUD tile with its original palette. Tile-local
  * UVs also avoid the 8-bit UV wrap at the edge of a native texture page. */
 static uint16_t hud_tile_bank(uint16_t page, uint16_t clut, uint16_t uv) {
-    for (unsigned i=0;i<ui_bank_count;++i)
-        if (ui_banks[i].page==page && ui_banks[i].clut==clut && ui_banks[i].uv==uv)
-            return ui_banks[i].id;
-    if (ui_bank_count==512 || (page&0x180)) return 0;
+    if (page&0x180) return 0;
     uint16_t colors[16], pixels[16*16];
     unsigned cx=(clut&63)*16, cy=clut>>6;
     for (unsigned i=0;i<16;++i) {
         if (cy>=496 && cy<512 && cx>=256 && cx+16<=320)
             colors[i]=psx_mod_read_half(menu_memory+0x10000+((cy-496)*64+cx-256+i)*2);
-        else if (clut>=0x7800 && (unsigned)(clut-0x7800)*32+32<=0xA60)
-            colors[i]=psx_mod_read_half(palette_source+(clut-0x7800)*32+i*2);
-        else return 0;
+        /* HUD frames use the game's shared UI palette, not the character's
+         * raw palette archive. Use the same current CLUT as the native HUD,
+         * including native fades; weapon icons use Zero's menu CLUT above. */
+        else colors[i]=gpu_get_vram()[cy*1024+cx+i];
     }
+    for (unsigned i=0;i<ui_bank_count;++i)
+        if (ui_banks[i].page==page && ui_banks[i].clut==clut && ui_banks[i].uv==uv &&
+            !memcmp(ui_banks[i].colors,colors,sizeof colors)) return ui_banks[i].id;
+    if (ui_bank_count==4096) return 0;
     unsigned base_x=(page&15)*64, base_y=(page&16)*16;
     for (unsigned y=0;y<16;++y) for (unsigned x=0;x<16;++x) {
         unsigned u=((uv&255)+x)&255, v=((uv>>8)+y)&255;
@@ -832,7 +881,9 @@ static uint16_t hud_tile_bank(uint16_t page, uint16_t clut, uint16_t uv) {
     }
     uint16_t id=(uint16_t)(0x7000+ui_bank_count);
     if (!psx_mod_define_texture_bank(id,16,16,pixels)) return 0;
-    ui_banks[ui_bank_count++]=(UiBank){page,clut,uv,id};
+    UiBank *bank=&ui_banks[ui_bank_count++];
+    bank->page=page; bank->clut=clut; bank->uv=uv; bank->id=id;
+    memcpy(bank->colors,colors,sizeof colors);
     return id;
 }
 static int hud_icon(CPUState *cpu, uint32_t address) {
@@ -944,7 +995,7 @@ static void activate(void) {
     diagnostic=psx_mod_alloc_guest_memory(0x2000,16);
     packets=psx_mod_alloc_texture_packet_memory(FRAME_ARENA*2,16);
     hud_packets=psx_mod_alloc_texture_packet_memory(0x10000,16);
-    menu_memory=psx_mod_alloc_gpu_dma_memory(0x21010,16);
+    menu_memory=psx_mod_alloc_gpu_dma_memory(MENU_BYTES*2,16);
     failed=!(assets && diagnostic && packets && hud_packets && menu_memory);
     if (!psx_mod_set_function_replacement(0x80031474,enemy_hit)) failed=1;
     if (!psx_mod_set_function_replacement(0x80029598,camera_target) ||

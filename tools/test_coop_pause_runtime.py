@@ -84,7 +84,7 @@ def main():
             wait(lambda: read(0x800CCF33) == b'\x80')
             # The fill byte drains before the native healing animation ends.
             # Start is ignored until the menu returns to its input state.
-            wait(lambda: read(0x800CF814, 2) == b'\1\0')
+            wait(lambda: read(0x800CF814, 2) == b'\1\1')
             press(seat, 0xFFF7)
             wait(lambda: read(0x800CCED1) == b'\0')
             time.sleep(.15)
