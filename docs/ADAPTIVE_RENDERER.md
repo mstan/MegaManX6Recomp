@@ -422,7 +422,7 @@ same `feat/mmx6-adaptive-renderer` branch:
 - The widescreen mod picker now defaults to Adaptive, followed by 16:9, 21:9
   and 32:9, without the old experimental labels.
 
-The earlier owner results from playtest 6 still require follow-up:
+The earlier owner results from playtest 6 are:
 
 - UI2: the saved darkness section now fills the adaptive width. Continuing
   into the **next section with darkness and rain together** restores the old
@@ -431,8 +431,8 @@ The earlier owner results from playtest 6 still require follow-up:
   the four polygons covered by the current fix are not sufficient evidence
   for every darkness variant.
 - UI3: the main Amazon jungle panorama is fixed. A **lower row to the right**,
-  barely visible in the expanded view, still has a black background. Capture
-  its layer coordinates and authored artwork before extending that region.
+  barely visible in the expanded view, still has a black background. The owner
+  accepts this as a rare out-of-bounds view; it is not a merge blocker.
 - UI4: the special-attack presentation is confirmed good.
 - UI5: the cave backdrop and scrolling correction are confirmed good.
 
@@ -442,10 +442,12 @@ while X falls vertically. Slot 07 shows black on both sides of the cave,
 although the native-wide renderer is active; it is not a 4:3 present. The
 read-only map census found no layer-2 tiles through the relevant 512–768 Y
 band, and only a short 880–944 Y strip in the later cave panel. These are
-authored map limits that 4:3 usually hides. A scene-specific cosmetic fill
-needs artwork and depth review: repeating the foreground map would imply
-platforms or walls where the game has none. The pause menu still correctly
-uses native 4:3; it is unrelated to slot 07's black sides.
+authored map limits that 4:3 usually hides. The owner explicitly accepts all
+three as rare, suboptimal views and does not want them fixed or treated as
+merge blockers. A cosmetic fill would need deeper scene work; repeating the
+foreground map would imply platforms or walls where the game has none. The
+pause menu still correctly uses native 4:3; it is unrelated to slot 07's
+black sides.
 
 The entire game, every narrow room, boss arena, transition, respawn path and
 alternate character has not been played through at these widths. Other finite
