@@ -67,6 +67,11 @@ static DeathEffectOrigin death_effect[96];
 typedef struct { uint32_t actor; uint8_t seat; } PickupOwner;
 static PickupOwner pickup_owners[128];
 static int pickup_call;
+/* Native stage solids keep one player's previous contact at +72/+76.
+ * Keep Zero's copy on the host; +73/+77 still belong to the ride armor. */
+typedef struct { uint8_t sides, carried; } SolidContact;
+static SolidContact zero_solid_contacts[80];
+static int solid_call, solid_allocate_call;
 /* Scene transport is independent of voluntary absence and death. The owner
  * occupies the native singleton for the one world pass until control returns. */
 static unsigned scene_owner, scene_phase;
@@ -714,12 +719,13 @@ static void diagnostic_setup(CPUState *cpu) {
     }
     if (command==4) {
         /* Atomic private placement, avoiding debug writes during projection. */
-        unsigned seat=psx_mod_read_byte(diagnostic+0x52)&1;
+        unsigned seat=psx_mod_read_byte(diagnostic+0x52);
         uint32_t x=psx_mod_read_word(diagnostic+0x54), y=psx_mod_read_word(diagnostic+0x58);
         if (seat) {
             put32(p2.body+8,x); put32(p2.body+12,y);
             put32(p2.body+0x18,x); put32(p2.body+0x1C,y);
-        } else {
+        }
+        if (seat!=1) {
             psx_mod_write_word(PLAYER+8,x); psx_mod_write_word(PLAYER+12,y);
             psx_mod_write_word(PLAYER+0x18,x); psx_mod_write_word(PLAYER+0x1C,y);
         }
@@ -729,6 +735,13 @@ static void diagnostic_setup(CPUState *cpu) {
         if (seat) enter_zero();
         guest(cpu,command==5?0x8003D308:0x8003D330,0x14,0x40);
         if (seat) leave_zero_context(1);
+    }
+    if (command==7) {
+        /* Select a weapon for private native-HUD fixtures at the same safe
+         * boundary as player placement; never write a projected body. */
+        uint8_t weapon=psx_mod_read_byte(diagnostic+0x51);
+        if (psx_mod_read_byte(diagnostic+0x52)&1) p2.body[0x93]=weapon;
+        else psx_mod_write_byte(PLAYER+0x93,weapon);
     }
     if (command) psx_mod_write_byte(diagnostic+0x50,0);
 }
@@ -877,6 +890,7 @@ static void native_player_init(CPUState *cpu, uint32_t address) {
     enrolled=0;
     scene_owner=scene_phase=0;
     memset(pickup_owners,0,sizeof pickup_owners);
+    memset(zero_solid_contacts,0,sizeof zero_solid_contacts);
     mmx6_coop_lifecycle_respawn(&life);
     pause_owner=-1; p2_start_previous=0;
 }
@@ -1197,6 +1211,62 @@ static int player_contact(CPUState *cpu, uint32_t address) {
     inside=0;
     return 1;
 }
+static SolidContact *solid_contact(uint32_t actor) {
+    if (actor<0x800C1220u || actor>=0x800C4560u || (actor-0x800C1220u)%0xA4) return NULL;
+    return &zero_solid_contacts[(actor-0x800C1220u)/0xA4];
+}
+static int solid_allocate(CPUState *cpu, uint32_t address) {
+    if (solid_allocate_call || !enrolled || failed) return 0;
+    solid_allocate_call=1;
+    uint32_t actor=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
+    solid_allocate_call=0;
+    SolidContact *contact=solid_contact(actor);
+    if (contact) memset(contact,0,sizeof *contact);
+    cpu->gpr[2]=actor;
+    return 1;
+}
+static uint32_t solid_as_zero(CPUState *cpu, uint32_t address, uint32_t actor,
+                              SolidContact *contact) {
+    uint8_t sides=psx_mod_read_byte(actor+0x72), carried=psx_mod_read_byte(actor+0x76);
+    psx_mod_write_byte(actor+0x72,contact->sides);
+    psx_mod_write_byte(actor+0x76,contact->carried);
+    uint32_t result=guest(cpu,address,actor,cpu->gpr[5]);
+    contact->sides=psx_mod_read_byte(actor+0x72);
+    contact->carried=psx_mod_read_byte(actor+0x76);
+    psx_mod_write_byte(actor+0x72,sides);
+    psx_mod_write_byte(actor+0x76,carried);
+    return result;
+}
+static int solid_player_collision(CPUState *cpu, uint32_t address) {
+    uint32_t actor=cpu->gpr[4];
+    SolidContact *contact=solid_contact(actor);
+    if (solid_call || !contact || !enrolled || failed || (inside && !zero_world) ||
+        psx_mod_read_byte(PLAY)!=0x0A) return 0;
+    solid_call=1;
+    uint32_t result;
+    if (zero_world) {
+        /* The survivor/scene owner is already projected. Preserve X's stored
+         * contact even while Zero owns the native world pass. */
+        result=solid_as_zero(cpu,address,actor,contact);
+    } else {
+        result=guest(cpu,address,actor,cpu->gpr[5]);
+        if (life.status[1]==MMX6_COOP_ALIVE && !scene_passenger(1) && p2.body[4]==1) {
+            inside=1;
+            enter_zero();
+            /* 31DA8 also resolves the shared ride armor. That part already
+             * ran above; the extra call handles only the second player. */
+            uint8_t ride=psx_mod_read_byte(0x800CD340);
+            psx_mod_write_byte(0x800CD340,0);
+            solid_as_zero(cpu,address,actor,contact);
+            psx_mod_write_byte(0x800CD340,ride);
+            leave_zero();
+            inside=0;
+        } else memset(contact,0,sizeof *contact);
+    }
+    cpu->gpr[2]=result;
+    solid_call=0;
+    return 1;
+}
 /* Retain each original 16x16 HUD tile with its original palette. Tile-local
  * UVs also avoid the 8-bit UV wrap at the edge of a native texture page. */
 static uint16_t hud_tile_bank(uint16_t page, uint16_t clut, uint16_t uv) {
@@ -1235,15 +1305,6 @@ static int hud_icon(CPUState *cpu, uint32_t address) {
     if (hud_seat!=1 || (cpu->gpr[4]!=3 && cpu->gpr[4]!=4)) return 0;
     cpu->gpr[2]=0;
     return 1;
-}
-static void hud_empty_ammo(CPUState *cpu) {
-    if (psx_mod_read_byte(PLAYER+0x93)) return;
-    /* Native routines hide ammo with a resource-free weapon selected. Keep
-     * the four columns stable using that same native frame, without fill. */
-    int frame=153+((int)psx_mod_read_half(PLAYER+0x14A)/6-48)/2;
-    if (frame<153) frame=153;
-    if (frame>161) frame=161;
-    guest(cpu,0x80024CC0,2,(uint32_t)frame);
 }
 static void hud_zero_packets(uint32_t arena) {
     uint32_t sprites=psx_mod_read_word(SCRATCH+0x108);
@@ -1308,7 +1369,6 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
     }
     /* P1 and the boss HUD execute their original draw path exactly once. */
     uint32_t result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
-    if (psx_mod_read_byte(PLAY+0x1F)) hud_empty_ammo(cpu);
     if (zero_world) capture(PLAYER,p1.body,sizeof p1.body);
     else capture(PLAYER,current,sizeof current);
     if (psx_mod_read_byte(PLAY+0x1F) && p2_hud_fade) {
@@ -1322,7 +1382,6 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
         hud_seat=1;
         guest(cpu,0x80024F90,PLAYER,0);
         guest(cpu,0x800249D4,PLAYER,0);
-        hud_empty_ammo(cpu);
         hud_seat=0;
         hud_zero_packets(arena);
         for (unsigned i=0;i<3;++i) psx_mod_write_word(SCRATCH+0x108+i*4,pools[i]);
@@ -1348,6 +1407,8 @@ static void activate(void) {
     hud_call=hud_seat=0;
     p2_hud_fade=128;
     pickup_call=0; memset(pickup_owners,0,sizeof pickup_owners);
+    solid_call=solid_allocate_call=0;
+    memset(zero_solid_contacts,0,sizeof zero_solid_contacts);
     scene_owner=scene_phase=0; scene_call=zero_projected=0;
     zero_menu_loaded=0;
     assets=psx_mod_alloc_guest_memory(ASSET_SPACE,16);
@@ -1363,6 +1424,8 @@ static void activate(void) {
         !psx_mod_set_function_replacement(0x8001E9EC,stage_tick) ||
         !psx_mod_set_function_replacement(0x800232D4,render_survivor)) failed=1;
     if (!psx_mod_set_function_replacement(0x80030ECC,player_contact)) failed=1;
+    if (!psx_mod_set_function_replacement(0x80031DA8,solid_player_collision) ||
+        !psx_mod_set_function_replacement(0x8002C4C4,solid_allocate)) failed=1;
     if (!psx_mod_set_function_replacement(0x8004E26C,pickup_collect) ||
         !psx_mod_set_function_replacement(0x8004DCB8,pickup_tick)) failed=1;
     if (!psx_mod_set_function_replacement(0x80040800,nightmare_soul)) failed=1;

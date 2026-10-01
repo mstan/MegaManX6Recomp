@@ -62,7 +62,17 @@ def main():
     try:
         p2(0xFFFF)
         for seat in (1, 0):
-            write(0x800970FC, 13 if seat else 11)
+            # The debug server may service a RAM write during Zero's native
+            # projection (including solid-object collision). Verify the
+            # published P1 body received setup before testing tank healing.
+            target_hp = 13 if seat else 11
+            deadline = time.monotonic()+3
+            while True:
+                write(0x800970FC, target_hp)
+                time.sleep(.05)
+                if read(diag+0x1800+0x5C)[0] == target_hp:
+                    break
+                check(time.monotonic() < deadline, 'Could not set up P1 health')
             write(diag+0x51, 11 if seat else 13)
             write(diag+0x50, 1)
             wait(lambda: read(diag+0x50) == b'\0')
