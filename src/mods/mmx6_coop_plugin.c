@@ -78,6 +78,7 @@ static unsigned scene_owner, scene_phase;
 static uint8_t scene_body[0x158];
 static int32_t scene_y;
 static int scene_call, zero_projected;
+static int unit_choices_call;
 
 static int scene_passenger(unsigned seat) { return scene_phase && scene_owner!=seat+1; }
 
@@ -132,6 +133,30 @@ static uint32_t guest(CPUState *cpu, uint32_t address, uint32_t a0, uint32_t a1)
     memcpy(cpu->gte_ctrl,ctrl,sizeof ctrl);
     cpu->pc=pc; cpu->hi=hi; cpu->lo=lo;
     return result;
+}
+
+static int unit_choices(CPUState *cpu, uint32_t address) {
+    /* ROCK_X6.BIN member 16 shares its load address with stage overlays.
+     * Match the native list builder before touching its menu-local table. */
+    if (unit_choices_call || failed || cpu->gpr[4]!=PLAY ||
+        psx_mod_read_word(address)!=0x3C05800Fu ||
+        psx_mod_read_word(address+0x10)!=0xA0601CB0u ||
+        psx_mod_read_word(address+0x104)!=0x03E00008u) return 0;
+    unit_choices_call=1;
+    cpu->gpr[2]=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
+    unit_choices_call=0;
+    /* Native navigation, portraits and confirmation all consume this list.
+     * Compact it rather than clearing Zero's persistent unlock/parts flags.
+     * Native order is X, Falcon, Zero, Shadow, Blade, Ultimate. */
+    unsigned count=psx_mod_read_byte(0x800F1CEB), kept=0;
+    if (count>6) return 1;
+    for (unsigned i=0;i<count;++i) {
+        uint8_t unit=psx_mod_read_byte(0x800F1CB0+i);
+        if (unit!=5) psx_mod_write_byte(0x800F1CB0+kept++,unit);
+    }
+    for (unsigned i=kept;i<6;++i) psx_mod_write_byte(0x800F1CB0+i,0);
+    psx_mod_write_byte(0x800F1CEB,(uint8_t)kept);
+    return 1;
 }
 
 static uint8_t *disc_file(const char *name, uint32_t *size) {
@@ -1446,6 +1471,7 @@ static void activate(void) {
     solid_call=solid_allocate_call=0;
     memset(zero_solid_contacts,0,sizeof zero_solid_contacts);
     scene_owner=scene_phase=0; scene_call=zero_projected=0;
+    unit_choices_call=0;
     zero_menu_loaded=0;
     assets=psx_mod_alloc_guest_memory(ASSET_SPACE,16);
     diagnostic=psx_mod_alloc_guest_memory(0x2000,16);
@@ -1454,6 +1480,7 @@ static void activate(void) {
     menu_memory=psx_mod_alloc_gpu_dma_memory(MENU_BYTES*2,16);
     failed=!(assets && diagnostic && packets && hud_packets && menu_memory);
     if (!psx_mod_set_function_replacement(0x80031474,enemy_hit)) failed=1;
+    if (!psx_mod_set_function_replacement(0x800E9898,unit_choices)) failed=1;
     if (!psx_mod_set_function_replacement(0x80029598,camera_target) ||
         !psx_mod_set_function_replacement(0x80029658,camera_target)) failed=1;
     if (!psx_mod_set_function_replacement(0x80034DCC,player_tick) ||
