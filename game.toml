@@ -1,6 +1,8 @@
 [game]
 name = "Mega Man X6"
 id = "SLUS-01395"
+# Expose both local input slots for the X + Zero co-op prototype.
+players = 2
 exe = "mmx6/SLUS_013.95"
 disc = "mmx6/Mega Man X6 (USA) (v1.1).cue"
 load_address = "0x80010000"
