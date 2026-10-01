@@ -8,6 +8,15 @@ one gen-time recompiler hook (no gameplay logic changes).
 
 ## Stage-entry stale reveal cleanup (2026-07-09 spike)
 
+Co-op netplay update (2026-10-01): the local-coop branch offers fixed 4:3,
+16:9 and 21:9 through **Settings → Display → Netplay aspect**. The host's choice
+is shared at launch; no adaptive choice is offered. OpenGL dual-raster sessions
+render the same native HUD textures for both players. Two-peer captures at
+320, 426 and 560 pixels wide place X's health fill at x=22..24 and Zero's at
+x=48..50 in every view. Zero's existing explicit left-anchor tags cover both
+his HUD artwork and fill primitives. The finite-map reveal limitations below
+still apply. Offline Mods retain their existing widescreen behavior.
+
 The native-wide compositor persists like VRAM, but its synthetic side margins
 have no PS1-owned pixels underneath them. If MMX6 does not redraw those columns
 on the first frames of a stage transition, the margins can retain pixels from

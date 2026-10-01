@@ -5,6 +5,7 @@
  * FilesIndex; instruction boundaries verified against the original executable.
  */
 #include "mod_plugins.h"
+#include "mod_netplay.h"
 #include "cpu_state.h"
 #include "sio.h"
 #include "gpu.h"
@@ -1465,9 +1466,11 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
 }
 static void activate(void) {
     free(zero_compressed); zero_compressed=NULL; compressed_size=0;
-    free(zero_ui_pixels); zero_ui_pixels=NULL; ui_bank_count=0;
+    free(zero_ui_pixels); zero_ui_pixels=NULL;
     inside=ready=enrolled=failed=0;
-    bank_count=frame_count=0; previous_input=p2_edges=0;
+    /* Immutable bank IDs and their lookup caches live for the process, as do
+     * the framework's banks. Reuse them across launcher rematches. */
+    frame_count=0; previous_input=p2_edges=0;
     mmx6_coop_lifecycle_init(&life); join_phase=0;
     player_call=stage_call=zero_world=world_render=0;
     pause_owner=-1; p2_start_previous=0;
@@ -1480,12 +1483,13 @@ static void activate(void) {
     scene_owner=scene_phase=0; scene_call=zero_projected=0;
     unit_choices_call=0;
     zero_menu_loaded=0;
-    assets=psx_mod_alloc_guest_memory(ASSET_SPACE,16);
-    diagnostic=psx_mod_alloc_guest_memory(0x2000,16);
-    packets=psx_mod_alloc_texture_packet_memory(FRAME_ARENA*2,16);
-    hud_packets=psx_mod_alloc_texture_packet_memory(0x10000,16);
-    menu_memory=psx_mod_alloc_gpu_dma_memory(MENU_BYTES*2,16);
+    if (!assets) assets=psx_mod_alloc_guest_memory(ASSET_SPACE,16);
+    if (!diagnostic) diagnostic=psx_mod_alloc_guest_memory(0x2000,16);
+    if (!packets) packets=psx_mod_alloc_texture_packet_memory(FRAME_ARENA*2,16);
+    if (!hud_packets) hud_packets=psx_mod_alloc_texture_packet_memory(0x10000,16);
+    if (!menu_memory) menu_memory=psx_mod_alloc_gpu_dma_memory(MENU_BYTES*2,16);
     failed=!(assets && diagnostic && packets && hud_packets && menu_memory);
+    if (diagnostic) for (unsigned i=0;i<0x2000;i+=4) psx_mod_write_word(diagnostic+i,0);
     if (!psx_mod_set_function_replacement(0x80031474,enemy_hit)) failed=1;
     if (!psx_mod_set_function_replacement(0x800E9898,unit_choices)) failed=1;
     if (!psx_mod_set_function_replacement(0x80029598,camera_target) ||
@@ -1497,7 +1501,12 @@ static void activate(void) {
     if (!psx_mod_set_function_replacement(0x80031DA8,solid_player_collision) ||
         !psx_mod_set_function_replacement(0x8002C4C4,solid_allocate)) failed=1;
     if (!psx_mod_set_function_replacement(0x8004E26C,pickup_collect) ||
-        !psx_mod_set_function_replacement(0x8004DCB8,pickup_tick)) failed=1;
+        !psx_mod_set_function_replacement(0x8004DCB8,pickup_tick) ||
+        /* Reploids have their own contact and delayed-healing routines.
+         * Their native state machine uses the same waiting/healing phases;
+         * keep the collector projected until that player's heal completes. */
+        !psx_mod_set_function_replacement(0x8004EECC,pickup_collect) ||
+        !psx_mod_set_function_replacement(0x8004EC30,pickup_tick)) failed=1;
     if (!psx_mod_set_function_replacement(0x80040800,nightmare_soul)) failed=1;
     if (!psx_mod_set_function_replacement(0x80050250,door_begin)) failed=1;
     if (!psx_mod_set_function_replacement(0x80051924,interaction_begin) ||
@@ -1509,6 +1518,10 @@ static void activate(void) {
     fprintf(stdout,"mmx6 co-op: development prototype active (OpenGL rendering required)\n");
 }
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
+    static const PSXModNetplayProfile netplay_profile = {
+        "mmx6.local-coop.prototype", "mmx6-x-zero-delay-v3", 0, 0, 1, 7
+    };
+    psx_mod_register_netplay_profile(&netplay_profile);
     psx_mod_register_activation_plugin("mmx6.local-coop.prototype",activate);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002012C,controller);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800232D4,render);

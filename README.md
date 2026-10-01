@@ -76,6 +76,33 @@ renderer notes) and the remaining enhancement follow-ups.
 
 ## Enhancements
 
+### X + Zero co-op netplay branch
+
+On `feat/local-coop-x-zero`, Netplay uses the shared PSX delay-sync transport
+with X as P1 and Zero as P2. The built-in co-op logic is enabled for both peers;
+ordinary offline mod selections remain separate. Use identical builds and the
+supported v1.1 disc and OpenGL renderer. Select your local controller on the launcher's P1/Netplay
+card, then host or join through **Netplay**.
+
+**Settings → Display → Netplay aspect** offers fixed 4:3, 16:9, and 21:9.
+Choose it before hosting; the host's choice applies to both peers. Adaptive is
+excluded. Both native HUDs anchor to the left edge with their normal spacing.
+Offline widescreen continues to use its existing Mods selection.
+
+Bundled OpenBIOS is the default. Co-op netplay skips the BIOS shell animation
+while running kernel initialization and disc loading normally. A selected retail
+BIOS remains supported. Ordinary game memory-card saves remain available;
+rollback and save states are disabled for this milestone because the co-op's
+host-owned simulation state is not yet serialized.
+
+Validated on two private local peers: OpenBIOS boot with shell skip, both seats'
+movement through transported input, P2 leave/rejoin with health preserved,
+native Zero/HUD rendering, and fixed 4:3/16:9/21:9 output. Logged core/device
+checksums matched across each run. Internet latency/loss, full campaign play,
+and runtime rematches still need separate validation. The repeatable input test
+is `tools/test_coop_netplay_runtime.py` (requires two private debug-enabled peers;
+use `--expected-width 426` for 16:9 or `560` for 21:9).
+
 MegaManX6Recomp supports opt-in enhancement packages without permanently
 patching your disc. Mega Man X6 Tweaks-derived packages expose their changes as
 individual launcher features, including configurable animation timing, status
