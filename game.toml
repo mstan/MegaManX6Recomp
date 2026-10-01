@@ -16,7 +16,7 @@ seeds = "seeds/ghidra_funcs.txt"
 # bios_thunks = "seeds/mmx6_bios_thunks.txt"  # optional; add once BIOS thunks are inventoried
 out_dir = "generated"
 strict = true
-mod_function_entry_funcs = ["0x8002012C", "0x800232D4", "0x80031474", "0x80029598", "0x80029658", "0x80034DCC", "0x8001E9EC", "0x8003BD24", "0x80030ECC", "0x8002C530", "0x80047E34", "0x800244C0", "0x80024CC0"]
+mod_function_entry_funcs = ["0x8002012C", "0x800232D4", "0x80031474", "0x80029598", "0x80029658", "0x80034DCC", "0x8001E9EC", "0x8003BD24", "0x80030ECC", "0x8002C530", "0x80047E34", "0x800244C0", "0x80024CC0", "0x8004E26C", "0x8004DCB8"]
 
 [runtime]
 debug_port = 4490
