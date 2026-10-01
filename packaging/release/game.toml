@@ -1,6 +1,7 @@
 [game]
 name = "Mega Man X6"
 id = "SLUS-01395"
+players = 2
 exe = "mmx6/SLUS_013.95"
 disc = "mmx6/Mega Man X6 (USA) (v1.1).cue"
 load_address = "0x80010000"
@@ -12,10 +13,16 @@ stack_base = "0x801FFFF0"
 [recompiler]
 seeds = "seeds/ghidra_funcs.txt"
 out_dir = "generated"
+# Keep overlay hooks identical to the development config. They are inert when
+# the owning mod is disabled, but must survive packaged overlay compilation.
+mod_function_entry_funcs = ["0x8002012C", "0x800232D4", "0x80031474", "0x80029598", "0x80029658", "0x80034DCC", "0x8001E9EC", "0x8003BD24", "0x80030ECC", "0x8002C530", "0x80047E34", "0x800244C0", "0x80024CC0", "0x8004E26C", "0x8004DCB8", "0x8004EECC", "0x8004EC30", "0x80050250", "0x8003D308", "0x80051924", "0x80052F64", "0x80040800", "0x80031DA8", "0x8002C4C4", "0x8002820C", "0x800E9898", "0x800270D0", "0x80026ECC", "0x800239CC", "0x80023ED8", "0x800241D4", "0x80022E44", "0x8002CBFC", "0x8002CCB0", "0x8002CAB4", "0x80029D18", "0x80029E7C", "0x8002CB50", "0x8002CD6C", "0x800F9334"]
 
 # ---- Player-adjustable options ------------------------------------------
 # Edit, save, and restart MegaManX6Recomp.exe to apply.
 [runtime]
+# Bundled OpenBIOS is the default; retail BIOS selection remains available.
+openbios = true
+bios_hle_keep_intro = false
 window_title = "Mega Man X6 Recompiled"
 memcard_dir = "saves"
 
@@ -86,8 +93,9 @@ deadzone = 12000
 # MMX6 requires a DualShock, so the launcher hides the "Hybrid" pad mode and
 # offers only Analog / D-Pad.
 allow_hybrid = false
+multitap_analog = false
 
-# ---- Widescreen (experimental 16:9, 2D engine) --------------------------
+# ---- Custom Renderer (default off, adaptive 2D view) -------------------
 # full_2d treats every in-game frame as gameplay so the wide present path engages
 # (MMX6 never emits the 3D sprite-tag the gameplay detector keys on). The bg2d
 # hooks widen the per-layer 2D background renderer for a true wider field of view.
@@ -95,6 +103,8 @@ allow_hybrid = false
 # must match the build the cache was made for.
 [widescreen]
 full_2d = true
+gameplay_state_addr = "0x800CCED0"
+gameplay_state_values = ["0x0000000A"]
 offer = false
 offer_ultrawide = true
 clear_reveal = true
@@ -107,7 +117,8 @@ nw_left_hud_packet_hi = "0x000E4100"
 # reveal plus a small off-screen guard. These hooks are identity at 4:3.
 [widescreen.cull]
 guard_pixels = 32
-bias_sites = ["0x801F2118"]
+bias_sites = ["0x801F2118", "0x80029FDC"]
+bias_lower_sites = ["0x80029FD0"]
 slti_sites = ["0x801F210C"]
 
 [widescreen.bg2d]

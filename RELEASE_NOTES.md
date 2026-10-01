@@ -1,25 +1,62 @@
-# MegaManX6Recomp v1.0.9
+# MegaManX6Recomp v1.2.0-rc2
 
-v1.0.9 is a patch release for the bilinear texture filtering bug reported in
-GitHub issue #20.
+This Windows validation candidate includes the adaptive widescreen integration
+and the Weapon Center / Ilumina rendering fixes, plus fullscreen and launcher
+improvements from rc1. The latest stable release
+remains v1.1.0. A full playthrough has not been recertified for this candidate.
 
-## Bilinear texture filtering
+## Changes
 
-The OpenGL bilinear path no longer draws grid seams through the title-sequence
-dialogue panel, portraits, and other textures assembled from small PS1 texture
-rectangles.
+- Windows borderless fullscreen uses a desktop-sized window without switching
+  display modes. Exclusive fullscreen remains a separate option, including
+  after reopening the launcher.
+- The launcher remembers its resized dimensions across launches and fits them
+  to the display's scaling and work area. Hotkey settings remain scrollable
+  when the window is small.
+- Release packaging checks its framework and output paths and includes
+  `BUILD_PROVENANCE.json`, preventing a stale development cache from silently
+  selecting an older framework worktree.
+- Optional widescreen now offers Adaptive, 16:9, 21:9, and 32:9, in that order.
+  Adaptive follows the window's aspect ratio. Enable it in Mods; it is off by
+  default.
+- Extended enemy spawning and culling, Ride Armor visibility, moving trash
+  blocks, and Recycle Lab background coverage into the widened view.
+- Integrated the supporting framework changes, including fixes for crashes
+  during mod activation and renderer transitions.
+- Kept Ilumina's sprite parts aligned in both phases, including wide views.
+  Weapon Center's backdrop stays centered with the boss and reflects its
+  original panorama to cover the extra width without exposing an atlas gutter.
+- Aligned release overlay compilation hooks with the development configuration
+  and rebuilt the original-disc native overlay cache for this exact build.
 
-The fix recenters the bilinear sample footprint on the same PS1 sampling grid
-used by the renderer's primitive alignment, so 1x texture tiles sample their own
-texels instead of blending against the previous row or column at tile
-boundaries. Transparent cutout edges also keep the nearest texel as the
-authority, which avoids dissolving sprite borders into transparent neighbours.
+## Performance revalidation requested
 
-## Compatibility
+GitHub issues #31 (Ilumina's second phase) and #32 (intro-stage enemies) remain
+open. Current tests with Ultimate X in Ilumina's second phase and active intro
+encounters ran near 60 FPS on the validation machine using NVIDIA OpenGL.
+Those results do not establish performance on the Intel hardware in the reports.
 
-Save files, memory cards and savestates from v1.0.8 continue to work. Your disc
-image is unchanged and is still not included.
+If you reported either slowdown, please retry this candidate and report the
+encounter, renderer, supersampling, enabled mods, CPU/GPU, and observed FPS.
 
-This hotfix package includes a prewarmed overlay cache for the new framework
-codegen tag. It still includes the bundled overlay toolchain, so additional
-cache entries will be built locally as you play.
+Issue #22's savestate failure was not reproduced: 132 save/load operations
+across 11 locations and a separate 20-minute active session with F7-menu saves
+and loads passed. Please report the exact stage, BIOS and settings if it
+persists. Issue #2's flashing on the reported 360 Hz display and issue #1's
+Steam Deck Gaming Mode controller selection/rumble need hardware revalidation;
+they are not certified resolved by the local tests.
+
+## Compatibility and known limitations
+
+Standard PS1 memory-card saves remain supported. Back up your saves before
+testing. Old savestates are not guaranteed to load across this framework update;
+load from your memory card and create new states in this version.
+
+Rare exposed gaps and local pillarboxing in Amazon Forest are accepted
+widescreen limitations. The experimental combined rain/darkness mask also has
+remaining limitations. These do not block this candidate.
+
+This is a Windows-only candidate. The package includes OpenBIOS and its MIT
+notice, the launcher, bundled mods, a freshly audited overlay cache, and the
+overlay toolchain. Your legally obtained game disc is still required. It does
+not include a game disc, retail BIOS, or save data.

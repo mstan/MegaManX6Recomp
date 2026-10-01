@@ -114,9 +114,9 @@ Invoke-Native {
     py -3 (Join-Path $Root "tools\check_release_config.py")
 } "release config parity check"
 
-$FrameworkRoot = Join-Path $Root "psxrecomp-v4"
+$FrameworkRoot = (Join-Path $Root "psxrecomp-v4").Replace('\', '/')
 if (-not (Test-Path $FrameworkRoot)) {
-    $FrameworkRoot = Join-Path $Root "..\psxrecomp"
+    throw "Missing pinned psxrecomp-v4 submodule. Run git submodule update --init --recursive."
 }
 $RecompSourceDir = Join-Path $FrameworkRoot "recompiler"
 $RecompDir = if ([System.IO.Path]::IsPathRooted($RecompilerBuildDir)) {
@@ -137,7 +137,38 @@ if (-not $SkipRegen) {
     Invoke-Native { & $RecompBin --config (Join-Path $Root 'game.toml') } 'base game regeneration'
 }
 
-Invoke-Native { & $CMake -S $Root -B $BuildPath -G Ninja -DCMAKE_BUILD_TYPE=Release -DPSX_DEBUG_TOOLS=OFF -DPSX_PGXP_VARIANT=OFF -DPSX_SDL_BACKEND=SDL3 "-DPSX_GAME_VERSION=$Version" } "cmake configure"
+Invoke-Native {
+    & $CMake -S $Root -B $BuildPath -G Ninja -DCMAKE_BUILD_TYPE=Release `
+        -DPSX_DEBUG_TOOLS=OFF -DPSX_PGXP_VARIANT=OFF -DPSX_SDL_BACKEND=SDL3 `
+        -DPSX_STATIC_RUNTIME=ON -DPSX_RECOMP_UI=ON -DPSX_NETPLAY=ON `
+        -DGAME_GENERATED_DIR=generated "-DPSX_GAME_VERSION=$Version" `
+        "-DPSXRECOMP_V4_ROOT=$FrameworkRoot" `
+        "-DPSX_THIRD_PARTY_DIR:PATH=$FrameworkRoot/third_party" `
+        "-DPSXRECOMP_BIOS_PROFILE=$FrameworkRoot/bios/OpenBIOS.toml" `
+        "-DPSXRECOMP_BUNDLED_BIOS_SOURCE=$FrameworkRoot/bios/openbios.bin" `
+        "-DPSXRECOMP_BUNDLED_BIOS_LICENSE=$FrameworkRoot/bios/OpenBIOS.LICENSE" `
+        "-DRECOMP_NET_ROOT=$FrameworkRoot/lib/recomp-net" `
+        "-DRECOMP_RBENGINE_ROOT=$FrameworkRoot/lib/retcomm-rbengine" `
+        "-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=$BuildPath" `
+        "-DCMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE=$BuildPath"
+} "cmake configure"
+# A development cache can point at another worktree or a playtest/variant
+# output folder. Prove the paths CMake accepted before building or copying.
+$releaseCache = Get-Content -LiteralPath (Join-Path $BuildPath 'CMakeCache.txt') -Raw
+foreach ($entry in @(
+    @('PSXRECOMP_V4_ROOT', $FrameworkRoot),
+    @('PSX_THIRD_PARTY_DIR', (Join-Path $FrameworkRoot 'third_party')),
+    @('CMAKE_RUNTIME_OUTPUT_DIRECTORY', $BuildPath),
+    @('CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE', $BuildPath)
+)) {
+    $pattern = '(?m)^' + [regex]::Escape($entry[0]) + ':[^=]+=(.+)\r?$'
+    $match = [regex]::Match($releaseCache, $pattern)
+    if (-not $match.Success -or
+        -not [string]::Equals([IO.Path]::GetFullPath($match.Groups[1].Value.Trim()),
+            [IO.Path]::GetFullPath($entry[1]), [StringComparison]::OrdinalIgnoreCase)) {
+        throw "Release cache did not adopt $($entry[0])=$($entry[1])"
+    }
+}
 Invoke-Native { & $CMake --build $BuildPath --target psx-runtime -j $Jobs } "cmake build"
 
 if (Test-Path $StageRoot) {
@@ -155,6 +186,17 @@ New-Item -ItemType Directory -Force (Join-Path $Stage "saves") | Out-Null
 $DevExe = Join-Path $BuildPath "mmx6-runtime.exe"
 if (-not (Test-Path $DevExe)) { $DevExe = Join-Path $BuildPath "psx-runtime.exe" }
 Copy-Item $DevExe (Join-Path $Stage "MegaManX6Recomp.exe")
+@{
+    version = $Version
+    game_commit = (& git -C $Root rev-parse HEAD).Trim()
+    framework_commit = (& git -C $FrameworkRoot rev-parse HEAD).Trim()
+    ui_commit = (& git -C (Join-Path $Root 'recomp-ui') rev-parse HEAD).Trim()
+    framework_source = 'psxrecomp-v4'
+    generated_source = 'generated'
+    debug_tools = $false
+    static_runtime = $true
+    created_utc = [DateTime]::UtcNow.ToString('o')
+} | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $Stage 'BUILD_PROVENANCE.json')
 Copy-Item (Join-Path $Root "README.md") $Stage
 Copy-Item (Join-Path $Root "LICENSE") $Stage
 New-Item -ItemType Directory -Force (Join-Path $Stage "docs") | Out-Null
@@ -252,7 +294,7 @@ $imports = & $objdump -p (Join-Path $Stage "MegaManX6Recomp.exe") |
 $systemDlls = @("kernel32.dll","user32.dll","gdi32.dll","shell32.dll","msvcrt.dll",
                 "advapi32.dll","ws2_32.dll","comdlg32.dll","dbghelp.dll","ole32.dll",
                 "oleaut32.dll","winmm.dll","imm32.dll","version.dll","setupapi.dll",
-                "dinput8.dll","rpcrt4.dll","hid.dll","cfgmgr32.dll","opengl32.dll",
+                "dinput8.dll","rpcrt4.dll","hid.dll","cfgmgr32.dll","opengl32.dll","iphlpapi.dll",
                 "d2d1.dll","dwrite.dll","ntdll.dll","bcrypt.dll","dwmapi.dll","shlwapi.dll","ucrtbase.dll")
 $nonSystem = $imports | Where-Object { $systemDlls -notcontains $_.ToLower() -and $_ -notmatch '^api-ms-win-crt-[a-z0-9-]+\.dll$' }
 if ($nonSystem) {

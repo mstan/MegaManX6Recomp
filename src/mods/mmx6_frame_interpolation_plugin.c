@@ -1,41 +1,45 @@
 #include "mod_plugins.h"
 
-#include <stdlib.h>
-#include <string.h>
-
 /*
- * Presentation-only frame interpolation, moved out of generic recomp-ui
- * Settings into the mod catalog (game.toml sets
- * [video] offer_frame_interpolation = false).
- *
- * Deliberately psx_mod_set_frame_interpolation and NOT
- * psx_mod_set_native_vblank_rate: the former blends between completed guest
- * frames and leaves VBlank, logic, timers, and audio at their stock cadence,
- * while the latter changes whole-machine realtime speed. Conflating the two is
- * how "smoother" turns into "the game runs fast", so this package exposes only
- * the presentation half.
+ * Keep Mega Man X6's guest cadence completely stock. These callbacks only
+ * select how frequently PSXrecomp's OpenGL presentation thread blends between
+ * the two most recent completed game frames.
  */
-#define PKG "mmx6.enhancement.frame-interpolation"
-#define FEATURE "frame-interpolation"
+static void mmx6_frame_rate_set(unsigned frames_per_second) {
+    (void)psx_mod_set_frame_interpolation_blend(
+        PSX_MOD_FRAME_INTERPOLATION_MOTION_ADAPTIVE);
+    (void)psx_mod_set_frame_interpolation(frames_per_second);
+}
 
-static void mmx6_frame_interpolation_activate(void) {
-    char rate[16];
-    unsigned long fps = 0ul;   /* 0 = follow the measured display refresh */
+static void mmx6_frame_rate_60_activate(void) {
+    mmx6_frame_rate_set(60u);
+}
 
-    /* An unreadable or unrecognised value falls back to the manifest default
-     * ("display"), which is the conservative choice: it follows the monitor
-     * instead of pinning a rate the panel may not support. */
-    if (psx_mod_option_value(PKG, FEATURE, "rate", rate, sizeof rate) &&
-        strcmp(rate, "display") != 0) {
-        char* end = rate;
-        const unsigned long parsed = strtoul(rate, &end, 10);
-        if (end != rate && *end == '\0') fps = parsed;
-    }
+static void mmx6_frame_rate_120_activate(void) {
+    mmx6_frame_rate_set(120u);
+}
 
-    (void)psx_mod_set_frame_interpolation((uint32_t)fps);
+static void mmx6_frame_rate_144_activate(void) {
+    mmx6_frame_rate_set(144u);
+}
+
+static void mmx6_frame_rate_165_activate(void) {
+    mmx6_frame_rate_set(165u);
+}
+
+static void mmx6_frame_rate_display_activate(void) {
+    mmx6_frame_rate_set(0u);
 }
 
 PSX_MOD_CONSTRUCTOR(mmx6_register_frame_interpolation_plugin) {
     (void)psx_mod_register_activation_plugin(
-        "mmx6.frame-interpolation", mmx6_frame_interpolation_activate);
+        "mmx6.framerate.60", mmx6_frame_rate_60_activate);
+    (void)psx_mod_register_activation_plugin(
+        "mmx6.framerate.120", mmx6_frame_rate_120_activate);
+    (void)psx_mod_register_activation_plugin(
+        "mmx6.framerate.144", mmx6_frame_rate_144_activate);
+    (void)psx_mod_register_activation_plugin(
+        "mmx6.framerate.165", mmx6_frame_rate_165_activate);
+    (void)psx_mod_register_activation_plugin(
+        "mmx6.framerate.uncapped", mmx6_frame_rate_display_activate);
 }

@@ -101,11 +101,15 @@ endif()
 # psxrecomp_v4_add_runtime_target above, so this override wins. Drop official art
 # into launcher_art/img/ to replace the generated placeholder.
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/launcher_art")
-    add_custom_command(TARGET psx-runtime POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-            "${CMAKE_CURRENT_SOURCE_DIR}/launcher_art"
-            "$<TARGET_FILE_DIR:psx-runtime>"
-        COMMENT "Overriding launcher art with MegaManX6Recomp/launcher_art")
+    foreach(MMX6_RUNTIME_TARGET psx-runtime psx-runtime-pgxp)
+        if(TARGET ${MMX6_RUNTIME_TARGET})
+            add_custom_command(TARGET ${MMX6_RUNTIME_TARGET} POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy_directory
+                    "${CMAKE_CURRENT_SOURCE_DIR}/launcher_art"
+                    "$<TARGET_FILE_DIR:${MMX6_RUNTIME_TARGET}>"
+                COMMENT "Overriding launcher art with MegaManX6Recomp/launcher_art")
+        endif()
+    endforeach()
 endif()
 
 # Framework sources these tests compile in are addressed through
@@ -174,6 +178,12 @@ if(BUILD_TESTING)
     )
 
     find_package(Python3 REQUIRED COMPONENTS Interpreter)
+
+    add_test(
+        NAME mmx6_release_config_test
+        COMMAND "${Python3_EXECUTABLE}"
+                "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_release_config.py"
+    )
 
     # Clean-room CD-ROM EDC/ECC recompute (tools/edc_ecc.py) — the Tweaks apply
     # path's replacement for the former GPLv3 error_recalc.exe. Pure Python, no
