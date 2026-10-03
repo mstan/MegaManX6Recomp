@@ -103,6 +103,11 @@ instead of stretching the original 4:3 picture.
 
 These are the framework features that are already working in this build:
 
+- **Native interpolated rendering.** Enable Frame Interpolation under Mods to
+  redraw world sprites and scrolling backgrounds at display refresh or
+  90/120/144/165/240 FPS. Gameplay, audio and animation timing stay unchanged;
+  HUD elements retain their screen positions. Uses OpenGL and defaults off.
+
 - **Two renderers.** A CPU software rasterizer (this release's default) and a
   GPU-authoritative OpenGL backend, both selectable in the launcher. Software is
   the default here because OpenGL shows intermittent flicker in this build (see
@@ -302,3 +307,7 @@ statically recompiled (machine-translated) builds of the game's code.
 </p>
 
 See [original-disc AOT overlays](docs/AOT_OVERLAYS.md) for the verified inventory, reusable extraction method, release checks, and coverage limits.
+
+## v1.2.0 rendering update
+
+Game-code sprite and scrolling-background interpolation above 60 Hz, with stable HUD and current animation cells. Includes the current audited adaptive-widescreen renderer and object activation/retention bounds so visible scenery loads before entering the view. Keeps encounter and script-controller activation guards.

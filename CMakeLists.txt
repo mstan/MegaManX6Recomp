@@ -44,6 +44,8 @@ file(GLOB MMX6_MOD_PLUGIN_SOURCES CONFIGURE_DEPENDS
 # domains can be developed and reviewed without editing one central registry.
 file(GLOB GAME_MOD_RESOLVER_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/*.cpp")
+# Runtime draw hooks are separate from declarative catalog resolvers.
+list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_frame_interpolation_plugin[.]cpp$")
 
 # The game-owned mod catalog (the two presentation enhancements plus the
 # acediez Tweaks set). Every feature stays disabled until selected on the
@@ -74,6 +76,7 @@ psxrecomp_v4_add_runtime_target(psx-runtime
     EXTRAS_SOURCES
         ${GAME_GENERATED_EXTRAS}
         ${MMX6_MOD_PLUGIN_SOURCES}
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/mmx6_frame_interpolation_plugin.cpp"
         ${GAME_MOD_RESOLVER_SOURCES}
 )
 
@@ -120,6 +123,14 @@ endif()
 # A title that cannot be built against framework master cannot be checked
 # against it either.
 if(BUILD_TESTING)
+    add_executable(mmx6_frame_interpolation_test
+        tests/test_mmx6_frame_interpolation.cpp
+        "${PSXRECOMP_V4_ROOT}/runtime/src/render_pass_motion.c")
+    target_include_directories(mmx6_frame_interpolation_test PRIVATE
+        "${PSXRECOMP_V4_ROOT}/runtime/include")
+    add_test(NAME mmx6_frame_interpolation_test
+        COMMAND "$<TARGET_FILE:mmx6_frame_interpolation_test>")
+
     add_executable(mmx6_adaptive_background_test tests/test_adaptive_background.c)
     target_include_directories(mmx6_adaptive_background_test PRIVATE
         "${PSXRECOMP_V4_ROOT}/runtime/include")
@@ -223,4 +234,13 @@ if(BUILD_TESTING)
         COMMAND "$<TARGET_FILE:mmx6_tweaks_timing_runtime_test>"
                 "${MMX6_TIMING_TEST_ARCHIVE}"
     )
+    get_property(_mmx6_test_targets DIRECTORY PROPERTY BUILDSYSTEM_TARGETS)
+    foreach(_target IN LISTS _mmx6_test_targets)
+        if(_target MATCHES "^mmx6_.*test$")
+            get_target_property(_sources ${_target} SOURCES)
+            if("${_sources}" MATCHES "mod_packages[.]cpp")
+                target_sources(${_target} PRIVATE tests/mod_media_stub.cpp)
+            endif()
+        endif()
+    endforeach()
 endif()

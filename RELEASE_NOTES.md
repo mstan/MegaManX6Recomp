@@ -1,3 +1,11 @@
+# v1.2.0
+
+Game-code sprite and scrolling-background interpolation above 60 Hz, with stable HUD and current animation cells. Includes the current audited adaptive-widescreen renderer and object activation/retention bounds so visible scenery loads before entering the view. Keeps encounter and script-controller activation guards.
+
+Enable the frame-rate and widescreen enhancements in Mods. Native game timing remains unchanged. These are playable preview builds; full-game completion is not recertified.
+
+---
+
 # MegaManX6Recomp v1.2.0-rc2
 
 This Windows validation candidate includes the adaptive widescreen integration

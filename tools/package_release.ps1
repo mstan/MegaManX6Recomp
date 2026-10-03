@@ -8,7 +8,7 @@ param(
     [string]$Version = "",
     [string]$BuildDir = "build-release",
     [string]$RecompilerBuildDir = "recompiler/build",
-    [int]$Jobs = 8,
+    [int]$Jobs = 2,
     [switch]$SkipRegen
 )
 
@@ -279,7 +279,7 @@ Invoke-Native {
         --game-toml (Join-Path $Root 'game.toml') --runtime-config $StagedGameToml `
         --runtime-build-dir $BuildPath --runtime-target psx-runtime `
         --recompiler $RecompBin --work-dir (Join-Path $Root 'build-aot') `
-        --stage $Stage --gcc (Join-Path $MingwBin 'gcc.exe') --workers 3
+        --stage $Stage --gcc (Join-Path $MingwBin 'gcc.exe') --workers $Jobs
 } 'original-disc AOT extraction, compilation and audit'
 Add-OverlayToolchain -Stage $Stage -RecompDir $RecompDir -RecompTools $RecompTools `
                      -RecompInc $RecompInc -MingwBin $MingwBin `
@@ -376,6 +376,24 @@ PS1 .mcd images.
 
 if (Test-Path $ZipPath) {
     Remove-Item -Force $ZipPath
+}
+# Keep framework/UI notices and source pins with the playable package.
+$Licenses = Join-Path $Stage 'licenses'
+New-Item -ItemType Directory -Path $Licenses -Force | Out-Null
+Copy-Item -Path (Join-Path $FrameworkRoot 'runtime/licenses/*') -Destination $Licenses -Force
+foreach ($notice in @('LICENSE', 'THIRD_PARTY_ATTRIBUTION.md')) {
+    $source = Join-Path $FrameworkRoot $notice
+    if (Test-Path -LiteralPath $source) {
+        Copy-Item -LiteralPath $source -Destination (Join-Path $Licenses "psxrecomp-$notice") -Force
+    }
+}
+$UiLicense = Join-Path $Root 'recomp-ui/LICENSE'
+if (Test-Path -LiteralPath $UiLicense) {
+    Copy-Item -LiteralPath $UiLicense -Destination (Join-Path $Licenses 'recomp-ui-LICENSE') -Force
+}
+foreach ($doc in @('VERSION','RELEASE_NOTES.md','framework_pins.txt','BUILD_PROVENANCE.json')) {
+    $source = Join-Path $Root $doc
+    if (Test-Path -LiteralPath $source) { Copy-Item -LiteralPath $source -Destination $Stage -Force }
 }
 Compress-Archive -Path (Join-Path $Stage "*") -DestinationPath $ZipPath -Force
 
