@@ -208,6 +208,25 @@ if(BUILD_TESTING)
                 "${MMX6_PRELOADED_MODS}"
     )
 
+    # Seamless Loading compatibility matrix over every bundled mod feature.
+    add_executable(mmx6_seamless_mod_matrix_test
+        tests/test_seamless_mod_matrix.cpp
+        ${GAME_MOD_RESOLVER_SOURCES}
+        "${PSXRECOMP_V4_ROOT}/runtime/src/mod_packages.cpp"
+        "${PSXRECOMP_V4_ROOT}/runtime/src/crc32.c"
+        "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c"
+    )
+    target_include_directories(mmx6_seamless_mod_matrix_test PRIVATE
+        src/mods
+        "${PSXRECOMP_V4_ROOT}/runtime/include"
+        "${PSXRECOMP_V4_ROOT}/recompiler/lib/toml11"
+    )
+    add_test(
+        NAME mmx6_seamless_mod_matrix_test
+        COMMAND "$<TARGET_FILE:mmx6_seamless_mod_matrix_test>"
+                "${MMX6_PRELOADED_MODS}"
+    )
+
     find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
     add_test(

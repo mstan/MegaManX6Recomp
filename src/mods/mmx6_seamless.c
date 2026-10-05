@@ -5,6 +5,7 @@
  * drains the game's deferred VRAM/SPU queue as the original main loop would.
  * Guest clocks, CD timing, XA music/voice streaming and audio pacing are not
  * changed. Anything outside the verified contract runs the original loader. */
+#include "mmx6_seamless_callers.h"
 #include "mmx6_seamless_store.h"
 #include "mod_plugins.h"
 #include "cpu_state.h"
@@ -205,23 +206,17 @@ static int contains(const uint32_t *list, unsigned n, uint32_t value) {
  * only move their queue work into a gameplay hitch and change spawn timing.
  * Unknown callers use the original loader. */
 static int blocking_request(CPUState *cpu, int packed) {
-    static const uint32_t pack_callers[] = {   /* return addresses after jal 80014F70 */
-        0x80013C54u, 0x80013C6Cu, 0x80013D90u, 0x8001407Cu, 0x800140A8u, 0x800140F0u,
-        0x80014124u, 0x800141D8u, 0x80014494u, 0x800144C4u, 0x80016094u, 0x800162D8u,
-        0x8001DCBCu};
-    static const uint32_t bin_callers[] = {    /* return addresses after jal 80016858 */
-        0x80013CE4u, 0x80013CF8u, 0x80013D5Cu, 0x80013E48u, 0x80013E84u};
-    static const uint32_t raw_callers[] = {    /* jal 80014E60 in 8001494C/80015EC0/80016178/8001642C */
-        0x80014A90u, 0x80016070u, 0x800162B4u, 0x80016504u};
     const uint32_t ra = cpu->gpr[31], sp = cpu->gpr[29];
     if (packed) {
         /* 80014F70 calls 80015230 last; its frame saves the caller's ra at +40. */
         if (ra < 0x80014F70u || ra >= FN_PACK_START) return 0;
-        return contains(pack_callers, sizeof pack_callers / 4, r32(sp + 40u));
+        return contains(mmx6_seamless_pack_callers, sizeof mmx6_seamless_pack_callers / 4,
+                        r32(sp + 40u));
     }
     if (ra == 0x80016938u)  /* from 80016858, whose frame saves its caller's ra at +28 */
-        return contains(bin_callers, sizeof bin_callers / 4, r32(sp + 28u));
-    return contains(raw_callers, sizeof raw_callers / 4, ra);
+        return contains(mmx6_seamless_bin_callers, sizeof mmx6_seamless_bin_callers / 4,
+                        r32(sp + 28u));
+    return contains(mmx6_seamless_raw_callers, sizeof mmx6_seamless_raw_callers / 4, ra);
 }
 
 static int start_filter(CPUState *cpu, uint32_t address) {

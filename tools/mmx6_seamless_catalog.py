@@ -21,6 +21,7 @@ ARCHIVES = (('ROCK_X6.DAT', 243), ('ROCK_X6.BIN', 59))
 GUARDS = (
     (0x80010038, 0x80010068),  # sector-handler and handler-switch tables
     (0x80014D50, 0x80016704),  # sector reader, start/wait, callbacks, deferred queue
+    (0x80016858, 0x80016950),  # BIN read start; its saved-ra slot identifies callers
     (0x8006E348, 0x8006E354),  # deferred VRAM/SPU job table
     (0x80064894, 0x800648B4),  # CdReady wrapper
     (0x80064CB4, 0x80064CD4),  # CdGetSector wrapper

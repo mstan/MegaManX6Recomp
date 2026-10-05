@@ -3,11 +3,12 @@
 static const GuardRange guard_ranges[] = {
     {0x80010038u, 0x80010068u},
     {0x80014D50u, 0x80016704u},
+    {0x80016858u, 0x80016950u},
     {0x8006E348u, 0x8006E354u},
     {0x80064894u, 0x800648B4u},
     {0x80064CB4u, 0x80064CD4u},
 };
-static const char guard_sha256[] = "5a6460ab997713865bf792d42db2011bbb5c1f7c6283ec93ca8da0363949dbc7";
+static const char guard_sha256[] = "029eb9493077985fa89961653530f70492cc6eb6f6e75b60d3e865cb10f848e6";
 static const ArchiveFile archives[] = {
     {"ROCK_X6.DAT", 211998u, 50913280u, 243u, "03c0c927194a0c8321ae207707abd5fc662bb13aa80c26145ee363cc716c2c9a"},
     {"ROCK_X6.BIN", 211185u, 1665024u, 59u, "55b03e4ecc13d6110ff300f80b7000b0f97234e19f1b846aa2b885eece30d80f"},

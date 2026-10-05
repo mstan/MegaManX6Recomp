@@ -37,6 +37,9 @@ struct ArchiveMember { unsigned archive, index, offset, size; const char *hash; 
 
 constexpr char kMagic[8] = {'X', '6', 'R', 'E', 'S', '0', '0', '1'};
 constexpr unsigned kKeepPacks = 4;
+/* Largest file on an 80-minute CD; asset mods may grow ROCK_X6.DAT into the
+ * padding file that follows it (e.g. the retranslation, ~66 MiB). */
+constexpr uint32_t kMaxArchiveBytes = 360000u * 2048u;
 
 struct Archive {
     Bytes data;          /* sector padded */
@@ -126,7 +129,7 @@ bool load(const std::filesystem::path &path, std::vector<Archive> &out) {
     for (size_t i = 0; i < out.size(); i++) {
         uint32_t size;
         unsigned char hash[32];
-        if (!in.read(reinterpret_cast<char *>(&size), 4) || !size || size > 64u * 1024u * 1024u ||
+        if (!in.read(reinterpret_cast<char *>(&size), 4) || !size || size > kMaxArchiveBytes ||
             !in.read(reinterpret_cast<char *>(hash), 32)) return false;
         out[i].size = size;
         out[i].data.resize((size + 2047u) & ~2047u);
@@ -197,7 +200,7 @@ std::vector<Archive> prepare() {
     for (size_t i = 0; i < out.size(); i++) {
         uint32_t size = 0;
         if (!psx_mod_read_disc_file(archives[i].path, nullptr, 0, &size) || !size ||
-            size > 64u * 1024u * 1024u)
+            size > kMaxArchiveBytes)
             throw std::runtime_error(std::string("cannot size ") + archives[i].path);
         out[i].size = size;
         out[i].data.assign((size + 2047u) & ~2047u, 0);

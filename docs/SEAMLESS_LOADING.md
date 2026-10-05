@@ -57,9 +57,11 @@ Function filters (`game.toml` `mod_function_entry_funcs`, regenerated) on
    and timing; overlapping them with play is their design, and serving them at
    once would move their queue work into a gameplay hitch and change spawn
    timing (counter `background_original`).
-2. The live loader code/data (5 ranges, 6.6 KB) must match the original
-   executable (SHA-256 guard), and the game's in-RAM descriptor tables must
-   agree with the resident archive headers entry by entry.
+2. The live loader code/data (6 ranges, including `80016858` whose frame layout
+   identifies callers) must match the original executable (SHA-256 guard), and
+   the game's in-RAM descriptor tables must agree with the resident archive
+   headers entry by entry. Trusted call sites live in
+   `src/mods/mmx6_seamless_callers.h`.
 3. The start routine's guest-visible state changes are applied without driving
    the drive. Then, per sector, the original callback runs with a synthesized
    header (BCD MSF, Form 1 subheader, EOR|EOF on the archive's last sector);
@@ -94,16 +96,46 @@ exhaustive playthrough is claimed.
 
 ## Asset mods (phase 2)
 
-Preparation reads the effective mounted disc (sector patches and derived
-discs), so a modified member is served as modified and counted (`N/302 members
-differ` in the log); a changed plan never reuses another plan's pack. Code mods
-that change the loader fail the guard and use the original loader.
-Compatibility of specific asset-mod combinations is tracked in `beads-eio.1.37`.
+Preparation reads the **effective** disc: committed sector writes/overlays,
+derived discs and mod-patched directory records. Modified members are served
+modified and counted (`N/302 members differ` in the log); a changed plan never
+reuses another plan's pack.
+
+Framework fixes this needed (psxrecomp `fix/mod-disc-read-applies-committed-plan`,
+pinned at `b52b27bb`): `psx_mod_read_disc_file` previously (1) skipped disc
+patches during plugin activation, because the drive's patches are enabled only
+after the text-image guard, so a modded plan silently prepared **stock** bytes;
+(2) looked files up through the unpatched directory; and (3) refused files over
+64 MiB. The retranslation relocates 25 enlarged records past the original end
+of `ROCK_X6.DAT` into `ZNULL.DAT`'s space and grows the DAT directory record to
+69,400,576 bytes. All three are covered by `mod_runtime_test`.
+
+`mmx6_seamless_mod_matrix_test` resolves all 203 bundled features (a feature
+that requires another package is checked with it) and classifies each plan:
+
+| Result | Features | Meaning |
+| --- | --- | --- |
+| served modified | 58 | Changes DAT/BIN members (boss AI, stage layouts, Nightmare, parts, title screen, retranslation, boss-warning voice). Served from the effective-disc pack. |
+| unaffected | 145 | Main-EXE or plugin changes outside the loader contract. |
+| original loader | 0 | Would change guarded loader code or a trusted call site. |
+
+The all-features plan resolves with 76 modified members and no contract
+change. Plans that write the DAT growth area must also grow `ROCK_X6.DAT`
+(asserted). Explicit fallbacks remain for anything else: a loader-code change
+fails the SHA-256 guard, descriptors outside the effective archive fail
+preparation, and an LBA outside the resident archives uses the drive for that
+load (counters `reject_guard`, `reject_table`, `reject_lba`).
+
+Runtime A/B with title screen, retranslation, boss-warning voice and a boss AI
+tweak enabled: the pack prepared 71,065,600 bytes with 65 modified members;
+seamless and original loading showed the same modded title screen, menus, stage
+select and stage, with 0 vs 1,760 CD data reads.
 
 ## Reproduce checks
 
 ```text
 cmake -B build -DMMX6_TEST_DISC="<path>/Mega Man X6 (USA) (v1.1).bin" ...
 ctest --test-dir build -R "seamless|preloaded|release_config" --output-on-failure
+# includes mmx6_seamless_mod_matrix_test (no disc needed)
 py -3 tools/mmx6_seamless_catalog.py "<path>/Mega Man X6 (USA) (v1.1).bin" --check
 ```
