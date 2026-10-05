@@ -149,6 +149,7 @@ if(BUILD_TESTING)
     add_executable(mmx6_seamless_store_test
         tests/test_seamless_store.cpp
         src/mods/mmx6_seamless_store.cpp
+        "${PSXRECOMP_V4_ROOT}/runtime/src/mod_resident.cpp"
         "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c")
     target_include_directories(mmx6_seamless_store_test PRIVATE
         src/mods

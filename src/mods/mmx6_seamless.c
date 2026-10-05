@@ -9,14 +9,10 @@
 #include "mmx6_seamless_store.h"
 #include "mod_plugins.h"
 #include "cpu_state.h"
-#include "dirty_ram_interp.h"
-#include "overlay_capture.h"
-#include "psx_memory.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-extern uint8_t *memory_get_ram_ptr(void);
 extern uint64_t psx_cycle_count;
 
 /* Original loader state (see docs/SEAMLESS_LOADING.md). */
@@ -45,22 +41,16 @@ static int ready, trace, retail, disabled;
 static int pumping, pump_error;
 static unsigned frame;
 static uint8_t sector[SECTOR_BYTES];
-static uint32_t cursor;
+static uint32_t cursor, sector_lba;
 
 static uint32_t r32(uint32_t a) { return psx_mod_read_word(a); }
 static uint8_t r8(uint32_t a) { return psx_mod_read_byte(a); }
 static void count(const char *name) { psx_mod_counter_add(name, 1); }
 static uint8_t bcd(unsigned v) { return (uint8_t)(((v / 10) << 4) | (v % 10)); }
 
-/* Run an original guest routine to completion from a filter callback. Keep
- * globally charged cycles/hardware deadlines; restore caller registers. */
+/* Run an original guest routine to completion from a filter callback. */
 static void call_guest(CPUState *cpu, uint32_t fn, uint32_t a0) {
-    CPUState saved = *cpu;
-    cpu->gpr[4] = a0;
-    psx_dispatch_call(cpu, fn, cpu->gpr[31]);
-    if (cpu->muldiv_ts_done > saved.muldiv_ts_done) saved.muldiv_ts_done = cpu->muldiv_ts_done;
-    if (cpu->gte_ts_done > saved.gte_ts_done) saved.gte_ts_done = cpu->gte_ts_done;
-    *cpu = saved;
+    (void)psx_mod_call_guest(cpu, fn, cpu->gpr[31], a0, 0, 0, 0);
 }
 
 /* Archive base LBA from the game's own descriptor table, which it built from
@@ -86,28 +76,21 @@ static void load_sector(uint32_t lba, const unsigned char *data, int last) {
     sector[6] = sector[10] = last ? 0x89 : 0x08; /* data; last file sector adds EOR|EOF */
     memcpy(sector + 12, data, 2048);
     cursor = 0;
+    sector_lba = lba;
 }
 
-/* CdGetSector(dst, words): the original is a CD-ROM DMA from the sector buffer.
- * Mirror the DMA's RAM-side effects (code capture and executable invalidation). */
+/* CdGetSector(dst, words): the original is a CD-ROM DMA from the sector buffer,
+ * so deliver the words with the same RAM-side effects. */
 static int get_sector_filter(CPUState *cpu, uint32_t address) {
     (void)address;
     if (!pumping || cpu->gpr[31] < LOADER_LO || cpu->gpr[31] >= LOADER_HI) return 0;
     uint32_t dst = cpu->gpr[4] & 0x1FFFFFFCu, bytes = cpu->gpr[5] * 4u;
-    if (!bytes || bytes > SECTOR_BYTES - cursor || dst >= psx_ram_live_bytes() ||
-        bytes > psx_ram_live_bytes() - dst) {
+    if (!bytes || bytes > SECTOR_BYTES - cursor ||
+        !psx_mod_dma_write_ram(0x80000000u | dst, sector + cursor, bytes, (int)sector_lba)) {
         pump_error = 1;
         cpu->gpr[2] = 0;
         return 1;
     }
-    if (dst < 0x1C0000u) overlay_capture_before_dma(dst, bytes);
-    for (uint32_t i = 0; i < bytes; i += 4) {
-        uint32_t w;
-        memcpy(&w, sector + cursor + i, 4);
-        psx_host_write_word(0x80000000u | (dst + i), w);
-    }
-    dirty_ram_mark_executable_range(dst, bytes);
-    if (dst < 0x1C0000u) overlay_capture_on_dma(dst, bytes, memory_get_ram_ptr() + dst);
     cursor += bytes;
     cpu->gpr[2] = 1;
     return 1;
@@ -142,7 +125,7 @@ static int pump(CPUState *cpu, int packed) {
         count("mmx6.seamless.reject_size");
         return 0;
     }
-    if (!mmx6_seamless_guard_ok(psx_mod_read_byte)) {
+    if (!mmx6_seamless_guard_ok()) {
         count("mmx6.seamless.reject_guard");
         return 0;
     }

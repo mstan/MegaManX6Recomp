@@ -1,7 +1,11 @@
 /* Integration test for Seamless Loading preparation using an owner-supplied
- * disc image. No disc data is distributed; the catalog holds metadata only. */
+ * disc image, through the framework's resident pack (mod_resident.cpp). The
+ * framework's disc and plan services are replaced by readers of the real disc
+ * image. No disc data is distributed; the catalog holds metadata only. */
 #include "mmx6_seamless_store.h"
+#include "mod_runtime.h"
 #include "psx_sha256.h"
+#include <algorithm>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -19,6 +23,7 @@ struct ArchiveMember { unsigned archive, index, offset, size; const char *hash; 
 std::ifstream disc;
 unsigned reads;
 bool available = true;
+bool modified_exe = false;
 /* Simulated asset mod: replace bytes inside one DAT member's sectors. */
 int patch_member = -1;
 std::string fingerprint = "stock-test-plan";
@@ -41,38 +46,47 @@ bool read_user(unsigned lba, unsigned char *out) {
     std::memcpy(out, raw + 24, 2048);
     return true;
 }
-uint8_t exe_byte(uint32_t address) { return exe_text.at(address - 0x80010000u); }
-uint8_t modified_exe_byte(uint32_t address) {
-    return address == 0x80015230u ? uint8_t(exe_byte(address) ^ 1u) : exe_byte(address);
+const ArchiveFile *archive(const char *path) {
+    for (const auto &a : archives)
+        if (!std::strcmp(a.path, path)) return &a;
+    return nullptr;
 }
 }  // namespace
 
 namespace PSXRecompV4 {
 const std::string &mod_runtime_fingerprint() { return fingerprint; }
+bool mod_runtime_read_disc_file_sectors(const std::string &path, uint32_t max_bytes,
+                                        std::vector<uint8_t> &padded, uint32_t &lba,
+                                        uint32_t &size, std::string *error) {
+    ++reads;
+    padded.clear();
+    const ArchiveFile *a = archive(path.c_str());
+    if (!available || !a || (max_bytes && a->size > max_bytes)) {
+        if (error) *error = path + ": unavailable";
+        return false;
+    }
+    padded.resize(size_t((a->size + 2047u) / 2048u) * 2048u);
+    for (uint32_t s = 0; s < padded.size() / 2048u; s++)
+        if (!read_user(a->lba + s, padded.data() + size_t(s) * 2048u)) return false;
+    if (patch_member >= 0 && path == "ROCK_X6.DAT")
+        padded[members[patch_member].offset * 2048u + 16u] ^= 0x5A;
+    lba = a->lba;
+    size = a->size;
+    return true;
+}
 }
 
-extern "C" int psx_mod_read_disc_file(const char *path, void *buffer, uint32_t capacity, uint32_t *size) {
-    ++reads;
-    if (size) *size = 0;
-    if (!available) return 0;
-    for (const auto &a : archives) {
-        if (std::strcmp(a.path, path)) continue;
-        if (!buffer) { *size = a.size; return 1; }
-        if (capacity < a.size) return 0;
-        unsigned char sector[2048];
-        for (uint32_t offset = 0; offset < a.size; offset += 2048) {
-            if (!read_user(a.lba + offset / 2048, sector)) return 0;
-            std::memcpy(static_cast<unsigned char *>(buffer) + offset, sector,
-                        std::min<uint32_t>(2048u, a.size - offset));
-        }
-        if (patch_member >= 0 && !std::strcmp(path, "ROCK_X6.DAT")) {
-            const auto &m = members[patch_member];
-            static_cast<unsigned char *>(buffer)[m.offset * 2048u + 16u] ^= 0x5A;
-        }
-        *size = a.size;
-        return 1;
-    }
-    return 0;
+extern "C" int psx_mod_disc_file_extent(const char *path, uint32_t *lba, uint32_t *size) {
+    const ArchiveFile *a = archive(path);
+    if (!a) return 0;
+    *lba = a->lba;
+    *size = a->size;
+    return 1;
+}
+extern "C" void psx_mod_counter_add(const char *, uint32_t) {}
+extern "C" uint8_t psx_mod_read_byte(uint32_t address) {
+    const uint8_t b = exe_text.at(address - 0x80010000u);
+    return modified_exe && address == 0x80015230u ? uint8_t(b ^ 1u) : b;
 }
 
 int main(int argc, char **argv) {
@@ -85,9 +99,9 @@ int main(int argc, char **argv) {
         ("run-" + std::to_string(std::filesystem::file_time_type::clock::now().time_since_epoch().count()));
     require(!std::filesystem::exists(cache), "test requires a fresh cache directory");
 #ifdef _WIN32
-    _putenv_s("MMX6_SEAMLESS_CACHE", cache.string().c_str());
+    _putenv_s("PSX_RESIDENT_CACHE", cache.string().c_str());
 #else
-    setenv("MMX6_SEAMLESS_CACHE", cache.string().c_str(), 1);
+    setenv("PSX_RESIDENT_CACHE", cache.string().c_str(), 1);
 #endif
     disc.open(argv[1], std::ios::binary);
     require(bool(disc), "disc open");
@@ -119,10 +133,12 @@ int main(int argc, char **argv) {
         }
         exe_text.assign(exe.begin() + 0x800, exe.begin() + size);
     }
-    require(mmx6_seamless_guard_ok(exe_byte), "original loader guard matches the executable");
-    require(!mmx6_seamless_guard_ok(modified_exe_byte), "modified loader code rejected");
+    require(mmx6_seamless_guard_ok(), "original loader guard matches the executable");
+    modified_exe = true;
+    require(!mmx6_seamless_guard_ok(), "modified loader code rejected");
+    modified_exe = false;
 
-    require(mmx6_seamless_prepare() == 1 && reads == 4, "cold native preparation");
+    require(mmx6_seamless_prepare() == 1 && reads == 2, "cold native preparation");
     require(mmx6_seamless_modified_members() == 0, "stock disc classified as original");
     for (const auto &m : members) {
         uint32_t offset = 0, size = 0;
@@ -144,7 +160,9 @@ int main(int argc, char **argv) {
     require(mmx6_seamless_prepare() == 1 && reads == 0, "warm launch uses the verified pack");
 
     std::filesystem::path stock_pack;
-    for (const auto &e : std::filesystem::directory_iterator(cache)) stock_pack = e.path();
+    for (const auto &e : std::filesystem::recursive_directory_iterator(cache))
+        if (e.path().extension() == ".pack") stock_pack = e.path();
+    require(!stock_pack.empty(), "pack published");
 
     /* An asset mod changes the plan fingerprint and the effective disc. The
      * stock pack must not be reused; the modified bytes are what is served. */
@@ -152,7 +170,7 @@ int main(int argc, char **argv) {
     require(mmx6_seamless_prepare() == 0 && !mmx6_seamless_sector(0, 2),
             "changed plan cannot reuse the stock pack");
     available = true; reads = 0;
-    require(mmx6_seamless_prepare() == 1 && reads == 4, "asset-mod plan prepared from the effective disc");
+    require(mmx6_seamless_prepare() == 1 && reads == 2, "asset-mod plan prepared from the effective disc");
     require(mmx6_seamless_modified_members() == 1, "modified member classified");
     {
         const auto &m = members[patch_member];
@@ -168,8 +186,8 @@ int main(int argc, char **argv) {
     { std::fstream out(stock_pack, std::ios::in | std::ios::out | std::ios::binary);
       out.seekp(4096 + 44); out.put(char(0xAA)); }
     available = true; reads = 0;
-    require(mmx6_seamless_prepare() == 1 && reads == 4, "corrupt pack rebuilt from the disc");
-    { std::ofstream out(stock_pack, std::ios::binary | std::ios::trunc); out.write("X6RES001", 8); }
+    require(mmx6_seamless_prepare() == 1 && reads == 2, "corrupt pack rebuilt from the disc");
+    { std::ofstream out(stock_pack, std::ios::binary | std::ios::trunc); out.write("PSXRES01", 8); }
     available = false;
     require(mmx6_seamless_prepare() == 0 && !mmx6_seamless_sector(0, 2),
             "failed repair leaves no resident state (original loading)");

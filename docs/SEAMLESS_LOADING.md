@@ -14,20 +14,28 @@ v1.1 (`disc_sha256 91ef53c1...`).
 On first activation, native code reads `ROCK_X6.DAT` (50,913,280 bytes) and
 `ROCK_X6.BIN` (1,665,024 bytes) from the mounted disc and writes a verified pack
 (52,578,304 resident bytes). No Python, compiler or extraction step is
-involved. Packs live in `%LOCALAPPDATA%/MegaManX6Recomp/seamless` on Windows,
-`$XDG_CACHE_HOME/MegaManX6Recomp/seamless` (or `~/.cache/...`) elsewhere. The
-name includes a hash of the mod-plan fingerprint (package order, selections,
-disc writes/overlays, derived discs, source disc hash). Every launch verifies
-the pack's per-archive SHA-256; a corrupt or truncated pack is rebuilt, and a
-failed rebuild leaves the original loader active. The four most recently used
-packs are kept. Packs contain licensed game data and must not be distributed.
+involved. The pack is the framework's resident disc pack (psxrecomp
+`runtime/include/mod_resident.h`), shared with the Tomba titles: whole
+effective sectors (true end-of-file tails), keyed by the mod-plan fingerprint
+(package order, selections, disc writes/overlays, derived discs, source disc
+hash), every blob SHA-256 verified on load, the files' disc extents rechecked.
+Packs live in `%LOCALAPPDATA%/MegaManX6Recomp/seamless` on Windows,
+`$XDG_CACHE_HOME/MegaManX6Recomp/seamless` (or `~/.cache/...`) elsewhere, named
+`slus01395-archives-v2-<key>.pack`. A corrupt or truncated pack is rebuilt, and
+a failed rebuild leaves the original loader active. The active pack and the
+three most recently used others are kept. Packs contain licensed game data and
+must not be distributed.
 
 Music, voices and movies (`XA/*.XA`, `STR/*.STR`) stay on their streaming paths.
 
-Developer-only environment variables: `MMX6_SEAMLESS_CACHE` (cache directory),
+Developer-only environment variables: `PSX_RESIDENT_CACHE` (cache root),
 `MMX6_SEAMLESS_TRACE=1` (per-load diagnostics with guest-cycle cost),
-`MMX6_SEAMLESS_RETAIL=1` (prepare, then bypass, for A/B). Always-on counters:
-TCP `{"cmd":"mod_counters"}` (`mmx6.seamless.*`).
+`MMX6_SEAMLESS_RETAIL=1` (prepare, then bypass, for A/B). Always-on: TCP
+`{"cmd":"resident_status"}` (pack state, modified files, size, prepare time)
+and `{"cmd":"mod_counters"}` (`mmx6.seamless.*`, `resident.*`). Served sectors
+are recorded in the CD DMA log (`cd_read_log`) with their disc LBA, like drive
+reads, so overlay tooling keeps its disc mapping; drive activity is
+`cdrom_bursts`.
 
 ## Original loader (from the original executable)
 
@@ -65,8 +73,10 @@ Function filters (`game.toml` `mod_function_entry_funcs`, regenerated) on
 3. The start routine's guest-visible state changes are applied without driving
    the drive. Then, per sector, the original callback runs with a synthesized
    header (BCD MSF, Form 1 subheader, EOR|EOF on the archive's last sector);
-   `CdReady` returns DataReady and `CdGetSector` copies resident bytes with the
-   CD-DMA path's RAM effects (overlay capture, executable invalidation). After
+   `CdReady` returns DataReady and `CdGetSector` delivers resident bytes through
+   the framework's `psx_mod_dma_write_ram` (the CD-DMA path's RAM effects:
+   overlay capture, executable invalidation, CD DMA log). Original routines run
+   through `psx_mod_call_guest`. After
    each sector with queued work, the original drain (`80015C5C`) and
    `DrawSync(0)` run. The callbacks issue their own Pause and set status 2.
 4. Any inconsistency leaves the game's own 600-frame timeout/retry to recover
@@ -83,7 +93,7 @@ jobs, ~21k cycles per sector) and land in frames that are already black.
   entries (X and Zero, three stages). No "Now Loading" or logo screen; fade-out
   and stage fade-in unchanged; gameplay screens identical to retail; player live.
 - Title, menu, memory-card continue and stage select load normally.
-- `mmx6_seamless_store_test` (owner disc): cold/warm preparation, all 302
+- `mmx6_seamless_store_test` (owner disc, real framework pack code): cold/warm preparation, all 302
   member hashes, loader guard against the disc's executable and rejection of a
   modified one, asset-mod plan isolation and served modified bytes, corruption
   repair, fail-closed fallback. `mmx6_preloaded_mods_test`: 16 packages,

@@ -21,7 +21,7 @@ const unsigned char *mmx6_seamless_sector(unsigned archive, uint32_t sector);
 /* Members whose bytes differ from the original disc (asset mods). */
 unsigned mmx6_seamless_modified_members(void);
 /* Live loader code/data matches the original executable. */
-int mmx6_seamless_guard_ok(uint8_t (*read)(uint32_t address));
+int mmx6_seamless_guard_ok(void);
 
 #ifdef __cplusplus
 }
