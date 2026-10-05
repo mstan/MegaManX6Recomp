@@ -14,7 +14,7 @@ seeds = "seeds/ghidra_funcs.txt"
 out_dir = "generated"
 # Keep overlay hooks identical to the development config. They are inert when
 # the owning mod is disabled, but must survive packaged overlay compilation.
-mod_function_entry_funcs = ["0x800270D0", "0x80026ECC", "0x800232D4", "0x800239CC", "0x80023ED8", "0x800241D4", "0x80022E44", "0x8002CBFC", "0x8002CCB0", "0x8002CAB4", "0x80029D18", "0x80029E7C", "0x8002CB50", "0x8002CD6C", "0x800F9334", "0x80025FB0", "0x80060964"]
+mod_function_entry_funcs = ["0x800270D0", "0x80026ECC", "0x800232D4", "0x800239CC", "0x80023ED8", "0x800241D4", "0x80022E44", "0x8002CBFC", "0x8002CCB0", "0x8002CAB4", "0x80029D18", "0x80029E7C", "0x8002CB50", "0x8002CD6C", "0x800F9334", "0x80025FB0", "0x80060964", "0x80014E60", "0x80015230", "0x80064894", "0x80064CB4"]
 mod_instruction_sites = ["0x80026DA4", "0x80025FD0"]
 
 # ---- Player-adjustable options ------------------------------------------
@@ -36,10 +36,10 @@ bios_hle = true
 # Deprecated alias for the HLE boot skip alone (kept for old settings files).
 fast_boot  = false
 
-# Load acceleration is OFF by default and is owned by Mods, not by this file.
-# Players who want faster loads enable "Fast Loading (host pacing)" (runs the
-# machine faster during a load, all game timing preserved) or "CD Speed" (makes
-# the emulated drive deliver sectors sooner) under Mods -> Quality of Life.
+# Seamless Loading is enabled by default on the Mods page. It serves verified
+# disc resources prepared once from your disc; guest CD timing, audio and
+# gameplay pacing stay normal. Disabling it restores the original loader. The
+# generic CD Speed and host-paced Fast Loading mods are not offered.
 #
 # The old `turbo_loads = true` key used to live here. It is deprecated and the
 # framework now ignores it. Do not put it back: the launcher draws no Turbo row,

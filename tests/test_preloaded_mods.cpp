@@ -7,8 +7,8 @@
 
 namespace {
 
-constexpr size_t kExpectedPackages = 15;
-constexpr size_t kExpectedFeatures = 203;
+constexpr size_t kExpectedPackages = 16;
+constexpr size_t kExpectedFeatures = 204;
 constexpr size_t kExpectedTweaksPackages = 13;
 constexpr const char* kGameId = "SLUS-01395";
 constexpr const char* kStockDiscSha256 =
@@ -151,8 +151,14 @@ int main(int argc, char** argv) {
                 return fail(id + "/" + feature.id +
                             " exposes permission-gated collaborator content");
             }
-            if (feature.default_enabled) {
-                return fail(id + "/" + feature.id + " is enabled by default");
+            /* Seamless Loading is the standard loader; everything else opts in. */
+            const bool seamless =
+                id == "mmx6.enhancement.seamless-loading" &&
+                feature.id == "seamless-loading";
+            if (feature.default_enabled != seamless) {
+                return fail(id + "/" + feature.id +
+                            (seamless ? " must be enabled by default"
+                                      : " is enabled by default"));
             }
         }
     }
@@ -180,11 +186,19 @@ int main(int argc, char** argv) {
             return fail(package_id + " legacy package state is enabled");
         }
         for (const auto& [feature_id, feature] : selection.features) {
-            if (feature.enabled) {
+            const bool seamless =
+                package_id == "mmx6.enhancement.seamless-loading" &&
+                feature_id == "seamless-loading";
+            if (feature.enabled != seamless) {
                 return fail(package_id + "/" + feature_id +
-                            " resolved enabled in the default state");
+                            (seamless ? " resolved disabled in the default state"
+                                      : " resolved enabled in the default state"));
             }
         }
+    }
+
+    if (!PSXRecompV4::mod_register_activation_plugin("mmx6.seamless", no_op_plugin)) {
+        return fail("could not register test plugin mmx6.seamless");
     }
 
     const PSXRecompV4::ModResolution plan =
@@ -198,8 +212,20 @@ int main(int argc, char** argv) {
         return fail("default catalog resolution failed: " + detail);
     }
     if (!plan.writes.empty() || !plan.overlays.empty() ||
-        !plan.derived_discs.empty()) {
-        return fail("default-disabled catalog produced runtime operations");
+        !plan.derived_discs.empty() || plan.plugins.size() != 1 ||
+        plan.plugins.front().id != "mmx6.seamless") {
+        return fail("default catalog must activate only Seamless Loading");
+    }
+    if (!manager.set_feature_enabled("mmx6.enhancement.seamless-loading",
+                                     "seamless-loading", false, &error)) {
+        return fail(error);
+    }
+    const PSXRecompV4::ModResolution retail_plan =
+        manager.resolve(kGameId, "", kStockDiscSha256);
+    if (!retail_plan.ok || !retail_plan.writes.empty() ||
+        !retail_plan.overlays.empty() || !retail_plan.derived_discs.empty() ||
+        !retail_plan.plugins.empty()) {
+        return fail("original-loading opt-out must produce no runtime operations");
     }
 
     PSXRecompV4::mod_clear_plugins_for_tests();
@@ -246,6 +272,6 @@ int main(int argc, char** argv) {
 
     std::cout << "preloaded mods: " << manager.packages().size()
               << " packages, " << feature_count
-              << " default-disabled features\n";
+              << " features, Seamless Loading default-on with original-loading opt-out\n";
     return 0;
 }

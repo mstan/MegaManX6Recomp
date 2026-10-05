@@ -16,7 +16,10 @@ out_dir = "generated"
 strict = true
 # Widescreen hooks: BG layer bounds, screen-space dialogue classification, and
 # paired actor draw/lifetime extents. Inactive with the enhancement off.
-mod_function_entry_funcs = ["0x800270D0", "0x80026ECC", "0x800232D4", "0x800239CC", "0x80023ED8", "0x800241D4", "0x80022E44", "0x8002CBFC", "0x8002CCB0", "0x8002CAB4", "0x80029D18", "0x80029E7C", "0x8002CB50", "0x8002CD6C", "0x800F9334", "0x80025FB0", "0x80060964"]
+# Seamless Loading hooks: whole-file and packed CD read starts, plus CdReady
+# and CdGetSector, which serve resident sectors only while a verified load is
+# being driven through the original loader callbacks.
+mod_function_entry_funcs = ["0x800270D0", "0x80026ECC", "0x800232D4", "0x800239CC", "0x80023ED8", "0x800241D4", "0x80022E44", "0x8002CBFC", "0x8002CCB0", "0x8002CAB4", "0x80029D18", "0x80029E7C", "0x8002CB50", "0x8002CD6C", "0x800F9334", "0x80025FB0", "0x80060964", "0x80014E60", "0x80015230", "0x80064894", "0x80064CB4"]
 mod_instruction_sites = ["0x80026DA4", "0x80025FD0"]
 
 [runtime]
@@ -44,10 +47,12 @@ memcard_dir = "saves"
 # Result: real load time shrinks with zero timing breakage.
 #
 # That mechanism is now reached ONLY through the Mods catalog — "Fast Loading
-# (host pacing)" / "CD Speed", both default-off. The old `turbo_loads = true`
-# key here is deprecated and ignored by the framework; do not reinstate it. It
-# had no launcher control, so players could not turn it off, and it fast-
-# forwarded the WARNING screen and other timed scenes (issue #14).
+# (host pacing)" / "CD Speed". This title's catalog now excludes both (CMake
+# builtin allowlist): Seamless Loading, default-on in Mods, serves verified
+# resident disc resources through the original loader callbacks with normal
+# guest/audio pacing. The old `turbo_loads = true` key is deprecated and
+# ignored by the framework; do not reinstate it. It forced fast-forward
+# through the WARNING screen and other timed scenes (issue #14).
 disc_speed   = "1x"     # authentic guest CD timing (never breaks game timing)
 # Overlay acceleration: compile the dirty-RAM overlay (ROCK_X6.DAT) to native
 # instead of interpreting it. backend=auto => gcc (full-C overlay DLLs, the

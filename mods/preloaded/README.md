@@ -1,7 +1,10 @@
 # Preloaded Mega Man X6 mods
 
-This directory contains the built-in, default-disabled Mega Man X6 mod catalog.
-CMake and the release packager copy it to `mods/packages` beside the runtime.
+This directory contains the built-in Mega Man X6 mod catalog. Every feature is
+disabled by default except `mmx6.enhancement.seamless-loading`, the standard
+loader (see `docs/SEAMLESS_LOADING.md`); disabling it restores original loading.
+This catalog does not include the framework's generic CD Speed or host-paced
+Fast Loading mods. CMake and the release packager copy it beside the runtime.
 
 Two enhancement packages own features that used to live in the launcher's generic
 Settings pages:

@@ -112,12 +112,13 @@ These are the framework features that are already working in this build:
   GPU-authoritative OpenGL backend, both selectable in the launcher. Software is
   the default here because OpenGL shows intermittent flicker in this build (see
   ISSUES.md #7); OpenGL also serves as the automatic fallback path.
-- **Fast loading (turbo loads).** While a load is in progress the whole machine
-  fast-forwards at your PC's full speed, then drops back to normal the instant
-  it finishes — so disc loads complete far faster while all of the game's
-  internal timing (and audio) stays correct. Authentic 1× disc timing is kept;
-  the speed comes from the load fast-forward, not from speeding up the emulated
-  CD (which would break timing). On by default; toggleable in the launcher.
+- **Seamless Loading.** On first launch the game's stage and menu resources are
+  prepared once from your disc into a verified local cache. Loads the game
+  would show "Now Loading" for are then served from memory through the game's
+  own loader, so stage entry skips the loading screen. Gameplay, audio, CD and
+  WARNING/cutscene timing stay normal; nothing is fast-forwarded. On by default;
+  disable it under **Mods** to restore original loading. See
+  [docs/SEAMLESS_LOADING.md](docs/SEAMLESS_LOADING.md).
 - **Opt-in FMV skips.** The Capcom logo and opening movie play by default.
   Separate skip features are available under **Mods**; the deprecated generic
   Settings toggle is disabled.
