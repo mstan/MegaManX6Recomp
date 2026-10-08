@@ -1,3 +1,54 @@
+# v1.3.0-alpha
+
+This Windows x64 prerelease introduces experimental simultaneous X + Zero
+co-op, locally or through delay-based netplay. The bundled co-op mod remains
+Experimental 0.0.1 and is disabled by default for local play.
+
+## Playing together
+
+- For local play, enable **X + Zero Co-op** in Mods and assign P1 and P2 in the
+  launcher. P1 controls X; P2 controls Zero. Release builds require distinct
+  physical controllers; controller plus keyboard is supported.
+- For netplay, use identical builds, the supported USA v1.1 disc, and OpenGL.
+  Select your local input on the P1/Netplay controller card, then host or join
+  through Netplay. Co-op is enabled automatically for both peers.
+- Netplay offers fixed 4:3, 16:9, and 21:9 views. The wide views use the enhanced
+  renderer, including extended scenery/enemy visibility and both native HUDs.
+  The host chooses the view before the session; adaptive resizing is excluded.
+- Players have separate health, weapons, and native character progression,
+  with one shared life pool. A surviving player continues after their partner
+  dies. P2 can hold Select for 1.5 seconds to leave and tap Select to return
+  with retained health; death prevents rejoining until a stage/team respawn.
+- Native door/dialogue handling, pause/Sub Tank ownership, collectible ownership,
+  Reploid rescue, Zero arrival animations, and independent pit deaths are included.
+  Zero is reserved for P2 and omitted from P1's unit-selection menu.
+
+OpenBIOS is bundled and selected by default. Netplay skips the BIOS shell
+animation. Standard memory-card saves remain supported; co-op uses isolated
+save storage. This package contains no game disc, retail BIOS, or player saves.
+
+## Validation and limitations
+
+Local co-op has owner playtest coverage. Two private peers on one Windows PC
+passed transported P1/P2 movement, P2 leave/rejoin health retention, enhanced
+16:9 scenery/enemy visibility, and both native HUDs. All 373 shared checksum
+checkpoints matched in the refreshed development build. This does not establish
+Internet, separate-machine, rematch, or full-campaign reliability.
+
+- Co-op requires OpenGL, a fresh boot, and rewind disabled. Co-op save states,
+  rewind, and rollback are not supported; netplay uses delay synchronization.
+- Campaign-specific transitions, progression/report behavior, mod combinations,
+  Internet latency/loss, and longer sessions still need testing.
+- Zero's HUD badge currently uses the resident blue palette.
+- Existing widescreen limitations include authored gaps in Amazon Forest and
+  incomplete coverage of the combined rain/darkness mask.
+
+The source is pinned to the co-op framework and launcher branches. The package
+includes source provenance, license notices, an audited native overlay cache,
+and the fallback overlay toolchain. v1.2.0 remains the stable release.
+
+---
+
 # v1.2.0
 
 Game-code sprite and scrolling-background interpolation above 60 Hz, with stable HUD and current animation cells. Includes the current audited adaptive-widescreen renderer and object activation/retention bounds so visible scenery loads before entering the view. Keeps encounter and script-controller activation guards.

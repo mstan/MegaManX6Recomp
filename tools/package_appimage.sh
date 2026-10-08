@@ -325,7 +325,7 @@ python3 "$fw/tools/aot_overlay_pipeline.py" release \
     --runtime-config "$player_toml" --runtime-build-dir "$build_dir" \
     --runtime-target psx-runtime --recompiler "$recompiler_bin" \
     --work-dir "$root/build-aot-linux" --stage "$payload" \
-    --gcc "${AOT_GCC:-gcc}" --workers "${AOT_WORKERS:-$jobs}"
+    --gcc "${AOT_GCC:-gcc}" --workers "${AOT_WORKERS:-$jobs}" --cps
 psx_add_overlay_toolchain --stage "$payload" \
                           --recomp-dir "$(dirname -- "$recompiler_bin")" \
                           --recomp-tools "$fw/tools" \

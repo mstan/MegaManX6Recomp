@@ -279,7 +279,7 @@ Invoke-Native {
         --game-toml (Join-Path $Root 'game.toml') --runtime-config $StagedGameToml `
         --runtime-build-dir $BuildPath --runtime-target psx-runtime `
         --recompiler $RecompBin --work-dir (Join-Path $Root 'build-aot') `
-        --stage $Stage --gcc (Join-Path $MingwBin 'gcc.exe') --workers $Jobs
+        --stage $Stage --gcc (Join-Path $MingwBin 'gcc.exe') --workers $Jobs --cps
 } 'original-disc AOT extraction, compilation and audit'
 Add-OverlayToolchain -Stage $Stage -RecompDir $RecompDir -RecompTools $RecompTools `
                      -RecompInc $RecompInc -MingwBin $MingwBin `
@@ -362,6 +362,17 @@ executable. Clear the BIOS row to return to OpenBIOS.
 Turbo loads, FMV skip, and disc speed can be changed in launcher Settings or in
 game.toml. Widescreen, frame interpolation, and Mega Man X6 Tweaks options live
 in the launcher's Mods view.
+
+Experimental X + Zero co-op:
+- Local: enable X + Zero Co-op in Mods, then assign P1 and P2 controllers.
+  A controller plus keyboard is supported; release builds require separate
+  physical gamepads when both players use gamepads.
+- Netplay: select local input on the P1/Netplay card, then host or join.
+  Both peers must use this same build. Co-op activates automatically.
+- Use OpenGL and disable rewind. Co-op save states and rollback are unsupported.
+  P2 holds Select for 1.5 seconds to leave and taps it to return while alive.
+- This alpha has local two-peer netplay validation; Internet sessions and the
+  full campaign are not certified. See RELEASE_NOTES.md for current limitations.
 
 The package includes native shards extracted from all 56 identified code
 images in the original disc archive. Interpreter and runtime compilation
