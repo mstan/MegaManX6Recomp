@@ -14,6 +14,11 @@
 #include <string>
 #include <vector>
 
+extern "C" {
+uint64_t s_frame_count;
+uint64_t psx_get_cycle_count(void) { return 0; }
+}
+
 namespace {
 struct GuardRange { uint32_t lo, hi; };
 struct ArchiveFile { const char *path; unsigned lba, size, count; const char *hash; };
