@@ -9,7 +9,7 @@ static unsigned entries,instructions,ticks,activations,env_calls,draw_calls,wait
 static bool fail_span;
 extern "C" {
 int g_psx_render_pass_active=0;
-int psx_mod_register_activation_plugin(const char* id,PSXModActivationCallback){assert(!std::strcmp(id,"mmx6.frame-interpolation") || !std::strncmp(id,"mmx6.framerate.",14));++activations;return 1;}
+int psx_mod_register_activation_plugin(const char* id,PSXModActivationCallback){assert(!std::strcmp(id,"mmx6.frame-interpolation"));++activations;return 1;}
 int psx_mod_register_vblank_plugin(const char*,PSXModVBlankCallback){++ticks;return 1;}
 int psx_mod_register_function_entry_plugin(const char*,uint32_t,PSXModFunctionEntryCallback){++entries;return 1;}
 int psx_mod_register_instruction_plugin(const char*,uint32_t,uint32_t,PSXModFunctionEntryCallback){++instructions;return 1;}
@@ -63,7 +63,7 @@ static void capture(CPUState& cpu,int x,int y,int cam){
     cpu.gpr[4]=HUD;actor(&cpu,Actor);end(&cpu,End);
 }
 int main(){
-    assert(activations==6 && entries==18 && instructions==12 && ticks==6);activate();
+    assert(activations==1 && entries==3 && instructions==2 && ticks==1);activate();
     CPUState cpu{};cpu.gpr[29]=0x801FF000;
     psx_mod_write_word(0x8009B7A0,Base);
     psx_mod_write_word(0x800CF908,0x010C4578);

@@ -1,7 +1,10 @@
 # Preloaded Mega Man X6 mods
 
-This directory contains the built-in, default-disabled Mega Man X6 mod catalog.
-CMake and the release packager copy it to `mods/packages` beside the runtime.
+This directory contains the built-in Mega Man X6 mod catalog. Every feature is
+disabled by default except `mmx6.enhancement.seamless-loading`, the standard
+loader (see `docs/SEAMLESS_LOADING.md`); disabling it restores original loading.
+This catalog does not include the framework's generic CD Speed or host-paced
+Fast Loading mods. CMake and the release packager copy it beside the runtime.
 
 `mmx6.local-coop` provides **X + Zero Co-op**, version **0.0.1**, with the
 launcher's standard **Experimental** badge. Enable it for local co-op; Netplay

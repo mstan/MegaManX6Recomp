@@ -200,9 +200,8 @@ void activate() {
 }
 }
 PSX_MOD_CONSTRUCTOR(mmx6_register_frame_interpolation_plugin) {
-    const char* ids[]={"mmx6.frame-interpolation","mmx6.framerate.60","mmx6.framerate.120",
-        "mmx6.framerate.144","mmx6.framerate.165","mmx6.framerate.uncapped"};
-    for(const char* id:ids) {
+    // The rate is the feature's "rate" option; one plugin id serves every rate.
+    const char* id="mmx6.frame-interpolation";
     psx_mod_register_activation_plugin(id,activate);
     psx_mod_register_vblank_plugin(id,tick);
     psx_mod_register_function_entry_plugin(id,Draw,begin);
@@ -210,5 +209,4 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_frame_interpolation_plugin) {
     psx_mod_register_function_entry_plugin(id,VSync,finish);
     psx_mod_register_instruction_plugin(id,Camera,0x0C009CF9,cameras);
     psx_mod_register_instruction_plugin(id,End,0x03E00008,end);
-    }
 }

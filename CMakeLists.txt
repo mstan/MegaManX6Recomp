@@ -45,8 +45,10 @@ file(GLOB MMX6_MOD_PLUGIN_SOURCES CONFIGURE_DEPENDS
 # domains can be developed and reviewed without editing one central registry.
 file(GLOB GAME_MOD_RESOLVER_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/*.cpp")
-# Runtime draw hooks are separate from declarative catalog resolvers.
+# Runtime draw hooks and the Seamless Loading resident store are separate from
+# declarative catalog resolvers.
 list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_frame_interpolation_plugin[.]cpp$")
+list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_seamless_store[.]cpp$")
 
 # The game-owned mod catalog (the two presentation enhancements plus the
 # acediez Tweaks set). Every feature stays disabled until selected on the
@@ -65,6 +67,14 @@ list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_frame_interpolation_pl
 # Bead beads-eio.3.101.
 set(MMX6_PRELOADED_MODS "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded")
 
+# Seamless Loading replaces the generic CD-speed and host-turbo builtins:
+# neither may change guest CD or audio pacing in this catalog. Restore the
+# caller's selection afterward for any other target.
+set(_mmx6_previous_builtin_allowlist "${PSX_BUILTIN_MOD_ALLOWLIST}")
+set(PSX_BUILTIN_MOD_ALLOWLIST
+    psx.enhancement.8mb-ram
+    psx.enhancement.pgxp
+    psx.presentation.bezel)
 psxrecomp_v4_add_runtime_target(psx-runtime
     GAME_GENERATED_FULL_C "${GAME_GENERATED_FULL}"
     GAME_GENERATED_DISPATCH_C "${GAME_GENERATED_DISPATCH}"
@@ -78,8 +88,11 @@ psxrecomp_v4_add_runtime_target(psx-runtime
         ${GAME_GENERATED_EXTRAS}
         ${MMX6_MOD_PLUGIN_SOURCES}
         "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/mmx6_frame_interpolation_plugin.cpp"
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/mmx6_seamless_store.cpp"
         ${GAME_MOD_RESOLVER_SOURCES}
 )
+set(PSX_BUILTIN_MOD_ALLOWLIST "${_mmx6_previous_builtin_allowlist}")
+unset(_mmx6_previous_builtin_allowlist)
 
 # First-divergence co-sim oracle build (COSIM_ORACLE.md): clean, deterministic,
 # PSX_NO_DEBUG_TOOLS + PSX_COSIM. Two of these (one normal, one PSX_FORCE_INTERP=1)
@@ -98,7 +111,7 @@ if(PSX_BUILD_COSIM)
 endif()
 
 # Per-game launcher art override. The framework copies its shared launcher assets
-# (img/disc.png etc. — the default is Tomba's disc) next to the exe; this copies
+# (img/disc.png etc. â€” the default is Tomba's disc) next to the exe; this copies
 # this repo's launcher_art/ on top AFTERWARD so the launcher shows MMX6's disc.
 # POST_BUILD commands run in add order, and the framework's copy is added inside
 # psxrecomp_v4_add_runtime_target above, so this override wins. Drop official art
@@ -131,6 +144,23 @@ if(BUILD_TESTING)
         "${PSXRECOMP_V4_ROOT}/runtime/include")
     add_test(NAME mmx6_frame_interpolation_test
         COMMAND "$<TARGET_FILE:mmx6_frame_interpolation_test>")
+
+    # Seamless Loading preparation against an owner-supplied disc image:
+    # -DMMX6_TEST_DISC=<path to "Mega Man X6 (USA) (v1.1).bin">.
+    add_executable(mmx6_seamless_store_test
+        tests/test_seamless_store.cpp
+        src/mods/mmx6_seamless_store.cpp
+        "${PSXRECOMP_V4_ROOT}/runtime/src/mod_resident.cpp"
+        "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c")
+    target_include_directories(mmx6_seamless_store_test PRIVATE
+        src/mods
+        "${PSXRECOMP_V4_ROOT}/runtime/include")
+    set(MMX6_TEST_DISC "" CACHE FILEPATH "Original SLUS-01395 v1.1 .bin for disc tests")
+    if(MMX6_TEST_DISC)
+        add_test(NAME mmx6_seamless_store_test
+            COMMAND "$<TARGET_FILE:mmx6_seamless_store_test>" "${MMX6_TEST_DISC}"
+                    "${CMAKE_CURRENT_BINARY_DIR}/seamless-test-cache")
+    endif()
 
     add_executable(mmx6_adaptive_background_test tests/test_adaptive_background.c)
     target_include_directories(mmx6_adaptive_background_test PRIVATE "${PSXRECOMP_V4_ROOT}/runtime/include")
@@ -188,6 +218,25 @@ if(BUILD_TESTING)
                 "${MMX6_PRELOADED_MODS}"
     )
 
+    # Seamless Loading compatibility matrix over every bundled mod feature.
+    add_executable(mmx6_seamless_mod_matrix_test
+        tests/test_seamless_mod_matrix.cpp
+        ${GAME_MOD_RESOLVER_SOURCES}
+        "${PSXRECOMP_V4_ROOT}/runtime/src/mod_packages.cpp"
+        "${PSXRECOMP_V4_ROOT}/runtime/src/crc32.c"
+        "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c"
+    )
+    target_include_directories(mmx6_seamless_mod_matrix_test PRIVATE
+        src/mods
+        "${PSXRECOMP_V4_ROOT}/runtime/include"
+        "${PSXRECOMP_V4_ROOT}/recompiler/lib/toml11"
+    )
+    add_test(
+        NAME mmx6_seamless_mod_matrix_test
+        COMMAND "$<TARGET_FILE:mmx6_seamless_mod_matrix_test>"
+                "${MMX6_PRELOADED_MODS}"
+    )
+
     find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
     add_test(
@@ -196,7 +245,7 @@ if(BUILD_TESTING)
                 "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_release_config.py"
     )
 
-    # Clean-room CD-ROM EDC/ECC recompute (tools/edc_ecc.py) — the Tweaks apply
+    # Clean-room CD-ROM EDC/ECC recompute (tools/edc_ecc.py) â€” the Tweaks apply
     # path's replacement for the former GPLv3 error_recalc.exe. Pure Python, no
     # disc image needed: the suite checks the Reed-Solomon syndromes directly.
     add_test(

@@ -226,9 +226,10 @@ Copy-Item (Join-Path $Root "docs/AOT_OVERLAYS.md") (Join-Path $Stage "docs")
 # the two things under mods/ that belong to this machine (installed/ and
 # state.toml) rather than leaving them to be noticed later.
 . (Join-Path $FrameworkRoot "tools\release_overlay_stage.ps1")
-Add-ModCatalog -BuildPath $BuildPath -Stage $Stage `
-               -GameModSource (Join-Path $Root "mods\preloaded") `
-               -FrameworkModSource (Join-Path $FrameworkRoot "mods\builtin") | Out-Null
+# The build publishes the target's catalog manifest, including its builtin
+# allowlist: Seamless Loading replaces generic CD Speed and host-paced Fast
+# Loading. Verify the staged catalog against that manifest.
+Add-ModCatalog -BuildPath $BuildPath -Stage $Stage -RuntimeTarget psx-runtime | Out-Null
 $BundledBiosSrc = Join-Path $BuildPath "bios"
 if (!(Test-Path (Join-Path $BundledBiosSrc "openbios.bin")) -or
     (Get-Item (Join-Path $BundledBiosSrc "openbios.bin")).Length -ne 524288 -or

@@ -1,0 +1,23 @@
+format_version = 5
+id = "mmx6.enhancement.seamless-loading"
+version = "0.1.0"
+name = "Mega Man X6 Seamless Loading"
+author = "mstan"
+description = "Remove loading screens with prepared disc resources at normal gameplay and audio speed."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+[[feature]]
+id = "seamless-loading"
+name = "Seamless Loading"
+description = "Prepare resources from your disc once for near-instant stage and area loading. Disable to restore original loading."
+group = "Gameplay"
+default_enabled = true
+
+[[plugin]]
+feature = "seamless-loading"
+id = "mmx6.seamless"
