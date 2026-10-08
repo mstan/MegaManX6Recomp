@@ -131,6 +131,11 @@ allow_hybrid   = false
 multitap_analog = false
 # Custom Renderer is enabled through Mods. Fit follows the live drawable;
 # fixed 16:9, 21:9 and 32:9 choices remain available. Disabled stays stock 4:3.
+[netplay]
+# The host's optional Seamless Loading feature uses the shared lobby mod plan.
+# The co-op profile still owns the simulation and fixed 4:3/16:9/21:9 views.
+content_negotiation = true
+
 [widescreen]
 full_2d = true
 # Retail main state 0A owns the stage loop. Menus, including the 512px

@@ -1,5 +1,11 @@
 # MegaManX6Recomp
 
+> **ALPHA: experimental X + Zero two-player co-op.**
+> [Latest published alpha: v1.3.1-alpha](https://github.com/mstan/MegaManX6Recomp/releases/tag/v1.3.1-alpha).
+> Local co-op and basic netplay are playable. Full-campaign play, Internet
+> conditions, and longer sessions still need coverage. [v1.2.0](https://github.com/mstan/MegaManX6Recomp/releases/tag/v1.2.0)
+> remains the stable release.
+
 > _This recompilation is a **byproduct of developing
 > [psxrecomp](https://github.com/mstan/psxrecomp)** — the games are the proving ground, the framework is the goal.
 > **These are in-development previews, not finished ports — expect rough
@@ -20,7 +26,8 @@ build glue for running Mega Man X6 on the PSXRecomp framework. The game's MIPS
 code is machine-translated ("recompiled") ahead of time into native C, then
 compiled into a real Windows program that runs the game's own logic on a
 faithful simulation of the PS1 hardware (GPU, SPU, GTE, memory cards) plus the
-real, recompiled PS1 BIOS — no high-level emulation shims.
+recompiled PS1 BIOS. Netplay skips the BIOS shell animation while preserving
+kernel initialization and disc boot.
 
 It does **not** contain the Mega Man X6 disc image, a retail PS1 BIOS, generated
 game code, or any decompiled game C. Release builds include the MIT-licensed
@@ -54,22 +61,23 @@ Important files:
 
 ## Status
 
-**Playable preview — `v0.0.1-alpha`.** This is the *first* public cut. Mega Man
-X6 **boots from the PS1 BIOS and plays** — through the opening, into stages, with
-working controller input and memory-card **save/load**, and **no known crashes**.
-It has not yet been verified all the way to the end, so treat it as a very
-playable preview rather than a certified full playthrough.
+**ALPHA — `v1.3.1-alpha` is the current published co-op prerelease.** X and Zero
+can play together locally or through delay-sync netplay. The co-op mod remains
+**Experimental 0.0.1**. Basic netplay has owner playtest coverage; the campaign
+has not been verified from start to finish.
 
 | Area | State |
 |---|---|
 | PS1 BIOS boot | Works (real recompiled BIOS) |
 | Disc-detect / boot | Works (loads `ROCK_X6.DAT`, reaches the engine) |
 | X-vs-Zero / Space Colony intro FMV | Plays; opt-in skip features available under Mods |
-| Controller | Works; DualShock/analog and rumble supported |
+| Controller | Two local input slots; DualShock/analog and rumble supported |
+| X + Zero co-op | Experimental 0.0.1; local and delay-sync netplay |
 | Stage gameplay | Works (not yet verified all the way to the end) |
 | Memory-card save / load | Works (standard PS1 `.mcd`, emulator-compatible) |
-| Renderers | Software **and** OpenGL (GPU); Software is the default this release (see ISSUES.md #7), OpenGL selectable |
+| Renderers | OpenGL is the default and required for co-op; Software remains selectable |
 | Custom Renderer | Experimental, opt-in; Adaptive or fixed 16:9 / 21:9 / 32:9 |
+| Co-op netplay view | Fixed 4:3 / 16:9 / 21:9, chosen by the host; both native HUDs anchored |
 
 Known issues: see [`ISSUES.md`](ISSUES.md) for the current issue log (including
 renderer notes) and the remaining enhancement follow-ups.
@@ -77,6 +85,22 @@ renderer notes) and the remaining enhancement follow-ups.
 ## Enhancements
 
 ### X + Zero co-op (experimental 0.0.1)
+
+<table>
+  <tr>
+    <td width="50%"><img src=".github/screenshots/mmx6-coop-intro.png" alt="Player one X and player two Zero together in the opening stage, with separate native health bars"></td>
+    <td width="50%"><img src=".github/screenshots/mmx6-coop-recycle-lab.png" alt="X riding Ride Armor alongside player two Zero in Recycle Lab"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>X and Zero share the opening stage, with independent health.</sub></td>
+    <td align="center"><sub>Two-player Recycle Lab gameplay, including X's Ride Armor.</sub></td>
+  </tr>
+</table>
+
+<p align="center">
+  <img src=".github/screenshots/mmx6-coop-ultrawide.png" alt="Experimental fixed 21:9 co-op view with expanded scenery and both native health bars">
+  <br><sub>Fixed 21:9 co-op rendering with both native HUDs anchored to the left.</sub>
+</p>
 
 Enable **X + Zero Co-op** on the launcher's Mods page for local play. The bundled
 mod is marked **Experimental**, version **0.0.1**, and disabled by default.
@@ -86,6 +110,11 @@ ordinary offline mod selections remain separate. Use identical builds and the
 supported v1.1 disc and OpenGL renderer. Select your local controller on the launcher's P1/Netplay
 card, then host or join through **Netplay**.
 
+Players share a life pool and keep separate health, weapons, and native
+character progression. The surviving player continues when their partner dies.
+P2 can hold Select for 1.5 seconds to leave, then tap Select to return with
+retained health. A dead P2 returns after a new stage or team respawn.
+
 **Settings → Display → Netplay aspect** offers fixed 4:3, 16:9, and 21:9.
 Choose it before hosting; the host's choice applies to both peers. Adaptive is
 excluded. The wide choices use the full enhanced renderer: host background
@@ -93,6 +122,17 @@ packets, room-edge framing, guarded enemy activation, and native dialogue/effect
 handling. Window resizing cannot change the match's view or activation bounds.
 Both native HUDs anchor to the left edge with their normal spacing. Offline
 widescreen continues to use its Mods selection, including adaptive Fit.
+
+**Current source: Lobby → Mods → Seamless Loading** lets the host choose the
+resident asset loader for both peers. It prepares the original disc resources
+in host memory and serves blocking loads through native installation callbacks;
+gameplay and audio retain normal pacing. Guests follow the host's setting and
+keep their own offline mod selections. The deprecated host-pacing Fast Loading
+and CD Speed options are absent from this game's catalog.
+
+The netplay loading option requires a build from current source; the published
+`v1.3.1-alpha` package includes Seamless Loading for local play. Both peers must
+use the same updated build.
 
 Bundled OpenBIOS is the default. Co-op netplay skips the BIOS shell animation
 while running kernel initialization and disc loading normally. A selected retail
@@ -141,10 +181,8 @@ These are the framework features that are already working in this build:
   90/120/144/165/240 FPS. Gameplay, audio and animation timing stay unchanged;
   HUD elements retain their screen positions. Uses OpenGL and defaults off.
 
-- **Two renderers.** A CPU software rasterizer (this release's default) and a
-  GPU-authoritative OpenGL backend, both selectable in the launcher. Software is
-  the default here because OpenGL shows intermittent flicker in this build (see
-  ISSUES.md #7); OpenGL also serves as the automatic fallback path.
+- **Two renderers.** A GPU OpenGL backend (the default) and a CPU software
+  rasterizer, both selectable in the launcher. Co-op requires OpenGL.
 - **Seamless Loading.** On first launch the game's stage and menu resources are
   prepared once from your disc into a verified local cache. Loads the game
   would show "Now Loading" for are then served from memory through the game's

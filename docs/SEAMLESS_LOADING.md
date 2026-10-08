@@ -28,6 +28,23 @@ must not be distributed.
 
 Music, voices and movies (`XA/*.XA`, `STR/*.STR`) stay on their streaming paths.
 
+### Co-op netplay (current source)
+
+The host can select **Lobby → Mods → Seamless Loading** for both peers. It is
+enabled by default on a fresh install. The trusted co-op profile negotiates
+this native loading feature through the shared lobby mod plan; guests apply
+the host's choice without saving it over their offline preferences. Both
+clients must use the same updated build. A different feature fingerprint or
+loading choice cannot silently start an incompatible session.
+
+Fixed **4:3 / 16:9 / 21:9** remain in **Settings → Display → Netplay aspect**.
+The host's aspect applies to both players, including X and Zero's HUD anchors.
+The catalog excludes the deprecated host-pacing and CD Speed loaders.
+
+This support is newer than the published `v1.3.1-alpha` package, which enables
+Seamless Loading for local play. The negotiated selection has focused runtime
+test coverage; accelerated netplay loads still need gameplay coverage.
+
 Developer-only environment variables: `PSX_RESIDENT_CACHE` (cache root),
 `MMX6_SEAMLESS_TRACE=1` (per-load diagnostics with guest-cycle cost),
 `MMX6_SEAMLESS_RETAIL=1` (prepare, then bypass, for A/B). Always-on: TCP
