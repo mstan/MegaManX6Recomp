@@ -1,3 +1,19 @@
+# v1.3.1-alpha
+
+Fixes repeated ?Player has joined? notices in LAN/Direct IP lobby chat. Periodic
+JOIN refresh packets still update the guest's seat, BIOS, memory-card offer,
+and endpoint; chat announces a new arrival once and allows a new notice after
+leaving and rejoining. Both modern and legacy LAN clients are covered.
+
+Includes all v1.3.0-alpha features and the current master baseline with
+Seamless Loading. The X + Zero co-op mod remains Experimental 0.0.1.
+
+The owner confirmed basic two-player netplay gameplay in v1.3.0-alpha.
+Separate-machine Internet, rematch, and full-campaign reliability remain
+outside the completed automated checks. v1.2.0 remains the stable release.
+
+---
+
 # v1.3.0-alpha
 
 This Windows x64 prerelease introduces experimental simultaneous X + Zero
