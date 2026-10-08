@@ -30,8 +30,8 @@ memcard_dir = "saves"
 # Disc read speed. "1x" is authentic PlayStation timing and is the safe default:
 # speeding up the emulated CD device changes how many frames pass between the
 # game's internal steps, which desyncs streamed audio and (for MMX6) wedges the
-# boot. Fast loads instead come from turbo_loads below (which fast-forwards the
-# whole machine during a load, preserving timing).
+# boot. Seamless Loading instead serves prepared resources through the native
+# loader while preserving gameplay and audio pacing.
 disc_speed = "1x"
 
 # BIOS backend. true skips the PlayStation boot animation with the HLE path.
@@ -102,6 +102,10 @@ multitap_analog = false
 # hooks widen the per-layer 2D background renderer for a true wider field of view.
 # All inert at 4:3. Addresses are specific to MMX6 (USA, v1.1, SLUS-01395) and
 # must match the build the cache was made for.
+[netplay]
+# Negotiate the host's optional Seamless Loading selection for both peers.
+content_negotiation = true
+
 [widescreen]
 full_2d = true
 gameplay_state_addr = "0x800CCED0"

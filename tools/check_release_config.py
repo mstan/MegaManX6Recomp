@@ -12,7 +12,7 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 DEV_CONFIG = ROOT / "game.toml"
 RELEASE_CONFIG = ROOT / "packaging" / "release" / "game.toml"
-PARITY_SECTIONS = ("widescreen",)
+PARITY_SECTIONS = ("widescreen", "netplay")
 PARITY_RECOMPILER_KEYS = ("mod_function_entry_funcs", "mod_instruction_sites")
 MOD_OWNED_VIDEO_KEYS = {
     "auto_skip_fmv": False,

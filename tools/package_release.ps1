@@ -360,9 +360,9 @@ streams its FMV/audio from.
 An optional retail BIOS choice and the selected disc path are saved next to the
 executable. Clear the BIOS row to return to OpenBIOS.
 
-Turbo loads, FMV skip, and disc speed can be changed in launcher Settings or in
-game.toml. Widescreen, frame interpolation, and Mega Man X6 Tweaks options live
-in the launcher's Mods view.
+Seamless Loading, FMV skip, widescreen, frame interpolation, and Mega Man X6
+Tweaks options live in the launcher's Mods view. The deprecated host-pacing
+Fast Loading and CD Speed mods are not offered.
 
 Experimental X + Zero co-op:
 - Local: enable X + Zero Co-op in Mods, then assign P1 and P2 controllers.
@@ -370,6 +370,8 @@ Experimental X + Zero co-op:
   physical gamepads when both players use gamepads.
 - Netplay: select local input on the P1/Netplay card, then host or join.
   Both peers must use this same build. Co-op activates automatically.
+  The host can enable Seamless Loading for both peers in Lobby > Mods.
+  Settings > Display > Netplay aspect offers fixed 4:3, 16:9, and 21:9.
 - Use OpenGL and disable rewind. Co-op save states and rollback are unsupported.
   P2 holds Select for 1.5 seconds to leave and taps it to return while alive.
 - This alpha has local two-peer netplay validation; Internet sessions and the

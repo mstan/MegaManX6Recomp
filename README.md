@@ -1,7 +1,7 @@
 # MegaManX6Recomp
 
 > **ALPHA: experimental X + Zero two-player co-op.**
-> [Latest published alpha: v1.3.1-alpha](https://github.com/mstan/MegaManX6Recomp/releases/tag/v1.3.1-alpha).
+> [Latest published alpha: v1.3.2-alpha](https://github.com/mstan/MegaManX6Recomp/releases/tag/v1.3.2-alpha).
 > Local co-op and basic netplay are playable. Full-campaign play, Internet
 > conditions, and longer sessions still need coverage. [v1.2.0](https://github.com/mstan/MegaManX6Recomp/releases/tag/v1.2.0)
 > remains the stable release.
@@ -61,7 +61,7 @@ Important files:
 
 ## Status
 
-**ALPHA — `v1.3.1-alpha` is the current published co-op prerelease.** X and Zero
+**ALPHA — `v1.3.2-alpha` is the current published co-op prerelease.** X and Zero
 can play together locally or through delay-sync netplay. The co-op mod remains
 **Experimental 0.0.1**. Basic netplay has owner playtest coverage; the campaign
 has not been verified from start to finish.
@@ -123,16 +123,15 @@ handling. Window resizing cannot change the match's view or activation bounds.
 Both native HUDs anchor to the left edge with their normal spacing. Offline
 widescreen continues to use its Mods selection, including adaptive Fit.
 
-**Current source: Lobby → Mods → Seamless Loading** lets the host choose the
+**Lobby → Mods → Seamless Loading** lets the host choose the
 resident asset loader for both peers. It prepares the original disc resources
 in host memory and serves blocking loads through native installation callbacks;
 gameplay and audio retain normal pacing. Guests follow the host's setting and
 keep their own offline mod selections. The deprecated host-pacing Fast Loading
 and CD Speed options are absent from this game's catalog.
 
-The netplay loading option requires a build from current source; the published
-`v1.3.1-alpha` package includes Seamless Loading for local play. Both peers must
-use the same updated build.
+Seamless Loading is available for local and netplay sessions in
+`v1.3.2-alpha`. Both peers must use the same build.
 
 Bundled OpenBIOS is the default. Co-op netplay skips the BIOS shell animation
 while running kernel initialization and disc loading normally. A selected retail

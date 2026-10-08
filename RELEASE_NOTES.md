@@ -1,3 +1,29 @@
+# v1.3.2-alpha
+
+The host can now select **Lobby → Mods → Seamless Loading** for both netplay
+peers. Disc resources are prepared in host memory and served through native
+loading callbacks, preserving normal gameplay and audio pacing. Guests follow
+the host's choice without replacing their saved offline mod preferences.
+Both peers must use this build; loading selections and fingerprints are checked
+before starting the session.
+
+- Fixed **4:3 / 16:9 / 21:9** netplay views remain under **Settings → Display →
+  Netplay aspect**. The host chooses the view; wide modes use the enhanced
+  renderer and anchor both native HUDs. Adaptive resizing is excluded.
+- The deprecated host-paced Fast Loading and CD Speed mods remain absent.
+- The README now showcases actual X + Zero co-op screenshots and ALPHA status.
+- Includes current game master and latest framework master, including the
+  audio buffer target correction. The release config enables loading negotiation
+  and the package parity check now guards that setting.
+
+The X + Zero co-op mod remains **Experimental 0.0.1**. Basic netplay has owner
+playtest coverage. The negotiated loading selection has focused runtime checks
+and a production build; accelerated netplay loads have not had an additional
+playtest campaign. Existing campaign/Internet/rematch limitations remain.
+**v1.2.0 remains the stable release.**
+
+---
+
 # v1.3.1-alpha
 
 Fixes repeated ?Player has joined? notices in LAN/Direct IP lobby chat. Periodic
