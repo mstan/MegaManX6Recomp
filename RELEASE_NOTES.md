@@ -4,9 +4,10 @@ This Windows x64 prerelease introduces experimental simultaneous X + Zero
 co-op, locally or through delay-based netplay. The bundled co-op mod remains
 Experimental 0.0.1 and is disabled by default for local play.
 
-The build includes default-on Seamless Loading: original disc archives are
+The build includes default-on Seamless Loading for local play: disc archives are
 prepared in host memory and reused for stage/area loads through the game's
 native installation callbacks, preserving normal gameplay and audio pacing.
+Netplay currently uses the synchronized disc-loading path.
 
 ## Playing together
 
