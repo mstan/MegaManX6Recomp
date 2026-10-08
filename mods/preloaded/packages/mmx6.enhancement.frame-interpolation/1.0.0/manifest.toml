@@ -1,9 +1,9 @@
 format_version = 5
 id = "mmx6.enhancement.frame-interpolation"
 version = "1.0.0"
-name = "Mega Man X6 Frame Rate"
+name = "Mega Man X6 Frame Interpolation"
 author = "mstan"
-description = "Presentation-only temporal frame blending. Game logic, timers, and audio remain at their stock cadence."
+description = "Redraws intermediate sprite and scrolling-background positions above the game's 60Hz output. Guest VBlank, game logic, timers, and audio stay at their stock cadence."
 resolver = "declarative"
 save_compatibility = "shared"
 
@@ -11,25 +11,31 @@ save_compatibility = "shared"
 game_id = "SLUS-01395"
 disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
 
+# Presentation only: this does NOT change machine speed. The distinct
+# native-VBlank-rate mechanism does, and is deliberately not exposed here.
 [[feature]]
 id = "frame-interpolation"
-name = "Temporal Frame Blending"
-description = "Blend completed game frames at the selected presentation rate without accelerating gameplay, timers, or audio. This is not motion-vector frame generation."
-group = "Frame Rate"
+name = "Frame Interpolation"
+description = "Render intermediate world-sprite and scrolling-background positions above 60Hz. Gameplay and animation timing stay at their stock rate; HUD elements remain stable. Requires OpenGL, which it selects, and runs without vsync."
+group = "Display"
 default_enabled = false
 
 [[option]]
 feature = "frame-interpolation"
 id = "rate"
-label = "Presentation rate"
-description = "Follow the display for even cadence, or choose a fixed diagnostic rate. The original game simulation remains untouched. Requires OpenGL."
-group = "Frame Rate"
+label = "Output rate"
+description = "Presentation rate. 'Display refresh' follows the measured monitor refresh; the fixed rates pace presentation at that many frames per second."
+group = "Display"
 type = "choice"
-default = "uncapped"
+default = "display"
 
 [[option.choice]]
-value = "60"
-label = "60 FPS"
+value = "display"
+label = "Display refresh"
+
+[[option.choice]]
+value = "90"
+label = "90 FPS"
 
 [[option.choice]]
 value = "120"
@@ -44,30 +50,17 @@ value = "165"
 label = "165 FPS"
 
 [[option.choice]]
+value = "240"
+label = "240 FPS"
+
+[[option.choice]]
+value = "60"
+label = "60 FPS"
+
+[[option.choice]]
 value = "uncapped"
-label = "Display refresh (Recommended)"
+label = "Display refresh (legacy setting)"
 
 [[plugin]]
 feature = "frame-interpolation"
-id = "mmx6.framerate.60"
-when = { rate = "60" }
-
-[[plugin]]
-feature = "frame-interpolation"
-id = "mmx6.framerate.120"
-when = { rate = "120" }
-
-[[plugin]]
-feature = "frame-interpolation"
-id = "mmx6.framerate.144"
-when = { rate = "144" }
-
-[[plugin]]
-feature = "frame-interpolation"
-id = "mmx6.framerate.165"
-when = { rate = "165" }
-
-[[plugin]]
-feature = "frame-interpolation"
-id = "mmx6.framerate.uncapped"
-when = { rate = "uncapped" }
+id = "mmx6.frame-interpolation"

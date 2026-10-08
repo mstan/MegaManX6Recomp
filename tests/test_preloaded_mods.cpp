@@ -211,6 +211,7 @@ int main(int argc, char** argv) {
 
     PSXRecompV4::mod_clear_plugins_for_tests();
     for (const char* id : {
+             "mmx6.frame-interpolation",
              "mmx6.framerate.60",
              "mmx6.framerate.120",
              "mmx6.framerate.144",
@@ -226,11 +227,14 @@ int main(int argc, char** argv) {
         return fail(error);
     }
     for (const auto& [choice, plugin] :
-         {std::pair{"60", "mmx6.framerate.60"},
-          std::pair{"120", "mmx6.framerate.120"},
-          std::pair{"144", "mmx6.framerate.144"},
-          std::pair{"165", "mmx6.framerate.165"},
-          std::pair{"uncapped", "mmx6.framerate.uncapped"}}) {
+         {std::pair{"display", "mmx6.frame-interpolation"},
+          std::pair{"90", "mmx6.frame-interpolation"},
+          std::pair{"240", "mmx6.frame-interpolation"},
+          std::pair{"60", "mmx6.frame-interpolation"},
+          std::pair{"120", "mmx6.frame-interpolation"},
+          std::pair{"144", "mmx6.frame-interpolation"},
+          std::pair{"165", "mmx6.frame-interpolation"},
+          std::pair{"uncapped", "mmx6.frame-interpolation"}}) {
         if (!manager.set_feature_option(
                 "mmx6.enhancement.frame-interpolation",
                 "frame-interpolation", "rate", choice, &error)) {

@@ -1521,7 +1521,7 @@ static void activate(void) {
 }
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
-        "mmx6.local-coop.prototype", "mmx6-x-zero-delay-v4", 0, 0, 1, 7,
+        "mmx6.local-coop.prototype", "mmx6-x-zero-delay-v5", 0, 0, 1, 7,
         "mmx6.widescreen"
     };
     psx_mod_register_netplay_profile(&netplay_profile);
