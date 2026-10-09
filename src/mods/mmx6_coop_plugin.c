@@ -56,7 +56,8 @@ static int pause_owner = -1, p2_start_previous;
 static uint32_t world_packets;
 static uint32_t hud_packets;
 static int hud_call, hud_seat;
-enum { P2_HUD_X=26 };
+/* Stack Zero's native meters below X in the same left-anchored column. */
+enum { P2_HUD_Y=104 };
 static unsigned p2_hud_fade=128;
 static uint16_t *zero_ui_pixels;
 typedef struct { uint16_t page, clut, uv, id, colors[16]; } UiBank;
@@ -1398,8 +1399,8 @@ static void hud_zero_packets(uint32_t arena) {
         uint16_t page=(uint16_t)psx_mod_read_word(mode+4);
         uint16_t bank=hud_tile_bank(page,(uint16_t)(uv>>16),(uint16_t)uv);
         if (!bank || expanded+80>arena+0x8000) { failed=1; return; }
-        int x=(int16_t)psx_mod_read_half(at+8)+P2_HUD_X;
-        int y=(int16_t)psx_mod_read_half(at+10);
+        int x=(int16_t)psx_mod_read_half(at+8);
+        int y=(int16_t)psx_mod_read_half(at+10)+P2_HUD_Y;
         /* Native texture modulation fades the original art, without making
          * alternate HUD graphics or changing its normal colors. */
         uint32_t shade=p2_hud_fade*0x010101u;
@@ -1416,7 +1417,7 @@ static void hud_zero_packets(uint32_t arena) {
     }
     for (uint32_t at=arena+0x2000;at<bars;at+=36) {
         for (unsigned xy=8;xy<=32;xy+=8)
-            psx_mod_write_half(at+xy,(uint16_t)(psx_mod_read_half(at+xy)+P2_HUD_X));
+            psx_mod_write_half(at+xy+2,(uint16_t)(psx_mod_read_half(at+xy+2)+P2_HUD_Y));
         for (unsigned c=4;c<=28;c+=8) {
             uint32_t color=psx_mod_read_word(at+c), faded=color&0xFF000000u;
             for (unsigned channel=0;channel<24;channel+=8)
