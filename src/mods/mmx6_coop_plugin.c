@@ -1246,8 +1246,12 @@ static int enemy_hit(CPUState *cpu, uint32_t address) {
     /* The caller owns enemy AI, invulnerability and applying this result.
      * Check P1 first; only a miss tries P2 with Zero's native hitbox tables.
      * Nested dispatch declines this replacement and executes the stock body. */
-    uint32_t enemy=cpu->gpr[4], result=guest(cpu,address,enemy,cpu->gpr[5]);
-    if (!result && p2.body[0x5C]) {
+    /* The native enemy pool suppresses collisions during PLAYER+CC hit
+     * pause. Apply that gate per seat: retrying a frozen Zero saber sets
+     * +CD again and restarts the five-tick pause on every player update. */
+    uint32_t enemy=cpu->gpr[4], result=psx_mod_read_byte(PLAYER+0xCC)?0:
+        guest(cpu,address,enemy,cpu->gpr[5]);
+    if (!result && p2.body[0x5C] && !p2.body[0xCC]) {
         enter_zero();
         result=guest(cpu,address,enemy,cpu->gpr[5]);
         leave_zero();
@@ -1264,8 +1268,9 @@ static int player_contact(CPUState *cpu, uint32_t address) {
     /* Native contact applies damage/knockback/iframes, then its caller handles
      * the enemy/projectile. Retry only a miss so a consumed projectile cannot
      * damage both actors and its AI still runs exactly once. */
-    uint32_t actor=cpu->gpr[4], result=guest(cpu,address,actor,cpu->gpr[5]);
-    if (!result && (p2.body[0x5C]&0x7F)) {
+    uint32_t actor=cpu->gpr[4], result=psx_mod_read_byte(PLAYER+0xCC)?0:
+        guest(cpu,address,actor,cpu->gpr[5]);
+    if (!result && (p2.body[0x5C]&0x7F) && !p2.body[0xCC]) {
         enter_zero();
         result=guest(cpu,address,actor,cpu->gpr[5]);
         leave_zero();
