@@ -178,11 +178,13 @@ changed-executable staging rejection remain recorded. This covers the healthy
 intro and P1 menu; other restoration contexts and rewind remain unverified.
 
 The combined SDK GCC matrix passes 24/24 after isolation of shared test
-directories. Modern Clang developer and production builds also pass 25/25 game
-checks, including original-source content/audio reproduction. The SDK file
-identity follow-up, final pin and subsequent exact-candidate checks are still
-being integrated. No full comparison status changes follow from these bounded
-milestones.
+directories. Modern Clang developer and production builds pass 26/26 game
+checks, including original-source content/audio reproduction. The selected
+local SDK pin is `9cb684082`, UI `b964eabe`; Windows files over 64 KiB and live
+writable mappings use fresh preparation instead of an unqualified identity
+cache shortcut. Subsequent exact-candidate native checks remain separate from
+the frozen `bd7b9449...` observations. No full comparison status changes follow
+from these bounded milestones.
 
 ## Next integration gates
 

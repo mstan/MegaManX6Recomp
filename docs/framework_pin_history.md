@@ -1,5 +1,26 @@
 # Framework pin history (historical)
 
+Local modern parity candidate, 2026-10-23: framework
+`9cb68408232f926a9c62a57bfcf9e4f829922261` on
+`feature/mmx6-modern-sdk-integrated-local`, UI
+`b964eabe5a3438b8ed121064354ba27c1accef3f`. Net remains
+`e5305930`, rbengine `2a03e736`. The bridge preserves X6 native replacement
+and negotiated default loading while adding the modern digest/snapshot APIs.
+Its overlay ABI is **32**; ABI 30/31 caches must be rejected and regenerated.
+The retained native QA runs use interpreted overlays and make no AOT claim.
+
+The local SDK also corrects optimized MinGW GNU x64 host escapes, isolates
+parallel test workspaces, and replaces Windows timestamp cache identities with
+bounded fresh content evidence. Files over 64 KiB and live writable mappings
+take the existing fresh preparation path; there is no unqualified USN shortcut.
+The combined GCC SDK matrix passes 24/24. Developer and production Clang X6
+builds pass 26/26 checks with original-source audits enabled. Exact binary
+native input/lifecycle, registered core/mod and warm/cold restore receipts are
+in [the netplay baseline](COOP_NETPLAY_BASELINE.md) and
+[snapshot baseline](COOP_SNAPSHOT_BASELINE.md); those name their own candidates.
+Broader mechanics, rewind, production gameplay, AOT and cross-platform behavior
+remain separate gates. All pins and branches are local; nothing was pushed.
+
 Local follow-up: `a72527f13a378688d7974afde86c3c8c140b79fd`, branch
 `feature/mmx6-parity-sdk-compat`, adds the already-proven X4 sampler correction
 `1e33761d` to the disc-identity fix below. Explicit host devices now enter
