@@ -400,7 +400,7 @@
           "netplay": "unverified"
         },
         "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "limitations": "Frozen source audit6b725ac maps native P1/boss packet range and explicit left anchoring for retained P2 sprites/bars. Actual HUD alignment, aspect/resize and both-mode artwork remain unverified. See COOP_HUD_MENU_AUDIT.md."
       }
     },
     {
@@ -437,7 +437,7 @@
           "netplay": "unverified"
         },
         "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "limitations": "Source gap fixed in9282fea: original stacked layout remains default; owning package now offers side_by_side, changing only private HUD packet offsets. Four GCC/Clang debug/production fixture runs passed in the worker; integrated Clang debug/production CTests also pass. Actual selection, both layouts/menus/resources/aspects and local/netplay rendered qualification remain unverified. Frozen source audit remains bound to pre-option7b584a8."
       }
     },
     {
@@ -474,7 +474,7 @@
           "netplay": "unverified"
         },
         "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "limitations": "Native Quit confirmation source and bounded P1 two-page/cancel capture runner are implemented in6946600/c460e65. Exact-image/default-loader/owned-process and same-machine profile/CRC guards are required. Native page visibility and body/HUD/effect suppression remain unverified; helper/CLI tests do not pass artwork. See COOP_NATIVE_QUIT_RUNNERS.md."
       }
     },
     {
@@ -1170,7 +1170,7 @@
           "netplay": "unverified"
         },
         "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "limitations": "Native guest-authority probe and primary confirmation-page/cancel route are implemented in6946600/c460e65. Unexpected guest admission records failure before any Cross confirmation. Actual guest authority, final native Quit/current-data/character reentry, shared progress/roster and subsequent guest menu ownership remain unverified. Debug process Quit is a separate contract."
       }
     },
     {
@@ -1583,7 +1583,7 @@
           "netplay": "unverified"
         },
         "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "limitations": "Default diagnostics capture and strict bounded offline N/C replay source are integrated inee8e14e; actual-module/reader/preparation checks pass. Explicit immutable offline overlay startup is pinned in078433e. A fresh generated hook/executable/manifest and actual accepted-input capture/replay are still required. Direct debug SIO input taints recordings; shared per-seat published-host ingress and an owned native qualifier are in progress. Consumed stream is not native outcome equality; no R26 pass. See COOP_NATIVE_REPLAY.md."
       }
     },
     {
@@ -2258,7 +2258,7 @@
           "netplay": "unverified"
         },
         "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "limitations": "Frozen source audit6b725ac identifies menu/world drawing boundaries and a possible omitted living P1 in P2-owned world draws. This remains a source prediction; no rendered transition failure or fix is claimed. Actual opening/closing intervals and HUD/body continuity need local and same-machine paired captures."
       }
     },
     {
