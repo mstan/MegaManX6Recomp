@@ -111,6 +111,10 @@ if(PSX_BUILD_COSIM)
     )
 endif()
 
+# Separate declared build identity; title/execution/content checks stay active.
+include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/mmx6_build_manifest.cmake")
+mmx6_register_build_manifests()
+
 # Per-game launcher art override. The framework copies its shared launcher assets
 # (img/disc.png etc. â€” the default is Tomba's disc) next to the exe; this copies
 # this repo's launcher_art/ on top AFTERWARD so the launcher shows MMX6's disc.
