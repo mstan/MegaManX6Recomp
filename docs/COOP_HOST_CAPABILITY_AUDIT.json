@@ -1,0 +1,323 @@
+{
+  "schema": 1,
+  "scope": "Bounded source-only host-optimization capability audit; no runtime, network, code changes or qualification passes.",
+  "source_repositories": [
+    {
+      "id": "sdk",
+      "commit": "9cb68408232f926a9c62a57bfcf9e4f829922261",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-bridge"
+    },
+    {
+      "id": "net",
+      "commit": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\net-modern"
+    },
+    {
+      "id": "game",
+      "commit": "5f9ba57c6cd3665182b3093bcadd7889f36f574e",
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity"
+    }
+  ],
+  "policy_sources": [
+    {
+      "path": "F:\\Projects\\recomp-template\\NETPLAY.md",
+      "section": "host-optimization-capabilities",
+      "sha256": "d6422e13bad44c2cb5f28a556143e00cc2506388d82ca68a397f30ac2c4a8cb6",
+      "bytes": 10079,
+      "provenance": "local owner policy file; full-file hash"
+    },
+    {
+      "path": "F:\\Projects\\recomp-template\\OPTIMIZATION.md",
+      "section": "host-assembly-portability",
+      "sha256": "5e19cdd70ea3811cf69635d326ab5b25d3aa17772843b297649d313a2212beec",
+      "bytes": 19316,
+      "provenance": "local owner policy file; full-file hash"
+    }
+  ],
+  "sources": [
+    {
+      "repository": "sdk",
+      "commit": "9cb68408232f926a9c62a57bfcf9e4f829922261",
+      "path": "cmake/psx_execution_profile.cmake",
+      "git_blob": "402387bffece94a706aa4dd8965a289f8b81c6c0",
+      "sha256": "2d8f31e7b3bee0a46c6ed8e8855b422feeafeae25a9c219098567ccb7baaf28a",
+      "bytes": 9594
+    },
+    {
+      "repository": "sdk",
+      "commit": "9cb68408232f926a9c62a57bfcf9e4f829922261",
+      "path": "runtime/runtime.cmake",
+      "git_blob": "0384dd4c60008ae479aff4d930081527a3ab2841",
+      "sha256": "0efff127e6a28a5206a2f4ab3e7e07a015c3572697a7203cab84ef4836f90c34",
+      "bytes": 146466
+    },
+    {
+      "repository": "sdk",
+      "commit": "9cb68408232f926a9c62a57bfcf9e4f829922261",
+      "path": "runtime/include/execution_profile.h",
+      "git_blob": "1ec8b4bcbd4ab8f7d10e0965ce3eefcf3a5f6d9c",
+      "sha256": "c32a076cc752d5777e032729552478df164611bc84e81b3bb3b4ea47ec1dd6e2",
+      "bytes": 358
+    },
+    {
+      "repository": "sdk",
+      "commit": "9cb68408232f926a9c62a57bfcf9e4f829922261",
+      "path": "runtime/include/execution_identity.h",
+      "git_blob": "5f1539bb1a7a009df3ad51b757962f6a9b413d64",
+      "sha256": "27e1ba7d3d1eca088e0e31c2c012e3831a1e6d23403c69c1dfc17543c7e8f3c0",
+      "bytes": 1543
+    },
+    {
+      "repository": "sdk",
+      "commit": "9cb68408232f926a9c62a57bfcf9e4f829922261",
+      "path": "runtime/include/netplay_content_gate.h",
+      "git_blob": "9bb17d67f8aa3d270a44f9a52d042b3a358992a4",
+      "sha256": "c823a62c2b69315bc1160a2089189b858496afca305ee2b94b65e5e23826b9b0",
+      "bytes": 1763
+    },
+    {
+      "repository": "sdk",
+      "commit": "9cb68408232f926a9c62a57bfcf9e4f829922261",
+      "path": "runtime/include/mod_netplay.h",
+      "git_blob": "5bb7a49ede46d0423a0ea2b68e47bd118ffbca64",
+      "sha256": "0a2b2fc028d06c3344f60367cea1e63fb68a5b8af5ac28763af02e92fad95102",
+      "bytes": 3372
+    },
+    {
+      "repository": "sdk",
+      "commit": "9cb68408232f926a9c62a57bfcf9e4f829922261",
+      "path": "runtime/src/mod_netplay.c",
+      "git_blob": "86073c6f8df14609da59575411554724efe91ebc",
+      "sha256": "2da562937a4cb4074121dcf9986a79d6e7b0cb9f574c4fff64f6b620e69a75ca",
+      "bytes": 8440
+    },
+    {
+      "repository": "sdk",
+      "commit": "9cb68408232f926a9c62a57bfcf9e4f829922261",
+      "path": "runtime/src/psx_netplay.c",
+      "git_blob": "758c0dc516556bda74ca4be36846a68b52b4a0d2",
+      "sha256": "b0d0dbe9c79b6f5546902115745b9d5b96d081930432532fdd63cd81b8c15221",
+      "bytes": 222192
+    },
+    {
+      "repository": "sdk",
+      "commit": "9cb68408232f926a9c62a57bfcf9e4f829922261",
+      "path": "runtime/include/psx_lobby_client.h",
+      "git_blob": "a0ccce54c11f257c67bd95a95db9d7f49d2e2b23",
+      "sha256": "788828b828685110ff15928b67206def70afb1e210bf6a78ab0b6fe7dcbfebe8",
+      "bytes": 36391
+    },
+    {
+      "repository": "sdk",
+      "commit": "9cb68408232f926a9c62a57bfcf9e4f829922261",
+      "path": "runtime/src/psx_lobby_client.c",
+      "git_blob": "72cd932bbeac799d3881f0ae0d873615e1ce3341",
+      "sha256": "ba0f5ab6a2a163eb59d9b4b5798da0e88a58e08cc865728acaddf29dc981bb8c",
+      "bytes": 212362
+    },
+    {
+      "repository": "sdk",
+      "commit": "9cb68408232f926a9c62a57bfcf9e4f829922261",
+      "path": "runtime/src/mod_runtime.cpp",
+      "git_blob": "fbe74f2df2d223eff434effde888441721f82d22",
+      "sha256": "0fb8642324c736c1fec966068b62047329da9d83173201c875ccd4087456d4a8",
+      "bytes": 146454
+    },
+    {
+      "repository": "sdk",
+      "commit": "9cb68408232f926a9c62a57bfcf9e4f829922261",
+      "path": "runtime/src/main.cpp",
+      "git_blob": "e1ef74b35a5e0b6459891468fe8529051edd7c7d",
+      "sha256": "fccfe1f805eb547f47e47b55633bdf6ad1862aca2283a4466e4525b14f84c031",
+      "bytes": 1004999
+    },
+    {
+      "repository": "sdk",
+      "commit": "9cb68408232f926a9c62a57bfcf9e4f829922261",
+      "path": "runtime/src/mdec.c",
+      "git_blob": "72a82a5ad38f98a521bfbf7ec2aeb2eaf32ed4fb",
+      "sha256": "83f219fde6ffa5d1286051632c691563d093d4de211c15905fe5907d624b6b63",
+      "bytes": 45150
+    },
+    {
+      "repository": "sdk",
+      "commit": "9cb68408232f926a9c62a57bfcf9e4f829922261",
+      "path": "runtime/tests/test_execution_profile.py",
+      "git_blob": "27809fd2b0e95d33b92799d1389d6016cd79f0d4",
+      "sha256": "3233d30fee36044d5bf61243accc2a9f95730dde07071bd1e7a0e752f5e1cf2f",
+      "bytes": 8267
+    },
+    {
+      "repository": "sdk",
+      "commit": "9cb68408232f926a9c62a57bfcf9e4f829922261",
+      "path": "runtime/tests/test_netplay_content_gate.c",
+      "git_blob": "e76e5bedfb320d96e07a8211bce20968d808544c",
+      "sha256": "94907190d3bc6b0627f5569e3f715ba4cfd73859fd390806f323d388fdceb42d",
+      "bytes": 1967
+    },
+    {
+      "repository": "net",
+      "commit": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "path": "include/recomp_net/config.h",
+      "git_blob": "1457f107776a8b7330a5e2cd8b3956e1be712de4",
+      "sha256": "bc2694ca7c32a67080c57f1b428588d7e7dcfe66b24b531dd404bb068475cf35",
+      "bytes": 3504
+    },
+    {
+      "repository": "net",
+      "commit": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "path": "include/recomp_net/lobby_client.h",
+      "git_blob": "4d32416a83038fc4bbabb3a899331a9f628ccaa6",
+      "sha256": "b422e9bf71083d3943e483accf6bd1c37184bed464587dae753cc08d528737d1",
+      "bytes": 50492
+    },
+    {
+      "repository": "net",
+      "commit": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "path": "include/recomp_net/module.h",
+      "git_blob": "15cd7dda7dea49eda90e81629a3736f3edf750e3",
+      "sha256": "338204abcc65ff54569fdeb8a38155f575ff1840124f7c1f917422a255069b3d",
+      "bytes": 3433
+    },
+    {
+      "repository": "net",
+      "commit": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "path": "src/protocol/rnet_protocol.h",
+      "git_blob": "f668da8e3332b6fa328fffb2e9bc230c8e12d259",
+      "sha256": "ccd64d4fc5f8d396c1dd994be208416d848aca789971d1d11a4eda8cafd9bf59",
+      "bytes": 14939
+    },
+    {
+      "repository": "net",
+      "commit": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "path": "src/protocol/rnet_protocol.c",
+      "git_blob": "33711f10a35471d1dfbe1c1d217fbfe7cbd0228b",
+      "sha256": "2ecf1c139d7164b8df4b2acdd1cc100e2d992e5b1d5ed15f2427604fcf700fd7",
+      "bytes": 28300
+    },
+    {
+      "repository": "net",
+      "commit": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "path": "src/session/rnet_session.c",
+      "git_blob": "a388607301aa74c486431ad153f393793ba11035",
+      "sha256": "1e8e83e460539aa28ba5db99116a0163843a2621e73452e31fcc6009bfc2115f",
+      "bytes": 169311
+    },
+    {
+      "repository": "net",
+      "commit": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "path": "src/rollback/rnet_rb_driver.c",
+      "git_blob": "664f613b08b827e2e9c8e8545832faf9b39fe2dc",
+      "sha256": "df88661e3e410d6057a5b8c88dffaed1432696439fbbbecaf8aedf2fd6d84780",
+      "bytes": 193716
+    },
+    {
+      "repository": "net",
+      "commit": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "path": "include/recomp_net/rb_driver.h",
+      "git_blob": "a6f654c965143c0f326937f5f36400819d902ebc",
+      "sha256": "538b0895ec5e3c2c66b17a0e0a2237e034236fa23b04946a629d762e1f3407cd",
+      "bytes": 18176
+    },
+    {
+      "repository": "net",
+      "commit": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "path": "docs/lobby.md",
+      "git_blob": "0511411e397275df2522c2d5f4526647f6752b90",
+      "sha256": "5e5f674d6ed59af60e209b66daa07e841a232c4d44d62bd4efdb749be8d4dc8b",
+      "bytes": 7463
+    },
+    {
+      "repository": "game",
+      "commit": "5f9ba57c6cd3665182b3093bcadd7889f36f574e",
+      "path": "CMakeLists.txt",
+      "git_blob": "d87c82571d136d209ca202337b8624ae9fb4f827",
+      "sha256": "b6b4a69a5be35c2bbeeeacc2690a0ebde18aadda553843f43742b9d288a15e54",
+      "bytes": 18446
+    },
+    {
+      "repository": "game",
+      "commit": "5f9ba57c6cd3665182b3093bcadd7889f36f574e",
+      "path": "src/mods/mmx6_coop_plugin.c",
+      "git_blob": "7c04ef4a806bb9c0b4079176a4e5b7b076d2227e",
+      "sha256": "569fda242cb40d6380bf2f564b5030e556a44eb9181cd1d104c6960fb639df3b",
+      "bytes": 84516
+    }
+  ],
+  "findings": [
+    {
+      "id": "H1",
+      "status": "IMPLEMENTED_SOURCE_ONLY",
+      "claim": "Fixed developer-selected ENHANCED/REFERENCE source-contract identity; full256-bit mutual content agreement gates frame admission.",
+      "evidence": [
+        "sdk:cmake/psx_execution_profile.cmake",
+        "sdk:runtime/include/execution_identity.h",
+        "sdk:runtime/include/netplay_content_gate.h",
+        "sdk:runtime/src/psx_netplay.c"
+      ]
+    },
+    {
+      "id": "H2",
+      "status": "GAP",
+      "claim": "Inspected PSX setup has no actual CPU architecture/optional-feature offers, available backend sets, qualified simulation profile offers, deterministic common-profile selection or portable fallback agreement.",
+      "evidence": [
+        "sdk:runtime/include/psx_lobby_client.h",
+        "sdk:runtime/src/psx_lobby_client.c",
+        "net:include/recomp_net/config.h",
+        "net:src/protocol/rnet_protocol.c",
+        "net:src/session/rnet_session.c"
+      ]
+    },
+    {
+      "id": "H3",
+      "status": "IMPLEMENTED_SOURCE_ONLY",
+      "claim": "X6v10 composes title/config/loading and retained-texture policy into identity; modern X6 requires locally working OpenGL retained textures and fails startup when unsupported.",
+      "evidence": [
+        "game:src/mods/mmx6_coop_plugin.c",
+        "sdk:runtime/src/mod_netplay.c",
+        "sdk:runtime/src/main.cpp"
+      ]
+    },
+    {
+      "id": "H4",
+      "status": "IDENTITY_LIMIT",
+      "claim": "Forced v10 profile replaces lobby game_version; source-contract digest is not whole-binary/compiler/options/hardware identity and does not automatically hash executable-owned coop plugin bytes.",
+      "evidence": [
+        "sdk:runtime/src/psx_lobby_client.c",
+        "sdk:runtime/src/mod_runtime.cpp",
+        "sdk:cmake/psx_execution_profile.cmake",
+        "sdk:runtime/runtime.cmake",
+        "game:CMakeLists.txt"
+      ]
+    },
+    {
+      "id": "H5",
+      "status": "EXTENSION_POINT_ONLY",
+      "claim": "Generic net lobby codec/ext and session_variant exist but do not implement PSX CPU/backend/profile negotiation; PSX still has separate concrete caps serializer.",
+      "evidence": [
+        "net:include/recomp_net/lobby_client.h",
+        "net:docs/lobby.md",
+        "sdk:runtime/include/psx_lobby_client.h",
+        "sdk:runtime/src/psx_lobby_client.c"
+      ]
+    },
+    {
+      "id": "H6",
+      "status": "EXAMPLE_SOURCE_ONLY",
+      "claim": "MDEC retains scalar and gated SSE2 implementation with local self-checks; this is not heterogeneous OS/CPU replay qualification or a capability exchange.",
+      "evidence": [
+        "sdk:runtime/src/mdec.c"
+      ]
+    }
+  ],
+  "qualification": {
+    "source_review": "completed for enumerated files only",
+    "tests_executed": [],
+    "cross_cpu": "UNVERIFIED",
+    "cross_os": "UNVERIFIED",
+    "heterogeneous_build": "UNVERIFIED",
+    "rollback": "UNVERIFIED; disabled for X6v10",
+    "known_existing_runtime_scope": "Parent reports same-host Windows loopback only; not reproduced by this audit.",
+    "ledger_passes_added": 0
+  }
+}
