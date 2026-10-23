@@ -3,11 +3,12 @@
 The catalog is **disabled by default**. Explicit development builds may set
 `-DMMX6_ENABLE_LOOPBACK_HOST_LAB=ON` to exercise the candidate
 `mmx6.win64-clang22.loopback`, revision2 for title contract
-`mmx6-x-zero-delay-v14`. This title revision adds source-guarded Recycle Lab
-portal ownership and validates the fixed roster and complete resource layout
-before private asset loading or enrollment. It retains the guest Select
-authority fix. The combined changes need fresh native evidence on their exact
-new image. The catalog permits development evidence collection only.
+`mmx6-x-zero-delay-v15`. This title revision accepts the four exact Recycle Lab
+portal record variants produced by the original admission scanner and reset
+code, with the producer instructions pinned too. It retains guarded portal
+ownership, fixed-roster resource admission and the guest Select authority fix.
+The correction needs fresh native evidence on its exact new image. The catalog
+permits development evidence collection only.
 GCC and unsupported builds remain valid offline builds and return an empty
 catalog even when the lab option is requested. SDKs before host-catalog API2
 keep their original plugin initializer layout and do not install the callback.

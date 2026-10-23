@@ -1,0 +1,148 @@
+{
+  "schema": 1,
+  "kind": "reviewed_conditional_CP2_source_floor_setup_before_portal_route",
+  "reviewed_at_utc": "2026-10-23T17:29:19.182465+00:00",
+  "candidate": {
+    "candidate_source": "c5fadead5296cb4bc53a5c283b04e5814e025f09",
+    "exe_sha256": "39c154966f9c12f939a8305551a910de9dbb97878dcf05c5935bed03c7ca7036",
+    "declared_manifest_sha256": "ae232408787bf0c3564bf8fd3aae85cc6d3977370fd059198b391345ebb25797"
+  },
+  "compilation_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v15-c5fadea\\candidate.json",
+    "sha256": "001b90d2acf18e7f934ec6c0644a6e673dadfeb37769b06086c64baf5f5f8a81"
+  },
+  "report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-cp2-v15-c5fadea-floor-probe\\qualification.json",
+    "sha256": "f601a72818474715602ebc7a52201185759c521af73621d01b8fac0a60f1356a"
+  },
+  "probe_source": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-cp2-v15-c5fadea-floor-probe\\portal-observer-probe-source.py",
+    "sha256": "264d56c00edee7fae83a6ea13a8deae92b9a9778475e646497ccbb22469e7109"
+  },
+  "owned_pid": 75996,
+  "shutdown": "graceful_owned_debug",
+  "exit_code": 0,
+  "status": "unverified_setup_failed_before_contact_route",
+  "placement": {
+    "seat": 0,
+    "x_fixed16": 96141312,
+    "y_fixed16": 104464384,
+    "rationale": "Source floor1616 and actual Xbox(0,2,11,19): center contact1595, one-pixel-air1594. X1467 is the left center envelope; no grounded/action/lock/timer/HP/portal writes.",
+    "prerequisite_bypass": true,
+    "ordinary_input_evidence_tainted": true
+  },
+  "scratch_pointers": [
+    "0x80097438",
+    "0x8019a4b0",
+    "0x801af8b0"
+  ],
+  "collision_assets": [
+    {
+      "address": "0x8019a4b0",
+      "bytes": 87040,
+      "sha256": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117",
+      "matches_source": true
+    },
+    {
+      "address": "0x801af8b0",
+      "bytes": 8000,
+      "sha256": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192",
+      "matches_source": true
+    }
+  ],
+  "initial_layout": {
+    "address": "80097438",
+    "bytes": 528,
+    "sha256": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+    "matches_initial_original": true,
+    "changed_indices": []
+  },
+  "actual_original_grounded_feet": {
+    "status": "source_samples_only_not_grounded_or_safe",
+    "body_sha256": "a16dfba973b9f239791de45d126ceb440a9a6e7505a4d3a2f117f3a20e4bc6f7",
+    "body_box_pointer": 2147958096,
+    "shape_sha256": "a266f054d4ac9645d4de03ac113401d17160e25f855d61f75fa576b0e77a1118",
+    "probes": [
+      {
+        "x": 1456,
+        "y": 1616,
+        "layer": 0,
+        "screen_col": 5,
+        "screen_row": 6,
+        "authored_only": true,
+        "runtime_status": "unverified",
+        "cell": 75,
+        "tile": 1636,
+        "descriptor": 1636,
+        "raw_code": 56,
+        "code": 56,
+        "reason": "descriptor low byte"
+      },
+      {
+        "x": 1477,
+        "y": 1616,
+        "layer": 0,
+        "screen_col": 5,
+        "screen_row": 6,
+        "authored_only": true,
+        "runtime_status": "unverified",
+        "cell": 75,
+        "tile": 1637,
+        "descriptor": 1637,
+        "raw_code": 56,
+        "code": 56,
+        "reason": "descriptor low byte"
+      },
+      {
+        "x": 1467,
+        "y": 1616,
+        "layer": 0,
+        "screen_col": 5,
+        "screen_row": 6,
+        "authored_only": true,
+        "runtime_status": "unverified",
+        "cell": 75,
+        "tile": 1636,
+        "descriptor": 1636,
+        "raw_code": 56,
+        "code": 56,
+        "reason": "descriptor low byte"
+      }
+    ],
+    "limits": [
+      "Native resolution changes the body and scratch state; this pure lookup does not",
+      "Full-foot safety, hazards, actor solids and live map mutations are not established"
+    ]
+  },
+  "final_source_floor_checks": {
+    "publication_after_completed_receipt": true,
+    "enrolled_living_idle_roster": false,
+    "native_gameplay_tuple": true,
+    "native_entry_gates_clear": false,
+    "native_p1_visible_idle_grounded": false,
+    "native_previous_position_settled": true,
+    "native_p1_agrees_with_publication": true,
+    "selected_camera_bounds": true,
+    "camera_inside_authored_bounds": true,
+    "actors_in_current_native_viewport": false,
+    "display_enabled": true,
+    "p1_at_disclosed_source_floor_probe_x": true
+  },
+  "capture": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-cp2-v15-c5fadea-floor-probe\\baseline\\portal-CP2-source-floor-probe.png",
+    "sha256": "f13aea429ca0ebde36bbd246792487253d72b731c9513826ee93adaea1698b68"
+  },
+  "visual_review": "Root inspected original Dr. Light armor-program dialogue with X visible and HELP marker. This does not show valid two-living-player portal contact/transition.",
+  "findings": [
+    "Full87040B metatiles and8000B descriptors match original DAT98 at live scratch-selected RAM addresses; all528 initial map bytes match.",
+    "Existing offline command4 placed residentP1 only at source-derived1467/1594. Native collision landsX at1595; all3 original foot samples find38h floor at1616. Native landing reaches action2 and releases entrylock before subsequent original scene.",
+    "P2 joined at checkpointX504 before P1 placement. P1 triggers native DrLight capsule scene; P2 is left behind and falls to HP0. Stable two-living-player readiness never completes; no portal approach input is sent."
+  ],
+  "limits": [
+    "Both checkpoint and position are disclosed private offline tainted prerequisite bypasses; original authored-X checkpoint readiness is not claimed.",
+    "The probe writes position/previous-position through existing command4 only; no HP, collision/ground, action, lock, world clock, portal/success flags or native cards are written by the probe. Native scene writes may occur.",
+    "This is a setup failure, not an R14 portal/camera/transition pass or proof of a cooperative capsule mechanic defect.",
+    "Next setup needs both actors in an observed source-supported area outside both native capsule and portal trigger boxes."
+  ],
+  "ledger_status": "unverified"
+}

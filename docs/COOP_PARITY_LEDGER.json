@@ -1427,9 +1427,51 @@
             "bypasses": [
               "Existing private offline command8 stage4/sec0/CP3 initialization; ordinary input proof is tainted."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "c5fadead5296cb4bc53a5c283b04e5814e025f09",
+            "build_identity": {
+              "exe_sha256": "39c154966f9c12f939a8305551a910de9dbb97878dcf05c5935bed03c7ca7036",
+              "declared_manifest_sha256": "ae232408787bf0c3564bf8fd3aae85cc6d3977370fd059198b391345ebb25797",
+              "compiled_source_commit": "c5fadead5296cb4bc53a5c283b04e5814e025f09",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "loader": "default Seamless Loading",
+              "input": "neutral after private CP2+P1 source-floor position setup",
+              "rollback": false
+            },
+            "action": "Verify actual collision assets/map/current X box, position P1 through existing offline command4, and observe original landing without ground/action/lock writes.",
+            "outcome": "Source-predicted X landing/foot collision and native entry-lock release observed. Original capsule scene intervenes; P2 left at checkpoint falls. No stable two-player setup or portal route/contact/transition is qualified.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-cp2-v15-c5fadea-floor-probe\\qualification.json",
+                "sha256": "f601a72818474715602ebc7a52201185759c521af73621d01b8fac0a60f1356a"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v15-c5fadea\\candidate.json",
+                "sha256": "001b90d2acf18e7f934ec6c0644a6e673dadfeb37769b06086c64baf5f5f8a81"
+              },
+              {
+                "path": "docs\\evidence\\mmx6-recycle-portal\\manifest-bound-c5fadea-cp2-floor-probe-reviewed.json",
+                "sha256": "1da57f049d355640b0f769876696df8beb26e13b902dbd6da59f7f7b1c25550d"
+              }
+            ],
+            "limits": [
+              "Both checkpoint and position are disclosed private offline tainted prerequisite bypasses; original authored-X checkpoint readiness is not claimed.",
+              "The probe writes position/previous-position through existing command4 only; no HP, collision/ground, action, lock, world clock, portal/success flags or native cards are written by the probe. Native scene writes may occur.",
+              "This is a setup failure, not an R14 portal/camera/transition pass or proof of a cooperative capsule mechanic defect.",
+              "Next setup needs both actors in an observed source-supported area outside both native capsule and portal trigger boxes."
+            ],
+            "bypasses": [
+              "Private offline command8 stage4/sec0/CP2 and command4 resident-only source-floor placement."
+            ]
           }
         ],
-        "limitations": "Source and merged fixtures identify Recycle Lab portal ownership. Actual c5fadea CP3 setup completed the original initializer but could not land/release entry lock; route/contact/transition/arrival and both modes remain unverified. Live exact native record variant requires a source-bound guard correction."
+        "limitations": "Source-pinned portal admission variants are corrected; fresh native qualification remains pending. CP3 neutral setup cannot land; CP2 source-floor probe verifies actual native X landing but triggers DrLight while P2 remains at checkpoint and falls. Both-mode portal contact/transition/arrival/return remain unverified."
       }
     },
     {
