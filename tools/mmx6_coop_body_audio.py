@@ -1,6 +1,7 @@
 """Native body-SFX observations; original input only, no audio/RAM writes."""
 import hashlib
 import json
+import re
 from pathlib import Path
 import time
 
@@ -10,6 +11,8 @@ import mmx6_coop_contact as contact
 
 SQUARE = 0x8000
 TRACE_TARGETS = {0x80016C48,0x8001750C,contact.CONTACT,0x8003D8A8}
+VOICE_OWNER = 0x4D4D583650320001
+VOICE_MASK = 0xF00B09
 
 
 def require(ok, message):
@@ -19,15 +22,63 @@ def require(ok, message):
 def build_source(exe_path, disc_path):
     exe, zero, banks = source_routes.original.original_sources(exe_path, disc_path)
     record = source_routes.prove_routes(exe, zero, banks)
-    for row in record['body_records']:
-        tone = row['tones'][0]
-        tone['pitch'] = audio.native_pitch(tone['note'], tone['shift'], tone['center'],
-            tone['shift'], lambda address: exe.word(address) & 0xFFFF)
+    record['all_records'] = source_routes.original.resolve_records(banks)
+    for rows in (record['body_records'], record['all_records']):
+        for row in rows:
+            for tone in row['tones']:
+                tone['pitch'] = audio.native_pitch(tone['note'], tone['shift'], tone['center'],
+                    tone['shift'], lambda address: exe.word(address) & 0xFFFF)
     return record
 
 
 def source_digest(source):
     return hashlib.sha256(json.dumps(source, sort_keys=True, separators=(',', ':')).encode('ascii')).hexdigest()
+
+
+def voice_leases(reply):
+    audio.parse_private_voices(reply)
+    owners=[]
+    for row in reply['voices']:
+        tag=row.get('owner_tag')
+        require(isinstance(tag,str) and re.fullmatch(r'0x[0-9a-fA-F]{16}',tag) is not None,
+            'Private voice ownership tag is absent or malformed')
+        owners.append(int(tag,16))
+    require(sum(1<<slot for slot,owner in enumerate(owners) if owner==VOICE_OWNER)==VOICE_MASK,
+        'Private character voice reservations differ from the source-derived mask')
+    return owners
+
+
+def probe_sample(observer,event,tone):
+    descriptors=[b for b in observer.private_banks['banks'] if b['bank']==event['sample_bank']]
+    require(len(descriptors)==1,'Character event lacks a unique retained source bank')
+    descriptor=descriptors[0]
+    start,count,size=tone['offset'],tone['bytes'],descriptor['bytes']
+    require(0<count<=131072 and start>=0 and start+count<=size,'Character sample escaped its source bank')
+    digest=hashlib.sha256()
+    for offset in range(0,count,4096):
+        digest.update(observer.bank_read(event['sample_bank'],start+offset,min(4096,count-offset),size)['data'])
+    observed=digest.hexdigest()
+    checks=dict(private_voice_route=event['v']==tone['voice']+24,
+        source_sample=observed==tone['sample_sha256'],
+        pitch_adsr_numeric=all(event[k]==tone[k] for k in ('pitch','adsr_lo','adsr_hi')),
+        original_end_marker_present=tone['first_end_block'] is not None and bool(tone['first_end_flags']&1))
+    return observed,checks
+
+
+def identify_character(observer,event,source,sound_calls):
+    require(event['sample_bank'] in (30,31) and 24<=event['v']<48,'Character event is not a retained private-bank voice')
+    calls=[r for r in sound_calls if int(r['target'],16)==0x80016C48 and int(r['a2'],16)==0x800970A0 and r['frame']==event['frame']]
+    matches=[]
+    for record in source.get('all_records',source.get('body_records',[])):
+        bank=30 if record.get('effective_bank_group',record['group'])==1 else 31
+        if bank!=event['sample_bank']:continue
+        if not any((int(c['a0'],16)&127)==record['group'] and (int(c['a1'],16)&255)==record['record'] for c in calls):continue
+        for tone in record['tones']:
+            if tone['voice']+24==event['v'] and tone['offset']==event['addr']:matches.append((record,tone))
+    require(len(matches)==1,'Character event lacks an unambiguous same-frame original body SOUND call')
+    record,tone=matches[0];observed,checks=probe_sample(observer,event,tone)
+    return dict(record=record,tone=tone,event=event,source_calls=calls,observed_sha256=observed,checks=checks,
+        record_selection='event_time_original_sound_call')
 
 
 def identify(observer, event, source, *, sound_calls=None):
@@ -42,18 +93,7 @@ def identify(observer, event, source, *, sound_calls=None):
         matches=[r for r in matches if any(int(c['a1'],16)==r['record'] for c in calls)]
     if len(matches) != 1: raise audio.AudioQualificationError('Body sample address is absent or ambiguous')
     record = matches[0]; tone = record['tones'][0]
-    descriptor = next(b for b in observer.private_banks['banks'] if b['bank'] == 30)
-    start, count, size = tone['offset'], tone['bytes'], descriptor['bytes']
-    if not 0 < count <= 131072 or start < 0 or start + count > size:
-        raise audio.AudioQualificationError('Body sample escaped its source bank')
-    digest = hashlib.sha256()
-    for offset in range(0, count, 4096):
-        digest.update(observer.bank_read(30, start+offset, min(4096, count-offset), size)['data'])
-    observed = digest.hexdigest()
-    checks = dict(private_voice_route=event['v'] == tone['voice']+24,
-        source_sample=observed == tone['sample_sha256'],
-        pitch_adsr_numeric=all(event[k] == tone[k] for k in ('pitch', 'adsr_lo', 'adsr_hi')),
-        original_end_marker_present=tone['first_end_block'] is not None and bool(tone['first_end_flags'] & 1))
+    observed,checks=probe_sample(observer,event,tone)
     return dict(record=record, event=event, observed_sha256=observed, checks=checks,
         source_calls=calls,record_selection='event_time_original_sound_call' if sound_calls is not None else 'unique_sample_source')
 
@@ -183,7 +223,7 @@ def exercise(ctx, contract, *, source, timeout=90, death=False, **unused):
             'Ordinary Zero saber plus requested contact-death route only; no full R4/R12 or other action-family pass.',
             'Original SOUND/STOP arguments and return addresses traced; s0 is enforced by the compiled guard, not claimed as a trace field.',
             'Inactive STOP may zero volume without KEYOFF. Such evidence never qualifies an active STOP7 lifetime.',
-            'Other observed character vocals retain their own unresolved disposition; no PCM/music/cross-machine result.'])
+            'Observed character samples require exact original body SOUND and bank bytes; unseen records/PCM/music/cross-machine remain unverified.'])
     report['body_audio'] = case
 
     def sample(label):
@@ -220,6 +260,7 @@ def exercise(ctx, contract, *, source, timeout=90, death=False, **unused):
     failure = None
     try:
         before = idle('body-audio-ground'); case['banks_before'] = observer.fingerprint_banks()
+        case['leases_before']=voice_leases(ctx['request']('spu_private_voices'))
         case['hardware_before'] = audio.parse_voices(ctx['request']('spu_voices'), require_banks=True)
         before = sample('body-audio-before-input')
         ctx['request']('fntrace_arm_clear')
@@ -285,6 +326,14 @@ def exercise(ctx, contract, *, source, timeout=90, death=False, **unused):
             checks.pop('private_native_stop_observed');case['active_phase2_stop7']='unverified: saber naturally ended before death'
         case['checks'].update(checks);case['terminal'] = details
         case['trace']=trace_page(ctx)
+        case['character_samples']=[identify_character(observer,event,source,case['trace']['entries'])
+            for event in observer.events if event['seq']>=start and event['kind']=='KEYON' and event['sample_bank'] in (30,31) and event['v']>=24]
+        case['checks']['observed_character_samples_source_matched']=bool(case['character_samples']) and all(
+            all(row['checks'].values()) for row in case['character_samples'])
+        case['character_vocals']=[row for row in case['character_samples'] if row['record']['group']==3]
+        case['character_vocal_disposition']='observed_source_matched' if case['character_vocals'] else 'unverified_native_rng_no_vocal'
+        case['leases_after']=voice_leases(ctx['request']('spu_private_voices'))
+        case['checks']['private_voice_leases_stable']=case['leases_before']==case['leases_after']
         case['checks']['original_zero_saber_sound_call']=any(int(r['target'],16)==0x80016C48 and
             int(r['a0'],16)==1 and int(r['a1'],16)==case['selected']['record']['record'] and
             int(r['a2'],16)==0x800970A0 and 0x801EA000<=int(r['ra'],16)<0x801EA000+contact.ZERO_SIZE

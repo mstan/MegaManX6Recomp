@@ -2,6 +2,8 @@
 import copy
 import struct
 import unittest
+import mmx6_coop_contact as subject
+from test_coop_debug_protocol import diagnostic
 
 from mmx6_coop_contact import (
     CONTACT, CONTACT_RA, ZERO_BASE, ZERO_SIZE, complete_contact_trace,
@@ -30,6 +32,37 @@ def hit(old):
     result["players"][1].update(hp_raw=28, hp=28, iframes=75, reaction=1, reaction_lock=1, action=17)
     result["p2_contact_counter"] = 1
     return result
+
+
+class ContactObservationTests(unittest.TestCase):
+    def client(self,phase=0,hp=0,strength=0,pointer=0,box=bytes.fromhex('f4ec1828')):
+        data=bytearray(diagnostic());data[0x100+0xE7]=5
+        pool=bytearray(subject.enemy.STRIDE*subject.enemy.SLOTS)
+        pool[:3]=bytes((0x41,1,1));pool[4]=phase;pool[0x5C]=hp;pool[0x60]=strength
+        struct.pack_into('<I',pool,0x10,subject.enemy.RECORD);struct.pack_into('<I',pool,0x50,pointer)
+        config=bytes(9)+b'\1'
+        values={subject.debug.DIAGNOSTIC_ADDRESS:bytes(data),subject.enemy.POOL:bytes(pool),
+            0x800CCF2F:config,subject.enemy.RECORD:bytes(8),0x80097202:bytes(6),0x800FAAE0:box}
+        class Client:
+            def read(self,address,count):
+                result=values[address]
+                if len(result)!=count:raise AssertionError('Unexpected observation span')
+                return result
+        return Client()
+
+    def test_zeroed_phase0_is_retained_pending_not_contact_evidence(self):
+        row=subject.observe_contact(self.client(),b'')
+        self.assertIsNone(row['instance']);self.assertEqual(row['pending_initialization']['phase'],0)
+        self.assertEqual(len(row['live_enemies']),1)
+
+    def test_initialized_authored_descriptor_remains_required(self):
+        row=subject.observe_contact(self.client(1,12,4,0x800FAAE0),b'')
+        self.assertIsNone(row['pending_initialization']);self.assertEqual(row['instance']['contact_box'],'f4ec1828')
+        for args in ((1,12,4,0),(0,12,0,0),(1,12,4,0x800FAAE4)):
+            with self.subTest(args=args),self.assertRaises(subject.debug.DebugError):
+                subject.observe_contact(self.client(*args),b'')
+        with self.assertRaises(subject.debug.DebugError):
+            subject.observe_contact(self.client(1,12,4,0x800FAAE0,b'\0'*4),b'')
 
 
 class NativeFieldTests(unittest.TestCase):

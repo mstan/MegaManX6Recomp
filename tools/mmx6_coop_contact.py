@@ -93,18 +93,24 @@ def observe_contact(client, zero_overlay: bytes) -> dict:
     players = [player_fields(data[0x1800:0x1958]), player_fields(data[0x100:0x258])]
     raw_pool = client.read(enemy.POOL, enemy.STRIDE * enemy.SLOTS)
     live, actor = enemy.parse_pool(raw_pool)
+    pending = None
     if actor:
         body = raw_pool[actor["slot"] * enemy.STRIDE:(actor["slot"] + 1) * enemy.STRIDE]
         pointer = struct.unpack_from("<I", body, 0x50)[0]
-        if pointer != 0x800FAAE0:
-            raise debug.DebugError("Record25 contact box is not the original authored descriptor")
-        box = client.read(pointer, 4)
-        if box.hex() != "f4ec1828":
-            raise debug.DebugError("Record25 authored contact rectangle changed")
-        actor.update(contact_class=body[0x62], contact_pointer=hex(pointer), contact_box=box.hex())
+        if actor['phase'] == 0 and pointer == 0 and actor['hp'] == 0 and actor['strength'] == 0:
+            # A newly allocated slot can be published before its first update.
+            # Retain it explicitly; it cannot establish contact attribution.
+            pending, actor = actor, None
+        else:
+            if pointer != 0x800FAAE0:
+                raise debug.DebugError("Record25 contact box is not the original authored descriptor")
+            box = client.read(pointer, 4)
+            if box.hex() != "f4ec1828":
+                raise debug.DebugError("Record25 authored contact rectangle changed")
+            actor.update(contact_class=body[0x62], contact_pointer=hex(pointer), contact_box=box.hex())
     config = client.read(0x800CCF2F, 10)  # PLAY+5F..68, shared parts and difficulty.
     damage, reaction = ordinary_damage(config[9], players[1]["armor"], players[1]["parts"], config[0])
-    return dict(observation=observed, players=players, instance=actor, live_enemies=live,
+    return dict(observation=observed, players=players, instance=actor, pending_initialization=pending, live_enemies=live,
         record=client.read(enemy.RECORD, 8).hex(),
         camera=list(struct.unpack("<h2xh", client.read(0x80097202, 6))),
         p2_contact_counter=struct.unpack_from("<I", data, 0x44)[0],

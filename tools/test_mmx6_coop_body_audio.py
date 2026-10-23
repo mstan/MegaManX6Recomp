@@ -37,6 +37,8 @@ class BodyAudioTests(unittest.TestCase):
         source,key=fixture();calls=[]
         private=private_voices();private['voices'][23].update(sample_bank=30,pending_bank=0,start=f"0x{key['addr']:05X}",
             pitch='0x0478',adsr_lo='0x80FF',adsr_hi='0x1FC0',vol_l='0x0000',vol_r='0x0000',env='0x0000',env_phase=3,mode=0)
+        for slot,row in enumerate(private['voices']):
+            row['owner_tag']=f"0x{subject.VOICE_OWNER if subject.VOICE_MASK&(1<<slot) else 0:016X}"
         class Observer(Bank):
             def __init__(self):super().__init__();self.events=[];self.cursor=0;self.count=0
             def fingerprint_banks(self):return [dict(bank=30,sha256='a'*64)]
@@ -73,6 +75,39 @@ class BodyAudioTests(unittest.TestCase):
         report,calls=self.run_case()
         self.assertLess(calls.index(('poll',4)),calls.index(('input',1,0)))
         self.assertEqual(report['accepted_windows'][0]['actual_native_ticks'],2)
+
+    def test_voice_leases_require_all_nine_slots_by_owner_even_with_same_bank(self):
+        reply=private_voices()
+        for slot,row in enumerate(reply['voices']):
+            row['owner_tag']=f"0x{subject.VOICE_OWNER if subject.VOICE_MASK&(1<<slot) else 0:016X}"
+        self.assertEqual(len(subject.voice_leases(reply)),24)
+        for slot,value in ((23,'0x0000000000000001'),(1,f'0x{subject.VOICE_OWNER:016X}'),(20,None)):
+            changed=copy.deepcopy(reply);changed['voices'][slot]['owner_tag']=value
+            with self.subTest(slot=slot),self.assertRaises(subject.audio.AudioQualificationError):subject.voice_leases(changed)
+
+    def test_general_vocal_needs_exact_call_bank_bytes_and_numeric_registers(self):
+        source,event=fixture();record=source['body_records'][0]
+        record.update(group=3,record=3,effective_bank_group=3);record['tones'][0].update(voice=20,offset=0)
+        event.update(v=44,sample_bank=31,addr=0)
+        call=dict(target='0x80016C48',a0='0x83',a1='0x103',a2='0x800970A0',frame=100)
+        class VocalBank:
+            private_banks=dict(banks=[dict(bank=31,bytes=52096)])
+            def bank_read(self,bank,address,count,size):
+                if bank!=31 or not 0<count<=4096 or size!=52096:raise AssertionError('Wrong source bank probe')
+                return dict(data=DATA[address:address+count])
+        result=subject.identify_character(VocalBank(),event,source,[call])
+        self.assertTrue(all(result['checks'].values()));self.assertEqual(result['record']['record'],3)
+        for changed in (dict(call,frame=101),dict(call,a2='0x8008EF48'),dict(call,a1='0x4')):
+            with self.assertRaises(subject.audio.AudioQualificationError):subject.identify_character(VocalBank(),event,source,[changed])
+        wrong=dict(event,pitch=1145)
+        self.assertFalse(subject.identify_character(VocalBank(),wrong,source,[call])['checks']['pitch_adsr_numeric'])
+
+    def test_general_vocal_record17_retains_effective_effects_bank(self):
+        source,event=fixture();record=source['body_records'][0]
+        record.update(group=3,record=17,effective_bank_group=1);record['tones'][0]['voice']=3
+        event['v']=27
+        call=dict(target='0x80016C48',a0='0x3',a1='0x11',a2='0x800970A0',frame=100)
+        self.assertTrue(all(subject.identify_character(Bank(),event,source,[call])['checks'].values()))
 
     def test_missing_native_action_stops_at_bound_and_clears_input(self):
         report,calls=self.run_case(never_accept=True)
