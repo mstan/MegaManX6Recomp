@@ -100,8 +100,10 @@ def prepare(recording: Path, candidate: Path, output: Path) -> dict:
             (output / f"replay/card{slot}.initial.mcd").write_bytes(card)
             (output / f"saves/card{slot}.mcd").write_bytes(card)
     trace_sha = hashlib.sha256(trace).hexdigest()
-    (output / "replay-profile.txt").write_text(
-        f"mmx6-native-replay-private-v1\n{identity['image_sha256']}\n{trace_sha}\n", encoding="ascii")
+    # This marker is a byte-level runtime contract. Text mode translates LF
+    # to CRLF on Windows, which must not alter the prepared wire bytes.
+    (output / "replay-profile.txt").write_bytes(
+        f"mmx6-native-replay-private-v1\n{identity['image_sha256']}\n{trace_sha}\n".encode("ascii"))
     environment = {
         "TEMP": str(output / "temp"), "TMP": str(output / "temp"),
         "LOCALAPPDATA": str(output / "data"), "APPDATA": str(output / "appdata"),

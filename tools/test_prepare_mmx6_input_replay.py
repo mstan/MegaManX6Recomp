@@ -59,7 +59,9 @@ class PreparationTests(unittest.TestCase):
         self.assertEqual((self.output / "keybinds.ini").read_bytes(), (self.candidate / "keybinds.ini").read_bytes())
         self.assertIn("--seal-interpreted-overlays", receipt["arguments"])
         self.assertEqual(receipt["arguments"][-1], "--no-launcher")
-        self.assertEqual((self.output / "replay-profile.txt").read_text().splitlines()[1], receipt["image_sha256"])
+        self.assertEqual((self.output / "replay-profile.txt").read_bytes(),
+                         ("mmx6-native-replay-private-v1\n" + receipt["image_sha256"] + "\n" +
+                          receipt["trace_sha256"] + "\n").encode("ascii"))
         for path in receipt["environment"].values():
             if path != "dummy":
                 self.assertTrue(Path(path).is_relative_to(self.output))
