@@ -120,7 +120,8 @@ P1's X must equal the authored checkpoint X exactly. Its Y must be the actual
 settled native Y inside the current camera/GPU viewport; the authored Y is the
 initial spawn and can change under native arrival/gravity. No guessed pixel
 tolerance is used. The actual primary-camera bounds must equal the selected
-record: maxX/minX/maxY/minY at camera `+1C/+1E/+20/+22`, current XY at `+0A/+0E`.
+record, except for the narrow original intro CP1 dynamic region described below:
+maxX/minX/maxY/minY at camera `+1C/+1E/+20/+22`, current XY at `+0A/+0E`.
 Both actors must lie inside that camera's actual reported display width/height
 and widescreen margin, with display enabled. Scripted entries that move X,
 moving supports or actors not reaching idle remain incomplete under this
@@ -191,3 +192,95 @@ Root's integration registers the C and Python fixtures. This completion fix
 changes only the Python predicate/tests and this document; no additional title
 build, native run, coverage or 234-row parity-ledger change accompanies it.
 A corrected actual entry and composed inspection remain required separately.
+
+## Intro CP1 native dynamic minimum Y
+
+This source audit pins the original USA v1.1 EXE SHA256
+`dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046`.
+The PS-X payload is `80010000..8008F000` (file offset `800`). The bounded
+intro BIN2 is archive descriptor 2, sector 36, size 74784, loaded at `800E9860`,
+SHA256 `d8bcf3aea6caf1dd4098b681ad912692835d726dfe16fddca779e82d894de607`.
+The complete archive SHA256 remains
+`55b03e4ecc13d6110ff300f80b7000b0f97234e19f1b846aa2b885eece30d80f`.
+No original executable/disc payload is distributed by this audit.
+
+The native closure is reproducible from those inputs:
+
+| Step | Original address and behavior |
+| --- | --- |
+| CP1 source | Stage0/section0 root `80073300` → table `80073134`, CP1 → record `8007212C`. Player spawn 2112/1072, camera1968/944, bounds minX1968/maxX5120/minY944/maxY944. |
+| Initializer | `80029B8C..80029D18`: `80029C64` writes record+14 to camera+22, and `80029C70` to camera+2A. Both start at944. |
+| Region placement | Intro primary root `8007349C` → `800FA214`; index9 at `800FA25C` is category3/type0/subtype7, position2128/1088. |
+| Handler | Loader `80013EE0..80013F08` indexes root `8006DE94` and publishes the selected pointer at scratchpad`1F80008C`. Intro root → BIN2 table `800FA6E0`, whose type0 word is `80052258`. Phase dispatch reads `800791E8`: phase0=`80052294`, phase1=`8005211C`. |
+| Region bind | `80052294..80052300` selects `80079D70[(stage*2+section)]`, masks subtype with7F and multiplies by16, stores its pointer at instance+18, then calls `8005211C`. Intro root=`800791F0`; subtype7 → `80079260`. |
+| Authored region | Eight unsigned halfwords at `80079260`: `[2112,2143,1040,1135,FFFF,FFFF,896,FFFF]`. They mean inclusive X/Y rectangle, followed by minX/maxX/minY/maxY targets. FFFF means retain that target. |
+| Target writer | `8005211C..80052258` rejects offscreen/retired context via `8002CAB4`, then tests resident P1 integer XY against that inclusive rectangle. Inside it sets camera+47=2. `800521F4` writes region+0C (=896) to camera+2A; the other targets remain unchanged. |
+| Camera update | `8002927C..8002935C` checks camera+44, player+CC, character/player+E0 gate, calls the native camera mode, then `80028EBC` at `80029340`. |
+| Native minY branch | `80029094..80029180`: equal current+22 and target+2A skip the write. When target is below cameraY, `80029104..80029128` computes signed16 `a1=P1.integerY-camera.integerY-camera[2C]`. At `8002912C`, nonnegative a1 branches directly to `8002917C`, `sh a1,22(a0)`. It does not add cameraY on that branch. |
+
+Consequently P1 Y1115, camera Y944 and camera+2C=96 produce current minY75
+while the authored target is896. The value is the original branch's arithmetic,
+not an arbitrary tolerance or a replacement engine coordinate. With those
+stable inputs the next native camera update stores the same value again.
+The unchanged-944 initializer alone cannot produce it: the equal-bounds branch
+does no minY store until a target changes.
+
+Root's retained first narrow writer trace
+`G:/Temp/Codex/psxrecomp/x6-parity/checkpoint-v12-e2e47e6-intro-cp1-camera-trace/qualification.json`
+has SHA256`be79a39bb6cef5821d838c841901d9ae39b1b78f01da69a8791b8a8a2960b179`. It
+contains the changed store at sequence35/frame2846: PC`8002917C`,
+RA`80029348`, width2, current minY`03B0→004B`, A0`800971F8`,
+A1`004B`, A2`0380`, T0`2`, T1`03B0`, V1`045B`, V0`004B0000`.
+The saved prefix contains only the oldest2048 of4629 available writes; it is
+not a complete trace. It identifies the current-bound writer and its native
+target896. The specific earlier target writer at `800521F4` remains a static
+source match until the separately owned target watch corroborates it.
+This audit does not claim that every possible writer/corruption path was ruled
+out, nor that native CP1 readiness or a composed image has passed.
+
+The helper now accepts that exact CP1 dynamic state only after read-only
+resident SHA256 checks cover the original smoother, wrapper, initializer,
+region routines, checkpoint/region/handler roots, placement and dispatch data.
+The policy also requires that P1 is inside the exact authored region, all
+other current and target bounds remain authored, target minY is the source
+record's896, current cameraXY stays authored, mode/active/visible fields are1,
+speed2, offset96, player blocking fields clear, and current minY is precisely
+the nonnegative signed native formula. A guessed value75, missing source
+evidence, partial camera read, changed target/code/table, other checkpoint or
+other camera state does not enable this exception. Other checkpoint readiness
+continues to use exact authored bounds.
+
+P1 and the full primary camera are read together as `800970A0+1AC` bytes.
+The old198-byte pure-codec input remains valid for the authored-bounds path,
+and cannot enable the dynamic policy. Static guards are cached per transaction
+only; the actual actor/camera/GPU and fresh completed publication are still
+checked for every readiness sample. The legacy receipt key
+`camera_inside_authored_bounds` means inside the verified native bounds on
+this narrow path. It does not disable camera containment. All existing living
+roster, source tuple, exact authored X, grounded/settled native body, completion,
+publication, viewport and display checks remain required. The command remains
+a tainted prerequisite bypass with ledger status unverified.
+
+Reproduce machine-readable source metadata without a game launch or writes:
+
+```powershell
+python tools/mmx6_coop_checkpoint.py --original <original-raw-BIN> --camera-audit
+```
+
+The output records full-source identities, bounded code/data span SHA256s,
+exact native IDs and PCs. It does not inspect unrelated disc members or change
+the immutable content inventory. Set `MMX6_CONTENT_EXE` and `MMX6_CONTENT_DISC`
+to the pinned read-only originals for the Python tests. The additional tests
+cover actual native branch decoding/table/placement reconstruction, resident
+guard drift, changed target/offset/mode/speed, missing guards, partial input,
+wrong tuple/region, different native-Y results, and preserved non-camera
+readiness failures. Synthetic positives test the rule only. No title build,
+game launch, ledger pass or checkpoint predicate adjustment beyond this exact
+source-derived dynamic path is evidence from this change.
+
+Validation of this source/predicate change: all26 tests in
+`python -m unittest discover -s tools -p test_mmx6_coop_checkpoint.py` pass with
+both original-input environment variables set; source-audit CLI reproduction
+and `git diff --check` pass. Native dynamic-policy validation remains unverified
+until an owned fresh target/current-bound trace, new full-camera readiness
+sample and completed composed capture are retained and reviewed.

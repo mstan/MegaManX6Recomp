@@ -1,6 +1,7 @@
 """Inventory/source guards and transaction failures; never native game proof."""
 import contextlib
 import io
+import copy
 import os
 from pathlib import Path
 import struct
@@ -28,13 +29,17 @@ def publication(state=0, *, generation=0, nonce=0, entries=0, reason=0):
 
 def settled_entry(tick=221):
     native=bytearray(0x1E);native[0]=10;native[0x1D]=1
-    player_camera=bytearray(0x198)
+    player_camera=bytearray(0x1AC)
     player_camera[0]=player_camera[3]=player_camera[4]=1;player_camera[5]=2
     player_camera[0x5C]=32;player_camera[0x70]=8
     for at in (8,0x18):struct.pack_into("<ii",player_camera,at,2112<<16,1115<<16)
     struct.pack_into("<h",player_camera,0x158+0xA,1968)
     struct.pack_into("<h",player_camera,0x158+0xE,944)
     struct.pack_into("<hhhh",player_camera,0x158+0x1C,5120,1968,944,944)
+    struct.pack_into("<hhhh",player_camera,0x158+0x24,5120,1968,944,944)
+    for at in (0,3,4,0x44):player_camera[0x158+at]=1
+    player_camera[0x158+0x47]=4
+    struct.pack_into("<h",player_camera,0x158+0x2C,96)
     row=dict(tick=tick,ready=1,enrolled=1,failed=0,mailbox=0,scene_owner=0,scene_phase=0,
         native_mode=10,native_phase=0,pause_owner=0,lifecycle=[0,0],players=[
             dict(active=1,character=0,state=1,action=2,hp=32,x_raw=2112<<16,y_raw=1115<<16),
@@ -102,8 +107,9 @@ class CheckpointTransactionTests(unittest.TestCase):
                     return b"\0"
                 if address == 0x800CCED0:
                     return native_entry[1]
-                if (address,count)==(0x800970A0,0x198):
+                if (address,count)==(0x800970A0,0x1AC):
                     return native_entry[2]
+                if address==checkpoint.CAMERA_SOURCE_SPANS[0][0]:return bytes(count)
                 raise AssertionError((address, count))
 
         def control(command, **fields):
@@ -190,11 +196,11 @@ class NativeEntryReadiness(unittest.TestCase):
         _,rows,sections=checkpoint.inventory(INVENTORY)
         self.target=checkpoint.select(rows,sections,0,0,1)
 
-    def reduce(self,row=None,native=None,actor_camera=None,gpu=None,anchor=220):
+    def reduce(self,row=None,native=None,actor_camera=None,gpu=None,anchor=220,source=None):
         actual=settled_entry()
         return checkpoint.reduce_entry_readiness(self.target,anchor,row or actual[0],
             native if native is not None else actual[1],
-            actor_camera if actor_camera is not None else actual[2],gpu if gpu is not None else actual[3])
+            actor_camera if actor_camera is not None else actual[2],gpu if gpu is not None else actual[3],source)
 
     def test_new_grounded_actor_and_selected_camera_qualify_readiness_not_spawn_y_tolerance(self):
         self.assertEqual(self.target["player"]["y"],1072)
@@ -243,6 +249,103 @@ class NativeEntryReadiness(unittest.TestCase):
             self.assertFalse(self.reduce(row=row)["enrolled_living_idle_roster"])
         gpu=settled_entry()[3];gpu["disabled"]=1
         self.assertFalse(self.reduce(gpu=gpu)["display_enabled"])
+
+
+def source_evidence():
+    return dict(verified=True,source_exe_sha256=checkpoint.content.EXE_SHA256,
+        spans=[dict(address=f"{a:08X}",size=n,sha256=h) for a,n,h in checkpoint.CAMERA_SOURCE_SPANS])
+
+
+class NativeDynamicCameraTests(unittest.TestCase):
+    setUp=NativeEntryReadiness.setUp
+    reduce=NativeEntryReadiness.reduce
+    def dynamic(self,py=1115):
+        row,native,raw,gpu=settled_entry();raw=bytearray(raw)
+        for at in (0xC,0x1C):struct.pack_into("<i",raw,at,py<<16)
+        row["players"][0]["y_raw"]=py<<16
+        struct.pack_into("<h",raw,0x158+0x22,py-944-96)
+        struct.pack_into("<h",raw,0x158+0x2A,896)
+        raw[0x158+0x47]=2
+        return row,native,raw,gpu
+
+    def test_source_derived_fixed_point_changes_with_native_y_not_magic75(self):
+        for py in (1040,1114,1115,1120):
+            row,native,raw,gpu=self.dynamic(py)
+            with self.subTest(py=py):
+                self.assertTrue(all(self.reduce(row,native,raw,gpu,source=source_evidence()).values()))
+                self.assertFalse(self.reduce(row,native,raw,gpu)["selected_camera_bounds"])
+
+    def test_wrong_branch_target_or_camera_state_is_rejected(self):
+        for offset,value,fmt in ((0x22,76,"h"),(0x2A,897,"h"),(0x2C,95,"h"),
+                (0x47,4,"B"),(0x44,0,"B"),(4,0,"B"),(0x26,1967,"h"),
+                (0x1C,5121,"h"),(0xE,943,"h")):
+            row,native,raw,gpu=self.dynamic()
+            struct.pack_into("<"+fmt,raw,0x158+offset,value)
+            with self.subTest(offset=offset):
+                self.assertFalse(self.reduce(row,native,raw,gpu,source=source_evidence())["selected_camera_bounds"])
+
+    def test_source_mismatch_other_tuple_partial_camera_and_outside_region_fail_closed(self):
+        row,native,raw,gpu=self.dynamic()
+        for key in ("verified","source_exe_sha256","spans"):
+            proof=source_evidence();proof[key]=None
+            self.assertFalse(self.reduce(row,native,raw,gpu,source=proof)["selected_camera_bounds"])
+        self.assertFalse(self.reduce(row,native,raw[:0x198],gpu,source=source_evidence())["selected_camera_bounds"])
+        wrong=copy.deepcopy(self.target);wrong["checkpoint"]=2
+        self.assertFalse(checkpoint.dynamic_cp1_camera(wrong,raw[:0x158],raw[0x158:],source_evidence()))
+        wrong=copy.deepcopy(self.target);wrong["camera"]["max_x"]+=1
+        self.assertFalse(checkpoint.dynamic_cp1_camera(wrong,raw[:0x158],raw[0x158:],source_evidence()))
+        struct.pack_into("<h",raw,0xA,2111)
+        self.assertFalse(self.reduce(row,native,raw,gpu,source=source_evidence())["selected_camera_bounds"])
+
+    def test_dynamic_camera_does_not_bypass_other_readiness_gates(self):
+        row,native,raw,gpu=self.dynamic();row["enrolled"]=0
+        checks=self.reduce(row,native,raw,gpu,source=source_evidence())
+        self.assertTrue(checks["selected_camera_bounds"])
+        self.assertFalse(all(checks.values()))
+        row["enrolled"]=1
+        self.assertFalse(all(self.reduce(row,native,raw,gpu,anchor=row["tick"],source=source_evidence()).values()))
+        gpu["disabled"]=1
+        self.assertFalse(all(self.reduce(row,native,raw,gpu,source=source_evidence()).values()))
+
+    def test_resident_short_changed_and_non_cp1_source_do_not_enable_policy(self):
+        class Reader:
+            def read(self,address,size):return bytes(size-1)
+        self.assertFalse(checkpoint.camera_source_evidence(Reader(),self.target)["verified"])
+        self.assertEqual(len(checkpoint.camera_source_evidence(Reader(),self.target)["spans"]),1)
+        wrong=copy.deepcopy(self.target);wrong["checkpoint"]=0
+        self.assertEqual(checkpoint.camera_source_evidence(Reader(),wrong)["spans"],[])
+
+    @unittest.skipUnless(os.environ.get("MMX6_CONTENT_DISC"),"Pinned original raw disc not supplied")
+    def test_original_selected_member_reproduces_closure_and_resident_guards(self):
+        disc=checkpoint.content.RawDisc(Path(os.environ["MMX6_CONTENT_DISC"]))
+        try:files=disc.inventory_files()
+        finally:disc.stream.close()
+        archive=files["ROCK_X6.BIN"]
+        self.assertEqual(checkpoint.content.sha256(archive),checkpoint.content.BIN_SHA256)
+        member=checkpoint.content.archive_members(archive)[2];start=member["sector"]*2048
+        intro=archive[start:start+member["size"]];exe=checkpoint.content.Executable(files["SLUS_013.95"])
+        audit=checkpoint.camera_source_audit(exe,intro)
+        self.assertEqual(audit["region"]["values"],list(checkpoint.CP1_REGION))
+        self.assertEqual(exe.word(0x800791E8),0x80052294)
+        self.assertEqual(exe.word(0x800791EC),0x8005211C)
+        self.assertEqual(exe.word(0x80079D70)+7*16,0x80079260)
+        self.assertEqual(struct.unpack_from("<4B2h",intro,0x800FA25C-0x800E9860),(0,0,7,3,2128,1088))
+        self.assertEqual(struct.unpack_from("<I",intro,0x800FA6E0-0x800E9860)[0],0x80052258)
+        # Actual original BGEZ a1 -> store, with a real delay-slot NOP.
+        branch=exe.word(0x8002912C)
+        self.assertEqual((branch>>26,(branch>>21)&31,(branch>>16)&31),(1,5,1))
+        self.assertEqual(0x80029130+((branch&0xFFFF)<<2),0x8002917C)
+        self.assertEqual(exe.word(0x8002917C),0xA4850022)
+        class Reader:
+            corrupt=False
+            def read(inner,address,size):
+                payload=(intro[address-0x800E9860:address-0x800E9860+size] if address>=0x800E9860 else
+                    exe.data[exe.offset(address,size):exe.offset(address,size)+size])
+                return (bytes([payload[0]^1])+payload[1:]) if inner.corrupt else payload
+        reader=Reader();self.assertTrue(checkpoint.camera_source_evidence(reader,self.target)["verified"])
+        reader.corrupt=True;self.assertFalse(checkpoint.camera_source_evidence(reader,self.target)["verified"])
+        broken=bytearray(intro);broken[0]^=1
+        with self.assertRaises(ValueError):checkpoint.camera_source_audit(exe,bytes(broken))
 
 
 class CheckpointOptions(unittest.TestCase):

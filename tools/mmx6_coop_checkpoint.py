@@ -16,6 +16,100 @@ SPANS = ((0x8001E6E4, 0x8001E730), (0x8001E914, 0x8001E9EC),
 CAPABILITY = 0x31504B43  # CKP1, little endian.
 INVENTORY_SHA256 = "67508ae2e19ad07c2c5cad41e12dbeb5e446e4eb50f033efa75ed306f2636fad"
 
+# Original bytes are read, never distributed. This narrowly scoped policy is
+# reproduced by camera_source_audit() and checked against resident RAM on entry.
+CAMERA_SOURCE_SPANS = (
+    (0x80028EBC, 0x3C0, "4089a81cde8dc3d2f2c93cb57f1ba278ae6551a9b5a4a72861600c776610ceca"),
+    (0x8002927C, 0xE0, "d9ed7c9aa57753adbcead391e60d469bf4c2f491556743b82c1ef014804e0ace"),
+    (0x800294B4, 0x84, "dbbe58ad96183f5246ae4ae8d9618e800cc07b889c992d6423e384fe0b828da8"),
+    (0x80029B8C, 0x18C, "d7935b9037f6b1df0020983af5feb7accfa5ff87357d7e1089563d7a70d6b058"),
+    (0x8005211C, 0x1E4, "7abab3ed7e47891f68c687a136683ce42d45e8a2d590b85016f2d193f4c7a240"),
+    (0x8006DE94, 4, "bc20286b0ffa86dfd8f5f773c6881b0d84c0933b723e9195643b46ed34bca8ab"),
+    (0x8007212C, 36, "7875f0a7e39a4fc9d563c87181b2d58a7e9b1281ac2db1f3d0bbddf7ce441a7c"),
+    (0x80073134, 8, "4ed372c528b16f3f21f32642046987fbc5ada461e6548e849613da0ee6c31aef"),
+    (0x80073300, 4, "c1b77b08a648d56869d3a8946ad9974de1f18338b543d19d285270c53fca58ea"),
+    (0x8007349C, 4, "6606ea3db93fc0dec5be3e8a8de19f58d67fb5e5f262141297edf13a81f1692e"),
+    (0x800791E8, 0x88, "a4e91ddfa0ac5997b1054ded8dba4dff98e83d1c4d805254f2c08c89bc52afbc"),
+    (0x80079D70, 4, "cf54956d97bf0d559e0e973225da06f72f041880658a52f88113dc26e7d2feaa"),
+    (0x800FA25C, 8, "f6cb35fe49b2007b256fccfef7d8787fb282a3784bff49d42eca907e904f61e3"),
+    (0x800FA6E0, 4, "b866e554ad4ec8f23cf7012ba8cbbf1d0b47e8089c8b0a94c6023e93c88908de"),
+)
+INTRO_MEMBER_SHA256 = "d8bcf3aea6caf1dd4098b681ad912692835d726dfe16fddca779e82d894de607"
+CP1_REGION = (2112, 2143, 1040, 1135, 0xFFFF, 0xFFFF, 896, 0xFFFF)
+
+
+def camera_source_audit(exe: content.Executable, intro: bytes) -> dict:
+    """Reproduce only the original EXE and selected BIN2 camera closure."""
+    if hashlib.sha256(exe.data).hexdigest() != content.EXE_SHA256 or \
+            hashlib.sha256(intro).hexdigest() != INTRO_MEMBER_SHA256:
+        raise ValueError("Camera audit needs the pinned original EXE and intro BIN2")
+    spans = []
+    for address, size, expected in CAMERA_SOURCE_SPANS:
+        payload = (exe.data[exe.offset(address, size):exe.offset(address, size)+size]
+                   if address < 0x800E9860 else intro[address-0x800E9860:address-0x800E9860+size])
+        actual = hashlib.sha256(payload).hexdigest()
+        if len(payload) != size or actual != expected:
+            raise ValueError(f"Camera source span differs at {address:08X}")
+        spans.append(dict(address=f"{address:08X}", size=size, sha256=actual))
+    if struct.unpack_from("<8H", exe.data, exe.offset(0x80079260, 16)) != CP1_REGION:
+        raise ValueError("Original CP1 dynamic region differs")
+    return dict(source_exe_sha256=content.EXE_SHA256, intro_member_sha256=INTRO_MEMBER_SHA256,
+        scope=dict(stage=0, section=0, checkpoint=1, record="8007212C"),
+        spans=spans, placement=dict(address="800FA25C", index=9, category=3, type=0, subtype=7),
+        region=dict(address="80079260", values=list(CP1_REGION)),
+        native_dispatch=dict(stage_root="8006DE94", intro_type_table="800FA6E0", handler="80052258",
+            phase_table="800791E8", initializer="80052294", update="8005211C",
+            region_root="80079D70", intro_regions="800791F0", binding_offset="18"),
+        current_min_y_store="8002917C", target_min_y_store="800521F4",
+        fixed_point=dict(expression="signed16(P1.integerY-CAM.integerY-CAM.signedHalfword2C)",
+            branch="8002912C BGEZ a1 directly to 8002917C", prerequisite="nonnegative result and targetMinY<cameraY"),
+        status="source_audit_only_native_qualification_pending")
+
+
+def camera_source_evidence(client, target: dict) -> dict:
+    """Read-only resident closure guards; a mismatch keeps authored-only policy."""
+    evidence = dict(verified=False, source_exe_sha256=content.EXE_SHA256, spans=[])
+    if (target.get("stage"), target.get("section"), target.get("checkpoint"), target.get("record")) != \
+            (0, 0, 1, "8007212C"):
+        return evidence
+    for address, size, expected in CAMERA_SOURCE_SPANS:
+        payload = client.read(address, size)
+        actual = hashlib.sha256(payload).hexdigest()
+        evidence["spans"].append(dict(address=f"{address:08X}", size=len(payload), sha256=actual))
+        if len(payload) != size or actual != expected:
+            return evidence
+    evidence["verified"] = True
+    return evidence
+
+
+def dynamic_cp1_camera(target: dict, body: bytes, camera: bytes, evidence: dict | None) -> bool:
+    """Exact original region plus nonnegative smoother branch fixed point.
+
+    8002912C branches directly to SH A1,22(A0) with signed16
+    A1=PLAYER.integerY-CAM.integerY-CAM[2C]. Do not repair that native formula.
+    """
+    if not evidence or evidence.get("verified") is not True or \
+            evidence.get("source_exe_sha256") != content.EXE_SHA256 or \
+            evidence.get("spans") != [dict(address=f"{a:08X}", size=n, sha256=h)
+                                      for a,n,h in CAMERA_SOURCE_SPANS] or \
+            (target.get("stage"), target.get("section"), target.get("checkpoint"), target.get("record")) != \
+            (0, 0, 1, "8007212C") or len(camera) != 0x54 or \
+            target.get("camera") != dict(x=1968,y=944,min_x=1968,max_x=5120,min_y=944,max_y=944):
+        return False
+    px, py = struct.unpack_from("<h", body, 0xA)[0], struct.unpack_from("<h", body, 0xE)[0]
+    x, y = struct.unpack_from("<h", camera, 0xA)[0], struct.unpack_from("<h", camera, 0xE)[0]
+    max_x,min_x,max_y,min_y = struct.unpack_from("<4h", camera, 0x1C)
+    target_max_x,target_min_x,target_max_y,target_min_y = struct.unpack_from("<4h", camera, 0x24)
+    offset = struct.unpack_from("<h", camera, 0x2C)[0]
+    expected = ((py-y-offset+0x8000)&0xFFFF)-0x8000
+    authored=target["camera"]
+    return (CP1_REGION[0] <= px <= CP1_REGION[1] and CP1_REGION[2] <= py <= CP1_REGION[3] and
+        (min_x,max_x,max_y)==(authored["min_x"],authored["max_x"],authored["max_y"]) and
+        (target_min_x,target_max_x,target_max_y)==(authored["min_x"],authored["max_x"],authored["max_y"]) and
+        target_min_y==CP1_REGION[6] and target_min_y<y and expected>=0 and min_y==expected and
+        abs(target_min_y-min_y)>2 and offset==0x60 and camera[0]==camera[3]==camera[4]==camera[0x44]==1 and
+        camera[0x47]==2 and not body[0xCC] and not body[0xE0] and (x,y)==(authored["x"],authored["y"]))
+
 
 def fnv32(data: bytes) -> int:
     value = 2166136261
@@ -116,10 +210,13 @@ def fixture_status(client) -> dict:
 
 
 def reduce_entry_readiness(target: dict, completed_tick: int, current: dict,
-                           native_play: bytes, native_player_camera: bytes, gpu: dict) -> dict:
+                           native_play: bytes, native_player_camera: bytes, gpu: dict,
+                           camera_source: dict | None = None) -> dict:
     """Source-bound settled entry, not merely mode0A plus a cached publication.
 
-    29B8C installs exact spawn X/Y and camera bounds. Native arrival/gravity may
+    29B8C installs exact spawn X/Y and camera bounds. Guarded intro CP1 also has
+    an authored native region changing minY through the original signed branch.
+    Native arrival/gravity may
     change Y before control returns, so Y uses actual stable grounded position
     inside the actual camera/GPU viewport, never a guessed spawn-Y tolerance.
     The exact authored-X contract is conservative for scripted moving entries.
@@ -129,7 +226,7 @@ def reduce_entry_readiness(target: dict, completed_tick: int, current: dict,
         native_previous_position_settled=False,native_p1_agrees_with_publication=False,
         p1_at_authored_x=False,selected_camera_bounds=False,camera_inside_authored_bounds=False,
         actors_in_current_native_viewport=False,display_enabled=False)
-    if len(native_play)!=0x1E or len(native_player_camera)!=0x198:
+    if len(native_play)!=0x1E or len(native_player_camera) not in (0x198,0x1AC):
         return checks
     try:
         delta=(current["tick"]-completed_tick)&0xFFFFFFFF
@@ -155,8 +252,11 @@ def reduce_entry_readiness(target: dict, completed_tick: int, current: dict,
         x,y=struct.unpack_from("<h",camera,0x0A)[0],struct.unpack_from("<h",camera,0x0E)[0]
         max_x,min_x,max_y,min_y=struct.unpack_from("<hhhh",camera,0x1C)
         authored=target["camera"]
-        checks["selected_camera_bounds"]=(min_x,max_x,min_y,max_y)==\
-            (authored["min_x"],authored["max_x"],authored["min_y"],authored["max_y"])
+        checks["selected_camera_bounds"]=((min_x,max_x,min_y,max_y)==
+            (authored["min_x"],authored["max_x"],authored["min_y"],authored["max_y"]) or
+            dynamic_cp1_camera(target,body,camera,camera_source))
+        # Legacy receipt key retained: these are now the verified native bounds,
+        # either authored directly or the exact guarded original CP1 branch.
         checks["camera_inside_authored_bounds"]=min_x<=x<=max_x and min_y<=y<=max_y
         width,height=gpu.get("width"),gpu.get("height")
         margin=gpu.get("ws",{}).get("x_margin")
@@ -238,10 +338,13 @@ def enter_checkpoint(control, client, target: dict, receipt: dict, *, timeout=60
                     receipt["completion_anchor"]=dict(fixture=observed,publication=current.json())
                 probe=dict(publication=current.json(),native_play=native.hex(),readiness_computed=False)
                 receipt["completion_waiting"].append(probe)
-                actual=client.read(0x800970A0,0x198)  # P1 + primary camera in ONE native read.
+                if "camera_source_evidence" not in receipt:
+                    receipt["camera_source_evidence"]=camera_source_evidence(client,target)
+                actual=client.read(0x800970A0,0x1AC)  # P1 + entire primary camera in ONE native read.
                 probe["native_player_camera"]=actual.hex()
                 gpu=control("gpu_state")
-                checks=reduce_entry_readiness(target,completed_tick,current.json(),native,actual,gpu)
+                checks=reduce_entry_readiness(target,completed_tick,current.json(),native,actual,gpu,
+                    receipt["camera_source_evidence"])
                 probe.update(gpu_state=gpu,checks=checks,readiness_computed=True)
                 receipt["checks"].update(checks)
                 if all(checks.values()):
@@ -256,10 +359,30 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--original", type=Path, required=True)
-    parser.add_argument("--inventory", type=Path, required=True)
-    parser.add_argument("--header", type=Path, required=True)
+    parser.add_argument("--inventory", type=Path)
+    parser.add_argument("--header", type=Path)
+    parser.add_argument("--camera-audit", action="store_true",
+                        help="Print source-only JSON from original raw BIN, without writing files")
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
+    if args.camera_audit:
+        if args.original.suffix.lower()!=".bin":
+            parser.error("Camera audit requires the original raw BIN containing EXE and selected intro member")
+        disc=content.RawDisc(args.original)
+        try:
+            files=disc.inventory_files()
+        finally:
+            disc.stream.close()
+        archive=files["ROCK_X6.BIN"]
+        if hashlib.sha256(archive).hexdigest()!=content.BIN_SHA256:
+            parser.error("Camera audit original archive identity differs")
+        member=content.archive_members(archive)[2]
+        start=member["sector"]*2048
+        print(json.dumps(camera_source_audit(content.Executable(files["SLUS_013.95"]),
+            archive[start:start+member["size"]]),indent=2))
+        raise SystemExit(0)
+    if args.inventory is None or args.header is None:
+        parser.error("Header reproduction requires --inventory and --header")
     rendered = render_header(args.inventory, original_executable(args.original))
     if args.check:
         if args.header.read_text(encoding="utf-8") != rendered:
