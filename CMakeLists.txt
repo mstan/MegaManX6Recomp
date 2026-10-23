@@ -219,6 +219,34 @@ if(BUILD_TESTING)
         add_test(NAME ${_mmx6_diag_target} COMMAND "$<TARGET_FILE:${_mmx6_diag_target}>")
     endforeach()
 
+    # These tests require the modern host-state API. Legacy SDK builds retain
+    # the disabled snapshot/network-state capability and remain buildable.
+    if(EXISTS "${PSXRECOMP_V4_ROOT}/runtime/include/mod_snapshot.h")
+        foreach(_mmx6_state_variant debug production)
+            set(_mmx6_state_target mmx6_coop_snapshot_${_mmx6_state_variant}_test)
+            add_executable(${_mmx6_state_target} tests/test_mmx6_coop_snapshot.c
+                src/mods/mmx6_coop_lifecycle.c src/mods/mmx6_coop_assets.c
+                "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c")
+            target_include_directories(${_mmx6_state_target} PRIVATE src/mods
+                "${PSXRECOMP_V4_ROOT}/runtime/include")
+            if(_mmx6_state_variant STREQUAL "production")
+                target_compile_definitions(${_mmx6_state_target} PRIVATE PSX_NO_DEBUG_TOOLS)
+            endif()
+            if(MSVC)
+                target_compile_options(${_mmx6_state_target} PRIVATE /O2 /Gy /Gw)
+                target_link_options(${_mmx6_state_target} PRIVATE /OPT:REF)
+            else()
+                target_compile_options(${_mmx6_state_target} PRIVATE -O2 -ffunction-sections -fdata-sections)
+                if(APPLE)
+                    target_link_options(${_mmx6_state_target} PRIVATE -Wl,-dead_strip)
+                else()
+                    target_link_options(${_mmx6_state_target} PRIVATE -Wl,--gc-sections)
+                endif()
+            endif()
+            add_test(NAME ${_mmx6_state_target} COMMAND "$<TARGET_FILE:${_mmx6_state_target}>")
+        endforeach()
+    endif()
+
     add_executable(mmx6_tweaks_hooks_test
         tests/test_mmx6_tweaks_hooks.cpp
         src/mods/mmx6_tweaks_hooks_resolver.cpp

@@ -6,12 +6,20 @@
  */
 #include "mod_plugins.h"
 #include "mod_netplay.h"
+#if defined(__has_include)
+#if __has_include("mod_snapshot.h")
+#define MMX6_COOP_MODERN_STATE 1
+#include "mod_snapshot.h"
+#include "psx_sha256.h"
+#endif
+#endif
 #include "cpu_state.h"
 #include "sio.h"
 #include "gpu.h"
 #include "mmx6_coop_assets.h"
 #include "mmx6_coop_lifecycle.h"
 #include "mmx6_coop_sprite_packet.h"
+#include "mmx6_coop_pixel_codec.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -30,7 +38,13 @@ typedef struct {
     uint8_t trails[0x120];
     uint8_t effects[0xF0];
 } PlayerContext;
-typedef struct { uint32_t source; uint16_t id, tile; uint8_t colors[32]; } SpriteBank;
+typedef struct {
+    uint32_t source;
+    uint16_t id,tile;
+    uint8_t colors[32];
+    uint32_t pixel_bytes;
+    uint8_t *pixels; /* Canonical immutable encoded pixels; never serialize this pointer. */
+} SpriteBank;
 static PlayerContext p2, p1;
 static uint8_t saved_overlay[OVERLAY_SIZE], zero_overlay[OVERLAY_SIZE];
 static uint8_t saved_play[0xE0], saved_camera[0x100];
@@ -81,6 +95,12 @@ static uint8_t scene_body[0x158];
 static int32_t scene_y;
 static int scene_call, zero_projected;
 static int unit_choices_call;
+#include "mmx6_coop_state_track.h"
+#ifdef MMX6_COOP_MODERN_STATE
+static uint8_t snapshot_asset_sha[32];
+static int snapshot_asset_valid;
+static void snapshot_assets_loaded(const Mmx6AssetView *views,unsigned count);
+#endif
 
 static int scene_passenger(unsigned seat) { return scene_phase && scene_owner!=seat+1; }
 
@@ -122,18 +142,25 @@ static void code_bank(const uint8_t *p) {
 static uint32_t guest(CPUState *cpu, uint32_t address, uint32_t a0, uint32_t a1) {
     /* Preserve the caller's architectural registers, not elapsed guest time.
      * Dispatch handles nested calls, interrupts and compiled/interpreted code. */
-    uint32_t regs[32], data[32], ctrl[32];
-    uint32_t pc=cpu->pc, hi=cpu->hi, lo=cpu->lo;
-    memcpy(regs,cpu->gpr,sizeof regs);
-    memcpy(data,cpu->gte_data,sizeof data);
-    memcpy(ctrl,cpu->gte_ctrl,sizeof ctrl);
+    uint32_t saved[102];
+    memcpy(saved,cpu->gpr,32*4);
+    memcpy(saved+32,cpu->gte_data,32*4);
+    memcpy(saved+64,cpu->gte_ctrl,32*4);
+    saved[96]=cpu->pc;saved[97]=cpu->hi;saved[98]=cpu->lo;
+    saved[99]=address;saved[100]=a0;saved[101]=a1;
+    STATE_WORDS(frame,1,saved,102);
+    if (!mmx6_state_can_call()) {
+        if(!failed)fprintf(stderr,"mmx6 co-op: invalid host callback stack; reactivation required\n");
+        failed=1;STATE_POP(frame);return 0;
+    }
     cpu->pc=0; cpu->gpr[4]=a0; cpu->gpr[5]=a1;
-    psx_dispatch_call(cpu,address,regs[31]);
+    psx_dispatch_call(cpu,address,saved[31]);
     uint32_t result=cpu->gpr[2];
-    memcpy(cpu->gpr,regs,sizeof regs);
-    memcpy(cpu->gte_data,data,sizeof data);
-    memcpy(cpu->gte_ctrl,ctrl,sizeof ctrl);
-    cpu->pc=pc; cpu->hi=hi; cpu->lo=lo;
+    memcpy(cpu->gpr,saved,32*4);
+    memcpy(cpu->gte_data,saved+32,32*4);
+    memcpy(cpu->gte_ctrl,saved+64,32*4);
+    cpu->pc=saved[96]; cpu->hi=saved[97]; cpu->lo=saved[98];
+    STATE_POP(frame);
     return result;
 }
 
@@ -238,6 +265,11 @@ static int load_assets(void) {
         !ui_upload(&icons) || !ui_upload(&menu_gfx) || !ui_upload(&menu_font)) {
         free(file); return 0;
     }
+#ifdef MMX6_COOP_MODERN_STATE
+    const Mmx6AssetView sources[]={graphics,sprites,palette,menu_gfx,menu_font,menu_colors,
+        menu_layout,portrait,portrait_colors,common,icons};
+    snapshot_assets_loaded(sources,sizeof sources/sizeof sources[0]);
+#endif
     free(file);
     fprintf(stdout,"mmx6 co-op: Zero resources loaded; status/input at %08X\n",diagnostic);
     fflush(stdout);
@@ -302,8 +334,13 @@ static uint32_t pickup_as_seat(CPUState *cpu, uint32_t address, uint32_t actor, 
     if (seat==resident) return guest(cpu,address,actor,0);
     uint8_t body[sizeof p2.body], character=psx_mod_read_byte(PLAY+0x38);
     uint8_t armor=psx_mod_read_byte(PLAY+0x5E);
+    uint8_t identity[2]={character,armor};
     uint8_t *other=seat?p2.body:p1.body;
     capture(PLAYER,body,sizeof body);
+    STATE_BYTES(restore_body,2,body,sizeof body);
+    STATE_BYTES(restore_identity,3,identity,sizeof identity);
+    uint32_t selection[3]={address,actor,seat};
+    STATE_WORDS(restore_selection,27,selection,3);
     project(PLAYER,other,sizeof body);
     psx_mod_write_byte(PLAY+0x38,seat?1:saved_play[0x38]);
     psx_mod_write_byte(PLAY+0x5E,seat?5:saved_play[0x5E]);
@@ -312,6 +349,7 @@ static uint32_t pickup_as_seat(CPUState *cpu, uint32_t address, uint32_t actor, 
     project(PLAYER,body,sizeof body);
     psx_mod_write_byte(PLAY+0x38,character);
     psx_mod_write_byte(PLAY+0x5E,armor);
+    STATE_POP(restore_selection);STATE_POP(restore_identity);STATE_POP(restore_body);
     return result;
 }
 static int pickup_collect(CPUState *cpu, uint32_t address) {
@@ -322,7 +360,10 @@ static int pickup_collect(CPUState *cpu, uint32_t address) {
      * Native overlap, item effects and capacity handling remain unchanged. */
     for (unsigned seat=0;seat<2;++seat) {
         if (life.status[seat]!=MMX6_COOP_ALIVE || scene_passenger(seat)) continue;
+        uint32_t context[3]={address,actor,seat};
+        STATE_WORDS(restore_collector,30,context,3);
         result=pickup_as_seat(cpu,address,actor,seat);
+        STATE_POP(restore_collector);
         unsigned mode=psx_mod_read_byte(actor+4);
         if (mode==1) continue;
         if (mode==2) {
@@ -345,7 +386,9 @@ static int pickup_tick(CPUState *cpu, uint32_t address) {
     for (unsigned i=0;i<128;++i) if (pickup_owners[i].actor==actor) {
         if (psx_mod_read_byte(actor+4)!=2) { pickup_owners[i].actor=0; return 0; }
         pickup_call=1;
+        uint32_t context[2]={actor,i};STATE_WORDS(restore_collector,31,context,2);
         cpu->gpr[2]=pickup_as_seat(cpu,address,actor,pickup_owners[i].seat);
+        STATE_POP(restore_collector);
         pickup_call=0;
         if (psx_mod_read_byte(actor+4)!=2) pickup_owners[i].actor=0;
         return 1;
@@ -356,9 +399,11 @@ static uint32_t pickup_overlap(CPUState *cpu, uint32_t actor, unsigned seat) {
     if (seat==(unsigned)(zero_world?1:0)) return guest(cpu,0x8002DCF4,actor,PLAYER);
     uint8_t body[sizeof p2.body];
     capture(PLAYER,body,sizeof body);
+    STATE_BYTES(restore_body,4,body,sizeof body);
     project(PLAYER,seat?p2.body:p1.body,sizeof body);
     uint32_t result=guest(cpu,0x8002DCF4,actor,PLAYER);
     project(PLAYER,body,sizeof body);
+    STATE_POP(restore_body);
     return result;
 }
 static int nightmare_soul(CPUState *cpu, uint32_t address) {
@@ -368,21 +413,26 @@ static int nightmare_soul(CPUState *cpu, uint32_t address) {
     pickup_call=1;
     unsigned seat=zero_world?1:0;
     uint32_t box=psx_mod_read_word(actor+0x68);
+    uint32_t context[5]={address,actor,box,seat,0};STATE_WORDS(restore_soul,32,context,5);
     psx_mod_write_word(actor+0x68,0x80075EE0); /* Native collectible soul box. */
     for (unsigned candidate=0;candidate<2;++candidate) {
+        context[4]=candidate;STATE_UPDATE(restore_soul,context);
         if (life.status[candidate]==MMX6_COOP_ALIVE && !scene_passenger(candidate) &&
             pickup_overlap(cpu,actor,candidate)) { seat=candidate; break; }
     }
     psx_mod_write_word(actor+0x68,box);
+    context[3]=seat;context[4]=2;STATE_UPDATE(restore_soul,context);
     /* Run this entity once. The original routine selects PLAY+D2/D4 from
      * the collector's character, retaining native soul values and rank data. */
     cpu->gpr[2]=pickup_as_seat(cpu,address,actor,seat);
+    STATE_POP(restore_soul);
     pickup_call=0;
     return 1;
 }
 static void begin_join(CPUState *cpu, uint32_t x, uint32_t y);
 static void enroll(CPUState *cpu) {
     uint32_t x=psx_mod_read_word(PLAYER+8), y=psx_mod_read_word(PLAYER+12);
+    uint32_t origin[2]={x,y};STATE_WORDS(restore_origin,33,origin,2);
     memset(&p2,0,sizeof p2);
     enter_zero();
     psx_mod_write_byte(PLAY+0x1E,0);
@@ -403,6 +453,7 @@ static void enroll(CPUState *cpu) {
      * voluntary return. This also covers new stages and checkpoint retries. */
     p2_hud_fade=0;
     begin_join(cpu,x+(24u<<16),y);
+    STATE_POP(restore_origin);
     fprintf(stdout,"mmx6 co-op: Zero enrolled at (%u,%u)\n",x>>16,y>>16);
     fflush(stdout);
 }
@@ -427,11 +478,13 @@ static int camera_target(CPUState *cpu, uint32_t address) {
     if (inside || failed || !shared_camera()) return 0;
     unsigned axis=address==0x80029598u?8:12;
     uint32_t original=psx_mod_read_word(PLAYER+axis);
+    STATE_WORDS(restore_axis,5,&original,1);
     int64_t midpoint=((int64_t)(int32_t)original+(int32_t)le32(p2.body+axis))/2;
     inside=1;
     psx_mod_write_word(PLAYER+axis,(uint32_t)midpoint);
     uint32_t result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
     psx_mod_write_word(PLAYER+axis,original);
+    STATE_POP(restore_axis);
     cpu->gpr[2]=result;
     inside=0;
     return 1;
@@ -508,7 +561,9 @@ static void join_animation(CPUState *cpu) {
         int32_t y=(int32_t)psx_mod_read_word(PLAYER+12)+8*65536;
         if (y>=join_y) {
             y=join_y;
+            STATE_WORDS(restore_y,34,&y,1);
             guest(cpu,0x8003BA04,PLAYER,2); /* Native beam resolves into Zero. */
+            STATE_POP(restore_y);
             join_phase=2;
         }
         psx_mod_write_word(PLAYER+12,(uint32_t)y);
@@ -653,6 +708,7 @@ static int door_begin(CPUState *cpu, uint32_t address) {
     uint32_t actor=cpu->gpr[4];
     scene_call=1;
     unsigned seat=0;
+    uint32_t context[4]={address,actor,seat,0};STATE_WORDS(restore_door,35,context,4);
     uint32_t hit=life.status[0]==MMX6_COOP_ALIVE?guest(cpu,0x80050C88,actor,0):0;
     if (!hit && life.status[1]==MMX6_COOP_ALIVE) {
         inside=1;
@@ -664,11 +720,13 @@ static int door_begin(CPUState *cpu, uint32_t address) {
     }
     /* Probe only the pure native overlap test. Door AI, effects and room
      * changes still execute once, under the touching player's context. */
+    context[2]=seat;context[3]=hit;STATE_UPDATE(restore_door,context);
     if (seat) { inside=1; enter_zero(); }
     uint32_t result=guest(cpu,address,actor,cpu->gpr[5]);
     if (hit && psx_mod_read_byte(PLAYER+0xD4)) scene_begin(seat,address);
     if (seat) { leave_zero_context(1); inside=0; }
     scene_call=0;
+    STATE_POP(restore_door);
     cpu->gpr[2]=result;
     return 1;
 }
@@ -694,11 +752,14 @@ static int interaction_begin(CPUState *cpu, uint32_t address) {
     int optional=address==0x80052F64 && (psx_mod_read_byte(actor+2)&0xF0);
     unsigned seat=second && (!first || (optional && (p2_edges&0x100) &&
         !(psx_mod_read_half(0x800C4570)&0x100)));
+    uint32_t context[3]={address,actor,seat};STATE_WORDS(restore_context,36,context,3);
     scene_call=1;
     uint8_t input[6];
+    unsigned restore_input=UINT32_MAX;
     if (seat) {
         inside=1;
         capture(0x800C456C,input,sizeof input);
+        restore_input=mmx6_state_push(6,input,sizeof input,0);
         enter_zero();
         uint16_t raw=p2_input(); raw=(uint16_t)((raw<<8)|(raw>>8));
         psx_mod_write_half(0x800C456C,raw);
@@ -710,9 +771,11 @@ static int interaction_begin(CPUState *cpu, uint32_t address) {
     if (seat) {
         leave_zero_context(1);
         project(0x800C456C,input,sizeof input);
+        STATE_POP(restore_input);
         inside=0;
     }
     scene_call=0;
+    STATE_POP(restore_context);
     cpu->gpr[2]=result;
     return 1;
 }
@@ -733,12 +796,15 @@ static void scene_tick(CPUState *cpu) {
          * native gameplay is now frozen for the other player's dialogue. */
         if (!seat && life.status[1]==MMX6_COOP_LEAVING) {
             int prior_inside=inside;
+            uint32_t context[2]={(uint32_t)prior_inside,(uint32_t)locked};
+            STATE_WORDS(restore_short_scene,37,context,2);
             inside=1;
             enter_zero();
             guest(cpu,0x8003674C,PLAYER,0);
             leave_zero();
             inside=prior_inside;
             if (p2.body[4]==3) mmx6_coop_teleport_done(&life);
+            STATE_POP(restore_short_scene);
         }
         if (!locked) scene_owner=0;
         return;
@@ -754,6 +820,11 @@ static void scene_tick(CPUState *cpu) {
     uint8_t play[sizeof saved_play], camera[sizeof saved_camera];
     capture(PLAY,play,sizeof play);
     capture(0x800971F8,camera,sizeof camera);
+    STATE_BYTES(restore_play,7,play,sizeof play);
+    STATE_BYTES(restore_camera,8,camera,sizeof camera);
+    STATE_BYTES(restore_owner,9,owner,sizeof owner);
+    uint32_t scene_context[5]={seat,passenger,(uint32_t)locked,(uint32_t)landing,(uint32_t)prior_inside};
+    STATE_WORDS(restore_context,28,scene_context,5);
     if (passenger) enter_zero();
     if (scene_phase==1) {
         if (passenger && life.status[1]==MMX6_COOP_JOINING) {
@@ -802,7 +873,9 @@ static void scene_tick(CPUState *cpu) {
             int32_t y=(int32_t)psx_mod_read_word(PLAYER+12)+8*65536;
             if (y>=scene_y) {
                 y=scene_y;
+                STATE_WORDS(restore_y,38,&y,1);
                 guest(cpu,0x8003BA04,PLAYER,2);
+                STATE_POP(restore_y);
                 scene_phase=5;
             }
             psx_mod_write_word(PLAYER+12,(uint32_t)y);
@@ -817,6 +890,7 @@ static void scene_tick(CPUState *cpu) {
     if (passenger) leave_zero();
     project(PLAY,play,sizeof play);
     project(0x800971F8,camera,sizeof camera);
+    STATE_POP(restore_context);STATE_POP(restore_owner);STATE_POP(restore_camera);STATE_POP(restore_play);
     inside=prior_inside;
     scene_call=0;
 }
@@ -887,6 +961,7 @@ static void route_p2_input(uint16_t raw) {
 }
 static void menu_vram(CPUState *cpu, int zero) {
     if (zero==zero_menu_loaded) return;
+    STATE_WORDS(restore_owner,39,&zero,1);
     /* These are the original PL00 menu/font upload pages, from native loader
      * table 8006E2EC (types 7/1), plus its 8006D9D4 menu palette rectangle.
      * Only one pause menu is visible, so preserve the exact resident X pages
@@ -926,11 +1001,13 @@ static void menu_vram(CPUState *cpu, int zero) {
             gpu_write_gp0(psx_mod_read_word(source+p));
     }
     zero_menu_loaded=zero;
+    STATE_POP(restore_owner);
 }
 static int player_tick(CPUState *cpu, uint32_t address) {
     if (inside || player_call || !enrolled || failed) return 0;
     uint8_t freeze[11];
     capture(PLAY+0x12,freeze,sizeof freeze);
+    STATE_BYTES(restore_freeze,10,freeze,sizeof freeze);
     player_call=1;
     uint32_t result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
     player_call=0;
@@ -939,6 +1016,7 @@ static int player_tick(CPUState *cpu, uint32_t address) {
         if (mmx6_coop_living(&life,1)) project(PLAY+0x12,freeze,sizeof freeze);
         if (psx_mod_read_byte(PLAYER+4)==3) life.status[0]=MMX6_COOP_FALLEN;
     }
+    STATE_POP(restore_freeze);
     cpu->gpr[2]=result;
     return 1;
 }
@@ -949,6 +1027,8 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     int start=!!(raw&8), pressed=start&&!p2_start_previous;
     unsigned phase=psx_mod_read_byte(PLAY+1);
     p2_start_previous=start;
+    uint32_t stage_context[4]={raw,phase,0,0};
+    STATE_WORDS(restore_stage,29,stage_context,4);
     /* Menus can bypass controller entirely. Consume their Select samples so
      * a held UI press cannot become a new rejoin edge on gameplay resume. */
     if (phase || scene_owner || psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C))
@@ -970,14 +1050,17 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     int survivor=(!life.wipe || life.wipe==2) &&
         (life.status[0]==MMX6_COOP_DYING || life.status[0]==MMX6_COOP_FALLEN) &&
         life.status[1]!=MMX6_COOP_ABSENT && (life.wipe || life.status[1]!=MMX6_COOP_FALLEN);
+    stage_context[3]=(uint32_t)survivor;STATE_UPDATE(restore_stage,stage_context);
     if (!survivor && pause_owner!=1 && scene_owner!=2) {
         stage_call=1;
         uint32_t result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
+        stage_context[2]=result;STATE_UPDATE(restore_stage,stage_context);
         if (!psx_mod_read_byte(PLAY+1)) scene_tick(cpu);
         diagnostics((uint16_t)((raw<<8)|(raw>>8)));
         if (psx_mod_read_byte(PLAY)!=0x0A) enrolled=0;
         cpu->gpr[2]=result;
         stage_call=0;
+        STATE_POP(restore_stage);
         return 1;
     }
     stage_call=inside=1;
@@ -989,32 +1072,41 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
         uint8_t flags[11];
         uint32_t timer=psx_mod_read_word(PLAY+0x90), total=psx_mod_read_word(PLAY+0xCC);
         capture(PLAY+0x12,flags,sizeof flags);
+        uint32_t clocks[2]={timer,total};
+        STATE_BYTES(restore_flags,11,flags,sizeof flags);
+        STATE_WORDS(restore_clocks,12,clocks,2);
         guest(cpu,0x80034DCC,0,0);
         project(PLAY+0x12,flags,sizeof flags);
         psx_mod_write_word(PLAY+0x90,timer);
         psx_mod_write_word(PLAY+0xCC,total);
+        STATE_POP(restore_clocks);STATE_POP(restore_flags);
         if (psx_mod_read_byte(PLAYER+4)==3) life.status[0]=MMX6_COOP_FALLEN;
     }
     uint8_t input[6];
     capture(0x800C456C,input,sizeof input);
+    STATE_BYTES(restore_input,13,input,sizeof input);
     raw=(uint16_t)((raw<<8)|(raw>>8));
+    stage_context[0]=raw;STATE_UPDATE(restore_stage,stage_context);
     enter_zero();
     route_p2_input(raw);
     zero_world=1;
     world_packets=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
     uint32_t result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
+    stage_context[2]=result;STATE_UPDATE(restore_stage,stage_context);
     if (psx_mod_read_byte(PLAYER+4)==2) mmx6_coop_fatal(&life,1);
     if (life.status[1]==MMX6_COOP_DYING && psx_mod_read_byte(PLAYER+4)==3)
         life.status[1]=MMX6_COOP_FALLEN;
     zero_world=0;
     leave_zero_context(1);
     project(0x800C456C,input,sizeof input);
+    STATE_POP(restore_input);
     if (!psx_mod_read_byte(PLAY+1)) scene_tick(cpu);
     diagnostics(raw);
     if (zero_menu_loaded && psx_mod_read_byte(PLAY+1)!=2) menu_vram(cpu,0);
     if (psx_mod_read_byte(PLAY)!=0x0A) enrolled=0;
     cpu->gpr[2]=result;
     stage_call=inside=0;
+    STATE_POP(restore_stage);
     return 1;
 }
 static void native_player_init(CPUState *cpu, uint32_t address) {
@@ -1060,6 +1152,7 @@ static void controller(CPUState *cpu, uint32_t address) {
     if (ready && enrolled) {
         constrain_player(0);
         uint16_t raw=p2_input();
+        uint32_t input_context=raw;STATE_WORDS(restore_raw,42,&input_context,1);
         uint8_t saved_input[6];
         if (!stage_call) diagnostic_setup(cpu);
         int safe=!psx_mod_read_byte(PLAYER+0x67) && (psx_mod_read_byte(PLAYER+0x70)&8);
@@ -1067,16 +1160,20 @@ static void controller(CPUState *cpu, uint32_t address) {
         if (action==MMX6_COOP_LEAVE) start_leave(cpu);
         else if (action==MMX6_COOP_JOIN) start_join(cpu);
         raw=(uint16_t)((raw<<8)|(raw>>8)); /* Native PadRead byte order. */
+        input_context=raw;STATE_UPDATE(restore_raw,&input_context);
         if (life.status[1]==MMX6_COOP_JOINING) {
             join_animation(cpu);
             if (!stage_call) diagnostics(raw);
+            STATE_POP(restore_raw);
             inside=0; return;
         }
         if (life.status[1]==MMX6_COOP_ABSENT || life.status[1]==MMX6_COOP_FALLEN) {
             if (!stage_call) diagnostics(raw);
+            STATE_POP(restore_raw);
             inside=0; return;
         }
         capture(0x800C456C,saved_input,sizeof saved_input);
+        STATE_BYTES(restore_input,14,saved_input,sizeof saved_input);
         enter_zero();
         psx_mod_write_half(0x800C456C,life.status[1]==MMX6_COOP_LEAVING?0:raw);
         psx_mod_write_half(0x800C456E,previous_input);
@@ -1094,11 +1191,35 @@ static void controller(CPUState *cpu, uint32_t address) {
         if (life.status[1]==MMX6_COOP_DYING && p2.body[4]==3) life.status[1]=MMX6_COOP_FALLEN;
         constrain_player(1);
         project(0x800C456C,saved_input,sizeof saved_input);
+        STATE_POP(restore_input);
         if (!stage_call) diagnostics(raw);
+        STATE_POP(restore_raw);
     }
     inside=0;
 }
 
+static uint16_t retain_sprite_bank(uint32_t source,uint16_t tile,const uint8_t colors[32],
+                                   const uint16_t *pixels) {
+    uint32_t count=tile==UINT16_MAX?65536u:256u;
+    uint32_t bytes=mmx6_pixels_size(pixels,count);
+    uint8_t *encoded=bytes?malloc(bytes):NULL;
+    if (!encoded || !mmx6_pixels_encode(encoded,bytes,pixels,count)) {free(encoded);return 0;}
+    /* A guest compression address can be reused by another stage or form.
+     * Compare actual decoded content, not source/palette keys or trailing RAM. */
+    for (unsigned i=0;i<bank_count;++i) {
+        SpriteBank *b=&banks[i];
+        if ((b->tile==UINT16_MAX)==(tile==UINT16_MAX) && b->pixel_bytes==bytes &&
+            b->pixels && !memcmp(b->pixels,encoded,bytes)) {free(encoded);return b->id;}
+    }
+    if (bank_count==4096) {free(encoded);return 0;}
+    uint16_t id=(uint16_t)(0x6000+bank_count);
+    unsigned width=count==65536?256:16;
+    if (!psx_mod_define_texture_bank(id,width,width,pixels)) {free(encoded);return 0;}
+    SpriteBank *b=&banks[bank_count++];
+    b->source=source;b->id=id;b->tile=tile;b->pixel_bytes=bytes;b->pixels=encoded;
+    memcpy(b->colors,colors,32);
+    return id;
+}
 static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut, uint16_t tile) {
     uint32_t offset, packed, source;
     uint8_t decoded[32768];
@@ -1133,11 +1254,13 @@ static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut, uint1
     if (!tiles || tiles>256 ||
         palette_offset+32>0x4000) return 0;
     capture((render_x_death?saved_resources[3]:active_palette)+(uint32_t)palette_offset,colors,sizeof colors);
-    for (unsigned i=0;i<bank_count;++i)
+    /* Zero's archive is immutable for this process/build. Only the resident
+     * X death path uses replaceable native RAM and needs content revalidation. */
+    if (!render_x_death) for (unsigned i=0;i<bank_count;++i)
         if (banks[i].source==source && banks[i].tile==tile &&
             !memcmp(banks[i].colors,colors,sizeof colors)) return banks[i].id;
     if (render_x_death) capture(source,x_compressed,available);
-    if (bank_count==4096 || !mmx6_coop_decode_sprite(compressed,
+    if (!mmx6_coop_decode_sprite(compressed,
             available,decoded,sizeof decoded,&written) || written!=(size_t)tiles*128)
         return 0;
     memset(pixels,0,sizeof pixels);
@@ -1153,17 +1276,13 @@ static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut, uint1
         }
         in+=chunk*128; row+=16; remaining-=chunk;
     }
-    uint16_t id=(uint16_t)(0x6000+bank_count);
     if (tile!=UINT16_MAX) {
         uint16_t tile_pixels[16*16];
         for (unsigned y=0;y<16;++y) for (unsigned x=0;x<16;++x)
             tile_pixels[y*16+x]=pixels[(((tile>>8)+y)&255)*256+(((tile&255)+x)&255)];
-        if (!psx_mod_define_texture_bank(id,16,16,tile_pixels)) return 0;
-    } else if (!psx_mod_define_texture_bank(id,256,256,pixels)) return 0;
-    banks[bank_count].source=source; banks[bank_count].id=id;
-    banks[bank_count].tile=tile;
-    memcpy(banks[bank_count++].colors,colors,sizeof colors);
-    return id;
+        return retain_sprite_bank(source,tile,colors,tile_pixels);
+    }
+    return retain_sprite_bank(source,tile,colors,pixels);
 }
 static void triangle(uint32_t dst, uint32_t next, const uint32_t *q,
                      unsigned a, unsigned b, unsigned c, uint16_t bank) {
@@ -1183,7 +1302,10 @@ static void triangle(uint32_t dst, uint32_t next, const uint32_t *q,
 static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
     uint32_t base=psx_mod_read_word(SCRATCH+0x100);
     uint32_t mode=psx_mod_read_word(SCRATCH+0x104);
+    uint32_t restore_words[4]={base,mode,actor,arena};
+    STATE_WORDS(restore_packet,15,restore_words,4);
     guest(cpu,0x800232D4,actor,0);
+    STATE_POP(restore_packet);
     uint32_t end=psx_mod_read_word(SCRATCH+0x100);
     if (end<base || end-arena>40000 || (end-base)%40) {
         failed=1; return;
@@ -1240,6 +1362,8 @@ static void render(CPUState *cpu, uint32_t address) {
     uint32_t original=psx_mod_read_word(SCRATCH+0x100);
     uint32_t base=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
     capture_player(&p1);
+    STATE_BYTES(restore_player,16,&p1,sizeof p1);
+    uint32_t render_context[2]={original,base};STATE_WORDS(restore_packet,17,render_context,2);
     project_player(&p2);
     psx_mod_write_word(SCRATCH+0x100,base);
     render_actor(cpu,PLAYER,base);
@@ -1250,6 +1374,7 @@ static void render(CPUState *cpu, uint32_t address) {
     uint32_t end=psx_mod_read_word(SCRATCH+0x100);
     psx_mod_write_word(SCRATCH+0x100,original);
     project_player(&p1);
+    STATE_POP(restore_packet);STATE_POP(restore_player);
     psx_mod_write_word(diagnostic+28,bank_count);
     psx_mod_write_word(diagnostic+32,(end-base)/40);
     inside=0;
@@ -1261,19 +1386,23 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
     world_render=1;
     uint32_t original=psx_mod_read_word(SCRATCH+0x100);
     uint32_t arena=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
+    uint32_t render_context[3]={original,actor,arena};STATE_WORDS(restore_packet,18,render_context,3);
     psx_mod_write_word(SCRATCH+0x100,world_packets);
     render_actor(cpu,actor,arena);
     if (actor==PLAYER && (life.status[0]==MMX6_COOP_DYING || scene_passenger(0)) && p1.body[3]) {
         uint8_t zero_body[sizeof p2.body];
         capture(PLAYER,zero_body,sizeof zero_body);
+        STATE_BYTES(restore_body,19,zero_body,sizeof zero_body);
         project(PLAYER,p1.body,sizeof p1.body);
         render_x_death=1;
         render_actor(cpu,PLAYER,arena);
         render_x_death=0;
         project(PLAYER,zero_body,sizeof zero_body);
+        STATE_POP(restore_body);
     }
     world_packets=psx_mod_read_word(SCRATCH+0x100);
     psx_mod_write_word(SCRATCH+0x100,original);
+    STATE_POP(restore_packet);
     world_render=0;
     (void)address;
     return 1;
@@ -1307,6 +1436,8 @@ static int death_effect_init(CPUState *cpu, uint32_t address) {
     uint32_t x=psx_mod_read_word(PLAYER+8), y=psx_mod_read_word(PLAYER+12);
     uint32_t assembly_now=psx_mod_read_word(SCRATCH+0x1C);
     uint8_t layer=psx_mod_read_byte(PLAYER+0x14);
+    uint32_t restore_values[4]={x,y,assembly_now,layer};
+    STATE_WORDS(restore_origin,20,restore_values,4);
     psx_mod_write_word(PLAYER+8,o->x); psx_mod_write_word(PLAYER+12,o->y);
     psx_mod_write_byte(PLAYER+0x14,o->layer); psx_mod_write_word(SCRATCH+0x1C,o->assembly);
     effect_call=1;
@@ -1314,6 +1445,7 @@ static int death_effect_init(CPUState *cpu, uint32_t address) {
     effect_call=0;
     psx_mod_write_word(PLAYER+8,x); psx_mod_write_word(PLAYER+12,y);
     psx_mod_write_byte(PLAYER+0x14,layer); psx_mod_write_word(SCRATCH+0x1C,assembly_now);
+    STATE_POP(restore_origin);
     cpu->gpr[2]=result;
     return 1;
 }
@@ -1375,6 +1507,10 @@ static int solid_allocate(CPUState *cpu, uint32_t address) {
 static uint32_t solid_as_zero(CPUState *cpu, uint32_t address, uint32_t actor,
                               SolidContact *contact) {
     uint8_t sides=psx_mod_read_byte(actor+0x72), carried=psx_mod_read_byte(actor+0x76);
+    uint8_t history[2]={sides,carried};
+    STATE_BYTES(restore_contact,21,history,sizeof history);
+    uint32_t context[3]={address,actor,(uint32_t)(contact-zero_solid_contacts)};
+    STATE_WORDS(restore_target,43,context,3);
     psx_mod_write_byte(actor+0x72,contact->sides);
     psx_mod_write_byte(actor+0x76,contact->carried);
     uint32_t result=guest(cpu,address,actor,cpu->gpr[5]);
@@ -1382,6 +1518,7 @@ static uint32_t solid_as_zero(CPUState *cpu, uint32_t address, uint32_t actor,
     contact->carried=psx_mod_read_byte(actor+0x76);
     psx_mod_write_byte(actor+0x72,sides);
     psx_mod_write_byte(actor+0x76,carried);
+    STATE_POP(restore_target);STATE_POP(restore_contact);
     return result;
 }
 static int solid_player_collision(CPUState *cpu, uint32_t address) {
@@ -1397,6 +1534,7 @@ static int solid_player_collision(CPUState *cpu, uint32_t address) {
         result=solid_as_zero(cpu,address,actor,contact);
     } else {
         result=guest(cpu,address,actor,cpu->gpr[5]);
+        STATE_WORDS(restore_result,44,&result,1);
         if (life.status[1]==MMX6_COOP_ALIVE && !scene_passenger(1) && p2.body[4]==1) {
             inside=1;
             /* 31DA8 and its terrain/box helpers use the player body and the
@@ -1405,17 +1543,21 @@ static int solid_player_collision(CPUState *cpu, uint32_t address) {
              * the 44 KiB overlay for every solid made Recycle Lab CPU-bound. */
             uint8_t body[sizeof p2.body];
             capture(PLAYER,body,sizeof body);
+            STATE_BYTES(restore_body,22,body,sizeof body);
             project(PLAYER,p2.body,sizeof p2.body);
             /* 31DA8 also resolves the shared ride armor. That part already
              * ran above; the extra call handles only the second player. */
             uint8_t ride=psx_mod_read_byte(0x800CD340);
+            STATE_BYTES(restore_ride,23,&ride,1);
             psx_mod_write_byte(0x800CD340,0);
             solid_as_zero(cpu,address,actor,contact);
             psx_mod_write_byte(0x800CD340,ride);
             capture(PLAYER,p2.body,sizeof p2.body);
             project(PLAYER,body,sizeof body);
+            STATE_POP(restore_ride);STATE_POP(restore_body);
             inside=0;
         } else memset(contact,0,sizeof *contact);
+        STATE_POP(restore_result);
     }
     cpu->gpr[2]=result;
     solid_call=0;
@@ -1516,6 +1658,9 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
     capture(PLAYER,current,sizeof current);
     uint32_t sprites_now=psx_mod_read_word(SCRATCH+0x1C);
     uint32_t menu_now=psx_mod_read_word(SCRATCH+0x3C);
+    uint32_t saved_pointers[2]={sprites_now,menu_now};
+    STATE_BYTES(restore_body,24,current,sizeof current);
+    STATE_WORDS(restore_pointers,25,saved_pointers,2);
     if (zero_world) {
         project(PLAYER,p1.body,sizeof p1.body);
         psx_mod_write_word(SCRATCH+0x1C,saved_resources[1]);
@@ -1523,15 +1668,18 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
     }
     /* P1 and the boss HUD execute their original draw path exactly once. */
     uint32_t result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
+    STATE_WORDS(restore_result,45,&result,1);
     if (zero_world) capture(PLAYER,p1.body,sizeof p1.body);
     else capture(PLAYER,current,sizeof current);
+    STATE_UPDATE(restore_body,current);
     if (psx_mod_read_byte(PLAY+0x1F) && p2_hud_fade) {
         project(PLAYER,zero_world?current:p2.body,sizeof p2.body);
         psx_mod_write_word(SCRATCH+0x1C,assembly);
         psx_mod_write_word(SCRATCH+0x3C,menu_assembly);
-        uint32_t pools[3];
+        uint32_t pools[4];
         for (unsigned i=0;i<3;++i) pools[i]=psx_mod_read_word(SCRATCH+0x108+i*4);
         uint32_t arena=hud_packets+(psx_mod_read_word(SCRATCH)&1u)*0x8000;
+        pools[3]=arena;STATE_WORDS(restore_pools,26,pools,4);
         for (unsigned i=0;i<3;++i) psx_mod_write_word(SCRATCH+0x108+i*4,arena+i*0x1000);
         hud_seat=1;
         guest(cpu,0x80024F90,PLAYER,0);
@@ -1539,17 +1687,28 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
         hud_seat=0;
         hud_zero_packets(arena);
         for (unsigned i=0;i<3;++i) psx_mod_write_word(SCRATCH+0x108+i*4,pools[i]);
+        STATE_POP(restore_pools);
         if (zero_world) capture(PLAYER,current,sizeof current);
         else capture(PLAYER,p2.body,sizeof p2.body);
     }
     project(PLAYER,current,sizeof current);
     psx_mod_write_word(SCRATCH+0x1C,sprites_now);
     psx_mod_write_word(SCRATCH+0x3C,menu_now);
+    STATE_POP(restore_result);
+    STATE_POP(restore_pointers);STATE_POP(restore_body);
     cpu->gpr[2]=result;
     hud_call=0;
     return 1;
 }
+#ifdef MMX6_COOP_MODERN_STATE
+#include "mmx6_coop_snapshot.inc"
+#endif
 static void activate(void) {
+    state_track.count=state_track.error=0;
+#ifdef MMX6_COOP_MODERN_STATE
+    snapshot_asset_valid=0;
+    snapshot_discard_prepared();
+#endif
     free(zero_compressed); zero_compressed=NULL; compressed_size=0;
     free(zero_ui_pixels); zero_ui_pixels=NULL;
     inside=ready=enrolled=failed=0;
