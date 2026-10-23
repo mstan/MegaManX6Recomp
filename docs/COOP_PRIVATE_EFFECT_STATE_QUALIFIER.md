@@ -80,6 +80,14 @@ gameplay for visual review; capture completion or cache equality alone does
 not approve texture reconstruction on screen.
 
 After each restore, original P1 Start must resume native gameplay. Observations
+retain the original closing interval. `stage_tick` chooses owner at entry, calls
+the original menu and publishes afterward; that call can change phase2 to0
+before the next entry clears the owner. One distinct phase0/P1-owned closing
+publication is retained and excluded from gameplay recovery. A second distinct
+one, ownership returning after gameplay, changed resources/roster/P1 position
+or a failure to reach owner-free gameplay is refused. This corrects the retained
+v12 warm retry's pre-load mutation false failure; it does not qualify save/load.
+Observations
 retain positive post-release dash continuation separately from the first
 negative-marker drain. Native phases 1 and 2 must be observed, followed by
 marker 0 **and every trail inactive/invisible**, within 32 native timer ticks of

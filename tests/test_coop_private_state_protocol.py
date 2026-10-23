@@ -251,5 +251,27 @@ class NativeRecoveryEvidenceTests(unittest.TestCase):
             self.assertFalse(all(state.reduce_restored_retirement(sampled(),rows).values()))
 
 
+class MenuClosePublicationTests(unittest.TestCase):
+    def test_native_owner_resets_on_next_stage_entry(self):
+        saved=sampled();closing=sampled(11)
+        self.assertEqual(state.private_resume_phase(saved,closing,gameplay_seen=False,closing_tick=None),(False,None))
+        closing["observation"]["native_phase"]=0
+        self.assertEqual(state.private_resume_phase(saved,closing,gameplay_seen=False,closing_tick=None),(False,11))
+        self.assertEqual(state.private_resume_phase(saved,closing,gameplay_seen=False,closing_tick=11),(False,11))
+        opened=deepcopy(closing);opened["observation"].update(tick=12,pause_owner=0)
+        self.assertEqual(state.private_resume_phase(saved,opened,gameplay_seen=False,closing_tick=11),(True,11))
+
+    def test_persistent_or_returning_owner_and_closing_corruption_refuse(self):
+        saved=sampled();closing=sampled(12);closing["observation"]["native_phase"]=0
+        for kwargs in (dict(gameplay_seen=False,closing_tick=11),dict(gameplay_seen=True,closing_tick=None)):
+            with self.assertRaises(DebugError):state.private_resume_phase(saved,closing,**kwargs)
+        for mutate in (lambda r:r["observation"].update(pause_owner=2),
+                       lambda r:r["observation"]["players"][1].update(hp=28),
+                       lambda r:r["observation"]["players"][0].update(x_raw=0),
+                       lambda r:r["observation"].update(scene_owner=1)):
+            changed=deepcopy(closing);mutate(changed)
+            with self.assertRaises(DebugError):state.private_resume_phase(saved,changed,gameplay_seen=False,closing_tick=None)
+
+
 if __name__ == "__main__":
     unittest.main()

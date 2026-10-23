@@ -308,6 +308,32 @@ def private_resources(row):
     return [(p["hp"], p["weapon"], tuple(p["ammo"])) for p in row["observation"]["players"]]
 
 
+def private_resume_phase(reference, row, *, gameplay_seen, closing_tick):
+    """Classify the source's one final menu publication before owner reset.
+
+    stage_tick chooses ownership at entry, calls the original menu, then
+    publishes. That call can change PLAY.phase2 to0; pause_owner clears only
+    on the next stage entry. Accept no second distinct residual publication.
+    All roster/resource/P1-position checks apply even to the closing interval.
+    """
+    base=row["observation"]
+    if (base["native_mode"] != 10 or base["scene_owner"] or tuple(base["lifecycle"]) != (0,0) or
+            [p["character"] for p in base["players"]] != [0,1] or
+            any(not p["active"] or p["state"] != 1 for p in base["players"]) or
+            private_resources(row) != private_resources(reference) or
+            base["players"][0]["x_raw"] != reference["observation"]["players"][0]["x_raw"]):
+        raise DebugError("Restored native dash resume changed roster, personal resources or P1 position")
+    if base["native_phase"]==2 and base["pause_owner"]==1 and not gameplay_seen and closing_tick is None:
+        return False,closing_tick
+    if base["native_phase"]==0 and base["pause_owner"]==1 and not gameplay_seen:
+        if closing_tick is not None and closing_tick != base["tick"]:
+            raise DebugError("Native menu owner persisted across distinct gameplay publications")
+        return False,base["tick"]
+    if base["native_phase"]!=0 or base["pause_owner"]:
+        raise DebugError("Restored native dash resume changed menu ownership")
+    return True,closing_tick
+
+
 def reduce_restored_retirement(reference, rows):
     """Observed native recovery only; timer progress is not a once-world proof."""
     checks = dict(original_menu_resume_advances_native_world=False,
@@ -458,6 +484,7 @@ class PrivateStateCase:
         after_start = self.sample(label+" native Start after neutral")
         receipt.update(accepted=True, after_tick=after_start["observation"]["tick"])
         deadline, first_negative, start_timer = time.monotonic()+self.timeout, None, None
+        gameplay_seen, closing_tick = False, None
         pending = list(history);history.clear()
         while time.monotonic() < deadline:
             row = pending.pop(0) if pending else self.sample(label+" native private effect continuation/drain")
@@ -465,16 +492,12 @@ class PrivateStateCase:
                 time.sleep(.005);continue
             history.append(row)
             base = row["observation"]
-            if base["native_phase"] == 2:
-                # Closing animation can continue after the accepted Start
-                # edge; its native completion, not a fixed delay, gates play.
+            accepted,closing_tick=private_resume_phase(reference,row,
+                gameplay_seen=gameplay_seen,closing_tick=closing_tick)
+            if not accepted:
                 time.sleep(.008)
                 continue
-            if (base["native_mode"] != 10 or base["native_phase"] != 0 or base["pause_owner"] or base["scene_owner"] or
-                    tuple(base["lifecycle"]) != (0, 0) or [p["character"] for p in base["players"]] != [0,1] or
-                    any(not p["active"] or p["state"] != 1 for p in base["players"]) or
-                    private_resources(row) != private_resources(reference)):
-                raise DebugError("Restored native dash resume changed ownership, roster or personal resources")
+            gameplay_seen=True
             timer = base["native_timer"]
             if start_timer is None:
                 start_timer = timer
@@ -491,7 +514,8 @@ class PrivateStateCase:
             time.sleep(.008)
         else:
             raise DebugError("Restored native effect recovery timed out")
-        checks = reduce_restored_retirement(reference, [row for row in history if row["observation"]["native_phase"] == 0])
+        checks = reduce_restored_retirement(reference, [row for row in history if
+            row["observation"]["native_phase"] == 0 and row["observation"]["pause_owner"] == 0])
         self.evidence["checks"].update(checks)
         if not all(checks.values()):
             raise DebugError("Restored native dash did not expose its full source-bound drain and retirement")
