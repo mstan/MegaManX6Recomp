@@ -8,6 +8,8 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 import json
 import math
+import hashlib
+from pathlib import Path
 import socket
 import struct
 import time
@@ -25,6 +27,37 @@ class DebugError(RuntimeError):
 
 class UnstableObservation(DebugError):
     """The published diagnostic block changed while being observed."""
+
+
+def capture_present(client, path: Path, *, timeout: float = 8.0, request=None) -> dict:
+    """Wait for actual composed-GL capture completion, never just its ack.
+
+    Owned-process runners should pass their ownership-checked request callback.
+    Canonical screenshot/screenshot_hires at scale one may instead read software
+    VRAM, which excludes retained GL texture banks.
+    """
+    path = Path(path)
+    if not path.is_absolute() or path.exists() or not path.parent.is_dir():
+        raise ValueError("Present capture needs a fresh absolute path in an existing directory")
+    if not math.isfinite(timeout) or not 0 < timeout <= 60:
+        raise ValueError("Present capture timeout must be in (0,60]")
+    rpc = request or client.request
+    before = rpc("present_shot_seq")
+    if type(before.get("seq")) is not int:
+        raise DebugError("present_shot_seq omitted its completion sequence")
+    acknowledgement = rpc("present_shot", path=str(path))
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        completed = rpc("present_shot_seq")
+        if type(completed.get("seq")) is int and completed["seq"] != before["seq"]:
+            if completed.get("wrote") != 1 or not path.is_file() or path.stat().st_size == 0:
+                raise DebugError("Composed capture completed without a written artifact")
+            with path.open("rb") as stream:
+                digest = hashlib.file_digest(stream, "sha256").hexdigest()
+            return dict(surface="composed_renderer_output", path=str(path), sha256=digest,
+                        before=before, acknowledgement=acknowledgement, completion=completed)
+        time.sleep(.02)
+    raise DebugError("Composed capture acknowledgement never reached completed generation")
 
 
 class DebugClient:
