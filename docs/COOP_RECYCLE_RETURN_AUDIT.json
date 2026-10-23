@@ -1,0 +1,461 @@
+{
+  "schema": 1,
+  "source_only": true,
+  "original_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+  "original_archive_sha256": "55b03e4ecc13d6110ff300f80b7000b0f97234e19f1b846aa2b885eece30d80f",
+  "inventory_sha256": "67508ae2e19ad07c2c5cad41e12dbeb5e446e4eb50f033efa75ed306f2636fad",
+  "namespace": {
+    "stage": 20,
+    "section": 1
+  },
+  "destination_member": {
+    "index": 28,
+    "sector": 591,
+    "size": 40334,
+    "sha256": "7f49ac29077a76c6dc0aaafc474ad4d4eece65402282549de2f1ff2b5d748aef"
+  },
+  "resource": {
+    "member": 118,
+    "sector": 13092,
+    "size": 655360,
+    "sha256": "791ea8758ab8e936d3dd44d3b4d1ac8a7123bfed6f2d334f4b818a46091debfc",
+    "header_sha256": "1fe68140a9b6fd8d0883c5778d030c08ec0c0d8a8f6c684c11fce3d8fea92e1b",
+    "assets": [
+      {
+        "index": 8,
+        "type": 0,
+        "bytes": 30720,
+        "sha256": "7197d2c9f6ce6a0423559ab2ca461d7f4cba9a420f0989e79f7689a1029e8530"
+      },
+      {
+        "index": 9,
+        "type": 1,
+        "bytes": 4512,
+        "sha256": "0fac81836f3e019ef5ac06449163a0ec1403e5f6fce7fff970e15842cb4fbf6b"
+      }
+    ]
+  },
+  "layout": {
+    "address": "800F2388",
+    "selector": "80076384",
+    "dimensions_address": "800763EA",
+    "width_screens": 15,
+    "height_screens": 6,
+    "layers": 3,
+    "bytes": 270,
+    "sha256": "2fdd0042cb39a7945c51ac2b872df790132b0ab33ecd1afa577d0947aecc85c1"
+  },
+  "checkpoints": [
+    {
+      "id": "s20-a1-c00",
+      "stage": 20,
+      "section": 1,
+      "checkpoint": 0,
+      "stage_name": "Alternate Magma (section 0), Recycle (section 1)",
+      "stage_role": "alternate",
+      "table": "800732D8",
+      "record": "80072FCC",
+      "player": {
+        "x": 79,
+        "y": 224
+      },
+      "camera": {
+        "x": 0,
+        "y": 224,
+        "min_x": 0,
+        "max_x": 2576,
+        "min_y": 224,
+        "max_y": 224
+      },
+      "arrival": 64,
+      "status": "unverified",
+      "checks": {
+        "terrain_collision_scroll": "unverified",
+        "enemies_interactions": "unverified",
+        "music_sfx": "unverified",
+        "checkpoint_retry": "unverified",
+        "boss": "unverified",
+        "exit_actual_transition": "unverified"
+      }
+    },
+    {
+      "id": "s20-a1-c01",
+      "stage": 20,
+      "section": 1,
+      "checkpoint": 1,
+      "stage_name": "Alternate Magma (section 0), Recycle (section 1)",
+      "stage_role": "alternate",
+      "table": "800732D8",
+      "record": "80072FF0",
+      "player": {
+        "x": 3024,
+        "y": 224
+      },
+      "camera": {
+        "x": 2848,
+        "y": 224,
+        "min_x": 2848,
+        "max_x": 2848,
+        "min_y": 224,
+        "max_y": 224
+      },
+      "arrival": 64,
+      "status": "unverified",
+      "checks": {
+        "terrain_collision_scroll": "unverified",
+        "enemies_interactions": "unverified",
+        "music_sfx": "unverified",
+        "checkpoint_retry": "unverified",
+        "boss": "unverified",
+        "exit_actual_transition": "unverified"
+      }
+    }
+  ],
+  "placement_census": {
+    "primary_count": 31,
+    "secondary_count": 27,
+    "authored_category0_type1C": [],
+    "limit": "Absence in these authored lists is not a complete dynamic producer or indirect-call census"
+  },
+  "relevant_records": [
+    {
+      "index": 0,
+      "address": "800F2498",
+      "flags": 0,
+      "object_id": 6,
+      "subtype": 1,
+      "category": 3,
+      "x": 3026,
+      "y": 375,
+      "status": "unverified"
+    },
+    {
+      "index": 1,
+      "address": "800F24A0",
+      "flags": 0,
+      "object_id": 14,
+      "subtype": 132,
+      "category": 3,
+      "x": 32,
+      "y": 256,
+      "status": "unverified"
+    },
+    {
+      "index": 29,
+      "address": "800F2580",
+      "flags": 0,
+      "object_id": 13,
+      "subtype": 0,
+      "category": 3,
+      "x": 3312,
+      "y": 384,
+      "status": "unverified"
+    },
+    {
+      "index": 30,
+      "address": "800F2588",
+      "flags": 0,
+      "object_id": 30,
+      "subtype": 1,
+      "category": 3,
+      "x": 32,
+      "y": 354,
+      "status": "unverified"
+    }
+  ],
+  "handlers": [
+    {
+      "category": 3,
+      "type": 6,
+      "address": "80052D30"
+    },
+    {
+      "category": 3,
+      "type": 13,
+      "address": "80052E44"
+    },
+    {
+      "category": 3,
+      "type": 14,
+      "address": "8005335C"
+    },
+    {
+      "category": 3,
+      "type": 30,
+      "address": "800EBEE8"
+    }
+  ],
+  "native_spans": [
+    {
+      "name": "stage_exit_consumer",
+      "address": "8001E32C",
+      "bytes": 952,
+      "sha256": "c532803823d419cf6804de1052208f0e5c9f8fb580ceb203b12de4d4157a6cbb"
+    },
+    {
+      "name": "majorB_next_namespace",
+      "address": "8001E81C",
+      "bytes": 100,
+      "sha256": "a8311628e312626c49438b39722841abba8d26e51b66dd65750571c3c5c693bb"
+    },
+    {
+      "name": "major13_next_namespace",
+      "address": "8001ED88",
+      "bytes": 84,
+      "sha256": "9bed7287252cc4965fcf09c12506299236a20fcd00d8b364c8f9cb0abb98a5fc"
+    },
+    {
+      "name": "major_table",
+      "address": "8007112C",
+      "bytes": 84,
+      "sha256": "ec8d5a30489e1891a07ac3342206659d57a2479f86bc1f11140bcee6ee5797ea"
+    },
+    {
+      "name": "category3_update",
+      "address": "8002048C",
+      "bytes": 276,
+      "sha256": "07f634d113d5068cc9912efc9b8f6c24cfdf946501cfc5e0d7c1fcdc6c964f9f"
+    },
+    {
+      "name": "initial_admission_window",
+      "address": "8002A3E8",
+      "bytes": 144,
+      "sha256": "9225a99471fa8645b007643f062416d822fa8a14038d56a94e7899a935e0cc97"
+    },
+    {
+      "name": "primary_scanner",
+      "address": "80029F38",
+      "bytes": 1024,
+      "sha256": "684a0c9cc93707411c183a030c73801a440b23f48e325ab811772328755022e1"
+    },
+    {
+      "name": "checkpoint_marker",
+      "address": "80052D30",
+      "bytes": 276,
+      "sha256": "589851445229bceda0dec0faf9045e4228604ac7aafd15ede03e2663c91e7b82"
+    },
+    {
+      "name": "boss_variant_loader",
+      "address": "80052E44",
+      "bytes": 288,
+      "sha256": "9fd97b6dd758b4f8482fcdd40ae54e2043fd0a1e10ae64afc45d24651c4052e8"
+    },
+    {
+      "name": "interaction_admission_window",
+      "address": "80052F64",
+      "bytes": 1016,
+      "sha256": "318e84150b200ff1542011e244b1375cc895249a51df49c9fc12a015cdb87af4"
+    },
+    {
+      "name": "interaction_region_selector",
+      "address": "8007A124",
+      "bytes": 48,
+      "sha256": "3c8fbece673bf85286a5a3e2f46d8ae8c2a718fe95ab0b7a6f836efd790bebcf"
+    },
+    {
+      "name": "destination_interaction_rectangle",
+      "address": "8007A974",
+      "bytes": 8,
+      "sha256": "68260e6e8cf04f3d68f4a9544aa635fcadd597bbcd4908e31a925c55b799ee7b"
+    },
+    {
+      "name": "default_body_box_selection",
+      "address": "8003CCBC",
+      "bytes": 68,
+      "sha256": "537f24ae8672645fb7a217bcb99b0acadaa110d3dc01f84d33f24f53d3acad99"
+    },
+    {
+      "name": "default_body_boxes",
+      "address": "80073D50",
+      "bytes": 8,
+      "sha256": "da8d8f948e652263fcb4c8a24cb000a09db8fff49beb902c2434ed598176e252"
+    },
+    {
+      "name": "layout_copy",
+      "address": "8002798C",
+      "bytes": 196,
+      "sha256": "ec8f3fe1c044f8b292e930b61c7e7967c557fd050109b82e0f28b7de13824b6f"
+    },
+    {
+      "name": "collision_lookup",
+      "address": "80030304",
+      "bytes": 264,
+      "sha256": "1de2c8cffd1cc6e9ef9dcf991e3ace3ac64510186096e20d32b02d298ba689d8"
+    },
+    {
+      "name": "ride_armor_placement",
+      "address": "800EBEE8",
+      "bytes": 124,
+      "sha256": "329d735f90cdb14421892108c6123ccd72157223c7d00eaf2fedbbfe9aa08595"
+    }
+  ],
+  "entrance_interaction": {
+    "record": "800F24A0",
+    "subtype": 132,
+    "region_table": "8007A124",
+    "group": 16,
+    "rectangle_address": "8007A974",
+    "rectangle": [
+      0,
+      224,
+      240,
+      416
+    ],
+    "comparisons": "strict xmin<X<xmax and ymin<Y<ymax; resident PLAYER only",
+    "input": "native pressed bit0100h; action>=2, signed HP neither0 nor80h, PLAYER+D4=0",
+    "additional_gates": [
+      "Stage event halfword PLAY+9E+2*group lacks bit4; native97428=0",
+      "For subtype84h, resident PLAYER+E0 must be neither1 nor2"
+    ],
+    "effect": "hint field PLAYER+14E=4; original interaction21760; not proof of a return warp"
+  },
+  "ride_armor": {
+    "record": "800F2588",
+    "handler": "800EBEE8",
+    "singleton": "800CD340",
+    "effect": "Copies subtype/origin/position to native singleton then frees placement actor; not a reverse portal"
+  },
+  "conditional_entry_floor": {
+    "layer": 0,
+    "x_pixels_inclusive": [
+      0,
+      95
+    ],
+    "floor_y": 384,
+    "code": 56,
+    "air_rectangle": {
+      "x": [
+        0,
+        95
+      ],
+      "y": [
+        224,
+        383
+      ]
+    },
+    "current_boxes_required": [
+      {
+        "character": "X",
+        "source": "80073D50",
+        "bytes": [
+          0,
+          2,
+          11,
+          19
+        ],
+        "predicted_contact_y": 363
+      },
+      {
+        "character": "Zero",
+        "source": "80073D54",
+        "bytes": [
+          0,
+          3,
+          11,
+          19
+        ],
+        "predicted_contact_y": 362
+      }
+    ],
+    "full_foot_center_x_inclusive": [
+      11,
+      85
+    ],
+    "adjacent_lower_response": {
+      "x": 96,
+      "y": 416,
+      "code": 58
+    },
+    "limitations": [
+      "Actual current+68 boxes, live map/assets, dynamic RideArmor/actors and ground resolution required",
+      "No teleport, safe walking/jump sequence, complete-foot or damage safety is approved"
+    ]
+  },
+  "admission": {
+    "initial_scan": "8002A3E8 ->80029F38",
+    "bounds": "strict cameraX-48<X<cameraX+368; cameraY-48<Y<cameraY+288",
+    "checkpoint_marker": "80052DB8 requires visibility helper2CAB4=0 and resident X>=3026 before native CP1 write",
+    "boss_loader": "80052E44 selects original member43/44/45 from actual PLAY+43B, waits14B78, allocates boss once then frees controller",
+    "limit": "Initial scan geometry is not actor allocation, a full moving-camera scan, arena admission or either-seat support proof"
+  },
+  "exit_consumer": {
+    "function": "8001E32C",
+    "input": "actual native PLAY+0F; no observer writes",
+    "variant_field": "PLAY+43B",
+    "policies": [
+      {
+        "kind": "positive_alternate_exit_to_story_loader",
+        "major": 19,
+        "stage": 20,
+        "section": 1,
+        "checkpoint": 2,
+        "native_play5f_or": 16,
+        "next_namespace": {
+          "major": 20,
+          "stage": 11,
+          "section": 0,
+          "checkpoint": 2
+        }
+      },
+      {
+        "kind": "positive_alternate_exit_to_story_loader",
+        "major": 19,
+        "stage": 20,
+        "section": 1,
+        "checkpoint": 4,
+        "native_play5f_or": 0,
+        "next_namespace": {
+          "major": 20,
+          "stage": 11,
+          "section": 0,
+          "checkpoint": 4
+        }
+      },
+      {
+        "kind": "positive_alternate_exit_to_majorB_loader",
+        "major": 11,
+        "stage": 20,
+        "section": 1,
+        "checkpoint": 0,
+        "next_namespace": {
+          "major": 12,
+          "stage": 15,
+          "section": 0,
+          "checkpoint": 0
+        }
+      }
+    ],
+    "negative_retry": {
+      "kind": "same_namespace_preserved_resource_retry",
+      "major": 9,
+      "stage": 20,
+      "section": 1,
+      "checkpoint": 0,
+      "resource_policy": "native PLAY+1E=-1; preserve resident HP/ammo/weapon",
+      "next_namespace": null
+    },
+    "zero_transition": {
+      "kind": "death_retry_or_game_over_requires_lives",
+      "major": null,
+      "stage": 20,
+      "section": 1,
+      "checkpoint": 0,
+      "next_namespace": null
+    },
+    "consumer_only": true,
+    "reverse_to_stage4_in_this_consumer": false,
+    "limit": "Boss defeat/clear producers, later scene/selector completion and all alternate variants remain unqualified"
+  },
+  "recommended_native_checks": [
+    "After real outbound load, require namespace20/1/CP0, both actual living grounded bodies, current private-bank box provenance, exact270-byte live layout and both collision assets",
+    "Neutral observation first; initial X79 fits the conditional ledge, but a +24 P2 join offset need not. Refuse blind Right/Left or inferred floor",
+    "If testing room limits, use short original held-frame0 inputs with neutral cleanup only after a current live safety envelope; retain independent control and composed captures",
+    "For campaign exit, first close RideArmor/terrain/arena traversal and original boss producer; use native combat and retain actual transition+43B branch, major/namespace and both-player lifecycle",
+    "Record any prerequisite/position/equipment bypass separately; never set portal, boss HP, clear/progression, exit flags, timers, ground or completion fields to claim this route",
+    "Distinguish passenger return at destination from reverse room travel and later campaign/story/selector return"
+  ],
+  "accepted_input_route": null,
+  "proven_safe_positions": [],
+  "local_coop": "unverified",
+  "netplay": "unverified"
+}
