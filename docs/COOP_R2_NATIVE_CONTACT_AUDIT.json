@@ -289,5 +289,22 @@
     "Independent once-world cadence and broad damage classes are not qualified",
     "R13 native outgoing saber damage is not incoming contact evidence",
     "Ghidra project lock left untouched; bounded original-byte Capstone analysis used instead"
-  ]
+  ],
+  "candidate_helper": {
+    "path": "tools/mmx6_coop_contact.py",
+    "entrypoint": "contact_pause_contact",
+    "tests": "tools/test_mmx6_coop_contact.py",
+    "runtime_qualified": false,
+    "source_only_status": "unexecuted original-input route candidate",
+    "contact_attribution": "complete80030ECC actor/RA trace plus coherent diagnostic+44 delta1 and actual HP/reaction/iframe trajectory",
+    "menu_expected_hp": "exact retained living HP after first contact; default smoke remains32/32",
+    "remaining_proof": [
+      "actual physical contact twice",
+      "safe native retreat retaining the same enemy",
+      "owned menu at reduced HP and native controls without consuming target",
+      "native recovery fields and75timer ticks",
+      "paired resolved core/mod checks",
+      "composed artwork review"
+    ]
+  }
 }

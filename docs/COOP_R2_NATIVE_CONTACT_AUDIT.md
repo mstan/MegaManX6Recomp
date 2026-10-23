@@ -119,9 +119,47 @@ The trial must not use Square to obtain its incoming-contact result.
    core/mod CRC evidence. Review local and paired results independently;
    source audit or a menu pass cannot close R2.
 
-The next implementation prerequisite is an actor-attributed contact collector
-using complete trace windows, the acceptance counter and coherent full-body
-fields with the immutable Zero box resolver. The selected route remains a
-candidate until the owning native run verifies physical contact, safe retreat
-and retention of the same enemy. No universal damage-class, AI, campaign,
-audio, cross-host or exactly-once-world claim follows from this audit.
+`tools/mmx6_coop_contact.py` now supplies the collector and reusable
+`contact_pause_contact(ctx, expected_exe_sha256=...)` candidate. It has no
+launcher or automatic ledger result. The selected route remains unexecuted
+until the owning native run verifies physical contact, safe retreat and
+retention of the same enemy. No universal damage-class, AI, campaign, audio,
+cross-host or exactly-once-world claim follows from this audit.
+
+## Candidate helper integration
+
+Supply the existing personal-menu runner context (`mode`, `input_path`,
+`clients`, `both`, `debug`, `report`, private `output`, `hold`,
+`native_advance`, `transport_window`, plus `network` online). Additional keys:
+
+| Key | Required evidence/ownership contract |
+| --- | --- |
+| `candidate_exe_sha256` | The exact selected `37cdc487...` executable identity, checked against the explicit function argument. A staging source observation is not compilation proof. |
+| `zero_overlay` | Immutable original member1 bytes. `load_zero_overlay(raw_disc_bin_path)` reads only the bounded inventory extents, verifies original EXE/archive/member identities and returns those22964 bytes without exporting a binary copy. |
+| `rpc(peer,command,**fields)` | Owning runner's listener-checked RPC callback for read-only GPU queries and host trace filter/clear/dump commands. No guest mutation or additional guest call is used. The one-process adapter can ignore the peer index after validating0. |
+| `matched(label)` | Required online and backed by real equal-simulation-tick resolved core/mod CRC samples, retained by the owning paired runner. Diagnostic counters are not substituted. |
+
+The helper keeps Xx144/resources unchanged, uses original P2 holds only, and
+requires native4:3/margin0. Each trial retains its pre-state, raw complete
+contact trace, all sampled body/counter/config/box observations and recovered
+native hit. An incomplete trace, foreign actor/caller, multiple acceptance
+increments, outgoing enemy damage, changed native configuration, terrain
+hazard, lost actor or missed native hurt window fails the case. The same
+sampled native slot/origin must stay alive HP12 throughout; no latch, HP,
+iframes, actor position or result flag is written.
+
+After each accepted hit it retreats before requesting a composed capture,
+then waits at least75 actual native timer ticks and observed eligibility.
+The full Zero menu helper runs at the safe retreat with Down/Up and exact
+reduced living HP. Its native post-menu Square expires away from the enemy
+before reapproach. These geometric choices are source-derived candidates,
+not runtime-confirmed safe positions. Their failures must be retained as
+setup/route failures rather than converted into a damage-mechanic verdict.
+
+Successful automated return remains
+`automated_contact_checks_passed_artwork_review_pending`, with ledger status
+unverified. The owning baseline adapter must preserve partial cases and wrap
+the menu helper's `RuntimeError` as its handled `DebugError`, as the standalone
+menu adapter already does. The helper's tests exercise evidence rejection,
+field decoding, original-difficulty arithmetic and trace completeness only;
+they do not qualify accepted controls, the route or native contact.
