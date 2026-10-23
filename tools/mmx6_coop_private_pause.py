@@ -307,7 +307,19 @@ def private_pause_smoke(ctx, *, expected_exe_sha256, window_frames=12, timeout=1
             case["effect_menu_reduction"].append(checks)
             require(all(checks.values()),"Source-bound native menu/private-effect resume reduction failed")
         case["checks"]["native_resume_advances_private_effects"]=True
-        dash_before,active,released_first=held(1,CIRCLE|JUMP|RIGHT,6,"Fresh post-menu native Circle+Jump+Right")
+        def observe_dash_art():
+            current=sample("Fresh post-menu native dash held")
+            if "dash_render_window" not in case and all(_visible(row) for row in current["peers"]):
+                case["dash_render_window"]=current
+                capture("p2-native-dash-present")
+                completed=sample("Native dash after completed composed capture")
+                case["dash_render_after_capture"]=completed
+                require(all(_visible(row) for row in completed["peers"]),
+                        "Native dash visible window ended before composed capture completed")
+            return current
+        dash_before,active,released_first=held(1,CIRCLE|JUMP|RIGHT,6,
+            "Fresh post-menu native Circle+Jump+Right",observe_dash_art)
+        require("dash_render_after_capture" in case,"No native visible dash window was captured")
         release=[released_first];deadline=time.monotonic()+timeout
         drain_timers=[None]*len(ctx["clients"])
         case["post_resume_dash"]=dict(before=dash_before,active=active,
