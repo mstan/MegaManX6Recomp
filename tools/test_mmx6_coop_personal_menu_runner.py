@@ -2,6 +2,8 @@
 import contextlib
 import io
 import unittest
+from types import SimpleNamespace
+from unittest.mock import patch
 
 from qualify_mmx6_coop_personal_menu import (
     OfflineMenuAdapter, OwnedReadClient, make_parser, validate_options,
@@ -58,6 +60,56 @@ class MenuRunnerOptions(unittest.TestCase):
 
 
 class OwnedOfflineInputTests(unittest.TestCase):
+    def test_observed_hold_samples_before_release_and_keeps_other_seat_independent(self):
+        calls, held = [], {}
+        def control(command, **fields):
+            calls.append((command, fields))
+            if command == "press":
+                held[fields["port"]] = fields["buttons"]
+            elif command == "clear_input":
+                held.pop(fields["port"], None)
+        adapter, report = self.adapter(control)
+        ticks = iter((100, 102, 120, 122))
+        adapter.sample = lambda label: SimpleNamespace(tick=(tick := next(ticks)), json=lambda:dict(tick=tick))
+        def observe():
+            self.assertEqual(held.get(2), 0xDFFF)
+            # A P1 Start hold/release must leave the outer P2 dash held.
+            if not calls[-1][0] == "clear_input":
+                adapter.hold(0, 8, 4, "nested P1 pause")
+                self.assertEqual(held, {2:0xDFFF})
+            return dict(held=held.copy())
+        with patch("qualify_mmx6_coop_personal_menu.time.sleep"):
+            rows = adapter.hold_observed(1, 0x2000, 12, "P2 held dash", observe)
+        self.assertEqual(len(rows), 3)
+        self.assertTrue(all(row["held"] == {2:0xDFFF} for row in rows))
+        self.assertEqual(held, {})
+        self.assertEqual(calls[-1], ("clear_input", dict(port=2)))
+        self.assertEqual(report["adapter_windows"][0]["end"]["tick"], 122)
+
+    def test_observed_hold_releases_after_observer_failure_and_preserves_original_error(self):
+        calls = []
+        def control(command, **fields):
+            calls.append(command)
+            if command == "clear_input":
+                raise RuntimeError("neutral unavailable")
+        adapter, report = self.adapter(control)
+        adapter.sample = lambda label: SimpleNamespace(tick=5)
+        def observe():
+            raise ValueError("observation rejected")
+        with self.assertRaisesRegex(ValueError, "observation rejected"):
+            adapter.hold_observed(1, 0x2000, 12, "case", observe)
+        self.assertEqual(calls, ["press", "clear_input"])
+        self.assertEqual(report["input_cleanup_errors"][0]["original_error"], "observation rejected")
+
+    def test_observed_hold_counter_reversal_releases_without_accepting_samples(self):
+        calls = []
+        adapter, _ = self.adapter(lambda command, **fields:calls.append(command))
+        ticks = iter((100, 99))
+        adapter.sample = lambda label: SimpleNamespace(tick=next(ticks))
+        with self.assertRaisesRegex(Exception, "counter moved backwards"):
+            adapter.hold_observed(1, 0x2000, 12, "case", lambda:self.fail("stale observation accepted"))
+        self.assertEqual(calls, ["press", "clear_input"])
+
     def adapter(self, control):
         report = {}
         adapter = OfflineMenuAdapter(control, report)

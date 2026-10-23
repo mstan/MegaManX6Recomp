@@ -145,6 +145,48 @@ class OfflineMenuAdapter:
     def native_advance(self, frames, label):
         return self.wait_counter("native_timer", frames, label)
 
+    def hold_observed(self, seat, bits, frames, label, observe):
+        """Sample during accepted input; always release before returning/error.
+
+        The observer reads/captures and may use the owning adapter to hold the
+        other seat. Endpoint-only samples can miss transient actor advancement.
+        """
+        if (seat not in (0, 1) or not 0 <= bits <= 0xFFFF or
+                not 6 <= frames <= 120 or not callable(observe)):
+            raise ValueError("Expected a native seat/mask, 6..120 publications and observer")
+        error, samples = None, []
+        start = self.sample(label + " start")
+        try:
+            self.control("press", port=seat + 1, buttons=0xFFFF ^ bits, frames=0)
+            deadline = time.monotonic() + self.timeout
+            while time.monotonic() < deadline:
+                row = self.sample(label)
+                delta = (row.tick - start.tick) & 0xFFFFFFFF
+                if delta >= 0x80000000:
+                    raise debug.DebugError(f"{label}: publication counter moved backwards")
+                samples.append(observe())
+                if delta >= frames + 2 and len(samples) >= 3:
+                    self.report["adapter_windows"].append(dict(label=label, counter="tick",
+                        requested_frames=frames, start=start.json(), end=row.json(),
+                        held_observations=len(samples)))
+                    break
+                time.sleep(.015)
+            else:
+                raise debug.DebugError(f"{label}: held input publication window timed out")
+        except BaseException as caught:
+            error = caught
+            raise
+        finally:
+            try:
+                self.control("clear_input", port=seat + 1)
+            except Exception as cleanup_error:
+                self.report["input_cleanup_errors"].append(dict(label=label, seat=seat,
+                    error=str(cleanup_error), original_error=str(error) if error else None))
+                if error is None:
+                    raise
+        self.transport_window(3)
+        return samples
+
     def hold(self, seat, bits, frames, label):
         if seat not in (0, 1) or not 0 <= bits <= 0xFFFF or not 1 <= frames <= 120:
             raise ValueError("Expected native seat0/1, pressed mask and bounded frame count")

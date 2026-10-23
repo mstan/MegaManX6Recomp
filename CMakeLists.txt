@@ -200,7 +200,8 @@ if(BUILD_TESTING)
                 test_coop_host_profile test_mmx6_coop_personal_menu
                 test_mmx6_coop_personal_menu_runner test_mmx6_coop_contact
                 test_mmx6_input_recording test_mmx6_content_coverage
-                test_mmx6_coop_contact_runner test_mmx6_coop_owned_cleanup)
+                test_mmx6_coop_contact_runner test_mmx6_coop_owned_cleanup
+                test_mmx6_coop_checkpoint)
             add_test(NAME mmx6_${_mmx6_python_test}
                 COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/${_mmx6_python_test}.py")
         endforeach()
@@ -321,6 +322,30 @@ if(BUILD_TESTING)
             endif()
         endif()
         add_test(NAME ${_mmx6_effects_target} COMMAND "$<TARGET_FILE:${_mmx6_effects_target}>")
+    endforeach()
+
+    foreach(_mmx6_checkpoint_variant debug production)
+        set(_mmx6_checkpoint_target mmx6_coop_checkpoint_${_mmx6_checkpoint_variant}_test)
+        add_executable(${_mmx6_checkpoint_target} tests/test_mmx6_coop_checkpoint.c
+            src/mods/mmx6_coop_lifecycle.c src/mods/mmx6_coop_assets.c)
+        target_include_directories(${_mmx6_checkpoint_target} PRIVATE src/mods
+            "${PSXRECOMP_V4_ROOT}/runtime/include")
+        if(_mmx6_checkpoint_variant STREQUAL "production")
+            target_compile_definitions(${_mmx6_checkpoint_target} PRIVATE PSX_NO_DEBUG_TOOLS)
+        endif()
+        if(MSVC)
+            target_compile_options(${_mmx6_checkpoint_target} PRIVATE /O2 /Gy /Gw)
+            target_link_options(${_mmx6_checkpoint_target} PRIVATE /OPT:REF)
+        else()
+            target_compile_options(${_mmx6_checkpoint_target} PRIVATE -O2 -ffunction-sections -fdata-sections)
+            if(APPLE)
+                target_link_options(${_mmx6_checkpoint_target} PRIVATE -Wl,-dead_strip)
+            else()
+                target_link_options(${_mmx6_checkpoint_target} PRIVATE -Wl,--gc-sections)
+            endif()
+        endif()
+        add_test(NAME ${_mmx6_checkpoint_target} COMMAND "$<TARGET_FILE:${_mmx6_checkpoint_target}>")
+        set_tests_properties(${_mmx6_checkpoint_target} PROPERTIES SKIP_RETURN_CODE 77)
     endforeach()
 
     # These tests require the modern host-state API. Legacy SDK builds retain

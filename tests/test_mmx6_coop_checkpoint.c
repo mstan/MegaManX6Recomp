@@ -47,7 +47,9 @@ static void mode9(CPUState *cpu) {
     cpu->gpr[31]=0x8001E720;cpu->gpr[4]=PLAY;
 }
 int main(int argc,char **argv) {
-    CHECK(argc==2);FILE *file=fopen(argv[1],"rb");CHECK(file);
+    const char *source=argc==2?argv[1]:getenv("MMX6_CONTENT_EXE");
+    if(!source || !*source){puts("SKIP: MMX6_CONTENT_EXE must name the original USA v1.1 EXE");return 77;}
+    CHECK(argc<=2);FILE *file=fopen(source,"rb");CHECK(file);
     CHECK(!fseek(file,0x800,SEEK_SET));CHECK(fread(original_ram+0x10000,1,0x7F000,file)==0x7F000);
     CHECK(fgetc(file)==EOF);fclose(file);
     CHECK(!diagnostic_tests());CPUState cpu;
