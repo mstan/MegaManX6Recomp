@@ -1,6 +1,7 @@
 """Pure owned-pair/source/input/failure seams; no game, socket or launch."""
 import io
 import json
+import re
 from pathlib import Path
 import tempfile
 from types import SimpleNamespace
@@ -57,14 +58,24 @@ class SourceBindingTests(unittest.TestCase):
             cue=root/"runtime.cue";cue.write_text('FILE "original.bin" BINARY\nTRACK 01 MODE2/2352\nINDEX 01 00:00:00\n')
             exe=root/"SLUS_013.95";exe.write_bytes(b"original fixture")
             settings='[video]\nrenderer="opengl"\naspect_ratio="4:3"\nrewind=false\n[controller]\np1_device = "keyboard"\np2_device = "none"\n'
-            config='[game]\nexe='+json.dumps(exe.as_posix())+'\ndisc='+json.dumps(cue.as_posix())+'\nmemcard_dir='+json.dumps((root/"saves").as_posix())+'\n[runtime]\nopenbios=true\nbios_hle=true\nbios_hle_keep_intro=false\ndisc_speed="1x"\n'
-            (root/"game.toml").write_text(config);(root/"settings.toml").write_text(settings)
+            # Use the real title layout: memcard_dir belongs to [runtime].
+            # A handcrafted [game] fixture masked the actual staging failure.
+            config=(Path(__file__).resolve().parents[1]/"game.toml").read_text(encoding="utf-8")
+            for key,value in (("exe",exe),("disc",cue),("memcard_dir",root/"saves")):
+                config,count=re.subn(r'(?m)^'+key+r'\s*=.*$',lambda _:key+' = '+json.dumps(value.as_posix()),config)
+                self.assertEqual(count,1)
+            (root/"game.toml").write_text(config,encoding="utf-8");(root/"settings.toml").write_text(settings)
             with patch.object(adapter.helper.content,"EXE_SHA256",adapter.preparation.sha256(exe)):
                 receipt=adapter.prepare_profile(root,cue,raw)
                 self.assertEqual(receipt["local_input_port"],1)
                 self.assertIn('p2_mode = "digital"',(root/"settings.toml").read_text())
-                (root/"settings.toml").write_text(settings);(root/"game.toml").write_text(config.replace('disc_speed="1x"','disc_speed="2x"'))
+                faster,count=re.subn(r'(?m)^disc_speed\s*=.*$','disc_speed = "2x"',config)
+                self.assertEqual(count,1)
+                (root/"settings.toml").write_text(settings);(root/"game.toml").write_text(faster,encoding="utf-8")
                 with self.assertRaisesRegex(ValueError,"default loader"):adapter.prepare_profile(root,cue,raw)
+                (root/"game.toml").write_text(re.sub(r'(?m)^memcard_dir\s*=.*\n','',config),encoding="utf-8")
+                (root/"settings.toml").write_text(settings)
+                with self.assertRaisesRegex(ValueError,"private-card binding"):adapter.prepare_profile(root,cue,raw)
 
 
 class PublishedRouteTests(unittest.TestCase):

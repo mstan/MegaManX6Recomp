@@ -47,8 +47,9 @@ def prepare_profile(directory,cue,raw):
         raise ValueError("Fresh paired reentry devices are not two stable digital host pads")
     config=tomllib.loads((directory/"game.toml").read_text(encoding="utf-8-sig"))
     game=config["game"];runtime=config["runtime"]
+    cards=runtime.get("memcard_dir")
     if (Path(game["disc"]).resolve(strict=True)!=Path(cue).resolve(strict=True) or
-            Path(game["memcard_dir"]).resolve()!=directory.resolve()/"saves" or
+            not isinstance(cards,str) or not cards or Path(cards).resolve()!=directory.resolve()/"saves" or
             preparation.sha256(Path(game["exe"]))!=helper.content.EXE_SHA256):
         raise ValueError("Prepared reentry original EXE/CUE/private-card binding changed")
     if (runtime.get("openbios") is not True or runtime.get("bios_hle") is not True or
