@@ -181,6 +181,7 @@ static uint32_t guest(CPUState *cpu, uint32_t address, uint32_t a0, uint32_t a1)
     return result;
 }
 
+#include "mmx6_coop_jump_audio.inc"
 #include "mmx6_coop_intro_target.inc"
 
 static int unit_choices(CPUState *cpu, uint32_t address) {
@@ -264,6 +265,10 @@ static int load_assets(const Mmx6CoopRoster *roster) {
         reason=MMX6_COOP_RESOURCES_INVALID_OVERLAY;
     if (reason!=MMX6_COOP_RESOURCES_OK) {
         fprintf(stderr,"mmx6 co-op: resources refused (%s)\n",mmx6_coop_resources_reason(reason));
+        free(bin);free(file);return 0;
+    }
+    if (!jump_audio_load(file,n)) {
+        fprintf(stderr,"mmx6 co-op: original Zero jump audio resources refused\n");
         free(bin);free(file);return 0;
     }
     uint8_t *compressed=malloc(v.graphics.size);
@@ -1906,9 +1911,14 @@ static void activate(void) {
     if (!packets) packets=psx_mod_alloc_texture_packet_memory(FRAME_ARENA*2,16);
     if (!hud_packets) hud_packets=psx_mod_alloc_texture_packet_memory(0x10000,16);
     if (!menu_memory) menu_memory=psx_mod_alloc_gpu_dma_memory(MENU_BYTES*2,16);
-    failed=!(assets && diagnostic && packets && hud_packets && menu_memory);
+    int audio_allocated=jump_audio_activate();
+    failed=!(assets && diagnostic && packets && hud_packets && menu_memory && audio_allocated);
     if (diagnostic) for (unsigned i=0;i<0x2000;i+=4) psx_mod_write_word(diagnostic+i,0);
     checkpoint_reset();
+    if (!psx_mod_set_function_replacement(0x80016C48,jump_audio_sound) ||
+        !psx_mod_set_function_replacement(0x8005A9D4,jump_audio_keyon) ||
+        !psx_mod_set_function_replacement(0x80055B14,jump_audio_status) ||
+        !psx_mod_set_function_replacement(0x8001750C,jump_audio_stop)) failed=1;
     if (!psx_mod_set_function_replacement(0x80031474,enemy_hit)) failed=1;
     if (!psx_mod_set_function_replacement(0x800E9898,unit_choices)) failed=1;
     if (!psx_mod_set_function_replacement(0x800EB14C,intro_near_target)) failed=1;

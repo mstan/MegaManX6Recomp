@@ -15,6 +15,11 @@ static void *test_malloc(size_t bytes);
 static int allocation_fail,allocation_calls,local_scope,texture_support=1;
 static unsigned guest_calls,guest_writes,forgotten;
 static int abandon_guest;
+static uint32_t audio_epoch=1;
+uint32_t psx_mod_spu_sample_bank_epoch(void){return audio_epoch;}
+int spu_get_private_voice_state(unsigned slot,SpuVoiceState *out){
+    CHECK((slot==20 || slot==22) && out);memset(out,0,sizeof *out);return 1;
+}
 static jmp_buf abandon_target;
 static uint8_t ram[0x200000],extra[0x200000];
 static uint16_t vram[1024*512];
@@ -65,6 +70,13 @@ static void setup(void){
     memset(saved_portrait_colors,0x3B,sizeof saved_portrait_colors);
     pickup_owners[0]=(PickupOwner){0x800C5000,1};zero_solid_contacts[3]=(SolidContact){3,255};
     death_effect[2]=(DeathEffectOrigin){123,456,0x80030000,2,1};
+    jump_audio_loaded=1;jump_audio_bound_epoch=jump_audio_owned_epoch=audio_epoch;
+    for(unsigned i=0;i<2;++i) {
+        JumpAudioBank *b=&jump_audio_banks[i];
+        b->guest=0x9F1B0000+i*8192;b->layout.bytes=32;b->layout.sample_bytes=128;
+        b->parsed=malloc(32);CHECK(b->parsed);memset(b->parsed,(int)(0x62+i),32);
+        b->samples=malloc(128);CHECK(b->samples);memset(b->samples,(int)(0x73+i),128);
+    }
     Mmx6AssetView source={zero_compressed,compressed_size,2};snapshot_assets_loaded(&source,1);CHECK(snapshot_ready());
 }
 static void pixel_edges(void){
@@ -116,6 +128,7 @@ static void digest_and_readiness(void){
     PERTURB(p2.shots[6]);PERTURB(previous_input);PERTURB(p2_start_previous);
     PERTURB(saved_portrait_colors[7]);PERTURB(pickup_owners[0].seat);PERTURB(zero_solid_contacts[3].carried);
     PERTURB(death_effect[2].x);
+    PERTURB(jump_audio_banks[0].guest);PERTURB(jump_audio_registers[4]);
 #undef PERTURB
     life.status[1]=MMX6_COOP_ABSENT;h=state_digest();life.rejoin_pending=1;CHECK(state_digest()!=h);life.rejoin_pending=0;life.status[1]=MMX6_COOP_ALIVE;
     zero_projected=1;h=state_digest();saved_play[3]^=1;CHECK(state_digest()!=h);saved_play[3]^=1;zero_projected=0;
@@ -124,6 +137,15 @@ static void digest_and_readiness(void){
     for(unsigned i=0;i<sizeof guards/sizeof guards[0];++i){h=state_digest();*guards[i]=1;CHECK(!snapshot_ready());CHECK(state_digest()!=h);*guards[i]=0;CHECK(snapshot_ready());CHECK(state_digest()==h);}
     local_scope=1;CHECK(!snapshot_ready());local_scope=0;
     texture_support=0;CHECK(!snapshot_ready());texture_support=1;
+    unsigned *audio_guards[]={&jump_audio_call,&jump_audio_keyon_call,&jump_audio_stop_call,&jump_audio_faulted,
+        &jump_audio_slot,&jump_audio_bank,&jump_audio_tone,&jump_audio_mode,&jump_audio_calculated};
+    for(unsigned i=0;i<sizeof audio_guards/sizeof audio_guards[0];++i) {
+        h=state_digest();*audio_guards[i]=1;CHECK(!snapshot_ready() && state_digest()!=h);
+        *audio_guards[i]=0;CHECK(snapshot_ready() && state_digest()==h);
+    }
+    h=state_digest();jump_audio_stop_mask=1;CHECK(!snapshot_ready() && state_digest()!=h);jump_audio_stop_mask=0;
+    jump_audio_registers[4]=1;CHECK(!snapshot_ready() && state_digest()!=h);jump_audio_registers[4]=0;
+    h=state_digest();++audio_epoch;CHECK(!snapshot_ready() && state_digest()==h);--audio_epoch;
     CHECK(snapshot_ready() && pause_owner==1 && zero_menu_loaded); /* Stable paused UI remains admissible. */
     uint32_t words[2]={0x11223344,0x55667788},same[2]={0x11223344,0x55667788};
     STATE_WORDS(a,42,words,2);CHECK(!snapshot_ready());h=state_digest();STATE_POP(a);
@@ -158,8 +180,10 @@ static void roundtrip_and_malformed(void){
     reject_unchanged(wire,0);reject_unchanged(wire,1);reject_unchanged(wire,len-1);
     memcpy(bad,wire,len);bad[len]=0;reject_unchanged(bad,len+1);
     memcpy(bad,wire,len);bad[8]^=1;reject_unchanged(bad,len); /* Fixed guest allocation identity. */
-    memcpy(bad,wire,len);bad[48]^=1;reject_unchanged(bad,len); /* Immutable asset SHA256. */
-    memcpy(bad,wire,len);bad[80+sizeof p2]=255;reject_unchanged(bad,len); /* Lifecycle enum. */
+    memcpy(bad,wire,len);bad[8+9*4]^=1;reject_unchanged(bad,len); /* Retained audio header allocation. */
+    StateIO resources={STATE_COUNT,1,NULL,NULL,0,0,0};snapshot_resources(&resources);
+    memcpy(bad,wire,len);bad[resources.pos-32]^=1;reject_unchanged(bad,len); /* Immutable asset SHA256. */
+    memcpy(bad,wire,len);bad[resources.pos+sizeof p2]=255;reject_unchanged(bad,len); /* Lifecycle enum. */
     HostState core;state_capture(&core);StateIO count={STATE_COUNT,1,NULL,NULL,0,0,0};snapshot_resources(&count);state_core(&count,&core);
     uint32_t cache=count.pos;memcpy(bad,wire,len);put32(bad+cache,4097);reject_unchanged(bad,len);
     memcpy(bad,wire,len);bad[cache+4+44]=2;reject_unchanged(bad,len); /* Invalid retained-pixel encoding. */
@@ -177,8 +201,13 @@ static void roundtrip_and_malformed(void){
      * pixel bank and metadata, then validate saved length independently of live. */
     for(unsigned i=0;i<4096;++i){free(banks[i].pixels);memset(&banks[i],0,sizeof banks[i]);}
     bank_count=ui_bank_count=0;memset(ui_banks,0,sizeof ui_banks);memset(&p2,0,sizeof p2);
-    CHECK(snapshot_validate(wire,len));allocation_fail=1;snapshot_read(wire,len);allocation_fail=0;
+    CHECK(snapshot_validate(wire,len));allocation_fail=1;allocations=allocation_calls;snapshot_read(wire,len);
     snapshot_resources_restored();CHECK(forgotten==1 && installed_resolver && state_digest()==original);
+    CHECK(allocation_calls==allocations);allocation_fail=0;
+    for(unsigned i=0;i<2;++i) {
+        uint8_t restored[32];capture(jump_audio_banks[i].guest,restored,sizeof restored);
+        CHECK(!memcmp(restored,jump_audio_banks[i].parsed,sizeof restored));
+    }
     for(unsigned i=0;i<bank_count;++i){CHECK(installed_resolver((uint16_t)(0x6000+i)));CHECK(texture_hash[i]==saved_hash[i]);}
     for(unsigned i=0;i<ui_bank_count;++i){CHECK(installed_resolver((uint16_t)(0x7000+i)));CHECK(texture_hash[4096+i]==saved_hash[4096+i]);}
     CHECK(!installed_resolver(0x5FFF));CHECK(!installed_resolver(0x8000));

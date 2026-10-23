@@ -1,0 +1,159 @@
+{
+  "schema": 1,
+  "scope": "fixed_X_P1_Zero_P2_ground_jump_only_candidate_unqualified",
+  "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+  "source_ranges": {
+    "native_sound": {
+      "begin": "80016C48",
+      "end_exclusive": "80016D34",
+      "sha256": "0363b19e99cb2c1cb5ee1ff43114a85340ea795a7deb47cdf5a0fd51814cfb54"
+    },
+    "sound_gain_and_selection": {
+      "begin": "80016D34",
+      "end_exclusive": "80017008",
+      "sha256": "fa436e55090bf6dee1a66c09e986abdcc8762b58aed2097e8c8c410d8f1dab4a"
+    },
+    "character_stop": {
+      "begin": "8001750C",
+      "end_exclusive": "800175F0",
+      "sha256": "cfaf446a25718c99c6f37b58426b27a31a075cbc143f06e23314b3a5a4cd79f9"
+    },
+    "jump_sfx_site": {
+      "begin": "80035620",
+      "end_exclusive": "80035724",
+      "sha256": "4cfd39d35be2a76873243e5ec325e7ee9bb88b9369097b2f832bddea99e9652b"
+    },
+    "ground_jump_voice": {
+      "begin": "8003AF1C",
+      "end_exclusive": "8003AFF4",
+      "sha256": "edb4af58ccfefaaa5df5282090250667a6580816d570c26e96126bcd0782feeb"
+    },
+    "voice_wrapper": {
+      "begin": "8003CFE0",
+      "end_exclusive": "8003D014",
+      "sha256": "9f594a7bde22b766b2fd112350df11d84ba5cdab1ac6fac77af1df0c186f8568"
+    },
+    "voice_status": {
+      "begin": "80055B14",
+      "end_exclusive": "80055BA4",
+      "sha256": "ab2a3c452306457781b1b64c3514df3b7c76b29d507b7f3c5adb9c1763f8bf64"
+    },
+    "explicit_keyon": {
+      "begin": "8005A9D4",
+      "end_exclusive": "8005AD40",
+      "sha256": "03f5fef35208abd5edae7dd33e8d6629bbb91f84ad6b62970bdb580e8be42e0e"
+    },
+    "header_program_parser": {
+      "begin": "80060408",
+      "end_exclusive": "8006054C",
+      "sha256": "ddc7f40ec7db5b0d0e613a34fd3620107b6af1c53ce00fa145682750c0944659"
+    },
+    "header_sample_parser": {
+      "begin": "8006054C",
+      "end_exclusive": "80060600",
+      "sha256": "107e0d77bf1097d6349fa60d47d6ff7d50130bc472858b9b63904805c8227844"
+    }
+  },
+  "required_hook_entries": [
+    "80016C48",
+    "8005A9D4",
+    "80055B14",
+    "8001750C"
+  ],
+  "native_driver_transaction": {
+    "begin": "800E4E30",
+    "bytes": 2304,
+    "end_inclusive": "800E572F",
+    "metadata_stride": 56,
+    "additional": [
+      {
+        "begin": "800E25E0",
+        "bytes": 24
+      },
+      {
+        "begin": "80097738",
+        "bytes": 128
+      },
+      {
+        "begin": "800E459C",
+        "bytes": 4
+      },
+      {
+        "begin": "800E155C",
+        "bytes": 4
+      }
+    ]
+  },
+  "native_direct_stop_calls": [
+    "8001D138",
+    "8001D234",
+    "8001D300",
+    "8001D498",
+    "8001D718",
+    "8001D7E0",
+    "8001DC34",
+    "8001DC94",
+    "8001EBB0",
+    "80034788",
+    "800349EC",
+    "800385FC",
+    "800386EC",
+    "800387E4",
+    "800388F8",
+    "8003B234",
+    "8003D8BC",
+    "8003D8C8",
+    "8003F494",
+    "8003F60C"
+  ],
+  "private_banks": [
+    {
+      "group": 1,
+      "native_id": 14,
+      "bank": 30,
+      "private_slot": 22,
+      "event_voice": 46,
+      "header_subasset": 11,
+      "header_bytes": 4264,
+      "sample_subasset": 12,
+      "sample_bytes": 123408,
+      "header_sha256": "abf6451ffee33fa526e91be07e9c4f854c38ef0840ffa19c50a89c896536c857",
+      "sample_sha256": "425516420dc6ff1d973edae265717a6ca237454631cdb4b7c829c96f6f7057a8"
+    },
+    {
+      "group": 3,
+      "native_id": 15,
+      "bank": 31,
+      "private_slot": 20,
+      "event_voice": 44,
+      "header_subasset": 13,
+      "header_bytes": 3696,
+      "sample_subasset": 14,
+      "sample_bytes": 52096,
+      "header_sha256": "7c9fedd98a3d4740a2baddcc77323984e8b0a1ae139e24f36043cdfd0fa757ce",
+      "sample_sha256": "203c8e0e58ea4e55797445b7af76e7563528c21536ae8fd57e38566a89b38bdd"
+    }
+  ],
+  "frozen_x4": {
+    "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+    "path": "src/mods/mmx4_coop_audio.c",
+    "blob": "f490a1725aac5775a3e6711305370c279362dceb"
+  },
+  "native_qualification": "UNVERIFIED; prior shared-voice implementation locally failed bounded comparison; no fix outcome is claimed",
+  "minimum_sdk": "bfbfb920bfa509f6a31ec2e6b28411a01797427f",
+  "helper_validation": {
+    "host": "Windows x64 only",
+    "compilers": [
+      "GCC15.2.0",
+      "Clang22.1.8"
+    ],
+    "configurations": 12,
+    "callback_and_snapshot_matrix": 8,
+    "header_matrix": 4,
+    "original_header_and_body_source_cases": true,
+    "native_execution": false,
+    "title_build": false,
+    "portable_other_architecture_or_cross_host_qualification": false,
+    "receipt_path": "G:/Temp/Codex/psxrecomp/x6-parity/temp/zero-jump-audio/matrix.json"
+  }
+}

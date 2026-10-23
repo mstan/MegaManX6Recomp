@@ -1,5 +1,5 @@
 /* Executable-owned host state, included after the native implementation.
- * Schema 1 is build-specific. No old-state migration or host pointer wire. */
+ * Schema 2 is build-specific. No old-state migration or host pointer wire. */
 enum { STATE_COUNT,STATE_WRITE,STATE_READ,STATE_HASH,STATE_MAX_BYTES=16*1024*1024 };
 typedef struct {
     unsigned mode,ok;
@@ -49,15 +49,19 @@ static void snapshot_assets_loaded(const Mmx6AssetView *views,unsigned count) {
         }
         psx_sha256_update(&sha,pixels,sizeof pixels);
     }
+    psx_sha256_update(&sha,jump_audio_asset_sha,sizeof jump_audio_asset_sha);
     psx_sha256_final(&sha,snapshot_asset_sha);snapshot_asset_valid=1;
 }
 static int snapshot_ready(void) {
     if(diagnostic && psx_mod_read_byte(diagnostic+0x50)==8)return 0;
     const unsigned guards[]={inside,player_call,stage_call,zero_world,world_render,
         hud_call,render_x_death,effect_call,pickup_call,solid_call,solid_allocate_call,
-        scene_call,zero_projected,unit_choices_call,intro_target_call,state_track.count,state_track.error,checkpoint_pending.phase};
+        scene_call,zero_projected,unit_choices_call,intro_target_call,state_track.count,state_track.error,checkpoint_pending.phase,
+        jump_audio_call,jump_audio_keyon_call,jump_audio_stop_call,jump_audio_faulted,
+        jump_audio_slot,jump_audio_bank,jump_audio_tone,jump_audio_mode,jump_audio_calculated,jump_audio_stop_mask};
     for(unsigned i=0;i<sizeof guards/sizeof guards[0];++i)if(guards[i])return 0;
-    return ready && !failed && snapshot_asset_valid && zero_compressed && compressed_size && zero_ui_pixels &&
+    for(unsigned i=0;i<8;++i)if(jump_audio_registers[i])return 0;
+    return ready && !failed && jump_audio_ready() && snapshot_asset_valid && zero_compressed && compressed_size && zero_ui_pixels &&
         assets && assembly && palette_source && active_palette && packets && diagnostic && menu_memory &&
         menu_assembly && hud_packets && psx_mod_texture_banks_supported() && !psx_mod_local_view_scope();
 }
@@ -155,14 +159,17 @@ static uint32_t state_digest(void) {
     HostState core;state_capture(&core);
     StateIO io={STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_fixed(&io,0x53483658u);state_core(&io,&core);
     const uint32_t resources[]={assets,assembly,palette_source,active_palette,packets,diagnostic,
-        menu_memory,menu_assembly,hud_packets,(uint32_t)compressed_size,(unsigned)snapshot_asset_valid};
+        menu_memory,menu_assembly,hud_packets,(uint32_t)compressed_size,(unsigned)snapshot_asset_valid,
+        jump_audio_banks[0].guest,jump_audio_banks[1].guest,jump_audio_loaded};
     for(unsigned i=0;i<sizeof resources/sizeof resources[0];++i)state_integer(&io,resources[i],4,UINT32_MAX);
     if(snapshot_asset_valid)state_bytes(&io,snapshot_asset_sha,sizeof snapshot_asset_sha);
     const uint32_t guards[]={inside,player_call,stage_call,zero_world,world_render,hud_call,render_x_death,
         effect_call,pickup_call,solid_call,solid_allocate_call,scene_call,zero_projected,unit_choices_call,intro_target_call,
         state_track.count,state_track.error,(unsigned)ready,checkpoint_pending.phase,
-        checkpoint_pending.index,checkpoint_pending.nonce};
+        checkpoint_pending.index,checkpoint_pending.nonce,jump_audio_call,jump_audio_keyon_call,jump_audio_stop_call,
+        jump_audio_slot,jump_audio_bank,jump_audio_tone,jump_audio_mode,jump_audio_calculated,jump_audio_faulted,jump_audio_stop_mask};
     for(unsigned i=0;i<sizeof guards/sizeof guards[0];++i)state_integer(&io,guards[i],4,UINT32_MAX);
+    for(unsigned i=0;i<8;++i)state_integer(&io,jump_audio_registers[i],2,65535);
     if(zero_world)state_integer(&io,world_packets,4,UINT32_MAX);
     if(hud_call)state_integer(&io,hud_seat,1,1);
     if(zero_projected) {
@@ -196,8 +203,9 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    state_fixed(s,0x53503658u);state_fixed(s,1);
-    const uint32_t handles[]={assets,assembly,palette_source,active_palette,packets,diagnostic,menu_memory,menu_assembly,hud_packets};
+    state_fixed(s,0x53503658u);state_fixed(s,2);
+    const uint32_t handles[]={assets,assembly,palette_source,active_palette,packets,diagnostic,menu_memory,menu_assembly,hud_packets,
+        jump_audio_banks[0].guest,jump_audio_banks[1].guest};
     for(unsigned i=0;i<sizeof handles/sizeof handles[0];++i)state_fixed(s,handles[i]);
     state_fixed(s,(uint32_t)compressed_size);
     uint8_t identity[32];memcpy(identity,snapshot_asset_sha,32);state_bytes(s,identity,32);
@@ -281,6 +289,10 @@ static int snapshot_resolve_texture(uint16_t id) {
     return 0;
 }
 static void snapshot_resources_restored(void) {
+    /* The validation boundary requires current retained/bound immutable banks.
+     * SPU state read preserves their registry/epoch. Rebuild guest headers
+     * without allocation, DMA, native calls or changing private DSP state. */
+    for(unsigned i=0;i<2;++i)project(jump_audio_banks[i].guest,jump_audio_banks[i].parsed,jump_audio_banks[i].layout.bytes);
     psx_mod_set_texture_bank_resolver(snapshot_resolve_texture);
     if(!psx_mod_forget_texture_bank_range(0x6000u,8192))failed=1;
 }
