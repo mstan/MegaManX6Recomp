@@ -11,6 +11,7 @@ typedef struct {
     Mmx6CoopStatus status[2];
     unsigned select_frames;
     uint8_t select_armed, select_previous, wipe; /* wipe = last fallen seat + 1 */
+    uint8_t rejoin_pending; /* A fresh request waits for departure completion and safe native ground. */
 } Mmx6CoopLifecycle;
 
 void mmx6_coop_lifecycle_init(Mmx6CoopLifecycle *s);
@@ -21,6 +22,9 @@ void mmx6_coop_fatal(Mmx6CoopLifecycle *s, unsigned player);
 void mmx6_coop_lifecycle_respawn(Mmx6CoopLifecycle *s);
 Mmx6CoopJoinAction mmx6_coop_join_input(Mmx6CoopLifecycle *s,
                                      int select, int gameplay, int safe_landing);
+/* Call join_input with gameplay=0 during native menus/locks too: those samples
+ * update button history without creating a request or advancing a hold. An
+ * already queued rejoin waits through that interval; death/respawn cancels it. */
 /* Completion is separate from the request, so native teleport art can finish. */
 void mmx6_coop_teleport_done(Mmx6CoopLifecycle *s);
 int32_t mmx6_coop_limit_x(int32_t x, int32_t other, unsigned viewport_width);

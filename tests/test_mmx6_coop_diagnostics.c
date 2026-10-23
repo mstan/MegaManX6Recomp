@@ -63,6 +63,7 @@ int main(void) {
     ++bank_count;CHECK(diagnostic_host_digest()==original);
     ++p2.shots[5];CHECK(diagnostic_host_digest()!=original);--p2.shots[5];
     ++life.select_frames;CHECK(diagnostic_host_digest()!=original);--life.select_frames;
+    ++life.rejoin_pending;CHECK(diagnostic_host_digest()!=original);--life.rejoin_pending;
     CHECK(diagnostic_host_digest()==original);
     ready=enrolled=1;psx_mod_write_byte(PLAY,10);
     diagnostics(0xFFFF);

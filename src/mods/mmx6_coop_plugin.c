@@ -552,7 +552,7 @@ static uint32_t diagnostic_host_digest(void) {
     /* Serialize integer fields explicitly; never hash structure padding. */
     const uint32_t fields[]={
         (uint32_t)life.status[0],(uint32_t)life.status[1],life.select_frames,
-        life.select_armed,life.select_previous,life.wipe,
+        life.select_armed,life.select_previous,life.wipe,life.rejoin_pending,
         previous_input,p2_edges,join_phase,(uint32_t)join_y,
         (uint32_t)pause_owner,(uint32_t)p2_start_previous,
         scene_owner,scene_phase,(uint32_t)scene_y,
@@ -949,6 +949,10 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     int start=!!(raw&8), pressed=start&&!p2_start_previous;
     unsigned phase=psx_mod_read_byte(PLAY+1);
     p2_start_previous=start;
+    /* Menus can bypass controller entirely. Consume their Select samples so
+     * a held UI press cannot become a new rejoin edge on gameplay resume. */
+    if (phase || scene_owner || psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C))
+        (void)mmx6_coop_join_input(&life,raw&1,0,0);
     if (!phase) {
         pause_owner=-1;
         /* Match the native pause gate. Simultaneous requests go to P1; an
@@ -1030,14 +1034,19 @@ static void controller(CPUState *cpu, uint32_t address) {
     if (inside || failed) return;
     /* Only the normal gameplay driver's post-player boundary. */
     if (cpu->gpr[31]!=0x80020C70u) return;
-    if (scene_owner) { life.select_frames=0; return; }
+    if (scene_owner) {
+        (void)mmx6_coop_join_input(&life,p2_input()&1,0,0);
+        return;
+    }
     if (psx_mod_read_byte(PLAY)!=0x0A || !psx_mod_read_byte(PLAYER)) {
+        (void)mmx6_coop_join_input(&life,p2_input()&1,0,0);
         enrolled=0; return;
     }
     if ((psx_mod_read_byte(PLAYER+4)!=2 &&
          (psx_mod_read_byte(PLAYER+4)!=1 || psx_mod_read_byte(PLAYER+5)<2)) ||
         psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C)) {
-        life.select_frames=0; return;
+        (void)mmx6_coop_join_input(&life,p2_input()&1,0,0);
+        return;
     }
     /* The opening's scripted jump/dialogue also uses action >= 2. Wait for
      * the native idle handoff before first enrollment, including restarts. */
