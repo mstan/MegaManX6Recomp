@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "kind": "historical_supporting_r13_map_not_formal_qualification",
+  "comparison": "R13",
+  "ledger_status": "unverified",
+  "mode_status": {
+    "local": "unverified",
+    "netplay": "unverified"
+  },
+  "formal_evidence_eligible": false,
+  "compiled_candidate_commit": null,
+  "formal_evidence_blocker": "The frozen validator requires an exact 40-character candidate commit; these historical receipts establish executable SHA256 but do not verify source-to-binary compilation provenance. Repeat both modes on the fresh clean manifest-bound candidate before changing ledger status.",
+  "source_audit": {
+    "commit": "42c82d5efec6b2cd32fc243b86e2e7e721c31e14",
+    "files": [
+      {
+        "path": "docs/COOP_PLACEMENT_ADMISSION_AUDIT.md",
+        "sha256": "a4e44b3da93c92caaa5171026dbdc9b3ac01e82fc5798559143214d120adbddf"
+      },
+      {
+        "path": "docs/COOP_PLACEMENT_ADMISSION_AUDIT.json",
+        "sha256": "0bc9abc116d01301e471da3a10a3aa4e9dd3980b5b5c2e3d86532d63a202cb67"
+      }
+    ],
+    "original_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "intro_overlay": {
+      "archive": "ROCK_X6.BIN",
+      "member": 2,
+      "sector": 36,
+      "size": 74784,
+      "base": "800E9860",
+      "sha256": "d8bcf3aea6caf1dd4098b681ad912692835d726dfe16fddca779e82d894de607"
+    }
+  },
+  "native_analogue": {
+    "state": "identified_subsystem",
+    "checkpoint": "s00-a0-c00",
+    "scanner": "80029F38",
+    "movement_driver": "80029D18",
+    "placement_root": "8007349C",
+    "allocator": "8002BBF4",
+    "record": {
+      "index": 25,
+      "address": "800FA2DC",
+      "category": 0,
+      "type": 1,
+      "subtype": 1,
+      "x": 416,
+      "y": 1080
+    },
+    "stationary_primary": {
+      "x": 144,
+      "camera": [
+        0,
+        944
+      ],
+      "strict_initial_rectangle": [
+        -48,
+        368,
+        896,
+        1232
+      ]
+    },
+    "preflight": "0<=cameraX && cameraX+368<416 && cameraY==944 && P1x==144 && !record_allocated && !live_origin_instance",
+    "admission": "P2 moves the shared midpoint camera; the rightward native strip is (C+336,C+368) x (Y-48,Y+288), with strict inequalities. The authored record lies outside the stationary P1-only placement rectangle.",
+    "pool": {
+      "base": "8008EF48",
+      "end_exclusive": "80090C88",
+      "stride": 156,
+      "slots": 48,
+      "identity": "Exactly one live +0!=0 slot with +1==1, +2==1 and +10==800FA2DC; never accept stale freed origin pointers."
+    },
+    "initialization": {
+      "entry": "800EAFFC",
+      "hp": 12,
+      "strength": 4,
+      "phase": 1,
+      "action": 1,
+      "render_byte_3_required": false
+    },
+    "interaction": {
+      "alive_body": "800EAC8C",
+      "native_hit": "80031474",
+      "native_contact": "80030ECC",
+      "observed_path": "P2 native attack; same live slot/type/origin loses HP or enters native death phase. Separate contact damage was not exercised."
+    }
+  },
+  "historical_receipts": [
+    {
+      "id": "bd7-preference-setup",
+      "mode": "local",
+      "original_report_status": "failed",
+      "outcome": "Setup rejection before route: stored renderer preference was mistaken for active widescreen.",
+      "artifacts": [
+        {
+          "path": "G:/Temp/Codex/psxrecomp/x6-parity/enemy-admission-r13-bd7/qualification.json",
+          "sha256": "dc23b225fd1dd10930d50192d4d0c2ae1b9161b1c2907b24e947cdc6ad6665a4"
+        }
+      ],
+      "result_kind": "setup_rejection"
+    },
+    {
+      "id": "bd7-camera-setup",
+      "mode": "local",
+      "original_report_status": "failed",
+      "outcome": "Setup rejection before route: literal camera0 check rejected camera2, which satisfies the source preflight.",
+      "artifacts": [
+        {
+          "path": "G:/Temp/Codex/psxrecomp/x6-parity/enemy-admission-r13-bd7-native43/qualification.json",
+          "sha256": "1af75072fbf5c02224c1fc95a8214c44a8d7e7fe1c62e2546f70cc003089a95e"
+        }
+      ],
+      "result_kind": "setup_rejection"
+    },
+    {
+      "id": "v10-first-route",
+      "mode": "local",
+      "original_report_status": "failed",
+      "outcome": "Origin-bound HP12/phase1 initialization observed; bounded walking approach stopped before the terrain rise, with no attack attempted.",
+      "artifacts": [
+        {
+          "path": "G:/Temp/Codex/psxrecomp/x6-parity/enemy-admission-r13-sdk9cb-v10-before/qualification.json",
+          "sha256": "1e49a755856feb288a9420485665ed19281b52fd70c647cbf98d7ac37b19763c"
+        }
+      ],
+      "result_kind": "route_setup_failure",
+      "exe_sha256": "a2f0d2c994db8deece0cb162114e74a225b8151a6c35940d5aa1651132544bc0"
+    },
+    {
+      "id": "v10-jump-correction",
+      "mode": "local",
+      "original_report_status": "passed",
+      "outcome": "Camera50 admission, HP12/phase1 initialization, native jump-right then P2 Square/action48 changed same live origin to HP0/phase2; P1x144 in137 observations.",
+      "artifacts": [
+        {
+          "path": "G:/Temp/Codex/psxrecomp/x6-parity/enemy-admission-r13-sdk9cb-v10-before-jump/qualification.json",
+          "sha256": "b83de4a8bc433c010ba13cc64c874323a3885947bfc75d579ee42dbbdd015948"
+        },
+        {
+          "path": "docs/evidence/mmx6-r13/native-v10-route-summary.json",
+          "sha256": "f96dc792210cef71b470dfce79f3665b2ad3aa87a9ddd276889c142572119bda"
+        }
+      ],
+      "result_kind": "bounded_historical_native_run",
+      "exe_sha256": "a2f0d2c994db8deece0cb162114e74a225b8151a6c35940d5aa1651132544bc0",
+      "settings": {
+        "native_viewport": "4:3",
+        "margin": 0,
+        "input_path": "native port2 pad",
+        "muted": true,
+        "private_profile": true
+      }
+    },
+    {
+      "id": "v11-local-original",
+      "mode": "local",
+      "original_report_status": "failed",
+      "outcome": "Original reducer missed retained post-Square HP4 window-start sample and inspected a later freed slot. This source report is unchanged.",
+      "artifacts": [
+        {
+          "path": "G:/Temp/Codex/psxrecomp/x6-parity/enemy-admission-r13-sdk9cb-v11-after/qualification.json",
+          "sha256": "46d18e38fc8f8fba0782be0223d6525d449a116e4402024dad74aed2c280f944"
+        }
+      ],
+      "result_kind": "preserved_original_reducer_failure",
+      "exe_sha256": "43796887fda9e8b6bf547acdd1fa1149e1a944717e824e0dee5bf4a5b6010db7"
+    },
+    {
+      "id": "v11-local-reanalysis",
+      "mode": "local",
+      "original_report_status": "failed",
+      "outcome": "Separate read-only reanalysis passes12 bounded local checks: camera51 admission, HP12/phase1 initialization, same live origin HP12->4 after Square, then deallocation; P1x144 in197 observations. It does not rewrite the original failed report.",
+      "artifacts": [
+        {
+          "path": "G:/Temp/Codex/psxrecomp/x6-parity/enemy-admission-r13-sdk9cb-v11-after/qualification-reanalysis.json",
+          "sha256": "19f2c19181d0ff2cf6640ceb4a2631c1b7c74b03381eb49442762625502e8ac0"
+        },
+        {
+          "path": "docs/evidence/mmx6-r13/native-v11-after-reanalysis.json",
+          "sha256": "19f2c19181d0ff2cf6640ceb4a2631c1b7c74b03381eb49442762625502e8ac0"
+        }
+      ],
+      "result_kind": "read_only_reanalysis",
+      "reanalysis_result": "passed",
+      "reanalysis_launch_count": 0,
+      "source_receipt": "v11-local-original",
+      "exe_sha256": "43796887fda9e8b6bf547acdd1fa1149e1a944717e824e0dee5bf4a5b6010db7",
+      "settings": {
+        "native_viewport": "4:3",
+        "margin": 0,
+        "input_path": "native port2 pad",
+        "muted": true,
+        "private_profile": true
+      }
+    },
+    {
+      "id": "v11-paired",
+      "mode": "netplay",
+      "original_report_status": "passed",
+      "outcome": "Both peers admitted camera53 origin-bound HP12/phase1 actor; published peer1 native attack reduced HP then freed it. P1x144 in121 paired observations;37 matched resolved core/mod CRC samples.",
+      "artifacts": [
+        {
+          "path": "G:/Temp/Codex/psxrecomp/x6-parity/netplay-native-r13-v11/qualification.json",
+          "sha256": "a62da3b15fca9ec5708726c71cd170427fb3212d2ccff7972fa275da70361b45"
+        },
+        {
+          "path": "docs/evidence/mmx6-r13/paired-v11-native-summary.json",
+          "sha256": "53df53deaf45e01466f3eff30e0bed4b672b4f8174e1de22b868a557ae1b8d5d"
+        }
+      ],
+      "result_kind": "bounded_historical_paired_run",
+      "exe_sha256": "43796887fda9e8b6bf547acdd1fa1149e1a944717e824e0dee5bf4a5b6010db7",
+      "settings": {
+        "profile": "mmx6-x-zero-delay-v11",
+        "input_delay": 3,
+        "peers": 2,
+        "network": "same-machine loopback",
+        "native_viewport": "4:3",
+        "margin": 0,
+        "loading": "default Seamless Loading",
+        "input_path": "published peer1 virtual host device through delay transport",
+        "muted": true,
+        "private_profiles": true
+      },
+      "crc_windows": {
+        "total_equal_core_mod_samples": 37,
+        "post_route_samples": 7,
+        "post_route_ticks": [
+          4288,
+          4480
+        ],
+        "post_route_both_resolved_through": 4499,
+        "post_pause_resume_samples": 8,
+        "post_pause_resume_ticks": [
+          4608,
+          4832
+        ],
+        "post_pause_resume_both_resolved_through": 4842
+      },
+      "matched_composed_scope": "Stable native paused menu only, SHA25634a3b672a3fd5fdf06710fa53c65fdd2560a3a622bb688039bf11737fdaa7b7c; independently timed gameplay captures differ."
+    }
+  ],
+  "required_final_receipts": [
+    "One exact fresh clean manifest-bound candidate commit and verified actual executable build identity shared by local/netplay receipts.",
+    "Per mode: native 4:3/margin0, inactive record25 and no live origin before admission, P1 fixed at144, original accepted P2 movement, source-mapped admission and actual HP12/phase1 initialization.",
+    "Per mode: accepted P2 native attack causing an observed HP decrease or native death on the same live authored-origin instance; retain failures separately.",
+    "Netplay: both peers perform the native mechanic through published host input, retain actual equal-simulation-tick resolved core/mod CRC samples and accurately scoped composed captures.",
+    "Reviewed artifact paths/SHA256, settings, inputs, outcome, limitations and bypasses satisfy the unchanged ledger validator before changing either mode status."
+  ],
+  "not_r13_gates": [
+    "Nearest-player AI for every enemy/action: the narrow type1 proximity fix is separately evidenced.",
+    "Independent once-world cadence: the trace receipt is a separate bounded check, not an additional R13 requirement.",
+    "Separate contact damage when the required native interaction is established by an actual native attack."
+  ],
+  "limits": [
+    "Historical support only: formal ledger evidence remains empty and all R13 statuses remain unverified.",
+    "One intro type1 record and one native attack route; no all-enemy/campaign/camera-lock/vertical-route/physical-controller/cross-host/audible claim.",
+    "Diagnostic publication and subsequent RAM reads are separate observations, not an atomic world snapshot.",
+    "Paired short HP4/HP8 samples tagged the same publication are not atomic matched hit history; resolved CRC samples qualify their retained windows.",
+    "Only the stable paused composed menu was byte-identical; independent gameplay captures differ in idle pose.",
+    "No guest RAM, fixture/mailbox, success-flag or source-card writes. Owned processes required termination after bounded quit handling; graceful shutdown is unqualified.",
+    "The native-world trace report retains a failed route HP-sample check despite separate passing counter checks and is not used as a passed R13 interaction receipt."
+  ]
+}

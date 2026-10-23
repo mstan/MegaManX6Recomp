@@ -491,12 +491,16 @@
       "frozen_row_sha256": "2631e7f8edc90ad4845df09f0e6e896939f0a56e89b26a525fcbe3ad82f144df",
       "x6": {
         "workstream": "camera",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Native enemy placement admission for a leading partner",
-        "bounded_check": "Map an authored X6 scanner/record, leave the primary outside its window and require guest-triggered initialization plus actual enemy interaction.",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Intro primary scanner 80029F38 / authored enemy record25 at 800FA2DC (category0/type1/subtype1)",
+        "bounded_check": "At native 4:3/margin0, keep P1x144 while record25 (416,1080) is outside the stationary P1-only scan rectangle; require an inactive record and no live origin, then use accepted P2 movement to admit it through the shared camera, observe origin-bound native HP12/phase1 initialization and a real P2 attack HP/death transition, independently local/netplay on one exact candidate.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:shared_camera",
-          "src/mods/mmx6_coop_plugin.c:camera_target"
+          "src/mods/mmx6_coop_plugin.c:camera_target",
+          "docs/COOP_PLACEMENT_ADMISSION_AUDIT.md",
+          "docs/COOP_PLACEMENT_ADMISSION_AUDIT.json",
+          "docs/COOP_R13_EVIDENCE_MAP.md",
+          "docs/evidence/mmx6-r13/historical-ledger-map.json"
         ],
         "status": "unverified",
         "required_modes": [
@@ -508,7 +512,7 @@
           "netplay": "unverified"
         },
         "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "limitations": "R13 and both modes remain unverified pending fresh local/netplay receipts on one clean manifest-bound candidate. Historical v10 native pass, v11 local read-only reanalysis pass and v11 paired pass identify exact executable SHA256 values but do not verify a compiled candidate commit; formal evidence remains empty. The original v11 local report stays failed; its separate passed reanalysis is not a rewrite. Source mapping, artifacts/status distinctions and remaining gates are in docs/COOP_R13_EVIDENCE_MAP.md and docs/evidence/mmx6-r13/historical-ledger-map.json. Scope is this intro record and native attack route; nearest-player AI breadth and independent once-world cadence are separate contracts, not extra R13 requirements."
       }
     },
     {
