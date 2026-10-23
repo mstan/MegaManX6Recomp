@@ -20,7 +20,29 @@ RECORD = 0x800FA2DC
 POOL = 0x8008EF48
 STRIDE = 0x9C
 SLOTS = 48
-BUILD_SHA = "bd7b9449d9fbc5c9c2137902ba2d8d525d1886211b03fd6756d0f76fbc9c263e"
+BUILD_SHA = "a2f0d2c994db8deece0cb162114e74a225b8151a6c35940d5aa1651132544bc0"
+
+
+def preflight(row):
+    camera_x, camera_y = row["camera"]
+    return (row["observation"]["players"][0]["x_raw"] == 144 << 16 and
+            0 <= camera_x and camera_x + 368 < 416 and camera_y == 944 and
+            not row["record_allocated"] and row["instance"] is None)
+
+
+def resident_targeting_sample(row):
+    target = row["instance"]
+    if target is None:
+        return None
+    players = row["observation"]["players"]
+    distances = [abs(target["x_raw"] - player["x_raw"]) / 65536 for player in players]
+    if target["phase"] == 1 and distances[1] < 112 <= distances[0]:
+        return dict(tick=row["observation"]["tick"], address=target["address"],
+                    origin=target["origin"], phase_plus4=target["phase"],
+                    action_plus5=target["action"], subaction_plus6=target["subaction"],
+                    hp=target["hp"], distances=distances,
+                    player_x=[player["x_raw"] / 65536 for player in players], enemy_x=target["x"])
+    return None
 
 
 def native_43(gpu, native_wide):
@@ -78,11 +100,13 @@ def observe_case(client):
 def run(args):
     output = local_output(args.output)
     prepare(args.build, args.source, output, args.disc, automated=True)
-    if sha256(output / "mmx6-runtime.exe") != BUILD_SHA:
-        raise ValueError("R13 case requires the frozen bd7 candidate")
+    if sha256(output / "mmx6-runtime.exe") != args.expected_exe_sha256:
+        raise ValueError("R13 candidate does not match the explicitly expected executable SHA256")
+    (output / "qualifier-source.py").write_bytes(Path(__file__).read_bytes())
+    qualifier_sha = sha256(output / "qualifier-source.py")
 
     def exercise(control, client, destination, report):
-        report.update(checks={}, observations=[], captures=[],
+        report.update(checks={}, observations=[], captures=[], resident_targeting_observations=[],
             scope="offline intro record25 only; R13 comparison row remains incomplete",
             unverified=["paired transport equivalent", "independent runtime proof of exactly one native world update"],
             source_contract={"scanner": "80029F38", "allocator": "8002BBF4", "enemy_update_loop": "8002000C",
@@ -93,6 +117,8 @@ def run(args):
                     "Camera, pool and diagnostic reads are separate bounded observations, not one atomic world sample",
                     "Type1 native AI proximity tests resident P1; P2 proximity alone is not qualified targeting",
                     "No paired result, ledger pass, full campaign or audible assertion"])
+        if args.expect_targeting_action2:
+            report["checks"]["p2_near_triggers_native_action2"] = False
         time.sleep(1)
         control("clear_input", port=1)
         control("clear_input", port=2)
@@ -104,7 +130,7 @@ def run(args):
         initial = observe_case(client)
         report["observations"].append(dict(label="initial", **initial))
         p1x = initial["observation"]["players"][0]["x_raw"]
-        if p1x != 144 << 16 or initial["camera"] != [0, 944] or initial["record_allocated"] or initial["instance"]:
+        if not preflight(initial):
             raise DebugError("Initial record/camera/P1 conditions are confounded; no route traversal attempted")
         report["captures"].append(capture_present(client, destination / "before-admission.png", request=control))
         selected_address = None
@@ -112,6 +138,11 @@ def run(args):
         def take(label):
             row = observe_case(client)
             report["observations"].append(dict(label=label, **row))
+            targeting = resident_targeting_sample(row)
+            if targeting:
+                report["resident_targeting_observations"].append(dict(label=label, **targeting))
+                if args.expect_targeting_action2 and targeting["action_plus5"] == 2:
+                    report["checks"]["p2_near_triggers_native_action2"] = True
             if row["observation"]["players"][0]["x_raw"] != p1x:
                 raise DebugError("P1 moved during the fixed-primary admission case")
             if row["instance"] and selected_address is not None and row["instance"]["address"] != selected_address:
@@ -151,6 +182,9 @@ def run(args):
         report["checks"]["record_bound_native_initialization"] = True
         report["captures"].append(capture_present(client, destination / "native-instance-admitted.png", request=control))
 
+        terrain_jump_used = False
+        last_approach_x = None
+        stalled = 0
         for step in range(24):
             row = take("approach bound instance")
             target = row["instance"]
@@ -158,15 +192,30 @@ def run(args):
                 raise DebugError("Selected instance disappeared before the planned interaction")
             if target["x"] - row["observation"]["players"][1]["x_raw"] / 65536 <= 40:
                 break
-            control("press", port=2, buttons=0xFFDF, frames=4)
-            window(5, f"P2 approach {step}")
+            p2x = row["observation"]["players"][1]["x_raw"]
+            stalled = stalled + 1 if last_approach_x == p2x else 0
+            last_approach_x = p2x
+            if not terrain_jump_used and stalled >= 2:
+                # The retained first route stopped at x309/y1114 before the
+                # nearby terrain rise. One original-input jump-right attempt.
+                report["terrain_jump"] = dict(tick=row["observation"]["tick"], x_raw=p2x,
+                                               reason="walking stopped before the intro terrain rise")
+                control("press", port=2, buttons=0xBFDF, frames=22)
+                window(24, "P2 single terrain jump-right")
+                terrain_jump_used = True
+            else:
+                control("press", port=2, buttons=0xFFDF, frames=4)
+                window(5, f"P2 approach {step}")
             control("clear_input", port=2)
         else:
             raise DebugError("P2 did not reach the bounded original-input attack position")
         before_attack = take("before native P2 attack")
         report["before_attack"] = before_attack
-        control("press", port=2, buttons=0xBFFF, frames=6)
-        window(4, "P2 jump toward selected enemy")
+        # Jump toward an elevated enemy only when below it. The terrain jump
+        # may already have placed P2 at or above the native enemy's height.
+        if before_attack["observation"]["players"][1]["y_raw"] > before_attack["instance"]["y_raw"] + (16 << 16):
+            control("press", port=2, buttons=0xBFFF, frames=6)
+            window(4, "P2 jump toward selected enemy")
         control("press", port=2, buttons=0x7FFF, frames=8)
         hit = None
         for index in range(25):
@@ -185,6 +234,7 @@ def run(args):
         report["captures"].append(capture_present(client, destination / "native-enemy-interaction.png", request=control))
 
     result = baseline.run(output, 24895, 200, False, exercise=exercise)
+    result["qualifier_sha256"] = qualifier_sha
     (output / "qualification.json").write_text(json.dumps(result, indent=2) + "\n")
     return result
 
@@ -195,7 +245,12 @@ def main():
     parser.add_argument("--source", type=Path, required=True)
     parser.add_argument("--disc", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--expected-exe-sha256", default=BUILD_SHA)
+    parser.add_argument("--expect-targeting-action2", action="store_true",
+                        help="Require native action2 while P2 is near and fixed P1 is far (after-fix comparison)")
     args = parser.parse_args()
+    if len(args.expected_exe_sha256) != 64 or any(c not in "0123456789abcdef" for c in args.expected_exe_sha256):
+        parser.error("Expected executable SHA256 must contain 64 lowercase hex digits")
     result = run(args)
     print(json.dumps(dict(status=result["status"], error=result.get("error"),
                          report=str(args.output / "qualification.json"))))

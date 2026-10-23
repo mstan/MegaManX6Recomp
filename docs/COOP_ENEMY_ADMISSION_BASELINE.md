@@ -39,7 +39,7 @@ and this enemy x416 its distance is 272, regardless of P2 leading. P2 proximity
 alone must not be required to trigger native action2. That targeting behavior
 is a separate source finding; this lane obtained no runtime targeting result.
 
-## Actual result: setup rejected, no admission qualification
+## Prior bd7 setup rejections
 
 Both retained attempts used executable SHA-256
 `bd7b9449d9fbc5c9c2137902ba2d8d525d1886211b03fd6756d0f76fbc9c263e`.
@@ -67,8 +67,8 @@ enemy pool was empty. The reused baseline's earlier twelve-frame P2 movement
 smoke had already shifted the camera. The strict setup gate stopped before the
 case moved P2 or attacked. Camera2 still satisfies the actual source
 discriminator `cameraX+368<416`: this was an unnecessary literal checkpoint
-assertion, not a failed mechanic. The owner confirmed stopping further launches
-in this lane and reviewing that source-derived guard centrally.
+assertion, not a failed mechanic. The coordinator ended that bounded lane and
+reviewed the source-derived guard. This was not a new owner instruction.
 
 The corrected failure's canonical PNG SHA-256 is
 `80d5ef0574f7377c7a412493bad12c3d5ae5fde34c61ba71d37fedf639b0dfac`.
@@ -86,9 +86,69 @@ of source metadata, explicit limits and slot-identity guarding were not rerun.
 
 The two reports are also committed under `docs/evidence/mmx6-r13/` with only
 CRLF line endings normalized to LF; the hashes above identify retained originals.
-Before a future native case, review the preflight against the source scanner
-predicate rather than requiring literal checkpoint camera0 after the baseline
-movement smoke. Keep the existing setup rejection evidence. Enemy admission,
-actual enemy interaction, composed art for
-this case, paired equivalence and independent once-world runtime proof remain
-unverified. R13 is not passed by this lane.
+The following route attempt replaces the literal camera check with the actual
+scanner predicate. Both original setup rejections remain preserved.
+
+## Native v10 route result
+
+The selected SDK9cb/profile-v10 candidate is a separately frozen executable:
+`a2f0d2c994db8deece0cb162114e74a225b8151a6c35940d5aa1651132544bc0`.
+Its executable/assets/catalog were staged from
+`netplay-modern-sdk-final-v10/peer-0`; caches, saves and cards were not copied.
+The preflight now requires `0<=cameraX` and `cameraX+368<416`, cameraY944,
+P1x144, an inactive record and no live matching origin. Unit cases accept
+camera0/2/47 and reject -1/48/80, wrong Y, moved P1, allocation and live origin.
+
+The first actual route, `enemy-admission-r13-sdk9cb-v10-before`, admitted the
+exact origin into slot0 at `8008EF48` at camera(49,944), diagnostic tick461.
+Native initialization was observed at tick476 with phase1/action1/subaction0,
+HP12 and strength4. P1 stayed x144. P2 walking stopped at x309/y1114 before the
+nearby terrain rise; its bounded approach could not reach attack distance.
+The report retains 56 samples from ticks642..841 with P2 distance111..107,
+P1 distance272 and native enemy action +5 still1. This observes the resident
+P1 proximity gap without using a hook counter as proof. No attack was attempted
+in that first route. Its report SHA-256 is
+`1e49a755856feb288a9420485665ed19281b52fd70c647cbf98d7ac37b19763c`.
+The executed qualifier source was saved alongside it, SHA-256
+`cfda96fafb71519c81867eff2cc8882a5ab5515a8eed9f079da31edd3c54710c`.
+
+One evidence-based route correction supplies one original jump-right input
+after walking stops. `enemy-admission-r13-sdk9cb-v10-before-jump` passes all
+eleven bounded offline checks, including the six reused intro/input checks.
+At tick383/camera(50,944), record25 was admitted into the same native pool slot;
+tick398 observed HP12/phase1 initialization. The single terrain jump began at
+tick572/x309. P2 subsequently reached x376/y1082, forty pixels from the enemy,
+while P1 stayed x144. Native Square input changed the exact origin-bound
+instance from HP12/phase1 to HP0/phase2 by tick725. P2 was in native action48;
+the native P2 hit counter changed 0->1 as corroborating telemetry. The native
+body transition, rather than that counter alone, establishes the interaction.
+There were 137 retained case observations; P1's X remained fixed in all of them.
+
+The corrected route report SHA-256 is
+`b83de4a8bc433c010ba13cc64c874323a3885947bfc75d579ee42dbbdd015948`.
+Its saved executed qualifier source SHA-256 is
+`ab8c3a56356872bf6eb5eabe2829b587e4e80ea458391dd6107357a5abd60ff2`.
+The composed `baseline/native-enemy-interaction.png` SHA-256 is
+`f03cf598b1ab2f2f27056c7a7427fdbecbd6b8a2d7094b067b53b6a1e78866d5`.
+Inspection shows X held at the left, Zero performing the saber attack and a
+hit/death burst at the right edge. The capture has actual present completion
+sequence3/wrote1. It is a single interaction image, not a full art qualification.
+
+The corrected route also retains 54 proximity-gap samples from ticks528..722,
+with P2 distance111 down to40 while P1 remains272 away and the enemy stays in
+action +5=1 before the hit. This is the v10 before case for the narrow targeting
+fix. The native timer advances, but independent once-world runtime proof,
+paired equivalence, audible behavior and the complete R13 row remain unverified.
+The runner again terminated only its owned process after bounded quit handling;
+no source card was used and existing private card bytes were unchanged.
+
+The tool supports an explicit `--expected-exe-sha256` for the selected after
+candidate and `--expect-targeting-action2` to require an actual origin-bound
+native action2 observation while P2 is within112 and fixed P1 remains outside.
+Seven focused parser/preflight/comparison tests pass. The after-comparison
+option was added after the v10 run and is not a v11 qualification by itself.
+
+All run directories above are under `G:/Temp/Codex/psxrecomp/x6-parity`.
+`docs/evidence/mmx6-r13/native-v10-route-summary.json` preserves compact receipts
+for both actual route attempts; the full observations/logs/captures remain in
+their identified output directories. No v11 result is implied by this evidence.

@@ -1,0 +1,46 @@
+{
+  "kind": "bounded_offline_enemy_admission_v10_receipts",
+  "exe_sha256": "a2f0d2c994db8deece0cb162114e74a225b8151a6c35940d5aa1651132544bc0",
+  "preflight": "0<=cameraX && cameraX+368<416 && cameraY==944 && P1x==144 && !record_allocated && !live_origin_instance",
+  "record": "800FA2DC",
+  "pool_instance": "8008EF48",
+  "input": "Original port2 SIO pad; no guest RAM or fixture writes",
+  "attempts": [
+    {
+      "output": "G:/Temp/Codex/psxrecomp/x6-parity/enemy-admission-r13-sdk9cb-v10-before",
+      "report_sha256": "1e49a755856feb288a9420485665ed19281b52fd70c647cbf98d7ac37b19763c",
+      "qualifier_source_sha256": "cfda96fafb71519c81867eff2cc8882a5ab5515a8eed9f079da31edd3c54710c",
+      "status": "attack_approach_not_reached",
+      "admitted": {"tick": 461, "camera": [49, 944], "enemy": [416, 1080], "hp": 12, "phase": 1, "action_plus5": 1, "strength": 4},
+      "initialized_tick": 476,
+      "observations": 157,
+      "p1_fixed_x": 144,
+      "walking_stop": [309, 1114],
+      "targeting_samples": 56,
+      "targeting_first": {"tick": 642, "player_x": [144, 305], "distances": [272, 111], "phase": 1, "action_plus5": 1, "hp": 12},
+      "targeting_last": {"tick": 841, "player_x": [144, 309], "distances": [272, 107], "phase": 1, "action_plus5": 1, "hp": 12},
+      "admitted_present_sha256": "90e8cbfedbc8cf7a8b1d54d81353b5d10f1fcc5e4085fde99c387fa3096c8768"
+    },
+    {
+      "output": "G:/Temp/Codex/psxrecomp/x6-parity/enemy-admission-r13-sdk9cb-v10-before-jump",
+      "report_sha256": "b83de4a8bc433c010ba13cc64c874323a3885947bfc75d579ee42dbbdd015948",
+      "qualifier_source_sha256": "ab8c3a56356872bf6eb5eabe2829b587e4e80ea458391dd6107357a5abd60ff2",
+      "status": "bounded_offline_pass_11_checks",
+      "correction": {"input": "one jump-right after walking stops", "tick": 572, "player2_x": 309},
+      "admitted": {"tick": 383, "camera": [50, 944], "enemy": [416, 1080], "hp": 12, "phase": 1, "action_plus5": 1, "strength": 4},
+      "initialized_tick": 398,
+      "observations": 137,
+      "p1_fixed_x": 144,
+      "before_attack": {"tick": 719, "player2": [376, 1082], "hp": 12, "phase": 1},
+      "after_attack": {"tick": 725, "player2": [376, 1082], "player2_action": 48, "hp": 0, "phase": 2, "same_live_slot_and_origin": true},
+      "p2_hit_counter": [0, 1],
+      "targeting_samples": 54,
+      "targeting_first": {"tick": 528, "player_x": [144, 305], "distances": [272, 111], "phase": 1, "action_plus5": 1, "hp": 12},
+      "targeting_last": {"tick": 722, "player_x": [144, 376], "distances": [272, 40], "phase": 1, "action_plus5": 1, "hp": 12},
+      "interaction_present_sha256": "f03cf598b1ab2f2f27056c7a7427fdbecbd6b8a2d7094b067b53b6a1e78866d5",
+      "interaction_present_completion": {"seq": 3, "wrote": 1}
+    }
+  ],
+  "unverified": ["paired transport", "independent runtime exactly-once world update", "complete R13 row", "audible behavior", "v11 targeting fix"],
+  "limits": ["Separate diagnostic/camera/pool reads are not one atomic world sample", "Timer advance is telemetry only", "Quit required owned-process termination", "No source card used; existing private card contents unchanged"]
+}

@@ -3,7 +3,8 @@ import struct
 import unittest
 
 from coop_debug import DebugError
-from qualify_mmx6_coop_enemy_admission import RECORD, SLOTS, STRIDE, native_43, parse_pool
+from qualify_mmx6_coop_enemy_admission import (RECORD, SLOTS, STRIDE, native_43,
+                                             parse_pool, preflight, resident_targeting_sample)
 
 
 class NativeEnemyEvidenceTests(unittest.TestCase):
@@ -49,6 +50,41 @@ class NativeEnemyEvidenceTests(unittest.TestCase):
         gpu["ws"]["mode"] = 2
         self.assertFalse(native_43(gpu, {"native_wide": 1, "mode": 2, "nw_extra": 0}))
         self.assertFalse(native_43({}, {}))
+
+    def test_preflight_uses_scanner_discriminator_before_admission(self):
+        row = {"camera": [2, 944], "record_allocated": False, "instance": None,
+               "observation": {"players": [{"x_raw": 144 << 16}]}}
+        for camera_x in (0, 2, 47):
+            row["camera"][0] = camera_x
+            self.assertTrue(preflight(row), camera_x)
+        for camera_x in (-1, 48, 80):
+            row["camera"][0] = camera_x
+            self.assertFalse(preflight(row), camera_x)
+        row["camera"] = [2, 944]
+        row["record_allocated"] = True
+        self.assertFalse(preflight(row))
+        row["record_allocated"] = False
+        row["instance"] = {"origin": hex(RECORD)}
+        self.assertFalse(preflight(row))
+        row["instance"] = None
+        row["camera"][1] = 943
+        self.assertFalse(preflight(row))
+        row["camera"][1] = 944
+        row["observation"]["players"][0]["x_raw"] += 1
+        self.assertFalse(preflight(row))
+
+    def test_targeting_comparison_retains_waiting_and_active_native_action(self):
+        _, target = parse_pool(self.pool([(0, self.body())]))
+        row = {"instance": target,
+               "observation": {"tick": 7, "players": [{"x_raw": 144 << 16}, {"x_raw": 305 << 16}]}}
+        self.assertEqual(resident_targeting_sample(row)["action_plus5"], 1)
+        target["action"] = 2
+        self.assertEqual(resident_targeting_sample(row)["action_plus5"], 2)
+        row["observation"]["players"][1]["x_raw"] = 304 << 16
+        self.assertIsNone(resident_targeting_sample(row))  # Native strict <112 boundary.
+        row["observation"]["players"][1]["x_raw"] = 305 << 16
+        row["observation"]["players"][0]["x_raw"] = 305 << 16
+        self.assertIsNone(resident_targeting_sample(row))  # P1 already near is no P2 discriminator.
 
 
 if __name__ == "__main__":
