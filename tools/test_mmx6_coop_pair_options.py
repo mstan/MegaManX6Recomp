@@ -3,7 +3,8 @@ import contextlib
 import io
 import unittest
 
-from qualify_mmx6_coop_pair import make_parser, validate_options
+from qualify_mmx6_coop_pair import CONTACT_EXE_SHA, make_parser, validate_options
+from mmx6_coop_contact import EXE_SHA
 
 
 class PairOptionTests(unittest.TestCase):
@@ -25,6 +26,8 @@ class PairOptionTests(unittest.TestCase):
         self.assertFalse(default.enemy_targeting_smoke)
         self.assertFalse(default.require_host_profile)
         self.assertFalse(default.personal_menu_smoke)
+        self.assertFalse(default.contact_pause_contact_smoke)
+        self.assertIsNone(default.original_disc)
         lifecycle = self.parse("--lifecycle-smoke")
         self.assertTrue(lifecycle.lifecycle_smoke)
         self.assertFalse(lifecycle.require_state_crc)
@@ -72,6 +75,37 @@ class PairOptionTests(unittest.TestCase):
                           "--admission-only")
         self.assertTrue(args.require_host_profile and args.admission_only)
         self.assertFalse(args.require_state_crc)
+
+    def contact_options(self):
+        return ["--contact-pause-contact-smoke", "--original-disc", "original.bin",
+                "--expected-exe-sha256", EXE_SHA, "--require-state-crc", "--require-host-profile",
+                "--expected-host-profile", "mmx6.win64-clang22.loopback", "--expected-host-profile-revision", "1"]
+
+    def test_contact_requires_exact_candidate_source_default_loader_crc_and_profile(self):
+        self.assertEqual(CONTACT_EXE_SHA, EXE_SHA)
+        args = self.parse(*self.contact_options())
+        self.assertTrue(args.contact_pause_contact_smoke and args.require_state_crc and args.require_host_profile)
+        self.assertEqual(args.expected_exe_sha256, EXE_SHA)
+        for flag in ("--native-loader-diagnostic", "--admission-only"):
+            self.rejected(*self.contact_options(), flag)
+        self.rejected("--contact-pause-contact-smoke")
+        self.rejected(*self.contact_options(), "--expected-exe-sha256", "a" * 64)
+        self.rejected(*self.contact_options(), "--original-disc", "original.cue")
+
+    def test_contact_cannot_omit_any_identity_or_evidence_guard(self):
+        for flag, takes_value in (("--original-disc", True), ("--expected-exe-sha256", True),
+                                  ("--require-state-crc", False), ("--require-host-profile", False),
+                                  ("--expected-host-profile", True), ("--expected-host-profile-revision", True)):
+            options = self.contact_options()
+            index = options.index(flag)
+            del options[index:index + (2 if takes_value else 1)]
+            self.rejected(*options)
+        self.rejected("--original-disc", "original.bin")
+
+    def test_contact_keeps_existing_menu_lifecycle_options_but_needs_separate_r13_actor_case(self):
+        args = self.parse(*self.contact_options(), "--personal-menu-smoke", "--lifecycle-smoke")
+        self.assertTrue(args.personal_menu_smoke and args.lifecycle_smoke and args.contact_pause_contact_smoke)
+        self.rejected(*self.contact_options(), "--enemy-targeting-smoke")
 
 
 if __name__ == "__main__":

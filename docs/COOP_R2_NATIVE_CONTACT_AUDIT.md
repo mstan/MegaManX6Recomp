@@ -163,3 +163,47 @@ the menu helper's `RuntimeError` as its handled `DebugError`, as the standalone
 menu adapter already does. The helper's tests exercise evidence rejection,
 field decoding, original-difficulty arithmetic and trace completeness only;
 they do not qualify accepted controls, the route or native contact.
+
+## Owned offline and paired adapters
+
+The adapters below have CLI/option tests only and have not launched this R2
+route. The owning coordinator runs the actual native trials and reviews their
+artwork. They make no ledger changes.
+
+`tools/qualify_mmx6_coop_contact.py` stages a fresh private offline profile or
+uses an unused `--candidate`. Build mode requires `--build`, `--source`,
+runtime `--disc` and `--output`; candidate mode forbids staging arguments.
+Both require `--original-disc` pointing to the original raw BIN and
+`--expected-exe-sha256` equal to the selected full `37cdc487...` hash above.
+Default debug port is24897. It reuses the existing `OfflineMenuAdapter` for
+owned active-low input and publication-based menu spacing, and baseline.run
+for the sole hidden/muted process, listener checks, private paths and cleanup.
+It never duplicates process lifecycle or provides a card/fixture option.
+
+The original `baseline/qualification.json` remains unchanged and is linked
+by status/path/SHA256 from the separate top-level receipt. Partial contact
+and menu cases are retained before errors are wrapped as baseline-handled
+`DebugError`. Runner/helper snapshots, tool hashes and bounded original-source
+hashes are retained. Exit0 means automated checks completed with artwork
+pending; it does not pass R2.
+
+The paired runner adds opt-in `--contact-pause-contact-smoke` and
+`--original-disc original.bin`. This case requires native gameplay, the full
+default loader, the exact selected executable hash, `--require-state-crc`,
+and declared `--require-host-profile` expectations. Existing profile validation
+still checks the actual pre-guest agreement; CRC validation still requires
+real same-simulation-tick core/mod samples below both resolved watermarks.
+All route/menu inputs use the owning peer's published host sampler; neutral
+release and pause spacing use resolved transport progress, never online SIO
+or the frozen world timer. Existing process/port ownership and cleanup remain
+in the paired runner.
+
+The contact flag cannot combine with `--enemy-targeting-smoke`: the latter
+requires an inactive authored record and consumes the enemy by attack, while
+R2 must retain that same live actor. Use separate fresh cases. Existing
+standalone menu/lifecycle options and their guards remain available; combining
+them is an explicit additional runtime obligation, not coverage inferred from
+the new option tests. A supplied `--original-disc` without the contact flag is
+rejected rather than ignored. Source loading verifies original EXE/archive/
+Zero member hashes; these are scoped source identities, not a whole-disc hash
+or a new claim about disc/network compatibility.

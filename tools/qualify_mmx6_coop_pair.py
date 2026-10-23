@@ -22,6 +22,9 @@ import time
 import traceback
 
 
+CONTACT_EXE_SHA = "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9"
+
+
 def enemy_targeting_smoke(ctx):
     """Original published peer1 input; read-only guest evidence on both peers."""
     enemy, clients, both = ctx["enemy"], ctx["clients"], ctx["both"]
@@ -188,11 +191,21 @@ def run(args) -> dict:
     if getattr(args, "personal_menu_smoke", False):
         personal_menu = importlib.import_module("mmx6_coop_personal_menu")
         modules += (personal_menu,)
+    contact, zero_overlay, original_disc = None, None, None
+    if getattr(args, "contact_pause_contact_smoke", False):
+        contact = importlib.import_module("mmx6_coop_contact")
+        inventory = importlib.import_module("inventory_mmx6_coop_content")
+        modules += (contact, contact.menu, contact.enemy, inventory)
     if any(Path(module.__file__).resolve().parent != tools_root for module in modules):
         raise ValueError("A shared tool resolved outside --tools-root")
     candidate_sha = preparation.sha256(args.build / "mmx6-runtime.exe")
     if getattr(args, "expected_exe_sha256", None) and candidate_sha != args.expected_exe_sha256:
         raise ValueError("Paired executable does not match the explicitly expected SHA256")
+    if contact is not None:
+        if candidate_sha != CONTACT_EXE_SHA or candidate_sha != contact.EXE_SHA:
+            raise ValueError("R2 paired executable is not the selected frozen37cdc487 candidate")
+        original_disc = args.original_disc.resolve(strict=True)
+        zero_overlay = contact.load_zero_overlay(original_disc)
     output = preparation.local_output(args.out)
     if output.exists():
         raise ValueError("Output exists; retain earlier evidence and choose a fresh directory")
@@ -218,6 +231,16 @@ def run(args) -> dict:
                       "Diagnostic publication counts are not netplay simulation ticks",
                       "Overlay autocompilation is off; no AOT or performance claim",
                       "No source memory cards were supplied or copied"])
+    if contact is not None:
+        report["contact_original_source"] = dict(raw_disc=str(original_disc),
+            exe_sha256=inventory.EXE_SHA256, archive_sha256=inventory.BIN_SHA256,
+            zero_overlay_sha256=contact.ZERO_SHA,
+            scope="Verified bounded EXE/archive/Zero members, not a whole-raw-disc hash")
+        report["contact_source_snapshots"] = []
+        for name, module in (("contact-helper-source.py", contact), ("contact-menu-helper-source.py", contact.menu)):
+            path = output/name
+            path.write_bytes(Path(module.__file__).read_bytes())
+            report["contact_source_snapshots"].append(dict(path=str(path), sha256=preparation.sha256(path)))
     handles, processes, clients, reservations = [], [], [], []
     executor = ThreadPoolExecutor(max_workers=2)
     runtime_ready = False
@@ -567,6 +590,45 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             matched("P2 personal menu, composed captures and resumed native controls")
             report["limits"].append(
                 "P2 personal-menu automated checks retain composed artwork review pending; no R8 ledger pass")
+        if contact is not None:
+            # Only the owning peer's published host sampler feeds transport.
+            # Paused menu spacing uses resolved transport ticks, never the
+            # deliberately frozen native world timer. Keep original errors if
+            # neutral cleanup also fails after an owned endpoint disappears.
+            def contact_hold(seat, bits, frames, label):
+                failure = None
+                try:
+                    clients[seat].host_input(bits)
+                    transport_window(frames)
+                except BaseException as error:
+                    failure = error
+                    raise
+                finally:
+                    try:
+                        clients[seat].host_input(0)
+                    except Exception as error:
+                        report.setdefault("contact_input_cleanup_errors", []).append(dict(
+                            label=label, seat=seat, error=str(error),
+                            original_error=str(failure) if failure else None))
+                        if failure is None:
+                            raise
+                transport_window(5)
+
+            case = contact.contact_pause_contact(dict(mode="netplay", input_path="published_host",
+                clients=clients, both=both, debug=debug, report=report, output=output,
+                hold=contact_hold, native_advance=lambda frames, label: advance(frames),
+                transport_window=transport_window, network=network, matched=matched,
+                candidate_exe_sha256=candidate_sha, zero_overlay=zero_overlay,
+                rpc=lambda peer, command, **fields: clients[peer].request(command, **fields)),
+                expected_exe_sha256=args.expected_exe_sha256)
+            report["contact_automated_status"] = case["status"]
+            report["contact_artwork_review"] = case["artwork_review"]
+            report["checks"]["r2_contact_pause_contact_automated_checks"] = bool(case["checks"]) and all(
+                case["checks"].values()) and case["status"] == "automated_contact_checks_passed_artwork_review_pending"
+            require(report["checks"]["r2_contact_pause_contact_automated_checks"],
+                    "R2 contact/menu/contact automated checks did not complete")
+            report["limits"].append(
+                "R2 source-derived contact route retains composed artwork review pending; no R2 ledger pass")
         if getattr(args, "enemy_targeting_smoke", False):
             enemy_targeting_smoke(dict(enemy=enemy, clients=clients, both=both, require=require,
                 network=network, report=report, matched=matched, wait_observed=wait_observed,
@@ -714,6 +776,10 @@ def make_parser():
                         help="Also exercise native P2 departure, blocked Select during P1 pause and fresh rejoin")
     parser.add_argument("--personal-menu-smoke", action="store_true",
                         help="Also check original published P2/Zero personal-menu ownership, controls and resources; composed artwork review remains pending")
+    parser.add_argument("--contact-pause-contact-smoke", action="store_true",
+                        help="Original published P2 body contact before/after its own menu; exact frozen37 candidate, source BIN, host profile and resolved CRC required")
+    parser.add_argument("--original-disc", type=Path,
+                        help="Original raw BIN for R2's immutable Zero hurtbox source, separate from runtime --disc")
     parser.add_argument("--require-state-crc", action="store_true",
                         help="Require modern same-simulation-tick core/mod logs below both resolved watermarks; candidate must register complete host digest")
     parser.add_argument("--require-host-profile", action="store_true",
@@ -743,6 +809,17 @@ def validate_options(parser, args):
         parser.error("Enemy targeting requires native gameplay, default loader and --require-state-crc")
     if args.personal_menu_smoke and (args.admission_only or args.native_loader_diagnostic or not args.require_state_crc):
         parser.error("Personal menu requires native gameplay, default loader and --require-state-crc")
+    if args.contact_pause_contact_smoke:
+        if args.admission_only or args.native_loader_diagnostic or not args.require_state_crc or not args.require_host_profile:
+            parser.error("Contact/menu/contact requires native gameplay, default loader, --require-state-crc and --require-host-profile")
+        if args.expected_exe_sha256 != CONTACT_EXE_SHA:
+            parser.error("Contact/menu/contact requires the exact frozen37cdc487 --expected-exe-sha256")
+        if args.original_disc is None or args.original_disc.suffix.lower() != ".bin":
+            parser.error("Contact/menu/contact requires --original-disc with the original raw BIN")
+        if args.enemy_targeting_smoke:
+            parser.error("Contact/menu/contact and enemy-targeting require separate fresh authored-enemy cases")
+    elif args.original_disc is not None:
+        parser.error("--original-disc belongs to --contact-pause-contact-smoke")
     if args.expected_exe_sha256 is not None and (len(args.expected_exe_sha256) != 64 or
             any(c not in "0123456789abcdef" for c in args.expected_exe_sha256)):
         parser.error("Expected executable SHA256 must contain 64 lowercase hex digits")
