@@ -1,0 +1,1350 @@
+{
+  "schema": 1,
+  "kind": "same_build_native_warm_cold_snapshot",
+  "result": "passed",
+  "candidate": {
+    "schema": 1,
+    "candidate_source": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+    "exe_sha256": "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9",
+    "declared_manifest_sha256": "5a1521fdf8682fbc8e28fee1fb3c4594d0b6a95844ea06ac3af61b998af28673",
+    "source_repositories": {
+      "game": {
+        "head": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "net": {
+        "head": "e53059306824edf4f0aec4aae5ae65151b18535f",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "rb": {
+        "head": "2a03e73693acee0fb78076ea058642c931bef12e",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "sdk": {
+        "head": "79246932166e46a82d7b61a229c60ff9c8e2931a",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "ui": {
+        "head": "b964eabe5a3438b8ed121064354ba27c1accef3f",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "private_artifacts": {
+      "manifest.json": "4f4f89f8186e8df3afbe64789dc07557c165ddedba3458da0d29617f4bd2ebd8",
+      "manifest.h": "4126bf438ab2dad04df539ba4a46ad204d4c07799973b7e6475621dce1b6f3aa",
+      "provenance.json": "e446eabb01917d705e7e2699d02f5212e1f064a4f44791fc70c783c1e9ee4f71",
+      "CMakeCache.txt": "724f583940806e5beedee78d341bd4d6c6d491a0cab323ff3001b6aa2e933f64"
+    },
+    "limits": [
+      "Declared-input identity only; native tests recorded separately.",
+      "Development loopback catalog explicitly enabled; source option default OFF.",
+      "Later QA tool/document commits do not change this frozen compiled candidate."
+    ]
+  },
+  "report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\snapshot-hostlab-fbba0e3\\qualification.json",
+    "sha256": "3971ee367dd9c3e6f3f04aa7f2ac60e3ab70d848a294c504f05fd28af8d846ad"
+  },
+  "snapshot": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\snapshot-hostlab-fbba0e3\\snapshot.pst",
+    "size": 1804645,
+    "sha256": "e4c0265721d64cc0d17a3492058907f0e15a6b3b57fc2f026e2e3d452a630912",
+    "slot_relative_path": "openbios\\state_80054AD8_slot08.pst"
+  },
+  "runner_sha256": "a634b17226db0576f3812d34bb571c59d0faef89e6ca12f1ba9bcbc4ea409611",
+  "phases": {
+    "warm": {
+      "checks": {
+        "p2_native_movement": true,
+        "p1_independent": true,
+        "mailbox_unused": true,
+        "p1_native_jump": true,
+        "p2_jump_independent": true,
+        "healthy_heroes": true,
+        "p2_native_jump_before_save": true,
+        "warm_retained_bank_growth": true,
+        "p2_changed_before_load": true,
+        "paused_p1_restored": true,
+        "resources_and_actor_fields_restored": true,
+        "complete_native_bodies_restored": true
+      },
+      "operations": [
+        {
+          "before": {
+            "id": 914,
+            "ok": true,
+            "generation": 0,
+            "pending": 0,
+            "last_ok": 0,
+            "last_op": "save",
+            "last_slot": -1
+          },
+          "acknowledgement": {
+            "id": 915,
+            "ok": true,
+            "op": "save",
+            "slot": 8
+          },
+          "observations": [
+            {
+              "id": 916,
+              "ok": true,
+              "generation": 1,
+              "pending": 0,
+              "last_ok": 1,
+              "last_op": "save",
+              "last_slot": 8
+            }
+          ],
+          "completion": {
+            "id": 916,
+            "ok": true,
+            "generation": 1,
+            "pending": 0,
+            "last_ok": 1,
+            "last_op": "save",
+            "last_slot": 8
+          }
+        },
+        {
+          "before": {
+            "id": 977,
+            "ok": true,
+            "generation": 1,
+            "pending": 0,
+            "last_ok": 1,
+            "last_op": "save",
+            "last_slot": 8
+          },
+          "acknowledgement": {
+            "id": 978,
+            "ok": true,
+            "op": "load",
+            "slot": 8
+          },
+          "observations": [
+            {
+              "id": 979,
+              "ok": true,
+              "generation": 2,
+              "pending": 0,
+              "last_ok": 1,
+              "last_op": "load",
+              "last_slot": 8
+            }
+          ],
+          "completion": {
+            "id": 979,
+            "ok": true,
+            "generation": 2,
+            "pending": 0,
+            "last_ok": 1,
+            "last_op": "load",
+            "last_slot": 8
+          }
+        }
+      ],
+      "captures": [
+        {
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\snapshot-hostlab-fbba0e3\\warm\\baseline\\warm-native-resources.png",
+          "sha256": "3b03a255ef7abef8fae05e53837c9c53c8950893c36cc0e796904adede966b2b",
+          "before": {
+            "id": 877,
+            "ok": true,
+            "seq": 0,
+            "wrote": 0
+          },
+          "acknowledgement": {
+            "id": 878,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\snapshot-hostlab-fbba0e3\\warm\\baseline\\warm-native-resources.png",
+            "staged": true,
+            "seq": 0
+          },
+          "completion": {
+            "id": 880,
+            "ok": true,
+            "seq": 1,
+            "wrote": 1
+          }
+        },
+        {
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\snapshot-hostlab-fbba0e3\\warm\\baseline\\warm-paused-before-save.png",
+          "sha256": "468f7ebebd27339ed386f18cc630cac3c46caaf4898731dc1e03c303accc8c24",
+          "before": {
+            "id": 911,
+            "ok": true,
+            "seq": 1,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 912,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\snapshot-hostlab-fbba0e3\\warm\\baseline\\warm-paused-before-save.png",
+            "staged": true,
+            "seq": 1
+          },
+          "completion": {
+            "id": 913,
+            "ok": true,
+            "seq": 2,
+            "wrote": 1
+          }
+        },
+        {
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\snapshot-hostlab-fbba0e3\\warm\\baseline\\warm-paused-restored.png",
+          "sha256": "1ffd85cbb67d93a5b2db73c4d99b71d7dc88cd709b74f27faad08fc4a2c37aef",
+          "before": {
+            "id": 982,
+            "ok": true,
+            "seq": 2,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 983,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\snapshot-hostlab-fbba0e3\\warm\\baseline\\warm-paused-restored.png",
+            "staged": true,
+            "seq": 2
+          },
+          "completion": {
+            "id": 984,
+            "ok": true,
+            "seq": 3,
+            "wrote": 1
+          }
+        }
+      ],
+      "samples": {
+        "initial": {
+          "observation": {
+            "schema": 1,
+            "tick": 235,
+            "sequence": 470,
+            "native_timer": 234,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 0,
+            "host_digest": 668250264,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 11894784,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 0
+          },
+          "bank_count": 187,
+          "native_menu_state": [
+            0,
+            0
+          ],
+          "body_hex": [
+            "01000001010200000000900000005b0400000000004002050000900000005b0400000000009efbff0000000000420000d44a1f8074411f80cc3a1080687c14800005007805000100000300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000400000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+            "01000101010200000080b50000005a0400000000004002050080b50000005a0400000200000000000000000000000000d0f61e8014eb1e801800009fa481039f0005007802000103ff03000000000000000000001cea1e8000000000202020000000000000000000543d0780050000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000080b50000005a040000000000002001000000000000000000000000"
+          ],
+          "body_sha256": [
+            "f8dcf6d2e7df2d0109fa1c4fbf43f312300200648d4709871ae3f413dddad89f",
+            "659cdb54cafaf7a7195e8138789f5095cd66ec031aee60a79765c883064a3677"
+          ]
+        },
+        "jumped": {
+          "observation": {
+            "schema": 1,
+            "tick": 245,
+            "sequence": 490,
+            "native_timer": 244,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 0,
+            "host_digest": 1489318910,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 7,
+                "hp": 32,
+                "x_raw": 11894784,
+                "y_raw": 70991872,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 0
+          },
+          "bank_count": 191,
+          "native_menu_state": [
+            0,
+            0
+          ],
+          "body_hex": [
+            "01000001010200000000900000005b0400000000004002050000900000005b0400000000009efbff0000000000420000d44a1f8078411f80cc3a1080687c14800005007808000177770300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000400000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+            "01000101010700000080b50000403b04000000000040020b0080b50000fe3a0400000000007cffff0000000000420000d0f61e8004ec1e801800009fa481039f000500780200011cff030000000000000000000008ea1e80000000002020200000000000000000ff543d0780050001000000000000000000000000000000000000000000000000000000000400000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000080b50000fe3a040000000000002001000000000000000000000000"
+          ],
+          "body_sha256": [
+            "49969d109ad3c94cc8b205661584d7126312a4a5ab9bf08eb61db733b0611b1a",
+            "85976be486a2a38087ae87bfef860d08d50bfbecf6b014c15f0fc9b24c775e20"
+          ]
+        },
+        "attacked": {
+          "observation": {
+            "schema": 1,
+            "tick": 256,
+            "sequence": 512,
+            "native_timer": 255,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 0,
+            "host_digest": 2050400359,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 50,
+                "hp": 32,
+                "x_raw": 11894784,
+                "y_raw": 72292864,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 0
+          },
+          "bank_count": 199,
+          "native_menu_state": [
+            0,
+            0
+          ],
+          "body_hex": [
+            "01000001010200000000900000005b0400000000004002050000900000005b0400000000009efbff0000000000420000d44a1f807c411f80cc3a1080687c14800005007808000100000300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000400000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+            "01000101013201000080b500001a4f04000000000040025b0080b50000024c040000000000a6fcff0000000000420000d0f61e80a0f11e801800009fa481039f00050078010301aeff030000000000000000000008ea1e80000000002020200000000000000000ff543d0780050005000000000000000000000000001000100000000000000000000000000400000100000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000080b50000024c040000000000002001000000000000000000000000"
+          ],
+          "body_sha256": [
+            "a14dd9776e32ca4abb685f4dd85e75cc43e383e4a63c3f878666692b00195049",
+            "5c1fda011c36b6fc2026893b437edbe0a7155e8a75dcb7fdbb381209a456b334"
+          ]
+        },
+        "settled": {
+          "observation": {
+            "schema": 1,
+            "tick": 330,
+            "sequence": 660,
+            "native_timer": 329,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 0,
+            "host_digest": 872961640,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 11894784,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 0
+          },
+          "bank_count": 214,
+          "native_menu_state": [
+            0,
+            0
+          ],
+          "body_hex": [
+            "01000001010200000000900000005b0400000000004002050000900000005b0400000000009efbff0000000000420000d44a1f809c411f80cc3a1080687c14800005007806000100000300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000400000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+            "01000101010200000080b50000005a0400000000004002050080b50000005a0400000000009efbff0000000000420000d0f61e8008eb1e801800009fa481039f0005007801000102ff03000000000000000000001cea1e8000000000202020000000000000000000543d0780050000000800000000000000000000000000000000000000000000000008000400000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000080b50000005a040000000000002001000000000000000000000000"
+          ],
+          "body_sha256": [
+            "0faf60e4e8ef3e9f6166e49d3feda672d8fe5d9d8d8d67aef869355addb7daee",
+            "5329b89036be855b0a703f7dd117b216129115bbfdf6eaeff0b9a572bc7b42fa"
+          ]
+        },
+        "before_save": {
+          "observation": {
+            "schema": 1,
+            "tick": 370,
+            "sequence": 740,
+            "native_timer": 334,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 1,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 2,
+            "host_digest": 2148870143,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 11894784,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 0
+          },
+          "bank_count": 214,
+          "native_menu_state": [
+            1,
+            0
+          ],
+          "body_hex": [
+            "01000001010200000000900000005b0400000000004002050000900000005b0400000000009efbff0000000000420000d44a1f809c411f80cc3a1080687c14800005007801000100000300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000400000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001010000000000000000000000",
+            "01000101010200000080b50000005a0400000000004002050080b50000005a0400000000009efbff0000000000420000d0f61e8010eb1e801800009fa481039f0005007814000100ff03000000000000000000001cea1e8000000000202020000000000000000000543d0780050000000800000000000000000000000000000000000000000000000008000400000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000080b50000005a040000000000002001000000000000000000000000"
+          ],
+          "body_sha256": [
+            "a7faabdcde37519fca3ce9902d40ab8a4b09d28fc77b675d5c02abbb0f4de2f5",
+            "f00805cf117c4ab5c49f3d2936141308c05d414361b15da1d5db91161256c9dd"
+          ]
+        },
+        "saved": {
+          "observation": {
+            "schema": 1,
+            "tick": 374,
+            "sequence": 748,
+            "native_timer": 334,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 1,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 2,
+            "host_digest": 2148870143,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 11894784,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 0
+          },
+          "bank_count": 214,
+          "native_menu_state": [
+            1,
+            0
+          ],
+          "body_hex": [
+            "01000001010200000000900000005b0400000000004002050000900000005b0400000000009efbff0000000000420000d44a1f809c411f80cc3a1080687c14800005007801000100000300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000400000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001010000000000000000000000",
+            "01000101010200000080b50000005a0400000000004002050080b50000005a0400000000009efbff0000000000420000d0f61e8010eb1e801800009fa481039f0005007814000100ff03000000000000000000001cea1e8000000000202020000000000000000000543d0780050000000800000000000000000000000000000000000000000000000008000400000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000080b50000005a040000000000002001000000000000000000000000"
+          ],
+          "body_sha256": [
+            "a7faabdcde37519fca3ce9902d40ab8a4b09d28fc77b675d5c02abbb0f4de2f5",
+            "f00805cf117c4ab5c49f3d2936141308c05d414361b15da1d5db91161256c9dd"
+          ],
+          "slot_relative_path": "openbios\\state_80054AD8_slot08.pst"
+        },
+        "moved_after_save": {
+          "observation": {
+            "schema": 1,
+            "tick": 443,
+            "sequence": 886,
+            "native_timer": 374,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 0,
+            "host_digest": 1561325739,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 13303808,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 0
+          },
+          "bank_count": 215,
+          "native_menu_state": [
+            0,
+            0
+          ],
+          "body_hex": [
+            "01000001010200000000900000005b0400000000004002050000900000005b0400000000009efbff0000000000420000d44a1f8074411f80cc3a1080687c14800005007809000100000300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000400000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+            "01000101010200000000cb0000005a0400000000004002050000cb0000005a0400000200000000000000000000000000d0f61e8000eb1e801800009fa481039f0005007818000100ff03000000000000000000001cea1e8000000000202020000000000000000000543d07800b0000000800000000000000000000000000000000000000000000000008000400000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000cb0000005a040000000000002001000000000000000000000000"
+          ],
+          "body_sha256": [
+            "6f0af6291223790eb99a22607fcd74fcdc3dbc68d4066a987c6208b9ba63236f",
+            "c19976907bb86389af20d14b99407bd66e4e8a318c7784f1431f3de2aeefb66e"
+          ]
+        },
+        "restored": {
+          "observation": {
+            "schema": 1,
+            "tick": 375,
+            "sequence": 750,
+            "native_timer": 334,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 1,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 2,
+            "host_digest": 2148870143,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 11894784,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 0
+          },
+          "bank_count": 214,
+          "native_menu_state": [
+            1,
+            0
+          ],
+          "body_hex": [
+            "01000001010200000000900000005b0400000000004002050000900000005b0400000000009efbff0000000000420000d44a1f809c411f80cc3a1080687c14800005007801000100000300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000400000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001010000000000000000000000",
+            "01000101010200000080b50000005a0400000000004002050080b50000005a0400000000009efbff0000000000420000d0f61e8010eb1e801800009fa481039f0005007814000100ff03000000000000000000001cea1e8000000000202020000000000000000000543d0780050000000800000000000000000000000000000000000000000000000008000400000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000080b50000005a040000000000002001000000000000000000000000"
+          ],
+          "body_sha256": [
+            "a7faabdcde37519fca3ce9902d40ab8a4b09d28fc77b675d5c02abbb0f4de2f5",
+            "f00805cf117c4ab5c49f3d2936141308c05d414361b15da1d5db91161256c9dd"
+          ]
+        }
+      },
+      "owned_pid": 48832,
+      "shutdown": "owned_process_terminated",
+      "exit_code": 1
+    },
+    "cold": {
+      "checks": {
+        "p2_native_movement": true,
+        "p1_independent": true,
+        "mailbox_unused": true,
+        "p1_native_jump": true,
+        "p2_jump_independent": true,
+        "healthy_heroes": true,
+        "cold_cache_smaller_than_saved": true,
+        "paused_p1_restored": true,
+        "resources_and_actor_fields_restored": true,
+        "complete_native_bodies_restored": true,
+        "saved_retained_cache_reconstructed": true,
+        "cold_p2_control_independent": true,
+        "cold_p1_control_independent": true
+      },
+      "operations": [
+        {
+          "before": {
+            "id": 827,
+            "ok": true,
+            "generation": 0,
+            "pending": 0,
+            "last_ok": 0,
+            "last_op": "save",
+            "last_slot": -1
+          },
+          "acknowledgement": {
+            "id": 828,
+            "ok": true,
+            "op": "load",
+            "slot": 8
+          },
+          "observations": [
+            {
+              "id": 829,
+              "ok": true,
+              "generation": 0,
+              "pending": 1,
+              "last_ok": 0,
+              "last_op": "load",
+              "last_slot": 8
+            },
+            {
+              "id": 830,
+              "ok": true,
+              "generation": 1,
+              "pending": 0,
+              "last_ok": 1,
+              "last_op": "load",
+              "last_slot": 8
+            }
+          ],
+          "completion": {
+            "id": 830,
+            "ok": true,
+            "generation": 1,
+            "pending": 0,
+            "last_ok": 1,
+            "last_op": "load",
+            "last_slot": 8
+          }
+        }
+      ],
+      "captures": [
+        {
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\snapshot-hostlab-fbba0e3\\cold\\baseline\\cold-paused-restored.png",
+          "sha256": "1ffd85cbb67d93a5b2db73c4d99b71d7dc88cd709b74f27faad08fc4a2c37aef",
+          "before": {
+            "id": 833,
+            "ok": true,
+            "seq": 0,
+            "wrote": 0
+          },
+          "acknowledgement": {
+            "id": 834,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\snapshot-hostlab-fbba0e3\\cold\\baseline\\cold-paused-restored.png",
+            "staged": true,
+            "seq": 0
+          },
+          "completion": {
+            "id": 836,
+            "ok": true,
+            "seq": 1,
+            "wrote": 1
+          }
+        },
+        {
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\snapshot-hostlab-fbba0e3\\cold\\baseline\\cold-native-after-input.png",
+          "sha256": "4eff216d8ad5ae7df6169b53b3307e9f52fe4e532c3fa86c15a44012c5905da1",
+          "before": {
+            "id": 907,
+            "ok": true,
+            "seq": 1,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 908,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\snapshot-hostlab-fbba0e3\\cold\\baseline\\cold-native-after-input.png",
+            "staged": true,
+            "seq": 1
+          },
+          "completion": {
+            "id": 909,
+            "ok": true,
+            "seq": 2,
+            "wrote": 1
+          }
+        }
+      ],
+      "samples": {
+        "before_load": {
+          "observation": {
+            "schema": 1,
+            "tick": 252,
+            "sequence": 504,
+            "native_timer": 251,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 0,
+            "host_digest": 1543836356,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 11894784,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 0
+          },
+          "bank_count": 190,
+          "native_menu_state": [
+            0,
+            0
+          ],
+          "body_hex": [
+            "01000001010200000000900000005b0400000000004002050000900000005b0400000000009efbff0000000000420000d44a1f8078411f80cc3a1080687c1480000500780c000177770300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000400000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+            "01000101010200000080b50000005a0400000000004002050080b50000005a0400000200000000000000000000000000d0f61e8018eb1e801800009fa481039f0005007827000104ff03000000000000000000001cea1e8000000000202020000000000000000000543d0780050000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000080b50000005a040000000000002001000000000000000000000000"
+          ],
+          "body_sha256": [
+            "3d016f29b9c1981328ab132b6be5dfab85ef217c5c47da5e8b2b27e8de9d432c",
+            "e7bb6ebae42785b55c9af3d04571c9d11cd11ee0b2fde9c4643394448d74f5fc"
+          ]
+        },
+        "restored": {
+          "observation": {
+            "schema": 1,
+            "tick": 378,
+            "sequence": 756,
+            "native_timer": 334,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 1,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 2,
+            "host_digest": 2148870143,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 11894784,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 0
+          },
+          "bank_count": 214,
+          "native_menu_state": [
+            1,
+            0
+          ],
+          "body_hex": [
+            "01000001010200000000900000005b0400000000004002050000900000005b0400000000009efbff0000000000420000d44a1f809c411f80cc3a1080687c14800005007801000100000300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000400000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001010000000000000000000000",
+            "01000101010200000080b50000005a0400000000004002050080b50000005a0400000000009efbff0000000000420000d0f61e8010eb1e801800009fa481039f0005007814000100ff03000000000000000000001cea1e8000000000202020000000000000000000543d0780050000000800000000000000000000000000000000000000000000000008000400000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000080b50000005a040000000000002001000000000000000000000000"
+          ],
+          "body_sha256": [
+            "a7faabdcde37519fca3ce9902d40ab8a4b09d28fc77b675d5c02abbb0f4de2f5",
+            "f00805cf117c4ab5c49f3d2936141308c05d414361b15da1d5db91161256c9dd"
+          ]
+        },
+        "after_p2_input": {
+          "observation": {
+            "schema": 1,
+            "tick": 451,
+            "sequence": 902,
+            "native_timer": 374,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 0,
+            "host_digest": 226679044,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 12779520,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 0
+          },
+          "bank_count": 214,
+          "native_menu_state": [
+            0,
+            0
+          ],
+          "body_hex": [
+            "01000001010200000000900000005b0400000000004002050000900000005b0400000000009efbff0000000000420000d44a1f8074411f80cc3a1080687c14800005007809000100000300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000400000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+            "01000101010200000000c30000005a0400000000004002050000c30000005a0400000200000000000000000000000000d0f61e8000eb1e801800009fa481039f0005007817000100ff03000000000000000000001cea1e8000000000202020000000000000000000543d0780030000000800000000000000000000000000000000000000000000000008000400000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000c30000005a040000000000002001000000000000000000000000"
+          ],
+          "body_sha256": [
+            "6f0af6291223790eb99a22607fcd74fcdc3dbc68d4066a987c6208b9ba63236f",
+            "2254ec7d6b07b8d2a612900eee5295db9b30ac8b6953a7a6b8ba02bf6b28f2da"
+          ]
+        },
+        "after_p1_input": {
+          "observation": {
+            "schema": 1,
+            "tick": 459,
+            "sequence": 918,
+            "native_timer": 382,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 0,
+            "host_digest": 3732075548,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 6,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 71336960,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 12779520,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 0
+          },
+          "bank_count": 214,
+          "native_menu_state": [
+            0,
+            0
+          ],
+          "body_hex": [
+            "01000001010600000000900000844004000000000040020a00009000004c450400000000008604000000000000420000d44a1f80b0421f80cc3a1080687c14800005007802010123230300000000000000000000543f1f8000000000202020000000000000000001503d07800a000f000000000000000000000000008000800000000000000000000000000600000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000009000004c45040000000000002001000000000000000000000000",
+            "01000101010200000000c30000005a0400000000004002050000c30000005a0400000200000000000000000000000000d0f61e8000eb1e801800009fa481039f000500780f000100ff03000000000000000000001cea1e8000000000202020000000000000000000543d0780030000000800000000000000000000000000000000000000000000000008000400000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000c30000005a040000000000002001000000000000000000000000"
+          ],
+          "body_sha256": [
+            "4f4453d282b45fefcf7aa82ed44d264908c9b1ac33eb9c48ad17961d85c68514",
+            "009969030c14d3aa41ab42e66cad64d26895558f15dd2f9bddbbbdb0aee939ff"
+          ]
+        }
+      },
+      "owned_pid": 77220,
+      "shutdown": "owned_process_terminated",
+      "exit_code": 1
+    }
+  },
+  "independent_checks": {
+    "both_complete348byte_bodies_equal_saved_warm_and_cold": true,
+    "only_current_build_snapshot_used": true,
+    "only_snapshot_transferred_to_fresh_cold_profile": true,
+    "cold_cache190_reconstructed_to214": true,
+    "warm_cold_restored_menu_captures_equal": true
+  },
+  "artwork_review": "Cold restored native X menu/portrait and post-resume X/Zero sprites/stacked healthy meters inspected; warm/cold restored images match. Loaded-slot9 OSD is the one-based display of requested slot8.",
+  "cleanup": {
+    "owned_pids_absent": [
+      48832,
+      77220
+    ],
+    "source_cards_used": false,
+    "graceful_exit_qualified": false
+  },
+  "limits": [
+    "Healthy intro/default resources and P1-owned menu on exact37cdc487 only.",
+    "No old-state compatibility requirement or migration; both save/load processes use the same executable.",
+    "Zero-owned menu cold restoration, spent ammo/damage/heals/death/scenes/moving support/pendingDMA/rewind/network state transfer remain separate.",
+    "All output is private on G; no original cards, settings or caches copied or changed.",
+    "Both owned processes needed termination after quit deadline; graceful exit remains unverified.",
+    "This receipt changes no additional aggregate ledger status."
+  ]
+}

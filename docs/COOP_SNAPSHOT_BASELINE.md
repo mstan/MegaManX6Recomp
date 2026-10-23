@@ -89,3 +89,34 @@ original disc, a new G/F output directory and its expected executable SHA:
 ```text
 python tools/qualify_mmx6_coop_state.py --build <frozen-build> --source <source-root> --disc <original-cue> --output <new-private-output> --expected-sha <sha256>
 ```
+
+## Manifest-bound v11 repeat
+
+The exact clean compiled candidate `fbba0e3`, executable
+`37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9`,
+also passes the native warm/cold case. The separate
+[current-build receipt](evidence/mmx6-snapshot/manifest-bound-fbba0e3-summary.json)
+retains all operations, complete saved/restored bodies, resources, bank counts,
+images, source provenance and limits. Raw report SHA-256 is
+`3971ee367dd9c3e6f3f04aa7f2ac60e3ab70d848a294c504f05fd28af8d846ad`.
+
+Twelve warm and thirteen cold checks pass. Save completes generation1;
+warm load completes generation2 and cold load generation1, each pending0/ok1,
+operation and slot8 verified. Both full348-byte bodies, personal resources and
+native P1-owned input-ready menu restore exactly. Warm banks grow187->214,
+change to215 after movement, then restore214. A fresh cold profile begins with
+190 banks and reconstructs214 from the snapshot; no other warm cache or card
+data is copied. Original independent P2/P1 controls work after native resume.
+
+Snapshot size is1,804,645 bytes, SHA-256
+`e4c0265721d64cc0d17a3492058907f0e15a6b3b57fc2f026e2e3d452a630912`.
+Warm and cold restored composed menus match
+`1ffd85cbb67d93a5b2db73c4d99b71d7dc88cd709b74f27faad08fc4a2c37aef`.
+The restored menu/portrait and cold resumed actors/HUD were inspected. The
+visible Loaded slot9 message is the one-based display of requested slot8.
+
+Both owned PIDs48832/77220 are gone after termination following the quit
+deadline; graceful exit remains unverified. These are current-build disposable
+snapshots only. The historical observations above remain tied to their own
+build. No additional ledger row, Zero-menu cold restoration, other gameplay
+context, rewind, rollback or cross-build compatibility is qualified here.
