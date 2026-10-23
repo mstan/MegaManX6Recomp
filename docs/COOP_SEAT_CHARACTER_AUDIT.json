@@ -949,11 +949,11 @@
     },
     {
       "id": "SC06",
-      "field": "PLAYER+93,+96,+D7; +8C..+92,+A2; full0x158-byte body",
-      "meaning": "Current weapon and charge/attack phase/counters are part of the native body. Initializer/wipe helpers affect these independently of graphics.",
-      "evidence": "8003BF18/BF28 copies saved weapon to93; 8003CDBC..8003CDEC and3CDF0..3CE2C clear8C/8E..92/A2. Workbook Ingame285,288,353 names weapon/attack/charge status.",
+      "field": "PLAYER+93,+96,+9B/+9C levels,+9D/+9E timers; +8C..+92,+A2; full0x158-byte body",
+      "meaning": "Current weapon, charge levels/timers and attack phase/counters belong to the native body. The D7 workbook label is not used as normal charge-glow evidence.",
+      "evidence": "8003BF18/BF28 restores weapon93; original charge producers8003EEE4/8003FFF4 use9B/9C and9D/9E. Native reset helpers clear8C/8E..92/A2. See COOP_R9_EFFECT_CLOSURE.json for source hashes.",
       "ownership": "Private actor body, attack pool and future-restored callback locals.",
-      "remaining_proof": "Map exact counter producer/consumer and allocation/expiry closure before R9 charged-shot claim; labels alone do not prove lifetimes.",
+      "remaining_proof": "Native fixed trail/attached source closure is mapped; actual private-seat update/render/resource/counter retirement and charged projectile closure remain unverified.",
       "local": "unverified",
       "netplay": "unverified"
     },
@@ -963,7 +963,7 @@
       "meaning": "Character overlay, native per-character table pointer, compression/assembly pointers, texture page/CLUT and frame.",
       "evidence": "80013CCC..13CF4 loads BIN0/1 at801EA000. 8003BF3C..BFB0 chooses30=801F4AD4(X)/801EF6D0(Zero), derives38 from SCRATCH+14 and3C from SCRATCH+1C, sets40=0500/42=7800. Role of30 requires consumer tracing; do not call it executable dispatch from this store alone.",
       "ownership": "Per-character/form immutable assets and projected actor resources.",
-      "remaining_proof": "Verify code-byte guard/cache invalidation and asset-generation identity for all form swaps.",
+      "remaining_proof": "800179A4/800179D0 establish animation-table consumer for+30 in the follow-up. Verify code-byte guards/cache invalidation and asset-generation identity for both rosters/every form; do not infer executable dispatch from the pointer.",
       "local": "unverified",
       "netplay": "unverified"
     },
@@ -971,9 +971,9 @@
       "id": "SC08",
       "field": "shots800950A0..800964A0; trails800972F8..80097418; attached effects800911A8..80091298",
       "meaning": "32 shots ofA0,3 trails of60, attached effect slots of50. Init installs two ordinary effect slots and a third only for X/Falcon form1.",
-      "evidence": "80020160..80020234 walks only32 shots byA0; 8003BFBC..8003C038 initializes3 trails; 8003C03C..C0A8 initializes2 attached effects, C0AC..C110 Falcon third.",
+      "evidence": "80020160..80020234 walks only32 shots byA0; 8003BFBC..8003C038 initializes3 trails; 8003C03C..C0A8 initializes2 attached effects, C0AC..C124 initializes Falcon third. Source consumers in COOP_R9_EFFECT_CLOSURE.json.",
       "ownership": "Private actor-owned pools, shared native world exactly once; deferred actors retain allocating owner.",
-      "remaining_proof": "Map exact charge-glow/trail update/render/deferred consumers.3CD44 is pad decode only, not an effect update. Pool capture alone is not native lifetime/render coverage.",
+      "remaining_proof": "See COOP_R9_EFFECT_CLOSURE.json for fixed trail/attached producer-update-render-retire source mapping.3CD44 remains pad decode only. Private-seat runtime execution, colors, shared deferred effects and lifetime tests remain unverified.",
       "local": "unverified",
       "netplay": "unverified"
     },
@@ -1195,5 +1195,6 @@
       "local": "unverified",
       "netplay": "unverified"
     }
-  ]
+  ],
+  "source_followup": "COOP_R9_EFFECT_CLOSURE.json: fixed-pool native source closure, no runtime pass or roster implementation."
 }

@@ -78,11 +78,11 @@ and intro helper already do.
 | `PLAY+74 + character*4 -> PLAYER+EC` word | `8003D72C..8003D74C` | Native equipped parts are indexed by character, not seat. |
 | `PLAY+60 -> PLAYER+C9` byte | `8003D748..8003D798`; form2 clears C9 | Earned weapons and form restrictions must remain native. |
 | HP at `PLAYER+5C/+5D/+5E`; ammo `+A8..+C7`; base `+14A` | Fresh init `8003BE64..8003BEB0` uses `PLAY+5B+character` and `PLAY+61+character`; checkpoint branch separately restores resources | Current HP/ammo belongs to the actor. Menu, ordinary door and voluntary rejoin must not refill it. |
-| Weapon `+93`, attack `+96`, charge status `+D7`, native temporary counters | Native checkpoint weapon store `8003BF28`; native reset helpers `8003CDBC..8003CE2C`; IngameTable rows285/288/353 label the fields | Capturing the body is useful, but exact charge/shot producer and expiry closure still needs tracing. |
+| Weapon `+93`, attack `+96`, charge levels `+9B/+9C`, timers `+9D/+9E`, native temporary counters | Native checkpoint weapon store `8003BF28`; charge helpers `8003EEE4/8003FFF4`; native reset helpers `8003CDBC..8003CE2C` | The follow-up source trace supersedes workbook row353's `+D7` charge label for normal glows. Capturing the body alone does not establish runtime closure. |
 | Native table `+30`; compression `+38`; assembly `+3C`; page `+40`; CLUT `+42`; frame `+47` | Init `8003BF3C..8003BFB0`; `+30` selects `801F4AD4` for X or `801EF6D0` for Zero | Native overlay/data and resource pointers must agree. The selected table's full consumer contract was not established here; a pointer store alone does not prove it is executable dispatch. |
 | Shots `800950A0..800964A0` | `80020160..80020234`: 32 entries, stride A0 | Actor-owned attack pool, with one native allocation/update/retire path. |
 | Trails `800972F8..80097418` | `8003BFBC..8003C038`: 3 entries, stride 60 | Each entry inherits the actor's compression, assembly, texture page and a native trail CLUT. |
-| Attached effects `800911A8..80091298` | `8003C03C..8003C0A8`: two stride 50 entries; `8003C0AC..8003C110` adds the third for X/Falcon | Source-proven storage relevant to charge/dash effects; exact glow/flare semantics and consumers remain unverified. |
+| Attached effects `800911A8..80091298` | `8003C03C..8003C0A8`: two stride 50 entries; `8003C0AC..8003C124` adds the third for X/Falcon | Fixed charge-glow and Falcon-flare source consumers are mapped in the follow-up; private-seat behavior remains unverified. |
 
 The current `PlayerContext` already captures the full 0x158-byte body, 0x1400
 shot bytes, 0x120 trail bytes and 0xF0 attached-effect bytes. This is useful
@@ -92,6 +92,12 @@ current explicit retained renderer draws the P2 body and 32 shot actors;
 source review has not established a complete private trail/attached-effect
 update/render/retirement path. Trace those native consumers before adding a
 second update or claiming an R9 fix; a second whole world pass is unsafe.
+
+The [R9 fixed-pool follow-up](COOP_R9_EFFECT_CLOSURE.md) now maps those original
+producers, update/render helpers and conditional retirement paths, and
+establishes an animation-table consumer for native `+30`. Private-seat
+execution, palette/resource correctness and natural retirement still require
+the listed runtime proofs. The unit5 filter remains unchanged.
 
 ## Resource and deferred ownership gaps
 

@@ -1,0 +1,982 @@
+{
+  "schema": 1,
+  "kind": "native_r9_fixed_effect_pool_closure",
+  "date": "2026-10-23",
+  "status": "source_mapped_runtime_unverified",
+  "game_commit": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+  "prior_audit_commit": "b3455e1512dc10656e8196b0bf5fc4f4034a6a29",
+  "scope": [
+    "Original EXE and original ROCK_X6.BIN member0 only; prior selected player DAT metadata reused by reference.",
+    "No plugin, SDK, CMake, ledger, menu policy or unit5 filter modification; no game/title build/native save access.",
+    "No full-disc walk/extraction, raw native byte distribution, Ghidra project open/unlock or remote operation."
+  ],
+  "sources": {
+    "original_exe": {
+      "path": "SLUS_013.95",
+      "bytes": 522240,
+      "sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+      "load_base": "80010000",
+      "payload_file_offset": 2048
+    },
+    "x_overlay": {
+      "archive": "ROCK_X6.BIN",
+      "archive_lba": 211185,
+      "member": 0,
+      "sector_offset": 2,
+      "bytes": 44588,
+      "load_base": "801EA000",
+      "sha256": "180175846cf8b1b650c405be8085b19417be033b4644a4034d70703124bf7871"
+    },
+    "original_asset_metadata": "COOP_SEAT_CHARACTER_AUDIT.json selected member and subasset metadata; BIN0/DAT86..89 form mappings retained.",
+    "game_sources": [
+      {
+        "path": "src/mods/mmx6_coop_plugin.c",
+        "git_blob": "dcf35129764cf75f8cceb653d9e59e79c4595154",
+        "bytes": 84866,
+        "sha256": "72cf416044ff4a089165c0a75a72df8c999eaeffb19a7b19ec81d2fb70a32fd9"
+      },
+      {
+        "path": "src/mods/mmx6_coop_assets.c",
+        "git_blob": "7cdfecd025e3a68250c76e6c114630bcd8e6b1de",
+        "bytes": 3611,
+        "sha256": "451e200d95e12d660207ff36baac5039acdec97c2c3e999c2614dc9ac25ae388"
+      },
+      {
+        "path": "src/mods/mmx6_coop_lifecycle.h",
+        "git_blob": "e257dd46dba6dcb3ae135a2407eeccd7e5aebff3",
+        "bytes": 1601,
+        "sha256": "404a21913971c5171ad6d547511a8c627b045ef9ddea73dd0f545c06e506cc42"
+      },
+      {
+        "path": "src/mods/mmx6_coop_snapshot.inc",
+        "git_blob": "ee6dfb306a022238a9a728d2592a8d061f076af1",
+        "bytes": 16123,
+        "sha256": "a3fbfd206df2a6a5b3e152a87109c7963e0191e36c09f6c04166ccee25f74801"
+      },
+      {
+        "path": "src/mods/mmx6_coop_state_track.h",
+        "git_blob": "935442b617264a4fa8cad0f6976d858d2b155a47",
+        "bytes": 1946,
+        "sha256": "7daf2ae3512fe4575dbc89635081d0689905f78f5f83ba814d5f5f8befd6ef4f"
+      }
+    ],
+    "decoder": "Installed Capstone MIPS32 little-endian, read-only disassembly; no native CPU execution."
+  },
+  "windows": [
+    {
+      "id": "pool_initialization",
+      "region": "exe",
+      "start": "8003BFBC",
+      "end_exclusive": "8003C128",
+      "kind": "instruction_window",
+      "payload_offset": 180156,
+      "bytes": 364,
+      "sha256": "ab85175f9b7dfa656fc9d1e0df2a2936fdd36448cc4d62772836833f9e7d6e05"
+    },
+    {
+      "id": "attached_actor",
+      "region": "exe",
+      "start": "80020AA8",
+      "end_exclusive": "80020C40",
+      "kind": "complete_routine",
+      "payload_offset": 68264,
+      "bytes": 408,
+      "sha256": "a74a76d444b7edc07287a6fbd8c0add731684f20fb0b9b46d2d6061ecba2f469"
+    },
+    {
+      "id": "ordinary_controller",
+      "region": "exe",
+      "start": "80020C40",
+      "end_exclusive": "80020D18",
+      "kind": "complete_routine",
+      "payload_offset": 68672,
+      "bytes": 216,
+      "sha256": "170289544800a642b580f76b038e2ef587e62f8709ea41be8bb8ea10da168084"
+    },
+    {
+      "id": "attached_pool",
+      "region": "exe",
+      "start": "80020D74",
+      "end_exclusive": "80020DC8",
+      "kind": "complete_routine",
+      "payload_offset": 68980,
+      "bytes": 84,
+      "sha256": "eec369efbc5ccaea2ebd0e5c6fb3df6b2fcf46abc07bd375944e375a242f131d"
+    },
+    {
+      "id": "trail_pool",
+      "region": "exe",
+      "start": "80020DC8",
+      "end_exclusive": "80020E1C",
+      "kind": "complete_routine",
+      "payload_offset": 69064,
+      "bytes": 84,
+      "sha256": "0141732f246b6f3a9135f688cf489935445d4fcc9cefb70e7fd99ddc3d42409e"
+    },
+    {
+      "id": "trail_actor",
+      "region": "exe",
+      "start": "80020E1C",
+      "end_exclusive": "80020F24",
+      "kind": "complete_routine",
+      "payload_offset": 69148,
+      "bytes": 264,
+      "sha256": "45afdb3127577cd4e90013afe37d1c67f5462d3eb782c4064566ba32321387ca"
+    },
+    {
+      "id": "trail_follow",
+      "region": "exe",
+      "start": "80020F24",
+      "end_exclusive": "80020F8C",
+      "kind": "complete_routine",
+      "payload_offset": 69412,
+      "bytes": 104,
+      "sha256": "ec8eaf6b3cad84fa77521cdc169d872e2e55bc3d48474251068b9959752aff32"
+    },
+    {
+      "id": "trail_first_drain",
+      "region": "exe",
+      "start": "80020F8C",
+      "end_exclusive": "8002103C",
+      "kind": "complete_routine",
+      "payload_offset": 69516,
+      "bytes": 176,
+      "sha256": "30eae714d07d0873241481efe09687ee7af5f4663aa65e2a50597c793bc205ef"
+    },
+    {
+      "id": "trail_final_drain",
+      "region": "exe",
+      "start": "8002103C",
+      "end_exclusive": "800210E8",
+      "kind": "complete_routine",
+      "payload_offset": 69692,
+      "bytes": 172,
+      "sha256": "11233894652484d8cd2122bf78561a8e9855fc466d7bf6e322e9b55a61b7c937"
+    },
+    {
+      "id": "recorded_input_controller",
+      "region": "exe",
+      "start": "80021500",
+      "end_exclusive": "8002163C",
+      "kind": "complete_routine",
+      "payload_offset": 70912,
+      "bytes": 316,
+      "sha256": "35e3a70aa2d170de75587502a310d1e3a37071c7d4f851deed18206f56b4e325"
+    },
+    {
+      "id": "stage_dispatch",
+      "region": "exe",
+      "start": "8001E9EC",
+      "end_exclusive": "8001EA28",
+      "kind": "complete_routine",
+      "payload_offset": 59884,
+      "bytes": 60,
+      "sha256": "ca34fec0c410c6edafefa2051a70b296396f6a761e4575b235c1160e85d57e47"
+    },
+    {
+      "id": "stage_controller_calls",
+      "region": "exe",
+      "start": "8001EA28",
+      "end_exclusive": "8001EC40",
+      "kind": "instruction_window",
+      "payload_offset": 59944,
+      "bytes": 536,
+      "sha256": "94e0616980de1a859adef7082c6d825f3154dd122d4fcc6e9b8ef96f0dc0b5a4"
+    },
+    {
+      "id": "recorded_controller_callsite",
+      "region": "exe",
+      "start": "8001D660",
+      "end_exclusive": "8001D6B0",
+      "kind": "instruction_window",
+      "payload_offset": 54880,
+      "bytes": 80,
+      "sha256": "98f0c07979910bcc37182ac13b04238f895cece8c31d256124852f4ef86bc7e4"
+    },
+    {
+      "id": "menu_controller_context",
+      "region": "exe",
+      "start": "80034CD0",
+      "end_exclusive": "80034DCC",
+      "kind": "complete_routine",
+      "payload_offset": 150736,
+      "bytes": 252,
+      "sha256": "1f149ec0a0fdd24d7f84b36f10c49ed76a857ea22ff28cb3218cc881bf31a2d7"
+    },
+    {
+      "id": "world_render_entry",
+      "region": "exe",
+      "start": "80022960",
+      "end_exclusive": "80022BB8",
+      "kind": "instruction_window",
+      "payload_offset": 76128,
+      "bytes": 600,
+      "sha256": "1111bff2d7d8240020292b9a74bcb8796231495ece76ec280ba2b84598741cae"
+    },
+    {
+      "id": "actor_renderer",
+      "region": "exe",
+      "start": "800232D4",
+      "end_exclusive": "800239CC",
+      "kind": "complete_routine",
+      "payload_offset": 78548,
+      "bytes": 1784,
+      "sha256": "987a4ce60d3e7e2fca084728ba7259bacde9513006e891b26beaf9ab5b4b63d3"
+    },
+    {
+      "id": "set_animation",
+      "region": "exe",
+      "start": "800179A4",
+      "end_exclusive": "800179D0",
+      "kind": "complete_routine",
+      "payload_offset": 31140,
+      "bytes": 44,
+      "sha256": "bb41e371db71000dc4ac97f153eaf668253dcc42f5ed74e93608aa6b3fd8288b"
+    },
+    {
+      "id": "advance_animation",
+      "region": "exe",
+      "start": "80017A04",
+      "end_exclusive": "80017A48",
+      "kind": "complete_routine",
+      "payload_offset": 31236,
+      "bytes": 68,
+      "sha256": "e947d51c1b65d627545acd99d25668520421497fc1f9865d22ef3b78267b6a43"
+    },
+    {
+      "id": "living_player_phase",
+      "region": "exe",
+      "start": "80034FBC",
+      "end_exclusive": "80035144",
+      "kind": "complete_routine",
+      "payload_offset": 151484,
+      "bytes": 392,
+      "sha256": "901bb59a96f4e1865be962469ce0e9a3e215496cf595265d8d370835925840b2"
+    },
+    {
+      "id": "charge_parent",
+      "region": "exe",
+      "start": "8003EC78",
+      "end_exclusive": "8003ED98",
+      "kind": "complete_routine",
+      "payload_offset": 191608,
+      "bytes": 288,
+      "sha256": "aac3a230d7414c5a6575ee549b35c3e68d76d43d3b649da2928ab44b7db1f094"
+    },
+    {
+      "id": "charge_release_predicate",
+      "region": "exe",
+      "start": "8003ED98",
+      "end_exclusive": "8003EEE4",
+      "kind": "complete_routine",
+      "payload_offset": 191896,
+      "bytes": 332,
+      "sha256": "d2e749f426961929c408ffe8c7555d0ee9f278d6c7a6eff8633f209b20b0c300"
+    },
+    {
+      "id": "special_weapon_charge",
+      "region": "exe",
+      "start": "8003EEE4",
+      "end_exclusive": "8003F000",
+      "kind": "complete_routine",
+      "payload_offset": 192228,
+      "bytes": 284,
+      "sha256": "5bfcebd307831d5044147284d937531625a282e721e11ed64148b1a6c0327c2e"
+    },
+    {
+      "id": "buster_charge",
+      "region": "exe",
+      "start": "8003FFF4",
+      "end_exclusive": "800400B4",
+      "kind": "complete_routine",
+      "payload_offset": 196596,
+      "bytes": 192,
+      "sha256": "00b3921e262b0bb2551f6766ec30cb9c4e962fcafe9f3de1cd520a980bad304e"
+    },
+    {
+      "id": "clear_charge",
+      "region": "exe",
+      "start": "8003F480",
+      "end_exclusive": "8003F4C4",
+      "kind": "complete_routine",
+      "payload_offset": 193664,
+      "bytes": 68,
+      "sha256": "df396a6021679e646fca6408c2d09b621c4119b2bac7c24bce3961f250478ebe"
+    },
+    {
+      "id": "clear_unheld_charge",
+      "region": "exe",
+      "start": "8003F58C",
+      "end_exclusive": "8003F644",
+      "kind": "complete_routine",
+      "payload_offset": 193932,
+      "bytes": 184,
+      "sha256": "fd396250845cd3c451a4f7efb30960a2c5e9e48bbd01135239d233911d17edcc"
+    },
+    {
+      "id": "ground_dash_accept",
+      "region": "exe",
+      "start": "80039EB0",
+      "end_exclusive": "80039F78",
+      "kind": "complete_routine",
+      "payload_offset": 171696,
+      "bytes": 200,
+      "sha256": "a46915e5c87bad39c759b5e5e05fec11121646a32ac419fbe3bb3fb513f78a5a"
+    },
+    {
+      "id": "double_tap_window",
+      "region": "exe",
+      "start": "80039F78",
+      "end_exclusive": "80039FFC",
+      "kind": "complete_routine",
+      "payload_offset": 171896,
+      "bytes": 132,
+      "sha256": "1d2a7e057ee201606d5e916e026eab5b747d7a777fe37b547ba13f0c604bf7dd"
+    },
+    {
+      "id": "ground_dash_callers",
+      "region": "exe",
+      "start": "80039BC4",
+      "end_exclusive": "80039C9C",
+      "kind": "instruction_window",
+      "payload_offset": 170948,
+      "bytes": 216,
+      "sha256": "57e6ee302f1adc00a593fd7980d4c3d6e2391f9b6071c8a279163d27023b1129"
+    },
+    {
+      "id": "start_ground_dash",
+      "region": "exe",
+      "start": "8003A9C4",
+      "end_exclusive": "8003AAD0",
+      "kind": "complete_routine",
+      "payload_offset": 174532,
+      "bytes": 268,
+      "sha256": "9996ba2a7772a5dacb0ff21bc2f396bf8d5ce7f15bea714f431a4b6ab87bba11"
+    },
+    {
+      "id": "ground_dash_phase_dispatch",
+      "region": "exe",
+      "start": "800370B0",
+      "end_exclusive": "80037130",
+      "kind": "complete_routine",
+      "payload_offset": 159920,
+      "bytes": 128,
+      "sha256": "a8357bc17045ec09cc41cc2c024d5588214a3296a53a8435492e90c7610be433"
+    },
+    {
+      "id": "ground_dash_start_phase",
+      "region": "exe",
+      "start": "800357A8",
+      "end_exclusive": "800358D4",
+      "kind": "complete_routine",
+      "payload_offset": 153512,
+      "bytes": 300,
+      "sha256": "f6852bd7ee4b24c28c60575cd19d08ecd1b05686798ec8b0590fa8a893133b7b"
+    },
+    {
+      "id": "air_dash_accept",
+      "region": "exe",
+      "start": "8003906C",
+      "end_exclusive": "80039228",
+      "kind": "complete_routine",
+      "payload_offset": 168044,
+      "bytes": 444,
+      "sha256": "21ea3f426dfeeb888a17788ac8906e6646c46c16b49c51b2ddc4055d19c9d1e8"
+    },
+    {
+      "id": "falcon_dash_start",
+      "region": "exe",
+      "start": "8003F28C",
+      "end_exclusive": "8003F32C",
+      "kind": "complete_routine",
+      "payload_offset": 193164,
+      "bytes": 160,
+      "sha256": "8ec98bb86fe8663c0e07bad3ecdbe3372deea44ad86b592b7928d063334671de"
+    },
+    {
+      "id": "ordinary_airdash_reset",
+      "region": "exe",
+      "start": "8003B298",
+      "end_exclusive": "8003B30C",
+      "kind": "complete_routine",
+      "payload_offset": 176792,
+      "bytes": 116,
+      "sha256": "8324bebf5adee8200839de6f8daeb379a05e4ec6f2b7bcfcb5d01ae9a9b963d5"
+    },
+    {
+      "id": "mark_trail_drain",
+      "region": "exe",
+      "start": "8003CD9C",
+      "end_exclusive": "8003CDBC",
+      "kind": "complete_routine",
+      "payload_offset": 183708,
+      "bytes": 32,
+      "sha256": "728ffb173472fc5fb56c9edb724f6e82b6c3d91bb6a8710356860b9c27941ed4"
+    },
+    {
+      "id": "reset_body_dash",
+      "region": "exe",
+      "start": "8003CDF0",
+      "end_exclusive": "8003CE30",
+      "kind": "complete_routine",
+      "payload_offset": 183792,
+      "bytes": 64,
+      "sha256": "5c42cd1f5007a6bffe596435f488a5831ac6f875a09be432e0c1cb535c1248b5"
+    },
+    {
+      "id": "falcon_action_dispatch",
+      "region": "bin0",
+      "start": "801EB8B8",
+      "end_exclusive": "801EB968",
+      "kind": "complete_routine",
+      "payload_offset": 6328,
+      "bytes": 176,
+      "sha256": "5315fc73e320420b0ae571190f38308fced0b9aef6cf31c08dc6d74333e63151"
+    },
+    {
+      "id": "falcon_action_phases",
+      "region": "bin0",
+      "start": "801EC878",
+      "end_exclusive": "801EC93C",
+      "kind": "two_complete_routines",
+      "payload_offset": 10360,
+      "bytes": 196,
+      "sha256": "7477d6dc2042bd724ff6e6c35a7fb65bf802cfe326cc8a641ff8ed9c57326fc5"
+    }
+  ],
+  "tables": [
+    {
+      "id": "stage_phase_table",
+      "region": "exe",
+      "address": "80071184",
+      "entries": [
+        "8001EA28",
+        "8001EB48",
+        "8001EC40"
+      ],
+      "metadata": {
+        "id": "stage_phase_table",
+        "region": "exe",
+        "start": "80071184",
+        "end_exclusive": "80071190",
+        "kind": "function_pointer_table",
+        "payload_offset": 397700,
+        "bytes": 12,
+        "sha256": "515f2fba970e24991663a5c9c9b9c1231eeecb0ff1ac609a5267594803c9f5bc"
+      }
+    },
+    {
+      "id": "trail_phase_table",
+      "region": "exe",
+      "address": "80071388",
+      "entries": [
+        "80020F24",
+        "80020F8C",
+        "8002103C"
+      ],
+      "metadata": {
+        "id": "trail_phase_table",
+        "region": "exe",
+        "start": "80071388",
+        "end_exclusive": "80071394",
+        "kind": "function_pointer_table",
+        "payload_offset": 398216,
+        "bytes": 12,
+        "sha256": "a8e00ab20c84cc58f684613bcb68fa3493e620a44a08b7b06b3850cce582edb2"
+      }
+    },
+    {
+      "id": "player_phase_table",
+      "region": "exe",
+      "address": "80073ABC",
+      "entries": [
+        "8003CBE4",
+        "80034FBC",
+        "8003CC78",
+        "8003CCB4"
+      ],
+      "metadata": {
+        "id": "player_phase_table",
+        "region": "exe",
+        "start": "80073ABC",
+        "end_exclusive": "80073ACC",
+        "kind": "function_pointer_table",
+        "payload_offset": 408252,
+        "bytes": 16,
+        "sha256": "4b5885c27c56c6350076ed02c211cab88eccf381b3ff6d31a1cb36d09456f665"
+      }
+    },
+    {
+      "id": "ground_dash_phase_table",
+      "region": "exe",
+      "address": "80073C04",
+      "entries": [
+        "800357A8",
+        "800358D4",
+        "80035A2C"
+      ],
+      "metadata": {
+        "id": "ground_dash_phase_table",
+        "region": "exe",
+        "start": "80073C04",
+        "end_exclusive": "80073C10",
+        "kind": "function_pointer_table",
+        "payload_offset": 408580,
+        "bytes": 12,
+        "sha256": "f70304c45c83658b1742267dc575f2f902b78995196b3174f2eba25eadf547f8"
+      }
+    },
+    {
+      "id": "falcon_dash_phase_table",
+      "region": "bin0",
+      "address": "801F3730",
+      "entries": [
+        "801EC878",
+        "801EC908"
+      ],
+      "metadata": {
+        "id": "falcon_dash_phase_table",
+        "region": "bin0",
+        "start": "801F3730",
+        "end_exclusive": "801F3738",
+        "kind": "function_pointer_table",
+        "payload_offset": 38704,
+        "bytes": 8,
+        "sha256": "a18f09a961756cbe056fe158ef7aeb0a96b94739eed3e0032547344b54739bfb"
+      }
+    },
+    {
+      "id": "selected_living_actions_0C_0D",
+      "region": "exe",
+      "address": "80073AFC",
+      "entries": [
+        "800370B0",
+        "80037130"
+      ],
+      "metadata": {
+        "id": "selected_living_actions_0C_0D",
+        "region": "exe",
+        "start": "80073AFC",
+        "end_exclusive": "80073B04",
+        "kind": "function_pointer_table",
+        "payload_offset": 408316,
+        "bytes": 8,
+        "sha256": "4432a4e011221d53116515a987f3be9dfce928e8b026f1b10862e765767407a4"
+      }
+    },
+    {
+      "id": "selected_living_action_23",
+      "region": "exe",
+      "address": "80073B58",
+      "entries": [
+        "801EB8B8"
+      ],
+      "metadata": {
+        "id": "selected_living_action_23",
+        "region": "exe",
+        "start": "80073B58",
+        "end_exclusive": "80073B5C",
+        "kind": "function_pointer_table",
+        "payload_offset": 408408,
+        "bytes": 4,
+        "sha256": "13f16f4b8c2aba9169e2509e17542573300d5e5b60076576585277d67bdf68a8"
+      }
+    }
+  ],
+  "direct_calls": [
+    {
+      "site": "8001EB0C",
+      "target": "80020C40",
+      "instruction": "jal"
+    },
+    {
+      "site": "8001EB64",
+      "target": "80020C40",
+      "instruction": "jal"
+    },
+    {
+      "site": "80034D90",
+      "target": "80020C40",
+      "instruction": "jal"
+    },
+    {
+      "site": "8001D698",
+      "target": "80021500",
+      "instruction": "jal"
+    },
+    {
+      "site": "80020C60",
+      "target": "80034DCC",
+      "instruction": "jal"
+    },
+    {
+      "site": "80020CC0",
+      "target": "8002F288",
+      "instruction": "jal"
+    },
+    {
+      "site": "80020CE8",
+      "target": "80020D74",
+      "instruction": "jal"
+    },
+    {
+      "site": "80020CF0",
+      "target": "80020DC8",
+      "instruction": "jal"
+    },
+    {
+      "site": "8002160C",
+      "target": "80020D74",
+      "instruction": "jal"
+    },
+    {
+      "site": "80021614",
+      "target": "80020DC8",
+      "instruction": "jal"
+    },
+    {
+      "site": "80020D88",
+      "target": "80020AA8",
+      "instruction": "jal"
+    },
+    {
+      "site": "80020D94",
+      "target": "80020AA8",
+      "instruction": "jal"
+    },
+    {
+      "site": "80020DB0",
+      "target": "80020AA8",
+      "instruction": "jal"
+    },
+    {
+      "site": "80020DF0",
+      "target": "80020E1C",
+      "instruction": "jal"
+    },
+    {
+      "site": "80035118",
+      "target": "8003EC78",
+      "instruction": "jal"
+    },
+    {
+      "site": "8003ED5C",
+      "target": "8003EEE4",
+      "instruction": "jal"
+    },
+    {
+      "site": "8003ED64",
+      "target": "8003FFF4",
+      "instruction": "jal"
+    },
+    {
+      "site": "80034D14",
+      "target": "8003F58C",
+      "instruction": "jal"
+    },
+    {
+      "site": "80034D34",
+      "target": "8003F480",
+      "instruction": "jal"
+    },
+    {
+      "site": "80039BE0",
+      "target": "8003A9C4",
+      "instruction": "jal"
+    },
+    {
+      "site": "80039C5C",
+      "target": "8003A9C4",
+      "instruction": "jal"
+    },
+    {
+      "site": "800390BC",
+      "target": "8003F28C",
+      "instruction": "jal"
+    },
+    {
+      "site": "80022B3C",
+      "target": "800232D4",
+      "instruction": "jal"
+    },
+    {
+      "site": "80022B58",
+      "target": "800232D4",
+      "instruction": "jal"
+    },
+    {
+      "site": "80022B74",
+      "target": "800232D4",
+      "instruction": "jal"
+    },
+    {
+      "site": "80022BA8",
+      "target": "800232D4",
+      "instruction": "jal"
+    }
+  ],
+  "pools": [
+    {
+      "id": "R9-TRAIL",
+      "base": "800972F8",
+      "end_exclusive": "80097418",
+      "count": 3,
+      "stride": 96,
+      "owner": "Hardcoded resident PLAYER800970A0; each actor+50 points to PLAYER for slot0 or previous trail for slots1/2.",
+      "init": "8003BFBC..8003C038",
+      "update": "80020DC8 ->80020E1C",
+      "render": "80022B80..80022BB4 reverse order2/1/0 through800232D4 when actor+3 nonzero",
+      "fields": {
+        "00": "type11h",
+        "02": "index0..2",
+        "03": "visible",
+        "04": "active phase group",
+        "05": "three-phase table index",
+        "08/0C": "current fixed-point X/Y",
+        "14": "camera layer",
+        "15": "facing",
+        "16": "draw priority4",
+        "18/1C": "previous position",
+        "38/3C": "graphics/assembly copied from owner each update",
+        "40": "owner texture page at init",
+        "42": "per-index trail CLUT at init",
+        "47": "owner animation frame copied each update",
+        "50": "native guest parent pointer",
+        "54": "follow delay",
+        "56": "first drain counter",
+        "58": "final drain counter"
+      },
+      "clut_table": {
+        "address": "80073CEC",
+        "values": [
+          "780D",
+          "780E",
+          "780F"
+        ],
+        "metadata": {
+          "id": "trail_cluts",
+          "region": "exe",
+          "start": "80073CEC",
+          "end_exclusive": "80073CF2",
+          "kind": "halfword_table",
+          "payload_offset": 408812,
+          "bytes": 6,
+          "sha256": "31e54fa8907c91ccf79000410eae1ea1cb5b65bc2893faaccdb4b7782a286b4c"
+        }
+      },
+      "producer": "Accepted native action writes resident signed PLAYER+8C positive. Do not create a trail from host-held dash alone.",
+      "retire": {
+        "zero_marker": "Active actor immediately hides/resets+3/+4; inactive actor does nothing.",
+        "negative_marker": "Phase0 moves to1. Phase1 consumes8 then transitions on following call. Phase2 consumes(5-index)*2 then hides on following call; slot2 also clears owner+8C.",
+        "positive_retrigger": "Phases1/2 reinitialize to0 with delay3/counter8/tail10,8,6 and current owner position.",
+        "inactive_negative": "An inactive slot seeing a negative marker clears owner+8C, which can cause other active slots to hide sooner.",
+        "conditional_bound": "With valid native counters, no retrigger, negative marker retained and one successful update per slot per tick: conservative at most21 own actor updates from phase0; shared slot2 marker clear can shorten the other slots. This is source arithmetic, not measured frames."
+      }
+    },
+    {
+      "id": "R9-CHARGE",
+      "base": "800911A8",
+      "end_exclusive": "80091248",
+      "count": 2,
+      "stride": 80,
+      "owner": "Hardcoded resident PLAYER800970A0; no separate owner field in actor.",
+      "init": "8003C03C..8003C0A8",
+      "update": "80020D74 ->80020AA8",
+      "render": "X-only80022B3C/80022B58 via800232D4 if actor+3 nonzero",
+      "fields": {
+        "00": "type21h",
+        "02": "slot0/full-level2 or slot1/level1",
+        "03": "visible",
+        "04": "animation active",
+        "08/0C": "owner current X/Y each update",
+        "14": "camera layer from init",
+        "15": "fixed0 at init",
+        "16": "draw priority2",
+        "30": "animation table8007789C",
+        "34/44..48": "animation state",
+        "38": "zero: common textures",
+        "3C": "SCRATCH+1C assembly plus its +70 relative offset",
+        "40": "texture page0",
+        "42": "CLUT7802"
+      },
+      "producer": "When inactive, either PLAYER+9B or+9C equals requiredlevel(2 for slot0;1 for slot1): show, select animation8+slot, set+4 active.",
+      "retire": "Once active, animation continues while either charge level is nonzero. Both9B/9C zero hides and clears+4 on the next update. Level1 glow is not automatically removed merely because level2 is reached. No unconditional lifetime timer."
+    },
+    {
+      "id": "R9-FALCON",
+      "base": "80091248",
+      "end_exclusive": "80091298",
+      "count": 1,
+      "stride": 80,
+      "owner": "Hardcoded resident PLAYER800970A0; initialized only character0 plus PLAY+5E==1.",
+      "init": "8003C0AC..8003C124",
+      "update": "80020D74 conditionally visits allocated third slot, then80020AA8 subtype3",
+      "render": "X-only80022B74 via800232D4 if actor+3 nonzero",
+      "fields": {
+        "02": "subtype3",
+        "03": "visible",
+        "06": "last player subphase",
+        "08/0C": "owner current X/Y",
+        "15": "owner facing each valid update",
+        "30": "animation table8007789C",
+        "38": "zero: common textures",
+        "3C": "SCRATCH+1C assembly plus its +20 relative offset",
+        "40": "texture page0",
+        "42": "CLUT7802"
+      },
+      "producer": "Only PLAYER+5==23h and signed PLAYER+6>0. On subphase change choose animation2B/2C/2A from sign of PLAYER+24, then advance animation.",
+      "retire": "Outside action23h or when player subphase<=0, reset animation2A, set effect+6=2 and hide on that same update. No independent effect TTL; native action exit is required."
+    }
+  ],
+  "accepted_inputs": {
+    "common_charge_parent": {
+      "entry": "8003EC78 via living phase80035118",
+      "gate": "character0; reject E0!=0 with form4; action not0,1,18h,19h; D5==0; release/fire predicate8003ED98 returns0; partsEC bit00080000 clear.",
+      "predicate": "Original8003ED98 preserves new-press/release handling using held+7C, previous+7E, edge+80, attackA6, action5, charge timers9D/9E and PLAY+C9 bits0/1. It can route to clear_charge instead of incrementing. Do not replace with a held-button approximation."
+    },
+    "buster": {
+      "entry": "8003FFF4",
+      "gate": "held7C&20h OR(PLAY+C9&01h and weapon93==0); level9C!=2, after common gate.",
+      "mutations": "timer9E++; first level9C=1 at timer25, full9C=2 at90; EC&00100000 chooses12/45; first threshold calls sound group1/id7 with actor.",
+      "units": "eligible native helper invocations, not necessarily wall-clock frames since first keypress"
+    },
+    "special_weapon": {
+      "entry": "8003EEE4",
+      "gate": "weapon93 nonzero, held7C&10h, level9B!=2, formE7 in1/3/4, ammo[A8+weapon*2]>=native_cost8003EB0C(actor,weapon+9), after common gate.",
+      "mutations": "timer9D++; first level9B=1 at25/full9B=2 at90, or12/45 with EC&00100000; first threshold sound group1/id7."
+    },
+    "charge_clear": {
+      "entry": "8003F480",
+      "mutations": "stop group1/id7 via8001750C, call8003CE30(actor), clear9B/9C/9D/9E.",
+      "release": "8003F58C uses resident PLAYER. Except PLAY+C9 autostart with weapon0, absent held10h clears9B/9D; absent held20h clears9C/9E; when timers clear, stop sound and refresh native animation. Menu path80034CD0 uses it before controller and clears on selected-weapon change."
+    },
+    "ground_dash": {
+      "accept": "80039EB0, called by80039BC4/80039C40",
+      "gate": "D3==0; native double-tap latch87!=0 or edge80&100h; update facing from held7C bits1/2; facing side must be clear in collision89 bits1/2; signed horizontal velocity20 from native speed104.",
+      "double_tap": "80039F78 resets87 each tick, rejects D3 or action0/1, stores first direction edge80&3 in82 and counter88=12; repeated matching edge while counter nonzero sets87=1.",
+      "start": "8003A9C4 sets84/86=1. Jump edge80&80h takes action6 and marker8C=1 immediately. Otherwise selects animation10h, timer85=15 if EC&10h else30, action0Ch/subphase0; table80073C04[0] ->800357A8 waits native animation45 bit80h before setting marker8C=1 and advancing subphase.",
+      "limits": "Native action handlers can cancel before activation; only accepted positive marker produces trails. Raw dash input is insufficient."
+    },
+    "falcon_dash": {
+      "accept": "8003906C ->8003F28C for character0/form1",
+      "gate": "D3==0 and86==0; then edge80&80h or80039EB0 returns1.",
+      "start": "8003F28C calls8003B298 to set native dash timing, then action23h/animationA9, sound1/id5 and two shared native effect helpers8003D3F8/8003D510. BIN0 action table23h ->801EB8B8; phase table801F3730 ->801EC878/801EC908.",
+      "activate": "801EC878 waits animation46==0, chooses native player animationAC/AD/AB from velocity24, writes8C=1 and increments6. Fixed flare uses action23h plus6>0 after this.",
+      "exit": "phase1 calls8003A0E8 and native8003AFF4 on end; interruption paths use native landing/fall routines. Fixed flare hides on next invalid action/subphase update.",
+      "limits": "Shared effect producers, collision helper internals and all armor-specific action paths are outside this fixed-pool closure and remain separate ownership obligations."
+    }
+  },
+  "animation_contract": {
+    "set": "800179A4: actor+30 indexes animation ID; writes+17,+34,+44word,+48=FF. The native+30 field is an animation pointer table in this consumer, not executable dispatch.",
+    "advance": "80017A04: decrement byte+44; when0, signed byte+46*4 advances+34; load next command word into+44..47. Only passed actor/its animation pointers are read or mutated; no global/PLAYER access or nested calls in these two helpers.",
+    "lifetime": "Animation stream stepping does not independently clear effect visibility; visibility retirement is owned by the pool helper conditions above."
+  },
+  "projection": [
+    {
+      "id": "R9-C01",
+      "region": "PLAYER800970A0 full158h",
+      "contract": "Project actor identity2/formE7, phase4/action5/subphase6, current and previous positions8/C/18/1C, frame47/facing15, velocity20/24, native input7C/7E/80/82 and dash latch/counters84..8C; charge levels/timers9B..9E, weapon93/attack96/A6, ammo and partsEC plus native physics values. These helpers hardcode resident body; passing a different a0 alone is insufficient."
+    },
+    {
+      "id": "R9-C02",
+      "region": "Private trails120h and attached effectsF0h",
+      "contract": "Capture/project fixed pools atomically with body; +50 guest parent links must refer to projected PLAYER/previous projected trail at the fixed guest addresses. Actor-local animation pointers/counters, owner frame resources and CLUT/page/layer must survive menus/snapshot/restoration."
+    },
+    {
+      "id": "R9-C03",
+      "region": "X BIN0 overlay and selected DAT86/87/88/89",
+      "contract": "Install correct character/form overlay and immutable resources. Init reads PLAY+38/+5E and SCRATCH+1C; trails inherit body38/3C/40 and tableCLUT; attached actors retain SCRATCH assembly-relative pointers. Full palette/fade/armor auxiliary-render composition remains open."
+    },
+    {
+      "id": "R9-C04",
+      "region": "PLAY=800CCED0",
+      "contract": "Charge reads shared option byte+C9; initializer reads character38/form5E and equipped parts indexed by native character. Restore campaign identity exactly and preserve deliberate shared policy. Do not turn option/config state into a per-seat inferred value or run the entire stage twice."
+    },
+    {
+      "id": "R9-C05",
+      "region": "Camera800971F8 and draw context",
+      "contract": "Renderer800232D4 uses actor14 to select camera layer (54h stride), actor3C/47/15/40/42/16, scratch0 frame bank, scratch100/104 packet cursors, scratch124 packet budget and OT-tail table8008EB08. PriorityFF additionally uses pointer8009B7A0+78. Private rendering needs owned valid packet arenas and native OT-tail continuation; do not restore away linked packets or overwrite another seat arena."
+    },
+    {
+      "id": "R9-C06",
+      "region": "Audio and shared deferred effects",
+      "contract": "Charge start/stop uses shared group1/id7 and actor-sensitive source routines; Falcon start invokes shared effect creation. Fixed pool projection alone does not isolate SPU voices or deferred asset ownership. Existing audio audit remains open."
+    },
+    {
+      "id": "R9-C07",
+      "region": "Controller lifetime/snapshot/digest",
+      "contract": "One native body advance and fixed-pool update per eligible actor in the source order, after contact; avoid double update when an X survivor already owns the one world pass. Pause/absent/fallen/scene/passenger gates must use existing lifecycle semantics. Any future reentrant guard or future-restored local must be tracked and included in ready/digest/reset/current-build snapshot handling, with guest values not host pointers."
+    }
+  ],
+  "source_corrections": [
+    {
+      "prior": "SC06 workbook-derived PLAYER+D7 charge label",
+      "correction": "Do not use D7 for the normal charge-glow producer: actual levels9B/9C and timers9D/9E are proven here; D7 appears in other native arrival/death countdown contexts. Preserve whole body but retain D7 semantic uncertainty."
+    },
+    {
+      "prior": "SC07 PLAYER+30 consumer unknown",
+      "correction": "800179A4/800179D0 establish an animation-pointer table consumer; this does not assert every other consumer or all form lifetimes."
+    },
+    {
+      "prior": "SC08 exact effect consumers unknown",
+      "correction": "Fixed trail/attached producer-update-render-retire source paths are mapped here. Runtime private-seat execution, rendering, colors and persistence remain unverified."
+    }
+  ],
+  "remaining_proofs": [
+    {
+      "id": "R9-E01",
+      "local": "unverified",
+      "netplay": "unverified",
+      "check": "Actual-plugin one update per private actor: native charge timer thresholds and dash marker transitions; no update on paused/absent/fallen/scene/passenger paths; survivor world does not double advance."
+    },
+    {
+      "id": "R9-E02",
+      "local": "unverified",
+      "netplay": "unverified",
+      "check": "Base X/P2 lower/full charge activation, release/fire/weapon-switch clear, private projectile ownership, no P1 charge contamination, natural counter/effect retirement."
+    },
+    {
+      "id": "R9-E03",
+      "local": "unverified",
+      "netplay": "unverified",
+      "check": "Base X/P2 button and double-tap ground dash with source accepted marker; interrupted/rejected dash produces no synthetic trails; drain/retrigger and trail parent chain remain private."
+    },
+    {
+      "id": "R9-E04",
+      "local": "unverified",
+      "netplay": "unverified",
+      "check": "Falcon form1 third slot only; native action23 phase reaches6>0, velocity-sign flare choices, interruption and charge/dash overlap; shared dash effect allocation ownership separately traced."
+    },
+    {
+      "id": "R9-E05",
+      "local": "unverified",
+      "netplay": "unverified",
+      "check": "Original native order and retained renderer emit fixed pools with actual X/form resources and correct per-stage/fade CLUTs; packet bounds, budget, OT links and independent immutable cache identities."
+    },
+    {
+      "id": "R9-E06",
+      "local": "unverified",
+      "netplay": "unverified",
+      "check": "Both menus, exit/teleport/death/checkpoint/team-wipe preserve or natively clear exact body/pools and resource identity; no leaked glow/trail when owner retires."
+    },
+    {
+      "id": "R9-E07",
+      "local": "unverified",
+      "netplay": "unverified",
+      "check": "Current-build snapshot/digest includes any new descriptor/guard/future-restored local; replay gives equal guest pool bytes/counters and host retained artifacts; states0/rollback0 remain fixed."
+    },
+    {
+      "id": "R9-E08",
+      "local": "unverified",
+      "netplay": "unverified",
+      "check": "Muted original/native comparison and fresh same-artifact two-peer pair exercise both roster directions independently; no R9/R4/R12 pass from source evidence."
+    }
+  ],
+  "verification": {
+    "method": "Exact original SHA and selected member SHA; bounds/SHA for every listed native window/table; direct JAL opcode/target checks and exact dispatch entries; JSON roundtrip and source Git identity checks. No native execution.",
+    "native_windows": 38,
+    "function_pointer_tables": 7,
+    "direct_jal_edges": 26,
+    "runtime_passes": 0
+  }
+}
