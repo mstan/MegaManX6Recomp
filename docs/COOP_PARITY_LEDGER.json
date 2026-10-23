@@ -353,17 +353,61 @@
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "beeae107efca2fddab2c279a9d48d5e7e00817b1",
+            "build_identity": {
+              "exe_sha256": "a8f20cdcc4ac68cdc76bf8fa7f1b3a74b9db67788514468743a355284b2080b8",
+              "declared_manifest_sha256": "91a1d699ca4d404400d9448730a482fbd2da04445ae9d2702ffc0cab6bd2ad29",
+              "compiled_source_commit": "beeae107efca2fddab2c279a9d48d5e7e00817b1",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "loader": "default Seamless Loading",
+              "input": "actual published host digital slots",
+              "rollback": false,
+              "audio": "emulated; muted SDL dummy output"
+            },
+            "action": "Native P1 X ground jump followed by P2 Zero ground jump during the first vocal lifetime; identify source ADPCM/tone and retain event disposition.",
+            "outcome": "P2 Zero ground jump used original X DAT87 group3/record7/sample8 (3360 bytes), not Zero DAT85 record7/sample8 (2576 bytes). Numeric pitch1144/ADSR33023/8128 match the identified X tone; no separate scalar DSP defect established.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-jump-audio/manifest-bound-beeae10-local-failure-reviewed.json",
+                "sha256": "5ca0d23ff531dbdb7fac7a25ab6faefd2b39bb49e7ae6c20019db22c5f477cd1"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v17-beeae10-local-x-first\\qualification.json",
+                "sha256": "e1b82db788f76aba3a96043b641c418d027e207c38e20531018031044fa1d96f"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v17-beeae10\\candidate.json",
+                "sha256": "27d42d624f1e0e4678db9c7fa1418afb9ff7727a57fab79510b16c9b71215789"
+              }
+            ],
+            "limits": [
+              "Only one X/P1-first then Zero/P2 original ground-jump overlap in a private offline intro; other audio/events/rosters/stages remain unverified.",
+              "Local R4/R12 failed for this concrete ownership/replacement counterexample; netplay was not exercised. No other comparison-family disposition.",
+              "Engine event frames are not native world ticks or sample-accurate PCM lifetime. Published Cross consumption anywhere in finalized input capture is not exact temporal jump/audio attribution.",
+              "Muted SDL dummy output; no speaker/PCM/music/audio-quality or private-bank correctness proof. Four intervening voice22 KEYONs are outside this group3 comparison.",
+              "Fresh private cards began empty; generated blank cards/initial snapshots are hash-bound. No source/native user cards supplied or modified.",
+              "Raw report keeps its original unverified family labels; this reviewed capsule records the concrete local failure without rewriting raw evidence or the ledger."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Concrete local original-ground-jump counterexample on exactbeeae10/a8f20cdc only. Other sound families, co-op-off native Zero comparison and all netplay audio checks remain unverified."
       }
     },
     {
@@ -723,9 +767,51 @@
               "Raw artwork-pending reports remain unchanged; root reviewed each composed image independently."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "4cdfe4d19f8932ed162818c8378d03254453cc72",
+            "build_identity": {
+              "exe_sha256": "eeb5754a53a6d10aeac13b294ce3325a7e2b8a6180b20ce001a3800401fcec6d",
+              "declared_manifest_sha256": "3d462d7f1bdcdbcd5f17211eaf597a7b3be4e199484c1f08fb90444f6cae89c8",
+              "compiled_source_commit": "4cdfe4d19f8932ed162818c8378d03254453cc72",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "loader": "default Seamless Loading",
+              "input": "published host via same-machine delay3 numeric127 UDP",
+              "rollback": false
+            },
+            "action": "Original primary Continue/Quit confirmation pages with a preexisting native Zero dash and three trails; cancel and resume.",
+            "outcome": "All10 native case checks and both10-check effect reducers pass; root reviewed all6 completed captures. Both pages hide bodies/meters/trails; native dash resumes and retires.31 resolved core/mod samples match. This is paired v16 evidence; local v16 remains unverified.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-native-quit/manifest-bound-4cdfe4d-pair-live-effects-reviewed.json",
+                "sha256": "aa2c94bfbdb542459cd3367e75bc2831dd565d7c1e00cb2a9eb98b57620a1d3f"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v16-4cdfe4d-pair-live-effects\\qualification.json",
+                "sha256": "6b5de27f994d7a5da748667b356fd637ac67bc053990d6aba53c621cb2dfbc8f"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v16-4cdfe4d\\candidate.json",
+                "sha256": "3562f02617dc6ada4f39ce27b28894213f6c785b5db93ca81c3938ad75bc6301"
+              }
+            ],
+            "limits": [
+              "Exact v16 Windowsx64 Clang22 ENHANCED image, linked OpenBIOS, interpreted stage overlays and current X/P1+Zero/P2 intro only.",
+              "Same physical machine numeric127.0.0.1 UDP delay3 and profile revision2; no cross-machine/CPU/OS, rollback, network states or AOT/performance qualification.",
+              "All10 native case checks plus two10-check effect reducers pass; raw effect reducers remain partial_evidence and raw artwork labels stay pending, with reviewed capture attribution recorded separately here.",
+              "Native P2 dash/three trails through primary confirmation pages and original cancel/resume only; other effects, opposite roster, final Quit, acquired-progress/current-data reentry, campaign and full R7/R15 remain unverified.",
+              "No source cards supplied or copied; generated private card files remained hash-identical. Debug Quit is owned cleanup, not native final-Quit proof.",
+              "No local v16 result or any other family pass is inherited from the prior c5 template."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Bounded local and same-machine paired passes retained separately for exact986e1598 and current39c15496 intro X/P1+Zero/P2: both original P1 confirmation pages hide bodies/meters and three native live dash trails, preserve frozen private state, then resume/retire after cancel. Final Quit/current-data reentry, other effect families/rosters/campaign scenes and cross-machine remain separate/unverified."
+        "limitations": "Bounded local and same-machine paired passes retained separately for exact986e1598 and current39c15496 intro X/P1+Zero/P2: both original P1 confirmation pages hide bodies/meters and three native live dash trails, preserve frozen private state, then resume/retire after cancel. Final Quit/current-data reentry, other effect families/rosters/campaign scenes and cross-machine remain separate/unverified. Additional exacteeb5754a paired v16 live-effect regression passes independently; no v16 local or current-candidate result is inherited."
       }
     },
     {
@@ -1201,17 +1287,61 @@
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "beeae107efca2fddab2c279a9d48d5e7e00817b1",
+            "build_identity": {
+              "exe_sha256": "a8f20cdcc4ac68cdc76bf8fa7f1b3a74b9db67788514468743a355284b2080b8",
+              "declared_manifest_sha256": "91a1d699ca4d404400d9448730a482fbd2da04445ae9d2702ffc0cab6bd2ad29",
+              "compiled_source_commit": "beeae107efca2fddab2c279a9d48d5e7e00817b1",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "loader": "default Seamless Loading",
+              "input": "actual published host digital slots",
+              "rollback": false,
+              "audio": "emulated; muted SDL dummy output"
+            },
+            "action": "Native P1 X ground jump followed by P2 Zero ground jump during the first vocal lifetime; identify source ADPCM/tone and retain event disposition.",
+            "outcome": "P1 X voice20 KEYON204/frame2519 was replaced by P2 KEYON206/frame2529 after10 engine frames; P1 did not reach natural end. P2 later reached END_STOP210/frame2558 after29 frames.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-jump-audio/manifest-bound-beeae10-local-failure-reviewed.json",
+                "sha256": "5ca0d23ff531dbdb7fac7a25ab6faefd2b39bb49e7ae6c20019db22c5f477cd1"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v17-beeae10-local-x-first\\qualification.json",
+                "sha256": "e1b82db788f76aba3a96043b641c418d027e207c38e20531018031044fa1d96f"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v17-beeae10\\candidate.json",
+                "sha256": "27d42d624f1e0e4678db9c7fa1418afb9ff7727a57fab79510b16c9b71215789"
+              }
+            ],
+            "limits": [
+              "Only one X/P1-first then Zero/P2 original ground-jump overlap in a private offline intro; other audio/events/rosters/stages remain unverified.",
+              "Local R4/R12 failed for this concrete ownership/replacement counterexample; netplay was not exercised. No other comparison-family disposition.",
+              "Engine event frames are not native world ticks or sample-accurate PCM lifetime. Published Cross consumption anywhere in finalized input capture is not exact temporal jump/audio attribution.",
+              "Muted SDL dummy output; no speaker/PCM/music/audio-quality or private-bank correctness proof. Four intervening voice22 KEYONs are outside this group3 comparison.",
+              "Fresh private cards began empty; generated blank cards/initial snapshots are hash-bound. No source/native user cards supplied or modified.",
+              "Raw report keeps its original unverified family labels; this reviewed capsule records the concrete local failure without rewriting raw evidence or the ledger."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Concrete local original-ground-jump counterexample on exactbeeae10/a8f20cdc only. Other sound families, co-op-off native Zero comparison and all netplay audio checks remain unverified."
       }
     },
     {
