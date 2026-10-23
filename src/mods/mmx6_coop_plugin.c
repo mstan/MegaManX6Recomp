@@ -32,6 +32,11 @@
 #define SCRATCH 0x1F800000u
 #define ASSET_SPACE 0x80000u
 #define FRAME_ARENA 0x20000u
+/* Native 800232D4 emits one 40-byte sprite plus one 8-byte mode tag per
+ * primitive, with a shared 1000-primitive budget. Expanded GT3 pairs occupy
+ * the middle 80000 bytes; retain mode tags in this same owned frame arena. */
+enum { PLAYER_PACKET_LIMIT=1000, PLAYER_PACKET_BYTES=PLAYER_PACKET_LIMIT*40,
+       PLAYER_MODE_OFFSET=PLAYER_PACKET_BYTES*3 };
 
 typedef struct {
     uint8_t body[0x158];
@@ -1141,7 +1146,7 @@ static void controller(CPUState *cpu, uint32_t address) {
         (void)mmx6_coop_join_input(&life,p2_input()&1,0,0);
         enrolled=0; return;
     }
-    if ((psx_mod_read_byte(PLAYER+4)!=2 &&
+    if (psx_mod_read_byte(PLAY+1) || (psx_mod_read_byte(PLAYER+4)!=2 &&
          (psx_mod_read_byte(PLAYER+4)!=1 || psx_mod_read_byte(PLAYER+5)<2)) ||
         psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C)) {
         (void)mmx6_coop_join_input(&life,p2_input()&1,0,0);
@@ -1191,6 +1196,12 @@ static void controller(CPUState *cpu, uint32_t address) {
         guest(cpu,0x80034DCC,0,0);
         guest(cpu,0x8002012C,0,0); /* This player's attack pool, never enemies/world. */
         guest(cpu,0x8002F288,PLAYER,0); /* Native terrain/platform contact. */
+        /* Original 80020C40 orders these fixed actor-owned pools after
+         * contact. They read the resident PLAYER and trail parent links;
+         * keep both calls inside the one private projection. The native
+         * survivor/menu world pass already owns them when inside is set. */
+        guest(cpu,0x80020D74,0,0);
+        guest(cpu,0x80020DC8,0,0);
         leave_zero();
         if (life.status[1]==MMX6_COOP_LEAVING && p2.body[4]==3)
             mmx6_coop_teleport_done(&life);
@@ -1309,12 +1320,23 @@ static void triangle(uint32_t dst, uint32_t next, const uint32_t *q,
 static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
     uint32_t base=psx_mod_read_word(SCRATCH+0x100);
     uint32_t mode=psx_mod_read_word(SCRATCH+0x104);
+    /* Preserve native's no-output return at budget>=1000. A negative budget
+     * would evade its signed comparison and cannot protect our arena. */
+    if (base<arena || base-arena>PLAYER_PACKET_BYTES || (base-arena)%40 ||
+        mode!=arena+PLAYER_MODE_OFFSET+(base-arena)/5 ||
+        (psx_mod_read_word(SCRATCH+0x124)&0x80000000u) ||
+        psx_mod_read_word(SCRATCH+0x124)<(base-arena)/40) {
+        failed=1; return;
+    }
     uint32_t restore_words[4]={base,mode,actor,arena};
     STATE_WORDS(restore_packet,15,restore_words,4);
     guest(cpu,0x800232D4,actor,0);
     STATE_POP(restore_packet);
     uint32_t end=psx_mod_read_word(SCRATCH+0x100);
-    if (end<base || end-arena>40000 || (end-base)%40) {
+    if (end<base || end-arena>PLAYER_PACKET_BYTES || (end-base)%40 ||
+        psx_mod_read_word(SCRATCH+0x104)!=mode+(end-base)/5 ||
+        (psx_mod_read_word(SCRATCH+0x124)&0x80000000u) ||
+        psx_mod_read_word(SCRATCH+0x124)<(end-arena)/40) {
         failed=1; return;
     }
     uint32_t table=psx_mod_read_word(actor+0x38);
@@ -1329,7 +1351,7 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
     /* Common effects use the stage's already resident textures. Only native
      * Zero frames need the retained host bank instead of X's texture slot. */
     if (!render_x_death && (table<assets || table-assets>=compressed_size)) return;
-    uint32_t expanded=arena+40000+(base-arena)*2;
+    uint32_t expanded=arena+PLAYER_PACKET_BYTES+(base-arena)*2;
     for (uint32_t at=base;at<end;at+=40,expanded+=80,mode+=8) {
         uint32_t q[10];
         for (unsigned i=0;i<10;++i) q[i]=psx_mod_read_word(at+i*4);
@@ -1367,19 +1389,33 @@ static void render(CPUState *cpu, uint32_t address) {
         psx_mod_read_byte(PLAY)!=0x0A || !psx_mod_texture_banks_supported()) return;
     inside=1;
     uint32_t original=psx_mod_read_word(SCRATCH+0x100);
+    uint32_t original_mode=psx_mod_read_word(SCRATCH+0x104);
     uint32_t base=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
     capture_player(&p1);
     STATE_BYTES(restore_player,16,&p1,sizeof p1);
-    uint32_t render_context[2]={original,base};STATE_WORDS(restore_packet,17,render_context,2);
+    uint32_t render_context[3]={original,original_mode,base};STATE_WORDS(restore_packet,17,render_context,3);
     project_player(&p2);
     psx_mod_write_word(SCRATCH+0x100,base);
+    psx_mod_write_word(SCRATCH+0x104,base+PLAYER_MODE_OFFSET);
     render_actor(cpu,PLAYER,base);
+    /* 80022960 draws X-only attached actors, then visible trails2/1/0.
+     * Fixed P2 is Zero, so preserve the native no-charge-glow draw gate;
+     * updating its attached pool does not authorize synthetic X artwork. */
+    if (!psx_mod_read_byte(PLAYER+2)) for (unsigned i=0;i<3 && !failed;++i) {
+        uint32_t actor=0x800911A8u+i*0x50;
+        if (psx_mod_read_byte(actor+3)) render_actor(cpu,actor,base);
+    }
+    for (unsigned i=3;i && !failed;--i) {
+        uint32_t actor=0x800972F8u+(i-1)*0x60;
+        if (psx_mod_read_byte(actor+3)) render_actor(cpu,actor,base);
+    }
     for (unsigned i=0;i<32 && !failed;++i) {
         uint32_t actor=0x800950A0u+i*0xA0;
         if (psx_mod_read_byte(actor+3)) render_actor(cpu,actor,base);
     }
     uint32_t end=psx_mod_read_word(SCRATCH+0x100);
     psx_mod_write_word(SCRATCH+0x100,original);
+    psx_mod_write_word(SCRATCH+0x104,original_mode);
     project_player(&p1);
     STATE_POP(restore_packet);STATE_POP(restore_player);
     psx_mod_write_word(diagnostic+28,bank_count);
@@ -1389,12 +1425,18 @@ static void render(CPUState *cpu, uint32_t address) {
 static int render_survivor(CPUState *cpu, uint32_t address) {
     if (!zero_world || world_render) return 0;
     uint32_t actor=cpu->gpr[4];
-    if (actor!=PLAYER && !(actor>=0x800950A0 && actor<0x800964A0)) return 0;
+    int shot=actor>=0x800950A0 && actor<0x800964A0 && !((actor-0x800950A0)%0xA0);
+    int trail=actor>=0x800972F8 && actor<0x80097418 && !((actor-0x800972F8)%0x60);
+    int attached=!psx_mod_read_byte(PLAYER+2) && actor>=0x800911A8 && actor<0x80091298 &&
+        !((actor-0x800911A8)%0x50);
+    if (actor!=PLAYER && !shot && !trail && !attached) return 0;
     world_render=1;
     uint32_t original=psx_mod_read_word(SCRATCH+0x100);
+    uint32_t original_mode=psx_mod_read_word(SCRATCH+0x104);
     uint32_t arena=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
-    uint32_t render_context[3]={original,actor,arena};STATE_WORDS(restore_packet,18,render_context,3);
+    uint32_t render_context[4]={original,original_mode,actor,arena};STATE_WORDS(restore_packet,18,render_context,4);
     psx_mod_write_word(SCRATCH+0x100,world_packets);
+    psx_mod_write_word(SCRATCH+0x104,arena+PLAYER_MODE_OFFSET+(world_packets-arena)/5);
     render_actor(cpu,actor,arena);
     if (actor==PLAYER && (life.status[0]==MMX6_COOP_DYING || scene_passenger(0)) && p1.body[3]) {
         uint8_t zero_body[sizeof p2.body];
@@ -1409,6 +1451,7 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
     }
     world_packets=psx_mod_read_word(SCRATCH+0x100);
     psx_mod_write_word(SCRATCH+0x100,original);
+    psx_mod_write_word(SCRATCH+0x104,original_mode);
     STATE_POP(restore_packet);
     world_render=0;
     (void)address;
