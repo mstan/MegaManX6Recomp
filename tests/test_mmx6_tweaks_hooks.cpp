@@ -1,4 +1,5 @@
 #include "mmx6_tweaks_hooks_resolver.h"
+#include "test_workspace.h"
 
 #include <algorithm>
 #include <array>
@@ -311,10 +312,12 @@ void test_invalid_manifest_and_selection() {
 }
 
 void test_manager_integration() {
-    const fs::path root =
-        fs::temp_directory_path() / "mmx6-tweaks-hooks-resolver-test";
     std::error_code ec;
-    fs::remove_all(root, ec);
+    const auto root = reserve_test_workspace("mmx6-tweaks-hooks-resolver", ec);
+    if (root.empty()) {
+        check(false, "could not reserve hook resolver workspace");
+        return;
+    }
     const fs::path source = fs::path(__FILE__).parent_path().parent_path() /
         "mods" / "preloaded" / "packages" / "mmx6.tweaks.hooks" / "1.1.0";
     const fs::path destination = root / "packages" /
@@ -379,10 +382,12 @@ void test_manager_integration() {
 void test_local_archive_when_supplied() {
     const char* archive = std::getenv("MMX6_HOOKS_TEST_ARCHIVE");
     if (!archive || !archive[0]) return;
-    const fs::path root =
-        fs::temp_directory_path() / "mmx6-tweaks-hooks-archive-test";
     std::error_code ec;
-    fs::remove_all(root, ec);
+    const auto root = reserve_test_workspace("mmx6-tweaks-hooks-archive", ec);
+    if (root.empty()) {
+        check(false, "could not reserve hook archive workspace");
+        return;
+    }
     ModPackageManager manager(root);
     std::string installed_id;
     std::string installed_version;

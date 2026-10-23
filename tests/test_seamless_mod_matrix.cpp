@@ -12,6 +12,7 @@
  * The printed matrix is the documented support table; assertions pin it. */
 #include "mod_packages.h"
 #include "mmx6_seamless_callers.h"
+#include "test_workspace.h"
 
 #include <algorithm>
 #include <cstdio>
@@ -120,10 +121,9 @@ Row analyse(const std::string &name, const PSXRecompV4::ModResolution &plan) {
 
 int main(int argc, char **argv) {
     if (argc != 2) return fail("expected the preloaded mods root");
-    const std::filesystem::path root =
-        std::filesystem::temp_directory_path() / "mmx6-seamless-matrix-test";
     std::error_code ec;
-    std::filesystem::remove_all(root, ec);
+    const auto root = reserve_test_workspace("mmx6-seamless-matrix", ec);
+    if (root.empty()) return fail("could not reserve catalog copy: " + ec.message());
     std::filesystem::copy(argv[1], root, std::filesystem::copy_options::recursive, ec);
     if (ec) return fail("could not stage catalog copy: " + ec.message());
 

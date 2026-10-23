@@ -1,4 +1,5 @@
 #include "mod_packages.h"
+#include "test_workspace.h"
 
 #include <filesystem>
 #include <iostream>
@@ -43,10 +44,12 @@ int main(int argc, char** argv) {
     // ApeEscapeRecomp's and Tomba2Recomp's equivalents already copy first. This
     // does the same, and scans only the copy so no path in the repo is touched.
     const std::filesystem::path source(argv[1]);
-    const std::filesystem::path root =
-        std::filesystem::temp_directory_path() / "mmx6-preloaded-mods-test";
+    // Different worktrees/configurations may run this test concurrently with
+    // the same TEMP. Atomically reserve our own copy, preserving older failures.
     std::error_code copy_ec;
-    std::filesystem::remove_all(root, copy_ec);
+    const auto root = reserve_test_workspace("mmx6-mods", copy_ec);
+    if (root.empty())
+        return fail("could not reserve a private catalog copy: " + copy_ec.message());
     std::filesystem::copy(source, root,
                           std::filesystem::copy_options::recursive, copy_ec);
     if (copy_ec) {

@@ -34,12 +34,14 @@ def run(args) -> dict:
     if output.exists():
         raise ValueError("Output exists; retain earlier evidence and choose a fresh directory")
     output.mkdir(parents=True)
-    report = dict(schema=1, kind="owned_loopback_delay_intro", status="failed_setup",
+    admission_only = getattr(args, "admission_only", False)
+    report = dict(schema=1, kind="owned_loopback_delay_admission" if admission_only else "owned_loopback_delay_intro", status="failed_setup",
                   candidate_exe_sha256=preparation.sha256(args.build / "mmx6-runtime.exe"),
                   runner_source_sha256=preparation.sha256(Path(__file__)),
                   loading_policy="original_disc_loader_diagnostic_bypass" if args.native_loader_diagnostic
                                  else "default_seamless_loading",
                   default_intro_qualified=False,
+                  default_launch_qualified=False,
                   tools_root=str(tools_root), tool_sha256={Path(m.__file__).name:
                   preparation.sha256(Path(m.__file__)) for m in modules},
                   session=args.session, input_delay=3, peers=[], setup=[], observations=[],
@@ -210,6 +212,7 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
                               output=str(output))), flush=True)
         deadline, next_input, release_input, step = time.monotonic()+args.timeout, 0., 0., 0
         neutralized = False
+        admission_start = None
         while time.monotonic() < deadline:
             if any(process.poll() is not None for process in processes):
                 raise debug.DebugError("An owned peer exited during native boot")
@@ -219,6 +222,24 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
                     time.sleep(.1)
                     continue
                 net = network()
+                if admission_only:
+                    if admission_start is None:
+                        admission_start = [row["tick"] for row in net]
+                    if all(row["tick"] >= start+60 and start+30 <= row["resolved_through"] <= row["tick"]
+                           for row, start in zip(net, admission_start)):
+                        loader_markers = [(output/f"peer-{seat}/logs/stdout.log").read_text(errors="replace")
+                                          for seat in range(2)]
+                        if not all("title netplay loading = resident assets" in text for text in loader_markers):
+                            time.sleep(0.05)
+                            continue  # Allow buffered startup logs within the setup deadline.
+                        report["checks"]["default_resident_loader_committed"] = True
+                        report["checks"]["active_delay_session_advances"] = True
+                        report["default_launch_qualified"] = not args.native_loader_diagnostic
+                        report["status"] = "passed"
+                        report["limits"].append("Admission only: no native gameplay, movement or host-FNV qualification")
+                        return report
+                    time.sleep(0.05)
+                    continue
                 pads = both(lambda seat: clients[seat].request("pad_status"))
                 if not all(pad.get("slot0", {}).get("connected") for pad in pads):
                     raise paired.FailedSetup("A private virtual P1 keyboard pad is disconnected")
@@ -363,11 +384,15 @@ def main():
     parser.add_argument("--timeout", type=float, default=240)
     parser.add_argument("--native-loader-diagnostic", action="store_true",
                         help="Explicitly bypass default Seamless Loading; never qualifies defaults")
+    parser.add_argument("--admission-only", action="store_true",
+                        help="Qualify default loader admission and advancing delay transport only; no gameplay pass")
     args = parser.parse_args()
     if sys.version_info < (3, 11):
         parser.error("Python 3.11+ is required by the shared staging tools")
     if not 0 < args.timeout <= 600:
         parser.error("Setup timeout must be in (0,600]")
+    if args.admission_only and args.native_loader_diagnostic:
+        parser.error("Default-loader admission requires Seamless Loading enabled")
     report = run(args)
     print(json.dumps(dict(status=report["status"], checks=report["checks"], error=report.get("error"),
                           report=str(args.out/"qualification.json"))), flush=True)

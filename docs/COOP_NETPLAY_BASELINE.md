@@ -1,9 +1,10 @@
 # X6 netplay baseline: 2026-10-23
 
-**Default netplay failed setup. Gameplay synchronization remains unverified.**
-One original/default-loading launch and one evidence-based loading-off
-diagnostic retry were performed. No further configurations or launches were
-tried. The offline intro pass recorded elsewhere does not transfer to netplay.
+**Corrected default startup admission passes. Gameplay synchronization remains
+unverified.** The original two attempts below preserve the default-loading
+failure and a loading-off diagnostic frontend timeout. A subsequent framework
+fix was validated with a separate default admission check, documented below.
+The offline intro pass recorded elsewhere does not transfer to netplay.
 
 ## Exact candidate and isolation
 
@@ -84,12 +85,44 @@ required disc hash against that empty value. The resulting invalid plan is
 reported as the generic native-plugin error. This source evidence explains
 why the original-loader bypass admitted the diagnostic session.
 
-Fix target: resolve and negotiate the loader plan against the verified selected
+The fix must resolve and negotiate the loader plan against the verified selected
 disc identity while retaining native-plugin-only validation and identical
 host/guest loading settings. Then retest the normal default. Turning off
 Seamless Loading is a disclosed bypass, not the correctness fix. The separate
 native frontend timeout remains a setup failure requiring its own evidence;
 no cause is assigned from the loading-plan defect.
+
+## Corrected default admission
+
+Local framework branch `fix/mmx6-netplay-loader-disc-identity`, commit
+`83e8b5e11c005e0868e1aef96335258aad157559`, fixes the empty identity in both
+the direct commit and launcher fingerprint paths. It freshly measures the
+selected CUE/CHD-aware disc, clears stale cached identity and resolves the
+native-only loader selection using the verified hash. Absent, wrong,
+unreadable and same-path-replaced discs are rejected; valid recovery succeeds.
+Other fingerprint behavior is preserved. Regression checks pass in both normal
+and worker-safe framework configurations. Local framework issue: `beads-skok`.
+
+The game now pins that local commit and uses profile `mmx6-x-zero-delay-v8`.
+UI and network dependency pins are unchanged. With default Seamless Loading
+enabled, `--admission-only` passed for both peers:
+
+- Both logs contain `title netplay loading = resident assets`.
+- Active delay session, two players, expected host/guest identities, rollback
+  disabled, tick 93 and resolved-through 92 on both peers, `desync=0`.
+- Executable SHA-256:
+  `7a600daf6dc29b26d602b729984b004f513092e0c11678254f268ce4824394ed`.
+- Evidence:
+  `G:/Temp/Codex/psxrecomp/x6-parity/netplay-default-loader-fixed/qualification.json`,
+  SHA-256 `6ca1e6ee5585cfd1ad0aafaf939d024562fe77b877e1e96e40caa1bb53689016`.
+- Both owned processes were stopped by the runner. Graceful quit remains
+  unverified. Original cards and owner processes were not used.
+
+This proves default loader admission and session progress only. It performs
+no native gameplay, movement or host-FNV qualification. The earlier frontend
+timeout and every gameplay/state comparison remain open. Later build hashes
+are listed separately in the burndown; this native pass belongs to the exact
+binary above.
 
 ## Reusable runner
 
@@ -102,7 +135,10 @@ mailboxes and state loading are absent.
 The final runner preserves default Seamless Loading. An explicit
 `--native-loader-diagnostic` option reproduces the disclosed original-loader
 bypass used by attempt 2. The runner gained that explicit flag after the
-bounded attempts; neither attempt was rerun. Python 3.11+ is required by the
+bounded attempts; neither original attempt was rerun. `--admission-only` checks
+the corrected default loader and advancing delay session without claiming
+intro gameplay; it cannot be combined with the diagnostic loading bypass.
+Python 3.11+ is required by the
 shared tools; the actual attempts used Python 3.12.5.
 
 ```powershell
@@ -113,7 +149,7 @@ $env:PYTHONPYCACHEPREFIX='G:/Temp/Codex/psxrecomp/x6-parity/pycache-state'
   tools/qualify_mmx6_coop_pair.py `
   --tools-root F:/Projects/psxrecomp/_wt-mmx6-x4-parity/tools `
   --build G:/Temp/Codex/psxrecomp/x6-parity/build-debug `
-  --disc 'F:/Projects/psxrecomp/MegaManX6Recomp/mmx6/Mega Man X6 (USA) (v1.1).cue' `
+  --disc 'G:/Temp/Codex/psxrecomp/x6-parity/disc/Mega Man X6 (USA) (v1.1).cue' `
   --out G:/Temp/Codex/psxrecomp/x6-parity/netplay-next-default
 ```
 

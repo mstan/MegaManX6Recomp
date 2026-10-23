@@ -1,5 +1,15 @@
 # Framework pin history (historical)
 
+Local X6 parity candidate, 2026-10-23: `psxrecomp-v4` is
+`83e8b5e11c005e0868e1aef96335258aad157559`, branch
+`fix/mmx6-netplay-loader-disc-identity`, based on `a502df385`.
+This fixes default netplay native-loader resolution/fingerprinting against
+the freshly verified selected disc. No codegen/overlay ABI change. Full debug
+and production builds and 20/20 game checks pass; default two-peer resident
+loader admission passes. Gameplay synchronization remains unverified; see
+[the netplay baseline](COOP_NETPLAY_BASELINE.md). This commit and game branch
+are local only and have not been pushed. UI pin remains `827f49dd`.
+
 The `psxrecomp` framework used to be pinned via this hand-maintained
 `psxrecomp-v4.pin` file. That mechanism has been **replaced by a real git
 submodule**: the framework commit this repo builds against is now recorded as

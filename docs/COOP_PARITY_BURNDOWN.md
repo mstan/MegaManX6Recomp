@@ -46,13 +46,16 @@ stacked meters, lifecycle and loader. It adds:
   64 native analogues still need identification.
 - Default rejection of the unilateral P2 input mailbox and fixture commands
   during netplay. Production also rejects both channels. Profile identity is
-  `mmx6-x-zero-delay-v7`; rollback and network state transfers remain disabled.
+  `mmx6-x-zero-delay-v8`; rollback and network state transfers remain disabled.
 - Diagnostic schema 1 with a completed-publication marker, canonical P1/P2
   bodies, ready/enrolled/failed flags and a **partial** host-context FNV hash.
   This hash is not the framework's whole-machine or mod checksum.
 - A bounded diagnostic/parser and paired-session harness, plus isolated local
   candidate preparation and an owned-process intro qualifier. Staging refuses
   existing outputs and excludes CD Speed and Fast Loading packages.
+- A local framework correction, `83e8b5e11c005e0868e1aef96335258aad157559`,
+  that verifies the actual selected disc before resolving and negotiating the
+  default native loading plan. Native-plugin validation remains enforced.
 
 The real-plugin regression fails on baseline 6cba3f8 because a queued network
 fixture mutates P2, and passes after the correction. Both debug and production
@@ -60,11 +63,23 @@ test variants execute the actual plugin against isolated memory/native-call
 fixtures. This is implementation regression evidence, not an actual online
 campaign pass.
 
-Fresh debug build and **20 CTests pass**, including the original X6 suite,
-frozen provenance, protocol, content and staging checks. Original-disc tests
-were enabled and reproduce the inventory; changed source identities are
-rejected. Full production runtime and other-target builds remain separate
-qualification requirements.
+Full debug and production builds succeed, with **20/20 CTests passing in each**,
+including simultaneous runs using the same scratch directory. The original
+catalog tests used shared fixed directory names; concurrent runs exposed
+deletion/copy races. All three affected test executables now atomically reserve
+private directories and preserve previous failures. Original-disc tests were
+enabled and reproduce the inventory; changed source identities are rejected.
+Framework loader regressions pass in normal and worker-safe configurations;
+the original framework fails the exact default-on disc-targeted fixture.
+Other-target builds and production gameplay remain separate qualifications.
+
+Final checks: `ctest-isolated-debug.log` and `ctest-isolated-production.log`
+under the evidence root. Current debug executable SHA-256 is
+`044731e5e78346b5f49d6ec810584e02dfbf14ce37c6271a6553a5525a8ba7e3`;
+production is
+`87c39513288921e12594e0bf330d657b49875e97701d2de9da843d4e90555c69`.
+Native observations below name their own executable hashes; build checks do
+not transfer those observations to a different binary.
 
 ## Native baseline evidence and limits
 
@@ -94,10 +109,19 @@ after quit failed to finish within the deadline. **Graceful exit remains
 unverified.** Existing private cards were unchanged; source cards/settings were
 never used as writable test state. No owner-facing window was launched.
 
+The original paired attempts and corrected default admission are recorded in
+[COOP_NETPLAY_BASELINE.md](COOP_NETPLAY_BASELINE.md). After the framework fix,
+both peers commit the default resident loader and advance an active two-player
+delay session: tick 93, resolved-through 92, rollback off, no reported input
+desynchronization. This is startup admission only. Native gameplay, matched
+whole-machine/mod checksums and transport input independence remain unverified.
+
 ## Next integration gates
 
-1. Finish actual loopback delay-sync input/partial-state evidence on this
-   candidate. Preserve the distinction between diagnostic publication counts
+1. Finish native frontend admission and actual loopback delay-sync
+   input/partial-state evidence. The loading-off diagnostic timed out in the
+   frontend; the corrected default startup check does not resolve that separate
+   question. Preserve the distinction between diagnostic publication counts
    and resolved simulation ticks. Do not close the broad netplay comparisons
    without framework core/mod checksums and their actual behavior checks.
 2. Bridge X6 onto the modern X4/X5 framework in a separate local framework
@@ -120,7 +144,7 @@ never used as writable test state. No owner-facing window was launched.
    coverage. Batch compatible mechanic checks on one integrated candidate,
    with a bounded attempt and one evidence-based setup correction before
    deferring a difficult starting situation to human assistance.
-6. Complete production/other-target builds, default settings, stability,
+6. Complete other-target builds, production gameplay, default settings, stability,
    physical controls, real-network and owner QA. A normal-audio, windowed
    launcher is staged separately; launching it requires an actual handoff.
 

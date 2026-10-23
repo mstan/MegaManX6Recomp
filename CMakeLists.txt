@@ -138,7 +138,7 @@ endif()
 # A title that cannot be built against framework master cannot be checked
 # against it either.
 if(BUILD_TESTING)
-    if(Python3_Interpreter_FOUND)
+    if(Python3_Interpreter_FOUND AND Python3_VERSION VERSION_GREATER_EQUAL 3.11)
         foreach(_mmx6_python_test test_coop_debug_protocol test_mmx6_coop_reference
                 test_mmx6_coop_content test_prepare_mmx6_coop_playtest)
             add_test(NAME mmx6_${_mmx6_python_test}
