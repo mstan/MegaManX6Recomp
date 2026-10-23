@@ -205,6 +205,8 @@ if(BUILD_TESTING)
                 test_mmx6_coop_private_pause test_mmx6_coop_published_input
                 test_mmx6_native_zero_reference
                 test_prepare_mmx6_input_replay
+                test_mmx6_coop_native_quit test_mmx6_coop_native_quit_runner
+                test_mmx6_coop_hud_audit
                 test_mmx6_reploid_rescue_audit test_mmx6_input_capture_hook)
             add_test(NAME mmx6_${_mmx6_python_test}
                 COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/${_mmx6_python_test}.py")
@@ -306,9 +308,10 @@ if(BUILD_TESTING)
         add_test(NAME ${_mmx6_diag_target} COMMAND "$<TARGET_FILE:${_mmx6_diag_target}>")
     endforeach()
 
-    foreach(_mmx6_effects_variant debug production)
-        set(_mmx6_effects_target mmx6_coop_private_effects_${_mmx6_effects_variant}_test)
-        add_executable(${_mmx6_effects_target} tests/test_mmx6_coop_private_effects.c
+    foreach(_mmx6_visual_kind private_effects hud)
+      foreach(_mmx6_effects_variant debug production)
+        set(_mmx6_effects_target mmx6_coop_${_mmx6_visual_kind}_${_mmx6_effects_variant}_test)
+        add_executable(${_mmx6_effects_target} tests/test_mmx6_coop_${_mmx6_visual_kind}.c
             src/mods/mmx6_coop_lifecycle.c src/mods/mmx6_coop_assets.c
             "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c")
         target_include_directories(${_mmx6_effects_target} PRIVATE src/mods
@@ -328,6 +331,7 @@ if(BUILD_TESTING)
             endif()
         endif()
         add_test(NAME ${_mmx6_effects_target} COMMAND "$<TARGET_FILE:${_mmx6_effects_target}>")
+      endforeach()
     endforeach()
 
     foreach(_mmx6_checkpoint_variant debug production)
