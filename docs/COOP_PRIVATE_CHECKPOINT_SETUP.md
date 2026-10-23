@@ -233,8 +233,8 @@ RA`80029348`, width2, current minY`03B0→004B`, A0`800971F8`,
 A1`004B`, A2`0380`, T0`2`, T1`03B0`, V1`045B`, V0`004B0000`.
 The saved prefix contains only the oldest2048 of4629 available writes; it is
 not a complete trace. It identifies the current-bound writer and its native
-target896. The specific earlier target writer at `800521F4` remains a static
-source match until the separately owned target watch corroborates it.
+target896. The subsequent owned target watch below corroborates the specific
+earlier target writer at `800521F4`.
 This audit does not claim that every possible writer/corruption path was ruled
 out, nor that native CP1 readiness or a composed image has passed.
 
@@ -278,9 +278,57 @@ readiness failures. Synthetic positives test the rule only. No title build,
 game launch, ledger pass or checkpoint predicate adjustment beyond this exact
 source-derived dynamic path is evidence from this change.
 
-Validation of this source/predicate change: all26 tests in
+Validation of this source/predicate change: all27 tests in
 `python -m unittest discover -s tools -p test_mmx6_coop_checkpoint.py` pass with
 both original-input environment variables set; source-audit CLI reproduction
 and `git diff --check` pass. Native dynamic-policy validation remains unverified
 until an owned fresh target/current-bound trace, new full-camera readiness
 sample and completed composed capture are retained and reviewed.
+
+## Native placement admission and target-writer corroboration
+
+Root's healthy target retry is retained at
+`G:/Temp/Codex/psxrecomp/x6-parity/checkpoint-v12-e2e47e6-intro-cp1-camera-target-trace-retry/qualification.json`,
+SHA256`e45f9c23009c6738cd5e44bb4c061247a64505b9067d593cdb732328cb3f6d97`.
+The whole narrow trace has total/available2009, with2006 address-filtered
+entries emitted and no ring loss. Target halfword`80097222` changes0→944
+at sequence13/native PC`80029C70`, then944→896 at sequence15/native
+PC`800521F4`, frame2778, width2, A0=CAM, A1=PLAYER, A2=`80079D70`,
+RA=`80052130`. This corroborates the authored dynamic-region writer. The
+case still failed readiness and exited normally0; it produced no qualified
+capture or ledger pass.
+
+The failure was an intentionally strict resident placement check: the source
+record at`800FA25C` has flags0, while the live record's full8-byte SHA was
+`109e11f1f90c33a56affb92787293bf8a682ec5005fed673a882b9d3df118f72`.
+The primary native placement scanner explains this mutation exactly:
+
+| Original PC | Native operation |
+| --- | --- |
+| `8002A014..8002A018` | Skip records whose existing flags have bit0 or bit7 set (`flags &81`). |
+| `8002A13C..8002A150` | Allocate the instance by the record's category; allocation failure skips admission. |
+| `8002A158..8002A184` | Copy type/subtype and XY, and bind instance+10 to the exact original placement record. |
+| `8002A254..8002A264` | Load record.flags, OR1, then store that byte back to the record. |
+| `8002A188..8002A198` | Category3 skips the following category<3 resource initialization. The later offscreen category mutation also applies only to categories<3. |
+| `8002A37C..8002A38C` | Fresh-stage placement reset keeps category low nibble and flags`&70`; this record's source flags therefore reset to0. |
+
+The complete original scanner`80029F38..8002A33C` SHA256 is
+`4cc5c282ba6f2a26f531dd282c241da0eab842c45d20653424c3e67fdba80de1`.
+Applying only that documented admission OR1 to the original category3/type0/
+subtype7 record derives the exact observed full8-byte SHA above. Bytes1..7
+remain pinned to the source. The helper accepts only two exact whole-record
+identities: original flags0, or native admitted flags1. It does not accept a
+general flag mask, bit7, arbitrary type/subtype/category/position mutations,
+or an unguarded code/table closure. Resident checks additionally pin the
+original OR/store block and native reset routine. The full scanner hash and
+mutation PCs are reproduced in `--camera-audit` source metadata; the scanner's
+unrelated widescreen-bias sites need not be assumed immutable for this guard.
+
+The extended actual-source test exercises all256 possible live flag bytes,
+accepting only0/1, then independently corrupts each other record byte. It also
+decodes the original OR1/SB/reset instructions and proves the admitted record
+enables only the same exact dynamic-camera predicate; omitted writer guards
+or forged hashes fail. The source audit and27 tests pass without a game.
+Current-build native readiness and final composition still require a fresh
+owned run; this source-derived guard correction does not convert the retained
+failed setup into a pass.

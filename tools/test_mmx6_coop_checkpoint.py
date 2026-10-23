@@ -315,6 +315,17 @@ class NativeDynamicCameraTests(unittest.TestCase):
         wrong=copy.deepcopy(self.target);wrong["checkpoint"]=0
         self.assertEqual(checkpoint.camera_source_evidence(Reader(),wrong)["spans"],[])
 
+    def test_only_exact_admitted_record_variant_preserves_dynamic_policy(self):
+        row,native,raw,gpu=self.dynamic()
+        proof=source_evidence()
+        entry=next(p for p in proof["spans"] if p["address"]==f"{checkpoint.PLACEMENT:08X}")
+        entry["sha256"]=checkpoint.PLACEMENT_ADMITTED_SHA256
+        self.assertTrue(all(self.reduce(row,native,raw,gpu,source=proof).values()))
+        entry["sha256"]="0"*64
+        self.assertFalse(self.reduce(row,native,raw,gpu,source=proof)["selected_camera_bounds"])
+        proof=source_evidence();proof["spans"].pop(4)  # Native admission writer cannot be omitted.
+        self.assertFalse(self.reduce(row,native,raw,gpu,source=proof)["selected_camera_bounds"])
+
     @unittest.skipUnless(os.environ.get("MMX6_CONTENT_DISC"),"Pinned original raw disc not supplied")
     def test_original_selected_member_reproduces_closure_and_resident_guards(self):
         disc=checkpoint.content.RawDisc(Path(os.environ["MMX6_CONTENT_DISC"]))
@@ -336,13 +347,27 @@ class NativeDynamicCameraTests(unittest.TestCase):
         self.assertEqual((branch>>26,(branch>>21)&31,(branch>>16)&31),(1,5,1))
         self.assertEqual(0x80029130+((branch&0xFFFF)<<2),0x8002917C)
         self.assertEqual(exe.word(0x8002917C),0xA4850022)
+        self.assertEqual(exe.word(0x8002A25C),0x34420001) # ORI v0,v0,1.
+        self.assertEqual(exe.word(0x8002A264),0xA2420000) # SB v0,0(s2=record).
+        self.assertEqual(exe.word(0x8002A388),0x30630070) # Reset preserves only original high flags.
         class Reader:
             corrupt=False
+            record=None
             def read(inner,address,size):
                 payload=(intro[address-0x800E9860:address-0x800E9860+size] if address>=0x800E9860 else
                     exe.data[exe.offset(address,size):exe.offset(address,size)+size])
+                if address==checkpoint.PLACEMENT and inner.record is not None:payload=inner.record
                 return (bytes([payload[0]^1])+payload[1:]) if inner.corrupt else payload
         reader=Reader();self.assertTrue(checkpoint.camera_source_evidence(reader,self.target)["verified"])
+        original=bytearray(reader.read(checkpoint.PLACEMENT,8))
+        for flags in range(256):
+            changed=original.copy();changed[0]=flags;reader.record=bytes(changed)
+            with self.subTest(flags=flags):
+                self.assertEqual(checkpoint.camera_source_evidence(reader,self.target)["verified"],flags in (0,1))
+        for byte in range(1,8):
+            changed=original.copy();changed[0]=1;changed[byte]^=1;reader.record=bytes(changed)
+            self.assertFalse(checkpoint.camera_source_evidence(reader,self.target)["verified"])
+        reader.record=None
         reader.corrupt=True;self.assertFalse(checkpoint.camera_source_evidence(reader,self.target)["verified"])
         broken=bytearray(intro);broken[0]^=1
         with self.assertRaises(ValueError):checkpoint.camera_source_audit(exe,bytes(broken))

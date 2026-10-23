@@ -23,6 +23,8 @@ CAMERA_SOURCE_SPANS = (
     (0x8002927C, 0xE0, "d9ed7c9aa57753adbcead391e60d469bf4c2f491556743b82c1ef014804e0ace"),
     (0x800294B4, 0x84, "dbbe58ad96183f5246ae4ae8d9618e800cc07b889c992d6423e384fe0b828da8"),
     (0x80029B8C, 0x18C, "d7935b9037f6b1df0020983af5feb7accfa5ff87357d7e1089563d7a70d6b058"),
+    (0x8002A254, 0x14, "9a76756a228e340e960ce17f8dd26714f2dedc0ee4816d9e351f20689bd95587"),
+    (0x8002A33C, 0x70, "64d048352812e4978ca1ed0fcc3edd590db9311fb7a08ef19a216024f7f980c5"),
     (0x8005211C, 0x1E4, "7abab3ed7e47891f68c687a136683ce42d45e8a2d590b85016f2d193f4c7a240"),
     (0x8006DE94, 4, "bc20286b0ffa86dfd8f5f773c6881b0d84c0933b723e9195643b46ed34bca8ab"),
     (0x8007212C, 36, "7875f0a7e39a4fc9d563c87181b2d58a7e9b1281ac2db1f3d0bbddf7ce441a7c"),
@@ -36,6 +38,17 @@ CAMERA_SOURCE_SPANS = (
 )
 INTRO_MEMBER_SHA256 = "d8bcf3aea6caf1dd4098b681ad912692835d726dfe16fddca779e82d894de607"
 CP1_REGION = (2112, 2143, 1040, 1135, 0xFFFF, 0xFFFF, 896, 0xFFFF)
+PLACEMENT = 0x800FA25C
+PLACEMENT_ADMITTED_SHA256 = "109e11f1f90c33a56affb92787293bf8a682ec5005fed673a882b9d3df118f72"
+
+
+def camera_spans_match(spans: list) -> bool:
+    expected=[dict(address=f"{a:08X}",size=n,sha256=h) for a,n,h in CAMERA_SOURCE_SPANS]
+    if spans==expected:return True
+    # Admit exactly one source-proven whole-record variant, not arbitrary flags
+    # or a partial-byte mask. Every other code/table/record byte stays pinned.
+    next(row for row in expected if row["address"]==f"{PLACEMENT:08X}")["sha256"]=PLACEMENT_ADMITTED_SHA256
+    return spans==expected
 
 
 def camera_source_audit(exe: content.Executable, intro: bytes) -> dict:
@@ -53,10 +66,21 @@ def camera_source_audit(exe: content.Executable, intro: bytes) -> dict:
         spans.append(dict(address=f"{address:08X}", size=size, sha256=actual))
     if struct.unpack_from("<8H", exe.data, exe.offset(0x80079260, 16)) != CP1_REGION:
         raise ValueError("Original CP1 dynamic region differs")
+    original=bytearray(intro[PLACEMENT-0x800E9860:PLACEMENT-0x800E9860+8])
+    if original[0]!=0:raise ValueError("Original CP1 placement flags differ")
+    original[0]|=1
+    if hashlib.sha256(original).hexdigest()!=PLACEMENT_ADMITTED_SHA256:
+        raise ValueError("Native admission variant differs")
+    scanner_at=exe.offset(0x80029F38,0x404)
     return dict(source_exe_sha256=content.EXE_SHA256, intro_member_sha256=INTRO_MEMBER_SHA256,
         scope=dict(stage=0, section=0, checkpoint=1, record="8007212C"),
         spans=spans, placement=dict(address="800FA25C", index=9, category=3, type=0, subtype=7),
         region=dict(address="80079260", values=list(CP1_REGION)),
+        placement_mutation=dict(field_offset=0,allowed_flags=[0,1],
+            admitted_sha256=PLACEMENT_ADMITTED_SHA256,store_pc="8002A264",or_pc="8002A25C",
+            binding_pc="8002A180",reset_pc="8002A38C",reset_mask="70",
+            scanner_address="80029F38",scanner_size=0x404,
+            scanner_sha256=hashlib.sha256(exe.data[scanner_at:scanner_at+0x404]).hexdigest()),
         native_dispatch=dict(stage_root="8006DE94", intro_type_table="800FA6E0", handler="80052258",
             phase_table="800791E8", initializer="80052294", update="8005211C",
             region_root="80079D70", intro_regions="800791F0", binding_offset="18"),
@@ -76,7 +100,8 @@ def camera_source_evidence(client, target: dict) -> dict:
         payload = client.read(address, size)
         actual = hashlib.sha256(payload).hexdigest()
         evidence["spans"].append(dict(address=f"{address:08X}", size=len(payload), sha256=actual))
-        if len(payload) != size or actual != expected:
+        if len(payload) != size or (actual != expected and
+                not (address==PLACEMENT and actual==PLACEMENT_ADMITTED_SHA256)):
             return evidence
     evidence["verified"] = True
     return evidence
@@ -90,8 +115,7 @@ def dynamic_cp1_camera(target: dict, body: bytes, camera: bytes, evidence: dict 
     """
     if not evidence or evidence.get("verified") is not True or \
             evidence.get("source_exe_sha256") != content.EXE_SHA256 or \
-            evidence.get("spans") != [dict(address=f"{a:08X}", size=n, sha256=h)
-                                      for a,n,h in CAMERA_SOURCE_SPANS] or \
+            not camera_spans_match(evidence.get("spans")) or \
             (target.get("stage"), target.get("section"), target.get("checkpoint"), target.get("record")) != \
             (0, 0, 1, "8007212C") or len(camera) != 0x54 or \
             target.get("camera") != dict(x=1968,y=944,min_x=1968,max_x=5120,min_y=944,max_y=944):
