@@ -14,6 +14,7 @@ import importlib
 import json
 import os
 from pathlib import Path
+import re
 import socket
 import subprocess
 import sys
@@ -175,6 +176,10 @@ def run(args) -> dict:
     paired = importlib.import_module("test_mmx6_coop_netplay")
     state_crc = importlib.import_module("coop_state_crc")
     modules = (debug, preparation, baseline, paired, state_crc)
+    host_profiles = None
+    if getattr(args, "require_host_profile", False):
+        host_profiles = importlib.import_module("coop_host_profile")
+        modules += (host_profiles,)
     enemy = None
     if getattr(args, "enemy_targeting_smoke", False):
         enemy = importlib.import_module("qualify_mmx6_coop_enemy_admission")
@@ -200,6 +205,9 @@ def run(args) -> dict:
                   tools_root=str(tools_root), tool_sha256={Path(m.__file__).name:
                   preparation.sha256(Path(m.__file__)) for m in modules},
                   session=args.session, input_delay=3, peers=[], setup=[], observations=[],
+                  host_profile_required=host_profiles is not None,
+                  host_profile_expected=dict(profile=args.expected_host_profile,
+                      revision=args.expected_host_profile_revision) if host_profiles is not None else None,
                   checks={}, matched_host_observations=[], resolved_state_crc=[], limits=[
                       "Intro only; no campaign, physical-controller, audible or real-network pass",
                       "Diagnostic FNV is bounded host state, not a framework core/mod CRC",
@@ -226,6 +234,20 @@ def run(args) -> dict:
     def require(condition, message):
         if not condition:
             raise paired.ValidationFailure(message)
+
+    def host_profile_checkpoint(*, final):
+        expected = [peer["preparation"]["exe_sha256"] for peer in report["peers"]]
+        require(len(expected) == 2 and all(value == candidate_sha for value in expected),
+                "A staged host-profile executable differs from the candidate")
+        evidence = host_profiles.verify_host_profile_pair([
+            (Path(peer["directory"])/"logs/stderr.log").read_text(encoding="utf-8", errors="replace")
+            for peer in report["peers"]], expected,
+            args.expected_host_profile, args.expected_host_profile_revision, final=final)
+        # Hash images only after complete records, not on each pending-log poll.
+        require(all(preparation.sha256(Path(peer["directory"])/"mmx6-runtime.exe") == expected[seat]
+                    for seat, peer in enumerate(report["peers"])),
+                "A staged host-profile executable changed after staging")
+        return evidence
 
     def network():
         status = both(lambda seat: clients[seat].request("netplay_status"))
@@ -368,6 +390,11 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
                                         "PSX_OVERLAY_AUTOCOMPILE_OFF", "PSX_NET_TRANSPORT",
                                         "PSX_NET_MODE", "SDL_AUDIODRIVER")}))
             report["peers"][-1]["network_selection_sha256"] = preparation.sha256(directory/"mods/state.toml")
+        if host_profiles is not None:
+            report["host_profile_build_manifest"] = host_profiles.validate_build_manifest(
+                args.build, [Path(peer["directory"])/"mmx6-runtime.exe" for peer in report["peers"]],
+                evidence_directory=output/"logs")
+            report["checks"]["declared_build_manifest_bound_to_staged_images"] = True
         # Reservations establish availability; owned-listener checks close the
         # release-to-launch race before every debug command, including quit.
         for reservation in reservations:
@@ -414,6 +441,13 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
                            for seat, process in enumerate(processes)):
                     time.sleep(.1)
                     continue
+                if host_profiles is not None and "host_profile_startup" not in report:
+                    try:
+                        report["host_profile_startup"] = host_profile_checkpoint(final=False)
+                    except host_profiles.MissingHostProfile:
+                        time.sleep(.05)
+                        continue
+                    report["checks"]["host_profile_settled_before_guest"] = True
                 net = network()
                 if admission_only:
                     if admission_start is None:
@@ -610,6 +644,18 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
         executor.shutdown(wait=True)
         for handle in handles:
             handle.close()
+        if host_profiles is not None:
+            # Read the complete owned logs after both writers stop. A later
+            # duplicate/restart/malformed record must revoke an earlier pass.
+            try:
+                report["host_profile_final"] = host_profile_checkpoint(final=True)
+                report["checks"]["host_profile_settled_before_guest"] = True
+            except Exception as error:
+                report["checks"]["host_profile_settled_before_guest"] = False
+                report["status"] = "failed" if runtime_ready else "failed_setup"
+                report["default_intro_qualified"] = report["default_launch_qualified"] = False
+                prior = report.get("error", "")
+                report["error"] = (prior + "; " if prior else "") + f"Host profile verification: {error}"
         (output/"qualification.json").write_text(json.dumps(report, indent=2)+"\n", encoding="utf-8")
     return report
 
@@ -634,6 +680,12 @@ def make_parser():
                         help="Also exercise native P2 departure, blocked Select during P1 pause and fresh rejoin")
     parser.add_argument("--require-state-crc", action="store_true",
                         help="Require modern same-simulation-tick core/mod logs below both resolved watermarks; candidate must register complete host digest")
+    parser.add_argument("--require-host-profile", action="store_true",
+                        help="Require declared build evidence and one identical pre-guest x64 ENHANCED/FP2 host agreement per peer")
+    parser.add_argument("--expected-host-profile",
+                        help="Explicit expected settled profile name; required with --require-host-profile")
+    parser.add_argument("--expected-host-profile-revision", type=int,
+                        help="Explicit expected profile revision; required with --require-host-profile")
     parser.add_argument("--enemy-targeting-smoke", action="store_true",
                         help="Also exercise original P2 route, native enemy targeting/HP and matching composed pause captures")
     parser.add_argument("--expected-exe-sha256")
@@ -656,6 +708,14 @@ def validate_options(parser, args):
     if args.expected_exe_sha256 is not None and (len(args.expected_exe_sha256) != 64 or
             any(c not in "0123456789abcdef" for c in args.expected_exe_sha256)):
         parser.error("Expected executable SHA256 must contain 64 lowercase hex digits")
+    if args.require_host_profile:
+        if (args.expected_host_profile is None or
+                re.fullmatch(r"[a-z0-9_.-]{1,31}", args.expected_host_profile) is None or
+                args.expected_host_profile_revision is None or
+                not 1 <= args.expected_host_profile_revision <= 0xFFFFFFFF):
+            parser.error("--require-host-profile requires an explicit bounded --expected-host-profile and --expected-host-profile-revision")
+    elif args.expected_host_profile is not None or args.expected_host_profile_revision is not None:
+        parser.error("Expected host profile options require --require-host-profile")
 
 
 def main():

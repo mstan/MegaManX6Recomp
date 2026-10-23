@@ -23,6 +23,7 @@ class PairOptionTests(unittest.TestCase):
         default = self.parse()
         self.assertFalse(default.lifecycle_smoke)
         self.assertFalse(default.enemy_targeting_smoke)
+        self.assertFalse(default.require_host_profile)
         lifecycle = self.parse("--lifecycle-smoke")
         self.assertTrue(lifecycle.lifecycle_smoke)
         self.assertFalse(lifecycle.require_state_crc)
@@ -40,6 +41,20 @@ class PairOptionTests(unittest.TestCase):
     def test_existing_admission_lifecycle_exclusion_and_explicit_hash(self):
         self.rejected("--admission-only", "--lifecycle-smoke")
         self.rejected("--expected-exe-sha256", "wrong")
+
+    def test_host_profile_requires_explicit_expected_catalog_identity(self):
+        self.rejected("--require-host-profile")
+        self.rejected("--require-host-profile", "--expected-host-profile", "lab")
+        self.rejected("--expected-host-profile", "lab", "--expected-host-profile-revision", "1")
+        for name, revision in (("bad/name", "1"), ("Upper", "1"), ("a" * 32, "1"),
+                               ("lab", "0"), ("lab", "4294967296")):
+            self.rejected("--require-host-profile", "--expected-host-profile", name,
+                          "--expected-host-profile-revision", revision)
+        args = self.parse("--require-host-profile", "--expected-host-profile",
+                          "mmx6.win64-clang22.loopback", "--expected-host-profile-revision", "1",
+                          "--admission-only")
+        self.assertTrue(args.require_host_profile and args.admission_only)
+        self.assertFalse(args.require_state_crc)
 
 
 if __name__ == "__main__":
