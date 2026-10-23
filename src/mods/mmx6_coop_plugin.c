@@ -7,6 +7,13 @@
 #include "mod_plugins.h"
 #include "mod_netplay.h"
 #include "mmx6_coop_host_lab.h"
+#include "mmx6_diagnostics.h"
+#if defined(__has_include)
+#if __has_include("session_input_taint.h")
+#include "session_input_taint.h"
+#define MMX6_COOP_INPUT_TAINT_API 1
+#endif
+#endif
 #if defined(__has_include)
 #if __has_include("mod_snapshot.h")
 #define MMX6_COOP_MODERN_STATE 1
@@ -699,15 +706,22 @@ static int diagnostic_mutation_allowed(void) {
 #endif
 }
 #include "mmx6_coop_checkpoint.inc"
-static uint16_t p2_input(void) {
+static uint16_t p2_input(unsigned consumer) {
     uint16_t raw=(uint16_t)~sio_get_pad_buttons_slot(1);
+    int contaminated=0;
     if (psx_mod_read_byte(diagnostic+0x30)) {
-        if (diagnostic_mutation_allowed()) raw=(uint16_t)~psx_mod_read_half(diagnostic+0x34);
+        if (diagnostic_mutation_allowed()) {
+            raw=(uint16_t)~psx_mod_read_half(diagnostic+0x34);contaminated=1;
+#ifdef MMX6_COOP_INPUT_TAINT_API
+            psx_session_input_taint_add(PSX_INPUT_TAINT_GAME_MAILBOX);
+#endif
+        }
         else {
             psx_mod_write_byte(diagnostic+0x30,0);
             psx_mod_counter_add("mmx6.coop.debug-input-rejected",1);
         }
     }
+    mmx6_diagnostics_p2(consumer,raw,contaminated);
     return raw;
 }
 static void scene_begin(unsigned seat, uint32_t source) {
@@ -784,7 +798,7 @@ static int interaction_begin(CPUState *cpu, uint32_t address) {
         capture(0x800C456C,input,sizeof input);
         restore_input=mmx6_state_push(6,input,sizeof input,0);
         enter_zero();
-        uint16_t raw=p2_input(); raw=(uint16_t)((raw<<8)|(raw>>8));
+        uint16_t raw=p2_input(MMX6_INPUT_INTERACTION); raw=(uint16_t)((raw<<8)|(raw>>8));
         psx_mod_write_half(0x800C456C,raw);
         psx_mod_write_half(0x800C4570,p2_edges);
     }
@@ -930,6 +944,9 @@ static void diagnostic_setup(CPUState *cpu) {
     if (command==8) return;
     /* Development-only fixture setup. The published host-body copy remains
      * read-only; a one-byte command commits the already-written payload. */
+#ifdef MMX6_COOP_INPUT_TAINT_API
+    if(command>=1 && command<=7)psx_session_input_taint_add(PSX_INPUT_TAINT_GAME_MAILBOX);
+#endif
     if (command==1) p2.body[0x5C]=psx_mod_read_byte(diagnostic+0x51);
     if (command==2) {
         uint16_t ammo=psx_mod_read_half(diagnostic+0x52);
@@ -1051,7 +1068,7 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     if (checkpoint_stage_boundary(cpu)) return 1;
     if (!enrolled || failed) return 0;
     diagnostic_setup(cpu);
-    uint16_t raw=p2_input();
+    uint16_t raw=p2_input(MMX6_INPUT_STAGE);
     int start=!!(raw&8), pressed=start&&!p2_start_previous;
     unsigned phase=psx_mod_read_byte(PLAY+1);
     p2_start_previous=start;
@@ -1155,17 +1172,17 @@ static void controller(CPUState *cpu, uint32_t address) {
     /* Only the normal gameplay driver's post-player boundary. */
     if (cpu->gpr[31]!=0x80020C70u) return;
     if (scene_owner) {
-        (void)mmx6_coop_join_input(&life,p2_input()&1,0,0);
+        (void)mmx6_coop_join_input(&life,p2_input(MMX6_INPUT_CONTROLLER_SCENE)&1,0,0);
         return;
     }
     if (psx_mod_read_byte(PLAY)!=0x0A || !psx_mod_read_byte(PLAYER)) {
-        (void)mmx6_coop_join_input(&life,p2_input()&1,0,0);
+        (void)mmx6_coop_join_input(&life,p2_input(MMX6_INPUT_CONTROLLER_INACTIVE)&1,0,0);
         enrolled=0; return;
     }
     if (psx_mod_read_byte(PLAY+1) || (psx_mod_read_byte(PLAYER+4)!=2 &&
          (psx_mod_read_byte(PLAYER+4)!=1 || psx_mod_read_byte(PLAYER+5)<2)) ||
         psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C)) {
-        (void)mmx6_coop_join_input(&life,p2_input()&1,0,0);
+        (void)mmx6_coop_join_input(&life,p2_input(MMX6_INPUT_CONTROLLER_BLOCKED)&1,0,0);
         return;
     }
     /* The opening's scripted jump/dialogue also uses action >= 2. Wait for
@@ -1179,7 +1196,7 @@ static void controller(CPUState *cpu, uint32_t address) {
     if (ready && !enrolled) enroll(cpu);
     if (ready && enrolled) {
         constrain_player(0);
-        uint16_t raw=p2_input();
+        uint16_t raw=p2_input(MMX6_INPUT_CONTROLLER_PLAYER);
         uint32_t input_context=raw;STATE_WORDS(restore_raw,42,&input_context,1);
         uint8_t saved_input[6];
         if (!stage_call) diagnostic_setup(cpu);

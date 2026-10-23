@@ -1,0 +1,23 @@
+format_version = 5
+id = "mmx6.diagnostics"
+version = "1.0.0"
+name = "Input Diagnostics"
+author = "mstan"
+description = "Save input diagnostics to help reproduce issues in supported play sessions. Replay is not implemented."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SLUS-01395"
+disc_sha256 = "91ef53c12c3a3eb3362d51d524d3f83cd4ff8e68bf2d2ad6c5c8ea4e0310d318"
+
+[[feature]]
+id = "input-recording"
+name = "Record input diagnostics"
+description = "Save input diagnostics in a private folder, including a copy of starting saves and settings. Unsupported sessions are reported explicitly."
+group = "Diagnostics"
+default_enabled = true
+
+[[plugin]]
+feature = "input-recording"
+id = "mmx6.diagnostics"

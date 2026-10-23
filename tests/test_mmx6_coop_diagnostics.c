@@ -15,6 +15,16 @@ static int test_digest_registered;
 int psx_mod_netplay_has_state_digest(void) { return test_digest_registered; }
 #endif
 static unsigned rejected,guest_calls,effect_writes;
+static unsigned observed_reads,observed_consumer;
+static uint16_t observed_buttons;
+static int observed_contaminated;
+#ifdef MMX6_COOP_INPUT_TAINT_API
+static uint32_t diagnostic_test_taint;
+void psx_session_input_taint_add(uint32_t flags){diagnostic_test_taint|=flags;}
+#endif
+void mmx6_diagnostics_p2(unsigned consumer,uint16_t buttons,int contaminated) {
+    ++observed_reads;observed_consumer=consumer;observed_buttons=buttons;observed_contaminated=contaminated;
+}
 static uint8_t *memory(uint32_t address) {
     if (address>=0x9F080000u && address<0x9F082000u) return test_diagnostic+address-0x9F080000u;
     return test_ram+(address&0x1FFFFFu);
@@ -52,20 +62,28 @@ int main(void) {
         CHECK(!psx_mod_read_byte(diagnostic+0x50));
         CHECK(!guest_calls);
     }
+#ifdef MMX6_COOP_INPUT_TAINT_API
+    CHECK(!diagnostic_test_taint); /* Rejected online operations do not taint. */
+#endif
     psx_mod_write_byte(diagnostic+0x30,1);
     psx_mod_write_half(diagnostic+0x34,0xBFFF);
-    CHECK(p2_input()==0x20); /* Native P2 Right, never the queued Jump. */
+    CHECK(p2_input(MMX6_INPUT_CONTROLLER_PLAYER)==0x20); /* Native P2 Right, never the queued Jump. */
+    CHECK(observed_reads==1 && observed_consumer==MMX6_INPUT_CONTROLLER_PLAYER &&
+          observed_buttons==0x20 && !observed_contaminated);
     CHECK(!psx_mod_read_byte(diagnostic+0x30));CHECK(rejected==8);
     test_online=0;
     queue(1);diagnostic_setup(&cpu);
     psx_mod_write_byte(diagnostic+0x30,1);
 #ifdef PSX_NO_DEBUG_TOOLS
     CHECK(p2.body[0x5C]==before.body[0x5C]);
-    CHECK(p2_input()==0x20);CHECK(rejected==10);
+    CHECK(p2_input(MMX6_INPUT_CONTROLLER_BLOCKED)==0x20);CHECK(rejected==10);
+    CHECK(!observed_contaminated && observed_buttons==0x20);
 #else
     CHECK(p2.body[0x5C]==17);
-    CHECK(p2_input()==0x4000);CHECK(rejected==8);
+    CHECK(p2_input(MMX6_INPUT_CONTROLLER_BLOCKED)==0x4000);CHECK(rejected==8);
+    CHECK(observed_contaminated && observed_buttons==0x4000);
 #endif
+    CHECK(observed_reads==2 && observed_consumer==MMX6_INPUT_CONTROLLER_BLOCKED);
     /* Padding and purely presentational cache growth must not change the
      * observation; owned combat/lifecycle mutations must change it. */
     uint32_t original=diagnostic_host_digest();
@@ -112,6 +130,19 @@ int main(void) {
     CHECK(psx_mod_read_byte(diagnostic+0x9C)==0);
     test_digest_registered=1;diagnostics(0xFFFF);
     CHECK(psx_mod_read_byte(diagnostic+0x9C)==1);
+#endif
+    /* Every known accepted fixture command marks provenance before mutation;
+     * unknown commands do not invent a fixture acceptance. */
+#ifdef MMX6_COOP_INPUT_TAINT_API
+    for(unsigned command=1;command<=7;++command){
+        diagnostic_test_taint=0;queue(command);diagnostic_setup(&cpu);
+#ifdef PSX_NO_DEBUG_TOOLS
+        CHECK(!diagnostic_test_taint);
+#else
+        CHECK(diagnostic_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
+#endif
+    }
+    diagnostic_test_taint=0;queue(9);diagnostic_setup(&cpu);CHECK(!diagnostic_test_taint);
 #endif
     puts("co-op debug isolation and diagnostic publication PASS");return 0;
 }

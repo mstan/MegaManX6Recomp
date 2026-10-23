@@ -1,12 +1,15 @@
 # R26 accepted-input recording and replay: source audit
 
-X6 has no equivalent of the frozen X4/X5 default playtest recorder in the
-audited source. Its diagnostic RAM, input acknowledgments, screenshots and
+The frozen X6 source below had no equivalent of the X4/X5 default playtest
+recorder. Its diagnostic RAM, input acknowledgments, screenshots and
 core/mod CRC logs cannot reconstruct both accepted pad streams and their
 starting state. **R26 remains unverified.** The follow-up adds an independent
 native-consumption file codec and pure validation tests; it neither installs a
 recorder nor qualifies replay. The [native boundary/format contract](COOP_INPUT_CONSUMPTION_CONTRACT.md)
 resolves the previously unmapped decoder and lists the remaining activation work.
+The later [bounded capture activation](COOP_INPUT_CAPTURE_ACTIVATION.md) adds a
+native worker and exact observer wiring; it still requires generated-hook/native
+verification and does not implement replay or qualify R26.
 
 The accompanying [source manifest](COOP_INPUT_RECORDING_AUDIT.json) pins each
 inspected Git blob and SHA-256: X4 `50593bca772b600de6911cbfecd40b0f08721147`,

@@ -6,8 +6,7 @@
 static uint8_t original_ram[0x200000],before_ram[0x200000];
 static uint16_t checkpoint_vram[1024*512];
 #ifdef MMX6_COOP_CHECKPOINT_TAINT_API
-static uint32_t checkpoint_test_taint;
-void psx_session_input_taint_add(uint32_t flags){checkpoint_test_taint|=flags;}
+#define checkpoint_test_taint diagnostic_test_taint
 #endif
 const uint16_t *gpu_get_vram(void){return checkpoint_vram;}
 void gpu_set_gp0_source(uint32_t source){(void)source;}
