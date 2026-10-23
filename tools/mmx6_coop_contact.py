@@ -252,7 +252,10 @@ def contact_pause_contact(ctx: dict, *, expected_exe_sha256: str) -> dict:
         raise debug.DebugError("R2 did not recover native eligibility after75 ticks")
 
     def retreat(counters, label):
-        for step in range(40):
+        # The first native trial retained the actor and counter but reached
+        # x287.5625 after40 short offline pulses. Allow the original-input
+        # retreat to reach the explicit safe position; waive no contact check.
+        for step in range(60):
             rows = sample(label)
             require(all(row["p2_contact_counter"] == counters[peer] for peer, row in enumerate(rows)),
                     "R2 uncontrolled repeat contact during retreat")
