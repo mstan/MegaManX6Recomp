@@ -49,3 +49,17 @@ sample end alone cannot pass the STOP check, and reused voices cannot borrow
 an older note's final envelope. The finalized native trace must contain actual
 P2 Square consumption. Other character vocal events remain visible in the
 report and do not acquire a passing disposition from this SFX case.
+
+The first native standing-saber trial reached private47/bank30 and natural
+END_STOP, then idle. Its observer incorrectly expected neutral Square release
+to issue KEYOFF; that failed setup is retained. A saber-only run now records
+partial observations and leaves STOP unverified. It cannot pass the full case.
+
+`--body-death` extends the case through original intro record25 contact: eight
+ordinary strength4 HP losses, no HP/death writes, and the surviving primary.
+Read-only function tracing records SOUND, STOP, the contact helper and phase2
+entry. Both phase2 STOP return addresses must match, and their engine frame
+must contain private46/47 KEYOFF with no hardware22/23 KEYOFF. SDK fntrace and
+SPU events explicitly read the same external `s_frame_count`; this comparison
+does not substitute a native timer, publication counter or independent sample
+clock. These native death checks still require an actual retained run.

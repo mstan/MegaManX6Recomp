@@ -52,7 +52,12 @@ class BodyAudioTests(unittest.TestCase):
                     dict(character=1,form=5,state=1,hp=32,action=action,ground=True,airborne=0)])
         observer=Observer();report={}
         def set_input(seat,bits):calls.append(('input',seat,bits));return dict(ack=True)
-        def request(cmd):return hardware() if cmd=='spu_voices' else private
+        def request(cmd,**fields):
+            if cmd=='fntrace_armed':return dict(count=4,targets=[hex(t)for t in subject.TRACE_TARGETS])
+            if cmd=='fntrace_dump':return dict(seq_lo=0,seq_hi=1,emitted=1,entries=[dict(seq=0,target='0x80016C48',
+                a0='0x1',a1='0x7',a2='0x800970A0',ra='0x801EA040')])
+            if cmd.startswith('fntrace_'):return dict(ok=True)
+            return hardware() if cmd=='spu_voices' else private
         ctx=dict(mode='local',input_path='published_host',clients=[object()],request=request,private_banks={},
             report=report,set_input=set_input,native_advance=lambda *args:None)
         with patch.object(subject.audio,'AudioObserver',return_value=observer):
@@ -60,7 +65,7 @@ class BodyAudioTests(unittest.TestCase):
                 with self.assertRaises(subject.audio.AudioQualificationError):subject.exercise(ctx,{},source=source,timeout=5)
             else:
                 result=subject.exercise(ctx,{},source=source,timeout=5)
-                self.assertEqual(result['status'],'observations_complete');self.assertTrue(all(result['checks'].values()))
+                self.assertEqual(result['status'],'observations_partial');self.assertTrue(all(result['checks'].values()))
         return report,calls
 
     def test_square_remains_held_until_actual_saber_and_keyon(self):
@@ -72,6 +77,41 @@ class BodyAudioTests(unittest.TestCase):
         report,calls=self.run_case(never_accept=True)
         self.assertEqual(calls[-1],('input',1,0));self.assertNotEqual(report['body_audio']['status'],'observations_complete')
         self.assertLess(len([x for x in calls if x[0]=='poll']),130)
+
+    def test_phase2_stop_requires_exact_call_and_same_frame_private_keyoff(self):
+        calls=[dict(target='0x8001750C',a0='0x1',a1=hex(record),ra=hex(ra),frame=200)
+            for record,ra in ((5,0x8003D8C4),(7,0x8003D8D0))]
+        calls.append(dict(target='0x8003D8A8',a0='0x800970A0',frame=200))
+        events=[dict(v=v,kind='KEYOFF',sample_bank=30,frame=200)for v in (46,47)]
+        self.assertTrue(all(subject.phase2_checks(dict(entries=calls),events).values()))
+        delayed=copy.deepcopy(events);delayed[1]['frame']=201
+        self.assertFalse(subject.phase2_checks(dict(entries=calls),delayed)['private23_phase2_stop'])
+        self.assertFalse(subject.phase2_checks(dict(entries=calls),events+[dict(v=22,kind='KEYOFF',frame=200)])['p1_hardware22_23_not_stopped'])
+        wrong=copy.deepcopy(calls);wrong[1]['ra']='0x8003F49C'
+        self.assertFalse(subject.phase2_checks(dict(entries=wrong),events)['original_phase2_stop_calls'])
+
+    def test_native_death_requires_eight_unmodified_strength4_contacts(self):
+        def row(hp,counter):
+            return dict(observation=dict(players=[dict(x_raw=144<<16),dict(x_raw=350<<16)],native_timer=counter*80),
+                players=[dict(hp_raw=32,state=1),dict(hp=hp,terrain=0,previous_terrain=0)],p2_contact_counter=counter,
+                expected_damage=4,expected_reaction=1,instance=dict(phase=1,hp=12,strength=4,subtype=1,
+                    contact_class=0,address='0x8008ef48',x_raw=400<<16))
+        for skipped in (False,True):
+            rows=[row(32-4*i,i)for i in range(9)]
+            if skipped:rows.pop(3)
+            inputs=[];ctx=dict(clients=[object()],zero_overlay=b'',set_input=lambda s,b:inputs.append((s,b)))
+            observer=type('Observer',(),{'events':[]})();case={}
+            def sample(label):
+                if label=='body-audio-phase2-stop':observer.events.append(dict(v=47,kind='KEYOFF'))
+                return {}
+            with patch.object(subject.contact,'observe_contact',side_effect=rows):
+                if skipped:
+                    with self.assertRaises(subject.audio.AudioQualificationError):
+                        subject.native_death(ctx,sample,observer,case,lambda *a:dict(observation={}))
+                else:
+                    subject.native_death(ctx,sample,observer,case,lambda *a:dict(observation={}))
+                    self.assertEqual(len(case['native_death']['hp_changes']),8)
+            self.assertEqual(inputs[-1],(1,0))
 
     def test_sample_larger_than_debug_read_limit_uses_exact_bounded_chunks(self):
         source,event=fixture();bank=Bank();result=subject.identify(bank,event,source)

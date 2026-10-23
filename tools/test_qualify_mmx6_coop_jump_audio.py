@@ -136,6 +136,10 @@ class ProtocolTests(unittest.TestCase):
             runner.options(p,p.parse_args(argv+["--body-sfx"]))
         body=p.parse_args(argv+["--private-banks","--body-sfx"]);runner.options(p,body)
         self.assertTrue(body.body_sfx)
+        with patch("sys.stderr",new=io.StringIO()),self.assertRaises(SystemExit):
+            runner.options(p,p.parse_args(argv+["--private-banks","--body-death"]))
+        death=p.parse_args(argv+["--private-banks","--body-sfx","--body-death"]);runner.options(p,death)
+        self.assertTrue(death.body_death)
 
 
 class FilesTests(unittest.TestCase):

@@ -30,6 +30,7 @@ import qualify_mmx6_input_replay as host
 
 SUCCESS = "jump_audio_observations_complete_outcomes_unverified"
 BODY_SUCCESS = "body_audio_observations_complete_outcomes_unverified"
+BODY_PARTIAL = "body_audio_sample_observed_stop_unverified"
 INCONCLUSIVE = "inconclusive_native_rng_no_two_voice_window"
 
 
@@ -229,7 +230,7 @@ def inspect_capture(candidate: Path, image: str, manifest: str, required_seats: 
                 scope="Ordered native N/P2 C consumption; no temporal "+("jump" if button==audio.CROSS else "saber")+" association or audio/output equivalence")
 
 
-def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,expected_image,first_seat,max_attempts,audio_timeout,private_banks=None,body_source=None):
+def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,expected_image,first_seat,max_attempts,audio_timeout,private_banks=None,body_source=None,body_death=False,zero_overlay=None):
     host.require_windows();host.reserve(port)
     prepared=host.json_object(candidate/"preparation.json")
     baseline.candidate_environment(candidate,prepared)
@@ -285,7 +286,8 @@ def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,exp
             if private_banks is not None:context["private_banks"]=private_banks
             if body_source is not None:
                 context["set_input"]=route.set
-                report["audio"]=body_audio.exercise(context,contract,source=body_source,timeout=audio_timeout)
+                context["zero_overlay"]=zero_overlay
+                report["audio"]=body_audio.exercise(context,contract,source=body_source,timeout=audio_timeout,death=body_death)
             else:
                 report["audio"]=audio.jump_overlap_smoke(context,contract,first_seat=first_seat,
                     max_attempts=max_attempts,timeout=audio_timeout)
@@ -317,6 +319,7 @@ def parser():
     p.add_argument("--private-banks",action="store_true",
                    help="Require new read-only event-bank/private-voice diagnostics and exact Zero30/31 banks")
     p.add_argument("--body-sfx",action="store_true",help="Observe ordinary Zero saber SFX and native private stop; requires --private-banks")
+    p.add_argument("--body-death",action="store_true",help="After saber, use original enemy contact and HP loss to reach native phase2 STOP5/7; requires --body-sfx")
     p.add_argument("--boot-timeout",type=float,default=240);p.add_argument("--progress-timeout",type=float,default=12)
     p.add_argument("--audio-timeout",type=float,default=90)
     return p
@@ -328,6 +331,7 @@ def options(p,args):
         p.error("Require explicit lowercase executable and declared-manifest SHA256")
     if not 1<=args.port<=65535 or not 1<=args.max_attempts<=8:p.error("Require port1..65535 and attempts1..8")
     if args.body_sfx and not args.private_banks:p.error("Body SFX requires immutable private-bank diagnostics")
+    if args.body_death and not args.body_sfx:p.error("Native body death requires the body-SFX source/observer case")
     for name,bound in (("boot_timeout",600),("progress_timeout",60),("audio_timeout",120)):
         if not math.isfinite(getattr(args,name)) or not 0<getattr(args,name)<=bound:p.error("Require finite bounded timeouts")
 
@@ -352,6 +356,7 @@ def run(args):
         (output/"source-contract.json").write_bytes(args.contract.read_bytes())
         private_banks=audio.build_private_bank_contract(args.disc,contract) if args.private_banks else None
         body_source=body_audio.build_source(args.original_exe,args.disc) if args.body_sfx else None
+        zero_overlay=body_audio.contact.load_zero_overlay(args.disc) if args.body_death else None
         if body_source is not None:
             (output/"source-body-routes.json").write_bytes((json.dumps(body_source,indent=2)+"\n").encode('utf-8'))
             (output/"mmx6_coop_body_audio-executed-source.py").write_bytes(Path(body_audio.__file__).read_bytes())
@@ -374,7 +379,8 @@ def run(args):
         try:
             run_owned(candidate,args.port,args.boot_timeout,args.progress_timeout,report["runtime"],contract,
                 expected_image=args.expected_exe_sha256,first_seat=args.first_seat,max_attempts=args.max_attempts,
-                audio_timeout=args.audio_timeout,private_banks=private_banks,body_source=body_source)
+                audio_timeout=args.audio_timeout,private_banks=private_banks,body_source=body_source,
+                body_death=args.body_death,zero_overlay=zero_overlay)
         except Exception as error:
             run_error=error
         native=report["runtime"]
@@ -394,12 +400,12 @@ def run(args):
             if run_error is None:raise
         if run_error is not None:raise run_error
         status=native.get("status")
-        report["status"]=(BODY_SUCCESS if args.body_sfx else SUCCESS) if status=="observations_complete" else status
-        if status not in ("observations_complete","comparison_failed",INCONCLUSIVE):
+        report["status"]=(BODY_SUCCESS if args.body_sfx else SUCCESS) if status=="observations_complete" else BODY_PARTIAL if status=="observations_partial" else status
+        if status not in ("observations_complete","observations_partial","comparison_failed",INCONCLUSIVE):
             raise debug.DebugError("Observer did not complete a bounded audio comparison")
     except Exception as error:
         report["error"]=dict(type=type(error).__name__,message=str(error));report["traceback"]=traceback.format_exc()
-        if report["status"] in (SUCCESS,BODY_SUCCESS):report["status"]="failed"
+        if report["status"] in (SUCCESS,BODY_SUCCESS,BODY_PARTIAL):report["status"]="failed"
     finally:
         (output/"qualification.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
     return report
@@ -410,7 +416,7 @@ def main(argv=None):
     try:result=run(args)
     except (ValueError,OSError) as error:p.exit(1,str(error)+"\n")
     print(json.dumps(result,indent=2))
-    return 0 if result["status"] in (SUCCESS,BODY_SUCCESS) else (2 if result["status"]==INCONCLUSIVE else 1)
+    return 0 if result["status"] in (SUCCESS,BODY_SUCCESS) else (2 if result["status"] in (INCONCLUSIVE,BODY_PARTIAL) else 1)
 
 
 if __name__=="__main__":raise SystemExit(main())

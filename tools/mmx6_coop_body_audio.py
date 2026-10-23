@@ -6,8 +6,10 @@ import time
 
 import audit_mmx6_body_audio_routes as source_routes
 import mmx6_coop_jump_audio as audio
+import mmx6_coop_contact as contact
 
 SQUARE = 0x8000
+TRACE_TARGETS = {0x80016C48,0x8001750C,contact.CONTACT,0x8003D8A8}
 
 
 def require(ok, message):
@@ -64,12 +66,91 @@ def final_checks(events, selected, private):
     return checks, dict(lifetime=audio.lifetime(events, key), keyoffs=stops, replaced=replaced, snapshot=row)
 
 
-def exercise(ctx, contract, *, source, timeout=90, **unused):
+def trace_page(ctx):
+    page=ctx['request']('fntrace_dump',count=4096,seq_lo='0')
+    rows=page['entries']
+    require(page['seq_lo']==0 and 0<=page['seq_hi']<=4096 and page['emitted']==len(rows) and
+        [r['seq'] for r in rows]==list(range(page['seq_hi'])), 'Body audio trace was evicted or incomplete')
+    require(all(int(r['target'],16) in TRACE_TARGETS for r in rows),'Body audio trace has an unarmed target')
+    return page
+
+
+def phase2_checks(page,events):
+    """Both SDK recorders use the same extern s_frame_count; no clock guess."""
+    rows=page['entries'];calls=[]
+    for record,ra in ((5,0x8003D8C4),(7,0x8003D8D0)):
+        calls.append([r for r in rows if int(r['target'],16)==0x8001750C and
+            int(r['a0'],16)==1 and int(r['a1'],16)==record and int(r['ra'],16)==ra])
+    frames={r['frame'] for group in calls for r in group}
+    return dict(original_phase2_stop_calls=all(calls),
+        original_phase2_handler=any(int(r['target'],16)==0x8003D8A8 and int(r['a0'],16)==0x800970A0 for r in rows),
+        private22_phase2_stop=any(e['v']==46 and e['kind']=='KEYOFF' and e['sample_bank'] in (0,30) and
+            any(e['frame']==r['frame']for r in calls[0])for e in events),
+        private23_phase2_stop=any(e['v']==47 and e['kind']=='KEYOFF' and e['sample_bank']==30 and
+            any(e['frame']==r['frame']for r in calls[1])for e in events),
+        p1_hardware22_23_not_stopped=not any(e['v']in (22,23) and e['kind']=='KEYOFF' and e['frame']in frames for e in events))
+
+
+def native_death(ctx, sample, observer, case, advance):
+    """Seek the original strength4 enemy using input; never write HP/flags."""
+    client=ctx['clients'][0];previous=None;selected=None;stalled=0;jumped=False
+    route=dict(kind='original_record25_contact_death',observations=[],hp_changes=[],bypasses=[])
+    case['native_death']=route
+    for step in range(400):
+        sample('body-audio-native-contact')
+        row=contact.observe_contact(client,ctx['zero_overlay']);route['observations'].append(row)
+        o=row['observation'];p1,p2=row['players'];hp=p2['hp'];actor=row['instance']
+        require(o['players'][0]['x_raw']==144<<16 and p1['hp_raw']==32 and p1['state']==1,
+            'Native death route moved or damaged the surviving primary')
+        require(not contact.hazardous(row) or hp==0,'Terrain hazard confounds the native contact death')
+        require(row['expected_damage']==4 and row['expected_reaction']==1,'Native contact configuration changed')
+        if step==0:
+            require(hp==32 and row['p2_contact_counter']==0,'Native death route requires fresh full-health Zero')
+        if actor:
+            require(actor['phase']==1 and actor['hp']==12 and actor['strength']==4 and actor['subtype']==1 and
+                actor['contact_class']==0,'Native authored contact enemy changed')
+            if selected is None:selected=actor['address']
+            require(actor['address']==selected,'Native contact enemy changed its original slot')
+        require(actor is not None or selected is None or hp==0,'Native contact enemy was lost before fatal damage')
+        if previous and hp!=previous['players'][1]['hp']:
+            require(previous['players'][1]['hp']-hp==4,'Native contact HP loss was not ordinary strength4 damage')
+            route['hp_changes'].append(dict(before=previous['players'][1]['hp'],after=hp,
+                counter=row['p2_contact_counter'],native_timer=o['native_timer']))
+        if hp==0:
+            require(row['p2_contact_counter']==8 and len(route['hp_changes'])==8,
+                'Native fatal HP loss lacks eight accepted ordinary contacts')
+            route['fatal_observation']=row
+            ctx['set_input'](1,0)
+            for _ in range(31):
+                sample('body-audio-phase2-stop')
+                if any(e['v']==47 and e['kind']=='KEYOFF' for e in observer.events):return
+                advance(2,'body-audio-phase2-stop-drain')
+            raise audio.AudioQualificationError('Original phase2 did not issue private47 KEYOFF')
+        positions=o['players'];x=positions[1]['x_raw']
+        stalled=stalled+1 if previous and abs(x-previous['observation']['players'][1]['x_raw'])<65536 else 0
+        if stalled>=2 and not jumped and x<350<<16 and hp==32:
+            bits,frames=0x4020,24;jumped=True
+        else:
+            dx=(actor['x_raw']-x) if actor else 10<<16
+            bits=0x20 if dx>3<<16 else 0x80 if dx<-(3<<16) else 0
+            frames=4
+        try:
+            acknowledgment=ctx['set_input'](1,bits)
+            advanced=advance(frames,f'body-audio-contact-seek-{step}')
+            route.setdefault('controls',[]).append(dict(pressed=bits,acknowledgment=acknowledgment,
+                before=o,after=advanced['observation'],requested_native_ticks=frames))
+        finally:ctx['set_input'](1,0)
+        previous=row
+    raise audio.AudioQualificationError('Bounded original contact route did not reach native phase2 death')
+
+
+def exercise(ctx, contract, *, source, timeout=90, death=False, **unused):
     if type(timeout) not in (int, float) or not 0 < timeout <= 120:
         raise ValueError('Require a finite bounded body-audio observation deadline')
     require(ctx['mode'] == 'local' and ctx['input_path'] == 'published_host', 'Body audio requires the owned local host route')
     observer = audio.AudioObserver(ctx['clients'][0], ctx['request'], contract, private_banks=ctx['private_banks'])
     report = ctx['report']; deadline = time.monotonic()+timeout
+    damage_allowed=False;trace_armed=False
     case = dict(kind='native_zero_body_saber_audio', status='failed_setup', input_path='published_host',
         source_sha256=source_digest(source), helper_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         checks={}, observations=[], inputs=[], events=observer.events, limits=[
@@ -83,9 +164,11 @@ def exercise(ctx, contract, *, source, timeout=90, **unused):
         row = observer.poll(); o = row['observation']
         require(o['ready'] == o['enrolled'] == 1 and not o['failed'] and not o['mailbox'] and
             o['native_mode'] == 10 and o['native_phase'] == 0 and not o['scene_owner'] and not o['pause_owner'] and
-            tuple(o['lifecycle']) == (0, 0), 'Body audio left living native gameplay')
+            o['lifecycle'][0]==0 and (damage_allowed or tuple(o['lifecycle'])==(0,0)), 'Body audio left the owned native gameplay context')
         require([(p['character'],p['form']) for p in row['players']] == [(0,1),(1,5)] and
-            all(p['state'] == 1 and p['hp'] == 32 for p in row['players']), 'Body audio lost healthy native X/Zero')
+            row['players'][0]['state']==1 and row['players'][0]['hp']==32 and
+            (damage_allowed or row['players'][1]['state']==1 and row['players'][1]['hp']==32),
+            'Body audio lost the required native actors or primary health')
         case['observations'].append(dict(label=label, **row)); return row
 
     def idle(label):
@@ -93,13 +176,31 @@ def exercise(ctx, contract, *, source, timeout=90, **unused):
             row = sample(label)
             if all(p['action'] == 2 and p['ground'] and not p['airborne'] for p in row['players']): return row
             require(attempt < 30, 'Original actors did not return to ground/idle')
-            ctx['native_advance'](4, label)
+            advance(4, label)
+
+    def advance(frames,label):
+        require(type(frames)is int and 1<=frames<=120,'Body audio needs bounded native progress')
+        start=sample(label+' start')['observation']
+        for _ in range(400):
+            row=sample(label);o=row['observation']
+            native=(o['native_timer']-start['native_timer'])&0xFFFFFFFF
+            publications=(o['tick']-start['tick'])&0xFFFFFFFF
+            require(native<0x80000000 and publications<0x80000000,'Body audio clocks regressed')
+            if native>=frames and publications>0:return row
+            time.sleep(.005)
+        raise audio.AudioQualificationError('Body audio native progress bound exhausted')
 
     failure = None
     try:
         before = idle('body-audio-ground'); case['banks_before'] = observer.fingerprint_banks()
         case['hardware_before'] = audio.parse_voices(ctx['request']('spu_voices'), require_banks=True)
         before = sample('body-audio-before-input')
+        ctx['request']('fntrace_arm_clear')
+        for target in sorted(TRACE_TARGETS):ctx['request']('fntrace_arm',target=hex(target))
+        armed=ctx['request']('fntrace_armed')
+        require(armed['count']==len(TRACE_TARGETS) and {int(t,16)for t in armed['targets']}==TRACE_TARGETS,
+            'Body audio source-call trace arm differs')
+        trace_armed=True;ctx['request']('fntrace_clear')
         start = observer.cursor; accepted = None
         try:
             acknowledgment = ctx['set_input'](1, SQUARE)
@@ -120,32 +221,58 @@ def exercise(ctx, contract, *, source, timeout=90, **unused):
             case['inputs'].append(receipt);report.setdefault('accepted_windows', []).append(receipt)
         finally:
             ctx['set_input'](1, 0)
+        keys = [e for e in observer.events if e['seq'] >= start and e['kind'] == 'KEYON' and e['v'] == 47]
+        require(len(keys)==1,'Saber SFX window has missing/reused private47')
+        case['selected'] = identify(observer, keys[0], source)
+        case['checks'].update(case['selected']['checks'])
         for attempt in range(31):
             row = sample('body-audio-neutral-stop')
             keys = [e for e in observer.events if e['seq'] >= start and e['kind'] == 'KEYON' and e['v'] == 47]
             require(len(keys) == 1, 'Saber SFX window has missing/reused private47')
-            stopped = any(e['seq'] > keys[0]['seq'] and e['v'] == 47 and e['kind'] == 'KEYOFF' for e in observer.events)
-            if stopped and all(p['action'] == 2 and p['ground'] for p in row['players']): break
-            require(attempt < 30, 'Native Square/neutral did not produce a private47 stop and return to idle')
-            ctx['native_advance'](4, 'body-audio-neutral-drain')
-        case['selected'] = identify(observer, keys[0], source)
-        case['checks'].update(case['selected']['checks'])
+            ended=audio.lifetime(observer.events,keys[0])['disposition'] in ('natural_end','keyed_off')
+            if ended and all(p['action'] == 2 and p['ground'] for p in row['players']): break
+            require(attempt < 30, 'Native saber did not terminate and return to idle')
+            advance(4, 'body-audio-neutral-drain')
+        case['standing_saber_terminal']=audio.lifetime(observer.events,keys[0])
+        if death:
+            damage_allowed=True
+            native_death(ctx,sample,observer,case,advance)
         for attempt in range(31):
             case['private_after'] = audio.parse_private_voices(ctx['request']('spu_private_voices'))
             voice = case['private_after']['voices'][keys[0]['v']-24]
             if voice['env'] == 0 and voice['env_phase'] == 3:break
             require(attempt < 30, 'Stopped saber DSP did not reach terminated envelope')
-            ctx['native_advance'](4, 'body-audio-DSP-drain');sample('body-audio-DSP-drain')
+            advance(4, 'body-audio-DSP-drain');sample('body-audio-DSP-drain')
         checks, details = final_checks(observer.events, case['selected'], case['private_after'])
         case['checks'].update(checks);case['terminal'] = details
+        case['trace']=trace_page(ctx)
+        case['checks']['original_zero_saber_sound_call']=any(int(r['target'],16)==0x80016C48 and
+            int(r['a0'],16)==1 and int(r['a1'],16)==case['selected']['record']['record'] and
+            int(r['a2'],16)==0x800970A0 and 0x801EA000<=int(r['ra'],16)<0x801EA000+contact.ZERO_SIZE
+            for r in case['trace']['entries'])
+        if death:
+            case['checks'].update(phase2_checks(case['trace'],observer.events))
+            actor=case['native_death']['fatal_observation']['instance']
+            actor=actor or next(r['instance']for r in reversed(case['native_death']['observations'])if r['instance'])
+            contacts=[r for r in case['trace']['entries']if int(r['target'],16)==contact.CONTACT]
+            case['checks']['original_contact_actor_caller']=bool(contacts) and all(
+                int(r['a0'],16)==int(actor['address'],16) and int(r['ra'],16)==contact.CONTACT_RA for r in contacts)
         case['banks_after'] = observer.fingerprint_banks()
         case['checks']['immutable_private_banks_stable'] = case['banks_before'] == case['banks_after']
         case['other_character_voice_events'] = [e for e in observer.events if e['seq'] >= start and e['v'] in (20,44)]
-        case['status'] = 'observations_complete' if all(case['checks'].values()) else 'comparison_failed'
+        case['status'] = 'observations_partial' if not death else 'observations_complete' if all(case['checks'].values()) else 'comparison_failed'
+        if not death:case['pending_checks']=['Native phase2 STOP5/7; ordinary Square/neutral naturally ends without that trigger']
         return case
     except BaseException as error:
         failure = error;case['error'] = dict(type=type(error).__name__, message=str(error));raise
     finally:
+        if trace_armed:
+            try:
+                if 'trace' not in case:case['trace']=trace_page(ctx)
+                ctx['request']('fntrace_arm_clear')
+            except Exception as error:
+                case['trace_error']=str(error)
+                if failure is None:raise
         try:ctx['set_input'](1,0)
         except Exception as error:
             case['neutral_error'] = str(error)
