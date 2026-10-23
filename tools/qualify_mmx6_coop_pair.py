@@ -397,6 +397,8 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             require(path.is_file() and path.stat().st_size > 0, "Render screenshot was not written")
             report["captures"].append(dict(seat=seat, surface="game_render_buffer",
                 path=str(path), sha256=preparation.sha256(path), response=response))
+            composed = debug.capture_present(client, output/f"peer-{seat}/logs/intro-present.png")
+            report["captures"].append(dict(seat=seat, **composed))
         report["final"] = [row.json() for row in rows()]
         network()
         report["status"] = "passed" if all(report["checks"].values()) else "failed"

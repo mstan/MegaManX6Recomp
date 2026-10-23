@@ -145,6 +145,8 @@ if(BUILD_TESTING)
             add_test(NAME mmx6_${_mmx6_python_test}
                 COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/${_mmx6_python_test}.py")
         endforeach()
+        add_test(NAME mmx6_coop_present_capture_test
+            COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_coop_present_capture.py")
         set(MMX6_X5_REFERENCE_REPO "" CACHE PATH "Optional local X5 Git repository for frozen-reference provenance checks")
         if(MMX6_X5_REFERENCE_REPO)
             add_test(NAME mmx6_coop_reference_provenance

@@ -1,4 +1,4 @@
-# X6 host-state codec: implemented, registration withheld
+# X6 host-state codec and modern candidate registration
 
 This lane starts at game `fb95f99`. It targets the frozen modern
 `6f0ccbc6b67fee626de6a7b0945ca3abb26332aa` snapshot/digest interfaces plus the
@@ -9,9 +9,11 @@ state transfer. No comparison ledger passes are added.
 ## State and resources
 
 `mmx6_coop_snapshot.inc` supplies `state_digest`, `snapshot_provider` schema 1,
-and `snapshot_resources_restored`. It remains unattached so integration cannot
-silently advertise an incomplete or unqualified contract. Legacy SDK builds
-without `mod_snapshot.h` remain buildable and omit those callbacks.
+and `snapshot_resources_restored`. The integrated modern candidate attaches
+them under profile `mmx6-x-zero-delay-v10`; legacy SDK builds without
+`mod_snapshot.h` remain buildable and omit those callbacks. Rollback and user
+state transfers in netplay remain disabled. Registration alone does not qualify
+native restore or rewind.
 
 The explicit little-endian wire includes P2's complete actor/attack/trail/effect
 pools; lifecycle, Select history and queued rejoin; retained departure body;
@@ -68,13 +70,15 @@ bounded to 64 records of at most 8 KiB each; overflow or unbalanced completion
 fails closed with an explicit error. Digest reads copied bytes, never borrowed
 stack pointers, including after a nonlocal escape.
 
-**Registration blocker:** a watchdog/scheduler escape can abandon plugin C
+**Readiness restriction:** a watchdog/scheduler escape can abandon plugin C
 frames and half-restored native projections. This lane rejects snapshots in that
 condition; full plugin reactivation is required. It does not blindly clear guards
-and continue half-applied native state. The SDK needs a proven unwind/abort
-contract before attaching this provider to owner save/load/rewind. A synthetic
-longjmp fixture confirms safe digest access and snapshot refusal, not native
-recovery. Normal completed callback paths pop their records.
+and continue half-applied native state. Such a session cannot save, load or
+rewind through the provider. A proven unwind/abort contract is still required
+to recover that session without reactivation. The synthetic longjmp fixture
+confirms safe digest access and snapshot refusal, not native recovery. Normal
+completed callback paths pop their records. Owner save/load/rewind qualification
+remains a separate integration gate.
 
 The local package ID `mmx6.local-coop` and forced profile ID
 `mmx6.local-coop.prototype` need the same provider and restore callback.
@@ -86,14 +90,15 @@ transfer even with `savestates_supported=0`; leaving it without a provider would
 omit mutable host state. This conclusion comes from the actual bridge selection
 function, rather than an assumed relationship between package and profile IDs.
 
-After those blockers and integrated checks, central registration would set the
-profile's `state_digest` and retained-texture requirement, register the provider
-and restore callback for both mutually exclusive IDs, bump compatibility identity,
-and keep online user state jumps/rewind blocked. Nothing here weakens executable,
+Central registration sets the profile's `state_digest` and retained-texture
+requirement and registers providers for both mutually exclusive IDs. The
+resource restore callback belongs to the common implementation plugin
+`mmx6.local-coop.prototype`, used by the offline package and forced profile.
+Compatibility identity is bumped and online user state jumps/rewind stay blocked.
+Nothing here weakens executable,
 content or agreed simulation-profile checks.
-The central registration edit must publish the actual
-`psx_mod_netplay_has_state_digest()` capability at diagnostic `+0x9c`; that
-reserved field remains unused in this lane. A zero digest value itself cannot
+The diagnostic now publishes the actual
+`psx_mod_netplay_has_state_digest()` capability at `+0x9c`. A zero digest value itself cannot
 distinguish an unavailable callback from a valid hash.
 
 ## Focused evidence and remaining qualification
@@ -117,6 +122,13 @@ both the legacy and modern headers. CTest registers
 `mmx6_coop_snapshot_debug_test` and `mmx6_coop_snapshot_production_test` when the
 modern SDK is selected. No engine build or game execution is claimed by these
 standalone fixture results.
+
+The first integrated native delay pair passes nine bounded intro/input/lifecycle
+checks and 29 common core/mod samples across four input windows, all strictly
+below both peers' resolved-through watermarks. Both peers explicitly report
+digest registration. Exact executable/report identities and limitations are in
+[COOP_NETPLAY_BASELINE.md](COOP_NETPLAY_BASELINE.md). This does not establish
+snapshot round trips or resimulation.
 
 These fixtures contain synthetic memory/resources and do not execute original
 game logic. Native warm/cold save/load, mapped rewind, menus, beam/death/scene

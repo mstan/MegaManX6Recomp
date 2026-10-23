@@ -214,6 +214,36 @@ fixes. They establish neither gameplay nor registered core/mod synchronization
 on the combined SDK. Both owned admission processes were verified absent;
 graceful exit remains unverified.
 
+## Registered host-state digest on profile v10
+
+The combined modern candidate registers the canonical X6 host digest, retained
+texture requirement and guarded snapshot provider. Rollback and online user
+state jumps remain disabled. `netplay-modern-v10-state/qualification.json`
+passes all nine intro/input/lifecycle checks with default Seamless Loading.
+It includes 29 matching core/mod samples across initial idle, P2 movement,
+P1 jumping and departure/pause/rejoin windows, at the same simulation ticks
+strictly below both peers' resolved-through watermarks. Both peers finish tick
+4445, resolved-through 4444, with no reported input desynchronization.
+
+Executable SHA-256:
+`bd7b9449d9fbc5c9c2137902ba2d8d525d1886211b03fd6756d0f76fbc9c263e`.
+Report SHA-256:
+`fca07dffa73e7f812f6efadc4fd1d3500e635d5a829fc34a8326797142501a21`.
+Source is game `6efd581` plus its retained staging patch (profile/registration
+attachment and diagnostic capability), SDK `948b99eba`, modern UI `b964eabe`.
+The later SDK fixture-isolation change affects tests only and was not in this
+executable. Modern game checks pass 23/23 (`ctest-modern-state-debug.log`).
+
+Both canonical-VRAM screenshots match SHA-256
+`d18e1b3c85a24c2d2e300e48f377faf0fcf57e046380337731e4b112923f6c07`.
+They show rectangular artifacts around the heroes and a damaged Zero badge.
+The modern dual raster keeps software VRAM authoritative and retained banks
+in GL presentation; a composed `present_shot` is needed before attributing the
+canonical image to the player's actual output. No composed-art pass follows
+from these images. Both owned processes were stopped and verified absent;
+graceful exit remains unverified. Native snapshot restore, rewind and broader
+mechanics remain unverified.
+
 ## Reusable runner
 
 `tools/qualify_mmx6_coop_pair.py` stages, launches, boots and observes two owned

@@ -667,6 +667,9 @@ static void diagnostics(uint16_t input) {
     psx_mod_write_byte(diagnostic+0x91,psx_mod_read_byte(PLAY+1));
     psx_mod_write_word(diagnostic+0x94,diagnostic_host_digest());
     psx_mod_write_word(diagnostic+0x98,1); /* bounded host FNV-1a, not core CRC */
+#ifdef MMX6_COOP_MODERN_STATE
+    psx_mod_write_byte(diagnostic+0x9C,(uint8_t)!!psx_mod_netplay_has_state_digest());
+#endif
     psx_mod_write_word(diagnostic+0x88,frame_count*2u);
 }
 static int diagnostic_mutation_allowed(void) {
@@ -1764,17 +1767,28 @@ static void activate(void) {
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
-        .compatibility_id = "mmx6-x-zero-delay-v9",
+        .compatibility_id = "mmx6-x-zero-delay-v10",
         .rollback_supported = 0,
         .savestates_supported = 0,
         .skip_bios_intro = 1,
         .fixed_aspect_mask = 7,
         .widescreen_plugin_id = "mmx6.widescreen",
+#ifdef MMX6_COOP_MODERN_STATE
+        .state_digest = state_digest,
+        .requires_retained_texture_banks = 1,
+#endif
         .loading_package_id = "mmx6.enhancement.seamless-loading",
         .loading_feature_id = "seamless-loading",
         .loading_plugin_id = "mmx6.seamless"
     };
     psx_mod_register_netplay_profile(&netplay_profile);
+#ifdef MMX6_COOP_MODERN_STATE
+    /* Online selects only the forced profile; offline selects its package.
+     * The runtime guarantees that exactly one of these identities is active. */
+    psx_mod_register_snapshot_provider("mmx6.local-coop",&snapshot_provider);
+    psx_mod_register_snapshot_provider("mmx6.local-coop.prototype",&snapshot_provider);
+    psx_mod_register_savestate_plugin("mmx6.local-coop.prototype",snapshot_resources_restored);
+#endif
     psx_mod_register_activation_plugin("mmx6.local-coop.prototype",activate);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002012C,controller);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800232D4,render);

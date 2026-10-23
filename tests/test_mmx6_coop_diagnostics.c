@@ -10,6 +10,10 @@
 #define CHECK(x) do { if (!(x)) { fprintf(stderr,"line %d: %s\n",__LINE__,#x); exit(1); } } while (0)
 static uint8_t test_diagnostic[0x2000],test_ram[0x200000];
 static int test_online;
+#ifdef MMX6_COOP_MODERN_STATE
+static int test_digest_registered;
+int psx_mod_netplay_has_state_digest(void) { return test_digest_registered; }
+#endif
 static unsigned rejected,guest_calls;
 static uint8_t *memory(uint32_t address) {
     if (address>=0x9F080000u && address<0x9F082000u) return test_diagnostic+address-0x9F080000u;
@@ -74,5 +78,10 @@ int main(void) {
     CHECK(psx_mod_read_byte(diagnostic+0x90)==10);
     CHECK(psx_mod_read_word(diagnostic+0x94)==diagnostic_host_digest());
     CHECK(psx_mod_read_word(diagnostic+0x98)==1);
+#ifdef MMX6_COOP_MODERN_STATE
+    CHECK(psx_mod_read_byte(diagnostic+0x9C)==0);
+    test_digest_registered=1;diagnostics(0xFFFF);
+    CHECK(psx_mod_read_byte(diagnostic+0x9C)==1);
+#endif
     puts("co-op debug isolation and diagnostic publication PASS");return 0;
 }
