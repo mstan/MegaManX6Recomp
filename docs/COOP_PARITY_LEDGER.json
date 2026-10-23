@@ -1667,13 +1667,13 @@
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
         "evidence": [
@@ -1851,9 +1851,51 @@
               "Same session and ports on a fresh owned pair produce a different confirmed selection SHA. This is bounded restart evidence, not a complete campaign/session-lifecycle pass."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "beeae107efca2fddab2c279a9d48d5e7e00817b1",
+            "build_identity": {
+              "exe_sha256": "a8f20cdcc4ac68cdc76bf8fa7f1b3a74b9db67788514468743a355284b2080b8",
+              "declared_manifest_sha256": "91a1d699ca4d404400d9448730a482fbd2da04445ae9d2702ffc0cab6bd2ad29",
+              "compiled_source_commit": "beeae107efca2fddab2c279a9d48d5e7e00817b1",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "loader": "defaultSeamlessLoading",
+              "input": "actual original offline native pads",
+              "rollback": false,
+              "route": "new_game"
+            },
+            "action": "Original final Quit/NewGame/story/intro dialogue reaches native idle; read owned host guards, then hold actual P2 Start across128 native world updates.",
+            "outcome": "Native X is idle with scripts/locks clear, but stage_call1 and state_track.count2 remain while SDK reports no active callback/host call. Published co-op tick318 stays at old pause; P2 Start does not open a native menu.",
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-native-reentry\\manifest-bound-beeae10-retired-stage-guard-reviewed.json",
+                "sha256": "dcadbe89143b13ca25aa5b97faa98af6ccc07cef5faab208689b30adb999087d"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-reentry-v17-beeae10-local-owned-host-probe\\qualification.json",
+                "sha256": "91da47e290e177371bdd0c2a2abe1420a855ce2ab322a40147bcb553c1b94c22"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-reentry-v17-beeae10-local-owned-host-probe\\owned-host-probe.json",
+                "sha256": "d09b413848e0658775df0b73dc8574c2106dc9493e4912260a3c1ea6d443be61"
+              }
+            ],
+            "limits": [
+              "Exact frozenv17 image only; local offline fixedX/P1+Zero/P2, no netplay or current-candidate pass.",
+              "Host VM reads use VM_READ/query on the owned child only; no debugger attachment, pause, process writes or guest success/fixture writes. Each symbol/native/debug RPC remains separately attributed.",
+              "Confirmed stage_call1 and two retained STATE frames with no active SDK callback/hostcall. Frame tags and exact safe reset boundary still need source closure before a fix.",
+              "Native NewGame default campaign is not acquired-progress/current-data retention, Continue, selector, native-card cold-load or save coverage.",
+              "No P2 menu/resume/movement pass, rollback/current-build snapshot pass, or full R15/F208 success is implied. Historical failed helper and raw evidence remain unchanged."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Exact986e1598 local and same-machine pairs now pass guest Select refusal, primary two-page/cancel authority, retained resources and native resumed input. Historical guest-admission failure is preserved and fixed; full finalQuit/current-data/character selection/acquired progression/reentry remain unverified."
+        "limitations": "Concrete exactv17 local native NewGame reentry failure: retired stage_call/STATE frames block fresh publications and guest menu Start. Netplay, fixed-candidate recovery and all acquired-progress/Continue/card/selector obligations remain unverified."
       }
     },
     {
@@ -10077,17 +10119,60 @@
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "beeae107efca2fddab2c279a9d48d5e7e00817b1",
+            "build_identity": {
+              "exe_sha256": "a8f20cdcc4ac68cdc76bf8fa7f1b3a74b9db67788514468743a355284b2080b8",
+              "declared_manifest_sha256": "91a1d699ca4d404400d9448730a482fbd2da04445ae9d2702ffc0cab6bd2ad29",
+              "compiled_source_commit": "beeae107efca2fddab2c279a9d48d5e7e00817b1",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "loader": "defaultSeamlessLoading",
+              "input": "actual original offline native pads",
+              "rollback": false,
+              "route": "new_game"
+            },
+            "action": "Original final Quit/NewGame/story/intro dialogue reaches native idle; read owned host guards, then hold actual P2 Start across128 native world updates.",
+            "outcome": "Native X is idle with scripts/locks clear, but stage_call1 and state_track.count2 remain while SDK reports no active callback/host call. Published co-op tick318 stays at old pause; P2 Start does not open a native menu.",
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-native-reentry\\manifest-bound-beeae10-retired-stage-guard-reviewed.json",
+                "sha256": "dcadbe89143b13ca25aa5b97faa98af6ccc07cef5faab208689b30adb999087d"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-reentry-v17-beeae10-local-owned-host-probe\\qualification.json",
+                "sha256": "91da47e290e177371bdd0c2a2abe1420a855ce2ab322a40147bcb553c1b94c22"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-reentry-v17-beeae10-local-owned-host-probe\\owned-host-probe.json",
+                "sha256": "d09b413848e0658775df0b73dc8574c2106dc9493e4912260a3c1ea6d443be61"
+              }
+            ],
+            "limits": [
+              "Exact frozenv17 image only; local offline fixedX/P1+Zero/P2, no netplay or current-candidate pass.",
+              "Host VM reads use VM_READ/query on the owned child only; no debugger attachment, pause, process writes or guest success/fixture writes. Each symbol/native/debug RPC remains separately attributed.",
+              "Confirmed stage_call1 and two retained STATE frames with no active SDK callback/hostcall. Frame tags and exact safe reset boundary still need source closure before a fix.",
+              "Native NewGame default campaign is not acquired-progress/current-data retention, Continue, selector, native-card cold-load or save coverage.",
+              "No P2 menu/resume/movement pass, rollback/current-build snapshot pass, or full R15/F208 success is implied. Historical failed helper and raw evidence remain unchanged."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Concrete exactv17 local native NewGame reentry failure: retired stage_call/STATE frames block fresh publications and guest menu Start. Netplay, fixed-candidate recovery and all acquired-progress/Continue/card/selector obligations remain unverified."
       }
     }
   ]

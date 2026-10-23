@@ -1,0 +1,326 @@
+{
+  "schema": 1,
+  "kind": "reviewed_native_new_game_reentry_retired_stage_guard_failure",
+  "candidate": {
+    "source_commit": "beeae107efca2fddab2c279a9d48d5e7e00817b1",
+    "exe_sha256": "a8f20cdcc4ac68cdc76bf8fa7f1b3a74b9db67788514468743a355284b2080b8",
+    "declared_manifest_sha256": "91a1d699ca4d404400d9448730a482fbd2da04445ae9d2702ffc0cab6bd2ad29",
+    "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+  },
+  "compilation_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v17-beeae10\\candidate.json",
+    "bytes": 2895,
+    "sha256": "27d42d624f1e0e4678db9c7fa1418afb9ff7727a57fab79510b16c9b71215789"
+  },
+  "reports": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-reentry-v17-beeae10-local-owned-host-probe\\qualification.json",
+      "bytes": 47831630,
+      "sha256": "91da47e290e177371bdd0c2a2abe1420a855ce2ab322a40147bcb553c1b94c22"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-reentry-v17-beeae10-local-owned-host-probe\\owned-host-probe.json",
+      "bytes": 436044,
+      "sha256": "d09b413848e0658775df0b73dc8574c2106dc9493e4912260a3c1ea6d443be61"
+    }
+  ],
+  "probe_source": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-reentry-v17-beeae10-local-owned-host-probe\\owned-host-probe-source.py",
+    "bytes": 8328,
+    "sha256": "fcd23099585069c7edca314045f3ee4a55fe1b3d19bdec3aa2cbc9e0785f23ff"
+  },
+  "original_helper_snapshot": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-reentry-v17-beeae10-local-owned-host-probe\\native-reentry-helper-source.py",
+    "bytes": 32573,
+    "sha256": "143471b3b3735169a83439eea1d5b60092ab91022bab187d2a5c4b7d56d66c24"
+  },
+  "disposition": {
+    "R15": {
+      "local": "failed",
+      "netplay": "unverified"
+    },
+    "F208": {
+      "local": "failed",
+      "netplay": "unverified"
+    }
+  },
+  "native_route": "Original primary finalQuit/title/NewGame/story and exact original in-game intro dialogue; native X idle observed before failed fresh-publication check",
+  "host_observations": [
+    {
+      "label": "after exact helper failure",
+      "pid": 57352,
+      "image_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-reentry-v17-beeae10-local-owned-host-probe\\mmx6-runtime.exe",
+      "exe_sha256": "a8f20cdcc4ac68cdc76bf8fa7f1b3a74b9db67788514468743a355284b2080b8",
+      "preferred_base": 5368709120,
+      "loaded_base": 140700845998080,
+      "image_size": 1012494336,
+      "symbol_va": {
+        "enrolled": 6378644544,
+        "failed": 6378644548,
+        "frame_count": 6378644552,
+        "inside": 6378060560,
+        "pause_owner": 5392442044,
+        "player_call": 6378060564,
+        "scene_owner": 6378644520,
+        "stage_call": 6378060568,
+        "zero_menu_loaded": 6378644540,
+        "zero_projected": 6378060608,
+        "zero_world": 6378060572,
+        "state_track_count": 6378585676,
+        "state_track_error": 6378585680
+      },
+      "host_values": {
+        "enrolled": 1,
+        "failed": 0,
+        "frame_count": 318,
+        "inside": 0,
+        "pause_owner": 4294967295,
+        "player_call": 0,
+        "scene_owner": 0,
+        "stage_call": 1,
+        "zero_menu_loaded": 0,
+        "zero_projected": 0,
+        "zero_world": 0,
+        "state_track_count": 2,
+        "state_track_error": 0
+      },
+      "snapshot_status": {
+        "id": 7313,
+        "ok": true,
+        "callback_active": false,
+        "host_call_depth": 0,
+        "site": 0,
+        "pc": "0x00000000",
+        "safe": true
+      },
+      "native": {
+        "mode": [
+          10,
+          0,
+          0
+        ],
+        "stage": 0,
+        "section": 0,
+        "fade": 0,
+        "native_timer": 1829,
+        "native_player": {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      },
+      "native_script_locks": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "native_dialogue_active": 0,
+      "diagnostic": {
+        "tick": 318,
+        "native_timer": 212,
+        "pause_owner": 1,
+        "native_mode": 10,
+        "native_phase": 2,
+        "ready": 1,
+        "enrolled": 1,
+        "failed": 0,
+        "lifecycle": [
+          0,
+          0
+        ]
+      },
+      "scope": "Separately attributed read-only host VM/native/debug observations; no debugger attachment, pause or host writes"
+    },
+    {
+      "label": "after bounded original P2 Start and release",
+      "pid": 57352,
+      "image_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-reentry-v17-beeae10-local-owned-host-probe\\mmx6-runtime.exe",
+      "exe_sha256": "a8f20cdcc4ac68cdc76bf8fa7f1b3a74b9db67788514468743a355284b2080b8",
+      "preferred_base": 5368709120,
+      "loaded_base": 140700845998080,
+      "image_size": 1012494336,
+      "symbol_va": {
+        "enrolled": 6378644544,
+        "failed": 6378644548,
+        "frame_count": 6378644552,
+        "inside": 6378060560,
+        "pause_owner": 5392442044,
+        "player_call": 6378060564,
+        "scene_owner": 6378644520,
+        "stage_call": 6378060568,
+        "zero_menu_loaded": 6378644540,
+        "zero_projected": 6378060608,
+        "zero_world": 6378060572,
+        "state_track_count": 6378585676,
+        "state_track_error": 6378585680
+      },
+      "host_values": {
+        "enrolled": 1,
+        "failed": 0,
+        "frame_count": 318,
+        "inside": 0,
+        "pause_owner": 4294967295,
+        "player_call": 0,
+        "scene_owner": 0,
+        "stage_call": 1,
+        "zero_menu_loaded": 0,
+        "zero_projected": 0,
+        "zero_world": 0,
+        "state_track_count": 2,
+        "state_track_error": 0
+      },
+      "snapshot_status": {
+        "id": 7382,
+        "ok": true,
+        "callback_active": false,
+        "host_call_depth": 0,
+        "site": 0,
+        "pc": "0x00000000",
+        "safe": true
+      },
+      "native": {
+        "mode": [
+          10,
+          0,
+          0
+        ],
+        "stage": 0,
+        "section": 0,
+        "fade": 0,
+        "native_timer": 1961,
+        "native_player": {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      },
+      "native_script_locks": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "native_dialogue_active": 0,
+      "diagnostic": {
+        "tick": 318,
+        "native_timer": 212,
+        "pause_owner": 1,
+        "native_mode": 10,
+        "native_phase": 2,
+        "ready": 1,
+        "enrolled": 1,
+        "failed": 0,
+        "lifecycle": [
+          0,
+          0
+        ]
+      },
+      "scope": "Separately attributed read-only host VM/native/debug observations; no debugger attachment, pause or host writes"
+    }
+  ],
+  "p2_start": {
+    "pressed_mask": 8,
+    "port": 2,
+    "raw_buttons": "0xFFF7",
+    "slot": {
+      "buttons": "0xFFF7",
+      "connected": true,
+      "analog": false,
+      "type": 0,
+      "sticks": [
+        128,
+        128,
+        128,
+        128
+      ],
+      "negcon": [
+        0,
+        0,
+        0
+      ],
+      "mode_locked": false
+    },
+    "before_native_timer": 1829,
+    "first_observed_timer": 1831,
+    "last_observed_timer": 1957,
+    "native_updates_from_before": 128,
+    "observations": 63,
+    "native_modes": [
+      [
+        10,
+        0,
+        0
+      ]
+    ],
+    "outcome": "No native menu after actual P2 Start; co-op diagnostic remains stale"
+  },
+  "owned_cleanup": {
+    "pid": 57352,
+    "method": "graceful_owned_debug",
+    "exit_code": 0,
+    "private_cards_unchanged": true
+  },
+  "review": {
+    "reviewer": "/root",
+    "basis": "Exact-image PE symbol and ASLR module/PID/image ownership checks; read-only host memory, native RAM and original pad observations",
+    "artwork": "not_reviewed_for_this_failure"
+  },
+  "limits": [
+    "Exact frozenv17 image only; local offline fixedX/P1+Zero/P2, no netplay or current-candidate pass.",
+    "Host VM reads use VM_READ/query on the owned child only; no debugger attachment, pause, process writes or guest success/fixture writes. Each symbol/native/debug RPC remains separately attributed.",
+    "Confirmed stage_call1 and two retained STATE frames with no active SDK callback/hostcall. Frame tags and exact safe reset boundary still need source closure before a fix.",
+    "Native NewGame default campaign is not acquired-progress/current-data retention, Continue, selector, native-card cold-load or save coverage.",
+    "No P2 menu/resume/movement pass, rollback/current-build snapshot pass, or full R15/F208 success is implied. Historical failed helper and raw evidence remain unchanged."
+  ]
+}
