@@ -1,5 +1,9 @@
 # Native same-build warm/cold snapshot baseline
 
+The opt-in [private-effect snapshot case](COOP_PRIVATE_EFFECT_STATE_QUALIFIER.md)
+adds full live Zero trail/attached-pool and serialized input/cache checks.
+Its native result is unverified; it does not extend the historical receipts below.
+
 `tools/qualify_mmx6_coop_state.py` stages two fresh private profiles and reuses
 the baseline runner's native boot/input, listener ownership and process cleanup.
 It supplies an optional baseline exercise callback rather than another boot
