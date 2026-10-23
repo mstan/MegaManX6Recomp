@@ -5,6 +5,9 @@ confirmation/cancel behavior and a separate guest-authority probe; it does not
 claim a complete Quit/current-data/character-selection cycle. No game, title
 build, plugin/SDK change, card operation or ledger update was performed here.
 
+[Owned offline and paired runner commands](COOP_NATIVE_QUIT_RUNNERS.md) now
+adapt these bounded scenarios; they do not supply native execution evidence.
+
 The frozen X4 reference is Playtest42 commit
 `50593bca772b600de6911cbfecd40b0f08721147`,
 `docs/COOP_PLAYTEST_REGRESSIONS.md`, blob

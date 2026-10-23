@@ -29,6 +29,8 @@ class PairOptionTests(unittest.TestCase):
         self.assertFalse(default.contact_pause_contact_smoke)
         self.assertIsNone(default.original_disc)
         self.assertFalse(default.private_pause_smoke)
+        self.assertIsNone(default.native_quit_scenario)
+        self.assertIsNone(default.original_exe)
         lifecycle = self.parse("--lifecycle-smoke")
         self.assertTrue(lifecycle.lifecycle_smoke)
         self.assertFalse(lifecycle.require_state_crc)
@@ -122,6 +124,30 @@ class PairOptionTests(unittest.TestCase):
         for flag in ("--admission-only","--native-loader-diagnostic","--personal-menu-smoke",
                      "--enemy-targeting-smoke","--lifecycle-smoke"):
             self.rejected(*options,flag)
+
+    def quit_options(self):
+        return ["--native-quit-scenario","guest_authority","--original-exe","SLUS_013.95",
+                "--expected-exe-sha256","a"*64,"--require-state-crc","--require-host-profile",
+                "--expected-host-profile","mmx6.win64-clang22.loopback","--expected-host-profile-revision","2"]
+
+    def test_native_quit_requires_all_explicit_source_image_profile_and_crc_guards(self):
+        args=self.parse(*self.quit_options())
+        self.assertEqual(args.native_quit_scenario,"guest_authority")
+        self.assertEqual(str(args.original_exe),"SLUS_013.95")
+        self.assertEqual(self.parse(*self.quit_options(),"--native-quit-scenario","p1_pages_cancel").native_quit_scenario,"p1_pages_cancel")
+        for flag,takes_value in (("--original-exe",True),("--expected-exe-sha256",True),
+                                 ("--require-state-crc",False),("--require-host-profile",False),
+                                 ("--expected-host-profile",True),("--expected-host-profile-revision",True)):
+            options=self.quit_options();at=options.index(flag);del options[at:at+(2 if takes_value else 1)]
+            self.rejected(*options)
+        self.rejected("--original-exe","SLUS_013.95")
+        self.rejected(*self.quit_options(),"--native-quit-scenario","final_quit")
+
+    def test_native_quit_requires_separate_fresh_default_loader_pair(self):
+        for flag in ("--admission-only","--native-loader-diagnostic","--personal-menu-smoke",
+                     "--enemy-targeting-smoke","--lifecycle-smoke","--private-pause-smoke",
+                     "--contact-pause-contact-smoke"):
+            self.rejected(*self.quit_options(),flag)
 
 
 if __name__ == "__main__":

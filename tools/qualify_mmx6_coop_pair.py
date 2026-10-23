@@ -25,6 +25,61 @@ import traceback
 CONTACT_EXE_SHA = "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9"
 
 
+def same_machine_plan(peers):
+    """Inspect the actual owned launch argv; no DNS or non-loopback peers."""
+    if len(peers)!=2:
+        raise ValueError("Same-machine native Quit needs exactly two owned launch plans")
+    records=[]
+    for seat,peer in enumerate(peers):
+        argv=peer["argv"]
+        def value(flag):
+            if argv.count(flag)!=1 or argv.index(flag)+1>=len(argv):
+                raise ValueError("Missing/duplicate native Quit network launch flag")
+            return argv[argv.index(flag)+1]
+        endpoints={}
+        for flag in ("--net-bind","--net-peer"):
+            text=value(flag)
+            match=re.fullmatch(r"127\.0\.0\.1:([1-9][0-9]{0,4})",text)
+            if match is None or not 1<=int(match[1])<=65535:
+                raise ValueError("Native Quit pair endpoints must be numeric 127.0.0.1 with bounded ports")
+            endpoints[flag]=text
+        if value("--net-slot")!=str(seat) or value("--net-input-player")!="0" or value("--net-delay")!="3":
+            raise ValueError("Native Quit requires original host mapping, seat0/1 and delay3")
+        records.append(dict(seat=seat,bind=endpoints["--net-bind"],peer=endpoints["--net-peer"]))
+    if (records[0]["bind"]==records[1]["bind"] or records[0]["peer"]!=records[1]["bind"] or
+            records[1]["peer"]!=records[0]["bind"]):
+        raise ValueError("Native Quit same-machine UDP plans must point to each other")
+    return dict(scope="same_machine",numeric_host="127.0.0.1",peers=records,
+        ownership="Both Popen handles and every debug listener are checked separately by the runner")
+
+
+def exercise_native_quit_pair(ctx,*,native_quit,published_input,original_exe,expected_sha,scenario):
+    """Adapt only accepted published host input; retain the helper's failure."""
+    report=ctx["report"]
+    report["checks"]["native_quit_automated_case_completed"]=False
+    plan=same_machine_plan(report["peers"])
+    if (report.get("candidate_exe_sha256")!=expected_sha or
+            any(peer.get("preparation",{}).get("exe_sha256")!=expected_sha for peer in report["peers"])):
+        raise ValueError("Native Quit published adapter requires two staged copies of the exact candidate")
+    if (not report["checks"].get("host_profile_settled_before_guest") or
+            not report["checks"].get("declared_build_manifest_bound_to_staged_images") or
+            not report["checks"].get("default_resident_loader_committed") or not report.get("resolved_state_crc") or
+            not report.get("host_profile_startup") or not report.get("host_profile_build_manifest")):
+        raise ValueError("Native Quit needs committed default loader, actual pre-guest host profile and resolved state CRC evidence")
+    adapter=published_input.PublishedHeldInput(ctx["clients"],ctx["network"],ctx["transport_window"],report)
+    case=native_quit.native_quit_smoke(dict(mode="netplay",input_path="published_host",
+        clients=ctx["clients"],both=ctx["both"],debug=ctx["debug"],report=report,output=ctx["output"],
+        hold=adapter.hold,native_advance=ctx["native_advance"],transport_window=ctx["transport_window"],
+        network=ctx["network"],matched=ctx["matched"],candidate_exe_sha256=expected_sha,same_machine=True,
+        candidate_binding=dict(exe_sha256=expected_sha,host_profile=report["host_profile_startup"],
+            network_plan=plan,declared_build=report["host_profile_build_manifest"])),
+        original_exe=original_exe,expected_exe_sha256=expected_sha,scenario=scenario)
+    report["native_quit_automated_status"]=case["status"]
+    report["checks"]["native_quit_automated_case_completed"]=(case["status"]==native_quit.SUCCESS and
+        bool(case["checks"]) and all(case["checks"].values()))
+    return case
+
+
 def enemy_targeting_smoke(ctx):
     """Original published peer1 input; read-only guest evidence on both peers."""
     enemy, clients, both = ctx["enemy"], ctx["clients"], ctx["both"]
@@ -191,7 +246,11 @@ def run(args) -> dict:
     if getattr(args, "personal_menu_smoke", False):
         personal_menu = importlib.import_module("mmx6_coop_personal_menu")
         modules += (personal_menu,)
-    private_pause = effects = published_input = None
+    private_pause = effects = published_input = native_quit = None
+    if getattr(args,"native_quit_scenario",None):
+        native_quit=importlib.import_module("mmx6_coop_native_quit")
+        published_input=importlib.import_module("mmx6_coop_published_input")
+        modules+=(native_quit,native_quit.menu,published_input)
     if getattr(args, "private_pause_smoke", False):
         private_pause = importlib.import_module("mmx6_coop_private_pause")
         effects = importlib.import_module("mmx6_coop_private_effects")
@@ -207,6 +266,7 @@ def run(args) -> dict:
     candidate_sha = preparation.sha256(args.build / "mmx6-runtime.exe")
     if getattr(args, "expected_exe_sha256", None) and candidate_sha != args.expected_exe_sha256:
         raise ValueError("Paired executable does not match the explicitly expected SHA256")
+    quit_original=native_quit.verify_original(args.original_exe) if native_quit is not None else None
     if contact is not None:
         if candidate_sha != CONTACT_EXE_SHA or candidate_sha != contact.EXE_SHA:
             raise ValueError("R2 paired executable is not the selected frozen37cdc487 candidate")
@@ -247,6 +307,12 @@ def run(args) -> dict:
             path = output/name
             path.write_bytes(Path(module.__file__).read_bytes())
             report["contact_source_snapshots"].append(dict(path=str(path), sha256=preparation.sha256(path)))
+    if native_quit is not None:
+        report.update(native_quit_scenario=args.native_quit_scenario,native_quit_original=quit_original,
+                      artwork_review="pending",ledger_status="unverified")
+        path=output/"native-quit-helper-source.py";path.write_bytes(Path(native_quit.__file__).read_bytes())
+        report["native_quit_source_snapshot"]=dict(path=str(path),sha256=preparation.sha256(path))
+        report["checks"]["native_quit_automated_case_completed"]=False
     handles, processes, clients, reservations = [], [], [], []
     executor = ThreadPoolExecutor(max_workers=2)
     runtime_ready = False
@@ -428,6 +494,8 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
                 args.build, [Path(peer["directory"])/"mmx6-runtime.exe" for peer in report["peers"]],
                 evidence_directory=output/"logs")
             report["checks"]["declared_build_manifest_bound_to_staged_images"] = True
+        if native_quit is not None:
+            report["native_quit_same_machine_plan"]=same_machine_plan(report["peers"])
         # Reservations establish availability; owned-listener checks close the
         # release-to-launch race before every debug command, including quit.
         for reservation in reservations:
@@ -566,6 +634,37 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             all(player.hp == 32 for player in row.players) for row in settled)
         report["checks"]["mailbox_unused"] = all(row.mailbox == 0 for row in settled)
         matched("P1 jump then settle")
+        if native_quit is not None:
+            # No native-world-timer wait inside a pause: the shared accepted
+            # host adapter uses resolved transport, with neutral in finally.
+            loader_logs=[(output/f"peer-{seat}/logs/stdout.log").read_text(errors="replace") for seat in range(2)]
+            require(all("title netplay loading = resident assets" in text for text in loader_logs),
+                    "Native Quit default resident loader did not commit on both peers")
+            report["checks"]["default_resident_loader_committed"]=True
+            before_cards=[{p.name:preparation.sha256(p) for p in (output/f"peer-{seat}/saves").glob("*.mcd")} for seat in range(2)]
+            report["native_quit_private_cards_before"]=before_cards
+            quit_error=None
+            try:
+                exercise_native_quit_pair(dict(clients=clients,both=both,debug=debug,report=report,output=output,
+                    network=network,transport_window=transport_window,matched=matched,
+                    native_advance=lambda frames,label:advance(frames)),native_quit=native_quit,
+                    published_input=published_input,original_exe=args.original_exe,expected_sha=args.expected_exe_sha256,
+                    scenario=args.native_quit_scenario)
+            except BaseException as error:
+                quit_error=error
+                raise
+            finally:
+                try:
+                    after_cards=[{p.name:preparation.sha256(p) for p in (output/f"peer-{seat}/saves").glob("*.mcd")} for seat in range(2)]
+                    report["native_quit_private_cards_after"]=after_cards
+                    report["checks"]["native_quit_private_cards_unchanged"]=before_cards==after_cards
+                except OSError as error:
+                    report["native_quit_private_card_error"]=str(error)
+                    report["checks"]["native_quit_private_cards_unchanged"]=False
+                    if quit_error is None:raise
+            require(report["checks"]["native_quit_automated_case_completed"],"Native Quit bounded case failed")
+            require(report["checks"]["native_quit_private_cards_unchanged"],"Native Quit changed a private native card")
+            report["limits"].append("Native Quit pages/refusal/cancel only; artwork and full final Quit/current-data reentry remain unverified")
         if personal_menu is not None:
             # Start can freeze the world during the hold itself. Measure every
             # accepted input interval using transport, including the neutral
@@ -787,6 +886,9 @@ def make_parser():
                         help="Original published P1 pause while P2 native dash effects are retained; fresh exact image, host profile and resolved CRC required")
     parser.add_argument("--contact-pause-contact-smoke", action="store_true",
                         help="Original published P2 body contact before/after its own menu; exact frozen37 candidate, source BIN, host profile and resolved CRC required")
+    parser.add_argument("--native-quit-scenario",choices=("guest_authority","p1_pages_cancel"),
+                        help="Separate fresh native Quit authority or primary pages/cancel case; exact image, original EXE, host profile and resolved CRC required")
+    parser.add_argument("--original-exe",type=Path,help="Original SLUS_013.95 source for --native-quit-scenario")
     parser.add_argument("--original-disc", type=Path,
                         help="Original raw BIN for R2's immutable Zero hurtbox source, separate from runtime --disc")
     parser.add_argument("--require-state-crc", action="store_true",
@@ -818,6 +920,15 @@ def validate_options(parser, args):
         parser.error("Enemy targeting requires native gameplay, default loader and --require-state-crc")
     if args.personal_menu_smoke and (args.admission_only or args.native_loader_diagnostic or not args.require_state_crc):
         parser.error("Personal menu requires native gameplay, default loader and --require-state-crc")
+    if args.native_quit_scenario:
+        if (args.admission_only or args.native_loader_diagnostic or not args.require_state_crc or
+                not args.require_host_profile or not args.expected_exe_sha256 or args.original_exe is None):
+            parser.error("Native Quit requires original EXE, exact SHA, native gameplay, default loader, host profile and resolved CRC")
+        if (args.private_pause_smoke or args.contact_pause_contact_smoke or args.enemy_targeting_smoke or
+                args.personal_menu_smoke or args.lifecycle_smoke):
+            parser.error("Each native Quit scenario requires a separate fresh pair without other optional routes")
+    elif args.original_exe is not None:
+        parser.error("--original-exe belongs to --native-quit-scenario")
     if args.private_pause_smoke:
         if (args.admission_only or args.native_loader_diagnostic or not args.require_state_crc or
                 not args.require_host_profile or not args.expected_exe_sha256):
