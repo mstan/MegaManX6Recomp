@@ -1,0 +1,519 @@
+{
+  "schema_version": 1,
+  "scope": [
+    "R5",
+    "R6",
+    "F18"
+  ],
+  "source_only": true,
+  "game_commit": "7b584a8b3c92fdf5c1d55471264098e6d5335385",
+  "x4_commit": "50593bca772b600de6911cbfecd40b0f08721147",
+  "source_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+  "sources": [
+    {
+      "path": "src/mods/mmx6_coop_plugin.c",
+      "sha256": "ff1dfa00767c12d6b2c113d274874857e38c63d23fb8a990086b30a8c7c315f3",
+      "bytes": 89353
+    },
+    {
+      "path": "mods/preloaded/packages/mmx6.local-coop/0.0.1/manifest.toml",
+      "sha256": "fc32952e9aba0973639e2ab69bde0f06fa64054f6591df9ca334f6e4326f548a",
+      "bytes": 911
+    },
+    {
+      "path": "game.toml",
+      "sha256": "08f650d868333749b1522e2edc49229b3cab8aa4fd9d3091d8ea471b5d8ebbdb",
+      "bytes": 12280
+    },
+    {
+      "path": "docs/COOP_PARITY_LEDGER.json",
+      "sha256": "a9e8f24ba9defdd9c1c7ad8b26d97760c5f8ab3517d0cc1b9da1249cd520829c",
+      "bytes": 627309
+    },
+    {
+      "path": "docs/COOP_X4_REFERENCE_SOURCES.json",
+      "sha256": "b5dd6ad973da66ec51e82476dc90603bc92b37ccd32e7bdf6c7b07c29bbd66eb",
+      "bytes": 5852
+    }
+  ],
+  "x4_sources": [
+    {
+      "path": "src/mods/mmx4_coop_plugin.c",
+      "sha256": "f61bb4f8758660ba21e04c86ec28b5c3f22738396ff128ebf10e65fae84b7e57",
+      "bytes": 89536
+    },
+    {
+      "path": "docs/COOP_PLAYTEST_REGRESSIONS.md",
+      "sha256": "66826ff879fc4c6e3dc45a9d8e6cb84223fcac20ceac2f3fec0feabeb470425f",
+      "bytes": 13037
+    },
+    {
+      "path": "docs/COOP_PLAYTEST_FEEDBACK_20261010.md",
+      "sha256": "75b25d86c1aab98d95f2a047ee749cb86414483655b066c19801c7906d1e99f2",
+      "bytes": 240107
+    }
+  ],
+  "functions": {
+    "hud_tile_bank": {
+      "line": 1651,
+      "sha256": "dd55a2875d4e389af55f4ebb9c61641b70bcf19e00e50513866b0ad6a86b2281"
+    },
+    "hud_icon": {
+      "line": 1680,
+      "sha256": "084858c14e301540a92eb589889088db91ef14a976be9a4f3d1e2af81beefe7d"
+    },
+    "hud_zero_packets": {
+      "line": 1688,
+      "sha256": "5bf88d66064f0b4b3c92c48807d36a4e64259baaf997456f45a6daf24906486d"
+    },
+    "draw_coop_hud": {
+      "line": 1732,
+      "sha256": "f2b5bf62098f750ec403a4a525e25aaca9fc569f175094f912be5db26589862c"
+    },
+    "render": {
+      "line": 1418,
+      "sha256": "2e35cb9fb4971c6c0b6722eef30aeb8425f268935e61d15fab7f2dae8572e105"
+    },
+    "render_survivor": {
+      "line": 1458,
+      "sha256": "29bd97482e6fdf4d13ce609b90e1b71148ffb3d145031aeb5f8879e98027ba24"
+    },
+    "stage_tick": {
+      "line": 1066,
+      "sha256": "c50cc392d24f4da3246f9337c6fe4be3dc1bff3ce872d822c42584168552b12a"
+    }
+  },
+  "native_spans": [
+    {
+      "address": "8001EC40",
+      "size": 40,
+      "sha256": "aee643b145ec5bd0c6d84dd4f8447e55f0ca64515a61fd40d4d2dfb4c971f437",
+      "direct_calls": [
+        {
+          "pc": "8001EC48",
+          "target": "8003CD44"
+        },
+        {
+          "pc": "8001EC50",
+          "target": "80034830"
+        }
+      ]
+    },
+    {
+      "address": "80022960",
+      "size": 632,
+      "sha256": "862212d68137a152900696ba199e93db4e8017565d327cf08ba2556150ca48a9",
+      "direct_calls": [
+        {
+          "pc": "80022A28",
+          "target": "800244C0"
+        },
+        {
+          "pc": "80022A30",
+          "target": "80026128"
+        },
+        {
+          "pc": "80022A68",
+          "target": "8002FE30"
+        },
+        {
+          "pc": "80022AC8",
+          "target": "800232D4"
+        },
+        {
+          "pc": "80022B08",
+          "target": "8002619C"
+        },
+        {
+          "pc": "80022B3C",
+          "target": "800232D4"
+        },
+        {
+          "pc": "80022B58",
+          "target": "800232D4"
+        },
+        {
+          "pc": "80022B74",
+          "target": "800232D4"
+        },
+        {
+          "pc": "80022BA8",
+          "target": "800232D4"
+        }
+      ]
+    },
+    {
+      "address": "800244C0",
+      "size": 500,
+      "sha256": "3e1b867060fb5bd38652d79ad12da92664ea304396fce2673056ed1adac40bd1",
+      "direct_calls": [
+        {
+          "pc": "800244F8",
+          "target": "80024F90"
+        },
+        {
+          "pc": "80024510",
+          "target": "800246B4"
+        },
+        {
+          "pc": "80024520",
+          "target": "800249D4"
+        },
+        {
+          "pc": "80024538",
+          "target": "80024CC0"
+        },
+        {
+          "pc": "80024564",
+          "target": "80024CC0"
+        },
+        {
+          "pc": "80024594",
+          "target": "80024CC0"
+        },
+        {
+          "pc": "800245E0",
+          "target": "80024CC0"
+        },
+        {
+          "pc": "80024600",
+          "target": "80024CC0"
+        },
+        {
+          "pc": "8002460C",
+          "target": "80024F90"
+        },
+        {
+          "pc": "80024684",
+          "target": "80024CC0"
+        },
+        {
+          "pc": "80024694",
+          "target": "80024CC0"
+        }
+      ]
+    },
+    {
+      "address": "800249D4",
+      "size": 748,
+      "sha256": "3797c5955432124e9620ebb9109b91c9fb1ca65d40447d5ff15f12c85ae55bad",
+      "direct_calls": [
+        {
+          "pc": "80024A40",
+          "target": "80024CC0"
+        },
+        {
+          "pc": "80024A60",
+          "target": "80024CC0"
+        },
+        {
+          "pc": "80024A80",
+          "target": "8003EB0C"
+        },
+        {
+          "pc": "80024AD0",
+          "target": "80024CC0"
+        },
+        {
+          "pc": "80024B14",
+          "target": "80024CC0"
+        },
+        {
+          "pc": "80024B48",
+          "target": "80024CC0"
+        },
+        {
+          "pc": "80024B64",
+          "target": "80024CC0"
+        },
+        {
+          "pc": "80024BF0",
+          "target": "800253AC"
+        },
+        {
+          "pc": "80024C4C",
+          "target": "80024CC0"
+        },
+        {
+          "pc": "80024C94",
+          "target": "80024CC0"
+        }
+      ]
+    },
+    {
+      "address": "80024CC0",
+      "size": 720,
+      "sha256": "5e2b6ff172ade564b01fa5594426cd8fa7c6b0b47ec0bccbe4e5e6d852bfcf2f",
+      "direct_calls": []
+    },
+    {
+      "address": "80024F90",
+      "size": 740,
+      "sha256": "489a97312662688d2ea683198d71684ebb1de0c056357d6bc565d28fc146c0b7",
+      "direct_calls": [
+        {
+          "pc": "800250BC",
+          "target": "800253AC"
+        },
+        {
+          "pc": "80025100",
+          "target": "800253AC"
+        },
+        {
+          "pc": "80025184",
+          "target": "800253AC"
+        },
+        {
+          "pc": "800251D8",
+          "target": "800253AC"
+        }
+      ]
+    },
+    {
+      "address": "80025FB0",
+      "size": 40,
+      "sha256": "ca6ff6777914d5a599c965d9bb0769ffb0034c5bb38c5506bac948398cd44ff6",
+      "direct_calls": [
+        {
+          "pc": "80025FB8",
+          "target": "80026D44"
+        },
+        {
+          "pc": "80025FC0",
+          "target": "80022960"
+        }
+      ]
+    },
+    {
+      "address": "80034830",
+      "size": 1436,
+      "sha256": "8a1596f363d0927f5727e9ca9db8e404628b4bfe638fa4aaa885384c63257fd1",
+      "direct_calls": [
+        {
+          "pc": "80034948",
+          "target": "80026028"
+        },
+        {
+          "pc": "80034960",
+          "target": "80026028"
+        },
+        {
+          "pc": "8003497C",
+          "target": "80026028"
+        },
+        {
+          "pc": "800349EC",
+          "target": "8001750C"
+        },
+        {
+          "pc": "800349F4",
+          "target": "800139F4"
+        },
+        {
+          "pc": "800349FC",
+          "target": "80025FB0"
+        },
+        {
+          "pc": "80034A70",
+          "target": "80026028"
+        },
+        {
+          "pc": "80034AC8",
+          "target": "800139F4"
+        },
+        {
+          "pc": "80034B00",
+          "target": "8002AB58"
+        },
+        {
+          "pc": "80034B10",
+          "target": "800139A0"
+        },
+        {
+          "pc": "80034B28",
+          "target": "80026028"
+        },
+        {
+          "pc": "80034B58",
+          "target": "80026028"
+        },
+        {
+          "pc": "80034BB0",
+          "target": "800139F4"
+        },
+        {
+          "pc": "80034BE8",
+          "target": "8001FFC0"
+        },
+        {
+          "pc": "80034BF8",
+          "target": "800139A0"
+        },
+        {
+          "pc": "80034C10",
+          "target": "80026028"
+        },
+        {
+          "pc": "80034C44",
+          "target": "80026028"
+        },
+        {
+          "pc": "80034C6C",
+          "target": "800139F4"
+        },
+        {
+          "pc": "80034C74",
+          "target": "80026028"
+        },
+        {
+          "pc": "80034CA8",
+          "target": "80026028"
+        },
+        {
+          "pc": "80034D14",
+          "target": "8003F58C"
+        },
+        {
+          "pc": "80034D34",
+          "target": "8003F480"
+        },
+        {
+          "pc": "80034D3C",
+          "target": "8003DF58"
+        },
+        {
+          "pc": "80034D58",
+          "target": "8003F0BC"
+        },
+        {
+          "pc": "80034D78",
+          "target": "801ECBE8"
+        },
+        {
+          "pc": "80034D90",
+          "target": "80020C40"
+        },
+        {
+          "pc": "80034DA0",
+          "target": "800139A0"
+        }
+      ]
+    },
+    {
+      "address": "80071184",
+      "size": 12,
+      "sha256": "515f2fba970e24991663a5c9c9b9c1231eeecb0ff1ac609a5267594803c9f5bc",
+      "direct_calls": []
+    },
+    {
+      "address": "80071E40",
+      "size": 8,
+      "sha256": "2befe2490a9c332ae210e21a07e7d2f711a2552a041763d960119b4c0f8a8d6e",
+      "direct_calls": []
+    },
+    {
+      "address": "80073998",
+      "size": 144,
+      "sha256": "b46ebdb08ccedcc13da615c558619a8b621971c4dea9cad7dc8e443963a69e7a",
+      "direct_calls": []
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "R5",
+      "frozen_row_sha256": "81c74475e9d391a98494c02ea516e6222e23c0a9b7bc1723dd8d15d5b7081300",
+      "x4": {
+        "source_report": "COOP_PLAYTEST_REGRESSIONS.md:17 #5",
+        "state": "checked",
+        "original_symptom": "P2 HUD anchoring matches P1 (9.19).",
+        "failure_class": "Private HUD uses the wrong viewport anchor"
+      },
+      "x6_bounded_check": "Change each actor's HP and inspect actual final-window meter anchors at several drawable aspects.",
+      "local": "unverified",
+      "netplay": "unverified",
+      "rendered_status": "unverified"
+    },
+    {
+      "id": "R6",
+      "frozen_row_sha256": "816c41fd64f6c08f0849577909c0ad542885ad3c868f9c7920537214fc59097f",
+      "x4": {
+        "source_report": "COOP_PLAYTEST_REGRESSIONS.md:18 #6",
+        "state": "checked",
+        "original_symptom": "Stacked default HUD with side-by-side option (9.21).",
+        "failure_class": "Meter layout option fails to anchor both heroes"
+      },
+      "x6_bounded_check": "Baseline stacks Zero at P2_HUD_Y=104; implement the elective alternate layout and inspect portrait/HP/ammo ownership in both.",
+      "local": "unverified",
+      "netplay": "unverified",
+      "rendered_status": "unverified"
+    },
+    {
+      "id": "F18",
+      "frozen_row_sha256": "a38d30aea85bf13c358cab9c6cb0c9b46a0a4d6479d2e3962c24864a943ff845",
+      "x4": {
+        "source_report": "COOP_PLAYTEST_FEEDBACK_20261010.md:53 #18",
+        "state": "checked",
+        "original_symptom": "P2 character and HUD pop out/in during pause transitions",
+        "failure_class": "Pause fades cull gameplay drawing too early"
+      },
+      "x6_bounded_check": "Capture opening and closing fades for both owners; require both actors whenever the native world draws and proper suppression on frontend pages.",
+      "local": "unverified",
+      "netplay": "unverified",
+      "rendered_status": "unverified"
+    }
+  ],
+  "layout": {
+    "default": "stacked",
+    "p2_translation": {
+      "x": 0,
+      "y": 104
+    },
+    "explicit_p2_anchor": -1,
+    "native_hp_xy": [
+      22,
+      80
+    ],
+    "package_option_count": 0,
+    "hud_layout_control": "absent",
+    "optional_side_by_side": "implementation_missing_at_frozen_game_commit"
+  },
+  "ownership": {
+    "roster": [
+      "X/P1",
+      "Zero/P2"
+    ],
+    "native_p1_and_boss_hud_calls": 1,
+    "private_p2_calls": [
+      "80024F90",
+      "800249D4"
+    ],
+    "shared_life_digit_icons_suppressed": [
+      3,
+      4
+    ],
+    "hp": "PLAYER+5C & 7F; maximum PLAY+5B+PLAYER.character",
+    "ammo": "PLAYER+93 selects signed-halfword PLAYER+A8+2*weapon; capacity PLAYER+14A",
+    "shared_lives": "PLAY+39; shown once by original P1 path",
+    "private_art": "original Zero UI pixels and current native CLUT retained in16x16 banks"
+  },
+  "visibility": {
+    "hud_gate": "enrolled && !failed && PLAY.major==0A; native PLAY+1F enables meters",
+    "p2_fade": "LEAVING/ABSENT: -8 toward0; every other lifecycle: +8 toward128, per HUD call",
+    "body_gate": "render() is skipped while inside; native visible bit +3 and actual PLAYER dispatch gate supplement",
+    "p2_owned_menu_prediction": "zero_world original PLAYER dispatch renders projected P2; stored P1 only added for DYING or scene_passenger(0), excluding ordinary living P1",
+    "prediction_status": "unverified_until_actual_completed_transition_packet_and_composed_capture",
+    "frontend_boundaries": "R7/Quit owned separately; no frontend state is qualified here"
+  },
+  "required_native_checks": [
+    "R5: both composed meter anchors after genuine separate HP/ammo changes,4:3 and expanded/resized drawable",
+    "R6: actual installed stacked and side_by_side controls, native portrait/HP/ammo ownership and original shared life display",
+    "F18: both menu owners, opening/closing, retain completed world/UI packet provenance and composed frames; require both bodies/meters exactly when native world draws",
+    "Each check needs exact candidate/build/settings/input/capture identity; local and netplay remain separate unverified results"
+  ],
+  "limits": [
+    "Committed source only; no X4/X5 pass transfer",
+    "No native game/build/capture was performed by this audit",
+    "Native table/call presence and capture acknowledgement cannot establish rendered visibility",
+    "Native menu call windows are bounded locators, not a complete frontend/substate classification"
+  ]
+}
