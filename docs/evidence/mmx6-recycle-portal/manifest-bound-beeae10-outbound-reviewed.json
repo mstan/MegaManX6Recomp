@@ -1,0 +1,209 @@
+{
+  "schema": 1,
+  "kind": "reviewed_offline_recycle_outbound_partial",
+  "candidate": {
+    "source_commit": "beeae107efca2fddab2c279a9d48d5e7e00817b1",
+    "exe_sha256": "a8f20cdcc4ac68cdc76bf8fa7f1b3a74b9db67788514468743a355284b2080b8",
+    "declared_manifest_sha256": "91a1d699ca4d404400d9448730a482fbd2da04445ae9d2702ffc0cab6bd2ad29",
+    "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+  },
+  "compilation_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v17-beeae10\\candidate.json",
+    "sha256": "27d42d624f1e0e4678db9c7fa1418afb9ff7727a57fab79510b16c9b71215789",
+    "bytes": 2895
+  },
+  "report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-v17-beeae10-local-destination-beam-wait\\qualification.json",
+    "sha256": "f6c3a16e3b62f616395ef5c5089780585ce2fbaa06e5608db8a3fa02f1ebb41b",
+    "bytes": 5627306
+  },
+  "runner": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-v17-beeae10-local-destination-beam-wait\\runner-source.py",
+    "sha256": "2296472833a8fe04e6ddeb1dac2838e0be347f8676d245c64a621d1b16725509",
+    "bytes": 42338
+  },
+  "owned_pid": 30252,
+  "shutdown": "graceful_owned_debug",
+  "exit_code": 0,
+  "private_cards_unchanged": true,
+  "scope": "Actual outbound native portal sequence and destination independent Right windows only; R14 remains unverified.",
+  "observed_native_transition": {
+    "source_portal_seen": true,
+    "native_action2_seen": true,
+    "native_freeze_seen": true,
+    "native_41h_and_fade_seen": true,
+    "major8_seen": true,
+    "major9_seen": true,
+    "destination_native_ready_seen": true
+  },
+  "raw_reducer": {
+    "status": "unverified_setup_gap",
+    "ledger_status": "unverified",
+    "checks": {
+      "source_portal_seen": true,
+      "native_action2_seen": true,
+      "native_freeze_seen": true,
+      "native_41h_and_fade_seen": true,
+      "major8_seen": true,
+      "major9_seen": true,
+      "destination_native_ready_seen": true,
+      "published_both_arrivals": false,
+      "p1_outside_p2_contact": false,
+      "independent_controls": false,
+      "composed_capture": false
+    },
+    "setup_gap": "CP3's authored spawn is 128px above the portal; safe terrain and a traversable approach remain unproven",
+    "coherence_gap": "Native portal/namespace and published private-player blocks are separate RPCs",
+    "limitations": [
+      "Partial native transition only; missed states are not inferred",
+      "Native code/descriptor and one resident's ground flag are not completed loader/GPU or both-player proof"
+    ]
+  },
+  "native_samples": 312,
+  "private_box_samples": 311,
+  "source_p1_miss": {
+    "p1_capsule_miss": true,
+    "p1_portal_miss": true,
+    "portal_geometry": {
+      "status": "source_arithmetic_only",
+      "hit": false,
+      "horizontal": false,
+      "vertical": true,
+      "actor_reference": [
+        1534,
+        1556
+      ],
+      "player_reference": [
+        1516,
+        1578
+      ],
+      "width_bound": 0,
+      "height_bound": 40,
+      "comparisons": "strict_less_than",
+      "actor_box_sha256": "84073cbb559670b3f787f59c89ffcdae36722b632d3359fc82dddb5f455f940b",
+      "player_box_sha256": "d17a734a863cc23effeffba4748ff0dc99777571d42d71b48846d401d5f4a634"
+    },
+    "attribution": "P1/actors one native RPC, immutable verified box source; no P2 contact inference"
+  },
+  "source_visibility": {
+    "player_centers_in_view": true,
+    "render_pointers_available": true,
+    "artwork_review": "pending",
+    "attribution": "Separate settled native-camera and private-player RPCs; no composed-art approval"
+  },
+  "destination_visibility": {
+    "player_centers_in_view": true,
+    "render_pointers_available": true,
+    "artwork_review": "pending",
+    "attribution": "Separate settled native-camera and private-player RPCs; no composed-art approval"
+  },
+  "input_windows": [
+    {
+      "label": "P2 original Right portal approach",
+      "seat": 1,
+      "bits": 32,
+      "requested_native_ticks": 24,
+      "accepted": "native_effect_observed",
+      "observed_native_ticks": 21,
+      "observed_publications": 21,
+      "stop": "native_portal_or_owner2_observed"
+    },
+    {
+      "label": "Destination independent seat1 Right",
+      "seat": 1,
+      "bits": 32,
+      "requested_native_ticks": 3,
+      "accepted": "native_progress_observed",
+      "observed_native_ticks": 4,
+      "observed_publications": 4,
+      "stop": "bounded_native_world_window",
+      "controlled_x_delta_raw": 98304,
+      "other_position_unchanged": true
+    },
+    {
+      "label": "Destination independent seat0 Right",
+      "seat": 0,
+      "bits": 32,
+      "requested_native_ticks": 3,
+      "accepted": "native_progress_observed",
+      "observed_native_ticks": 3,
+      "observed_publications": 3,
+      "stop": "bounded_native_world_window",
+      "controlled_x_delta_raw": 65536,
+      "other_position_unchanged": true
+    }
+  ],
+  "captures": [
+    {
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-v17-beeae10-local-destination-beam-wait\\baseline\\portal-source-ready.png",
+        "sha256": "3d40c7f2b7ee6aac0b7bdba9bbb0f932be50958d7102201e7fbf9f9b408b6cd5",
+        "bytes": 2074543
+      },
+      "completion": {
+        "id": 1327,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      },
+      "review": {
+        "method": "Root visually inspected actual completed composed image",
+        "observation": "Original Recycle terrain, capsule and HELP Reploid visible; overlapping heroes left of portal.",
+        "limits": "Still image only; no native collision, exact contact attribution, animation lifetime or return-route pass."
+      }
+    },
+    {
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-v17-beeae10-local-destination-beam-wait\\baseline\\portal-destination-ready.png",
+        "sha256": "67b4c1b3d06df05817c0af38c17295813ab20d88e1a255e8bd1ec7ddcd840748",
+        "bytes": 2074543
+      },
+      "completion": {
+        "id": 1826,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      },
+      "review": {
+        "method": "Root visually inspected actual completed composed image",
+        "observation": "Both heroes and their meters visible over destination industrial terrain; no apparent missing character artwork.",
+        "limits": "Still image only; no native collision, exact contact attribution, animation lifetime or return-route pass."
+      }
+    },
+    {
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-v17-beeae10-local-destination-beam-wait\\baseline\\portal-destination-independent-controls.png",
+        "sha256": "84fb945eecc975c8ca84fdb0ff42ebc89e1c7be4e3c5d3c4a8c486b221872724",
+        "bytes": 2074543
+      },
+      "completion": {
+        "id": 1863,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      },
+      "review": {
+        "method": "Root visually inspected actual completed composed image",
+        "observation": "Both heroes and their meters visible over destination industrial terrain; no apparent missing character artwork.",
+        "limits": "Still image only; no native collision, exact contact attribution, animation lifetime or return-route pass."
+      }
+    }
+  ],
+  "prerequisite_bypasses": [
+    "Existing offline command8 original stage4/section0/CP2 initialization.",
+    "Existing offline command4 seat2 changes both position/previous-position pairs to source-derived1506/1593."
+  ],
+  "limits": [
+    "Same-machine local only; no netplay, campaign reachability, acquired-progress or native-card pass.",
+    "Authored checkpointX480 is disclosed bypassed; source/exclusion/current boxes and original landing were separately checked.",
+    "Native actor and private P2 boxes are separate RPCs. P1 source arithmetic miss is not same-frame P2 contact proof.",
+    "The earlier pure transition reducer remains unverified and retains stale CP3/setup and missing downstream-proof fields. No false result is rewritten.",
+    "Destination live idle and both independent three-native-update Right windows are separate actual helper observations.",
+    "No return route, boss completion, room-boundary coverage or fullR14 pass. Newv18 code inherits no v17 observation."
+  ],
+  "ledger_status": "unverified",
+  "mode_status": {
+    "local": "unverified",
+    "netplay": "unverified"
+  }
+}
