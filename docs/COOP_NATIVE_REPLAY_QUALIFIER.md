@@ -33,6 +33,11 @@ and preserve device topology. The trace must contain actual native P1 Cross
 words and extra P2 Right reads. It never sends debug press/direct SIO, pad-type
 overrides, a scripted input route, guest RAM writes or a title mailbox. This
 does not qualify physical controllers or reproduce raw serial publication.
+Non-neutral frontend pulses wait until the actual recording worker has emitted
+its first complete canonical N. Until then the agent keeps the configured
+devices neutral, so its controls cannot alter BIOS serial branches before the
+recorded decoder seam. This live-prefix gate is not complete trace admission;
+the finalized file is still strictly validated after quit.
 
 The historical baseline.run still uses direct SIO controls and is unchanged.
 This runner reuses baseline candidate validation, Windows listener/PID ownership
@@ -108,7 +113,7 @@ Pure protocol/cleanup tests:
 & 'C:/Users/Matthew/.pyenv/pyenv-win/versions/3.12.5/python.exe' -m unittest discover -s tools -p test_prepare_mmx6_input_replay.py
 ```
 
-All sixteen new tests and eight existing preparation tests passed. Tests mock
+All seventeen new tests and eight existing preparation tests passed. Tests mock
 Popen/sockets; their synthetic executable bytes are never executed. They cover
 capability/topology/override rejection, per-seat held/neutral routing, original
 failure preservation during release, listener ownership, exact capture inputs,

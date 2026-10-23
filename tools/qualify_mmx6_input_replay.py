@@ -206,6 +206,33 @@ def reserve(port):
     with socket.socket() as reservation: reservation.bind(("127.0.0.1", port))
 
 
+def native_capture_started(candidate):
+    """Only gate agent input on a visible complete first N; never admit a prefix.
+
+    The buffered worker may publish later than the native call. Waiting is
+    safe; injecting during BIOS before any N could change unrecorded serial
+    branches. Final admission still requires the complete canonical trace.
+    """
+    paths = list(candidate.glob("saves/**/input-recordings/session-*/inputs.jsonl"))
+    if not paths: return False
+    if len(paths) != 1: raise ValueError("Multiple capture streams appeared during cold boot")
+    with paths[0].open("rb") as source:
+        rows = []
+        for _ in range(2):
+            raw = source.readline(codec.MAX_LINE+1)
+            if not raw.endswith(b"\n"): return False
+            if len(raw) > codec.MAX_LINE: raise ValueError("Malformed live native capture line bound")
+            row = json.loads(raw)
+            if codec.canonical(row) != raw: raise ValueError("Noncanonical live native capture prefix")
+            rows.append(row)
+    header, first = rows
+    if (header.get("type") != "header" or header.get("schema") != 1 or header.get("contract") != codec.CONTRACT or
+            first.get("type") != "N" or first.get("native") != 0 or first.get("order") != 0 or
+            first.get("caller") not in codec.NATIVE_CALLERS):
+        raise ValueError("Recorder did not begin with its mapped original native N")
+    return True
+
+
 def run_capture(candidate, port, timeout, progress_timeout, report):
     require_windows(); reserve(port)
     prepared = json_object(candidate / "preparation.json")
@@ -238,6 +265,10 @@ def run_capture(candidate, port, timeout, progress_timeout, report):
                         verify_host_status(control("pad_status", port=seat+1), seat)
                         route.set(seat, 0)
                     report["host_device_preflight"] = True
+                if not report.get("first_native_record_observed"):
+                    if not native_capture_started(candidate):
+                        time.sleep(.03); continue
+                    report["first_native_record_observed"] = True
                 mode = route.client.read(0x800CCED0, 2)
                 if mode[0] == 10:
                     try:

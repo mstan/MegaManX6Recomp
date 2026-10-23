@@ -149,6 +149,7 @@ class ArtifactTests(unittest.TestCase):
         candidate=self.root / "captured"
         recording=candidate / "saves/input-recordings/session-1"
         shutil.copytree(self.root / "source",recording)
+        self.assertTrue(runner.native_capture_started(candidate))
         found,summary=runner.inspect_recording(candidate,receipt["image_sha256"],"2"*64)
         self.assertEqual(found,recording);self.assertEqual(summary["events"],2)
         for image,manifest in (("f"*64,"2"*64),(receipt["image_sha256"],"f"*64)):
@@ -166,6 +167,21 @@ class ArtifactTests(unittest.TestCase):
         with self.assertRaises(ValueError):runner.inspect_recording(candidate,receipt["image_sha256"],"2"*64)
         shutil.copytree(self.root / "source",candidate / "saves/input-recordings/session-2")
         with self.assertRaises(ValueError):runner.inspect_recording(candidate,receipt["image_sha256"],"2"*64)
+
+    def test_frontend_input_gate_waits_for_actual_complete_first_native_record(self):
+        candidate=self.root / "record";candidate.mkdir()
+        self.assertFalse(runner.native_capture_started(candidate))
+        path=candidate / "saves/input-recordings/session-1/inputs.jsonl";path.parent.mkdir(parents=True)
+        path.write_bytes(b'{"contract":')
+        self.assertFalse(runner.native_capture_started(candidate))
+        header=runner.codec.canonical(dict(type="header",schema=1,contract=runner.codec.CONTRACT,identity={}))
+        path.write_bytes(header+b'{"caller":')
+        self.assertFalse(runner.native_capture_started(candidate))
+        first=dict(type="N",native=0,order=0,caller=0x80012220)
+        path.write_bytes(header+runner.codec.canonical(first))
+        self.assertTrue(runner.native_capture_started(candidate))
+        first["type"]="C";path.write_bytes(header+runner.codec.canonical(first))
+        with self.assertRaises(ValueError):runner.native_capture_started(candidate)
 
     def test_duplicate_json_fields_refuse(self):
         path=self.root / "ambiguous.json";path.write_bytes(b'{"schema":1,"schema":1}')
@@ -246,7 +262,7 @@ class ArtifactTests(unittest.TestCase):
         with patch.object(runner,"require_windows"),patch.object(runner,"reserve"),patch.object(runner.baseline,"candidate_environment",return_value=environment), \
                 patch.object(runner.baseline,"owns_listener",return_value=True),patch.object(runner.subprocess,"Popen",return_value=process) as launch, \
                 patch.object(runner.debug.DebugClient,"request",side_effect=request),patch.object(runner.HostRoute,"sample",return_value=row), \
-                patch.object(runner.HostRoute,"exercise"):
+                patch.object(runner.HostRoute,"exercise"),patch.object(runner,"native_capture_started",return_value=True):
             runner.run_capture(candidate,12345,1,1,report)
         self.assertEqual(report["cleanup"],dict(shutdown="graceful_owned_debug",exit_code=0))
         self.assertEqual(report["status"],"route_completed")
