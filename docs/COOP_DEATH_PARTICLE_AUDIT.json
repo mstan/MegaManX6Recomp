@@ -1,0 +1,712 @@
+{
+  "schema_version": 1,
+  "scope": [
+    "R3",
+    "F4"
+  ],
+  "source_only": true,
+  "game_commit": "d1263e0acc75ae33368b6110a07d95d23e2d0987",
+  "source_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+  "archive_sha256": "55b03e4ecc13d6110ff300f80b7000b0f97234e19f1b846aa2b885eece30d80f",
+  "selected_members": [
+    {
+      "index": 1,
+      "sector": 24,
+      "size": 22964,
+      "sha256": "75a142a529ddc70f0d60ee6be32ebcdb0cf5cc90ec88e965c3b15cf0c6d21b00"
+    },
+    {
+      "index": 2,
+      "sector": 36,
+      "size": 74784,
+      "sha256": "d8bcf3aea6caf1dd4098b681ad912692835d726dfe16fddca779e82d894de607"
+    }
+  ],
+  "native_spans": [
+    {
+      "address": "8003CC78",
+      "size": 60,
+      "sha256": "10188abaf6ccb6d94a537c07b76a3836524ab81bf831b7559253443a6d1480f7",
+      "direct_calls": []
+    },
+    {
+      "address": "80034DCC",
+      "size": 492,
+      "sha256": "db13690cac03abb675fbbf316f430f16034c175f4dd18671b4b0b4f315b0f2cb",
+      "direct_calls": [
+        {
+          "pc": "80034F1C",
+          "target": "80060964"
+        }
+      ]
+    },
+    {
+      "address": "8003D8A8",
+      "size": 820,
+      "sha256": "0acb744f6b17ddc5abd76c437b7eb862f02e60c3dd57985b7cc068d8b6e1b02c",
+      "direct_calls": [
+        {
+          "pc": "8003D8BC",
+          "target": "8001750C"
+        },
+        {
+          "pc": "8003D8C8",
+          "target": "8001750C"
+        },
+        {
+          "pc": "8003D8D0",
+          "target": "80012D9C"
+        },
+        {
+          "pc": "8003D930",
+          "target": "8003BA04"
+        },
+        {
+          "pc": "8003D9B4",
+          "target": "80016C48"
+        },
+        {
+          "pc": "8003D9C4",
+          "target": "80016C48"
+        },
+        {
+          "pc": "8003D9E0",
+          "target": "8003D9F8"
+        },
+        {
+          "pc": "8003DA24",
+          "target": "8002D2D4"
+        },
+        {
+          "pc": "8003DA34",
+          "target": "8003DAF4"
+        },
+        {
+          "pc": "8003DA68",
+          "target": "8003DB44"
+        },
+        {
+          "pc": "8003DA80",
+          "target": "8003DB44"
+        },
+        {
+          "pc": "8003DB04",
+          "target": "8002C530"
+        },
+        {
+          "pc": "8003DB84",
+          "target": "8002C530"
+        }
+      ]
+    },
+    {
+      "address": "80047E34",
+      "size": 508,
+      "sha256": "deef90ae2da4cd7d3dca105f966945ab00b40538345c472da45d822f3ffc67c8",
+      "direct_calls": [
+        {
+          "pc": "80047EB0",
+          "target": "8002D3B4"
+        },
+        {
+          "pc": "80047F3C",
+          "target": "800179A4"
+        },
+        {
+          "pc": "80047F44",
+          "target": "8002D2B0"
+        },
+        {
+          "pc": "80047F60",
+          "target": "8002CCB0"
+        },
+        {
+          "pc": "80047F90",
+          "target": "80047E34"
+        },
+        {
+          "pc": "80047FA0",
+          "target": "80047FB8"
+        },
+        {
+          "pc": "80047FDC",
+          "target": "8002CBFC"
+        },
+        {
+          "pc": "80047FF0",
+          "target": "8002C9B0"
+        },
+        {
+          "pc": "80048000",
+          "target": "80017A04"
+        },
+        {
+          "pc": "80048008",
+          "target": "8002D2B0"
+        },
+        {
+          "pc": "80048018",
+          "target": "8002CCB0"
+        }
+      ]
+    },
+    {
+      "address": "8002C530",
+      "size": 96,
+      "sha256": "9bb1ebe6d89446e08525884b81b9289f5f64ddc2b3388a05855c7e49482be2e5",
+      "direct_calls": []
+    },
+    {
+      "address": "800206C0",
+      "size": 276,
+      "sha256": "537c3d2eca94eee410554c054b08bb049562190e4c0f435e364544c293118ffb",
+      "direct_calls": [
+        {
+          "pc": "80020798",
+          "target": "8002CD6C"
+        }
+      ]
+    },
+    {
+      "address": "80020C40",
+      "size": 196,
+      "sha256": "0420ce4f4df1aa2567b932ec9af2524a174f99b07c0b99d85dd6b64646090a97",
+      "direct_calls": [
+        {
+          "pc": "80020C48",
+          "target": "8002E84C"
+        },
+        {
+          "pc": "80020C50",
+          "target": "8003CD44"
+        },
+        {
+          "pc": "80020C58",
+          "target": "80020A08"
+        },
+        {
+          "pc": "80020C60",
+          "target": "80034DCC"
+        },
+        {
+          "pc": "80020C68",
+          "target": "8002012C"
+        },
+        {
+          "pc": "80020C70",
+          "target": "800208EC"
+        },
+        {
+          "pc": "80020C78",
+          "target": "8002000C"
+        },
+        {
+          "pc": "80020C80",
+          "target": "80020258"
+        },
+        {
+          "pc": "80020C88",
+          "target": "80020378"
+        },
+        {
+          "pc": "80020C90",
+          "target": "800205A0"
+        },
+        {
+          "pc": "80020C98",
+          "target": "800206C0"
+        },
+        {
+          "pc": "80020CA0",
+          "target": "800207D4"
+        },
+        {
+          "pc": "80020CA8",
+          "target": "80029D18"
+        },
+        {
+          "pc": "80020CB0",
+          "target": "8002048C"
+        },
+        {
+          "pc": "80020CB8",
+          "target": "80020D18"
+        },
+        {
+          "pc": "80020CC0",
+          "target": "8002F288"
+        },
+        {
+          "pc": "80020CC8",
+          "target": "8002927C"
+        },
+        {
+          "pc": "80020CD0",
+          "target": "8002935C"
+        },
+        {
+          "pc": "80020CD8",
+          "target": "800293CC"
+        },
+        {
+          "pc": "80020CE0",
+          "target": "8002ACA8"
+        },
+        {
+          "pc": "80020CE8",
+          "target": "80020D74"
+        },
+        {
+          "pc": "80020CF0",
+          "target": "80020DC8"
+        },
+        {
+          "pc": "80020D00",
+          "target": "80017B04"
+        }
+      ]
+    },
+    {
+      "address": "80022D00",
+      "size": 96,
+      "sha256": "cbe25621d8576c75ae0bbe0a6797af378db4c7a5c57cbd7276cc70b2fd088b98",
+      "direct_calls": [
+        {
+          "pc": "80022D30",
+          "target": "800232D4"
+        },
+        {
+          "pc": "80022D48",
+          "target": "800239CC"
+        }
+      ]
+    },
+    {
+      "address": "8002CBFC",
+      "size": 368,
+      "sha256": "dbf1d709e13fb55fd9a0dcf1cc1065f4357e63a2002b5a0ff6186f0356909c43",
+      "direct_calls": []
+    },
+    {
+      "address": "800179A4",
+      "size": 164,
+      "sha256": "5c20240edf12b2a5163779c23b686ca8363678966d8c7d41a1d68ab971b65987",
+      "direct_calls": []
+    },
+    {
+      "address": "8002D2B0",
+      "size": 36,
+      "sha256": "27a83fee52c62b7f4a185b41056e43b5a60e2f28525f99a487853d5a7366979a",
+      "direct_calls": []
+    },
+    {
+      "address": "8002D3B4",
+      "size": 160,
+      "sha256": "dfa4a4ad9d3cdbb3fad35ff1c2f1fe858f9db7e30c8e27e77c45395d62043664",
+      "direct_calls": []
+    },
+    {
+      "address": "8002C9B0",
+      "size": 36,
+      "sha256": "46cbc9828aa67de8b5cb54342b05138bed1ad1f9b6b3a777a978748035b883d1",
+      "direct_calls": []
+    },
+    {
+      "address": "80073ABC",
+      "size": 16,
+      "sha256": "4b5885c27c56c6350076ed02c211cab88eccf381b3ff6d31a1cb36d09456f665",
+      "direct_calls": []
+    },
+    {
+      "address": "80073D20",
+      "size": 48,
+      "sha256": "ff43cffe394d5ef25edf1c174919e88c26a03d4ee157a2a2a52387e03508b25b",
+      "direct_calls": [
+        {
+          "pc": "80073D30",
+          "target": "80201000"
+        },
+        {
+          "pc": "80073D38",
+          "target": "88281808"
+        },
+        {
+          "pc": "80073D40",
+          "target": "84241404"
+        },
+        {
+          "pc": "80073D48",
+          "target": "8C2C1C0C"
+        }
+      ]
+    },
+    {
+      "address": "8007789C",
+      "size": 32,
+      "sha256": "3502724f536f1596ebee536eb64b405542fa63426a0f1c76c7068e4643f0d981",
+      "direct_calls": []
+    },
+    {
+      "address": "80076BDC",
+      "size": 36,
+      "sha256": "fae4b995d86f7b48a69f07e5a585afd3496cd40afc9429e55e06533ee064cea6",
+      "direct_calls": []
+    },
+    {
+      "address": "80077B20",
+      "size": 4,
+      "sha256": "61aa5ff2e9f00a11d14da08c8b422b8d5d873e242280cadcdb91bcaeb0dadf5d",
+      "direct_calls": []
+    }
+  ],
+  "sources": [
+    {
+      "path": "src/mods/mmx6_coop_plugin.c",
+      "bytes": 89978,
+      "sha256": "7507189a215dfd05cb3d7a3b38e0b821bdce7085227d447e91605f1f86c6e2d2"
+    },
+    {
+      "path": "src/mods/mmx6_coop_lifecycle.c",
+      "bytes": 3155,
+      "sha256": "3e488c7d08693f23b08eaa6f05e2164cf04bb030fee9c830b2d8e12ac81e57cf"
+    },
+    {
+      "path": "src/mods/mmx6_coop_snapshot.inc",
+      "bytes": 16301,
+      "sha256": "54abde5649a593f31d4cfd56e4ae16b7e65673da4a721d82ee8e2e2e00b5cfef"
+    },
+    {
+      "path": "docs/COOP_PARITY_LEDGER.json",
+      "bytes": 627309,
+      "sha256": "a9e8f24ba9defdd9c1c7ad8b26d97760c5f8ab3517d0cc1b9da1249cd520829c"
+    }
+  ],
+  "functions": {
+    "death_effect_allocate": {
+      "line": 1492,
+      "sha256": "310c1c70bee392efdf96e000fc72783bf90dcc295d59e148bd225d36226c97f9"
+    },
+    "death_effect_init": {
+      "line": 1511,
+      "sha256": "b36d946b6707fc1d6c3ecb015f64b44edb717ab85a26539a1b88f7ed9b6b61fd"
+    },
+    "player_tick": {
+      "line": 1048,
+      "sha256": "466fec3471b75fa9a3d2e6cf815ff535f0330c5602dc528903921fa5d477c27d"
+    },
+    "stage_tick": {
+      "line": 1065,
+      "sha256": "c50cc392d24f4da3246f9337c6fe4be3dc1bff3ce872d822c42584168552b12a"
+    },
+    "controller": {
+      "line": 1168,
+      "sha256": "b994c5d9341047e5646c00152a79a2761363a7933766d2f3cf1734800e26181c"
+    },
+    "render_survivor": {
+      "line": 1457,
+      "sha256": "29bd97482e6fdf4d13ce609b90e1b71148ffb3d145031aeb5f8879e98027ba24"
+    },
+    "render_actor": {
+      "line": 1352,
+      "sha256": "c0a8c9ab10784121ddca5eaf5d8369e039ff149083b2dd7266eae1514485dece"
+    },
+    "sprite_bank": {
+      "line": 1273,
+      "sha256": "a6161ff8edc0e3eb6db13bac0dbc91d3c2c4df133a5b4713031d7fec067344b5"
+    }
+  },
+  "comparisons": [
+    {
+      "id": "R3",
+      "frozen_row_sha256": "fe414d5fc0d4959b059e49d17593e36ccd9894b66536a647ae69ff926949e8d4",
+      "x4": {
+        "source_report": "COOP_PLAYTEST_REGRESSIONS.md:15 #3",
+        "state": "checked",
+        "original_symptom": "P2 death particles originate at P2 and use the character's color (9.24).",
+        "failure_class": "Death effects inherit the singleton origin or palette"
+      },
+      "bounded_check": "Kill each seat at a distinct position; retain composed native burst colors, origin, expiry and surviving partner control.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "F4",
+      "frozen_row_sha256": "f6583dbd4f3ff376f8a5232a67ef9e288cf928f9b6fd88ad4ed2f820973e42d1",
+      "x4": {
+        "source_report": "COOP_PLAYTEST_FEEDBACK_20261010.md:39 #4",
+        "state": "checked",
+        "original_symptom": "Death during boss approach produces an excessive particle burst and reported slowdown",
+        "failure_class": "Fatal entry repeats death emitters or leaves them alive"
+      },
+      "bounded_check": "Kill the actual scene owner once before release; count native effect creation/expiry and world cadence while the passenger recovers.",
+      "local": "unverified",
+      "netplay": "unverified"
+    }
+  ],
+  "native_dispatch": {
+    "player_phase2": "80073ABC[2] ->8003CC78",
+    "death_subphases": "80073D20",
+    "phases": [
+      "8003D8A8",
+      "8003D954",
+      "8003D9F8",
+      "8003DACC"
+    ],
+    "fx_root": "8006E004 ->800FA814",
+    "fx11_handler": "800FA858 ->80047F78",
+    "fx_update": "800206C0; native controller JAL80020C98",
+    "fx_draw": "80022D30 ->800232D4 (visible1);80022D48 ->800239CC (visible2)"
+  },
+  "pool": {
+    "base": "800CD410",
+    "end": "800CF810",
+    "count": 96,
+    "stride": 96,
+    "allocator": "8002C530",
+    "allocation_field": "+0",
+    "type_field": "+1=11h",
+    "subtype_field": "+2",
+    "visible_field": "+3",
+    "phase_field": "+4",
+    "position_fields": [
+      "+8 wordfixedX",
+      "+C wordfixedY"
+    ],
+    "velocity_fields": [
+      "+20 wordVX",
+      "+24 wordVY"
+    ],
+    "parent": "none: initialization copies singleton PLAYER origin",
+    "initializer": "80047E34",
+    "update": "80047FB8"
+  },
+  "emission": {
+    "initial_group": 0,
+    "initial_timer": 0,
+    "invocations": 40,
+    "random_attempts": 44,
+    "radial_attempts": 32,
+    "events": [
+      {
+        "invocation": 0,
+        "random_attempts": 4,
+        "radial_groups": [
+          0
+        ],
+        "radial_attempts": 8
+      },
+      {
+        "invocation": 3,
+        "random_attempts": 4,
+        "radial_groups": [],
+        "radial_attempts": 0
+      },
+      {
+        "invocation": 7,
+        "random_attempts": 4,
+        "radial_groups": [],
+        "radial_attempts": 0
+      },
+      {
+        "invocation": 11,
+        "random_attempts": 4,
+        "radial_groups": [],
+        "radial_attempts": 0
+      },
+      {
+        "invocation": 15,
+        "random_attempts": 4,
+        "radial_groups": [],
+        "radial_attempts": 0
+      },
+      {
+        "invocation": 19,
+        "random_attempts": 4,
+        "radial_groups": [
+          1
+        ],
+        "radial_attempts": 8
+      },
+      {
+        "invocation": 22,
+        "random_attempts": 4,
+        "radial_groups": [],
+        "radial_attempts": 0
+      },
+      {
+        "invocation": 26,
+        "random_attempts": 4,
+        "radial_groups": [],
+        "radial_attempts": 0
+      },
+      {
+        "invocation": 30,
+        "random_attempts": 4,
+        "radial_groups": [],
+        "radial_attempts": 0
+      },
+      {
+        "invocation": 34,
+        "random_attempts": 4,
+        "radial_groups": [],
+        "radial_attempts": 0
+      },
+      {
+        "invocation": 38,
+        "random_attempts": 4,
+        "radial_groups": [
+          2,
+          3
+        ],
+        "radial_attempts": 16
+      }
+    ],
+    "unit": "accepted_native_emitter_invocations_not_wall_clock_frames",
+    "runtime_status": "unverified"
+  },
+  "radial_angles": [
+    [
+      0,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      28
+    ],
+    [
+      2,
+      6,
+      10,
+      14,
+      18,
+      22,
+      26,
+      30
+    ],
+    [
+      1,
+      5,
+      9,
+      13,
+      17,
+      21,
+      25,
+      29
+    ],
+    [
+      3,
+      7,
+      11,
+      15,
+      19,
+      23,
+      27,
+      31
+    ]
+  ],
+  "native_resource": {
+    "animation_table": "8007789C",
+    "animations": [
+      {
+        "animation": 6,
+        "address": "80076BDC",
+        "frames": [
+          105,
+          106,
+          107,
+          108,
+          109
+        ],
+        "delays": [
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "final_signed_stride": -4
+      },
+      {
+        "animation": 7,
+        "address": "80076BF0",
+        "frames": [
+          110,
+          111,
+          112,
+          113
+        ],
+        "delays": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "final_signed_stride": -3
+      }
+    ],
+    "compression_pointer": "+38=0",
+    "assembly": "SCRATCH+1C + word[+4] -> effect+3C",
+    "tile_page": "+40=0",
+    "clut": "+42=7802h (VRAM x32,y480,16colors)",
+    "priority": "+16=10h",
+    "origin": "PLAYER+8/+C and layer+14 copied at initialization, not allocation",
+    "random": "subtype80h|RNG&1Fh; native velocity multiplied by8; animation7",
+    "radial": "angle&1Fh; velocity scaled using[1,3,2,3] by low2bits; animation6"
+  },
+  "retirement": {
+    "random": "80047FDC tests fixed320x240+8px bounds; true ->8002C9B0 clears allocated/visible",
+    "radial": "no explicit deallocation in this update;8002CCB0 recalculates visible against native camera/width, allocated slots may persist",
+    "animation": "6/7 loop native glyph frames; not a lifetime timer",
+    "freeze": "PLAY+17 gates global update; paused/frozen publications are not particle updates"
+  },
+  "adapter": {
+    "origin": "allocation RA8003DB0C/8003DB8C captures X/Y/layer/assembly per96slots; any wrapped allocation invalidates prior slot receipt",
+    "delayed_init": "80047E34 replacement consumes valid receipt once, projects only origin/layer/assembly, calls original once and restores",
+    "snapshot": "pending origin receipts participate in existing host snapshot/digest; no new state added by audit",
+    "once_world": "private player/attack/contact/attached/trail pass does not add800206C0; survivor/scene calls original world once",
+    "death_entry": "fatal accepts a living actor once; private nativeD6/D7/body context retained; no source-proven repeat-emitter defect",
+    "atlas_gap": "global death pool excluded from private render_survivor/render actor bank admission; original native shared atlas/CLUT remains in use"
+  },
+  "findings": [
+    {
+      "id": "native76",
+      "classification": "source_proven_native_behavior",
+      "text": "44random+32radial are original attempts per one ordinary zeroedD6/D7 emitter; successful allocations may be fewer"
+    },
+    {
+      "id": "radial-allocation",
+      "classification": "source_proven_native_behavior",
+      "text": "allocated-but-invisible radial slots do not alone prove a leak"
+    },
+    {
+      "id": "origin-adapter",
+      "classification": "source_proven_existing_ownership_adapter",
+      "text": "allocation origin/layer/assembly retained for delayed init; native runtime origin/restoration remains unverified"
+    },
+    {
+      "id": "atlas-color",
+      "classification": "unverified_resource_gap",
+      "text": "private global particles keep native atlas/7802CLUT path; wrong pixels/colors cannot be concluded without original Zero and X reference"
+    },
+    {
+      "id": "repeat-burst",
+      "classification": "unverified_runtime_obligation",
+      "text": "no source-proven excess emitter repetition; actual scene-owner death allocation/update/retirement/progress trace needed"
+    }
+  ],
+  "required_native_checks": [
+    "Separate-seat distinct-position original X/P1 and Zero/P2 fatal admissions with native body phase/timers and survivor input",
+    "Count producer-specific allocation attempts by true caller; normalize wrapper/original duplicates and exclude unrelated globalFX",
+    "Native global updates, visibility and deallocation separately; count no frozen/menu ticks as lifetime progress",
+    "Original co-op-off Zero/X particle glyph/CLUT/atlas reference plus completed composed death captures and source palette samples",
+    "Actual scene owner fatal before release; bounded world progress and passenger recovery; both local/netplay on exact candidate"
+  ],
+  "limits": [
+    "No native game/build/capture or ledger update by this audit",
+    "Source accounting is not native frame cadence, ordinary60FPS performance or rendered qualification",
+    "Selected Zero/intro members only; no full-disc content crawl or opposite-roster claim",
+    "No X4/X5 counts, palette addresses or passed results transferred"
+  ]
+}
