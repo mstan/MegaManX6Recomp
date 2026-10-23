@@ -36,6 +36,48 @@ hashed evidence for each required mode. Do not set the completion flags under
 test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
+## Current integrated candidate, October 23
+
+The local integration now uses profile `mmx6-x-zero-delay-v11`, ABI 32,
+the modern SDK bridge and UI `b964eabe`. Rollback and online user state jumps
+remain disabled. The historical milestones below retain their original
+candidate identities; observations do not transfer automatically to a rebuild.
+
+- The native intro enemy action-1 proximity correction has actual before/after
+  local evidence and a two-peer original-input route with 37 matching resolved
+  core/mod samples. The route admits authored record 25 while X remains fixed,
+  observes original initialization, Zero-only proximity response and native
+  attack damage on both peers. See [the paired receipt](COOP_PAIRED_ENEMY_BASELINE.md).
+  Other targeting routines and stages remain unverified.
+- [Independent native trace counters](COOP_NATIVE_WORLD_TRACE.md) show one
+  enemy-world entry per complete frame in the observed intro sequence: 361
+  frames, 364 complete driver cycles and 83 bound live-enemy frames. Both
+  broader route reports retain their failed status; the corrected trace run
+  missed the intermediate HP-loss sample. This counter result does not qualify
+  moving platforms or every world subsystem.
+- The SDK now requires actual CPU/backend offers and a trusted title catalog,
+  canonical startup floating-point state, verified linked BIOS selection,
+  immutable interpreted overlays, actual executable SHA and mutual profile
+  agreement before guest execution. Fresh OS nonces bind each startup;
+  existing title/content/build gates remain. Eight integrated startup/core/
+  wire/CPU/FP/image/nonce fixtures pass. Native transport qualification of this
+  new gate remains open; broad host catalogs remain unavailable.
+- X6 explicitly registers its declared build inputs, including the resolved
+  generated-game tree, actual dependency pins and tracked edits. The integrated
+  Clang developer build passes all 31 game CTests with original content/audio
+  reproduction enabled. The manifest covers declared inputs, not an exhaustive
+  external binary or driver closure. See [manifest limits](COOP_BUILD_MANIFEST_REGISTRATION.md).
+- The [optimized helper matrix](../psxrecomp-v4/docs/qa/x6-helper-qualification-20261023/README.md)
+  retains 48 passes, two fixture linkage blocks and one disabled SPU test.
+  Running that disabled executable directly reproduces four existing ADSR
+  failures. Compressed-stream MDEC, forced-scalar and exhaustive load-delay
+  coverage remain open; this matrix does not qualify another CPU or OS.
+
+The next candidate will exercise an explicit development-only numeric
+`127.0.0.1` catalog. Its default remains off until the candidate's eligibility,
+real transport and restart checks have evidence. No cross-machine or broad
+production profile is inferred from this one-machine work.
+
 ## First implementation milestone
 
 The integration retains X6's existing native co-op renderer, hit pause,
@@ -188,27 +230,16 @@ from these bounded milestones.
 
 ## Next integration gates
 
-The modern SDK bridge candidate has now built with Clang, passed 21 game
-checks, original-disc resident-store validation of 302 members and default
-two-peer loader admission. Exact receipts and scope are in
-[COOP_NETPLAY_BASELINE.md](COOP_NETPLAY_BASELINE.md). The bridge uses ABI 32
-to distinguish its modern layout from the previous X6 ABI 31. It remains a
-separate candidate until its host-escape and content-cache corrections pass
-combined validation. Gameplay and registered host-state checks do not inherit
-the startup result.
-
-1. Extend the now-passing default loopback intro/input/lifecycle smoke with
-   damage, combat, both personal menus and authored scene checks. The earlier frontend timeout is explained by the
-   old sampler omission and retained as failed setup. Preserve the distinction
-   between diagnostic publication counts
-   and resolved simulation ticks. Do not close the broad netplay comparisons
-   without framework core/mod checksums and their actual behavior checks.
-2. Finish selecting the validated modern bridge from its separate local
-   framework worktree. Its frozen base is `6f0ccbc6`, UI `b964eabe`, recomp-net
-   `e5305930`, rbengine `2a03e736`. Preserve X6's native replacement service
-   from `a6216c6be` and negotiated loading behavior from `50c68be75`; reconcile
-   overlay ABI 31/30 and retain modern dependency pins. A blind repin removes
-   services used by existing X6 generated code and plugins.
+1. Qualify the fresh manifest-bound candidate locally and through the required
+   startup gate on the narrowly eligible loopback route. Retain actual
+   zero-cycle agreement, independent inputs, native damage, lifecycle,
+   composed captures and resolved core/mod samples. Repeat startup with fresh
+   nonces; preserve refusal and mismatch evidence. R13 still needs the final
+   exact-candidate receipts before its ledger status changes.
+2. Extend the now-passing native intro cases with both personal menus and
+   authored scene checks. Keep framework fixture gaps and existing SPU
+   fidelity failures explicit. Use real peer hardware before enabling any
+   cross-machine, cross-CPU or cross-OS qualification.
 3. Extend the registered host-state provider beyond the healthy intro/P1 menu:
    qualify rewind, both menus, joining/death, scenes, deferred heals and moving
    solids, including cold resource restoration. Keep rollback disabled until
@@ -227,5 +258,5 @@ the startup result.
    physical controls, real-network and owner QA. A normal-audio, windowed
    launcher is staged separately; launching it requires an actual handoff.
 
-Full parity remains in progress. No comparison has been closed by this first
-implementation milestone.
+Full parity remains in progress. Bounded native checks and framework fixes do
+not close the unexecuted campaign inventory.
