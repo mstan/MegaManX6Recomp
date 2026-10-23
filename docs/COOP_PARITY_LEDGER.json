@@ -582,6 +582,46 @@
               "Prior exact-image failures and234 frozen comparison definitions remain retained; no full row promoted."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "a1dac268ed8c5dc8ed902396cebcb2d0597fb009",
+            "build_identity": {
+              "exe_sha256": "982e2ab847d27615ee075578311bed6b74baed77fc9d52b9b41a77bd84749253",
+              "declared_manifest_sha256": "808ac1ac573bf192fa89c0c08631873689cc8a167fc6f34baa8a38e4b96d1c00",
+              "compiled_source_commit": "a1dac268ed8c5dc8ed902396cebcb2d0597fb009",
+              "sdk_commit": "bfbfb920bfa509f6a31ec2e6b28411a01797427f"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "loader": "defaultSeamlessLoading",
+              "input": "owned published host digital slots",
+              "rollback": false,
+              "muted": true
+            },
+            "action": "Native Zero Square/neutral followed by original intro record25 contact until native HP32->0; read-only source-call/SPU/sample observations.",
+            "outcome": "Saber SFX source/route/pitch/ADSR and nine live STOP5 private46 zero-volume events pass. Current v19 saber vocal uses actual X sample bytes on hardware20/bank0. Active phase2 STOP7 and full comparison remain incomplete.",
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-body-audio\\manifest-bound-a1dac26-local-contact-and-vocal-reviewed.json",
+                "sha256": "197056ea6272ac7b54db3d54eda4de2eeb6b4edcffe0deadc51e9d7e694b0839",
+                "bytes": 18615
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v19-a1dac26-local-contact-death-alias-bound\\qualification.json",
+                "sha256": "44a10ef8216d9a5f7becf955c08f3d8925ebe32f3b7c8ff2220b9f2e1dc8f95c",
+                "bytes": 2945729
+              }
+            ],
+            "limits": [
+              "Local frozen v19 only: selected saber SFX source/route/numerical fields and nine living STOP5 private46 events are proved. No active phase2 STOP7, paired result, full audio, music, PCM or campaign pass.",
+              "Phase2 entry and both original STOP5/7 calls are traced. The earlier saber had naturally ended; SDK Release/env0 deactivates it, and private stop omits KEYOFF for inactive voices. Absence is not a demonstrated game defect or an active-stop pass.",
+              "Saber vocal is a current-image R4 counterexample: actual hardware20/bank0 bytes match X DAT87 group3/record3, while Zero performs the native saber. Its independent source/identity evidence does not prove every other vocal family or a P1 lifetime cut.",
+              "All eight HP losses came from ordinary source-attributed native contact; no HP/death/success writes or prerequisite bypasses.",
+              "Raw failed_setup reports are preserved; source sample alias and incorrect STOP-trigger assumptions belong to the observer, not retrospective engine failures."
+            ],
+            "bypasses": []
           }
         ],
         "limitations": "Concrete local original-ground-jump counterexample on exactbeeae10/a8f20cdc only. Other sound families, co-op-off native Zero comparison and all netplay audio checks remain unverified."
@@ -1691,6 +1731,46 @@
               "Source and actual-plugin fixtures cover eight PLAY records/nine STOP sites; native local/paired body event/lifetime, current-build active23 state and music/PCM qualification remain pending.",
               "Same-machine development profile only; no cross-machine, heterogeneous, rollback, production-native or campaign qualification.",
               "Prior exact-image failures and234 frozen comparison definitions remain retained; no full row promoted."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "a1dac268ed8c5dc8ed902396cebcb2d0597fb009",
+            "build_identity": {
+              "exe_sha256": "982e2ab847d27615ee075578311bed6b74baed77fc9d52b9b41a77bd84749253",
+              "declared_manifest_sha256": "808ac1ac573bf192fa89c0c08631873689cc8a167fc6f34baa8a38e4b96d1c00",
+              "compiled_source_commit": "a1dac268ed8c5dc8ed902396cebcb2d0597fb009",
+              "sdk_commit": "bfbfb920bfa509f6a31ec2e6b28411a01797427f"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "loader": "defaultSeamlessLoading",
+              "input": "owned published host digital slots",
+              "rollback": false,
+              "muted": true
+            },
+            "action": "Native Zero Square/neutral followed by original intro record25 contact until native HP32->0; read-only source-call/SPU/sample observations.",
+            "outcome": "Saber SFX source/route/pitch/ADSR and nine live STOP5 private46 zero-volume events pass. Current v19 saber vocal uses actual X sample bytes on hardware20/bank0. Active phase2 STOP7 and full comparison remain incomplete.",
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-body-audio\\manifest-bound-a1dac26-local-contact-and-vocal-reviewed.json",
+                "sha256": "197056ea6272ac7b54db3d54eda4de2eeb6b4edcffe0deadc51e9d7e694b0839",
+                "bytes": 18615
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v19-a1dac26-local-contact-death-alias-bound\\qualification.json",
+                "sha256": "44a10ef8216d9a5f7becf955c08f3d8925ebe32f3b7c8ff2220b9f2e1dc8f95c",
+                "bytes": 2945729
+              }
+            ],
+            "limits": [
+              "Local frozen v19 only: selected saber SFX source/route/numerical fields and nine living STOP5 private46 events are proved. No active phase2 STOP7, paired result, full audio, music, PCM or campaign pass.",
+              "Phase2 entry and both original STOP5/7 calls are traced. The earlier saber had naturally ended; SDK Release/env0 deactivates it, and private stop omits KEYOFF for inactive voices. Absence is not a demonstrated game defect or an active-stop pass.",
+              "Saber vocal is a current-image R4 counterexample: actual hardware20/bank0 bytes match X DAT87 group3/record3, while Zero performs the native saber. Its independent source/identity evidence does not prove every other vocal family or a P1 lifetime cut.",
+              "All eight HP losses came from ordinary source-attributed native contact; no HP/death/success writes or prerequisite bypasses.",
+              "Raw failed_setup reports are preserved; source sample alias and incorrect STOP-trigger assumptions belong to the observer, not retrospective engine failures."
             ],
             "bypasses": []
           }

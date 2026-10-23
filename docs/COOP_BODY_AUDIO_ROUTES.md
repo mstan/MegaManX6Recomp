@@ -58,8 +58,22 @@ partial observations and leaves STOP unverified. It cannot pass the full case.
 `--body-death` extends the case through original intro record25 contact: eight
 ordinary strength4 HP losses, no HP/death writes, and the surviving primary.
 Read-only function tracing records SOUND, STOP, the contact helper and phase2
-entry. Both phase2 STOP return addresses must match, and their engine frame
-must contain private46/47 KEYOFF with no hardware22/23 KEYOFF. SDK fntrace and
+entry. Both phase2 STOP return addresses must match. Active private voices
+require same-frame private KEYOFF with no hardware22/23 KEYOFF. An already
+ended voice is a separate contract: its private volume must change to zero,
+with its sample attribution and P1 hardware registers preserved. That never
+passes active STOP7 lifetime coverage. SDK fntrace and
 SPU events explicitly read the same external `s_frame_count`; this comparison
 does not substitute a native timer, publication counter or independent sample
 clock. These native death checks still require an actual retained run.
+
+The [reviewed first contact-death receipt](evidence/mmx6-body-audio/manifest-bound-a1dac26-local-contact-and-vocal-reviewed.json)
+verifies the saber SFX source sample and numerical fields, nine live STOP5
+private46 events with zero volume and no hardware22 stop, and native HP32->0
+through eight ordinary contacts. All 1342 contact trace rows name the original
+record25 actor and caller. Both original phase2 STOP calls ran, but the earlier
+saber had naturally ended; the SDK deactivates Release/env0 and skips KEYOFF
+on inactive voices. Active STOP7 remains unverified. The receipt also records
+a current v19 failure: Zero's saber vocal used actual X DAT87 sample bytes on
+hardware20/bank0 instead of the retained Zero sample. Correct SFX do not close
+the remaining vocal, hurt or death families.

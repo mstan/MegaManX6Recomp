@@ -100,10 +100,14 @@ class BodyAudioTests(unittest.TestCase):
         for skipped in (False,True):
             rows=[row(32-4*i,i)for i in range(9)]
             if skipped:rows.pop(3)
-            inputs=[];ctx=dict(clients=[object()],zero_overlay=b'',set_input=lambda s,b:inputs.append((s,b)))
+            calls=[dict(seq=i,target='0x8001750C',a0='0x1',a1=hex(record),ra=hex(ra),frame=200)
+                for i,(record,ra)in enumerate(((5,0x8003D8C4),(7,0x8003D8D0)))]
+            calls.append(dict(seq=2,target='0x8003D8A8',a0='0x800970A0',frame=200))
+            inputs=[];ctx=dict(clients=[object()],zero_overlay=b'',set_input=lambda s,b:inputs.append((s,b)),
+                request=lambda *a,**k:dict(seq_lo=0,seq_hi=3,emitted=3,entries=calls))
             observer=type('Observer',(),{'events':[]})();case={}
             def sample(label):
-                if label=='body-audio-phase2-stop':observer.events.append(dict(v=47,kind='KEYOFF'))
+                if label=='body-audio-phase2-stop':observer.events.append(dict(v=47,kind='KEYOFF',sample_bank=30,frame=200))
                 return {}
             with patch.object(subject.contact,'observe_contact',side_effect=rows):
                 if skipped:
@@ -113,6 +117,24 @@ class BodyAudioTests(unittest.TestCase):
                     subject.native_death(ctx,sample,observer,case,lambda *a:dict(observation={}))
                     self.assertEqual(len(case['native_death']['hp_changes']),8)
             self.assertEqual(inputs[-1],(1,0))
+
+    def test_inactive_stop_needs_owned_volume_transition_and_preserved_hardware(self):
+        calls=[dict(target='0x8001750C',a0='0x1',a1=hex(record),ra=hex(ra),frame=200)
+            for record,ra in ((5,0x8003D8C4),(7,0x8003D8D0))]
+        calls.append(dict(target='0x8003D8A8',a0='0x800970A0',frame=200))
+        before=subject.audio.parse_private_voices(private_voices());after=copy.deepcopy(before)
+        before['voices'][23].update(sample_bank=30,start=33744,active=0,env=0,env_phase=3,vol_l=100,vol_r=200)
+        after['voices'][23]=dict(before['voices'][23],vol_l=0,vol_r=0)
+        hw=subject.audio.parse_voices(hardware(),require_banks=True);hw['voices'][22].update(vol_l=456,vol_r=789)
+        events=[dict(v=47,kind='KEYON',sample_bank=30,frame=100),dict(v=47,kind='END_STOP',sample_bank=30,frame=127)]
+        def checks():return subject.phase2_checks(dict(entries=calls),events,before_private=before,after_private=after,
+            before_hardware=hw,after_hardware=copy.deepcopy(hw))
+        self.assertTrue(all(checks().values()))
+        before['voices'][23]['active']=1;self.assertFalse(checks()['private23_phase2_stop'])
+        before['voices'][23]['active']=0;after['voices'][23]['vol_l']=100
+        self.assertFalse(checks()['private23_phase2_stop'])
+        after['voices'][23]['vol_l']=0;events.append(dict(v=47,kind='KEYON',sample_bank=30,frame=150))
+        self.assertFalse(checks()['private23_phase2_stop'])
 
     def test_sample_larger_than_debug_read_limit_uses_exact_bounded_chunks(self):
         source,event=fixture();bank=Bank();result=subject.identify(bank,event,source)

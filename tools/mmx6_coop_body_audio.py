@@ -82,20 +82,38 @@ def trace_page(ctx):
     return page
 
 
-def phase2_checks(page,events):
+def phase2_checks(page,events,*,before_private=None,after_private=None,before_hardware=None,after_hardware=None):
     """Both SDK recorders use the same extern s_frame_count; no clock guess."""
     rows=page['entries'];calls=[]
     for record,ra in ((5,0x8003D8C4),(7,0x8003D8D0)):
         calls.append([r for r in rows if int(r['target'],16)==0x8001750C and
             int(r['a0'],16)==1 and int(r['a1'],16)==record and int(r['ra'],16)==ra])
     frames={r['frame'] for group in calls for r in group}
-    return dict(original_phase2_stop_calls=all(calls),
+    checks=dict(original_phase2_stop_calls=all(calls),
         original_phase2_handler=any(int(r['target'],16)==0x8003D8A8 and int(r['a0'],16)==0x800970A0 for r in rows),
         private22_phase2_stop=any(e['v']==46 and e['kind']=='KEYOFF' and e['sample_bank'] in (0,30) and
             any(e['frame']==r['frame']for r in calls[0])for e in events),
         private23_phase2_stop=any(e['v']==47 and e['kind']=='KEYOFF' and e['sample_bank']==30 and
             any(e['frame']==r['frame']for r in calls[1])for e in events),
         p1_hardware22_23_not_stopped=not any(e['v']in (22,23) and e['kind']=='KEYOFF' and e['frame']in frames for e in events))
+    if before_private is not None and after_private is not None:
+        old=before_private['voices'][23];new=after_private['voices'][23]
+        # END_STOP deactivates a silent Release voice. Native STOP still zeros
+        # its registers, but SDK correctly emits no KEYOFF for an inactive slot.
+        inactive23=(old['active']==0 and old['env']==0 and old['env_phase']==3 and
+            old['sample_bank']==30 and (old['vol_l']!=0 or old['vol_r']!=0))
+        same23=all(old[k]==new[k]for k in ('sample_bank','start','pitch','adsr_lo','adsr_hi'))
+        keys23=[e for e in events if e['v']==47 and e['kind']=='KEYON']
+        checks['private23_phase2_stop']|=(bool(calls[1]) and inactive23 and same23 and len(keys23)==1 and
+            new['vol_l']==new['vol_r']==new['env']==0 and new['env_phase']==3)
+        if before_hardware is not None and after_hardware is not None:
+            old22=before_hardware['voices'][22];new22=after_hardware['voices'][22]
+            preserved=all(old22[k]==new22[k]for k in ('sample_bank','start','vol_l','vol_r','pitch','adsr_lo','adsr_hi','mode'))
+            checks['p1_hardware22_registers_preserved']=preserved and (old22['vol_l']!=0 or old22['vol_r']!=0)
+            p22=after_private['voices'][22]
+            checks['private22_phase2_stop']|=(bool(calls[0]) and preserved and p22['active']==0 and
+                p22['vol_l']==p22['vol_r']==p22['env']==0 and p22['env_phase']==3)
+    return checks
 
 
 def native_death(ctx, sample, observer, case, advance):
@@ -130,9 +148,10 @@ def native_death(ctx, sample, observer, case, advance):
             ctx['set_input'](1,0)
             for _ in range(31):
                 sample('body-audio-phase2-stop')
-                if any(e['v']==47 and e['kind']=='KEYOFF' for e in observer.events):return
+                observed=phase2_checks(trace_page(ctx),observer.events)
+                if observed['original_phase2_stop_calls'] and observed['original_phase2_handler']:return
                 advance(2,'body-audio-phase2-stop-drain')
-            raise audio.AudioQualificationError('Original phase2 did not issue private47 KEYOFF')
+            raise audio.AudioQualificationError('Original phase2 source STOP5/7 calls were not observed')
         positions=o['players'];x=positions[1]['x_raw']
         stalled=stalled+1 if previous and abs(x-previous['observation']['players'][1]['x_raw'])<65536 else 0
         if stalled>=2 and not jumped and x<350<<16 and hp==32:
@@ -158,11 +177,12 @@ def exercise(ctx, contract, *, source, timeout=90, death=False, **unused):
     observer = audio.AudioObserver(ctx['clients'][0], ctx['request'], contract, private_banks=ctx['private_banks'])
     report = ctx['report']; deadline = time.monotonic()+timeout
     damage_allowed=False;trace_armed=False
-    case = dict(kind='native_zero_body_saber_audio', status='failed_setup', input_path='published_host',
+    case = dict(kind='native_zero_body_saber_and_contact_death_audio' if death else 'native_zero_body_saber_audio', status='failed_setup', input_path='published_host',
         source_sha256=source_digest(source), helper_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         checks={}, observations=[], inputs=[], events=observer.events, limits=[
-            'Ordinary Zero standing Square/neutral SFX only; no full R4/R12 or other action-family pass.',
-            'Private KEYOFF and final volume observed in living gameplay; no individual STOP caller trace is inferred.',
+            'Ordinary Zero saber plus requested contact-death route only; no full R4/R12 or other action-family pass.',
+            'Original SOUND/STOP arguments and return addresses traced; s0 is enforced by the compiled guard, not claimed as a trace field.',
+            'Inactive STOP may zero volume without KEYOFF. Such evidence never qualifies an active STOP7 lifetime.',
             'Other observed character vocals retain their own unresolved disposition; no PCM/music/cross-machine result.'])
     report['body_audio'] = case
 
@@ -242,6 +262,7 @@ def exercise(ctx, contract, *, source, timeout=90, death=False, **unused):
             require(attempt < 30, 'Native saber did not terminate and return to idle')
             advance(4, 'body-audio-neutral-drain')
         case['standing_saber_terminal']=audio.lifetime(observer.events,keys[0])
+        case['private_before_death']=audio.parse_private_voices(ctx['request']('spu_private_voices'))
         case['standing_saber_vocals']=[]
         driver=observer.driver();case['driver_after_saber']=driver
         for event in observer.events:
@@ -260,6 +281,8 @@ def exercise(ctx, contract, *, source, timeout=90, death=False, **unused):
             require(attempt < 30, 'Stopped saber DSP did not reach terminated envelope')
             advance(4, 'body-audio-DSP-drain');sample('body-audio-DSP-drain')
         checks, details = final_checks(observer.events, case['selected'], case['private_after'])
+        if death and case['private_before_death']['voices'][23]['active']==0:
+            checks.pop('private_native_stop_observed');case['active_phase2_stop7']='unverified: saber naturally ended before death'
         case['checks'].update(checks);case['terminal'] = details
         case['trace']=trace_page(ctx)
         case['checks']['original_zero_saber_sound_call']=any(int(r['target'],16)==0x80016C48 and
@@ -267,7 +290,9 @@ def exercise(ctx, contract, *, source, timeout=90, death=False, **unused):
             int(r['a2'],16)==0x800970A0 and 0x801EA000<=int(r['ra'],16)<0x801EA000+contact.ZERO_SIZE
             for r in case['trace']['entries'])
         if death:
-            case['checks'].update(phase2_checks(case['trace'],observer.events))
+            case['hardware_after']=audio.parse_voices(ctx['request']('spu_voices'),require_banks=True)
+            case['checks'].update(phase2_checks(case['trace'],observer.events,before_private=case['private_before_death'],
+                after_private=case['private_after'],before_hardware=case['hardware_before'],after_hardware=case['hardware_after']))
             actor=case['native_death']['fatal_observation']['instance']
             actor=actor or next(r['instance']for r in reversed(case['native_death']['observations'])if r['instance'])
             contacts=[r for r in case['trace']['entries']if int(r['target'],16)==contact.CONTACT]
