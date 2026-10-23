@@ -97,6 +97,10 @@ retry/re-entry and cold native-card continuation.
 
 ## Qualification procedure and remaining gaps
 
+Record runtime attempts in the separate [live coverage ledger](COOP_X6_COVERAGE.md)
+through its [evidence workflow](COOP_X6_COVERAGE_WORKFLOW.md). The source inventory
+remains immutable; rerunning extraction must not overwrite runtime history.
+
 Use native checkpoints and authored coordinates to position/protect players
 quickly. Traverse between checkpoints and exercise native triggers; do not set
 success, boss-clear, unlock or rescue flags for the check being claimed. Record
@@ -129,6 +133,34 @@ The native pointers do **not** resolve these remaining obligations:
 Current-build save/load, rewind and rollback must preserve any newly identified
 simulation state. Old snapshot migration is excluded. Native card progress is
 a separate persistence contract and must remain intact.
+
+### Native entry boundary
+
+Read-only inspection of the pinned original EXE identifies the ordinary entry
+chain. The main dispatcher `8001E6E4..8001E730` indexes `8007112C` by the byte
+at `PLAY=800CCED0`. Mode8 selects `8001E914`: it calls the original stage/section
+loader `80013DE8`, resets checkpoint `PLAY+1D` to0, then selects mode9. Mode9
+selects `8001E1BC`, which initializes the native pools, calls checkpoint selector
+`80029B8C` at `8001E244`, initializes camera/layers and changes mode to0A at
+`8001E304`. Merely writing mode0A skips that initialization.
+
+The checkpoint selector reads stage/section at `PLAY+0C/+0D` and checkpoint at
+`PLAY+1D`. It installs current/previous player positions, arrival byte, camera
+positions/bounds, two background-layer offsets and body byte `+CE`. Thus a
+coordinate teleport alone does not reproduce native checkpoint entry. Mode8
+also deliberately clears the checkpoint after loading: an arbitrary-checkpoint
+harness needs a safe boundary before the original mode9 initializer, with its
+prerequisite bypass retained. No such harness or stage/retry pass is established
+by this source mapping. Online unilateral memory/fixture writes remain rejected.
+
+Exact EXE span hashes (end addresses exclusive; file offset is
+`0x800 + guest_address - 0x80010000`):
+
+| Span | SHA256 |
+| --- | --- |
+| `8001E914..8001E9EC`, mode8 loader/reset | `ad4d2d9299a5e871110bde73120cb7410560e1d8e9797143bc3bb474be35b371` |
+| `8001E1BC..8001E32C`, mode9 initialization | `db8d0094d673f5a0f2c89beb097c54bee6f8449c539d9d176f00844af5160b9c` |
+| `80029B8C..80029D18`, complete checkpoint selector | `d7935b9037f6b1df0020983af5feb7accfa5ff87357d7e1089563d7a70d6b058` |
 
 ## Reproduction and tests
 

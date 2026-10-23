@@ -14,9 +14,12 @@ publication or tracker synchronization is authorized.
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
+| [Live native coverage](COOP_X6_COVERAGE.md) | 1,665 individual cases / 3,330 independent mode results, all unverified |
 
-The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`; the native
-inventory and X6-only obligations are `COOP_X6_CONTENT.json`. These are coverage
+The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The frozen
+native inventory and X6-only definitions are `COOP_X6_CONTENT.json`; live native
+attempts belong in `COOP_X6_COVERAGE.json` using its
+[append-only workflow](COOP_X6_COVERAGE_WORKFLOW.md). These are coverage
 records linked to the central Beads issue, not independent issue databases.
 The Markdown reference is generated from the comparison ledger. Preserve the
 frozen report, symptom, failure class and source hashes when changing an X6
@@ -75,7 +78,7 @@ candidate identities; observations do not transfer automatically to a rebuild.
 - X6 explicitly registers its declared build inputs, including the resolved
   generated-game tree, actual dependency pins and tracked edits. The integrated
   Clang developer lab build passes36/36 game CTests; the later production
-  default-OFF integration passes39/39, with original content/audio reproduction
+  default-OFF integration passes41/41, with original content/audio reproduction
   enabled. The manifest covers declared inputs, not an exhaustive
   external binary or driver closure. See [manifest limits](COOP_BUILD_MANIFEST_REGISTRATION.md).
 - The same frozen executable passes a fresh [current-build warm/cold snapshot
