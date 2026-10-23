@@ -93,3 +93,56 @@ stalled resolution, desync, resource leakage, publication wrap, stale/preexistin
 attack observations and forbidden online input adapters. They establish parser
 and reducer behavior only. Actual accepted input and composed artwork require
 fresh local and paired runtime evidence from the owning runner.
+
+## Standalone owned offline runner
+
+`tools/qualify_mmx6_coop_personal_menu.py` adapts this case through
+`qualify_mmx6_coop_baseline.run(..., exercise=...)`. This implementation has
+only CLI/input-adapter unit evidence; it has not launched a native case.
+
+Stage a new private candidate from a selected immutable build:
+
+```powershell
+python tools/qualify_mmx6_coop_personal_menu.py --build G:/path/to/frozen-build `
+  --source F:/path/to/game-source --disc G:/path/to/original-disc.cue `
+  --output G:/path/to/new-private-menu-case --expected-exe-sha256 <64-lowercase-hex>
+```
+
+Or use an already prepared, unused automated profile:
+
+```powershell
+python tools/qualify_mmx6_coop_personal_menu.py --candidate G:/path/to/fresh-prepared-profile `
+  --expected-exe-sha256 <64-lowercase-hex> --port 24896
+```
+
+The modes are mutually exclusive. Build staging requires source/disc/output;
+candidate mode forbids those staging arguments. The executable must match the
+explicit hash and preparation receipt. The runner rejects prior qualification
+files, a reused baseline directory, cards and populated private saves/temp/
+cache/data/appdata/resident directories. Shared preparation validates the
+private F:/G: profile paths, hidden/muted runtime environment and source
+observation artifacts. Preparation does not establish compilation provenance.
+There is no source-card option and no cache/save copy.
+
+The adapter first clears both native ports and waits for two healthy action2
+heroes with stable coordinates across advancing publications. It does not
+assume the baseline's preceding jump has finished. Each accepted hold uses
+`press(port=seat+1, buttons=0xFFFF^pressed_bits, frames=N)`, paces by coherent
+diagnostic publication progress, attempts port-specific neutral clear even
+on failure, then leaves a neutral publication interval. Gameplay-only advance
+uses the native world timer. Reads and composed capture RPCs also pass through
+the baseline's listener-PID check; the helper receives a read/capture-only
+client view. No online input route is provided by this offline adapter.
+
+Each candidate retains runner/helper source snapshots and hashes, shared-tool
+hashes, adapter publications/native windows, original input events, partial
+case errors, personal resources and completed composed captures. The original
+`baseline/qualification.json` remains untouched, with its original status and
+hash linked from the top-level `qualification.json`. A failed helper is
+converted to the baseline's handled error type so cleanup and the original
+failed report survive; it is never relabeled as a passed run. An automated
+success is recorded separately as
+`automated_checks_passed_artwork_review_pending`; exit0 only indicates those
+automated checks completed. Artwork remains pending and the ledger remains
+unverified. The owning reviewer must inspect the composed menu/gameplay
+captures before treating the receipt as qualification.
