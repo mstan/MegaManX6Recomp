@@ -3,8 +3,10 @@
 X6 has no equivalent of the frozen X4/X5 default playtest recorder in the
 audited source. Its diagnostic RAM, input acknowledgments, screenshots and
 core/mod CRC logs cannot reconstruct both accepted pad streams and their
-starting state. **R26 remains unverified.** This commit changes documentation
-only; it neither installs a recorder nor qualifies replay.
+starting state. **R26 remains unverified.** The follow-up adds an independent
+native-consumption file codec and pure validation tests; it neither installs a
+recorder nor qualifies replay. The [native boundary/format contract](COOP_INPUT_CONSUMPTION_CONTRACT.md)
+resolves the previously unmapped decoder and lists the remaining activation work.
 
 The accompanying [source manifest](COOP_INPUT_RECORDING_AUDIT.json) pins each
 inspected Git blob and SHA-256: X4 `50593bca772b600de6911cbfecd40b0f08721147`,
@@ -81,10 +83,10 @@ small read-only SDK observer seams**, with two related streams:
    X6's extra `p2_input` reads for P2, with ordered consumer identity. Add a
    title boundary/native-state check without projecting a new actor or calling
    guest code. This is the X6 analogue of X4/X5 `N` plus `C`, not a port of
-   their hook address. The exact X6 serial poll-latch callback and native
-   decoder boundary must be mapped/implemented before claiming complete
-   offline replay. No suitable public observer callback currently supplies
-   this complete event contract.
+   their hook address. The follow-up maps native decoder `80012A34` and a
+   read-only post-decode instruction boundary at `80012C44`. It does not install
+   them or map a complete public serial transaction observer. No suitable
+   public observer callback currently supplies this complete event contract.
 
 The shared apply function is concrete, but not sufficient alone: legacy
 `apply_input_override_to_sio`, port2 overrides and `env_pad_hold_apply` can

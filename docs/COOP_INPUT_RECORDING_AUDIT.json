@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "scope": "R26 source-only audit; no runtime/SDK/CMake/ledger changes, builds, game launches or native recorder/replay qualification",
+  "scope": "R26 source audit plus independent native-consumption codec/validation; no activation, runtime/SDK/CMake/ledger edits, builds, game launches or replay qualification",
   "x6_status": "unverified; no default persistent accepted-input recorder/replayer in audited X6 source",
   "sources": [
     {
@@ -234,6 +234,38 @@
       "git_blob": "467233bf3f850766334039e7d2a900cbde3ab0bd",
       "sha256": "efd91ebcc224e820edac5ff9f3530e2435500dba419faad52418f44489ea5b8f",
       "bytes": 4323
+    },
+    {
+      "repository": "x4",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "src/mods/mmx4_coop_plugin.c",
+      "git_blob": "a4c0417e3e021d243f8cbb7e109f96d87d6ebf38",
+      "sha256": "f61bb4f8758660ba21e04c86ec28b5c3f22738396ff128ebf10e65fae84b7e57",
+      "bytes": 89536
+    },
+    {
+      "repository": "x6",
+      "commit": "92ba3997de1f9cb30cc05648c84ee9e8afb5fa4a",
+      "path": "game.toml",
+      "git_blob": "7f957974ced5136b4576702bb9257ec47e7e83e1",
+      "sha256": "fe91905bdd9cccc5b2695ebb442a1937d7f01ccd412c990687da5c80ad7fd232",
+      "bytes": 12252
+    },
+    {
+      "repository": "x6",
+      "commit": "92ba3997de1f9cb30cc05648c84ee9e8afb5fa4a",
+      "path": "mods/preloaded/packages/mmx6.local-coop/0.0.1/manifest.toml",
+      "git_blob": "68e52f41db41323eb5b9d7a88bf8a514c1986471",
+      "sha256": "fc32952e9aba0973639e2ab69bde0f06fa64054f6591df9ca334f6e4326f548a",
+      "bytes": 911
+    },
+    {
+      "repository": "sdk",
+      "commit": "79246932166e46a82d7b61a229c60ff9c8e2931a",
+      "path": "runtime/include/memcard.h",
+      "git_blob": "1fe62fc50b0b76850160199ffe2db2ff79cc86d7",
+      "sha256": "df1a80cfc93a55315cc468db447ac2c3e5d201eaeb8d9a198904613ba940a3cd",
+      "bytes": 4131
     }
   ],
   "frozen_reference_design": {
@@ -376,8 +408,8 @@
     },
     {
       "id": "native-consumer-map",
-      "status": "unverified",
-      "requirement": "map original X6 serial poll latch/native decode boundary plus ordered p2_input reads; no X4/X5 address substitutions"
+      "status": "source-mapped; runtime-interception-uninstalled",
+      "requirement": "Install/regenerate native80012A34 observer plus all tagged p2_input consumers; qualify actual order, escaped-call cleanup and SIO provenance before replay claims"
     },
     {
       "id": "offline-replay",
@@ -396,5 +428,134 @@
       "requirement": "wrong image/settings/cards/baseline, malformed/missing/truncated/duplicate rows, fixture contamination, queue/disk/open/flush failures and interrupted close"
     }
   ],
-  "no_inherited_passes": true
+  "no_inherited_passes": true,
+  "native_x6_consumption": {
+    "source": {
+      "serial": "SLUS-01395",
+      "revision": "USA v1.1",
+      "exe_bytes": 522240,
+      "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+      "header_bytes": 2048,
+      "load_address": "0x80010000",
+      "load_bytes": "0x0007F000"
+    },
+    "spans": {
+      "native_pad_decode": {
+        "start": "0x80012A34",
+        "end_exclusive": "0x80012C54",
+        "bytes": 544,
+        "sha256": "8ca7b0e60a42934a40186be927ca9ec2683f2ace00b37edd0b2f9a293ef379fa"
+      },
+      "native_main_driver": {
+        "start": "0x800120A0",
+        "end_exclusive": "0x800122A4",
+        "bytes": 516,
+        "sha256": "f847ca30abc155999faf0af61901710f515e8c709ba0270eaf8f6af7ad34a64d"
+      },
+      "native_wait_loop_a": {
+        "start": "0x8001A7E0",
+        "end_exclusive": "0x8001A858",
+        "bytes": 120,
+        "sha256": "34d4a4270a4ffc95630fd540e227509004ac5e6c94fa9c923d6ba4bee6997eec"
+      },
+      "native_wait_loop_b": {
+        "start": "0x8001AAE0",
+        "end_exclusive": "0x8001AB58",
+        "bytes": 120,
+        "sha256": "dc75b73ad4d76556efa9548527053753fa7824f3f4c8136524f69b4a88bfd383"
+      },
+      "native_pad_configuration_tail": {
+        "start": "0x80013064",
+        "end_exclusive": "0x80013128",
+        "bytes": 196,
+        "sha256": "2d3a96e085d216a59745fef5af75f504f3a6a5fc600b1db8b9ccd9e976951af2"
+      },
+      "native_pad_buffer_setup": {
+        "start": "0x800126DC",
+        "end_exclusive": "0x800126F8",
+        "bytes": 28,
+        "sha256": "8764d56803c6e06f0f629c47567b3539cb4d228e0784b47507b9090e428625d4"
+      }
+    },
+    "direct_j_jal_exe_refs": [
+      {
+        "address": "0x80012218",
+        "instruction": "0x0C004A8D",
+        "return_pc": "0x80012220"
+      },
+      {
+        "address": "0x8001A82C",
+        "instruction": "0x0C004A8D",
+        "return_pc": "0x8001A834"
+      },
+      {
+        "address": "0x8001AB10",
+        "instruction": "0x0C004A8D",
+        "return_pc": "0x8001AB18"
+      }
+    ],
+    "absolute_32bit_pointer_refs_in_exe": [],
+    "reference_scan_scope": "Aligned loaded EXE words only; no claim that every overlay/indirect caller has been dynamically exercised. Unknown callers fail closed in codec schema1.",
+    "serial_buffers": [
+      "0x800CF920",
+      "0x800CF870"
+    ],
+    "decoded_current_previous_pressed": [
+      [
+        "0x800C456C",
+        "0x800C456E",
+        "0x800C4570"
+      ],
+      [
+        "0x800C4758",
+        "0x800C475A",
+        "0x800C475C"
+      ]
+    ],
+    "main_driver_counter": "0x80097420; incremented after native decoder at80012228..80012238; wait-loop calls can share its value",
+    "native_bit_order": "active-high, byte-swapped relative to standard PSX button masks",
+    "p2_bit_order": "active-high standard PSX button masks, before existing byte-swap",
+    "p2_consumer_tags": {
+      "stage": 1033,
+      "controller-scene": 1137,
+      "controller-inactive": 1141,
+      "controller-blocked": 1147,
+      "controller-player": 1161,
+      "interaction": 771
+    },
+    "x6_plugin_blob_still_current_at_observation": {
+      "observed_main_commit": "fd567309cd1f5b25db2848e5774119f045b8b3d8",
+      "blob": "dcf35129764cf75f8cceb653d9e59e79c4595154"
+    },
+    "sio_latch": "SDK792 sio.c1409..1432 copies current pad_buttons into the persistent 0x42 response;1663..1671 shifts it. sio_get_pad_buttons_slot1203 reads live current buttons, not that response.",
+    "recording_boundaries": "At native post-decode instruction80012C44 after both original decoded triples and pad-config tail: N; at each actual normal p2_input read with explicit consumer tag: C. Never call p2_input merely to sample an N row.",
+    "unproven_raw_source_copy": "Reading serial RAM headers at function entry is not a proven exact copy of the bytes later consumed across guest IRQ/event boundaries; codec does not label those proposed samples consumed.",
+    "runtime_status": "Source mapped, interception not installed or natively qualified. No complete serial transaction recorder/replayer exists in this lane.",
+    "preferred_observer": {
+      "address": "0x80012C44",
+      "expected_instruction": "0x8FBF0010",
+      "instruction": "lw ra,16(sp)",
+      "caller_source": "guest word at sp+16; live ra is0x80012C44 after inner configuration JAL",
+      "side_effects": "read-only instruction callback; no guest reentry, PC redirect or guest-time change; native epilogue follows",
+      "activation_status": "not installed; requires game.toml instruction site plus exact instruction registration under offline diagnostics and actual fixed-profile plugin ID"
+    }
+  },
+  "independent_codec": {
+    "module": "tools/mmx6_input_recording.py",
+    "tests": "tools/test_mmx6_input_recording.py",
+    "contract": "mmx6.native-consumption.v1",
+    "implemented": "Bounded canonical JSONL encode/strict streaming validation, envelope identity and exported settings/cards/baseline byte checks, complete/failure terminal marker and stream SHA256",
+    "not_implemented": [
+      "runtime activation",
+      "background event writer",
+      "default package/fixed-profile hooks",
+      "SIO publication/latch/connection provenance",
+      "network completion/resolution stream",
+      "native-state/full core-mod replay checkpoints",
+      "offline or paired replay"
+    ],
+    "terminal_meaning": "File writer finalized without a declared failure; not proof of authentic source, replay success, complete consumed serial transactions or resolved online ticks",
+    "compatibility": "Schema/build specific disposable artifacts; no backward migration requirement",
+    "native_observer_contract": "Post-decode boundary, not an invented host poll and not an assertion of completed/resolved network simulation"
+  }
 }
