@@ -1,0 +1,479 @@
+{
+  "schema": 1,
+  "kind": "reviewed_offline_recycle_cp2_setup_partial",
+  "candidate": {
+    "source_commit": "beeae107efca2fddab2c279a9d48d5e7e00817b1",
+    "exe_sha256": "a8f20cdcc4ac68cdc76bf8fa7f1b3a74b9db67788514468743a355284b2080b8",
+    "declared_manifest_sha256": "91a1d699ca4d404400d9448730a482fbd2da04445ae9d2702ffc0cab6bd2ad29",
+    "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+  },
+  "compilation_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v17-beeae10\\candidate.json",
+    "sha256": "27d42d624f1e0e4678db9c7fa1418afb9ff7727a57fab79510b16c9b71215789",
+    "bytes": 2895
+  },
+  "scope": "Original native CP2 and landing prerequisites only; no portal approach or R14 pass",
+  "attempts": [
+    {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-v17-beeae10-local-source-midpoint\\qualification.json",
+        "sha256": "6b7da8a342ce66ea2700383e11f155c922afeea71e3239ef59c9559d9799240d",
+        "bytes": 130307
+      },
+      "runner": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-v17-beeae10-local-source-midpoint\\runner-source.py",
+        "sha256": "68dba3f81209b95a40d018fb43e27927cbbb090eaf6635ad9e2b72c3c3e175cd",
+        "bytes": 36600
+      },
+      "pid": 80656,
+      "raw_status": "failed",
+      "error": "Offline portal trial stopped: CP2 original source/record/loader namespace not ready",
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0,
+      "private_cards_unchanged": true,
+      "checkpoint_completion": {
+        "generation": 1,
+        "state": 3,
+        "reason": 0,
+        "stage": 4,
+        "section": 0,
+        "checkpoint": 2,
+        "nonce": 905722752,
+        "initializer_entries": 1,
+        "record": "80072444",
+        "tainted": 1
+      },
+      "input_windows": 0,
+      "captures": 0,
+      "position_command_committed": false,
+      "finding": "Initializer completed once, but cached enrolled intro bodies atX144 were accepted while original CP2 fade1/entrylock1. No position command."
+    },
+    {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-v17-beeae10-local-source-midpoint-fresh-entry\\qualification.json",
+        "sha256": "a296149189da9a2d870561985dc640caa1a4729bd7208a465a1d3f49d7a0546c",
+        "bytes": 1130131
+      },
+      "runner": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-v17-beeae10-local-source-midpoint-fresh-entry\\runner-source.py",
+        "sha256": "3c6ce86114e18291248f04deb17e04239c15113890b2fb28d6e0eefbe0a3937e",
+        "bytes": 37510
+      },
+      "pid": 41764,
+      "raw_status": "failed",
+      "error": "Offline portal trial stopped: Private bank unavailable, tainted by input mailbox, or hero dying",
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0,
+      "private_cards_unchanged": true,
+      "checkpoint_completion": {
+        "generation": 1,
+        "state": 3,
+        "reason": 0,
+        "stage": 4,
+        "section": 0,
+        "checkpoint": 2,
+        "nonce": 1576848512,
+        "initializer_entries": 1,
+        "record": "80072444",
+        "tainted": 1
+      },
+      "input_windows": 0,
+      "captures": 0,
+      "position_command_committed": false,
+      "finding": "After originalXlanding, fresh private publication correctly entered JOINING3. Helper rejected normal original incoming beam. No position command."
+    },
+    {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-v17-beeae10-local-source-midpoint-native-beam\\qualification.json",
+        "sha256": "bda7cb2698ac16324b159d9d6e0627b541982d1f34f2ddd8c36a8335c22ff8ba",
+        "bytes": 2115399
+      },
+      "runner": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-v17-beeae10-local-source-midpoint-native-beam\\runner-source.py",
+        "sha256": "10de793428051f41bd2a0c2ee6ffafe46fdcfc722463ffae321bffc83426803c",
+        "bytes": 37775
+      },
+      "pid": 67136,
+      "raw_status": "failed",
+      "error": "Offline portal trial stopped: Unqualified nearby native actor: retain partial evidence, do not place/move",
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0,
+      "private_cards_unchanged": true,
+      "checkpoint_completion": {
+        "generation": 1,
+        "state": 3,
+        "reason": 0,
+        "stage": 4,
+        "section": 0,
+        "checkpoint": 2,
+        "nonce": 1842530240,
+        "initializer_entries": 1,
+        "record": "80072444",
+        "tainted": 1
+      },
+      "input_windows": 0,
+      "captures": 0,
+      "position_command_committed": true,
+      "finding": "Original joining completed. Source-derived seat2 position committed at1506/1593; both original landings and six native foot codes38h observed. Postlanding source-preflight stopped on unknown nearbyactor before any Right or capture.",
+      "position_bypass": {
+        "opcode": 4,
+        "payload": {
+          "0x52": 2,
+          "0x54": 0,
+          "0x55": 0,
+          "0x56": 226,
+          "0x57": 5,
+          "0x58": 0,
+          "0x59": 0,
+          "0x5a": 57,
+          "0x5b": 6
+        },
+        "prerequisite_bypass": true,
+        "ordinary_input_evidence_tainted": true,
+        "source_solver": {
+          "status": "conditional_source_setup_not_native_qualification",
+          "floor_y": 1616,
+          "body_center_envelope": [
+            1467,
+            1557
+          ],
+          "capsule_position": [
+            1424,
+            1604
+          ],
+          "portal_position": [
+            1552,
+            1584
+          ],
+          "source_miss_intervals": [
+            [
+              1489,
+              1523
+            ]
+          ],
+          "excluded_counts": {
+            "capsule": 22,
+            "portal": 34
+          },
+          "x_damage_box": [
+            -10,
+            -17,
+            19,
+            38
+          ],
+          "zero_damage_box": [
+            -8,
+            -17,
+            19,
+            39
+          ],
+          "conditional_both_seat_probe": {
+            "x": 1506,
+            "y": 1593,
+            "x_native_landing_y": 1595,
+            "zero_native_landing_y": 1594,
+            "command": 4,
+            "seat": 2,
+            "selection": "midpoint_of_widest_proven_source_miss_interval"
+          },
+          "automatic_actions": [],
+          "local_coop": "unverified",
+          "netplay": "unverified",
+          "remaining_conditions": [
+            "Exact current per-seat damage box provenance and native terrain boxes must match these inputs",
+            "Live layout, scratch pointers, full metatiles/descriptors and dynamic hazards/solids must pass preflight",
+            "Use a fresh scene-free offline setup; never clear an existing capsule dialogue/portal lock",
+            "Position both eligible living seats atomically, or before enrollment and then prove safe native joining",
+            "Only original landing, idle, lock release, enrollment, camera and actor initialization may qualify readiness",
+            "Original checkpoint-X mismatch and command4 are disclosed tainted prerequisite bypasses; no paired mailbox"
+          ]
+        }
+      },
+      "native_grounded_feet": [
+        {
+          "status": "source_samples_only_not_grounded_or_safe",
+          "body_sha256": "1d5e2b059181ad297dc92bf9cd8c7b22f0fdbae2db3e819101b6f6f6ae633f0d",
+          "body_box_pointer": 2147958096,
+          "shape_sha256": "a266f054d4ac9645d4de03ac113401d17160e25f855d61f75fa576b0e77a1118",
+          "probes": [
+            {
+              "x": 1495,
+              "y": 1616,
+              "layer": 0,
+              "screen_col": 5,
+              "screen_row": 6,
+              "authored_only": true,
+              "runtime_status": "unverified",
+              "cell": 75,
+              "tile": 1638,
+              "descriptor": 1638,
+              "raw_code": 56,
+              "code": 56,
+              "reason": "descriptor low byte"
+            },
+            {
+              "x": 1516,
+              "y": 1616,
+              "layer": 0,
+              "screen_col": 5,
+              "screen_row": 6,
+              "authored_only": true,
+              "runtime_status": "unverified",
+              "cell": 75,
+              "tile": 1618,
+              "descriptor": 1618,
+              "raw_code": 56,
+              "code": 56,
+              "reason": "descriptor low byte"
+            },
+            {
+              "x": 1506,
+              "y": 1616,
+              "layer": 0,
+              "screen_col": 5,
+              "screen_row": 6,
+              "authored_only": true,
+              "runtime_status": "unverified",
+              "cell": 75,
+              "tile": 1618,
+              "descriptor": 1618,
+              "raw_code": 56,
+              "code": 56,
+              "reason": "descriptor low byte"
+            }
+          ],
+          "limits": [
+            "Native resolution changes the body and scratch state; this pure lookup does not",
+            "Full-foot safety, hazards, actor solids and live map mutations are not established"
+          ]
+        },
+        {
+          "status": "source_samples_only_not_grounded_or_safe",
+          "body_sha256": "fd891b1ff65b62298474b803b22dd15ebbbd365fbc1fdd7221801154ec6dd0d7",
+          "body_box_pointer": 2147958100,
+          "shape_sha256": "a402fa2ef856506f9321bfc9de0694418acca6d2e1fbcaa5ba8a352696e2a207",
+          "probes": [
+            {
+              "x": 1495,
+              "y": 1616,
+              "layer": 0,
+              "screen_col": 5,
+              "screen_row": 6,
+              "authored_only": true,
+              "runtime_status": "unverified",
+              "cell": 75,
+              "tile": 1638,
+              "descriptor": 1638,
+              "raw_code": 56,
+              "code": 56,
+              "reason": "descriptor low byte"
+            },
+            {
+              "x": 1516,
+              "y": 1616,
+              "layer": 0,
+              "screen_col": 5,
+              "screen_row": 6,
+              "authored_only": true,
+              "runtime_status": "unverified",
+              "cell": 75,
+              "tile": 1618,
+              "descriptor": 1618,
+              "raw_code": 56,
+              "code": 56,
+              "reason": "descriptor low byte"
+            },
+            {
+              "x": 1506,
+              "y": 1616,
+              "layer": 0,
+              "screen_col": 5,
+              "screen_row": 6,
+              "authored_only": true,
+              "runtime_status": "unverified",
+              "cell": 75,
+              "tile": 1618,
+              "descriptor": 1618,
+              "raw_code": 56,
+              "code": 56,
+              "reason": "descriptor low byte"
+            }
+          ],
+          "limits": [
+            "Native resolution changes the body and scratch state; this pure lookup does not",
+            "Full-foot safety, hazards, actor solids and live map mutations are not established"
+          ]
+        }
+      ],
+      "native_context": {
+        "mode": 10,
+        "phase": 0,
+        "stage": 4,
+        "section": 0,
+        "checkpoint": 2,
+        "fade": 0,
+        "freeze": 0,
+        "shared_entry_lock": 0
+      },
+      "nearby_actors": [
+        {
+          "category": 0,
+          "address": 2148069660,
+          "type": 28,
+          "subtype": 1,
+          "origin": 2148477708,
+          "parent": 0,
+          "x": 1552,
+          "y": 1584,
+          "known_source_actor": true
+        },
+        {
+          "category": 4,
+          "address": 2148274720,
+          "type": 26,
+          "subtype": 4,
+          "origin": 2148478500,
+          "parent": 0,
+          "x": 1424,
+          "y": 1604,
+          "known_source_actor": true
+        },
+        {
+          "category": 4,
+          "address": 2148274884,
+          "type": 4,
+          "subtype": 59,
+          "origin": 2148477820,
+          "parent": 0,
+          "x": 1360,
+          "y": 1600,
+          "known_source_actor": false
+        },
+        {
+          "category": 4,
+          "address": 2148275048,
+          "type": 26,
+          "subtype": 16,
+          "origin": 0,
+          "parent": 2148274720,
+          "x": 1424,
+          "y": 1526,
+          "known_source_actor": true
+        }
+      ],
+      "actual_landed_box_plan": {
+        "status": "conditional_source_setup_not_native_qualification",
+        "floor_y": 1616,
+        "body_center_envelope": [
+          1467,
+          1557
+        ],
+        "capsule_position": [
+          1424,
+          1604
+        ],
+        "portal_position": [
+          1552,
+          1584
+        ],
+        "source_miss_intervals": [
+          [
+            1489,
+            1523
+          ]
+        ],
+        "excluded_counts": {
+          "capsule": 22,
+          "portal": 34
+        },
+        "x_damage_box": [
+          -10,
+          -17,
+          19,
+          38
+        ],
+        "zero_damage_box": [
+          -8,
+          -17,
+          19,
+          39
+        ],
+        "conditional_both_seat_probe": {
+          "x": 1506,
+          "y": 1593,
+          "x_native_landing_y": 1595,
+          "zero_native_landing_y": 1594,
+          "command": 4,
+          "seat": 2,
+          "selection": "midpoint_of_widest_proven_source_miss_interval"
+        },
+        "automatic_actions": [],
+        "local_coop": "unverified",
+        "netplay": "unverified",
+        "remaining_conditions": [
+          "Exact current per-seat damage box provenance and native terrain boxes must match these inputs",
+          "Live layout, scratch pointers, full metatiles/descriptors and dynamic hazards/solids must pass preflight",
+          "Use a fresh scene-free offline setup; never clear an existing capsule dialogue/portal lock",
+          "Position both eligible living seats atomically, or before enrollment and then prove safe native joining",
+          "Only original landing, idle, lock release, enrollment, camera and actor initialization may qualify readiness",
+          "Original checkpoint-X mismatch and command4 are disclosed tainted prerequisite bypasses; no paired mailbox"
+        ]
+      },
+      "published_players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 98697216,
+          "y_raw": 104529920,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 98697216,
+          "y_raw": 104464384,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "published_lifecycle": [
+        0,
+        0
+      ],
+      "known_content_mapping": "Frozen contentinventory identifies unknown category4/type4/subtype59/origin800F2B7C at1360/1600 as Reploid059. Its safe recognition/contact closure is still being audited; no blanket whitelist."
+    }
+  ],
+  "limits": [
+    "Same-machine offline only, fixedX/P1+Zero/P2 on exactv17 image; netplay/campaign/actualportalcontact and destination unverified.",
+    "Checkpoint command8 and seat2 position command4 are disclosed tainted prerequisites. No success/HP/ground/action/lock/clock or destination writes.",
+    "Separate native/X6BX RPCs retain separate attribution; no exact-tick P2 contact claim. No gameplay artwork capture was reached in these cases.",
+    "Original user cards were not supplied or modified; owned private-card hashes remain unchanged."
+  ]
+}

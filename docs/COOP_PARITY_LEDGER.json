@@ -1599,9 +1599,48 @@
             "bypasses": [
               "Private offline command8 stage4/sec0/CP2 and command4 resident-only source-floor placement."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "beeae107efca2fddab2c279a9d48d5e7e00817b1",
+            "build_identity": {
+              "exe_sha256": "a8f20cdcc4ac68cdc76bf8fa7f1b3a74b9db67788514468743a355284b2080b8",
+              "declared_manifest_sha256": "91a1d699ca4d404400d9448730a482fbd2da04445ae9d2702ffc0cab6bd2ad29",
+              "compiled_source_commit": "beeae107efca2fddab2c279a9d48d5e7e00817b1",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "loader": "defaultSeamlessLoading",
+              "input": "ownedofflineNativePads",
+              "rollback": false
+            },
+            "action": "Original CP2 initializer and incoming beam, then source-derived atomic two-seat position prerequisite and original terrain landing; stop before approach on unknown nearbyactor.",
+            "outcome": "Both original actors land atX1506 with nativeY1595/1594 and all six source feet38h. R14 remains unverified: no portal Right/contact/fade/destination observations reached.",
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-recycle-portal\\manifest-bound-beeae10-cp2-setup-reviewed.json",
+                "sha256": "5e9b3cf99c90b30e9cb3a8036607d9de10a38c72375d79ec33b340df7c0b09ad"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v17-beeae10\\candidate.json",
+                "sha256": "27d42d624f1e0e4678db9c7fa1418afb9ff7727a57fab79510b16c9b71215789"
+              }
+            ],
+            "limits": [
+              "Same-machine offline only, fixedX/P1+Zero/P2 on exactv17 image; netplay/campaign/actualportalcontact and destination unverified.",
+              "Checkpoint command8 and seat2 position command4 are disclosed tainted prerequisites. No success/HP/ground/action/lock/clock or destination writes.",
+              "Separate native/X6BX RPCs retain separate attribution; no exact-tick P2 contact claim. No gameplay artwork capture was reached in these cases.",
+              "Original user cards were not supplied or modified; owned private-card hashes remain unchanged."
+            ],
+            "bypasses": [
+              "Existing offline diagnosticcommand8 CP2 initialization once; source-nonce/record/taint receipt retained.",
+              "Existing offline diagnosticcommand4 seat2 positions+previouspositions only at1506/1593; authored checkpoint X480 was bypassed."
+            ]
           }
         ],
-        "limitations": "Source-pinned portal admission variants are corrected; fresh native qualification remains pending. CP3 neutral setup cannot land; CP2 source-floor probe verifies actual native X landing but triggers DrLight while P2 remains at checkpoint and falls. Both-mode portal contact/transition/arrival/return remain unverified."
+        "limitations": "Actual v17 CP2 source/terrain/landing prerequisites observed with explicit checkpoint+position bypasses. Unknown nearbyReploid059 caused pre-approach stop; portal ownership/contact, transition/destination, original route and netplay remain unverified."
       }
     },
     {
