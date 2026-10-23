@@ -74,6 +74,16 @@ public:
         e=slots[t%Capacity];tail.store(t+1,std::memory_order_release);return true;
     }
 };
+enum class Take { Empty,Ready,Terminal };
+template<size_t Capacity,class Terminal>
+Take take_before_terminal(Queue<Capacity>& queue,Event& event,Terminal terminal){
+    if(queue.pop(event))return Take::Ready;
+    if(!terminal())return Take::Empty;
+    /* Terminal is published only after producers disarm/drain. A producer may
+     * have accepted its last event between the first pop and this observation.
+     * Re-read after that acquire before declaring the accepted prefix drained. */
+    return queue.pop(event)?Take::Ready:Take::Terminal;
+}
 struct Sink { virtual bool write(const std::string&)=0;virtual ~Sink()=default; };
 /* Same strict event/terminal contract as tools/mmx6_input_recording.py. A sink
  * or validation error poisons this encoder; it can never finalize success. */

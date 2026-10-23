@@ -107,9 +107,11 @@ class Capture {
                 artifact(directory/("card"+std::to_string(slot+1)+".initial.mcd"),startup.cards[slot].data(),startup.cards[slot].size());
             FileSink file(directory/"inputs.jsonl");Encoder encoder(file,startup.identity);
             for(;;){Event event;
-                if(queue.pop(event)){encoder.append(event);continue;}
-                if(closing.load(std::memory_order_acquire))break;
-                if(failure.load(std::memory_order_acquire)&&!in_flight.load(std::memory_order_acquire))break;
+                const Take take=take_before_terminal(queue,event,[this]{
+                    return closing.load(std::memory_order_acquire)||
+                        (failure.load(std::memory_order_acquire)&&!in_flight.load(std::memory_order_acquire));});
+                if(take==Take::Ready){encoder.append(event);continue;}
+                if(take==Take::Terminal)break;
                 std::unique_lock<std::mutex> lock(wait_mutex);
                 wake.wait_for(lock,std::chrono::milliseconds(50));
             }
@@ -180,8 +182,8 @@ public:
         Event e;e.kind=1;e.native=natives-1;e.consumer=static_cast<uint8_t>(consumer);e.buttons=buttons;publish(e);
     }
 };
-/* The object stays allocated until process destruction. Router start/end are
- * serialized; the raw pointer publication is never borrowed by the worker. */
+/* Router start/end are serialized. End disarms the raw pointer, waits for all
+ * outer Callback guards, drains the worker and only then resets the object. */
 std::unique_ptr<Capture> current;
 std::atomic<Capture*> active{nullptr};
 std::atomic<unsigned> callbacks{0};

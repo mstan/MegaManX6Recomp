@@ -50,6 +50,16 @@ static void codec_negatives(){
     Queue<2> queue;Event a;a.order=7;assert(queue.push(a));a.order=8;assert(queue.push(a));
     a.order=9;assert(!queue.push(a));Event out;assert(queue.pop(out)&&out.order==7);
     assert(queue.push(a));assert(queue.pop(out)&&out.order==8);assert(queue.pop(out)&&out.order==9);assert(!queue.pop(out));
+    /* Deterministically publish the last accepted event after the first empty
+     * pop but before normal/failure terminal observation. The exact production
+     * drain helper must re-read, retain that event and only then finish. */
+    for(bool failure_terminal:{false,true}){
+        Queue<2> tail;Event last;last.order=failure_terminal?22:21;
+        unsigned observed=0;
+        const Take first=take_before_terminal(tail,out,[&]{++observed;assert(tail.push(last));return true;});
+        assert(first==Take::Ready&&out.order==last.order&&observed==1);
+        assert(take_before_terminal(tail,out,[]{return true;})==Take::Terminal);
+    }
     auto id=identity();MemorySink sink;Encoder encoder(sink,id);Event n;n.caller=0x80012220;n.cycles=10;
     encoder.append(n);auto c=n;c.kind=1;c.native=0;c.order=1;c.consumer=4;c.buttons=8;encoder.append(c);encoder.finish("");
     rejects([&]{encoder.append(c);});rejects([&]{encoder.finish("");});
