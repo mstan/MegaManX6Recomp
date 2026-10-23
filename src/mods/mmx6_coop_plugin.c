@@ -739,6 +739,7 @@ static void script_begin(CPUState *cpu, uint32_t address) {
     (void)cpu;
     if (!scene_call && !failed) scene_begin(zero_projected?1:0,address);
 }
+#include "mmx6_coop_recycle_portal.inc"
 static int door_begin(CPUState *cpu, uint32_t address) {
     if (scene_call || inside || !enrolled || failed || scene_owner) return 0;
     uint32_t actor=cpu->gpr[4];
@@ -1837,6 +1838,7 @@ static void activate(void) {
     if (!psx_mod_set_function_replacement(0x80031474,enemy_hit)) failed=1;
     if (!psx_mod_set_function_replacement(0x800E9898,unit_choices)) failed=1;
     if (!psx_mod_set_function_replacement(0x800EB14C,intro_near_target)) failed=1;
+    if (!psx_mod_set_function_replacement(0x800EC780,recycle_portal_contact)) failed=1;
     if (!psx_mod_set_function_replacement(0x80029598,camera_target) ||
         !psx_mod_set_function_replacement(0x80029658,camera_target)) failed=1;
     if (!psx_mod_set_function_replacement(0x80034DCC,player_tick) ||
