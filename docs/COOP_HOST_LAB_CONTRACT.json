@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; strict original-init retired Quit callback recovery and private Zero ground-jump audio require fresh exact-image native qualification",
+  "status": "development-candidate-only; general private Zero character audio and schema3 require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
   "revision": 2,
   "default_enabled": false,
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v17",
+    "title_compatibility": "mmx6-x-zero-delay-v18",
     "slots": 2,
     "players": 2,
     "occupied_mask": 3,
@@ -152,5 +152,18 @@
     "scope": "Body-owned Zero group1 records1..8 use private22/23 and exact actor/caller/phase-bound STOP5/7; other families remain incomplete.",
     "source_receipt": "docs/COOP_BODY_AUDIO_ROUTES.json",
     "fresh_native_qualification": "required; prior v18 image evidence does not transfer"
+  },
+  "title_changes_v18": {
+    "scope": "45 populated group1/3 records and 47 voice entries resolved with effective-bank aliases, program ranks and tone rollover; route only source-owned projected ordinary Zero body calls",
+    "sdk_source": "09e8673435c73e516b420e6c13bb11f02dc8aaea",
+    "private_voice_owner": "0x4D4D583650320001",
+    "private_voice_mask": "0x00F00B09",
+    "snapshot_schema": 3,
+    "private_priority_bytes": 24,
+    "native_selection": "Original RNG, raw group flags, priority/status and legitimate zero/partial KEYON decisions; full native driver restored before private DSP",
+    "stop_scope": "Nine exact s0/phase/caller-bound group1/5 and1/7 stops, plus original global FF once; no P1-derived character-stop mirror",
+    "documentation": "docs/COOP_PRIVATE_CHARACTER_AUDIO.md",
+    "fresh_native_qualification": "required; older v16/v17 image receipts do not transfer",
+    "limits": "Other rosters and unproved child actor calls, current-image sample identity/lifetimes, active STOP7, state/rewind, full local/paired campaign and physical/cross-machine profiles remain unqualified"
   }
 }

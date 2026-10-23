@@ -1,5 +1,5 @@
 /* Executable-owned host state, included after the native implementation.
- * Schema 2 is build-specific. No old-state migration or host pointer wire. */
+ * Schema 3 is build-specific. No old-state migration or host pointer wire. */
 enum { STATE_COUNT,STATE_WRITE,STATE_READ,STATE_HASH,STATE_MAX_BYTES=16*1024*1024 };
 typedef struct {
     unsigned mode,ok;
@@ -61,6 +61,7 @@ static int snapshot_ready(void) {
         jump_audio_slot,jump_audio_bank,jump_audio_tone,jump_audio_mode,jump_audio_calculated,jump_audio_stop_mask};
     for(unsigned i=0;i<sizeof guards/sizeof guards[0];++i)if(guards[i])return 0;
     for(unsigned i=0;i<8;++i)if(jump_audio_registers[i])return 0;
+    if(!jump_audio_extra_idle())return 0;
     return ready && !failed && jump_audio_ready() && snapshot_asset_valid && zero_compressed && compressed_size && zero_ui_pixels &&
         assets && assembly && palette_source && active_palette && packets && diagnostic && menu_memory &&
         menu_assembly && hud_packets && psx_mod_texture_banks_supported() && !psx_mod_local_view_scope();
@@ -76,6 +77,7 @@ typedef struct {
     PickupOwner pickups[128];
     SolidContact contacts[80];
     DeathEffectOrigin deaths[96];
+    uint8_t audio_priorities[24];
 } HostState;
 static void state_capture(HostState *s) {
     memset(s,0,sizeof *s);s->player=p2;s->lifecycle=life;
@@ -88,6 +90,7 @@ static void state_capture(HostState *s) {
     memcpy(s->pickups,pickup_owners,sizeof pickup_owners);
     memcpy(s->contacts,zero_solid_contacts,sizeof zero_solid_contacts);
     memcpy(s->deaths,death_effect,sizeof death_effect);
+    memcpy(s->audio_priorities,jump_audio_priorities,sizeof jump_audio_priorities);
 }
 static int state_actor(uint32_t address) {
     return !address || (address>=0x80010000u && address<=0x801FFF00u && !(address&3));
@@ -112,6 +115,7 @@ static void state_core(StateIO *io,HostState *s) {
     uint32_t menu=state_integer(io,(uint32_t)(s->pause+1),1,2);s->pause=(int)menu-1;
     FIELD(start,1,1);FIELD(menu_loaded,1,1);state_bytes(io,s->portrait,sizeof s->portrait);
     FIELD(enrolled,1,1);FIELD(failed,1,io->mode==STATE_HASH?1:0);
+    state_bytes(io,s->audio_priorities,sizeof s->audio_priorities);
     for(unsigned i=0;i<128;++i) {
         uint32_t actor=state_integer(io,s->pickups[i].actor,4,UINT32_MAX);
         uint32_t seat=state_integer(io,s->pickups[i].actor?s->pickups[i].seat:0,1,1);
@@ -151,6 +155,7 @@ static void state_commit(const HostState *s) {
     frame_count=s->frame_count;p2_hud_fade=s->hud_fade;world_packets=s->world_packets;hud_seat=s->hud_seat;
     memcpy(pickup_owners,s->pickups,sizeof pickup_owners);memcpy(zero_solid_contacts,s->contacts,sizeof zero_solid_contacts);
     memcpy(death_effect,s->deaths,sizeof death_effect);
+    memcpy(jump_audio_priorities,s->audio_priorities,sizeof jump_audio_priorities);
     /* These backups are meaningful only under rejected live projections. */
     memset(&p1,0,sizeof p1);memset(saved_overlay,0,sizeof saved_overlay);memset(saved_play,0,sizeof saved_play);
     memset(saved_camera,0,sizeof saved_camera);memset(saved_resources,0,sizeof saved_resources);saved_palette_dirty=0;
@@ -167,7 +172,8 @@ static uint32_t state_digest(void) {
         effect_call,pickup_call,solid_call,solid_allocate_call,scene_call,zero_projected,unit_choices_call,intro_target_call,
         state_track.count,state_track.error,(unsigned)ready,checkpoint_pending.phase,
         checkpoint_pending.index,checkpoint_pending.nonce,jump_audio_call,jump_audio_keyon_call,jump_audio_stop_call,
-        jump_audio_slot,jump_audio_bank,jump_audio_tone,jump_audio_mode,jump_audio_calculated,jump_audio_faulted,jump_audio_stop_mask};
+        jump_audio_slot,jump_audio_bank,jump_audio_tone,jump_audio_mode,jump_audio_calculated,jump_audio_faulted,jump_audio_stop_mask,
+        (unsigned)!jump_audio_extra_idle()};
     for(unsigned i=0;i<sizeof guards/sizeof guards[0];++i)state_integer(&io,guards[i],4,UINT32_MAX);
     for(unsigned i=0;i<8;++i)state_integer(&io,jump_audio_registers[i],2,65535);
     if(zero_world)state_integer(&io,world_packets,4,UINT32_MAX);
@@ -203,7 +209,7 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    state_fixed(s,0x53503658u);state_fixed(s,2);
+    state_fixed(s,0x53503658u);state_fixed(s,3);
     const uint32_t handles[]={assets,assembly,palette_source,active_palette,packets,diagnostic,menu_memory,menu_assembly,hud_packets,
         jump_audio_banks[0].guest,jump_audio_banks[1].guest};
     for(unsigned i=0;i<sizeof handles/sizeof handles[0];++i)state_fixed(s,handles[i]);

@@ -1,5 +1,12 @@
 # X6 host-state codec and modern candidate registration
 
+The current v18 candidate uses internal wire schema3, adding the 24 persistent
+private character-audio priorities to both canonical state and save/load.
+Private-SPU owner tags are serialized separately by the SDK. Pending audio
+calculations/outputs and missing voice reservations reject snapshot readiness.
+See [the current audio candidate](COOP_PRIVATE_CHARACTER_AUDIO.md) for scope and
+remaining native qualification. The earlier lane and receipts follow below.
+
 This lane starts at game `fb95f99`. It targets the frozen modern
 `6f0ccbc6b67fee626de6a7b0945ca3abb26332aa` snapshot/digest interfaces plus the
 separately owned loader bridge. It does not establish that SDK's scheduler or

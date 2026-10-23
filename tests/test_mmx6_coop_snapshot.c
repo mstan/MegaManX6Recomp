@@ -18,6 +18,10 @@ static int abandon_guest;
 static uint32_t audio_epoch=1;
 static int foreign_audio23;
 uint32_t psx_mod_spu_sample_bank_epoch(void){return audio_epoch;}
+uint64_t psx_mod_spu_private_voice_owner(unsigned slot){
+    CHECK(slot<24);
+    return (JUMP_STOP_MASK&(1u<<slot))?JUMP_AUDIO_OWNER+(slot==23 && foreign_audio23):0;
+}
 int spu_get_private_voice_state(unsigned slot,SpuVoiceState *out){
     CHECK((slot==20 || slot==22 || slot==23) && out);memset(out,0,sizeof *out);
     if(slot==23 && foreign_audio23){out->active=1;out->sample_bank=29;}
@@ -74,6 +78,7 @@ static void setup(void){
     pickup_owners[0]=(PickupOwner){0x800C5000,1};zero_solid_contacts[3]=(SolidContact){3,255};
     death_effect[2]=(DeathEffectOrigin){123,456,0x80030000,2,1};
     jump_audio_loaded=1;jump_audio_bound_epoch=jump_audio_owned_epoch=audio_epoch;
+    for(unsigned s=0;s<24;++s)jump_audio_priorities[s]=(uint8_t)(s*9u);
     for(unsigned i=0;i<2;++i) {
         JumpAudioBank *b=&jump_audio_banks[i];
         b->guest=0x9F1B0000+i*8192;b->layout.bytes=32;b->layout.sample_bytes=128;
@@ -132,6 +137,7 @@ static void digest_and_readiness(void){
     PERTURB(saved_portrait_colors[7]);PERTURB(pickup_owners[0].seat);PERTURB(zero_solid_contacts[3].carried);
     PERTURB(death_effect[2].x);
     PERTURB(jump_audio_banks[0].guest);PERTURB(jump_audio_registers[4]);
+    PERTURB(jump_audio_priorities[0]);PERTURB(jump_audio_priorities[20]);PERTURB(jump_audio_priorities[23]);
 #undef PERTURB
     life.status[1]=MMX6_COOP_ABSENT;h=state_digest();life.rejoin_pending=1;CHECK(state_digest()!=h);life.rejoin_pending=0;life.status[1]=MMX6_COOP_ALIVE;
     zero_projected=1;h=state_digest();saved_play[3]^=1;CHECK(state_digest()!=h);saved_play[3]^=1;zero_projected=0;
@@ -148,6 +154,8 @@ static void digest_and_readiness(void){
     }
     h=state_digest();jump_audio_stop_mask=1;CHECK(!snapshot_ready() && state_digest()!=h);jump_audio_stop_mask=0;
     jump_audio_registers[4]=1;CHECK(!snapshot_ready() && state_digest()!=h);jump_audio_registers[4]=0;
+    jump_audio_meta.voice_count=1;CHECK(!snapshot_ready() && state_digest()!=h);jump_audio_meta.voice_count=0;
+    jump_audio_voices[3].bank=31;CHECK(!snapshot_ready() && state_digest()!=h);jump_audio_voices[3].bank=0;
     h=state_digest();++audio_epoch;CHECK(!snapshot_ready() && state_digest()==h);--audio_epoch;
     h=state_digest();foreign_audio23=1;CHECK(!snapshot_ready() && !snapshot_bytes() && state_digest()==h);
     foreign_audio23=0;CHECK(snapshot_ready() && state_digest()==h);
@@ -184,6 +192,7 @@ static void roundtrip_and_malformed(void){
     CHECK(!snapshot_write(wire,len-1));CHECK(!snapshot_write(wire,len+1));
     reject_unchanged(wire,0);reject_unchanged(wire,1);reject_unchanged(wire,len-1);
     memcpy(bad,wire,len);bad[len]=0;reject_unchanged(bad,len+1);
+    memcpy(bad,wire,len);put32(bad+4,2);reject_unchanged(bad,len); /* Disposable older wire schema. */
     memcpy(bad,wire,len);bad[8]^=1;reject_unchanged(bad,len); /* Fixed guest allocation identity. */
     memcpy(bad,wire,len);bad[8+9*4]^=1;reject_unchanged(bad,len); /* Retained audio header allocation. */
     StateIO resources={STATE_COUNT,1,NULL,NULL,0,0,0};snapshot_resources(&resources);
@@ -200,8 +209,10 @@ static void roundtrip_and_malformed(void){
     }
     uint32_t original=state_digest(),saved_hash[8192];memcpy(saved_hash,texture_hash,sizeof saved_hash);
     CHECK(snapshot_validate(wire,len));p2.body[0x5C]=1;previous_input^=0x101;zero_solid_contacts[3].carried=0;
+    memset(jump_audio_priorities,0,sizeof jump_audio_priorities);
     int allocations=allocation_calls;allocation_fail=1;snapshot_read(wire,len);allocation_fail=0;
     CHECK(allocation_calls==allocations && state_digest()==original && p2.body[0x5C]==23);
+    for(unsigned s=0;s<24;++s)CHECK(jump_audio_priorities[s]==(uint8_t)(s*9u));
     /* Cold cache: retain immutable disc/build resources, destroy every current
      * pixel bank and metadata, then validate saved length independently of live. */
     for(unsigned i=0;i<4096;++i){free(banks[i].pixels);memset(&banks[i],0,sizeof banks[i]);}

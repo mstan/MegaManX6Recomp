@@ -49,22 +49,18 @@ Mmx6JumpAudioReason mmx6_jump_audio_prepare_header(const uint8_t *source,size_t 
     }
     for(unsigned at=8;at<offset;at+=4) {
         if(!h32(source+at))continue;
-        unsigned id=source[at]&63u;
-        if(id!=1 && id!=3)return MMX6_JUMP_AUDIO_RECORD;
-    }
-    const unsigned record_list[3]={2,4,7};
-    for(unsigned n=0;n<(group==1?8u:3u);++n) {
-        unsigned record=group==1?n+1u:record_list[n];
-        unsigned tone=group==1 && record>=2?record+1u:record;
-        unsigned voice=group==1?(record>=7?23u:22u):20u;
-        if(record>=(offset-8u)/4u)return MMX6_JUMP_AUDIO_RECORD;
-        const uint8_t *r=source+8u+record*4u;
-        if(r[0]!=(uint8_t)(0x80u|group) || r[1] || r[2]!=(uint8_t)(tone<<4) ||
-            r[3]!=voice)return MMX6_JUMP_AUDIO_RECORD;
-        if(!source[offset+32] || tone>=source[offset+32])return MMX6_JUMP_AUDIO_RECORD;
-        const uint8_t *t=source+offset+32u+2048u+rank[0]*512u+tone*32u;
-        if(!h16(t+22) || !source[offset+33] || !t[2] || t[4]>127 || t[5]>127 ||
-            t[6]>127 || t[6]!=t[7])return MMX6_JUMP_AUDIO_RECORD;
+        const uint8_t *r=source+at;
+        unsigned id=r[0]&63u,voice=r[3]&31u,count=1u+((r[3]>>5)&3u);
+        if((id!=1 && id!=3) || (r[0]&0xC0u)!=0x80u || (r[3]&0x80u) ||
+           voice>=24 || count>24u-voice)return MMX6_JUMP_AUDIO_RECORD;
+        /* Cross-bank references are checked after both headers are ready. */
+        if(id!=group)continue;
+        for(unsigned n=0;n<count;++n) {
+            unsigned program=(r[1]&127u)+((r[2]>>4)+n)/16u,tone=((r[2]>>4)+n)%16u;
+            if(program>=128 || tone>=source[offset+32u+program*16u])return MMX6_JUMP_AUDIO_RECORD;
+            const uint8_t *t=source+offset+32u+2048u+rank[program]*512u+tone*32u;
+            if(!h16(t+22) || t[4]>127 || t[5]>127 || t[6]>127)return MMX6_JUMP_AUDIO_RECORD;
+        }
     }
     memset(&result,0,sizeof result);
     result.group=group;result.id=group==1?MMX6_JUMP_AUDIO_SFX_ID:MMX6_JUMP_AUDIO_VOICE_ID;
@@ -87,4 +83,67 @@ Mmx6JumpAudioReason mmx6_jump_audio_prepare_header(const uint8_t *source,size_t 
             ((source[at]&63u)==1?MMX6_JUMP_AUDIO_SFX_ID:MMX6_JUMP_AUDIO_VOICE_ID));
     *out=result;
     return MMX6_JUMP_AUDIO_OK;
+}
+
+static int private_bank_valid(const Mmx6PrivateAudioBank *b,unsigned index) {
+    if(!b || !b->parsed || !b->layout)return 0;
+    const Mmx6JumpAudioHeader *h=b->layout;
+    if(h->group!=(index?3u:1u) || h->id!=(index?15u:14u) || h->bank!=(index?31u:30u) ||
+       h->bytes>8192 || h->vab<8 || (h->vab&3u) || h->vab>h->bytes || h->bytes-h->vab<32 ||
+       h->programs!=h->vab+32u || h->programs>h->bytes || h->bytes-h->programs<2048 ||
+       h->tones!=h->programs+2048u || h->records!=(h->vab-8u)/4u ||
+       !h->sample_bytes || h->sample_bytes>=0x80000u || (h->sample_bytes&15u) ||
+       h32(b->parsed+4)!=h->sample_bytes)return 0;
+    unsigned count=h16(b->parsed+h->vab+18u);
+    return count && count<=128 && h->tones+count*512u+512u==h->bytes &&
+        h->samples==h16(b->parsed+h->vab+22u) && h->samples && h->samples<=255;
+}
+Mmx6JumpAudioReason mmx6_private_audio_record(const Mmx6PrivateAudioBank banks[2],
+    unsigned group,unsigned record,Mmx6PrivateAudioRecord *out) {
+    if(!banks || !out || (group!=1 && group!=3) ||
+       !private_bank_valid(&banks[0],0) || !private_bank_valid(&banks[1],1))return MMX6_JUMP_AUDIO_ARGUMENT;
+    const Mmx6PrivateAudioBank *table=&banks[group==3];
+    if(record>=table->layout->records)return MMX6_JUMP_AUDIO_RECORD;
+    const uint8_t *r=table->parsed+8u+record*4u;unsigned id=r[0]&63u;
+    if(!h32(r) || (id!=14 && id!=15) || (r[0]&0xC0u)!=0x80u || (r[3]&0x80u))return MMX6_JUMP_AUDIO_RECORD;
+    const Mmx6PrivateAudioBank *b=&banks[id==15];const Mmx6JumpAudioHeader *h=b->layout;
+    Mmx6PrivateAudioRecord result;memset(&result,0,sizeof result);
+    result.group=group;result.record=record;result.first_voice=r[3]&31u;
+    result.voice_count=1u+((r[3]>>5)&3u);result.priority=r[2]&15u;
+    if(result.first_voice>=24 || result.voice_count>24u-result.first_voice)return MMX6_JUMP_AUDIO_RECORD;
+    result.voice_mask=((1u<<result.voice_count)-1u)<<result.first_voice;
+    for(unsigned n=0;n<result.voice_count;++n) {
+        Mmx6PrivateAudioTone *v=&result.voices[n];unsigned t=(r[2]>>4)+n;
+        v->slot=result.first_voice+n;v->bank=h->bank;v->id=h->id;
+        v->program=(r[1]&127u)+t/16u;v->tone=t%16u;
+        if(v->program>=128)return MMX6_JUMP_AUDIO_RECORD;
+        const uint8_t *program=b->parsed+h->programs+v->program*16u;
+        uint32_t rank=h32(program+8);
+        if(!program[0] || program[0]>16 || v->tone>=program[0] || rank>=h16(b->parsed+h->vab+18u))
+            return MMX6_JUMP_AUDIO_RECORD;
+        const uint8_t *tone=b->parsed+h->tones+rank*512u+v->tone*32u;
+        unsigned sample=h16(tone+22u);
+        if(!sample || sample>h->samples)return MMX6_JUMP_AUDIO_RECORD;
+        unsigned before=sample-1u;
+        uint32_t start=(uint32_t)h16(b->parsed+h->programs+(before/2u)*16u+12u+(before&1u)*2u)*8u;
+        uint32_t end=(uint32_t)h16(b->parsed+h->programs+(sample/2u)*16u+12u+(sample&1u)*2u)*8u;
+        if(start>=end || end>h->sample_bytes || ((start|end)&15u) || tone[4]>127 || tone[5]>127 || tone[6]>127)
+            return MMX6_JUMP_AUDIO_RECORD;
+        v->sample_offset=start;v->sample_bytes=end-start;v->note=tone[6];v->shift=tone[5];
+        v->adsr_lo=h16(tone+16);v->adsr_hi=h16(tone+18);
+    }
+    *out=result;return MMX6_JUMP_AUDIO_OK;
+}
+Mmx6JumpAudioReason mmx6_private_audio_validate(const Mmx6PrivateAudioBank banks[2],uint32_t *voice_mask) {
+    if(!voice_mask || !banks || !private_bank_valid(&banks[0],0) || !private_bank_valid(&banks[1],1))
+        return MMX6_JUMP_AUDIO_ARGUMENT;
+    uint32_t result=0;
+    for(unsigned i=0;i<2;++i)for(unsigned r=0;r<banks[i].layout->records;++r) {
+        if(!h32(banks[i].parsed+8u+r*4u))continue;
+        Mmx6PrivateAudioRecord record;
+        Mmx6JumpAudioReason reason=mmx6_private_audio_record(banks,i?3:1,r,&record);
+        if(reason!=MMX6_JUMP_AUDIO_OK)return reason;
+        result|=record.voice_mask;
+    }
+    *voice_mask=result;return MMX6_JUMP_AUDIO_OK;
 }

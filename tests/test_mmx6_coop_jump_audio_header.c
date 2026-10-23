@@ -41,7 +41,59 @@ static void sfx_fixture(void) {
         source[at+3]=(uint8_t)(r>=7?23:22);
     }
 }
+static void record_rejected(Mmx6PrivateAudioBank banks[2],unsigned group,unsigned record) {
+    Mmx6PrivateAudioRecord out,before;memset(&out,0xCD,sizeof out);before=out;
+    CHECK(mmx6_private_audio_record(banks,group,record,&out)!=MMX6_JUMP_AUDIO_OK);
+    CHECK(!memcmp(&out,&before,sizeof out));
+}
+static void record_resolver(void) {
+    uint8_t output[2][8192];Mmx6JumpAudioHeader h[2];
+    sfx_fixture();CHECK(mmx6_jump_audio_prepare_header(source,bytes,160,1,output[0],8192,&h[0])==MMX6_JUMP_AUDIO_OK);
+    fixture();CHECK(mmx6_jump_audio_prepare_header(source,bytes,128,3,output[1],8192,&h[1])==MMX6_JUMP_AUDIO_OK);
+    Mmx6PrivateAudioBank banks[2]={{output[0],&h[0]},{output[1],&h[1]}};
+    Mmx6PrivateAudioRecord record;
+    CHECK(mmx6_private_audio_record(banks,3,17,&record)==MMX6_JUMP_AUDIO_OK);
+    CHECK(record.voice_count==1 && record.voices[0].slot==3 && record.voices[0].bank==30 &&
+          record.voices[0].id==14 && record.voices[0].program==0 && record.voices[0].tone==0 &&
+          record.voices[0].sample_offset==0 && record.voices[0].sample_bytes==16);
+    record_rejected(banks,3,0);record_rejected(banks,3,18);record_rejected(banks,2,17);
+    const unsigned offsets[]={program,program+8,tone+22,tone+5};
+    const uint8_t values[]={0,255,255,128};
+    for(unsigned i=0;i<4;++i) {
+        uint8_t saved=output[0][offsets[i]];output[0][offsets[i]]=values[i];
+        record_rejected(banks,3,17);output[0][offsets[i]]=saved;
+    }
+    uint8_t saved=output[1][8+17*4+3];output[1][8+17*4+3]=0x3F;
+    record_rejected(banks,3,17);output[1][8+17*4+3]=saved;
+    --h[0].bytes;record_rejected(banks,3,17);++h[0].bytes;
+    uint32_t mask=0;CHECK(mmx6_private_audio_validate(banks,&mask)==MMX6_JUMP_AUDIO_OK);
+    CHECK(mask==((1u<<3)|(1u<<20)|(1u<<22)|(1u<<23)));
+    output[1][8+17*4+3]=0x3F;mask=0xA5A5A5A5u;
+    CHECK(mmx6_private_audio_validate(banks,&mask)!=MMX6_JUMP_AUDIO_OK && mask==0xA5A5A5A5u);
+}
+static void original_records(char **argv) {
+    uint8_t input[2][8193],output[2][8192];Mmx6JumpAudioHeader h[2];Mmx6PrivateAudioBank banks[2];
+    for(unsigned i=0;i<2;++i) {
+        FILE *file=fopen(argv[1+i*2],"rb");CHECK(file);
+        size_t size=fread(input[i],1,sizeof input[i],file);CHECK(!ferror(file));fclose(file);
+        unsigned body=(unsigned)strtoul(argv[2+i*2],NULL,10);
+        CHECK(mmx6_jump_audio_prepare_header(input[i],size,body,i?3:1,output[i],sizeof output[i],&h[i])==MMX6_JUMP_AUDIO_OK);
+        banks[i]=(Mmx6PrivateAudioBank){output[i],&h[i]};
+    }
+    uint32_t mask=0;CHECK(mmx6_private_audio_validate(banks,&mask)==MMX6_JUMP_AUDIO_OK);
+    printf("mask %u\n",mask);
+    for(unsigned i=0;i<2;++i)for(unsigned r=0;r<h[i].records;++r) {
+        Mmx6PrivateAudioRecord record;
+        if(mmx6_private_audio_record(banks,i?3:1,r,&record)!=MMX6_JUMP_AUDIO_OK)continue;
+        for(unsigned v=0;v<record.voice_count;++v) {
+            Mmx6PrivateAudioTone *t=&record.voices[v];
+            printf("%u %u %u %u %u %u %u %u %u %u %u %u %u\n",record.group,r,t->slot,t->bank,t->id,
+                t->program,t->tone,t->sample_offset,t->sample_bytes,t->note,t->shift,t->adsr_lo,t->adsr_hi);
+        }
+    }
+}
 int main(int argc,char **argv) {
+    if(argc==5){original_records(argv);return 0;}
     if(argc==4) {
         uint8_t input[8193],output[8192];Mmx6JumpAudioHeader h;
         FILE *file=fopen(argv[1],"rb");CHECK(file);size_t size=fread(input,1,sizeof input,file);CHECK(!ferror(file));fclose(file);
@@ -70,9 +122,9 @@ int main(int argc,char **argv) {
     fixture();p16(source+bytes-510,3);rejected(bytes,128,3,sizeof parsed);
     fixture();p16(source+tone+22,255);rejected(bytes,128,3,sizeof parsed);
     fixture();p16(source+tone+7*32+22,0);rejected(bytes,128,3,sizeof parsed);
-    fixture();source[tone+7*32+7]=61;rejected(bytes,128,3,sizeof parsed);
-    fixture();source[8+4*4+2]|=1;rejected(bytes,128,3,sizeof parsed);
-    fixture();source[8+4*4+3]=21;rejected(bytes,128,3,sizeof parsed);
+    fixture();source[tone+7*32+6]=128;rejected(bytes,128,3,sizeof parsed);
+    fixture();source[8+4*4+2]=0xF0;rejected(bytes,128,3,sizeof parsed);
+    fixture();source[8+4*4+3]=23|0x20;rejected(bytes,128,3,sizeof parsed);
     fixture();source[8+4*4]=0xC3;rejected(bytes,128,3,sizeof parsed);
     fixture();source[8+17*4]=0x82;rejected(bytes,128,3,sizeof parsed);
     fixture();CHECK(mmx6_jump_audio_prepare_header(source,bytes,128,3,source,sizeof source,&h)==MMX6_JUMP_AUDIO_ARGUMENT);
@@ -80,7 +132,11 @@ int main(int argc,char **argv) {
     sfx_fixture();CHECK(mmx6_jump_audio_prepare_header(source,bytes,160,1,parsed,sizeof parsed,&h)==MMX6_JUMP_AUDIO_OK);
     CHECK(h.id==14 && h.bank==30 && parsed[8+5*4+2]==0x60 && parsed[8+7*4+3]==23);
     for(unsigned r=1;r<=8;++r)for(unsigned field=0;field<4;++field) {
-        sfx_fixture();source[8+r*4+field]^=1;rejected(bytes,160,1,sizeof parsed);
+        sfx_fixture();source[8+r*4+field]=(uint8_t)(field==0?0x82:field==1?127:field==2?0xF0:31);
+        rejected(bytes,160,1,sizeof parsed);
     }
-    puts("X6 private jump parsed-header bounds and alias tests passed");return 0;
+    fixture();source[8+4*4+1]=0x80;source[8+4*4+2]|=3;
+    CHECK(mmx6_jump_audio_prepare_header(source,bytes,128,3,parsed,sizeof parsed,&h)==MMX6_JUMP_AUDIO_OK);
+    CHECK(parsed[8+4*4+1]==0x80 && (parsed[8+4*4+2]&15)==3); /* Preserve native gain flag and priority. */
+    record_resolver();puts("X6 private parsed-header/record bounds and alias tests passed");return 0;
 }

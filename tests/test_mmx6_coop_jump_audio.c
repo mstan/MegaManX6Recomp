@@ -41,13 +41,16 @@ void psx_dispatch_call(CPUState *cpu,uint32_t target,uint32_t ret) {
 
 static uint32_t epoch=1,active,stopped;
 static uint32_t private_bank[24];
+static uint64_t private_owner[24];
 static unsigned plays,volumes,registrations,calculations,keyons,status_reads;
 static unsigned slot_volumes[24];
 static int bank_conflict,play_failure,wrong_keyon,charged_call,no_keyon,bad_output;
+static int local_scope;
+static uint32_t suppressed_result,skip_voices;
 static uint32_t played_bank,played_slot,played_mode;
 static uint16_t played[8];
 int psx_mod_texture_banks_supported(void){return 1;}
-int psx_mod_local_view_scope(void){return 0;}
+int psx_mod_local_view_scope(void){return local_scope;}
 static uint8_t expected_driver[JUMP_DRIVER_BYTES],expected_priority[24],expected_records[128],expected_outside[8];
 static void same_native(void) {
     uint8_t bytes[JUMP_DRIVER_BYTES];capture(JUMP_DRIVER,bytes,sizeof bytes);
@@ -66,73 +69,113 @@ int psx_mod_spu_sample_bank(uint32_t bank,const void *bytes,uint32_t size) {
     CHECK(bank==30 || bank==31);CHECK(bytes && size==jump_audio_banks[bank==31].layout.sample_bytes);
     ++registrations;return !bank_conflict;
 }
-int psx_mod_spu_private_voice_play(unsigned slot,uint32_t bank,const uint16_t regs[8],unsigned mode) {
+uint64_t psx_mod_spu_private_voice_owner(unsigned slot){CHECK(slot<24);return private_owner[slot];}
+int psx_mod_spu_private_voice_claim(uint64_t owner,uint32_t mask) {
+    CHECK(owner==JUMP_AUDIO_OWNER && mask==JUMP_STOP_MASK);
+    for(unsigned s=0;s<24;++s)if(mask&(1u<<s))
+        if((private_owner[s] && private_owner[s]!=owner) || (!private_owner[s] && (active&(1u<<s))))return 0;
+    for(unsigned s=0;s<24;++s)if(mask&(1u<<s))private_owner[s]=owner;
+    return 1;
+}
+int psx_mod_spu_private_voice_play_owned(uint64_t owner,unsigned slot,uint32_t bank,const uint16_t regs[8],unsigned mode) {
     same_native();CHECK(!jump_audio_call && !jump_audio_keyon_call && !state_track.count);
+    CHECK(owner==JUMP_AUDIO_OWNER && private_owner[slot]==owner);
     ++plays;played_slot=slot;played_bank=bank;played_mode=mode;memcpy(played,regs,sizeof played);
-    active|=1u<<slot;private_bank[slot]=bank;return !play_failure;
+    if(play_failure)return 0;
+    active|=1u<<slot;private_bank[slot]=bank;return 1;
 }
-int psx_mod_spu_private_voice_volume(unsigned slot,uint16_t left,uint16_t right) {
-    CHECK(slot==20 || slot==22 || slot==23);CHECK(!left && !right);++volumes;++slot_volumes[slot];return 1;
+int psx_mod_spu_private_voice_volume_owned(uint64_t owner,unsigned slot,uint16_t left,uint16_t right) {
+    CHECK(slot<24 && (JUMP_STOP_MASK&(1u<<slot)) && private_owner[slot]==owner && owner==JUMP_AUDIO_OWNER);
+    CHECK(!left && !right);++volumes;++slot_volumes[slot];return 1;
 }
-void psx_mod_spu_private_voice_stop(uint32_t mask){
+int psx_mod_spu_private_voice_stop_owned(uint64_t owner,uint32_t mask){
     CHECK(!(mask&~JUMP_STOP_MASK));stopped|=mask;
+    for(unsigned s=0;s<24;++s)if(mask&(1u<<s))CHECK(owner==JUMP_AUDIO_OWNER && private_owner[s]==owner);
     /* The real DSP keeps active1 through release/END_STOP; it is not proof
      * that a sample is still audible, nor a private-slot allocation flag. */
+    return 1;
 }
 uint32_t psx_mod_call_guest_uncharged(CPUState *cpu,uint32_t target,uint32_t ret,
     uint32_t a0,uint32_t a1,uint32_t a2,uint32_t a3,uint32_t budget,int *charged) {
     (void)ret;CHECK(!budget && jump_audio_call && state_track.count==4 && !snapshot_ready());
     *charged=charged_call;
     if(target==0x80016C48) {
-        ++calculations;CHECK(a0==1 || a0==3);CHECK(a2==PLAYER);
-        JumpAudioBank *b=&jump_audio_banks[a0==3];
-        CHECK(psx_mod_read_word(0x80097738+a0*4)==b->guest+b->layout.vab);
-        CHECK(psx_mod_read_word(0x80097778+a0*4)==b->guest+8);
+        ++calculations;unsigned group=a0&127u;CHECK(group==1 || group==3);CHECK(a2==PLAYER);
+        JumpAudioBank *b=&jump_audio_banks[group==3];
+        CHECK(psx_mod_read_word(0x80097738+group*4)==b->guest+b->layout.vab);
+        CHECK(psx_mod_read_word(0x80097778+group*4)==b->guest+8);
+        CHECK(!memcmp(memory(0x800E25E0),jump_audio_priorities,24));
         for(unsigned i=0;i<2;++i) {
             JumpAudioBank *v=&jump_audio_banks[i];unsigned id=v->layout.id;
             CHECK(psx_mod_read_byte(0x800E5690+id)==1);
             CHECK(psx_mod_read_word(0x800E56F0+id*4)==0);
             CHECK(psx_mod_read_word(0x800E55C8+id*4)==v->guest+v->layout.vab);
         }
-        CPUState nested=*cpu;nested.gpr[4]=1u<<jump_audio_slot;
-        CHECK(jump_audio_status(&nested,0x80055B14));++status_reads;
-        CHECK(nested.gpr[2]==((active&(1u<<jump_audio_slot))?1u:0u));
-        if(no_keyon)return 0;
-        nested=*cpu;
-        const uint8_t *record=b->parsed+8+a1*4;
-        nested.gpr[4]=wrong_keyon?21:record[3]&31u;
-        nested.gpr[5]=b->layout.id;nested.gpr[6]=record[2]&15u;nested.gpr[7]=record[2]>>4;
-        nested.gpr[29]=0x801D0000;
-        const uint8_t *tone=b->parsed+b->layout.tones+nested.gpr[7]*32;
-        psx_mod_write_word(nested.gpr[29]+16,tone[6]);psx_mod_write_word(nested.gpr[29]+20,tone[5]);
-        psx_mod_write_word(nested.gpr[29]+24,79);psx_mod_write_word(nested.gpr[29]+28,113);
-        CHECK(jump_audio_keyon(&nested,0x8005A9D4));
-        return nested.gpr[2];
+        const uint8_t *record=b->parsed+8+(a1&255u)*4;
+        unsigned count=1+((record[3]>>5)&3u),first=record[3]&31u;
+        for(unsigned v=0;v<count;++v) {
+            CPUState nested=*cpu;nested.gpr[4]=1u<<(first+v);
+            CHECK(jump_audio_status(&nested,0x80055B14));++status_reads;
+            CHECK(nested.gpr[2]==((active&(1u<<(first+v)))?1u:0u));
+            if(no_keyon || (skip_voices&(1u<<(first+v))))continue;
+            JumpAudioBank *effective=&jump_audio_banks[(record[0]&63u)==15];
+            unsigned t=(record[2]>>4)+v,program=(record[1]&127u)+t/16u;
+            const uint8_t *p=effective->parsed+effective->layout.programs+program*16u;
+            unsigned rank=(unsigned)p[8]|(unsigned)p[9]<<8;
+            const uint8_t *tone=effective->parsed+effective->layout.tones+rank*512u+(t%16u)*32u;
+            nested=*cpu;nested.gpr[4]=wrong_keyon?24:first+v;
+            nested.gpr[5]=effective->layout.id;nested.gpr[6]=program;nested.gpr[7]=t%16u;
+            nested.gpr[29]=0x801D0000;
+            psx_mod_write_word(nested.gpr[29]+16,tone[6]);psx_mod_write_word(nested.gpr[29]+20,tone[5]);
+            psx_mod_write_word(nested.gpr[29]+24,79);psx_mod_write_word(nested.gpr[29]+28,113);
+            CHECK(jump_audio_keyon(&nested,0x8005A9D4));
+            if(nested.gpr[2]==UINT32_MAX)return nested.gpr[2];
+        }
+        return no_keyon?suppressed_result:0;
     }
     CHECK(target==0x8005A9D4 && jump_audio_keyon_call);++keyons;
-    CHECK(a0==jump_audio_slot && a1==(jump_audio_bank==30?14u:15u) && !a2 && a3==jump_audio_tone);
+    CHECK(a0==jump_audio_slot && a1==(jump_audio_bank==30?14u:15u) && a3==jump_audio_tone);
+    const JumpAudioBank *b=&jump_audio_banks[a1==15];
+    const uint8_t *p=b->parsed+b->layout.programs+a2*16u;
+    unsigned rank=(unsigned)p[8]|(unsigned)p[9]<<8;
+    const uint8_t *tone=b->parsed+b->layout.tones+rank*512u+a3*32u;
+    unsigned sample=(unsigned)tone[22]|(unsigned)tone[23]<<8,before=sample-1u;
+    const uint8_t *start=b->parsed+b->layout.programs+(before/2u)*16u+12u+(before&1u)*2u;
     /* Source closure: dirty+register+metadata(0x38 stride), all masks/history,
      * selected VAB globals and tables. Touch the entire owned span. */
     for(unsigned i=0;i<JUMP_DRIVER_BYTES;++i)psx_mod_write_byte(JUMP_DRIVER+i,(uint8_t)(i*13+9));
     memset(memory(0x800E25E0),0xA1,24);memset(memory(0x80097738),0xB2,128);
     psx_mod_write_word(0x800E459C,0x1234);psx_mod_write_word(0x800E155C,0x5678);
     uint32_t r=0x800E53A0+a0*16;
-    const uint16_t actual[6]={1234,2345,0x478,8,0x80FF,0x1FC0};
+    const uint16_t actual[6]={1234,2345,0x478,(uint16_t)(start[0]|(unsigned)start[1]<<8),
+        (uint16_t)(tone[16]|(unsigned)tone[17]<<8),(uint16_t)(tone[18]|(unsigned)tone[19]<<8)};
     for(unsigned i=0;i<6;++i)psx_mod_write_half(r+i*2,actual[i]);
     psx_mod_write_half(0x800E4E40+a0*0x38+0x1E,0);
     psx_mod_write_half(0x800E4E40+a0*0x38+0x2A,0);
     if(bad_output==1)psx_mod_write_half(0x800E4E40+a0*0x38+0x1E,1);
     if(bad_output==2)psx_mod_write_half(0x800E4E40+a0*0x38+0x2A,1);
     if(bad_output==3)psx_mod_write_half(r+6,16); /* Outside this bank's128bytes. */
+    if(bad_output==4)psx_mod_write_half(r+8,actual[4]^1u);
     psx_mod_write_word(0x800E4E38,1u<<a0);psx_mod_write_word(0x800E4E34,1u<<a0);
     return 0;
+}
+static void test16(uint8_t *p,unsigned v){p[0]=(uint8_t)v;p[1]=(uint8_t)(v>>8);}
+static void test_record(JumpAudioBank *b,unsigned record,unsigned id,unsigned program,unsigned tone,unsigned slot,unsigned count) {
+    uint8_t *r=b->parsed+8u+record*4u;
+    r[0]=(uint8_t)(0x80u|id);r[1]=(uint8_t)program;r[2]=(uint8_t)(tone<<4);
+    r[3]=(uint8_t)(slot|((count-1u)<<5));
 }
 static void setup_audio(void) {
     memset(test_ram,0,sizeof test_ram);memset(&state_track,0,sizeof state_track);
     failed=jump_audio_faulted=jump_audio_call=jump_audio_keyon_call=jump_audio_stop_call=0;
     bank_conflict=play_failure=wrong_keyon=charged_call=no_keyon=bad_output=0;
+    local_scope=0;suppressed_result=skip_voices=0;
+    jump_audio_clear_calculation();memset(jump_audio_priorities,0,sizeof jump_audio_priorities);
     ready=enrolled=zero_projected=1;zero_world=0;active=stopped=0;
-    private_bank[20]=31;private_bank[22]=private_bank[23]=30;
+    for(unsigned s=0;s<24;++s) {
+        private_bank[s]=s==20?31:30;
+        private_owner[s]=(JUMP_STOP_MASK&(1u<<s))?JUMP_AUDIO_OWNER:0;
+    }
     jump_audio_loaded=1;jump_audio_bound_epoch=jump_audio_owned_epoch=epoch;
     plays=volumes=registrations=calculations=keyons=status_reads=guest_calls=0;
     memset(slot_volumes,0,sizeof slot_volumes);
@@ -144,15 +187,31 @@ static void setup_audio(void) {
         if(!b->samples)b->samples=calloc(1,128);
         CHECK(b->parsed && b->samples);
         b->guest=0x9F1A0000+i*8192;
-        b->layout=(Mmx6JumpAudioHeader){i?3:1,i?15:14,i?31:30,3184,128,80,112,2160,18,8};
-        memset(b->parsed,0,8192);b->parsed[112]=10;
-        for(unsigned t=0;t<10;++t){b->parsed[2160+t*32+6]=60;b->parsed[2160+t*32+5]=0;}
-        for(unsigned r=1;r<=(i?7u:8u);++r) {
-            b->parsed[8+r*4]=(uint8_t)(0x80u+b->layout.id);
-            b->parsed[8+r*4+2]=(uint8_t)((!i && r>=2?r+1:r)<<4);
-            b->parsed[8+r*4+3]=(uint8_t)(i?20:r>=7?23:22);
+        unsigned records=i?18:32,vab=8+records*4,programs=vab+32,tones=programs+2048;
+        b->layout=(Mmx6JumpAudioHeader){i?3:1,i?15:14,i?31:30,tones+3*512+512,128,vab,programs,tones,records,8};
+        memset(b->parsed,0,8192);put32(b->parsed,((i?3u:1u)<<24)|vab);put32(b->parsed+4,128);
+        test16(b->parsed+vab+18,3);test16(b->parsed+vab+22,8);
+        for(unsigned p=0;p<3;++p) {
+            b->parsed[programs+p*16]=16;put32(b->parsed+programs+p*16+8,p);
+            for(unsigned t=0;t<16;++t) {
+                uint8_t *tone=b->parsed+tones+p*512+t*32;
+                tone[6]=(uint8_t)(60+p);tone[5]=(uint8_t)(p*2);
+                test16(tone+16,0x80FF+p);test16(tone+18,0x1FC0+p);
+                test16(tone+22,(t+p)%8+1);
+            }
         }
+        for(unsigned s=0;s<=8;++s)test16(b->parsed+programs+(s/2u)*16u+12u+(s&1u)*2u,s*2u);
+        for(unsigned r=1;r<=(i?7u:8u);++r) {
+            test_record(b,r,b->layout.id,0,!i && r>=2?r+1:r,i?20:r>=7?23:22,1);
+        }
+        test_record(b,0,b->layout.id,0,0,i?20:21,1);
     }
+    test_record(&jump_audio_banks[0],11,14,0,14,20,4); /* Program rollover, four calculations. */
+    test_record(&jump_audio_banks[0],12,14,0x81,7,3,1); /* Native program high flag. */
+    test_record(&jump_audio_banks[1],17,14,1,7,3,1); /* Effective effects-bank alias. */
+    test_record(&jump_audio_banks[1],14,15,1,0,23,1);
+    const unsigned extra_slots[]={0,8,9,11};
+    for(unsigned n=0;n<4;++n)test_record(&jump_audio_banks[0],19+n,14,2,n,extra_slots[n],1);
     /* P1 already has arbitrary queued data. Zero must not edit any of it. */
     for(unsigned i=0;i<JUMP_DRIVER_BYTES;++i)psx_mod_write_byte(JUMP_DRIVER+i,(uint8_t)(i*7+3));
     memset(memory(0x800E25E0),0x78,24);memset(memory(0x80097738),0x9A,128);
@@ -180,35 +239,47 @@ static void transactions(void) {
         before.gpr[2]=cpu.gpr[2];CHECK(!memcmp(&before,&cpu,sizeof cpu));same_native();
         CHECK(plays==1 && keyons==1 && calculations==1 && status_reads==1);
         CHECK(played_slot==(groups[n]==3?20u:records[n]>=7?23u:22u) && played_bank==(groups[n]==3?31u:30u) && played_mode==3);
-        CHECK(played[0]==1234 && played[1]==2345 && played[2]==0x478 && played[3]==8);
-        CHECK(played[4]==0x80FF && played[5]==0x1FC0 && !played[6] && played[7]==8);
+        unsigned t=groups[n]==1 && records[n]>=2?records[n]+1:records[n],start=(t%8u)*2u;
+        CHECK(played[0]==1234 && played[1]==2345 && played[2]==0x478 && played[3]==start);
+        CHECK(played[4]==0x80FF && played[5]==0x1FC0 && !played[6] && played[7]==start);
         CHECK(!jump_audio_call && !jump_audio_keyon_call && !jump_audio_calculated && !state_track.count);
+        CHECK(jump_audio_extra_idle());for(unsigned s=0;s<24;++s)CHECK(jump_audio_priorities[s]==0xA1);
         CHECK(jump_audio_sound(&cpu,0x80016C48)==1 && plays==2 && !failed);same_native(); /* Own active replacement. */
     }
     for(unsigned r=1;r<=8;++r) {
         setup_audio();CPUState cpu=request(1,r);cpu.gpr[6]=PLAYER+0x100;
         CHECK(!jump_audio_sound(&cpu,0x80016C48) && !plays && !calculations && !failed);same_native();
-        setup_audio();cpu=request(1,r);psx_mod_write_byte(PLAYER+4,2);
+        setup_audio();cpu=request(1,r);psx_mod_write_byte(PLAYER+4,4);
         CHECK(!jump_audio_sound(&cpu,0x80016C48) && !plays && !calculations && !failed);same_native();
     }
-    for(unsigned n=0;n<6;++n) {
+    for(unsigned n=0;n<3;++n) {
         setup_audio();CPUState cpu=request(3,7);
         if(n==0)zero_projected=0;
-        if(n==1)cpu.gpr[31]^=4;
-        if(n==2)psx_mod_write_word(cpu.gpr[29]+16,0x8003B000);
-        if(n==3)cpu.gpr[5]=3;
-        if(n==4)psx_mod_write_byte(PLAY+0x5F,0x20);
-        if(n==5)psx_mod_write_byte(0x80090D53,255);
+        if(n==1)local_scope=1;
+        if(n==2)psx_mod_write_byte(0x80090D53,255);
         CHECK(!jump_audio_sound(&cpu,0x80016C48) && !plays && !calculations && !failed);same_native();
     }
-    for(unsigned n=0;n<4;++n) {
+    /* Body ownership is independent of one vocal wrapper, shared defense
+     * parts, and the living phase. Raw flag/record arguments stay intact. */
+    for(unsigned phase=0;phase<=3;++phase) {
+        setup_audio();CPUState cpu=request(0x83,0x103);cpu.gpr[31]=0x801EBE90;
+        psx_mod_write_byte(PLAYER+4,(uint8_t)phase);psx_mod_write_byte(PLAY+0x5F,0x20);
+        CHECK(jump_audio_sound(&cpu,0x80016C48) && !failed && plays==1 && played_bank==31);same_native();
+    }
+    for(unsigned n=0;n<3;++n) {
         setup_audio();CPUState cpu=request(3,7);
-        wrong_keyon=n==0;charged_call=n==1;no_keyon=n==2;play_failure=n==3;
+        wrong_keyon=n==0;charged_call=n==1;play_failure=n==2;
         CHECK(jump_audio_sound(&cpu,0x80016C48) && cpu.gpr[2]==UINT32_MAX && failed);
         same_native();CHECK(!jump_audio_call && !jump_audio_keyon_call && !state_track.count);
-        CHECK(plays==(n==3?1u:0u));
+        CHECK(plays==(n==2?1u:0u) && jump_audio_extra_idle());
     }
-    for(unsigned n=1;n<=3;++n) {
+    for(unsigned n=0;n<2;++n) {
+        setup_audio();CPUState cpu=request(3,7);no_keyon=1;suppressed_result=n?UINT32_MAX:0;
+        jump_audio_priorities[20]=9;
+        CHECK(jump_audio_sound(&cpu,0x80016C48) && cpu.gpr[2]==suppressed_result && !failed && !plays);
+        CHECK(jump_audio_priorities[20]==9 && jump_audio_extra_idle());same_native();
+    }
+    for(unsigned n=1;n<=4;++n) {
         setup_audio();CPUState cpu=request(3,7);bad_output=(int)n;
         CHECK(jump_audio_sound(&cpu,0x80016C48) && cpu.gpr[2]==UINT32_MAX && failed && !plays);
         same_native();CHECK(!jump_audio_call && !jump_audio_keyon_call && !state_track.count);
@@ -221,9 +292,9 @@ static void transactions(void) {
     }
     setup_audio();jump_audio_bound_epoch=0;bank_conflict=1;CPUState cpu=request(3,7);
     CHECK(jump_audio_sound(&cpu,0x80016C48) && failed && !calculations && !plays);same_native();
-    setup_audio();jump_audio_bound_epoch=jump_audio_owned_epoch=0;active=1u<<20;cpu=request(3,7);
-    CHECK(jump_audio_sound(&cpu,0x80016C48) && failed && !registrations && !stopped);same_native();
-    setup_audio();active=1u<<20;private_bank[20]=29;cpu=request(3,7);
+    setup_audio();jump_audio_bound_epoch=jump_audio_owned_epoch=0;active=1u<<20;private_owner[20]=0;cpu=request(3,7);
+    CHECK(jump_audio_sound(&cpu,0x80016C48) && failed && !registrations && !(stopped&(1u<<20)));same_native();
+    setup_audio();active=1u<<20;private_owner[20]=JUMP_AUDIO_OWNER+1;cpu=request(3,7);
     unsigned unchanged_writes=memory_writes;CHECK(!jump_audio_ready() && memory_writes==unchanged_writes);
     CHECK(jump_audio_sound(&cpu,0x80016C48) && failed && !calculations && !plays);
     CHECK((active&(1u<<20)) && !(stopped&(1u<<20)) && !slot_volumes[20]);same_native(); /* Foreign voice is retained. */
@@ -231,12 +302,35 @@ static void transactions(void) {
     CHECK(jump_audio_sound(&cpu,0x80016C48) && !failed && registrations==2 && plays==1);same_native();
     setup_audio();state_track.count=MMX6_STATE_FRAMES;cpu=request(3,7);
     CHECK(jump_audio_sound(&cpu,0x80016C48) && failed && state_track.count==MMX6_STATE_FRAMES && !calculations);same_native();
+
+    /* Effective-bank aliases and nonzero programs retain their identities. */
+    const unsigned gs[]={3,3,1,1,1,1,1},rs[]={17,14,12,19,20,21,22},slots[]={3,23,3,0,8,9,11};
+    for(unsigned n=0;n<7;++n) {
+        setup_audio();cpu=request(gs[n],rs[n]);CHECK(jump_audio_sound(&cpu,0x80016C48) && !failed && plays==1);
+        CHECK(played_slot==slots[n] && played_bank==(n==1?31u:30u) && jump_audio_extra_idle());same_native();
+    }
+    setup_audio();cpu=request(1,11);CHECK(jump_audio_sound(&cpu,0x80016C48) && !failed && plays==4 && keyons==4);
+    CHECK(played_slot==23 && played[4]==0x8100 && played[5]==0x1FC1 && jump_audio_extra_idle());same_native();
+    setup_audio();skip_voices=(1u<<22)|(1u<<23);cpu=request(1,11);
+    CHECK(jump_audio_sound(&cpu,0x80016C48) && !failed && plays==2 && keyons==2 && status_reads==4);same_native();
+    setup_audio();cpu=request(1,7);CHECK(jump_audio_sound(&cpu,0x80016C48) && played_bank==30);
+    cpu=request(3,14);CHECK(jump_audio_sound(&cpu,0x80016C48) && !failed && played_slot==23 && played_bank==31);same_native();
+    for(unsigned n=0;n<2;++n) {
+        setup_audio();cpu=request(3,n?18:13);
+        CHECK(jump_audio_sound(&cpu,0x80016C48) && !failed && !calculations && !plays);
+        CHECK(cpu.gpr[2]==(n?0xFFFFFFFEu:0xFFFFFFFBu));same_native();
+    }
+    /* Foreign reservations are forbidden even inactive, on the SAME bank. */
+    for(unsigned slot=0;slot<24;++slot)if(JUMP_STOP_MASK&(1u<<slot)) {
+        setup_audio();private_owner[slot]=JUMP_AUDIO_OWNER+1;cpu=request(1,1);
+        CHECK(!jump_audio_ready() && jump_audio_sound(&cpu,0x80016C48) && failed && !plays && !calculations);
+        CHECK(!slot_volumes[slot] && !(stopped&(1u<<slot)) && private_owner[slot]==JUMP_AUDIO_OWNER+1);same_native();
+    }
 }
 static void stops(void) {
     setup_audio();CPUState cpu=request(3,7);active=1u<<20;
-    CHECK(jump_audio_stop(&cpu,0x8001750C) && cpu.gpr[2]==0xFF000000u);
-    CHECK(stopped==(1u<<20) && volumes==1 && !guest_calls);same_native();
-    setup_audio();cpu=request(1,1);CHECK(jump_audio_stop(&cpu,0x8001750C) && stopped==(1u<<22));same_native();
+    CHECK(!jump_audio_stop(&cpu,0x8001750C) && !stopped && !volumes && !guest_calls);same_native();
+    setup_audio();cpu=request(1,1);CHECK(!jump_audio_stop(&cpu,0x8001750C) && !stopped);same_native();
     setup_audio();cpu=request(3,3);CHECK(!jump_audio_stop(&cpu,0x8001750C) && !stopped && !volumes);
     const uint32_t callers[]={0x80038604,0x800386F4,0x800387EC,0x80038900,0x8003B23C,
                               0x8003D8C4,0x8003D8D0,0x8003F49C,0x8003F614};
@@ -259,7 +353,7 @@ static void stops(void) {
             if(invalid==4)ready=0;
             if(invalid==5)psx_mod_write_byte(PLAYER+2,0);
             if(invalid==6)psx_mod_write_byte(PLAYER+0xE7,1);
-            if(invalid==7)psx_mod_write_byte(PLAY,9);
+            if(invalid==7)local_scope=1;
             if(invalid==8)psx_mod_write_byte(PLAYER+4,0);
             if(invalid==9)psx_mod_write_byte(PLAYER+4,(uint8_t)(i==5 || i==6?1:2));
             CHECK(!jump_audio_stop(&cpu,0x8001750C) && !stopped && !volumes && !guest_calls);same_native();
@@ -267,20 +361,17 @@ static void stops(void) {
     }
     setup_audio();cpu=request(3,7);zero_projected=0;CHECK(!jump_audio_stop(&cpu,0x8001750C) && !stopped);
     setup_audio();cpu=request(255,0);CHECK(jump_audio_stop(&cpu,0x8001750C) && guest_calls==1);
-    CHECK(stopped==JUMP_STOP_MASK && volumes==3 && !jump_audio_stop_call);
-    setup_audio();cpu=request(3,7);active=1u<<20;private_bank[20]=29;
-    CHECK(jump_audio_stop(&cpu,0x8001750C) && failed && !guest_calls && !slot_volumes[20]);
-    CHECK((active&(1u<<20)) && !(stopped&(1u<<20)));
-    setup_audio();cpu=request(255,0);active=1u<<20;private_bank[20]=29;
+    CHECK(stopped==JUMP_STOP_MASK && volumes==9 && !jump_audio_stop_call);
+    setup_audio();cpu=request(255,0);active=1u<<20;private_owner[20]=JUMP_AUDIO_OWNER+1;
     CHECK(jump_audio_stop(&cpu,0x8001750C) && failed && guest_calls==1 && !slot_volumes[20]);
     CHECK((active&(1u<<20)) && !(stopped&(1u<<20)));
     unsigned foreign_volumes=slot_volumes[20];CHECK(jump_audio_activate());
     CHECK((active&(1u<<20)) && !(stopped&(1u<<20)) && slot_volumes[20]==foreign_volumes);
     setup_audio();cpu=request(1,7);cpu.gpr[16]=PLAYER;cpu.gpr[31]=0x8003F49C;
-    active=1u<<23;private_bank[23]=29;
+    active=1u<<23;private_owner[23]=JUMP_AUDIO_OWNER+1;
     CHECK(jump_audio_stop(&cpu,0x8001750C) && failed && !guest_calls && !slot_volumes[23]);
     CHECK((active&(1u<<23)) && !(stopped&(1u<<23)));same_native();
-    setup_audio();cpu=request(1,7);active=1u<<23;private_bank[23]=29;
+    setup_audio();cpu=request(1,7);active=1u<<23;private_owner[23]=JUMP_AUDIO_OWNER+1;
     CHECK(!jump_audio_ready());
     CHECK(jump_audio_sound(&cpu,0x80016C48) && failed && !calculations && !plays && !slot_volumes[23]);
     CHECK((active&(1u<<23)) && !(stopped&(1u<<23)));same_native();
@@ -306,17 +397,29 @@ static void original_assets(const char *path) {
         CHECK(!memcmp(b->samples,original.data,original.size));
         uint8_t restored[8192];capture(b->guest,restored,b->layout.bytes);CHECK(!memcmp(restored,b->parsed,b->layout.bytes));
     }
-    ++epoch;active=0;CHECK(!jump_audio_ready() && jump_audio_bind() && jump_audio_ready());
+    /* Actual original record data through the actual adapter. The native
+     * calculation is still an explicit guest double, never gameplay evidence. */
+    unsigned routed=0;plays=0;
+    for(unsigned i=0;i<2;++i)for(unsigned r=0;r<jump_audio_banks[i].layout.records;++r) {
+        const uint8_t *entry=jump_audio_banks[i].parsed+8u+r*4u;
+        if(!(entry[0]|entry[1]|entry[2]|entry[3]))continue;
+        CPUState cpu=request(i?3:1,r);
+        CHECK(jump_audio_sound(&cpu,0x80016C48) && !failed && !cpu.gpr[2] && jump_audio_extra_idle());
+        same_native();++routed;
+    }
+    CHECK(routed==45 && plays==47);
+    ++epoch;active=0;memset(private_owner,0,sizeof private_owner);
+    CHECK(!jump_audio_ready() && jump_audio_bind() && jump_audio_ready());
     CHECK(jump_audio_activate() && !jump_audio_loaded && !jump_audio_call);
     /* Corrupt actual source bytes, preserving structural extents: exact digest
      * rejection is before any published resource or registry mutation. */
     Mmx6AssetView sample;CHECK(mmx6_coop_dat_asset(data,(size_t)length,85,12,&sample));
     data[sample.data-data]^=1;writes=memory_writes;registrations=0;
     CHECK(!jump_audio_load(data,(size_t)length) && !jump_audio_loaded && memory_writes==writes && !registrations);
-    free(data);puts("original Zero immutable header/body load, allocation rollback and epoch rebind PASS");
+    free(data);puts("original Zero load, 45 records/47 mocked calculations, allocation rollback and epoch rebind PASS");
 }
 int main(int argc,char **argv) {
     transactions();stops();
     if(argc==2)original_assets(argv[1]);else CHECK(argc==1);
-    puts("actual X6 private jump callbacks: exact native rollback, routing, refusal and stop PASS");return 0;
+    puts("actual X6 private character callbacks: exact native rollback, routing, refusal and stop PASS");return 0;
 }

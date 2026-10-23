@@ -214,6 +214,7 @@ if(BUILD_TESTING)
                 test_mmx6_coop_native_reentry_runner test_qualify_mmx6_coop_jump_audio
                 test_mmx6_coop_jump_audio_private
                 test_mmx6_coop_jump_audio_pair
+                test_mmx6_coop_body_audio
                 test_mmx6_private_action_audio_audit
                 test_mmx6_recycle_return_audit
                 test_mmx6_body_audio_routes
@@ -364,6 +365,13 @@ if(BUILD_TESTING)
             target_compile_definitions(${_mmx6_header_target} PRIVATE PSX_NO_DEBUG_TOOLS)
         endif()
         add_test(NAME ${_mmx6_header_target} COMMAND "$<TARGET_FILE:${_mmx6_header_target}>")
+        if(Python3_Interpreter_FOUND AND Python3_VERSION VERSION_GREATER_EQUAL 3.11)
+            set(_mmx6_records_test mmx6_coop_private_audio_records_${_mmx6_header_variant}_test)
+            add_test(NAME ${_mmx6_records_test}
+                COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_mmx6_coop_private_audio_records.py"
+                    "$<TARGET_FILE:${_mmx6_header_target}>" --scratch-root "${CMAKE_BINARY_DIR}/private-audio-records")
+            set_tests_properties(${_mmx6_records_test} PROPERTIES SKIP_RETURN_CODE 77 TIMEOUT 90)
+        endif()
     endforeach()
 
     add_executable(mmx6_coop_roster_test tests/test_mmx6_coop_roster.c

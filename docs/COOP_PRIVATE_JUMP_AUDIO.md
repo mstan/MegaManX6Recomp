@@ -1,5 +1,11 @@
 # Scoped private Zero jump audio candidate
 
+This page records the earlier scoped implementation and its retained receipts.
+The current v18 source candidate is described in
+[private character audio](COOP_PRIVATE_CHARACTER_AUDIO.md); its broader route,
+voice leases and schema3 supersede the implementation scope below. Older native
+receipts do not qualify the new image.
+
 This is a default correctness fix when the fixed X/P1 + ordinary Zero/P2 co-op
 package is active. It remains **unqualified in a native candidate**. It does not
 resolve the whole R4/R12 families, other attacks/hurt voices, opposite rosters,
