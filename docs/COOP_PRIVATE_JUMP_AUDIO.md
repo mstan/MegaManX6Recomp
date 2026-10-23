@@ -169,8 +169,8 @@ pass. The frozen348a52c debug and production suites now both pass96/96.
 Its [local X-first native receipt](evidence/mmx6-jump-audio/manifest-bound-348a52c-local-private-overlap-reviewed.json)
 passes all19 sample/route/DSP/lifetime checks: hardware P1 continues after
 private P2 voice44/bank31, both reach original end markers and zero final
-envelopes, and immutable source banks remain unchanged. Opposite order,
-paired audio and other action families remain unverified; prior exact-image
+envelopes, and immutable source banks remain unchanged. At that point opposite
+order, paired audio and other action families were unverified; prior exact-image
 failures are retained and R4/R12 are not closed by this bounded ground jump.
 
 The first reverse-order trial retained an input setup failure: its first
@@ -186,4 +186,15 @@ now passes all19 checks on the same frozen348a52c image. Zero's private voice
 continues through X's native KEYON; both reach natural end with correct source,
 DSP and immutable banks. The source correction makes input acceptance observed
 instead of assuming it from a requested one-tick window. Both local orders are
-now covered; paired audio and other action families remain unverified.
+now covered.
+
+The [paired receipt](evidence/mmx6-jump-audio/manifest-bound-348a52c-paired-orders-reviewed.json)
+also covers both orders on fresh same-machine pairs using the same frozen image.
+Each peer independently passes all 19 source, route, lifetime and final DSP
+checks. The X-first run took six ordinary jump trials and retained 29 matched
+resolved core/mod samples; Zero first took four trials and retained 30 samples.
+Both pairs used the fixed startup profile, published neutral inputs afterward,
+preserved their private memory cards and exited through owned Quit. Composed
+captures were reviewed and match between peers. The earlier eight-trial
+inconclusive run is retained. Other action families, PCM/listening, music
+continuity and cross-machine qualification remain open; R4/R12 remain incomplete.

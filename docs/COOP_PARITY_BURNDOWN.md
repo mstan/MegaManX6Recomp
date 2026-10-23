@@ -53,7 +53,13 @@ passes19 local source/route/DSP/lifetime checks, including P1 continuing after
 the correct private Zero vocal. A separate
 [reverse-order receipt](evidence/mmx6-jump-audio/manifest-bound-348a52c-local-private-reverse-reviewed.json)
 also passes19 checks with Zero first. Other action families and paired audio
-remain unverified.
+are tracked separately. The [paired receipt](evidence/mmx6-jump-audio/manifest-bound-348a52c-paired-orders-reviewed.json)
+now passes both orders on fresh same-machine pairs: all 19 source, route,
+lifetime and DSP checks pass independently on each peer. X first took six
+ordinary RNG trials with 29 matched resolved core/mod samples; Zero first took
+four trials with 30 matched samples. Both pairs exited through owned Quit with
+unchanged private memory cards. The earlier eight-trial inconclusive run is
+retained. Other audio actions and cross-machine netplay remain unverified.
 
 The [native New Game receipt](evidence/mmx6-native-reentry/manifest-bound-348a52c-new-game-reviewed.json)
 passes the original final Quit/title/story/arrival and full11-check guest

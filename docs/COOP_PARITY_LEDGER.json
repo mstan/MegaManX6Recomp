@@ -485,6 +485,56 @@
               "R4/R12 retain exact old-image failures and are not closed by bounded new-image ground-jump evidence."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "348a52cabb33c49a1bb97c8fae35185d43dd7f31",
+            "build_identity": {
+              "exe_sha256": "8198893ef9f023b59be1a9eb768977f55e7f2feae40f0ce581e322870ab4f229",
+              "declared_manifest_sha256": "3198d0285ac8dde9636c9aac5dd79399621d820a38f7561907fe4fa2b90af68b",
+              "compiled_source_commit": "348a52cabb33c49a1bb97c8fae35185d43dd7f31",
+              "sdk_commit": "bfbfb920bfa509f6a31ec2e6b28411a01797427f"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "loader": "defaultSeamlessLoading",
+              "input": "Each logical seat publishes its owning peer local digital host port1; neutral axes; no SIO/RAM mailbox",
+              "rollback": false,
+              "muted": true,
+              "input_delay": 3,
+              "profile": "mmx6.win64-clang22.loopback",
+              "profile_revision": 2
+            },
+            "action": "Fresh same-machine pairs: native X then Zero and Zero then X ground jumps, independently observed on each peer through source samples, event banks, natural end and final DSP.",
+            "outcome": "Both orders pass all19 bounded audio checks independently on both peers (38 per run), with matched resolved core/mod samples, unchanged private cards and graceful owned exits. Full comparison remains incomplete.",
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-jump-audio\\manifest-bound-348a52c-paired-orders-reviewed.json",
+                "sha256": "dbb157d74ad391e5db1a7f115a0d19f605e0351a92de6efe6ee2f4fb3b0b4206",
+                "bytes": 65623
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v18-348a52c-pair-x-first-32\\qualification.json",
+                "sha256": "de3825fa50a7da14203a0f99fd67526f50137ac216af579e832eb1016421483d",
+                "bytes": 3766328
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v18-348a52c-pair-zero-first-32\\qualification.json",
+                "sha256": "0b3c536329b2df726eb46311c5bf3f5016f7e430e88daf331d914af6cc0b029c",
+                "bytes": 3373551
+              }
+            ],
+            "limits": [
+              "One ordinary ground-jump vocal overlap per order on two same-machine peers; other actions and cross-machine netplay remain unverified.",
+              "Exact event-time sample bytes, bank/voice route, numerical pitch/ADSR, natural terminal events and final DSP observed independently on each peer; engine-frame spans are not an independent sample clock.",
+              "Muted output retained audio emulation; no PCM, listening, music continuity or full R4/R12 audio qualification.",
+              "Native nonjump1/5 shared hardware22 STOP and other Zero sound families remain open.",
+              "Frozen debug image only; production96/96 fixtures establish compilation without native production qualification.",
+              "Earlier eight-attempt X-first run remains inconclusive, not rewritten as a game failure. More bounded ordinary RNG trials and one fewer redundant observation produced the new evidence; RNG and success flags were not forced.",
+              "No full reference row is promoted; prior exact-image failures remain retained."
+            ],
+            "bypasses": []
           }
         ],
         "limitations": "Concrete local original-ground-jump counterexample on exactbeeae10/a8f20cdc only. Other sound families, co-op-off native Zero comparison and all netplay audio checks remain unverified."
@@ -1497,6 +1547,56 @@
               "Debug build only native receipt; production96of96 checks establish compilation/fixtures without native production qualification.",
               "Earlier reverse-order setup released Cross after one update before native consumption; preserve that failed attempt. Corrected helperb7a4e4e holds through actual action6/ascent. Final source uses actual CMake root with56game/34generated declared inputs rehashed.",
               "R4/R12 retain exact old-image failures and are not closed by bounded new-image ground-jump evidence."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "348a52cabb33c49a1bb97c8fae35185d43dd7f31",
+            "build_identity": {
+              "exe_sha256": "8198893ef9f023b59be1a9eb768977f55e7f2feae40f0ce581e322870ab4f229",
+              "declared_manifest_sha256": "3198d0285ac8dde9636c9aac5dd79399621d820a38f7561907fe4fa2b90af68b",
+              "compiled_source_commit": "348a52cabb33c49a1bb97c8fae35185d43dd7f31",
+              "sdk_commit": "bfbfb920bfa509f6a31ec2e6b28411a01797427f"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "loader": "defaultSeamlessLoading",
+              "input": "Each logical seat publishes its owning peer local digital host port1; neutral axes; no SIO/RAM mailbox",
+              "rollback": false,
+              "muted": true,
+              "input_delay": 3,
+              "profile": "mmx6.win64-clang22.loopback",
+              "profile_revision": 2
+            },
+            "action": "Fresh same-machine pairs: native X then Zero and Zero then X ground jumps, independently observed on each peer through source samples, event banks, natural end and final DSP.",
+            "outcome": "Both orders pass all19 bounded audio checks independently on both peers (38 per run), with matched resolved core/mod samples, unchanged private cards and graceful owned exits. Full comparison remains incomplete.",
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-jump-audio\\manifest-bound-348a52c-paired-orders-reviewed.json",
+                "sha256": "dbb157d74ad391e5db1a7f115a0d19f605e0351a92de6efe6ee2f4fb3b0b4206",
+                "bytes": 65623
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v18-348a52c-pair-x-first-32\\qualification.json",
+                "sha256": "de3825fa50a7da14203a0f99fd67526f50137ac216af579e832eb1016421483d",
+                "bytes": 3766328
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v18-348a52c-pair-zero-first-32\\qualification.json",
+                "sha256": "0b3c536329b2df726eb46311c5bf3f5016f7e430e88daf331d914af6cc0b029c",
+                "bytes": 3373551
+              }
+            ],
+            "limits": [
+              "One ordinary ground-jump vocal overlap per order on two same-machine peers; other actions and cross-machine netplay remain unverified.",
+              "Exact event-time sample bytes, bank/voice route, numerical pitch/ADSR, natural terminal events and final DSP observed independently on each peer; engine-frame spans are not an independent sample clock.",
+              "Muted output retained audio emulation; no PCM, listening, music continuity or full R4/R12 audio qualification.",
+              "Native nonjump1/5 shared hardware22 STOP and other Zero sound families remain open.",
+              "Frozen debug image only; production96/96 fixtures establish compilation without native production qualification.",
+              "Earlier eight-attempt X-first run remains inconclusive, not rewritten as a game failure. More bounded ordinary RNG trials and one fewer redundant observation produced the new evidence; RNG and success flags were not forced.",
+              "No full reference row is promoted; prior exact-image failures remain retained."
             ],
             "bypasses": []
           }

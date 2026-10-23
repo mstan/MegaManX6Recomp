@@ -30,6 +30,12 @@ before final DSP snapshots. The whole audio case has a fixed120-second deadline
 and at most32 native attempts. Missing vocals or no common overlap remains an
 explicit inconclusive result.
 
+The [reviewed v18 receipt](evidence/mmx6-jump-audio/manifest-bound-348a52c-paired-orders-reviewed.json)
+covers X first and Zero first on fresh same-machine pairs. Both peers pass all
+19 bounded audio checks independently in each order; the earlier inconclusive
+eight-trial run is retained. Other sound families and full R4/R12 qualification
+remain open.
+
 The pair uses different numeric127.0.0.1 UDP endpoints, delay3, and the same
 fixed profile/revision/selection before guest frame0. Resolved core/mod checks
 are required before and after the audio case. Both peers must then release their
