@@ -6,6 +6,11 @@ and [extractor](../tools/audit_mmx6_coop_audio.py) establish original banks,
 explicit voice reuse and native call boundaries. No game was launched and no
 speaker output or reference recording was produced.
 
+The [driver ownership follow-up](COOP_AUDIO_DRIVER_OWNERSHIP.md) resolves the
+ordinary X6 mirror/history/mask extents, character stop/volume path and logical
+VAB base versus asynchronous completion boundary. It preserves the explicit
+runtime blockers and unverified outcomes below; no audio adapter is enabled.
+
 The X6 candidate is `1d6f67c`. Original SLUS-01395 USA v1.1 EXE SHA-256:
 `dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046`.
 The disc's EXE is compared byte-for-byte, and each selected player DAT member

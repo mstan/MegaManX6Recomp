@@ -1,0 +1,695 @@
+{
+  "format_version": 1,
+  "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+  "evidence": "Original native instructions manually traced; hashes and call sites reproduced mechanically",
+  "implementation_status": "audit_only_no_runtime_fix",
+  "local_coop": "unverified",
+  "netplay": "unverified",
+  "routines": [
+    {
+      "name": "character_stop",
+      "start": "8001750C",
+      "end_exclusive": "800175F0",
+      "bytes": 228,
+      "sha256": "cfaf446a25718c99c6f37b58426b27a31a075cbc143f06e23314b3a5a4cd79f9",
+      "direct_calls": [
+        {
+          "site": "8001753C",
+          "target": "8005BC14"
+        },
+        {
+          "site": "80017544",
+          "target": "8005AD40"
+        },
+        {
+          "site": "800175B4",
+          "target": "8005BC14"
+        },
+        {
+          "site": "800175BC",
+          "target": "8005AD40"
+        }
+      ],
+      "indirect_call_sites": []
+    },
+    {
+      "name": "explicit_key_on",
+      "start": "8005A9D4",
+      "end_exclusive": "8005AD40",
+      "bytes": 876,
+      "sha256": "03f5fef35208abd5edae7dd33e8d6629bbb91f84ad6b62970bdb580e8be42e0e",
+      "direct_calls": [
+        {
+          "site": "8005AA60",
+          "target": "8005FC94"
+        },
+        {
+          "site": "8005ACC4",
+          "target": "8005BCA4"
+        },
+        {
+          "site": "8005ACDC",
+          "target": "8005E0D4"
+        },
+        {
+          "site": "8005ACEC",
+          "target": "8005DF40"
+        },
+        {
+          "site": "8005ACF8",
+          "target": "8005E794"
+        }
+      ],
+      "indirect_call_sites": []
+    },
+    {
+      "name": "explicit_stop",
+      "start": "8005AD40",
+      "end_exclusive": "8005ADB4",
+      "bytes": 116,
+      "sha256": "4bf08a5d3e4b862ac6ba5bc8671e91b8570cc5617530b0b8f1f3a4f1dd508f4d",
+      "direct_calls": [
+        {
+          "site": "8005AD90",
+          "target": "8005E6D4"
+        }
+      ],
+      "indirect_call_sites": []
+    },
+    {
+      "name": "explicit_volume",
+      "start": "8005BC14",
+      "end_exclusive": "8005BC98",
+      "bytes": 132,
+      "sha256": "6f28c632ab18b7f828821fb79524a01a36e926e79083454399b6b2f7bc07623d",
+      "direct_calls": [],
+      "indirect_call_sites": []
+    },
+    {
+      "name": "key_on_setup",
+      "start": "8005BCA4",
+      "end_exclusive": "8005BE6C",
+      "bytes": 456,
+      "sha256": "25866e1c62efc7c03f6bd0a95c72f6ea9fe8c217a2bc74d34312c9bf18bc802e",
+      "direct_calls": [],
+      "indirect_call_sites": []
+    },
+    {
+      "name": "driver_flush",
+      "start": "8005BE94",
+      "end_exclusive": "8005C358",
+      "bytes": 1220,
+      "sha256": "c982925ced2f77b7aa3650e41feef1acf0f6a4f93686e8d55218ad5da6afb543",
+      "direct_calls": [
+        {
+          "site": "8005BF14",
+          "target": "8005D0D4"
+        },
+        {
+          "site": "8005C018",
+          "target": "8005C364"
+        },
+        {
+          "site": "8005C208",
+          "target": "8005C8D4"
+        },
+        {
+          "site": "8005C254",
+          "target": "8005C714"
+        },
+        {
+          "site": "8005C274",
+          "target": "8005C714"
+        },
+        {
+          "site": "8005C2B0",
+          "target": "8005C6E4"
+        },
+        {
+          "site": "8005C2C4",
+          "target": "8005C6B4"
+        },
+        {
+          "site": "8005C2E4",
+          "target": "8005C654"
+        },
+        {
+          "site": "8005C2F4",
+          "target": "8005C364"
+        }
+      ],
+      "indirect_call_sites": [
+        "8005C0A8",
+        "8005C0D4"
+      ]
+    },
+    {
+      "name": "mask_write",
+      "start": "8005C394",
+      "end_exclusive": "8005C650",
+      "bytes": 700,
+      "sha256": "74b7142c3de6d8c35a1d509276e35c25db45e7a7aed6f95c58d68dc050cf890f",
+      "direct_calls": [],
+      "indirect_call_sites": []
+    },
+    {
+      "name": "key_mask_write",
+      "start": "8005C714",
+      "end_exclusive": "8005C8D0",
+      "bytes": 444,
+      "sha256": "38660be4cb7aa3eaec5a85ae2da185fd3d0861bb2a2ede00803877cb901ab59e",
+      "direct_calls": [],
+      "indirect_call_sites": []
+    },
+    {
+      "name": "transfer_gate",
+      "start": "8005D4A4",
+      "end_exclusive": "8005D4E4",
+      "bytes": 64,
+      "sha256": "b804c5ef7dbbad7535e62486bae41e9b1efbecbc1f3d62ac8db4dbd58574f8da",
+      "direct_calls": [],
+      "indirect_call_sites": []
+    },
+    {
+      "name": "noise_key_on",
+      "start": "8005E0D4",
+      "end_exclusive": "8005E63C",
+      "bytes": 1384,
+      "sha256": "3cdb7f9c8035047d253043f4e749bb66dae821f4442dffcebdceae54d7e23bcf",
+      "direct_calls": [
+        {
+          "site": "8005E41C",
+          "target": "8005E644"
+        }
+      ],
+      "indirect_call_sites": []
+    },
+    {
+      "name": "noise_clock",
+      "start": "8005E644",
+      "end_exclusive": "8005E68C",
+      "bytes": 72,
+      "sha256": "7e9c6b1dd4c410419339cc5eb126a7a3638097664d3163e686a2cb4c892562bb",
+      "direct_calls": [],
+      "indirect_call_sites": []
+    },
+    {
+      "name": "stop_queue",
+      "start": "8005E6D4",
+      "end_exclusive": "8005E794",
+      "bytes": 192,
+      "sha256": "58db8b67b6dd38c5e9ccfbe4227e5c22010d1d0b7d83b5a2cf3324549584d1ae",
+      "direct_calls": [],
+      "indirect_call_sites": []
+    },
+    {
+      "name": "sample_key_on_queue",
+      "start": "8005E794",
+      "end_exclusive": "8005EC5C",
+      "bytes": 1224,
+      "sha256": "ae6b85430c46d5414cf1dfb6e925cd5c79e2d18669ff7566671591df015b7f04",
+      "direct_calls": [],
+      "indirect_call_sites": []
+    },
+    {
+      "name": "select_vab_program",
+      "start": "8005FC94",
+      "end_exclusive": "8005FD54",
+      "bytes": 192,
+      "sha256": "bae7f102db75d7f38cfe1b5b18e87761a70d3bbee3d47857014ac341eccb55af",
+      "direct_calls": [],
+      "indirect_call_sites": []
+    },
+    {
+      "name": "header_open_wrapper",
+      "start": "800601A4",
+      "end_exclusive": "800601D8",
+      "bytes": 52,
+      "sha256": "12c33cd266a69cd9ec4415c2e8e209bbeaed11bee75eaa04022e1090b9090f76",
+      "direct_calls": [
+        {
+          "site": "800601BC",
+          "target": "80060214"
+        }
+      ],
+      "indirect_call_sites": []
+    },
+    {
+      "name": "header_open",
+      "start": "80060214",
+      "end_exclusive": "80060600",
+      "bytes": 1004,
+      "sha256": "7f19f43c11f6266305a3fb0f42461d8c3a424f97837e85d5d867485cbb52431d",
+      "direct_calls": [
+        {
+          "site": "80060248",
+          "target": "8005D4CC"
+        },
+        {
+          "site": "8006025C",
+          "target": "8005D4A4"
+        },
+        {
+          "site": "8006031C",
+          "target": "8005D4A4"
+        },
+        {
+          "site": "800604FC",
+          "target": "8005D4A4"
+        }
+      ],
+      "indirect_call_sites": [
+        "800604C4"
+      ]
+    },
+    {
+      "name": "body_transfer",
+      "start": "80060604",
+      "end_exclusive": "80060788",
+      "bytes": 388,
+      "sha256": "d754d3081b86782fec320751a05afedc6eb991a098fc35d792be673a1f7fa2e2",
+      "direct_calls": [
+        {
+          "site": "80060688",
+          "target": "80055BA4"
+        },
+        {
+          "site": "8006069C",
+          "target": "80060794"
+        },
+        {
+          "site": "800606E0",
+          "target": "8005D4A4"
+        },
+        {
+          "site": "8006070C",
+          "target": "8005D4A4"
+        },
+        {
+          "site": "80060718",
+          "target": "800607F4"
+        }
+      ],
+      "indirect_call_sites": []
+    },
+    {
+      "name": "transfer_complete",
+      "start": "80060884",
+      "end_exclusive": "80060958",
+      "bytes": 212,
+      "sha256": "f487130f60c53628e1185c777ae70e26f2cadac784034ffdeabb5a59a797afb3",
+      "direct_calls": [
+        {
+          "site": "80060890",
+          "target": "800608B4"
+        },
+        {
+          "site": "800608FC",
+          "target": "80069E44"
+        },
+        {
+          "site": "8006091C",
+          "target": "80069E44"
+        }
+      ],
+      "indirect_call_sites": []
+    }
+  ],
+  "native_regions": [
+    {
+      "name": "voice_metadata",
+      "base": "800E4E40",
+      "stride": 56,
+      "count": 24,
+      "end_exclusive": "800E5380",
+      "evidence": "8005ABF8..8005ACC8; init 8005D248..8005D36C"
+    },
+    {
+      "name": "voice_dirty",
+      "base": "800E5380",
+      "stride": 1,
+      "count": 24,
+      "end_exclusive": "800E5398",
+      "evidence": "8005BDBC,8005BE68,8005EB08; flush 8005C128..8005C238"
+    },
+    {
+      "name": "voice_register_mirror",
+      "base": "800E53A0",
+      "stride": 16,
+      "count": 24,
+      "end_exclusive": "800E5520",
+      "evidence": "8005BCA4/8005E794; init 8005D13C..8005D164"
+    },
+    {
+      "name": "voice_end_history",
+      "base": "800E5528",
+      "stride": 4,
+      "count": 16,
+      "end_exclusive": "800E5568",
+      "evidence": "8005BCEC..8005BD10; flush 8005BEC4..8005BFA8"
+    },
+    {
+      "name": "key_on_mask",
+      "base": "800E4E30",
+      "stride": 2,
+      "count": 2,
+      "end_exclusive": "800E4E34",
+      "evidence": "8005EC10..8005EC2C; flush 8005C25C..8005C278"
+    },
+    {
+      "name": "noise_mask",
+      "base": "800E4E38",
+      "stride": 2,
+      "count": 2,
+      "end_exclusive": "800E4E3C",
+      "evidence": "8005EBE8..8005EC18; flush 8005C2CC..8005C2F8"
+    },
+    {
+      "name": "reverb_mask",
+      "base": "800E4E34",
+      "stride": 2,
+      "count": 2,
+      "end_exclusive": "800E4E38",
+      "evidence": "8005EB70..8005EBCC; flush 8005C298..8005C2C8"
+    },
+    {
+      "name": "key_off_mask",
+      "base": "800E5568",
+      "stride": 2,
+      "count": 2,
+      "end_exclusive": "800E556C",
+      "evidence": "8005E758/8005E77C; flush 8005C23C..8005C258"
+    }
+  ],
+  "character_tones": [
+    {
+      "member": 85,
+      "character": "Zero",
+      "group": 1,
+      "header_sha256": "abf6451ffee33fa526e91be07e9c4f854c38ef0840ffa19c50a89c896536c857",
+      "allocated_tone_slots": 48,
+      "sample_numbers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "noise_sample_255_slots": []
+    },
+    {
+      "member": 85,
+      "character": "Zero",
+      "group": 3,
+      "header_sha256": "7c9fedd98a3d4740a2baddcc77323984e8b0a1ae139e24f36043cdfd0fa757ce",
+      "allocated_tone_slots": 32,
+      "sample_numbers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "noise_sample_255_slots": []
+    },
+    {
+      "member": 86,
+      "character": "Ultimate X",
+      "group": 1,
+      "header_sha256": "b4c3506a39e2c2b81cecc2614352059e4c1d8b14730f5ae4871723ac426c65fc",
+      "allocated_tone_slots": 80,
+      "sample_numbers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "noise_sample_255_slots": []
+    },
+    {
+      "member": 86,
+      "character": "Ultimate X",
+      "group": 3,
+      "header_sha256": "1a63a15f0f26daab6d65a554fc95688b014ab458764d57cd2105520c8d7f689c",
+      "allocated_tone_slots": 32,
+      "sample_numbers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "noise_sample_255_slots": []
+    },
+    {
+      "member": 87,
+      "character": "Falcon X",
+      "group": 1,
+      "header_sha256": "3fc7f1fcd8f9fd4180af09cdf7aab3f907c1406ab513145a7cc2490a93c4e98a",
+      "allocated_tone_slots": 80,
+      "sample_numbers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "noise_sample_255_slots": []
+    },
+    {
+      "member": 87,
+      "character": "Falcon X",
+      "group": 3,
+      "header_sha256": "1a63a15f0f26daab6d65a554fc95688b014ab458764d57cd2105520c8d7f689c",
+      "allocated_tone_slots": 32,
+      "sample_numbers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "noise_sample_255_slots": []
+    },
+    {
+      "member": 88,
+      "character": "Shadow X",
+      "group": 1,
+      "header_sha256": "d4549a99331ae79e5c3f6a844185445629cb64a81737b1fef6b540f2364cc6e8",
+      "allocated_tone_slots": 48,
+      "sample_numbers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "noise_sample_255_slots": []
+    },
+    {
+      "member": 88,
+      "character": "Shadow X",
+      "group": 3,
+      "header_sha256": "1a63a15f0f26daab6d65a554fc95688b014ab458764d57cd2105520c8d7f689c",
+      "allocated_tone_slots": 32,
+      "sample_numbers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "noise_sample_255_slots": []
+    },
+    {
+      "member": 89,
+      "character": "Blade X",
+      "group": 1,
+      "header_sha256": "0442d04cbf6fdab0e8a369bbff6d03495adde6aac75bca472dc32ec7d4e8fce9",
+      "allocated_tone_slots": 96,
+      "sample_numbers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "noise_sample_255_slots": []
+    },
+    {
+      "member": 89,
+      "character": "Blade X",
+      "group": 3,
+      "header_sha256": "1a63a15f0f26daab6d65a554fc95688b014ab458764d57cd2105520c8d7f689c",
+      "allocated_tone_slots": 32,
+      "sample_numbers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13
+      ],
+      "noise_sample_255_slots": []
+    }
+  ],
+  "remaining": [
+    "Resolve and bound flush callback targets at 800E5520 and 800E5398 and every scheduler entry to the flush.",
+    "Prove uncharged isolated native calculation cannot flush/escape midway, including queued SPU write mode.",
+    "Implement character-scoped status/stop/volume, global stop, VAB epoch and snapshot ownership, preserving music.",
+    "Obtain native muted captures of sample identity, overlap, natural end, stop, load/retry/rematch and snapshot replay."
+  ]
+}
