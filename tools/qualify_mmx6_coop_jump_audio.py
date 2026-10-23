@@ -20,6 +20,7 @@ import traceback
 import coop_debug as debug
 import coop_host_profile as manifests
 import mmx6_coop_jump_audio as audio
+import mmx6_coop_body_audio as body_audio
 import mmx6_input_recording as codec
 import prepare_mmx6_coop_playtest as preparation
 import prepare_mmx6_input_replay as artifacts
@@ -28,6 +29,7 @@ import qualify_mmx6_input_replay as host
 
 
 SUCCESS = "jump_audio_observations_complete_outcomes_unverified"
+BODY_SUCCESS = "body_audio_observations_complete_outcomes_unverified"
 INCONCLUSIVE = "inconclusive_native_rng_no_two_voice_window"
 
 
@@ -174,7 +176,8 @@ def card_hashes(candidate):
             for path in sorted((candidate/"saves").rglob("*.mcd"))}
 
 
-def inspect_capture(candidate: Path, image: str, manifest: str, required_seats: set[int]) -> dict:
+def inspect_capture(candidate: Path, image: str, manifest: str, required_seats: set[int], *, button=audio.CROSS) -> dict:
+    if button not in (audio.CROSS,body_audio.SQUARE):raise ValueError("Unsupported recorded action button")
     paths=list(candidate.glob("saves/**/input-recordings/session-*/inputs.jsonl"))
     if len(paths)!=1:raise ValueError("Require one finalized native-consumption recording")
     path=paths[0]
@@ -216,15 +219,17 @@ def inspect_capture(candidate: Path, image: str, manifest: str, required_seats: 
     with path.open("rb") as stream:
         for raw in stream:
             event=json.loads(raw)
-            if event.get("type")=="N" and event["pads"][0][0]&0x40:seen.add(0)
-            if event.get("type")=="C" and event["buttons"]&audio.CROSS:seen.add(1)
-    if not required_seats<=seen:raise ValueError("Native trace lacks a requested seat's accepted jump input")
+            if event.get("type")=="N" and event["pads"][0][0]&(button>>8):seen.add(0)
+            if event.get("type")=="C" and event["buttons"]&button:seen.add(1)
+    if not required_seats<=seen:raise ValueError("Native trace lacks a requested seat's accepted action input")
     return dict(path=str(path),sha256=preparation.sha256(path),events=summary.events,natives=summary.natives,
-                p2_reads=summary.p2_reads,identity=identity,requested_jump_seats=sorted(required_seats),
-                consumed_cross_seen_anywhere=sorted(seen),scope="Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence")
+                p2_reads=summary.p2_reads,identity=identity,
+                **({"requested_jump_seats":sorted(required_seats),"consumed_cross_seen_anywhere":sorted(seen)} if button==audio.CROSS else
+                   {"requested_saber_seats":sorted(required_seats),"consumed_square_seen_anywhere":sorted(seen)}),
+                scope="Ordered native N/P2 C consumption; no temporal "+("jump" if button==audio.CROSS else "saber")+" association or audio/output equivalence")
 
 
-def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,expected_image,first_seat,max_attempts,audio_timeout,private_banks=None):
+def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,expected_image,first_seat,max_attempts,audio_timeout,private_banks=None,body_source=None):
     host.require_windows();host.reserve(port)
     prepared=host.json_object(candidate/"preparation.json")
     baseline.candidate_environment(candidate,prepared)
@@ -278,8 +283,12 @@ def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,exp
                 request=control,hold=route.hold,native_advance=route.native_advance,report=report,
                 candidate=candidate,expected_sha256=expected_image)
             if private_banks is not None:context["private_banks"]=private_banks
-            report["audio"]=audio.jump_overlap_smoke(context,contract,first_seat=first_seat,
-                max_attempts=max_attempts,timeout=audio_timeout)
+            if body_source is not None:
+                context["set_input"]=route.set
+                report["audio"]=body_audio.exercise(context,contract,source=body_source,timeout=audio_timeout)
+            else:
+                report["audio"]=audio.jump_overlap_smoke(context,contract,first_seat=first_seat,
+                    max_attempts=max_attempts,timeout=audio_timeout)
             status=control("netplay_status");verify_offline(status);report["offline_after"]=status
             report["status"]=report["audio"]["status"]
         finally:
@@ -307,6 +316,7 @@ def parser():
     p.add_argument("--max-attempts",type=int,default=8)
     p.add_argument("--private-banks",action="store_true",
                    help="Require new read-only event-bank/private-voice diagnostics and exact Zero30/31 banks")
+    p.add_argument("--body-sfx",action="store_true",help="Observe ordinary Zero saber SFX and native private stop; requires --private-banks")
     p.add_argument("--boot-timeout",type=float,default=240);p.add_argument("--progress-timeout",type=float,default=12)
     p.add_argument("--audio-timeout",type=float,default=90)
     return p
@@ -317,6 +327,7 @@ def options(p,args):
     if any(re.fullmatch(r"[0-9a-f]{64}",getattr(args,key)) is None for key in ("expected_exe_sha256","expected_manifest_sha256")):
         p.error("Require explicit lowercase executable and declared-manifest SHA256")
     if not 1<=args.port<=65535 or not 1<=args.max_attempts<=8:p.error("Require port1..65535 and attempts1..8")
+    if args.body_sfx and not args.private_banks:p.error("Body SFX requires immutable private-bank diagnostics")
     for name,bound in (("boot_timeout",600),("progress_timeout",60),("audio_timeout",120)):
         if not math.isfinite(getattr(args,name)) or not 0<getattr(args,name)<=bound:p.error("Require finite bounded timeouts")
 
@@ -326,10 +337,10 @@ def run(args):
     output=preparation.local_output(args.output)
     if output.exists():raise ValueError("Output exists; preserve it and select a fresh F:/G: profile")
     output.mkdir(parents=True)
-    report=dict(schema=1,kind="owned_offline_jump_audio",status="failed_setup",r4="unverified",r12="unverified",
+    report=dict(schema=1,kind="owned_offline_body_audio" if args.body_sfx else "owned_offline_jump_audio",status="failed_setup",r4="unverified",r12="unverified",
         diagnostics_scope="private_banks_v1" if args.private_banks else "hardware_legacy",
         audible_output="not_tested",checks={},tools={Path(m.__file__).name:preparation.sha256(Path(m.__file__))
-        for m in (audio,debug,manifests,preparation,baseline,host,codec,artifacts)},runner_sha256=preparation.sha256(Path(__file__)),
+        for m in (audio,body_audio,debug,manifests,preparation,baseline,host,codec,artifacts)},runner_sha256=preparation.sha256(Path(__file__)),
         runtime={},limits=["Local native digital virtual host slots only; no physical-controller or paired proof",
             "No PCM comparison, independent SPU-sample clock or music continuity proof; explicit diagnostic scope is retained"])
     (output/"runner-source.py").write_bytes(Path(__file__).read_bytes())
@@ -340,6 +351,10 @@ def run(args):
         report["checks"]["original_source_contract_reproduced"]=True
         (output/"source-contract.json").write_bytes(args.contract.read_bytes())
         private_banks=audio.build_private_bank_contract(args.disc,contract) if args.private_banks else None
+        body_source=body_audio.build_source(args.original_exe,args.disc) if args.body_sfx else None
+        if body_source is not None:
+            (output/"source-body-routes.json").write_bytes((json.dumps(body_source,indent=2)+"\n").encode('utf-8'))
+            (output/"mmx6_coop_body_audio-executed-source.py").write_bytes(Path(body_audio.__file__).read_bytes())
         if private_banks is not None:
             report["private_bank_source"]=private_banks
             report["checks"]["original_private_source_banks_reproduced"]=True
@@ -359,27 +374,32 @@ def run(args):
         try:
             run_owned(candidate,args.port,args.boot_timeout,args.progress_timeout,report["runtime"],contract,
                 expected_image=args.expected_exe_sha256,first_seat=args.first_seat,max_attempts=args.max_attempts,
-                audio_timeout=args.audio_timeout,private_banks=private_banks)
+                audio_timeout=args.audio_timeout,private_banks=private_banks,body_source=body_source)
         except Exception as error:
             run_error=error
         native=report["runtime"]
         try:
             if native.get("cleanup")!=dict(shutdown="graceful_owned_debug",exit_code=0) or not native.get("existing_private_cards_unchanged"):
                 raise debug.DebugError("Owned shutdown/private-card retention failed")
-            requested={row["seat"] for row in native.get("accepted_windows",[]) if row["pressed"]==audio.CROSS and row["label"].startswith("audio-")}
-            report["capture"]=inspect_capture(candidate,args.expected_exe_sha256,args.expected_manifest_sha256,requested)
+            button=body_audio.SQUARE if args.body_sfx else audio.CROSS
+            requested={row["seat"] for row in native.get("accepted_windows",[]) if row["pressed"]==button and
+                       row["label"].startswith("body-audio-" if args.body_sfx else "audio-")}
+            if args.body_sfx:
+                report["capture"]=inspect_capture(candidate,args.expected_exe_sha256,args.expected_manifest_sha256,requested,button=button)
+            else:
+                report["capture"]=inspect_capture(candidate,args.expected_exe_sha256,args.expected_manifest_sha256,requested)
             report["checks"]["finalized_native_input_capture_and_owned_cleanup"]=True
         except Exception as error:
             report["postrun_error"]=dict(type=type(error).__name__,message=str(error))
             if run_error is None:raise
         if run_error is not None:raise run_error
         status=native.get("status")
-        report["status"]=SUCCESS if status=="observations_complete" else status
+        report["status"]=(BODY_SUCCESS if args.body_sfx else SUCCESS) if status=="observations_complete" else status
         if status not in ("observations_complete","comparison_failed",INCONCLUSIVE):
             raise debug.DebugError("Observer did not complete a bounded audio comparison")
     except Exception as error:
         report["error"]=dict(type=type(error).__name__,message=str(error));report["traceback"]=traceback.format_exc()
-        if report["status"]==SUCCESS:report["status"]="failed"
+        if report["status"] in (SUCCESS,BODY_SUCCESS):report["status"]="failed"
     finally:
         (output/"qualification.json").write_text(json.dumps(report,indent=2)+"\n",encoding="utf-8")
     return report
@@ -390,7 +410,7 @@ def main(argv=None):
     try:result=run(args)
     except (ValueError,OSError) as error:p.exit(1,str(error)+"\n")
     print(json.dumps(result,indent=2))
-    return 0 if result["status"]==SUCCESS else (2 if result["status"]==INCONCLUSIVE else 1)
+    return 0 if result["status"] in (SUCCESS,BODY_SUCCESS) else (2 if result["status"]==INCONCLUSIVE else 1)
 
 
 if __name__=="__main__":raise SystemExit(main())

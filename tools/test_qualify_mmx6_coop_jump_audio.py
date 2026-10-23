@@ -132,6 +132,10 @@ class ProtocolTests(unittest.TestCase):
         p=runner.parser();legacy=p.parse_args(argv);modern=p.parse_args(argv+["--private-banks"])
         runner.options(p,legacy);runner.options(p,modern)
         self.assertFalse(legacy.private_banks);self.assertTrue(modern.private_banks)
+        with patch("sys.stderr",new=io.StringIO()),self.assertRaises(SystemExit):
+            runner.options(p,p.parse_args(argv+["--body-sfx"]))
+        body=p.parse_args(argv+["--private-banks","--body-sfx"]);runner.options(p,body)
+        self.assertTrue(body.body_sfx)
 
 
 class FilesTests(unittest.TestCase):
@@ -167,7 +171,7 @@ class FilesTests(unittest.TestCase):
         path.write_text(original);(build/"CMakeCache.txt").write_text("GAME_GENERATED_DIR:STRING=generated\n")
         with self.assertRaises(ValueError):runner.validate_sources(build,source,manifest)
 
-    def recording(self):
+    def recording(self,button=0x4000):
         candidate=self.root/"candidate";record=candidate/"saves/input-recordings/session-1";record.mkdir(parents=True)
         settings=dict(declared_scope_available=1,input=dict(ports=[dict(seat=i,device_kind=1,configured_mode=2,connected=1,type=0)for i in (0,1)]))
         bundles={"settings.json":runner.codec.canonical(settings),"content.json":b'{}\n',
@@ -177,8 +181,8 @@ class FilesTests(unittest.TestCase):
             settings_sha256=runner.codec.sha256(bundles["settings.json"]),content_sha256=runner.codec.sha256(bundles["content.json"]),
             simulation_contract_sha256=runner.codec.sha256(bundles["simulation-contract.json"]),mode="offline",profile=None,cards=[None,None],baseline=None)
         stream=io.BytesIO();writer=runner.codec.Encoder(stream,identity)
-        writer.append(dict(type="N",order=0,native=0,cycles=10,sim_tick=None,frame=20,caller=0x80012220,pads=[[0x40,0,0x40],[0,0,0]]))
-        writer.append(dict(type="C",order=1,native=0,cycles=11,sim_tick=None,seat=1,consumer="stage",buttons=0x4000));writer.finish()
+        writer.append(dict(type="N",order=0,native=0,cycles=10,sim_tick=None,frame=20,caller=0x80012220,pads=[[button>>8,0,button>>8],[0,0,0]]))
+        writer.append(dict(type="C",order=1,native=0,cycles=11,sim_tick=None,seat=1,consumer="stage",buttons=button));writer.finish()
         (record/"inputs.jsonl").write_bytes(stream.getvalue())
         (record/"status.json").write_bytes(runner.codec.canonical(dict(contract=runner.codec.CONTRACT,epoch=1,failure="",schema=1,
             scope=runner.artifacts.STATUS_SCOPE,status="finalized")))
@@ -192,6 +196,16 @@ class FilesTests(unittest.TestCase):
         self.assertIn("no temporal jump association",found["scope"])
         (record/"inputs.jsonl").write_bytes((record/"inputs.jsonl").read_bytes()[:-1])
         with self.assertRaises(ValueError):runner.inspect_capture(candidate,"1"*64,"2"*64,{0,1})
+
+    def test_saber_capture_requires_actual_square_consumption(self):
+        candidate,record=self.recording(button=0x8000)
+        result=runner.inspect_capture(candidate,"1"*64,"2"*64,{1},button=0x8000)
+        self.assertEqual(result['consumed_square_seen_anywhere'],[0,1])
+        with self.assertRaises(ValueError):runner.inspect_capture(candidate,"1"*64,"2"*64,{1})
+
+    def test_jump_consumption_does_not_substitute_for_saber(self):
+        candidate,record=self.recording()
+        with self.assertRaises(ValueError):runner.inspect_capture(candidate,"1"*64,"2"*64,{1},button=0x8000)
 
     def test_capture_bad_status_image_manifest_or_startup_bundle_refused(self):
         candidate,record=self.recording()

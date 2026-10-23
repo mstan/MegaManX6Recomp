@@ -39,3 +39,13 @@ state coverage remain required.
 Prior v18 jump receipts remain bound to their original executable. Other vocal,
 hurt, multi-voice death, earned technique, child, music and PCM coverage remain
 open under R4/R12.
+
+The owned local audio runner accepts `--private-banks --body-sfx` for an
+ordinary standing Zero Square/neutral case. It retains original-source body
+records, probes every selected sample byte in reads of at most 4096 bytes,
+checks numerical pitch/ADSR, and observes private KEYOFF plus final volume/DSP.
+It holds Square until actual saber action and KEYON are observed. Natural
+sample end alone cannot pass the STOP check, and reused voices cannot borrow
+an older note's final envelope. The finalized native trace must contain actual
+P2 Square consumption. Other character vocal events remain visible in the
+report and do not acquire a passing disposition from this SFX case.
