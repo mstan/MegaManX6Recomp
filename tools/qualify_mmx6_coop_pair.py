@@ -715,26 +715,12 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             reservation.close()
         for seat, process in enumerate(processes):
             peer = report["peers"][seat]
-            if process.poll() is None:
-                try:
-                    clients[seat].release()
-                    clients[seat].request("quit")
-                    process.wait(timeout=5)
-                    peer["shutdown"] = "graceful_owned_debug"
-                except Exception:
-                    if process.poll() is None:
-                        process.terminate()
-                    try:
-                        process.wait(timeout=5)
-                    except subprocess.TimeoutExpired:
-                        process.kill()
-                        process.wait(timeout=5)
-                    peer["shutdown"] = "owned_popen_terminated"
-            else:
-                peer["shutdown"] = "already_exited"
+            peer.update(baseline.stop_owned_runtime(process,
+                clear_inputs=(lambda: clients[seat].release(),),
+                request_quit=lambda: clients[seat].request("quit")))
+            if peer["shutdown"] == "already_exited":
                 if report["status"] == "passed":
                     report["status"] = "failed"
-            peer["exit_code"] = process.poll()
             peer["private_card_files"] = [dict(name=path.name, sha256=preparation.sha256(path))
                 for path in (Path(peer["directory"])/"saves").glob("*.mcd")]
         executor.shutdown(wait=True)

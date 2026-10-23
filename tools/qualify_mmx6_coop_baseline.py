@@ -75,6 +75,54 @@ def candidate_environment(candidate: Path, preparation: dict) -> dict:
     return environment
 
 
+def stop_owned_runtime(process, *, clear_inputs, request_quit) -> dict:
+    """Stop only a runner-created Popen; an invalid quit ACK is not an exit.
+
+    Callbacks retain the runner's listener/PID checks. A quit transport,
+    ownership or acknowledgement error is retained separately while the owned
+    process still gets the normal five seconds to exit without termination.
+    """
+    def error_record(error):
+        return dict(type=type(error).__name__, message=str(error))
+
+    result = {}
+    if process.poll() is not None:
+        return dict(shutdown="already_exited", exit_code=process.poll())
+    for index, clear in enumerate(clear_inputs):
+        try:
+            clear()
+        except Exception as error:
+            result.setdefault("input_release_errors", []).append(
+                dict(index=index, **error_record(error)))
+    try:
+        request_quit()
+    except Exception as error:
+        result["quit_protocol_error"] = error_record(error)
+    try:
+        process.wait(timeout=5)
+    except subprocess.TimeoutExpired as error:
+        result["natural_exit_timeout"] = error_record(error)
+        # Recheck for exit at the deadline before signalling only this Popen.
+        if process.poll() is None:
+            process.terminate()
+            result["shutdown"] = "owned_popen_terminated"
+            try:
+                process.wait(timeout=5)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                process.wait(timeout=5)
+                result["shutdown"] = "owned_popen_killed"
+    if "shutdown" not in result:
+        if "quit_protocol_error" in result:
+            result["shutdown"] = "natural_exit_after_quit_protocol_error"
+        elif "input_release_errors" in result:
+            result["shutdown"] = "natural_exit_after_input_release_error"
+        else:
+            result["shutdown"] = "graceful_owned_debug"
+    result["exit_code"] = process.poll()
+    return result
+
+
 def run(candidate: Path, port: int, timeout: float, legacy: bool, *, exercise=None) -> dict:
     candidate = candidate.resolve(strict=True)
     preparation = json.loads((candidate / "preparation.json").read_text())
@@ -191,24 +239,14 @@ def run(candidate: Path, port: int, timeout: float, legacy: bool, *, exercise=No
                 pass
     finally:
         if process is not None:
-            if process.poll() is not None:
+            cleanup = stop_owned_runtime(process,
+                clear_inputs=(lambda: control("clear_input", port=1),
+                              lambda: control("clear_input", port=2)),
+                request_quit=lambda: control("quit"))
+            result.update(cleanup)
+            if cleanup["shutdown"] == "already_exited":
                 result["status"] = "failed" if result["status"] == "passed" else result["status"]
                 result["unexpected_exit"] = True
-            if process.poll() is None:
-                try:
-                    control("clear_input", port=1)
-                    control("clear_input", port=2)
-                    control("quit")
-                    process.wait(timeout=5)
-                    result["shutdown"] = "graceful"
-                except (DebugError, OSError, subprocess.TimeoutExpired):
-                    process.terminate()
-                    try:
-                        process.wait(timeout=5)
-                    except subprocess.TimeoutExpired:
-                        process.kill();process.wait(timeout=5)
-                    result["shutdown"] = "owned_process_terminated"
-            result["exit_code"] = process.poll()
         result["existing_private_cards_unchanged"] = all((candidate / "saves" / name).read_bytes() == data
                                                         for name, data in before.items())
         if not result["existing_private_cards_unchanged"]:

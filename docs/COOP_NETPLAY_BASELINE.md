@@ -304,3 +304,21 @@ Choose a fresh evidence directory. A passing bounded runner would still be
 only an intro/input smoke. The pinned framework has no host-state `mod`
 checksum partition; standalone diagnostic FNV matching must never be described
 as full core/mod synchronization.
+
+## Owned shutdown receipts
+
+The baseline and paired runners share `stop_owned_runtime`. Every cleanup RPC
+still uses its existing listener/PID guard. A failed input release is retained
+under `input_release_errors`; a quit transport, ownership or acknowledgement
+failure is retained with its exact exception type and message under
+`quit_protocol_error`. Either failure still allows the owned Popen its existing
+five-second natural-exit window. An invalid acknowledgement followed by exit
+is reported as `natural_exit_after_quit_protocol_error`, with the actual exit
+code, and never as graceful. Only a process still running after that window
+receives `terminate`, followed by the existing bounded wait/kill fallback.
+Already-exited processes receive no controls or signals.
+
+`tools/test_mmx6_coop_owned_cleanup.py` covers these paths with mock processes,
+including valid acknowledgements without exit and rejected listener ownership.
+These tests establish harness cleanup behavior, not native quit protocol
+correctness or a runtime hang. No additional game was launched for this change.
