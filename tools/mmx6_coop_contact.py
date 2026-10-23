@@ -338,9 +338,14 @@ def contact_pause_contact(ctx: dict, *, expected_exe_sha256: str) -> dict:
         require(all(row["players"][1]["hp_raw"] == 32 for row in initial), "R2 needs fresh full-health Zero")
         case["status"] = "failed"
         counters = [row["p2_contact_counter"] for row in initial]
-        for step in range(24):
+        # Offline short SIO pulses can cover less ground than the paired
+        # transport windows. Stop on native admission, with the same original
+        # camera bound, rather than assuming24 pulses reach that boundary.
+        for step in range(40):
             ctx["hold"](1, menu.RIGHT, 4, f"R2 native admission right{step}")
             rows = sample("R2 native admission", need_actor=False)
+            require(all(row["camera"][0] <= 80 or row["instance"] for row in rows),
+                    "R2 camera passed the source admission window without its bound native origin")
             if all(row["instance"] for row in rows):
                 break
         else:
