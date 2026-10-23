@@ -201,7 +201,7 @@ if(BUILD_TESTING)
                 test_mmx6_coop_personal_menu_runner test_mmx6_coop_contact
                 test_mmx6_input_recording test_mmx6_content_coverage
                 test_mmx6_coop_contact_runner test_mmx6_coop_owned_cleanup
-                test_mmx6_coop_checkpoint)
+                test_mmx6_coop_checkpoint test_mmx6_coop_private_effects)
             add_test(NAME mmx6_${_mmx6_python_test}
                 COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/${_mmx6_python_test}.py")
         endforeach()
