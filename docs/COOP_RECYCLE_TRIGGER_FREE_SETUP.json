@@ -1,0 +1,241 @@
+{
+  "schema": 1,
+  "source_only": true,
+  "original_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+  "original_bin_sha256": "55b03e4ecc13d6110ff300f80b7000b0f97234e19f1b846aa2b885eece30d80f",
+  "inventory_sha256": "67508ae2e19ad07c2c5cad41e12dbeb5e446e4eb50f033efa75ed306f2636fad",
+  "source_spans": [
+    {
+      "name": "capsule_initialize",
+      "address": "80051158",
+      "bytes": 824,
+      "sha256": "300a32c51fa32145927fde5865795aaea86b82132e8bfee4701d7e9aafee77e9"
+    },
+    {
+      "name": "capsule_update",
+      "address": "80051890",
+      "bytes": 148,
+      "sha256": "b2e662176c7d97badefec8cd67b9485c3064a0c101598119646e56f10861e488"
+    },
+    {
+      "name": "capsule_trigger",
+      "address": "80051924",
+      "bytes": 288,
+      "sha256": "1351c2c188e51729e9bf1257c28964c00e46d31eef58deb88eef537924c77b59"
+    },
+    {
+      "name": "capsule_action_table",
+      "address": "80078E18",
+      "bytes": 20,
+      "sha256": "559b5bf641a8bfc58a496d3fbe95832714804683081d5463e6b48cc31c6ead8a"
+    },
+    {
+      "name": "capsule_boxes",
+      "address": "80078DF8",
+      "bytes": 12,
+      "sha256": "894a5bd3f3eea3da3c45bd35445228fbe2a3039aeedc0881ee2f421fcf147805"
+    },
+    {
+      "name": "portal_contact",
+      "address": "8002D654",
+      "bytes": 532,
+      "sha256": "39bed2ddf0ab87f9f986d8f51c1fc735557ffbf0949fd4dfd3fc54e928d2168b"
+    },
+    {
+      "name": "initial_admission",
+      "address": "8002A3E8",
+      "bytes": 144,
+      "sha256": "9225a99471fa8645b007643f062416d822fa8a14038d56a94e7899a935e0cc97"
+    }
+  ],
+  "capsule": {
+    "index": 117,
+    "address": "800F2E24",
+    "flags": 0,
+    "object_id": 26,
+    "subtype": 4,
+    "category": 4,
+    "x": 1424,
+    "y": 1592,
+    "status": "unverified"
+  },
+  "capsule_native": {
+    "handler": "800515B4",
+    "initialize": "80051158",
+    "update": "80051890",
+    "action_table": "80078E18[0] ->80051924",
+    "terrain_box": "80078DF8",
+    "terrain_box_values": [
+      0,
+      0,
+      16,
+      12
+    ],
+    "damage_box": "80078E00",
+    "damage_box_values": [
+      -16,
+      -12,
+      32,
+      24
+    ],
+    "initial_foot_probes": [
+      [
+        0,
+        0,
+        0
+      ],
+      [
+        56,
+        56,
+        56
+      ]
+    ],
+    "predicted_grounded_y": 1604,
+    "trigger": "signed16 |dx|<=64 and -104<=dy<=16 in ordinary local coordinates; does not read damage boxes",
+    "trigger_limit": "Native signed16 negation wrap reproduced by calculator; local source region only for setup"
+  },
+  "reference_character_boxes": [
+    {
+      "character": 0,
+      "index": 0,
+      "sector": 2,
+      "bytes": 44588,
+      "sha256": "180175846cf8b1b650c405be8085b19417be033b4644a4034d70703124bf7871",
+      "box_address": "801F3F50",
+      "box_values": [
+        -10,
+        -17,
+        19,
+        38
+      ],
+      "condition": "Explicit source reference, not an inferred current standing/idle box"
+    },
+    {
+      "character": 1,
+      "index": 1,
+      "sector": 24,
+      "bytes": 22964,
+      "sha256": "75a142a529ddc70f0d60ee6be32ebcdb0cf5cc90ec88e965c3b15cf0c6d21b00",
+      "box_address": "801EEA04",
+      "box_values": [
+        -10,
+        -17,
+        21,
+        39
+      ],
+      "condition": "Explicit source reference, not an inferred current standing/idle box"
+    }
+  ],
+  "conditional_reference_setup": {
+    "status": "conditional_source_setup_not_native_qualification",
+    "floor_y": 1616,
+    "body_center_envelope": [
+      1467,
+      1557
+    ],
+    "capsule_position": [
+      1424,
+      1604
+    ],
+    "portal_position": [
+      1552,
+      1584
+    ],
+    "source_miss_intervals": [
+      [
+        1489,
+        1523
+      ]
+    ],
+    "excluded_counts": {
+      "capsule": 22,
+      "portal": 34
+    },
+    "x_damage_box": [
+      -10,
+      -17,
+      19,
+      38
+    ],
+    "zero_damage_box": [
+      -10,
+      -17,
+      21,
+      39
+    ],
+    "conditional_both_seat_probe": {
+      "x": 1506,
+      "y": 1593,
+      "x_native_landing_y": 1595,
+      "zero_native_landing_y": 1594,
+      "command": 4,
+      "seat": 2,
+      "selection": "midpoint_of_widest_proven_source_miss_interval"
+    },
+    "automatic_actions": [],
+    "local_coop": "unverified",
+    "netplay": "unverified",
+    "remaining_conditions": [
+      "Exact current per-seat damage box provenance and native terrain boxes must match these inputs",
+      "Live layout, scratch pointers, full metatiles/descriptors and dynamic hazards/solids must pass preflight",
+      "Use a fresh scene-free offline setup; never clear an existing capsule dialogue/portal lock",
+      "Position both eligible living seats atomically, or before enrollment and then prove safe native joining",
+      "Only original landing, idle, lock release, enrollment, camera and actor initialization may qualify readiness",
+      "Original checkpoint-X mismatch and command4 are disclosed tainted prerequisite bypasses; no paired mailbox"
+    ]
+  },
+  "checkpoint": {
+    "id": "s04-a0-c02",
+    "stage": 4,
+    "section": 0,
+    "checkpoint": 2,
+    "stage_name": "Recycle Lab / Metal Shark Player",
+    "stage_role": "investigator",
+    "table": "80073188",
+    "record": "80072444",
+    "player": {
+      "x": 480,
+      "y": 1456
+    },
+    "camera": {
+      "x": 320,
+      "y": 1424,
+      "min_x": 320,
+      "max_x": 1264,
+      "min_y": 1424,
+      "max_y": 1424
+    },
+    "arrival": 64,
+    "status": "unverified",
+    "checks": {
+      "terrain_collision_scroll": "unverified",
+      "enemies_interactions": "unverified",
+      "music_sfx": "unverified",
+      "checkpoint_retry": "unverified",
+      "boss": "unverified",
+      "exit_actual_transition": "unverified"
+    }
+  },
+  "original_camera_admission": {
+    "settled_camera": [
+      1264,
+      1424
+    ],
+    "viewport": [
+      1264,
+      1584,
+      1424,
+      1664
+    ],
+    "initial_expanded_rectangle": [
+      1216,
+      1632,
+      1376,
+      1712
+    ],
+    "scanner": "8002A3E8 ->80029F38",
+    "requirements": "Wait for original camera/admission and live capsule phase1/action0, portal phase1/action1 with source geometry; no flags/actor initialization writes"
+  },
+  "local_coop": "unverified",
+  "netplay": "unverified"
+}
