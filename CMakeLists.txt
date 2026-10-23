@@ -197,7 +197,8 @@ if(BUILD_TESTING)
                 test_mmx6_coop_content test_mmx6_coop_audio_audit test_mmx6_audio_driver_audit
                 test_prepare_mmx6_coop_playtest test_mmx6_coop_enemy_admission
                 test_mmx6_coop_pair_options test_mmx6_build_provenance test_mmx6_world_trace
-                test_coop_host_profile test_mmx6_coop_personal_menu)
+                test_coop_host_profile test_mmx6_coop_personal_menu
+                test_mmx6_coop_personal_menu_runner)
             add_test(NAME mmx6_${_mmx6_python_test}
                 COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/${_mmx6_python_test}.py")
         endforeach()
