@@ -24,6 +24,7 @@ class PairOptionTests(unittest.TestCase):
         self.assertFalse(default.lifecycle_smoke)
         self.assertFalse(default.enemy_targeting_smoke)
         self.assertFalse(default.require_host_profile)
+        self.assertFalse(default.personal_menu_smoke)
         lifecycle = self.parse("--lifecycle-smoke")
         self.assertTrue(lifecycle.lifecycle_smoke)
         self.assertFalse(lifecycle.require_state_crc)
@@ -37,6 +38,22 @@ class PairOptionTests(unittest.TestCase):
         self.rejected("--enemy-targeting-smoke")
         self.rejected("--enemy-targeting-smoke", "--require-state-crc", "--native-loader-diagnostic")
         self.rejected("--enemy-targeting-smoke", "--require-state-crc", "--admission-only")
+
+    def test_personal_menu_requires_crc_native_gameplay_and_default_loader(self):
+        self.rejected("--personal-menu-smoke")
+        self.rejected("--personal-menu-smoke", "--require-state-crc", "--admission-only")
+        self.rejected("--personal-menu-smoke", "--require-state-crc", "--native-loader-diagnostic")
+        args = self.parse("--personal-menu-smoke", "--require-state-crc")
+        self.assertTrue(args.personal_menu_smoke and args.require_state_crc)
+        self.assertFalse(args.lifecycle_smoke or args.enemy_targeting_smoke)
+
+    def test_personal_menu_combines_with_existing_native_and_host_profile_checks(self):
+        args = self.parse("--personal-menu-smoke", "--require-state-crc", "--lifecycle-smoke",
+                          "--enemy-targeting-smoke", "--require-host-profile",
+                          "--expected-host-profile", "mmx6.win64-clang22.loopback",
+                          "--expected-host-profile-revision", "1")
+        self.assertTrue(args.personal_menu_smoke and args.lifecycle_smoke and
+                        args.enemy_targeting_smoke and args.require_host_profile)
 
     def test_existing_admission_lifecycle_exclusion_and_explicit_hash(self):
         self.rejected("--admission-only", "--lifecycle-smoke")

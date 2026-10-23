@@ -184,6 +184,10 @@ def run(args) -> dict:
     if getattr(args, "enemy_targeting_smoke", False):
         enemy = importlib.import_module("qualify_mmx6_coop_enemy_admission")
         modules += (enemy,)
+    personal_menu = None
+    if getattr(args, "personal_menu_smoke", False):
+        personal_menu = importlib.import_module("mmx6_coop_personal_menu")
+        modules += (personal_menu,)
     if any(Path(module.__file__).resolve().parent != tools_root for module in modules):
         raise ValueError("A shared tool resolved outside --tools-root")
     candidate_sha = preparation.sha256(args.build / "mmx6-runtime.exe")
@@ -533,6 +537,32 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             all(player.hp == 32 for player in row.players) for row in settled)
         report["checks"]["mailbox_unused"] = all(row.mailbox == 0 for row in settled)
         matched("P1 jump then settle")
+        if personal_menu is not None:
+            # Start can freeze the world during the hold itself. Measure every
+            # accepted input interval using transport, including the neutral
+            # release crossing delay3; native_advance remains a world-timer wait.
+            def menu_hold(seat, bits, frames, label):
+                try:
+                    clients[seat].host_input(bits)
+                    transport_window(frames)
+                finally:
+                    clients[seat].host_input(0)
+                transport_window(5)
+
+            (output/"personal-menu").mkdir()
+            case = personal_menu.personal_menu_smoke(dict(mode="netplay", input_path="published_host",
+                clients=clients, both=both, debug=debug, report=report, output=output,
+                hold=menu_hold, native_advance=lambda frames, label: advance(frames),
+                transport_window=transport_window, network=network), owner=1)
+            report["personal_menu_automated_status"] = case["status"]
+            report["personal_menu_artwork_review"] = case["artwork_review"]
+            report["checks"]["p2_personal_menu_automated_checks"] = bool(case["checks"]) and all(
+                case["checks"].values()) and case["status"] == "automated_checks_passed_artwork_review_pending"
+            require(report["checks"]["p2_personal_menu_automated_checks"],
+                    "P2 personal-menu automated checks did not complete")
+            matched("P2 personal menu, composed captures and resumed native controls")
+            report["limits"].append(
+                "P2 personal-menu automated checks retain composed artwork review pending; no R8 ledger pass")
         if getattr(args, "enemy_targeting_smoke", False):
             enemy_targeting_smoke(dict(enemy=enemy, clients=clients, both=both, require=require,
                 network=network, report=report, matched=matched, wait_observed=wait_observed,
@@ -678,6 +708,8 @@ def make_parser():
                         help="Qualify default loader admission and advancing delay transport only; no gameplay pass")
     parser.add_argument("--lifecycle-smoke", action="store_true",
                         help="Also exercise native P2 departure, blocked Select during P1 pause and fresh rejoin")
+    parser.add_argument("--personal-menu-smoke", action="store_true",
+                        help="Also check original published P2/Zero personal-menu ownership, controls and resources; composed artwork review remains pending")
     parser.add_argument("--require-state-crc", action="store_true",
                         help="Require modern same-simulation-tick core/mod logs below both resolved watermarks; candidate must register complete host digest")
     parser.add_argument("--require-host-profile", action="store_true",
@@ -705,6 +737,8 @@ def validate_options(parser, args):
         parser.error("State CRC qualification requires native gameplay")
     if args.enemy_targeting_smoke and (args.admission_only or args.native_loader_diagnostic or not args.require_state_crc):
         parser.error("Enemy targeting requires native gameplay, default loader and --require-state-crc")
+    if args.personal_menu_smoke and (args.admission_only or args.native_loader_diagnostic or not args.require_state_crc):
+        parser.error("Personal menu requires native gameplay, default loader and --require-state-crc")
     if args.expected_exe_sha256 is not None and (len(args.expected_exe_sha256) != 64 or
             any(c not in "0123456789abcdef" for c in args.expected_exe_sha256)):
         parser.error("Expected executable SHA256 must contain 64 lowercase hex digits")

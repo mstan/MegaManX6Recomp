@@ -1,5 +1,21 @@
 # Native personal-menu helper contract
 
+The owned paired qualifier exposes this case as `--personal-menu-smoke` and
+requires `--require-state-crc`, native gameplay and the default Seamless Loading
+path. It runs the P2/Zero case after the existing healthy intro checks, before
+optional enemy/lifecycle routes, and then retains a resolved core/mod CRC phase
+after the case's paused/resumed composed captures. Host-profile requirements
+remain separately optional. Combined routes still enforce their own native
+preconditions rather than repositioning or resetting guest state.
+
+The paired adapter uses only the matching peer's ownership-checked published
+`host_input` sampler. Holds and neutral release intervals wait on actual
+transport/resolved ticks because Start can freeze the world mid-hold.
+`native_advance` separately uses the native world timer during gameplay.
+It creates the private `personal-menu` capture directory before calling the
+shared helper. The helper's automated status and pending artwork review remain
+in the retained report; a passing automated runner does not mark R8 passed.
+
 `tools/mmx6_coop_personal_menu.py` provides
 `personal_menu_smoke(ctx, owner=1)` for an owning offline or paired runner.
 It has no process launcher, CLI, fixture setup or ledger updates. No native
