@@ -2,8 +2,9 @@
 
 Uses current shared tools from --tools-root, not the worker's older copies.
 Never writes guest RAM/mailboxes/fixtures or copies source memory cards.
-Only the two Popen processes created here can be stopped. A passing result is
-an intro/input smoke and bounded host-FNV observation, not full state parity.
+Only the two Popen processes created here can be stopped. Successful checks
+cover the selected native cases; full campaign and cross-host parity remain
+separate qualification gates.
 """
 from __future__ import annotations
 
@@ -20,6 +21,151 @@ import time
 import traceback
 
 
+def enemy_targeting_smoke(ctx):
+    """Original published peer1 input; read-only guest evidence on both peers."""
+    enemy, clients, both = ctx["enemy"], ctx["clients"], ctx["both"]
+    require, network, report = ctx["require"], ctx["network"], ctx["report"]
+    case = dict(observations=[], initialized=[], action2=[], attack=[], captures=[],
+                input_path="peer1 virtual host device through delay transport",
+                limits=["Separate guest reads are not one atomic world sample",
+                        "Independent exactly-once world-update counter remains unverified"])
+    report["enemy_targeting"] = case
+    histories, seen_action1, seen_action2 = [[], []], [False, False], [False, False]
+
+    def sample(label):
+        current = both(lambda seat: enemy.observe_case(clients[seat]))
+        network()
+        case["observations"].append(dict(label=label, peers=current))
+        for seat, row in enumerate(current):
+            histories[seat].append(dict(label=label, **row))
+            require(row["observation"]["players"][0]["x_raw"] == 144 << 16,
+                    "R13 primary moved from its fixed native X")
+            target = row["instance"]
+            if target and target["phase"] == 1 and target["hp"] == 12 and target["action"] == 1:
+                seen_action1[seat] = True
+            near = enemy.resident_targeting_sample(row)
+            if near and near["action_plus5"] == 2:
+                seen_action2[seat] = True
+                case["action2"].append(dict(seat=seat, **near))
+        return current
+
+    def advance(count, label):
+        initial = sample(label + " start")
+        deadline = time.monotonic() + 15
+        while time.monotonic() < deadline:
+            current = sample(label)
+            if all(((row["observation"]["native_timer"] - old["observation"]["native_timer"]) & 0xFFFFFFFF) >= count
+                   for old, row in zip(initial, current)):
+                return current
+            time.sleep(.02)
+        raise RuntimeError("R13 native timers did not advance through the published-input window")
+
+    def hold(buttons, count, label):
+        clients[1].host_input(buttons)
+        try:
+            advance(count, label)
+        finally:
+            clients[1].host_input(0)
+        # Let neutral input cross delay3 before the next geometric decision.
+        return advance(5, label + " release")
+
+    initial = sample("R13 preflight")
+    require(all(enemy.preflight(row) for row in initial), "R13 source-derived preflight failed")
+    view = both(lambda seat: clients[seat].request("gpu_state"))
+    wide = both(lambda seat: clients[seat].request("ws_nw"))
+    require(all(enemy.native_43(gpu, nw) for gpu, nw in zip(view, wide)), "R13 requires native 4:3/margin0")
+    admitted = [None, None]
+    for step in range(24):
+        current = hold(0x20, 5, f"R13 admission right {step}")
+        for seat, row in enumerate(current):
+            if admitted[seat] is None and row["instance"]:
+                admitted[seat] = row
+            require(row["camera"][0] <= 80 or admitted[seat] is not None,
+                    "R13 passed the admission window without its bound origin")
+        if all(admitted):
+            break
+    require(all(admitted), "R13 bounded published P2 lead did not admit both native actors")
+    case["admitted"] = admitted
+    require(all(48 <= row["camera"][0] <= 80 for row in admitted), "R13 admission camera outside source window")
+    initialized = advance(8, "R13 native initialization")
+    require(all(row["instance"] and row["instance"]["phase"] == 1 and
+                row["instance"]["hp"] == 12 and row["instance"]["subtype"] == 1
+                for row in initialized), "R13 native phase1/HP12 initialization missing")
+    case["initialized"] = initialized
+    addresses = [row["instance"]["address"] for row in initialized]
+    last_x, stalled, jumped = None, 0, False
+    for step in range(32):
+        current = sample("R13 approach")
+        require(all(row["instance"] and row["instance"]["address"] == addresses[seat]
+                    for seat, row in enumerate(current)), "R13 bound actor changed before attack")
+        distances = [(row["instance"]["x_raw"] - row["observation"]["players"][1]["x_raw"]) / 65536
+                     for row in current]
+        if all(distance <= 40 for distance in distances):
+            break
+        positions = [row["observation"]["players"][1]["x_raw"] for row in current]
+        stalled = stalled + 1 if last_x is not None and all(abs(a-b) < 65536 for a, b in zip(positions, last_x)) else 0
+        last_x = positions
+        if stalled >= 2 and not jumped:
+            case["terrain_jump"] = dict(positions=positions, step=step)
+            hold(0x4020, 24, "R13 single terrain jump-right")
+            jumped = True
+        else:
+            hold(0x20, 5, f"R13 approach right {step}")
+    else:
+        raise RuntimeError("R13 published P2 input did not reach native attack range")
+    require(all(seen_action1) and all(seen_action2), "R13 both native actors must transition action1->2 with only P2 near")
+    before_attack = sample("R13 before native attack")
+    require(all(row["instance"]["hp"] == 12 for row in before_attack), "R13 enemy HP changed before controlled attack")
+    case["before_attack"] = before_attack
+    if any(row["observation"]["players"][1]["y_raw"] > row["instance"]["y_raw"] + (16 << 16)
+           for row in before_attack):
+        hold(0x4000, 5, "R13 jump toward elevated enemy")
+    attack_start = [len(history) for history in histories]
+    clients[1].host_input(0x8000)
+    try:
+        advance(8, "R13 native Square")
+    finally:
+        clients[1].host_input(0)
+    hits = [None, None]
+    for step in range(20):
+        for seat in range(2):
+            hits[seat] = enemy.attack_evidence(before_attack[seat], histories[seat][attack_start[seat]:])
+        if all(hits):
+            break
+        advance(3, f"R13 native attack result {step}")
+    require(all(hits), "R13 lacked an origin-bound native HP drop on both peers")
+    case["attack"] = hits
+    advance(90, "R13 death and input settle")
+    ctx["matched"]("R13 native target response and attack")
+
+    # Original P1 Start freezes the native post-route scene for matching GL
+    # captures. No local engine pause, RAM or simulation-success writes.
+    clients[0].host_input(8)
+    ctx["wait_observed"](lambda row: row.native_phase == 2 and row.pause_owner == 1,
+                         "R13 post-route native pause did not open")
+    clients[0].host_input(0)
+    ctx["transport_window"](15)
+    deadline = time.monotonic() + 12
+    while time.monotonic() < deadline:
+        ready = both(lambda seat: clients[seat].read(0x800CF814, 1)[0] == 1)
+        if all(ready):
+            break
+        time.sleep(.05)
+    require(all(ready), "R13 native pause did not finish opening")
+    case["captures"] = both(lambda seat: dict(seat=seat, **ctx["debug"].capture_present(
+        clients[seat], ctx["output"]/f"peer-{seat}/logs/r13-paused-present.png")))
+    require(case["captures"][0]["sha256"] == case["captures"][1]["sha256"],
+            "R13 composed native post-route pause captures differ")
+    clients[0].host_input(8)
+    ctx["wait_observed"](lambda row: row.native_phase == 0, "R13 native pause did not resume")
+    clients[0].host_input(0)
+    advance(20, "R13 post-capture resume")
+    ctx["matched"]("R13 post-capture native resume")
+    report["checks"].update(r13_both_origin_bound_native_init=True,
+        r13_both_action1_to2_only_p2_near=True, r13_both_native_p2_enemy_hp_drop=True,
+        r13_p1_x_stayed_fixed=True, r13_composed_pause_captures_match=True)
+
+
 def run(args) -> dict:
     tools_root = args.tools_root.resolve(strict=True)
     sys.path.insert(0, str(tools_root))
@@ -29,15 +175,23 @@ def run(args) -> dict:
     paired = importlib.import_module("test_mmx6_coop_netplay")
     state_crc = importlib.import_module("coop_state_crc")
     modules = (debug, preparation, baseline, paired, state_crc)
+    enemy = None
+    if getattr(args, "enemy_targeting_smoke", False):
+        enemy = importlib.import_module("qualify_mmx6_coop_enemy_admission")
+        modules += (enemy,)
     if any(Path(module.__file__).resolve().parent != tools_root for module in modules):
         raise ValueError("A shared tool resolved outside --tools-root")
+    candidate_sha = preparation.sha256(args.build / "mmx6-runtime.exe")
+    if getattr(args, "expected_exe_sha256", None) and candidate_sha != args.expected_exe_sha256:
+        raise ValueError("Paired executable does not match the explicitly expected SHA256")
     output = preparation.local_output(args.out)
     if output.exists():
         raise ValueError("Output exists; retain earlier evidence and choose a fresh directory")
     output.mkdir(parents=True)
+    (output/"runner-source.py").write_bytes(Path(__file__).read_bytes())
     admission_only = getattr(args, "admission_only", False)
     report = dict(schema=1, kind="owned_loopback_delay_admission" if admission_only else "owned_loopback_delay_intro", status="failed_setup",
-                  candidate_exe_sha256=preparation.sha256(args.build / "mmx6-runtime.exe"),
+                  candidate_exe_sha256=candidate_sha,
                   runner_source_sha256=preparation.sha256(Path(__file__)),
                   loading_policy="original_disc_loader_diagnostic_bypass" if args.native_loader_diagnostic
                                  else "default_seamless_loading",
@@ -345,6 +499,10 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             all(player.hp == 32 for player in row.players) for row in settled)
         report["checks"]["mailbox_unused"] = all(row.mailbox == 0 for row in settled)
         matched("P1 jump then settle")
+        if getattr(args, "enemy_targeting_smoke", False):
+            enemy_targeting_smoke(dict(enemy=enemy, clients=clients, both=both, require=require,
+                network=network, report=report, matched=matched, wait_observed=wait_observed,
+                transport_window=transport_window, output=output, debug=debug))
         if getattr(args, "lifecycle_smoke", False):
             saved = rows()
             clients[1].host_input(1)  # Original Select hold, never a fixture.
@@ -456,7 +614,7 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
     return report
 
 
-def main():
+def make_parser():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--tools-root", type=Path, required=True)
     parser.add_argument("--build", type=Path, required=True)
@@ -476,7 +634,13 @@ def main():
                         help="Also exercise native P2 departure, blocked Select during P1 pause and fresh rejoin")
     parser.add_argument("--require-state-crc", action="store_true",
                         help="Require modern same-simulation-tick core/mod logs below both resolved watermarks; candidate must register complete host digest")
-    args = parser.parse_args()
+    parser.add_argument("--enemy-targeting-smoke", action="store_true",
+                        help="Also exercise original P2 route, native enemy targeting/HP and matching composed pause captures")
+    parser.add_argument("--expected-exe-sha256")
+    return parser
+
+
+def validate_options(parser, args):
     if sys.version_info < (3, 11):
         parser.error("Python 3.11+ is required by the shared staging tools")
     if not 0 < args.timeout <= 600:
@@ -487,6 +651,17 @@ def main():
         parser.error("Lifecycle smoke requires the native gameplay checks")
     if args.admission_only and args.require_state_crc:
         parser.error("State CRC qualification requires native gameplay")
+    if args.enemy_targeting_smoke and (args.admission_only or args.native_loader_diagnostic or not args.require_state_crc):
+        parser.error("Enemy targeting requires native gameplay, default loader and --require-state-crc")
+    if args.expected_exe_sha256 is not None and (len(args.expected_exe_sha256) != 64 or
+            any(c not in "0123456789abcdef" for c in args.expected_exe_sha256)):
+        parser.error("Expected executable SHA256 must contain 64 lowercase hex digits")
+
+
+def main():
+    parser = make_parser()
+    args = parser.parse_args()
+    validate_options(parser, args)
     report = run(args)
     print(json.dumps(dict(status=report["status"], checks=report["checks"], error=report.get("error"),
                           report=str(args.out/"qualification.json"))), flush=True)

@@ -203,5 +203,8 @@ including native action2 and the HP drop. The original runtime status was not
 rewritten. Eight focused tool tests pass. The corrected reducer has been
 exercised against the retained real report and unit fixtures, not a fresh game
 run. Graceful shutdown remains unqualified: only the owned process was
-terminated after bounded quit handling. Paired behavior and an independent
-once-world runtime counter remain open; this does not pass the complete R13 row.
+terminated after bounded quit handling. At this offline milestone paired
+behavior was still untested. The later bounded pair is documented in
+[COOP_PAIRED_ENEMY_BASELINE.md](COOP_PAIRED_ENEMY_BASELINE.md). An independent
+once-world runtime counter remains open; these cases do not pass the complete
+R13 row.

@@ -1,0 +1,1452 @@
+{
+  "kind": "bounded_paired_native_enemy_targeting",
+  "source_report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\netplay-native-r13-v11\\qualification.json",
+  "source_report_sha256": "a62da3b15fca9ec5708726c71cd170427fb3212d2ccff7972fa275da70361b45",
+  "runner_source_sha256": "265a041fb1218f3307a68be605a5441756d451657adb838ad04b11346751b8a2",
+  "tool_sha256": {
+    "coop_debug.py": "43d8a09b19ee7743c2ce881bb8a29933bdc4acd668ab81ae3de1263d3062e00b",
+    "prepare_mmx6_coop_playtest.py": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978",
+    "qualify_mmx6_coop_baseline.py": "0d130f488ffffee197b4393e0ae3ad4cd645ef8f6e9e7804a1023266e8d1903e",
+    "test_mmx6_coop_netplay.py": "1e37d4bd1f6fcf7c55c45d2e0915a126c64d71b5aab001632bef60c55f72bd51",
+    "coop_state_crc.py": "ed47ea23719fe15eb8072ed17376e6ce91f3e976a5e7cc9c1fd1f2b9cc4a42c7",
+    "qualify_mmx6_coop_enemy_admission.py": "c953ef53a862996f508b3290e08525d80c3f1be7a734e601cf1d5f34eae8a519"
+  },
+  "candidate_exe_sha256": "43796887fda9e8b6bf547acdd1fa1149e1a944717e824e0dee5bf4a5b6010db7",
+  "profile": "mmx6-x-zero-delay-v11",
+  "session": 202610237,
+  "input_delay": 3,
+  "loading_policy": "default_seamless_loading",
+  "status": "passed",
+  "checks": {
+    "p2_right_reaches_both_peers": true,
+    "p2_right_preserves_p1_x": true,
+    "p1_jump_reaches_both_peers": true,
+    "p1_jump_preserves_p2_y": true,
+    "both_alive_healthy": true,
+    "mailbox_unused": true,
+    "r13_both_origin_bound_native_init": true,
+    "r13_both_action1_to2_only_p2_near": true,
+    "r13_both_native_p2_enemy_hp_drop": true,
+    "r13_p1_x_stayed_fixed": true,
+    "r13_composed_pause_captures_match": true
+  },
+  "input_path": "peer1 virtual host device through delay transport",
+  "admitted": [
+    {
+      "tick": 1182,
+      "native_timer": 1181,
+      "camera": [
+        53,
+        944
+      ],
+      "record_hex": "01010110a001380400010100",
+      "record_allocated": true,
+      "instance": {
+        "address": "0x8008ef48",
+        "slot": 0,
+        "origin": "0x800fa2dc",
+        "flags": 65,
+        "type": 1,
+        "subtype": 1,
+        "render": 0,
+        "phase": 1,
+        "action": 1,
+        "subaction": 0,
+        "hp": 12,
+        "strength": 4,
+        "iframe": 0,
+        "x_raw": 27262976,
+        "y_raw": 70778880,
+        "x": 416.0,
+        "y": 1080.0,
+        "body_hex": "41010100010100000000a00100003804dca20f80000006000000a001000038040000000000000000000000000000000024ab0f80e8aa0f80000000003462158010018c7801000000ff00000000000000e0aa0f80e4aa0f80dc4307800c0000000400000000000000dcaa0f80000000000800000000000000000000000100000000000000000000000000000000000000000000000000000000000000"
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 5,
+          "hp": 32,
+          "x_raw": 18513920,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "p2_hit_counter": 0,
+      "p2_contact_counter": 0
+    },
+    {
+      "tick": 1182,
+      "native_timer": 1181,
+      "camera": [
+        53,
+        944
+      ],
+      "record_hex": "01010110a001380400010100",
+      "record_allocated": true,
+      "instance": {
+        "address": "0x8008ef48",
+        "slot": 0,
+        "origin": "0x800fa2dc",
+        "flags": 65,
+        "type": 1,
+        "subtype": 1,
+        "render": 0,
+        "phase": 1,
+        "action": 1,
+        "subaction": 0,
+        "hp": 12,
+        "strength": 4,
+        "iframe": 0,
+        "x_raw": 27262976,
+        "y_raw": 70778880,
+        "x": 416.0,
+        "y": 1080.0,
+        "body_hex": "41010100010100000000a00100003804dca20f80000006000000a001000038040000000000000000000000000000000024ab0f80e8aa0f80000000003462158010018c7801000000ff00000000000000e0aa0f80e4aa0f80dc4307800c0000000400000000000000dcaa0f80000000000800000000000000000000000100000000000000000000000000000000000000000000000000000000000000"
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 5,
+          "hp": 32,
+          "x_raw": 18513920,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "p2_hit_counter": 0,
+      "p2_contact_counter": 0
+    }
+  ],
+  "initialized": [
+    {
+      "tick": 1197,
+      "native_timer": 1196,
+      "camera": [
+        53,
+        944
+      ],
+      "record_hex": "01010110a001380400010100",
+      "record_allocated": true,
+      "instance": {
+        "address": "0x8008ef48",
+        "slot": 0,
+        "origin": "0x800fa2dc",
+        "flags": 65,
+        "type": 1,
+        "subtype": 1,
+        "render": 0,
+        "phase": 1,
+        "action": 1,
+        "subaction": 0,
+        "hp": 12,
+        "strength": 4,
+        "iframe": 0,
+        "x_raw": 27262976,
+        "y_raw": 70778880,
+        "x": 416.0,
+        "y": 1080.0,
+        "body_hex": "41010100010100000000a00100003804dca20f80000006000000a001000038040000000000000000000000000000000024ab0f80e8aa0f80000000003462158010018c7801000000ff00000000000000e0aa0f80e4aa0f80dc4307800c0000000400000000000000dcaa0f80000000000800000000000000000000000100000000000000000000000000000000000000000000000000000000000000"
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 18513920,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "p2_hit_counter": 0,
+      "p2_contact_counter": 0
+    },
+    {
+      "tick": 1196,
+      "native_timer": 1195,
+      "camera": [
+        53,
+        944
+      ],
+      "record_hex": "01010110a001380400010100",
+      "record_allocated": true,
+      "instance": {
+        "address": "0x8008ef48",
+        "slot": 0,
+        "origin": "0x800fa2dc",
+        "flags": 65,
+        "type": 1,
+        "subtype": 1,
+        "render": 0,
+        "phase": 1,
+        "action": 1,
+        "subaction": 0,
+        "hp": 12,
+        "strength": 4,
+        "iframe": 0,
+        "x_raw": 27262976,
+        "y_raw": 70778880,
+        "x": 416.0,
+        "y": 1080.0,
+        "body_hex": "41010100010100000000a00100003804dca20f80000006000000a001000038040000000000000000000000000000000024ab0f80e8aa0f80000000003462158010018c7801000000ff00000000000000e0aa0f80e4aa0f80dc4307800c0000000400000000000000dcaa0f80000000000800000000000000000000000100000000000000000000000000000000000000000000000000000000000000"
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 18513920,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "p2_hit_counter": 0,
+      "p2_contact_counter": 0
+    }
+  ],
+  "first_action2": [
+    {
+      "seat": 0,
+      "tick": 1253,
+      "address": "0x8008ef48",
+      "origin": "0x800fa2dc",
+      "phase_plus4": 1,
+      "action_plus5": 2,
+      "subaction_plus6": 0,
+      "hp": 12,
+      "distances": [
+        272,
+        107
+      ],
+      "native_integer_x": [
+        416,
+        144,
+        309
+      ],
+      "player_x": [
+        144.0,
+        309.5
+      ],
+      "enemy_x": 416.0
+    },
+    {
+      "seat": 1,
+      "tick": 1256,
+      "address": "0x8008ef48",
+      "origin": "0x800fa2dc",
+      "phase_plus4": 1,
+      "action_plus5": 2,
+      "subaction_plus6": 0,
+      "hp": 12,
+      "distances": [
+        272,
+        107
+      ],
+      "native_integer_x": [
+        416,
+        144,
+        309
+      ],
+      "player_x": [
+        144.0,
+        309.5
+      ],
+      "enemy_x": 416.0
+    }
+  ],
+  "before_attack": [
+    {
+      "tick": 1423,
+      "native_timer": 1422,
+      "camera": [
+        104,
+        944
+      ],
+      "record_hex": "01010110a001380400010100",
+      "record_allocated": true,
+      "instance": {
+        "address": "0x8008ef48",
+        "slot": 0,
+        "origin": "0x800fa2dc",
+        "flags": 65,
+        "type": 1,
+        "subtype": 1,
+        "render": 1,
+        "phase": 1,
+        "action": 2,
+        "subaction": 0,
+        "hp": 12,
+        "strength": 4,
+        "iframe": 0,
+        "x_raw": 27262976,
+        "y_raw": 70778880,
+        "x": 416.0,
+        "y": 1080.0,
+        "body_hex": "41010101010200000000a00100003804dca20f80000006000000a001000038040000000000000000000000000000000024ab0f80e8aa0f80000000003462158010018c7801000000ff00000000000000e0aa0f80e4aa0f80dc4307800c0000000400000000000000dcaa0f80000000000800000000000000000000007800000000000000000000000000000000000000000000000000000000000000"
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 25198592,
+          "y_raw": 70909952,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "p2_hit_counter": 0,
+      "p2_contact_counter": 0
+    },
+    {
+      "tick": 1423,
+      "native_timer": 1422,
+      "camera": [
+        104,
+        944
+      ],
+      "record_hex": "01010110a001380400010100",
+      "record_allocated": true,
+      "instance": {
+        "address": "0x8008ef48",
+        "slot": 0,
+        "origin": "0x800fa2dc",
+        "flags": 65,
+        "type": 1,
+        "subtype": 1,
+        "render": 1,
+        "phase": 1,
+        "action": 1,
+        "subaction": 0,
+        "hp": 12,
+        "strength": 4,
+        "iframe": 0,
+        "x_raw": 27262976,
+        "y_raw": 70778880,
+        "x": 416.0,
+        "y": 1080.0,
+        "body_hex": "41010101010100000000a00100003804dca20f80000006000000a001000038040000000000000000000000000000000024ab0f80e8aa0f80000000003462158010018c7801000000ff00000000000000e0aa0f80e4aa0f80dc4307800c0000000400000000000000dcaa0f80000000000800000000000000000000007800000000000000000000000000000000000000000000000000000000000000"
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 25198592,
+          "y_raw": 70909952,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "p2_hit_counter": 0,
+      "p2_contact_counter": 0
+    }
+  ],
+  "native_hp_drop": [
+    {
+      "tick": 1432,
+      "native_timer": 1431,
+      "camera": [
+        104,
+        944
+      ],
+      "record_hex": "01010110a001380400010100",
+      "record_allocated": true,
+      "instance": {
+        "address": "0x8008ef48",
+        "slot": 0,
+        "origin": "0x800fa2dc",
+        "flags": 65,
+        "type": 1,
+        "subtype": 1,
+        "render": 1,
+        "phase": 1,
+        "action": 2,
+        "subaction": 0,
+        "hp": 4,
+        "strength": 4,
+        "iframe": 0,
+        "x_raw": 27262976,
+        "y_raw": 70778880,
+        "x": 416.0,
+        "y": 1080.0,
+        "body_hex": "41010101010200000000a00100003804dca20f80000006000000a001000038040000000000000000000000000000000024ab0f80e8aa0f80000000003462158010018cf801000000ff00000000000000e0aa0f80e4aa0f80dc430780040000000400000000010000dcaa0f80000000000800000000000000000000007800000000000000000000000000000000000000000000000000000000000000"
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 48,
+          "hp": 32,
+          "x_raw": 25198592,
+          "y_raw": 70909952,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "p2_hit_counter": 1,
+      "p2_contact_counter": 0
+    },
+    {
+      "tick": 1432,
+      "native_timer": 1431,
+      "camera": [
+        104,
+        944
+      ],
+      "record_hex": "01010110a001380400010100",
+      "record_allocated": true,
+      "instance": {
+        "address": "0x8008ef48",
+        "slot": 0,
+        "origin": "0x800fa2dc",
+        "flags": 65,
+        "type": 1,
+        "subtype": 1,
+        "render": 1,
+        "phase": 1,
+        "action": 1,
+        "subaction": 0,
+        "hp": 8,
+        "strength": 4,
+        "iframe": 0,
+        "x_raw": 27262976,
+        "y_raw": 70778880,
+        "x": 416.0,
+        "y": 1080.0,
+        "body_hex": "41010101010100000000a00100003804dca20f80000006000000a001000038040000000000000000000000000000000024ab0f80e8aa0f80000000003462158010018cf801000000ff00000000000000e0aa0f80e4aa0f80dc430780080000000400000000010000dcaa0f80000000000800000000000000000000007800000000000000000000000000000000000000000000000000000000000000"
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 48,
+          "hp": 32,
+          "x_raw": 25198592,
+          "y_raw": 70909952,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "p2_hit_counter": 0,
+      "p2_contact_counter": 0
+    }
+  ],
+  "last_case_observation": {
+    "label": "R13 post-capture resume",
+    "peers": [
+      {
+        "observation": {
+          "schema": 1,
+          "tick": 1875,
+          "sequence": 3750,
+          "native_timer": 1812,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 1962390062,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 25198592,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "camera": [
+          104,
+          944
+        ],
+        "previous_camera": [
+          104,
+          944
+        ],
+        "record_hex": "00010110a001380400010100",
+        "record_allocated": false,
+        "instance": null,
+        "live_pool": [],
+        "native_shared_gate": 0,
+        "p2_hit_counter": 3,
+        "p2_contact_counter": 0
+      },
+      {
+        "observation": {
+          "schema": 1,
+          "tick": 1875,
+          "sequence": 3750,
+          "native_timer": 1812,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 1962390062,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 25198592,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "camera": [
+          104,
+          944
+        ],
+        "previous_camera": [
+          104,
+          944
+        ],
+        "record_hex": "00010110a001380400010100",
+        "record_allocated": false,
+        "instance": null,
+        "live_pool": [],
+        "native_shared_gate": 0,
+        "p2_hit_counter": 3,
+        "p2_contact_counter": 0
+      }
+    ]
+  },
+  "observations_per_peer": 121,
+  "resolved_state_crc": [
+    {
+      "label": "initial idle",
+      "samples": [
+        {
+          "simulation_tick": 2944,
+          "core": "3154c10f",
+          "mod": "b4585d91"
+        },
+        {
+          "simulation_tick": 2976,
+          "core": "0f0fc329",
+          "mod": "39fff6cb"
+        },
+        {
+          "simulation_tick": 3008,
+          "core": "ceffbfb0",
+          "mod": "1f149eeb"
+        },
+        {
+          "simulation_tick": 3040,
+          "core": "d11f4d67",
+          "mod": "7cc15259"
+        },
+        {
+          "simulation_tick": 3072,
+          "core": "ee36e8bd",
+          "mod": "4e0e2479"
+        },
+        {
+          "simulation_tick": 3104,
+          "core": "71267801",
+          "mod": "054c5fe9"
+        },
+        {
+          "simulation_tick": 3136,
+          "core": "a76a1d35",
+          "mod": "31d46c43"
+        }
+      ],
+      "resolved_through": [
+        3164,
+        3165
+      ]
+    },
+    {
+      "label": "P2 right then release",
+      "samples": [
+        {
+          "simulation_tick": 3200,
+          "core": "cb5ba80f",
+          "mod": "5bbee6f2"
+        },
+        {
+          "simulation_tick": 3232,
+          "core": "fa79b57f",
+          "mod": "87b31794"
+        },
+        {
+          "simulation_tick": 3264,
+          "core": "c672851e",
+          "mod": "b9dcc4b2"
+        },
+        {
+          "simulation_tick": 3296,
+          "core": "000ee3d2",
+          "mod": "d4b5fd92"
+        },
+        {
+          "simulation_tick": 3328,
+          "core": "f02a4370",
+          "mod": "273da73c"
+        },
+        {
+          "simulation_tick": 3360,
+          "core": "8c0fb66e",
+          "mod": "fd9689dc"
+        },
+        {
+          "simulation_tick": 3392,
+          "core": "e2cd9b0c",
+          "mod": "e97668ea"
+        },
+        {
+          "simulation_tick": 3424,
+          "core": "f83adb26",
+          "mod": "1942ee41"
+        }
+      ],
+      "resolved_through": [
+        3434,
+        3434
+      ]
+    },
+    {
+      "label": "P1 jump then settle",
+      "samples": [
+        {
+          "simulation_tick": 3520,
+          "core": "383b492b",
+          "mod": "de70acc2"
+        },
+        {
+          "simulation_tick": 3552,
+          "core": "73fd115f",
+          "mod": "055ae4ad"
+        },
+        {
+          "simulation_tick": 3584,
+          "core": "8a18dee2",
+          "mod": "169b564c"
+        },
+        {
+          "simulation_tick": 3616,
+          "core": "9070af2f",
+          "mod": "ba95e4c5"
+        },
+        {
+          "simulation_tick": 3648,
+          "core": "a616912b",
+          "mod": "92e6dc9a"
+        },
+        {
+          "simulation_tick": 3680,
+          "core": "4e483b50",
+          "mod": "5bbee6f2"
+        },
+        {
+          "simulation_tick": 3712,
+          "core": "8091290f",
+          "mod": "87b31794"
+        }
+      ],
+      "resolved_through": [
+        3737,
+        3738
+      ]
+    },
+    {
+      "label": "R13 native target response and attack",
+      "samples": [
+        {
+          "simulation_tick": 4288,
+          "core": "9e8049eb",
+          "mod": "c7e895f3"
+        },
+        {
+          "simulation_tick": 4320,
+          "core": "af8fbd50",
+          "mod": "f79bb3ac"
+        },
+        {
+          "simulation_tick": 4352,
+          "core": "48bc4398",
+          "mod": "5f77d14d"
+        },
+        {
+          "simulation_tick": 4384,
+          "core": "587611af",
+          "mod": "7062d2e8"
+        },
+        {
+          "simulation_tick": 4416,
+          "core": "7abec09b",
+          "mod": "5aee397b"
+        },
+        {
+          "simulation_tick": 4448,
+          "core": "373695db",
+          "mod": "382e5c6b"
+        },
+        {
+          "simulation_tick": 4480,
+          "core": "f5cd4855",
+          "mod": "b4b719c5"
+        }
+      ],
+      "resolved_through": [
+        4499,
+        4499
+      ]
+    },
+    {
+      "label": "R13 post-capture native resume",
+      "samples": [
+        {
+          "simulation_tick": 4608,
+          "core": "0c78938f",
+          "mod": "c88bdb95"
+        },
+        {
+          "simulation_tick": 4640,
+          "core": "ce128003",
+          "mod": "f09a6e47"
+        },
+        {
+          "simulation_tick": 4672,
+          "core": "b309e159",
+          "mod": "296167e7"
+        },
+        {
+          "simulation_tick": 4704,
+          "core": "6a8c6372",
+          "mod": "7ae9bd1d"
+        },
+        {
+          "simulation_tick": 4736,
+          "core": "31026955",
+          "mod": "9b3973fa"
+        },
+        {
+          "simulation_tick": 4768,
+          "core": "378ca406",
+          "mod": "acce2b85"
+        },
+        {
+          "simulation_tick": 4800,
+          "core": "e1e00e8a",
+          "mod": "15610aff"
+        },
+        {
+          "simulation_tick": 4832,
+          "core": "28f7ccca",
+          "mod": "bd0461c5"
+        }
+      ],
+      "resolved_through": [
+        4842,
+        4842
+      ]
+    }
+  ],
+  "resolved_core_mod_samples": 37,
+  "matched_paused_composed": [
+    {
+      "seat": 0,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\netplay-native-r13-v11\\peer-0\\logs\\r13-paused-present.png",
+      "sha256": "34a3b672a3fd5fdf06710fa53c65fdd2560a3a622bb688039bf11737fdaa7b7c",
+      "before": {
+        "id": 2895,
+        "ok": true,
+        "seq": 0,
+        "wrote": 0
+      },
+      "acknowledgement": {
+        "id": 2896,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\netplay-native-r13-v11\\peer-0\\logs\\r13-paused-present.png",
+        "staged": true,
+        "seq": 0
+      },
+      "completion": {
+        "id": 2898,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      }
+    },
+    {
+      "seat": 1,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\netplay-native-r13-v11\\peer-1\\logs\\r13-paused-present.png",
+      "sha256": "34a3b672a3fd5fdf06710fa53c65fdd2560a3a622bb688039bf11737fdaa7b7c",
+      "before": {
+        "id": 2763,
+        "ok": true,
+        "seq": 0,
+        "wrote": 0
+      },
+      "acknowledgement": {
+        "id": 2764,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\netplay-native-r13-v11\\peer-1\\logs\\r13-paused-present.png",
+        "staged": true,
+        "seq": 0
+      },
+      "completion": {
+        "id": 2765,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      }
+    }
+  ],
+  "final_captures": [
+    {
+      "seat": 0,
+      "surface": "game_render_buffer",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\netplay-native-r13-v11\\peer-0\\logs\\intro.png",
+      "sha256": "a4f8f3edea5c259159cf71a2e0e5b2ae454dc8bef639fef1da7b64cd54f6986e",
+      "response": {
+        "id": 3133,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\netplay-native-r13-v11\\peer-0\\logs\\intro.png",
+        "width": 320,
+        "height": 240
+      }
+    },
+    {
+      "seat": 0,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\netplay-native-r13-v11\\peer-0\\logs\\intro-present.png",
+      "sha256": "0135e09c151a16f53f56f0eb072e9d0addeae9b379e11c8828b52b4c91c8ec12",
+      "before": {
+        "id": 3134,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 3135,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\netplay-native-r13-v11\\peer-0\\logs\\intro-present.png",
+        "staged": true,
+        "seq": 1
+      },
+      "completion": {
+        "id": 3136,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      }
+    },
+    {
+      "seat": 1,
+      "surface": "game_render_buffer",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\netplay-native-r13-v11\\peer-1\\logs\\intro.png",
+      "sha256": "a4f8f3edea5c259159cf71a2e0e5b2ae454dc8bef639fef1da7b64cd54f6986e",
+      "response": {
+        "id": 2996,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\netplay-native-r13-v11\\peer-1\\logs\\intro.png",
+        "width": 320,
+        "height": 240
+      }
+    },
+    {
+      "seat": 1,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\netplay-native-r13-v11\\peer-1\\logs\\intro-present.png",
+      "sha256": "d2b4e0958d100850da4da76f3ffcd07ed8997f49462c4ad451d9fc164b5cf7ec",
+      "before": {
+        "id": 2997,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2998,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\netplay-native-r13-v11\\peer-1\\logs\\intro-present.png",
+        "staged": true,
+        "seq": 1
+      },
+      "completion": {
+        "id": 2999,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      }
+    }
+  ],
+  "final_network_status": [
+    {
+      "id": 3138,
+      "ok": true,
+      "active": 1,
+      "host": 1,
+      "rollback": 0,
+      "architecture": "p2p",
+      "max_players": 2,
+      "players": 2,
+      "tick": 4852,
+      "resolved_through": 4851,
+      "stall": "ok",
+      "remote_lead": 2,
+      "desync": 0,
+      "desync_tick": 0,
+      "local_hash": 0,
+      "remote_hash": 0
+    },
+    {
+      "id": 3001,
+      "ok": true,
+      "active": 1,
+      "host": 0,
+      "rollback": 0,
+      "architecture": "p2p",
+      "max_players": 2,
+      "players": 2,
+      "tick": 4852,
+      "resolved_through": 4851,
+      "stall": "ok",
+      "remote_lead": 2,
+      "desync": 0,
+      "desync_tick": 0,
+      "local_hash": 0,
+      "remote_hash": 0
+    }
+  ],
+  "final": [
+    {
+      "schema": 1,
+      "tick": 2129,
+      "sequence": 4258,
+      "native_timer": 2066,
+      "lifecycle": [
+        0,
+        0
+      ],
+      "pause_owner": 0,
+      "scene_owner": 0,
+      "scene_phase": 0,
+      "mailbox": 0,
+      "ready": 1,
+      "enrolled": 1,
+      "failed": 0,
+      "native_mode": 10,
+      "native_phase": 0,
+      "host_digest": 4068387892,
+      "host_digest_algorithm": 1,
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 25198592,
+          "y_raw": 70909952,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "framework_digest_registered": 1
+    },
+    {
+      "schema": 1,
+      "tick": 2129,
+      "sequence": 4258,
+      "native_timer": 2066,
+      "lifecycle": [
+        0,
+        0
+      ],
+      "pause_owner": 0,
+      "scene_owner": 0,
+      "scene_phase": 0,
+      "mailbox": 0,
+      "ready": 1,
+      "enrolled": 1,
+      "failed": 0,
+      "native_mode": 10,
+      "native_phase": 0,
+      "host_digest": 4068387892,
+      "host_digest_algorithm": 1,
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 25198592,
+          "y_raw": 70909952,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "framework_digest_registered": 1
+    }
+  ],
+  "peers": [
+    {
+      "seat": 0,
+      "pid": 14088,
+      "shutdown": "owned_popen_terminated",
+      "exit_code": 1,
+      "source_card": null,
+      "private_card_files": [
+        {
+          "name": "card1.mcd",
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "name": "card2.mcd",
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ]
+    },
+    {
+      "seat": 1,
+      "pid": 65688,
+      "shutdown": "owned_popen_terminated",
+      "exit_code": 1,
+      "source_card": null,
+      "private_card_files": [
+        {
+          "name": "card1.mcd",
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "name": "card2.mcd",
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Separate guest reads are not one atomic world sample",
+    "Independent exactly-once world-update counter remains unverified",
+    "Transient per-peer HP4/HP8 at publication1432 came from separate advancing guest reads; not one atomic world sample",
+    "Core/mod comparisons are actual equal simulation ticks below both resolved watermarks, independent of publication counts",
+    "Matching composed captures show the native paused menu; independent final gameplay captures have different X idle poses",
+    "No cross-host, physical-controller, audible, full-R13 or independently counted exactly-once world-update qualification",
+    "Cleanup dearmed debug input after qualification using the inherited release helper; route controls were published host input only"
+  ]
+}
