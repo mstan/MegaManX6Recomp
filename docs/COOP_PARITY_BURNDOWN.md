@@ -75,9 +75,19 @@ candidate identities; observations do not transfer automatically to a rebuild.
 - X6 explicitly registers its declared build inputs, including the resolved
   generated-game tree, actual dependency pins and tracked edits. The integrated
   Clang developer lab build passes36/36 game CTests; the later production
-  default-OFF integration passes38/38, with original content/audio reproduction
+  default-OFF integration passes39/39, with original content/audio reproduction
   enabled. The manifest covers declared inputs, not an exhaustive
   external binary or driver closure. See [manifest limits](COOP_BUILD_MANIFEST_REGISTRATION.md).
+- The same frozen executable passes a fresh [current-build warm/cold snapshot
+  repeat](COOP_SNAPSHOT_BASELINE.md): 12 warm and 13 cold checks, exact restoration
+  of both complete native bodies, reconstructed retained banks and independent
+  resumed input. Only the private snapshot was transferred to the cold profile.
+  This does not qualify rewind, online state transfer or campaign restoration.
+- The [native input consumption contract](COOP_INPUT_CONSUMPTION_CONTRACT.md)
+  now maps the original decoder completion and all six extra P2 read sites.
+  Its strict file codec rejects truncation, event-order gaps and mismatched
+  startup artifacts. Runtime recording and replay remain separate work; R26
+  is still unverified.
 - The [optimized helper matrix](../psxrecomp-v4/docs/qa/x6-helper-qualification-20261023/README.md)
   retains 48 passes, two fixture linkage blocks and one disabled SPU test.
   Running that disabled executable directly reproduces four existing ADSR
