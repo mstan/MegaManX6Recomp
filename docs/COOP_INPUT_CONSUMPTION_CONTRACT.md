@@ -5,7 +5,9 @@ The native P1 decoder and all six current P2 read sites are source-mapped.
 file codec and startup-artifact validator. A later bounded
 [activation slice](COOP_INPUT_CAPTURE_ACTIVATION.md) now connects a native worker
 to those boundaries; generated-hook and native capture verification remain
-pending. **Replay remains absent; R26 remains unverified.** A syntactically valid file is not evidence
+pending. A bounded explicit [offline replay implementation](COOP_NATIVE_REPLAY.md)
+now supplies those native consumption boundaries; **native replay and R26 remain
+unverified.** A syntactically valid file is not evidence
 that these hooks ran, that exported settings were complete, or that replay works.
 
 The [source manifest](COOP_INPUT_RECORDING_AUDIT.json) retains 33 frozen Git

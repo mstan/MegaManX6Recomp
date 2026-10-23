@@ -1,0 +1,264 @@
+{
+  "schema": 1,
+  "scope": "bounded explicit offline same-build native N/C replay; no native replay or R26 qualification",
+  "game_base": "bd2652df8ab1cca31acce9cea8909de097382689",
+  "capture_drain_fix": "25936bcda309fa4c274a8a26e869d75aa3e4d785",
+  "frozen_recorder_sources": [
+    {
+      "repository": "x4",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "src/mods/mmx4_diagnostics.cpp",
+      "git_blob": "139473f5bf1548bdbe1e139969d07a1ca078e9b2",
+      "sha256": "ed73eeaec6467293e3f19858a5a893c81c312fb5b3805a430f5d174fc10bc7fc",
+      "bytes": 22271
+    },
+    {
+      "repository": "x4",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "src/mods/mmx4_diagnostic_writer.h",
+      "git_blob": "c079ad5f336b38de3010ddcca53ef08825a0f348",
+      "sha256": "a843b82e9b50c3a8dd1024b2a0431f2a571fab95062923f3e388bf80d9c5be4a",
+      "bytes": 8530
+    },
+    {
+      "repository": "x4",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "src/mods/mmx4_diagnostic_mode.h",
+      "git_blob": "e64ebbaf1e12c202c201928b575e0e2752267623",
+      "sha256": "631a5aa8443a8b9a285e8f2312a0e7f6ba78b7d5726b394234b6aa51ee816038",
+      "bytes": 1214
+    },
+    {
+      "repository": "x4",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "tools/replay_mmx4_diagnostics.py",
+      "git_blob": "89866c71e4b3929964863a6cb28ed5d5c7c7b149",
+      "sha256": "521f0ae45cfa84e41ebe7b5eab11cc417a003d58f27cec81ef370977f7b09c20",
+      "bytes": 11123
+    },
+    {
+      "repository": "x4",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "tools/test_mmx4_diagnostic_capture.py",
+      "git_blob": "4f4eb23e481defb2f3ea2600610668d01a8c0e1d",
+      "sha256": "bb6d4c9a341ad4507f30b415d726a8437d810c033c36e2e45a1ce8be51a3340c",
+      "bytes": 5900
+    },
+    {
+      "repository": "x5",
+      "commit": "9ed460e7b7e60769fa12bcab74e228ae19796214",
+      "path": "src/mods/mmx5_diagnostics.cpp",
+      "git_blob": "014f1d17fbf51193c28fe88bc183dfd993ee4623",
+      "sha256": "7ce75b85b5af96f7257404b1010ea6b3bf4499d0db2d5990a06936b6cd358ebb",
+      "bytes": 22449
+    },
+    {
+      "repository": "x5",
+      "commit": "9ed460e7b7e60769fa12bcab74e228ae19796214",
+      "path": "src/mods/mmx5_diagnostic_writer.h",
+      "git_blob": "1bdf4c35af2b703fe4b11c243fe80efa8e4d8804",
+      "sha256": "2ca74551a4497b2caf5c217a1485f4a106a8731eb18829ec165840d9deaf1267",
+      "bytes": 9060
+    },
+    {
+      "repository": "x5",
+      "commit": "9ed460e7b7e60769fa12bcab74e228ae19796214",
+      "path": "src/mods/mmx5_diagnostic_paths.h",
+      "git_blob": "59d453c9230a7de1cc6f1d4bdba82a1303260f03",
+      "sha256": "6e8bd69debd9359a255df91903e251595a36416c5f1993f1853249d49184e342",
+      "bytes": 1106
+    },
+    {
+      "repository": "x5",
+      "commit": "9ed460e7b7e60769fa12bcab74e228ae19796214",
+      "path": "tools/replay_mmx5_diagnostics.py",
+      "git_blob": "83094a22162b111368ec7c70fd51ecba95421eff",
+      "sha256": "bee789661d753db27f270ea93be33950b074f882ed777bdff73efd8ea005d1b3",
+      "bytes": 11355
+    },
+    {
+      "repository": "x4",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "src/mods/mmx4_diagnostic_paths.h",
+      "git_blob": "b594964c2e518f119d83e798be0dbe98d47235c2",
+      "sha256": "207b6aecd421882ff1d97f62a87d622e6e6dc3306005b6d2f4a684ccc2ea9c64",
+      "bytes": 1106
+    },
+    {
+      "repository": "x4",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "mods/preloaded/packages/mmx4.diagnostics/1.0.0/manifest.toml",
+      "git_blob": "695654d46bdd0eaabf884e7dd20e2a7e17fec536",
+      "sha256": "933cde0edf1ba78459e15e259cd3342aba86a080381d35cf5114cf66f09f5db1",
+      "bytes": 785
+    },
+    {
+      "repository": "x5",
+      "commit": "9ed460e7b7e60769fa12bcab74e228ae19796214",
+      "path": "mods/preloaded/packages/mmx5.diagnostics/1.0.0/manifest.toml",
+      "git_blob": "22b3f1377e4d2c2f0576888d50c1ef1b49338425",
+      "sha256": "410f1943b15bbe0b6fb4c2f0a2b93656336c662f2fd60e450854756a559de0a9",
+      "bytes": 785
+    },
+    {
+      "repository": "x4",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "src/mods/mmx4_coop_plugin.c",
+      "git_blob": "a4c0417e3e021d243f8cbb7e109f96d87d6ebf38",
+      "sha256": "f61bb4f8758660ba21e04c86ec28b5c3f22738396ff128ebf10e65fae84b7e57",
+      "bytes": 89536
+    }
+  ],
+  "sdk_observed_commit": "283a75cf3e859820c266f82208f12ee7839d5f61",
+  "sdk_observed_sources": [
+    {
+      "path": "runtime/include/session_diagnostics.h",
+      "sha256": "7df545d928bfa043729e1b0f510811574f5d7ee3eee5eab40f0ed0e42acd7426",
+      "bytes": 3911
+    },
+    {
+      "path": "runtime/include/session_diagnostics_scope.hpp",
+      "sha256": "a7c9a465580b298135b1251be323755ccf590f2946d6d5b31026b392b34068b7",
+      "bytes": 2336
+    },
+    {
+      "path": "runtime/src/session_diagnostics_startup.inc",
+      "sha256": "bf2c296c9489cd6f35cb75f41c563d8c253ce36fab00efabe7ae8dec7331f9d6",
+      "bytes": 20989
+    },
+    {
+      "path": "runtime/src/session_diagnostics_router.inc",
+      "sha256": "b83074eed3bbcf42335611dd15311bf722c19be7741d635777d5d0261d3c20b8",
+      "bytes": 2346
+    },
+    {
+      "path": "runtime/include/code_provider.h",
+      "sha256": "0e47f112b518c1b0a4a9abab2db5e7451d9d4202ad3a760273f85ab40a1a17ba",
+      "bytes": 3184
+    },
+    {
+      "path": "runtime/src/mod_runtime.cpp",
+      "sha256": "913072d4b080817b7757432b7e08286eb471ac10a8c6a8eb649516b4a38e7f4e",
+      "bytes": 147181
+    },
+    {
+      "path": "runtime/include/crash_trace.h",
+      "sha256": "099c0e1e8fe4adb559266f4978b070e550d62e1b208656e9d63e4f3601b64f6a",
+      "bytes": 1637
+    },
+    {
+      "path": "runtime/include/memcard.h",
+      "sha256": "df1a80cfc93a55315cc468db447ac2c3e5d201eaeb8d9a198904613ba940a3cd",
+      "bytes": 4131
+    }
+  ],
+  "sdk_offline_caller_seal_commit": "fd52f9413",
+  "sdk_offline_flag": "--seal-interpreted-overlays",
+  "implementation_sources": [
+    {
+      "path": "src/mods/mmx6_input_replay.hpp",
+      "sha256": "ae366e03a373f318e37a439cf626798f71e402afc83b32abab338fd6b304b6b7",
+      "bytes": 6776
+    },
+    {
+      "path": "src/mods/mmx6_replay_runtime.inc",
+      "sha256": "3dface71628732afa4789fef3e2d6ca1665d9f8326ebb312de5b3a0eb13ee9d0",
+      "bytes": 10353
+    },
+    {
+      "path": "src/mods/mmx6_diagnostics.cpp",
+      "sha256": "3187a9dad356e3be3fac9e6b8686d59b50e6f0c4322057d9d30db45f26a81dbd",
+      "bytes": 17150
+    },
+    {
+      "path": "src/mods/mmx6_diagnostics.h",
+      "sha256": "87dbf725dced1dcddbbab6f594a6a41e91f5357eba701fc53cd880ae41e2bdad",
+      "bytes": 731
+    },
+    {
+      "path": "src/mods/mmx6_coop_plugin.c",
+      "sha256": "cb6e0510cf73daa4061346d7cea24fa9b59ed4dfba6bdae9b6a02ce24c752649",
+      "bytes": 88226
+    },
+    {
+      "path": "tests/test_mmx6_input_replay.cpp",
+      "sha256": "a2cdc26706d7fd6586ccbaa67347ccea073bcd011e1b2c54346fd8a039aeb9e7",
+      "bytes": 4942
+    },
+    {
+      "path": "tests/test_mmx6_native_replay.cpp",
+      "sha256": "5d2573eca7138339c64f103bda5170b9d71df8baa0a2094c7dded4c2e692fd42",
+      "bytes": 10115
+    },
+    {
+      "path": "tests/test_mmx6_replay_legacy.cpp",
+      "sha256": "ad1ccb47b8f79fbfefb857bb81911fff45b253a8f65c45b47d4993145c3b4379",
+      "bytes": 689
+    },
+    {
+      "path": "tools/prepare_mmx6_input_replay.py",
+      "sha256": "faf44122bcc9a453d1d5a706a256869df27e258c717d88dc0fc9b42e0ac12828",
+      "bytes": 8238
+    },
+    {
+      "path": "tools/test_mmx6_native_replay.py",
+      "sha256": "50d1b350f99115f6eea5303772dd6cca6871454ff81630a7fc0fe4d545a28e16",
+      "bytes": 2744
+    },
+    {
+      "path": "tools/test_prepare_mmx6_input_replay.py",
+      "sha256": "1d2d509ddf37354a8240388b16ee9806dce85a4801b249c64326fc27a0739dbf",
+      "bytes": 6912
+    },
+    {
+      "path": "tests/test_mmx6_coop_diagnostics.c",
+      "sha256": "e239f25979ea2596e0888abf3de5964d0caa7b91accc706de95fe46812809671",
+      "bytes": 6662
+    },
+    {
+      "path": "tests/test_mmx6_coop_private_effects.c",
+      "sha256": "ff20f243147e5b1e6a1bd11ed80fdac2c89d5f08f073a0bb480b67c676df443b",
+      "bytes": 22275
+    },
+    {
+      "path": "tests/test_mmx6_input_capture.cpp",
+      "sha256": "9d89c55f1c5e31ab658d83d8c1283cce44ddf1faebfa4c08564f802edbda63ef",
+      "bytes": 10179
+    }
+  ],
+  "expected_native_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+  "native_decoder": {
+    "start": "80012A34",
+    "bytes": 544,
+    "sha256": "8ca7b0e60a42934a40186be927ca9ec2683f2ace00b37edd0b2f9a293ef379fa",
+    "hook": "80012C44",
+    "expected_word": "8FBF0010"
+  },
+  "limits": [
+    "Complete 262144-event/128MiB prefetch only; no restored-state baseline",
+    "Unsealed ordinary offline refuses; no observer settings/backend changes",
+    "Exact actual image/manifest/execution/resolved bundle/card identity required",
+    "No raw SIO/publication replay or outcome/native qualification",
+    "Loaded non-system DLL bytes not independently measured by current startup export",
+    "No cross-build/compiler/CPU/OS or second physical host claim"
+  ],
+  "helper_validation": {
+    "flags": [
+      "-O3",
+      "-UNDEBUG",
+      "-ffp-contract=off"
+    ],
+    "compilers": [
+      "Clang 22.1.8",
+      "GCC 15.2"
+    ],
+    "replay_reader_runtime_cells_passed": 8,
+    "normal_capture_diagnostics_effects_cells_passed": 12,
+    "legacy_service_refusal_cells_passed": 2,
+    "python_codec_passed": 20,
+    "python_preparation_passed": 8,
+    "python_hook_emission_passed": 3,
+    "native_replay": "unverified",
+    "r26": "unverified"
+  }
+}

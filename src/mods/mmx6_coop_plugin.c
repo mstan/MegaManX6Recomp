@@ -721,8 +721,7 @@ static uint16_t p2_input(unsigned consumer) {
             psx_mod_counter_add("mmx6.coop.debug-input-rejected",1);
         }
     }
-    mmx6_diagnostics_p2(consumer,raw,contaminated);
-    return raw;
+    return mmx6_diagnostics_p2(consumer,raw,contaminated);
 }
 static void scene_begin(unsigned seat, uint32_t source) {
     if (scene_owner || !enrolled || life.status[seat]!=MMX6_COOP_ALIVE) return;

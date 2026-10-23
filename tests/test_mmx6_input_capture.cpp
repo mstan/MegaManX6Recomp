@@ -21,6 +21,11 @@ static uint8_t test_ram[0x200000];
 static void owned(){assert(std::this_thread::get_id()==owner);}
 extern "C" int psx_game_register_session_diagnostics(PSXSessionDiagnosticsStartFn a,PSXSessionDiagnosticsEndFn b){
     assert(!start_fn&&!stop_fn);start_fn=a;stop_fn=b;return 1;}
+extern "C" int psx_game_register_guarded_session_diagnostics(PSXSessionDiagnosticsStartFn,PSXSessionDiagnosticsEndFn){assert(false);return 0;}
+extern "C" int psx_session_diagnostics_refuse_replay(const char*){assert(false);return 0;}
+extern "C" void psx_session_diagnostics_end(int){assert(false);}
+extern "C" void psx_fatal_halt(const char*){assert(false);std::abort();}
+extern "C" void psx_crash_trace_set_exit_origin(const char*){assert(false);}
 extern "C" int psx_mod_register_instruction_plugin(const char *id,uint32_t address,uint32_t word,PSXModFunctionEntryCallback f){
     assert(!std::strcmp(id,registrations?"mmx6.local-coop.prototype":"mmx6.diagnostics"));
     assert(address==0x80012C44&&word==0x8FBF0010);native_fn=f;++registrations;return 1;}
@@ -30,6 +35,7 @@ extern "C" uint32_t psx_netplay_sim_tick(){owned();return test_tick;}
 extern "C" uint32_t psx_session_input_taint_get(){owned();return taint;}
 extern "C" void psx_session_input_taint_add(uint32_t flags){owned();taint|=flags;}
 extern "C" int memcard_is_present(int slot){owned();++card_presence_reads;return slot==0;}
+extern "C" int memcard_debug_info(int,const char**,uint8_t*,int*,int*){assert(false);return -1;}
 extern "C" int memcard_export_raw(int slot,uint8_t *out){owned();assert(slot==0);++card_exports;
     for(unsigned i=0;i<MEMCARD_SIZE;++i)out[i]=static_cast<uint8_t>(i);
     return 0;}
@@ -38,6 +44,7 @@ extern "C" uint16_t psx_mod_read_half(uint32_t address){owned();++runtime_reads;
 extern "C" uint32_t psx_mod_read_word(uint32_t address){return psx_mod_read_half(address)|uint32_t(psx_mod_read_half(address+2))<<16;}
 static void word(uint32_t address,uint32_t value){for(unsigned i=0;i<4;++i)test_ram[(address+i)&0x1FFFFFu]=uint8_t(value>>(8*i));}
 static void half(uint32_t address,uint16_t value){test_ram[address&0x1FFFFFu]=uint8_t(value);test_ram[(address+1)&0x1FFFFFu]=uint8_t(value>>8);}
+extern "C" void psx_mod_write_half(uint32_t,uint16_t){assert(false);}
 struct MemorySink:Mmx6Capture::Sink{
     std::string bytes;bool short_write=false;
     bool write(const std::string& row)override{if(short_write){bytes+=row.substr(0,row.size()/2);return false;}bytes+=row;return true;}
@@ -96,8 +103,10 @@ int main(int argc,char **argv){
     settings[2]='X';content[2]='Y';implementation[2]='Z';
     CPUState cpu{};cpu.gpr[29]=0x801FFF00;cpu.gpr[31]=0x80012C44;word(cpu.gpr[29]+16,0x80012220);
     word(0x80097420,20);const CPUState before=cpu;
+    const std::vector<uint8_t> ram_before(test_ram,test_ram+sizeof test_ram);
     native_fn(&cpu,0x80012C44);assert(!std::memcmp(&cpu,&before,sizeof cpu));
     for(unsigned tag=0;tag<6;++tag){++test_cycles;mmx6_diagnostics_p2(tag,8,0);}
+    assert(!std::memcmp(test_ram,ram_before.data(),sizeof test_ram));
     ++test_cycles;word(cpu.gpr[29]+16,0x8001A834);half(0x800C456C,0x800);half(0x800C4570,0x800);
     native_fn(&cpu,0x80012C44);++test_cycles;mmx6_diagnostics_p2(0,8,0);
     if(argc>2&&!std::strcmp(argv[2],"--atexit")){

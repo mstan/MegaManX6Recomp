@@ -13,12 +13,15 @@
 #include "psx_cycles.h"
 #include "psx_netplay.h"
 #include "memcard.h"
+#include "crash_trace.h"
 #include "mmx6_input_capture.hpp"
+#include "mmx6_input_replay.hpp"
 #include <chrono>
 #include <condition_variable>
 #include <cstdlib>
 #include <cstring>
 #include <filesystem>
+#include <fstream>
 #include <memory>
 #include <mutex>
 #include <thread>
@@ -41,6 +44,7 @@ struct Startup {
     Identity identity;
     std::string root,settings,content,implementation;
     std::array<std::vector<uint8_t>,2> cards;
+    std::array<std::string,2> card_paths;
 };
 struct FileSink:Sink {
     FILE *file=nullptr;
@@ -83,6 +87,17 @@ std::filesystem::path private_directory(const Startup& s){
             return path;}}
     throw std::runtime_error("cannot reserve unique capture output directory");
 }
+bool sample_native(CPUState *cpu,uint32_t address,Event& e)noexcept{
+    const uint32_t sp=cpu?cpu->gpr[29]:0,physical=sp&0x1FFFFFFFu;
+    if(!cpu||address!=0x80012C44u||(sp&3)||physical>0x1FFFECu||
+       !((sp>=0x80000000u&&sp<0x80200000u)||(sp>=0xA0000000u&&sp<0xA0200000u)))return false;
+    e.caller=psx_mod_read_word(sp+16);e.frame=psx_mod_read_word(0x80097420u);
+    const uint32_t bases[]={0x800C456Cu,0x800C4758u};
+    for(unsigned port=0;port<2;++port)for(unsigned word=0;word<3;++word)
+        e.pads[port][word]=psx_mod_read_half(bases[port]+2*word);
+    return true;
+}
+#include "mmx6_replay_runtime.inc"
 class Capture {
     Queue<8192> queue;
     std::atomic<bool> accepting{false},closing{false};
@@ -165,14 +180,8 @@ public:
     void native(CPUState *cpu,uint32_t address)noexcept{
         if(!enter())return;
         Event e;e.kind=0;e.native=natives;
-        const uint32_t sp=cpu?cpu->gpr[29]:0,physical=sp&0x1FFFFFFFu;
-        if(!cpu||address!=0x80012C44u||(sp&3)||physical>0x1FFFECu||
-           !((sp>=0x80000000u&&sp<0x80200000u)||(sp>=0xA0000000u&&sp<0xA0200000u))){
+        if(!sample_native(cpu,address,e)){
             fail(InvalidNative);in_flight.fetch_sub(1,std::memory_order_release);return;}
-        e.caller=psx_mod_read_word(sp+16);e.frame=psx_mod_read_word(0x80097420u);
-        const uint32_t bases[]={0x800C456Cu,0x800C4758u};
-        for(unsigned port=0;port<2;++port)for(unsigned word=0;word<3;++word)
-            e.pads[port][word]=psx_mod_read_half(bases[port]+2*word);
         publish(e);
     }
     void p2(unsigned consumer,uint16_t buttons,int contaminated)noexcept{
@@ -185,12 +194,16 @@ public:
 /* Router start/end are serialized. End disarms the raw pointer, waits for all
  * outer Callback guards, drains the worker and only then resets the object. */
 std::unique_ptr<Capture> current;
+std::unique_ptr<Replay> current_replay;
 std::atomic<Capture*> active{nullptr};
+std::atomic<Replay*> active_replay{nullptr};
 std::atomic<unsigned> callbacks{0};
+std::atomic<bool> replay_end_failed{false};
 uint64_t current_epoch=0;
 struct Callback {
     Capture *capture=nullptr;
-    Callback(){callbacks.fetch_add(1);capture=active.load();}
+    Replay *replay=nullptr;
+    Callback(){callbacks.fetch_add(1);capture=active.load();replay=active_replay.load();}
     ~Callback(){callbacks.fetch_sub(1);}
 };
 void end(uint64_t epoch,int reason){
@@ -198,18 +211,28 @@ void end(uint64_t epoch,int reason){
     /* Sequential ordering across these two atomics prevents the exiting thread
      * from freeing a pointer that a producer has just acquired. */
     active.store(nullptr);
+    active_replay.store(nullptr);
     while(callbacks.load())std::this_thread::yield();
-    if(current){current->stop(reason);current.reset();}current_epoch=0;
+    if(current){current->stop(reason);current.reset();}
+    if(current_replay){replay_end_failed.store(!current_replay->stop(reason));current_replay.reset();}
+    current_epoch=0;
 }
 void begin(const PSXSessionDiagnosticsStart *s){
     if(!s)return;
+    const char *replay_path=std::getenv("MMX6_INPUT_REPLAY");
+    const bool replay_requested=replay_path!=nullptr;
     /* Offline feature selection is actual committed plugin ownership. Online
      * the executable's forced profile owns the same native instruction hook. */
-    if(!mod_runtime_diagnostics_plugin_active(s->netplay?"mmx6.local-coop.prototype":"mmx6.diagnostics"))return;
+    if(!mod_runtime_diagnostics_plugin_active(s->netplay?"mmx6.local-coop.prototype":"mmx6.diagnostics")){
+        if(replay_requested)psx_session_diagnostics_refuse_replay("required diagnostics native hook is not active");return;}
     const char *enabled=std::getenv("MMX6_INPUT_RECORDING");
-    if(enabled&&!std::strcmp(enabled,"0"))return;
-    if(!s->envelope_complete){std::fprintf(stderr,"mmx6 diagnostics: capture unavailable: %s\n",s->unavailable_reason);return;}
-    if(s->guest_cycles||s->sim_tick||current)throw std::runtime_error("capture requires fresh resolved startup boundary");
+    if(!replay_requested&&enabled&&!std::strcmp(enabled,"0"))return;
+    if(!s->envelope_complete){
+        if(replay_requested)psx_session_diagnostics_refuse_replay(s->unavailable_reason);
+        else std::fprintf(stderr,"mmx6 diagnostics: capture unavailable: %s\n",s->unavailable_reason);
+        return;}
+    if(replay_requested&&s->netplay){psx_session_diagnostics_refuse_replay("native-consumption replay is offline only");return;}
+    if(s->guest_cycles||s->sim_tick||current||current_replay)throw std::runtime_error("diagnostics requires fresh resolved startup boundary");
     Startup owned;owned.epoch=s->session_epoch;
     owned.root=(std::filesystem::path(s->output_root)/"input-recordings").string();
     if(const char *root=std::getenv("MMX6_INPUT_RECORDING_DIR"))owned.root=root;
@@ -219,21 +242,58 @@ void begin(const PSXSessionDiagnosticsStart *s){
     id.settings=sha(owned.settings.data(),owned.settings.size());id.content=sha(owned.content.data(),owned.content.size());
     id.simulation=sha(owned.implementation.data(),owned.implementation.size());
     id.netplay=s->netplay!=0;id.profile=s->profile_id;id.revision=s->profile_revision;id.selected=s->selected_sha256;
-    for(unsigned slot=0;slot<2;++slot)if(memcard_is_present(slot)){
+    for(unsigned slot=0;slot<2;++slot){
+        if(replay_requested){const char *path=nullptr;
+            if(memcard_debug_info(slot,&path,nullptr,nullptr,nullptr)!=0)throw std::runtime_error("live replay card path unavailable");
+            owned.card_paths[slot]=path?path:"";}
+        if(memcard_is_present(slot)){
         owned.cards[slot].resize(MEMCARD_SIZE);
         if(memcard_export_raw(slot,owned.cards[slot].data())!=0)throw std::runtime_error("initial memory card export failed");
-        id.cards[slot]=sha(owned.cards[slot].data(),owned.cards[slot].size());}
+        id.cards[slot]=sha(owned.cards[slot].data(),owned.cards[slot].size());}}
     (void)id.json(); // Validate before worker/producer activation.
+    if(replay_requested){
+        try{
+            if(!*replay_path)throw std::runtime_error("explicit replay path is empty");
+            const char *profile=std::getenv("MMX6_INPUT_REPLAY_PROFILE");
+            if(!profile||!*profile)throw std::runtime_error("explicit replay requires a prepared private profile");
+            current_replay=std::make_unique<Replay>(std::move(owned),replay_path,profile);
+            current_epoch=s->session_epoch;replay_end_failed.store(false);active_replay.store(current_replay.get());
+        }catch(const std::exception& error){psx_session_diagnostics_refuse_replay(error.what());}
+        return;
+    }
     current_epoch=s->session_epoch;current=std::make_unique<Capture>(std::move(owned));
     active.store(current.get());
 }
-void native(CPUState *cpu,uint32_t address){Callback scope;if(scope.capture)scope.capture->native(cpu,address);}
+[[noreturn]]void finish_replay(ReplayResult result){
+    /* ERROR/completion control only. Every Callback guard is already released;
+     * atomically disarm, drain the status worker, then use existing terminal
+     * runtime boundaries. Never longjmp or return a live input fallback. */
+    active_replay.store(nullptr);
+    psx_session_diagnostics_end(result.control==ReplayControl::Complete?
+        PSX_SESSION_DIAGNOSTICS_END_NORMAL:PSX_SESSION_DIAGNOSTICS_END_START_FAILED);
+    if(result.control==ReplayControl::Complete&&!replay_end_failed.load()){
+        psx_crash_trace_set_exit_origin("mmx6_native_consumption_replay_end");std::exit(0);
+    }
+    psx_fatal_halt(result.reason?result.reason:"native-consumption replay result failed");
+    std::abort(); // Boundary is documented nonreturning, even on legacy headers.
 }
-extern "C" void mmx6_diagnostics_p2(unsigned consumer,uint16_t buttons,int contaminated){
-    Callback scope;if(scope.capture)scope.capture->p2(consumer,buttons,contaminated);
+void native(CPUState *cpu,uint32_t address){
+    ReplayResult result;{Callback scope;
+        if(scope.replay)result=scope.replay->native(cpu,address);
+        else if(scope.capture)scope.capture->native(cpu,address);}
+    if(result.control!=ReplayControl::Continue)finish_replay(result);
+}
+}
+extern "C" uint16_t mmx6_diagnostics_p2(unsigned consumer,uint16_t buttons,int contaminated){
+    ReplayResult result;result.buttons=buttons;{Callback scope;
+        if(scope.replay)result=scope.replay->p2(consumer,buttons,contaminated);
+        else if(scope.capture)scope.capture->p2(consumer,buttons,contaminated);}
+    if(result.control!=ReplayControl::Continue)finish_replay(result);
+    return result.buttons;
 }
 PSX_MOD_CONSTRUCTOR(mmx6_register_diagnostics){
-    psx_game_register_session_diagnostics(begin,end);
+    if(std::getenv("MMX6_INPUT_REPLAY"))psx_game_register_guarded_session_diagnostics(begin,end);
+    else psx_game_register_session_diagnostics(begin,end);
     for(const char *id:{"mmx6.diagnostics","mmx6.local-coop.prototype"})
         psx_mod_register_instruction_plugin(id,0x80012C44u,0x8FBF0010u,native);
 }
@@ -241,9 +301,14 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_diagnostics){
 /* Legacy SDK helper fixtures remain linkable; no capture is advertised. */
 #include "mod_plugins.h"
 #include <cstdio>
-extern "C" void mmx6_diagnostics_p2(unsigned,uint16_t,int){}
+#include <cstdlib>
+extern "C" uint16_t mmx6_diagnostics_p2(unsigned,uint16_t buttons,int){return buttons;}
 static void unavailable(){std::fprintf(stderr,"mmx6 diagnostics: capture unavailable: SDK session diagnostics service required\n");}
 PSX_MOD_CONSTRUCTOR(mmx6_register_diagnostics_unavailable){
+    if(std::getenv("MMX6_INPUT_REPLAY")){
+        std::fprintf(stderr,"mmx6 diagnostics: explicit replay refused: SDK guarded session diagnostics service required\n");
+        std::exit(EXIT_FAILURE);
+    }
     psx_mod_register_activation_plugin("mmx6.diagnostics",unavailable);
 }
 #endif

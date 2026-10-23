@@ -3,7 +3,9 @@
 The trusted `mmx6_diagnostics.cpp` observer now connects the frozen-source
 contract in [COOP_INPUT_CONSUMPTION_CONTRACT.md](COOP_INPUT_CONSUMPTION_CONTRACT.md)
 to a bounded native writer. **No native executable has been built or run for
-this change. Replay remains unimplemented and R26 remains unverified.**
+this change. R26 remains unverified.** A later bounded
+[offline replay slice](COOP_NATIVE_REPLAY.md) adds explicit supply and guarded
+refusal; it has no native replay qualification.
 
 The default-enabled `mmx6.diagnostics` catalog feature owns the offline
 instruction callback. The actual forced online profile

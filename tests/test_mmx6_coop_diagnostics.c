@@ -15,15 +15,17 @@ static int test_digest_registered;
 int psx_mod_netplay_has_state_digest(void) { return test_digest_registered; }
 #endif
 static unsigned rejected,guest_calls,effect_writes;
-static unsigned observed_reads,observed_consumer;
+static unsigned observed_reads,observed_consumer,sio_reads;
+static int test_replay_supply;
 static uint16_t observed_buttons;
 static int observed_contaminated;
 #ifdef MMX6_COOP_INPUT_TAINT_API
 static uint32_t diagnostic_test_taint;
 void psx_session_input_taint_add(uint32_t flags){diagnostic_test_taint|=flags;}
 #endif
-void mmx6_diagnostics_p2(unsigned consumer,uint16_t buttons,int contaminated) {
+uint16_t mmx6_diagnostics_p2(unsigned consumer,uint16_t buttons,int contaminated) {
     ++observed_reads;observed_consumer=consumer;observed_buttons=buttons;observed_contaminated=contaminated;
+    return test_replay_supply?0x1234:buttons;
 }
 static uint8_t *memory(uint32_t address) {
     if (address>=0x9F080000u && address<0x9F082000u) return test_diagnostic+address-0x9F080000u;
@@ -43,7 +45,7 @@ void psx_mod_write_word(uint32_t address,uint32_t value) { for(unsigned i=0;i<4;
 void psx_mod_write_code_word(uint32_t address,uint32_t value) { psx_mod_write_word(address,value); }
 int psx_mod_netplay_is_active(void) { return test_online; }
 void psx_mod_counter_add(const char *name,uint32_t count) { CHECK(strstr(name,"rejected"));rejected+=count; }
-uint16_t sio_get_pad_buttons_slot(int slot) { CHECK(slot==1);return 0xFFDF; }
+uint16_t sio_get_pad_buttons_slot(int slot) { CHECK(slot==1);++sio_reads;return 0xFFDF; }
 void psx_dispatch_call(CPUState *cpu,uint32_t target,uint32_t ret) { (void)cpu;(void)target;(void)ret;++guest_calls; }
 
 static void queue(unsigned command) {
@@ -84,6 +86,13 @@ int main(void) {
     CHECK(observed_contaminated && observed_buttons==0x4000);
 #endif
     CHECK(observed_reads==2 && observed_consumer==MMX6_INPUT_CONTROLLER_BLOCKED);
+    /* The accepted debug override is intentionally persistent. Clear it before
+     * separately checking the ordinary sampler/explicit-return wiring. */
+    psx_mod_write_byte(diagnostic+0x30,0);
+    CHECK(sio_reads==2);test_replay_supply=1;
+    CHECK(p2_input(MMX6_INPUT_INTERACTION)==0x1234);
+    CHECK(sio_reads==3 && observed_reads==3 && observed_buttons==0x20 && !observed_contaminated);
+    test_replay_supply=0;
     /* Padding and purely presentational cache growth must not change the
      * observation; owned combat/lifecycle mutations must change it. */
     uint32_t original=diagnostic_host_digest();

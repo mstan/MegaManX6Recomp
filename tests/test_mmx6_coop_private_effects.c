@@ -32,8 +32,9 @@ void psx_mod_write_half(uint32_t a,uint16_t v){psx_mod_write_byte(a,(uint8_t)v);
 void psx_mod_write_word(uint32_t a,uint32_t v){for(unsigned i=0;i<4;++i)psx_mod_write_byte(a+i,(uint8_t)(v>>(i*8)));}
 void psx_mod_write_code_word(uint32_t a,uint32_t v){psx_mod_write_word(a,v);}
 uint16_t sio_get_pad_buttons_slot(int slot){CHECK(slot==1);return pad_buttons;}
-void mmx6_diagnostics_p2(unsigned consumer,uint16_t buttons,int contaminated){
+uint16_t mmx6_diagnostics_p2(unsigned consumer,uint16_t buttons,int contaminated){
     CHECK(consumer<6 && buttons==(uint16_t)~pad_buttons && !contaminated);
+    return buttons;
 }
 #ifdef MMX6_COOP_INPUT_TAINT_API
 void psx_session_input_taint_add(uint32_t flags){(void)flags;CHECK(0);}
