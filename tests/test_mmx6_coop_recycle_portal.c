@@ -170,6 +170,8 @@ static void setup(CPUState *cpu){
     psx_mod_write_byte(portal+4,1);psx_mod_write_byte(portal+5,1);psx_mod_write_byte(portal+6,0);
     psx_mod_write_word(portal+0x10,0x800F2B0Cu);psx_mod_write_word(portal+0x50,0x800F38BCu);
     psx_mod_write_word(portal+0x54,0x800F38C0u);psx_mod_write_word(portal+0x68,0x800F38B8u);
+    /* Actual observed native first-admission variant, not original-only data. */
+    psx_mod_write_word(0x800F2B0Cu,0x10011C01u);
     cpu->gpr[4]=portal;cpu->gpr[31]=0x800EC70Cu;
     psx_mod_clear_function_replacements();CHECK(psx_mod_set_function_replacement(0x800EC780,recycle_portal_contact));
     CHECK(recycle_portal_source());
@@ -237,6 +239,17 @@ int main(int argc,char **argv){
     setup(&cpu);enrolled=0;rejected(&cpu);setup(&cpu);scene_phase=1;rejected(&cpu);
     setup(&cpu);p2.body[2]=0;rejected(&cpu);setup(&cpu);psx_mod_write_byte(PLAYER+2,1);rejected(&cpu);
     for(unsigned flags=0;flags<256;++flags){setup(&cpu);psx_mod_write_byte(0x800F2B0Cu,(uint8_t)flags);CHECK(recycle_portal_source()==(flags<=1));}
+    for(unsigned state=0;state<256;++state)for(unsigned flags=0;flags<2;++flags){
+        setup(&cpu);psx_mod_write_byte(0x800F2B0Cu,(uint8_t)flags);
+        psx_mod_write_byte(0x800F2B0Fu,(uint8_t)state);
+        CHECK(recycle_portal_source()==(state==0 || state==0x10));
+    }
+    for(unsigned state=0;state<=0x10;state+=0x10)for(unsigned flags=0;flags<2;++flags){
+        setup(&cpu);psx_mod_write_byte(0x800F2B0Cu,(uint8_t)flags);
+        psx_mod_write_byte(0x800F2B0Fu,(uint8_t)state);
+        CHECK(recycle_portal_contact(&cpu,0x800EC780));
+        CHECK(probes==2 && actions==1 && scene_owner==2);
+    }
     for(unsigned offset=1;offset<8;++offset){setup(&cpu);psx_mod_write_byte(0x800F2B0Cu+offset,psx_mod_read_byte(0x800F2B0Cu+offset)^1);rejected(&cpu);}
     puts("Recycle portal actual-plugin guarded contact, deferred owner and single-world fixture PASS; native gameplay unverified");return 0;
 }

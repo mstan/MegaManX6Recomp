@@ -16,13 +16,18 @@ member6 code/dispatch/collision closure and original EXE contact, controller
 order, player transition and stage-init/destination routines. It rejects
 different code at the reused overlay address.
 
-The native scanner stores the authored record pointer in instance `+10` at
-`8002A180`. `8002A254..8002A264` reads byte0 and ORs1 in the final store.
-`8002A33C..8002A3AC` clears admission on stage reset with AND70h and advances
-eight bytes per record. This source record starts with0, so the guard accepts
-exactly its complete eight-byte original/admitted variants: byte0=0 or1,
-every other byte exact. All256 first-byte values and corruptions of the other
-seven bytes are checked. No broad flag mask or patched-workbook bytes are used.
+The scanner first calls `80029E7C` at `8002A12C`. For this category0 record,
+high byte3 state0 becomes10h at `80029EF8` before allocation; PLAY+68=3 bypasses
+that state step. The producer's complete188-byte native extent is SHA guarded.
+The scanner stores the authored record pointer in instance `+10` at `8002A180`,
+then `8002A254..8002A264` ORs1 into byte0. Stage reset `8002A380/384` restores
+byte3's low category nibble and byte0's authored70h bits, advancing8 per record.
+The guard accepts four complete eight-byte variants: byte0=0 or1 crossed with
+byte3=00 or10h; the other six bytes stay exact. Every byte0 and byte3 value is
+tested independently, with corruptions of the remaining bytes rejected.
+Other scanner state-machine values remain outside this qualified source
+closure. No broad high-nibble/flag mask or workbook replacement bytes are used.
+See [the CP3/native-record follow-up](COOP_RECYCLE_CP3_NATIVE_ENTRY.md).
 
 Both actors must be allocated, visible, healthy, alive and control-ready in
 the current fixed X/P1 and Zero/P2 roster. Scene/passenger, pause, transition,

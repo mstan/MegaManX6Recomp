@@ -47,6 +47,52 @@ def native(member=None):
 def response(address,raw):return dict(ok=True,addr=hex(address),len=len(raw),hex=bytes(raw).hex())
 
 
+def native_record_state(exe, record, mode):
+    """Execute only the pinned admission leaf's integer/branch/store subset.
+
+    Bounded source proof, not a CPU/game emulator. Original instructions have
+    explicit independent load-delay slots; branch delay slots execute below.
+    Only record+3 and PLAY+68 memory accesses are permitted.
+    """
+    program=exe.data[exe.offset(0x80029E7C,0xBC):exe.offset(0x80029E7C,0xBC)+0xBC]
+    if portal.sha(program)!="df6eff4115848b712fbc5f13bac169665422de1032a5e9544412af5d56e7da89":
+        raise ValueError("Unpinned native admission leaf")
+    raw=bytearray(record);regs=[0]*32;regs[4]=portal.RECORD;regs[31]=0x80000000
+    pc=0x80029E7C;delayed=None;writes=[]
+    signed=lambda n:n-0x100000000 if n&0x80000000 else n
+    for _ in range(96):
+        if pc==0x80000000:return bytes(raw),regs[2],writes
+        if not 0x80029E7C<=pc<0x80029F38 or pc&3:raise ValueError("Admission PC escaped")
+        word=exe.word(pc);op=word>>26;rs=(word>>21)&31;rt=(word>>16)&31;rd=(word>>11)&31
+        imm=word&0xFFFF;short=imm-0x10000 if imm&0x8000 else imm;target=None
+        if word==0:pass
+        elif op==0 and word&63==0x21:regs[rd]=regs[rs]+regs[rt]
+        elif op==0 and word&63==0x2B:regs[rd]=int(regs[rs]<regs[rt])
+        elif op==0 and word&63==8:target=regs[rs]
+        elif op==2:target=((pc+4)&0xF0000000)|((word&0x3FFFFFF)<<2)
+        elif op in (4,5):
+            if (regs[rs]==regs[rt])==(op==4):target=pc+4+short*4
+        elif op==9:regs[rt]=regs[rs]+short
+        elif op==10:regs[rt]=int(signed(regs[rs])<short)
+        elif op==11:regs[rt]=int(regs[rs]<(short&0xFFFFFFFF))
+        elif op==12:regs[rt]=regs[rs]&imm
+        elif op==15:regs[rt]=imm<<16
+        elif op==0x24:
+            address=(regs[rs]+short)&0xFFFFFFFF
+            if address==portal.RECORD+3:regs[rt]=raw[3]
+            elif address==portal.PLAY+0x68:regs[rt]=mode
+            else:raise ValueError("Admission memory read escaped")
+        elif op==0x28:
+            address=(regs[rs]+short)&0xFFFFFFFF
+            if address!=portal.RECORD+3:raise ValueError("Admission memory write escaped")
+            raw[3]=regs[rt]&255;writes.append(pc)
+        else:raise ValueError(f"Unsupported admission opcode {word:08X}")
+        if delayed is not None and target is not None:raise ValueError("Branch in delay slot")
+        regs=[n&0xFFFFFFFF for n in regs];regs[0]=0
+        pc=delayed if delayed is not None else pc+4;delayed=target
+    raise ValueError("Admission instruction bound exhausted")
+
+
 class PortalObserverTests(unittest.TestCase):
     def test_exact_extent_pool_and_resident_attribution(self):
         raw=native();row=portal.parse_native(raw)
@@ -70,13 +116,36 @@ class PortalObserverTests(unittest.TestCase):
         raw=native();raw[portal.PLAY+12-portal.BASE]=20;raw[portal.PLAY+13-portal.BASE]=1
         self.assertIsNone(portal.parse_native(raw)["portal"]) # No old-origin attribution on a new map.
 
-    def test_record_has_only_original_and_admitted_variants(self):
-        for flags in range(256):
-            raw=native();raw[portal.RECORD-portal.BASE]=flags
-            self.assertEqual(portal.parse_native(raw)["source_record_match"],flags in (0,1))
-        for offset in range(1,8):
+    def test_record_has_only_four_complete_source_variants(self):
+        for state in (0,0x10):
+            for flags in range(256):
+                raw=native();raw[portal.RECORD-portal.BASE]=flags;raw[portal.RECORD-portal.BASE+3]=state
+                self.assertEqual(portal.parse_native(raw)["source_record_match"],flags in (0,1))
+        for flags in (0,1):
+            for state in range(256):
+                raw=native();raw[portal.RECORD-portal.BASE]=flags;raw[portal.RECORD-portal.BASE+3]=state
+                self.assertEqual(portal.parse_native(raw)["source_record_match"],state in (0,0x10))
+        for offset in (1,2,4,5,6,7):
             raw=native();raw[portal.RECORD-portal.BASE+offset]^=1
             self.assertFalse(portal.parse_native(raw)["source_record_match"])
+
+    def test_original_native_admission_leaf_produces_observed_byte3(self):
+        path=os.environ.get("MMX6_CONTENT_EXE")
+        if not path:self.skipTest("Supply original MMX6_CONTENT_EXE")
+        exe=portal.checkpoint.original_executable(Path(path))
+        original=struct.pack("<4B2h",0,28,1,0,1552,1584)
+        for mode in (0,1,2):
+            changed,result,writes=native_record_state(exe,original,mode)
+            self.assertEqual(changed,bytes.fromhex("001c011010063006"))
+            self.assertEqual((result,writes),(0,[0x80029EF8]))
+            pending,result,writes=native_record_state(exe,changed,mode)
+            self.assertEqual((pending,result,writes),(changed,1,[]))
+        unchanged,result,writes=native_record_state(exe,original,3)
+        self.assertEqual((unchanged,result,writes),(original,0,[]))
+        for pc,word in ((0x8002A12C,0x0C00A79F),(0x8002A25C,0x34420001),
+                        (0x8002A264,0xA2420000),(0x8002A380,0x30A2000F),(0x8002A384,0xA0820003)):
+            self.assertEqual(exe.word(pc),word)
+        self.assertIn(bytes.fromhex("011c011010063006"),portal.RECORD_VARIANTS)
 
     def test_read_only_callbacks_are_exact_and_cross_rpc_attribution_stays_missing(self):
         raw=native();diag=publication();calls=[]
@@ -168,6 +237,12 @@ class PortalObserverTests(unittest.TestCase):
         member=archive[153*2048:153*2048+42944]
         observed=portal.parse_native(native(member))
         self.assertTrue(observed["source_closure_present"])
+        for variant in portal.RECORD_VARIANTS:
+            admitted=native(member)
+            at=portal.RECORD-portal.BASE;admitted[at:at+8]=variant
+            self.assertTrue(portal.parse_native(admitted)["source_closure_present"])
+        self.assertEqual(plan["record_mutation"]["complete_record_variants"],
+                         [v.hex() for v in portal.RECORD_VARIANTS])
         mutated=native(member);mutated[0x800EC780-portal.BASE]^=1
         self.assertFalse(portal.parse_native(mutated)["source_closure_present"])
         mutated=native(member);mutated[portal.BIN_TABLE+6*8-portal.BASE]^=1

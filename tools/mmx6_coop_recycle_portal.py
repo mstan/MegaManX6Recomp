@@ -29,6 +29,8 @@ SOURCE_WINDOWS = (
     (0x800F38B8, 0x7C, "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c"),
     (0x800E9864, 0x14, "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43"),
 )
+RECORD_VARIANTS = tuple(struct.pack("<4B2h", flags,28,1,state,1552,1584)
+                        for flags in (0,1) for state in (0,0x10))
 SETUP_GAP = "CP3's authored spawn is 128px above the portal; safe terrain and a traversable approach remain unproven"
 COHERENCE_GAP = "Native portal/namespace and published private-player blocks are separate RPCs"
 
@@ -105,6 +107,10 @@ def source_plan(original: Path, disc: Path, inventory: Path | None = None) -> di
         destination=checkpoint.select(locations, sections, 20, 1, 0),
         native_destination_path=["800EC978 writes41h", "8001E3D4 ->80042F7C maps4 to20/1",
                                  "8001E930 clears checkpoint before major9 initializer8001E1BC"],
+        record_mutation=dict(admission_helper="80029E7C..80029F38",scanner_call="8002A12C",
+            byte3_store="80029EF8",byte3_values=[0,0x10],byte0_values=[0,1],
+            source_sha256="df6eff4115848b712fbc5f13bac169665422de1032a5e9544412af5d56e7da89",
+            complete_record_variants=[r.hex() for r in RECORD_VARIANTS]),
         destination_code_windows=windows, automatic_actions=[], proven_safe_contact_positions=[],
         setup_status="unverified_setup_gap", setup_gap=SETUP_GAP, coherence_gap=COHERENCE_GAP,
         bypass_policy="Any later private checkpoint/position/prerequisite setup must be explicit and tainted; no portal/transition/success writes",
@@ -162,8 +168,7 @@ def parse_native(raw: bytes) -> dict:
                 timer=struct.unpack_from("<h", actor, 0x7C)[0], saved_body_box=struct.unpack_from("<I", actor, 0x88)[0],
                 raw_hex=actor.hex())
     record = read(RECORD, 8)
-    original_record = struct.pack("<4B2h", 0, 28, 1, 0, 1552, 1584)
-    record_match = record in (original_record, bytes((1,))+original_record[1:])
+    record_match = record in RECORD_VARIANTS
     source_windows = [dict(address=a, size=n, sha256=sha(read(a, n)), matches=sha(read(a, n)) == h)
                       for a, n, h in SOURCE_WINDOWS]
     camera = read(CAMERA, 0x54)

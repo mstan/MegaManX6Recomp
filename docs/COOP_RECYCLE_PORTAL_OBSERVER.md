@@ -39,8 +39,11 @@ The native 41h mapping is `8001E3D4 ->80042F7C`, mapping stage 4 to 20/1.
 Major8 entry `8001E914` clears checkpoint at `8001E930` before major9's
 initializer `8001E1BC`, giving the CP0 source expectation. Source member6 is
 42,944 bytes at archive sector153; destination member28 is40,334 bytes at591.
-The source member's controller/dispatch/collision windows and original/admitted
-record variants are checked. Destination code-prefix and native BIN descriptor
+The source member's controller/dispatch/collision windows and four exact
+original/admission-state record variants are checked (byte0=0/1, byte3=00/10h;
+all other bytes exact). Original scanner `80029EF8` produces byte3=10h before
+allocation; see [the native entry follow-up](COOP_RECYCLE_CP3_NATIVE_ENTRY.md).
+Destination code-prefix and native BIN descriptor
 presence are only partial loading observations.
 
 ## API for the owning launcher adapter
@@ -127,8 +130,9 @@ $env:MMX6_CONTENT_DISC='<original-raw-bin>'
 python -m unittest discover -s tools -p test_mmx6_coop_recycle_portal.py -v
 ```
 
-Set TEMP/TMP/PYTHONPYCACHEPREFIX to G/F first. Nine tests pass, including actual
-original source reproduction, all 256 admission flag values, malformed/truncated
+Set TEMP/TMP/PYTHONPYCACHEPREFIX to G/F first. Ten tests pass, including actual
+original source reproduction and execution of the bounded native admission
+leaf's instructions, all256 byte0/byte3 values, malformed/truncated
 envelopes, duplicate/stale pool identities, torn publications, candidate binding,
 retained partial failures and refusal to turn a synthetic complete native
 sequence into a full qualification. The original-input route is unimplemented

@@ -19,6 +19,7 @@ static const Mmx6PortalCode recycle_portal_code[]={
     {0x8001E1BCu,0x170u,"db8d0094d673f5a0f2c89beb097c54bee6f8449c539d9d176f00844af5160b9c"},
     {0x8001E32Cu,0x3B8u,"c532803823d419cf6804de1052208f0e5c9f8fb580ceb203b12de4d4157a6cbb"},
     {0x80042F7Cu,0x2Cu,"71e386a73511afbe127fe413a0403074e0978eb81db558eea22d61711a0043a5"},
+    {0x80029E7Cu,0xBCu,"df6eff4115848b712fbc5f13bac169665422de1032a5e9544412af5d56e7da89"},
     {0x8002A254u,0x14u,"9a76756a228e340e960ce17f8dd26714f2dedc0ee4816d9e351f20689bd95587"},
     {0x8002A33Cu,0x70u,"64d048352812e4978ca1ed0fcc3edd590db9311fb7a08ef19a216024f7f980c5"}
 };
@@ -36,12 +37,16 @@ static int recycle_portal_source(void) {
             if(span->sha[n*2]!=hex[digest[n]>>4] || span->sha[n*2+1]!=hex[digest[n]&15])return 0;
     }
     unsigned flags=psx_mod_read_byte(0x800F2B0Cu);
-    /* Scanner8002A254..264 ORs1 into record byte0 after native allocation;
-     * 8002A33C..3AC resets it with AND70h. This authored record starts0.
-     * Accept the two complete words only; no mask permits other mutations. */
-    return flags<=1 && psx_mod_read_word(0x8006DC8Cu)==0x800F301Cu &&
+    unsigned state=psx_mod_read_byte(0x800F2B0Fu);
+    /* Before allocation, scanner8002A12C calls80029E7C. Category0/high0
+     * becomes10h at80029EF8 unless PLAY+68==3 bypasses that state step.
+     * Scanner8002A254..264 then ORs1 into byte0. Reset8002A380/384
+     * restores byte3's low nibble and byte0's authored70h bits.
+     * Accept four complete source-proven words; all other bytes stay exact. */
+    return flags<=1 && (state==0 || state==0x10) &&
+        psx_mod_read_word(0x8006DC8Cu)==0x800F301Cu &&
         psx_mod_read_word(0x800F308Cu)==0x800EC678u &&
-        psx_mod_read_word(0x800F2B0Cu)==(0x00011C00u|flags) &&
+        psx_mod_read_word(0x800F2B0Cu)==(0x00011C00u|flags|(state<<24)) &&
         psx_mod_read_word(0x800F2B10u)==0x06300610u;
 }
 static int recycle_portal_eligible(unsigned seat) {
