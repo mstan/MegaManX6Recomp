@@ -152,3 +152,22 @@ python -m unittest discover -s tools -p test_mmx6_native_player_init_audit.py -v
 Four pure/source tests cover source reproduction, canonical/attract/projected/
 door/wrong-root/phase/roster distinctions and exact frame-shape negatives.
 Synthetic shape/signature success is not a native or host-retirement pass.
+
+## Integrated repair awaiting native qualification
+
+The title now checks the exact caller/stack signature, inactive projection
+guards and both owned frame shapes at the original initializer boundary. It
+discards only the retired stage guard and frame count; it never executes the
+old restore operations or rewrites native RAM, CPU, resources or frame count.
+Saved STATE_WORDS are read as host-order uint32_t through memcpy, matching
+their capture format on both host byte orders.
+
+The actual-plugin retirement fixture escapes stage_tick/guest through a
+modeled scheduler longjmp, checks the two resulting copies, invokes the real
+initializer callback and exercises fresh publication and P2 menu ownership.
+Twenty-five negative cases reject foreign callers, unsafe stacks, active
+projection, unknown phases and altered frame shapes/payloads. Focused Clang
+debug/production and GCC production variants pass. This fixture does not
+execute original CloseTh/ChangeTh or establish native artwork/gameplay success.
+The preserved beeae10 failure remains failed until a new exact candidate
+passes native local and paired reentry.

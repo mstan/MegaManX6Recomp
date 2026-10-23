@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | R2, R7, R8 and R13 passed on preserved exact candidates; 230 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 4 passed (R2, R7, R8, R13), 4 failed (R4, R12, R15, F208), 226 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -39,7 +39,23 @@ hashed evidence for each required mode. Do not set the completion flags under
 test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
-## Current integrated candidate, October 23
+## Current qualification status, October 23
+
+All 234 reference rows are inventoried; 4/234 (1.7%) are passed. The four
+failed rows cover observed P2 jump-audio ownership and stale co-op callbacks
+after native Quit -> New Game. Their exact-image evidence remains failed
+while corrections undergo integration and fresh native qualification.
+
+The latest frozen gameplay image is v17, title source beeae10, SDK6212e680,
+profile mmx6-x-zero-delay-v15. Its debug and production suites passed86/86;
+this does not close gameplay rows. New source/SDK changes need a separately
+frozen candidate and do not inherit those checks. Rollback remains disabled.
+The latest local portal attempt completed automated transition and destination
+independent-control observations; artwork/contact review, return-route and
+paired coverage remain outstanding, so R14 stays unverified. Testing uses
+two peers on this machine. Other-machine qualification remains unverified.
+
+## Earlier integration milestones
 
 The local integration now uses profile `mmx6-x-zero-delay-v12`, ABI 32,
 the modern SDK bridge and UI `b964eabe`. Rollback and online user state jumps

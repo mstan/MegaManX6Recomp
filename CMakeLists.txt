@@ -216,6 +216,7 @@ if(BUILD_TESTING)
                 test_mmx6_coop_recycle_setup test_mmx6_coop_collision_boxes
                 test_qualify_mmx6_coop_recycle_portal
                 test_mmx6_coop_reploid059
+                test_mmx6_native_player_init_audit
                 test_mmx6_input_capture_hook)
             add_test(NAME mmx6_${_mmx6_python_test}
                 COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/${_mmx6_python_test}.py")
@@ -317,7 +318,7 @@ if(BUILD_TESTING)
         add_test(NAME ${_mmx6_diag_target} COMMAND "$<TARGET_FILE:${_mmx6_diag_target}>")
     endforeach()
 
-    foreach(_mmx6_visual_kind private_effects hud resource_admission recycle_portal)
+    foreach(_mmx6_visual_kind private_effects hud resource_admission recycle_portal reentry_retirement)
       foreach(_mmx6_effects_variant debug production)
         set(_mmx6_effects_target mmx6_coop_${_mmx6_visual_kind}_${_mmx6_effects_variant}_test)
         add_executable(${_mmx6_effects_target} tests/test_mmx6_coop_${_mmx6_visual_kind}.c
@@ -593,7 +594,7 @@ if(BUILD_TESTING)
     foreach(_target IN LISTS _mmx6_test_targets)
         if(_target MATCHES "^mmx6_.*test$")
             get_target_property(_sources ${_target} SOURCES)
-            if("${_sources}" MATCHES "tests/test_mmx6_coop_(intro_target|diagnostics|private_effects|hud|checkpoint|snapshot|resource_admission|recycle_portal)[.]c")
+            if("${_sources}" MATCHES "tests/test_mmx6_coop_(intro_target|diagnostics|private_effects|hud|checkpoint|snapshot|resource_admission|recycle_portal|reentry_retirement)[.]c")
                 target_sources(${_target} PRIVATE src/mods/mmx6_coop_roster.c
                     src/mods/mmx6_coop_resources.c)
                 if(NOT "${_sources}" MATCHES "src/mods/mmx6_coop_assets[.]c")

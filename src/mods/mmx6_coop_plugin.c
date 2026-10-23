@@ -1194,9 +1194,42 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     STATE_POP(restore_stage);
     return 1;
 }
+/* Original final Quit closes its program thread and ChangeThread abandons
+ * the stage_tick/guest C stack. The scheduler retires framework context, but
+ * these title-owned guards/copies survive. Admit only the original root's
+ * major9 caller after that escape; never replay old copies into the new game.
+ * Source/caller proof: docs/COOP_NATIVE_PLAYER_INIT_CALLER_AUDIT.md. */
+static uint32_t retired_host_word(const Mmx6StateFrame *frame,size_t index) {
+    uint32_t value;
+    /* STATE_WORDS retains native host words, unlike guest RAM byte copies. */
+    memcpy(&value,frame->saved+index*sizeof value,sizeof value);
+    return value;
+}
+static int retire_quit_stage(CPUState *cpu,uint32_t address) {
+    if (!cpu || address!=0x8003BD24u || inside || player_call || zero_world || zero_projected ||
+        world_render || hud_call || render_x_death || effect_call || pickup_call || solid_call ||
+        solid_allocate_call || scene_call || unit_choices_call || intro_target_call ||
+        stage_call!=1 || state_track.count!=2 || state_track.error ||
+        psx_mod_read_byte(PLAY)!=9 || psx_mod_read_byte(PLAY+1) ||
+        cpu->gpr[31]!=0x8001E26Cu || cpu->gpr[16]!=PLAY) return 0;
+    uint32_t sp=cpu->gpr[29];
+    if ((sp&3u) || sp<0x80010000u || sp>0x801FFFE8u ||
+        psx_mod_read_word(sp+0x14u)!=0x8001E720u) return 0;
+    const Mmx6StateFrame *stage=&state_track.frame[0],*call=&state_track.frame[1];
+    if (stage->tag!=29 || stage->bytes!=16 || stage->words!=1 ||
+        retired_host_word(stage,1)!=2 || retired_host_word(stage,3)!=0 ||
+        call->tag!=1 || call->bytes!=102u*4u || call->words!=1 ||
+        retired_host_word(call,99)!=0x8001E9ECu ||
+        retired_host_word(call,100)!=PLAY ||
+        retired_host_word(call,31)!=0x8001E720u) return 0;
+    stage_call=0;
+    state_track.count=0;
+    fprintf(stdout,"mmx6 co-op: retired Quit stage callback at original fresh initialization\n");
+    return 1;
+}
 static void native_player_init(CPUState *cpu, uint32_t address) {
-    (void)cpu; (void)address;
     if (inside) return;
+    (void)retire_quit_stage(cpu,address);
     /* This is the native fresh-stage/checkpoint-respawn initialization, never
      * an ordinary door. The host body is enrolled after the new X body lands. */
     enrolled=0;

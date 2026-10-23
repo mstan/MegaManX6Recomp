@@ -126,6 +126,9 @@ static void native_draw(uint32_t actor){
 }
 void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     (void)ret;CHECK(call_count<512 && state_track.count);calls[call_count++]=address;
+#ifdef MMX6_TEST_DISPATCH_CALL
+    if(MMX6_TEST_DISPATCH_CALL(cpu,address,ret))return;
+#endif
 #ifdef MMX6_COOP_MODERN_STATE
     CHECK(!snapshot_ready());
     if(address==0x800232D4u){
