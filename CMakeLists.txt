@@ -462,9 +462,15 @@ if(BUILD_TESTING)
         PROPERTIES WORKING_DIRECTORY "$<TARGET_FILE_DIR:mmx6_tweaks_hooks_test>"
     )
 
+    # This fixture resolves catalog patches. The diagnostics observer is a
+    # runtime service, exercised by its own actual-module fixtures and the game;
+    # its constructors/consumers require the engine's session and memory APIs.
+    set(MMX6_CATALOG_RESOLVER_SOURCES ${GAME_MOD_RESOLVER_SOURCES})
+    list(REMOVE_ITEM MMX6_CATALOG_RESOLVER_SOURCES
+        "${CMAKE_CURRENT_SOURCE_DIR}/src/mods/mmx6_diagnostics.cpp")
     add_executable(mmx6_preloaded_mods_test
         tests/test_preloaded_mods.cpp
-        ${GAME_MOD_RESOLVER_SOURCES}
+        ${MMX6_CATALOG_RESOLVER_SOURCES}
         "${PSXRECOMP_V4_ROOT}/runtime/src/mod_packages.cpp"
         "${PSXRECOMP_V4_ROOT}/runtime/src/crc32.c"
         "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c"
@@ -483,7 +489,7 @@ if(BUILD_TESTING)
     # Seamless Loading compatibility matrix over every bundled mod feature.
     add_executable(mmx6_seamless_mod_matrix_test
         tests/test_seamless_mod_matrix.cpp
-        ${GAME_MOD_RESOLVER_SOURCES}
+        ${MMX6_CATALOG_RESOLVER_SOURCES}
         "${PSXRECOMP_V4_ROOT}/runtime/src/mod_packages.cpp"
         "${PSXRECOMP_V4_ROOT}/runtime/src/crc32.c"
         "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c"
