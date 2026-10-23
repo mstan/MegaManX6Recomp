@@ -1,0 +1,206 @@
+{
+  "schema": 1,
+  "kind": "original_native_player_init_caller_audit",
+  "source_only": true,
+  "original_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+  "original_archive_sha256": "55b03e4ecc13d6110ff300f80b7000b0f97234e19f1b846aa2b885eece30d80f",
+  "members_scanned": 59,
+  "census": {
+    "8003BD24": [
+      {
+        "image": "EXE",
+        "address": 2147603836,
+        "kind": "jal",
+        "return_address": 2147603844
+      },
+      {
+        "image": "EXE",
+        "address": 2147607140,
+        "kind": "jal",
+        "return_address": 2147607148
+      }
+    ],
+    "8001E1BC": [
+      {
+        "image": "EXE",
+        "address": 2147946832,
+        "kind": "literal_word"
+      }
+    ],
+    "8001E6E4": []
+  },
+  "spans": [
+    {
+      "name": "game_root",
+      "address": "8001E6E4",
+      "bytes": 76,
+      "sha256": "d3f0223b56f2141fd57d28d785917818632669b1d83a29c816f33bab9eb7908a"
+    },
+    {
+      "name": "major_table",
+      "address": "8007112C",
+      "bytes": 56,
+      "sha256": "369799b7a13cead7eec76ffbf588abd43dab0325bd7cf2465baa5d7ce8e11de3"
+    },
+    {
+      "name": "major9",
+      "address": "8001E1BC",
+      "bytes": 368,
+      "sha256": "db8d0094d673f5a0f2c89beb097c54bee6f8449c539d9d176f00844af5160b9c"
+    },
+    {
+      "name": "major8",
+      "address": "8001E914",
+      "bytes": 216,
+      "sha256": "ad4d2d9299a5e871110bde73120cb7410560e1d8e9797143bc3bb474be35b371"
+    },
+    {
+      "name": "stage_dispatch",
+      "address": "8001E9EC",
+      "bytes": 60,
+      "sha256": "ca34fec0c410c6edafefa2051a70b296396f6a761e4575b235c1160e85d57e47"
+    },
+    {
+      "name": "checkpoint_select",
+      "address": "80029B8C",
+      "bytes": 224,
+      "sha256": "1a0daa4d03de1a25d2535c532c778bac2206cf875d10602d6a6c9a814ab9c9d5"
+    },
+    {
+      "name": "native_init",
+      "address": "8003BD24",
+      "bytes": 1160,
+      "sha256": "708d97ea00151c27b59fe2f0380782bb5bd5f261693706afa498130f616d2dab"
+    },
+    {
+      "name": "attract_dispatch",
+      "address": "8001D424",
+      "bytes": 60,
+      "sha256": "9a87ca6d77bb8307c6fa4c4753e2bd9b855661e9a3243044c4db763ed698cccb"
+    },
+    {
+      "name": "attract_init",
+      "address": "8001D51C",
+      "bytes": 240,
+      "sha256": "d2fe58b01e8bebb27d000d445a73a838629461cf7e0c719639a2d75d1ff33a1a"
+    },
+    {
+      "name": "attract_table",
+      "address": "800710AC",
+      "bytes": 12,
+      "sha256": "3fac9316efbfa7bfa89f0284a9ee91b5c86e380172e6a46712778cffff28038e"
+    },
+    {
+      "name": "final_quit",
+      "address": "8001FD10",
+      "bytes": 356,
+      "sha256": "61d1a95c84ac1e20b87557a7ebc922487293485c7fe2e3bde54713dab41dfa97"
+    },
+    {
+      "name": "frontend_install",
+      "address": "8001D25C",
+      "bytes": 68,
+      "sha256": "520e33e565f98d036a16679e1fc7916ee2f3b18b91a764df93d5cde90924e3ac"
+    },
+    {
+      "name": "task_open_close_change",
+      "address": "80013300",
+      "bytes": 240,
+      "sha256": "2d80dd9f440b95ece0038745e71e1611a3fd3039014fa9e0c87b0fe9429cfb80"
+    },
+    {
+      "name": "bios_stubs",
+      "address": "80069E74",
+      "bytes": 128,
+      "sha256": "6648636c2d7d697f92c0e1a81d9c1c097fc8f8987451a98615b34571b32b16d0"
+    },
+    {
+      "name": "ordinary_door",
+      "address": "8003D308",
+      "bytes": 68,
+      "sha256": "d22755900b324fe8019c1acfcd89c324f80a7ec1fb00c49af8fd4f0f83839a6e"
+    }
+  ],
+  "game_loop_constructors": [
+    {
+      "image": "EXE",
+      "address": 2147605348,
+      "instruction": "24A5E6E4",
+      "window_sha256": "4fa9c44ff5a9e7efed4decbf1e9c979e7ffbd05bd821f6f7882bc95da4b2ef12"
+    },
+    {
+      "image": "EXE",
+      "address": 2147605956,
+      "instruction": "24A5E6E4",
+      "window_sha256": "8caa718e39e3ec39dcb78b81ee5b5eff84b20d216456e4745dd90585bdd80a26"
+    },
+    {
+      "image": "EXE",
+      "address": 2147606004,
+      "instruction": "24A5E6E4",
+      "window_sha256": "8caa718e39e3ec39dcb78b81ee5b5eff84b20d216456e4745dd90585bdd80a26"
+    },
+    {
+      "image": "member18",
+      "address": 2148444504,
+      "instruction": "24A5E6E4",
+      "window_sha256": "2987eecd89eb006ec97f966b8ab2b22ca42f3b0c3d9f4b0c1a2976fa775283d6"
+    },
+    {
+      "image": "member18",
+      "address": 2148456540,
+      "instruction": "24A5E6E4",
+      "window_sha256": "23899931473a0129541d6a21782e3cbc6a49bdc1ed373787498fcbcec03430e1"
+    }
+  ],
+  "source_signature": {
+    "entry": "8003BD24",
+    "ra": "8001E26C",
+    "s0": "800CCED0",
+    "major": 9,
+    "enclosing_saved_ra": "[SP+14]=8001E720 before init prologue",
+    "argument_gate": "Incoming a0 is not a native caller identity; init overwrites it immediately",
+    "body_gate": "Old resident HP/character/action/visibility are not init-completion evidence"
+  },
+  "resource_policy": {
+    "signed_play_1e": {
+      "0_or_minus2": "native campaign max HP/ammo",
+      "minus1": "native preserved HP/ammo/weapon",
+      "other": "does not take those refill/restore branches"
+    },
+    "campaign_character": "native3BE10 copies PLAY+38 into resident PLAYER+2"
+  },
+  "retired_frame_shape": {
+    "observed_host_count": 2,
+    "observed_host_error": 0,
+    "source_inferred_expected_tags": [
+      29,
+      1
+    ],
+    "frame_payload_observed": false,
+    "expected_tag29": {
+      "bytes": 16,
+      "words": 1,
+      "phase": 2,
+      "survivor": 0
+    },
+    "expected_tag1": {
+      "bytes": 408,
+      "words": 1,
+      "saved31": "8001E720",
+      "saved99": "8001E9EC",
+      "saved100": "800CCED0"
+    }
+  },
+  "host_retirement": "Matching source/native/owned-frame shape is necessary but not a public-depth0 proof; require original closed-task/scheduler escape contract",
+  "runtime_fix_scope": "Root-owned: discard only proven retired owned copies; never restore old CPU/body over fresh native initialization",
+  "native_validation": "unverified_no_new_game_or_title_build",
+  "ledger_unchanged": true,
+  "limits": [
+    "Aligned source census includes all59 archive members; it is not a proof against arbitrary corrupted/computed guest PCs",
+    "Canonical source entry is not successful init completion or fresh co-op enrollment",
+    "Phase0/fixed-X character are bounded NewGame context; major9 itself does not dispatch or clear PLAY+1",
+    "Public callback-active/host-depth0 do not universally exclude direct game hooks",
+    "Two exact frame tags/payloads are source-inferred expectations, not observed in the retained host probe"
+  ]
+}
