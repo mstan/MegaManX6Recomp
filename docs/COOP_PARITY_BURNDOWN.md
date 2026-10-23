@@ -53,6 +53,10 @@ stacked meters, lifecycle and loader. It adds:
 - A bounded diagnostic/parser and paired-session harness, plus isolated local
   candidate preparation and an owned-process intro qualifier. Staging refuses
   existing outputs and excludes CD Speed and Fast Loading packages.
+  New receipts retain scoped tracked-source observations and exact local Git
+  heads/patch hashes for game, framework and UI. These observations describe
+  staging-time sources; they do not establish compilation provenance or capture
+  untracked inputs. Runners reject changed source-observation artifacts.
 - A local framework correction, `83e8b5e11c005e0868e1aef96335258aad157559`,
   that verifies the actual selected disc before resolving and negotiating the
   default native loading plan. Native-plugin validation remains enforced.

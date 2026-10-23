@@ -2,10 +2,12 @@
 import json
 from pathlib import Path
 import tempfile
+import shutil
+import subprocess
 import tomllib
 import unittest
 
-from prepare_mmx6_coop_playtest import prepare
+from prepare_mmx6_coop_playtest import prepare, sha256
 from qualify_mmx6_coop_baseline import candidate_environment
 
 
@@ -91,6 +93,31 @@ class PreparationTests(unittest.TestCase):
         env_path.write_text(json.dumps(original))
         (output / "game.toml").write_text("changed")
         with self.assertRaisesRegex(ValueError, "changed"):
+            candidate_environment(output.resolve(), receipt)
+
+    @unittest.skipUnless(shutil.which("git"), "Git is required for source-observation evidence")
+    def test_tracked_source_changes_are_retained_without_claiming_build_binding(self):
+        git = [shutil.which("git"), "-C", str(self.source)]
+        def run(*args):
+            return subprocess.run(git + list(args), check=True, capture_output=True).stdout
+        run("init")
+        run("add", "game.toml")
+        run("-c", "user.name=Fixture", "-c", "user.email=fixture@example.invalid",
+            "-c", "commit.gpgsign=false", "commit", "-m", "Synthetic source fixture")
+        head = run("rev-parse", "HEAD").decode().strip()
+        (self.source / "game.toml").write_text((self.source / "game.toml").read_text()+"# local edit\n")
+        output = self.root / "candidate"
+        receipt = prepare(self.build, self.source, output, self.disc)
+        observation = receipt["source_observation"]
+        self.assertEqual(observation["build_source_binding"], "unverified_from_staging")
+        record = observation["repositories"]["game"]
+        self.assertEqual(record["commit"], head)
+        self.assertTrue(record["tracked_changes"])
+        self.assertIn(b"local edit", Path(record["patch"]).read_bytes())
+        self.assertEqual(record["patch_sha256"], sha256(Path(record["patch"])))
+        candidate_environment(output.resolve(), receipt)
+        Path(record["patch"]).write_bytes(b"tampered")
+        with self.assertRaisesRegex(ValueError, "Source observation artifact changed"):
             candidate_environment(output.resolve(), receipt)
 
 

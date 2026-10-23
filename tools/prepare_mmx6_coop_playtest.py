@@ -11,6 +11,7 @@ import json
 import os
 from pathlib import Path
 import shutil
+import subprocess
 import sys
 import tomllib
 
@@ -27,6 +28,41 @@ def local_output(path: Path) -> Path:
     if os.name == "nt" and path.drive.upper() not in {"F:", "G:"}:
         raise ValueError("Generated output must be on F: or G:")
     return path
+
+
+def source_observation(source: Path, output: Path) -> dict:
+    """Retain tracked source changes without inferring how a binary was built."""
+    result = {"kind": "source_tree_observation_at_staging",
+              "build_source_binding": "unverified_from_staging",
+              "tracked_scope_only": True, "repositories": {}}
+    git = shutil.which("git")
+    environment = dict(os.environ, TEMP=str(output / "temp"), TMP=str(output / "temp"))
+    repositories = (
+        ("game", source, ["CMakeLists.txt", "game.toml", "src", "generated", "psxrecomp-v4", "recomp-ui"]),
+        ("framework", source / "psxrecomp-v4", ["runtime", "recompiler", "lib"]),
+        ("ui", source / "recomp-ui", ["."]),
+    )
+    for name, root, paths in repositories:
+        record = {"available": False}
+        result["repositories"][name] = record
+        if not git or not (root / ".git").exists():
+            record["reason"] = "Git executable or explicit repository metadata unavailable"
+            continue
+        try:
+            command = [git, "--no-optional-locks", "-C", str(root)]
+            head = subprocess.run(command + ["rev-parse", "HEAD"], check=True,
+                                  capture_output=True, timeout=20, env=environment).stdout.decode().strip()
+            if len(head) != 40 or any(ch not in "0123456789abcdef" for ch in head):
+                raise ValueError("Unexpected Git object identity")
+            patch = subprocess.run(command + ["diff", "--binary", "--no-ext-diff", head, "--", *paths],
+                                   check=True, capture_output=True, timeout=20, env=environment).stdout
+            patch_path = output / "logs" / f"source-{name}.diff"
+            patch_path.write_bytes(patch)
+            record.update(available=True, commit=head, tracked_changes=bool(patch),
+                          scope=paths, patch=str(patch_path), patch_sha256=sha256(patch_path))
+        except (OSError, subprocess.SubprocessError, ValueError) as error:
+            record["reason"] = f"Source observation unavailable: {type(error).__name__}"
+    return result
 
 
 def prepare(build: Path, source: Path, output: Path, disc: Path,
@@ -140,7 +176,9 @@ enabled = true
         "packages": [item["id"] for _, item in packages],
         "source_card": str(card) if card else None,
         "source_card_sha256": sha256(card) if card else None,
+        "source_observation": source_observation(source, output),
         "limitations": ["No gameplay, controller or network qualification from staging",
+                         "Source observation captures tracked scope at staging, not compilation provenance or untracked files",
                          "Overlay compilation disabled; no AOT performance claim",
                          "Owner must assign both local controllers in the launcher"],
     }

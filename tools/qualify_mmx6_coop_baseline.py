@@ -47,6 +47,13 @@ def candidate_environment(candidate: Path, preparation: dict) -> dict:
     for name, key in (("mmx6-runtime.exe", "exe_sha256"), ("game.toml", "game_config_sha256")):
         if sha256(candidate / name) != preparation[key]:
             raise ValueError(f"Prepared {name} changed; prepare a fresh candidate")
+    for record in preparation.get("source_observation", {}).get("repositories", {}).values():
+        if not record.get("available"):
+            continue
+        patch = Path(record["patch"]).resolve()
+        if not patch.is_relative_to(candidate / "logs") or not patch.is_file() or \
+                sha256(patch) != record["patch_sha256"]:
+            raise ValueError("Source observation artifact changed or escaped the private profile")
     values = json.loads((candidate / "environment.json").read_text())
     path_keys = {"TEMP", "TMP", "LOCALAPPDATA", "APPDATA", "XDG_CACHE_HOME",
                  "PSX_RESIDENT_CACHE", "PSX_OVERLAY_CACHE_DIR",
