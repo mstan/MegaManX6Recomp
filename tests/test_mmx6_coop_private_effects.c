@@ -17,6 +17,8 @@ static uint16_t test_vram[1024*512],bank_first[4096];
 static uint32_t calls[512],drawn[128],tagged[256];
 static unsigned call_count,draw_count,tag_count;
 static int texture_support=1,marker_override=2,terminal_player,stage_driver;
+static int menu_probe;
+static uint16_t menu_input[3];
 static unsigned native_budget;
 static uint16_t pad_buttons=0xFFFF;
 static const unsigned resource_offsets[7]={0x14,0x1C,0x24,0x28,0x38,0x3C,0xA8};
@@ -138,6 +140,14 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     }
 #endif
     if(address==0x800232D4u){native_draw(cpu->gpr[4]);return;}
+    if(address==0x8001E9ECu && menu_probe){
+        CHECK(stage_call);
+        if(menu_probe==1){CHECK(zero_world && inside);projected();}
+        else CHECK(!zero_world && !inside && psx_mod_read_byte(PLAYER+2)==0);
+        for(unsigned i=0;i<3;++i)menu_input[i]=psx_mod_read_half(0x800C456C+i*2);
+        cpu->gpr[2]=0x51554954u;
+        return;
+    }
     if(address==0x8001E9ECu){
         CHECK(stage_driver && zero_world && inside);projected();
         psx_mod_write_word(PLAY+0x90,psx_mod_read_word(PLAY+0x90)+1);
@@ -168,9 +178,10 @@ static void setup(CPUState *cpu){
     memset(test_vram,0,sizeof test_vram);memset(bank_first,0,sizeof bank_first);memset(zero_overlay,0x44,sizeof zero_overlay);
     mmx6_coop_lifecycle_init(&life);state_track.count=state_track.error=0;
     inside=failed=player_call=zero_world=world_render=scene_owner=scene_phase=zero_projected=0;
-    ready=enrolled=stage_call=1;pause_owner=-1;zero_menu_loaded=0;join_phase=0;previous_input=p2_edges=0;
+    ready=enrolled=stage_call=1;pause_owner=-1;zero_menu_loaded=0;join_phase=0;previous_input=p2_edges=0;p2_start_previous=0;
     texture_support=1;marker_override=2;terminal_player=stage_driver=0;call_count=draw_count=tag_count=native_budget=0;
     pad_buttons=0xFFFF;
+    menu_probe=0;memset(menu_input,0,sizeof menu_input);
     assets=0x9F000000u;assembly=0x9F010000u;palette_source=0x9F020000u;active_palette=0x9F024000u;
     packets=0x9F100000u;diagnostic=0x9F080000u;menu_memory=0x9F200000u;menu_assembly=menu_memory+0x14000;
     static uint8_t compressed[64];zero_compressed=compressed;compressed_size=sizeof compressed;memset(compressed,0,sizeof compressed);
@@ -254,6 +265,38 @@ static void menu_freeze_and_select_resume(void){
     setup(&cpu);inside=1;psx_mod_write_byte(PLAY+1,2);pad_buttons=0xFFFE;
     controller(&cpu,0);CHECK(!call_count && !life.select_previous); /* Native owned-menu context is already inside. */
 }
+static void native_menu_campaign_authority(void){
+    CPUState cpu;setup(&cpu);stage_call=0;pause_owner=1;zero_menu_loaded=1;menu_probe=1;
+    psx_mod_write_byte(PLAY+1,2);
+    /* An earlier gameplay Select may remain in native previous-input state.
+     * The personal menu must receive Right/Start/Cross while Select cannot
+     * reach the original Quit branch's held or rising-edge word. */
+    previous_input=0x0100;pad_buttons=(uint16_t)~0x4029u;
+    const uint16_t resident_input[3]={0xBEEF,0x1234,0x5678};
+    for(unsigned i=0;i<3;++i)psx_mod_write_half(0x800C456C+i*2,resident_input[i]);
+    PlayerContext resident;capture_player(&resident);
+    CHECK(stage_tick(&cpu,0x8001E9EC));
+    CHECK(call_count==1 && menu_input[0]==0x2840 && menu_input[1]==0x0100 && menu_input[2]==0x2840);
+    CHECK(previous_input==0x2840 && life.select_previous && !life.select_frames);
+    for(unsigned i=0;i<3;++i)CHECK(psx_mod_read_half(0x800C456C+i*2)==resident_input[i]);
+    PlayerContext after;capture_player(&after);CHECK(!memcmp(&after,&resident,sizeof resident));
+    CHECK(!inside && !zero_world && !stage_call && !state_track.count && !failed);
+
+    /* P1 remains the campaign authority: its original Select edge reaches
+     * the native menu unchanged, independently of P2's held Select. */
+    setup(&cpu);stage_call=0;pause_owner=0;menu_probe=2;psx_mod_write_byte(PLAY+1,2);
+    pad_buttons=0xFFFE;psx_mod_write_half(0x800C456C,0x0100);psx_mod_write_half(0x800C4570,0x0100);
+    CHECK(stage_tick(&cpu,0x8001E9EC));
+    CHECK(call_count==1 && menu_input[0]==0x0100 && menu_input[2]==0x0100 && life.select_previous);
+
+    /* When P2 owns the ordinary survivor world, Select keeps its gameplay
+     * meaning. The restriction is the owned personal-menu boundary only. */
+    setup(&cpu);stage_call=0;menu_probe=1;life.status[0]=MMX6_COOP_FALLEN;
+    psx_mod_write_byte(PLAYER+4,3);pad_buttons=0xFFFE;
+    CHECK(stage_tick(&cpu,0x8001E9EC));
+    CHECK(call_count==1 && menu_input[0]==0x0100 && menu_input[2]==0x0100 && pause_owner==-1);
+    CHECK(!inside && !zero_world && !stage_call && !state_track.count && !failed);
+}
 static void draw_order_retained_packets_and_survivor(void){
     CPUState cpu;setup(&cpu);for(unsigned i=0;i<3;++i){p2.trails[i*0x60+3]=1;p2.effects[i*0x50+3]=1;}
     p2.shots[3]=1;put32(p2.shots+0x38,assets);put32(p2.shots+0x3C,assembly);p2.shots[0x42]=0;p2.shots[0x43]=0x78;
@@ -295,5 +338,5 @@ static void draw_order_retained_packets_and_survivor(void){
     setup(&cpu);psx_mod_write_word(SCRATCH+0x124,0x80000000u);render(&cpu,0);CHECK(failed && !draw_count); /* Negative budget would bypass native's signed comparison. */
 }
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
-    controller_pair_and_restoration();lifetime_and_gates();menu_freeze_and_select_resume();draw_order_retained_packets_and_survivor();clear_banks();
+    controller_pair_and_restoration();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();clear_banks();
     puts("private native effects actual-plugin call order, gates, lifetime projection and retained packet ownership PASS");return 0;}

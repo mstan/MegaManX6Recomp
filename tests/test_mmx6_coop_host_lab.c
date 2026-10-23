@@ -23,7 +23,7 @@ static PSXModNetplayHostStartup valid(void){
     c.declared_build_manifest_schema=1;c.builtin_bios_image_id="OPENBIOS";
     c.builtin_bios_image_wordsum=0xc4daeb88u;c.slot_count=c.player_count=2;c.occupied_mask=3;
     c.loading_enabled=1;c.renderer=1;c.retained_texture_banks=1;c.aspect_index=0;
-    title=(PSXModNetplayProfile){.plugin_id="mmx6.local-coop.prototype",.compatibility_id="mmx6-x-zero-delay-v12",
+    title=(PSXModNetplayProfile){.plugin_id="mmx6.local-coop.prototype",.compatibility_id="mmx6-x-zero-delay-v13",
         .skip_bios_intro=1,.state_digest=digest,.requires_retained_texture_banks=1,
         .loading_package_id="mmx6.enhancement.seamless-loading",.loading_feature_id="seamless-loading",
         .loading_plugin_id="mmx6.seamless"};
@@ -67,9 +67,9 @@ int main(void){
     REJECT(actual_executable_sha256,NULL);uint8_t zero[32]={0};REJECT(actual_executable_sha256,zero);
     c=valid();CHECK(!lab_context_eligible(&c,"bad-contract"));CHECK(!lab_context_eligible(&c,NULL));
     c.player_count=0;c.occupied_mask=0;CHECK(lab_context_eligible(&c,MMX6_HOST_LAB_EXECUTION_ID));
-    c=valid();title.compatibility_id="mmx6-x-zero-delay-v11";CHECK(!lab_title_eligible(&title));
+    c=valid();title.compatibility_id="mmx6-x-zero-delay-v12";CHECK(!lab_title_eligible(&title));
     CHECK(!mmx6_coop_lab_host_profiles(&c,&cat));
-    c=valid();title.compatibility_id="mmx6-x-zero-delay-v13";CHECK(!lab_title_eligible(&title));
+    c=valid();title.compatibility_id="mmx6-x-zero-delay-v14";CHECK(!lab_title_eligible(&title));
     CHECK(!mmx6_coop_lab_host_profiles(&c,&cat));
     c=valid();title.rollback_supported=1;CHECK(!lab_title_eligible(&title));
     c=valid();title.savestates_supported=1;CHECK(!lab_title_eligible(&title));

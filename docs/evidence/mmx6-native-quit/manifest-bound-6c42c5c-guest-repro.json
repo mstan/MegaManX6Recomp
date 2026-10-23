@@ -1,0 +1,52 @@
+{
+  "schema": 1,
+  "kind": "native_guest_campaign_quit_admission_reproduction",
+  "reviewed_at_utc": "2026-10-23T16:10:18.221036+00:00",
+  "result": "failed_guest_authority",
+  "candidate": {
+    "candidate_source": "6c42c5c4afa68bb7dfe60097e091a6a551940d9a",
+    "exe_sha256": "089bb606b5dff06cdcea3e3adbcb1e728379e1045cdd7eedca097e1d3899ca25",
+    "declared_manifest_sha256": "8e10381c97c8c8ad22698648328ed7c2b6930c4175346c0544905d79bc8a9f15"
+  },
+  "report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v13-6c42c5c-local-guest\\qualification.json",
+    "sha256": "6f3598ea21e25b82233ddf5455d9b3998fd271e1cf8fa5d1661378a0fc3d7f34"
+  },
+  "compilation_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v13-6c42c5c\\candidate.json",
+    "sha256": "a912cd8c93931b73c2be52ecef6b794af3cc1449c1ff99bced453a843bff2605"
+  },
+  "checks": {
+    "guest_select_cannot_enter_native_quit": false
+  },
+  "process": {
+    "owned_pid": 13268,
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "native_menu": {
+    "menu": [
+      1,
+      6
+    ],
+    "quit_phase": 1,
+    "quit_page": 0,
+    "choice": 0,
+    "fade": 1,
+    "native_play_mode": 10,
+    "native_play_phase": 2,
+    "native_menu_hex": "000000000106020100000000000000000000000000000200000000000000000000000001010100000000000007000000000000000000000000000000"
+  },
+  "composed_capture": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v13-6c42c5c-local-guest\\baseline\\guest-authority\\peer-0-guest-native-quit-page-admitted.png",
+    "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373"
+  },
+  "artwork_review": "Root inspected the completed composed capture: it is black while native fade field is1. It does not establish confirmation artwork or gameplay/HUD suppression.",
+  "limits": [
+    "Guest/P2 alone opened the original first Quit page through native Select; no Cross or final Quit was sent.",
+    "Actual admission is established by native menu state1/substate6/phase1/page0, not the black image.",
+    "Same exact Windows image, local intro and fixed roster only; paired authority/reentry remain unverified.",
+    "Fix masks only Select at the P2-owned phase2 route; native validation of the changed image is pending."
+  ],
+  "bypasses": []
+}

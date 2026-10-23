@@ -3,7 +3,9 @@
 The catalog is **disabled by default**. Explicit development builds may set
 `-DMMX6_ENABLE_LOOPBACK_HOST_LAB=ON` to exercise the candidate
 `mmx6.win64-clang22.loopback`, revision2 for title contract
-`mmx6-x-zero-delay-v12`. This is a route to collecting fresh
+`mmx6-x-zero-delay-v13`. The title revision blocks guest Select at its owned
+pause menu; P1 retains the native campaign Quit path. This change needs fresh
+native evidence on its exact new image. This is a route to collecting fresh
 evidence, not a production qualification or a correctness-fix rollout switch.
 GCC and unsupported builds remain valid offline builds and return an empty
 catalog even when the lab option is requested. SDKs before host-catalog API2

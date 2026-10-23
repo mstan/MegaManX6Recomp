@@ -1160,17 +1160,58 @@
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "Native guest-authority probe and primary confirmation-page/cancel route are implemented in6946600/c460e65. Unexpected guest admission records failure before any Cross confirmation. Actual guest authority, final native Quit/current-data/character reentry, shared progress/roster and subsequent guest menu ownership remain unverified. Debug process Quit is a separate contract."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "6c42c5c4afa68bb7dfe60097e091a6a551940d9a",
+            "build_identity": {
+              "exe_sha256": "089bb606b5dff06cdcea3e3adbcb1e728379e1045cdd7eedca097e1d3899ca25",
+              "declared_manifest_sha256": "8e10381c97c8c8ad22698648328ed7c2b6930c4175346c0544905d79bc8a9f15",
+              "compiled_source_commit": "6c42c5c4afa68bb7dfe60097e091a6a551940d9a",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "input": "owned offline native pads",
+              "loader": "default Seamless Loading",
+              "rollback": false
+            },
+            "action": "P2 native Start opens its personal menu, then P2 alone sends Select. Stop before Cross if admitted.",
+            "outcome": "Native first campaign Quit page admitted from guest. Failed authority; final confirmation never sent.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v13-6c42c5c-local-guest\\qualification.json",
+                "sha256": "6f3598ea21e25b82233ddf5455d9b3998fd271e1cf8fa5d1661378a0fc3d7f34"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v13-6c42c5c\\candidate.json",
+                "sha256": "a912cd8c93931b73c2be52ecef6b794af3cc1449c1ff99bced453a843bff2605"
+              },
+              {
+                "path": "docs/evidence/mmx6-native-quit/manifest-bound-6c42c5c-guest-repro.json",
+                "sha256": "9d60c1e7ef4313e5085df985cce3dc48f0f6f12dd89f131b03d78b4fe4f18a71"
+              }
+            ],
+            "limits": [
+              "Guest/P2 alone opened the original first Quit page through native Select; no Cross or final Quit was sent.",
+              "Actual admission is established by native menu state1/substate6/phase1/page0, not the black image.",
+              "Same exact Windows image, local intro and fixed roster only; paired authority/reentry remain unverified.",
+              "Fix masks only Select at the P2-owned phase2 route; native validation of the changed image is pending."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Reproduced exact089bb606 local guest Select entering original campaign Quit menu1/substate6/phase1/page0. No confirmation/final Quit sent; captured frame black with fade1, so artwork remains unverified. Default source fix withholds Select only at P2-owned phase2; native retest of changed identity, paired authority, P1 finalQuit/current-data/reentry remain pending."
       }
     },
     {

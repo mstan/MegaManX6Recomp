@@ -100,3 +100,16 @@ loader overrides, numeric endpoint/cross-link rejection, published input and
 neutral cleanup, baseline-compatible error propagation, original failure
 retention, inherited offline session isolation and private-card read errors.
 No game, title build, plugin/SDK/CMake/ledger edit or remote action occurred.
+# Native guest-authority reproduction and fix
+
+Root reproduced guest Select entering native menu1/substate6/phase1/page0 on
+exact executable `089bb606`. The probe stopped before Cross, retained its
+failed result and acknowledged Quit/exit0. The completed image was black
+with fade field1; confirmation artwork remains unverified. The
+[reviewed reproduction](evidence/mmx6-native-quit/manifest-bound-6c42c5c-guest-repro.json)
+binds the native state and original report. Source now withholds Select only
+at P2's owned phase2 menu, while preserving join history, other menu buttons,
+P1's native Quit controls and gameplay Select. Actual-plugin debug/production
+fixtures pass. Title contract `mmx6-x-zero-delay-v13` requires fresh native
+qualification; source tests alone do not pass R7/R15.
+

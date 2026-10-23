@@ -1129,6 +1129,11 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     uint8_t input[6];
     capture(0x800C456C,input,sizeof input);
     STATE_BYTES(restore_input,13,input,sizeof input);
+    /* Native Select enters campaign Quit, which belongs to P1. Consume the
+     * actual UI sample in the join-history gate above, but withhold Select
+     * from P2's owned pause. Gameplay departure/rejoin and P1 input retain
+     * their native controls. Other personal-menu buttons still pass through. */
+    if (pause_owner==1 && phase==2) raw=(uint16_t)(raw&~1u);
     raw=(uint16_t)((raw<<8)|(raw>>8));
     stage_context[0]=raw;STATE_UPDATE(restore_stage,stage_context);
     enter_zero();
@@ -1860,7 +1865,7 @@ static void activate(void) {
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
-        .compatibility_id = "mmx6-x-zero-delay-v12",
+        .compatibility_id = "mmx6-x-zero-delay-v13",
         .rollback_supported = 0,
         .savestates_supported = 0,
         .skip_bios_intro = 1,

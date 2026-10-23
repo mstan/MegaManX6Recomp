@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; exact frozen v12 menu/restart observations retained; newer capture/startup source requires a fresh candidate",
+  "status": "development-candidate-only; prior exact-image evidence retained; guest campaign Quit authority fix requires a fresh candidate and native qualification",
   "profile": "mmx6.win64-clang22.loopback",
   "revision": 2,
   "default_enabled": false,
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v12",
+    "title_compatibility": "mmx6-x-zero-delay-v13",
     "slots": 2,
     "players": 2,
     "occupied_mask": 3,

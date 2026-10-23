@@ -336,6 +336,11 @@ if(BUILD_TESTING)
       endforeach()
     endforeach()
 
+    add_executable(mmx6_coop_roster_test tests/test_mmx6_coop_roster.c
+        src/mods/mmx6_coop_roster.c)
+    target_include_directories(mmx6_coop_roster_test PRIVATE src/mods)
+    add_test(NAME mmx6_coop_roster_test COMMAND "$<TARGET_FILE:mmx6_coop_roster_test>")
+
     foreach(_mmx6_checkpoint_variant debug production)
         set(_mmx6_checkpoint_target mmx6_coop_checkpoint_${_mmx6_checkpoint_variant}_test)
         add_executable(${_mmx6_checkpoint_target} tests/test_mmx6_coop_checkpoint.c
