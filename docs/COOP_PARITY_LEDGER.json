@@ -639,9 +639,89 @@
               "All owned processes needed termination during bounded quit handling; graceful exit remains unverified."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e2e47e66e119425d6e9235cd3511209bf1cc1aad",
+            "build_identity": {
+              "exe_sha256": "229ffec7a7dabda9742653264e1d023adde408602003df7f48b4c4d3f758d8e6",
+              "declared_manifest_sha256": "e186d1d0908b5a0341de84261272c30e14c4ab83a6fabbad30e6da9df5d4cefb",
+              "compiled_source_commit": "e2e47e66e119425d6e9235cd3511209bf1cc1aad",
+              "sdk_commit": "199839335e32448c10a52f4c98967903a807e040"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2, native4:3/default loader/OpenBIOS/retainedGL",
+              "input": "accepted offline native pads",
+              "rollback": false
+            },
+            "action": "Original owner menu and independent resumed native controls.",
+            "outcome": "All11 native menu checks and independently reviewed native artwork pass; paired25resolved core/mod samples match.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-v12-e2e47e6-local\\qualification.json",
+                "sha256": "f564a974d3117290cd968cf257b9a5f15371d3481722b7f18cb6e66488cadc0d"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v12-e2e47e6\\candidate.json",
+                "sha256": "24f75e4e4c3f88dcc9c6e705900aeeb02910890c73d4705ef7d27dc1fe9c49cf"
+              },
+              {
+                "path": "docs/evidence/mmx6-r8/manifest-bound-e2e47e6-summary.json",
+                "sha256": "a4276af569cac5507af39bddf540a65d3da5e0b3a4c84c197f1001ba8511d8bb"
+              }
+            ],
+            "limits": [
+              "Exact frozen v12 image and one Windows x64/Clang22.1.8/CPUmask7f ENHANCED numeric127 host only.",
+              "Default loader, OpenBIOS, retained GL, native4:3, delay3, rollback and online user states disabled.",
+              "No online RAM/mailbox/fixture writes, granted equipment, source-card copies or native success-flag writes.",
+              "Separate RPCs and composed captures do not establish the same simulation/render frame across peers.",
+              "No campaign, opposite-roster, earned-equipment, cross-machine/OS/CPU or broad production qualification."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "e2e47e66e119425d6e9235cd3511209bf1cc1aad",
+            "build_identity": {
+              "exe_sha256": "229ffec7a7dabda9742653264e1d023adde408602003df7f48b4c4d3f758d8e6",
+              "declared_manifest_sha256": "e186d1d0908b5a0341de84261272c30e14c4ab83a6fabbad30e6da9df5d4cefb",
+              "compiled_source_commit": "e2e47e66e119425d6e9235cd3511209bf1cc1aad",
+              "sdk_commit": "199839335e32448c10a52f4c98967903a807e040"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2, native4:3/default loader/OpenBIOS/retainedGL",
+              "input": "published host sampler via delay3 numeric127 development lab",
+              "rollback": false
+            },
+            "action": "Original owner menu and independent resumed native controls.",
+            "outcome": "All11 native menu checks and independently reviewed native artwork pass; paired25resolved core/mod samples match.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-v12-e2e47e6-paired-restart\\qualification.json",
+                "sha256": "2af9ac81142f568fb3e08b0fdf885899239dde61f5a67e0867839f4f6eacdb73"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v12-e2e47e6\\candidate.json",
+                "sha256": "24f75e4e4c3f88dcc9c6e705900aeeb02910890c73d4705ef7d27dc1fe9c49cf"
+              },
+              {
+                "path": "docs/evidence/mmx6-r8/manifest-bound-e2e47e6-summary.json",
+                "sha256": "a4276af569cac5507af39bddf540a65d3da5e0b3a4c84c197f1001ba8511d8bb"
+              }
+            ],
+            "limits": [
+              "Exact frozen v12 image and one Windows x64/Clang22.1.8/CPUmask7f ENHANCED numeric127 host only.",
+              "Default loader, OpenBIOS, retained GL, native4:3, delay3, rollback and online user states disabled.",
+              "No online RAM/mailbox/fixture writes, granted equipment, source-card copies or native success-flag writes.",
+              "Separate RPCs and composed captures do not establish the same simulation/render frame across peers.",
+              "No campaign, opposite-roster, earned-equipment, cross-machine/OS/CPU or broad production qualification."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Passed for healthy intro X/P1 + Zero/P2 with native default equipment on exact manifest-bound fbba0e3 / executable37cdc487. Both modes and composed artwork reviewed. Original failed Right setup remains recorded, followed by source-backed Down/Up success. Earned equipment, opposite rosters, post-menu contact damage, native Quit/re-entry, death, rewind and cold state restoration remain separate. See evidence/mmx6-r8/manifest-bound-fbba0e3-summary.json."
+        "limitations": "Bounded default-equipment Zero-owned menu passed on exact v11 and v12 images with both modes and inspected artwork. Latest v12 also has a same-session-ID fresh-nonce restart and valid quit ACK/natural exits. Earned equipment, opposite rosters, native Quit/re-entry, death, rewind and cold menu restoration remain separate."
       }
     },
     {
@@ -678,8 +758,95 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "e2e47e66e119425d6e9235cd3511209bf1cc1aad",
+            "build_identity": {
+              "exe_sha256": "229ffec7a7dabda9742653264e1d023adde408602003df7f48b4c4d3f758d8e6",
+              "declared_manifest_sha256": "e186d1d0908b5a0341de84261272c30e14c4ab83a6fabbad30e6da9df5d4cefb",
+              "compiled_source_commit": "e2e47e66e119425d6e9235cd3511209bf1cc1aad",
+              "sdk_commit": "199839335e32448c10a52f4c98967903a807e040"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2, native4:3/default loader/OpenBIOS/retainedGL",
+              "input": "accepted offline native pads",
+              "rollback": false
+            },
+            "action": "P1 menu retains active native Zero dash; original P2 Circle/Right/Select96 cannot advance body/pools; resume and fresh native dash-jump drain.",
+            "outcome": "Bounded native freeze/resume/dash lifetime checks pass in both modes; paired29resolved samples match. X-owned charge/projectile/opposite-roster and native trail-color comparison remain unverified.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\private-pause-v12-e2e47e6-local-native-drain\\qualification.json",
+                "sha256": "372ce5fa675a6ebb3db5a88e3f971c6be7abc2b9f660247d051ccc0b79a035ea"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v12-e2e47e6\\candidate.json",
+                "sha256": "24f75e4e4c3f88dcc9c6e705900aeeb02910890c73d4705ef7d27dc1fe9c49cf"
+              },
+              {
+                "path": "docs/evidence/mmx6-private-pause/manifest-bound-e2e47e6-summary.json",
+                "sha256": "14091b0e362a1bfbf8e849378b4b82a2fb219e281ddc35fb61bf50d83ee98dc8"
+              }
+            ],
+            "limits": [
+              "Exact frozen v12 image and one Windows x64/Clang22.1.8/CPUmask7f ENHANCED numeric127 host only.",
+              "Default loader, OpenBIOS, retained GL, native4:3, delay3, rollback and online user states disabled.",
+              "No online RAM/mailbox/fixture writes, granted equipment, source-card copies or native success-flag writes.",
+              "Separate RPCs and composed captures do not establish the same simulation/render frame across peers.",
+              "No campaign, opposite-roster, earned-equipment, cross-machine/OS/CPU or broad production qualification.",
+              "Fixed X/P1 and Zero/P2 only. R9 requires X-owned charge/projectile/dash in either seat and remains unverified.",
+              "Native pool visibility/resource/CLUT checks pass; the three retained colors still require comparison with native Zero/P1 reference output.",
+              "This case establishes neither once-world update counts nor a rollback/rewind guarantee."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "e2e47e66e119425d6e9235cd3511209bf1cc1aad",
+            "build_identity": {
+              "exe_sha256": "229ffec7a7dabda9742653264e1d023adde408602003df7f48b4c4d3f758d8e6",
+              "declared_manifest_sha256": "e186d1d0908b5a0341de84261272c30e14c4ab83a6fabbad30e6da9df5d4cefb",
+              "compiled_source_commit": "e2e47e66e119425d6e9235cd3511209bf1cc1aad",
+              "sdk_commit": "199839335e32448c10a52f4c98967903a807e040"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2, native4:3/default loader/OpenBIOS/retainedGL",
+              "input": "published host sampler via delay3 numeric127 development lab",
+              "rollback": false
+            },
+            "action": "P1 menu retains active native Zero dash; original P2 Circle/Right/Select96 cannot advance body/pools; resume and fresh native dash-jump drain.",
+            "outcome": "Bounded native freeze/resume/dash lifetime checks pass in both modes; paired29resolved samples match. X-owned charge/projectile/opposite-roster and native trail-color comparison remain unverified.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\private-pause-v12-e2e47e6-paired\\qualification.json",
+                "sha256": "da4b96671d568a98859c8d6e3393f6ddfa3534ebf2d00aec8fedd33b4e246120"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v12-e2e47e6\\candidate.json",
+                "sha256": "24f75e4e4c3f88dcc9c6e705900aeeb02910890c73d4705ef7d27dc1fe9c49cf"
+              },
+              {
+                "path": "docs/evidence/mmx6-private-pause/manifest-bound-e2e47e6-summary.json",
+                "sha256": "14091b0e362a1bfbf8e849378b4b82a2fb219e281ddc35fb61bf50d83ee98dc8"
+              }
+            ],
+            "limits": [
+              "Exact frozen v12 image and one Windows x64/Clang22.1.8/CPUmask7f ENHANCED numeric127 host only.",
+              "Default loader, OpenBIOS, retained GL, native4:3, delay3, rollback and online user states disabled.",
+              "No online RAM/mailbox/fixture writes, granted equipment, source-card copies or native success-flag writes.",
+              "Separate RPCs and composed captures do not establish the same simulation/render frame across peers.",
+              "No campaign, opposite-roster, earned-equipment, cross-machine/OS/CPU or broad production qualification.",
+              "Fixed X/P1 and Zero/P2 only. R9 requires X-owned charge/projectile/dash in either seat and remains unverified.",
+              "Native pool visibility/resource/CLUT checks pass; the three retained colors still require comparison with native Zero/P1 reference output.",
+              "This case establishes neither once-world update counts nor a rollback/rewind guarantee."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Zero/P2 native private-pool menu freeze and dash lifetime now pass bounded local/development-loopback checks on exact v12. X in either seat, X-owned charge/projectiles, complete retained-color/native-reference comparison and full R9 remain unverified."
       }
     },
     {
