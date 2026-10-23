@@ -110,7 +110,7 @@ image is migrated or loaded into a changed image. Network state transfer,
 rewind, rollback, opposite roster, other campaign locations, cross-build and
 cross-machine behavior remain unqualified.
 
-Validation: 22 pure tests pass (19 new private-state cases plus 3 existing
+Validation: 24 pure tests pass (21 private-state cases plus 3 existing
 save/load receipt cases). They cover stale/torn publications, raw/compressed
 framing, hidden input/pool changes, wrong bank IDs/content, unsupported
 schema/build/asset bindings, source-card rejection, bounded CLI values,
