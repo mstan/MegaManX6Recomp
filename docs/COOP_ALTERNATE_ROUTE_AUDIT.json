@@ -1,0 +1,644 @@
+{
+  "schema_version": 1,
+  "source_only": true,
+  "scope": [
+    "R14"
+  ],
+  "game_commit": "952bb4b7b684b9bf05dc9777ce37738b053247dd",
+  "comparison": {
+    "id": "R14",
+    "frozen_row_sha256": "f84b489de9124b06fc4ddff745018059da8666b678ae2330431c7953877326ff",
+    "x4": {
+      "source_report": "COOP_PLAYTEST_REGRESSIONS.md:58 #14",
+      "state": "checked",
+      "original_symptom": "P2 Web Spider secret-area camera (`beads-eio.9.31`). The owner narrowed",
+      "failure_class": "Secret-area activation and room-camera locks ignore leading P2"
+    },
+    "bounded_check": "Enter a genuine alternate-route trigger with the partner first while the primary remains outside; verify room limits, collision, controls and native return.",
+    "local": "unverified",
+    "netplay": "unverified"
+  },
+  "original": {
+    "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "archive_sha256": "55b03e4ecc13d6110ff300f80b7000b0f97234e19f1b846aa2b885eece30d80f",
+    "archive_lba": 211185,
+    "archive_bytes": 1665024,
+    "selected_member": {
+      "index": 6,
+      "sector": 153,
+      "size": 42944,
+      "sha256": "c7b195e3e3968ebbd6c177cf023e47b35a9a816382c9b54ca157a80b393468f5"
+    }
+  },
+  "sources": [
+    {
+      "path": "src/mods/mmx6_coop_plugin.c",
+      "bytes": 89978,
+      "sha256": "7507189a215dfd05cb3d7a3b38e0b821bdce7085227d447e91605f1f86c6e2d2"
+    },
+    {
+      "path": "game.toml",
+      "bytes": 12280,
+      "sha256": "08f650d868333749b1522e2edc49229b3cab8aa4fd9d3091d8ea471b5d8ebbdb"
+    },
+    {
+      "path": "docs/COOP_PARITY_LEDGER.json",
+      "bytes": 629155,
+      "sha256": "56f00f27793ac11410de693f165621f289d3c0aedb6ce87a6526dfee8c2e4b52"
+    },
+    {
+      "path": "docs/COOP_X6_CONTENT.json",
+      "bytes": 798749,
+      "sha256": "67508ae2e19ad07c2c5cad41e12dbeb5e446e4eb50f033efa75ed306f2636fad"
+    }
+  ],
+  "functions": {
+    "activate": {
+      "line": 1800,
+      "sha256": "58fe7b5f02bd8c3c4f7f94ae01db184df1df61f5339c4f9990d81689db95c35a"
+    },
+    "interaction_inside": {
+      "line": 769,
+      "sha256": "006afc5ceab891daa764a42a6b1425d58c6a7935028b4c5acfba525263077398"
+    },
+    "interaction_begin": {
+      "line": 783,
+      "sha256": "8bc40983ab7afce12365a2422b9bbe903a665b989e35af90f75b821d28dbb7a5"
+    },
+    "stage_tick": {
+      "line": 1065,
+      "sha256": "c50cc392d24f4da3246f9337c6fe4be3dc1bff3ce872d822c42584168552b12a"
+    },
+    "controller": {
+      "line": 1168,
+      "sha256": "b994c5d9341047e5646c00152a79a2761363a7933766d2f3cf1734800e26181c"
+    },
+    "scene_locked": {
+      "line": 818,
+      "sha256": "c9b27df6efcac53f4c49b5bc49df749639bfc3796d192d6f057f4ef61f8abf5d"
+    },
+    "scene_tick": {
+      "line": 823,
+      "sha256": "6f19edc0f955fee84179d26911d2b381b1f9602eeb63e440d64ef45c669d9fdf"
+    },
+    "player_tick": {
+      "line": 1048,
+      "sha256": "466fec3471b75fa9a3d2e6cf815ff535f0330c5602dc528903921fa5d477c27d"
+    },
+    "camera_target": {
+      "line": 494,
+      "sha256": "145b0fe8697ff558b6c8a6cc0b0f56d839127c1cfb2f7a570111fe62cc1772af"
+    }
+  },
+  "native_spans": [
+    {
+      "name": "contact",
+      "address": "8002D654",
+      "size": 532,
+      "sha256": "39bed2ddf0ab87f9f986d8f51c1fc735557ffbf0949fd4dfd3fc54e928d2168b",
+      "direct_calls": []
+    },
+    {
+      "name": "fade_request",
+      "address": "800139F4",
+      "size": 84,
+      "sha256": "0db226e86cfcc7fbfa8c5281f438a75256024a4e3b03041df4f0d7d8f39c82f0",
+      "direct_calls": [
+        {
+          "pc": "80013A30",
+          "target": "80013300"
+        }
+      ]
+    },
+    {
+      "name": "stage_transition",
+      "address": "8001E32C",
+      "size": 952,
+      "sha256": "c532803823d419cf6804de1052208f0e5c9f8fb580ceb203b12de4d4157a6cbb",
+      "direct_calls": [
+        {
+          "pc": "8001E3D4",
+          "target": "80042F7C"
+        }
+      ]
+    },
+    {
+      "name": "alternate_destination",
+      "address": "80042F7C",
+      "size": 44,
+      "sha256": "71e386a73511afbe127fe413a0403074e0978eb81db558eea22d61711a0043a5",
+      "direct_calls": []
+    },
+    {
+      "name": "stage_initialize",
+      "address": "8001E1BC",
+      "size": 368,
+      "sha256": "db8d0094d673f5a0f2c89beb097c54bee6f8449c539d9d176f00844af5160b9c",
+      "direct_calls": [
+        {
+          "pc": "8001E1C8",
+          "target": "8001EC0C"
+        },
+        {
+          "pc": "8001E1F0",
+          "target": "80013D10"
+        },
+        {
+          "pc": "8001E224",
+          "target": "8002B838"
+        },
+        {
+          "pc": "8001E22C",
+          "target": "8002C2B8"
+        },
+        {
+          "pc": "8001E234",
+          "target": "80017E24"
+        },
+        {
+          "pc": "8001E23C",
+          "target": "800280F4"
+        },
+        {
+          "pc": "8001E244",
+          "target": "80029B8C"
+        },
+        {
+          "pc": "8001E24C",
+          "target": "8002927C"
+        },
+        {
+          "pc": "8001E254",
+          "target": "8002935C"
+        },
+        {
+          "pc": "8001E25C",
+          "target": "800293CC"
+        },
+        {
+          "pc": "8001E264",
+          "target": "8003BD24"
+        },
+        {
+          "pc": "8001E26C",
+          "target": "8002A33C"
+        },
+        {
+          "pc": "8001E274",
+          "target": "8002A3E8"
+        },
+        {
+          "pc": "8001E2C4",
+          "target": "80025F34"
+        },
+        {
+          "pc": "8001E2CC",
+          "target": "8001E730"
+        },
+        {
+          "pc": "8001E2EC",
+          "target": "8001E78C"
+        },
+        {
+          "pc": "8001E2F4",
+          "target": "800139A0"
+        }
+      ]
+    },
+    {
+      "name": "checkpoint_initialize",
+      "address": "80029B8C",
+      "size": 392,
+      "sha256": "e901e2326b871ed66cc2675d7827a1e9d5a76ab2f7f474b3ed55a9a3fd7b3c00",
+      "direct_calls": []
+    },
+    {
+      "name": "body_transition_probe",
+      "address": "8003A628",
+      "size": 80,
+      "sha256": "8448685dacfd99c7da2ffeced5139cfc0611367502fabede5da4ada73dc97df5",
+      "direct_calls": [
+        {
+          "pc": "8003A63C",
+          "target": "8003B870"
+        },
+        {
+          "pc": "8003A65C",
+          "target": "8003AAD0"
+        }
+      ]
+    },
+    {
+      "name": "initialize",
+      "address": "800EBD80",
+      "size": 320,
+      "sha256": "907c382255706f6a17ba8f897923808f7202522a4644240f0b7fdf7642c0241c",
+      "direct_calls": [
+        {
+          "pc": "800EBE54",
+          "target": "800179A4"
+        },
+        {
+          "pc": "800EBE68",
+          "target": "800179A4"
+        },
+        {
+          "pc": "800EBE7C",
+          "target": "800179A4"
+        }
+      ]
+    },
+    {
+      "name": "lock_player_and_world",
+      "address": "800EBEC0",
+      "size": 244,
+      "sha256": "d01f587bfd1e23cc7eb71539896555b2a7804b757d3e24d0f65a5654ecdb7576",
+      "direct_calls": [
+        {
+          "pc": "800EBF4C",
+          "target": "8003F3DC"
+        },
+        {
+          "pc": "800EBF54",
+          "target": "8003CDF0"
+        },
+        {
+          "pc": "800EBF5C",
+          "target": "8003CE30"
+        },
+        {
+          "pc": "800EBF64",
+          "target": "8003C4EC"
+        },
+        {
+          "pc": "800EBF6C",
+          "target": "8002B6B0"
+        },
+        {
+          "pc": "800EBF98",
+          "target": "80016C48"
+        }
+      ]
+    },
+    {
+      "name": "restore_after_fade",
+      "address": "800EBFB4",
+      "size": 196,
+      "sha256": "556d167483180c2778912e5f1a97efe1b99bd33ceba46ef53e13fe10edb43327",
+      "direct_calls": []
+    },
+    {
+      "name": "controller",
+      "address": "800EC678",
+      "size": 76,
+      "sha256": "fbe51d03db852b8daeb7331f8961f88ef1cc6b02f292e19a6362c5fed91ce261",
+      "direct_calls": [
+        {
+          "pc": "800EC6AC",
+          "target": "8002F288"
+        }
+      ]
+    },
+    {
+      "name": "phase1",
+      "address": "800EC6C4",
+      "size": 124,
+      "sha256": "17b8b66f6f72d76833dfbec72193e24b4b7b64eae31322aa2a416893b05c3755",
+      "direct_calls": [
+        {
+          "pc": "800EC6E0",
+          "target": "80017A04"
+        },
+        {
+          "pc": "800EC728",
+          "target": "8002CCB0"
+        }
+      ]
+    },
+    {
+      "name": "retire",
+      "address": "800EC740",
+      "size": 64,
+      "sha256": "acbf5f9539bcf2d21572a19b9b01fc17be779e2df4db0be6af246bc41ea4eead",
+      "direct_calls": [
+        {
+          "pc": "800EC758",
+          "target": "8002CA14"
+        },
+        {
+          "pc": "800EC768",
+          "target": "8002CA54"
+        }
+      ]
+    },
+    {
+      "name": "contact_admission",
+      "address": "800EC780",
+      "size": 120,
+      "sha256": "ba7a594a4f76d806497a45b6f221b8c39100f8b899b422368183ff2df7d538b7",
+      "direct_calls": [
+        {
+          "pc": "800EC79C",
+          "target": "8002D654"
+        }
+      ]
+    },
+    {
+      "name": "request_alternate",
+      "address": "800EC8F8",
+      "size": 164,
+      "sha256": "3328bc63dc35fb961a9f23059bb8ff82fefd701e126027d1e0c6e1f542f51e19",
+      "direct_calls": [
+        {
+          "pc": "800EC964",
+          "target": "800139F4"
+        }
+      ]
+    },
+    {
+      "name": "collision_animation_dispatch",
+      "address": "800F38B8",
+      "size": 124,
+      "sha256": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c",
+      "direct_calls": []
+    },
+    {
+      "name": "subtype_initialize_dispatch",
+      "address": "800E9864",
+      "size": 20,
+      "sha256": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43",
+      "direct_calls": []
+    }
+  ],
+  "research_label": {
+    "workbook_sha256": "6855194c79f0830ee77b86901bc1997a481ce62de17dfaaced79d976d840e552",
+    "sheet": "ObjectOriginTable",
+    "cell": "C7",
+    "label": "Hidden Area teleport",
+    "limits": "Semantic research index only; original record/table/transition establish the native mapping. Workbook replacement bytes are not stock guards."
+  },
+  "origin": {
+    "inventory_sha256": "67508ae2e19ad07c2c5cad41e12dbeb5e446e4eb50f033efa75ed306f2636fad",
+    "stage": 4,
+    "section": 0,
+    "placement_index": 18,
+    "record": {
+      "index": 18,
+      "address": "800F2B0C",
+      "flags": 0,
+      "object_id": 28,
+      "subtype": 1,
+      "category": 0,
+      "x": 1552,
+      "y": 1584,
+      "status": "unverified"
+    },
+    "record_sha256": "1da195c7418d8219e0316218ffe1d1ad5adcbdbd5425a9d980259edc313d2c7f",
+    "category_root": "8006DC6C",
+    "handler_table": "800F301C",
+    "handler_slot": "800F308C",
+    "handler": "800EC678"
+  },
+  "dispatch": {
+    "phase_table": "800F3900",
+    "phases": [
+      "800EBD80",
+      "800EC6C4",
+      "800EC740",
+      "800EC740"
+    ],
+    "action_table": "800F3910",
+    "actions": [
+      "80040290",
+      "800EC780",
+      "800EC880",
+      "800EC8BC",
+      "800EC7F8",
+      "800EC844"
+    ],
+    "action2_substate_table": "800F3928",
+    "action2_substates": [
+      "800EBEC0",
+      "800EC8F8",
+      "800EBFB4"
+    ],
+    "subtype1_initialize": "800E9864[1] ->800EBE64 ->phase1/action1/subaction0"
+  },
+  "contact": {
+    "call_pc": "800EC79C",
+    "function": "8002D654",
+    "arguments": [
+      "a0=portal",
+      "a1=800970A0 resident PLAYER"
+    ],
+    "portal_attack_box": "+50 ->800F38BC",
+    "portal_box": [
+      -18,
+      -28,
+      28,
+      40
+    ],
+    "player_box": "PLAYER+54 (required nonzero)",
+    "immunity": "PLAYER+61 nonzero rejects",
+    "geometry": "native signed centers/facing, unsigned extents and directional half-open comparisons; not camera-center or fixed-radius admission",
+    "success": "subtype1: actor+5=2,+6=0,+84=resident PLAYER integerX; subtype2 uses different action3 path",
+    "native_absence": "no pad/Select prerequisite in this contact helper"
+  },
+  "lock": {
+    "setup": "800EBEC0",
+    "hp_gate": "resident PLAYER+5C must be nonzero",
+    "camera_bytes": [
+      "CAM+44",
+      "CAM+98",
+      "CAM+EC"
+    ],
+    "play_flags": [
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "19"
+    ],
+    "flag_value": 2,
+    "body": "PLAYER+5=2; old PLAYER+68 saved in actor+88, PLAYER+68 cleared",
+    "portal_fields": {
+      "+0": "OR8",
+      "+6": "increment",
+      "+7C": "timer half reset0",
+      "+80/+82": "resident PLAYER integerX"
+    }
+  },
+  "transition": {
+    "request": "800EC8F8",
+    "timer": "actor+7C signed half reaches29 on accepted update calls, not wall-clock frames",
+    "player_x": "native frame parity picks actor+80 increasing or +82 decreasing and stores PLAYER+0A",
+    "request_pc": "800EC964 ->800139F4(8)",
+    "flag_pc": "800EC978",
+    "flag": "PLAY+0F=subtype|40h; subtype1 gives41h",
+    "destination_caller": "8001E3C8..8001E3E4 within8001E32C: stage1..8 and flag41h",
+    "destination_helper": "80042F7C",
+    "destination_stage": 20,
+    "destination_section": 1,
+    "all_investigator_destinations": [
+      {
+        "stage": 1,
+        "destination_stage": 19,
+        "destination_section": 0
+      },
+      {
+        "stage": 2,
+        "destination_stage": 19,
+        "destination_section": 1
+      },
+      {
+        "stage": 3,
+        "destination_stage": 20,
+        "destination_section": 0
+      },
+      {
+        "stage": 4,
+        "destination_stage": 20,
+        "destination_section": 1
+      },
+      {
+        "stage": 5,
+        "destination_stage": 21,
+        "destination_section": 0
+      },
+      {
+        "stage": 6,
+        "destination_stage": 21,
+        "destination_section": 1
+      },
+      {
+        "stage": 7,
+        "destination_stage": 22,
+        "destination_section": 0
+      },
+      {
+        "stage": 8,
+        "destination_stage": 22,
+        "destination_section": 1
+      }
+    ],
+    "load": "next major8 initialization8001E1BC calls80029B8C then camera routines8002927C/8002935C/800293CC, resets PLAY+0F and enters major0A",
+    "authored_destination_locations": [
+      {
+        "id": "s20-a1-c00",
+        "stage": 20,
+        "section": 1,
+        "checkpoint": 0,
+        "stage_name": "Alternate Magma (section 0), Recycle (section 1)",
+        "stage_role": "alternate",
+        "table": "800732D8",
+        "record": "80072FCC",
+        "player": {
+          "x": 79,
+          "y": 224
+        },
+        "camera": {
+          "x": 0,
+          "y": 224,
+          "min_x": 0,
+          "max_x": 2576,
+          "min_y": 224,
+          "max_y": 224
+        },
+        "arrival": 64,
+        "status": "unverified",
+        "checks": {
+          "terrain_collision_scroll": "unverified",
+          "enemies_interactions": "unverified",
+          "music_sfx": "unverified",
+          "checkpoint_retry": "unverified",
+          "boss": "unverified",
+          "exit_actual_transition": "unverified"
+        }
+      },
+      {
+        "id": "s20-a1-c01",
+        "stage": 20,
+        "section": 1,
+        "checkpoint": 1,
+        "stage_name": "Alternate Magma (section 0), Recycle (section 1)",
+        "stage_role": "alternate",
+        "table": "800732D8",
+        "record": "80072FF0",
+        "player": {
+          "x": 3024,
+          "y": 224
+        },
+        "camera": {
+          "x": 2848,
+          "y": 224,
+          "min_x": 2848,
+          "max_x": 2848,
+          "min_y": 224,
+          "max_y": 224
+        },
+        "arrival": 64,
+        "status": "unverified",
+        "checks": {
+          "terrain_collision_scroll": "unverified",
+          "enemies_interactions": "unverified",
+          "music_sfx": "unverified",
+          "checkpoint_retry": "unverified",
+          "boss": "unverified",
+          "exit_actual_transition": "unverified"
+        }
+      }
+    ],
+    "checkpoint_limit": "Locations are authored candidates. This bounded audit does not prove which checkpoint is selected on actual entry or full streaming/overlay completion.",
+    "restore": "800EBFB4 waits fade idle, restores PLAYER integerX, +68, camera+44/+98/+EC=1 and clears its shared flags"
+  },
+  "adapter": {
+    "explicit_hooks": "80050250 door;80051924 interaction;80052F64 optional event/dialogue zones;8003D308 script start",
+    "missing_portal_hook": "No explicit800EC780/8002D654/type1C wrapper or corresponding scene admission in activate()",
+    "ordinary_world": "stage_tick default calls original once with resident P1; controller projects P2 only for private body/shot/contact/attached/trail passes",
+    "other_context": "survivor, P2 menu or established P2 scene can project Zero for the original world; this is not an either-player portal policy",
+    "passenger_gate": "scene_tick phase3 waits owner grounded/controllable/HP with D0/D4/7A and shared locks clear; no explicit actual-destination generation token",
+    "camera": "existing midpoint/tether camera hooks do not change this explicit PLAYER collision argument"
+  },
+  "findings": [
+    {
+      "id": "authored-route",
+      "classification": "source_proven_native_contract",
+      "text": "Pinned original type1C/subtype1 Recycle actor leads through41h to alternate20/1; this is not the52F64 dialogue handler"
+    },
+    {
+      "id": "resident-contact",
+      "classification": "source_proven_adapter_coverage_gap",
+      "text": "Native portal contact explicitly uses resident PLAYER and current adapter lacks a portal either-seat/owner wrapper; an actual leading-P2 counterexample remains unverified"
+    },
+    {
+      "id": "projection-closure",
+      "classification": "source_proven_constraint_for_future_fix",
+      "text": "A whole-controller body projection would also redirect native saved body box/X, shared freeze flags, camera locks and transition writes; do not copy the intro near-X-only projection"
+    },
+    {
+      "id": "destination-release",
+      "classification": "unverified_native_obligation",
+      "text": "Actual destination load, native selected checkpoint, safe full-foot landing and both controls must be observed before any R14 pass"
+    }
+  ],
+  "proposed_fix_boundary": "First obtain original P1/co-op P1 references and a P1-far/P2-only native contact trace. Then design a source-guarded pure contact probe plus explicit portal owner/transition closure; never execute the shared portal AI twice or fake the success flag.",
+  "required_native_checks": [
+    "Bind exact candidate/settings/original source; keep original native cards isolated. Reach record18 by genuine stage traversal or explicitly tainted private positioning, never write portal action/PLAY0F/route flags.",
+    "Co-op-off native X/P1 then co-op P1: bind live category0 pool slot origin+10 to800F2B0C and retain phase/action, native box pointers, HP/immunity, position/facing and actual contact result.",
+    "Living Zero/P2 only in the actual contact boxes while living X/P1 is outside: record ordinary world context and source-proven contact call/result; compare P1-only control. Also reject absent/fallen/passenger/menu cases.",
+    "Observe exactly one original action2 setup/freeze and native fade/41h transition. Follow actual stage20/section1 initialization, selected checkpoint, archive/overlay identity, camera bounds/collision and completed composed frame.",
+    "Keep passenger out until native destination exists, owner is grounded/controllable and full-foot safe terrain is established; independently accept both inputs after release, with retained character resources and finite beams.",
+    "Exercise actual native return/exit separately. Repeat independently local and netplay on one exact candidate with resolved input/core/mod evidence; source, loading and capture ACK are not passes."
+  ],
+  "limits": [
+    "No plugin, SDK, CMake, ledger, runtime or save edits; no build/game launched",
+    "Only EXE, archive metadata and selected Recycle member6 interpreted; no full-disc crawl",
+    "Other portal subtypes, refight portals/R21, story replacement bosses and all eight route runtime cases remain outside scope",
+    "Workbook label is a pinned research index, not executable proof or a patched-disc identity",
+    "No X4 addresses, mechanics, inherited passes or rendered/native qualification"
+  ]
+}
