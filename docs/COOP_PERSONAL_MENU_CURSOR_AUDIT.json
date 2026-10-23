@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "kind": "native-source-personal-menu-cursor-audit",
+  "runtime_qualification": "pending fresh original-input local and paired evidence",
+  "original": {
+    "title": "Mega Man X6 (USA) v1.1 / SLUS-01395",
+    "exe_name": "SLUS_013.95",
+    "bytes": 522240,
+    "sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "text_load_address": "0x80010000",
+    "file_header_bytes": 2048,
+    "source_observation": "Read-only original EXE; address-to-file offset is address - 0x80010000 + 2048. No assets copied."
+  },
+  "code_regions": [
+    {"address": "0x80034830", "bytes": 68, "role": "menu base/state dispatch", "sha256": "85e16602de339369b10a376bcb4af4ec4bdffcded913421499c2e19147fda4fc"},
+    {"address": "0x80032DF0", "bytes": 1060, "role": "menu availability/current selection initializer", "sha256": "50ff324ae97c7f5ef5b35f130660080e6f7b3a1d778d7759066da9ab15393e44"},
+    {"address": "0x80033214", "bytes": 748, "role": "weapon-column input handler", "sha256": "0ce3260f59ecd3a3bc1c9e3fa4401e4aa2d6b98e6574a65ab1a602e493928b9f"},
+    {"address": "0x80033500", "bytes": 748, "role": "tank-column input handler", "sha256": "6461abc9b402593dd9183ed17f6e64bfe23b695da8fc85e70c4c313eed321f54"},
+    {"address": "0x800337EC", "bytes": 588, "role": "lower-menu input handler", "sha256": "1da3732971cf5c8ba6d398e576f4449be706f9f354025af1a91ef2f64772c3c2"},
+    {"address": "0x800346EC", "bytes": 284, "role": "menu close/resume versus stage-exit route", "sha256": "2a918262c728c1759faac953c0998cc241b0c8a51a87fab6d7df748c24adf15b"},
+    {"address": "0x80073970", "bytes": 320, "role": "weapon bit/selection maps and menu handler tables", "sha256": "798fc11a2bfd757820b6b751013e8753da18d678c707f6e7d1489a97ee47d299"}
+  ],
+  "native_fields": {
+    "menu_base": "0x800CF810",
+    "menu_state": "base+0x04 = 0x800CF814",
+    "menu_input_substate": "base+0x05 = 0x800CF815",
+    "cursor": "base+0x14 = 0x800CF824",
+    "availability_base": "base+0x16 = 0x800CF826; slot i is base+0x16+i",
+    "giga_availability": "base+0x2D = 0x800CF83D",
+    "exit_route_word": "base+0x38 = 0x800CF848",
+    "player": "0x800970A0; native co-op projects the pause owner's personal body",
+    "play": "0x800CCED0"
+  },
+  "pristine_zero_preconditions": {
+    "character": "PLAYER+0x02 = 1",
+    "current_weapon": "PLAYER+0x93 = 0",
+    "earned_weapon_bits": "PLAYER+0xC9 = 0",
+    "earned_ability_bits": "word PLAYER+0xEC = 0",
+    "owned_tanks": "halfword PLAY+0x6A & 0x7000 = 0",
+    "setup": "Existing healthy intro roster, no grants or success-state writes"
+  },
+  "availability": [
+    {"slots": "0", "native_predicate": "Zero branch 80032ED8 writes 2 (truthy); X branch 80032E58 writes 1", "pristine_zero": "2"},
+    {"slots": "1..8", "native_predicate": "80032F08..50 tests PLAYER+0xC9 using maps 80073970, 80073990 and bit table 80073988", "pristine_zero": "all 0"},
+    {"slots": "9", "native_predicate": "Zero path 80032F54 writes 0; X path can enable from PLAYER+0xE7", "pristine_zero": "0"},
+    {"slots": "0x0A..0x0C", "native_predicate": "80032F58..FE0 enables from halfword PLAY+0x6A bits 0x1000, 0x2000, 0x4000", "pristine_zero": "all 0"},
+    {"slots": "0x0D..0x0F", "native_predicate": "80032FE8..FF0 unconditionally writes 1 to menu+0x23/+0x24/+0x25", "pristine_zero": "all 1; exact on-screen text labels are not inferred"},
+    {"slots": "0x10", "native_predicate": "80032FF4..33030 writes the PLAY+0x60 stage-clear bit when unsigned(PLAY+0x0C-1)<8; outside that range the initializer does not rewrite this slot", "pristine_zero": "not needed by the selected route; do not infer a live value without observing prior initialization"},
+    {"slots": "0x17 (Giga)", "native_predicate": "80033170 clears menu+0x2D; 80033174..1C0 enables it only for set PLAYER+0xEC ability bits (4<<i), i=10..15, storing i-9", "pristine_zero": "0"}
+  ],
+  "reversible_route": {
+    "published_change_button": "0x0040 (Down)",
+    "native_change_edge": "0x4000 at 0x800C4570",
+    "change_nodes": [0, 13],
+    "change_substates": [0, 2],
+    "change_source": "80033418..44 skips unavailable weapons 1..9 and Giga; 800333A4..3F4 selects first available lower node 0x0D and substate 2; cursor store 800334CC",
+    "published_restore_button": "0x0010 (Up)",
+    "native_restore_edge": "0x1000 at 0x800C4570",
+    "restore_nodes": [13, 0],
+    "restore_substates": [2, 0],
+    "restore_source": "800338F8..958 skips absent Giga and Zero slot9, scans 8 down to0, finds availability[0]=2 and restores input substate0; cursor store 80033A04",
+    "confirmation": "None. Never activate a lower menu item to test this cursor route."
+  },
+  "node_action_evidence": {
+    "0x0D": "800338C0..D4 confirmation chooses menu closing with exit_route_word still0; 80034714..34 resumes PLAY+1=0. This proves menu close/resume behavior, not a guessed Quit-stage label.",
+    "0x10": "80033878..9C confirmation sets exit_route_word=1; 80034738..FC takes the stage-exit route (native mode0x0B, sometimes0x13). Not activated or needed by this correction.",
+    "limits": "Other lower-item on-screen names and the live stage-exit availability in this intro were not qualified."
+  },
+  "retained_original_failure": {
+    "path": "G:/Temp/Codex/psxrecomp/x6-parity/personal-menu-hostlab-fbba0e3-local/qualification.json",
+    "sha256": "7a25aeb168cf5dcf803a8e3d52724ee7f34c5b5e5689303278274ac37e452a8a",
+    "status": "failed",
+    "error": "Native personal-menu case failed: Owner cursor did not actually change",
+    "interpretation": "Right only scans the unavailable tank column for this inventory; retained unchanged, no waived check."
+  },
+  "limits": [
+    "Source establishes an eligible reversible node route, not a runtime pass.",
+    "Shared personal-menu helper/default remains generic; only the pristine Zero paired adapter supplies Down/Up.",
+    "No inventory grants, tank use, guest writes, launches, artwork approval or ledger updates."
+  ]
+}

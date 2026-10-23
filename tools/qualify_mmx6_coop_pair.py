@@ -550,10 +550,14 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
                 transport_window(5)
 
             (output/"personal-menu").mkdir()
+            # Native 80033214/800337EC: pristine Zero uses Down 0->0x0D,
+            # Up 0x0D->0. Right scans only unavailable tanks in this inventory.
+            # See docs/COOP_PERSONAL_MENU_CURSOR_AUDIT.{md,json}.
             case = personal_menu.personal_menu_smoke(dict(mode="netplay", input_path="published_host",
                 clients=clients, both=both, debug=debug, report=report, output=output,
                 hold=menu_hold, native_advance=lambda frames, label: advance(frames),
-                transport_window=transport_window, network=network), owner=1)
+                transport_window=transport_window, network=network), owner=1,
+                cursor_buttons=(0x40, 0x10))
             report["personal_menu_automated_status"] = case["status"]
             report["personal_menu_artwork_review"] = case["artwork_review"]
             report["checks"]["p2_personal_menu_automated_checks"] = bool(case["checks"]) and all(
