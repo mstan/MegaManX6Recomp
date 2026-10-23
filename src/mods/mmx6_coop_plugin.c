@@ -30,6 +30,7 @@
 #include "mmx6_coop_sprite_packet.h"
 #include "mmx6_coop_pixel_codec.h"
 #include "mmx6_coop_effect_diagnostic.h"
+#include "mmx6_coop_box_diagnostic.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -657,6 +658,30 @@ static uint32_t diagnostic_host_digest(void) {
 #undef HASH_BYTES
     return hash;
 }
+static void diagnostic_p2_boxes(void) {
+    static const unsigned offsets[3]={0x50,0x54,0x68};
+    uint8_t wire[MMX6_BOX_DIAG_BYTES]={0};
+    put32(wire,MMX6_BOX_DIAG_MAGIC);
+    put32(wire+4,MMX6_BOX_DIAG_SCHEMA);
+    put32(wire+8,MMX6_BOX_DIAG_BYTES);
+    put32(wire+12,frame_count);
+    for(unsigned i=0;i<3;++i) {
+        uint8_t *record=wire+16+i*12;
+        uint32_t pointer=le32(p2.body+offsets[i]);
+        put32(record,pointer);
+        if(!ready || failed)continue;
+        /* P2 pointers into PL00 address the private code/data bank. Reading
+         * restored singleton RAM here would publish X bytes for Zero. */
+        if(pointer>=OVERLAY && pointer<=OVERLAY+OVERLAY_SIZE-4u) {
+            put32(record+4,MMX6_BOX_PRIVATE_OVERLAY);
+            memcpy(record+8,zero_overlay+(pointer-OVERLAY),4);
+        } else if(pointer>=0x80010000u && pointer<=OVERLAY-4u) {
+            put32(record+4,MMX6_BOX_NATIVE_RAM);
+            capture(pointer,record+8,4);
+        }
+    }
+    project(diagnostic+MMX6_BOX_DIAG_HEADER,wire,sizeof wire);
+}
 static void diagnostics(uint16_t input) {
     ++frame_count;
     /* Odd sequence denotes publication in progress; finish with an even one.
@@ -705,6 +730,7 @@ static void diagnostics(uint16_t input) {
     psx_mod_write_word(diagnostic+MMX6_FX_DIAG_HEADER+12,frame_count);
     project(diagnostic+MMX6_FX_DIAG_TRAILS,p2.trails,sizeof p2.trails);
     project(diagnostic+MMX6_FX_DIAG_ATTACHED,p2.effects,sizeof p2.effects);
+    diagnostic_p2_boxes();
     psx_mod_write_word(diagnostic+0x88,frame_count*2u);
 }
 static int diagnostic_mutation_allowed(void) {

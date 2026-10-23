@@ -16,6 +16,7 @@ int psx_mod_netplay_has_state_digest(void) { return test_digest_registered; }
 #endif
 static unsigned rejected,guest_calls,effect_writes;
 static unsigned observed_reads,observed_consumer,sio_reads;
+static unsigned box_writes;
 static int test_replay_supply;
 static uint16_t observed_buttons;
 static int observed_contaminated;
@@ -35,6 +36,9 @@ uint8_t psx_mod_read_byte(uint32_t address) { return *memory(address); }
 uint16_t psx_mod_read_half(uint32_t address) { return (uint16_t)(psx_mod_read_byte(address)|(psx_mod_read_byte(address+1)<<8)); }
 uint32_t psx_mod_read_word(uint32_t address) { return (uint32_t)psx_mod_read_half(address)|((uint32_t)psx_mod_read_half(address+2)<<16); }
 void psx_mod_write_byte(uint32_t address,uint8_t value) {
+    if(address>=diagnostic+MMX6_BOX_DIAG_HEADER && address<diagnostic+MMX6_BOX_DIAG_END) {
+        CHECK(psx_mod_read_word(diagnostic+0x88)&1);++box_writes;
+    }
     if(address>=diagnostic+MMX6_FX_DIAG_HEADER && address<diagnostic+MMX6_FX_DIAG_END) {
         CHECK(psx_mod_read_word(diagnostic+0x88)&1);++effect_writes;
     }
@@ -109,6 +113,12 @@ int main(void) {
     for(unsigned i=0;i<sizeof p2.effects;++i)p2.effects[i]=(uint8_t)(i*11+9);
     memset(memory(0x800972F8),0xE1,sizeof p2.trails);
     memset(memory(0x800911A8),0xE2,sizeof p2.effects);
+    put32(p2.body+0x50,OVERLAY+OVERLAY_SIZE-4);
+    put32(p2.body+0x54,0x80073D54);
+    put32(p2.body+0x68,OVERLAY+OVERLAY_SIZE-3); /* Reject a crossing read. */
+    memcpy(zero_overlay+OVERLAY_SIZE-4,"\x11\x22\x33\x44",4);
+    memcpy(memory(OVERLAY+OVERLAY_SIZE-4),"\xAA\xBB\xCC\xDD",4);
+    memcpy(memory(0x80073D54),"\x55\x66\x77\x88",4);
     PlayerContext published=p2;
     diagnostics(0xFFFF);
     CHECK(psx_mod_read_word(diagnostic+0x80)==1);
@@ -126,8 +136,24 @@ int main(void) {
     CHECK(!memcmp(test_diagnostic+MMX6_FX_DIAG_TRAILS,p2.trails,sizeof p2.trails));
     CHECK(!memcmp(test_diagnostic+MMX6_FX_DIAG_ATTACHED,p2.effects,sizeof p2.effects));
     CHECK(!memcmp(&published,&p2,sizeof p2)); /* Observation is read-only. */
+    CHECK(box_writes==MMX6_BOX_DIAG_BYTES);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_BOX_DIAG_HEADER)==MMX6_BOX_DIAG_MAGIC);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_BOX_DIAG_HEADER+4)==1);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_BOX_DIAG_HEADER+8)==MMX6_BOX_DIAG_BYTES);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_BOX_DIAG_HEADER+12)==frame_count);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_BOX_DIAG_RECORDS)==OVERLAY+OVERLAY_SIZE-4);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_BOX_DIAG_RECORDS+4)==MMX6_BOX_PRIVATE_OVERLAY);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_BOX_DIAG_RECORDS+8)==0x44332211);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_BOX_DIAG_RECORDS+16)==MMX6_BOX_NATIVE_RAM);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_BOX_DIAG_RECORDS+20)==0x88776655);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_BOX_DIAG_RECORDS+24)==OVERLAY+OVERLAY_SIZE-3);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_BOX_DIAG_RECORDS+28)==MMX6_BOX_UNAVAILABLE);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_BOX_DIAG_RECORDS+32)==0);
+    CHECK(!memcmp(memory(OVERLAY+OVERLAY_SIZE-4),"\xAA\xBB\xCC\xDD",4));
+    CHECK(!memcmp(zero_overlay+OVERLAY_SIZE-4,"\x11\x22\x33\x44",4));
+    CHECK(!memcmp(memory(0x80073D54),"\x55\x66\x77\x88",4));
     for(unsigned i=0x1958;i<MMX6_FX_DIAG_HEADER;++i)CHECK(test_diagnostic[i]==0xA5);
-    for(unsigned i=MMX6_FX_DIAG_END;i<0x2000;++i)CHECK(test_diagnostic[i]==0xA5);
+    for(unsigned i=MMX6_BOX_DIAG_END;i<0x2000;++i)CHECK(test_diagnostic[i]==0xA5);
     /* All bytes, including hidden/unallocated stale native fields, are copied;
      * the observer decides whether they are eligible source-bound evidence. */
     p2.trails[0x50]^=0x80;p2.effects[0x42]^=0x40;
@@ -135,6 +161,13 @@ int main(void) {
     CHECK(test_diagnostic[MMX6_FX_DIAG_TRAILS+0x50]==p2.trails[0x50]);
     CHECK(test_diagnostic[MMX6_FX_DIAG_ATTACHED+0x42]==p2.effects[0x42]);
     CHECK(psx_mod_read_word(diagnostic+MMX6_FX_DIAG_HEADER+12)==frame_count);
+    put32(p2.body+0x50,0);diagnostics(0xFFFF);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_BOX_DIAG_RECORDS+4)==MMX6_BOX_UNAVAILABLE);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_BOX_DIAG_RECORDS+8)==0); /* Clear stale bytes. */
+    ready=0;diagnostics(0xFFFF);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_BOX_DIAG_RECORDS+16)==MMX6_BOX_UNAVAILABLE);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_BOX_DIAG_RECORDS+20)==0);
+    ready=1;
 #ifdef MMX6_COOP_MODERN_STATE
     CHECK(psx_mod_read_byte(diagnostic+0x9C)==0);
     test_digest_registered=1;diagnostics(0xFFFF);
