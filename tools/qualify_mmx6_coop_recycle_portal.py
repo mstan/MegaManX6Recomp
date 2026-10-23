@@ -79,10 +79,12 @@ def bodies(publication):
     return tuple(bytes.fromhex(publication[k]) for k in ("p1_body_hex", "p2_body_hex"))
 
 
-def valid_publication(publication, *, settled=False):
+def valid_publication(publication, *, settled=False, allow_joining=False):
     p = publication["observation"]
+    allowed_lifecycle = ((0,0),(0,3)) if allow_joining else ((0,0),)
     require(p["ready"] == 1 and p["failed"] == p["mailbox"] == 0 and
-            tuple(p["lifecycle"]) == (0, 0), "Private bank unavailable, tainted by input mailbox, or hero dying")
+            tuple(p["lifecycle"]) in allowed_lifecycle,
+            "Private bank unavailable, tainted by input mailbox, or hero dying/joining")
     b1, b2 = bodies(publication)
     require(alive(b1) and alive(b2) and b1[2] == 0 and b2[2] == 1,
             "Expected two living current fixed-roster bodies")
@@ -318,7 +320,7 @@ class Trial:
         while time.monotonic() < deadline:
             native = observe_native(self.control);native_rows.append(native)
             pub = boxes.observe_owned(self.control);rows.append(pub)
-            b1,b2 = valid_publication(pub)
+            b1,b2 = valid_publication(pub,allow_joining=True)
             p = pub["observation"]
             require(p["native_mode"] == 10 and not (p["scene_owner"] or p["pause_owner"] or p["native_phase"]) and
                     all(struct.unpack_from("<h",b,0xE)[0] < 2048 for b in (b1,b2)),
@@ -331,7 +333,8 @@ class Trial:
             # An initializer receipt does not refresh the co-op publication.
             # Compare separately attributed native/private P1 observations only
             # after original CP2 landing; do not infer cross-RPC atomicity.
-            if native_ready and p["enrolled"] == 1 and idle(b1) and \
+            if native_ready and p["enrolled"] == 1 and tuple(p["lifecycle"]) == (0,0) and idle(b1) and \
+                    b2[3] == 1 and struct.unpack_from("<I",b2,0x68)[0] == Z_BODY[0] and \
                     resident[8:16] == b1[8:16] and resident[0x5C] == b1[0x5C]:
                 return pub
             time.sleep(.015)

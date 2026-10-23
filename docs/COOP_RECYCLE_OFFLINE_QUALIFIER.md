@@ -46,6 +46,13 @@ enrolled idle bodies. The helper therefore separately observes actual CP2
 namespace/source code, fade/entry-lock clearance and native idle X at the
 authored x480, then requires agreeing published P1 position/HP. These remain
 separate RPC observations, without a claim of cross-command atomicity.
+The fresh CP2 publication initially reports lifecycle `(0,3)`: `enroll`
+calls `begin_join`, and `join_animation` completes the native incoming beam
+before `mmx6_coop_teleport_done` changes Zero to ALIVE. The next retained v17
+attempt exposed that legitimate intermediate state. The wait accepts JOINING
+only while observing entry, and returns after both lifecycles are ALIVE and
+Zero's original terrain-box pointer is available. No fixture command is sent
+to finish the beam; absent, leaving, failed or dying actors still stop the trial.
 
 Before position commit, the runner verifies the exact original528-byte live
 layout, scratch pointers80097438/8019A4B0/801AF8B0, complete87,040-byte

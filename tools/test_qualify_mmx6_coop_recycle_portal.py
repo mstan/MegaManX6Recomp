@@ -282,6 +282,24 @@ class InputTests(unittest.TestCase):
         self.assertEqual(len(trial.report["entry_enrollment_wait"]),3)
         trial.control.assert_not_called()
 
+    def test_actual_native_joining_waits_without_placement_until_original_completion(self):
+        fixture=json.loads((Path(__file__).resolve().parents[1]/
+            "tests/fixtures/mmx6_recycle_cp2_stale_enrollment_v17.json").read_bytes())
+        join=fixture["native_joining_attempt"]
+        self.assertEqual(join["publication"]["observation"]["lifecycle"],[0,3])
+        self.assertEqual(struct.unpack_from("<I",bytes.fromhex(join["publication"]["p2_body_hex"]),0x68)[0],0)
+        trial=self.trial();fresh=publication(212,1);landed=cp2_landed(fresh)
+        with patch.object(runner.boxes,"observe_owned",side_effect=[join["publication"],fresh]), \
+             patch.object(runner,"observe_native",side_effect=[join["native_observation"],landed]), \
+             patch.object(runner.time,"sleep"):
+            self.assertIs(trial.wait_entry_enrollment(),fresh)
+        trial.control.assert_not_called()
+        for state in (1,2,4,5):
+            bad=copy.deepcopy(join["publication"]);bad["observation"]["lifecycle"][1]=state
+            with self.assertRaises(runner.debug.DebugError):runner.valid_publication(bad,allow_joining=True)
+        bad=copy.deepcopy(join["publication"]);bad["observation"]["failed"]=1
+        with self.assertRaises(runner.debug.DebugError):runner.valid_publication(bad,allow_joining=True)
+
 
 class OptionsTests(unittest.TestCase):
     def test_invalid_options_refused_before_any_launch(self):
