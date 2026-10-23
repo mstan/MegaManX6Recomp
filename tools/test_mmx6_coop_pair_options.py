@@ -38,6 +38,10 @@ class PairOptionTests(unittest.TestCase):
         self.assertIsNone(default.original_exe)
         self.assertIsNone(default.source)
         self.assertIsNone(default.native_reentry)
+        self.assertFalse(default.jump_audio_smoke)
+        self.assertIsNone(default.audio_first_seat)
+        self.assertIsNone(default.audio_max_attempts)
+        self.assertIsNone(default.expected_manifest_sha256)
         self.assertEqual(self.parse("--source","frozen-source").source,Path("frozen-source"))
         lifecycle = self.parse("--lifecycle-smoke")
         self.assertTrue(lifecycle.lifecycle_smoke)
@@ -199,6 +203,34 @@ class PairOptionTests(unittest.TestCase):
         return ["--native-reentry","new_game","--original-disc","original.bin",
             "--expected-exe-sha256","a"*64,"--require-state-crc","--require-host-profile",
             "--expected-host-profile","mmx6.win64-clang22.loopback","--expected-host-profile-revision","2"]
+
+    def audio_options(self):
+        return ["--jump-audio-smoke","--original-exe","SLUS_013.95","--original-disc","original.bin",
+            "--expected-exe-sha256","a"*64,"--expected-manifest-sha256","b"*64,
+            "--require-state-crc","--require-host-profile","--expected-host-profile","mmx6.win64-clang22.loopback",
+            "--expected-host-profile-revision","2"]
+
+    def test_paired_audio_requires_all_explicit_source_build_profile_and_crc_guards(self):
+        self.assertTrue(self.parse(*self.audio_options()).jump_audio_smoke)
+        for first in ("0","1"):
+            args=self.parse(*self.audio_options(),"--audio-first-seat",first,"--audio-max-attempts","8")
+            self.assertEqual(args.audio_first_seat,int(first))
+        for flag,count in (("--original-exe",2),("--original-disc",2),("--expected-exe-sha256",2),
+                           ("--expected-manifest-sha256",2),("--require-state-crc",1),("--require-host-profile",1),
+                           ("--expected-host-profile",2),("--expected-host-profile-revision",2)):
+            options=self.audio_options();at=options.index(flag);del options[at:at+count];self.rejected(*options)
+        for extra in (("--audio-first-seat","2"),("--audio-max-attempts","0"),("--audio-max-attempts","9"),
+                      ("--expected-manifest-sha256","B"*64),("--original-disc","not-bin.cue")):
+            self.rejected(*self.audio_options(),*extra)
+
+    def test_paired_audio_requires_a_separate_pair_and_ancillary_flags_stay_scoped(self):
+        for flag in ("--admission-only","--native-loader-diagnostic","--personal-menu-smoke","--lifecycle-smoke",
+                     "--enemy-targeting-smoke","--private-pause-smoke","--contact-pause-contact-smoke"):
+            self.rejected(*self.audio_options(),flag)
+        self.rejected(*self.audio_options(),"--native-reentry","new_game")
+        self.rejected(*self.audio_options(),"--native-quit-scenario","guest_authority")
+        for options in (("--audio-first-seat","0"),("--audio-max-attempts","1"),("--expected-manifest-sha256","b"*64)):
+            self.rejected(*options)
 
     def test_native_new_game_requires_source_image_profile_crc_and_a_separate_pair(self):
         self.assertEqual(self.parse(*self.reentry_options()).native_reentry,"new_game")

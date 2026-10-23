@@ -248,7 +248,13 @@ def run(args) -> dict:
         personal_menu = importlib.import_module("mmx6_coop_personal_menu")
         modules += (personal_menu,)
     private_pause = effects = published_input = native_quit = None
-    reentry_pair = source_validation = None
+    reentry_pair = source_validation = audio_pair = None
+    if getattr(args,"jump_audio_smoke",False):
+        audio_pair=importlib.import_module("mmx6_coop_jump_audio_pair")
+        source_validation=audio_pair.sources
+        modules+=(audio_pair,audio_pair.audio,audio_pair.ownership,audio_pair.ownership.host,source_validation)
+        modules+=tuple(importlib.import_module(name) for name in
+            ("audit_mmx6_coop_audio","inventory_mmx6_coop_content","mmx6_seamless_catalog"))
     if getattr(args,"native_reentry",None):
         reentry_pair=importlib.import_module("mmx6_coop_native_reentry_pair")
         source_validation=importlib.import_module("qualify_mmx6_coop_jump_audio")
@@ -280,6 +286,10 @@ def run(args) -> dict:
     if reentry_pair is not None:
         reentry_binding=reentry_pair.bind_original_disc(args.disc,args.original_disc)
         reentry_original=reentry_pair.helper.load_sources(args.original_disc)["original"]
+    audio_source=None
+    if audio_pair is not None:
+        audio_source=audio_pair.load_sources(args.original_exe,args.original_disc,args.disc,
+            tools_root.parent/"docs/COOP_JUMP_AUDIO_CONTRACT.json")
     if contact is not None:
         if candidate_sha != CONTACT_EXE_SHA or candidate_sha != contact.EXE_SHA:
             raise ValueError("R2 paired executable is not the selected frozen37cdc487 candidate")
@@ -335,6 +345,14 @@ def run(args) -> dict:
         for module in (reentry_pair,reentry_pair.helper,reentry_pair.helper.menu,reentry_pair.host):
             path=output/(Path(module.__file__).stem+"-executed-source.py");path.write_bytes(Path(module.__file__).read_bytes())
             report["native_reentry_source_snapshots"].append(dict(path=str(path),sha256=preparation.sha256(path)))
+    if audio_pair is not None:
+        report.update(jump_audio_source=audio_source,jump_audio_prepared=[],ledger_status="unverified",
+            r4="unverified",r12="unverified",audible_output="not_tested",jump_audio_source_snapshots=[])
+        report["checks"]["jump_audio_original_source_bound"]=True
+        report["checks"]["jump_audio_both_peers_completed"]=False
+        for module in (audio_pair,audio_pair.audio,audio_pair.ownership,audio_pair.ownership.host,source_validation):
+            path=output/(Path(module.__file__).stem+"-executed-source.py");path.write_bytes(Path(module.__file__).read_bytes())
+            report["jump_audio_source_snapshots"].append(dict(path=str(path),sha256=preparation.sha256(path)))
     handles, processes, clients, reservations = [], [], [], []
     executor = ThreadPoolExecutor(max_workers=2)
     runtime_ready = False
@@ -491,6 +509,9 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
                     "Build changed during paired staging")
             if reentry_pair is not None:
                 report["native_reentry_prepared"].append(reentry_pair.prepare_profile(directory,args.disc,args.original_disc))
+            if audio_pair is not None:
+                report["jump_audio_prepared"].append(audio_pair.ownership.prepare_profile(directory,args.disc,args.original_disc))
+                audio_pair.sources.verify_prepared_originals(directory,args.original_exe,args.disc)
             environment = baseline.candidate_environment(directory, receipt)
             # Discard inherited developer/session controls, then reapply only
             # the validated private paths and fixed LAN/delay policies.
@@ -527,6 +548,15 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             report["checks"]["native_reentry_declared_sources_match"]=True
             require(reentry_pair.bind_original_disc(args.disc,args.original_disc)==reentry_binding,
                     "Original CUE/raw source changed during paired preparation")
+        if audio_pair is not None:
+            report["jump_audio_same_machine_plan"]=same_machine_plan(report["peers"])
+            require(report["host_profile_build_manifest"]["declared_sha256"]==args.expected_manifest_sha256,
+                    "Audio compiled manifest differs from the explicitly expected SHA256")
+            report["jump_audio_declared_sources"]=source_validation.validate_sources(
+                args.build,staging_source,report["host_profile_build_manifest"])
+            report["checks"]["jump_audio_declared_sources_match"]=True
+            require(audio_pair.ownership.bind_original_disc(args.disc,args.original_disc)==audio_source["disc"],
+                    "Original audio CUE/raw source changed during paired preparation")
         # Reservations establish availability; owned-listener checks close the
         # release-to-launch race before every debug command, including quit.
         for reservation in reservations:
@@ -562,19 +592,21 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
 
                 def host_input(self, pressed=0):
                     if self.reentry_route is None:
-                        if reentry_pair is not None:raise debug.DebugError("Owned reentry host route is unavailable")
+                        if reentry_pair is not None or audio_pair is not None:raise debug.DebugError("Owned published host route is unavailable")
                         return super().host_input(pressed)
                     return self.reentry_route.set(0,pressed)
 
                 def release(self):
                     if self.reentry_route is None:
-                        if reentry_pair is not None:return self.request("clear_input",layer="host",port=1)
+                        if reentry_pair is not None or audio_pair is not None:return self.request("clear_input",layer="host",port=1)
                         return super().release()
                     return self.reentry_route.clear()
 
             clients.append(OwnedClient(ports[seat], process))
         if reentry_pair is not None:
             reentry_pair.install_routes(clients,processes,ports[:2],report,output,handles)
+        if audio_pair is not None:
+            audio_pair.install_routes(clients,processes,ports[:2],report,output,handles)
         print(json.dumps(dict(event="launched_owned_pair", pids=[p.pid for p in processes],
                               output=str(output))), flush=True)
         deadline, next_input, release_input, step = time.monotonic()+args.timeout, 0., 0., 0
@@ -680,6 +712,22 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             all(player.hp == 32 for player in row.players) for row in settled)
         report["checks"]["mailbox_unused"] = all(row.mailbox == 0 for row in settled)
         matched("P1 jump then settle")
+        if audio_pair is not None:
+            loader_logs=[(output/f"peer-{seat}/logs/stdout.log").read_text(errors="replace") for seat in range(2)]
+            require(all("title netplay loading = resident assets" in text for text in loader_logs),
+                    "Audio default resident loader did not commit on both peers")
+            report["checks"]["default_resident_loader_committed"]=True
+            case=audio_pair.exercise(dict(clients=clients,both=both,report=report,output=output,
+                network=network,native_advance=lambda frames,label:advance(frames)),
+                expected_sha=args.expected_exe_sha256,source=audio_source,
+                first_seat=args.audio_first_seat if args.audio_first_seat is not None else 0,
+                max_attempts=args.audio_max_attempts if args.audio_max_attempts is not None else 8)
+            matched("paired ground-jump audio then settle")
+            report["checks"]["jump_audio_resolved_crc_after_case"]=True
+            report["jump_audio_automated_status"]=case["status"]
+            require(case["status"] in (audio_pair.SUCCESS,audio_pair.INCONCLUSIVE),
+                    "Paired jump audio did not complete both independent comparisons: "+case["status"])
+            report["limits"].append("Ground-jump order only; no full R4/R12, PCM, audible, music or cross-host pass")
         if reentry_pair is not None:
             loader_logs=[(output/f"peer-{seat}/logs/stdout.log").read_text(errors="replace") for seat in range(2)]
             require(all("title netplay loading = resident assets" in text for text in loader_logs),
@@ -866,6 +914,8 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
         report["final"] = [row.json() for row in rows()]
         network()
         report["status"] = "passed" if all(report["checks"].values()) else "failed"
+        if audio_pair is not None and report.get("jump_audio_automated_status")==audio_pair.INCONCLUSIVE:
+            report["status"]=audio_pair.INCONCLUSIVE
         report["default_intro_qualified"] = report["status"] == "passed" and not args.native_loader_diagnostic
     except Exception as error:
         report.update(error=str(error), traceback=traceback.format_exc())
@@ -896,7 +946,7 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
                     clear_inputs=(lambda: clients[seat].release(),),
                     request_quit=lambda: clients[seat].request("quit")))
             except Exception as error:
-                if reentry_pair is None:raise
+                if reentry_pair is None and audio_pair is None:raise
                 peer.update(shutdown="owned_cleanup_error",cleanup_error=str(error))
             if peer["shutdown"] == "already_exited":
                 if report["status"] == "passed":
@@ -905,13 +955,15 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
                 peer["private_card_files"] = [dict(name=path.name, sha256=preparation.sha256(path))
                     for path in (Path(peer["directory"])/"saves").glob("*.mcd")]
             except OSError as error:
-                if reentry_pair is None:raise
+                if reentry_pair is None and audio_pair is None:raise
                 peer["private_card_error"]=str(error)
         executor.shutdown(wait=True)
         for handle in handles:
             handle.close()
         if reentry_pair is not None:
             reentry_pair.finalize(report,output,runtime_ready=runtime_ready,owned_processes=len(processes))
+        if audio_pair is not None:
+            audio_pair.finalize(report,output,runtime_ready=runtime_ready,owned_processes=len(processes))
         if host_profiles is not None:
             # Read the complete owned logs after both writers stop. A later
             # duplicate/restart/malformed record must revoke an earlier pass.
@@ -956,11 +1008,19 @@ def make_parser():
                         help="Original published P2 body contact before/after its own menu; exact frozen37 candidate, source BIN, host profile and resolved CRC required")
     parser.add_argument("--native-quit-scenario",choices=("guest_authority","p1_pages_cancel","p1_pages_cancel_live_effects"),
                         help="Separate fresh native Quit authority or primary pages/cancel case; exact image, original EXE, host profile and resolved CRC required")
-    parser.add_argument("--original-exe",type=Path,help="Original SLUS_013.95 source for --native-quit-scenario")
+    parser.add_argument("--original-exe",type=Path,help="Original SLUS_013.95 source for --native-quit-scenario or --jump-audio-smoke")
+    parser.add_argument("--jump-audio-smoke",action="store_true",
+                        help="Separate same-machine paired ground-jump private-bank/sample/DSP/lifetime observation; strict original/image/manifest/profile/CRC proof required")
+    parser.add_argument("--audio-first-seat",type=int,choices=(0,1),
+                        help="First jumping logical seat (default0), only with --jump-audio-smoke")
+    parser.add_argument("--audio-max-attempts",type=int,
+                        help="Bounded native RNG attempts1..8 (default8), only with --jump-audio-smoke")
+    parser.add_argument("--expected-manifest-sha256",
+                        help="Exact compiled declared-manifest SHA256, required by --jump-audio-smoke")
     parser.add_argument("--native-reentry",choices=("new_game",),
                         help="Separate same-machine original final Quit/New Game and fresh P2 menu recovery; strict image/source/profile/CRC proof required")
     parser.add_argument("--original-disc", type=Path,
-                        help="Original raw BIN for R2 or --native-reentry, separate from runtime --disc CUE")
+                        help="Original raw BIN for R2, --native-reentry or --jump-audio-smoke, separate from runtime --disc CUE")
     parser.add_argument("--require-state-crc", action="store_true",
                         help="Require modern same-simulation-tick core/mod logs below both resolved watermarks; candidate must register complete host digest")
     parser.add_argument("--require-host-profile", action="store_true",
@@ -995,18 +1055,33 @@ def validate_options(parser, args):
                 not args.require_host_profile or not args.expected_exe_sha256 or args.original_exe is None):
             parser.error("Native Quit requires original EXE, exact SHA, native gameplay, default loader, host profile and resolved CRC")
         if (args.private_pause_smoke or args.contact_pause_contact_smoke or args.enemy_targeting_smoke or
-                args.personal_menu_smoke or args.lifecycle_smoke or args.native_reentry):
+                args.personal_menu_smoke or args.lifecycle_smoke or args.native_reentry or args.jump_audio_smoke):
             parser.error("Each native Quit scenario requires a separate fresh pair without other optional routes")
-    elif args.original_exe is not None:
-        parser.error("--original-exe belongs to --native-quit-scenario")
+    elif args.original_exe is not None and not args.jump_audio_smoke:
+        parser.error("--original-exe belongs to --native-quit-scenario or --jump-audio-smoke")
     if args.native_reentry:
         if (args.admission_only or args.native_loader_diagnostic or not args.require_state_crc or
                 not args.require_host_profile or not args.expected_exe_sha256 or args.original_disc is None or
                 args.original_disc.suffix.lower()!=".bin" or args.disc.suffix.lower()!=".cue"):
             parser.error("Native reentry requires raw original BIN, runtime CUE, exact image, default loader, host profile and resolved CRC")
         if (args.private_pause_smoke or args.contact_pause_contact_smoke or args.enemy_targeting_smoke or
-                args.personal_menu_smoke or args.lifecycle_smoke or args.native_quit_scenario):
+                args.personal_menu_smoke or args.lifecycle_smoke or args.native_quit_scenario or args.jump_audio_smoke):
             parser.error("Native reentry requires a separate fresh pair without other optional routes")
+    if args.jump_audio_smoke:
+        if (args.admission_only or args.native_loader_diagnostic or not args.require_state_crc or
+                not args.require_host_profile or not args.expected_exe_sha256 or not args.expected_manifest_sha256 or
+                args.original_exe is None or args.original_disc is None or args.original_disc.suffix.lower()!=".bin" or
+                args.disc.suffix.lower()!=".cue"):
+            parser.error("Paired audio requires original EXE/raw BIN/runtime CUE, exact image/manifest, default loader, host profile and resolved CRC")
+        if (args.private_pause_smoke or args.contact_pause_contact_smoke or args.enemy_targeting_smoke or
+                args.personal_menu_smoke or args.lifecycle_smoke or args.native_quit_scenario or args.native_reentry):
+            parser.error("Paired ground-jump audio requires a separate fresh pair without other optional routes")
+        if args.audio_max_attempts is not None and not 1<=args.audio_max_attempts<=8:
+            parser.error("Audio attempts must be1..8")
+        if re.fullmatch(r"[a-f0-9]{64}",args.expected_manifest_sha256) is None:
+            parser.error("Expected manifest SHA256 must contain64 lowercase hex digits")
+    elif args.audio_first_seat is not None or args.audio_max_attempts is not None or args.expected_manifest_sha256 is not None:
+        parser.error("Audio order/attempts/manifest options require --jump-audio-smoke")
     if args.private_pause_smoke:
         if (args.admission_only or args.native_loader_diagnostic or not args.require_state_crc or
                 not args.require_host_profile or not args.expected_exe_sha256):
@@ -1023,8 +1098,8 @@ def validate_options(parser, args):
             parser.error("Contact/menu/contact requires --original-disc with the original raw BIN")
         if args.enemy_targeting_smoke:
             parser.error("Contact/menu/contact and enemy-targeting require separate fresh authored-enemy cases")
-    elif args.original_disc is not None and not args.native_reentry:
-        parser.error("--original-disc belongs to --contact-pause-contact-smoke or --native-reentry")
+    elif args.original_disc is not None and not args.native_reentry and not args.jump_audio_smoke:
+        parser.error("--original-disc belongs to --contact-pause-contact-smoke, --native-reentry or --jump-audio-smoke")
     if args.expected_exe_sha256 is not None and (len(args.expected_exe_sha256) != 64 or
             any(c not in "0123456789abcdef" for c in args.expected_exe_sha256)):
         parser.error("Expected executable SHA256 must contain 64 lowercase hex digits")
