@@ -6,6 +6,16 @@ ran only pure Python tests: no title build, native launch or R26 pass. The
 successful runner status is `native_stream_consumed_outcomes_unverified`, not a
 gameplay/outcome or complete machine replay qualification.
 
+Root subsequently ran the exact v13 executable `089bb606`: all five native
+recording checks passed, and a fresh private replay consumed the finalized
+5913-event stream and exited0. The first replay refused before guest entry
+because the preparer wrote a CRLF marker on Windows; `13fa4cd` writes exact LF
+bytes and the existing preparation test now checks the raw wire format. The
+[reviewed receipt](evidence/mmx6-native-replay/manifest-bound-6c42c5c-reviewed.json)
+retains both attempts, compiled identity and separate 71/71 diagnostic and
+production test results. Outcome equality, diagnostics UI presentation and
+complete R26 remain unverified.
+
 The caller supplies explicit frozen executable and compiled-manifest SHA256
 values. The runner stages a fresh candidate using the existing playtest
 preparer, validates the actual manifest JSON/header and its compiled SHA bytes

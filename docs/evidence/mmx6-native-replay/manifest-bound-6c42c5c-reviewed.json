@@ -1,0 +1,133 @@
+{
+  "schema": 1,
+  "kind": "manifest_bound_native_capture_and_replay_review",
+  "reviewed_at_utc": "2026-10-23T16:00:20.440998+00:00",
+  "result": "ordered_native_input_capture_and_private_replay_passed_outcomes_unverified",
+  "candidate": {
+    "candidate_source": "6c42c5c4afa68bb7dfe60097e091a6a551940d9a",
+    "exe_sha256": "089bb606b5dff06cdcea3e3adbcb1e728379e1045cdd7eedca097e1d3899ca25",
+    "declared_manifest_sha256": "8e10381c97c8c8ad22698648328ed7c2b6930c4175346c0544905d79bc8a9f15"
+  },
+  "compilation_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v13-6c42c5c\\candidate.json",
+    "sha256": "a912cd8c93931b73c2be52ecef6b794af3cc1449c1ff99bced453a843bff2605"
+  },
+  "production_default_off": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v13-6c42c5c\\production-default-off.json",
+    "sha256": "0acd8b6ac8d1b353d95b23289e5b5b394f8b0bdd486a12067a3d08f402919d43"
+  },
+  "compilation_checks": {
+    "diagnostic": "71/71",
+    "production": "71/71, debug tools OFF and loopback lab OFF"
+  },
+  "source_capture": {
+    "report": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-capture-replay-v13-6c42c5c\\qualification.json",
+      "sha256": "da95265df7614a34dfa825d03b8067d2165c426c9a37d827d291b23ab7d7321c"
+    },
+    "status": "route_completed",
+    "checks": {
+      "p2_native_movement": true,
+      "p1_independent": true,
+      "p1_native_jump": true,
+      "p2_jump_independent": true,
+      "mailbox_unused": true
+    },
+    "owned_pid": 75356,
+    "shutdown": {
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    },
+    "input_path": "per-port virtual host devices through ordinary offline sampler",
+    "trace": {
+      "directory": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-capture-replay-v13-6c42c5c\\record\\saves\\input-recordings\\session-1792770795875409-1-0",
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "089bb606b5dff06cdcea3e3adbcb1e728379e1045cdd7eedca097e1d3899ca25",
+        "manifest_sha256": "8e10381c97c8c8ad22698648328ed7c2b6930c4175346c0544905d79bc8a9f15",
+        "mode": "offline",
+        "profile": null,
+        "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+        "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      "events": 5913,
+      "natives": 4140,
+      "p2_reads": 1773,
+      "repeated_native_frames": 2085,
+      "actual_p1_cross_word_anywhere": true,
+      "actual_p2_right_read": true,
+      "trace_sha256": "d57ba2fe71bbcd8d79e2694d22ea02e885292121ef99042f840b45b2d214db68"
+    }
+  },
+  "fresh_private_replay": {
+    "report": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-replay-v13-6c42c5c-lf-marker\\qualification.json",
+      "sha256": "05fb5e3ee98ca8221fda7fdc6c70f1f543005f470d74eef3e03c2b7d75edef86"
+    },
+    "result": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-replay-v13-6c42c5c-lf-marker\\replay-result.json",
+      "sha256": "8639d62e682c979d871a6cf18980c8be72608ddbc5b31d5573a2b2be4a0bc955"
+    },
+    "consumed": {
+      "consumed": 5913,
+      "contract": "mmx6.native-consumption.v1",
+      "epoch": 1,
+      "events": 5913,
+      "failure": "",
+      "schema": 1,
+      "scope": "ordered native/P2 consumption only; no full SIO or outcome qualification",
+      "status": "consumed",
+      "trace_sha256": "d57ba2fe71bbcd8d79e2694d22ea02e885292121ef99042f840b45b2d214db68"
+    },
+    "process": {
+      "owned_pid": 81580,
+      "cleanup": {
+        "shutdown": "already_exited",
+        "exit_code": 0
+      }
+    },
+    "exact_lf_marker": {
+      "sha256": "7f99350960ce069200f843b6ab907e4722ad8990826f7795ca07f08d1e683247",
+      "bytes": 160,
+      "LF": 3,
+      "CR": 0
+    }
+  },
+  "first_failure": {
+    "report": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-capture-replay-v13-6c42c5c\\qualification.json",
+      "sha256": "da95265df7614a34dfa825d03b8067d2165c426c9a37d827d291b23ab7d7321c"
+    },
+    "error": {
+      "type": "DebugError",
+      "message": "Owned native replay exited without successful EOF consumption"
+    },
+    "interpretation": "Original private replay refused before guest entry: Python text-mode marker had three CRLF endings instead of required LF bytes. Source capture remained finalized and unchanged.",
+    "fix_commit": "13fa4cd",
+    "validation": "Eight preparation tests pass on Windows with strict raw marker-byte assertion."
+  },
+  "bypasses": [],
+  "ledger_status": "unverified",
+  "limits": [
+    "One actual Windows x64 machine and exact preserved executable/manifest only.",
+    "Ordinary configured two digital keyboard slots with per-seat published host input; no direct SIO or guest writes.",
+    "Input pulses wait for first recorded native N; finalized full trace, exact actual startup bundles and initial cards are validated.",
+    "4140 original native N and1773 extra P2 C events include2085 repeated native-frame events; none are deduplicated.",
+    "Consumed ordered native/P2 inputs do not establish raw-SIO/publication or whole-machine replay.",
+    "No EOF live RAM, rendered/audio outcome equality, gameplay-end hash or hard next-read bound is claimed.",
+    "Actual diagnostics UI/recording-location presentation and complete R26 remain unverified.",
+    "No prior v11/v12 comparison pass transfers to this new image."
+  ]
+}

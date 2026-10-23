@@ -1582,8 +1582,58 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "Default diagnostics capture and strict bounded offline N/C replay source are integrated inee8e14e; actual-module/reader/preparation checks pass. Explicit immutable offline overlay startup is pinned in078433e. A fresh generated hook/executable/manifest and actual accepted-input capture/replay are still required. Direct debug SIO input taints recordings; shared per-seat published-host ingress and an owned native qualifier are in progress. Consumed stream is not native outcome equality; no R26 pass. See COOP_NATIVE_REPLAY.md."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "6c42c5c4afa68bb7dfe60097e091a6a551940d9a",
+            "build_identity": {
+              "exe_sha256": "089bb606b5dff06cdcea3e3adbcb1e728379e1045cdd7eedca097e1d3899ca25",
+              "declared_manifest_sha256": "8e10381c97c8c8ad22698648328ed7c2b6930c4175346c0544905d79bc8a9f15",
+              "compiled_source_commit": "6c42c5c4afa68bb7dfe60097e091a6a551940d9a",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "input": "two configured digital keyboard slots and acknowledged per-seat published host layer",
+              "loader": "default Seamless Loading",
+              "overlays": "explicitly sealed interpreted before guest cycle0",
+              "rollback": false
+            },
+            "action": "Cold native frontend, independent P2 Right/P1 Jump, finalized recording, fresh private same-image replay.",
+            "outcome": "All five native recording movement checks and exact5913-event replay consumption passed. Full R26 remains unverified.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-capture-replay-v13-6c42c5c\\qualification.json",
+                "sha256": "da95265df7614a34dfa825d03b8067d2165c426c9a37d827d291b23ab7d7321c"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-replay-v13-6c42c5c-lf-marker\\qualification.json",
+                "sha256": "05fb5e3ee98ca8221fda7fdc6c70f1f543005f470d74eef3e03c2b7d75edef86"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v13-6c42c5c\\candidate.json",
+                "sha256": "a912cd8c93931b73c2be52ecef6b794af3cc1449c1ff99bced453a843bff2605"
+              },
+              {
+                "path": "docs/evidence/mmx6-native-replay/manifest-bound-6c42c5c-reviewed.json",
+                "sha256": "7649324d2c86387b7ef8ea720921c8c88520ce0c4941afd27bbdfea103fc3a4a"
+              }
+            ],
+            "limits": [
+              "One actual Windows x64 machine and exact preserved executable/manifest only.",
+              "Ordinary configured two digital keyboard slots with per-seat published host input; no direct SIO or guest writes.",
+              "Input pulses wait for first recorded native N; finalized full trace, exact actual startup bundles and initial cards are validated.",
+              "4140 original native N and1773 extra P2 C events include2085 repeated native-frame events; none are deduplicated.",
+              "Consumed ordered native/P2 inputs do not establish raw-SIO/publication or whole-machine replay.",
+              "No EOF live RAM, rendered/audio outcome equality, gameplay-end hash or hard next-read bound is claimed.",
+              "Actual diagnostics UI/recording-location presentation and complete R26 remain unverified.",
+              "No prior v11/v12 comparison pass transfers to this new image."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Default diagnostics produced a finalized5913-event native trace on exact089bb606/manifest8e10381c; fresh private same-image replay consumed all5913 and exited0 after Windows marker-byte fix13fa4cd. Actual native P1 jump/P2 movement checks pass during recording. Ordered N/C consumption excludes raw SIO/publication and has no capture-end outcome/artwork equality claim; diagnostics UI/location presentation and fullR26 remain unverified. See docs/evidence/mmx6-native-replay/manifest-bound-6c42c5c-reviewed.json."
       }
     },
     {
