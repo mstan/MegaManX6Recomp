@@ -3,10 +3,11 @@
 The catalog is **disabled by default**. Explicit development builds may set
 `-DMMX6_ENABLE_LOOPBACK_HOST_LAB=ON` to exercise the candidate
 `mmx6.win64-clang22.loopback`, revision2 for title contract
-`mmx6-x-zero-delay-v13`. The title revision blocks guest Select at its owned
-pause menu; P1 retains the native campaign Quit path. This change needs fresh
-native evidence on its exact new image. This is a route to collecting fresh
-evidence, not a production qualification or a correctness-fix rollout switch.
+`mmx6-x-zero-delay-v14`. This title revision adds source-guarded Recycle Lab
+portal ownership and validates the fixed roster and complete resource layout
+before private asset loading or enrollment. It retains the guest Select
+authority fix. The combined changes need fresh native evidence on their exact
+new image. The catalog permits development evidence collection only.
 GCC and unsupported builds remain valid offline builds and return an empty
 catalog even when the lab option is requested. SDKs before host-catalog API2
 keep their original plugin initializer layout and do not install the callback.
@@ -71,6 +72,7 @@ The [earlier native baseline](COOP_HOST_LAB_BASELINE.md) supplies bounded eviden
 for executable37cdc487 under revision1/titlev11, including startup, gameplay and
 restart checks. Revision2 retains those exact review hashes as historical
 evidence. It changes the title contract for native private-effect updates,
-menu-phase gating and owned mode packets; fresh v12 native qualification is
-pending. The semantic JSON remains a development contract; its hash does not
+menu-phase gating and owned mode packets. Later exact-image receipts are
+retained separately under `docs/evidence`; they do not qualify the current
+portal/resource bundle. The semantic JSON remains a development contract; its hash does not
 qualify another build automatically. The default stays OFF.

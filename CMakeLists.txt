@@ -208,7 +208,7 @@ if(BUILD_TESTING)
                 test_mmx6_coop_native_quit test_mmx6_coop_native_quit_runner
                 test_mmx6_coop_hud_audit
                 test_mmx6_reploid_rescue_audit test_mmx6_death_particle_audit
-                test_mmx6_alternate_route_audit
+                test_mmx6_alternate_route_audit test_mmx6_coop_recycle_portal
                 test_mmx6_input_capture_hook)
             add_test(NAME mmx6_${_mmx6_python_test}
                 COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/${_mmx6_python_test}.py")
@@ -310,7 +310,7 @@ if(BUILD_TESTING)
         add_test(NAME ${_mmx6_diag_target} COMMAND "$<TARGET_FILE:${_mmx6_diag_target}>")
     endforeach()
 
-    foreach(_mmx6_visual_kind private_effects hud)
+    foreach(_mmx6_visual_kind private_effects hud resource_admission recycle_portal)
       foreach(_mmx6_effects_variant debug production)
         set(_mmx6_effects_target mmx6_coop_${_mmx6_visual_kind}_${_mmx6_effects_variant}_test)
         add_executable(${_mmx6_effects_target} tests/test_mmx6_coop_${_mmx6_visual_kind}.c
@@ -318,6 +318,10 @@ if(BUILD_TESTING)
             "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c")
         target_include_directories(${_mmx6_effects_target} PRIVATE src/mods
             "${PSXRECOMP_V4_ROOT}/runtime/include")
+        if(_mmx6_visual_kind STREQUAL "recycle_portal")
+            target_sources(${_mmx6_effects_target} PRIVATE
+                "${PSXRECOMP_V4_ROOT}/runtime/src/mod_function_replacements.c")
+        endif()
         if(_mmx6_effects_variant STREQUAL "production")
             target_compile_definitions(${_mmx6_effects_target} PRIVATE PSX_NO_DEBUG_TOOLS)
         endif()
@@ -333,6 +337,9 @@ if(BUILD_TESTING)
             endif()
         endif()
         add_test(NAME ${_mmx6_effects_target} COMMAND "$<TARGET_FILE:${_mmx6_effects_target}>")
+        if(_mmx6_visual_kind STREQUAL "recycle_portal")
+            set_tests_properties(${_mmx6_effects_target} PROPERTIES SKIP_RETURN_CODE 77)
+        endif()
       endforeach()
     endforeach()
 
@@ -340,6 +347,11 @@ if(BUILD_TESTING)
         src/mods/mmx6_coop_roster.c)
     target_include_directories(mmx6_coop_roster_test PRIVATE src/mods)
     add_test(NAME mmx6_coop_roster_test COMMAND "$<TARGET_FILE:mmx6_coop_roster_test>")
+    add_executable(mmx6_coop_resources_test tests/test_mmx6_coop_resources.c
+        src/mods/mmx6_coop_resources.c src/mods/mmx6_coop_roster.c
+        src/mods/mmx6_coop_assets.c)
+    target_include_directories(mmx6_coop_resources_test PRIVATE src/mods)
+    add_test(NAME mmx6_coop_resources_test COMMAND "$<TARGET_FILE:mmx6_coop_resources_test>")
 
     foreach(_mmx6_checkpoint_variant debug production)
         set(_mmx6_checkpoint_target mmx6_coop_checkpoint_${_mmx6_checkpoint_variant}_test)
@@ -574,6 +586,10 @@ if(BUILD_TESTING)
     foreach(_target IN LISTS _mmx6_test_targets)
         if(_target MATCHES "^mmx6_.*test$")
             get_target_property(_sources ${_target} SOURCES)
+            if("${_sources}" MATCHES "tests/test_mmx6_coop_(intro_target|diagnostics|private_effects|hud|checkpoint|snapshot|resource_admission|recycle_portal)[.]c")
+                target_sources(${_target} PRIVATE src/mods/mmx6_coop_roster.c
+                    src/mods/mmx6_coop_resources.c)
+            endif()
             if("${_sources}" MATCHES "mod_packages[.]cpp")
                 target_sources(${_target} PRIVATE tests/mod_media_stub.cpp)
             endif()

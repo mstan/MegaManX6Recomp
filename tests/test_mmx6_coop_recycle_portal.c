@@ -180,7 +180,13 @@ static void rejected(CPUState *cpu){
     CHECK(!probes && !actions && !scene_owner && !memcmp(before,ram,sizeof ram));free(before);
 }
 int main(int argc,char **argv){
-    CHECK(argc==3);load_original(argv[1],argv[2]);CPUState cpu;setup(&cpu);
+    CHECK(argc==1 || argc==3);
+    const char *exe=argc==3?argv[1]:getenv("MMX6_CONTENT_EXE");
+    const char *disc=argc==3?argv[2]:getenv("MMX6_CONTENT_DISC");
+    if(!exe || !*exe || !disc || !*disc){
+        puts("Original EXE/raw disc required (arguments or MMX6_CONTENT_EXE/DISC)");return 77;
+    }
+    load_original(exe,disc);CPUState cpu;setup(&cpu);
     native_action(&cpu);CHECK(psx_mod_read_byte(portal+5)==1);actions=0; /* Native P1-only negative control. */
     uint8_t body[sizeof p2.body];capture(PLAYER,body,sizeof body);PlayerContext private_before=p2;
     CHECK(psx_mod_try_function_replacement(&cpu,0x800EC780));
