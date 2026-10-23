@@ -27,6 +27,10 @@ import qualify_mmx6_coop_baseline as baseline
 PLAY, PLAYER, TRAILS = 0x800CCED0, 0x800970A0, 0x800972F8
 PAD_DECODE, DIALOGUE = 0x800C456C, 0x8008EAF0
 BODY_AND_TRAILS_BYTES = 0x378  # body158h + native camera100h + trails120h.
+# Fixed ordinary-RAM mapping, supported by handle_read_ram's full-RAM bound.
+# 441736 hex bytes + the server's <=256-byte envelope fit the 1 MiB client cap.
+NATIVE_PLAY_OFFSET = PLAY-PLAYER
+NATIVE_SNAPSHOT_BYTES = NATIVE_PLAY_OFFSET+0x94  # 0x35EC4, ends at800CCF64.
 MENU_BASE, MENU_MEMBER, ZERO_MEMBER = 0x800E9860, 16, 1
 MENU_TABLE, MENU_COUNT = 0x800F1CB0, 0x800F1CEB
 MENU_SHA = "c9211aee86c5e7377b7716bd698102da1aed8c57a128e90507259cf9f6093ecf"
@@ -234,29 +238,58 @@ class OwnedNativeSession:
         return status
 
 
-def read_native(session) -> dict:
-    """Body/camera/three trails are ONE RPC; clock brackets are separate."""
-    before=session.read(PLAY,0x94)
-    raw=session.read(PLAYER,BODY_AND_TRAILS_BYTES)
-    after=session.read(PLAY,0x94)
-    if len(before) != 0x94 or len(after) != 0x94 or len(raw) != BODY_AND_TRAILS_BYTES:
-        raise debug.DebugError("Truncated native reference observation")
-    if before[:3] != after[:3] or before[0x90:0x94] != after[0x90:0x94]:
-        raise debug.UnstableObservation("Native clock/mode advanced across separate clock/pool RPCs")
-    body=raw[:0x158]
-    pools=raw[TRAILS-PLAYER:]
-    player=debug.Player.parse(body)
-    return dict(native_mode=after[0],native_phase=after[1],native_subphase=after[2],
-        stage=after[0x0C],section=after[0x0D],native_timer=struct.unpack_from("<I",after,0x90)[0],
-        campaign_character=after[0x38],form=after[0x5E],unlocks=after[0x5F],
-        body_form=body[0xE7],
-        player=player.__dict__,body_hex=body.hex(),marker=struct.unpack_from("<b",body,0x8C)[0],
-        animation_table=struct.unpack_from("<I",body,0x30)[0],
-        compression=struct.unpack_from("<I",body,0x38)[0],assembly=struct.unpack_from("<I",body,0x3C)[0],
-        page=struct.unpack_from("<H",body,0x40)[0],clut=struct.unpack_from("<H",body,0x42)[0],
-        frame=body[0x47],facing=body[0x15],
-        trails=[NativeEffect.parse(pools[i*0x60:(i+1)*0x60],"trails",i).__dict__ for i in range(3)],
-        observation_limit="Body and pools share one RPC; PLAY clock/mode are separately bracketed, not one atomic cross-RPC snapshot")
+def read_native(session, *, evidence=None, label="native snapshot") -> dict:
+    """One fixed owned RPC: ordinary RAM cannot advance during this handler.
+
+    The generic DebugClient.read stays bounded at64KiB. Only this exact mapping
+    uses the SDK's existing larger read_ram reply; no scatter/pause/new API.
+    """
+    receipt=dict(label=label,status="requested",address=hex(PLAYER),bytes=NATIVE_SNAPSHOT_BYTES,
+                 end_exclusive=hex(PLAYER+NATIVE_SNAPSHOT_BYTES),
+                 method="one emulation-thread read_ram handler; no cross-RPC clock pairing")
+    if evidence is not None:evidence.append(receipt)
+    try:
+        response=session.request("read_ram",addr=hex(PLAYER),len=NATIVE_SNAPSHOT_BYTES)
+        encoded=response.get("hex")
+        receipt.update(response_address=response.get("addr"),response_bytes=response.get("len"),
+                       response_hex_chars=len(encoded) if isinstance(encoded,str) else None)
+        if isinstance(encoded,str):
+            receipt.update(response_hex_sha256=_sha(encoded.encode("utf-8")),
+                           response_hex_prefix=encoded[:64],response_hex_suffix=encoded[-64:])
+        address=response.get("addr")
+        if (not isinstance(address,str) or not re.fullmatch(r"0x[0-9a-fA-F]{8}",address) or
+                int(address,16)!=PLAYER or type(response.get("len")) is not int or
+                response["len"]!=NATIVE_SNAPSHOT_BYTES):
+            raise debug.DebugError("Native snapshot response differs from the exact fixed RAM mapping")
+        if not isinstance(encoded,str) or len(encoded)!=NATIVE_SNAPSHOT_BYTES*2:
+            raise debug.DebugError("Truncated or oversized fixed native RAM snapshot")
+        try:window=bytes.fromhex(encoded)
+        except ValueError as error:raise debug.DebugError("Invalid native snapshot hexadecimal payload") from error
+        if len(window)!=NATIVE_SNAPSHOT_BYTES:
+            raise debug.DebugError("Native snapshot decoded payload has the wrong length")
+        raw=window[:BODY_AND_TRAILS_BYTES]
+        play=window[NATIVE_PLAY_OFFSET:]
+        receipt.update(source_sha256=_sha(window),play_hex=play.hex(),body_camera_trails_hex=raw.hex())
+        body=raw[:0x158]
+        pools=raw[TRAILS-PLAYER:]
+        player=debug.Player.parse(body)
+        row=dict(native_mode=play[0],native_phase=play[1],native_subphase=play[2],
+            stage=play[0x0C],section=play[0x0D],native_timer=struct.unpack_from("<I",play,0x90)[0],
+            campaign_character=play[0x38],form=play[0x5E],unlocks=play[0x5F],
+            body_form=body[0xE7],
+            player=player.__dict__,body_hex=body.hex(),marker=struct.unpack_from("<b",body,0x8C)[0],
+            animation_table=struct.unpack_from("<I",body,0x30)[0],
+            compression=struct.unpack_from("<I",body,0x38)[0],assembly=struct.unpack_from("<I",body,0x3C)[0],
+            page=struct.unpack_from("<H",body,0x40)[0],clut=struct.unpack_from("<H",body,0x42)[0],
+            frame=body[0x47],facing=body[0x15],
+            trails=[NativeEffect.parse(pools[i*0x60:(i+1)*0x60],"trails",i).__dict__ for i in range(3)],
+            native_snapshot=receipt,
+            observation_limit="One emulation-thread ordinary-RAM read; palette/composed captures remain separate RPCs")
+        receipt["status"]="accepted"
+        return row
+    except Exception as error:
+        receipt.update(status="rejected",error=str(error),error_type=type(error).__name__)
+        raise
 
 
 def native_zero(row: dict) -> bool:
@@ -377,7 +410,7 @@ def _menu_press(session,bits,predicate,*,timeout=2,receipt=None,ready=None):
                 record["status"]="native_transition_and_neutral_observed"
 
 
-def select_native_zero(session,sources,receipt: dict,*,allow_private_prerequisite=False,timeout=60):
+def select_native_zero(session,sources,receipt: dict,*,allow_private_prerequisite=False,timeout=60,snapshot_evidence=None):
     """Uses the original menu, never assigns form/character/cursor/table bytes."""
     if type(allow_private_prerequisite) is not bool or not math.isfinite(timeout) or not 0<timeout<=180:
         raise ValueError("Native selection requires an explicit bypass boolean and bounded deadline")
@@ -460,8 +493,7 @@ def select_native_zero(session,sources,receipt: dict,*,allow_private_prerequisit
         if actor.character!=1 or actor.state!=1 or actor.action!=2 or not actor.active:
             time.sleep(.02)
             continue
-        try:row=read_native(session)
-        except debug.UnstableObservation:continue
+        row=read_native(session,evidence=snapshot_evidence,label="selected idle Zero/P1")
         if native_zero(row) and row["player"]["action"]==2:
             receipt.update(status="native_zero_selected",after=row)
             return row
@@ -530,7 +562,7 @@ def run_native_zero_reference(process,port: int,candidate: Path,original_disc: P
     report.update(kind="offline_native_zero_p1_original_renderer_reference",status="failed_setup",
         expected_exe_sha256=expected_exe_sha256,source_exe_sha256=content.EXE_SHA256,
         source_archive_sha256=content.BIN_SHA256,original_disc=str(Path(original_disc).resolve()),sources_verified=False,
-        source_menu_sha256=MENU_SHA,source_zero_sha256=ZERO_SHA,observations=[],inputs=[],captures=[],
+        source_menu_sha256=MENU_SHA,source_zero_sha256=ZERO_SHA,observations=[],inputs=[],captures=[],native_snapshot_reads=[],
         source_native_renderer_order=[hex(PLAYER),hex(TRAILS+0xC0),hex(TRAILS+0x60),hex(TRAILS)],
         checks={},cleanup_errors=[],artwork_review="pending",ledger_status="unverified",
         prerequisite_bypass=False,ordinary_input_evidence_tainted=False,
@@ -538,7 +570,7 @@ def run_native_zero_reference(process,port: int,candidate: Path,original_disc: P
                      for module in (debug,content,preparation,baseline)},
         helper_sha256=preparation.sha256(Path(__file__)),
         limits=["Reference native game packet-renderer path inside the bound recompiled image; not original hardware qualification",
-                "Body/pools share oneRPC; separate PLAY, palette and composed-capture RPCs have explicit temporal limits",
+                "Body/pools/PLAY share one fixed ordinary-RAM RPC; palette/composed captures remain separate operations",
                 "Private prerequisite, if used, taints campaign/unlock/ordinary-input evidence",
                 "No opposite-roster co-op, X/P2 charge, R9, campaign or native-card pass"])
     session=None
@@ -556,11 +588,12 @@ def run_native_zero_reference(process,port: int,candidate: Path,original_disc: P
             raise debug.DebugError("Reference requires the fresh automated native P1 pad")
         report["selection"]={}
         selected=select_native_zero(session,sources,report["selection"],
-            allow_private_prerequisite=allow_private_prerequisite,timeout=min(60,timeout*5))
+            allow_private_prerequisite=allow_private_prerequisite,timeout=min(60,timeout*5),
+            snapshot_evidence=report["native_snapshot_reads"])
         report["observations"].append(dict(label="native_zero_idle",row=selected))
         _guard_code(session,sources,"zero",0x801EA000,((0x801EA000,0x801EA020),),report["selection"]["code_guards"])
         report["captures"].append(debug.capture_present(session,output/"zero-native-idle.png",request=session.request))
-        before=read_native(session)
+        before=read_native(session,evidence=report["native_snapshot_reads"],label="before dash")
         if not native_zero(before) or before["marker"] or any(t["visible"] or t["active"] for t in before["trails"]):
             raise debug.DebugError("Reference dash needs a clear native Zero/P1 marker/pool")
         active,released,capture_window=[],[],[]
@@ -579,8 +612,7 @@ def run_native_zero_reference(process,port: int,candidate: Path,original_disc: P
                     raise debug.DebugError("Composed capture exceeded the bounded native held-input window")
                 return session.request(command,**fields)
             while time.monotonic()<deadline:
-                try:now=read_native(session)
-                except debug.UnstableObservation:continue
+                now=read_native(session,evidence=report["native_snapshot_reads"],label="held native dash")
                 active.append(now)
                 delta=(now["native_timer"]-start)&0xFFFFFFFF
                 if delta>=0x80000000 or delta>hold_ticks+12:
@@ -589,7 +621,8 @@ def run_native_zero_reference(process,port: int,candidate: Path,original_disc: P
                     capture_window.append(now)
                     report["captures"].append(debug.capture_present(session,output/"zero-native-positive-dash.png",
                         timeout=min(timeout,8),request=capture_control))
-                    capture_window.append(read_native(session))
+                    capture_window.append(read_native(session,evidence=report["native_snapshot_reads"],
+                                                      label="after completed positive composed capture"))
                     report["native_trail_palettes"]=read_trail_palettes(session)
                 if delta>=hold_ticks and len(capture_window)==2:break
                 time.sleep(.005)
@@ -597,11 +630,10 @@ def run_native_zero_reference(process,port: int,candidate: Path,original_disc: P
         finally:
             session.request("clear_input",port=1)
         report["inputs"].append(dict(path="offline_native",seat=0,pressed=0,purpose="neutral in finally"))
-        release_start=read_native(session)
+        release_start=read_native(session,evidence=report["native_snapshot_reads"],label="neutral release start")
         deadline=time.monotonic()+timeout
         while time.monotonic()<deadline:
-            try:now=read_native(session)
-            except debug.UnstableObservation:continue
+            now=read_native(session,evidence=report["native_snapshot_reads"],label="native drain/retirement")
             released.append(now)
             delta=(now["native_timer"]-release_start["native_timer"])&0xFFFFFFFF
             if delta>=0x80000000 or delta>64:

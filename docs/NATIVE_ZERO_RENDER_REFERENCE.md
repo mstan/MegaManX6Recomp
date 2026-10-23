@@ -175,18 +175,65 @@ time and any independent release error. A response or release timeout remains
 RPC; PLAY mode and dialogue are separate reads, with mode brackets checked.
 This is not an atomic cross-RPC state or a complete input trace.
 
-This correction was source-audited and tested without launching a game.
-Native selection, dash rendering and artwork remain unverified until a fresh
-owned run succeeds; the old failed report is not reclassified.
+The menu correction was source-audited and tested without launching a game in
+its implementation lane. A subsequent owning-runner receipt reached native
+Zero selection, as described below. The old failed report is not reclassified.
 
 ## Dash, resources, captures and retirement
 
-The P1 body, intervening camera block and three complete trail records are
-read in **one `378h`-byte RPC** from `800970A0`. Native links, fields, CLUTs,
-phases and counters are parsed with the existing strict `NativeEffect` codec.
-The signed native producer is body`+8C`, not an input acknowledgment. PLAY
-clock/mode reads bracket that RPC and mismatches reject the observation;
-they remain separate operations, with the temporal limit recorded explicitly.
+The original three-RPC clock/pool/clock reader correctly rejected changing
+clocks, but ordinary progress between independently owned requests could make
+a coherent sample unavailable. The preserved owning-runner attempt
+`G:/Temp/Codex/psxrecomp/x6-parity/native-zero-reference-v12-e2e47e6-ready-neutral/qualification.json`
+has SHA256 `ec16a1587755696e06e6b44ba0e29785fb80de81a86e9cecca31fee2030f180d`.
+On the same exact `229ffec7...758d8e6` image it reached
+`selection.status=native_zero_selected`, passed its source/profile guards and
+completed an idle composed capture. It then remained `failed_setup` on an
+unstable three-RPC sample **before any dash input**. The owned process quit
+with ACK and exit0. That raw result remains unchanged; it is not an art/dash pass.
+
+The replacement uses the existing SDK's **one fixed contiguous ordinary-RAM
+request** from `800970A0` through exclusive `800CCF64`: `35EC4h`/220,868 bytes.
+The first `378h` bytes contain the P1 body, camera block and three complete
+trails. PLAY's exact `94h` bytes, including native clock/mode, start at offset
+`35E30h`. There is no pairing with an earlier/later clock and no retry which
+admits mismatched data.
+
+This path is supported in frozen SDK
+`199839335e32448c10a52f4c98967903a807e040`,
+`runtime/src/debug_server.c` blob `c35a59284c6148def1ee12fc94b20413f459026f`:
+`handle_read_ram` at line5283 permits up to full live RAM, allocates a bounded
+heap reply and reads it in one handler. `process_command` at line16289 runs
+that handler at an emulation-thread `debug_server_poll` safe point.
+The same file's `debug_server_send_line` grows its response buffer up to64MiB,
+so there is no intervening64KiB transport truncation. All bytes
+in this mapping are ordinary 2MiB RAM; no MMIO, guest call, guest pause command
+or fixture write is involved. Thus guest execution cannot advance between
+the native fields within this handler. This is a native RAM observation at
+that safe point, not a full core/peripheral or savestate snapshot.
+
+The exact 441,736 hex characters plus the server's small envelope fit the
+existing 1MiB client response cap. Generic `DebugClient.read` retains its64KiB
+limit. Only `read_native` issues this fixed larger mapping, through the same
+PID/listener-checked `OwnedNativeSession.request`. It strictly verifies reply
+address, integer length, exact hex size/decoding and native record links. A
+clamped, truncated, malformed, incorrectly mapped or unavailable reply fails
+closed; it does not fall back to split reads, pause execution or weaken native
+clock equality. Each observation still requires native Zero/living-body,
+resource, phase, held-clock/capture and finite-retirement checks.
+
+Every attempted read is appended to `native_snapshot_reads` before its RPC,
+with a context label and exact mapping. Accepted records retain the PLAY and
+full `378h` body/camera/trails slices plus a full response-payload SHA256;
+unparsed gap bytes are discarded. Rejected requests retain their status/error,
+available address/length/hex-size and encoded-response hash/prefix/suffix.
+Transport and invalid-link failures are retained too. The payload hash is
+diagnostic evidence, not a framework CRC or simulation digest. Native links,
+fields, CLUTs, phases and counters still use the strict `NativeEffect` codec;
+the signed native producer is body`+8C`, not an input acknowledgment.
+
+The single-RPC fix was tested without a native launch or title build. A fresh
+owned run must still qualify dash/artwork behavior; no old result is promoted.
 
 The case captures a completed composed idle image, then holds original P1
 Right+Circle+Cross (`6020h` active-high; NativePad active-low`9FDFh`) with
@@ -240,7 +287,7 @@ python -m unittest test_mmx6_native_zero_reference
 ```
 
 Set `MMX6_CONTENT_DISC` to the explicit legitimate raw disc path to include
-the original-source guard test. Twenty-five fixtures cover real-state setup and
+the original-source guard test. Twenty-seven fixtures cover real-state setup and
 drift, source cards/non-pristine profiles, listener/image/online rejection,
 source guards, exact record reads/links, original unit navigation and bypass
 boundaries, held input cleanup, source palette framing, positive capture
@@ -250,5 +297,9 @@ input after a clear ACK, mode transitions without consumed input, phase11
 initialization/text states, pending selector animation, truncated/incoherent samples and independent
 response/cleanup failures. The optional source check includes every added
 live guard extent from the unchanged full-identity original bundle.
+Snapshot fixtures require clock/body/pools from one exact RPC, reject wrong
+addresses/counts/lengths/encoding and invalid links, retain failed requests,
+and refuse unsupported atomic mapping before any dash input. Split-read
+fallback is forbidden. Synthetic responses establish protocol behavior only.
 The modeled native responses are test contracts, not original-game execution
 or artwork evidence. No SDK/plugin/profile/ledger/CMake files are changed.

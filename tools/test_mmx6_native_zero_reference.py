@@ -10,7 +10,7 @@ import unittest
 from unittest.mock import Mock,patch
 
 import mmx6_native_zero_reference as reference
-from coop_debug import DebugError,UnstableObservation
+from coop_debug import DebugError
 
 
 def body_and_trails(*,marker=0,visible=False,phase=0):
@@ -36,9 +36,16 @@ def play(timer=10):
     return bytes(raw)
 
 
+def native_response(timer=10, *, raw=None, **kwargs):
+    window=bytearray(reference.NATIVE_SNAPSHOT_BYTES)
+    window[:reference.BODY_AND_TRAILS_BYTES]=body_and_trails(**kwargs) if raw is None else raw
+    window[reference.NATIVE_PLAY_OFFSET:]=play(timer)
+    return dict(addr=hex(reference.PLAYER),len=reference.NATIVE_SNAPSHOT_BYTES,hex=window.hex())
+
+
 def sample(timer=10,**kwargs):
     session=Mock()
-    session.read.side_effect=[play(timer),body_and_trails(**kwargs),play(timer)]
+    session.request.return_value=native_response(timer,**kwargs)
     return reference.read_native(session)
 
 
@@ -157,26 +164,54 @@ class MenuPulseTests(unittest.TestCase):
 
 
 class SourceAndObservationTests(unittest.TestCase):
-    def test_native_body_and_all_three_full_trails_share_one_exact_rpc(self):
+    def test_native_clock_body_and_all_three_full_trails_share_one_exact_rpc(self):
         session=Mock()
         raw=body_and_trails(marker=1,visible=True)
-        session.read.side_effect=[play(),raw,play()]
-        row=reference.read_native(session)
+        response=native_response(raw=raw);session.request.return_value=response;evidence=[]
+        row=reference.read_native(session,evidence=evidence,label="one coherent snapshot")
         self.assertTrue(reference.visible_dash(row))
-        self.assertEqual(session.read.call_args_list[1].args,(reference.PLAYER,0x378))
+        self.assertEqual(session.request.call_args.args,("read_ram",))
+        self.assertEqual(session.request.call_args.kwargs,dict(addr="0x800970a0",len=0x35EC4))
         self.assertEqual(row["trails"][2]["parent"],reference.TRAILS+0x60)
         self.assertEqual(row["trails"][0]["raw_hex"],raw[0x258:0x2B8].hex())
-        self.assertEqual(len(session.read.call_args_list),3)  # Two labeled clock brackets, one pool read.
+        self.assertEqual(session.request.call_count,1);session.read.assert_not_called()
+        self.assertEqual(row["native_timer"],10)
+        self.assertEqual(evidence[0]["status"],"accepted")
+        self.assertEqual(evidence[0]["play_hex"],play().hex())
+        self.assertEqual(evidence[0]["body_camera_trails_hex"],raw.hex())
+        self.assertEqual(evidence[0]["source_sha256"],reference._sha(bytes.fromhex(response["hex"])))
+        self.assertLess(len(json.dumps(response).encode())+256,reference.debug.DebugClient(1234).max_response_bytes)
 
-    def test_changed_cross_rpc_clock_or_mode_truncation_and_wrong_link_reject(self):
-        for after in (play(11),bytes((4,))+play()[1:]):
-            session=Mock();session.read.side_effect=[play(),body_and_trails(),after]
-            with self.assertRaises(UnstableObservation):reference.read_native(session)
-        session=Mock();session.read.side_effect=[play(),body_and_trails()[:-1],play()]
+    def test_truncated_oversized_wrong_mapping_and_malformed_snapshot_refuse(self):
+        response=native_response()
+        for change in (dict(addr="0x800970a1"),dict(addr=reference.PLAYER),dict(len=True),dict(len=0x378),
+                       dict(hex=response["hex"][:-2]),dict(hex=response["hex"]+"00"),
+                       dict(hex="zz"+response["hex"][2:]),dict(hex="  "+response["hex"][2:])):
+            session=Mock();session.request.return_value=dict(response,**change);evidence=[]
+            with self.subTest(change=list(change)),self.assertRaises(DebugError):
+                reference.read_native(session,evidence=evidence)
+            self.assertEqual(session.request.call_count,1);session.read.assert_not_called()
+            self.assertEqual(evidence[0]["status"],"rejected")
+            self.assertIn("error",evidence[0])
+        # A rejected prior split response cannot fall back to a successful
+        # legacy clock/pool/clock pairing.
+        session=Mock();session.request.return_value=dict(addr=hex(reference.PLAYER),len=0x378,hex=body_and_trails().hex())
+        session.read.side_effect=[play(),body_and_trails(),play(11)]
         with self.assertRaises(DebugError):reference.read_native(session)
+        session.read.assert_not_called()
+
+    def test_transport_and_invalid_native_link_are_retained_without_retry_or_mutation(self):
+        session=Mock();session.request.side_effect=DebugError("owned listener lost");evidence=[]
+        with self.assertRaisesRegex(DebugError,"listener"):reference.read_native(session,evidence=evidence)
+        self.assertEqual(evidence[0]["status"],"rejected")
+        self.assertEqual(evidence[0]["error"],"owned listener lost")
+        self.assertEqual(session.request.call_count,1)
         raw=bytearray(body_and_trails(marker=1,visible=True));raw[0x258+0x50]^=1
-        session=Mock();session.read.side_effect=[play(),bytes(raw),play()]
-        with self.assertRaisesRegex(DebugError,"parent"):reference.read_native(session)
+        session=Mock();session.request.return_value=native_response(raw=bytes(raw));evidence=[]
+        with self.assertRaisesRegex(DebugError,"parent"):reference.read_native(session,evidence=evidence)
+        self.assertEqual(evidence[0]["status"],"rejected")
+        self.assertEqual(evidence[0]["body_camera_trails_hex"],bytes(raw).hex())
+        self.assertEqual(session.request.call_count,1)
 
     def test_source_guard_checks_full_live_window_and_retains_mismatch(self):
         session=Mock();session.read.return_value=b"different"
@@ -332,6 +367,10 @@ class OwnershipAndSelectionTests(unittest.TestCase):
                 raise AssertionError((address,size))
             def request(self,command,**fields):
                 self.commands.append((command,fields))
+                if command=="read_ram":
+                    if fields!=dict(addr=hex(reference.PLAYER),len=reference.NATIVE_SNAPSHOT_BYTES):
+                        raise AssertionError("Unexpected native snapshot mapping")
+                    return native_response()
                 if command=="write_ram":
                     address,value=int(fields["addr"],0),int(fields["val"],0)
                     if address==reference.PLAY+0x5F:self.flags=value
@@ -422,6 +461,34 @@ class OwnershipAndSelectionTests(unittest.TestCase):
             process.terminate.assert_not_called();process.kill.assert_not_called()
             with self.assertRaises(FileExistsError):
                 reference.run_native_zero_reference(process,1234,Path(directory),Path("original.bin"),"0"*64,{})
+
+    def test_unavailable_atomic_mapping_retains_rejection_before_any_dash_input(self):
+        with tempfile.TemporaryDirectory(dir=os.environ["TEMP"],prefix="x6-native-reference-") as directory:
+            session=Mock(profile={},image_path=Path(directory)/"mmx6-runtime.exe",image_sha256="a"*64)
+            session.offline.return_value=dict(active=0)
+            def request(command,**fields):
+                if command=="pad_status":return dict(slot0=dict(connected=True))
+                if command=="read_ram":return dict(addr=hex(reference.PLAYER),len=0x378,hex=body_and_trails().hex())
+                return dict(ok=True)
+            session.request.side_effect=request
+            def selected(_session,_sources,receipt,**_):
+                receipt.update(status="native_zero_selected",code_guards=[])
+                return sample()
+            process=Mock(pid=123);report={}
+            with patch.object(reference,"load_sources",return_value={}),\
+                 patch.object(reference,"OwnedNativeSession",return_value=session),\
+                 patch.object(reference,"select_native_zero",side_effect=selected),patch.object(reference,"_guard_code"),\
+                 patch.object(reference.debug,"capture_present",return_value=dict(surface="fixture_only")):
+                result=reference.run_native_zero_reference(process,1234,Path(directory),Path("source.bin"),"a"*64,report)
+            saved=json.loads((Path(directory)/"native-zero-reference/reference.json").read_text())
+            self.assertEqual(result["status"],"failed_setup")
+            self.assertEqual(saved["selection"]["status"],"native_zero_selected")
+            self.assertEqual(saved["native_snapshot_reads"][0]["label"],"before dash")
+            self.assertEqual(saved["native_snapshot_reads"][0]["status"],"rejected")
+            self.assertIn("exact fixed RAM mapping",saved["error"])
+            self.assertFalse(any(call.args==("press",) for call in session.request.call_args_list))
+            self.assertEqual(session.request.call_args_list[-1].args,("clear_input",))
+            process.terminate.assert_not_called();process.kill.assert_not_called()
 
     def test_full_case_keeps_completed_artwork_pending_and_uses_held_input_then_neutral(self):
         with tempfile.TemporaryDirectory(dir=os.environ["TEMP"],prefix="x6-native-reference-") as directory:
