@@ -75,7 +75,7 @@ def candidate_environment(candidate: Path, preparation: dict) -> dict:
     return environment
 
 
-def run(candidate: Path, port: int, timeout: float, legacy: bool) -> dict:
+def run(candidate: Path, port: int, timeout: float, legacy: bool, *, exercise=None) -> dict:
     candidate = candidate.resolve(strict=True)
     preparation = json.loads((candidate / "preparation.json").read_text())
     environment = candidate_environment(candidate, preparation)
@@ -171,6 +171,10 @@ def run(candidate: Path, port: int, timeout: float, legacy: bool) -> dict:
             if not (output / "intro.png").is_file() or (output / "intro.png").stat().st_size == 0:
                 raise DebugError("Screenshot command did not produce an artifact")
             result["intro_image_sha256"] = sha256(output / "intro.png")
+            if exercise is not None:
+                result["exercise"] = {}
+                exercise(control, client, output, result["exercise"])
+                result["checks"].update(result["exercise"].get("checks", {}))
             result["status"] = "passed" if all(result["checks"].values()) else "failed"
     except (DebugError, OSError, ValueError) as error:
         result["error"] = str(error)
