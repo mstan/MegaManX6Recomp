@@ -1,0 +1,131 @@
+{
+  "schema": 1,
+  "kind": "reviewed_same_machine_restart_and_guest_quit_refusal",
+  "reviewed_at_utc": "2026-10-23T17:19:39.646402+00:00",
+  "candidate": {
+    "candidate_source": "c5fadead5296cb4bc53a5c283b04e5814e025f09",
+    "exe_sha256": "39c154966f9c12f939a8305551a910de9dbb97878dcf05c5935bed03c7ca7036",
+    "declared_manifest_sha256": "ae232408787bf0c3564bf8fd3aae85cc6d3977370fd059198b391345ebb25797"
+  },
+  "compilation_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v15-c5fadea\\candidate.json",
+    "sha256": "001b90d2acf18e7f934ec6c0644a6e673dadfeb37769b06086c64baf5f5f8a81"
+  },
+  "prior_pair": {
+    "path": "docs\\evidence\\mmx6-native-quit\\manifest-bound-c5fadea-live-effects-reviewed.json",
+    "sha256": "1bd1c21d628d7a6f5688dc3eaa666006040ee21d856c9ce454de6e588b4902c6"
+  },
+  "report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v15-c5fadea-pair-guest\\qualification.json",
+    "sha256": "7817f4b98cde13555081210bdd9eee307baaf44acb11376c8d4e3730983f48ae"
+  },
+  "checks": {
+    "enough_samples": true,
+    "native_pause_owned": true,
+    "native_menu_input_state": true,
+    "world_timer_frozen": true,
+    "diagnostic_publications_advanced": true,
+    "cursor_unchanged": true,
+    "network_active_without_desync": true,
+    "transport_ticks_advanced": true,
+    "resolved_ticks_advanced": true,
+    "guest_select_cannot_enter_native_quit": true,
+    "personal_resources_preserved": true,
+    "native_roster_preserved": true,
+    "original_world_resumed": true,
+    "genuine_independent_guest_input_after_cancel": true,
+    "resolved_core_mod_crc_comparison_completed": true
+  },
+  "outer_checks": {
+    "native_quit_automated_case_completed": true,
+    "declared_build_manifest_bound_to_staged_images": true,
+    "host_profile_settled_before_guest": true,
+    "p2_right_reaches_both_peers": true,
+    "p2_right_preserves_p1_x": true,
+    "p1_jump_reaches_both_peers": true,
+    "p1_jump_preserves_p2_y": true,
+    "both_alive_healthy": true,
+    "mailbox_unused": true,
+    "default_resident_loader_committed": true,
+    "native_quit_private_cards_unchanged": true
+  },
+  "session": 2026102349,
+  "selected_profile_sha256": "061292fc07a06c211fcaa7a49b57d8a5b7099300bf8e88bd8b918d34543bc309",
+  "prior_selected_profile_sha256": "6a65e9cca916f8b474a8d6748920dd676b570407b3a461d65154a0ded9c47725",
+  "settlements": [
+    {
+      "profile": "mmx6.win64-clang22.loopback",
+      "revision": 2,
+      "selected_sha256": "061292fc07a06c211fcaa7a49b57d8a5b7099300bf8e88bd8b918d34543bc309",
+      "cycles": 0,
+      "sim_tick": 0,
+      "before_enter_guest": 1
+    },
+    {
+      "profile": "mmx6.win64-clang22.loopback",
+      "revision": 2,
+      "selected_sha256": "061292fc07a06c211fcaa7a49b57d8a5b7099300bf8e88bd8b918d34543bc309",
+      "cycles": 0,
+      "sim_tick": 0,
+      "before_enter_guest": 1
+    }
+  ],
+  "resolved_core_mod_samples": [
+    {
+      "label": "initial idle",
+      "count": 8
+    },
+    {
+      "label": "P2 right then release",
+      "count": 7
+    },
+    {
+      "label": "P1 jump then settle",
+      "count": 8
+    },
+    {
+      "label": "Native Quit guest_authority resolved core/mod comparison",
+      "count": 8
+    }
+  ],
+  "processes": [
+    {
+      "owned_pid": 49728,
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    },
+    {
+      "owned_pid": 53156,
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    }
+  ],
+  "captures": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v15-c5fadea-pair-guest\\guest-authority\\peer-0-guest-owned-pause-after-select-refusal.png",
+      "sha256": "6470760df1f5cb91f8663ce766f0edd85a321a661c41e2acacb57c5ff1010284"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v15-c5fadea-pair-guest\\guest-authority\\peer-1-guest-owned-pause-after-select-refusal.png",
+      "sha256": "6470760df1f5cb91f8663ce766f0edd85a321a661c41e2acacb57c5ff1010284"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v15-c5fadea-pair-guest\\guest-authority\\peer-0-native-resumed-after-quit-cancel-or-refusal.png",
+      "sha256": "6f3822100172c6b0c13c465afea16c909fc3451db8e850bf8c4cbf92f95ebcf3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v15-c5fadea-pair-guest\\guest-authority\\peer-1-native-resumed-after-quit-cancel-or-refusal.png",
+      "sha256": "cf7d8a731f18235383d35d1953922d6397ab79214d36a9dd4ef259e7bb2c86cb"
+    }
+  ],
+  "visual_review": "Root independently inspected all4 composed captures: each guest-owned native Zero/Z-SABER pause remains after refused Select, and original terrain plus separate X/Zero bodies/meters return after native cancel.",
+  "limits": [
+    "Exact preservedc5fadea/executable39c15496 and SDK6212, intro/default loader and X/P1+Zero/P2 only.",
+    "Native P2 dash with three trails is the live-effect class tested; other effect families/rosters/campaign scenes remain unverified.",
+    "Same physical machine numeric127 UDP delay3 only; no rollback/network user states or cross-machine/OS/CPU qualification.",
+    "Portal ownership has source/fixture checks; no actual portal entry/arrival pass is implied by intro enrollment.",
+    "Final Quit/acquired-progress/current-data reentry remain separate R15 obligations.",
+    "Raw artwork-pending reports remain unchanged; root reviewed each composed image independently.",
+    "Same session and ports on a fresh owned pair produce a different confirmed selection SHA. This is bounded restart evidence, not a complete campaign/session-lifecycle pass."
+  ]
+}

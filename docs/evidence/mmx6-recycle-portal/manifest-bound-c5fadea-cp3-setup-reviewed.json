@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "kind": "reviewed_native_CP3_setup_gap_before_portal_route",
+  "reviewed_at_utc": "2026-10-23T17:19:39.651911+00:00",
+  "candidate": {
+    "candidate_source": "c5fadead5296cb4bc53a5c283b04e5814e025f09",
+    "exe_sha256": "39c154966f9c12f939a8305551a910de9dbb97878dcf05c5935bed03c7ca7036",
+    "declared_manifest_sha256": "ae232408787bf0c3564bf8fd3aae85cc6d3977370fd059198b391345ebb25797"
+  },
+  "compilation_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v15-c5fadea\\candidate.json",
+    "sha256": "001b90d2acf18e7f934ec6c0644a6e673dadfeb37769b06086c64baf5f5f8a81"
+  },
+  "report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-cp3-v15-c5fadea-observation\\qualification.json",
+    "sha256": "e858a4d09a091417195cc874fe8adab8167656886ffdd80e402211d321b9c58d"
+  },
+  "probe_source": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-cp3-v15-c5fadea-observation\\portal-observer-probe-source.py",
+    "sha256": "8cebff32c4de10f08b4ee661619ad57d7247ae3ab18fbd564392da3401aa93bb"
+  },
+  "status": "unverified_prerequisite_setup_failed_no_route_attempt",
+  "owned_pid": 13768,
+  "shutdown": "graceful_owned_debug",
+  "exit_code": 0,
+  "initializer_checks": {
+    "requested_tuple": true,
+    "original_initializer_observed_once": true,
+    "inventoried_record": true,
+    "fixture_bypass_retained": true,
+    "native_gameplay": true
+  },
+  "final_fixture_receipt": {
+    "generation": 1,
+    "state": 3,
+    "reason": 0,
+    "stage": 4,
+    "section": 0,
+    "checkpoint": 3,
+    "nonce": 104963456,
+    "initializer_entries": 1,
+    "record": "80072468",
+    "tainted": 1
+  },
+  "neutral_probe_count": 53,
+  "first_position_fixed16": [
+    113246208,
+    95420416
+  ],
+  "last_position_fixed16": [
+    113246208,
+    134217728
+  ],
+  "body_box": "80073D50",
+  "shared_entry_lock": 1,
+  "native_timer": 0,
+  "live_layout": {
+    "address": "80097438",
+    "bytes": 528,
+    "sha256": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+    "matches_initial_original": true,
+    "changed_indices": []
+  },
+  "source_record_hex": "011c011010063006",
+  "source_windows": [
+    {
+      "address": 2148449664,
+      "size": 3100,
+      "sha256": "649b1982448e991220f590c33c2e63ea0851750ec7a6dd78038f06604738365f",
+      "matches": true
+    },
+    {
+      "address": 2148481208,
+      "size": 124,
+      "sha256": "3ddf40bbf8a26b1afbb70e52e7f8630bfbe88bdee0c7ea3a00df5ea5acf5601c",
+      "matches": true
+    },
+    {
+      "address": 2148440164,
+      "size": 20,
+      "sha256": "53b05d275b9e87395fd528643ec36cb8907090872218b132cd804162b4ee7f43",
+      "matches": true
+    }
+  ],
+  "capture": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-cp3-v15-c5fadea-observation\\baseline\\portal-CP3-observation.png",
+    "sha256": "251ecb9330fb664611be7ee9d03141edde8d80e111943a949158bb41eca14ed9"
+  },
+  "visual_review": "Root inspected composed output: tall left terrain and a mostly black right region with native X HUD; no qualified living body viewport/portal transition is shown.",
+  "bypasses": [
+    "Existing private offline command8 stage4/sec0/CP3 initialization; ordinary input proof is tainted."
+  ],
+  "limits": [
+    "No custom positioning, route input, success/ground/action/lock/timer/HP writes or source card.",
+    "Original initializer completed once; original readiness did not complete. Resident X fell from authoredY1456 to source map-height2048 while native action0 waited for landing. Root stopped without attempting a route.",
+    "All528 layout bytes match initial source; source windows match. Live record011c011010063006 is rejected by the current guard, and the original admission writer is being pinned before correction.",
+    "This is a setup gap; no co-op scene/collision/portal/arrival/artwork/campaign failure or pass is inferred."
+  ]
+}

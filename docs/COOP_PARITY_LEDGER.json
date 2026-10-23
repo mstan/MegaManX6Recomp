@@ -1368,11 +1368,13 @@
       "x6": {
         "workstream": "camera",
         "mapping_state": "candidate_native_scenario",
-        "analogue": "Nightmare alternate-route camera admission",
+        "analogue": "Recycle Lab native alternate-route portal ownership",
         "bounded_check": "Enter a genuine alternate-route trigger with the partner first while the primary remains outside; verify room limits, collision, controls and native return.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:shared_camera",
-          "src/mods/mmx6_coop_plugin.c:camera_target"
+          "src/mods/mmx6_coop_plugin.c:camera_target",
+          "src/mods/mmx6_coop_recycle_portal.inc:recycle_portal_contact",
+          "tools/audit_mmx6_recycle_terrain.py:observe_source_preflight"
         ],
         "status": "unverified",
         "required_modes": [
@@ -1383,8 +1385,51 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "c5fadead5296cb4bc53a5c283b04e5814e025f09",
+            "build_identity": {
+              "exe_sha256": "39c154966f9c12f939a8305551a910de9dbb97878dcf05c5935bed03c7ca7036",
+              "declared_manifest_sha256": "ae232408787bf0c3564bf8fd3aae85cc6d3977370fd059198b391345ebb25797",
+              "compiled_source_commit": "c5fadead5296cb4bc53a5c283b04e5814e025f09",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "loader": "default Seamless Loading",
+              "input": "neutral after disclosed offline CP3 setup",
+              "rollback": false
+            },
+            "action": "Original stage4/sec0/CP3 initializer plus neutral body/live-map/portal preflight; no custom positioning or route input.",
+            "outcome": "Initializer completed once but landing/readiness failed; root stopped at source map-height2048. Live initial layout and code windows match; native admission-mutated portal record exposes an overly strict current guard.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-cp3-v15-c5fadea-observation\\qualification.json",
+                "sha256": "e858a4d09a091417195cc874fe8adab8167656886ffdd80e402211d321b9c58d"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v15-c5fadea\\candidate.json",
+                "sha256": "001b90d2acf18e7f934ec6c0644a6e673dadfeb37769b06086c64baf5f5f8a81"
+              },
+              {
+                "path": "docs\\evidence\\mmx6-recycle-portal\\manifest-bound-c5fadea-cp3-setup-reviewed.json",
+                "sha256": "49a582c4fdde6f0ec5f4831d8ebdb966095bf662941360a61ea3045151f71f2a"
+              }
+            ],
+            "limits": [
+              "No custom positioning, route input, success/ground/action/lock/timer/HP writes or source card.",
+              "Original initializer completed once; original readiness did not complete. Resident X fell from authoredY1456 to source map-height2048 while native action0 waited for landing. Root stopped without attempting a route.",
+              "All528 layout bytes match initial source; source windows match. Live record011c011010063006 is rejected by the current guard, and the original admission writer is being pinned before correction.",
+              "This is a setup gap; no co-op scene/collision/portal/arrival/artwork/campaign failure or pass is inferred."
+            ],
+            "bypasses": [
+              "Existing private offline command8 stage4/sec0/CP3 initialization; ordinary input proof is tainted."
+            ]
+          }
+        ],
+        "limitations": "Source and merged fixtures identify Recycle Lab portal ownership. Actual c5fadea CP3 setup completed the original initializer but could not land/release entry lock; route/contact/transition/arrival and both modes remain unverified. Live exact native record variant requires a source-bound guard correction."
       }
     },
     {
@@ -1550,6 +1595,49 @@
               "Both pairs use actual same-machine numeric127 UDP, delay3 and disabled rollback/network user states; no cross-machine/OS/CPU qualification.",
               "Independent captures do not establish identical render frames between peers.",
               "Raw artwork-pending reports remain unchanged; visual review is recorded here."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "c5fadead5296cb4bc53a5c283b04e5814e025f09",
+            "build_identity": {
+              "exe_sha256": "39c154966f9c12f939a8305551a910de9dbb97878dcf05c5935bed03c7ca7036",
+              "declared_manifest_sha256": "ae232408787bf0c3564bf8fd3aae85cc6d3977370fd059198b391345ebb25797",
+              "compiled_source_commit": "c5fadead5296cb4bc53a5c283b04e5814e025f09",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "loader": "default Seamless Loading",
+              "input": "published host via same-machine delay3 numeric127 UDP",
+              "rollback": false
+            },
+            "action": "Fresh same-session owned pair: P2 opens native menu, Select is refused, P1 cannot resume, P2 cancels and independently moves.",
+            "outcome": "All15 bounded guest-authority/native menu checks and31common resolved core/modsamples pass; all4 composed captures reviewed. Final Quit/current-data/acquired-progress/reentry remain unverified.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v15-c5fadea-pair-guest\\qualification.json",
+                "sha256": "7817f4b98cde13555081210bdd9eee307baaf44acb11376c8d4e3730983f48ae"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v15-c5fadea\\candidate.json",
+                "sha256": "001b90d2acf18e7f934ec6c0644a6e673dadfeb37769b06086c64baf5f5f8a81"
+              },
+              {
+                "path": "docs\\evidence\\mmx6-native-quit\\manifest-bound-c5fadea-restart-guest-reviewed.json",
+                "sha256": "8df1bbbd750dc1f2a5a2a179da2c935e001ec9783652d1588ae09d2c28948024"
+              }
+            ],
+            "limits": [
+              "Exact preservedc5fadea/executable39c15496 and SDK6212, intro/default loader and X/P1+Zero/P2 only.",
+              "Native P2 dash with three trails is the live-effect class tested; other effect families/rosters/campaign scenes remain unverified.",
+              "Same physical machine numeric127 UDP delay3 only; no rollback/network user states or cross-machine/OS/CPU qualification.",
+              "Portal ownership has source/fixture checks; no actual portal entry/arrival pass is implied by intro enrollment.",
+              "Final Quit/acquired-progress/current-data reentry remain separate R15 obligations.",
+              "Raw artwork-pending reports remain unchanged; root reviewed each composed image independently.",
+              "Same session and ports on a fresh owned pair produce a different confirmed selection SHA. This is bounded restart evidence, not a complete campaign/session-lifecycle pass."
             ],
             "bypasses": []
           }
