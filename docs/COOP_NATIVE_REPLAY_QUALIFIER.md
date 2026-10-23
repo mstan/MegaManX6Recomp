@@ -9,7 +9,12 @@ gameplay/outcome or complete machine replay qualification.
 The caller supplies explicit frozen executable and compiled-manifest SHA256
 values. The runner stages a fresh candidate using the existing playtest
 preparer, validates the actual manifest JSON/header and its compiled SHA bytes
-in the build/staged executables, and keeps that evidence. It copies no source
+in the build/staged executables, and keeps that evidence. The staged executable
+must independently match the explicit expected full-image SHA after preparation.
+`run_capture(..., expected_exe_sha256=...)` rechecks those actual bytes immediately
+before its Popen call; a preparation receipt or embedded manifest string cannot
+substitute for this check. A changed image fails before launch and retains the
+partial receipt. It copies no source
 cards. Generated settings configure both slots as keyboard devices in digital
 mode **before guest0** (`config_loader.cpp` controller settings keys). The exact
 resolved startup bundle and exported initial cards are later required by the
@@ -30,7 +35,12 @@ slots must already report connected and digital. The route advances original
 frontend Start/Cross inputs, reaches two idle living heroes, then holds P2 Right
 and P1 Jump through native world-clock windows. Releases use a neutral host set
 and preserve device topology. The trace must contain actual native P1 Cross
-words and extra P2 Right reads. It never sends debug press/direct SIO, pad-type
+words and extra P2 Right reads. The receipt field
+`actual_p1_cross_word_anywhere` means Cross occurred somewhere in the complete
+stream, which includes frontend input. It does not associate that N with the
+later gameplay jump window or establish a jump outcome. Native route observations
+and their limits remain separate evidence; R26/outcomes remain unverified.
+It never sends debug press/direct SIO, pad-type
 overrides, a scripted input route, guest RAM writes or a title mailbox. This
 does not qualify physical controllers or reproduce raw serial publication.
 Non-neutral frontend pulses wait until the actual recording worker has emitted
@@ -113,12 +123,16 @@ Pure protocol/cleanup tests:
 & 'C:/Users/Matthew/.pyenv/pyenv-win/versions/3.12.5/python.exe' -m unittest discover -s tools -p test_prepare_mmx6_input_replay.py
 ```
 
-All seventeen new tests and eight existing preparation tests passed. Tests mock
+All twenty runner tests and eight existing preparation tests passed. Tests mock
 Popen/sockets; their synthetic executable bytes are never executed. They cover
 capability/topology/override rejection, per-seat held/neutral routing, original
 failure preservation during release, listener ownership, exact capture inputs,
 stale/malformed/changed result/command/environment refusal, missing result,
-native failure/deadline cleanup and failure-report preservation. The initial
+native failure/deadline cleanup and failure-report preservation. The exact-image
+regressions refuse changed staged bytes before capture, refuse a change after
+candidate-environment validation immediately before Popen, and retain the
+positive exact-image guard/forwarding path. A trace containing only an unbound
+Cross word cannot be mislabeled as a proven jump. The initial
 success-fixture error exhausted its finite mock poll list; using the real
 process contract of repeated stable exit-code reads corrected that fixture
 without changing runtime behavior or weakening assertions.

@@ -152,6 +152,9 @@ class ArtifactTests(unittest.TestCase):
         self.assertTrue(runner.native_capture_started(candidate))
         found,summary=runner.inspect_recording(candidate,receipt["image_sha256"],"2"*64)
         self.assertEqual(found,recording);self.assertEqual(summary["events"],2)
+        # This fixture has one Cross N, with no association to a gameplay jump.
+        self.assertTrue(summary["actual_p1_cross_word_anywhere"])
+        self.assertNotIn("actual_p1_jump_word",summary)
         for image,manifest in (("f"*64,"2"*64),(receipt["image_sha256"],"f"*64)):
             with self.assertRaises(ValueError):runner.inspect_recording(candidate,image,manifest)
         rows=[json.loads(line) for line in (recording / "inputs.jsonl").read_bytes().splitlines()]
@@ -246,6 +249,8 @@ class ArtifactTests(unittest.TestCase):
 
     def test_capture_reuses_owned_lifecycle_and_never_sends_direct_sio(self):
         candidate=self.root / "record";candidate.mkdir()
+        (candidate / "mmx6-runtime.exe").write_bytes(b"exact fixture image; never executed")
+        image_sha=runner.preparation.sha256(candidate / "mmx6-runtime.exe")
         (candidate / "preparation.json").write_text('{}')
         environment=dict(TEMP=str(candidate / "temp"))
         (candidate / "environment.json").write_text(json.dumps(environment))
@@ -263,13 +268,74 @@ class ArtifactTests(unittest.TestCase):
                 patch.object(runner.baseline,"owns_listener",return_value=True),patch.object(runner.subprocess,"Popen",return_value=process) as launch, \
                 patch.object(runner.debug.DebugClient,"request",side_effect=request),patch.object(runner.HostRoute,"sample",return_value=row), \
                 patch.object(runner.HostRoute,"exercise"),patch.object(runner,"native_capture_started",return_value=True):
-            runner.run_capture(candidate,12345,1,1,report)
+            runner.run_capture(candidate,12345,1,1,report,expected_exe_sha256=image_sha)
         self.assertEqual(report["cleanup"],dict(shutdown="graceful_owned_debug",exit_code=0))
         self.assertEqual(report["status"],"route_completed")
         self.assertEqual(set(commands),{"set_input","pad_status","read_ram","quit"})
         self.assertIn("--seal-interpreted-overlays",launch.call_args.args[0]);self.assertIn("--hidden-window",launch.call_args.args[0])
         self.assertEqual(launch.call_args.kwargs["env"]["SDL_AUDIODRIVER"],"dummy")
+        self.assertEqual(report["expected_exe_sha256"],image_sha)
+        self.assertEqual(report["prelaunch_exe_sha256"],image_sha)
         self.assertEqual(held,[0,0]);process.terminate.assert_not_called()
+
+    def test_changed_capture_image_after_environment_validation_refuses_before_popen(self):
+        candidate=self.root / "record";candidate.mkdir()
+        image=candidate / "mmx6-runtime.exe";image.write_bytes(b"expected fixture image")
+        expected_sha=runner.preparation.sha256(image)
+        (candidate / "preparation.json").write_text('{}')
+        environment=dict(TEMP=str(candidate / "temp"))
+        (candidate / "environment.json").write_text(json.dumps(environment))
+        def validated(*_):
+            image.write_bytes(b"changed after receipt validation")
+            return environment
+        report={}
+        with patch.object(runner,"require_windows"),patch.object(runner,"reserve"),\
+                patch.object(runner.baseline,"candidate_environment",side_effect=validated),\
+                patch.object(runner.subprocess,"Popen") as launch:
+            with self.assertRaisesRegex(ValueError,"explicitly expected SHA256"):
+                runner.run_capture(candidate,12345,1,1,report,expected_exe_sha256=expected_sha)
+        launch.assert_not_called()
+        self.assertEqual(report["status"],"failed_setup")
+        self.assertEqual(report["expected_exe_sha256"],expected_sha)
+        self.assertNotIn("owned_pid",report)
+
+    def test_changed_staged_image_refuses_before_capture_and_preserves_failure(self):
+        build=self.root / "build";build.mkdir();(build / "mmx6-runtime.exe").write_bytes(b"expected image")
+        expected_sha=runner.preparation.sha256(build / "mmx6-runtime.exe")
+        args=SimpleNamespace(output=self.root / "report",build=build,source=self.root / "source",disc=self.root / "disc",
+                             expected_exe_sha256=expected_sha,expected_manifest_sha256="2"*64)
+        def prepare(_build,_source,candidate,_disc,**_):
+            candidate.mkdir();(candidate / "mmx6-runtime.exe").write_bytes(b"changed staged image")
+        with patch.object(runner,"require_windows"),patch.object(runner.preparation,"prepare",side_effect=prepare),\
+                patch.object(runner,"configure_two_digital_slots"),patch.object(runner.manifests,"validate_build_manifest") as manifest,\
+                patch.object(runner,"run_capture") as capture,patch.object(runner.subprocess,"Popen") as launch:
+            result=runner.run(args)
+        capture.assert_not_called();launch.assert_not_called();manifest.assert_not_called()
+        self.assertEqual(result["status"],"failed_setup")
+        self.assertEqual(result["r26"],"unverified")
+        self.assertIn("explicitly expected SHA256",result["error"]["message"])
+        self.assertNotIn("staged_exact_image_and_declared_manifest",result["checks"])
+        self.assertEqual(json.loads((args.output / "qualification.json").read_text())["error"],result["error"])
+
+    def test_exact_staged_image_is_forwarded_to_capture_launch_guard(self):
+        build=self.root / "build";build.mkdir();image=b"expected image"
+        (build / "mmx6-runtime.exe").write_bytes(image);expected_sha=runner.preparation.sha256(build / "mmx6-runtime.exe")
+        args=SimpleNamespace(output=self.root / "report",build=build,source=self.root / "source",disc=self.root / "disc",
+                             expected_exe_sha256=expected_sha,expected_manifest_sha256="2"*64,
+                             record_port=24920,replay_port=24921,boot_timeout=1,progress_timeout=1,replay_timeout=1)
+        def prepare(_build,_source,candidate,_disc,**_):
+            candidate.mkdir();(candidate / "mmx6-runtime.exe").write_bytes(image)
+        with patch.object(runner,"require_windows"),patch.object(runner.preparation,"prepare",side_effect=prepare),\
+                patch.object(runner,"configure_two_digital_slots"),\
+                patch.object(runner.manifests,"validate_build_manifest",return_value=dict(declared_sha256="2"*64)),\
+                patch.object(runner,"run_capture") as capture,\
+                patch.object(runner,"inspect_recording",return_value=(self.root / "recording",{})),\
+                patch.object(runner.replay_preparation,"prepare",return_value={}),patch.object(runner,"run_replay"):
+            result=runner.run(args)
+        self.assertEqual(result["status"],runner.SUCCESS)
+        self.assertEqual(result["staged_exe_sha256"],expected_sha)
+        self.assertEqual(capture.call_args.kwargs,dict(expected_exe_sha256=expected_sha))
+        self.assertEqual(result["r26"],"unverified")
 
     def test_image_failure_is_preserved_without_starting_capture(self):
         build=self.root / "build";build.mkdir();(build / "mmx6-runtime.exe").write_bytes(b"actual")

@@ -233,7 +233,16 @@ def native_capture_started(candidate):
     return True
 
 
-def run_capture(candidate, port, timeout, progress_timeout, report):
+def verify_expected_image(executable, expected_sha256):
+    if not isinstance(expected_sha256, str) or not re.fullmatch(r"[0-9a-f]{64}", expected_sha256):
+        raise ValueError("Capture requires an explicit exact executable SHA256")
+    actual = preparation.sha256(executable)
+    if actual != expected_sha256:
+        raise ValueError(f"Staged capture executable differs from explicitly expected SHA256: {actual}")
+    return actual
+
+
+def run_capture(candidate, port, timeout, progress_timeout, report, *, expected_exe_sha256):
     require_windows(); reserve(port)
     prepared = json_object(candidate / "preparation.json")
     validated = baseline.candidate_environment(candidate, prepared)
@@ -244,11 +253,15 @@ def run_capture(candidate, port, timeout, progress_timeout, report):
     output = candidate / "native-recording"; output.mkdir()
     args = [str(candidate / "mmx6-runtime.exe"), "--game", str(candidate / "game.toml"),
             "--memcard-dir", str(candidate / "saves"), "--seal-interpreted-overlays", "--hidden-window", "--debug-port", str(port)]
-    report.update(args=args, status="failed_setup", input_path="per-port virtual host devices through ordinary offline sampler")
+    report.update(args=args, status="failed_setup", expected_exe_sha256=expected_exe_sha256,
+                  input_path="per-port virtual host devices through ordinary offline sampler")
     process = None; route = None
     with (output / "stdout.log").open("w") as stdout, (output / "stderr.log").open("w") as stderr, \
             (output / "control.jsonl").open("w") as transcript:
         try:
+            # Candidate receipt validation and embedded manifest presence do not
+            # replace the caller's exact image identity. Recheck at launch too.
+            report["prelaunch_exe_sha256"] = verify_expected_image(candidate / "mmx6-runtime.exe", expected_exe_sha256)
             process = subprocess.Popen(args, cwd=candidate, env=environment, stdout=stdout, stderr=stderr,
                                        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0)
             report["owned_pid"] = process.pid
@@ -333,7 +346,7 @@ def inspect_recording(candidate, image_sha, manifest_sha):
         raise ValueError("Trace did not retain both actual native P1 and extra P2 route inputs")
     return path.parent, dict(identity=identity, events=summary.events, natives=summary.natives,
                              p2_reads=summary.p2_reads, repeated_native_frames=repeated_frames,
-                             actual_p1_jump_word=saw_p1, actual_p2_right_read=saw_p2,
+                             actual_p1_cross_word_anywhere=saw_p1, actual_p2_right_read=saw_p2,
                              trace_sha256=preparation.sha256(path))
 
 
@@ -439,13 +452,15 @@ def run(args):
         candidate = output / "record"
         preparation.prepare(args.build, args.source, candidate, args.disc, automated=True)
         configure_two_digital_slots(candidate)
+        report["staged_exe_sha256"] = verify_expected_image(candidate / "mmx6-runtime.exe", args.expected_exe_sha256)
         manifest = manifests.validate_build_manifest(args.build, [args.build / "mmx6-runtime.exe", candidate / "mmx6-runtime.exe"],
                                                      evidence_directory=output / "manifest")
         if manifest["declared_sha256"] != args.expected_manifest_sha256:
             raise ValueError("Build manifest differs from explicitly expected compiled identity")
         report["build_manifest"] = manifest
         report["checks"]["staged_exact_image_and_declared_manifest"] = True
-        run_capture(candidate, args.record_port, args.boot_timeout, args.progress_timeout, report["record"])
+        run_capture(candidate, args.record_port, args.boot_timeout, args.progress_timeout, report["record"],
+                    expected_exe_sha256=args.expected_exe_sha256)
         recording, inspected = inspect_recording(candidate, args.expected_exe_sha256, args.expected_manifest_sha256)
         report["capture"] = dict(directory=str(recording), **inspected)
         profile = output / "replay"
