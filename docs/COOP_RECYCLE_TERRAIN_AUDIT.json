@@ -1,0 +1,500 @@
+{
+  "schema": 1,
+  "source_only": true,
+  "original_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+  "original_bin_sha256": "55b03e4ecc13d6110ff300f80b7000b0f97234e19f1b846aa2b885eece30d80f",
+  "original_bin_member6_sha256": "c7b195e3e3968ebbd6c177cf023e47b35a9a816382c9b54ca157a80b393468f5",
+  "inventory_sha256": "67508ae2e19ad07c2c5cad41e12dbeb5e446e4eb50f033efa75ed306f2636fad",
+  "resource": {
+    "archive": "ROCK_X6.DAT",
+    "member": 98,
+    "lba": 211998,
+    "sector": 5682,
+    "size": 937984,
+    "sha256": "f8798efe535ac46ca7ab2a7e4dfd99705c5624ae5c301627543c3d91d3bf6515",
+    "header_sha256": "1fe68140a9b6fd8d0883c5778d030c08ec0c0d8a8f6c684c11fce3d8fea92e1b",
+    "assets": [
+      {
+        "index": 7,
+        "type": 0,
+        "bytes": 87040,
+        "sha256": "a8a914262768bcf2b0310a5e4723f545ca4b840387900c1d78d3bd1de6a0b117"
+      },
+      {
+        "index": 8,
+        "type": 1,
+        "bytes": 8000,
+        "sha256": "613dcf05adfc3810a7b13bf496f9fceae4b156acc00b9c78a9b635326eb6b192"
+      }
+    ]
+  },
+  "native_spans": [
+    {
+      "name": "stage_resource_selection",
+      "address": "80013E54",
+      "size": 56,
+      "sha256": "9cd18b837411d336ceb218fa4c9ffb02bc23e4aea25354254c9c1ea5fefd10e5",
+      "direct_calls": [
+        {
+          "pc": "80013E7C",
+          "target": "80016858"
+        },
+        {
+          "pc": "80013E84",
+          "target": "8001494C"
+        }
+      ]
+    },
+    {
+      "name": "stage_member_start",
+      "address": "80014084",
+      "size": 36,
+      "sha256": "32a5a6cb94342d390e34c40ff07ca2cd33a75500d60be807274671412840cb5c",
+      "direct_calls": [
+        {
+          "pc": "800140A0",
+          "target": "80014F70"
+        }
+      ]
+    },
+    {
+      "name": "typed_asset_pointer_publication",
+      "address": "800154D0",
+      "size": 76,
+      "sha256": "fe9819813a64507d47109eca0a5ec814a13d49148be846a077ec8c5ee3bd456f",
+      "direct_calls": []
+    },
+    {
+      "name": "type0_type1_destinations",
+      "address": "8006E27C",
+      "size": 8,
+      "sha256": "5c095a9e9f0679cd6643d3cfd885b64673204a51652a3915f676df56be307b0a",
+      "direct_calls": []
+    },
+    {
+      "name": "live_map_pointer",
+      "address": "80026888",
+      "size": 40,
+      "sha256": "089343d709e881bc02b98b049058ad86a006281cf07cf7842c078bf50afda701",
+      "direct_calls": []
+    },
+    {
+      "name": "layout_copy",
+      "address": "8002798C",
+      "size": 196,
+      "sha256": "ec8f3fe1c044f8b292e930b61c7e7967c557fd050109b82e0f28b7de13824b6f",
+      "direct_calls": [
+        {
+          "pc": "80027A38",
+          "target": "800268B0"
+        }
+      ]
+    },
+    {
+      "name": "screen_lookup",
+      "address": "80028078",
+      "size": 124,
+      "sha256": "65f9eb9f635a842727e63d387ff1d2f10586d0d4d24c446893ed115e708ae2d2",
+      "direct_calls": []
+    },
+    {
+      "name": "collision_lookup",
+      "address": "80030304",
+      "size": 264,
+      "sha256": "1de2c8cffd1cc6e9ef9dcf991e3ace3ac64510186096e20d32b02d298ba689d8",
+      "direct_calls": [
+        {
+          "pc": "8003035C",
+          "target": "80028078"
+        }
+      ]
+    },
+    {
+      "name": "body_probe_shape",
+      "address": "800304D8",
+      "size": 148,
+      "sha256": "aa5ca022636f3ec10dbc7acb94a285de68abb23876b7c0270c50fa36f3f2a268",
+      "direct_calls": []
+    },
+    {
+      "name": "downward_probes",
+      "address": "8002F840",
+      "size": 412,
+      "sha256": "601f4ffdf244bd287d63c58bf6aa691fc197a5b9b4c485f9c8cfb8cfebf7c0e9",
+      "direct_calls": [
+        {
+          "pc": "8002F8A0",
+          "target": "80030304"
+        },
+        {
+          "pc": "8002F8C8",
+          "target": "80030304"
+        },
+        {
+          "pc": "8002F8DC",
+          "target": "80030304"
+        },
+        {
+          "pc": "8002F8F0",
+          "target": "8002F9DC"
+        },
+        {
+          "pc": "8002F944",
+          "target": "80030304"
+        },
+        {
+          "pc": "8002F980",
+          "target": "8002F9DC"
+        },
+        {
+          "pc": "8002F998",
+          "target": "800308B8"
+        },
+        {
+          "pc": "8002F9AC",
+          "target": "800308B8"
+        }
+      ]
+    },
+    {
+      "name": "downward_resolution",
+      "address": "8002F9DC",
+      "size": 528,
+      "sha256": "303c576ca60f22dfa655535743fb48bede01500fa97f899b47a00f6ad69409ba",
+      "direct_calls": [
+        {
+          "pc": "8002FA34",
+          "target": "80030304"
+        },
+        {
+          "pc": "8002FB94",
+          "target": "80030834"
+        }
+      ]
+    },
+    {
+      "name": "horizontal_resolution",
+      "address": "80030628",
+      "size": 196,
+      "sha256": "0909f0ad99941e13350a4d03537216724aa5e358a2a77bee7dae066d48b05fb4",
+      "direct_calls": []
+    },
+    {
+      "name": "ground_resolution",
+      "address": "80030834",
+      "size": 132,
+      "sha256": "e94dba8f538e844e0c8ec0fb09c4b5e0ef0d190e2b8e9a7b982dd1e0c559e101",
+      "direct_calls": []
+    },
+    {
+      "name": "default_body_boxes",
+      "address": "8003CCBC",
+      "size": 68,
+      "sha256": "537f24ae8672645fb7a217bcb99b0acadaa110d3dc01f84d33f24f53d3acad99",
+      "direct_calls": []
+    },
+    {
+      "name": "checkpoint_marker",
+      "address": "80052D30",
+      "size": 276,
+      "sha256": "589851445229bceda0dec0faf9045e4228604ac7aafd15ede03e2663c91e7b82",
+      "direct_calls": [
+        {
+          "pc": "80052DA0",
+          "target": "8002CA14"
+        },
+        {
+          "pc": "80052DC4",
+          "target": "8002CAB4"
+        },
+        {
+          "pc": "80052E1C",
+          "target": "8002CA14"
+        },
+        {
+          "pc": "80052E2C",
+          "target": "8002CA14"
+        }
+      ]
+    }
+  ],
+  "layout": {
+    "root": "800762E0",
+    "selector": "80076300",
+    "address": "800F286C",
+    "bytes": 528,
+    "sha256": "f68a92a60270db16e4a82a10782d3bfa98643dc82e467122ef8aee31a49b985c",
+    "width_screens": 22,
+    "height_screens": 8,
+    "layers": 3,
+    "runtime_copy": "8002798C ->80097438 via1F800004",
+    "metatiles": "type0 ->1F800008",
+    "descriptors": "type1 ->1F80000C",
+    "lookup": "80028078 then80030304"
+  },
+  "checkpoint": {
+    "id": "s04-a0-c03",
+    "stage": 4,
+    "section": 0,
+    "checkpoint": 3,
+    "stage_name": "Recycle Lab / Metal Shark Player",
+    "stage_role": "investigator",
+    "table": "80073188",
+    "record": "80072468",
+    "player": {
+      "x": 1728,
+      "y": 1456
+    },
+    "camera": {
+      "x": 1568,
+      "y": 1440,
+      "min_x": 1568,
+      "max_x": 1568,
+      "min_y": 1440,
+      "max_y": 1440
+    },
+    "arrival": 64,
+    "status": "unverified",
+    "checks": {
+      "terrain_collision_scroll": "unverified",
+      "enemies_interactions": "unverified",
+      "music_sfx": "unverified",
+      "checkpoint_retry": "unverified",
+      "boss": "unverified",
+      "exit_actual_transition": "unverified"
+    }
+  },
+  "nearby_authored_objects": [
+    {
+      "index": 2,
+      "address": "800F2A8C",
+      "flags": 0,
+      "object_id": 6,
+      "subtype": 3,
+      "category": 3,
+      "x": 1600,
+      "y": 1584,
+      "status": "unverified",
+      "source_list": "placement_sections",
+      "handler_table": "800F32D8",
+      "handler": "80052D30",
+      "meaning_status": "unverified_unless_described"
+    },
+    {
+      "index": 18,
+      "address": "800F2B0C",
+      "flags": 0,
+      "object_id": 28,
+      "subtype": 1,
+      "category": 0,
+      "x": 1552,
+      "y": 1584,
+      "status": "unverified",
+      "source_list": "placement_sections",
+      "handler_table": "800F301C",
+      "handler": "800EC678",
+      "meaning_status": "unverified_unless_described"
+    },
+    {
+      "index": 19,
+      "address": "800F2B14",
+      "flags": 0,
+      "object_id": 8,
+      "subtype": 35,
+      "category": 4,
+      "x": 1872,
+      "y": 1584,
+      "status": "unverified",
+      "source_list": "placement_sections",
+      "handler_table": "800F338C",
+      "handler": "80050DFC",
+      "meaning_status": "unverified_unless_described"
+    },
+    {
+      "index": 117,
+      "address": "800F2E24",
+      "flags": 0,
+      "object_id": 26,
+      "subtype": 4,
+      "category": 4,
+      "x": 1424,
+      "y": 1592,
+      "status": "unverified",
+      "source_list": "placement_sections",
+      "handler_table": "800F338C",
+      "handler": "800515B4",
+      "meaning_status": "unverified_unless_described"
+    }
+  ],
+  "native_default_boxes": [
+    {
+      "character": "X",
+      "address": "80073D50",
+      "sha256": "a266f054d4ac9645d4de03ac113401d17160e25f855d61f75fa576b0e77a1118",
+      "x_offset": 0,
+      "y_offset": 2,
+      "x_radius": 11,
+      "y_radius": 19,
+      "prerequisite": "8003CCBC with body+D5 nonnegative; actual body+68 must match"
+    },
+    {
+      "character": "Zero",
+      "address": "80073D54",
+      "sha256": "a402fa2ef856506f9321bfc9de0694418acca6d2e1fbcaa5ba8a352696e2a207",
+      "x_offset": 0,
+      "y_offset": 3,
+      "x_radius": 11,
+      "y_radius": 19,
+      "prerequisite": "8003CCBC with body+D5 nonnegative; actual body+68 must match"
+    }
+  ],
+  "downward_dispatch": {
+    "00": "8002FBCC",
+    "38": "8002FBA4",
+    "39": "8002FBA4"
+  },
+  "left_dispatch": {
+    "38": "8003065C",
+    "39": "8003065C"
+  },
+  "findings": [
+    {
+      "id": "initial_solid_column",
+      "x_inclusive": [
+        1568,
+        1599
+      ],
+      "y_inclusive": [
+        1408,
+        1679
+      ],
+      "sampled_tiles": 34,
+      "codes": [
+        56,
+        57
+      ],
+      "evidence": "38/39 use8003065C left collision and8002FBA4 downward solid resolution",
+      "limit": "Initial authored layer0 only; no proof of the live mutated map or a complete route"
+    },
+    {
+      "id": "initial_no_static_support_corridor",
+      "x_inclusive": [
+        1600,
+        1791
+      ],
+      "y_inclusive": [
+        1440,
+        2047
+      ],
+      "sampled_tiles": 456,
+      "codes": [
+        0
+      ],
+      "evidence": "Every16px cell in this scoped initial corridor resolves0",
+      "limit": "No static support in the initial sample, not proof that no dynamic actor can support a live body"
+    }
+  ],
+  "camera": {
+    "source": [
+      1568,
+      1440
+    ],
+    "x_bounds": [
+      1568,
+      1568
+    ],
+    "y_bounds": [
+      1440,
+      1440
+    ],
+    "limit": "Authored view lock is not terrain, player clamping or reachability proof"
+  },
+  "marker": {
+    "record": "800F2A8C",
+    "category": 3,
+    "type": 6,
+    "subtype": 3,
+    "position": [
+      1600,
+      1584
+    ],
+    "handler": "80052D30",
+    "initialize": "80052D6C",
+    "update": "80052DB8",
+    "native_write": "80052E18 writes PLAY+1D checkpoint=3 after original visibility/X threshold",
+    "limit": "Checkpoint marker does not create a floor or alter the initial static map in this closure"
+  },
+  "source_probe_envelope": {
+    "status": "source_probe_envelope_not_approved_live_placement",
+    "layer": 0,
+    "standing_zero_box": "80073D54",
+    "clear_rectangle": {
+      "x": [
+        1456,
+        1567
+      ],
+      "y": [
+        1577,
+        1615
+      ]
+    },
+    "floor_y": 1616,
+    "floor_code": 56,
+    "body_center_x_inclusive": [
+      1467,
+      1557
+    ],
+    "predicted_native_contact_center_y": 1594,
+    "one_pixel_air_center_y": 1593,
+    "live_prerequisites": [
+      "Actual current Zero body+68 equals80073D54 and its four bytes match",
+      "Live layout, metatiles and descriptors retain these collision results",
+      "No dynamic hazard/solid or campaign/script lock invalidates the rectangle",
+      "Actual current damage box and portal facing establish initial contact miss, with P1 outside",
+      "A disclosed private position bypass is explicitly permitted and retained as tainted setup"
+    ],
+    "qualification_limits": [
+      "This predicts static geometry, not a native grounded outcome",
+      "No exact X, input sequence or teleport action is selected",
+      "Only original gravity/contact/input may establish landing, approach and portal admission"
+    ]
+  },
+  "existing_offline_setup": {
+    "game_commit": "b766ed1d7a698ec10bcdf9b793a82c4ca84aff10",
+    "source": "src/mods/mmx6_coop_plugin.c",
+    "function": {
+      "line": 933,
+      "sha256": "9fa8c8b96ef95ae4c81d4d6ddf2649e814fe537219679a6aa081053724325034"
+    },
+    "gate": {
+      "line": 701,
+      "sha256": "0b48338b863e8df2c552865c4d83b3c29de945cd165f41093f68617859c0bc43"
+    },
+    "command": 4,
+    "command_offset": "50",
+    "seat_offset": "52",
+    "x_fixed32_offset": "54",
+    "y_fixed32_offset": "58",
+    "seats": {
+      "0": "residentP1",
+      "1": "privateP2",
+      "2": "both"
+    },
+    "writes": "body+8/+C and previous+18/+1C only; preserves other native body fields",
+    "restriction": "Development offline only; active netplay refuses, production debug-disabled refuses",
+    "taint": "PSX_INPUT_TAINT_GAME_MAILBOX when input-taint API exists; bypass must also be disclosed in report",
+    "execution_status": "not_executed_no_setup_authorized_by_this_audit"
+  },
+  "conclusion": "A completed CP3 does not yet justify a Left/fall route; a static portal-side probe envelope still needs live safety/contact checks",
+  "recommended_actions": [],
+  "proven_safe_positions": [],
+  "local_coop": "unverified",
+  "netplay": "unverified",
+  "next_native_check": [
+    "Initialize disclosed CP3 and first retain both actual bodies, current+68 boxes, native ground flags and completed terrain capture",
+    "Read live80097438 map bytes528; compare original layout without rewriting differences",
+    "Trace actual original30304 foot query arguments/returns and2F418 ground flags during neutral ticks; do not invoke helpers or write collision scratch",
+    "If neutral support is absent or body falls, retain failure and stop; no blind Left into the column or fall beyond the map",
+    "If dynamic support/map changes exist, identify their producer and actual safe movement before a bounded accepted-input test; CP2 remains an unqualified alternative"
+  ]
+}
