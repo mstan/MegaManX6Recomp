@@ -5,6 +5,7 @@ import os
 from pathlib import Path
 import struct
 import tempfile
+import tomllib
 import unittest
 from unittest.mock import patch
 
@@ -276,6 +277,18 @@ class OriginalBankTests(unittest.TestCase):
         self.assertTrue(found["sample_matches"])
         self.assertEqual(found["tone"]["character"],"X")
         with self.assertRaisesRegex(audio.AudioQualificationError,"does not match"):observer.fingerprint_banks()
+
+
+class NativeAudioHookIntegrationTests(unittest.TestCase):
+    def test_development_and_release_emit_each_required_driver_hook(self):
+        root=Path(__file__).resolve().parents[1]
+        required={0x80016C48,0x8005A9D4,0x80055B14,0x8001750C}
+        for name in ("game.toml","packaging/release/game.toml"):
+            with self.subTest(config=name):
+                config=tomllib.loads((root/name).read_text(encoding="utf-8"))
+                entries=[int(value,16) for value in config["recompiler"]["mod_function_entry_funcs"]]
+                self.assertTrue(required.issubset(entries))
+                for address in required:self.assertEqual(entries.count(address),1)
 
 
 if __name__=="__main__":unittest.main()

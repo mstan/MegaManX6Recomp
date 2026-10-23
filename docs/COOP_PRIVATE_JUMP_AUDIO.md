@@ -157,3 +157,13 @@ offset/hash, pitch/ADSR/mode, verify P1 continues through P2 KEYON, and observe
 both original end markers/lifetimes with no unintended replacement. It must also
 retain known nonjump stop behavior as a separate open obligation. Local and
 netplay evidence remain separate; no R4/R12 pass follows from these fixtures.
+
+Central integration now selects title compatibility v16, links the helper
+through the title's existing mod-source glob and the actual-plugin fixtures,
+registers header/transaction tests in debug and production variants, and seeds
+all four driver functions in development and release configurations. Ignored
+native regeneration changed only full_01, full_23 and full_24; each required
+function contains the actual replacement entry, and the original input-capture
+hook remains verified. Ten combined audio/snapshot/effects/retirement CTests
+pass. Full newly frozen debug/production builds and native local/paired
+qualification are still pending; prior exact-image failures are retained.

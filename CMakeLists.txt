@@ -318,7 +318,7 @@ if(BUILD_TESTING)
         add_test(NAME ${_mmx6_diag_target} COMMAND "$<TARGET_FILE:${_mmx6_diag_target}>")
     endforeach()
 
-    foreach(_mmx6_visual_kind private_effects hud resource_admission recycle_portal reentry_retirement)
+    foreach(_mmx6_visual_kind private_effects hud resource_admission recycle_portal reentry_retirement jump_audio)
       foreach(_mmx6_effects_variant debug production)
         set(_mmx6_effects_target mmx6_coop_${_mmx6_visual_kind}_${_mmx6_effects_variant}_test)
         add_executable(${_mmx6_effects_target} tests/test_mmx6_coop_${_mmx6_visual_kind}.c
@@ -349,6 +349,17 @@ if(BUILD_TESTING)
             set_tests_properties(${_mmx6_effects_target} PROPERTIES SKIP_RETURN_CODE 77)
         endif()
       endforeach()
+    endforeach()
+
+    foreach(_mmx6_header_variant debug production)
+        set(_mmx6_header_target mmx6_coop_jump_audio_header_${_mmx6_header_variant}_test)
+        add_executable(${_mmx6_header_target} tests/test_mmx6_coop_jump_audio_header.c
+            src/mods/mmx6_coop_jump_audio.c)
+        target_include_directories(${_mmx6_header_target} PRIVATE src/mods)
+        if(_mmx6_header_variant STREQUAL "production")
+            target_compile_definitions(${_mmx6_header_target} PRIVATE PSX_NO_DEBUG_TOOLS)
+        endif()
+        add_test(NAME ${_mmx6_header_target} COMMAND "$<TARGET_FILE:${_mmx6_header_target}>")
     endforeach()
 
     add_executable(mmx6_coop_roster_test tests/test_mmx6_coop_roster.c
@@ -594,9 +605,9 @@ if(BUILD_TESTING)
     foreach(_target IN LISTS _mmx6_test_targets)
         if(_target MATCHES "^mmx6_.*test$")
             get_target_property(_sources ${_target} SOURCES)
-            if("${_sources}" MATCHES "tests/test_mmx6_coop_(intro_target|diagnostics|private_effects|hud|checkpoint|snapshot|resource_admission|recycle_portal|reentry_retirement)[.]c")
+            if("${_sources}" MATCHES "tests/test_mmx6_coop_(intro_target|diagnostics|private_effects|hud|checkpoint|snapshot|resource_admission|recycle_portal|reentry_retirement|jump_audio)[.]c")
                 target_sources(${_target} PRIVATE src/mods/mmx6_coop_roster.c
-                    src/mods/mmx6_coop_resources.c)
+                    src/mods/mmx6_coop_resources.c src/mods/mmx6_coop_jump_audio.c)
                 if(NOT "${_sources}" MATCHES "src/mods/mmx6_coop_assets[.]c")
                     target_sources(${_target} PRIVATE src/mods/mmx6_coop_assets.c)
                 endif()
