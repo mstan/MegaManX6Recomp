@@ -1,0 +1,137 @@
+{
+  "schema": 1,
+  "kind": "manifest_bound_character_audio_build_and_source_review",
+  "mode": "source_and_build_only",
+  "result": "passed_bounded_checks_native_unverified",
+  "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+  "build_identity": {
+    "debug_executable_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+    "debug_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+    "production_executable_sha256": "ce220b638acd7a19133c8dba3e2d16e92706b33225b98d8d03f89bd00bf6e1b3",
+    "production_manifest_sha256": "93d28d4490330441a9015851dbfb9c07a309b338c9ea23a68a17df526314aad0",
+    "title_compatibility": "mmx6-x-zero-delay-v18",
+    "semantic_contract_sha256": "e0d4144e1a257ec0a4ea6f918f53a34f904d138c74de007f029452b94f5954c5",
+    "source_repositories": {
+      "game": {
+        "head": "22ea525bbc52b5177f501989fedc5873ef30099c",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "net": {
+        "head": "e53059306824edf4f0aec4aae5ae65151b18535f",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "rb": {
+        "head": "2a03e73693acee0fb78076ea058642c931bef12e",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "sdk": {
+        "head": "09e8673435c73e516b420e6c13bb11f02dc8aaea",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "ui": {
+        "head": "b964eabe5a3438b8ed121064354ba27c1accef3f",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "settings": {
+    "serial": true,
+    "compile_jobs": 2,
+    "subagents": 0,
+    "development_loopback_lab": true,
+    "production_loopback_lab": false,
+    "production_debug_tools": false
+  },
+  "action": [
+    "Build exact local candidate in debug and production, then run each complete CTest suite serially.",
+    "Compare the actual C record resolver with independent original-disc parsing for all 45 populated records/47 voice entries.",
+    "Exercise actual-plugin callbacks with original data and an explicit bounded native guest double; check full native-driver restoration before private DSP.",
+    "Exercise current-build private priorities, voice ownership, invalid/pending state refusal and snapshot roundtrip using Clang22.1.8 and GCC15.2.0 fixtures."
+  ],
+  "outcome": {
+    "debug_ctest": "103/103 passed",
+    "production_ctest": "103/103 passed",
+    "original_data": {
+      "populated_records": 45,
+      "voice_entries": 47,
+      "reserved_slots": 9
+    },
+    "native_gameplay": "unverified for this exact image",
+    "comparison_ledger": {
+      "passed": 4,
+      "failed": 4,
+      "unverified": 226,
+      "total": 234
+    },
+    "sdk_fidelity": "Four existing sweep assertions reproduced on both 09e867 and exact bfbfb920 baseline; no full SPU fidelity-suite green claim"
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v20-22ea525\\candidate.json",
+      "sha256": "1a73c37f0dc0c7aa7e4ec524e68561c61a04d713e39930c2ec97b0b8c2fd6500"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\general-audio-route\\full-debug-build.log",
+      "sha256": "6f521c9b3ece7141b2bef0822f5153ee51c1d2598063e83c940db0a18259c62d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\general-audio-route\\full-debug-ctest.log",
+      "sha256": "4aa4eb8cd4687b0c372e660e9f9c51b8cf855aeb82ccdd0b23781bc07089634a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\general-audio-route\\full-production-build.log",
+      "sha256": "912a9eef43100e0893e20e098f62178525517544d342cf06242c78a752136de0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\general-audio-route\\full-production-ctest.log",
+      "sha256": "a0674e231ace987e3fc675f3d1a4ee61a92c6af7e16a631200168544346f2dfd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\general-audio-route\\original-route-debug-clang.log",
+      "sha256": "1df5d61028cfa79fa42232c82def3a267ef29df50c1079c58a330b216272980c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\general-audio-route\\original-route-production-clang.log",
+      "sha256": "4e5e24dbfdebe031d7682a0e38217a30ac6255c0a2f5d8bdb8916f203d485310"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\general-audio-route\\title-jump_audio-debug-gcc.exe.run.log",
+      "sha256": "5882973311ea1c245a140d71881072f6445912d73b6671e3092115943988552c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\general-audio-route\\title-jump_audio-production-gcc.exe.run.log",
+      "sha256": "a4159495252d1198f95791ab1c0b3ba438b696fceb541f1302c7bd6904c5fdb0"
+    }
+  ],
+  "source_validation": {
+    "checked_files": {
+      "game": 56,
+      "game-generated": 34
+    },
+    "checked_bytes": 43883730,
+    "generated_root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\generated-source",
+    "scope": "Declared game and game-generated files only; other dependency roots not rehashed"
+  },
+  "production_source_validation": {
+    "checked_files": {
+      "game": 56,
+      "game-generated": 34
+    },
+    "checked_bytes": 43883730,
+    "generated_root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\generated-source",
+    "scope": "Declared game and game-generated files only; other dependency roots not rehashed"
+  },
+  "limits": [
+    "No new native local/paired gameplay, audible/PCM/music, active STOP7, state/rewind or campaign qualification.",
+    "Old exact-image receipts do not transfer; R4/R12 remain incomplete; no cross-build/cross-machine qualification.",
+    "Solo serial local branches/worktrees only; no pushes or issue synchronization.",
+    "Original-data callback tests use an explicit guest double; they are not native MIPS/audio playback.",
+    "No R4/R12 pass or current-vocal-failure reclassification follows from these source/build checks."
+  ],
+  "bypasses": []
+}
