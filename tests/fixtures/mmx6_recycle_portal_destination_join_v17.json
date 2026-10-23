@@ -1,0 +1,165 @@
+{
+  "kind": "retained_actual_portal_destination_joining_v17",
+  "exe_sha256": "a8f20cdcc4ac68cdc76bf8fa7f1b3a74b9db67788514468743a355284b2080b8",
+  "raw_report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-v17-beeae10-local-reploid-source-exclusion\\qualification.json",
+    "sha256": "101274ce83fb7c81272f46602a55786dfd441cb2d8441388226c1dc196c8eaa4"
+  },
+  "native_observation": {
+    "native": {
+      "mode": 10,
+      "phase": 0,
+      "stage": 20,
+      "section": 1,
+      "checkpoint": 0,
+      "fade": 0,
+      "freeze": 0,
+      "transition": 0,
+      "shared_entry_lock": 0,
+      "resident_player": {
+        "active": 1,
+        "character": 0,
+        "visible": 1,
+        "phase": 1,
+        "action": 2,
+        "hp": 32,
+        "x_raw": 5177344,
+        "y_raw": 23789568,
+        "terrain": 0,
+        "contacts": 8,
+        "iframe": 0,
+        "locks": [
+          0,
+          0,
+          0
+        ],
+        "facing": 64,
+        "attack_box": 0,
+        "damage_box": 2149531472,
+        "body_box": 2147958096,
+        "compression": 2148547276,
+        "assembly": 2148826216,
+        "page": 1280,
+        "clut": 30720,
+        "native_ground_contact": true,
+        "resource_pointers_valid": true,
+        "raw_hex": "010000010102000000004f0000006b01000000000040020500004f0000006b01000000000000f8ff0000000000000000d44a1f806c411f80cc3a1080687c14800005007808000100000300000000000000000000503f1f8000000000202020000000000000000000503d07800f0000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000004f0000006b010000000000002001000004000000000000000000"
+      }
+    }
+  },
+  "publication": {
+    "label": "destination landing",
+    "kind": "single_rpc_private_collision_boxes",
+    "raw_bytes": 7264,
+    "raw_sha256": "f8ae053837442e79844917656844d26956b2578b6e3b1f7fd1e911bf0b44f8a1",
+    "observation": {
+      "schema": 1,
+      "tick": 625,
+      "sequence": 1250,
+      "native_timer": 368,
+      "lifecycle": [
+        0,
+        3
+      ],
+      "pause_owner": 0,
+      "scene_owner": 0,
+      "scene_phase": 0,
+      "mailbox": 0,
+      "ready": 1,
+      "enrolled": 1,
+      "failed": 0,
+      "native_mode": 10,
+      "native_phase": 0,
+      "host_digest": 719465693,
+      "host_digest_algorithm": 1,
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 5177344,
+          "y_raw": 23789568,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 0,
+          "hp": 32,
+          "x_raw": 6750208,
+          "y_raw": 14155776,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "framework_digest_registered": 0
+    },
+    "p1_body_hex": "010000010102000000004f0000006b01000000000040020500004f0000006b01000000000000f8ff0000000000000000d44a1f806c411f80cc3a1080687c14800005007808000100000300000000000000000000503f1f8000000000202020000000000000000000503d07800f0000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000004f0000006b010000000000002001000004000000000000000000",
+    "p2_body_hex": "0100010101000000000067000000d8000000000000000201000067000000b80000000000000000000000000000000000d0f61e8020ea1e801800009fa481039f0005007802000134ff0300000000000000000000000000000000000020202000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000010000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000000000000000000000000000002001000000000000000000000000",
+    "boxes": {
+      "attack": {
+        "pointer": 0,
+        "origin": "unavailable",
+        "available": false,
+        "hex": null
+      },
+      "damage": {
+        "pointer": 0,
+        "origin": "unavailable",
+        "available": false,
+        "hex": null
+      },
+      "body": {
+        "pointer": 0,
+        "origin": "unavailable",
+        "available": false,
+        "hex": null
+      }
+    },
+    "limits": [
+      "Bytes describe the published cached P2 body; eligibility still needs living active pose checks.",
+      "Native actor pools, actual contacts and camera state from other RPCs are not atomic with this block.",
+      "No collision, guest call, input or gameplay pass is implied by source bytes."
+    ]
+  },
+  "native_transition_checks": {
+    "source_portal_seen": true,
+    "native_action2_seen": true,
+    "native_freeze_seen": true,
+    "native_41h_and_fade_seen": true,
+    "major8_seen": true,
+    "major9_seen": true,
+    "destination_native_ready_seen": true,
+    "published_both_arrivals": false,
+    "p1_outside_p2_contact": false,
+    "independent_controls": false,
+    "composed_capture": false
+  },
+  "limits": [
+    "Actual original arrival only; later completed-idle fixture rows are synthetic waiting-gate boundaries, not native destination qualification."
+  ]
+}

@@ -300,6 +300,27 @@ class InputTests(unittest.TestCase):
         bad=copy.deepcopy(join["publication"]);bad["observation"]["failed"]=1
         with self.assertRaises(runner.debug.DebugError):runner.valid_publication(bad,allow_joining=True)
 
+    def test_actual_portal_destination_joining_is_observed_then_original_idle_is_required(self):
+        f=json.loads((Path(__file__).resolve().parents[1]/
+            "tests/fixtures/mmx6_recycle_portal_destination_join_v17.json").read_bytes())
+        entry,pub=f["native_observation"],f["publication"]
+        self.assertEqual((entry["native"]["stage"],entry["native"]["section"]),(20,1))
+        self.assertEqual(pub["observation"]["lifecycle"],[0,3])
+        # Synthetic completion tests the wait gate, not destination physics.
+        complete=copy.deepcopy(pub);complete["observation"]["lifecycle"]=[0,0]
+        for key in ("p1_body_hex","p2_body_hex"):
+            b=bytearray.fromhex(complete[key]);b[3:6]=bytes((1,1,2));b[0x67]=0;b[0x70]|=8
+            for at in (0x7A,0xD0,0xD4):b[at]=0
+            b[0x18:0x20]=b[8:16];complete[key]=b.hex()
+        landed=copy.deepcopy(entry)
+        landed["native"]["resident_player"]=runner.portal._body(bytes.fromhex(complete["p1_body_hex"]))
+        trial=self.trial();trial.sample=Mock(side_effect=[(entry,pub),(landed,complete),(landed,complete)])
+        with patch.object(runner.time,"sleep"):
+            self.assertIs(trial.wait_idle()[1],complete)
+        trial.control.assert_not_called()
+        trial=self.trial();trial.sample=Mock(return_value=(entry,pub))
+        with self.assertRaises(runner.debug.DebugError):trial.wait_idle(source=True)
+
 
 class OptionsTests(unittest.TestCase):
     def test_invalid_options_refused_before_any_launch(self):

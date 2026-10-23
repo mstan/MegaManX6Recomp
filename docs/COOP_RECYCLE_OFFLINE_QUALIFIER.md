@@ -41,6 +41,11 @@ X+24; placing both before enrollment could therefore be overwritten to1530
 and accidentally contact the portal. P2's phase1/action0 and null damage
 pointer while entering are permitted native states. A null pointer remains a
 no-contact gate; unavailable bytes for a nonnull pointer are rejected.
+The destination uses the same original incoming-beam lifecycle. The first
+source-qualified portal approach reached native action2, fade41h, majors8/9
+and stage20/section1/CP0, then exposed a wait that rejected JOINING3. The
+retained destination fixture now requires observing that state and waiting
+for original living idle completion; it grants no arrival or control pass.
 The initializer can finish while diagnostics still contain the intro's
 enrolled idle bodies. The helper therefore separately observes actual CP2
 namespace/source code, fade/entry-lock clearance and native idle X at the

@@ -394,7 +394,9 @@ class Trial:
         previous = None
         while time.monotonic() < deadline:
             native,pub = self.sample("source landing" if source else "destination landing")
-            b1,b2 = valid_publication(pub)
+            # Original major9 arrival enrolls Zero through JOINING3. It must
+            # complete natively before settled=True can qualify the landing.
+            b1,b2 = valid_publication(pub,allow_joining=not source)
             n = native["native"]
             require(not n["transition"] and not n["fade"] and not n["freeze"] and
                     not pub["observation"]["scene_owner"], "Unexpected scene during neutral landing")
