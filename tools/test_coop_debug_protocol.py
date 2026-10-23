@@ -10,7 +10,8 @@ from unittest.mock import Mock, patch
 from coop_debug import (DIAGNOSTIC_ADDRESS, DIAGNOSTIC_BYTES, DebugClient,
                         DebugError, UnstableObservation, observe, parse_diagnostic)
 from test_mmx6_coop_netplay import (FailedSetup, ValidationFailure, main,
-                                   native_ready, pair_match, validate_status)
+                                   native_ready, pair_match, require_framework_digest,
+                                   validate_status)
 from coop_state_crc import (MissingStateCrc, StateCrcError, parse_state_crc,
                             resolved_state_crc)
 
@@ -47,6 +48,17 @@ class DiagnosticTests(unittest.TestCase):
             data = bytearray(diagnostic())
             data[0x3C] = owner
             self.assertEqual(parse_diagnostic(bytes(data)).pause_owner, owner)
+
+    def test_unregistered_framework_digest_cannot_qualify_crc_mode(self):
+        unregistered = parse_diagnostic(diagnostic(digest=0))
+        with self.assertRaises(FailedSetup):
+            require_framework_digest([unregistered, unregistered])
+        data = bytearray(diagnostic(digest=0))
+        data[0x9C] = 1
+        registered = parse_diagnostic(bytes(data))
+        require_framework_digest([registered, registered])
+        with self.assertRaises(FailedSetup):
+            require_framework_digest([registered, unregistered])
 
     def test_versioned_fields_and_canonical_player_order(self):
         row = parse_diagnostic(diagnostic(digest=0))

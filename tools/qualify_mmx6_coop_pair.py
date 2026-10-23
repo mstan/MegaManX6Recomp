@@ -100,6 +100,8 @@ def run(args) -> dict:
         raise paired.ValidationFailure("Native timers did not consume the input window")
 
     def matched(label, seconds=4):
+        if getattr(args, "require_state_crc", False):
+            paired.require_framework_digest(rows())
         first_simulation_tick = max(row["tick"] for row in network())
         deadline, history, common = time.monotonic()+seconds, [{}, {}], set()
         matches = []

@@ -154,6 +154,7 @@ class Observation:
     host_digest: int | None
     host_digest_algorithm: int | None
     players: tuple[Player, Player]
+    framework_digest_registered: int | None = None
 
     def json(self) -> dict:
         return asdict(self)
@@ -178,7 +179,7 @@ def parse_diagnostic(data: bytes, *, allow_legacy: bool = False) -> Observation:
         ready, enrolled, failed = data[0x8C:0x8F]
         mode, phase = data[0x90:0x92]
         digest, algorithm = struct.unpack_from("<II", data, 0x94)
-        if any(flag not in (0, 1) for flag in (ready, enrolled, failed)):
+        if any(flag not in (0, 1) for flag in (ready, enrolled, failed, data[0x9C])):
             raise DebugError("Invalid diagnostic ready/enrolled/failed flag")
         if algorithm != 1:
             raise DebugError(f"Unsupported host digest algorithm {algorithm}")
@@ -194,7 +195,8 @@ def parse_diagnostic(data: bytes, *, allow_legacy: bool = False) -> Observation:
     return Observation(version, struct.unpack_from("<I", data, 4)[0], sequence,
                        struct.unpack_from("<I", data, 36)[0], lifecycle,
                        data[0x3C], data[0x3E], data[0x3F], data[0x30],
-                       ready, enrolled, failed, mode, phase, digest, algorithm, (p1, p2))
+                       ready, enrolled, failed, mode, phase, digest, algorithm, (p1, p2),
+                       data[0x9C] if version == 1 else None)
 
 
 def observe(client: DebugClient, address: int = DIAGNOSTIC_ADDRESS, *,

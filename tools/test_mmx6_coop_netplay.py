@@ -44,6 +44,11 @@ def native_ready(row: Observation) -> bool:
                 for player in row.players))
 
 
+def require_framework_digest(rows: list[Observation]) -> None:
+    if any(row.framework_digest_registered != 1 for row in rows):
+        raise FailedSetup("Both candidates must report a registered framework host-state digest")
+
+
 def pair_match(left: Observation, right: Observation) -> dict:
     """Compare one publication count; never compare different asynchronous ticks."""
     require(left.schema == right.schema == 1, "Paired checks require diagnostic schema 1")

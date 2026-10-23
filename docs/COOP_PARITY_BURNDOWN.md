@@ -90,8 +90,9 @@ compile error found during the separate modern Clang candidate build.
 Latest logs: `build-audio-audit-debug.log`, `build-audio-audit-production.log`,
 `ctest-audio-audit-debug.log`, `ctest-audio-audit-production.log`. Both native
 content and audio reproduction tests were enabled against the private G: disc
-copy. The protocol suite includes 22 checks, including rejection of unresolved,
-legacy, conflicting or mismatched core/mod checksum evidence.
+copy. The protocol suite includes 23 checks, including rejection of unresolved,
+legacy, conflicting or mismatched core/mod checksum evidence and missing
+framework digest registration on either peer.
 
 Checks for framework 83e: `ctest-isolated-debug.log` and
 `ctest-isolated-production.log` under the evidence root. That debug executable
@@ -155,6 +156,15 @@ blanket bank mapping cannot be copied. R4/R12 remain unverified pending complete
 X6 driver/flush ownership and native muted captures.
 
 ## Next integration gates
+
+The modern SDK bridge candidate has now built with Clang, passed 21 game
+checks, original-disc resident-store validation of 302 members and default
+two-peer loader admission. Exact receipts and scope are in
+[COOP_NETPLAY_BASELINE.md](COOP_NETPLAY_BASELINE.md). The bridge uses ABI 32
+to distinguish its modern layout from the previous X6 ABI 31. It remains a
+separate candidate until its host-escape and content-cache corrections pass
+combined validation. Gameplay and registered host-state checks do not inherit
+the startup result.
 
 1. Extend the now-passing default loopback intro/input smoke with lifecycle,
    menu and scene checks. The earlier frontend timeout is explained by the

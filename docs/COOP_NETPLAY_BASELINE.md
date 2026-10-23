@@ -190,6 +190,30 @@ Healthy intro resources only were exercised; this does not qualify spent ammo,
 airborne unsafe landing, death/retry, audio, full state restoration or campaign
 scenes. Matching diagnostic publications remain partial evidence.
 
+## Modern SDK candidate admission
+
+The isolated Clang candidate bridges X6's native services onto framework base
+`6f0ccbc6`, with modern UI `b964eabe`, net `e5305930` and rbengine `2a03e736`.
+Framework bridge commit `2a0754436` uses overlay ABI 32. This candidate is not
+the game repository's selected SDK pin yet.
+
+`netplay-modern-bridge-admission/qualification.json` passes default resident
+loader admission and an advancing two-peer delay session, with both resolved
+through tick 62 and no reported input desynchronization. Report SHA-256:
+`d38cc60b8c10870ff68be479b558adca6d9f2521a538520e2db27b4eb90f23e0`.
+Executable SHA-256:
+`81cae43aec8ccde5417373a4fe25f48d383b3d75799349bd01ff02e69010aaa3`.
+The 21 game checks also pass (`ctest-modern-debug.log`). The original-disc
+resident-store check passes cold/warm preparation, 302 member hashes, loader
+guard, mod-plan separation, corruption repair and fail-closed fallback. Its log
+is `F:/Temp/Codex/psxrecomp/x6-parity/resident-validation/resident-check.log`,
+SHA-256 `914adc9c36034743694f4df3fcd6dc820ded107ab6c5173a6ae2f0cb50e21ef4`.
+
+These receipts precede the integrated host-escape and Windows file-identity
+fixes. They establish neither gameplay nor registered core/mod synchronization
+on the combined SDK. Both owned admission processes were verified absent;
+graceful exit remains unverified.
+
 ## Reusable runner
 
 `tools/qualify_mmx6_coop_pair.py` stages, launches, boots and observes two owned
@@ -212,6 +236,9 @@ the same simulation tick, strictly below both resolved-through watermarks and
 after each input window. Legacy/missing partitions and too few samples cannot
 pass. The candidate must separately register its complete authoritative host
 digest: a logged `mod=00000000` alone proves no such registration. This mode
+also requires the explicit framework-registration capability at diagnostic
+`+0x9C` on both peers; existing unregistered candidates publish zero there.
+The standalone diagnostic FNV cannot satisfy that capability. The mode
 has parser regressions but no native X6 qualification yet.
 Python 3.11+ is required by the
 shared tools; the actual attempts used Python 3.12.5.
