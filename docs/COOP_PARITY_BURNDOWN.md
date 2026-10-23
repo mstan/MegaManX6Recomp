@@ -50,8 +50,20 @@ The v12 source adds original native private trail/attached-effect updates,
 reverse-order visible trail rendering, owned mode packets and a menu-phase
 guard against extra P2 advancement. Source-backed actual-plugin fixtures pass
 in optimized GCC/Clang debug/production variants. The development host rule is
-now revision2 and remains default-OFF; fresh v12 native qualification is pending.
-The three comparison passes below remain bound to the frozen v11 artifact.
+now revision2 and remains default-OFF. The frozen v12 image `229ffec7` has a
+fresh native pair, same-session-ID nonce restart and reviewed R8 menu checks in
+both modes. Its bounded Zero private-pause/dash checks also pass locally and
+paired; R9 stays unverified pending X-owned effects, opposite rosters and the
+native Zero trail-color comparison. See the exact-image summaries under
+`docs/evidence/mmx6-r8` and `docs/evidence/mmx6-private-pause`.
+
+R2 and R13 remain bound to the frozen v11 artifact. New diagnostics/replay and
+startup-override source changes require another exact candidate and do not
+inherit either image's runtime observations. Stronger native checkpoint
+readiness correctly rejects a camera bound of 75 against its authored 944;
+the original camera writer is under investigation. No campaign case is passed
+by that incomplete setup. Testing uses two peers on this machine; other-machine
+qualification remains unverified.
 
 - The native intro enemy action-1 proximity correction has actual before/after
   local evidence and a two-peer original-input route with 37 matching resolved

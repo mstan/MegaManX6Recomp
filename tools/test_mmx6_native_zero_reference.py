@@ -152,6 +152,20 @@ class ProfileTests(unittest.TestCase):
                     (root/"mods/bundled/coop/2").mkdir();(root/"mods/bundled/coop/2/manifest.toml").write_text('id="mmx6.local-coop"\nversion="2"\n')
                 with self.assertRaises(ValueError):reference.disable_reference_mods(root)
 
+    def test_engine_formatting_normalization_preserves_exact_disabled_semantics(self):
+        with tempfile.TemporaryDirectory(dir=os.environ["TEMP"],prefix="x6-native-reference-") as directory:
+            root,digest=self.profile(directory)
+            receipt=reference.disable_reference_mods(root)
+            path=root/"mods/state.toml"
+            path.write_text(path.read_text().replace("\n","\n\n"))
+            with patch.object(reference.baseline,"candidate_environment",return_value={}):
+                result=reference.validate_reference_profile(root,digest)
+                self.assertNotEqual(result["actual_state_sha256"],receipt["state_sha256"])
+                self.assertEqual(result["actual_state_semantic_sha256"],receipt["state_semantic_sha256"])
+                path.write_text(path.read_text().replace('version = "1"','version = "2"',1))
+                with self.assertRaisesRegex(ValueError,"changed"):
+                    reference.validate_reference_profile(root,digest)
+
 
 class OwnershipAndSelectionTests(unittest.TestCase):
     def test_original_unit_navigation_preserves_unlocks_and_never_assigns_form_or_cursor(self):

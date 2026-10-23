@@ -30,6 +30,12 @@ prepared a fresh profile, call `disable_reference_mods(candidate)` before
 launch instead. It refuses populated saves/cache/data/appdata/resident folders,
 duplicate catalog versions, prior attempts and a source-card preparation.
 
+The runtime may normalize whitespace and table ordering on startup. The helper
+records both the prepared raw SHA and a canonical semantic SHA, then checks the
+live file against exact package versions and the complete disabled feature set.
+Equivalent formatting is accepted; changed settings remain refused. The actual
+live raw and semantic hashes are retained in the case receipt.
+
 Use `qualify_mmx6_coop_baseline.candidate_environment` and the same absolute
 candidate executable/game/memcard arguments as its owned runner, with that
 profile as cwd. All environment/cache/card paths stay private on F:/G:;

@@ -41,6 +41,15 @@ def _sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def _state_identity(record: dict) -> str:
+    """Formatting may be normalized by the engine; settings may not drift."""
+    ordered=dict(record)
+    for key,fields in (("package",("id",)),("feature",("package_id","id"))):
+        if key in ordered:
+            ordered[key]=sorted(ordered[key],key=lambda row:tuple(str(row.get(f)) for f in fields))
+    return _sha(json.dumps(ordered,sort_keys=True,separators=(",",":"),ensure_ascii=True).encode("ascii"))
+
+
 def _forward(old: int, new: int, minimum: int = 1) -> bool:
     return minimum <= ((new-old)&0xFFFFFFFF) < 0x80000000
 
@@ -106,6 +115,7 @@ def disable_reference_mods(candidate: Path) -> dict:
     (candidate/"mods/state.toml").write_bytes(state.encode("utf-8"))
     receipt=dict(kind="offline_native_zero_reference_mod_state",coop_enabled=False,
         all_catalog_features_disabled=True,state_sha256=_sha(state.encode()),
+        state_semantic_sha256=_state_identity(tomllib.loads(state)),
         candidate_exe_sha256=prepared["exe_sha256"],source_cards=False,
         limits=["Real offline mod state; netplay forced profiles are unsupported",
                 "Staging and state do not establish runtime artwork correctness"])
@@ -132,20 +142,26 @@ def validate_reference_profile(candidate: Path, expected_sha: str) -> dict:
             prepared.get("automated_profile") is not True):
         raise ValueError("Reference profile/image/private-card binding is invalid")
     state_data=(candidate/"mods/state.toml").read_bytes()
-    if _sha(state_data) != receipt["state_sha256"]:
-        raise ValueError("Reference real mod state changed after preparation")
     state=tomllib.loads(state_data.decode("utf-8"))
+    if (_sha(state_data) != receipt["state_sha256"] and
+            _state_identity(state) != receipt.get("state_semantic_sha256")):
+        raise ValueError("Reference real mod state changed after preparation")
     features=state.get("feature",[])
     actual=[(f.get("package_id"),f.get("id")) for f in features]
     expected=[(package,feature) for package,_,items in _catalog_features(candidate) for feature in items]
     if (state.get("format_version") != 2 or len(set(actual)) != len(actual) or set(actual) != set(expected) or
             any(f.get("enabled") is not False for f in features)):
         raise ValueError("Reference must explicitly disable every catalog feature in real mod state")
+    packages=[(p.get("id"),p.get("version")) for p in state.get("package",[])]
+    expected_packages=[(package,version) for package,version,_ in _catalog_features(candidate)]
+    if len(set(packages))!=len(packages) or set(packages)!=set(expected_packages):
+        raise ValueError("Reference package versions changed after preparation")
     saves=(candidate/"saves").resolve(strict=True)
     if not saves.is_relative_to(candidate) or any(not p.resolve(strict=True).is_relative_to(candidate) for p in saves.glob("*.mcd")):
         raise ValueError("Reference native cards must remain inside its private profile")
     baseline.candidate_environment(candidate,prepared)
-    return dict(preparation=prepared,mod_state=receipt)
+    return dict(preparation=prepared,mod_state=receipt,actual_state_sha256=_sha(state_data),
+                actual_state_semantic_sha256=_state_identity(state))
 
 
 def process_image_path(pid: int) -> Path:
