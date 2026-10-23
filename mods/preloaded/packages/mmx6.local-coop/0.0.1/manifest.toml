@@ -19,6 +19,23 @@ description = "Play together as X and Zero with shared lives and separate health
 group = "Gameplay"
 default_enabled = false
 
+[[option]]
+feature = "prototype"
+id = "hud_layout"
+label = "HUD layout"
+description = "Stack the original X and Zero meters in one left column, or place Zero's meters beside X's. Shared lives remain displayed once."
+group = "Display"
+type = "choice"
+default = "stacked"
+
+[[option.choice]]
+value = "stacked"
+label = "Stacked"
+
+[[option.choice]]
+value = "side_by_side"
+label = "Side by side"
+
 [[plugin]]
 feature = "prototype"
 id = "mmx6.local-coop.prototype"

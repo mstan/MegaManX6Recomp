@@ -126,3 +126,40 @@ python tools/audit_mmx6_coop_hud.py --exe <original-SLUS_013.95> `
 existing audit. `--check` is read-only. Set non-C TEMP/TMP/Python cache paths
 and `MMX6_CONTENT_EXE`, `MMX6_X4_REPOSITORY` for the source tests. No mutable
 coverage ledger or frozen comparison definition is modified by this workflow.
+
+## Separate R6 presentation implementation
+
+The follow-up implementation adds the owning `mmx6.local-coop` prototype's
+`hud_layout` choice: **Stacked** defaults to the existing P2 translation0/104;
+**Side by side** translates P2 by56/0. The56-pixel column separation is an
+elective co-op layout choice, not an original single-player X6 setting. It
+preserves the X6 native health/weapon group geometry and its left anchor.
+Both original retained sprite triangles and every vertex of native G4 bars
+receive the same translation. Frames, portraits, glyphs, HP/ammo values, CLUT
+selection, fade modulation, shared-life suppression and P1/boss calls stay on
+their existing paths. There is no local split-pane implementation implied.
+
+The renderer reads the immutable committed package/feature option directly
+with the existing portable SDK API. Missing, empty or unknown values keep
+stacked. No new persistent simulation/host state, snapshot fields, guest input
+path or live option mutation is introduced. The frozen source JSON continues
+to describe the exact pre-implementation commit; it is deliberately not
+rewritten to claim that the original audit already contained this setting.
+
+`tests/test_mmx6_coop_hud.c` includes the actual plugin with isolated RAM and
+bounded original native sprite/mode/G4 packet producers. It checks both
+layouts, invalid/missing values, both DMA arenas, every translated bar vertex,
+retained sprite geometry, original P1/boss once, private Zero ownership,
+resident body/resource/pool restoration (including an already Zero-owned
+world), CLUT content changes, fade colors, visibility gates, shared-life icon
+suppression and malformed pool rejection. This is packet wiring evidence;
+the fixture does not emulate original art, menus or final composition.
+
+The fixture passes at C99/O2 under GCC15.2 and Clang22.1.8 in debug and
+`PSX_NO_DEBUG_TOOLS` variants. The production plugin also compiles under both
+compilers with the older a502 SDK headers. Clang reports the pre-existing
+duplicate CPUState typedef warning in SDK headers. No title build/native
+launch accompanied these checks. Root must register the new fixture (same
+lifecycle/assets/SHA sources and section-GC flags as the private-effects
+fixture), inspect the actual installed control, and run native local/netplay
+composed validation before R6 can pass. R5 and F18 remain unverified.

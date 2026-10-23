@@ -1684,6 +1684,15 @@ static int hud_icon(CPUState *cpu, uint32_t address) {
     cpu->gpr[2]=0;
     return 1;
 }
+static void hud_offsets(int *x, int *y) {
+    char layout[32];
+    *x=0; *y=P2_HUD_Y;
+    /* Committed package options are immutable while the plugin runs. Read
+     * the presentation preference directly: no new simulation/snapshot state.
+     * Unknown/old configurations keep the original stacked default. */
+    if (psx_mod_option_value("mmx6.local-coop","prototype","hud_layout",layout,sizeof layout) &&
+        !strcmp(layout,"side_by_side")) { *x=56; *y=0; }
+}
 static void hud_zero_packets(uint32_t arena) {
     uint32_t sprites=psx_mod_read_word(SCRATCH+0x108);
     uint32_t modes=psx_mod_read_word(SCRATCH+0x10C);
@@ -1694,14 +1703,15 @@ static void hud_zero_packets(uint32_t arena) {
         bars<arena+0x2000 || bars>arena+0x3000 || (bars-arena-0x2000)%36) {
         failed=1; return;
     }
+    int offset_x,offset_y;hud_offsets(&offset_x,&offset_y);
     uint32_t expanded=arena+0x3000, mode=arena+0x1000;
     for (uint32_t at=arena;at<sprites;at+=16,mode+=8,expanded+=80) {
         uint32_t link=psx_mod_read_word(at), uv=psx_mod_read_word(at+12);
         uint16_t page=(uint16_t)psx_mod_read_word(mode+4);
         uint16_t bank=hud_tile_bank(page,(uint16_t)(uv>>16),(uint16_t)uv);
         if (!bank || expanded+80>arena+0x8000) { failed=1; return; }
-        int x=(int16_t)psx_mod_read_half(at+8);
-        int y=(int16_t)psx_mod_read_half(at+10)+P2_HUD_Y;
+        int x=(int16_t)psx_mod_read_half(at+8)+offset_x;
+        int y=(int16_t)psx_mod_read_half(at+10)+offset_y;
         /* Native texture modulation fades the original art, without making
          * alternate HUD graphics or changing its normal colors. */
         uint32_t shade=p2_hud_fade*0x010101u;
@@ -1717,8 +1727,10 @@ static void hud_zero_packets(uint32_t arena) {
         psx_mod_write_word(at,expanded&0xFFFFFF);
     }
     for (uint32_t at=arena+0x2000;at<bars;at+=36) {
-        for (unsigned xy=8;xy<=32;xy+=8)
-            psx_mod_write_half(at+xy+2,(uint16_t)(psx_mod_read_half(at+xy+2)+P2_HUD_Y));
+        for (unsigned xy=8;xy<=32;xy+=8) {
+            psx_mod_write_half(at+xy,(uint16_t)(psx_mod_read_half(at+xy)+offset_x));
+            psx_mod_write_half(at+xy+2,(uint16_t)(psx_mod_read_half(at+xy+2)+offset_y));
+        }
         for (unsigned c=4;c<=28;c+=8) {
             uint32_t color=psx_mod_read_word(at+c), faded=color&0xFF000000u;
             for (unsigned channel=0;channel<24;channel+=8)
