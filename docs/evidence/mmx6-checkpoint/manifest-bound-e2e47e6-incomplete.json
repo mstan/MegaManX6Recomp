@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "kind": "reviewed_incomplete_native_checkpoint_setup",
+  "candidate_source": "e2e47e66e119425d6e9235cd3511209bf1cc1aad",
+  "exe_sha256": "229ffec7a7dabda9742653264e1d023adde408602003df7f48b4c4d3f758d8e6",
+  "declared_manifest_sha256": "e186d1d0908b5a0341de84261272c30e14c4ab83a6fabbad30e6da9df5d4cefb",
+  "raw_report": {
+    "path": "G:/Temp/Codex/psxrecomp/x6-parity/checkpoint-v12-e2e47e6-intro-cp1/qualification.json",
+    "sha256": "a3b6e1396a2570ec6866967799bf62b78e99dab1d5bd739cee2054060febae2b",
+    "automated_status": "prerequisite_bypass_setup_completed_artwork_pending",
+    "rewritten": false
+  },
+  "reviewed_disposition": "unverified_incomplete_setup",
+  "target": "s00-a0-c01",
+  "observed": {
+    "native_mode": 10,
+    "native_tuple": [0, 0, 1],
+    "guarded_initializer_entry_count": 1,
+    "camera_checkpoint_parameters_installed": true,
+    "before_publication_tick": 215,
+    "claimed_final_publication_tick": 220,
+    "both_published_actor_positions_still_equal_pre_request": true,
+    "capture_black": true,
+    "owned_shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "capture": {
+    "path": "G:/Temp/Codex/psxrecomp/x6-parity/checkpoint-v12-e2e47e6-intro-cp1/baseline/checkpoint-present.png",
+    "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+    "review": "Root inspected the full composed capture; all pixels are black. It does not show playable checkpoint entry."
+  },
+  "required_correction": [
+    "Anchor freshness after observing the completed native initializer receipt; payload RPCs can advance the old publication before the command is consumed.",
+    "Require actual post-entry actor initialization/enrollment, source-backed checkpoint placement and cleared native loading/control gates.",
+    "Retain and inspect completed composed output after those conditions."
+  ],
+  "limits": [
+    "The raw automated status is insufficient and is explicitly rejected by this review.",
+    "The fixture is a private offline prerequisite bypass, never native retry, progression, reachability or mechanic evidence.",
+    "No comparison, content obligation or native coverage case is passed."
+  ]
+}

@@ -1,9 +1,12 @@
 # Private offline checkpoint entry setup
 
 This is a development fixture for campaign QA, not a retry, progression,
-checkpoint reachability or mechanic pass. No native game has been launched to
-qualify it yet. Root must review and build the changed entry registration before
-using a fresh exact-candidate profile.
+checkpoint reachability or mechanic pass. The first native v12 attempt reached
+the requested initializer but exposed an incomplete completion predicate. The
+[reviewed receipt](evidence/mmx6-checkpoint/manifest-bound-e2e47e6-incomplete.json)
+rejects its automated completion status: both diagnostic actor positions were
+still from the old stage and the composed capture was black. This fixture is
+not yet qualified for campaign setup.
 
 The immutable [content inventory](COOP_X6_CONTENT.json) retains all 115 tuples.
 Only 94 tuples in its 23 authored placement sections are permitted. The other 21
@@ -37,9 +40,13 @@ stage/section, checkpoint0 from mode8, `a0=800CCED0` and return address
 installs only the requested checkpoint before returning to ordinary dispatch.
 It never calls the initializer, replaces it, uploads an overlay or writes
 native tables. A repeated/out-of-order observer fails the pending operation.
-Completion requires the subsequent native mode0A stage entry with the selected
-tuple; a fresh enrolled co-op diagnostic publication is additionally required
-by the runner before it declares setup completed.
+The native receipt reaches completion at the subsequent mode0A stage entry
+with the selected tuple. That receipt alone does not establish playable entry.
+The original runner's publication check was anchored before the payload RPCs,
+which could accept a later old-stage publication. Qualification additionally
+needs freshness anchored after the completion receipt, actual new actor
+initialization/placement and native control readiness, followed by inspected
+composed output. Those checks remain under implementation.
 
 Pending state is cleared by activation/reset and by detected plugin,
 source/context/order or offline-policy failure. Queued command8 and both
