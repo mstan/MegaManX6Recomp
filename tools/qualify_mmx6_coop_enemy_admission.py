@@ -35,13 +35,33 @@ def resident_targeting_sample(row):
     if target is None:
         return None
     players = row["observation"]["players"]
-    distances = [abs(target["x_raw"] - player["x_raw"]) / 65536 for player in players]
+    # 800EB14C compares signed integer high halves, not fractional body X.
+    enemy_integer_x = target["x_raw"] >> 16
+    player_integer_x = [player["x_raw"] >> 16 for player in players]
+    distances = [abs(enemy_integer_x - x) for x in player_integer_x]
     if target["phase"] == 1 and distances[1] < 112 <= distances[0]:
         return dict(tick=row["observation"]["tick"], address=target["address"],
                     origin=target["origin"], phase_plus4=target["phase"],
                     action_plus5=target["action"], subaction_plus6=target["subaction"],
                     hp=target["hp"], distances=distances,
+                    native_integer_x=[enemy_integer_x, *player_integer_x],
                     player_x=[player["x_raw"] / 65536 for player in players], enemy_x=target["x"])
+    return None
+
+
+def attack_evidence(before, observations):
+    """Keep an observed native HP drop even if the next sample is a freed slot."""
+    initial = before["instance"]
+    if initial is None or initial["hp"] <= 0:
+        return None
+    for row in observations:
+        target = row["instance"]
+        elapsed = (row["observation"]["tick"] - before["observation"]["tick"]) & 0xFFFFFFFF
+        if (target and 0 < elapsed < 0x80000000 and target["flags"] and
+                target["address"] == initial["address"] and target["origin"] == hex(RECORD) and
+                initial["origin"] == hex(RECORD) and target["type"] == initial["type"] == 1 and
+                target["hp"] < initial["hp"]):
+            return row
     return None
 
 
@@ -98,8 +118,12 @@ def observe_case(client):
 
 
 def run(args):
-    output = local_output(args.output)
-    prepare(args.build, args.source, output, args.disc, automated=True)
+    output = local_output(args.candidate or args.output)
+    if args.candidate:
+        if not output.is_dir() or (output / "qualification.json").exists() or (output / "baseline").exists():
+            raise ValueError("Prepared candidate must be fresh; existing qualification evidence is preserved")
+    else:
+        prepare(args.build, args.source, output, args.disc, automated=True)
     if sha256(output / "mmx6-runtime.exe") != args.expected_exe_sha256:
         raise ValueError("R13 candidate does not match the explicitly expected executable SHA256")
     (output / "qualifier-source.py").write_bytes(Path(__file__).read_bytes())
@@ -115,7 +139,8 @@ def run(args):
             input_path="original port2 SIO pad; host virtual layer in this SDK is P1-only",
             limits=["Timer progress does not prove exactly one world update",
                     "Camera, pool and diagnostic reads are separate bounded observations, not one atomic world sample",
-                    "Type1 native AI proximity tests resident P1; P2 proximity alone is not qualified targeting",
+                    ("Native targeting response covers only this bound intro type1 instance" if args.expect_targeting_action2 else
+                     "Type1 native AI proximity tests resident P1; P2 proximity alone is not qualified targeting"),
                     "No paired result, ledger pass, full campaign or audible assertion"])
         if args.expect_targeting_action2:
             report["checks"]["p2_near_triggers_native_action2"] = False
@@ -143,6 +168,10 @@ def run(args):
                 report["resident_targeting_observations"].append(dict(label=label, **targeting))
                 if args.expect_targeting_action2 and targeting["action_plus5"] == 2:
                     report["checks"]["p2_near_triggers_native_action2"] = True
+                    if "targeting_response_capture" not in report:
+                        report["targeting_response_capture"] = capture_present(
+                            client, destination / "native-targeting-action2.png", request=control)
+                        report["captures"].append(report["targeting_response_capture"])
             if row["observation"]["players"][0]["x_raw"] != p1x:
                 raise DebugError("P1 moved during the fixed-primary admission case")
             if row["instance"] and selected_address is not None and row["instance"]["address"] != selected_address:
@@ -216,13 +245,13 @@ def run(args):
         if before_attack["observation"]["players"][1]["y_raw"] > before_attack["instance"]["y_raw"] + (16 << 16):
             control("press", port=2, buttons=0xBFFF, frames=6)
             window(4, "P2 jump toward selected enemy")
+        attack_start = len(report["observations"])
         control("press", port=2, buttons=0x7FFF, frames=8)
         hit = None
         for index in range(25):
-            row = window(2, f"native P2 attack interaction {index}")
-            target = row["instance"]
-            if target and (target["hp"] < 12 or target["phase"] >= 2):
-                hit = row
+            window(2, f"native P2 attack interaction {index}")
+            hit = attack_evidence(before_attack, report["observations"][attack_start:])
+            if hit:
                 break
         control("clear_input", port=2)
         report["interaction"] = hit or take("interaction not observed")
@@ -241,19 +270,25 @@ def run(args):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--build", type=Path, required=True)
-    parser.add_argument("--source", type=Path, required=True)
-    parser.add_argument("--disc", type=Path, required=True)
-    parser.add_argument("--output", type=Path, required=True)
+    staging = parser.add_mutually_exclusive_group(required=True)
+    staging.add_argument("--build", type=Path)
+    staging.add_argument("--candidate", type=Path, help="Use one fresh prepared private candidate without restaging")
+    parser.add_argument("--source", type=Path)
+    parser.add_argument("--disc", type=Path)
+    parser.add_argument("--output", type=Path)
     parser.add_argument("--expected-exe-sha256", default=BUILD_SHA)
     parser.add_argument("--expect-targeting-action2", action="store_true",
                         help="Require native action2 while P2 is near and fixed P1 is far (after-fix comparison)")
     args = parser.parse_args()
+    if args.build and not all((args.source, args.disc, args.output)):
+        parser.error("--build requires --source, --disc and --output")
+    if args.candidate and any((args.source, args.disc, args.output)):
+        parser.error("--candidate uses its existing preparation; omit staging arguments")
     if len(args.expected_exe_sha256) != 64 or any(c not in "0123456789abcdef" for c in args.expected_exe_sha256):
         parser.error("Expected executable SHA256 must contain 64 lowercase hex digits")
     result = run(args)
     print(json.dumps(dict(status=result["status"], error=result.get("error"),
-                         report=str(args.output / "qualification.json"))))
+                         report=str((args.candidate or args.output) / "qualification.json"))))
     return 0 if result["status"] == "passed" else 1
 
 

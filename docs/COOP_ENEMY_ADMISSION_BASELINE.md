@@ -145,6 +145,8 @@ no source card was used and existing private card bytes were unchanged.
 The tool supports an explicit `--expected-exe-sha256` for the selected after
 candidate and `--expect-targeting-action2` to require an actual origin-bound
 native action2 observation while P2 is within112 and fixed P1 remains outside.
+The comparison uses the native signed integer X halves, including the strict
+112-pixel boundary, and captures the first observed action2 composed response.
 Seven focused parser/preflight/comparison tests pass. The after-comparison
 option was added after the v10 run and is not a v11 qualification by itself.
 
@@ -152,3 +154,54 @@ All run directories above are under `G:/Temp/Codex/psxrecomp/x6-parity`.
 `docs/evidence/mmx6-r13/native-v10-route-summary.json` preserves compact receipts
 for both actual route attempts; the full observations/logs/captures remain in
 their identified output directories. No v11 result is implied by this evidence.
+
+## Native v11 after comparison
+
+The coordinator prepared a new immutable candidate at
+`enemy-admission-r13-sdk9cb-v11-after`, executable SHA-256
+`43796887fda9e8b6bf547acdd1fa1149e1a944717e824e0dee5bf4a5b6010db7`.
+The tool's `--candidate` mode validates and uses a fresh existing preparation
+without restaging it, and rejects existing qualification evidence. This run
+used `--expect-targeting-action2` and the exact expected executable hash.
+Its executed qualifier source is retained alongside it, SHA-256
+`8f2238226dae172d3f6aef39b712349a217b615bb8e66e78972c6456ea7d5c83`.
+
+Record25 was admitted at camera(51,944), tick454, and native initialization was
+observed at tick473. P1 stayed x144 in all 197 case observations. At tick590 the
+same origin-bound actor entered native action +5=2 with HP12 while Zero's raw
+X was309.5: the native signed integer X values were enemy416/P1=144/P2=309,
+distances272/107. This directly discriminates the fixed behavior from v10's
+waiting action1 under the same near/far condition. The first response composed
+capture has completion sequence3/wrote1, SHA-256
+`33862cf795400063200ea0d3338543cf75bcbd784126a58a0a99a8557238b685`.
+Inspection shows both heroes and a native attack/projectile response; the bound
+enemy is beyond the right viewport edge at this camera position. This does not
+qualify its complete animation/art or other native AI types.
+
+At tick796, before original Square input, the exact actor was alive with HP12
+and phase1. The recorded `native P2 attack interaction 0 start` at tick799
+already had HP4/phase1, the same live slot/type/origin and P2 native action48 at
+x376/y1082. By tick805 the slot was freed and the P2 hit counter was3. Both
+heroes ended alive with HP32; P1 remained fixed. The final composed image
+SHA-256 is `d28230cc86a84814ee3a8a742b19aca7620f28df5b549d5a5ef6c2c89b1e4ac5`.
+
+The original report is preserved with status `failed`, SHA-256
+`46d18e38fc8f8fba0782be0223d6525d449a116e4402024dad74aed2c280f944`.
+Its attack reducer checked only the wait window's returned sample, overlooking
+the already-recorded HP4 start sample before the enemy was freed. The corrected
+reducer examines every post-input observation, requires a forward tick, the
+same live native slot/type/origin and an actual HP drop. A regression covers
+the observed HP12 -> HP4 -> freed sequence plus stale, dead, wrong-origin,
+wrong-slot, wrong-type and unchanged-HP negatives.
+
+No second v11 launch was needed. Separate read-only
+`qualification-reanalysis.json` retains the original report hash and recovered
+sample; SHA-256 `19f2c19181d0ff2cf6640ceb4a2631c1b7c74b03381eb49442762625502e8ac0`.
+It is committed as `docs/evidence/mmx6-r13/native-v11-after-reanalysis.json`.
+All twelve bounded local checks are supported by the retained observations,
+including native action2 and the HP drop. The original runtime status was not
+rewritten. Eight focused tool tests pass. The corrected reducer has been
+exercised against the retained real report and unit fixtures, not a fresh game
+run. Graceful shutdown remains unqualified: only the owned process was
+terminated after bounded quit handling. Paired behavior and an independent
+once-world runtime counter remain open; this does not pass the complete R13 row.

@@ -1,10 +1,11 @@
 """Offline evidence-parser checks; no runtime or guest-memory writes."""
 import struct
 import unittest
+from copy import deepcopy
 
 from coop_debug import DebugError
 from qualify_mmx6_coop_enemy_admission import (RECORD, SLOTS, STRIDE, native_43,
-                                             parse_pool, preflight, resident_targeting_sample)
+                                             parse_pool, preflight, resident_targeting_sample, attack_evidence)
 
 
 class NativeEnemyEvidenceTests(unittest.TestCase):
@@ -82,9 +83,30 @@ class NativeEnemyEvidenceTests(unittest.TestCase):
         self.assertEqual(resident_targeting_sample(row)["action_plus5"], 2)
         row["observation"]["players"][1]["x_raw"] = 304 << 16
         self.assertIsNone(resident_targeting_sample(row))  # Native strict <112 boundary.
+        target["x_raw"] += 0xC000
+        row["observation"]["players"][1]["x_raw"] += 0xE000
+        self.assertIsNone(resident_targeting_sample(row))  # Fractional distance <112, native integers still112.
+        target["x_raw"] = 416 << 16
         row["observation"]["players"][1]["x_raw"] = 305 << 16
         row["observation"]["players"][0]["x_raw"] = 305 << 16
         self.assertIsNone(resident_targeting_sample(row))  # P1 already near is no P2 discriminator.
+
+    def test_attack_reducer_keeps_window_start_before_enemy_is_freed(self):
+        _, target = parse_pool(self.pool([(0, self.body())]))
+        before = {"instance": target, "observation": {"tick": 796}}
+        hit = deepcopy(before)
+        hit["observation"]["tick"] = 799
+        hit["instance"]["hp"] = 4
+        freed = {"instance": None, "observation": {"tick": 805}}
+        self.assertIs(attack_evidence(before, [hit, freed]), hit)
+        for field, value in (("address", "0x8008efe4"), ("origin", hex(RECORD + 12)),
+                             ("type", 2), ("flags", 0), ("hp", 12)):
+            invalid = deepcopy(hit)
+            invalid["instance"][field] = value
+            self.assertIsNone(attack_evidence(before, [invalid, freed]), field)
+        stale = deepcopy(hit)
+        stale["observation"]["tick"] = 795
+        self.assertIsNone(attack_evidence(before, [stale, freed]))
 
 
 if __name__ == "__main__":
