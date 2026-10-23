@@ -284,6 +284,8 @@ class AudioObserver:
         if len(self.events)>16384 or any(row["v"] in range(24,48) for row in self.events):
             raise AudioQualificationError("Private voice/event volume outside hardware-only case")
         bodies = [raw[0x1800:0x1958],raw[0x100:0x258]]
+        # Actor+24 is native positive-up speed; the integrator subtracts it
+        # from Y. Actor+1C is the prior Y copied by80034E30, not a velocity.
         players = [dict(character=b[2],form=b[0xE7],state=b[4],action=b[5],hp=b[0x5C],
             x=struct.unpack_from("<i",b,8)[0],y=struct.unpack_from("<i",b,12)[0],
             vy=struct.unpack_from("<i",b,0x24)[0],airborne=struct.unpack_from("<b",b,0x67)[0],
@@ -311,6 +313,34 @@ class AudioObserver:
         if len(matches)>1:
             raise AudioQualificationError("Ambiguous source tone at native sample address")
         return matches[0] if matches else dict(tone=None,sample_matches=False,reason="unmapped_native_sample_address")
+
+
+def accepted_ground_jump(before: dict, after: dict, seat: int, receipt: dict) -> bool:
+    """Require native ascent while held, then only its normal6/7 air phases.
+
+    Native actor+24 is positive-up speed, subtracted from Y at8002D078.
+    Releasing Cross at8003565C..70 zeroes it;80035760..8C then sets
+    action7/airborne=-1. The post-release RPC can therefore observe a valid
+    falling short jump. Its earlier held endpoint must prove action6 and
+    upward displacement; a generic falling action alone is insufficient.
+    """
+    try:
+        if type(seat) is not int or seat not in (0,1) or not isinstance(receipt,dict):return False
+        initial,final=before["players"][seat],after["players"][seat]
+        start,end=receipt["start"]["players"][seat],receipt["end"]["players"][seat]
+        progress=(receipt["actual_native_ticks"],receipt["actual_publications"])
+        return bool(type(receipt["seat"]) is int and receipt["seat"]==seat and receipt["pressed"]==CROSS and
+            all(type(n) is int and 0<n<0x80000000 for n in progress) and
+            initial["action"]==2 and initial["ground"] and initial["airborne"]==0 and
+            start["active"]==end["active"]==1 and start["state"]==end["state"]==1 and
+            start["character"]==end["character"]==initial["character"] and
+            start["hp"]==end["hp"]==initial["hp"] and start["action"]==2 and
+            start["y_raw"]==initial["y"] and end["action"]==6 and end["y_raw"]<initial["y"] and
+            final["state"]==1 and final["character"]==initial["character"] and final["hp"]==initial["hp"] and
+            (final["action"],final["airborne"]) in ((6,1),(7,-1)) and not final["ground"] and
+            final["y"]<initial["y"])
+    except (KeyError,TypeError,IndexError):
+        return False
 
 
 def jump_overlap_smoke(ctx: dict,contract: dict,*,first_seat: int=0,max_attempts: int=8,
@@ -364,7 +394,7 @@ def jump_overlap_smoke(ctx: dict,contract: dict,*,first_seat: int=0,max_attempts
             require(n<20,"Both actors failed to return to native ground/idle")
             ctx["native_advance"](4,label)
     def hold(seat,label):
-        receipt=ctx["hold"](seat,CROSS,1,label);case["inputs"].append(receipt)
+        receipt=ctx["hold"](seat,CROSS,1,label);case["inputs"].append(receipt);return receipt
     chosen=None
     try:
         ground("audio-initial-ground");before_driver=observer.driver();case["driver_before"]=before_driver
@@ -372,17 +402,15 @@ def jump_overlap_smoke(ctx: dict,contract: dict,*,first_seat: int=0,max_attempts
                 "Unqualified native release/VAB readiness")
         case["voices_before"]=parse_voices(ctx["request"]("spu_voices"))
         for attempt in range(max_attempts):
-            before=ground(f"audio-attempt-{attempt}-ground");hold(first_seat,"audio-first-jump")
+            before=ground(f"audio-attempt-{attempt}-ground");held=hold(first_seat,"audio-first-jump")
             first=sample("audio-first-jump")
-            require(first["players"][first_seat]["action"]==6 and first["players"][first_seat]["vy"]<0 and
-                    first["players"][first_seat]["y"]<before["players"][first_seat]["y"],"First native jump was not accepted")
+            require(accepted_ground_jump(before,first,first_seat,held),"First native jump was not accepted")
             first_keys=[e for e in first["new_events"] if e["kind"]=="KEYON" and e["v"]==20]
             row=dict(attempt=attempt,first_keys=first_keys);case["attempts"].append(row)
             if not first_keys:continue # Native RNG may deliberately omit the voice.
             require(len(first_keys)==1,"Ambiguous first jump voice window")
-            hold(first_seat^1,"audio-second-jump");second=sample("audio-second-jump")
-            require(second["players"][first_seat^1]["action"]==6 and second["players"][first_seat^1]["vy"]<0 and
-                    second["players"][first_seat^1]["y"]<before["players"][first_seat^1]["y"],"Second native jump was not accepted")
+            held=hold(first_seat^1,"audio-second-jump");second=sample("audio-second-jump")
+            require(accepted_ground_jump(before,second,first_seat^1,held),"Second native jump was not accepted")
             second_keys=[e for e in second["new_events"] if e["kind"]=="KEYON" and e["v"]==20]
             row["second_keys"]=second_keys
             if not second_keys:continue

@@ -1,0 +1,554 @@
+{
+  "schema": 1,
+  "kind": "retained_native_jump_endpoint_regression",
+  "source_report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v16-4cdfe4d-local-x-first-source-bound\\qualification.json",
+  "source_report_sha256": "2be42456f2b78ca830580a74b70c98fee4bd684875eb0e7bdb5cf95f922d33af",
+  "control_sha256": "51dced902b079bbdcc03b03823e9bec67605f4fc94491049d4636449ac5ae93f",
+  "image_sha256": "eeb5754a53a6d10aeac13b294ce3325a7e2b8a6180b20ce001a3800401fcec6d",
+  "manifest_sha256": "3d462d7f1bdcdbcd5f17211eaf597a7b3be4e199484c1f08fb90444f6cae89c8",
+  "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+  "native_windows": [
+    {
+      "name": "jump_action_dispatch",
+      "start": "800350D4",
+      "end_exclusive": "800350F8",
+      "sha256": "8c515406084ead20010e18a2aa63c64583ae5c58adf58f0942f681f4f0d6db98"
+    },
+    {
+      "name": "jump_action6",
+      "start": "80035620",
+      "end_exclusive": "800357A8",
+      "sha256": "5e33c2074cf18f2a89e46aaf02148cd7856ad52e581be8095d68fd0b9a7c633e"
+    },
+    {
+      "name": "fall_initialization",
+      "start": "8003AFF4",
+      "end_exclusive": "8003B054",
+      "sha256": "3882b7d449a2da1ccbca21755b546770ca39c2cb6a406fe1b6bacbd2ce7b8583"
+    },
+    {
+      "name": "motion_integrator",
+      "start": "8002CFB0",
+      "end_exclusive": "8002D0D8",
+      "sha256": "a96414dc0d3703294c84b7a1cf3c2bfc579be4e622b5aedcb1ebf6224a0a9c08"
+    }
+  ],
+  "action_table": {
+    "address": "80073ACC",
+    "action6": "80035620",
+    "action7": "800368FC"
+  },
+  "before": {
+    "observation": {
+      "schema": 1,
+      "tick": 148,
+      "sequence": 296,
+      "native_timer": 147,
+      "lifecycle": [
+        0,
+        0
+      ],
+      "pause_owner": 0,
+      "scene_owner": 0,
+      "scene_phase": 0,
+      "mailbox": 0,
+      "ready": 1,
+      "enrolled": 1,
+      "failed": 0,
+      "native_mode": 10,
+      "native_phase": 0,
+      "host_digest": 1265333402,
+      "host_digest_algorithm": 1,
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 11010048,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "framework_digest_registered": 0
+    },
+    "players": [
+      {
+        "character": 0,
+        "form": 1,
+        "state": 1,
+        "action": 2,
+        "hp": 32,
+        "x": 9437184,
+        "y": 73072640,
+        "vy": -354816,
+        "airborne": 0,
+        "ground": true,
+        "speech_gate": 0
+      },
+      {
+        "character": 1,
+        "form": 5,
+        "state": 1,
+        "action": 2,
+        "hp": 32,
+        "x": 11010048,
+        "y": 73007104,
+        "vy": -16896,
+        "airborne": 0,
+        "ground": true,
+        "speech_gate": 0
+      }
+    ],
+    "event_total": 202,
+    "new_events": [],
+    "label": "audio-attempt-0-ground"
+  },
+  "held_receipt": {
+    "label": "audio-first-jump",
+    "seat": 0,
+    "pressed": 16384,
+    "requested_native_ticks": 1,
+    "acknowledgment": {
+      "seat": 0,
+      "pressed": 16384,
+      "status": {
+        "id": 1360,
+        "ok": true,
+        "pad": "0xBFFF",
+        "slot0": {
+          "buttons": "0xBFFF",
+          "connected": true,
+          "analog": false,
+          "type": 0,
+          "sticks": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "negcon": [
+            0,
+            0,
+            0
+          ],
+          "mode_locked": false
+        },
+        "slot1": {
+          "buttons": "0xFFFF",
+          "connected": true,
+          "analog": false,
+          "type": 0,
+          "sticks": [
+            128,
+            128,
+            128,
+            128
+          ],
+          "negcon": [
+            0,
+            0,
+            0
+          ],
+          "mode_locked": false
+        },
+        "override": -1,
+        "override_frames": 0,
+        "override_pad_type": -1,
+        "override_p2": -1,
+        "override_p2_frames": 0,
+        "override_axes": [
+          128,
+          128,
+          128,
+          128
+        ],
+        "override_axes_valid": false,
+        "host_input_slots": 2,
+        "host_port": 1,
+        "host_layer": true,
+        "host_buttons": "0xBFFF",
+        "host_axes": [
+          128,
+          128,
+          128,
+          128
+        ],
+        "host_lt": 0,
+        "host_rt": 0
+      }
+    },
+    "start": {
+      "schema": 1,
+      "tick": 149,
+      "sequence": 298,
+      "native_timer": 148,
+      "lifecycle": [
+        0,
+        0
+      ],
+      "pause_owner": 0,
+      "scene_owner": 0,
+      "scene_phase": 0,
+      "mailbox": 0,
+      "ready": 1,
+      "enrolled": 1,
+      "failed": 0,
+      "native_mode": 10,
+      "native_phase": 0,
+      "host_digest": 2972107170,
+      "host_digest_algorithm": 1,
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 11010048,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "framework_digest_registered": 0
+    },
+    "end": {
+      "schema": 1,
+      "tick": 152,
+      "sequence": 304,
+      "native_timer": 151,
+      "lifecycle": [
+        0,
+        0
+      ],
+      "pause_owner": 0,
+      "scene_owner": 0,
+      "scene_phase": 0,
+      "mailbox": 0,
+      "ready": 1,
+      "enrolled": 1,
+      "failed": 0,
+      "native_mode": 10,
+      "native_phase": 0,
+      "host_digest": 3752770450,
+      "host_digest_algorithm": 1,
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 6,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 72691712,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 11010048,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "framework_digest_registered": 0
+    },
+    "actual_native_ticks": 3,
+    "actual_publications": 3
+  },
+  "held_body": {
+    "tick": 152,
+    "action": 6,
+    "airborne": 1,
+    "y": 72691712,
+    "vy": 364032
+  },
+  "after": {
+    "observation": {
+      "schema": 1,
+      "tick": 156,
+      "sequence": 312,
+      "native_timer": 155,
+      "lifecycle": [
+        0,
+        0
+      ],
+      "pause_owner": 0,
+      "scene_owner": 0,
+      "scene_phase": 0,
+      "mailbox": 0,
+      "ready": 1,
+      "enrolled": 1,
+      "failed": 0,
+      "native_mode": 10,
+      "native_phase": 0,
+      "host_digest": 2824809605,
+      "host_digest_algorithm": 1,
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 7,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 71997440,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 11010048,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "framework_digest_registered": 0
+    },
+    "players": [
+      {
+        "character": 0,
+        "form": 1,
+        "state": 1,
+        "action": 7,
+        "hp": 32,
+        "x": 9437184,
+        "y": 71997440,
+        "vy": -33792,
+        "airborne": -1,
+        "ground": false,
+        "speech_gate": 0
+      },
+      {
+        "character": 1,
+        "form": 5,
+        "state": 1,
+        "action": 2,
+        "hp": 32,
+        "x": 11010048,
+        "y": 73007104,
+        "vy": -16896,
+        "airborne": 0,
+        "ground": true,
+        "speech_gate": 0
+      }
+    ],
+    "event_total": 204,
+    "new_events": [
+      {
+        "seq": 202,
+        "frame": 2543,
+        "kind": "KEYON",
+        "v": 20,
+        "addr": 338464,
+        "pitch": 1144,
+        "adsr_lo": 33023,
+        "adsr_hi": 8128,
+        "vol_l": 10157,
+        "vol_r": 8544
+      },
+      {
+        "seq": 203,
+        "frame": 2545,
+        "kind": "KEYON",
+        "v": 22,
+        "addr": 142720,
+        "pitch": 1448,
+        "adsr_lo": 33023,
+        "adsr_hi": 8128,
+        "vol_l": 12290,
+        "vol_r": 9363
+      }
+    ],
+    "label": "audio-first-jump"
+  },
+  "host_input_receipts": 94,
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "existing_private_cards_unchanged": true,
+  "capture": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v16-4cdfe4d-local-x-first-source-bound\\candidate\\saves\\input-recordings\\session-1792777412136715-1-0\\inputs.jsonl",
+    "sha256": "cbab538f52e1511628afaa43c33b6eb936b797fbd34fd5e8d83af9ba1f398e88",
+    "events": 5844,
+    "natives": 4096,
+    "p2_reads": 1748,
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "eeb5754a53a6d10aeac13b294ce3325a7e2b8a6180b20ce001a3800401fcec6d",
+      "manifest_sha256": "3d462d7f1bdcdbcd5f17211eaf597a7b3be4e199484c1f08fb90444f6cae89c8",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "requested_jump_seats": [
+      0
+    ],
+    "consumed_cross_seen_anywhere": [
+      0
+    ],
+    "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence",
+    "artifacts": {
+      "card1.initial.mcd": {
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      },
+      "card2.initial.mcd": {
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      },
+      "content.json": {
+        "bytes": 503,
+        "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+      },
+      "inputs.jsonl": {
+        "bytes": 767161,
+        "sha256": "cbab538f52e1511628afaa43c33b6eb936b797fbd34fd5e8d83af9ba1f398e88"
+      },
+      "settings.json": {
+        "bytes": 10329,
+        "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+      },
+      "simulation-contract.json": {
+        "bytes": 259,
+        "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      "status.json": {
+        "bytes": 160,
+        "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+      }
+    }
+  },
+  "audio_comparison": "not_reached",
+  "r4": "unverified",
+  "r12": "unverified"
+}

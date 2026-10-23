@@ -328,14 +328,23 @@ def run(args):
         report["manifest"]=manifest;report["sources"]=validate_sources(args.build,args.source,manifest)
         report["originals"]=verify_prepared_originals(candidate,args.original_exe,args.disc)
         report["checks"]["exact_image_manifest_and_declared_game_sources"]=True
-        run_owned(candidate,args.port,args.boot_timeout,args.progress_timeout,report["runtime"],contract,
-            expected_image=args.expected_exe_sha256,first_seat=args.first_seat,max_attempts=args.max_attempts,audio_timeout=args.audio_timeout)
+        run_error=None
+        try:
+            run_owned(candidate,args.port,args.boot_timeout,args.progress_timeout,report["runtime"],contract,
+                expected_image=args.expected_exe_sha256,first_seat=args.first_seat,max_attempts=args.max_attempts,audio_timeout=args.audio_timeout)
+        except Exception as error:
+            run_error=error
         native=report["runtime"]
-        if native.get("cleanup")!=dict(shutdown="graceful_owned_debug",exit_code=0) or not native.get("existing_private_cards_unchanged"):
-            raise debug.DebugError("Owned shutdown/private-card retention failed")
-        requested={row["seat"] for row in native.get("accepted_windows",[]) if row["pressed"]==audio.CROSS and row["label"].startswith("audio-")}
-        report["capture"]=inspect_capture(candidate,args.expected_exe_sha256,args.expected_manifest_sha256,requested)
-        report["checks"]["finalized_native_input_capture_and_owned_cleanup"]=True
+        try:
+            if native.get("cleanup")!=dict(shutdown="graceful_owned_debug",exit_code=0) or not native.get("existing_private_cards_unchanged"):
+                raise debug.DebugError("Owned shutdown/private-card retention failed")
+            requested={row["seat"] for row in native.get("accepted_windows",[]) if row["pressed"]==audio.CROSS and row["label"].startswith("audio-")}
+            report["capture"]=inspect_capture(candidate,args.expected_exe_sha256,args.expected_manifest_sha256,requested)
+            report["checks"]["finalized_native_input_capture_and_owned_cleanup"]=True
+        except Exception as error:
+            report["postrun_error"]=dict(type=type(error).__name__,message=str(error))
+            if run_error is None:raise
+        if run_error is not None:raise run_error
         status=native.get("status")
         report["status"]=SUCCESS if status=="observations_complete" else status
         if status not in ("observations_complete","comparison_failed",INCONCLUSIVE):

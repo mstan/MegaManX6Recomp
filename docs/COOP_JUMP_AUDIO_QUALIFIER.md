@@ -109,7 +109,9 @@ listener and final report. Required context keys are:
   The helper uses only `spu_events`, `spu_voices`, `spu_ram` and RAM reads.
 - `hold(seat,bits,frames,label)` publishes actual host input for seat0/1,
   waits through the requested bounded native window, and always neutralizes
-  in its own finally. CROSS is4000h. `native_advance(frames,label)` waits on
+  in its own finally. It returns its JSON receipt with seat/pressed mask,
+  actual native/publication deltas and coherent `start`/`end` player snapshots.
+  CROSS is4000h. `native_advance(frames,label)` waits on
   the native PLAY timer. Neither callback may write SIO, player RAM, RNG,
   diagnostic mailboxes, audio tables or directly invoke guest code.
 - `report` is a dictionary; `candidate` is the prepared directory;
@@ -126,8 +128,13 @@ this bounded helper.
 
 The helper checks healthy initialized Falcon X/P1+Zero/P2, live ordinary
 mode0Ah, no pause/scene owner/absence/mailbox, HP32, native speech gate0,
-ground/idle before an attempt, and action6/upward motion after each actual
-jump. Intentional RNG silence retries without forcing RNG. At most8 attempts,
+ground/idle before an attempt, and action6/upward displacement in each held
+input receipt. The later post-release snapshot must remain above the starting
+Y in native action6/airborne1 or action7/airborne-1. Actor+24 is positive-up
+speed, subtracted from Y; releasing Cross can zero it and enter action7 before
+the RPC endpoint. A generic fall without the held native action6 witness is
+refused. See the [retained native regression](COOP_JUMP_AUDIO_RUNNER.md#native-endpoint-correction).
+Intentional RNG silence retries without forcing RNG. At most8 attempts,
 120 seconds,16384 retained events and4096 bytes per sample probe are allowed.
 If the first voice ends before the second key-on it is not an overlap.
 If no two-voice window occurs, the result is explicitly inconclusive.
@@ -160,4 +167,6 @@ drift/fabricated pass, wrong character/pitch/ADSR, replacement versus natural
 end and rejection of online/unilateral-input/candidate mismatch before
 controls. With both original paths supplied, an additional bounded test
 rebuilds the entire metadata contract. These fixtures are not native audio
-qualification. No native observer result has been produced in this lane.
+qualification. The first native run reached a valid short jump but exposed
+the original observer's endpoint predicate error; its audio comparison was
+not reached. No successful native audio comparison is claimed.

@@ -140,6 +140,63 @@ class ContractTests(unittest.TestCase):
         audio.validate_contract(actual)
 
 
+class NativeJumpEndpointTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.fixture=json.loads((ROOT/"tests/fixtures/mmx6_jump_audio_native_endpoint_v16.json").read_text())
+
+    def test_actual_held_ascent_then_released_action7_is_an_accepted_jump(self):
+        f=self.fixture
+        self.assertEqual(f["source_report_sha256"],"2be42456f2b78ca830580a74b70c98fee4bd684875eb0e7bdb5cf95f922d33af")
+        self.assertEqual(f["host_input_receipts"],94)
+        self.assertEqual(f["held_body"],dict(tick=152,action=6,airborne=1,y=72691712,vy=364032))
+        initial,final=f["before"]["players"][0],f["after"]["players"][0]
+        self.assertEqual((initial["action"],final["action"],initial["y"],final["y"]),(2,7,73072640,71997440))
+        self.assertFalse(final["action"]==6 and final["vy"]<0) # Original false refusal.
+        self.assertTrue(audio.accepted_ground_jump(f["before"],f["after"],0,f["held_receipt"]))
+        keys=[(e["seq"],e["v"])for e in f["after"]["new_events"]if e["kind"]=="KEYON"]
+        self.assertEqual(keys,[(202,20),(203,22)])
+        self.assertEqual(f["cleanup"],dict(shutdown="graceful_owned_debug",exit_code=0))
+        self.assertEqual((f["capture"]["events"],f["capture"]["natives"],f["capture"]["p2_reads"]),(5844,4096,1748))
+        self.assertEqual(f["audio_comparison"],"not_reached")
+        self.assertEqual((f["r4"],f["r12"]),("unverified","unverified"))
+
+    def test_generic_fall_landing_or_other_actions_do_not_substitute_for_native_ascent(self):
+        f=self.fixture
+        for change in (lambda b,a,r:r["end"]["players"][0].update(action=7),
+                       lambda b,a,r:r["end"]["players"][0].update(y_raw=b["players"][0]["y"]),
+                       lambda b,a,r:r.update(seat=1),lambda b,a,r:r.update(actual_native_ticks=True),
+                       lambda b,a,r:r.update(actual_publications=0),
+                       lambda b,a,r:a["players"][0].update(action=8),
+                       lambda b,a,r:a["players"][0].update(action=7,airborne=1),
+                       lambda b,a,r:a["players"][0].update(action=6,airborne=0),
+                       lambda b,a,r:a["players"][0].update(ground=True),
+                       lambda b,a,r:a["players"][0].update(hp=16),
+                       lambda b,a,r:a["players"][0].update(y=b["players"][0]["y"]),
+                       lambda b,a,r:b["players"][0].update(ground=False)):
+            b,a,r=copy.deepcopy((f["before"],f["after"],f["held_receipt"]))
+            change(b,a,r)
+            with self.subTest(after=a["players"][0]):self.assertFalse(audio.accepted_ground_jump(b,a,0,r))
+        self.assertFalse(audio.accepted_ground_jump(f["before"],f["after"],0,None))
+
+    def test_action6_endpoint_uses_positive_up_native_speed(self):
+        f=self.fixture;after=copy.deepcopy(f["after"])
+        after["players"][0].update(f["held_body"])
+        self.assertTrue(after["players"][0]["vy"]>0)
+        self.assertTrue(audio.accepted_ground_jump(f["before"],after,0,f["held_receipt"]))
+
+    @unittest.skipUnless(os.getenv("MMX6_AUDIO_EXE"),"Set original EXE path to reproduce native jump-window hashes")
+    def test_original_action_table_and_transition_windows(self):
+        f=self.fixture;raw=Path(os.environ["MMX6_AUDIO_EXE"]).read_bytes()
+        self.assertEqual(hashlib.sha256(raw).hexdigest(),f["exe_sha256"])
+        for window in f["native_windows"]:
+            start,end=int(window["start"],16),int(window["end_exclusive"],16)
+            self.assertEqual(hashlib.sha256(raw[start-0x80010000+2048:end-0x80010000+2048]).hexdigest(),window["sha256"])
+        for action in (6,7):
+            target=struct.unpack_from("<I",raw,0x80073ACC+action*4-0x80010000+2048)[0]
+            self.assertEqual(f["action_table"][f"action{action}"],f"{target:08X}")
+
+
 class ComparisonTests(unittest.TestCase):
     def setUp(self):
         self.contract = CONTRACT
@@ -294,7 +351,12 @@ class ContextTests(unittest.TestCase):
                 def driver(self): return dict(release_adjust=0,vab_status=[1]*16)
             def hold(seat, bits, frames, label):
                 controls.append((seat,bits,frames,label))
-                if bits: state["jumping"] = True
+                if bits:
+                    state["jumping"] = True
+                    start=[dict(active=1,state=1,character=c,action=2,hp=32,y_raw=100)for c in (0,1)]
+                    end=copy.deepcopy(start);end[seat].update(action=6,y_raw=90)
+                    return dict(seat=seat,pressed=bits,actual_native_ticks=1,actual_publications=1,
+                                start=dict(players=start),end=dict(players=end))
             def advance(*args): state["jumping"] = False
             ctx = dict(mode="local",input_path="published_host",clients=[None],report=report,
                        candidate=candidate,expected_sha256=digest,hold=hold,native_advance=advance,

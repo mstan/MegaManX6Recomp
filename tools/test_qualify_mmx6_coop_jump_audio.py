@@ -283,5 +283,39 @@ class FilesTests(unittest.TestCase):
             self.assertEqual((output/"qualification.json").read_bytes(),before)
         launch.assert_not_called()
 
+    def test_observer_exception_still_validates_finalized_capture_without_hiding_original_error(self):
+        contract=json.loads((Path(runner.audio.__file__).resolve().parents[1]/"docs/COOP_JUMP_AUDIO_CONTRACT.json").read_text())
+        def prepare(build,source,candidate,*args,**kwargs):candidate.mkdir()
+        def failed_observer(candidate,port,boot,progress,native,*args,**kwargs):
+            native.update(cleanup=dict(shutdown="graceful_owned_debug",exit_code=0),existing_private_cards_unchanged=True,
+                          accepted_windows=[dict(seat=0,pressed=runner.audio.CROSS,label="audio-first-jump")],
+                          jump_audio=[dict(status="failed_setup",error="native predicate refused")])
+            raise runner.debug.DebugError("original native predicate refused")
+        for index,post_error in enumerate((False,True)):
+            argv=["--build",str(self.root/"build"),"--source",str(self.root/"source"),"--disc",str(self.root/"disc.bin"),
+                  "--original-exe",str(self.root/"original.exe"),"--output",str(self.root/f"postrun-{index}"),
+                  "--expected-exe-sha256","1"*64,"--expected-manifest-sha256","2"*64]
+            args=runner.parser().parse_args(argv)
+            with patch.object(runner.host,"require_windows"),patch.object(runner.audio,"build_contract",return_value=contract), \
+                    patch.object(runner.host,"verify_expected_image"),patch.object(runner.preparation,"prepare",side_effect=prepare), \
+                    patch.object(runner.host,"configure_two_digital_slots"), \
+                    patch.object(runner.manifests,"validate_build_manifest",return_value=dict(declared_sha256="2"*64)), \
+                    patch.object(runner,"validate_sources",return_value={}),patch.object(runner,"verify_prepared_originals",return_value={}), \
+                    patch.object(runner,"run_owned",side_effect=failed_observer), \
+                    patch.object(runner,"inspect_capture",side_effect=ValueError("postrun truncation")if post_error else None,
+                                 return_value=dict(events=5844,natives=4096,p2_reads=1748))as inspect, \
+                    patch.object(runner.subprocess,"Popen")as launch:
+                report=runner.run(args)
+            inspect.assert_called_once_with(args.output/"candidate","1"*64,"2"*64,{0})
+            launch.assert_not_called()
+            self.assertEqual(report["status"],"failed_setup")
+            self.assertEqual(report["error"]["message"],"original native predicate refused")
+            if post_error:
+                self.assertEqual(report["postrun_error"]["message"],"postrun truncation")
+                self.assertNotIn("capture",report)
+            else:
+                self.assertEqual(report["capture"]["events"],5844)
+                self.assertTrue(report["checks"]["finalized_native_input_capture_and_owned_cleanup"])
+
 
 if __name__=="__main__":unittest.main()
