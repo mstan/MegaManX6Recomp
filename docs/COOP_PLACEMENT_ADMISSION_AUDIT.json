@@ -1,0 +1,245 @@
+{
+  "format_version": 1,
+  "comparison": "R13",
+  "status": "unverified",
+  "local": "unverified",
+  "netplay": "unverified",
+  "game_source_commit": "ebf3b1130249f3c589e47bdb88e19877817001f5",
+  "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+  "overlay": {
+    "archive": "ROCK_X6.BIN",
+    "member": 2,
+    "sector": 36,
+    "size": 74784,
+    "base": "800E9860",
+    "sha256": "d8bcf3aea6caf1dd4098b681ad912692835d726dfe16fddca779e82d894de607"
+  },
+  "frozen_x4": {
+    "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+    "files": [
+      {
+        "path": "src/mods/mmx4_coop_split.c",
+        "git_blob": "d2afe037a9feb3c96f5dc0b3c80dd8bbd56fe8d5",
+        "sha256": "9f60f3bf2ebaa77fbbdb2453886a1038f8c17f31d3ddf8c67e645952829556b3"
+      },
+      {
+        "path": "src/mods/mmx4_coop_views.c",
+        "git_blob": "480f211919d1972b5cd1ed1555074a4f91aa3c2f",
+        "sha256": "2495b88bdc5ba502a7df92dbb48b56bfe4d2fb022b8cbc4e74e3dda479c95244"
+      }
+    ]
+  },
+  "native_routines": [
+    {
+      "name": "movement_scan_driver",
+      "start": "80029D18",
+      "end_exclusive": "80029E7C",
+      "sha256": "77a15a9b65fc17bc30fcea6a01491ca5955e6e7ef646acad5f52ec2b89edfb17"
+    },
+    {
+      "name": "primary_admission",
+      "start": "80029F38",
+      "end_exclusive": "8002A33C",
+      "sha256": "4cc5c282ba6f2a26f531dd282c241da0eab842c45d20653424c3e67fdba80de1"
+    },
+    {
+      "name": "difficulty_latch_eligibility",
+      "start": "80029E7C",
+      "end_exclusive": "80029F38",
+      "sha256": "df6eff4115848b712fbc5f13bac169665422de1032a5e9544412af5d56e7da89"
+    },
+    {
+      "name": "primary_reset",
+      "start": "8002A33C",
+      "end_exclusive": "8002A3AC",
+      "sha256": "64d048352812e4978ca1ed0fcc3edd590db9311fb7a08ef19a216024f7f980c5"
+    },
+    {
+      "name": "category_allocator",
+      "start": "8002A3AC",
+      "end_exclusive": "8002A3E8",
+      "sha256": "e8354030939ae7d38f61afcc21dcaa35383e788827dad0704b3bb09af595b9c7"
+    },
+    {
+      "name": "initial_and_secondary_admission",
+      "start": "8002A3E8",
+      "end_exclusive": "8002A47C",
+      "sha256": "6c31a2533e896fd02258e57365ad9f2eaf1f14bff9137eb34aa6232da5def4a0"
+    },
+    {
+      "name": "secondary_producer",
+      "start": "8002A4E4",
+      "end_exclusive": "8002A588",
+      "sha256": "4954ea12e5ef0a57a6f195005c0a774d76d0b73a89fce8e852817453b3586548"
+    },
+    {
+      "name": "camera_target_x",
+      "start": "80029598",
+      "end_exclusive": "800295E8",
+      "sha256": "e39b71b7c80da677bca1a1b4cc7c69af2fc96b583f0b08d38e5cf35b451f82e0"
+    },
+    {
+      "name": "camera_target_y",
+      "start": "80029658",
+      "end_exclusive": "800296A8",
+      "sha256": "268ddcdec060db90c2631f7516d51703f92f73ef3287f547617e91c4990562e5"
+    },
+    {
+      "name": "enemy_allocator",
+      "start": "8002BBF4",
+      "end_exclusive": "8002BCCC",
+      "sha256": "a592bcc71033c34451dc43badcc1f5f54f404ae416a83590546896b43a14f4f6"
+    },
+    {
+      "name": "world_enemy_update",
+      "start": "8002000C",
+      "end_exclusive": "8002012C",
+      "sha256": "03738f2b959dd315f070016f1b63856c2b16e5d63b2ee98f396d3009428fd1ad"
+    },
+    {
+      "name": "intro_type1_dispatch",
+      "start": "800EAFB0",
+      "end_exclusive": "800EAFFC",
+      "sha256": "315c562649bde6de3dd3be3e5566746fe465773ba2322dd7370252dc06a73b97",
+      "source": "ROCK_X6.BIN member2"
+    },
+    {
+      "name": "intro_type1_initialize",
+      "start": "800EAFFC",
+      "end_exclusive": "800EB10C",
+      "sha256": "5e574f41490c29335043e7f7bf24590f100dc8dc90a1d8bf7bd864f8a7876599",
+      "source": "ROCK_X6.BIN member2"
+    },
+    {
+      "name": "intro_type1_alive_update",
+      "start": "800EAC8C",
+      "end_exclusive": "800EAE0C",
+      "sha256": "cd14c1ec1679ddf26ec0603fec50e9438de071eed53c1c427bb24bb4fc4ba13f",
+      "source": "ROCK_X6.BIN member2"
+    },
+    {
+      "name": "intro_type1_proximity",
+      "start": "800EB14C",
+      "end_exclusive": "800EB1A0",
+      "sha256": "006123113552d8f79e437bfb59b9e76905555756966bf391c0d5394e83aaa39a",
+      "source": "ROCK_X6.BIN member2"
+    }
+  ],
+  "checkpoint": {
+    "id": "s00-a0-c00",
+    "stage": 0,
+    "section": 0,
+    "checkpoint": 0,
+    "stage_name": "Intro / Eurasia ruins",
+    "stage_role": "campaign",
+    "table": "80073134",
+    "record": "80072108",
+    "player": {
+      "x": 144,
+      "y": 976
+    },
+    "camera": {
+      "x": 0,
+      "y": 944,
+      "min_x": 0,
+      "max_x": 5120,
+      "min_y": 896,
+      "max_y": 944
+    },
+    "arrival": 64,
+    "status": "unverified",
+    "checks": {
+      "terrain_collision_scroll": "unverified",
+      "enemies_interactions": "unverified",
+      "music_sfx": "unverified",
+      "checkpoint_retry": "unverified",
+      "boss": "unverified",
+      "exit_actual_transition": "unverified"
+    }
+  },
+  "authored_record": {
+    "index": 25,
+    "address": "800FA2DC",
+    "flags": 0,
+    "object_id": 1,
+    "subtype": 1,
+    "category": 0,
+    "x": 416,
+    "y": 1080,
+    "status": "unverified"
+  },
+  "camera": {
+    "base": "800971F8",
+    "current_x": "80097202",
+    "current_y": "80097206",
+    "previous_x": "8009720E",
+    "previous_y": "80097212",
+    "initial_rectangle": {
+      "left": -48,
+      "right": 368,
+      "top": 896,
+      "bottom": 1232
+    },
+    "right_strip": {
+      "left": "camera_x+336",
+      "right": "camera_x+368",
+      "top": "camera_y-48",
+      "bottom": "camera_y+288"
+    },
+    "strict_scan_inequalities": true
+  },
+  "instance": {
+    "base": "8008EF48",
+    "end_exclusive": "80090C88",
+    "stride": 156,
+    "count": 48,
+    "origin_offset": 16,
+    "type_offset": 1,
+    "subtype_offset": 2,
+    "phase_offset": 4,
+    "action_offset": 5,
+    "subaction_offset": 6,
+    "hp_offset": 92,
+    "initial_hp": 12,
+    "initial_phase": 1,
+    "initial_action": 1,
+    "initial_subaction": 0,
+    "render_byte_3_not_required_for_initialization": true
+  },
+  "handler": {
+    "root": "8006DC6C",
+    "intro_table": "800FA424",
+    "type1": "800EAFB0",
+    "phase_table": "800FAB48",
+    "initialize": "800EAFFC",
+    "alive": "800EAC8C",
+    "hit_call": "800EAD20",
+    "hit_target": "80031474",
+    "contact_call": "800EADC0",
+    "contact_target": "80030ECC"
+  },
+  "limits": [
+    "Shared camera can admit leading P2 ordinary placements; no independent X6 view is claimed.",
+    "Type1 action1 proximity reads resident native PLAYER X, not nearest living player; P2-only AI action2 is not established.",
+    "Record latch or allocated slot alone is not initialized enemy interaction.",
+    "No source-backed independent once-world runtime counter was qualified.",
+    "No native or netplay execution was performed in this source lane."
+  ],
+  "game_sources": [
+    {
+      "path": "src/mods/mmx6_coop_plugin.c",
+      "git_blob": "7c04ef4a806bb9c0b4079176a4e5b7b076d2227e",
+      "sha256": "569fda242cb40d6380bf2f564b5030e556a44eb9181cd1d104c6960fb639df3b"
+    },
+    {
+      "path": "src/mods/mmx6_coop_lifecycle.c",
+      "git_blob": "a4f324c85bfaeb2c5d313dd4c1e139130f458e0c",
+      "sha256": "3e488c7d08693f23b08eaa6f05e2164cf04bb030fee9c830b2d8e12ac81e57cf"
+    },
+    {
+      "path": "src/mods/mmx6_widescreen_plugin.c",
+      "git_blob": "befa89e9eaf5c322419a4e084ba323cad16b1829",
+      "sha256": "b340981719e543ab607f997e066f821123faa75e0dbfc62af787c28d363f84fe"
+    }
+  ]
+}
