@@ -25,6 +25,7 @@
 #include "sio.h"
 #include "gpu.h"
 #include "mmx6_coop_assets.h"
+#include "mmx6_coop_resources.h"
 #include "mmx6_coop_lifecycle.h"
 #include "mmx6_coop_sprite_packet.h"
 #include "mmx6_coop_pixel_codec.h"
@@ -232,62 +233,69 @@ static int ui_upload(const Mmx6AssetView *asset) {
     }
     return 1;
 }
-static int load_assets(void) {
-    uint32_t n;
-    uint8_t *file=disc_file("ROCK_X6.BIN",&n);
-    Mmx6AssetView v, graphics, sprites, palette;
-    if (!file) return 0;
-    if (!mmx6_coop_overlay(file,n,1,&v) || v.size>sizeof zero_overlay || v.type!=0x3D) {
-        free(file); return 0;
+static int fixed_roster(Mmx6CoopRoster *roster) {
+    Mmx6CoopRosterNative native={psx_mod_read_byte(PLAYER+2),psx_mod_read_byte(PLAYER+0xE7),
+        psx_mod_read_byte(PLAY+0x38),psx_mod_read_byte(PLAY+0x5E),psx_mod_read_byte(PLAY+0x5F)};
+    Mmx6CoopRosterReason identity=mmx6_coop_roster_resolve(&native,roster);
+    if (identity!=MMX6_COOP_ROSTER_OK) {
+        fprintf(stderr,"mmx6 co-op: native roster refused (%s)\n",mmx6_coop_roster_reason(identity));
+        return 0;
     }
-    memcpy(zero_overlay,v.data,v.size);
-    free(file);
-    file=disc_file("ROCK_X6.DAT",&n);
-    if (!file) return 0;
-    if (!mmx6_coop_dat_asset(file,n,85,3,&graphics) || graphics.type!=2 ||
-        !mmx6_coop_dat_asset(file,n,85,10,&sprites) || sprites.type!=3 ||
-        !mmx6_coop_dat_asset(file,n,85,0,&palette) || palette.type!=9 ||
-        graphics.size+sprites.size+palette.size+0x4040>ASSET_SPACE) { free(file); return 0; }
-    zero_compressed=malloc(graphics.size);
-    if (!zero_compressed) { free(file); return 0; }
-    memcpy(zero_compressed,graphics.data,graphics.size); compressed_size=graphics.size;
-    assembly=assets+(((uint32_t)graphics.size+15u) & ~15u);
-    palette_source=assembly+(((uint32_t)sprites.size+15u) & ~15u);
-    active_palette=palette_source+(((uint32_t)palette.size+15u) & ~15u);
-    project(assets,graphics.data,graphics.size);
-    project(assembly,sprites.data,sprites.size);
-    project(palette_source,palette.data,palette.size);
-    project(active_palette,palette.data,palette.size);
-    Mmx6AssetView menu_gfx, menu_font, menu_colors, menu_layout, portrait, portrait_colors;
-    if (!mmx6_coop_dat_asset(file,n,85,6,&menu_gfx) || menu_gfx.size!=0x8000 ||
-        !mmx6_coop_dat_asset(file,n,85,7,&menu_font) || menu_font.size!=0x8000 ||
-        !mmx6_coop_dat_asset(file,n,85,8,&menu_colors) || menu_colors.size!=0x800 ||
-        !mmx6_coop_dat_asset(file,n,85,9,&menu_layout) ||
-        !mmx6_coop_dat_record(file,n,165,&portrait) || portrait.size!=0x2000 ||
-        !mmx6_coop_dat_record(file,n,166,&portrait_colors) || portrait_colors.size!=0x200) {
-        free(file); return 0;
+    Mmx6CoopResourcesReason admission=mmx6_coop_resources_fixed_runtime_admit(roster);
+    if (admission!=MMX6_COOP_RESOURCES_OK) {
+        fprintf(stderr,"mmx6 co-op: native roster refused (%s)\n",mmx6_coop_resources_reason(admission));
+        return 0;
     }
-    menu_assembly=active_palette+0x4000;
-    if (menu_assembly-assets+menu_layout.size>ASSET_SPACE) { free(file); return 0; }
-    project(menu_memory,menu_gfx.data,menu_gfx.size);
-    project(menu_memory+0x8000,menu_font.data,menu_font.size);
-    project(menu_memory+0x10000,menu_colors.data,menu_colors.size);
-    project(menu_memory+MENU_PORTRAIT,portrait.data,portrait.size);
-    project(menu_memory+MENU_PORTRAIT_COLORS,portrait_colors.data,portrait_colors.size);
-    project(menu_assembly,menu_layout.data,menu_layout.size);
-    zero_ui_pixels=calloc(1024*512,sizeof *zero_ui_pixels);
-    Mmx6AssetView common, icons;
-    if (!zero_ui_pixels || !mmx6_coop_dat_asset(file,n,85,1,&common) ||
-        !mmx6_coop_dat_asset(file,n,85,2,&icons) || !ui_upload(&common) ||
-        !ui_upload(&icons) || !ui_upload(&menu_gfx) || !ui_upload(&menu_font)) {
-        free(file); return 0;
+    return 1;
+}
+static int load_assets(const Mmx6CoopRoster *roster) {
+    uint32_t bin_size=0,n=0;
+    Mmx6CoopResourceViews v;
+    /* No private X resource may enter this public runtime before symmetric
+     * menu/HUD/deferred/audio and canonical-state ownership are implemented. */
+    if (mmx6_coop_resources_fixed_runtime_admit(roster)!=MMX6_COOP_RESOURCES_OK) return 0;
+    uint8_t *bin=disc_file("ROCK_X6.BIN",&bin_size);
+    if (!bin) return 0;
+    uint8_t *file=disc_file("ROCK_X6.DAT",&n);
+    if (!file) { free(bin);return 0; }
+    Mmx6CoopResourcesReason reason=mmx6_coop_resource_prepare(roster,1,bin,bin_size,file,n,ASSET_SPACE,&v);
+    if (reason==MMX6_COOP_RESOURCES_OK && v.overlay.size>sizeof zero_overlay)
+        reason=MMX6_COOP_RESOURCES_INVALID_OVERLAY;
+    if (reason!=MMX6_COOP_RESOURCES_OK) {
+        fprintf(stderr,"mmx6 co-op: resources refused (%s)\n",mmx6_coop_resources_reason(reason));
+        free(bin);free(file);return 0;
+    }
+    uint8_t *compressed=malloc(v.graphics.size);
+    uint16_t *pixels=calloc(1024*512,sizeof *zero_ui_pixels);
+    if (!compressed || !pixels) { free(compressed);free(pixels);free(bin);free(file);return 0; }
+    zero_compressed=compressed;zero_ui_pixels=pixels;
+    /* Plan all aligned spans/source and working palette bounds BEFORE copies. */
+    memset(zero_overlay,0,sizeof zero_overlay);
+    memcpy(zero_overlay,v.overlay.data,v.overlay.size);
+    memcpy(zero_compressed,v.graphics.data,v.graphics.size);compressed_size=v.graphics.size;
+    assembly=assets+v.layout.assembly;
+    palette_source=assets+v.layout.palette_source;
+    active_palette=assets+v.layout.active_palette;
+    menu_assembly=assets+v.layout.menu_assembly;
+    project(assets,v.graphics.data,v.graphics.size);
+    project(assembly,v.assembly.data,v.assembly.size);
+    project(palette_source,v.palette.data,v.palette.size);
+    project(active_palette,v.palette.data,v.palette.size);
+    project(menu_memory,v.menu_graphics.data,v.menu_graphics.size);
+    project(menu_memory+0x8000,v.font.data,v.font.size);
+    project(menu_memory+0x10000,v.menu_colors.data,v.menu_colors.size);
+    project(menu_memory+MENU_PORTRAIT,v.portrait.data,v.portrait.size);
+    project(menu_memory+MENU_PORTRAIT_COLORS,v.portrait_colors.data,v.portrait_colors.size);
+    project(menu_assembly,v.menu_layout.data,v.menu_layout.size);
+    if (!ui_upload(&v.common) || !ui_upload(&v.icons) || !ui_upload(&v.menu_graphics) || !ui_upload(&v.font)) {
+        free(bin);free(file);return 0;
     }
 #ifdef MMX6_COOP_MODERN_STATE
-    const Mmx6AssetView sources[]={graphics,sprites,palette,menu_gfx,menu_font,menu_colors,
-        menu_layout,portrait,portrait_colors,common,icons};
+    const Mmx6AssetView sources[]={v.graphics,v.assembly,v.palette,v.menu_graphics,v.font,v.menu_colors,
+        v.menu_layout,v.portrait,v.portrait_colors,v.common,v.icons};
     snapshot_assets_loaded(sources,sizeof sources/sizeof sources[0]);
 #endif
-    free(file);
+    free(bin);free(file);
     fprintf(stdout,"mmx6 co-op: Zero resources loaded; status/input at %08X\n",diagnostic);
     fflush(stdout);
     return 1;
@@ -447,7 +455,8 @@ static int nightmare_soul(CPUState *cpu, uint32_t address) {
     return 1;
 }
 static void begin_join(CPUState *cpu, uint32_t x, uint32_t y);
-static void enroll(CPUState *cpu) {
+static void enroll(CPUState *cpu,const Mmx6CoopRoster *roster) {
+    if (mmx6_coop_resources_fixed_runtime_admit(roster)!=MMX6_COOP_RESOURCES_OK) { failed=1;return; }
     uint32_t x=psx_mod_read_word(PLAYER+8), y=psx_mod_read_word(PLAYER+12);
     uint32_t origin[2]={x,y};STATE_WORDS(restore_origin,33,origin,2);
     memset(&p2,0,sizeof p2);
@@ -1194,11 +1203,17 @@ static void controller(CPUState *cpu, uint32_t address) {
      * the native idle handoff before first enrollment, including restarts. */
     if (!enrolled && (psx_mod_read_byte(PLAYER+4)!=1 || psx_mod_read_byte(PLAYER+5)!=2)) return;
     inside=1;
-    if (!ready) {
-        ready=load_assets();
-        if (!ready) { failed=1; fprintf(stderr,"mmx6 co-op: resource validation failed\n"); }
+    if (!ready || !enrolled) {
+        Mmx6CoopRoster roster;
+        /* The original idle handoff has completed body/parts initialization.
+         * Recheck even when immutable Zero assets survived a native respawn. */
+        if (!fixed_roster(&roster)) { failed=1;inside=0;return; }
+        if (!ready) {
+            ready=load_assets(&roster);
+            if (!ready) { failed=1; fprintf(stderr,"mmx6 co-op: resource validation failed\n"); }
+        }
+        if (ready && !enrolled) enroll(cpu,&roster);
     }
-    if (ready && !enrolled) enroll(cpu);
     if (ready && enrolled) {
         constrain_player(0);
         uint16_t raw=p2_input(MMX6_INPUT_CONTROLLER_PLAYER);
