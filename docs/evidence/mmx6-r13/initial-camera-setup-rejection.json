@@ -1,0 +1,766 @@
+{
+  "kind": "bounded_intro_baseline",
+  "status": "failed",
+  "preparation": {
+    "format_version": 1,
+    "kind": "local_candidate_preparation",
+    "runtime_qualified": false,
+    "build": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\snapshot-modern-v10-state\\warm",
+    "source": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity",
+    "output": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\enemy-admission-r13-bd7-native43",
+    "disc": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\disc\\Mega Man X6 (USA) (v1.1).cue",
+    "automated_profile": true,
+    "exe_sha256": "bd7b9449d9fbc5c9c2137902ba2d8d525d1886211b03fd6756d0f76fbc9c263e",
+    "game_config_sha256": "61751fb8f6000442b423ab85e84bffb3575646eac5cb3a864463238269669583",
+    "packages": [
+      "mmx6.enhancement.frame-interpolation",
+      "mmx6.enhancement.seamless-loading",
+      "mmx6.enhancement.widescreen",
+      "mmx6.local-coop",
+      "mmx6.tweaks.boss-attacks",
+      "mmx6.tweaks.continuous-dash",
+      "mmx6.tweaks.damage-rules",
+      "mmx6.tweaks.general-foundations",
+      "mmx6.tweaks.hooks",
+      "mmx6.tweaks.ingame-options",
+      "mmx6.tweaks.mach-dash",
+      "mmx6.tweaks.native",
+      "mmx6.tweaks.new-game",
+      "mmx6.tweaks.player-standalone",
+      "mmx6.tweaks.stage-modes",
+      "mmx6.tweaks.timing",
+      "mmx6.tweaks.zero-techniques",
+      "psx.enhancement.8mb-ram",
+      "psx.enhancement.pgxp",
+      "psx.presentation.bezel"
+    ],
+    "source_card": null,
+    "source_card_sha256": null,
+    "source_observation": {
+      "kind": "source_tree_observation_at_staging",
+      "build_source_binding": "unverified_from_staging",
+      "tracked_scope_only": true,
+      "repositories": {
+        "game": {
+          "available": true,
+          "commit": "9145a902dde1702904dcc95984021abd4d2e001b",
+          "tracked_changes": false,
+          "scope": [
+            "CMakeLists.txt",
+            "game.toml",
+            "src",
+            "generated",
+            "psxrecomp-v4",
+            "recomp-ui"
+          ],
+          "patch": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\enemy-admission-r13-bd7-native43\\logs\\source-game.diff",
+          "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "framework": {
+          "available": true,
+          "commit": "9cb68408232f926a9c62a57bfcf9e4f829922261",
+          "tracked_changes": false,
+          "scope": [
+            "runtime",
+            "recompiler",
+            "lib"
+          ],
+          "patch": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\enemy-admission-r13-bd7-native43\\logs\\source-framework.diff",
+          "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "ui": {
+          "available": true,
+          "commit": "b964eabe5a3438b8ed121064354ba27c1accef3f",
+          "tracked_changes": false,
+          "scope": [
+            "."
+          ],
+          "patch": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\enemy-admission-r13-bd7-native43\\logs\\source-ui.diff",
+          "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    "limitations": [
+      "No gameplay, controller or network qualification from staging",
+      "Source observation captures tracked scope at staging, not compilation provenance or untracked files",
+      "Overlay compilation disabled; no AOT performance claim",
+      "Owner must assign both local controllers in the launcher"
+    ]
+  },
+  "args": [
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\enemy-admission-r13-bd7-native43\\mmx6-runtime.exe",
+    "--game",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\enemy-admission-r13-bd7-native43\\game.toml",
+    "--memcard-dir",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\enemy-admission-r13-bd7-native43\\saves",
+    "--hidden-window",
+    "--debug-port",
+    "24895"
+  ],
+  "observations": [
+    {
+      "schema": 1,
+      "tick": 159,
+      "sequence": 318,
+      "native_timer": 158,
+      "lifecycle": [
+        0,
+        0
+      ],
+      "pause_owner": 0,
+      "scene_owner": 0,
+      "scene_phase": 0,
+      "mailbox": 0,
+      "ready": 1,
+      "enrolled": 1,
+      "failed": 0,
+      "native_mode": 10,
+      "native_phase": 0,
+      "host_digest": 3648105626,
+      "host_digest_algorithm": 1,
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 11010048,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "framework_digest_registered": 0
+    },
+    {
+      "schema": 1,
+      "tick": 179,
+      "sequence": 358,
+      "native_timer": 178,
+      "lifecycle": [
+        0,
+        0
+      ],
+      "pause_owner": 0,
+      "scene_owner": 0,
+      "scene_phase": 0,
+      "mailbox": 0,
+      "ready": 1,
+      "enrolled": 1,
+      "failed": 0,
+      "native_mode": 10,
+      "native_phase": 0,
+      "host_digest": 3842797448,
+      "host_digest_algorithm": 1,
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 5,
+          "hp": 32,
+          "x_raw": 11894784,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "framework_digest_registered": 0
+    },
+    {
+      "schema": 1,
+      "tick": 186,
+      "sequence": 372,
+      "native_timer": 185,
+      "lifecycle": [
+        0,
+        0
+      ],
+      "pause_owner": 0,
+      "scene_owner": 0,
+      "scene_phase": 0,
+      "mailbox": 0,
+      "ready": 1,
+      "enrolled": 1,
+      "failed": 0,
+      "native_mode": 10,
+      "native_phase": 0,
+      "host_digest": 3393116788,
+      "host_digest_algorithm": 1,
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 6,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 71040512,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 11894784,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "framework_digest_registered": 0
+    }
+  ],
+  "checks": {
+    "p2_native_movement": true,
+    "p1_independent": true,
+    "mailbox_unused": true,
+    "p1_native_jump": true,
+    "p2_jump_independent": true,
+    "healthy_heroes": true
+  },
+  "limits": [
+    "Intro only; no campaign, audible or physical-controller pass",
+    "Bounded host digest is not a complete core/mod checksum"
+  ],
+  "owned_pid": 78400,
+  "setup_latest": {
+    "native_mode": [
+      10,
+      0
+    ],
+    "p1_action": 2,
+    "p1_connected": true
+  },
+  "intro_image_sha256": "a7baa5d1640933637c9451843cdb11f1489d3a072803ea11432d8d352e0ee3d6",
+  "exercise": {
+    "checks": {},
+    "observations": [
+      {
+        "label": "initial",
+        "observation": {
+          "schema": 1,
+          "tick": 248,
+          "sequence": 496,
+          "native_timer": 247,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 2519382338,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 11894784,
+              "y_raw": 73007104,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "camera": [
+          2,
+          944
+        ],
+        "previous_camera": [
+          2,
+          944
+        ],
+        "record_hex": "00010100a001380400010100",
+        "record_allocated": false,
+        "instance": null,
+        "live_pool": [],
+        "native_shared_gate": 0,
+        "p2_hit_counter": 0,
+        "p2_contact_counter": 0
+      }
+    ],
+    "captures": [],
+    "scope": "offline intro record25 only; R13 comparison row remains incomplete",
+    "unverified": [
+      "paired transport equivalent",
+      "independent runtime proof of exactly one native world update"
+    ],
+    "source_contract": {
+      "scanner": "80029F38",
+      "allocator": "8002BBF4",
+      "enemy_update_loop": "8002000C",
+      "record": "0x800fa2dc",
+      "type1_init": "800EAFFC",
+      "type1_phase1": "800EAC8C"
+    },
+    "input_path": "original port2 SIO pad; host virtual layer in this SDK is P1-only",
+    "gpu": {
+      "id": 764,
+      "ok": true,
+      "display_x": 0,
+      "display_y": 0,
+      "width": 320,
+      "height": 240,
+      "screen_offset_y": 0,
+      "depth": 15,
+      "depth24": 0,
+      "disabled": 0,
+      "h_display": [
+        600,
+        3160
+      ],
+      "v_display": [
+        16,
+        256
+      ],
+      "hres1": 1,
+      "hres2": 0,
+      "gpustat": "0xD6020005",
+      "gp0_writes": 11096982,
+      "gp0_nop": 15258,
+      "gp0_fill": 2284,
+      "gp0_draw": 1273644,
+      "gp0_env": 190532,
+      "gp0_copy": 5184,
+      "draw_area": [
+        0,
+        240,
+        319,
+        479
+      ],
+      "draw_offset": [
+        0,
+        240
+      ],
+      "vertical_split": {
+        "active": 0,
+        "left_age": 255,
+        "right_age": 255
+      },
+      "ws": {
+        "configured": 0,
+        "active": 0,
+        "game_mode": 1,
+        "present_native_43": 0,
+        "x_margin": 0,
+        "activation_margin": 0,
+        "squash": [
+          1,
+          1
+        ],
+        "mode": 0,
+        "nw_extra": 0,
+        "view_anchor": 0,
+        "view_left": 0,
+        "view_right": 0,
+        "view_shift": 0,
+        "view_padding": [
+          0,
+          0
+        ],
+        "bg2d_generations": 0,
+        "cur_frame": 2894,
+        "last_tag_frame": 4294966845,
+        "last_3d_frame": 2894,
+        "gte_verts": 0,
+        "last_world3d_frame": 4294966845,
+        "ovh_prims": 1,
+        "last_ovh_frame": 1243,
+        "auto_ui": {
+          "configured": 0,
+          "in_place": 0,
+          "dense": 0,
+          "ot_rank": 4294967295,
+          "candidates": 0,
+          "transforms": 0
+        },
+        "aspect_cone": {
+          "calls": 0,
+          "identity_43": 0,
+          "vanilla_keep": 0,
+          "visible_keep": 0,
+          "guard_keep": 0,
+          "hysteresis_keep": 0,
+          "outside_reject": 0,
+          "queue_reject": 0,
+          "queue_highwater": [
+            0,
+            0,
+            0
+          ]
+        },
+        "terrain_angle": {
+          "calls": 0,
+          "identity_43": 0,
+          "max_vanilla": 0,
+          "max_widened": 0
+        },
+        "backdrop": {
+          "veto": 0,
+          "eval_frame": 0,
+          "rects": 0,
+          "full": 0,
+          "short": 0,
+          "x": [
+            0,
+            0
+          ],
+          "reveal": 0,
+          "canon_pct": 0,
+          "left_pct": 0,
+          "right_pct": 0,
+          "last_short": 0,
+          "evaluations": 0,
+          "short_frames": 0
+        }
+      }
+    },
+    "native_wide": {
+      "id": 765,
+      "ok": true,
+      "native_wide": 1,
+      "mode": 0,
+      "nw_extra": 0,
+      "projection_correction": 0,
+      "projection_vertices": 0,
+      "nclip_rescues": 0,
+      "oversize_triangles": 0
+    }
+  },
+  "error": "Initial record/camera/P1 conditions are confounded; no route traversal attempted",
+  "failure_observations": {
+    "pad_status": {
+      "id": 771,
+      "ok": true,
+      "pad": "0xFFFF",
+      "slot0": {
+        "buttons": "0xFFFF",
+        "connected": true,
+        "analog": true,
+        "type": 1,
+        "sticks": [
+          128,
+          128,
+          128,
+          128
+        ],
+        "negcon": [
+          0,
+          0,
+          0
+        ],
+        "mode_locked": false
+      },
+      "slot1": {
+        "buttons": "0xFFFF",
+        "connected": true,
+        "analog": false,
+        "type": 0,
+        "sticks": [
+          128,
+          128,
+          128,
+          128
+        ],
+        "negcon": [
+          0,
+          0,
+          0
+        ],
+        "mode_locked": false
+      },
+      "override": -1,
+      "override_frames": 0,
+      "override_pad_type": -1,
+      "override_p2": -1,
+      "override_p2_frames": 0,
+      "override_axes": [
+        128,
+        128,
+        128,
+        128
+      ],
+      "override_axes_valid": false,
+      "host_layer": false,
+      "host_buttons": "0xFFFF",
+      "host_axes": [
+        128,
+        128,
+        128,
+        128
+      ],
+      "host_lt": 0,
+      "host_rt": 0
+    },
+    "netplay_status": {
+      "id": 772,
+      "ok": true,
+      "active": 0,
+      "host": 0,
+      "rollback": 0,
+      "architecture": "off",
+      "max_players": 0,
+      "players": 0,
+      "tick": 0,
+      "resolved_through": 0,
+      "stall": "inactive",
+      "remote_lead": 0,
+      "desync": 0,
+      "desync_tick": 0,
+      "local_hash": 0,
+      "remote_hash": 0
+    },
+    "gpu_state": {
+      "id": 773,
+      "ok": true,
+      "display_x": 0,
+      "display_y": 240,
+      "width": 320,
+      "height": 240,
+      "screen_offset_y": 0,
+      "depth": 15,
+      "depth24": 0,
+      "disabled": 0,
+      "h_display": [
+        600,
+        3160
+      ],
+      "v_display": [
+        16,
+        256
+      ],
+      "hres1": 1,
+      "hres2": 0,
+      "gpustat": "0x56020005",
+      "gp0_writes": 11107685,
+      "gp0_nop": 15274,
+      "gp0_fill": 2287,
+      "gp0_draw": 1275483,
+      "gp0_env": 190760,
+      "gp0_copy": 5188,
+      "draw_area": [
+        0,
+        0,
+        319,
+        239
+      ],
+      "draw_offset": [
+        0,
+        0
+      ],
+      "vertical_split": {
+        "active": 0,
+        "left_age": 255,
+        "right_age": 255
+      },
+      "ws": {
+        "configured": 0,
+        "active": 0,
+        "game_mode": 1,
+        "present_native_43": 0,
+        "x_margin": 0,
+        "activation_margin": 0,
+        "squash": [
+          1,
+          1
+        ],
+        "mode": 0,
+        "nw_extra": 0,
+        "view_anchor": 0,
+        "view_left": 0,
+        "view_right": 0,
+        "view_shift": 0,
+        "view_padding": [
+          0,
+          0
+        ],
+        "bg2d_generations": 0,
+        "cur_frame": 2897,
+        "last_tag_frame": 4294966845,
+        "last_3d_frame": 2897,
+        "gte_verts": 0,
+        "last_world3d_frame": 4294966845,
+        "ovh_prims": 1,
+        "last_ovh_frame": 1243,
+        "auto_ui": {
+          "configured": 0,
+          "in_place": 0,
+          "dense": 0,
+          "ot_rank": 4294967295,
+          "candidates": 0,
+          "transforms": 0
+        },
+        "aspect_cone": {
+          "calls": 0,
+          "identity_43": 0,
+          "vanilla_keep": 0,
+          "visible_keep": 0,
+          "guard_keep": 0,
+          "hysteresis_keep": 0,
+          "outside_reject": 0,
+          "queue_reject": 0,
+          "queue_highwater": [
+            0,
+            0,
+            0
+          ]
+        },
+        "terrain_angle": {
+          "calls": 0,
+          "identity_43": 0,
+          "max_vanilla": 0,
+          "max_widened": 0
+        },
+        "backdrop": {
+          "veto": 0,
+          "eval_frame": 0,
+          "rects": 0,
+          "full": 0,
+          "short": 0,
+          "x": [
+            0,
+            0
+          ],
+          "reveal": 0,
+          "canon_pct": 0,
+          "left_pct": 0,
+          "right_pct": 0,
+          "last_short": 0,
+          "evaluations": 0,
+          "short_frames": 0
+        }
+      }
+    }
+  },
+  "shutdown": "owned_process_terminated",
+  "exit_code": 1,
+  "existing_private_cards_unchanged": true
+}
