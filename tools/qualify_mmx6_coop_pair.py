@@ -248,6 +248,13 @@ def run(args) -> dict:
         personal_menu = importlib.import_module("mmx6_coop_personal_menu")
         modules += (personal_menu,)
     private_pause = effects = published_input = native_quit = None
+    reentry_pair = source_validation = None
+    if getattr(args,"native_reentry",None):
+        reentry_pair=importlib.import_module("mmx6_coop_native_reentry_pair")
+        source_validation=importlib.import_module("qualify_mmx6_coop_jump_audio")
+        modules+=(reentry_pair,reentry_pair.helper,reentry_pair.published,reentry_pair.host,
+            reentry_pair.helper.quit_ui,reentry_pair.helper.menu,reentry_pair.helper.content,
+            reentry_pair.helper.native,source_validation)
     if getattr(args,"native_quit_scenario",None):
         native_quit=importlib.import_module("mmx6_coop_native_quit")
         published_input=importlib.import_module("mmx6_coop_published_input")
@@ -269,6 +276,10 @@ def run(args) -> dict:
     if getattr(args, "expected_exe_sha256", None) and candidate_sha != args.expected_exe_sha256:
         raise ValueError("Paired executable does not match the explicitly expected SHA256")
     quit_original=native_quit.verify_original(args.original_exe) if native_quit is not None else None
+    reentry_original=reentry_binding=None
+    if reentry_pair is not None:
+        reentry_binding=reentry_pair.bind_original_disc(args.disc,args.original_disc)
+        reentry_original=reentry_pair.helper.load_sources(args.original_disc)["original"]
     if contact is not None:
         if candidate_sha != CONTACT_EXE_SHA or candidate_sha != contact.EXE_SHA:
             raise ValueError("R2 paired executable is not the selected frozen37cdc487 candidate")
@@ -315,6 +326,15 @@ def run(args) -> dict:
         path=output/"native-quit-helper-source.py";path.write_bytes(Path(native_quit.__file__).read_bytes())
         report["native_quit_source_snapshot"]=dict(path=str(path),sha256=preparation.sha256(path))
         report["checks"]["native_quit_automated_case_completed"]=False
+    if reentry_pair is not None:
+        report.update(native_reentry_route="new_game",native_reentry_original=reentry_original,
+            native_reentry_disc_binding=reentry_binding,native_reentry_prepared=[],artwork_review="pending",ledger_status="unverified")
+        report["checks"]["native_reentry_original_source_bound"]=True
+        report["checks"]["native_reentry_automated_case_completed"]=False
+        report["native_reentry_source_snapshots"]=[]
+        for module in (reentry_pair,reentry_pair.helper,reentry_pair.helper.menu,reentry_pair.host):
+            path=output/(Path(module.__file__).stem+"-executed-source.py");path.write_bytes(Path(module.__file__).read_bytes())
+            report["native_reentry_source_snapshots"].append(dict(path=str(path),sha256=preparation.sha256(path)))
     handles, processes, clients, reservations = [], [], [], []
     executor = ThreadPoolExecutor(max_workers=2)
     runtime_ready = False
@@ -469,6 +489,8 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             require(receipt["source_card"] is None, "Unexpected source card")
             require(receipt["exe_sha256"] == report["candidate_exe_sha256"],
                     "Build changed during paired staging")
+            if reentry_pair is not None:
+                report["native_reentry_prepared"].append(reentry_pair.prepare_profile(directory,args.disc,args.original_disc))
             environment = baseline.candidate_environment(directory, receipt)
             # Discard inherited developer/session controls, then reapply only
             # the validated private paths and fixed LAN/delay policies.
@@ -498,6 +520,13 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             report["checks"]["declared_build_manifest_bound_to_staged_images"] = True
         if native_quit is not None:
             report["native_quit_same_machine_plan"]=same_machine_plan(report["peers"])
+        if reentry_pair is not None:
+            report["native_reentry_same_machine_plan"]=same_machine_plan(report["peers"])
+            report["native_reentry_declared_sources"]=source_validation.validate_sources(
+                args.build,staging_source,report["host_profile_build_manifest"])
+            report["checks"]["native_reentry_declared_sources_match"]=True
+            require(reentry_pair.bind_original_disc(args.disc,args.original_disc)==reentry_binding,
+                    "Original CUE/raw source changed during paired preparation")
         # Reservations establish availability; owned-listener checks close the
         # release-to-launch race before every debug command, including quit.
         for reservation in reservations:
@@ -524,13 +553,28 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
                 def __init__(self, port, owner):
                     super().__init__(port, timeout=3)
                     self.owner = owner
+                    self.reentry_route = None
 
                 def request(self, command, **fields):
                     if self.owner.poll() is not None or not baseline.owns_listener(self.port, self.owner.pid):
                         raise debug.DebugError("Owned process does not own this debug listener")
                     return super().request(command, **fields)
 
+                def host_input(self, pressed=0):
+                    if self.reentry_route is None:
+                        if reentry_pair is not None:raise debug.DebugError("Owned reentry host route is unavailable")
+                        return super().host_input(pressed)
+                    return self.reentry_route.set(0,pressed)
+
+                def release(self):
+                    if self.reentry_route is None:
+                        if reentry_pair is not None:return self.request("clear_input",layer="host",port=1)
+                        return super().release()
+                    return self.reentry_route.clear()
+
             clients.append(OwnedClient(ports[seat], process))
+        if reentry_pair is not None:
+            reentry_pair.install_routes(clients,processes,ports[:2],report,output,handles)
         print(json.dumps(dict(event="launched_owned_pair", pids=[p.pid for p in processes],
                               output=str(output))), flush=True)
         deadline, next_input, release_input, step = time.monotonic()+args.timeout, 0., 0., 0
@@ -636,6 +680,16 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             all(player.hp == 32 for player in row.players) for row in settled)
         report["checks"]["mailbox_unused"] = all(row.mailbox == 0 for row in settled)
         matched("P1 jump then settle")
+        if reentry_pair is not None:
+            loader_logs=[(output/f"peer-{seat}/logs/stdout.log").read_text(errors="replace") for seat in range(2)]
+            require(all("title netplay loading = resident assets" in text for text in loader_logs),
+                    "Native reentry default resident loader did not commit on both peers")
+            report["checks"]["default_resident_loader_committed"]=True
+            reentry_pair.exercise(dict(clients=clients,both=both,debug=debug,report=report,output=output,
+                network=network,transport_window=transport_window,matched=matched,
+                native_advance=lambda frames,label:advance(frames)),expected_sha=args.expected_exe_sha256,
+                original_disc=args.original_disc,plan=report["native_reentry_same_machine_plan"])
+            report["limits"].append("New Game defaults only; no acquired-current-data/card-load/Continue/opposite-roster/cross-host pass")
         if native_quit is not None:
             # No native-world-timer wait inside a pause: the shared accepted
             # host adapter uses resolved transport, with neutral in finally.
@@ -837,17 +891,27 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             reservation.close()
         for seat, process in enumerate(processes):
             peer = report["peers"][seat]
-            peer.update(baseline.stop_owned_runtime(process,
-                clear_inputs=(lambda: clients[seat].release(),),
-                request_quit=lambda: clients[seat].request("quit")))
+            try:
+                peer.update(baseline.stop_owned_runtime(process,
+                    clear_inputs=(lambda: clients[seat].release(),),
+                    request_quit=lambda: clients[seat].request("quit")))
+            except Exception as error:
+                if reentry_pair is None:raise
+                peer.update(shutdown="owned_cleanup_error",cleanup_error=str(error))
             if peer["shutdown"] == "already_exited":
                 if report["status"] == "passed":
                     report["status"] = "failed"
-            peer["private_card_files"] = [dict(name=path.name, sha256=preparation.sha256(path))
-                for path in (Path(peer["directory"])/"saves").glob("*.mcd")]
+            try:
+                peer["private_card_files"] = [dict(name=path.name, sha256=preparation.sha256(path))
+                    for path in (Path(peer["directory"])/"saves").glob("*.mcd")]
+            except OSError as error:
+                if reentry_pair is None:raise
+                peer["private_card_error"]=str(error)
         executor.shutdown(wait=True)
         for handle in handles:
             handle.close()
+        if reentry_pair is not None:
+            reentry_pair.finalize(report,output,runtime_ready=runtime_ready,owned_processes=len(processes))
         if host_profiles is not None:
             # Read the complete owned logs after both writers stop. A later
             # duplicate/restart/malformed record must revoke an earlier pass.
@@ -893,8 +957,10 @@ def make_parser():
     parser.add_argument("--native-quit-scenario",choices=("guest_authority","p1_pages_cancel","p1_pages_cancel_live_effects"),
                         help="Separate fresh native Quit authority or primary pages/cancel case; exact image, original EXE, host profile and resolved CRC required")
     parser.add_argument("--original-exe",type=Path,help="Original SLUS_013.95 source for --native-quit-scenario")
+    parser.add_argument("--native-reentry",choices=("new_game",),
+                        help="Separate same-machine original final Quit/New Game and fresh P2 menu recovery; strict image/source/profile/CRC proof required")
     parser.add_argument("--original-disc", type=Path,
-                        help="Original raw BIN for R2's immutable Zero hurtbox source, separate from runtime --disc")
+                        help="Original raw BIN for R2 or --native-reentry, separate from runtime --disc CUE")
     parser.add_argument("--require-state-crc", action="store_true",
                         help="Require modern same-simulation-tick core/mod logs below both resolved watermarks; candidate must register complete host digest")
     parser.add_argument("--require-host-profile", action="store_true",
@@ -929,10 +995,18 @@ def validate_options(parser, args):
                 not args.require_host_profile or not args.expected_exe_sha256 or args.original_exe is None):
             parser.error("Native Quit requires original EXE, exact SHA, native gameplay, default loader, host profile and resolved CRC")
         if (args.private_pause_smoke or args.contact_pause_contact_smoke or args.enemy_targeting_smoke or
-                args.personal_menu_smoke or args.lifecycle_smoke):
+                args.personal_menu_smoke or args.lifecycle_smoke or args.native_reentry):
             parser.error("Each native Quit scenario requires a separate fresh pair without other optional routes")
     elif args.original_exe is not None:
         parser.error("--original-exe belongs to --native-quit-scenario")
+    if args.native_reentry:
+        if (args.admission_only or args.native_loader_diagnostic or not args.require_state_crc or
+                not args.require_host_profile or not args.expected_exe_sha256 or args.original_disc is None or
+                args.original_disc.suffix.lower()!=".bin" or args.disc.suffix.lower()!=".cue"):
+            parser.error("Native reentry requires raw original BIN, runtime CUE, exact image, default loader, host profile and resolved CRC")
+        if (args.private_pause_smoke or args.contact_pause_contact_smoke or args.enemy_targeting_smoke or
+                args.personal_menu_smoke or args.lifecycle_smoke or args.native_quit_scenario):
+            parser.error("Native reentry requires a separate fresh pair without other optional routes")
     if args.private_pause_smoke:
         if (args.admission_only or args.native_loader_diagnostic or not args.require_state_crc or
                 not args.require_host_profile or not args.expected_exe_sha256):
@@ -949,8 +1023,8 @@ def validate_options(parser, args):
             parser.error("Contact/menu/contact requires --original-disc with the original raw BIN")
         if args.enemy_targeting_smoke:
             parser.error("Contact/menu/contact and enemy-targeting require separate fresh authored-enemy cases")
-    elif args.original_disc is not None:
-        parser.error("--original-disc belongs to --contact-pause-contact-smoke")
+    elif args.original_disc is not None and not args.native_reentry:
+        parser.error("--original-disc belongs to --contact-pause-contact-smoke or --native-reentry")
     if args.expected_exe_sha256 is not None and (len(args.expected_exe_sha256) != 64 or
             any(c not in "0123456789abcdef" for c in args.expected_exe_sha256)):
         parser.error("Expected executable SHA256 must contain 64 lowercase hex digits")

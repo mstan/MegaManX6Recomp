@@ -37,6 +37,7 @@ class PairOptionTests(unittest.TestCase):
         self.assertIsNone(default.native_quit_scenario)
         self.assertIsNone(default.original_exe)
         self.assertIsNone(default.source)
+        self.assertIsNone(default.native_reentry)
         self.assertEqual(self.parse("--source","frozen-source").source,Path("frozen-source"))
         lifecycle = self.parse("--lifecycle-smoke")
         self.assertTrue(lifecycle.lifecycle_smoke)
@@ -193,6 +194,24 @@ class PairOptionTests(unittest.TestCase):
             self.rejected(*incomplete)
         for flag in ("--native-loader-diagnostic","--admission-only","--private-pause-smoke","--lifecycle-smoke"):
             self.rejected(*options,flag)
+
+    def reentry_options(self):
+        return ["--native-reentry","new_game","--original-disc","original.bin",
+            "--expected-exe-sha256","a"*64,"--require-state-crc","--require-host-profile",
+            "--expected-host-profile","mmx6.win64-clang22.loopback","--expected-host-profile-revision","2"]
+
+    def test_native_new_game_requires_source_image_profile_crc_and_a_separate_pair(self):
+        self.assertEqual(self.parse(*self.reentry_options()).native_reentry,"new_game")
+        for flag,count in (("--original-disc",2),("--expected-exe-sha256",2),("--require-state-crc",1),
+                           ("--require-host-profile",1),("--expected-host-profile",2),("--expected-host-profile-revision",2)):
+            options=self.reentry_options();at=options.index(flag);del options[at:at+count];self.rejected(*options)
+        for flag in ("--admission-only","--native-loader-diagnostic","--personal-menu-smoke","--lifecycle-smoke",
+                     "--enemy-targeting-smoke","--private-pause-smoke","--contact-pause-contact-smoke"):
+            self.rejected(*self.reentry_options(),flag)
+        self.rejected(*self.reentry_options(),*self.quit_options())
+        self.rejected(*self.reentry_options(),"--native-reentry","current_data")
+        self.rejected(*self.reentry_options(),"--original-disc","runtime.cue")
+        self.rejected(*self.reentry_options(),"--disc","original.bin")
 
 
 if __name__ == "__main__":
