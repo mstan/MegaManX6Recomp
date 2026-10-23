@@ -155,6 +155,35 @@ the effects VAB. Proven X4 design is a reference, but its memory extents and
 blanket bank mapping cannot be copied. R4/R12 remain unverified pending complete
 X6 driver/flush ownership and native muted captures.
 
+## Modern host-state milestone
+
+The modern candidate uses ABI 32 and profile `mmx6-x-zero-delay-v10`, with a
+canonical host digest, explicit callback-local tracking, validated snapshots
+and cold retained-texture reconstruction. Rollback and online user state jumps
+remain disabled. [The codec document](COOP_HOST_STATE_CODEC.md) records the
+state contract and refusal after an abandoned callback.
+
+The exact `bd7b9449...` candidate passes nine native two-peer intro/input/lifecycle
+checks and 30 common resolved core/mod samples across four phases. Matching
+composed GL captures show the original actors and HUD; canonical VRAM alone
+omits retained GL textures. The report, complete hashes and prior capture
+ambiguity are retained in [the netplay baseline](COOP_NETPLAY_BASELINE.md).
+
+[Warm/cold native snapshot qualification](COOP_SNAPSHOT_BASELINE.md) passes
+on that same executable: actual save/load completion generations, both complete
+348-byte bodies and healthy resources restored, cold cache reconstruction from
+170 to 211 banks, native menu resume and independent controls after load.
+Composed restored menu captures match. The initial menu-fade failure and a
+changed-executable staging rejection remain recorded. This covers the healthy
+intro and P1 menu; other restoration contexts and rewind remain unverified.
+
+The combined SDK GCC matrix passes 24/24 after isolation of shared test
+directories. Modern Clang developer and production builds also pass 25/25 game
+checks, including original-source content/audio reproduction. The SDK file
+identity follow-up, final pin and subsequent exact-candidate checks are still
+being integrated. No full comparison status changes follow from these bounded
+milestones.
+
 ## Next integration gates
 
 The modern SDK bridge candidate has now built with Clang, passed 21 game
@@ -166,22 +195,22 @@ separate candidate until its host-escape and content-cache corrections pass
 combined validation. Gameplay and registered host-state checks do not inherit
 the startup result.
 
-1. Extend the now-passing default loopback intro/input smoke with lifecycle,
-   menu and scene checks. The earlier frontend timeout is explained by the
+1. Extend the now-passing default loopback intro/input/lifecycle smoke with
+   damage, combat, both personal menus and authored scene checks. The earlier frontend timeout is explained by the
    old sampler omission and retained as failed setup. Preserve the distinction
    between diagnostic publication counts
    and resolved simulation ticks. Do not close the broad netplay comparisons
    without framework core/mod checksums and their actual behavior checks.
-2. Bridge X6 onto the modern X4/X5 framework in a separate local framework
-   worktree. Their committed base is `6f0ccbc6`, UI `b964eabe`, recomp-net
+2. Finish selecting the validated modern bridge from its separate local
+   framework worktree. Its frozen base is `6f0ccbc6`, UI `b964eabe`, recomp-net
    `e5305930`, rbengine `2a03e736`. Preserve X6's native replacement service
    from `a6216c6be` and negotiated loading behavior from `50c68be75`; reconcile
    overlay ABI 31/30 and retain modern dependency pins. A blind repin removes
    services used by existing X6 generated code and plugins.
-3. Register a canonical host-state digest and a validated snapshot provider,
-   with stable callback boundaries and retained resource reconstruction.
-   Qualify warm/cold restore, menus, joining/death, scenes, deferred heals and
-   moving-solid contact. Keep rollback disabled until resimulation is proven.
+3. Extend the registered host-state provider beyond the healthy intro/P1 menu:
+   qualify rewind, both menus, joining/death, scenes, deferred heals and moving
+   solids, including cold resource restoration. Keep rollback disabled until
+   resimulation is proven.
 4. Implement the missing seat/character ownership and diagnostic recorder;
    qualify voices, effects, personal menus, resources and lifecycle before
    expanding cameras, Both-door policy and elective options. Correctness works

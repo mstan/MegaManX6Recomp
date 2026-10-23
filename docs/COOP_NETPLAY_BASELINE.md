@@ -244,6 +244,21 @@ from these images. Both owned processes were stopped and verified absent;
 graceful exit remains unverified. Native snapshot restore, rewind and broader
 mechanics remain unverified.
 
+A second run of this exact executable, `netplay-modern-v10-present`, adds
+completed composed captures. It again passes nine checks, with 30 matching
+resolved core/mod samples. Both peers finish tick 4438, resolved-through 4437,
+with no reported input desynchronization. Report SHA-256:
+`621f553dbcccee0d61d662a60a4ef20c1d3a8e86bb34dbb92f13ff8c1daf175b`.
+Both composed PNGs match SHA-256
+`dbefe3a88d5e7716ef09eeb790129fdf4168ad97c5e3e0f3f738490a682afa44`
+and show clean native actors and both meters. Thus the rectangular canonical
+VRAM artifacts above do not establish a presentation defect. The runner now
+retains both surfaces and checks asynchronous capture completion. Both owned
+processes were stopped and verified absent. The subsequent healthy-intro
+warm/cold restore result is recorded separately in
+[COOP_SNAPSHOT_BASELINE.md](COOP_SNAPSHOT_BASELINE.md); broader restoration and
+rewind remain unverified.
+
 ## Reusable runner
 
 `tools/qualify_mmx6_coop_pair.py` stages, launches, boots and observes two owned

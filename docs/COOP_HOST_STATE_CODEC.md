@@ -131,8 +131,14 @@ digest registration. Exact executable/report identities and limitations are in
 snapshot round trips or resimulation.
 
 These fixtures contain synthetic memory/resources and do not execute original
-game logic. Native warm/cold save/load, mapped rewind, menus, beam/death/scene
-transitions, delayed healing, moving terrain, pending DMA, composed art and
-same-simulation-tick core/mod peer CRCs remain required. Audio audit added no new
-host state; native audio correctness remains a separate unverified obligation.
-No game runner, source card or remote service was used by this lane.
+game logic. Subsequent native warm/cold save/load passes for the healthy intro
+and a stable P1-owned menu, including exact complete body restoration, cold
+retained-bank reconstruction and continued independent controls. Exact receipts
+and the retained initial fade/setup failure are in
+[COOP_SNAPSHOT_BASELINE.md](COOP_SNAPSHOT_BASELINE.md). Composed captures are
+inspected separately from canonical VRAM. Broader menus, mapped rewind,
+beam/death/scene transitions, delayed healing, moving terrain and pending DMA
+remain required. Bounded same-simulation-tick core/mod peer CRCs pass in the
+intro; that evidence does not qualify the remaining mechanics. Audio audit added
+no new host state; native audio correctness remains unverified. Original cards
+and remote services were not used.
