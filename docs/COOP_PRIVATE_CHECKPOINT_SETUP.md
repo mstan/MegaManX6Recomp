@@ -46,7 +46,8 @@ The original runner's publication check was anchored before the payload RPCs,
 which could accept a later old-stage publication. Qualification additionally
 needs freshness anchored after the completion receipt, actual new actor
 initialization/placement and native control readiness, followed by inspected
-composed output. Those checks remain under implementation.
+composed output. The source-bound readiness checks below are implemented and
+unit tested; a corrected native run and composed inspection remain unverified.
 
 Pending state is cleared by activation/reset and by detected plugin,
 source/context/order or offline-policy failure. Queued command8 and both
@@ -87,8 +88,51 @@ namespaces and zero nonces are rejected before any game state write.
 
 An acknowledgement alone cannot pass. The runner requires a new generation,
 the exact nonce/tuple/record, count1, taint1, completed state, actual native
-mode/tuple and a fresh enrolled publication. Separate native/camera and co-op
-reads are retained as separate observations, not one atomic world snapshot.
+mode/tuple and a new enrolled publication **after the first observed completed
+state**. The pre-request publication is retained only as history. Every
+completed-state probe records its own native bytes, coherent diagnostic,
+GPU state and readiness reduction under `completion_waiting`.
+
+The original mode9 sequence calls checkpoint selector `80029B8C` at `8001E244`
+and native player initialization `8003BD24` at `8001E264`. The selector writes
+PLAYER current/previous XY at `80029BD8/BE0/BE8/BEC` and primary-camera current,
+previous and bounds. The co-op native-init observer clears enrollment; only a
+subsequent native idle handoff can enroll the new private actor. Mode0A can
+therefore coexist with a diagnostic publication from before that handoff.
+
+The completed-state anchor fixes the concrete race: pre-request tick215 and
+later old-world tick220 from payload processing cannot pass merely because
+mode0A/CP1 is now present. First completed state anchors220; only a strictly
+later publication may satisfy readiness. A repeat of220 or a backward tick is
+incomplete, even when every other readiness field looks correct.
+
+Source guards additionally require normal mode0A/phase0 with the requested
+tuple, living idle X/P1 and Zero/P2, no scene/menu/mailbox, and native
+`PLAY+0F/+10/+1C` clear. Mode9 explicitly sets `+1C=1`; the existing controller
+and native pause gates reject those blocking states. The runner reads the
+resident P1 body and primary camera together in one bounded native read. It
+requires visible native X identity, idle state, the existing co-op safe-landing
+condition (`+67==0`, `+70 & 8`), equal current/previous position, and agreement
+with the newly published P1 position. A temporary Zero projection cannot stand
+in for native P1.
+
+P1's X must equal the authored checkpoint X exactly. Its Y must be the actual
+settled native Y inside the current camera/GPU viewport; the authored Y is the
+initial spawn and can change under native arrival/gravity. No guessed pixel
+tolerance is used. The actual primary-camera bounds must equal the selected
+record: maxX/minX/maxY/minY at camera `+1C/+1E/+20/+22`, current XY at `+0A/+0E`.
+Both actors must lie inside that camera's actual reported display width/height
+and widescreen margin, with display enabled. Scripted entries that move X,
+moving supports or actors not reaching idle remain incomplete under this
+conservative contract until their source-backed readiness is separately mapped.
+
+The immutable inventory field named `arrival` is not used as a readiness
+state: original record byte `+18` is copied to PLAYER `+15` at `80029BF8`.
+Native entry blocking state is observed directly. The existing owned CLI
+requests its completed composed GL capture only after readiness; that capture
+still needs inspection. A nonempty PNG alone is not proof of a visible playable
+scene. Separate PLAY/GPU, coherent diagnostic and native body/camera reads are
+retained separately, not claimed as one atomic world snapshot.
 
 ## Reproduction and current validation
 
@@ -129,12 +173,21 @@ rejected, duplicate, stale or mismatched transaction completions.
 Validation passed locally: the checkpoint fixture under Clang with `-O2` in
 debug/production and the SDK taint header from `ef638ae184a0d0e3f2c389d26e6e16350bfbe57a`,
 plus Clang `-O0` and GCC `-O2` without that optional header; the existing
-snapshot fixture under Clang `-O2` debug/production; and all 12 Python cases
+snapshot fixture under Clang `-O2` debug/production; and the original 12 Python cases
 with the pinned original EXE supplied. The optional API fixture supplies its
 own host taint stub and verifies accepted setup taints, rejection does not,
 and fixture reset never clears SDK taint. It does not qualify a linked game.
 Header reproduction, Python syntax and whitespace checks also pass.
 
-No CMake, coverage, 234-row parity ledger, title build or native run is included
-in this change. Root needs to register `test_mmx6_coop_checkpoint.c` and the
-Python test in its owned build work, then qualify an actual entry separately.
+The subsequent completion fix passes all 20 Python cases, including the exact
+old-publication race, required post-completion freshness, new actor/camera
+agreement, blocking native entry flags, projection rejection, native grounded
+settling and offscreen/disabled-display negatives. Synthetic positive fixtures
+exercise the predicate only; they do not establish a CP1 landing or qualify
+the earlier black native capture. The reviewed failure receipt and its original
+automated status remain unchanged.
+
+Root's integration registers the C and Python fixtures. This completion fix
+changes only the Python predicate/tests and this document; no additional title
+build, native run, coverage or 234-row parity-ledger change accompanies it.
+A corrected actual entry and composed inspection remain required separately.

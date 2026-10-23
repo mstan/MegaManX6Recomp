@@ -26,6 +26,23 @@ def publication(state=0, *, generation=0, nonce=0, entries=0, reason=0):
     return bytes(data)
 
 
+def settled_entry(tick=221):
+    native=bytearray(0x1E);native[0]=10;native[0x1D]=1
+    player_camera=bytearray(0x198)
+    player_camera[0]=player_camera[3]=player_camera[4]=1;player_camera[5]=2
+    player_camera[0x5C]=32;player_camera[0x70]=8
+    for at in (8,0x18):struct.pack_into("<ii",player_camera,at,2112<<16,1115<<16)
+    struct.pack_into("<h",player_camera,0x158+0xA,1968)
+    struct.pack_into("<h",player_camera,0x158+0xE,944)
+    struct.pack_into("<hhhh",player_camera,0x158+0x1C,5120,1968,944,944)
+    row=dict(tick=tick,ready=1,enrolled=1,failed=0,mailbox=0,scene_owner=0,scene_phase=0,
+        native_mode=10,native_phase=0,pause_owner=0,lifecycle=[0,0],players=[
+            dict(active=1,character=0,state=1,action=2,hp=32,x_raw=2112<<16,y_raw=1115<<16),
+            dict(active=1,character=1,state=1,action=2,hp=32,x_raw=2136<<16,y_raw=1115<<16)])
+    gpu=dict(width=320,height=240,disabled=0,ws=dict(x_margin=0))
+    return row,bytes(native),bytes(player_camera),gpu
+
+
 class FrozenInventoryTests(unittest.TestCase):
     def test_all115_retained_only94_campaign_tuples_permitted(self):
         _, rows, sections = checkpoint.inventory(INVENTORY)
@@ -71,7 +88,9 @@ class CheckpointTransactionTests(unittest.TestCase):
         self.receipt = {}
         self.next_tick = 10
 
-    def run_request(self, statuses, *, active=0, clock=None):
+    def run_request(self, statuses, *, active=0, clock=None, ticks=None):
+        native_entry=settled_entry()
+        publication_ticks=iter(ticks) if ticks else None
         class Reader:
             def __init__(inner):
                 inner.states = iter(statuses)
@@ -82,21 +101,21 @@ class CheckpointTransactionTests(unittest.TestCase):
                 if (address, count) == (debug.DIAGNOSTIC_ADDRESS+0x50, 1):
                     return b"\0"
                 if address == 0x800CCED0:
-                    data = bytearray(0x1E);data[0]=10;data[0x1D]=1
-                    return data
-                if address == 0x800971F8:
-                    return bytes(64)
+                    return native_entry[1]
+                if (address,count)==(0x800970A0,0x198):
+                    return native_entry[2]
                 raise AssertionError((address, count))
 
         def control(command, **fields):
             self.calls.append((command, fields))
-            return dict(active=active) if command == "netplay_status" else dict(ok=True)
+            if command=="netplay_status":return dict(active=active)
+            if command=="gpu_state":return native_entry[3]
+            return dict(ok=True)
 
         def observe(client):
-            self.next_tick += 1
-            return SimpleNamespace(tick=self.next_tick, ready=1, enrolled=1, failed=0, native_mode=10,
-                lifecycle=(0, 0), players=[SimpleNamespace(active=1, hp=32)]*2,
-                json=lambda: dict(tick=self.next_tick))
+            self.next_tick=next(publication_ticks) if publication_ticks else self.next_tick+1
+            row=settled_entry(self.next_tick)[0]
+            return SimpleNamespace(tick=self.next_tick,json=lambda:row)
 
         with patch.object(debug, "observe", observe), patch.object(checkpoint.time, "sleep"):
             if clock:
@@ -107,7 +126,8 @@ class CheckpointTransactionTests(unittest.TestCase):
     def test_payload_then_commit_only_mailbox_and_actual_completion_required(self):
         result = self.run_request([publication(), publication(1, generation=1, nonce=77),
                                   publication(2, generation=1, nonce=77, entries=1),
-                                  publication(3, generation=1, nonce=77, entries=1)])
+                                  publication(3, generation=1, nonce=77, entries=1),
+                                  publication(3, generation=1, nonce=77, entries=1)],ticks=[215,220,221])
         writes = [fields for cmd, fields in self.calls if cmd == "write_ram"]
         self.assertEqual([int(w["addr"], 16) for w in writes],
                          list(range(debug.DIAGNOSTIC_ADDRESS+0x51, debug.DIAGNOSTIC_ADDRESS+0x58)) +
@@ -116,6 +136,10 @@ class CheckpointTransactionTests(unittest.TestCase):
         self.assertEqual(result["status"], "prerequisite_bypass_setup_completed_artwork_pending")
         self.assertTrue(result["prerequisite_bypass"] and result["ordinary_input_evidence_tainted"])
         self.assertEqual(result["ledger_status"], "unverified")
+        self.assertFalse(result["completion_waiting"][0]["checks"]["publication_after_completed_receipt"])
+        self.assertTrue(result["completion_waiting"][-1]["checks"]["publication_after_completed_receipt"])
+        self.assertEqual(result["completion_anchor"]["publication"]["tick"],220)
+        self.assertEqual(result["final_players"]["tick"],221)
 
     def test_online_and_ambiguous_status_rejected_before_any_write(self):
         for active in (1, True, None):
@@ -150,6 +174,75 @@ class CheckpointTransactionTests(unittest.TestCase):
             with self.assertRaises(debug.DebugError):
                 self.run_request([publication(), final])
             self.assertEqual(self.receipt["status"], "failed_setup")
+
+    def test_later_old_publication_after_payload_cannot_satisfy_completed_anchor(self):
+        done=publication(3,generation=1,nonce=77,entries=1)
+        with self.assertRaisesRegex(debug.DebugError,"deadline"):
+            self.run_request([publication(),done,done],ticks=[215,220,220],clock=[0,0,0,1000])
+        self.assertEqual(self.receipt["completion_anchor"]["publication"]["tick"],220)
+        self.assertTrue(all(not row["checks"]["publication_after_completed_receipt"]
+                            for row in self.receipt["completion_waiting"]))
+        self.assertEqual(self.receipt["status"],"failed_setup")
+
+
+class NativeEntryReadiness(unittest.TestCase):
+    def setUp(self):
+        _,rows,sections=checkpoint.inventory(INVENTORY)
+        self.target=checkpoint.select(rows,sections,0,0,1)
+
+    def reduce(self,row=None,native=None,actor_camera=None,gpu=None,anchor=220):
+        actual=settled_entry()
+        return checkpoint.reduce_entry_readiness(self.target,anchor,row or actual[0],
+            native if native is not None else actual[1],
+            actor_camera if actor_camera is not None else actual[2],gpu if gpu is not None else actual[3])
+
+    def test_new_grounded_actor_and_selected_camera_qualify_readiness_not_spawn_y_tolerance(self):
+        self.assertEqual(self.target["player"]["y"],1072)
+        self.assertTrue(all(self.reduce().values()))  # Synthetic settled Y; no CP1 landing is qualified here.
+
+    def test_cached_pub_equal_anchor_or_backwards_cannot_pass(self):
+        for tick in (220,219):
+            row=settled_entry(tick)[0]
+            self.assertFalse(self.reduce(row=row)["publication_after_completed_receipt"])
+
+    def test_old_stage_body_outside_new_camera_cannot_pass_even_with_new_publication(self):
+        row=settled_entry()[0];row["players"][0]["x_raw"]=144<<16;row["players"][1]["x_raw"]=181<<16
+        checks=self.reduce(row=row)
+        self.assertFalse(checks["native_p1_agrees_with_publication"])
+        self.assertFalse(checks["actors_in_current_native_viewport"])
+
+    def test_arrival_scene_and_stage_blocking_flags_are_not_playable_entry(self):
+        for at in (0x0F,0x10,0x1C):
+            raw=bytearray(settled_entry()[1]);raw[at]=5
+            self.assertFalse(self.reduce(native=raw)["native_entry_gates_clear"])
+
+    def test_projected_zero_unsettled_previous_position_or_airborne_p1_is_not_ready(self):
+        for mutation in ("projection","previous","airborne"):
+            raw=bytearray(settled_entry()[2])
+            if mutation=="projection":raw[2]=1
+            elif mutation=="previous":struct.pack_into("<i",raw,0x1C,1072<<16)
+            else:raw[0x70]=0
+            checks=self.reduce(actor_camera=raw)
+            self.assertFalse(checks["native_previous_position_settled"] if mutation=="previous" else checks["native_p1_visible_idle_grounded"])
+
+    def test_wrong_authored_x_camera_bounds_or_offscreen_partner_cannot_pass(self):
+        raw=bytearray(settled_entry()[2]);struct.pack_into("<i",raw,8,(2112<<16)+1)
+        self.assertFalse(self.reduce(actor_camera=raw)["p1_at_authored_x"])
+        raw=bytearray(settled_entry()[2]);struct.pack_into("<h",raw,0x158+0x1E,0)
+        self.assertFalse(self.reduce(actor_camera=raw)["selected_camera_bounds"])
+        row=settled_entry()[0];row["players"][1]["y_raw"]=(944+240)<<16
+        self.assertFalse(self.reduce(row=row)["actors_in_current_native_viewport"])
+
+    def test_new_publication_without_enrolled_idle_roster_or_display_is_not_ready(self):
+        for mutation in ("not_enrolled","joining","pending_hit","not_idle"):
+            row=settled_entry()[0]
+            if mutation=="not_enrolled":row["enrolled"]=0
+            elif mutation=="joining":row["lifecycle"]=[0,3]
+            elif mutation=="pending_hit":row["players"][1]["hp"]=0x9C
+            else:row["players"][1]["action"]=6
+            self.assertFalse(self.reduce(row=row)["enrolled_living_idle_roster"])
+        gpu=settled_entry()[3];gpu["disabled"]=1
+        self.assertFalse(self.reduce(gpu=gpu)["display_enabled"])
 
 
 class CheckpointOptions(unittest.TestCase):

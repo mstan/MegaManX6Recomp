@@ -115,6 +115,62 @@ def fixture_status(client) -> dict:
                 record=f"{struct.unpack_from('<I', data, 24)[0]:08X}", tainted=data[28])
 
 
+def reduce_entry_readiness(target: dict, completed_tick: int, current: dict,
+                           native_play: bytes, native_player_camera: bytes, gpu: dict) -> dict:
+    """Source-bound settled entry, not merely mode0A plus a cached publication.
+
+    29B8C installs exact spawn X/Y and camera bounds. Native arrival/gravity may
+    change Y before control returns, so Y uses actual stable grounded position
+    inside the actual camera/GPU viewport, never a guessed spawn-Y tolerance.
+    The exact authored-X contract is conservative for scripted moving entries.
+    """
+    checks = dict(publication_after_completed_receipt=False, enrolled_living_idle_roster=False,
+        native_gameplay_tuple=False,native_entry_gates_clear=False,native_p1_visible_idle_grounded=False,
+        native_previous_position_settled=False,native_p1_agrees_with_publication=False,
+        p1_at_authored_x=False,selected_camera_bounds=False,camera_inside_authored_bounds=False,
+        actors_in_current_native_viewport=False,display_enabled=False)
+    if len(native_play)!=0x1E or len(native_player_camera)!=0x198:
+        return checks
+    try:
+        delta=(current["tick"]-completed_tick)&0xFFFFFFFF
+        checks["publication_after_completed_receipt"]=0<delta<0x80000000
+        players=current["players"]
+        checks["enrolled_living_idle_roster"]=(current["ready"]==current["enrolled"]==1 and
+            current["failed"]==current["mailbox"]==current["scene_owner"]==current["scene_phase"]==0 and
+            current["native_mode"]==10 and current["native_phase"]==current["pause_owner"]==0 and
+            tuple(current["lifecycle"])==(0,0) and len(players)==2 and
+            [p["character"] for p in players]==[0,1] and
+            all(p["active"] and p["state"]==1 and p["action"]==2 and 0<p["hp"]<128 for p in players))
+        checks["native_gameplay_tuple"]=(native_play[0],native_play[1],native_play[12],native_play[13],native_play[0x1D])==\
+            (10,0,target["stage"],target["section"],target["checkpoint"])
+        checks["native_entry_gates_clear"]=all(native_play[at]==0 for at in (0x0F,0x10,0x1C))
+        body=native_player_camera[:0x158];camera=native_player_camera[0x158:]
+        actor=debug.Player.parse(body)
+        checks["native_p1_visible_idle_grounded"]=(actor.active and body[3]==1 and actor.character==0 and
+            actor.state==1 and actor.action==2 and 0<actor.hp<128 and not body[0x67] and bool(body[0x70]&8))
+        checks["native_previous_position_settled"]=struct.unpack_from("<ii",body,8)==struct.unpack_from("<ii",body,0x18)
+        checks["native_p1_agrees_with_publication"]=(actor.x_raw,actor.y_raw,actor.hp)==\
+            (players[0]["x_raw"],players[0]["y_raw"],players[0]["hp"])
+        checks["p1_at_authored_x"]=actor.x_raw==(target["player"]["x"]<<16)
+        x,y=struct.unpack_from("<h",camera,0x0A)[0],struct.unpack_from("<h",camera,0x0E)[0]
+        max_x,min_x,max_y,min_y=struct.unpack_from("<hhhh",camera,0x1C)
+        authored=target["camera"]
+        checks["selected_camera_bounds"]=(min_x,max_x,min_y,max_y)==\
+            (authored["min_x"],authored["max_x"],authored["min_y"],authored["max_y"])
+        checks["camera_inside_authored_bounds"]=min_x<=x<=max_x and min_y<=y<=max_y
+        width,height=gpu.get("width"),gpu.get("height")
+        margin=gpu.get("ws",{}).get("x_margin")
+        checks["display_enabled"]=type(gpu.get("disabled")) is int and gpu["disabled"]==0
+        if all(type(value) is int for value in (width,height,margin)) and width>0 and height>0 and margin>=0:
+            checks["actors_in_current_native_viewport"]=all(
+                ((x-margin)<<16)<=p["x_raw"]<((x+width+margin)<<16) and
+                (y<<16)<=p["y_raw"]<((y+height)<<16)
+                for p in players)
+    except (KeyError,ValueError,TypeError,struct.error):
+        pass
+    return checks
+
+
 def enter_checkpoint(control, client, target: dict, receipt: dict, *, timeout=60, nonce=1) -> dict:
     """One owned offline mailbox transaction; retains partial setup evidence.
 
@@ -131,6 +187,7 @@ def enter_checkpoint(control, client, target: dict, receipt: dict, *, timeout=60
     receipt.update(kind="private_offline_native_checkpoint_entry", status="failed_setup",
                    prerequisite_bypass=True, ordinary_input_evidence_tainted=True, target=target,
                    source_exe_sha256=content.EXE_SHA256, nonce=nonce, observations=[], checks={},
+                   completion_waiting=[],composed_capture_required_after_readiness=True,
                    ledger_status="unverified", artwork_review="pending")
     network = control("netplay_status")
     receipt["network_status"] = network
@@ -150,6 +207,7 @@ def enter_checkpoint(control, client, target: dict, receipt: dict, *, timeout=60
     control("write_ram", addr=hex(debug.DIAGNOSTIC_ADDRESS + 0x50), val="0x8")
     deadline = time.monotonic() + timeout
     expected_generation = (before["generation"] + 1) & 0xFFFFFFFF
+    completed_tick=None
     while time.monotonic() < deadline:
         observed = fixture_status(client)
         receipt["observations"].append(observed)
@@ -173,11 +231,21 @@ def enter_checkpoint(control, client, target: dict, receipt: dict, *, timeout=60
                                     (10, stage, section, checkpoint))
                 if not all(receipt["checks"].values()):
                     raise debug.DebugError("Checkpoint entry completion did not match the requested native setup")
-                fresh = (current.tick - before_players.tick) & 0xFFFFFFFF
-                if (0 < fresh < 0x80000000 and current.ready == current.enrolled == 1 and not current.failed and
-                        current.native_mode == 10 and current.lifecycle == (0, 0) and
-                        all(player.active and player.hp > 0 for player in current.players)):
-                    receipt["native_camera_after_entry"] = client.read(0x800971F8, 0x40).hex()
+                if completed_tick is None:
+                    # Payload RPCs can advance the OLD world beyond the
+                    # pre-request tick. Anchor AFTER first state3 instead.
+                    completed_tick=current.tick
+                    receipt["completion_anchor"]=dict(fixture=observed,publication=current.json())
+                probe=dict(publication=current.json(),native_play=native.hex(),readiness_computed=False)
+                receipt["completion_waiting"].append(probe)
+                actual=client.read(0x800970A0,0x198)  # P1 + primary camera in ONE native read.
+                probe["native_player_camera"]=actual.hex()
+                gpu=control("gpu_state")
+                checks=reduce_entry_readiness(target,completed_tick,current.json(),native,actual,gpu)
+                probe.update(gpu_state=gpu,checks=checks,readiness_computed=True)
+                receipt["checks"].update(checks)
+                if all(checks.values()):
+                    receipt["native_camera_after_entry"] = actual[0x158:].hex()
                     receipt["status"] = "prerequisite_bypass_setup_completed_artwork_pending"
                     return receipt
         time.sleep(.03)
