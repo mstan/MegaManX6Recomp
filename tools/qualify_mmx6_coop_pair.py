@@ -1,0 +1,378 @@
+"""Stage and qualify one owned, hidden, muted loopback X6 delay-sync pair.
+
+Uses current shared tools from --tools-root, not the worker's older copies.
+Never writes guest RAM/mailboxes/fixtures or copies source memory cards.
+Only the two Popen processes created here can be stopped. A passing result is
+an intro/input smoke and bounded host-FNV observation, not full state parity.
+"""
+from __future__ import annotations
+
+import argparse
+from concurrent.futures import ThreadPoolExecutor
+import importlib
+import json
+import os
+from pathlib import Path
+import socket
+import subprocess
+import sys
+import time
+import traceback
+
+
+def run(args) -> dict:
+    tools_root = args.tools_root.resolve(strict=True)
+    sys.path.insert(0, str(tools_root))
+    debug = importlib.import_module("coop_debug")
+    preparation = importlib.import_module("prepare_mmx6_coop_playtest")
+    baseline = importlib.import_module("qualify_mmx6_coop_baseline")
+    paired = importlib.import_module("test_mmx6_coop_netplay")
+    modules = (debug, preparation, baseline, paired)
+    if any(Path(module.__file__).resolve().parent != tools_root for module in modules):
+        raise ValueError("A shared tool resolved outside --tools-root")
+    output = preparation.local_output(args.out)
+    if output.exists():
+        raise ValueError("Output exists; retain earlier evidence and choose a fresh directory")
+    output.mkdir(parents=True)
+    report = dict(schema=1, kind="owned_loopback_delay_intro", status="failed_setup",
+                  candidate_exe_sha256=preparation.sha256(args.build / "mmx6-runtime.exe"),
+                  runner_source_sha256=preparation.sha256(Path(__file__)),
+                  loading_policy="original_disc_loader_diagnostic_bypass" if args.native_loader_diagnostic
+                                 else "default_seamless_loading",
+                  default_intro_qualified=False,
+                  tools_root=str(tools_root), tool_sha256={Path(m.__file__).name:
+                  preparation.sha256(Path(m.__file__)) for m in modules},
+                  session=args.session, input_delay=3, peers=[], setup=[], observations=[],
+                  checks={}, matched_host_observations=[], limits=[
+                      "Intro only; no campaign, physical-controller, audible or real-network pass",
+                      "Diagnostic FNV is bounded host state, not a framework core/mod CRC",
+                      "Diagnostic publication counts are not netplay simulation ticks",
+                      "Overlay autocompilation is off; no AOT or performance claim",
+                      "No source memory cards were supplied or copied"])
+    handles, processes, clients, reservations = [], [], [], []
+    executor = ThreadPoolExecutor(max_workers=2)
+    runtime_ready = False
+
+    def both(function):
+        jobs = [executor.submit(function, seat) for seat in range(2)]
+        values, errors = [], []
+        for job in jobs:
+            try:
+                values.append(job.result())
+            except Exception as error:
+                values.append(None)
+                errors.append(error)
+        if errors:
+            raise errors[0]
+        return values
+
+    def require(condition, message):
+        if not condition:
+            raise paired.ValidationFailure(message)
+
+    def network():
+        status = both(lambda seat: clients[seat].request("netplay_status"))
+        paired.validate_status(status)
+        report["last_network_status"] = status
+        return status
+
+    def rows():
+        observed = both(lambda seat: debug.observe(clients[seat]))
+        require(all(row.mailbox == 0 for row in observed), "Raw P2 mailbox became armed")
+        require(all(row.ready == row.enrolled == 1 and row.failed == 0 for row in observed),
+                "A co-op plugin left its ready/enrolled state")
+        report["observations"].append([row.json() for row in observed])
+        return observed
+
+    def advance(count, timeout=20):
+        start = rows()
+        deadline = time.monotonic()+timeout
+        while time.monotonic() < deadline:
+            current = rows()
+            if all(((row.native_timer-old.native_timer) & 0xFFFFFFFF) >= count
+                   for row, old in zip(current, start)):
+                network()
+                return current
+            time.sleep(.025)
+        raise paired.ValidationFailure("Native timers did not consume the input window")
+
+    def matched(label, seconds=4):
+        deadline, history, common = time.monotonic()+seconds, [{}, {}], set()
+        matches = []
+        while time.monotonic() < deadline:
+            observed = rows()
+            for seat, row in enumerate(observed):
+                history[seat][row.tick] = row
+                if len(history[seat]) > 256:
+                    del history[seat][next(iter(history[seat]))]
+            for tick in sorted((set(history[0]) & set(history[1])) - common):
+                matches.append(paired.pair_match(history[0][tick], history[1][tick]))
+                common.add(tick)
+            time.sleep(.015)
+        if len(matches) < 2:
+            raise paired.FailedSetup(f"{label}: insufficient common diagnostic publication counts")
+        report["matched_host_observations"].append(dict(label=label, matches=matches))
+        network()
+
+    try:
+        ports = [args.host_port, args.guest_port, args.host_udp, args.guest_udp]
+        if len(set(ports)) != 4 or any(not 1 <= port <= 65535 for port in ports):
+            raise ValueError("Require four distinct ports in 1..65535")
+        for port, kind in zip(ports, (socket.SOCK_STREAM, socket.SOCK_STREAM,
+                                     socket.SOCK_DGRAM, socket.SOCK_DGRAM)):
+            reservation = socket.socket(socket.AF_INET, kind)
+            if hasattr(socket, "SO_EXCLUSIVEADDRUSE"):
+                reservation.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+            reservation.bind(("127.0.0.1", port))
+            reservations.append(reservation)
+        for seat in range(2):
+            directory = output/f"peer-{seat}"
+            receipt = preparation.prepare(args.build, tools_root.parent, directory, args.disc,
+                                          automated=True)
+            # The executable-owned profile supplies co-op. Preserve the normal
+            # default-on loader unless the caller explicitly asks to bypass it
+            # for diagnosis; such a run cannot qualify default netplay.
+            (directory/"mods/state.toml").write_text(f'''format_version = 2
+[[package]]
+id = "mmx6.local-coop"
+version = "0.0.1"
+[[feature]]
+package_id = "mmx6.local-coop"
+id = "prototype"
+enabled = false
+[[package]]
+id = "mmx6.enhancement.seamless-loading"
+version = "0.1.0"
+[[feature]]
+package_id = "mmx6.enhancement.seamless-loading"
+id = "seamless-loading"
+enabled = {str(not args.native_loader_diagnostic).lower()}
+''', encoding="utf-8")
+            require(receipt["source_card"] is None, "Unexpected source card")
+            require(receipt["exe_sha256"] == report["candidate_exe_sha256"],
+                    "Build changed during paired staging")
+            environment = baseline.candidate_environment(directory, receipt)
+            # Discard inherited developer/session controls, then reapply only
+            # the validated private paths and fixed LAN/delay policies.
+            environment = {key: value for key, value in environment.items()
+                           if not key.upper().startswith(("PSX_", "RNET_"))}
+            environment.update(json.loads((directory/"environment.json").read_text()))
+            environment.update(PSX_NET_TRANSPORT="lan", PSX_NET_MODE="delay",
+                               SDL_AUDIODRIVER="dummy", PSX_NETPLAY="1")
+            argv = [str(directory/"mmx6-runtime.exe"), "--game", str(directory/"game.toml"),
+                    "--bios", str(directory/"bios/openbios.bin"), "--disc", str(args.disc.resolve()),
+                    "--memcard-dir", str(directory/"saves"), "--no-launcher", "--hidden-window",
+                    "--renderer", "opengl", "--netplay", "--net-slot", str(seat),
+                    "--net-input-player", "0", "--net-bind", f"127.0.0.1:{ports[2+seat]}",
+                    "--net-peer", f"127.0.0.1:{ports[3-seat]}", "--net-delay", "3",
+                    "--net-session-id", str(args.session), "--debug-port", str(ports[seat])]
+            report["peers"].append(dict(seat=seat, directory=str(directory), argv=argv,
+                                        preparation=receipt, runtime_environment={key: environment[key]
+                                        for key in ("TEMP", "TMP", "LOCALAPPDATA", "APPDATA",
+                                        "PSX_RESIDENT_CACHE", "PSX_OVERLAY_CACHE_DIR",
+                                        "PSX_OVERLAY_AUTOCOMPILE_OFF", "PSX_NET_TRANSPORT",
+                                        "PSX_NET_MODE", "SDL_AUDIODRIVER")}))
+            report["peers"][-1]["network_selection_sha256"] = preparation.sha256(directory/"mods/state.toml")
+        # Reservations establish availability; owned-listener checks close the
+        # release-to-launch race before every debug command, including quit.
+        for reservation in reservations:
+            reservation.close()
+        reservations.clear()
+        for seat, peer in enumerate(report["peers"]):
+            directory = Path(peer["directory"])
+            stdout = (directory/"logs/stdout.log").open("w", encoding="utf-8")
+            stderr = (directory/"logs/stderr.log").open("w", encoding="utf-8")
+            handles.extend((stdout, stderr))
+            environment = baseline.candidate_environment(directory, peer["preparation"])
+            environment = {key: value for key, value in environment.items()
+                           if not key.upper().startswith(("PSX_", "RNET_"))}
+            environment.update(json.loads((directory/"environment.json").read_text()))
+            environment.update(PSX_NET_TRANSPORT="lan", PSX_NET_MODE="delay",
+                               SDL_AUDIODRIVER="dummy", PSX_NETPLAY="1")
+            process = subprocess.Popen(peer["argv"], cwd=directory, env=environment,
+                                       stdin=subprocess.DEVNULL, stdout=stdout, stderr=stderr,
+                                       creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0)
+            processes.append(process)
+            peer["owned_pid"] = process.pid
+
+            class OwnedClient(debug.DebugClient):
+                def __init__(self, port, owner):
+                    super().__init__(port, timeout=3)
+                    self.owner = owner
+
+                def request(self, command, **fields):
+                    if self.owner.poll() is not None or not baseline.owns_listener(self.port, self.owner.pid):
+                        raise debug.DebugError("Owned process does not own this debug listener")
+                    return super().request(command, **fields)
+
+            clients.append(OwnedClient(ports[seat], process))
+        print(json.dumps(dict(event="launched_owned_pair", pids=[p.pid for p in processes],
+                              output=str(output))), flush=True)
+        deadline, next_input, release_input, step = time.monotonic()+args.timeout, 0., 0., 0
+        neutralized = False
+        while time.monotonic() < deadline:
+            if any(process.poll() is not None for process in processes):
+                raise debug.DebugError("An owned peer exited during native boot")
+            try:
+                if not all(baseline.owns_listener(ports[seat], process.pid)
+                           for seat, process in enumerate(processes)):
+                    time.sleep(.1)
+                    continue
+                net = network()
+                pads = both(lambda seat: clients[seat].request("pad_status"))
+                if not all(pad.get("slot0", {}).get("connected") for pad in pads):
+                    raise paired.FailedSetup("A private virtual P1 keyboard pad is disconnected")
+                if not neutralized:
+                    both(lambda seat: clients[seat].host_input(0))
+                    neutralized = True
+                modes = both(lambda seat: list(clients[seat].read(0x800CCED0, 2)))
+                actions = both(lambda seat: clients[seat].read(0x800970A5, 1)[0])
+                report["setup"].append(dict(modes=modes, actions=actions,
+                                           network_ticks=[row["tick"] for row in net]))
+                if len(report["setup"]) > 512:
+                    del report["setup"][0]
+                if all(mode[0] == 10 and action == 2 for mode, action in zip(modes, actions)):
+                    observed = both(lambda seat: debug.observe(clients[seat]))
+                    if all(paired.native_ready(row) for row in observed):
+                        break
+                now = time.monotonic()
+                if release_input and now >= release_input:
+                    clients[0].host_input(0)
+                    release_input = 0.
+                if now >= next_input and not release_input:
+                    button = 0x0008 if modes[0][0] != 10 and step % 3 == 0 else 0x4000
+                    clients[0].host_input(button)
+                    release_input, next_input = time.monotonic()+.20, time.monotonic()+.9
+                    step += 1
+                    if step % 10 == 1:
+                        print(json.dumps(dict(event="native_boot", modes=modes, actions=actions,
+                                              network_ticks=[row["tick"] for row in net])), flush=True)
+            except (debug.DebugError, OSError) as error:
+                report["latest_setup_error"] = str(error)
+            time.sleep(.10)
+        else:
+            raise paired.FailedSetup("Native boot did not reach two idle live heroes within the setup deadline")
+        both(lambda seat: clients[seat].host_input(0))
+        runtime_ready = True
+        report["status"] = "failed"
+        start = advance(10)
+        report["initial"] = [row.json() for row in start]
+        matched("initial idle")
+        before = rows()
+        clients[1].host_input(0x20)
+        try:
+            advance(12)
+        finally:
+            clients[1].host_input(0)
+        moved = advance(8)
+        report["checks"]["p2_right_reaches_both_peers"] = all(
+            after.players[1].x_raw > old.players[1].x_raw for old, after in zip(before, moved))
+        report["checks"]["p2_right_preserves_p1_x"] = all(
+            after.players[0].x_raw == old.players[0].x_raw for old, after in zip(before, moved))
+        matched("P2 right then release")
+        before = rows()
+        clients[0].host_input(0x4000)
+        try:
+            jumped = advance(6)
+        finally:
+            clients[0].host_input(0)
+        report["checks"]["p1_jump_reaches_both_peers"] = all(
+            after.players[0].y_raw < old.players[0].y_raw for old, after in zip(before, jumped))
+        report["checks"]["p1_jump_preserves_p2_y"] = all(
+            after.players[1].y_raw == old.players[1].y_raw for old, after in zip(before, jumped))
+        settled = advance(45)
+        report["checks"]["both_alive_healthy"] = all(row.lifecycle == (0, 0) and
+            all(player.hp == 32 for player in row.players) for row in settled)
+        report["checks"]["mailbox_unused"] = all(row.mailbox == 0 for row in settled)
+        matched("P1 jump then settle")
+        report["captures"] = []
+        for seat, client in enumerate(clients):
+            path = output/f"peer-{seat}/logs/intro.png"
+            response = client.request("screenshot", path=str(path))
+            require(path.is_file() and path.stat().st_size > 0, "Render screenshot was not written")
+            report["captures"].append(dict(seat=seat, surface="game_render_buffer",
+                path=str(path), sha256=preparation.sha256(path), response=response))
+        report["final"] = [row.json() for row in rows()]
+        network()
+        report["status"] = "passed" if all(report["checks"].values()) else "failed"
+        report["default_intro_qualified"] = report["status"] == "passed" and not args.native_loader_diagnostic
+    except Exception as error:
+        report.update(error=str(error), traceback=traceback.format_exc())
+        if not runtime_ready:
+            report["status"] = "failed_setup"
+        for seat, client in enumerate(clients):
+            diagnostics = {}
+            for command in ("netplay_status", "pad_status", "gpu_state"):
+                try:
+                    diagnostics[command] = client.request(command)
+                except Exception as diagnostic_error:
+                    diagnostics[command] = dict(error=str(diagnostic_error))
+            try:
+                path = output/f"peer-{seat}/logs/failure.png"
+                diagnostics["screenshot"] = client.request("screenshot", path=str(path))
+                if path.is_file():
+                    diagnostics["screenshot_sha256"] = preparation.sha256(path)
+            except Exception as diagnostic_error:
+                diagnostics["screenshot_error"] = str(diagnostic_error)
+            report["peers"][seat]["failure_diagnostics"] = diagnostics
+    finally:
+        for reservation in reservations:
+            reservation.close()
+        for seat, process in enumerate(processes):
+            peer = report["peers"][seat]
+            if process.poll() is None:
+                try:
+                    clients[seat].release()
+                    clients[seat].request("quit")
+                    process.wait(timeout=5)
+                    peer["shutdown"] = "graceful_owned_debug"
+                except Exception:
+                    if process.poll() is None:
+                        process.terminate()
+                    try:
+                        process.wait(timeout=5)
+                    except subprocess.TimeoutExpired:
+                        process.kill()
+                        process.wait(timeout=5)
+                    peer["shutdown"] = "owned_popen_terminated"
+            else:
+                peer["shutdown"] = "already_exited"
+                if report["status"] == "passed":
+                    report["status"] = "failed"
+            peer["exit_code"] = process.poll()
+            peer["private_card_files"] = [dict(name=path.name, sha256=preparation.sha256(path))
+                for path in (Path(peer["directory"])/"saves").glob("*.mcd")]
+        executor.shutdown(wait=True)
+        for handle in handles:
+            handle.close()
+        (output/"qualification.json").write_text(json.dumps(report, indent=2)+"\n", encoding="utf-8")
+    return report
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--tools-root", type=Path, required=True)
+    parser.add_argument("--build", type=Path, required=True)
+    parser.add_argument("--disc", type=Path, required=True)
+    parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--host-port", type=int, default=24901)
+    parser.add_argument("--guest-port", type=int, default=24902)
+    parser.add_argument("--host-udp", type=int, default=29901)
+    parser.add_argument("--guest-udp", type=int, default=29902)
+    parser.add_argument("--session", type=int, default=20261023)
+    parser.add_argument("--timeout", type=float, default=240)
+    parser.add_argument("--native-loader-diagnostic", action="store_true",
+                        help="Explicitly bypass default Seamless Loading; never qualifies defaults")
+    args = parser.parse_args()
+    if sys.version_info < (3, 11):
+        parser.error("Python 3.11+ is required by the shared staging tools")
+    if not 0 < args.timeout <= 600:
+        parser.error("Setup timeout must be in (0,600]")
+    report = run(args)
+    print(json.dumps(dict(status=report["status"], checks=report["checks"], error=report.get("error"),
+                          report=str(args.out/"qualification.json"))), flush=True)
+    return 0 if report["status"] == "passed" else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
