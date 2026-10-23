@@ -40,6 +40,7 @@ class BodyAudioTests(unittest.TestCase):
         class Observer(Bank):
             def __init__(self):super().__init__();self.events=[];self.cursor=0;self.count=0
             def fingerprint_banks(self):return [dict(bank=30,sha256='a'*64)]
+            def driver(self):return {}
             def poll(self):
                 self.count+=1;calls.append(('poll',self.count))
                 action=2
@@ -55,7 +56,7 @@ class BodyAudioTests(unittest.TestCase):
         def request(cmd,**fields):
             if cmd=='fntrace_armed':return dict(count=4,targets=[hex(t)for t in subject.TRACE_TARGETS])
             if cmd=='fntrace_dump':return dict(seq_lo=0,seq_hi=1,emitted=1,entries=[dict(seq=0,target='0x80016C48',
-                a0='0x1',a1='0x7',a2='0x800970A0',ra='0x801EA040')])
+                a0='0x1',a1='0x7',a2='0x800970A0',ra='0x801EA040',frame=100)])
             if cmd.startswith('fntrace_'):return dict(ok=True)
             return hardware() if cmd=='spu_voices' else private
         ctx=dict(mode='local',input_path='published_host',clients=[object()],request=request,private_banks={},
@@ -127,6 +128,17 @@ class BodyAudioTests(unittest.TestCase):
             self.assertFalse(all(subject.identify(Bank(),event,source)['checks'].values()))
         source,event=fixture();source['body_records'][0]['tones'][0]['sample_sha256']='0'*64
         self.assertFalse(subject.identify(Bank(),event,source)['checks']['source_sample'])
+
+    def test_alias_record_needs_the_actual_same_frame_sound_call(self):
+        source,event=fixture();alias=copy.deepcopy(source['body_records'][0]);alias['record']=8
+        alias['tones'][0]['tone']=9;source['body_records'].append(alias)
+        call=dict(target='0x80016C48',a0='0x1',a1='0x7',a2='0x800970A0',ra='0x801EBE90',frame=100)
+        with self.assertRaises(subject.audio.AudioQualificationError):subject.identify(Bank(),event,source)
+        selected=subject.identify(Bank(),event,source,sound_calls=[call])
+        self.assertEqual(selected['record']['record'],7)
+        self.assertEqual(selected['record_selection'],'event_time_original_sound_call')
+        for changed in (dict(call,frame=101),dict(call,a2='0x8008EF48')):
+            with self.assertRaises(subject.audio.AudioQualificationError):subject.identify(Bank(),event,source,sound_calls=[changed])
 
     def test_stop_does_not_borrow_a_replacement_notes_envelope(self):
         source,key=fixture();selected=subject.identify(Bank(),key,source)

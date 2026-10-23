@@ -30,10 +30,16 @@ def source_digest(source):
     return hashlib.sha256(json.dumps(source, sort_keys=True, separators=(',', ':')).encode('ascii')).hexdigest()
 
 
-def identify(observer, event, source):
+def identify(observer, event, source, *, sound_calls=None):
     """Probe every sample byte with bounded reads, using its event-time bank."""
     if event['sample_bank'] != 30: raise audio.AudioQualificationError('Body SFX names a different immutable bank')
     matches = [r for r in source['body_records'] if r['tones'][0]['offset'] == event['addr']]
+    calls=[]
+    if sound_calls is not None:
+        calls=[r for r in sound_calls if int(r['target'],16)==0x80016C48 and int(r['a0'],16)==1 and
+            int(r['a2'],16)==0x800970A0 and r['frame']==event['frame'] and
+            0x801EA000<=int(r['ra'],16)<0x801EA000+contact.ZERO_SIZE]
+        matches=[r for r in matches if any(int(c['a1'],16)==r['record'] for c in calls)]
     if len(matches) != 1: raise audio.AudioQualificationError('Body sample address is absent or ambiguous')
     record = matches[0]; tone = record['tones'][0]
     descriptor = next(b for b in observer.private_banks['banks'] if b['bank'] == 30)
@@ -48,7 +54,8 @@ def identify(observer, event, source):
         source_sample=observed == tone['sample_sha256'],
         pitch_adsr_numeric=all(event[k] == tone[k] for k in ('pitch', 'adsr_lo', 'adsr_hi')),
         original_end_marker_present=tone['first_end_block'] is not None and bool(tone['first_end_flags'] & 1))
-    return dict(record=record, event=event, observed_sha256=observed, checks=checks)
+    return dict(record=record, event=event, observed_sha256=observed, checks=checks,
+        source_calls=calls,record_selection='event_time_original_sound_call' if sound_calls is not None else 'unique_sample_source')
 
 
 def final_checks(events, selected, private):
@@ -223,7 +230,8 @@ def exercise(ctx, contract, *, source, timeout=90, death=False, **unused):
             ctx['set_input'](1, 0)
         keys = [e for e in observer.events if e['seq'] >= start and e['kind'] == 'KEYON' and e['v'] == 47]
         require(len(keys)==1,'Saber SFX window has missing/reused private47')
-        case['selected'] = identify(observer, keys[0], source)
+        case['sample_trace']=trace_page(ctx)
+        case['selected'] = identify(observer, keys[0], source,sound_calls=case['sample_trace']['entries'])
         case['checks'].update(case['selected']['checks'])
         for attempt in range(31):
             row = sample('body-audio-neutral-stop')
@@ -234,6 +242,14 @@ def exercise(ctx, contract, *, source, timeout=90, death=False, **unused):
             require(attempt < 30, 'Native saber did not terminate and return to idle')
             advance(4, 'body-audio-neutral-drain')
         case['standing_saber_terminal']=audio.lifetime(observer.events,keys[0])
+        case['standing_saber_vocals']=[]
+        driver=observer.driver();case['driver_after_saber']=driver
+        for event in observer.events:
+            if event['seq']>=start and event['kind']=='KEYON' and event['v']==20:
+                try:identity=observer.identify(event,driver)
+                except audio.AudioQualificationError as error:identity=dict(sample_matches=False,reason=str(error))
+                case['standing_saber_vocals'].append(dict(event=event,identity=identity,
+                    scope='Separate vocal ownership observation; does not pass from body SFX'))
         if death:
             damage_allowed=True
             native_death(ctx,sample,observer,case,advance)
