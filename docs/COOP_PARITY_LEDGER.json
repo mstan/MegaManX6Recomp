@@ -622,6 +622,45 @@
               "Raw failed_setup reports are preserved; source sample alias and incorrect STOP-trigger assumptions belong to the observer, not retrospective engine failures."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "a1dac268ed8c5dc8ed902396cebcb2d0597fb009",
+            "build_identity": {
+              "exe_sha256": "982e2ab847d27615ee075578311bed6b74baed77fc9d52b9b41a77bd84749253",
+              "declared_manifest_sha256": "808ac1ac573bf192fa89c0c08631873689cc8a167fc6f34baa8a38e4b96d1c00",
+              "compiled_source_commit": "a1dac268ed8c5dc8ed902396cebcb2d0597fb009",
+              "sdk_commit": "bfbfb920bfa509f6a31ec2e6b28411a01797427f"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "loader": "defaultSeamlessLoading",
+              "input": "owned published host digital slots",
+              "rollback": false,
+              "muted": true
+            },
+            "action": "Fresh original Zero saber plus eight-contact native death; source traces, exact sample probes, before/after private and hardware DSP.",
+            "outcome": "All18 bounded SFX/inactive-stop checks pass. Private23 nonzero volume becomes zero with its binding intact; P1 hardware22 registers remain unchanged. Active STOP7 and the full comparison remain incomplete; prior current-image X-vocal failure is retained.",
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-body-audio\\manifest-bound-a1dac26-local-inactive-stops-reviewed.json",
+                "sha256": "08eaf0b92b1ef9ef070593b965ffde274d018f3eb4e6673105f10760d1097749",
+                "bytes": 12358
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v19-a1dac26-local-contact-death-inactive-contract\\qualification.json",
+                "sha256": "5ea9c810b7297ca5107d5664a6556aad81fcec3ad813dc089107b077006104c1",
+                "bytes": 5805050
+              }
+            ],
+            "limits": [
+              "Exact same-machine local v19 only: selected saber SFX and inactive phase2 STOP semantics pass; active STOP7 lifetime, paired body audio and active23 current-build states remain unverified.",
+              "Before death private23 was inactive with envelope0/Release and nonzero volume; original phase2 STOP7 zeroed volume without replacing the sample. SDK correctly emits no KEYOFF for an inactive voice.",
+              "Original phase2 STOP calls, eight native HP losses, contact actor/caller, private final state and unchanged P1 hardware22 registers are independently retained. This is not whole-campaign or audible/PCM/music qualification.",
+              "This run selected no saber vocal. The prior same-image actual X-sample vocal counterexample remains failed and is not overwritten by RNG absence."
+            ],
+            "bypasses": []
           }
         ],
         "limitations": "Concrete local original-ground-jump counterexample on exactbeeae10/a8f20cdc only. Other sound families, co-op-off native Zero comparison and all netplay audio checks remain unverified."
@@ -1771,6 +1810,45 @@
               "Saber vocal is a current-image R4 counterexample: actual hardware20/bank0 bytes match X DAT87 group3/record3, while Zero performs the native saber. Its independent source/identity evidence does not prove every other vocal family or a P1 lifetime cut.",
               "All eight HP losses came from ordinary source-attributed native contact; no HP/death/success writes or prerequisite bypasses.",
               "Raw failed_setup reports are preserved; source sample alias and incorrect STOP-trigger assumptions belong to the observer, not retrospective engine failures."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "a1dac268ed8c5dc8ed902396cebcb2d0597fb009",
+            "build_identity": {
+              "exe_sha256": "982e2ab847d27615ee075578311bed6b74baed77fc9d52b9b41a77bd84749253",
+              "declared_manifest_sha256": "808ac1ac573bf192fa89c0c08631873689cc8a167fc6f34baa8a38e4b96d1c00",
+              "compiled_source_commit": "a1dac268ed8c5dc8ed902396cebcb2d0597fb009",
+              "sdk_commit": "bfbfb920bfa509f6a31ec2e6b28411a01797427f"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "loader": "defaultSeamlessLoading",
+              "input": "owned published host digital slots",
+              "rollback": false,
+              "muted": true
+            },
+            "action": "Fresh original Zero saber plus eight-contact native death; source traces, exact sample probes, before/after private and hardware DSP.",
+            "outcome": "All18 bounded SFX/inactive-stop checks pass. Private23 nonzero volume becomes zero with its binding intact; P1 hardware22 registers remain unchanged. Active STOP7 and the full comparison remain incomplete; prior current-image X-vocal failure is retained.",
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-body-audio\\manifest-bound-a1dac26-local-inactive-stops-reviewed.json",
+                "sha256": "08eaf0b92b1ef9ef070593b965ffde274d018f3eb4e6673105f10760d1097749",
+                "bytes": 12358
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v19-a1dac26-local-contact-death-inactive-contract\\qualification.json",
+                "sha256": "5ea9c810b7297ca5107d5664a6556aad81fcec3ad813dc089107b077006104c1",
+                "bytes": 5805050
+              }
+            ],
+            "limits": [
+              "Exact same-machine local v19 only: selected saber SFX and inactive phase2 STOP semantics pass; active STOP7 lifetime, paired body audio and active23 current-build states remain unverified.",
+              "Before death private23 was inactive with envelope0/Release and nonzero volume; original phase2 STOP7 zeroed volume without replacing the sample. SDK correctly emits no KEYOFF for an inactive voice.",
+              "Original phase2 STOP calls, eight native HP losses, contact actor/caller, private final state and unchanged P1 hardware22 registers are independently retained. This is not whole-campaign or audible/PCM/music qualification.",
+              "This run selected no saber vocal. The prior same-image actual X-sample vocal counterexample remains failed and is not overwritten by RNG absence."
             ],
             "bypasses": []
           }

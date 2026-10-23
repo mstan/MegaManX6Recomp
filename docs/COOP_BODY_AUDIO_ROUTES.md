@@ -65,7 +65,8 @@ with its sample attribution and P1 hardware registers preserved. That never
 passes active STOP7 lifetime coverage. SDK fntrace and
 SPU events explicitly read the same external `s_frame_count`; this comparison
 does not substitute a native timer, publication counter or independent sample
-clock. These native death checks still require an actual retained run.
+clock. Active and inactive STOP dispositions require their own retained
+observations.
 
 The [reviewed first contact-death receipt](evidence/mmx6-body-audio/manifest-bound-a1dac26-local-contact-and-vocal-reviewed.json)
 verifies the saber SFX source sample and numerical fields, nine live STOP5
@@ -77,3 +78,13 @@ on inactive voices. Active STOP7 remains unverified. The receipt also records
 a current v19 failure: Zero's saber vocal used actual X DAT87 sample bytes on
 hardware20/bank0 instead of the retained Zero sample. Correct SFX do not close
 the remaining vocal, hurt or death families.
+
+The [fresh inactive-STOP receipt](evidence/mmx6-body-audio/manifest-bound-a1dac26-local-inactive-stops-reviewed.json)
+passes all 18 bounded SFX/inactive-death-STOP checks. Private23 was already
+inactive with envelope0 and volume13433/13433; its volume becomes0/0 after the
+original phase2 STOP7, with the sample binding intact. P1 hardware22 volume,
+start, pitch and ADSR remain unchanged. Both immutable banks, eight ordinary
+native contacts, source caller traces, clean input recording, owned exit0 and
+unchanged private cards are retained. No saber vocal was selected on this run;
+the prior same-image X-sample counterexample remains failed. Active STOP7,
+paired body audio, active23 state and the other sound families remain open.

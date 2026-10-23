@@ -1,0 +1,457 @@
+{
+  "schema": 1,
+  "kind": "reviewed_local_saber_and_inactive_phase2_body_stops",
+  "candidate": {
+    "source_commit": "a1dac268ed8c5dc8ed902396cebcb2d0597fb009",
+    "sdk_commit": "bfbfb920bfa509f6a31ec2e6b28411a01797427f",
+    "exe_sha256": "982e2ab847d27615ee075578311bed6b74baed77fc9d52b9b41a77bd84749253",
+    "declared_manifest_sha256": "808ac1ac573bf192fa89c0c08631873689cc8a167fc6f34baa8a38e4b96d1c00",
+    "title_compatibility": "mmx6-x-zero-delay-v17"
+  },
+  "compile_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v19-a1dac26\\candidate.json",
+    "sha256": "cb371d2beec7a9627564265969185e772516921ca7d94313f73ecd144081571c",
+    "bytes": 3232
+  },
+  "report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v19-a1dac26-local-contact-death-inactive-contract\\qualification.json",
+    "sha256": "5ea9c810b7297ca5107d5664a6556aad81fcec3ad813dc089107b077006104c1",
+    "bytes": 5805050
+  },
+  "executed_runner": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v19-a1dac26-local-contact-death-inactive-contract\\runner-source.py",
+    "sha256": "53b50d95a3c86e26467a03e85f0b08cecaa0497c18b8c74c59e47f5bf3c5c81f",
+    "bytes": 27771
+  },
+  "executed_observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v19-a1dac26-local-contact-death-inactive-contract\\mmx6_coop_body_audio-executed-source.py",
+    "sha256": "b02315363d6362a757e3e7952806954273c399d2e50fc5e560702b3aad677d93",
+    "bytes": 21150
+  },
+  "bounded_result": "passed",
+  "checks": {
+    "private_voice_route": true,
+    "source_sample": true,
+    "pitch_adsr_numeric": true,
+    "original_end_marker_present": true,
+    "final_dsp_attribution": true,
+    "stopped_volume_zero": true,
+    "final_envelope_terminated": true,
+    "final_pitch_adsr_numeric": true,
+    "final_noise_off": true,
+    "original_zero_saber_sound_call": true,
+    "original_phase2_stop_calls": true,
+    "original_phase2_handler": true,
+    "private22_phase2_stop": true,
+    "private23_phase2_stop": true,
+    "p1_hardware22_23_not_stopped": true,
+    "p1_hardware22_registers_preserved": true,
+    "original_contact_actor_caller": true,
+    "immutable_private_banks_stable": true
+  },
+  "selected_saber": {
+    "record": {
+      "group": 1,
+      "record": 7,
+      "effective_bank_group": 1,
+      "program_high_bit": 0,
+      "routing": 2,
+      "priority": 0,
+      "voice_range": [
+        23
+      ],
+      "tones": [
+        {
+          "voice": 23,
+          "program": 0,
+          "tone": 8,
+          "sample": 9,
+          "offset": 33744,
+          "bytes": 4192,
+          "sample_sha256": "fed7bfff83b8e45b286ce7831981f2e8ce65a9e80ad3c0d63ec258c59630cf22",
+          "note": 51,
+          "shift": 57,
+          "center": 69,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "first_end_block": 260,
+          "first_end_flags": 1,
+          "pitch": 1525
+        }
+      ]
+    },
+    "event": {
+      "seq": 206,
+      "frame": 2635,
+      "kind": "KEYON",
+      "v": 47,
+      "addr": 33744,
+      "pitch": 1525,
+      "adsr_lo": 33023,
+      "adsr_hi": 8128,
+      "vol_l": 13433,
+      "vol_r": 13433,
+      "sample_bank": 30
+    },
+    "observed_sha256": "fed7bfff83b8e45b286ce7831981f2e8ce65a9e80ad3c0d63ec258c59630cf22",
+    "checks": {
+      "private_voice_route": true,
+      "source_sample": true,
+      "pitch_adsr_numeric": true,
+      "original_end_marker_present": true
+    },
+    "source_calls": [
+      {
+        "seq": 0,
+        "target": "0x80016C48",
+        "ra": "0x801EBE90",
+        "a0": "0x00000001",
+        "a1": "0x00000007",
+        "a2": "0x800970A0",
+        "a3": "0x800970A0",
+        "s3": "0xFF000000",
+        "sp": "0x801FEF28",
+        "frame": 2635
+      }
+    ],
+    "record_selection": "event_time_original_sound_call"
+  },
+  "standing_terminal": {
+    "disposition": "natural_end",
+    "terminal": {
+      "seq": 207,
+      "frame": 2662,
+      "kind": "END_STOP",
+      "v": 47,
+      "addr": 33760,
+      "pitch": 1525,
+      "adsr_lo": 33023,
+      "adsr_hi": 8128,
+      "vol_l": 13433,
+      "vol_r": 13433,
+      "sample_bank": 30
+    },
+    "engine_frames": 27
+  },
+  "private23_before_death": {
+    "v": 47,
+    "active": 0,
+    "vol_l": 13433,
+    "vol_r": 13433,
+    "pitch": 1525,
+    "adsr_lo": 33023,
+    "adsr_hi": 8128,
+    "phase": 2182,
+    "env": 0,
+    "start": 33744,
+    "loop": 33744,
+    "cur_addr": 33776,
+    "repeat_addr": 33760,
+    "flags": 4,
+    "sample_idx": 0,
+    "env_phase": 3,
+    "vol_cur_l": 26866,
+    "vol_cur_r": 26866,
+    "sample_bank": 30,
+    "pending_bank": 0,
+    "mode": 0
+  },
+  "private23_after_death": {
+    "v": 47,
+    "active": 0,
+    "vol_l": 0,
+    "vol_r": 0,
+    "pitch": 1525,
+    "adsr_lo": 33023,
+    "adsr_hi": 8128,
+    "phase": 2182,
+    "env": 0,
+    "start": 33744,
+    "loop": 33744,
+    "cur_addr": 33776,
+    "repeat_addr": 33760,
+    "flags": 4,
+    "sample_idx": 0,
+    "env_phase": 3,
+    "vol_cur_l": 0,
+    "vol_cur_r": 0,
+    "sample_bank": 30,
+    "pending_bank": 0,
+    "mode": 0
+  },
+  "private22_after_death": {
+    "v": 46,
+    "active": 0,
+    "vol_l": 0,
+    "vol_r": 0,
+    "pitch": 1525,
+    "adsr_lo": 33023,
+    "adsr_hi": 8128,
+    "phase": 96,
+    "env": 0,
+    "start": 21136,
+    "loop": 21136,
+    "cur_addr": 21296,
+    "repeat_addr": 21152,
+    "flags": 0,
+    "sample_idx": 22,
+    "env_phase": 3,
+    "vol_cur_l": 0,
+    "vol_cur_r": 0,
+    "sample_bank": 30,
+    "pending_bank": 0,
+    "mode": 0
+  },
+  "hardware22_before": {
+    "v": 22,
+    "active": 0,
+    "vol_l": 9167,
+    "vol_r": 6838,
+    "pitch": 1024,
+    "adsr_lo": 33023,
+    "adsr_hi": 8128,
+    "phase": 1024,
+    "env": 0,
+    "start": 220304,
+    "loop": 220320,
+    "cur_addr": 220336,
+    "repeat_addr": 220320,
+    "flags": 4,
+    "sample_idx": 0,
+    "env_phase": 3,
+    "vol_cur_l": 18334,
+    "vol_cur_r": 13676,
+    "sample_bank": 0,
+    "pending_bank": 0,
+    "mode": 0
+  },
+  "hardware22_after": {
+    "v": 22,
+    "active": 0,
+    "vol_l": 9167,
+    "vol_r": 6838,
+    "pitch": 1024,
+    "adsr_lo": 33023,
+    "adsr_hi": 8128,
+    "phase": 1024,
+    "env": 0,
+    "start": 220304,
+    "loop": 220320,
+    "cur_addr": 220336,
+    "repeat_addr": 220320,
+    "flags": 4,
+    "sample_idx": 0,
+    "env_phase": 3,
+    "vol_cur_l": 18334,
+    "vol_cur_r": 13676,
+    "sample_bank": 0,
+    "pending_bank": 0,
+    "mode": 0
+  },
+  "phase2_calls": [
+    {
+      "seq": 1433,
+      "target": "0x8003D8A8",
+      "ra": "0x8003CCA4",
+      "a0": "0x800970A0",
+      "a1": "0x8003D8A8",
+      "a2": "0x00000010",
+      "a3": "0x00000000",
+      "s3": "0xFF000000",
+      "sp": "0x801FEF60",
+      "frame": 3499
+    },
+    {
+      "seq": 1434,
+      "target": "0x8001750C",
+      "ra": "0x8003D8C4",
+      "a0": "0x00000001",
+      "a1": "0x00000005",
+      "a2": "0x00000010",
+      "a3": "0x00000000",
+      "s3": "0xFF000000",
+      "sp": "0x801FEF48",
+      "frame": 3499
+    },
+    {
+      "seq": 1435,
+      "target": "0x8001750C",
+      "ra": "0x8003D8D0",
+      "a0": "0x00000001",
+      "a1": "0x00000007",
+      "a2": "0x00000010",
+      "a3": "0x00000000",
+      "s3": "0xFF000000",
+      "sp": "0x801FEF48",
+      "frame": 3499
+    }
+  ],
+  "hp_changes": [
+    {
+      "before": 32,
+      "after": 28,
+      "counter": 1,
+      "native_timer": 498
+    },
+    {
+      "before": 28,
+      "after": 24,
+      "counter": 2,
+      "native_timer": 579
+    },
+    {
+      "before": 24,
+      "after": 20,
+      "counter": 3,
+      "native_timer": 657
+    },
+    {
+      "before": 20,
+      "after": 16,
+      "counter": 4,
+      "native_timer": 728
+    },
+    {
+      "before": 16,
+      "after": 12,
+      "counter": 5,
+      "native_timer": 802
+    },
+    {
+      "before": 12,
+      "after": 8,
+      "counter": 6,
+      "native_timer": 886
+    },
+    {
+      "before": 8,
+      "after": 4,
+      "counter": 7,
+      "native_timer": 955
+    },
+    {
+      "before": 4,
+      "after": 0,
+      "counter": 8,
+      "native_timer": 1035
+    }
+  ],
+  "accepted_contact_count": 8,
+  "primary_survivor": {
+    "hp_raw": 32,
+    "hp": 32,
+    "pending_hit": false,
+    "iframes": 0,
+    "reaction": 0,
+    "reaction_lock": 0,
+    "direction": 0,
+    "facing": 64,
+    "state": 1,
+    "action": 2,
+    "subaction": 0,
+    "hit_pause": 0,
+    "hit_pause_request": 0,
+    "alternate_projection": false,
+    "native_restriction": 0,
+    "body_restriction": 0,
+    "box_pointer": 2149531472,
+    "terrain": 8,
+    "previous_terrain": 8,
+    "armor": 1,
+    "parts": 0
+  },
+  "trace": {
+    "seq_lo": 0,
+    "seq_hi": 1438,
+    "emitted": 1438
+  },
+  "private_banks_before": [
+    {
+      "bank": 30,
+      "bytes": 123408,
+      "sha256": "425516420dc6ff1d973edae265717a6ca237454631cdb4b7c829c96f6f7057a8",
+      "source_member": 85,
+      "body_subasset": 12,
+      "matches_source": true
+    },
+    {
+      "bank": 31,
+      "bytes": 52096,
+      "sha256": "203c8e0e58ea4e55797445b7af76e7563528c21536ae8fd57e38566a89b38bdd",
+      "source_member": 85,
+      "body_subasset": 14,
+      "matches_source": true
+    }
+  ],
+  "private_banks_after": [
+    {
+      "bank": 30,
+      "bytes": 123408,
+      "sha256": "425516420dc6ff1d973edae265717a6ca237454631cdb4b7c829c96f6f7057a8",
+      "source_member": 85,
+      "body_subasset": 12,
+      "matches_source": true
+    },
+    {
+      "bank": 31,
+      "bytes": 52096,
+      "sha256": "203c8e0e58ea4e55797445b7af76e7563528c21536ae8fd57e38566a89b38bdd",
+      "source_member": 85,
+      "body_subasset": 14,
+      "matches_source": true
+    }
+  ],
+  "native_input_capture": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v19-a1dac26-local-contact-death-inactive-contract\\candidate\\saves\\input-recordings\\session-1792794734419793-1-0\\inputs.jsonl",
+    "sha256": "f69a78e69b0ea69edbce19dd353dcf95452b508b5c4774a78c389be492d1a3f4",
+    "events": 9684,
+    "natives": 6052,
+    "p2_reads": 3632,
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "982e2ab847d27615ee075578311bed6b74baed77fc9d52b9b41a77bd84749253",
+      "manifest_sha256": "808ac1ac573bf192fa89c0c08631873689cc8a167fc6f34baa8a38e4b96d1c00",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "requested_saber_seats": [
+      1
+    ],
+    "consumed_square_seen_anywhere": [
+      1
+    ],
+    "scope": "Ordered native N/P2 C consumption; no temporal saber association or audio/output equivalence"
+  },
+  "active_phase2_stop7": "unverified: saber naturally ended before death",
+  "retained_same_image_vocal_failure": {
+    "path": "docs\\evidence\\mmx6-body-audio\\manifest-bound-a1dac26-local-contact-and-vocal-reviewed.json",
+    "sha256": "197056ea6272ac7b54db3d54eda4de2eeb6b4edcffe0deadc51e9d7e694b0839",
+    "bytes": 18615
+  },
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "private_cards_unchanged": true,
+  "limits": [
+    "Exact same-machine local v19 only: selected saber SFX and inactive phase2 STOP semantics pass; active STOP7 lifetime, paired body audio and active23 current-build states remain unverified.",
+    "Before death private23 was inactive with envelope0/Release and nonzero volume; original phase2 STOP7 zeroed volume without replacing the sample. SDK correctly emits no KEYOFF for an inactive voice.",
+    "Original phase2 STOP calls, eight native HP losses, contact actor/caller, private final state and unchanged P1 hardware22 registers are independently retained. This is not whole-campaign or audible/PCM/music qualification.",
+    "This run selected no saber vocal. The prior same-image actual X-sample vocal counterexample remains failed and is not overwritten by RNG absence."
+  ],
+  "bypasses": []
+}

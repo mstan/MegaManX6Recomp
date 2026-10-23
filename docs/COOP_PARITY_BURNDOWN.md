@@ -59,8 +59,12 @@ The [local contact-death audio receipt](evidence/mmx6-body-audio/manifest-bound-
 now verifies the saber SFX source/numerical fields and nine live STOP5
 private46 events, with native eight-contact HP32->0 and surviving X. It also
 confirms a current-image R4 failure: Zero's saber vocal selects X's actual
-sample bytes on hardware20/bank0. Active phase2 STOP7, other action families,
-paired body audio and current-build active23 state remain unverified.
+sample bytes on hardware20/bank0. The [fresh inactive-STOP receipt](evidence/mmx6-body-audio/manifest-bound-a1dac26-local-inactive-stops-reviewed.json)
+also passes all 18 selected SFX/inactive-death-STOP checks: private23 volume
+changes from13433/13433 to0/0 while P1 hardware22 registers stay intact.
+Active phase2 STOP7, other action families, paired body audio and current-build
+active23 state remain unverified. A run with no RNG-selected saber vocal does
+not erase the retained current-image vocal failure.
 
 The earlier v18 image, source348a52c and title compatibility v16, passed96/96.
 The [private ground-jump receipt](evidence/mmx6-jump-audio/manifest-bound-348a52c-local-private-overlap-reviewed.json)
