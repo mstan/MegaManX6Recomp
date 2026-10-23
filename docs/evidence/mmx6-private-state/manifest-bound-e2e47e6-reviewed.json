@@ -1,0 +1,182 @@
+{
+  "schema": 1,
+  "kind": "reviewed_current_build_private_effect_state",
+  "reviewed_at_utc": "2026-10-23T15:45:38.004007+00:00",
+  "result": "bounded_warm_and_cold_current_build_state_checks_and_composed_artwork_passed",
+  "candidate": {
+    "candidate_source": "e2e47e66e119425d6e9235cd3511209bf1cc1aad",
+    "exe_sha256": "229ffec7a7dabda9742653264e1d023adde408602003df7f48b4c4d3f758d8e6",
+    "declared_manifest_sha256": "e186d1d0908b5a0341de84261272c30e14c4ab83a6fabbad30e6da9df5d4cefb"
+  },
+  "compilation_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v12-e2e47e6\\candidate.json",
+    "sha256": "24f75e4e4c3f88dcc9c6e705900aeeb02910890c73d4705ef7d27dc1fe9c49cf"
+  },
+  "raw_report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\private-state-v12-e2e47e6-native-close\\qualification.json",
+    "sha256": "051ead338ca9b6937d72dce9a14f158c0e85e9f8953bc14e585dc30fbd208914"
+  },
+  "raw_status": "automated_private_effect_state_checks_passed_artwork_pending",
+  "checks": {
+    "warm_completed_private_effect_state_case": true,
+    "warm_private_cards_unchanged": true,
+    "cold_completed_private_effect_state_case": true,
+    "cold_private_cards_unchanged": true
+  },
+  "wire_contract": {
+    "pst": 10,
+    "msnp": 1,
+    "offline_provider": "mmx6.local-coop",
+    "provider_schema": 1,
+    "source": "src/mods/mmx6_coop_snapshot.inc",
+    "resources_bytes": 80,
+    "semantic_core_bytes": 9366,
+    "excluded_tail_bytes": 10,
+    "excluded_tail_fields": [
+      "frame_count",
+      "hud_fade",
+      "world_packets",
+      "hud_seat"
+    ]
+  },
+  "snapshot": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\private-state-v12-e2e47e6-native-close\\snapshot.pst",
+    "sha256": "8ae9a68f973c4459bfd01f38eec81cdb9cd619a1dd1481a29e1c4023787f3731"
+  },
+  "phases": {
+    "warm": {
+      "checks": {
+        "original_menu_resume_advances_native_world": true,
+        "native_phase1_and_phase2_observed": true,
+        "finite_all_three_retired": true,
+        "ordered_native_recovery_publications": true,
+        "recovery_personal_resources_preserved": true,
+        "recovery_original_p1_position_preserved": true,
+        "genuine_p2_input_resumed_independently": true,
+        "personal_hp_ammo_weapon_preserved": true,
+        "new_publication_after_completed_load": true,
+        "publication_after_saved_provider": true,
+        "native_p1_pause_retains_live_dash": true,
+        "saved_native_clock_restored": true,
+        "saved_native_menu_state_restored": true,
+        "full_private_body": true,
+        "full_private_shots": true,
+        "full_private_trails": true,
+        "full_private_attached": true,
+        "full_p1_body": true,
+        "native_input_history": true,
+        "exact_current_build_key": true,
+        "same_provider_set": true,
+        "same_resource_and_original_asset_binding": true,
+        "full_private_context_and_host_input_history": true,
+        "explicit_native_and_host_input_history": true,
+        "saved_native_world_clock": true,
+        "saved_native_mode_phase": true,
+        "saved_native_menu_state": true,
+        "full_retained_bank_payloads": true,
+        "saved_sprite_bank_count": true,
+        "saved_ui_bank_count": true,
+        "native_private_cards_preserved": true
+      },
+      "owned_process": {
+        "owned_pid": 75876,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "restored_provider_probe": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\private-state-v12-e2e47e6-native-close\\warm-restored-probe.pst",
+        "sha256": "4f60d05743434318f412993617d8da39a77387e87c47da6e56e9b7463b1093ee"
+      },
+      "composed_captures": [
+        {
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\private-state-v12-e2e47e6-native-close\\warm\\baseline\\live-private-effects-before-save.png",
+          "sha256": "07d18dcc3ffe6352a73af58ffcaa1dc238259c16539661ef776884a38ce828a1"
+        },
+        {
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\private-state-v12-e2e47e6-native-close\\warm\\baseline\\warm-before-load-native-after-dash-retirement-and-input.png",
+          "sha256": "2ca3cd8d9e6002ef2d3a7740d592e6e55e2746e3fbf52163b0e532fc5cf63c8b"
+        },
+        {
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\private-state-v12-e2e47e6-native-close\\warm\\baseline\\warm-restored-live-private-pools-present.png",
+          "sha256": "c015fcd932bfe4ff6976ed7fcd88be6d9fb794080d3383638edef018b02f7e11"
+        },
+        {
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\private-state-v12-e2e47e6-native-close\\warm\\baseline\\warm-after-load-native-after-dash-retirement-and-input.png",
+          "sha256": "f381ca3657e7c8a6f8fa2a54e5fe696625886eebc565184a8a0a8619aa154d15"
+        }
+      ],
+      "review": "Root inspected every named composed capture independently. Original X portrait/X-BUSTER menu remains intact; restored menu images match, and resumed intro catwalk shows separate X/Zero bodies and meters without observed retained-bank corruption."
+    },
+    "cold": {
+      "checks": {
+        "fresh_process_cache_smaller_without_warm_cache_copy": true,
+        "new_publication_after_completed_load": true,
+        "publication_after_saved_provider": true,
+        "native_p1_pause_retains_live_dash": true,
+        "saved_native_clock_restored": true,
+        "saved_native_menu_state_restored": true,
+        "full_private_body": true,
+        "full_private_shots": true,
+        "full_private_trails": true,
+        "full_private_attached": true,
+        "full_p1_body": true,
+        "native_input_history": true,
+        "exact_current_build_key": true,
+        "same_provider_set": true,
+        "same_resource_and_original_asset_binding": true,
+        "full_private_context_and_host_input_history": true,
+        "explicit_native_and_host_input_history": true,
+        "saved_native_world_clock": true,
+        "saved_native_mode_phase": true,
+        "saved_native_menu_state": true,
+        "full_retained_bank_payloads": true,
+        "saved_sprite_bank_count": true,
+        "saved_ui_bank_count": true,
+        "original_menu_resume_advances_native_world": true,
+        "native_phase1_and_phase2_observed": true,
+        "finite_all_three_retired": true,
+        "ordered_native_recovery_publications": true,
+        "recovery_personal_resources_preserved": true,
+        "recovery_original_p1_position_preserved": true,
+        "genuine_p2_input_resumed_independently": true,
+        "personal_hp_ammo_weapon_preserved": true,
+        "native_private_cards_preserved": true
+      },
+      "owned_process": {
+        "owned_pid": 61972,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "restored_provider_probe": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\private-state-v12-e2e47e6-native-close\\cold-restored-probe.pst",
+        "sha256": "a5d39f91e2164a87a8900ff7ce4587520b0eab3528d59871f23b100d3b59fd22"
+      },
+      "composed_captures": [
+        {
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\private-state-v12-e2e47e6-native-close\\cold\\baseline\\cold-restored-live-private-pools-present.png",
+          "sha256": "c015fcd932bfe4ff6976ed7fcd88be6d9fb794080d3383638edef018b02f7e11"
+        },
+        {
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\private-state-v12-e2e47e6-native-close\\cold\\baseline\\cold-after-load-native-after-dash-retirement-and-input.png",
+          "sha256": "0d3800856b7f74d103e120ab1e2161be656895f0eea2adbc27cd717d71aa9878"
+        }
+      ],
+      "review": "Root inspected every named composed capture independently. Original X portrait/X-BUSTER menu remains intact; restored menu images match, and resumed intro catwalk shows separate X/Zero bodies and meters without observed retained-bank corruption."
+    }
+  },
+  "ledger_status": "unverified",
+  "limits": [
+    "Exact frozen v12 image, same physical machine, intro and fixed X/P1 + Zero/P2 only.",
+    "No save-state backward compatibility, migration or cross-build claim.",
+    "Snapshot restores native menu and live private pools; menu hides world effects, so no active-trail color qualification.",
+    "No rollback, rewind, network-state transfer, once-world update, campaign or complete R8/R9 qualification.",
+    "Only the exact PST transfers to cold profile; source cards and warm retained cache are not copied.",
+    "Raw artwork-pending report remains unchanged. Review is recorded separately."
+  ]
+}

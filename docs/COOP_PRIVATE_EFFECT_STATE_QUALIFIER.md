@@ -120,3 +120,14 @@ HP/P1-position changes. A read-only inspection of the retained historical bd7
 snapshot also identified 211 sprite banks, 6 UI banks and provider tick 369; its
 saved native P1/P2 bodies match that historical published receipt. This checks
 the reader against an existing artifact, not the new private-effect mechanic.
+
+The exact frozen v12 executable `229ffec7` now passes the native warm and cold
+cases: 31 warm checks, 32 cold checks, unchanged private cards, acknowledged
+Quit and natural exit0 for both owned processes. Root independently reviewed
+all six completed composed captures: the original menu remains intact and
+resumed X/Zero bodies and meters show no observed retained-bank corruption.
+The compact [reviewed receipt](evidence/mmx6-private-state/manifest-bound-e2e47e6-reviewed.json)
+binds the original report, snapshot, post-load probes, images and compile proof.
+It leaves the original artwork-pending report unchanged. This bounded
+current-build save/load result does not pass rollback, rewind, network state
+transfer, active-trail colors, the campaign or a complete parity comparison.
