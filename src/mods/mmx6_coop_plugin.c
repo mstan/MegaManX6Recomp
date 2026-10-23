@@ -6,6 +6,7 @@
  */
 #include "mod_plugins.h"
 #include "mod_netplay.h"
+#include "mmx6_coop_host_lab.h"
 #if defined(__has_include)
 #if __has_include("mod_snapshot.h")
 #define MMX6_COOP_MODERN_STATE 1
@@ -1783,7 +1784,10 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
 #endif
         .loading_package_id = "mmx6.enhancement.seamless-loading",
         .loading_feature_id = "seamless-loading",
-        .loading_plugin_id = "mmx6.seamless"
+        .loading_plugin_id = "mmx6.seamless",
+#if defined(PSX_MOD_NETPLAY_HOST_CATALOG_API) && PSX_MOD_NETPLAY_HOST_CATALOG_API >= 2
+        .host_profiles = mmx6_coop_lab_host_profiles
+#endif
     };
     psx_mod_register_netplay_profile(&netplay_profile);
 #ifdef MMX6_COOP_MODERN_STATE

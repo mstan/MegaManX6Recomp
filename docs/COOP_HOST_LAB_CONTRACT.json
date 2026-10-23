@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "status": "development-candidate-only; fresh native pair and restart evidence required",
+  "profile": "mmx6.win64-clang22.loopback",
+  "revision": 1,
+  "default_enabled": false,
+  "flags": ["DIRECT_LOOPBACK"],
+  "scope": "two processes on this same machine through direct numeric 127.0.0.1; same actual executable SHA-256",
+  "compiler": {"target": "x86_64-w64-windows-gnu", "clang": [22, 1, 8]},
+  "execution": {
+    "backend": "ENHANCED",
+    "identity": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+    "cpu_architecture": "x64",
+    "required_observed_features": "0x7f",
+    "fp_contract": 2,
+    "interpreted_overlays_sealed": true
+  },
+  "bios": {
+    "builtin_linked": true,
+    "image_id": "OPENBIOS",
+    "image_wordsum": "0xc4daeb88",
+    "source_image_sha256": "fabe498fbf224e4721f12f31b6f5fe0659205e341dc4e5c5f91b9bd1a1011c57"
+  },
+  "session": {
+    "plugin": "mmx6.local-coop.prototype",
+    "title_compatibility": "mmx6-x-zero-delay-v11",
+    "slots": 2,
+    "players": 2,
+    "occupied_mask": 3,
+    "rollback": 0,
+    "network_user_states": 0,
+    "loading_enabled": 1,
+    "renderer": 1,
+    "retained_texture_banks": 1,
+    "aspect_index": 0,
+    "declared_manifest_schema": 1,
+    "declared_manifest_sha256": "required valid nonzero SHA-256; additional identity only",
+    "actual_executable_sha256": "required nonzero 32-byte OS-resolved running image; peers must match existing gate"
+  },
+  "prior_evidence": {
+    "candidate_executable_sha256": "bd7b9449d9fbc5c9c2137902ba2d8d525d1886211b03fd6756d0f76fbc9c263e",
+    "title_profile": "mmx6-x-zero-delay-v10",
+    "game_source": "6efd58164103ab2a1a169244031f5272ef6390b6 plus retained staging patch 1269ac382d3a30e4482372532e4b0d3401b8e7c5d792511bf99f7be80f0ae781",
+    "sdk_source": "948b99eba5f98edcc37c475535f84c1cb333b713",
+    "receipts": [
+      {"path": "G:/Temp/Codex/psxrecomp/x6-parity/netplay-modern-v10-state/qualification.json", "sha256": "fca07dffa73e7f812f6efadc4fd1d3500e635d5a829fc34a8326797142501a21", "observed": "nine bounded intro/input/lifecycle checks and 29 same resolved-tick matching core/mod samples"},
+      {"path": "G:/Temp/Codex/psxrecomp/x6-parity/netplay-modern-v10-present/qualification.json", "sha256": "621f553dbcccee0d61d662a60a4ef20c1d3a8e86bb34dbb92f13ff8c1daf175b", "observed": "same executable; nine bounded checks and 30 matching resolved core/mod samples; composed captures inspected"}
+    ],
+    "limits": "Prior executable predates v11 AI and new host agreement/FP/overlay-seal APIs. It establishes no candidate qualification, fresh-nonce settlement, rollback, campaign, audio, heterogeneous equivalence or actual portable fallback. CPU mask0x7f is the currently probed lab host, not a feature record retroactively attached to old receipts. New manifest/image requirements strengthen admission but do not qualify simulation.",
+    "helper_receipts": "SDK docs/qa/x6-helper-qualification-20261023: 48 checks passed, two could not link, one disabled; direct SPU fidelity execution reproduced four existing ADSR sweep failures. This is not a passing full ENHANCED helper matrix or title simulation qualification. See retained fixture-link-followup separately."
+  },
+  "required_fresh_evidence": [
+    "both peers use identical final candidate actual executable SHA and declared manifest",
+    "same selected profile/revision/selection SHA on both peers after mutual agreement, logged cycle0/tick0 before guest dispatch",
+    "default resident loader, OpenBIOS and retained OpenGL intro/input/lifecycle with resolved core/mod matching",
+    "fresh restart/rematch settles again with fresh nonces before guest dispatch",
+    "unsupported scope/capability and missing policy fail before guest execution"
+  ],
+  "excluded": ["remote LAN", "internet", "ICE", "relay", "lobby routing", "spectators", "other machines", "other operating systems", "other CPU feature sets", "other compilers", "other execution contracts", "PGXP variant", "native overlay DLLs", "dynamic BIOS modules", "cross-build play", "REFERENCE fallback", "rollback", "network user states", "campaign correctness"]
+}

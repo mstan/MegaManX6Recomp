@@ -6,6 +6,8 @@ find_package(Python3 QUIET COMPONENTS Interpreter)
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD 17)
 option(PSX_NETPLAY "Build the shared two-player netplay stack" ON)
+option(MMX6_ENABLE_LOOPBACK_HOST_LAB
+    "Enable unqualified same-machine Clang22 ENHANCED loopback candidate for explicit lab validation" OFF)
 
 set(PSXRECOMP_V4_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/psxrecomp-v4" CACHE PATH
     "Path to psxrecomp-v4")
@@ -94,6 +96,21 @@ psxrecomp_v4_add_runtime_target(psx-runtime
 )
 set(PSX_BUILTIN_MOD_ALLOWLIST "${_mmx6_previous_builtin_allowlist}")
 unset(_mmx6_previous_builtin_allowlist)
+if(MMX6_ENABLE_LOOPBACK_HOST_LAB)
+    find_package(Python3 REQUIRED COMPONENTS Interpreter)
+    add_custom_target(mmx6_host_lab_contract_check
+        COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/mmx6_host_lab_contract.py"
+        VERBATIM)
+endif()
+foreach(_mmx6_host_target psx-runtime psx-runtime-pgxp)
+    if(TARGET ${_mmx6_host_target})
+        target_compile_definitions(${_mmx6_host_target} PRIVATE
+            MMX6_ENABLE_LOOPBACK_HOST_LAB=$<BOOL:${MMX6_ENABLE_LOOPBACK_HOST_LAB}>)
+        if(TARGET mmx6_host_lab_contract_check)
+            add_dependencies(${_mmx6_host_target} mmx6_host_lab_contract_check)
+        endif()
+    endif()
+endforeach()
 
 # First-divergence co-sim oracle build (COSIM_ORACLE.md): clean, deterministic,
 # PSX_NO_DEBUG_TOOLS + PSX_COSIM. Two of these (one normal, one PSX_FORCE_INTERP=1)
@@ -142,6 +159,38 @@ endif()
 # A title that cannot be built against framework master cannot be checked
 # against it either.
 if(BUILD_TESTING)
+    set(_lab_sdk_sources "")
+    if(EXISTS "${PSXRECOMP_V4_ROOT}/runtime/src/netplay_host_profile.c")
+        list(APPEND _lab_sdk_sources "${PSXRECOMP_V4_ROOT}/runtime/src/netplay_host_profile.c"
+            "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c")
+    endif()
+    foreach(_lab_variant enabled disabled wrong-contract pgxp)
+        set(_lab_test mmx6_host_lab_${_lab_variant}_test)
+        add_executable(${_lab_test} tests/test_mmx6_coop_host_lab.c ${_lab_sdk_sources})
+        target_include_directories(${_lab_test} PRIVATE tests src/mods "${PSXRECOMP_V4_ROOT}/runtime/include")
+        set(_lab_expected 0)
+        if(_lab_variant STREQUAL "disabled")
+            target_compile_definitions(${_lab_test} PRIVATE MMX6_ENABLE_LOOPBACK_HOST_LAB=0)
+        else()
+            target_compile_definitions(${_lab_test} PRIVATE MMX6_ENABLE_LOOPBACK_HOST_LAB=1)
+            if(_lab_variant STREQUAL "enabled" AND WIN32 AND MINGW AND CMAKE_SIZEOF_VOID_P EQUAL 8
+                AND CMAKE_C_COMPILER_ID STREQUAL "Clang" AND CMAKE_C_COMPILER_VERSION VERSION_EQUAL "22.1.8")
+                set(_lab_expected 1)
+            endif()
+        endif()
+        if(_lab_variant STREQUAL "wrong-contract")
+            target_compile_definitions(${_lab_test} PRIVATE MMX6_HOST_LAB_TEST_BAD_EXECUTION=1)
+        endif()
+        if(_lab_variant STREQUAL "pgxp")
+            target_compile_definitions(${_lab_test} PRIVATE PSX_PGXP=1)
+        endif()
+        target_compile_definitions(${_lab_test} PRIVATE MMX6_HOST_LAB_EXPECT_OFFER=${_lab_expected})
+        add_test(NAME ${_lab_test} COMMAND ${_lab_test})
+    endforeach()
+    if(Python3_Interpreter_FOUND)
+        add_test(NAME mmx6_host_lab_contract_test
+            COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/mmx6_host_lab_contract.py")
+    endif()
     if(Python3_Interpreter_FOUND AND Python3_VERSION VERSION_GREATER_EQUAL 3.11)
         foreach(_mmx6_python_test test_coop_debug_protocol test_mmx6_coop_reference
                 test_mmx6_coop_content test_mmx6_coop_audio_audit test_mmx6_audio_driver_audit
