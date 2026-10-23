@@ -95,6 +95,7 @@ static uint8_t scene_body[0x158];
 static int32_t scene_y;
 static int scene_call, zero_projected;
 static int unit_choices_call;
+static int intro_target_call;
 #include "mmx6_coop_state_track.h"
 #ifdef MMX6_COOP_MODERN_STATE
 static uint8_t snapshot_asset_sha[32];
@@ -164,6 +165,8 @@ static uint32_t guest(CPUState *cpu, uint32_t address, uint32_t a0, uint32_t a1)
     return result;
 }
 
+#include "mmx6_coop_intro_target.inc"
+
 static int unit_choices(CPUState *cpu, uint32_t address) {
     /* ROCK_X6.BIN member 16 shares its load address with stage overlays.
      * Match the native list builder before touching its menu-local table. */
@@ -173,7 +176,7 @@ static int unit_choices(CPUState *cpu, uint32_t address) {
         psx_mod_read_word(address+0x104)!=0x03E00008u) return 0;
     unit_choices_call=1;
     cpu->gpr[2]=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
-    unit_choices_call=0;
+    unit_choices_call=intro_target_call=0;
     /* Native navigation, portraits and confirmation all consume this list.
      * Compact it rather than clearing Zero's persistent unlock/parts flags.
      * Native order is X, Falcon, Zero, Shadow, Blade, Ultimate. */
@@ -1739,6 +1742,7 @@ static void activate(void) {
     if (diagnostic) for (unsigned i=0;i<0x2000;i+=4) psx_mod_write_word(diagnostic+i,0);
     if (!psx_mod_set_function_replacement(0x80031474,enemy_hit)) failed=1;
     if (!psx_mod_set_function_replacement(0x800E9898,unit_choices)) failed=1;
+    if (!psx_mod_set_function_replacement(0x800EB14C,intro_near_target)) failed=1;
     if (!psx_mod_set_function_replacement(0x80029598,camera_target) ||
         !psx_mod_set_function_replacement(0x80029658,camera_target)) failed=1;
     if (!psx_mod_set_function_replacement(0x80034DCC,player_tick) ||

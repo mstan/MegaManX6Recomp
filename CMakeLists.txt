@@ -198,6 +198,23 @@ if(BUILD_TESTING)
     target_include_directories(mmx6_coop_assets_test PRIVATE src/mods)
     add_test(NAME mmx6_coop_assets_test COMMAND "$<TARGET_FILE:mmx6_coop_assets_test>")
 
+    add_executable(mmx6_coop_intro_target_test tests/test_mmx6_coop_intro_target.c
+        src/mods/mmx6_coop_lifecycle.c "${PSXRECOMP_V4_ROOT}/runtime/src/mod_function_replacements.c")
+    target_include_directories(mmx6_coop_intro_target_test PRIVATE src/mods
+        "${PSXRECOMP_V4_ROOT}/runtime/include")
+    if(MSVC)
+        target_compile_options(mmx6_coop_intro_target_test PRIVATE /O2 /Gy /Gw)
+        target_link_options(mmx6_coop_intro_target_test PRIVATE /OPT:REF)
+    else()
+        target_compile_options(mmx6_coop_intro_target_test PRIVATE -O2 -ffunction-sections -fdata-sections)
+        if(APPLE)
+            target_link_options(mmx6_coop_intro_target_test PRIVATE -Wl,-dead_strip)
+        else()
+            target_link_options(mmx6_coop_intro_target_test PRIVATE -Wl,--gc-sections)
+        endif()
+    endif()
+    add_test(NAME mmx6_coop_intro_target_test COMMAND "$<TARGET_FILE:mmx6_coop_intro_target_test>")
+
     # Compile the actual trusted plugin into an isolated guest-memory fixture.
     # Dead gameplay entry points are discarded; both developer and production
     # builds must reject the one-sided debug channel during netplay.

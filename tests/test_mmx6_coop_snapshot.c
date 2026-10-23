@@ -112,8 +112,8 @@ static void digest_and_readiness(void){
     life.status[1]=MMX6_COOP_ABSENT;h=state_digest();life.rejoin_pending=1;CHECK(state_digest()!=h);life.rejoin_pending=0;life.status[1]=MMX6_COOP_ALIVE;
     zero_projected=1;h=state_digest();saved_play[3]^=1;CHECK(state_digest()!=h);saved_play[3]^=1;zero_projected=0;
     int *guards[]={&inside,&player_call,&stage_call,&zero_world,&world_render,&hud_call,&render_x_death,
-        &effect_call,&pickup_call,&solid_call,&solid_allocate_call,&scene_call,&zero_projected,&unit_choices_call};
-    for(unsigned i=0;i<sizeof guards/sizeof guards[0];++i){*guards[i]=1;CHECK(!snapshot_ready());*guards[i]=0;CHECK(snapshot_ready());}
+        &effect_call,&pickup_call,&solid_call,&solid_allocate_call,&scene_call,&zero_projected,&unit_choices_call,&intro_target_call};
+    for(unsigned i=0;i<sizeof guards/sizeof guards[0];++i){h=state_digest();*guards[i]=1;CHECK(!snapshot_ready());CHECK(state_digest()!=h);*guards[i]=0;CHECK(snapshot_ready());CHECK(state_digest()==h);}
     local_scope=1;CHECK(!snapshot_ready());local_scope=0;
     texture_support=0;CHECK(!snapshot_ready());texture_support=1;
     CHECK(snapshot_ready() && pause_owner==1 && zero_menu_loaded); /* Stable paused UI remains admissible. */
