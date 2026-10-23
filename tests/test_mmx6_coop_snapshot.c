@@ -16,9 +16,12 @@ static int allocation_fail,allocation_calls,local_scope,texture_support=1;
 static unsigned guest_calls,guest_writes,forgotten;
 static int abandon_guest;
 static uint32_t audio_epoch=1;
+static int foreign_audio23;
 uint32_t psx_mod_spu_sample_bank_epoch(void){return audio_epoch;}
 int spu_get_private_voice_state(unsigned slot,SpuVoiceState *out){
-    CHECK((slot==20 || slot==22) && out);memset(out,0,sizeof *out);return 1;
+    CHECK((slot==20 || slot==22 || slot==23) && out);memset(out,0,sizeof *out);
+    if(slot==23 && foreign_audio23){out->active=1;out->sample_bank=29;}
+    return 1;
 }
 static jmp_buf abandon_target;
 static uint8_t ram[0x200000],extra[0x200000];
@@ -146,6 +149,8 @@ static void digest_and_readiness(void){
     h=state_digest();jump_audio_stop_mask=1;CHECK(!snapshot_ready() && state_digest()!=h);jump_audio_stop_mask=0;
     jump_audio_registers[4]=1;CHECK(!snapshot_ready() && state_digest()!=h);jump_audio_registers[4]=0;
     h=state_digest();++audio_epoch;CHECK(!snapshot_ready() && state_digest()==h);--audio_epoch;
+    h=state_digest();foreign_audio23=1;CHECK(!snapshot_ready() && !snapshot_bytes() && state_digest()==h);
+    foreign_audio23=0;CHECK(snapshot_ready() && state_digest()==h);
     CHECK(snapshot_ready() && pause_owner==1 && zero_menu_loaded); /* Stable paused UI remains admissible. */
     uint32_t words[2]={0x11223344,0x55667788},same[2]={0x11223344,0x55667788};
     STATE_WORDS(a,42,words,2);CHECK(!snapshot_ready());h=state_digest();STATE_POP(a);
