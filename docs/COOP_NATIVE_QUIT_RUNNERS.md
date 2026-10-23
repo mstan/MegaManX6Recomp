@@ -49,7 +49,7 @@ the rest of each command is complete. Fresh output names retain every attempt.
 ```powershell
 $quitPython = 'C:/Users/Matthew/.pyenv/pyenv-win/versions/3.12.5/python.exe'
 $quitTools = 'F:/Projects/psxrecomp/_wt-mmx6-x4-parity/tools'
-$quitSource = 'F:/Projects/psxrecomp/_wt-mmx6-x4-parity'
+$quitSource = 'G:/Temp/Codex/psxrecomp/x6-parity/<frozen-game-source-worktree>'
 $quitBuild = 'G:/Temp/Codex/psxrecomp/x6-parity/<frozen-complete-build>'
 $quitExpectedSha = '<selected-64-lowercase-hex-executable-sha256>'
 $quitHostProfile = '<selected-explicit-host-profile>'
@@ -84,10 +84,19 @@ baseline; no source cards are read or copied.
 Paired, original published host samplers on **this same machine only**:
 
 ```powershell
-& $quitPython "$quitTools/qualify_mmx6_coop_pair.py" --tools-root $quitTools --build $quitBuild --disc $quitDisc --out "G:/Temp/Codex/psxrecomp/x6-parity/quit-$quitStamp-pair-guest" --original-exe $quitOriginal --expected-exe-sha256 $quitExpectedSha --native-quit-scenario guest_authority --require-host-profile --expected-host-profile $quitHostProfile --expected-host-profile-revision $quitHostRevision --require-state-crc --host-port 24901 --guest-port 24902 --host-udp 29901 --guest-udp 29902 --session 20261023 --timeout 240
-& $quitPython "$quitTools/qualify_mmx6_coop_pair.py" --tools-root $quitTools --build $quitBuild --disc $quitDisc --out "G:/Temp/Codex/psxrecomp/x6-parity/quit-$quitStamp-pair-primary" --original-exe $quitOriginal --expected-exe-sha256 $quitExpectedSha --native-quit-scenario p1_pages_cancel --require-host-profile --expected-host-profile $quitHostProfile --expected-host-profile-revision $quitHostRevision --require-state-crc --host-port 24901 --guest-port 24902 --host-udp 29901 --guest-udp 29902 --session 20261023 --timeout 240
-& $quitPython "$quitTools/qualify_mmx6_coop_pair.py" --tools-root $quitTools --build $quitBuild --disc $quitDisc --out "G:/Temp/Codex/psxrecomp/x6-parity/quit-$quitStamp-pair-primary-live-effects" --original-exe $quitOriginal --expected-exe-sha256 $quitExpectedSha --native-quit-scenario p1_pages_cancel_live_effects --require-host-profile --expected-host-profile $quitHostProfile --expected-host-profile-revision $quitHostRevision --require-state-crc --host-port 24901 --guest-port 24902 --host-udp 29901 --guest-udp 29902 --session 20261023 --timeout 240
+& $quitPython "$quitTools/qualify_mmx6_coop_pair.py" --tools-root $quitTools --source $quitSource --build $quitBuild --disc $quitDisc --out "G:/Temp/Codex/psxrecomp/x6-parity/quit-$quitStamp-pair-guest" --original-exe $quitOriginal --expected-exe-sha256 $quitExpectedSha --native-quit-scenario guest_authority --require-host-profile --expected-host-profile $quitHostProfile --expected-host-profile-revision $quitHostRevision --require-state-crc --host-port 24901 --guest-port 24902 --host-udp 29901 --guest-udp 29902 --session 20261023 --timeout 240
+& $quitPython "$quitTools/qualify_mmx6_coop_pair.py" --tools-root $quitTools --source $quitSource --build $quitBuild --disc $quitDisc --out "G:/Temp/Codex/psxrecomp/x6-parity/quit-$quitStamp-pair-primary" --original-exe $quitOriginal --expected-exe-sha256 $quitExpectedSha --native-quit-scenario p1_pages_cancel --require-host-profile --expected-host-profile $quitHostProfile --expected-host-profile-revision $quitHostRevision --require-state-crc --host-port 24901 --guest-port 24902 --host-udp 29901 --guest-udp 29902 --session 20261023 --timeout 240
+& $quitPython "$quitTools/qualify_mmx6_coop_pair.py" --tools-root $quitTools --source $quitSource --build $quitBuild --disc $quitDisc --out "G:/Temp/Codex/psxrecomp/x6-parity/quit-$quitStamp-pair-primary-live-effects" --original-exe $quitOriginal --expected-exe-sha256 $quitExpectedSha --native-quit-scenario p1_pages_cancel_live_effects --require-host-profile --expected-host-profile $quitHostProfile --expected-host-profile-revision $quitHostRevision --require-state-crc --host-port 24901 --guest-port 24902 --host-udp 29901 --guest-udp 29902 --session 20261023 --timeout 240
 ```
+
+The optional paired `--source` selects the frozen game source used by ordinary
+`prepare` validation and `game.toml` staging. It defaults to the parent of
+`--tools-root`, including earlier programmatic callers without a `source`
+attribute. This allows current helpers to qualify an older exact frozen
+candidate/configuration: `--tools-root` still binds every executing helper
+path/hash, while `staging_source` records the resolved config-source path and
+each preparation receipt retains its staged `game_config_sha256`. The option
+does not add runtime arguments or bypass source-config validation.
 
 The pair rejects `--admission-only`, `--native-loader-diagnostic` and every
 other optional menu, lifecycle, contact, targeting or private-effects route
@@ -137,6 +146,10 @@ loader overrides, numeric endpoint/cross-link rejection, published input and
 neutral cleanup, baseline-compatible error propagation, original failure
 retention, inherited offline session isolation and private-card read errors.
 No game, title build, plugin/SDK/CMake/ledger edit or remote action occurred.
+The source-selection follow-up passes15 option/staging tests, including an
+explicit source different from the executing helpers and the older Namespace
+default. Its fixture stops at ordinary `prepare` validation before any launch
+and retains the chosen path in the resulting setup-failure report.
 # Native guest-authority reproduction and fix
 
 Root reproduced guest Select entering native menu1/substate6/phase1/page0 on

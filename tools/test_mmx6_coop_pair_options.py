@@ -1,9 +1,14 @@
 """Public paired qualification options preserve existing lifecycle coverage."""
 import contextlib
 import io
+import json
+from pathlib import Path
+import tempfile
 import unittest
+from unittest.mock import Mock, patch
 
-from qualify_mmx6_coop_pair import CONTACT_EXE_SHA, make_parser, validate_options
+from qualify_mmx6_coop_pair import CONTACT_EXE_SHA, make_parser, run, validate_options
+import prepare_mmx6_coop_playtest as preparation
 from mmx6_coop_contact import EXE_SHA
 
 
@@ -31,6 +36,8 @@ class PairOptionTests(unittest.TestCase):
         self.assertFalse(default.private_pause_smoke)
         self.assertIsNone(default.native_quit_scenario)
         self.assertIsNone(default.original_exe)
+        self.assertIsNone(default.source)
+        self.assertEqual(self.parse("--source","frozen-source").source,Path("frozen-source"))
         lifecycle = self.parse("--lifecycle-smoke")
         self.assertTrue(lifecycle.lifecycle_smoke)
         self.assertFalse(lifecycle.require_state_crc)
@@ -124,6 +131,33 @@ class PairOptionTests(unittest.TestCase):
         for flag in ("--admission-only","--native-loader-diagnostic","--personal-menu-smoke",
                      "--enemy-targeting-smoke","--lifecycle-smoke"):
             self.rejected(*options,flag)
+    def test_explicit_config_source_and_legacy_default_reach_prepare_with_executing_helpers_unchanged(self):
+        tools=Path(__file__).resolve().parent
+        with tempfile.TemporaryDirectory() as temporary:
+            root=Path(temporary);build=root/"build";build.mkdir();(build/"mmx6-runtime.exe").write_bytes(b"fixture image")
+            frozen=root/"frozen-source";frozen.mkdir();(frozen/"game.toml").write_text("# frozen staging fixture\n")
+            for index,source in enumerate((frozen,None)):
+                with self.subTest(explicit=source is not None):
+                    output=root/f"attempt-{index}"
+                    parser=make_parser();args=parser.parse_args(["--tools-root",str(tools),"--build",str(build),
+                        "--disc",str(root/"private.cue"),"--out",str(output)])
+                    if source is None:del args.source  # Earlier programmatic Namespace callers remain supported.
+                    else:args.source=source
+                    def refuse(build_path,actual_source,directory,disc,*,automated):
+                        self.assertEqual(actual_source,(source or tools.parent).resolve())
+                        self.assertEqual(build_path,build)
+                        self.assertTrue(automated)
+                        raise ValueError("bounded fixture stops at ordinary prepare validation")
+                    with patch.object(preparation,"prepare",side_effect=refuse) as prepare, \
+                            patch("qualify_mmx6_coop_pair.socket.socket",return_value=Mock()), \
+                            patch("qualify_mmx6_coop_pair.subprocess.Popen") as launch:
+                        report=run(args)
+                    prepare.assert_called_once();launch.assert_not_called()
+                    self.assertEqual(report["status"],"failed_setup")
+                    self.assertEqual(report["tools_root"],str(tools))
+                    self.assertEqual(report["staging_source"],str((source or tools.parent).resolve()))
+                    self.assertIn("coop_debug.py",report["tool_sha256"])
+                    self.assertEqual(json.loads((output/"qualification.json").read_text())["staging_source"],report["staging_source"])
 
     def quit_options(self):
         return ["--native-quit-scenario","guest_authority","--original-exe","SLUS_013.95",

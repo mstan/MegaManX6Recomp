@@ -227,6 +227,7 @@ def enemy_targeting_smoke(ctx):
 
 def run(args) -> dict:
     tools_root = args.tools_root.resolve(strict=True)
+    staging_source = (getattr(args,"source",None) or tools_root.parent).resolve(strict=True)
     sys.path.insert(0, str(tools_root))
     debug = importlib.import_module("coop_debug")
     preparation = importlib.import_module("prepare_mmx6_coop_playtest")
@@ -286,7 +287,7 @@ def run(args) -> dict:
                                  else "default_seamless_loading",
                   default_intro_qualified=False,
                   default_launch_qualified=False,
-                  tools_root=str(tools_root), tool_sha256={Path(m.__file__).name:
+                  tools_root=str(tools_root), staging_source=str(staging_source), tool_sha256={Path(m.__file__).name:
                   preparation.sha256(Path(m.__file__)) for m in modules},
                   session=args.session, input_delay=3, peers=[], setup=[], observations=[],
                   host_profile_required=host_profiles is not None,
@@ -444,7 +445,7 @@ def run(args) -> dict:
             reservations.append(reservation)
         for seat in range(2):
             directory = output/f"peer-{seat}"
-            receipt = preparation.prepare(args.build, tools_root.parent, directory, args.disc,
+            receipt = preparation.prepare(args.build, staging_source, directory, args.disc,
                                           automated=True)
             # The executable-owned profile supplies co-op. Preserve the normal
             # default-on loader unless the caller explicitly asks to bypass it
@@ -866,6 +867,8 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
 def make_parser():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--tools-root", type=Path, required=True)
+    parser.add_argument("--source",type=Path,
+                        help="Game config staging source; defaults to --tools-root parent, independently of executing helper hashes")
     parser.add_argument("--build", type=Path, required=True)
     parser.add_argument("--disc", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
