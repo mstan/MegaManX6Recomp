@@ -10,6 +10,13 @@ SHA `5ca0d23ff531dbdb7fac7a25ab6faefd2b39bb49e7ae6c20019db22c5f477cd1`,
 still records Zero using X's sample and replacing P1's vocal. Its raw report
 remains unchanged; netplay and all other audio families were unverified there.
 
+The jump-only/current-candidate limitations below describe that audited v18
+route. The later [body ownership repair](COOP_BODY_AUDIO_ROUTES.md) covers
+body-owned group1 records1..8 and exact STOP5/7 callers on frozen v19. Both
+100/100 suites and a paired gameplay smoke pass; native event/sample/STOP and
+active private23 state qualification remain pending. The source audit is not
+retroactively treated as native audio evidence.
+
 The [reproducible metadata](COOP_PRIVATE_ACTION_AUDIO_AUDIT.json) pins the
 original EXE, archive, executable Zero overlay, DAT85 banks,17 source spans,
 all direct encoded callers and45 populated Zero records resolved to effective

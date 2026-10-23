@@ -46,8 +46,16 @@ failed rows preserve observed prior-image P2 audio ownership and stale co-op
 callbacks after native Quit -> New Game. The new image passes bounded native
 corrections; broader row requirements remain incomplete.
 
-The latest frozen gameplay image is v18, title source348a52c, SDKbfbfb920,
-profile mmx6-x-zero-delay-v16. Its debug and production suites passed96/96.
+The latest frozen candidate is v19, title source a1dac26, SDK bfbfb920,
+title compatibility mmx6-x-zero-delay-v17. Its debug and production suites
+passed 100/100. The [body-audio build and gameplay receipt](evidence/mmx6-body-audio/manifest-bound-a1dac26-build-and-saber-smoke-reviewed.json)
+retains a fresh same-machine pair with all 11 menu/resume/control/Square checks,
+20 matched resolved core/mod samples, matching reviewed composed captures and
+graceful owned exits. The new default body PLAY/STOP routes still require
+native event/sample/lifetime qualification; this gameplay smoke is not that
+audio proof.
+
+The earlier v18 image, source348a52c and title compatibility v16, passed96/96.
 The [private ground-jump receipt](evidence/mmx6-jump-audio/manifest-bound-348a52c-local-private-overlap-reviewed.json)
 passes19 local source/route/DSP/lifetime checks, including P1 continuing after
 the correct private Zero vocal. A separate

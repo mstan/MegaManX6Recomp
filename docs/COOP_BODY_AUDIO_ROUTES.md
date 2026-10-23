@@ -29,8 +29,13 @@ original-source audit checks record-to-tone mappings, original call arguments
 and s0 setup, including the helper that loads fixed PLAYER directly. These
 checks do not establish native gameplay or audio qualification.
 
-Fresh exact debug and production builds, native local and same-machine paired
-SOUND/STOP observations, and current-build state coverage remain required.
+The [frozen v19 receipt](evidence/mmx6-body-audio/manifest-bound-a1dac26-build-and-saber-smoke-reviewed.json)
+binds source a1dac26 and both 100/100 suites. A fresh same-machine pair passes
+all 11 native menu/resume/movement/Square checks with 20 matched resolved
+core/mod samples, matching reviewed composed captures and graceful owned exits.
+This gameplay smoke does not observe body-audio event/sample/STOP lifetimes.
+Native local and paired SOUND/STOP observations and current-build active23
+state coverage remain required.
 Prior v18 jump receipts remain bound to their original executable. Other vocal,
 hurt, multi-voice death, earned technique, child, music and PCM coverage remain
 open under R4/R12.

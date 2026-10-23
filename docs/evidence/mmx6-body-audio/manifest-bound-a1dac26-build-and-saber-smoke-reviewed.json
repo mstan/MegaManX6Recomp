@@ -1,0 +1,374 @@
+{
+  "schema": 1,
+  "kind": "reviewed_body_audio_build_and_paired_gameplay_smoke",
+  "candidate": {
+    "source_commit": "a1dac268ed8c5dc8ed902396cebcb2d0597fb009",
+    "sdk_commit": "bfbfb920bfa509f6a31ec2e6b28411a01797427f",
+    "exe_sha256": "982e2ab847d27615ee075578311bed6b74baed77fc9d52b9b41a77bd84749253",
+    "declared_manifest_sha256": "808ac1ac573bf192fa89c0c08631873689cc8a167fc6f34baa8a38e4b96d1c00",
+    "title_compatibility": "mmx6-x-zero-delay-v17"
+  },
+  "bounded_result": "build_and_gameplay_smoke_passed; audio_event_qualification_pending",
+  "compile_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v19-a1dac26\\candidate.json",
+    "sha256": "cb371d2beec7a9627564265969185e772516921ca7d94313f73ecd144081571c",
+    "bytes": 3232
+  },
+  "production_default_off_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v19-a1dac26\\production-default-off.json",
+    "sha256": "ee31ed55bde8ded99a9186f44c72cb7dc1bce5a464f0720bfed4d87902783796",
+    "bytes": 1666
+  },
+  "source_routes": {
+    "path": "docs\\COOP_BODY_AUDIO_ROUTES.json",
+    "sha256": "6395cc6fdc8dc32ac49c04b0e12fe47d456b98b83e7f8597c9f7d8619ed753ac",
+    "bytes": 10578
+  },
+  "report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v19-a1dac26-pair-living-saber\\qualification.json",
+    "sha256": "6ccae3b128966872395f26e997824a60ef2527a92bb55e61987ce2f72ab99929",
+    "bytes": 2521614
+  },
+  "checks": {
+    "declared_build_manifest_bound_to_staged_images": true,
+    "host_profile_settled_before_guest": true,
+    "p2_right_reaches_both_peers": true,
+    "p2_right_preserves_p1_x": true,
+    "p1_jump_reaches_both_peers": true,
+    "p1_jump_preserves_p2_y": true,
+    "both_alive_healthy": true,
+    "mailbox_unused": true,
+    "p2_personal_menu_automated_checks": true
+  },
+  "personal_menu_checks": {
+    "owner_native_pause_and_frozen_world": true,
+    "other_start_cannot_resume": true,
+    "other_cursor_cannot_change_owner_choice": true,
+    "owner_cursor_changes_and_restores": true,
+    "both_personal_resources_preserved_in_menu": true,
+    "owner_resumes_native_world": true,
+    "both_personal_resources_preserved_after_resume": true,
+    "continued_independent_native_movement": true,
+    "continued_native_square_action": true,
+    "composed_captures_completed": true,
+    "both_heroes_healthy_after_controls": true
+  },
+  "source_validation": {
+    "checked_files": {
+      "game": 56,
+      "game-generated": 34
+    },
+    "checked_bytes": 43878191,
+    "generated_root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\generated-source",
+    "scope": "Declared game and game-generated files only; other dependency roots not rehashed"
+  },
+  "host_profile_startup": {
+    "profile": "mmx6.win64-clang22.loopback",
+    "revision": 2,
+    "selected_sha256": "2c19cd565aa5adcc94f2041dea15cbd47cc3734659be66aad551d0e69264c7f8",
+    "peers": [
+      {
+        "capabilities": {
+          "actual_image_sha256": "982e2ab847d27615ee075578311bed6b74baed77fc9d52b9b41a77bd84749253",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "2c19cd565aa5adcc94f2041dea15cbd47cc3734659be66aad551d0e69264c7f8",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      },
+      {
+        "capabilities": {
+          "actual_image_sha256": "982e2ab847d27615ee075578311bed6b74baed77fc9d52b9b41a77bd84749253",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "2c19cd565aa5adcc94f2041dea15cbd47cc3734659be66aad551d0e69264c7f8",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      }
+    ]
+  },
+  "host_profile_final": {
+    "profile": "mmx6.win64-clang22.loopback",
+    "revision": 2,
+    "selected_sha256": "2c19cd565aa5adcc94f2041dea15cbd47cc3734659be66aad551d0e69264c7f8",
+    "peers": [
+      {
+        "capabilities": {
+          "actual_image_sha256": "982e2ab847d27615ee075578311bed6b74baed77fc9d52b9b41a77bd84749253",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "2c19cd565aa5adcc94f2041dea15cbd47cc3734659be66aad551d0e69264c7f8",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      },
+      {
+        "capabilities": {
+          "actual_image_sha256": "982e2ab847d27615ee075578311bed6b74baed77fc9d52b9b41a77bd84749253",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "2c19cd565aa5adcc94f2041dea15cbd47cc3734659be66aad551d0e69264c7f8",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      }
+    ]
+  },
+  "resolved_state_crc": [
+    {
+      "label": "initial idle",
+      "samples": [
+        {
+          "simulation_tick": 2848,
+          "core": "4327eb6f",
+          "mod": "daafb7fa"
+        },
+        {
+          "simulation_tick": 2880,
+          "core": "03f4f82e",
+          "mod": "9bcec886"
+        }
+      ],
+      "resolved_through": [
+        2912,
+        2912
+      ]
+    },
+    {
+      "label": "P2 right then release",
+      "samples": [
+        {
+          "simulation_tick": 2944,
+          "core": "5fad3aa4",
+          "mod": "8785a318"
+        },
+        {
+          "simulation_tick": 2976,
+          "core": "b64a8714",
+          "mod": "a1a08226"
+        },
+        {
+          "simulation_tick": 3008,
+          "core": "de727cc1",
+          "mod": "ee2e98bc"
+        },
+        {
+          "simulation_tick": 3040,
+          "core": "c7fe5c43",
+          "mod": "167fdf9c"
+        },
+        {
+          "simulation_tick": 3072,
+          "core": "449328e8",
+          "mod": "f483123e"
+        }
+      ],
+      "resolved_through": [
+        3081,
+        3083
+      ]
+    },
+    {
+      "label": "P1 jump then settle",
+      "samples": [
+        {
+          "simulation_tick": 3168,
+          "core": "3488c4ec",
+          "mod": "f1763404"
+        },
+        {
+          "simulation_tick": 3200,
+          "core": "4ad2737a",
+          "mod": "dc273088"
+        },
+        {
+          "simulation_tick": 3232,
+          "core": "a74939e5",
+          "mod": "47ce0376"
+        },
+        {
+          "simulation_tick": 3264,
+          "core": "34a04bc5",
+          "mod": "979b0b0c"
+        },
+        {
+          "simulation_tick": 3296,
+          "core": "108ee785",
+          "mod": "6048b9bc"
+        },
+        {
+          "simulation_tick": 3328,
+          "core": "7c345278",
+          "mod": "b011b16e"
+        },
+        {
+          "simulation_tick": 3360,
+          "core": "80ebdded",
+          "mod": "d4c00b5e"
+        }
+      ],
+      "resolved_through": [
+        3381,
+        3381
+      ]
+    },
+    {
+      "label": "P2 personal menu, composed captures and resumed native controls",
+      "samples": [
+        {
+          "simulation_tick": 3904,
+          "core": "a030c1b9",
+          "mod": "4d0d4477"
+        },
+        {
+          "simulation_tick": 3936,
+          "core": "bbf343da",
+          "mod": "0f33ca7c"
+        },
+        {
+          "simulation_tick": 3968,
+          "core": "40fead1a",
+          "mod": "414109d2"
+        },
+        {
+          "simulation_tick": 4000,
+          "core": "b80db405",
+          "mod": "ae246180"
+        },
+        {
+          "simulation_tick": 4032,
+          "core": "e092364c",
+          "mod": "1cf43f24"
+        },
+        {
+          "simulation_tick": 4064,
+          "core": "20b6c5a1",
+          "mod": "1051aaca"
+        }
+      ],
+      "resolved_through": [
+        4067,
+        4067
+      ]
+    }
+  ],
+  "matched_resolved_samples": 20,
+  "cleanup": [
+    {
+      "seat": 0,
+      "owned_pid": 13256,
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0,
+      "private_card_files": [
+        {
+          "name": "card1.mcd",
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "name": "card2.mcd",
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ]
+    },
+    {
+      "seat": 1,
+      "owned_pid": 71220,
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0,
+      "private_card_files": [
+        {
+          "name": "card1.mcd",
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "name": "card2.mcd",
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ]
+    }
+  ],
+  "captures": [
+    {
+      "peer": 0,
+      "label": "paused-present",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v19-a1dac26-pair-living-saber\\personal-menu\\p2-peer-0-paused-present.png",
+        "sha256": "8adba9b8ee7dbe18ac4e8306d5458ca7027de24e790a0e214bd6f3b98f89af2d",
+        "bytes": 2074543
+      }
+    },
+    {
+      "peer": 1,
+      "label": "paused-present",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v19-a1dac26-pair-living-saber\\personal-menu\\p2-peer-1-paused-present.png",
+        "sha256": "8adba9b8ee7dbe18ac4e8306d5458ca7027de24e790a0e214bd6f3b98f89af2d",
+        "bytes": 2074543
+      }
+    },
+    {
+      "peer": 0,
+      "label": "resumed-present",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v19-a1dac26-pair-living-saber\\personal-menu\\p2-peer-0-resumed-present.png",
+        "sha256": "05a8365a66c44aea48507e9234c6550a63d0b084bf429162880fbee6882b71db",
+        "bytes": 2074543
+      }
+    },
+    {
+      "peer": 1,
+      "label": "resumed-present",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v19-a1dac26-pair-living-saber\\personal-menu\\p2-peer-1-resumed-present.png",
+        "sha256": "05a8365a66c44aea48507e9234c6550a63d0b084bf429162880fbee6882b71db",
+        "bytes": 2074543
+      }
+    }
+  ],
+  "visual_review": "Primary agent inspected both unique peer0 composed frames: native Zero portrait/Z-SABER menu, then intro gameplay with overlapping X/Zero bodies and both meters. Independently hashed peer1 bytes match each corresponding frame; no full artwork/palette comparison inferred.",
+  "limits": [
+    "Native pair establishes ordinary controls and11 menu/resume/movement/Square checks on this exact image, not event-time body-audio sample/STOP correctness.",
+    "Source and actual-plugin fixtures cover eight PLAY records/nine STOP sites; native local/paired body event/lifetime, current-build active23 state and music/PCM qualification remain pending.",
+    "Same-machine development profile only; no cross-machine, heterogeneous, rollback, production-native or campaign qualification.",
+    "Prior exact-image failures and234 frozen comparison definitions remain retained; no full row promoted."
+  ],
+  "bypasses": []
+}
