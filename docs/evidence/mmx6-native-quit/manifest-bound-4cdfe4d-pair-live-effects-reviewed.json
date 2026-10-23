@@ -1,0 +1,503 @@
+{
+  "schema": 1,
+  "kind": "reviewed_paired_intro_native_quit_live_effects_regression",
+  "reviewed_at_utc": "2026-10-23T18:30:50.396060+00:00",
+  "scope_status": "passed_exact_v16_paired_case",
+  "candidate": {
+    "source_commit": "4cdfe4d19f8932ed162818c8378d03254453cc72",
+    "exe_sha256": "eeb5754a53a6d10aeac13b294ce3325a7e2b8a6180b20ce001a3800401fcec6d",
+    "declared_manifest_sha256": "3d462d7f1bdcdbcd5f17211eaf597a7b3be4e199484c1f08fb90444f6cae89c8",
+    "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+  },
+  "compilation_proof": {
+    "receipt": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v16-4cdfe4d\\candidate.json",
+      "bytes": 2891,
+      "sha256": "3562f02617dc6ada4f39ce27b28894213f6c785b5db93ca81c3938ad75bc6301"
+    },
+    "source_repositories": {
+      "game": {
+        "head": "4cdfe4d19f8932ed162818c8378d03254453cc72",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "net": {
+        "head": "e53059306824edf4f0aec4aae5ae65151b18535f",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "rb": {
+        "head": "2a03e73693acee0fb78076ea058642c931bef12e",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "sdk": {
+        "head": "6212e68066a6977dc587e8fca71f27dac9b002fc",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "ui": {
+        "head": "b964eabe5a3438b8ed121064354ba27c1accef3f",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "private_artifact_sha256": {
+      "manifest.json": "bff1f0f0d9d21b6e07032884cf6dfe4749d8ca7cd2040016d69b29f517be4290",
+      "manifest.h": "2acb7ea974a3bb32a81d9650f2bd314d81a7c965fa78e70f2fc5533cd48f7528",
+      "provenance.json": "9e5ebc1957b40e957146157817fcd1e5869779c966508127b9e3c62be666fd5d",
+      "CMakeCache.txt": "724f583940806e5beedee78d341bd4d6c6d491a0cab323ff3001b6aa2e933f64",
+      "regen-config.toml": "c98ec29fb5ac45beefbf350efc5e95ae767245d260ee4350a9c52b9fbfbec055",
+      "regeneration.json": "e3a1a796de62b44443ba65dd578f58d6579cea01c793fa9db86e6ab9070e949d",
+      "source-game.toml": "50b36fd5346aa111b30ca4cd4b7c172a39823c0a6843ec00f81ff642ca3dd215",
+      "ctest.log": "a3655f14db61b79c5aca37c2d42070a4bf68eec94caee8527815849230b2c9f9",
+      "build.log": "76738d51cf734f688c8e28d7453ee6001a9d6228746ce891fae6e87b45bb0cf3"
+    }
+  },
+  "report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v16-4cdfe4d-pair-live-effects\\qualification.json",
+    "bytes": 5785166,
+    "sha256": "6b5de27f994d7a5da748667b356fd637ac67bc053990d6aba53c621cb2dfbc8f"
+  },
+  "runner": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v16-4cdfe4d-pair-live-effects\\runner-source.py",
+    "bytes": 59391,
+    "sha256": "7f4f925e2b4cbe6593c68a4f6d3ef4d52e942286d1fdc316e05c9398d351fc17"
+  },
+  "helper": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v16-4cdfe4d-pair-live-effects\\native-quit-helper-source.py",
+    "bytes": 27793,
+    "sha256": "f71a5b80e3da5d322da442524c450f1d27434d2e2205a358fc58d3403b8dc61a"
+  },
+  "tool_sha256": {
+    "coop_debug.py": "43d8a09b19ee7743c2ce881bb8a29933bdc4acd668ab81ae3de1263d3062e00b",
+    "prepare_mmx6_coop_playtest.py": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978",
+    "qualify_mmx6_coop_baseline.py": "b2e0d0195544e78ae175e9f591db33da791b4bdd2f14703d63561989e20b76f8",
+    "test_mmx6_coop_netplay.py": "1e37d4bd1f6fcf7c55c45d2e0915a126c64d71b5aab001632bef60c55f72bd51",
+    "coop_state_crc.py": "ed47ea23719fe15eb8072ed17376e6ce91f3e976a5e7cc9c1fd1f2b9cc4a42c7",
+    "coop_host_profile.py": "c11d19879b6fbe2cdc464f20b5d444598fa590d6145d795bef7a1597280cf735",
+    "mmx6_coop_native_quit.py": "f71a5b80e3da5d322da442524c450f1d27434d2e2205a358fc58d3403b8dc61a",
+    "mmx6_coop_personal_menu.py": "95eda202b0a42482afb42e7b9e3b237378cfa0f362d197d6fa08522ab762adb1",
+    "mmx6_coop_published_input.py": "1ad70248cd065d7963b4c26c5c2c0959c78d93225de335bdb18793b00d214bf6",
+    "mmx6_coop_private_pause.py": "660bef661e4e25d54a259e54735673d8d8ecc6d42505124c98161fdfe0644eee",
+    "mmx6_coop_private_effects.py": "8aa7290af8316bf827024684668410b080ea5e56fbcbf7653236ad46f6bbffba"
+  },
+  "raw_status": "passed",
+  "raw_case_status": "automated_native_quit_bounded_checks_passed_artwork_pending",
+  "raw_artwork_review": "pending",
+  "raw_effect_absence_review": "pending",
+  "scenario": "p1_pages_cancel_live_effects",
+  "input_path": "published_host",
+  "machine_scope": "same_machine",
+  "session": 2026102349,
+  "input_delay": 3,
+  "loading_policy": "default_seamless_loading",
+  "original": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\disc\\SLUS_013.95",
+    "sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "bytes": 522240,
+    "regions": [
+      {
+        "address": "0x800348b0",
+        "bytes": 236,
+        "sha256": "543e10d9173c3ec75572ed5ae1a0e4ebea260df49ce1691c51af041e6a500728"
+      },
+      {
+        "address": "0x80034b70",
+        "bytes": 236,
+        "sha256": "67e5b261733da1dfd5f3c3d699e48cf3cc7f561d14f78de7478a41669124cf54"
+      },
+      {
+        "address": "0x8001fd10",
+        "bytes": 356,
+        "sha256": "61d1a95c84ac1e20b87557a7ebc922487293485c7fe2e3bde54713dab41dfa97"
+      },
+      {
+        "address": "0x8001ffc0",
+        "bytes": 76,
+        "sha256": "ba2dbd646de6fc434640f0309f397fec6db98d3de631b472e9335b78e2594b20"
+      }
+    ]
+  },
+  "case_checks": {
+    "primary_native_first_page_continue": true,
+    "primary_second_page_cancel": true,
+    "guest_cannot_control_primary_confirmation": true,
+    "preexisting_native_p2_dash_retained_through_quit_pages": true,
+    "original_preexisting_dash_resumes_and_retires": true,
+    "personal_resources_preserved": true,
+    "native_roster_preserved": true,
+    "original_world_resumed": true,
+    "genuine_independent_guest_input_after_cancel": true,
+    "resolved_core_mod_crc_comparison_completed": true
+  },
+  "case_check_count": 10,
+  "effects_reductions": [
+    {
+      "peer": 0,
+      "status": "partial_evidence",
+      "checks": {
+        "extension_available": true,
+        "eligible_fixed_roster": true,
+        "original_input_receipts": true,
+        "ordered_publications": true,
+        "accepted_native_dash_marker": true,
+        "three_visible_native_trails": true,
+        "owner_frame_resources": true,
+        "native_links_and_cluts_retained": true,
+        "release_drains_without_retrigger": true,
+        "finite_native_retirement": true
+      },
+      "positive_continuation_ticks": [
+        1583,
+        1585,
+        1591
+      ]
+    },
+    {
+      "peer": 1,
+      "status": "partial_evidence",
+      "checks": {
+        "extension_available": true,
+        "eligible_fixed_roster": true,
+        "original_input_receipts": true,
+        "ordered_publications": true,
+        "accepted_native_dash_marker": true,
+        "three_visible_native_trails": true,
+        "owner_frame_resources": true,
+        "native_links_and_cluts_retained": true,
+        "release_drains_without_retrigger": true,
+        "finite_native_retirement": true
+      },
+      "positive_continuation_ticks": [
+        1583,
+        1585,
+        1591
+      ]
+    }
+  ],
+  "captures": [
+    {
+      "peer": 0,
+      "label": "p1-native-quit-page-one",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v16-4cdfe4d-pair-live-effects\\p1-pages-cancel-live-effects\\peer-0-p1-native-quit-page-one.png",
+      "bytes": 2074543,
+      "sha256": "bf8dbb12ea6f4f2aa87c0443fc86517e7f473813f2d9820c1a9b8f09e63a7e1b",
+      "surface": "composed_renderer_output",
+      "before_sequence": 0,
+      "completed_sequence": 1,
+      "wrote": 1
+    },
+    {
+      "peer": 1,
+      "label": "p1-native-quit-page-one",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v16-4cdfe4d-pair-live-effects\\p1-pages-cancel-live-effects\\peer-1-p1-native-quit-page-one.png",
+      "bytes": 2074543,
+      "sha256": "bf8dbb12ea6f4f2aa87c0443fc86517e7f473813f2d9820c1a9b8f09e63a7e1b",
+      "surface": "composed_renderer_output",
+      "before_sequence": 0,
+      "completed_sequence": 1,
+      "wrote": 1
+    },
+    {
+      "peer": 0,
+      "label": "p1-native-quit-page-two",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v16-4cdfe4d-pair-live-effects\\p1-pages-cancel-live-effects\\peer-0-p1-native-quit-page-two.png",
+      "bytes": 2074543,
+      "sha256": "c8543735033c93a53590c101e7dc7213a286e9dc33f12691979a41132c606809",
+      "surface": "composed_renderer_output",
+      "before_sequence": 1,
+      "completed_sequence": 2,
+      "wrote": 1
+    },
+    {
+      "peer": 1,
+      "label": "p1-native-quit-page-two",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v16-4cdfe4d-pair-live-effects\\p1-pages-cancel-live-effects\\peer-1-p1-native-quit-page-two.png",
+      "bytes": 2074543,
+      "sha256": "c8543735033c93a53590c101e7dc7213a286e9dc33f12691979a41132c606809",
+      "surface": "composed_renderer_output",
+      "before_sequence": 1,
+      "completed_sequence": 2,
+      "wrote": 1
+    },
+    {
+      "peer": 0,
+      "label": "native-resumed-after-quit-cancel-or-refusal",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v16-4cdfe4d-pair-live-effects\\p1-pages-cancel-live-effects\\peer-0-native-resumed-after-quit-cancel-or-refusal.png",
+      "bytes": 2074543,
+      "sha256": "82ef1261acdb6a94adcd01ac548c266c3d591edbd86e45bc303ba7873c8fc064",
+      "surface": "composed_renderer_output",
+      "before_sequence": 2,
+      "completed_sequence": 3,
+      "wrote": 1
+    },
+    {
+      "peer": 1,
+      "label": "native-resumed-after-quit-cancel-or-refusal",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v16-4cdfe4d-pair-live-effects\\p1-pages-cancel-live-effects\\peer-1-native-resumed-after-quit-cancel-or-refusal.png",
+      "bytes": 2074543,
+      "sha256": "82ef1261acdb6a94adcd01ac548c266c3d591edbd86e45bc303ba7873c8fc064",
+      "surface": "composed_renderer_output",
+      "before_sequence": 2,
+      "completed_sequence": 3,
+      "wrote": 1
+    }
+  ],
+  "capture_window_count": 3,
+  "host_profile": {
+    "required": true,
+    "startup": {
+      "profile": "mmx6.win64-clang22.loopback",
+      "revision": 2,
+      "selected_sha256": "eb1373e1fd55955c66fab827b339349e5c813945e7f6b63375f5719c3102b037",
+      "peers": [
+        {
+          "capabilities": {
+            "actual_image_sha256": "eeb5754a53a6d10aeac13b294ce3325a7e2b8a6180b20ce001a3800401fcec6d",
+            "cpu_arch": 2,
+            "features": 127,
+            "backend": 2,
+            "fp": 2,
+            "overlays": "interpreted",
+            "offers": 1
+          },
+          "settlement": {
+            "profile": "mmx6.win64-clang22.loopback",
+            "revision": 2,
+            "selected_sha256": "eb1373e1fd55955c66fab827b339349e5c813945e7f6b63375f5719c3102b037",
+            "cycles": 0,
+            "sim_tick": 0,
+            "before_enter_guest": 1
+          }
+        },
+        {
+          "capabilities": {
+            "actual_image_sha256": "eeb5754a53a6d10aeac13b294ce3325a7e2b8a6180b20ce001a3800401fcec6d",
+            "cpu_arch": 2,
+            "features": 127,
+            "backend": 2,
+            "fp": 2,
+            "overlays": "interpreted",
+            "offers": 1
+          },
+          "settlement": {
+            "profile": "mmx6.win64-clang22.loopback",
+            "revision": 2,
+            "selected_sha256": "eb1373e1fd55955c66fab827b339349e5c813945e7f6b63375f5719c3102b037",
+            "cycles": 0,
+            "sim_tick": 0,
+            "before_enter_guest": 1
+          }
+        }
+      ]
+    },
+    "unchanged_at_final": true
+  },
+  "resolved_core_mod": {
+    "total": 31,
+    "groups": [
+      {
+        "label": "initial idle",
+        "count": 7,
+        "first": {
+          "simulation_tick": 2880,
+          "core": "2ed7a076",
+          "mod": "0b59c2a6"
+        },
+        "last": {
+          "simulation_tick": 3072,
+          "core": "7443cead",
+          "mod": "7f451e7c"
+        },
+        "resolved_through": [
+          3095,
+          3095
+        ],
+        "samples_sha256": "0923fb1567b80918ad800bb6002078c9dc271d698d4b505a13cfe42ee307a0b0"
+      },
+      {
+        "label": "P2 right then release",
+        "count": 8,
+        "first": {
+          "simulation_tick": 3136,
+          "core": "f1c1b136",
+          "mod": "805d6d2e"
+        },
+        "last": {
+          "simulation_tick": 3360,
+          "core": "cd418e8f",
+          "mod": "4ec2c576"
+        },
+        "resolved_through": [
+          3361,
+          3361
+        ],
+        "samples_sha256": "97b363878b2821df93bd1a610e0f699ee64875a1cca78cf5ea57875ee75afc3a"
+      },
+      {
+        "label": "P1 jump then settle",
+        "count": 8,
+        "first": {
+          "simulation_tick": 3424,
+          "core": "77dd9074",
+          "mod": "90f49860"
+        },
+        "last": {
+          "simulation_tick": 3648,
+          "core": "3100349c",
+          "mod": "039adf70"
+        },
+        "resolved_through": [
+          3655,
+          3655
+        ],
+        "samples_sha256": "fc8f6134f8689416280fbcc202bc5d227a2bb207e034c7f1b5be5a9e54bbd113"
+      },
+      {
+        "label": "Native Quit p1_pages_cancel_live_effects resolved core/mod comparison",
+        "count": 8,
+        "first": {
+          "simulation_tick": 4320,
+          "core": "9aa7ff5b",
+          "mod": "a1097782"
+        },
+        "last": {
+          "simulation_tick": 4544,
+          "core": "f47c923d",
+          "mod": "6c6432ae"
+        },
+        "resolved_through": [
+          4555,
+          4555
+        ],
+        "samples_sha256": "210e5235688eac7f909791901cbd5add67db060bcde3e81775e3227af1e35e45"
+      }
+    ],
+    "scope": "Runner-retained common resolved simulation-tick/core/mod comparisons, not diagnostic FNV equivalence"
+  },
+  "aggregate_pair_checks": {
+    "native_quit_automated_case_completed": true,
+    "declared_build_manifest_bound_to_staged_images": true,
+    "host_profile_settled_before_guest": true,
+    "p2_right_reaches_both_peers": true,
+    "p2_right_preserves_p1_x": true,
+    "p1_jump_reaches_both_peers": true,
+    "p1_jump_preserves_p2_y": true,
+    "both_alive_healthy": true,
+    "mailbox_unused": true,
+    "default_resident_loader_committed": true,
+    "native_quit_private_cards_unchanged": true
+  },
+  "processes": [
+    {
+      "seat": 0,
+      "owned_pid": 71832,
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v16-4cdfe4d-pair-live-effects\\peer-0\\mmx6-runtime.exe",
+        "bytes": 27384320,
+        "sha256": "eeb5754a53a6d10aeac13b294ce3325a7e2b8a6180b20ce001a3800401fcec6d"
+      },
+      "private_card_files": [
+        {
+          "name": "card1.mcd",
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "name": "card2.mcd",
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ]
+    },
+    {
+      "seat": 1,
+      "owned_pid": 70476,
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v16-4cdfe4d-pair-live-effects\\peer-1\\mmx6-runtime.exe",
+        "bytes": 27384320,
+        "sha256": "eeb5754a53a6d10aeac13b294ce3325a7e2b8a6180b20ce001a3800401fcec6d"
+      },
+      "private_card_files": [
+        {
+          "name": "card1.mcd",
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "name": "card2.mcd",
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ]
+    }
+  ],
+  "private_cards_unchanged": true,
+  "held_input_cleanup_errors": [],
+  "prior_c5_template_comparison": {
+    "repository_path": "docs/evidence/mmx6-native-quit/manifest-bound-c5fadea-live-effects-reviewed.json",
+    "sha256": "1bd1c21d628d7a6f5688dc3eaa666006040ee21d856c9ce454de6e588b4902c6",
+    "candidate": {
+      "candidate_source": "c5fadead5296cb4bc53a5c283b04e5814e025f09",
+      "exe_sha256": "39c154966f9c12f939a8305551a910de9dbb97878dcf05c5935bed03c7ca7036",
+      "declared_manifest_sha256": "ae232408787bf0c3564bf8fd3aae85cc6d3977370fd059198b391345ebb25797"
+    },
+    "ten_case_checks_identical": true,
+    "two_ten_check_effect_reducers_identical": true,
+    "three_capture_windows_identical": true,
+    "capture_byte_comparisons": [
+      {
+        "label": "p1-native-quit-page-one",
+        "peer": 0,
+        "identical": true
+      },
+      {
+        "label": "p1-native-quit-page-one",
+        "peer": 1,
+        "identical": true
+      },
+      {
+        "label": "p1-native-quit-page-two",
+        "peer": 0,
+        "identical": true
+      },
+      {
+        "label": "p1-native-quit-page-two",
+        "peer": 1,
+        "identical": true
+      },
+      {
+        "label": "native-resumed-after-quit-cancel-or-refusal",
+        "peer": 0,
+        "identical": false
+      },
+      {
+        "label": "native-resumed-after-quit-cancel-or-refusal",
+        "peer": 1,
+        "identical": false
+      }
+    ],
+    "prior_resolved_sample_count": 28,
+    "current_resolved_sample_count": 31,
+    "profile_id_revision_identical": true,
+    "selection_digest_differs": true,
+    "scope": "Same native confirmation/cancel/live-Zero-dash contract re-exercised on a new exact image; no transfer of local or campaign qualification"
+  },
+  "review": {
+    "primary_reviewer": "/root",
+    "primary_basis": "Parent explicitly reports individual inspection of all six actual completed Quit captures",
+    "secondary_reviewer": "/root/content_inventory",
+    "secondary_basis": "Independently viewed peer0 first page, second page and resumed image; recomputed all6 actual file hashes and verified peer pairs byte-identical",
+    "findings": "Native blue Continue and Quit confirmation pages hide gameplay bodies, meters and trails. After cancel, original intro terrain, separate X/Zero bodies and stacked meters are visible; no stale dash trail burst is visible in the resumed capture. Native raw checks separately retain freeze, same-dash continuation and finite retirement.",
+    "raw_pending_labels_preserved": true
+  },
+  "limits": [
+    "Exact v16 Windowsx64 Clang22 ENHANCED image, linked OpenBIOS, interpreted stage overlays and current X/P1+Zero/P2 intro only.",
+    "Same physical machine numeric127.0.0.1 UDP delay3 and profile revision2; no cross-machine/CPU/OS, rollback, network states or AOT/performance qualification.",
+    "All10 native case checks plus two10-check effect reducers pass; raw effect reducers remain partial_evidence and raw artwork labels stay pending, with reviewed capture attribution recorded separately here.",
+    "Native P2 dash/three trails through primary confirmation pages and original cancel/resume only; other effects, opposite roster, final Quit, acquired-progress/current-data reentry, campaign and full R7/R15 remain unverified.",
+    "No source cards supplied or copied; generated private card files remained hash-identical. Debug Quit is owned cleanup, not native final-Quit proof.",
+    "No local v16 result or any other family pass is inherited from the prior c5 template."
+  ]
+}

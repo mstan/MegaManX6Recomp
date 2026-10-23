@@ -1,0 +1,469 @@
+{
+  "schema": 1,
+  "kind": "reviewed_native_jump_audio_local_failure",
+  "reviewed_at_utc": "2026-10-23T18:30:50.396060+00:00",
+  "disposition": {
+    "R4": {
+      "local": "failed",
+      "netplay": "unverified"
+    },
+    "R12": {
+      "local": "failed",
+      "netplay": "unverified"
+    }
+  },
+  "candidate": {
+    "source_commit": "beeae107efca2fddab2c279a9d48d5e7e00817b1",
+    "exe_sha256": "a8f20cdcc4ac68cdc76bf8fa7f1b3a74b9db67788514468743a355284b2080b8",
+    "declared_manifest_sha256": "91a1d699ca4d404400d9448730a482fbd2da04445ae9d2702ffc0cab6bd2ad29",
+    "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+  },
+  "compilation_proof": {
+    "receipt": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v17-beeae10\\candidate.json",
+      "bytes": 2895,
+      "sha256": "27d42d624f1e0e4678db9c7fa1418afb9ff7727a57fab79510b16c9b71215789"
+    },
+    "source_repositories": {
+      "game": {
+        "head": "beeae107efca2fddab2c279a9d48d5e7e00817b1",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "net": {
+        "head": "e53059306824edf4f0aec4aae5ae65151b18535f",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "rb": {
+        "head": "2a03e73693acee0fb78076ea058642c931bef12e",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "sdk": {
+        "head": "6212e68066a6977dc587e8fca71f27dac9b002fc",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "ui": {
+        "head": "b964eabe5a3438b8ed121064354ba27c1accef3f",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "private_artifact_sha256": {
+      "manifest.json": "97f5db7fdce2245eb003719bcf2ca4d0cc091096113e4118d69757fba0971b50",
+      "manifest.h": "dc2c1bc92eeb9aede8295a83906571875cc810c0ba86cdba9e352587c9ec6ceb",
+      "provenance.json": "befc7ac8ce0c82f3bad151beecef35448a77ada5dec6530bc7ff6043f0df11cb",
+      "CMakeCache.txt": "724f583940806e5beedee78d341bd4d6c6d491a0cab323ff3001b6aa2e933f64",
+      "regen-config.toml": "c98ec29fb5ac45beefbf350efc5e95ae767245d260ee4350a9c52b9fbfbec055",
+      "regeneration.json": "e3a1a796de62b44443ba65dd578f58d6579cea01c793fa9db86e6ab9070e949d",
+      "source-game.toml": "50b36fd5346aa111b30ca4cd4b7c172a39823c0a6843ec00f81ff642ca3dd215",
+      "ctest.log": "0320db95ecb2b694ed1615a0f15d306a5e5f074fe292f8fe21b15dba4bb4d403",
+      "build.log": "272c06cee9f660f055b512fae878978bafdd24c8ba85d50ce1b05992d7dfa094"
+    }
+  },
+  "report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v17-beeae10-local-x-first\\qualification.json",
+    "bytes": 541720,
+    "sha256": "e1b82db788f76aba3a96043b641c418d027e207c38e20531018031044fa1d96f"
+  },
+  "raw_status": "comparison_failed",
+  "raw_family_labels": {
+    "r4": "unverified",
+    "r12": "unverified",
+    "preserved_unchanged": true
+  },
+  "runner": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v17-beeae10-local-x-first\\runner-source.py",
+    "bytes": 23248,
+    "sha256": "765f169a40670a5c09769107b5964c859df502eebdf81dcad2a67e469008737e"
+  },
+  "tool_sha256": {
+    "mmx6_coop_jump_audio.py": "eba9f0ac62c3945f9bdf11d113da09c213c42cf11980f1da344dff8199ea8d52",
+    "coop_debug.py": "43d8a09b19ee7743c2ce881bb8a29933bdc4acd668ab81ae3de1263d3062e00b",
+    "coop_host_profile.py": "c11d19879b6fbe2cdc464f20b5d444598fa590d6145d795bef7a1597280cf735",
+    "prepare_mmx6_coop_playtest.py": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978",
+    "qualify_mmx6_coop_baseline.py": "b2e0d0195544e78ae175e9f591db33da791b4bdd2f14703d63561989e20b76f8",
+    "qualify_mmx6_input_replay.py": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd",
+    "mmx6_input_recording.py": "a4d21aaa83c9104679d549c0f5fa81bf95106ce800b0601263faaff46ae5310a",
+    "prepare_mmx6_input_replay.py": "584c0790706a2794636f7ed1bbd5e6b904f29b8b285d6eb3a9f5373167500d95"
+  },
+  "original_source": {
+    "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "character_sound_members": {
+      "X": {
+        "member": 87,
+        "sha256": "d41601a3c9a38463b3725fde5f01d7850af6d829b49dae1b162ddc3a7e3f88ac"
+      },
+      "Zero": {
+        "member": 85,
+        "sha256": "25f558d69e38e5f170b3325e27dc49a8232860f97d97dfeb6a0ce5306364f1c8"
+      }
+    },
+    "original_runtime_binding": {
+      "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+      "disc": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\disc\\Mega Man X6 (USA) (v1.1).bin",
+      "loader": "default OpenBIOS/HLE with authentic1x disc",
+      "settings_sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa"
+    },
+    "declared_game_source_verification": {
+      "checked_files": {
+        "game": 53,
+        "game-generated": 34
+      },
+      "checked_bytes": 43848875,
+      "generated_root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\generated-source",
+      "scope": "Declared game and game-generated files only; other dependency roots not rehashed"
+    }
+  },
+  "source_contract": {
+    "file": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v17-beeae10-local-x-first\\source-contract.json",
+      "bytes": 13086,
+      "sha256": "e3f5772ba49da170e1839330f00839f3cd19012c898ddbee18b6251f590103af"
+    },
+    "canonical_sha256": "ce11910561b56c85450c0c14d66333b0bddd50156235c76ff12bbeb4c902124a",
+    "native_window_hashes": [
+      {
+        "name": "ground_jump",
+        "start": "8003AF1C",
+        "end_exclusive": "8003AFF4",
+        "sha256": "edb4af58ccfefaaa5df5282090250667a6580816d570c26e96126bcd0782feeb"
+      },
+      {
+        "name": "jump_animation_sound",
+        "start": "800356C4",
+        "end_exclusive": "800356F4",
+        "sha256": "bd14a2ec9e1c0a1f80082dfdfd54bcce7d0eb650e76b1228b239b644cdfcabff"
+      },
+      {
+        "name": "voice_wrapper",
+        "start": "8003CFE0",
+        "end_exclusive": "8003D014",
+        "sha256": "9f594a7bde22b766b2fd112350df11d84ba5cdab1ac6fac77af1df0c186f8568"
+      },
+      {
+        "name": "hurt_sound_calls",
+        "start": "8003963C",
+        "end_exclusive": "80039694",
+        "sha256": "4605a72ff2bae8e47b81aa201f1deae6312a532d83f3cf3a47479255dc0e1a77"
+      },
+      {
+        "name": "tone_metadata",
+        "start": "8005A794",
+        "end_exclusive": "8005A9CC",
+        "sha256": "7b3d6985fa91c055fdf12df7c0442c478c52d8c8861d66387ebe6cc472d2c18a"
+      },
+      {
+        "name": "sound_keyon_arguments",
+        "start": "80016E70",
+        "end_exclusive": "80016F80",
+        "sha256": "34b80951c235d2490103ac5295aef68125d5a6e20e871d04ac979c5057b49504"
+      },
+      {
+        "name": "native_pitch",
+        "start": "8005DF40",
+        "end_exclusive": "8005E0C8",
+        "sha256": "351b919cd119d249416f6d59285e79a3dd8f9615fe4350bbbdee60daeecec0eb"
+      },
+      {
+        "name": "voice_setup",
+        "start": "8005BCA4",
+        "end_exclusive": "8005BE6C",
+        "sha256": "25866e1c62efc7c03f6bd0a95c72f6ea9fe8c217a2bc74d34312c9bf18bc802e"
+      },
+      {
+        "name": "sample_table_sizes",
+        "start": "8006044C",
+        "end_exclusive": "800605B0",
+        "sha256": "98bcc88b8cc50bfe05887b33a22c8e53f0526b84686fe4aa22e1185fdd6f883c"
+      }
+    ]
+  },
+  "checks": {
+    "two_keyons": true,
+    "vocal_lifetime_overlap": true,
+    "p1_source_sample": true,
+    "p1_pitch_adsr": true,
+    "p1_natural_end": false,
+    "p2_source_sample": false,
+    "p2_pitch_adsr": false,
+    "p2_natural_end": true,
+    "last_voice_envelope_terminated": true
+  },
+  "actors": [
+    {
+      "seat": 0,
+      "keyon": {
+        "seq": 204,
+        "frame": 2519,
+        "kind": "KEYON",
+        "v": 20,
+        "addr": 338464,
+        "pitch": 1144,
+        "adsr_lo": 33023,
+        "adsr_hi": 8128,
+        "vol_l": 10157,
+        "vol_r": 8544
+      },
+      "identity": {
+        "tone": {
+          "character": "X",
+          "member": 87,
+          "group": 3,
+          "record": 6,
+          "vab_handle": 3,
+          "program": 0,
+          "tone": 6,
+          "voice": 20,
+          "sample": 7,
+          "offset": 13680,
+          "bytes": 1856,
+          "sample_sha256": "5e96f6c111bb06aee701c64c9406e4d60fe64e3203455e6ccf18eb32109c00bb",
+          "header_sha256": "1a63a15f0f26daab6d65a554fc95688b014ab458764d57cd2105520c8d7f689c",
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "note": 66,
+          "shift": 59,
+          "center": 89,
+          "pitch": 1144,
+          "first_end_block": 114,
+          "first_end_flags": 1
+        },
+        "sample_matches": true,
+        "observed_sha256": "5e96f6c111bb06aee701c64c9406e4d60fe64e3203455e6ccf18eb32109c00bb"
+      },
+      "lifetime": {
+        "disposition": "replaced",
+        "terminal": {
+          "seq": 206,
+          "frame": 2529,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 340320,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 10157
+        },
+        "engine_frames": 10
+      }
+    },
+    {
+      "seat": 1,
+      "keyon": {
+        "seq": 206,
+        "frame": 2529,
+        "kind": "KEYON",
+        "v": 20,
+        "addr": 340320,
+        "pitch": 1144,
+        "adsr_lo": 33023,
+        "adsr_hi": 8128,
+        "vol_l": 10157,
+        "vol_r": 10157
+      },
+      "identity": {
+        "tone": {
+          "character": "X",
+          "member": 87,
+          "group": 3,
+          "record": 7,
+          "vab_handle": 3,
+          "program": 0,
+          "tone": 7,
+          "voice": 20,
+          "sample": 8,
+          "offset": 15536,
+          "bytes": 3360,
+          "sample_sha256": "ee9efd35fbcb7958abbc52a76bdfc433b53ec117e319cc9835275c6bb7cc5e55",
+          "header_sha256": "1a63a15f0f26daab6d65a554fc95688b014ab458764d57cd2105520c8d7f689c",
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "note": 67,
+          "shift": 59,
+          "center": 90,
+          "pitch": 1144,
+          "first_end_block": 208,
+          "first_end_flags": 1
+        },
+        "sample_matches": true,
+        "observed_sha256": "ee9efd35fbcb7958abbc52a76bdfc433b53ec117e319cc9835275c6bb7cc5e55"
+      },
+      "lifetime": {
+        "disposition": "natural_end",
+        "terminal": {
+          "seq": 210,
+          "frame": 2558,
+          "kind": "END_STOP",
+          "v": 20,
+          "addr": 340336,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 10157
+        },
+        "engine_frames": 29
+      }
+    }
+  ],
+  "expected_zero_record7": {
+    "character": "Zero",
+    "member": 85,
+    "group": 3,
+    "record": 7,
+    "vab_handle": 3,
+    "program": 0,
+    "tone": 7,
+    "voice": 20,
+    "sample": 8,
+    "offset": 12368,
+    "bytes": 2576,
+    "sample_sha256": "2d7263e69e5a6cb0f7a9a11eee2976efd683e22359d9083fcc77d411a4c4fe82",
+    "header_sha256": "7c9fedd98a3d4740a2baddcc77323984e8b0a1ae139e24f36043cdfd0fa757ce",
+    "adsr_lo": 33023,
+    "adsr_hi": 8128,
+    "note": 67,
+    "shift": 59,
+    "center": 90,
+    "pitch": 1144,
+    "first_end_block": 159,
+    "first_end_flags": 1
+  },
+  "driver": {
+    "before_equals_after": true,
+    "canonical_sha256": "e21c904754a27ed7375c0bca36943fc4c2ddef55db33133a0ae5fa1ead4d75f5",
+    "release_adjust": 0,
+    "selected_vabs": {
+      "1": {
+        "headers": 2148870700,
+        "vab_status": 1,
+        "bases": 142720,
+        "record_ends": 2148870700,
+        "record_pointers": 2148870548
+      },
+      "3": {
+        "headers": 2148875932,
+        "vab_status": 1,
+        "bases": 324784,
+        "record_ends": 2148875932,
+        "record_pointers": 2148875860
+      }
+    }
+  },
+  "reviewed_findings": [
+    "P1 X KEYON204 at engineframe2519 uses hardwarevoice20 and original FalconX DAT87 group3/VAB3 program0 tone6/sample7; nativeSPURAM hash matches the pinned1856-byte sample.",
+    "P2 KEYON206 at engineframe2529 reuses voice20 and selects FalconX DAT87 tone7/sample8, not originalZero DAT85 tone7/sample8. Observed3360-byte hash differs from the expectedZero2576-byte sample identity.",
+    "KEYON206 replaces P1 after10engineframes while its voice lifetime overlaps P2. It is not P1 natural completion. P2 reaches END_STOP210 atengineframe2558 after29engineframes.",
+    "p2_pitch_adsr is false because compare_overlap gates it on a correct character/source match. The observed pitch1144/0478h, ADSR33023/80FFh and8128/1FC0h numerically match the identified X tone; they also coincide with the expected Zero record7 numerics. No independent numerical pitch/ADSR defect is claimed.",
+    "END_STOP establishes envelope termination, not active0, PCM/audible duration or sample identity from its post-stop address. Sample identity is bound at KEYON."
+  ],
+  "capture": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v17-beeae10-local-x-first\\candidate\\saves\\input-recordings\\session-1792778517141576-1-0\\inputs.jsonl",
+    "sha256": "3e4884d76712963fa5b86162f1bc015d40117f05995e3a0977cab0c0b3de9f6b",
+    "events": 5932,
+    "natives": 4126,
+    "p2_reads": 1806,
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "a8f20cdcc4ac68cdc76bf8fa7f1b3a74b9db67788514468743a355284b2080b8",
+      "manifest_sha256": "91a1d699ca4d404400d9448730a482fbd2da04445ae9d2702ffc0cab6bd2ad29",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "requested_jump_seats": [
+      0,
+      1
+    ],
+    "consumed_cross_seen_anywhere": [
+      0,
+      1
+    ],
+    "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence",
+    "artifacts": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v17-beeae10-local-x-first\\candidate\\saves\\input-recordings\\session-1792778517141576-1-0\\inputs.jsonl",
+        "bytes": 778051,
+        "sha256": "3e4884d76712963fa5b86162f1bc015d40117f05995e3a0977cab0c0b3de9f6b"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v17-beeae10-local-x-first\\candidate\\saves\\input-recordings\\session-1792778517141576-1-0\\status.json",
+        "bytes": 160,
+        "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v17-beeae10-local-x-first\\candidate\\saves\\input-recordings\\session-1792778517141576-1-0\\settings.json",
+        "bytes": 10329,
+        "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v17-beeae10-local-x-first\\candidate\\saves\\input-recordings\\session-1792778517141576-1-0\\content.json",
+        "bytes": 503,
+        "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v17-beeae10-local-x-first\\candidate\\saves\\input-recordings\\session-1792778517141576-1-0\\simulation-contract.json",
+        "bytes": 259,
+        "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      }
+    ],
+    "status": {
+      "contract": "mmx6.native-consumption.v1",
+      "epoch": 1,
+      "failure": "",
+      "schema": 1,
+      "scope": "native-consumption diagnostics; replay unimplemented",
+      "status": "finalized"
+    },
+    "revalidated_finalized_decoder_identity": true
+  },
+  "owned_run": {
+    "pid": 78892,
+    "input_path": "published_host",
+    "muted": "SDL_AUDIODRIVER=dummy",
+    "offline_before": 0,
+    "offline_after": 0,
+    "cleanup": {
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    },
+    "cards_before": {},
+    "cards_after": {
+      "saves\\card1.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "saves\\card2.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "saves\\input-recordings\\session-1792778517141576-1-0\\card1.initial.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "saves\\input-recordings\\session-1792778517141576-1-0\\card2.initial.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    "existing_private_cards_unchanged": true
+  },
+  "review": {
+    "reviewer": "/root/content_inventory",
+    "basis": "Read-only raw report, pinned source contract/helper gate, finalized capture decoder and actual artifact hashes; parent identified this as the confirmed v17 failure",
+    "artwork_or_audible_review": "not_performed"
+  },
+  "limits": [
+    "Only one X/P1-first then Zero/P2 original ground-jump overlap in a private offline intro; other audio/events/rosters/stages remain unverified.",
+    "Local R4/R12 failed for this concrete ownership/replacement counterexample; netplay was not exercised. No other comparison-family disposition.",
+    "Engine event frames are not native world ticks or sample-accurate PCM lifetime. Published Cross consumption anywhere in finalized input capture is not exact temporal jump/audio attribution.",
+    "Muted SDL dummy output; no speaker/PCM/music/audio-quality or private-bank correctness proof. Four intervening voice22 KEYONs are outside this group3 comparison.",
+    "Fresh private cards began empty; generated blank cards/initial snapshots are hash-bound. No source/native user cards supplied or modified.",
+    "Raw report keeps its original unverified family labels; this reviewed capsule records the concrete local failure without rewriting raw evidence or the ledger."
+  ]
+}
