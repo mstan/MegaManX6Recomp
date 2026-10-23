@@ -104,6 +104,14 @@ static void retain_native_x_pixels(void){
 }
 static void digest_and_readiness(void){
     uint32_t h=state_digest();++frame_count;p2_hud_fade=17;CHECK(state_digest()==h);
+    psx_mod_write_byte(diagnostic+0x50,8);CHECK(!snapshot_ready() && !snapshot_bytes());
+    psx_mod_write_byte(diagnostic+0x50,0);CHECK(snapshot_ready());
+    for(unsigned phase=1;phase<=2;++phase){
+        checkpoint_pending=(Mmx6CheckpointPending){phase,1,1234};
+        CHECK(!snapshot_ready() && !snapshot_bytes() && state_digest()!=h);
+        memset(&checkpoint_pending,0,sizeof checkpoint_pending);
+        CHECK(snapshot_ready() && state_digest()==h);
+    }
 #define PERTURB(value) do{(value)^=1;CHECK(state_digest()!=h);(value)^=1;CHECK(state_digest()==h);}while(0)
     PERTURB(p2.shots[6]);PERTURB(previous_input);PERTURB(p2_start_previous);
     PERTURB(saved_portrait_colors[7]);PERTURB(pickup_owners[0].seat);PERTURB(zero_solid_contacts[3].carried);

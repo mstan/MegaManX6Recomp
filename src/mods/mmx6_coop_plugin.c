@@ -688,6 +688,7 @@ static int diagnostic_mutation_allowed(void) {
     return !psx_mod_netplay_is_active();
 #endif
 }
+#include "mmx6_coop_checkpoint.inc"
 static uint16_t p2_input(void) {
     uint16_t raw=(uint16_t)~sio_get_pad_buttons_slot(1);
     if (psx_mod_read_byte(diagnostic+0x30)) {
@@ -914,6 +915,9 @@ static void diagnostic_setup(CPUState *cpu) {
         psx_mod_counter_add("mmx6.coop.debug-fixture-rejected",1);
         return;
     }
+    /* Command8 may only commit at the outer stage entry, never from the
+     * controller's projected/nested post-player boundary. */
+    if (command==8) return;
     /* Development-only fixture setup. The published host-body copy remains
      * read-only; a one-byte command commits the already-written payload. */
     if (command==1) p2.body[0x5C]=psx_mod_read_byte(diagnostic+0x51);
@@ -1033,7 +1037,9 @@ static int player_tick(CPUState *cpu, uint32_t address) {
     return 1;
 }
 static int stage_tick(CPUState *cpu, uint32_t address) {
-    if (stage_call || inside || !enrolled || failed) return 0;
+    if (stage_call || inside) return 0;
+    if (checkpoint_stage_boundary(cpu)) return 1;
+    if (!enrolled || failed) return 0;
     diagnostic_setup(cpu);
     uint16_t raw=p2_input();
     int start=!!(raw&8), pressed=start&&!p2_start_previous;
@@ -1784,6 +1790,7 @@ static void activate(void) {
     if (!menu_memory) menu_memory=psx_mod_alloc_gpu_dma_memory(MENU_BYTES*2,16);
     failed=!(assets && diagnostic && packets && hud_packets && menu_memory);
     if (diagnostic) for (unsigned i=0;i<0x2000;i+=4) psx_mod_write_word(diagnostic+i,0);
+    checkpoint_reset();
     if (!psx_mod_set_function_replacement(0x80031474,enemy_hit)) failed=1;
     if (!psx_mod_set_function_replacement(0x800E9898,unit_choices)) failed=1;
     if (!psx_mod_set_function_replacement(0x800EB14C,intro_near_target)) failed=1;
@@ -1844,6 +1851,7 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002012C,controller);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800232D4,render);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8003BD24,native_player_init);
+    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8001E1BC,checkpoint_native_entry);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8003D308,script_begin);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002820C,camera_pits);
 }

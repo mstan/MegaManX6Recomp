@@ -52,9 +52,10 @@ static void snapshot_assets_loaded(const Mmx6AssetView *views,unsigned count) {
     psx_sha256_final(&sha,snapshot_asset_sha);snapshot_asset_valid=1;
 }
 static int snapshot_ready(void) {
+    if(diagnostic && psx_mod_read_byte(diagnostic+0x50)==8)return 0;
     const unsigned guards[]={inside,player_call,stage_call,zero_world,world_render,
         hud_call,render_x_death,effect_call,pickup_call,solid_call,solid_allocate_call,
-        scene_call,zero_projected,unit_choices_call,intro_target_call,state_track.count,state_track.error};
+        scene_call,zero_projected,unit_choices_call,intro_target_call,state_track.count,state_track.error,checkpoint_pending.phase};
     for(unsigned i=0;i<sizeof guards/sizeof guards[0];++i)if(guards[i])return 0;
     return ready && !failed && snapshot_asset_valid && zero_compressed && compressed_size && zero_ui_pixels &&
         assets && assembly && palette_source && active_palette && packets && diagnostic && menu_memory &&
@@ -159,7 +160,8 @@ static uint32_t state_digest(void) {
     if(snapshot_asset_valid)state_bytes(&io,snapshot_asset_sha,sizeof snapshot_asset_sha);
     const uint32_t guards[]={inside,player_call,stage_call,zero_world,world_render,hud_call,render_x_death,
         effect_call,pickup_call,solid_call,solid_allocate_call,scene_call,zero_projected,unit_choices_call,intro_target_call,
-        state_track.count,state_track.error,(unsigned)ready};
+        state_track.count,state_track.error,(unsigned)ready,checkpoint_pending.phase,
+        checkpoint_pending.index,checkpoint_pending.nonce};
     for(unsigned i=0;i<sizeof guards/sizeof guards[0];++i)state_integer(&io,guards[i],4,UINT32_MAX);
     if(zero_world)state_integer(&io,world_packets,4,UINT32_MAX);
     if(hud_call)state_integer(&io,hud_seat,1,1);
