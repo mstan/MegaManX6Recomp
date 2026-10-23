@@ -1,0 +1,400 @@
+{
+  "schema": 1,
+  "scope": "R26 source-only audit; no runtime/SDK/CMake/ledger changes, builds, game launches or native recorder/replay qualification",
+  "x6_status": "unverified; no default persistent accepted-input recorder/replayer in audited X6 source",
+  "sources": [
+    {
+      "repository": "x4",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "src/mods/mmx4_diagnostics.cpp",
+      "git_blob": "139473f5bf1548bdbe1e139969d07a1ca078e9b2",
+      "sha256": "ed73eeaec6467293e3f19858a5a893c81c312fb5b3805a430f5d174fc10bc7fc",
+      "bytes": 22271
+    },
+    {
+      "repository": "x4",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "src/mods/mmx4_diagnostic_writer.h",
+      "git_blob": "c079ad5f336b38de3010ddcca53ef08825a0f348",
+      "sha256": "a843b82e9b50c3a8dd1024b2a0431f2a571fab95062923f3e388bf80d9c5be4a",
+      "bytes": 8530
+    },
+    {
+      "repository": "x4",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "src/mods/mmx4_diagnostic_mode.h",
+      "git_blob": "e64ebbaf1e12c202c201928b575e0e2752267623",
+      "sha256": "631a5aa8443a8b9a285e8f2312a0e7f6ba78b7d5726b394234b6aa51ee816038",
+      "bytes": 1214
+    },
+    {
+      "repository": "x4",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "tools/replay_mmx4_diagnostics.py",
+      "git_blob": "89866c71e4b3929964863a6cb28ed5d5c7c7b149",
+      "sha256": "521f0ae45cfa84e41ebe7b5eab11cc417a003d58f27cec81ef370977f7b09c20",
+      "bytes": 11123
+    },
+    {
+      "repository": "x4",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "tools/test_mmx4_diagnostic_capture.py",
+      "git_blob": "4f4eb23e481defb2f3ea2600610668d01a8c0e1d",
+      "sha256": "bb6d4c9a341ad4507f30b415d726a8437d810c033c36e2e45a1ce8be51a3340c",
+      "bytes": 5900
+    },
+    {
+      "repository": "x5",
+      "commit": "9ed460e7b7e60769fa12bcab74e228ae19796214",
+      "path": "src/mods/mmx5_diagnostics.cpp",
+      "git_blob": "014f1d17fbf51193c28fe88bc183dfd993ee4623",
+      "sha256": "7ce75b85b5af96f7257404b1010ea6b3bf4499d0db2d5990a06936b6cd358ebb",
+      "bytes": 22449
+    },
+    {
+      "repository": "x5",
+      "commit": "9ed460e7b7e60769fa12bcab74e228ae19796214",
+      "path": "src/mods/mmx5_diagnostic_writer.h",
+      "git_blob": "1bdf4c35af2b703fe4b11c243fe80efa8e4d8804",
+      "sha256": "2ca74551a4497b2caf5c217a1485f4a106a8731eb18829ec165840d9deaf1267",
+      "bytes": 9060
+    },
+    {
+      "repository": "x5",
+      "commit": "9ed460e7b7e60769fa12bcab74e228ae19796214",
+      "path": "src/mods/mmx5_diagnostic_paths.h",
+      "git_blob": "59d453c9230a7de1cc6f1d4bdba82a1303260f03",
+      "sha256": "6e8bd69debd9359a255df91903e251595a36416c5f1993f1853249d49184e342",
+      "bytes": 1106
+    },
+    {
+      "repository": "x5",
+      "commit": "9ed460e7b7e60769fa12bcab74e228ae19796214",
+      "path": "tools/replay_mmx5_diagnostics.py",
+      "git_blob": "83094a22162b111368ec7c70fd51ecba95421eff",
+      "sha256": "bee789661d753db27f270ea93be33950b074f882ed777bdff73efd8ea005d1b3",
+      "bytes": 11355
+    },
+    {
+      "repository": "sdk",
+      "commit": "79246932166e46a82d7b61a229c60ff9c8e2931a",
+      "path": "runtime/src/main.cpp",
+      "git_blob": "1a8e57e27bd4a71834089e221e03a9ed6e8b2841",
+      "sha256": "ae95501e0a6c41b46871427049af420975ca4b053dc056db1a79c6239386ceae",
+      "bytes": 1008233
+    },
+    {
+      "repository": "sdk",
+      "commit": "79246932166e46a82d7b61a229c60ff9c8e2931a",
+      "path": "runtime/src/sio.c",
+      "git_blob": "67f6e3b9bae0a621caddd2a2a7754bafd694853d",
+      "sha256": "139a172676a04807471b3d1169b7521a981bcd8ded9c3c9abb27c931344db83a",
+      "bytes": 137203
+    },
+    {
+      "repository": "sdk",
+      "commit": "79246932166e46a82d7b61a229c60ff9c8e2931a",
+      "path": "runtime/src/psx_netplay.c",
+      "git_blob": "ac6e14b69943292e18a0d21e28df90206437c7cb",
+      "sha256": "7f99ddbde9f5cf6981fbbc976da801eba535105da425e4ecda0f968a541189bf",
+      "bytes": 229730
+    },
+    {
+      "repository": "sdk",
+      "commit": "79246932166e46a82d7b61a229c60ff9c8e2931a",
+      "path": "runtime/src/pad_external_input.c",
+      "git_blob": "04c51898ad9d6d43166390d256574fd6d0b08053",
+      "sha256": "8ae643bde2069fd3cd36f14e8cbb912395f7b946029d729c377134467b8c3a39",
+      "bytes": 3688
+    },
+    {
+      "repository": "sdk",
+      "commit": "79246932166e46a82d7b61a229c60ff9c8e2931a",
+      "path": "runtime/src/pad_external_input.h",
+      "git_blob": "6f7598fbec5f323e1a864e52ded7ad8bfca45ee0",
+      "sha256": "f288b0630c97ab45fc742a70dedc69b6342d3a9b110c31bd330bf71c2e980549",
+      "bytes": 4969
+    },
+    {
+      "repository": "sdk",
+      "commit": "79246932166e46a82d7b61a229c60ff9c8e2931a",
+      "path": "runtime/src/mod_netplay.c",
+      "git_blob": "86073c6f8df14609da59575411554724efe91ebc",
+      "sha256": "2da562937a4cb4074121dcf9986a79d6e7b0cb9f574c4fff64f6b620e69a75ca",
+      "bytes": 8440
+    },
+    {
+      "repository": "sdk",
+      "commit": "79246932166e46a82d7b61a229c60ff9c8e2931a",
+      "path": "runtime/include/mod_plugins.h",
+      "git_blob": "83fc0d1518aba05e350f7c4bf73db9f1b8b10089",
+      "sha256": "80ba09c71a89f4ff41c0d28327c73b33d6aa2cc05a0d5af3f851f1706d54c290",
+      "bytes": 65450
+    },
+    {
+      "repository": "sdk",
+      "commit": "79246932166e46a82d7b61a229c60ff9c8e2931a",
+      "path": "runtime/include/mod_netplay.h",
+      "git_blob": "2694b8aececcdb561a1f75db81a63a41fa2b6fa4",
+      "sha256": "00513d67e013846177f7809ddc0c6298ffa57ef3a9212edfa4fa65bc3d47d888",
+      "bytes": 4712
+    },
+    {
+      "repository": "sdk",
+      "commit": "79246932166e46a82d7b61a229c60ff9c8e2931a",
+      "path": "runtime/include/psx_netplay.h",
+      "git_blob": "4d3603a44583b37e35a5ac6086e2316344b4f7b1",
+      "sha256": "da075acfc9215fe1d27976ff0359266006639f713a8cf243562c41dac0674feb",
+      "bytes": 21337
+    },
+    {
+      "repository": "sdk",
+      "commit": "79246932166e46a82d7b61a229c60ff9c8e2931a",
+      "path": "runtime/include/mod_session_baseline.h",
+      "git_blob": "ff00b873e24854201016339de0d66aedee7d593e",
+      "sha256": "94f194ecf16f7c83fb9821849b0dd0daf61dd45f029517ffb7beb5f9f8ecf7f8",
+      "bytes": 2301
+    },
+    {
+      "repository": "sdk",
+      "commit": "79246932166e46a82d7b61a229c60ff9c8e2931a",
+      "path": "runtime/include/netplay_sim_pad_cache.h",
+      "git_blob": "a7af819deffe4cca35a5c8c0c0a1794054884e28",
+      "sha256": "8ca9c3397cf8481aa8f1f2f523ff771202f38944d886838ad7c6a143db43ca4b",
+      "bytes": 1458
+    },
+    {
+      "repository": "sdk",
+      "commit": "79246932166e46a82d7b61a229c60ff9c8e2931a",
+      "path": "runtime/src/netplay_input_hist.c",
+      "git_blob": "e3c4678230c8d6ad59b467d771455292e5428967",
+      "sha256": "aa2f657e3d2d767987d58a31373f37504057fda25f6a3ee270829803c52acc0b",
+      "bytes": 1851
+    },
+    {
+      "repository": "x6",
+      "commit": "92ba3997de1f9cb30cc05648c84ee9e8afb5fa4a",
+      "path": "src/mods/mmx6_coop_plugin.c",
+      "git_blob": "dcf35129764cf75f8cceb653d9e59e79c4595154",
+      "sha256": "72cf416044ff4a089165c0a75a72df8c999eaeffb19a7b19ec81d2fb70a32fd9",
+      "bytes": 84866
+    },
+    {
+      "repository": "x6",
+      "commit": "92ba3997de1f9cb30cc05648c84ee9e8afb5fa4a",
+      "path": "tools/prepare_mmx6_coop_playtest.py",
+      "git_blob": "09092d88cfa094580d76e8da69b37715093c7cfd",
+      "sha256": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978",
+      "bytes": 10411
+    },
+    {
+      "repository": "x4",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "src/mods/mmx4_diagnostic_paths.h",
+      "git_blob": "b594964c2e518f119d83e798be0dbe98d47235c2",
+      "sha256": "207b6aecd421882ff1d97f62a87d622e6e6dc3306005b6d2f4a684ccc2ea9c64",
+      "bytes": 1106
+    },
+    {
+      "repository": "x4",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "mods/preloaded/packages/mmx4.diagnostics/1.0.0/manifest.toml",
+      "git_blob": "695654d46bdd0eaabf884e7dd20e2a7e17fec536",
+      "sha256": "933cde0edf1ba78459e15e259cd3342aba86a080381d35cf5114cf66f09f5db1",
+      "bytes": 785
+    },
+    {
+      "repository": "x5",
+      "commit": "9ed460e7b7e60769fa12bcab74e228ae19796214",
+      "path": "mods/preloaded/packages/mmx5.diagnostics/1.0.0/manifest.toml",
+      "git_blob": "22b3f1377e4d2c2f0576888d50c1ef1b49338425",
+      "sha256": "410f1943b15bbe0b6fb4c2f0a2b93656336c662f2fd60e450854756a559de0a9",
+      "bytes": 785
+    },
+    {
+      "repository": "sdk",
+      "commit": "79246932166e46a82d7b61a229c60ff9c8e2931a",
+      "path": "runtime/src/psx_pad_apply.c",
+      "git_blob": "cf9524dc71a937901e5f992f169495c458ee09e6",
+      "sha256": "44cb18729dd7f5446fac4988c1dc922a32ed84374f4bd51c7e5c6fbaa96f5370",
+      "bytes": 814
+    },
+    {
+      "repository": "sdk",
+      "commit": "79246932166e46a82d7b61a229c60ff9c8e2931a",
+      "path": "runtime/src/psx_selfcheck.c",
+      "git_blob": "69cab707abdf136577cdbbd8fa8596dda94e30dd",
+      "sha256": "712739c0b32429521abf36235d59c6fc0443b16ed089763fcdfe1124a29cd645",
+      "bytes": 38427
+    },
+    {
+      "repository": "sdk",
+      "commit": "79246932166e46a82d7b61a229c60ff9c8e2931a",
+      "path": "runtime/include/psx_selfcheck.h",
+      "git_blob": "467233bf3f850766334039e7d2a900cbde3ab0bd",
+      "sha256": "efd91ebcc224e820edac5ff9f3530e2435500dba419faad52418f44489ea5b8f",
+      "bytes": 4323
+    }
+  ],
+  "frozen_reference_design": {
+    "x4_default_enabled_manifest": "mods/preloaded/packages/mmx4.diagnostics/1.0.0/manifest.toml",
+    "x5_default_enabled_manifest": "mods/preloaded/packages/mmx5.diagnostics/1.0.0/manifest.toml",
+    "native_rows": "N sequence/frame/decoded-pads/accepted-seat-pads/native-state-check",
+    "ordered_consumption_rows": "C sequence seat buttons for extra co-op pad reads",
+    "x5_fixture_rows": "D rows are recorded and rejected by input-only replay launcher",
+    "writer": {
+      "queue_entries": 4096,
+      "single_emulation_thread_producer": true,
+      "background_owns_copies_only": true,
+      "periodic_flush_ms": 100,
+      "full_or_io_failure": "stop recording explicitly, do not silently drop or block every input"
+    },
+    "starting_state": [
+      "execution ID",
+      "portable mod plan",
+      "diagnostic build ID",
+      "effective mode and changes",
+      "settings",
+      "mod choices",
+      "initial raw cards or absence markers",
+      "full baseline.pst after offline restore/rewind"
+    ],
+    "replay_limits": [
+      "explicit offline replay only",
+      "frozen launchers reject network recordings",
+      "incomplete final native interval is trimmed",
+      "native bounded state hash is not full core/mod CRC",
+      "old SDK/addresses/state slices are not X6 qualification"
+    ]
+  },
+  "existing_x6_sdk_boundaries": [
+    {
+      "source": "sdk/runtime/src/psx_pad_apply.c:5",
+      "function": "psx_pad_apply_to_sio",
+      "role": "shared normal final pad publication; proposed read-only observer seam",
+      "complete_recorder_exists": false,
+      "limits": [
+        "legacy direct SIO overrides bypass it",
+        "deferred type and connection changes need separate actual-state events",
+        "publication is not native consumption or peer-resolved completion"
+      ]
+    },
+    {
+      "source": "sdk/runtime/src/main.cpp:6352,7091,8526,8867",
+      "functions": [
+        "apply_pad_slot_to_sio",
+        "sample_pad_into_sio",
+        "sdl_vblank_present_body"
+      ],
+      "role": "offline resolution and low-latency resampling; preserve all authoritative publications without disabling normal timing"
+    },
+    {
+      "source": "sdk/runtime/src/psx_netplay.c:2612,2626,2656,3614",
+      "functions": [
+        "host_sample_local",
+        "host_publish",
+        "np_publish_hist_sio",
+        "psx_netplay_stage_local"
+      ],
+      "role": "local wire proposal versus exact admitted simulation-seat publication; distinguish latched/live-only/resimulation cases"
+    },
+    {
+      "source": "sdk/runtime/include/psx_netplay.h:181",
+      "function": "psx_netplay_sim_pad",
+      "role": "read-only current-simulation-tick published seat cache while guest runs; not an event/history recorder"
+    },
+    {
+      "source": "sdk/runtime/src/psx_netplay.c:5643,5702",
+      "functions": [
+        "psx_netplay_finish_frame",
+        "psx_netplay_resolved_through"
+      ],
+      "role": "actual completed tick and separate peer-confirmation frontier"
+    },
+    {
+      "source": "x6/src/mods/mmx6_coop_plugin.c:686,1030,1131",
+      "functions": [
+        "p2_input",
+        "stage_tick",
+        "controller"
+      ],
+      "role": "extra native partner reads including menus/lifecycle; offline mailbox overrides must be marked unsupported/fixture, not normal pad evidence"
+    },
+    {
+      "source": "sdk/runtime/src/main.cpp:7154",
+      "function": "sample_headless_pad_into_sio",
+      "role": "ordinary headless pads neutral; explicit host layer exception resolves P1 only and neutralizes P2; do not inherit old two-pad headless claims"
+    },
+    {
+      "source": "sdk/runtime/include/psx_selfcheck.h:5",
+      "function": "PSX_RB_SELFCHECK",
+      "role": "opt-in offline in-memory resimulation comparator; not default user recorder and changes input timing/ownership while enabled"
+    }
+  ],
+  "proposed_integration": {
+    "activation": "default-enabled offline title diagnostics plus explicit ownership under fixed online co-op profile; disabled offline observer must not start restore-only capture",
+    "observer_contract": "void/read-only callbacks, owned POD copies only, no guest call/RAM/mailbox/input mutation or emulation-thread file formatting",
+    "streams": [
+      "local publication provenance/wire tick",
+      "final SIO publication and native accepted consumption order",
+      "completed interval and resolved-prefix commit",
+      "effective mode/config changes and restore epochs"
+    ],
+    "required_tags": [
+      "session/restore epoch",
+      "event order",
+      "guest cycles",
+      "offline boundary or simulation/wire tick",
+      "seat-to-port mapping",
+      "pad buttons/sticks/connection/config and effective/requested type",
+      "source provenance",
+      "completed/resolved status"
+    ],
+    "default_destinations": "fresh discoverable session directory within validated private F:/G: data/saves root; no silent C:/AppData fallback",
+    "failure_contract": "bounded queue and pending-resolution window; stop capture with first error; preserve partial prefix/tail and explicit terminal completeness; do not mutate or block gameplay to rescue recording",
+    "replay_online": "blocked until a trusted per-peer tick-indexed local publication source runs through unchanged transport and both peers agree before guest; unilateral debug/SIO/mailbox injection is not replay",
+    "reference_parity_scope": "Default offline/online accepted capture plus strict offline replay and explicit network-trace refusal. Paired replay is optional future capability, not an invented prerequisite for this frozen-reference scope."
+  },
+  "starting_envelope_required": [
+    "actual executable SHA256",
+    "declared manifest/header canonical identity",
+    "execution/implementation IDs",
+    "actual original BIOS/disc identities without copied assets",
+    "effective mod plan/options/settings and environment",
+    "controller mode/mapping",
+    "boot/loader/renderer/retained-bank policy",
+    "FP/backend/interpreted overlay contract",
+    "old session selected identity plus fresh replay session identity",
+    "initial exported raw-card hashes/bytes or absence markers for each authoritative peer",
+    "complete ready current-build machine plus X6 host snapshot for post-restore segments"
+  ],
+  "validation_blockers": [
+    {
+      "id": "recorder",
+      "status": "unimplemented",
+      "requirement": "default offline and paired finalized accepted-pad files, initial state and discoverable location"
+    },
+    {
+      "id": "native-consumer-map",
+      "status": "unverified",
+      "requirement": "map original X6 serial poll latch/native decode boundary plus ordered p2_input reads; no X4/X5 address substitutions"
+    },
+    {
+      "id": "offline-replay",
+      "status": "unverified",
+      "requirement": "exact-build private original-input replay with sequence/consumer order, native state, complete core/mod and composed-output checks"
+    },
+    {
+      "id": "paired-replay",
+      "status": "unsupported-future-capability",
+      "requirement": "trusted coordinated local wire publication sources and unchanged transport; frozen X4/X5 launcher behavior does not supply this",
+      "scope": "Not required to match frozen X4/X5 offline-replay and online-capture scope; no broader replay claim allowed."
+    },
+    {
+      "id": "failure-corpus",
+      "status": "unverified",
+      "requirement": "wrong image/settings/cards/baseline, malformed/missing/truncated/duplicate rows, fixture contamination, queue/disk/open/flush failures and interrupted close"
+    }
+  ],
+  "no_inherited_passes": true
+}
