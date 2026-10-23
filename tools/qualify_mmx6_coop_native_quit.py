@@ -31,7 +31,7 @@ def make_parser():
     parser.add_argument("--output",type=Path)
     parser.add_argument("--original-exe",type=Path,required=True,help="Exact original SLUS_013.95, separate from runtime CUE")
     parser.add_argument("--expected-exe-sha256",required=True)
-    parser.add_argument("--native-quit-scenario",choices=("guest_authority","p1_pages_cancel"),required=True)
+    parser.add_argument("--native-quit-scenario",choices=native_quit.SCENARIOS,required=True)
     parser.add_argument("--port",type=int,default=24898)
     parser.add_argument("--timeout",type=float,default=240)
     parser.add_argument("--progress-timeout",type=float,default=12)
@@ -81,7 +81,7 @@ def make_exercise(args,candidate,prepared,metadata):
             adapter.settle_idle()
             case=native_quit.native_quit_smoke(dict(mode="local",input_path="offline_native",
                 clients=[adapter.client],both=lambda fn:[fn(0)],debug=owned_debug,report=report,output=destination,
-                hold=adapter.hold,native_advance=adapter.native_advance,transport_window=adapter.transport_window,
+                hold=adapter.hold,hold_observed=adapter.hold_observed,native_advance=adapter.native_advance,transport_window=adapter.transport_window,
                 candidate_exe_sha256=prepared["exe_sha256"],candidate_binding=metadata),
                 original_exe=args.original_exe,expected_exe_sha256=args.expected_exe_sha256,
                 scenario=args.native_quit_scenario,timeout=args.progress_timeout,window_frames=args.window_frames)
@@ -118,6 +118,7 @@ def run(args):
                       PYTHONPYCACHEPREFIX=str(candidate/"temp/pycache"))
     sys.pycache_prefix=str(candidate/"temp/pycache")
     modules=(debug,native_quit,preparation,baseline,menu_runner,native_quit.menu)
+    if args.native_quit_scenario=="p1_pages_cancel_live_effects":modules+=(native_quit.private_pause,native_quit.private_effects)
     metadata=dict(kind="owned_offline_native_quit",scenario=args.native_quit_scenario,
         mode="local",machine_scope="same_machine",input_path="offline_native",
         candidate_exe_sha256=prepared["exe_sha256"],expected_exe_sha256=args.expected_exe_sha256,

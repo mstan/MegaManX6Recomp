@@ -8,6 +8,7 @@ import unittest
 from unittest.mock import Mock, patch
 
 import mmx6_coop_native_quit as quit_ui
+from test_mmx6_coop_private_effects import publication as effect_publication
 
 
 def row(tick=10, *, page=0, choice=0, owner=0):
@@ -83,6 +84,16 @@ class NativeQuitEvidenceTests(unittest.TestCase):
 
 
 class NativeQuitObserverTests(unittest.TestCase):
+    def test_live_effect_observation_supplies_the_same_canonical_publication_without_another_base_read(self):
+        raw=bytearray(0x3C);raw[4:8]=bytes((1,6,2,1))
+        client=Mock();client.read.side_effect=[bytes(raw),bytes(8),bytes((10,2))+bytes(0x6A)]
+        fx=quit_ui.private_effects.parse_effect_diagnostic(effect_publication(20,marker=1,visible=True,menu=True))
+        debug=Mock()
+        parsed=quit_ui.observe_native_quit(client,debug,effect_observation=fx)
+        debug.observe.assert_not_called()
+        self.assertEqual(parsed["observation"],fx.json()["observation"])
+        self.assertEqual(parsed["p2_body_hex"],fx.p2_body_hex)
+        self.assertEqual(parsed["trails"][1]["raw_hex"],fx.trails[1].raw_hex)
     def test_original_read_fields_and_separate_projection_are_recorded(self):
         raw=bytearray(0x3C);raw[4:8]=bytes((1,6,2,1));raw[0x14]=13
         struct.pack_into("<I",raw,0x34,1)
@@ -126,6 +137,14 @@ class NativeQuitGuardTests(unittest.TestCase):
                 quit_ui.native_quit_smoke(ctx,original_exe=path,expected_exe_sha256="a"*64)
             ctx["hold"].assert_not_called()
 
+    def test_live_effect_scenario_requires_observed_input_before_any_source_or_control(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            ctx=self.ctx(Path(temporary))
+            with patch.object(quit_ui,"verify_original") as source,self.assertRaisesRegex(ValueError,"observed input"):
+                quit_ui.native_quit_smoke(ctx,original_exe="unused",expected_exe_sha256="a"*64,
+                                          scenario="p1_pages_cancel_live_effects")
+            source.assert_not_called();ctx["hold"].assert_not_called()
+
     def test_guest_admission_retains_failure_and_never_sends_confirmation(self):
         with tempfile.TemporaryDirectory() as temporary:
             ctx=self.ctx(Path(temporary));ctx["both"].side_effect=lambda fn:[fn(0)]
@@ -164,6 +183,133 @@ class NativeQuitGuardTests(unittest.TestCase):
             self.assertIn("no confirmation",case["error"])
             self.assertFalse(case["checks"]["guest_select_cannot_enter_native_quit"])
             self.assertEqual([call.args[1] for call in ctx["hold"].call_args_list],[quit_ui.START,quit_ui.SELECT])
+
+
+class LiveEffectModel:
+    """Deterministic input/observer fixture, never native gameplay evidence."""
+    def __init__(self, root, *, unavailable=False, corrupt_page=False, omit_phase1=False,
+                 corrupt_neutral=False, corruption_offset=None):
+        self.tick=10;self.timer=10;self.paused=False;self.live=False;self.resuming=0
+        self.page=None;self.choice=0;self.x=224;self.unavailable=unavailable
+        self.corrupt_page=corrupt_page;self.omit_phase1=omit_phase1;self.controls=[]
+        self.corrupt_neutral=corrupt_neutral;self.neutralized=False
+        self.corruption_offset=corruption_offset or quit_ui.private_effects.TRAILS+0x5F
+        self.ctx=dict(mode="local",input_path="offline_native",clients=[Mock()],both=lambda fn:[fn(0)],
+            debug=SimpleNamespace(observe=Mock(),capture_present=Mock(return_value={"path":"fixture-only.png"})),
+            report={},output=root,hold=self.hold,hold_observed=self.hold_observed,
+            native_advance=self.advance,transport_window=self.transport,candidate_exe_sha256="a"*64)
+
+    def fx(self, client):
+        self.tick+=1
+        if not self.paused:self.timer+=1
+        marker,visible,phase=(1,True,0) if self.live else (0,False,0)
+        if self.resuming and not self.paused:
+            marker,visible,phase=((-1,True,2 if self.omit_phase1 else 1),(-1,True,2),(0,False,0))[min(self.resuming-1,2)]
+            self.resuming+=1
+            if marker==0:self.live=False
+        wire=bytearray(effect_publication(self.tick,timer=self.timer,marker=marker,visible=visible,
+                                         trail_phase=phase,menu=self.paused,unavailable=self.unavailable))
+        wire[0x3C]=int(self.paused)  # Actual P1 owner in the canonical publication.
+        struct.pack_into("<i",wire,0x108,self.x<<16);wire[8:12]=wire[0x108:0x10C]
+        if (self.corrupt_page and self.page==1) or (self.corrupt_neutral and self.neutralized):
+            wire[self.corruption_offset]=0xA7
+        return quit_ui.private_effects.parse_effect_diagnostic(bytes(wire))
+
+    def ui(self, client, debug, *, effect_observation=None):
+        result=row(self.tick,page=self.page or 0,choice=self.choice)
+        result.update(effect_observation.json())
+        result.update(menu=[1,6 if self.page is not None else 0] if self.paused else [0,0],
+                      menu_phase=2 if self.page is not None else 0,
+                      native_play_phase=2 if self.paused else 0)
+        return result
+
+    def transport(self, frames):self.tick+=frames
+    def advance(self, frames, label):
+        self.tick+=frames
+        if not self.paused:self.timer+=frames
+    def hold(self, seat, bits, frames, label):
+        self.controls.append((seat,bits))
+        self.tick+=frames
+        if seat==0 and bits==quit_ui.START:
+            self.paused=not self.paused
+            if not self.paused:self.resuming=1
+        elif self.paused and seat==0:
+            if bits==quit_ui.SELECT:self.page=0;self.choice=0
+            elif bits==quit_ui.DOWN:self.choice=1
+            elif bits==quit_ui.CROSS:
+                if self.page==0 and self.choice==1:self.page=1;self.choice=1
+                elif self.page==1 and self.choice==1:self.page=0;self.choice=0
+                elif self.page==0 and self.choice==0:self.page=None
+                else:raise AssertionError("Fixture received forbidden final Quit confirmation")
+        elif seat==1 and bits==0x20:self.x+=4
+    def hold_observed(self, seat, bits, frames, label, observe):
+        self.controls.append((seat,bits));self.live=True;self.tick+=frames
+        samples=[observe() for _ in range(3)]
+        self.controls.append((seat,0));self.neutralized=True;self.transport(3)
+        return samples
+    def run(self):
+        with patch.object(quit_ui,"verify_original",return_value={}), \
+                patch.object(quit_ui.private_effects,"observe_effects",side_effect=self.fx), \
+                patch.object(quit_ui,"observe_native_quit",side_effect=self.ui):
+            return quit_ui.native_quit_smoke(self.ctx,original_exe="verified",expected_exe_sha256="a"*64,
+                                             scenario="p1_pages_cancel_live_effects")
+
+
+class NativeQuitLiveEffectTests(unittest.TestCase):
+    def test_actual_dash_input_freeze_pages_and_both_native_drain_phases_are_required(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            model=LiveEffectModel(Path(temporary));case=model.run()
+            self.assertEqual(case["status"],quit_ui.SUCCESS)
+            self.assertEqual(case["preexisting_effect_absence_review"],"pending")
+            self.assertEqual(case["ledger_status"],"unverified")
+            self.assertTrue(all(case["effect_reductions"][0]["checks"].values()))
+            self.assertTrue(case["checks"]["preexisting_native_p2_dash_retained_through_quit_pages"])
+            self.assertEqual(model.controls[0],(1,0x6020))
+            self.assertEqual(model.controls[1],(0,quit_ui.START))
+            self.assertIn((1,0),model.controls)
+            self.assertEqual([w["before"]["peers"][0]["quit_page"] for w in case["effect_capture_windows"][:2]],[0,1])
+            reference=case["effects_reference"]["peers"][0]
+            for capture in case["effect_capture_windows"][:2]:
+                for end in ("before","after"):
+                    self.assertEqual(quit_ui.private_pause._pools(capture[end]["peers"][0]),quit_ui.private_pause._pools(reference))
+
+    def test_missing_extension_fails_setup_before_original_input(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            model=LiveEffectModel(Path(temporary),unavailable=True)
+            with self.assertRaisesRegex(quit_ui.NativeQuitError,"full diagnostic"):model.run()
+            self.assertEqual(model.controls,[])
+            self.assertEqual(model.ctx["report"]["native_quit"][0]["status"],"failed_setup")
+
+    def test_one_reserved_pool_byte_change_fails_before_cancel_or_resume(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            for index,offset in enumerate((quit_ui.private_effects.TRAILS+0x5F,
+                                           quit_ui.private_effects.ATTACHED+0x4F,0x122)):
+                with self.subTest(offset=offset):
+                    root=Path(temporary)/str(index);root.mkdir()
+                    model=LiveEffectModel(root,corrupt_page=True,corruption_offset=offset)
+                    with self.assertRaisesRegex(quit_ui.NativeQuitError,"changed preexisting private body/effects"):model.run()
+                    case=model.ctx["report"]["native_quit"][0]
+                    self.assertEqual(case["status"],"failed_behavior")
+                    self.assertEqual(sum(bits==quit_ui.START for seat,bits in model.controls),1)
+                    self.assertNotEqual(case["observations"][-1]["peers"][0],case["effects_reference"]["peers"][0])
+
+    def test_pool_is_frozen_from_first_owned_pause_before_neutral_release(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            model=LiveEffectModel(Path(temporary),corrupt_neutral=True)
+            with self.assertRaisesRegex(quit_ui.NativeQuitError,"changed preexisting private body/effects"):model.run()
+            case=model.ctx["report"]["native_quit"][0]
+            self.assertEqual(case["status"],"failed_behavior")
+            self.assertEqual(case["windows"],[])
+            self.assertFalse(any(bits==quit_ui.SELECT for seat,bits in model.controls))
+
+    def test_retirement_without_observed_phase1_is_a_failed_case(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            model=LiveEffectModel(Path(temporary),omit_phase1=True)
+            with self.assertRaisesRegex(quit_ui.NativeQuitError,"acceptance/resources/phases/retirement"):model.run()
+            case=model.ctx["report"]["native_quit"][0]
+            self.assertEqual(case["status"],"failed_behavior")
+            self.assertFalse(case["effect_reductions"][0]["checks"]["release_drains_without_retrigger"])
+            self.assertNotIn("original_preexisting_dash_resumes_and_retires",case["checks"])
 
 
 if __name__=="__main__":unittest.main()

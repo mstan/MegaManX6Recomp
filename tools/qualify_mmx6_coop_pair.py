@@ -69,7 +69,7 @@ def exercise_native_quit_pair(ctx,*,native_quit,published_input,original_exe,exp
     adapter=published_input.PublishedHeldInput(ctx["clients"],ctx["network"],ctx["transport_window"],report)
     case=native_quit.native_quit_smoke(dict(mode="netplay",input_path="published_host",
         clients=ctx["clients"],both=ctx["both"],debug=ctx["debug"],report=report,output=ctx["output"],
-        hold=adapter.hold,native_advance=ctx["native_advance"],transport_window=ctx["transport_window"],
+        hold=adapter.hold,hold_observed=adapter.hold_observed,native_advance=ctx["native_advance"],transport_window=ctx["transport_window"],
         network=ctx["network"],matched=ctx["matched"],candidate_exe_sha256=expected_sha,same_machine=True,
         candidate_binding=dict(exe_sha256=expected_sha,host_profile=report["host_profile_startup"],
             network_plan=plan,declared_build=report["host_profile_build_manifest"])),
@@ -251,6 +251,7 @@ def run(args) -> dict:
         native_quit=importlib.import_module("mmx6_coop_native_quit")
         published_input=importlib.import_module("mmx6_coop_published_input")
         modules+=(native_quit,native_quit.menu,published_input)
+        if args.native_quit_scenario=="p1_pages_cancel_live_effects":modules+=(native_quit.private_pause,native_quit.private_effects)
     if getattr(args, "private_pause_smoke", False):
         private_pause = importlib.import_module("mmx6_coop_private_pause")
         effects = importlib.import_module("mmx6_coop_private_effects")
@@ -886,7 +887,7 @@ def make_parser():
                         help="Original published P1 pause while P2 native dash effects are retained; fresh exact image, host profile and resolved CRC required")
     parser.add_argument("--contact-pause-contact-smoke", action="store_true",
                         help="Original published P2 body contact before/after its own menu; exact frozen37 candidate, source BIN, host profile and resolved CRC required")
-    parser.add_argument("--native-quit-scenario",choices=("guest_authority","p1_pages_cancel"),
+    parser.add_argument("--native-quit-scenario",choices=("guest_authority","p1_pages_cancel","p1_pages_cancel_live_effects"),
                         help="Separate fresh native Quit authority or primary pages/cancel case; exact image, original EXE, host profile and resolved CRC required")
     parser.add_argument("--original-exe",type=Path,help="Original SLUS_013.95 source for --native-quit-scenario")
     parser.add_argument("--original-disc", type=Path,

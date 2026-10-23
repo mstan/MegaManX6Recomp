@@ -50,6 +50,11 @@ class QuitRunnerOptions(unittest.TestCase):
                            ("--progress-timeout","inf"),("--window-frames","5")):
             self.rejected("--candidate","fresh",*self.identity,flag,value)
 
+    def test_live_effect_pages_are_a_separate_explicit_scenario(self):
+        args=self.parse("--candidate","fresh",*self.identity,"--native-quit-scenario","p1_pages_cancel_live_effects")
+        self.assertEqual(args.native_quit_scenario,"p1_pages_cancel_live_effects")
+        self.assertEqual(self.parse("--candidate","fresh",*self.identity).native_quit_scenario,"guest_authority")
+
 
 class OfflineAdapterProtocolTests(unittest.TestCase):
     def loader(self,root):
@@ -89,6 +94,21 @@ class OfflineAdapterProtocolTests(unittest.TestCase):
         self.assertTrue(report["checks"]["native_private_cards_unchanged"])
         self.assertEqual(report["error_type"],"NativeQuitError")
         control.assert_not_called()  # This adapter does not invent a cleanup/confirm path.
+
+    def test_live_effect_offline_case_receives_the_existing_owned_observed_input(self):
+        args=SimpleNamespace(progress_timeout=12,window_frames=12,native_quit_scenario="p1_pages_cancel_live_effects",
+                             original_exe=Path("verified"),expected_exe_sha256="a"*64)
+        adapter=Mock();report={}
+        def inspect(ctx,**fields):
+            self.assertIs(ctx["hold_observed"],adapter.hold_observed)
+            self.assertEqual(ctx["input_path"],"offline_native")
+            self.assertEqual(fields["scenario"],"p1_pages_cancel_live_effects")
+            return dict(status=helper.SUCCESS,checks=dict(fixture_callback_contract=True))
+        with patch.object(offline.menu_runner,"OfflineMenuAdapter",return_value=adapter), \
+                patch.object(offline,"card_hashes",return_value={}), \
+                patch.object(helper,"native_quit_smoke",side_effect=inspect):
+            offline.make_exercise(args,Path("private"),dict(exe_sha256="a"*64),{})(Mock(),None,Path("output"),report)
+        adapter.settle_idle.assert_called_once()
 
     def test_secondary_card_read_failure_preserves_native_failure(self):
         args=SimpleNamespace(progress_timeout=12,window_frames=12,native_quit_scenario="guest_authority",
@@ -183,6 +203,19 @@ class PairPlanAndPublishedInputTests(unittest.TestCase):
         self.assertEqual([call.args for call in ctx["transport_window"].call_args_list],[(4,),(5,)])
         self.assertFalse(ctx["report"]["checks"]["native_quit_automated_case_completed"])
         self.assertEqual(ctx["report"]["native_quit"][0]["status"],"failed_behavior")
+
+    def test_live_effect_pair_receives_observed_host_input_on_the_same_adapter(self):
+        ctx=self.ctx()
+        def inspect(case_ctx,**fields):
+            self.assertEqual(fields["scenario"],"p1_pages_cancel_live_effects")
+            self.assertIs(case_ctx["hold_observed"].__self__,case_ctx["hold"].__self__)
+            self.assertIsInstance(case_ctx["hold"].__self__,published.PublishedHeldInput)
+            self.assertEqual(case_ctx["input_path"],"published_host")
+            return dict(status=helper.SUCCESS,checks=dict(fixture_callback_contract=True))
+        with patch.object(helper,"native_quit_smoke",side_effect=inspect):
+            exercise_native_quit_pair(ctx,native_quit=helper,published_input=published,original_exe=Path("verified"),
+                expected_sha="a"*64,scenario="p1_pages_cancel_live_effects")
+        for client in ctx["clients"]:client.request.assert_not_called();client.host_input.assert_not_called()
 
 
 if __name__=="__main__":unittest.main()

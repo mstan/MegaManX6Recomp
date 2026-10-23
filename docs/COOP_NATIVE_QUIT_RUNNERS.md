@@ -15,6 +15,29 @@ conversion or an R15 pass. `p1_pages_cancel` exercises the source-mapped
 primary Continue/cancel path and both confirmation pages with wrong-seat
 input rejection, then cancels and resumes native controls.
 
+`p1_pages_cancel_live_effects` is a separate fresh P1 run with a required native
+Zero/P2 dash before opening the menu. It uses the existing owned observed-input
+adapter to hold Right/Circle/Cross (`0x6020`) and accepts the precondition only
+when the current effects diagnostic shows a positive native marker and all
+three live phase0 trails. While those original inputs remain held, the
+observer sends one other-seat P1 Start. Failure to retain those trails in the
+actual P1-owned pause is a setup failure, never an empty-pool substitute. Once
+that pause is observed, any private body/pool or native world-clock change is
+a behavior failure, including during the eventual P2 neutral release.
+
+The full private body, all three trails and all three attached records must
+remain byte-identical through every UI observation, both page windows and
+each completed composed-capture bracket. Both pages still need visual review
+for absence of gameplay bodies, HUD and these preexisting effects. The helper
+does not derive absence from logical visibility or pool retention. After
+actual cancellation and native resume, it observes the same dash's positive
+continuation (an observation ceiling of120 native ticks after pause), then both negative drain
+phases and all trails retired within32 native ticks of the first observed
+negative marker. The existing dash reducer checks original-input receipts,
+personal resources, native links/CLUTs and ordered publication/native-clock
+evidence. No second dash, final Quit, guest write or bank reconstruction
+command supplies the result. The earlier idle scenario remains available.
+
 Use a frozen exact executable and complete build directory. The paired build
 must include its compiled `psx_build_manifest/psx-runtime` manifest/header and
 bundled catalog, not just a copied executable. Set `quitExpectedSha`, the
@@ -44,6 +67,7 @@ Offline, original native pads through the existing `OfflineMenuAdapter`:
 ```powershell
 & $quitPython "$quitTools/qualify_mmx6_coop_native_quit.py" --build $quitBuild --source $quitSource --disc $quitDisc --output "G:/Temp/Codex/psxrecomp/x6-parity/quit-$quitStamp-local-guest" --original-exe $quitOriginal --expected-exe-sha256 $quitExpectedSha --native-quit-scenario guest_authority --port 24898 --timeout 240 --progress-timeout 12 --window-frames 12
 & $quitPython "$quitTools/qualify_mmx6_coop_native_quit.py" --build $quitBuild --source $quitSource --disc $quitDisc --output "G:/Temp/Codex/psxrecomp/x6-parity/quit-$quitStamp-local-primary" --original-exe $quitOriginal --expected-exe-sha256 $quitExpectedSha --native-quit-scenario p1_pages_cancel --port 24898 --timeout 240 --progress-timeout 12 --window-frames 12
+& $quitPython "$quitTools/qualify_mmx6_coop_native_quit.py" --build $quitBuild --source $quitSource --disc $quitDisc --output "G:/Temp/Codex/psxrecomp/x6-parity/quit-$quitStamp-local-primary-live-effects" --original-exe $quitOriginal --expected-exe-sha256 $quitExpectedSha --native-quit-scenario p1_pages_cancel_live_effects --port 24898 --timeout 240 --progress-timeout 12 --window-frames 12
 ```
 
 The alternative `--candidate <new-prepared-profile>` mode requires the same
@@ -62,6 +86,7 @@ Paired, original published host samplers on **this same machine only**:
 ```powershell
 & $quitPython "$quitTools/qualify_mmx6_coop_pair.py" --tools-root $quitTools --build $quitBuild --disc $quitDisc --out "G:/Temp/Codex/psxrecomp/x6-parity/quit-$quitStamp-pair-guest" --original-exe $quitOriginal --expected-exe-sha256 $quitExpectedSha --native-quit-scenario guest_authority --require-host-profile --expected-host-profile $quitHostProfile --expected-host-profile-revision $quitHostRevision --require-state-crc --host-port 24901 --guest-port 24902 --host-udp 29901 --guest-udp 29902 --session 20261023 --timeout 240
 & $quitPython "$quitTools/qualify_mmx6_coop_pair.py" --tools-root $quitTools --build $quitBuild --disc $quitDisc --out "G:/Temp/Codex/psxrecomp/x6-parity/quit-$quitStamp-pair-primary" --original-exe $quitOriginal --expected-exe-sha256 $quitExpectedSha --native-quit-scenario p1_pages_cancel --require-host-profile --expected-host-profile $quitHostProfile --expected-host-profile-revision $quitHostRevision --require-state-crc --host-port 24901 --guest-port 24902 --host-udp 29901 --guest-udp 29902 --session 20261023 --timeout 240
+& $quitPython "$quitTools/qualify_mmx6_coop_pair.py" --tools-root $quitTools --build $quitBuild --disc $quitDisc --out "G:/Temp/Codex/psxrecomp/x6-parity/quit-$quitStamp-pair-primary-live-effects" --original-exe $quitOriginal --expected-exe-sha256 $quitExpectedSha --native-quit-scenario p1_pages_cancel_live_effects --require-host-profile --expected-host-profile $quitHostProfile --expected-host-profile-revision $quitHostRevision --require-state-crc --host-port 24901 --guest-port 24902 --host-udp 29901 --guest-udp 29902 --session 20261023 --timeout 240
 ```
 
 The pair rejects `--admission-only`, `--native-loader-diagnostic` and every
@@ -92,9 +117,21 @@ automation returns `automated_native_quit_bounded_checks_passed_artwork_pending`
 the pair retains its usual aggregate `passed` only if every required guard
 and case check succeeds, with the native case/artwork status separately pending.
 Neither result passes R7/R15 or extends the source audit's stated scope.
+The live-effects case records `effects_reference`, `effects_after_neutral`,
+accepted held/neutral input brackets, all capture brackets, full retirement
+observations and per-peer dash reductions. Its
+`preexisting_effect_absence_review` remains `pending` even if every automated
+check succeeds. A base-only diagnostic cannot run this scenario. Menu/global
+reads remain separate from the one coherent effects publication; no atomic
+UI/effects read, capture frame or cross-peer snapshot is claimed.
 
-Validation:34 pure checks pass:12 helper tests,9 new runner/adapter tests and
-13 paired-option tests (including2 new scenario guards). They cover missing
+Validation for the live-effects extension:82 focused pure tests pass across
+the Quit helper/runners/options and reused private-pause/effects/published-input
+modules. The45 Quit checks include a deterministic input/observation fixture
+for the complete live-effects path, missing-extension refusal before input,
+single-byte private body/trail/attached corruption, neutral-release mutation
+and retirement without observed phase1. Those fixtures are not native or
+artwork evidence. The runner tests preserve missing
 identity/profile/CRC/source guards, incompatible optional routes, catalog/state
 loader overrides, numeric endpoint/cross-link rejection, published input and
 neutral cleanup, baseline-compatible error propagation, original failure

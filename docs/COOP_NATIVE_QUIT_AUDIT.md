@@ -108,6 +108,10 @@ native_quit_smoke(ctx, original_exe=original_slus_path,
 native_quit_smoke(ctx, original_exe=original_slus_path,
     expected_exe_sha256=exact_candidate_sha,
     scenario="p1_pages_cancel", timeout=12, window_frames=12)
+# Separate fresh run requiring preexisting native P2 dash effects:
+native_quit_smoke(ctx, original_exe=original_slus_path,
+    expected_exe_sha256=exact_candidate_sha,
+    scenario="p1_pages_cancel_live_effects", timeout=12, window_frames=12)
 ```
 
 The context matches `mmx6_coop_personal_menu`'s owned accepted-input contract:
@@ -121,6 +125,23 @@ Online additionally requires `same_machine=True`, actual `network()` and
 loopback/listener/PID, matching-build, negotiated profile, default-loader and
 resolved core/mod CRC proof. Online input must be `published_host`; direct
 SIO, private mailbox and RAM fixture paths are rejected by contract.
+
+The optional live-effects scenario additionally requires
+`hold_observed(seat,bits,frames,label,observe)`, supplied by the existing
+`OfflineMenuAdapter` or `PublishedHeldInput`. It must collect at least three
+samples while input is held, allow one nested other-seat Start, and neutralize
+the original seat in `finally`. The helper reuses the source-derived private
+effects diagnostic/parser, visible-window and full-pool freeze checks from
+[the private-effects audit](COOP_PRIVATE_EFFECT_DIAGNOSTIC.md). The full pinned
+original EXE identity above also binds the original trail producer. Circle is
+`0x2000`, Cross `0x4000` and Right `0x20`; actual marker/trails establish native
+acceptance rather than an input acknowledgement. The native positive window
+must still exist when P1's original pause is ready. From that first ready
+pause, full private body/trail/attached bytes and native time remain frozen
+through neutral release, both native pages, wrong-seat probes and their
+composed-capture brackets. After cancellation the original dash must resume,
+show both negative drain phases and retire with retained resources/CLUTs.
+See the [runner commands and bounded continuation/drain contract](COOP_NATIVE_QUIT_RUNNERS.md).
 
 The guest-authority scenario opens Zero's pause and attempts Select. It sends
 no guest Cross if Quit is admitted. A refusal must preserve the owned native
@@ -148,7 +169,7 @@ Automated success is
 R7/R15 pass. Artwork and ledger status remain pending/unverified. Root must
 run the scenarios on fresh private profiles in local and same-machine paired
 modes. Primary final Quit/title/current-data/character reentry, non-empty
-campaign progress, opposite roster, preexisting effect suppression and a
+campaign progress, opposite roster, visually reviewed preexisting effect suppression and a
 subsequent guest-owned menu remain separate requirements. No source card or
 success/unlock/progression writes are allowed to supply those outcomes.
 

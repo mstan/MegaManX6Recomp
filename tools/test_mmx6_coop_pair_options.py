@@ -149,6 +149,17 @@ class PairOptionTests(unittest.TestCase):
                      "--contact-pause-contact-smoke"):
             self.rejected(*self.quit_options(),flag)
 
+    def test_live_effect_quit_preserves_all_native_quit_guards_and_exclusion(self):
+        options=self.quit_options()
+        options[options.index("guest_authority")]="p1_pages_cancel_live_effects"
+        self.assertEqual(self.parse(*options).native_quit_scenario,"p1_pages_cancel_live_effects")
+        for flag,takes_value in (("--original-exe",True),("--expected-exe-sha256",True),
+                                 ("--require-state-crc",False),("--require-host-profile",False)):
+            incomplete=options.copy();at=incomplete.index(flag);del incomplete[at:at+(2 if takes_value else 1)]
+            self.rejected(*incomplete)
+        for flag in ("--native-loader-diagnostic","--admission-only","--private-pause-smoke","--lifecycle-smoke"):
+            self.rejected(*options,flag)
+
 
 if __name__ == "__main__":
     unittest.main()
