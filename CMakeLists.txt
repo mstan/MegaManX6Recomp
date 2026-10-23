@@ -213,6 +213,7 @@ if(BUILD_TESTING)
                 test_mmx6_coop_jump_audio
                 test_mmx6_coop_native_reentry_runner test_qualify_mmx6_coop_jump_audio
                 test_mmx6_coop_recycle_setup test_mmx6_coop_collision_boxes
+                test_qualify_mmx6_coop_recycle_portal
                 test_mmx6_input_capture_hook)
             add_test(NAME mmx6_${_mmx6_python_test}
                 COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/${_mmx6_python_test}.py")

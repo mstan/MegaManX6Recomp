@@ -314,14 +314,25 @@ class Trial:
         """Original X landing enrolls P2 at X+24; never relocate before that."""
         deadline = time.monotonic()+self.entry_timeout
         rows = self.report.setdefault("entry_enrollment_wait",[])
+        native_rows = self.report.setdefault("entry_native_wait",[])
         while time.monotonic() < deadline:
+            native = observe_native(self.control);native_rows.append(native)
             pub = boxes.observe_owned(self.control);rows.append(pub)
             b1,b2 = valid_publication(pub)
             p = pub["observation"]
             require(p["native_mode"] == 10 and not (p["scene_owner"] or p["pause_owner"] or p["native_phase"]) and
                     all(struct.unpack_from("<h",b,0xE)[0] < 2048 for b in (b1,b2)),
                     "Original CP2 enrollment left its living scene-free entry")
-            if p["enrolled"] == 1 and idle(b1):
+            n = native["native"]
+            resident = bytes.fromhex(n["resident_player"]["raw_hex"])
+            native_ready = (n["mode"],n["phase"],n["stage"],n["section"],n["checkpoint"]) == (10,0,4,0,2) and \
+                n["source_closure_present"] and not (n["fade"] or n["freeze"] or n["transition"] or n["shared_entry_lock"]) and \
+                idle(resident) and struct.unpack_from("<i",resident,8)[0] == 480<<16
+            # An initializer receipt does not refresh the co-op publication.
+            # Compare separately attributed native/private P1 observations only
+            # after original CP2 landing; do not infer cross-RPC atomicity.
+            if native_ready and p["enrolled"] == 1 and idle(b1) and \
+                    resident[8:16] == b1[8:16] and resident[0x5C] == b1[0x5C]:
                 return pub
             time.sleep(.015)
         raise debug.DebugError("Original CP2 resident landing/enrollment did not complete")

@@ -1,8 +1,11 @@
 # Owned offline Recycle portal qualifier
 
 `tools/qualify_mmx6_coop_recycle_portal.py` implements one bounded offline
-trial. It has **not run against a native title**. Pure tests establish runner
-boundaries only. R14, rendered artwork, campaign reachability and netplay stay
+trial. Its first v17 native attempt stopped before placement because a cached
+intro publication was mistaken for CP2 enrollment. That retained failure is
+covered by `tests/fixtures/mmx6_recycle_cp2_stale_enrollment_v17.json`; the
+corrected runner requires original CP2 landing and matching P1 observations.
+Pure tests establish runner boundaries only. R14, rendered artwork, campaign reachability and netplay stay
 unverified, including after automated observations complete.
 
 The runner reuses the baseline's hidden muted process, listener/PID ownership,
@@ -38,6 +41,11 @@ X+24; placing both before enrollment could therefore be overwritten to1530
 and accidentally contact the portal. P2's phase1/action0 and null damage
 pointer while entering are permitted native states. A null pointer remains a
 no-contact gate; unavailable bytes for a nonnull pointer are rejected.
+The initializer can finish while diagnostics still contain the intro's
+enrolled idle bodies. The helper therefore separately observes actual CP2
+namespace/source code, fade/entry-lock clearance and native idle X at the
+authored x480, then requires agreeing published P1 position/HP. These remain
+separate RPC observations, without a claim of cross-command atomicity.
 
 Before position commit, the runner verifies the exact original528-byte live
 layout, scratch pointers80097438/8019A4B0/801AF8B0, complete87,040-byte

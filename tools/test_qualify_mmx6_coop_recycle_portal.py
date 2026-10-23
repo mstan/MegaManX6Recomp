@@ -1,6 +1,7 @@
 """Pure offline portal runner boundaries; no runtime process, sockets or cards."""
 import copy
 import io
+import json
 import os
 from pathlib import Path
 import struct
@@ -59,6 +60,14 @@ def observed():
     raw=native()
     row=runner.observe_native(lambda command,**fields:response(int(fields["addr"],0),raw))
     row["native"]["source_closure_present"]=True # Explicit synthetic source gate, not real original evidence.
+    return row
+
+
+def cp2_landed(pub):
+    for key in ("p1_body_hex","p2_body_hex"):
+        body=bytearray.fromhex(pub[key]);struct.pack_into("<i",body,8,480<<16)
+        body[0x18:0x20]=body[8:16];pub[key]=body.hex()
+    row=observed();row["native"]["resident_player"]=runner.portal._body(bytes.fromhex(pub["p1_body_hex"]))
     return row
 
 
@@ -247,13 +256,31 @@ class InputTests(unittest.TestCase):
     def test_waits_for_original_enrollment_before_any_relocation(self):
         trial=self.trial();old=publication();old["observation"]["enrolled"]=0
         enrolled=publication(8,21)
+        landed=cp2_landed(enrolled)
         body=bytearray.fromhex(enrolled["p2_body_hex"]);body[5]=0;body[0x70]=0
         struct.pack_into("<I",body,0x54,0);enrolled["p2_body_hex"]=body.hex()
-        with patch.object(runner.boxes,"observe_owned",side_effect=[old,enrolled]),patch.object(runner.time,"sleep"):
+        with patch.object(runner.boxes,"observe_owned",side_effect=[old,enrolled]), \
+             patch.object(runner,"observe_native",return_value=landed),patch.object(runner.time,"sleep"):
             result=trial.wait_entry_enrollment()
         self.assertEqual(result["observation"]["enrolled"],1)
         self.assertEqual(len(trial.report["entry_enrollment_wait"]),2)
         trial.control.assert_not_called() # P2 native entry remains untouched.
+
+    def test_actual_v17_stale_intro_enrollment_does_not_satisfy_cp2_landing(self):
+        fixture=json.loads((Path(__file__).resolve().parents[1]/
+            "tests/fixtures/mmx6_recycle_cp2_stale_enrollment_v17.json").read_bytes())
+        stale=fixture["publication"];entry=fixture["native_observation"]
+        self.assertEqual(stale["observation"]["tick"],221)
+        self.assertEqual(struct.unpack_from("<i",bytes.fromhex(stale["p1_body_hex"]),8)[0],144<<16)
+        self.assertEqual((entry["native"]["fade"],entry["native"]["shared_entry_lock"]),(1,1))
+        trial=self.trial();fresh=publication(222,1);landed=cp2_landed(fresh)
+        # A ready CP2 native row with old publication is also insufficient.
+        with patch.object(runner.boxes,"observe_owned",side_effect=[stale,stale,fresh]), \
+             patch.object(runner,"observe_native",side_effect=[entry,landed,landed]), \
+             patch.object(runner.time,"sleep"):
+            self.assertIs(trial.wait_entry_enrollment(),fresh)
+        self.assertEqual(len(trial.report["entry_enrollment_wait"]),3)
+        trial.control.assert_not_called()
 
 
 class OptionsTests(unittest.TestCase):
