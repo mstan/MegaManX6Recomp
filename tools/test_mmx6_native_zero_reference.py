@@ -13,18 +13,20 @@ import mmx6_native_zero_reference as reference
 from coop_debug import DebugError
 
 
-def body_and_trails(*,marker=0,visible=False,phase=0):
+def body_and_trails(*,marker=0,visible=False,phase=0,frame=7,trail_frame=None,facing=0,trail_facing=None):
     raw=bytearray(reference.BODY_AND_TRAILS_BYTES)
     raw[0]=raw[2]=raw[3]=raw[4]=1
     raw[5]=6 if marker else 2
-    raw[0x5C]=32;raw[0xE7]=5;raw[0x47]=7
+    raw[0x5C]=32;raw[0xE7]=5;raw[0x47]=frame;raw[0x15]=facing
     struct.pack_into("<b",raw,0x8C,marker)
     struct.pack_into("<I",raw,0x30,0x801EF6D0)
     struct.pack_into("<IIHH",raw,0x38,0x801D0000,0x801C0000,0x0500,0x7800)
     for i in range(3):
         start=reference.TRAILS-reference.PLAYER+i*0x60
         raw[start]=0x11;raw[start+2]=i
-        raw[start+3]=raw[start+4]=int(visible);raw[start+5]=phase;raw[start+0x16]=4;raw[start+0x47]=7
+        raw[start+3]=raw[start+4]=int(visible);raw[start+5]=phase;raw[start+0x16]=4
+        raw[start+0x47]=frame if trail_frame is None else trail_frame
+        raw[start+0x15]=facing if trail_facing is None else trail_facing
         struct.pack_into("<IIHH",raw,start+0x38,0x801D0000,0x801C0000,0x0500,reference.TRAIL_CLUTS[i])
         struct.pack_into("<IHHH",raw,start+0x50,reference.PLAYER if not i else reference.TRAILS+(i-1)*0x60,3,8,(5-i)*2)
     return bytes(raw)
@@ -259,6 +261,45 @@ class ReducerTests(unittest.TestCase):
         self.assertFalse(reference.reduce_native_reference(before,changed,released,active)["native_resources_and_cluts_retained"])
         changed=copy.deepcopy(active);changed[0]["player"]["character"]=0
         self.assertFalse(reference.reduce_native_reference(before,changed,released,active)["native_zero_roster"])
+
+    def test_mid_update_drain_pose_lag_is_retained_without_relaxing_resources(self):
+        before,active,released=self.traces()
+        released[0]=sample(13,marker=-1,visible=True,phase=1,frame=8,trail_frame=7,facing=0x40,trail_facing=0)
+        analysis=reference.native_resource_analysis(before,active,released,active)
+        checks=reference.reduce_native_reference(before,active,released,active)
+        self.assertTrue(all(checks.values()),checks)
+        self.assertTrue(analysis["resources_and_cluts_retained"])
+        lag=analysis["arbitrary_sample_pose_differences"]
+        self.assertEqual(len(lag),1)
+        self.assertEqual((lag[0]["group"],lag[0]["index"],lag[0]["native_timer"],lag[0]["body_frame"]),
+                         ("released",0,13,8))
+        self.assertEqual([(t["slot"],t["frame"],t["facing"],t["phase"]) for t in lag[0]["trails"]],
+                         [(0,7,0,1),(1,7,0,1),(2,7,0,1)])
+        # No raw/source observation is normalized to pretend pose equality.
+        self.assertEqual(released[0]["frame"],8)
+        self.assertEqual(released[0]["trails"][0]["frame"],7)
+
+    def test_positive_and_capture_pose_gates_still_require_current_body_frame_and_facing(self):
+        before,active,released=self.traces()
+        bad=sample(11,marker=1,visible=True,frame=8,trail_frame=7)
+        self.assertFalse(reference.visible_dash(bad))
+        checks=reference.reduce_native_reference(before,[bad,bad],released,active)
+        self.assertFalse(checks["accepted_positive_marker"] or checks["all_native_trails_visible"])
+        for bad_capture in (bad,sample(11,marker=1,visible=True,facing=0x40,trail_facing=0)):
+            checks=reference.reduce_native_reference(before,active,released,[bad_capture,active[1]])
+            self.assertFalse(checks["capture_bracketed_by_visible_dash"])
+
+    def test_resource_links_pages_and_cluts_are_exact_on_every_sample_including_capture(self):
+        for group in ("before","active","released","capture_window"):
+            for fields in (("compression",),("assembly",),("page",),("clut",),
+                           ("trails","parent"),("trails","compression"),("trails","assembly"),
+                           ("trails","page"),("trails","clut")):
+                before,active,released=self.traces();captures=copy.deepcopy(active)
+                row={"before":before,"active":active[0],"released":released[0],"capture_window":captures[1]}[group]
+                target=row["trails"][1] if fields[0]=="trails" else row
+                target[fields[-1]]^=0x10
+                with self.subTest(group=group,fields=fields):
+                    self.assertFalse(reference.reduce_native_reference(before,active,released,captures)["native_resources_and_cluts_retained"])
         self.assertFalse(reference.reduce_native_reference(before,active,released,active,max_drain_ticks=8)["finite_retirement"])
 
 
@@ -525,6 +566,17 @@ class OwnershipAndSelectionTests(unittest.TestCase):
 
 @unittest.skipUnless(os.environ.get("MMX6_CONTENT_DISC"),"Set explicit original raw disc path for source guards")
 class OriginalSourcesTests(unittest.TestCase):
+    def test_original_player_trail_order_pose_copies_and_constructor_are_live_guarded(self):
+        sources=reference.load_sources(Path(os.environ["MMX6_CONTENT_DISC"]))
+        jal=lambda address:0x0C000000|((address>>2)&0x03FFFFFF)
+        expected={0x80020C60:jal(0x80034DCC),0x80020CF0:jal(0x80020DC8),0x80020DF0:jal(0x80020E1C),
+                  0x80020E38:0xA0C30047,0x80020E44:0xA0C20015,0x80020E50:0xACC30038,0x80020E68:0xACC5003C,
+                  0x8003C00C:0xA4850040,0x8003C018:0xA4830042}
+        for address,word in expected.items():
+            with self.subTest(address=hex(address)):
+                self.assertEqual(struct.unpack_from("<I",sources["exe"],address-sources["exe_base"])[0],word)
+                self.assertTrue(any(first<=address and address+4<=end for first,end in reference.EXE_GUARDS))
+
     def test_original_source_bundle_and_all_runtime_guard_extents_are_bounded(self):
         sources=reference.load_sources(Path(os.environ["MMX6_CONTENT_DISC"]))
         for key,base,windows in (("exe",sources["exe_base"],reference.EXE_GUARDS),

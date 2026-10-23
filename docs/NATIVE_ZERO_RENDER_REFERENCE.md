@@ -232,8 +232,9 @@ diagnostic evidence, not a framework CRC or simulation digest. Native links,
 fields, CLUTs, phases and counters still use the strict `NativeEffect` codec;
 the signed native producer is body`+8C`, not an input acknowledgment.
 
-The single-RPC fix was tested without a native launch or title build. A fresh
-owned run must still qualify dash/artwork behavior; no old result is promoted.
+The single-RPC fix was implemented without a native launch or title build in
+its lane. The subsequent owning-runner receipt below contains38 accepted
+atomic reads. No old result is promoted.
 
 The case captures a completed composed idle image, then holds original P1
 Right+Circle+Cross (`6020h` active-high; NativePad active-low`9FDFh`) with
@@ -268,6 +269,75 @@ retirement within32 observed timer ticks of the first negative sample.
 The overall release window is bounded at64 ticks. These are observed clock
 windows, not proof that one clock tick equals one own helper invocation.
 
+### Resource retention and native pose update order
+
+The owning-runner attempt
+`G:/Temp/Codex/psxrecomp/x6-parity/native-zero-reference-v12-e2e47e6-atomic/qualification.json`
+has SHA256 `ae344de521e3a0695e6ee640b0fbc11490c37914f597655b41dad3c5af248a2b`.
+It remains `failed` with seven of the original eight checks true. On exact
+image `229ffec7a7dabda9742653264e1d023adde408602003df7f48b4c4d3f758d8e6`
+it retained38 accepted atomic reads, two completed composed captures, original
+positive dash input, negative trail phases1/2 and complete retirement. There
+were no case/cleanup errors; the owned process quit with ACK and exit0.
+
+The only false predicate was `native_resources_and_cluts_retained`. Its old
+definition also required every trail's pose to equal the **current** body pose
+at every arbitrary observation. Exactly one row violated that extra condition:
+`released[17]`, native timer47, marker-1, all three trails active/visible phase1.
+The body frame was `24h`, the trails were `23h`, and all facings were `40h`.
+The atomic source-payload SHA is
+`0d75cd6a4c5ecd7262324e555edcf35f85049118e48d96fabd7756106fd0dac7`.
+The following timer47 sample has body/trail frame`24h`. All compression,
+assembly, page, CLUT and native parent tuples stayed exactly equal to the
+before sample throughout. CPU and GL palette receipts also have equal SHA
+`1c11dd711f5a8215681ade1a33e9d226c404bba65a140841c734241657662e41`;
+the correction changes no palette parsing or acceptance requirement.
+
+The clean original EXE explains the pose difference without altering the raw
+observation:
+
+| Original source | Consequence |
+| --- | --- |
+| `80020C60 -> 80034DCC`, then `80020CF0 -> 80020DC8` | The native player update precedes trail refresh. A safe-point RAM observation is not a fence after the complete player/trail pass. |
+| `80020DF0 -> 80020E1C`, loop stride`60h`, three slots | The three trails are updated sequentially. There is no all-slot atomic pose publication. |
+| `80020E30..80020E68` | Every invocation copies PLAYER frame`+47`, facing`+15`, compression`+38` and assembly`+3C` into that trail before its active/phase branches. A body pose can change before these copies complete. |
+| `8003BFBC..8003C03C` | The constructor copies native resources/page and installs CLUTs`780Dh/780Eh/780Fh` and the PLAYER/previous-trail parent chain. These remain resource/identity invariants. |
+
+The expanded live guard now covers `80020C40..800210D0`, original-source SHA256
+`74bb77b92428e4cea18687f70d6e33407e05d50d0f065876af38408e015fddc1`.
+The existing player-init guard already includes the constructor span above,
+whose exact source SHA256 is
+`d327e497114fd2aa25b54a89fcf693a63784ea35815d304db44529d28531aebf`.
+Source tests verify the literal native call/copy instructions and guard
+coverage. The extra live caller-order guard was not run retroactively in the
+historical capture; future helper runs require it before input.
+
+The corrected resource predicate retains every owner/trail
+compression/assembly/page/CLUT and parent tuple check on every sample. It also
+applies those checks to both completed-capture bracket samples. Only the
+unsupported all-arbitrary-samples frame/facing equality is removed from that
+resource predicate. `visible_dash` and the accepted positive/composed-capture
+gates still require all three visible phase0 trails to match the current body
+frame, facing and native resources. A lagged pose is not normalized into an
+accepted capture. Native phase/drain/timer/retirement and personal-resource
+checks remain unchanged.
+
+New receipts include `resource_analysis.arbitrary_sample_pose_differences`,
+which preserves each differing group/index, clock, marker, exact body/trail
+poses, phase and atomic source hash. This does not infer a completed world
+cycle or a general time bound for pose lag.
+
+Read-only reanalysis is retained separately at
+`G:/Temp/Codex/psxrecomp/x6-parity/native-zero-reference-v12-e2e47e6-atomic-resource-reanalysis.json`,
+SHA256 `66c45af9ed752eb6398015b49f9d31112d8b479d511d4270a8bbc88329cf052d`.
+The corrected reducer returns eight true checks for the retained rows while
+that artifact explicitly preserves the original `failed` status and its hash.
+It records helper SHA256
+`26f58a78d6f6ea97a0d5d8b84915716be6964f898765570ced62fafaec9c3fb5`.
+This is source-backed predicate reanalysis, not another native run, new live
+guard qualification, artwork approval or a ledger pass. Artwork and ledger
+status remain pending/unverified.
+
 Fresh output is `candidate/native-zero-reference/` with idle/positive composed
 images and `reference.json`. Errors retain setup writes, inputs, native rows,
 captures, binding and cleanup failures already observed. Reusing the folder
@@ -287,7 +357,7 @@ python -m unittest test_mmx6_native_zero_reference
 ```
 
 Set `MMX6_CONTENT_DISC` to the explicit legitimate raw disc path to include
-the original-source guard test. Twenty-seven fixtures cover real-state setup and
+the original-source guard tests. Thirty-one fixtures cover real-state setup and
 drift, source cards/non-pristine profiles, listener/image/online rejection,
 source guards, exact record reads/links, original unit navigation and bypass
 boundaries, held input cleanup, source palette framing, positive capture
@@ -301,5 +371,10 @@ Snapshot fixtures require clock/body/pools from one exact RPC, reject wrong
 addresses/counts/lengths/encoding and invalid links, retain failed requests,
 and refuse unsupported atomic mapping before any dash input. Split-read
 fallback is forbidden. Synthetic responses establish protocol behavior only.
+Resource regressions accept source-compatible arbitrary drain-pose lag without
+changing the raw rows, keep strict positive/capture pose gates, and reject
+owner/trail resource, link, page or CLUT corruption in before, active, released
+and capture samples. The optional source checks cover original call order,
+per-trail copies and constructor instructions with live-guard coverage.
 The modeled native responses are test contracts, not original-game execution
 or artwork evidence. No SDK/plugin/profile/ledger/CMake files are changed.

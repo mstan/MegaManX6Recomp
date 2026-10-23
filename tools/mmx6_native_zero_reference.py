@@ -38,7 +38,7 @@ ZERO_SHA = "75a142a529ddc70f0d60ee6be32ebcdb0cf5cc90ec88e965c3b15cf0c6d21b00"
 DISABLED_STATE = "native-zero-reference-state.json"
 EXE_GUARDS = ((0x8001E6E4,0x8001E730), (0x8001E8CC,0x8001E914),
               (0x80013BF0,0x80013D10), (0x8003BD24,0x8003C140),
-              (0x80020DC8,0x800210D0), (0x80022960,0x80022BD8),
+              (0x80020C40,0x800210D0), (0x80022960,0x80022BD8),
               (0x80012A34,0x80012B44), (0x800100B4,0x800100D0),
               (0x80021C20,0x80021C50), (0x80021FC4,0x80022014))
 MENU_GUARDS = ((0x800E9898,0x800E99A4), (0x800EA894,0x800EAEF8), (0x800EB080,0x800EB1E8),
@@ -518,6 +518,34 @@ def read_trail_palettes(session) -> dict:
     return result
 
 
+def native_resource_analysis(before,active,released,capture_window) -> dict:
+    """Resources stay exact; arbitrary safe-point samples need not finish a pass.
+
+    80020C60 updates PLAYER before80020CF0 enters the three-slot trail loop.
+    Each80020E1C invocation copies frame/facing at+47/+15 independently.
+    Pose lag is retained as evidence, never normalized into a capture candidate.
+    """
+    groups=(("before",[before]),("active",active),("released",released),("capture_window",capture_window))
+    rows=[row for _,values in groups for row in values]
+    resource=lambda r:(r["compression"],r["assembly"],r["page"],r["clut"],
+        tuple((t["parent"],t["compression"],t["assembly"],t["page"],t["clut"]) for t in r["trails"]))
+    retained=all(resource(row)==resource(before) and all(
+        (trail["compression"],trail["assembly"])==(row["compression"],row["assembly"])
+        for trail in row["trails"]) for row in rows)
+    lag=[]
+    for group,values in groups:
+        for index,row in enumerate(values):
+            differences=[dict(slot=trail["slot"],frame=trail["frame"],facing=trail["facing"],
+                              visible=trail["visible"],active=trail["active"],phase=trail["phase"])
+                         for trail in row["trails"] if (trail["frame"],trail["facing"])!=(row["frame"],row["facing"])]
+            if differences:
+                lag.append(dict(group=group,index=index,native_timer=row["native_timer"],marker=row["marker"],
+                    body_frame=row["frame"],body_facing=row["facing"],trails=differences,
+                    source_sha256=row.get("native_snapshot",{}).get("source_sha256")))
+    return dict(resources_and_cluts_retained=retained,arbitrary_sample_pose_differences=lag,
+                pose_rule="Current-body pose equality is enforced by visible_dash for accepted positive/capture samples; arbitrary update-boundary pose lag is not a resource change")
+
+
 def reduce_native_reference(before,active,released,capture_window,*,max_drain_ticks=32) -> dict:
     checks=dict(native_zero_roster=False,accepted_positive_marker=False,all_native_trails_visible=False,
                 capture_bracketed_by_visible_dash=False,negative_drain_phases=False,finite_retirement=False,
@@ -538,11 +566,7 @@ def reduce_native_reference(before,active,released,capture_window,*,max_drain_ti
     delta=(last["native_timer"]-draining[0]["native_timer"])&0xFFFFFFFF if draining else 0xFFFFFFFF
     checks["finite_retirement"]=(checks["negative_drain_phases"] and 0<delta<=max_drain_ticks and last["marker"]==0 and
                                   all(t["visible"]==t["active"]==0 for t in last["trails"]))
-    resource=lambda r:(r["compression"],r["assembly"],r["page"],r["clut"],
-        tuple((t["parent"],t["compression"],t["assembly"],t["page"],t["clut"]) for t in r["trails"]))
-    checks["native_resources_and_cluts_retained"]=all(resource(r)==resource(before) and all(
-        (t["compression"],t["assembly"],t["frame"],t["facing"])==(r["compression"],r["assembly"],r["frame"],r["facing"])
-        for t in r["trails"]) for r in rows)
+    checks["native_resources_and_cluts_retained"]=native_resource_analysis(before,active,released,capture_window)["resources_and_cluts_retained"]
     return checks
 
 
@@ -641,6 +665,7 @@ def run_native_zero_reference(process,port: int,candidate: Path,original_disc: P
             if now["marker"]==0 and all(t["visible"]==t["active"]==0 for t in now["trails"]):break
             time.sleep(.005)
         else:raise debug.DebugError("Native Zero reference drain/retirement deadline expired")
+        report["resource_analysis"]=native_resource_analysis(before,active,released,capture_window)
         report["checks"]=reduce_native_reference(before,active,released,capture_window)
         report["status"]="reference_observations_completed_artwork_pending" if all(report["checks"].values()) else "failed"
     except Exception as error:
