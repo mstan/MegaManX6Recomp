@@ -145,7 +145,8 @@ if(BUILD_TESTING)
     if(Python3_Interpreter_FOUND AND Python3_VERSION VERSION_GREATER_EQUAL 3.11)
         foreach(_mmx6_python_test test_coop_debug_protocol test_mmx6_coop_reference
                 test_mmx6_coop_content test_mmx6_coop_audio_audit test_mmx6_audio_driver_audit
-                test_prepare_mmx6_coop_playtest test_mmx6_coop_enemy_admission)
+                test_prepare_mmx6_coop_playtest test_mmx6_coop_enemy_admission
+                test_mmx6_coop_pair_options test_mmx6_build_provenance)
             add_test(NAME mmx6_${_mmx6_python_test}
                 COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/${_mmx6_python_test}.py")
         endforeach()
