@@ -1,0 +1,287 @@
+{
+  "schema": 1,
+  "kind": "original_native_final_quit_reentry_source_mapping",
+  "status": "source_mapped_runtime_unverified",
+  "game_source_reviewed": "62037b677c553c2127a48f88552a38840f24c8ce",
+  "original": {
+    "raw_disc": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\disc\\Mega Man X6 (USA) (v1.1).bin",
+    "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "archive_sha256": "55b03e4ecc13d6110ff300f80b7000b0f97234e19f1b846aa2b885eece30d80f",
+    "members": [
+      {
+        "index": 16,
+        "sector": 381,
+        "size": 33946,
+        "sha256": "c9211aee86c5e7377b7716bd698102da1aed8c57a128e90507259cf9f6093ecf",
+        "role": "menu"
+      },
+      {
+        "index": 18,
+        "sector": 401,
+        "size": 32488,
+        "sha256": "3ae703ad03b2bbc4b71fc09e5f418e1e87ffd49a4a6a4240e69172fb87036166",
+        "role": "title"
+      }
+    ]
+  },
+  "runtime_code_windows": [
+    {
+      "member": "exe",
+      "address": "8001CF78",
+      "end_exclusive": "8001D2A0",
+      "bytes": 808,
+      "sha256": "8f31b43d0957616dca2a5f6f4ae9e581a29736a935efab6143e9841f41075840"
+    },
+    {
+      "member": "exe",
+      "address": "8001D930",
+      "end_exclusive": "8001DBAC",
+      "bytes": 636,
+      "sha256": "5630c8efb4704925af80793aa1452d8189143078bef5e12c6a94503a26a17f25"
+    },
+    {
+      "member": "exe",
+      "address": "8001DE10",
+      "end_exclusive": "8001E1BC",
+      "bytes": 940,
+      "sha256": "35f783a0567c313f3abc115e0355992da84922f6301d56c90b0155204c35afe3"
+    },
+    {
+      "member": "exe",
+      "address": "8001E6E4",
+      "end_exclusive": "8001E730",
+      "bytes": 76,
+      "sha256": "d3f0223b56f2141fd57d28d785917818632669b1d83a29c816f33bab9eb7908a"
+    },
+    {
+      "member": "exe",
+      "address": "8001E880",
+      "end_exclusive": "8001E914",
+      "bytes": 148,
+      "sha256": "eff01f8fc5be661306850fdef42058711d721883f12fe97a7344581f484bb3ce"
+    },
+    {
+      "member": "exe",
+      "address": "8001FD10",
+      "end_exclusive": "8001FE74",
+      "bytes": 356,
+      "sha256": "61d1a95c84ac1e20b87557a7ebc922487293485c7fe2e3bde54713dab41dfa97"
+    },
+    {
+      "member": "exe",
+      "address": "8001BA1C",
+      "end_exclusive": "8001BD40",
+      "bytes": 804,
+      "sha256": "1ab0bad5c14c9da324c5a3ec480a60e707beb65a118506e82e02ebb9cb8bde73"
+    },
+    {
+      "member": "exe",
+      "address": "80012A34",
+      "end_exclusive": "80012B44",
+      "bytes": 272,
+      "sha256": "427b7e373e2be018a1647198ab1d79335541c5229d0197e32bf0d7262342b885"
+    },
+    {
+      "member": "exe",
+      "address": "80021FC4",
+      "end_exclusive": "80022014",
+      "bytes": 80,
+      "sha256": "af8a9bfd68b2da45d8895ad0c8daa636083286a7964c7aee2d3fdd2f1216efb7"
+    },
+    {
+      "member": "title",
+      "address": "800EA62C",
+      "end_exclusive": "800EA9D0",
+      "bytes": 932,
+      "sha256": "df1adc3a702c8a6b37dabb0062b47033d31f2cc64d6952176347b6d6bcd6c348"
+    },
+    {
+      "member": "title",
+      "address": "800ED760",
+      "end_exclusive": "800ED87C",
+      "bytes": 284,
+      "sha256": "b5c78a856d9b67b4fba01bce817fbf9615a7a601da6f3b28b609fd0b7d2bb6ca"
+    },
+    {
+      "member": "title",
+      "address": "800F08FC",
+      "end_exclusive": "800F0928",
+      "bytes": 44,
+      "sha256": "e8bd0918ec537b5e03fafc72b446094ba7ce838cd46e930f96abc93e7f234396"
+    },
+    {
+      "member": "menu",
+      "address": "800E9898",
+      "end_exclusive": "800E99A4",
+      "bytes": 268,
+      "sha256": "1a6fd680b1e11784ebbadd24f595db348f0f98a7c863ceb514e4b7825c2863c1"
+    },
+    {
+      "member": "menu",
+      "address": "800EA894",
+      "end_exclusive": "800EAEF8",
+      "bytes": 1636,
+      "sha256": "bbf2e98733115bc19e5e59c85250f6ce78b90646571b6839473169ed3142e3f0"
+    },
+    {
+      "member": "menu",
+      "address": "800EB080",
+      "end_exclusive": "800EB1E8",
+      "bytes": 360,
+      "sha256": "450afc286d2451bf6bda7a4b68e5d7cbea177fc7433f4abe120dee52631dfd8d"
+    },
+    {
+      "member": "menu",
+      "address": "800ECD80",
+      "end_exclusive": "800ECDE4",
+      "bytes": 100,
+      "sha256": "ab42a562b0c1b90841f6b5857c9feb1ded0b5c54f378856c7b1fa0efdd28ffb4"
+    },
+    {
+      "member": "menu",
+      "address": "800ED648",
+      "end_exclusive": "800ED71C",
+      "bytes": 212,
+      "sha256": "74e73da8961fea8d0f740e5de835518fdbdd75e36b9600c438b2d12e073b302e"
+    },
+    {
+      "member": "menu",
+      "address": "800F0F40",
+      "end_exclusive": "800F0F6C",
+      "bytes": 44,
+      "sha256": "88b4f16bedc1b937e6fed870e6931bdfaf37ab6598bf79eac88fe208ff8888cc"
+    },
+    {
+      "member": "menu",
+      "address": "800F1060",
+      "end_exclusive": "800F1098",
+      "bytes": 56,
+      "sha256": "e6f040b0087ed196dfe637a189540804da6a9e20c698e75af0e94e52af10d567"
+    }
+  ],
+  "ordinary_ram_snapshot": {
+    "address": "80070CC4",
+    "end_exclusive": "800CF84C",
+    "bytes": 387976,
+    "hex_chars": 775952
+  },
+  "persistent_imports": [
+    {
+      "saved_offset": "0x4",
+      "play_offset": "0x70",
+      "bytes": 4
+    },
+    {
+      "saved_offset": "0x8",
+      "play_offset": "0x74",
+      "bytes": 8
+    },
+    {
+      "saved_offset": "0x10",
+      "play_offset": "0x6c",
+      "bytes": 4
+    },
+    {
+      "saved_offset": "0x14",
+      "play_offset": "0x6a",
+      "bytes": 2
+    },
+    {
+      "saved_offset": "0x36",
+      "play_offset": "0x5b",
+      "bytes": 2
+    },
+    {
+      "saved_offset": "0x38",
+      "play_offset": "0x61",
+      "bytes": 2
+    },
+    {
+      "saved_offset": "0x3a",
+      "play_offset": "0x60",
+      "bytes": 1
+    },
+    {
+      "saved_offset": "0x3b",
+      "play_offset": "0x5f",
+      "bytes": 1
+    },
+    {
+      "saved_offset": "0x3c",
+      "play_offset": "0x69",
+      "bytes": 1
+    },
+    {
+      "saved_offset": "0x3d",
+      "play_offset": "0x8d",
+      "bytes": 2
+    },
+    {
+      "saved_offset": "0x40",
+      "play_offset": "0xcc",
+      "bytes": 4
+    },
+    {
+      "saved_offset": "0x44",
+      "play_offset": "0xd8",
+      "bytes": 64
+    },
+    {
+      "saved_offset": "0x84",
+      "play_offset": "0x9e",
+      "bytes": 42
+    },
+    {
+      "saved_offset": "0xb8",
+      "play_offset": "0xd2",
+      "bytes": 4
+    },
+    {
+      "saved_offset": "0xbc",
+      "play_offset": "0x168",
+      "bytes": 16
+    },
+    {
+      "saved_offset": "0xcc",
+      "play_offset": "0xc9",
+      "bytes": 1
+    },
+    {
+      "saved_offset": "0xcd",
+      "play_offset": "0x438",
+      "bytes": 1
+    },
+    {
+      "saved_offset": "0xce",
+      "play_offset": "0x178",
+      "bytes": 704
+    },
+    {
+      "saved_offset": "0x390",
+      "play_offset": "0x43c",
+      "bytes": 36
+    },
+    {
+      "saved_offset": "0x3b4",
+      "play_offset": "0x465",
+      "bytes": 3
+    }
+  ],
+  "native_current_header": {
+    "address": "80070CC4",
+    "ineligible": 255,
+    "observation": "No native current header was observed in this source-only task"
+  },
+  "routes": [
+    "primary_final_quit_title_current_data_map_unit0_native_reentry_guest_menu",
+    "primary_final_quit_title_new_game_native_defaults_reentry_guest_menu"
+  ],
+  "limits": [
+    "No native run or ledger pass",
+    "New Game is not acquired-current-data preservation",
+    "Empty current header must fail before Quit controls",
+    "Native card load/save and earned-progress coverage are separate",
+    "Post-reentry guest Select authority is a separate existing probe",
+    "No original binary bytes committed"
+  ]
+}
