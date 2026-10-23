@@ -213,6 +213,10 @@ if(BUILD_TESTING)
                 test_mmx6_coop_jump_audio
                 test_mmx6_coop_native_reentry_runner test_qualify_mmx6_coop_jump_audio
                 test_mmx6_coop_jump_audio_private
+                test_mmx6_coop_jump_audio_pair
+                test_mmx6_private_action_audio_audit
+                test_mmx6_recycle_return_audit
+                test_mmx6_body_audio_routes
                 test_mmx6_coop_recycle_setup test_mmx6_coop_collision_boxes
                 test_qualify_mmx6_coop_recycle_portal
                 test_mmx6_coop_reploid059

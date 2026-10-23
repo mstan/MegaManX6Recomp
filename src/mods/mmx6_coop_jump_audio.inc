@@ -1,5 +1,5 @@
-/* Included after guest()/capture()/project(). Only original Zero ground-jump
- * records are private; all other native sounds retain their original route. */
+/* Included after guest()/capture()/project(). Original Zero ground-jump
+ * vocals and body-owned group1 records1..8 use retained private samples. */
 #include "mmx6_coop_jump_audio.h"
 #include "psx_sha256.h"
 #include "spu.h"
@@ -16,7 +16,7 @@ static unsigned jump_audio_slot,jump_audio_bank,jump_audio_tone,jump_audio_mode,
 static uint32_t jump_audio_stop_mask;
 static uint16_t jump_audio_registers[8];
 enum { JUMP_DRIVER=0x800E4E30u,JUMP_DRIVER_BYTES=0x900,
-       JUMP_STOP_MASK=(1u<<20)|(1u<<22) };
+       JUMP_STOP_MASK=(1u<<20)|(1u<<22)|(1u<<23) };
 
 static int jump_audio_slot_available(unsigned slot,uint32_t bank,uint32_t epoch) {
     SpuVoiceState voice;
@@ -29,8 +29,10 @@ static int jump_audio_stop_owned(uint32_t mask) {
         uint32_t owned=0;
         if((mask&(1u<<20)) && jump_audio_slot_available(20,31,epoch))owned|=1u<<20;
         if((mask&(1u<<22)) && jump_audio_slot_available(22,30,epoch))owned|=1u<<22;
+        if((mask&(1u<<23)) && jump_audio_slot_available(23,30,epoch))owned|=1u<<23;
         if(owned&(1u<<20))psx_mod_spu_private_voice_volume(20,0,0);
         if(owned&(1u<<22))psx_mod_spu_private_voice_volume(22,0,0);
+        if(owned&(1u<<23))psx_mod_spu_private_voice_volume(23,0,0);
         if(owned)psx_mod_spu_private_voice_stop(owned);
         return owned==mask;
     }
@@ -45,7 +47,8 @@ static int jump_audio_fault(const char *reason) {
 static int jump_audio_bind(void) {
     uint32_t epoch=psx_mod_spu_sample_bank_epoch();
     if(!jump_audio_loaded || !epoch)return 0;
-    if(!jump_audio_slot_available(20,31,epoch) || !jump_audio_slot_available(22,30,epoch))return 0;
+    if(!jump_audio_slot_available(20,31,epoch) || !jump_audio_slot_available(22,30,epoch) ||
+       !jump_audio_slot_available(23,30,epoch))return 0;
     if(epoch==jump_audio_bound_epoch)return 1;
     if(epoch!=jump_audio_owned_epoch && (psx_mod_spu_private_voice_active()&JUMP_STOP_MASK))return 0;
     for(unsigned i=0;i<2;++i) {
@@ -65,7 +68,8 @@ static int jump_audio_ready(void) {
             b->layout.sample_bytes>=0x80000u)return 0;
     }
     return jump_audio_slot_available(20,31,jump_audio_bound_epoch) &&
-           jump_audio_slot_available(22,30,jump_audio_bound_epoch);
+           jump_audio_slot_available(22,30,jump_audio_bound_epoch) &&
+           jump_audio_slot_available(23,30,jump_audio_bound_epoch);
 }
 static int jump_audio_activate(void) {
     jump_audio_stop_private();
@@ -130,7 +134,26 @@ static int jump_audio_projected(void) {
         !(psx_mod_read_byte(PLAY+0x5F)&0x20);
 }
 static int jump_audio_record(unsigned group,unsigned record) {
-    return (group==1 && record==1) || (group==3 && (record==2 || record==4 || record==7));
+    return (group==1 && record>=1 && record<=8) || (group==3 && (record==2 || record==4 || record==7));
+}
+static unsigned jump_audio_record_slot(unsigned group,unsigned record) {
+    return group==3?20u:record>=7?23u:22u;
+}
+static unsigned jump_audio_record_tone(unsigned group,unsigned record) {
+    /* Retained original records, validated by prepare_header: record2 skips
+     * tone2, so record and tone are deliberately not interchangeable. */
+    return group==1 && record>=2?record+1u:record;
+}
+static int jump_audio_body_stop(CPUState *cpu,unsigned record) {
+    /* STOP has no actor argument. Only these original callers retain the
+     * affected player in s0. Phase2 admits only its exact two entry stops. */
+    if(cpu->gpr[16]!=PLAYER)return 0;
+    unsigned phase=psx_mod_read_byte(PLAYER+4);uint32_t ra=cpu->gpr[31];
+    if(phase==2)return (record==5 && ra==0x8003D8C4u) || (record==7 && ra==0x8003D8D0u);
+    if(phase!=1)return 0;
+    if(record==5)return ra==0x80038604u || ra==0x800386F4u || ra==0x800387ECu ||
+        ra==0x80038900u || ra==0x8003B23Cu;
+    return record==7 && (ra==0x8003F49Cu || ra==0x8003F614u);
 }
 static int jump_audio_free_native_slots(void) {
     const uint32_t tables[]={0x800E5588u,0x800E55C8u,0x800E5610u,0x800E56A8u,0x800E56F0u};
@@ -190,7 +213,11 @@ static int jump_audio_sound(CPUState *cpu,uint32_t address) {
     if(jump_audio_call || !jump_audio_projected() || !jump_audio_record(group,record) || cpu->gpr[6]!=PLAYER)return 0;
     if(group==3) {
         if(cpu->gpr[31]!=0x8003D004u || psx_mod_read_word(cpu->gpr[29]+16)!=0x8003AFCCu)return 0;
-    } else if(cpu->gpr[31]!=0x800356F4u || psx_mod_read_byte(PLAYER+5)!=6)return 0;
+    }
+    /* SOUND supplies its spatial actor. While Zero is projected, an exact
+     * PLAYER argument proves body ownership; child/shared actors are excluded.
+     * Include every body record on22/23 so later STOP5/7 cannot leave an
+     * earlier native P2 play behind on P1's hardware. */
     /* Native channel-disabled semantics are unchanged and issue no KEYON. */
     if(psx_mod_read_byte(0x80090D50u+group)==255)return 0;
     if(!jump_audio_bind() || !jump_audio_free_native_slots() || psx_mod_read_half(0x800E5652u)!=128 ||
@@ -207,7 +234,8 @@ static int jump_audio_sound(CPUState *cpu,uint32_t address) {
     if(!mmx6_state_can_call()) {
         state_track.count=prior;jump_audio_fault("host transaction capacity");cpu->gpr[2]=UINT32_MAX;return 1;
     }
-    jump_audio_call=1;jump_audio_slot=group==1?22:20;jump_audio_bank=group==1?30:31;jump_audio_tone=record;
+    jump_audio_call=1;jump_audio_slot=jump_audio_record_slot(group,record);
+    jump_audio_bank=group==1?30:31;jump_audio_tone=jump_audio_record_tone(group,record);
     jump_audio_calculated=jump_audio_faulted=jump_audio_mode=0;memset(jump_audio_registers,0,sizeof jump_audio_registers);
     jump_audio_install_tables();JumpAudioBank *b=&jump_audio_banks[group==3];
     psx_mod_write_word(0x80097738u+group*4u,b->guest+b->layout.vab);
@@ -236,6 +264,15 @@ static int jump_audio_stop(CPUState *cpu,uint32_t address) {
         if(!jump_audio_stop_owned(JUMP_STOP_MASK))jump_audio_fault("private global stop ownership");
         jump_audio_stop_call=0;jump_audio_stop_mask=0;cpu->gpr[2]=result;return 1;
     }
+    if(group==1 && (record==5 || record==7)) {
+        /* Explicit ownership and death entry are separate from phase1 jump
+         * admission. Do not call native volume-zero/KEYOFF on P1 hardware. */
+        if(!ready || !enrolled || failed || !(zero_projected || zero_world) ||
+           psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAYER+2)!=1 ||
+           psx_mod_read_byte(PLAYER+0xE7)!=5 || !jump_audio_body_stop(cpu,record))return 0;
+        if(!jump_audio_stop_owned(1u<<jump_audio_record_slot(group,record)))jump_audio_fault("private body stop ownership");
+        cpu->gpr[2]=0xFF000000u;return 1;
+    }
     if(!jump_audio_projected())return 0;
     if(!jump_audio_record(group,record)) {
         /* Other sounds remain native. A native stop for another record can
@@ -255,7 +292,7 @@ static int jump_audio_stop(CPUState *cpu,uint32_t address) {
         if(!jump_audio_stop_owned(mask))jump_audio_fault("private mirrored stop ownership");
         jump_audio_stop_call=0;jump_audio_stop_mask=0;cpu->gpr[2]=result;return 1;
     }
-    unsigned slot=group==1?22:20;
+    unsigned slot=jump_audio_record_slot(group,record);
     /* Native800175B4 calls volume(0,0), then800175BC queues KEYOFF. For these
      * records the sole voice is the title-owned private slot, never P1's. */
     if(!jump_audio_stop_owned(1u<<slot))jump_audio_fault("private stop ownership");

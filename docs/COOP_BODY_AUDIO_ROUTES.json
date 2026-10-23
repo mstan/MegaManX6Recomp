@@ -1,0 +1,409 @@
+{
+  "schema": 1,
+  "kind": "original_body_audio_routes",
+  "source_only": true,
+  "original_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+  "original_zero_code_sha256": "75a142a529ddc70f0d60ee6be32ebcdb0cf5cc90ec88e965c3b15cf0c6d21b00",
+  "body_records": [
+    {
+      "group": 1,
+      "record": 1,
+      "effective_bank_group": 1,
+      "program_high_bit": 0,
+      "routing": 2,
+      "priority": 0,
+      "voice_range": [
+        22
+      ],
+      "tones": [
+        {
+          "voice": 22,
+          "program": 0,
+          "tone": 1,
+          "sample": 5,
+          "offset": 9168,
+          "bytes": 6832,
+          "sample_sha256": "003fb81cc12e8f6d70af3c2853de826f9974879a777c79a77bc60cfa1568a81e",
+          "note": 45,
+          "shift": 57,
+          "center": 63,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "first_end_block": 425,
+          "first_end_flags": 1
+        }
+      ]
+    },
+    {
+      "group": 1,
+      "record": 2,
+      "effective_bank_group": 1,
+      "program_high_bit": 0,
+      "routing": 2,
+      "priority": 0,
+      "voice_range": [
+        22
+      ],
+      "tones": [
+        {
+          "voice": 22,
+          "program": 0,
+          "tone": 3,
+          "sample": 12,
+          "offset": 52384,
+          "bytes": 1792,
+          "sample_sha256": "948ac829822ab47a4c0db7065047f1946ae30d67230c6732d81ff1f70e14a74d",
+          "note": 46,
+          "shift": 0,
+          "center": 70,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "first_end_block": 110,
+          "first_end_flags": 1
+        }
+      ]
+    },
+    {
+      "group": 1,
+      "record": 3,
+      "effective_bank_group": 1,
+      "program_high_bit": 0,
+      "routing": 2,
+      "priority": 0,
+      "voice_range": [
+        22
+      ],
+      "tones": [
+        {
+          "voice": 22,
+          "program": 0,
+          "tone": 4,
+          "sample": 13,
+          "offset": 54176,
+          "bytes": 1584,
+          "sample_sha256": "ca9a3f8c32ad6aebc7a53442cbfc3363c3b52cc3c8996d996b2eee25c5d24714",
+          "note": 47,
+          "shift": 0,
+          "center": 71,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "first_end_block": 97,
+          "first_end_flags": 1
+        }
+      ]
+    },
+    {
+      "group": 1,
+      "record": 4,
+      "effective_bank_group": 1,
+      "program_high_bit": 0,
+      "routing": 2,
+      "priority": 0,
+      "voice_range": [
+        22
+      ],
+      "tones": [
+        {
+          "voice": 22,
+          "program": 0,
+          "tone": 5,
+          "sample": 4,
+          "offset": 7456,
+          "bytes": 1712,
+          "sample_sha256": "69df8f22beae0215f1ebd00272f6ca4390ec610e1618e79ba545b248e9530056",
+          "note": 48,
+          "shift": 0,
+          "center": 72,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "first_end_block": 105,
+          "first_end_flags": 1
+        }
+      ]
+    },
+    {
+      "group": 1,
+      "record": 5,
+      "effective_bank_group": 1,
+      "program_high_bit": 0,
+      "routing": 2,
+      "priority": 0,
+      "voice_range": [
+        22
+      ],
+      "tones": [
+        {
+          "voice": 22,
+          "program": 0,
+          "tone": 6,
+          "sample": 7,
+          "offset": 21136,
+          "bytes": 8944,
+          "sample_sha256": "0b4522c6d034aa5dd0eb4d3a8e7878c1070701ece620003d7f910cb91522b5f7",
+          "note": 49,
+          "shift": 57,
+          "center": 67,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "first_end_block": 557,
+          "first_end_flags": 1
+        }
+      ]
+    },
+    {
+      "group": 1,
+      "record": 6,
+      "effective_bank_group": 1,
+      "program_high_bit": 0,
+      "routing": 2,
+      "priority": 0,
+      "voice_range": [
+        22
+      ],
+      "tones": [
+        {
+          "voice": 22,
+          "program": 0,
+          "tone": 7,
+          "sample": 8,
+          "offset": 30080,
+          "bytes": 3664,
+          "sample_sha256": "4d3e0623a7d836acc6eba9c2cc9a889b3dc32f11c7b1592c33018dd7d95c41b8",
+          "note": 50,
+          "shift": 57,
+          "center": 68,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "first_end_block": 227,
+          "first_end_flags": 1
+        }
+      ]
+    },
+    {
+      "group": 1,
+      "record": 7,
+      "effective_bank_group": 1,
+      "program_high_bit": 0,
+      "routing": 2,
+      "priority": 0,
+      "voice_range": [
+        23
+      ],
+      "tones": [
+        {
+          "voice": 23,
+          "program": 0,
+          "tone": 8,
+          "sample": 9,
+          "offset": 33744,
+          "bytes": 4192,
+          "sample_sha256": "fed7bfff83b8e45b286ce7831981f2e8ce65a9e80ad3c0d63ec258c59630cf22",
+          "note": 51,
+          "shift": 57,
+          "center": 69,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "first_end_block": 260,
+          "first_end_flags": 1
+        }
+      ]
+    },
+    {
+      "group": 1,
+      "record": 8,
+      "effective_bank_group": 1,
+      "program_high_bit": 0,
+      "routing": 2,
+      "priority": 0,
+      "voice_range": [
+        23
+      ],
+      "tones": [
+        {
+          "voice": 23,
+          "program": 0,
+          "tone": 9,
+          "sample": 9,
+          "offset": 33744,
+          "bytes": 4192,
+          "sample_sha256": "fed7bfff83b8e45b286ce7831981f2e8ce65a9e80ad3c0d63ec258c59630cf22",
+          "note": 52,
+          "shift": 57,
+          "center": 67,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "first_end_block": 260,
+          "first_end_flags": 1
+        }
+      ]
+    }
+  ],
+  "stop_callers": [
+    {
+      "site": "800385FC",
+      "return_address": "80038604",
+      "group": 1,
+      "record": 5,
+      "native_voice": 22,
+      "phase": 1,
+      "actor_binding": "s0 = actor a0; runtime requires exact PLAYER",
+      "source_span": {
+        "address": "80038594",
+        "bytes": 112,
+        "sha256": "f9fb9c5fe135462928484716f92a0775bdc16444c017916ebd43a921830c995d"
+      }
+    },
+    {
+      "site": "800386EC",
+      "return_address": "800386F4",
+      "group": 1,
+      "record": 5,
+      "native_voice": 22,
+      "phase": 1,
+      "actor_binding": "s0 = actor a0; runtime requires exact PLAYER",
+      "source_span": {
+        "address": "80038594",
+        "bytes": 352,
+        "sha256": "eebbc9d90485d83139d79f322ec5996a46de3adbac7dadc4c979dc1ba2cc1a0c"
+      }
+    },
+    {
+      "site": "800387E4",
+      "return_address": "800387EC",
+      "group": 1,
+      "record": 5,
+      "native_voice": 22,
+      "phase": 1,
+      "actor_binding": "s0 = actor a0; runtime requires exact PLAYER",
+      "source_span": {
+        "address": "80038788",
+        "bytes": 100,
+        "sha256": "84dd07ec980712c5776505d766da26d28ee0263c38f59cd65628afd1723784aa"
+      }
+    },
+    {
+      "site": "800388F8",
+      "return_address": "80038900",
+      "group": 1,
+      "record": 5,
+      "native_voice": 22,
+      "phase": 1,
+      "actor_binding": "s0 = actor a0; runtime requires exact PLAYER",
+      "source_span": {
+        "address": "80038788",
+        "bytes": 376,
+        "sha256": "3ba4cba7cafebe18be942b74059827c8966295f713e16c967c3c2275734100a7"
+      }
+    },
+    {
+      "site": "8003B234",
+      "return_address": "8003B23C",
+      "group": 1,
+      "record": 5,
+      "native_voice": 22,
+      "phase": 1,
+      "actor_binding": "s0 = actor a0; runtime requires exact PLAYER",
+      "source_span": {
+        "address": "8003B218",
+        "bytes": 36,
+        "sha256": "e658fa856c0174b1d7a4a2dd3be7686cda023d0787449f18714b9c084c0607f2"
+      }
+    },
+    {
+      "site": "8003D8BC",
+      "return_address": "8003D8C4",
+      "group": 1,
+      "record": 5,
+      "native_voice": 22,
+      "phase": 2,
+      "actor_binding": "s0 = actor a0; runtime requires exact PLAYER",
+      "source_span": {
+        "address": "8003D8A8",
+        "bytes": 28,
+        "sha256": "b7dda78bc931f2b278aaf9866a125546250f2f419aa53f3b41616871f5cd75e9"
+      }
+    },
+    {
+      "site": "8003D8C8",
+      "return_address": "8003D8D0",
+      "group": 1,
+      "record": 7,
+      "native_voice": 23,
+      "phase": 2,
+      "actor_binding": "s0 = actor a0; runtime requires exact PLAYER",
+      "source_span": {
+        "address": "8003D8A8",
+        "bytes": 40,
+        "sha256": "685069b08e303f2a3da7098f230dd9e12decbdb8d560c0076ed44040dc40862b"
+      }
+    },
+    {
+      "site": "8003F494",
+      "return_address": "8003F49C",
+      "group": 1,
+      "record": 7,
+      "native_voice": 23,
+      "phase": 1,
+      "actor_binding": "s0 = actor a0; runtime requires exact PLAYER",
+      "source_span": {
+        "address": "8003F480",
+        "bytes": 28,
+        "sha256": "93d3b6cef3a3cdd602cc517c9e38e66026d0c05837d1df364237abe084b23f78"
+      }
+    },
+    {
+      "site": "8003F60C",
+      "return_address": "8003F614",
+      "group": 1,
+      "record": 7,
+      "native_voice": 23,
+      "phase": 1,
+      "actor_binding": "s0 = 800970A0 (original fixed PLAYER)",
+      "source_span": {
+        "address": "8003F58C",
+        "bytes": 136,
+        "sha256": "47668da6690ba85ededc1bf541d1cb0fc309774f96407344d89285453b8646e1"
+      }
+    }
+  ],
+  "direct_sound_examples": [
+    {
+      "site": "80035898",
+      "return_address": "800358A0",
+      "group": 1,
+      "record": 5,
+      "actor_argument": "a2 = s0; runtime requires exact PLAYER"
+    },
+    {
+      "site": "800372B0",
+      "return_address": "800372B8",
+      "group": 1,
+      "record": 5,
+      "actor_argument": "a2 = s0; runtime requires exact PLAYER"
+    },
+    {
+      "site": "801EA038",
+      "return_address": "801EA040",
+      "group": 1,
+      "record": 7,
+      "actor_argument": "a2 = s0; runtime requires exact PLAYER"
+    },
+    {
+      "site": "801EA168",
+      "return_address": "801EA170",
+      "group": 1,
+      "record": 8,
+      "actor_argument": "a2 = s0; runtime requires exact PLAYER"
+    }
+  ],
+  "runtime_contract": [
+    "Living projected Zero, PLAY10, exact PLAYER spatial actor for body SOUND; child actors excluded.",
+    "STOP lacks an actor argument: exact source return address AND s0=PLAYER required.",
+    "Phase2 admits only original death-entry STOP5/7; other STOP sites require phase1.",
+    "Native groupFF once plus title-owned private voices; foreign private voices preserved."
+  ],
+  "limits": [
+    "Source records/callers do not prove native execution, DSP lifetime, PCM or campaign behavior.",
+    "Other effective banks, programs, multivoice, vocal/child families and music remain separate."
+  ]
+}

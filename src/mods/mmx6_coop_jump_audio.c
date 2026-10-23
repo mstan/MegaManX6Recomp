@@ -53,14 +53,16 @@ Mmx6JumpAudioReason mmx6_jump_audio_prepare_header(const uint8_t *source,size_t 
         if(id!=1 && id!=3)return MMX6_JUMP_AUDIO_RECORD;
     }
     const unsigned record_list[3]={2,4,7};
-    for(unsigned n=0;n<(group==1?1u:3u);++n) {
-        unsigned record=group==1?1u:record_list[n];
+    for(unsigned n=0;n<(group==1?8u:3u);++n) {
+        unsigned record=group==1?n+1u:record_list[n];
+        unsigned tone=group==1 && record>=2?record+1u:record;
+        unsigned voice=group==1?(record>=7?23u:22u):20u;
         if(record>=(offset-8u)/4u)return MMX6_JUMP_AUDIO_RECORD;
         const uint8_t *r=source+8u+record*4u;
-        if(r[0]!=(uint8_t)(0x80u|group) || r[1] || r[2]!=(uint8_t)(record<<4) ||
-            r[3]!=(group==1?22u:20u))return MMX6_JUMP_AUDIO_RECORD;
-        if(!source[offset+32] || record>=source[offset+32])return MMX6_JUMP_AUDIO_RECORD;
-        const uint8_t *t=source+offset+32u+2048u+rank[0]*512u+record*32u;
+        if(r[0]!=(uint8_t)(0x80u|group) || r[1] || r[2]!=(uint8_t)(tone<<4) ||
+            r[3]!=voice)return MMX6_JUMP_AUDIO_RECORD;
+        if(!source[offset+32] || tone>=source[offset+32])return MMX6_JUMP_AUDIO_RECORD;
+        const uint8_t *t=source+offset+32u+2048u+rank[0]*512u+tone*32u;
         if(!h16(t+22) || !source[offset+33] || !t[2] || t[4]>127 || t[5]>127 ||
             t[6]>127 || t[6]!=t[7])return MMX6_JUMP_AUDIO_RECORD;
     }

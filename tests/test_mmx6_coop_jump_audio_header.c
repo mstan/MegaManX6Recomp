@@ -29,6 +29,18 @@ static void rejected(size_t size,size_t body,unsigned group,size_t capacity) {
     CHECK(mmx6_jump_audio_prepare_header(source,size,body,group,parsed,capacity,&out)!=MMX6_JUMP_AUDIO_OK);
     CHECK(!memcmp(parsed,before,sizeof parsed));CHECK(!memcmp(&out,&saved,sizeof out));
 }
+static void sfx_fixture(void) {
+    fixture();memset(source+8,0,pre-8);p32(source,(1u<<24)|pre);p32(source+4,160);
+    p32(source+pre+12,bytes-pre+160);p16(source+pre+20,10);p16(source+pre+22,10);source[program]=10;
+    for(unsigned i=0;i<10;++i) {
+        uint8_t *t=source+tone+i*32u;t[2]=127;t[4]=60;t[6]=t[7]=60;p16(t+22,i+1);
+        p16(source+bytes-512+(i+1)*2u,2);
+    }
+    for(unsigned r=1;r<=8;++r) {
+        unsigned at=8+r*4;source[at]=0x81;source[at+2]=(uint8_t)((r>=2?r+1:r)<<4);
+        source[at+3]=(uint8_t)(r>=7?23:22);
+    }
+}
 int main(int argc,char **argv) {
     if(argc==4) {
         uint8_t input[8193],output[8192];Mmx6JumpAudioHeader h;
@@ -65,5 +77,10 @@ int main(int argc,char **argv) {
     fixture();source[8+17*4]=0x82;rejected(bytes,128,3,sizeof parsed);
     fixture();CHECK(mmx6_jump_audio_prepare_header(source,bytes,128,3,source,sizeof source,&h)==MMX6_JUMP_AUDIO_ARGUMENT);
     CHECK(mmx6_jump_audio_prepare_header(source,bytes,128,3,source+16,sizeof source-16,&h)==MMX6_JUMP_AUDIO_ARGUMENT);
+    sfx_fixture();CHECK(mmx6_jump_audio_prepare_header(source,bytes,160,1,parsed,sizeof parsed,&h)==MMX6_JUMP_AUDIO_OK);
+    CHECK(h.id==14 && h.bank==30 && parsed[8+5*4+2]==0x60 && parsed[8+7*4+3]==23);
+    for(unsigned r=1;r<=8;++r)for(unsigned field=0;field<4;++field) {
+        sfx_fixture();source[8+r*4+field]^=1;rejected(bytes,160,1,sizeof parsed);
+    }
     puts("X6 private jump parsed-header bounds and alias tests passed");return 0;
 }
