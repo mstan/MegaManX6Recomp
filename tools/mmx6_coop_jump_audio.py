@@ -23,6 +23,9 @@ SDK_COMMIT = "6212e68066a6977dc587e8fca71f27dac9b002fc"
 CONTRACT_SHA256 = "ce11910561b56c85450c0c14d66333b0bddd50156235c76ff12bbeb4c902124a"
 JUMP_RECORDS = {"X": (2, 3, 6), "Zero": (2, 4, 7)}
 CROSS = 0x4000
+PRIVATE_DIAGNOSTICS_SDK = "bfbfb920bfa509f6a31ec2e6b28411a01797427f"
+PRIVATE_BANK_BODIES = ((30,1,12,0x020101,123408,"425516420dc6ff1d973edae265717a6ca237454631cdb4b7c829c96f6f7057a8"),
+                       (31,3,14,0x020303,52096,"203c8e0e58ea4e55797445b7af76e7563528c21536ae8fd57e38566a89b38bdd"))
 
 
 class AudioQualificationError(debug.DebugError):
@@ -41,13 +44,13 @@ def _hex(value, digits, label):
     return int(value, 16)
 
 
-def parse_events(reply: dict, after: int | None = None) -> tuple[int, list[dict]]:
+def parse_events(reply: dict, after: int | None = None, *, require_banks=False) -> tuple[int, list[dict]]:
     """SDK event seq is zero-based; total is the next sequence, never a frame.
 
     Reject a reset, missing requested suffix, reordered/duplicate rows, or a
     truncated response. Never reset or consume the runtime's event ring.
     """
-    if reply.get("ok") is not True:
+    if not isinstance(reply,dict) or reply.get("ok") is not True:
         raise AudioQualificationError("SPU events unavailable")
     total = _uint(reply.get("total"), 64, "event total")
     count = _uint(reply.get("count"), 13, "event count")
@@ -76,22 +79,23 @@ def parse_events(reply: dict, after: int | None = None) -> tuple[int, list[dict]
         previous_frame=parsed["frame"]
         for key in ("pitch", "adsr_lo", "adsr_hi", "vol_l", "vol_r"):
             parsed[key] = _hex(row.get(key), 4, key)
+        if require_banks or "sample_bank" in row:
+            parsed["sample_bank"] = _uint(row.get("sample_bank"),5,"event-time sample bank")
+            if kind == "IRQ" and parsed["sample_bank"] != 0:
+                raise AudioQualificationError("IRQ cannot name a sample bank")
         if after is None or parsed["seq"] >= after:
             result.append(parsed)
     return total, result
 
 
-def parse_voices(reply: dict) -> dict:
-    if reply.get("ok") is not True or not isinstance(reply.get("voices"),list) or len(reply["voices"])!=24:
-        raise AudioQualificationError("Missing hardware SPU voice snapshot")
-    result={key:_hex(reply.get(key),4,key) for key in ("ctrl","main_l","main_r")}
-    result.update({key:_hex(reply.get(key),6,key) for key in
-                   ("kon","koff","pmon","non","eon","endx","active_mask")})
+def _voice_rows(rows,base,require_banks):
+    if not isinstance(rows,list) or len(rows)!=24:
+        raise AudioQualificationError("Missing exact SPU voice set")
     voices=[]
-    for index,row in enumerate(reply["voices"]):
-        if not isinstance(row,dict) or type(row.get("v")) is not int or row["v"]!=index:
-            raise AudioQualificationError("Duplicate/missing hardware voice index")
-        voice=dict(v=index,active=_uint(row.get("active"),1,"active"))
+    for index,row in enumerate(rows):
+        if not isinstance(row,dict) or type(row.get("v")) is not int or row["v"]!=base+index:
+            raise AudioQualificationError("Duplicate/missing voice index")
+        voice=dict(v=base+index,active=_uint(row.get("active"),1,"active"))
         for key in ("vol_l","vol_r","pitch","adsr_lo","adsr_hi","phase","env"):
             voice[key]=_hex(row.get(key),4,key)
         for key in ("start","loop","cur_addr","repeat_addr"):
@@ -106,9 +110,52 @@ def parse_voices(reply: dict) -> dict:
             if type(row.get(key)) is not int or not -32768<=row[key]<=32767:
                 raise AudioQualificationError("Invalid live voice volume")
             voice[key]=row[key]
+        if require_banks or any(key in row for key in ("sample_bank","pending_bank","mode")):
+            voice.update(sample_bank=_uint(row.get("sample_bank"),5,"decoder sample bank"),
+                pending_bank=_uint(row.get("pending_bank"),5,"pending sample bank"),
+                mode=_uint(row.get("mode"),2,"voice mode"))
         voices.append(voice)
+    return voices
+
+
+def parse_voices(reply: dict, *, require_banks=False) -> dict:
+    if not isinstance(reply,dict) or reply.get("ok") is not True:
+        raise AudioQualificationError("Missing hardware SPU voice snapshot")
+    result={key:_hex(reply.get(key),4,key) for key in ("ctrl","main_l","main_r")}
+    result.update({key:_hex(reply.get(key),6,key) for key in
+                   ("kon","koff","pmon","non","eon","endx","active_mask")})
+    voices=_voice_rows(reply.get("voices"),0,require_banks)
     result["voices"]=voices
     return result
+
+
+def parse_private_voices(reply: dict) -> dict:
+    if not isinstance(reply,dict) or reply.get("ok") is not True or type(reply.get("schema")) is not int or reply["schema"]!=1:
+        raise AudioQualificationError("Missing schema1 private SPU snapshot")
+    voices=_voice_rows(reply.get("voices"),24,True)
+    mask=_hex(reply.get("active_mask"),6,"private active mask")
+    if mask != sum(v["active"]<<i for i,v in enumerate(voices)):
+        raise AudioQualificationError("Private active mask/rows disagree")
+    return dict(schema=1,active_mask=mask,voices=voices)
+
+
+def parse_bank_reply(reply,bank,address,count,*,expected_size=None):
+    """Exact read-only envelope; clipped/absent reads never become sample proof."""
+    _uint(bank,5,"requested bank");_uint(address,19,"requested bank offset")
+    if type(count) is not int or not 0<=count<=4096:
+        raise AudioQualificationError("Bank probe length exceeds4096")
+    if not isinstance(reply,dict) or reply.get("ok") is not True or type(reply.get("bank")) is not int or reply["bank"]!=bank or \
+            type(reply.get("addr")) is not int or reply["addr"]!=address or type(reply.get("resident")) is not bool:
+        raise AudioQualificationError("Mismatched immutable bank envelope")
+    size=_uint(reply.get("size"),32,"bank size")
+    if size>0x80000 or reply["resident"] != bool(size) or (bank==0 and size!=0x80000):
+        raise AudioQualificationError("Unsupported bank residency/size")
+    got=_uint(reply.get("len"),13,"bank read length")
+    if got!=count or address+count>size or not reply["resident"] or \
+            not isinstance(reply.get("hex"),str) or not re.fullmatch(r"[0-9a-fA-F]{%d}"%(count*2),reply["hex"]) or \
+            (expected_size is not None and size!=expected_size):
+        raise AudioQualificationError("Absent, clipped, stale or malformed immutable bank read")
+    return dict(bank=bank,size=size,addr=address,len=count,data=bytes.fromhex(reply["hex"]))
 
 
 def native_pitch(note: int, shift: int, center: int, tuning: int, word) -> int:
@@ -214,11 +261,50 @@ def validate_contract(contract: dict) -> str:
     return actual
 
 
+def private_bank_contract(contract):
+    """Companion schema; the frozen historical contract/hash stays unchanged."""
+    validate_contract(contract)
+    return dict(schema=1,kind="zero_private_sample_banks_v1",source_contract_sha256=CONTRACT_SHA256,
+        diagnostics_sdk=PRIVATE_DIAGNOSTICS_SDK,source_member=85,
+        source_member_sha256=PLAYER_MEMBERS[85][1],banks=[dict(bank=bank,character="Zero",group=group,
+            body_subasset=index,body_type=kind,bytes=size,sha256=digest,offset_origin=0)
+            for bank,group,index,kind,size,digest in PRIVATE_BANK_BODIES])
+
+
+def validate_private_bank_contract(value,contract):
+    encode=lambda v:json.dumps(v,sort_keys=True,separators=(",",":"),allow_nan=False).encode("ascii")
+    if encode(value)!=encode(private_bank_contract(contract)):
+        raise ValueError("Unreviewed private sample bank source metadata")
+
+
+def build_private_bank_contract(disc_path,contract):
+    expected=private_bank_contract(contract)
+    disc=Disc(str(disc_path))
+    try:
+        lba,total=disc.files()["ROCK_X6.DAT"];table=disc.user(lba)
+        sector,size=struct.unpack_from("<II",table,85*8)
+        if not 2048<=size<=2_000_000 or sector<1 or sector*2048+size>total:
+            raise ValueError("Original private player extent escaped archive")
+        payload=b"".join(disc.user(lba+sector+i)for i in range((size+2047)//2048))[:size]
+        if hashlib.sha256(payload).hexdigest()!=expected["source_member_sha256"]:
+            raise ValueError("Original Zero private bank member differs")
+        assets=subassets(payload)
+        for record in expected["banks"]:
+            kind,body=assets[record["body_subasset"]]
+            if (kind,len(body),hashlib.sha256(body).hexdigest())!=(record["body_type"],record["bytes"],record["sha256"]):
+                raise ValueError("Original private bank body differs")
+    finally:
+        disc.f.close()
+    return expected
+
+
 def lifetime(events: list[dict], keyon: dict) -> dict:
     """END_STOP means envelope0/release; SDK active may remain1 and loop silently."""
     for row in events:
         if row["seq"] > keyon["seq"] and row["v"] == keyon["v"] and \
                 row["kind"] in ("KEYON", "KEYOFF", "END_STOP", "END_LOOP"):
+            if "sample_bank" in keyon and row["kind"]!="KEYON" and row.get("sample_bank")!=keyon["sample_bank"]:
+                raise AudioQualificationError("Lifetime terminal changed bank without a recorded replacement")
             delta=(row["frame"]-keyon["frame"]) & 0xFFFFFFFF
             if delta>=0x80000000:raise AudioQualificationError("Lifetime frame regressed")
             return dict(disposition={"KEYON":"replaced", "KEYOFF":"keyed_off",
@@ -254,10 +340,64 @@ def compare_overlap(events: list[dict], first: dict, second: dict,
                         "END_STOP is envelope termination, not active0", "No PCM/output, private-bank or paired proof"])
 
 
+def compare_private_overlap(events,first,second,identities,first_seat,contract):
+    """Source identity, route, numeric DSP and lifetime are independent checks."""
+    validate_contract(contract)
+    if type(first_seat) is not int or first_seat not in (0,1) or first["seq"]>=second["seq"] or \
+            any(e.get("kind")!="KEYON" or e not in events or "sample_bank" not in e or
+                type(e.get("v")) is not int or not 0<=e["v"]<48 for e in (first,second)):
+        raise ValueError("Expected ordered event-time-banked jump KEYONs")
+    first_life,second_life=lifetime(events,first),lifetime(events,second)
+    checks=dict(two_keyons=True,vocal_lifetime_overlap=first_life["terminal"] is not None and
+                first_life["terminal"]["seq"]>=second["seq"])
+    actors=[]
+    for seat,event,life in ((first_seat,first,first_life),(first_seat^1,second,second_life)):
+        found=identities.get(event["seq"],{});tone=found.get("tone")
+        character="X" if seat==0 else "Zero"
+        checks[f"p{seat+1}_source_sample"]=bool(tone and tone["character"]==character and
+            tone["group"]==3 and tone["voice"]==20 and tone["record"] in JUMP_RECORDS[character] and
+            found.get("sample_matches") is True and found.get("sample_bank")==event["sample_bank"])
+        # The complete eligible original set, even when sample identity is
+        # unknown/wrong. Numeric compatibility cannot establish its bank.
+        numeric_keys=("pitch","adsr_lo","adsr_hi")
+        eligible={tuple(t[k]for k in numeric_keys)for t in contract["tones"]if
+                  t["character"]==character and t["group"]==3 and t["record"] in JUMP_RECORDS[character]}
+        checks[f"p{seat+1}_pitch_adsr_numeric"]=tuple(event[k]for k in numeric_keys) in eligible
+        checks[f"p{seat+1}_voice_route"]=(event["v"],event["sample_bank"])==((20,0)if seat==0 else(44,31))
+        checks[f"p{seat+1}_natural_end"]=life["disposition"]=="natural_end"
+        actors.append(dict(seat=seat,keyon=event,identity=found,lifetime=life,
+            identified_tone_pitch_adsr_numeric=all(event[k]==tone[k]for k in numeric_keys)if tone else None))
+    return dict(checks=checks,actors=actors,collision_observed=first_life["disposition"]=="replaced",
+        limits=["Private-banks-v1 explicit scope; frozen hardware reports do not inherit it",
+                "Event-time bank/source bytes are distinct from later DSP snapshots",
+                "Engine event frames are not native world ticks or sample-accurate PCM duration",
+                "No R4/R12, netplay, music, other audio families or audible-output pass"])
+
+
+def final_dsp_checks(events,actors,hardware,private):
+    """Do not attribute a reused channel's current envelope to an older note."""
+    checks={};details=[]
+    for actor in actors:
+        event=actor["keyon"];v=event["v"]
+        row=(hardware["voices"][v] if v<24 else private["voices"][v-24])
+        later=any(e["v"]==v and e["kind"]=="KEYON" and e["seq"]>event["seq"]for e in events)
+        consistent=not later and row["sample_bank"]==row["pending_bank"]==event["sample_bank"] and row["start"]==event["addr"]
+        prefix=f"p{actor['seat']+1}"
+        checks[prefix+"_final_dsp_attribution"]=consistent
+        checks[prefix+"_final_envelope_terminated"]=consistent and row["env"]==0 and row["env_phase"]==3
+        checks[prefix+"_final_pitch_adsr_numeric"]=consistent and all(row[k]==event[k]for k in ("pitch","adsr_lo","adsr_hi"))
+        checks[prefix+"_final_noise_off"]=consistent and not row["mode"]&1
+        details.append(dict(seat=actor["seat"],voice=v,event_seq=event["seq"],later_keyon=later,
+                            snapshot=row,attribution_consistent=consistent))
+    return checks,details
+
+
 class AudioObserver:
-    def __init__(self, client, request, contract):
+    def __init__(self, client, request, contract, *, private_banks=None):
         validate_contract(contract)
+        if private_banks is not None:validate_private_bank_contract(private_banks,contract)
         self.client,self.request,self.contract = client,request,contract
+        self.private_banks=private_banks
         self.cursor = None
         self.events = []
 
@@ -277,11 +417,13 @@ class AudioObserver:
     def poll(self):
         raw = self.client.read(debug.DIAGNOSTIC_ADDRESS,debug.DIAGNOSTIC_BYTES)
         observation = debug.parse_diagnostic(raw).json()
-        total, events = parse_events(self.request("spu_events",count=4096),self.cursor)
+        total, events = parse_events(self.request("spu_events",count=4096),self.cursor,
+                                   require_banks=self.private_banks is not None)
         if self.cursor is not None:
             self.events.extend(events)
         self.cursor = total
-        if len(self.events)>16384 or any(row["v"] in range(24,48) for row in self.events):
+        if len(self.events)>16384 or (self.private_banks is None and
+                any(row["v"] in range(24,48) or row.get("sample_bank",0)!=0 for row in self.events)):
             raise AudioQualificationError("Private voice/event volume outside hardware-only case")
         bodies = [raw[0x1800:0x1958],raw[0x100:0x258]]
         # Actor+24 is native positive-up speed; the integrator subtracts it
@@ -293,6 +435,8 @@ class AudioObserver:
         return dict(observation=observation,players=players,event_total=total,new_events=events)
 
     def identify(self,event,driver):
+        if self.private_banks is not None:
+            return self.identify_banked(event,driver)
         matches=[]
         for tone in self.contract["tones"]:
             if tone["group"]!=3 or tone["record"] not in (2,3,4,6,7):
@@ -313,6 +457,51 @@ class AudioObserver:
         if len(matches)>1:
             raise AudioQualificationError("Ambiguous source tone at native sample address")
         return matches[0] if matches else dict(tone=None,sample_matches=False,reason="unmapped_native_sample_address")
+
+    def bank_read(self,bank,address,count,size):
+        return parse_bank_reply(self.request("spu_sample_bank",bank=bank,addr=address,len=count),
+                                bank,address,count,expected_size=size)
+
+    def fingerprint_banks(self):
+        """At most44 bounded body reads; retain hashes, never ADPCM bytes."""
+        result=[]
+        for record in self.private_banks["banks"]:
+            bank,size=record["bank"],record["bytes"]
+            self.bank_read(bank,0,0,size)
+            digest=hashlib.sha256()
+            for at in range(0,size,4096):
+                digest.update(self.bank_read(bank,at,min(4096,size-at),size)["data"])
+            self.bank_read(bank,0,0,size)
+            observed=digest.hexdigest()
+            if observed!=record["sha256"]:
+                raise AudioQualificationError("Resident immutable bank does not match original Zero body")
+            result.append(dict(bank=bank,bytes=size,sha256=observed,source_member=85,
+                               body_subasset=record["body_subasset"],matches_source=True))
+        return result
+
+    def identify_banked(self,event,driver):
+        bank=_uint(event.get("sample_bank"),5,"selected event-time bank")
+        descriptor=next((b for b in self.private_banks["banks"] if b["bank"]==bank),None)
+        if bank and descriptor is None:
+            raise AudioQualificationError("Event names an unqualified immutable bank")
+        matches=[]
+        for tone in self.contract["tones"]:
+            if tone["group"]!=3 or tone["record"] not in (2,3,4,6,7):continue
+            if descriptor and (tone["character"],tone["group"])!=(descriptor["character"],descriptor["group"]):continue
+            start=tone["offset"]+(0 if bank else driver["bases"][tone["vab_handle"]])
+            if start!=event["addr"]:continue
+            size=descriptor["bytes"] if descriptor else 0x80000
+            count=tone["bytes"]
+            if not 0<count<=4096 or start+count>size:
+                raise AudioQualificationError("Sample escaped its named bank")
+            payload=self.bank_read(bank,start,count,size)["data"]
+            digest=hashlib.sha256(payload).hexdigest()
+            matches.append(dict(tone=tone,sample_bank=bank,sample_matches=digest==tone["sample_sha256"],
+                observed_sha256=digest,bank_size=size,sample_offset=start,probe_bytes=count,
+                attribution="event_time_bank_and_exact_source_bytes"))
+        if len(matches)>1:raise AudioQualificationError("Ambiguous named-bank sample identity")
+        return matches[0] if matches else dict(tone=None,sample_bank=bank,sample_matches=False,
+                                               reason="unmapped_event_time_bank_sample")
 
 
 def accepted_ground_jump(before: dict, after: dict, seat: int, receipt: dict) -> bool:
@@ -368,11 +557,16 @@ def jump_overlap_smoke(ctx: dict,contract: dict,*,first_seat: int=0,max_attempts
             sha256(candidate/"mmx6-runtime.exe")!=expected or \
             json.loads((candidate/"preparation.json").read_text(encoding="utf-8"))["exe_sha256"]!=expected:
         raise ValueError("Prepared candidate image identity mismatch")
-    observer=AudioObserver(ctx["clients"][0],ctx["request"],contract)
+    private_banks=ctx.get("private_banks")
+    if private_banks is not None:validate_private_bank_contract(private_banks,contract)
+    observer=(AudioObserver(ctx["clients"][0],ctx["request"],contract,private_banks=private_banks)
+              if private_banks is not None else AudioObserver(ctx["clients"][0],ctx["request"],contract))
     case=dict(kind="native_jump_audio_overlap",mode="local",input_path="published_host",
         candidate_sha256=expected,helper_sha256=sha256(Path(__file__)),
         source_contract_sha256=hashlib.sha256(json.dumps(contract,sort_keys=True,separators=(",",":")).encode()).hexdigest(),
-        first_seat=first_seat,status="failed_setup",attempts=[],observations=[],inputs=[],checks={},events=[])
+        first_seat=first_seat,status="failed_setup",attempts=[],observations=[],inputs=[],checks={},events=[],
+        diagnostics_scope="private_banks_v1" if private_banks is not None else "hardware_legacy")
+    if private_banks is not None:case["private_bank_source"]=private_banks
     ctx["report"].setdefault("jump_audio",[]).append(case)
     deadline=time.monotonic()+timeout
     def require(ok,message):
@@ -397,21 +591,25 @@ def jump_overlap_smoke(ctx: dict,contract: dict,*,first_seat: int=0,max_attempts
         receipt=ctx["hold"](seat,CROSS,1,label);case["inputs"].append(receipt);return receipt
     chosen=None
     try:
-        ground("audio-initial-ground");before_driver=observer.driver();case["driver_before"]=before_driver
+        ground("audio-initial-ground")
+        if private_banks is not None:case["private_banks_before"]=observer.fingerprint_banks()
+        before_driver=observer.driver();case["driver_before"]=before_driver
         require(before_driver["release_adjust"]==0 and all(before_driver["vab_status"][i]==1 for i in (1,3)),
                 "Unqualified native release/VAB readiness")
-        case["voices_before"]=parse_voices(ctx["request"]("spu_voices"))
+        case["voices_before"]=parse_voices(ctx["request"]("spu_voices"),require_banks=private_banks is not None)
+        if private_banks is not None:case["private_voices_before"]=parse_private_voices(ctx["request"]("spu_private_voices"))
         for attempt in range(max_attempts):
             before=ground(f"audio-attempt-{attempt}-ground");held=hold(first_seat,"audio-first-jump")
             first=sample("audio-first-jump")
             require(accepted_ground_jump(before,first,first_seat,held),"First native jump was not accepted")
-            first_keys=[e for e in first["new_events"] if e["kind"]=="KEYON" and e["v"]==20]
+            jump_voices=(20,44) if private_banks is not None else (20,)
+            first_keys=[e for e in first["new_events"] if e["kind"]=="KEYON" and e["v"] in jump_voices]
             row=dict(attempt=attempt,first_keys=first_keys);case["attempts"].append(row)
             if not first_keys:continue # Native RNG may deliberately omit the voice.
             require(len(first_keys)==1,"Ambiguous first jump voice window")
             held=hold(first_seat^1,"audio-second-jump");second=sample("audio-second-jump")
             require(accepted_ground_jump(before,second,first_seat^1,held),"Second native jump was not accepted")
-            second_keys=[e for e in second["new_events"] if e["kind"]=="KEYON" and e["v"]==20]
+            second_keys=[e for e in second["new_events"] if e["kind"]=="KEYON" and e["v"] in jump_voices]
             row["second_keys"]=second_keys
             if not second_keys:continue
             require(len(second_keys)==1,"Ambiguous second jump voice window")
@@ -420,16 +618,30 @@ def jump_overlap_smoke(ctx: dict,contract: dict,*,first_seat: int=0,max_attempts
                 row["overlap"]="not_observed_first_voice_already_ended";continue
             ground("audio-overlap-drain")
             chosen=(first_keys[0],second_keys[0]);break
-        ground("audio-final-ground");after_driver=observer.driver();case["driver_after"]=after_driver
+        ground("audio-final-ground")
+        if private_banks is not None:
+            case["private_banks_after"]=observer.fingerprint_banks()
+            require(case["private_banks_before"]==case["private_banks_after"],"Private immutable bank identity changed")
+            sample("audio-after-read-only-bank-probes")
+        after_driver=observer.driver();case["driver_after"]=after_driver
         require(before_driver==after_driver,"Native audio resource tables changed during sample probes")
-        case["voices_after"]=parse_voices(ctx["request"]("spu_voices"))
+        case["voices_after"]=parse_voices(ctx["request"]("spu_voices"),require_banks=private_banks is not None)
+        if private_banks is not None:
+            case["private_voices_after"]=parse_private_voices(ctx["request"]("spu_private_voices"))
+            sample("audio-after-separate-final-dsp-snapshots")
         case["events"]=observer.events
         if chosen is None:
             case["status"]="inconclusive_native_rng_no_two_voice_window";return case
         identities={e["seq"]:observer.identify(e,after_driver) for e in chosen}
-        case.update(compare_overlap(observer.events,*chosen,identities,first_seat))
-        case["checks"]["last_voice_envelope_terminated"]=case["voices_after"]["voices"][20]["env"]==0 and \
-            case["voices_after"]["voices"][20]["env_phase"]==3
+        if private_banks is not None:
+            case.update(compare_private_overlap(observer.events,*chosen,identities,first_seat,contract))
+            final_checks,details=final_dsp_checks(observer.events,case["actors"],case["voices_after"],case["private_voices_after"])
+            case["checks"].update(final_checks);case["final_dsp_observations"]=details
+            case["checks"]["private_source_banks_stable"]=True
+        else:
+            case.update(compare_overlap(observer.events,*chosen,identities,first_seat))
+            case["checks"]["last_voice_envelope_terminated"]=case["voices_after"]["voices"][20]["env"]==0 and \
+                case["voices_after"]["voices"][20]["env_phase"]==3
         case["status"]="observations_complete" if all(case["checks"].values()) else "comparison_failed"
         return case
     except Exception as error:

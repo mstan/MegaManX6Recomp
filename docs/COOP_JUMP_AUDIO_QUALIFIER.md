@@ -1,5 +1,10 @@
 # X6 jump voice overlap: source contract and bounded observer
 
+The original hardware-only scope below remains available as `hardware_legacy`.
+An explicit `--private-banks` runner mode now uses the additional read-only
+bank/voice diagnostics; see [the private diagnostic contract](COOP_JUMP_AUDIO_PRIVATE_DIAGNOSTICS.md).
+It does not transfer frozen evidence or grant a new native audio result.
+
 R4/R12 remain unverified. No game, title build or sound output was started for
 this work. This adds an observer and original-source metadata, with no audio
 adapter or changes to the plugin, SDK, CMake or comparison ledger. The starting

@@ -208,7 +208,7 @@ def inspect_capture(candidate: Path, image: str, manifest: str, required_seats: 
                 consumed_cross_seen_anywhere=sorted(seen),scope="Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence")
 
 
-def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,expected_image,first_seat,max_attempts,audio_timeout):
+def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,expected_image,first_seat,max_attempts,audio_timeout,private_banks=None):
     host.require_windows();host.reserve(port)
     prepared=host.json_object(candidate/"preparation.json")
     baseline.candidate_environment(candidate,prepared)
@@ -217,7 +217,8 @@ def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,exp
     args=[str(candidate/"mmx6-runtime.exe"),"--game",str(candidate/"game.toml"),"--memcard-dir",str(candidate/"saves"),
           "--seal-interpreted-overlays","--hidden-window","--debug-port",str(port)]
     report.update(status="failed_setup",args=args,environment=host.json_object(candidate/"environment.json"),
-                  input_path="published_host",muted="SDL_AUDIODRIVER=dummy",cards_before=card_hashes(candidate))
+                  input_path="published_host",muted="SDL_AUDIODRIVER=dummy",cards_before=card_hashes(candidate),
+                  diagnostics_scope="private_banks_v1" if private_banks is not None else "hardware_legacy")
     report["process_environment_overlay"]={name:environment[name] for name in
         ("SDL_AUDIODRIVER","XDG_DATA_HOME","XDG_CONFIG_HOME","PYTHONPYCACHEPREFIX")}
     process=route=control=None
@@ -257,9 +258,11 @@ def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,exp
                 time.sleep(.03)
             else:raise debug.DebugError("Original host-input frontend did not reach healthy intro")
             route.set(0,0);route.set(1,0)
-            report["audio"]=audio.jump_overlap_smoke(dict(mode="local",input_path="published_host",clients=[route.client],
+            context=dict(mode="local",input_path="published_host",clients=[route.client],
                 request=control,hold=route.hold,native_advance=route.native_advance,report=report,
-                candidate=candidate,expected_sha256=expected_image),contract,first_seat=first_seat,
+                candidate=candidate,expected_sha256=expected_image)
+            if private_banks is not None:context["private_banks"]=private_banks
+            report["audio"]=audio.jump_overlap_smoke(context,contract,first_seat=first_seat,
                 max_attempts=max_attempts,timeout=audio_timeout)
             status=control("netplay_status");verify_offline(status);report["offline_after"]=status
             report["status"]=report["audio"]["status"]
@@ -286,6 +289,8 @@ def parser():
     p.add_argument("--expected-exe-sha256",required=True);p.add_argument("--expected-manifest-sha256",required=True)
     p.add_argument("--port",type=int,default=24940);p.add_argument("--first-seat",type=int,choices=(0,1),default=0)
     p.add_argument("--max-attempts",type=int,default=8)
+    p.add_argument("--private-banks",action="store_true",
+                   help="Require new read-only event-bank/private-voice diagnostics and exact Zero30/31 banks")
     p.add_argument("--boot-timeout",type=float,default=240);p.add_argument("--progress-timeout",type=float,default=12)
     p.add_argument("--audio-timeout",type=float,default=90)
     return p
@@ -306,10 +311,11 @@ def run(args):
     if output.exists():raise ValueError("Output exists; preserve it and select a fresh F:/G: profile")
     output.mkdir(parents=True)
     report=dict(schema=1,kind="owned_offline_jump_audio",status="failed_setup",r4="unverified",r12="unverified",
+        diagnostics_scope="private_banks_v1" if args.private_banks else "hardware_legacy",
         audible_output="not_tested",checks={},tools={Path(m.__file__).name:preparation.sha256(Path(m.__file__))
         for m in (audio,debug,manifests,preparation,baseline,host,codec,artifacts)},runner_sha256=preparation.sha256(Path(__file__)),
         runtime={},limits=["Local native digital virtual host slots only; no physical-controller or paired proof",
-            "No private-bank qualification, PCM comparison, independent SPU-sample clock or music continuity proof"])
+            "No PCM comparison, independent SPU-sample clock or music continuity proof; explicit diagnostic scope is retained"])
     (output/"runner-source.py").write_bytes(Path(__file__).read_bytes())
     try:
         contract=host.json_object(args.contract);report["contract_sha256"]=audio.validate_contract(contract)
@@ -317,6 +323,11 @@ def run(args):
         if reproduced!=contract:raise ValueError("Actual original EXE/raw BIN does not reproduce the pinned audio contract")
         report["checks"]["original_source_contract_reproduced"]=True
         (output/"source-contract.json").write_bytes(args.contract.read_bytes())
+        private_banks=audio.build_private_bank_contract(args.disc,contract) if args.private_banks else None
+        if private_banks is not None:
+            report["private_bank_source"]=private_banks
+            report["checks"]["original_private_source_banks_reproduced"]=True
+            (output/"source-private-banks.json").write_text(json.dumps(private_banks,indent=2)+"\n",encoding="utf-8")
         host.verify_expected_image(args.build/"mmx6-runtime.exe",args.expected_exe_sha256)
         candidate=output/"candidate"
         preparation.prepare(args.build,args.source,candidate,args.disc,automated=True)
@@ -331,7 +342,8 @@ def run(args):
         run_error=None
         try:
             run_owned(candidate,args.port,args.boot_timeout,args.progress_timeout,report["runtime"],contract,
-                expected_image=args.expected_exe_sha256,first_seat=args.first_seat,max_attempts=args.max_attempts,audio_timeout=args.audio_timeout)
+                expected_image=args.expected_exe_sha256,first_seat=args.first_seat,max_attempts=args.max_attempts,
+                audio_timeout=args.audio_timeout,private_banks=private_banks)
         except Exception as error:
             run_error=error
         native=report["runtime"]

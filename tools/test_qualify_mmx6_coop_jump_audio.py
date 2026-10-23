@@ -98,6 +98,13 @@ class ProtocolTests(unittest.TestCase):
             with self.subTest(extra=extra),patch("sys.stderr",new=io.StringIO()),self.assertRaises(SystemExit):
                 runner.options(p,p.parse_args(base+extra))
 
+    def test_private_bank_diagnostics_are_explicit_and_legacy_is_default(self):
+        argv=["--build","build","--source","source","--disc","disc","--original-exe","original","--output","output",
+              "--expected-exe-sha256","1"*64,"--expected-manifest-sha256","2"*64]
+        p=runner.parser();legacy=p.parse_args(argv);modern=p.parse_args(argv+["--private-banks"])
+        runner.options(p,legacy);runner.options(p,modern)
+        self.assertFalse(legacy.private_banks);self.assertTrue(modern.private_banks)
+
 
 class FilesTests(unittest.TestCase):
     def setUp(self):
@@ -176,7 +183,7 @@ class FilesTests(unittest.TestCase):
         (candidate/"environment.json").write_text(json.dumps(dict(TEMP=str(candidate/"temp"))))
         return candidate
 
-    def owned_run(self,candidate,observer,*,quit_error=False,ownership=True):
+    def owned_run(self,candidate,observer,*,quit_error=False,ownership=True,private_banks=None):
         process=Mock(pid=123);process.poll.return_value=None
         row=runner.debug.parse_diagnostic(diagnostic());commands=[];held=[0,0];active=[False,False]
         def request(command,**fields):
@@ -204,7 +211,7 @@ class FilesTests(unittest.TestCase):
                 patch.object(runner.audio,"jump_overlap_smoke",side_effect=observer):
             try:
                 runner.run_owned(candidate,12345,.01,1,report,{},expected_image=runner.preparation.sha256(candidate/"mmx6-runtime.exe"),
-                    first_seat=1,max_attempts=2,audio_timeout=10)
+                    first_seat=1,max_attempts=2,audio_timeout=10,private_banks=private_banks)
             except Exception as error:report["caught_error"]=str(error)
         return report,process,commands,launch
 
@@ -223,6 +230,18 @@ class FilesTests(unittest.TestCase):
         self.assertIn("--hidden-window",launch.call_args.args[0]);self.assertIn("--seal-interpreted-overlays",launch.call_args.args[0])
         self.assertEqual(launch.call_args.kwargs["env"]["SDL_AUDIODRIVER"],"dummy")
         process.terminate.assert_not_called()
+
+    def test_explicit_private_metadata_reaches_observer_without_changing_owned_cleanup(self):
+        candidate=self.candidate();metadata=dict(schema=1,fixture="observer seam only")
+        def observer(ctx,contract,**options):
+            self.assertIs(ctx["private_banks"],metadata)
+            self.assertEqual(ctx["input_path"],"published_host")
+            return dict(status="comparison_failed")
+        report,process,commands,_=self.owned_run(candidate,observer,private_banks=metadata)
+        self.assertEqual(report["diagnostics_scope"],"private_banks_v1")
+        self.assertEqual(report["cleanup"],dict(shutdown="graceful_owned_debug",exit_code=0))
+        self.assertTrue(report["existing_private_cards_unchanged"])
+        self.assertEqual([f["port"]for c,f in commands if c=="clear_input"],[1,2])
 
     def test_observer_failure_preserves_prefix_and_still_clears_selected_host_slots(self):
         candidate=self.candidate()
