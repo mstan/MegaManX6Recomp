@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | R8 and R13 passed on one exact candidate; 232 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | R2, R8 and R13 passed on one exact candidate; 231 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -62,6 +62,11 @@ candidate identities; observations do not transfer automatically to a rebuild.
   samples; both paused and resumed composed images match and were inspected.
   The initial unavailable Right cursor setup remains failed; the correction
   uses the source-proven Down/Up path without granting inventory.
+- [Native damage before/after Zero's menu](COOP_CONTACT_BASELINE.md) passes R2
+  on that same candidate. Local135 and paired118 contact observations retain
+  ZeroHP32->28->24, native reactions/recoveries, the same enemyHP12 and unchanged
+  X resources. The pair adds30 matching resolved core/mod samples; completed
+  composed images were reviewed. Three incomplete route attempts remain explicit.
 - [Independent native trace counters](COOP_NATIVE_WORLD_TRACE.md) show one
   enemy-world entry per complete frame in the observed intro sequence: 361
   frames, 364 complete driver cycles and 83 bound live-enemy frames. Both
@@ -77,8 +82,9 @@ candidate identities; observations do not transfer automatically to a rebuild.
   recorded below; broad host catalogs remain unavailable.
 - X6 explicitly registers its declared build inputs, including the resolved
   generated-game tree, actual dependency pins and tracked edits. The integrated
-  Clang developer lab build passes36/36 game CTests; the later production
-  default-OFF integration passes41/41, with original content/audio reproduction
+  frozen Clang developer lab build passed36/36 game CTests; the later production
+  default-OFF integration passes41/41. A separate developer
+  [quit-acknowledgement fix](COOP_DEBUG_QUIT_BASELINE.md) passes44/44, with original content/audio reproduction
   enabled. The manifest covers declared inputs, not an exhaustive
   external binary or driver closure. See [manifest limits](COOP_BUILD_MANIFEST_REGISTRATION.md).
 - The same frozen executable passes a fresh [current-build warm/cold snapshot

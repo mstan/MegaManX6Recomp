@@ -42,12 +42,15 @@ Both menu images and restored gameplay were inspected.
 
 Outputs remain in the three `personal-menu-hostlab-fbba0e3-*` directories on
 G:. All owned PIDs79460/16860/58768/26972 are gone. They needed termination
-after the quit deadline; graceful exit remains unverified. Source cards were
+in bounded quit handling; graceful exit remains unverified by those receipts.
+The [later quit probe](COOP_DEBUG_QUIT_BASELINE.md) corrects the earlier timeout
+interpretation. Source cards were
 never supplied or modified. Online controls used the published host sampler;
 offline controls used accepted debug SIO. All launches were hidden and muted.
 
 Scope is healthy intro X/P1 + Zero/P2 with native default equipment on this
-exact one-host artifact. Earned equipment, opposite rosters, post-menu contact
-damage, Quit/Continue/re-entry, death, rewind, cold restoration, physical
+exact one-host artifact. Post-menu contact damage now has its own
+[bounded R2 result](COOP_CONTACT_BASELINE.md). Earned equipment, opposite rosters,
+Quit/Continue/re-entry, death, rewind, cold restoration, physical
 controllers and other hosts remain separate checks. The development host
 catalog stays OFF by default. Full parity remains in progress.

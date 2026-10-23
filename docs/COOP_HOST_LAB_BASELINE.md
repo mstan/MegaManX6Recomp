@@ -42,7 +42,10 @@ All launches used private hidden/muted profiles, linked OpenBIOS, the default
 resident loader, retained OpenGL/native4:3, delay3 and two numeric127.0.0.1
 processes. No online SIO/mailbox/RAM mutation, state loading or original cards
 were used. Owned PIDs49936/81412/46492/63476/77460 are gone. Positive runs needed
-owned termination after the quit deadline; graceful exit remains unverified.
+owned termination during bounded quit handling; valid graceful exit remains
+unverified by those receipts. A [later native probe](COOP_DEBUG_QUIT_BASELINE.md)
+found an acknowledgement race that can trigger termination before the wait;
+the older records do not establish a timeout or hang.
 
 This qualifies the bounded R13 mechanic and startup cell on this exact artifact.
 The lab option remains OFF by default. Remote LAN/internet, other machines,

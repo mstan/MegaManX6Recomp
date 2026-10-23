@@ -4,7 +4,7 @@ Frozen X4 Playtest42: `50593bca772b600de6911cbfecd40b0f08721147`. Frozen X5 comp
 The machine-readable authority is [COOP_PARITY_LEDGER.json](COOP_PARITY_LEDGER.json); this page is its generated review view.
 R1–R26 preserve the regression-report IDs; F1–F208 preserve the numbered feedback-report IDs. They are separate namespaces, totaling **234 comparisons**.
 
-X6: **2 passed, 0 failed, 232 unverified, 0 inapplicable**.
+X6: **3 passed, 0 failed, 231 unverified, 0 inapplicable**.
 Mappings: 50 inspected subsystems, 121 candidate native scenarios, 63 unidentified native analogues.
 Identified subsystem means only that the named baseline code exists; candidate scenarios need authored-content confirmation. Neither is a gameplay pass.
 
@@ -23,7 +23,7 @@ Regenerate: `python tools/build_mmx6_coop_reference.py --render`; validate witho
 | ID | Frozen X4 source/report | Original symptom | Failure class / risk | X6 counterpart / mapping | X6 bounded check | Local / netplay / aggregate |
 | --- | --- | --- | --- | --- | --- | --- |
 | R1 | COOP_PLAYTEST_REGRESSIONS.md:13 #1 | Windows/Linux lobby and two local controller selections (9.18). | Controller/lobby admission mismatch | DualShock controller and lobby admission (identified_subsystem) | Select two distinct pads; launch native X6 through Host/Join and verify independent accepted inputs on both peers, then repeat Windows/Linux. | unverified / unverified / unverified |
-| R2 | COOP_PLAYTEST_REGRESSIONS.md:14 #2 | P2 incoming damage after pause in the earlier owner playtest (9.22). | Incoming damage or immunity restored to the wrong seat after pause | Zero incoming contact after personal pause (identified_subsystem) | Accept the same native enemy contact before and after Zero's own menu; compare only Zero HP/reaction and retained X resources. | unverified / unverified / unverified |
+| R2 | COOP_PLAYTEST_REGRESSIONS.md:14 #2 | P2 incoming damage after pause in the earlier owner playtest (9.22). | Incoming damage or immunity restored to the wrong seat after pause | Zero incoming contact after personal pause (identified_subsystem) | Accept the same native enemy contact before and after Zero's own menu; compare only Zero HP/reaction and retained X resources. | passed / passed / passed |
 | R3 | COOP_PLAYTEST_REGRESSIONS.md:15 #3 | P2 death particles originate at P2 and use the character's color (9.24). | Death effects inherit the singleton origin or palette | X/Zero native death effects (identified_subsystem) | Kill each seat at a distinct position; retain composed native burst colors, origin, expiry and surviving partner control. | unverified / unverified / unverified |
 | R4 | COOP_PLAYTEST_REGRESSIONS.md:16 #4 | P2 character voice sample ownership (9.23). Overlapping channels are #12. | Voice/sample-bank ownership collides between characters | X/Zero voice sample identity (identified_subsystem) | Capture native X and Zero jump, attack, hurt and death tones; compare each with a co-op-off character reference. | unverified / unverified / unverified |
 | R5 | COOP_PLAYTEST_REGRESSIONS.md:17 #5 | P2 HUD anchoring matches P1 (9.19). | Private HUD uses the wrong viewport anchor | Stacked X6 life-meter anchoring (identified_subsystem) | Change each actor's HP and inspect actual final-window meter anchors at several drawable aspects. | unverified / unverified / unverified |

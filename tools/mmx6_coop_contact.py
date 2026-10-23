@@ -1,8 +1,9 @@
 """Source-bound original-input R2 candidate; no launcher or ledger disposition.
 
 The owning runner supplies accepted input, listener-checked RPCs and lifecycle.
-This case has not been executed. Its strict evidence reducer rejects ambiguous
-actor attribution instead of passing an HP change or hook counter alone.
+The frozen candidate has separate reviewed local/loopback receipts. New runs
+still require actual evidence: the reducer rejects ambiguous actor attribution
+instead of passing an HP change or hook counter alone.
 """
 from __future__ import annotations
 

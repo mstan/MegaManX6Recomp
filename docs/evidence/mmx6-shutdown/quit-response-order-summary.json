@@ -1,0 +1,132 @@
+{
+  "schema": 1,
+  "kind": "reviewed_debug_quit_response_order",
+  "issue": "beads-181w",
+  "before": {
+    "report": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\debug-quit-response-regression-old\\qualification.json",
+      "sha256": "6da4e506006b6543ecae594f30c52e1d8486c4f6cb485db59926ebcd7894b809"
+    },
+    "observation": {
+      "kind": "owned_debug_quit_response",
+      "status": "failed",
+      "expected_id": 424242,
+      "exe_sha256": "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9",
+      "runner_sha256": "3e85a77bc60db37d6d63cfb6113d596e49b1bc9a7bc694d69ef46a1fdcc2969c",
+      "limits": [
+        "Startup and quit only; no gameplay or native card progress qualification",
+        "Source observations at staging are not compilation provenance"
+      ],
+      "owned_pid": 80052,
+      "raw_response": "{\"ok\":false,\"err\":\"emu busy or frozen\"}\n",
+      "shutdown": "natural_exit",
+      "exit_code": 0,
+      "response": {
+        "ok": false,
+        "err": "emu busy or frozen"
+      },
+      "checks": {
+        "matching_ack": false,
+        "natural_exit_zero": true
+      },
+      "process_gone": true,
+      "listener_released": true
+    }
+  },
+  "after": {
+    "report": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\debug-quit-response-regression-fixed\\qualification.json",
+      "sha256": "f8a397450f16f75cfb93318c0f1fc951077e11fbaec45f6e0ec2ff1ea6e79865"
+    },
+    "observation": {
+      "kind": "owned_debug_quit_response",
+      "status": "passed",
+      "expected_id": 424242,
+      "exe_sha256": "a9092eee23d44b9cd4f936d0db6ad7f7cc991a83a16797662d8f6e59d468e266",
+      "runner_sha256": "3e85a77bc60db37d6d63cfb6113d596e49b1bc9a7bc694d69ef46a1fdcc2969c",
+      "limits": [
+        "Startup and quit only; no gameplay or native card progress qualification",
+        "Source observations at staging are not compilation provenance"
+      ],
+      "owned_pid": 55992,
+      "raw_response": "{\"id\":424242,\"ok\":true}\n",
+      "shutdown": "natural_exit",
+      "exit_code": 0,
+      "response": {
+        "id": 424242,
+        "ok": true
+      },
+      "checks": {
+        "matching_ack": true,
+        "natural_exit_zero": true
+      },
+      "process_gone": true,
+      "listener_released": true
+    },
+    "compile_proof": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-debug-quit-99ed867\\candidate.json",
+      "sha256": "d3b107cdd7321a07b8f055eb8e7c347957d9298263d4d7ee0ce3e58ef5eec931"
+    },
+    "candidate": {
+      "schema": 1,
+      "kind": "exact_debug_quit_regression_candidate",
+      "candidate_source": "99ed86754e57578748525b00d68ece6db78b7a80",
+      "exe_sha256": "a9092eee23d44b9cd4f936d0db6ad7f7cc991a83a16797662d8f6e59d468e266",
+      "declared_manifest_sha256": "a1a07df441844bc59eed80e9e21240b611f416a446aeea64100ffb14fe993654",
+      "source_repositories": {
+        "game": {
+          "head": "99ed86754e57578748525b00d68ece6db78b7a80",
+          "tracked_edits": {},
+          "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "net": {
+          "head": "e53059306824edf4f0aec4aae5ae65151b18535f",
+          "tracked_edits": {},
+          "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "rb": {
+          "head": "2a03e73693acee0fb78076ea058642c931bef12e",
+          "tracked_edits": {},
+          "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "sdk": {
+          "head": "8e7917429e010575ca903354f5fc104a2227a7f0",
+          "tracked_edits": {},
+          "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "ui": {
+          "head": "b964eabe5a3438b8ed121064354ba27c1accef3f",
+          "tracked_edits": {},
+          "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "private_artifacts": {
+        "CMakeCache.txt": "724f583940806e5beedee78d341bd4d6c6d491a0cab323ff3001b6aa2e933f64",
+        "manifest.h": "176910075303fa1685c4160ba34b380845c2b5a4049261e721ae268467b12066",
+        "manifest.json": "9004c7fbf57acf8dfdf7b16f8952350860d5c5a49ced760f044f358d28bf672a",
+        "provenance.json": "3239a2f759750ebf6379083ac99f1738bfd52282f67800eeaeb322151b6ec14f"
+      },
+      "limits": [
+        "Native quit regression only; no gameplay/effects/campaign pass transferred from prior executable37cdc487",
+        "Later QA/doc commits do not change this compiled candidate"
+      ]
+    }
+  },
+  "sdk_fix": "8e7917429",
+  "isolated_original_fix": "1a82b081e",
+  "ctest": {
+    "tests": 44,
+    "passed": 44,
+    "log": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-debug-quit-ack.log",
+      "sha256": "7dfb8b54b96086ef68712544a0db49acd2f050981a1bf1f37e6f6458c6a92ac1"
+    }
+  },
+  "explanation": "send_ok buffers during handler execution. Old quit shuts down before IO_REQ becomes IO_RESP, yielding an uncorrelated busy response. The fix defers shutdown until the matching response is published and the worker sends it before joining.",
+  "historical_correction": "Earlier runner quit exceptions could lead directly to owned termination without waiting5s. Their termination records do not establish a quit timeout or runtime hang. No historical raw report or hashed review summary has been rewritten.",
+  "limits": [
+    "Native Windowsx64/Clang22.1.8 startup/quit protocol regression only.",
+    "Existing exit(0) semantics remain; this does not establish every main-teardown path or future recorder drain.",
+    "Gameplay/effects/campaign passes from37cdc487 do not transfer to the newer executable."
+  ]
+}

@@ -1,7 +1,7 @@
 # R2 native enemy contact before and after Zero's menu
 
-This is a source audit and candidate route, with **no R2 runtime result**.
-It changes no ledger status and has launched no game. The selected compiled
+This source audit predates the separate [reviewed native R2 result](COOP_CONTACT_BASELINE.md).
+Source mapping alone changes no ledger status. The selected compiled
 game is `fbba0e3ae5e38174022fa7eb79ac81c3741ef391`, executable SHA-256
 `37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9`.
 The coordinator's manifest-bound R13 receipt establishes its original-input

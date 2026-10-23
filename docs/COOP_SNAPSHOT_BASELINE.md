@@ -71,10 +71,11 @@ uses the previously staged original build's exe/DLL/assets/catalog; it copies
 none of its runtime caches, snapshots or cards while preparing the new profiles.
 No older snapshot is loaded into the changed build.
 
-Both successful processes responded throughout qualification but did not exit
-within the baseline runner's quit deadline. Cleanup terminated only their owned
-PIDs; receipts record `owned_process_terminated` and exit 1. Graceful shutdown is
-not qualified. No process remains running from this lane.
+Both successful processes responded throughout qualification. Cleanup terminated
+only their owned PIDs; receipts record `owned_process_terminated` and exit1.
+Those receipts do not distinguish timeout from an earlier quit-protocol error;
+the [later quit audit](COOP_DEBUG_QUIT_BASELINE.md) corrects the timeout inference.
+Graceful shutdown is not qualified. No process remains running from this lane.
 
 This covers a healthy intro with HP 32, weapon 0 and the recorded full ammo values.
 Spent ammo, damage, delayed healing, death/scene boundaries, moving terrain,
@@ -115,8 +116,9 @@ Warm and cold restored composed menus match
 The restored menu/portrait and cold resumed actors/HUD were inspected. The
 visible Loaded slot9 message is the one-based display of requested slot8.
 
-Both owned PIDs48832/77220 are gone after termination following the quit
-deadline; graceful exit remains unverified. These are current-build disposable
+Both owned PIDs48832/77220 are gone after termination during bounded quit
+handling; those receipts do not establish a timeout or valid graceful exit.
+These are current-build disposable
 snapshots only. The historical observations above remain tied to their own
 build. No additional ledger row, Zero-menu cold restoration, other gameplay
 context, rewind, rollback or cross-build compatibility is qualified here.

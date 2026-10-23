@@ -86,17 +86,209 @@
           "src/mods/mmx6_coop_plugin.c:enemy_hit",
           "src/mods/mmx6_coop_plugin.c:player_contact"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "candidate": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+            "build_identity": {
+              "exe_sha256": "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9",
+              "declared_manifest_sha256": "5a1521fdf8682fbc8e28fee1fb3c4594d0b6a95844ea06ac3af61b998af28673",
+              "compiled_source_commit": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+              "sdk_commit": "79246932166e46a82d7b61a229c60ff9c8e2931a"
+            },
+            "settings": {
+              "roster": "X/P1 + base Zero/P2, pristine intro gear, native4:3/default loader/OpenBIOS/retainedGL",
+              "rollback": false,
+              "online_user_states": false
+            },
+            "bypasses": [],
+            "mode": "local",
+            "result": "unverified",
+            "action": "Attempt the source-derived native contact/menu/contact route with short offline SIO pulses.",
+            "outcome": "Native R2 contact/menu/contact case failed: R2 P2 lead did not admit the reserved enemy",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\contact-hostlab-fbba0e3-local\\qualification.json",
+                "sha256": "149c65070831960e81f369f4c98d35356d981698b049424ec3df08e0a6bb12dd"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-fbba0e3\\candidate.json",
+                "sha256": "92aa781ce7dd7c21228d7a17800e6d93871b525f6fbc0348ae87b8bdc6d1daf9"
+              }
+            ],
+            "limits": [
+              "Incomplete route/setup attempt; no before-and-after mechanic pass or native game defect inferred.",
+              "Raw failed report retained unchanged; subsequent attempts use fresh private profiles."
+            ]
+          },
+          {
+            "candidate": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+            "build_identity": {
+              "exe_sha256": "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9",
+              "declared_manifest_sha256": "5a1521fdf8682fbc8e28fee1fb3c4594d0b6a95844ea06ac3af61b998af28673",
+              "compiled_source_commit": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+              "sdk_commit": "79246932166e46a82d7b61a229c60ff9c8e2931a"
+            },
+            "settings": {
+              "roster": "X/P1 + base Zero/P2, pristine intro gear, native4:3/default loader/OpenBIOS/retainedGL",
+              "rollback": false,
+              "online_user_states": false
+            },
+            "bypasses": [],
+            "mode": "local",
+            "result": "unverified",
+            "action": "Attempt the source-derived native contact/menu/contact route with short offline SIO pulses.",
+            "outcome": "Native R2 contact/menu/contact case failed: R2 could not retreat safely while retaining the same actor",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\contact-hostlab-fbba0e3-local-admission40\\qualification.json",
+                "sha256": "a9973fca19813582b088471d97d10abdbfcb28ee37dc78071c8543b91cf15c1d"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-fbba0e3\\candidate.json",
+                "sha256": "92aa781ce7dd7c21228d7a17800e6d93871b525f6fbc0348ae87b8bdc6d1daf9"
+              }
+            ],
+            "limits": [
+              "Incomplete route/setup attempt; no before-and-after mechanic pass or native game defect inferred.",
+              "Raw failed report retained unchanged; subsequent attempts use fresh private profiles."
+            ]
+          },
+          {
+            "candidate": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+            "build_identity": {
+              "exe_sha256": "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9",
+              "declared_manifest_sha256": "5a1521fdf8682fbc8e28fee1fb3c4594d0b6a95844ea06ac3af61b998af28673",
+              "compiled_source_commit": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+              "sdk_commit": "79246932166e46a82d7b61a229c60ff9c8e2931a"
+            },
+            "settings": {
+              "roster": "X/P1 + base Zero/P2, pristine intro gear, native4:3/default loader/OpenBIOS/retainedGL",
+              "rollback": false,
+              "online_user_states": false
+            },
+            "bypasses": [],
+            "mode": "local",
+            "result": "unverified",
+            "action": "Attempt the source-derived native contact/menu/contact route with short offline SIO pulses.",
+            "outcome": "Native R2 contact/menu/contact case failed: R2 P2 lead did not admit the reserved enemy",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\contact-hostlab-fbba0e3-local-retreat60\\qualification.json",
+                "sha256": "8cb7b9b396921ddaca288aa6c84d5d56272261952d20a6efea9e1d1ab17182e4"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-fbba0e3\\candidate.json",
+                "sha256": "92aa781ce7dd7c21228d7a17800e6d93871b525f6fbc0348ae87b8bdc6d1daf9"
+              }
+            ],
+            "limits": [
+              "Incomplete route/setup attempt; no before-and-after mechanic pass or native game defect inferred.",
+              "Raw failed report retained unchanged; subsequent attempts use fresh private profiles."
+            ]
+          },
+          {
+            "candidate": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+            "build_identity": {
+              "exe_sha256": "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9",
+              "declared_manifest_sha256": "5a1521fdf8682fbc8e28fee1fb3c4594d0b6a95844ea06ac3af61b998af28673",
+              "compiled_source_commit": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+              "sdk_commit": "79246932166e46a82d7b61a229c60ff9c8e2931a"
+            },
+            "settings": {
+              "roster": "X/P1 + base Zero/P2, pristine intro gear, native4:3/default loader/OpenBIOS/retainedGL",
+              "rollback": false,
+              "online_user_states": false,
+              "input": "accepted offline debug SIO held through observed publication windows"
+            },
+            "bypasses": [],
+            "mode": "local",
+            "result": "passed",
+            "action": "Admit original authored record25, accept one native body contact, retreat/recover, exercise Zero-owned menu and independent controls, then accept/recover from the same enemy contact again.",
+            "outcome": "ZeroHP32->28 before its menu and28->24 afterward, both native action17/reaction1/positive<=75 iframes and75tick recoveries, accepted P2 counters0->1->2, same original enemyHP12 retained, XHP32/x144/allresources unchanged; all11 personal-menu checks and composed artwork reviewed.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\contact-hostlab-fbba0e3-local-held-window\\qualification.json",
+                "sha256": "9cea2f0653644e1e14f939fd0bc397e92ff5831ca55799e6e098248dcf015eda"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-fbba0e3\\candidate.json",
+                "sha256": "92aa781ce7dd7c21228d7a17800e6d93871b525f6fbc0348ae87b8bdc6d1daf9"
+              },
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-r2\\manifest-bound-fbba0e3-summary.json",
+                "sha256": "b70fb88eef954ac72d0776e174f9e896afdb159562cfc6857fe2b343d92e6127"
+              }
+            ],
+            "limits": [
+              "Bounded intro record25 ordinary strength4/class0 contact only; other damage classes and stages remain unverified.",
+              "Fixed X/P1 + base Zero/P2, native4:3, default Seamless Loading, linked OpenBIOS, retained OpenGL and pristine equipment only.",
+              "Local controls use accepted offline debug SIO; netplay uses only the owning peer published host input through delay3.",
+              "No HP/grace/inventory/success writes, fixture mailboxes, teleports, source-card copies or online user-state jumps.",
+              "Complete actor/caller entry traces plus accepted-contact counter and HP/reaction trajectory bind the native contact; entries alone do not prove acceptance.",
+              "Player bodies/counter share one coherent diagnostic read; pool/box/config and cross-peer reads remain separate observations.",
+              "Paused peer images have different hashes and were separately reviewed; no same-frame/pixel-identical paused comparison is claimed.",
+              "Development numeric127 loopback on one Windowsx64/Clang22.1.8/CPUmask7f/ENHANCED host; no cross-machine/OS/CPU or broad production qualification.",
+              "The older SDK has an independently reproduced quit ACK race. These successful trials naturally exited0 after a retained protocol error; they do not qualify a valid graceful quit ACK.",
+              "Raw automated/artwork-pending reports and all earlier route failures remain unchanged; this separate review supplies only the bounded R2 disposition."
+            ]
+          },
+          {
+            "candidate": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+            "build_identity": {
+              "exe_sha256": "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9",
+              "declared_manifest_sha256": "5a1521fdf8682fbc8e28fee1fb3c4594d0b6a95844ea06ac3af61b998af28673",
+              "compiled_source_commit": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+              "sdk_commit": "79246932166e46a82d7b61a229c60ff9c8e2931a"
+            },
+            "settings": {
+              "roster": "X/P1 + base Zero/P2, pristine intro gear, native4:3/default loader/OpenBIOS/retainedGL",
+              "rollback": false,
+              "online_user_states": false,
+              "input": "owning peer published_host via delay3 numeric127 loopback lab"
+            },
+            "bypasses": [],
+            "mode": "netplay",
+            "result": "passed",
+            "action": "Admit original authored record25, accept one native body contact, retreat/recover, exercise Zero-owned menu and independent controls, then accept/recover from the same enemy contact again.",
+            "outcome": "ZeroHP32->28 before its menu and28->24 afterward, both native action17/reaction1/positive<=75 iframes and75tick recoveries, accepted P2 counters0->1->2, same original enemyHP12 retained, XHP32/x144/allresources unchanged; all11 personal-menu checks and composed artwork reviewed. Both peers match30 resolved core/mod samples below both completed watermarks.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\contact-hostlab-fbba0e3-paired\\qualification.json",
+                "sha256": "54000ccc6bdcbba8c0b04234bff16617482069e8667311c860ce956808fe2939"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-fbba0e3\\candidate.json",
+                "sha256": "92aa781ce7dd7c21228d7a17800e6d93871b525f6fbc0348ae87b8bdc6d1daf9"
+              },
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-r2\\manifest-bound-fbba0e3-summary.json",
+                "sha256": "b70fb88eef954ac72d0776e174f9e896afdb159562cfc6857fe2b343d92e6127"
+              }
+            ],
+            "limits": [
+              "Bounded intro record25 ordinary strength4/class0 contact only; other damage classes and stages remain unverified.",
+              "Fixed X/P1 + base Zero/P2, native4:3, default Seamless Loading, linked OpenBIOS, retained OpenGL and pristine equipment only.",
+              "Local controls use accepted offline debug SIO; netplay uses only the owning peer published host input through delay3.",
+              "No HP/grace/inventory/success writes, fixture mailboxes, teleports, source-card copies or online user-state jumps.",
+              "Complete actor/caller entry traces plus accepted-contact counter and HP/reaction trajectory bind the native contact; entries alone do not prove acceptance.",
+              "Player bodies/counter share one coherent diagnostic read; pool/box/config and cross-peer reads remain separate observations.",
+              "Paused peer images have different hashes and were separately reviewed; no same-frame/pixel-identical paused comparison is claimed.",
+              "Development numeric127 loopback on one Windowsx64/Clang22.1.8/CPUmask7f/ENHANCED host; no cross-machine/OS/CPU or broad production qualification.",
+              "The older SDK has an independently reproduced quit ACK race. These successful trials naturally exited0 after a retained protocol error; they do not qualify a valid graceful quit ACK.",
+              "Raw automated/artwork-pending reports and all earlier route failures remain unchanged; this separate review supplies only the bounded R2 disposition."
+            ]
+          }
+        ],
+        "limitations": "Passed only the bounded original intro ordinary body-contact path before/after Zero-owned pause on frozenfbba0e3/executable37cdc487; other actors, damage classes, rosters, stages and hosts remain unverified."
       }
     },
     {
@@ -358,7 +550,7 @@
               "Loopback lab uses one Windows x64 host, numeric127 endpoints, Clang22.1.8 ENHANCED and current CPUmask7f; no cross-machine or production qualification.",
               "Online controls use published original host inputs; offline controls use accepted debug SIO. No online RAM/mailbox/fixture writes or granted inventory.",
               "Native menu reads follow coherent diagnostics but are not one atomic cross-peer snapshot. Resolved CRC samples are below both completed simulation watermarks.",
-              "All owned processes needed termination after the quit deadline; graceful exit remains unverified."
+              "All owned processes needed termination during bounded quit handling; graceful exit remains unverified."
             ],
             "bypasses": []
           },
@@ -401,7 +593,7 @@
               "Loopback lab uses one Windows x64 host, numeric127 endpoints, Clang22.1.8 ENHANCED and current CPUmask7f; no cross-machine or production qualification.",
               "Online controls use published original host inputs; offline controls use accepted debug SIO. No online RAM/mailbox/fixture writes or granted inventory.",
               "Native menu reads follow coherent diagnostics but are not one atomic cross-peer snapshot. Resolved CRC samples are below both completed simulation watermarks.",
-              "All owned processes needed termination after the quit deadline; graceful exit remains unverified."
+              "All owned processes needed termination during bounded quit handling; graceful exit remains unverified."
             ],
             "bypasses": []
           },
@@ -444,7 +636,7 @@
               "Loopback lab uses one Windows x64 host, numeric127 endpoints, Clang22.1.8 ENHANCED and current CPUmask7f; no cross-machine or production qualification.",
               "Online controls use published original host inputs; offline controls use accepted debug SIO. No online RAM/mailbox/fixture writes or granted inventory.",
               "Native menu reads follow coherent diagnostics but are not one atomic cross-peer snapshot. Resolved CRC samples are below both completed simulation watermarks.",
-              "All owned processes needed termination after the quit deadline; graceful exit remains unverified."
+              "All owned processes needed termination during bounded quit handling; graceful exit remains unverified."
             ],
             "bypasses": []
           }
