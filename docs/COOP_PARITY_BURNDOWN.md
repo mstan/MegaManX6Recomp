@@ -46,7 +46,7 @@ stacked meters, lifecycle and loader. It adds:
   64 native analogues still need identification.
 - Default rejection of the unilateral P2 input mailbox and fixture commands
   during netplay. Production also rejects both channels. Profile identity is
-  `mmx6-x-zero-delay-v8`; rollback and network state transfers remain disabled.
+  `mmx6-x-zero-delay-v9`; rollback and network state transfers remain disabled.
 - Diagnostic schema 1 with a completed-publication marker, canonical P1/P2
   bodies, ready/enrolled/failed flags and a **partial** host-context FNV hash.
   This hash is not the framework's whole-machine or mod checksum.
@@ -56,6 +56,9 @@ stacked meters, lifecycle and loader. It adds:
 - A local framework correction, `83e8b5e11c005e0868e1aef96335258aad157559`,
   that verifies the actual selected disc before resolving and negotiating the
   default native loading plan. Native-plugin validation remains enforced.
+- X4's virtual-host netplay sampler correction, locally `a72527f13`, plus
+  source-backed Select edge/queued-rejoin corrections described in
+  [the lifecycle audit](COOP_LIFECYCLE_AUDIT.md).
 
 The real-plugin regression fails on baseline 6cba3f8 because a queued network
 fixture mutates P2, and passes after the correction. Both debug and production
@@ -63,7 +66,7 @@ test variants execute the actual plugin against isolated memory/native-call
 fixtures. This is implementation regression evidence, not an actual online
 campaign pass.
 
-Full debug and production builds succeed, with **20/20 CTests passing in each**,
+Full debug and production builds succeed, with **21/21 CTests passing in each**,
 including simultaneous runs using the same scratch directory. The original
 catalog tests used shared fixed directory names; concurrent runs exposed
 deletion/copy races. All three affected test executables now atomically reserve
@@ -72,9 +75,15 @@ enabled and reproduce the inventory; changed source identities are rejected.
 Framework loader regressions pass in normal and worker-safe configurations;
 the original framework fails the exact default-on disc-targeted fixture.
 Other-target builds and production gameplay remain separate qualifications.
+Latest logs: `build-audio-audit-debug.log`, `build-audio-audit-production.log`,
+`ctest-audio-audit-debug.log`, `ctest-audio-audit-production.log`. Both native
+content and audio reproduction tests were enabled against the private G: disc
+copy. The protocol suite includes 22 checks, including rejection of unresolved,
+legacy, conflicting or mismatched core/mod checksum evidence.
 
-Final checks: `ctest-isolated-debug.log` and `ctest-isolated-production.log`
-under the evidence root. Current debug executable SHA-256 is
+Checks for framework 83e: `ctest-isolated-debug.log` and
+`ctest-isolated-production.log` under the evidence root. That debug executable
+SHA-256 is
 `044731e5e78346b5f49d6ec810584e02dfbf14ce37c6271a6553a5525a8ba7e3`;
 production is
 `87c39513288921e12594e0bf330d657b49875e97701d2de9da843d4e90555c69`.
@@ -113,15 +122,32 @@ The original paired attempts and corrected default admission are recorded in
 [COOP_NETPLAY_BASELINE.md](COOP_NETPLAY_BASELINE.md). After the framework fix,
 both peers commit the default resident loader and advance an active two-player
 delay session: tick 93, resolved-through 92, rollback off, no reported input
-desynchronization. This is startup admission only. Native gameplay, matched
-whole-machine/mod checksums and transport input independence remain unverified.
+desynchronization. This is startup admission only. A subsequent sampler fix
+also passes the bounded native intro/input smoke on both peers with original
+host inputs, healthy heroes and unused mailbox. Its exact candidate, matching
+captures and limitations are recorded separately in the baseline document.
+Whole-machine/mod checksums and full campaign behavior remain unverified.
+
+Profile v9 also passes a bounded native two-peer leave/pause/rejoin smoke:
+held departure stays absent; a Select press held from primary pause through
+resume creates no join; a fresh edge rejoins with the observed healthy intro
+resources retained. The initial one-based-owner assertion error is preserved
+as a harness failure, followed by the successful corrected run. Full debug
+and production builds and 20/20 tests pass for this lifecycle candidate.
+
+[The native audio audit](COOP_AUDIO_NATIVE_AUDIT.md) reproduces ten banks across
+five forms with five passing source/metadata checks. X6 voice records use
+stride 0x38 and voice body type 0x20303; every voice group's record 17 references
+the effects VAB. Proven X4 design is a reference, but its memory extents and
+blanket bank mapping cannot be copied. R4/R12 remain unverified pending complete
+X6 driver/flush ownership and native muted captures.
 
 ## Next integration gates
 
-1. Finish native frontend admission and actual loopback delay-sync
-   input/partial-state evidence. The loading-off diagnostic timed out in the
-   frontend; the corrected default startup check does not resolve that separate
-   question. Preserve the distinction between diagnostic publication counts
+1. Extend the now-passing default loopback intro/input smoke with lifecycle,
+   menu and scene checks. The earlier frontend timeout is explained by the
+   old sampler omission and retained as failed setup. Preserve the distinction
+   between diagnostic publication counts
    and resolved simulation ticks. Do not close the broad netplay comparisons
    without framework core/mod checksums and their actual behavior checks.
 2. Bridge X6 onto the modern X4/X5 framework in a separate local framework

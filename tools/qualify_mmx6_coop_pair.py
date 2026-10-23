@@ -27,7 +27,8 @@ def run(args) -> dict:
     preparation = importlib.import_module("prepare_mmx6_coop_playtest")
     baseline = importlib.import_module("qualify_mmx6_coop_baseline")
     paired = importlib.import_module("test_mmx6_coop_netplay")
-    modules = (debug, preparation, baseline, paired)
+    state_crc = importlib.import_module("coop_state_crc")
+    modules = (debug, preparation, baseline, paired, state_crc)
     if any(Path(module.__file__).resolve().parent != tools_root for module in modules):
         raise ValueError("A shared tool resolved outside --tools-root")
     output = preparation.local_output(args.out)
@@ -45,7 +46,7 @@ def run(args) -> dict:
                   tools_root=str(tools_root), tool_sha256={Path(m.__file__).name:
                   preparation.sha256(Path(m.__file__)) for m in modules},
                   session=args.session, input_delay=3, peers=[], setup=[], observations=[],
-                  checks={}, matched_host_observations=[], limits=[
+                  checks={}, matched_host_observations=[], resolved_state_crc=[], limits=[
                       "Intro only; no campaign, physical-controller, audible or real-network pass",
                       "Diagnostic FNV is bounded host state, not a framework core/mod CRC",
                       "Diagnostic publication counts are not netplay simulation ticks",
@@ -99,6 +100,7 @@ def run(args) -> dict:
         raise paired.ValidationFailure("Native timers did not consume the input window")
 
     def matched(label, seconds=4):
+        first_simulation_tick = max(row["tick"] for row in network())
         deadline, history, common = time.monotonic()+seconds, [{}, {}], set()
         matches = []
         while time.monotonic() < deadline:
@@ -114,7 +116,42 @@ def run(args) -> dict:
         if len(matches) < 2:
             raise paired.FailedSetup(f"{label}: insufficient common diagnostic publication counts")
         report["matched_host_observations"].append(dict(label=label, matches=matches))
-        network()
+        status = network()
+        if getattr(args, "require_state_crc", False):
+            digests = [state_crc.parse_state_crc(
+                (output/f"peer-{seat}/logs/stderr.log").read_text(errors="replace"))
+                for seat in range(2)]
+            try:
+                samples = state_crc.resolved_state_crc(
+                    *digests, min(row["resolved_through"] for row in status),
+                    after=first_simulation_tick)
+            except state_crc.MissingStateCrc as error:
+                raise paired.FailedSetup(f"{label}: {error}") from error
+            report["resolved_state_crc"].append(dict(label=label, samples=samples,
+                resolved_through=[row["resolved_through"] for row in status]))
+
+    def wait_observed(predicate, message, seconds=30):
+        deadline = time.monotonic()+seconds
+        while time.monotonic() < deadline:
+            current = rows()
+            network()
+            if all(predicate(row) for row in current):
+                return current
+            time.sleep(.05)
+        raise paired.ValidationFailure(message)
+
+    def transport_window(count, seconds=20):
+        # Paused gameplay stops the native timer. Use resolved transport ticks
+        # here, without equating them with diagnostic publication counts.
+        start = network()
+        deadline = time.monotonic()+seconds
+        while time.monotonic() < deadline:
+            status = network()
+            if all(row["resolved_through"] >= old["tick"]+count
+                   for row, old in zip(status, start)):
+                return rows()
+            time.sleep(.05)
+        raise paired.ValidationFailure("Transport did not resolve the held-input window")
 
     try:
         ports = [args.host_port, args.guest_port, args.host_udp, args.guest_udp]
@@ -306,6 +343,51 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             all(player.hp == 32 for player in row.players) for row in settled)
         report["checks"]["mailbox_unused"] = all(row.mailbox == 0 for row in settled)
         matched("P1 jump then settle")
+        if getattr(args, "lifecycle_smoke", False):
+            saved = rows()
+            clients[1].host_input(1)  # Original Select hold, never a fixture.
+            absent = wait_observed(lambda row: row.lifecycle == (0, 2),
+                                   "P2 did not complete native voluntary departure")
+            held = transport_window(20)
+            require(all(row.lifecycle == (0, 2) for row in held),
+                    "Held departure Select immediately rejoined")
+            clients[1].host_input(0)
+            transport_window(10)
+            clients[0].host_input(8)
+            wait_observed(lambda row: row.native_phase == 2 and row.pause_owner == 1,
+                          "Primary native pause did not open")
+            clients[0].host_input(0)
+            transport_window(10)
+            # A blocked press must be consumed as history, not replayed as a
+            # fresh rejoin edge when the primary resumes its own native menu.
+            clients[1].host_input(1)
+            transport_window(12)
+            clients[0].host_input(8)
+            wait_observed(lambda row: row.native_phase == 0,
+                          "Primary native menu did not resume")
+            clients[0].host_input(0)
+            resumed = transport_window(25)
+            report["checks"]["blocked_select_does_not_rejoin"] = all(
+                row.lifecycle == (0, 2) for row in resumed)
+            require(report["checks"]["blocked_select_does_not_rejoin"],
+                    "Select held from native pause fabricated a rejoin edge")
+            clients[1].host_input(0)
+            transport_window(10)
+            clients[1].host_input(1)
+            wait_observed(lambda row: row.lifecycle[1] in (3, 0),
+                          "Fresh Select did not request native rejoin")
+            clients[1].host_input(0)
+            joined = wait_observed(lambda row: paired.native_ready(row),
+                                   "P2 did not finish native rejoin")
+            report["checks"]["leave_rejoin_retains_resources"] = all(
+                (old.players[1].hp, old.players[1].ammo, old.players[1].weapon) ==
+                (new.players[1].hp, new.players[1].ammo, new.players[1].weapon)
+                for old, new in zip(saved, joined))
+            report["checks"]["held_departure_stays_absent"] = all(
+                row.lifecycle == (0, 2) for row in absent+held)
+            matched("P2 leave, blocked Select in P1 menu, fresh rejoin")
+            report["limits"].append(
+                "Lifecycle smoke uses healthy intro resources; spent ammo, death, unsafe landing and campaign retry remain unverified")
         report["captures"] = []
         for seat, client in enumerate(clients):
             path = output/f"peer-{seat}/logs/intro.png"
@@ -386,6 +468,10 @@ def main():
                         help="Explicitly bypass default Seamless Loading; never qualifies defaults")
     parser.add_argument("--admission-only", action="store_true",
                         help="Qualify default loader admission and advancing delay transport only; no gameplay pass")
+    parser.add_argument("--lifecycle-smoke", action="store_true",
+                        help="Also exercise native P2 departure, blocked Select during P1 pause and fresh rejoin")
+    parser.add_argument("--require-state-crc", action="store_true",
+                        help="Require modern same-simulation-tick core/mod logs below both resolved watermarks; candidate must register complete host digest")
     args = parser.parse_args()
     if sys.version_info < (3, 11):
         parser.error("Python 3.11+ is required by the shared staging tools")
@@ -393,6 +479,10 @@ def main():
         parser.error("Setup timeout must be in (0,600]")
     if args.admission_only and args.native_loader_diagnostic:
         parser.error("Default-loader admission requires Seamless Loading enabled")
+    if args.admission_only and args.lifecycle_smoke:
+        parser.error("Lifecycle smoke requires the native gameplay checks")
+    if args.admission_only and args.require_state_crc:
+        parser.error("State CRC qualification requires native gameplay")
     report = run(args)
     print(json.dumps(dict(status=report["status"], checks=report["checks"], error=report.get("error"),
                           report=str(args.out/"qualification.json"))), flush=True)

@@ -11,6 +11,8 @@ from coop_debug import (DIAGNOSTIC_ADDRESS, DIAGNOSTIC_BYTES, DebugClient,
                         DebugError, UnstableObservation, observe, parse_diagnostic)
 from test_mmx6_coop_netplay import (FailedSetup, ValidationFailure, main,
                                    native_ready, pair_match, validate_status)
+from coop_state_crc import (MissingStateCrc, StateCrcError, parse_state_crc,
+                            resolved_state_crc)
 
 
 def diagnostic(*, tick=10, sequence=20, digest=0x12345678):
@@ -32,6 +34,20 @@ def diagnostic(*, tick=10, sequence=20, digest=0x12345678):
 
 
 class DiagnosticTests(unittest.TestCase):
+    def test_owned_weapon_and_ammo_are_part_of_the_same_publication(self):
+        data = bytearray(diagnostic())
+        data[0x100+0x93] = 7
+        struct.pack_into("<9H", data, 0x100+0xA8, *range(9))
+        row = parse_diagnostic(bytes(data))
+        self.assertEqual(row.players[1].weapon, 7)
+        self.assertEqual(row.players[1].ammo, tuple(range(9)))
+
+    def test_pause_owner_uses_one_based_wire_seats(self):
+        for owner in (0, 1, 2):
+            data = bytearray(diagnostic())
+            data[0x3C] = owner
+            self.assertEqual(parse_diagnostic(bytes(data)).pause_owner, owner)
+
     def test_versioned_fields_and_canonical_player_order(self):
         row = parse_diagnostic(diagnostic(digest=0))
         self.assertEqual((row.tick, row.sequence, row.host_digest), (10, 20, 0))
@@ -184,6 +200,36 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(result, 2)
         self.assertEqual(report["result"], "failed_setup")
         self.assertEqual(report["whole_machine_determinism"], "unverified")
+
+
+class StateCrcTests(unittest.TestCase):
+    @staticmethod
+    def line(tick, core="12345678", mod="ABCDEF00"):
+        return f"psxrecomp: rb live dig local sim={tick} core={core} cpu=00000001 mod={mod} av=00000002\n"
+
+    def test_only_complete_mod_partition_lines_qualify(self):
+        text = "rb live dig local sim=32 core=12345678 ram=87654321\n"
+        self.assertEqual(parse_state_crc(text+self.line(64).rstrip()), {})
+        self.assertEqual(parse_state_crc(self.line(64))[64].mod, "abcdef00")
+
+    def test_conflicting_repeated_tick_is_rejected(self):
+        self.assertEqual(len(parse_state_crc(self.line(32)*2)), 1)
+        with self.assertRaises(StateCrcError):
+            parse_state_crc(self.line(32)+self.line(32, mod="00000000"))
+
+    def test_only_common_simulation_ticks_below_watermark_qualify(self):
+        host = parse_state_crc("".join(self.line(tick) for tick in (0, 32, 64, 96)))
+        guest = parse_state_crc("".join(self.line(tick) for tick in (32, 64, 96, 128)))
+        samples = resolved_state_crc(host, guest, 96, after=0)
+        self.assertEqual([row["simulation_tick"] for row in samples], [32, 64])
+        with self.assertRaises(MissingStateCrc):
+            resolved_state_crc(host, guest, 64, after=0)
+
+    def test_mod_divergence_fails_with_identical_core(self):
+        host = parse_state_crc(self.line(32)+self.line(64))
+        guest = parse_state_crc(self.line(32)+self.line(64, mod="00000000"))
+        with self.assertRaises(StateCrcError):
+            resolved_state_crc(host, guest, 96)
 
 
 if __name__ == "__main__":

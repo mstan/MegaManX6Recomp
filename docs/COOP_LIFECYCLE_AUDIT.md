@@ -46,4 +46,9 @@ Native checks still required: both peers' accepted Select streams; actual beam
 art/lifetime; airborne leader landing and portal waits; menu transitions;
 owner death during each beam direction; survivor play; original death/retry and
 forward-section policies; HP/ammo/weapon retention; copied native-card integrity;
-and exact core/mod checksum agreement. No comparison ledger status changes here.
+and exact core/mod checksum agreement. A subsequent bounded profile-v9 native
+loopback smoke passes departure, held Select across primary pause/resume and
+fresh rejoin with healthy intro resource retention; exact hashes and the
+retained initial harness ownership-encoding error are in
+[COOP_NETPLAY_BASELINE.md](COOP_NETPLAY_BASELINE.md). Other checks above remain
+open. No full comparison ledger status changes here.

@@ -1,7 +1,7 @@
 # X6 netplay baseline: 2026-10-23
 
-**Corrected default startup admission passes. Gameplay synchronization remains
-unverified.** The original two attempts below preserve the default-loading
+**Default loopback intro/input and bounded lifecycle smokes pass. Full state
+and campaign synchronization remain unverified.** The original attempts preserve the default-loading
 failure and a loading-off diagnostic frontend timeout. A subsequent framework
 fix was validated with a separate default admission check, documented below.
 The offline intro pass recorded elsewhere does not transfer to netplay.
@@ -120,9 +120,75 @@ enabled, `--admission-only` passed for both peers:
 
 This proves default loader admission and session progress only. It performs
 no native gameplay, movement or host-FNV qualification. The earlier frontend
-timeout and every gameplay/state comparison remain open. Later build hashes
+timeout was investigated separately below. Every full gameplay/state comparison
+remains open. Later build hashes
 are listed separately in the burndown; this native pass belongs to the exact
 binary above.
+
+## Native transport input smoke after the sampler correction
+
+The old framework's `capture_pad_slot_exclusive` omitted the virtual host
+device that the offline sampler already accepts. Thus `pad_status` correctly
+acknowledged a host-layer command while the netplay sampler still captured a
+neutral keyboard. Frozen modern X4 already contains the correction
+`1e33761d2a4060a1d6092ecf18c243fb9604d43c`. Its exact change was cherry-picked
+locally as `a72527f13a378688d7974afde86c3c8c140b79fd`, retaining the disc-identity
+fix. It samples the explicit virtual device before transport staging and uses
+the destination seat's pad mode; no simulation-layer SIO override is involved.
+
+A fresh default-Seamless pair then passed the bounded intro/input checks:
+
+- Native frontend reaches two living idle heroes using original inputs only.
+- P2 Right moves P2 on both peers while preserving P1's X; P1 Jump reaches
+  both peers while preserving P2's Y. Both remain healthy; mailbox unused.
+- The three partial host-observation windows contain 104, 106 and 109 matching
+  diagnostic publications. These are not framework simulation CRC samples.
+- Final session ticks are 3690/3691, resolved-through 3689/3690, two players,
+  rollback disabled, no reported input-contract desynchronization.
+- Both 320x240 game-render-buffer captures were inspected and show X/Zero and
+  their meters. Both SHA-256 values are
+  `088fa57c185d86dea69344dc612814eb77ab3389f21bc82cadbde94c8a9c4a95`.
+
+Exact executable:
+`cff00c09fde9f6f786883a869bb276bbd20aedfd6b50224c183ee2b39e0f4384`.
+Report:
+`G:/Temp/Codex/psxrecomp/x6-parity/netplay-host-input-fixed/qualification.json`,
+SHA-256 `d7a8fbd69bdb5ff5e995e8b5805ad2173d33463b060b21fce7cb828dcfda5ea6`.
+Only the runner's two processes were terminated and verified absent. Graceful
+exit remains unverified. This is a bounded loopback input smoke, with no core/mod
+determinism, physical controller, audible, campaign or internet qualification.
+
+## Lifecycle smoke on profile v9
+
+The source/helper correction in game `fb95f99` preserves queued rejoin intent
+and consumes blocked Select edges, with compatibility profile bumped to
+`mmx6-x-zero-delay-v9`. Full debug and production builds plus 20/20 checks each
+pass (`build-lifecycle-*.log`, `ctest-lifecycle-*.log`). Debug executable:
+`407f13b2b44a795dfc2316a6884c64b6e453ae554569fb64ca528e4b36d0233b`;
+production: `112990647ce3c8c2781a5238c272790a0894223c2be6c54f299a68b29ade3464`.
+
+`netplay-lifecycle-v9-owner-fixed/qualification.json` passes the six intro/input
+checks plus three native lifecycle checks: held departure remains absent,
+Select pressed during primary pause and held through resume creates no rejoin,
+and a fresh released/pressed Select rejoins with observed HP/ammo/weapon
+preserved. Both peers finish tick 4418, resolved-through 4417, `desync=0`.
+Report SHA-256:
+`d5dd9796f3751fde9971c474741e655255eb5320176342f90f9e37cdd22d09a0`.
+Both final game-buffer captures were inspected; SHA-256:
+`3a2d09561d3a91261178ca645ba9304667f1a953b24e1b4ecd9559fb15e70f6a`.
+
+The prior `netplay-lifecycle-v9/qualification.json` is retained as a harness
+failure (SHA-256
+`a4ba79cf665f9e2a90846e81607a424abfa3b8d8bb983ab995545c3bf2f0d813`).
+Its screenshot and published phase show the primary menu opened correctly;
+the new assertion incorrectly expected zero-based ownership, while the wire
+uses 0=none/1=P1/2=P2. Only that assertion was corrected before the successful
+retry. No game fix or native pause defect is inferred from this failed tool run.
+
+All four owned processes were verified absent after their runners stopped them.
+Healthy intro resources only were exercised; this does not qualify spent ammo,
+airborne unsafe landing, death/retry, audio, full state restoration or campaign
+scenes. Matching diagnostic publications remain partial evidence.
 
 ## Reusable runner
 
@@ -138,6 +204,15 @@ bypass used by attempt 2. The runner gained that explicit flag after the
 bounded attempts; neither original attempt was rerun. `--admission-only` checks
 the corrected default loader and advancing delay session without claiming
 intro gameplay; it cannot be combined with the diagnostic loading bypass.
+`--lifecycle-smoke` extends a gameplay run with native departure, a Select
+press held through primary pause/resume and a fresh rejoin, retaining resource
+observations. This mode does not inject death, spent ammo or success flags.
+`--require-state-crc` additionally requires modern core/mod breadcrumb pairs at
+the same simulation tick, strictly below both resolved-through watermarks and
+after each input window. Legacy/missing partitions and too few samples cannot
+pass. The candidate must separately register its complete authoritative host
+digest: a logged `mod=00000000` alone proves no such registration. This mode
+has parser regressions but no native X6 qualification yet.
 Python 3.11+ is required by the
 shared tools; the actual attempts used Python 3.12.5.
 

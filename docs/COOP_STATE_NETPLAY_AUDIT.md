@@ -6,6 +6,16 @@ The baseline is X6 `6cba3f8b4dafe3c4cabd2316593084e87c3f682a` with framework
 below adds observability and prevents unsafe test setup from being counted as
 network evidence; it does not establish X4 parity.
 
+Integrated follow-up: unilateral diagnostic writes are now rejected online and
+in production; coherent reads use one emulation-thread publication. Profile v9
+and framework a725 pass bounded native loopback input and leave/pause/rejoin
+checks, recorded in [the baseline](COOP_NETPLAY_BASELINE.md). A separate local
+modern-SDK bridge and complete host-state provider are being implemented; the
+baseline API/state gaps below remain historical evidence, not a claim that
+those future implementations are already qualified. `coop_state_crc.py` now
+validates same-simulation-tick core/mod samples strictly below both resolved
+watermarks, but no X6 native core/mod checksum pass is claimed yet.
+
 ## References and actual framework capabilities
 
 - Frozen X4: `50593bca772b600de6911cbfecd40b0f08721147`, framework

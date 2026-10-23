@@ -1,5 +1,12 @@
 # Framework pin history (historical)
 
+Local follow-up: `a72527f13a378688d7974afde86c3c8c140b79fd`, branch
+`feature/mmx6-parity-sdk-compat`, adds the already-proven X4 sampler correction
+`1e33761d` to the disc-identity fix below. Explicit host devices now enter
+the exclusive netplay capture path with the destination seat's pad mode.
+The exact X6 candidate `cff00c09...` passes native loopback intro/input smoke;
+see the baseline for full hashes and limits. No remote publication.
+
 Local X6 parity candidate, 2026-10-23: `psxrecomp-v4` is
 `83e8b5e11c005e0868e1aef96335258aad157559`, branch
 `fix/mmx6-netplay-loader-disc-identity`, based on `a502df385`.

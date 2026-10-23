@@ -123,13 +123,16 @@ class Player:
     hp: int
     x_raw: int
     y_raw: int
+    weapon: int = 0
+    ammo: tuple[int, ...] = ()
 
     @classmethod
     def parse(cls, body: bytes) -> "Player":
         if len(body) != BODY_BYTES:
             raise DebugError("Truncated native player body")
         x, y = struct.unpack_from("<ii", body, 8)
-        return cls(body[0], body[2], body[4], body[5], body[0x5C], x, y)
+        return cls(body[0], body[2], body[4], body[5], body[0x5C], x, y,
+                   body[0x93], struct.unpack_from("<9H", body, 0xA8))
 
 
 @dataclass(frozen=True)
@@ -139,7 +142,7 @@ class Observation:
     sequence: int | None
     native_timer: int
     lifecycle: tuple[int, int]
-    pause_owner: int
+    pause_owner: int  # Wire encoding: 0=none, 1=P1, 2=P2.
     scene_owner: int
     scene_phase: int
     mailbox: int
