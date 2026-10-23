@@ -5,7 +5,7 @@ R4/R12, local co-op and netplay audio outcomes are unverified. No adapter is
 enabled and no game or card was opened. The original SLUS-01395 USA v1.1 EXE
 SHA-256 is `dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046`.
 
-[The reproducible metadata](COOP_AUDIO_DRIVER_OWNERSHIP.json) pins 18 inspected
+[The reproducible metadata](COOP_AUDIO_DRIVER_OWNERSHIP.json) pins 20 inspected
 routine extents, direct calls, unresolved indirect call sites, eight native
 state regions and ten original character tone tables. These bounds were traced
 from original MIPS instructions with Capstone 5.0.7. The reproducer needs only
@@ -69,8 +69,27 @@ been excluded during a projected call.
 
 Two indirect callbacks execute during flush when per-voice fields `M+1e` or
 `M+2a` are nonzero: `8005C0A8` uses pointer `800E5520`; `8005C0D4` uses pointer
-`800E5398`. Their active targets and complete ramp mutations remain unresolved.
-This prevents declaring the entire stop/volume/flush ownership contract complete.
+`800E5398`. Their exact observed contract is a guest callback receiving
+`a0=voice (0..23)`; the flush ignores its return value and then continues to the
+other conditional callback or next voice. Its mutations cannot be inferred
+from that ABI alone.
+
+Both slots have a proven initial target of **zero**. The original entry at
+`80054AD8` constructs `[8008EAA8,800E9860)` and clears it in words at
+`80054AE8..80054AF8`; both slots lie inside. An encoded-immediate scan of the
+entire loaded base EXE finds only the two slot loads at `8005C0A0` and
+`8005C0CC`, with no explicit address-immediate stores or slot-address
+construction. The activation fields have explicit zero stores in driver init
+(`8005D300`, `8005D330`) and native voice selection (`8005DEC8`, `8005DED4`).
+No nonzero callback assignment/target has been established.
+
+This result is deliberately bounded: an immediate scan is not alias analysis
+and cannot exclude computed pointer writes or later overlay code. It does not
+prove the callbacks remain null throughout a campaign. The missing dynamic
+values are precisely the two slot words plus `M+1e`/`M+2a` for every active
+voice. If an activation becomes nonzero, its actual slot target and complete
+callee mutations must be observed/traced before enabling private lifetimes.
+No callable function is invented for an initially null pointer.
 
 `8005C714` also has two submission modes, controlled by bit 0 of `8007AE00`.
 Direct mode writes SPU KEYON at register offsets `188h/18ah`, KEYOFF at
@@ -79,6 +98,37 @@ and queue globals `8007ADCC` / `8007ADC8`. Mask helper `8005C394` similarly
 selects hardware versus the `800E4368` mirror. Preserving a high-level mask
 after a flush already consumed it cannot undo a hardware voice replacement.
 The isolated calculation must prove that no flush/escape occurs before restore.
+
+### Finite ordinary calculation closure
+
+All direct calls, indirect calls, external tail jumps and native trap
+instructions in the ordinary calculation are now enumerated by the reproducer:
+
+| Entry | Complete ordinary direct closure |
+| --- | --- |
+| KEYON `8005A9D4` | `8005FC94` (VAB/program selection), `8005BCA4` (voice setup), `8005DF40 -> 8005DFA8` (pitch lookup/conversion), `8005E794` (sample queue). |
+| STOP `8005AD40` | `8005E6D4` (stop queue), which is a leaf. |
+| Volume `8005BC14` | Leaf. |
+
+None of these routines has an indirect call or an external tail jump. No edge
+reaches `8005BE94`, BIOS/device waits or either flush callback. KEYON's only
+additional direct edge, `8005ACDC -> 8005E0D4`, is the selected-sample-255 branch
+excluded for the ten exact character banks below. KEYON also contains four
+native `BREAK` guards around gain division (`8005AAC4`, `8005AADC`, `8005AAFC`,
+`8005AB14`). Ordinary nonnegative original gains avoid zero/overflow division;
+an adapter must validate original arguments rather than treating arbitrary
+guest state as a safe calculation.
+
+The modern SDK's `mod_plugins.h` uncharged-call contract states that budget 0
+charges no cycles, advances no devices and takes no interrupts.
+`runtime/src/mod_guest_services.c:66` enters that cycle-freeze scope around
+dispatch; `psx_cycles.c` keeps it frozen without a finite-budget thaw. Thus
+ordinary native call-graph closure no longer leaves an unidentified direct
+flush path. This is a source-level timing contract, not a demonstrated guarantee
+against replaced functions, segment/dispatch failures, watchdogs or abandoned
+host frames. A future transaction needs explicit failure/escape ownership
+and an actual helper regression before registration. Clearing an abandoned
+guard cannot repair a half-restored voice mirror.
 
 There is also a distinct tone sample-number `ffh` path: KEYON calls
 `8005E0D4`, which calls `8005E644` and writes shared SPU control register
@@ -124,11 +174,12 @@ shared selectors. Any transaction must derive its own exact capture/restore
 set from these paths, preserve pending P1 hardware work, and retain cross-bank
 record routing. New host-owned audio state must join the canonical codec/digest.
 
-No narrow runtime fix is enabled: unresolved flush callbacks, scheduler
-admission and native lifetime/transition observations make a passing adapter
-claim premature. The remaining work is specific: resolve the two callback
-targets and ramp state; prove the uncharged transaction cannot flush midway;
-implement character-scoped routing and transfer/epoch ownership; then compare
+No narrow runtime fix is enabled: later computed callback assignments,
+abnormal dispatch/escape ownership and native lifetime/transition observations
+make a passing adapter claim premature. The remaining work is specific:
+observe the two slot/activation pairs and trace any nonzero targets; implement
+and test scoped calculation failure handling plus character-scoped routing and
+transfer/epoch ownership; then compare
 muted native captures, shared music, both overlap orders and current-build
 restore on local and accepted-input netplay sessions. No ledger row closes here.
 
@@ -142,7 +193,8 @@ python tools/audit_mmx6_audio_driver.py --exe $env:MMX6_AUDIO_EXE --disc $env:MM
 python -m unittest discover -s tools -p test_mmx6_audio_driver_audit.py -v
 ```
 
-Five tests pass with original-source reproduction enabled. They check bounded
+Seven tests pass with original-source reproduction enabled. They check bounded
 routine extraction, return delay-slot inclusion, direct/indirect call identity,
+tail-call/trap detection, finite ordinary closure, startup callback scope,
 unknown-source rejection and exact source reproduction. They establish audit
 integrity, not simulated execution of native audio or audible correctness.

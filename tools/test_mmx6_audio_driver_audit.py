@@ -33,6 +33,14 @@ class DriverEvidence(unittest.TestCase):
         self.assertNotEqual(result["sha256"], routine_metadata(Executable(bytes(changed)),
             "probe", 0x80010000, 0x80010020)["sha256"])
 
+    def test_tail_calls_and_exception_instructions_cannot_hide_in_closure(self):
+        data = bytearray(self.synthetic().data)
+        struct.pack_into("<II", data, 2048 + 16, 0x000001CD,
+                         0x08000000 | (0x8005E794 >> 2 & 0x03FFFFFF))
+        result = routine_metadata(Executable(bytes(data)), "probe", 0x80010000, 0x80010020)
+        self.assertEqual(result["trap_sites"], [{"site": "80010010", "kind": "break"}])
+        self.assertEqual(result["external_jumps"], [{"site": "80010014", "target": "8005E794"}])
+
     def test_escaping_unaligned_and_missing_delay_slot_reject(self):
         exe = self.synthetic()
         for start, end in ((0x80010001, 0x80010020), (0x80010000, 0x80010024),
@@ -55,6 +63,25 @@ class DriverEvidence(unittest.TestCase):
         self.assertEqual(len(report["character_tones"]), 10)
         self.assertTrue(all(not row["noise_sample_255_slots"] for row in report["character_tones"]))
         self.assertTrue(report["remaining"])
+
+    def test_frozen_ordinary_closure_and_callback_startup_scope(self):
+        report = json.loads(REPORT.read_text(encoding="utf-8"))
+        routines = {row["name"]: row for row in report["routines"]}
+        closure = report["ordinary_calculation_closure"]
+        names = set(closure["key_on"] + closure["stop"] + closure["volume"])
+        targets = {routines[name]["start"] for name in names} | {routines["noise_key_on"]["start"]}
+        for name in names:
+            self.assertFalse(routines[name]["indirect_call_sites"])
+            self.assertFalse(routines[name]["indirect_jumps"])
+            self.assertFalse(routines[name]["external_jumps"])
+            self.assertFalse(routines[name]["external_branches"])
+            self.assertTrue(all(call["target"] in targets for call in routines[name]["direct_calls"]))
+            self.assertTrue(all(trap["kind"] == "break" for trap in routines[name]["trap_sites"]))
+        self.assertEqual(len(routines["explicit_key_on"]["trap_sites"]), 4)
+        for row, site in zip(report["callback_evidence"], ("8005C0A0", "8005C0CC")):
+            self.assertEqual(row["startup_value"], 0)
+            self.assertEqual(row["encoded_immediate_references"], [{"site": site, "opcode": 35}])
+            self.assertIn("unresolved", row["later_nonzero_target"])
 
     @unittest.skipUnless(os.environ.get("MMX6_AUDIO_EXE") and os.environ.get("MMX6_AUDIO_DISC"),
                          "Set original EXE/disc paths for source reproduction")

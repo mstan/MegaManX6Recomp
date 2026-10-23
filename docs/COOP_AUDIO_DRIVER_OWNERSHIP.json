@@ -1,5 +1,5 @@
 {
-  "format_version": 1,
+  "format_version": 2,
   "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
   "evidence": "Original native instructions manually traced; hashes and call sites reproduced mechanically",
   "implementation_status": "audit_only_no_runtime_fix",
@@ -30,7 +30,11 @@
           "target": "8005AD40"
         }
       ],
-      "indirect_call_sites": []
+      "indirect_call_sites": [],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
     },
     {
       "name": "explicit_key_on",
@@ -60,7 +64,28 @@
           "target": "8005E794"
         }
       ],
-      "indirect_call_sites": []
+      "indirect_call_sites": [],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": [
+        {
+          "site": "8005AAC4",
+          "kind": "break"
+        },
+        {
+          "site": "8005AADC",
+          "kind": "break"
+        },
+        {
+          "site": "8005AAFC",
+          "kind": "break"
+        },
+        {
+          "site": "8005AB14",
+          "kind": "break"
+        }
+      ]
     },
     {
       "name": "explicit_stop",
@@ -74,7 +99,11 @@
           "target": "8005E6D4"
         }
       ],
-      "indirect_call_sites": []
+      "indirect_call_sites": [],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
     },
     {
       "name": "explicit_volume",
@@ -83,7 +112,11 @@
       "bytes": 132,
       "sha256": "6f28c632ab18b7f828821fb79524a01a36e926e79083454399b6b2f7bc07623d",
       "direct_calls": [],
-      "indirect_call_sites": []
+      "indirect_call_sites": [],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
     },
     {
       "name": "key_on_setup",
@@ -92,7 +125,11 @@
       "bytes": 456,
       "sha256": "25866e1c62efc7c03f6bd0a95c72f6ea9fe8c217a2bc74d34312c9bf18bc802e",
       "direct_calls": [],
-      "indirect_call_sites": []
+      "indirect_call_sites": [],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
     },
     {
       "name": "driver_flush",
@@ -141,7 +178,11 @@
       "indirect_call_sites": [
         "8005C0A8",
         "8005C0D4"
-      ]
+      ],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
     },
     {
       "name": "mask_write",
@@ -150,7 +191,11 @@
       "bytes": 700,
       "sha256": "74b7142c3de6d8c35a1d509276e35c25db45e7a7aed6f95c58d68dc050cf890f",
       "direct_calls": [],
-      "indirect_call_sites": []
+      "indirect_call_sites": [],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
     },
     {
       "name": "key_mask_write",
@@ -159,7 +204,11 @@
       "bytes": 444,
       "sha256": "38660be4cb7aa3eaec5a85ae2da185fd3d0861bb2a2ede00803877cb901ab59e",
       "direct_calls": [],
-      "indirect_call_sites": []
+      "indirect_call_sites": [],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
     },
     {
       "name": "transfer_gate",
@@ -168,7 +217,42 @@
       "bytes": 64,
       "sha256": "b804c5ef7dbbad7535e62486bae41e9b1efbecbc1f3d62ac8db4dbd58574f8da",
       "direct_calls": [],
-      "indirect_call_sites": []
+      "indirect_call_sites": [],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
+    },
+    {
+      "name": "pitch_lookup",
+      "start": "8005DF40",
+      "end_exclusive": "8005DFA8",
+      "bytes": 104,
+      "sha256": "d2bd56116071549ecfecac003aad89329ebf941cc4c8b452e2d5bad41bacebfb",
+      "direct_calls": [
+        {
+          "site": "8005DF90",
+          "target": "8005DFA8"
+        }
+      ],
+      "indirect_call_sites": [],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
+    },
+    {
+      "name": "pitch_convert",
+      "start": "8005DFA8",
+      "end_exclusive": "8005E0C8",
+      "bytes": 288,
+      "sha256": "a2b832803fa2c81fe30221820bc19f6bbbde4ff500da8ad8aae92059d0e35fd3",
+      "direct_calls": [],
+      "indirect_call_sites": [],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
     },
     {
       "name": "noise_key_on",
@@ -182,7 +266,11 @@
           "target": "8005E644"
         }
       ],
-      "indirect_call_sites": []
+      "indirect_call_sites": [],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
     },
     {
       "name": "noise_clock",
@@ -191,7 +279,11 @@
       "bytes": 72,
       "sha256": "7e9c6b1dd4c410419339cc5eb126a7a3638097664d3163e686a2cb4c892562bb",
       "direct_calls": [],
-      "indirect_call_sites": []
+      "indirect_call_sites": [],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
     },
     {
       "name": "stop_queue",
@@ -200,7 +292,11 @@
       "bytes": 192,
       "sha256": "58db8b67b6dd38c5e9ccfbe4227e5c22010d1d0b7d83b5a2cf3324549584d1ae",
       "direct_calls": [],
-      "indirect_call_sites": []
+      "indirect_call_sites": [],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
     },
     {
       "name": "sample_key_on_queue",
@@ -209,7 +305,11 @@
       "bytes": 1224,
       "sha256": "ae6b85430c46d5414cf1dfb6e925cd5c79e2d18669ff7566671591df015b7f04",
       "direct_calls": [],
-      "indirect_call_sites": []
+      "indirect_call_sites": [],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
     },
     {
       "name": "select_vab_program",
@@ -218,7 +318,11 @@
       "bytes": 192,
       "sha256": "bae7f102db75d7f38cfe1b5b18e87761a70d3bbee3d47857014ac341eccb55af",
       "direct_calls": [],
-      "indirect_call_sites": []
+      "indirect_call_sites": [],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
     },
     {
       "name": "header_open_wrapper",
@@ -232,7 +336,11 @@
           "target": "80060214"
         }
       ],
-      "indirect_call_sites": []
+      "indirect_call_sites": [],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
     },
     {
       "name": "header_open",
@@ -260,7 +368,11 @@
       ],
       "indirect_call_sites": [
         "800604C4"
-      ]
+      ],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
     },
     {
       "name": "body_transfer",
@@ -290,7 +402,11 @@
           "target": "800607F4"
         }
       ],
-      "indirect_call_sites": []
+      "indirect_call_sites": [],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
     },
     {
       "name": "transfer_complete",
@@ -312,9 +428,73 @@
           "target": "80069E44"
         }
       ],
-      "indirect_call_sites": []
+      "indirect_call_sites": [],
+      "indirect_jumps": [],
+      "external_jumps": [],
+      "external_branches": [],
+      "trap_sites": []
     }
   ],
+  "callback_evidence": [
+    {
+      "slot": "800E5520",
+      "startup_value": 0,
+      "startup_zero_start": "8008EAA8",
+      "startup_zero_end_exclusive": "800E9860",
+      "zero_loop_store": "80054AE8",
+      "conditional_call": "8005C0A8",
+      "activation_metadata_offset": 30,
+      "argument": "a0=voice (0..23)",
+      "return_value": "ignored",
+      "encoded_immediate_references": [
+        {
+          "site": "8005C0A0",
+          "opcode": 35
+        }
+      ],
+      "later_nonzero_target": "unresolved: computed/overlay writes not excluded"
+    },
+    {
+      "slot": "800E5398",
+      "startup_value": 0,
+      "startup_zero_start": "8008EAA8",
+      "startup_zero_end_exclusive": "800E9860",
+      "zero_loop_store": "80054AE8",
+      "conditional_call": "8005C0D4",
+      "activation_metadata_offset": 42,
+      "argument": "a0=voice (0..23)",
+      "return_value": "ignored",
+      "encoded_immediate_references": [
+        {
+          "site": "8005C0CC",
+          "opcode": 35
+        }
+      ],
+      "later_nonzero_target": "unresolved: computed/overlay writes not excluded"
+    }
+  ],
+  "ordinary_calculation_closure": {
+    "key_on": [
+      "explicit_key_on",
+      "select_vab_program",
+      "key_on_setup",
+      "pitch_lookup",
+      "pitch_convert",
+      "sample_key_on_queue"
+    ],
+    "stop": [
+      "explicit_stop",
+      "stop_queue"
+    ],
+    "volume": [
+      "explicit_volume"
+    ],
+    "excluded_branch": "8005ACDC -> noise_key_on only when selected sample is 255; absent from frozen character tone slots",
+    "indirect_calls": [],
+    "flush_calls": [],
+    "trap_obligation": "KEYON has native BREAK guards around gain division; require original nonnegative gains and valid guest inputs",
+    "scope": "Native direct closure only; SDK replacement/dispatch failures and later computed writes are not proved absent"
+  },
   "native_regions": [
     {
       "name": "voice_metadata",
@@ -687,8 +867,8 @@
     }
   ],
   "remaining": [
-    "Resolve and bound flush callback targets at 800E5520 and 800E5398 and every scheduler entry to the flush.",
-    "Prove uncharged isolated native calculation cannot flush/escape midway, including queued SPU write mode.",
+    "Callback slots are startup-zero with no explicit encoded-immediate assignments in the base EXE; resolve later computed/overlay assignments and nonzero targets if their metadata activation fields become nonzero.",
+    "Native ordinary closure has no flush/indirect calls; qualify SDK uncharged dispatch and abnormal-escape handling before enabling an adapter.",
     "Implement character-scoped status/stop/volume, global stop, VAB epoch and snapshot ownership, preserving music.",
     "Obtain native muted captures of sample identity, overlap, natural end, stop, load/retry/rematch and snapshot replay."
   ]

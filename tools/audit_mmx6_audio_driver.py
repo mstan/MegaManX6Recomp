@@ -22,6 +22,8 @@ ROUTINES = (
     ("mask_write", 0x8005C394, 0x8005C650),
     ("key_mask_write", 0x8005C714, 0x8005C8D0),
     ("transfer_gate", 0x8005D4A4, 0x8005D4E4),
+    ("pitch_lookup", 0x8005DF40, 0x8005DFA8),
+    ("pitch_convert", 0x8005DFA8, 0x8005E0C8),
     ("noise_key_on", 0x8005E0D4, 0x8005E63C),
     ("noise_clock", 0x8005E644, 0x8005E68C),
     ("stop_queue", 0x8005E6D4, 0x8005E794),
@@ -52,7 +54,7 @@ def routine_metadata(exe, name, start, end):
     data = exe.data[at:at + end - start]
     if len(data) < 8 or struct.unpack_from("<I", data, len(data) - 8)[0] != 0x03E00008:
         raise ValueError("Audited extent must include terminal JR RA and delay slot")
-    calls, indirect = [], []
+    calls, indirect, indirect_jumps, external_jumps, external_branches, traps = [], [], [], [], [], []
     for offset in range(0, len(data), 4):
         word = struct.unpack_from("<I", data, offset)[0]
         address = start + offset
@@ -61,9 +63,55 @@ def routine_metadata(exe, name, start, end):
             calls.append(dict(site=f"{address:08X}", target=f"{target:08X}"))
         elif word >> 26 == 0 and word & 63 == 9:
             indirect.append(f"{address:08X}")
+        elif word >> 26 == 0 and word & 63 == 8 and (word >> 21) & 31 != 31:
+            indirect_jumps.append(f"{address:08X}")
+        elif word >> 26 == 2:
+            target = ((address + 4) & 0xF0000000) | ((word & 0x03FFFFFF) << 2)
+            if not start <= target < end:
+                external_jumps.append(dict(site=f"{address:08X}", target=f"{target:08X}"))
+        elif word >> 26 in (1, 4, 5, 6, 7):
+            signed = (word & 65535) - (65536 if word & 32768 else 0)
+            target = (address + 4 + signed * 4) & 0xFFFFFFFF
+            if word >> 26 == 1 and (word >> 16) & 31 in (16, 17):
+                calls.append(dict(site=f"{address:08X}", target=f"{target:08X}"))
+            elif not start <= target < end:
+                external_branches.append(dict(site=f"{address:08X}", target=f"{target:08X}"))
+        elif word >> 26 == 0 and word & 63 in (12, 13):
+            traps.append(dict(site=f"{address:08X}", kind="syscall" if word & 63 == 12 else "break"))
     return dict(name=name, start=f"{start:08X}", end_exclusive=f"{end:08X}",
                 bytes=len(data), sha256=hashlib.sha256(data).hexdigest(),
-                direct_calls=calls, indirect_call_sites=indirect)
+                direct_calls=calls, indirect_call_sites=indirect,
+                indirect_jumps=indirect_jumps, external_jumps=external_jumps,
+                external_branches=external_branches, trap_sites=traps)
+
+
+def callback_evidence(exe):
+    # Decode the actual startup LUI/ADDIU address pairs, not guessed BSS bounds.
+    bounds = []
+    for address, register in ((0x80054AD8, 2), (0x80054AE0, 3)):
+        hi, low = exe.word(address), exe.word(address + 4)
+        if (hi >> 26 != 15 or (hi >> 16) & 31 != register or low >> 26 != 9
+                or (low >> 21) & 31 != register or (low >> 16) & 31 != register):
+            raise ValueError("Startup address construction differs")
+        signed = (low & 65535) - (65536 if low & 32768 else 0)
+        bounds.append((((hi & 65535) << 16) + signed) & 0xFFFFFFFF)
+    result = []
+    for slot, activation, site in ((0x800E5520, 0x1E, 0x8005C0A8),
+                                   (0x800E5398, 0x2A, 0x8005C0D4)):
+        references = []
+        for offset in range(0, exe.size, 4):
+            word = struct.unpack_from("<I", exe.data, 2048 + offset)[0]
+            # This is an encoded-immediate scan, not alias analysis. Do not
+            # mistake its absence of stores for proof against computed writes.
+            if word >> 26 in (8, 9, 12, 13, 14, 0x20, 0x21, 0x23, 0x24, 0x25, 0x28, 0x29, 0x2B) and word & 65535 == slot & 65535:
+                references.append(dict(site=f"{exe.base + offset:08X}", opcode=word >> 26))
+        result.append(dict(slot=f"{slot:08X}", startup_value=0,
+            startup_zero_start=f"{bounds[0]:08X}", startup_zero_end_exclusive=f"{bounds[1]:08X}",
+            zero_loop_store="80054AE8", conditional_call=f"{site:08X}",
+            activation_metadata_offset=activation, argument="a0=voice (0..23)",
+            return_value="ignored", encoded_immediate_references=references,
+            later_nonzero_target="unresolved: computed/overlay writes not excluded"))
+    return result
 
 
 def tone_metadata(disc_path):
@@ -102,16 +150,24 @@ def audit(exe_path, disc_path):
     if digest(data) != EXE_SHA256:
         raise ValueError("Require original SLUS-01395 USA v1.1 executable")
     exe = Executable(data)
-    return dict(format_version=1, exe_sha256=EXE_SHA256,
+    return dict(format_version=2, exe_sha256=EXE_SHA256,
         evidence="Original native instructions manually traced; hashes and call sites reproduced mechanically",
         implementation_status="audit_only_no_runtime_fix", local_coop="unverified", netplay="unverified",
         routines=[routine_metadata(exe, *row) for row in ROUTINES],
+        callback_evidence=callback_evidence(exe),
+        ordinary_calculation_closure=dict(
+            key_on=["explicit_key_on", "select_vab_program", "key_on_setup", "pitch_lookup", "pitch_convert", "sample_key_on_queue"],
+            stop=["explicit_stop", "stop_queue"], volume=["explicit_volume"],
+            excluded_branch="8005ACDC -> noise_key_on only when selected sample is 255; absent from frozen character tone slots",
+            indirect_calls=[], flush_calls=[],
+            trap_obligation="KEYON has native BREAK guards around gain division; require original nonnegative gains and valid guest inputs",
+            scope="Native direct closure only; SDK replacement/dispatch failures and later computed writes are not proved absent"),
         native_regions=[dict(name=name, base=f"{base:08X}", stride=stride, count=count,
             end_exclusive=f"{base + stride * count:08X}", evidence=source)
             for name, base, stride, count, source in REGIONS],
         character_tones=tone_metadata(disc_path),
-        remaining=["Resolve and bound flush callback targets at 800E5520 and 800E5398 and every scheduler entry to the flush.",
-            "Prove uncharged isolated native calculation cannot flush/escape midway, including queued SPU write mode.",
+        remaining=["Callback slots are startup-zero with no explicit encoded-immediate assignments in the base EXE; resolve later computed/overlay assignments and nonzero targets if their metadata activation fields become nonzero.",
+            "Native ordinary closure has no flush/indirect calls; qualify SDK uncharged dispatch and abnormal-escape handling before enabling an adapter.",
             "Implement character-scoped status/stop/volume, global stop, VAB epoch and snapshot ownership, preserving music.",
             "Obtain native muted captures of sample identity, overlap, natural end, stop, load/retry/rematch and snapshot replay."])
 
@@ -131,7 +187,7 @@ def main():
         with args.out.open("x", encoding="utf-8", newline="\n") as f:
             json.dump(report, f, indent=2)
             f.write("\n")
-    print("18 native routine extents, 8 queue regions, 10 tone tables; audio outcomes unverified")
+    print("20 native routine extents, ordinary call closure, 2 startup-zero callback slots; audio outcomes unverified")
 
 
 if __name__ == "__main__":
