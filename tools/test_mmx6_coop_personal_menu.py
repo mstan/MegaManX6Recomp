@@ -165,6 +165,28 @@ class CallbackContractTests(unittest.TestCase):
             personal_menu_smoke(ctx, owner=0)
         self.assertEqual(ctx["report"], {})
 
+    def test_expected_hp_rejects_dead_pending_hit_and_invalid_values_before_controls(self):
+        for values in ((32, 0), (0, 28), (32, -1), (32, 0x9C), (32, 128),
+                       (32, True), (32, 28.0), (32,), "32,28", None):
+            ctx = self.context()
+            with self.assertRaisesRegex(ValueError, "two living positive"):
+                personal_menu_smoke(ctx, expected_hp=values)
+            self.assertEqual(ctx["report"], {})
+
+    def test_reduced_living_hp_is_allowed_without_enabling_any_other_bypass(self):
+        for values in ((32, 28), (32, 1), (32, 32)):
+            ctx = self.context()
+            ctx["input_path"] = "mailbox"
+            with self.assertRaisesRegex(ValueError, "published host"):
+                personal_menu_smoke(ctx, expected_hp=values)
+            self.assertEqual(ctx["report"], {})
+        before = [peer()]
+        before[0]["observation"]["players"][1]["hp"] = 28
+        after = copy.deepcopy(before)
+        self.assertTrue(resources_preserved(before, after))
+        after[0]["observation"]["players"][1]["hp"] = 32
+        self.assertFalse(resources_preserved(before, after))
+
 
 if __name__ == "__main__":
     unittest.main()

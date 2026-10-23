@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "comparison": "R2",
+  "kind": "source_native_contact_audit",
+  "runtime_qualified": false,
+  "mode_status": {
+    "local": "unverified",
+    "netplay": "unverified"
+  },
+  "candidate": {
+    "compiled_game_commit": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+    "executable_sha256": "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9",
+    "binding": "Coordinator supplied existing manifest-bound candidate identity; this audit launched no process",
+    "r13_support": "docs/evidence/mmx6-r13/manifest-bound-fbba0e3-summary.json"
+  },
+  "original_source": {
+    "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "archive_sha256": "55b03e4ecc13d6110ff300f80b7000b0f97234e19f1b846aa2b885eece30d80f",
+    "zero_overlay": {
+      "index": 1,
+      "sector": 24,
+      "size": 22964,
+      "sha256": "75a142a529ddc70f0d60ee6be32ebcdb0cf5cc90ec88e965c3b15cf0c6d21b00",
+      "base": "801EA000"
+    },
+    "intro_overlay": {
+      "index": 2,
+      "sector": 36,
+      "size": 74784,
+      "sha256": "d8bcf3aea6caf1dd4098b681ad912692835d726dfe16fddca779e82d894de607",
+      "base": "800E9860"
+    }
+  },
+  "game_source": {
+    "commit": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+    "path": "src/mods/mmx6_coop_plugin.c",
+    "git_blob": "dcf35129764cf75f8cceb653d9e59e79c4595154",
+    "sha256": "72cf416044ff4a089165c0a75a72df8c999eaeffb19a7b19ec81d2fb70a32fd9",
+    "functions": [
+      "player_contact",
+      "enemy_hit",
+      "capture_player",
+      "project_player",
+      "enter_zero",
+      "leave_zero_context",
+      "stage_tick"
+    ]
+  },
+  "native_spans": [
+    {
+      "name": "contact_native",
+      "source": "original_exe",
+      "start": "80030ECC",
+      "end_exclusive": "800312DC",
+      "sha256": "f9cd7d69e2727dd9c690060871b2dc21ac50810ed1d668eb91867a84e688523a"
+    },
+    {
+      "name": "overlap_including_tail",
+      "source": "original_exe",
+      "start": "8002D654",
+      "end_exclusive": "8002D868",
+      "sha256": "39bed2ddf0ab87f9f986d8f51c1fc735557ffbf0949fd4dfd3fc54e928d2168b"
+    },
+    {
+      "name": "damage_calculator_including_tail",
+      "source": "original_exe",
+      "start": "80030DC0",
+      "end_exclusive": "80030ECC",
+      "sha256": "a3035cfd50e2d39cd6224483cec6a6366dbf0a0072370855f24dd89aa367ce43"
+    },
+    {
+      "name": "normal_player_driver",
+      "source": "original_exe",
+      "start": "80034FBC",
+      "end_exclusive": "80035144",
+      "sha256": "901bb59a96f4e1865be962469ce0e9a3e215496cf595265d8d370835925840b2"
+    },
+    {
+      "name": "hurt_and_recovery",
+      "source": "original_exe",
+      "start": "80039228",
+      "end_exclusive": "8003963C",
+      "sha256": "0892257ac80f549bf450aa8e1104d3f79cbbdcab4e8e58c7ffbc9c4d703f0617"
+    },
+    {
+      "name": "hurt_initialize",
+      "source": "original_exe",
+      "start": "8003963C",
+      "end_exclusive": "800397F8",
+      "sha256": "5c5638eefe9ac802e1626147e94ce540e618ab1ecfd419dafa7c0e5043569f02"
+    },
+    {
+      "name": "hurtbox_binding",
+      "source": "original_exe",
+      "start": "8003C3C8",
+      "end_exclusive": "8003C4EC",
+      "sha256": "ba7312b9d6723ca89dad48e9a27376a069367c22c6470290ee730f86afc3c9f3"
+    },
+    {
+      "name": "reaction_action_table",
+      "source": "original_exe",
+      "start": "80073C70",
+      "end_exclusive": "80073C78",
+      "sha256": "99aedbe404582406c63a24a8d617c698161b2df4a9ba41da026533acbd14dffa"
+    },
+    {
+      "name": "reaction_iframe_table",
+      "source": "original_exe",
+      "start": "80073CD8",
+      "end_exclusive": "80073CE0",
+      "sha256": "1712a76e6b76e23ed3394d8689a16b4d4b75d8fdbaaeae4579d1fc63609f32ec"
+    },
+    {
+      "name": "enemy_shot_allocator",
+      "source": "original_exe",
+      "start": "8002C458",
+      "end_exclusive": "8002C4C4",
+      "sha256": "c7cdcd3105098abb17ee03d839f3141a1df0d573a0bd50f8a786ce1250ab0e86"
+    },
+    {
+      "name": "type1_initialize",
+      "source": "ROCK_X6.BIN member2",
+      "start": "800EAFFC",
+      "end_exclusive": "800EB10C",
+      "sha256": "5e574f41490c29335043e7f7bf24590f100dc8dc90a1d8bf7bd864f8a7876599"
+    },
+    {
+      "name": "type1_alive",
+      "source": "ROCK_X6.BIN member2",
+      "start": "800EAC8C",
+      "end_exclusive": "800EAE0C",
+      "sha256": "cd14c1ec1679ddf26ec0603fec50e9438de071eed53c1c427bb24bb4fc4ba13f"
+    },
+    {
+      "name": "type1_action2",
+      "source": "ROCK_X6.BIN member2",
+      "start": "800EAE0C",
+      "end_exclusive": "800EAFB0",
+      "sha256": "f84cf953301f39a364938ea8102cf9dd9bf82ef5fcd25474275c6e4c87e7b0ae"
+    },
+    {
+      "name": "type1_contact_box",
+      "source": "ROCK_X6.BIN member2",
+      "start": "800FAAE0",
+      "end_exclusive": "800FAAE4",
+      "sha256": "4baf983d84c0d999d8c1074f9c349edabbc6b50fbd1fa0c2e2f5253fda58faad"
+    },
+    {
+      "name": "type1_damageable_box",
+      "source": "ROCK_X6.BIN member2",
+      "start": "800FAAE4",
+      "end_exclusive": "800FAAE8",
+      "sha256": "4baf983d84c0d999d8c1074f9c349edabbc6b50fbd1fa0c2e2f5253fda58faad"
+    }
+  ],
+  "actor": {
+    "record": "800FA2DC",
+    "record_index": 25,
+    "category": 0,
+    "type": 1,
+    "subtype": 1,
+    "position": [
+      416,
+      1080
+    ],
+    "pool": {
+      "base": "8008EF48",
+      "end_exclusive": "80090C88",
+      "stride": 156,
+      "slots": 48
+    },
+    "identity": "Exactly one live slot with +0!=0,+1=1,+2=1,+10=800FA2DC",
+    "initialized_hp": 12,
+    "strength": 4,
+    "contact_class": 0,
+    "contact_box": {
+      "pointer": "800FAAE0",
+      "bytes": "f4ec1828",
+      "offset_x": -12,
+      "offset_y": -20,
+      "width": 24,
+      "height": 40
+    },
+    "weapon_hit_call": "800EAD20",
+    "incoming_contact_call": "800EADC0",
+    "incoming_contact_return": "800EADC8"
+  },
+  "player_fields": {
+    "hp_raw": "5C",
+    "hp_value_mask": "7F",
+    "pending_hit_mask": "80",
+    "invulnerability": "61",
+    "reaction": "63",
+    "reaction_lock": "A4",
+    "knockback_direction": "A5",
+    "facing": "15",
+    "damageable_box_pointer": "54",
+    "hit_pause": "CC",
+    "hit_pause_request": "CD",
+    "alternate_projection": "D5",
+    "terrain_flags": "70",
+    "previous_terrain_flags": "89",
+    "armor_identity": "E7",
+    "parts_flags": "EC"
+  },
+  "ordinary_reaction": {
+    "action": 17,
+    "reaction": 1,
+    "iframe_initial": 75,
+    "iframe_source": "80073CD9",
+    "recovery_required": [
+      "HP80 clear",
+      "61==0",
+      "A4==0",
+      "CC==0",
+      "living idle body",
+      "stable box pointers",
+      "native timer progressed at least75 after observed hit"
+    ]
+  },
+  "damage": {
+    "base_strength": 4,
+    "difficulty_field": "800CCF38",
+    "unarmored_difficulty_0_1_2": [
+      3,
+      4,
+      5
+    ],
+    "half_damage_gates": [
+      "bodyE7 in1..4",
+      "bodyE7==5 and PLAY5F&20",
+      "bodyEC&200"
+    ],
+    "limits": "Ordinary nonnegative strength4/class0 only; preserve native configuration and observe actual damage/reaction"
+  },
+  "accepted_contact": {
+    "counter": "diagnostic+44",
+    "counter_meaning": "Increment only when projected P2 native contact returns nonzero",
+    "counter_delta_required": 1,
+    "trace_target": "80030ECC",
+    "trace_actor": "same live origin-bound pool address",
+    "trace_ra": "800EADC8",
+    "trace_complete_required": true,
+    "trace_return_v0_available": false,
+    "additional_evidence": [
+      "actual native masked HP loss",
+      "native hurt action/reaction and iframe state",
+      "unchanged X personal resources",
+      "same enemy HP12/phase1",
+      "no foreign contact source or terrain-hazard attribution",
+      "same config before/after own menu"
+    ]
+  },
+  "zero_box_resolver": {
+    "base": "801EA000",
+    "member": 1,
+    "size": 22964,
+    "sha256": "75a142a529ddc70f0d60ee6be32ebcdb0cf5cc90ec88e965c3b15cf0c6d21b00",
+    "table_base": "801EEA00",
+    "animation_maps": [
+      "801EE700",
+      "801EE800",
+      "801EE900"
+    ],
+    "binding_entry": "8003C3C8",
+    "rule": "Resolve P2 +54 from immutable original Zero member, not resident X overlay RAM; reject out-of-member or zero pointers"
+  },
+  "menu_prerequisite": {
+    "default_expected_hp": [
+      32,
+      32
+    ],
+    "explicit_reduced_example": [
+      32,
+      28
+    ],
+    "preserve_exact_personal_resources": true,
+    "grants": false,
+    "source_backed_cursor_buttons": [
+      64,
+      16
+    ],
+    "safe_retreat_required_before_full_helper": true,
+    "reason": "The full helper performs post-menu Right/Square; require the reserved enemy remains HP12/phase1"
+  },
+  "route_state": "source-derived candidate; no contact trial executed",
+  "limits": [
+    "No runtime, build, ledger, pair or SDK changes from this audit",
+    "Independent once-world cadence and broad damage classes are not qualified",
+    "R13 native outgoing saber damage is not incoming contact evidence",
+    "Ghidra project lock left untouched; bounded original-byte Capstone analysis used instead"
+  ]
+}

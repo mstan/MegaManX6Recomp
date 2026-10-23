@@ -23,12 +23,23 @@ runtime result is claimed by this module or its pure reducer tests. The caller
 must retain its complete report on success or exception and perform composed
 artwork review separately.
 
-The case begins with two healthy native intro heroes and no menu, scene or
+The case begins with two living native intro heroes and no menu, scene or
 mailbox. The selected owner's original Start opens the native menu. It checks
 the diagnostic owner, native pause phase and **first byte1** at `800CF814`.
 It retains the second byte without requiring1: the existing native pause
 fixture observes `01/00` on initial entry and `01/01` after tank healing.
 There are no tank/resource grants in this helper.
+
+The default `expected_hp=(32,32)` retains the full-health smoke contract.
+An explicit pair of positive native HP values can qualify a menu after real
+contact, for example `expected_hp=(32,28)`. Both pre-menu and final HP must
+equal those exact values, and the existing before/during/after comparisons
+still require both heroes' HP, weapon and ammo unchanged. Zero, negative,
+noninteger and high-bit pending-hit HP values are rejected before controls.
+This parameter never grants health or bypasses ownership, cursor, timer,
+movement, attack or artwork checks. A contact case must retreat safely before
+calling the full helper: its post-menu Right/Square must not damage or consume
+the enemy reserved for the next controlled contact.
 
 The other hero's Start must not resume the owner's menu; its direction input
 must not change cursor `800CF824`. The owner must actually change that cursor,

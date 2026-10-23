@@ -141,6 +141,7 @@ def native_square_evidence(before: dict, history: list[dict], owner: int = 1) ->
 
 
 def personal_menu_smoke(ctx: dict, owner: int = 1, *,
+                        expected_hp: tuple[int, int] = (32, 32),
                         cursor_buttons: tuple[int, int] = (RIGHT, LEFT),
                         window_frames: int = 12, timeout: float = 12) -> dict:
     """Exercise a real owner's menu using a runner-owned input/advance adapter.
@@ -155,6 +156,9 @@ def personal_menu_smoke(ctx: dict, owner: int = 1, *,
                 "hold", "native_advance", "transport_window")
     if any(key not in ctx for key in required):
         raise ValueError("Incomplete personal-menu runner context")
+    if (not isinstance(expected_hp, (tuple, list)) or len(expected_hp) != 2 or
+            any(type(value) is not int or not 1 <= value <= 0x7F for value in expected_hp)):
+        raise ValueError("Expected HP needs two living positive native values in 1..127")
     mode = ctx["mode"]
     if mode not in ("local", "netplay") or owner not in (0, 1):
         raise ValueError("Expected local/netplay and owner0/1")
@@ -189,6 +193,7 @@ def personal_menu_smoke(ctx: dict, owner: int = 1, *,
         raise ValueError("Retain earlier menu captures; use fresh evidence output")
     case = dict(kind="native_personal_menu", mode=mode, owner=owner,
                 helper_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                expected_hp=list(expected_hp),
                 input_path=ctx["input_path"], status="failed_setup", observations=[],
                 inputs=[], frozen_windows=[], checks={}, captures=[],
                 artwork_review="pending", limits=[
@@ -260,8 +265,8 @@ def personal_menu_smoke(ctx: dict, owner: int = 1, *,
                     row["observation"]["native_phase"] == 0 and
                     row["observation"]["pause_owner"] == 0 and
                     tuple(row["observation"]["lifecycle"]) == (0, 0) and
-                    all(player["active"] and player["state"] == 1 and player["hp"] == 32
-                        for player in row["observation"]["players"])
+                    all(player["active"] and player["state"] == 1 and player["hp"] == expected_hp[seat]
+                        for seat, player in enumerate(row["observation"]["players"]))
                     for row in before["peers"]), "Personal menu needs two healthy native intro heroes")
         case["before"] = before
         case["status"] = "failed"
@@ -332,7 +337,8 @@ def personal_menu_smoke(ctx: dict, owner: int = 1, *,
         case["final"] = sample("Personal menu final native observation")
         require(all(row["observation"]["native_phase"] == 0 and
                     tuple(row["observation"]["lifecycle"]) == (0, 0) and
-                    all(player["hp"] == 32 for player in row["observation"]["players"])
+                    all(player["hp"] == expected_hp[seat]
+                        for seat, player in enumerate(row["observation"]["players"]))
                     for row in case["final"]["peers"]), "Personal menu ended outside healthy native gameplay")
         case["checks"]["both_heroes_healthy_after_controls"] = True
         case["status"] = "automated_checks_passed_artwork_review_pending"
