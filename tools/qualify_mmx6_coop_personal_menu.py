@@ -150,7 +150,11 @@ class OfflineMenuAdapter:
             raise ValueError("Expected native seat0/1, pressed mask and bounded frame count")
         error = None
         try:
-            self.control("press", port=seat + 1, buttons=0xFFFF ^ bits, frames=frames)
+            # SDK792 expires this counter on each override GET, including
+            # low-latency resamples, rather than once per guest frame. Hold
+            # until the bounded publication window completes, then clear in
+            # finally; a short read-count pulse is not a native-frame hold.
+            self.control("press", port=seat + 1, buttons=0xFFFF ^ bits, frames=0)
             self.wait_counter("tick", frames + 2, label)
         except BaseException as caught:
             error = caught

@@ -70,10 +70,41 @@ class OwnedOfflineInputTests(unittest.TestCase):
             calls = []
             adapter, _ = self.adapter(lambda command, **fields: calls.append((command, fields)))
             adapter.hold(seat, bits, 4, "native case")
-            self.assertEqual(calls, [("press", dict(port=seat + 1, buttons=active_low, frames=4)),
+            self.assertEqual(calls, [("press", dict(port=seat + 1, buttons=active_low, frames=0)),
                                      ("clear_input", dict(port=seat + 1))])
             self.assertEqual([entry[:2] for entry in self.windows], [("tick", 6), ("tick", 3)])
             self.assertNotIn("native_timer", [entry[0] for entry in self.windows])
+
+    def test_low_latency_override_reads_do_not_expire_before_the_publication_window(self):
+        # Model the SDK getter's read-count expiration independently of the
+        # runner's publication clock. Both one and multiple samples per frame
+        # must retain the requested buttons until the explicit neutral clear.
+        for reads_per_publication in (1, 2, 4):
+            state = dict(buttons=None, remaining=0)
+            windows = []
+
+            def control(command, **fields):
+                if command == "press":
+                    state.update(buttons=fields["buttons"], remaining=fields["frames"])
+                elif command == "clear_input":
+                    state.update(buttons=None, remaining=0)
+
+            def read_override():
+                result = state["buttons"]
+                if result is not None and state["remaining"] > 0:
+                    state["remaining"] -= 1
+                    if not state["remaining"]:
+                        state["buttons"] = None
+                return result
+
+            adapter, _ = self.adapter(control)
+            adapter.wait_counter = lambda field, count, label: windows.append(
+                [read_override() for _ in range(count * reads_per_publication)])
+            adapter.hold(1, 0x20, 4, "held native approach")
+            self.assertTrue(windows[0])
+            self.assertEqual(set(windows[0]), {0xFFDF})
+            self.assertEqual(set(windows[1]), {None})
+            self.assertIsNone(state["buttons"])
 
     def test_press_failure_still_attempts_neutral_clear_and_preserves_original_error(self):
         calls = []
