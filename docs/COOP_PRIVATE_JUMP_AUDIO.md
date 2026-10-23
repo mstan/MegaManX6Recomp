@@ -165,5 +165,10 @@ all four driver functions in development and release configurations. Ignored
 native regeneration changed only full_01, full_23 and full_24; each required
 function contains the actual replacement entry, and the original input-capture
 hook remains verified. Ten combined audio/snapshot/effects/retirement CTests
-pass. Full newly frozen debug/production builds and native local/paired
-qualification are still pending; prior exact-image failures are retained.
+pass. The frozen348a52c debug and production suites now both pass96/96.
+Its [local X-first native receipt](evidence/mmx6-jump-audio/manifest-bound-348a52c-local-private-overlap-reviewed.json)
+passes all19 sample/route/DSP/lifetime checks: hardware P1 continues after
+private P2 voice44/bank31, both reach original end markers and zero final
+envelopes, and immutable source banks remain unchanged. Opposite order,
+paired audio and other action families remain unverified; prior exact-image
+failures are retained and R4/R12 are not closed by this bounded ground jump.

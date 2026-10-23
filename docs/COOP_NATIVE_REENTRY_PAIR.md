@@ -5,6 +5,15 @@ source-bound `mmx6_coop_native_reentry.native_reentry_smoke` to two owned peers.
 The option is a qualification route; the gameplay correction stays default.
 No native result or ledger pass is established by this implementation/tests.
 
+The separate [exact348a52c native receipt](evidence/mmx6-native-reentry/manifest-bound-348a52c-new-game-reviewed.json)
+now completes this New Game route on two owned same-machine peers, including
+all11 guest-menu checks,29 matching resolved core/mod samples, matching reviewed
+paused/resumed images and natural owned exit0/private-card preservation.
+Earlier incomplete setup and180-second wall-deadline attempts remain retained.
+The latter was still changing story state at its deadline; it is not evidence
+of a stationary native story deadlock. Full Continue/current-data/acquired
+progression and R15/F208 scope remain incomplete.
+
 Use a new output directory, an exact expected executable SHA, the default
 resident loader, required resolved core/mod CRC and the actual expected host
 profile/revision. The runner stages both private profiles from the supplied

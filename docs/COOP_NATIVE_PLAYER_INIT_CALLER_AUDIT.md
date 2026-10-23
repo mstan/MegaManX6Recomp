@@ -153,7 +153,7 @@ Four pure/source tests cover source reproduction, canonical/attract/projected/
 door/wrong-root/phase/roster distinctions and exact frame-shape negatives.
 Synthetic shape/signature success is not a native or host-retirement pass.
 
-## Integrated repair awaiting native qualification
+## Integrated repair and bounded native qualification
 
 The title now checks the exact caller/stack signature, inactive projection
 guards and both owned frame shapes at the original initializer boundary. It
@@ -169,5 +169,12 @@ Twenty-five negative cases reject foreign callers, unsafe stacks, active
 projection, unknown phases and altered frame shapes/payloads. Focused Clang
 debug/production and GCC production variants pass. This fixture does not
 execute original CloseTh/ChangeTh or establish native artwork/gameplay success.
-The preserved beeae10 failure remains failed until a new exact candidate
-passes native local and paired reentry.
+The preserved beeae10 failure remains an exact-image failed observation.
+The [348a52c receipt](evidence/mmx6-native-reentry/manifest-bound-348a52c-new-game-reviewed.json)
+now has completed native local and paired New Game reentry: the strict guard
+accepts the original boundary, fresh enrollment/publications follow, and all11
+guest menu/resume/movement/attack checks pass. The pair adds29 resolved matching
+core/mod samples and matching reviewed paused/resumed composed images. This
+does not independently dump the two old host frames or qualify native Continue,
+unit selection or acquired campaign progress. Earlier incomplete capture and
+wall-deadline attempts remain retained; full R15/F208 coverage is incomplete.

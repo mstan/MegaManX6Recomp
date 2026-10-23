@@ -42,16 +42,28 @@ states; old-state migration is never required.
 ## Current qualification status, October 23
 
 All 234 reference rows are inventoried; 4/234 (1.7%) are passed. The four
-failed rows cover observed P2 jump-audio ownership and stale co-op callbacks
-after native Quit -> New Game. Their exact-image evidence remains failed
-while corrections undergo integration and fresh native qualification.
+failed rows preserve observed prior-image P2 audio ownership and stale co-op
+callbacks after native Quit -> New Game. The new image passes bounded native
+corrections; broader row requirements remain incomplete.
 
-The latest frozen gameplay image is v17, title source beeae10, SDK6212e680,
-profile mmx6-x-zero-delay-v15. Its debug and production suites passed86/86;
-this does not close gameplay rows. New source/SDK changes need a separately
-frozen candidate and do not inherit those checks. Rollback remains disabled.
+The latest frozen gameplay image is v18, title source348a52c, SDKbfbfb920,
+profile mmx6-x-zero-delay-v16. Its debug and production suites passed96/96.
+The [private ground-jump receipt](evidence/mmx6-jump-audio/manifest-bound-348a52c-local-private-overlap-reviewed.json)
+passes19 local source/route/DSP/lifetime checks, including P1 continuing after
+the correct private Zero vocal. Other action families and paired audio remain
+unverified.
+
+The [native New Game receipt](evidence/mmx6-native-reentry/manifest-bound-348a52c-new-game-reviewed.json)
+passes the original final Quit/title/story/arrival and full11-check guest
+menu/resume/Right/Square case locally and on two same-machine peers. The pair
+has29 matched resolved core/mod samples and matching reviewed paused/resumed
+images. Native Continue/current-data, character selection and acquired progress
+remain unverified. Incomplete capture/setup/180-second wall-deadline attempts
+are retained; a timeout while story state still changes is not proof of a
+stationary native deadlock. New source/SDK changes need another exact candidate
+and do not inherit these checks. Rollback remains disabled.
 The latest local portal attempt completed automated transition and destination
-independent-control observations; artwork/contact review, return-route and
+independent-control observations; exact contact attribution, return-route and
 paired coverage remain outstanding, so R14 stays unverified. Testing uses
 two peers on this machine. Other-machine qualification remains unverified.
 
