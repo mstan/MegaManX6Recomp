@@ -309,17 +309,147 @@
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+            "build_identity": {
+              "exe_sha256": "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9",
+              "declared_manifest_sha256": "5a1521fdf8682fbc8e28fee1fb3c4594d0b6a95844ea06ac3af61b998af28673",
+              "compiled_source_commit": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+              "sdk_commit": "79246932166e46a82d7b61a229c60ff9c8e2931a"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2, healthy intro, native4:3/default loader/OpenBIOS/retainedGL",
+              "cursor": "Right/Left (unavailable setup)",
+              "input": "offline accepted debug SIO",
+              "rollback": false,
+              "network_user_states": false
+            },
+            "action": "Open Zero-owned native menu; try X Start and valid direction; use Zero direction and resume, then original movement and Square.",
+            "outcome": "Pristine inventory has no selectable node to the right. This helper setup failure is not an R8 ownership regression. Native source audit provides Down/Up0->0x0D->0, used for the one corrected local run and first paired run.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-hostlab-fbba0e3-local\\qualification.json",
+                "sha256": "7a25aeb168cf5dcf803a8e3d52724ee7f34c5b5e5689303278274ac37e452a8a"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-fbba0e3\\candidate.json",
+                "sha256": "92aa781ce7dd7c21228d7a17800e6d93871b525f6fbc0348ae87b8bdc6d1daf9"
+              },
+              {
+                "path": "docs\\evidence\\mmx6-r8\\manifest-bound-fbba0e3-summary.json",
+                "sha256": "a96dbe017bcad465a6cc498761c1ddedb0a95df954252f25cc08ef31e87df1c4"
+              }
+            ],
+            "limits": [
+              "Healthy intro X/P1 + base Zero/P2 on exact frozen fbba0e3 executable37cdc487 only.",
+              "Default equipment/no earned weapons or tanks; full equipment combinations, opposite rosters, damage after menu, native Quit/Continue/re-entry, death, rewind and cold menu restoration are separate checks.",
+              "Loopback lab uses one Windows x64 host, numeric127 endpoints, Clang22.1.8 ENHANCED and current CPUmask7f; no cross-machine or production qualification.",
+              "Online controls use published original host inputs; offline controls use accepted debug SIO. No online RAM/mailbox/fixture writes or granted inventory.",
+              "Native menu reads follow coherent diagnostics but are not one atomic cross-peer snapshot. Resolved CRC samples are below both completed simulation watermarks.",
+              "All owned processes needed termination after the quit deadline; graceful exit remains unverified."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+            "build_identity": {
+              "exe_sha256": "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9",
+              "declared_manifest_sha256": "5a1521fdf8682fbc8e28fee1fb3c4594d0b6a95844ea06ac3af61b998af28673",
+              "compiled_source_commit": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+              "sdk_commit": "79246932166e46a82d7b61a229c60ff9c8e2931a"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2, healthy intro, native4:3/default loader/OpenBIOS/retainedGL",
+              "cursor": "Down/Up0->13->0",
+              "input": "offline accepted debug SIO",
+              "rollback": false,
+              "network_user_states": false
+            },
+            "action": "Open Zero-owned native menu; try X Start and valid direction; use Zero direction and resume, then original movement and Square.",
+            "outcome": "All11 native menu checks pass with reviewed Zero menu/portrait and restored original gameplay/HUD. Original automated/artwork-pending receipt is preserved; separate reviewed receipt establishes the artwork result.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-hostlab-fbba0e3-local-down-up\\qualification.json",
+                "sha256": "305c94523802b272e330e6db435b51a7514c8a3388727114147f80c9f32927ef"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-fbba0e3\\candidate.json",
+                "sha256": "92aa781ce7dd7c21228d7a17800e6d93871b525f6fbc0348ae87b8bdc6d1daf9"
+              },
+              {
+                "path": "docs\\evidence\\mmx6-r8\\manifest-bound-fbba0e3-summary.json",
+                "sha256": "a96dbe017bcad465a6cc498761c1ddedb0a95df954252f25cc08ef31e87df1c4"
+              }
+            ],
+            "limits": [
+              "Healthy intro X/P1 + base Zero/P2 on exact frozen fbba0e3 executable37cdc487 only.",
+              "Default equipment/no earned weapons or tanks; full equipment combinations, opposite rosters, damage after menu, native Quit/Continue/re-entry, death, rewind and cold menu restoration are separate checks.",
+              "Loopback lab uses one Windows x64 host, numeric127 endpoints, Clang22.1.8 ENHANCED and current CPUmask7f; no cross-machine or production qualification.",
+              "Online controls use published original host inputs; offline controls use accepted debug SIO. No online RAM/mailbox/fixture writes or granted inventory.",
+              "Native menu reads follow coherent diagnostics but are not one atomic cross-peer snapshot. Resolved CRC samples are below both completed simulation watermarks.",
+              "All owned processes needed termination after the quit deadline; graceful exit remains unverified."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+            "build_identity": {
+              "exe_sha256": "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9",
+              "declared_manifest_sha256": "5a1521fdf8682fbc8e28fee1fb3c4594d0b6a95844ea06ac3af61b998af28673",
+              "compiled_source_commit": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+              "sdk_commit": "79246932166e46a82d7b61a229c60ff9c8e2931a"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2, healthy intro, native4:3/default loader/OpenBIOS/retainedGL",
+              "cursor": "Down/Up0->13->0",
+              "input": "published host sampler via delay3 numeric127 development lab",
+              "rollback": false,
+              "network_user_states": false
+            },
+            "action": "Open Zero-owned native menu; try X Start and valid direction; use Zero direction and resume, then original movement and Square.",
+            "outcome": "All11 native menu checks pass, including wrong-seat rejection, frozen world with advancing publications/transport, unchanged personal resources, Zero-owned cursor/resume and independent native movement/action48. Completed composed artwork reviewed separately; paired30common resolved core/mod samples match.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-hostlab-fbba0e3-paired\\qualification.json",
+                "sha256": "eb718416ad9221e21089bf3453cfd98de4bb1d98385d2732d4d6d51e62c397d2"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-fbba0e3\\candidate.json",
+                "sha256": "92aa781ce7dd7c21228d7a17800e6d93871b525f6fbc0348ae87b8bdc6d1daf9"
+              },
+              {
+                "path": "docs\\evidence\\mmx6-r8\\manifest-bound-fbba0e3-summary.json",
+                "sha256": "a96dbe017bcad465a6cc498761c1ddedb0a95df954252f25cc08ef31e87df1c4"
+              }
+            ],
+            "limits": [
+              "Healthy intro X/P1 + base Zero/P2 on exact frozen fbba0e3 executable37cdc487 only.",
+              "Default equipment/no earned weapons or tanks; full equipment combinations, opposite rosters, damage after menu, native Quit/Continue/re-entry, death, rewind and cold menu restoration are separate checks.",
+              "Loopback lab uses one Windows x64 host, numeric127 endpoints, Clang22.1.8 ENHANCED and current CPUmask7f; no cross-machine or production qualification.",
+              "Online controls use published original host inputs; offline controls use accepted debug SIO. No online RAM/mailbox/fixture writes or granted inventory.",
+              "Native menu reads follow coherent diagnostics but are not one atomic cross-peer snapshot. Resolved CRC samples are below both completed simulation watermarks.",
+              "All owned processes needed termination after the quit deadline; graceful exit remains unverified."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Passed for healthy intro X/P1 + Zero/P2 with native default equipment on exact manifest-bound fbba0e3 / executable37cdc487. Both modes and composed artwork reviewed. Original failed Right setup remains recorded, followed by source-backed Down/Up success. Earned equipment, opposite rosters, post-menu contact damage, native Quit/re-entry, death, rewind and cold state restoration remain separate. See evidence/mmx6-r8/manifest-bound-fbba0e3-summary.json."
       }
     },
     {

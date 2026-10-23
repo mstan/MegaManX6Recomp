@@ -1,0 +1,3066 @@
+{
+  "schema": 1,
+  "kind": "native_p2_menu_local_and_loopback_with_artwork_review",
+  "result": "passed",
+  "candidate": {
+    "schema": 1,
+    "candidate_source": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+    "exe_sha256": "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9",
+    "declared_manifest_sha256": "5a1521fdf8682fbc8e28fee1fb3c4594d0b6a95844ea06ac3af61b998af28673",
+    "source_repositories": {
+      "game": {
+        "head": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "net": {
+        "head": "e53059306824edf4f0aec4aae5ae65151b18535f",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "rb": {
+        "head": "2a03e73693acee0fb78076ea058642c931bef12e",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "sdk": {
+        "head": "79246932166e46a82d7b61a229c60ff9c8e2931a",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "ui": {
+        "head": "b964eabe5a3438b8ed121064354ba27c1accef3f",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "private_artifacts": {
+      "manifest.json": "4f4f89f8186e8df3afbe64789dc07557c165ddedba3458da0d29617f4bd2ebd8",
+      "manifest.h": "4126bf438ab2dad04df539ba4a46ad204d4c07799973b7e6475621dce1b6f3aa",
+      "provenance.json": "e446eabb01917d705e7e2699d02f5212e1f064a4f44791fc70c783c1e9ee4f71",
+      "CMakeCache.txt": "724f583940806e5beedee78d341bd4d6c6d491a0cab323ff3001b6aa2e933f64"
+    },
+    "limits": [
+      "Declared-input identity only; native tests recorded separately.",
+      "Development loopback catalog explicitly enabled; source option default OFF.",
+      "Later QA tool/document commits do not change this frozen compiled candidate."
+    ]
+  },
+  "reports": {
+    "local_failed_right": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-hostlab-fbba0e3-local\\qualification.json",
+      "sha256": "7a25aeb168cf5dcf803a8e3d52724ee7f34c5b5e5689303278274ac37e452a8a"
+    },
+    "local": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-hostlab-fbba0e3-local-down-up\\qualification.json",
+      "sha256": "305c94523802b272e330e6db435b51a7514c8a3388727114147f80c9f32927ef"
+    },
+    "netplay": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-hostlab-fbba0e3-paired\\qualification.json",
+      "sha256": "eb718416ad9221e21089bf3453cfd98de4bb1d98385d2732d4d6d51e62c397d2"
+    },
+    "candidate": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-fbba0e3\\candidate.json",
+      "sha256": "92aa781ce7dd7c21228d7a17800e6d93871b525f6fbc0348ae87b8bdc6d1daf9"
+    }
+  },
+  "local": {
+    "mode": "local",
+    "owner": 1,
+    "helper_sha256": "39823814ed41942115c1ab3821bf927fb9fd3c6fac7570985f035bce5b1b8fe7",
+    "input_path": "offline_native",
+    "status": "automated_checks_passed_artwork_review_pending",
+    "checks": {
+      "owner_native_pause_and_frozen_world": true,
+      "other_start_cannot_resume": true,
+      "other_cursor_cannot_change_owner_choice": true,
+      "owner_cursor_changes_and_restores": true,
+      "both_personal_resources_preserved_in_menu": true,
+      "owner_resumes_native_world": true,
+      "both_personal_resources_preserved_after_resume": true,
+      "continued_independent_native_movement": true,
+      "continued_native_square_action": true,
+      "composed_captures_completed": true,
+      "both_heroes_healthy_after_controls": true
+    },
+    "inputs": [
+      {
+        "seat": 1,
+        "pressed": 8,
+        "frames": 4,
+        "label": "Owner native Start"
+      },
+      {
+        "seat": 0,
+        "pressed": 8,
+        "frames": 4,
+        "label": "Other hero Start must not resume owner's menu"
+      },
+      {
+        "seat": 0,
+        "pressed": 64,
+        "frames": 4,
+        "label": "Other hero cursor input must be ignored"
+      },
+      {
+        "seat": 1,
+        "pressed": 64,
+        "frames": 4,
+        "label": "Owner changes real native cursor"
+      },
+      {
+        "seat": 1,
+        "pressed": 16,
+        "frames": 4,
+        "label": "Owner restores original native cursor"
+      },
+      {
+        "seat": 1,
+        "pressed": 8,
+        "frames": 4,
+        "label": "Owner native Start resumes"
+      },
+      {
+        "seat": 1,
+        "pressed": 32,
+        "frames": 6,
+        "label": "Owner independent native movement after menu"
+      },
+      {
+        "seat": 1,
+        "pressed": 32768,
+        "frames": 2,
+        "label": "Owner native Square after menu"
+      }
+    ],
+    "before": {
+      "label": "Personal menu native gameplay preflight",
+      "peers": [
+        {
+          "observation": {
+            "schema": 1,
+            "tick": 205,
+            "sequence": 410,
+            "native_timer": 204,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 0,
+            "host_digest": 89893141,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 11894784,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 0
+          },
+          "menu": [
+            0,
+            0
+          ],
+          "cursor": 0
+        }
+      ]
+    },
+    "resumed": {
+      "label": "Native gameplay after owner's resume",
+      "peers": [
+        {
+          "observation": {
+            "schema": 1,
+            "tick": 572,
+            "sequence": 1144,
+            "native_timer": 223,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 0,
+            "host_digest": 1584218205,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 11894784,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 0
+          },
+          "menu": [
+            0,
+            0
+          ],
+          "cursor": 0
+        }
+      ]
+    },
+    "native_attack": [
+      {
+        "observation": {
+          "schema": 1,
+          "tick": 607,
+          "sequence": 1214,
+          "native_timer": 258,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 2294944369,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 48,
+              "hp": 32,
+              "x_raw": 12091392,
+              "y_raw": 73007104,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "menu": [
+          0,
+          0
+        ],
+        "cursor": 0
+      }
+    ],
+    "final": {
+      "label": "Personal menu final native observation",
+      "peers": [
+        {
+          "observation": {
+            "schema": 1,
+            "tick": 611,
+            "sequence": 1222,
+            "native_timer": 262,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 0,
+            "host_digest": 2012138208,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 48,
+                "hp": 32,
+                "x_raw": 12091392,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 0
+          },
+          "menu": [
+            0,
+            0
+          ],
+          "cursor": 0
+        }
+      ]
+    },
+    "captures": [
+      {
+        "peer": 0,
+        "label": "paused-present",
+        "surface": "composed_renderer_output",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-hostlab-fbba0e3-local-down-up\\baseline\\personal-menu\\p2-peer-0-paused-present.png",
+        "sha256": "dc05aca4808fb7f275cd586656469e3f7ba8510571111d0eb5246daea43a9a01",
+        "before": {
+          "id": 1070,
+          "ok": true,
+          "seq": 0,
+          "wrote": 0
+        },
+        "acknowledgement": {
+          "id": 1071,
+          "ok": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-hostlab-fbba0e3-local-down-up\\baseline\\personal-menu\\p2-peer-0-paused-present.png",
+          "staged": true,
+          "seq": 0
+        },
+        "completion": {
+          "id": 1072,
+          "ok": true,
+          "seq": 1,
+          "wrote": 1
+        }
+      },
+      {
+        "peer": 0,
+        "label": "resumed-present",
+        "surface": "composed_renderer_output",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-hostlab-fbba0e3-local-down-up\\baseline\\personal-menu\\p2-peer-0-resumed-present.png",
+        "sha256": "ba4a368e720caaeae4e876b0b4bfc4f0284381dd8feb76ec835f8ec19c332885",
+        "before": {
+          "id": 1159,
+          "ok": true,
+          "seq": 1,
+          "wrote": 1
+        },
+        "acknowledgement": {
+          "id": 1160,
+          "ok": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-hostlab-fbba0e3-local-down-up\\baseline\\personal-menu\\p2-peer-0-resumed-present.png",
+          "staged": true,
+          "seq": 1
+        },
+        "completion": {
+          "id": 1161,
+          "ok": true,
+          "seq": 2,
+          "wrote": 1
+        }
+      }
+    ],
+    "frozen_windows": [
+      {
+        "label": "Owner native menu idle",
+        "checks": {
+          "enough_samples": true,
+          "native_pause_owned": true,
+          "native_menu_input_state": true,
+          "world_timer_frozen": true,
+          "diagnostic_publications_advanced": true,
+          "cursor_unchanged": true
+        },
+        "samples": [
+          {
+            "peers": [
+              {
+                "tick": 240,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 254,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 270,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 284,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Other hero Start rejected",
+        "checks": {
+          "enough_samples": true,
+          "native_pause_owned": true,
+          "native_menu_input_state": true,
+          "world_timer_frozen": true,
+          "diagnostic_publications_advanced": true,
+          "cursor_unchanged": true
+        },
+        "samples": [
+          {
+            "peers": [
+              {
+                "tick": 296,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 311,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 325,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 339,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Other hero cursor rejected",
+        "checks": {
+          "enough_samples": true,
+          "native_pause_owned": true,
+          "native_menu_input_state": true,
+          "world_timer_frozen": true,
+          "diagnostic_publications_advanced": true,
+          "cursor_unchanged": true
+        },
+        "samples": [
+          {
+            "peers": [
+              {
+                "tick": 359,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 373,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 389,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 407,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Owner changed cursor",
+        "checks": {
+          "enough_samples": true,
+          "native_pause_owned": true,
+          "native_menu_input_state": true,
+          "world_timer_frozen": true,
+          "diagnostic_publications_advanced": true,
+          "cursor_unchanged": true
+        },
+        "samples": [
+          {
+            "peers": [
+              {
+                "tick": 420,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  2
+                ],
+                "cursor": 13
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 437,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  2
+                ],
+                "cursor": 13
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 454,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  2
+                ],
+                "cursor": 13
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 469,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  2
+                ],
+                "cursor": 13
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Owner restored cursor",
+        "checks": {
+          "enough_samples": true,
+          "native_pause_owned": true,
+          "native_menu_input_state": true,
+          "world_timer_frozen": true,
+          "diagnostic_publications_advanced": true,
+          "cursor_unchanged": true
+        },
+        "samples": [
+          {
+            "peers": [
+              {
+                "tick": 483,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 497,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 511,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 527,
+                "native_timer": 207,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "netplay": {
+    "mode": "netplay",
+    "owner": 1,
+    "helper_sha256": "39823814ed41942115c1ab3821bf927fb9fd3c6fac7570985f035bce5b1b8fe7",
+    "input_path": "published_host",
+    "status": "automated_checks_passed_artwork_review_pending",
+    "checks": {
+      "owner_native_pause_and_frozen_world": true,
+      "other_start_cannot_resume": true,
+      "other_cursor_cannot_change_owner_choice": true,
+      "owner_cursor_changes_and_restores": true,
+      "both_personal_resources_preserved_in_menu": true,
+      "owner_resumes_native_world": true,
+      "both_personal_resources_preserved_after_resume": true,
+      "continued_independent_native_movement": true,
+      "continued_native_square_action": true,
+      "composed_captures_completed": true,
+      "both_heroes_healthy_after_controls": true
+    },
+    "inputs": [
+      {
+        "seat": 1,
+        "pressed": 8,
+        "frames": 4,
+        "label": "Owner native Start"
+      },
+      {
+        "seat": 0,
+        "pressed": 8,
+        "frames": 4,
+        "label": "Other hero Start must not resume owner's menu"
+      },
+      {
+        "seat": 0,
+        "pressed": 64,
+        "frames": 4,
+        "label": "Other hero cursor input must be ignored"
+      },
+      {
+        "seat": 1,
+        "pressed": 64,
+        "frames": 4,
+        "label": "Owner changes real native cursor"
+      },
+      {
+        "seat": 1,
+        "pressed": 16,
+        "frames": 4,
+        "label": "Owner restores original native cursor"
+      },
+      {
+        "seat": 1,
+        "pressed": 8,
+        "frames": 4,
+        "label": "Owner native Start resumes"
+      },
+      {
+        "seat": 1,
+        "pressed": 32,
+        "frames": 6,
+        "label": "Owner independent native movement after menu"
+      },
+      {
+        "seat": 1,
+        "pressed": 32768,
+        "frames": 2,
+        "label": "Owner native Square after menu"
+      }
+    ],
+    "before": {
+      "label": "Personal menu native gameplay preflight",
+      "peers": [
+        {
+          "observation": {
+            "schema": 1,
+            "tick": 1020,
+            "sequence": 2040,
+            "native_timer": 1019,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 0,
+            "host_digest": 2732870236,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 12550144,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 1
+          },
+          "menu": [
+            0,
+            0
+          ],
+          "cursor": 0
+        },
+        {
+          "observation": {
+            "schema": 1,
+            "tick": 1020,
+            "sequence": 2040,
+            "native_timer": 1019,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 0,
+            "host_digest": 2732870236,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 12550144,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 1
+          },
+          "menu": [
+            0,
+            0
+          ],
+          "cursor": 0
+        }
+      ],
+      "network": [
+        {
+          "id": 1959,
+          "ok": true,
+          "active": 1,
+          "host": 1,
+          "rollback": 0,
+          "architecture": "p2p",
+          "max_players": 2,
+          "players": 2,
+          "tick": 3705,
+          "resolved_through": 3703,
+          "stall": "ok",
+          "remote_lead": 1,
+          "desync": 0,
+          "desync_tick": 0,
+          "local_hash": 0,
+          "remote_hash": 0
+        },
+        {
+          "id": 1775,
+          "ok": true,
+          "active": 1,
+          "host": 0,
+          "rollback": 0,
+          "architecture": "p2p",
+          "max_players": 2,
+          "players": 2,
+          "tick": 3703,
+          "resolved_through": 3702,
+          "stall": "ok",
+          "remote_lead": 3,
+          "desync": 0,
+          "desync_tick": 0,
+          "local_hash": 0,
+          "remote_hash": 0
+        }
+      ]
+    },
+    "resumed": {
+      "label": "Native gameplay after owner's resume",
+      "peers": [
+        {
+          "observation": {
+            "schema": 1,
+            "tick": 1483,
+            "sequence": 2966,
+            "native_timer": 1044,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 0,
+            "host_digest": 2793100050,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 12550144,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 1
+          },
+          "menu": [
+            0,
+            0
+          ],
+          "cursor": 0
+        },
+        {
+          "observation": {
+            "schema": 1,
+            "tick": 1484,
+            "sequence": 2968,
+            "native_timer": 1045,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 0,
+            "host_digest": 1320102069,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 12550144,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 1
+          },
+          "menu": [
+            0,
+            0
+          ],
+          "cursor": 0
+        }
+      ],
+      "network": [
+        {
+          "id": 2268,
+          "ok": true,
+          "active": 1,
+          "host": 1,
+          "rollback": 0,
+          "architecture": "p2p",
+          "max_players": 2,
+          "players": 2,
+          "tick": 4169,
+          "resolved_through": 4167,
+          "stall": "ok",
+          "remote_lead": 1,
+          "desync": 0,
+          "desync_tick": 0,
+          "local_hash": 0,
+          "remote_hash": 0
+        },
+        {
+          "id": 2091,
+          "ok": true,
+          "active": 1,
+          "host": 0,
+          "rollback": 0,
+          "architecture": "p2p",
+          "max_players": 2,
+          "players": 2,
+          "tick": 4168,
+          "resolved_through": 4167,
+          "stall": "ok",
+          "remote_lead": 3,
+          "desync": 0,
+          "desync_tick": 0,
+          "local_hash": 0,
+          "remote_hash": 0
+        }
+      ]
+    },
+    "native_attack": [
+      {
+        "observation": {
+          "schema": 1,
+          "tick": 1536,
+          "sequence": 3072,
+          "native_timer": 1097,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 1311618471,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 48,
+              "hp": 32,
+              "x_raw": 13172736,
+              "y_raw": 73007104,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "menu": [
+          0,
+          0
+        ],
+        "cursor": 0
+      },
+      {
+        "observation": {
+          "schema": 1,
+          "tick": 1535,
+          "sequence": 3070,
+          "native_timer": 1096,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 3514222379,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 48,
+              "hp": 32,
+              "x_raw": 13172736,
+              "y_raw": 73007104,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "menu": [
+          0,
+          0
+        ],
+        "cursor": 0
+      }
+    ],
+    "final": {
+      "label": "Personal menu final native observation",
+      "peers": [
+        {
+          "observation": {
+            "schema": 1,
+            "tick": 1541,
+            "sequence": 3082,
+            "native_timer": 1102,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 0,
+            "host_digest": 3551084379,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 48,
+                "hp": 32,
+                "x_raw": 13172736,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 1
+          },
+          "menu": [
+            0,
+            0
+          ],
+          "cursor": 0
+        },
+        {
+          "observation": {
+            "schema": 1,
+            "tick": 1541,
+            "sequence": 3082,
+            "native_timer": 1102,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "mailbox": 0,
+            "ready": 1,
+            "enrolled": 1,
+            "failed": 0,
+            "native_mode": 10,
+            "native_phase": 0,
+            "host_digest": 3551084379,
+            "host_digest_algorithm": 1,
+            "players": [
+              {
+                "active": 1,
+                "character": 0,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x_raw": 9437184,
+                "y_raw": 73072640,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              },
+              {
+                "active": 1,
+                "character": 1,
+                "state": 1,
+                "action": 48,
+                "hp": 32,
+                "x_raw": 13172736,
+                "y_raw": 73007104,
+                "weapon": 0,
+                "ammo": [
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288,
+                  288
+                ]
+              }
+            ],
+            "framework_digest_registered": 1
+          },
+          "menu": [
+            0,
+            0
+          ],
+          "cursor": 0
+        }
+      ],
+      "network": [
+        {
+          "id": 2309,
+          "ok": true,
+          "active": 1,
+          "host": 1,
+          "rollback": 0,
+          "architecture": "p2p",
+          "max_players": 2,
+          "players": 2,
+          "tick": 4227,
+          "resolved_through": 4225,
+          "stall": "ok",
+          "remote_lead": 1,
+          "desync": 0,
+          "desync_tick": 0,
+          "local_hash": 0,
+          "remote_hash": 0
+        },
+        {
+          "id": 2141,
+          "ok": true,
+          "active": 1,
+          "host": 0,
+          "rollback": 0,
+          "architecture": "p2p",
+          "max_players": 2,
+          "players": 2,
+          "tick": 4226,
+          "resolved_through": 4225,
+          "stall": "ok",
+          "remote_lead": 3,
+          "desync": 0,
+          "desync_tick": 0,
+          "local_hash": 0,
+          "remote_hash": 0
+        }
+      ]
+    },
+    "captures": [
+      {
+        "peer": 0,
+        "label": "paused-present",
+        "surface": "composed_renderer_output",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-hostlab-fbba0e3-paired\\personal-menu\\p2-peer-0-paused-present.png",
+        "sha256": "85bd4a2f99bbdbbd98ca9744258276fe857e3fa647d5bd0045fe05e615570651",
+        "before": {
+          "id": 2223,
+          "ok": true,
+          "seq": 0,
+          "wrote": 0
+        },
+        "acknowledgement": {
+          "id": 2224,
+          "ok": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-hostlab-fbba0e3-paired\\personal-menu\\p2-peer-0-paused-present.png",
+          "staged": true,
+          "seq": 0
+        },
+        "completion": {
+          "id": 2226,
+          "ok": true,
+          "seq": 1,
+          "wrote": 1
+        }
+      },
+      {
+        "peer": 1,
+        "label": "paused-present",
+        "surface": "composed_renderer_output",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-hostlab-fbba0e3-paired\\personal-menu\\p2-peer-1-paused-present.png",
+        "sha256": "85bd4a2f99bbdbbd98ca9744258276fe857e3fa647d5bd0045fe05e615570651",
+        "before": {
+          "id": 2043,
+          "ok": true,
+          "seq": 0,
+          "wrote": 0
+        },
+        "acknowledgement": {
+          "id": 2044,
+          "ok": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-hostlab-fbba0e3-paired\\personal-menu\\p2-peer-1-paused-present.png",
+          "staged": true,
+          "seq": 0
+        },
+        "completion": {
+          "id": 2045,
+          "ok": true,
+          "seq": 1,
+          "wrote": 1
+        }
+      },
+      {
+        "peer": 0,
+        "label": "resumed-present",
+        "surface": "composed_renderer_output",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-hostlab-fbba0e3-paired\\personal-menu\\p2-peer-0-resumed-present.png",
+        "sha256": "44e2a4824bb06904017d38ad7bbf4067e2a50359f9fdd303f8fbbacecc47f77d",
+        "before": {
+          "id": 2303,
+          "ok": true,
+          "seq": 1,
+          "wrote": 1
+        },
+        "acknowledgement": {
+          "id": 2304,
+          "ok": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-hostlab-fbba0e3-paired\\personal-menu\\p2-peer-0-resumed-present.png",
+          "staged": true,
+          "seq": 1
+        },
+        "completion": {
+          "id": 2305,
+          "ok": true,
+          "seq": 2,
+          "wrote": 1
+        }
+      },
+      {
+        "peer": 1,
+        "label": "resumed-present",
+        "surface": "composed_renderer_output",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-hostlab-fbba0e3-paired\\personal-menu\\p2-peer-1-resumed-present.png",
+        "sha256": "44e2a4824bb06904017d38ad7bbf4067e2a50359f9fdd303f8fbbacecc47f77d",
+        "before": {
+          "id": 2134,
+          "ok": true,
+          "seq": 1,
+          "wrote": 1
+        },
+        "acknowledgement": {
+          "id": 2135,
+          "ok": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\personal-menu-hostlab-fbba0e3-paired\\personal-menu\\p2-peer-1-resumed-present.png",
+          "staged": true,
+          "seq": 1
+        },
+        "completion": {
+          "id": 2137,
+          "ok": true,
+          "seq": 2,
+          "wrote": 1
+        }
+      }
+    ],
+    "frozen_windows": [
+      {
+        "label": "Owner native menu idle",
+        "checks": {
+          "enough_samples": true,
+          "native_pause_owned": true,
+          "native_menu_input_state": true,
+          "world_timer_frozen": true,
+          "diagnostic_publications_advanced": true,
+          "cursor_unchanged": true,
+          "network_active_without_desync": true,
+          "transport_ticks_advanced": true,
+          "resolved_ticks_advanced": true
+        },
+        "samples": [
+          {
+            "peers": [
+              {
+                "tick": 1058,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              },
+              {
+                "tick": 1058,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ],
+            "network": [
+              {
+                "tick": 3744,
+                "resolved_through": 3742,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 3743,
+                "resolved_through": 3742,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 1078,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              },
+              {
+                "tick": 1077,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ],
+            "network": [
+              {
+                "tick": 3761,
+                "resolved_through": 3760,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 3762,
+                "resolved_through": 3761,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 1096,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              },
+              {
+                "tick": 1095,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ],
+            "network": [
+              {
+                "tick": 3779,
+                "resolved_through": 3778,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 3779,
+                "resolved_through": 3778,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 1112,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              },
+              {
+                "tick": 1112,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ],
+            "network": [
+              {
+                "tick": 3797,
+                "resolved_through": 3795,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 3796,
+                "resolved_through": 3795,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Other hero Start rejected",
+        "checks": {
+          "enough_samples": true,
+          "native_pause_owned": true,
+          "native_menu_input_state": true,
+          "world_timer_frozen": true,
+          "diagnostic_publications_advanced": true,
+          "cursor_unchanged": true,
+          "network_active_without_desync": true,
+          "transport_ticks_advanced": true,
+          "resolved_ticks_advanced": true
+        },
+        "samples": [
+          {
+            "peers": [
+              {
+                "tick": 1134,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              },
+              {
+                "tick": 1134,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ],
+            "network": [
+              {
+                "tick": 3819,
+                "resolved_through": 3817,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 3818,
+                "resolved_through": 3817,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 1154,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              },
+              {
+                "tick": 1154,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ],
+            "network": [
+              {
+                "tick": 3839,
+                "resolved_through": 3838,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 3838,
+                "resolved_through": 3837,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 1172,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              },
+              {
+                "tick": 1171,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ],
+            "network": [
+              {
+                "tick": 3855,
+                "resolved_through": 3854,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 3855,
+                "resolved_through": 3854,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 1189,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              },
+              {
+                "tick": 1189,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ],
+            "network": [
+              {
+                "tick": 3876,
+                "resolved_through": 3874,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 3876,
+                "resolved_through": 3875,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Other hero cursor rejected",
+        "checks": {
+          "enough_samples": true,
+          "native_pause_owned": true,
+          "native_menu_input_state": true,
+          "world_timer_frozen": true,
+          "diagnostic_publications_advanced": true,
+          "cursor_unchanged": true,
+          "network_active_without_desync": true,
+          "transport_ticks_advanced": true,
+          "resolved_ticks_advanced": true
+        },
+        "samples": [
+          {
+            "peers": [
+              {
+                "tick": 1214,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              },
+              {
+                "tick": 1213,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ],
+            "network": [
+              {
+                "tick": 3899,
+                "resolved_through": 3898,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 3899,
+                "resolved_through": 3898,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 1233,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              },
+              {
+                "tick": 1233,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ],
+            "network": [
+              {
+                "tick": 3919,
+                "resolved_through": 3917,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 3918,
+                "resolved_through": 3917,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 1253,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              },
+              {
+                "tick": 1253,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ],
+            "network": [
+              {
+                "tick": 3939,
+                "resolved_through": 3938,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 3939,
+                "resolved_through": 3938,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 1274,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              },
+              {
+                "tick": 1273,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ],
+            "network": [
+              {
+                "tick": 3957,
+                "resolved_through": 3956,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 3957,
+                "resolved_through": 3956,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Owner changed cursor",
+        "checks": {
+          "enough_samples": true,
+          "native_pause_owned": true,
+          "native_menu_input_state": true,
+          "world_timer_frozen": true,
+          "diagnostic_publications_advanced": true,
+          "cursor_unchanged": true,
+          "network_active_without_desync": true,
+          "transport_ticks_advanced": true,
+          "resolved_ticks_advanced": true
+        },
+        "samples": [
+          {
+            "peers": [
+              {
+                "tick": 1298,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  2
+                ],
+                "cursor": 13
+              },
+              {
+                "tick": 1297,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  2
+                ],
+                "cursor": 13
+              }
+            ],
+            "network": [
+              {
+                "tick": 3982,
+                "resolved_through": 3981,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 3981,
+                "resolved_through": 3980,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 1315,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  2
+                ],
+                "cursor": 13
+              },
+              {
+                "tick": 1314,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  2
+                ],
+                "cursor": 13
+              }
+            ],
+            "network": [
+              {
+                "tick": 4000,
+                "resolved_through": 3999,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 4000,
+                "resolved_through": 3999,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 1334,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  2
+                ],
+                "cursor": 13
+              },
+              {
+                "tick": 1333,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  2
+                ],
+                "cursor": 13
+              }
+            ],
+            "network": [
+              {
+                "tick": 4017,
+                "resolved_through": 4016,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 4017,
+                "resolved_through": 4016,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 1351,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  2
+                ],
+                "cursor": 13
+              },
+              {
+                "tick": 1350,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  2
+                ],
+                "cursor": 13
+              }
+            ],
+            "network": [
+              {
+                "tick": 4036,
+                "resolved_through": 4034,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 4034,
+                "resolved_through": 4033,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "Owner restored cursor",
+        "checks": {
+          "enough_samples": true,
+          "native_pause_owned": true,
+          "native_menu_input_state": true,
+          "world_timer_frozen": true,
+          "diagnostic_publications_advanced": true,
+          "cursor_unchanged": true,
+          "network_active_without_desync": true,
+          "transport_ticks_advanced": true,
+          "resolved_ticks_advanced": true
+        },
+        "samples": [
+          {
+            "peers": [
+              {
+                "tick": 1374,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              },
+              {
+                "tick": 1374,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ],
+            "network": [
+              {
+                "tick": 4059,
+                "resolved_through": 4058,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 4059,
+                "resolved_through": 4058,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 1393,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              },
+              {
+                "tick": 1392,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ],
+            "network": [
+              {
+                "tick": 4078,
+                "resolved_through": 4076,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 4077,
+                "resolved_through": 4076,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 1411,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              },
+              {
+                "tick": 1411,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ],
+            "network": [
+              {
+                "tick": 4096,
+                "resolved_through": 4094,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 4095,
+                "resolved_through": 4094,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          },
+          {
+            "peers": [
+              {
+                "tick": 1429,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              },
+              {
+                "tick": 1428,
+                "native_timer": 1025,
+                "native_phase": 2,
+                "pause_owner": 2,
+                "menu": [
+                  1,
+                  0
+                ],
+                "cursor": 0
+              }
+            ],
+            "network": [
+              {
+                "tick": 4114,
+                "resolved_through": 4113,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              },
+              {
+                "tick": 4114,
+                "resolved_through": 4113,
+                "active": 1,
+                "players": 2,
+                "max_players": 2,
+                "rollback": 0,
+                "desync": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "paired_host_profile": {
+    "profile": "mmx6.win64-clang22.loopback",
+    "revision": 1,
+    "selected_sha256": "bb82e6e341fb6e2dd04614f75eab71ba3dd764cd5209b09c8207246e3ebc7c16",
+    "peers": [
+      {
+        "capabilities": {
+          "actual_image_sha256": "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 1,
+          "selected_sha256": "bb82e6e341fb6e2dd04614f75eab71ba3dd764cd5209b09c8207246e3ebc7c16",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      },
+      {
+        "capabilities": {
+          "actual_image_sha256": "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 1,
+          "selected_sha256": "bb82e6e341fb6e2dd04614f75eab71ba3dd764cd5209b09c8207246e3ebc7c16",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      }
+    ]
+  },
+  "resolved_core_mod_samples": 30,
+  "resolved_crc_windows": [
+    {
+      "label": "initial idle",
+      "samples": [
+        {
+          "simulation_tick": 2880,
+          "core": "2dfc166f",
+          "mod": "dca21009"
+        },
+        {
+          "simulation_tick": 2912,
+          "core": "b6be68ca",
+          "mod": "e2c223e9"
+        },
+        {
+          "simulation_tick": 2944,
+          "core": "3b6d9131",
+          "mod": "0d2cf2f3"
+        },
+        {
+          "simulation_tick": 2976,
+          "core": "72a28b99",
+          "mod": "8c3c6793"
+        },
+        {
+          "simulation_tick": 3008,
+          "core": "fade9f10",
+          "mod": "9b629e51"
+        },
+        {
+          "simulation_tick": 3040,
+          "core": "78fcd344",
+          "mod": "06d8ad52"
+        },
+        {
+          "simulation_tick": 3072,
+          "core": "07cf75b9",
+          "mod": "d6e29991"
+        },
+        {
+          "simulation_tick": 3104,
+          "core": "464cf494",
+          "mod": "8448374b"
+        }
+      ],
+      "resolved_through": [
+        3118,
+        3118
+      ]
+    },
+    {
+      "label": "P2 right then release",
+      "samples": [
+        {
+          "simulation_tick": 3168,
+          "core": "7afeba66",
+          "mod": "631c6b14"
+        },
+        {
+          "simulation_tick": 3200,
+          "core": "a83b5ec5",
+          "mod": "5b3a597e"
+        },
+        {
+          "simulation_tick": 3232,
+          "core": "4963dedd",
+          "mod": "5bd6c51c"
+        },
+        {
+          "simulation_tick": 3264,
+          "core": "7ea20b1b",
+          "mod": "126233ff"
+        },
+        {
+          "simulation_tick": 3296,
+          "core": "11ed5d6c",
+          "mod": "6918e486"
+        },
+        {
+          "simulation_tick": 3328,
+          "core": "90ca8b9e",
+          "mod": "c4ffa873"
+        },
+        {
+          "simulation_tick": 3360,
+          "core": "4b55d1fc",
+          "mod": "5c915074"
+        }
+      ],
+      "resolved_through": [
+        3388,
+        3388
+      ]
+    },
+    {
+      "label": "P1 jump then settle",
+      "samples": [
+        {
+          "simulation_tick": 3456,
+          "core": "6ea3ae94",
+          "mod": "5638232c"
+        },
+        {
+          "simulation_tick": 3488,
+          "core": "fd721739",
+          "mod": "bbaffd0c"
+        },
+        {
+          "simulation_tick": 3520,
+          "core": "4d402717",
+          "mod": "0fc22b36"
+        },
+        {
+          "simulation_tick": 3552,
+          "core": "eb6ec39b",
+          "mod": "d64ce456"
+        },
+        {
+          "simulation_tick": 3584,
+          "core": "e4ab75e4",
+          "mod": "fd7f33a4"
+        },
+        {
+          "simulation_tick": 3616,
+          "core": "eea0fa7b",
+          "mod": "14a16044"
+        },
+        {
+          "simulation_tick": 3648,
+          "core": "1c0042b2",
+          "mod": "631c6b14"
+        },
+        {
+          "simulation_tick": 3680,
+          "core": "0b6de269",
+          "mod": "5b3a597e"
+        }
+      ],
+      "resolved_through": [
+        3689,
+        3689
+      ]
+    },
+    {
+      "label": "P2 personal menu, composed captures and resumed native controls",
+      "samples": [
+        {
+          "simulation_tick": 4256,
+          "core": "82efa857",
+          "mod": "bd12bbce"
+        },
+        {
+          "simulation_tick": 4288,
+          "core": "6f057e0f",
+          "mod": "6ccc3e94"
+        },
+        {
+          "simulation_tick": 4320,
+          "core": "3d1b3c77",
+          "mod": "e3f2a311"
+        },
+        {
+          "simulation_tick": 4352,
+          "core": "70970b60",
+          "mod": "c8f5cb7e"
+        },
+        {
+          "simulation_tick": 4384,
+          "core": "4d660ba2",
+          "mod": "ff8c3fd8"
+        },
+        {
+          "simulation_tick": 4416,
+          "core": "67b38a46",
+          "mod": "44a3ff38"
+        },
+        {
+          "simulation_tick": 4448,
+          "core": "41fb4769",
+          "mod": "5b0af916"
+        }
+      ],
+      "resolved_through": [
+        4469,
+        4469
+      ]
+    }
+  ],
+  "final_network": [
+    {
+      "id": 2476,
+      "ok": true,
+      "active": 1,
+      "host": 1,
+      "rollback": 0,
+      "architecture": "p2p",
+      "max_players": 2,
+      "players": 2,
+      "tick": 4482,
+      "resolved_through": 4481,
+      "stall": "ok",
+      "remote_lead": 2,
+      "desync": 0,
+      "desync_tick": 0,
+      "local_hash": 0,
+      "remote_hash": 0
+    },
+    {
+      "id": 2307,
+      "ok": true,
+      "active": 1,
+      "host": 0,
+      "rollback": 0,
+      "architecture": "p2p",
+      "max_players": 2,
+      "players": 2,
+      "tick": 4482,
+      "resolved_through": 4481,
+      "stall": "ok",
+      "remote_lead": 3,
+      "desync": 0,
+      "desync_tick": 0,
+      "local_hash": 0,
+      "remote_hash": 0
+    }
+  ],
+  "artwork_review": {
+    "result": "passed",
+    "local": "Red Zero palette, Z-SABER title and native Zero portrait; restored X and Zero sprites/stacked healthy meters inspected.",
+    "netplay": "Both red Zero menus/portraits and restored gameplay inspected. Matching paused SHA85bd4a2f... and resumed SHA44e2a482...; complete hashes retained per capture.",
+    "raw_statuses_preserved": "Original automated/artwork-pending receipts remain unchanged; this separate receipt supplies manual review."
+  },
+  "first_attempt": {
+    "raw_result": "failed",
+    "error": "Native personal-menu case failed: Owner cursor did not actually change",
+    "native_checks": {
+      "owner_native_pause_and_frozen_world": true,
+      "other_start_cannot_resume": true,
+      "other_cursor_cannot_change_owner_choice": true
+    },
+    "interpretation": "Pristine inventory has no selectable node to the right. This helper setup failure is not an R8 ownership regression. Native source audit provides Down/Up0->0x0D->0, used for the one corrected local run and first paired run."
+  },
+  "cleanup": {
+    "owned_pids_absent": [
+      79460,
+      16860,
+      58768,
+      26972
+    ],
+    "source_cards_used": false,
+    "graceful_exit_qualified": false
+  },
+  "limits": [
+    "Healthy intro X/P1 + base Zero/P2 on exact frozen fbba0e3 executable37cdc487 only.",
+    "Default equipment/no earned weapons or tanks; full equipment combinations, opposite rosters, damage after menu, native Quit/Continue/re-entry, death, rewind and cold menu restoration are separate checks.",
+    "Loopback lab uses one Windows x64 host, numeric127 endpoints, Clang22.1.8 ENHANCED and current CPUmask7f; no cross-machine or production qualification.",
+    "Online controls use published original host inputs; offline controls use accepted debug SIO. No online RAM/mailbox/fixture writes or granted inventory.",
+    "Native menu reads follow coherent diagnostics but are not one atomic cross-peer snapshot. Resolved CRC samples are below both completed simulation watermarks.",
+    "All owned processes needed termination after the quit deadline; graceful exit remains unverified."
+  ]
+}

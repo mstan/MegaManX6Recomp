@@ -146,3 +146,8 @@ success is recorded separately as
 automated checks completed. Artwork remains pending and the ledger remains
 unverified. The owning reviewer must inspect the composed menu/gameplay
 captures before treating the receipt as qualification.
+
+The [frozen native baseline](COOP_PERSONAL_MENU_BASELINE.md) now supplies that
+review for R8 on executable37cdc487, independently local and paired. The raw
+automated/artwork-pending receipts remain unchanged. This does not transfer
+qualification to another artifact, roster, equipment set or restoration flow.

@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | R13 passed on one exact candidate; 233 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | R8 and R13 passed on one exact candidate; 232 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -52,6 +52,13 @@ candidate identities; observations do not transfer automatically to a rebuild.
   loopback: 12 local checks, 16 paired checks, 46 matching resolved core/mod
   samples and verified agreement before guest cycle0/tick0. Other targeting
   routines and stages remain unverified.
+- [Zero's personal menu](COOP_PERSONAL_MENU_BASELINE.md) now passes R8 in both
+  modes on the same frozen candidate. Eleven native case checks cover owning
+  input, wrong-seat rejection, frozen world time, retained resources and
+  resumed movement/action48. The pair adds 30 matching resolved core/mod
+  samples; both paused and resumed composed images match and were inspected.
+  The initial unavailable Right cursor setup remains failed; the correction
+  uses the source-proven Down/Up path without granting inventory.
 - [Independent native trace counters](COOP_NATIVE_WORLD_TRACE.md) show one
   enemy-world entry per complete frame in the observed intro sequence: 361
   frames, 364 complete driver cycles and 83 bound live-enemy frames. Both
@@ -63,12 +70,13 @@ candidate identities; observations do not transfer automatically to a rebuild.
   immutable interpreted overlays, actual executable SHA and mutual profile
   agreement before guest execution. Fresh OS nonces bind each startup;
   existing title/content/build gates remain. Eight integrated startup/core/
-  wire/CPU/FP/image/nonce fixtures pass. Native transport qualification of this
-  new gate remains open; broad host catalogs remain unavailable.
+  wire/CPU/FP/image/nonce fixtures pass. Narrow loopback transport evidence is
+  recorded below; broad host catalogs remain unavailable.
 - X6 explicitly registers its declared build inputs, including the resolved
   generated-game tree, actual dependency pins and tracked edits. The integrated
-  Clang developer build passes all 31 game CTests with original content/audio
-  reproduction enabled. The manifest covers declared inputs, not an exhaustive
+  Clang developer lab build passes36/36 game CTests; the later production
+  default-OFF integration passes38/38, with original content/audio reproduction
+  enabled. The manifest covers declared inputs, not an exhaustive
   external binary or driver closure. See [manifest limits](COOP_BUILD_MANIFEST_REGISTRATION.md).
 - The [optimized helper matrix](../psxrecomp-v4/docs/qa/x6-helper-qualification-20261023/README.md)
   retains 48 passes, two fixture linkage blocks and one disabled SPU test.
