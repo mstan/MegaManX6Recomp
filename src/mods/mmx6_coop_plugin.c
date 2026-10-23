@@ -176,7 +176,7 @@ static int unit_choices(CPUState *cpu, uint32_t address) {
         psx_mod_read_word(address+0x104)!=0x03E00008u) return 0;
     unit_choices_call=1;
     cpu->gpr[2]=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
-    unit_choices_call=intro_target_call=0;
+    unit_choices_call=0;
     /* Native navigation, portraits and confirmation all consume this list.
      * Compact it rather than clearing Zero's persistent unlock/parts flags.
      * Native order is X, Falcon, Zero, Shadow, Blade, Ultimate. */
@@ -1731,7 +1731,7 @@ static void activate(void) {
     solid_call=solid_allocate_call=0;
     memset(zero_solid_contacts,0,sizeof zero_solid_contacts);
     scene_owner=scene_phase=0; scene_call=zero_projected=0;
-    unit_choices_call=0;
+    unit_choices_call=intro_target_call=0;
     zero_menu_loaded=0;
     if (!assets) assets=psx_mod_alloc_guest_memory(ASSET_SPACE,16);
     if (!diagnostic) diagnostic=psx_mod_alloc_guest_memory(0x2000,16);
@@ -1771,7 +1771,7 @@ static void activate(void) {
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
-        .compatibility_id = "mmx6-x-zero-delay-v10",
+        .compatibility_id = "mmx6-x-zero-delay-v11",
         .rollback_supported = 0,
         .savestates_supported = 0,
         .skip_bios_intro = 1,
