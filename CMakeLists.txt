@@ -201,7 +201,9 @@ if(BUILD_TESTING)
                 test_mmx6_coop_personal_menu_runner test_mmx6_coop_contact
                 test_mmx6_input_recording test_mmx6_content_coverage
                 test_mmx6_coop_contact_runner test_mmx6_coop_owned_cleanup
-                test_mmx6_coop_checkpoint test_mmx6_coop_private_effects)
+                test_mmx6_coop_checkpoint test_mmx6_coop_private_effects
+                test_mmx6_coop_private_pause test_mmx6_coop_published_input
+                test_mmx6_reploid_rescue_audit test_mmx6_input_capture_hook)
             add_test(NAME mmx6_${_mmx6_python_test}
                 COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/${_mmx6_python_test}.py")
         endforeach()
@@ -347,6 +349,34 @@ if(BUILD_TESTING)
         add_test(NAME ${_mmx6_checkpoint_target} COMMAND "$<TARGET_FILE:${_mmx6_checkpoint_target}>")
         set_tests_properties(${_mmx6_checkpoint_target} PROPERTIES SKIP_RETURN_CODE 77)
     endforeach()
+
+    if(EXISTS "${PSXRECOMP_V4_ROOT}/runtime/include/session_diagnostics.h" AND
+            Python3_Interpreter_FOUND AND Python3_VERSION VERSION_GREATER_EQUAL 3.11)
+        find_package(Threads REQUIRED)
+        foreach(_mmx6_capture_variant debug production)
+            set(_mmx6_capture_target mmx6_input_capture_${_mmx6_capture_variant}_test)
+            add_executable(${_mmx6_capture_target} tests/test_mmx6_input_capture.cpp
+                "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c")
+            target_include_directories(${_mmx6_capture_target} PRIVATE src/mods
+                "${PSXRECOMP_V4_ROOT}/runtime/include")
+            target_link_libraries(${_mmx6_capture_target} PRIVATE Threads::Threads)
+            if(_mmx6_capture_variant STREQUAL "production")
+                target_compile_definitions(${_mmx6_capture_target} PRIVATE PSX_NO_DEBUG_TOOLS)
+            endif()
+            if(MSVC)
+                target_compile_options(${_mmx6_capture_target} PRIVATE /O2 /UNDEBUG /fp:strict)
+            else()
+                target_compile_options(${_mmx6_capture_target} PRIVATE -O3 -UNDEBUG -ffp-contract=off)
+            endif()
+            add_test(NAME ${_mmx6_capture_target}
+                COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_mmx6_input_capture.py"
+                    --fixture "$<TARGET_FILE:${_mmx6_capture_target}>"
+                    --output "${CMAKE_CURRENT_BINARY_DIR}/input-capture-fixtures/${_mmx6_capture_variant}")
+        endforeach()
+        add_test(NAME mmx6_native_input_hook_emission_test
+            COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/check_mmx6_input_capture_hook.py"
+                --unit "${CMAKE_CURRENT_SOURCE_DIR}/${GAME_GENERATED_DIR}/SLUS_013.95_full_00.c")
+    endif()
 
     # These tests require the modern host-state API. Legacy SDK builds retain
     # the disabled snapshot/network-state capability and remain buildable.
