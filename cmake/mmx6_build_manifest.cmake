@@ -3,7 +3,10 @@ include("${PSXRECOMP_V4_ROOT}/cmake/psx_build_manifest.cmake")
 function(mmx6_register_build_manifests)
     find_package(Python3 REQUIRED COMPONENTS Interpreter)
     set(_roots "game=${CMAKE_SOURCE_DIR}" "build=${CMAKE_BINARY_DIR}"
-        "sdk=${PSXRECOMP_V4_ROOT}")
+        "sdk=${PSXRECOMP_V4_ROOT}"
+        # Generated game sources may be a junction onto the scratch drive.
+        # Give that exact declared tree its own logical root after resolution.
+        "game-generated=${CMAKE_SOURCE_DIR}/${GAME_GENERATED_DIR}")
     set(_repositories game "${CMAKE_SOURCE_DIR}" sdk "${PSXRECOMP_V4_ROOT}")
     set(_headers "${CMAKE_SOURCE_DIR}/src" "${CMAKE_SOURCE_DIR}/${GAME_GENERATED_DIR}"
         "${PSXRECOMP_V4_ROOT}/runtime/include")

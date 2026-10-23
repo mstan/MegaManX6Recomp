@@ -11,6 +11,8 @@ The registration captures the final target sources, including generated game
 and BIOS units, runtime sources, trusted EXTRAS and UI units directly added to
 that target. Source roots include the title, SDK, actual build directory,
 selected UI/net/RB trees, compiler/toolchain and relevant prefetched roots.
+The exact selected generated-game tree has its own logical root so a junction
+onto the scratch drive remains covered after canonical path resolution.
 Unmapped or missing direct inputs reject. The Windows resource object is an
 explicit prerequisite before its bytes are hashed. SDK generated sources in
 the source tree map to `sdk/`; binary-tree generated sources map to `build/`.
