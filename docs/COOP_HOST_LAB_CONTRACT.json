@@ -1,12 +1,21 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; fresh native pair and restart evidence required",
+  "status": "development-candidate-only; v12 private-effect/menu changes require fresh native pair and restart evidence",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 1,
+  "revision": 2,
   "default_enabled": false,
-  "flags": ["DIRECT_LOOPBACK"],
+  "flags": [
+    "DIRECT_LOOPBACK"
+  ],
   "scope": "two processes on this same machine through direct numeric 127.0.0.1; same actual executable SHA-256",
-  "compiler": {"target": "x86_64-w64-windows-gnu", "clang": [22, 1, 8]},
+  "compiler": {
+    "target": "x86_64-w64-windows-gnu",
+    "clang": [
+      22,
+      1,
+      8
+    ]
+  },
   "execution": {
     "backend": "ENHANCED",
     "identity": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
@@ -23,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v11",
+    "title_compatibility": "mmx6-x-zero-delay-v12",
     "slots": 2,
     "players": 2,
     "occupied_mask": 3,
@@ -43,8 +52,16 @@
     "game_source": "6efd58164103ab2a1a169244031f5272ef6390b6 plus retained staging patch 1269ac382d3a30e4482372532e4b0d3401b8e7c5d792511bf99f7be80f0ae781",
     "sdk_source": "948b99eba5f98edcc37c475535f84c1cb333b713",
     "receipts": [
-      {"path": "G:/Temp/Codex/psxrecomp/x6-parity/netplay-modern-v10-state/qualification.json", "sha256": "fca07dffa73e7f812f6efadc4fd1d3500e635d5a829fc34a8326797142501a21", "observed": "nine bounded intro/input/lifecycle checks and 29 same resolved-tick matching core/mod samples"},
-      {"path": "G:/Temp/Codex/psxrecomp/x6-parity/netplay-modern-v10-present/qualification.json", "sha256": "621f553dbcccee0d61d662a60a4ef20c1d3a8e86bb34dbb92f13ff8c1daf175b", "observed": "same executable; nine bounded checks and 30 matching resolved core/mod samples; composed captures inspected"}
+      {
+        "path": "G:/Temp/Codex/psxrecomp/x6-parity/netplay-modern-v10-state/qualification.json",
+        "sha256": "fca07dffa73e7f812f6efadc4fd1d3500e635d5a829fc34a8326797142501a21",
+        "observed": "nine bounded intro/input/lifecycle checks and 29 same resolved-tick matching core/mod samples"
+      },
+      {
+        "path": "G:/Temp/Codex/psxrecomp/x6-parity/netplay-modern-v10-present/qualification.json",
+        "sha256": "621f553dbcccee0d61d662a60a4ef20c1d3a8e86bb34dbb92f13ff8c1daf175b",
+        "observed": "same executable; nine bounded checks and 30 matching resolved core/mod samples; composed captures inspected"
+      }
     ],
     "limits": "Prior executable predates v11 AI and new host agreement/FP/overlay-seal APIs. It establishes no candidate qualification, fresh-nonce settlement, rollback, campaign, audio, heterogeneous equivalence or actual portable fallback. CPU mask0x7f is the currently probed lab host, not a feature record retroactively attached to old receipts. New manifest/image requirements strengthen admission but do not qualify simulation.",
     "helper_receipts": "SDK docs/qa/x6-helper-qualification-20261023: 48 checks passed, two could not link, one disabled; direct SPU fidelity execution reproduced four existing ADSR sweep failures. This is not a passing full ENHANCED helper matrix or title simulation qualification. See retained fixture-link-followup separately."
@@ -56,5 +73,46 @@
     "fresh restart/rematch settles again with fresh nonces before guest dispatch",
     "unsupported scope/capability and missing policy fail before guest execution"
   ],
-  "excluded": ["remote LAN", "internet", "ICE", "relay", "lobby routing", "spectators", "other machines", "other operating systems", "other CPU feature sets", "other compilers", "other execution contracts", "PGXP variant", "native overlay DLLs", "dynamic BIOS modules", "cross-build play", "REFERENCE fallback", "rollback", "network user states", "campaign correctness"]
+  "excluded": [
+    "remote LAN",
+    "internet",
+    "ICE",
+    "relay",
+    "lobby routing",
+    "spectators",
+    "other machines",
+    "other operating systems",
+    "other CPU feature sets",
+    "other compilers",
+    "other execution contracts",
+    "PGXP variant",
+    "native overlay DLLs",
+    "dynamic BIOS modules",
+    "cross-build play",
+    "REFERENCE fallback",
+    "rollback",
+    "network user states",
+    "campaign correctness"
+  ],
+  "prior_v11_evidence": {
+    "candidate_source": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+    "actual_executable_sha256": "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9",
+    "profile_revision": 1,
+    "semantic_contract_sha256": "b51aac8e2db53925b054688317c695ea21e3d940197947b1ce1fa1fe0286efe0",
+    "receipts": [
+      {
+        "path": "docs/evidence/mmx6-r2/manifest-bound-fbba0e3-summary.json",
+        "sha256": "b70fb88eef954ac72d0776e174f9e896afdb159562cfc6857fe2b343d92e6127"
+      },
+      {
+        "path": "docs/evidence/mmx6-r8/manifest-bound-fbba0e3-summary.json",
+        "sha256": "a96dbe017bcad465a6cc498761c1ddedb0a95df954252f25cc08ef31e87df1c4"
+      },
+      {
+        "path": "docs/evidence/mmx6-r13/manifest-bound-fbba0e3-summary.json",
+        "sha256": "dc6a76fe64f1b0eb3ec9093983bf913948a61c6a036240bbc448594f8fd8242a"
+      }
+    ],
+    "limits": "These bounded R2/R8/R13 and nonce-restart observations remain exact-v11-artifact evidence. They do not qualify v12 private effect updates, menu-phase guard, mode-packet ownership or another build. Default lab option remains OFF."
+  }
 }

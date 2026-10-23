@@ -2,7 +2,8 @@
 
 The catalog is **disabled by default**. Explicit development builds may set
 `-DMMX6_ENABLE_LOOPBACK_HOST_LAB=ON` to exercise the candidate
-`mmx6.win64-clang22.loopback`, revision1. This is a route to collecting fresh
+`mmx6.win64-clang22.loopback`, revision2 for title contract
+`mmx6-x-zero-delay-v12`. This is a route to collecting fresh
 evidence, not a production qualification or a correctness-fix rollout switch.
 GCC and unsupported builds remain valid offline builds and return an empty
 catalog even when the lab option is requested. SDKs before host-catalog API2
@@ -64,7 +65,10 @@ peers, actual cycle0/tick0 settlement before guest dispatch, default native
 loader/intro/input checks, and resolved core/mod matching. Broader gameplay,
 audio, rollback, other hosts and production release remain unverified.
 
-The fresh [native baseline](COOP_HOST_LAB_BASELINE.md) supplies bounded evidence
-for executable37cdc487 on the measured host, including the required startup,
-gameplay and restart checks. The semantic JSON remains a development contract;
-its hash does not qualify a future build automatically. The default stays OFF.
+The [earlier native baseline](COOP_HOST_LAB_BASELINE.md) supplies bounded evidence
+for executable37cdc487 under revision1/titlev11, including startup, gameplay and
+restart checks. Revision2 retains those exact review hashes as historical
+evidence. It changes the title contract for native private-effect updates,
+menu-phase gating and owned mode packets; fresh v12 native qualification is
+pending. The semantic JSON remains a development contract; its hash does not
+qualify another build automatically. The default stays OFF.

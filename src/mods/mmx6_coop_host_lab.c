@@ -45,7 +45,7 @@ static int lab_context_eligible(const PSXModNetplayHostStartup *c,const char *ex
 }
 static int lab_title_eligible(const PSXModNetplayProfile *p){
     return p&&p->plugin_id&&!strcmp(p->plugin_id,"mmx6.local-coop.prototype")&&
-        p->compatibility_id&&!strcmp(p->compatibility_id,"mmx6-x-zero-delay-v11")&&
+        p->compatibility_id&&!strcmp(p->compatibility_id,MMX6_HOST_LAB_TITLE_COMPATIBILITY)&&
         !p->rollback_supported&&!p->savestates_supported&&p->skip_bios_intro==1&&
         p->requires_retained_texture_banks==1&&p->state_digest&&
         p->loading_package_id&&!strcmp(p->loading_package_id,"mmx6.enhancement.seamless-loading")&&

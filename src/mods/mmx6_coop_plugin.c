@@ -1815,7 +1815,7 @@ static void activate(void) {
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
-        .compatibility_id = "mmx6-x-zero-delay-v11",
+        .compatibility_id = "mmx6-x-zero-delay-v12",
         .rollback_supported = 0,
         .savestates_supported = 0,
         .skip_bios_intro = 1,

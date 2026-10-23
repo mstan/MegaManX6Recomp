@@ -14,6 +14,7 @@ def generated_header():
             "#ifndef MMX6_COOP_HOST_LAB_CONTRACT_H\n#define MMX6_COOP_HOST_LAB_CONTRACT_H\n"
             f'#define MMX6_HOST_LAB_PROFILE "{record["profile"]}"\n'
             f'#define MMX6_HOST_LAB_REVISION {record["revision"]}u\n'
+            f'#define MMX6_HOST_LAB_TITLE_COMPATIBILITY "{record["session"]["title_compatibility"]}"\n'
             f'#define MMX6_HOST_LAB_EXECUTION_ID "{record["execution"]["identity"]}"\n'
             f'#define MMX6_HOST_LAB_BIOS_ID "{record["bios"]["image_id"]}"\n'
             f'#define MMX6_HOST_LAB_BIOS_WORDSUM {record["bios"]["image_wordsum"]}u\n'

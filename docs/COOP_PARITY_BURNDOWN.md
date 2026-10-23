@@ -41,10 +41,17 @@ states; old-state migration is never required.
 
 ## Current integrated candidate, October 23
 
-The local integration now uses profile `mmx6-x-zero-delay-v11`, ABI 32,
+The local integration now uses profile `mmx6-x-zero-delay-v12`, ABI 32,
 the modern SDK bridge and UI `b964eabe`. Rollback and online user state jumps
 remain disabled. The historical milestones below retain their original
 candidate identities; observations do not transfer automatically to a rebuild.
+
+The v12 source adds original native private trail/attached-effect updates,
+reverse-order visible trail rendering, owned mode packets and a menu-phase
+guard against extra P2 advancement. Source-backed actual-plugin fixtures pass
+in optimized GCC/Clang debug/production variants. The development host rule is
+now revision2 and remains default-OFF; fresh v12 native qualification is pending.
+The three comparison passes below remain bound to the frozen v11 artifact.
 
 - The native intro enemy action-1 proximity correction has actual before/after
   local evidence and a two-peer original-input route with 37 matching resolved

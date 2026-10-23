@@ -299,6 +299,30 @@ if(BUILD_TESTING)
         add_test(NAME ${_mmx6_diag_target} COMMAND "$<TARGET_FILE:${_mmx6_diag_target}>")
     endforeach()
 
+    foreach(_mmx6_effects_variant debug production)
+        set(_mmx6_effects_target mmx6_coop_private_effects_${_mmx6_effects_variant}_test)
+        add_executable(${_mmx6_effects_target} tests/test_mmx6_coop_private_effects.c
+            src/mods/mmx6_coop_lifecycle.c src/mods/mmx6_coop_assets.c
+            "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c")
+        target_include_directories(${_mmx6_effects_target} PRIVATE src/mods
+            "${PSXRECOMP_V4_ROOT}/runtime/include")
+        if(_mmx6_effects_variant STREQUAL "production")
+            target_compile_definitions(${_mmx6_effects_target} PRIVATE PSX_NO_DEBUG_TOOLS)
+        endif()
+        if(MSVC)
+            target_compile_options(${_mmx6_effects_target} PRIVATE /O2 /Gy /Gw)
+            target_link_options(${_mmx6_effects_target} PRIVATE /OPT:REF)
+        else()
+            target_compile_options(${_mmx6_effects_target} PRIVATE -O2 -ffunction-sections -fdata-sections)
+            if(APPLE)
+                target_link_options(${_mmx6_effects_target} PRIVATE -Wl,-dead_strip)
+            else()
+                target_link_options(${_mmx6_effects_target} PRIVATE -Wl,--gc-sections)
+            endif()
+        endif()
+        add_test(NAME ${_mmx6_effects_target} COMMAND "$<TARGET_FILE:${_mmx6_effects_target}>")
+    endforeach()
+
     # These tests require the modern host-state API. Legacy SDK builds retain
     # the disabled snapshot/network-state capability and remain buildable.
     if(EXISTS "${PSXRECOMP_V4_ROOT}/runtime/include/mod_snapshot.h")
