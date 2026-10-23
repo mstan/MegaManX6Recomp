@@ -35,10 +35,12 @@ whole enemy update nor a combat/contact callback is wrapped.
 
 `intro_target_call` prevents recursive interception, blocks snapshot readiness,
 participates in the canonical state digest guard array, and resets on
-activation. Its future-restored X value uses `STATE_WORDS` tag46; the nested
+full activation, rather than unrelated unit-selection completion. Its
+future-restored X value uses `STATE_WORDS` tag46; the nested
 guest call uses the existing architectural-register record. No host pointer
 or new stable host state is serialized. Rollback and savestates remain disabled
-in the netplay profile; the final compatibility revision belongs to integration.
+in the netplay profile. Integration advances the compatibility revision to
+`mmx6-x-zero-delay-v11` for this simulation change.
 
 ## Dispatch and verification
 
@@ -83,10 +85,34 @@ $out = 'G:/Temp/Codex/psxrecomp/x6-parity/build/intro-target/intro-gcc.exe'
 & $out
 ```
 
-The independent R13 native lane stopped at its setup camera gate and produced
-no action/HP transition evidence. Next, with P1 fixed at144, let Zero admit
-placement25 through the camera scanner and approach within112 without setting
-its action directly. Record the bound instance+10=800FA2DC, native action1->2,
-one world update, restored P1 X, and matching peer state. Repeat with P1 near,
-ties, both seats absent/fallen, pause and survivor Zero. Facing at800EACF8,
-action2 range at800EAE24 and every other AI helper remain separate open checks.
+## Native before/after comparison
+
+The [R13 native receipts](COOP_ENEMY_ADMISSION_BASELINE.md) now observe the
+counterexample and fixed response through original input, with X held at144.
+On immutable v10 executable `a2f0d2c9...`, Zero admits original placement25
+through the camera scanner, approaches within112, and leaves the exact bound
+actor waiting in action1 across54 samples. A native jump crosses the observed
+terrain step; Square damages that actor without moving X.
+
+On immutable v11 executable
+`43796887fda9e8b6bf547acdd1fa1149e1a944717e824e0dee5bf4a5b6010db7`,
+the same origin-bound actor enters action2 at tick590 while signed integer
+positions are enemy416/X144/Zero309. P1 stays fixed in all197 observations.
+After native Square, the live actor's HP drops12->4 before its slot is freed.
+The original report's failed attack-window reduction is retained; a separate
+read-only reanalysis recovers the already-recorded HP transition. It does not
+rewrite that report or invent a new runtime pass. Both composed response and
+interaction captures were inspected.
+
+Debug and production candidates build, with27/28 checks passing initially;
+the missing packaged hook entry was corrected and the one failed configuration
+check then passed in both. Target projection, snapshot/digest guard and native
+qualification parser tests pass. The build logs and exact receipts remain in
+the named G: evidence root. These local results do not transfer to a new SDK
+or executable.
+
+Paired targeting, an independent once-world runtime counter, and native
+near-P1/tie/absent/fallen/pause/survivor cases remain open. Facing at800EACF8,
+action2 range at800EAE24 and every other AI helper remain separate checks.
+This bounded action1 fix does not establish sustained nearest-player AI or
+pass the aggregate R13 comparison.
