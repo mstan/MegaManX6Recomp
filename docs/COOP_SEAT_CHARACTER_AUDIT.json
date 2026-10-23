@@ -1,0 +1,1199 @@
+{
+  "schema": 1,
+  "kind": "source_only_seat_character_ownership_audit",
+  "game_commit": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+  "date": "2026-10-23",
+  "status": "audit_only_no_runtime_changes_no_gameplay_pass",
+  "frozen_x4_commit": "50593bca772b600de6911cbfecd40b0f08721147",
+  "limits": [
+    "No game, native CPU execution, full title build, save/card read or write, SDK modification or ledger status change.",
+    "Frozen X4 implementation is a design reference only. Its addresses/layouts/passes do not transfer to X6.",
+    "Native routine windows and asset hashes prove source mapping, not runtime reachability, callback lifetime or correct seat swaps."
+  ],
+  "sources": {
+    "game": [
+      {
+        "path": "src/mods/mmx6_coop_plugin.c",
+        "git_blob": "dcf35129764cf75f8cceb653d9e59e79c4595154",
+        "bytes": 84866,
+        "sha256": "72cf416044ff4a089165c0a75a72df8c999eaeffb19a7b19ec81d2fb70a32fd9"
+      },
+      {
+        "path": "src/mods/mmx6_coop_assets.c",
+        "git_blob": "7cdfecd025e3a68250c76e6c114630bcd8e6b1de",
+        "bytes": 3611,
+        "sha256": "451e200d95e12d660207ff36baac5039acdec97c2c3e999c2614dc9ac25ae388"
+      },
+      {
+        "path": "src/mods/mmx6_coop_lifecycle.h",
+        "git_blob": "e257dd46dba6dcb3ae135a2407eeccd7e5aebff3",
+        "bytes": 1601,
+        "sha256": "404a21913971c5171ad6d547511a8c627b045ef9ddea73dd0f545c06e506cc42"
+      },
+      {
+        "path": "src/mods/mmx6_coop_snapshot.inc",
+        "git_blob": "ee6dfb306a022238a9a728d2592a8d061f076af1",
+        "bytes": 16123,
+        "sha256": "a3fbfd206df2a6a5b3e152a87109c7963e0191e36c09f6c04166ccee25f74801"
+      },
+      {
+        "path": "src/mods/mmx6_coop_state_track.h",
+        "git_blob": "935442b617264a4fa8cad0f6976d858d2b155a47",
+        "bytes": 1946,
+        "sha256": "7daf2ae3512fe4575dbc89635081d0689905f78f5f83ba814d5f5f8befd6ef4f"
+      },
+      {
+        "path": "mods/preloaded/packages/mmx6.local-coop/0.0.1/manifest.toml",
+        "git_blob": "68e52f41db41323eb5b9d7a88bf8a514c1986471",
+        "bytes": 911,
+        "sha256": "fc32952e9aba0973639e2ab69bde0f06fa64054f6591df9ca334f6e4326f548a"
+      },
+      {
+        "path": "docs/COOP_AUDIO_NATIVE_AUDIT.json",
+        "git_blob": "f286c5ba5a15c82d717ce0f3f8b11865694bb555",
+        "bytes": 107504,
+        "sha256": "6bfd5aa8ba6694118d0fdb3f3e5c60a3eda8f210aa239dcf8ae62b089b16d8cb"
+      },
+      {
+        "path": "docs/COOP_AUDIO_DRIVER_OWNERSHIP.json",
+        "git_blob": "f9ccb9e30aca6e85d58e73de8a94f5f8c715b86d",
+        "bytes": 20492,
+        "sha256": "09ddb4951694228718dca29a4a6f8920f50788c83e9dbba094b20a0afc8e5cc5"
+      }
+    ],
+    "x4": [
+      {
+        "path": "src/mods/mmx4_coop_plugin.c",
+        "git_blob": "a4c0417e3e021d243f8cbb7e109f96d87d6ebf38",
+        "bytes": 89536,
+        "sha256": "f61bb4f8758660ba21e04c86ec28b5c3f22738396ff128ebf10e65fae84b7e57"
+      },
+      {
+        "path": "src/mods/mmx4_coop_lifecycle.c",
+        "git_blob": "a40f13791c1b82d54597028015554a143b90ae09",
+        "bytes": 135195,
+        "sha256": "aaf711bf1a30f3e5eb618772cf51af1f62c000e501156dea60cc67bc90f0d775"
+      },
+      {
+        "path": "src/mods/mmx4_coop_combat.c",
+        "git_blob": "e56f5e7c7b1b47c3d7a95db74d4df67eb9f11719",
+        "bytes": 50500,
+        "sha256": "3153b42f6dbb5a408c63eafb7b5b8e16a04102b994a62ab7b8d199792636752a"
+      },
+      {
+        "path": "src/mods/mmx4_coop_audio.c",
+        "git_blob": "f490a1725aac5775a3e6711305370c279362dceb",
+        "bytes": 12540,
+        "sha256": "8c50b2559702eeb0dc668611d4a8ca216979bf3d9c897b45037842a088d0d27c"
+      },
+      {
+        "path": "docs/COOP_PLAYTEST_REGRESSIONS.md",
+        "git_blob": "7619517d5ebd4c27e943f36fbb41ccb38357d410",
+        "bytes": 13037,
+        "sha256": "66826ff879fc4c6e3dc45a9d8e6cb84223fcac20ceac2f3fec0feabeb470425f"
+      },
+      {
+        "path": "docs/COOP_PERSONAL_MENUS40.md",
+        "git_blob": "ba69868d1822f65a2a82226422c8878075477bd9",
+        "bytes": 5528,
+        "sha256": "42a048dae049da5757271db62aa335cb59275a5f124afcaf4a086e2ec4b66311"
+      }
+    ],
+    "original_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "workbook_sha256": "6855194c79f0830ee77b86901bc1997a481ce62de17dfaaced79d976d840e552",
+    "workbook_sheets": [
+      "FilesIndex",
+      "IngameTable",
+      "PlaythroughTable"
+    ],
+    "native_input": "Read-only original SLUS-01395 USA v1.1 on G:; ISO root and selected BIN/DAT member sectors only, no full archive extraction.",
+    "scratch_probe": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scratch\\seat-character-audit\\probe_native.py",
+    "scratch_workbook_probe": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scratch\\seat-character-audit\\read_workbook.py"
+  },
+  "native_windows": [
+    {
+      "id": "character_loader",
+      "start": "80013BF0",
+      "end_exclusive": "80013D10",
+      "bytes": 288,
+      "sha256": "d96a67e198b34f44a893781109c75b553623934caf83341f407e6d79a9bdd4e6",
+      "kind": "complete_routine"
+    },
+    {
+      "id": "player_init_identity_resources_pools",
+      "start": "8003BD24",
+      "end_exclusive": "8003C140",
+      "bytes": 1052,
+      "sha256": "0fdac6093bdba899dbfe7b0b679bb6bcb417f5640b9c6754c9abf5a7443a1594",
+      "kind": "instruction_window"
+    },
+    {
+      "id": "parts_derived_physics",
+      "start": "8003D630",
+      "end_exclusive": "8003D718",
+      "bytes": 232,
+      "sha256": "11af0ab48d8ea85b8e72a6d81bac5e8f7de879c6b6ebde22cad460c4844233de",
+      "kind": "complete_routine"
+    },
+    {
+      "id": "form_parts_unlock_projection",
+      "start": "8003D718",
+      "end_exclusive": "8003D7AC",
+      "bytes": 148,
+      "sha256": "d2cc0660040709245080d3e570746ce3247ec4b9064a251b0a08ce42112e0e8e",
+      "kind": "complete_routine"
+    },
+    {
+      "id": "shot_pool_update",
+      "start": "8002012C",
+      "end_exclusive": "80020258",
+      "bytes": 300,
+      "sha256": "2909e41e4cf4404c63b3834ec72ee2a75b6bdc03e54884efaa516d405d21b99e",
+      "kind": "complete_routine"
+    },
+    {
+      "id": "pad_decode_only",
+      "start": "8003CD44",
+      "end_exclusive": "8003CD9C",
+      "bytes": 88,
+      "sha256": "ea61b9e6299e4246d9e5ee170cadcacb7fbfe6668ea34f2d18dd4a85675b8d10",
+      "kind": "complete_routine"
+    },
+    {
+      "id": "portrait_character_form_choice",
+      "start": "800228AC",
+      "end_exclusive": "80022928",
+      "bytes": 124,
+      "sha256": "76fb7917f5a93b6e6a7bd22ee7cd0fe9a89b21a8ed4fcf2f6d98ae83ee640488",
+      "kind": "complete_routine"
+    },
+    {
+      "id": "death_effect_allocators_window",
+      "start": "8003DAF4",
+      "end_exclusive": "8003DBDC",
+      "bytes": 232,
+      "sha256": "6418861f196f55ff3296927012894c90fbf0ff4cfd8811a49ebed6878a7f6173",
+      "kind": "instruction_window"
+    }
+  ],
+  "assets": [
+    {
+      "archive": "ROCK_X6.BIN",
+      "member": 0,
+      "lba": 211185,
+      "sector": 2,
+      "bytes": 44588,
+      "sha256": "180175846cf8b1b650c405be8085b19417be033b4644a4034d70703124bf7871",
+      "type": "0x3c"
+    },
+    {
+      "archive": "ROCK_X6.BIN",
+      "member": 1,
+      "lba": 211185,
+      "sector": 24,
+      "bytes": 22964,
+      "sha256": "75a142a529ddc70f0d60ee6be32ebcdb0cf5cc90ec88e965c3b15cf0c6d21b00",
+      "type": "0x3d"
+    },
+    {
+      "archive": "ROCK_X6.BIN",
+      "member": 16,
+      "lba": 211185,
+      "sector": 381,
+      "bytes": 33946,
+      "sha256": "c9211aee86c5e7377b7716bd698102da1aed8c57a128e90507259cf9f6093ecf",
+      "type": "0x11"
+    },
+    {
+      "archive": "ROCK_X6.DAT",
+      "member": 85,
+      "lba": 211998,
+      "sector": 1782,
+      "bytes": 831488,
+      "sha256": "25f558d69e38e5f170b3325e27dc49a8232860f97d97dfeb6a0ce5306364f1c8",
+      "assets": [
+        {
+          "index": 0,
+          "type": "00000009",
+          "offset": 2048,
+          "bytes": 2656,
+          "sha256": "a25b72412e19b88b0eb3d55e001d337bd904a1176437367d96fc52ad383f6539"
+        },
+        {
+          "index": 1,
+          "type": "0001000B",
+          "offset": 6144,
+          "bytes": 32768,
+          "sha256": "679005a9bbbe80828f14150fa170418486b8a2ebc6143cdddfeac369d0b3390a"
+        },
+        {
+          "index": 2,
+          "type": "00010206",
+          "offset": 38912,
+          "bytes": 112640,
+          "sha256": "b0a328f06490dec97a23a8565389dfb7cbb5d4da67e5b3117ed82535a7452a75"
+        },
+        {
+          "index": 3,
+          "type": "00000002",
+          "offset": 151552,
+          "bytes": 229672,
+          "sha256": "22ae0ce0483087cb597b146de9e3f646756dfcf5358fc8140067af7c0f6fbe5a"
+        },
+        {
+          "index": 4,
+          "type": "00000004",
+          "offset": 382976,
+          "bytes": 5336,
+          "sha256": "66ed1d5a9fa7afd9d56b551709fa673bc2da600d80dc41c0bc278539b2866365"
+        },
+        {
+          "index": 5,
+          "type": "00020000",
+          "offset": 389120,
+          "bytes": 138608,
+          "sha256": "bf2e666f782d8c5eb6fc4d552ce7550728fe6fdc16463b66b296f4b4f81f8a9b"
+        },
+        {
+          "index": 6,
+          "type": "00010007",
+          "offset": 528384,
+          "bytes": 32768,
+          "sha256": "9bed37c05a7a31e9ebbfbf86d1ffecd28f7d54f1e2314e8d1750182df70d9346"
+        },
+        {
+          "index": 7,
+          "type": "00010001",
+          "offset": 561152,
+          "bytes": 32768,
+          "sha256": "cca2294ce750673a91a405659a92a2d6646d9821f7bc77e60dd3b4262d81984a"
+        },
+        {
+          "index": 8,
+          "type": "00000011",
+          "offset": 593920,
+          "bytes": 2048,
+          "sha256": "14804d1c305598e4549fcf96c18a048e0c3d5634f72973bd6a845b4785572789"
+        },
+        {
+          "index": 9,
+          "type": "00000012",
+          "offset": 595968,
+          "bytes": 9036,
+          "sha256": "4fc0450f6fbe9e7fefecd1959ae74987a5c3e2e10df906a65de4ea1799f019c3"
+        },
+        {
+          "index": 10,
+          "type": "00000003",
+          "offset": 606208,
+          "bytes": 34084,
+          "sha256": "116e35f693c69694e6576c582925eea8d791aa3fa5fcee0f310e8d837ebe7aaa"
+        },
+        {
+          "index": 11,
+          "type": "00000006",
+          "offset": 641024,
+          "bytes": 4264,
+          "sha256": "abf6451ffee33fa526e91be07e9c4f854c38ef0840ffa19c50a89c896536c857"
+        },
+        {
+          "index": 12,
+          "type": "00020101",
+          "offset": 647168,
+          "bytes": 123408,
+          "sha256": "425516420dc6ff1d973edae265717a6ca237454631cdb4b7c829c96f6f7057a8"
+        },
+        {
+          "index": 13,
+          "type": "00000006",
+          "offset": 772096,
+          "bytes": 3696,
+          "sha256": "7c9fedd98a3d4740a2baddcc77323984e8b0a1ae139e24f36043cdfd0fa757ce"
+        },
+        {
+          "index": 14,
+          "type": "00020303",
+          "offset": 776192,
+          "bytes": 52096,
+          "sha256": "203c8e0e58ea4e55797445b7af76e7563528c21536ae8fd57e38566a89b38bdd"
+        },
+        {
+          "index": 15,
+          "type": "00000014",
+          "offset": 829440,
+          "bytes": 284,
+          "sha256": "b691ec5678c2a3c35635fea546d81255a38e81518471df6af9517e8f4d3e6470"
+        }
+      ]
+    },
+    {
+      "archive": "ROCK_X6.DAT",
+      "member": 86,
+      "lba": 211998,
+      "sector": 2188,
+      "bytes": 903168,
+      "sha256": "2cb904ce44014592c5b881bc9f37a75262374eb74d601fffdb018eea9f856c4c",
+      "assets": [
+        {
+          "index": 0,
+          "type": "00000009",
+          "offset": 2048,
+          "bytes": 2688,
+          "sha256": "c4349a09cebce27bd9fdfe4f7023d45fb15fa802ef4ce436fef0c4c04f997a17"
+        },
+        {
+          "index": 1,
+          "type": "0001000B",
+          "offset": 6144,
+          "bytes": 32768,
+          "sha256": "679005a9bbbe80828f14150fa170418486b8a2ebc6143cdddfeac369d0b3390a"
+        },
+        {
+          "index": 2,
+          "type": "00010206",
+          "offset": 38912,
+          "bytes": 112640,
+          "sha256": "3dcd80aeddf02d5a3b1b7b33b60748ba3dd3649ad5efff6aeddf090e1151d2be"
+        },
+        {
+          "index": 3,
+          "type": "00000002",
+          "offset": 151552,
+          "bytes": 245288,
+          "sha256": "e7e6b252b045c3633e98f3dfbf9f78839f7236813fa7204a6bb6ecc4b8a0ed45"
+        },
+        {
+          "index": 4,
+          "type": "00000004",
+          "offset": 397312,
+          "bytes": 5336,
+          "sha256": "66ed1d5a9fa7afd9d56b551709fa673bc2da600d80dc41c0bc278539b2866365"
+        },
+        {
+          "index": 5,
+          "type": "00020000",
+          "offset": 403456,
+          "bytes": 138608,
+          "sha256": "bf2e666f782d8c5eb6fc4d552ce7550728fe6fdc16463b66b296f4b4f81f8a9b"
+        },
+        {
+          "index": 6,
+          "type": "00010007",
+          "offset": 542720,
+          "bytes": 32768,
+          "sha256": "af4ad996491f141db60d88766ac6a2cf9c580e361d40e76463ce5b9e3b5e0be3"
+        },
+        {
+          "index": 7,
+          "type": "00010001",
+          "offset": 575488,
+          "bytes": 32768,
+          "sha256": "cca2294ce750673a91a405659a92a2d6646d9821f7bc77e60dd3b4262d81984a"
+        },
+        {
+          "index": 8,
+          "type": "00000011",
+          "offset": 608256,
+          "bytes": 2048,
+          "sha256": "ed0e0139350757bde9ae1bb1eb846b97612de2cc197aa90c9ade1e80bd94cdb1"
+        },
+        {
+          "index": 9,
+          "type": "00000012",
+          "offset": 610304,
+          "bytes": 9252,
+          "sha256": "5bec0e8c56a50cfecba0869729b58168687e201004edf04c02b3c3f9e8da2f6d"
+        },
+        {
+          "index": 10,
+          "type": "00000003",
+          "offset": 620544,
+          "bytes": 41400,
+          "sha256": "f836366f079c873c47440fbd6860716f5829554b6789352737969a787b800974"
+        },
+        {
+          "index": 11,
+          "type": "00000006",
+          "offset": 663552,
+          "bytes": 5312,
+          "sha256": "b4c3506a39e2c2b81cecc2614352059e4c1d8b14730f5ae4871723ac426c65fc"
+        },
+        {
+          "index": 12,
+          "type": "00020101",
+          "offset": 669696,
+          "bytes": 172768,
+          "sha256": "ace87356c352818958e936d7b133c59955e7f71aa3363b98ba862c3db7a1430b"
+        },
+        {
+          "index": 13,
+          "type": "00000006",
+          "offset": 843776,
+          "bytes": 3696,
+          "sha256": "1a63a15f0f26daab6d65a554fc95688b014ab458764d57cd2105520c8d7f689c"
+        },
+        {
+          "index": 14,
+          "type": "00020303",
+          "offset": 847872,
+          "bytes": 52608,
+          "sha256": "fb80f7b0876285bd166c8bc56a9f1dda9298ebebbd05248aaf81fa89100a9a58"
+        },
+        {
+          "index": 15,
+          "type": "00000014",
+          "offset": 901120,
+          "bytes": 284,
+          "sha256": "b691ec5678c2a3c35635fea546d81255a38e81518471df6af9517e8f4d3e6470"
+        }
+      ]
+    },
+    {
+      "archive": "ROCK_X6.DAT",
+      "member": 87,
+      "lba": 211998,
+      "sector": 2629,
+      "bytes": 931840,
+      "sha256": "d41601a3c9a38463b3725fde5f01d7850af6d829b49dae1b162ddc3a7e3f88ac",
+      "assets": [
+        {
+          "index": 0,
+          "type": "00000009",
+          "offset": 2048,
+          "bytes": 2688,
+          "sha256": "7431dfb288fb3f1f295775e59ff2cf9e5aaa1b1a1c151a16684d83c769397604"
+        },
+        {
+          "index": 1,
+          "type": "0001000B",
+          "offset": 6144,
+          "bytes": 32768,
+          "sha256": "679005a9bbbe80828f14150fa170418486b8a2ebc6143cdddfeac369d0b3390a"
+        },
+        {
+          "index": 2,
+          "type": "00010206",
+          "offset": 38912,
+          "bytes": 112640,
+          "sha256": "3dcd80aeddf02d5a3b1b7b33b60748ba3dd3649ad5efff6aeddf090e1151d2be"
+        },
+        {
+          "index": 3,
+          "type": "00000002",
+          "offset": 151552,
+          "bytes": 262428,
+          "sha256": "3609ad288c725edb4cfac1d97c7d4fcd39f9086627517c8b154f6d7aa7b9cfc6"
+        },
+        {
+          "index": 4,
+          "type": "00000004",
+          "offset": 415744,
+          "bytes": 5336,
+          "sha256": "66ed1d5a9fa7afd9d56b551709fa673bc2da600d80dc41c0bc278539b2866365"
+        },
+        {
+          "index": 5,
+          "type": "00020000",
+          "offset": 421888,
+          "bytes": 138608,
+          "sha256": "bf2e666f782d8c5eb6fc4d552ce7550728fe6fdc16463b66b296f4b4f81f8a9b"
+        },
+        {
+          "index": 6,
+          "type": "00010007",
+          "offset": 561152,
+          "bytes": 32768,
+          "sha256": "2f5913d5aae6304b951ea1ee11b276e41416ac2e2196df02d460ee95fdfa1a41"
+        },
+        {
+          "index": 7,
+          "type": "00010001",
+          "offset": 593920,
+          "bytes": 32768,
+          "sha256": "cca2294ce750673a91a405659a92a2d6646d9821f7bc77e60dd3b4262d81984a"
+        },
+        {
+          "index": 8,
+          "type": "00000011",
+          "offset": 626688,
+          "bytes": 2048,
+          "sha256": "ed0e0139350757bde9ae1bb1eb846b97612de2cc197aa90c9ade1e80bd94cdb1"
+        },
+        {
+          "index": 9,
+          "type": "00000012",
+          "offset": 628736,
+          "bytes": 9076,
+          "sha256": "9d9db57dc1c80dcc5117786643a8960d53b48f32ad05bf56ce9f3dc10a582888"
+        },
+        {
+          "index": 10,
+          "type": "00000003",
+          "offset": 638976,
+          "bytes": 44452,
+          "sha256": "ac73508aacae0233bc6a51c7b8afc480cc97844d1ad6cd8b68f3a2873c157a6c"
+        },
+        {
+          "index": 11,
+          "type": "00000006",
+          "offset": 684032,
+          "bytes": 5312,
+          "sha256": "3fc7f1fcd8f9fd4180af09cdf7aab3f907c1406ab513145a7cc2490a93c4e98a"
+        },
+        {
+          "index": 12,
+          "type": "00020101",
+          "offset": 690176,
+          "bytes": 182064,
+          "sha256": "4d34d0ff6e09dd9c764391583aeda4cb4f5a46e35e92a916b56b221f7da30c7f"
+        },
+        {
+          "index": 13,
+          "type": "00000006",
+          "offset": 872448,
+          "bytes": 3696,
+          "sha256": "1a63a15f0f26daab6d65a554fc95688b014ab458764d57cd2105520c8d7f689c"
+        },
+        {
+          "index": 14,
+          "type": "00020303",
+          "offset": 876544,
+          "bytes": 52608,
+          "sha256": "fb80f7b0876285bd166c8bc56a9f1dda9298ebebbd05248aaf81fa89100a9a58"
+        },
+        {
+          "index": 15,
+          "type": "00000014",
+          "offset": 929792,
+          "bytes": 284,
+          "sha256": "b691ec5678c2a3c35635fea546d81255a38e81518471df6af9517e8f4d3e6470"
+        }
+      ]
+    },
+    {
+      "archive": "ROCK_X6.DAT",
+      "member": 88,
+      "lba": 211998,
+      "sector": 3084,
+      "bytes": 806912,
+      "sha256": "b7d6eb7c0cc7abc97df61a7eedbdd3fe2ffc5fbbb237be905bd7b38341be0664",
+      "assets": [
+        {
+          "index": 0,
+          "type": "00000009",
+          "offset": 2048,
+          "bytes": 2688,
+          "sha256": "518f3e83bbbad55d19e80d06766d8dfab1b68072f17dd2c26fce996530d1e9ee"
+        },
+        {
+          "index": 1,
+          "type": "0001000B",
+          "offset": 6144,
+          "bytes": 32768,
+          "sha256": "679005a9bbbe80828f14150fa170418486b8a2ebc6143cdddfeac369d0b3390a"
+        },
+        {
+          "index": 2,
+          "type": "00010206",
+          "offset": 38912,
+          "bytes": 112640,
+          "sha256": "3dcd80aeddf02d5a3b1b7b33b60748ba3dd3649ad5efff6aeddf090e1151d2be"
+        },
+        {
+          "index": 3,
+          "type": "00000002",
+          "offset": 151552,
+          "bytes": 232116,
+          "sha256": "de4ca8b2826a4fb1a699b8dd315433bb1899f77a88cd8623b504d16ad38a5958"
+        },
+        {
+          "index": 4,
+          "type": "00000004",
+          "offset": 385024,
+          "bytes": 5336,
+          "sha256": "66ed1d5a9fa7afd9d56b551709fa673bc2da600d80dc41c0bc278539b2866365"
+        },
+        {
+          "index": 5,
+          "type": "00020000",
+          "offset": 391168,
+          "bytes": 138608,
+          "sha256": "bf2e666f782d8c5eb6fc4d552ce7550728fe6fdc16463b66b296f4b4f81f8a9b"
+        },
+        {
+          "index": 6,
+          "type": "00010007",
+          "offset": 530432,
+          "bytes": 32768,
+          "sha256": "af4ad996491f141db60d88766ac6a2cf9c580e361d40e76463ce5b9e3b5e0be3"
+        },
+        {
+          "index": 7,
+          "type": "00010001",
+          "offset": 563200,
+          "bytes": 32768,
+          "sha256": "cca2294ce750673a91a405659a92a2d6646d9821f7bc77e60dd3b4262d81984a"
+        },
+        {
+          "index": 8,
+          "type": "00000011",
+          "offset": 595968,
+          "bytes": 2048,
+          "sha256": "b22f974e9bb23080f48805126422c05de5938637125efcb11cfd40052a245c25"
+        },
+        {
+          "index": 9,
+          "type": "00000012",
+          "offset": 598016,
+          "bytes": 9252,
+          "sha256": "5bec0e8c56a50cfecba0869729b58168687e201004edf04c02b3c3f9e8da2f6d"
+        },
+        {
+          "index": 10,
+          "type": "00000003",
+          "offset": 608256,
+          "bytes": 39252,
+          "sha256": "bf1b93b3ab7b717ccc9efff01c987d2ac4028bd8afdd607b32c7cbaa7b70cb5b"
+        },
+        {
+          "index": 11,
+          "type": "00000006",
+          "offset": 649216,
+          "bytes": 4212,
+          "sha256": "d4549a99331ae79e5c3f6a844185445629cb64a81737b1fef6b540f2364cc6e8"
+        },
+        {
+          "index": 12,
+          "type": "00020101",
+          "offset": 655360,
+          "bytes": 91872,
+          "sha256": "a61f117dc0121daae9d9dd4d2d49f2bb9e63952de39c8bfd1c88c3630abe0b4c"
+        },
+        {
+          "index": 13,
+          "type": "00000006",
+          "offset": 747520,
+          "bytes": 3696,
+          "sha256": "1a63a15f0f26daab6d65a554fc95688b014ab458764d57cd2105520c8d7f689c"
+        },
+        {
+          "index": 14,
+          "type": "00020303",
+          "offset": 751616,
+          "bytes": 52608,
+          "sha256": "fb80f7b0876285bd166c8bc56a9f1dda9298ebebbd05248aaf81fa89100a9a58"
+        },
+        {
+          "index": 15,
+          "type": "00000014",
+          "offset": 804864,
+          "bytes": 284,
+          "sha256": "b691ec5678c2a3c35635fea546d81255a38e81518471df6af9517e8f4d3e6470"
+        }
+      ]
+    },
+    {
+      "archive": "ROCK_X6.DAT",
+      "member": 89,
+      "lba": 211998,
+      "sector": 3478,
+      "bytes": 921600,
+      "sha256": "43d65433299185f5ff6289a108d8f2d4f56769c9da2609252507f16e43f78e2f",
+      "assets": [
+        {
+          "index": 0,
+          "type": "00000009",
+          "offset": 2048,
+          "bytes": 2784,
+          "sha256": "681a68bffa3eafacb70f0d7b5a6374d1d4b4b90e287e7563d8022d3a52406022"
+        },
+        {
+          "index": 1,
+          "type": "0001000B",
+          "offset": 6144,
+          "bytes": 32768,
+          "sha256": "679005a9bbbe80828f14150fa170418486b8a2ebc6143cdddfeac369d0b3390a"
+        },
+        {
+          "index": 2,
+          "type": "00010206",
+          "offset": 38912,
+          "bytes": 112640,
+          "sha256": "a46fc5a897d4d815918d750fffdd8b067353c591d4bdb993334e5031a7d933f7"
+        },
+        {
+          "index": 3,
+          "type": "00000002",
+          "offset": 151552,
+          "bytes": 263612,
+          "sha256": "5d5c201492d60e7c0abe7a97d6c80e346b2a0bcf44c4ac6f5d508ce3a6a28756"
+        },
+        {
+          "index": 4,
+          "type": "00000004",
+          "offset": 415744,
+          "bytes": 5336,
+          "sha256": "66ed1d5a9fa7afd9d56b551709fa673bc2da600d80dc41c0bc278539b2866365"
+        },
+        {
+          "index": 5,
+          "type": "00020000",
+          "offset": 421888,
+          "bytes": 138608,
+          "sha256": "bf2e666f782d8c5eb6fc4d552ce7550728fe6fdc16463b66b296f4b4f81f8a9b"
+        },
+        {
+          "index": 6,
+          "type": "00010007",
+          "offset": 561152,
+          "bytes": 32768,
+          "sha256": "af4ad996491f141db60d88766ac6a2cf9c580e361d40e76463ce5b9e3b5e0be3"
+        },
+        {
+          "index": 7,
+          "type": "00010001",
+          "offset": 593920,
+          "bytes": 32768,
+          "sha256": "cca2294ce750673a91a405659a92a2d6646d9821f7bc77e60dd3b4262d81984a"
+        },
+        {
+          "index": 8,
+          "type": "00000011",
+          "offset": 626688,
+          "bytes": 2048,
+          "sha256": "80b1c5e3b0b0910a50f7aa4c2a291f60db59aff470f10d04f4dad7af408a9af4"
+        },
+        {
+          "index": 9,
+          "type": "00000012",
+          "offset": 628736,
+          "bytes": 9252,
+          "sha256": "5bec0e8c56a50cfecba0869729b58168687e201004edf04c02b3c3f9e8da2f6d"
+        },
+        {
+          "index": 10,
+          "type": "00000003",
+          "offset": 638976,
+          "bytes": 43832,
+          "sha256": "17528637ade7f1b2dcb2a28550630976567f3689a8f939435ec839256f3b7f27"
+        },
+        {
+          "index": 11,
+          "type": "00000006",
+          "offset": 684032,
+          "bytes": 5824,
+          "sha256": "0442d04cbf6fdab0e8a369bbff6d03495adde6aac75bca472dc32ec7d4e8fce9"
+        },
+        {
+          "index": 12,
+          "type": "00020101",
+          "offset": 690176,
+          "bytes": 171712,
+          "sha256": "4c08eb599c9905fba248d0608f018748ce0a476b27c9abd4db1ed06fd2c63acb"
+        },
+        {
+          "index": 13,
+          "type": "00000006",
+          "offset": 862208,
+          "bytes": 3696,
+          "sha256": "1a63a15f0f26daab6d65a554fc95688b014ab458764d57cd2105520c8d7f689c"
+        },
+        {
+          "index": 14,
+          "type": "00020303",
+          "offset": 866304,
+          "bytes": 52608,
+          "sha256": "fb80f7b0876285bd166c8bc56a9f1dda9298ebebbd05248aaf81fa89100a9a58"
+        },
+        {
+          "index": 15,
+          "type": "00000014",
+          "offset": 919552,
+          "bytes": 284,
+          "sha256": "b691ec5678c2a3c35635fea546d81255a38e81518471df6af9517e8f4d3e6470"
+        }
+      ]
+    }
+  ],
+  "selection": {
+    "native_overlay_member": 16,
+    "native_overlay_base": "800E9860",
+    "list_builder": "800E9898",
+    "list": "800F1CB0",
+    "count": "800F1CEB",
+    "native_order": [
+      0,
+      1,
+      5,
+      2,
+      3,
+      4
+    ],
+    "unlock_flags": "PLAY+5F: Falcon01, Shadow02, Blade04, Ultimate08, Zero10; Black Zero20 affects native portrait variant, not a seventh ordinary unit ID.",
+    "confirm": {
+      "site": "800EB174..800EB19C in BIN16 only",
+      "form_store": "800EB18C -> PLAY+5E",
+      "zero_test": "form==5",
+      "character_store": "800EB198 / 800EB19C -> PLAY+38=1 / 0"
+    },
+    "coop_filter": "unit_choices calls original once then removes unit5; it does not clear permanent availability bits.",
+    "configuration": "mmx6.local-coop manifest feature prototype is an enabled/disabled plugin feature. No seat-character/form option exists. Native stage selector chooses campaign character, then co-op enrolls fixed Zero into P2.",
+    "ui_readiness": "Do not remove the Zero filter before generic counterpart resources/projection exist."
+  },
+  "forms": [
+    {
+      "form_id": 0,
+      "character_id": 0,
+      "name": "X",
+      "bin_member": 0,
+      "dat_member": 86,
+      "portrait_index": 0,
+      "status": "source_mapped_runtime_unverified"
+    },
+    {
+      "form_id": 1,
+      "character_id": 0,
+      "name": "Falcon X",
+      "bin_member": 0,
+      "dat_member": 87,
+      "portrait_index": 3,
+      "status": "source_mapped_runtime_unverified"
+    },
+    {
+      "form_id": 2,
+      "character_id": 0,
+      "name": "Shadow X",
+      "bin_member": 0,
+      "dat_member": 88,
+      "portrait_index": 4,
+      "status": "source_mapped_runtime_unverified"
+    },
+    {
+      "form_id": 3,
+      "character_id": 0,
+      "name": "Blade X",
+      "bin_member": 0,
+      "dat_member": 89,
+      "portrait_index": 5,
+      "status": "source_mapped_runtime_unverified"
+    },
+    {
+      "form_id": 4,
+      "character_id": 0,
+      "name": "Ultimate X",
+      "bin_member": 0,
+      "dat_member": 86,
+      "portrait_index": 2,
+      "status": "source_mapped_runtime_unverified"
+    },
+    {
+      "form_id": 5,
+      "character_id": 1,
+      "name": "Zero",
+      "bin_member": 1,
+      "dat_member": 85,
+      "portrait_index": 1,
+      "status": "source_mapped_runtime_unverified"
+    }
+  ],
+  "field_mapping": [
+    {
+      "id": "SC01",
+      "field": "PLAY=800CCED0 +38; PLAYER=800970A0 +02 (byte)",
+      "meaning": "Native character: X0/Zero1. Init copies PLAY+38 into body+2; identity is distinct from seat.",
+      "evidence": "8003BDE8 reads PLAY+38; 8003BE10 stores PLAYER+02. Workbook Playthrough58 / Ingame140.",
+      "ownership": "Per-character context; restore native campaign owner after projection.",
+      "remaining_proof": "Prove all native consumers and exception/scene restoration in both rosters.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC02",
+      "field": "PLAY+5E; PLAYER+E7 (byte)",
+      "meaning": "Native form IDs0..5; body form is set separately from character byte.",
+      "evidence": "8003D730 loads PLAY+5E; 8003D73C stores PLAYER+E7. Workbook Playthrough96 / Ingame369.",
+      "ownership": "Per-character/form selection; do not infer X form from Zero campaign form5.",
+      "remaining_proof": "Choose explicit fixed default or agreed X/P2 form policy; qualify every form independently.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC03",
+      "field": "PLAY+5F; native stage-selector list/count",
+      "meaning": "Availability bits and Black Zero variant are native persistent progress/code state.",
+      "evidence": "BIN16 800E98AC..800E9998; zero form5 appended at800E98F8/FC. Workbook Playthrough97.",
+      "ownership": "Shared native progression; selection belongs to campaign/owned menu, not player seat arithmetic.",
+      "remaining_proof": "Retain legitimate unlock/parts progress; do not clear flags as a roster implementation.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC04",
+      "field": "PLAY+74/+78 -> PLAYER+EC word; PLAY+60 -> PLAYER+C9 byte",
+      "meaning": "Native equipped parts indexed by character0/1; beaten-stage/weapon availability copied unless Shadow form2 clears C9.",
+      "evidence": "8003D72C..8003D74C indexes PLAY+74+body[2]*4. 8003D748..D798 clears C9 for form2, otherwise copies PLAY+60. Workbook Playthrough98,118..125; Ingame339,374..377.",
+      "ownership": "Character-specific permanent equipment with shared earned progression, private current body/counters.",
+      "remaining_proof": "Trace native menu writeback and part-dependent physics/techniques for each character/form.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC05",
+      "field": "PLAYER+5C/+5D/+5E; +A8..+C7; +14A; PLAY+5B/+5C,+61/+62",
+      "meaning": "Fresh init selects character-specific max HP and weapon-energy base; fills16 native ammo halfwords. Checkpoint path separately copies saved HP/ammo.",
+      "evidence": "8003BE64..8003BEB0 reads PLAY+5B+char and PLAY+61+char; 8003BED8..8003BF30 handles saved HP/ammo/weapon.",
+      "ownership": "Private current resources follow actor/character; preserve native shared lives, tanks and persistent progress.",
+      "remaining_proof": "Do not refill on menu/ordinary door/rejoin; test spent resources and native checkpoint/team wipe separately.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC06",
+      "field": "PLAYER+93,+96,+D7; +8C..+92,+A2; full0x158-byte body",
+      "meaning": "Current weapon and charge/attack phase/counters are part of the native body. Initializer/wipe helpers affect these independently of graphics.",
+      "evidence": "8003BF18/BF28 copies saved weapon to93; 8003CDBC..8003CDEC and3CDF0..3CE2C clear8C/8E..92/A2. Workbook Ingame285,288,353 names weapon/attack/charge status.",
+      "ownership": "Private actor body, attack pool and future-restored callback locals.",
+      "remaining_proof": "Map exact counter producer/consumer and allocation/expiry closure before R9 charged-shot claim; labels alone do not prove lifetimes.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC07",
+      "field": "801EA000..801F5000 code/data aperture; PLAYER+30,+38,+3C,+40,+42,+47",
+      "meaning": "Character overlay, native per-character table pointer, compression/assembly pointers, texture page/CLUT and frame.",
+      "evidence": "80013CCC..13CF4 loads BIN0/1 at801EA000. 8003BF3C..BFB0 chooses30=801F4AD4(X)/801EF6D0(Zero), derives38 from SCRATCH+14 and3C from SCRATCH+1C, sets40=0500/42=7800. Role of30 requires consumer tracing; do not call it executable dispatch from this store alone.",
+      "ownership": "Per-character/form immutable assets and projected actor resources.",
+      "remaining_proof": "Verify code-byte guard/cache invalidation and asset-generation identity for all form swaps.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC08",
+      "field": "shots800950A0..800964A0; trails800972F8..80097418; attached effects800911A8..80091298",
+      "meaning": "32 shots ofA0,3 trails of60, attached effect slots of50. Init installs two ordinary effect slots and a third only for X/Falcon form1.",
+      "evidence": "80020160..80020234 walks only32 shots byA0; 8003BFBC..8003C038 initializes3 trails; 8003C03C..C0A8 initializes2 attached effects, C0AC..C110 Falcon third.",
+      "ownership": "Private actor-owned pools, shared native world exactly once; deferred actors retain allocating owner.",
+      "remaining_proof": "Map exact charge-glow/trail update/render/deferred consumers.3CD44 is pad decode only, not an effect update. Pool capture alone is not native lifetime/render coverage.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC09",
+      "field": "SCRATCH+14,+1C,+24,+28,+38,+3C,+A8; dirty800C4560; actor CLUT+42",
+      "meaning": "Current projection swaps seven graphical/menu resource pointers and one dirty byte. DAT subassets0/3/10 supply palette/graphics/assembly; 6..9 menus.",
+      "evidence": "enter_zero/leave_zero_context; native type-placement table8006E2EC and loader8001574C used by ui_upload. FilesIndex labels stage/section X/Zero COL members.",
+      "ownership": "Per-character/form asset owner; actual stage palette/fade and immutable cache generation must match owner.",
+      "remaining_proof": "Resolve original stage COL palette composition and both dash/death CLUTs; never reuse P1 colors merely because seat swapped.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC10",
+      "field": "menu VRAM/CLUT + portraits; native HUD24F90/249D4; pause_owner vs hud_seat",
+      "meaning": "Pause/HUD owner is a seat, while menu, icons, portrait and native form are character-specific.",
+      "evidence": "load_assets fixedDAT85+portrait165/166; menu_vram exchanges8 regions; draw_coop_hud installs fixedZero assembly/menu and hud_zero_packets reads zero_ui_pixels. Native portrait228AC..22924 chooses baseX0/Zero1/Ultimate2/Falcon3/Shadow4/Blade5/BlackZero6.",
+      "ownership": "One visible native pause menu; seat -> character -> form resource lookup; shared-life icon remains primary-only.",
+      "remaining_proof": "Both owned menus in both rosters, wrong-seat resume/quit rejection, exact equipment and native resumed attacks.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC11",
+      "field": "DeathEffectOrigin pool800CD410..800CF810 stride60; saved origin/layer/assembly",
+      "meaning": "Deferred death particles bind allocating position/layer/assembly, currently with X-specific resident rendering exception.",
+      "evidence": "Native callers8003DB04/8003DB84 return8003DB0C/8003DB8C. Plugin death_effect_allocate/init captures origin/layer/assembly; render_survivor sets render_x_death for seat0.",
+      "ownership": "Deferred allocating actor/character/form, independent of current projected seat.",
+      "remaining_proof": "Trace/retain native palette/frame/type as required; compare both colors/expiry after either-seat death and opposite survivor.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC12",
+      "field": "DAT11/12 group1;13/14 group3; native record/end pointers97778/97738; voice driver state",
+      "meaning": "Character audio/sample ownership is absent from current projection. Voices request overlapping hardware slots; group3 record17 aliases effects VAB1.",
+      "evidence": "COOP_AUDIO_NATIVE_AUDIT/DRIVER_OWNERSHIP pinned original calls and member hashes.",
+      "ownership": "Character/form banks plus explicit private voice ownership; shared music/flush state remains source-guarded.",
+      "remaining_proof": "No audio implementation/pass from this audit. Resolve live callback/async completion and compare muted original action/hurt/death captures.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC13",
+      "field": "Host seat-character/form map; immutable asset identity; callback guards/snapshot/digest",
+      "meaning": "Current host provider assumes one fixed Zero asset set and serializes body/pools rather than an independent roster descriptor.",
+      "evidence": "snapshot_assets_loaded hashes one Zero overlay/archive/UI set; snapshot_ready/digest guard zero_world/zero_projected/render_x_death.",
+      "ownership": "Canonical bounded enum IDs and stable handles, never host pointers; identity fixed for match.",
+      "remaining_proof": "Add map/form/asset generation to serializer/digest/reset and valid-boundary guards; reject bad data. Bump title/profile contract before new roster netplay; no old-state migration required.",
+      "local": "unverified",
+      "netplay": "unverified"
+    }
+  ],
+  "unsafe_assumptions": [
+    {
+      "symbol": "unit_choices",
+      "reason": "Drops native Zero form5 from campaign selector; prevents normal Zero-primary choice while co-op enabled."
+    },
+    {
+      "symbol": "load_assets/enter_zero/leave_zero_context",
+      "reason": "One Zero overlay/member85 plus hardcoded PLAY38=1/5E=5; saved primary resources assumed X."
+    },
+    {
+      "symbol": "pickup_as_seat",
+      "reason": "seat1 implies character1/form5; opposite roster would award/heal using the wrong character-dependent native identity."
+    },
+    {
+      "symbol": "menu_vram/draw_coop_hud/hud_tile_bank",
+      "reason": "Boolean zero_menu_loaded and zero_ui_pixels fixed to Zero assets/portrait165/166; seat1 is conflated with character."
+    },
+    {
+      "symbol": "sprite_bank/render_actor/render_survivor",
+      "reason": "Private immutable archive is Zero; render_x_death chooses native X RAM path and seat0 death explicitly. Cache key must cover future form/source generation."
+    },
+    {
+      "symbol": "retain_surviving_zero/zero_world/scene branches",
+      "reason": "Lifecycle indices are seats, but resource projection helpers and survivor implementation names/branches encode Zero as seat1."
+    },
+    {
+      "symbol": "enroll/native_player_init",
+      "reason": "Always zeros/initializes P2 under Zero projection; no counterpart form state when primary becomes Zero."
+    },
+    {
+      "symbol": "capture_player/project_player and controller",
+      "reason": "Existing body/shot/trail/effect capture is useful but does not prove exact X charge/trail update/render closure. Do not run a whole world pass twice."
+    },
+    {
+      "symbol": "snapshot_asset_sha/snapshot_ready",
+      "reason": "One fixed resource set and Zero-specific flags need review when identity becomes mutable; current restore qualification does not transfer."
+    }
+  ],
+  "frozen_x4_patterns": [
+    {
+      "file": "src/mods/mmx4_coop_plugin.c",
+      "lines": "37..75,254..285,343..349,450..487",
+      "design": "CharacterAssets[2], native counterpart=body[2]^1, seat-to-character menu lookup, per-character resources and stage-specific palette. X variant separate from campaign/seat."
+    },
+    {
+      "file": "src/mods/mmx4_coop_plugin.c",
+      "lines": "30,104..113,1185..1195,1259..1271",
+      "design": "Own and render body, shot, trail and charge-glow pools with allocating character and native assembly; defer effects with owner data. No X4 addresses or struct sizes transfer."
+    },
+    {
+      "file": "src/mods/mmx4_coop_plugin.c",
+      "lines": "1305,1504..1507",
+      "design": "Canonical counterpart identity belongs in digest/snapshot with validity checks rather than being inferred from host pointer or seat."
+    },
+    {
+      "file": "src/mods/mmx4_coop_audio.c",
+      "lines": "20..25,59..107,142..177",
+      "design": "Character/group bank lookup, SPU boot epoch rebinding, scoped record/priority projection and private voices. X6 handle alias/stride/body-type differences prevent direct code copy."
+    },
+    {
+      "file": "docs/COOP_PERSONAL_MENUS40.md",
+      "lines": "6..8",
+      "design": "Owned native menus independent of campaign character; primary campaign authority remains a seat rule."
+    }
+  ],
+  "first_slice": {
+    "status": "proposal_only",
+    "scope": "Opposite roster Zero/P1 + base X/P2, alongside existing X/P1+Zero/P2; no all-form/audio/R9 pass claim.",
+    "steps": [
+      "Introduce explicit seat -> character/form descriptors; P1 follows actual native selected character; define an agreed base-X0 counterpart policy when Zero is primary rather than guessing its previous armor.",
+      "Generalize immutable assets from source-proven form table: BIN0 + DAT86 for baseX0, BIN1 + DAT85 forZero5. Use the native initializer and per-character parts/HP/ammo reads under scoped identity; restore exact campaign identity/resources on every owned exit.",
+      "Generalize menu/HUD/pickup/death/survivor resource lookup by character while keeping lifecycle/input/menu authority by seat. Keep native unlock flags intact; only then adapt the co-op unit filter.",
+      "First prove projection symmetry in actual-plugin synthetic fixtures, including future-restored locals/guards and current-build snapshot/digest. Keep one native world pass.",
+      "Before exposing X/P2 charge or declaring R9 behavior, trace native attached-effect/trail producer-update-render-retire closure, include every owner field, and use bounded native original comparisons.",
+      "Register fixed roster/form policy in agreed title/options identity and bump compatibility/profile contracts. Existing narrow labv11 catalog must refuse a changed contract until reviewed/requalified."
+    ]
+  },
+  "comparisons": [
+    "R3",
+    "R4",
+    "R8",
+    "R9",
+    "R12",
+    "R15",
+    "F12",
+    "F13",
+    "F14",
+    "F19",
+    "F23",
+    "F49",
+    "F54",
+    "F71",
+    "F179"
+  ],
+  "remaining_proofs": [
+    {
+      "id": "SC-P01",
+      "check": "Native unlocked Zero stage selection while co-op active, then first enrollment with Zero/P1 and X/P2; preserve native campaign progress and primary save/quit authority.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC-P02",
+      "check": "Each roster initializes each actor once, preserves independent accepted pads, and advances shared native enemies/world/camera/clock exactly once.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC-P03",
+      "check": "Native X/P2 charge stages, release, charged projectile/shot count and exact allocation/retirement before/after each owned menu.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC-P04",
+      "check": "Native X/P2 dash and afterimage assembly/palette/origin/lifetime with the other hero stationary, after rejoin and after a genuine door.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC-P05",
+      "check": "X/Zero owned hit/parts/equipment/weapon/ammo changes remain with the intended character after menus and shared pickups; spent resources do not refill on ordinary rejoin.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC-P06",
+      "check": "Both owned menus use original matching form/portrait/icons; wrong-seat resume/quit cannot change campaign ownership.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC-P07",
+      "check": "Either-seat ordinary death retains original pose/color/origin/expiry and leaves the opposite character independently controllable; no duplicated life debit or effect update.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC-P08",
+      "check": "Stage/section COL palettes and form-specific trail/death CLUTs match co-op-off references, including BlackZero/armors as separate future scope.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC-P09",
+      "check": "Voice/action/hurt/death sample identity and simultaneous lifetimes from muted native captures, with private bank/voice reset/stop/load boundaries proven.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC-P10",
+      "check": "Current-build snapshot restore and digest cover roster/form/assets/pending effects/future-restored locals; failed/abandoned projection remains unsafe and rejects snapshot.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC-P11",
+      "check": "Same actual executable local and netplay results independently cover the opposite roster; fresh admission/selected profile stays immutable and no unqualified fallback is offered.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "SC-P12",
+      "check": "Only after base opposite roster is qualified, expand Falcon/Shadow/Blade/Ultimate and BlackZero with their genuine native abilities, resource limits and authored routes.",
+      "local": "unverified",
+      "netplay": "unverified"
+    }
+  ]
+}
