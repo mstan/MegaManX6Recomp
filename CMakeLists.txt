@@ -204,6 +204,7 @@ if(BUILD_TESTING)
                 test_mmx6_coop_checkpoint test_mmx6_coop_private_effects
                 test_mmx6_coop_private_pause test_mmx6_coop_published_input
                 test_mmx6_native_zero_reference
+                test_prepare_mmx6_input_replay
                 test_mmx6_reploid_rescue_audit test_mmx6_input_capture_hook)
             add_test(NAME mmx6_${_mmx6_python_test}
                 COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/${_mmx6_python_test}.py")
@@ -375,6 +376,33 @@ if(BUILD_TESTING)
                 COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_mmx6_input_capture.py"
                     --fixture "$<TARGET_FILE:${_mmx6_capture_target}>"
                     --output "${CMAKE_CURRENT_BINARY_DIR}/input-capture-fixtures/${_mmx6_capture_variant}")
+        endforeach()
+        foreach(_mmx6_replay_variant debug production)
+            foreach(_mmx6_replay_kind input native)
+                set(_mmx6_replay_target mmx6_${_mmx6_replay_kind}_replay_${_mmx6_replay_variant}_test)
+                add_executable(${_mmx6_replay_target}
+                    tests/test_mmx6_${_mmx6_replay_kind}_replay.cpp
+                    "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c")
+                target_include_directories(${_mmx6_replay_target} PRIVATE src/mods
+                    "${PSXRECOMP_V4_ROOT}/runtime/include")
+                target_link_libraries(${_mmx6_replay_target} PRIVATE Threads::Threads)
+                if(_mmx6_replay_variant STREQUAL "production")
+                    target_compile_definitions(${_mmx6_replay_target} PRIVATE PSX_NO_DEBUG_TOOLS)
+                endif()
+                if(MSVC)
+                    target_compile_options(${_mmx6_replay_target} PRIVATE /O2 /UNDEBUG /fp:strict)
+                else()
+                    target_compile_options(${_mmx6_replay_target} PRIVATE -O3 -UNDEBUG -ffp-contract=off)
+                endif()
+                if(_mmx6_replay_kind STREQUAL "native")
+                    add_test(NAME ${_mmx6_replay_target}
+                        COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_mmx6_native_replay.py"
+                            --fixture "$<TARGET_FILE:${_mmx6_replay_target}>"
+                            --output "${CMAKE_CURRENT_BINARY_DIR}/native-replay-fixtures/${_mmx6_replay_variant}")
+                else()
+                    add_test(NAME ${_mmx6_replay_target} COMMAND "$<TARGET_FILE:${_mmx6_replay_target}>")
+                endif()
+            endforeach()
         endforeach()
         add_test(NAME mmx6_native_input_hook_emission_test
             COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/check_mmx6_input_capture_hook.py"
