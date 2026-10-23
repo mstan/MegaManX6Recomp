@@ -73,12 +73,20 @@ campaign pass.
 Full debug and production builds succeed, with **21/21 CTests passing in each**,
 including simultaneous runs using the same scratch directory. The original
 catalog tests used shared fixed directory names; concurrent runs exposed
-deletion/copy races. All three affected test executables now atomically reserve
+deletion/copy races. All four catalog test executables now atomically reserve
 private directories and preserve previous failures. Original-disc tests were
 enabled and reproduce the inventory; changed source identities are rejected.
 Framework loader regressions pass in normal and worker-safe configurations;
 the original framework fails the exact default-on disc-targeted fixture.
 Other-target builds and production gameplay remain separate qualifications.
+The later timing-package test hang and unsuccessful debugger startup are retained
+in `timing-test-hang.json`; only that verified owned test was stopped. Its fixed
+scratch root was another collision risk. After private-directory reservation,
+both simultaneous suites pass 21/21 (`ctest-timing-isolated-*.log`). This does
+not infer a gameplay defect or a proven fault stack from the hung test.
+Catalog checks now have a 120-second deadline. The resident-store test also
+uses atomic directory reservation, avoiding a libc++ extended-clock `to_string`
+compile error found during the separate modern Clang candidate build.
 Latest logs: `build-audio-audit-debug.log`, `build-audio-audit-production.log`,
 `ctest-audio-audit-debug.log`, `ctest-audio-audit-production.log`. Both native
 content and audio reproduction tests were enabled against the private G: disc

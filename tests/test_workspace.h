@@ -8,8 +8,10 @@
 // Reserve a directory atomically: concurrent configurations/worktrees may share
 // TEMP. Never remove another run's workspace, including retained failure data.
 inline std::filesystem::path reserve_test_workspace(
-    const char* prefix, std::error_code& error) {
-    const auto parent = std::filesystem::temp_directory_path(error);
+    const char* prefix, std::error_code& error,
+    const std::filesystem::path& base = {}) {
+    error.clear();
+    const auto parent = base.empty() ? std::filesystem::temp_directory_path(error) : base;
     if (error) return {};
     const auto stamp = std::chrono::steady_clock::now().time_since_epoch().count();
     for (unsigned attempt = 0; attempt < 100; ++attempt) {

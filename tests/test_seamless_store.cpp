@@ -5,6 +5,7 @@
 #include "mmx6_seamless_store.h"
 #include "mod_runtime.h"
 #include "psx_sha256.h"
+#include "test_workspace.h"
 #include <algorithm>
 #include <cstdio>
 #include <cstdlib>
@@ -100,9 +101,12 @@ int main(int argc, char **argv) {
         return 2;
     }
     /* A fresh, test-owned cache directory beneath the scratch directory. */
-    const auto cache = std::filesystem::absolute(argv[2]) /
-        ("run-" + std::to_string(std::filesystem::file_time_type::clock::now().time_since_epoch().count()));
-    require(!std::filesystem::exists(cache), "test requires a fresh cache directory");
+    std::error_code scratch_error;
+    const auto scratch = std::filesystem::absolute(argv[2]);
+    std::filesystem::create_directories(scratch, scratch_error);
+    require(!scratch_error, "scratch directory creation");
+    const auto cache = reserve_test_workspace("run", scratch_error, scratch);
+    require(!cache.empty(), "test requires a private cache directory");
 #ifdef _WIN32
     _putenv_s("PSX_RESIDENT_CACHE", cache.string().c_str());
 #else

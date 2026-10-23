@@ -332,6 +332,9 @@ if(BUILD_TESTING)
         COMMAND "$<TARGET_FILE:mmx6_tweaks_timing_runtime_test>"
                 "${MMX6_TIMING_TEST_ARCHIVE}"
     )
+    set_tests_properties(mmx6_preloaded_mods_test mmx6_seamless_mod_matrix_test
+        mmx6_tweaks_hooks_test mmx6_tweaks_timing_runtime_test
+        PROPERTIES TIMEOUT 120)
     get_property(_mmx6_test_targets DIRECTORY PROPERTY BUILDSYSTEM_TARGETS)
     foreach(_target IN LISTS _mmx6_test_targets)
         if(_target MATCHES "^mmx6_.*test$")

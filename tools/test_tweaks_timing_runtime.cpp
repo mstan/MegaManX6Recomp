@@ -1,4 +1,5 @@
 #include "mod_packages.h"
+#include "../tests/test_workspace.h"
 
 #include <algorithm>
 #include <filesystem>
@@ -49,10 +50,12 @@ int main(int argc, char** argv) {
         return 2;
     }
 
-    const fs::path root =
-        fs::temp_directory_path() / "mmx6-timing-package-runtime-test";
     std::error_code ec;
-    fs::remove_all(root, ec);
+    const auto root = reserve_test_workspace("mmx6-timing-package-runtime", ec);
+    if (root.empty()) {
+        std::cerr << "could not reserve timing test workspace: " << ec.message() << '\n';
+        return 1;
+    }
     ModPackageManager manager(root);
     std::string error;
     std::string installed_id;
