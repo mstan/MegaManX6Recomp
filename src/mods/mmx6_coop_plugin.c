@@ -21,6 +21,7 @@
 #include "mmx6_coop_lifecycle.h"
 #include "mmx6_coop_sprite_packet.h"
 #include "mmx6_coop_pixel_codec.h"
+#include "mmx6_coop_effect_diagnostic.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -679,6 +680,15 @@ static void diagnostics(uint16_t input) {
 #ifdef MMX6_COOP_MODERN_STATE
     psx_mod_write_byte(diagnostic+0x9C,(uint8_t)!!psx_mod_netplay_has_state_digest());
 #endif
+    /* Host-owned P2 pools, never a second read of the projected singleton.
+     * Publish before completing the SAME base sequence: old base readers
+     * keep their schema1/1958h contract; extension readers use one1C20h RPC. */
+    psx_mod_write_word(diagnostic+MMX6_FX_DIAG_HEADER,MMX6_FX_DIAG_MAGIC);
+    psx_mod_write_word(diagnostic+MMX6_FX_DIAG_HEADER+4,MMX6_FX_DIAG_SCHEMA);
+    psx_mod_write_word(diagnostic+MMX6_FX_DIAG_HEADER+8,MMX6_FX_DIAG_BYTES);
+    psx_mod_write_word(diagnostic+MMX6_FX_DIAG_HEADER+12,frame_count);
+    project(diagnostic+MMX6_FX_DIAG_TRAILS,p2.trails,sizeof p2.trails);
+    project(diagnostic+MMX6_FX_DIAG_ATTACHED,p2.effects,sizeof p2.effects);
     psx_mod_write_word(diagnostic+0x88,frame_count*2u);
 }
 static int diagnostic_mutation_allowed(void) {

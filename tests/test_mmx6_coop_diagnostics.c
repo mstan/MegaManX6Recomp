@@ -14,7 +14,7 @@ static int test_online;
 static int test_digest_registered;
 int psx_mod_netplay_has_state_digest(void) { return test_digest_registered; }
 #endif
-static unsigned rejected,guest_calls;
+static unsigned rejected,guest_calls,effect_writes;
 static uint8_t *memory(uint32_t address) {
     if (address>=0x9F080000u && address<0x9F082000u) return test_diagnostic+address-0x9F080000u;
     return test_ram+(address&0x1FFFFFu);
@@ -22,7 +22,12 @@ static uint8_t *memory(uint32_t address) {
 uint8_t psx_mod_read_byte(uint32_t address) { return *memory(address); }
 uint16_t psx_mod_read_half(uint32_t address) { return (uint16_t)(psx_mod_read_byte(address)|(psx_mod_read_byte(address+1)<<8)); }
 uint32_t psx_mod_read_word(uint32_t address) { return (uint32_t)psx_mod_read_half(address)|((uint32_t)psx_mod_read_half(address+2)<<16); }
-void psx_mod_write_byte(uint32_t address,uint8_t value) { *memory(address)=value; }
+void psx_mod_write_byte(uint32_t address,uint8_t value) {
+    if(address>=diagnostic+MMX6_FX_DIAG_HEADER && address<diagnostic+MMX6_FX_DIAG_END) {
+        CHECK(psx_mod_read_word(diagnostic+0x88)&1);++effect_writes;
+    }
+    *memory(address)=value;
+}
 void psx_mod_write_half(uint32_t address,uint16_t value) { psx_mod_write_byte(address,(uint8_t)value);psx_mod_write_byte(address+1,(uint8_t)(value>>8)); }
 void psx_mod_write_word(uint32_t address,uint32_t value) { for(unsigned i=0;i<4;++i)psx_mod_write_byte(address+i,(uint8_t)(value>>(i*8))); }
 void psx_mod_write_code_word(uint32_t address,uint32_t value) { psx_mod_write_word(address,value); }
@@ -70,6 +75,14 @@ int main(void) {
     ++life.rejoin_pending;CHECK(diagnostic_host_digest()!=original);--life.rejoin_pending;
     CHECK(diagnostic_host_digest()==original);
     ready=enrolled=1;psx_mod_write_byte(PLAY,10);
+    /* Resident/native pools deliberately differ: publication owns P2 host
+     * bytes even while PLAYER belongs to P1. Canaries bound its new writes. */
+    memset(test_diagnostic+0x1958,0xA5,0x2000-0x1958);
+    for(unsigned i=0;i<sizeof p2.trails;++i)p2.trails[i]=(uint8_t)(i*7+3);
+    for(unsigned i=0;i<sizeof p2.effects;++i)p2.effects[i]=(uint8_t)(i*11+9);
+    memset(memory(0x800972F8),0xE1,sizeof p2.trails);
+    memset(memory(0x800911A8),0xE2,sizeof p2.effects);
+    PlayerContext published=p2;
     diagnostics(0xFFFF);
     CHECK(psx_mod_read_word(diagnostic+0x80)==1);
     CHECK(psx_mod_read_word(diagnostic+0x84)==0x1958);
@@ -78,6 +91,23 @@ int main(void) {
     CHECK(psx_mod_read_byte(diagnostic+0x90)==10);
     CHECK(psx_mod_read_word(diagnostic+0x94)==diagnostic_host_digest());
     CHECK(psx_mod_read_word(diagnostic+0x98)==1);
+    CHECK(effect_writes==MMX6_FX_DIAG_BYTES);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_FX_DIAG_HEADER)==MMX6_FX_DIAG_MAGIC);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_FX_DIAG_HEADER+4)==1);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_FX_DIAG_HEADER+8)==0x220);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_FX_DIAG_HEADER+12)==frame_count);
+    CHECK(!memcmp(test_diagnostic+MMX6_FX_DIAG_TRAILS,p2.trails,sizeof p2.trails));
+    CHECK(!memcmp(test_diagnostic+MMX6_FX_DIAG_ATTACHED,p2.effects,sizeof p2.effects));
+    CHECK(!memcmp(&published,&p2,sizeof p2)); /* Observation is read-only. */
+    for(unsigned i=0x1958;i<MMX6_FX_DIAG_HEADER;++i)CHECK(test_diagnostic[i]==0xA5);
+    for(unsigned i=MMX6_FX_DIAG_END;i<0x2000;++i)CHECK(test_diagnostic[i]==0xA5);
+    /* All bytes, including hidden/unallocated stale native fields, are copied;
+     * the observer decides whether they are eligible source-bound evidence. */
+    p2.trails[0x50]^=0x80;p2.effects[0x42]^=0x40;
+    diagnostics(0xFFFF);
+    CHECK(test_diagnostic[MMX6_FX_DIAG_TRAILS+0x50]==p2.trails[0x50]);
+    CHECK(test_diagnostic[MMX6_FX_DIAG_ATTACHED+0x42]==p2.effects[0x42]);
+    CHECK(psx_mod_read_word(diagnostic+MMX6_FX_DIAG_HEADER+12)==frame_count);
 #ifdef MMX6_COOP_MODERN_STATE
     CHECK(psx_mod_read_byte(diagnostic+0x9C)==0);
     test_digest_registered=1;diagnostics(0xFFFF);
