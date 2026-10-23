@@ -50,8 +50,10 @@ The latest frozen gameplay image is v18, title source348a52c, SDKbfbfb920,
 profile mmx6-x-zero-delay-v16. Its debug and production suites passed96/96.
 The [private ground-jump receipt](evidence/mmx6-jump-audio/manifest-bound-348a52c-local-private-overlap-reviewed.json)
 passes19 local source/route/DSP/lifetime checks, including P1 continuing after
-the correct private Zero vocal. Other action families and paired audio remain
-unverified.
+the correct private Zero vocal. A separate
+[reverse-order receipt](evidence/mmx6-jump-audio/manifest-bound-348a52c-local-private-reverse-reviewed.json)
+also passes19 checks with Zero first. Other action families and paired audio
+remain unverified.
 
 The [native New Game receipt](evidence/mmx6-native-reentry/manifest-bound-348a52c-new-game-reviewed.json)
 passes the original final Quit/title/story/arrival and full11-check guest

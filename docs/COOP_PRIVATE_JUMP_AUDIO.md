@@ -181,4 +181,9 @@ native action6 ascent, with the existing wall deadline and120-native-update
 bound, before releasing. It still requires the independent original body and
 source acceptance checks afterward. The21 runner/protocol tests include that
 one-publication delay, a missing-ascent bound and neutral cleanup; the failed
-native attempt is retained, and reverse-order audio remains pending a fresh run.
+native attempt is retained. The [fresh reverse-order receipt](evidence/mmx6-jump-audio/manifest-bound-348a52c-local-private-reverse-reviewed.json)
+now passes all19 checks on the same frozen348a52c image. Zero's private voice
+continues through X's native KEYON; both reach natural end with correct source,
+DSP and immutable banks. The source correction makes input acceptance observed
+instead of assuming it from a requested one-tick window. Both local orders are
+now covered; paired audio and other action families remain unverified.
