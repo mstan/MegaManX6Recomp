@@ -191,6 +191,12 @@ def run(args) -> dict:
     if getattr(args, "personal_menu_smoke", False):
         personal_menu = importlib.import_module("mmx6_coop_personal_menu")
         modules += (personal_menu,)
+    private_pause = effects = published_input = None
+    if getattr(args, "private_pause_smoke", False):
+        private_pause = importlib.import_module("mmx6_coop_private_pause")
+        effects = importlib.import_module("mmx6_coop_private_effects")
+        published_input = importlib.import_module("mmx6_coop_published_input")
+        modules += (private_pause, effects, published_input)
     contact, zero_overlay, original_disc = None, None, None
     if getattr(args, "contact_pause_contact_smoke", False):
         contact = importlib.import_module("mmx6_coop_contact")
@@ -590,6 +596,21 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             matched("P2 personal menu, composed captures and resumed native controls")
             report["limits"].append(
                 "P2 personal-menu automated checks retain composed artwork review pending; no R8 ledger pass")
+        if private_pause is not None:
+            input_adapter = published_input.PublishedHeldInput(clients, network, transport_window, report)
+            case = private_pause.private_pause_smoke(dict(mode="netplay", input_path="published_host",
+                clients=clients, both=both, debug=debug, report=report, output=output,
+                effects=effects, hold=input_adapter.hold, hold_observed=input_adapter.hold_observed,
+                native_advance=lambda frames,label:advance(frames), transport_window=transport_window,
+                network=network, matched=matched, candidate_exe_sha256=candidate_sha),
+                expected_exe_sha256=args.expected_exe_sha256)
+            report["private_pause_automated_status"] = case["status"]
+            report["checks"]["private_effect_pause_automated_checks"] = (
+                bool(case.get("checks")) and all(case["checks"].values()) and
+                case["status"] == "automated_private_pause_checks_passed_artwork_pending")
+            require(report["checks"]["private_effect_pause_automated_checks"],
+                    "Native P1 private-effect pause case did not complete")
+            report["limits"].append("Private-effect pause case retains composed artwork review pending; no R9 ledger pass")
         if contact is not None:
             # Only the owning peer's published host sampler feeds transport.
             # Paused menu spacing uses resolved transport ticks, never the
@@ -762,6 +783,8 @@ def make_parser():
                         help="Also exercise native P2 departure, blocked Select during P1 pause and fresh rejoin")
     parser.add_argument("--personal-menu-smoke", action="store_true",
                         help="Also check original published P2/Zero personal-menu ownership, controls and resources; composed artwork review remains pending")
+    parser.add_argument("--private-pause-smoke", action="store_true",
+                        help="Original published P1 pause while P2 native dash effects are retained; fresh exact image, host profile and resolved CRC required")
     parser.add_argument("--contact-pause-contact-smoke", action="store_true",
                         help="Original published P2 body contact before/after its own menu; exact frozen37 candidate, source BIN, host profile and resolved CRC required")
     parser.add_argument("--original-disc", type=Path,
@@ -795,6 +818,13 @@ def validate_options(parser, args):
         parser.error("Enemy targeting requires native gameplay, default loader and --require-state-crc")
     if args.personal_menu_smoke and (args.admission_only or args.native_loader_diagnostic or not args.require_state_crc):
         parser.error("Personal menu requires native gameplay, default loader and --require-state-crc")
+    if args.private_pause_smoke:
+        if (args.admission_only or args.native_loader_diagnostic or not args.require_state_crc or
+                not args.require_host_profile or not args.expected_exe_sha256):
+            parser.error("Private-effect pause requires native gameplay, default loader, exact SHA, resolved CRC and host profile")
+        if (args.contact_pause_contact_smoke or args.enemy_targeting_smoke or
+                args.personal_menu_smoke or args.lifecycle_smoke):
+            parser.error("Private-effect pause requires a separate fresh authored-input case")
     if args.contact_pause_contact_smoke:
         if args.admission_only or args.native_loader_diagnostic or not args.require_state_crc or not args.require_host_profile:
             parser.error("Contact/menu/contact requires native gameplay, default loader, --require-state-crc and --require-host-profile")

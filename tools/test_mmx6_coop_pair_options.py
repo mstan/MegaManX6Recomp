@@ -28,6 +28,7 @@ class PairOptionTests(unittest.TestCase):
         self.assertFalse(default.personal_menu_smoke)
         self.assertFalse(default.contact_pause_contact_smoke)
         self.assertIsNone(default.original_disc)
+        self.assertFalse(default.private_pause_smoke)
         lifecycle = self.parse("--lifecycle-smoke")
         self.assertTrue(lifecycle.lifecycle_smoke)
         self.assertFalse(lifecycle.require_state_crc)
@@ -106,6 +107,21 @@ class PairOptionTests(unittest.TestCase):
         args = self.parse(*self.contact_options(), "--personal-menu-smoke", "--lifecycle-smoke")
         self.assertTrue(args.personal_menu_smoke and args.lifecycle_smoke and args.contact_pause_contact_smoke)
         self.rejected(*self.contact_options(), "--enemy-targeting-smoke")
+
+    def test_private_pause_requires_exact_image_profile_crc_and_its_own_fresh_case(self):
+        options = ["--private-pause-smoke", "--expected-exe-sha256", "a"*64,
+                   "--require-state-crc", "--require-host-profile",
+                   "--expected-host-profile", "mmx6.win64-clang22.loopback",
+                   "--expected-host-profile-revision", "2"]
+        self.assertTrue(self.parse(*options).private_pause_smoke)
+        for flag,takes_value in (("--expected-exe-sha256",True),("--require-state-crc",False),
+                                 ("--require-host-profile",False)):
+            incomplete=options.copy();at=incomplete.index(flag)
+            del incomplete[at:at+(2 if takes_value else 1)]
+            self.rejected(*incomplete)
+        for flag in ("--admission-only","--native-loader-diagnostic","--personal-menu-smoke",
+                     "--enemy-targeting-smoke","--lifecycle-smoke"):
+            self.rejected(*options,flag)
 
 
 if __name__ == "__main__":
