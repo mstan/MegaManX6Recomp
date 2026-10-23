@@ -350,9 +350,14 @@ class NativeReentryOwnershipTests(unittest.TestCase):
                 clients=[client],both=lambda fn:[fn(0)],set_input=set_input,debug=debugger,report={},output=Path(temporary),
                 hold=Mock(),native_advance=Mock(),transport_window=Mock())
             sources=dict(original={},exe_base=0x80010000,exe=bytes(0x50000),title=bytes(0x8000))
+            def guest_menu(menu_ctx,**kwargs):
+                # Real capture_present rejects a missing parent; the native
+                # v18 run reached the recovered menu before exposing this gap.
+                self.assertTrue((Path(menu_ctx["output"])/"personal-menu").is_dir())
+                return dict(checks=dict(fixture_guest_contract=True))
             with patch.object(reentry,"load_sources",return_value=sources), \
                     patch.object(reentry,"read_native",side_effect=lambda *args,**kwargs:deepcopy(state)), \
-                    patch.object(reentry.menu,"personal_menu_smoke",return_value=dict(checks=dict(fixture_guest_contract=True))) as guest:
+                    patch.object(reentry.menu,"personal_menu_smoke",side_effect=guest_menu) as guest:
                 case=reentry.native_reentry_smoke(ctx,original_disc="original.bin",expected_exe_sha256="a"*64,route="new_game")
             self.assertEqual(case["status"],reentry.SUCCESS)
             self.assertEqual(case["artwork_review"],"pending")

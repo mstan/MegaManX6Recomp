@@ -486,6 +486,9 @@ def native_reentry_smoke(ctx, *, original_disc, expected_exe_sha256, route="curr
             require(all(r==dict(campaign_character=0,armor=1,unlocks=1,max_hp=[32,32],native_body_form=1) for r in case["new_game_defaults"]),
                     "Native New Game defaults do not match original initializer")
         capture("native-reentered-gameplay")
+        # The menu helper requires its capture parent to exist. The enclosing
+        # reentry evidence directory is fresh and owns this nested output.
+        (output/"personal-menu").mkdir()
         menu_ctx=dict(ctx,output=output)
         hp=tuple(p["hp"] for p in returned[0]["players"])
         require(all(tuple(p["hp"] for p in row["players"])==hp for row in returned),"Peers disagree on reentered personal HP")
