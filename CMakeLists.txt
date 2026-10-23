@@ -174,6 +174,7 @@ if(BUILD_TESTING)
         else()
             target_compile_definitions(${_lab_test} PRIVATE MMX6_ENABLE_LOOPBACK_HOST_LAB=1)
             if(_lab_variant STREQUAL "enabled" AND WIN32 AND MINGW AND CMAKE_SIZEOF_VOID_P EQUAL 8
+                AND CMAKE_SYSTEM_PROCESSOR MATCHES "^(AMD64|amd64|x86_64|X86_64)$"
                 AND CMAKE_C_COMPILER_ID STREQUAL "Clang" AND CMAKE_C_COMPILER_VERSION VERSION_EQUAL "22.1.8")
                 set(_lab_expected 1)
             endif()
