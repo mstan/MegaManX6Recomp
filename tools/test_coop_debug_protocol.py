@@ -55,6 +55,8 @@ class DiagnosticTests(unittest.TestCase):
         data[8] ^= 1
         with self.assertRaises(UnstableObservation):
             parse_diagnostic(bytes(data))
+        with self.assertRaises(UnstableObservation):
+            parse_diagnostic(diagnostic(tick=11, sequence=20))
 
     def test_invalid_ownership_and_boolean_rejected(self):
         for offset, value in ((0x38, 6), (0x3C, 3), (0x3E, 3), (0x8E, 2)):
@@ -73,21 +75,20 @@ class DiagnosticTests(unittest.TestCase):
         self.assertIsNone(row.host_digest)
         self.assertFalse(native_ready(row))
 
-    def test_seqlock_retries_changed_publication(self):
+    def test_snapshot_retries_unfinished_publication(self):
         client = Mock()
-        client.read.side_effect = [struct.pack("<I", 18), diagnostic(), struct.pack("<I", 20),
-                                   struct.pack("<I", 20), diagnostic(), struct.pack("<I", 20)]
+        client.read.side_effect = [diagnostic(sequence=19), diagnostic()]
         row = observe(client, attempts=2)
         self.assertEqual(row.sequence, 20)
-        self.assertEqual(client.read.call_count, 6)
+        self.assertEqual(client.read.call_count, 2)
         client.read.assert_any_call(DIAGNOSTIC_ADDRESS, DIAGNOSTIC_BYTES)
 
     def test_never_stable_is_bounded(self):
         client = Mock()
-        client.read.side_effect = [struct.pack("<I", 18), diagnostic(), struct.pack("<I", 20)] * 3
+        client.read.side_effect = [diagnostic(sequence=19)] * 3
         with self.assertRaises(UnstableObservation):
             observe(client, attempts=3)
-        self.assertEqual(client.read.call_count, 9)
+        self.assertEqual(client.read.call_count, 3)
 
     def test_pair_same_tick_and_digest_is_partial_evidence(self):
         row = parse_diagnostic(diagnostic())

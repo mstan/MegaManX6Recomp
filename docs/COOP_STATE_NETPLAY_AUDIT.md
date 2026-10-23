@@ -95,8 +95,12 @@ P1's stable native body at `+0x1800`, each `0x158` bytes.
 | `+0x90..91` | Native major mode and phase |
 | `+0x94`, `+0x98` | Bounded host diagnostic digest; algorithm ID `1` (FNV-1a) |
 
-`tools/coop_debug.py` reads the sequence before the block and afterwards,
-accepting only identical even values and coherent mirrored P2 position/health.
+`tools/coop_debug.py` reads one block in one `read_ram` command, accepting only
+an even sequence and coherent mirrored P2 position/health. The pinned runtime
+executes that command on the emulation thread inside `debug_server_poll`;
+no guest execution interleaves the block copy. Separate before/after RPCs
+were rejected after a native test showed they can span successive frames,
+causing false observation failures even with a valid published snapshot.
 It retries torn publications a bounded number of times. It validates magic,
 size, schema, ownership, booleans and digest algorithm. Frozen legacy schema 0
 is accepted only through an explicit offline inspection option; it cannot

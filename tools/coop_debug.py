@@ -170,6 +170,8 @@ def parse_diagnostic(data: bytes, *, allow_legacy: bool = False) -> Observation:
     elif version == DIAGNOSTIC_VERSION and declared_size == DIAGNOSTIC_BYTES:
         if sequence & 1:
             raise UnstableObservation("Diagnostic publication is in progress")
+        if sequence != (struct.unpack_from("<I", data, 4)[0]*2) & 0xFFFFFFFF:
+            raise UnstableObservation("Diagnostic tick and publication sequence disagree")
         ready, enrolled, failed = data[0x8C:0x8F]
         mode, phase = data[0x90:0x92]
         digest, algorithm = struct.unpack_from("<II", data, 0x94)
@@ -194,18 +196,23 @@ def parse_diagnostic(data: bytes, *, allow_legacy: bool = False) -> Observation:
 
 def observe(client: DebugClient, address: int = DIAGNOSTIC_ADDRESS, *,
             attempts: int = 4, allow_legacy: bool = False) -> Observation:
-    """Retry only torn publications; transport/schema errors remain failures."""
+    """Read one atomic emulation-thread response; reject torn publications.
+
+    The pinned runtime executes read_ram inside debug_server_poll on the
+    emulation thread, without guest execution during the copy. Three separate
+    RPCs may span three frames and cannot form a usable seqlock transaction.
+    The in-block even sequence and redundant body fields validate this single
+    published snapshot. Transport/schema errors remain failures.
+    """
     if not 1 <= attempts <= 16:
         raise ValueError("Expected 1..16 observation attempts")
     for _ in range(attempts):
-        before = struct.unpack("<I", client.read(address + DIAGNOSTIC_SEQUENCE, 4))[0]
         data = client.read(address, DIAGNOSTIC_BYTES)
-        after = struct.unpack("<I", client.read(address + DIAGNOSTIC_SEQUENCE, 4))[0]
         try:
             result = parse_diagnostic(data, allow_legacy=allow_legacy)
             if result.schema == 0:
                 return result
-            if before == result.sequence == after and not after & 1:
+            if not result.sequence & 1:
                 return result
         except UnstableObservation:
             pass

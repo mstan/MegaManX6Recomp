@@ -537,8 +537,50 @@ static void retain_surviving_zero(CPUState *cpu) {
     life.select_frames=life.select_armed=0;
     join_phase=0;
 }
+/* Bounded host-context observation, not a framework/core state checksum.
+ * Excludes host pointers, retained texture caches and transient projections.
+ * All fields are sampled at the existing canonical diagnostic boundary. */
+static uint32_t diagnostic_host_digest(void) {
+    uint32_t hash=2166136261u;
+#define HASH_BYTES(data, count) do { \
+    const uint8_t *bytes_=(const uint8_t *)(data); \
+    for (size_t i_=0;i_<(count);++i_) hash=(hash^bytes_[i_])*16777619u; \
+} while (0)
+    HASH_BYTES(&p2,sizeof p2);
+    HASH_BYTES(returning_body,sizeof returning_body);
+    HASH_BYTES(scene_body,sizeof scene_body);
+    /* Serialize integer fields explicitly; never hash structure padding. */
+    const uint32_t fields[]={
+        (uint32_t)life.status[0],(uint32_t)life.status[1],life.select_frames,
+        life.select_armed,life.select_previous,life.wipe,
+        previous_input,p2_edges,join_phase,(uint32_t)join_y,
+        (uint32_t)pause_owner,(uint32_t)p2_start_previous,
+        scene_owner,scene_phase,(uint32_t)scene_y,
+        (uint32_t)ready,(uint32_t)enrolled,(uint32_t)failed
+    };
+    for (size_t i=0;i<sizeof fields/sizeof fields[0];++i) {
+        uint8_t bytes[4]; put32(bytes,fields[i]); HASH_BYTES(bytes,sizeof bytes);
+    }
+    for (size_t i=0;i<sizeof death_effect/sizeof death_effect[0];++i) {
+        uint8_t bytes[14];
+        put32(bytes,death_effect[i].x);put32(bytes+4,death_effect[i].y);
+        put32(bytes+8,death_effect[i].assembly);
+        bytes[12]=death_effect[i].layer;bytes[13]=death_effect[i].valid;
+        HASH_BYTES(bytes,sizeof bytes);
+    }
+    for (size_t i=0;i<sizeof pickup_owners/sizeof pickup_owners[0];++i) {
+        uint8_t bytes[5];put32(bytes,pickup_owners[i].actor);bytes[4]=pickup_owners[i].seat;
+        HASH_BYTES(bytes,sizeof bytes);
+    }
+    HASH_BYTES(zero_solid_contacts,sizeof zero_solid_contacts);
+#undef HASH_BYTES
+    return hash;
+}
 static void diagnostics(uint16_t input) {
     ++frame_count;
+    /* Odd sequence denotes publication in progress; finish with an even one.
+     * Read the entire block in one emulation-thread debug command. */
+    psx_mod_write_word(diagnostic+0x88,frame_count*2u-1u);
     psx_mod_write_word(diagnostic,0x434F4F50);
     psx_mod_write_word(diagnostic+4,frame_count);
     project(diagnostic+8,p2.body+8,8);
@@ -561,10 +603,33 @@ static void diagnostics(uint16_t input) {
     uint8_t body[0x158];
     capture(PLAYER,body,sizeof body);
     project(diagnostic+0x1800,body,sizeof body);
+    psx_mod_write_word(diagnostic+0x80,1); /* diagnostic schema */
+    psx_mod_write_word(diagnostic+0x84,0x1958);
+    psx_mod_write_byte(diagnostic+0x8C,(uint8_t)ready);
+    psx_mod_write_byte(diagnostic+0x8D,(uint8_t)enrolled);
+    psx_mod_write_byte(diagnostic+0x8E,(uint8_t)failed);
+    psx_mod_write_byte(diagnostic+0x90,psx_mod_read_byte(PLAY));
+    psx_mod_write_byte(diagnostic+0x91,psx_mod_read_byte(PLAY+1));
+    psx_mod_write_word(diagnostic+0x94,diagnostic_host_digest());
+    psx_mod_write_word(diagnostic+0x98,1); /* bounded host FNV-1a, not core CRC */
+    psx_mod_write_word(diagnostic+0x88,frame_count*2u);
+}
+static int diagnostic_mutation_allowed(void) {
+#ifdef PSX_NO_DEBUG_TOOLS
+    return 0;
+#else
+    return !psx_mod_netplay_is_active();
+#endif
 }
 static uint16_t p2_input(void) {
     uint16_t raw=(uint16_t)~sio_get_pad_buttons_slot(1);
-    if (psx_mod_read_byte(diagnostic+0x30)) raw=(uint16_t)~psx_mod_read_half(diagnostic+0x34);
+    if (psx_mod_read_byte(diagnostic+0x30)) {
+        if (diagnostic_mutation_allowed()) raw=(uint16_t)~psx_mod_read_half(diagnostic+0x34);
+        else {
+            psx_mod_write_byte(diagnostic+0x30,0);
+            psx_mod_counter_add("mmx6.coop.debug-input-rejected",1);
+        }
+    }
     return raw;
 }
 static void scene_begin(unsigned seat, uint32_t source) {
@@ -757,6 +822,12 @@ static void scene_tick(CPUState *cpu) {
 }
 static void diagnostic_setup(CPUState *cpu) {
     unsigned command=psx_mod_read_byte(diagnostic+0x50);
+    if (!command) return;
+    if (!diagnostic_mutation_allowed()) {
+        psx_mod_write_byte(diagnostic+0x50,0);
+        psx_mod_counter_add("mmx6.coop.debug-fixture-rejected",1);
+        return;
+    }
     /* Development-only fixture setup. The published host-body copy remains
      * read-only; a one-byte command commits the already-written payload. */
     if (command==1) p2.body[0x5C]=psx_mod_read_byte(diagnostic+0x51);
@@ -867,8 +938,6 @@ static int player_tick(CPUState *cpu, uint32_t address) {
         mmx6_coop_fatal(&life,0);
         if (mmx6_coop_living(&life,1)) project(PLAY+0x12,freeze,sizeof freeze);
         if (psx_mod_read_byte(PLAYER+4)==3) life.status[0]=MMX6_COOP_FALLEN;
-        psx_mod_write_byte(diagnostic+0x38,(uint8_t)life.status[0]);
-        psx_mod_write_byte(diagnostic+0x3B,life.wipe);
     }
     cpu->gpr[2]=result;
     return 1;
@@ -894,7 +963,6 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
         life.select_frames=0;
         if (pause_owner<0) pause_owner=mmx6_coop_living(&life,0)?0:1;
     }
-    psx_mod_write_byte(diagnostic+0x3C,(uint8_t)(pause_owner+1));
     int survivor=(!life.wipe || life.wipe==2) &&
         (life.status[0]==MMX6_COOP_DYING || life.status[0]==MMX6_COOP_FALLEN) &&
         life.status[1]!=MMX6_COOP_ABSENT && (life.wipe || life.status[1]!=MMX6_COOP_FALLEN);
@@ -1527,7 +1595,7 @@ static void activate(void) {
 }
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
-        "mmx6.local-coop.prototype", "mmx6-x-zero-delay-v6", 0, 0, 1, 7,
+        "mmx6.local-coop.prototype", "mmx6-x-zero-delay-v7", 0, 0, 1, 7,
         "mmx6.widescreen", "mmx6.enhancement.seamless-loading",
         "seamless-loading", "mmx6.seamless"
     };

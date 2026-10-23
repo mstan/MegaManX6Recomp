@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 project(MegaManX6Recomp C CXX)
 include(CTest)
+find_package(Python3 QUIET COMPONENTS Interpreter)
 
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_CXX_STANDARD 17)
@@ -137,6 +138,19 @@ endif()
 # A title that cannot be built against framework master cannot be checked
 # against it either.
 if(BUILD_TESTING)
+    if(Python3_Interpreter_FOUND)
+        foreach(_mmx6_python_test test_coop_debug_protocol test_mmx6_coop_reference
+                test_mmx6_coop_content test_prepare_mmx6_coop_playtest)
+            add_test(NAME mmx6_${_mmx6_python_test}
+                COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/${_mmx6_python_test}.py")
+        endforeach()
+        set(MMX6_X5_REFERENCE_REPO "" CACHE PATH "Optional local X5 Git repository for frozen-reference provenance checks")
+        if(MMX6_X5_REFERENCE_REPO)
+            add_test(NAME mmx6_coop_reference_provenance
+                COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/build_mmx6_coop_reference.py"
+                    --check --source-repo "${MMX6_X5_REFERENCE_REPO}" --root "${CMAKE_CURRENT_SOURCE_DIR}")
+        endif()
+    endif()
     add_executable(mmx6_frame_interpolation_test
         tests/test_mmx6_frame_interpolation.cpp
         "${PSXRECOMP_V4_ROOT}/runtime/src/render_pass_motion.c")
@@ -178,6 +192,31 @@ if(BUILD_TESTING)
         tests/test_mmx6_coop_assets.c src/mods/mmx6_coop_assets.c)
     target_include_directories(mmx6_coop_assets_test PRIVATE src/mods)
     add_test(NAME mmx6_coop_assets_test COMMAND "$<TARGET_FILE:mmx6_coop_assets_test>")
+
+    # Compile the actual trusted plugin into an isolated guest-memory fixture.
+    # Dead gameplay entry points are discarded; both developer and production
+    # builds must reject the one-sided debug channel during netplay.
+    foreach(_mmx6_diag_variant debug production)
+        set(_mmx6_diag_target mmx6_coop_diagnostics_${_mmx6_diag_variant}_test)
+        add_executable(${_mmx6_diag_target} tests/test_mmx6_coop_diagnostics.c)
+        target_include_directories(${_mmx6_diag_target} PRIVATE src/mods
+            "${PSXRECOMP_V4_ROOT}/runtime/include")
+        if(_mmx6_diag_variant STREQUAL "production")
+            target_compile_definitions(${_mmx6_diag_target} PRIVATE PSX_NO_DEBUG_TOOLS)
+        endif()
+        if(MSVC)
+            target_compile_options(${_mmx6_diag_target} PRIVATE /Gy /Gw)
+            target_link_options(${_mmx6_diag_target} PRIVATE /OPT:REF)
+        else()
+            target_compile_options(${_mmx6_diag_target} PRIVATE -ffunction-sections -fdata-sections)
+            if(APPLE)
+                target_link_options(${_mmx6_diag_target} PRIVATE -Wl,-dead_strip)
+            else()
+                target_link_options(${_mmx6_diag_target} PRIVATE -Wl,--gc-sections)
+            endif()
+        endif()
+        add_test(NAME ${_mmx6_diag_target} COMMAND "$<TARGET_FILE:${_mmx6_diag_target}>")
+    endforeach()
 
     add_executable(mmx6_tweaks_hooks_test
         tests/test_mmx6_tweaks_hooks.cpp
