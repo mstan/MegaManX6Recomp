@@ -1,0 +1,448 @@
+{
+  "schema": 1,
+  "kind": "source_only_opposite_roster_implementation_plan",
+  "game_commit": "6c42c5c4afa68bb7dfe60097e091a6a551940d9a",
+  "status": "proposal_only_no_runtime_pass",
+  "sources": {
+    "x6": {
+      "commit": "6c42c5c4afa68bb7dfe60097e091a6a551940d9a",
+      "files": [
+        {
+          "path": "src/mods/mmx6_coop_plugin.c",
+          "git_blob": "e004e4a02a2c784f412a0e7ad02ebcf8807b6f69",
+          "bytes": 89978,
+          "sha256": "7507189a215dfd05cb3d7a3b38e0b821bdce7085227d447e91605f1f86c6e2d2"
+        },
+        {
+          "path": "src/mods/mmx6_coop_assets.c",
+          "git_blob": "7cdfecd025e3a68250c76e6c114630bcd8e6b1de",
+          "bytes": 3611,
+          "sha256": "451e200d95e12d660207ff36baac5039acdec97c2c3e999c2614dc9ac25ae388"
+        },
+        {
+          "path": "src/mods/mmx6_coop_lifecycle.h",
+          "git_blob": "e257dd46dba6dcb3ae135a2407eeccd7e5aebff3",
+          "bytes": 1601,
+          "sha256": "404a21913971c5171ad6d547511a8c627b045ef9ddea73dd0f545c06e506cc42"
+        },
+        {
+          "path": "src/mods/mmx6_coop_snapshot.inc",
+          "git_blob": "41c11205de9649f06f9f2bfc824f0c404e4ccc74",
+          "bytes": 16301,
+          "sha256": "54abde5649a593f31d4cfd56e4ae16b7e65673da4a721d82ee8e2e2e00b5cfef"
+        },
+        {
+          "path": "src/mods/mmx6_coop_state_track.h",
+          "git_blob": "935442b617264a4fa8cad0f6976d858d2b155a47",
+          "bytes": 1946,
+          "sha256": "7daf2ae3512fe4575dbc89635081d0689905f78f5f83ba814d5f5f8befd6ef4f"
+        },
+        {
+          "path": "src/mods/mmx6_coop_host_lab_contract.h",
+          "git_blob": "ae8ddf5b67ec7221c19e535a0a4fdcddc85dd565",
+          "bytes": 860,
+          "sha256": "2c8b5e95e9d14fee79e2c7ea2ac0e3dd545e9d3007f7b2b14359bfe50d37e0ad"
+        },
+        {
+          "path": "mods/preloaded/packages/mmx6.local-coop/0.0.1/manifest.toml",
+          "git_blob": "09f00da456dbf048cbb992428bbe692919c5a047",
+          "bytes": 1302,
+          "sha256": "1be8c16dc35f38000c67821fb4588a0cb6af5d205fa6a2f57488b3a0dabaf00c"
+        },
+        {
+          "path": "game.toml",
+          "git_blob": "7512a22a413f96feb52d2535b347b5154a9cff6c",
+          "bytes": 12280,
+          "sha256": "08f650d868333749b1522e2edc49229b3cab8aa4fd9d3091d8ea471b5d8ebbdb"
+        },
+        {
+          "path": "tests/test_mmx6_coop_private_effects.c",
+          "git_blob": "2d4b7f7f7aa6f7347938bca7f3653d5e886a772f",
+          "bytes": 22275,
+          "sha256": "ff20f243147e5b1e6a1bd11ed80fdac2c89d5f08f073a0bb480b67c676df443b"
+        },
+        {
+          "path": "docs/COOP_SEAT_CHARACTER_AUDIT.json",
+          "git_blob": "6bc6e5a3d0f61046260bba3be2837f9b8542c0af",
+          "bytes": 47699,
+          "sha256": "e424166d4d296732c7e937ff5bc385e3d2a9a8a142a310e64cc44066d34eb1e3"
+        },
+        {
+          "path": "docs/COOP_R9_EFFECT_CLOSURE.json",
+          "git_blob": "4c9bfe55ae9c7521886e6ff3a572af788684e544",
+          "bytes": 36155,
+          "sha256": "b74f9800046a0edaf0ba6e869a10eb606c479be1776d90cd758fd07c0d78dde7"
+        },
+        {
+          "path": "docs/COOP_AUDIO_DRIVER_OWNERSHIP.json",
+          "git_blob": "f9ccb9e30aca6e85d58e73de8a94f5f8c715b86d",
+          "bytes": 20492,
+          "sha256": "09ddb4951694228718dca29a4a6f8920f50788c83e9dbba094b20a0afc8e5cc5"
+        }
+      ]
+    },
+    "x4": {
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "files": [
+        {
+          "path": "src/mods/mmx4_coop_plugin.c",
+          "git_blob": "a4c0417e3e021d243f8cbb7e109f96d87d6ebf38",
+          "bytes": 89536,
+          "sha256": "f61bb4f8758660ba21e04c86ec28b5c3f22738396ff128ebf10e65fae84b7e57"
+        },
+        {
+          "path": "src/mods/mmx4_coop_lifecycle.c",
+          "git_blob": "a40f13791c1b82d54597028015554a143b90ae09",
+          "bytes": 135195,
+          "sha256": "aaf711bf1a30f3e5eb618772cf51af1f62c000e501156dea60cc67bc90f0d775"
+        },
+        {
+          "path": "src/mods/mmx4_coop_combat.c",
+          "git_blob": "e56f5e7c7b1b47c3d7a95db74d4df67eb9f11719",
+          "bytes": 50500,
+          "sha256": "3153b42f6dbb5a408c63eafb7b5b8e16a04102b994a62ab7b8d199792636752a"
+        }
+      ]
+    },
+    "x5": {
+      "commit": "9ed460e7b7e60769fa12bcab74e228ae19796214",
+      "files": [
+        {
+          "path": "src/mods/mmx5_coop_plugin.c",
+          "git_blob": "493dfe4134956ae27538cf626e6b19dbe0deb3c5",
+          "bytes": 253228,
+          "sha256": "4d55213297606aa1db1306ef5c82d4ac1de048cad1a87052b2860596b33f38ba"
+        }
+      ]
+    }
+  },
+  "original_exe": {
+    "bytes": 522240,
+    "sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "load_base": "80010000",
+    "offset_rule": "0x800 + address - load_base"
+  },
+  "native_windows": [
+    {
+      "id": "character_loader",
+      "start": "80013BF0",
+      "end_exclusive": "80013D10",
+      "bytes": 288,
+      "sha256": "d96a67e198b34f44a893781109c75b553623934caf83341f407e6d79a9bdd4e6"
+    },
+    {
+      "id": "player_initializer",
+      "start": "8003BD24",
+      "end_exclusive": "8003C140",
+      "bytes": 1052,
+      "sha256": "0fdac6093bdba899dbfe7b0b679bb6bcb417f5640b9c6754c9abf5a7443a1594"
+    },
+    {
+      "id": "parts_form",
+      "start": "8003D718",
+      "end_exclusive": "8003D7AC",
+      "bytes": 148,
+      "sha256": "d2cc0660040709245080d3e570746ce3247ec4b9064a251b0a08ce42112e0e8e"
+    },
+    {
+      "id": "portrait_selector",
+      "start": "800228AC",
+      "end_exclusive": "80022928",
+      "bytes": 124,
+      "sha256": "76fb7917f5a93b6e6a7bd22ee7cd0fe9a89b21a8ed4fcf2f6d98ae83ee640488"
+    },
+    {
+      "id": "portrait_load_calls",
+      "start": "80014314",
+      "end_exclusive": "800143A0",
+      "bytes": 140,
+      "sha256": "267da6fea6eb8f6510b738e1e930fdb7bac8723d91502fd7e0e1af6ec45e5401"
+    },
+    {
+      "id": "dat_record_loader",
+      "start": "8001642C",
+      "end_exclusive": "8001651C",
+      "bytes": 240,
+      "sha256": "7831c610cb4899b148d5b82ce44631d131cbca250345f25ec0ab906f78249317"
+    }
+  ],
+  "portrait_records": [
+    {
+      "archive": "ROCK_X6.DAT",
+      "record": 163,
+      "lba": 211998,
+      "sector": 24655,
+      "bytes": 8192,
+      "sha256": "a676acc50ce3bdc7c3dc0eec5b5d31f236c92bb9d748caaae8d04f1c328706c8"
+    },
+    {
+      "archive": "ROCK_X6.DAT",
+      "record": 164,
+      "lba": 211998,
+      "sector": 24659,
+      "bytes": 512,
+      "sha256": "f115923573c90ec411c359b9d119fe05ac7c746acf23c836ca65402b3ca25465"
+    },
+    {
+      "archive": "ROCK_X6.DAT",
+      "record": 165,
+      "lba": 211998,
+      "sector": 24660,
+      "bytes": 8192,
+      "sha256": "90d8e1e9d1ff3d3add429af0cdde2b23a18466ad28d1313c86b94efd8d4af198"
+    },
+    {
+      "archive": "ROCK_X6.DAT",
+      "record": 166,
+      "lba": 211998,
+      "sector": 24664,
+      "bytes": 512,
+      "sha256": "101f178ea687c2be657ad2f2c1720ed09fccbe247129752ca5d702dad6ddd599"
+    }
+  ],
+  "portrait_contract": {
+    "selector": "800228AC",
+    "load_calls": "80014314..80014398",
+    "graphics_record": "163 + 2 * native_portrait_index",
+    "palette_record": "164 + 2 * native_portrait_index",
+    "dat_table": "800E0398",
+    "dat_table_stride": 8,
+    "base_x_index": 0,
+    "zero_index": 1,
+    "black_zero_index": 6
+  },
+  "restrictions": [
+    {
+      "id": "OR01",
+      "area": "native selector",
+      "symbol": "unit_choices",
+      "source": "src/mods/mmx6_coop_plugin.c",
+      "line_start": 184,
+      "line_end": 205,
+      "current": "Removes native Zero form5, keeps persistent availability.",
+      "required": "Permit native unlocked Zero only after generic counterpart closure.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "OR02",
+      "area": "native actor admission",
+      "symbol": "native_player_init/controller",
+      "source": "src/mods/mmx6_coop_plugin.c",
+      "line_start": 1156,
+      "line_end": 1195,
+      "current": "No independent campaign-character refusal; phase gates do not choose counterpart.",
+      "required": "Validate native P1 identity and resolve opposite character with explicit base-X0 policy.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "OR03",
+      "area": "immutable resources",
+      "symbol": "load_assets",
+      "source": "src/mods/mmx6_coop_plugin.c",
+      "line_start": 235,
+      "line_end": 294,
+      "current": "BIN1 type3D/DAT85/portrait165-166 only.",
+      "required": "Select BIN0 type3C/DAT86/163-164 for base X; preserve exact bounded asset identity.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "OR04",
+      "area": "projection",
+      "symbol": "enter_zero/leave_zero_context",
+      "source": "src/mods/mmx6_coop_plugin.c",
+      "line_start": 295,
+      "line_end": 344,
+      "current": "P2 always character1/form5; one extra resource set.",
+      "required": "Project typed actor resources; restore native campaign/overlay/pointers and shared-world contract.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "OR05",
+      "area": "native enrollment",
+      "symbol": "enroll",
+      "source": "src/mods/mmx6_coop_plugin.c",
+      "line_start": 450,
+      "line_end": 475,
+      "current": "Native init/parts/physics/idle always run under Zero identity.",
+      "required": "Use native helpers once with each descriptor; retain spent resources outside native respawn.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "OR06",
+      "area": "collectors",
+      "symbol": "pickup_as_seat",
+      "source": "src/mods/mmx6_coop_plugin.c",
+      "line_start": 349,
+      "line_end": 369,
+      "current": "seat1 forces character1/form5.",
+      "required": "Resolve collector character/form independently of seat.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "OR07",
+      "area": "owned menu",
+      "symbol": "menu_vram/stage_tick",
+      "source": "src/mods/mmx6_coop_plugin.c",
+      "line_start": 1004,
+      "line_end": 1154,
+      "current": "Private Zero pages and portrait are exchanged with saved campaign pages.",
+      "required": "Use selected private resources while seat owns input/Quit authority; preserve native writeback.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "OR08",
+      "area": "HUD/UI",
+      "symbol": "hud_tile_bank/draw_coop_hud",
+      "source": "src/mods/mmx6_coop_plugin.c",
+      "line_start": 1650,
+      "line_end": 1795,
+      "current": "Fixed Zero UI plane and native Zero HUD800249D4.",
+      "required": "Select native HUD X800246B4/Zero800249D4; character resource/palette identity.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "OR09",
+      "area": "retained sprite sources",
+      "symbol": "sprite_bank/render_actor",
+      "source": "src/mods/mmx6_coop_plugin.c",
+      "line_start": 1273,
+      "line_end": 1416,
+      "current": "Immutable Zero graphics, special mutable-resident X-death path.",
+      "required": "Actor/source/form identity plus content validation for reused native virtual addresses.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "OR10",
+      "area": "survivor/deferred owner",
+      "symbol": "render_survivor/death_effect_init",
+      "source": "src/mods/mmx6_coop_plugin.c",
+      "line_start": 1457,
+      "line_end": 1532,
+      "current": "P1 supplemental draw uses render_x_death; delayed death retains origin/layer/assembly.",
+      "required": "Bind actual actor resources; trace native X deferred owner reads separately.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "OR11",
+      "area": "fixed pools",
+      "symbol": "controller/render",
+      "source": "src/mods/mmx6_coop_plugin.c",
+      "line_start": 1227,
+      "line_end": 1446,
+      "current": "Private attached/trail calls and native character0 render gate now exist.",
+      "required": "Retain once-per-actor source order; qualify actual X/P2 charge/dash/art/retirement with correct assets.",
+      "local": "unverified",
+      "netplay": "unverified"
+    },
+    {
+      "id": "OR12",
+      "area": "state/rematch/identity",
+      "symbol": "snapshot_assets_loaded/snapshot_resources/activate/profile",
+      "source": "src/mods/mmx6_coop_snapshot.inc",
+      "line_start": 35,
+      "line_end": 52,
+      "current": "One Zero asset hash/UI source; profile v12 labrev2.",
+      "required": "Canonical validated roster/source state and cold resources; reset/caches; new actual identity and qualification.",
+      "local": "unverified",
+      "netplay": "unverified",
+      "related_sites": [
+        {
+          "source": "src/mods/mmx6_coop_snapshot.inc",
+          "line_start": 198,
+          "line_end": 205
+        },
+        {
+          "source": "src/mods/mmx6_coop_snapshot.inc",
+          "line_start": 266,
+          "line_end": 285
+        },
+        {
+          "source": "src/mods/mmx6_coop_plugin.c",
+          "line_start": 1800,
+          "line_end": 1878
+        }
+      ]
+    }
+  ],
+  "current_delta_from_prior_audit": [
+    "Private attached80020D74 then trails80020DC8 update calls now present after contact within private projection.",
+    "Private retained draw now includes native character0-only attached slots and trails2/1/0.",
+    "Actual-plugin model fixtures are source wiring evidence only; no opposite-roster original execution was run."
+  ],
+  "frozen_design": [
+    {
+      "title": "X4",
+      "path": "src/mods/mmx4_coop_plugin.c",
+      "lines": "257..281,466..476",
+      "contract": "Character-indexed assets; actual native counterpart; separate variant/campaign flag; stage palette."
+    },
+    {
+      "title": "X4",
+      "path": "src/mods/mmx4_coop_combat.c",
+      "lines": "413..454",
+      "contract": "Deferred allocating-owner projection while Zero/P1 is restored."
+    },
+    {
+      "title": "X4",
+      "path": "src/mods/mmx4_coop_lifecycle.c",
+      "lines": "1459..1488",
+      "contract": "Keep shared stage palette work across private actor projection."
+    },
+    {
+      "title": "X5",
+      "path": "src/mods/mmx5_coop_plugin.c",
+      "lines": "49..78,525..560,1065..1111,3881..3938",
+      "contract": "Separate character, form, immutable source and bank generation; native counterpart init; native character HUD/menu."
+    }
+  ],
+  "proposed_first_rosters": [
+    {
+      "campaign_character": 0,
+      "campaign_forms": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "private_character": 1,
+      "private_form": 5,
+      "private_bin": 1,
+      "private_dat": 85
+    },
+    {
+      "campaign_character": 1,
+      "campaign_forms": [
+        5
+      ],
+      "private_character": 0,
+      "private_form": 0,
+      "private_bin": 0,
+      "private_dat": 86,
+      "variant_policy": "Refuse active unsupported Black Zero until qualified; preserve persistent PLAY+5F bit20."
+    }
+  ],
+  "explicit_blockers": [
+    "X6 stage-specific character palette composition/fades/dash CLUTs and native menu writeback.",
+    "Base-X shared deferred effects need actual allocating-owner trace; X4 effect types are not X6 evidence.",
+    "Current plugin has no counterpart VAB/audio adapter; original group1/group3 residency, record17 alias, queue/flush and async completion remain separate dependencies.",
+    "Black Zero native portrait6 and gameplay/palette composition are not represented by fixed Zero165/166.",
+    "No original/native offline or same-machine paired evidence for Zero/P1 + X/P2; current source/fixture passes do not qualify it."
+  ],
+  "limits": [
+    "No title/game builds, launches, saves/cards, runtime mutations, SDK/CMake/plugin edits or comparison-ledger passes.",
+    "No original binary/asset bytes distributed; only source identities, bounded window and portrait metadata.",
+    "No cross-CPU/OS/physical-machine netplay claim; future validation is bounded by actual qualification.",
+    "No all-X-forms/BlackZero/private-audio/R8/R9/replay/save-state/rollback claim."
+  ]
+}
