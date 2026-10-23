@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "kind": "expected_no_catalog_refusal",
+  "result": "passed",
+  "candidate_executable_sha256": "15404060e160b6a25743732c958d7ae1d58980f6b3e49dfc7501864cd836868b",
+  "declared_manifest_sha256": "3dc7452b41ea439dc9e7ceaa94960d78a1142df256e484d73d85872f84f73188",
+  "source_provenance": {
+    "game": {
+      "head": "693cfac4067b4ebc4ecb939d670db71e6beca5d9",
+      "tracked_edits": {},
+      "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "net": {
+      "head": "e53059306824edf4f0aec4aae5ae65151b18535f",
+      "tracked_edits": {},
+      "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rb": {
+      "head": "2a03e73693acee0fb78076ea058642c931bef12e",
+      "tracked_edits": {},
+      "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "sdk": {
+      "head": "dee0e912e1785ce4a93de2a046cce2ba55812870",
+      "tracked_edits": {},
+      "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "ui": {
+      "head": "b964eabe5a3438b8ed121064354ba27c1accef3f",
+      "tracked_edits": {},
+      "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "raw_pair_result": "failed_setup",
+  "raw_pair_error": "An owned peer exited during native boot",
+  "checks": {
+    "both_owned_peers_refused_absent_catalog": true,
+    "both_exit_codes_one": true,
+    "same_compiled_manifest_on_both_peers": true,
+    "manifest_canonical_sha_and_embedded_bytes_verified": true,
+    "no_settlement_logged": true
+  },
+  "owned_pids": [
+    55552,
+    23236
+  ],
+  "cleanup": "Both owned PIDs absent after normal exit; no termination required.",
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-profile-absent-negative\\qualification.json",
+      "sha256": "2cbe449ee0886132a03ce2dea8df28272bf8f18b3dad0250ea9360651e785be7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-modern-debug\\psx_build_manifest\\psx-runtime\\Release\\manifest.json",
+      "sha256": "5553e308e7b80a37d417afc565191a546c61249a60a3782cc5bddfba56d41297"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-modern-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+      "sha256": "a0d21b401493981dc9e6d0c5c192cf0fe80681e42132c2fd949e649cb61a1822"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-profile-absent-negative-run.log",
+      "sha256": "697a7653419ee2bda4dc746083adf26b4c5c67a2973e371ef66d1493d4d4c0db"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-profile-absent-negative-run-python312.log",
+      "sha256": "ba835dc706d524835bd9328d508e10cae14a29b0895aeba2738b28e4b94acd55"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-profile-absent-negative\\peer-0\\logs\\stderr.log",
+      "sha256": "15733371805f8b4cb10a6ab0e2240127361f33ebd33c6844253a4b94e17b4c8a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-profile-absent-negative\\peer-1\\logs\\stderr.log",
+      "sha256": "15733371805f8b4cb10a6ab0e2240127361f33ebd33c6844253a4b94e17b4c8a"
+    }
+  ],
+  "limits": [
+    "Expected startup refusal only; no native gameplay, positive host gate, transport, restart or cross-machine qualification.",
+    "Raw paired report remains failed_setup; this separate receipt checks the deliberately absent catalog.",
+    "Initial Python3.10 CLI rejection launched no game; corrected invocation used explicit Python3.12 and retained both logs.",
+    "Declared manifest is scoped declared-input provenance, not exhaustive system/driver closure."
+  ]
+}
