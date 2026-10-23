@@ -113,9 +113,9 @@ def compare_peer(observer, record, chosen, first_seat, contract):
     record["status"] = "observations_complete" if all(record["checks"].values()) else "comparison_failed"
 
 
-def exercise(ctx, *, expected_sha, source, first_seat=0, max_attempts=8, timeout=120):
+def exercise(ctx, *, expected_sha, source, first_seat=0, max_attempts=32, timeout=120):
     if (type(first_seat) is not int or first_seat not in (0, 1) or type(max_attempts) is not int or
-            not 1 <= max_attempts <= 8 or type(timeout) not in (int, float) or not 0 < timeout <= 120):
+            not 1 <= max_attempts <= 32 or type(timeout) not in (int, float) or not 0 < timeout <= 120):
         raise ValueError("Audio requires bounded first-seat/attempt/deadline options")
     validate_context(ctx, expected_sha)
     report, clients = ctx["report"], ctx["clients"]
@@ -183,13 +183,14 @@ def exercise(ctx, *, expected_sha, source, first_seat=0, max_attempts=8, timeout
             except Exception as error:
                 case.setdefault("neutral_errors", []).append(dict(seat=seat, label=label, error=str(error)))
                 if failure is None: raise
-        after, _ = sample(label+" released")
+        after, after_network = sample(label+" released")
         case["inputs"].append(dict(label=label, logical_seat=seat, peers=held))
         for peer in (0, 1):
             require(audio.accepted_ground_jump(before[peer], after[peer], seat, held[peer]),
                     f"Peer{peer} native ground jump was not accepted")
-        return [[e for e in observer.events if e["seq"] >= starts[peer] and
+        keys = [[e for e in observer.events if e["seq"] >= starts[peer] and
                  e["kind"] == "KEYON" and e["v"] in (20, 44)] for peer, observer in enumerate(observers)]
+        return keys, after, after_network
 
     failure = None
     try:
@@ -205,15 +206,15 @@ def exercise(ctx, *, expected_sha, source, first_seat=0, max_attempts=8, timeout
         chosen = None
         for attempt in range(max_attempts):
             before, start = ground(f"audio-attempt-{attempt}-ground")
-            first = jump(first_seat, before, start, "audio-first-jump")
+            first, before_second, second_start = jump(first_seat, before, start, "audio-first-jump")
             row = dict(attempt=attempt, first_keys=first); case["attempts"].append(row)
             require(all(len(keys) <= 1 for keys in first), "Ambiguous first jump voice window")
             if not all(first):
                 row["skip"] = "native_rng_first_voice_missing_on_at_least_one_peer"; continue
-            # The second actor has not moved; use a fresh neutral observation
-            # rather than attributing a prior sampled state to this hold.
-            before, start = sample("audio-before-second-jump")
-            second = jump(first_seat ^ 1, before, start, "audio-second-jump")
+            # Reuse the actual post-release observation just collected. It
+            # includes the still-grounded second actor; another full poll here
+            # unnecessarily spends the first vocal's short remaining lifetime.
+            second, _, _ = jump(first_seat ^ 1, before_second, second_start, "audio-second-jump")
             row["second_keys"] = second
             require(all(len(keys) <= 1 for keys in second), "Ambiguous second jump voice window")
             if not all(second):

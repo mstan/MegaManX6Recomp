@@ -721,7 +721,7 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
                 network=network,native_advance=lambda frames,label:advance(frames)),
                 expected_sha=args.expected_exe_sha256,source=audio_source,
                 first_seat=args.audio_first_seat if args.audio_first_seat is not None else 0,
-                max_attempts=args.audio_max_attempts if args.audio_max_attempts is not None else 8)
+                max_attempts=args.audio_max_attempts if args.audio_max_attempts is not None else 32)
             matched("paired ground-jump audio then settle")
             report["checks"]["jump_audio_resolved_crc_after_case"]=True
             report["jump_audio_automated_status"]=case["status"]
@@ -1014,7 +1014,7 @@ def make_parser():
     parser.add_argument("--audio-first-seat",type=int,choices=(0,1),
                         help="First jumping logical seat (default0), only with --jump-audio-smoke")
     parser.add_argument("--audio-max-attempts",type=int,
-                        help="Bounded native RNG attempts1..8 (default8), only with --jump-audio-smoke")
+                        help="Bounded native RNG attempts1..32 (default32), only with --jump-audio-smoke")
     parser.add_argument("--expected-manifest-sha256",
                         help="Exact compiled declared-manifest SHA256, required by --jump-audio-smoke")
     parser.add_argument("--native-reentry",choices=("new_game",),
@@ -1076,8 +1076,8 @@ def validate_options(parser, args):
         if (args.private_pause_smoke or args.contact_pause_contact_smoke or args.enemy_targeting_smoke or
                 args.personal_menu_smoke or args.lifecycle_smoke or args.native_quit_scenario or args.native_reentry):
             parser.error("Paired ground-jump audio requires a separate fresh pair without other optional routes")
-        if args.audio_max_attempts is not None and not 1<=args.audio_max_attempts<=8:
-            parser.error("Audio attempts must be1..8")
+        if args.audio_max_attempts is not None and not 1<=args.audio_max_attempts<=32:
+            parser.error("Audio attempts must be1..32")
         if re.fullmatch(r"[a-f0-9]{64}",args.expected_manifest_sha256) is None:
             parser.error("Expected manifest SHA256 must contain64 lowercase hex digits")
     elif args.audio_first_seat is not None or args.audio_max_attempts is not None or args.expected_manifest_sha256 is not None:

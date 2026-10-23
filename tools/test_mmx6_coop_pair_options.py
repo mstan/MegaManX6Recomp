@@ -213,13 +213,14 @@ class PairOptionTests(unittest.TestCase):
     def test_paired_audio_requires_all_explicit_source_build_profile_and_crc_guards(self):
         self.assertTrue(self.parse(*self.audio_options()).jump_audio_smoke)
         for first in ("0","1"):
-            args=self.parse(*self.audio_options(),"--audio-first-seat",first,"--audio-max-attempts","8")
+            args=self.parse(*self.audio_options(),"--audio-first-seat",first,"--audio-max-attempts","32")
             self.assertEqual(args.audio_first_seat,int(first))
+            self.assertEqual(args.audio_max_attempts,32)
         for flag,count in (("--original-exe",2),("--original-disc",2),("--expected-exe-sha256",2),
                            ("--expected-manifest-sha256",2),("--require-state-crc",1),("--require-host-profile",1),
                            ("--expected-host-profile",2),("--expected-host-profile-revision",2)):
             options=self.audio_options();at=options.index(flag);del options[at:at+count];self.rejected(*options)
-        for extra in (("--audio-first-seat","2"),("--audio-max-attempts","0"),("--audio-max-attempts","9"),
+        for extra in (("--audio-first-seat","2"),("--audio-max-attempts","0"),("--audio-max-attempts","33"),
                       ("--expected-manifest-sha256","B"*64),("--original-disc","not-bin.cue")):
             self.rejected(*self.audio_options(),*extra)
 

@@ -27,7 +27,7 @@ pitch and ADSR, an overlap, original end conditions and final DSP state. Origina
 immutable banks are fingerprinted before/after. Landing does not substitute for
 voice completion: selected voices are drained through observed terminal events
 before final DSP snapshots. The whole audio case has a fixed120-second deadline
-and at most8 native attempts. Missing vocals or no common overlap remains an
+and at most32 native attempts. Missing vocals or no common overlap remains an
 explicit inconclusive result.
 
 The pair uses different numeric127.0.0.1 UDP endpoints, delay3, and the same
@@ -51,7 +51,7 @@ v18 image (the source must still match its declared inputs):
   --out 'G:/Temp/Codex/psxrecomp/x6-parity/paired-jump-audio-FRESH' `
   --expected-exe-sha256 8198893ef9f023b59be1a9eb768977f55e7f2feae40f0ce581e322870ab4f229 `
   --expected-manifest-sha256 3198d0285ac8dde9636c9aac5dd79399621d820a38f7561907fe4fa2b90af68b `
-  --jump-audio-smoke --audio-first-seat 0 --audio-max-attempts 8 `
+  --jump-audio-smoke --audio-first-seat 0 --audio-max-attempts 32 `
   --require-state-crc --require-host-profile `
   --expected-host-profile mmx6.win64-clang22.loopback --expected-host-profile-revision 2
 ```
