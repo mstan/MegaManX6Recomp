@@ -1,0 +1,207 @@
+{
+  "schema": 1,
+  "kind": "reviewed_portal_resource_bundle_intro_and_native_quit_regression",
+  "reviewed_at_utc": "2026-10-23T17:09:28.055909+00:00",
+  "candidate": {
+    "candidate_source": "c5fadead5296cb4bc53a5c283b04e5814e025f09",
+    "exe_sha256": "39c154966f9c12f939a8305551a910de9dbb97878dcf05c5935bed03c7ca7036",
+    "declared_manifest_sha256": "ae232408787bf0c3564bf8fd3aae85cc6d3977370fd059198b391345ebb25797"
+  },
+  "compilation_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v15-c5fadea\\candidate.json",
+    "sha256": "001b90d2acf18e7f934ec6c0644a6e673dadfeb37769b06086c64baf5f5f8a81"
+  },
+  "production_default_off": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v15-c5fadea\\production-default-off.json",
+    "sha256": "8e5c78d80faa608b1bbda0ba833fda8de8a00ccaac3c368319a6311a20228552"
+  },
+  "compilation_tests": {
+    "diagnostic": "79/79",
+    "production": "79/79"
+  },
+  "cases": {
+    "local": {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v15-c5fadea-local-live-effects\\qualification.json",
+        "sha256": "3e69be6837377e693c3aa8b2f22024803a142b70f28a12eebf89ec2559eaf490"
+      },
+      "checks": {
+        "primary_native_first_page_continue": true,
+        "primary_second_page_cancel": true,
+        "guest_cannot_control_primary_confirmation": true,
+        "preexisting_native_p2_dash_retained_through_quit_pages": true,
+        "original_preexisting_dash_resumes_and_retires": true,
+        "personal_resources_preserved": true,
+        "native_roster_preserved": true,
+        "original_world_resumed": true,
+        "genuine_independent_guest_input_after_cancel": true
+      },
+      "effects_checks": [
+        {
+          "extension_available": true,
+          "eligible_fixed_roster": true,
+          "original_input_receipts": true,
+          "ordered_publications": true,
+          "accepted_native_dash_marker": true,
+          "three_visible_native_trails": true,
+          "owner_frame_resources": true,
+          "native_links_and_cluts_retained": true,
+          "release_drains_without_retrigger": true,
+          "finite_native_retirement": true
+        }
+      ],
+      "capture_window_count": 3,
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v15-c5fadea-local-live-effects\\baseline\\p1-pages-cancel-live-effects\\peer-0-p1-native-quit-page-one.png",
+          "sha256": "91aba325a2bfb4eff47a5773878355f47bdaf84ba5b14da6898699f22851f6a4"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v15-c5fadea-local-live-effects\\baseline\\p1-pages-cancel-live-effects\\peer-0-p1-native-quit-page-two.png",
+          "sha256": "8109f0740538110cacef04e6cd5a9ab5c5691d63771d4ca1f0b12ced1e3a2f67"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v15-c5fadea-local-live-effects\\baseline\\p1-pages-cancel-live-effects\\peer-0-native-resumed-after-quit-cancel-or-refusal.png",
+          "sha256": "508ea1f736d1e616e24e71db517aa84ec014fac61379041b781d32bd4adc1d27"
+        }
+      ],
+      "processes": [
+        {
+          "owned_pid": 72064,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "review": "Root independently inspected all captures: original blue Continue/Quit confirmation pages hide gameplay bodies/meters/trails; original terrain and separate X/Zero bodies/meters are present after cancel. Raw checks prove retained private body/trails/attached/native clock freeze and same-dash resume/finite retirement."
+    },
+    "netplay": {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v15-c5fadea-pair-live-effects\\qualification.json",
+        "sha256": "ef9d5d84f883f1ed8735e5188fa822307e6e42cdd28c46f18e12e3b29c34e88b"
+      },
+      "checks": {
+        "primary_native_first_page_continue": true,
+        "primary_second_page_cancel": true,
+        "guest_cannot_control_primary_confirmation": true,
+        "preexisting_native_p2_dash_retained_through_quit_pages": true,
+        "original_preexisting_dash_resumes_and_retires": true,
+        "personal_resources_preserved": true,
+        "native_roster_preserved": true,
+        "original_world_resumed": true,
+        "genuine_independent_guest_input_after_cancel": true,
+        "resolved_core_mod_crc_comparison_completed": true
+      },
+      "effects_checks": [
+        {
+          "extension_available": true,
+          "eligible_fixed_roster": true,
+          "original_input_receipts": true,
+          "ordered_publications": true,
+          "accepted_native_dash_marker": true,
+          "three_visible_native_trails": true,
+          "owner_frame_resources": true,
+          "native_links_and_cluts_retained": true,
+          "release_drains_without_retrigger": true,
+          "finite_native_retirement": true
+        },
+        {
+          "extension_available": true,
+          "eligible_fixed_roster": true,
+          "original_input_receipts": true,
+          "ordered_publications": true,
+          "accepted_native_dash_marker": true,
+          "three_visible_native_trails": true,
+          "owner_frame_resources": true,
+          "native_links_and_cluts_retained": true,
+          "release_drains_without_retrigger": true,
+          "finite_native_retirement": true
+        }
+      ],
+      "capture_window_count": 3,
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v15-c5fadea-pair-live-effects\\p1-pages-cancel-live-effects\\peer-0-p1-native-quit-page-one.png",
+          "sha256": "bf8dbb12ea6f4f2aa87c0443fc86517e7f473813f2d9820c1a9b8f09e63a7e1b"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v15-c5fadea-pair-live-effects\\p1-pages-cancel-live-effects\\peer-1-p1-native-quit-page-one.png",
+          "sha256": "bf8dbb12ea6f4f2aa87c0443fc86517e7f473813f2d9820c1a9b8f09e63a7e1b"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v15-c5fadea-pair-live-effects\\p1-pages-cancel-live-effects\\peer-0-p1-native-quit-page-two.png",
+          "sha256": "c8543735033c93a53590c101e7dc7213a286e9dc33f12691979a41132c606809"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v15-c5fadea-pair-live-effects\\p1-pages-cancel-live-effects\\peer-1-p1-native-quit-page-two.png",
+          "sha256": "c8543735033c93a53590c101e7dc7213a286e9dc33f12691979a41132c606809"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v15-c5fadea-pair-live-effects\\p1-pages-cancel-live-effects\\peer-0-native-resumed-after-quit-cancel-or-refusal.png",
+          "sha256": "3620c03a2250b2f3645dc6b649e200c5ec9a5c6c49a32a75606757e5d4974960"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v15-c5fadea-pair-live-effects\\p1-pages-cancel-live-effects\\peer-1-native-resumed-after-quit-cancel-or-refusal.png",
+          "sha256": "3620c03a2250b2f3645dc6b649e200c5ec9a5c6c49a32a75606757e5d4974960"
+        }
+      ],
+      "processes": [
+        {
+          "owned_pid": 61320,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "owned_pid": 74744,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "review": "Root independently inspected all captures: original blue Continue/Quit confirmation pages hide gameplay bodies/meters/trails; original terrain and separate X/Zero bodies/meters are present after cancel. Raw checks prove retained private body/trails/attached/native clock freeze and same-dash resume/finite retirement.",
+      "selected_profile_sha256": "6a65e9cca916f8b474a8d6748920dd676b570407b3a461d65154a0ded9c47725",
+      "settlement": [
+        {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "6a65e9cca916f8b474a8d6748920dd676b570407b3a461d65154a0ded9c47725",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        },
+        {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "6a65e9cca916f8b474a8d6748920dd676b570407b3a461d65154a0ded9c47725",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      ],
+      "resolved_core_mod_samples": [
+        {
+          "label": "initial idle",
+          "count": 8
+        },
+        {
+          "label": "P2 right then release",
+          "count": 7
+        },
+        {
+          "label": "P1 jump then settle",
+          "count": 6
+        },
+        {
+          "label": "Native Quit p1_pages_cancel_live_effects resolved core/mod comparison",
+          "count": 7
+        }
+      ]
+    }
+  },
+  "limits": [
+    "Exact preservedc5fadea/executable39c15496 and SDK6212, intro/default loader and X/P1+Zero/P2 only.",
+    "Native P2 dash with three trails is the live-effect class tested; other effect families/rosters/campaign scenes remain unverified.",
+    "Same physical machine numeric127 UDP delay3 only; no rollback/network user states or cross-machine/OS/CPU qualification.",
+    "Portal ownership has source/fixture checks; no actual portal entry/arrival pass is implied by intro enrollment.",
+    "Final Quit/acquired-progress/current-data reentry remain separate R15 obligations.",
+    "Raw artwork-pending reports remain unchanged; root reviewed each composed image independently."
+  ]
+}
