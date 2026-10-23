@@ -1,0 +1,38 @@
+{
+  "schema": 1,
+  "kind": "historical_reploid059_metadata_only_preflight_rejection",
+  "original_report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\portal-v17-beeae10-local-source-midpoint-native-beam\\qualification.json",
+    "sha256": "bda7cb2698ac16324b159d9d6e0627b541982d1f34f2ddd8c36a8335c22ff8ba"
+  },
+  "original_status": "failed",
+  "original_error": "Unqualified nearby native actor: retain partial evidence, do not place/move",
+  "original_candidate_exe_sha256": "a8f20cdcc4ac68cdc76bf8fa7f1b3a74b9db67788514468743a355284b2080b8",
+  "observed_native_timer": 253,
+  "observed_publication_tick": 429,
+  "native_block_sha256": "3f028efb02543171ac57f420f8877e9b3dec5e0bd7c6c5ff906462ab9c2ab3d6",
+  "nearby_actor": {
+    "category": 4,
+    "address": 2148274884,
+    "type": 4,
+    "subtype": 59,
+    "origin": 2148477820,
+    "parent": 0,
+    "x": 1360,
+    "y": 1600,
+    "known_source_actor": false
+  },
+  "missing_fields": [
+    "full_A4_actor",
+    "phase_action_eligibility",
+    "grounded_variant_motion",
+    "live_origin_record8",
+    "body_box_pointer",
+    "live_fixed_pointer_box4",
+    "category4_dispatch_binding"
+  ],
+  "classification": "unverified_missing_live_fields_not_a_mechanic_failure",
+  "unchanged_raw_failure": true,
+  "retroactive_pass": false,
+  "native_portal_and_reploid_mechanics": "unverified"
+}

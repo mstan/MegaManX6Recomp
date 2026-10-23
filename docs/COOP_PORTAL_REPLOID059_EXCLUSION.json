@@ -1,0 +1,175 @@
+{
+  "schema": 1,
+  "kind": "source_bound_reploid059_portal_approach_exclusion",
+  "source_guards": {
+    "status": "original_source_guards_verified",
+    "original_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "original_member6_sha256": "c7b195e3e3968ebbd6c177cf023e47b35a9a816382c9b54ca157a80b393468f5",
+    "windows": [
+      {
+        "name": "solid_update",
+        "address": 2147616160,
+        "bytes": 288,
+        "sha256": "b08512ecebd6885080e14a3f3362c465049c1de842bf00b4b4fbedb1d27d653d"
+      },
+      {
+        "name": "phase_dispatch",
+        "address": 2147809332,
+        "bytes": 76,
+        "sha256": "b3484109156a7c8864090485d5a770d288ad1f4c02946a564b709fa6409f8039"
+      },
+      {
+        "name": "phase_table",
+        "address": 2147978364,
+        "bytes": 36,
+        "sha256": "4046311ada07ad864c23e96ceb6af641db3aca7c624aa8e0b31b1bb18f258953"
+      },
+      {
+        "name": "initialize",
+        "address": 2147805184,
+        "bytes": 632,
+        "sha256": "78e21a80c5e597237bc0c39eb5756113f67c4133bc820572a89a7ed318613b41"
+      },
+      {
+        "name": "idle",
+        "address": 2147805816,
+        "bytes": 440,
+        "sha256": "1768c7f52375b3b4daa50da1d0be94c99ba9c98916f47963964fa77112da920a"
+      },
+      {
+        "name": "contact",
+        "address": 2147806924,
+        "bytes": 260,
+        "sha256": "f0a519246ca8a2d9c70525f64ec9cb57dfa77daa4d870cb285211ec6684e8cc3"
+      },
+      {
+        "name": "body_contact_geometry",
+        "address": 2147671284,
+        "bytes": 352,
+        "sha256": "ae9156b379e618a48716e4d1efe1bbde05183f1185cfa72e63c94cb93294591e"
+      },
+      {
+        "name": "facing_animation_selection",
+        "address": 2147810956,
+        "bytes": 112,
+        "sha256": "454d6bddece44ce0eefb6a79b4be28e093a498718ef10e8745bbd3a5e62d585b"
+      },
+      {
+        "name": "animation",
+        "address": 2147580324,
+        "bytes": 160,
+        "sha256": "6446292a3a708036d6fb8d8d3db5bc82f9f1cc56641648b6abda93800d31cd75"
+      },
+      {
+        "name": "offscreen_visibility",
+        "address": 2147666940,
+        "bytes": 368,
+        "sha256": "dbf1d709e13fb55fd9a0dcf1cc1065f4357e63a2002b5a0ff6186f0356909c43"
+      },
+      {
+        "name": "body_box",
+        "address": 2147977488,
+        "bytes": 4,
+        "sha256": "6d7afb8070febf7b6c4adda4905fba44091e4d0a38c13b7c7d50e6bd45db8dfe"
+      },
+      {
+        "name": "scanner_record_mutation",
+        "address": 2147655292,
+        "bytes": 636,
+        "sha256": "b2ac7f6c590d26b454dee356fcacd8dd9c78ba5be7b728ebd8229b6983758b5c"
+      },
+      {
+        "name": "category4_allocator",
+        "address": 2147665092,
+        "bytes": 108,
+        "sha256": "4669bef7a4cc12596f4e2aa63d4aa2cbec058c69b49b6a85339ddd70437c7990"
+      }
+    ],
+    "placement": {
+      "index": 32,
+      "address": 2148477820,
+      "hex": "00043b0450054006"
+    },
+    "dispatch": {
+      "address": 2148479884,
+      "hex": "2048058028480580304805803848058034f80480",
+      "entry4": 2147809332
+    }
+  },
+  "original_archive_sha256": "55b03e4ecc13d6110ff300f80b7000b0f97234e19f1b846aa2b885eece30d80f",
+  "inventory": "docs/COOP_X6_CONTENT.json",
+  "placement": {
+    "id": "reploid-059",
+    "stage": 4,
+    "section": 0,
+    "index": 32,
+    "address": 2148477820,
+    "authored_hex": "00043b0450054006",
+    "allowed_live_hex": "01043b0450054006",
+    "x": 1360,
+    "y": 1600
+  },
+  "native_path": {
+    "category4_world_update": "800205A0 indexes [1F800094]+type*4, strideA4/80slots",
+    "category4_stage4_root": "[8006DF6C]=800F338C",
+    "type4_entry": "[800F339C]=8004F834",
+    "phase_dispatch": "8004F834 ->80078C7C[phase]",
+    "initialize": "8004E800",
+    "idle": "8004EA78",
+    "contact": "8004EB48 ->8004EECC ->8002DCF4(actor+68,player+68)",
+    "accepted_collection": "8004EF40 ->8004FF00(subtype,2), native life/heal/resource writes; not harmless",
+    "ordinary_pickup": "8004E26C is a different contact path"
+  },
+  "required_instance": {
+    "flags": 65,
+    "type": 4,
+    "subtype": 59,
+    "phase": 1,
+    "action": 0,
+    "subaction": 0,
+    "eligibility": 1,
+    "visible": 1,
+    "variant": 0,
+    "airborne_bob": 0,
+    "ground_bit": 8,
+    "position": [
+      1360,
+      1600
+    ],
+    "zero_motion_bytes16": true,
+    "facing": 0,
+    "facing_animation_allowed": [
+      0,
+      64
+    ],
+    "body_box_pointer": 2147977488,
+    "body_box_hex": "00000810"
+  },
+  "finite_exclusion": {
+    "p1_fixed_x": 1506,
+    "p2_x_inclusive": [
+      1506,
+      1695
+    ],
+    "accepted_control": "P2 original persistent Right only",
+    "actor_radius": 8,
+    "player_radius": 11,
+    "minimum_horizontal_distance": 146,
+    "minimum_margin": 127,
+    "contact": "Original2DCF4 strict abs(body_center_dx)<radius_sum19; misses horizontally regardless ofY",
+    "actual_box_provenance": "separate owned read_ram at fixed80078910, never arbitrary actor pointer",
+    "scope": "Exact idle actor and sampled source-world context only; no universal Reploid safety",
+    "continuous_frame_coverage": false
+  },
+  "source_closure": {
+    "idle_local_position_writes": "Only Y bob at8004EBB8 when+7E==1; that airborne state is rejected",
+    "no_x_motion": "Init zeroes+20/+24/+28/+2C; admitted idle callees animation/facing/offscreen/visibility do not writeX",
+    "unsupported_transitions": "Healing/collection, infection(+7==2), phase7offscreen, phase8alreadyfound and all other phases rejected",
+    "record_mutation": "29E7C and2A268 high-nibble state changes apply onlycategories<3; category4 remains04.2A254..264 sets allocation bit0."
+  },
+  "historical_receipt": "docs/evidence/mmx6-portal/reploid059-preflight-v17.json",
+  "native_observer_status": "pending_fresh_full_A4_box_and_dispatch_observer",
+  "portal": "unverified",
+  "reploid": "unverified",
+  "ledger_unchanged": true
+}

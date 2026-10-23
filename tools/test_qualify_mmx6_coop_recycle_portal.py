@@ -315,6 +315,7 @@ class OptionsTests(unittest.TestCase):
             args=runner.make_parser().parse_args(["--candidate",str(root),"--original-exe",str(existing),
                 "--original-disc",str(existing),"--expected-exe-sha256","a"*64])
             with patch.object(runner.setup,"load_sources",return_value={}),patch.object(runner.portal,"source_plan",return_value={}), \
+                 patch.object(runner.reploid,"source_guards",return_value={}), \
                  patch.object(runner.preparation,"local_output",return_value=root), \
                  patch.object(runner.offline,"pristine_candidate",side_effect=ValueError("retain prior")), \
                  patch.object(runner.baseline,"run") as launch,self.assertRaisesRegex(ValueError,"retain prior"):

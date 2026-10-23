@@ -23,6 +23,7 @@ import mmx6_coop_checkpoint as checkpoint
 import mmx6_coop_collision_boxes as boxes
 import mmx6_coop_recycle_portal as portal
 import mmx6_coop_recycle_setup as setup
+import mmx6_coop_reploid059 as reploid
 import prepare_mmx6_coop_playtest as preparation
 import qualify_mmx6_coop_baseline as baseline
 import qualify_mmx6_coop_personal_menu as offline
@@ -108,7 +109,7 @@ def original_box(sources, owner, pointer):
 def current_boxes(control, sources, publication, *, settled=False):
     """P2 bytes come only from X6BX; current null damage is a native miss gate."""
     b1, b2 = valid_publication(publication, settled=settled)
-    result = dict(body_pointers=[], damage=[], source="explicit original owner plus current X6BX bytes")
+    result = dict(body_pointers=[], body=[], damage=[], source="explicit original owner plus current X6BX bytes")
     for owner, (body, expected) in enumerate(zip((b1, b2), (X_BODY, Z_BODY))):
         body_pointer = struct.unpack_from("<I", body, 0x68)[0]
         require(body_pointer == expected[0], "Current terrain box pointer differs from bounded source envelope")
@@ -121,6 +122,8 @@ def current_boxes(control, sources, publication, *, settled=False):
             actual_body = bytes.fromhex(record["hex"])
         require(actual_body == expected[1], "Actual terrain box bytes differ")
         result["body_pointers"].append(body_pointer)
+        result["body"].append(dict(pointer=body_pointer,hex=actual_body.hex(),
+            origin="resident_native_ram" if owner == 0 else "native_ram"))
         pointer = struct.unpack_from("<I", body, 0x54)[0]
         if not pointer:
             require(not settled, "An idle hero has no current damage box")
@@ -160,22 +163,67 @@ def observe_native(control):
                 (category == 4 and capsule is not None and
                  ((origin == setup.CAPSULE_RECORD and actor[1:3] == bytes((26, 4))) or
                   (actor[1:3] == bytes((26, 16)) and parent == capsule["address"])))
-            nearby.append(dict(category=category, address=address, type=actor[1], subtype=actor[2],
-                origin=origin, parent=parent, x=x, y=y, known_source_actor=known))
+            item = dict(category=category, address=address, type=actor[1], subtype=actor[2],
+                origin=origin, parent=parent, x=x, y=y, known_source_actor=known)
+            if category == 4:
+                # Read the one permitted source record from THIS native block,
+                # never dereference an arbitrary actor-supplied origin pointer.
+                at = reploid.RECORD-portal.BASE
+                record_hex = raw[at:at+8].hex() if origin == reploid.RECORD else None
+                item.update(reploid.enrich(actor,address=address,category=category,record_hex=record_hex))
+            else:
+                item["raw_hex"] = actor.hex()
+            nearby.append(item)
     layout = raw[0x80097438-portal.BASE:0x80097438-portal.BASE+528]
     return dict(native=native, capsule=capsule, nearby_actors=nearby,
-                live_layout_hex=layout.hex(), native_block_sha256=setup.sha(raw))
+                live_layout_hex=layout.hex(), native_block_sha256=setup.sha(raw),
+                reploid059_source=dict(dispatch_table_address=reploid.DISPATCH_TABLE,
+                    dispatch_table_hex=raw[reploid.DISPATCH_TABLE-portal.BASE:
+                                           reploid.DISPATCH_TABLE-portal.BASE+20].hex()))
 
 
-def source_preflight(control, sources, row, receipt):
+def probe_reploid_exclusion(control,sources,row,publication,body_evidence,receipt):
+    """One explicit fixed-pointer box probe, bracketed by native actor samples.
+
+    Nothing is written. The after-publication is separately attributed and
+    cannot turn the actor/native and private blocks into one coherent sample.
+    """
+    receipt.update(status="unverified_probe",before_native=row,before_publication=publication,
+                   body_evidence=body_evidence,source_guards=sources["reploid059_guards"])
+    actor = reploid.find_actor(row) # Refuse unknown identity/pointer BEFORE reads.
+    _,state = reploid.actor_state(actor)
+    receipt["actor_baseline"] = state
+    actual = portal._read(control,reploid.BOX_POINTER,4)
+    receipt["body_box_probe"] = dict(address=reploid.BOX_POINTER,bytes=4,hex=actual.hex(),
+        provenance="separate_owned_read_ram_fixed_source_pointer")
+    table = struct.unpack("<I",portal._read(control,reploid.DISPATCH_POINTER,4))[0]
+    receipt["dispatch_probe"] = dict(address=reploid.DISPATCH_POINTER,bytes=4,value=table,
+        provenance="separate_owned_read_ram_fixed_scratch_slot")
+    receipt["before_check"] = reploid.validate_frame(row,publication,body_evidence,receipt)
+    after = observe_native(control)
+    receipt["after_native"] = after
+    after_pub = boxes.observe_owned(control)
+    receipt["after_publication"] = after_pub
+    receipt["after_check"] = reploid.validate_frame(after,after_pub,body_evidence,receipt)
+    receipt.update(status="conditional_source_bound_contact_exclusion",
+        native_runtime_qualification="read_only_scope_checks_observed_not_mechanic_qualification",
+        attribution="Box and scratch RPCs bracketed by native blocks; private publications are separate RPCs",
+        continuous_frame_coverage=False,native_reploid_mechanics="unverified")
+    return receipt
+
+
+def source_preflight(control, sources, row, receipt, *, publication=None, body_evidence=None):
     n = row["native"]
     require((n["mode"], n["phase"], n["stage"], n["section"], n["checkpoint"]) == (10, 0, 4, 0, 2) and
             n["source_closure_present"] and not n["transition"] and not n["fade"] and not n["freeze"],
             "CP2 original source/record/loader namespace not ready")
     terrain = sources["terrain"]
     require(bytes.fromhex(row["live_layout_hex"]) == terrain.layout, "Live528-byte map differs from original")
-    require(not any(not a["known_source_actor"] for a in row["nearby_actors"]),
-            "Unqualified nearby native actor: retain partial evidence, do not place/move")
+    if any(not a["known_source_actor"] for a in row["nearby_actors"]):
+        require(publication is not None and body_evidence is not None,
+                "Unqualified nearby native actor: retain partial evidence, do not place/move")
+        probe_reploid_exclusion(control,sources,row,publication,body_evidence,
+                               receipt.setdefault("reploid059_exclusion",{}))
     pointers = struct.unpack("<III", portal._read(control, 0x1F800004, 12))
     receipt["scratch_pointers"] = list(pointers)
     require(pointers == SCRATCH, "Live collision scratch pointers differ from this bounded source setup")
@@ -293,6 +341,7 @@ class Trial:
     def __init__(self, control, adapter, output, report, sources, plan, timeout, entry_timeout):
         self.control,self.adapter,self.output,self.report = control,adapter,output,report
         self.sources,self.plan,self.timeout,self.entry_timeout = sources,plan,timeout,entry_timeout
+        self.reploid_scope = None
         report.update(native_samples=[],box_samples=[],input_windows=[],captures=[],
                       prerequisite_bypass=True,ordinary_input_evidence_tainted=True,
                       artwork_review="pending",ledger_status="unverified",
@@ -393,6 +442,11 @@ class Trial:
             actual = current_boxes(self.control,self.sources,start,settled=True)
             native = observe_native(self.control)
             self.report["native_samples"].append(dict(label="immediate pre-input P1 miss",**native))
+            if any(not a["known_source_actor"] for a in native["nearby_actors"]):
+                self.reploid_scope = probe_reploid_exclusion(self.control,self.sources,native,start,
+                    actual["body"],receipt.setdefault("reploid059_pre_input",{}))
+            elif self.reploid_scope is not None:
+                raise debug.DebugError("Previously bound Reploid059 vanished before original input")
             receipt["p1_pre_input_misses"] = outside(native,bytes.fromhex(actual["damage"][0]["hex"]),actual["damage"][0]["pointer"])
         receipt["before"] = start
         error = None
@@ -415,6 +469,13 @@ class Trial:
                 if activation and ((actor and actor["action"] == 2) or p["scene_owner"] == 2):
                     receipt.update(stop="native_portal_or_owner2_observed",after=pub,accepted="native_effect_observed")
                     return
+                if activation:
+                    if self.reploid_scope is not None:
+                        receipt.setdefault("reploid059_source_window_checks",[]).append(
+                            reploid.validate_frame(row,pub,self.reploid_scope["body_evidence"],self.reploid_scope))
+                    else:
+                        require(not any(not a["known_source_actor"] for a in row["nearby_actors"]),
+                                "New unqualified nearby actor during original portal approach")
                 require(p["scene_owner"] == 0 and p["native_phase"] == p["pause_owner"] == 0,
                         "Unexpected native menu/scene during independent movement")
                 if delta >= max_ticks:
@@ -477,7 +538,10 @@ class Trial:
         x = conditional["conditional_both_seat_probe"]["x"]
         require(any(lo <= x <= hi for lo,hi in recomputed["source_miss_intervals"]),
                 "Current landed damage boxes invalidate the disclosed source position")
-        source_preflight(self.control,self.sources,ready,self.report.setdefault("after_landing_preflight",{}))
+        landed_preflight = self.report.setdefault("after_landing_preflight",{})
+        source_preflight(self.control,self.sources,ready,landed_preflight,
+                         publication=pub,body_evidence=actual["body"])
+        self.reploid_scope = landed_preflight.get("reploid059_exclusion")
         self.report["p1_source_trigger_misses"] = outside(ready,bytes.fromhex(actual["damage"][0]["hex"]),actual["damage"][0]["pointer"])
         gpu = self.control("gpu_state");self.report["source_gpu_state"] = gpu
         self.report["source_visibility"] = viewport(ready,pub,gpu)
@@ -554,6 +618,7 @@ def validate_options(parser,args):
 
 def run(args):
     sources = setup.load_sources(args.original_exe.resolve(strict=True),args.original_disc.resolve(strict=True))
+    sources["reploid059_guards"] = reploid.source_guards(sources)
     plan = portal.source_plan(args.original_exe,args.original_disc)
     candidate = preparation.local_output(args.candidate or args.output)
     if not args.candidate:
@@ -564,12 +629,13 @@ def run(args):
     os.environ.update(TEMP=str(candidate/"temp"),TMP=str(candidate/"temp"),
                       PYTHONPYCACHEPREFIX=str(candidate/"temp/pycache"))
     sys.pycache_prefix = str(candidate/"temp/pycache")
-    modules = (setup,portal,boxes,checkpoint,setup.terrain_source,debug,offline,baseline,preparation)
+    modules = (setup,portal,boxes,checkpoint,reploid,setup.terrain_source,debug,offline,baseline,preparation)
     metadata = dict(kind="owned_offline_recycle_portal_qualifier",candidate_exe_sha256=prepared["exe_sha256"],
         expected_exe_sha256=args.expected_exe_sha256,original_exe_sha256=setup.content.EXE_SHA256,
         original_archive_sha256=setup.content.BIN_SHA256,inventory_sha256=checkpoint.INVENTORY_SHA256,
         runner_sha256=preparation.sha256(Path(__file__)),source_plan=plan,
         runtime_original_source_binding=binding,
+        reploid059_source_guards=sources["reploid059_guards"],
         tool_sha256={Path(m.__file__).name:preparation.sha256(Path(m.__file__)) for m in modules},
         prerequisite_bypass=True,ordinary_input_evidence_tainted=True,artwork_review="pending",ledger_status="unverified",
         limits=["Only local offline CP2 checkpoint+two-seat position prerequisites; no original route/campaign/netplay pass",
