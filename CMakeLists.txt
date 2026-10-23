@@ -203,6 +203,7 @@ if(BUILD_TESTING)
                 test_mmx6_coop_contact_runner test_mmx6_coop_owned_cleanup
                 test_mmx6_coop_checkpoint test_mmx6_coop_private_effects
                 test_mmx6_coop_private_pause test_mmx6_coop_published_input
+                test_mmx6_native_zero_reference
                 test_mmx6_reploid_rescue_audit test_mmx6_input_capture_hook)
             add_test(NAME mmx6_${_mmx6_python_test}
                 COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/${_mmx6_python_test}.py")
@@ -211,6 +212,8 @@ if(BUILD_TESTING)
             COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_coop_present_capture.py")
         add_test(NAME mmx6_coop_state_protocol_test
             COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_coop_state_protocol.py")
+        add_test(NAME mmx6_coop_private_state_protocol_test
+            COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_coop_private_state_protocol.py")
         set(MMX6_X5_REFERENCE_REPO "" CACHE PATH "Optional local X5 Git repository for frozen-reference provenance checks")
         if(MMX6_X5_REFERENCE_REPO)
             add_test(NAME mmx6_coop_reference_provenance

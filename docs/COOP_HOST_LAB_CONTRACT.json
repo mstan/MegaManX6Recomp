@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; v12 private-effect/menu changes require fresh native pair and restart evidence",
+  "status": "development-candidate-only; exact frozen v12 menu/restart observations retained; newer capture/startup source requires a fresh candidate",
   "profile": "mmx6.win64-clang22.loopback",
   "revision": 2,
   "default_enabled": false,
@@ -114,5 +114,25 @@
       }
     ],
     "limits": "These bounded R2/R8/R13 and nonce-restart observations remain exact-v11-artifact evidence. They do not qualify v12 private effect updates, menu-phase guard, mode-packet ownership or another build. Default lab option remains OFF."
+  },
+  "prior_v12_evidence": {
+    "candidate_source": "e2e47e66e119425d6e9235cd3511209bf1cc1aad",
+    "sdk_source": "199839335e32448c10a52f4c98967903a807e040",
+    "actual_executable_sha256": "229ffec7a7dabda9742653264e1d023adde408602003df7f48b4c4d3f758d8e6",
+    "declared_manifest_sha256": "e186d1d0908b5a0341de84261272c30e14c4ab83a6fabbad30e6da9df5d4cefb",
+    "profile_revision": 2,
+    "semantic_contract_sha256": "463094dac737ed3a990c174bc97922aef135a7b058da51bced45968d0810ccba",
+    "receipts": [
+      {
+        "path": "docs/evidence/mmx6-r8/manifest-bound-e2e47e6-summary.json",
+        "sha256": "a4276af569cac5507af39bddf540a65d3da5e0b3a4c84c197f1001ba8511d8bb"
+      },
+      {
+        "path": "docs/evidence/mmx6-private-pause/manifest-bound-e2e47e6-summary.json",
+        "sha256": "14091b0e362a1bfbf8e849378b4b82a2fb219e281ddc35fb61bf50d83ee98dc8"
+      }
+    ],
+    "observed": "Baseline22, menu25 and private-pause29 resolved core/mod samples match in their separate original-input phases. Fresh same-session-ID restart selects a new nonce-bound agreement before guest cycle0/tick0. Native quit acknowledgements and natural exit0 retained.",
+    "limits": "R8 passed bounded local and development loopback; Zero-only private-pause/dash evidence leaves R9 unverified. Checkpoint readiness retry failed its camera-bound check. These exact-image observations do not qualify new diagnostics/replay/startup code, campaign, rollback, other machines or other profiles. Default lab option remains OFF."
   }
 }
