@@ -84,9 +84,9 @@
     {
       "member": "exe",
       "address": "80021FC4",
-      "end_exclusive": "80022014",
-      "bytes": 80,
-      "sha256": "af8a9bfd68b2da45d8895ad0c8daa636083286a7964c7aee2d3fdd2f1216efb7"
+      "end_exclusive": "80022838",
+      "bytes": 2164,
+      "sha256": "ac2ca5e06f5e0eac6dbfec9575be81448f1d04f6b6f136c5d631e5cbf9d4351a"
     },
     {
       "member": "title",
@@ -283,5 +283,17 @@
     "Native card load/save and earned-progress coverage are separate",
     "Post-reentry guest Select authority is a separate existing probe",
     "No original binary bytes committed"
-  ]
+  ],
+  "dialogue_input_contract": {
+    "ready_status": 255,
+    "ready_phase": 3,
+    "source_ready": "800227F8..80022804",
+    "source_input": "80022000..8002200C",
+    "source_close": "800220F0..80022108",
+    "source_continue": "8002211C..80022170",
+    "source_cursor_advance": "800225E4..800225F8",
+    "source_retire": "8002217C..8002231C",
+    "bound": "Existing route deadline, at most240seconds; no assumed story-page count",
+    "historical_failed_report_sha256": "8446564400671323a9cce759f6881228f09a6b03e26bb7d6e358a9eee2425339"
+  }
 }

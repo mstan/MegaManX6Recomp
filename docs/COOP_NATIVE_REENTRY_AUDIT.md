@@ -169,3 +169,60 @@ fixture checks the actual final-choice sequence and fresh-arrival anchor before
 invoking the existing guest-menu helper. It is not native or artwork evidence.
 Literal original EXE/BIN18 source words are checked when the local original
 disc is available; the focused source check passed here.
+
+## Native New Game dialogue-budget correction
+
+The first owned native New Game attempt reached the actual title and New Game
+story, then the helper refused a seventeenth ready dialogue because it assumed
+at most16 inputs. This is a qualifier failure, not evidence of a game defect.
+The unchanged failed report is
+`G:/Temp/Codex/psxrecomp/x6-parity/native-reentry-v16-4cdfe4d-local-new-game/qualification.json`,
+SHA256 `8446564400671323a9cce759f6881228f09a6b03e26bb7d6e358a9eee2425339`.
+Its image is `eeb5754a53a6d10aeac13b294ce3325a7e2b8a6180b20ce001a3800401fcec6d`.
+The owned process exited0 after its acknowledged debug Quit. That cleanup is
+separate from the observed native final Quit/title/New Game transitions.
+
+The [retained analysis](evidence/mmx6-native-reentry/new-game-v16-dialogue-budget-failure.json)
+records all16 accepted positions plus the next ready position. Every accepted
+input starts at dialogue statusFFh/phase3, has a distinct text cursor
+(`8014F634` through`8014FB12`), and reaches status80h/phase4 with actual native
+Cross held. The next box is FFh/3 at`8014FB78`; native script phases progressed
+3→4→5→7→9→11. The observed story is progressing, rather than repeatedly
+acknowledging one unchanged ready box. These facts do not establish the total
+story-page count, completed reentry, artwork or an R15 pass. The old report's
+empty final `checks` and failed status remain unchanged.
+
+Original EXE code supports a readiness/progress contract, not a16-page bound:
+
+- `800227F8..80022804` publishes FFh/phase3 when the parser reaches an input
+  control. Phase2 is automatic typing; nonzero active alone is insufficient.
+- `80022000..8002200C` tests the original native edge byte. With control bit
+  8000h, `800220F0..80022108` starts its close timer at50 and80h/phase4; native
+  retirement ends by clearing active at`8002231C`.
+- For a continuing page, `8002211C..80022170` resumes the parser and increments
+  the page counter. `800225E4..800225F8` advances its text cursor by two bytes
+  for each parsed unit.
+
+The correction therefore uses the existing route deadline (at most240seconds),
+without increasing or substituting an assumed page count. It rechecks exact
+source-mode FFh/3 readiness immediately before persistent Cross, requires actual
+decoded held input, and accepts only a source-derived close/retirement, changed
+text cursor or continued-page transition on every peer. Consumed neutral is
+still mandatory. A generic phase change, unchanged ready box, queued80h state,
+or input ACK cannot establish that response. Per-input budgets are capped by
+the remaining route time; ordinary ownership/RPC and final release cleanup
+remain in force.
+
+`scripted_waits` retains deadlines, elapsed time, input indices, actual offered
+and accepted per-peer positions, response reasons and errors. Full atomic RAM
+observations and pulse/neutral samples remain in their existing arrays. The
+runtime original-code guard now covers `80021FC4..80022838`, including the
+response and parser routines; source-window hashes are updated in the mapping.
+
+Nine additional pure tests include the retained native failure, a17-box
+protocol sequence, false readiness/response states, one missing peer response,
+consumed-neutral failure handling, queued-state timeout, continued progress
+without destination and an empty peer result. They are protocol regressions,
+not native success evidence. No game/title build or native launch was performed
+for this correction. A fresh root-owned native retry and artwork review remain
+required; current-data and earned-card coverage remain separate.

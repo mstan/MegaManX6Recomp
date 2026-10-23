@@ -30,7 +30,7 @@ SUCCESS = "automated_native_reentry_checks_passed_artwork_pending"
 EXE_WINDOWS = ((0x8001CF78,0x8001D2A0),(0x8001D930,0x8001DBAC),
     (0x8001DE10,0x8001E1BC),(0x8001E6E4,0x8001E730),(0x8001E880,0x8001E914),
     (0x8001FD10,0x8001FE74),(0x8001BA1C,0x8001BD40),
-    (0x80012A34,0x80012B44),(0x80021FC4,0x80022014))
+    (0x80012A34,0x80012B44),(0x80021FC4,0x80022838))
 TITLE_WINDOWS = ((0x800EA62C,0x800EA9D0),(0x800ED760,0x800ED87C),(0x800F08FC,0x800F0928))
 # Source 8001BA1C..8001BD40. Volatile script/input fields are recorded, not
 # treated as campaign inventory. No campaign character/armor is imported here.
@@ -159,6 +159,88 @@ def primary_scope(row):
     return row["mode"][:2]==[10,0] and row["campaign_character"]==row["native_player"]["character"]==0
 
 
+def dialogue_state(row):
+    data=bytes.fromhex(row["dialogue_hex"])
+    if len(data)!=16:raise ValueError("Native dialogue observation must contain exactly16 bytes")
+    return dict(stage=row["stage"],section=row["section"],mode=list(row["mode"]),
+        cursor=hex(struct.unpack_from("<I",data)[0]),control=struct.unpack_from("<H",data,4)[0],
+        timer=struct.unpack_from("<H",data,10)[0],active=data[12],phase=data[13],page=data[14])
+
+
+def scripted_dialogue_ready(row):
+    # Parser800227F8..22804 publishes FF/3. Phase2 is automatic typing;
+    # queued/closing80 is not a second input opportunity.
+    source_mode=(row["stage"]==13 and row["mode"]==[4,11,1]) or (
+        row["stage"]==11 and row["mode"][0] in (0x13,0x14))
+    state=dialogue_state(row)
+    return source_mode and (state["active"],state["phase"])==(0xFF,3)
+
+
+def dialogue_response(before,after):
+    """Native progress after one consumed Cross, not just phase!=3.
+
+    Closing control8000 sets80/4 then retires through5 to inactive at
+    800220F0..2231C. Otherwise2211C..22170 resumes the parser, increments
+    page, and225E4..225F8 advances its text cursor. Polls may miss states.
+    """
+    if after["cursor"]!=before["cursor"]:return "native_text_cursor_advanced"
+    if after["active"]==0:return "native_dialogue_retired"
+    if before["control"]&0x8000:
+        if after["active"]==0x80 and after["phase"] in (4,5):return "native_box_closing"
+    elif after["page"]!=before["page"]:
+        return "native_page_advanced"
+    return None
+
+
+def wait_scripted(ctx,inputs,receipts,predicate,observe,*,label,seconds,timeout=12,guard_map=lambda:None):
+    """Bound by the route deadline, never an invented count of story boxes.
+
+    Each accepted input still needs its original ready decoder, actual held
+    Cross, native dialogue progress on every peer, and consumed neutral.
+    observe retains the full ordinary-RAM rows in the owning case.
+    """
+    if (not math.isfinite(seconds) or not 0<seconds<=240 or
+            not math.isfinite(timeout) or not 0<timeout<=60):raise ValueError("Invalid native scripted deadline")
+    started=time.monotonic();deadline=started+seconds;guarded=False
+    receipt=dict(label=label,status="waiting",deadline_seconds=seconds,inputs=[],
+        limit="Native readiness deadline; no assumed dialogue page count")
+    receipts.append(receipt)
+    try:
+        while time.monotonic()<deadline:
+            rows=observe(label)
+            if not rows:raise ReentryError(label+": native observation omitted every owned peer")
+            if all(predicate(r) for r in rows):
+                receipt["status"]="native_destination_observed";return rows
+            if rows and all(scripted_dialogue_ready(r) for r in rows):
+                if all(r["stage"]==13 for r in rows) and not guarded:guard_map();guarded=True
+                offered=[];accepted=[]
+                def ready(item):
+                    if len(item["peers"])!=len(rows) or not all(scripted_dialogue_ready(r) for r in item["peers"]):return False
+                    offered[:]=[dialogue_state(r) for r in item["peers"]]
+                    return True
+                def response(item):
+                    after=[dialogue_state(r) for r in item["peers"]]
+                    if len(after)!=len(offered):return False
+                    reasons=[dialogue_response(old,new) for old,new in zip(offered,after)]
+                    if not all(reasons):return False
+                    accepted[:]=[dict(before=old,after=new,response=reason) for old,new,reason in zip(offered,after,reasons)]
+                    return True
+                remaining=deadline-time.monotonic()
+                if remaining<=0:break
+                item=dict(input_index=len(inputs),status="pending");receipt["inputs"].append(item)
+                try:
+                    pulse(ctx,inputs,0x4000,response,lambda text:dict(peers=observe(text)),
+                        label="Original phase3 scripted dialogue Cross",ready=ready,timeout=min(timeout,remaining/3))
+                    item.update(status="native_response_and_neutral_observed",peers=accepted)
+                except Exception as error:
+                    item.update(status="failed",offered=offered,error=str(error));raise
+            time.sleep(.015)
+        raise ReentryError(label+": native scripted readiness timed out")
+    except Exception as error:
+        receipt.update(status="failed",error=str(error),error_type=type(error).__name__);raise
+    finally:receipt["elapsed_seconds"]=time.monotonic()-started
+
+
 def pulse(ctx,record,bits,predicate,observe,*,label,timeout=12,ready=lambda row:True):
     """P1 persistent sampler, witnessed native response and consumed neutral.
 
@@ -232,7 +314,7 @@ def native_reentry_smoke(ctx, *, original_disc, expected_exe_sha256, route="curr
         candidate_exe_sha256=expected_exe_sha256,candidate_binding=ctx.get("candidate_binding"),mode=ctx["mode"],
         input_path=ctx["input_path"],helper_sha256=sha(Path(__file__).read_bytes()),observations=[],reads=[],inputs=[],
         dependency_sha256={Path(m.__file__).name:sha(Path(m.__file__).read_bytes()) for m in (debug,content,quit_ui,menu,native)},
-        diagnostic_observations=[],code_guards=[],captures=[],checks={},artwork_review="pending",ledger_status="unverified",limits=[
+        diagnostic_observations=[],scripted_waits=[],code_guards=[],captures=[],checks={},artwork_review="pending",ledger_status="unverified",limits=[
             "No native-card load/save or acquired-progress preservation is implied by an empty private profile",
             "New Game defaults are distinct from current-data preservation",
             "Ordinary RAM is atomic only within each fixed read; diagnostics/captures and peers are separate",
@@ -279,22 +361,9 @@ def native_reentry_smoke(ctx, *, original_disc, expected_exe_sha256, route="curr
     def capture(label):
         case["captures"].extend(ctx["both"](lambda peer:dict(peer=peer,label=label,
             **ctx["debug"].capture_present(ctx["clients"][peer],output/f"peer-{peer}-{label}.png"))))
-    def wait_scripted(predicate,label,seconds):
-        deadline=time.monotonic()+seconds;dialogues=0;guarded=False
-        while time.monotonic()<deadline:
-            rows=observe(label)
-            if all(predicate(r) for r in rows):return rows
-            map_dialogue=all(r["stage"]==13 and r["mode"]==[4,11,1] for r in rows)
-            script_dialogue=all(r["stage"]==11 and r["mode"][0] in (0x13,0x14) for r in rows)
-            if (map_dialogue or script_dialogue) and all(bytes.fromhex(r["dialogue_hex"])[0xC] and
-                    bytes.fromhex(r["dialogue_hex"])[0xD]==3 for r in rows):
-                if map_dialogue and not guarded:guard("menu",native.MENU_GUARDS);guarded=True
-                require(dialogues<16,"Original reentry dialogue exceeded bounded16 pages")
-                pressed(0x4000,lambda r:bytes.fromhex(r["dialogue_hex"])[0xC]==0 or bytes.fromhex(r["dialogue_hex"])[0xD]!=3,
-                        "Original phase3 scripted dialogue Cross")
-                dialogues+=1
-            time.sleep(.015)
-        raise ReentryError(label+": native scripted readiness timed out")
+    def scripted(predicate,label,seconds):
+        return wait_scripted(ctx,case["inputs"],case["scripted_waits"],predicate,observe,label=label,
+            seconds=seconds,timeout=timeout,guard_map=lambda:guard("menu",native.MENU_GUARDS))
     try:
         initial=observe("Healthy original-input reentry preflight");case["before"]=initial
         canonical=canonical_read("Canonical pre-Quit preflight");case["before_diagnostic"]=canonical
@@ -336,7 +405,7 @@ def native_reentry_smoke(ctx, *, original_disc, expected_exe_sha256, route="curr
                     "Native current-data prompt did not retain primary current buffer/choice0")
             pressed(0x4000,lambda r:r["frontend"][:2]!=[7,1],"Original Cross imports native current data",ready=current_prompt)
             # No card-choice input is ever sent; headerFF never reaches here.
-            mapped=wait_scripted(map_ready,"Original current-data stage map readiness",reentry_timeout);case["native_map"]=mapped
+            mapped=scripted(map_ready,"Original current-data stage map readiness",reentry_timeout);case["native_map"]=mapped
             guard("menu",native.MENU_GUARDS)
             case["current_data_reductions"]=[reduce_current_data(old,row) for old,row in zip(initial,mapped)]
             require(all(all(item["checks"].values()) for item in case["current_data_reductions"]),"Original current-data campaign import/ownership mismatch")
@@ -368,7 +437,7 @@ def native_reentry_smoke(ctx, *, original_disc, expected_exe_sha256, route="curr
         def arrived(row):return row["mode"][:2]==[10,0]
         deadline=time.monotonic()+reentry_timeout
         while time.monotonic()<deadline:
-            rows=wait_scripted(arrived,"Original native reentry/arrival",max(.001,deadline-time.monotonic()))
+            rows=scripted(arrived,"Original native reentry/arrival",max(.001,deadline-time.monotonic()))
             if all(arrived(r) for r in rows):
                 diagnostics=canonical_read("Canonical native arrival after ordinary-RAM gameplay")
                 if anchor is None:

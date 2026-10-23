@@ -1,6 +1,7 @@
 """Pure native reentry protocol/source/ownership tests, no native launches."""
 from copy import deepcopy
 import itertools
+import json
 from pathlib import Path
 import struct
 import tempfile
@@ -108,6 +109,137 @@ class NativeReentryInputTests(unittest.TestCase):
         with self.assertRaisesRegex(OSError,"owned sampler refused"):
             reentry.pulse(ctx,attempts,8,lambda row:True,lambda label:native_row(),label="Start")
         self.assertEqual(attempts[0]["release_error"],"neutral refused")
+
+
+class ScriptedDialogueTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.retained=json.loads((Path(__file__).resolve().parent.parent/
+            "docs/evidence/mmx6-native-reentry/new-game-v16-dialogue-budget-failure.json").read_text())
+
+    def row(self,state,decoded=(0,0,0)):
+        raw=bytearray(16);struct.pack_into("<IH",raw,0,int(state["cursor"],16),state["control"])
+        struct.pack_into("<H",raw,10,state["timer"])
+        raw[12:15]=bytes((state["active"],state["phase"],state["page"]))
+        return dict(stage=state["stage"],section=state["section"],mode=state["mode"],
+            dialogue_hex=raw.hex(),decoded=list(decoded))
+
+    def test_actual_failure_contains_sixteen_real_closures_and_a_seventeenth_ready_box(self):
+        retained=self.retained
+        self.assertEqual(retained["raw_report"]["sha256"],"8446564400671323a9cce759f6881228f09a6b03e26bb7d6e358a9eee2425339")
+        self.assertEqual(retained["raw_report"]["status"],"failed")
+        self.assertEqual(retained["raw_report"]["error"],"Original reentry dialogue exceeded bounded16 pages")
+        cursors=set()
+        for item in retained["accepted_dialogue_inputs"]:
+            before,after=item["before"],item["accepted_response"]
+            self.assertTrue(reentry.scripted_dialogue_ready(self.row(before)))
+            self.assertEqual(reentry.dialogue_response(before,after),"native_box_closing")
+            self.assertEqual(item["pressed"],0x4000)
+            self.assertTrue(item["neutral_consumed"]);cursors.add(before["cursor"])
+        self.assertEqual(len(cursors),16)
+        self.assertNotIn(retained["pending_next_ready"]["cursor"],cursors)
+        self.assertTrue(reentry.scripted_dialogue_ready(self.row(retained["pending_next_ready"])))
+
+    def test_ready_requires_exact_original_ff_phase3_and_the_inventoried_script_mode(self):
+        state=self.retained["pending_next_ready"]
+        self.assertTrue(reentry.scripted_dialogue_ready(self.row(state)))
+        for change in (dict(active=1,phase=2),dict(active=0x80),dict(active=0),dict(phase=4),
+                       dict(stage=0),dict(mode=[10,0,0])):
+            self.assertFalse(reentry.scripted_dialogue_ready(self.row(dict(state,**change))))
+        with self.assertRaises(ValueError):reentry.dialogue_state(dict(self.row(state),dialogue_hex="00"))
+
+    def test_generic_phase_changes_or_same_ready_box_are_not_source_response_evidence(self):
+        before=self.retained["pending_next_ready"]
+        self.assertIsNone(reentry.dialogue_response(before,dict(before)))
+        self.assertIsNone(reentry.dialogue_response(before,dict(before,active=1,phase=2)))
+        self.assertIsNone(reentry.dialogue_response(before,dict(before,active=0x80,phase=3)))
+        self.assertEqual(reentry.dialogue_response(before,dict(before,active=0)),"native_dialogue_retired")
+        self.assertEqual(reentry.dialogue_response(before,dict(before,cursor="0x8014fb7a")),"native_text_cursor_advanced")
+        continuing=dict(before,control=before["control"]&~0x8000)
+        self.assertEqual(reentry.dialogue_response(continuing,dict(continuing,page=1)),"native_page_advanced")
+        self.assertIsNone(reentry.dialogue_response(continuing,dict(continuing,active=0x80,phase=4)))
+
+    def test_seventeen_distinct_native_boxes_can_reach_destination_within_the_existing_deadline(self):
+        states=[item["before"] for item in self.retained["accepted_dialogue_inputs"]]+[self.retained["pending_next_ready"]]
+        current=dict(index=0,held=False);inputs=[];receipts=[];controls=[]
+        def control(seat,bits):
+            controls.append((seat,bits))
+            if bits:current["held"]=True
+            elif current["held"]:current.update(index=current["index"]+1,held=False)
+        def observe(label):
+            if current["index"]==len(states):
+                return [self.row(dict(states[-1],mode=[10,0,0],active=0))]
+            state=states[current["index"]]
+            if current["held"]:state=dict(state,active=0x80,phase=4,timer=50)
+            return [self.row(state,(0x40,0,0x40) if current["held"] else (0,0,0))]
+        with patch.object(reentry.time,"sleep"):
+            rows=reentry.wait_scripted(dict(set_input=control,input_path="offline_native"),inputs,receipts,
+                lambda row:row["mode"][:2]==[10,0],observe,label="Retained source-ready boxes",seconds=180)
+        self.assertEqual(rows[0]["mode"],[10,0,0]);self.assertEqual(len(inputs),17)
+        self.assertEqual(len(controls),34)
+        self.assertEqual(receipts[0]["status"],"native_destination_observed")
+        self.assertEqual(len(receipts[0]["inputs"]),17)
+        self.assertTrue(all(i["neutral_consumed"] for i in inputs))
+        self.assertTrue(all(i["peers"][0]["response"]=="native_box_closing" for i in receipts[0]["inputs"]))
+
+    def test_unconsumed_ready_box_times_out_and_keeps_offered_native_state_and_neutral(self):
+        state=self.retained["pending_next_ready"];controls=[];held=False;inputs=[];receipts=[]
+        def control(seat,bits):
+            nonlocal held
+            controls.append((seat,bits));held=bool(bits)
+        def observe(label):return [self.row(state,(0x40,0,0x40) if held else (0,0,0))]
+        with patch.object(reentry.time,"sleep"),patch.object(reentry.time,"monotonic",side_effect=itertools.count(0,.001)):
+            with self.assertRaisesRegex(reentry.ReentryError,"response timed out"):
+                reentry.wait_scripted(dict(set_input=control,input_path="offline_native"),inputs,receipts,
+                    lambda row:False,observe,label="Unconsumed native box",seconds=1,timeout=.02)
+        self.assertEqual(controls,[(0,0x4000),(0,0)])
+        self.assertFalse(inputs[0]["transition_observed"]);self.assertTrue(inputs[0]["neutral_consumed"])
+        self.assertEqual(receipts[0]["status"],"failed")
+        self.assertEqual(receipts[0]["inputs"][0]["offered"][0]["cursor"],state["cursor"])
+
+    def test_queued_state_waits_to_deadline_without_sending_cross(self):
+        state=dict(self.retained["pending_next_ready"],active=0x80);ctx=dict(set_input=Mock(),input_path="offline_native")
+        receipts=[]
+        with patch.object(reentry.time,"sleep"),patch.object(reentry.time,"monotonic",side_effect=itertools.count(0,.01)):
+            with self.assertRaisesRegex(reentry.ReentryError,"scripted readiness timed out"):
+                reentry.wait_scripted(ctx,[],receipts,lambda row:False,lambda label:[self.row(state)],
+                    label="Queued dialogue",seconds=.05)
+        ctx["set_input"].assert_not_called();self.assertEqual(receipts[0]["inputs"],[])
+
+    def test_continued_native_progress_still_cannot_extend_the_route_deadline(self):
+        state=dict(self.retained["pending_next_ready"]);held=False;inputs=[];receipts=[]
+        def control(seat,bits):
+            nonlocal held
+            if not bits and held:state["cursor"]=hex(int(state["cursor"],16)+2)
+            held=bool(bits)
+        def observe(label):
+            return [self.row(dict(state,active=0x80,phase=4) if held else state,(0x40,0,0x40) if held else (0,0,0))]
+        with patch.object(reentry.time,"sleep"),patch.object(reentry.time,"monotonic",side_effect=itertools.count(0,.001)):
+            with self.assertRaises(reentry.ReentryError):
+                reentry.wait_scripted(dict(set_input=control,input_path="offline_native"),inputs,receipts,
+                    lambda row:False,observe,label="Progress without destination",seconds=.2,timeout=.02)
+        self.assertGreater(len(inputs),1);self.assertLess(len(inputs),100)
+        self.assertFalse(held);self.assertEqual(receipts[0]["status"],"failed")
+
+    def test_empty_peer_observation_is_not_vacuous_destination_success(self):
+        receipts=[];ctx=dict(set_input=Mock(),input_path="offline_native")
+        with self.assertRaisesRegex(reentry.ReentryError,"omitted every owned peer"):
+            reentry.wait_scripted(ctx,[],receipts,lambda row:True,lambda label:[],label="Missing peer",seconds=1)
+        ctx["set_input"].assert_not_called();self.assertEqual(receipts[0]["status"],"failed")
+
+    def test_each_peer_must_show_native_dialogue_response_before_releasing_input(self):
+        state=self.retained["pending_next_ready"];inputs=[];receipts=[];held=False
+        def control(seat,bits):
+            nonlocal held
+            held=bool(bits)
+        def observe(label):
+            pad=(0x40,0,0x40) if held else (0,0,0)
+            return [self.row(dict(state,active=0x80,phase=4) if held else state,pad),self.row(state,pad)]
+        with patch.object(reentry.time,"sleep"),patch.object(reentry.time,"monotonic",side_effect=itertools.count(0,.001)):
+            with self.assertRaisesRegex(reentry.ReentryError,"response timed out"):
+                reentry.wait_scripted(dict(set_input=control,input_path="published_host"),inputs,receipts,
+                    lambda row:False,observe,label="Both peers",seconds=1,timeout=.02)
+        self.assertFalse(inputs[0]["transition_observed"]);self.assertTrue(inputs[0]["neutral_consumed"])
 
 
 class NativeReentryOwnershipTests(unittest.TestCase):
@@ -253,6 +385,19 @@ class OriginalSourceTests(unittest.TestCase):
         self.assertEqual(word("title",0x800EA904),0x24840CC4)
         self.assertEqual(word("exe",0x8001BB40),0xA123005F)  # saved unlocks -> PLAY+5F
         self.assertEqual(word("exe",0x8001E16C),0xA0A2005F)  # New Game replaces unlocks with1
+        # Exact phase3 readiness, real closing response, continued parser and
+        # text-position advance; guard these full routines in the runtime.
+        self.assertEqual(word("exe",0x800227F8),0x240200FF)
+        self.assertEqual(word("exe",0x80022800),0xA222000C)
+        self.assertEqual(word("exe",0x80022804),0xA223000D)
+        self.assertEqual(word("exe",0x80022004),0x90434570)  # native edge byte
+        self.assertEqual(word("exe",0x800220F4),0x24030004)
+        self.assertEqual(word("exe",0x80022100),0xA263000D)
+        self.assertEqual(word("exe",0x80022108),0xA262000C)
+        self.assertEqual(word("exe",0x8002216C),0x0C0088D3)  # continued parser
+        self.assertEqual(word("exe",0x800225EC),0x24420002)
+        self.assertEqual(word("exe",0x800225F8),0xAE220000)
+        self.assertEqual(word("exe",0x8002231C),0xA260000C)  # actual retirement
 
 
 if __name__=="__main__":unittest.main()

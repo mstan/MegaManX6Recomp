@@ -1,0 +1,723 @@
+{
+  "schema": 1,
+  "kind": "retained_native_reentry_dialogue_budget_failure_analysis",
+  "status": "historical_failed_report_preserved_not_reclassified",
+  "raw_report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-reentry-v16-4cdfe4d-local-new-game\\qualification.json",
+    "sha256": "8446564400671323a9cce759f6881228f09a6b03e26bb7d6e358a9eee2425339",
+    "status": "failed",
+    "case_status": "failed_behavior",
+    "error": "Original reentry dialogue exceeded bounded16 pages",
+    "observations": 2223,
+    "inputs": 24
+  },
+  "candidate_exe_sha256": "eeb5754a53a6d10aeac13b294ce3325a7e2b8a6180b20ce001a3800401fcec6d",
+  "original": {
+    "raw_disc": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\disc\\Mega Man X6 (USA) (v1.1).bin",
+    "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "archive_sha256": "55b03e4ecc13d6110ff300f80b7000b0f97234e19f1b846aa2b885eece30d80f",
+    "members": [
+      {
+        "index": 16,
+        "sector": 381,
+        "size": 33946,
+        "sha256": "c9211aee86c5e7377b7716bd698102da1aed8c57a128e90507259cf9f6093ecf",
+        "role": "menu"
+      },
+      {
+        "index": 18,
+        "sector": 401,
+        "size": 32488,
+        "sha256": "3ae703ad03b2bbc4b71fc09e5f418e1e87ffd49a4a6a4240e69172fb87036166",
+        "role": "title"
+      }
+    ]
+  },
+  "accepted_dialogue_inputs": [
+    {
+      "input_index": 8,
+      "status": "native_response_and_neutral_observed",
+      "pressed": 16384,
+      "before": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          3,
+          0
+        ],
+        "cursor": "0x8014f634",
+        "control": 42081,
+        "timer": 0,
+        "active": 255,
+        "phase": 3,
+        "page": 0
+      },
+      "accepted_response": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          3,
+          0
+        ],
+        "cursor": "0x8014f634",
+        "control": 42081,
+        "timer": 48,
+        "active": 128,
+        "phase": 4,
+        "page": 0
+      },
+      "decoded_at_response": [
+        64,
+        64,
+        0
+      ],
+      "neutral_consumed": true
+    },
+    {
+      "input_index": 9,
+      "status": "native_response_and_neutral_observed",
+      "pressed": 16384,
+      "before": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          3,
+          0
+        ],
+        "cursor": "0x8014f68e",
+        "control": 42081,
+        "timer": 0,
+        "active": 255,
+        "phase": 3,
+        "page": 0
+      },
+      "accepted_response": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          3,
+          0
+        ],
+        "cursor": "0x8014f68e",
+        "control": 42081,
+        "timer": 49,
+        "active": 128,
+        "phase": 4,
+        "page": 0
+      },
+      "decoded_at_response": [
+        64,
+        64,
+        0
+      ],
+      "neutral_consumed": true
+    },
+    {
+      "input_index": 10,
+      "status": "native_response_and_neutral_observed",
+      "pressed": 16384,
+      "before": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          3,
+          0
+        ],
+        "cursor": "0x8014f6e2",
+        "control": 42078,
+        "timer": 0,
+        "active": 255,
+        "phase": 3,
+        "page": 0
+      },
+      "accepted_response": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          3,
+          0
+        ],
+        "cursor": "0x8014f6e2",
+        "control": 42078,
+        "timer": 49,
+        "active": 128,
+        "phase": 4,
+        "page": 0
+      },
+      "decoded_at_response": [
+        64,
+        64,
+        0
+      ],
+      "neutral_consumed": true
+    },
+    {
+      "input_index": 11,
+      "status": "native_response_and_neutral_observed",
+      "pressed": 16384,
+      "before": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          3,
+          0
+        ],
+        "cursor": "0x8014f754",
+        "control": 42081,
+        "timer": 0,
+        "active": 255,
+        "phase": 3,
+        "page": 0
+      },
+      "accepted_response": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          3,
+          0
+        ],
+        "cursor": "0x8014f754",
+        "control": 42081,
+        "timer": 50,
+        "active": 128,
+        "phase": 4,
+        "page": 0
+      },
+      "decoded_at_response": [
+        64,
+        0,
+        64
+      ],
+      "neutral_consumed": true
+    },
+    {
+      "input_index": 12,
+      "status": "native_response_and_neutral_observed",
+      "pressed": 16384,
+      "before": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          3,
+          0
+        ],
+        "cursor": "0x8014f796",
+        "control": 42078,
+        "timer": 0,
+        "active": 255,
+        "phase": 3,
+        "page": 0
+      },
+      "accepted_response": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          3,
+          0
+        ],
+        "cursor": "0x8014f796",
+        "control": 42078,
+        "timer": 50,
+        "active": 128,
+        "phase": 4,
+        "page": 0
+      },
+      "decoded_at_response": [
+        64,
+        0,
+        64
+      ],
+      "neutral_consumed": true
+    },
+    {
+      "input_index": 13,
+      "status": "native_response_and_neutral_observed",
+      "pressed": 16384,
+      "before": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          4,
+          0
+        ],
+        "cursor": "0x8014f7c4",
+        "control": 42081,
+        "timer": 0,
+        "active": 255,
+        "phase": 3,
+        "page": 0
+      },
+      "accepted_response": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          4,
+          0
+        ],
+        "cursor": "0x8014f7c4",
+        "control": 42081,
+        "timer": 49,
+        "active": 128,
+        "phase": 4,
+        "page": 0
+      },
+      "decoded_at_response": [
+        64,
+        64,
+        0
+      ],
+      "neutral_consumed": true
+    },
+    {
+      "input_index": 14,
+      "status": "native_response_and_neutral_observed",
+      "pressed": 16384,
+      "before": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          5,
+          0
+        ],
+        "cursor": "0x8014f84c",
+        "control": 42078,
+        "timer": 0,
+        "active": 255,
+        "phase": 3,
+        "page": 0
+      },
+      "accepted_response": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          5,
+          0
+        ],
+        "cursor": "0x8014f84c",
+        "control": 42078,
+        "timer": 50,
+        "active": 128,
+        "phase": 4,
+        "page": 0
+      },
+      "decoded_at_response": [
+        64,
+        0,
+        64
+      ],
+      "neutral_consumed": true
+    },
+    {
+      "input_index": 15,
+      "status": "native_response_and_neutral_observed",
+      "pressed": 16384,
+      "before": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          5,
+          0
+        ],
+        "cursor": "0x8014f8c2",
+        "control": 42078,
+        "timer": 0,
+        "active": 255,
+        "phase": 3,
+        "page": 0
+      },
+      "accepted_response": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          5,
+          0
+        ],
+        "cursor": "0x8014f8c2",
+        "control": 42078,
+        "timer": 50,
+        "active": 128,
+        "phase": 4,
+        "page": 0
+      },
+      "decoded_at_response": [
+        64,
+        0,
+        64
+      ],
+      "neutral_consumed": true
+    },
+    {
+      "input_index": 16,
+      "status": "native_response_and_neutral_observed",
+      "pressed": 16384,
+      "before": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          5,
+          0
+        ],
+        "cursor": "0x8014f904",
+        "control": 42081,
+        "timer": 0,
+        "active": 255,
+        "phase": 3,
+        "page": 0
+      },
+      "accepted_response": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          5,
+          0
+        ],
+        "cursor": "0x8014f904",
+        "control": 42081,
+        "timer": 50,
+        "active": 128,
+        "phase": 4,
+        "page": 0
+      },
+      "decoded_at_response": [
+        64,
+        0,
+        64
+      ],
+      "neutral_consumed": true
+    },
+    {
+      "input_index": 17,
+      "status": "native_response_and_neutral_observed",
+      "pressed": 16384,
+      "before": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          7,
+          0
+        ],
+        "cursor": "0x8014f924",
+        "control": 42131,
+        "timer": 0,
+        "active": 255,
+        "phase": 3,
+        "page": 0
+      },
+      "accepted_response": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          7,
+          0
+        ],
+        "cursor": "0x8014f924",
+        "control": 42131,
+        "timer": 48,
+        "active": 128,
+        "phase": 4,
+        "page": 0
+      },
+      "decoded_at_response": [
+        64,
+        64,
+        0
+      ],
+      "neutral_consumed": true
+    },
+    {
+      "input_index": 18,
+      "status": "native_response_and_neutral_observed",
+      "pressed": 16384,
+      "before": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          9,
+          0
+        ],
+        "cursor": "0x8014f974",
+        "control": 42067,
+        "timer": 0,
+        "active": 255,
+        "phase": 3,
+        "page": 0
+      },
+      "accepted_response": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          9,
+          0
+        ],
+        "cursor": "0x8014f974",
+        "control": 42067,
+        "timer": 50,
+        "active": 128,
+        "phase": 4,
+        "page": 0
+      },
+      "decoded_at_response": [
+        64,
+        0,
+        64
+      ],
+      "neutral_consumed": true
+    },
+    {
+      "input_index": 19,
+      "status": "native_response_and_neutral_observed",
+      "pressed": 16384,
+      "before": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          11,
+          0
+        ],
+        "cursor": "0x8014f9d0",
+        "control": 42067,
+        "timer": 0,
+        "active": 255,
+        "phase": 3,
+        "page": 0
+      },
+      "accepted_response": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          11,
+          0
+        ],
+        "cursor": "0x8014f9d0",
+        "control": 42067,
+        "timer": 50,
+        "active": 128,
+        "phase": 4,
+        "page": 0
+      },
+      "decoded_at_response": [
+        64,
+        0,
+        64
+      ],
+      "neutral_consumed": true
+    },
+    {
+      "input_index": 20,
+      "status": "native_response_and_neutral_observed",
+      "pressed": 16384,
+      "before": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          11,
+          0
+        ],
+        "cursor": "0x8014fa28",
+        "control": 42081,
+        "timer": 0,
+        "active": 255,
+        "phase": 3,
+        "page": 0
+      },
+      "accepted_response": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          11,
+          0
+        ],
+        "cursor": "0x8014fa28",
+        "control": 42081,
+        "timer": 50,
+        "active": 128,
+        "phase": 4,
+        "page": 0
+      },
+      "decoded_at_response": [
+        64,
+        0,
+        64
+      ],
+      "neutral_consumed": true
+    },
+    {
+      "input_index": 21,
+      "status": "native_response_and_neutral_observed",
+      "pressed": 16384,
+      "before": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          11,
+          0
+        ],
+        "cursor": "0x8014fa7a",
+        "control": 42081,
+        "timer": 0,
+        "active": 255,
+        "phase": 3,
+        "page": 0
+      },
+      "accepted_response": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          11,
+          0
+        ],
+        "cursor": "0x8014fa7a",
+        "control": 42081,
+        "timer": 50,
+        "active": 128,
+        "phase": 4,
+        "page": 0
+      },
+      "decoded_at_response": [
+        64,
+        0,
+        64
+      ],
+      "neutral_consumed": true
+    },
+    {
+      "input_index": 22,
+      "status": "native_response_and_neutral_observed",
+      "pressed": 16384,
+      "before": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          11,
+          0
+        ],
+        "cursor": "0x8014fab8",
+        "control": 42067,
+        "timer": 0,
+        "active": 255,
+        "phase": 3,
+        "page": 0
+      },
+      "accepted_response": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          11,
+          0
+        ],
+        "cursor": "0x8014fab8",
+        "control": 42067,
+        "timer": 49,
+        "active": 128,
+        "phase": 4,
+        "page": 0
+      },
+      "decoded_at_response": [
+        64,
+        64,
+        0
+      ],
+      "neutral_consumed": true
+    },
+    {
+      "input_index": 23,
+      "status": "native_response_and_neutral_observed",
+      "pressed": 16384,
+      "before": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          11,
+          0
+        ],
+        "cursor": "0x8014fb12",
+        "control": 42067,
+        "timer": 0,
+        "active": 255,
+        "phase": 3,
+        "page": 0
+      },
+      "accepted_response": {
+        "stage": 11,
+        "section": 0,
+        "mode": [
+          20,
+          11,
+          0
+        ],
+        "cursor": "0x8014fb12",
+        "control": 42067,
+        "timer": 50,
+        "active": 128,
+        "phase": 4,
+        "page": 0
+      },
+      "decoded_at_response": [
+        64,
+        0,
+        64
+      ],
+      "neutral_consumed": true
+    }
+  ],
+  "pending_next_ready": {
+    "stage": 11,
+    "section": 0,
+    "mode": [
+      20,
+      11,
+      0
+    ],
+    "cursor": "0x8014fb78",
+    "control": 42081,
+    "timer": 0,
+    "active": 255,
+    "phase": 3,
+    "page": 0
+  },
+  "analysis": {
+    "accepted_inputs": 16,
+    "distinct_ready_cursors": 16,
+    "every_ready_is_ff_phase3": true,
+    "every_response_is_80_phase4": true,
+    "seventeenth_distinct_ready_observed": true,
+    "finding": "Unsupported helper16-page cap stopped a progressing original New Game story; no native game defect is established"
+  },
+  "limits": [
+    "This reanalysis is not a completed reentry or artwork pass",
+    "The failed native report and its original status remain unchanged",
+    "No exact total intro dialogue count or all-route bound is inferred",
+    "No native launch or title build was performed for this correction"
+  ]
+}
