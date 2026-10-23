@@ -90,6 +90,13 @@ New comparisons keep these predicates separate for each seat:
   changed start address prevents attributing that snapshot to the selected
   note. Its original event lifetime remains separately reported.
 
+The pending bank is a future KEYON latch, **not** the current decoder bank.
+Hardware KEYON consumes/clears it, and private play initializes it to0 while
+setting the current sample bank. Applicable final snapshots require the
+current bank to match the event and the pending latch to be0. A nonzero
+pending latch, including31 when the current bank is31, leaves a future/reuse
+gap and refuses attribution.
+
 `END_STOP` means envelope0/release; it need not clear `active`. Its post-stop
 repeat address is not the selected sample identity. Reverb/mode and effective
 volume fields are retained without inventing a stereo-gain, reverb or PCM

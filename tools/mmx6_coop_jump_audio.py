@@ -381,7 +381,7 @@ def final_dsp_checks(events,actors,hardware,private):
         event=actor["keyon"];v=event["v"]
         row=(hardware["voices"][v] if v<24 else private["voices"][v-24])
         later=any(e["v"]==v and e["kind"]=="KEYON" and e["seq"]>event["seq"]for e in events)
-        consistent=not later and row["sample_bank"]==row["pending_bank"]==event["sample_bank"] and row["start"]==event["addr"]
+        consistent=not later and row["sample_bank"]==event["sample_bank"] and row["pending_bank"]==0 and row["start"]==event["addr"]
         prefix=f"p{actor['seat']+1}"
         checks[prefix+"_final_dsp_attribution"]=consistent
         checks[prefix+"_final_envelope_terminated"]=consistent and row["env"]==0 and row["env_phase"]==3

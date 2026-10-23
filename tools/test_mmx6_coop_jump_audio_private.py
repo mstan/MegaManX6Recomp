@@ -162,11 +162,11 @@ class ComparisonTests(unittest.TestCase):
     def test_stale_dsp_binding_pending_bank_or_later_keyon_cannot_qualify_old_note(self):
         hw=audio.parse_voices(hardware(),require_banks=True);pv=audio.parse_private_voices(private_voices())
         for row,e in ((hw["voices"][20],self.first),(pv["voices"][20],self.second)):
-            row.update(start=e["addr"],sample_bank=e["sample_bank"],pending_bank=e["sample_bank"])
+            row.update(start=e["addr"],sample_bank=e["sample_bank"],pending_bank=0)
         actors=self.compare()["actors"]
         checks,_=audio.final_dsp_checks(self.events,actors,hw,pv)
         self.assertTrue(all(checks.values()),checks)
-        for field,value in (("sample_bank",30),("pending_bank",30),("mode",1),("pitch",1000),("env",1)):
+        for field,value in (("sample_bank",30),("pending_bank",30),("pending_bank",31),("mode",1),("pitch",1000),("env",1)):
             old=pv["voices"][20][field];pv["voices"][20][field]=value
             checks,_=audio.final_dsp_checks(self.events,actors,hw,pv)
             self.assertFalse(all(checks.values()),(field,checks));pv["voices"][20][field]=old
@@ -202,7 +202,7 @@ class ContextTests(unittest.TestCase):
                 def identify(self,e,driver):return dict(tone=x if e["v"]==20 else z,sample_matches=True,sample_bank=e["sample_bank"])
             hw,pv=hardware(),private_voices()
             hw["voices"][20].update(start="0x52A20") #338464, not the END_STOP repeat address.
-            pv["voices"][20].update(start=f"0x{z['offset']:05X}",sample_bank=31,pending_bank=31)
+            pv["voices"][20].update(start=f"0x{z['offset']:05X}",sample_bank=31,pending_bank=0)
             def request(command,**fields):
                 self.assertIn(command,("spu_voices","spu_private_voices"))
                 return hw if command=="spu_voices" else pv
