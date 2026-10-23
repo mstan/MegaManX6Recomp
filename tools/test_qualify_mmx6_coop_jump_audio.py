@@ -62,7 +62,8 @@ class ProtocolTests(unittest.TestCase):
 
     def test_hold_keeps_native_publication_receipt_and_neutralizes(self):
         start=runner.debug.parse_diagnostic(diagnostic(tick=10));start=replace(start,native_timer=20)
-        end=replace(start,tick=12,native_timer=21)
+        jumping=replace(start.players[1],action=6,y_raw=start.players[1].y_raw-65536)
+        end=replace(start,tick=12,native_timer=21,players=(start.players[0],jumping))
         report={};route=runner.AudioHostRoute(Mock(),report,1)
         route.sample=Mock(return_value=start);route.advance=Mock(return_value=end)
         route.set=Mock(return_value=dict(ack="synthetic"))
@@ -72,6 +73,33 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(route.set.call_args_list[-1].args,(1,0))
         json.dumps(receipt) # The observer stores this directly in its report.
         self.assertEqual(report["accepted_windows"],[receipt])
+
+    def test_first_world_update_cannot_release_cross_before_native_jump_consumption(self):
+        start=runner.debug.parse_diagnostic(diagnostic(tick=10));start=replace(start,native_timer=20)
+        delayed=replace(start,tick=11,native_timer=21)
+        jumping=replace(start.players[1],action=6,y_raw=start.players[1].y_raw-65536)
+        held=replace(start,tick=12,native_timer=22,players=(start.players[0],jumping))
+        report={};events=[];route=runner.AudioHostRoute(Mock(),report,1)
+        samples=iter((start,held))
+        def sample(label):events.append(("sample",label));return next(samples)
+        def control(seat,bits):events.append(("input",bits));return dict(ack="synthetic")
+        route.sample=sample;route.advance=Mock(return_value=delayed);route.set=control
+        receipt=route.hold(1,runner.audio.CROSS,1,"delayed P2 capture")
+        self.assertEqual(receipt["end"]["players"][1]["action"],6)
+        self.assertEqual(receipt["actual_native_ticks"],2)
+        self.assertEqual(events[-1],("input",0))
+        self.assertIn("held acceptance",events[-2][1])
+
+    def test_missing_held_ascent_expires_at_native_bound_and_still_neutralizes(self):
+        start=runner.debug.parse_diagnostic(diagnostic(tick=10));start=replace(start,native_timer=20)
+        delayed=replace(start,tick=11,native_timer=21)
+        expired=replace(start,tick=131,native_timer=141)
+        route=runner.AudioHostRoute(Mock(),{},1)
+        route.sample=Mock(side_effect=(start,expired));route.advance=Mock(return_value=delayed);route.set=Mock()
+        with self.assertRaisesRegex(runner.debug.DebugError,"held jump"):
+            route.hold(1,runner.audio.CROSS,1,"unaccepted P2")
+        self.assertEqual(route.set.call_args_list[-1].args,(1,0))
+        self.assertNotIn("accepted_windows",route.report)
 
     def test_hold_refuses_stalled_or_regressed_publications_and_preserves_original_error(self):
         start=runner.debug.parse_diagnostic(diagnostic(tick=10));start=replace(start,native_timer=20)

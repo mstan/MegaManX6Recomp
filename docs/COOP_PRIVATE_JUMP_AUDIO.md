@@ -172,3 +172,13 @@ private P2 voice44/bank31, both reach original end markers and zero final
 envelopes, and immutable source banks remain unchanged. Opposite order,
 paired audio and other action families remain unverified; prior exact-image
 failures are retained and R4/R12 are not closed by this bounded ground jump.
+
+The first reverse-order trial retained an input setup failure: its first
+post-input world publication still showed idle Zero, then Zero was airborne
+in action7 during cleanup after release. One world tick did not prove host
+sample consumption. The local audio adapter now holds Cross through observed
+native action6 ascent, with the existing wall deadline and120-native-update
+bound, before releasing. It still requires the independent original body and
+source acceptance checks afterward. The21 runner/protocol tests include that
+one-publication delay, a missing-ascent bound and neutral cleanup; the failed
+native attempt is retained, and reverse-order audio remains pending a fresh run.

@@ -131,16 +131,32 @@ class AudioHostRoute(host.HostRoute):
         if type(frames) is not int or not 1<=frames<=120:
             raise ValueError("Require bounded native/publication input progress")
         start=self.sample(label+" start");original=None
+        deadline=time.monotonic()+self.timeout
         try:
             acknowledgment=self.set(seat,bits)
             end=self.advance(start,frames,label)
-            native=(end.native_timer-start.native_timer)&0xFFFFFFFF
-            publications=(end.tick-start.tick)&0xFFFFFFFF
-            if not 0<publications<0x80000000 or not frames<=native<0x80000000:
-                raise debug.DebugError("Accepted hold lacks forward native/publication evidence")
+            while True:
+                native=(end.native_timer-start.native_timer)&0xFFFFFFFF
+                publications=(end.tick-start.tick)&0xFFFFFFFF
+                if not 0<publications<0x80000000 or not frames<=native<0x80000000:
+                    raise debug.DebugError("Accepted hold lacks forward native/publication evidence")
+                if bits!=audio.CROSS:break
+                if native>120:
+                    raise debug.DebugError("Original held jump exceeded its native observation bound")
+                before,held=start.players[seat],end.players[seat]
+                if (held.state==1 and held.character==before.character and held.hp==before.hp and
+                        held.action==6 and held.y_raw<before.y_raw):break
+                # One world update may consume the previous host sample. Keep
+                # Cross held until actual native ascent, rather than releasing
+                # on that first publication and seeing action7 afterward.
+                if native>=120 or time.monotonic()>=deadline:
+                    raise debug.DebugError("Original held jump never reached observed native action6 ascent")
+                time.sleep(.005)
+                end=self.sample(label+" held acceptance")
             receipt=dict(label=label,seat=seat,pressed=bits,requested_native_ticks=frames,
                          acknowledgment=acknowledgment,start=start.json(),end=end.json(),
-                         actual_native_ticks=native,actual_publications=publications)
+                         actual_native_ticks=native,actual_publications=publications,
+                         held_jump_observed=bits==audio.CROSS)
             self.report.setdefault("accepted_windows",[]).append(receipt)
             return receipt
         except BaseException as error:
