@@ -464,14 +464,14 @@
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -557,9 +557,91 @@
               "Raw artwork-pending reports remain unchanged; visual review is recorded here."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "754f8cab43bd67361587c37814fbf7a45c9786bc",
+            "build_identity": {
+              "exe_sha256": "986e159870cc1abad7f23b80bac8f606fb1be444028891bc5d534bcd93498617",
+              "declared_manifest_sha256": "fa0f03408e1ec84039c4a204273a21fcd4314ea2b1673661876097ed00549446",
+              "compiled_source_commit": "754f8cab43bd67361587c37814fbf7a45c9786bc",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "loader": "default Seamless Loading",
+              "input": "owned offline native pads",
+              "rollback": false
+            },
+            "action": "Native P2 Right/Circle/Cross creates three live dash trails; P1 pauses, enters both original Continue/Quit pages, cancels, and resumes the original dash.",
+            "outcome": "All native case/resource/freeze/resume/finite-retirement checks pass; root independently inspected all3 local and all6 paired composed captures. Bodies/meters/live retained dash effects are hidden on both native confirmation pages.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-local-live-effects\\qualification.json",
+                "sha256": "431dac9b271195d586a0ea421fda9f6bcdffcd0ddae9108bf2d86eabc08cc615"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v14-754f8ca\\candidate.json",
+                "sha256": "b7827b987decd6200e6022a066e3d1a9a1fac28fa1ee232d10755a887d5a8ed8"
+              },
+              {
+                "path": "docs/evidence/mmx6-native-quit/manifest-bound-754f8ca-live-effects-reviewed.json",
+                "sha256": "addb46e4ea116eeeb19a95f35fef6a4b9e3ba46c5bd3959b0389dc9bfccdc576"
+              }
+            ],
+            "limits": [
+              "Exact preserved754f8ca/executable986e1598, intro/default loader and X/P1+Zero/P2 only.",
+              "Two processes on the same physical machine with numeric127.0.0.1 UDP, delay3 and rollback/network user states disabled.",
+              "Native P2 dash with three trails is the live-effect class exercised. Other attack families, opposite roster, all campaign scenes and cross-machine/OS/CPU remain unverified.",
+              "Final Quit and acquired-progress/current-data reentry remain separate R15 obligations.",
+              "Raw artwork-pending reports remain unchanged; this capsule records root visual review. Independent captures do not establish identical peer render frames."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "754f8cab43bd67361587c37814fbf7a45c9786bc",
+            "build_identity": {
+              "exe_sha256": "986e159870cc1abad7f23b80bac8f606fb1be444028891bc5d534bcd93498617",
+              "declared_manifest_sha256": "fa0f03408e1ec84039c4a204273a21fcd4314ea2b1673661876097ed00549446",
+              "compiled_source_commit": "754f8cab43bd67361587c37814fbf7a45c9786bc",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "loader": "default Seamless Loading",
+              "input": "published host via same-machine delay3 numeric127 UDP",
+              "rollback": false
+            },
+            "action": "Native P2 Right/Circle/Cross creates three live dash trails; P1 pauses, enters both original Continue/Quit pages, cancels, and resumes the original dash.",
+            "outcome": "All native case/resource/freeze/resume/finite-retirement checks pass; root independently inspected all3 local and all6 paired composed captures. Bodies/meters/live retained dash effects are hidden on both native confirmation pages.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-pair-live-effects\\qualification.json",
+                "sha256": "64955c6b342b2e0cb03e6f44ad82bf933c0daeac2b48049cc0c7cb70b0bb4385"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v14-754f8ca\\candidate.json",
+                "sha256": "b7827b987decd6200e6022a066e3d1a9a1fac28fa1ee232d10755a887d5a8ed8"
+              },
+              {
+                "path": "docs/evidence/mmx6-native-quit/manifest-bound-754f8ca-live-effects-reviewed.json",
+                "sha256": "addb46e4ea116eeeb19a95f35fef6a4b9e3ba46c5bd3959b0389dc9bfccdc576"
+              }
+            ],
+            "limits": [
+              "Exact preserved754f8ca/executable986e1598, intro/default loader and X/P1+Zero/P2 only.",
+              "Two processes on the same physical machine with numeric127.0.0.1 UDP, delay3 and rollback/network user states disabled.",
+              "Native P2 dash with three trails is the live-effect class exercised. Other attack families, opposite roster, all campaign scenes and cross-machine/OS/CPU remain unverified.",
+              "Final Quit and acquired-progress/current-data reentry remain separate R15 obligations.",
+              "Raw artwork-pending reports remain unchanged; this capsule records root visual review. Independent captures do not establish identical peer render frames."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Exact986e1598 local and same-machine pairs pass primary Continue/Quit-page native controls and inspected composed absence of gameplay bodies/meters. Preexisting native attack effects were absent; live-effect suppression and fullR7 remain unverified."
+        "limitations": "Bounded exact986e1598 intro X/P1+Zero/P2: both original P1 Continue/Quit pages hide bodies/meters and three native live dash trails, retain their frozen private state, then resume/retire after cancel. Final Quit/current-data reentry, other effect families/rosters/campaign scenes and cross-machine remain separate/unverified."
       }
     },
     {
