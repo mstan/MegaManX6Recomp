@@ -1,0 +1,275 @@
+{
+  "schema": 1,
+  "kind": "reviewed_private_checkpoint_prerequisite_setup",
+  "result": "setup_completed_composed_frame_reviewed",
+  "ledger_status": "unverified",
+  "prerequisite_bypass": true,
+  "ordinary_input_evidence_tainted": true,
+  "candidate_source": "e2e47e66e119425d6e9235cd3511209bf1cc1aad",
+  "exe_sha256": "229ffec7a7dabda9742653264e1d023adde408602003df7f48b4c4d3f758d8e6",
+  "manifest_sha256": "e186d1d0908b5a0341de84261272c30e14c4ab83a6fabbad30e6da9df5d4cefb",
+  "raw_report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\checkpoint-v12-e2e47e6-intro-cp1-camera-target-admitted\\qualification.json",
+    "sha256": "da75ad0bb6230f2868f01858d4345a6b9af37b8857da6f79fee27419a807802e"
+  },
+  "compiled_candidate": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v12-e2e47e6\\candidate.json",
+    "sha256": "24f75e4e4c3f88dcc9c6e705900aeeb02910890c73d4705ef7d27dc1fe9c49cf"
+  },
+  "original_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+  "target": {
+    "id": "s00-a0-c01",
+    "stage": 0,
+    "section": 0,
+    "checkpoint": 1,
+    "stage_name": "Intro / Eurasia ruins",
+    "stage_role": "campaign",
+    "table": "80073134",
+    "record": "8007212C",
+    "player": {
+      "x": 2112,
+      "y": 1072
+    },
+    "camera": {
+      "x": 1968,
+      "y": 944,
+      "min_x": 1968,
+      "max_x": 5120,
+      "min_y": 944,
+      "max_y": 944
+    },
+    "arrival": 64,
+    "status": "unverified",
+    "checks": {
+      "terrain_collision_scroll": "unverified",
+      "enemies_interactions": "unverified",
+      "music_sfx": "unverified",
+      "checkpoint_retry": "unverified",
+      "boss": "unverified",
+      "exit_actual_transition": "unverified"
+    }
+  },
+  "checks": {
+    "requested_tuple": true,
+    "original_initializer_observed_once": true,
+    "inventoried_record": true,
+    "fixture_bypass_retained": true,
+    "native_gameplay": true,
+    "publication_after_completed_receipt": true,
+    "enrolled_living_idle_roster": true,
+    "native_gameplay_tuple": true,
+    "native_entry_gates_clear": true,
+    "native_p1_visible_idle_grounded": true,
+    "native_previous_position_settled": true,
+    "native_p1_agrees_with_publication": true,
+    "p1_at_authored_x": true,
+    "selected_camera_bounds": true,
+    "camera_inside_authored_bounds": true,
+    "actors_in_current_native_viewport": true,
+    "display_enabled": true
+  },
+  "resident_source_evidence": {
+    "verified": true,
+    "source_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "spans": [
+      {
+        "address": "80028EBC",
+        "size": 960,
+        "sha256": "4089a81cde8dc3d2f2c93cb57f1ba278ae6551a9b5a4a72861600c776610ceca"
+      },
+      {
+        "address": "8002927C",
+        "size": 224,
+        "sha256": "d9ed7c9aa57753adbcead391e60d469bf4c2f491556743b82c1ef014804e0ace"
+      },
+      {
+        "address": "800294B4",
+        "size": 132,
+        "sha256": "dbbe58ad96183f5246ae4ae8d9618e800cc07b889c992d6423e384fe0b828da8"
+      },
+      {
+        "address": "80029B8C",
+        "size": 396,
+        "sha256": "d7935b9037f6b1df0020983af5feb7accfa5ff87357d7e1089563d7a70d6b058"
+      },
+      {
+        "address": "8002A254",
+        "size": 20,
+        "sha256": "9a76756a228e340e960ce17f8dd26714f2dedc0ee4816d9e351f20689bd95587"
+      },
+      {
+        "address": "8002A33C",
+        "size": 112,
+        "sha256": "64d048352812e4978ca1ed0fcc3edd590db9311fb7a08ef19a216024f7f980c5"
+      },
+      {
+        "address": "8005211C",
+        "size": 484,
+        "sha256": "7abab3ed7e47891f68c687a136683ce42d45e8a2d590b85016f2d193f4c7a240"
+      },
+      {
+        "address": "8006DE94",
+        "size": 4,
+        "sha256": "bc20286b0ffa86dfd8f5f773c6881b0d84c0933b723e9195643b46ed34bca8ab"
+      },
+      {
+        "address": "8007212C",
+        "size": 36,
+        "sha256": "7875f0a7e39a4fc9d563c87181b2d58a7e9b1281ac2db1f3d0bbddf7ce441a7c"
+      },
+      {
+        "address": "80073134",
+        "size": 8,
+        "sha256": "4ed372c528b16f3f21f32642046987fbc5ada461e6548e849613da0ee6c31aef"
+      },
+      {
+        "address": "80073300",
+        "size": 4,
+        "sha256": "c1b77b08a648d56869d3a8946ad9974de1f18338b543d19d285270c53fca58ea"
+      },
+      {
+        "address": "8007349C",
+        "size": 4,
+        "sha256": "6606ea3db93fc0dec5be3e8a8de19f58d67fb5e5f262141297edf13a81f1692e"
+      },
+      {
+        "address": "800791E8",
+        "size": 136,
+        "sha256": "a4e91ddfa0ac5997b1054ded8dba4dff98e83d1c4d805254f2c08c89bc52afbc"
+      },
+      {
+        "address": "80079D70",
+        "size": 4,
+        "sha256": "cf54956d97bf0d559e0e973225da06f72f041880658a52f88113dc26e7d2feaa"
+      },
+      {
+        "address": "800FA25C",
+        "size": 8,
+        "sha256": "109e11f1f90c33a56affb92787293bf8a682ec5005fed673a882b9d3df118f72"
+      },
+      {
+        "address": "800FA6E0",
+        "size": 4,
+        "sha256": "b866e554ad4ec8f23cf7012ba8cbbf1d0b47e8089c8b0a94c6023e93c88908de"
+      }
+    ]
+  },
+  "camera": {
+    "x": 1968,
+    "y": 944,
+    "current_bounds": [
+      5120,
+      1968,
+      944,
+      75
+    ],
+    "target_bounds": [
+      5120,
+      1968,
+      944,
+      896
+    ],
+    "native_offset": 96
+  },
+  "composed_capture": {
+    "surface": "composed_renderer_output",
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\checkpoint-v12-e2e47e6-intro-cp1-camera-target-admitted\\baseline\\checkpoint-present.png",
+    "sha256": "d022aa88e409949f6e4a30acab4c38465d7589d5dec3de072a7cefa4acdf610f",
+    "before": {
+      "id": 1496,
+      "ok": true,
+      "seq": 0,
+      "wrote": 0
+    },
+    "acknowledgement": {
+      "id": 1497,
+      "ok": true,
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\checkpoint-v12-e2e47e6-intro-cp1-camera-target-admitted\\baseline\\checkpoint-present.png",
+      "staged": true,
+      "seq": 0
+    },
+    "completion": {
+      "id": 1498,
+      "ok": true,
+      "seq": 1,
+      "wrote": 1
+    }
+  },
+  "review": "Root inspected the completed composed image: original intro catwalk and both living X/Zero bodies are visible with their meters; frame is not black.",
+  "narrow_target_trace": {
+    "total": 774,
+    "available": 774,
+    "emitted": 774,
+    "changed_writes": [
+      {
+        "seq": 10,
+        "addr": "0x00097222",
+        "old": "0x00000080",
+        "new": "0x00000000",
+        "pc": "0x8002C2E8",
+        "w": 1,
+        "frame": 2646
+      },
+      {
+        "seq": 11,
+        "addr": "0x00097223",
+        "old": "0x00000003",
+        "new": "0x00000000",
+        "pc": "0x8002C2E8",
+        "w": 1,
+        "frame": 2646
+      },
+      {
+        "seq": 12,
+        "addr": "0x00097222",
+        "old": "0x00000000",
+        "new": "0x000003B0",
+        "pc": "0x80029C70",
+        "w": 2,
+        "frame": 2647
+      },
+      {
+        "seq": 14,
+        "addr": "0x00097222",
+        "old": "0x000003B0",
+        "new": "0x00000380",
+        "pc": "0x800521F4",
+        "w": 2,
+        "frame": 2652
+      }
+    ]
+  },
+  "owned_process": {
+    "owned_pid": 67024,
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "retained_failures": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\checkpoint-v12-e2e47e6-intro-cp1\\qualification.json",
+      "sha256": "a3b6e1396a2570ec6866967799bf62b78e99dab1d5bd739cee2054060febae2b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\checkpoint-v12-e2e47e6-intro-cp1-post-completion\\qualification.json",
+      "sha256": "1ced16068a71a5733805505e7b7dcd502a09e322ce3c7f4ecedda032c4ec5b7e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\checkpoint-v12-e2e47e6-intro-cp1-camera-trace\\qualification.json",
+      "sha256": "be79a39bb6cef5821d838c841901d9ae39b1b78f01da69a8791b8a8a2960b179"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\checkpoint-v12-e2e47e6-intro-cp1-camera-target-trace\\qualification.json",
+      "sha256": "91b65715a1e175bebe256169a6f385a307d1bcf2ef30df691c16933e6295bbd0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\checkpoint-v12-e2e47e6-intro-cp1-camera-target-trace-retry\\qualification.json",
+      "sha256": "e45f9c23009c6738cd5e44bb4c061247a64505b9067d593cdb732328cb3f6d97"
+    }
+  ],
+  "limits": [
+    "Private native checkpoint entry bypass only; no native reachability, retry, stage mechanic, boss, exit or campaign pass.",
+    "The first obsolete setup receipt was rejected after a black/stale-body frame; all raw failures remain unchanged.",
+    "Narrow write traces identify only this watched camera field; they do not establish once-world execution.",
+    "Local exact frozen image only; netplay/cross-machine and new rebuilt-source qualification remain unverified."
+  ]
+}
