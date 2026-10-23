@@ -309,26 +309,48 @@ def private_pause_smoke(ctx, *, expected_exe_sha256, window_frames=12, timeout=1
         case["checks"]["native_resume_advances_private_effects"]=True
         dash_before,active,released_first=held(1,CIRCLE|JUMP|RIGHT,6,"Fresh post-menu native Circle+Jump+Right")
         release=[released_first];deadline=time.monotonic()+timeout
-        case["post_resume_dash"]=dict(before=dash_before,active=active,released=release,reductions=[])
+        drain_timers=[None]*len(ctx["clients"])
+        case["post_resume_dash"]=dict(before=dash_before,active=active,
+            post_release=release,reductions=[],
+            continuation_limit_ticks=120,
+            limits=["Neutral input does not immediately end a native jump-dash.",
+                    "Positive-marker continuation is retained separately from the negative-marker drain.",
+                    "The finite drain bound starts at the first observed negative marker per peer."])
         while time.monotonic()<deadline:
             require(all(gameplay(row) for row in release[-1]["peers"]),"Native dash recovery left living gameplay")
-            require(all(((row["observation"]["native_timer"]-old["observation"]["native_timer"])&0xFFFFFFFF)<=max_retirement_ticks
-                        for old,row in zip(released_first["peers"],release[-1]["peers"])),
-                    "Fresh native dash retirement exceeded its bounded native-time window")
+            for peer,row in enumerate(release[-1]["peers"]):
+                timer=row["observation"]["native_timer"]
+                if drain_timers[peer] is None and row["marker"]<0:drain_timers[peer]=timer
+                if drain_timers[peer] is None:
+                    require(((timer-released_first["peers"][peer]["observation"]["native_timer"])&0xFFFFFFFF)<=120,
+                            "Native post-release jump-dash continuation exceeded the bounded observation window")
+                else:
+                    require(row["marker"]<=0,"Native dash retriggered after the negative-marker drain began")
+                    require(((timer-drain_timers[peer])&0xFFFFFFFF)<=max_retirement_ticks,
+                            "Fresh native dash retirement exceeded its bounded negative-marker drain window")
             if all(_retired(row) for row in release[-1]["peers"]):break
             ctx["native_advance"](1,"Observe native dash-jump drain")
             release.append(sample("Post-menu native dash-jump retirement"))
+        require(all(_retired(row) for row in release[-1]["peers"]),"Fresh native dash never completed its finite retirement")
         for peer in range(len(ctx["clients"])):
             first=live[dash_before["sample_index"]][peer]
-            during=unique(active,peer,after=first);require(bool(during),"No forward native dash observation during held Circle")
-            drained=unique(release,peer,after=during[-1]);require(bool(drained),"No native publication after neutral input")
+            held_rows=unique(active,peer,after=first);require(bool(held_rows),"No forward native dash observation during held Circle")
+            post=unique(release,peer,after=held_rows[-1]);require(bool(post),"No native publication after neutral input")
+            drain_at=next((i for i,row in enumerate(post) if row.marker<0),None)
+            require(drain_at is not None,"Native dash never entered its negative-marker drain")
+            # Native jump-dash action7 legitimately continues after neutral;
+            # only its negative-marker transition starts trail retirement.
+            during=held_rows+post[:drain_at];drained=post[drain_at:]
             receipts=[dict(path=ctx["input_path"],seat=1,pressed=CIRCLE|JUMP|RIGHT,accepted=True,bypasses=[],
-                           before_tick=first.observation.tick,after_tick=during[0].observation.tick),
+                           before_tick=first.observation.tick,after_tick=held_rows[0].observation.tick),
                       dict(path=ctx["input_path"],seat=1,pressed=0,accepted=True,bypasses=[],
-                           before_tick=during[-1].observation.tick,after_tick=drained[0].observation.tick)]
+                           before_tick=held_rows[-1].observation.tick,after_tick=post[0].observation.tick)]
             reduced=effects.reduce_zero_dash(first,during,drained,mode=ctx["mode"],input_path=ctx["input_path"],
                                               input_receipts=receipts,max_retirement_ticks=max_retirement_ticks)
-            reduced["input_receipts"]=receipts;case["post_resume_dash"]["reductions"].append(reduced)
+            reduced.update(input_receipts=receipts,
+                post_release_continuation_ticks=[row.observation.tick for row in post[:drain_at]],
+                negative_drain_start_tick=drained[0].observation.tick)
+            case["post_resume_dash"]["reductions"].append(reduced)
             require(all(reduced["checks"].values()),"Fresh native post-menu dash acceptance/drain/retirement failed")
             require(any(row.marker>0 and row.observation.players[1].action==6 and
                         row.observation.players[1].y_raw<first.observation.players[1].y_raw for row in during),

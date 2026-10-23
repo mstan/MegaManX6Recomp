@@ -58,6 +58,14 @@ action6/positive marker, all three visible trails, negative-marker drain phases1
 and2, then marker0 with all active/visible flags clear within the bounded native
 timer window. An actual rising P2 position must also be observed. This is an
 ordinary native dash-jump/airborne observation, not an air-dash unlock proof.
+Native action7 can retain its positive marker after neutral input. The runner
+retains that continuation explicitly, with a separate 120 native-tick diagnostic
+deadline. The configured retirement window begins at the first observed
+negative marker per peer. It still requires both drain phases and every trail
+to become inactive and invisible; marker0 alone does not complete retirement.
+The first v12 native attempt exposed the old neutral-anchored deadline while
+passing the full paused-body/pool freeze and resume checks. That failed raw
+attempt remains retained and is not rewritten into a pass.
 Both heroes' personal resources and P1's X remain fixed throughout observed
 history. The native timer is not presented as an independent helper counter.
 
