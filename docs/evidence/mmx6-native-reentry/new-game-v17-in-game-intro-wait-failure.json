@@ -1,0 +1,659 @@
+{
+  "schema": 1,
+  "kind": "retained_native_reentry_in_game_intro_wait_analysis",
+  "status": "historical_failed_report_preserved_not_reclassified",
+  "raw_report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-reentry-v17-beeae10-local-new-game-progress\\qualification.json",
+    "sha256": "6310c4923d734172cb3511f1d0ed4daf8e05db9d1fe03b14b19a1d5d42c1022c",
+    "status": "failed",
+    "error": "Native arrival never produced a fresh settled co-op publication",
+    "case_status": "failed_behavior",
+    "observations": 4916,
+    "inputs": 31
+  },
+  "candidate": {
+    "exe_sha256": "a8f20cdcc4ac68cdc76bf8fa7f1b3a74b9db67788514468743a355284b2080b8",
+    "coordinator_reported_source": "beeae107efca2fddab2c279a9d48d5e7e00817b1"
+  },
+  "executed_helper": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-reentry-v17-beeae10-local-new-game-progress\\native-reentry-helper-source.py",
+    "sha256": "a60d2a7927b807a819375103b5f31d7881550f291d3350076b4869ca6d0778c0",
+    "saved_snapshot_matches": true
+  },
+  "original": {
+    "raw_disc": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\disc\\Mega Man X6 (USA) (v1.1).bin",
+    "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "archive_sha256": "55b03e4ecc13d6110ff300f80b7000b0f97234e19f1b846aa2b885eece30d80f",
+    "members": [
+      {
+        "index": 16,
+        "sector": 381,
+        "size": 33946,
+        "sha256": "c9211aee86c5e7377b7716bd698102da1aed8c57a128e90507259cf9f6093ecf",
+        "role": "menu"
+      },
+      {
+        "index": 18,
+        "sector": 401,
+        "size": 32488,
+        "sha256": "3ae703ad03b2bbc4b71fc09e5f418e1e87ffd49a4a6a4240e69172fb87036166",
+        "role": "title"
+      }
+    ]
+  },
+  "native_mode_runs": [
+    {
+      "native_mode_stage_section": [
+        [
+          10,
+          0,
+          0
+        ],
+        0,
+        0
+      ],
+      "first_observation": 0,
+      "last_observation": 2
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          10,
+          2,
+          0
+        ],
+        0,
+        0
+      ],
+      "first_observation": 3,
+      "last_observation": 53
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          0,
+          0,
+          0
+        ],
+        0,
+        0
+      ],
+      "first_observation": 54,
+      "last_observation": 54
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          0,
+          0,
+          0
+        ],
+        14,
+        0
+      ],
+      "first_observation": 55,
+      "last_observation": 149
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          19,
+          0,
+          0
+        ],
+        0,
+        0
+      ],
+      "first_observation": 150,
+      "last_observation": 150
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          0,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 151,
+      "last_observation": 168
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          2,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 169,
+      "last_observation": 185
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          3,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 186,
+      "last_observation": 876
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          4,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 877,
+      "last_observation": 952
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          5,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 953,
+      "last_observation": 1400
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          6,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 1401,
+      "last_observation": 1415
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          7,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 1416,
+      "last_observation": 1500
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          8,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 1501,
+      "last_observation": 1515
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          9,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 1516,
+      "last_observation": 1630
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          10,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 1631,
+      "last_observation": 1635
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          11,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 1636,
+      "last_observation": 2526
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          12,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 2527,
+      "last_observation": 2542
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          13,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 2543,
+      "last_observation": 2684
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          14,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 2685,
+      "last_observation": 2983
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          15,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 2984,
+      "last_observation": 3013
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          16,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 3014,
+      "last_observation": 3030
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          17,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 3031,
+      "last_observation": 3184
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          18,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 3185,
+      "last_observation": 3349
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          20,
+          19,
+          0
+        ],
+        11,
+        0
+      ],
+      "first_observation": 3350,
+      "last_observation": 3366
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          7,
+          0,
+          0
+        ],
+        0,
+        0
+      ],
+      "first_observation": 3367,
+      "last_observation": 3382
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          8,
+          0,
+          0
+        ],
+        0,
+        0
+      ],
+      "first_observation": 3383,
+      "last_observation": 3392
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          9,
+          0,
+          0
+        ],
+        0,
+        0
+      ],
+      "first_observation": 3393,
+      "last_observation": 3394
+    },
+    {
+      "native_mode_stage_section": [
+        [
+          10,
+          0,
+          0
+        ],
+        0,
+        0
+      ],
+      "first_observation": 3395,
+      "last_observation": 4915
+    }
+  ],
+  "accepted_inputs": {
+    "total": 31,
+    "story_dialogue_crosses": 23,
+    "all_original_response_and_neutral_observed": true
+  },
+  "first_native_mode_a0": {
+    "observation_index": 3395,
+    "row": {
+      "mode": [
+        10,
+        0,
+        0
+      ],
+      "native_timer": 0,
+      "stage": 0,
+      "section": 0,
+      "campaign_character": 0,
+      "armor": 1,
+      "unlocks": 1,
+      "fade": 1,
+      "decoded": [
+        0,
+        0,
+        0
+      ],
+      "native_player": {
+        "active": 1,
+        "character": 0,
+        "state": 0,
+        "action": 0,
+        "hp": 32,
+        "x_raw": 9437184,
+        "y_raw": 63963136,
+        "weapon": 0,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ]
+      },
+      "native_body_hex": "0100000000000000000090000000d0030000000000400200000090000000d00300000000000000000000000000000000d44a1f8000000000cc3a1080687c14800005007800000000000300000000000000000000000000000000000020202000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000001000000000000000000000000000000000000000000000000000000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000000000000000000000000000002001000000000000000000000000",
+      "play_hex": "0a00000079000000170000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000020200001010030300000000000010000000000000000000000000000000000000000000000000000000000000000000000000707000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a08c0000a08c0000a08c0000a08c0000a08c0000a08c0000a08c0000a08c00000000000000000000",
+      "dialogue_hex": "00000000000000000000000000000000",
+      "snapshot_sha256": "d2d1a704bfd1243c984bc5b778df3bf55e88d94bd7469355c8ef764dea30dd81"
+    }
+  },
+  "last_native_mode_a0": {
+    "observation_index": 4915,
+    "row": {
+      "mode": [
+        10,
+        0,
+        0
+      ],
+      "native_timer": 0,
+      "stage": 0,
+      "section": 0,
+      "campaign_character": 0,
+      "armor": 1,
+      "unlocks": 1,
+      "fade": 0,
+      "decoded": [
+        0,
+        0,
+        0
+      ],
+      "native_player": {
+        "active": 1,
+        "character": 0,
+        "state": 1,
+        "action": 20,
+        "hp": 32,
+        "x_raw": 9437184,
+        "y_raw": 73072640,
+        "weapon": 0,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ]
+      },
+      "native_body_hex": "01000001011400000000900000005b0400000000004002050000900000005b04000000000000f8ff0000000000000000d44a1f8088411f80cc3a1080687c1480000500780c000177770300000000000000000000503f1f8000000000202020000000000000000000503d078000000000080800000000000000000100000000000000000000000000000800000000000000000000320000000000000000000000000000000000000020012001200120012001200120012001200120012001200120012001200120010000000000000000ff1440ff00000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+      "play_hex": "0a00000079000000170000000000000000010101010101010101000001000100000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000020200001010030300000000000010000000000000000000000000000000000000000000000000000000000000000000000000707000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000001800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000a08c0000a08c0000a08c0000a08c0000a08c0000a08c0000a08c0000a08c00000000000000000000",
+      "dialogue_hex": "a8c61b80742a53003d000000ff030002",
+      "snapshot_sha256": "869dace7bcd828e5a20265e6991eb81b5889da0dced05a3e8cdfd0d98af1f193"
+    }
+  },
+  "in_game_intro": {
+    "native_mode_a0_observations": 1521,
+    "ready_ff_phase3_observations": 1355,
+    "ready_cursor": "0x801bc6a8",
+    "source_lock_offsets": [
+      "0x11",
+      "0x12",
+      "0x13",
+      "0x14",
+      "0x15",
+      "0x16",
+      "0x17",
+      "0x18",
+      "0x19",
+      "0x1c"
+    ],
+    "locks": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "native_action": 20,
+    "native_timer": 0
+  },
+  "arrival_diagnostic_anchor": [
+    {
+      "schema": 1,
+      "tick": 327,
+      "sequence": 654,
+      "native_timer": 223,
+      "lifecycle": [
+        0,
+        0
+      ],
+      "pause_owner": 1,
+      "scene_owner": 0,
+      "scene_phase": 0,
+      "mailbox": 0,
+      "ready": 1,
+      "enrolled": 1,
+      "failed": 0,
+      "native_mode": 10,
+      "native_phase": 2,
+      "host_digest": 3920306017,
+      "host_digest_algorithm": 1,
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 11894784,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "framework_digest_registered": 0
+    }
+  ],
+  "arrival_diagnostic_variants": [
+    {
+      "tick": 327,
+      "sequence": 654,
+      "native_mode": 10,
+      "native_phase": 2,
+      "pause_owner": 1,
+      "enrolled": 1,
+      "count": 1521
+    }
+  ],
+  "capture_receipts": [
+    {
+      "label": "native-first-quit-page",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-reentry-v17-beeae10-local-new-game-progress\\baseline\\native-final-quit-new-game\\peer-0-native-first-quit-page.png",
+      "sha256": "91aba325a2bfb4eff47a5773878355f47bdaf84ba5b14da6898699f22851f6a4",
+      "artwork_review": "not_reviewed_by_this_source_analysis"
+    },
+    {
+      "label": "native-second-quit-page",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-reentry-v17-beeae10-local-new-game-progress\\baseline\\native-final-quit-new-game\\peer-0-native-second-quit-page.png",
+      "sha256": "8109f0740538110cacef04e6cd5a9ab5c5691d63771d4ca1f0b12ced1e3a2f67",
+      "artwork_review": "not_reviewed_by_this_source_analysis"
+    },
+    {
+      "label": "native-title-after-final-quit",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-reentry-v17-beeae10-local-new-game-progress\\baseline\\native-final-quit-new-game\\peer-0-native-title-after-final-quit.png",
+      "sha256": "8e69cbdfd1775090fa629d17fc68be2fefab1aa7ca7df05c58df11e279af9927",
+      "artwork_review": "not_reviewed_by_this_source_analysis"
+    }
+  ],
+  "owned_process": {
+    "pid": 64488,
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0,
+    "private_cards_unchanged": true
+  },
+  "analysis": {
+    "story_reached_stage0_gameplay": true,
+    "ordinary_mode_a0_is_not_native_idle": true,
+    "helper_stopped_dialogue_inputs_before_original_native_release": true,
+    "stale_diagnostic_rejection_is_correct": true,
+    "production_defect_established": false,
+    "finding": "Helper arrived() accepted modeA/0 before its native intro dialogue/idle handoff; its scripted input allowlist then excluded this actual stage0 FF/3 hold."
+  },
+  "limits": [
+    "No successful reentry, guest-menu recovery or artwork pass from this failed run",
+    "Source pattern supports the original common in-game help hold; no caller-entry trace identifies its exact NPC/text semantic",
+    "No production patch, input replay, native launch or title build performed for this source/helper correction",
+    "No all-stage dialogue input policy or acquired-progress/card-preservation claim"
+  ]
+}

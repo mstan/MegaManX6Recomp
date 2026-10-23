@@ -30,8 +30,11 @@ SUCCESS = "automated_native_reentry_checks_passed_artwork_pending"
 EXE_WINDOWS = ((0x8001CF78,0x8001D2A0),(0x8001D930,0x8001DBAC),
     (0x8001DE10,0x8001E1BC),(0x8001E6E4,0x8001E730),(0x8001E880,0x8001E914),
     (0x8001FD10,0x8001FE74),(0x8001BA1C,0x8001BD40),
-    (0x80012A34,0x80012B44),(0x80021FC4,0x80022838))
+    (0x80012A34,0x80012B44),(0x80021FC4,0x80022838),
+    (0x8003D308,0x8003D34C),(0x80053270,0x8005353C))
 TITLE_WINDOWS = ((0x800EA62C,0x800EA9D0),(0x800ED760,0x800ED87C),(0x800F08FC,0x800F0928))
+INTRO_DIALOGUE_LOCKS = tuple(range(0x11,0x1A))+(0x1C,)
+ARRIVAL_CLEAR_LOCKS = (0x10,)+INTRO_DIALOGUE_LOCKS
 # Source 8001BA1C..8001BD40. Volatile script/input fields are recorded, not
 # treated as campaign inventory. No campaign character/armor is imported here.
 PERSISTENT_IMPORTS = ((0x04,0x70,4),(0x08,0x74,8),(0x10,0x6C,4),(0x14,0x6A,2),
@@ -167,11 +170,37 @@ def dialogue_state(row):
         timer=struct.unpack_from("<H",data,10)[0],active=data[12],phase=data[13],page=data[14])
 
 
+def intro_dialogue_context(row):
+    """Original stage0 X-owned scripted help; no general gameplay confirm.
+
+    800532A4..53340 gates action14, sets the native freeze/script locks and
+    opens dialogue. 800534C4..53518 waits for inactive dialogue before
+    clearing those locks and ending the original player script.
+    """
+    if (row["stage"],row["section"],row["mode"])!=(0,0,[10,0,0]) or row["fade"]:
+        return False
+    player=row["native_player"];play=bytes.fromhex(row["play_hex"])
+    return (row["campaign_character"]==player["character"]==0 and player["active"] and
+        player["state"]==1 and player["action"]==0x14 and 0<player["hp"]<128 and
+        play[0x10]==0 and all(play[offset]==1 for offset in INTRO_DIALOGUE_LOCKS))
+
+
+def native_arrival_ready(row):
+    # Native modeA/0 starts before landing/dialogue. First enrollment waits
+    # for original idle state1/action2; retain that gate, all source dialogue
+    # locks clear, inactive text and the separate fresh-publication proof.
+    if row["mode"]!=[10,0,0] or row["fade"]:return False
+    player=row["native_player"];play=bytes.fromhex(row["play_hex"])
+    return (row["campaign_character"]==player["character"]==0 and player["active"] and
+        player["state"]==1 and player["action"]==2 and 0<player["hp"]<128 and
+        not any(play[offset] for offset in ARRIVAL_CLEAR_LOCKS) and dialogue_state(row)["active"]==0)
+
+
 def scripted_dialogue_ready(row):
     # Parser800227F8..22804 publishes FF/3. Phase2 is automatic typing;
     # queued/closing80 is not a second input opportunity.
     source_mode=(row["stage"]==13 and row["mode"]==[4,11,1]) or (
-        row["stage"]==11 and row["mode"][0] in (0x13,0x14))
+        row["stage"]==11 and row["mode"][0] in (0x13,0x14)) or intro_dialogue_context(row)
     state=dialogue_state(row)
     return source_mode and (state["active"],state["phase"])==(0xFF,3)
 
@@ -434,7 +463,7 @@ def native_reentry_smoke(ctx, *, original_disc, expected_exe_sha256, route="curr
         # Let original scripted arrival progress. A dialogue Cross is allowed
         # only at the original phase3 input decoder, not a guessed screen.
         anchor=None;returned=None
-        def arrived(row):return row["mode"][:2]==[10,0]
+        def arrived(row):return native_arrival_ready(row)
         deadline=time.monotonic()+reentry_timeout
         while time.monotonic()<deadline:
             rows=scripted(arrived,"Original native reentry/arrival",max(.001,deadline-time.monotonic()))

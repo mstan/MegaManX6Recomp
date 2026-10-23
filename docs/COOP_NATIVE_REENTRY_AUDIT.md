@@ -226,3 +226,87 @@ without destination and an empty peer result. They are protocol regressions,
 not native success evidence. No game/title build or native launch was performed
 for this correction. A fresh root-owned native retry and artwork review remain
 required; current-data and earned-card coverage remain separate.
+
+## Native v17 in-game intro handoff correction
+
+The next retained New Game attempt passes the earlier story-dialogue budget
+blocker, then stops at another helper boundary. Its unchanged raw report is
+`G:/Temp/Codex/psxrecomp/x6-parity/native-reentry-v17-beeae10-local-new-game-progress/qualification.json`,
+SHA256 `6310c4923d734172cb3511f1d0ed4daf8e05db9d1fe03b14b19a1d5d42c1022c`.
+The exact executable is
+`a8f20cdcc4ac68cdc76bf8fa7f1b3a74b9db67788514468743a355284b2080b8`;
+the coordinator identifies frozen game source
+`beeae107efca2fddab2c279a9d48d5e7e00817b1`. The saved helper source hash
+matches the helper hash in the raw case. The
+[compact failure analysis](evidence/mmx6-native-reentry/new-game-v17-in-game-intro-wait-failure.json)
+preserves the input outcomes, mode progression, first/last ordinary arrival
+rows, canonical-publication counts, capture hashes and owned cleanup.
+
+There are 31 accepted native inputs with consumed neutral, including 23 story
+dialogue Crosses. The original story progresses from stage 11 script phase 0
+to 19, then stage 0 entry modes 7→8→9→A/0. The first A/0 observation is still
+initialization: native X state 0/action 0, Y=976, fade 1. Later X lands at
+X=144/Y=1115, state 1/action 14h, HP32, fade 0. The first story wait returns at
+111.391 seconds of its 180-second deadline, leaving the outer loop to wait
+for diagnostics without further dialogue input.
+
+The terminal native state is an original input-ready in-game dialogue:
+status FFh/phase 3, cursor `801BC6A8`, control `2A74`, observed 1355 times. Native
+world timer remains 0; PLAY freeze bytes 11h..19h and script lock 1Ch are 1.
+All 1521 arrival diagnostics remain at tick 327/sequence 654, native pause
+phase 2/owner 1 from before final Quit. This is correctly rejected as stale;
+it is not evidence that the original story failed to reach its intro or that
+the new native player is dead. Only the pre-Quit pages and title were captured;
+no completed reentry/menu/artwork pass is inferred.
+
+The source explains this hold without requiring a production change:
+
+- Original EXE `800532A4..80053340` has a low-nibble path that waits for
+  player action 14h, then sets the native script/freeze flags and calls
+  dialogue initializer `80021760`. Its low actor message nibble selects the
+  text. This analysis does not claim an exact NPC
+  caller-entry trace or identify its text by guessing from the cursor.
+- `800534C4..800534CC` waits while dialogue active is nonzero. Only after text
+  retires does `800534F0..80053518` clear the freeze flags and call `8003D330`.
+  The script helpers at `8003D308..8003D348` own the native player script and
+  PLAY+1Ch lock. Generic phase 3 input/continued-page behavior remains the
+  source contract described above.
+- Frozen game `native_player_init` clears enrollment; `controller` waits for
+  original state 1/action 2 before first enrollment, including restarts.
+  `stage_tick` publishes no co-op diagnostics while unenrolled. These relevant
+  function blocks match the reviewed frozen `beeae10` source exactly. Thus a
+  stale publication during this native pre-idle hold is expected; the trial
+  did not yet reach the boundary needed to assess fresh enrollment.
+
+The helper previously called any native A/0 state “arrived,” including the
+initialization/dialogue hold. Its scripted input allowlist then excluded this
+stage 0 gameplay dialogue. The correction keeps the original Cross/response/
+consumed-neutral protocol and adds only the observed source-backed context:
+stage 0/section 0, exact mode A/0/0, living native X state 1/action 14h, matching
+primary character 0, fade 0, PLAY+10h clear and all inventoried dialogue/script
+locks 1. Exact FFh/phase 3 remains mandatory. Ordinary gameplay, another stage,
+another character, dead actors, typing/queued text and incomplete lock
+patterns cannot receive this automatic confirm.
+
+Actual arrival now requires a living native primary X in state 1/action 2,
+fade 0, inactive text and all inventoried locks clear, including PLAY+10h.
+Only then is the first diagnostic taken as an anchor. The existing strictly
+new, settled co-op publication test is unchanged; old tick 327 cannot pass.
+The helper does not clear locks, alter actions, enroll a body or write progress.
+The runtime guard adds original windows `8003D308..8003D34C` and
+`80053270..8005353C`, with exact hashes in the source mapping.
+
+Five new pure tests retain the actual failed state, reject premature A/0
+arrival and unrelated input contexts, require every lock clear, and exercise
+a source-protocol continued-page/close/idle sequence without weakening stale
+publication rejection. Together with existing helper/runner checks, 42 pass,
+including the original source-word check. The simulated release sequence is
+a protocol regression, not a native outcome claim.
+
+The raw report owns runtime PID 64488, acknowledged debug Quit and exit 0; the
+outer failed qualifier returns 1. Those outcomes are distinct. Raw failed
+status and all prior evidence remain unchanged. No native run, title build,
+plugin/SDK/ledger change or production defect claim accompanies this helper
+correction. A fresh exact-image native trial must still establish actual
+dialogue release, co-op enrollment, guest-owned menu recovery and reviewed
+artwork; current-data and earned-card coverage remain separate.

@@ -322,7 +322,7 @@ class NativeReentryOwnershipTests(unittest.TestCase):
                 current_data_sha256="fixture-buffer",dialogue_hex=bytes(16).hex(),decoded=[0,0,0])
             play=bytearray(0x468);play[0x5B:0x5D]=bytes((32,32));state["play_hex"]=play.hex()
             body=bytearray(0x158);body[0xE7]=1
-            state.update(native_player=dict(character=0),native_body_hex=body.hex())
+            state.update(native_player=dict(active=1,character=0,state=1,action=2,hp=32),native_body_hex=body.hex())
             controls=[];ticks=iter(range(10,100));arrivals=[]
             def set_input(seat,bits):
                 controls.append((seat,bits));native_bits=((bits&255)<<8)|(bits>>8)
@@ -349,7 +349,7 @@ class NativeReentryOwnershipTests(unittest.TestCase):
             ctx=dict(mode="local",input_path="offline_native",candidate_exe_sha256="a"*64,
                 clients=[client],both=lambda fn:[fn(0)],set_input=set_input,debug=debugger,report={},output=Path(temporary),
                 hold=Mock(),native_advance=Mock(),transport_window=Mock())
-            sources=dict(original={},exe_base=0x80010000,exe=bytes(0x20000),title=bytes(0x8000))
+            sources=dict(original={},exe_base=0x80010000,exe=bytes(0x50000),title=bytes(0x8000))
             with patch.object(reentry,"load_sources",return_value=sources), \
                     patch.object(reentry,"read_native",side_effect=lambda *args,**kwargs:deepcopy(state)), \
                     patch.object(reentry.menu,"personal_menu_smoke",return_value=dict(checks=dict(fixture_guest_contract=True))) as guest:
@@ -363,6 +363,102 @@ class NativeReentryOwnershipTests(unittest.TestCase):
             self.assertEqual(guest.call_args.kwargs["cursor_buttons"],(0x40,0x10))
             self.assertTrue(all(seat==0 for seat,bits in controls))
             self.assertTrue(all(c["neutral_consumed"] for c in case["inputs"]))
+
+
+class NativeIntroArrivalTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.retained=json.loads((Path(__file__).resolve().parent.parent/
+            "docs/evidence/mmx6-native-reentry/new-game-v17-in-game-intro-wait-failure.json").read_text())
+
+    def held(self):return deepcopy(self.retained["last_native_mode_a0"]["row"])
+
+    def idle(self):
+        row=self.held();play=bytearray.fromhex(row["play_hex"])
+        for offset in reentry.ARRIVAL_CLEAR_LOCKS:play[offset]=0
+        row.update(play_hex=play.hex(),dialogue_hex=bytes(16).hex(),
+            native_player=dict(row["native_player"],state=1,action=2))
+        return row
+
+    def test_retained_story_completes_but_mode_a0_still_waits_for_original_intro_input(self):
+        data=self.retained;row=self.held()
+        self.assertEqual(data["raw_report"]["sha256"],"6310c4923d734172cb3511f1d0ed4daf8e05db9d1fe03b14b19a1d5d42c1022c")
+        self.assertEqual(data["raw_report"]["status"],"failed")
+        self.assertEqual(data["accepted_inputs"]["story_dialogue_crosses"],23)
+        self.assertTrue(data["accepted_inputs"]["all_original_response_and_neutral_observed"])
+        self.assertEqual(row["mode"],[10,0,0])  # Old destination accepted this too early.
+        self.assertFalse(reentry.native_arrival_ready(row))
+        self.assertTrue(reentry.intro_dialogue_context(row))
+        self.assertTrue(reentry.scripted_dialogue_ready(row))
+        self.assertEqual(data["in_game_intro"]["ready_ff_phase3_observations"],1355)
+        self.assertEqual(data["arrival_diagnostic_variants"][0]["count"],1521)
+        anchor=data["arrival_diagnostic_anchor"]
+        self.assertFalse(reentry.fresh_reentry(anchor,deepcopy(anchor)))
+
+    def test_original_initialization_mode_is_neither_arrival_nor_an_input_opportunity(self):
+        row=self.retained["first_native_mode_a0"]["row"]
+        self.assertEqual(row["native_player"]["state"],0)
+        self.assertFalse(reentry.native_arrival_ready(row))
+        self.assertFalse(reentry.scripted_dialogue_ready(row))
+
+    def test_intro_confirm_is_limited_to_living_x_exact_stage_and_source_lock_pattern(self):
+        row=self.held()
+        for change in (dict(stage=1),dict(section=1),dict(mode=[10,2,0]),dict(fade=1),
+                       dict(campaign_character=1),dict(native_player=dict(row["native_player"],character=1)),
+                       dict(native_player=dict(row["native_player"],action=2)),
+                       dict(native_player=dict(row["native_player"],state=0)),
+                       dict(native_player=dict(row["native_player"],active=0)),
+                       dict(native_player=dict(row["native_player"],hp=0)),
+                       dict(native_player=dict(row["native_player"],hp=128))):
+            self.assertFalse(reentry.scripted_dialogue_ready(dict(row,**change)))
+        for offset in reentry.INTRO_DIALOGUE_LOCKS:
+            play=bytearray.fromhex(row["play_hex"]);play[offset]=0
+            self.assertFalse(reentry.scripted_dialogue_ready(dict(row,play_hex=play.hex())))
+        play=bytearray.fromhex(row["play_hex"]);play[0x10]=1
+        self.assertFalse(reentry.scripted_dialogue_ready(dict(row,play_hex=play.hex())))
+        self.assertFalse(reentry.scripted_dialogue_ready(self.idle()))
+
+    def test_actual_arrival_requires_idle_inactive_text_and_every_source_lock_clear(self):
+        row=self.idle();self.assertTrue(reentry.native_arrival_ready(row))
+        for offset in reentry.ARRIVAL_CLEAR_LOCKS:
+            play=bytearray.fromhex(row["play_hex"]);play[offset]=1
+            self.assertFalse(reentry.native_arrival_ready(dict(row,play_hex=play.hex())))
+        for change in (dict(fade=1),dict(mode=[10,0,1]),dict(dialogue_hex=self.held()["dialogue_hex"]),
+                       dict(native_player=dict(row["native_player"],action=0x14)),
+                       dict(native_player=dict(row["native_player"],state=0)),
+                       dict(native_player=dict(row["native_player"],hp=0)),
+                       dict(native_player=dict(row["native_player"],character=1))):
+            self.assertFalse(reentry.native_arrival_ready(dict(row,**change)))
+
+    def test_native_intro_page_and_close_are_consumed_before_idle_destination(self):
+        # Deterministic original-protocol regression, not an actual reentry pass.
+        row=self.held();phase=0;inputs=[];receipts=[];controls=[]
+        def control(seat,bits):
+            nonlocal row,phase
+            controls.append((seat,bits))
+            if bits:
+                dialogue=bytearray.fromhex(row["dialogue_hex"])
+                if phase==0:
+                    struct.pack_into("<I",dialogue,0,struct.unpack_from("<I",dialogue)[0]+2)
+                    struct.pack_into("<H",dialogue,4,0xA461)
+                    dialogue[14]+=1
+                else:dialogue[12:14]=bytes((0x80,4))
+                row.update(dialogue_hex=dialogue.hex(),decoded=[0x40,0,0x40])
+            else:
+                row["decoded"]=[0,0,0]
+                if phase==1:row=self.idle()
+                phase+=1
+        def observe(label):return [deepcopy(row)]
+        with patch.object(reentry.time,"sleep"):
+            result=reentry.wait_scripted(dict(set_input=control,input_path="offline_native"),inputs,receipts,
+                reentry.native_arrival_ready,observe,label="Original in-game intro handoff",seconds=12)
+        self.assertEqual(controls,[(0,0x4000),(0,0),(0,0x4000),(0,0)])
+        self.assertTrue(reentry.native_arrival_ready(result[0]))
+        self.assertEqual([i["peers"][0]["response"] for i in receipts[0]["inputs"]],
+            ["native_text_cursor_advanced","native_box_closing"])
+        self.assertTrue(all(i["neutral_consumed"] for i in inputs))
+        anchor=self.retained["arrival_diagnostic_anchor"]
+        self.assertFalse(reentry.fresh_reentry(anchor,deepcopy(anchor)))
 
 
 class OriginalSourceTests(unittest.TestCase):
@@ -398,6 +494,19 @@ class OriginalSourceTests(unittest.TestCase):
         self.assertEqual(word("exe",0x800225EC),0x24420002)
         self.assertEqual(word("exe",0x800225F8),0xAE220000)
         self.assertEqual(word("exe",0x8002231C),0xA260000C)  # actual retirement
+        # Original in-game help owns action14/PLAY locks until native text ends.
+        self.assertEqual(word("exe",0x800532A4),0x804470A5)
+        self.assertEqual(word("exe",0x800532A8),0x24030014)
+        self.assertEqual(word("exe",0x800532BC),0xA230001C)
+        self.assertEqual(word("exe",0x80053304),0xA2300012)
+        self.assertEqual(word("exe",0x80053308),0xA2300013)
+        self.assertEqual(word("exe",0x8005332C),0x0C0085D8)
+        self.assertEqual(word("exe",0x800534C4),0x9043EAFC)
+        self.assertEqual(word("exe",0x800534F4),0xA0400012)
+        self.assertEqual(word("exe",0x800534F8),0xA0400013)
+        self.assertEqual(word("exe",0x80053514),0x0C00F4CC)
+        self.assertEqual(word("exe",0x8003D32C),0xA066CEEC)
+        self.assertEqual(word("exe",0x8003D348),0xA060CEEC)
 
 
 if __name__=="__main__":unittest.main()

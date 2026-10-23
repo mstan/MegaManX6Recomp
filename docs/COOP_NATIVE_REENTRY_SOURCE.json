@@ -157,6 +157,20 @@
       "end_exclusive": "800F1098",
       "bytes": 56,
       "sha256": "e6f040b0087ed196dfe637a189540804da6a9e20c698e75af0e94e52af10d567"
+    },
+    {
+      "member": "exe",
+      "address": "8003D308",
+      "end_exclusive": "8003D34C",
+      "bytes": 68,
+      "sha256": "d22755900b324fe8019c1acfcd89c324f80a7ec1fb00c49af8fd4f0f83839a6e"
+    },
+    {
+      "member": "exe",
+      "address": "80053270",
+      "end_exclusive": "8005353C",
+      "bytes": 716,
+      "sha256": "0b9df59c470061b05d531217cdf70f2ce521d8ba8e241548405c522d6c7a5e02"
     }
   ],
   "ordinary_ram_snapshot": {
@@ -295,5 +309,54 @@
     "source_retire": "8002217C..8002231C",
     "bound": "Existing route deadline, at most240seconds; no assumed story-page count",
     "historical_failed_report_sha256": "8446564400671323a9cce759f6881228f09a6b03e26bb7d6e358a9eee2425339"
+  },
+  "in_game_intro_arrival_contract": {
+    "stage": 0,
+    "section": 0,
+    "mode": [
+      10,
+      0,
+      0
+    ],
+    "primary_character": 0,
+    "ready_dialogue_status": 255,
+    "ready_dialogue_phase": 3,
+    "scripted_player_state": 1,
+    "scripted_player_action": 20,
+    "source_lock_offsets": [
+      "0x11",
+      "0x12",
+      "0x13",
+      "0x14",
+      "0x15",
+      "0x16",
+      "0x17",
+      "0x18",
+      "0x19",
+      "0x1c"
+    ],
+    "source_lock_value": 1,
+    "source_producer": "800532A4..80053340",
+    "source_dialogue_retirement_gate": "800534C0..800534CC",
+    "source_lock_release": "800534F0..80053518",
+    "source_player_script": "8003D308..8003D348",
+    "arrival_player_state": 1,
+    "arrival_player_action": 2,
+    "arrival_clear_offsets": [
+      "0x10",
+      "0x11",
+      "0x12",
+      "0x13",
+      "0x14",
+      "0x15",
+      "0x16",
+      "0x17",
+      "0x18",
+      "0x19",
+      "0x1c"
+    ],
+    "native_dialogue_inactive_before_arrival": true,
+    "fresh_diagnostic_publication_still_required": true,
+    "historical_failed_report_sha256": "6310c4923d734172cb3511f1d0ed4daf8e05db9d1fe03b14b19a1d5d42c1022c"
   }
 }
