@@ -118,6 +118,67 @@ table `801EF6D0`, body form5 and native RAM compression/assembly resources.
 It records the stage/section reached, without assuming intro or claiming a
 campaign transition pass. Briefing dismissals are bounded original input too.
 
+### Briefing readiness and consumed neutral between menu pulses
+
+The preserved native attempt
+`G:/Temp/Codex/psxrecomp/x6-parity/native-zero-reference-v12-e2e47e6-normalized/qualification.json`
+has SHA256 `37f100b990f9f6327330bf5d833f30e9756e72b94d54cc3e0fa446964cd27198`.
+It remains `failed_setup` on image
+`229ffec7a7dabda9742653264e1d023adde408602003df7f48b4c4d3f758d8e6`.
+Source/profile guards and the explicit prerequisite bypass completed. One
+briefing input was recorded, then the next pulse timed out before the unit
+list. The old report lacks the failed pulse's decoded observations; it cannot
+establish the exact runtime cause. It is retained unchanged.
+
+The original source identifies two defects in that pulse predicate:
+
+| Original source | Native behavior and helper requirement |
+| --- | --- |
+| EXE `80012A34..80012B43` | Pad bytes are decoded to `800C456C` held, `800C456E` previous and `800C4570` rising edge. `80012B20..40` writes `previous=old held` and `edge=new held & ~old held`. A clear-input ACK does not establish consumption. |
+| BIN16 `800F1068[11] -> 800ED6E0`; subtable `800F1060` | Stage-map phase11 dispatches subphase0 to `800ED648`, subphase1 to `800ED6B4`. |
+| BIN16 `800ED690..800ED6A4` | Subphase0 calls the native dialogue initializer `80021760`, then increments subphase automatically. A change from `04/0B/00` to `04/0B/01` is insufficient evidence of a Cross dismissal. |
+| BIN16 `800ED6B4..800ED6D4` | Subphase1 waits for the dialogue active byte `8008EAFC` to clear, then returns to map phase3/subphase0. |
+| EXE `800100B4[3] -> 80022000`; dispatch `80021C20..4C` | Dialogue phase is `8008EAFD`. Phase3 reads the decoded edge low byte at `80022004`; Cross is native `0040h`. Phase2 at `80021FC4` may change text timing without dismissing the page. |
+| BIN16 `800EB080..800EB1E7` | The original selector reads rising edges. Published Right `0020h` decodes to native `2000h`; published Cross `4000h` decodes to native `0040h`. |
+| BIN16 `800F0F40[5/6] -> 800EB080/800ECD80` | Selector input runs in `04/04/05`. Right changes the cursor and enters subphase6 at `800EB148..158`; `800ECD80..800ECDE0` returns to5 after eight native animation updates. Neutral input during6 does not make the selector ready for another edge. |
+
+These additional EXE/BIN16 windows are compared with live original bytes
+before their associated inputs. Briefing input now waits for coherent sampled
+mode `04/0B/01`, nonzero dialogue activity and dialogue phase3. It rechecks
+that readiness while waiting for neutral before pressing. The response must
+leave the native input-wait phase/page or leave phase11; initialization alone
+is never labeled a dismissal. The outer wait retains mode, dialogue and
+decoded observations even while native text/loading work progresses.
+The map-opening pulse requires sampled `04/04/00`. Every cursor/confirmation
+pulse requires sampled `04/04/05` before pressing. The helper waits for the
+original cursor animation to return from6 to5; leaving5 due to a previous
+cursor animation can no longer masquerade as confirmation. It does not force
+the native animation counter, cursor or form.
+
+Every menu pulse uses the existing persistent `frames=0` input, waits for an
+observed native held mask plus the expected native response, clears input in
+`finally`, then waits until **all three decoded halfwords are zero**. Following
+an observed hold, held0/previous-held is still a pending release and cannot
+permit the next pulse. A separate pre-pulse neutral check also rejects stale
+previous/edge values. Poll sleeps only pace reads; native values determine
+readiness and release completion. The frozen gameplay clock is not used as a
+menu progress clock. A one-frame edge can be missed by polling, so the receipt
+records whether an edge was sampled without treating that absence alone as a
+failure after a neutral-to-held input and actual native response.
+
+`selection.inputs` appends each attempt **before** issuing it. It retains the
+purpose, published/native masks, timeout, mode brackets, decoded triples,
+dialogue state, held/response/release observations, timeout stage(s), elapsed
+time and any independent release error. A response or release timeout remains
+`failed_setup`; a successful attempt is only
+`native_transition_and_neutral_observed`. The decoded triple is one six-byte
+RPC; PLAY mode and dialogue are separate reads, with mode brackets checked.
+This is not an atomic cross-RPC state or a complete input trace.
+
+This correction was source-audited and tested without launching a game.
+Native selection, dash rendering and artwork remain unverified until a fresh
+owned run succeeds; the old failed report is not reclassified.
+
 ## Dash, resources, captures and retirement
 
 The P1 body, intervening camera block and three complete trail records are
@@ -179,10 +240,15 @@ python -m unittest test_mmx6_native_zero_reference
 ```
 
 Set `MMX6_CONTENT_DISC` to the explicit legitimate raw disc path to include
-the original-source guard test. Fifteen fixtures cover real-state setup and
+the original-source guard test. Twenty-five fixtures cover real-state setup and
 drift, source cards/non-pristine profiles, listener/image/online rejection,
 source guards, exact record reads/links, original unit navigation and bypass
 boundaries, held input cleanup, source palette framing, positive capture
 brackets, negative drain/resource failures and retained partial results.
+Menu regressions cover delayed native release consumption, stale previous
+input after a clear ACK, mode transitions without consumed input, phase11
+initialization/text states, pending selector animation, truncated/incoherent samples and independent
+response/cleanup failures. The optional source check includes every added
+live guard extent from the unchanged full-identity original bundle.
 The modeled native responses are test contracts, not original-game execution
 or artwork evidence. No SDK/plugin/profile/ledger/CMake files are changed.

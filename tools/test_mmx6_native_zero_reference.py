@@ -1,5 +1,6 @@
 """Native-reference protocol/ownership fixtures; no game/art qualification."""
 import copy
+import itertools
 import json
 import os
 from pathlib import Path
@@ -39,6 +40,120 @@ def sample(timer=10,**kwargs):
     session=Mock()
     session.read.side_effect=[play(timer),body_and_trails(**kwargs),play(timer)]
     return reference.read_native(session)
+
+
+def menu_sample(*,mode=(4,4,0),held=0,previous=0,edge=0,dialogue_active=0,
+                dialogue_phase=0,coherent=True):
+    return dict(mode=list(mode),mode_before=list(mode),coherent_mode=coherent,
+                held=held,previous=previous,edge=edge,
+                decoded_hex=struct.pack("<3H",held,previous,edge).hex(),
+                dialogue_active=dialogue_active,dialogue_phase=dialogue_phase)
+
+
+class MenuPulseTests(unittest.TestCase):
+    def test_clear_ack_waits_for_both_decoded_held_and_previous_to_be_neutral(self):
+        session=Mock();record={}
+        sequence=[menu_sample(),menu_sample(held=0x40,edge=0x40),
+                  menu_sample(held=0x40,previous=0x40),menu_sample(previous=0x40),menu_sample()]
+        with patch.object(reference,"_read_menu_input",side_effect=sequence),patch.object(reference.time,"sleep"):
+            reference._menu_press(session,0x4000,lambda row:True,receipt=record)
+        self.assertEqual(record["status"],"native_transition_and_neutral_observed")
+        self.assertEqual(len(record["neutral_after"]),3)
+        self.assertTrue(record["pressed_observed"] and record["edge_observed"] and record["neutral_consumed"])
+        self.assertEqual(session.request.call_args_list[0].kwargs,dict(port=1,buttons=0xBFFF,frames=0))
+        self.assertEqual(session.request.call_args_list[-1].args,("clear_input",))
+
+    def test_ack_and_mode_transition_without_a_consumed_button_cannot_pass(self):
+        session=Mock();record={}
+        # A native animation transition can happen while the input has not
+        # reached the decoder. A true predicate or press ACK cannot qualify it.
+        with patch.object(reference,"_read_menu_input",return_value=menu_sample(mode=(4,11,1))),\
+             patch.object(reference.time,"sleep"),\
+             patch.object(reference.time,"monotonic",side_effect=itertools.count(0,.01)):
+            with self.assertRaisesRegex(DebugError,"held_response"):
+                reference._menu_press(session,0x4000,lambda row:True,timeout=.08,receipt=record)
+        self.assertEqual(record["status"],"failed_setup")
+        self.assertFalse(record["pressed_observed"] or record["transition_observed"])
+        self.assertTrue(record["neutral_consumed"])
+        self.assertEqual(record["timeout_stages"],["held_response"])
+        self.assertTrue(all(row["expected_transition"] for row in record["held_response"]))
+
+    def test_release_ack_with_stale_previous_is_a_retained_setup_failure(self):
+        session=Mock();record={};rows=iter([menu_sample(),menu_sample(held=0x2000,edge=0x2000)])
+        def observe(_):return next(rows,menu_sample(previous=0x2000))
+        with patch.object(reference,"_read_menu_input",side_effect=observe),patch.object(reference.time,"sleep"),\
+             patch.object(reference.time,"monotonic",side_effect=itertools.count(0,.01)):
+            with self.assertRaisesRegex(DebugError,"neutral_after"):
+                reference._menu_press(session,0x20,lambda row:True,timeout=.08,receipt=record)
+        self.assertEqual(record["status"],"failed_setup")
+        self.assertTrue(record["transition_observed"])
+        self.assertFalse(record["neutral_consumed"])
+        self.assertEqual(record["timeout_stage"],"neutral_after")
+        self.assertEqual(record["neutral_after"][-1]["previous"],0x2000)
+        self.assertIn("neutral_after",record["release_error"])
+
+    def test_mode_brackets_and_truncated_triples_do_not_count_as_neutral(self):
+        session=Mock();dialogue=bytes(0x10)
+        session.read.side_effect=[bytes((4,11,0)),bytes(6),dialogue,bytes((4,11,1))]
+        row=reference._read_menu_input(session)
+        self.assertFalse(reference._neutral_menu_input(row))
+        self.assertEqual(session.read.call_args_list[1].args,(reference.PAD_DECODE,6))
+        for bad in (bytes(5),bytes(7)):
+            session.read.side_effect=[bytes((4,11,1)),bad,dialogue,bytes((4,11,1))]
+            with self.assertRaisesRegex(DebugError,"Truncated"):reference._read_menu_input(session)
+
+    def test_briefing_initialization_and_text_animation_are_not_input_ready(self):
+        for row in (menu_sample(mode=(4,11,0),dialogue_active=1,dialogue_phase=3),
+                    menu_sample(mode=(4,11,1),dialogue_active=1,dialogue_phase=1),
+                    menu_sample(mode=(4,11,1),dialogue_active=1,dialogue_phase=2),
+                    menu_sample(mode=(4,11,1),dialogue_active=0,dialogue_phase=3),
+                    menu_sample(mode=(4,11,1),dialogue_active=1,dialogue_phase=3,coherent=False)):
+            self.assertFalse(reference._briefing_ready(row),row)
+        ready=menu_sample(mode=(4,11,1),dialogue_active=1,dialogue_phase=3)
+        self.assertTrue(reference._briefing_ready(ready))
+        session=Mock();record={}
+        sequence=[menu_sample(mode=(4,11,0)),menu_sample(mode=(4,11,1),dialogue_active=1,dialogue_phase=2),
+                  ready,menu_sample(mode=(4,11,1),held=0x40,edge=0x40,dialogue_active=1,dialogue_phase=1),menu_sample()]
+        def observe(_):
+            if len(sequence)>2 and not reference._briefing_ready(sequence[0]):
+                self.assertFalse(any(c.args==("press",) for c in session.request.call_args_list))
+            return sequence.pop(0)
+        with patch.object(reference,"_read_menu_input",side_effect=observe),patch.object(reference.time,"sleep"):
+            reference._menu_press(session,0x4000,lambda row:row["dialogue_phase"]!=3,
+                                  ready=reference._briefing_ready,receipt=record)
+        self.assertEqual(len(record["neutral_before"]),3)
+        self.assertTrue(record["neutral_consumed"])
+
+    def test_invalid_pulses_are_rejected_before_controls(self):
+        for bits,timeout in ((0,2),(True,2),(-1,2),(0x10000,2),(0x20,float("nan")),(0x20,0),(0x20,13)):
+            session=Mock()
+            with self.assertRaises(ValueError):reference._menu_press(session,bits,lambda row:True,timeout=timeout)
+            session.request.assert_not_called()
+
+    def test_neutral_cursor_animation_must_finish_before_confirmation_press(self):
+        session=Mock();record={}
+        sequence=[menu_sample(mode=(4,4,6)),menu_sample(mode=(4,4,6)),menu_sample(mode=(4,4,5)),
+                  menu_sample(mode=(4,4,7),held=0x40,edge=0x40),menu_sample(mode=(4,4,7))]
+        def observe(_):
+            if sequence[0]["mode"]==[4,4,6]:
+                self.assertFalse(any(c.args==("press",) for c in session.request.call_args_list))
+            return sequence.pop(0)
+        with patch.object(reference,"_read_menu_input",side_effect=observe),patch.object(reference.time,"sleep"):
+            reference._menu_press(session,0x4000,lambda row:row["mode"]!=[4,4,5],receipt=record,
+                                  ready=lambda row:row["mode"]==[4,4,5])
+        self.assertEqual(len(record["neutral_before"]),3)
+        self.assertEqual(record["held_response"][-1]["mode"],[4,4,7])
+        self.assertTrue(record["neutral_consumed"])
+
+    def test_original_response_error_is_not_replaced_by_cleanup_protocol_failure(self):
+        session=Mock();record={}
+        session.request.side_effect=[dict(ok=True),DebugError("release protocol failure")]
+        with patch.object(reference,"_read_menu_input",side_effect=[menu_sample(),menu_sample(held=0x2000)]),\
+             self.assertRaisesRegex(RuntimeError,"response failure"):
+            reference._menu_press(session,0x20,lambda row:(_ for _ in ()).throw(RuntimeError("response failure")),receipt=record)
+        self.assertEqual(record["error"],"response failure")
+        self.assertEqual(record["release_error"],"release protocol failure")
+        self.assertFalse(record["neutral_consumed"])
 
 
 class SourceAndObservationTests(unittest.TestCase):
@@ -168,11 +283,33 @@ class ProfileTests(unittest.TestCase):
 
 
 class OwnershipAndSelectionTests(unittest.TestCase):
+    def test_failed_briefing_attempt_retains_mode_decoded_input_and_timeout(self):
+        session=Mock();receipt={}
+        session.read.side_effect=[bytes((10,0,0)),bytes((1,)),body_and_trails()[:0x158]]
+        ready=menu_sample(mode=(4,11,1),dialogue_active=1,dialogue_phase=3)
+        with patch.object(reference,"_guard_code"),patch.object(reference,"_read_menu_input",return_value=ready),\
+             patch.object(reference.time,"sleep"),\
+             patch.object(reference.time,"monotonic",side_effect=itertools.count(0,.01)):
+            with self.assertRaisesRegex(DebugError,"held_response"):
+                reference.select_native_zero(session,{"exe_base":0x80010000},receipt,
+                                              allow_private_prerequisite=True,timeout=.4)
+        self.assertEqual(receipt["status"],"failed_setup")
+        self.assertTrue(receipt["ordinary_input_evidence_tainted"])
+        self.assertEqual(len(receipt["inputs"]),2)
+        attempt=receipt["inputs"][-1]
+        self.assertEqual(attempt["purpose"],"native briefing page input")
+        self.assertEqual(attempt["ready_sample"]["mode"],[4,11,1])
+        self.assertEqual(attempt["held_response"][-1]["decoded_hex"],"000000000000")
+        self.assertEqual(attempt["timeout_stage"],"held_response")
+        self.assertTrue(attempt["neutral_consumed"])
+        self.assertEqual(attempt["status"],"failed_setup")
+
     def test_original_unit_navigation_preserves_unlocks_and_never_assigns_form_or_cursor(self):
         class MenuModel:
             # Source-contract I/O model only, not original native game logic.
             def __init__(self,filtered=False):
                 self.mode=(10,0,0);self.flags=1;self.cursor=0;self.selected=False;self.filtered=filtered;self.commands=[]
+                self.requested=0;self.decoded=0;self.animation=0
             def offline(self):return dict(active=0)
             def read(self,address,size):
                 if address==reference.PLAY and size==3:return bytes(self.mode)
@@ -181,6 +318,13 @@ class OwnershipAndSelectionTests(unittest.TestCase):
                 if address==reference.MENU_COUNT:return bytes((2 if self.filtered else 3,))
                 if address==reference.MENU_TABLE:return bytes((0,1) if self.filtered else (0,1,5))
                 if address==reference.PLAY+0x30:return bytes((self.cursor,))
+                if address==reference.PAD_DECODE:
+                    if self.animation:
+                        self.animation-=1
+                        if not self.animation:self.mode=(4,4,5)
+                    previous,self.decoded=self.decoded,self.requested
+                    return struct.pack("<3H",self.decoded,previous,self.decoded&~previous)
+                if address==reference.DIALOGUE:return bytes(0x10)
                 if address==reference.PLAYER:
                     body=bytearray(body_and_trails())
                     if not self.selected:body[2]=0
@@ -194,10 +338,15 @@ class OwnershipAndSelectionTests(unittest.TestCase):
                     if address==reference.PLAY:self.mode=(4,4,0)
                 if command=="press":
                     bits=fields["buttons"]^0xFFFF
-                    if bits==0x20:self.cursor=(self.cursor+1)%3
+                    if self.decoded:raise AssertionError("Next pulse arrived before consumed native neutral")
+                    if self.mode not in ((4,4,0),(4,4,5)):raise AssertionError("Input sent during native selector animation")
+                    self.requested=((bits&255)<<8)|(bits>>8)
+                    if bits==0x20:
+                        self.cursor=(self.cursor+1)%3;self.mode=(4,4,6);self.animation=4
                     if bits==0x4000:
                         if self.mode==(4,4,0):self.mode=(4,4,5)
                         elif self.mode==(4,4,5):self.mode=(10,0,0);self.selected=True
+                if command=="clear_input":self.requested=0
                 return dict(ok=True)
         session=MenuModel();receipt={}
         with patch.object(reference,"_guard_code"):
@@ -209,6 +358,7 @@ class OwnershipAndSelectionTests(unittest.TestCase):
                          [reference.PLAY+0x5F,reference.PLAY+1,reference.PLAY+2,reference.PLAY])
         self.assertTrue(all(f["frames"]==0 and f["port"]==1 for cmd,f in session.commands if cmd=="press"))
         self.assertEqual(sum(cmd=="press" for cmd,_ in session.commands)+1,sum(cmd=="clear_input" for cmd,_ in session.commands))
+        self.assertTrue(all(row.get("neutral_consumed") for row in receipt["inputs"] if row["pressed"]))
         filtered=MenuModel(filtered=True)
         with patch.object(reference,"_guard_code"),self.assertRaisesRegex(DebugError,"filtered"):
             reference.select_native_zero(filtered,{"exe_base":0x80010000},{},allow_private_prerequisite=True)
@@ -240,13 +390,17 @@ class OwnershipAndSelectionTests(unittest.TestCase):
 
     def test_online_refused_and_native_input_neutralized_when_predicate_raises(self):
         session=Mock();session.offline.side_effect=DebugError("online")
-        with self.assertRaises(DebugError):reference._menu_press(session,0x20,lambda:True)
+        with self.assertRaises(DebugError):reference._menu_press(session,0x20,lambda row:True)
         session.request.assert_not_called()
-        session=Mock()
-        with self.assertRaisesRegex(RuntimeError,"predicate"):
-            reference._menu_press(session,0x20,lambda:(_ for _ in ()).throw(RuntimeError("predicate")))
+        session=Mock();record={}
+        with patch.object(reference,"_read_menu_input",side_effect=[menu_sample(),menu_sample(held=0x2000),menu_sample()]),\
+             self.assertRaisesRegex(RuntimeError,"predicate"):
+            reference._menu_press(session,0x20,lambda row:(_ for _ in ()).throw(RuntimeError("predicate")),receipt=record)
         self.assertEqual(session.request.call_args_list[-1].args,("clear_input",))
         self.assertEqual(session.request.call_args_list[0].kwargs["frames"],0)
+        self.assertEqual(record["error"],"predicate")
+        self.assertTrue(record["neutral_consumed"])
+        self.assertEqual(record["status"],"failed_setup")
 
     def test_private_bypass_requires_explicit_boolean_and_idle_native_body(self):
         session=Mock();session.read.side_effect=[bytes((10,0,0)),bytes((1,))]

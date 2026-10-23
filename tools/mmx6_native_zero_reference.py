@@ -25,6 +25,7 @@ import prepare_mmx6_coop_playtest as preparation
 import qualify_mmx6_coop_baseline as baseline
 
 PLAY, PLAYER, TRAILS = 0x800CCED0, 0x800970A0, 0x800972F8
+PAD_DECODE, DIALOGUE = 0x800C456C, 0x8008EAF0
 BODY_AND_TRAILS_BYTES = 0x378  # body158h + native camera100h + trails120h.
 MENU_BASE, MENU_MEMBER, ZERO_MEMBER = 0x800E9860, 16, 1
 MENU_TABLE, MENU_COUNT = 0x800F1CB0, 0x800F1CEB
@@ -33,8 +34,12 @@ ZERO_SHA = "75a142a529ddc70f0d60ee6be32ebcdb0cf5cc90ec88e965c3b15cf0c6d21b00"
 DISABLED_STATE = "native-zero-reference-state.json"
 EXE_GUARDS = ((0x8001E6E4,0x8001E730), (0x8001E8CC,0x8001E914),
               (0x80013BF0,0x80013D10), (0x8003BD24,0x8003C140),
-              (0x80020DC8,0x800210D0), (0x80022960,0x80022BD8))
-MENU_GUARDS = ((0x800E9898,0x800E99A4), (0x800EB174,0x800EB1A0))
+              (0x80020DC8,0x800210D0), (0x80022960,0x80022BD8),
+              (0x80012A34,0x80012B44), (0x800100B4,0x800100D0),
+              (0x80021C20,0x80021C50), (0x80021FC4,0x80022014))
+MENU_GUARDS = ((0x800E9898,0x800E99A4), (0x800EA894,0x800EAEF8), (0x800EB080,0x800EB1E8),
+               (0x800ECD80,0x800ECDE4), (0x800ED648,0x800ED71C),
+               (0x800F0F40,0x800F0F6C), (0x800F1060,0x800F1098))
 
 
 def _sha(data: bytes) -> str:
@@ -284,17 +289,92 @@ def _read_mode(session):
     return tuple(session.read(PLAY,3))
 
 
-def _menu_press(session,bits,predicate,*,timeout=2):
+def _read_menu_input(session):
+    """One decoded triple RPC, bracketed by mode; no cross-RPC atomic claim."""
+    before=session.read(PLAY,3)
+    pad=session.read(PAD_DECODE,6)
+    dialogue=session.read(DIALOGUE,0x10)
+    after=session.read(PLAY,3)
+    if len(before)!=3 or len(after)!=3 or len(pad)!=6 or len(dialogue)!=0x10:
+        raise debug.DebugError("Truncated original menu mode/decoded-input/dialogue observation")
+    held,previous,edge=struct.unpack("<3H",pad)
+    return dict(mode=list(after),mode_before=list(before),coherent_mode=before==after,
+        held=held,previous=previous,edge=edge,decoded_hex=pad.hex(),
+        dialogue_active=dialogue[0x0C],dialogue_phase=dialogue[0x0D],
+        dialogue_hex=dialogue.hex())
+
+
+def _neutral_menu_input(row):
+    # 80012B20..40: previous=old held; edge=new held & ~old held.
+    # After a witnessed hold this requires the release to reach the decoder,
+    # including a subsequent decode with previous=0. An RPC ACK is insufficient.
+    return row["coherent_mode"] and (row["held"],row["previous"],row["edge"])==(0,0,0)
+
+
+def _briefing_ready(row):
+    # BIN16 phase11/subphase0 initializes dialogue then advances automatically.
+    # Only dialogue phase3 reads the rising-edge low byte at 80022000.
+    return (row["coherent_mode"] and row["mode"]==[4,11,1] and
+            row["dialogue_active"]!=0 and row["dialogue_phase"]==3)
+
+
+def _wait_menu_input(session,record,stage,predicate,timeout):
+    deadline=time.monotonic()+timeout
+    samples=record.setdefault(stage,[])
+    while time.monotonic()<deadline:
+        row=_read_menu_input(session)
+        samples.append(row)
+        if row["coherent_mode"] and predicate(row):return row
+        time.sleep(.015)  # Poll pacing only; the sampled predicate proves progress.
+    record.setdefault("timeout_stage",stage)
+    record.setdefault("timeout_stages",[]).append(stage)
+    raise debug.DebugError(f"Original native menu input timed out during {stage}")
+
+
+def _menu_press(session,bits,predicate,*,timeout=2,receipt=None,ready=None):
+    """Persistent native input, actual response, then consumed neutral release."""
+    if type(bits) is not int or not 0<bits<=0xFFFF or not math.isfinite(timeout) or not 0<timeout<=12:
+        raise ValueError("Original menu pulse needs nonzero16-bit buttons and bounded timeout0..12")
+    record={} if receipt is None else receipt
+    record.update(pressed=bits,status="failed_setup",timeout_seconds=timeout,
+                  native_pressed=((bits&255)<<8)|(bits>>8),pressed_observed=False,
+                  edge_observed=False,transition_observed=False,neutral_consumed=False,
+                  readiness_required=ready is not None)
     session.offline()
+    started=time.monotonic();failure=None
     try:
+        def can_press(row):
+            row["native_neutral"]=_neutral_menu_input(row)
+            row["input_ready"]=ready is None or bool(ready(row))
+            return row["native_neutral"] and row["input_ready"]
+        _wait_menu_input(session,record,"neutral_before",can_press,timeout)
         session.request("press",port=1,buttons=bits^0xFFFF,frames=0)
-        deadline=time.monotonic()+timeout
-        while time.monotonic()<deadline:
-            if predicate():return
-            time.sleep(.015)
-        raise debug.DebugError("Original native menu input did not reach the bounded expected transition")
+        def responded(row):
+            native=record["native_pressed"]
+            record["pressed_observed"] |= (row["held"]&native)==native
+            record["edge_observed"] |= (row["edge"]&native)==native
+            response=bool(predicate(row))
+            row["expected_transition"]=response
+            return record["pressed_observed"] and response
+        _wait_menu_input(session,record,"held_response",responded,timeout)
+        record["transition_observed"]=True
+    except Exception as exc:
+        failure=exc;record["error"]=str(exc)
+        raise
     finally:
-        session.request("clear_input",port=1)
+        try:
+            session.request("clear_input",port=1)
+            _wait_menu_input(session,record,"neutral_after",_neutral_menu_input,timeout)
+            record["neutral_consumed"]=True
+        except Exception as exc:
+            record["release_error"]=str(exc)
+            if failure is None:
+                record["error"]=str(exc)
+                raise
+        finally:
+            record["elapsed_seconds"]=time.monotonic()-started
+            if failure is None and record["neutral_consumed"] and record["transition_observed"]:
+                record["status"]="native_transition_and_neutral_observed"
 
 
 def select_native_zero(session,sources,receipt: dict,*,allow_private_prerequisite=False,timeout=60):
@@ -323,17 +403,29 @@ def select_native_zero(session,sources,receipt: dict,*,allow_private_prerequisit
             (PLAY+2,mode[2],0,"native screen subphase initialization"),(PLAY,mode[0],2,"native screen2 loader prerequisite")):
             receipt["bypasses"].append(dict(address=hex(address),before=old,after=new,reason=reason))
             session.request("write_ram",addr=hex(address),val=hex(new))
-    deadline=time.monotonic()+timeout
+    deadline=time.monotonic()+timeout;menu_guarded=False
+    receipt["stage_map_wait"]=[]
     while time.monotonic()<deadline:
-        mode=_read_mode(session)
+        row=_read_menu_input(session)
+        receipt["stage_map_wait"].append(row)
+        if not row["coherent_mode"]:
+            time.sleep(.015)
+            continue
+        mode=tuple(row["mode"])
         if mode==(4,4,0):break
-        if mode[:2]==(4,11):
-            old=mode
-            _menu_press(session,0x4000,lambda:_read_mode(session)!=old,timeout=min(2,timeout))
-            receipt["inputs"].append(dict(pressed=0x4000,purpose="native briefing dismissal"))
+        if _briefing_ready(row):
+            if not menu_guarded:
+                _guard_code(session,sources,"menu",MENU_BASE,MENU_GUARDS,receipt["code_guards"])
+                menu_guarded=True
+            attempt=dict(pressed=0x4000,purpose="native briefing page input",ready_sample=row)
+            receipt["inputs"].append(attempt)
+            _menu_press(session,0x4000,
+                lambda sample:sample["mode"][:2]!=[4,11] or sample["dialogue_active"]==0 or sample["dialogue_phase"]!=3,
+                timeout=min(2,timeout),receipt=attempt,ready=_briefing_ready)
         else:time.sleep(.03)
     else:raise debug.DebugError("Native stage map did not become input-ready")
-    _guard_code(session,sources,"menu",MENU_BASE,MENU_GUARDS,receipt["code_guards"])
+    if not menu_guarded:
+        _guard_code(session,sources,"menu",MENU_BASE,MENU_GUARDS,receipt["code_guards"])
     count=session.read(MENU_COUNT,1)[0]
     if not 1<=count<=6:raise debug.DebugError("Native unit count is invalid")
     choices=list(session.read(MENU_TABLE,count))
@@ -342,17 +434,23 @@ def select_native_zero(session,sources,receipt: dict,*,allow_private_prerequisit
     receipt.update(native_choices=choices,native_unlocks=flags)
     if choices!=expected or 5 not in choices:
         raise debug.DebugError("Native unit5 list absent/filtered; reference co-op-disabled contract failed")
-    _menu_press(session,0x4000,lambda:_read_mode(session)==(4,4,5))
-    receipt["inputs"].append(dict(pressed=0x4000,purpose="open native unit selector"))
+    attempt=dict(pressed=0x4000,purpose="open native unit selector")
+    receipt["inputs"].append(attempt)
+    _menu_press(session,0x4000,lambda row:row["mode"]==[4,4,5],receipt=attempt,
+                ready=lambda row:row["mode"]==[4,4,0])
     for _ in range(count):
         cursor=session.read(PLAY+0x30,1)[0]
         if cursor>=count:raise debug.DebugError("Native unit cursor escaped source list")
         if choices[cursor]==5:break
-        _menu_press(session,0x20,lambda:session.read(PLAY+0x30,1)[0]!=(cursor))
-        receipt["inputs"].append(dict(pressed=0x20,purpose="native unit cursor",before=cursor))
+        attempt=dict(pressed=0x20,purpose="native unit cursor",before=cursor)
+        receipt["inputs"].append(attempt)
+        _menu_press(session,0x20,lambda row:session.read(PLAY+0x30,1)[0]!=cursor,receipt=attempt,
+                    ready=lambda row:row["mode"]==[4,4,5])
     else:raise debug.DebugError("Native unit selector never reached Zero")
-    _menu_press(session,0x4000,lambda:_read_mode(session)!=(4,4,5))
-    receipt["inputs"].append(dict(pressed=0x4000,purpose="confirm native Zero"))
+    attempt=dict(pressed=0x4000,purpose="confirm native Zero")
+    receipt["inputs"].append(attempt)
+    _menu_press(session,0x4000,lambda row:row["mode"]!=[4,4,5],receipt=attempt,
+                ready=lambda row:row["mode"]==[4,4,5])
     deadline=time.monotonic()+timeout
     while time.monotonic()<deadline:
         if _read_mode(session)[:2]!=(10,0):
