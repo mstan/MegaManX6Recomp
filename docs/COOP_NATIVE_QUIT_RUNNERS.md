@@ -110,6 +110,16 @@ with fade field1; confirmation artwork remains unverified. The
 binds the native state and original report. Source now withholds Select only
 at P2's owned phase2 menu, while preserving join history, other menu buttons,
 P1's native Quit controls and gameplay Select. Actual-plugin debug/production
-fixtures pass. Title contract `mmx6-x-zero-delay-v13` requires fresh native
-qualification; source tests alone do not pass R7/R15.
+fixtures pass. Title contract `mmx6-x-zero-delay-v13` identifies the changed
+input contract; source tests alone do not pass R7/R15.
 
+Exact executable `986e1598` subsequently passed all four native cases: local
+and same-machine paired guest refusal, plus local and paired primary pages
+and cancellation. Root reviewed all 15 composed captures. Both pairs settled
+before guest execution and retained 39 common resolved core/mod samples; a
+fresh pair reused the session ID with a different confirmed selection digest.
+The [reviewed receipt](evidence/mmx6-native-quit/manifest-bound-754f8ca-reviewed.json)
+also binds separate 73/73 diagnostic/production tests and an actual explicit
+`PSX_FORCE_INTERP=0` refusal before guest execution. The historical failure is
+preserved; R7/R15 remain unverified for live effects and final Quit/campaign
+reentry respectively.

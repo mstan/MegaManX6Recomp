@@ -1,0 +1,744 @@
+{
+  "schema": 1,
+  "kind": "reviewed_native_guest_quit_authority_and_primary_pages",
+  "reviewed_at_utc": "2026-10-23T16:34:48.772804+00:00",
+  "result": "bounded_guest_refusal_primary_pages_cancel_and_native_resume_passed",
+  "candidate": {
+    "candidate_source": "754f8cab43bd67361587c37814fbf7a45c9786bc",
+    "exe_sha256": "986e159870cc1abad7f23b80bac8f606fb1be444028891bc5d534bcd93498617",
+    "declared_manifest_sha256": "fa0f03408e1ec84039c4a204273a21fcd4314ea2b1673661876097ed00549446"
+  },
+  "compilation_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v14-754f8ca\\candidate.json",
+    "sha256": "b7827b987decd6200e6022a066e3d1a9a1fac28fa1ee232d10755a887d5a8ed8"
+  },
+  "production_default_off": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v14-754f8ca\\production-default-off.json",
+    "sha256": "b1cc3692348efc530483a807a926bed29a3f9891cf556ee486c55403fa335bc5"
+  },
+  "compilation_tests": {
+    "diagnostic": "73/73",
+    "production": "73/73"
+  },
+  "cases": {
+    "local_guest": {
+      "mode": "local",
+      "scenario": "guest_authority",
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-local-guest\\qualification.json",
+        "sha256": "54be19933f216c4394cbe98b54fda68913de632129b3a42a21ee5f663d279ba9"
+      },
+      "checks": {
+        "enough_samples": true,
+        "native_pause_owned": true,
+        "native_menu_input_state": true,
+        "world_timer_frozen": true,
+        "diagnostic_publications_advanced": true,
+        "cursor_unchanged": true,
+        "guest_select_cannot_enter_native_quit": true,
+        "personal_resources_preserved": true,
+        "native_roster_preserved": true,
+        "original_world_resumed": true,
+        "genuine_independent_guest_input_after_cancel": true
+      },
+      "captures": [
+        {
+          "peer": 0,
+          "label": "guest-owned-pause-after-select-refusal",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-local-guest\\baseline\\guest-authority\\peer-0-guest-owned-pause-after-select-refusal.png",
+          "sha256": "c31990f848b7be62fc507052ba8fba4fc9a186bfbad2e5ca2bb2c4a120276d31"
+        },
+        {
+          "peer": 0,
+          "label": "native-resumed-after-quit-cancel-or-refusal",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-local-guest\\baseline\\guest-authority\\peer-0-native-resumed-after-quit-cancel-or-refusal.png",
+          "sha256": "198a54e65bd76d787e1654b155a1473a139aadb5866b7afd8b0a99db74816ee0"
+        }
+      ],
+      "review": "Root independently inspected every composed capture: original Zero/Z-SABER pause after guest Select refusal, both original Continue/Quit pages with no gameplay bodies/meters, and separate resumed X/Zero bodies/meters as applicable.",
+      "processes": [
+        {
+          "owned_pid": 22544,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ]
+    },
+    "local_primary": {
+      "mode": "local",
+      "scenario": "p1_pages_cancel",
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-local-primary\\qualification.json",
+        "sha256": "a02c14eb4fc0b9196963fdebe1c89e8c89287eb56e9aa3e999dc008e4e844a1a"
+      },
+      "checks": {
+        "primary_native_first_page_continue": true,
+        "primary_second_page_cancel": true,
+        "guest_cannot_control_primary_confirmation": true,
+        "personal_resources_preserved": true,
+        "native_roster_preserved": true,
+        "original_world_resumed": true,
+        "genuine_independent_guest_input_after_cancel": true
+      },
+      "captures": [
+        {
+          "peer": 0,
+          "label": "p1-native-quit-page-one",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-local-primary\\baseline\\p1-pages-cancel\\peer-0-p1-native-quit-page-one.png",
+          "sha256": "91aba325a2bfb4eff47a5773878355f47bdaf84ba5b14da6898699f22851f6a4"
+        },
+        {
+          "peer": 0,
+          "label": "p1-native-quit-page-two",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-local-primary\\baseline\\p1-pages-cancel\\peer-0-p1-native-quit-page-two.png",
+          "sha256": "8109f0740538110cacef04e6cd5a9ab5c5691d63771d4ca1f0b12ced1e3a2f67"
+        },
+        {
+          "peer": 0,
+          "label": "native-resumed-after-quit-cancel-or-refusal",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-local-primary\\baseline\\p1-pages-cancel\\peer-0-native-resumed-after-quit-cancel-or-refusal.png",
+          "sha256": "55ef2572fbecb29dd2408b82acb8a09d83697512386fc2473d0cf9e4be0ed19c"
+        }
+      ],
+      "review": "Root independently inspected every composed capture: original Zero/Z-SABER pause after guest Select refusal, both original Continue/Quit pages with no gameplay bodies/meters, and separate resumed X/Zero bodies/meters as applicable.",
+      "processes": [
+        {
+          "owned_pid": 34888,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ]
+    },
+    "netplay_guest": {
+      "mode": "netplay",
+      "scenario": "guest_authority",
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-pair-guest\\qualification.json",
+        "sha256": "2247b91f891397387f94cbdfe0d528c6a7b692008bee23a31f2fc4fdb519bb8e"
+      },
+      "checks": {
+        "enough_samples": true,
+        "native_pause_owned": true,
+        "native_menu_input_state": true,
+        "world_timer_frozen": true,
+        "diagnostic_publications_advanced": true,
+        "cursor_unchanged": true,
+        "network_active_without_desync": true,
+        "transport_ticks_advanced": true,
+        "resolved_ticks_advanced": true,
+        "guest_select_cannot_enter_native_quit": true,
+        "personal_resources_preserved": true,
+        "native_roster_preserved": true,
+        "original_world_resumed": true,
+        "genuine_independent_guest_input_after_cancel": true,
+        "resolved_core_mod_crc_comparison_completed": true
+      },
+      "captures": [
+        {
+          "peer": 0,
+          "label": "guest-owned-pause-after-select-refusal",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-pair-guest\\guest-authority\\peer-0-guest-owned-pause-after-select-refusal.png",
+          "sha256": "5743e2117022197612500e5d7b6a0fda06206aab659083bea9e76119bcf8344a"
+        },
+        {
+          "peer": 1,
+          "label": "guest-owned-pause-after-select-refusal",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-pair-guest\\guest-authority\\peer-1-guest-owned-pause-after-select-refusal.png",
+          "sha256": "5743e2117022197612500e5d7b6a0fda06206aab659083bea9e76119bcf8344a"
+        },
+        {
+          "peer": 0,
+          "label": "native-resumed-after-quit-cancel-or-refusal",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-pair-guest\\guest-authority\\peer-0-native-resumed-after-quit-cancel-or-refusal.png",
+          "sha256": "8d92e6341a75a4f0a111880db4abc51231583c10081baa69a90476e515be5bf4"
+        },
+        {
+          "peer": 1,
+          "label": "native-resumed-after-quit-cancel-or-refusal",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-pair-guest\\guest-authority\\peer-1-native-resumed-after-quit-cancel-or-refusal.png",
+          "sha256": "e5afffe91d7e8cb688da6a0fcacfd18071490c9ceb8c2c9a30d061495c075069"
+        }
+      ],
+      "review": "Root independently inspected every composed capture: original Zero/Z-SABER pause after guest Select refusal, both original Continue/Quit pages with no gameplay bodies/meters, and separate resumed X/Zero bodies/meters as applicable.",
+      "processes": [
+        {
+          "seat": 0,
+          "owned_pid": 78096,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "seat": 1,
+          "owned_pid": 80788,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "host_profile_startup": {
+        "profile": "mmx6.win64-clang22.loopback",
+        "revision": 2,
+        "selected_sha256": "932997e5d2b12056f7ddf55c3ba1025b5bc124fa5e255e37f6c0fc98327404f8",
+        "peers": [
+          {
+            "capabilities": {
+              "actual_image_sha256": "986e159870cc1abad7f23b80bac8f606fb1be444028891bc5d534bcd93498617",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "932997e5d2b12056f7ddf55c3ba1025b5bc124fa5e255e37f6c0fc98327404f8",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          },
+          {
+            "capabilities": {
+              "actual_image_sha256": "986e159870cc1abad7f23b80bac8f606fb1be444028891bc5d534bcd93498617",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "932997e5d2b12056f7ddf55c3ba1025b5bc124fa5e255e37f6c0fc98327404f8",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          }
+        ]
+      },
+      "host_profile_final": {
+        "profile": "mmx6.win64-clang22.loopback",
+        "revision": 2,
+        "selected_sha256": "932997e5d2b12056f7ddf55c3ba1025b5bc124fa5e255e37f6c0fc98327404f8",
+        "peers": [
+          {
+            "capabilities": {
+              "actual_image_sha256": "986e159870cc1abad7f23b80bac8f606fb1be444028891bc5d534bcd93498617",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "932997e5d2b12056f7ddf55c3ba1025b5bc124fa5e255e37f6c0fc98327404f8",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          },
+          {
+            "capabilities": {
+              "actual_image_sha256": "986e159870cc1abad7f23b80bac8f606fb1be444028891bc5d534bcd93498617",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "932997e5d2b12056f7ddf55c3ba1025b5bc124fa5e255e37f6c0fc98327404f8",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          }
+        ]
+      },
+      "session": 2026102349,
+      "resolved_state_crc": [
+        {
+          "label": "initial idle",
+          "resolved_through": [
+            2724,
+            2724
+          ],
+          "common_samples": [
+            {
+              "simulation_tick": 2592,
+              "core": "6b0273e8",
+              "mod": "69e26ae3"
+            },
+            {
+              "simulation_tick": 2624,
+              "core": "3c044463",
+              "mod": "f1feb60d"
+            },
+            {
+              "simulation_tick": 2656,
+              "core": "0c1494b8",
+              "mod": "68fa18ad"
+            },
+            {
+              "simulation_tick": 2688,
+              "core": "0784954b",
+              "mod": "4a866211"
+            },
+            {
+              "simulation_tick": 2720,
+              "core": "f6341c8c",
+              "mod": "c2e4ac9b"
+            }
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "resolved_through": [
+            2912,
+            2911
+          ],
+          "common_samples": [
+            {
+              "simulation_tick": 2784,
+              "core": "b3accd46",
+              "mod": "9ca155b2"
+            },
+            {
+              "simulation_tick": 2816,
+              "core": "5121a3e5",
+              "mod": "34178281"
+            },
+            {
+              "simulation_tick": 2848,
+              "core": "f250da5d",
+              "mod": "2f53314b"
+            },
+            {
+              "simulation_tick": 2880,
+              "core": "b6ab1e9a",
+              "mod": "3f721da1"
+            }
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "resolved_through": [
+            3138,
+            3138
+          ],
+          "common_samples": [
+            {
+              "simulation_tick": 2976,
+              "core": "c689f32a",
+              "mod": "15671c63"
+            },
+            {
+              "simulation_tick": 3008,
+              "core": "bdceda3e",
+              "mod": "2d4998a7"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "5b220622",
+              "mod": "44d2eca9"
+            },
+            {
+              "simulation_tick": 3072,
+              "core": "ac21aef2",
+              "mod": "8a9894bb"
+            },
+            {
+              "simulation_tick": 3104,
+              "core": "a4b550bc",
+              "mod": "da5a99e3"
+            },
+            {
+              "simulation_tick": 3136,
+              "core": "b5d877ae",
+              "mod": "dd39d531"
+            }
+          ]
+        },
+        {
+          "label": "Native Quit guest_authority resolved core/mod comparison",
+          "resolved_through": [
+            3526,
+            3527
+          ],
+          "common_samples": [
+            {
+              "simulation_tick": 3360,
+              "core": "6b5e4a67",
+              "mod": "f1707f41"
+            },
+            {
+              "simulation_tick": 3392,
+              "core": "d5086399",
+              "mod": "b06b55d7"
+            },
+            {
+              "simulation_tick": 3424,
+              "core": "706299b3",
+              "mod": "8444e095"
+            },
+            {
+              "simulation_tick": 3456,
+              "core": "b186fec8",
+              "mod": "05531b4d"
+            },
+            {
+              "simulation_tick": 3488,
+              "core": "e75b4dca",
+              "mod": "0cf2d9bf"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "8e1379db",
+              "mod": "19721edf"
+            }
+          ]
+        }
+      ]
+    },
+    "netplay_primary": {
+      "mode": "netplay",
+      "scenario": "p1_pages_cancel",
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-pair-primary\\qualification.json",
+        "sha256": "ed70b9197bbedbbb96829352749a4ce3804faedf2eabd6f76880fabfe54224fd"
+      },
+      "checks": {
+        "primary_native_first_page_continue": true,
+        "primary_second_page_cancel": true,
+        "guest_cannot_control_primary_confirmation": true,
+        "personal_resources_preserved": true,
+        "native_roster_preserved": true,
+        "original_world_resumed": true,
+        "genuine_independent_guest_input_after_cancel": true,
+        "resolved_core_mod_crc_comparison_completed": true
+      },
+      "captures": [
+        {
+          "peer": 0,
+          "label": "p1-native-quit-page-one",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-pair-primary\\p1-pages-cancel\\peer-0-p1-native-quit-page-one.png",
+          "sha256": "bf8dbb12ea6f4f2aa87c0443fc86517e7f473813f2d9820c1a9b8f09e63a7e1b"
+        },
+        {
+          "peer": 1,
+          "label": "p1-native-quit-page-one",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-pair-primary\\p1-pages-cancel\\peer-1-p1-native-quit-page-one.png",
+          "sha256": "bf8dbb12ea6f4f2aa87c0443fc86517e7f473813f2d9820c1a9b8f09e63a7e1b"
+        },
+        {
+          "peer": 0,
+          "label": "p1-native-quit-page-two",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-pair-primary\\p1-pages-cancel\\peer-0-p1-native-quit-page-two.png",
+          "sha256": "c8543735033c93a53590c101e7dc7213a286e9dc33f12691979a41132c606809"
+        },
+        {
+          "peer": 1,
+          "label": "p1-native-quit-page-two",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-pair-primary\\p1-pages-cancel\\peer-1-p1-native-quit-page-two.png",
+          "sha256": "c8543735033c93a53590c101e7dc7213a286e9dc33f12691979a41132c606809"
+        },
+        {
+          "peer": 0,
+          "label": "native-resumed-after-quit-cancel-or-refusal",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-pair-primary\\p1-pages-cancel\\peer-0-native-resumed-after-quit-cancel-or-refusal.png",
+          "sha256": "cfc65c305c44d20235756bff0e8e4fe0bf4aa6e4b8b2a2fb6bddedda7c262896"
+        },
+        {
+          "peer": 1,
+          "label": "native-resumed-after-quit-cancel-or-refusal",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-pair-primary\\p1-pages-cancel\\peer-1-native-resumed-after-quit-cancel-or-refusal.png",
+          "sha256": "85ca1452f8e68be243c8ae5c077ed33618240e64197d1a06a6158ec7f680078c"
+        }
+      ],
+      "review": "Root independently inspected every composed capture: original Zero/Z-SABER pause after guest Select refusal, both original Continue/Quit pages with no gameplay bodies/meters, and separate resumed X/Zero bodies/meters as applicable.",
+      "processes": [
+        {
+          "seat": 0,
+          "owned_pid": 76960,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "seat": 1,
+          "owned_pid": 304,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "host_profile_startup": {
+        "profile": "mmx6.win64-clang22.loopback",
+        "revision": 2,
+        "selected_sha256": "4987f92a8d2255878977a71228820005c7fb6418d0df811178bba8b5b3997d7c",
+        "peers": [
+          {
+            "capabilities": {
+              "actual_image_sha256": "986e159870cc1abad7f23b80bac8f606fb1be444028891bc5d534bcd93498617",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "4987f92a8d2255878977a71228820005c7fb6418d0df811178bba8b5b3997d7c",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          },
+          {
+            "capabilities": {
+              "actual_image_sha256": "986e159870cc1abad7f23b80bac8f606fb1be444028891bc5d534bcd93498617",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "4987f92a8d2255878977a71228820005c7fb6418d0df811178bba8b5b3997d7c",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          }
+        ]
+      },
+      "host_profile_final": {
+        "profile": "mmx6.win64-clang22.loopback",
+        "revision": 2,
+        "selected_sha256": "4987f92a8d2255878977a71228820005c7fb6418d0df811178bba8b5b3997d7c",
+        "peers": [
+          {
+            "capabilities": {
+              "actual_image_sha256": "986e159870cc1abad7f23b80bac8f606fb1be444028891bc5d534bcd93498617",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "4987f92a8d2255878977a71228820005c7fb6418d0df811178bba8b5b3997d7c",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          },
+          {
+            "capabilities": {
+              "actual_image_sha256": "986e159870cc1abad7f23b80bac8f606fb1be444028891bc5d534bcd93498617",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "4987f92a8d2255878977a71228820005c7fb6418d0df811178bba8b5b3997d7c",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          }
+        ]
+      },
+      "session": 2026102349,
+      "resolved_state_crc": [
+        {
+          "label": "initial idle",
+          "resolved_through": [
+            2742,
+            2742
+          ],
+          "common_samples": [
+            {
+              "simulation_tick": 2624,
+              "core": "eea0d66f",
+              "mod": "a5d6c019"
+            },
+            {
+              "simulation_tick": 2656,
+              "core": "b8fc2008",
+              "mod": "fb389627"
+            },
+            {
+              "simulation_tick": 2688,
+              "core": "bc702594",
+              "mod": "77d8f047"
+            },
+            {
+              "simulation_tick": 2720,
+              "core": "89081698",
+              "mod": "0024a9c1"
+            }
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "resolved_through": [
+            2905,
+            2905
+          ],
+          "common_samples": [
+            {
+              "simulation_tick": 2784,
+              "core": "a0e584fe",
+              "mod": "fd48f497"
+            },
+            {
+              "simulation_tick": 2816,
+              "core": "2c988197",
+              "mod": "fb00a461"
+            },
+            {
+              "simulation_tick": 2848,
+              "core": "8609ae3e",
+              "mod": "d577a51b"
+            },
+            {
+              "simulation_tick": 2880,
+              "core": "1db1fbdb",
+              "mod": "f9e3a7cb"
+            }
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "resolved_through": [
+            3115,
+            3115
+          ],
+          "common_samples": [
+            {
+              "simulation_tick": 2976,
+              "core": "5ca493e2",
+              "mod": "b2415ef3"
+            },
+            {
+              "simulation_tick": 3008,
+              "core": "350fbbea",
+              "mod": "75d9f0a7"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "2fed1c14",
+              "mod": "b83569f2"
+            },
+            {
+              "simulation_tick": 3072,
+              "core": "5c68bb2d",
+              "mod": "07cf4fa1"
+            },
+            {
+              "simulation_tick": 3104,
+              "core": "87fb106e",
+              "mod": "aae4e02b"
+            }
+          ]
+        },
+        {
+          "label": "Native Quit p1_pages_cancel resolved core/mod comparison",
+          "resolved_through": [
+            3880,
+            3880
+          ],
+          "common_samples": [
+            {
+              "simulation_tick": 3744,
+              "core": "f1398760",
+              "mod": "6ddbfe22"
+            },
+            {
+              "simulation_tick": 3776,
+              "core": "71b4067c",
+              "mod": "a4f0cfa8"
+            },
+            {
+              "simulation_tick": 3808,
+              "core": "84db1e8e",
+              "mod": "554153ee"
+            },
+            {
+              "simulation_tick": 3840,
+              "core": "d7e742c9",
+              "mod": "81a2684e"
+            },
+            {
+              "simulation_tick": 3872,
+              "core": "c50923d1",
+              "mod": "37e2ee80"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "original_failure": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-native-quit\\manifest-bound-6c42c5c-guest-repro.json",
+    "sha256": "9d60c1e7ef4313e5085df985cce3dc48f0f6f12dd89f131b03d78b4fe4f18a71"
+  },
+  "ledger_status": "unverified",
+  "limits": [
+    "Exact preserved754f8ca/executable986e1598, default loader, intro and fixed X/P1+Zero/P2 only.",
+    "Only the guest Select admission defect is resolved; complete R15 still requires native final Quit, current-data/character selection, acquired progress and guest menu reentry.",
+    "Both original primary confirmation pages hide gameplay bodies/meters; no live attack effects were seeded, so R7 effect-suppression coverage remains open.",
+    "Both pairs use actual same-machine numeric127 UDP, delay3 and disabled rollback/network user states; no cross-machine/OS/CPU qualification.",
+    "Independent captures do not establish identical render frames between peers.",
+    "Raw artwork-pending reports remain unchanged; visual review is recorded here."
+  ],
+  "same_session_fresh_nonce_restart": {
+    "session": 2026102349,
+    "selections": [
+      "932997e5d2b12056f7ddf55c3ba1025b5bc124fa5e255e37f6c0fc98327404f8",
+      "4987f92a8d2255878977a71228820005c7fb6418d0df811178bba8b5b3997d7c"
+    ]
+  },
+  "actual_override_refusal": {
+    "report": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-override-v14-754f8ca-explicit-zero\\qualification.json",
+      "sha256": "767b33baa24391195619a7012a168b8e0eae2145b00de7fb838f31a02f8b47c8"
+    },
+    "checks": {
+      "exact_staged_image": true,
+      "refused_configured_override": true,
+      "no_guest_execution_marker": true,
+      "no_settled_profile": true,
+      "natural_refusal_exit": true
+    },
+    "configured_override": {
+      "name": "PSX_FORCE_INTERP",
+      "value": "0"
+    },
+    "owned_pid": 27836,
+    "exit_code": 1
+  },
+  "reviewed_composed_captures": 15,
+  "resolved_common_core_mod_samples": 39
+}

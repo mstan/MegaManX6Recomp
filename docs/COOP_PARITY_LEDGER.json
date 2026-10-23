@@ -473,8 +473,93 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "Native Quit confirmation source and bounded P1 two-page/cancel capture runner are implemented in6946600/c460e65. Exact-image/default-loader/owned-process and same-machine profile/CRC guards are required. Native page visibility and body/HUD/effect suppression remain unverified; helper/CLI tests do not pass artwork. See COOP_NATIVE_QUIT_RUNNERS.md."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "754f8cab43bd67361587c37814fbf7a45c9786bc",
+            "build_identity": {
+              "exe_sha256": "986e159870cc1abad7f23b80bac8f606fb1be444028891bc5d534bcd93498617",
+              "declared_manifest_sha256": "fa0f03408e1ec84039c4a204273a21fcd4314ea2b1673661876097ed00549446",
+              "compiled_source_commit": "754f8cab43bd67361587c37814fbf7a45c9786bc",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "loader": "default Seamless Loading",
+              "input": "owned offline native pads",
+              "rollback": false
+            },
+            "action": "Original P1 Continue/Quit pages with native choice/cancel; inspect composed bodies/meters.",
+            "outcome": "Bounded authority/cancel/resume checks and all15 independently reviewed captures pass across four exact-image runs; full comparison remains unverified.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-local-primary\\qualification.json",
+                "sha256": "a02c14eb4fc0b9196963fdebe1c89e8c89287eb56e9aa3e999dc008e4e844a1a"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v14-754f8ca\\candidate.json",
+                "sha256": "b7827b987decd6200e6022a066e3d1a9a1fac28fa1ee232d10755a887d5a8ed8"
+              },
+              {
+                "path": "docs/evidence/mmx6-native-quit/manifest-bound-754f8ca-reviewed.json",
+                "sha256": "ec0a353c92a616f4dde0c3dec38b7bf85c62fc3fa7d4390eb3d6f35625079a32"
+              }
+            ],
+            "limits": [
+              "Exact preserved754f8ca/executable986e1598, default loader, intro and fixed X/P1+Zero/P2 only.",
+              "Only the guest Select admission defect is resolved; complete R15 still requires native final Quit, current-data/character selection, acquired progress and guest menu reentry.",
+              "Both original primary confirmation pages hide gameplay bodies/meters; no live attack effects were seeded, so R7 effect-suppression coverage remains open.",
+              "Both pairs use actual same-machine numeric127 UDP, delay3 and disabled rollback/network user states; no cross-machine/OS/CPU qualification.",
+              "Independent captures do not establish identical render frames between peers.",
+              "Raw artwork-pending reports remain unchanged; visual review is recorded here."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "754f8cab43bd67361587c37814fbf7a45c9786bc",
+            "build_identity": {
+              "exe_sha256": "986e159870cc1abad7f23b80bac8f606fb1be444028891bc5d534bcd93498617",
+              "declared_manifest_sha256": "fa0f03408e1ec84039c4a204273a21fcd4314ea2b1673661876097ed00549446",
+              "compiled_source_commit": "754f8cab43bd67361587c37814fbf7a45c9786bc",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "loader": "default Seamless Loading",
+              "input": "published host via same-machine delay3 numeric127 UDP",
+              "rollback": false
+            },
+            "action": "Original P1 Continue/Quit pages with native choice/cancel; inspect composed bodies/meters.",
+            "outcome": "Bounded authority/cancel/resume checks and all15 independently reviewed captures pass across four exact-image runs; full comparison remains unverified.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-pair-primary\\qualification.json",
+                "sha256": "ed70b9197bbedbbb96829352749a4ce3804faedf2eabd6f76880fabfe54224fd"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v14-754f8ca\\candidate.json",
+                "sha256": "b7827b987decd6200e6022a066e3d1a9a1fac28fa1ee232d10755a887d5a8ed8"
+              },
+              {
+                "path": "docs/evidence/mmx6-native-quit/manifest-bound-754f8ca-reviewed.json",
+                "sha256": "ec0a353c92a616f4dde0c3dec38b7bf85c62fc3fa7d4390eb3d6f35625079a32"
+              }
+            ],
+            "limits": [
+              "Exact preserved754f8ca/executable986e1598, default loader, intro and fixed X/P1+Zero/P2 only.",
+              "Only the guest Select admission defect is resolved; complete R15 still requires native final Quit, current-data/character selection, acquired progress and guest menu reentry.",
+              "Both original primary confirmation pages hide gameplay bodies/meters; no live attack effects were seeded, so R7 effect-suppression coverage remains open.",
+              "Both pairs use actual same-machine numeric127 UDP, delay3 and disabled rollback/network user states; no cross-machine/OS/CPU qualification.",
+              "Independent captures do not establish identical render frames between peers.",
+              "Raw artwork-pending reports remain unchanged; visual review is recorded here."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Exact986e1598 local and same-machine pairs pass primary Continue/Quit-page native controls and inspected composed absence of gameplay bodies/meters. Preexisting native attack effects were absent; live-effect suppression and fullR7 remain unverified."
       }
     },
     {
@@ -1160,13 +1245,13 @@
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "failed",
+        "status": "unverified",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
+          "local": "unverified",
           "netplay": "unverified"
         },
         "evidence": [
@@ -1209,9 +1294,101 @@
               "Fix masks only Select at the P2-owned phase2 route; native validation of the changed image is pending."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "754f8cab43bd67361587c37814fbf7a45c9786bc",
+            "build_identity": {
+              "exe_sha256": "986e159870cc1abad7f23b80bac8f606fb1be444028891bc5d534bcd93498617",
+              "declared_manifest_sha256": "fa0f03408e1ec84039c4a204273a21fcd4314ea2b1673661876097ed00549446",
+              "compiled_source_commit": "754f8cab43bd67361587c37814fbf7a45c9786bc",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "loader": "default Seamless Loading",
+              "input": "owned offline native pads",
+              "rollback": false
+            },
+            "action": "Native guest Select refusal and P1 original two confirmation pages/cancel; independently resumed P2 Right.",
+            "outcome": "Bounded authority/cancel/resume checks and all15 independently reviewed captures pass across four exact-image runs; full comparison remains unverified.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-local-guest\\qualification.json",
+                "sha256": "54be19933f216c4394cbe98b54fda68913de632129b3a42a21ee5f663d279ba9"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-local-primary\\qualification.json",
+                "sha256": "a02c14eb4fc0b9196963fdebe1c89e8c89287eb56e9aa3e999dc008e4e844a1a"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v14-754f8ca\\candidate.json",
+                "sha256": "b7827b987decd6200e6022a066e3d1a9a1fac28fa1ee232d10755a887d5a8ed8"
+              },
+              {
+                "path": "docs/evidence/mmx6-native-quit/manifest-bound-754f8ca-reviewed.json",
+                "sha256": "ec0a353c92a616f4dde0c3dec38b7bf85c62fc3fa7d4390eb3d6f35625079a32"
+              }
+            ],
+            "limits": [
+              "Exact preserved754f8ca/executable986e1598, default loader, intro and fixed X/P1+Zero/P2 only.",
+              "Only the guest Select admission defect is resolved; complete R15 still requires native final Quit, current-data/character selection, acquired progress and guest menu reentry.",
+              "Both original primary confirmation pages hide gameplay bodies/meters; no live attack effects were seeded, so R7 effect-suppression coverage remains open.",
+              "Both pairs use actual same-machine numeric127 UDP, delay3 and disabled rollback/network user states; no cross-machine/OS/CPU qualification.",
+              "Independent captures do not establish identical render frames between peers.",
+              "Raw artwork-pending reports remain unchanged; visual review is recorded here."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "754f8cab43bd67361587c37814fbf7a45c9786bc",
+            "build_identity": {
+              "exe_sha256": "986e159870cc1abad7f23b80bac8f606fb1be444028891bc5d534bcd93498617",
+              "declared_manifest_sha256": "fa0f03408e1ec84039c4a204273a21fcd4314ea2b1673661876097ed00549446",
+              "compiled_source_commit": "754f8cab43bd67361587c37814fbf7a45c9786bc",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "loader": "default Seamless Loading",
+              "input": "published host via same-machine delay3 numeric127 UDP",
+              "rollback": false
+            },
+            "action": "Native guest Select refusal and P1 original two confirmation pages/cancel; independently resumed P2 Right.",
+            "outcome": "Bounded authority/cancel/resume checks and all15 independently reviewed captures pass across four exact-image runs; full comparison remains unverified.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-pair-guest\\qualification.json",
+                "sha256": "2247b91f891397387f94cbdfe0d528c6a7b692008bee23a31f2fc4fdb519bb8e"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-quit-v14-754f8ca-pair-primary\\qualification.json",
+                "sha256": "ed70b9197bbedbbb96829352749a4ce3804faedf2eabd6f76880fabfe54224fd"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v14-754f8ca\\candidate.json",
+                "sha256": "b7827b987decd6200e6022a066e3d1a9a1fac28fa1ee232d10755a887d5a8ed8"
+              },
+              {
+                "path": "docs/evidence/mmx6-native-quit/manifest-bound-754f8ca-reviewed.json",
+                "sha256": "ec0a353c92a616f4dde0c3dec38b7bf85c62fc3fa7d4390eb3d6f35625079a32"
+              }
+            ],
+            "limits": [
+              "Exact preserved754f8ca/executable986e1598, default loader, intro and fixed X/P1+Zero/P2 only.",
+              "Only the guest Select admission defect is resolved; complete R15 still requires native final Quit, current-data/character selection, acquired progress and guest menu reentry.",
+              "Both original primary confirmation pages hide gameplay bodies/meters; no live attack effects were seeded, so R7 effect-suppression coverage remains open.",
+              "Both pairs use actual same-machine numeric127 UDP, delay3 and disabled rollback/network user states; no cross-machine/OS/CPU qualification.",
+              "Independent captures do not establish identical render frames between peers.",
+              "Raw artwork-pending reports remain unchanged; visual review is recorded here."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Reproduced exact089bb606 local guest Select entering original campaign Quit menu1/substate6/phase1/page0. No confirmation/final Quit sent; captured frame black with fade1, so artwork remains unverified. Default source fix withholds Select only at P2-owned phase2; native retest of changed identity, paired authority, P1 finalQuit/current-data/reentry remain pending."
+        "limitations": "Exact986e1598 local and same-machine pairs now pass guest Select refusal, primary two-page/cancel authority, retained resources and native resumed input. Historical guest-admission failure is preserved and fixed; full finalQuit/current-data/character selection/acquired progression/reentry remain unverified."
       }
     },
     {
