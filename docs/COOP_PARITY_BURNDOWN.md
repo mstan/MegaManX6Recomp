@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 234 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | R13 passed on one exact candidate; 233 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -48,7 +48,10 @@ candidate identities; observations do not transfer automatically to a rebuild.
   core/mod samples. The route admits authored record 25 while X remains fixed,
   observes original initialization, Zero-only proximity response and native
   attack damage on both peers. See [the paired receipt](COOP_PAIRED_ENEMY_BASELINE.md).
-  Other targeting routines and stages remain unverified.
+  A fresh manifest-bound repeat now passes R13 locally and over development
+  loopback: 12 local checks, 16 paired checks, 46 matching resolved core/mod
+  samples and verified agreement before guest cycle0/tick0. Other targeting
+  routines and stages remain unverified.
 - [Independent native trace counters](COOP_NATIVE_WORLD_TRACE.md) show one
   enemy-world entry per complete frame in the observed intro sequence: 361
   frames, 364 complete driver cycles and 83 bound live-enemy frames. Both
@@ -73,10 +76,12 @@ candidate identities; observations do not transfer automatically to a rebuild.
   failures. Compressed-stream MDEC, forced-scalar and exhaustive load-delay
   coverage remain open; this matrix does not qualify another CPU or OS.
 
-The next candidate will exercise an explicit development-only numeric
-`127.0.0.1` catalog. Its default remains off until the candidate's eligibility,
-real transport and restart checks have evidence. No cross-machine or broad
-production profile is inferred from this one-machine work.
+The explicit development-only numeric `127.0.0.1` catalog now has actual
+transport and same-session-ID restart evidence on frozen executable37cdc487.
+Both starts settle before cycle0/tick0, with different nonce-bound selected
+identities. The enabled developer build passes36/36 game checks. The option
+remains off by default; no cross-machine or broad production profile is inferred.
+See [the exact candidate and limits](COOP_HOST_LAB_BASELINE.md).
 
 ## First implementation milestone
 
@@ -230,16 +235,13 @@ from these bounded milestones.
 
 ## Next integration gates
 
-1. Qualify the fresh manifest-bound candidate locally and through the required
-   startup gate on the narrowly eligible loopback route. Retain actual
-   zero-cycle agreement, independent inputs, native damage, lifecycle,
-   composed captures and resolved core/mod samples. Repeat startup with fresh
-   nonces; preserve refusal and mismatch evidence. R13 still needs the final
-   exact-candidate receipts before its ledger status changes.
-2. Extend the now-passing native intro cases with both personal menus and
+1. Extend the now-passing native intro cases with both personal menus and
    authored scene checks. Keep framework fixture gaps and existing SPU
    fidelity failures explicit. Use real peer hardware before enabling any
    cross-machine, cross-CPU or cross-OS qualification.
+2. Validate subsequent implementation changes on a newly frozen candidate;
+   retain the current R13 receipt against its actual compiled source commit.
+   Repeat relevant cases when a changed binary or execution contract is used.
 3. Extend the registered host-state provider beyond the healthy intro/P1 menu:
    qualify rewind, both menus, joining/death, scenes, deferred heals and moving
    solids, including cold resource restoration. Keep rollback disabled until

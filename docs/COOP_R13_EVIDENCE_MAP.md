@@ -2,13 +2,18 @@
 
 R13's native X6 analogue is identified: intro stage0/section0/checkpoint0,
 primary record25 at `800FA2DC`, category0/type1/subtype1, authored at (416,1080).
-The ledger remains **unverified locally and over netplay**. Historical runs
-support this particular mechanic in both modes, but the final candidate must
-repeat both modes with a verified compilation identity. The formal ledger
-`evidence` list remains empty; its validator requires a 40-character candidate
-commit, while these receipts establish executable hashes without proving which
-source commit produced them. No candidate commit is inferred from staging-time
-source observations.
+The ledger now passes this bounded record locally and over loopback netplay on
+compiled candidate `fbba0e3ae5e38174022fa7eb79ac81c3741ef391`, executable
+`37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9`.
+The [fresh receipt](evidence/mmx6-r13/manifest-bound-fbba0e3-summary.json) retains
+the canonical compiled manifest, clean source provenance, independent native
+outcomes, actual zero-cycle host agreement, 46 resolved core/mod samples and a
+fresh startup. Its scope remains intro record25 on this exact artifact.
+
+The historical receipts below establish executable hashes without proving which
+source commit produced them. They remain supporting history, distinct from the
+new formal ledger receipts. No candidate commit is inferred from staging-time
+source observations, and the old failed reports remain unchanged.
 
 The machine-readable supporting index is
 [historical-ledger-map.json](evidence/mmx6-r13/historical-ledger-map.json).

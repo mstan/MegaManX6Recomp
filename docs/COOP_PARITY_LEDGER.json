@@ -502,17 +502,112 @@
           "docs/COOP_R13_EVIDENCE_MAP.md",
           "docs/evidence/mmx6-r13/historical-ledger-map.json"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "R13 and both modes remain unverified pending fresh local/netplay receipts on one clean manifest-bound candidate. Historical v10 native pass, v11 local read-only reanalysis pass and v11 paired pass identify exact executable SHA256 values but do not verify a compiled candidate commit; formal evidence remains empty. The original v11 local report stays failed; its separate passed reanalysis is not a rewrite. Source mapping, artifacts/status distinctions and remaining gates are in docs/COOP_R13_EVIDENCE_MAP.md and docs/evidence/mmx6-r13/historical-ledger-map.json. Scope is this intro record and native attack route; nearest-player AI breadth and independent once-world cadence are separate contracts, not extra R13 requirements."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+            "build_identity": {
+              "exe_sha256": "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9",
+              "declared_manifest_sha256": "5a1521fdf8682fbc8e28fee1fb3c4594d0b6a95844ea06ac3af61b998af28673",
+              "compiled_source_commit": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+              "sdk_commit": "79246932166e46a82d7b61a229c60ff9c8e2931a"
+            },
+            "settings": {
+              "co_op": "X/P1 and Zero/P2",
+              "aspect": "native4:3, margin0",
+              "loading": "default resident loader",
+              "bios": "linked OpenBIOS",
+              "overlay_autocompile": false,
+              "input": "offline debug SIO",
+              "rollback": false,
+              "network_user_states": false
+            },
+            "action": "P1 stays at x144; original P2 movement shifts the shared camera to admit inactive authored record25, followed by original native Square attack.",
+            "outcome": "Same live type1/subtype1 origin800FA2DC initializes HP12/phase1 and loses HP after the P2 native attack; P1 remains fixed. All12 bounded local checks pass.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\enemy-admission-r13-hostlab-fbba0e3\\qualification.json",
+                "sha256": "659de177d9b93a0fe9c29a6979f11bdadb9e8f11e4b8448c91b4df6ca27926e1"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-fbba0e3\\candidate.json",
+                "sha256": "92aa781ce7dd7c21228d7a17800e6d93871b525f6fbc0348ae87b8bdc6d1daf9"
+              },
+              {
+                "path": "docs\\evidence\\mmx6-r13\\manifest-bound-fbba0e3-summary.json",
+                "sha256": "dc6a76fe64f1b0eb3ec9093983bf913948a61c6a036240bbc448594f8fd8242a"
+              }
+            ],
+            "limits": [
+              "R13 is bounded to intro stage0/section0/checkpoint0 record25. No all-enemies or full campaign pass.",
+              "Two processes on one physical Windows x64 host; numeric loopback, Clang22.1.8 ENHANCED, observed CPU mask0x7f, default loader, OpenBIOS, retained GL/native4:3.",
+              "The lab option remains development-only and OFF by default; this receipt qualifies this exact artifact and route, not future builds or remote hosts.",
+              "Rollback, online user states, rewind, audio, physical controllers, launcher/lobby and heterogeneous hosts remain separate.",
+              "Separate guest reads are not atomic matched-frame snapshots; resolved core/mod evidence uses common completed simulation ticks.",
+              "Both positive pair runs required owned process termination after quit deadline; graceful exit remains unverified.",
+              "Historical failed reports/reanalyses remain unchanged; this fresh successful run is a distinct receipt."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+            "build_identity": {
+              "exe_sha256": "37cdc4876f7e852b97ef5f14210809b0af7d4a8adaa1759c9e096017170e1fa9",
+              "declared_manifest_sha256": "5a1521fdf8682fbc8e28fee1fb3c4594d0b6a95844ea06ac3af61b998af28673",
+              "compiled_source_commit": "fbba0e3ae5e38174022fa7eb79ac81c3741ef391",
+              "sdk_commit": "79246932166e46a82d7b61a229c60ff9c8e2931a"
+            },
+            "settings": {
+              "co_op": "X/P1 and Zero/P2",
+              "aspect": "native4:3, margin0",
+              "loading": "default resident loader",
+              "bios": "linked OpenBIOS",
+              "overlay_autocompile": false,
+              "input": "original peer host sampler through delay3 numeric127.0.0.1; development host lab explicitly ON",
+              "rollback": false,
+              "network_user_states": false
+            },
+            "action": "P1 stays at x144; original P2 movement shifts the shared camera to admit inactive authored record25, followed by original native Square attack.",
+            "outcome": "Same live type1/subtype1 origin800FA2DC initializes HP12/phase1 and loses HP after the P2 native attack; P1 remains fixed. Both peers additionally agree before cycle0/tick0 and match46 resolved core/mod samples across gameplay/lifecycle windows.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\netplay-hostlab-fbba0e3\\qualification.json",
+                "sha256": "b9afcca1bb1dfcf34236658f807556c906af2b77057c3e0c7f7cc693c0bbd038"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-fbba0e3\\candidate.json",
+                "sha256": "92aa781ce7dd7c21228d7a17800e6d93871b525f6fbc0348ae87b8bdc6d1daf9"
+              },
+              {
+                "path": "docs\\evidence\\mmx6-r13\\manifest-bound-fbba0e3-summary.json",
+                "sha256": "dc6a76fe64f1b0eb3ec9093983bf913948a61c6a036240bbc448594f8fd8242a"
+              }
+            ],
+            "limits": [
+              "R13 is bounded to intro stage0/section0/checkpoint0 record25. No all-enemies or full campaign pass.",
+              "Two processes on one physical Windows x64 host; numeric loopback, Clang22.1.8 ENHANCED, observed CPU mask0x7f, default loader, OpenBIOS, retained GL/native4:3.",
+              "The lab option remains development-only and OFF by default; this receipt qualifies this exact artifact and route, not future builds or remote hosts.",
+              "Rollback, online user states, rewind, audio, physical controllers, launcher/lobby and heterogeneous hosts remain separate.",
+              "Separate guest reads are not atomic matched-frame snapshots; resolved core/mod evidence uses common completed simulation ticks.",
+              "Both positive pair runs required owned process termination after quit deadline; graceful exit remains unverified.",
+              "Historical failed reports/reanalyses remain unchanged; this fresh successful run is a distinct receipt."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Passed only for the authored intro record25/native attack route on exact manifest-bound fbba0e3 / executable37cdc487... . Both local and development loopback modes passed; historical failed/reanalysis reports are preserved separately. No claim for other placements, contact damage, broad nearest-player AI, independent once-world cadence, other hosts or campaign breadth. See manifest-bound-fbba0e3-summary.json for exact identities, settings, resolved samples, reviewed images and cleanup limits."
       }
     },
     {

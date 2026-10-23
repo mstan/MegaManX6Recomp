@@ -63,3 +63,8 @@ same-artifact pair and restart/rematch receipt, identical selected SHA on both
 peers, actual cycle0/tick0 settlement before guest dispatch, default native
 loader/intro/input checks, and resolved core/mod matching. Broader gameplay,
 audio, rollback, other hosts and production release remain unverified.
+
+The fresh [native baseline](COOP_HOST_LAB_BASELINE.md) supplies bounded evidence
+for executable37cdc487 on the measured host, including the required startup,
+gameplay and restart checks. The semantic JSON remains a development contract;
+its hash does not qualify a future build automatically. The default stays OFF.
