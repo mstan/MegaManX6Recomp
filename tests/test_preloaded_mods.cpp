@@ -3,13 +3,14 @@
 
 #include <filesystem>
 #include <iostream>
+#include <set>
 #include <string>
 #include <utility>
 
 namespace {
 
-constexpr size_t kExpectedPackages = 17;
-constexpr size_t kExpectedFeatures = 205;
+constexpr size_t kExpectedPackages = 18;
+constexpr size_t kExpectedFeatures = 206;
 constexpr size_t kExpectedTweaksPackages = 13;
 constexpr const char* kGameId = "SLUS-01395";
 constexpr const char* kStockDiscSha256 =
@@ -21,6 +22,22 @@ int fail(const std::string& message) {
 }
 
 void no_op_plugin() {}
+
+bool default_enabled(const std::string& package, const std::string& feature) {
+    return (package == "mmx6.enhancement.seamless-loading" &&
+            feature == "seamless-loading") ||
+           (package == "mmx6.diagnostics" && feature == "input-recording");
+}
+
+bool plugin_only_plan(const PSXRecompV4::ModResolution& plan,
+                      const std::set<std::string>& expected) {
+    if (!plan.ok || !plan.writes.empty() || !plan.overlays.empty() ||
+        !plan.derived_discs.empty() || !plan.resources.empty() ||
+        plan.plugins.size() != expected.size()) return false;
+    std::set<std::string> actual;
+    for (const auto& plugin : plan.plugins) actual.insert(plugin.id);
+    return actual == expected;
+}
 
 }  // namespace
 
@@ -103,6 +120,44 @@ int main(int argc, char** argv) {
              package->features[0].channel != PSXRecompV4::ModChannel::Experimental)) {
             return fail("co-op must ship as experimental 0.0.1");
         }
+        if (id == "mmx6.local-coop") {
+            if (package->options.size() != 1) return fail("co-op must expose its HUD layout");
+            const auto& option = package->options.front();
+            if (option.feature_id != "prototype" || option.id != "hud_layout" ||
+                option.type != PSXRecompV4::ModOptionType::Choice ||
+                option.default_value != "stacked" || option.choices.size() != 2 ||
+                option.choices[0].value != "stacked" ||
+                option.choices[1].value != "side_by_side") {
+                return fail("co-op HUD layout must default to stacked and offer side by side");
+            }
+        }
+        if (id == "mmx6.diagnostics") {
+            if (package->version != "1.0.0" ||
+                package->channel != PSXRecompV4::ModChannel::Stable ||
+                package->save_compatibility != "shared" ||
+                package->resolver != "declarative" ||
+                package->targets.size() != 1 ||
+                package->targets.front().game_id != kGameId ||
+                package->targets.front().disc_sha256 != kStockDiscSha256 ||
+                !package->targets.front().exe_sha256.empty() ||
+                package->features.size() != 1 ||
+                package->features.front().id != "input-recording" ||
+                package->features.front().channel != PSXRecompV4::ModChannel::Stable ||
+                package->features.front().hidden ||
+                !package->features.front().default_enabled ||
+                package->plugins.size() != 1 ||
+                package->plugins.front().id != "mmx6.diagnostics" ||
+                package->plugins.front().feature_id != "input-recording" ||
+                package->plugins.front().netplay_local_view ||
+                package->plugins.front().netplay_input ||
+                !package->plugins.front().when.empty() ||
+                !package->patches.empty() || !package->overlays.empty() ||
+                !package->derived_discs.empty() || !package->resources.empty() ||
+                !package->options.empty() || !package->dependencies.empty() ||
+                !package->requirements.empty()) {
+                return fail("diagnostics must be the default-on, stock-targeted recording plugin only");
+            }
+        }
         if (id == "mmx6.tweaks.assets" ||
             id == "mmx6.tweaks.extra-mugshots") {
             return fail(id + " is permission-gated and must remain withheld");
@@ -161,14 +216,12 @@ int main(int argc, char** argv) {
                 return fail(id + "/" + feature.id +
                             " exposes permission-gated collaborator content");
             }
-            /* Seamless Loading is the standard loader; everything else opts in. */
-            const bool seamless =
-                id == "mmx6.enhancement.seamless-loading" &&
-                feature.id == "seamless-loading";
-            if (feature.default_enabled != seamless) {
+            /* Standard loading and input diagnostics are the only defaults. */
+            const bool enabled = default_enabled(id, feature.id);
+            if (feature.default_enabled != enabled) {
                 return fail(id + "/" + feature.id +
-                            (seamless ? " must be enabled by default"
-                                      : " is enabled by default"));
+                            (enabled ? " must be enabled by default"
+                                     : " is enabled by default"));
             }
         }
     }
@@ -196,19 +249,21 @@ int main(int argc, char** argv) {
             return fail(package_id + " legacy package state is enabled");
         }
         for (const auto& [feature_id, feature] : selection.features) {
-            const bool seamless =
-                package_id == "mmx6.enhancement.seamless-loading" &&
-                feature_id == "seamless-loading";
-            if (feature.enabled != seamless) {
+            const bool enabled = default_enabled(package_id, feature_id);
+            if (feature.enabled != enabled) {
                 return fail(package_id + "/" + feature_id +
-                            (seamless ? " resolved disabled in the default state"
-                                      : " resolved enabled in the default state"));
+                            (enabled ? " resolved disabled in the default state"
+                                     : " resolved enabled in the default state"));
             }
         }
     }
 
     if (!PSXRecompV4::mod_register_activation_plugin("mmx6.seamless", no_op_plugin)) {
         return fail("could not register test plugin mmx6.seamless");
+    }
+    // Catalog resolution uses a stub, not the runtime observer or engine APIs.
+    if (!PSXRecompV4::mod_register_activation_plugin("mmx6.diagnostics", no_op_plugin)) {
+        return fail("could not register test plugin mmx6.diagnostics");
     }
 
     const PSXRecompV4::ModResolution plan =
@@ -221,22 +276,62 @@ int main(int argc, char** argv) {
         }
         return fail("default catalog resolution failed: " + detail);
     }
-    if (!plan.writes.empty() || !plan.overlays.empty() ||
-        !plan.derived_discs.empty() || plan.plugins.size() != 1 ||
-        plan.plugins.front().id != "mmx6.seamless") {
-        return fail("default catalog must activate only Seamless Loading");
+    if (!plugin_only_plan(plan, {"mmx6.seamless", "mmx6.diagnostics"})) {
+        return fail("default catalog must activate only Seamless Loading and diagnostics");
+    }
+    for (const auto& plugin : plan.plugins) {
+        const bool diagnostics = plugin.id == "mmx6.diagnostics";
+        if (plugin.package_id != (diagnostics ? "mmx6.diagnostics" :
+                                  "mmx6.enhancement.seamless-loading") ||
+            plugin.feature_id != (diagnostics ? "input-recording" : "seamless-loading")) {
+            return fail("default plugin must retain its owning package and feature");
+        }
+    }
+    if (manager.feature_option_value(plan, "mmx6.local-coop", "prototype", "hud_layout") != "stacked") {
+        return fail("default co-op HUD selection must remain stacked while co-op is disabled");
     }
     if (!manager.set_feature_enabled("mmx6.enhancement.seamless-loading",
                                      "seamless-loading", false, &error)) {
         return fail(error);
     }
-    const PSXRecompV4::ModResolution retail_plan =
-        manager.resolve(kGameId, "", kStockDiscSha256);
-    if (!retail_plan.ok || !retail_plan.writes.empty() ||
-        !retail_plan.overlays.empty() || !retail_plan.derived_discs.empty() ||
-        !retail_plan.plugins.empty()) {
-        return fail("original-loading opt-out must produce no runtime operations");
+    if (!plugin_only_plan(manager.resolve(kGameId, "", kStockDiscSha256),
+                          {"mmx6.diagnostics"})) {
+        return fail("original-loading opt-out must retain diagnostics alone");
     }
+    if (!manager.set_feature_enabled("mmx6.diagnostics", "input-recording", false, &error)) {
+        return fail(error);
+    }
+    if (!plugin_only_plan(manager.resolve(kGameId, "", kStockDiscSha256), {})) {
+        return fail("disabling loading and diagnostics must produce no runtime operations");
+    }
+    if (!manager.set_feature_enabled("mmx6.enhancement.seamless-loading",
+                                     "seamless-loading", true, &error)) return fail(error);
+    if (!plugin_only_plan(manager.resolve(kGameId, "", kStockDiscSha256), {"mmx6.seamless"})) {
+        return fail("diagnostics opt-out must retain Seamless Loading alone");
+    }
+    if (!manager.set_feature_enabled("mmx6.enhancement.seamless-loading",
+                                     "seamless-loading", false, &error)) return fail(error);
+
+    if (!PSXRecompV4::mod_register_activation_plugin("mmx6.local-coop.prototype", no_op_plugin)) {
+        return fail("could not register test plugin mmx6.local-coop.prototype");
+    }
+    if (!manager.set_feature_enabled("mmx6.local-coop", "prototype", true, &error)) return fail(error);
+    for (const char* layout : {"stacked", "side_by_side"}) {
+        if (!manager.set_feature_option("mmx6.local-coop", "prototype", "hud_layout", layout, &error)) {
+            return fail(error);
+        }
+        const auto hud_plan = manager.resolve(kGameId, "", kStockDiscSha256);
+        if (!plugin_only_plan(hud_plan, {"mmx6.local-coop.prototype"}) ||
+            manager.feature_option_value(hud_plan, "mmx6.local-coop", "prototype", "hud_layout") != layout) {
+            return fail(std::string("wrong isolated co-op HUD selection: ") + layout);
+        }
+    }
+    error.clear();
+    if (manager.set_feature_option("mmx6.local-coop", "prototype", "hud_layout", "diagonal", &error) ||
+        error.empty() || manager.feature_option_value("mmx6.local-coop", "prototype", "hud_layout") != "side_by_side") {
+        return fail("invalid HUD layout must be rejected without changing the valid selection");
+    }
+    if (!manager.set_feature_enabled("mmx6.local-coop", "prototype", false, &error)) return fail(error);
 
     PSXRecompV4::mod_clear_plugins_for_tests();
     for (const char* id : {
@@ -282,6 +377,6 @@ int main(int argc, char** argv) {
 
     std::cout << "preloaded mods: " << manager.packages().size()
               << " packages, " << feature_count
-              << " features, Seamless Loading default-on with original-loading opt-out\n";
+              << " features, loading and diagnostics default-on with independent opt-outs; both HUD layouts\n";
     return 0;
 }

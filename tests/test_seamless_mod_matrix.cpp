@@ -41,12 +41,23 @@ constexpr uint32_t kZnullLba = 236858, kZnullSectors = 18088;
 int fail(const std::string &m) { std::cerr << "FAIL: " << m << "\n"; return 1; }
 void no_op_plugin() {}
 
+bool plugin_only_plan(const PSXRecompV4::ModResolution &plan,
+                      const std::set<std::string> &expected) {
+    if (!plan.ok || !plan.writes.empty() || !plan.overlays.empty() ||
+        !plan.derived_discs.empty() || !plan.resources.empty() ||
+        plan.plugins.size() != expected.size()) return false;
+    std::set<std::string> actual;
+    for (const auto &plugin : plan.plugins) actual.insert(plugin.id);
+    return actual == expected;
+}
+
 struct Row {
     std::string name, error;
     std::set<std::string> members;   /* "DAT[12]" / "BIN[3]" touched */
     unsigned disc_exe = 0, disc_other = 0, main_writes = 0, dir_writes = 0, growth = 0;
     uint32_t other_lo = ~0u, other_hi = 0;
     std::set<uint32_t> guard_hits, site_hits;
+    std::set<std::string> plugin_ids;
     bool derived = false;
     std::string verdict() const {
         if (!error.empty()) return "unresolved";
@@ -115,6 +126,7 @@ Row analyse(const std::string &name, const PSXRecompV4::ModResolution &plan) {
         else classify_disc(row, o.target, o.location, o.payload.size());
     }
     row.derived = !plan.derived_discs.empty();
+    for (const auto &plugin : plan.plugins) row.plugin_ids.insert(plugin.id);
     return row;
 }
 }  // namespace
@@ -139,7 +151,18 @@ int main(int argc, char **argv) {
         if (!PSXRecompV4::mod_register_activation_plugin(id, no_op_plugin))
             return fail("could not register plugin " + id);
 
-    /* Every feature alone, with Seamless Loading in its default-on state. */
+    /* Verify the real defaults before isolating the single-feature matrix.
+     * The observer implementation is deliberately not linked into this fixture. */
+    if (!plugin_only_plan(manager.resolve(kGameId, "", kStockDiscSha256),
+                          {"mmx6.seamless", "mmx6.diagnostics"}))
+        return fail("default catalog must resolve loading plus diagnostics only");
+    if (!manager.set_feature_enabled("mmx6.diagnostics", "input-recording", false, &error))
+        return fail(error);
+    if (!plugin_only_plan(manager.resolve(kGameId, "", kStockDiscSha256), {"mmx6.seamless"}))
+        return fail("diagnostics opt-out must preserve the loader-only matrix baseline");
+
+    /* Every feature alone, with Seamless Loading enabled. Diagnostics is also
+     * classified as its own row, rather than contaminating every other row. */
     std::vector<std::pair<std::string, std::string>> features;
     for (const auto &[id, versions] : manager.packages()) {
         const auto *package = manager.selected_package(id);
@@ -147,9 +170,17 @@ int main(int argc, char **argv) {
         for (const auto &f : package->features) features.emplace_back(id, f.id);
     }
     std::vector<Row> rows;
+    bool checked_diagnostics = false;
     for (const auto &[package, feature] : features) {
         if (!manager.set_feature_enabled(package, feature, true, &error)) return fail(error);
-        Row row = analyse(package + "/" + feature, manager.resolve(kGameId, "", kStockDiscSha256));
+        const auto feature_plan = manager.resolve(kGameId, "", kStockDiscSha256);
+        const bool diagnostics = package == "mmx6.diagnostics" && feature == "input-recording";
+        if (diagnostics) {
+            if (!plugin_only_plan(feature_plan, {"mmx6.seamless", "mmx6.diagnostics"}))
+                return fail("diagnostics alone must add only its recording plugin to the loader");
+            checked_diagnostics = true;
+        }
+        Row row = analyse(package + "/" + feature, feature_plan);
         /* A feature that requires another package is checked with it enabled. */
         const std::string needs = "requires enabled package ";
         const size_t at = row.error.find(needs);
@@ -166,6 +197,7 @@ int main(int argc, char **argv) {
         rows.push_back(row);
         if (!manager.set_feature_enabled(package, feature, false, &error)) return fail(error);
     }
+    if (!checked_diagnostics) return fail("diagnostics feature is missing from the matrix");
     /* Every feature at once, when the catalog allows that combination. */
     for (const auto &[package, feature] : features) manager.set_feature_enabled(package, feature, true, &error);
     Row all = analyse("ALL FEATURES", manager.resolve(kGameId, "", kStockDiscSha256));
@@ -197,6 +229,8 @@ int main(int argc, char **argv) {
      * docs/SEAMLESS_LOADING.md and this test together. */
     for (const auto &r : rows) {
         if (!r.error.empty()) return fail(r.name + " does not resolve alone: " + r.error);
+        if (r.name != "mmx6.diagnostics/input-recording" && r.plugin_ids.count("mmx6.diagnostics"))
+            return fail(r.name + " unexpectedly includes diagnostics in its isolated plan");
         if (r.disc_other) return fail(r.name + " patches unclassified disc sectors");
         if (r.growth && !r.dir_writes)
             return fail(r.name + " writes the DAT growth area without growing ROCK_X6.DAT");
