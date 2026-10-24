@@ -1505,8 +1505,12 @@ static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut, uint1
 }
 static int zero_ui_effect(uint32_t actor) {
     int slot=shared_effect_slot(actor);
+    /* Native8004AE78..AEAC resolves the UI table's first relative offset;
+     * actor+3C holds that assembly, not the table base at SCRATCH+3C. */
+    uint32_t offset=menu_assembly?psx_mod_read_word(menu_assembly):ASSET_SPACE;
     return slot>=0 && shared_effect_owners[slot]==2 && psx_mod_read_byte(actor) &&
-        psx_mod_read_byte(actor+1)==17 && psx_mod_read_word(actor+0x3C)==menu_assembly;
+        psx_mod_read_byte(actor+1)==17 && offset<ASSET_SPACE &&
+        psx_mod_read_word(actor+0x3C)==menu_assembly+offset;
 }
 static uint16_t zero_ui_effect_bank(uint16_t page,uint16_t clut,uint16_t tile) {
     /* Native type17 draws Zero's PL00 UI assembly (frames83/84). Its atlas

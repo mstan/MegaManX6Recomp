@@ -480,7 +480,8 @@ static void deferred_shared_effect_owner_context(void) {
 static void deferred_ui_effect_retains_owner_atlas(void){
     CPUState cpu;setup(&cpu);uint32_t actor=0x80091298u;
     psx_mod_write_byte(actor,1);psx_mod_write_byte(actor+1,17);psx_mod_write_byte(actor+3,1);
-    psx_mod_write_byte(actor+0x16,0x37);psx_mod_write_word(actor+0x3C,menu_assembly);
+    psx_mod_write_word(menu_assembly,0xCC);
+    psx_mod_write_byte(actor+0x16,0x37);psx_mod_write_word(actor+0x3C,menu_assembly+0xCC);
     psx_mod_write_half(actor+0x42,0x7E50);shared_effect_owners[0]=2;
     /* Deliberately different resident X tiles/CLUT and private Zero source. */
     memset(test_vram,0xBB,sizeof test_vram);
@@ -497,6 +498,9 @@ static void deferred_ui_effect_retains_owner_atlas(void){
     CHECK(!failed && world_packets==packets+80 && bank_count==2);
     CHECK(!memcmp(first,memory(packets+PLAYER_PACKET_BYTES),sizeof first));
     CHECK(!state_track.count && !state_track.error && !world_render);
+    psx_mod_write_word(actor+0x3C,menu_assembly);cpu.gpr[4]=actor;
+    CHECK(!render_survivor(&cpu,0x800232D4u)); /* Table base is not the resolved native assembly. */
+    psx_mod_write_word(actor+0x3C,menu_assembly+0xCC);
     shared_effect_owners[0]=1;cpu.gpr[4]=actor;CHECK(!render_survivor(&cpu,0x800232D4u));
     shared_effect_owners[0]=2;psx_mod_write_byte(actor+1,26);CHECK(!render_survivor(&cpu,0x800232D4u));
     psx_mod_write_byte(actor+1,17);psx_mod_write_word(actor+0x3C,assembly);CHECK(!render_survivor(&cpu,0x800232D4u));
