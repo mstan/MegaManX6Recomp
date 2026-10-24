@@ -979,9 +979,9 @@ static void diagnostic_setup(CPUState *cpu) {
         psx_mod_counter_add("mmx6.coop.debug-fixture-rejected",1);
         return;
     }
-    /* Command8 may only commit at the outer stage entry, never from the
+    /* Commands8/9 may only commit at the outer stage entry, never from the
      * controller's projected/nested post-player boundary. */
-    if (command==8) return;
+    if (command==8 || command==9) return;
     /* Development-only fixture setup. The published host-body copy remains
      * read-only; a one-byte command commits the already-written payload. */
 #ifdef MMX6_COOP_INPUT_TAINT_API
@@ -1103,10 +1103,42 @@ static int player_tick(CPUState *cpu, uint32_t address) {
     cpu->gpr[2]=result;
     return 1;
 }
+static void diagnostic_inventory_setup(CPUState *cpu) {
+    if (psx_mod_read_byte(diagnostic+0x50)!=9) return;
+    /* An offline prerequisite bypass for native resource tests. Neither
+     * selection nor current HP/ammo is changed: subsequent native input must
+     * spend energy, and actual state load/rewind must restore it. */
+    unsigned mask=psx_mod_read_byte(diagnostic+0x51);
+    if (!diagnostic_mutation_allowed() || !mask || scene_owner || zero_projected ||
+        psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
+        psx_mod_read_byte(PLAY+12) || psx_mod_read_byte(PLAY+13) ||
+        psx_mod_read_byte(PLAY+0x38) || psx_mod_read_byte(PLAY+0x5E)!=1 ||
+        life.status[0]!=MMX6_COOP_ALIVE || life.status[1]!=MMX6_COOP_ALIVE ||
+        psx_mod_read_byte(PLAYER+2) || p2.body[2]!=1 ||
+        psx_mod_read_byte(PLAYER+0xE7)!=1 || p2.body[0xE7]!=5 ||
+        psx_mod_read_byte(PLAYER+4)!=1 || p2.body[4]!=1 ||
+        psx_mod_read_byte(PLAYER+5)!=2 || p2.body[5]!=2 ||
+        checkpoint_hash(0x8003D718u,0x8003D7ACu)!=0xe818bdd7u) {
+        psx_mod_write_byte(diagnostic+0x50,0);
+        psx_mod_counter_add("mmx6.coop.debug-inventory-rejected",1);
+        return;
+    }
+#ifdef MMX6_COOP_INPUT_TAINT_API
+    psx_session_input_taint_add(PSX_INPUT_TAINT_GAME_MAILBOX);
+#endif
+    psx_mod_write_byte(PLAY+0x60,(uint8_t)mask);
+    guest(cpu,0x8003D718,PLAYER,0);
+    enter_zero();
+    guest(cpu,0x8003D718,PLAYER,0);
+    leave_zero();
+    psx_mod_write_byte(diagnostic+0x50,0);
+    psx_mod_counter_add("mmx6.coop.debug-inventory-grant",1);
+}
 static int stage_tick(CPUState *cpu, uint32_t address) {
     if (stage_call || inside) return 0;
     if (checkpoint_stage_boundary(cpu)) return 1;
     if (!enrolled || failed) return 0;
+    diagnostic_inventory_setup(cpu);
     diagnostic_setup(cpu);
     uint16_t raw=p2_input(MMX6_INPUT_STAGE);
     int start=!!(raw&8), pressed=start&&!p2_start_previous;

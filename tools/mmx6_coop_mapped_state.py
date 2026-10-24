@@ -16,6 +16,7 @@ import qualify_mmx6_coop_personal_menu as menus
 import qualify_mmx6_coop_state as state
 import mmx6_owned_keyboard as keyboard_input
 import mmx6_coop_state_resources as resource_input
+import mmx6_coop_inventory_state as inventory_input
 
 
 SUCCESS='bounded_mapped_state_controls_observed'
@@ -150,7 +151,7 @@ def restored_publications(case,saved,label):
     return restored,checks
 
 
-def exercise(ctx,*,output,timeout=12,keyboard=False,resource_sources=None):
+def exercise(ctx,*,output,timeout=12,keyboard=False,resource_sources=None,inventory_source=None):
     require(ctx['mode']=='local' and ctx['input_path']=='published_host','Mapped states need the owned local host route')
     output.mkdir(parents=True,exist_ok=False)
     evidence={};ctx['report']['mapped_state']=evidence
@@ -172,6 +173,8 @@ def exercise(ctx,*,output,timeout=12,keyboard=False,resource_sources=None):
         require(all(checks.values()),label+': full provider/static DSP differs from saved paused state')
         return checks
     try:
+        if inventory_source:
+            inventory_input.prepare(ctx,case,inventory_source)
         case.open_live_window()
         before=case.stable_window('Before mapped keyboard S save' if keyboard else 'Before mapped Square save')
         controls.operation('save',0)
@@ -183,6 +186,17 @@ def exercise(ctx,*,output,timeout=12,keyboard=False,resource_sources=None):
         evidence['checks']['keyboard_s_saved_live_private_pools' if keyboard else 'mapped_square_saved_live_private_pools']=True
         evidence['status']='failed_behavior'
         case.resume_and_retire(reference,'before-mapped-load')
+        if inventory_source:
+            spent=inventory_input.spend(ctx,case,'before-mapped-ammo-load')
+            divergence=inventory_input.changed_resources(before[0],spent)
+            controls.operation('load',0)
+            reference,inventory_checks=restored_publications(case,saved,'Mapped load restores natively spent ammo and selection')
+            inventory_checks.update(divergence)
+            inventory_checks['personal_ammo_weapon_restored']=state.private_resources(reference)==state.private_resources(before[0])
+            require(all(inventory_checks.values()),'Mapped load did not restore genuinely spent ammo and selection')
+            evidence['checks'].update({'inventory_'+k:v for k,v in inventory_checks.items()})
+            evidence['checks']['inventory_full_provider_probe']=all(probe('inventory-load',saved).values())
+            case.resume_and_retire(reference,'before-mapped-hp-load')
         damaged=resource_input.exercise(ctx,case,resource_sources) if resource_sources else None
         controls.operation('load',0)
         reference,checks=restored_publications(case,saved,'Actual keyboard L restores private pools' if keyboard else 'Actual mapped Cross restores private pools')
@@ -210,6 +224,11 @@ def exercise(ctx,*,output,timeout=12,keyboard=False,resource_sources=None):
         adapter.wait_counter('tick',240,'Retain original paused private pools in rewind history')
         pause_end=case.stable_window('Original positive private pools retained before rewind divergence')[-1]
         case.resume_and_retire(pause_end,'before-mapped-rewind')
+        if inventory_source:
+            rewind_spent=inventory_input.spend(ctx,case,'before-mapped-ammo-rewind')
+            divergence=inventory_input.changed_resources(before[0],rewind_spent)
+            require(all(divergence.values()),'Rewind setup did not genuinely spend personal ammo/change selection')
+            evidence['checks'].update({'rewind_inventory_'+k:v for k,v in divergence.items()})
         changed=case.sample('Retired pools and moved Zero before mapped rewind')
         require(not state.private_visible(changed),'Rewind setup did not diverge from the saved live pools')
         rewind=ctx['request']('rewind_status');evidence['rewind_before_open']=rewind
@@ -237,6 +256,9 @@ def exercise(ctx,*,output,timeout=12,keyboard=False,resource_sources=None):
         else:controls.hold_until(0x4000,lambda:not controls.overlay()['rewind_open'],'Mapped Cross accepts rewind')
         reference,checks=restored_publications(case,saved,'Actual mapped rewind restores positive original private pools')
         evidence['checks'].update({'rewind_'+k:v for k,v in checks.items()})
+        if inventory_source:
+            evidence['checks']['rewind_personal_ammo_weapon_restored']=state.private_resources(reference)==state.private_resources(before[0])
+            require(evidence['checks']['rewind_personal_ammo_weapon_restored'],'Rewind did not restore personal ammo/selection')
         evidence['checks']['mapped_rewind_full_provider_probe']=all(probe('rewind',saved).values())
         case.capture('mapped-rewind-restored-live-pools')
         case.resume_and_retire(reference,'after-mapped-rewind')
