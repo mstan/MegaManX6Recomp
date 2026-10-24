@@ -2,6 +2,7 @@
 from pathlib import Path
 import sys
 import unittest
+from unittest.mock import Mock
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'tools'))
 import mmx6_coop_state_resources as subject
@@ -12,6 +13,15 @@ def sample(hp):
 
 
 class ResourceRestoreTests(unittest.TestCase):
+    def test_primary_sample_does_not_read_the_borrowed_live_player_slot(self):
+        body=bytearray(0x158);body[2]=0;body[4]=1;body[0x5c]=32;body[0xe7]=1
+        row=dict(p1_body_hex=body.hex(),observation=dict(native_mode=10,native_phase=0,native_timer=77,tick=99))
+        case=Mock();case.sample.return_value=row
+        client=Mock();client.read.return_value=b'\0\0'
+        player=subject.coherent_primary(client,case)
+        self.assertEqual((player['character'],player['form'],player['hp'],player['timer']),(0,1,32,77))
+        client.read.assert_called_once_with(subject.native_contact.native.reference.PLAY+12,2)
+
     def test_unchanged_resources_and_only_one_changed_hero_cannot_pass(self):
         saved=sample([32,32])
         for hp in ([32,32],[30,32],[32,28],[0,28],[30,0]):

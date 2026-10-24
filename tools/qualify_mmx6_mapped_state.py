@@ -22,7 +22,7 @@ def run(args):
         original=binding.load_sources(args.original_exe,args.original_disc,args.disc,
             args.source/'docs/COOP_JUMP_AUDIO_CONTRACT.json')
         for module in (mapped,state,owner,binding,mapped.menus,mapped.keyboard_input,mapped.resource_input,
-                       mapped.resource_input.zero_contact,mapped.resource_input.native_contact):
+                       mapped.resource_input.zero_contact,mapped.resource_input.native_contact,mapped.resource_input.primary):
             p=Path(module.__file__);(output/(p.stem+'-executed-source.py')).write_bytes(p.read_bytes())
         (output/'runner-executed-source.py').write_bytes(Path(__file__).read_bytes())
         report['original_disc']=original['disc']

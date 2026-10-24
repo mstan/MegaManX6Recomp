@@ -8,6 +8,7 @@ import time
 import coop_debug as debug
 import mmx6_coop_contact as zero_contact
 import mmx6_native_contact_audio as native_contact
+import mmx6_coop_primary_audio as primary
 import qualify_mmx6_coop_state as state
 
 
@@ -25,6 +26,17 @@ def restored_resources(saved, damaged, restored):
     )
 
 
+def coherent_primary(client, case):
+    row = case.sample('Published primary body before native resource contact')
+    observation = row['observation']
+    player = primary.player(bytes.fromhex(row['p1_body_hex']), observation)
+    location = client.read(native_contact.native.reference.PLAY+12, 2)
+    player.update(mode=[observation['native_mode'], observation['native_phase']],
+                  stage=location[0], section=location[1],
+                  observation_method='coherent published P1 body/mode/timer; common PLAY location separately read')
+    return player
+
+
 def exercise(ctx, case, sources, *, timeout=90):
     require(ctx['mode'] == 'local' and ctx['input_path'] == 'published_host',
             'Native resource route needs the owned local host sampler')
@@ -39,7 +51,7 @@ def exercise(ctx, case, sources, *, timeout=90):
                  source=target, checks={}, bypasses=[], limits=[
         'HP changes use ordinary host input and native gameplay; ammo spending is separate.',
         'P2 committed contact is source/counter/reaction matched. P1 committed native HP loss is observed; exact P1 damage caller is not claimed.',
-        'Body/PLAY, enemy pool and placement reads are separate RPCs in the original P1 contact helper.',
+        'P1 body/mode/timer use the coherent published diagnostic; common PLAY location, enemy pool and placement use separate RPCs.',
     ])
     case.evidence['native_resource_damage'] = route
     start = case.sample('Before actual native resource divergence')
@@ -96,12 +108,12 @@ def exercise(ctx, case, sources, *, timeout=90):
         else:
             raise debug.DebugError('P2 native resource route exhausted its input bound')
 
-        previous = native_contact.observe(client, target)
+        previous = native_contact.observe(client, target, player_sample=lambda: coherent_primary(client, case))
         require(previous['player']['hp'] == 32, 'P1 was damaged before its own resource route')
         last_x, stalled, jumps = None, 0, 0
         for step in range(250):
             require(time.monotonic() < deadline, 'P1 native contact deadline expired')
-            row = native_contact.observe(client, target)
+            row = native_contact.observe(client, target, player_sample=lambda: coherent_primary(client, case))
             route['p1_observations'].append(row)
             player, actor = row['player'], row['actor']
             require(player['mode'][:2] == [10, 0] and player['stage'] == player['section'] == 0 and

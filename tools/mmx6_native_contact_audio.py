@@ -86,8 +86,8 @@ def target_actor(raw_pool, target):
     return actor,pending,len(live)
 
 
-def observe(session,target):
-    row = native.native_sample(session)
+def observe(session,target,*,player_sample=None):
+    row = native.native_sample(session) if player_sample is None else player_sample()
     raw = session.read(enemies.POOL,enemies.STRIDE*enemies.SLOTS)
     actor,pending,live_count = target_actor(raw,target)
     record = session.read(target['record'],8)
@@ -101,7 +101,9 @@ def observe(session,target):
                        'Native authored contact box escaped original RAM')
         actor['contact_box_hex'] = session.read(pointer,4).hex()
     return dict(player=row,actor=actor,pending_initialization=pending,live_enemy_count=live_count,
-                record_hex=record.hex(),observation_method='separate owned body/PLAY, enemy-pool and placement RPCs')
+                record_hex=record.hex(),observation_method=(
+                    'separate owned body/PLAY, enemy-pool and placement RPCs' if player_sample is None else
+                    'published player diagnostic; separate common PLAY location, enemy-pool and placement RPCs'))
 
 
 def hazardous(player):
