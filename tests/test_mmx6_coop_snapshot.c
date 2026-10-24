@@ -121,6 +121,14 @@ static void retain_native_x_pixels(void){
     CHECK(retain_sprite_bank(0x80040000,0,colors,tile));
     for(unsigned i=0;i<16;++i)vram[480*1024+i]=(uint16_t)(i+1);
     CHECK(hud_tile_bank(0,(uint16_t)(480*64),0));
+    /* Deferred Giga UI pixels must survive cold texture reconstruction even
+     * when resident VRAM belongs to the other player. */
+    memset(vram,0xBB,sizeof vram);
+    for(unsigned y=0;y<16;++y)for(unsigned x=0;x<4;++x)
+        zero_ui_pixels[(256+80+y)*1024+896+16+x]=0x1111;
+    psx_mod_write_half(menu_memory+0x10000+((505-496)*64+1)*2,0x1234);
+    CHECK(zero_ui_effect_bank(0x3E,0x7E50,0x5040));
+    CHECK(zero_ui_effect_bank(0x3E,0x7E50,UINT16_MAX));
 }
 static void digest_and_readiness(void){
     uint32_t h=state_digest();++frame_count;p2_hud_fade=17;CHECK(state_digest()==h);

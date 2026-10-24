@@ -1198,6 +1198,9 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     p2_start_previous=start;
     uint32_t stage_context[4]={raw,phase,0,0};
     STATE_WORDS(restore_stage,29,stage_context,4);
+    /* Private bodies and deferred shared UI effects append to the same
+     * retained arena, in the original world's render order. */
+    world_packets=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
     /* Menus can bypass controller entirely. Consume their Select samples so
      * a held UI press cannot become a new rejoin edge on gameplay resume. */
     if (phase || scene_owner || psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C))
@@ -1504,6 +1507,36 @@ static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut, uint1
     }
     return retain_sprite_bank(source,tile,colors,pixels);
 }
+static int zero_ui_effect(uint32_t actor) {
+    int slot=shared_effect_slot(actor);
+    return slot>=0 && shared_effect_owners[slot]==2 && psx_mod_read_byte(actor) &&
+        psx_mod_read_byte(actor+1)==17 && psx_mod_read_word(actor+0x3C)==menu_assembly;
+}
+static uint16_t zero_ui_effect_bank(uint16_t page,uint16_t clut,uint16_t tile) {
+    /* Native type17 draws Zero's PL00 UI assembly (frames83/84). Its atlas
+     * at896,256 shares VRAM with X's different UI art. Decode the original
+     * private UI pixels and palette, retaining native UVs, tint and blending.
+     * The virtual source key is outside the compressed player archive. */
+    if(!zero_ui_pixels || (page&0x180u))return 0;
+    unsigned cx=(clut&63)*16,cy=clut>>6;
+    if(cy<496 || cy>=512 || cx<256 || cx+16>320)return 0;
+    uint8_t colors[32];
+    capture(menu_memory+0x10000+((cy-496)*64+cx-256)*2,colors,sizeof colors);
+    uint32_t source=menu_memory+MENU_BYTES+(page&31u)*4u;
+    for(unsigned i=0;i<bank_count;++i)
+        if(banks[i].source==source && banks[i].tile==tile && !memcmp(banks[i].colors,colors,32))
+            return banks[i].id;
+    uint16_t pixels[256*256];
+    unsigned width=tile==UINT16_MAX?256:16,bx=(page&15)*64,by=(page&16)*16;
+    for(unsigned y=0;y<width;++y)for(unsigned x=0;x<width;++x) {
+        unsigned u=tile==UINT16_MAX?x:((tile&255)+x)&255;
+        unsigned v=tile==UINT16_MAX?y:((tile>>8)+y)&255;
+        unsigned word=zero_ui_pixels[(by+v)*1024+bx+u/4];
+        unsigned color=(word>>((u&3)*4))&15;
+        pixels[y*width+x]=(uint16_t)(colors[color*2]|colors[color*2+1]<<8);
+    }
+    return retain_sprite_bank(source,tile,colors,pixels);
+}
 static void triangle(uint32_t dst, uint32_t next, const uint32_t *q,
                      unsigned a, unsigned b, unsigned c, uint16_t bank) {
     uint32_t color=q[1]&0xFFFFFF;
@@ -1553,7 +1586,8 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
     }
     /* Common effects use the stage's already resident textures. Only native
      * Zero frames need the retained host bank instead of X's texture slot. */
-    if (!render_x_death && (table<assets || table-assets>=compressed_size)) return;
+    int ui=zero_ui_effect(actor);
+    if (!ui && !render_x_death && (table<assets || table-assets>=compressed_size)) return;
     if (render_x_death && (table<0x80010000u || table>=0x80200000u)) return;
     uint32_t expanded=arena+PLAYER_PACKET_BYTES+(base-arena)*2;
     for (uint32_t at=base;at<end;at+=40,expanded+=80,mode+=8) {
@@ -1563,7 +1597,10 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
         int supported=mmx6_coop_sprite_quad(q,&tile);
         if (tile!=UINT16_MAX)
             q[5]|=(psx_mod_read_word(mode+4)&0x60u)<<16;
-        uint16_t bank=supported?sprite_bank(table,frame,(uint16_t)(q[3]>>16),tile):0;
+        uint16_t bank=0;
+        uint16_t page=tile==UINT16_MAX?(uint16_t)(q[5]>>16):(uint16_t)psx_mod_read_word(mode+4);
+        if(supported)bank=ui?zero_ui_effect_bank(page,
+            (uint16_t)(q[3]>>16),tile):sprite_bank(table,frame,(uint16_t)(q[3]>>16),tile);
         /* Native OT links still address the original tag. Turn it into a
          * zero-command link to two tagged GT3 packets in our own DMA arena. */
         if (bank) {
@@ -1594,30 +1631,32 @@ static void render(CPUState *cpu, uint32_t address) {
     inside=1;
     uint32_t original=psx_mod_read_word(SCRATCH+0x100);
     uint32_t original_mode=psx_mod_read_word(SCRATCH+0x104);
-    uint32_t base=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
+    uint32_t arena=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
+    uint32_t base=world_packets;
     capture_player(&p1);
     STATE_BYTES(restore_player,16,&p1,sizeof p1);
-    uint32_t render_context[3]={original,original_mode,base};STATE_WORDS(restore_packet,17,render_context,3);
+    uint32_t render_context[4]={original,original_mode,arena,base};STATE_WORDS(restore_packet,17,render_context,4);
     project_player(&p2);
     psx_mod_write_word(SCRATCH+0x100,base);
-    psx_mod_write_word(SCRATCH+0x104,base+PLAYER_MODE_OFFSET);
-    render_actor(cpu,PLAYER,base);
+    psx_mod_write_word(SCRATCH+0x104,arena+PLAYER_MODE_OFFSET+(base-arena)/5);
+    render_actor(cpu,PLAYER,arena);
     /* 80022960 draws X-only attached actors, then visible trails2/1/0.
      * Fixed P2 is Zero, so preserve the native no-charge-glow draw gate;
      * updating its attached pool does not authorize synthetic X artwork. */
     if (!psx_mod_read_byte(PLAYER+2)) for (unsigned i=0;i<3 && !failed;++i) {
         uint32_t actor=0x800911A8u+i*0x50;
-        if (psx_mod_read_byte(actor+3)) render_actor(cpu,actor,base);
+        if (psx_mod_read_byte(actor+3)) render_actor(cpu,actor,arena);
     }
     for (unsigned i=3;i && !failed;--i) {
         uint32_t actor=0x800972F8u+(i-1)*0x60;
-        if (psx_mod_read_byte(actor+3)) render_actor(cpu,actor,base);
+        if (psx_mod_read_byte(actor+3)) render_actor(cpu,actor,arena);
     }
     for (unsigned i=0;i<32 && !failed;++i) {
         uint32_t actor=0x800950A0u+i*0xA0;
-        if (psx_mod_read_byte(actor+3)) render_actor(cpu,actor,base);
+        if (psx_mod_read_byte(actor+3)) render_actor(cpu,actor,arena);
     }
     uint32_t end=psx_mod_read_word(SCRATCH+0x100);
+    world_packets=end;
     psx_mod_write_word(SCRATCH+0x100,original);
     psx_mod_write_word(SCRATCH+0x104,original_mode);
     project_player(&p1);
@@ -1627,13 +1666,16 @@ static void render(CPUState *cpu, uint32_t address) {
     inside=0;
 }
 static int render_survivor(CPUState *cpu, uint32_t address) {
-    if (!zero_world || world_render) return 0;
     uint32_t actor=cpu->gpr[4];
+    if(world_render || !enrolled || failed || psx_mod_read_byte(PLAY)!=0x0A ||
+        !psx_mod_texture_banks_supported())return 0;
+    int ui=zero_ui_effect(actor);
+    if (!zero_world && !ui) return 0;
     int shot=actor>=0x800950A0 && actor<0x800964A0 && !((actor-0x800950A0)%0xA0);
     int trail=actor>=0x800972F8 && actor<0x80097418 && !((actor-0x800972F8)%0x60);
     int attached=!psx_mod_read_byte(PLAYER+2) && actor>=0x800911A8 && actor<0x80091298 &&
         !((actor-0x800911A8)%0x50);
-    if (actor!=PLAYER && !shot && !trail && !attached) return 0;
+    if (actor!=PLAYER && !shot && !trail && !attached && !ui) return 0;
     world_render=1;
     uint32_t original=psx_mod_read_word(SCRATCH+0x100);
     uint32_t original_mode=psx_mod_read_word(SCRATCH+0x104);

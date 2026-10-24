@@ -14,6 +14,7 @@ enum { TRAILS=0x800972F8u,EFFECTS=0x800911A8u,MODES_AT=120000u };
 static uint8_t ram[0x200000],extra[0x300000];
 static uint8_t previous_frame[FRAME_ARENA];
 static uint16_t test_vram[1024*512],bank_first[4096];
+static uint16_t test_zero_ui[1024*512];
 static uint32_t calls[512],drawn[128],tagged[256];
 static unsigned call_count,draw_count,tag_count;
 static int texture_support=1,marker_override=2,terminal_player,stage_driver;
@@ -125,8 +126,13 @@ static void native_draw(uint32_t actor){
     CHECK(at>=arena && at+40<=arena+40000 && mode==arena+MODES_AT+(at-arena)/5);
     uint32_t q[10]={0x09000000u|((mode+8)&0xFFFFFFu),0x2C808080u,0x0014000Au,0,0x0014001Au,0x00000010u,0x0024000Au,0x00001000u,0x0024001Au,0x00001010u};
     q[3]=(uint32_t)psx_mod_read_half(actor+0x42)<<16;
+    if(zero_ui_effect(actor)) {
+        q[1]=0x7D000000u;q[3]|=0x5040u;
+        memset(q+4,0,6*sizeof *q);
+    }
     for(unsigned i=0;i<10;++i)psx_mod_write_word(at+i*4,q[i]);
-    psx_mod_write_word(mode,0x01000000u|(at&0xFFFFFFu));psx_mod_write_word(mode+4,0xE1000040u);
+    psx_mod_write_word(mode,0x01000000u|(at&0xFFFFFFu));
+    psx_mod_write_word(mode+4,zero_ui_effect(actor)?0xE100003Eu:0xE1000040u);
     unsigned priority=psx_mod_read_byte(actor+0x16);
     uint32_t tail=0x8008EB08u+(psx_mod_read_word(SCRATCH)&1u)*128+(priority>>4)*32+(priority&7)*4;
     uint32_t previous=psx_mod_read_word(tail);
@@ -166,7 +172,7 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
         unsigned found=0;
         for(unsigned i=0;i<state_track.count;++i){
             Mmx6StateFrame *f=&state_track.frame[i];if(f->tag!=17 && f->tag!=18)continue;
-            CHECK(f->words && f->bytes==(f->tag==17?12u:16u));
+            CHECK(f->words && f->bytes==16u);
             uint32_t before=state_digest();f->saved[4]^=1;CHECK(state_digest()!=before);f->saved[4]^=1;
             CHECK(state_digest()==before);++found;
         }
@@ -221,6 +227,7 @@ static void setup(CPUState *cpu){
     menu_vram_probe=gp0_upload_stage=gp0_upload_left=0;
     assets=0x9F000000u;assembly=0x9F010000u;palette_source=0x9F020000u;active_palette=0x9F024000u;
     packets=0x9F100000u;diagnostic=0x9F080000u;menu_memory=0x9F200000u;menu_assembly=menu_memory+0x14000;
+    world_packets=packets;zero_ui_pixels=test_zero_ui;memset(test_zero_ui,0,sizeof test_zero_ui);
     static uint8_t compressed[64];zero_compressed=compressed;compressed_size=sizeof compressed;memset(compressed,0,sizeof compressed);
     put32(compressed,0x100020);const uint16_t stream[]={0x6000,0x1111,0x0001,63,0,0};
     for(unsigned i=0;i<6;++i){compressed[32+i*2]=(uint8_t)stream[i];compressed[33+i*2]=(uint8_t)(stream[i]>>8);}
@@ -356,7 +363,8 @@ static void draw_order_retained_packets_and_survivor(void){
     uint32_t second_tag=packets+40000+1*80+40;CHECK((psx_mod_read_word(second_tag)&0xFFFFFFu)==((packets+MODES_AT+2*8)&0xFFFFFFu));
     PlayerContext after;capture_player(&after);CHECK(!memcmp(&resident,&after,sizeof after) && !inside && !state_track.count && !failed);
     capture(packets,previous_frame,sizeof previous_frame);
-    psx_mod_write_word(SCRATCH,1);psx_mod_write_word(SCRATCH+0x124,0);native_budget=0;draw_count=tag_count=0;
+    psx_mod_write_word(SCRATCH,1);world_packets=packets+FRAME_ARENA;
+    psx_mod_write_word(SCRATCH+0x124,0);native_budget=0;draw_count=tag_count=0;
     render(&cpu,0x800232D4);CHECK(draw_count==5 && bank_count==4 && !failed);
     CHECK(!memcmp(previous_frame,memory(packets),sizeof previous_frame)); /* Opposite DMA frame stays intact. */
     CHECK(psx_mod_read_word(packets+FRAME_ARENA)==((packets+FRAME_ARENA+40000)&0xFFFFFFu));
@@ -468,7 +476,36 @@ static void deferred_shared_effect_owner_context(void) {
     native_player_init(&cpu,0x8003BD24u);
     for(unsigned i=0;i<96;++i)CHECK(!shared_effect_owners[i]);
 }
+static void deferred_ui_effect_retains_owner_atlas(void){
+    CPUState cpu;setup(&cpu);uint32_t actor=0x80091298u;
+    psx_mod_write_byte(actor,1);psx_mod_write_byte(actor+1,17);psx_mod_write_byte(actor+3,1);
+    psx_mod_write_byte(actor+0x16,0x37);psx_mod_write_word(actor+0x3C,menu_assembly);
+    psx_mod_write_half(actor+0x42,0x7E50);shared_effect_owners[0]=2;
+    /* Deliberately different resident X tiles/CLUT and private Zero source. */
+    memset(test_vram,0xBB,sizeof test_vram);
+    for(unsigned y=0;y<16;++y)for(unsigned x=0;x<4;++x)
+        test_zero_ui[(256+80+y)*1024+896+16+x]=0x1111;
+    psx_mod_write_half(menu_memory+0x10000+((505-496)*64+1)*2,0x1234);
+    cpu.gpr[4]=actor;
+    CHECK(render_survivor(&cpu,0x800232D4u));
+    CHECK(draw_count==1 && drawn[0]==actor && bank_count==1 && bank_first[0]==0x1234);
+    CHECK(world_packets==packets+40 && psx_mod_read_word(SCRATCH+0x100)==0x800A0000);
+    uint8_t first[80];capture(packets+PLAYER_PACKET_BYTES,first,sizeof first);
+    /* P2's normal body draw appends instead of overwriting the shared actor. */
+    cpu.gpr[4]=PLAYER;render(&cpu,0x800232D4u);
+    CHECK(!failed && world_packets==packets+80 && bank_count==2);
+    CHECK(!memcmp(first,memory(packets+PLAYER_PACKET_BYTES),sizeof first));
+    CHECK(!state_track.count && !state_track.error && !world_render);
+    shared_effect_owners[0]=1;cpu.gpr[4]=actor;CHECK(!render_survivor(&cpu,0x800232D4u));
+    shared_effect_owners[0]=2;psx_mod_write_byte(actor+1,26);CHECK(!render_survivor(&cpu,0x800232D4u));
+    psx_mod_write_byte(actor+1,17);psx_mod_write_word(actor+0x3C,assembly);CHECK(!render_survivor(&cpu,0x800232D4u));
+    /* A full FT4 retains its original UVs in a complete source page. */
+    uint16_t full=zero_ui_effect_bank(0x3E,0x7E50,UINT16_MAX);CHECK(full);
+    unsigned count=bank_count;CHECK(zero_ui_effect_bank(0x3E,0x7E50,UINT16_MAX)==full && bank_count==count);
+    CHECK(!zero_ui_effect_bank(0xBE,0x7E50,0) && !zero_ui_effect_bank(0x3E,0x7800,0));
+}
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     controller_pair_and_restoration();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
     deferred_shared_effect_owner_context();
+    deferred_ui_effect_retains_owner_atlas();clear_banks();
     puts("private native effects actual-plugin call order, gates, lifetime projection and retained packet ownership PASS");return 0;}
