@@ -1,0 +1,1176 @@
+{
+  "schema": 1,
+  "kind": "reviewed_native_current_build_active_private_audio_restore",
+  "reviewed_at_utc": "2026-10-24T04:31:48.806580+00:00",
+  "result": "bounded_source_matched_zero_death_vocal_warm_and_cold_restore_passed",
+  "candidate": {
+    "compiled_source": "22ea525bbc52b5177f501989fedc5873ef30099c",
+    "exe_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+    "manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+    "sdk": "09e8673435c73e516b420e6c13bb11f02dc8aaea",
+    "title": "mmx6-x-zero-delay-v18"
+  },
+  "raw_report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\qualification.json",
+    "sha256": "3263640f1575b07425f61c716b2d0bfe09d81bf5529e2c402b718fe01d68bca1",
+    "size": 7083774
+  },
+  "compilation_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v20-22ea525\\candidate.json",
+    "sha256": "1a73c37f0dc0c7aa7e4ec524e68561c61a04d713e39930c2ec97b0b8c2fd6500",
+    "size": 4429
+  },
+  "build_and_source_receipt": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-character-audio\\manifest-bound-22ea525-build-and-source-reviewed.json",
+    "sha256": "b0cd04af4a292649fe7cbdab4a50eac3e58ad986d7f46e532f5878e63e0e82c1",
+    "size": 6274
+  },
+  "paused_inactive_state_receipt": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-private-state\\manifest-bound-22ea525-reviewed.json",
+    "sha256": "c6d2e6efc8ff365dfce81c074c62319cd6dc96e65d6b1dee11599bc4600e8ae2",
+    "size": 22081
+  },
+  "manifest": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\frozen-build-v20-22ea525\\psx_build_manifest\\psx-runtime\\Release\\manifest.json",
+    "sha256": "26ff444b5cb1f509d8e4b9eb4f30cc393f48d835006da7b74c327a55f11a82be",
+    "size": 161853
+  },
+  "manifest_header": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\frozen-build-v20-22ea525\\psx_build_manifest\\psx-runtime\\Release\\manifest.h",
+    "sha256": "500f2ed903fb27ec63b227b25a1de1e1d696344d2146baa067b70c0a50030b0d",
+    "size": 150
+  },
+  "declared_source_validation": {
+    "checked_files": {
+      "game": 56,
+      "game-generated": 34
+    },
+    "checked_bytes": 43883730,
+    "generated_root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\generated-source",
+    "scope": "Declared game and game-generated files only; other dependency roots not rehashed"
+  },
+  "executed_sources": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\mmx6_coop_active_audio_state-executed-source.py",
+      "sha256": "e0e5bd00d174c8cc48aeec9d9af659207d8ff679b7e656d9f7ed6ff5deae8de9",
+      "size": 12648
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\mmx6_coop_body_audio-executed-source.py",
+      "sha256": "22de2f57b6b088bed044029a66cf2a047a32ec7829e7c5eb4e6c33fad05b8bc5",
+      "size": 27459
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\mmx6_coop_contact-executed-source.py",
+      "sha256": "dbcb58c53b5e1e0a7433aeb25c48beb9ae20b30c05fd11b5da60b33f40513046",
+      "size": 22689
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "size": 29983
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "3b107c1f80a132de2fb3d33ca6190e6bb0587c5e173c161f61b8d146ec57ac64",
+      "size": 27915
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "0ba7b2486bd1321f629324d886d274d9f652fc65e60cec09b05faf20c3707f99",
+      "size": 52846
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\runner-executed-source.py",
+      "sha256": "61e830fdb02ba1ab10c0cfe46a67dec60cd98a560e8073c0c85834f9c9038488",
+      "size": 5833
+    }
+  ],
+  "post_run_gate_source": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\reviewed-active-state-gates.py",
+    "sha256": "8bf3ca139f9289642a334c528f021df69400e96a13ccdd55fe1c18a50c8e5a7f",
+    "size": 12681
+  },
+  "post_run_gate_change": "The suffix comparison uses bounded len/enumerate rather than constructing a potentially huge range list. Both retained native load boundaries were revalidated with this equivalent comparison; malformed synthetic totals are tested.",
+  "native_original_disc": {
+    "runtime_cue": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\disc\\Mega Man X6 (USA) (v1.1).cue",
+    "cue_sha256": "3237ed931e92ba163a1985f72da805e7f53c0932bb7d8a27355f725f12380da1",
+    "original_raw_bin": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\disc\\Mega Man X6 (USA) (v1.1).bin",
+    "raw_bytes": 599985792,
+    "raw_mtime_ns": 1783557594526603300,
+    "track": 1,
+    "mode": "MODE2/2352",
+    "index": "00:00:00",
+    "scope": "Exact file/track binding and pinned EXE/archive members; no whole raw-disc hash claim"
+  },
+  "native_source_digest": "bef159ae20bf77c65f5f29cece3bae22ac6b5287599472c5a292d0bb1f47053a",
+  "source_selected_vocal": {
+    "record": [
+      3,
+      16
+    ],
+    "tone": {
+      "voice": 20,
+      "program": 0,
+      "tone": 12,
+      "sample": 13,
+      "offset": 29904,
+      "bytes": 9248,
+      "sample_sha256": "322b69a7f0999a42269c5d80afb84a62dd628afef350746f7ac877fd24d06387",
+      "note": 72,
+      "shift": 59,
+      "center": 95,
+      "adsr_lo": 33023,
+      "adsr_hi": 8128,
+      "first_end_block": 576,
+      "first_end_flags": 1,
+      "pitch": 1144
+    },
+    "event": {
+      "seq": 246,
+      "frame": 3789,
+      "kind": "KEYON",
+      "v": 44,
+      "addr": 29904,
+      "pitch": 1144,
+      "adsr_lo": 33023,
+      "adsr_hi": 8128,
+      "vol_l": 3063,
+      "vol_r": 10157,
+      "sample_bank": 31
+    },
+    "source_calls": [
+      {
+        "seq": 1576,
+        "target": "0x80016C48",
+        "ra": "0x8003D9BC",
+        "a0": "0x00000003",
+        "a1": "0x00000010",
+        "a2": "0x800970A0",
+        "a3": "0x00000000",
+        "s3": "0xFF000000",
+        "sp": "0x801FEF48",
+        "frame": 3789
+      },
+      {
+        "seq": 1577,
+        "target": "0x80016C48",
+        "ra": "0x8003D9BC",
+        "a0": "0x00000003",
+        "a1": "0x00000010",
+        "a2": "0x800970A0",
+        "a3": "0x00000000",
+        "s3": "0xFF000000",
+        "sp": "0x801FEF48",
+        "frame": 3789
+      },
+      {
+        "seq": 1578,
+        "target": "0x80016C48",
+        "ra": "0x8003D9CC",
+        "a0": "0x00000003",
+        "a1": "0x0000000E",
+        "a2": "0x800970A0",
+        "a3": "0x00000000",
+        "s3": "0xFF000000",
+        "sp": "0x801FEF48",
+        "frame": 3789
+      },
+      {
+        "seq": 1579,
+        "target": "0x80016C48",
+        "ra": "0x8003D9CC",
+        "a0": "0x00000003",
+        "a1": "0x0000000E",
+        "a2": "0x800970A0",
+        "a3": "0x00000000",
+        "s3": "0xFF000000",
+        "sp": "0x801FEF48",
+        "frame": 3789
+      }
+    ],
+    "sample_probe_sha256": "322b69a7f0999a42269c5d80afb84a62dd628afef350746f7ac877fd24d06387",
+    "checks": {
+      "private_voice_route": true,
+      "source_sample": true,
+      "pitch_adsr_numeric": true,
+      "original_end_marker_present": true
+    }
+  },
+  "saved_snapshot": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\warm-state\\snapshot.pst",
+    "sha256": "219273c5eb5461fe8f83553da32607395ae387bf5918edd0bc9ad6a6eec05d86",
+    "size": 1921276
+  },
+  "snapshot_contract": {
+    "pst": 10,
+    "provider_interface": 1,
+    "internal_wire": 3,
+    "private_spu_bytes": 6652,
+    "priority_bytes_hex": "000000000000000000000000000000000000000000000000",
+    "qualified_private_slot": 20,
+    "observed_active_slots": [
+      20,
+      23
+    ],
+    "stable_owner": "0x4d4d583650320001",
+    "owner_mask": "0x00f00b09"
+  },
+  "phases": {
+    "warm": {
+      "checks": {
+        "source_matched_active_voice_saved": true,
+        "audible_voice_returns_after_completed_load": true,
+        "exact_current_build_key": true,
+        "same_provider_set": true,
+        "same_resource_and_original_asset_binding": true,
+        "persistent_private_audio_priorities": true,
+        "private_spu_owner_tags": true,
+        "private_spu_modes": true,
+        "private_spu_registers_hex": true,
+        "private_spu_bank_bindings": true,
+        "decoder_resumes_at_or_after_saved_cursor": true,
+        "restored_voice_natural_end_without_retrigger": true,
+        "immutable_private_source_banks_preserved": true
+      },
+      "check_count": 13,
+      "saved_active_voice": {
+        "checks": {
+          "active": true,
+          "audible_envelope": true,
+          "source_bank": true,
+          "source_start": true,
+          "pitch": true,
+          "adsr": true,
+          "owner": true
+        },
+        "slot": 20,
+        "voice": {
+          "slot": 20,
+          "owner_tag": "0x4d4d583650320001",
+          "active": 1,
+          "addr": 31504,
+          "repeat": 29920,
+          "sample_bank": 31,
+          "pending_bank": 0,
+          "env_level": 32759,
+          "adsr_phase": 2,
+          "voice_wire_hex": "01000000107b0000e07400001f00000000000000c5287621000764ede0e461ea30f7bbfd15036207c30a570d3a0726fecd0e1910e60089ec4be407ea08ef5dfb75059309c50c2b0781f61dedaae6dbf95d1810000000880300001ded81f600f77f0000000002ee17000000005a4f00000000"
+        },
+        "registers": [
+          3063,
+          10157,
+          1144,
+          3738,
+          33023,
+          8128,
+          0,
+          3738
+        ]
+      },
+      "restored_active_voice": {
+        "checks": {
+          "active": true,
+          "audible_envelope": true,
+          "source_bank": true,
+          "source_start": true,
+          "pitch": true,
+          "adsr": true,
+          "owner": true
+        },
+        "slot": 20,
+        "voice": {
+          "slot": 20,
+          "owner_tag": "0x4d4d583650320001",
+          "active": 1,
+          "addr": 32368,
+          "repeat": 29920,
+          "sample_bank": 31,
+          "pending_bank": 0,
+          "env_level": 32759,
+          "adsr_phase": 2,
+          "voice_wire_hex": "01000000707e0000e07400001f0000000000000019efeaefe5fd9a145b236f20480957ecebd995da6eeba802bf15041fce1c740fe9fcfdf133ef51f06cf2b0f669fd0a025907800b4c0b6a075411520541f910000000e00000006a074c0b00f77f0000000002ee17000000005a4f00000000"
+        },
+        "registers": [
+          3063,
+          10157,
+          1144,
+          3738,
+          33023,
+          8128,
+          0,
+          3738
+        ]
+      },
+      "restored_probe": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\warm-state\\restored-probe.pst",
+        "sha256": "0efd06d8e8197f13e786b0559f2e93bba437326b52f0e687eb61758a446cf9b3",
+        "size": 1918621
+      },
+      "recorded_load_boundary": {
+        "before_sequence": 249,
+        "first_after_total": 249,
+        "early_events": [],
+        "post_load_events": [
+          {
+            "seq": 249,
+            "frame": 3939,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 29920,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 31
+          }
+        ]
+      },
+      "all_provider_comparisons": {
+        "exact_current_build_key": true,
+        "same_provider_set": true,
+        "same_resource_and_original_asset_binding": true,
+        "full_private_context_and_host_input_history": false,
+        "explicit_native_and_host_input_history": true,
+        "saved_native_world_clock": false,
+        "saved_native_mode_phase": true,
+        "saved_native_menu_state": true,
+        "full_retained_bank_payloads": true,
+        "saved_sprite_bank_count": true,
+        "saved_ui_bank_count": true,
+        "persistent_private_audio_priorities": true,
+        "private_spu_owner_tags": true,
+        "private_spu_modes": true,
+        "private_spu_registers_hex": true,
+        "private_spu_bank_bindings": true
+      },
+      "interpretation": "Unpaused world progression changes the complete semantic core and world clock between actual saves. No byte differences are normalized. This case qualifies active voice identity/playback, not full host-state equality.",
+      "operations": [
+        {
+          "id": 2728,
+          "ok": true,
+          "generation": 1,
+          "pending": 0,
+          "last_ok": 1,
+          "last_op": "save",
+          "last_slot": 8
+        },
+        {
+          "id": 2805,
+          "ok": true,
+          "generation": 2,
+          "pending": 0,
+          "last_ok": 1,
+          "last_op": "load",
+          "last_slot": 8
+        },
+        {
+          "id": 2813,
+          "ok": true,
+          "generation": 3,
+          "pending": 0,
+          "last_ok": 1,
+          "last_op": "save",
+          "last_slot": 7
+        }
+      ],
+      "banks": [
+        {
+          "bank": 30,
+          "bytes": 123408,
+          "sha256": "425516420dc6ff1d973edae265717a6ca237454631cdb4b7c829c96f6f7057a8",
+          "source_member": 85,
+          "body_subasset": 12,
+          "matches_source": true
+        },
+        {
+          "bank": 31,
+          "bytes": 52096,
+          "sha256": "203c8e0e58ea4e55797445b7af76e7563528c21536ae8fd57e38566a89b38bdd",
+          "source_member": 85,
+          "body_subasset": 14,
+          "matches_source": true
+        }
+      ],
+      "private_cards_preserved": true,
+      "owned_process": {
+        "pid": 62740,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "composed_captures": [
+        {
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\warm-state\\restored-gameplay-after-audio.png",
+          "sha256": "96c9b4399d5f73d377b1cbf0964324ea895b8348a95cd307f760c05717d6c58d",
+          "size": 2074543
+        }
+      ]
+    },
+    "cold": {
+      "checks": {
+        "fresh_process_lacks_saved_active_voice": true,
+        "audible_voice_returns_after_completed_load": true,
+        "exact_current_build_key": true,
+        "same_provider_set": true,
+        "same_resource_and_original_asset_binding": true,
+        "persistent_private_audio_priorities": true,
+        "private_spu_owner_tags": true,
+        "private_spu_modes": true,
+        "private_spu_registers_hex": true,
+        "private_spu_bank_bindings": true,
+        "decoder_resumes_at_or_after_saved_cursor": true,
+        "restored_voice_natural_end_without_retrigger": true,
+        "immutable_private_source_banks_preserved": true
+      },
+      "check_count": 13,
+      "saved_active_voice": {
+        "checks": {
+          "active": true,
+          "audible_envelope": true,
+          "source_bank": true,
+          "source_start": true,
+          "pitch": true,
+          "adsr": true,
+          "owner": true
+        },
+        "slot": 20,
+        "voice": {
+          "slot": 20,
+          "owner_tag": "0x4d4d583650320001",
+          "active": 1,
+          "addr": 31504,
+          "repeat": 29920,
+          "sample_bank": 31,
+          "pending_bank": 0,
+          "env_level": 32759,
+          "adsr_phase": 2,
+          "voice_wire_hex": "01000000107b0000e07400001f00000000000000c5287621000764ede0e461ea30f7bbfd15036207c30a570d3a0726fecd0e1910e60089ec4be407ea08ef5dfb75059309c50c2b0781f61dedaae6dbf95d1810000000880300001ded81f600f77f0000000002ee17000000005a4f00000000"
+        },
+        "registers": [
+          3063,
+          10157,
+          1144,
+          3738,
+          33023,
+          8128,
+          0,
+          3738
+        ]
+      },
+      "restored_active_voice": {
+        "checks": {
+          "active": true,
+          "audible_envelope": true,
+          "source_bank": true,
+          "source_start": true,
+          "pitch": true,
+          "adsr": true,
+          "owner": true
+        },
+        "slot": 20,
+        "voice": {
+          "slot": 20,
+          "owner_tag": "0x4d4d583650320001",
+          "active": 1,
+          "addr": 32032,
+          "repeat": 29920,
+          "sample_bank": 31,
+          "pending_bank": 0,
+          "env_level": 32759,
+          "adsr_phase": 2,
+          "voice_wire_hex": "01000000207d0000e07400001f000000000000000f0d610cbc0945063cff71fbadf93cf88bf9c900c0049904f50294fe48fd0fffe5002e00820128fcd2f21fe94bec7cfd151ba22d9a26e50d37f6c7fe89060b000000a80a0000e50d9a2600f77f0000000002ee17000000005a4f00000000"
+        },
+        "registers": [
+          3063,
+          10157,
+          1144,
+          3738,
+          33023,
+          8128,
+          0,
+          3738
+        ]
+      },
+      "restored_probe": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\cold-state\\restored-probe.pst",
+        "sha256": "e0c4912931200ac381264f1c31f3d24a3ab9046f1e4fea99880620a1ba395cf6",
+        "size": 1917681
+      },
+      "recorded_load_boundary": {
+        "before_sequence": 204,
+        "first_after_total": 205,
+        "early_events": [
+          {
+            "seq": 204,
+            "frame": 2624,
+            "kind": "END_STOP",
+            "v": 22,
+            "addr": 220320,
+            "pitch": 1024,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 9167,
+            "vol_r": 6838,
+            "sample_bank": 0
+          }
+        ],
+        "post_load_events": [
+          {
+            "seq": 204,
+            "frame": 2624,
+            "kind": "END_STOP",
+            "v": 22,
+            "addr": 220320,
+            "pitch": 1024,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 9167,
+            "vol_r": 6838,
+            "sample_bank": 0
+          },
+          {
+            "seq": 205,
+            "frame": 2715,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 29920,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 31
+          }
+        ]
+      },
+      "all_provider_comparisons": {
+        "exact_current_build_key": true,
+        "same_provider_set": true,
+        "same_resource_and_original_asset_binding": true,
+        "full_private_context_and_host_input_history": false,
+        "explicit_native_and_host_input_history": true,
+        "saved_native_world_clock": false,
+        "saved_native_mode_phase": true,
+        "saved_native_menu_state": true,
+        "full_retained_bank_payloads": true,
+        "saved_sprite_bank_count": true,
+        "saved_ui_bank_count": true,
+        "persistent_private_audio_priorities": true,
+        "private_spu_owner_tags": true,
+        "private_spu_modes": true,
+        "private_spu_registers_hex": true,
+        "private_spu_bank_bindings": true
+      },
+      "interpretation": "Unpaused world progression changes the complete semantic core and world clock between actual saves. No byte differences are normalized. This case qualifies active voice identity/playback, not full host-state equality.",
+      "operations": [
+        {
+          "id": 1485,
+          "ok": true,
+          "generation": 1,
+          "pending": 0,
+          "last_ok": 1,
+          "last_op": "load",
+          "last_slot": 8
+        },
+        {
+          "id": 1493,
+          "ok": true,
+          "generation": 2,
+          "pending": 0,
+          "last_ok": 1,
+          "last_op": "save",
+          "last_slot": 7
+        }
+      ],
+      "banks": [
+        {
+          "bank": 30,
+          "bytes": 123408,
+          "sha256": "425516420dc6ff1d973edae265717a6ca237454631cdb4b7c829c96f6f7057a8",
+          "source_member": 85,
+          "body_subasset": 12,
+          "matches_source": true
+        },
+        {
+          "bank": 31,
+          "bytes": 52096,
+          "sha256": "203c8e0e58ea4e55797445b7af76e7563528c21536ae8fd57e38566a89b38bdd",
+          "source_member": 85,
+          "body_subasset": 14,
+          "matches_source": true
+        }
+      ],
+      "private_cards_preserved": true,
+      "owned_process": {
+        "pid": 74552,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "composed_captures": [
+        {
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\cold-state\\restored-gameplay-after-audio.png",
+          "sha256": "7366ffdc4f24dcf916831d4ae46aeea906d3772c493e8b9bae50684b70fb9aff",
+          "size": 2074543
+        }
+      ]
+    }
+  },
+  "earlier_attempts": [
+    {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\qualification.json",
+        "sha256": "830b9e9108f45de2e626259b5b57d7eb81df4fb04a5d33d68d7b44d2d5bb7c21",
+        "size": 2219240
+      },
+      "raw_status": "failed_setup",
+      "reviewed_disposition": "setup_failure: native Start/menu attempt produced voice44 KEYOFF and an inactive snapshot; late native STOP caller was not captured and remains unidentified"
+    },
+    {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\qualification.json",
+        "sha256": "ddee45128ced825baccbc5463a35f73fb0e747c5b708dc6a28e5037f7f3f57ec",
+        "size": 6719008
+      },
+      "raw_status": "bounded_native_active_audio_state_observed",
+      "reviewed_disposition": "earlier bounded positive warm/cold observation before the full load-boundary gate"
+    },
+    {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\qualification.json",
+        "sha256": "0df0ee356e1e642098e347c1b4ae5916e0d2f1140b8f42818a30d2565b34a96b",
+        "size": 2400531
+      },
+      "raw_status": "failed_setup",
+      "reviewed_disposition": "observer_race: separate voice query reached silence before the event poll observed END_STOP; corrected by requiring both"
+    }
+  ],
+  "python_validation": {
+    "tests": 202,
+    "result": "passed",
+    "log": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\python-validation.txt",
+      "sha256": "b638a972aa55e0ba344741028cb96cf69d4d8d1f79f8d589f82ba4575fcb95eb",
+      "size": 681
+    }
+  },
+  "visual_review": {
+    "reviewer": "root, solo",
+    "captures_viewed": 2,
+    "finding": "Both composed post-audio frames show X alive at full HP, the Zero meter empty and native death rings in the intro. Captures are reviewed independently, not required to match during running simulation.",
+    "limits": "No original artwork, particle mechanic, HUD, campaign transition or audio-output/PCM qualification follows from the screenshots."
+  },
+  "ledger": {
+    "F33": "unverified",
+    "other_statuses_changed": false
+  },
+  "limits": [
+    "Same physical Windows machine, exact compiled candidate, fixed X/P1 + Zero/P2 intro, offline only; no cross-build or heterogeneous claim.",
+    "Original host-published inputs reach authored record25 and cause eight ordinary strength4 contact losses; no HP, actor, audio or success-flag writes.",
+    "Only the exact new PST is copied to a fresh private cold profile; warm caches, settings and native memory cards are not transferred.",
+    "Private slot20 source group3/16 vocal is qualified. Slot23 shared death effect is observed active in the snapshots but its complete restored lifetime is not qualified here.",
+    "Voice activity, positive envelope, source bank/start/pitch/ADSR, all nine owner tags, static registers/modes/banks and saved decoder cursor are checked. The source bank bytes remain immutable.",
+    "All saved priority bytes are zero; native restoration of nonzero priorities remains unverified.",
+    "Simulation and DSP advance between saves; complete host core/world clock differences are retained explicitly. No unpaused full-state equality or once-world claim.",
+    "The complete event suffix across each load is retained; selected voice has END_STOP with no intervening KEYON/KEYOFF in that suffix. No old KEYON is paired with a post-load terminal.",
+    "No mapped user save/load hotkeys, rewind, rollback, network state transfer, native invalid-state rejection, PCM comparison, additional audio families or full F33 pass.",
+    "The earlier menu-paused failure is a setup failure. The exact native STOP caller after menu entry was not captured; no source-call qualification is inferred.",
+    "Native memory cards are preserved; old save-state compatibility/migration is not required."
+  ],
+  "artifacts": [
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-character-audio\\manifest-bound-22ea525-build-and-source-reviewed.json",
+      "sha256": "b0cd04af4a292649fe7cbdab4a50eac3e58ad986d7f46e532f5878e63e0e82c1"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-private-state\\manifest-bound-22ea525-reviewed.json",
+      "sha256": "c6d2e6efc8ff365dfce81c074c62319cd6dc96e65d6b1dee11599bc4600e8ae2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\frozen-build-v20-22ea525\\psx_build_manifest\\psx-runtime\\Release\\manifest.h",
+      "sha256": "500f2ed903fb27ec63b227b25a1de1e1d696344d2146baa067b70c0a50030b0d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\frozen-build-v20-22ea525\\psx_build_manifest\\psx-runtime\\Release\\manifest.json",
+      "sha256": "26ff444b5cb1f509d8e4b9eb4f30cc393f48d835006da7b74c327a55f11a82be"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v20-22ea525\\candidate.json",
+      "sha256": "1a73c37f0dc0c7aa7e4ec524e68561c61a04d713e39930c2ec97b0b8c2fd6500"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\cold\\environment.json",
+      "sha256": "dfbffa334f1326bde99a7d48127455a2343276c2594b2edea0c5f579d28c306f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\cold\\game.toml",
+      "sha256": "9caea24b5cd4736f444b1c059813cf3a552ac15e99778474f2fa8453b2987f7f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\cold\\preparation.json",
+      "sha256": "1f2744f29b6d8322a6e97cf44aa50454984e8689efd12fa5bb321455601c7acb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\cold\\settings.toml",
+      "sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\mmx6_coop_active_audio_state-executed-source.py",
+      "sha256": "f2efaf33e86d2e87d4f7554af4fd6a066ed0572872a632b476f1f83d8ffe9fe4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\mmx6_coop_body_audio-executed-source.py",
+      "sha256": "22de2f57b6b088bed044029a66cf2a047a32ec7829e7c5eb4e6c33fad05b8bc5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\mmx6_coop_contact-executed-source.py",
+      "sha256": "dbcb58c53b5e1e0a7433aeb25c48beb9ae20b30c05fd11b5da60b33f40513046"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\qualification.json",
+      "sha256": "0df0ee356e1e642098e347c1b4ae5916e0d2f1140b8f42818a30d2565b34a96b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "3b107c1f80a132de2fb3d33ca6190e6bb0587c5e173c161f61b8d146ec57ac64"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "0ba7b2486bd1321f629324d886d274d9f652fc65e60cec09b05faf20c3707f99"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\runner-executed-source.py",
+      "sha256": "61e830fdb02ba1ab10c0cfe46a67dec60cd98a560e8073c0c85834f9c9038488"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\warm-state\\snapshot.pst",
+      "sha256": "4dc1d25f17dd50a0fefe31bc468e5ca4c7935362a8298970d4600d6449497a11"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\warm\\environment.json",
+      "sha256": "c1732c48e31d66c3a596ba6c564056ea563223e1d2181805d959fc744d14b5e5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\warm\\game.toml",
+      "sha256": "179d1cb458970decbc4d276bdb1f7fe137bfac6c179f34d434493354ed11f351"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\warm\\input.ini",
+      "sha256": "93c78ec3a5240e59490da98572816ebcf1afe7462d9493f81102315239709803"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\warm\\jump-audio\\control.jsonl",
+      "sha256": "b97c61278264684c190bb3596cdb116c4f67b64eaba5491f8466ae2ece86b138"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\warm\\jump-audio\\stderr.log",
+      "sha256": "668ea0b12e4d7b983f90eef5729970e6478fd1641ea19eb8778cc3eca052cf75"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\warm\\jump-audio\\stdout.log",
+      "sha256": "85a779b96fbda47608097f3b6621f1817b50730f0fe15015fe6962cce830733a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\warm\\keybinds.ini",
+      "sha256": "6332ef4bd4b0caeb5bd42b18a4d37aa35c864735b5c8b254c996fe3718e5faec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\warm\\preparation.json",
+      "sha256": "daf31a84be73a1924ab591de5e099f425f347f323bc8db294c6bf2972487890b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\warm\\psx_freeze_heartbeat.json",
+      "sha256": "47b8b5d22c2a561bd88bd28b66dc41b325bae84eaf60b4febc1920c0770c7481"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\warm\\psx_last_run_report.json",
+      "sha256": "e557b13ff00138a356577a3e0121f6e43e7f61666d717a54f0a60d943c9669d0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-complete-boundary\\warm\\settings.toml",
+      "sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\cold\\environment.json",
+      "sha256": "eddc02c283a412b734af4fb181b50d1d27ed0cc40f94846ee979a1ed58996cc6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\cold\\game.toml",
+      "sha256": "c3c21cc3087d98f6faa88ee3b80573a63d782bc94e00b40bb35c098997186018"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\cold\\preparation.json",
+      "sha256": "0498c709c1c81fa301aa948d2e4cc974878e9858b9d54e3a9ac2519e0a3fceeb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\cold\\settings.toml",
+      "sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\mmx6_coop_active_audio_state-executed-source.py",
+      "sha256": "0a5ab164c85fe8863d60df6c995801623a2f6cd064cdcb3631206f3f37ef797c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\mmx6_coop_body_audio-executed-source.py",
+      "sha256": "22de2f57b6b088bed044029a66cf2a047a32ec7829e7c5eb4e6c33fad05b8bc5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\mmx6_coop_contact-executed-source.py",
+      "sha256": "dbcb58c53b5e1e0a7433aeb25c48beb9ae20b30c05fd11b5da60b33f40513046"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\qualification.json",
+      "sha256": "830b9e9108f45de2e626259b5b57d7eb81df4fb04a5d33d68d7b44d2d5bb7c21"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "3b107c1f80a132de2fb3d33ca6190e6bb0587c5e173c161f61b8d146ec57ac64"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "0ba7b2486bd1321f629324d886d274d9f652fc65e60cec09b05faf20c3707f99"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\runner-executed-source.py",
+      "sha256": "7ababd387445f6af4d6ee1e7b329519e0cb746f9db10e87114d6446ac4dbb7fa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\warm-state\\snapshot.pst",
+      "sha256": "799332f4c2f1e96128d59e55cdaf1a1dd42f10334916cc9b77a6ae4636ec8347"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\warm\\environment.json",
+      "sha256": "fb1281b4e5e592a54915b160c66b9b210386ce160671c65d3a1d3094c6d381de"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\warm\\game.toml",
+      "sha256": "76a29fff33249f9a9b16d5f2ac521901b119346da810278ec888f2c5e8e398c8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\warm\\input.ini",
+      "sha256": "93c78ec3a5240e59490da98572816ebcf1afe7462d9493f81102315239709803"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\warm\\jump-audio\\control.jsonl",
+      "sha256": "0084815dc5134a5af2602ae920e66e481cce1e2b1b20d2eee6f55c7f9a86d047"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\warm\\jump-audio\\stderr.log",
+      "sha256": "64590caa1ea5f697363c97404797d82b3349e8bda7a453028f350eaa6e1e979f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\warm\\jump-audio\\stdout.log",
+      "sha256": "40b8d1b6847eb708901053812ee40afe4b94ccdd259a6c9dd52bd67c659536d3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\warm\\keybinds.ini",
+      "sha256": "6332ef4bd4b0caeb5bd42b18a4d37aa35c864735b5c8b254c996fe3718e5faec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\warm\\preparation.json",
+      "sha256": "b9e7e1ebcafe423232c6b6dae508c6ef062abdaab6a3c24c2513c07677ef8739"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\warm\\psx_freeze_heartbeat.json",
+      "sha256": "61efde38ed5423be159e0f663f5209af29ba1d0e77ff46cd5d59c1579f1e78be"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\warm\\psx_last_run_report.json",
+      "sha256": "3fb93850bf0d12b2805bddcdba171fce6b875c8dd2a6e61b0cb982ec8905d2a6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-first\\warm\\settings.toml",
+      "sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\cold-state\\restored-gameplay-after-audio.png",
+      "sha256": "7366ffdc4f24dcf916831d4ae46aeea906d3772c493e8b9bae50684b70fb9aff"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\cold-state\\restored-probe.pst",
+      "sha256": "e0c4912931200ac381264f1c31f3d24a3ab9046f1e4fea99880620a1ba395cf6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\cold\\environment.json",
+      "sha256": "3301d183b42bda82771ba860907cdc44613c8ee30ef35678a7a1e554675da4a5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\cold\\game.toml",
+      "sha256": "8bcb2d8b3607689dd36b63081f39aab93d0774aa634ef50ebc4879c1590b4bdc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\cold\\input.ini",
+      "sha256": "93c78ec3a5240e59490da98572816ebcf1afe7462d9493f81102315239709803"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\cold\\jump-audio\\control.jsonl",
+      "sha256": "3063ba94cf7f9a6e1887d0c5b5e692d35a4f0ce1569b34bb1aa9199493c3010a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\cold\\jump-audio\\stderr.log",
+      "sha256": "a8445c987b399e2116738d873200fbfe778b2cc444127cbf1814939f3c98566c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\cold\\jump-audio\\stdout.log",
+      "sha256": "1f43cb7b429650235a0b12dc62ba7073e6326546fa56111fc1de27a587e4e0c0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\cold\\keybinds.ini",
+      "sha256": "6332ef4bd4b0caeb5bd42b18a4d37aa35c864735b5c8b254c996fe3718e5faec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\cold\\preparation.json",
+      "sha256": "056fb6bd993754de1dd769a17d7aa914ddc5db7f53fc7620dee1256412c6c8e7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\cold\\psx_freeze_heartbeat.json",
+      "sha256": "d1c938229c68aab2c0ee095f404d4c87bc2b93026c86befe28043cfb8225fb5d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\cold\\psx_last_run_report.json",
+      "sha256": "40af095576cdb3fa28c1bfc06f899227add6acab540a2f62c155999162a2480a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\cold\\settings.toml",
+      "sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\mmx6_coop_active_audio_state-executed-source.py",
+      "sha256": "e0e5bd00d174c8cc48aeec9d9af659207d8ff679b7e656d9f7ed6ff5deae8de9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\mmx6_coop_body_audio-executed-source.py",
+      "sha256": "22de2f57b6b088bed044029a66cf2a047a32ec7829e7c5eb4e6c33fad05b8bc5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\mmx6_coop_contact-executed-source.py",
+      "sha256": "dbcb58c53b5e1e0a7433aeb25c48beb9ae20b30c05fd11b5da60b33f40513046"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\python-validation.txt",
+      "sha256": "b638a972aa55e0ba344741028cb96cf69d4d8d1f79f8d589f82ba4575fcb95eb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\qualification.json",
+      "sha256": "3263640f1575b07425f61c716b2d0bfe09d81bf5529e2c402b718fe01d68bca1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "3b107c1f80a132de2fb3d33ca6190e6bb0587c5e173c161f61b8d146ec57ac64"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "0ba7b2486bd1321f629324d886d274d9f652fc65e60cec09b05faf20c3707f99"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\reviewed-active-state-gates.py",
+      "sha256": "8bf3ca139f9289642a334c528f021df69400e96a13ccdd55fe1c18a50c8e5a7f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\runner-executed-source.py",
+      "sha256": "61e830fdb02ba1ab10c0cfe46a67dec60cd98a560e8073c0c85834f9c9038488"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\warm-state\\restored-gameplay-after-audio.png",
+      "sha256": "96c9b4399d5f73d377b1cbf0964324ea895b8348a95cd307f760c05717d6c58d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\warm-state\\restored-probe.pst",
+      "sha256": "0efd06d8e8197f13e786b0559f2e93bba437326b52f0e687eb61758a446cf9b3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\warm-state\\snapshot.pst",
+      "sha256": "219273c5eb5461fe8f83553da32607395ae387bf5918edd0bc9ad6a6eec05d86"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\warm\\environment.json",
+      "sha256": "93939c4b827fd1ee8f6d723d557eb49ff28f98e592b85a12ebe44d91c4e1a60f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\warm\\game.toml",
+      "sha256": "8ead1fc6b526a99ba8c9c648996055c80208ebf37d8a21dff86de147ea608ba0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\warm\\input.ini",
+      "sha256": "93c78ec3a5240e59490da98572816ebcf1afe7462d9493f81102315239709803"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\warm\\jump-audio\\control.jsonl",
+      "sha256": "016066440aa6b2e9d9c0a768f813ec66b560b317dd1d3406c384dd2db9e08dbf"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\warm\\jump-audio\\stderr.log",
+      "sha256": "2d186987ad108096acdcd69fc465201cd3c90dc0740f5581a19d8a3d5e7d2bf9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\warm\\jump-audio\\stdout.log",
+      "sha256": "af06941a85bc422f281782addc9ab153ceaede2d1feb2181a902bb242c918c1a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\warm\\keybinds.ini",
+      "sha256": "6332ef4bd4b0caeb5bd42b18a4d37aa35c864735b5c8b254c996fe3718e5faec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\warm\\preparation.json",
+      "sha256": "41f9cb37af34161cd0b81fea852f4d696211c12c9788f5daed7fa2040aa4eb13"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\warm\\psx_freeze_heartbeat.json",
+      "sha256": "ebfcf289589577fc278ba59674b681f425c928019aa8518d3e9aad15598bc542"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\warm\\psx_last_run_report.json",
+      "sha256": "1e0f43475a3c4e6185f7fa4880222d1decbb60b3721893dc0bf0223cf5684a95"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\warm\\settings.toml",
+      "sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\cold-state\\restored-probe.pst",
+      "sha256": "655770203fadb380905b13b2e29218d024ca31bcfd2cfd9c7733e36b1f5934b5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\cold\\environment.json",
+      "sha256": "03d73bab4f339c18a7955da098b3feaa1cc13966bc44ab3bd3de4ac717b2acfa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\cold\\game.toml",
+      "sha256": "380d08de2e74b38d052018d1694ebb8a5b6e972ef38f9c7e1907e19f99f90fdb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\cold\\input.ini",
+      "sha256": "93c78ec3a5240e59490da98572816ebcf1afe7462d9493f81102315239709803"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\cold\\jump-audio\\control.jsonl",
+      "sha256": "8e6fe58254bd9e726b6c6aacbb722a47a1884c2a0e9f20a7e64f506684f25909"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\cold\\jump-audio\\stderr.log",
+      "sha256": "6965579271847a53b8fff5a5c9eee28204e5ffcf70077c5bb024b492c0605dff"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\cold\\jump-audio\\stdout.log",
+      "sha256": "35d123d4a0a0de37dd0c7b9c20b57c249caab1b69d62a950955a28fa23df9de7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\cold\\keybinds.ini",
+      "sha256": "6332ef4bd4b0caeb5bd42b18a4d37aa35c864735b5c8b254c996fe3718e5faec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\cold\\preparation.json",
+      "sha256": "0406a1369974161fae285bba288737a2dcc2f04b802a8deb16b55a3688cb1eed"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\cold\\psx_freeze_heartbeat.json",
+      "sha256": "03ebcfdd1b3b4a4eec6fdbd9b4a187bc1f3ce8adfff83125447f47a3e60aa891"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\cold\\psx_last_run_report.json",
+      "sha256": "877fedb95a0cb030efbb427acd59c969069f5ba78067f4547de2533ee7e49060"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\cold\\settings.toml",
+      "sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\mmx6_coop_active_audio_state-executed-source.py",
+      "sha256": "824625bee2390f8773abb57d7d07079885e625ad0eaebfa252e3cbdb298dd1a2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\mmx6_coop_body_audio-executed-source.py",
+      "sha256": "22de2f57b6b088bed044029a66cf2a047a32ec7829e7c5eb4e6c33fad05b8bc5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\mmx6_coop_contact-executed-source.py",
+      "sha256": "dbcb58c53b5e1e0a7433aeb25c48beb9ae20b30c05fd11b5da60b33f40513046"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\qualification.json",
+      "sha256": "ddee45128ced825baccbc5463a35f73fb0e747c5b708dc6a28e5037f7f3f57ec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "3b107c1f80a132de2fb3d33ca6190e6bb0587c5e173c161f61b8d146ec57ac64"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "0ba7b2486bd1321f629324d886d274d9f652fc65e60cec09b05faf20c3707f99"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\runner-executed-source.py",
+      "sha256": "61e830fdb02ba1ab10c0cfe46a67dec60cd98a560e8073c0c85834f9c9038488"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\warm-state\\restored-probe.pst",
+      "sha256": "d09652053f4bd644c77a12db74e146f0832344ee7dabaaf5d67138cbef1e653f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\warm-state\\snapshot.pst",
+      "sha256": "ea2b6043d99845a9a09143d8534c52087792771f4e290bd418a032e5a880286d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\warm\\environment.json",
+      "sha256": "eed9b61714833a9cb1fb40d2ddaa652055dc03eb13ed2abb76e5278c13aa0c62"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\warm\\game.toml",
+      "sha256": "260b554933dac5e04d2958da92cd31a32219893252a1b85cd0e524b8d234a2ae"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\warm\\input.ini",
+      "sha256": "93c78ec3a5240e59490da98572816ebcf1afe7462d9493f81102315239709803"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\warm\\jump-audio\\control.jsonl",
+      "sha256": "690d8ed21b0b5afc0965ff339139b7ddd0f15f0a40ccb892154a3c9ecd1f50e5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\warm\\jump-audio\\stderr.log",
+      "sha256": "a551df2f357569092711c22017f5412f7c216c596b7d912bee9ce3746abcdc58"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\warm\\jump-audio\\stdout.log",
+      "sha256": "d0bd725343f81813f84619e591db2808b670783ab1fd73ea368cc5df52b3702a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\warm\\keybinds.ini",
+      "sha256": "6332ef4bd4b0caeb5bd42b18a4d37aa35c864735b5c8b254c996fe3718e5faec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\warm\\preparation.json",
+      "sha256": "04dc93489133fb2f204a7bb459ae5725a351d8349ed38c85fe713df76dd0bfcf"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\warm\\psx_freeze_heartbeat.json",
+      "sha256": "b8def0994f75d5ce3e57ffcd733009268f41d76cbe4e2025311e76333a4d8580"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\warm\\psx_last_run_report.json",
+      "sha256": "3e498fc1c407d8549fea7259ffbc52f1de0757c3768b55145fc71fec766d5cda"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-unpaused\\warm\\settings.toml",
+      "sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa"
+    }
+  ]
+}

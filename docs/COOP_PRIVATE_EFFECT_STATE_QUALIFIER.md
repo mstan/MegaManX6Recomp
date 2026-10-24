@@ -6,8 +6,9 @@ The [reviewed receipt](evidence/mmx6-private-state/manifest-bound-22ea525-review
 retains 36 warm and 37 cold checks, the actual saved state and restored probes,
 completed composed captures, source identities and normal owned exits0.
 Both private memory cards remain unchanged. **F33 remains unverified**:
-actual mapped save/load/rewind controls, active private audio restoration,
-rollback and native malformed-state rejection are outside this run.
+actual mapped save/load/rewind controls, rollback and native malformed-state
+rejection are outside this run. Its saved voices are inactive; the separate
+active-vocal case below adds bounded playback evidence.
 The body-only command and its historical bd7/37 receipts in
 [COOP_SNAPSHOT_BASELINE.md](COOP_SNAPSHOT_BASELINE.md) remain separate.
 
@@ -164,3 +165,46 @@ binds the original report, snapshot, post-load probes, images and compile proof.
 It leaves the original artwork-pending report unchanged. This bounded
 current-build save/load result does not pass rollback, rewind, network state
 transfer, active-trail colors, the campaign or a complete parity comparison.
+
+## Active private death vocal
+
+`tools/qualify_mmx6_active_audio_state.py` owns sequential warm and fresh-cold
+processes on the same exact candidate22ea525/image4b31864f/manifest12fe4747.
+It requires explicit original EXE/disc, image and manifest identities and
+reuses the existing owned published-host input lifecycle. The
+[reviewed receipt](evidence/mmx6-private-state/manifest-bound-22ea525-active-audio-reviewed.json)
+retains the exact executed sources, raw reports, native recordings, snapshots,
+restored probes and both completed composed captures.
+
+Original inputs reach authored enemy25 and cause eight ordinary strength4
+contact losses. The exact original body SOUND call selects Zero's group3/16
+death vocal: private slot20/bank31, source sample13, 9248 bytes, pitch1144 and
+ADSR33023/8128. The entire sample and both immutable bank hashes match the
+original source. No HP, actor, audio, clock or success flag is written.
+
+The runner saves while gameplay and audio continue. The native snapshot has
+slot20 active, envelope32759 and decoder cursor31504. Original playback ends
+naturally before the warm load. Warm and fresh-cold restores return an audible
+active voice with the same source owner/bank/start/pitch/ADSR; actual subsequent
+probe saves contain cursor32368 and32032 respectively and envelope32759.
+Both restored voices then produce END_STOP without KEYON or KEYOFF across the
+complete recorded load interval. All nine owners, modes, registers, bank
+bindings and24 priority bytes compare exactly. The priority values are zero;
+nonzero native-priority restoration remains unverified.
+
+Each phase passes13 applicable checks, preserves private native cards and exits
+naturally0. The full semantic host core and native world clock differ between
+the running saves; those differences are retained explicitly. They are not
+normalized or claimed equal. The separate paused case above establishes its
+own full-context restoration contract. Slot23's shared death effect is active
+in these snapshots, but its complete restored lifetime is not qualified here.
+No PCM/bit-identical output, mapped hotkey, rewind, rollback, network state or
+complete F33 pass follows from this vocal case.
+
+Two setup/observer failures remain in the receipt: the menu-paused attempt
+produced KEYOFF and an inactive snapshot, and a later poll saw silence before
+fetching END_STOP. The exact native STOP caller after menu entry was not
+captured. The final observer waits for both silence and the recorded terminal,
+and retains the complete event suffix through the first post-load publication.
+It rejects recorder resets, eviction and missing/reordered events. All202
+selected Python checks pass, including six active-state tests.

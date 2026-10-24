@@ -70,6 +70,17 @@ were zero. Active audio, nonzero native priorities, mapped controls, rewind,
 rollback and native malformed-state rejection remain open. F33 and all other
 comparison dispositions remain unchanged.
 
+The [active-vocal state receipt](evidence/mmx6-private-state/manifest-bound-22ea525-active-audio-reviewed.json)
+adds13 warm and13 fresh-cold checks on that same image. An actual source-matched
+Zero group3/16 vocal is saved while playing, returns with a positive envelope
+and advancing saved decoder cursor after each load, and ends naturally without
+retrigger/key-off across the recorded load interval. Nine owner reservations
+and static DSP identity remain exact; both processes exit0 and preserve cards.
+All202 selected Python checks pass. Running host-core/clock differences remain
+explicit, and zero priority values do not qualify nonzero native priorities.
+Mapped controls, rewind, rollback, native invalid-state rejection and full F33
+remain unverified. Earlier failed setup/observer attempts are retained.
+
 ### Earlier audio milestones
 
 These receipts retain their scopes and dispositions at the time. The current

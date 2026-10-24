@@ -134,6 +134,15 @@ wire separately preserves all stable 64-bit voice owners along with the DSP
 state. Older private snapshots are disposable and rejected; no migration is
 required. Native memory cards remain a separate contract.
 
+The [native active-state receipt](evidence/mmx6-private-state/manifest-bound-22ea525-active-audio-reviewed.json)
+now qualifies source-matched group3/16 death-vocal playback across warm and
+fresh-process loads on this exact image. Slot20/bank31 is active with a positive
+envelope in the saved state and both restored probes; the decoder advances from
+the saved cursor and ends naturally without a new KEYON/KEYOFF across the
+recorded load boundary. All nine owner reservations and static voice bindings
+survive. Native priority bytes in this case are zero. This is not a nonzero
+priority, rewind, rollback, PCM or every-action restoration qualification.
+
 Actual callback/snapshot fixtures pass in debug and production with Clang22.1.8
 and MinGW GCC15.2.0. The independently parsed original-disc differential checks
 all 45 records/47 entries against the actual C resolver in both configurations.
@@ -146,7 +155,7 @@ The SDK owner change is local commit
 `09e8673435c73e516b420e6c13bb11f02dc8aaea`. Its owner/DSP and debug-JSON fixtures
 pass under both compilers. The broader SDK fidelity fixture retains four sweep
 assertion failures also reproduced on exact baseline `bfbfb920`; it is not
-reported as a fully passing SPU suite. Fresh image/manifest-bound local and
-paired sample-identity, overlapping lifetime, current-state, active STOP7 and
-campaign checks remain required. Existing v16/v17 receipts retain their exact
-older-image scope.
+reported as a fully passing SPU suite. Current bounded local/paired sample and
+overlap receipts and the state receipt above retain their exact scopes.
+Additional actions, active STOP7, broader state/rewind and campaign checks
+remain required. Existing v16/v17 receipts retain their exact older-image scope.

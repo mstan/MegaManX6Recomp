@@ -4856,9 +4856,61 @@
               "Historical raw artwork-pending report is unchanged; bounded visual review is recorded separately."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+            "build_identity": {
+              "exe_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+              "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+              "compiled_source_commit": "22ea525bbc52b5177f501989fedc5873ef30099c",
+              "sdk_commit": "09e8673435c73e516b420e6c13bb11f02dc8aaea"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro stage0/section0/checkpoint0",
+              "loading": "default Seamless Loading",
+              "input": "owned published host digital slots",
+              "state_control": "completed native save8/load8/probe7 RPCs; unpaused simulation",
+              "audio": "emulated; muted SDL dummy output",
+              "rollback": false
+            },
+            "action": "Reach authored enemy25 through original inputs and take eight ordinary strength4 contacts. Save during the source-matched Zero group3/16 death vocal; allow original playback to end, load and inspect a real probe save. Repeat load in a fresh private process receiving only the new snapshot.",
+            "outcome": "13 warm and13 cold checks pass: saved slot20/bank31 is active with envelope32759 and cursor31504. Restored actual probe saves contain active envelope32759 and advancing cursors32368/32032, matching source start/pitch/ADSR, all nine owners and static bindings. The complete load event suffix contains natural END_STOP with no selected-voice KEYON/KEYOFF. Both processes exit0, private cards and source banks remain unchanged, and202 selected Python checks pass. Full F33 remains unverified.",
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-private-state\\manifest-bound-22ea525-active-audio-reviewed.json",
+                "sha256": "cdc05c6c14e1068de93f7d4317ca40a9d41430b5c23ce2198f19d8ad66cce3cd"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-active-audio-v20-22ea525-terminal-and-boundary\\qualification.json",
+                "sha256": "3263640f1575b07425f61c716b2d0bfe09d81bf5529e2c402b718fe01d68bca1",
+                "size": 7083774
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v20-22ea525\\candidate.json",
+                "sha256": "1a73c37f0dc0c7aa7e4ec524e68561c61a04d713e39930c2ec97b0b8c2fd6500",
+                "size": 4429
+              }
+            ],
+            "limits": [
+              "Same physical Windows machine, exact compiled candidate, fixed X/P1 + Zero/P2 intro, offline only; no cross-build or heterogeneous claim.",
+              "Original host-published inputs reach authored record25 and cause eight ordinary strength4 contact losses; no HP, actor, audio or success-flag writes.",
+              "Only the exact new PST is copied to a fresh private cold profile; warm caches, settings and native memory cards are not transferred.",
+              "Private slot20 source group3/16 vocal is qualified. Slot23 shared death effect is observed active in the snapshots but its complete restored lifetime is not qualified here.",
+              "Voice activity, positive envelope, source bank/start/pitch/ADSR, all nine owner tags, static registers/modes/banks and saved decoder cursor are checked. The source bank bytes remain immutable.",
+              "All saved priority bytes are zero; native restoration of nonzero priorities remains unverified.",
+              "Simulation and DSP advance between saves; complete host core/world clock differences are retained explicitly. No unpaused full-state equality or once-world claim.",
+              "The complete event suffix across each load is retained; selected voice has END_STOP with no intervening KEYON/KEYOFF in that suffix. No old KEYON is paired with a post-load terminal.",
+              "No mapped user save/load hotkeys, rewind, rollback, network state transfer, native invalid-state rejection, PCM comparison, additional audio families or full F33 pass.",
+              "The earlier menu-paused failure is a setup failure. The exact native STOP caller after menu entry was not captured; no source-call qualification is inferred.",
+              "Native memory cards are preserved; old save-state compatibility/migration is not required."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Bounded current-image local native warm/cold state restoration is observed. Actual mapped save/load controls, rewind, active private audio/nonzero priorities, native malformed-state rejection and netplay state behavior remain unverified. Pure parser rejection tests do not qualify the native loader."
+        "limitations": "Bounded local current-image paused private-effect context restoration and unpaused active group3/16 vocal restoration are observed. Actual mapped controls, rewind, additional active-audio families/nonzero priorities, native malformed-state rejection, rollback and netplay state behavior remain unverified. Running host-core/world-clock differences are retained; parser rejection tests do not qualify the native loader."
       }
     },
     {
