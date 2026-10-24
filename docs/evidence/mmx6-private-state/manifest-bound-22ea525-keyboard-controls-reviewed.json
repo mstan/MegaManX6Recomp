@@ -1,0 +1,952 @@
+{
+  "schema": 1,
+  "kind": "reviewed_native_owned_keyboard_state_rewind_and_invalid_provider_rejection",
+  "reviewed_at_utc": "2026-10-24T05:34:20.015531+00:00",
+  "result": "bounded_local_keyboard_checks_passed_F33_unverified",
+  "candidate": {
+    "compiled_source": "22ea525bbc52b5177f501989fedc5873ef30099c",
+    "exe_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+    "manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+    "sdk": "09e8673435c73e516b420e6c13bb11f02dc8aaea",
+    "title": "mmx6-x-zero-delay-v18"
+  },
+  "raw_report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\qualification.json",
+    "sha256": "14d13634f1f3900d10aad445e35d27925ac5eb0d1af478a0a52b21d005fc51b3",
+    "size": 9553845
+  },
+  "executed_sources": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "size": 29983
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "0d4000e511d83b71154ef8f3d882c95de256b880c5fcf091f27c027a8e86ed3e",
+      "size": 14243
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mmx6_owned_keyboard-executed-source.py",
+      "sha256": "f8be7ec4de417e9db15970e5b6e0c0caeb34c428797434699f5caebb3e84c6aa",
+      "size": 4288
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "4829fcb53086c45a2fc4198167b282a73c4e79d3e586211ff8934de168a7f49e",
+      "size": 29088
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\qualify_mmx6_coop_personal_menu-executed-source.py",
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c",
+      "size": 16934
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "eced2cb8b51c932c3a4bca24bbce5c99264aa453eb37c22e9c30f0cb2e9f5219",
+      "size": 52953
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\runner-executed-source.py",
+      "sha256": "8cbcbdb74147a8f24b9ef6f8431ded8f4cc587ab4a1d7b6fd712309edc5fe4d6",
+      "size": 4860
+    }
+  ],
+  "compilation_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v20-22ea525\\candidate.json",
+    "sha256": "1a73c37f0dc0c7aa7e4ec524e68561c61a04d713e39930c2ec97b0b8c2fd6500",
+    "size": 4429
+  },
+  "manifest": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\frozen-build-v20-22ea525\\psx_build_manifest\\psx-runtime\\Release\\manifest.json",
+    "sha256": "26ff444b5cb1f509d8e4b9eb4f30cc393f48d835006da7b74c327a55f11a82be",
+    "size": 161853
+  },
+  "declared_source_validation": {
+    "checked_files": {
+      "game": 56,
+      "game-generated": 34
+    },
+    "checked_bytes": 43883730,
+    "generated_root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\generated-source",
+    "scope": "Declared game and game-generated files only; other dependency roots not rehashed"
+  },
+  "settings": {
+    "video": {
+      "renderer": "opengl",
+      "fullscreen": 0,
+      "window_width": 960,
+      "aspect_ratio": "4:3",
+      "rewind": true,
+      "rewind_depth": 50,
+      "rewind_interval": 8,
+      "frame_interpolation": false
+    },
+    "controller": {
+      "p1_device": "keyboard",
+      "p2_device": "keyboard",
+      "p1_mode": "digital",
+      "p2_mode": "digital"
+    },
+    "launcher": {
+      "skip_launcher": false
+    }
+  },
+  "native_input_scope": {
+    "gameplay": "owned published host pad sampler",
+    "state_ui": "WM_KEYDOWN/WM_KEYUP to owned SDL HWND; no foreground/global injection or physical-hardware claim"
+  },
+  "keyboard_window": {
+    "hwnd": 4467516,
+    "class_name": "SDL_app",
+    "title": "MegaManX6Recomp",
+    "pid": 59632
+  },
+  "keyboard_events": [
+    {
+      "key": "F7",
+      "up": false,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 256,
+      "vk": 118,
+      "scan": 65,
+      "lparam": 4259841,
+      "monotonic_ns": 286304875000000,
+      "posted": true
+    },
+    {
+      "key": "F7",
+      "up": true,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 257,
+      "vk": 118,
+      "scan": 65,
+      "lparam": 3225485313,
+      "monotonic_ns": 286304906000000,
+      "posted": true
+    },
+    {
+      "key": "S",
+      "up": false,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 256,
+      "vk": 83,
+      "scan": 31,
+      "lparam": 2031617,
+      "monotonic_ns": 286305046000000,
+      "posted": true
+    },
+    {
+      "key": "S",
+      "up": true,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 257,
+      "vk": 83,
+      "scan": 31,
+      "lparam": 3223257089,
+      "monotonic_ns": 286305109000000,
+      "posted": true
+    },
+    {
+      "key": "F7",
+      "up": false,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 256,
+      "vk": 118,
+      "scan": 65,
+      "lparam": 4259841,
+      "monotonic_ns": 286306546000000,
+      "posted": true
+    },
+    {
+      "key": "F7",
+      "up": true,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 257,
+      "vk": 118,
+      "scan": 65,
+      "lparam": 3225485313,
+      "monotonic_ns": 286306562000000,
+      "posted": true
+    },
+    {
+      "key": "L",
+      "up": false,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 256,
+      "vk": 76,
+      "scan": 38,
+      "lparam": 2490369,
+      "monotonic_ns": 286306671000000,
+      "posted": true
+    },
+    {
+      "key": "L",
+      "up": true,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 257,
+      "vk": 76,
+      "scan": 38,
+      "lparam": 3223715841,
+      "monotonic_ns": 286306734000000,
+      "posted": true
+    },
+    {
+      "key": "F7",
+      "up": false,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 256,
+      "vk": 118,
+      "scan": 65,
+      "lparam": 4259841,
+      "monotonic_ns": 286306937000000,
+      "posted": true
+    },
+    {
+      "key": "F7",
+      "up": true,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 257,
+      "vk": 118,
+      "scan": 65,
+      "lparam": 3225485313,
+      "monotonic_ns": 286307000000000,
+      "posted": true
+    },
+    {
+      "key": "Right",
+      "up": false,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 256,
+      "vk": 39,
+      "scan": 77,
+      "lparam": 21823489,
+      "monotonic_ns": 286307109000000,
+      "posted": true
+    },
+    {
+      "key": "Right",
+      "up": true,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 257,
+      "vk": 39,
+      "scan": 77,
+      "lparam": 3243048961,
+      "monotonic_ns": 286307156000000,
+      "posted": true
+    },
+    {
+      "key": "L",
+      "up": false,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 256,
+      "vk": 76,
+      "scan": 38,
+      "lparam": 2490369,
+      "monotonic_ns": 286307312000000,
+      "posted": true
+    },
+    {
+      "key": "L",
+      "up": true,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 257,
+      "vk": 76,
+      "scan": 38,
+      "lparam": 3223715841,
+      "monotonic_ns": 286307359000000,
+      "posted": true
+    },
+    {
+      "key": "F8",
+      "up": false,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 256,
+      "vk": 119,
+      "scan": 66,
+      "lparam": 4325377,
+      "monotonic_ns": 286312953000000,
+      "posted": true
+    },
+    {
+      "key": "F8",
+      "up": true,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 257,
+      "vk": 119,
+      "scan": 66,
+      "lparam": 3225550849,
+      "monotonic_ns": 286312968000000,
+      "posted": true
+    },
+    {
+      "key": "Left",
+      "up": false,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 256,
+      "vk": 37,
+      "scan": 75,
+      "lparam": 21692417,
+      "monotonic_ns": 286313093000000,
+      "posted": true
+    },
+    {
+      "key": "Left",
+      "up": true,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 257,
+      "vk": 37,
+      "scan": 75,
+      "lparam": 3242917889,
+      "monotonic_ns": 286314859000000,
+      "posted": true
+    },
+    {
+      "key": "Enter",
+      "up": false,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 256,
+      "vk": 13,
+      "scan": 28,
+      "lparam": 1835009,
+      "monotonic_ns": 286314984000000,
+      "posted": true
+    },
+    {
+      "key": "Enter",
+      "up": true,
+      "pid": 59632,
+      "hwnd": 4467516,
+      "message": 257,
+      "vk": 13,
+      "scan": 28,
+      "lparam": 3223060481,
+      "monotonic_ns": 286315015000000,
+      "posted": true
+    }
+  ],
+  "operations": [
+    {
+      "path": "mapped_win32_keyboard",
+      "operation": "save",
+      "slot": 0,
+      "expected_ok": true,
+      "before": {
+        "id": 1807,
+        "ok": true,
+        "generation": 0,
+        "pending": 0,
+        "last_ok": 0,
+        "last_op": "save",
+        "last_slot": -1
+      },
+      "observations": [
+        {
+          "id": 1809,
+          "ok": true,
+          "generation": 0,
+          "pending": 1,
+          "last_ok": 0,
+          "last_op": "save",
+          "last_slot": 0
+        },
+        {
+          "id": 1810,
+          "ok": true,
+          "generation": 1,
+          "pending": 0,
+          "last_ok": 1,
+          "last_op": "save",
+          "last_slot": 0
+        }
+      ],
+      "completion": {
+        "id": 1810,
+        "ok": true,
+        "generation": 1,
+        "pending": 0,
+        "last_ok": 1,
+        "last_op": "save",
+        "last_slot": 0
+      }
+    },
+    {
+      "path": "mapped_win32_keyboard",
+      "operation": "load",
+      "slot": 0,
+      "expected_ok": true,
+      "before": {
+        "id": 1900,
+        "ok": true,
+        "generation": 1,
+        "pending": 0,
+        "last_ok": 1,
+        "last_op": "save",
+        "last_slot": 0
+      },
+      "observations": [
+        {
+          "id": 1902,
+          "ok": true,
+          "generation": 1,
+          "pending": 0,
+          "last_ok": 1,
+          "last_op": "save",
+          "last_slot": 0
+        },
+        {
+          "id": 1903,
+          "ok": true,
+          "generation": 2,
+          "pending": 0,
+          "last_ok": 1,
+          "last_op": "load",
+          "last_slot": 0
+        }
+      ],
+      "completion": {
+        "id": 1903,
+        "ok": true,
+        "generation": 2,
+        "pending": 0,
+        "last_ok": 1,
+        "last_op": "load",
+        "last_slot": 0
+      }
+    },
+    {
+      "before": {
+        "id": 1915,
+        "ok": true,
+        "generation": 2,
+        "pending": 0,
+        "last_ok": 1,
+        "last_op": "load",
+        "last_slot": 0
+      },
+      "acknowledgement": {
+        "id": 1916,
+        "ok": true,
+        "op": "save",
+        "slot": 7
+      },
+      "observations": [
+        {
+          "id": 1917,
+          "ok": true,
+          "generation": 2,
+          "pending": 1,
+          "last_ok": 1,
+          "last_op": "save",
+          "last_slot": 7
+        },
+        {
+          "id": 1918,
+          "ok": true,
+          "generation": 3,
+          "pending": 0,
+          "last_ok": 1,
+          "last_op": "save",
+          "last_slot": 7
+        }
+      ],
+      "completion": {
+        "id": 1918,
+        "ok": true,
+        "generation": 3,
+        "pending": 0,
+        "last_ok": 1,
+        "last_op": "save",
+        "last_slot": 7
+      }
+    },
+    {
+      "path": "mapped_win32_keyboard",
+      "operation": "load",
+      "slot": 1,
+      "expected_ok": false,
+      "before": {
+        "id": 1930,
+        "ok": true,
+        "generation": 3,
+        "pending": 0,
+        "last_ok": 1,
+        "last_op": "save",
+        "last_slot": 7
+      },
+      "observations": [
+        {
+          "id": 1932,
+          "ok": true,
+          "generation": 4,
+          "pending": 0,
+          "last_ok": 0,
+          "last_op": "load",
+          "last_slot": 1
+        }
+      ],
+      "completion": {
+        "id": 1932,
+        "ok": true,
+        "generation": 4,
+        "pending": 0,
+        "last_ok": 0,
+        "last_op": "load",
+        "last_slot": 1
+      }
+    },
+    {
+      "before": {
+        "id": 1944,
+        "ok": true,
+        "generation": 4,
+        "pending": 0,
+        "last_ok": 0,
+        "last_op": "load",
+        "last_slot": 1
+      },
+      "acknowledgement": {
+        "id": 1945,
+        "ok": true,
+        "op": "save",
+        "slot": 7
+      },
+      "observations": [
+        {
+          "id": 1946,
+          "ok": true,
+          "generation": 4,
+          "pending": 1,
+          "last_ok": 0,
+          "last_op": "save",
+          "last_slot": 7
+        },
+        {
+          "id": 1947,
+          "ok": true,
+          "generation": 5,
+          "pending": 0,
+          "last_ok": 1,
+          "last_op": "save",
+          "last_slot": 7
+        }
+      ],
+      "completion": {
+        "id": 1947,
+        "ok": true,
+        "generation": 5,
+        "pending": 0,
+        "last_ok": 1,
+        "last_op": "save",
+        "last_slot": 7
+      }
+    },
+    {
+      "before": {
+        "id": 2247,
+        "ok": true,
+        "generation": 5,
+        "pending": 0,
+        "last_ok": 1,
+        "last_op": "save",
+        "last_slot": 7
+      },
+      "acknowledgement": {
+        "id": 2248,
+        "ok": true,
+        "op": "save",
+        "slot": 7
+      },
+      "observations": [
+        {
+          "id": 2249,
+          "ok": true,
+          "generation": 6,
+          "pending": 0,
+          "last_ok": 1,
+          "last_op": "save",
+          "last_slot": 7
+        }
+      ],
+      "completion": {
+        "id": 2249,
+        "ok": true,
+        "generation": 6,
+        "pending": 0,
+        "last_ok": 1,
+        "last_op": "save",
+        "last_slot": 7
+      }
+    }
+  ],
+  "snapshot": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\mapped-save.pst",
+    "sha256": "c53f51a810a0fea7bdd9810f53514e5b13722d6c47c53f3eace2ec34101bf8f5",
+    "size": 1787509
+  },
+  "provider_probes": [
+    {
+      "label": "mapped-load",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\mapped-load-probe.pst",
+        "sha256": "db08dc4196a899e150f54f6e9733312852743da1b196c7f422adeca8c8b4beb7",
+        "size": 1784040
+      },
+      "checks": {
+        "exact_current_build_key": true,
+        "same_provider_set": true,
+        "same_resource_and_original_asset_binding": true,
+        "full_private_context_and_host_input_history": true,
+        "explicit_native_and_host_input_history": true,
+        "saved_native_world_clock": true,
+        "saved_native_mode_phase": true,
+        "saved_native_menu_state": true,
+        "full_retained_bank_payloads": true,
+        "saved_sprite_bank_count": true,
+        "saved_ui_bank_count": true,
+        "persistent_private_audio_priorities": true,
+        "private_spu_owner_tags": true,
+        "private_spu_modes": true,
+        "private_spu_registers_hex": true,
+        "private_spu_bank_bindings": true,
+        "full_native_p1_body": true
+      }
+    },
+    {
+      "label": "after-invalid",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\after-invalid-probe.pst",
+        "sha256": "47292c78e1851b1d3edcfd32896660c194c9f4054a4d6428ae716ab1a5a3bbb1",
+        "size": 1787012
+      },
+      "checks": {
+        "exact_current_build_key": true,
+        "same_provider_set": true,
+        "same_resource_and_original_asset_binding": true,
+        "full_private_context_and_host_input_history": true,
+        "explicit_native_and_host_input_history": true,
+        "saved_native_world_clock": true,
+        "saved_native_mode_phase": true,
+        "saved_native_menu_state": true,
+        "full_retained_bank_payloads": true,
+        "saved_sprite_bank_count": true,
+        "saved_ui_bank_count": true,
+        "persistent_private_audio_priorities": true,
+        "private_spu_owner_tags": true,
+        "private_spu_modes": true,
+        "private_spu_registers_hex": true,
+        "private_spu_bank_bindings": true,
+        "full_native_p1_body": true
+      }
+    },
+    {
+      "label": "rewind",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\rewind-probe.pst",
+        "sha256": "5097cb2d915abacea9df6e6a25dd4bb96b7e53d37bf2ba2103113e7aa7696fca",
+        "size": 1788417
+      },
+      "checks": {
+        "exact_current_build_key": true,
+        "same_provider_set": true,
+        "same_resource_and_original_asset_binding": true,
+        "full_private_context_and_host_input_history": true,
+        "explicit_native_and_host_input_history": true,
+        "saved_native_world_clock": true,
+        "saved_native_mode_phase": true,
+        "saved_native_menu_state": true,
+        "full_retained_bank_payloads": true,
+        "saved_sprite_bank_count": true,
+        "saved_ui_bank_count": true,
+        "persistent_private_audio_priorities": true,
+        "private_spu_owner_tags": true,
+        "private_spu_modes": true,
+        "private_spu_registers_hex": true,
+        "private_spu_bank_bindings": true,
+        "full_native_p1_body": true
+      }
+    }
+  ],
+  "malformed_snapshot": {
+    "artifact": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\invalid-internal-wire4.pst",
+      "sha256": "f3b3ba06c4c570363eae44ebb29e4ea790f7ebc338761856175806ae2670ffd6",
+      "size": 1782346
+    },
+    "change": "Only current provider internal wire3 -> unsupported wire4; current build header retained"
+  },
+  "checks": {
+    "keyboard_s_saved_live_private_pools": true,
+    "original_menu_resume_advances_native_world": true,
+    "native_phase1_and_phase2_observed": true,
+    "finite_all_three_retired": true,
+    "ordered_native_recovery_publications": true,
+    "recovery_personal_resources_preserved": true,
+    "recovery_original_p1_position_preserved": true,
+    "genuine_p2_input_resumed_independently": true,
+    "personal_hp_ammo_weapon_preserved": true,
+    "new_publication_after_completed_load": true,
+    "publication_after_saved_provider": true,
+    "native_p1_pause_retains_live_dash": true,
+    "saved_native_clock_restored": true,
+    "saved_native_menu_state_restored": true,
+    "full_private_body": true,
+    "full_private_shots": true,
+    "full_private_trails": true,
+    "full_private_attached": true,
+    "full_p1_body": true,
+    "native_input_history": true,
+    "keyboard_l_provider_probe": true,
+    "native_malformed_provider_rejection_preserves_state": true,
+    "rewind_new_publication_after_completed_load": true,
+    "rewind_publication_after_saved_provider": true,
+    "rewind_native_p1_pause_retains_live_dash": true,
+    "rewind_saved_native_clock_restored": true,
+    "rewind_saved_native_menu_state_restored": true,
+    "rewind_full_private_body": true,
+    "rewind_full_private_shots": true,
+    "rewind_full_private_trails": true,
+    "rewind_full_private_attached": true,
+    "rewind_full_p1_body": true,
+    "rewind_native_input_history": true,
+    "mapped_rewind_full_provider_probe": true
+  },
+  "check_count": 34,
+  "snapshot_contract": {
+    "pst": 10,
+    "provider_interface": 1,
+    "internal_wire": 3,
+    "semantic_bytes": 9390,
+    "native_world_clock": 158,
+    "sprite_banks": 297,
+    "ui_banks": 6,
+    "saved_active_private_voices": 0,
+    "audio_priorities_hex": "000000000000000000000000000000000000000000000000"
+  },
+  "observed_resources": {
+    "hp_pairs": [
+      [
+        32,
+        32
+      ]
+    ],
+    "ammo_perturbed": false,
+    "weapon_perturbed": false,
+    "restore_after_spending": "unverified"
+  },
+  "rewind_seek": {
+    "publications_since_paused_window": 75,
+    "interval": 8,
+    "desired_steps": 22,
+    "held_seconds": 1.7500000000000002,
+    "qualification": "Actual restored bytes only; duration is not a selected-tick proof"
+  },
+  "owned_process": {
+    "pid": 59632,
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "private_cards": {
+    "before": {},
+    "after": {
+      "saves\\card1.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "saves\\card2.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    "existing_private_cards_unchanged": true
+  },
+  "visual_review": {
+    "reviewer": "root, solo",
+    "viewed_files": [
+      "before-mapped-save-0.png",
+      "mapped-rewind-selected.png",
+      "after-mapped-rewind-native-after-dash-retirement-and-input.png"
+    ],
+    "finding": "F7 slot browser shows new slot1; selected rewind filmstrip29/50,F3072 shows original X menu; resumed intro shows X/Zero bodies and full personal meters.",
+    "limits": "These three named captures reviewed. No campaign, original-artwork or physical-hardware qualification."
+  },
+  "python_validation": {
+    "test_count": 209,
+    "result": "passed",
+    "log": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\python-validation.txt",
+      "sha256": "e0ff0ea90e05487bd1fa9bbe1cd24e888aaf3a33ae29a42dc5c08ea90768696e",
+      "size": 820
+    }
+  },
+  "reference_netplay_policy": [
+    {
+      "repository": "F:\\Projects\\psxrecomp\\MegaManX4Recomp",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "src/mods/mmx4_coop_plugin.c",
+      "sha256": "f61bb4f8758660ba21e04c86ec28b5c3f22738396ff128ebf10e65fae84b7e57",
+      "excerpts": [
+        {
+          "line": 1623,
+          "text": "psx_mod_set_rewind_blocked(psx_mod_netplay_is_active());"
+        },
+        {
+          "line": 1624,
+          "text": "psx_mod_set_savestate_blocked(psx_mod_netplay_is_active());"
+        }
+      ]
+    },
+    {
+      "repository": "F:\\Projects\\psxrecomp\\MegaManX4Recomp",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "docs/COOP_NETPLAY_EVIDENCE.md",
+      "sha256": "4297648ceb9cf07b5ecea28e91ba05661b39459cb8bc99959bb5c9f46314101c",
+      "excerpts": [
+        {
+          "line": 89,
+          "text": "The profile uses delay-sync and refuses rollback, savestates and rewind."
+        }
+      ]
+    },
+    {
+      "repository": "F:\\Projects\\psxrecomp\\_wt-mmx5-x4-parity",
+      "commit": "9ed460e7b7e60769fa12bcab74e228ae19796214",
+      "path": "src/mods/mmx5_coop_plugin.c",
+      "sha256": "4d55213297606aa1db1306ef5c82d4ac1de048cad1a87052b2860596b33f38ba",
+      "excerpts": [
+        {
+          "line": 4153,
+          "text": "psx_mod_set_savestate_blocked(psx_mod_netplay_is_active());"
+        }
+      ]
+    }
+  ],
+  "ledger": {
+    "row": "F33",
+    "local": "unverified",
+    "netplay": "unverified",
+    "aggregate": "unverified"
+  },
+  "limits": [
+    "Exact same-image Windows local X/P1 + Zero/P2 intro only; netplay and other hosts remain unverified.",
+    "Posted WM_KEYDOWN/WM_KEYUP events exercise owned Win32/SDL keyboard routing. Physical keyboard hardware and global focus behavior are not qualified.",
+    "Gameplay uses owned published host pad inputs; only state/rewind UI input uses the owned keyboard window.",
+    "HP remained32/32 and ammo/weapon were not spent or changed. Equal resource bytes establish preservation only; restoring resources after genuine damage/spending remains unverified.",
+    "Current-build provider internal wire3->4 rejection only; no old-state migration or backward compatibility is required.",
+    "All nine reserved SPU owners restore. Saved priorities are zero and saved voices inactive; active audio rewind and nonzero native priorities remain separate.",
+    "Ordered native-consumption recording is unavailable with rewind by SDK contract. No ordered recording/replay or rollback pass is claimed.",
+    "Only later completed save7 probe RPCs inspect provider state; mapped save/load operations use keyboard UI events.",
+    "Frozen X4/X5 source proves online state jumps are deliberately blocked. This source observation does not qualify X6 runtime refusal or synchronization.",
+    "All234 dispositions, including F33 local/netplay/aggregate, remain unchanged."
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\after-invalid-probe.pst",
+      "sha256": "47292c78e1851b1d3edcfd32896660c194c9f4054a4d6428ae716ab1a5a3bbb1",
+      "size": 1787012
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\after-mapped-rewind-native-after-dash-retirement-and-input.png",
+      "sha256": "d0860b87dc228a1bcd3d9583223742e50d44b91072b496495116220fc65f0071",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\before-mapped-load-0.png",
+      "sha256": "066f1e95408a11f59e51c5843a596fe5eb73905f843bc0c49f19c187c0f44eb7",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\before-mapped-load-1.png",
+      "sha256": "e55be1fa9bd5da777cc12fbffde63b79f4f7243d70e13726e1ae837b591c315f",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\before-mapped-load-native-after-dash-retirement-and-input.png",
+      "sha256": "595b2e62659e028da4b085451277810458430c6fd9353a5efc04ecff7e5ca8aa",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\before-mapped-rewind-native-after-dash-retirement-and-input.png",
+      "sha256": "ce475784360ed9f20542144421db3c9bccca23b44cf1485dec82b7245930d9e8",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\before-mapped-save-0.png",
+      "sha256": "da846c868445ae4d8a01811639189ec47252d4aa70b3dd98ba984aeddcfd89a7",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\invalid-internal-wire4.pst",
+      "sha256": "f3b3ba06c4c570363eae44ebb29e4ea790f7ebc338761856175806ae2670ffd6",
+      "size": 1782346
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\live-private-effects-before-save.png",
+      "sha256": "29b83049cf53b0b379eda56d8407fdf004c7d69496f57690f2c4b79844574dc4",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\mapped-load-probe.pst",
+      "sha256": "db08dc4196a899e150f54f6e9733312852743da1b196c7f422adeca8c8b4beb7",
+      "size": 1784040
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\mapped-rewind-open.png",
+      "sha256": "e669fdc1ce18a1c7d77a0648136882b77464e6e801704959dbe9baacf3f8d0f9",
+      "size": 338189
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\mapped-rewind-restored-live-pools.png",
+      "sha256": "119ba6d52852526256b468334f9927f374b2d006314e95f48cd7fe4f8ad7c619",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\mapped-rewind-selected.png",
+      "sha256": "07eb8abf661908a3adbe4bc08047c4b16dde91545fc7ba52b7067347ea8e000c",
+      "size": 338189
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\mapped-save.pst",
+      "sha256": "c53f51a810a0fea7bdd9810f53514e5b13722d6c47c53f3eace2ec34101bf8f5",
+      "size": 1787509
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\mapped-state\\rewind-probe.pst",
+      "sha256": "5097cb2d915abacea9df6e6a25dd4bb96b7e53d37bf2ba2103113e7aa7696fca",
+      "size": 1788417
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\candidate\\settings.toml",
+      "sha256": "b550cf7c0c5adf5943c0785d278dc5cf84167602dcf49b0d66c5dff63c46ee25",
+      "size": 311
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\candidate\\game.toml",
+      "sha256": "223fef891db405a4eefd875b4b79690f1498e5711b5f9d24520f938da50bc64e",
+      "size": 12540
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\candidate\\environment.json",
+      "sha256": "64dc87f23f5d35d3afdc0fde802fa70fb93e6c37c5f933cdd1461716592e47c7",
+      "size": 1180
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\candidate\\preparation.json",
+      "sha256": "c7c24da3b2563ae10423f18dfbb96fe63ef586245dbe2292b83c704c144b76d0",
+      "size": 3405
+    }
+  ]
+}

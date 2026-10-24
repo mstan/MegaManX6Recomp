@@ -89,8 +89,22 @@ input/resources, retained graphics and nine SPU reservations. Actual native
 effect retirement and independent P2 movement recover afterward. The process
 exits0 and preserves cards; all206 selected Python checks pass. Rewind's
 recording limitation and the earlier closing-interval seek miss are explicit.
-Physical F7/F8 keyboard events, netplay and remaining F33 contexts are still
-unverified, so no comparison disposition changes.
+At that milestone keyboard event routing, netplay and remaining F33 contexts
+were unverified, so no comparison disposition changed.
+
+The [owned keyboard receipt](evidence/mmx6-private-state/manifest-bound-22ea525-keyboard-controls-reviewed.json)
+adds34 native checks through F7/S/L and F8/Left/Enter on the same image.
+Twenty Win32 key messages target only the owned SDL window; this tests the
+keyboard event path without claiming physical keyboard hardware coverage.
+Three completed provider probes match after load, invalid-provider rejection
+and rewind. The process exits0, existing cards remain unchanged, and all209
+selected Python checks pass. HP stayed32/32 and ammo/weapon were not changed:
+these state receipts establish resource preservation, while restoring resources
+after native damage or spending remains unverified. Frozen X4 source and its
+netplay evidence explicitly block online savestates and rewind; X5 also blocks
+online savestates. X6 still needs a two-peer runtime refusal and synchronization
+check against that contract. F33 local/netplay and the234-row totals remain
+unchanged.
 
 ### Earlier audio milestones
 

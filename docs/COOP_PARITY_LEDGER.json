@@ -4962,9 +4962,61 @@
               "The complete234-comparison burndown and F33 remain unverified beyond the stated bounded outcomes."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+            "build_identity": {
+              "exe_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+              "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+              "compiled_source_commit": "22ea525bbc52b5177f501989fedc5873ef30099c",
+              "sdk_commit": "09e8673435c73e516b420e6c13bb11f02dc8aaea"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro stage0/section0/checkpoint0",
+              "loading": "default Seamless Loading",
+              "input": "owned published host gameplay slots; Win32/SDL keyboard state UI on exact owned HWND",
+              "rewind": true,
+              "rewind_depth": 50,
+              "rewind_interval": 8,
+              "ordered_recording": "SDK excludes rewind timelines; no ordered capture/replay qualification",
+              "audio": "emulated; muted SDL dummy output",
+              "rollback": false
+            },
+            "action": "F7/S saves0, F7/L loads0 after native effect retirement/P2 movement. F7/Right/L rejects malformed current provider in slot1. F8/Left/Enter rewinds to live pools; original native retirement and independent P2 input resume.",
+            "outcome": "All34 native keyboard checks and209 selected Python tests pass;20 owned keyboard messages complete, three provider probes match, normal exit0 and existing cards unchanged. HP32/32 and ammo/weapon were not perturbed; resource restoration after damage/spending and online refusal/synchronization remain unverified.",
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-private-state\\manifest-bound-22ea525-keyboard-controls-reviewed.json",
+                "sha256": "84320ef77c031ebd2b5a32745c622285392d27d374c53ade8d7bc1ec89a06532"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-keyboard-first\\qualification.json",
+                "sha256": "14d13634f1f3900d10aad445e35d27925ac5eb0d1af478a0a52b21d005fc51b3",
+                "size": 9553845
+              }
+            ],
+            "limits": [
+              "Exact same-image Windows local X/P1 + Zero/P2 intro only; netplay and other hosts remain unverified.",
+              "Posted WM_KEYDOWN/WM_KEYUP events exercise owned Win32/SDL keyboard routing. Physical keyboard hardware and global focus behavior are not qualified.",
+              "Gameplay uses owned published host pad inputs; only state/rewind UI input uses the owned keyboard window.",
+              "HP remained32/32 and ammo/weapon were not spent or changed. Equal resource bytes establish preservation only; restoring resources after genuine damage/spending remains unverified.",
+              "Current-build provider internal wire3->4 rejection only; no old-state migration or backward compatibility is required.",
+              "All nine reserved SPU owners restore. Saved priorities are zero and saved voices inactive; active audio rewind and nonzero native priorities remain separate.",
+              "Ordered native-consumption recording is unavailable with rewind by SDK contract. No ordered recording/replay or rollback pass is claimed.",
+              "Only later completed save7 probe RPCs inspect provider state; mapped save/load operations use keyboard UI events.",
+              "Frozen X4/X5 source proves online state jumps are deliberately blocked. This source observation does not qualify X6 runtime refusal or synchronization.",
+              "All234 dispositions, including F33 local/netplay/aggregate, remain unchanged."
+            ],
+            "bypasses": [
+              "Unsupported internal wire4 is forged only in a disposable current-build state to test rejection; no gameplay completion/resource flags are written.",
+              "Published host pad samples drive gameplay; the state/rewind UI uses posted messages scoped to the owned SDL HWND. Physical keyboard hardware remains unverified."
+            ]
           }
         ],
-        "limitations": "Bounded local paused private-effect restoration, active death-vocal warm/cold restoration, controller-mapped Square/Cross, private-pool rewind and current internal-wire4 native rejection are observed. Physical F7/F8 keyboard event routing, netplay state behavior, other malformed-state families, additional active-audio/nonzero-priority restore/rewind and other locations remain unverified. Ordered recording intentionally excludes rewind timelines. No old-state migration is required."
+        "limitations": "Bounded current-wire warm/cold state, active vocal restore, controller and owned Win32/SDL keyboard state/rewind checks pass. HP/ammo/weapon were preserved without genuine resource perturbation. F33 remains unverified pending meaningful resource restoration and runtime verification of the frozen X4 online refusal contract; no old-state compatibility requirement."
       }
     },
     {

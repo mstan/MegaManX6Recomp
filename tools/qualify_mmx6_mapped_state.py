@@ -1,4 +1,4 @@
-"""Own one muted, exact-image controller-mapped state/rewind qualification."""
+"""Own one muted, exact-image mapped state/rewind qualification."""
 import argparse
 import json
 from pathlib import Path
@@ -16,11 +16,12 @@ import qualify_mmx6_coop_state as state
 def run(args):
     output=preparation.local_output(args.out);output.mkdir(parents=True,exist_ok=False)
     report=dict(kind='owned_native_mapped_coop_state',status='failed_setup',runtime={},checks={},F33='unverified',
-        limits=['Same-image local controller paths only. Physical F7/F8, netplay and full F33 remain separate.'])
+        control_route='owned_win32_keyboard' if args.keyboard else 'published_controller',
+        limits=['Same-image local UI paths only. Physical keyboard hardware, netplay and full F33 remain separate.'])
     try:
         original=binding.load_sources(args.original_exe,args.original_disc,args.disc,
             args.source/'docs/COOP_JUMP_AUDIO_CONTRACT.json')
-        for module in (mapped,state,owner,binding,mapped.menus):
+        for module in (mapped,state,owner,binding,mapped.menus,mapped.keyboard_input):
             p=Path(module.__file__);(output/(p.stem+'-executed-source.py')).write_bytes(p.read_bytes())
         (output/'runner-executed-source.py').write_bytes(Path(__file__).read_bytes())
         report['original_disc']=original['disc']
@@ -35,7 +36,7 @@ def run(args):
         report.update(state.validate_state_build(args.build,args.source,[args.build,candidate],args.expected_manifest_sha256,output))
         report['originals']=owner.verify_prepared_originals(candidate,args.original_exe,args.disc,expected_rewind=True)
         report['checks']['exact_image_manifest_declared_sources_originals']=True
-        def observe(ctx):return mapped.exercise(ctx,output=output/'mapped-state')
+        def observe(ctx):return mapped.exercise(ctx,output=output/'mapped-state',keyboard=args.keyboard)
         owner.run_owned(candidate,args.port,args.boot_timeout,12,report['runtime'],original['contract'],
             expected_image=args.expected_exe_sha256,first_seat=0,max_attempts=8,audio_timeout=120,
             private_banks=original['private_banks'],custom_observer=observe,rewind_state_case=True)
@@ -60,6 +61,7 @@ def main():
     for name in ('build','source','disc','original-disc','original-exe','out'):p.add_argument('--'+name,type=Path,required=True)
     for name in ('expected-exe-sha256','expected-manifest-sha256'):p.add_argument('--'+name,required=True)
     p.add_argument('--port',type=int,default=24923);p.add_argument('--boot-timeout',type=int,default=200)
+    p.add_argument('--keyboard',action='store_true',help='Use owned Win32/SDL F7/S/L and F8/Left/Enter instead of controller UI shortcuts')
     a=p.parse_args()
     if not 1024<=a.port<=65535 or not 1<=a.boot_timeout<=600:p.error('Require bounded port and boot timeout')
     if any(re.fullmatch('[0-9a-f]{64}',v) is None for v in (a.expected_exe_sha256,a.expected_manifest_sha256)):

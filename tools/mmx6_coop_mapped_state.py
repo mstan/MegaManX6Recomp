@@ -1,7 +1,7 @@
-"""Native controller-mapped state UI and rewind; no direct load requests.
+"""Native keyboard/controller state UI and rewind; no direct load requests.
 
 Gameplay input uses the owned host sampler. Probe saves only inspect the actual
-provider after user-path operations; they never stand in for Square/Cross.
+provider after user-path operations; they never stand in for mapped UI input.
 """
 import hashlib
 import math
@@ -14,6 +14,7 @@ import zlib
 import coop_debug as debug
 import qualify_mmx6_coop_personal_menu as menus
 import qualify_mmx6_coop_state as state
+import mmx6_owned_keyboard as keyboard_input
 
 
 SUCCESS='bounded_mapped_state_controls_observed'
@@ -73,9 +74,10 @@ def malformed_current_wire(original):
 
 
 class SlotControls:
-    def __init__(self,ctx,evidence,output):
+    def __init__(self,ctx,evidence,output,*,keyboard=False):
         self.ctx,self.evidence,self.output=ctx,evidence,output
         evidence.update(mapped_controls=[],overlay_observations=[],overlay_captures=[])
+        self.keyboard=keyboard_input.OwnedKeyboard(ctx,evidence) if keyboard else None
 
     def wait(self,test,label,timeout=18):
         deadline=time.monotonic()+timeout
@@ -108,14 +110,18 @@ class SlotControls:
 
     def open_slot(self,slot):
         require(not self.overlay()['save_menu_open'],'Slot browser was already open')
-        self.hold_until(0x801,lambda:self.overlay()['save_menu_open'],'Select+R1 opens actual slot browser')
+        if self.keyboard:
+            self.keyboard.until('F7',lambda:self.overlay()['save_menu_open'],self.wait,'Win32 F7 opens actual slot browser')
+        else:self.hold_until(0x801,lambda:self.overlay()['save_menu_open'],'Select+R1 opens actual slot browser')
         time.sleep(.08)
         for _ in range(12):
             status=self.overlay()
             require(not status['save_unavailable'],'Current local mode blocks the slot browser')
             if status['save_slot']==slot:return
             current=status['save_slot']
-            self.hold_until(0x20,lambda:self.overlay()['save_slot']!=current,'Actual slot-browser Right')
+            if self.keyboard:
+                self.keyboard.until('Right',lambda:self.overlay()['save_slot']!=current,self.wait,'Keyboard slot-browser Right')
+            else:self.hold_until(0x20,lambda:self.overlay()['save_slot']!=current,'Actual slot-browser Right')
             time.sleep(.08)
         raise debug.DebugError('Could not navigate to the requested ordinary slot')
 
@@ -123,13 +129,15 @@ class SlotControls:
         self.open_slot(slot)
         self.capture('save_states',f'before-mapped-{operation}-{slot}')
         before=self.ctx['request']('savestate_status')
-        record=dict(path='mapped_controller',operation=operation,slot=slot,expected_ok=expected_ok,
+        record=dict(path='mapped_win32_keyboard' if self.keyboard else 'mapped_controller',operation=operation,slot=slot,expected_ok=expected_ok,
             before=before,observations=[])
         self.evidence['operations'].append(record)
         def completed():
             after=self.ctx['request']('savestate_status');record['observations'].append(after)
             if operation_result(before,after,operation,slot,expected_ok):
                 record['completion']=after;return after
+        if self.keyboard:
+            return self.keyboard.until('S' if operation=='save' else 'L',completed,self.wait,'Keyboard '+operation)
         return self.hold_until(0x8000 if operation=='save' else 0x4000,completed,'Mapped '+operation)
 
 
@@ -141,15 +149,17 @@ def restored_publications(case,saved,label):
     return restored,checks
 
 
-def exercise(ctx,*,output,timeout=12):
+def exercise(ctx,*,output,timeout=12,keyboard=False):
     require(ctx['mode']=='local' and ctx['input_path']=='published_host','Mapped states need the owned local host route')
     output.mkdir(parents=True,exist_ok=False)
     evidence={};ctx['report']['mapped_state']=evidence
     adapter=PublishedAdapter(ctx,evidence,timeout)
     case=state.PrivateStateCase(ctx['request'],output,evidence,timeout=timeout,
         adapter=adapter,input_path='published_host')
-    controls=SlotControls(ctx,evidence,output)
-    evidence['limits']=['Local exact-image X/P1 + Zero/P2 intro only; physical keyboard F7/F8 and netplay are separate.',
+    controls=SlotControls(ctx,evidence,output,keyboard=keyboard)
+    evidence['control_route']='owned_win32_keyboard' if keyboard else 'published_controller'
+    evidence['limits']=['Local exact-image X/P1 + Zero/P2 intro only; physical keyboard hardware and netplay are separate.',
+        'Owned Win32/SDL key events use the original host UI; physical hardware is not exercised.' if keyboard else
         'Controller shortcuts use the original host UI. Direct save RPCs only produce read-only provider probes.',
         'Rewind seek duration is a setup heuristic; only actual restored state establishes the outcome.',
         'A missed seek or observer setup failure is not automatically an engine defect.']
@@ -162,20 +172,20 @@ def exercise(ctx,*,output,timeout=12):
         return checks
     try:
         case.open_live_window()
-        before=case.stable_window('Before mapped Square save')
+        before=case.stable_window('Before mapped keyboard S save' if keyboard else 'Before mapped Square save')
         controls.operation('save',0)
         image=state.copy_slot_image(ctx['candidate'],0,output/'mapped-save.pst')
         evidence['mapped_saved_snapshot']=image;saved=image['inspection']
         state.require_audio_owner_contract(saved)
         reference=case.wait(lambda row:all(state.reduce_private_restore(saved,row,completed_tick=before[0]['observation']['tick']).values()),
             'Native published state after mapped Square save')
-        evidence['checks']['mapped_square_saved_live_private_pools']=True
+        evidence['checks']['keyboard_s_saved_live_private_pools' if keyboard else 'mapped_square_saved_live_private_pools']=True
         evidence['status']='failed_behavior'
         case.resume_and_retire(reference,'before-mapped-load')
         controls.operation('load',0)
-        reference,checks=restored_publications(case,saved,'Actual mapped Cross restores private pools')
+        reference,checks=restored_publications(case,saved,'Actual keyboard L restores private pools' if keyboard else 'Actual mapped Cross restores private pools')
         evidence['checks'].update(checks)
-        evidence['checks']['mapped_cross_provider_probe']=all(probe('mapped-load',saved).values())
+        evidence['checks']['keyboard_l_provider_probe' if keyboard else 'mapped_cross_provider_probe']=all(probe('mapped-load',saved).values())
 
         bad=malformed_current_wire(Path(image['path']).read_bytes());bad_path=output/'invalid-internal-wire4.pst'
         bad_path.write_bytes(bad)
@@ -198,7 +208,9 @@ def exercise(ctx,*,output,timeout=12):
         require(not state.private_visible(changed),'Rewind setup did not diverge from the saved live pools')
         rewind=ctx['request']('rewind_status');evidence['rewind_before_open']=rewind
         require(rewind['snaps']>=20,'Insufficient actual rewind history')
-        controls.hold_until(5,lambda:controls.overlay()['rewind_open'],'Select+R3 opens actual rewind')
+        if controls.keyboard:
+            controls.keyboard.until('F8',lambda:controls.overlay()['rewind_open'],controls.wait,'Win32 F8 opens actual rewind')
+        else:controls.hold_until(5,lambda:controls.overlay()['rewind_open'],'Select+R3 opens actual rewind')
         time.sleep(.1);controls.capture('rewind','mapped-rewind-open')
         delta=(changed['observation']['tick']-pause_end['observation']['tick'])&0xffffffff
         # Overlay-open/capture RPCs also consume presentations before the
@@ -209,10 +221,14 @@ def exercise(ctx,*,output,timeout=12):
         seconds=.28+.07*(steps-1)
         evidence['rewind_seek_heuristic']=dict(publications_since_paused_window=delta,interval=8,
             desired_steps=steps,held_seconds=seconds,qualification='Actual restored bytes only; duration is not a selected-tick proof')
-        try:ctx['set_input'](0,0x80);time.sleep(seconds)
-        finally:ctx['set_input'](0,0)
+        if controls.keyboard:controls.keyboard.held('Left',seconds)
+        else:
+            try:ctx['set_input'](0,0x80);time.sleep(seconds)
+            finally:ctx['set_input'](0,0)
         time.sleep(.1);controls.capture('rewind','mapped-rewind-selected')
-        controls.hold_until(0x4000,lambda:not controls.overlay()['rewind_open'],'Mapped Cross accepts rewind')
+        if controls.keyboard:
+            controls.keyboard.until('Enter',lambda:not controls.overlay()['rewind_open'],controls.wait,'Keyboard Enter accepts rewind')
+        else:controls.hold_until(0x4000,lambda:not controls.overlay()['rewind_open'],'Mapped Cross accepts rewind')
         reference,checks=restored_publications(case,saved,'Actual mapped rewind restores positive original private pools')
         evidence['checks'].update({'rewind_'+k:v for k,v in checks.items()})
         evidence['checks']['mapped_rewind_full_provider_probe']=all(probe('rewind',saved).values())
