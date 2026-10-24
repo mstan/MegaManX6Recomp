@@ -12,7 +12,7 @@ alias. All 18 applicable checks pass with nine stable voice leases, eight
 ordinary contacts, preserved primary hardware registers and natural Quit exit0.
 The inactive STOP7 volume transition was obscured by source-matched death3/14
 reusing private23; it remains pending. Active STOP7, unseen records,
-co-op-off hurt/death references and full attack/hurt overlap remain unverified.
+remaining co-op comparisons and full attack/hurt overlap remain unverified.
 The underlying native candidate is 22ea525; later
 commits changed the observer and retained evidence, not that game image.
 
@@ -45,8 +45,26 @@ the trace, so exact record/caller attribution remains unverified. The observed
 Zero/P1 jump and Saber waveforms also match the retained Zero/P2 samples.
 Zero's original selector requires the explicit private availability/screen
 prerequisite; this does not establish earned unlock, campaign or native-card
-progress. Both owned processes quit naturally with exit0. Hurt/death references,
-active STOP7, attack/hurt overlap and native state/rewind remain open.
+progress. Both owned processes quit naturally with exit0.
+
+Fresh [native hurt/death references](evidence/mmx6-character-audio/manifest-bound-22ea525-native-off-hurt-death-reviewed.json)
+now add 54 exact source-matched events for X and 47 for Zero, with unchanged
+character banks and natural owned exit0. X reaches HP0 through seventeen
+observed losses (two of 1HP, fifteen of 2HP); Zero through eight of 4HP in Amazon
+Area. These sequences are audio references, not ordinary-contact/R2 passes.
+All fifteen comparisons of Zero's records3/0,1,14,16,17 match the retained
+local and both-peer samples and pitch/ADSR. Spatial volume and PCM equality
+are not established by those comparisons.
+
+Character death vocal3/16 differs between X and Zero and reaches its natural
+end, at 84/79 observed engine frames. Shared death effect3/14 uses the same
+source sample for both; the original global STOP(FF) then keys it off at 97
+frames in each reference. Those distinct dispositions do not impose primary
+scene shutdown on a surviving co-op partner. The raw observer's earlier
+"death vocal" label for3/14 is corrected in the reviewed receipt without
+altering its events. Co-op X hurt/death, remaining attack-family comparisons,
+paired Zero's optional Saber vocal, actual attack/hurt overlap, active STOP7
+and native state/rewind remain open. All 162 selected Python tests pass.
 
 The original USA1.1 data contains 45 populated records and 47 voice entries
 across groups1/3. The resolver retains effective bank aliases, populated-program

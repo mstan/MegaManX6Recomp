@@ -12,6 +12,15 @@ records the explicit availability/screen prerequisite and actual original
 menu selection. That audio run does not exercise this module's dash/trail
 renderer reducer or qualify native unlock/campaign/card progress.
 
+The audio runner also accepts `--contact-death`. Its offline observer uses
+original intro placement25 for X or Amazon placement59 for Zero, validates
+the original placement and native hurt/death/spawner code, and moves with
+ordinary NativePad inputs until committed HP0. The retained
+[hurt/death receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-native-off-hurt-death-reviewed.json)
+compares character vocal3/16 separately from shared effect3/14. The latter's
+native global-STOP disposition does not qualify private co-op lifetimes.
+It uses no co-op diagnostic, actor/HP/placement write or synthetic hit.
+
 The reference follows the original game's ordinary player sprite/VRAM path
 inside an exactly bound recompiled image. It is not original-hardware or
 emulator qualification. It does not expose the opposite co-op roster, remove

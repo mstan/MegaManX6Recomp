@@ -147,9 +147,10 @@ class Observer:
     def __init__(self, session, source):
         self.session, self.source = session, source
         self.cursor, self.events = None, []
+        self.event_window = 4096
 
     def poll(self):
-        total, rows = audio.parse_events(self.session.request("spu_events", count=4096),
+        total, rows = audio.parse_events(self.session.request("spu_events", count=self.event_window),
                                         self.cursor, require_banks=True)
         if self.cursor is not None:
             require(all(r["v"] < 24 or r["kind"] == "IRQ" for r in rows),
@@ -236,18 +237,22 @@ def native_sample(session):
     play = session.read(reference.PLAY,0x94)
     return dict(mode=list(play[:3]), stage=play[12], section=play[13],
                 timer=struct.unpack_from("<I",play,0x90)[0], character=body[2],
-                form=body[0xE7], state=body[4], action=body[5], hp=body[0x5C],
+                form=body[0xE7], state=body[4], action=body[5], hp=body[0x5C]&127,
+                hp_raw=body[0x5C],pending_hit=bool(body[0x5C]&128),
+                iframes=body[0x61],reaction=body[0x63],reaction_lock=body[0xA4],
+                terrain=body[0x70],previous_terrain=body[0x89],
+                difficulty=play[0x68],shared_parts=play[0x5F],parts=struct.unpack_from('<I',body,0xEC)[0],
                 x=struct.unpack_from("<i",body,8)[0], y=struct.unpack_from("<i",body,12)[0],
                 airborne=struct.unpack_from("<b",body,0x67)[0], ground=bool(body[0x70]&8),
                 observation_method="separate body and PLAY RAM RPCs")
 
 
-def trace_page(session):
+def trace_page(session, *, targets=TRACE_TARGETS):
     page = session.request("fntrace_dump", count=4096, seq_lo="0")
     rows = page["entries"]
     require(page["seq_lo"] == 0 and 0 <= page["seq_hi"] <= 4096 and page["emitted"] == len(rows)
             and [r["seq"] for r in rows] == list(range(page["seq_hi"]))
-            and all(int(r["target"],16) in TRACE_TARGETS for r in rows), "Native reference trace is incomplete")
+            and all(int(r["target"],16) in targets for r in rows), "Native reference trace is incomplete")
     return page
 
 
@@ -375,6 +380,13 @@ def run(args):
         report["executed_helpers"][path.name] = preparation.sha256(path)
     report["executed_helpers"][Path(__file__).name] = preparation.sha256(Path(__file__))
     (output/"qualify_mmx6_native_audio-executed-source.py").write_bytes(Path(__file__).read_bytes())
+    contact_audio = None
+    if args.contact_death:
+        import mmx6_native_contact_audio as contact_audio
+        module_path=Path(contact_audio.__file__)
+        report['executed_helpers'][module_path.name]=preparation.sha256(module_path)
+        (output/'mmx6_native_contact_audio-executed-source.py').write_bytes(module_path.read_bytes())
+        report['limits'][1]='Original-input ground jump, standing attack and requested authored contact hurt/death reference only; other actions remain unverified.'
     process, session, stdout, stderr, rpc_log = None, None, None, None, None
     try:
         profile = output/"candidate"
@@ -442,6 +454,11 @@ def run(args):
             case = dict(label=label,status="failed_setup")
             report["cases"].append(case)
             exercise(session,observer,label,bits,case=case)
+        if contact_audio is not None:
+            report['contact_audio']={}
+            source=contact_audio.load_source(args.original_exe,args.original_disc,row['stage'])
+            observer.event_window=1024  # Strict suffix checks still reject any evicted events.
+            contact_audio.exercise(session,observer,source,report['contact_audio'],timeout=args.contact_timeout)
         report["banks_after"] = observer.fingerprint_banks(observer.driver())
         require(report["banks_before"] == report["banks_after"], "Native character bank changed during bounded reference")
         report["checks"] = dict(real_coop_disabled=True, offline=session.offline()["active"] == 0,
@@ -450,6 +467,8 @@ def run(args):
                                 native_jump_vocal_observed=any(c.get("jump_vocal_observed") for c in report["cases"]))
         report["final_mod_state"] = reference.validate_reference_profile(profile,args.expected_exe_sha256)
         report["status"] = "bounded_jump_attack_references_observed_hurt_death_unverified"
+        if contact_audio is not None:
+            report['status']='bounded_jump_attack_hurt_death_references_observed_outcomes_unverified'
     except Exception as error:
         report.update(error_type=type(error).__name__,error=str(error))
     finally:
@@ -487,16 +506,21 @@ def main():
     parser.add_argument("--port",type=int,default=17936)
     parser.add_argument("--timeout",type=float,default=90)
     parser.add_argument("--jump-attempts",type=int,default=32)
+    parser.add_argument('--contact-death',action='store_true')
+    parser.add_argument('--contact-timeout',type=float,default=150)
     args = parser.parse_args()
     if not 0 < args.timeout <= 180 or not 1024 <= args.port <= 65535:
         parser.error("Require timeout in (0,180] and an unprivileged TCP port")
     if not 1 <= args.jump_attempts <= 32:
         parser.error("Require one to32 original-input jump attempts; no RNG writes")
+    if not 0 < args.contact_timeout <= 180:
+        parser.error('Require contact deadline in (0,180]')
     if args.allow_private_prerequisite and args.character != "Zero":
         parser.error("The bounded selector prerequisite applies to Zero only")
     report = run(args)
     print(json.dumps({k:report[k] for k in ("character","status","error","cleanup") if k in report}))
-    return 2 if report["status"] == "bounded_jump_attack_references_observed_hurt_death_unverified" else 1
+    return 2 if report["status"] in ("bounded_jump_attack_references_observed_hurt_death_unverified",
+        'bounded_jump_attack_hurt_death_references_observed_outcomes_unverified') else 1
 
 
 if __name__ == "__main__":

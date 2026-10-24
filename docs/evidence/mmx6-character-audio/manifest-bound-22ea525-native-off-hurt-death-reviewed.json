@@ -1,0 +1,1197 @@
+{
+  "schema": 1,
+  "kind": "reviewed_native_off_X_Zero_hurt_death_references",
+  "mode": "local",
+  "result": "unverified",
+  "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+  "build_identity": {
+    "exe_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+    "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+    "compiled_source_commit": "22ea525bbc52b5177f501989fedc5873ef30099c",
+    "sdk_commit": "09e8673435c73e516b420e6c13bb11f02dc8aaea"
+  },
+  "settings": {
+    "offline": true,
+    "coop": false,
+    "all_staged_features": false,
+    "source_cards": false,
+    "input": "original debug NativePad P1 held inputs only",
+    "muted": "SDL_AUDIODRIVER=dummy",
+    "rewind": false,
+    "loader": "default OpenBIOS/HLE authentic1x",
+    "references": "Falcon X/P1 intro and ordinary Zero/P1 Amazon, separate fresh profiles"
+  },
+  "action": "Source-bind native placements and hurt/death/spawner code; reach authored enemies using original movement/jump inputs; observe committed native HP32->0, both death records and terminal events; compare retained co-op source samples and complete owned natural Quit.",
+  "outcome": {
+    "references": [
+      {
+        "character": "X",
+        "stage": 0,
+        "authored_target": {
+          "member": 2,
+          "member_sha256": "d8bcf3aea6caf1dd4098b681ad912692835d726dfe16fddca779e82d894de607",
+          "record": "0x800fa2dc",
+          "object_id": 1,
+          "subtype": 1,
+          "x": 416,
+          "y": 1080
+        },
+        "code_guards": [
+          {
+            "name": "native_hurt_audio",
+            "address": 2147718716,
+            "bytes": 88,
+            "sha256": "4605a72ff2bae8e47b81aa201f1deae6312a532d83f3cf3a47479255dc0e1a77"
+          },
+          {
+            "name": "native_phase2_death_audio",
+            "address": 2147735720,
+            "bytes": 336,
+            "sha256": "8de96c926c6a6a9921f4d6787d03eb68abfa13d429a47b114fe9f172298bb6b3"
+          },
+          {
+            "name": "native_spawn_allocation_and_retry_bits",
+            "address": 2147656276,
+            "bytes": 172,
+            "sha256": "321f50b785da886c01d030d47c6ceeaf0f42c6bf3b518a3eaeb4eee19564106a"
+          }
+        ],
+        "observations": 284,
+        "trace_entries": 68,
+        "hp_sequence": [
+          32,
+          31,
+          29,
+          27,
+          25,
+          23,
+          21,
+          19,
+          17,
+          15,
+          13,
+          11,
+          9,
+          7,
+          5,
+          3,
+          1,
+          0
+        ],
+        "hp_loss_counts": {
+          "1": 2,
+          "2": 15
+        },
+        "exact_contact_caller_identity": "unverified; audio reference only",
+        "source_matched_events": 54,
+        "source_records": [
+          {
+            "group": 1,
+            "record": 1,
+            "events": 2,
+            "sha256": [
+              "23d6df9f6f33018436d56f5a8c53d244e11fbf99e334f5edfc052e168dd32112"
+            ],
+            "hardware_voices": [
+              22
+            ],
+            "dispositions": {
+              "replaced": 2
+            }
+          },
+          {
+            "group": 1,
+            "record": 2,
+            "events": 2,
+            "sha256": [
+              "cfcfa90cff1f0fbbd7be536106c2a3108298bf0a32b6a287dc2bcd8cd346d50f"
+            ],
+            "hardware_voices": [
+              22
+            ],
+            "dispositions": {
+              "natural_end": 2
+            }
+          },
+          {
+            "group": 1,
+            "record": 4,
+            "events": 2,
+            "sha256": [
+              "b1fd45f5c9fdd667c21240e7cc2a7f7f2f2b708be0e8b50ce94759b3b4003cb2"
+            ],
+            "hardware_voices": [
+              22
+            ],
+            "dispositions": {
+              "natural_end": 2
+            }
+          },
+          {
+            "group": 1,
+            "record": 5,
+            "events": 8,
+            "sha256": [
+              "14945bd6d35d0084b3a25b25ff46b7aefc0c21bd24a197647aff86b6ec7fb50a"
+            ],
+            "hardware_voices": [
+              22
+            ],
+            "dispositions": {
+              "keyed_off": 8
+            }
+          },
+          {
+            "group": 1,
+            "record": 6,
+            "events": 4,
+            "sha256": [
+              "2bf14ca1264ea8af95b9f343cc368c5546bc594b6b975faedfa5e633f7d87f5e"
+            ],
+            "hardware_voices": [
+              22
+            ],
+            "dispositions": {
+              "natural_end": 4
+            }
+          },
+          {
+            "group": 3,
+            "record": 0,
+            "events": 10,
+            "sha256": [
+              "c5953d3af17822886712bcded0882e7e6af06270ed811930389b07ce81e3cb5d"
+            ],
+            "hardware_voices": [
+              20
+            ],
+            "dispositions": {
+              "natural_end": 10
+            }
+          },
+          {
+            "group": 3,
+            "record": 1,
+            "events": 6,
+            "sha256": [
+              "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562"
+            ],
+            "hardware_voices": [
+              20
+            ],
+            "dispositions": {
+              "natural_end": 6
+            }
+          },
+          {
+            "group": 3,
+            "record": 3,
+            "events": 1,
+            "sha256": [
+              "df2849a939d2df5955dffd6b9110938c05a5bf3703393f4ba0a174096c74f250"
+            ],
+            "hardware_voices": [
+              20
+            ],
+            "dispositions": {
+              "natural_end": 1
+            }
+          },
+          {
+            "group": 3,
+            "record": 6,
+            "events": 1,
+            "sha256": [
+              "5e96f6c111bb06aee701c64c9406e4d60fe64e3203455e6ccf18eb32109c00bb"
+            ],
+            "hardware_voices": [
+              20
+            ],
+            "dispositions": {
+              "replaced": 1
+            }
+          },
+          {
+            "group": 3,
+            "record": 14,
+            "events": 1,
+            "sha256": [
+              "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc"
+            ],
+            "hardware_voices": [
+              23
+            ],
+            "dispositions": {
+              "keyed_off": 1
+            }
+          },
+          {
+            "group": 3,
+            "record": 16,
+            "events": 1,
+            "sha256": [
+              "15d893361d4f0666bd75dad46a9a193f0173fee5045500404b846fc264a26122"
+            ],
+            "hardware_voices": [
+              20
+            ],
+            "dispositions": {
+              "natural_end": 1
+            }
+          },
+          {
+            "group": 3,
+            "record": 17,
+            "events": 16,
+            "sha256": [
+              "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029"
+            ],
+            "hardware_voices": [
+              3
+            ],
+            "dispositions": {
+              "natural_end": 16
+            }
+          }
+        ],
+        "death_vocal3_16": [
+          {
+            "sha256": "15d893361d4f0666bd75dad46a9a193f0173fee5045500404b846fc264a26122",
+            "voice": 20,
+            "source_return": "0x8003D9BC",
+            "lifetime": {
+              "disposition": "natural_end",
+              "terminal": {
+                "seq": 339,
+                "frame": 5358,
+                "kind": "END_STOP",
+                "v": 20,
+                "addr": 354624,
+                "pitch": 1144,
+                "adsr_lo": 33023,
+                "adsr_hi": 8128,
+                "vol_l": 10157,
+                "vol_r": 10157,
+                "sample_bank": 0
+              },
+              "engine_frames": 84
+            }
+          }
+        ],
+        "shared_death_effect3_14": [
+          {
+            "sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+            "voice": 23,
+            "source_return": "0x8003D9CC",
+            "lifetime": {
+              "disposition": "keyed_off",
+              "terminal": {
+                "seq": 342,
+                "frame": 5371,
+                "kind": "KEYOFF",
+                "v": 23,
+                "addr": 377296,
+                "pitch": 1290,
+                "adsr_lo": 33023,
+                "adsr_hi": 8128,
+                "vol_l": 0,
+                "vol_r": 0,
+                "sample_bank": 0
+              },
+              "engine_frames": 97
+            }
+          }
+        ],
+        "global_stop": {
+          "seq": 67,
+          "target": "0x8001750C",
+          "ra": "0x8001EBB8",
+          "a0": "0x000000FF",
+          "a1": "0x00000000",
+          "a2": "0x800C4614",
+          "a3": "0x8008EB88",
+          "s3": "0xFF000000",
+          "sp": "0x801FEFB0",
+          "frame": 5370
+        },
+        "banks": [
+          {
+            "group": 1,
+            "start": 142720,
+            "bytes": 182064,
+            "sha256": "4d34d0ff6e09dd9c764391583aeda4cb4f5a46e35e92a916b56b221f7da30c7f",
+            "matches_source": true
+          },
+          {
+            "group": 3,
+            "start": 324784,
+            "bytes": 52608,
+            "sha256": "fb80f7b0876285bd166c8bc56a9f1dda9298ebebbd05248aaf81fa89100a9a58",
+            "matches_source": true
+          }
+        ],
+        "checks": {
+          "original_native_hurt_audio": true,
+          "original_native_death_audio": true,
+          "actual_committed_fatal_HP_loss": true,
+          "original_placement_source": true,
+          "terrain_hazards_excluded": true,
+          "death_vocal_terminal_observed": true,
+          "stable_character_driver": true
+        },
+        "post_review_checks": {
+          "character_death_vocal3_16_present": true,
+          "character_vocal_natural_end": true,
+          "shared_death_effect3_14_present": true,
+          "shared_effect_KEYOFF_follows_original_global_STOP": true
+        },
+        "native_cards": {
+          "before": {},
+          "after": {
+            "card1.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+            "card2.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          "preserved": true
+        },
+        "cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        "bypasses": [],
+        "executed_helpers": {
+          "mmx6_native_zero_reference.py": "26f58a78d6f6ea97a0d5d8b84915716be6964f898765570ced62fafaec9c3fb5",
+          "mmx6_coop_jump_audio.py": "66166703568cc6037c3bc0c5cbd1ec0c91e63e976c1d47317860d916f757c8a0",
+          "audit_mmx6_private_action_audio.py": "4b07514dcba079b98332c8ac95e4de477d83f6dfae358c864a5fbf3e14010d79",
+          "qualify_mmx6_coop_jump_audio.py": "53b50d95a3c86e26467a03e85f0b08cecaa0497c18b8c74c59e47f5bf3c5c81f",
+          "qualify_mmx6_coop_baseline.py": "b2e0d0195544e78ae175e9f591db33da791b4bdd2f14703d63561989e20b76f8",
+          "qualify_mmx6_native_audio.py": "086ee0a297c1866a8fb998a6d1d9b52fcf68080a1403688c533e8ef1613e6a27",
+          "mmx6_native_contact_audio.py": "8694991f19237d439a495ac140829f9360a340168fdde46b34bffc94740e0105"
+        }
+      },
+      {
+        "character": "Zero",
+        "stage": 1,
+        "authored_target": {
+          "member": 3,
+          "member_sha256": "68e8b41b5618ccfced88057553597749513f4aeb25191004f886f9d881b633ea",
+          "record": "0x800f6540",
+          "object_id": 7,
+          "subtype": 0,
+          "x": 544,
+          "y": 380
+        },
+        "code_guards": [
+          {
+            "name": "native_hurt_audio",
+            "address": 2147718716,
+            "bytes": 88,
+            "sha256": "4605a72ff2bae8e47b81aa201f1deae6312a532d83f3cf3a47479255dc0e1a77"
+          },
+          {
+            "name": "native_phase2_death_audio",
+            "address": 2147735720,
+            "bytes": 336,
+            "sha256": "8de96c926c6a6a9921f4d6787d03eb68abfa13d429a47b114fe9f172298bb6b3"
+          },
+          {
+            "name": "native_spawn_allocation_and_retry_bits",
+            "address": 2147656276,
+            "bytes": 172,
+            "sha256": "321f50b785da886c01d030d47c6ceeaf0f42c6bf3b518a3eaeb4eee19564106a"
+          }
+        ],
+        "observations": 410,
+        "trace_entries": 65,
+        "hp_sequence": [
+          32,
+          28,
+          24,
+          20,
+          16,
+          12,
+          8,
+          4,
+          0
+        ],
+        "hp_loss_counts": {
+          "4": 8
+        },
+        "exact_contact_caller_identity": "unverified; audio reference only",
+        "source_matched_events": 47,
+        "source_records": [
+          {
+            "group": 1,
+            "record": 1,
+            "events": 4,
+            "sha256": [
+              "003fb81cc12e8f6d70af3c2853de826f9974879a777c79a77bc60cfa1568a81e"
+            ],
+            "hardware_voices": [
+              22
+            ],
+            "dispositions": {
+              "replaced": 4
+            }
+          },
+          {
+            "group": 1,
+            "record": 2,
+            "events": 9,
+            "sha256": [
+              "948ac829822ab47a4c0db7065047f1946ae30d67230c6732d81ff1f70e14a74d"
+            ],
+            "hardware_voices": [
+              22
+            ],
+            "dispositions": {
+              "replaced": 2,
+              "natural_end": 7
+            }
+          },
+          {
+            "group": 1,
+            "record": 4,
+            "events": 4,
+            "sha256": [
+              "69df8f22beae0215f1ebd00272f6ca4390ec610e1618e79ba545b248e9530056"
+            ],
+            "hardware_voices": [
+              22
+            ],
+            "dispositions": {
+              "natural_end": 3,
+              "replaced": 1
+            }
+          },
+          {
+            "group": 1,
+            "record": 5,
+            "events": 10,
+            "sha256": [
+              "0b4522c6d034aa5dd0eb4d3a8e7878c1070701ece620003d7f910cb91522b5f7"
+            ],
+            "hardware_voices": [
+              22
+            ],
+            "dispositions": {
+              "keyed_off": 8,
+              "replaced": 2
+            }
+          },
+          {
+            "group": 1,
+            "record": 6,
+            "events": 1,
+            "sha256": [
+              "4d3e0623a7d836acc6eba9c2cc9a889b3dc32f11c7b1592c33018dd7d95c41b8"
+            ],
+            "hardware_voices": [
+              22
+            ],
+            "dispositions": {
+              "natural_end": 1
+            }
+          },
+          {
+            "group": 3,
+            "record": 0,
+            "events": 4,
+            "sha256": [
+              "6038134b63be2771567d95c5cb6d00e4d83a4a3890723a49588b39be982721f6"
+            ],
+            "hardware_voices": [
+              20
+            ],
+            "dispositions": {
+              "natural_end": 4
+            }
+          },
+          {
+            "group": 3,
+            "record": 1,
+            "events": 3,
+            "sha256": [
+              "9ad087f5829434990a3f9e1affee52b5274234525f454935bbe74295b5f2ffdd"
+            ],
+            "hardware_voices": [
+              20
+            ],
+            "dispositions": {
+              "natural_end": 3
+            }
+          },
+          {
+            "group": 3,
+            "record": 7,
+            "events": 3,
+            "sha256": [
+              "2d7263e69e5a6cb0f7a9a11eee2976efd683e22359d9083fcc77d411a4c4fe82"
+            ],
+            "hardware_voices": [
+              20
+            ],
+            "dispositions": {
+              "natural_end": 3
+            }
+          },
+          {
+            "group": 3,
+            "record": 14,
+            "events": 1,
+            "sha256": [
+              "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc"
+            ],
+            "hardware_voices": [
+              23
+            ],
+            "dispositions": {
+              "keyed_off": 1
+            }
+          },
+          {
+            "group": 3,
+            "record": 16,
+            "events": 1,
+            "sha256": [
+              "322b69a7f0999a42269c5d80afb84a62dd628afef350746f7ac877fd24d06387"
+            ],
+            "hardware_voices": [
+              20
+            ],
+            "dispositions": {
+              "natural_end": 1
+            }
+          },
+          {
+            "group": 3,
+            "record": 17,
+            "events": 7,
+            "sha256": [
+              "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029"
+            ],
+            "hardware_voices": [
+              3
+            ],
+            "dispositions": {
+              "natural_end": 7
+            }
+          }
+        ],
+        "death_vocal3_16": [
+          {
+            "sha256": "322b69a7f0999a42269c5d80afb84a62dd628afef350746f7ac877fd24d06387",
+            "voice": 20,
+            "source_return": "0x8003D9BC",
+            "lifetime": {
+              "disposition": "natural_end",
+              "terminal": {
+                "seq": 552,
+                "frame": 8960,
+                "kind": "END_STOP",
+                "v": 20,
+                "addr": 296048,
+                "pitch": 1144,
+                "adsr_lo": 33023,
+                "adsr_hi": 8128,
+                "vol_l": 10157,
+                "vol_r": 10157,
+                "sample_bank": 0
+              },
+              "engine_frames": 79
+            }
+          }
+        ],
+        "shared_death_effect3_14": [
+          {
+            "sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+            "voice": 23,
+            "source_return": "0x8003D9CC",
+            "lifetime": {
+              "disposition": "keyed_off",
+              "terminal": {
+                "seq": 553,
+                "frame": 8978,
+                "kind": "KEYOFF",
+                "v": 23,
+                "addr": 318128,
+                "pitch": 1290,
+                "adsr_lo": 33023,
+                "adsr_hi": 8128,
+                "vol_l": 0,
+                "vol_r": 0,
+                "sample_bank": 0
+              },
+              "engine_frames": 97
+            }
+          }
+        ],
+        "global_stop": {
+          "seq": 64,
+          "target": "0x8001750C",
+          "ra": "0x8001EBB8",
+          "a0": "0x000000FF",
+          "a1": "0x00000000",
+          "a2": "0x800C4614",
+          "a3": "0x8008EB88",
+          "s3": "0xFF000000",
+          "sp": "0x801FEFB0",
+          "frame": 8977
+        },
+        "banks": [
+          {
+            "group": 1,
+            "start": 142720,
+            "bytes": 123408,
+            "sha256": "425516420dc6ff1d973edae265717a6ca237454631cdb4b7c829c96f6f7057a8",
+            "matches_source": true
+          },
+          {
+            "group": 3,
+            "start": 266128,
+            "bytes": 52096,
+            "sha256": "203c8e0e58ea4e55797445b7af76e7563528c21536ae8fd57e38566a89b38bdd",
+            "matches_source": true
+          }
+        ],
+        "checks": {
+          "original_native_hurt_audio": true,
+          "original_native_death_audio": true,
+          "actual_committed_fatal_HP_loss": true,
+          "original_placement_source": true,
+          "terrain_hazards_excluded": true,
+          "death_vocal_terminal_observed": true,
+          "stable_character_driver": true
+        },
+        "post_review_checks": {
+          "character_death_vocal3_16_present": true,
+          "character_vocal_natural_end": true,
+          "shared_death_effect3_14_present": true,
+          "shared_effect_KEYOFF_follows_original_global_STOP": true
+        },
+        "native_cards": {
+          "before": {},
+          "after": {
+            "card1.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+            "card2.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          "preserved": true
+        },
+        "cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        "bypasses": [
+          {
+            "address": "0x800ccf2f",
+            "before": 1,
+            "after": 17,
+            "reason": "private Zero availability bit10"
+          },
+          {
+            "address": "0x800cced1",
+            "before": 0,
+            "after": 0,
+            "reason": "native screen phase initialization"
+          },
+          {
+            "address": "0x800cced2",
+            "before": 0,
+            "after": 0,
+            "reason": "native screen subphase initialization"
+          },
+          {
+            "address": "0x800cced0",
+            "before": 10,
+            "after": 2,
+            "reason": "native screen2 loader prerequisite"
+          }
+        ],
+        "executed_helpers": {
+          "mmx6_native_zero_reference.py": "26f58a78d6f6ea97a0d5d8b84915716be6964f898765570ced62fafaec9c3fb5",
+          "mmx6_coop_jump_audio.py": "66166703568cc6037c3bc0c5cbd1ec0c91e63e976c1d47317860d916f757c8a0",
+          "audit_mmx6_private_action_audio.py": "4b07514dcba079b98332c8ac95e4de477d83f6dfae358c864a5fbf3e14010d79",
+          "qualify_mmx6_coop_jump_audio.py": "53b50d95a3c86e26467a03e85f0b08cecaa0497c18b8c74c59e47f5bf3c5c81f",
+          "qualify_mmx6_coop_baseline.py": "b2e0d0195544e78ae175e9f591db33da791b4bdd2f14703d63561989e20b76f8",
+          "qualify_mmx6_native_audio.py": "086ee0a297c1866a8fb998a6d1d9b52fcf68080a1403688c533e8ef1613e6a27",
+          "mmx6_native_contact_audio.py": "8694991f19237d439a495ac140829f9360a340168fdde46b34bffc94740e0105"
+        }
+      }
+    ],
+    "co_op_comparisons": [
+      {
+        "character": "Zero",
+        "mode": "local",
+        "peer": null,
+        "group": 3,
+        "record": 0,
+        "compared_co_op_events": 2,
+        "sample_identity_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "sha256": "6038134b63be2771567d95c5cb6d00e4d83a4a3890723a49588b39be982721f6",
+        "native_voice": 20,
+        "co_op_voice": 44,
+        "co_op_bank": 31,
+        "native_lifetime_disposition": "natural_end",
+        "native_lifetime_engine_frames": 15,
+        "co_op_lifetime_disposition": "natural_end",
+        "co_op_lifetime_engine_frames": 16,
+        "scope": "Exact waveform/pitch/ADSR and route comparison. Lifetimes are retained separately; no equality or original global-STOP obligation is inferred for private P2."
+      },
+      {
+        "character": "Zero",
+        "mode": "local",
+        "peer": null,
+        "group": 3,
+        "record": 1,
+        "compared_co_op_events": 5,
+        "sample_identity_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "sha256": "9ad087f5829434990a3f9e1affee52b5274234525f454935bbe74295b5f2ffdd",
+        "native_voice": 20,
+        "co_op_voice": 44,
+        "co_op_bank": 31,
+        "native_lifetime_disposition": "natural_end",
+        "native_lifetime_engine_frames": 20,
+        "co_op_lifetime_disposition": "natural_end",
+        "co_op_lifetime_engine_frames": 21,
+        "scope": "Exact waveform/pitch/ADSR and route comparison. Lifetimes are retained separately; no equality or original global-STOP obligation is inferred for private P2."
+      },
+      {
+        "character": "Zero",
+        "mode": "local",
+        "peer": null,
+        "group": 3,
+        "record": 14,
+        "compared_co_op_events": 1,
+        "sample_identity_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+        "native_voice": 23,
+        "co_op_voice": 47,
+        "co_op_bank": 31,
+        "native_lifetime_disposition": "keyed_off",
+        "native_lifetime_engine_frames": 97,
+        "co_op_lifetime_disposition": "natural_end",
+        "co_op_lifetime_engine_frames": 98,
+        "scope": "Exact waveform/pitch/ADSR and route comparison. Lifetimes are retained separately; no equality or original global-STOP obligation is inferred for private P2."
+      },
+      {
+        "character": "Zero",
+        "mode": "local",
+        "peer": null,
+        "group": 3,
+        "record": 16,
+        "compared_co_op_events": 1,
+        "sample_identity_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "sha256": "322b69a7f0999a42269c5d80afb84a62dd628afef350746f7ac877fd24d06387",
+        "native_voice": 20,
+        "co_op_voice": 44,
+        "co_op_bank": 31,
+        "native_lifetime_disposition": "natural_end",
+        "native_lifetime_engine_frames": 79,
+        "co_op_lifetime_disposition": "natural_end",
+        "co_op_lifetime_engine_frames": 79,
+        "scope": "Exact waveform/pitch/ADSR and route comparison. Lifetimes are retained separately; no equality or original global-STOP obligation is inferred for private P2."
+      },
+      {
+        "character": "Zero",
+        "mode": "local",
+        "peer": null,
+        "group": 3,
+        "record": 17,
+        "compared_co_op_events": 7,
+        "sample_identity_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "sha256": "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029",
+        "native_voice": 3,
+        "co_op_voice": 27,
+        "co_op_bank": 30,
+        "native_lifetime_disposition": "natural_end",
+        "native_lifetime_engine_frames": 19,
+        "co_op_lifetime_disposition": "natural_end",
+        "co_op_lifetime_engine_frames": 19,
+        "scope": "Exact waveform/pitch/ADSR and route comparison. Lifetimes are retained separately; no equality or original global-STOP obligation is inferred for private P2."
+      },
+      {
+        "character": "Zero",
+        "mode": "netplay",
+        "peer": 0,
+        "group": 3,
+        "record": 0,
+        "compared_co_op_events": 3,
+        "sample_identity_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "sha256": "6038134b63be2771567d95c5cb6d00e4d83a4a3890723a49588b39be982721f6",
+        "native_voice": 20,
+        "co_op_voice": 44,
+        "co_op_bank": 31,
+        "native_lifetime_disposition": "natural_end",
+        "native_lifetime_engine_frames": 15,
+        "co_op_lifetime_disposition": "natural_end",
+        "co_op_lifetime_engine_frames": 15,
+        "scope": "Exact waveform/pitch/ADSR and route comparison. Lifetimes are retained separately; no equality or original global-STOP obligation is inferred for private P2."
+      },
+      {
+        "character": "Zero",
+        "mode": "netplay",
+        "peer": 0,
+        "group": 3,
+        "record": 1,
+        "compared_co_op_events": 4,
+        "sample_identity_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "sha256": "9ad087f5829434990a3f9e1affee52b5274234525f454935bbe74295b5f2ffdd",
+        "native_voice": 20,
+        "co_op_voice": 44,
+        "co_op_bank": 31,
+        "native_lifetime_disposition": "natural_end",
+        "native_lifetime_engine_frames": 20,
+        "co_op_lifetime_disposition": "natural_end",
+        "co_op_lifetime_engine_frames": 20,
+        "scope": "Exact waveform/pitch/ADSR and route comparison. Lifetimes are retained separately; no equality or original global-STOP obligation is inferred for private P2."
+      },
+      {
+        "character": "Zero",
+        "mode": "netplay",
+        "peer": 0,
+        "group": 3,
+        "record": 14,
+        "compared_co_op_events": 1,
+        "sample_identity_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+        "native_voice": 23,
+        "co_op_voice": 47,
+        "co_op_bank": 31,
+        "native_lifetime_disposition": "keyed_off",
+        "native_lifetime_engine_frames": 97,
+        "co_op_lifetime_disposition": "natural_end",
+        "co_op_lifetime_engine_frames": 97,
+        "scope": "Exact waveform/pitch/ADSR and route comparison. Lifetimes are retained separately; no equality or original global-STOP obligation is inferred for private P2."
+      },
+      {
+        "character": "Zero",
+        "mode": "netplay",
+        "peer": 0,
+        "group": 3,
+        "record": 16,
+        "compared_co_op_events": 1,
+        "sample_identity_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "sha256": "322b69a7f0999a42269c5d80afb84a62dd628afef350746f7ac877fd24d06387",
+        "native_voice": 20,
+        "co_op_voice": 44,
+        "co_op_bank": 31,
+        "native_lifetime_disposition": "natural_end",
+        "native_lifetime_engine_frames": 79,
+        "co_op_lifetime_disposition": "natural_end",
+        "co_op_lifetime_engine_frames": 78,
+        "scope": "Exact waveform/pitch/ADSR and route comparison. Lifetimes are retained separately; no equality or original global-STOP obligation is inferred for private P2."
+      },
+      {
+        "character": "Zero",
+        "mode": "netplay",
+        "peer": 0,
+        "group": 3,
+        "record": 17,
+        "compared_co_op_events": 7,
+        "sample_identity_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "sha256": "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029",
+        "native_voice": 3,
+        "co_op_voice": 27,
+        "co_op_bank": 30,
+        "native_lifetime_disposition": "natural_end",
+        "native_lifetime_engine_frames": 19,
+        "co_op_lifetime_disposition": "natural_end",
+        "co_op_lifetime_engine_frames": 18,
+        "scope": "Exact waveform/pitch/ADSR and route comparison. Lifetimes are retained separately; no equality or original global-STOP obligation is inferred for private P2."
+      },
+      {
+        "character": "Zero",
+        "mode": "netplay",
+        "peer": 1,
+        "group": 3,
+        "record": 0,
+        "compared_co_op_events": 3,
+        "sample_identity_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "sha256": "6038134b63be2771567d95c5cb6d00e4d83a4a3890723a49588b39be982721f6",
+        "native_voice": 20,
+        "co_op_voice": 44,
+        "co_op_bank": 31,
+        "native_lifetime_disposition": "natural_end",
+        "native_lifetime_engine_frames": 15,
+        "co_op_lifetime_disposition": "natural_end",
+        "co_op_lifetime_engine_frames": 15,
+        "scope": "Exact waveform/pitch/ADSR and route comparison. Lifetimes are retained separately; no equality or original global-STOP obligation is inferred for private P2."
+      },
+      {
+        "character": "Zero",
+        "mode": "netplay",
+        "peer": 1,
+        "group": 3,
+        "record": 1,
+        "compared_co_op_events": 4,
+        "sample_identity_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "sha256": "9ad087f5829434990a3f9e1affee52b5274234525f454935bbe74295b5f2ffdd",
+        "native_voice": 20,
+        "co_op_voice": 44,
+        "co_op_bank": 31,
+        "native_lifetime_disposition": "natural_end",
+        "native_lifetime_engine_frames": 20,
+        "co_op_lifetime_disposition": "natural_end",
+        "co_op_lifetime_engine_frames": 20,
+        "scope": "Exact waveform/pitch/ADSR and route comparison. Lifetimes are retained separately; no equality or original global-STOP obligation is inferred for private P2."
+      },
+      {
+        "character": "Zero",
+        "mode": "netplay",
+        "peer": 1,
+        "group": 3,
+        "record": 14,
+        "compared_co_op_events": 1,
+        "sample_identity_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+        "native_voice": 23,
+        "co_op_voice": 47,
+        "co_op_bank": 31,
+        "native_lifetime_disposition": "keyed_off",
+        "native_lifetime_engine_frames": 97,
+        "co_op_lifetime_disposition": "natural_end",
+        "co_op_lifetime_engine_frames": 97,
+        "scope": "Exact waveform/pitch/ADSR and route comparison. Lifetimes are retained separately; no equality or original global-STOP obligation is inferred for private P2."
+      },
+      {
+        "character": "Zero",
+        "mode": "netplay",
+        "peer": 1,
+        "group": 3,
+        "record": 16,
+        "compared_co_op_events": 1,
+        "sample_identity_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "sha256": "322b69a7f0999a42269c5d80afb84a62dd628afef350746f7ac877fd24d06387",
+        "native_voice": 20,
+        "co_op_voice": 44,
+        "co_op_bank": 31,
+        "native_lifetime_disposition": "natural_end",
+        "native_lifetime_engine_frames": 79,
+        "co_op_lifetime_disposition": "natural_end",
+        "co_op_lifetime_engine_frames": 78,
+        "scope": "Exact waveform/pitch/ADSR and route comparison. Lifetimes are retained separately; no equality or original global-STOP obligation is inferred for private P2."
+      },
+      {
+        "character": "Zero",
+        "mode": "netplay",
+        "peer": 1,
+        "group": 3,
+        "record": 17,
+        "compared_co_op_events": 7,
+        "sample_identity_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "sha256": "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029",
+        "native_voice": 3,
+        "co_op_voice": 27,
+        "co_op_bank": 30,
+        "native_lifetime_disposition": "natural_end",
+        "native_lifetime_engine_frames": 19,
+        "co_op_lifetime_disposition": "natural_end",
+        "co_op_lifetime_engine_frames": 18,
+        "scope": "Exact waveform/pitch/ADSR and route comparison. Lifetimes are retained separately; no equality or original global-STOP obligation is inferred for private P2."
+      }
+    ],
+    "tests": {
+      "selected": 162,
+      "passed": 162,
+      "new_contact_tests": 9
+    },
+    "checks": {
+      "source_matched_native_hurt_death_both_characters": true,
+      "native_character_death_vocals_different": true,
+      "native_shared_death_effect_equal": true,
+      "Zero_local_and_both_peers_five_record_identity_and_numeric_comparisons": true,
+      "native_banks_unchanged": true,
+      "both_owned_processes_natural_exit0": true
+    },
+    "retained_prior_attempts": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-first\\qualification.json",
+        "status": "failed_setup",
+        "observer_error": "Live native contact placement differs from source beyond its allocation bit",
+        "cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        "disposition": "Retained observer/input-route limitation, not a game failure."
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-spawn-retry\\qualification.json",
+        "status": "failed_setup",
+        "observer_error": "Native death vocal did not reach its natural source lifetime",
+        "cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        "disposition": "Retained observer/input-route limitation, not a game failure."
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-primary-stop-lifetime\\qualification.json",
+        "status": "failed_setup",
+        "observer_error": "Native authored contact route exhausted its input-step bound",
+        "cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        "disposition": "Retained observer/input-route limitation, not a game failure."
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\qualification.json",
+      "sha256": "10f7f0f30d9d0438c3e264ee344fd6bbd9214cf7a6e898e25c9388a62d0feffb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\source-records.json",
+      "sha256": "f459f98e1af825948f4b560990105540da454fbcb50e99a07a62851a8e79255c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\audio-rpc.jsonl",
+      "sha256": "f41cbf758d2678667e1fb38fe4aaf23a0a1a1b4bae0481b70ab16522536963c3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\qualify_mmx6_native_audio-executed-source.py",
+      "sha256": "086ee0a297c1866a8fb998a6d1d9b52fcf68080a1403688c533e8ef1613e6a27"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\mmx6_native_contact_audio-executed-source.py",
+      "sha256": "8694991f19237d439a495ac140829f9360a340168fdde46b34bffc94740e0105"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\stdout.log",
+      "sha256": "94c2461ef89dc57b11a3b332476ce7b0c32e317d6204dfde4013bf165164f707"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\stderr.log",
+      "sha256": "b960e75b9a4fa327f79a118127056e6d3281a383ca6c0da30c5fed4ea281dff2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\candidate\\mods\\state.toml",
+      "sha256": "307c65254f168785d2b9caf1553b5a03e0cd63d26351db4e795339bca7896d6c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\candidate\\native-zero-reference-state.json",
+      "sha256": "9a172f79b8014c8f4c4ab2ff58b15202b35d77c994894e2fcc497d2c50297724"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\candidate\\preparation.json",
+      "sha256": "21f55da1293e4a42f38fc1cac0b0dcdda1c351a923ccc38970a7c215b2c4aa8d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+      "sha256": "29c1994477a0c4fb4d8140eff2e27ca6a987822979d7e5b32f629a404749363f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\source-records.json",
+      "sha256": "cf8e85b018a48902988fc0ef6db31a677c52187297df86bfddb72f875377e963"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\audio-rpc.jsonl",
+      "sha256": "a7442f4bd4f1eb2f2a3b7ec2ca3f24ec73f39f5b6164f270014d5e4bdfd2f334"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualify_mmx6_native_audio-executed-source.py",
+      "sha256": "086ee0a297c1866a8fb998a6d1d9b52fcf68080a1403688c533e8ef1613e6a27"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\mmx6_native_contact_audio-executed-source.py",
+      "sha256": "8694991f19237d439a495ac140829f9360a340168fdde46b34bffc94740e0105"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\stdout.log",
+      "sha256": "e899c44627a3e0e84dbe7ccb9eaca44de827fa2e4d9024a753fb70f0bce24a6b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\stderr.log",
+      "sha256": "b960e75b9a4fa327f79a118127056e6d3281a383ca6c0da30c5fed4ea281dff2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\candidate\\mods\\state.toml",
+      "sha256": "307c65254f168785d2b9caf1553b5a03e0cd63d26351db4e795339bca7896d6c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\candidate\\native-zero-reference-state.json",
+      "sha256": "9a172f79b8014c8f4c4ab2ff58b15202b35d77c994894e2fcc497d2c50297724"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\candidate\\preparation.json",
+      "sha256": "957f945a008d1a631192f6b7b97266fe359bd3e633308037b929f9d09234d934"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-local-general-retirement-aware\\qualification.json",
+      "sha256": "d99ff9d5e74f92657136ffbc4284b5d06ff624eb4eececb5089f2b49b6c57b73"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-paired-general\\qualification.json",
+      "sha256": "47980a544dab47da7734a1eb83c631fc8281ec5c053a4a203430bc5e542f2d92"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-first\\qualification.json",
+      "sha256": "f340d1267b837803625a607b62dd6cd6a72dabf70a03ebc4db28c8753ecf646d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-spawn-retry\\qualification.json",
+      "sha256": "be74ac7cc5c170af2f0bb499f7a4fce597fe05e2839a0aeedb0715466683c5c6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-primary-stop-lifetime\\qualification.json",
+      "sha256": "f1dd2aa6e1bf8f6f9fba1582778c94ea34075408af418aeb65ab448130c681be"
+    }
+  ],
+  "limits": [
+    "Full R4/R12 stay incomplete. Co-op X hurt/death and attack-family comparisons, optional paired Zero Saber vocal, actual attack/hurt overlap, active STOP7 and native current-build state/rewind remain unverified.",
+    "The executed raw helper called record3/14 a death vocal. This review corrects that classification without changing raw receipts: character death vocal is3/16 (RA8003D9BC), shared death effect is3/14 (RA8003D9CC). Both retained runs satisfy the stricter distinct-record reducer.",
+    "Original global STOP(FF) at RA8001EBB8 precedes hardware KEYOFF of shared death effect3/14 by one engine frame. It does not establish an obligation to stop private P2 audio while P1 survives.",
+    "Waveform, pitch and ADSR are compared. Spatial volume, PCM, sample-clock equality and native/private lifetime equality are not established by these comparisons.",
+    "Original NativePad input only; physical controls, published-host transforms, other machines/OSes/CPUs, cross-build compatibility and full campaign remain unverified.",
+    "HP losses and authored actor snapshots are retained, but exact contact caller/ordinary damage-calculator qualification is not established; this is not an R2 pass.",
+    "Zero selection requires the disclosed private availability/screen prerequisite. Earned unlock, ordinary campaign/menu entry and native-card progress are not qualified.",
+    "The original spawner mutates allocation bit0 and the placement category high nibble through0h..50h admission states. Exact source code and all remaining authored bytes are checked; no placement bytes were written."
+  ],
+  "bypasses": [
+    {
+      "character": "Zero",
+      "ordinary_progress_evidence_tainted": true,
+      "writes": [
+        {
+          "address": "0x800ccf2f",
+          "before": 1,
+          "after": 17,
+          "reason": "private Zero availability bit10"
+        },
+        {
+          "address": "0x800cced1",
+          "before": 0,
+          "after": 0,
+          "reason": "native screen phase initialization"
+        },
+        {
+          "address": "0x800cced2",
+          "before": 0,
+          "after": 0,
+          "reason": "native screen subphase initialization"
+        },
+        {
+          "address": "0x800cced0",
+          "before": 10,
+          "after": 2,
+          "reason": "native screen2 loader prerequisite"
+        }
+      ]
+    }
+  ]
+}

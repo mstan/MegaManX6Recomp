@@ -838,9 +838,81 @@
                 "sha256": "e2e4e30c52c9583903ef2e9f4d75344c47888ced11045526797e5ea58fbea8d4"
               }
             ]
+          },
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+            "build_identity": {
+              "exe_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+              "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+              "compiled_source_commit": "22ea525bbc52b5177f501989fedc5873ef30099c",
+              "sdk_commit": "09e8673435c73e516b420e6c13bb11f02dc8aaea"
+            },
+            "settings": {
+              "offline": true,
+              "coop": false,
+              "all_staged_features": false,
+              "source_cards": false,
+              "input": "original debug NativePad P1 held inputs only",
+              "muted": "SDL_AUDIODRIVER=dummy",
+              "rewind": false,
+              "loader": "default OpenBIOS/HLE authentic1x",
+              "references": "Falcon X/P1 intro and ordinary Zero/P1 Amazon, separate fresh profiles"
+            },
+            "action": "Source-bind native placements and hurt/death/spawner code; reach authored enemies using original movement/jump inputs; observe committed native HP32->0, both death records and terminal events; compare retained co-op source samples and complete owned natural Quit.",
+            "limits": [
+              "Full R4/R12 stay incomplete. Co-op X hurt/death and attack-family comparisons, optional paired Zero Saber vocal, actual attack/hurt overlap, active STOP7 and native current-build state/rewind remain unverified.",
+              "The executed raw helper called record3/14 a death vocal. This review corrects that classification without changing raw receipts: character death vocal is3/16 (RA8003D9BC), shared death effect is3/14 (RA8003D9CC). Both retained runs satisfy the stricter distinct-record reducer.",
+              "Original global STOP(FF) at RA8001EBB8 precedes hardware KEYOFF of shared death effect3/14 by one engine frame. It does not establish an obligation to stop private P2 audio while P1 survives.",
+              "Waveform, pitch and ADSR are compared. Spatial volume, PCM, sample-clock equality and native/private lifetime equality are not established by these comparisons.",
+              "Original NativePad input only; physical controls, published-host transforms, other machines/OSes/CPUs, cross-build compatibility and full campaign remain unverified.",
+              "HP losses and authored actor snapshots are retained, but exact contact caller/ordinary damage-calculator qualification is not established; this is not an R2 pass.",
+              "Zero selection requires the disclosed private availability/screen prerequisite. Earned unlock, ordinary campaign/menu entry and native-card progress are not qualified.",
+              "The original spawner mutates allocation bit0 and the placement category high nibble through0h..50h admission states. Exact source code and all remaining authored bytes are checked; no placement bytes were written."
+            ],
+            "bypasses": [
+              {
+                "character": "Zero",
+                "ordinary_progress_evidence_tainted": true,
+                "writes": [
+                  {
+                    "address": "0x800ccf2f",
+                    "before": 1,
+                    "after": 17,
+                    "reason": "private Zero availability bit10"
+                  },
+                  {
+                    "address": "0x800cced1",
+                    "before": 0,
+                    "after": 0,
+                    "reason": "native screen phase initialization"
+                  },
+                  {
+                    "address": "0x800cced2",
+                    "before": 0,
+                    "after": 0,
+                    "reason": "native screen subphase initialization"
+                  },
+                  {
+                    "address": "0x800cced0",
+                    "before": 10,
+                    "after": 2,
+                    "reason": "native screen2 loader prerequisite"
+                  }
+                ]
+              }
+            ],
+            "outcome": "Native co-op-disabled references now match54 X and47 Zero source events through actual HP32->0, with unchanged character banks and natural owned exits0. Fifteen comparisons match Zero records3/0,1,14,16,17 against earlier local co-op and both peers. Character death vocal3/16 is distinct from shared effect3/14; native primary global STOP keys off the shared effect after the vocal has ended.162 selected Python tests pass. Co-op X hurt/death, remaining attack-family comparisons, optional paired Zero Saber vocal, actual attack/hurt overlap, active STOP7 and native state/rewind remain unverified.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-character-audio/manifest-bound-22ea525-native-off-hurt-death-reviewed.json",
+                "sha256": "fed5556fe379839a425377369449a01a18296dbc1ffc51dbde2e22ae3b3389e3"
+              }
+            ]
           }
         ],
-        "limitations": "Historical failures remain retained. Exact 22ea525 has 27 local events/12 records, both paired jump orders, and 33 paired saber-SFX/hurt/death events per peer across 11 records. Co-op-off references, paired optional saber3/3, active STOP7 and actual attack/hurt vocal overlap remain incomplete."
+        "limitations": "Exact22ea525 has retained local/paired Zero source audio and co-op-disabled X/Zero jump, attack, hurt and death references. Historical wrong-character audio remains a failed prior-image observation. Co-op X hurt/death, remaining attack-family comparisons, optional paired Zero Saber vocal, actual attack/hurt overlap, active STOP7, native state/rewind and full family qualification remain incomplete. Native Zero selector setup is a recorded prerequisite bypass; waveform/pitch/ADSR comparisons do not prove spatial volume, PCM or lifecycle equality."
       }
     },
     {

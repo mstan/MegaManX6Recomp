@@ -51,15 +51,15 @@ Ordinary Zero audio candidate 22ea525 now has a
 for 27 source-matched events across 12 original records, including corrected
 saber3/3, hurt/death and effective-bank aliases. Its 18 applicable checks pass;
 inactive STOP7 is explicitly pending after a later death sound reuses that
-voice. Active STOP7, co-op-off hurt/death references and complete paired general audio remain
+voice. Active STOP7, remaining character comparisons and complete paired general audio remain
 unverified. This adds bounded evidence without changing the 234 dispositions.
 
 The same exact image now also passes both paired ground-jump orders, with
 19 checks per peer and 60 matching core/mod CRC samples across the two runs
 (15 after their audio cases). The
 [paired receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-paired-jump-orders-reviewed.json)
-retains the limited same-machine scope; full attack/hurt overlap and co-op-off
-hurt/death character references are still required.
+retains the limited same-machine scope; full attack/hurt overlap and remaining
+co-op character comparisons are still required.
 
 The [paired body-audio receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-paired-body-reviewed.json)
 adds 33 independently source-matched events per peer across 11 records,
@@ -75,9 +75,20 @@ with both original character banks unchanged. Zero's jump and Saber vocal have
 exact body-call/sample identities; its Saber effect has exact waveform/numeric
 DSP evidence while its event-time SOUND record/caller remains unverified.
 Zero selection uses an explicit private availability/screen prerequisite, not
-earned progress. Both offline processes quit naturally with exit0. Native
-hurt/death references, active STOP7, attack/hurt overlap and native state/rewind
-remain open; the ledger stays at4 passed,4 failed,226 unverified.
+earned progress. Both offline processes quit naturally with exit0. Remaining
+co-op character comparisons, active STOP7, attack/hurt overlap and native
+state/rewind remain open; the ledger stays at4 passed,4 failed,226 unverified.
+
+The [native hurt/death receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-native-off-hurt-death-reviewed.json)
+adds 54 source-matched X events and 47 Zero events, unchanged original character
+banks and both natural owned exits0. Fifteen Zero hurt/death record comparisons
+match the retained local and both-peer samples and pitch/ADSR. Character death
+vocal3/16 ends naturally; shared effect3/14 is separately keyed off by the
+original global STOP. The stricter review retains that distinction and the
+explicit Zero-selector prerequisite. All 162 selected Python tests pass.
+Co-op X hurt/death, remaining attack-family comparisons, optional paired Zero
+Saber vocal, actual attack/hurt overlap, active STOP7 and native state/rewind
+remain incomplete. No ledger disposition changes.
 
 The earlier frozen v19 candidate used title source a1dac26, SDK bfbfb920,
 title compatibility mmx6-x-zero-delay-v17. Its debug and production suites
