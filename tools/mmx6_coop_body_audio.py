@@ -201,7 +201,9 @@ def native_death(ctx, sample, observer, case, advance):
         if step==0:
             require(hp==32 and row['p2_contact_counter']==0,'Native death route requires fresh full-health Zero')
         if actor:
-            require(actor['phase']==1 and actor['hp']==12 and actor['strength']==4 and actor['subtype']==1 and
+            # The coherent fatal player sample precedes the separate pool RPC;
+            # the surviving camera can already retire this offscreen enemy.
+            require((actor['phase']==1 or hp==0 and actor['phase']==3) and actor['hp']==12 and actor['strength']==4 and actor['subtype']==1 and
                 actor['contact_class']==0,'Native authored contact enemy changed')
             if selected is None:selected=actor['address']
             require(actor['address']==selected,'Native contact enemy changed its original slot')
@@ -214,6 +216,7 @@ def native_death(ctx, sample, observer, case, advance):
             require(row['p2_contact_counter']==8 and len(route['hp_changes'])==8,
                 'Native fatal HP loss lacks eight accepted ordinary contacts')
             route['fatal_observation']=row
+            route['enemy_retired_after_fatal']=bool(actor and actor['phase']==3)
             ctx['set_input'](1,0)
             for _ in range(31):
                 sample('body-audio-phase2-stop')

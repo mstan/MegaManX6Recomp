@@ -161,9 +161,10 @@ class BodyAudioTests(unittest.TestCase):
                 players=[dict(hp_raw=32,state=1),dict(hp=hp,terrain=0,previous_terrain=0)],p2_contact_counter=counter,
                 expected_damage=4,expected_reaction=1,instance=dict(phase=1,hp=12,strength=4,subtype=1,
                     contact_class=0,address='0x8008ef48',x_raw=400<<16))
-        for skipped in (False,True):
+        for skipped,retirement in ((False,None),(True,None),(False,-1),(False,-2)):
             rows=[row(32-4*i,i)for i in range(9)]
             if skipped:rows.pop(3)
+            if retirement is not None:rows[retirement]['instance']['phase']=3
             calls=[dict(seq=i,target='0x8001750C',a0='0x1',a1=hex(record),ra=hex(ra),frame=200)
                 for i,(record,ra)in enumerate(((5,0x8003D8C4),(7,0x8003D8D0)))]
             calls.append(dict(seq=2,target='0x8003D8A8',a0='0x800970A0',frame=200))
@@ -174,12 +175,13 @@ class BodyAudioTests(unittest.TestCase):
                 if label=='body-audio-phase2-stop':observer.events.append(dict(v=47,kind='KEYOFF',sample_bank=30,frame=200))
                 return {}
             with patch.object(subject.contact,'observe_contact',side_effect=rows):
-                if skipped:
+                if skipped or retirement==-2:
                     with self.assertRaises(subject.audio.AudioQualificationError):
                         subject.native_death(ctx,sample,observer,case,lambda *a:dict(observation={}))
                 else:
                     subject.native_death(ctx,sample,observer,case,lambda *a:dict(observation={}))
                     self.assertEqual(len(case['native_death']['hp_changes']),8)
+                    self.assertEqual(case['native_death']['enemy_retired_after_fatal'],retirement==-1)
             self.assertEqual(inputs[-1],(1,0))
 
     def test_inactive_stop_needs_owned_volume_transition_and_preserved_hardware(self):
