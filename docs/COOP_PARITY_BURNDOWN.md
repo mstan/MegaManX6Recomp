@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 6 passed (R2, R4, R7, R8, R12, R13), 2 failed (R15, F208), 226 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 7 passed (R2, R4, R7, R8, R12, R13, F33), 2 failed (R15, F208), 225 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -544,3 +544,32 @@ binds82 retained artifacts. F33 local/aggregate remains unverified pending a
 separate nonzero scene-owner restoration check. The aggregate ledger remains
 6 passed,2 failed,226 unverified of234. Human-dependent checks are deferred;
 automatable scene, content and remaining reference checks continue serially.
+
+
+## F33 bounded contract complete (October 24)
+
+[Reviewed scene and aggregate F33 receipt](evidence/mmx6-private-state/manifest-bound-f339e12-f33-scenes-reviewed.json)
+binds138 retained artifacts and the earlier inventory/netplay receipt. Both X
+and Zero now own a nonzero native scene in independent runs. Actual mapped
+save/load and rewind restore the retained scene record byte for byte. Each
+owner passes six checks, with20 provider comparisons after mapped load and18
+after rewind. The original script then finishes and ordinary input independently
+moves each actor. Both owned games exit0, with existing native cards unchanged.
+All245 selected Python tests pass; native debug/production remain103/103 each.
+
+The original script lock/release helpers bypass the authored trigger as a
+prerequisite. They do not qualify a door, dialogue trigger or progression row.
+The owner keeps animating while the scene freezes the world clock; comparing
+its later animated pose to a frozen save instant would be invalid. Rewind also
+selects a later retained scene instant whose animation may admit another sprite
+bank. These differences are explicit; all non-actor host context, retained scene
+body, effects pools, passenger body, resources and input history still match.
+The separate paused resource/effect cases retain all17 exact provider comparisons.
+Six observer/setup attempts are retained with their original errors and reasons.
+
+F33 local and netplay now pass the bounded exact-image/same-host contract.
+Aggregate progress is7 passed,2 failed,225 unverified of234 (3.0% passed).
+The79 X6-specific obligations and1,665 content cases retain their own statuses;
+scene trigger, acquisition, active-voice/nonzero-priority and other campaign
+checks gain no pass from this fixture. Human-dependent setup is deferred until
+the automated and locally accessible checks have been exhausted.

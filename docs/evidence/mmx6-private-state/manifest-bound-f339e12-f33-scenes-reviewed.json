@@ -1,0 +1,1357 @@
+{
+  "schema": 1,
+  "kind": "reviewed_f33_mapped_resources_private_state_scene_ownership_and_online_refusals",
+  "reviewed_at_utc": "2026-10-24T07:55:04.113870+00:00",
+  "candidate": {
+    "schema": 1,
+    "kind": "exact_offline_earned_inventory_prerequisite_candidate",
+    "candidate_source": "f339e1236e71aa172af9ea234b719baa0e4efbf2",
+    "exe_sha256": "be394703993ba902f77e7d2f0f5f351e6a78afac3aa60886324e35fc804420a2",
+    "declared_manifest_sha256": "519b22de4c8cc3655cbaac37d36524c24943a34dc467bd477e720be99b606a61",
+    "production_exe_sha256": "3cda2c2682a661ba2ff4bd448ae04d520e8fd6565e1b776200291369293b0773",
+    "production_declared_manifest_sha256": "b95786c196b5a7dd8fec5e54f36bf47f76c999a62422bdd73ee77df2834c75d7",
+    "source_repositories": {
+      "game": {
+        "head": "f339e1236e71aa172af9ea234b719baa0e4efbf2",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "net": {
+        "head": "e53059306824edf4f0aec4aae5ae65151b18535f",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "rb": {
+        "head": "2a03e73693acee0fb78076ea058642c931bef12e",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "sdk": {
+        "head": "5bd63adf265d6019a30fec221001ce481c602144",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "ui": {
+        "head": "b964eabe5a3438b8ed121064354ba27c1accef3f",
+        "tracked_edits": {},
+        "tracked_status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "source_validation": {
+      "checked_files": {
+        "game": 56,
+        "game-generated": 34
+      },
+      "checked_bytes": 43885352,
+      "generated_root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\generated-source",
+      "scope": "Declared game and game-generated files only; other dependency roots not rehashed"
+    },
+    "production_source_validation": {
+      "checked_files": {
+        "game": 56,
+        "game-generated": 34
+      },
+      "checked_bytes": 43885352,
+      "generated_root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\generated-source",
+      "scope": "Declared game and game-generated files only; other dependency roots not rehashed"
+    },
+    "title_compatibility": "mmx6-x-zero-delay-v18",
+    "host_profile": "mmx6.win64-clang22.loopback revision2",
+    "host_profile_semantic_sha256": "e0d4144e1a257ec0a4ea6f918f53a34f904d138c74de007f029452b94f5954c5",
+    "frozen_debug": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\frozen-build-v22-f339e12",
+    "validation": {
+      "debug": "103/103 CTests passed",
+      "production": "103/103 CTests passed",
+      "python": "241 selected tests passed",
+      "production_default_flags": {
+        "MMX6_ENABLE_LOOPBACK_HOST_LAB": "OFF",
+        "PSX_DEBUG_TOOLS": "OFF"
+      },
+      "native_gameplay": "unverified for this image"
+    },
+    "artifacts": {
+      "CMakeCache.txt": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\CMakeCache.txt",
+        "sha256": "724f583940806e5beedee78d341bd4d6c6d491a0cab323ff3001b6aa2e933f64",
+        "bytes": 38941
+      },
+      "debug-build.log": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\debug-build.log",
+        "sha256": "1d273e99f6146945326826653b82652009460d2b38c962e7183826bc13bfed17",
+        "bytes": 19943
+      },
+      "debug-ctest.log": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\debug-ctest.log",
+        "sha256": "fc64bdc3c9f5f3468535a7d278e11dd0e3db987b5fae48c8606d768b46ba297f",
+        "bytes": 15026
+      },
+      "manifest.h": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\manifest.h",
+        "sha256": "39808b07ba45dbe4961204facf0bfecd2596b321f72b6c233962386c3a9fb955",
+        "bytes": 150
+      },
+      "manifest.json": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\manifest.json",
+        "sha256": "6a2ebcfc73e77ef860ced57dfb65f12c68073416a0378617192816badef8cf8a",
+        "bytes": 161853
+      },
+      "production-build.log": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\production-build.log",
+        "sha256": "cfdc214c189e5309af3acb0ffa71057981d4fec11d07d89021c32095b8defd61",
+        "bytes": 19649
+      },
+      "production-CMakeCache.txt": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\production-CMakeCache.txt",
+        "sha256": "4c85104d95082cf53987b91551b85a03ee89dbd25639e85a643d5005cd837194",
+        "bytes": 39264
+      },
+      "production-ctest.log": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\production-ctest.log",
+        "sha256": "d1d7a094d4c5d55b6ce7ca804f982eb6e4f4f36b1acb03fe6418fb13d86556f7",
+        "bytes": 15031
+      },
+      "production-manifest.h": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\production-manifest.h",
+        "sha256": "83451d335afbdd94df0745e7d57d9dd8b1c77a5c98956d161d8d0cd0df3e7430",
+        "bytes": 150
+      },
+      "production-manifest.json": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\production-manifest.json",
+        "sha256": "6adfe87d17787defea3e6f66be433be76d8eb71c944eadd6d577c29ba341097e",
+        "bytes": 161193
+      },
+      "production-provenance.json": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\production-provenance.json",
+        "sha256": "f8ad4fc68fdf671f2f6628da46cb5f8e9aa70c4520434e7bbb3954b880ec1dc3",
+        "bytes": 21164
+      },
+      "provenance.json": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\provenance.json",
+        "sha256": "be98733497bd57645d991feb37ff5a696bca6092492401a1addfe8bf3d0b6de0",
+        "bytes": 21034
+      },
+      "python-tests.log": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\python-tests.log",
+        "sha256": "213286144086e1bc90a78ec085095a8105e45b70f5305d9b3f8fb8f322e27cff",
+        "bytes": 1171
+      }
+    },
+    "limits": [
+      "Archive manifest validation uses the same image twice; paired qualification must validate both actual separately staged images.",
+      "Source validation covers declared game/generated inputs; SDK/net/rb/ui are fixed clean Git identities.",
+      "No old native passes are transferred to this new image; runtime qualification remains pending.",
+      "Local same-host development candidate only; no publication or heterogeneous compatibility claim.",
+      "Earned weapon availability is an offline prerequisite bypass. Only actual native input may establish spending and selection; no state-test result is supplied by the fixture."
+    ]
+  },
+  "qa_source_commit": "08b5e72a9ac6cec1de7bf317ebe03f6270cb78f7",
+  "inventory_and_online_receipt": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-private-state\\manifest-bound-f339e12-inventory-resources-reviewed.json",
+    "sha256": "47f24bfc3ffd07c9a76dcfe750867640db0527027ff264c56f913d48e9f704c5",
+    "size": 174271
+  },
+  "scene_cases": [
+    {
+      "raw_report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\qualification.json",
+        "sha256": "f34f5d39736d958b57820ee0652e5faddaed283ff6b3fd6988aeeed26c5f2d8d",
+        "size": 14858550
+      },
+      "owner_seat": 1,
+      "control_route": "owned_win32_keyboard",
+      "checks": {
+        "mapped_save_nonzero_scene_owner": true,
+        "mapped_load_nonzero_scene_owner": true,
+        "mapped_load_full_scene_context": true,
+        "mapped_rewind_nonzero_scene_owner": true,
+        "mapped_rewind_full_scene_context": true,
+        "both_actors_continue_with_independent_input": true
+      },
+      "snapshot": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mapped-state\\scene-save.pst",
+        "sha256": "cba19e5d2108c3b28cff0e4fd101d5a35ac88e2b5255bc2cff58ac24f5f94ed5",
+        "size": 1835871
+      },
+      "saved_scene": {
+        "owner": 2,
+        "phase": 3,
+        "context_hex": "020300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000001010200000000900000005b0400000000004002050000900000005b04000000000096faff0000000000420000d44a1f8070411f80cc3a1080687c1480000500780a000173730300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000"
+      },
+      "provider_probes": [
+        {
+          "label": "mapped-scene-load",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mapped-state\\mapped-scene-load-probe.pst",
+            "sha256": "9c51534f25e10f1334860a3e4f3e8ea449cd9abd63a4b24ee20ceae2b2207104",
+            "size": 1835104
+          },
+          "independent_checks": {
+            "exact_current_build_key": true,
+            "same_provider_set": true,
+            "same_resource_and_original_asset_binding": true,
+            "explicit_native_and_host_input_history": true,
+            "saved_native_world_clock": true,
+            "saved_native_mode_phase": true,
+            "saved_native_menu_state": true,
+            "full_retained_bank_payloads": true,
+            "saved_sprite_bank_count": true,
+            "saved_ui_bank_count": true,
+            "persistent_private_audio_priorities": true,
+            "private_spu_owner_tags": true,
+            "private_spu_modes": true,
+            "private_spu_registers_hex": true,
+            "private_spu_bank_bindings": true,
+            "full_non_actor_host_context": true,
+            "full_private_effect_pools": true,
+            "full_inactive_passenger_body": true,
+            "private_body_hex_resources": true,
+            "p1_body_hex_resources": true
+          },
+          "scene": {
+            "owner": 2,
+            "phase": 3,
+            "context_hex": "020300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000001010200000000900000005b0400000000004002050000900000005b04000000000096faff0000000000420000d44a1f8070411f80cc3a1080687c1480000500780a000173730300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000"
+          },
+          "excluded_dynamic_comparisons": [
+            "owner native animation pose"
+          ]
+        },
+        {
+          "label": "mapped-scene-rewind",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mapped-state\\mapped-scene-rewind-probe.pst",
+            "sha256": "55ce091a5fd33656d2ec060a972f9047f42a74abe00a9cb7d52b33cf5387839d",
+            "size": 1840489
+          },
+          "independent_checks": {
+            "exact_current_build_key": true,
+            "same_provider_set": true,
+            "same_resource_and_original_asset_binding": true,
+            "explicit_native_and_host_input_history": true,
+            "saved_native_world_clock": true,
+            "saved_native_mode_phase": true,
+            "saved_native_menu_state": true,
+            "saved_ui_bank_count": true,
+            "persistent_private_audio_priorities": true,
+            "private_spu_owner_tags": true,
+            "private_spu_modes": true,
+            "private_spu_registers_hex": true,
+            "private_spu_bank_bindings": true,
+            "full_non_actor_host_context": true,
+            "full_private_effect_pools": true,
+            "full_inactive_passenger_body": true,
+            "private_body_hex_resources": true,
+            "p1_body_hex_resources": true
+          },
+          "scene": {
+            "owner": 2,
+            "phase": 3,
+            "context_hex": "020300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000001010200000000900000005b0400000000004002050000900000005b04000000000096faff0000000000420000d44a1f8070411f80cc3a1080687c1480000500780a000173730300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000"
+          },
+          "excluded_dynamic_comparisons": [
+            "owner native animation pose",
+            "sprite cache admitted by later native animation"
+          ]
+        }
+      ],
+      "prerequisite": {
+        "helpers": [
+          {
+            "address": 2147734280,
+            "bytes": 40,
+            "sha256": "9b5ce4e2f8ce7fde8a1ceeee2ade074d66b3ced5747a3ea9d55a6673b53825c1",
+            "code_hex": "0980023ca0704224010006240d80033cd00046a0d10044a0d20045a07a0046a00800e003ecce66a0"
+          },
+          {
+            "address": 2147734320,
+            "bytes": 28,
+            "sha256": "f7a6295b23f5ee582b20035c9d35b5f3f58bf2b8a2492e4ace6add196f47f724",
+            "code_hex": "0980023ca07042240d80033cd00040a07a0040a00800e003ecce60a0"
+          }
+        ],
+        "bypass": "Authored script/door trigger bypassed; state ownership and continuation tested separately"
+      },
+      "mailbox_writes": [
+        {
+          "command": 5,
+          "offset": 82,
+          "value": 1,
+          "response": {
+            "id": 1519,
+            "ok": true
+          }
+        },
+        {
+          "command": 5,
+          "offset": 80,
+          "value": 5,
+          "response": {
+            "id": 1520,
+            "ok": true
+          }
+        },
+        {
+          "command": 6,
+          "offset": 82,
+          "value": 1,
+          "response": {
+            "id": 1586,
+            "ok": true
+          }
+        },
+        {
+          "command": 6,
+          "offset": 80,
+          "value": 6,
+          "response": {
+            "id": 1587,
+            "ok": true
+          }
+        },
+        {
+          "command": 6,
+          "offset": 82,
+          "value": 1,
+          "response": {
+            "id": 1961,
+            "ok": true
+          }
+        },
+        {
+          "command": 6,
+          "offset": 80,
+          "value": 6,
+          "response": {
+            "id": 1962,
+            "ok": true
+          }
+        },
+        {
+          "command": 6,
+          "offset": 82,
+          "value": 1,
+          "response": {
+            "id": 2100,
+            "ok": true
+          }
+        },
+        {
+          "command": 6,
+          "offset": 80,
+          "value": 6,
+          "response": {
+            "id": 2101,
+            "ok": true
+          }
+        }
+      ],
+      "rewind_seek_setup": {
+        "publications_since_owned_window": 123,
+        "desired_steps": 34,
+        "held_seconds": 2.59,
+        "qualification": "Setup only; native ownership and full context gate pass"
+      },
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "existing_cards_unchanged": true,
+      "limits": [
+        "Authored script/door trigger bypassed; state ownership and continuation tested separately",
+        "Current exact-image intro scene state only; full paused actor-byte checks are separate.",
+        "Scene owner native animation advances between operations. Its animation bytes are not compared as a frozen pose."
+      ]
+    },
+    {
+      "raw_report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\qualification.json",
+        "sha256": "a39496c719543b953fa3f50793f97505605a7bd975b45d886da262b49cfcb40f",
+        "size": 15938524
+      },
+      "owner_seat": 0,
+      "control_route": "published_controller",
+      "checks": {
+        "mapped_save_nonzero_scene_owner": true,
+        "mapped_load_nonzero_scene_owner": true,
+        "mapped_load_full_scene_context": true,
+        "mapped_rewind_nonzero_scene_owner": true,
+        "mapped_rewind_full_scene_context": true,
+        "both_actors_continue_with_independent_input": true
+      },
+      "snapshot": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mapped-state\\scene-save.pst",
+        "sha256": "cd707c414cfe3e7d6ee1737ac7b46240b0604af8ad3ddeea03f02580aef8cf76",
+        "size": 1832175
+      },
+      "saved_scene": {
+        "owner": 1,
+        "phase": 3,
+        "context_hex": "010300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000101010200000000a80000005a0400000000000002050000a80000005a040000000000beffff0000000000420000d0f61e8004eb1e801800009fa481039f0005007802000101ff03000000000000000000001cea1e8000000000202020000012000000000000543d0780080000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000a80000005a040000000000002001000000000000000000000000"
+      },
+      "provider_probes": [
+        {
+          "label": "mapped-scene-load",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mapped-state\\mapped-scene-load-probe.pst",
+            "sha256": "f1a2a14dcf8215abba7444ec42df925b45e4fd8e68217dabf6fe019cc365c743",
+            "size": 1826462
+          },
+          "independent_checks": {
+            "exact_current_build_key": true,
+            "same_provider_set": true,
+            "same_resource_and_original_asset_binding": true,
+            "explicit_native_and_host_input_history": true,
+            "saved_native_world_clock": true,
+            "saved_native_mode_phase": true,
+            "saved_native_menu_state": true,
+            "full_retained_bank_payloads": true,
+            "saved_sprite_bank_count": true,
+            "saved_ui_bank_count": true,
+            "persistent_private_audio_priorities": true,
+            "private_spu_owner_tags": true,
+            "private_spu_modes": true,
+            "private_spu_registers_hex": true,
+            "private_spu_bank_bindings": true,
+            "full_non_actor_host_context": true,
+            "full_private_effect_pools": true,
+            "full_inactive_passenger_body": true,
+            "private_body_hex_resources": true,
+            "p1_body_hex_resources": true
+          },
+          "scene": {
+            "owner": 1,
+            "phase": 3,
+            "context_hex": "010300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000101010200000000a80000005a0400000000000002050000a80000005a040000000000beffff0000000000420000d0f61e8004eb1e801800009fa481039f0005007802000101ff03000000000000000000001cea1e8000000000202020000012000000000000543d0780080000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000a80000005a040000000000002001000000000000000000000000"
+          },
+          "excluded_dynamic_comparisons": [
+            "owner native animation pose"
+          ]
+        },
+        {
+          "label": "mapped-scene-rewind",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mapped-state\\mapped-scene-rewind-probe.pst",
+            "sha256": "380d9ae5836dd921eb5e4b2fc07d7666eaad6c329ee49970f41141f86531f7c1",
+            "size": 1829616
+          },
+          "independent_checks": {
+            "exact_current_build_key": true,
+            "same_provider_set": true,
+            "same_resource_and_original_asset_binding": true,
+            "explicit_native_and_host_input_history": true,
+            "saved_native_world_clock": true,
+            "saved_native_mode_phase": true,
+            "saved_native_menu_state": true,
+            "saved_ui_bank_count": true,
+            "persistent_private_audio_priorities": true,
+            "private_spu_owner_tags": true,
+            "private_spu_modes": true,
+            "private_spu_registers_hex": true,
+            "private_spu_bank_bindings": true,
+            "full_non_actor_host_context": true,
+            "full_private_effect_pools": true,
+            "full_inactive_passenger_body": true,
+            "private_body_hex_resources": true,
+            "p1_body_hex_resources": true
+          },
+          "scene": {
+            "owner": 1,
+            "phase": 3,
+            "context_hex": "010300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000101010200000000a80000005a0400000000000002050000a80000005a040000000000beffff0000000000420000d0f61e8004eb1e801800009fa481039f0005007802000101ff03000000000000000000001cea1e8000000000202020000012000000000000543d0780080000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000a80000005a040000000000002001000000000000000000000000"
+          },
+          "excluded_dynamic_comparisons": [
+            "owner native animation pose",
+            "sprite cache admitted by later native animation"
+          ]
+        }
+      ],
+      "prerequisite": {
+        "helpers": [
+          {
+            "address": 2147734280,
+            "bytes": 40,
+            "sha256": "9b5ce4e2f8ce7fde8a1ceeee2ade074d66b3ced5747a3ea9d55a6673b53825c1",
+            "code_hex": "0980023ca0704224010006240d80033cd00046a0d10044a0d20045a07a0046a00800e003ecce66a0"
+          },
+          {
+            "address": 2147734320,
+            "bytes": 28,
+            "sha256": "f7a6295b23f5ee582b20035c9d35b5f3f58bf2b8a2492e4ace6add196f47f724",
+            "code_hex": "0980023ca07042240d80033cd00040a07a0040a00800e003ecce60a0"
+          }
+        ],
+        "bypass": "Authored script/door trigger bypassed; state ownership and continuation tested separately"
+      },
+      "mailbox_writes": [
+        {
+          "command": 5,
+          "offset": 82,
+          "value": 0,
+          "response": {
+            "id": 1586,
+            "ok": true
+          }
+        },
+        {
+          "command": 5,
+          "offset": 80,
+          "value": 5,
+          "response": {
+            "id": 1587,
+            "ok": true
+          }
+        },
+        {
+          "command": 6,
+          "offset": 82,
+          "value": 0,
+          "response": {
+            "id": 1724,
+            "ok": true
+          }
+        },
+        {
+          "command": 6,
+          "offset": 80,
+          "value": 6,
+          "response": {
+            "id": 1725,
+            "ok": true
+          }
+        },
+        {
+          "command": 6,
+          "offset": 82,
+          "value": 0,
+          "response": {
+            "id": 2105,
+            "ok": true
+          }
+        },
+        {
+          "command": 6,
+          "offset": 80,
+          "value": 6,
+          "response": {
+            "id": 2106,
+            "ok": true
+          }
+        },
+        {
+          "command": 6,
+          "offset": 82,
+          "value": 0,
+          "response": {
+            "id": 2237,
+            "ok": true
+          }
+        },
+        {
+          "command": 6,
+          "offset": 80,
+          "value": 6,
+          "response": {
+            "id": 2238,
+            "ok": true
+          }
+        }
+      ],
+      "rewind_seek_setup": {
+        "publications_since_owned_window": 126,
+        "desired_steps": 34,
+        "held_seconds": 2.59,
+        "qualification": "Setup only; native ownership and full context gate pass"
+      },
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "existing_cards_unchanged": true,
+      "limits": [
+        "Authored script/door trigger bypassed; state ownership and continuation tested separately",
+        "Current exact-image intro scene state only; full paused actor-byte checks are separate.",
+        "Scene owner native animation advances between operations. Its animation bytes are not compared as a frozen pose."
+      ]
+    }
+  ],
+  "observer_setup_attempts": [
+    {
+      "raw_report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-keyboard\\qualification.json",
+        "sha256": "11acd6fe7b459b89fbbd3ebf40b5fd95b93f88e07e670abbc06cf58a03ce0a72",
+        "size": 13376715
+      },
+      "reported_status": "failed_setup",
+      "reported_error": "Original native script lock with outgoing passenger completed: native/coherent state predicate timed out",
+      "interpretation": "Observer required initial D0 lock value1; native script legitimately advances it toFF."
+    },
+    {
+      "raw_report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-native-lock\\qualification.json",
+        "sha256": "674009cea8f907008bd96adad4a6d0c5feb08ad5347ac5e0ec639afc7d3fa248",
+        "size": 2142655
+      },
+      "reported_status": "failed_behavior",
+      "reported_error": "mapped-scene-load: full saved native/private provider differs",
+      "interpretation": "Scene context restored; an animated owner byte changed between slot save and later probe. Full-body frozen-pose expectation was inapplicable here."
+    },
+    {
+      "raw_report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-settled\\qualification.json",
+        "sha256": "5c737c76c7066f8200389131888b886df191cf05a0803ffdc79f72f7680ab7ab",
+        "size": 10460700
+      },
+      "reported_status": "failed_setup",
+      "reported_error": "Native scene owner counter retires before exact state baseline: native/coherent state predicate timed out",
+      "interpretation": "Attempt to wait for animated native byte44 to reach0 was invalid: its native animation loops."
+    },
+    {
+      "raw_report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-live-animation\\qualification.json",
+        "sha256": "a7a4f86cd06bc38de58d8ae75908b079a77e32ab04278bdcfb5ec9906ba29b24",
+        "size": 1797991
+      },
+      "reported_status": "failed_behavior",
+      "reported_error": "Personal-menu adapter left healthy native co-op gameplay/menu",
+      "interpretation": "Menu helper incorrectly required both actors active while passenger was intentionally absent in scene phase3."
+    },
+    {
+      "raw_report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-retained-history\\qualification.json",
+        "sha256": "8662a33af28c56dbded8af2710404ff58c11085880f33d7814b21e0e31c1467f",
+        "size": 5701813
+      },
+      "reported_status": "failed_behavior",
+      "reported_error": "mapped-scene-rewind: saved scene host context, pools, passenger or resources differ",
+      "interpretation": "Nonzero ownership, full scene context and resources restored; later selected scene instant had an additional native-animation sprite bank compared with earlier manual save."
+    },
+    {
+      "raw_report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-context\\qualification.json",
+        "sha256": "58c6eceb40dab8efe681916106a4c63c73d2748129ecb6862ff8af2712c00ef6",
+        "size": 5641095
+      },
+      "reported_status": "failed_behavior",
+      "reported_error": "Scene ownership did not genuinely diverge",
+      "interpretation": "Ownership cleared; a subsequent idle-pose assertion rejected X normal fall action7. Ownership divergence setup now checks ownership; independent movement remains a separate final gate."
+    }
+  ],
+  "python_validation": {
+    "passed": true,
+    "test_count": 245,
+    "log": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\python-validation-scene.txt",
+      "sha256": "9ef2bb0cde4255a9964a6eb9b411792e5a0d903e01a28d224b0472c04da82d2e",
+      "size": 503
+    }
+  },
+  "visual_review": [
+    "Zero keyboard rewind selects native scene interval at F3098 (18/50); X controller rewind selects native scene interval at F3169 (17/50).",
+    "X case post-rewind original script release returns both visible actors and their HUDs. Independent movement is independently checked from actual native samples, not inferred from images."
+  ],
+  "limits": [
+    "F33 passes its bounded current-image same-machine contract. Authored doors/dialogue triggers, progression and other content rows are separate.",
+    "Inventory acquisition and authored scene trigger are explicitly bypassed prerequisites through original native helpers; no HP/ammo/selection/ownership/restoration outcomes are written by observers.",
+    "Owner native scene animation advances between operations; the owner animated pose is not compared as a frozen frame. Rewind selects a later scene instant, so its sprite cache is not compared with the earlier manual save. Full non-actor host context, scene record, pools, passenger body, input and resources are checked. Separate paused private-state cases retain all17 exact provider comparisons.",
+    "X/P1 + Zero/P2 intro on this exact Windows image/profile only. Physical devices, other hosts/OS/CPUs deferred. Active-voice/nonzero-priority rewind and ordered recording through rewind remain unverified.",
+    "Native cards preserved; current-build invalid provider rejection qualified. Backward save-state migration is not required. Production103 CTests pass with lab/debug OFF; native evidence is from development image."
+  ],
+  "ledger": {
+    "row": "F33",
+    "local": "passed",
+    "netplay": "passed",
+    "aggregate": "passed"
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\candidate.json",
+      "sha256": "14f14700dfc7df3b0b1bba395e078dbc9e3917c32961874c4007722aeec038ec",
+      "size": 6710
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\CMakeCache.txt",
+      "sha256": "724f583940806e5beedee78d341bd4d6c6d491a0cab323ff3001b6aa2e933f64",
+      "size": 38941
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\debug-build.log",
+      "sha256": "1d273e99f6146945326826653b82652009460d2b38c962e7183826bc13bfed17",
+      "size": 19943
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\debug-ctest.log",
+      "sha256": "fc64bdc3c9f5f3468535a7d278e11dd0e3db987b5fae48c8606d768b46ba297f",
+      "size": 15026
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\manifest.h",
+      "sha256": "39808b07ba45dbe4961204facf0bfecd2596b321f72b6c233962386c3a9fb955",
+      "size": 150
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\manifest.json",
+      "sha256": "6a2ebcfc73e77ef860ced57dfb65f12c68073416a0378617192816badef8cf8a",
+      "size": 161853
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\production-build.log",
+      "sha256": "cfdc214c189e5309af3acb0ffa71057981d4fec11d07d89021c32095b8defd61",
+      "size": 19649
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\production-CMakeCache.txt",
+      "sha256": "4c85104d95082cf53987b91551b85a03ee89dbd25639e85a643d5005cd837194",
+      "size": 39264
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\production-ctest.log",
+      "sha256": "d1d7a094d4c5d55b6ce7ca804f982eb6e4f4f36b1acb03fe6418fb13d86556f7",
+      "size": 15031
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\production-manifest.h",
+      "sha256": "83451d335afbdd94df0745e7d57d9dd8b1c77a5c98956d161d8d0cd0df3e7430",
+      "size": 150
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\production-manifest.json",
+      "sha256": "6adfe87d17787defea3e6f66be433be76d8eb71c944eadd6d577c29ba341097e",
+      "size": 161193
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\production-provenance.json",
+      "sha256": "f8ad4fc68fdf671f2f6628da46cb5f8e9aa70c4520434e7bbb3954b880ec1dc3",
+      "size": 21164
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\provenance.json",
+      "sha256": "be98733497bd57645d991feb37ff5a696bca6092492401a1addfe8bf3d0b6de0",
+      "size": 21034
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\python-tests.log",
+      "sha256": "213286144086e1bc90a78ec085095a8105e45b70f5305d9b3f8fb8f322e27cff",
+      "size": 1171
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\python-validation-final.txt",
+      "sha256": "9e926fc962fd1e650b2476b314a0c95e7c50591cee2cac31248238f9a04fc9b9",
+      "size": 499
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mapped-state\\mapped-save.pst",
+      "sha256": "6e5ef82ad481c665af3cd4cae8e49fa79501944c0f1842f134644f5b75bfade0",
+      "size": 1796433
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mapped-state\\inventory-load-probe.pst",
+      "sha256": "e0aa2db0ab1af68de8133afd94bd8bb4086fe3d5d9bc2a1b5d77b22e74175429",
+      "size": 1789607
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mapped-state\\mapped-load-probe.pst",
+      "sha256": "0bedb86fd46a8bfb475f6b74dcfd92d2b15c7a27a20868bb34c8fdeb0fb2739f",
+      "size": 1795140
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mapped-state\\after-invalid-probe.pst",
+      "sha256": "f21be44fc943db4363442a29a6c8b8cb2043182d90950fe47814ef1765b312a0",
+      "size": 1794119
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mapped-state\\rewind-probe.pst",
+      "sha256": "18f580c29c7dba95525027ce81c0df93b16398945cac57ef9946bcba6d7248cf",
+      "size": 1797435
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mapped-state\\live-private-effects-before-save.png",
+      "sha256": "3712c632f7f975130e985487060975d984d10e6c4b807f431cedcce01d2aaf04",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mapped-state\\before-mapped-load-native-after-dash-retirement-and-input.png",
+      "sha256": "b0951915d392e65e6416220c71b622009f1cd6122d956ccbb37d9a4d8a669384",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mapped-state\\before-mapped-hp-load-native-after-dash-retirement-and-input.png",
+      "sha256": "9533d9d0ce82764d893a2837c00a9ddc11d9a6b05b1cfe7e95db0e7f755197f9",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mapped-state\\before-mapped-rewind-native-after-dash-retirement-and-input.png",
+      "sha256": "ced6d4d4550b91f9685f20e9ef03926c5b67da6fc19fba74ed4fc6250a41518e",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mapped-state\\mapped-rewind-restored-live-pools.png",
+      "sha256": "8944be471234881c0f61294f22ce5247da526b4c0f108d2a7b6e711410b86cdc",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mapped-state\\after-mapped-rewind-native-after-dash-retirement-and-input.png",
+      "sha256": "c547839e309953e8cfb6bab24942722cabf5da70ef2c6e8b29c0f6d985e9acd5",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mapped-state\\before-mapped-save-0.png",
+      "sha256": "da846c868445ae4d8a01811639189ec47252d4aa70b3dd98ba984aeddcfd89a7",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mapped-state\\before-mapped-load-0.png",
+      "sha256": "eccaef22703931c8bee5a450a13591938ffac9c26e7ddab1f273f514de9aef54",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mapped-state\\before-mapped-load-1.png",
+      "sha256": "67552b4f9f6b506932f227b762c9ae8054d6f9fc453942684bf5df620734dc14",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mapped-state\\mapped-rewind-open.png",
+      "sha256": "1fa600315f81d942df66283801cd38cfde66cb189dafb61cb681f152cab36c5e",
+      "size": 338189
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mapped-state\\mapped-rewind-selected.png",
+      "sha256": "525fec4c629b9ea2c9f50e2dd485ecf316491e55e8fe71e2b99e55789e162310",
+      "size": 338189
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mmx6_coop_contact-executed-source.py",
+      "sha256": "dbcb58c53b5e1e0a7433aeb25c48beb9ae20b30c05fd11b5da60b33f40513046",
+      "size": 22689
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mmx6_coop_inventory_state-executed-source.py",
+      "sha256": "211bd23caf176328cc3a24aaeae26a44b5d0dc5e48b244c1826781e9f53f61f4",
+      "size": 6110
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "size": 29983
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "46527abb4ff87f5cbed803db726e95b0aee32a420d4b93a33e912fe1b76fa286",
+      "size": 16569
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mmx6_coop_primary_audio-executed-source.py",
+      "sha256": "891ea9c540b3190649f1f79366425b34f645b1c5b12293d5cbcf6fd4d6cbac2c",
+      "size": 19629
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mmx6_coop_state_resources-executed-source.py",
+      "sha256": "6c704a9f0800c2b10a795fc8307fb1840b67355c1b71c9367b3582d2c2cc24d7",
+      "size": 7783
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mmx6_native_contact_audio-executed-source.py",
+      "sha256": "01f28d65c97f7f886bc62856c24509c13ccb274999b74e4287238b5412e8ca94",
+      "size": 16568
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mmx6_owned_keyboard-executed-source.py",
+      "sha256": "11b07f655dd711e5cf39c36362eec796b9eb73b86702d8100e0a958a3e348402",
+      "size": 4599
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "4829fcb53086c45a2fc4198167b282a73c4e79d3e586211ff8934de168a7f49e",
+      "size": 29088
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\qualify_mmx6_coop_personal_menu-executed-source.py",
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c",
+      "size": 16934
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "eced2cb8b51c932c3a4bca24bbce5c99264aa453eb37c22e9c30f0cb2e9f5219",
+      "size": 52953
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\runner-executed-source.py",
+      "sha256": "8d25c577b00bed45b571d28885a8479b0ff0c3f100b67cfb7c90a8912c15f761",
+      "size": 6054
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\mapped-state\\invalid-internal-wire4.pst",
+      "sha256": "e1651a2636b04e02634b59fe83d6af8844515113e0eb84199ed438eb2972cf34",
+      "size": 1791469
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-paused-rewind-interior\\qualification.json",
+      "sha256": "3cb7878053a3ac90555bcaca495df730501ef47ac6aa775e48853316eb2bf161",
+      "size": 16714460
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mapped-state\\mapped-save.pst",
+      "sha256": "ba41237387dd10ab8f434f362467cc55538b60e5663475f222e3852c54f059bd",
+      "size": 1794059
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mapped-state\\inventory-load-probe.pst",
+      "sha256": "322b2116a7fded820f040d9765d0a736855283c82f0ea76b7d11784b9767425c",
+      "size": 1795335
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mapped-state\\mapped-load-probe.pst",
+      "sha256": "a7ae423d49b7d07bd088b2dafd4072a6a8caef731f7888e0a2187ecceb766a55",
+      "size": 1798923
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mapped-state\\after-invalid-probe.pst",
+      "sha256": "ba49044497e55d57ce81e41f00ff611132f1e60089818a422bf317dd71deb69f",
+      "size": 1791497
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mapped-state\\rewind-probe.pst",
+      "sha256": "85d1a8748a43096be2f0f7ce0254696460a6bdd087efd702047991efd7323b81",
+      "size": 1797848
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mapped-state\\live-private-effects-before-save.png",
+      "sha256": "4e61a220ac42ef77b7536bd7bba15995d18bab3ade48e5204f9a58b8387b978b",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mapped-state\\before-mapped-load-native-after-dash-retirement-and-input.png",
+      "sha256": "80234d956445a32cbda3818c3a9942f854d2633b2eaa4b82574f3982ff42b4a1",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mapped-state\\before-mapped-hp-load-native-after-dash-retirement-and-input.png",
+      "sha256": "15b6d4a15677f8f3dbbbab8158ccb0cffc1f0ec6464b430b2ef012f1c3bb7ec4",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mapped-state\\before-mapped-rewind-native-after-dash-retirement-and-input.png",
+      "sha256": "598b003cf99b6903048ac609a98650f5e83cf01ae072b646fb8d96356705853e",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mapped-state\\mapped-rewind-restored-live-pools.png",
+      "sha256": "f0fcc911edb23a4c1e11a63eab3d5d5c8b202acc7c15a5c16197a88a3f08b71e",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mapped-state\\after-mapped-rewind-native-after-dash-retirement-and-input.png",
+      "sha256": "15b6d4a15677f8f3dbbbab8158ccb0cffc1f0ec6464b430b2ef012f1c3bb7ec4",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mapped-state\\before-mapped-save-0.png",
+      "sha256": "da846c868445ae4d8a01811639189ec47252d4aa70b3dd98ba984aeddcfd89a7",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mapped-state\\before-mapped-load-0.png",
+      "sha256": "b4786a18b1648d30b993be400f48ef3877362b52906b8f25ceb688a57640df5f",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mapped-state\\before-mapped-load-1.png",
+      "sha256": "83194a9c5e0adea1ea04e399b724991b0fb8971951e8ac602f90802c3e16744a",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mapped-state\\mapped-rewind-open.png",
+      "sha256": "3491aebd650bdb2c0817dc4943c6007c535bb3fe6e9da775b7d55a4fd262a0fc",
+      "size": 338189
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mapped-state\\mapped-rewind-selected.png",
+      "sha256": "8b8aac5ecc66317ef7489e6ce47c698e804d3229f53208acfcccc1fc622db8df",
+      "size": 338189
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mmx6_coop_contact-executed-source.py",
+      "sha256": "dbcb58c53b5e1e0a7433aeb25c48beb9ae20b30c05fd11b5da60b33f40513046",
+      "size": 22689
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mmx6_coop_inventory_state-executed-source.py",
+      "sha256": "211bd23caf176328cc3a24aaeae26a44b5d0dc5e48b244c1826781e9f53f61f4",
+      "size": 6110
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "size": 29983
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "46527abb4ff87f5cbed803db726e95b0aee32a420d4b93a33e912fe1b76fa286",
+      "size": 16569
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mmx6_coop_primary_audio-executed-source.py",
+      "sha256": "891ea9c540b3190649f1f79366425b34f645b1c5b12293d5cbcf6fd4d6cbac2c",
+      "size": 19629
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mmx6_coop_state_resources-executed-source.py",
+      "sha256": "6c704a9f0800c2b10a795fc8307fb1840b67355c1b71c9367b3582d2c2cc24d7",
+      "size": 7783
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mmx6_native_contact_audio-executed-source.py",
+      "sha256": "01f28d65c97f7f886bc62856c24509c13ccb274999b74e4287238b5412e8ca94",
+      "size": 16568
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mmx6_owned_keyboard-executed-source.py",
+      "sha256": "11b07f655dd711e5cf39c36362eec796b9eb73b86702d8100e0a958a3e348402",
+      "size": 4599
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "4829fcb53086c45a2fc4198167b282a73c4e79d3e586211ff8934de168a7f49e",
+      "size": 29088
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\qualify_mmx6_coop_personal_menu-executed-source.py",
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c",
+      "size": 16934
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "eced2cb8b51c932c3a4bca24bbce5c99264aa453eb37c22e9c30f0cb2e9f5219",
+      "size": 52953
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\runner-executed-source.py",
+      "sha256": "8d25c577b00bed45b571d28885a8479b0ff0c3f100b67cfb7c90a8912c15f761",
+      "size": 6054
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\mapped-state\\invalid-internal-wire4.pst",
+      "sha256": "4e3f21ab594d219ea476aa0d799f27a729e75e5a43790382bf3693dae6eb0aba",
+      "size": 1788796
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-controller\\qualification.json",
+      "sha256": "a5748e81f714354569e1211872d38ac418715d05d7d893330d0f0eb673c66941",
+      "size": 16845573
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v22-f339e12-inventory-candidate\\qualification.json",
+      "sha256": "44808153be74664d815bc43394acf6b6539269381c5ff37e210ecee96787093c",
+      "size": 4097454
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v22-f339e12-inventory-candidate\\peer-0\\logs\\online-keyboard-refused-browser-gameplay.png",
+      "sha256": "f2ce9cdb9ad933e4026c7554dbb16e174b9a17421eb4ad2773acbd915ef31458",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v22-f339e12-inventory-candidate\\peer-0\\logs\\online-controller-refused-browser-gameplay.png",
+      "sha256": "65b24acdb8f7ce991686c2456061a69861c2d3fe46ce31ef0b68d43d8ba787ca",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v22-f339e12-inventory-candidate\\peer-1\\logs\\online-keyboard-refused-browser-gameplay.png",
+      "sha256": "1ab4a686eff0664cd0396e98a201c04e121af387cfbc08dee7d2b562cd4e251c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v22-f339e12-inventory-candidate\\peer-1\\logs\\online-controller-refused-browser-gameplay.png",
+      "sha256": "ef2e03a7ddc7cb0923272f8897a929a45cf98cf646e824bcbe432e59dc394470",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-first\\qualification.json",
+      "sha256": "59faa24a11a2645b912d93b6dee0f96cf2e5380db217c7b908a434305145a25c",
+      "size": 16707326
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\inventory-state-v22-f339e12-published-energy\\qualification.json",
+      "sha256": "f8320ae890c47051a87a5b4bcbd7ddfa2aa7bea6509481e01df5f1093be38558",
+      "size": 16364227
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-private-state\\manifest-bound-f339e12-inventory-resources-reviewed.json",
+      "sha256": "47f24bfc3ffd07c9a76dcfe750867640db0527027ff264c56f913d48e9f704c5",
+      "size": 174271
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mapped-state\\scene-save.pst",
+      "sha256": "cba19e5d2108c3b28cff0e4fd101d5a35ac88e2b5255bc2cff58ac24f5f94ed5",
+      "size": 1835871
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mapped-state\\mapped-scene-load-probe.pst",
+      "sha256": "9c51534f25e10f1334860a3e4f3e8ea449cd9abd63a4b24ee20ceae2b2207104",
+      "size": 1835104
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mapped-state\\mapped-scene-rewind-probe.pst",
+      "sha256": "55ce091a5fd33656d2ec060a972f9047f42a74abe00a9cb7d52b33cf5387839d",
+      "size": 1840489
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mapped-state\\native-scene-owned.png",
+      "sha256": "8daea1b3e8cdab1d075c3ef7ff48efb2787e2fdc80ba8a3ab99846f456798985",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mapped-state\\before-scene-load-native-return.png",
+      "sha256": "299d0ae4ba7c3ce15559e7b245b96eaef99ba2ed59f6061bf7fa0fc17fef5ffe",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mapped-state\\before-scene-rewind-native-return.png",
+      "sha256": "3527559bc6a2c482867e4a9193049b7c711786754b5a416bfa0f79a0f8d209a6",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mapped-state\\after-scene-rewind-native-return.png",
+      "sha256": "5b5dff2788953bc1d59d2cb8c0df035d02351a1d9731739000ab679a14eb7648",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mapped-state\\before-mapped-save-0.png",
+      "sha256": "da846c868445ae4d8a01811639189ec47252d4aa70b3dd98ba984aeddcfd89a7",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mapped-state\\before-mapped-load-0.png",
+      "sha256": "81362a30704fe039880f91454cab608e075f66fd60b476bc8f18527dc375bc7e",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mapped-state\\scene-rewind-selected.png",
+      "sha256": "66247c5f38593af4384e7e38eb76ab121be3e0a7001acb7336eb2591821c7c90",
+      "size": 338189
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mmx6_coop_contact-executed-source.py",
+      "sha256": "dbcb58c53b5e1e0a7433aeb25c48beb9ae20b30c05fd11b5da60b33f40513046",
+      "size": 22689
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mmx6_coop_inventory_state-executed-source.py",
+      "sha256": "211bd23caf176328cc3a24aaeae26a44b5d0dc5e48b244c1826781e9f53f61f4",
+      "size": 6110
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "size": 29983
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "46527abb4ff87f5cbed803db726e95b0aee32a420d4b93a33e912fe1b76fa286",
+      "size": 16569
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mmx6_coop_primary_audio-executed-source.py",
+      "sha256": "891ea9c540b3190649f1f79366425b34f645b1c5b12293d5cbcf6fd4d6cbac2c",
+      "size": 19629
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mmx6_coop_scene_state-executed-source.py",
+      "sha256": "a6f3597d56c31d9c9ead7aa44ce068f567f184301d770aea4f242d2536d18337",
+      "size": 12309
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mmx6_coop_state_resources-executed-source.py",
+      "sha256": "6c704a9f0800c2b10a795fc8307fb1840b67355c1b71c9367b3582d2c2cc24d7",
+      "size": 7783
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mmx6_native_contact_audio-executed-source.py",
+      "sha256": "01f28d65c97f7f886bc62856c24509c13ccb274999b74e4287238b5412e8ca94",
+      "size": 16568
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\mmx6_owned_keyboard-executed-source.py",
+      "sha256": "11b07f655dd711e5cf39c36362eec796b9eb73b86702d8100e0a958a3e348402",
+      "size": 4599
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "4829fcb53086c45a2fc4198167b282a73c4e79d3e586211ff8934de168a7f49e",
+      "size": 29088
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\qualify_mmx6_coop_personal_menu-executed-source.py",
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c",
+      "size": 16934
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "eced2cb8b51c932c3a4bca24bbce5c99264aa453eb37c22e9c30f0cb2e9f5219",
+      "size": 52953
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\runner-executed-source.py",
+      "sha256": "9feab97e56e5a47b359b6bdfe39ead5c32394ff6cc503dea0fc993ccf9ea0cf4",
+      "size": 6825
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-released\\qualification.json",
+      "sha256": "f34f5d39736d958b57820ee0652e5faddaed283ff6b3fd6988aeeed26c5f2d8d",
+      "size": 14858550
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mapped-state\\scene-save.pst",
+      "sha256": "cd707c414cfe3e7d6ee1737ac7b46240b0604af8ad3ddeea03f02580aef8cf76",
+      "size": 1832175
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mapped-state\\mapped-scene-load-probe.pst",
+      "sha256": "f1a2a14dcf8215abba7444ec42df925b45e4fd8e68217dabf6fe019cc365c743",
+      "size": 1826462
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mapped-state\\mapped-scene-rewind-probe.pst",
+      "sha256": "380d9ae5836dd921eb5e4b2fc07d7666eaad6c329ee49970f41141f86531f7c1",
+      "size": 1829616
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mapped-state\\native-scene-owned.png",
+      "sha256": "c71e3c05c1030f27fbf7805f27b7aa3ca4f4974553c30ed1e6dfe49afd184739",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mapped-state\\before-scene-load-native-return.png",
+      "sha256": "09509efe093f0fa072ad66fa16ab153258684d32fa9beb32ce7adb3c74f21b6b",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mapped-state\\before-scene-rewind-native-return.png",
+      "sha256": "ed2a93605ab3c56b938fcbe7dac658f51c0ec83d4c22b62af945dc2eccb721b3",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mapped-state\\after-scene-rewind-native-return.png",
+      "sha256": "f063c73606536a81c46fec1908e68a8e78ef5af7e2769de9c7d27b9c8c618965",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mapped-state\\before-mapped-save-0.png",
+      "sha256": "da846c868445ae4d8a01811639189ec47252d4aa70b3dd98ba984aeddcfd89a7",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mapped-state\\before-mapped-load-0.png",
+      "sha256": "b64c7b6968b6afc99980a18296d5f8bca65e52fbb9215a5ec37a3f9fe855045b",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mapped-state\\scene-rewind-selected.png",
+      "sha256": "65fcf29c2eebecfc98e860d0ee6d0d1dc94fdd3fdcb778a5dbd7017d633a7fcc",
+      "size": 338189
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mmx6_coop_contact-executed-source.py",
+      "sha256": "dbcb58c53b5e1e0a7433aeb25c48beb9ae20b30c05fd11b5da60b33f40513046",
+      "size": 22689
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mmx6_coop_inventory_state-executed-source.py",
+      "sha256": "211bd23caf176328cc3a24aaeae26a44b5d0dc5e48b244c1826781e9f53f61f4",
+      "size": 6110
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "size": 29983
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "46527abb4ff87f5cbed803db726e95b0aee32a420d4b93a33e912fe1b76fa286",
+      "size": 16569
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mmx6_coop_primary_audio-executed-source.py",
+      "sha256": "891ea9c540b3190649f1f79366425b34f645b1c5b12293d5cbcf6fd4d6cbac2c",
+      "size": 19629
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mmx6_coop_scene_state-executed-source.py",
+      "sha256": "a6f3597d56c31d9c9ead7aa44ce068f567f184301d770aea4f242d2536d18337",
+      "size": 12309
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mmx6_coop_state_resources-executed-source.py",
+      "sha256": "6c704a9f0800c2b10a795fc8307fb1840b67355c1b71c9367b3582d2c2cc24d7",
+      "size": 7783
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mmx6_native_contact_audio-executed-source.py",
+      "sha256": "01f28d65c97f7f886bc62856c24509c13ccb274999b74e4287238b5412e8ca94",
+      "size": 16568
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\mmx6_owned_keyboard-executed-source.py",
+      "sha256": "11b07f655dd711e5cf39c36362eec796b9eb73b86702d8100e0a958a3e348402",
+      "size": 4599
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "4829fcb53086c45a2fc4198167b282a73c4e79d3e586211ff8934de168a7f49e",
+      "size": 29088
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\qualify_mmx6_coop_personal_menu-executed-source.py",
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c",
+      "size": 16934
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "eced2cb8b51c932c3a4bca24bbce5c99264aa453eb37c22e9c30f0cb2e9f5219",
+      "size": 52953
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\runner-executed-source.py",
+      "sha256": "9feab97e56e5a47b359b6bdfe39ead5c32394ff6cc503dea0fc993ccf9ea0cf4",
+      "size": 6825
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-x-controller\\qualification.json",
+      "sha256": "a39496c719543b953fa3f50793f97505605a7bd975b45d886da262b49cfcb40f",
+      "size": 15938524
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-keyboard\\qualification.json",
+      "sha256": "11acd6fe7b459b89fbbd3ebf40b5fd95b93f88e07e670abbc06cf58a03ce0a72",
+      "size": 13376715
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-native-lock\\qualification.json",
+      "sha256": "674009cea8f907008bd96adad4a6d0c5feb08ad5347ac5e0ec639afc7d3fa248",
+      "size": 2142655
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-settled\\qualification.json",
+      "sha256": "5c737c76c7066f8200389131888b886df191cf05a0803ffdc79f72f7680ab7ab",
+      "size": 10460700
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-live-animation\\qualification.json",
+      "sha256": "a7a4f86cd06bc38de58d8ae75908b079a77e32ab04278bdcfb5ec9906ba29b24",
+      "size": 1797991
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-retained-history\\qualification.json",
+      "sha256": "8662a33af28c56dbded8af2710404ff58c11085880f33d7814b21e0e31c1467f",
+      "size": 5701813
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scene-state-v22-f339e12-zero-context\\qualification.json",
+      "sha256": "58c6eceb40dab8efe681916106a4c63c73d2748129ecb6862ff8af2712c00ef6",
+      "size": 5641095
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v22-f339e12\\python-validation-scene.txt",
+      "sha256": "9ef2bb0cde4255a9964a6eb9b411792e5a0d903e01a28d224b0472c04da82d2e",
+      "size": 503
+    }
+  ]
+}

@@ -4797,13 +4797,13 @@
           "src/mods/mmx6_coop_plugin.c:diagnostics",
           "src/mods/mmx6_coop_plugin.c:diagnostic_setup"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "passed"
         },
         "evidence": [
@@ -5261,9 +5261,48 @@
             },
             "action": "Revalidate current native image/profile with both peers and actual keyboard/controller refusals plus12second live windows.",
             "outcome": "Both peers5/5 checks;8 completed entry refusals,4 backend refusals, four12second windows,719-721 resolved ticks and720-721 native ticks.53 distinct matching resolved CRC samples,30 after refusal routes. Normal owned cleanup and private cards unchanged."
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "f339e1236e71aa172af9ea234b719baa0e4efbf2",
+            "build_identity": {
+              "exe_sha256": "be394703993ba902f77e7d2f0f5f351e6a78afac3aa60886324e35fc804420a2",
+              "manifest_sha256": "519b22de4c8cc3655cbaac37d36524c24943a34dc467bd477e720be99b606a61",
+              "compiled_source_commit": "f339e1236e71aa172af9ea234b719baa0e4efbf2",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "08b5e72a9ac6cec1de7bf317ebe03f6270cb78f7"
+            },
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-private-state\\manifest-bound-f339e12-f33-scenes-reviewed.json",
+                "sha256": "ad889bee0b9fda0d8ad84d6d2c2d572dab5a4202a1cd7cee8ddde8d00d834789"
+              }
+            ],
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "routes": [
+                "Zero scene owner/Win32 keyboard",
+                "X scene owner/published controller"
+              ],
+              "audio": "emulated, muted dummy output"
+            },
+            "action": "Use original native script lock/release helpers as an explicit authored-trigger prerequisite bypass. Save nonzero ownership, release/finish native scene, restore via actual mapped load and rewind, then finish scene and exercise independent input for both actors.",
+            "outcome": "Both owners pass6 checks each. Four native provider probes independently verify20 mapped-load or18 rewind comparisons plus byte-exact retained scene records. Normal native continuation and independent P1/P2 movement pass after each final rewind. Both processes exit0 normally and existing private cards are unchanged. Combined with prior55-per-route resource/private-state checks and current-image paired refusal evidence, bounded F33 local/netplay/aggregate passes.",
+            "limits": [
+              "F33 passes its bounded current-image same-machine contract. Authored doors/dialogue triggers, progression and other content rows are separate.",
+              "Inventory acquisition and authored scene trigger are explicitly bypassed prerequisites through original native helpers; no HP/ammo/selection/ownership/restoration outcomes are written by observers.",
+              "Owner native scene animation advances between operations; the owner animated pose is not compared as a frozen frame. Rewind selects a later scene instant, so its sprite cache is not compared with the earlier manual save. Full non-actor host context, scene record, pools, passenger body, input and resources are checked. Separate paused private-state cases retain all17 exact provider comparisons.",
+              "X/P1 + Zero/P2 intro on this exact Windows image/profile only. Physical devices, other hosts/OS/CPUs deferred. Active-voice/nonzero-priority rewind and ordered recording through rewind remain unverified.",
+              "Native cards preserved; current-build invalid provider rejection qualified. Backward save-state migration is not required. Production103 CTests pass with lab/debug OFF; native evidence is from development image."
+            ],
+            "bypasses": [
+              "Authored scene trigger bypassed through original D308/D330 helpers, not ownership/result writes. Earned inventory acquisition bypass is described in the preceding receipt."
+            ]
           }
         ],
-        "limitations": "Native HP, ammo and selection now genuinely diverge and restore through both local mapped UI routes (55 checks each), with current-build malformed-state rejection and full provider comparisons. Same-image netplay refusal policy requalified. F33 remains unverified only pending the explicit nonzero scene-owner state check; authored progression remains separate."
+        "limitations": "F33 bounded current-image same-host contract passed: both actual local control routes restore both actors, genuinely changed HP/ammo/selections, private pools and input history; both nonzero scene owners restore and continue with independent input. Current-build malformed providers safely rejected. Both netplay peers refuse unsupported state/rewind without freezing, with resolved CRC and live progress evidence. Original acquisition/authored scene trigger prerequisites explicitly bypassed. Physical hardware, other hosts/OS/CPUs, active voices/nonzero priorities and authored progression remain separate."
       }
     },
     {
