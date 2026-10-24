@@ -1,0 +1,831 @@
+{
+  "schema": 1,
+  "kind": "reviewed_native_off_X_Zero_jump_and_attack_audio_reference",
+  "mode": "local",
+  "result": "unverified",
+  "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+  "build_identity": {
+    "exe_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+    "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+    "compiled_source_commit": "22ea525bbc52b5177f501989fedc5873ef30099c",
+    "sdk_commit": "09e8673435c73e516b420e6c13bb11f02dc8aaea"
+  },
+  "settings": {
+    "coop": false,
+    "all_staged_features": false,
+    "offline": true,
+    "muted": "SDL_AUDIODRIVER=dummy",
+    "references": "separate fresh native Falcon X/P1 and ordinary Zero/P1 profiles",
+    "input": "original debug NativePad P1 held inputs; no physical-controller or published-host qualification",
+    "rewind": false,
+    "loader": "default OpenBIOS/HLE authentic1x",
+    "source_cards": false
+  },
+  "action": "Disable every staged feature before process creation, source/image/manifest bind both native profiles, use original inputs for ground jumps and standing Square attacks, read native hardware samples and driver fields, compare the retained co-op source samples and finish owned natural Quit.",
+  "outcome": {
+    "native_references": [
+      {
+        "character": "X",
+        "profile": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-source-child\\candidate",
+        "stage": 0,
+        "checks": {
+          "real_coop_disabled": true,
+          "offline": true,
+          "native_character_confirmed": true,
+          "source_matched_banks": true,
+          "bounded_jump_attack_reference_actions": true,
+          "native_jump_vocal_observed": true
+        },
+        "banks": [
+          {
+            "group": 1,
+            "start": 142720,
+            "bytes": 182064,
+            "sha256": "4d34d0ff6e09dd9c764391583aeda4cb4f5a46e35e92a916b56b221f7da30c7f",
+            "matches_source": true
+          },
+          {
+            "group": 3,
+            "start": 324784,
+            "bytes": 52608,
+            "sha256": "fb80f7b0876285bd166c8bc56a9f1dda9298ebebbd05248aaf81fa89100a9a58",
+            "matches_source": true
+          }
+        ],
+        "mod_state_semantic_sha256": "f5c5e7ef82397a6dd2840a7d57bb4de17f5f4433596bcb1ace138fc4e770e1e2",
+        "actual_mod_state_sha256": "307c65254f168785d2b9caf1553b5a03e0cd63d26351db4e795339bca7896d6c",
+        "private_voices_unreserved": true,
+        "cases": [
+          {
+            "label": "ground_jump",
+            "attempt": 1,
+            "status": "bounded_source_matched_reference",
+            "checks": {
+              "source_matched_body_audio": true,
+              "original_input_observed": true,
+              "returned_to_ground_idle": true,
+              "stable_native_driver": true,
+              "living_health_preserved": true
+            },
+            "observations": 26,
+            "trace_entries": 3,
+            "exact_sound_matches": [
+              {
+                "group": 3,
+                "record": 3,
+                "voice": 20,
+                "sha256": "df2849a939d2df5955dffd6b9110938c05a5bf3703393f4ba0a174096c74f250",
+                "pitch": 1144,
+                "adsr_lo": 33023,
+                "adsr_hi": 8128,
+                "queued_engine_frames": 1,
+                "actor_attribution": "original_PLAYER_body_SOUND",
+                "lifetime": {
+                  "disposition": "natural_end",
+                  "terminal": {
+                    "seq": 198,
+                    "frame": 3463,
+                    "kind": "END_STOP",
+                    "v": 20,
+                    "addr": 331216,
+                    "pitch": 1144,
+                    "adsr_lo": 33023,
+                    "adsr_hi": 8128,
+                    "vol_l": 10157,
+                    "vol_r": 8544,
+                    "sample_bank": 0
+                  },
+                  "engine_frames": 16
+                },
+                "exact_sound_record_identity": true
+              },
+              {
+                "group": 1,
+                "record": 1,
+                "voice": 22,
+                "sha256": "23d6df9f6f33018436d56f5a8c53d244e11fbf99e334f5edfc052e168dd32112",
+                "pitch": 1448,
+                "adsr_lo": 33023,
+                "adsr_hi": 8128,
+                "queued_engine_frames": 1,
+                "actor_attribution": "original_PLAYER_body_SOUND",
+                "lifetime": {
+                  "disposition": "replaced",
+                  "terminal": {
+                    "seq": 197,
+                    "frame": 3459,
+                    "kind": "KEYON",
+                    "v": 22,
+                    "addr": 220304,
+                    "pitch": 1024,
+                    "adsr_lo": 33023,
+                    "adsr_hi": 8128,
+                    "vol_l": 9167,
+                    "vol_r": 6838,
+                    "sample_bank": 0
+                  },
+                  "engine_frames": 10
+                },
+                "exact_sound_record_identity": true
+              },
+              {
+                "group": 1,
+                "record": 2,
+                "voice": 22,
+                "sha256": "cfcfa90cff1f0fbbd7be536106c2a3108298bf0a32b6a287dc2bcd8cd346d50f",
+                "pitch": 1024,
+                "adsr_lo": 33023,
+                "adsr_hi": 8128,
+                "queued_engine_frames": 1,
+                "actor_attribution": "original_PLAYER_body_SOUND",
+                "lifetime": {
+                  "disposition": "natural_end",
+                  "terminal": {
+                    "seq": 199,
+                    "frame": 3482,
+                    "kind": "END_STOP",
+                    "v": 22,
+                    "addr": 220320,
+                    "pitch": 1024,
+                    "adsr_lo": 33023,
+                    "adsr_hi": 8128,
+                    "vol_l": 9167,
+                    "vol_r": 6838,
+                    "sample_bank": 0
+                  },
+                  "engine_frames": 23
+                },
+                "exact_sound_record_identity": true
+              }
+            ],
+            "sample_only": [],
+            "limits": []
+          },
+          {
+            "label": "standing_square_attack",
+            "attempt": null,
+            "status": "bounded_source_matched_reference",
+            "checks": {
+              "source_matched_body_audio": true,
+              "original_input_observed": true,
+              "returned_to_ground_idle": true,
+              "stable_native_driver": true,
+              "living_health_preserved": true
+            },
+            "observations": 26,
+            "trace_entries": 5,
+            "exact_sound_matches": [
+              {
+                "group": 1,
+                "record": 8,
+                "voice": 21,
+                "sha256": "d11a903e4b869160cdd39f86239546da8bb826a8e1472f5b37b565e8211e8c66",
+                "pitch": 1525,
+                "adsr_lo": 33023,
+                "adsr_hi": 8128,
+                "queued_engine_frames": 1,
+                "actor_attribution": "source_guarded_native_X_buster_initializer_same_frame_same_actor",
+                "lifetime": {
+                  "disposition": "natural_end",
+                  "terminal": {
+                    "seq": 201,
+                    "frame": 3548,
+                    "kind": "END_STOP",
+                    "v": 21,
+                    "addr": 148848,
+                    "pitch": 1525,
+                    "adsr_lo": 33023,
+                    "adsr_hi": 8128,
+                    "vol_l": 10157,
+                    "vol_r": 10157,
+                    "sample_bank": 0
+                  },
+                  "engine_frames": 18
+                },
+                "exact_sound_record_identity": true
+              }
+            ],
+            "sample_only": [],
+            "limits": []
+          }
+        ],
+        "bypasses": [],
+        "native_cards": {
+          "before": {},
+          "after": {
+            "card1.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+            "card2.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          "preserved": true
+        },
+        "cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        "tools": {
+          "mmx6_native_zero_reference.py": "26f58a78d6f6ea97a0d5d8b84915716be6964f898765570ced62fafaec9c3fb5",
+          "mmx6_coop_jump_audio.py": "66166703568cc6037c3bc0c5cbd1ec0c91e63e976c1d47317860d916f757c8a0",
+          "audit_mmx6_private_action_audio.py": "4b07514dcba079b98332c8ac95e4de477d83f6dfae358c864a5fbf3e14010d79",
+          "qualify_mmx6_coop_jump_audio.py": "53b50d95a3c86e26467a03e85f0b08cecaa0497c18b8c74c59e47f5bf3c5c81f",
+          "qualify_mmx6_coop_baseline.py": "b2e0d0195544e78ae175e9f591db33da791b4bdd2f14703d63561989e20b76f8",
+          "qualify_mmx6_native_audio.py": "d58cab610b6cb655d82bd23b84800ac0200a82b4845d9ee1cd5d817de217eb85"
+        }
+      },
+      {
+        "character": "Zero",
+        "profile": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\candidate",
+        "stage": 1,
+        "checks": {
+          "real_coop_disabled": true,
+          "offline": true,
+          "native_character_confirmed": true,
+          "source_matched_banks": true,
+          "bounded_jump_attack_reference_actions": true,
+          "native_jump_vocal_observed": true
+        },
+        "banks": [
+          {
+            "group": 1,
+            "start": 142720,
+            "bytes": 123408,
+            "sha256": "425516420dc6ff1d973edae265717a6ca237454631cdb4b7c829c96f6f7057a8",
+            "matches_source": true
+          },
+          {
+            "group": 3,
+            "start": 266128,
+            "bytes": 52096,
+            "sha256": "203c8e0e58ea4e55797445b7af76e7563528c21536ae8fd57e38566a89b38bdd",
+            "matches_source": true
+          }
+        ],
+        "mod_state_semantic_sha256": "f5c5e7ef82397a6dd2840a7d57bb4de17f5f4433596bcb1ace138fc4e770e1e2",
+        "actual_mod_state_sha256": "307c65254f168785d2b9caf1553b5a03e0cd63d26351db4e795339bca7896d6c",
+        "private_voices_unreserved": true,
+        "cases": [
+          {
+            "label": "ground_jump",
+            "attempt": 1,
+            "status": "bounded_source_matched_reference",
+            "checks": {
+              "source_matched_character_samples": true,
+              "original_input_observed": true,
+              "returned_to_ground_idle": true,
+              "stable_native_driver": true,
+              "living_health_preserved": true
+            },
+            "observations": 23,
+            "trace_entries": 1,
+            "exact_sound_matches": [
+              {
+                "group": 1,
+                "record": 2,
+                "voice": 22,
+                "sha256": "948ac829822ab47a4c0db7065047f1946ae30d67230c6732d81ff1f70e14a74d",
+                "pitch": 1024,
+                "adsr_lo": 33023,
+                "adsr_hi": 8128,
+                "queued_engine_frames": 1,
+                "actor_attribution": "original_PLAYER_body_SOUND",
+                "lifetime": {
+                  "disposition": "natural_end",
+                  "terminal": {
+                    "seq": 435,
+                    "frame": 6638,
+                    "kind": "END_STOP",
+                    "v": 22,
+                    "addr": 195120,
+                    "pitch": 1024,
+                    "adsr_lo": 33023,
+                    "adsr_hi": 8128,
+                    "vol_l": 11198,
+                    "vol_r": 11198,
+                    "sample_bank": 0
+                  },
+                  "engine_frames": 17
+                },
+                "exact_sound_record_identity": true
+              }
+            ],
+            "sample_only": [],
+            "limits": []
+          },
+          {
+            "label": "ground_jump",
+            "attempt": 2,
+            "status": "bounded_source_matched_reference",
+            "checks": {
+              "source_matched_character_samples": true,
+              "original_input_observed": true,
+              "returned_to_ground_idle": true,
+              "stable_native_driver": true,
+              "living_health_preserved": true
+            },
+            "observations": 27,
+            "trace_entries": 3,
+            "exact_sound_matches": [
+              {
+                "group": 3,
+                "record": 4,
+                "voice": 20,
+                "sha256": "326c986761f6b3808e7eade99e77bf95f2dae6124559377f75971550aa53b4d9",
+                "pitch": 1144,
+                "adsr_lo": 33023,
+                "adsr_hi": 8128,
+                "queued_engine_frames": 1,
+                "actor_attribution": "original_PLAYER_body_SOUND",
+                "lifetime": {
+                  "disposition": "natural_end",
+                  "terminal": {
+                    "seq": 438,
+                    "frame": 6706,
+                    "kind": "END_STOP",
+                    "v": 20,
+                    "addr": 272960,
+                    "pitch": 1144,
+                    "adsr_lo": 33023,
+                    "adsr_hi": 8128,
+                    "vol_l": 10157,
+                    "vol_r": 10157,
+                    "sample_bank": 0
+                  },
+                  "engine_frames": 12
+                },
+                "exact_sound_record_identity": true
+              },
+              {
+                "group": 1,
+                "record": 1,
+                "voice": 22,
+                "sha256": "003fb81cc12e8f6d70af3c2853de826f9974879a777c79a77bc60cfa1568a81e",
+                "pitch": 1525,
+                "adsr_lo": 33023,
+                "adsr_hi": 8128,
+                "queued_engine_frames": 1,
+                "actor_attribution": "original_PLAYER_body_SOUND",
+                "lifetime": {
+                  "disposition": "replaced",
+                  "terminal": {
+                    "seq": 439,
+                    "frame": 6709,
+                    "kind": "KEYON",
+                    "v": 22,
+                    "addr": 195104,
+                    "pitch": 1024,
+                    "adsr_lo": 33023,
+                    "adsr_hi": 8128,
+                    "vol_l": 11198,
+                    "vol_r": 11198,
+                    "sample_bank": 0
+                  },
+                  "engine_frames": 13
+                },
+                "exact_sound_record_identity": true
+              },
+              {
+                "group": 1,
+                "record": 2,
+                "voice": 22,
+                "sha256": "948ac829822ab47a4c0db7065047f1946ae30d67230c6732d81ff1f70e14a74d",
+                "pitch": 1024,
+                "adsr_lo": 33023,
+                "adsr_hi": 8128,
+                "queued_engine_frames": 1,
+                "actor_attribution": "original_PLAYER_body_SOUND",
+                "lifetime": {
+                  "disposition": "natural_end",
+                  "terminal": {
+                    "seq": 440,
+                    "frame": 6726,
+                    "kind": "END_STOP",
+                    "v": 22,
+                    "addr": 195120,
+                    "pitch": 1024,
+                    "adsr_lo": 33023,
+                    "adsr_hi": 8128,
+                    "vol_l": 11198,
+                    "vol_r": 11198,
+                    "sample_bank": 0
+                  },
+                  "engine_frames": 17
+                },
+                "exact_sound_record_identity": true
+              }
+            ],
+            "sample_only": [],
+            "limits": []
+          },
+          {
+            "label": "standing_square_attack",
+            "attempt": null,
+            "status": "bounded_source_matched_reference",
+            "checks": {
+              "source_matched_character_samples": true,
+              "original_input_observed": true,
+              "returned_to_ground_idle": true,
+              "stable_native_driver": true,
+              "living_health_preserved": true
+            },
+            "observations": 24,
+            "trace_entries": 1,
+            "exact_sound_matches": [
+              {
+                "group": 3,
+                "record": 3,
+                "voice": 20,
+                "sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+                "pitch": 1144,
+                "adsr_lo": 33023,
+                "adsr_hi": 8128,
+                "queued_engine_frames": 1,
+                "actor_attribution": "original_PLAYER_body_SOUND",
+                "lifetime": {
+                  "disposition": "natural_end",
+                  "terminal": {
+                    "seq": 443,
+                    "frame": 6791,
+                    "kind": "END_STOP",
+                    "v": 20,
+                    "addr": 271392,
+                    "pitch": 1144,
+                    "adsr_lo": 33023,
+                    "adsr_hi": 8128,
+                    "vol_l": 10157,
+                    "vol_r": 10157,
+                    "sample_bank": 0
+                  },
+                  "engine_frames": 14
+                },
+                "exact_sound_record_identity": true
+              }
+            ],
+            "sample_only": [
+              {
+                "voice": 23,
+                "sha256": "fed7bfff83b8e45b286ce7831981f2e8ce65a9e80ad3c0d63ec258c59630cf22",
+                "record_candidates": [
+                  {
+                    "group": 1,
+                    "record": 7,
+                    "effective_bank_group": 1,
+                    "program": 0,
+                    "tone": 8
+                  }
+                ],
+                "pitch": 1525,
+                "adsr_lo": 33023,
+                "adsr_hi": 8128,
+                "actor_attribution": "unverified; waveform only within original-input action window",
+                "exact_sound_record_identity": false,
+                "lifetime": {
+                  "disposition": "natural_end",
+                  "terminal": {
+                    "seq": 444,
+                    "frame": 6803,
+                    "kind": "END_STOP",
+                    "v": 23,
+                    "addr": 176480,
+                    "pitch": 1525,
+                    "adsr_lo": 33023,
+                    "adsr_hi": 8128,
+                    "vol_l": 13433,
+                    "vol_r": 13433,
+                    "sample_bank": 0
+                  },
+                  "engine_frames": 26
+                }
+              }
+            ],
+            "limits": [
+              "Native Saber SFX waveform/numeric DSP match records1/7 and1/8's shared sample; exact SOUND record/caller remains unverified."
+            ]
+          }
+        ],
+        "bypasses": [
+          {
+            "address": "0x800ccf2f",
+            "before": 1,
+            "after": 17,
+            "reason": "private Zero availability bit10"
+          },
+          {
+            "address": "0x800cced1",
+            "before": 0,
+            "after": 0,
+            "reason": "native screen phase initialization"
+          },
+          {
+            "address": "0x800cced2",
+            "before": 0,
+            "after": 0,
+            "reason": "native screen subphase initialization"
+          },
+          {
+            "address": "0x800cced0",
+            "before": 10,
+            "after": 2,
+            "reason": "native screen2 loader prerequisite"
+          }
+        ],
+        "native_cards": {
+          "before": {},
+          "after": {
+            "card1.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+            "card2.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          "preserved": true
+        },
+        "cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        "tools": {
+          "mmx6_native_zero_reference.py": "26f58a78d6f6ea97a0d5d8b84915716be6964f898765570ced62fafaec9c3fb5",
+          "mmx6_coop_jump_audio.py": "66166703568cc6037c3bc0c5cbd1ec0c91e63e976c1d47317860d916f757c8a0",
+          "audit_mmx6_private_action_audio.py": "4b07514dcba079b98332c8ac95e4de477d83f6dfae358c864a5fbf3e14010d79",
+          "qualify_mmx6_coop_jump_audio.py": "53b50d95a3c86e26467a03e85f0b08cecaa0497c18b8c74c59e47f5bf3c5c81f",
+          "qualify_mmx6_coop_baseline.py": "b2e0d0195544e78ae175e9f591db33da791b4bdd2f14703d63561989e20b76f8",
+          "qualify_mmx6_native_audio.py": "15bfff4202b0c958e4d685342ccf51a22c2942a18a641cc4d1cdaeb995e25161"
+        }
+      }
+    ],
+    "co_op_sample_comparisons": [
+      {
+        "character": "X",
+        "group": 3,
+        "record": 3,
+        "peer": 0,
+        "co_op_mode": "paired delay",
+        "sha256": "df2849a939d2df5955dffd6b9110938c05a5bf3703393f4ba0a174096c74f250",
+        "sample_identity_equal": true,
+        "numeric_DSP_equal": true,
+        "native_voice": 20,
+        "co_op_voice": 20,
+        "native_lifetime_engine_frames": 16,
+        "co_op_lifetime_engine_frames": 15,
+        "scope": "Sample identity/numeric DSP comparison; one-frame playback phase difference does not establish PCM/timing equality."
+      },
+      {
+        "character": "X",
+        "group": 3,
+        "record": 3,
+        "peer": 1,
+        "co_op_mode": "paired delay",
+        "sha256": "df2849a939d2df5955dffd6b9110938c05a5bf3703393f4ba0a174096c74f250",
+        "sample_identity_equal": true,
+        "numeric_DSP_equal": true,
+        "native_voice": 20,
+        "co_op_voice": 20,
+        "native_lifetime_engine_frames": 16,
+        "co_op_lifetime_engine_frames": 15,
+        "scope": "Sample identity/numeric DSP comparison; one-frame playback phase difference does not establish PCM/timing equality."
+      },
+      {
+        "character": "Zero",
+        "group": 3,
+        "record": 4,
+        "peer": 0,
+        "co_op_mode": "paired delay",
+        "sha256": "326c986761f6b3808e7eade99e77bf95f2dae6124559377f75971550aa53b4d9",
+        "sample_identity_equal": true,
+        "numeric_DSP_equal": true,
+        "native_voice": 20,
+        "co_op_voice": 44,
+        "native_lifetime_engine_frames": 12,
+        "co_op_lifetime_engine_frames": 11,
+        "scope": "Sample identity/numeric DSP comparison; one-frame playback phase difference does not establish PCM/timing equality."
+      },
+      {
+        "character": "Zero",
+        "group": 3,
+        "record": 4,
+        "peer": 1,
+        "co_op_mode": "paired delay",
+        "sha256": "326c986761f6b3808e7eade99e77bf95f2dae6124559377f75971550aa53b4d9",
+        "sample_identity_equal": true,
+        "numeric_DSP_equal": true,
+        "native_voice": 20,
+        "co_op_voice": 44,
+        "native_lifetime_engine_frames": 12,
+        "co_op_lifetime_engine_frames": 11,
+        "scope": "Sample identity/numeric DSP comparison; one-frame playback phase difference does not establish PCM/timing equality."
+      },
+      {
+        "character": "Zero",
+        "group": 3,
+        "record": 3,
+        "co_op_mode": "local",
+        "sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+        "sample_identity_equal": true,
+        "numeric_DSP_equal": true,
+        "native_exact_sound_record_identity": true,
+        "native_voice": 20,
+        "co_op_voice": 44,
+        "native_lifetime_engine_frames": 14,
+        "co_op_lifetime_engine_frames": 14,
+        "scope": "Independent native Zero/P1 vs private Zero/P2 Saber vocal source identity."
+      },
+      {
+        "character": "Zero",
+        "group": 1,
+        "record": 7,
+        "co_op_mode": "local",
+        "sha256": "fed7bfff83b8e45b286ce7831981f2e8ce65a9e80ad3c0d63ec258c59630cf22",
+        "sample_identity_equal": true,
+        "numeric_DSP_equal": true,
+        "native_exact_sound_record_identity": false,
+        "native_voice": 23,
+        "co_op_voice": 47,
+        "native_lifetime_engine_frames": 26,
+        "co_op_lifetime_engine_frames": 27,
+        "scope": "Waveform/numeric DSP only; native Saber SFX SOUND entry is unobserved and exact caller/record attribution remains unverified."
+      }
+    ],
+    "checks": {
+      "all_native_reference_bank_hashes_match": true,
+      "both_native_jump_vocals_observed": true,
+      "source_matched_native_X_buster": true,
+      "source_matched_native_Zero_saber_vocal": true,
+      "native_Zero_saber_SFX_waveform_and_numeric_DSP": true,
+      "all_six_retained_native_vs_co_op_sample_comparisons_match": true,
+      "both_owned_processes_natural_exit0": true,
+      "source_cards_unused": true
+    },
+    "exact_native_Zero_saber_SFX_SOUND_identity": "unverified",
+    "tests": {
+      "selected_python_tests": 153,
+      "passed": 153,
+      "new_native_observer_tests": 10
+    },
+    "retained_prior_attempts": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-first\\qualification.json",
+        "status": "failed_setup",
+        "observer_error": "Native jump vocal was not observed",
+        "disposition": "Retained observer/setup limitation; no game failure or broad pass inferred.",
+        "cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-natural-retry\\qualification.json",
+        "status": "failed_setup",
+        "observer_error": "No native body SOUND/sample identity in original-input reference window",
+        "disposition": "Retained observer/setup limitation; no game failure or broad pass inferred.",
+        "cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-selector\\qualification.json",
+        "status": "failed_setup",
+        "observer_error": "Native Zero Saber SFX was not observed",
+        "disposition": "Retained observer/setup limitation; no game failure or broad pass inferred.",
+        "cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-source-child\\qualification.json",
+      "sha256": "42341b86859266b18827258fbc4f49ad1e6c9344f5ed3cc40df40283e122e4ab"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-source-child\\source-records.json",
+      "sha256": "f459f98e1af825948f4b560990105540da454fbcb50e99a07a62851a8e79255c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-source-child\\audio-rpc.jsonl",
+      "sha256": "29b8bc9dad8a09de73c44480d08ba0729f498ccc4e42e9ea975f52b2973bac17"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-source-child\\qualify_mmx6_native_audio-executed-source.py",
+      "sha256": "d58cab610b6cb655d82bd23b84800ac0200a82b4845d9ee1cd5d817de217eb85"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-source-child\\stdout.log",
+      "sha256": "c0757e19ef308cef19de84ccb3b5a4f9ce4e310c13a530d5092370dc13191c5e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-source-child\\stderr.log",
+      "sha256": "b960e75b9a4fa327f79a118127056e6d3281a383ca6c0da30c5fed4ea281dff2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-source-child\\candidate\\mods\\state.toml",
+      "sha256": "307c65254f168785d2b9caf1553b5a03e0cd63d26351db4e795339bca7896d6c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-source-child\\candidate\\native-zero-reference-state.json",
+      "sha256": "9a172f79b8014c8f4c4ab2ff58b15202b35d77c994894e2fcc497d2c50297724"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-source-child\\candidate\\preparation.json",
+      "sha256": "fd213e337f327aebc2899ce81de86fb90fd0409774f4f7422e0d9eba0240d82a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\qualification.json",
+      "sha256": "153d2deef24e01d464696d4acebdf0a9cd49dfc86f6757cc00b848703c2c1c0d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\source-records.json",
+      "sha256": "cf8e85b018a48902988fc0ef6db31a677c52187297df86bfddb72f875377e963"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\audio-rpc.jsonl",
+      "sha256": "e5a4fe341f81898be8e8c8041094affe68fb3a8bc9e811bfe6c24369618b4ad6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\qualify_mmx6_native_audio-executed-source.py",
+      "sha256": "15bfff4202b0c958e4d685342ccf51a22c2942a18a641cc4d1cdaeb995e25161"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\stdout.log",
+      "sha256": "d4c50d1414a00b5b0756e6253c5c5dbde70601d3a8add57ba8bf5aa474166a5b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\stderr.log",
+      "sha256": "b960e75b9a4fa327f79a118127056e6d3281a383ca6c0da30c5fed4ea281dff2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\candidate\\mods\\state.toml",
+      "sha256": "307c65254f168785d2b9caf1553b5a03e0cd63d26351db4e795339bca7896d6c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\candidate\\native-zero-reference-state.json",
+      "sha256": "9a172f79b8014c8f4c4ab2ff58b15202b35d77c994894e2fcc497d2c50297724"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\candidate\\preparation.json",
+      "sha256": "ee3c29ff4714d8af3239557dbc7163d69c3fd2b882a8a064356a4e42258885dd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v20-22ea525-paired-first1\\qualification.json",
+      "sha256": "aa79979982b6c0b5c1036877f6ff6b19c154e68931b0176fcff2a8bf4c88c98f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v20-22ea525-paired-first0\\qualification.json",
+      "sha256": "aab27ead48e1aedfca1bf5572ca7fadf503cef1f52e1adfcbe5eb26d8b9b8d40"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-local-general-retirement-aware\\qualification.json",
+      "sha256": "d99ff9d5e74f92657136ffbc4284b5d06ff624eb4eececb5089f2b49b6c57b73"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-first\\qualification.json",
+      "sha256": "7a09d5217aeda82fc8100fa2f4b770eec03dce54a293e8338c9684b14d3ba699"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-natural-retry\\qualification.json",
+      "sha256": "882bf6201f25c52f89ebac4ae06f03adc4e431a104fd97dbb4f1b15fc402d10e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-selector\\qualification.json",
+      "sha256": "8abbcc2bfb9ec49d0d67f4fa282b477ae7108f16096b433913b2423f1486a67a"
+    }
+  ],
+  "limits": [
+    "Only native ground-jump and standing-attack references; native hurt/death references remain unverified. Full R4/R12 stay incomplete.",
+    "Native Zero availability/screen setup is a private prerequisite bypass, not earned unlock, campaign, ordinary menu entry or native-card progress.",
+    "Native Zero Saber SFX waveform/numeric DSP match the listed source metadata; an event-time SOUND entry is not present, so exact caller/record attribution remains unverified.",
+    "Hardware KEYON matching allows the same/next engine frame. Recorded co-op/native lifetimes may differ by one frame; no PCM, sample-clock or audio-output equality is claimed.",
+    "Actual simultaneous attack/hurt overlap, active STOP7, native current-build state/rewind and remaining content/actions/rosters remain unverified.",
+    "Only this image and physical Windows machine; no remote peer, other OS/CPU, cross-build compatibility, physical-input or full campaign claim."
+  ],
+  "bypasses": [
+    {
+      "character": "Zero",
+      "ordinary_progress_evidence_tainted": true,
+      "writes": [
+        {
+          "address": "0x800ccf2f",
+          "before": 1,
+          "after": 17,
+          "reason": "private Zero availability bit10"
+        },
+        {
+          "address": "0x800cced1",
+          "before": 0,
+          "after": 0,
+          "reason": "native screen phase initialization"
+        },
+        {
+          "address": "0x800cced2",
+          "before": 0,
+          "after": 0,
+          "reason": "native screen subphase initialization"
+        },
+        {
+          "address": "0x800cced0",
+          "before": 10,
+          "after": 2,
+          "reason": "native screen2 loader prerequisite"
+        }
+      ]
+    }
+  ]
+}

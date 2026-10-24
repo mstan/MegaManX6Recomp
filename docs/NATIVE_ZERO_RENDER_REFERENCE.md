@@ -5,6 +5,13 @@ Zero/P1 visual reference for comparison with private Zero/P2 dash rendering.
 The owning runner launches/stops its own process; this module does neither.
 No game/title build or native run was performed while implementing it.
 
+The selector is now exercised by `tools/qualify_mmx6_native_audio.py` in a
+separate co-op-disabled audio reference. Its retained
+[receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-native-off-jump-attack-reviewed.json)
+records the explicit availability/screen prerequisite and actual original
+menu selection. That audio run does not exercise this module's dash/trail
+renderer reducer or qualify native unlock/campaign/card progress.
+
 The reference follows the original game's ordinary player sprite/VRAM path
 inside an exactly bound recompiled image. It is not original-hardware or
 emulator qualification. It does not expose the opposite co-op roster, remove

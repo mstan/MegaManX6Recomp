@@ -768,6 +768,76 @@
               "Co-op-off native X/Zero references, active STOP7, remaining records, current-build native state/rewind, PCM/music, physical controls, other hosts/CPUs/OSes and full campaign remain unverified."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+            "build_identity": {
+              "exe_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+              "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+              "compiled_source_commit": "22ea525bbc52b5177f501989fedc5873ef30099c",
+              "sdk_commit": "09e8673435c73e516b420e6c13bb11f02dc8aaea"
+            },
+            "settings": {
+              "coop": false,
+              "all_staged_features": false,
+              "offline": true,
+              "muted": "SDL_AUDIODRIVER=dummy",
+              "references": "separate fresh native Falcon X/P1 and ordinary Zero/P1 profiles",
+              "input": "original debug NativePad P1 held inputs; no physical-controller or published-host qualification",
+              "rewind": false,
+              "loader": "default OpenBIOS/HLE authentic1x",
+              "source_cards": false
+            },
+            "action": "Disable every staged feature before process creation, source/image/manifest bind both native profiles, use original inputs for ground jumps and standing Square attacks, read native hardware samples and driver fields, compare the retained co-op source samples and finish owned natural Quit.",
+            "limits": [
+              "Only native ground-jump and standing-attack references; native hurt/death references remain unverified. Full R4/R12 stay incomplete.",
+              "Native Zero availability/screen setup is a private prerequisite bypass, not earned unlock, campaign, ordinary menu entry or native-card progress.",
+              "Native Zero Saber SFX waveform/numeric DSP match the listed source metadata; an event-time SOUND entry is not present, so exact caller/record attribution remains unverified.",
+              "Hardware KEYON matching allows the same/next engine frame. Recorded co-op/native lifetimes may differ by one frame; no PCM, sample-clock or audio-output equality is claimed.",
+              "Actual simultaneous attack/hurt overlap, active STOP7, native current-build state/rewind and remaining content/actions/rosters remain unverified.",
+              "Only this image and physical Windows machine; no remote peer, other OS/CPU, cross-build compatibility, physical-input or full campaign claim."
+            ],
+            "bypasses": [
+              {
+                "character": "Zero",
+                "ordinary_progress_evidence_tainted": true,
+                "writes": [
+                  {
+                    "address": "0x800ccf2f",
+                    "before": 1,
+                    "after": 17,
+                    "reason": "private Zero availability bit10"
+                  },
+                  {
+                    "address": "0x800cced1",
+                    "before": 0,
+                    "after": 0,
+                    "reason": "native screen phase initialization"
+                  },
+                  {
+                    "address": "0x800cced2",
+                    "before": 0,
+                    "after": 0,
+                    "reason": "native screen subphase initialization"
+                  },
+                  {
+                    "address": "0x800cced0",
+                    "before": 10,
+                    "after": 2,
+                    "reason": "native screen2 loader prerequisite"
+                  }
+                ]
+              }
+            ],
+            "outcome": "Co-op-disabled native X and Zero jump/standing-attack references now retain source-matched waveforms and numeric DSP. Six retained comparisons match the exact-image co-op samples: both peers for X3/3 and Zero3/4 jumps, local Zero3/3 Saber vocal and local Zero1/7 Saber SFX waveform. Native Zero Saber SFX event-time SOUND record/caller, native hurt/death references and the full R4/R12 families remain unverified. Zero selection uses the recorded private prerequisite bypass. Both owned native runs exit naturally0;153 selected Python tests pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-character-audio/manifest-bound-22ea525-native-off-jump-attack-reviewed.json",
+                "sha256": "e2e4e30c52c9583903ef2e9f4d75344c47888ced11045526797e5ea58fbea8d4"
+              }
+            ]
           }
         ],
         "limitations": "Historical failures remain retained. Exact 22ea525 has 27 local events/12 records, both paired jump orders, and 33 paired saber-SFX/hurt/death events per peer across 11 records. Co-op-off references, paired optional saber3/3, active STOP7 and actual attack/hurt vocal overlap remain incomplete."

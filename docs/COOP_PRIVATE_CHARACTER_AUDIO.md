@@ -12,7 +12,7 @@ alias. All 18 applicable checks pass with nine stable voice leases, eight
 ordinary contacts, preserved primary hardware registers and natural Quit exit0.
 The inactive STOP7 volume transition was obscured by source-matched death3/14
 reusing private23; it remains pending. Active STOP7, unseen records,
-co-op-off character references and full attack/hurt overlap remain unverified.
+co-op-off hurt/death references and full attack/hurt overlap remain unverified.
 The underlying native candidate is 22ea525; later
 commits changed the observer and retained evidence, not that game image.
 
@@ -32,6 +32,21 @@ and both processes exit naturally. The saber SFX is observed; its optional
 3/3 vocal was absent in this run. Inactive STOP7 is explicitly pending on both
 peers. P1 remains idle during this route, so actual attack/hurt vocal overlap
 is still required.
+
+The [co-op-disabled native references](evidence/mmx6-character-audio/manifest-bound-22ea525-native-off-jump-attack-reviewed.json)
+now retain separate offline X and Zero ground-jump and standing-attack runs on
+that exact image, with every staged feature disabled. Both original character
+banks match before and after each run. X's jump vocal and buster have exact
+source-call/sample identities; the buster requires its source-guarded initializer
+and the same child actor in the same frame. Zero's jump and Saber vocal have
+exact body-call/sample identities. Its hardware23 Saber waveform and numeric
+DSP match the original source, but the event-time SOUND entry is absent from
+the trace, so exact record/caller attribution remains unverified. The observed
+Zero/P1 jump and Saber waveforms also match the retained Zero/P2 samples.
+Zero's original selector requires the explicit private availability/screen
+prerequisite; this does not establish earned unlock, campaign or native-card
+progress. Both owned processes quit naturally with exit0. Hurt/death references,
+active STOP7, attack/hurt overlap and native state/rewind remain open.
 
 The original USA1.1 data contains 45 populated records and 47 voice entries
 across groups1/3. The resolver retains effective bank aliases, populated-program

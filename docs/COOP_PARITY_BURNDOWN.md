@@ -51,7 +51,7 @@ Ordinary Zero audio candidate 22ea525 now has a
 for 27 source-matched events across 12 original records, including corrected
 saber3/3, hurt/death and effective-bank aliases. Its 18 applicable checks pass;
 inactive STOP7 is explicitly pending after a later death sound reuses that
-voice. Active STOP7, co-op-off references and complete paired general audio remain
+voice. Active STOP7, co-op-off hurt/death references and complete paired general audio remain
 unverified. This adds bounded evidence without changing the 234 dispositions.
 
 The same exact image now also passes both paired ground-jump orders, with
@@ -59,7 +59,7 @@ The same exact image now also passes both paired ground-jump orders, with
 (15 after their audio cases). The
 [paired receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-paired-jump-orders-reviewed.json)
 retains the limited same-machine scope; full attack/hurt overlap and co-op-off
-character references are still required.
+hurt/death character references are still required.
 
 The [paired body-audio receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-paired-body-reviewed.json)
 adds 33 independently source-matched events per peer across 11 records,
@@ -69,7 +69,17 @@ processes exit naturally. Its inactive STOP7 and optional saber3/3 vocal remain
 unverified; P1 is idle during the body route. The full row dispositions remain
 unchanged.
 
-The latest frozen candidate is v19, title source a1dac26, SDK bfbfb920,
+New [co-op-disabled X/Zero reference runs](evidence/mmx6-character-audio/manifest-bound-22ea525-native-off-jump-attack-reviewed.json)
+retain source-matched native jump and standing-attack audio on candidate22ea525,
+with both original character banks unchanged. Zero's jump and Saber vocal have
+exact body-call/sample identities; its Saber effect has exact waveform/numeric
+DSP evidence while its event-time SOUND record/caller remains unverified.
+Zero selection uses an explicit private availability/screen prerequisite, not
+earned progress. Both offline processes quit naturally with exit0. Native
+hurt/death references, active STOP7, attack/hurt overlap and native state/rewind
+remain open; the ledger stays at4 passed,4 failed,226 unverified.
+
+The earlier frozen v19 candidate used title source a1dac26, SDK bfbfb920,
 title compatibility mmx6-x-zero-delay-v17. Its debug and production suites
 passed 100/100. The [body-audio build and gameplay receipt](evidence/mmx6-body-audio/manifest-bound-a1dac26-build-and-saber-smoke-reviewed.json)
 retains a fresh same-machine pair with all 11 menu/resume/control/Square checks,
