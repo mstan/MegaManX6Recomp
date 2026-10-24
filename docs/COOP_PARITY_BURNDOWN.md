@@ -74,9 +74,22 @@ now retains actual door contact, charged boss damage to defeat, the native
 CURRENT export matching campaign fields. Checkpoint and positive native
 invincibility counters are explicit offline prerequisites. The completed
 route saves its actually earned exit and report execution points for later
-checks on this exact build. R15/F208 stay failed until real Continue/import,
-selection, reentry and remaining required modes are validated. Native cards,
-netplay and the separate content inventory gain no pass from this result.
+checks on this exact build. Native cards and netplay gain no pass from export.
+
+The subsequent [local reentry component receipt](evidence/mmx6-native-reentry/manifest-bound-777b4d0-earned-CURRENT-and-NewGame-local-components-reviewed.json)
+qualifies actual guest Quit refusal, both primary final Quit confirmations,
+eligible title CURRENT import, native character selection and fresh X/Zero
+mission reentry on the same image. All source-mapped persistent import fields
+match. The guest then owns its native menu, rejects other-seat input, resumes
+and accepts independent movement and attack. A separate original New Game
+in the same process restores the actual default campaign and repeats all
+11 guest menu/control checks. Root reproduced the raw import/default/fresh
+publication reductions and reviewed both paused/resumed world samples.
+The completed CURRENT path has an actually saved execution point before
+New Game. Its prerequisite LOAD and strictly refused pre-load recording are
+explicit; there is no native-card or post-load recording claim. R15/F208
+retain their failed history and remain open for independent netplay and
+unacquired campaign-progress breadth; no aggregate row is promoted.
 
 F157 now passes locally on `777b4d0`. The
 [fresh Zero follow-up receipt](evidence/mmx6-combat/manifest-bound-777b4d0-F157-fresh-Zero-followups-local-reviewed.json)
