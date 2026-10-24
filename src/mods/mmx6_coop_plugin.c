@@ -1577,11 +1577,61 @@ static void triangle(uint32_t dst, uint32_t next, const uint32_t *q,
         psx_mod_write_word(dst+12+i*12,uv);
     }
 }
+/* Process-local, read-only rendering diagnosis. No guest/native state writes. */
+#ifndef PSX_NO_DEBUG_TOOLS
+static uint32_t giga_trace_pointed_word(uint32_t pointer,int *valid) {
+    uint32_t physical=pointer&0x1FFFFFFFu,packet_physical=packets&0x1FFFFFFFu;
+    *valid=!(physical&3u) && ((physical>=0x10000u && physical<=0x1FFFFCu) ||
+        (packets && physical>=packet_physical && physical-packet_physical<=FRAME_ARENA*2u-4u));
+    if (*valid) return psx_mod_read_word(physical|0x80000000u);
+    return UINT32_MAX;
+}
+static void giga_packet_trace(const char *phase,uint32_t actor) {
+    const char *enabled=getenv("MMX6_GIGA_PACKET_TRACE");
+    if (!enabled || strcmp(enabled,"1")) return;
+    int slot=actor?shared_effect_slot(actor):-1;
+    int personal=actor>=0x800950A0u && actor<0x800964A0u && (actor-0x800950A0u)%0xA0u==0;
+    if (actor && slot<0 && !personal) return; /* Admit the pool before reading actor fields. */
+    unsigned type=actor?psx_mod_read_byte(actor+1):0;
+    if (actor) {
+        int owned_shared=slot>=0 && shared_effect_owners[slot]==2 && (type==17 || type==26);
+        int owned_shot=personal && type==44 &&
+            psx_mod_read_byte(PLAYER+2)==1 && !render_x_death;
+        if (!owned_shared && !owned_shot) return;
+    } else if (p2.body[5]!=59) return;
+    unsigned parity=psx_mod_read_word(SCRATCH)&1u;
+    uint32_t head11=psx_mod_read_word(0x80090D70u+parity*128u+36u);
+    uint32_t tail11=psx_mod_read_word(0x8008EB08u+parity*128u+36u);
+    uint32_t head37=psx_mod_read_word(0x80090D70u+parity*128u+124u);
+    uint32_t tail37=psx_mod_read_word(0x8008EB08u+parity*128u+124u);
+    int head11_valid,tail11_valid,head37_valid,tail37_valid;
+    uint32_t head11_word=giga_trace_pointed_word(head11,&head11_valid);
+    uint32_t tail11_word=giga_trace_pointed_word(tail11,&tail11_valid);
+    uint32_t head37_word=giga_trace_pointed_word(head37,&head37_valid);
+    uint32_t tail37_word=giga_trace_pointed_word(tail37,&tail37_valid);
+    static uint64_t host_trace_sequence;
+    fprintf(stdout,"mmx6_giga_packet_trace sequence=%llu phase=%s actor=%08X type=%u subtype=%u state=%u action=%u assembly=%08X priority=%02X parity=%u native_timer=%u sprite_frame47=%u scratch0=%08X world_packets=%08X inside=%d world_render=%d zero_world=%d pause_owner=%d base=%08X mode=%08X budget=%u head11=%08X head11_valid=%d head11_word=%08X tail11=%08X tail11_valid=%d tail11_word=%08X head37=%08X head37_valid=%d head37_word=%08X tail37=%08X tail37_valid=%d tail37_word=%08X\n",
+        (unsigned long long)++host_trace_sequence,phase,actor,type,
+        actor?psx_mod_read_byte(actor+2):0,actor?psx_mod_read_byte(actor+4):0,
+        actor?psx_mod_read_byte(actor+5):0,actor?psx_mod_read_word(actor+0x3C):0,
+        actor?psx_mod_read_byte(actor+0x16):0,parity,
+        psx_mod_read_word(PLAY+0x90),actor?psx_mod_read_byte(actor+0x47):0,
+        psx_mod_read_word(SCRATCH),world_packets,inside,world_render,zero_world,pause_owner,
+        psx_mod_read_word(SCRATCH+0x100),
+        psx_mod_read_word(SCRATCH+0x104),psx_mod_read_word(SCRATCH+0x124),
+        head11,head11_valid,head11_word,tail11,tail11_valid,tail11_word,
+        head37,head37_valid,head37_word,tail37,tail37_valid,tail37_word);
+}
+#else
+static void giga_packet_trace(const char *phase,uint32_t actor) { (void)phase;(void)actor; }
+#endif
+
 static void begin_world_draw(CPUState *cpu,uint32_t address) {
     /* Native80025FB0 precedes background and sprite/HUD emission, including
      * the first arrival draw before stage_tick. Both private bodies and
      * deferred shared effects append once in this original render order. */
     if(enrolled && !failed)world_packets=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
+    giga_packet_trace("world-begin",0);
     (void)cpu;(void)address;
 }
 static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
@@ -1597,8 +1647,10 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
     }
     uint32_t restore_words[4]={base,mode,actor,arena};
     STATE_WORDS(restore_packet,15,restore_words,4);
+    giga_packet_trace("before-native",actor);
     guest(cpu,0x800232D4,actor,0);
     STATE_POP(restore_packet);
+    giga_packet_trace("after-native",actor);
     uint32_t end=psx_mod_read_word(SCRATCH+0x100);
     if (end<base || end-arena>PLAYER_PACKET_BYTES || (end-base)%40 ||
         psx_mod_read_word(SCRATCH+0x104)!=mode+(end-base)/5 ||
@@ -1619,8 +1671,12 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
     /* Common effects use the stage's already resident textures. Only native
      * Zero frames need the retained host bank instead of X's texture slot. */
     int ui=zero_ui_effect(actor),icons=zero_icon_effect(actor);
-    if (!ui && !icons && !render_x_death && (table<assets || table-assets>=compressed_size)) return;
-    if (render_x_death && (table<0x80010000u || table>=0x80200000u)) return;
+    if (!ui && !icons && !render_x_death && (table<assets || table-assets>=compressed_size)) {
+        giga_packet_trace("native-only",actor);return;
+    }
+    if (render_x_death && (table<0x80010000u || table>=0x80200000u)) {
+        giga_packet_trace("native-only",actor);return;
+    }
     uint32_t expanded=arena+PLAYER_PACKET_BYTES+(base-arena)*2;
     for (uint32_t at=base;at<end;at+=40,expanded+=80,mode+=8) {
         uint32_t q[10];
@@ -1655,6 +1711,7 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
             psx_mod_write_word(at,q[0]&0xFFFFFF);
         }
     }
+    giga_packet_trace("after-conversion",actor);
 }
 static void render(CPUState *cpu, uint32_t address) {
     (void)address;
