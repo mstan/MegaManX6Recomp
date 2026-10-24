@@ -134,6 +134,7 @@ static void digest_and_readiness(void){
     }
 #define PERTURB(value) do{(value)^=1;CHECK(state_digest()!=h);(value)^=1;CHECK(state_digest()==h);}while(0)
     PERTURB(p2.shots[6]);PERTURB(previous_input);PERTURB(p2_start_previous);
+    PERTURB(zero_giga_backup[7]);
     PERTURB(saved_portrait_colors[7]);PERTURB(pickup_owners[0].seat);PERTURB(zero_solid_contacts[3].carried);
     PERTURB(death_effect[2].x);
     PERTURB(jump_audio_banks[0].guest);PERTURB(jump_audio_registers[4]);
@@ -187,6 +188,8 @@ static void actual_projection_backups(void){
     CHECK(zero_solid_contacts[3].carried==255 && !state_track.count && snapshot_ready());
 }
 static void roundtrip_and_malformed(void){
+    uint8_t expected_giga[ZERO_GIGA_BACKUP_BYTES];
+    for(unsigned i=0;i<sizeof expected_giga;++i)zero_giga_backup[i]=expected_giga[i]=(uint8_t)(i*11u+3u);
     uint32_t len=snapshot_bytes();CHECK(len && len<STATE_MAX_BYTES);
     uint8_t *wire=malloc(len+1),*bad=malloc(len+1);CHECK(wire && bad && snapshot_write(wire,len));
     CHECK(!snapshot_write(wire,len-1));CHECK(!snapshot_write(wire,len+1));
@@ -210,13 +213,16 @@ static void roundtrip_and_malformed(void){
     uint32_t original=state_digest(),saved_hash[8192];memcpy(saved_hash,texture_hash,sizeof saved_hash);
     CHECK(snapshot_validate(wire,len));p2.body[0x5C]=1;previous_input^=0x101;zero_solid_contacts[3].carried=0;
     memset(jump_audio_priorities,0,sizeof jump_audio_priorities);
+    memset(zero_giga_backup,0,sizeof zero_giga_backup);
     int allocations=allocation_calls;allocation_fail=1;snapshot_read(wire,len);allocation_fail=0;
     CHECK(allocation_calls==allocations && state_digest()==original && p2.body[0x5C]==23);
+    CHECK(!memcmp(zero_giga_backup,expected_giga,sizeof expected_giga));
     for(unsigned s=0;s<24;++s)CHECK(jump_audio_priorities[s]==(uint8_t)(s*9u));
     /* Cold cache: retain immutable disc/build resources, destroy every current
      * pixel bank and metadata, then validate saved length independently of live. */
     for(unsigned i=0;i<4096;++i){free(banks[i].pixels);memset(&banks[i],0,sizeof banks[i]);}
     bank_count=ui_bank_count=0;memset(ui_banks,0,sizeof ui_banks);memset(&p2,0,sizeof p2);
+    memset(zero_giga_backup,0,sizeof zero_giga_backup);
     CHECK(snapshot_validate(wire,len));allocation_fail=1;allocations=allocation_calls;snapshot_read(wire,len);
     snapshot_resources_restored();CHECK(forgotten==1 && installed_resolver && state_digest()==original);
     CHECK(allocation_calls==allocations);allocation_fail=0;

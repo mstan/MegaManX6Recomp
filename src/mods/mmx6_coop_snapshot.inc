@@ -1,5 +1,5 @@
 /* Executable-owned host state, included after the native implementation.
- * Schema 3 is build-specific. No old-state migration or host pointer wire. */
+ * Schema 4 is build-specific. No old-state migration or host pointer wire. */
 enum { STATE_COUNT,STATE_WRITE,STATE_READ,STATE_HASH,STATE_MAX_BYTES=16*1024*1024 };
 typedef struct {
     unsigned mode,ok;
@@ -78,6 +78,7 @@ typedef struct {
     SolidContact contacts[80];
     DeathEffectOrigin deaths[96];
     uint8_t audio_priorities[24];
+    uint8_t giga_backup[ZERO_GIGA_BACKUP_BYTES];
 } HostState;
 static void state_capture(HostState *s) {
     memset(s,0,sizeof *s);s->player=p2;s->lifecycle=life;
@@ -91,6 +92,7 @@ static void state_capture(HostState *s) {
     memcpy(s->contacts,zero_solid_contacts,sizeof zero_solid_contacts);
     memcpy(s->deaths,death_effect,sizeof death_effect);
     memcpy(s->audio_priorities,jump_audio_priorities,sizeof jump_audio_priorities);
+    memcpy(s->giga_backup,zero_giga_backup,sizeof zero_giga_backup);
 }
 static int state_actor(uint32_t address) {
     return !address || (address>=0x80010000u && address<=0x801FFF00u && !(address&3));
@@ -139,6 +141,7 @@ static void state_core(StateIO *io,HostState *s) {
     if(s->lifecycle.rejoin_pending &&
         ((s->lifecycle.status[1]!=MMX6_COOP_ABSENT && s->lifecycle.status[1]!=MMX6_COOP_LEAVING) ||
          !mmx6_coop_living(&s->lifecycle,0) || s->lifecycle.wipe))io->ok=0;
+    state_bytes(io,s->giga_backup,sizeof s->giga_backup);
     if(io->mode!=STATE_HASH) {
         FIELD(frame_count,4,UINT32_MAX);FIELD(hud_fade,1,128);FIELD(world_packets,4,UINT32_MAX);FIELD(hud_seat,1,1);
         if(s->world_packets && (s->world_packets<packets || s->world_packets>packets+FRAME_ARENA*2))io->ok=0;
@@ -156,6 +159,7 @@ static void state_commit(const HostState *s) {
     memcpy(pickup_owners,s->pickups,sizeof pickup_owners);memcpy(zero_solid_contacts,s->contacts,sizeof zero_solid_contacts);
     memcpy(death_effect,s->deaths,sizeof death_effect);
     memcpy(jump_audio_priorities,s->audio_priorities,sizeof jump_audio_priorities);
+    memcpy(zero_giga_backup,s->giga_backup,sizeof zero_giga_backup);
     /* These backups are meaningful only under rejected live projections. */
     memset(&p1,0,sizeof p1);memset(saved_overlay,0,sizeof saved_overlay);memset(saved_play,0,sizeof saved_play);
     memset(saved_camera,0,sizeof saved_camera);memset(saved_resources,0,sizeof saved_resources);saved_palette_dirty=0;
@@ -209,7 +213,7 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    state_fixed(s,0x53503658u);state_fixed(s,3);
+    state_fixed(s,0x53503658u);state_fixed(s,4);
     const uint32_t handles[]={assets,assembly,palette_source,active_palette,packets,diagnostic,menu_memory,menu_assembly,hud_packets,
         jump_audio_banks[0].guest,jump_audio_banks[1].guest};
     for(unsigned i=0;i<sizeof handles/sizeof handles[0];++i)state_fixed(s,handles[i]);

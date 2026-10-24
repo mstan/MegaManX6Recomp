@@ -33,7 +33,7 @@ class SceneStateTests(unittest.TestCase):
         core[at:at+2] = b'\x02\x03'
         core[at+6] = 0x42
         core[at+6+0x158] = 0x81
-        image = dict(internal_wire_schema=3, semantic_core_hex=core.hex())
+        image = dict(internal_wire_schema=subject.state.HOST_WIRE_SCHEMA, semantic_core_hex=core.hex())
         scene = subject.scene_wire(image)
         self.assertEqual((scene['owner'], scene['phase']), (2, 3))
         self.assertEqual(len(bytes.fromhex(scene['context_hex'])), 6+2*0x158)
@@ -43,8 +43,8 @@ class SceneStateTests(unittest.TestCase):
 
     def test_unknown_or_invalid_scene_wire_cannot_establish_restore(self):
         core = bytearray(subject.state.HOST_SEMANTIC_BYTES)
-        image = dict(internal_wire_schema=3, semantic_core_hex=core.hex())
-        for changes in (dict(internal_wire_schema=4), dict(semantic_core_hex=core[:-1].hex())):
+        image = dict(internal_wire_schema=subject.state.HOST_WIRE_SCHEMA, semantic_core_hex=core.hex())
+        for changes in (dict(internal_wire_schema=subject.state.HOST_WIRE_SCHEMA+1), dict(semantic_core_hex=core[:-1].hex())):
             with self.assertRaises(subject.mapped.debug.DebugError):
                 subject.scene_wire(dict(image, **changes))
         at = subject.state.HOST_PLAYER_BYTES+19

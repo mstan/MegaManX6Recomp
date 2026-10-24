@@ -32,8 +32,8 @@ def load_source(path):
 
 
 def scene_wire(image):
-    """Read only the current schema3 scene record; reject unknown layouts."""
-    require(image['internal_wire_schema'] == 3, 'Unsupported scene state wire')
+    """Read only the current scene record; reject unknown layouts."""
+    require(image['internal_wire_schema'] == state.HOST_WIRE_SCHEMA, 'Unsupported scene state wire')
     core = bytes.fromhex(image['semantic_core_hex'])
     require(len(core) == state.HOST_SEMANTIC_BYTES, 'Unexpected scene state wire length')
     at = state.HOST_PLAYER_BYTES + 19

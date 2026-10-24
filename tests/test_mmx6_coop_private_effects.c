@@ -386,6 +386,28 @@ static void borrowed_menu_restores_primary_sprite_sheet(void){
     CHECK(!memcmp(test_vram,original_menu_vram,sizeof test_vram));
     CHECK(!state_track.count && !state_track.error);
 }
+static void native_giga_backup_survives_private_callbacks(void){
+    CPUState cpu;setup(&cpu);uint32_t expected[16];
+    for(unsigned i=0;i<16;++i){
+        expected[i]=0x12340000u+i*0x010101u;
+        psx_mod_write_word(0x80090CD0u+i*4,expected[i]);
+    }
+    enter_zero();
+    /* Original Zero801EA7A4 phase1 copies this exact shared16-word table
+     * into writable overlay801EF974, then temporarily fills it withFF. */
+    for(unsigned i=0;i<16;++i){
+        psx_mod_write_word(0x801EF974u+i*4,psx_mod_read_word(0x80090CD0u+i*4));
+        psx_mod_write_word(0x80090CD0u+i*4,UINT32_MAX);
+    }
+    leave_zero();
+    enter_zero();
+    /* Original801EA888 phase2 consumes the earlier callback's backup. */
+    for(unsigned i=0;i<16;++i)
+        psx_mod_write_word(0x80090CD0u+i*4,psx_mod_read_word(0x801EF974u+i*4));
+    leave_zero();
+    for(unsigned i=0;i<16;++i)CHECK(psx_mod_read_word(0x80090CD0u+i*4)==expected[i]);
+    CHECK(!zero_projected && !state_track.count && !state_track.error && !failed);
+}
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
-    controller_pair_and_restoration();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();clear_banks();
+    controller_pair_and_restoration();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
     puts("private native effects actual-plugin call order, gates, lifetime projection and retained packet ownership PASS");return 0;}

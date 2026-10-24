@@ -43,6 +43,7 @@ def provider(*, tick=10, bank_count=4):
     core[at] = 1  # pause_owner+1
     core[at+3+0x200] = 1  # enrolled
     core[state.HOST_AUDIO_PRIORITIES_OFFSET+20]=2
+    core[-state.HOST_GIGA_BACKUP_BYTES:]=bytes((i*11+3)&255 for i in range(state.HOST_GIGA_BACKUP_BYTES))
     tail = struct.pack("<IBIB", tick, 128, 0, 0)
     cache = struct.pack("<I", bank_count)
     for index in range(bank_count):
@@ -84,9 +85,11 @@ class StateWireTests(unittest.TestCase):
         self.assertEqual(parsed["publication_tick"], 10)
         self.assertEqual(parsed["bank_count"], 4)
         self.assertEqual(parsed["ui_bank_count"], 1)
-        self.assertEqual(len(bytes.fromhex(parsed["semantic_core_hex"])), 9390)
+        self.assertEqual(len(bytes.fromhex(parsed["semantic_core_hex"])), 9454)
         self.assertEqual(len(bytes.fromhex(parsed['resource_binding_hex'])),88)
-        self.assertEqual(parsed['internal_wire_schema'],3)
+        self.assertEqual(parsed['internal_wire_schema'],state.HOST_WIRE_SCHEMA)
+        self.assertEqual(bytes.fromhex(parsed['zero_giga_backup_hex']),
+                         bytes((i*11+3)&255 for i in range(64)))
         self.assertEqual(bytes.fromhex(parsed['audio_priorities_hex'])[20],2)
         state.require_audio_owner_contract(parsed)
         self.assertEqual(len(bytes.fromhex(parsed["shots_hex"])), 0x1400)
@@ -105,7 +108,7 @@ class StateWireTests(unittest.TestCase):
             changed = bytearray(provider());struct.pack_into("<I", changed, offset, 2)
             with self.assertRaises(DebugError):
                 state.parse_state_image(image(changed))
-        for version in (1,2,4):
+        for version in (1,2,3,state.HOST_WIRE_SCHEMA+1):
             changed=bytearray(provider());struct.pack_into('<I',changed,4,version)
             with self.assertRaises(DebugError):state.parse_state_image(image(changed))
 
@@ -153,7 +156,8 @@ class StateWireTests(unittest.TestCase):
         saved = state.parse_state_image(image())
         for offset in (state.HOST_RESOURCE_BYTES+state.HOST_PLAYER_BYTES+15,
                        state.HOST_RESOURCE_BYTES+0x1558+0x5F,
-                       state.HOST_RESOURCE_BYTES+0x1678+0x4F):
+                       state.HOST_RESOURCE_BYTES+0x1678+0x4F,
+                       state.HOST_CORE_END-state.HOST_GIGA_BACKUP_BYTES+7):
             changed = bytearray(provider());changed[offset] ^= 1
             restored = state.parse_state_image(image(changed))
             checks = state.reduce_provider_restore(saved, restored)

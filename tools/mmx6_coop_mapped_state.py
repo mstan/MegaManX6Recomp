@@ -53,7 +53,7 @@ def operation_result(before,after,operation,slot,expected_ok):
 
 
 def malformed_current_wire(original):
-    """Keep the current build/framing; forge only internal provider wire4."""
+    """Keep current build/framing; forge the next unsupported provider wire."""
     state.parse_state_image(original)  # Bounded, valid current image first.
     header=original[:36];count=struct.unpack_from('<I',original,28)[0]
     at=36;parts=[header];mutated=False
@@ -67,8 +67,8 @@ def malformed_current_wire(original):
             start=28+name_len
             require(interface==1 and bytes(raw[28:start])==b'mmx6.local-coop' and start+payload_len==len(raw),
                 'Unexpected current co-op provider identity')
-            require(struct.unpack_from('<II',raw,start)==(0x53503658,3),'Expected current internal wire3')
-            struct.pack_into('<I',raw,start+4,4);mutated=True
+            require(struct.unpack_from('<II',raw,start)==(0x53503658,state.HOST_WIRE_SCHEMA),'Expected current internal wire')
+            struct.pack_into('<I',raw,start+4,state.HOST_WIRE_SCHEMA+1);mutated=True
             payload=struct.pack('<I',len(raw))+zlib.compress(raw) if flags else bytes(raw)
         parts.extend([struct.pack('<IIQ',tag,flags,len(payload)),payload])
     require(mutated and at==len(original),'Provider mutation did not cover one complete current image')
@@ -207,14 +207,14 @@ def exercise(ctx,*,output,timeout=12,keyboard=False,resource_sources=None,invent
             evidence['checks'].update(resource_checks)
         evidence['checks']['keyboard_l_provider_probe' if keyboard else 'mapped_cross_provider_probe']=all(probe('mapped-load',saved).values())
 
-        bad=malformed_current_wire(Path(image['path']).read_bytes());bad_path=output/'invalid-internal-wire4.pst'
+        bad=malformed_current_wire(Path(image['path']).read_bytes());bad_path=output/f'invalid-internal-wire{state.HOST_WIRE_SCHEMA+1}.pst'
         bad_path.write_bytes(bad)
         relative=Path(image['slot_relative_path'])
         require(relative.name.endswith('_slot00.pst'),'Unexpected private state filename')
         target=ctx['candidate']/'saves'/relative.with_name(relative.name.replace('_slot00.pst','_slot01.pst'))
         shutil.copyfile(bad_path,target)
         evidence['malformed_snapshot']=dict(path=str(bad_path),sha256=hashlib.sha256(bad).hexdigest(),
-            change='Only current provider internal wire3 -> unsupported wire4; current build header retained')
+            change=f'Only current provider internal wire{state.HOST_WIRE_SCHEMA} -> unsupported wire{state.HOST_WIRE_SCHEMA+1}; current build header retained')
         controls.operation('load',1,False)
         restored_publications(case,saved,'Mapped malformed load leaves native paused pools intact')
         evidence['checks']['native_malformed_provider_rejection_preserves_state']=all(probe('after-invalid',saved).values())

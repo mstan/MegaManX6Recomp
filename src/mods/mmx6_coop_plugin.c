@@ -63,6 +63,11 @@ typedef struct {
 } SpriteBank;
 static PlayerContext p2, p1;
 static uint8_t saved_overlay[OVERLAY_SIZE], zero_overlay[OVERLAY_SIZE];
+/* Original Zero Giga801EA7A4/801EA888 retains16 shared words80090CD0 in
+ * writable overlay801EF974 across player callbacks. Keep that data separate
+ * from the immutable executable image and its source/asset identity. */
+enum { ZERO_GIGA_BACKUP_OFFSET=0x5974, ZERO_GIGA_BACKUP_BYTES=64 };
+static uint8_t zero_giga_backup[ZERO_GIGA_BACKUP_BYTES];
 static uint8_t saved_play[0xE0], saved_camera[0x100];
 static uint8_t *zero_compressed;
 static size_t compressed_size;
@@ -262,7 +267,8 @@ static int load_assets(const Mmx6CoopRoster *roster) {
     uint8_t *file=disc_file("ROCK_X6.DAT",&n);
     if (!file) { free(bin);return 0; }
     Mmx6CoopResourcesReason reason=mmx6_coop_resource_prepare(roster,1,bin,bin_size,file,n,ASSET_SPACE,&v);
-    if (reason==MMX6_COOP_RESOURCES_OK && v.overlay.size>sizeof zero_overlay)
+    if (reason==MMX6_COOP_RESOURCES_OK && (v.overlay.size>sizeof zero_overlay ||
+        v.overlay.size<ZERO_GIGA_BACKUP_OFFSET+ZERO_GIGA_BACKUP_BYTES))
         reason=MMX6_COOP_RESOURCES_INVALID_OVERLAY;
     if (reason!=MMX6_COOP_RESOURCES_OK) {
         fprintf(stderr,"mmx6 co-op: resources refused (%s)\n",mmx6_coop_resources_reason(reason));
@@ -279,6 +285,7 @@ static int load_assets(const Mmx6CoopRoster *roster) {
     /* Plan all aligned spans/source and working palette bounds BEFORE copies. */
     memset(zero_overlay,0,sizeof zero_overlay);
     memcpy(zero_overlay,v.overlay.data,v.overlay.size);
+    memcpy(zero_giga_backup,zero_overlay+ZERO_GIGA_BACKUP_OFFSET,sizeof zero_giga_backup);
     memcpy(zero_compressed,v.graphics.data,v.graphics.size);compressed_size=v.graphics.size;
     assembly=assets+v.layout.assembly;
     palette_source=assets+v.layout.palette_source;
@@ -322,6 +329,7 @@ static void enter_zero(void) {
     saved_palette_dirty=psx_mod_read_byte(0x800C4560);
     project_player(&p2);
     code_bank(zero_overlay);
+    project(OVERLAY+ZERO_GIGA_BACKUP_OFFSET,zero_giga_backup,sizeof zero_giga_backup);
     psx_mod_write_word(SCRATCH+0x14,assets);
     psx_mod_write_word(SCRATCH+0x1C,assembly);
     psx_mod_write_word(SCRATCH+0x24,palette_source);
@@ -335,6 +343,7 @@ static void enter_zero(void) {
 }
 static void leave_zero_context(int shared_world) {
     capture_player(&p2);
+    capture(OVERLAY+ZERO_GIGA_BACKUP_OFFSET,zero_giga_backup,sizeof zero_giga_backup);
     project_player(&p1);
     code_bank(saved_overlay);
     psx_mod_write_word(SCRATCH+0x14,saved_resources[0]);
@@ -1980,6 +1989,7 @@ static void activate(void) {
     scene_owner=scene_phase=0; scene_call=zero_projected=0;
     unit_choices_call=intro_target_call=0;
     zero_menu_loaded=0;
+    memset(zero_giga_backup,0,sizeof zero_giga_backup);
     if (!assets) assets=psx_mod_alloc_guest_memory(ASSET_SPACE,16);
     if (!diagnostic) diagnostic=psx_mod_alloc_guest_memory(0x2000,16);
     if (!packets) packets=psx_mod_alloc_texture_packet_memory(FRAME_ARENA*2,16);

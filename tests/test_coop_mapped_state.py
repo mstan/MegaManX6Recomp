@@ -69,7 +69,8 @@ class MappedStateTests(unittest.TestCase):
             self.assertEqual(old[2],new[2]);self.assertEqual(old[9],new[9])
             differences=[i for i,(a,b) in enumerate(zip(old[0x16],new[0x16])) if a!=b]
             self.assertEqual(len(differences),1)
-            self.assertEqual((old[0x16][differences[0]],new[0x16][differences[0]]),(3,4))
+            self.assertEqual((old[0x16][differences[0]],new[0x16][differences[0]]),
+                             (subject.state.HOST_WIRE_SCHEMA,subject.state.HOST_WIRE_SCHEMA+1))
 
 
 if __name__=='__main__':unittest.main()
