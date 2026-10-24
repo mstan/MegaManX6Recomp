@@ -16,6 +16,13 @@ co-op-off character references, actual P1 vocal overlap and paired general
 audio remain unverified. The underlying native candidate is 22ea525; later
 commits changed the observer and retained evidence, not that game image.
 
+Fresh [paired ground-jump receipts](evidence/mmx6-character-audio/manifest-bound-22ea525-paired-jump-orders-reviewed.json)
+also pass both jump orders, with all 19 audio checks independently passing on
+each peer. Each pair retains 30 matching core/mod CRC samples; 15 samples across
+the two runs follow their audio cases. Both processes exit naturally in each
+run. These overlap checks do not qualify paired saber/hurt/death or the full
+R4/R12 families.
+
 The original USA1.1 data contains 45 populated records and 47 voice entries
 across groups1/3. The resolver retains effective bank aliases, populated-program
 ranks, tone rollover, native contiguous voices, sample offsets/lengths,

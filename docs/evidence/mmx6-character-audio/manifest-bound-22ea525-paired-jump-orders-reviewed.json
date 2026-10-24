@@ -1,0 +1,700 @@
+{
+  "schema": 1,
+  "kind": "manifest_bound_same_machine_paired_ground_jump_audio_review",
+  "mode": "netplay",
+  "result": "unverified",
+  "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+  "build_identity": {
+    "executable_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+    "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+    "sdk": "09e8673435c73e516b420e6c13bb11f02dc8aaea",
+    "title_compatibility": "mmx6-x-zero-delay-v18",
+    "semantic_contract_sha256": "e0d4144e1a257ec0a4ea6f918f53a34f904d138c74de007f029452b94f5954c5"
+  },
+  "settings": {
+    "roster": "Falcon X/P1 + ordinary Zero/P2",
+    "peers": "two processes on this physical Windows machine",
+    "transport": "direct numeric 127.0.0.1, delay",
+    "rollback": 0,
+    "network_user_states": 0,
+    "muted": "SDL_AUDIODRIVER=dummy"
+  },
+  "action": "Launch separate fresh same-machine pairs for each jump order; use owned published host inputs; independently probe both peers\u2019 sample bytes, numeric DSP state and natural overlapping lifetimes; require pre-frame0 agreement and resolved matching core/mod CRC.",
+  "outcome": {
+    "runs": [
+      {
+        "first_seat": 0,
+        "checks": {
+          "jump_audio_original_source_bound": true,
+          "jump_audio_both_peers_completed": true,
+          "declared_build_manifest_bound_to_staged_images": true,
+          "jump_audio_declared_sources_match": true,
+          "host_profile_settled_before_guest": true,
+          "p2_right_reaches_both_peers": true,
+          "p2_right_preserves_p1_x": true,
+          "p1_jump_reaches_both_peers": true,
+          "p1_jump_preserves_p2_y": true,
+          "both_alive_healthy": true,
+          "mailbox_unused": true,
+          "default_resident_loader_committed": true,
+          "jump_audio_published_neutral_requests_completed": true,
+          "jump_audio_resolved_crc_after_case": true,
+          "jump_audio_final_private_cards_unchanged": true,
+          "jump_audio_owned_pair_cleanup": true
+        },
+        "audio_peers": [
+          {
+            "peer": 0,
+            "checks": {
+              "two_keyons": true,
+              "vocal_lifetime_overlap": true,
+              "p1_source_sample": true,
+              "p1_pitch_adsr_numeric": true,
+              "p1_voice_route": true,
+              "p1_natural_end": true,
+              "p2_source_sample": true,
+              "p2_pitch_adsr_numeric": true,
+              "p2_voice_route": true,
+              "p2_natural_end": true,
+              "p1_final_dsp_attribution": true,
+              "p1_final_envelope_terminated": true,
+              "p1_final_pitch_adsr_numeric": true,
+              "p1_final_noise_off": true,
+              "p2_final_dsp_attribution": true,
+              "p2_final_envelope_terminated": true,
+              "p2_final_pitch_adsr_numeric": true,
+              "p2_final_noise_off": true,
+              "private_source_banks_stable": true
+            },
+            "actors": [
+              {
+                "seat": 0,
+                "keyon": {
+                  "seq": 239,
+                  "frame": 3955,
+                  "kind": "KEYON",
+                  "v": 20,
+                  "addr": 338464,
+                  "pitch": 1144,
+                  "adsr_lo": 33023,
+                  "adsr_hi": 8128,
+                  "vol_l": 10157,
+                  "vol_r": 7899,
+                  "sample_bank": 0
+                },
+                "sample_sha256": "5e96f6c111bb06aee701c64c9406e4d60fe64e3203455e6ccf18eb32109c00bb",
+                "source_character": "X",
+                "source_record": 6,
+                "lifetime": {
+                  "disposition": "natural_end",
+                  "terminal": {
+                    "seq": 242,
+                    "frame": 3970,
+                    "kind": "END_STOP",
+                    "v": 20,
+                    "addr": 338480,
+                    "pitch": 1144,
+                    "adsr_lo": 33023,
+                    "adsr_hi": 8128,
+                    "vol_l": 10157,
+                    "vol_r": 7899,
+                    "sample_bank": 0
+                  },
+                  "engine_frames": 15
+                }
+              },
+              {
+                "seat": 1,
+                "keyon": {
+                  "seq": 241,
+                  "frame": 3969,
+                  "kind": "KEYON",
+                  "v": 44,
+                  "addr": 6816,
+                  "pitch": 1144,
+                  "adsr_lo": 33023,
+                  "adsr_hi": 8128,
+                  "vol_l": 8544,
+                  "vol_r": 10157,
+                  "sample_bank": 31
+                },
+                "sample_sha256": "326c986761f6b3808e7eade99e77bf95f2dae6124559377f75971550aa53b4d9",
+                "source_character": "Zero",
+                "source_record": 4,
+                "lifetime": {
+                  "disposition": "natural_end",
+                  "terminal": {
+                    "seq": 244,
+                    "frame": 3980,
+                    "kind": "END_STOP",
+                    "v": 44,
+                    "addr": 6832,
+                    "pitch": 1144,
+                    "adsr_lo": 33023,
+                    "adsr_hi": 8128,
+                    "vol_l": 8544,
+                    "vol_r": 10157,
+                    "sample_bank": 31
+                  },
+                  "engine_frames": 11
+                }
+              }
+            ]
+          },
+          {
+            "peer": 1,
+            "checks": {
+              "two_keyons": true,
+              "vocal_lifetime_overlap": true,
+              "p1_source_sample": true,
+              "p1_pitch_adsr_numeric": true,
+              "p1_voice_route": true,
+              "p1_natural_end": true,
+              "p2_source_sample": true,
+              "p2_pitch_adsr_numeric": true,
+              "p2_voice_route": true,
+              "p2_natural_end": true,
+              "p1_final_dsp_attribution": true,
+              "p1_final_envelope_terminated": true,
+              "p1_final_pitch_adsr_numeric": true,
+              "p1_final_noise_off": true,
+              "p2_final_dsp_attribution": true,
+              "p2_final_envelope_terminated": true,
+              "p2_final_pitch_adsr_numeric": true,
+              "p2_final_noise_off": true,
+              "private_source_banks_stable": true
+            },
+            "actors": [
+              {
+                "seat": 0,
+                "keyon": {
+                  "seq": 239,
+                  "frame": 3955,
+                  "kind": "KEYON",
+                  "v": 20,
+                  "addr": 338464,
+                  "pitch": 1144,
+                  "adsr_lo": 33023,
+                  "adsr_hi": 8128,
+                  "vol_l": 10157,
+                  "vol_r": 7899,
+                  "sample_bank": 0
+                },
+                "sample_sha256": "5e96f6c111bb06aee701c64c9406e4d60fe64e3203455e6ccf18eb32109c00bb",
+                "source_character": "X",
+                "source_record": 6,
+                "lifetime": {
+                  "disposition": "natural_end",
+                  "terminal": {
+                    "seq": 242,
+                    "frame": 3970,
+                    "kind": "END_STOP",
+                    "v": 20,
+                    "addr": 338480,
+                    "pitch": 1144,
+                    "adsr_lo": 33023,
+                    "adsr_hi": 8128,
+                    "vol_l": 10157,
+                    "vol_r": 7899,
+                    "sample_bank": 0
+                  },
+                  "engine_frames": 15
+                }
+              },
+              {
+                "seat": 1,
+                "keyon": {
+                  "seq": 241,
+                  "frame": 3969,
+                  "kind": "KEYON",
+                  "v": 44,
+                  "addr": 6816,
+                  "pitch": 1144,
+                  "adsr_lo": 33023,
+                  "adsr_hi": 8128,
+                  "vol_l": 8544,
+                  "vol_r": 10157,
+                  "sample_bank": 31
+                },
+                "sample_sha256": "326c986761f6b3808e7eade99e77bf95f2dae6124559377f75971550aa53b4d9",
+                "source_character": "Zero",
+                "source_record": 4,
+                "lifetime": {
+                  "disposition": "natural_end",
+                  "terminal": {
+                    "seq": 244,
+                    "frame": 3980,
+                    "kind": "END_STOP",
+                    "v": 44,
+                    "addr": 6832,
+                    "pitch": 1144,
+                    "adsr_lo": 33023,
+                    "adsr_hi": 8128,
+                    "vol_l": 8544,
+                    "vol_r": 10157,
+                    "sample_bank": 31
+                  },
+                  "engine_frames": 11
+                }
+              }
+            ]
+          }
+        ],
+        "resolved_crc_samples": 30,
+        "postcase_crc_samples": 8,
+        "startup_agreement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "b303cea25eeda7c18cd913a876e24f93e5d98ba2ba70754455517309b2f1b94d",
+          "peers": [
+            {
+              "capabilities": {
+                "actual_image_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+                "cpu_arch": 2,
+                "features": 127,
+                "backend": 2,
+                "fp": 2,
+                "overlays": "interpreted",
+                "offers": 1
+              },
+              "settlement": {
+                "profile": "mmx6.win64-clang22.loopback",
+                "revision": 2,
+                "selected_sha256": "b303cea25eeda7c18cd913a876e24f93e5d98ba2ba70754455517309b2f1b94d",
+                "cycles": 0,
+                "sim_tick": 0,
+                "before_enter_guest": 1
+              }
+            },
+            {
+              "capabilities": {
+                "actual_image_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+                "cpu_arch": 2,
+                "features": 127,
+                "backend": 2,
+                "fp": 2,
+                "overlays": "interpreted",
+                "offers": 1
+              },
+              "settlement": {
+                "profile": "mmx6.win64-clang22.loopback",
+                "revision": 2,
+                "selected_sha256": "b303cea25eeda7c18cd913a876e24f93e5d98ba2ba70754455517309b2f1b94d",
+                "cycles": 0,
+                "sim_tick": 0,
+                "before_enter_guest": 1
+              }
+            }
+          ]
+        },
+        "final_agreement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "b303cea25eeda7c18cd913a876e24f93e5d98ba2ba70754455517309b2f1b94d",
+          "peers": [
+            {
+              "capabilities": {
+                "actual_image_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+                "cpu_arch": 2,
+                "features": 127,
+                "backend": 2,
+                "fp": 2,
+                "overlays": "interpreted",
+                "offers": 1
+              },
+              "settlement": {
+                "profile": "mmx6.win64-clang22.loopback",
+                "revision": 2,
+                "selected_sha256": "b303cea25eeda7c18cd913a876e24f93e5d98ba2ba70754455517309b2f1b94d",
+                "cycles": 0,
+                "sim_tick": 0,
+                "before_enter_guest": 1
+              }
+            },
+            {
+              "capabilities": {
+                "actual_image_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+                "cpu_arch": 2,
+                "features": 127,
+                "backend": 2,
+                "fp": 2,
+                "overlays": "interpreted",
+                "offers": 1
+              },
+              "settlement": {
+                "profile": "mmx6.win64-clang22.loopback",
+                "revision": 2,
+                "selected_sha256": "b303cea25eeda7c18cd913a876e24f93e5d98ba2ba70754455517309b2f1b94d",
+                "cycles": 0,
+                "sim_tick": 0,
+                "before_enter_guest": 1
+              }
+            }
+          ]
+        },
+        "exits": [
+          0,
+          0
+        ],
+        "composed_capture_sha256": [
+          "1ab4a686eff0664cd0396e98a201c04e121af387cfbc08dee7d2b562cd4e251c",
+          "24360ae32c87dddd2c8ae6e7d00daa780a2a2244d2e1064fdb2ee4000996a618"
+        ]
+      },
+      {
+        "first_seat": 1,
+        "checks": {
+          "jump_audio_original_source_bound": true,
+          "jump_audio_both_peers_completed": true,
+          "declared_build_manifest_bound_to_staged_images": true,
+          "jump_audio_declared_sources_match": true,
+          "host_profile_settled_before_guest": true,
+          "p2_right_reaches_both_peers": true,
+          "p2_right_preserves_p1_x": true,
+          "p1_jump_reaches_both_peers": true,
+          "p1_jump_preserves_p2_y": true,
+          "both_alive_healthy": true,
+          "mailbox_unused": true,
+          "default_resident_loader_committed": true,
+          "jump_audio_published_neutral_requests_completed": true,
+          "jump_audio_resolved_crc_after_case": true,
+          "jump_audio_final_private_cards_unchanged": true,
+          "jump_audio_owned_pair_cleanup": true
+        },
+        "audio_peers": [
+          {
+            "peer": 0,
+            "checks": {
+              "two_keyons": true,
+              "vocal_lifetime_overlap": true,
+              "p2_source_sample": true,
+              "p2_pitch_adsr_numeric": true,
+              "p2_voice_route": true,
+              "p2_natural_end": true,
+              "p1_source_sample": true,
+              "p1_pitch_adsr_numeric": true,
+              "p1_voice_route": true,
+              "p1_natural_end": true,
+              "p2_final_dsp_attribution": true,
+              "p2_final_envelope_terminated": true,
+              "p2_final_pitch_adsr_numeric": true,
+              "p2_final_noise_off": true,
+              "p1_final_dsp_attribution": true,
+              "p1_final_envelope_terminated": true,
+              "p1_final_pitch_adsr_numeric": true,
+              "p1_final_noise_off": true,
+              "private_source_banks_stable": true
+            },
+            "actors": [
+              {
+                "seat": 1,
+                "keyon": {
+                  "seq": 244,
+                  "frame": 3915,
+                  "kind": "KEYON",
+                  "v": 44,
+                  "addr": 12368,
+                  "pitch": 1144,
+                  "adsr_lo": 33023,
+                  "adsr_hi": 8128,
+                  "vol_l": 8544,
+                  "vol_r": 10157,
+                  "sample_bank": 31
+                },
+                "sample_sha256": "2d7263e69e5a6cb0f7a9a11eee2976efd683e22359d9083fcc77d411a4c4fe82",
+                "source_character": "Zero",
+                "source_record": 7,
+                "lifetime": {
+                  "disposition": "natural_end",
+                  "terminal": {
+                    "seq": 249,
+                    "frame": 3936,
+                    "kind": "END_STOP",
+                    "v": 44,
+                    "addr": 12384,
+                    "pitch": 1144,
+                    "adsr_lo": 33023,
+                    "adsr_hi": 8128,
+                    "vol_l": 8544,
+                    "vol_r": 10157,
+                    "sample_bank": 31
+                  },
+                  "engine_frames": 21
+                }
+              },
+              {
+                "seat": 0,
+                "keyon": {
+                  "seq": 247,
+                  "frame": 3928,
+                  "kind": "KEYON",
+                  "v": 20,
+                  "addr": 331200,
+                  "pitch": 1144,
+                  "adsr_lo": 33023,
+                  "adsr_hi": 8128,
+                  "vol_l": 10157,
+                  "vol_r": 8544,
+                  "sample_bank": 0
+                },
+                "sample_sha256": "df2849a939d2df5955dffd6b9110938c05a5bf3703393f4ba0a174096c74f250",
+                "source_character": "X",
+                "source_record": 3,
+                "lifetime": {
+                  "disposition": "natural_end",
+                  "terminal": {
+                    "seq": 251,
+                    "frame": 3943,
+                    "kind": "END_STOP",
+                    "v": 20,
+                    "addr": 331216,
+                    "pitch": 1144,
+                    "adsr_lo": 33023,
+                    "adsr_hi": 8128,
+                    "vol_l": 10157,
+                    "vol_r": 8544,
+                    "sample_bank": 0
+                  },
+                  "engine_frames": 15
+                }
+              }
+            ]
+          },
+          {
+            "peer": 1,
+            "checks": {
+              "two_keyons": true,
+              "vocal_lifetime_overlap": true,
+              "p2_source_sample": true,
+              "p2_pitch_adsr_numeric": true,
+              "p2_voice_route": true,
+              "p2_natural_end": true,
+              "p1_source_sample": true,
+              "p1_pitch_adsr_numeric": true,
+              "p1_voice_route": true,
+              "p1_natural_end": true,
+              "p2_final_dsp_attribution": true,
+              "p2_final_envelope_terminated": true,
+              "p2_final_pitch_adsr_numeric": true,
+              "p2_final_noise_off": true,
+              "p1_final_dsp_attribution": true,
+              "p1_final_envelope_terminated": true,
+              "p1_final_pitch_adsr_numeric": true,
+              "p1_final_noise_off": true,
+              "private_source_banks_stable": true
+            },
+            "actors": [
+              {
+                "seat": 1,
+                "keyon": {
+                  "seq": 244,
+                  "frame": 3915,
+                  "kind": "KEYON",
+                  "v": 44,
+                  "addr": 12368,
+                  "pitch": 1144,
+                  "adsr_lo": 33023,
+                  "adsr_hi": 8128,
+                  "vol_l": 8544,
+                  "vol_r": 10157,
+                  "sample_bank": 31
+                },
+                "sample_sha256": "2d7263e69e5a6cb0f7a9a11eee2976efd683e22359d9083fcc77d411a4c4fe82",
+                "source_character": "Zero",
+                "source_record": 7,
+                "lifetime": {
+                  "disposition": "natural_end",
+                  "terminal": {
+                    "seq": 249,
+                    "frame": 3936,
+                    "kind": "END_STOP",
+                    "v": 44,
+                    "addr": 12384,
+                    "pitch": 1144,
+                    "adsr_lo": 33023,
+                    "adsr_hi": 8128,
+                    "vol_l": 8544,
+                    "vol_r": 10157,
+                    "sample_bank": 31
+                  },
+                  "engine_frames": 21
+                }
+              },
+              {
+                "seat": 0,
+                "keyon": {
+                  "seq": 247,
+                  "frame": 3928,
+                  "kind": "KEYON",
+                  "v": 20,
+                  "addr": 331200,
+                  "pitch": 1144,
+                  "adsr_lo": 33023,
+                  "adsr_hi": 8128,
+                  "vol_l": 10157,
+                  "vol_r": 8544,
+                  "sample_bank": 0
+                },
+                "sample_sha256": "df2849a939d2df5955dffd6b9110938c05a5bf3703393f4ba0a174096c74f250",
+                "source_character": "X",
+                "source_record": 3,
+                "lifetime": {
+                  "disposition": "natural_end",
+                  "terminal": {
+                    "seq": 251,
+                    "frame": 3943,
+                    "kind": "END_STOP",
+                    "v": 20,
+                    "addr": 331216,
+                    "pitch": 1144,
+                    "adsr_lo": 33023,
+                    "adsr_hi": 8128,
+                    "vol_l": 10157,
+                    "vol_r": 8544,
+                    "sample_bank": 0
+                  },
+                  "engine_frames": 15
+                }
+              }
+            ]
+          }
+        ],
+        "resolved_crc_samples": 30,
+        "postcase_crc_samples": 7,
+        "startup_agreement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "f191b915d36a278a9d24569afcd5da473c7b869b9c3cc6a13f1ba4eaac5b67fe",
+          "peers": [
+            {
+              "capabilities": {
+                "actual_image_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+                "cpu_arch": 2,
+                "features": 127,
+                "backend": 2,
+                "fp": 2,
+                "overlays": "interpreted",
+                "offers": 1
+              },
+              "settlement": {
+                "profile": "mmx6.win64-clang22.loopback",
+                "revision": 2,
+                "selected_sha256": "f191b915d36a278a9d24569afcd5da473c7b869b9c3cc6a13f1ba4eaac5b67fe",
+                "cycles": 0,
+                "sim_tick": 0,
+                "before_enter_guest": 1
+              }
+            },
+            {
+              "capabilities": {
+                "actual_image_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+                "cpu_arch": 2,
+                "features": 127,
+                "backend": 2,
+                "fp": 2,
+                "overlays": "interpreted",
+                "offers": 1
+              },
+              "settlement": {
+                "profile": "mmx6.win64-clang22.loopback",
+                "revision": 2,
+                "selected_sha256": "f191b915d36a278a9d24569afcd5da473c7b869b9c3cc6a13f1ba4eaac5b67fe",
+                "cycles": 0,
+                "sim_tick": 0,
+                "before_enter_guest": 1
+              }
+            }
+          ]
+        },
+        "final_agreement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "f191b915d36a278a9d24569afcd5da473c7b869b9c3cc6a13f1ba4eaac5b67fe",
+          "peers": [
+            {
+              "capabilities": {
+                "actual_image_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+                "cpu_arch": 2,
+                "features": 127,
+                "backend": 2,
+                "fp": 2,
+                "overlays": "interpreted",
+                "offers": 1
+              },
+              "settlement": {
+                "profile": "mmx6.win64-clang22.loopback",
+                "revision": 2,
+                "selected_sha256": "f191b915d36a278a9d24569afcd5da473c7b869b9c3cc6a13f1ba4eaac5b67fe",
+                "cycles": 0,
+                "sim_tick": 0,
+                "before_enter_guest": 1
+              }
+            },
+            {
+              "capabilities": {
+                "actual_image_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+                "cpu_arch": 2,
+                "features": 127,
+                "backend": 2,
+                "fp": 2,
+                "overlays": "interpreted",
+                "offers": 1
+              },
+              "settlement": {
+                "profile": "mmx6.win64-clang22.loopback",
+                "revision": 2,
+                "selected_sha256": "f191b915d36a278a9d24569afcd5da473c7b869b9c3cc6a13f1ba4eaac5b67fe",
+                "cycles": 0,
+                "sim_tick": 0,
+                "before_enter_guest": 1
+              }
+            }
+          ]
+        },
+        "exits": [
+          0,
+          0
+        ],
+        "composed_capture_sha256": [
+          "b8b56aaca70d690eeb41725ba35c442a7cb2bf1a4a93fce50582416761f9ec58",
+          "b8b56aaca70d690eeb41725ba35c442a7cb2bf1a4a93fce50582416761f9ec58"
+        ]
+      }
+    ],
+    "reviewed_composed_images": "All three unique composed frames were inspected: both distinct actors and stacked HUDs visible. Unpaused captures in the first order differ; no synchronized pixel-equality claim. The second order has identical composed-image hashes.",
+    "full_audio_family_status": "incomplete; this is ground-jump overlap only"
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v20-22ea525-paired-first0\\peer-0\\logs\\intro-present.png",
+      "sha256": "1ab4a686eff0664cd0396e98a201c04e121af387cfbc08dee7d2b562cd4e251c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v20-22ea525-paired-first0\\peer-1\\logs\\intro-present.png",
+      "sha256": "24360ae32c87dddd2c8ae6e7d00daa780a2a2244d2e1064fdb2ee4000996a618"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v20-22ea525-paired-first0\\qualification.json",
+      "sha256": "aab27ead48e1aedfca1bf5572ca7fadf503cef1f52e1adfcbe5eb26d8b9b8d40"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v20-22ea525-paired-first1\\peer-0\\logs\\intro-present.png",
+      "sha256": "b8b56aaca70d690eeb41725ba35c442a7cb2bf1a4a93fce50582416761f9ec58"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v20-22ea525-paired-first1\\peer-1\\logs\\intro-present.png",
+      "sha256": "b8b56aaca70d690eeb41725ba35c442a7cb2bf1a4a93fce50582416761f9ec58"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\jump-audio-v20-22ea525-paired-first1\\qualification.json",
+      "sha256": "aa79979982b6c0b5c1036877f6ff6b19c154e68931b0176fcff2a8bf4c88c98f"
+    }
+  ],
+  "limits": [
+    "Only this exact image and same-machine development profile; production lab stays OFF.",
+    "Paired saber/hurt/death, active STOP7 and co-op-off native character references remain unverified.",
+    "No whole R4/R12 pass, rollback/state-transfer, physical-controller, cross-machine, other-CPU/OS or full campaign result.",
+    "No PCM/music or original-console DSP equivalence; local nine-owner-tag checks remain separately scoped."
+  ],
+  "bypasses": []
+}

@@ -696,9 +696,44 @@
               "No PCM/music continuity, original-console DSP equivalence, physical controls, cross-machine, state/rewind or full campaign qualification."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+            "build_identity": {
+              "executable_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+              "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+              "sdk": "09e8673435c73e516b420e6c13bb11f02dc8aaea",
+              "title_compatibility": "mmx6-x-zero-delay-v18",
+              "semantic_contract_sha256": "e0d4144e1a257ec0a4ea6f918f53a34f904d138c74de007f029452b94f5954c5"
+            },
+            "settings": {
+              "roster": "Falcon X/P1 + ordinary Zero/P2",
+              "peers": "two processes on this physical Windows machine",
+              "transport": "direct numeric127.0.0.1 delay",
+              "rollback": 0,
+              "network_user_states": 0,
+              "muted": "SDL_AUDIODRIVER=dummy"
+            },
+            "action": "Launch separate fresh same-machine pairs for each jump order; use owned published host inputs; independently probe both peers’ sample bytes, numeric DSP state and natural overlapping lifetimes; require pre-frame0 agreement and resolved matching core/mod CRC.",
+            "outcome": "Both jump orders pass all 19 audio checks independently on both peers. Each pair has 30 matching core/mod CRC samples, including 8/7 after its audio case; natural owned exit0 for all four processes. General paired audio and full comparisons remain incomplete.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-character-audio/manifest-bound-22ea525-paired-jump-orders-reviewed.json",
+                "sha256": "49f4f8b9b2773c51fba15bd3d6717a0f1fe6d88a7ab8fd8ba3c85a0d190e1b56"
+              }
+            ],
+            "limits": [
+              "Only this exact image and same-machine development profile; production lab stays OFF.",
+              "Paired saber/hurt/death, active STOP7 and co-op-off native character references remain unverified.",
+              "No whole R4/R12 pass, rollback/state-transfer, physical-controller, cross-machine, other-CPU/OS or full campaign result.",
+              "No PCM/music or original-console DSP equivalence; local nine-owner-tag checks remain separately scoped."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Historical local failures remain retained. Exact 22ea525 local native evidence now corrects saber3/3 and matches 27 events/12 records; full co-op-off reference, remaining audio, active STOP7 and paired general comparisons remain incomplete. P1 idle register preservation is not overlapping-vocal lifetime proof."
+        "limitations": "Historical failures remain retained. Exact 22ea525 matches 27 local events/12 records and passes both paired ground-jump orders on each peer. Co-op-off references, remaining audio, active STOP7 and paired attack/hurt/death overlap remain incomplete."
       }
     },
     {
@@ -1921,9 +1956,44 @@
               "No PCM/music continuity, original-console DSP equivalence, physical controls, cross-machine, state/rewind or full campaign qualification."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+            "build_identity": {
+              "executable_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+              "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+              "sdk": "09e8673435c73e516b420e6c13bb11f02dc8aaea",
+              "title_compatibility": "mmx6-x-zero-delay-v18",
+              "semantic_contract_sha256": "e0d4144e1a257ec0a4ea6f918f53a34f904d138c74de007f029452b94f5954c5"
+            },
+            "settings": {
+              "roster": "Falcon X/P1 + ordinary Zero/P2",
+              "peers": "two processes on this physical Windows machine",
+              "transport": "direct numeric127.0.0.1 delay",
+              "rollback": 0,
+              "network_user_states": 0,
+              "muted": "SDL_AUDIODRIVER=dummy"
+            },
+            "action": "Launch separate fresh same-machine pairs for each jump order; use owned published host inputs; independently probe both peers’ sample bytes, numeric DSP state and natural overlapping lifetimes; require pre-frame0 agreement and resolved matching core/mod CRC.",
+            "outcome": "Both jump orders pass all 19 audio checks independently on both peers. Each pair has 30 matching core/mod CRC samples, including 8/7 after its audio case; natural owned exit0 for all four processes. General paired audio and full comparisons remain incomplete.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-character-audio/manifest-bound-22ea525-paired-jump-orders-reviewed.json",
+                "sha256": "49f4f8b9b2773c51fba15bd3d6717a0f1fe6d88a7ab8fd8ba3c85a0d190e1b56"
+              }
+            ],
+            "limits": [
+              "Only this exact image and same-machine development profile; production lab stays OFF.",
+              "Paired saber/hurt/death, active STOP7 and co-op-off native character references remain unverified.",
+              "No whole R4/R12 pass, rollback/state-transfer, physical-controller, cross-machine, other-CPU/OS or full campaign result.",
+              "No PCM/music or original-console DSP equivalence; local nine-owner-tag checks remain separately scoped."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Historical local failures remain retained. Exact 22ea525 local native evidence now corrects saber3/3 and matches 27 events/12 records; full co-op-off reference, remaining audio, active STOP7 and paired general comparisons remain incomplete. P1 idle register preservation is not overlapping-vocal lifetime proof."
+        "limitations": "Historical failures remain retained. Exact 22ea525 matches 27 local events/12 records and passes both paired ground-jump orders on each peer. Co-op-off references, remaining audio, active STOP7 and paired attack/hurt/death overlap remain incomplete."
       }
     },
     {

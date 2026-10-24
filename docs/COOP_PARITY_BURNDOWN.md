@@ -54,6 +54,13 @@ inactive STOP7 is explicitly pending after a later death sound reuses that
 voice. Active STOP7, co-op-off references and fresh paired general audio remain
 unverified. This adds bounded evidence without changing the 234 dispositions.
 
+The same exact image now also passes both paired ground-jump orders, with
+19 checks per peer and 60 matching core/mod CRC samples across the two runs
+(15 after their audio cases). The
+[paired receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-paired-jump-orders-reviewed.json)
+retains the limited same-machine scope; paired attack/hurt/death and co-op-off
+character references are still required.
+
 The latest frozen candidate is v19, title source a1dac26, SDK bfbfb920,
 title compatibility mmx6-x-zero-delay-v17. Its debug and production suites
 passed 100/100. The [body-audio build and gameplay receipt](evidence/mmx6-body-audio/manifest-bound-a1dac26-build-and-saber-smoke-reviewed.json)
