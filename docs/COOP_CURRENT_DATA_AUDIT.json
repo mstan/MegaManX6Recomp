@@ -1,0 +1,361 @@
+{
+  "schema": 1,
+  "kind": "original_native_current_data_producers_source_audit",
+  "source_only": true,
+  "status": "source_mapped_runtime_unverified",
+  "original": {
+    "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "archive_sha256": "55b03e4ecc13d6110ff300f80b7000b0f97234e19f1b846aa2b885eece30d80f",
+    "members": [
+      {
+        "index": 2,
+        "sector": 36,
+        "size": 74784,
+        "sha256": "d8bcf3aea6caf1dd4098b681ad912692835d726dfe16fddca779e82d894de607"
+      },
+      {
+        "index": 18,
+        "sector": 401,
+        "size": 32488,
+        "sha256": "3ae703ad03b2bbc4b71fc09e5f418e1e87ffd49a4a6a4240e69172fb87036166"
+      },
+      {
+        "index": 20,
+        "sector": 419,
+        "size": 45216,
+        "sha256": "353abfee70d0d12cbdc32d620c5482e15ff26a603e4af58b5d341071ca78a956"
+      }
+    ]
+  },
+  "source_spans": [
+    {
+      "region": "exe",
+      "id": "native_current_pack",
+      "address": "8001BD40",
+      "end_exclusive": "8001C024",
+      "bytes": 740,
+      "sha256": "0cd0b74b27b104d034399664381d334dafa5b077061c6eb1ced6484a4daba681"
+    },
+    {
+      "region": "exe",
+      "id": "native_current_unpack",
+      "address": "8001BA1C",
+      "end_exclusive": "8001BD40",
+      "bytes": 804,
+      "sha256": "1ab0bad5c14c9da324c5a3ec480a60e707beb65a118506e82e02ebb9cb8bde73"
+    },
+    {
+      "region": "exe",
+      "id": "native_exit_consumer",
+      "address": "8001E32C",
+      "end_exclusive": "8001E6E4",
+      "bytes": 952,
+      "sha256": "c532803823d419cf6804de1052208f0e5c9f8fb580ceb203b12de4d4157a6cbb"
+    },
+    {
+      "region": "exe",
+      "id": "positive_stage0_exit",
+      "address": "8001E394",
+      "end_exclusive": "8001E3B4",
+      "bytes": 32,
+      "sha256": "94ed65bf87ab94947f6807cfc9d15b8e00b0d623d85e5fa33f602ea90fa9a8ba"
+    },
+    {
+      "region": "exe",
+      "id": "native_report_loader",
+      "address": "8001E81C",
+      "end_exclusive": "8001E880",
+      "bytes": 100,
+      "sha256": "a8311628e312626c49438b39722841abba8d26e51b66dd65750571c3c5c693bb"
+    },
+    {
+      "region": "bin2",
+      "id": "intro_finale_exit_producer",
+      "address": "800F65A4",
+      "end_exclusive": "800F65DC",
+      "bytes": 56,
+      "sha256": "892a71b78f5ee9007907fd493fa83eb8e035432b220b75e99973b0097920a59d"
+    },
+    {
+      "region": "bin20",
+      "id": "report_export_step",
+      "address": "800EAC28",
+      "end_exclusive": "800EAD70",
+      "bytes": 328,
+      "sha256": "5d6660ec91bc61ca59a83572b6bbe51ba3235126bc396472338cde70425c3b7e"
+    },
+    {
+      "region": "bin20",
+      "id": "report_export_dispatch",
+      "address": "800EF638",
+      "end_exclusive": "800EF674",
+      "bytes": 60,
+      "sha256": "ae4a11150a62036e69c1bb98fb9ce8b046cc05fec03f98492f5b9a40eed675e6"
+    },
+    {
+      "region": "bin20",
+      "id": "report_export_dispatch_table",
+      "address": "800F3970",
+      "end_exclusive": "800F397C",
+      "bytes": 12,
+      "sha256": "90f08a9fcf475a75ca1923a6496693c2f06045bdc8f2bbc2fe30ff085e0daf7e"
+    }
+  ],
+  "direct_pack_callers": [
+    {
+      "region": "bin18",
+      "address": "800ED15C",
+      "instruction": "JAL",
+      "target": "8001BD40"
+    },
+    {
+      "region": "bin20",
+      "address": "800EACB0",
+      "instruction": "JAL",
+      "target": "8001BD40"
+    }
+  ],
+  "scan_scope": {
+    "exe_payload_bytes": 520192,
+    "bin_members": 59,
+    "instruction_alignment": 4,
+    "ops": [
+      "J",
+      "JAL"
+    ],
+    "indirect_calls": "not proven absent"
+  },
+  "pack_contract": {
+    "function": "8001BD40",
+    "arguments": "Incoming argument registers ignored; fixed native globals",
+    "fixed_source": "800CCED0",
+    "fixed_destination": "80070CC4",
+    "header_store": "8001BD9C",
+    "header_value": 1,
+    "completion": "Header is stored before payload copies; require native return and stable observations",
+    "leaf": true,
+    "private_coop_projection": "Source routine alone does not establish active campaign ownership"
+  },
+  "intro_route": {
+    "stage": 0,
+    "bin_member": 2,
+    "finale_dispatch": "800F64C0",
+    "dispatch_index": "actor+6",
+    "dispatch_table": "800FB938",
+    "entries": [
+      "800F2BE4",
+      "800F2D08",
+      "800F2EBC",
+      "800F64FC",
+      "800F6548",
+      "800F65A4"
+    ],
+    "final_step": "800F65A4",
+    "gate": "Native dialogue active byte8008EAFC==0",
+    "positive_exit_store": "800F65C0",
+    "positive_exit_value": 64,
+    "consumer": "8001E32C",
+    "stage0_branch": "8001E394..8001E3B4",
+    "intermediate": {
+      "major": 11,
+      "phase": 0,
+      "phase2": 0,
+      "phase3": 0,
+      "play66": 1
+    },
+    "loader": "8001E81C",
+    "destination": {
+      "major": 12,
+      "stage": 15,
+      "section": 0,
+      "checkpoint": 0
+    }
+  },
+  "report_route": {
+    "bin_member": 20,
+    "stage": 15,
+    "dispatcher": "800EF638",
+    "dispatch_index": "signed report-context+2",
+    "table": "800F3970",
+    "entries": [
+      "800EAC28",
+      "800EAD70",
+      "800EAE98"
+    ],
+    "entry0": "800EAC28",
+    "pack_call": "800EACB0",
+    "sequencing": "After native report finalization helper800EE6F4; before later report pages/card-save choice"
+  },
+  "unpack_contract": {
+    "function": "8001BA1C",
+    "argument": "a0 points to native payload",
+    "persistent_imports": [
+      {
+        "current_offset": "0x4",
+        "play_offset": "0x70",
+        "bytes": 4
+      },
+      {
+        "current_offset": "0x8",
+        "play_offset": "0x74",
+        "bytes": 8
+      },
+      {
+        "current_offset": "0x10",
+        "play_offset": "0x6c",
+        "bytes": 4
+      },
+      {
+        "current_offset": "0x14",
+        "play_offset": "0x6a",
+        "bytes": 2
+      },
+      {
+        "current_offset": "0x36",
+        "play_offset": "0x5b",
+        "bytes": 2
+      },
+      {
+        "current_offset": "0x38",
+        "play_offset": "0x61",
+        "bytes": 2
+      },
+      {
+        "current_offset": "0x3a",
+        "play_offset": "0x60",
+        "bytes": 1
+      },
+      {
+        "current_offset": "0x3b",
+        "play_offset": "0x5f",
+        "bytes": 1
+      },
+      {
+        "current_offset": "0x3c",
+        "play_offset": "0x69",
+        "bytes": 1
+      },
+      {
+        "current_offset": "0x3d",
+        "play_offset": "0x8d",
+        "bytes": 2
+      },
+      {
+        "current_offset": "0x40",
+        "play_offset": "0xcc",
+        "bytes": 4
+      },
+      {
+        "current_offset": "0x44",
+        "play_offset": "0xd8",
+        "bytes": 64
+      },
+      {
+        "current_offset": "0x84",
+        "play_offset": "0x9e",
+        "bytes": 42
+      },
+      {
+        "current_offset": "0xb8",
+        "play_offset": "0xd2",
+        "bytes": 4
+      },
+      {
+        "current_offset": "0xbc",
+        "play_offset": "0x168",
+        "bytes": 16
+      },
+      {
+        "current_offset": "0xcc",
+        "play_offset": "0xc9",
+        "bytes": 1
+      },
+      {
+        "current_offset": "0xcd",
+        "play_offset": "0x438",
+        "bytes": 1
+      },
+      {
+        "current_offset": "0xce",
+        "play_offset": "0x178",
+        "bytes": 704
+      },
+      {
+        "current_offset": "0x390",
+        "play_offset": "0x43c",
+        "bytes": 36
+      },
+      {
+        "current_offset": "0x3b4",
+        "play_offset": "0x465",
+        "bytes": 3
+      }
+    ],
+    "exceptions": [
+      "Native import does not restore campaign characterPLAY+38 or armorPLAY+5E.",
+      "Native lives are initialized2 or4 from the original parts policy."
+    ]
+  },
+  "important_exports": [
+    {
+      "name": "shared parts",
+      "play_offset": "0x70",
+      "current_offset": "0x4",
+      "bytes": 4
+    },
+    {
+      "name": "upgrade once mask",
+      "play_offset": "0x6c",
+      "current_offset": "0x10",
+      "bytes": 4
+    },
+    {
+      "name": "per-character maximum HP",
+      "play_offset": "0x5b",
+      "current_offset": "0x36",
+      "bytes": 2
+    },
+    {
+      "name": "per-character maximum energy",
+      "play_offset": "0x61",
+      "current_offset": "0x38",
+      "bytes": 2
+    },
+    {
+      "name": "earned weapon mask",
+      "play_offset": "0x60",
+      "current_offset": "0x3a",
+      "bytes": 1
+    },
+    {
+      "name": "found Reploid states",
+      "play_offset": "0xd8",
+      "current_offset": "0x44",
+      "bytes": 64
+    },
+    {
+      "name": "nightmare soul totals",
+      "play_offset": "0xd2",
+      "current_offset": "0xb8",
+      "bytes": 4
+    },
+    {
+      "name": "nightmare consumed matrix",
+      "play_offset": "0x178",
+      "current_offset": "0xce",
+      "bytes": 704
+    }
+  ],
+  "bypass_policy": {
+    "native_route": "Actual intro finale, accepted native dialogue, positive exit, report and stable CURRENT observations",
+    "fixture": "Calling pack or authoring CURRENT would bypass eligibility/earned progress; it cannot qualify boss, exit, acquisition or card I/O.",
+    "earned_inventory_mailbox": "Prerequisite weapon flags only; mailbox9 does not export CURRENT"
+  },
+  "limits": [
+    "Original-source reproduction only; no game was launched by this audit.",
+    "No runtime, acquired-progress, boss/finale activation, card or current-import pass.",
+    "Eligible header alone does not prove payload completion or independently earned primary-campaign data.",
+    "Direct J/JAL scan is bounded source evidence; dynamic/indirect producers are not excluded.",
+    "No original executable/archive bytes are emitted."
+  ]
+}
