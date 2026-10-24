@@ -332,7 +332,7 @@ class BodyPairTests(unittest.TestCase):
                 runner.validate_options(parser,parser.parse_args([x for x in options if x!=missing]))
 
     def test_partial_stops_have_distinct_exit_and_cannot_hide_cleanup_failure(self):
-        for status,code in ((adapter.BODY_PARTIAL,2),('failed',1),('passed',0)):
+        for status,code in ((adapter.BODY_PARTIAL,2),('primary_audio_observations_partial_missing_overlap',2),('failed',1),('passed',0)):
             parser=Mock();parser.parse_args.return_value=Mock(out=Path('unused'))
             with patch.object(runner,'make_parser',return_value=parser),patch.object(runner,'validate_options'), \
                  patch.object(runner,'run',return_value=dict(status=status,checks={})),patch('builtins.print'):
@@ -346,6 +346,27 @@ class BodyPairTests(unittest.TestCase):
                 adapter.finalize(report,Path('unused'),runtime_ready=True,owned_processes=2)
             self.assertEqual(report['status'],'failed' if bad else adapter.BODY_PARTIAL)
             self.assertFalse(report['default_intro_qualified'])
+
+    def test_primary_cannot_bypass_two_image_profile_and_route_validation(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture=Fixture(Path(temporary));fixture.report['checks']['host_profile_settled_before_guest']=False
+            with self.assertRaises(ValueError):
+                adapter.exercise_primary(fixture.ctx,expected_sha=fixture.sha,source=fixture.source,
+                    original_exe=Path('unused'),original_disc=Path('unused'))
+            self.assertFalse(fixture.controls);self.assertFalse((Path(temporary)/'primary-audio').exists())
+
+    def test_primary_requires_full_gates_and_separate_fatal_Zero_case(self):
+        parser=runner.make_parser();base=['--tools-root','.','--build','.','--disc','runtime.cue','--out','unused']
+        with patch('sys.stderr'),self.assertRaises(SystemExit):
+            runner.validate_options(parser,parser.parse_args(base+['--primary-audio-smoke']))
+        options=base+['--primary-audio-smoke','--jump-audio-smoke','--require-state-crc','--require-host-profile',
+            '--expected-host-profile','mmx6.win64-clang22.loopback','--expected-host-profile-revision','2',
+            '--expected-exe-sha256','a'*64,'--expected-manifest-sha256','b'*64,
+            '--original-exe','SLUS_013.95','--original-disc','original.bin']
+        runner.validate_options(parser,parser.parse_args(options))
+        for invalid in ([x for x in options if x!='--require-state-crc'],options+['--body-audio-smoke']):
+            with patch('sys.stderr'),self.assertRaises(SystemExit):
+                runner.validate_options(parser,parser.parse_args(invalid))
 
 
 if __name__ == "__main__": unittest.main()

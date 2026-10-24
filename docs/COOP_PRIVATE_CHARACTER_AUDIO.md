@@ -1,9 +1,14 @@
 # Private ordinary Zero character audio candidate
 
 The v18 title candidate extends the default fixed X/P1 + ordinary Zero/P2
-audio correction to source-derived character records. Full local and
-same-machine paired qualification is still required. R4/R12 remain incomplete;
-opposite rosters and unproved child-actor calls remain outside this boundary.
+audio correction to source-derived character records. The
+[combined exact-image receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-R4-R12-reviewed.json)
+now passes the frozen bounded R4 sample-identity and R12 natural-overlap checks
+in local co-op and same-machine netplay. It retains 24 character/family/mode
+coverage cells, 45 comparisons against co-op-disabled native references and
+17 actual jump/hurt or Saber/hurt overlap windows. Other action families,
+active STOP7, music/PCM, native state/rewind, opposite rosters and unproved
+child-actor calls remain open in the broader audio issues.
 
 The [exact-image local receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-local-body-reviewed.json)
 now matches 27 native audio events across 12 original records, including the
@@ -11,8 +16,8 @@ previously wrong saber3/3 vocal, hurt/death sounds and group3/17's effects-bank
 alias. All 18 applicable checks pass with nine stable voice leases, eight
 ordinary contacts, preserved primary hardware registers and natural Quit exit0.
 The inactive STOP7 volume transition was obscured by source-matched death3/14
-reusing private23; it remains pending. Active STOP7, unseen records,
-remaining co-op comparisons and full attack/hurt overlap remain unverified.
+reusing private23; it remains pending. Active STOP7 and unseen records remain
+unverified; this receipt alone does not close the broader audio requirements.
 The underlying native candidate is 22ea525; later
 commits changed the observer and retained evidence, not that game image.
 
@@ -64,7 +69,22 @@ scene shutdown on a surviving co-op partner. The raw observer's earlier
 "death vocal" label for3/14 is corrected in the reviewed receipt without
 altering its events. Co-op X hurt/death, remaining attack-family comparisons,
 paired Zero's optional Saber vocal, actual attack/hurt overlap, active STOP7
-and native state/rewind remain open. All 162 selected Python tests pass.
+and native state/rewind remained open at that milestone. Its 162 selected
+Python tests passed.
+
+The later combined receipt adds direct local X jump/buster/hurt/death probes,
+paired X audio and independently observed Zero jump/Saber vocals during X
+hurt. Both channels reach natural END_STOP in every retained overlap window.
+The primary death effect ends naturally at 98 frames while Zero survives;
+the native-off primary scene's global stop does not run. Both peers finish
+with X fallen and Zero at31HP, retain all nine owners and unchanged native
+and private character banks, and match 37 resolved core/mod samples including
+seven after the new case. Both owned processes quit naturally with exit0;
+the local native-consumption capture finalizes with both Square seats and
+Zero Cross observed. All 170 selected Python tests pass. Broader Beads
+acceptance remains open for additional action/stop callers, active STOP7,
+music/PCM and current-build native state/rewind; the ledger pass is bounded
+to its frozen R4/R12 requirements and this fixed roster/image/host.
 
 The original USA1.1 data contains 45 populated records and 47 voice entries
 across groups1/3. The resolver retains effective bank aliases, populated-program

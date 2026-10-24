@@ -425,6 +425,20 @@ def exercise_body(ctx, *, expected_sha, source, original_exe, original_disc, tim
             if failure is None:raise audio.AudioQualificationError('Paired body audio cleanup failed')
 
 
+def exercise_primary(ctx,*,expected_sha,source,original_exe,original_disc,timeout=150):
+    """Full paired startup gates, then two independent primary/overlap probes."""
+    import mmx6_coop_primary_audio as primary
+    validate_context(ctx,expected_sha)
+    def set_input(seat,bits):
+        ctx['clients'][seat].host_input(bits)
+        return dict(ctx['clients'][seat].reentry_route.report['inputs'][-1],logical_seat=seat,local_port=1)
+    return primary.exercise(dict(ctx,mode='netplay',input_path='published_host',
+        expected_sha256=expected_sha,private_banks=source['private_banks'],set_input=set_input,
+        request_peer=lambda peer,cmd,**kw:ctx['clients'][peer].request(cmd,**kw),
+        output=Path(ctx['output'])/'primary-audio'),source['contract'],
+        primary.sources(original_exe,original_disc),timeout=timeout)
+
+
 def finalize(report, output, *, runtime_ready, owned_processes):
     """Late cleanup/profile failure cannot inherit an earlier observer success."""
     try:

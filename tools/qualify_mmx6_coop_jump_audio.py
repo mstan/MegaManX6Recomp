@@ -230,7 +230,7 @@ def inspect_capture(candidate: Path, image: str, manifest: str, required_seats: 
                 scope="Ordered native N/P2 C consumption; no temporal "+("jump" if button==audio.CROSS else "saber")+" association or audio/output equivalence")
 
 
-def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,expected_image,first_seat,max_attempts,audio_timeout,private_banks=None,body_source=None,body_death=False,zero_overlay=None):
+def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,expected_image,first_seat,max_attempts,audio_timeout,private_banks=None,body_source=None,body_death=False,zero_overlay=None,custom_observer=None):
     host.require_windows();host.reserve(port)
     prepared=host.json_object(candidate/"preparation.json")
     baseline.candidate_environment(candidate,prepared)
@@ -282,9 +282,11 @@ def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,exp
             route.set(0,0);route.set(1,0)
             context=dict(mode="local",input_path="published_host",clients=[route.client],
                 request=control,hold=route.hold,native_advance=route.native_advance,report=report,
-                candidate=candidate,expected_sha256=expected_image)
+                candidate=candidate,expected_sha256=expected_image,set_input=route.set)
             if private_banks is not None:context["private_banks"]=private_banks
-            if body_source is not None:
+            if custom_observer is not None:
+                report['audio']=custom_observer(context)
+            elif body_source is not None:
                 context["set_input"]=route.set
                 context["zero_overlay"]=zero_overlay
                 report["audio"]=body_audio.exercise(context,contract,source=body_source,timeout=audio_timeout,death=body_death)

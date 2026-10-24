@@ -1,0 +1,5333 @@
+{
+  "schema": 1,
+  "kind": "reviewed_bounded_R4_character_audio_and_R12_natural_overlap",
+  "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+  "build_identity": {
+    "exe_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+    "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+    "compiled_source_commit": "22ea525bbc52b5177f501989fedc5873ef30099c",
+    "sdk_commit": "09e8673435c73e516b420e6c13bb11f02dc8aaea"
+  },
+  "requirements": {
+    "R4": "Capture native X and Zero jump, attack, hurt and death tones; compare each with a co-op-off character reference.",
+    "R12": "Overlap actual jump/hurt and attack events; retain tone identity and natural channel lifetimes so one actor cannot steal the other's voice."
+  },
+  "results": {
+    "R4": {
+      "local": "passed",
+      "netplay": "passed"
+    },
+    "R12": {
+      "local": "passed",
+      "netplay": "passed"
+    }
+  },
+  "settings": {
+    "roster": "Falcon X/P1 + ordinary Zero/P2",
+    "peers": "same physical Windows machine, direct127.0.0.1 delay",
+    "paired_profile": "mmx6.win64-clang22.loopback",
+    "revision": 2,
+    "input": "owned published host digital slots",
+    "loader": "default resident assets, authentic1x",
+    "muted": "SDL_AUDIODRIVER=dummy",
+    "rollback": false,
+    "rewind": false
+  },
+  "R4": {
+    "coverage_cells": [
+      {
+        "mode": "local",
+        "peer": null,
+        "character": "X",
+        "family": "jump",
+        "result": "passed",
+        "comparison_ids": [
+          1
+        ]
+      },
+      {
+        "mode": "local",
+        "peer": null,
+        "character": "X",
+        "family": "attack",
+        "result": "passed",
+        "comparison_ids": [
+          2
+        ]
+      },
+      {
+        "mode": "local",
+        "peer": null,
+        "character": "X",
+        "family": "hurt",
+        "result": "passed",
+        "comparison_ids": [
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "mode": "local",
+        "peer": null,
+        "character": "X",
+        "family": "death",
+        "result": "passed",
+        "comparison_ids": [
+          6,
+          7
+        ]
+      },
+      {
+        "mode": "local",
+        "peer": null,
+        "character": "Zero",
+        "family": "jump",
+        "result": "passed",
+        "comparison_ids": [
+          8
+        ]
+      },
+      {
+        "mode": "local",
+        "peer": null,
+        "character": "Zero",
+        "family": "attack",
+        "result": "passed",
+        "comparison_ids": [
+          9,
+          10
+        ]
+      },
+      {
+        "mode": "local",
+        "peer": null,
+        "character": "Zero",
+        "family": "hurt",
+        "result": "passed",
+        "comparison_ids": [
+          11,
+          12,
+          13
+        ]
+      },
+      {
+        "mode": "local",
+        "peer": null,
+        "character": "Zero",
+        "family": "death",
+        "result": "passed",
+        "comparison_ids": [
+          14,
+          15
+        ]
+      },
+      {
+        "mode": "netplay",
+        "peer": 0,
+        "character": "X",
+        "family": "jump",
+        "result": "passed",
+        "comparison_ids": [
+          16
+        ]
+      },
+      {
+        "mode": "netplay",
+        "peer": 0,
+        "character": "X",
+        "family": "attack",
+        "result": "passed",
+        "comparison_ids": [
+          17
+        ]
+      },
+      {
+        "mode": "netplay",
+        "peer": 0,
+        "character": "X",
+        "family": "hurt",
+        "result": "passed",
+        "comparison_ids": [
+          18,
+          19,
+          20
+        ]
+      },
+      {
+        "mode": "netplay",
+        "peer": 0,
+        "character": "X",
+        "family": "death",
+        "result": "passed",
+        "comparison_ids": [
+          21,
+          22
+        ]
+      },
+      {
+        "mode": "netplay",
+        "peer": 0,
+        "character": "Zero",
+        "family": "jump",
+        "result": "passed",
+        "comparison_ids": [
+          23
+        ]
+      },
+      {
+        "mode": "netplay",
+        "peer": 0,
+        "character": "Zero",
+        "family": "attack",
+        "result": "passed",
+        "comparison_ids": [
+          24,
+          25
+        ]
+      },
+      {
+        "mode": "netplay",
+        "peer": 0,
+        "character": "Zero",
+        "family": "hurt",
+        "result": "passed",
+        "comparison_ids": [
+          26,
+          27,
+          28
+        ]
+      },
+      {
+        "mode": "netplay",
+        "peer": 0,
+        "character": "Zero",
+        "family": "death",
+        "result": "passed",
+        "comparison_ids": [
+          29,
+          30
+        ]
+      },
+      {
+        "mode": "netplay",
+        "peer": 1,
+        "character": "X",
+        "family": "jump",
+        "result": "passed",
+        "comparison_ids": [
+          31
+        ]
+      },
+      {
+        "mode": "netplay",
+        "peer": 1,
+        "character": "X",
+        "family": "attack",
+        "result": "passed",
+        "comparison_ids": [
+          32
+        ]
+      },
+      {
+        "mode": "netplay",
+        "peer": 1,
+        "character": "X",
+        "family": "hurt",
+        "result": "passed",
+        "comparison_ids": [
+          33,
+          34,
+          35
+        ]
+      },
+      {
+        "mode": "netplay",
+        "peer": 1,
+        "character": "X",
+        "family": "death",
+        "result": "passed",
+        "comparison_ids": [
+          36,
+          37
+        ]
+      },
+      {
+        "mode": "netplay",
+        "peer": 1,
+        "character": "Zero",
+        "family": "jump",
+        "result": "passed",
+        "comparison_ids": [
+          38
+        ]
+      },
+      {
+        "mode": "netplay",
+        "peer": 1,
+        "character": "Zero",
+        "family": "attack",
+        "result": "passed",
+        "comparison_ids": [
+          39,
+          40
+        ]
+      },
+      {
+        "mode": "netplay",
+        "peer": 1,
+        "character": "Zero",
+        "family": "hurt",
+        "result": "passed",
+        "comparison_ids": [
+          41,
+          42,
+          43
+        ]
+      },
+      {
+        "mode": "netplay",
+        "peer": 1,
+        "character": "Zero",
+        "family": "death",
+        "result": "passed",
+        "comparison_ids": [
+          44,
+          45
+        ]
+      }
+    ],
+    "comparisons": [
+      {
+        "id": 1,
+        "mode": "local",
+        "peer": null,
+        "character": "X",
+        "family": "jump",
+        "group": 3,
+        "record": 2,
+        "source_matched_events": 1,
+        "sha256": "baee284403154c38bd3ac1cac49015102ca425161e3fdd5b5eaf5c8e26608bc4",
+        "event": {
+          "seq": 216,
+          "frame": 2992,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 329888,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 5481,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-all-jump-variants\\qualification.json",
+          "action": "ground_jump",
+          "event": {
+            "seq": 212,
+            "frame": 3637,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 329888,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 8544,
+            "sample_bank": 0
+          },
+          "sha256": "baee284403154c38bd3ac1cac49015102ca425161e3fdd5b5eaf5c8e26608bc4",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 0,
+            "target": "0x80016C48",
+            "ra": "0x8003D004",
+            "a0": "0x00000003",
+            "a1": "0x00000002",
+            "a2": "0x800970A0",
+            "a3": "0x800970A0",
+            "s3": "0xFF000000",
+            "sp": "0x801FEEF0",
+            "frame": 3636
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 214,
+              "frame": 3649,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 329904,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 8544,
+              "sample_bank": 0
+            },
+            "engine_frames": 12
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 2,
+        "mode": "local",
+        "peer": null,
+        "character": "X",
+        "family": "attack",
+        "group": 1,
+        "record": 8,
+        "source_matched_events": 1,
+        "sha256": "d11a903e4b869160cdd39f86239546da8bb826a8e1472f5b37b565e8211e8c66",
+        "event": {
+          "seq": 206,
+          "frame": 2706,
+          "kind": "KEYON",
+          "v": 21,
+          "addr": 148832,
+          "pitch": 1525,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-all-jump-variants\\qualification.json",
+          "action": "standing_square_attack",
+          "event": {
+            "seq": 259,
+            "frame": 4559,
+            "kind": "KEYON",
+            "v": 21,
+            "addr": 148832,
+            "pitch": 1525,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "d11a903e4b869160cdd39f86239546da8bb826a8e1472f5b37b565e8211e8c66",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 2,
+            "target": "0x80016C48",
+            "ra": "0x800493D4",
+            "a0": "0x00000001",
+            "a1": "0x00000008",
+            "a2": "0x80091298",
+            "a3": "0x80091298",
+            "s3": "0x00000006",
+            "sp": "0x801FEF30",
+            "frame": 4558
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 260,
+              "frame": 4577,
+              "kind": "END_STOP",
+              "v": 21,
+              "addr": 148848,
+              "pitch": 1525,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 18
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 3,
+        "mode": "local",
+        "peer": null,
+        "character": "X",
+        "family": "hurt",
+        "group": 3,
+        "record": 0,
+        "source_matched_events": 9,
+        "sha256": "c5953d3af17822886712bcded0882e7e6af06270ed811930389b07ce81e3cb5d",
+        "event": {
+          "seq": 220,
+          "frame": 2997,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 324784,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 5481,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 250,
+            "frame": 4201,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 324784,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "c5953d3af17822886712bcded0882e7e6af06270ed811930389b07ce81e3cb5d",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 18,
+            "target": "0x80016C48",
+            "ra": "0x80039684",
+            "a0": "0x00000003",
+            "a1": "0x00000000",
+            "a2": "0x800970A0",
+            "a3": "0x00000001",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF20",
+            "frame": 4200
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 251,
+              "frame": 4217,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 324800,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 16
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 4,
+        "mode": "local",
+        "peer": null,
+        "character": "X",
+        "family": "hurt",
+        "group": 3,
+        "record": 1,
+        "source_matched_events": 7,
+        "sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+        "event": {
+          "seq": 238,
+          "frame": 3152,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 326624,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 228,
+            "frame": 3961,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 326624,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 8,
+            "target": "0x80016C48",
+            "ra": "0x80039684",
+            "a0": "0x00000003",
+            "a1": "0x00000001",
+            "a2": "0x800970A0",
+            "a3": "0x00000001",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF20",
+            "frame": 3960
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 231,
+              "frame": 3989,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 326640,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 28
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 5,
+        "mode": "local",
+        "peer": null,
+        "character": "X",
+        "family": "hurt",
+        "group": 3,
+        "record": 17,
+        "source_matched_events": 16,
+        "sha256": "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029",
+        "event": {
+          "seq": 219,
+          "frame": 2997,
+          "kind": "KEYON",
+          "v": 3,
+          "addr": 157552,
+          "pitch": 1024,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 4178,
+          "vol_r": 8227,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-all-jump-variants\\qualification.json",
+          "action": "standing_square_attack",
+          "event": {
+            "seq": 261,
+            "frame": 4581,
+            "kind": "KEYON",
+            "v": 3,
+            "addr": 157552,
+            "pitch": 1024,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 2219,
+            "vol_r": 8227,
+            "sample_bank": 0
+          },
+          "sha256": "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029",
+          "exact_sound_identity": false,
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 262,
+              "frame": 4599,
+              "kind": "END_STOP",
+              "v": 3,
+              "addr": 157568,
+              "pitch": 1024,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 2219,
+              "vol_r": 8227,
+              "sample_bank": 0
+            },
+            "engine_frames": 18
+          },
+          "limit": "Waveform/pitch/ADSR reference only; exact native SOUND caller/record remains unverified."
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 6,
+        "mode": "local",
+        "peer": null,
+        "character": "X",
+        "family": "death",
+        "group": 3,
+        "record": 16,
+        "source_matched_events": 1,
+        "sha256": "15d893361d4f0666bd75dad46a9a193f0173fee5045500404b846fc264a26122",
+        "event": {
+          "seq": 385,
+          "frame": 4301,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 354608,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 337,
+            "frame": 5274,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 354608,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "15d893361d4f0666bd75dad46a9a193f0173fee5045500404b846fc264a26122",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 65,
+            "target": "0x80016C48",
+            "ra": "0x8003D9BC",
+            "a0": "0x00000003",
+            "a1": "0x00000010",
+            "a2": "0x800970A0",
+            "a3": "0x00000000",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF48",
+            "frame": 5273
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 339,
+              "frame": 5358,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 354624,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 84
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 7,
+        "mode": "local",
+        "peer": null,
+        "character": "X",
+        "family": "death",
+        "group": 3,
+        "record": 14,
+        "source_matched_events": 1,
+        "sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+        "event": {
+          "seq": 386,
+          "frame": 4301,
+          "kind": "KEYON",
+          "v": 23,
+          "addr": 364448,
+          "pitch": 1290,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 338,
+            "frame": 5274,
+            "kind": "KEYON",
+            "v": 23,
+            "addr": 364448,
+            "pitch": 1290,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 66,
+            "target": "0x80016C48",
+            "ra": "0x8003D9CC",
+            "a0": "0x00000003",
+            "a1": "0x0000000E",
+            "a2": "0x800970A0",
+            "a3": "0x000027AD",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF48",
+            "frame": 5273
+          },
+          "lifetime": {
+            "disposition": "keyed_off",
+            "terminal": {
+              "seq": 342,
+              "frame": 5371,
+              "kind": "KEYOFF",
+              "v": 23,
+              "addr": 377296,
+              "pitch": 1290,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 0,
+              "vol_r": 0,
+              "sample_bank": 0
+            },
+            "engine_frames": 97
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 8,
+        "mode": "local",
+        "peer": null,
+        "character": "Zero",
+        "family": "jump",
+        "group": 3,
+        "record": 7,
+        "source_matched_events": 4,
+        "sha256": "2d7263e69e5a6cb0f7a9a11eee2976efd683e22359d9083fcc77d411a4c4fe82",
+        "event": {
+          "seq": 271,
+          "frame": 3393,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 12368,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 463,
+            "frame": 7140,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 278496,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "2d7263e69e5a6cb0f7a9a11eee2976efd683e22359d9083fcc77d411a4c4fe82",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 6,
+            "target": "0x80016C48",
+            "ra": "0x8003D004",
+            "a0": "0x00000003",
+            "a1": "0x00000007",
+            "a2": "0x800970A0",
+            "a3": "0x800970A0",
+            "s3": "0xFF000000",
+            "sp": "0x801FEEF0",
+            "frame": 7139
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 465,
+              "frame": 7162,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 278512,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 22
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 9,
+        "mode": "local",
+        "peer": null,
+        "character": "Zero",
+        "family": "attack",
+        "group": 1,
+        "record": 7,
+        "source_matched_events": 8,
+        "sha256": "fed7bfff83b8e45b286ce7831981f2e8ce65a9e80ad3c0d63ec258c59630cf22",
+        "event": {
+          "seq": 239,
+          "frame": 3158,
+          "kind": "KEYON",
+          "v": 47,
+          "addr": 33744,
+          "pitch": 1525,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 13433,
+          "vol_r": 4051,
+          "sample_bank": 30
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\qualification.json",
+          "action": "standing_square_attack",
+          "event": {
+            "seq": 442,
+            "frame": 6777,
+            "kind": "KEYON",
+            "v": 23,
+            "addr": 176464,
+            "pitch": 1525,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 13433,
+            "vol_r": 13433,
+            "sample_bank": 0
+          },
+          "sha256": "fed7bfff83b8e45b286ce7831981f2e8ce65a9e80ad3c0d63ec258c59630cf22",
+          "exact_sound_identity": false,
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 444,
+              "frame": 6803,
+              "kind": "END_STOP",
+              "v": 23,
+              "addr": 176480,
+              "pitch": 1525,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 13433,
+              "vol_r": 13433,
+              "sample_bank": 0
+            },
+            "engine_frames": 26
+          },
+          "limit": "Waveform/pitch/ADSR reference only; exact native SOUND caller/record remains unverified."
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 10,
+        "mode": "local",
+        "peer": null,
+        "character": "Zero",
+        "family": "attack",
+        "group": 3,
+        "record": 3,
+        "source_matched_events": 5,
+        "sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+        "event": {
+          "seq": 240,
+          "frame": 3158,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 5248,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\qualification.json",
+          "action": "standing_square_attack",
+          "event": {
+            "seq": 441,
+            "frame": 6777,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 271376,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 0,
+            "target": "0x80016C48",
+            "ra": "0x8003D004",
+            "a0": "0x00000003",
+            "a1": "0x00000003",
+            "a2": "0x800970A0",
+            "a3": "0x00003479",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF10",
+            "frame": 6776
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 443,
+              "frame": 6791,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 271392,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 14
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 11,
+        "mode": "local",
+        "peer": null,
+        "character": "Zero",
+        "family": "hurt",
+        "group": 3,
+        "record": 0,
+        "source_matched_events": 2,
+        "sha256": "6038134b63be2771567d95c5cb6d00e4d83a4a3890723a49588b39be982721f6",
+        "event": {
+          "seq": 218,
+          "frame": 3196,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 0,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 31
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 479,
+            "frame": 7311,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 266128,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "6038134b63be2771567d95c5cb6d00e4d83a4a3890723a49588b39be982721f6",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 18,
+            "target": "0x80016C48",
+            "ra": "0x80039684",
+            "a0": "0x00000003",
+            "a1": "0x00000000",
+            "a2": "0x800970A0",
+            "a3": "0x00000001",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF20",
+            "frame": 7310
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 480,
+              "frame": 7326,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 266144,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 15
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 12,
+        "mode": "local",
+        "peer": null,
+        "character": "Zero",
+        "family": "hurt",
+        "group": 3,
+        "record": 1,
+        "source_matched_events": 5,
+        "sha256": "9ad087f5829434990a3f9e1affee52b5274234525f454935bbe74295b5f2ffdd",
+        "event": {
+          "seq": 228,
+          "frame": 3348,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 1824,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 31
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 495,
+            "frame": 7642,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 267952,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "9ad087f5829434990a3f9e1affee52b5274234525f454935bbe74295b5f2ffdd",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 29,
+            "target": "0x80016C48",
+            "ra": "0x80039684",
+            "a0": "0x00000003",
+            "a1": "0x00000001",
+            "a2": "0x800970A0",
+            "a3": "0x00000001",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF20",
+            "frame": 7641
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 497,
+              "frame": 7662,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 267968,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 20
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 13,
+        "mode": "local",
+        "peer": null,
+        "character": "Zero",
+        "family": "hurt",
+        "group": 3,
+        "record": 17,
+        "source_matched_events": 7,
+        "sha256": "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029",
+        "event": {
+          "seq": 219,
+          "frame": 3196,
+          "kind": "KEYON",
+          "v": 27,
+          "addr": 55760,
+          "pitch": 1024,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 2219,
+          "vol_r": 8227,
+          "sample_bank": 30
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 478,
+            "frame": 7311,
+            "kind": "KEYON",
+            "v": 3,
+            "addr": 198480,
+            "pitch": 1024,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 8227,
+            "vol_r": 8227,
+            "sample_bank": 0
+          },
+          "sha256": "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 19,
+            "target": "0x80016C48",
+            "ra": "0x80039694",
+            "a0": "0x00000003",
+            "a1": "0x00000011",
+            "a2": "0x800970A0",
+            "a3": "0x000027AD",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF20",
+            "frame": 7310
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 481,
+              "frame": 7330,
+              "kind": "END_STOP",
+              "v": 3,
+              "addr": 198496,
+              "pitch": 1024,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 8227,
+              "vol_r": 8227,
+              "sample_bank": 0
+            },
+            "engine_frames": 19
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 14,
+        "mode": "local",
+        "peer": null,
+        "character": "Zero",
+        "family": "death",
+        "group": 3,
+        "record": 16,
+        "source_matched_events": 1,
+        "sha256": "322b69a7f0999a42269c5d80afb84a62dd628afef350746f7ac877fd24d06387",
+        "event": {
+          "seq": 256,
+          "frame": 3737,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 29904,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 31
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 550,
+            "frame": 8881,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 296032,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "322b69a7f0999a42269c5d80afb84a62dd628afef350746f7ac877fd24d06387",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 62,
+            "target": "0x80016C48",
+            "ra": "0x8003D9BC",
+            "a0": "0x00000003",
+            "a1": "0x00000010",
+            "a2": "0x800970A0",
+            "a3": "0x00000000",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF48",
+            "frame": 8880
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 552,
+              "frame": 8960,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 296048,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 79
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 15,
+        "mode": "local",
+        "peer": null,
+        "character": "Zero",
+        "family": "death",
+        "group": 3,
+        "record": 14,
+        "source_matched_events": 1,
+        "sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+        "event": {
+          "seq": 257,
+          "frame": 3737,
+          "kind": "KEYON",
+          "v": 47,
+          "addr": 39152,
+          "pitch": 1290,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 31
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 551,
+            "frame": 8881,
+            "kind": "KEYON",
+            "v": 23,
+            "addr": 305280,
+            "pitch": 1290,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 63,
+            "target": "0x80016C48",
+            "ra": "0x8003D9CC",
+            "a0": "0x00000003",
+            "a1": "0x0000000E",
+            "a2": "0x800970A0",
+            "a3": "0x000027AD",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF48",
+            "frame": 8880
+          },
+          "lifetime": {
+            "disposition": "keyed_off",
+            "terminal": {
+              "seq": 553,
+              "frame": 8978,
+              "kind": "KEYOFF",
+              "v": 23,
+              "addr": 318128,
+              "pitch": 1290,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 0,
+              "vol_r": 0,
+              "sample_bank": 0
+            },
+            "engine_frames": 97
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 16,
+        "mode": "netplay",
+        "peer": 0,
+        "character": "X",
+        "family": "jump",
+        "group": 3,
+        "record": 6,
+        "source_matched_events": 1,
+        "sha256": "5e96f6c111bb06aee701c64c9406e4d60fe64e3203455e6ccf18eb32109c00bb",
+        "event": {
+          "seq": 249,
+          "frame": 4003,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 338464,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 7899,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-all-jump-variants\\qualification.json",
+          "action": "ground_jump",
+          "event": {
+            "seq": 217,
+            "frame": 3719,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 338464,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 8544,
+            "sample_bank": 0
+          },
+          "sha256": "5e96f6c111bb06aee701c64c9406e4d60fe64e3203455e6ccf18eb32109c00bb",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 0,
+            "target": "0x80016C48",
+            "ra": "0x8003D004",
+            "a0": "0x00000003",
+            "a1": "0x00000006",
+            "a2": "0x800970A0",
+            "a3": "0x800970A0",
+            "s3": "0xFF000000",
+            "sp": "0x801FEEF0",
+            "frame": 3718
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 219,
+              "frame": 3735,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 338480,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 8544,
+              "sample_bank": 0
+            },
+            "engine_frames": 16
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 17,
+        "mode": "netplay",
+        "peer": 0,
+        "character": "X",
+        "family": "attack",
+        "group": 1,
+        "record": 8,
+        "source_matched_events": 1,
+        "sha256": "d11a903e4b869160cdd39f86239546da8bb826a8e1472f5b37b565e8211e8c66",
+        "event": {
+          "seq": 259,
+          "frame": 4550,
+          "kind": "KEYON",
+          "v": 21,
+          "addr": 148832,
+          "pitch": 1525,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-all-jump-variants\\qualification.json",
+          "action": "standing_square_attack",
+          "event": {
+            "seq": 259,
+            "frame": 4559,
+            "kind": "KEYON",
+            "v": 21,
+            "addr": 148832,
+            "pitch": 1525,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "d11a903e4b869160cdd39f86239546da8bb826a8e1472f5b37b565e8211e8c66",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 2,
+            "target": "0x80016C48",
+            "ra": "0x800493D4",
+            "a0": "0x00000001",
+            "a1": "0x00000008",
+            "a2": "0x80091298",
+            "a3": "0x80091298",
+            "s3": "0x00000006",
+            "sp": "0x801FEF30",
+            "frame": 4558
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 260,
+              "frame": 4577,
+              "kind": "END_STOP",
+              "v": 21,
+              "addr": 148848,
+              "pitch": 1525,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 18
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 18,
+        "mode": "netplay",
+        "peer": 0,
+        "character": "X",
+        "family": "hurt",
+        "group": 3,
+        "record": 0,
+        "source_matched_events": 6,
+        "sha256": "c5953d3af17822886712bcded0882e7e6af06270ed811930389b07ce81e3cb5d",
+        "event": {
+          "seq": 270,
+          "frame": 4913,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 324784,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3708,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 250,
+            "frame": 4201,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 324784,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "c5953d3af17822886712bcded0882e7e6af06270ed811930389b07ce81e3cb5d",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 18,
+            "target": "0x80016C48",
+            "ra": "0x80039684",
+            "a0": "0x00000003",
+            "a1": "0x00000000",
+            "a2": "0x800970A0",
+            "a3": "0x00000001",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF20",
+            "frame": 4200
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 251,
+              "frame": 4217,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 324800,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 16
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 19,
+        "mode": "netplay",
+        "peer": 0,
+        "character": "X",
+        "family": "hurt",
+        "group": 3,
+        "record": 1,
+        "source_matched_events": 9,
+        "sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+        "event": {
+          "seq": 281,
+          "frame": 4989,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 326624,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 228,
+            "frame": 3961,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 326624,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 8,
+            "target": "0x80016C48",
+            "ra": "0x80039684",
+            "a0": "0x00000003",
+            "a1": "0x00000001",
+            "a2": "0x800970A0",
+            "a3": "0x00000001",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF20",
+            "frame": 3960
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 231,
+              "frame": 3989,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 326640,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 28
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 20,
+        "mode": "netplay",
+        "peer": 0,
+        "character": "X",
+        "family": "hurt",
+        "group": 3,
+        "record": 17,
+        "source_matched_events": 15,
+        "sha256": "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029",
+        "event": {
+          "seq": 269,
+          "frame": 4913,
+          "kind": "KEYON",
+          "v": 3,
+          "addr": 157552,
+          "pitch": 1024,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 2742,
+          "vol_r": 8227,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-all-jump-variants\\qualification.json",
+          "action": "standing_square_attack",
+          "event": {
+            "seq": 261,
+            "frame": 4581,
+            "kind": "KEYON",
+            "v": 3,
+            "addr": 157552,
+            "pitch": 1024,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 2219,
+            "vol_r": 8227,
+            "sample_bank": 0
+          },
+          "sha256": "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029",
+          "exact_sound_identity": false,
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 262,
+              "frame": 4599,
+              "kind": "END_STOP",
+              "v": 3,
+              "addr": 157568,
+              "pitch": 1024,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 2219,
+              "vol_r": 8227,
+              "sample_bank": 0
+            },
+            "engine_frames": 18
+          },
+          "limit": "Waveform/pitch/ADSR reference only; exact native SOUND caller/record remains unverified."
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 21,
+        "mode": "netplay",
+        "peer": 0,
+        "character": "X",
+        "family": "death",
+        "group": 3,
+        "record": 16,
+        "source_matched_events": 1,
+        "sha256": "15d893361d4f0666bd75dad46a9a193f0173fee5045500404b846fc264a26122",
+        "event": {
+          "seq": 403,
+          "frame": 6081,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 354608,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 337,
+            "frame": 5274,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 354608,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "15d893361d4f0666bd75dad46a9a193f0173fee5045500404b846fc264a26122",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 65,
+            "target": "0x80016C48",
+            "ra": "0x8003D9BC",
+            "a0": "0x00000003",
+            "a1": "0x00000010",
+            "a2": "0x800970A0",
+            "a3": "0x00000000",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF48",
+            "frame": 5273
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 339,
+              "frame": 5358,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 354624,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 84
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 22,
+        "mode": "netplay",
+        "peer": 0,
+        "character": "X",
+        "family": "death",
+        "group": 3,
+        "record": 14,
+        "source_matched_events": 1,
+        "sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+        "event": {
+          "seq": 404,
+          "frame": 6081,
+          "kind": "KEYON",
+          "v": 23,
+          "addr": 364448,
+          "pitch": 1290,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 338,
+            "frame": 5274,
+            "kind": "KEYON",
+            "v": 23,
+            "addr": 364448,
+            "pitch": 1290,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 66,
+            "target": "0x80016C48",
+            "ra": "0x8003D9CC",
+            "a0": "0x00000003",
+            "a1": "0x0000000E",
+            "a2": "0x800970A0",
+            "a3": "0x000027AD",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF48",
+            "frame": 5273
+          },
+          "lifetime": {
+            "disposition": "keyed_off",
+            "terminal": {
+              "seq": 342,
+              "frame": 5371,
+              "kind": "KEYOFF",
+              "v": 23,
+              "addr": 377296,
+              "pitch": 1290,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 0,
+              "vol_r": 0,
+              "sample_bank": 0
+            },
+            "engine_frames": 97
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 23,
+        "mode": "netplay",
+        "peer": 0,
+        "character": "Zero",
+        "family": "jump",
+        "group": 3,
+        "record": 7,
+        "source_matched_events": 1,
+        "sha256": "2d7263e69e5a6cb0f7a9a11eee2976efd683e22359d9083fcc77d411a4c4fe82",
+        "event": {
+          "seq": 251,
+          "frame": 4014,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 12368,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 8544,
+          "vol_r": 10157,
+          "sample_bank": 31
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 463,
+            "frame": 7140,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 278496,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "2d7263e69e5a6cb0f7a9a11eee2976efd683e22359d9083fcc77d411a4c4fe82",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 6,
+            "target": "0x80016C48",
+            "ra": "0x8003D004",
+            "a0": "0x00000003",
+            "a1": "0x00000007",
+            "a2": "0x800970A0",
+            "a3": "0x800970A0",
+            "s3": "0xFF000000",
+            "sp": "0x801FEEF0",
+            "frame": 7139
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 465,
+              "frame": 7162,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 278512,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 22
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 24,
+        "mode": "netplay",
+        "peer": 0,
+        "character": "Zero",
+        "family": "attack",
+        "group": 1,
+        "record": 7,
+        "source_matched_events": 6,
+        "sha256": "fed7bfff83b8e45b286ce7831981f2e8ce65a9e80ad3c0d63ec258c59630cf22",
+        "event": {
+          "seq": 283,
+          "frame": 5006,
+          "kind": "KEYON",
+          "v": 47,
+          "addr": 33744,
+          "pitch": 1525,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 13433,
+          "vol_r": 4051,
+          "sample_bank": 30
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\qualification.json",
+          "action": "standing_square_attack",
+          "event": {
+            "seq": 442,
+            "frame": 6777,
+            "kind": "KEYON",
+            "v": 23,
+            "addr": 176464,
+            "pitch": 1525,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 13433,
+            "vol_r": 13433,
+            "sample_bank": 0
+          },
+          "sha256": "fed7bfff83b8e45b286ce7831981f2e8ce65a9e80ad3c0d63ec258c59630cf22",
+          "exact_sound_identity": false,
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 444,
+              "frame": 6803,
+              "kind": "END_STOP",
+              "v": 23,
+              "addr": 176480,
+              "pitch": 1525,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 13433,
+              "vol_r": 13433,
+              "sample_bank": 0
+            },
+            "engine_frames": 26
+          },
+          "limit": "Waveform/pitch/ADSR reference only; exact native SOUND caller/record remains unverified."
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 25,
+        "mode": "netplay",
+        "peer": 0,
+        "character": "Zero",
+        "family": "attack",
+        "group": 3,
+        "record": 3,
+        "source_matched_events": 4,
+        "sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+        "event": {
+          "seq": 284,
+          "frame": 5006,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 5248,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\qualification.json",
+          "action": "standing_square_attack",
+          "event": {
+            "seq": 441,
+            "frame": 6777,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 271376,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 0,
+            "target": "0x80016C48",
+            "ra": "0x8003D004",
+            "a0": "0x00000003",
+            "a1": "0x00000003",
+            "a2": "0x800970A0",
+            "a3": "0x00003479",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF10",
+            "frame": 6776
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 443,
+              "frame": 6791,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 271392,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 14
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 26,
+        "mode": "netplay",
+        "peer": 0,
+        "character": "Zero",
+        "family": "hurt",
+        "group": 3,
+        "record": 0,
+        "source_matched_events": 3,
+        "sha256": "6038134b63be2771567d95c5cb6d00e4d83a4a3890723a49588b39be982721f6",
+        "event": {
+          "seq": 286,
+          "frame": 5033,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 0,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 31
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 479,
+            "frame": 7311,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 266128,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "6038134b63be2771567d95c5cb6d00e4d83a4a3890723a49588b39be982721f6",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 18,
+            "target": "0x80016C48",
+            "ra": "0x80039684",
+            "a0": "0x00000003",
+            "a1": "0x00000000",
+            "a2": "0x800970A0",
+            "a3": "0x00000001",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF20",
+            "frame": 7310
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 480,
+              "frame": 7326,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 266144,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 15
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 27,
+        "mode": "netplay",
+        "peer": 0,
+        "character": "Zero",
+        "family": "hurt",
+        "group": 3,
+        "record": 1,
+        "source_matched_events": 4,
+        "sha256": "9ad087f5829434990a3f9e1affee52b5274234525f454935bbe74295b5f2ffdd",
+        "event": {
+          "seq": 273,
+          "frame": 4797,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 1824,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 31
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 495,
+            "frame": 7642,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 267952,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "9ad087f5829434990a3f9e1affee52b5274234525f454935bbe74295b5f2ffdd",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 29,
+            "target": "0x80016C48",
+            "ra": "0x80039684",
+            "a0": "0x00000003",
+            "a1": "0x00000001",
+            "a2": "0x800970A0",
+            "a3": "0x00000001",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF20",
+            "frame": 7641
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 497,
+              "frame": 7662,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 267968,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 20
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 28,
+        "mode": "netplay",
+        "peer": 0,
+        "character": "Zero",
+        "family": "hurt",
+        "group": 3,
+        "record": 17,
+        "source_matched_events": 7,
+        "sha256": "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029",
+        "event": {
+          "seq": 274,
+          "frame": 4797,
+          "kind": "KEYON",
+          "v": 27,
+          "addr": 55760,
+          "pitch": 1024,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 2219,
+          "vol_r": 8227,
+          "sample_bank": 30
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 478,
+            "frame": 7311,
+            "kind": "KEYON",
+            "v": 3,
+            "addr": 198480,
+            "pitch": 1024,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 8227,
+            "vol_r": 8227,
+            "sample_bank": 0
+          },
+          "sha256": "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 19,
+            "target": "0x80016C48",
+            "ra": "0x80039694",
+            "a0": "0x00000003",
+            "a1": "0x00000011",
+            "a2": "0x800970A0",
+            "a3": "0x000027AD",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF20",
+            "frame": 7310
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 481,
+              "frame": 7330,
+              "kind": "END_STOP",
+              "v": 3,
+              "addr": 198496,
+              "pitch": 1024,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 8227,
+              "vol_r": 8227,
+              "sample_bank": 0
+            },
+            "engine_frames": 19
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 29,
+        "mode": "netplay",
+        "peer": 0,
+        "character": "Zero",
+        "family": "death",
+        "group": 3,
+        "record": 16,
+        "source_matched_events": 1,
+        "sha256": "322b69a7f0999a42269c5d80afb84a62dd628afef350746f7ac877fd24d06387",
+        "event": {
+          "seq": 308,
+          "frame": 5346,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 29904,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 31
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 550,
+            "frame": 8881,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 296032,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "322b69a7f0999a42269c5d80afb84a62dd628afef350746f7ac877fd24d06387",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 62,
+            "target": "0x80016C48",
+            "ra": "0x8003D9BC",
+            "a0": "0x00000003",
+            "a1": "0x00000010",
+            "a2": "0x800970A0",
+            "a3": "0x00000000",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF48",
+            "frame": 8880
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 552,
+              "frame": 8960,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 296048,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 79
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 30,
+        "mode": "netplay",
+        "peer": 0,
+        "character": "Zero",
+        "family": "death",
+        "group": 3,
+        "record": 14,
+        "source_matched_events": 1,
+        "sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+        "event": {
+          "seq": 309,
+          "frame": 5346,
+          "kind": "KEYON",
+          "v": 47,
+          "addr": 39152,
+          "pitch": 1290,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 31
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 551,
+            "frame": 8881,
+            "kind": "KEYON",
+            "v": 23,
+            "addr": 305280,
+            "pitch": 1290,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 63,
+            "target": "0x80016C48",
+            "ra": "0x8003D9CC",
+            "a0": "0x00000003",
+            "a1": "0x0000000E",
+            "a2": "0x800970A0",
+            "a3": "0x000027AD",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF48",
+            "frame": 8880
+          },
+          "lifetime": {
+            "disposition": "keyed_off",
+            "terminal": {
+              "seq": 553,
+              "frame": 8978,
+              "kind": "KEYOFF",
+              "v": 23,
+              "addr": 318128,
+              "pitch": 1290,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 0,
+              "vol_r": 0,
+              "sample_bank": 0
+            },
+            "engine_frames": 97
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 31,
+        "mode": "netplay",
+        "peer": 1,
+        "character": "X",
+        "family": "jump",
+        "group": 3,
+        "record": 6,
+        "source_matched_events": 1,
+        "sha256": "5e96f6c111bb06aee701c64c9406e4d60fe64e3203455e6ccf18eb32109c00bb",
+        "event": {
+          "seq": 249,
+          "frame": 4003,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 338464,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 7899,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-all-jump-variants\\qualification.json",
+          "action": "ground_jump",
+          "event": {
+            "seq": 217,
+            "frame": 3719,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 338464,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 8544,
+            "sample_bank": 0
+          },
+          "sha256": "5e96f6c111bb06aee701c64c9406e4d60fe64e3203455e6ccf18eb32109c00bb",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 0,
+            "target": "0x80016C48",
+            "ra": "0x8003D004",
+            "a0": "0x00000003",
+            "a1": "0x00000006",
+            "a2": "0x800970A0",
+            "a3": "0x800970A0",
+            "s3": "0xFF000000",
+            "sp": "0x801FEEF0",
+            "frame": 3718
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 219,
+              "frame": 3735,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 338480,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 8544,
+              "sample_bank": 0
+            },
+            "engine_frames": 16
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 32,
+        "mode": "netplay",
+        "peer": 1,
+        "character": "X",
+        "family": "attack",
+        "group": 1,
+        "record": 8,
+        "source_matched_events": 1,
+        "sha256": "d11a903e4b869160cdd39f86239546da8bb826a8e1472f5b37b565e8211e8c66",
+        "event": {
+          "seq": 259,
+          "frame": 4550,
+          "kind": "KEYON",
+          "v": 21,
+          "addr": 148832,
+          "pitch": 1525,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-all-jump-variants\\qualification.json",
+          "action": "standing_square_attack",
+          "event": {
+            "seq": 259,
+            "frame": 4559,
+            "kind": "KEYON",
+            "v": 21,
+            "addr": 148832,
+            "pitch": 1525,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "d11a903e4b869160cdd39f86239546da8bb826a8e1472f5b37b565e8211e8c66",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 2,
+            "target": "0x80016C48",
+            "ra": "0x800493D4",
+            "a0": "0x00000001",
+            "a1": "0x00000008",
+            "a2": "0x80091298",
+            "a3": "0x80091298",
+            "s3": "0x00000006",
+            "sp": "0x801FEF30",
+            "frame": 4558
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 260,
+              "frame": 4577,
+              "kind": "END_STOP",
+              "v": 21,
+              "addr": 148848,
+              "pitch": 1525,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 18
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 33,
+        "mode": "netplay",
+        "peer": 1,
+        "character": "X",
+        "family": "hurt",
+        "group": 3,
+        "record": 0,
+        "source_matched_events": 6,
+        "sha256": "c5953d3af17822886712bcded0882e7e6af06270ed811930389b07ce81e3cb5d",
+        "event": {
+          "seq": 270,
+          "frame": 4913,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 324784,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3708,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 250,
+            "frame": 4201,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 324784,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "c5953d3af17822886712bcded0882e7e6af06270ed811930389b07ce81e3cb5d",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 18,
+            "target": "0x80016C48",
+            "ra": "0x80039684",
+            "a0": "0x00000003",
+            "a1": "0x00000000",
+            "a2": "0x800970A0",
+            "a3": "0x00000001",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF20",
+            "frame": 4200
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 251,
+              "frame": 4217,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 324800,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 16
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 34,
+        "mode": "netplay",
+        "peer": 1,
+        "character": "X",
+        "family": "hurt",
+        "group": 3,
+        "record": 1,
+        "source_matched_events": 9,
+        "sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+        "event": {
+          "seq": 281,
+          "frame": 4989,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 326624,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 228,
+            "frame": 3961,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 326624,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 8,
+            "target": "0x80016C48",
+            "ra": "0x80039684",
+            "a0": "0x00000003",
+            "a1": "0x00000001",
+            "a2": "0x800970A0",
+            "a3": "0x00000001",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF20",
+            "frame": 3960
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 231,
+              "frame": 3989,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 326640,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 28
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 35,
+        "mode": "netplay",
+        "peer": 1,
+        "character": "X",
+        "family": "hurt",
+        "group": 3,
+        "record": 17,
+        "source_matched_events": 15,
+        "sha256": "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029",
+        "event": {
+          "seq": 269,
+          "frame": 4913,
+          "kind": "KEYON",
+          "v": 3,
+          "addr": 157552,
+          "pitch": 1024,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 2742,
+          "vol_r": 8227,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-all-jump-variants\\qualification.json",
+          "action": "standing_square_attack",
+          "event": {
+            "seq": 261,
+            "frame": 4581,
+            "kind": "KEYON",
+            "v": 3,
+            "addr": 157552,
+            "pitch": 1024,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 2219,
+            "vol_r": 8227,
+            "sample_bank": 0
+          },
+          "sha256": "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029",
+          "exact_sound_identity": false,
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 262,
+              "frame": 4599,
+              "kind": "END_STOP",
+              "v": 3,
+              "addr": 157568,
+              "pitch": 1024,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 2219,
+              "vol_r": 8227,
+              "sample_bank": 0
+            },
+            "engine_frames": 18
+          },
+          "limit": "Waveform/pitch/ADSR reference only; exact native SOUND caller/record remains unverified."
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 36,
+        "mode": "netplay",
+        "peer": 1,
+        "character": "X",
+        "family": "death",
+        "group": 3,
+        "record": 16,
+        "source_matched_events": 1,
+        "sha256": "15d893361d4f0666bd75dad46a9a193f0173fee5045500404b846fc264a26122",
+        "event": {
+          "seq": 403,
+          "frame": 6081,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 354608,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 337,
+            "frame": 5274,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 354608,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "15d893361d4f0666bd75dad46a9a193f0173fee5045500404b846fc264a26122",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 65,
+            "target": "0x80016C48",
+            "ra": "0x8003D9BC",
+            "a0": "0x00000003",
+            "a1": "0x00000010",
+            "a2": "0x800970A0",
+            "a3": "0x00000000",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF48",
+            "frame": 5273
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 339,
+              "frame": 5358,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 354624,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 84
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 37,
+        "mode": "netplay",
+        "peer": 1,
+        "character": "X",
+        "family": "death",
+        "group": 3,
+        "record": 14,
+        "source_matched_events": 1,
+        "sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+        "event": {
+          "seq": 404,
+          "frame": 6081,
+          "kind": "KEYON",
+          "v": 23,
+          "addr": 364448,
+          "pitch": 1290,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 338,
+            "frame": 5274,
+            "kind": "KEYON",
+            "v": 23,
+            "addr": 364448,
+            "pitch": 1290,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 66,
+            "target": "0x80016C48",
+            "ra": "0x8003D9CC",
+            "a0": "0x00000003",
+            "a1": "0x0000000E",
+            "a2": "0x800970A0",
+            "a3": "0x000027AD",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF48",
+            "frame": 5273
+          },
+          "lifetime": {
+            "disposition": "keyed_off",
+            "terminal": {
+              "seq": 342,
+              "frame": 5371,
+              "kind": "KEYOFF",
+              "v": 23,
+              "addr": 377296,
+              "pitch": 1290,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 0,
+              "vol_r": 0,
+              "sample_bank": 0
+            },
+            "engine_frames": 97
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 38,
+        "mode": "netplay",
+        "peer": 1,
+        "character": "Zero",
+        "family": "jump",
+        "group": 3,
+        "record": 7,
+        "source_matched_events": 1,
+        "sha256": "2d7263e69e5a6cb0f7a9a11eee2976efd683e22359d9083fcc77d411a4c4fe82",
+        "event": {
+          "seq": 251,
+          "frame": 4014,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 12368,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 8544,
+          "vol_r": 10157,
+          "sample_bank": 31
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 463,
+            "frame": 7140,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 278496,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "2d7263e69e5a6cb0f7a9a11eee2976efd683e22359d9083fcc77d411a4c4fe82",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 6,
+            "target": "0x80016C48",
+            "ra": "0x8003D004",
+            "a0": "0x00000003",
+            "a1": "0x00000007",
+            "a2": "0x800970A0",
+            "a3": "0x800970A0",
+            "s3": "0xFF000000",
+            "sp": "0x801FEEF0",
+            "frame": 7139
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 465,
+              "frame": 7162,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 278512,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 22
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 39,
+        "mode": "netplay",
+        "peer": 1,
+        "character": "Zero",
+        "family": "attack",
+        "group": 1,
+        "record": 7,
+        "source_matched_events": 6,
+        "sha256": "fed7bfff83b8e45b286ce7831981f2e8ce65a9e80ad3c0d63ec258c59630cf22",
+        "event": {
+          "seq": 283,
+          "frame": 5006,
+          "kind": "KEYON",
+          "v": 47,
+          "addr": 33744,
+          "pitch": 1525,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 13433,
+          "vol_r": 4051,
+          "sample_bank": 30
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\qualification.json",
+          "action": "standing_square_attack",
+          "event": {
+            "seq": 442,
+            "frame": 6777,
+            "kind": "KEYON",
+            "v": 23,
+            "addr": 176464,
+            "pitch": 1525,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 13433,
+            "vol_r": 13433,
+            "sample_bank": 0
+          },
+          "sha256": "fed7bfff83b8e45b286ce7831981f2e8ce65a9e80ad3c0d63ec258c59630cf22",
+          "exact_sound_identity": false,
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 444,
+              "frame": 6803,
+              "kind": "END_STOP",
+              "v": 23,
+              "addr": 176480,
+              "pitch": 1525,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 13433,
+              "vol_r": 13433,
+              "sample_bank": 0
+            },
+            "engine_frames": 26
+          },
+          "limit": "Waveform/pitch/ADSR reference only; exact native SOUND caller/record remains unverified."
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 40,
+        "mode": "netplay",
+        "peer": 1,
+        "character": "Zero",
+        "family": "attack",
+        "group": 3,
+        "record": 3,
+        "source_matched_events": 4,
+        "sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+        "event": {
+          "seq": 284,
+          "frame": 5006,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 5248,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\qualification.json",
+          "action": "standing_square_attack",
+          "event": {
+            "seq": 441,
+            "frame": 6777,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 271376,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 0,
+            "target": "0x80016C48",
+            "ra": "0x8003D004",
+            "a0": "0x00000003",
+            "a1": "0x00000003",
+            "a2": "0x800970A0",
+            "a3": "0x00003479",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF10",
+            "frame": 6776
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 443,
+              "frame": 6791,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 271392,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 14
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 41,
+        "mode": "netplay",
+        "peer": 1,
+        "character": "Zero",
+        "family": "hurt",
+        "group": 3,
+        "record": 0,
+        "source_matched_events": 3,
+        "sha256": "6038134b63be2771567d95c5cb6d00e4d83a4a3890723a49588b39be982721f6",
+        "event": {
+          "seq": 286,
+          "frame": 5033,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 0,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 31
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 479,
+            "frame": 7311,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 266128,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "6038134b63be2771567d95c5cb6d00e4d83a4a3890723a49588b39be982721f6",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 18,
+            "target": "0x80016C48",
+            "ra": "0x80039684",
+            "a0": "0x00000003",
+            "a1": "0x00000000",
+            "a2": "0x800970A0",
+            "a3": "0x00000001",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF20",
+            "frame": 7310
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 480,
+              "frame": 7326,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 266144,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 15
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 42,
+        "mode": "netplay",
+        "peer": 1,
+        "character": "Zero",
+        "family": "hurt",
+        "group": 3,
+        "record": 1,
+        "source_matched_events": 4,
+        "sha256": "9ad087f5829434990a3f9e1affee52b5274234525f454935bbe74295b5f2ffdd",
+        "event": {
+          "seq": 273,
+          "frame": 4797,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 1824,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 31
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 495,
+            "frame": 7642,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 267952,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "9ad087f5829434990a3f9e1affee52b5274234525f454935bbe74295b5f2ffdd",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 29,
+            "target": "0x80016C48",
+            "ra": "0x80039684",
+            "a0": "0x00000003",
+            "a1": "0x00000001",
+            "a2": "0x800970A0",
+            "a3": "0x00000001",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF20",
+            "frame": 7641
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 497,
+              "frame": 7662,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 267968,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 20
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 43,
+        "mode": "netplay",
+        "peer": 1,
+        "character": "Zero",
+        "family": "hurt",
+        "group": 3,
+        "record": 17,
+        "source_matched_events": 7,
+        "sha256": "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029",
+        "event": {
+          "seq": 274,
+          "frame": 4797,
+          "kind": "KEYON",
+          "v": 27,
+          "addr": 55760,
+          "pitch": 1024,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 2219,
+          "vol_r": 8227,
+          "sample_bank": 30
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 478,
+            "frame": 7311,
+            "kind": "KEYON",
+            "v": 3,
+            "addr": 198480,
+            "pitch": 1024,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 8227,
+            "vol_r": 8227,
+            "sample_bank": 0
+          },
+          "sha256": "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 19,
+            "target": "0x80016C48",
+            "ra": "0x80039694",
+            "a0": "0x00000003",
+            "a1": "0x00000011",
+            "a2": "0x800970A0",
+            "a3": "0x000027AD",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF20",
+            "frame": 7310
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 481,
+              "frame": 7330,
+              "kind": "END_STOP",
+              "v": 3,
+              "addr": 198496,
+              "pitch": 1024,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 8227,
+              "vol_r": 8227,
+              "sample_bank": 0
+            },
+            "engine_frames": 19
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 44,
+        "mode": "netplay",
+        "peer": 1,
+        "character": "Zero",
+        "family": "death",
+        "group": 3,
+        "record": 16,
+        "source_matched_events": 1,
+        "sha256": "322b69a7f0999a42269c5d80afb84a62dd628afef350746f7ac877fd24d06387",
+        "event": {
+          "seq": 308,
+          "frame": 5346,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 29904,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 31
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 550,
+            "frame": 8881,
+            "kind": "KEYON",
+            "v": 20,
+            "addr": 296032,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "322b69a7f0999a42269c5d80afb84a62dd628afef350746f7ac877fd24d06387",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 62,
+            "target": "0x80016C48",
+            "ra": "0x8003D9BC",
+            "a0": "0x00000003",
+            "a1": "0x00000010",
+            "a2": "0x800970A0",
+            "a3": "0x00000000",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF48",
+            "frame": 8880
+          },
+          "lifetime": {
+            "disposition": "natural_end",
+            "terminal": {
+              "seq": 552,
+              "frame": 8960,
+              "kind": "END_STOP",
+              "v": 20,
+              "addr": 296048,
+              "pitch": 1144,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 10157,
+              "vol_r": 10157,
+              "sample_bank": 0
+            },
+            "engine_frames": 79
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      },
+      {
+        "id": 45,
+        "mode": "netplay",
+        "peer": 1,
+        "character": "Zero",
+        "family": "death",
+        "group": 3,
+        "record": 14,
+        "source_matched_events": 1,
+        "sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+        "event": {
+          "seq": 309,
+          "frame": 5346,
+          "kind": "KEYON",
+          "v": 47,
+          "addr": 39152,
+          "pitch": 1290,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 31
+        },
+        "native_reference": {
+          "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+          "action": "offline_authored_native_contact_hurt_death_audio",
+          "event": {
+            "seq": 551,
+            "frame": 8881,
+            "kind": "KEYON",
+            "v": 23,
+            "addr": 305280,
+            "pitch": 1290,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+          "exact_sound_identity": true,
+          "source_call": {
+            "seq": 63,
+            "target": "0x80016C48",
+            "ra": "0x8003D9CC",
+            "a0": "0x00000003",
+            "a1": "0x0000000E",
+            "a2": "0x800970A0",
+            "a3": "0x000027AD",
+            "s3": "0xFF000000",
+            "sp": "0x801FEF48",
+            "frame": 8880
+          },
+          "lifetime": {
+            "disposition": "keyed_off",
+            "terminal": {
+              "seq": 553,
+              "frame": 8978,
+              "kind": "KEYOFF",
+              "v": 23,
+              "addr": 318128,
+              "pitch": 1290,
+              "adsr_lo": 33023,
+              "adsr_hi": 8128,
+              "vol_l": 0,
+              "vol_r": 0,
+              "sample_bank": 0
+            },
+            "engine_frames": 97
+          }
+        },
+        "sample_equal": true,
+        "pitch_and_ADSR_equal": true,
+        "independent_route_correct": true
+      }
+    ],
+    "native_references": [
+      {
+        "character": "X",
+        "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-all-jump-variants\\qualification.json",
+        "banks": [
+          {
+            "group": 1,
+            "start": 142720,
+            "bytes": 182064,
+            "sha256": "4d34d0ff6e09dd9c764391583aeda4cb4f5a46e35e92a916b56b221f7da30c7f",
+            "matches_source": true
+          },
+          {
+            "group": 3,
+            "start": 324784,
+            "bytes": 52608,
+            "sha256": "fb80f7b0876285bd166c8bc56a9f1dda9298ebebbd05248aaf81fa89100a9a58",
+            "matches_source": true
+          }
+        ],
+        "checks": {
+          "real_coop_disabled": true,
+          "offline": true,
+          "native_character_confirmed": true,
+          "source_matched_banks": true,
+          "bounded_jump_attack_reference_actions": true,
+          "native_jump_vocal_observed": true,
+          "all_original_jump_vocal_variants_observed": true
+        },
+        "bypasses": [],
+        "cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      },
+      {
+        "character": "X",
+        "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\qualification.json",
+        "banks": [
+          {
+            "group": 1,
+            "start": 142720,
+            "bytes": 182064,
+            "sha256": "4d34d0ff6e09dd9c764391583aeda4cb4f5a46e35e92a916b56b221f7da30c7f",
+            "matches_source": true
+          },
+          {
+            "group": 3,
+            "start": 324784,
+            "bytes": 52608,
+            "sha256": "fb80f7b0876285bd166c8bc56a9f1dda9298ebebbd05248aaf81fa89100a9a58",
+            "matches_source": true
+          }
+        ],
+        "checks": {
+          "real_coop_disabled": true,
+          "offline": true,
+          "native_character_confirmed": true,
+          "source_matched_banks": true,
+          "bounded_jump_attack_reference_actions": true,
+          "native_jump_vocal_observed": true
+        },
+        "bypasses": [],
+        "cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      },
+      {
+        "character": "Zero",
+        "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\qualification.json",
+        "banks": [
+          {
+            "group": 1,
+            "start": 142720,
+            "bytes": 123408,
+            "sha256": "425516420dc6ff1d973edae265717a6ca237454631cdb4b7c829c96f6f7057a8",
+            "matches_source": true
+          },
+          {
+            "group": 3,
+            "start": 266128,
+            "bytes": 52096,
+            "sha256": "203c8e0e58ea4e55797445b7af76e7563528c21536ae8fd57e38566a89b38bdd",
+            "matches_source": true
+          }
+        ],
+        "checks": {
+          "real_coop_disabled": true,
+          "offline": true,
+          "native_character_confirmed": true,
+          "source_matched_banks": true,
+          "bounded_jump_attack_reference_actions": true,
+          "native_jump_vocal_observed": true
+        },
+        "bypasses": [
+          {
+            "address": "0x800ccf2f",
+            "before": 1,
+            "after": 17,
+            "reason": "private Zero availability bit10"
+          },
+          {
+            "address": "0x800cced1",
+            "before": 0,
+            "after": 0,
+            "reason": "native screen phase initialization"
+          },
+          {
+            "address": "0x800cced2",
+            "before": 0,
+            "after": 0,
+            "reason": "native screen subphase initialization"
+          },
+          {
+            "address": "0x800cced0",
+            "before": 10,
+            "after": 2,
+            "reason": "native screen2 loader prerequisite"
+          }
+        ],
+        "cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      },
+      {
+        "character": "Zero",
+        "report": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+        "banks": [
+          {
+            "group": 1,
+            "start": 142720,
+            "bytes": 123408,
+            "sha256": "425516420dc6ff1d973edae265717a6ca237454631cdb4b7c829c96f6f7057a8",
+            "matches_source": true
+          },
+          {
+            "group": 3,
+            "start": 266128,
+            "bytes": 52096,
+            "sha256": "203c8e0e58ea4e55797445b7af76e7563528c21536ae8fd57e38566a89b38bdd",
+            "matches_source": true
+          }
+        ],
+        "checks": {
+          "real_coop_disabled": true,
+          "offline": true,
+          "native_character_confirmed": true,
+          "source_matched_banks": true,
+          "bounded_jump_attack_reference_actions": true,
+          "native_jump_vocal_observed": true
+        },
+        "bypasses": [
+          {
+            "address": "0x800ccf2f",
+            "before": 1,
+            "after": 17,
+            "reason": "private Zero availability bit10"
+          },
+          {
+            "address": "0x800cced1",
+            "before": 0,
+            "after": 0,
+            "reason": "native screen phase initialization"
+          },
+          {
+            "address": "0x800cced2",
+            "before": 0,
+            "after": 0,
+            "reason": "native screen subphase initialization"
+          },
+          {
+            "address": "0x800cced0",
+            "before": 10,
+            "after": 2,
+            "reason": "native screen2 loader prerequisite"
+          }
+        ],
+        "cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      }
+    ],
+    "scope": "Selected native jump, ordinary standing attack, hurt and death source samples; character voice and shared death effect are separate."
+  },
+  "R12": {
+    "natural_overlap_windows": [
+      {
+        "mode": "local",
+        "peer": null,
+        "family": "jump_hurt",
+        "primary_record": 0,
+        "zero_record": 7,
+        "primary_event": {
+          "seq": 270,
+          "frame": 3380,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 324784,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "zero_event": {
+          "seq": 271,
+          "frame": 3393,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 12368,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "primary_sha256": "c5953d3af17822886712bcded0882e7e6af06270ed811930389b07ce81e3cb5d",
+        "zero_sha256": "2d7263e69e5a6cb0f7a9a11eee2976efd683e22359d9083fcc77d411a4c4fe82",
+        "primary_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 273,
+            "frame": 3396,
+            "kind": "END_STOP",
+            "v": 20,
+            "addr": 324800,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "engine_frames": 16
+        },
+        "zero_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 275,
+            "frame": 3415,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 12384,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 3063,
+            "sample_bank": 31
+          },
+          "engine_frames": 22
+        },
+        "overlap_engine_frames": 3
+      },
+      {
+        "mode": "local",
+        "peer": null,
+        "family": "jump_hurt",
+        "primary_record": 1,
+        "zero_record": 7,
+        "primary_event": {
+          "seq": 325,
+          "frame": 3836,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 326624,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "zero_event": {
+          "seq": 326,
+          "frame": 3841,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 12368,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "primary_sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+        "zero_sha256": "2d7263e69e5a6cb0f7a9a11eee2976efd683e22359d9083fcc77d411a4c4fe82",
+        "primary_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 330,
+            "frame": 3864,
+            "kind": "END_STOP",
+            "v": 20,
+            "addr": 326640,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "engine_frames": 28
+        },
+        "zero_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 329,
+            "frame": 3863,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 12384,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 3063,
+            "sample_bank": 31
+          },
+          "engine_frames": 22
+        },
+        "overlap_engine_frames": 22
+      },
+      {
+        "mode": "local",
+        "peer": null,
+        "family": "saber_hurt",
+        "primary_record": 1,
+        "zero_record": 3,
+        "primary_event": {
+          "seq": 238,
+          "frame": 3152,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 326624,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "zero_event": {
+          "seq": 240,
+          "frame": 3158,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 5248,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "primary_sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+        "zero_sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+        "primary_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 244,
+            "frame": 3180,
+            "kind": "END_STOP",
+            "v": 20,
+            "addr": 326640,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "engine_frames": 28
+        },
+        "zero_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 242,
+            "frame": 3172,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 5264,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 3063,
+            "sample_bank": 31
+          },
+          "engine_frames": 14
+        },
+        "overlap_engine_frames": 14
+      },
+      {
+        "mode": "local",
+        "peer": null,
+        "family": "saber_hurt",
+        "primary_record": 0,
+        "zero_record": 3,
+        "primary_event": {
+          "seq": 260,
+          "frame": 3304,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 324784,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "zero_event": {
+          "seq": 262,
+          "frame": 3319,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 5248,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "primary_sha256": "c5953d3af17822886712bcded0882e7e6af06270ed811930389b07ce81e3cb5d",
+        "zero_sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+        "primary_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 263,
+            "frame": 3320,
+            "kind": "END_STOP",
+            "v": 20,
+            "addr": 324800,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "engine_frames": 16
+        },
+        "zero_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 266,
+            "frame": 3332,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 5264,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 3063,
+            "sample_bank": 31
+          },
+          "engine_frames": 13
+        },
+        "overlap_engine_frames": 1
+      },
+      {
+        "mode": "local",
+        "peer": null,
+        "family": "saber_hurt",
+        "primary_record": 1,
+        "zero_record": 3,
+        "primary_event": {
+          "seq": 282,
+          "frame": 3456,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 326624,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "zero_event": {
+          "seq": 286,
+          "frame": 3475,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 5248,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "primary_sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+        "zero_sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+        "primary_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 288,
+            "frame": 3484,
+            "kind": "END_STOP",
+            "v": 20,
+            "addr": 326640,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "engine_frames": 28
+        },
+        "zero_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 289,
+            "frame": 3489,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 5264,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 3063,
+            "sample_bank": 31
+          },
+          "engine_frames": 14
+        },
+        "overlap_engine_frames": 9
+      },
+      {
+        "mode": "local",
+        "peer": null,
+        "family": "saber_hurt",
+        "primary_record": 0,
+        "zero_record": 3,
+        "primary_event": {
+          "seq": 300,
+          "frame": 3608,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 324784,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "zero_event": {
+          "seq": 302,
+          "frame": 3623,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 5248,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "primary_sha256": "c5953d3af17822886712bcded0882e7e6af06270ed811930389b07ce81e3cb5d",
+        "zero_sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+        "primary_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 303,
+            "frame": 3624,
+            "kind": "END_STOP",
+            "v": 20,
+            "addr": 324800,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "engine_frames": 16
+        },
+        "zero_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 306,
+            "frame": 3636,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 5264,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 3063,
+            "sample_bank": 31
+          },
+          "engine_frames": 13
+        },
+        "overlap_engine_frames": 1
+      },
+      {
+        "mode": "local",
+        "peer": null,
+        "family": "saber_hurt",
+        "primary_record": 0,
+        "zero_record": 3,
+        "primary_event": {
+          "seq": 334,
+          "frame": 3912,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 324784,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "zero_event": {
+          "seq": 336,
+          "frame": 3921,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 5248,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "primary_sha256": "c5953d3af17822886712bcded0882e7e6af06270ed811930389b07ce81e3cb5d",
+        "zero_sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+        "primary_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 337,
+            "frame": 3928,
+            "kind": "END_STOP",
+            "v": 20,
+            "addr": 324800,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "engine_frames": 16
+        },
+        "zero_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 339,
+            "frame": 3935,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 5264,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 3063,
+            "sample_bank": 31
+          },
+          "engine_frames": 14
+        },
+        "overlap_engine_frames": 7
+      },
+      {
+        "mode": "netplay",
+        "peer": 0,
+        "family": "jump_hurt",
+        "primary_record": 1,
+        "zero_record": 7,
+        "primary_event": {
+          "seq": 313,
+          "frame": 5293,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 326624,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "zero_event": {
+          "seq": 315,
+          "frame": 5313,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 12368,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "primary_sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+        "zero_sha256": "2d7263e69e5a6cb0f7a9a11eee2976efd683e22359d9083fcc77d411a4c4fe82",
+        "primary_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 317,
+            "frame": 5320,
+            "kind": "END_STOP",
+            "v": 20,
+            "addr": 326640,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "engine_frames": 27
+        },
+        "zero_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 318,
+            "frame": 5334,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 12384,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 3063,
+            "sample_bank": 31
+          },
+          "engine_frames": 21
+        },
+        "overlap_engine_frames": 7
+      },
+      {
+        "mode": "netplay",
+        "peer": 0,
+        "family": "jump_hurt",
+        "primary_record": 1,
+        "zero_record": 7,
+        "primary_event": {
+          "seq": 350,
+          "frame": 5616,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 326624,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "zero_event": {
+          "seq": 351,
+          "frame": 5630,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 12368,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "primary_sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+        "zero_sha256": "2d7263e69e5a6cb0f7a9a11eee2976efd683e22359d9083fcc77d411a4c4fe82",
+        "primary_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 354,
+            "frame": 5643,
+            "kind": "END_STOP",
+            "v": 20,
+            "addr": 326640,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "engine_frames": 27
+        },
+        "zero_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 355,
+            "frame": 5651,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 12384,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 3063,
+            "sample_bank": 31
+          },
+          "engine_frames": 21
+        },
+        "overlap_engine_frames": 13
+      },
+      {
+        "mode": "netplay",
+        "peer": 0,
+        "family": "saber_hurt",
+        "primary_record": 1,
+        "zero_record": 3,
+        "primary_event": {
+          "seq": 281,
+          "frame": 4989,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 326624,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "zero_event": {
+          "seq": 284,
+          "frame": 5006,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 5248,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "primary_sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+        "zero_sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+        "primary_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 286,
+            "frame": 5016,
+            "kind": "END_STOP",
+            "v": 20,
+            "addr": 326640,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "engine_frames": 27
+        },
+        "zero_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 287,
+            "frame": 5019,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 5264,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 3063,
+            "sample_bank": 31
+          },
+          "engine_frames": 13
+        },
+        "overlap_engine_frames": 10
+      },
+      {
+        "mode": "netplay",
+        "peer": 0,
+        "family": "saber_hurt",
+        "primary_record": 1,
+        "zero_record": 3,
+        "primary_event": {
+          "seq": 322,
+          "frame": 5369,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 326624,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "zero_event": {
+          "seq": 326,
+          "frame": 5390,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 5248,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "primary_sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+        "zero_sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+        "primary_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 327,
+            "frame": 5396,
+            "kind": "END_STOP",
+            "v": 20,
+            "addr": 326640,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "engine_frames": 27
+        },
+        "zero_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 328,
+            "frame": 5403,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 5264,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 3063,
+            "sample_bank": 31
+          },
+          "engine_frames": 13
+        },
+        "overlap_engine_frames": 6
+      },
+      {
+        "mode": "netplay",
+        "peer": 0,
+        "family": "saber_hurt",
+        "primary_record": 1,
+        "zero_record": 3,
+        "primary_event": {
+          "seq": 387,
+          "frame": 5920,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 326624,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "zero_event": {
+          "seq": 390,
+          "frame": 5945,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 5248,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "primary_sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+        "zero_sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+        "primary_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 391,
+            "frame": 5947,
+            "kind": "END_STOP",
+            "v": 20,
+            "addr": 326640,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "engine_frames": 27
+        },
+        "zero_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 392,
+            "frame": 5958,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 5264,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 3063,
+            "sample_bank": 31
+          },
+          "engine_frames": 13
+        },
+        "overlap_engine_frames": 2
+      },
+      {
+        "mode": "netplay",
+        "peer": 1,
+        "family": "jump_hurt",
+        "primary_record": 1,
+        "zero_record": 7,
+        "primary_event": {
+          "seq": 313,
+          "frame": 5293,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 326624,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "zero_event": {
+          "seq": 315,
+          "frame": 5313,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 12368,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "primary_sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+        "zero_sha256": "2d7263e69e5a6cb0f7a9a11eee2976efd683e22359d9083fcc77d411a4c4fe82",
+        "primary_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 317,
+            "frame": 5320,
+            "kind": "END_STOP",
+            "v": 20,
+            "addr": 326640,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "engine_frames": 27
+        },
+        "zero_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 318,
+            "frame": 5334,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 12384,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 3063,
+            "sample_bank": 31
+          },
+          "engine_frames": 21
+        },
+        "overlap_engine_frames": 7
+      },
+      {
+        "mode": "netplay",
+        "peer": 1,
+        "family": "jump_hurt",
+        "primary_record": 1,
+        "zero_record": 7,
+        "primary_event": {
+          "seq": 350,
+          "frame": 5616,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 326624,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "zero_event": {
+          "seq": 351,
+          "frame": 5630,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 12368,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "primary_sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+        "zero_sha256": "2d7263e69e5a6cb0f7a9a11eee2976efd683e22359d9083fcc77d411a4c4fe82",
+        "primary_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 354,
+            "frame": 5643,
+            "kind": "END_STOP",
+            "v": 20,
+            "addr": 326640,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "engine_frames": 27
+        },
+        "zero_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 355,
+            "frame": 5651,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 12384,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 3063,
+            "sample_bank": 31
+          },
+          "engine_frames": 21
+        },
+        "overlap_engine_frames": 13
+      },
+      {
+        "mode": "netplay",
+        "peer": 1,
+        "family": "saber_hurt",
+        "primary_record": 1,
+        "zero_record": 3,
+        "primary_event": {
+          "seq": 281,
+          "frame": 4989,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 326624,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "zero_event": {
+          "seq": 284,
+          "frame": 5006,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 5248,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "primary_sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+        "zero_sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+        "primary_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 286,
+            "frame": 5016,
+            "kind": "END_STOP",
+            "v": 20,
+            "addr": 326640,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "engine_frames": 27
+        },
+        "zero_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 287,
+            "frame": 5019,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 5264,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 3063,
+            "sample_bank": 31
+          },
+          "engine_frames": 13
+        },
+        "overlap_engine_frames": 10
+      },
+      {
+        "mode": "netplay",
+        "peer": 1,
+        "family": "saber_hurt",
+        "primary_record": 1,
+        "zero_record": 3,
+        "primary_event": {
+          "seq": 322,
+          "frame": 5369,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 326624,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "zero_event": {
+          "seq": 326,
+          "frame": 5390,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 5248,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "primary_sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+        "zero_sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+        "primary_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 327,
+            "frame": 5396,
+            "kind": "END_STOP",
+            "v": 20,
+            "addr": 326640,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "engine_frames": 27
+        },
+        "zero_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 328,
+            "frame": 5403,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 5264,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 3063,
+            "sample_bank": 31
+          },
+          "engine_frames": 13
+        },
+        "overlap_engine_frames": 6
+      },
+      {
+        "mode": "netplay",
+        "peer": 1,
+        "family": "saber_hurt",
+        "primary_record": 1,
+        "zero_record": 3,
+        "primary_event": {
+          "seq": 387,
+          "frame": 5920,
+          "kind": "KEYON",
+          "v": 20,
+          "addr": 326624,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 3063,
+          "vol_r": 10157,
+          "sample_bank": 0
+        },
+        "zero_event": {
+          "seq": 390,
+          "frame": 5945,
+          "kind": "KEYON",
+          "v": 44,
+          "addr": 5248,
+          "pitch": 1144,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 10157,
+          "vol_r": 3063,
+          "sample_bank": 31
+        },
+        "primary_sha256": "d30c9c96a78f9b7135e314ee639032c43072594a31ef94d7a97cbefe224a9562",
+        "zero_sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+        "primary_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 391,
+            "frame": 5947,
+            "kind": "END_STOP",
+            "v": 20,
+            "addr": 326640,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 3063,
+            "vol_r": 10157,
+            "sample_bank": 0
+          },
+          "engine_frames": 27
+        },
+        "zero_lifetime": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 392,
+            "frame": 5958,
+            "kind": "END_STOP",
+            "v": 44,
+            "addr": 5264,
+            "pitch": 1144,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 10157,
+            "vol_r": 3063,
+            "sample_bank": 31
+          },
+          "engine_frames": 13
+        },
+        "overlap_engine_frames": 2
+      }
+    ],
+    "source_voice_routes": "P1 native hardware20/bank0 and P2 owned private44/bank31",
+    "fixed_owners": "0x4D4D583650320001 under mask0x00F00B09",
+    "scope": "Actual Zero jump/Saber vocals during X hurt; each retained voice reaches its natural END_STOP before any replacement."
+  },
+  "validation": {
+    "selected_python_tests": 170,
+    "passed": 170,
+    "matched_core_mod_samples": 37,
+    "post_primary_case_core_mod_samples": 7,
+    "local_final_HP": [
+      0,
+      32
+    ],
+    "paired_final_HP": [
+      [
+        0,
+        31
+      ],
+      [
+        0,
+        31
+      ]
+    ],
+    "paired_final_lifecycle": [
+      [
+        5,
+        0
+      ],
+      [
+        5,
+        0
+      ]
+    ],
+    "local_owned_exit": {
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    },
+    "paired_owned_exits": [
+      {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      }
+    ],
+    "private_cards_unchanged": true,
+    "composed_captures_identical": true,
+    "visual_review": "One byte-identical composed capture viewed: X bar empty, Zero present with31HP; no sprite/particle/HUD-mechanic pass inferred."
+  },
+  "retained_setup_failure": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-paired-first\\qualification.json",
+    "error": "Primary audio lost fixed roster or healthy surviving Zero",
+    "scope": "Earlier observer required pristine Zero health and stopped after a1HP native hit. Both actors lived; revised survival guard retains damage. Not a game failure."
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-all-jump-variants\\qualification.json",
+      "sha256": "4b12fa7cbf6ad5451512e04a91740fc94c0079c7af51313ef6dedc41675bd519"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-all-jump-variants\\source-records.json",
+      "sha256": "f459f98e1af825948f4b560990105540da454fbcb50e99a07a62851a8e79255c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-all-jump-variants\\audio-rpc.jsonl",
+      "sha256": "46c49df6a3228ec9a5ed41f1e82ef81b382de77e7e315f95c009322c00e71b00"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-all-jump-variants\\qualify_mmx6_native_audio-executed-source.py",
+      "sha256": "7ba5df13a3d9021746c9f050beb6fcc79e91a2b4ea5788d88125c55f0c7aab0f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-all-jump-variants\\candidate\\mods\\state.toml",
+      "sha256": "307c65254f168785d2b9caf1553b5a03e0cd63d26351db4e795339bca7896d6c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-X-all-jump-variants\\candidate\\native-zero-reference-state.json",
+      "sha256": "9a172f79b8014c8f4c4ab2ff58b15202b35d77c994894e2fcc497d2c50297724"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\frozen-build-v20-22ea525\\psx_build_manifest\\psx-runtime\\Release\\manifest.json",
+      "sha256": "26ff444b5cb1f509d8e4b9eb4f30cc393f48d835006da7b74c327a55f11a82be"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\qualification.json",
+      "sha256": "10f7f0f30d9d0438c3e264ee344fd6bbd9214cf7a6e898e25c9388a62d0feffb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\source-records.json",
+      "sha256": "f459f98e1af825948f4b560990105540da454fbcb50e99a07a62851a8e79255c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\audio-rpc.jsonl",
+      "sha256": "f41cbf758d2678667e1fb38fe4aaf23a0a1a1b4bae0481b70ab16522536963c3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\qualify_mmx6_native_audio-executed-source.py",
+      "sha256": "086ee0a297c1866a8fb998a6d1d9b52fcf68080a1403688c533e8ef1613e6a27"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\mmx6_native_contact_audio-executed-source.py",
+      "sha256": "8694991f19237d439a495ac140829f9360a340168fdde46b34bffc94740e0105"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\candidate\\mods\\state.toml",
+      "sha256": "307c65254f168785d2b9caf1553b5a03e0cd63d26351db4e795339bca7896d6c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-X-ledge-retry\\candidate\\native-zero-reference-state.json",
+      "sha256": "9a172f79b8014c8f4c4ab2ff58b15202b35d77c994894e2fcc497d2c50297724"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\qualification.json",
+      "sha256": "153d2deef24e01d464696d4acebdf0a9cd49dfc86f6757cc00b848703c2c1c0d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\source-records.json",
+      "sha256": "cf8e85b018a48902988fc0ef6db31a677c52187297df86bfddb72f875377e963"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\audio-rpc.jsonl",
+      "sha256": "e5a4fe341f81898be8e8c8041094affe68fb3a8bc9e811bfe6c24369618b4ad6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\qualify_mmx6_native_audio-executed-source.py",
+      "sha256": "15bfff4202b0c958e4d685342ccf51a22c2942a18a641cc4d1cdaeb995e25161"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\candidate\\mods\\state.toml",
+      "sha256": "307c65254f168785d2b9caf1553b5a03e0cd63d26351db4e795339bca7896d6c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-audio-v20-22ea525-Zero-wave-contract\\candidate\\native-zero-reference-state.json",
+      "sha256": "9a172f79b8014c8f4c4ab2ff58b15202b35d77c994894e2fcc497d2c50297724"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualification.json",
+      "sha256": "29c1994477a0c4fb4d8140eff2e27ca6a987822979d7e5b32f629a404749363f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\source-records.json",
+      "sha256": "cf8e85b018a48902988fc0ef6db31a677c52187297df86bfddb72f875377e963"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\audio-rpc.jsonl",
+      "sha256": "a7442f4bd4f1eb2f2a3b7ec2ca3f24ec73f39f5b6164f270014d5e4bdfd2f334"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\qualify_mmx6_native_audio-executed-source.py",
+      "sha256": "086ee0a297c1866a8fb998a6d1d9b52fcf68080a1403688c533e8ef1613e6a27"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\mmx6_native_contact_audio-executed-source.py",
+      "sha256": "8694991f19237d439a495ac140829f9360a340168fdde46b34bffc94740e0105"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\candidate\\mods\\state.toml",
+      "sha256": "307c65254f168785d2b9caf1553b5a03e0cd63d26351db4e795339bca7896d6c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-contact-audio-v20-22ea525-Zero-Amazon-first\\candidate\\native-zero-reference-state.json",
+      "sha256": "9a172f79b8014c8f4c4ab2ff58b15202b35d77c994894e2fcc497d2c50297724"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-local-with-X-jumps\\candidate\\saves\\input-recordings\\session-1792811207067164-1-0\\inputs.jsonl",
+      "sha256": "4f91eb75c9b74583f9f14ff3468aa51576cca1492a24cec52c08b02991ddd9b1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-local-general-retirement-aware\\qualification.json",
+      "sha256": "d99ff9d5e74f92657136ffbc4284b5d06ff624eb4eececb5089f2b49b6c57b73"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-paired-general\\qualification.json",
+      "sha256": "47980a544dab47da7734a1eb83c631fc8281ec5c053a4a203430bc5e542f2d92"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-local-with-X-jumps\\qualification.json",
+      "sha256": "710c7b3dc66e02e8e2d304b26f21b09e2aa5a56f710bea102337aa686ed1f9a1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-local-with-X-jumps\\primary-audio\\observations.json",
+      "sha256": "8795610114f4c6473d8d1d0540c825a234eb76a95b74e49a389bb98d98383826"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-local-with-X-jumps\\primary-audio\\peer-0-rpc.jsonl",
+      "sha256": "0322b18bfdf518a063b24d9fc1335ff84eeb0934db53b7deb7ba09274f31374c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-local-with-X-jumps\\primary-audio\\primary-observer-executed-source.py",
+      "sha256": "678ee47ba3154d4f0123ad7907020136f9b3309e58cb0a275d14c94ad778f447"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-local-with-X-jumps\\primary-audio\\source-records.json",
+      "sha256": "79db72f3ec90ae03e940723787b53cca75e47b402982b0c462784842bbdeaf1d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-local-with-X-jumps\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-local-with-X-jumps\\mmx6_coop_primary_audio-executed-source.py",
+      "sha256": "678ee47ba3154d4f0123ad7907020136f9b3309e58cb0a275d14c94ad778f447"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-local-with-X-jumps\\mmx6_native_contact_audio-executed-source.py",
+      "sha256": "9db065f3ff7c6d1396d9d07868e1031b46f6929d7c557e58936ebc55450d4719"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-local-with-X-jumps\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "3b107c1f80a132de2fb3d33ca6190e6bb0587c5e173c161f61b8d146ec57ac64"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-local-with-X-jumps\\qualify_mmx6_native_audio-executed-source.py",
+      "sha256": "7ba5df13a3d9021746c9f050beb6fcc79e91a2b4ea5788d88125c55f0c7aab0f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-paired-living-Zero\\qualification.json",
+      "sha256": "2976dcaf5b452ca7486bc22904e54d7a5c61f2f6092b5ed10ce065a1978dcda5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-paired-living-Zero\\primary-audio\\observations.json",
+      "sha256": "e329ad83e6dc009edf5f257f02840f82658478d41a7e60f0ec77cdcd1c1ca784"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-paired-living-Zero\\primary-audio\\peer-0-rpc.jsonl",
+      "sha256": "a21d806baf3ad7eca9e0046f6ec5c2fc3c73f317bcb23e968a4364ef53c821d3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-paired-living-Zero\\primary-audio\\peer-1-rpc.jsonl",
+      "sha256": "7a4d5eea40c9063bf7a89eece3cf1504dddcc7a47b06bca54dd4cc1c1c0099b4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-paired-living-Zero\\primary-audio\\primary-observer-executed-source.py",
+      "sha256": "3c711ecbb411d7dce5cef769c85c549c0a2aac4b43a3d82694d552e0e9c5303f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-paired-living-Zero\\primary-audio\\source-records.json",
+      "sha256": "79db72f3ec90ae03e940723787b53cca75e47b402982b0c462784842bbdeaf1d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-paired-living-Zero\\mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "66166703568cc6037c3bc0c5cbd1ec0c91e63e976c1d47317860d916f757c8a0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-paired-living-Zero\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-paired-living-Zero\\mmx6_coop_native_reentry_pair-executed-source.py",
+      "sha256": "883c388ed512915b482533f625ddffde91111a7b436dbf63a538db0b9fda7b8b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-paired-living-Zero\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "3b107c1f80a132de2fb3d33ca6190e6bb0587c5e173c161f61b8d146ec57ac64"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-paired-living-Zero\\qualify_mmx6_input_replay-executed-source.py",
+      "sha256": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-paired-living-Zero\\peer-0\\logs\\intro-present.png",
+      "sha256": "834c9e7cb84b5d1543ad3a061207a05cc19dc20c4c97d1c1ac4d9bfb3b76468e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-paired-living-Zero\\peer-1\\logs\\intro-present.png",
+      "sha256": "834c9e7cb84b5d1543ad3a061207a05cc19dc20c4c97d1c1ac4d9bfb3b76468e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\primary-audio-v20-22ea525-paired-first\\qualification.json",
+      "sha256": "c65d13db2eb1362ad6174e70a1b28cdd1aef2346b0e6d281c638bfdba7fda4ea"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-character-audio\\manifest-bound-22ea525-build-and-source-reviewed.json",
+      "sha256": "b0cd04af4a292649fe7cbdab4a50eac3e58ad986d7f46e532f5878e63e0e82c1"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-character-audio\\manifest-bound-22ea525-local-body-reviewed.json",
+      "sha256": "259f097c0f953b412255e663a64acfc14e5a4a5f6ac009d4fe75cb0bab5a5718"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-character-audio\\manifest-bound-22ea525-paired-body-reviewed.json",
+      "sha256": "d2abeab69fb7b6a65b93e6f7b8631f95c54ae1586e267922fd1c53a0b8a7e423"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-character-audio\\manifest-bound-22ea525-paired-jump-orders-reviewed.json",
+      "sha256": "49f4f8b9b2773c51fba15bd3d6717a0f1fe6d88a7ab8fd8ba3c85a0d190e1b56"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-character-audio\\manifest-bound-22ea525-native-off-jump-attack-reviewed.json",
+      "sha256": "e2e4e30c52c9583903ef2e9f4d75344c47888ced11045526797e5ea58fbea8d4"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-character-audio\\manifest-bound-22ea525-native-off-hurt-death-reviewed.json",
+      "sha256": "fed5556fe379839a425377369449a01a18296dbc1ffc51dbde2e22ae3b3389e3"
+    }
+  ],
+  "limits": [
+    "Bounded R4/R12 checks only, fixed Falcon X/P1 and ordinary Zero/P2 roster, this exact image and same physical Windows machine.",
+    "R4 standing attacks are ordinary X buster and ordinary Zero Saber; unseen charge/special/weapon/other-roster paths remain unverified.",
+    "R12 covers retained natural jump/hurt and Saber/hurt windows. Active STOP7, other sound/stop callers, complete record reachability and current-build native state/rewind remain separate open work.",
+    "Native Zero reference uses a private availability/screen prerequisite. It does not qualify earned unlock, campaign, ordinary selector entry or native-card progress.",
+    "Native Zero Saber SFX reference has exact waveform/pitch/ADSR but no event-time SOUND entry; exact native caller/record attribution stays unverified.",
+    "Sample identity, pitch/ADSR and explicit event lifetimes are compared. Spatial volume, PCM/audio output, independent sample clocks, physical controls and cross-machine/CPU/OS/build compatibility are not qualified.",
+    "Zero receives1HP native damage in the paired primary route; both peers retain31HP and matching resolved checksums. No exact native damage-caller or full-health preservation claim.",
+    "Native primary death globally stops shared effect3/14 at97frames. With co-op Zero surviving, it ends naturally at98frames without global STOP; character death vocal3/16 is separately source-matched and natural.",
+    "Historical wrong-character failures remain retained against their original images. This pass does not close the full234 comparisons,79 native obligations or content inventory."
+  ],
+  "bypasses": [
+    {
+      "scope": "Native-off Zero reference prerequisite only",
+      "writes": [
+        {
+          "address": "0x800ccf2f",
+          "before": 1,
+          "after": 17,
+          "reason": "private Zero availability bit10"
+        },
+        {
+          "address": "0x800cced1",
+          "before": 0,
+          "after": 0,
+          "reason": "native screen phase initialization"
+        },
+        {
+          "address": "0x800cced2",
+          "before": 0,
+          "after": 0,
+          "reason": "native screen subphase initialization"
+        },
+        {
+          "address": "0x800cced0",
+          "before": 10,
+          "after": 2,
+          "reason": "native screen2 loader prerequisite"
+        }
+      ],
+      "ordinary_progress_evidence_tainted": true,
+      "co_op_observation_bypasses": []
+    }
+  ]
+}

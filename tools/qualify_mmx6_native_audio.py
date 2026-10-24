@@ -444,11 +444,15 @@ def run(args):
         audio.parse_private_voices(report["private_before"])
         require(all(int(v["owner_tag"],16) == 0 and not v["active"] for v in report["private_before"]["voices"]),
                 "Co-op-disabled reference contains a private voice reservation")
+        jump_records=set()
+        required_jumps=set(audio.JUMP_RECORDS[args.character])
         for attempt in range(args.jump_attempts):
             case = dict(label="ground_jump",attempt=attempt+1,status="failed_setup")
             report["cases"].append(case)
             exercise(session,observer,"ground_jump",0x4000,case=case)
-            if case["jump_vocal_observed"]:
+            jump_records.update(m['record']['record'] for m in case['matched'] if m['record']['group']==3)
+            complete=(required_jumps<=jump_records) if args.all_jump_variants else case["jump_vocal_observed"]
+            if complete:
                 break
         for label, bits in (("standing_square_attack",0x8000),):
             case = dict(label=label,status="failed_setup")
@@ -465,6 +469,9 @@ def run(args):
                                 native_character_confirmed=True, source_matched_banks=True,
                                 bounded_jump_attack_reference_actions=True,
                                 native_jump_vocal_observed=any(c.get("jump_vocal_observed") for c in report["cases"]))
+        report['jump_vocal_records_observed']=sorted(jump_records)
+        if args.all_jump_variants:
+            report['checks']['all_original_jump_vocal_variants_observed']=required_jumps<=jump_records
         report["final_mod_state"] = reference.validate_reference_profile(profile,args.expected_exe_sha256)
         report["status"] = "bounded_jump_attack_references_observed_hurt_death_unverified"
         if contact_audio is not None:
@@ -506,6 +513,7 @@ def main():
     parser.add_argument("--port",type=int,default=17936)
     parser.add_argument("--timeout",type=float,default=90)
     parser.add_argument("--jump-attempts",type=int,default=32)
+    parser.add_argument('--all-jump-variants',action='store_true',help='Use bounded original jumps until every character-specific vocal record is observed')
     parser.add_argument('--contact-death',action='store_true')
     parser.add_argument('--contact-timeout',type=float,default=150)
     args = parser.parse_args()

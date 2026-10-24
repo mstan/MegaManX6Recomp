@@ -255,6 +255,9 @@ def run(args) -> dict:
         modules+=(audio_pair,audio_pair.audio,audio_pair.ownership,audio_pair.ownership.host,source_validation)
         modules+=tuple(importlib.import_module(name) for name in
             ("audit_mmx6_coop_audio","inventory_mmx6_coop_content","mmx6_seamless_catalog"))
+        if getattr(args,'primary_audio_smoke',False):
+            primary_observer=importlib.import_module('mmx6_coop_primary_audio')
+            modules+=(primary_observer,primary_observer.native,primary_observer.contact)
     if getattr(args,"native_reentry",None):
         reentry_pair=importlib.import_module("mmx6_coop_native_reentry_pair")
         source_validation=importlib.import_module("qualify_mmx6_coop_jump_audio")
@@ -740,6 +743,19 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
                 matched("paired saber hurt death audio then settle")
                 report["checks"]["body_audio_resolved_crc_after_case"]=True
                 report["limits"].append("Paired body samples/contact death are separate bounded observations; pending inactive STOP7 never becomes a pass")
+            if getattr(args,'primary_audio_smoke',False):
+                report['checks']['primary_audio_resolved_crc_after_case']=False
+                primary_case=audio_pair.exercise_primary(dict(clients=clients,both=both,report=report,
+                    output=output,network=network,native_advance=lambda frames,label:advance(frames)),
+                    expected_sha=args.expected_exe_sha256,source=audio_source,
+                    original_exe=args.original_exe,original_disc=args.original_disc)
+                report['primary_audio_automated_status']=primary_case['status']
+                require(primary_case['status'] in ('primary_audio_observations_complete_outcomes_unverified',
+                    'primary_audio_observations_partial_missing_overlap'),
+                    'Paired primary audio did not complete independent source/lifecycle comparisons: '+primary_case['status'])
+                matched('paired X hurt death, Zero survival and vocal overlap')
+                report['checks']['primary_audio_resolved_crc_after_case']=True
+                report['limits'].append('Primary X audio and observed one-direction vocal overlaps only; no full R4/R12, active STOP7 or cross-host pass')
         if reentry_pair is not None:
             loader_logs=[(output/f"peer-{seat}/logs/stdout.log").read_text(errors="replace") for seat in range(2)]
             require(all("title netplay loading = resident assets" in text for text in loader_logs),
@@ -930,6 +946,8 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             report["status"]=audio_pair.INCONCLUSIVE
         if audio_pair is not None and report["status"]=="passed" and report.get("body_audio_automated_status")==audio_pair.BODY_PARTIAL:
             report["status"]=audio_pair.BODY_PARTIAL
+        if audio_pair is not None and report['status']=='passed' and report.get('primary_audio_automated_status')=='primary_audio_observations_partial_missing_overlap':
+            report['status']='primary_audio_observations_partial_missing_overlap'
         report["default_intro_qualified"] = report["status"] == "passed" and not args.native_loader_diagnostic
     except Exception as error:
         report.update(error=str(error), traceback=traceback.format_exc())
@@ -1033,6 +1051,8 @@ def make_parser():
                         help="Bounded native RNG attempts1..32 (default32), only with --jump-audio-smoke")
     parser.add_argument("--expected-manifest-sha256",
                         help="Exact compiled declared-manifest SHA256, required by --jump-audio-smoke")
+    parser.add_argument('--primary-audio-smoke',action='store_true',
+                        help='Observe X buster/hurt/death, surviving Zero and vocal overlap; requires full jump-audio startup gates and a separate fresh pair')
     parser.add_argument("--native-reentry",choices=("new_game",),
                         help="Separate same-machine original final Quit/New Game and fresh P2 menu recovery; strict image/source/profile/CRC proof required")
     parser.add_argument("--original-disc", type=Path,
@@ -1052,6 +1072,11 @@ def make_parser():
 
 
 def validate_options(parser, args):
+    if getattr(args,'primary_audio_smoke',False):
+        if not args.jump_audio_smoke:
+            parser.error('Primary audio requires full --jump-audio-smoke source/image/profile/CRC gates')
+        if getattr(args,'body_audio_smoke',False):
+            parser.error('Primary X and fatal Zero audio cases require separate fresh pairs')
     if getattr(args,"body_audio_smoke",False) and not args.jump_audio_smoke:
         parser.error("Paired body audio requires the full --jump-audio-smoke source/profile/CRC gates")
     if sys.version_info < (3, 11):
@@ -1139,7 +1164,8 @@ def main():
     print(json.dumps(dict(status=report["status"], checks=report["checks"], error=report.get("error"),
                           report=str(args.out/"qualification.json"))), flush=True)
     if report["status"]=="passed":return 0
-    if report["status"]=="paired_body_audio_observations_partial_stops_unverified":return 2
+    if report["status"] in ("paired_body_audio_observations_partial_stops_unverified",
+        'primary_audio_observations_partial_missing_overlap'):return 2
     return 1
 
 

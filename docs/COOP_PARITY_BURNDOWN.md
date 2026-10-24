@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 4 passed (R2, R7, R8, R13), 4 failed (R4, R12, R15, F208), 226 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 6 passed (R2, R4, R7, R8, R12, R13), 2 failed (R15, F208), 226 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -41,10 +41,27 @@ states; old-state migration is never required.
 
 ## Current qualification status, October 23
 
-All 234 reference rows are inventoried; 4/234 (1.7%) are passed. The four
-failed rows preserve observed prior-image P2 audio ownership and stale co-op
-callbacks after native Quit -> New Game. Retained native corrections belong to
-their exact candidate images; broader row requirements remain incomplete.
+All 234 reference rows are inventoried; 6/234 (2.6%) are passed. R15/F208
+retain prior native Quit callback failures with broader transition checks
+incomplete. Earlier audio failures remain in R4/R12 history, followed by
+current-image local and paired passes of their frozen bounded checks.
+
+The [combined R4/R12 receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-R4-R12-reviewed.json)
+binds candidate22ea525 to 24 character/family/mode coverage cells, 45 actual
+sample/pitch/ADSR comparisons with co-op-disabled native references and 17
+natural overlap windows. X and Zero jump, ordinary standing attack, hurt and
+death samples are compared separately. Independent X hurt/Zero jump or Saber
+voices end naturally in local co-op and on both peers. The pair retains37
+matching resolved core/mod samples, seven after the primary-death/survivor
+case, unchanged private cards and natural owned exits0. All 170 selected
+Python tests pass. The broader audio issues remain open for additional
+actions/stop callers, active STOP7, music/PCM, native state/rewind and other
+rosters/hosts; this does not qualify all audio or any other ledger row.
+
+### Earlier audio milestones
+
+These receipts retain their scopes and dispositions at the time. The current
+combined ledger qualification is stated above.
 
 Ordinary Zero audio candidate 22ea525 now has a
 [local native receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-local-body-reviewed.json)
@@ -77,7 +94,7 @@ DSP evidence while its event-time SOUND record/caller remains unverified.
 Zero selection uses an explicit private availability/screen prerequisite, not
 earned progress. Both offline processes quit naturally with exit0. Remaining
 co-op character comparisons, active STOP7, attack/hurt overlap and native
-state/rewind remain open; the ledger stays at4 passed,4 failed,226 unverified.
+state/rewind remained open; the ledger then had4 passed,4 failed,226 unverified.
 
 The [native hurt/death receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-native-off-hurt-death-reviewed.json)
 adds 54 source-matched X events and 47 Zero events, unchanged original character
@@ -102,7 +119,7 @@ audio proof.
 The [local contact-death audio receipt](evidence/mmx6-body-audio/manifest-bound-a1dac26-local-contact-and-vocal-reviewed.json)
 now verifies the saber SFX source/numerical fields and nine live STOP5
 private46 events, with native eight-contact HP32->0 and surviving X. It also
-confirms a current-image R4 failure: Zero's saber vocal selects X's actual
+confirms a then-current v19 R4 failure: Zero's saber vocal selects X's actual
 sample bytes on hardware20/bank0. The [fresh inactive-STOP receipt](evidence/mmx6-body-audio/manifest-bound-a1dac26-local-inactive-stops-reviewed.json)
 also passes all 18 selected SFX/inactive-death-STOP checks: private23 volume
 changes from13433/13433 to0/0 while P1 hardware22 registers stay intact.
@@ -344,8 +361,8 @@ and production builds and 20/20 tests pass for this lifecycle candidate.
 five forms with five passing source/metadata checks. X6 voice records use
 stride 0x38 and voice body type 0x20303; every voice group's record 17 references
 the effects VAB. Proven X4 design is a reference, but its memory extents and
-blanket bank mapping cannot be copied. R4/R12 remain unverified pending complete
-X6 driver/flush ownership and native muted captures.
+blanket bank mapping cannot be copied. That source-only milestone left R4/R12
+unverified; the later bounded native qualification is recorded above.
 
 ## Modern host-state milestone
 

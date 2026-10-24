@@ -353,14 +353,14 @@
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "failed",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -910,9 +910,159 @@
                 "sha256": "fed5556fe379839a425377369449a01a18296dbc1ffc51dbde2e22ae3b3389e3"
               }
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+            "build_identity": {
+              "exe_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+              "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+              "compiled_source_commit": "22ea525bbc52b5177f501989fedc5873ef30099c",
+              "sdk_commit": "09e8673435c73e516b420e6c13bb11f02dc8aaea"
+            },
+            "settings": {
+              "roster": "Falcon X/P1 + ordinary Zero/P2",
+              "peers": "same physical Windows machine, direct127.0.0.1 delay",
+              "paired_profile": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "input": "owned published host digital slots",
+              "loader": "default resident assets, authentic1x",
+              "muted": "SDL_AUDIODRIVER=dummy",
+              "rollback": false,
+              "rewind": false,
+              "observation_mode": "local"
+            },
+            "action": "Capture each character jump, ordinary standing attack, native hurt and death source samples; compare waveform/pitch/ADSR to independently staged co-op-disabled native references.",
+            "outcome": "All selected character/family cells pass, including native X buster/hurt/death and private Zero Saber/hurt/death; actual source bytes and pitch/ADSR equal the co-op-disabled references. The combined review retains24 coverage cells and45 source comparisons across local and both peers.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-character-audio/manifest-bound-22ea525-R4-R12-reviewed.json",
+                "sha256": "aac88a965f703b5803b9275ac6d627a1ca05d629642cf8d16bb40a2fb0ff1181"
+              }
+            ],
+            "limits": [
+              "Bounded R4/R12 checks only, fixed Falcon X/P1 and ordinary Zero/P2 roster, this exact image and same physical Windows machine.",
+              "R4 standing attacks are ordinary X buster and ordinary Zero Saber; unseen charge/special/weapon/other-roster paths remain unverified.",
+              "R12 covers retained natural jump/hurt and Saber/hurt windows. Active STOP7, other sound/stop callers, complete record reachability and current-build native state/rewind remain separate open work.",
+              "Native Zero reference uses a private availability/screen prerequisite. It does not qualify earned unlock, campaign, ordinary selector entry or native-card progress.",
+              "Native Zero Saber SFX reference has exact waveform/pitch/ADSR but no event-time SOUND entry; exact native caller/record attribution stays unverified.",
+              "Sample identity, pitch/ADSR and explicit event lifetimes are compared. Spatial volume, PCM/audio output, independent sample clocks, physical controls and cross-machine/CPU/OS/build compatibility are not qualified.",
+              "Zero receives1HP native damage in the paired primary route; both peers retain31HP and matching resolved checksums. No exact native damage-caller or full-health preservation claim.",
+              "Native primary death globally stops shared effect3/14 at97frames. With co-op Zero surviving, it ends naturally at98frames without global STOP; character death vocal3/16 is separately source-matched and natural.",
+              "Historical wrong-character failures remain retained against their original images. This pass does not close the full234 comparisons,79 native obligations or content inventory."
+            ],
+            "bypasses": [
+              {
+                "scope": "Native-off Zero reference prerequisite only",
+                "writes": [
+                  {
+                    "address": "0x800ccf2f",
+                    "before": 1,
+                    "after": 17,
+                    "reason": "private Zero availability bit10"
+                  },
+                  {
+                    "address": "0x800cced1",
+                    "before": 0,
+                    "after": 0,
+                    "reason": "native screen phase initialization"
+                  },
+                  {
+                    "address": "0x800cced2",
+                    "before": 0,
+                    "after": 0,
+                    "reason": "native screen subphase initialization"
+                  },
+                  {
+                    "address": "0x800cced0",
+                    "before": 10,
+                    "after": 2,
+                    "reason": "native screen2 loader prerequisite"
+                  }
+                ],
+                "ordinary_progress_evidence_tainted": true,
+                "co_op_observation_bypasses": []
+              }
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+            "build_identity": {
+              "exe_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+              "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+              "compiled_source_commit": "22ea525bbc52b5177f501989fedc5873ef30099c",
+              "sdk_commit": "09e8673435c73e516b420e6c13bb11f02dc8aaea"
+            },
+            "settings": {
+              "roster": "Falcon X/P1 + ordinary Zero/P2",
+              "peers": "same physical Windows machine, direct127.0.0.1 delay",
+              "paired_profile": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "input": "owned published host digital slots",
+              "loader": "default resident assets, authentic1x",
+              "muted": "SDL_AUDIODRIVER=dummy",
+              "rollback": false,
+              "rewind": false,
+              "observation_mode": "netplay"
+            },
+            "action": "Capture each character jump, ordinary standing attack, native hurt and death source samples; compare waveform/pitch/ADSR to independently staged co-op-disabled native references.",
+            "outcome": "All selected character/family cells pass, including native X buster/hurt/death and private Zero Saber/hurt/death; actual source bytes and pitch/ADSR equal the co-op-disabled references. The combined review retains24 coverage cells and45 source comparisons across local and both peers.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-character-audio/manifest-bound-22ea525-R4-R12-reviewed.json",
+                "sha256": "aac88a965f703b5803b9275ac6d627a1ca05d629642cf8d16bb40a2fb0ff1181"
+              }
+            ],
+            "limits": [
+              "Bounded R4/R12 checks only, fixed Falcon X/P1 and ordinary Zero/P2 roster, this exact image and same physical Windows machine.",
+              "R4 standing attacks are ordinary X buster and ordinary Zero Saber; unseen charge/special/weapon/other-roster paths remain unverified.",
+              "R12 covers retained natural jump/hurt and Saber/hurt windows. Active STOP7, other sound/stop callers, complete record reachability and current-build native state/rewind remain separate open work.",
+              "Native Zero reference uses a private availability/screen prerequisite. It does not qualify earned unlock, campaign, ordinary selector entry or native-card progress.",
+              "Native Zero Saber SFX reference has exact waveform/pitch/ADSR but no event-time SOUND entry; exact native caller/record attribution stays unverified.",
+              "Sample identity, pitch/ADSR and explicit event lifetimes are compared. Spatial volume, PCM/audio output, independent sample clocks, physical controls and cross-machine/CPU/OS/build compatibility are not qualified.",
+              "Zero receives1HP native damage in the paired primary route; both peers retain31HP and matching resolved checksums. No exact native damage-caller or full-health preservation claim.",
+              "Native primary death globally stops shared effect3/14 at97frames. With co-op Zero surviving, it ends naturally at98frames without global STOP; character death vocal3/16 is separately source-matched and natural.",
+              "Historical wrong-character failures remain retained against their original images. This pass does not close the full234 comparisons,79 native obligations or content inventory."
+            ],
+            "bypasses": [
+              {
+                "scope": "Native-off Zero reference prerequisite only",
+                "writes": [
+                  {
+                    "address": "0x800ccf2f",
+                    "before": 1,
+                    "after": 17,
+                    "reason": "private Zero availability bit10"
+                  },
+                  {
+                    "address": "0x800cced1",
+                    "before": 0,
+                    "after": 0,
+                    "reason": "native screen phase initialization"
+                  },
+                  {
+                    "address": "0x800cced2",
+                    "before": 0,
+                    "after": 0,
+                    "reason": "native screen subphase initialization"
+                  },
+                  {
+                    "address": "0x800cced0",
+                    "before": 10,
+                    "after": 2,
+                    "reason": "native screen2 loader prerequisite"
+                  }
+                ],
+                "ordinary_progress_evidence_tainted": true,
+                "co_op_observation_bypasses": []
+              }
+            ]
           }
         ],
-        "limitations": "Exact22ea525 has retained local/paired Zero source audio and co-op-disabled X/Zero jump, attack, hurt and death references. Historical wrong-character audio remains a failed prior-image observation. Co-op X hurt/death, remaining attack-family comparisons, optional paired Zero Saber vocal, actual attack/hurt overlap, active STOP7, native state/rewind and full family qualification remain incomplete. Native Zero selector setup is a recorded prerequisite bypass; waveform/pitch/ADSR comparisons do not prove spatial volume, PCM or lifecycle equality."
+        "limitations": "Passed selected X/Zero jump, ordinary standing attack, hurt/death sample/pitch/ADSR comparisons against co-op-disabled native references. Native Zero selector uses the disclosed private prerequisite; its Saber SFX exact SOUND caller remains unverified. Unseen actions/weapons/rosters, spatial volume, music/PCM, current-build native state/rewind and other audio acceptance remain open."
       }
     },
     {
@@ -1792,14 +1942,14 @@
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "failed",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -2207,9 +2357,95 @@
               "Co-op-off native X/Zero references, active STOP7, remaining records, current-build native state/rewind, PCM/music, physical controls, other hosts/CPUs/OSes and full campaign remain unverified."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+            "build_identity": {
+              "exe_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+              "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+              "compiled_source_commit": "22ea525bbc52b5177f501989fedc5873ef30099c",
+              "sdk_commit": "09e8673435c73e516b420e6c13bb11f02dc8aaea"
+            },
+            "settings": {
+              "roster": "Falcon X/P1 + ordinary Zero/P2",
+              "peers": "same physical Windows machine, direct127.0.0.1 delay",
+              "paired_profile": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "input": "owned published host digital slots",
+              "loader": "default resident assets, authentic1x",
+              "muted": "SDL_AUDIODRIVER=dummy",
+              "rollback": false,
+              "rewind": false,
+              "observation_mode": "local"
+            },
+            "action": "Use original published Zero jump/Saber inputs during native X hurt; independently identify actual source samples/routes and require overlapping natural END_STOP lifetimes.",
+            "outcome": "Local case retains2 jump/hurt and5 Saber/hurt windows with source-correct hardware20/private44 channels and natural ends.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-character-audio/manifest-bound-22ea525-R4-R12-reviewed.json",
+                "sha256": "aac88a965f703b5803b9275ac6d627a1ca05d629642cf8d16bb40a2fb0ff1181"
+              }
+            ],
+            "limits": [
+              "Bounded R4/R12 checks only, fixed Falcon X/P1 and ordinary Zero/P2 roster, this exact image and same physical Windows machine.",
+              "R4 standing attacks are ordinary X buster and ordinary Zero Saber; unseen charge/special/weapon/other-roster paths remain unverified.",
+              "R12 covers retained natural jump/hurt and Saber/hurt windows. Active STOP7, other sound/stop callers, complete record reachability and current-build native state/rewind remain separate open work.",
+              "Native Zero reference uses a private availability/screen prerequisite. It does not qualify earned unlock, campaign, ordinary selector entry or native-card progress.",
+              "Native Zero Saber SFX reference has exact waveform/pitch/ADSR but no event-time SOUND entry; exact native caller/record attribution stays unverified.",
+              "Sample identity, pitch/ADSR and explicit event lifetimes are compared. Spatial volume, PCM/audio output, independent sample clocks, physical controls and cross-machine/CPU/OS/build compatibility are not qualified.",
+              "Zero receives1HP native damage in the paired primary route; both peers retain31HP and matching resolved checksums. No exact native damage-caller or full-health preservation claim.",
+              "Native primary death globally stops shared effect3/14 at97frames. With co-op Zero surviving, it ends naturally at98frames without global STOP; character death vocal3/16 is separately source-matched and natural.",
+              "Historical wrong-character failures remain retained against their original images. This pass does not close the full234 comparisons,79 native obligations or content inventory."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+            "build_identity": {
+              "exe_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+              "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+              "compiled_source_commit": "22ea525bbc52b5177f501989fedc5873ef30099c",
+              "sdk_commit": "09e8673435c73e516b420e6c13bb11f02dc8aaea"
+            },
+            "settings": {
+              "roster": "Falcon X/P1 + ordinary Zero/P2",
+              "peers": "same physical Windows machine, direct127.0.0.1 delay",
+              "paired_profile": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "input": "owned published host digital slots",
+              "loader": "default resident assets, authentic1x",
+              "muted": "SDL_AUDIODRIVER=dummy",
+              "rollback": false,
+              "rewind": false,
+              "observation_mode": "netplay"
+            },
+            "action": "Use original published Zero jump/Saber inputs during native X hurt; independently identify actual source samples/routes and require overlapping natural END_STOP lifetimes.",
+            "outcome": "Each peer independently retains2 jump/hurt and3 Saber/hurt natural windows;37 resolved core/mod samples match, including7 after X falls while Zero survives at31HP.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-character-audio/manifest-bound-22ea525-R4-R12-reviewed.json",
+                "sha256": "aac88a965f703b5803b9275ac6d627a1ca05d629642cf8d16bb40a2fb0ff1181"
+              }
+            ],
+            "limits": [
+              "Bounded R4/R12 checks only, fixed Falcon X/P1 and ordinary Zero/P2 roster, this exact image and same physical Windows machine.",
+              "R4 standing attacks are ordinary X buster and ordinary Zero Saber; unseen charge/special/weapon/other-roster paths remain unverified.",
+              "R12 covers retained natural jump/hurt and Saber/hurt windows. Active STOP7, other sound/stop callers, complete record reachability and current-build native state/rewind remain separate open work.",
+              "Native Zero reference uses a private availability/screen prerequisite. It does not qualify earned unlock, campaign, ordinary selector entry or native-card progress.",
+              "Native Zero Saber SFX reference has exact waveform/pitch/ADSR but no event-time SOUND entry; exact native caller/record attribution stays unverified.",
+              "Sample identity, pitch/ADSR and explicit event lifetimes are compared. Spatial volume, PCM/audio output, independent sample clocks, physical controls and cross-machine/CPU/OS/build compatibility are not qualified.",
+              "Zero receives1HP native damage in the paired primary route; both peers retain31HP and matching resolved checksums. No exact native damage-caller or full-health preservation claim.",
+              "Native primary death globally stops shared effect3/14 at97frames. With co-op Zero surviving, it ends naturally at98frames without global STOP; character death vocal3/16 is separately source-matched and natural.",
+              "Historical wrong-character failures remain retained against their original images. This pass does not close the full234 comparisons,79 native obligations or content inventory."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Historical failures remain retained. Exact 22ea525 has 27 local events/12 records, both paired jump orders, and 33 paired saber-SFX/hurt/death events per peer across 11 records. Co-op-off references, paired optional saber3/3, active STOP7 and actual attack/hurt vocal overlap remain incomplete."
+        "limitations": "Passed retained natural X-hurt/Zero-jump and X-hurt/Zero-Saber overlap windows in local co-op and both same-machine peers, with independent source samples/routes and natural END_STOP. Active STOP7, other sound/stop callers, all-action/roster coverage, music/PCM and native state/rewind remain open under broader audio acceptance."
       }
     },
     {
