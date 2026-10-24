@@ -129,6 +129,10 @@ static void retain_native_x_pixels(void){
     psx_mod_write_half(menu_memory+0x10000+((505-496)*64+1)*2,0x1234);
     CHECK(zero_ui_effect_bank(0x3E,0x7E50,0x5040));
     CHECK(zero_ui_effect_bank(0x3E,0x7E50,UINT16_MAX));
+    for(unsigned y=176;y<256;++y)for(unsigned x=768;x<832;++x)
+        zero_ui_pixels[y*1024+x]=0x1111;
+    psx_mod_write_half(active_palette+2*32+2,0x4321);
+    CHECK(zero_atlas_effect_bank(0x2C,0x7802,UINT16_MAX,0));
 }
 static void digest_and_readiness(void){
     uint32_t h=state_digest();++frame_count;p2_hud_fade=17;CHECK(state_digest()==h);

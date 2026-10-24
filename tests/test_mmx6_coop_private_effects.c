@@ -129,6 +129,9 @@ static void native_draw(uint32_t actor){
     if(zero_ui_effect(actor)) {
         q[1]=0x7D000000u;q[3]|=0x5040u;
         memset(q+4,0,6*sizeof *q);
+    } else if(zero_icon_effect(actor)) {
+        q[1]=0x2F808080u; /* Original raw+semitransparent flipped FT4. */
+        q[3]|=0xC0D0u;q[5]=0x002CC0C0u;q[7]=0xD0D0u;q[9]=0xD0C0u;
     }
     for(unsigned i=0;i<10;++i)psx_mod_write_word(at+i*4,q[i]);
     psx_mod_write_word(mode,0x01000000u|(at&0xFFFFFFu));
@@ -517,9 +520,38 @@ static void arrival_draw_precedes_stage_callback(void){
     psx_mod_write_word(SCRATCH,1);begin_world_draw(&cpu,0x80025FB0u);
     CHECK(world_packets==packets+FRAME_ARENA && !stage_call && !state_track.count);
 }
+static void deferred_icon_effect_retains_zero_source(void){
+    CPUState cpu;setup(&cpu);uint32_t actor=0x80091298u;
+    psx_mod_write_word(assembly+0x3C,0xCC);
+    psx_mod_write_byte(actor,1);psx_mod_write_byte(actor+1,26);psx_mod_write_byte(actor+3,1);
+    psx_mod_write_word(actor+0x3C,assembly+0xCC);psx_mod_write_half(actor+0x42,0x7802);
+    shared_effect_owners[0]=2;cpu.gpr[4]=actor;
+    memset(test_vram,0xBB,sizeof test_vram);
+    for(unsigned y=0;y<256;++y)for(unsigned x=0;x<64;++x)
+        test_zero_ui[y*1024+768+x]=0x1111;
+    psx_mod_write_half(active_palette+2*32+2,0x4321);
+    CHECK(render_survivor(&cpu,0x800232D4u));
+    CHECK(!failed && draw_count==1 && bank_count==1 && bank_first[0]==0x4321);
+    CHECK(banks[0].tile==UINT16_MAX && world_packets==packets+40);
+    uint32_t expanded=packets+PLAYER_PACKET_BYTES;
+    CHECK(psx_mod_read_word(expanded+4)==0x37808080u);
+    CHECK((psx_mod_read_word(expanded+12)&0xFFFFu)==0xC0D0u);
+    CHECK((psx_mod_read_word(expanded+24)&0xFFFFu)==0xC0C0u);
+    CHECK((psx_mod_read_word(expanded+36)&0xFFFFu)==0xD0D0u);
+    CHECK(psx_mod_read_word(SCRATCH+0x100)==0x800A0000 && !world_render && !state_track.count);
+    uint16_t old=banks[0].id;
+    psx_mod_write_half(active_palette+2*32+2,0x5678);
+    uint16_t fresh=zero_atlas_effect_bank(0x2C,0x7802,UINT16_MAX,0);
+    CHECK(fresh && fresh!=old && bank_first[fresh-0x6000]==0x5678);
+    shared_effect_owners[0]=1;CHECK(!render_survivor(&cpu,0x800232D4u));
+    shared_effect_owners[0]=2;psx_mod_write_word(actor+0x3C,assembly);
+    CHECK(!render_survivor(&cpu,0x800232D4u));
+    CHECK(!zero_atlas_effect_bank(0x2C,0x77FF,0,0) && !zero_atlas_effect_bank(0x2C,0x7A00,0,0));
+}
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     controller_pair_and_restoration();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
     deferred_shared_effect_owner_context();
     deferred_ui_effect_retains_owner_atlas();clear_banks();
     arrival_draw_precedes_stage_callback();clear_banks();
+    deferred_icon_effect_retains_zero_source();clear_banks();
     puts("private native effects actual-plugin call order, gates, lifetime projection and retained packet ownership PASS");return 0;}

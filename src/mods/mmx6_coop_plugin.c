@@ -1512,16 +1512,31 @@ static int zero_ui_effect(uint32_t actor) {
         psx_mod_read_byte(actor+1)==17 && offset<ASSET_SPACE &&
         psx_mod_read_word(actor+0x3C)==menu_assembly+offset;
 }
-static uint16_t zero_ui_effect_bank(uint16_t page,uint16_t clut,uint16_t tile) {
-    /* Native type17 draws Zero's PL00 UI assembly (frames83/84). Its atlas
-     * at896,256 shares VRAM with X's different UI art. Decode the original
-     * private UI pixels and palette, retaining native UVs, tint and blending.
+static int zero_icon_effect(uint32_t actor) {
+    int slot=shared_effect_slot(actor);
+    /* Original Zero801EE2DC..E304 resolves decimal offset60 in its sprite
+     * assembly table. Native packed shapes add their own page to actor+40:
+     * page0 there still samples the character's different icon atlas. */
+    uint32_t offset=assembly?psx_mod_read_word(assembly+0x3C):ASSET_SPACE;
+    return slot>=0 && shared_effect_owners[slot]==2 && psx_mod_read_byte(actor) &&
+        psx_mod_read_byte(actor+1)==26 && offset<ASSET_SPACE &&
+        psx_mod_read_word(actor+0x3C)==assembly+offset;
+}
+static uint16_t zero_atlas_effect_bank(uint16_t page,uint16_t clut,uint16_t tile,int menu) {
+    /* Original type17 UI and type26 packed icon shapes share VRAM with X's
+     * different PL00 art. Decode the original private atlas and the native
+     * menu/player palette, retaining actual page, UVs, tint and blending.
      * The virtual source key is outside the compressed player archive. */
     if(!zero_ui_pixels || (page&0x180u))return 0;
     unsigned cx=(clut&63)*16,cy=clut>>6;
-    if(cy<496 || cy>=512 || cx<256 || cx+16>320)return 0;
     uint8_t colors[32];
-    capture(menu_memory+0x10000+((cy-496)*64+cx-256)*2,colors,sizeof colors);
+    if(menu) {
+        if(cy<496 || cy>=512 || cx<256 || cx+16>320)return 0;
+        capture(menu_memory+0x10000+((cy-496)*64+cx-256)*2,colors,sizeof colors);
+    } else {
+        if(clut<0x7800 || (uint32_t)(clut-0x7800)*32u>=0x4000u)return 0;
+        capture(active_palette+(uint32_t)(clut-0x7800)*32u,colors,sizeof colors);
+    }
     uint32_t source=menu_memory+MENU_BYTES+(page&31u)*4u;
     for(unsigned i=0;i<bank_count;++i)
         if(banks[i].source==source && banks[i].tile==tile && !memcmp(banks[i].colors,colors,32))
@@ -1536,6 +1551,9 @@ static uint16_t zero_ui_effect_bank(uint16_t page,uint16_t clut,uint16_t tile) {
         pixels[y*width+x]=(uint16_t)(colors[color*2]|colors[color*2+1]<<8);
     }
     return retain_sprite_bank(source,tile,colors,pixels);
+}
+static uint16_t zero_ui_effect_bank(uint16_t page,uint16_t clut,uint16_t tile) {
+    return zero_atlas_effect_bank(page,clut,tile,1);
 }
 static void triangle(uint32_t dst, uint32_t next, const uint32_t *q,
                      unsigned a, unsigned b, unsigned c, uint16_t bank) {
@@ -1593,8 +1611,8 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
     }
     /* Common effects use the stage's already resident textures. Only native
      * Zero frames need the retained host bank instead of X's texture slot. */
-    int ui=zero_ui_effect(actor);
-    if (!ui && !render_x_death && (table<assets || table-assets>=compressed_size)) return;
+    int ui=zero_ui_effect(actor),icons=zero_icon_effect(actor);
+    if (!ui && !icons && !render_x_death && (table<assets || table-assets>=compressed_size)) return;
     if (render_x_death && (table<0x80010000u || table>=0x80200000u)) return;
     uint32_t expanded=arena+PLAYER_PACKET_BYTES+(base-arena)*2;
     for (uint32_t at=base;at<end;at+=40,expanded+=80,mode+=8) {
@@ -1607,7 +1625,8 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
         uint16_t bank=0;
         uint16_t page=tile==UINT16_MAX?(uint16_t)(q[5]>>16):(uint16_t)psx_mod_read_word(mode+4);
         if(supported)bank=ui?zero_ui_effect_bank(page,
-            (uint16_t)(q[3]>>16),tile):sprite_bank(table,frame,(uint16_t)(q[3]>>16),tile);
+            (uint16_t)(q[3]>>16),tile):icons?zero_atlas_effect_bank(page,
+            (uint16_t)(q[3]>>16),tile,0):sprite_bank(table,frame,(uint16_t)(q[3]>>16),tile);
         /* Native OT links still address the original tag. Turn it into a
          * zero-command link to two tagged GT3 packets in our own DMA arena. */
         if (bank) {
@@ -1676,13 +1695,13 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
     uint32_t actor=cpu->gpr[4];
     if(world_render || !enrolled || failed || psx_mod_read_byte(PLAY)!=0x0A ||
         !psx_mod_texture_banks_supported())return 0;
-    int ui=zero_ui_effect(actor);
-    if (!zero_world && !ui) return 0;
+    int retained=zero_ui_effect(actor)||zero_icon_effect(actor);
+    if (!zero_world && !retained) return 0;
     int shot=actor>=0x800950A0 && actor<0x800964A0 && !((actor-0x800950A0)%0xA0);
     int trail=actor>=0x800972F8 && actor<0x80097418 && !((actor-0x800972F8)%0x60);
     int attached=!psx_mod_read_byte(PLAYER+2) && actor>=0x800911A8 && actor<0x80091298 &&
         !((actor-0x800911A8)%0x50);
-    if (actor!=PLAYER && !shot && !trail && !attached && !ui) return 0;
+    if (actor!=PLAYER && !shot && !trail && !attached && !retained) return 0;
     world_render=1;
     uint32_t original=psx_mod_read_word(SCRATCH+0x100);
     uint32_t original_mode=psx_mod_read_word(SCRATCH+0x104);
