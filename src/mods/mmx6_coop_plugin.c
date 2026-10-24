@@ -1587,7 +1587,12 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
     psx_mod_write_word(SCRATCH+0x100,world_packets);
     psx_mod_write_word(SCRATCH+0x104,arena+PLAYER_MODE_OFFSET+(world_packets-arena)/5);
     render_actor(cpu,actor,arena);
-    if (actor==PLAYER && (life.status[0]==MMX6_COOP_DYING || scene_passenger(0)) && p1.body[3]) {
+    /* A Zero-owned pause still draws the native world during its fades.
+     * The resident PLAYER is Zero there; retain living X in that same world
+     * draw instead of making him disappear until gameplay resumes. Native
+     * menu-only pages do not call this path. */
+    if (actor==PLAYER && (life.status[0]==MMX6_COOP_DYING || scene_passenger(0) ||
+        (pause_owner==1 && life.status[0]==MMX6_COOP_ALIVE)) && p1.body[3]) {
         uint8_t zero_body[sizeof p2.body];
         capture(PLAYER,zero_body,sizeof zero_body);
         STATE_BYTES(restore_body,19,zero_body,sizeof zero_body);
