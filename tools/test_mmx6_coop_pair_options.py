@@ -210,6 +210,24 @@ class PairOptionTests(unittest.TestCase):
             "--require-state-crc","--require-host-profile","--expected-host-profile","mmx6.win64-clang22.loopback",
             "--expected-host-profile-revision","2"]
 
+    def test_hud_pair_keeps_all_explicit_source_image_profile_crc_gates(self):
+        options=self.audio_options();options[0]='--hud-presentation-smoke'
+        args=self.parse(*options)
+        self.assertTrue(args.hud_presentation_smoke)
+        self.assertEqual(args.hud_layout,'stacked')
+        self.assertEqual(self.parse(*options,'--hud-layout','side_by_side').hud_layout,'side_by_side')
+        for flag,value in (('--original-exe',True),('--original-disc',True),('--expected-exe-sha256',True),
+                           ('--expected-manifest-sha256',True),('--require-state-crc',False),('--require-host-profile',False)):
+            incomplete=options.copy();at=incomplete.index(flag);del incomplete[at:at+(2 if value else 1)]
+            self.rejected(*incomplete)
+        self.rejected('--hud-layout','side_by_side')
+
+    def test_hud_pair_cannot_mix_with_other_authored_routes_or_loading_bypass(self):
+        options=self.audio_options();options[0]='--hud-presentation-smoke'
+        for flag in ('--jump-audio-smoke','--state-policy-smoke','--personal-menu-smoke','--lifecycle-smoke',
+                     '--enemy-targeting-smoke','--private-pause-smoke','--admission-only','--native-loader-diagnostic'):
+            self.rejected(*options,flag)
+
     def test_paired_audio_requires_all_explicit_source_build_profile_and_crc_guards(self):
         self.assertTrue(self.parse(*self.audio_options()).jump_audio_smoke)
         for first in ("0","1"):

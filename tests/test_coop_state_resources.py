@@ -13,6 +13,11 @@ def sample(hp):
 
 
 class ResourceRestoreTests(unittest.TestCase):
+    def test_paired_resource_route_rejects_missing_peer_or_transport_before_observation(self):
+        for clients,network in (([],Mock()),([Mock()],Mock()),([Mock(),Mock()],None)):
+            with self.assertRaises(subject.debug.DebugError):
+                subject.exercise(dict(mode='netplay',input_path='published_host',clients=clients,network=network),Mock(),{})
+
     def test_primary_sample_does_not_read_the_borrowed_live_player_slot(self):
         body=bytearray(0x158);body[2]=0;body[4]=1;body[0x5c]=32;body[0xe7]=1
         row=dict(p1_body_hex=body.hex(),observation=dict(native_mode=10,native_phase=0,native_timer=77,tick=99))

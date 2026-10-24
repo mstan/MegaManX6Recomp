@@ -38,8 +38,11 @@ def coherent_primary(client, case):
 
 
 def exercise(ctx, case, sources, *, timeout=90):
-    require(ctx['mode'] == 'local' and ctx['input_path'] == 'published_host',
-            'Native resource route needs the owned local host sampler')
+    require(ctx['mode'] in ('local', 'netplay') and ctx['input_path'] == 'published_host',
+            'Native resource route needs the owned published host sampler')
+    if ctx['mode'] == 'netplay':
+        require(len(ctx['clients']) == 2 and callable(ctx.get('network')),
+                'Paired native resource route needs both owned peers and live transport validation')
     require(0 < timeout <= 120, 'Native resource route needs a bounded deadline')
     client = ctx['clients'][0]
     target, overlay = sources['target'], sources['zero_overlay']

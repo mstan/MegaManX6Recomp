@@ -248,11 +248,15 @@ def run(args) -> dict:
         personal_menu = importlib.import_module("mmx6_coop_personal_menu")
         modules += (personal_menu,)
     private_pause = effects = published_input = native_quit = None
-    reentry_pair = source_validation = audio_pair = state_policy = None
+    reentry_pair = source_validation = audio_pair = state_policy = hud_pair = None
+    if getattr(args,'hud_presentation_smoke',False):
+        hud_pair=importlib.import_module('mmx6_coop_hud_pair')
+        modules+=(hud_pair,hud_pair.hud,hud_pair.hud.resources,hud_pair.hud.state,hud_pair.hud.mapped,
+                  hud_pair.hud.mapped.keyboard_input)
     if getattr(args,"state_policy_smoke",False):
         state_policy=importlib.import_module("mmx6_coop_state_policy")
         modules+=(state_policy,state_policy.keyboard)
-    if getattr(args,"jump_audio_smoke",False) or state_policy is not None:
+    if getattr(args,"jump_audio_smoke",False) or state_policy is not None or hud_pair is not None:
         audio_pair=importlib.import_module("mmx6_coop_jump_audio_pair")
         source_validation=audio_pair.sources
         modules+=(audio_pair,audio_pair.audio,audio_pair.ownership,audio_pair.ownership.host,source_validation)
@@ -355,7 +359,8 @@ def run(args) -> dict:
         report.update(jump_audio_source=audio_source,jump_audio_prepared=[],ledger_status="unverified",
             r4="unverified",r12="unverified",audible_output="not_tested",jump_audio_source_snapshots=[])
         report["checks"]["jump_audio_original_source_bound"]=True
-        report["checks"]["state_policy_both_peers_completed" if state_policy is not None else "jump_audio_both_peers_completed"]=False
+        key='hud_presentation_both_peers_completed' if hud_pair is not None else 'state_policy_both_peers_completed' if state_policy is not None else 'jump_audio_both_peers_completed'
+        report['checks'][key]=False
         for module in (audio_pair,audio_pair.audio,audio_pair.ownership,audio_pair.ownership.host,source_validation):
             path=output/(Path(module.__file__).stem+"-executed-source.py");path.write_bytes(Path(module.__file__).read_bytes())
             report["jump_audio_source_snapshots"].append(dict(path=str(path),sha256=preparation.sha256(path)))
@@ -364,6 +369,10 @@ def run(args) -> dict:
         for module in (state_policy,state_policy.keyboard):
             (output/(Path(module.__file__).stem+"-executed-source.py")).write_bytes(Path(module.__file__).read_bytes())
         report["limits"].append("State policy uses enabled rewind preferences; no ordered recording or audio qualification is claimed")
+    if hud_pair is not None:
+        report['kind']='owned_loopback_delay_hud_presentation'
+        for module in (hud_pair,hud_pair.hud,hud_pair.hud.resources,hud_pair.hud.state,hud_pair.hud.mapped,hud_pair.hud.mapped.keyboard_input):
+            (output/(Path(module.__file__).stem+'-executed-source.py')).write_bytes(Path(module.__file__).read_bytes())
     handles, processes, clients, reservations = [], [], [], []
     executor = ThreadPoolExecutor(max_workers=2)
     runtime_ready = False
@@ -516,6 +525,11 @@ id = "seamless-loading"
 enabled = {str(not args.native_loader_diagnostic).lower()}
 ''', encoding="utf-8")
             require(receipt["source_card"] is None, "Unexpected source card")
+            if hud_pair is not None and args.hud_layout=='side_by_side':
+                path=directory/'mods/state.toml';text=path.read_text(encoding='utf-8')
+                old='id = "prototype"\nenabled = false\n'
+                require(text.count(old)==1,'Unexpected fresh co-op HUD preference')
+                path.write_text(text.replace(old,old+'[feature.values]\nhud_layout = "side_by_side"\n'),encoding='utf-8')
             require(receipt["exe_sha256"] == report["candidate_exe_sha256"],
                     "Build changed during paired staging")
             if reentry_pair is not None:
@@ -734,7 +748,17 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             report["checks"]["default_resident_loader_committed"]=True
             state_policy.exercise(dict(clients=clients,report=report,output=output,
                 transport_window=transport_window,matched=matched,network=network),expected_sha=args.expected_exe_sha256)
-        if audio_pair is not None and state_policy is None:
+        if hud_pair is not None:
+            loader_logs=[(output/f'peer-{seat}/logs/stdout.log').read_text(errors='replace') for seat in range(2)]
+            require(all('title netplay loading = resident assets' in text for text in loader_logs),
+                    'HUD default resident loader did not commit on both peers')
+            report['checks']['default_resident_loader_committed']=True
+            sources=dict(zero_overlay=hud_pair.hud.resources.zero_contact.load_zero_overlay(args.original_disc),
+                target=hud_pair.hud.resources.native_contact.load_source(args.original_exe,args.original_disc,0))
+            hud_pair.exercise(dict(clients=clients,both=both,report=report,output=output,network=network,
+                transport_window=transport_window,matched=matched,advance=advance),
+                expected_sha=args.expected_exe_sha256,layout=args.hud_layout,source=sources)
+        if audio_pair is not None and state_policy is None and hud_pair is None:
             loader_logs=[(output/f"peer-{seat}/logs/stdout.log").read_text(errors="replace") for seat in range(2)]
             require(all("title netplay loading = resident assets" in text for text in loader_logs),
                     "Audio default resident loader did not commit on both peers")
@@ -1062,6 +1086,10 @@ def make_parser():
     parser.add_argument("--original-exe",type=Path,help="Original SLUS_013.95 source for --native-quit-scenario or --jump-audio-smoke")
     parser.add_argument("--state-policy-smoke",action="store_true",
                         help="Verify keyboard/controller state and rewind refusal on both admitted peers with local rewind enabled")
+    parser.add_argument('--hud-presentation-smoke',action='store_true',
+                        help='Capture both menu owners and changed-HP HUD anchors at actual drawable aspects on two exact-image peers')
+    parser.add_argument('--hud-layout',choices=('stacked','side_by_side'),
+                        help='Presentation layout for a separate --hud-presentation-smoke pair; default stacked')
     parser.add_argument("--jump-audio-smoke",action="store_true",
                         help="Separate same-machine paired ground-jump private-bank/sample/DSP/lifetime observation; strict original/image/manifest/profile/CRC proof required")
     parser.add_argument("--body-audio-smoke",action="store_true",
@@ -1093,6 +1121,15 @@ def make_parser():
 
 
 def validate_options(parser, args):
+    if getattr(args,'hud_presentation_smoke',False):
+        if (args.jump_audio_smoke or args.state_policy_smoke or args.body_audio_smoke or args.primary_audio_smoke or
+            args.native_quit_scenario or args.native_reentry or args.private_pause_smoke or args.contact_pause_contact_smoke or
+            args.enemy_targeting_smoke or args.personal_menu_smoke or args.lifecycle_smoke or
+            args.audio_first_seat is not None or args.audio_max_attempts is not None):
+            parser.error('HUD presentation requires a separate fresh pair without other optional routes')
+        args.hud_layout=args.hud_layout or 'stacked'
+    elif getattr(args,'hud_layout',None) is not None:
+        parser.error('--hud-layout requires --hud-presentation-smoke')
     if getattr(args,"state_policy_smoke",False):
         if (args.jump_audio_smoke or args.body_audio_smoke or args.primary_audio_smoke or
                 args.native_quit_scenario or args.native_reentry or args.private_pause_smoke or
@@ -1128,7 +1165,7 @@ def validate_options(parser, args):
         if (args.private_pause_smoke or args.contact_pause_contact_smoke or args.enemy_targeting_smoke or
                 args.personal_menu_smoke or args.lifecycle_smoke or args.native_reentry or args.jump_audio_smoke):
             parser.error("Each native Quit scenario requires a separate fresh pair without other optional routes")
-    elif args.original_exe is not None and not args.jump_audio_smoke and not getattr(args,"state_policy_smoke",False):
+    elif args.original_exe is not None and not args.jump_audio_smoke and not getattr(args,"state_policy_smoke",False) and not getattr(args,'hud_presentation_smoke',False):
         parser.error("--original-exe belongs to --native-quit-scenario or --jump-audio-smoke")
     if args.native_reentry:
         if (args.admission_only or args.native_loader_diagnostic or not args.require_state_crc or
@@ -1138,7 +1175,7 @@ def validate_options(parser, args):
         if (args.private_pause_smoke or args.contact_pause_contact_smoke or args.enemy_targeting_smoke or
                 args.personal_menu_smoke or args.lifecycle_smoke or args.native_quit_scenario or args.jump_audio_smoke):
             parser.error("Native reentry requires a separate fresh pair without other optional routes")
-    if args.jump_audio_smoke or getattr(args,"state_policy_smoke",False):
+    if args.jump_audio_smoke or getattr(args,"state_policy_smoke",False) or getattr(args,'hud_presentation_smoke',False):
         if (args.admission_only or args.native_loader_diagnostic or not args.require_state_crc or
                 not args.require_host_profile or not args.expected_exe_sha256 or not args.expected_manifest_sha256 or
                 args.original_exe is None or args.original_disc is None or args.original_disc.suffix.lower()!=".bin" or
@@ -1169,7 +1206,7 @@ def validate_options(parser, args):
             parser.error("Contact/menu/contact requires --original-disc with the original raw BIN")
         if args.enemy_targeting_smoke:
             parser.error("Contact/menu/contact and enemy-targeting require separate fresh authored-enemy cases")
-    elif args.original_disc is not None and not args.native_reentry and not args.jump_audio_smoke and not getattr(args,"state_policy_smoke",False):
+    elif args.original_disc is not None and not args.native_reentry and not args.jump_audio_smoke and not getattr(args,"state_policy_smoke",False) and not getattr(args,'hud_presentation_smoke',False):
         parser.error("--original-disc belongs to --contact-pause-contact-smoke, --native-reentry or --jump-audio-smoke")
     if args.expected_exe_sha256 is not None and (len(args.expected_exe_sha256) != 64 or
             any(c not in "0123456789abcdef" for c in args.expected_exe_sha256)):
