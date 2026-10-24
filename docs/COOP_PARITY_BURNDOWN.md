@@ -145,7 +145,14 @@ Both changes preserve the other actor's resources. Its repeated X attack
 times out while the native Ice Burst block persists, so it supplies no full
 HUD qualification. The revised observer brackets the first X spend with the
 same three drawable captures after Zero's option is active; no repeat-use
-assumption or direct selection/energy write is needed. Artwork remains pending.
+assumption or direct selection/energy write is needed. The resulting
+[v25 local ammo receipt](evidence/mmx6-hud/manifest-bound-56b3fc5-local-ammo-layouts-reviewed.json)
+reviews both layouts at all three aspects. All24 actor/capture fill tops match
+the original energy/6 geometry. X energy288->256 changes its48-pixel fill to42;
+Zero energy252 retains42 pixels and its entire330-pixel region is unchanged.
+Both local runs preserve cards and exit normally. R6 local now passes; netplay
+and aggregate remain unverified. The earned-inventory bypass is explicit and
+both strict capture/replay paths reject the tainted recording.
 
 The [Current Data source audit](COOP_CURRENT_DATA_AUDIT.md) reproduces the
 original intro finale/positive-exit/mission-report eligibility chain, nine exact

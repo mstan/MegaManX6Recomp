@@ -1259,7 +1259,7 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
         "evidence": [
@@ -1388,9 +1388,53 @@
               "Windows same-machine X/P1 and Zero/P2 intro only; physical devices, other hosts and production native gameplay remain separate."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "56b3fc5e2dd2fcf8bc1bf8cc402654872137f0d5",
+            "build_identity": {
+              "exe_sha256": "04957b04a206f0210d4ef30f6bbd6e64539bae538b5fe6983821b9ce8a144e92",
+              "manifest_sha256": "5516bef1635e91ec9a8200091a3b9f7aa0b434eb14a2e8487001fb36408affcf",
+              "compiled_source_commit": "56b3fc5e2dd2fcf8bc1bf8cc402654872137f0d5",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "349ba60201ccb8926adb01230784297141a40e10"
+            },
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-hud/manifest-bound-56b3fc5-local-ammo-layouts-reviewed.json",
+                "sha256": "91416ef549d07f8b760d893538986ee623b43ea28587a8acfb20ed194db97d6d"
+              }
+            ],
+            "settings": {
+              "layouts": [
+                "stacked default",
+                "side_by_side"
+              ],
+              "drawable_sizes": [
+                "960x720",
+                "1200x600",
+                "640x900"
+              ],
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "audio": "emulated muted dummy"
+            },
+            "action": "Grant earned-weapon prerequisites offline through original initializer; use actual original R1/R1 and Zero Up+Triangle, retain composed full-X/spent-Zero meters at three aspects, then first original X Triangle and same captures. Independently read native resources and measure source-derived orange fill tops.",
+            "outcome": "Both layouts retain native HP/weapon artwork. P1 actual energy288->256 shortens rendered ammo height48->42; Zero energy252/height42 and its entire330-pixel ROI remain unchanged. All24 actor/capture fill tops match source. All native owner/resource gates, private cards and normal exits pass.",
+            "limits": [
+              "Local X/P1+Zero/P2 USA1.1 intro, exact frozen debug image on Windows only; no paired/netplay, production native gameplay, opposite roster, physical device or other-host admission.",
+              "Earned weapon inventory is an explicit prerequisite bypass through audited offline mailbox9 and original8003D718. Selection and energy change only through ordinary original R1/R1, Zero Up+Triangle and X Triangle. No HP/ammo/selection/action/clear/outcome writes. Acquisition and campaign progress are unverified.",
+              "Default recording remains enabled but fixture-tainted. Canonical failed trace and startup/card artifacts are retained, and ordinary capture/offline replay strictly refuse it. No finalized recording/replay pass.",
+              "Composed captures are asynchronous sampled presentation with stable resource brackets, not a continuous-frame or CPU-exact alignment claim. Both full native builds pass103/103; the separate Giga black-render issue remains open.",
+              "This closes only R6 local rendered layout/portrait/HP/ammo ownership; netplay and aggregate remain unverified."
+            ],
+            "bypasses": [
+              "Earned inventory prerequisite through audited offline mailbox9/original initializer; no acquisition/progression or replay claim."
+            ]
           }
         ],
-        "limitations": "Both layouts/portraits/independent HP now reviewed locally and on both exact-image peers. Actual selected/spent ammo HUD ownership remains unverified in both modes."
+        "limitations": "Local rendered portraits/HP/selected-and-spent ammo pass in both layouts and three aspects on exact56b3fc5. Paired selected/spent ammo ownership remains unverified, so aggregate R6 stays unverified. Offline earned-weapon prerequisite is bypassed honestly; strict fixture-tainted recording/replay refuse admission. Separate Giga rendering issue remains open."
       }
     },
     {
