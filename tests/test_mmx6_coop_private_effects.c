@@ -25,6 +25,7 @@ static uint16_t menu_input[3];
 static unsigned native_budget;
 static unsigned shared_probe,shared_probe_seat,shared_probe_delete,shared_probe_calls;
 static unsigned icon_packet_probe;
+static unsigned render_replacement_probe;
 static uint16_t pad_buttons=0xFFFF;
 static const unsigned resource_offsets[7]={0x14,0x1C,0x24,0x28,0x38,0x3C,0xA8};
 static uint8_t *memory(uint32_t a){
@@ -161,6 +162,13 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
 #ifdef MMX6_TEST_DISPATCH_CALL
     if(MMX6_TEST_DISPATCH_CALL(cpu,address,ret))return;
 #endif
+    /* SDK dispatch runs entry hooks and replacements on nested guest calls
+     * too. A private type44 draw must not start a second private packet pass
+     * through render_survivor and overwrite the body/curtain append cursor. */
+    if(render_replacement_probe && address==0x800232D4u) {
+        render(cpu,address);
+        if(render_survivor(cpu,address))return;
+    }
     if(shared_probe && address==0x8002C398u) {
         memset(memory(0x80091298u),0,0x70);cpu->gpr[2]=0x80091298u;return;
     }
@@ -234,7 +242,7 @@ static void setup(CPUState *cpu){
     inside=failed=player_call=zero_world=world_render=scene_owner=scene_phase=zero_projected=0;
     shared_fx_call=shared_fx_allocate_call=0;memset(shared_effect_owners,0,sizeof shared_effect_owners);
     shared_probe=shared_probe_seat=shared_probe_delete=shared_probe_calls=0;
-    icon_packet_probe=0;
+    icon_packet_probe=render_replacement_probe=0;
     ready=enrolled=stage_call=1;pause_owner=-1;zero_menu_loaded=0;join_phase=0;previous_input=p2_edges=0;p2_start_previous=0;
     texture_support=1;marker_override=2;terminal_player=stage_driver=0;call_count=draw_count=tag_count=native_budget=0;
     pad_buttons=0xFFFF;
@@ -572,7 +580,8 @@ static void private_giga_shots_retain_zero_source(void){
         for(unsigned y=0;y<256;++y)for(unsigned x=768;x<1024;++x)
             test_zero_ui[y*1024+x]=0x1111;
         psx_mod_write_half(active_palette+2*32+2,0x4321);
-        icon_packet_probe=primitive;
+        icon_packet_probe=primitive;render_replacement_probe=1;
+        p2.shots[0x16]=0x11; /* Original personal Giga bucket. */
         render(&cpu,0x800232D4u);
         CHECK(!failed && draw_count==2 && drawn[1]==actor && bank_count==2);
         CHECK(bank_first[1]==0x4321 && banks[1].tile==(primitive==1?UINT16_MAX:0xD0C0));
@@ -594,7 +603,7 @@ static void private_giga_shots_retain_zero_source(void){
         render_x_death=1;CHECK(!zero_icon_effect(actor));render_x_death=0;
         psx_mod_write_byte(PLAYER+2,0);CHECK(!zero_icon_effect(actor));
         CHECK(!render_survivor(&cpu,0x800232D4u));
-        project_player(&resident);clear_banks();
+        project_player(&resident);render_replacement_probe=0;clear_banks();
     }
 }
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);

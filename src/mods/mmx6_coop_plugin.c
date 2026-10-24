@@ -1715,10 +1715,14 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
 }
 static void render(CPUState *cpu, uint32_t address) {
     (void)address;
-    if (inside || failed || !enrolled || cpu->gpr[4]!=PLAYER || !p2.body[3] ||
+    if (inside || world_render || failed || !enrolled || cpu->gpr[4]!=PLAYER || !p2.body[3] ||
         life.status[1]==MMX6_COOP_ABSENT || life.status[1]==MMX6_COOP_FALLEN ||
         psx_mod_read_byte(PLAY)!=0x0A || !psx_mod_texture_banks_supported()) return;
-    inside=1;
+    /* Nested guest dispatch still runs the survivor replacement. Keep that
+     * replacement outside this entire private draw pass: a retained type44
+     * shot otherwise restarts at world_packets before this pass appends its
+     * body, and later shared curtain packets overwrite the shot's live tail. */
+    inside=world_render=1;
     uint32_t original=psx_mod_read_word(SCRATCH+0x100);
     uint32_t original_mode=psx_mod_read_word(SCRATCH+0x104);
     uint32_t arena=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
@@ -1753,7 +1757,7 @@ static void render(CPUState *cpu, uint32_t address) {
     STATE_POP(restore_packet);STATE_POP(restore_player);
     psx_mod_write_word(diagnostic+28,bank_count);
     psx_mod_write_word(diagnostic+32,(end-base)/40);
-    inside=0;
+    inside=world_render=0;
 }
 static int render_survivor(CPUState *cpu, uint32_t address) {
     uint32_t actor=cpu->gpr[4];
