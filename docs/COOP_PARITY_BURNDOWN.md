@@ -113,6 +113,36 @@ streams are re-evaluated. The seven focused reducer tests pass. These bounded
 X/P1+Zero/P2 intro checks do not qualify R6 ammo, R15/F208 continuation,
 campaign content, other rosters/hosts, physical devices or production gameplay.
 
+The subsequent [native Giga failure receipt](evidence/mmx6-hud/manifest-bound-1f50059-Giga-palette-backup-failure-reviewed.json)
+records a separate local correctness bug under beads-eio.1.45. Original Zero
+R2 spends actual energy and reaches its native Giga phases, but composed output
+becomes black and retains only16 setup/clear GPU commands after the action
+retires. The corrected source-bound probe observes the shared palette/color
+masks80090CD0..80090D0F becoming zero. Native phase1 backs those words up into
+writable Zero overlay801EF974; phase2 restores them. Co-op reinstalls pristine
+overlay data each callback, losing that backup. Earlier wrong-address and
+setup probes remain preserved, and empty function-trace output is not treated
+as proof of absent execution.
+
+Native fix56b3fc5 retains that64-byte writable tail separately from the immutable
+overlay and includes it in current-build wire4 snapshots and state digests.
+The actual-plugin two-callback regression fails before the fix in debug and
+production, then passes with the four effect/snapshot variants;49 Python state
+checks pass. Full builds and rendered native repair qualification are pending.
+The92-artifact failure receipt makes no R6 or replay admission: the inventory
+prerequisite bypass intentionally taints the default recording, and both strict
+capture/replay paths reject it. R6 selected/spent composed ammo ownership remains
+open. The derived Reploid adapter fingerprints were refreshed after archiving
+their prior record; native definitions and all runtime dispositions are unchanged.
+
+The [Current Data source audit](COOP_CURRENT_DATA_AUDIT.md) reproduces the
+original intro finale/positive-exit/mission-report eligibility chain, nine exact
+code/table spans and the direct export callers across all59 BIN members.
+Eight pinned-source tests pass. Eligible current data is exported during report
+processing before the card-save choice; a fresh intro headerFF is ineligible.
+R15/F208 still require the actual native prerequisites, Continue/import, unit
+selection and shared progression checks. No runtime pass follows from the audit.
+
 The [combined R4/R12 receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-R4-R12-reviewed.json)
 binds candidate22ea525 to 24 character/family/mode coverage cells, 45 actual
 sample/pitch/ADSR comparisons with co-op-disabled native references and 17

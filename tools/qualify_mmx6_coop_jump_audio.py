@@ -241,7 +241,9 @@ def native_capture_required(candidate, *, rewind_state_case=False, custom_observ
     return False
 
 
-def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,expected_image,first_seat,max_attempts,audio_timeout,private_banks=None,body_source=None,body_death=False,zero_overlay=None,custom_observer=None,rewind_state_case=False):
+def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,expected_image,first_seat,max_attempts,audio_timeout,private_banks=None,body_source=None,body_death=False,zero_overlay=None,custom_observer=None,rewind_state_case=False,rpc_timeout=3.0):
+    if isinstance(rpc_timeout,bool) or not isinstance(rpc_timeout,(int,float)) or not 0<rpc_timeout<=30:
+        raise ValueError('Owned RPC timeout must be finite and within (0,30] seconds')
     host.require_windows();host.reserve(port)
     prepared=host.json_object(candidate/"preparation.json")
     baseline.candidate_environment(candidate,prepared)
@@ -254,6 +256,7 @@ def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,exp
                   input_path="published_host",muted="SDL_AUDIODRIVER=dummy",cards_before=card_hashes(candidate),
                   diagnostics_scope="private_banks_v1" if private_banks is not None else "hardware_legacy")
     report['ordered_native_recording_required']=require_capture
+    report['control_rpc_timeout_seconds']=rpc_timeout
     if not require_capture:
         report['ordered_native_recording_limit']='Rewind timeline changes are outside the recording contract; no capture/replay qualification claimed'
     report["process_environment_overlay"]={name:environment[name] for name in
@@ -266,7 +269,7 @@ def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,exp
             process=subprocess.Popen(args,cwd=candidate,env=environment,stdout=stdout,stderr=stderr,
                 creationflags=subprocess.CREATE_NO_WINDOW if os.name=="nt" else 0)
             report["owned_pid"]=process.pid
-            control=host.control_for(process,port,debug.DebugClient(port),transcript)
+            control=host.control_for(process,port,debug.DebugClient(port,timeout=rpc_timeout),transcript)
             route=AudioHostRoute(control,report,progress_timeout)
             deadline=time.monotonic()+boot_timeout;next_pulse=0.;release_at=None;step=0
             while time.monotonic()<deadline:

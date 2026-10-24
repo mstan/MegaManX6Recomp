@@ -21,7 +21,7 @@ AMMO_SHA = '3797c5955432124e9620ebb9109b91c9fb1ca65d40447d5ff15f12c85ae55bad'
 ASPECTS = hud.SIZES[:3]
 
 
-def load_source(path):
+def load_source(path, original_disc=None):
     source = inventory.load_source(path)
     data = Path(path).read_bytes()
     exe = inventory.content.Executable(data)
@@ -33,7 +33,62 @@ def load_source(path):
         source_instructions={hex(pc): hex(struct.unpack_from('<I', data, exe.offset(pc, 4))[0])
             for pc in (0x800249F8, 0x80024B6C, 0x80024B80, 0x80024B90, 0x80024BA4,
                        0x80024BA8, 0x80024BDC, 0x80024BEC)})
+    if original_disc is not None:
+        zero = hud.resources.zero_contact.load_zero_overlay(original_disc)
+        code = zero[0x254:0x34C]
+        require(hashlib.sha256(code).hexdigest() ==
+            '3f060d450064603e7794052a2ae1cdbd9d88eb22bfb8661facea8bf8571d52cb',
+            'Original Zero Yammar activation changed')
+        source['zero_yammar'] = dict(address=0x801EA254, bytes=len(code),
+            sha256=hashlib.sha256(code).hexdigest(), selected_weapon=3,
+            native_input='held Up and fresh Triangle edge (native held4/edge20h)', option_offset=0xA6,
+            limits='Original activation candidate; native selection, spending and presentation must be observed')
     return source
+
+
+def spend_for_hud(ctx, case):
+    """Use separate native selections that can remain visible after spending.
+
+    X weapon1 creates a persistent option; Zero R2 uses a temporary Giga
+    selection and fullscreen effect. Neither is a repeatable steady bar probe.
+    This route instead observes X weapon2 and Zero's Up+Triangle option; it
+    requires their actual results rather than assigning either selection.
+    """
+    before = case.sample('Before native ammo HUD actions')
+    require([p[1] for p in hud.state.private_resources(before)] == [0, 0],
+            'Ammo HUD route needs fresh native base selections')
+    route = dict(before=before, attempts=[], checks={})
+    case.evidence.setdefault('native_inventory_spending', []).append(route)
+
+    def accepted(seat, bits, predicate, label, selection_only=False):
+        case.adapter.native_advance(3, label+' consumed neutral before edge')
+        anchor = case.sample(label+' input bracket')
+        try:
+            receipt = ctx['set_input'](seat, bits)
+            row = case.wait(lambda r: hud.state.forward(anchor['observation']['tick'], r['observation']['tick']) and
+                            predicate(r), label+' actual native result')
+        finally:
+            ctx['set_input'](seat, 0)
+        case.adapter.native_advance(3, label+' consumed neutral after edge')
+        after = case.sample(label+' released')
+        checks = ownership_checks(anchor, after, seat, selection_only=selection_only)
+        route['attempts'].append(dict(seat=seat, pressed=bits, selection_only=selection_only,
+            before=anchor, accepted=row, after=after, acknowledgment=receipt, checks=checks, label=label))
+        require(all(checks.values()), 'Native ammo HUD action violated private resource ownership')
+
+    accepted(0, 0x800, lambda r:r['observation']['players'][0]['weapon'] == 1,
+             'Original X first R1', True)
+    accepted(0, 0x800, lambda r:r['observation']['players'][0]['weapon'] == 2,
+             'Original X second R1', True)
+    accepted(0, 0x1000, lambda r:r['observation']['players'][0]['ammo'][2] < 288,
+             'Original X weapon2 Triangle')
+    accepted(1, 0x1010, lambda r:r['observation']['players'][1]['weapon'] == 3 and
+        r['observation']['players'][1]['ammo'][3] < 288 and bytes.fromhex(r['p2_body_hex'])[0xA6] == 1,
+        'Original Zero Up plus Triangle Yammar')
+    after = case.sample('After both native selected ammo actions')
+    route.update(after=after, checks=inventory.changed_resources(before, after))
+    require(all(route['checks'].values()), 'Native HUD ammo actions did not change both actors')
+    return after
 
 
 def selected_resources(row):
@@ -115,14 +170,47 @@ def compare_regions(before, after):
     return result
 
 
+def settle_fixture_idle(ctx, case, timeout):
+    """Require living stable actors and clear native script locks.
+
+    Native contact before this fixture may already have changed HP. Keep
+    those actual values; the fixture neither refills nor requires maximum HP.
+    """
+    for seat in (0, 1):
+        ctx['set_input'](seat, 0)
+    deadline, previous = time.monotonic()+timeout, None
+    while time.monotonic() < deadline:
+        row = case.sample('Settle living native inventory actors')
+        o = row['observation']
+        idle = (o['native_mode'] == 10 and o['native_phase'] == 0 and
+            not (o['pause_owner'] or o['scene_owner'] or o['failed'] or o['mailbox']) and
+            o['ready'] == o['enrolled'] == 1 and not any(o['lifecycle']) and
+            all(p['active'] and p['state'] == 1 and p['action'] == 2 and 0 < p['hp'] < 128
+                for p in o['players']) and
+            all(bytes.fromhex(row[k])[0xCC] == bytes.fromhex(row[k])[0xE0] == 0
+                for k in ('p1_body_hex', 'p2_body_hex')))
+        if idle and previous is not None:
+            delta = (o['tick']-previous['observation']['tick']) & 0xFFFFFFFF
+            if 2 <= delta < 0x80000000 and all(
+                (a['x_raw'], a['y_raw']) == (b['x_raw'], b['y_raw'])
+                for a, b in zip(o['players'], previous['observation']['players'])):
+                case.evidence['settled_living_idle'] = row
+                return row
+        previous = row if idle else None
+        case.adapter.transport_window(2)
+    raise debug.DebugError('Living native inventory actors did not settle with clear script locks')
+
+
 def exercise(ctx, *, output, layout, source, timeout=18):
     require(ctx['mode'] == 'local' and ctx['input_path'] == 'published_host', 'Ammo HUD fixture is local only')
     require(layout in ('stacked', 'side_by_side'), 'Unknown ammo HUD layout')
+    require('zero_yammar' in source, 'Ammo HUD needs source-bound original Zero option activation')
     output.mkdir(parents=True, exist_ok=False)
     evidence = {}; ctx['report']['ammo_hud_inventory'] = evidence
     adapter = hud.mapped.PublishedAdapter(ctx, evidence, timeout)
     case = hud.state.PrivateStateCase(ctx['request'], output, evidence, timeout=timeout,
                                       adapter=adapter, input_path='published_host')
+    adapter.settle_idle = lambda: settle_fixture_idle(ctx, case, timeout)
     window = hud.OwnedWindow(ctx, evidence)
     evidence.update(layout=layout, source=source['ammo_hud'], native_resource_ownership=[],
         ammo_capture_sets=[], extra_attacks=[], limits=[
@@ -148,6 +236,11 @@ def exercise(ctx, *, output, layout, source, timeout=18):
             after = case.sample(label+' after capture')
             video = ctx['request']('video_info')
             measurement = ammo_regions(receipt['path'], after, layout)
+            require([r['weapon'] for r in measurement['regions']] == [2, 3],
+                    'Native selected ammo identities changed before composed capture')
+            from PIL import Image
+            with Image.open(receipt['path']) as image:
+                require(image.convert('RGB').getbbox() is not None, 'Native composed ammo capture is entirely black')
             require(measurement['image_size'] == [video['drawable_w'], video['drawable_h']],
                     'Ammo capture does not match the actual final drawable')
             require(hud.state.private_resources(before) == hud.state.private_resources(after),
@@ -158,10 +251,10 @@ def exercise(ctx, *, output, layout, source, timeout=18):
 
     try:
         inventory.prepare(ctx, case, source)
-        after = inventory.spend(ctx, case, 'ammo-hud-initial-native-use')
+        after = spend_for_hud(ctx, case)
         route = evidence['native_inventory_spending'][-1]
         for index, attempt in enumerate(route['attempts']):
-            checks = ownership_checks(attempt['before'], attempt['after'], attempt['seat'], selection_only=index == 0)
+            checks = attempt['checks']
             evidence['native_resource_ownership'].append(dict(attempt=index, seat=attempt['seat'], checks=checks))
             require(all(checks.values()), 'Native inventory input changed another actor or did not produce its own resource effect')
         require(all(v['weapon'] > 0 for v in selected_resources(after)), 'Both native ammo meters need a selected earned weapon')

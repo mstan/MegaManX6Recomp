@@ -106,7 +106,7 @@ def run(args):
     try:
         original = binding.load_sources(args.original_exe, args.original_disc, args.disc,
                                         args.source/'docs/COOP_JUMP_AUDIO_CONTRACT.json')
-        source = ammo.load_source(args.original_exe)
+        source = ammo.load_source(args.original_exe, args.original_disc)
         for module in (ammo, ammo.inventory, ammo.hud, ammo.hud.mapped, ammo.hud.mapped.menus,
                        ammo.hud.mapped.keyboard_input, ammo.hud.state, preparation, owner, binding, owner.codec,
                        owner.artifacts, owner.host):
@@ -128,7 +128,7 @@ def run(args):
         try:
             owner.run_owned(candidate, args.port, 200, 12, report['runtime'], original['contract'],
                 expected_image=args.expected_exe_sha256, first_seat=0, max_attempts=8, audio_timeout=120,
-                private_banks=original['private_banks'],
+                private_banks=original['private_banks'], rpc_timeout=15,
                 custom_observer=lambda ctx: ammo.exercise(ctx, output=output/'ammo-hud', layout=args.layout, source=source))
         except Exception as caught:
             error = caught

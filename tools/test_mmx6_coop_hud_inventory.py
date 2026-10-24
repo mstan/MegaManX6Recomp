@@ -7,6 +7,8 @@ from pathlib import Path
 import struct
 import tempfile
 import unittest
+from types import SimpleNamespace
+from unittest.mock import Mock, patch
 
 from PIL import Image, ImageDraw
 
@@ -28,6 +30,44 @@ def row(energies=(0x1800, 0x1000)):
 
 
 class AmmoTests(unittest.TestCase):
+    def test_fixture_idle_keeps_nonmaximum_hp_and_refuses_dead_or_scripted_actors(self):
+        def idle(tick):
+            value = row()
+            value['observation'].update(tick=tick,native_mode=10,native_phase=0,pause_owner=0,
+                scene_owner=0,failed=0,mailbox=0,ready=1,enrolled=1,lifecycle=[0,0])
+            for seat, player in enumerate(value['observation']['players']):
+                player.update(active=1,state=1,action=2,hp=30+seat*2,x_raw=144+seat*24,y_raw=1115)
+            return value
+        ctx = dict(set_input=Mock())
+        case = SimpleNamespace(sample=Mock(side_effect=[idle(10),idle(12)]),
+            adapter=SimpleNamespace(transport_window=Mock()),evidence={})
+        accepted = ammo.settle_fixture_idle(ctx,case,1)
+        self.assertEqual([p['hp'] for p in accepted['observation']['players']],[30,32])
+        self.assertEqual([call.args for call in ctx['set_input'].call_args_list],[(0,0),(1,0)])
+        for mutation in ('dead','scripted'):
+            altered = idle(10)
+            if mutation == 'dead':
+                altered['observation']['players'][1]['hp'] = 0
+            else:
+                body = bytearray.fromhex(altered['p2_body_hex']);body[0xE0]=1
+                altered['p2_body_hex'] = body.hex()
+            case = SimpleNamespace(sample=Mock(return_value=altered),
+                adapter=SimpleNamespace(transport_window=Mock()),evidence={})
+            with self.subTest(mutation=mutation), patch.object(ammo.time,'monotonic',side_effect=[0,0,2]):
+                with self.assertRaises(ammo.debug.DebugError):
+                    ammo.settle_fixture_idle(ctx,case,1)
+
+    @unittest.skipUnless(os.environ.get('MMX6_CONTENT_EXE') and os.environ.get('MMX6_CONTENT_DISC'),
+                         'Pinned original EXE and disc not supplied')
+    def test_zero_option_activation_is_bound_to_original_code(self):
+        source = ammo.load_source(os.environ['MMX6_CONTENT_EXE'],os.environ['MMX6_CONTENT_DISC'])
+        self.assertEqual(source['zero_yammar']['selected_weapon'],3)
+        zero = bytearray(ammo.hud.resources.zero_contact.load_zero_overlay(os.environ['MMX6_CONTENT_DISC']))
+        zero[0x254] ^= 1
+        with patch.object(ammo.hud.resources.zero_contact,'load_zero_overlay',return_value=bytes(zero)):
+            with self.assertRaisesRegex(ammo.debug.DebugError,'Yammar activation changed'):
+                ammo.load_source(os.environ['MMX6_CONTENT_EXE'],os.environ['MMX6_CONTENT_DISC'])
+
     def test_energy_observation_rejects_mismatched_or_invalid_actor_body(self):
         sample = row()
         self.assertEqual([v['energy'] for v in ammo.selected_resources(sample)], [0x1800, 0x1000])
