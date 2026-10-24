@@ -7,7 +7,9 @@ complete authoritative host digest; a logged zero mod value cannot prove that.
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 import re
+import time
 
 
 class StateCrcError(RuntimeError):
@@ -64,3 +66,27 @@ def resolved_state_crc(host: dict[int, StateCrc], guest: dict[int, StateCrc],
     if len(ticks) < minimum:
         raise MissingStateCrc(f"Need {minimum} common resolved core/mod samples; found {len(ticks)}")
     return [dict(simulation_tick=tick, core=host[tick].core, mod=host[tick].mod) for tick in ticks]
+
+
+def wait_resolved_state_crc(probe, *, after: int, timeout: float = 15,
+                            poll: float = .025, clock=time.monotonic, sleep=time.sleep) -> list[dict]:
+    """Wait for two actual common resolved samples, keeping every CRC check.
+
+    ``probe`` must reread both logs and the current resolved watermark. A
+    slow host may emit fewer than two breadcrumbs in the diagnostic window;
+    that is pending evidence, while a mismatched CRC is an immediate failure.
+    """
+    if (type(after) is not int or not -1 <= after <= 0xFFFFFFFF or
+            not callable(probe) or not math.isfinite(timeout) or not 0 < timeout <= 60 or
+            not math.isfinite(poll) or not 0 < poll <= min(1, timeout)):
+        raise ValueError("Expected a bounded live CRC probe, range and polling deadline")
+    deadline = clock()+timeout
+    while True:
+        host, guest, watermark = probe()
+        try:
+            return resolved_state_crc(host, guest, watermark, after=after)
+        except MissingStateCrc as error:
+            remaining = deadline-clock()
+            if remaining <= 0:
+                raise MissingStateCrc(f"{error}; bounded live CRC wait expired") from error
+        sleep(min(poll, remaining))

@@ -9,6 +9,7 @@ from unittest.mock import Mock, patch
 
 from qualify_mmx6_coop_pair import CONTACT_EXE_SHA, make_parser, run, validate_options
 import prepare_mmx6_coop_playtest as preparation
+import coop_state_crc as state_crc
 from mmx6_coop_contact import EXE_SHA
 
 
@@ -263,6 +264,62 @@ class PairOptionTests(unittest.TestCase):
         self.rejected(*self.reentry_options(),"--native-reentry","current_data")
         self.rejected(*self.reentry_options(),"--original-disc","runtime.cue")
         self.rejected(*self.reentry_options(),"--disc","original.bin")
+
+
+class LiveStateCrcTests(unittest.TestCase):
+    class Clock:
+        now = 0.
+
+        def read(self):
+            return self.now
+
+        def sleep(self, seconds):
+            self.now += seconds
+
+    def wait(self, probe, *, timeout=8):
+        clock = self.Clock()
+        return state_crc.wait_resolved_state_crc(lambda: probe(clock.now), after=100,
+            timeout=timeout, poll=.25, clock=clock.read, sleep=clock.sleep)
+
+    def test_slow_live_breadcrumbs_wait_past_four_seconds_for_two_actual_samples(self):
+        def probe(now):
+            values = {120: state_crc.StateCrc('00000001', '00000002')}
+            if now >= 5:
+                values[150] = state_crc.StateCrc('00000003', '00000004')
+            return values, values, 151
+        self.assertEqual([v['simulation_tick'] for v in self.wait(probe)], [120, 150])
+
+    def test_wait_rereads_watermark_and_excludes_old_and_unresolved_samples(self):
+        def probe(now):
+            values = {tick: state_crc.StateCrc('00000001', '00000002') for tick in (90, 120, 150)}
+            return values, values, 150 if now < 1 else 151
+        self.assertEqual([v['simulation_tick'] for v in self.wait(probe)], [120, 150])
+
+    def test_one_common_sample_expires_without_lowering_the_minimum(self):
+        values = {120: state_crc.StateCrc('00000001', '00000002')}
+        with self.assertRaisesRegex(state_crc.MissingStateCrc, 'found 1; bounded live CRC wait expired'):
+            self.wait(lambda now: (values, values, 151), timeout=1)
+
+    def test_mismatched_resolved_crc_fails_immediately_even_before_two_samples(self):
+        probe = Mock(return_value=({120: state_crc.StateCrc('00000001', '00000002')},
+                                  {120: state_crc.StateCrc('00000001', '00000003')}, 151))
+        with self.assertRaisesRegex(state_crc.StateCrcError, 'mismatch at resolved simulation tick 120'):
+            self.wait(probe)
+        self.assertEqual(probe.call_count, 1)
+
+    def test_ownership_or_probe_failure_is_not_retried_as_missing_evidence(self):
+        probe = Mock(side_effect=RuntimeError('owned listener exited'))
+        with self.assertRaisesRegex(RuntimeError, 'owned listener exited'):
+            self.wait(probe)
+        self.assertEqual(probe.call_count, 1)
+
+    def test_invalid_deadlines_ranges_and_watermarks_fail(self):
+        for kwargs in (dict(timeout=0), dict(timeout=float('inf')), dict(poll=0), dict(after=-2)):
+            with self.subTest(kwargs=kwargs), self.assertRaises(ValueError):
+                options = dict(after=100); options.update(kwargs)
+                state_crc.wait_resolved_state_crc(lambda: ({}, {}, 0), **options)
+        with self.assertRaises(ValueError):
+            self.wait(lambda now: ({}, {}, -1))
 
 
 if __name__ == "__main__":

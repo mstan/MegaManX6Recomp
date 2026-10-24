@@ -455,13 +455,15 @@ def run(args) -> dict:
         report["matched_host_observations"].append(dict(label=label, matches=matches))
         status = network()
         if getattr(args, "require_state_crc", False):
-            digests = [state_crc.parse_state_crc(
-                (output/f"peer-{seat}/logs/stderr.log").read_text(errors="replace"))
-                for seat in range(2)]
+            def crc_probe():
+                nonlocal status
+                status = network()
+                digests = [state_crc.parse_state_crc(
+                    (output/f"peer-{seat}/logs/stderr.log").read_text(errors="replace"))
+                    for seat in range(2)]
+                return (*digests, min(row["resolved_through"] for row in status))
             try:
-                samples = state_crc.resolved_state_crc(
-                    *digests, min(row["resolved_through"] for row in status),
-                    after=first_simulation_tick)
+                samples = state_crc.wait_resolved_state_crc(crc_probe, after=first_simulation_tick)
             except state_crc.MissingStateCrc as error:
                 raise paired.FailedSetup(f"{label}: {error}") from error
             report["resolved_state_crc"].append(dict(label=label, samples=samples,
