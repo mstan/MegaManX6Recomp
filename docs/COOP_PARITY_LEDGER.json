@@ -1095,11 +1095,54 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "Frozen source audit6b725ac maps native P1/boss packet range and explicit left anchoring for retained P2 sprites/bars. Actual HUD alignment, aspect/resize and both-mode artwork remain unverified. See COOP_HUD_MENU_AUDIT.md."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "f339e1236e71aa172af9ea234b719baa0e4efbf2",
+            "build_identity": {
+              "exe_sha256": "be394703993ba902f77e7d2f0f5f351e6a78afac3aa60886324e35fc804420a2",
+              "manifest_sha256": "519b22de4c8cc3655cbaac37d36524c24943a34dc467bd477e720be99b606a61",
+              "compiled_source_commit": "f339e1236e71aa172af9ea234b719baa0e4efbf2",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "e06c61558c1c4fcf84fe144c10077d9e8e7ac5b8"
+            },
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-hud\\manifest-bound-f339e12-layouts-and-f18-failure-reviewed.json",
+                "sha256": "79868dee957f25588dc0ab92a1657e39249ca8e884eb0ad94ccd20c082fb3b79"
+              }
+            ],
+            "settings": {
+              "layouts": [
+                "stacked default",
+                "side_by_side"
+              ],
+              "drawable_sizes": [
+                "960x720",
+                "1200x600",
+                "640x900"
+              ],
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "audio": "emulated muted dummy"
+            },
+            "action": "Use actual original Start for both owners, capture early opening/closing frames, damage each actor through native contact, resize only the owned SDL HWND and measure composed native meter anchors.",
+            "outcome": "Local check passes: both meter anchors match the native layout at three actual drawable aspects with genuine independent HP values. Stacked displacement0/104 and side-by-side56/0 both observed.",
+            "limits": [
+              "R5 local native anchor check passes at actual final drawable sizes and genuine changed HP; netplay remains unverified.",
+              "Both layouts have actual composed local HP/portrait evidence. R6 ammo ownership and netplay remain unverified, so no full R6 pass.",
+              "F18 actual local failure is reproduced, not inferred solely from source. No netplay F18 result yet.",
+              "All input is ordinary owned host publication; no gameplay fixture writes, resource writes, physical devices or other-host proof.",
+              "Native records finalized with full startup settings/cards and exact image identity; no replay or temporal action association claim from these captures."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Local exact-image final-window anchors qualified at three drawable aspects with actual native HP changes, both layouts. Netplay remains unverified."
       }
     },
     {
@@ -1135,8 +1178,51 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "Source gap fixed in9282fea: original stacked layout remains default; owning package now offers side_by_side, changing only private HUD packet offsets. Four GCC/Clang debug/production fixture runs passed in the worker; integrated Clang debug/production CTests also pass. Actual selection, both layouts/menus/resources/aspects and local/netplay rendered qualification remain unverified. Frozen source audit remains bound to pre-option7b584a8."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "f339e1236e71aa172af9ea234b719baa0e4efbf2",
+            "build_identity": {
+              "exe_sha256": "be394703993ba902f77e7d2f0f5f351e6a78afac3aa60886324e35fc804420a2",
+              "manifest_sha256": "519b22de4c8cc3655cbaac37d36524c24943a34dc467bd477e720be99b606a61",
+              "compiled_source_commit": "f339e1236e71aa172af9ea234b719baa0e4efbf2",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "e06c61558c1c4fcf84fe144c10077d9e8e7ac5b8"
+            },
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-hud\\manifest-bound-f339e12-layouts-and-f18-failure-reviewed.json",
+                "sha256": "79868dee957f25588dc0ab92a1657e39249ca8e884eb0ad94ccd20c082fb3b79"
+              }
+            ],
+            "settings": {
+              "layouts": [
+                "stacked default",
+                "side_by_side"
+              ],
+              "drawable_sizes": [
+                "960x720",
+                "1200x600",
+                "640x900"
+              ],
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "audio": "emulated muted dummy"
+            },
+            "action": "Use actual original Start for both owners, capture early opening/closing frames, damage each actor through native contact, resize only the owned SDL HWND and measure composed native meter anchors.",
+            "outcome": "Both local layouts render original portraits and independent changed HP with shared lives shown once; ammo ownership and paired qualification remain unverified.",
+            "limits": [
+              "R5 local native anchor check passes at actual final drawable sizes and genuine changed HP; netplay remains unverified.",
+              "Both layouts have actual composed local HP/portrait evidence. R6 ammo ownership and netplay remain unverified, so no full R6 pass.",
+              "F18 actual local failure is reproduced, not inferred solely from source. No netplay F18 result yet.",
+              "All input is ordinary owned host publication; no gameplay fixture writes, resource writes, physical devices or other-host proof.",
+              "Native records finalized with full startup settings/cards and exact image identity; no replay or temporal action association claim from these captures."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Alternate option exists in current source and both local layout/portrait/HP renderings now observed. Actual ammo ownership and paired layout qualification remain unverified."
       }
     },
     {
@@ -4238,17 +4324,60 @@
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "Frozen source audit6b725ac identifies menu/world drawing boundaries and a possible omitted living P1 in P2-owned world draws. This remains a source prediction; no rendered transition failure or fix is claimed. Actual opening/closing intervals and HUD/body continuity need local and same-machine paired captures."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "f339e1236e71aa172af9ea234b719baa0e4efbf2",
+            "build_identity": {
+              "exe_sha256": "be394703993ba902f77e7d2f0f5f351e6a78afac3aa60886324e35fc804420a2",
+              "manifest_sha256": "519b22de4c8cc3655cbaac37d36524c24943a34dc467bd477e720be99b606a61",
+              "compiled_source_commit": "f339e1236e71aa172af9ea234b719baa0e4efbf2",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "e06c61558c1c4fcf84fe144c10077d9e8e7ac5b8"
+            },
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-hud\\manifest-bound-f339e12-layouts-and-f18-failure-reviewed.json",
+                "sha256": "79868dee957f25588dc0ab92a1657e39249ca8e884eb0ad94ccd20c082fb3b79"
+              }
+            ],
+            "settings": {
+              "layouts": [
+                "stacked default",
+                "side_by_side"
+              ],
+              "drawable_sizes": [
+                "960x720",
+                "1200x600",
+                "640x900"
+              ],
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "audio": "emulated muted dummy"
+            },
+            "action": "Use actual original Start for both owners, capture early opening/closing frames, damage each actor through native contact, resize only the owned SDL HWND and measure composed native meter anchors.",
+            "outcome": "Local failure: earliest P2-owned menu opening hides living X while Zero and both HUDs remain. Corresponding P1 opening renders both. X published visible flag remains1. Source render_survivor lacks alive P1 admission for a Zero-owned menu world draw.",
+            "limits": [
+              "R5 local native anchor check passes at actual final drawable sizes and genuine changed HP; netplay remains unverified.",
+              "Both layouts have actual composed local HP/portrait evidence. R6 ammo ownership and netplay remain unverified, so no full R6 pass.",
+              "F18 actual local failure is reproduced, not inferred solely from source. No netplay F18 result yet.",
+              "All input is ordinary owned host publication; no gameplay fixture writes, resource writes, physical devices or other-host proof.",
+              "Native records finalized with full startup settings/cards and exact image identity; no replay or temporal action association claim from these captures."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Native local failure reproduced on f339e12: X disappears during early P2-owned menu world draw despite living/visible native state. Local issue beads-eio.1.44 claimed for default correctness fix and exact-image local/paired validation."
       }
     },
     {

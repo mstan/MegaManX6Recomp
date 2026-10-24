@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 7 passed (R2, R4, R7, R8, R12, R13, F33), 2 failed (R15, F208), 225 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 7 passed (R2, R4, R7, R8, R12, R13, F33), 3 failed (R15, F18, F208), 224 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -573,3 +573,24 @@ The79 X6-specific obligations and1,665 content cases retain their own statuses;
 scene trigger, acquisition, active-voice/nonzero-priority and other campaign
 checks gain no pass from this fixture. Human-dependent setup is deferred until
 the automated and locally accessible checks have been exhausted.
+
+
+## HUD anchors qualified locally; F18 native failure reproduced (October 24)
+
+[Reviewed HUD receipt](evidence/mmx6-hud/manifest-bound-f339e12-layouts-and-f18-failure-reviewed.json)
+binds109 artifacts for actual stacked-default and side-by-side captures on
+`f339e12`, SDK `5bd63adf2`, QA `e06c615`. R5 local passes: native contact
+changes both HP values and composed meter anchors match at960x720,1200x600
+and640x900 final drawable sizes. R5 netplay remains unverified. Both layouts
+show original portraits, separate HP and one shared life display; R6 remains
+unverified for actual ammo ownership and paired qualification. Native input
+recordings finalize; owned games exit0 and existing cards are unchanged.
+
+F18 local fails: the earliest P2/Zero-owned menu opening shows only Zero,
+while both HUDs remain; X stays visible in the corresponding P1-owned opening.
+Published X visible flag is1 before and after the failed frame. This reproduces
+the source audit prediction: `render_survivor` omits living P1 from a Zero-owned
+menu world draw. Local bug `beads-eio.1.44` is claimed for the default fix and
+exact-image local/paired regression. An earlier harness field-name collision
+is retained as a setup error, separately from the native rendering failure.
+Aggregate234 is7 passed,3 failed,224 unverified while this failure is open.
