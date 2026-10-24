@@ -26,6 +26,7 @@ static unsigned native_budget;
 static unsigned shared_probe,shared_probe_seat,shared_probe_delete,shared_probe_calls;
 static unsigned icon_packet_probe;
 static unsigned render_replacement_probe;
+static unsigned working_palette_probe,working_palette_probe_calls;
 static uint16_t pad_buttons=0xFFFF;
 static const unsigned resource_offsets[7]={0x14,0x1C,0x24,0x28,0x38,0x3C,0xA8};
 static uint8_t *memory(uint32_t a){
@@ -169,6 +170,17 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
         render(cpu,address);
         if(render_survivor(cpu,address))return;
     }
+    if(working_palette_probe && address==0x8003C4ECu) {
+        /* Original8003C63C..C690 ordinary Zero contract. This models the
+         * native external selector; full engine/native art remains QA. */
+        CHECK(inside && zero_projected && psx_mod_read_byte(PLAYER+2)==1);
+        CHECK(psx_mod_read_word(SCRATCH+0x24)==palette_source &&
+              psx_mod_read_word(SCRATCH+0x28)==active_palette);
+        for(unsigned i=0;i<32;++i)psx_mod_write_byte(active_palette+i,
+            psx_mod_read_byte(palette_source+i));
+        psx_mod_write_byte(0x800C4560,psx_mod_read_byte(0x800C4560)|1);
+        ++working_palette_probe_calls;return;
+    }
     if(shared_probe && address==0x8002C398u) {
         memset(memory(0x80091298u),0,0x70);cpu->gpr[2]=0x80091298u;return;
     }
@@ -243,6 +255,7 @@ static void setup(CPUState *cpu){
     shared_fx_call=shared_fx_allocate_call=0;memset(shared_effect_owners,0,sizeof shared_effect_owners);
     shared_probe=shared_probe_seat=shared_probe_delete=shared_probe_calls=0;
     icon_packet_probe=render_replacement_probe=0;
+    working_palette_probe=working_palette_probe_calls=0;working_palette_assets_ready=0;
     ready=enrolled=stage_call=1;pause_owner=-1;zero_menu_loaded=0;join_phase=0;previous_input=p2_edges=0;p2_start_previous=0;
     texture_support=1;marker_override=2;terminal_player=stage_driver=0;call_count=draw_count=tag_count=native_budget=0;
     pad_buttons=0xFFFF;
@@ -606,6 +619,109 @@ static void private_giga_shots_retain_zero_source(void){
         project_player(&resident);render_replacement_probe=0;clear_banks();
     }
 }
+static void native_working_palette_class_and_load_events(void) {
+    CPUState cpu;setup(&cpu);
+    const unsigned member_bytes=2048+0x4000,dat_bytes=2048+2*member_bytes;
+    uint8_t *dat=calloc(dat_bytes,1);CHECK(dat);
+    for(unsigned record=1;record<=2;++record) {
+        unsigned first=2048+(record-1)*member_bytes;
+        put32(dat+record*8,first/2048);put32(dat+record*8+4,member_bytes);
+        put32(dat+first,1);put32(dat+first+4,member_bytes);
+        put32(dat+first+8,5);put32(dat+first+12,record==1?0x3C00:0x4000);
+        for(unsigned row=0;row<512;++row)for(unsigned c=1;c<16;++c) {
+            unsigned value=record==2?0x2222:0x3333;
+            if(row==2 && c==5)value=record==2?0xFFFF:0x4321;
+            if(row==2 && c==13)value=0xE566;
+            if(row>=13 && row<=15)value=row==13?0x8032:row==14?0x800E:0x8009;
+            unsigned at=first+2048+row*32+c*2;
+            dat[at]=(uint8_t)value;dat[at+1]=(uint8_t)(value>>8);
+        }
+    }
+    /* Synthetic archive/table metadata; no original asset bytes bundled. */
+    for(unsigned i=0;i<184;++i)psx_mod_write_byte(0x8006DA88u+i,0);
+    psx_mod_write_half(0x8006DA88u,1);psx_mod_write_half(0x8006DAE4u,2);
+    psx_mod_write_half(0x8006DA8Cu,1);psx_mod_write_half(0x8006DAE8u,1);
+    CHECK(working_palette_prepare(dat,dat_bytes,2));
+    for(unsigned row=0;row<83;++row)for(unsigned c=0;c<16;++c)
+        psx_mod_write_half(palette_source+row*32+c*2,c?0x805E:0);
+    uint8_t source_before[2656];capture(palette_source,source_before,sizeof source_before);
+    /* The old wholesale type9 -> working policy gives this red beam and
+     * colored/black trails; actual native type5 must replace those rows. */
+    project(active_palette,source_before,sizeof source_before);
+    CHECK(psx_mod_read_half(active_palette+2*32+10)==0x805E);
+    working_palette_probe=1;cpu.gpr[31]=0x800140F0u;
+    cpu.gpr[4]=1;cpu.gpr[5]=1;cpu.gpr[6]=0;
+    CPUState saved_cpu=cpu;PlayerContext resident;capture_player(&resident);
+    CHECK(!working_palette_native_load(&cpu,0x80014F70u) && !failed);
+    CHECK(working_palette_probe_calls==1 && !memcmp(&cpu,&saved_cpu,sizeof cpu));
+    PlayerContext after;capture_player(&after);CHECK(!memcmp(&resident,&after,sizeof after));
+    CHECK(!inside && !zero_projected && !state_track.count && !state_track.error);
+    CHECK(psx_mod_read_word(SCRATCH+0x28)==0x80030300u &&
+          psx_mod_read_byte(0x800C4560)==0x72);
+    uint8_t source_after[2656];capture(palette_source,source_after,sizeof source_after);
+    CHECK(!memcmp(source_before,source_after,sizeof source_before));
+    CHECK(psx_mod_read_half(active_palette+2)==0x805E); /* Native current body. */
+    CHECK(psx_mod_read_half(active_palette+2*32+10)==0xFFFF &&
+          psx_mod_read_half(active_palette+2*32+26)==0xE566);
+    for(unsigned row=13;row<=15;++row)for(unsigned c=1;c<16;++c)
+        CHECK(psx_mod_read_half(active_palette+row*32+c*2)==
+              (row==13?0x8032:row==14?0x800E:0x8009));
+    for(unsigned y=0;y<256;++y)for(unsigned x=768;x<1024;++x)
+        test_zero_ui[y*1024+x]=0x5555;
+    uint16_t beam=zero_atlas_effect_bank(0x2Cu,0x7802u,0xD0C0u,0);
+    CHECK(beam==0x6000 && bank_first[0]==0xFFFF);
+    for(unsigned row=13;row<=15;++row) {
+        uint16_t bank=sprite_bank(assets,0,(uint16_t)(0x7800+row),0);
+        CHECK(bank && bank_first[bank-0x6000]==(row==13?0x8032:row==14?0x800E:0x8009));
+    }
+    /* Palette mutations create new retained colors, never repaint old IDs. */
+    psx_mod_write_half(active_palette+2*32+10,0x1234);
+    uint16_t changed=zero_atlas_effect_bank(0x2Cu,0x7802u,0xD0C0u,0);
+    CHECK(changed!=beam && bank_first[changed-0x6000]==0x1234 && bank_first[0]==0xFFFF);
+    psx_mod_write_byte(PLAY+0x0C,1);cpu.gpr[31]=0x800140F0u;
+    CHECK(!working_palette_native_load(&cpu,0x80014F70u) && !failed);
+    CHECK(working_palette_probe_calls==2 && psx_mod_read_half(active_palette+2*32+10)==0x4321);
+    CHECK(psx_mod_read_half(active_palette+0x3C02)==0x2222); /* Partial payload tail preserved. */
+    /* Native stage13 can change a selector without changing stage/section. */
+    psx_mod_write_half(0x8006DAE8u,2);
+    CHECK(!working_palette_native_load(&cpu,0x80014F70u) && !failed);
+    CHECK(working_palette_probe_calls==3 && psx_mod_read_half(active_palette+2*32+10)==0xFFFF);
+    /* Unrelated loader calls, unrelated projections and record0 never reseed. */
+    uint8_t preserved[0x4000];capture(active_palette,preserved,sizeof preserved);
+    cpu.gpr[31]=0x800140F4u;CHECK(!working_palette_native_load(&cpu,0x80014F70u));
+    CHECK(working_palette_probe_calls==3);
+    cpu.gpr[31]=0x800140F0u;inside=1;CHECK(!working_palette_native_load(&cpu,0x80014F70u));inside=0;
+    inside=1;enter_zero();cpu.gpr[31]=0x80014124u;cpu.gpr[4]=2;
+    psx_mod_write_word(SCRATCH+0x24,0x80050000u);
+    psx_mod_write_word(SCRATCH+0x28,0x80054000u);
+    psx_mod_write_byte(0x800C4560u,0x3A);
+    for(unsigned i=0;i<32;++i)psx_mod_write_byte(0x80054000u+i,0xA5);
+    CHECK(!working_palette_native_load(&cpu,0x80014F70u) && !failed);
+    CHECK(working_palette_probe_calls==4 && inside && zero_projected);
+    CHECK(psx_mod_read_word(SCRATCH+0x24)==0x80050000u &&
+          psx_mod_read_word(SCRATCH+0x28)==0x80054000u &&
+          psx_mod_read_byte(0x800C4560u)==0x3A);
+    for(unsigned i=0;i<32;++i)CHECK(psx_mod_read_byte(0x80054000u+i)==0xA5);
+    leave_zero();inside=0;cpu.gpr[31]=0x800140F0u;
+    psx_mod_write_byte(PLAY+0x0D,1);cpu.gpr[4]=0;
+    CHECK(!working_palette_native_load(&cpu,0x80014F70u) && !failed && working_palette_probe_calls==4);
+    uint8_t now[0x4000];capture(active_palette,now,sizeof now);CHECK(!memcmp(now,preserved,sizeof now));
+    CHECK(!working_palette_seed(1)); /* No fabricated initial base for record0. */
+    psx_mod_write_byte(PLAY+0x0D,2);CHECK(!working_palette_seed(0));
+    psx_mod_write_byte(PLAY+0x0D,0);psx_mod_write_byte(PLAY+0x0C,23);CHECK(!working_palette_seed(0));
+    psx_mod_write_byte(PLAY+0x0C,255);CHECK(!working_palette_seed(0));
+    /* Typed bounds/selector failure must not write current working memory. */
+    unsigned second=2048+member_bytes;
+    put32(dat+second+8,9);CHECK(!working_palette_prepare(dat,dat_bytes,2) && !working_palette_assets_ready);
+    put32(dat+second+8,5);put32(dat+second+12,0x3FE0);
+    CHECK(!working_palette_prepare(dat,dat_bytes,2));put32(dat+second+12,0x4000);
+    CHECK(!working_palette_prepare(dat,dat_bytes-1,2));
+    CHECK(working_palette_prepare(dat,dat_bytes,2));
+    psx_mod_write_byte(PLAY+0x0C,0);psx_mod_write_half(0x8006DAE4u,256);
+    CHECK(!working_palette_seed(0));
+    capture(active_palette,now,sizeof now);CHECK(!memcmp(now,preserved,sizeof now));
+    free(dat);clear_banks();working_palette_assets_ready=working_palette_probe=0;
+}
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     controller_pair_and_restoration();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
     deferred_shared_effect_owner_context();
@@ -613,4 +729,5 @@ int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     arrival_draw_precedes_stage_callback();clear_banks();
     deferred_icon_effect_retains_zero_source();clear_banks();
     private_giga_shots_retain_zero_source();
+    native_working_palette_class_and_load_events();
     puts("private native effects actual-plugin call order, gates, lifetime projection and retained packet ownership PASS");return 0;}

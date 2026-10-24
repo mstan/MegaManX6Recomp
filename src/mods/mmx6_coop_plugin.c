@@ -259,6 +259,7 @@ static int fixed_roster(Mmx6CoopRoster *roster) {
     }
     return 1;
 }
+#include "mmx6_coop_working_palette.inc"
 static int load_assets(const Mmx6CoopRoster *roster) {
     uint32_t bin_size=0,n=0;
     Mmx6CoopResourceViews v;
@@ -275,6 +276,9 @@ static int load_assets(const Mmx6CoopRoster *roster) {
         reason=MMX6_COOP_RESOURCES_INVALID_OVERLAY;
     if (reason!=MMX6_COOP_RESOURCES_OK) {
         fprintf(stderr,"mmx6 co-op: resources refused (%s)\n",mmx6_coop_resources_reason(reason));
+        free(bin);free(file);return 0;
+    }
+    if (!working_palette_source_guards() || !working_palette_prepare(file,n,WORKING_RECORD_COUNT)) {
         free(bin);free(file);return 0;
     }
     if (!jump_audio_load(file,n)) {
@@ -297,7 +301,10 @@ static int load_assets(const Mmx6CoopRoster *roster) {
     project(assets,v.graphics.data,v.graphics.size);
     project(assembly,v.assembly.data,v.assembly.size);
     project(palette_source,v.palette.data,v.palette.size);
-    project(active_palette,v.palette.data,v.palette.size);
+    if (!working_palette_seed(1)) {
+        free(zero_compressed);zero_compressed=NULL;compressed_size=0;
+        free(zero_ui_pixels);zero_ui_pixels=NULL;free(bin);free(file);return 0;
+    }
     project(menu_memory,v.menu_graphics.data,v.menu_graphics.size);
     project(menu_memory+0x8000,v.font.data,v.font.size);
     project(menu_memory+0x10000,v.menu_colors.data,v.menu_colors.size);
@@ -309,7 +316,9 @@ static int load_assets(const Mmx6CoopRoster *roster) {
     }
 #ifdef MMX6_COOP_MODERN_STATE
     const Mmx6AssetView sources[]={v.graphics,v.assembly,v.palette,v.menu_graphics,v.font,v.menu_colors,
-        v.menu_layout,v.portrait,v.portrait_colors,v.common,v.icons};
+        v.menu_layout,v.portrait,v.portrait_colors,v.common,v.icons,
+        {working_palette_lengths,sizeof working_palette_lengths,5},
+        {&native_working_palettes[0][0],sizeof native_working_palettes,5}};
     snapshot_assets_loaded(sources,sizeof sources/sizeof sources[0]);
 #endif
     free(bin);free(file);
@@ -478,6 +487,8 @@ static int nightmare_soul(CPUState *cpu, uint32_t address) {
 static void begin_join(CPUState *cpu, uint32_t x, uint32_t y);
 static void enroll(CPUState *cpu,const Mmx6CoopRoster *roster) {
     if (mmx6_coop_resources_fixed_runtime_admit(roster)!=MMX6_COOP_RESOURCES_OK) { failed=1;return; }
+    /* Native fresh-stage/checkpoint birth reapplies its own body rows next. */
+    if (working_palette_assets_ready && !working_palette_seed(0)) { failed=1;return; }
     uint32_t x=psx_mod_read_word(PLAYER+8), y=psx_mod_read_word(PLAYER+12);
     uint32_t origin[2]={x,y};STATE_WORDS(restore_origin,33,origin,2);
     memset(&p2,0,sizeof p2);
@@ -2137,6 +2148,7 @@ static void activate(void) {
     free(zero_compressed); zero_compressed=NULL; compressed_size=0;
     free(zero_ui_pixels); zero_ui_pixels=NULL;
     inside=ready=enrolled=failed=0;
+    working_palette_assets_ready=0;
     /* Immutable bank IDs and their lookup caches live for the process, as do
      * the framework's banks. Reuse them across launcher rematches. */
     frame_count=0; previous_input=p2_edges=0;
@@ -2176,6 +2188,7 @@ static void activate(void) {
     if (!psx_mod_set_function_replacement(0x80034DCC,player_tick) ||
         !psx_mod_set_function_replacement(0x8001E9EC,stage_tick) ||
         !psx_mod_set_function_replacement(0x800232D4,render_survivor)) failed=1;
+    if (!psx_mod_set_function_replacement(0x80014F70,working_palette_native_load)) failed=1;
     if (!psx_mod_set_function_replacement(0x80030ECC,player_contact)) failed=1;
     if (!psx_mod_set_function_replacement(0x80031DA8,solid_player_collision) ||
         !psx_mod_set_function_replacement(0x8002C4C4,solid_allocate)) failed=1;
