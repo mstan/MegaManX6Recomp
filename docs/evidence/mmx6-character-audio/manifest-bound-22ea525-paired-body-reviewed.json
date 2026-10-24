@@ -1,0 +1,597 @@
+{
+  "schema": 1,
+  "kind": "manifest_bound_paired_saber_hurt_death_audio_review",
+  "mode": "netplay",
+  "result": "unverified",
+  "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+  "build_identity": {
+    "executable_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+    "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+    "sdk": "09e8673435c73e516b420e6c13bb11f02dc8aaea",
+    "title_compatibility": "mmx6-x-zero-delay-v18",
+    "harness": "26b4d3a8e935f29ddeba8922c2ee2efaa33991f1"
+  },
+  "settings": {
+    "peers": "two processes on this physical Windows machine",
+    "transport": "direct numeric 127.0.0.1 delay",
+    "profile": "mmx6.win64-clang22.loopback",
+    "revision": 2,
+    "roster": "Falcon X/P1 + ordinary Zero/P2",
+    "muted": "SDL_AUDIODRIVER=dummy",
+    "rollback": 0,
+    "network_user_states": 0
+  },
+  "action": "After an independently checked ground-jump overlap, press original P2 Square and approach the authored record25 enemy with published movement. Observe eight ordinary four-HP losses, original phase2 and sample identity independently on both peers; retain post-death matching simulation CRC and natural owned Quit.",
+  "outcome": {
+    "peers": [
+      {
+        "peer": 0,
+        "checks": {
+          "private_voice_route": true,
+          "source_sample": true,
+          "pitch_adsr_numeric": true,
+          "original_end_marker_present": true,
+          "standing_saber_final_dsp_attribution": true,
+          "standing_saber_final_envelope_terminated": true,
+          "standing_saber_final_pitch_adsr_numeric": true,
+          "standing_saber_final_noise_off": true,
+          "observed_character_samples_source_matched": true,
+          "private_voice_leases_stable": true,
+          "original_zero_saber_sound_call": true,
+          "original_phase2_stop_calls": true,
+          "original_phase2_handler": true,
+          "private22_phase2_stop": true,
+          "p1_hardware22_23_not_stopped": true,
+          "p1_hardware22_registers_preserved": true,
+          "original_contact_actor_caller": true,
+          "immutable_private_banks_stable": true
+        },
+        "source_records": [
+          {
+            "group": 1,
+            "record": 7,
+            "sample_bank": 30,
+            "event_voice": 47,
+            "sample_sha256": "fed7bfff83b8e45b286ce7831981f2e8ce65a9e80ad3c0d63ec258c59630cf22",
+            "events": 1
+          },
+          {
+            "group": 1,
+            "record": 5,
+            "sample_bank": 30,
+            "event_voice": 46,
+            "sample_sha256": "0b4522c6d034aa5dd0eb4d3a8e7878c1070701ece620003d7f910cb91522b5f7",
+            "events": 7
+          },
+          {
+            "group": 1,
+            "record": 6,
+            "sample_bank": 30,
+            "event_voice": 46,
+            "sample_sha256": "4d3e0623a7d836acc6eba9c2cc9a889b3dc32f11c7b1592c33018dd7d95c41b8",
+            "events": 6
+          },
+          {
+            "group": 3,
+            "record": 2,
+            "sample_bank": 31,
+            "event_voice": 44,
+            "sample_sha256": "5214fae7b42ac65b1f045f4e3f51a569ed4808d77328bb55100d6096c17dbfe9",
+            "events": 1
+          },
+          {
+            "group": 1,
+            "record": 1,
+            "sample_bank": 30,
+            "event_voice": 46,
+            "sample_sha256": "003fb81cc12e8f6d70af3c2853de826f9974879a777c79a77bc60cfa1568a81e",
+            "events": 1
+          },
+          {
+            "group": 1,
+            "record": 2,
+            "sample_bank": 30,
+            "event_voice": 46,
+            "sample_sha256": "948ac829822ab47a4c0db7065047f1946ae30d67230c6732d81ff1f70e14a74d",
+            "events": 1
+          },
+          {
+            "group": 3,
+            "record": 1,
+            "sample_bank": 31,
+            "event_voice": 44,
+            "sample_sha256": "9ad087f5829434990a3f9e1affee52b5274234525f454935bbe74295b5f2ffdd",
+            "events": 4
+          },
+          {
+            "group": 3,
+            "record": 17,
+            "sample_bank": 30,
+            "event_voice": 27,
+            "sample_sha256": "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029",
+            "events": 7
+          },
+          {
+            "group": 3,
+            "record": 0,
+            "sample_bank": 31,
+            "event_voice": 44,
+            "sample_sha256": "6038134b63be2771567d95c5cb6d00e4d83a4a3890723a49588b39be982721f6",
+            "events": 3
+          },
+          {
+            "group": 3,
+            "record": 16,
+            "sample_bank": 31,
+            "event_voice": 44,
+            "sample_sha256": "322b69a7f0999a42269c5d80afb84a62dd628afef350746f7ac877fd24d06387",
+            "events": 1
+          },
+          {
+            "group": 3,
+            "record": 14,
+            "sample_bank": 31,
+            "event_voice": 47,
+            "sample_sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+            "events": 1
+          }
+        ],
+        "event_count": 33,
+        "hp_changes": [
+          {
+            "before": 32,
+            "after": 28,
+            "counter": 1,
+            "native_timer": 2116
+          },
+          {
+            "before": 28,
+            "after": 24,
+            "counter": 2,
+            "native_timer": 2190
+          },
+          {
+            "before": 24,
+            "after": 20,
+            "counter": 3,
+            "native_timer": 2276
+          },
+          {
+            "before": 20,
+            "after": 16,
+            "counter": 4,
+            "native_timer": 2359
+          },
+          {
+            "before": 16,
+            "after": 12,
+            "counter": 5,
+            "native_timer": 2417
+          },
+          {
+            "before": 12,
+            "after": 8,
+            "counter": 6,
+            "native_timer": 2501
+          },
+          {
+            "before": 8,
+            "after": 4,
+            "counter": 7,
+            "native_timer": 2584
+          },
+          {
+            "before": 4,
+            "after": 0,
+            "counter": 8,
+            "native_timer": 2656
+          }
+        ],
+        "saber_event": {
+          "seq": 248,
+          "frame": 4304,
+          "kind": "KEYON",
+          "v": 47,
+          "addr": 33744,
+          "pitch": 1525,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 11514,
+          "vol_r": 13433,
+          "sample_bank": 30
+        },
+        "saber_terminal": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 249,
+            "frame": 4330,
+            "kind": "END_STOP",
+            "v": 47,
+            "addr": 33760,
+            "pitch": 1525,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 11514,
+            "vol_r": 13433,
+            "sample_bank": 30
+          },
+          "engine_frames": 26
+        },
+        "owner_tag": "0x4D4D583650320001",
+        "owner_mask": "0x00F00B09",
+        "owner_tags_stable": true,
+        "trace_entries": 1661,
+        "pending_checks": [
+          "Inactive STOP7 volume transition was not sampled before source-matched death record3/14 reused private23"
+        ]
+      },
+      {
+        "peer": 1,
+        "checks": {
+          "private_voice_route": true,
+          "source_sample": true,
+          "pitch_adsr_numeric": true,
+          "original_end_marker_present": true,
+          "standing_saber_final_dsp_attribution": true,
+          "standing_saber_final_envelope_terminated": true,
+          "standing_saber_final_pitch_adsr_numeric": true,
+          "standing_saber_final_noise_off": true,
+          "observed_character_samples_source_matched": true,
+          "immutable_private_banks_stable": true,
+          "private_voice_leases_stable": true,
+          "eight_ordinary_contact_losses": true,
+          "original_contact_actor_caller": true,
+          "original_phase2_stop_calls": true,
+          "original_phase2_handler": true,
+          "private22_phase2_stop": true,
+          "p1_hardware22_23_not_stopped": true,
+          "p1_hardware22_registers_preserved": true
+        },
+        "source_records": [
+          {
+            "group": 1,
+            "record": 7,
+            "sample_bank": 30,
+            "event_voice": 47,
+            "sample_sha256": "fed7bfff83b8e45b286ce7831981f2e8ce65a9e80ad3c0d63ec258c59630cf22",
+            "events": 1
+          },
+          {
+            "group": 1,
+            "record": 5,
+            "sample_bank": 30,
+            "event_voice": 46,
+            "sample_sha256": "0b4522c6d034aa5dd0eb4d3a8e7878c1070701ece620003d7f910cb91522b5f7",
+            "events": 7
+          },
+          {
+            "group": 1,
+            "record": 6,
+            "sample_bank": 30,
+            "event_voice": 46,
+            "sample_sha256": "4d3e0623a7d836acc6eba9c2cc9a889b3dc32f11c7b1592c33018dd7d95c41b8",
+            "events": 6
+          },
+          {
+            "group": 3,
+            "record": 2,
+            "sample_bank": 31,
+            "event_voice": 44,
+            "sample_sha256": "5214fae7b42ac65b1f045f4e3f51a569ed4808d77328bb55100d6096c17dbfe9",
+            "events": 1
+          },
+          {
+            "group": 1,
+            "record": 1,
+            "sample_bank": 30,
+            "event_voice": 46,
+            "sample_sha256": "003fb81cc12e8f6d70af3c2853de826f9974879a777c79a77bc60cfa1568a81e",
+            "events": 1
+          },
+          {
+            "group": 1,
+            "record": 2,
+            "sample_bank": 30,
+            "event_voice": 46,
+            "sample_sha256": "948ac829822ab47a4c0db7065047f1946ae30d67230c6732d81ff1f70e14a74d",
+            "events": 1
+          },
+          {
+            "group": 3,
+            "record": 1,
+            "sample_bank": 31,
+            "event_voice": 44,
+            "sample_sha256": "9ad087f5829434990a3f9e1affee52b5274234525f454935bbe74295b5f2ffdd",
+            "events": 4
+          },
+          {
+            "group": 3,
+            "record": 17,
+            "sample_bank": 30,
+            "event_voice": 27,
+            "sample_sha256": "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029",
+            "events": 7
+          },
+          {
+            "group": 3,
+            "record": 0,
+            "sample_bank": 31,
+            "event_voice": 44,
+            "sample_sha256": "6038134b63be2771567d95c5cb6d00e4d83a4a3890723a49588b39be982721f6",
+            "events": 3
+          },
+          {
+            "group": 3,
+            "record": 16,
+            "sample_bank": 31,
+            "event_voice": 44,
+            "sample_sha256": "322b69a7f0999a42269c5d80afb84a62dd628afef350746f7ac877fd24d06387",
+            "events": 1
+          },
+          {
+            "group": 3,
+            "record": 14,
+            "sample_bank": 31,
+            "event_voice": 47,
+            "sample_sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+            "events": 1
+          }
+        ],
+        "event_count": 33,
+        "hp_changes": [
+          {
+            "before": 32,
+            "after": 28,
+            "counter": 1,
+            "native_timer": 2118
+          },
+          {
+            "before": 28,
+            "after": 24,
+            "counter": 2,
+            "native_timer": 2195
+          },
+          {
+            "before": 24,
+            "after": 20,
+            "counter": 3,
+            "native_timer": 2278
+          },
+          {
+            "before": 20,
+            "after": 16,
+            "counter": 4,
+            "native_timer": 2341
+          },
+          {
+            "before": 16,
+            "after": 12,
+            "counter": 5,
+            "native_timer": 2419
+          },
+          {
+            "before": 12,
+            "after": 8,
+            "counter": 6,
+            "native_timer": 2492
+          },
+          {
+            "before": 8,
+            "after": 4,
+            "counter": 7,
+            "native_timer": 2569
+          },
+          {
+            "before": 4,
+            "after": 0,
+            "counter": 8,
+            "native_timer": 2644
+          }
+        ],
+        "saber_event": {
+          "seq": 248,
+          "frame": 4304,
+          "kind": "KEYON",
+          "v": 47,
+          "addr": 33744,
+          "pitch": 1525,
+          "adsr_lo": 33023,
+          "adsr_hi": 8128,
+          "vol_l": 11514,
+          "vol_r": 13433,
+          "sample_bank": 30
+        },
+        "saber_terminal": {
+          "disposition": "natural_end",
+          "terminal": {
+            "seq": 249,
+            "frame": 4330,
+            "kind": "END_STOP",
+            "v": 47,
+            "addr": 33760,
+            "pitch": 1525,
+            "adsr_lo": 33023,
+            "adsr_hi": 8128,
+            "vol_l": 11514,
+            "vol_r": 13433,
+            "sample_bank": 30
+          },
+          "engine_frames": 26
+        },
+        "owner_tag": "0x4D4D583650320001",
+        "owner_mask": "0x00F00B09",
+        "owner_tags_stable": true,
+        "trace_entries": 1661,
+        "pending_checks": [
+          "Inactive STOP7 obscured by source-matched death3/14"
+        ]
+      }
+    ],
+    "pending": [
+      {
+        "peer": 0,
+        "check": "Inactive STOP7 volume transition was not sampled before source-matched death record3/14 reused private23"
+      },
+      {
+        "peer": 1,
+        "check": "Inactive STOP7 obscured by source-matched death3/14"
+      }
+    ],
+    "resolved_crc_groups": [
+      {
+        "label": "initial idle",
+        "samples": 7
+      },
+      {
+        "label": "P2 right then release",
+        "samples": 8
+      },
+      {
+        "label": "P1 jump then settle",
+        "samples": 7
+      },
+      {
+        "label": "paired ground-jump audio then settle",
+        "samples": 7
+      },
+      {
+        "label": "paired saber hurt death audio then settle",
+        "samples": 7
+      }
+    ],
+    "startup_agreement": {
+      "profile": "mmx6.win64-clang22.loopback",
+      "revision": 2,
+      "selected_sha256": "d587c5690bc6c636600049e2ad17047cd734e78ccbe84466b77976c95b8cc1a9",
+      "peers": [
+        {
+          "capabilities": {
+            "actual_image_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+            "cpu_arch": 2,
+            "features": 127,
+            "backend": 2,
+            "fp": 2,
+            "overlays": "interpreted",
+            "offers": 1
+          },
+          "settlement": {
+            "profile": "mmx6.win64-clang22.loopback",
+            "revision": 2,
+            "selected_sha256": "d587c5690bc6c636600049e2ad17047cd734e78ccbe84466b77976c95b8cc1a9",
+            "cycles": 0,
+            "sim_tick": 0,
+            "before_enter_guest": 1
+          }
+        },
+        {
+          "capabilities": {
+            "actual_image_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+            "cpu_arch": 2,
+            "features": 127,
+            "backend": 2,
+            "fp": 2,
+            "overlays": "interpreted",
+            "offers": 1
+          },
+          "settlement": {
+            "profile": "mmx6.win64-clang22.loopback",
+            "revision": 2,
+            "selected_sha256": "d587c5690bc6c636600049e2ad17047cd734e78ccbe84466b77976c95b8cc1a9",
+            "cycles": 0,
+            "sim_tick": 0,
+            "before_enter_guest": 1
+          }
+        }
+      ]
+    },
+    "final_agreement": {
+      "profile": "mmx6.win64-clang22.loopback",
+      "revision": 2,
+      "selected_sha256": "d587c5690bc6c636600049e2ad17047cd734e78ccbe84466b77976c95b8cc1a9",
+      "peers": [
+        {
+          "capabilities": {
+            "actual_image_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+            "cpu_arch": 2,
+            "features": 127,
+            "backend": 2,
+            "fp": 2,
+            "overlays": "interpreted",
+            "offers": 1
+          },
+          "settlement": {
+            "profile": "mmx6.win64-clang22.loopback",
+            "revision": 2,
+            "selected_sha256": "d587c5690bc6c636600049e2ad17047cd734e78ccbe84466b77976c95b8cc1a9",
+            "cycles": 0,
+            "sim_tick": 0,
+            "before_enter_guest": 1
+          }
+        },
+        {
+          "capabilities": {
+            "actual_image_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+            "cpu_arch": 2,
+            "features": 127,
+            "backend": 2,
+            "fp": 2,
+            "overlays": "interpreted",
+            "offers": 1
+          },
+          "settlement": {
+            "profile": "mmx6.win64-clang22.loopback",
+            "revision": 2,
+            "selected_sha256": "d587c5690bc6c636600049e2ad17047cd734e78ccbe84466b77976c95b8cc1a9",
+            "cycles": 0,
+            "sim_tick": 0,
+            "before_enter_guest": 1
+          }
+        }
+      ]
+    },
+    "primary_survives": true,
+    "private_cards_unchanged": true,
+    "exits": [
+      0,
+      0
+    ],
+    "composed_frame_review": "The identical composed frames show surviving X with full health and the empty Zero meter; one matching frame was inspected. Death particles are not qualified by this endpoint."
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-paired-general\\qualification.json",
+      "sha256": "47980a544dab47da7734a1eb83c631fc8281ec5c053a4a203430bc5e542f2d92"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-paired-general\\body-audio\\source-records.json",
+      "sha256": "da50b6d5f7a201b61ed8def92eafc2a85ce89336a68e15b754b33b7c3c7804ca"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-paired-general\\body-audio\\body-observer-executed-source.py",
+      "sha256": "22de2f57b6b088bed044029a66cf2a047a32ec7829e7c5eb4e6c33fad05b8bc5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-paired-general\\body-audio\\peer-0-audio-rpc.jsonl",
+      "sha256": "c35c7f3d055f50d93d3e9730b5775dad11da63bfea6adb1f825e8caeb4ae47d7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-paired-general\\body-audio\\peer-1-audio-rpc.jsonl",
+      "sha256": "ffe86fbb302d8bd8400b91c8a2a20792ac9c79bd924111baf1349adc6055701f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-paired-general\\peer-0\\logs\\intro-present.png",
+      "sha256": "4b8b5f77048ad08c6ebde32b91abfcc89ab4b6a68808ffd51a49acee5f7b4dde"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-paired-general\\peer-1\\logs\\intro-present.png",
+      "sha256": "4b8b5f77048ad08c6ebde32b91abfcc89ab4b6a68808ffd51a49acee5f7b4dde"
+    }
+  ],
+  "limits": [
+    "All 18 applicable checks and all 33 source-matched events pass independently per peer; this is still partial because inactive STOP7 volume transition is obscured by later source-matched death3/14.",
+    "Source records cover 11 distinct records in this run. Saber SFX1/7 is observed on both; its optional vocal3/3 was not observed here. The earlier local3/3 receipt remains separate.",
+    "P1 is idle during the body route: this does not prove simultaneous attack/hurt vocal lifetimes. The preceding ground-jump overlap remains separately scoped.",
+    "Co-op-off native X/Zero references, active STOP7, remaining records, current-build native state/rewind, PCM/music, physical controls, other hosts/CPUs/OSes and full campaign remain unverified."
+  ],
+  "bypasses": []
+}

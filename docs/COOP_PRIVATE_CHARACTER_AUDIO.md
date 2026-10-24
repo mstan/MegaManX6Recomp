@@ -11,9 +11,9 @@ previously wrong saber3/3 vocal, hurt/death sounds and group3/17's effects-bank
 alias. All 18 applicable checks pass with nine stable voice leases, eight
 ordinary contacts, preserved primary hardware registers and natural Quit exit0.
 The inactive STOP7 volume transition was obscured by source-matched death3/14
-reusing private23; it remains pending. Active STOP7, the other 33 records,
-co-op-off character references, actual P1 vocal overlap and paired general
-audio remain unverified. The underlying native candidate is 22ea525; later
+reusing private23; it remains pending. Active STOP7, unseen records,
+co-op-off character references and full attack/hurt overlap remain unverified.
+The underlying native candidate is 22ea525; later
 commits changed the observer and retained evidence, not that game image.
 
 Fresh [paired ground-jump receipts](evidence/mmx6-character-audio/manifest-bound-22ea525-paired-jump-orders-reviewed.json)
@@ -22,6 +22,16 @@ each peer. Each pair retains 30 matching core/mod CRC samples; 15 samples across
 the two runs follow their audio cases. Both processes exit naturally in each
 run. These overlap checks do not qualify paired saber/hurt/death or the full
 R4/R12 families.
+
+The [paired saber/hurt/death receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-paired-body-reviewed.json)
+now independently matches 33 events across 11 records on each peer. Both peers
+pass all 18 applicable checks, observe all eight ordinary contact losses and
+retain all nine voice owners through the bank change for death3/14. Seven
+post-death core/mod CRC samples match, both private cards remain unchanged,
+and both processes exit naturally. The saber SFX is observed; its optional
+3/3 vocal was absent in this run. Inactive STOP7 is explicitly pending on both
+peers. P1 remains idle during this route, so actual attack/hurt vocal overlap
+is still required.
 
 The original USA1.1 data contains 45 populated records and 47 voice entries
 across groups1/3. The resolver retains effective bank aliases, populated-program

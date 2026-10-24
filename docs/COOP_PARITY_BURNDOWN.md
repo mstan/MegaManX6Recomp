@@ -51,15 +51,23 @@ Ordinary Zero audio candidate 22ea525 now has a
 for 27 source-matched events across 12 original records, including corrected
 saber3/3, hurt/death and effective-bank aliases. Its 18 applicable checks pass;
 inactive STOP7 is explicitly pending after a later death sound reuses that
-voice. Active STOP7, co-op-off references and fresh paired general audio remain
+voice. Active STOP7, co-op-off references and complete paired general audio remain
 unverified. This adds bounded evidence without changing the 234 dispositions.
 
 The same exact image now also passes both paired ground-jump orders, with
 19 checks per peer and 60 matching core/mod CRC samples across the two runs
 (15 after their audio cases). The
 [paired receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-paired-jump-orders-reviewed.json)
-retains the limited same-machine scope; paired attack/hurt/death and co-op-off
+retains the limited same-machine scope; full attack/hurt overlap and co-op-off
 character references are still required.
+
+The [paired body-audio receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-paired-body-reviewed.json)
+adds 33 independently source-matched events per peer across 11 records,
+18 applicable checks per peer, eight ordinary contact losses on each and seven
+matching post-death core/mod samples. Both owner masks remain stable and both
+processes exit naturally. Its inactive STOP7 and optional saber3/3 vocal remain
+unverified; P1 is idle during the body route. The full row dispositions remain
+unchanged.
 
 The latest frozen candidate is v19, title source a1dac26, SDK bfbfb920,
 title compatibility mmx6-x-zero-delay-v17. Its debug and production suites
