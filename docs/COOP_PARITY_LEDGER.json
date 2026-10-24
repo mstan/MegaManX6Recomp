@@ -4092,11 +4092,55 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "9cbc314068c7a403028461c588b76e17e34c7350",
+            "build_identity": {
+              "executable_sha256": "0524cc4ab45989ce10d64246ee183b9f7e1d2834d48b3827d942765d173c114e",
+              "compiled_manifest_sha256": "964d5ef5f01706a62a03cf8aebb728e3a4d04fb5fd30822167737960067ad65a",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
+            },
+            "settings": {
+              "mode": "offline",
+              "input_path": "published_host",
+              "roster": [
+                "X/P1",
+                "normal Zero/P2"
+              ],
+              "stage": 0,
+              "section": 0,
+              "private_profile": true,
+              "audio": "dummy",
+              "recording": "Finalized ordinary accepted native inputs, no fixture or LOAD"
+            },
+            "action": "Hold original guest Select through outgoing beam and ABSENT, keep held to exclude retrigger, release/rearm, press fresh Select; move primary Right during actual incoming phase1, neutralize, observe one finite native phase2/ALIVE/grounded settlement, then independently move each seat Right.",
+            "outcome": "379 coherent typed/native/host samples satisfy all14 independent checks: lifecycle0->1->2->3->0 exactly once, actual primary2px movement while both endpoint samples JOINING/phase1, one monotonic beam at fixed target, retained HP/ammo/parts/form/earned/capacity/checkpoint/world, neutral grounded stationary settlement after117native ticks (bound120), independent P1/P2 control and source guards unchanged. Recording finalized, private cards unchanged, graceful owned exit0.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-hud/manifest-bound-9cbc314-F6-moving-primary-rejoin-local-reviewed.json",
+                "sha256": "c54f588be09c8ee7e96649fb79a165edfa1669d6d9479931152d8ea2fa1eab42"
+              }
+            ],
+            "limits": [
+              "Fixed native X/P1+Zero/P2, healthy grounded ordinary gameplay; no other roster/form/unsafe landing/portal/death/retry breadth.",
+              "Atomic typed publication plus separately matched double-stable read-only host fields; no instruction-atomic whole-machine claim.",
+              "F6 mechanics only; artwork, native once-world counts, finalized recording, online/core CRC and aggregate are separate.",
+              "Owner must validate compiled manifest/declared source/provenance and finalize default recording/cards/cleanup after the whole batch.",
+              "All earlier failed/partial observer attempts remain intact. Separate RPCs crossed native frame boundaries; read-only exact-owned-process mapping now preserves the same full body/host/frame/timer/mode/typed sequence predicates without a fallback.",
+              "Original draft body+20=0 idle assumption was unsupported: native X can stand stationary with a retained0.5px velocity field. Admission now requires actual action2/grounded/nonair/marker0/neutral input and four actual updates with every observed body position stationary. Native one-pixel landing collision reanchors this window; all full body bytes remain retained.",
+              "Native JOINING phase1->2 occurs at the saved landing target; Zero then naturally settles its feet one pixel on the following grounded update. No position/action/resource/success field was written by this observer.",
+              "Three composed frames inspected by root. Heroes overlap after arrival; typed coherent observations establish each independent2px movement. No all-artworks or opposite-facing/alternate-landing breadth claim.",
+              "LOCAL F6 only; no netplay, rollback or aggregate pass. The separate F12 dash-color failure on this same candidate remains failed."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "LOCAL bounded F6 passed on9cbc314: one finite actual guest rejoin with primary2px movement during phase1, resources/world retained,117tick settlement and independent controls. Fresh ordinary-input process, no fixture/LOAD. Netplay and aggregate remain unverified; prior observer failures preserved."
       }
     },
     {

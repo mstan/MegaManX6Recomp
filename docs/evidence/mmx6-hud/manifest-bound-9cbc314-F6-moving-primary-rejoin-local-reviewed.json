@@ -1,0 +1,696 @@
+{
+  "schema": 1,
+  "kind": "reviewed_LOCAL_F6_actual_primary_movement_during_one_native_guest_rejoin",
+  "reviewed_at_utc": "2026-10-24T22:30:33.294948+00:00",
+  "issue": "beads-gxrh",
+  "result": "passed",
+  "compiled_source": "9cbc314068c7a403028461c588b76e17e34c7350",
+  "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+  "executable_sha256": "0524cc4ab45989ce10d64246ee183b9f7e1d2834d48b3827d942765d173c114e",
+  "compiled_manifest_sha256": "964d5ef5f01706a62a03cf8aebb728e3a4d04fb5fd30822167737960067ad65a",
+  "frozen_row_sha256": "1b1320cd8d3d7f345a3d20d1f3b94ffa494dc553093b0ed3f12b50d4d53981b7",
+  "checks": {
+    "strict_local_published_input": true,
+    "exact_source_guards": true,
+    "ordered_coherent_typed_publications": true,
+    "single_leave_absent_join_alive": true,
+    "original_select_consumed_and_neutralized": true,
+    "held_Select_does_not_rejoin": true,
+    "primary_movement_inside_actual_JOINING": true,
+    "one_monotonic_native_beam": true,
+    "finite_ALIVE_settlement": true,
+    "personal_resources_retained": true,
+    "checkpoint_and_native_world_retained": true,
+    "p1_independent": true,
+    "p2_independent": true,
+    "measured_stationary_neutral_windows": true
+  },
+  "independent_reduction": {
+    "status": "local_F6_one_native_rejoin_with_overlapping_primary_movement_observed",
+    "checks": {
+      "strict_local_published_input": true,
+      "exact_source_guards": true,
+      "ordered_coherent_typed_publications": true,
+      "single_leave_absent_join_alive": true,
+      "original_select_consumed_and_neutralized": true,
+      "held_Select_does_not_rejoin": true,
+      "primary_movement_inside_actual_JOINING": true,
+      "one_monotonic_native_beam": true,
+      "finite_ALIVE_settlement": true,
+      "personal_resources_retained": true,
+      "checkpoint_and_native_world_retained": true,
+      "p1_independent": true,
+      "p2_independent": true,
+      "measured_stationary_neutral_windows": true
+    },
+    "observations": 379,
+    "sampling_rejections": 253,
+    "lifecycle": [
+      0,
+      1,
+      2,
+      3,
+      0
+    ],
+    "movement_during_JOINING": {
+      "ticks": [
+        439,
+        444
+      ],
+      "phases": [
+        1,
+        1
+      ],
+      "positions": [
+        [
+          [
+            9437184,
+            73072640
+          ],
+          [
+            9437184,
+            59768832
+          ]
+        ],
+        [
+          [
+            9568256,
+            73072640
+          ],
+          [
+            9437184,
+            62390272
+          ]
+        ]
+      ],
+      "actual_primary_displacement_pixels": 2.0
+    },
+    "native_ticks_to_neutral_settlement": 117,
+    "independent_control_windows": {
+      "departure": [
+        5,
+        209
+      ],
+      "held_absent": [
+        209,
+        217
+      ],
+      "neutral_absent": [
+        217,
+        223
+      ],
+      "moving_join": [
+        225,
+        228
+      ],
+      "p1_control": [
+        344,
+        349
+      ],
+      "p2_control": [
+        360,
+        365
+      ]
+    },
+    "neutral_windows": [
+      {
+        "label": "F6 after previous batch exercise",
+        "window": [
+          0,
+          4
+        ]
+      },
+      {
+        "label": "Both heroes after native rejoin",
+        "window": [
+          335,
+          339
+        ]
+      },
+      {
+        "label": "Independent seat0 baseline",
+        "window": [
+          340,
+          344
+        ]
+      },
+      {
+        "label": "Independent seat0 final neutral",
+        "window": [
+          352,
+          356
+        ]
+      },
+      {
+        "label": "Independent seat1 baseline",
+        "window": [
+          356,
+          360
+        ]
+      },
+      {
+        "label": "Independent seat1 final neutral",
+        "window": [
+          374,
+          378
+        ]
+      }
+    ],
+    "resource_retention_checks": {
+      "resources_retained": true,
+      "world_retained": true,
+      "actual_body_host_native_crosschecks": true
+    },
+    "captures": [
+      {
+        "label": "F6-before-departure",
+        "before_index": 4,
+        "surface": "composed_renderer_output",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\hud\\F6\\F6-before-departure.png",
+        "sha256": "f8043958b87171f146510adbf6337c0c50eac55a96d4fe278d6e262d2ed9dbd2",
+        "before": {
+          "id": 1463,
+          "ok": true,
+          "seq": 0,
+          "wrote": 0
+        },
+        "acknowledgement": {
+          "id": 1464,
+          "ok": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\hud\\F6\\F6-before-departure.png",
+          "staged": true,
+          "seq": 0
+        },
+        "completion": {
+          "id": 1465,
+          "ok": true,
+          "seq": 1,
+          "wrote": 1
+        }
+      },
+      {
+        "label": "F6-after-native-rejoin",
+        "before_index": 339,
+        "surface": "composed_renderer_output",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\hud\\F6\\F6-after-native-rejoin.png",
+        "sha256": "d15f4b903406bca991965b239a53707571b41a523cdc040a56e641820de12f90",
+        "before": {
+          "id": 1478,
+          "ok": true,
+          "seq": 1,
+          "wrote": 1
+        },
+        "acknowledgement": {
+          "id": 1479,
+          "ok": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\hud\\F6\\F6-after-native-rejoin.png",
+          "staged": true,
+          "seq": 1
+        },
+        "completion": {
+          "id": 1481,
+          "ok": true,
+          "seq": 2,
+          "wrote": 1
+        }
+      },
+      {
+        "label": "F6-after-independent-controls",
+        "before_index": 378,
+        "surface": "composed_renderer_output",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\hud\\F6\\F6-after-independent-controls.png",
+        "sha256": "4b62a57c4602df77fe77b33bb7b2ecbd60e532419813c488bb7ae285f11f07c5",
+        "before": {
+          "id": 1490,
+          "ok": true,
+          "seq": 2,
+          "wrote": 1
+        },
+        "acknowledgement": {
+          "id": 1491,
+          "ok": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\hud\\F6\\F6-after-independent-controls.png",
+          "staged": true,
+          "seq": 2
+        },
+        "completion": {
+          "id": 1492,
+          "ok": true,
+          "seq": 3,
+          "wrote": 1
+        }
+      }
+    ],
+    "parent_checks": {
+      "exact_image_manifest_declared_sources_originals": true,
+      "native_case_finalized_recording_cleanup_and_cards": true
+    },
+    "recording": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\candidate\\saves\\input-recordings\\session-1792880866214473-1-0\\inputs.jsonl",
+      "sha256": "edceb065f733396a6353e9d71803a38c7fa97544c7a0536b37f8829f3695fe39",
+      "events": 7893,
+      "natives": 5162,
+      "p2_reads": 2731,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "0524cc4ab45989ce10d64246ee183b9f7e1d2834d48b3827d942765d173c114e",
+        "manifest_sha256": "964d5ef5f01706a62a03cf8aebb728e3a4d04fb5fd30822167737960067ad65a",
+        "mode": "offline",
+        "profile": null,
+        "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+        "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      "requested_jump_seats": [],
+      "consumed_cross_seen_anywhere": [
+        0
+      ],
+      "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence"
+    },
+    "cards": true,
+    "cleanup": {
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    },
+    "neutralization_errors": [],
+    "report_sha256": "033b2a0f99c1cff96ce5686781e42d2cc13a1c0155fbf245bd44121fc2a619be"
+  },
+  "source": {
+    "original_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "native_guards": [
+      {
+        "address": "0x8003a980",
+        "bytes": 68,
+        "sha256": "b6b5ab63f243f021dd5a2d62e7fb15b6b3ac75169374b2af623e496860dde569"
+      },
+      {
+        "address": "0x8003b954",
+        "bytes": 176,
+        "sha256": "c58c3c4d5af14e7a04ed45969742119cf1ff806ccd353c29a4ddee9d3a300c30"
+      },
+      {
+        "address": "0x8003ba04",
+        "bytes": 256,
+        "sha256": "48381729ad96a063855aac338a3d9c5004efa8da85e333341ed045517f8d1763"
+      },
+      {
+        "address": "0x8003ad18",
+        "bytes": 72,
+        "sha256": "1e2c723392ad9497fdb184ece561e5405cf4156ae30dde1b7adaa357ba7a7a38"
+      },
+      {
+        "address": "0x80017a04",
+        "bytes": 256,
+        "sha256": "60f885acfc5b386f8c296b9e0cb87c6136c9cb770999644a7122de6b663d24a3"
+      },
+      {
+        "address": "0x8003cd44",
+        "bytes": 128,
+        "sha256": "ebae1e95ff19dcf79855866c4ee69f709e4975ebd5e3ab6474610520d491ec0e"
+      }
+    ],
+    "host_function_guards": {
+      "start_leave": "4b3d5cfec91087039ff220a319f107c81c8774fef105bf883473f084843a55f5",
+      "begin_join": "d83be5b5232cece45fb309de5205738361ba33b9eb1d1c3875291ad4617bbe01",
+      "start_join": "2ee12574594ad1b801abbd5bcdcec425a7a2cb93a59ca38a0197783db0063d06",
+      "join_animation": "734c73d4a53a8ac7612892f91c8bcfcba886e39d6b9bb7746e57420577da6433"
+    },
+    "helper_guards": {
+      "mmx6_coop_lifecycle.c": "3e488c7d08693f23b08eaa6f05e2164cf04bb030fee9c830b2d8e12ac81e57cf",
+      "mmx6_coop_lifecycle.h": "404a21913971c5171ad6d547511a8c627b045ef9ddea73dd0f545c06e506cc42"
+    },
+    "ledger_sha256": "ecdf87478e5f57372ed884e781574ae17bc6ab974d293afc4d3704858ccffb6e",
+    "frozen_row_sha256": "1b1320cd8d3d7f345a3d20d1f3b94ffa494dc553093b0ed3f12b50d4d53981b7",
+    "bounded_check": "Move the leader through controller input during the partner's native beam-in; verify one finite arrival and retained HP/equipment.",
+    "source_build_limit": "Owner must separately validate compiled manifest and declared source provenance"
+  },
+  "source_guards_before": [
+    [
+      2147723648,
+      68,
+      "b6b5ab63f243f021dd5a2d62e7fb15b6b3ac75169374b2af623e496860dde569"
+    ],
+    [
+      2147727700,
+      176,
+      "c58c3c4d5af14e7a04ed45969742119cf1ff806ccd353c29a4ddee9d3a300c30"
+    ],
+    [
+      2147727876,
+      256,
+      "48381729ad96a063855aac338a3d9c5004efa8da85e333341ed045517f8d1763"
+    ],
+    [
+      2147724568,
+      72,
+      "1e2c723392ad9497fdb184ece561e5405cf4156ae30dde1b7adaa357ba7a7a38"
+    ],
+    [
+      2147580420,
+      256,
+      "60f885acfc5b386f8c296b9e0cb87c6136c9cb770999644a7122de6b663d24a3"
+    ],
+    [
+      2147732804,
+      128,
+      "ebae1e95ff19dcf79855866c4ee69f709e4975ebd5e3ab6474610520d491ec0e"
+    ]
+  ],
+  "source_guards_after": [
+    [
+      2147723648,
+      68,
+      "b6b5ab63f243f021dd5a2d62e7fb15b6b3ac75169374b2af623e496860dde569"
+    ],
+    [
+      2147727700,
+      176,
+      "c58c3c4d5af14e7a04ed45969742119cf1ff806ccd353c29a4ddee9d3a300c30"
+    ],
+    [
+      2147727876,
+      256,
+      "48381729ad96a063855aac338a3d9c5004efa8da85e333341ed045517f8d1763"
+    ],
+    [
+      2147724568,
+      72,
+      "1e2c723392ad9497fdb184ece561e5405cf4156ae30dde1b7adaa357ba7a7a38"
+    ],
+    [
+      2147580420,
+      256,
+      "60f885acfc5b386f8c296b9e0cb87c6136c9cb770999644a7122de6b663d24a3"
+    ],
+    [
+      2147732804,
+      128,
+      "ebae1e95ff19dcf79855866c4ee69f709e4975ebd5e3ab6474610520d491ec0e"
+    ]
+  ],
+  "direct_read_mapping": {
+    "kind": "ReadProcessMemory QUERY_INFORMATION|VM_READ only",
+    "memory_source": "SDK runtime/src/memory.c and runtime/include/{mod_memory,psx_memory}.h",
+    "diagnostic_guest": "0x9f080000",
+    "mod_used": 548864,
+    "ram_size": 2097152,
+    "ram_mask": "0x1fffff",
+    "predicates": "Original double-stable host/full bodies/typed publication/native PLAY clock unchanged"
+  },
+  "captures": [
+    {
+      "label": "F6-before-departure",
+      "before_index": 4,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\hud\\F6\\F6-before-departure.png",
+      "sha256": "f8043958b87171f146510adbf6337c0c50eac55a96d4fe278d6e262d2ed9dbd2",
+      "before": {
+        "id": 1463,
+        "ok": true,
+        "seq": 0,
+        "wrote": 0
+      },
+      "acknowledgement": {
+        "id": 1464,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\hud\\F6\\F6-before-departure.png",
+        "staged": true,
+        "seq": 0
+      },
+      "completion": {
+        "id": 1465,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "F6-after-native-rejoin",
+      "before_index": 339,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\hud\\F6\\F6-after-native-rejoin.png",
+      "sha256": "d15f4b903406bca991965b239a53707571b41a523cdc040a56e641820de12f90",
+      "before": {
+        "id": 1478,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 1479,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\hud\\F6\\F6-after-native-rejoin.png",
+        "staged": true,
+        "seq": 1
+      },
+      "completion": {
+        "id": 1481,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "F6-after-independent-controls",
+      "before_index": 378,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\hud\\F6\\F6-after-independent-controls.png",
+      "sha256": "4b62a57c4602df77fe77b33bb7b2ecbd60e532419813c488bb7ae285f11f07c5",
+      "before": {
+        "id": 1490,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 1491,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\hud\\F6\\F6-after-independent-controls.png",
+        "staged": true,
+        "seq": 2
+      },
+      "completion": {
+        "id": 1492,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      }
+    }
+  ],
+  "stationary_neutral_windows": [
+    {
+      "label": "F6 after previous batch exercise",
+      "window": [
+        0,
+        4
+      ]
+    },
+    {
+      "label": "Both heroes after native rejoin",
+      "window": [
+        335,
+        339
+      ]
+    },
+    {
+      "label": "Independent seat0 baseline",
+      "window": [
+        340,
+        344
+      ]
+    },
+    {
+      "label": "Independent seat0 final neutral",
+      "window": [
+        352,
+        356
+      ]
+    },
+    {
+      "label": "Independent seat1 baseline",
+      "window": [
+        356,
+        360
+      ]
+    },
+    {
+      "label": "Independent seat1 final neutral",
+      "window": [
+        374,
+        378
+      ]
+    }
+  ],
+  "recording": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\candidate\\saves\\input-recordings\\session-1792880866214473-1-0\\inputs.jsonl",
+    "sha256": "edceb065f733396a6353e9d71803a38c7fa97544c7a0536b37f8829f3695fe39",
+    "events": 7893,
+    "natives": 5162,
+    "p2_reads": 2731,
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "0524cc4ab45989ce10d64246ee183b9f7e1d2834d48b3827d942765d173c114e",
+      "manifest_sha256": "964d5ef5f01706a62a03cf8aebb728e3a4d04fb5fd30822167737960067ad65a",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "requested_jump_seats": [],
+    "consumed_cross_seen_anywhere": [
+      0
+    ],
+    "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence"
+  },
+  "parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "native_case_finalized_recording_cleanup_and_cards": true
+  },
+  "private_cards_unchanged": true,
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\qualification.json",
+      "bytes": 2458389,
+      "sha256": "033b2a0f99c1cff96ce5686781e42d2cc13a1c0155fbf245bd44121fc2a619be"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-v33-native-independent-success-reduction.json",
+      "bytes": 6762,
+      "sha256": "3c0333b3e4b6c7aacc9f9784eb10b100c58348a602d17b2724238a83215a480e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v33-9cbc314\\candidate.json",
+      "bytes": 5201,
+      "sha256": "e8473dfafbb6b18c81cd793669a5f5478fe2267aff059d03707b8a1bc42f4e6d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\diagnostic-runner-executed-source.py",
+      "bytes": 1789,
+      "sha256": "6432d2f0e208e965922b3dd82687218791e13a66ccbbbe98322829ee199fe40f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\observer-executed-source.py",
+      "bytes": 35215,
+      "sha256": "6d263748eafb58c299a1aadbb1be58a20b57c11da2dc7ac4b1c63e6154752e1c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\hud\\F6\\executed-observer-source.py",
+      "bytes": 35215,
+      "sha256": "6d263748eafb58c299a1aadbb1be58a20b57c11da2dc7ac4b1c63e6154752e1c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\hud\\F6\\F6-observation.json",
+      "bytes": 1915220,
+      "sha256": "8de1cc50e21247095fd22755cc3a0222cfe9fdb69f0c86ec2bdd05ea192ee1c6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-moving-leader-local-draft-contract.txt",
+      "bytes": 9716,
+      "sha256": "cc2bc90d2a2b16b66a379fbb7615c4142cef0a3b1f4c141834a77f6e96064886"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-direct-read-and-stationary-idle-observer-v4-contract.txt",
+      "bytes": 2078,
+      "sha256": "20d4035f43bd66640990a4981e141364470416e768671b375aad9abf4f1d0697"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\prepare-F6-native-landing-neutral-v5.py",
+      "bytes": 3326,
+      "sha256": "f435fad76bca9ac026a0522a3e7beefade21b0c1c49ced5f79bb0d620d4e0d1b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-F6-v5-native-neutral-prefix.py",
+      "bytes": 2274,
+      "sha256": "b852ca3967001d73cabc4795fb9c8a4393ec877c093fe1357c81698a943ac320"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-v5-native-neutral-prefix-review.json",
+      "bytes": 877,
+      "sha256": "0d3ef669d19c93fb5bb1e08b7886f313c70df80559f2f698798b58c0020d54fb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-F6-v33-native-success.py",
+      "bytes": 2674,
+      "sha256": "2ac0a27790274bc13fdd85eb46040bc7864e0c995642db53988520f2c5ff7335"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\hud\\F6\\F6-before-departure.png",
+      "bytes": 2074543,
+      "sha256": "f8043958b87171f146510adbf6337c0c50eac55a96d4fe278d6e262d2ed9dbd2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\hud\\F6\\F6-after-native-rejoin.png",
+      "bytes": 2074543,
+      "sha256": "d15f4b903406bca991965b239a53707571b41a523cdc040a56e641820de12f90"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\hud\\F6\\F6-after-independent-controls.png",
+      "bytes": 2074543,
+      "sha256": "4b62a57c4602df77fe77b33bb7b2ecbd60e532419813c488bb7ae285f11f07c5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-native-landing-neutral-v33-9cbc314\\candidate\\saves\\input-recordings\\session-1792880866214473-1-0\\inputs.jsonl",
+      "bytes": 1032630,
+      "sha256": "edceb065f733396a6353e9d71803a38c7fa97544c7a0536b37f8829f3695fe39"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v33-9cbc314\\qualification.json",
+      "bytes": 2888975,
+      "sha256": "94f110401f4d013ebc22b00c07659f6b45da292450d98e149a7064d042e832da"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-matching-sampler-diagnostics-v33-9cbc314\\qualification.json",
+      "bytes": 659568,
+      "sha256": "37fd99f9e59c6517a51b5a20921daead18ac8109340d284199ca99424e1614b0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-direct-read-v33-9cbc314\\qualification.json",
+      "bytes": 3874099,
+      "sha256": "c84d8bbcefa3975df9d9d7ea1870d965ce067bb8a4789fb2d201d8856f569796"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-stationary-idle-v33-9cbc314\\qualification.json",
+      "bytes": 3646323,
+      "sha256": "9c85790dd190d1b76513d0b13a92f171c2df1c5e0bbff25534c520ead1e5aa9a"
+    }
+  ],
+  "limits": [
+    "Fixed native X/P1+Zero/P2, healthy grounded ordinary gameplay; no other roster/form/unsafe landing/portal/death/retry breadth.",
+    "Atomic typed publication plus separately matched double-stable read-only host fields; no instruction-atomic whole-machine claim.",
+    "F6 mechanics only; artwork, native once-world counts, finalized recording, online/core CRC and aggregate are separate.",
+    "Owner must validate compiled manifest/declared source/provenance and finalize default recording/cards/cleanup after the whole batch.",
+    "All earlier failed/partial observer attempts remain intact. Separate RPCs crossed native frame boundaries; read-only exact-owned-process mapping now preserves the same full body/host/frame/timer/mode/typed sequence predicates without a fallback.",
+    "Original draft body+20=0 idle assumption was unsupported: native X can stand stationary with a retained0.5px velocity field. Admission now requires actual action2/grounded/nonair/marker0/neutral input and four actual updates with every observed body position stationary. Native one-pixel landing collision reanchors this window; all full body bytes remain retained.",
+    "Native JOINING phase1->2 occurs at the saved landing target; Zero then naturally settles its feet one pixel on the following grounded update. No position/action/resource/success field was written by this observer.",
+    "Three composed frames inspected by root. Heroes overlap after arrival; typed coherent observations establish each independent2px movement. No all-artworks or opposite-facing/alternate-landing breadth claim.",
+    "LOCAL F6 only; no netplay, rollback or aggregate pass. The separate F12 dash-color failure on this same candidate remains failed."
+  ],
+  "bypasses": []
+}
