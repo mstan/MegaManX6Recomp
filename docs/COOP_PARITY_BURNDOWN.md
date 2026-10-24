@@ -128,12 +128,24 @@ Native fix56b3fc5 retains that64-byte writable tail separately from the immutabl
 overlay and includes it in current-build wire4 snapshots and state digests.
 The actual-plugin two-callback regression fails before the fix in debug and
 production, then passes with the four effect/snapshot variants;49 Python state
-checks pass. Full builds and rendered native repair qualification are pending.
+checks pass. Both full debug and production builds now pass103/103 CTests.
+The frozen v25 native probe confirms the original masks are restored, the
+mutable backup survives and the immutable overlay stays pristine. The world
+still becomes black with16 setup/clear GPU commands after Giga retires: this
+is a partial repair, and beads-eio.1.45 remains open for the remaining cause.
 The92-artifact failure receipt makes no R6 or replay admission: the inventory
 prerequisite bypass intentionally taints the default recording, and both strict
 capture/replay paths reject it. R6 selected/spent composed ammo ownership remains
 open. The derived Reploid adapter fingerprints were refreshed after archiving
 their prior record; native definitions and all runtime dispositions are unchanged.
+
+The v25 ammo probe confirms original X R1/R1/Triangle selects weapon2 and
+spends32 energy; original Zero Up+Triangle selects weapon3 and spends36.
+Both changes preserve the other actor's resources. Its repeated X attack
+times out while the native Ice Burst block persists, so it supplies no full
+HUD qualification. The revised observer brackets the first X spend with the
+same three drawable captures after Zero's option is active; no repeat-use
+assumption or direct selection/energy write is needed. Artwork remains pending.
 
 The [Current Data source audit](COOP_CURRENT_DATA_AUDIT.md) reproduces the
 original intro finale/positive-exit/mission-report eligibility chain, nine exact

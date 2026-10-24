@@ -46,7 +46,7 @@ def load_source(path, original_disc=None):
     return source
 
 
-def spend_for_hud(ctx, case):
+def spend_for_hud(ctx, case, *, before_primary_spend=None):
     """Use separate native selections that can remain visible after spending.
 
     X weapon1 creates a persistent option; Zero R2 uses a temporary Giga
@@ -80,11 +80,15 @@ def spend_for_hud(ctx, case):
              'Original X first R1', True)
     accepted(0, 0x800, lambda r:r['observation']['players'][0]['weapon'] == 2,
              'Original X second R1', True)
-    accepted(0, 0x1000, lambda r:r['observation']['players'][0]['ammo'][2] < 288,
-             'Original X weapon2 Triangle')
     accepted(1, 0x1010, lambda r:r['observation']['players'][1]['weapon'] == 3 and
         r['observation']['players'][1]['ammo'][3] < 288 and bytes.fromhex(r['p2_body_hex'])[0xA6] == 1,
         'Original Zero Up plus Triangle Yammar')
+    # Ice Burst's first accepted use is sufficient. Do not assume another
+    # press spends again while its persistent native block remains alive.
+    if before_primary_spend is not None:
+        before_primary_spend()
+    accepted(0, 0x1000, lambda r:r['observation']['players'][0]['ammo'][2] < 288,
+             'Original X weapon2 Triangle')
     after = case.sample('After both native selected ammo actions')
     route.update(after=after, checks=inventory.changed_resources(before, after))
     require(all(route['checks'].values()), 'Native HUD ammo actions did not change both actors')
@@ -213,7 +217,7 @@ def exercise(ctx, *, output, layout, source, timeout=18):
     adapter.settle_idle = lambda: settle_fixture_idle(ctx, case, timeout)
     window = hud.OwnedWindow(ctx, evidence)
     evidence.update(layout=layout, source=source['ammo_hud'], native_resource_ownership=[],
-        ammo_capture_sets=[], extra_attacks=[], limits=[
+        ammo_capture_sets=[], limits=[
             'Earned weapons are a prerequisite bypass through the original initializer; acquisition is not qualified.',
             'No HP, ammo, selection, action or completion flags are directly written.',
             'Inventory mailbox taints the default ordered recording; finalized capture and replay are refused.',
@@ -251,7 +255,18 @@ def exercise(ctx, *, output, layout, source, timeout=18):
 
     try:
         inventory.prepare(ctx, case, source)
-        after = spend_for_hud(ctx, case)
+        initial_groups = []
+
+        def capture_before_primary_spend():
+            settle('Zero native option active before first X spend')
+            row = case.sample('Full X meter and natively spent Zero meter')
+            values = selected_resources(row)
+            require(values[0]['energy'] == values[0]['capacity'] and
+                    values[1]['energy'] < values[1]['capacity'],
+                    'Initial rendered comparison requires full X and spent Zero energy')
+            initial_groups.append(captures('p1-full-p2-native-spent'))
+
+        after = spend_for_hud(ctx, case, before_primary_spend=capture_before_primary_spend)
         route = evidence['native_inventory_spending'][-1]
         for index, attempt in enumerate(route['attempts']):
             checks = attempt['checks']
@@ -259,49 +274,23 @@ def exercise(ctx, *, output, layout, source, timeout=18):
             require(all(checks.values()), 'Native inventory input changed another actor or did not produce its own resource effect')
         require(all(v['weapon'] > 0 for v in selected_resources(after)), 'Both native ammo meters need a selected earned weapon')
         settle('Initial native ammo use retired')
-        initial = captures('both-selected-and-spent')
-        # One actor changes again while the other stays untouched, providing a
-        # resource-bracketed image comparison. Bounded attacks stop once native
-        # energy has dropped by one eighth of capacity or eight accepted uses.
-        start = case.sample('Before additional P1 native ammo use')
-        initial_p1 = selected_resources(start)[0]
-        target = max(1, initial_p1['capacity']//8)
-        spending_deadline = time.monotonic()+60
-        for index in range(8):
-            before = case.sample('Additional P1 native attack bracket')
-            current = selected_resources(before)
-            value = current[0]
-            distinct = value['energy']*current[1]['capacity'] != current[1]['energy']*value['capacity']
-            if (initial_p1['energy']-value['energy'] >= target and distinct) or value['energy'] == 0:
-                break
-            require(time.monotonic() < spending_deadline, 'Additional native ammo-use budget expired')
-            attempt = dict(seat=0, pressed=0x1000, before=before, label='additional-p1-'+str(index))
-            evidence['extra_attacks'].append(attempt)
-            try:
-                attempt['acknowledgment'] = ctx['set_input'](0, 0x1000)
-                used = case.wait(lambda r: hud.state.forward(before['observation']['tick'], r['observation']['tick']) and
-                    selected_resources(r)[0]['energy'] < value['energy'], 'Additional original P1 Triangle consumes ammo')
-                attempt['accepted'] = used
-            finally:
-                ctx['set_input'](0, 0)
-            after = settle('Additional native attack retired')
-            checks = ownership_checks(before, after, 0)
-            checks['same_selected_weapon'] = selected_resources(before)[0]['weapon'] == selected_resources(after)[0]['weapon']
-            attempt.update(after=after, checks=checks)
-            require(all(checks.values()), 'Additional P1 attack did not preserve private native ownership')
-        final = case.sample('Distinct final native ammo values')
+        require(len(initial_groups) == 1, 'First X spend needs exactly one before-capture group')
+        initial = initial_groups[0]
+        changed = captures('both-selected-and-spent')
+        final = case.sample('Final native ammo values')
         values = selected_resources(final)
-        require(evidence['extra_attacks'], 'Additional native ammo use did not establish a changing selected meter')
-        require(values[0]['energy']*values[1]['capacity'] != values[1]['energy']*values[0]['capacity'],
-                'Selected ammo fractions are still identical; artwork ownership remains ambiguous')
-        changed = captures('p1-extra-spent-p2-preserved')
+        before_row = initial['captures'][-1]['native_after']
+        bracket = ownership_checks(before_row, final, 0)
+        bracket['same_selected_weapons'] = [r['weapon'] for r in selected_resources(before_row)] == [r['weapon'] for r in values]
+        require(all(bracket.values()), 'First X spend did not preserve Zero and native meter identity')
+        evidence['rendered_resource_bracket'] = dict(before=before_row, after=final, checks=bracket)
         evidence['ammo_image_comparisons'] = [dict(drawable=a['measurement']['image_size'],
             observations=compare_regions(a['measurement'], b['measurement']))
             for a, b in zip(initial['captures'], changed['captures'])]
         evidence['checks'].update(both_native_heroes_selected_and_spent=all(route['checks'].values()),
             isolated_native_resource_changes=all(all(r['checks'].values()) for r in evidence['native_resource_ownership']),
-            additional_p1_use_preserves_p2=all(all(r['checks'].values()) for r in evidence['extra_attacks']),
-            selected_ammo_fractions_distinct=True, all_three_actual_drawable_aspects=len(changed['captures']) == 3)
+            first_p1_use_preserves_p2=all(bracket.values()),
+            before_and_after_same_three_aspects=len(initial['captures']) == len(changed['captures']) == 3)
         evidence['final_resources'] = values
         evidence['status'] = SUCCESS
         return evidence
