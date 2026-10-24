@@ -140,6 +140,20 @@ capture/replay paths reject it. R6 selected/spent composed ammo ownership remain
 open. The derived Reploid adapter fingerprints were refreshed after archiving
 their prior record; native definitions and all runtime dispositions are unchanged.
 
+The next owned v25 probe identifies the remaining Giga failure: its shared
+decimal-type26 effect selects801EE254 after the resident X overlay returns.
+That address is a Zero callback but an unrelated X continuation. The native
+actor acquires exactly the predicted invalid state55h, field50=800FA6A8 and
+field64=1; the pool iterator and draw cursors stall while later effects queue.
+The pending fix records ownership on every native shared-pool allocation,
+projects the creator for the original type17/type26 callback, and restores
+either resident context. Native order, selectors and shared globals remain
+under original code. Current-build wire5 includes96 owner bytes. Focused
+debug/production effect, snapshot and diagnostic tests pass; native recovery
+and effect artwork are still pending. Offline audit command10 supplies only
+bounded native iframe counters for living seats; online/production and
+projected-body writes are refused, and accepted protection taints recordings.
+
 The v25 ammo probe confirms original X R1/R1/Triangle selects weapon2 and
 spends32 energy; original Zero Up+Triangle selects weapon3 and spends36.
 Both changes preserve the other actor's resources. Its repeated X attack

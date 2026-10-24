@@ -22,6 +22,7 @@ static unsigned menu_vram_probe,gp0_upload_stage,gp0_upload_left,gp0_upload_x,gp
 static uint16_t original_menu_vram[1024*512];
 static uint16_t menu_input[3];
 static unsigned native_budget;
+static unsigned shared_probe,shared_probe_seat,shared_probe_delete,shared_probe_calls;
 static uint16_t pad_buttons=0xFFFF;
 static const unsigned resource_offsets[7]={0x14,0x1C,0x24,0x28,0x38,0x3C,0xA8};
 static uint8_t *memory(uint32_t a){
@@ -140,6 +141,25 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
 #ifdef MMX6_TEST_DISPATCH_CALL
     if(MMX6_TEST_DISPATCH_CALL(cpu,address,ret))return;
 #endif
+    if(shared_probe && address==0x8002C398u) {
+        memset(memory(0x80091298u),0,0x70);cpu->gpr[2]=0x80091298u;return;
+    }
+    if(shared_probe && (address==0x801EE254u || address==0x8004AE1Cu)) {
+        ++shared_probe_calls;CHECK(shared_fx_call);
+#ifdef MMX6_COOP_MODERN_STATE
+        CHECK(!snapshot_ready());
+#endif
+        if(shared_probe_seat)projected();
+        else {
+            CHECK(!zero_projected && !zero_world && psx_mod_read_byte(PLAYER+2)==0);
+            CHECK(psx_mod_read_word(OVERLAY)==0x11223344 && psx_mod_read_word(SCRATCH+0x1C)==0x80030100u);
+        }
+        psx_mod_write_byte(PLAYER+0xD8,0x4C);
+        psx_mod_write_byte(cpu->gpr[4]+4,1);
+        psx_mod_write_word(PLAY+0x90,psx_mod_read_word(PLAY+0x90)+1);
+        if(shared_probe_delete)psx_mod_write_byte(cpu->gpr[4],0);
+        cpu->gpr[2]=0x1234;return;
+    }
 #ifdef MMX6_COOP_MODERN_STATE
     CHECK(!snapshot_ready());
     if(address==0x800232D4u){
@@ -192,6 +212,8 @@ static void setup(CPUState *cpu){
     memset(test_vram,0,sizeof test_vram);memset(bank_first,0,sizeof bank_first);memset(zero_overlay,0x44,sizeof zero_overlay);
     mmx6_coop_lifecycle_init(&life);state_track.count=state_track.error=0;
     inside=failed=player_call=zero_world=world_render=scene_owner=scene_phase=zero_projected=0;
+    shared_fx_call=shared_fx_allocate_call=0;memset(shared_effect_owners,0,sizeof shared_effect_owners);
+    shared_probe=shared_probe_seat=shared_probe_delete=shared_probe_calls=0;
     ready=enrolled=stage_call=1;pause_owner=-1;zero_menu_loaded=0;join_phase=0;previous_input=p2_edges=0;p2_start_previous=0;
     texture_support=1;marker_override=2;terminal_player=stage_driver=0;call_count=draw_count=tag_count=native_budget=0;
     pad_buttons=0xFFFF;
@@ -408,6 +430,45 @@ static void native_giga_backup_survives_private_callbacks(void){
     for(unsigned i=0;i<16;++i)CHECK(psx_mod_read_word(0x80090CD0u+i*4)==expected[i]);
     CHECK(!zero_projected && !state_track.count && !state_track.error && !failed);
 }
+static void deferred_shared_effect_owner_context(void) {
+    CPUState cpu;setup(&cpu);stage_call=0;shared_probe=1;
+    const uint32_t actor=0x80091298u,table=0x800FA640u;
+    PlayerContext primary;capture_player(&primary);
+    inside=1;enter_zero();CHECK(shared_effect_allocate(&cpu,0x8002C398u));
+    CHECK(cpu.gpr[2]==actor && shared_effect_owners[0]==2);
+    leave_zero_context(1);inside=0;
+    psx_mod_write_byte(actor,1);psx_mod_write_byte(actor+1,26);
+    psx_mod_write_word(SCRATCH+0x88,table);psx_mod_write_word(table+26*4,0x801EE254u);
+    cpu.gpr[31]=0x80020438u;cpu.gpr[4]=actor;shared_probe_seat=1;
+    CHECK(shared_effect_callback(&cpu,0x801EE254u));
+    CHECK(shared_probe_calls==1 && cpu.gpr[2]==0x1234 && p2.body[0xD8]==0x4C);
+    CHECK(psx_mod_read_byte(actor+4)==1 && psx_mod_read_word(actor+0x50)==0);
+    PlayerContext after;capture_player(&after);CHECK(!memcmp(&primary,&after,sizeof primary));
+    CHECK(psx_mod_read_word(OVERLAY)==0x11223344 && !inside && !zero_projected && !shared_fx_call && !shared_fx_allocate_call && !state_track.count);
+    CHECK(psx_mod_read_word(PLAY+0x90)==1);
+    cpu.gpr[31]=0x80020434u;CHECK(!shared_effect_callback(&cpu,0x801EE254u));
+    cpu.gpr[31]=0x80020438u;cpu.gpr[4]=actor+1;CHECK(!shared_effect_callback(&cpu,0x801EE254u));
+    cpu.gpr[4]=actor;psx_mod_write_word(table+26*4,0x80010000u);CHECK(!shared_effect_callback(&cpu,0x801EE254u));
+    psx_mod_write_word(table+26*4,0x801EE254u);shared_probe_delete=1;
+    CHECK(shared_effect_callback(&cpu,0x801EE254u));CHECK(!shared_effect_owners[0]);
+    CHECK(shared_effect_allocate(&cpu,0x8002C398u));CHECK(shared_effect_owners[0]==1);
+    psx_mod_write_byte(actor,1);psx_mod_write_byte(actor+1,17);
+    psx_mod_write_word(table+17*4,0x8004AE1Cu);shared_probe_delete=0;shared_probe_seat=0;
+    inside=1;enter_zero();zero_world=1;
+    psx_mod_write_byte(OVERLAY+0x5900,0x6D);
+    PlayerContext zero;capture_player(&zero);
+    cpu.gpr[4]=actor;cpu.gpr[31]=0x80020438u;
+    CHECK(shared_effect_callback(&cpu,0x8004AE1Cu));
+    capture_player(&after);CHECK(!memcmp(&zero,&after,sizeof zero));
+    CHECK(inside && zero_world && zero_projected && psx_mod_read_byte(OVERLAY+0x5900)==0x6D);
+    CHECK(psx_mod_read_word(SCRATCH+0x1C)==assembly && p1.body[0xD8]==0x4C);
+    zero_world=0;leave_zero_context(1);inside=0;
+    CHECK(psx_mod_read_byte(PLAYER+0xD8)==0x4C && !state_track.count && !state_track.error);
+    CHECK(shared_probe_calls==3);
+    native_player_init(&cpu,0x8003BD24u);
+    for(unsigned i=0;i<96;++i)CHECK(!shared_effect_owners[i]);
+}
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     controller_pair_and_restoration();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
+    deferred_shared_effect_owner_context();
     puts("private native effects actual-plugin call order, gates, lifetime projection and retained packet ownership PASS");return 0;}

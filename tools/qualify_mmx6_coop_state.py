@@ -25,15 +25,17 @@ from coop_debug import (BODY_BYTES, DIAGNOSTIC_ADDRESS, DIAGNOSTIC_BYTES,
 
 
 # Read-only, current-build wire inspection, not an alternate state loader.
-# runtime/include/boot_state.h + runtime/src/mod_snapshot.c; internal game schema4 is
+# runtime/include/boot_state.h + runtime/src/mod_snapshot.c; internal game schema5 is
 # src/mods/mmx6_coop_snapshot.inc. Reject future layouts instead of guessing.
 MAX_STATE_BYTES = 64 * 1024 * 1024
-HOST_WIRE_SCHEMA = 4
+HOST_WIRE_SCHEMA = 5
 HOST_RESOURCE_BYTES = 88
 HOST_PLAYER_BYTES = 0x158 + 0x1400 + 0x120 + 0xF0
 HOST_AUDIO_PRIORITIES_OFFSET = HOST_PLAYER_BYTES + 25 + 2*0x158 + 0x205
 HOST_GIGA_BACKUP_BYTES = 64
-HOST_SEMANTIC_BYTES = HOST_AUDIO_PRIORITIES_OFFSET + 24 + 128*5 + 80*2 + 96*14 + HOST_GIGA_BACKUP_BYTES
+HOST_SHARED_EFFECT_OWNER_BYTES = 96
+HOST_GIGA_BACKUP_OFFSET = HOST_AUDIO_PRIORITIES_OFFSET + 24 + 128*5 + 80*2 + 96*14
+HOST_SEMANTIC_BYTES = HOST_GIGA_BACKUP_OFFSET + HOST_GIGA_BACKUP_BYTES + HOST_SHARED_EFFECT_OWNER_BYTES
 HOST_CORE_END = HOST_RESOURCE_BYTES + HOST_SEMANTIC_BYTES
 HOST_CACHE_OFFSET = HOST_CORE_END + 10  # publication count + presentation tail
 PRIVATE_SUCCESS = "automated_private_effect_state_checks_passed_artwork_pending"
@@ -106,6 +108,8 @@ def parse_state_image(data):
     schema, payload = records["mmx6.local-coop"]
     require(schema == 1 and len(payload) >= HOST_CACHE_OFFSET+8 and
             struct.unpack_from("<II", payload) == (0x53503658, HOST_WIRE_SCHEMA), "unsupported X6 provider schema")
+    require(all(v <= 2 for v in payload[HOST_CORE_END-HOST_SHARED_EFFECT_OWNER_BYTES:HOST_CORE_END]),
+            "invalid shared effect owner")
     cache_at = HOST_CACHE_OFFSET
     count = struct.unpack_from("<I", payload, cache_at)[0];cache_at += 4
     require(count <= 4096, "unbounded retained sprite count")
@@ -150,7 +154,8 @@ def parse_state_image(data):
         provider_schema=schema, provider_payload_sha256=hashlib.sha256(payload).hexdigest(),
         resource_binding_hex=payload[:HOST_RESOURCE_BYTES].hex(), semantic_core_hex=core.hex(),
         internal_wire_schema=HOST_WIRE_SCHEMA,
-        zero_giga_backup_hex=core[-HOST_GIGA_BACKUP_BYTES:].hex(),
+        zero_giga_backup_hex=core[HOST_GIGA_BACKUP_OFFSET:HOST_GIGA_BACKUP_OFFSET+HOST_GIGA_BACKUP_BYTES].hex(),
+        shared_effect_owners=list(core[-HOST_SHARED_EFFECT_OWNER_BYTES:]),
         audio_priorities_hex=core[HOST_AUDIO_PRIORITIES_OFFSET:HOST_AUDIO_PRIORITIES_OFFSET+24].hex(),
         private_spu=dict(owner_tags=owners,modes=modes,registers_hex=registers,bank_bindings=bindings,
             voices=voices,guest_clock_phase=struct.unpack_from('<I',spu,len(spu)-4)[0],

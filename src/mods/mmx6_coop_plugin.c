@@ -100,6 +100,9 @@ typedef struct { uint16_t page, clut, uv, id, colors[16]; } UiBank;
 static UiBank ui_banks[4096];
 static unsigned ui_bank_count;
 static int render_x_death, effect_call;
+/* Native shared112-byte effects outlive their creating player callback. */
+static uint8_t shared_effect_owners[96]; /* 0 unowned, 1 X, 2 Zero. */
+static int shared_fx_call,shared_fx_allocate_call;
 typedef struct { uint32_t x,y,assembly; uint8_t layer,valid; } DeathEffectOrigin;
 static DeathEffectOrigin death_effect[96];
 typedef struct { uint32_t actor; uint8_t seat; } PickupOwner;
@@ -366,6 +369,8 @@ static void leave_zero_context(int shared_world) {
     zero_projected=0;
 }
 static void leave_zero(void) { leave_zero_context(0); }
+
+#include "mmx6_coop_shared_effects.inc"
 
 /* Pickup routines only need a body and character identity. Keep all native
  * shared changes (life count, tanks, collection flags and heal freeze) while
@@ -992,6 +997,27 @@ static void diagnostic_setup(CPUState *cpu) {
     /* Commands8/9 may only commit at the outer stage entry, never from the
      * controller's projected/nested post-player boundary. */
     if (command==8 || command==9) return;
+    if (command==10) {
+        /* Bounded offline audit protection, not a permanent gameplay option.
+         * Native8002D654 checks defender+61; positive1..127 expires through
+         * original80039494. Unlike C4568 this does not bypass player actions.
+         * Commit both seats atomically while neither body is projected. */
+        if(inside || stage_call || zero_projected)return;
+        unsigned ticks=psx_mod_read_byte(diagnostic+0x51),mask=psx_mod_read_byte(diagnostic+0x52);
+        int valid=ready && enrolled && !failed && ticks && ticks<=127 && mask && mask<=3 &&
+            !scene_owner && pause_owner<0 && psx_mod_read_byte(PLAY)==10 && !psx_mod_read_byte(PLAY+1);
+        if(mask&1)valid=valid && life.status[0]==MMX6_COOP_ALIVE &&
+            psx_mod_read_byte(PLAYER+4)==1 && psx_mod_read_byte(PLAYER+0x5C)>0 && psx_mod_read_byte(PLAYER+0x5C)<128;
+        if(mask&2)valid=valid && life.status[1]==MMX6_COOP_ALIVE && p2.body[4]==1 && p2.body[0x5C]>0 && p2.body[0x5C]<128;
+        if(valid) {
+#ifdef MMX6_COOP_INPUT_TAINT_API
+            psx_session_input_taint_add(PSX_INPUT_TAINT_GAME_MAILBOX);
+#endif
+            if(mask&1)psx_mod_write_byte(PLAYER+0x61,(uint8_t)ticks);
+            if(mask&2)p2.body[0x61]=(uint8_t)ticks;
+        } else psx_mod_counter_add("mmx6.coop.debug-protection-rejected",1);
+        psx_mod_write_byte(diagnostic+0x50,0);return;
+    }
     /* Development-only fixture setup. The published host-body copy remains
      * read-only; a one-byte command commits the already-written payload. */
 #ifdef MMX6_COOP_INPUT_TAINT_API
@@ -1270,7 +1296,7 @@ static uint32_t retired_host_word(const Mmx6StateFrame *frame,size_t index) {
 }
 static int retire_quit_stage(CPUState *cpu,uint32_t address) {
     if (!cpu || address!=0x8003BD24u || inside || player_call || zero_world || zero_projected ||
-        world_render || hud_call || render_x_death || effect_call || pickup_call || solid_call ||
+        world_render || hud_call || render_x_death || effect_call || shared_fx_call || shared_fx_allocate_call || pickup_call || solid_call ||
         solid_allocate_call || scene_call || unit_choices_call || intro_target_call ||
         stage_call!=1 || state_track.count!=2 || state_track.error ||
         psx_mod_read_byte(PLAY)!=9 || psx_mod_read_byte(PLAY+1) ||
@@ -1299,6 +1325,7 @@ static void native_player_init(CPUState *cpu, uint32_t address) {
     scene_owner=scene_phase=0;
     memset(pickup_owners,0,sizeof pickup_owners);
     memset(zero_solid_contacts,0,sizeof zero_solid_contacts);
+    memset(shared_effect_owners,0,sizeof shared_effect_owners);
     mmx6_coop_lifecycle_respawn(&life);
     pause_owner=-1; p2_start_previous=0;
 }
@@ -1980,7 +2007,8 @@ static void activate(void) {
     mmx6_coop_lifecycle_init(&life); join_phase=0;
     player_call=stage_call=zero_world=world_render=0;
     pause_owner=-1; p2_start_previous=0;
-    render_x_death=effect_call=0; memset(death_effect,0,sizeof death_effect);
+    render_x_death=effect_call=shared_fx_call=shared_fx_allocate_call=0; memset(death_effect,0,sizeof death_effect);
+    memset(shared_effect_owners,0,sizeof shared_effect_owners);
     hud_call=hud_seat=0;
     p2_hud_fade=128;
     pickup_call=0; memset(pickup_owners,0,sizeof pickup_owners);
@@ -2030,6 +2058,9 @@ static void activate(void) {
         !psx_mod_set_function_replacement(0x80024CC0,hud_icon)) failed=1;
     if (!psx_mod_set_function_replacement(0x8002C530,death_effect_allocate) ||
         !psx_mod_set_function_replacement(0x80047E34,death_effect_init)) failed=1;
+    if (!psx_mod_set_function_replacement(0x8002C398,shared_effect_allocate) ||
+        !psx_mod_set_function_replacement(0x8004AE1C,shared_effect_callback) ||
+        !psx_mod_set_function_replacement(0x801EE254,shared_effect_callback)) failed=1;
     fprintf(stdout,"mmx6 co-op: development prototype active (OpenGL rendering required)\n");
 }
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {

@@ -135,6 +135,7 @@ static void digest_and_readiness(void){
 #define PERTURB(value) do{(value)^=1;CHECK(state_digest()!=h);(value)^=1;CHECK(state_digest()==h);}while(0)
     PERTURB(p2.shots[6]);PERTURB(previous_input);PERTURB(p2_start_previous);
     PERTURB(zero_giga_backup[7]);
+    PERTURB(shared_effect_owners[7]);
     PERTURB(saved_portrait_colors[7]);PERTURB(pickup_owners[0].seat);PERTURB(zero_solid_contacts[3].carried);
     PERTURB(death_effect[2].x);
     PERTURB(jump_audio_banks[0].guest);PERTURB(jump_audio_registers[4]);
@@ -143,7 +144,7 @@ static void digest_and_readiness(void){
     life.status[1]=MMX6_COOP_ABSENT;h=state_digest();life.rejoin_pending=1;CHECK(state_digest()!=h);life.rejoin_pending=0;life.status[1]=MMX6_COOP_ALIVE;
     zero_projected=1;h=state_digest();saved_play[3]^=1;CHECK(state_digest()!=h);saved_play[3]^=1;zero_projected=0;
     int *guards[]={&inside,&player_call,&stage_call,&zero_world,&world_render,&hud_call,&render_x_death,
-        &effect_call,&pickup_call,&solid_call,&solid_allocate_call,&scene_call,&zero_projected,&unit_choices_call,&intro_target_call};
+        &effect_call,&pickup_call,&solid_call,&solid_allocate_call,&scene_call,&zero_projected,&unit_choices_call,&intro_target_call,&shared_fx_call,&shared_fx_allocate_call};
     for(unsigned i=0;i<sizeof guards/sizeof guards[0];++i){h=state_digest();*guards[i]=1;CHECK(!snapshot_ready());CHECK(state_digest()!=h);*guards[i]=0;CHECK(snapshot_ready());CHECK(state_digest()==h);}
     local_scope=1;CHECK(!snapshot_ready());local_scope=0;
     texture_support=0;CHECK(!snapshot_ready());texture_support=1;
@@ -189,7 +190,9 @@ static void actual_projection_backups(void){
 }
 static void roundtrip_and_malformed(void){
     uint8_t expected_giga[ZERO_GIGA_BACKUP_BYTES];
+    uint8_t expected_owners[96];
     for(unsigned i=0;i<sizeof expected_giga;++i)zero_giga_backup[i]=expected_giga[i]=(uint8_t)(i*11u+3u);
+    for(unsigned i=0;i<96;++i)shared_effect_owners[i]=expected_owners[i]=(uint8_t)(i%3);
     uint32_t len=snapshot_bytes();CHECK(len && len<STATE_MAX_BYTES);
     uint8_t *wire=malloc(len+1),*bad=malloc(len+1);CHECK(wire && bad && snapshot_write(wire,len));
     CHECK(!snapshot_write(wire,len-1));CHECK(!snapshot_write(wire,len+1));
@@ -203,6 +206,7 @@ static void roundtrip_and_malformed(void){
     memcpy(bad,wire,len);bad[resources.pos+sizeof p2]=255;reject_unchanged(bad,len); /* Lifecycle enum. */
     HostState core;state_capture(&core);StateIO count={STATE_COUNT,1,NULL,NULL,0,0,0};snapshot_resources(&count);state_core(&count,&core);
     uint32_t cache=count.pos;memcpy(bad,wire,len);put32(bad+cache,4097);reject_unchanged(bad,len);
+    memcpy(bad,wire,len);bad[cache-10-96]=3;reject_unchanged(bad,len); /* Invalid shared effect owner. */
     memcpy(bad,wire,len);bad[cache+4+44]=2;reject_unchanged(bad,len); /* Invalid retained-pixel encoding. */
     allocation_fail=1;reject_unchanged(wire,len);allocation_fail=0;
     uint32_t untouched=state_digest();
@@ -214,17 +218,21 @@ static void roundtrip_and_malformed(void){
     CHECK(snapshot_validate(wire,len));p2.body[0x5C]=1;previous_input^=0x101;zero_solid_contacts[3].carried=0;
     memset(jump_audio_priorities,0,sizeof jump_audio_priorities);
     memset(zero_giga_backup,0,sizeof zero_giga_backup);
+    memset(shared_effect_owners,0,sizeof shared_effect_owners);
     int allocations=allocation_calls;allocation_fail=1;snapshot_read(wire,len);allocation_fail=0;
     CHECK(allocation_calls==allocations && state_digest()==original && p2.body[0x5C]==23);
     CHECK(!memcmp(zero_giga_backup,expected_giga,sizeof expected_giga));
+    CHECK(!memcmp(shared_effect_owners,expected_owners,sizeof expected_owners));
     for(unsigned s=0;s<24;++s)CHECK(jump_audio_priorities[s]==(uint8_t)(s*9u));
     /* Cold cache: retain immutable disc/build resources, destroy every current
      * pixel bank and metadata, then validate saved length independently of live. */
     for(unsigned i=0;i<4096;++i){free(banks[i].pixels);memset(&banks[i],0,sizeof banks[i]);}
     bank_count=ui_bank_count=0;memset(ui_banks,0,sizeof ui_banks);memset(&p2,0,sizeof p2);
     memset(zero_giga_backup,0,sizeof zero_giga_backup);
+    memset(shared_effect_owners,0,sizeof shared_effect_owners);
     CHECK(snapshot_validate(wire,len));allocation_fail=1;allocations=allocation_calls;snapshot_read(wire,len);
     snapshot_resources_restored();CHECK(forgotten==1 && installed_resolver && state_digest()==original);
+    CHECK(!memcmp(shared_effect_owners,expected_owners,sizeof expected_owners));
     CHECK(allocation_calls==allocations);allocation_fail=0;
     for(unsigned i=0;i<2;++i) {
         uint8_t restored[32];capture(jump_audio_banks[i].guest,restored,sizeof restored);

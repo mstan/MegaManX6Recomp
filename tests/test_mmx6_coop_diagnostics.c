@@ -57,6 +57,55 @@ static void queue(unsigned command) {
     psx_mod_write_byte(diagnostic+0x51,17);
     psx_mod_write_half(diagnostic+0x52,0x90);
 }
+static void protection_boundary(void) {
+    CPUState cpu;memset(&cpu,0,sizeof cpu);
+    inside=stage_call=zero_projected=scene_owner=failed=0;ready=enrolled=1;pause_owner=-1;
+    memset(&life,0,sizeof life);life.status[0]=life.status[1]=MMX6_COOP_ALIVE;test_online=0;
+    memset(&p2,0x32,sizeof p2);p2.body[4]=1;p2.body[0x5C]=25;
+    psx_mod_write_byte(PLAYER+4,1);psx_mod_write_byte(PLAYER+0x5C,23);
+    psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAY+1,0);
+    for(unsigned online=0;online<2;++online) {
+        test_online=(int)online;
+        for(unsigned kind=0;kind<5;++kind) {
+            unsigned ticks=kind==1?0:kind==2?128:120,mask=kind==3?0:kind==4?4:3;
+            p2.body[0x61]=7;psx_mod_write_byte(PLAYER+0x61,9);
+            PlayerContext before=p2;
+            psx_mod_write_byte(diagnostic+0x51,(uint8_t)ticks);psx_mod_write_byte(diagnostic+0x52,(uint8_t)mask);
+            psx_mod_write_byte(diagnostic+0x50,10);
+#ifdef MMX6_COOP_INPUT_TAINT_API
+            diagnostic_test_taint=0;
+#endif
+            diagnostic_setup(&cpu);CHECK(!psx_mod_read_byte(diagnostic+0x50));
+            int accepted=!online && !kind;
+#ifdef PSX_NO_DEBUG_TOOLS
+            accepted=0;
+#endif
+            CHECK(psx_mod_read_byte(PLAYER+0x61)==(accepted?120:9));
+            if(accepted)before.body[0x61]=120;
+            CHECK(!memcmp(&before,&p2,sizeof p2));CHECK(psx_mod_read_byte(PLAYER+0x5C)==23 && p2.body[0x5C]==25);
+#ifdef MMX6_COOP_INPUT_TAINT_API
+            CHECK(diagnostic_test_taint==(accepted?PSX_INPUT_TAINT_GAME_MAILBOX:0));
+#endif
+        }
+    }
+#ifndef PSX_NO_DEBUG_TOOLS
+    test_online=0;life.status[1]=MMX6_COOP_DYING;
+    p2.body[0x61]=7;psx_mod_write_byte(PLAYER+0x61,9);
+    queue(10);psx_mod_write_byte(diagnostic+0x51,120);psx_mod_write_byte(diagnostic+0x52,3);
+    diagnostic_setup(&cpu);CHECK(!psx_mod_read_byte(diagnostic+0x50));
+    CHECK(psx_mod_read_byte(PLAYER+0x61)==9 && p2.body[0x61]==7); /* Atomic refusal. */
+    life.status[1]=MMX6_COOP_ALIVE;p2.body[0x5C]=0x80;
+    queue(10);psx_mod_write_byte(diagnostic+0x51,120);psx_mod_write_byte(diagnostic+0x52,3);
+    diagnostic_setup(&cpu);CHECK(!psx_mod_read_byte(diagnostic+0x50));
+    CHECK(psx_mod_read_byte(PLAYER+0x61)==9 && p2.body[0x61]==7);
+    p2.body[0x5C]=25;
+    test_online=0;inside=1;queue(10);psx_mod_write_byte(diagnostic+0x51,120);psx_mod_write_byte(diagnostic+0x52,3);
+    diagnostic_setup(&cpu);CHECK(psx_mod_read_byte(diagnostic+0x50)==10); /* Never commit a projected body. */
+    inside=0;diagnostic_setup(&cpu);CHECK(!psx_mod_read_byte(diagnostic+0x50));
+    CHECK(psx_mod_read_byte(PLAYER+0x61)==120 && p2.body[0x61]==120);
+#endif
+    test_online=0;
+}
 int main(void) {
     CPUState cpu; memset(&cpu,0,sizeof cpu);diagnostic=0x9F080000u;
     memset(&p2,0x32,sizeof p2);
@@ -186,5 +235,6 @@ int main(void) {
     }
     diagnostic_test_taint=0;queue(9);diagnostic_setup(&cpu);CHECK(!diagnostic_test_taint);
 #endif
+    protection_boundary();
     puts("co-op debug isolation and diagnostic publication PASS");return 0;
 }
