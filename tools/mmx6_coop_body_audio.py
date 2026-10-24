@@ -193,6 +193,7 @@ def native_death(ctx, sample, observer, case, advance):
     for step in range(400):
         sample('body-audio-native-contact')
         row=contact.observe_contact(client,ctx['zero_overlay']);route['observations'].append(row)
+        if ctx.get('on_contact_observation'):ctx['on_contact_observation'](row)
         o=row['observation'];p1,p2=row['players'];hp=p2['hp'];actor=row['instance']
         require(o['players'][0]['x_raw']==144<<16 and p1['hp_raw']==32 and p1['state']==1,
             'Native death route moved or damaged the surviving primary')
@@ -245,11 +246,18 @@ def native_death(ctx, sample, observer, case, advance):
 def exercise(ctx, contract, *, source, timeout=90, death=False, **unused):
     if type(timeout) not in (int, float) or not 0 < timeout <= 120:
         raise ValueError('Require a finite bounded body-audio observation deadline')
-    require(ctx['mode'] == 'local' and ctx['input_path'] == 'published_host', 'Body audio requires the owned local host route')
+    require(ctx['mode'] in ('local','netplay') and ctx['input_path'] == 'published_host', 'Body audio requires an owned published host route')
+    if ctx['mode']=='netplay':
+        require(isinstance(ctx.get('expected_sha256'),str) and re.fullmatch(r'[0-9a-f]{64}',ctx['expected_sha256']) is not None,
+            'Paired body audio lacks its exact image identity')
+        # Lazy import: the paired adapter reuses this observer after its full
+        # two-image/profile/CRC/route validation, without calling it offline.
+        from mmx6_coop_jump_audio_pair import validate_context
+        validate_context(ctx,ctx['expected_sha256'])
     observer = audio.AudioObserver(ctx['clients'][0], ctx['request'], contract, private_banks=ctx['private_banks'])
     report = ctx['report']; deadline = time.monotonic()+timeout
     damage_allowed=False;trace_armed=False
-    case = dict(kind='native_zero_body_saber_and_contact_death_audio' if death else 'native_zero_body_saber_audio', status='failed_setup', input_path='published_host',
+    case = dict(kind='native_zero_body_saber_and_contact_death_audio' if death else 'native_zero_body_saber_audio', mode=ctx['mode'],status='failed_setup', input_path='published_host',
         source_sha256=source_digest(source), helper_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         checks={}, observations=[], inputs=[], events=observer.events, limits=[
             'Ordinary Zero saber plus requested contact-death route only; no full R4/R12 or other action-family pass.',
@@ -338,6 +346,7 @@ def exercise(ctx, contract, *, source, timeout=90, death=False, **unused):
         case['private_before_death']=audio.parse_private_voices(ctx['request']('spu_private_voices'))
         checks,details=standing_checks(observer.events,case['selected'],case['private_before_death'])
         case['checks'].update(checks);case['terminal']=details
+        if ctx.get('on_standing_saber'):ctx['on_standing_saber'](case)
         case['standing_saber_vocals']=[]
         driver=observer.driver();case['driver_after_saber']=driver
         for event in observer.events:

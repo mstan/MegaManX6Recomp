@@ -16,6 +16,8 @@ import qualify_mmx6_coop_jump_audio as sources
 
 INCONCLUSIVE = "inconclusive_native_rng_no_shared_two_voice_window"
 SUCCESS = "paired_jump_audio_observations_complete_outcomes_unverified"
+BODY_SUCCESS = "paired_body_audio_observations_complete_outcomes_unverified"
+BODY_PARTIAL = "paired_body_audio_observations_partial_stops_unverified"
 
 
 def load_sources(original_exe, raw_disc, cue, contract_path):
@@ -268,6 +270,159 @@ def exercise(ctx, *, expected_sha, source, first_seat=0, max_attempts=32, timeou
         if errors:
             case["status"] = "failed_cleanup"
             if failure is None: raise audio.AudioQualificationError("Paired audio neutral release failed")
+
+
+def contact_history(rows):
+    """Require eight independently observed ordinary losses, not a counter alone."""
+    from mmx6_coop_contact import hazardous
+    require(bool(rows) and rows[0]['players'][1]['hp']==32 and rows[0]['p2_contact_counter']==0,
+        'Secondary contact history lacks its initial full-health observation')
+    changes=[];selected=None;previous=rows[0]
+    for row in rows:
+        p1,p2=row['players'];actor=row['instance']
+        require(p1['hp_raw']==32 and p1['state']==1 and row['observation']['players'][0]['x_raw']==144<<16,
+            'Secondary primary moved or lost health')
+        require(row['expected_damage']==4 and row['expected_reaction']==1,'Secondary damage configuration changed')
+        require(not hazardous(row) or p2['hp']==0,'Secondary terrain hazard confounds contact damage')
+        if actor:
+            require((actor['phase']==1 or p2['hp']==0 and actor['phase']==3) and actor['hp']==12 and
+                actor['strength']==4 and actor['subtype']==1 and actor['contact_class']==0,
+                'Secondary authored contact enemy changed')
+            if selected is None:selected=actor['address']
+            require(selected==actor['address'],'Secondary contact actor changed')
+        require(actor is not None or selected is None or p2['hp']==0,'Secondary contact actor disappeared before fatal damage')
+        old=previous['players'][1]['hp']
+        if old!=p2['hp']:
+            require(old-p2['hp']==4 and row['p2_contact_counter']==len(changes)+1,
+                'Secondary contact history skipped or misattributed a loss')
+            changes.append(dict(before=old,after=p2['hp'],counter=row['p2_contact_counter'],
+                native_timer=row['observation']['native_timer']))
+        previous=row
+    require(selected is not None and len(changes)==8 and rows[-1]['players'][1]['hp']==0 and rows[-1]['p2_contact_counter']==8,
+        'Secondary contact history lacks eight observed losses and fatal damage')
+    return changes,selected
+
+
+def exercise_body(ctx, *, expected_sha, source, original_exe, original_disc, timeout=120):
+    """One shared input route, with independent source/voice/contact probes."""
+    import mmx6_coop_body_audio as body
+    validate_context(ctx,expected_sha)
+    require(type(timeout) in (int,float) and 0<timeout<=120,'Require bounded paired body audio deadline')
+    report,clients=ctx['report'],ctx['clients'];output=Path(ctx['output'])/'body-audio';output.mkdir()
+    body_source=body.build_source(original_exe,original_disc)
+    zero_overlay=body.contact.load_zero_overlay(original_disc)
+    (output/'source-records.json').write_text(json.dumps(body_source,indent=2)+'\n',encoding='utf-8')
+    (output/'body-observer-executed-source.py').write_bytes(Path(body.__file__).read_bytes())
+    case=dict(kind='paired_native_saber_hurt_death_audio',mode='netplay',scope='same_machine',
+        status='failed_setup',peers=[{},dict(peer=1,checks={},contacts=[],observations=[])],
+        source_sha256=body.source_digest(body_source),helper_sha256=ownership.preparation.sha256(Path(__file__)),
+        candidate_sha256=expected_sha,checks={},pending_checks=[],limits=[
+            'Both peer observations use source-bound original inputs; no full R4/R12, co-op-off reference, active STOP7 or cross-machine pass.',
+            'Inactive STOP7 is pending if later source-matched death audio obscures its volume transition.'])
+    report['body_audio_pair']=case;report['checks']['body_audio_both_peers_applicable_checks']=False
+    logs=[(output/f'peer-{p}-audio-rpc.jsonl').open('w',encoding='utf-8')for p in (0,1)]
+    secondary=case['peers'][1];live=False;captured=False
+    def request(peer,command,**fields):
+        response=clients[peer].request(command,**fields)
+        logs[peer].write(json.dumps(dict(command=command,fields=fields,response=response),separators=(',',':'))+'\n')
+        logs[peer].flush();return response
+    observers=[None,audio.AudioObserver(clients[1],lambda cmd,**kw:request(1,cmd,**kw),source['contract'],private_banks=source['private_banks'])]
+    observer=observers[1]
+    secondary['events']=observer.events
+    def capture_secondary():
+        nonlocal captured
+        if captured:return
+        secondary['observations'].append(observer.poll())
+        secondary['private_after']=audio.parse_private_voices(request(1,'spu_private_voices'))
+        secondary['owners_after']=body.voice_leases(request(1,'spu_private_voices'))
+        secondary['hardware_after']=audio.parse_voices(request(1,'spu_voices'),require_banks=True)
+        secondary['contacts'].append(body.contact.observe_contact(clients[1],zero_overlay))
+        secondary['trace']=body.trace_page(dict(request=lambda cmd,**kw:request(1,cmd,**kw)))
+        secondary['events']=observer.events;captured=True
+    def primary_request(command,**fields):
+        nonlocal live
+        if command=='fntrace_arm_clear' and live:capture_secondary();live=False
+        response=request(0,command,**fields)
+        if command in ('fntrace_arm_clear','fntrace_arm','fntrace_clear','fntrace_armed'):
+            other=request(1,command,**fields)
+            if command=='fntrace_armed':
+                require(other['count']==response['count'] and set(other['targets'])==set(response['targets']),
+                    'Secondary source trace targets differ')
+            if command=='fntrace_clear':
+                secondary['observations'].append(observer.poll());secondary['event_start']=observer.cursor;live=True
+        return response
+    def set_input(seat,bits):
+        clients[seat].host_input(bits)
+        return dict(clients[seat].reentry_route.report['inputs'][-1],logical_seat=seat,local_port=1)
+    def standing(primary):
+        row=observer.poll();living_sample(row);secondary['observations'].append(row)
+        trace=body.trace_page(dict(request=lambda cmd,**kw:request(1,cmd,**kw)))
+        keys=[e for e in observer.events if e['seq']>=secondary['event_start'] and e['kind']=='KEYON' and
+            e['v']==47 and e['frame']==primary['selected']['event']['frame']]
+        require(len(keys)==1,'Secondary lacks the same-frame native saber event')
+        secondary['selected']=body.identify(observer,keys[0],body_source,sound_calls=trace['entries'])
+        secondary['private_before_death']=audio.parse_private_voices(request(1,'spu_private_voices'))
+        secondary['checks'].update(secondary['selected']['checks'])
+        checks,terminal=body.standing_checks(observer.events,secondary['selected'],secondary['private_before_death'])
+        secondary['checks'].update(checks);secondary['terminal']=terminal
+        secondary['contacts'].append(body.contact.observe_contact(clients[1],zero_overlay))
+    def contact_observation(row):
+        secondary['contacts'].append(body.contact.observe_contact(clients[1],zero_overlay))
+        case.setdefault('network_observations',[]).append(ctx['network']())
+    failure=None
+    try:
+        secondary['banks_before']=observer.fingerprint_banks()
+        secondary['owners_before']=body.voice_leases(request(1,'spu_private_voices'))
+        secondary['hardware_before']=audio.parse_voices(request(1,'spu_voices'),require_banks=True)
+        body.exercise(dict(ctx,mode='netplay',input_path='published_host',expected_sha256=expected_sha,
+            request=primary_request,set_input=set_input,private_banks=source['private_banks'],zero_overlay=zero_overlay,
+            on_standing_saber=standing,on_contact_observation=contact_observation),source['contract'],
+            source=body_source,timeout=timeout,death=True)
+        primary=report['body_audio'];case['peers'][0]=primary
+        require(captured,'Secondary source trace was not captured before disarming')
+        secondary['character_samples']=[body.identify_character(observer,e,body_source,secondary['trace']['entries'])
+            for e in observer.events if e['seq']>=secondary['event_start'] and e['kind']=='KEYON' and
+            e['sample_bank'] in (30,31) and e['v']>=24]
+        secondary['checks']['observed_character_samples_source_matched']=bool(secondary['character_samples']) and all(
+            all(r['checks'].values())for r in secondary['character_samples'])
+        secondary['banks_after']=observer.fingerprint_banks()
+        secondary['checks']['immutable_private_banks_stable']=secondary['banks_before']==secondary['banks_after']
+        secondary['checks']['private_voice_leases_stable']=secondary['owners_before']==secondary['owners_after']
+        secondary['hp_changes'],actor=contact_history(secondary['contacts'])
+        secondary['checks']['eight_ordinary_contact_losses']=len(secondary['hp_changes'])==8
+        contacts=[r for r in secondary['trace']['entries']if int(r['target'],16)==body.contact.CONTACT]
+        secondary['checks']['original_contact_actor_caller']=bool(contacts) and all(
+            int(r['a0'],16)==int(actor,16) and int(r['ra'],16)==body.contact.CONTACT_RA for r in contacts)
+        checks=body.phase2_checks(secondary['trace'],observer.events,before_private=secondary['private_before_death'],
+            after_private=secondary['private_after'],before_hardware=secondary['hardware_before'],after_hardware=secondary['hardware_after'])
+        secondary['pending_checks']=[]
+        if not checks['private23_phase2_stop'] and body.obscured_inactive_stop7(observer.events,secondary['selected'],
+                secondary['private_before_death'],secondary['private_after'],secondary['trace'],secondary['character_samples']):
+            checks.pop('private23_phase2_stop');secondary['pending_checks'].append('Inactive STOP7 obscured by source-matched death3/14')
+        secondary['checks'].update(checks)
+        secondary['status']='observations_complete' if all(secondary['checks'].values()) else 'comparison_failed'
+        if secondary['status']=='observations_complete' and secondary['pending_checks']:secondary['status']='observations_partial'
+        case['pending_checks']=[dict(peer=p,check=check)for p,row in enumerate(case['peers'])for check in row.get('pending_checks',[])]
+        case['checks']={f'peer{p}_{k}':v for p,row in enumerate(case['peers'])for k,v in row['checks'].items()}
+        complete=bool(case['checks']) and all(case['checks'].values())
+        case['status']=(BODY_PARTIAL if case['pending_checks'] else BODY_SUCCESS)if complete else 'comparison_failed'
+        report['checks']['body_audio_both_peers_applicable_checks']=complete
+        return case
+    except BaseException as error:
+        failure=error;case['error']=dict(type=type(error).__name__,message=str(error));raise
+    finally:
+        if 'body_audio' in report:case['peers'][0]=report.pop('body_audio')
+        errors=[]
+        for p in (0,1):
+            try:clients[p].host_input(0)
+            except Exception as error:errors.append(dict(peer=p,error=str(error)))
+            try:request(p,'fntrace_arm_clear')
+            except Exception as error:errors.append(dict(peer=p,trace_error=str(error)))
+        for log in logs:log.close()
+        case['cleanup_errors']=errors
+        if errors:
+            case['status']='failed_cleanup'
+            if failure is None:raise audio.AudioQualificationError('Paired body audio cleanup failed')
 
 
 def finalize(report, output, *, runtime_ready, owned_processes):

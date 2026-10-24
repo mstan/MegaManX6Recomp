@@ -285,4 +285,67 @@ class BeforeLaunchTests(unittest.TestCase):
                 self.assertTrue((root/"output/qualification.json").is_file())
 
 
+class BodyPairTests(unittest.TestCase):
+    def rows(self):
+        return [dict(observation=dict(players=[dict(x_raw=144<<16)],native_timer=100+i*80),
+            players=[dict(hp_raw=32,state=1),dict(hp=32-i*4,terrain=8,previous_terrain=8)],
+            p2_contact_counter=i,expected_damage=4,expected_reaction=1,
+            instance=dict(address='0x8008ef48',phase=1,hp=12,strength=4,subtype=1,contact_class=0))for i in range(9)]
+
+    def test_secondary_requires_eight_observed_losses_not_just_fatal_counter(self):
+        rows=self.rows();rows[-1]['instance']['phase']=3
+        changes,actor=adapter.contact_history(rows)
+        self.assertEqual(len(changes),8);self.assertEqual(actor,'0x8008ef48')
+        # Native acceptance can precede actual HP consumption by one sample.
+        pending=copy.deepcopy(rows[0]);pending['p2_contact_counter']=1;rows.insert(1,pending)
+        self.assertEqual(len(adapter.contact_history(rows)[0]),8)
+        for failure in ('missing_loss','counter','primary','hazard','actor','early_retirement'):
+            broken=self.rows()
+            if failure=='missing_loss':broken.pop(3)
+            if failure=='counter':broken[4]['p2_contact_counter']=5
+            if failure=='primary':broken[4]['players'][0]['hp_raw']=28
+            if failure=='hazard':broken[4]['players'][1]['terrain']=3
+            if failure=='actor':
+                for row in broken:row['instance']=None
+            if failure=='early_retirement':broken[4]['instance']['phase']=3
+            with self.subTest(failure=failure),self.assertRaises(adapter.audio.AudioQualificationError):adapter.contact_history(broken)
+
+    def test_body_cannot_bypass_two_image_profile_and_route_validation(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            fixture=Fixture(Path(temporary));fixture.report['checks']['host_profile_settled_before_guest']=False
+            with self.assertRaises(ValueError):
+                adapter.exercise_body(fixture.ctx,expected_sha=fixture.sha,source=fixture.source,
+                    original_exe=Path('unused'),original_disc=Path('unused'))
+            self.assertFalse(fixture.controls);self.assertFalse((Path(temporary)/'body-audio').exists())
+
+    def test_body_flag_requires_existing_source_manifest_profile_crc_gates(self):
+        parser=runner.make_parser();base=['--tools-root','.','--build','.','--disc','runtime.cue','--out','unused']
+        with patch('sys.stderr'),self.assertRaises(SystemExit):
+            runner.validate_options(parser,parser.parse_args(base+['--body-audio-smoke']))
+        options=base+['--body-audio-smoke','--jump-audio-smoke','--require-state-crc','--require-host-profile',
+            '--expected-host-profile','mmx6.win64-clang22.loopback','--expected-host-profile-revision','2',
+            '--expected-exe-sha256','a'*64,'--expected-manifest-sha256','b'*64,
+            '--original-exe','SLUS_013.95','--original-disc','original.bin']
+        runner.validate_options(parser,parser.parse_args(options))
+        for missing in ('--require-state-crc','--require-host-profile'):
+            with patch('sys.stderr'),self.assertRaises(SystemExit):
+                runner.validate_options(parser,parser.parse_args([x for x in options if x!=missing]))
+
+    def test_partial_stops_have_distinct_exit_and_cannot_hide_cleanup_failure(self):
+        for status,code in ((adapter.BODY_PARTIAL,2),('failed',1),('passed',0)):
+            parser=Mock();parser.parse_args.return_value=Mock(out=Path('unused'))
+            with patch.object(runner,'make_parser',return_value=parser),patch.object(runner,'validate_options'), \
+                 patch.object(runner,'run',return_value=dict(status=status,checks={})),patch('builtins.print'):
+                self.assertEqual(runner.main(),code)
+        for bad in (False,True):
+            report=dict(status=adapter.BODY_PARTIAL,default_intro_qualified=False,default_launch_qualified=False,
+                checks={},jump_audio_private_cards_before=[{},{}],
+                peers=[dict(shutdown='graceful_owned_debug',exit_code=0)for _ in (0,1)])
+            if bad:report['peers'][1]['exit_code']=1
+            with patch.object(adapter.ownership,'cards',return_value=[{},{}]):
+                adapter.finalize(report,Path('unused'),runtime_ready=True,owned_processes=2)
+            self.assertEqual(report['status'],'failed' if bad else adapter.BODY_PARTIAL)
+            self.assertFalse(report['default_intro_qualified'])
+
+
 if __name__ == "__main__": unittest.main()

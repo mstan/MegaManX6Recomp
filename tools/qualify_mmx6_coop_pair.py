@@ -727,7 +727,19 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             report["jump_audio_automated_status"]=case["status"]
             require(case["status"] in (audio_pair.SUCCESS,audio_pair.INCONCLUSIVE),
                     "Paired jump audio did not complete both independent comparisons: "+case["status"])
-            report["limits"].append("Ground-jump order only; no full R4/R12, PCM, audible, music or cross-host pass")
+            report["limits"].append("The ground-jump phase covers one order only; no full R4/R12, PCM, audible, music or cross-host pass")
+            if getattr(args,"body_audio_smoke",False):
+                report["checks"]["body_audio_resolved_crc_after_case"]=False
+                body_case=audio_pair.exercise_body(dict(clients=clients,both=both,report=report,output=output,
+                    network=network,native_advance=lambda frames,label:advance(frames)),
+                    expected_sha=args.expected_exe_sha256,source=audio_source,
+                    original_exe=args.original_exe,original_disc=args.original_disc)
+                report["body_audio_automated_status"]=body_case["status"]
+                require(body_case["status"] in (audio_pair.BODY_SUCCESS,audio_pair.BODY_PARTIAL),
+                    "Paired body audio did not complete both independent comparisons: "+body_case["status"])
+                matched("paired saber hurt death audio then settle")
+                report["checks"]["body_audio_resolved_crc_after_case"]=True
+                report["limits"].append("Paired body samples/contact death are separate bounded observations; pending inactive STOP7 never becomes a pass")
         if reentry_pair is not None:
             loader_logs=[(output/f"peer-{seat}/logs/stdout.log").read_text(errors="replace") for seat in range(2)]
             require(all("title netplay loading = resident assets" in text for text in loader_logs),
@@ -916,6 +928,8 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
         report["status"] = "passed" if all(report["checks"].values()) else "failed"
         if audio_pair is not None and report.get("jump_audio_automated_status")==audio_pair.INCONCLUSIVE:
             report["status"]=audio_pair.INCONCLUSIVE
+        if audio_pair is not None and report["status"]=="passed" and report.get("body_audio_automated_status")==audio_pair.BODY_PARTIAL:
+            report["status"]=audio_pair.BODY_PARTIAL
         report["default_intro_qualified"] = report["status"] == "passed" and not args.native_loader_diagnostic
     except Exception as error:
         report.update(error=str(error), traceback=traceback.format_exc())
@@ -1011,6 +1025,8 @@ def make_parser():
     parser.add_argument("--original-exe",type=Path,help="Original SLUS_013.95 source for --native-quit-scenario or --jump-audio-smoke")
     parser.add_argument("--jump-audio-smoke",action="store_true",
                         help="Separate same-machine paired ground-jump private-bank/sample/DSP/lifetime observation; strict original/image/manifest/profile/CRC proof required")
+    parser.add_argument("--body-audio-smoke",action="store_true",
+                        help="After paired ground jumps, independently check saber/hurt/death and eight ordinary contacts on both peers; requires --jump-audio-smoke")
     parser.add_argument("--audio-first-seat",type=int,choices=(0,1),
                         help="First jumping logical seat (default0), only with --jump-audio-smoke")
     parser.add_argument("--audio-max-attempts",type=int,
@@ -1036,6 +1052,8 @@ def make_parser():
 
 
 def validate_options(parser, args):
+    if getattr(args,"body_audio_smoke",False) and not args.jump_audio_smoke:
+        parser.error("Paired body audio requires the full --jump-audio-smoke source/profile/CRC gates")
     if sys.version_info < (3, 11):
         parser.error("Python 3.11+ is required by the shared staging tools")
     if not 0 < args.timeout <= 600:
@@ -1120,7 +1138,9 @@ def main():
     report = run(args)
     print(json.dumps(dict(status=report["status"], checks=report["checks"], error=report.get("error"),
                           report=str(args.out/"qualification.json"))), flush=True)
-    return 0 if report["status"] == "passed" else 1
+    if report["status"]=="passed":return 0
+    if report["status"]=="paired_body_audio_observations_partial_stops_unverified":return 2
+    return 1
 
 
 if __name__ == "__main__":
