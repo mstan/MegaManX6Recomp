@@ -4193,14 +4193,14 @@
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "failed",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
-          "netplay": "failed"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -4268,9 +4268,79 @@
               "Charge is genuine original held Square, with two visible native primary attached effects. No inventory/resource/scene fixture used. Current full F18 remains failed; R5 anchor pass is unaffected."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "1f50059cf85f1022ae0097340926887de7ed13ec",
+            "build_identity": {
+              "exe_sha256": "97b2281e2dabed61c40bdd319eaf6dc22623aa55371de6d2631845e3750b02e4",
+              "manifest_sha256": "9345a5ca54c490ef81f7549d199a54ef4b40c8d956bf8c2e2e0dae4c49224b49",
+              "compiled_source_commit": "1f50059cf85f1022ae0097340926887de7ed13ec",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "7021a3d"
+            },
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-hud/manifest-bound-1f50059-menu-restoration-reviewed.json",
+                "sha256": "6025e9472966caffdf509cc324bddb3771f3b96d986d15d9071242355d0e84f6"
+              }
+            ],
+            "settings": {
+              "layout": "stacked default",
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "audio": "emulated muted dummy",
+              "input": "ordinary native host inputs"
+            },
+            "action": "Hold native primary charge; retain every completed GPU frame through both original menu owners, actual Continue/final Quit pages and cancels. Inspect composed restored artwork and trigger native charged X projectile/Zero Saber after menus through natural retirement.",
+            "outcome": "Primary sprite-sheet restoration removes the reproduced tile corruption. Complete world-frame submissions retain both bodies, meters and charge; UI-only pages suppress gameplay draws. Composed local/both-peer bodies/scenery/palettes and subsequent native attacks are intact. Exact-image peers retain101 CRC samples/14 windows for continuity and30/4 for post-menu attacks; normal exits and unchanged cards.",
+            "limits": [
+              "Bounded X/P1+Zero/P2 Windows intro, default stacked layout, offline and exact-image same-machine numeric loopback delay3 peers. No opposite roster, campaign/content, physical device, other CPU/OS/build or rollback pass.",
+              "Command continuity proves submissions in each retained completed frame; composed captures separately establish sampled artwork. Asynchronous presentation and CPU observations are not claimed frame-identical. All sequences/ring counts are checked, with both sheets/HUDs/charge on world frames and suppression on UI-only pages.",
+              "All gameplay/menu/Quit/charge/attack triggers use ordinary native host inputs; no inventory/HP/ammo/scene/success fixtures, process writes or source cards. Local ordered native recordings are finalized; pair replay is not claimed.",
+              "Both actual Quit confirmation pages are reached and canceled. Final Quit/current-data/new-game and campaign/selection/progression checks remain under R15/F208. R6 selected/spent ammo ownership remains open.",
+              "Production103/103 and debug103/103 CTests pass on this native source; production native gameplay is separate. Prior66f7db0 rendered failures and initial observer error are preserved."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "1f50059cf85f1022ae0097340926887de7ed13ec",
+            "build_identity": {
+              "exe_sha256": "97b2281e2dabed61c40bdd319eaf6dc22623aa55371de6d2631845e3750b02e4",
+              "manifest_sha256": "9345a5ca54c490ef81f7549d199a54ef4b40c8d956bf8c2e2e0dae4c49224b49",
+              "compiled_source_commit": "1f50059cf85f1022ae0097340926887de7ed13ec",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "7021a3d"
+            },
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-hud/manifest-bound-1f50059-menu-restoration-reviewed.json",
+                "sha256": "6025e9472966caffdf509cc324bddb3771f3b96d986d15d9071242355d0e84f6"
+              }
+            ],
+            "settings": {
+              "layout": "stacked default",
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "audio": "emulated muted dummy",
+              "input": "ordinary native host inputs"
+            },
+            "action": "Hold native primary charge; retain every completed GPU frame through both original menu owners, actual Continue/final Quit pages and cancels. Inspect composed restored artwork and trigger native charged X projectile/Zero Saber after menus through natural retirement.",
+            "outcome": "Primary sprite-sheet restoration removes the reproduced tile corruption. Complete world-frame submissions retain both bodies, meters and charge; UI-only pages suppress gameplay draws. Composed local/both-peer bodies/scenery/palettes and subsequent native attacks are intact. Exact-image peers retain101 CRC samples/14 windows for continuity and30/4 for post-menu attacks; normal exits and unchanged cards.",
+            "limits": [
+              "Bounded X/P1+Zero/P2 Windows intro, default stacked layout, offline and exact-image same-machine numeric loopback delay3 peers. No opposite roster, campaign/content, physical device, other CPU/OS/build or rollback pass.",
+              "Command continuity proves submissions in each retained completed frame; composed captures separately establish sampled artwork. Asynchronous presentation and CPU observations are not claimed frame-identical. All sequences/ring counts are checked, with both sheets/HUDs/charge on world frames and suppression on UI-only pages.",
+              "All gameplay/menu/Quit/charge/attack triggers use ordinary native host inputs; no inventory/HP/ammo/scene/success fixtures, process writes or source cards. Local ordered native recordings are finalized; pair replay is not claimed.",
+              "Both actual Quit confirmation pages are reached and canceled. Final Quit/current-data/new-game and campaign/selection/progression checks remain under R15/F208. R6 selected/spent ammo ownership remains open.",
+              "Production103/103 and debug103/103 CTests pass on this native source; production native gameplay is separate. Prior66f7db0 rendered failures and initial observer error are preserved."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "66f7db0 fixes living-X omission but composed X sprite tiles corrupt after Zero-owned menu, reproduced locally with held native charge and on both exact-image peers. Completed-frame submission counts do not establish intact artwork. Native player-sheet restoration and frozen primary effect pools need repair/requalification under beads-eio.1.44."
+        "limitations": "1f50059 passes bounded native X/P1+Zero/P2 intro menu fade/restoration checks locally and on exact-image loopback peers, with complete held-charge world/UI command streams, actual Quit pages/cancels and intact subsequent native attacks. Earlier missing-X/tile failures remain in history. Other rosters/campaign, production gameplay, other hosts/physical devices, R6 ammo and R15/F208 continuation remain separate."
       }
     },
     {
@@ -4559,14 +4629,14 @@
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "failed",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
-          "netplay": "failed"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -4760,9 +4830,79 @@
               "Charge is genuine original held Square, with two visible native primary attached effects. No inventory/resource/scene fixture used. Current full F18 remains failed; R5 anchor pass is unaffected."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "1f50059cf85f1022ae0097340926887de7ed13ec",
+            "build_identity": {
+              "exe_sha256": "97b2281e2dabed61c40bdd319eaf6dc22623aa55371de6d2631845e3750b02e4",
+              "manifest_sha256": "9345a5ca54c490ef81f7549d199a54ef4b40c8d956bf8c2e2e0dae4c49224b49",
+              "compiled_source_commit": "1f50059cf85f1022ae0097340926887de7ed13ec",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "7021a3d"
+            },
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-hud/manifest-bound-1f50059-menu-restoration-reviewed.json",
+                "sha256": "6025e9472966caffdf509cc324bddb3771f3b96d986d15d9071242355d0e84f6"
+              }
+            ],
+            "settings": {
+              "layout": "stacked default",
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "audio": "emulated muted dummy",
+              "input": "ordinary native host inputs"
+            },
+            "action": "Hold native primary charge; retain every completed GPU frame through both original menu owners, actual Continue/final Quit pages and cancels. Inspect composed restored artwork and trigger native charged X projectile/Zero Saber after menus through natural retirement.",
+            "outcome": "Primary sprite-sheet restoration removes the reproduced tile corruption. Complete world-frame submissions retain both bodies, meters and charge; UI-only pages suppress gameplay draws. Composed local/both-peer bodies/scenery/palettes and subsequent native attacks are intact. Exact-image peers retain101 CRC samples/14 windows for continuity and30/4 for post-menu attacks; normal exits and unchanged cards.",
+            "limits": [
+              "Bounded X/P1+Zero/P2 Windows intro, default stacked layout, offline and exact-image same-machine numeric loopback delay3 peers. No opposite roster, campaign/content, physical device, other CPU/OS/build or rollback pass.",
+              "Command continuity proves submissions in each retained completed frame; composed captures separately establish sampled artwork. Asynchronous presentation and CPU observations are not claimed frame-identical. All sequences/ring counts are checked, with both sheets/HUDs/charge on world frames and suppression on UI-only pages.",
+              "All gameplay/menu/Quit/charge/attack triggers use ordinary native host inputs; no inventory/HP/ammo/scene/success fixtures, process writes or source cards. Local ordered native recordings are finalized; pair replay is not claimed.",
+              "Both actual Quit confirmation pages are reached and canceled. Final Quit/current-data/new-game and campaign/selection/progression checks remain under R15/F208. R6 selected/spent ammo ownership remains open.",
+              "Production103/103 and debug103/103 CTests pass on this native source; production native gameplay is separate. Prior66f7db0 rendered failures and initial observer error are preserved."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "1f50059cf85f1022ae0097340926887de7ed13ec",
+            "build_identity": {
+              "exe_sha256": "97b2281e2dabed61c40bdd319eaf6dc22623aa55371de6d2631845e3750b02e4",
+              "manifest_sha256": "9345a5ca54c490ef81f7549d199a54ef4b40c8d956bf8c2e2e0dae4c49224b49",
+              "compiled_source_commit": "1f50059cf85f1022ae0097340926887de7ed13ec",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "7021a3d"
+            },
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-hud/manifest-bound-1f50059-menu-restoration-reviewed.json",
+                "sha256": "6025e9472966caffdf509cc324bddb3771f3b96d986d15d9071242355d0e84f6"
+              }
+            ],
+            "settings": {
+              "layout": "stacked default",
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "audio": "emulated muted dummy",
+              "input": "ordinary native host inputs"
+            },
+            "action": "Hold native primary charge; retain every completed GPU frame through both original menu owners, actual Continue/final Quit pages and cancels. Inspect composed restored artwork and trigger native charged X projectile/Zero Saber after menus through natural retirement.",
+            "outcome": "Primary sprite-sheet restoration removes the reproduced tile corruption. Complete world-frame submissions retain both bodies, meters and charge; UI-only pages suppress gameplay draws. Composed local/both-peer bodies/scenery/palettes and subsequent native attacks are intact. Exact-image peers retain101 CRC samples/14 windows for continuity and30/4 for post-menu attacks; normal exits and unchanged cards.",
+            "limits": [
+              "Bounded X/P1+Zero/P2 Windows intro, default stacked layout, offline and exact-image same-machine numeric loopback delay3 peers. No opposite roster, campaign/content, physical device, other CPU/OS/build or rollback pass.",
+              "Command continuity proves submissions in each retained completed frame; composed captures separately establish sampled artwork. Asynchronous presentation and CPU observations are not claimed frame-identical. All sequences/ring counts are checked, with both sheets/HUDs/charge on world frames and suppression on UI-only pages.",
+              "All gameplay/menu/Quit/charge/attack triggers use ordinary native host inputs; no inventory/HP/ammo/scene/success fixtures, process writes or source cards. Local ordered native recordings are finalized; pair replay is not claimed.",
+              "Both actual Quit confirmation pages are reached and canceled. Final Quit/current-data/new-game and campaign/selection/progression checks remain under R15/F208. R6 selected/spent ammo ownership remains open.",
+              "Production103/103 and debug103/103 CTests pass on this native source; production native gameplay is separate. Prior66f7db0 rendered failures and initial observer error are preserved."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "66f7db0 fixes living-X omission but composed X sprite tiles corrupt after Zero-owned menu, reproduced locally with held native charge and on both exact-image peers. Completed-frame submission counts do not establish intact artwork. Native player-sheet restoration and frozen primary effect pools need repair/requalification under beads-eio.1.44."
+        "limitations": "1f50059 passes bounded native X/P1+Zero/P2 intro menu fade/restoration checks locally and on exact-image loopback peers, with complete held-charge world/UI command streams, actual Quit pages/cancels and intact subsequent native attacks. Earlier missing-X/tile failures remain in history. Other rosters/campaign, production gameplay, other hosts/physical devices, R6 ammo and R15/F208 continuation remain separate."
       }
     },
     {

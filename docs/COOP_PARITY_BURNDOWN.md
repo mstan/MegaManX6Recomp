@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 8 passed (R2, R4, R5, R7, R8, R12, R13, F33), 4 failed (R15, F10, F18, F208), 222 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 10 passed (R2, R4, R5, R7, R8, R12, R13, F10, F18, F33), 2 failed (R15, F208), 222 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -41,11 +41,12 @@ states; old-state migration is never required.
 
 ## Current qualification status, October 24
 
-All 234 reference rows are inventoried; 8/234 (3.4%) are passed. R15/F208
+All 234 reference rows are inventoried; 10/234 (4.3%) are passed. R15/F208
 retain prior native Quit callback failures with broader transition checks
 incomplete. F33's current-image state/resource and paired refusal checks pass.
-F10/F18 retain a newly observed post-menu sprite failure on 66f7db0, described
-below. Continuous submission coverage alone did not establish intact artwork.
+F10/F18 now pass on 1f50059 after restoring the original primary sprite sheet
+and frozen effects, with rendered local/paired requalification below. Their
+earlier 66f7db0 failures remain in history.
 Earlier audio failures remain in R4/R12 history, followed by
 current-image local and paired passes of their frozen bounded checks.
 
@@ -61,8 +62,8 @@ skips. Debug and production builds each retain 103 passing CTests.
 
 Reviewed local and both-peer opening/closing samples show the 66f7db0 fix
 retains living X in Zero-owned world draws. Original menu-only pages suppress
-gameplay bodies and meters. These samples do not establish every intervening
-frame or actual Quit-page suppression, so F18 remains open. R6 also remains
+gameplay bodies and meters. Those samples did not establish every intervening
+frame or actual Quit-page suppression. R6 remains
 open for selected/spent ammo HUD ownership in both layouts and modes. The
 earlier f339e12 failure receipt and all frozen X4/X5 fields remain unchanged.
 
@@ -81,8 +82,36 @@ run. Later images recover. F10 and F18 therefore fail in both modes; neither
 packet counts nor synchronization override this rendered failure. The initial
 local classifier's page0/page5 setup error is retained and independently
 corrected against its original packets. The receipt hashes 1,567 artifacts.
-Issue beads-eio.1.44 remains open for native player-sheet restoration, frozen
-primary effect rendering and exact-image requalification. R5 remains passed.
+That failure motivated native player-sheet restoration, frozen primary effect
+rendering and exact-image requalification under beads-eio.1.44. R5 remains passed.
+
+The [v24 menu restoration receipt](evidence/mmx6-hud/manifest-bound-1f50059-menu-restoration-reviewed.json)
+qualifies F10 and F18 locally and on exact-image loopback peers. Candidate
+1f50059 retains/restores X's original 64-word × 256-row VRAM sheet across
+borrowed native menu stages and renders the complete frozen primary personal
+effect pools during Zero-owned world drawing. Actual-plugin regressions verify
+the native GP0 transfer rectangle, six render dispatches and context restoration.
+Debug and production builds each pass all 103 CTests.
+
+The receipt retains 506 local and 948 paired completed GPU frames through
+both owners' menus, held native primary charge and actual Continue/final-Quit
+pages/cancels. Every retained world frame contains both character sheets,
+gameplay meters and native charge primitives; UI-only pages suppress them.
+The separated local post-Zero-menu VRAM sheet matches the original pre-menu
+sheet exactly. Composed local and both-peer captures show intact X/Zero,
+scenery, palettes and subsequent native charged X projectile/Zero Saber;
+both attacks are observed born and naturally retired. The pairs retain 101
+matching resolved core/mod samples across 14 continuity windows and another
+30 across four post-attack windows. All owned processes exit0 and preserve
+private cards. Local ordered native recordings are finalized.
+
+All 1,598 receipt artifacts are hashed, including immutable executed observer
+snapshots. An initial local observer missed original unflipped X/charge sprites;
+its raw report remains unchanged. The supplementary reducer recognizes actual
+native sprite/quad families and inherited texture pages, and all complete
+streams are re-evaluated. The seven focused reducer tests pass. These bounded
+X/P1+Zero/P2 intro checks do not qualify R6 ammo, R15/F208 continuation,
+campaign content, other rosters/hosts, physical devices or production gameplay.
 
 The [combined R4/R12 receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-R4-R12-reviewed.json)
 binds candidate22ea525 to 24 character/family/mode coverage cells, 45 actual
