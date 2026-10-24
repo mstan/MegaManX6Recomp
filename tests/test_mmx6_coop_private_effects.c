@@ -18,6 +18,8 @@ static uint32_t calls[512],drawn[128],tagged[256];
 static unsigned call_count,draw_count,tag_count;
 static int texture_support=1,marker_override=2,terminal_player,stage_driver;
 static int menu_probe;
+static unsigned menu_vram_probe,gp0_upload_stage,gp0_upload_left,gp0_upload_x,gp0_upload_y,gp0_upload_width,gp0_upload_at;
+static uint16_t original_menu_vram[1024*512];
 static uint16_t menu_input[3];
 static unsigned native_budget;
 static uint16_t pad_buttons=0xFFFF;
@@ -49,8 +51,16 @@ int psx_mod_widescreen_x_margin(void){return 0;}
 void psx_mod_counter_add(const char *name,uint32_t count){(void)name;(void)count;}
 int psx_mod_read_disc_file(const char *name,void *data,uint32_t size,uint32_t *out){(void)name;(void)data;(void)size;(void)out;CHECK(0);return 0;}
 const uint16_t *gpu_get_vram(void){return test_vram;}
-void gpu_write_gp0(uint32_t value){(void)value;CHECK(0);}
-void gpu_set_gp0_source(uint32_t address){(void)address;CHECK(0);}
+void gpu_write_gp0(uint32_t value){
+    CHECK(menu_vram_probe);
+    if(!gp0_upload_stage){CHECK(value==0xA0000000);gp0_upload_stage=1;return;}
+    if(gp0_upload_stage==1){gp0_upload_x=value&0xFFFF;gp0_upload_y=value>>16;gp0_upload_stage=2;return;}
+    if(gp0_upload_stage==2){gp0_upload_width=value&0xFFFF;gp0_upload_left=gp0_upload_width*(value>>16);gp0_upload_at=0;CHECK(gp0_upload_left && !(gp0_upload_left&1));gp0_upload_stage=3;return;}
+    for(unsigned i=0;i<2;++i){unsigned x=gp0_upload_x+gp0_upload_at%gp0_upload_width,y=gp0_upload_y+gp0_upload_at/gp0_upload_width;
+        CHECK(x<1024 && y<512 && gp0_upload_left);test_vram[y*1024+x]=(uint16_t)(value>>(i*16));++gp0_upload_at;--gp0_upload_left;}
+    if(!gp0_upload_left)gp0_upload_stage=0;
+}
+void gpu_set_gp0_source(uint32_t address){CHECK(menu_vram_probe && !address && !gp0_upload_stage);}
 int psx_mod_define_texture_bank(uint16_t id,uint32_t width,uint32_t height,const uint16_t *pixels){
     CHECK(id>=0x6000 && id<0x7000 && width==height && (width==16 || width==256));
     bank_first[id-0x6000]=pixels[0];return 1;
@@ -126,6 +136,7 @@ static void native_draw(uint32_t actor){
 }
 void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     (void)ret;CHECK(call_count<512 && state_track.count);calls[call_count++]=address;
+    if(menu_vram_probe && address==0x80066150u)return;
 #ifdef MMX6_TEST_DISPATCH_CALL
     if(MMX6_TEST_DISPATCH_CALL(cpu,address,ret))return;
 #endif
@@ -185,6 +196,7 @@ static void setup(CPUState *cpu){
     texture_support=1;marker_override=2;terminal_player=stage_driver=0;call_count=draw_count=tag_count=native_budget=0;
     pad_buttons=0xFFFF;
     menu_probe=0;memset(menu_input,0,sizeof menu_input);
+    menu_vram_probe=gp0_upload_stage=gp0_upload_left=0;
     assets=0x9F000000u;assembly=0x9F010000u;palette_source=0x9F020000u;active_palette=0x9F024000u;
     packets=0x9F100000u;diagnostic=0x9F080000u;menu_memory=0x9F200000u;menu_assembly=menu_memory+0x14000;
     static uint8_t compressed[64];zero_compressed=compressed;compressed_size=sizeof compressed;memset(compressed,0,sizeof compressed);
@@ -340,6 +352,40 @@ static void draw_order_retained_packets_and_survivor(void){
     setup(&cpu);psx_mod_write_word(SCRATCH+0x124,1001);render(&cpu,0);CHECK(!failed && !draw_count); /* Native budget exhaustion remains a no-output return. */
     setup(&cpu);psx_mod_write_word(SCRATCH+0x124,0x80000000u);render(&cpu,0);CHECK(failed && !draw_count); /* Negative budget would bypass native's signed comparison. */
 }
+static void borrowed_menu_retains_primary_pools(void){
+    CPUState cpu;setup(&cpu);PlayerContext primary;capture_player(&primary);
+    memset(primary.shots,0,sizeof primary.shots);memset(primary.trails,0,sizeof primary.trails);memset(primary.effects,0,sizeof primary.effects);
+    put32(primary.body+0x38,0x80040000);put32(primary.body+0x3C,0x80041000);primary.body[0x16]=4;primary.body[0x42]=0;primary.body[0x43]=0x78;primary.body[0x47]=0;
+    for(unsigned i=0;i<64;++i)psx_mod_write_byte(0x80040000+i,zero_compressed[i]);
+    for(unsigned i=0;i<2;++i){uint8_t *effect=primary.effects+i*0x50;effect[0]=0x21;effect[3]=effect[4]=1;effect[0x16]=4;
+        put32(effect+0x3C,0x80045000);effect[0x42]=2;effect[0x43]=0x78;}
+    primary.trails[0]=0x11;primary.trails[3]=primary.trails[4]=1;primary.trails[0x16]=4;
+    put32(primary.trails+0x38,0x80040000);put32(primary.trails+0x3C,0x80041000);primary.trails[0x42]=0;primary.trails[0x43]=0x78;
+    primary.shots[0]=2;primary.shots[3]=primary.shots[4]=1;primary.shots[0x16]=4;
+    put32(primary.shots+0x38,0x80040000);primary.shots[0x42]=0;primary.shots[0x43]=0x78;
+    project_player(&primary);enter_zero();inside=zero_world=1;pause_owner=1;world_packets=packets;
+    PlayerContext zero_before;capture_player(&zero_before);cpu.gpr[4]=PLAYER;
+    CHECK(render_survivor(&cpu,0x800232D4) && draw_count==6 && !failed);
+    const uint32_t expected[]={PLAYER,PLAYER,EFFECTS,EFFECTS+0x50,TRAILS,0x800950A0};
+    CHECK(!memcmp(drawn,expected,sizeof expected));PlayerContext after;capture_player(&after);
+    CHECK(!memcmp(&zero_before,&after,sizeof after) && !memcmp(&p1,&primary,sizeof primary));
+    CHECK(!render_x_death && !world_render && !state_track.count && !state_track.error);
+    zero_world=inside=0;leave_zero();
+}
+static void borrowed_menu_restores_primary_sprite_sheet(void){
+    CPUState cpu;setup(&cpu);menu_vram_probe=1;
+    for(unsigned i=0;i<1024*512;++i)test_vram[i]=original_menu_vram[i]=(uint16_t)(i*13u+7u);
+    for(unsigned i=0;i<MENU_BYTES;i+=2)psx_mod_write_half(menu_memory+i,(uint16_t)(i^0xA55A));
+    menu_vram(&cpu,1);CHECK(zero_menu_loaded && !gp0_upload_stage);
+    for(unsigned y=0;y<256;++y)for(unsigned x=320;x<384;++x){
+        CHECK(test_vram[y*1024+x]==original_menu_vram[y*1024+x]);test_vram[y*1024+x]=0x55AA;
+    }
+    /* Model the original borrowed Zero upload, without changing X's cached
+     * animation frame. Switching back must restore those exact native pixels. */
+    menu_vram(&cpu,0);CHECK(!zero_menu_loaded && !gp0_upload_stage);
+    CHECK(!memcmp(test_vram,original_menu_vram,sizeof test_vram));
+    CHECK(!state_track.count && !state_track.error);
+}
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
-    controller_pair_and_restoration();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();clear_banks();
+    controller_pair_and_restoration();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();clear_banks();
     puts("private native effects actual-plugin call order, gates, lifetime projection and retained packet ownership PASS");return 0;}

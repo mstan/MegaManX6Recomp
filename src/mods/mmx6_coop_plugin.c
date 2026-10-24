@@ -69,7 +69,8 @@ static size_t compressed_size;
 static uint32_t assets, assembly, palette_source, active_palette, packets, diagnostic;
 static uint32_t saved_resources[7], frame_count;
 static uint32_t menu_memory, menu_assembly;
-enum { MENU_PORTRAIT=0x10800, MENU_PORTRAIT_COLORS=0x12800, MENU_BYTES=0x12A00 };
+enum { MENU_PORTRAIT=0x10800, MENU_PORTRAIT_COLORS=0x12800, MENU_BYTES=0x12A00,
+       MENU_PLAYER_BACKUP=MENU_BYTES*2, MENU_STORAGE_BYTES=MENU_PLAYER_BACKUP+0x8000 };
 static uint8_t saved_portrait_colors[0x200];
 static int zero_menu_loaded;
 static uint8_t saved_palette_dirty;
@@ -1083,6 +1084,22 @@ static void menu_vram(CPUState *cpu, int zero) {
         for (unsigned p=0;p<width[i]*height[i]*2;p+=4)
             gpu_write_gp0(psx_mod_read_word(source+p));
     }
+    /* Zero's native menu stage also services its player upload queue. That
+     * queue targets the singleton player sheet at320,0 even though both
+     * bodies draw from retained banks during the borrowed world pass. X's
+     * frozen animation cache still considers its original sheet resident.
+     * Preserve it on entry and restore it before ordinary X rendering resumes;
+     * otherwise the first resumed X frame samples Zero's tile arrangement. */
+    if (zero) {
+        const uint16_t *vram=gpu_get_vram();
+        for (unsigned row=0;row<256;++row) for (unsigned col=0;col<64;++col)
+            psx_mod_write_half(menu_memory+MENU_PLAYER_BACKUP+2*(row*64+col),vram[row*1024+320+col]);
+    } else {
+        gpu_set_gp0_source(0);
+        gpu_write_gp0(0xA0000000);gpu_write_gp0(320);gpu_write_gp0(64|(256u<<16));
+        for (unsigned p=0;p<0x8000;p+=4)
+            gpu_write_gp0(psx_mod_read_word(menu_memory+MENU_PLAYER_BACKUP+p));
+    }
     zero_menu_loaded=zero;
     STATE_POP(restore_owner);
 }
@@ -1492,14 +1509,16 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
     unsigned frame=psx_mod_read_byte(actor+0x47);
     /* Native saber actors share the player's uploaded frame, with their own
      * assembly and palette (801ED4F4); they have no decompression pointer. */
-    if (!table && psx_mod_read_word(actor+0x3C)==le32(p2.body+0x3C) &&
-        psx_mod_read_half(actor+0x40)==(uint16_t)(p2.body[0x40]|p2.body[0x41]<<8)) {
-        table=zero_world?psx_mod_read_word(PLAYER+0x38):le32(p2.body+0x38);
-        frame=zero_world?psx_mod_read_byte(PLAYER+0x47):p2.body[0x47];
+    const uint8_t *retained_body=render_x_death?p1.body:p2.body;
+    if (!table && psx_mod_read_word(actor+0x3C)==le32(retained_body+0x3C) &&
+        psx_mod_read_half(actor+0x40)==(uint16_t)(retained_body[0x40]|retained_body[0x41]<<8)) {
+        table=zero_world&&!render_x_death?psx_mod_read_word(PLAYER+0x38):le32(retained_body+0x38);
+        frame=zero_world&&!render_x_death?psx_mod_read_byte(PLAYER+0x47):retained_body[0x47];
     }
     /* Common effects use the stage's already resident textures. Only native
      * Zero frames need the retained host bank instead of X's texture slot. */
     if (!render_x_death && (table<assets || table-assets>=compressed_size)) return;
+    if (render_x_death && (table<0x80010000u || table>=0x80200000u)) return;
     uint32_t expanded=arena+PLAYER_PACKET_BYTES+(base-arena)*2;
     for (uint32_t at=base;at<end;at+=40,expanded+=80,mode+=8) {
         uint32_t q[10];
@@ -1593,15 +1612,33 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
      * menu-only pages do not call this path. */
     if (actor==PLAYER && (life.status[0]==MMX6_COOP_DYING || scene_passenger(0) ||
         (pause_owner==1 && life.status[0]==MMX6_COOP_ALIVE)) && p1.body[3]) {
-        uint8_t zero_body[sizeof p2.body];
-        capture(PLAYER,zero_body,sizeof zero_body);
-        STATE_BYTES(restore_body,19,zero_body,sizeof zero_body);
-        project(PLAYER,p1.body,sizeof p1.body);
+        PlayerContext zero_player;
+        capture_player(&zero_player);
+        STATE_BYTES(restore_player,19,&zero_player,sizeof zero_player);
+        project_player(&p1);
         render_x_death=1;
         render_actor(cpu,PLAYER,arena);
+        if (pause_owner==1 && life.status[0]==MMX6_COOP_ALIVE) {
+            /* Original PLAYER world dispatch also owns X's frozen personal
+             * pools. Native menu-only pages never invoke this branch. Common
+             * charge art keeps its original stage texture; X-frame trails and
+             * shots use retained banks rather than Zero's singleton sheet. */
+            for (unsigned i=0;i<3 && !failed;++i) {
+                uint32_t effect=0x800911A8u+i*0x50;
+                if (psx_mod_read_byte(effect+3)) render_actor(cpu,effect,arena);
+            }
+            for (unsigned i=3;i && !failed;--i) {
+                uint32_t trail_actor=0x800972F8u+(i-1)*0x60;
+                if (psx_mod_read_byte(trail_actor+3)) render_actor(cpu,trail_actor,arena);
+            }
+            for (unsigned i=0;i<32 && !failed;++i) {
+                uint32_t shot_actor=0x800950A0u+i*0xA0;
+                if (psx_mod_read_byte(shot_actor+3)) render_actor(cpu,shot_actor,arena);
+            }
+        }
         render_x_death=0;
-        project(PLAYER,zero_body,sizeof zero_body);
-        STATE_POP(restore_body);
+        project_player(&zero_player);
+        STATE_POP(restore_player);
     }
     world_packets=psx_mod_read_word(SCRATCH+0x100);
     psx_mod_write_word(SCRATCH+0x100,original);
@@ -1947,7 +1984,7 @@ static void activate(void) {
     if (!diagnostic) diagnostic=psx_mod_alloc_guest_memory(0x2000,16);
     if (!packets) packets=psx_mod_alloc_texture_packet_memory(FRAME_ARENA*2,16);
     if (!hud_packets) hud_packets=psx_mod_alloc_texture_packet_memory(0x10000,16);
-    if (!menu_memory) menu_memory=psx_mod_alloc_gpu_dma_memory(MENU_BYTES*2,16);
+    if (!menu_memory) menu_memory=psx_mod_alloc_gpu_dma_memory(MENU_STORAGE_BYTES,16);
     int audio_allocated=jump_audio_activate();
     failed=!(assets && diagnostic && packets && hud_packets && menu_memory && audio_allocated);
     if (diagnostic) for (unsigned i=0;i<0x2000;i+=4) psx_mod_write_word(diagnostic+i,0);
