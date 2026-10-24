@@ -4536,14 +4536,14 @@
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -4626,9 +4626,49 @@
               "F12 failed9cbc attempt remains in ledger/evidence. LOCAL F12 and F6 passed on253c74e; their netplay and aggregate remain unverified. No Giga art/state pass from this ordinary run."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "253c74e5a9f33549dacdd0f675b16e76b46cc91a",
+            "build_identity": {
+              "executable_sha256": "472727e56a428b878306939bb25f0f594407c072ded853a2077746bc6e43701b",
+              "compiled_manifest_sha256": "fb7e85ea35bd2bbe31cef6429aac88cd8cac4fa22e286c3e5b26beb8ec1af746",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
+            },
+            "settings": {
+              "mode": "loopback",
+              "input_path": "published_host",
+              "input_delay": 3,
+              "roster": [
+                "X/P1",
+                "normal Zero/P2"
+              ],
+              "stage": 0,
+              "section": 0,
+              "private_profiles": true,
+              "audio": "dummy"
+            },
+            "action": "Actual P2 dash then P1 native menu; P2 Circle, Right and long Select during pause, resume, fresh Circle+Jump+Right and finite natural retirement. Same-image paired pre/post native artwork captured separately.",
+            "outcome": "Original unmodified timing helper and full parent pass on both peers; three exact private body/pool freeze windows, personal resources/P1 position retained, native dash-jump/drain/retirement, four resolved core/mod CRC windows (29 samples), both ordinary online recordings finalized/cards unchanged/exit0. Four source-bound art captures match native original palette and all actual used trail-bank pixels.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-hud/manifest-bound-253c74e-F12-paired-native-dash-pause-reviewed.json",
+                "sha256": "672067a2105246139cc74828a00556abf30caab3318a9a19241e60f4543de532"
+              }
+            ],
+            "limits": [
+              "Exact same compiled253c74e image/manifest, X/P1 and normalZero/P2 stage0/section0. LOCAL original pixels/menu/retirement plus actual loopback published-host paired timing and artwork components. No all-character/stage/attack coverage.",
+              "Pairedv3 full parent remains failed at its additional late transient capture; only independently reviewed four positive pre/post art captures are reused. Pairedv4 unmodified original timing helper passes all full-parent gates. Separate runs are disclosed, not relabelled as one run.",
+              "Artwork matches pinned original Zero DAT85 decoded pixels/native stage working palette on both peers. Composed frames reviewed, no whole-screen hardware/original phase equivalence.",
+              "Same-host loopback delay3 with four resolved full core/mod CRC windows; no cross-host, rollback or offline replay equivalence claim. Ordinary finalized online N/C recordings correctly refuse offline replay.",
+              "Fresh native-formatted private blank cards remain unchanged. Existing populated owner progress was neither imported nor exercised. All owned processes exited0.",
+              "Frozen F12 comparison is admitted for this bounded contract. Other ledger rows and the separate native-content inventory receive no pass from this evidence."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "LOCAL F12 passed253c74e native red palette+original decoded trail pixels before/after menu with finite expiry; failed9cbc attempt preserved. Netplay and aggregate unverified; normal Zero/stage0 only."
+        "limitations": "Passed LOCAL and paired same-image253c74e normalZero/stage0 F12 contract. Multi-run paired art and unmodified timing components explicitly bound; older failed parents retained. No rollback/cross-host/allart or native-content coverage."
       }
     },
     {
