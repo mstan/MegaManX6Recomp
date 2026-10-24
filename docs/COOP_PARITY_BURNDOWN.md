@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 8 passed (R2, R4, R5, R7, R8, R12, R13, F33), 3 failed (R15, F18, F208), 223 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 8 passed (R2, R4, R5, R7, R8, R12, R13, F33), 4 failed (R15, F10, F18, F208), 222 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -44,8 +44,8 @@ states; old-state migration is never required.
 All 234 reference rows are inventoried; 8/234 (3.4%) are passed. R15/F208
 retain prior native Quit callback failures with broader transition checks
 incomplete. F33's current-image state/resource and paired refusal checks pass.
-F18 retains its reproduced failure until the fixed image completes continuous
-transition and actual Quit-page qualification.
+F10/F18 retain a newly observed post-menu sprite failure on 66f7db0, described
+below. Continuous submission coverage alone did not establish intact artwork.
 Earlier audio failures remain in R4/R12 history, followed by
 current-image local and paired passes of their frozen bounded checks.
 
@@ -65,6 +65,24 @@ gameplay bodies and meters. These samples do not establish every intervening
 frame or actual Quit-page suppression, so F18 remains open. R6 also remains
 open for selected/spent ammo HUD ownership in both layouts and modes. The
 earlier f339e12 failure receipt and all frozen X4/X5 fields remain unchanged.
+
+The subsequent [continuous-frame and tile-failure receipt](evidence/mmx6-hud/manifest-bound-66f7db0-continuity-and-tile-failure-reviewed.json)
+retains 376 local and 943 paired completed GPU frames, including both menu
+owners and actual native Continue/final-Quit pages/cancels. Corrected
+character-sheet and HUD submission checks pass for the uncharged runs; all
+commands are retained without sequence gaps. The pair has 99 distinct matching
+resolved core/mod samples across 14 windows. Both peers exit normally with
+unchanged cards. An additional native held-Square charge run retains 148 frames
+and two visible primary attached effects, also with normal exit and cards.
+
+Composed review nevertheless finds scrambled rectangular X sprite tiles just
+after Zero's menu closes, independently on both peers and in the local charged
+run. Later images recover. F10 and F18 therefore fail in both modes; neither
+packet counts nor synchronization override this rendered failure. The initial
+local classifier's page0/page5 setup error is retained and independently
+corrected against its original packets. The receipt hashes 1,567 artifacts.
+Issue beads-eio.1.44 remains open for native player-sheet restoration, frozen
+primary effect rendering and exact-image requalification. R5 remains passed.
 
 The [combined R4/R12 receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-R4-R12-reviewed.json)
 binds candidate22ea525 to 24 character/family/mode coverage cells, 45 actual

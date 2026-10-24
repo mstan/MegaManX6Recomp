@@ -4193,17 +4193,84 @@
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "failed",
+          "netplay": "failed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+            "build_identity": {
+              "exe_sha256": "627cc3dcc6bf49186c83355a103e44cb1c01d395b32897c064b71ddce83075fd",
+              "manifest_sha256": "329355cb9942693df0748822cb483683132a5c970ae3e6f68825c959db1338ee",
+              "compiled_source_commit": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "cdd0c93"
+            },
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-hud\\manifest-bound-66f7db0-continuity-and-tile-failure-reviewed.json",
+                "sha256": "50f9a898fd8e3fd376c8fad1f63dfeeea46f6182ed331e2427e0fb37f325053d"
+              }
+            ],
+            "settings": {
+              "layout": "stacked",
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "audio": "emulated muted dummy"
+            },
+            "action": "Retain every completed GPU frame across both original menu owners, primary Continue/final-Quit pages/cancels, and native resumed gameplay; separately hold native primary Square charge.",
+            "outcome": "Both bodies and gameplay HUDs are submitted in the retained world frames and suppressed on UI-only pages, but actual composed X tiles are scrambled on returning from Zero-owned menu. Reproduced in the local held-charge run and independently on both peers. Later X imagery recovers. Full row fails.",
+            "limits": [
+              "GP0 emission continuity is not sprite-pixel correctness. Both character sheets in a frame cannot override the actual composed tile corruption.",
+              "376 local and943 paired completed frames (472/471) retain exact commands. Both peers have99 distinct resolved CRC samples across14 windows. No other-host/roster/physical-device pass.",
+              "Actual Continue and final Quit confirmation pages were reached and canceled through original input; no success flags, guest-memory writes or source cards.",
+              "Charge is genuine original held Square, with two visible native primary attached effects. No inventory/resource/scene fixture used. Current full F18 remains failed; R5 anchor pass is unaffected."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "failed",
+            "candidate": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+            "build_identity": {
+              "exe_sha256": "627cc3dcc6bf49186c83355a103e44cb1c01d395b32897c064b71ddce83075fd",
+              "manifest_sha256": "329355cb9942693df0748822cb483683132a5c970ae3e6f68825c959db1338ee",
+              "compiled_source_commit": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "cdd0c93"
+            },
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-hud\\manifest-bound-66f7db0-continuity-and-tile-failure-reviewed.json",
+                "sha256": "50f9a898fd8e3fd376c8fad1f63dfeeea46f6182ed331e2427e0fb37f325053d"
+              }
+            ],
+            "settings": {
+              "layout": "stacked",
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "audio": "emulated muted dummy"
+            },
+            "action": "Retain every completed GPU frame across both original menu owners, primary Continue/final-Quit pages/cancels, and native resumed gameplay; separately hold native primary Square charge.",
+            "outcome": "Both bodies and gameplay HUDs are submitted in the retained world frames and suppressed on UI-only pages, but actual composed X tiles are scrambled on returning from Zero-owned menu. Reproduced in the local held-charge run and independently on both peers. Later X imagery recovers. Full row fails.",
+            "limits": [
+              "GP0 emission continuity is not sprite-pixel correctness. Both character sheets in a frame cannot override the actual composed tile corruption.",
+              "376 local and943 paired completed frames (472/471) retain exact commands. Both peers have99 distinct resolved CRC samples across14 windows. No other-host/roster/physical-device pass.",
+              "Actual Continue and final Quit confirmation pages were reached and canceled through original input; no success flags, guest-memory writes or source cards.",
+              "Charge is genuine original held Square, with two visible native primary attached effects. No inventory/resource/scene fixture used. Current full F18 remains failed; R5 anchor pass is unaffected."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "66f7db0 fixes living-X omission but composed X sprite tiles corrupt after Zero-owned menu, reproduced locally with held native charge and on both exact-image peers. Completed-frame submission counts do not establish intact artwork. Native player-sheet restoration and frozen primary effect pools need repair/requalification under beads-eio.1.44."
       }
     },
     {
@@ -4499,7 +4566,7 @@
         ],
         "mode_status": {
           "local": "failed",
-          "netplay": "unverified"
+          "netplay": "failed"
         },
         "evidence": [
           {
@@ -4627,9 +4694,75 @@
               "Windows same-machine X/P1 and Zero/P2 intro only; physical devices, other hosts and production native gameplay remain separate."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+            "build_identity": {
+              "exe_sha256": "627cc3dcc6bf49186c83355a103e44cb1c01d395b32897c064b71ddce83075fd",
+              "manifest_sha256": "329355cb9942693df0748822cb483683132a5c970ae3e6f68825c959db1338ee",
+              "compiled_source_commit": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "cdd0c93"
+            },
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-hud\\manifest-bound-66f7db0-continuity-and-tile-failure-reviewed.json",
+                "sha256": "50f9a898fd8e3fd376c8fad1f63dfeeea46f6182ed331e2427e0fb37f325053d"
+              }
+            ],
+            "settings": {
+              "layout": "stacked",
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "audio": "emulated muted dummy"
+            },
+            "action": "Retain every completed GPU frame across both original menu owners, primary Continue/final-Quit pages/cancels, and native resumed gameplay; separately hold native primary Square charge.",
+            "outcome": "Both bodies and gameplay HUDs are submitted in the retained world frames and suppressed on UI-only pages, but actual composed X tiles are scrambled on returning from Zero-owned menu. Reproduced in the local held-charge run and independently on both peers. Later X imagery recovers. Full row fails.",
+            "limits": [
+              "GP0 emission continuity is not sprite-pixel correctness. Both character sheets in a frame cannot override the actual composed tile corruption.",
+              "376 local and943 paired completed frames (472/471) retain exact commands. Both peers have99 distinct resolved CRC samples across14 windows. No other-host/roster/physical-device pass.",
+              "Actual Continue and final Quit confirmation pages were reached and canceled through original input; no success flags, guest-memory writes or source cards.",
+              "Charge is genuine original held Square, with two visible native primary attached effects. No inventory/resource/scene fixture used. Current full F18 remains failed; R5 anchor pass is unaffected."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "failed",
+            "candidate": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+            "build_identity": {
+              "exe_sha256": "627cc3dcc6bf49186c83355a103e44cb1c01d395b32897c064b71ddce83075fd",
+              "manifest_sha256": "329355cb9942693df0748822cb483683132a5c970ae3e6f68825c959db1338ee",
+              "compiled_source_commit": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "cdd0c93"
+            },
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-hud\\manifest-bound-66f7db0-continuity-and-tile-failure-reviewed.json",
+                "sha256": "50f9a898fd8e3fd376c8fad1f63dfeeea46f6182ed331e2427e0fb37f325053d"
+              }
+            ],
+            "settings": {
+              "layout": "stacked",
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "audio": "emulated muted dummy"
+            },
+            "action": "Retain every completed GPU frame across both original menu owners, primary Continue/final-Quit pages/cancels, and native resumed gameplay; separately hold native primary Square charge.",
+            "outcome": "Both bodies and gameplay HUDs are submitted in the retained world frames and suppressed on UI-only pages, but actual composed X tiles are scrambled on returning from Zero-owned menu. Reproduced in the local held-charge run and independently on both peers. Later X imagery recovers. Full row fails.",
+            "limits": [
+              "GP0 emission continuity is not sprite-pixel correctness. Both character sheets in a frame cannot override the actual composed tile corruption.",
+              "376 local and943 paired completed frames (472/471) retain exact commands. Both peers have99 distinct resolved CRC samples across14 windows. No other-host/roster/physical-device pass.",
+              "Actual Continue and final Quit confirmation pages were reached and canceled through original input; no success flags, guest-memory writes or source cards.",
+              "Charge is genuine original held Square, with two visible native primary attached effects. No inventory/resource/scene fixture used. Current full F18 remains failed; R5 anchor pass is unaffected."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "66f7db0 fixes living-X omission in reviewed local/paired samples for both layouts. Historical f339e12 failure retained pending continuous transition packet coverage and native Quit-page suppression; issue beads-eio.1.44 remains open."
+        "limitations": "66f7db0 fixes living-X omission but composed X sprite tiles corrupt after Zero-owned menu, reproduced locally with held native charge and on both exact-image peers. Completed-frame submission counts do not establish intact artwork. Native player-sheet restoration and frozen primary effect pools need repair/requalification under beads-eio.1.44."
       }
     },
     {
