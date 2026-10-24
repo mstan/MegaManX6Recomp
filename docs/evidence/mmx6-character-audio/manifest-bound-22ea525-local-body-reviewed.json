@@ -1,0 +1,295 @@
+{
+  "schema": 1,
+  "kind": "manifest_bound_native_private_character_audio_review",
+  "mode": "local",
+  "result": "unverified",
+  "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+  "build_identity": {
+    "executable_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+    "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+    "sdk": "09e8673435c73e516b420e6c13bb11f02dc8aaea",
+    "title_compatibility": "mmx6-x-zero-delay-v18",
+    "harness_source": "de7351a93f79c5f4a06df54f17d3eb9c79ca258a"
+  },
+  "settings": {
+    "roster": "ordinary Falcon X/P1 and ordinary Zero/P2",
+    "mode": "offline two published digital host slots",
+    "stage": "original intro/record25 enemy",
+    "muted": "SDL_AUDIODRIVER=dummy",
+    "audio_emulation": "preserved"
+  },
+  "action": [
+    "Press original P2 Square, retain same-frame native body SOUND/KEYON and complete sample-byte probes.",
+    "Use original movement and one terrain jump to approach record25; accept eight ordinary strength4 contacts without writing HP, actors, audio or completion flags.",
+    "Trace original phase2 STOP5/7, retain independent hardware/private state and all voice owners, then quit the owned process gracefully."
+  ],
+  "outcome": {
+    "disposition": "27 source-matched events / 12 original records; 18 applicable checks pass; inactive STOP7 remains pending",
+    "checks": {
+      "private_voice_route": true,
+      "source_sample": true,
+      "pitch_adsr_numeric": true,
+      "original_end_marker_present": true,
+      "standing_saber_final_dsp_attribution": true,
+      "standing_saber_final_envelope_terminated": true,
+      "standing_saber_final_pitch_adsr_numeric": true,
+      "standing_saber_final_noise_off": true,
+      "observed_character_samples_source_matched": true,
+      "private_voice_leases_stable": true,
+      "original_zero_saber_sound_call": true,
+      "original_phase2_stop_calls": true,
+      "original_phase2_handler": true,
+      "private22_phase2_stop": true,
+      "p1_hardware22_23_not_stopped": true,
+      "p1_hardware22_registers_preserved": true,
+      "original_contact_actor_caller": true,
+      "immutable_private_banks_stable": true
+    },
+    "source_records": [
+      {
+        "group": 1,
+        "record": 7,
+        "event_voice": 47,
+        "sample_bank": 30,
+        "sample_sha256": "fed7bfff83b8e45b286ce7831981f2e8ce65a9e80ad3c0d63ec258c59630cf22",
+        "events": 1
+      },
+      {
+        "group": 3,
+        "record": 3,
+        "event_voice": 44,
+        "sample_bank": 31,
+        "sample_sha256": "5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63",
+        "events": 1
+      },
+      {
+        "group": 1,
+        "record": 5,
+        "event_voice": 46,
+        "sample_bank": 30,
+        "sample_sha256": "0b4522c6d034aa5dd0eb4d3a8e7878c1070701ece620003d7f910cb91522b5f7",
+        "events": 4
+      },
+      {
+        "group": 3,
+        "record": 7,
+        "event_voice": 44,
+        "sample_bank": 31,
+        "sample_sha256": "2d7263e69e5a6cb0f7a9a11eee2976efd683e22359d9083fcc77d411a4c4fe82",
+        "events": 1
+      },
+      {
+        "group": 1,
+        "record": 1,
+        "event_voice": 46,
+        "sample_bank": 30,
+        "sample_sha256": "003fb81cc12e8f6d70af3c2853de826f9974879a777c79a77bc60cfa1568a81e",
+        "events": 1
+      },
+      {
+        "group": 1,
+        "record": 2,
+        "event_voice": 46,
+        "sample_bank": 30,
+        "sample_sha256": "948ac829822ab47a4c0db7065047f1946ae30d67230c6732d81ff1f70e14a74d",
+        "events": 1
+      },
+      {
+        "group": 3,
+        "record": 0,
+        "event_voice": 44,
+        "sample_bank": 31,
+        "sample_sha256": "6038134b63be2771567d95c5cb6d00e4d83a4a3890723a49588b39be982721f6",
+        "events": 2
+      },
+      {
+        "group": 3,
+        "record": 17,
+        "event_voice": 27,
+        "sample_bank": 30,
+        "sample_sha256": "3849f73da2ec664732118255463da30fcd8438fc29ef37db4b0b18c1b8c51029",
+        "events": 7
+      },
+      {
+        "group": 3,
+        "record": 1,
+        "event_voice": 44,
+        "sample_bank": 31,
+        "sample_sha256": "9ad087f5829434990a3f9e1affee52b5274234525f454935bbe74295b5f2ffdd",
+        "events": 5
+      },
+      {
+        "group": 1,
+        "record": 6,
+        "event_voice": 46,
+        "sample_bank": 30,
+        "sample_sha256": "4d3e0623a7d836acc6eba9c2cc9a889b3dc32f11c7b1592c33018dd7d95c41b8",
+        "events": 2
+      },
+      {
+        "group": 3,
+        "record": 16,
+        "event_voice": 44,
+        "sample_bank": 31,
+        "sample_sha256": "322b69a7f0999a42269c5d80afb84a62dd628afef350746f7ac877fd24d06387",
+        "events": 1
+      },
+      {
+        "group": 3,
+        "record": 14,
+        "event_voice": 47,
+        "sample_bank": 31,
+        "sample_sha256": "bca9ec5b6b47b1247ec483f6b95cb8de3d94c58e03132255c63df5f434e4cfbc",
+        "events": 1
+      }
+    ],
+    "vocal_events": 18,
+    "hp_changes": [
+      {
+        "before": 32,
+        "after": 28,
+        "counter": 1,
+        "native_timer": 720
+      },
+      {
+        "before": 28,
+        "after": 24,
+        "counter": 2,
+        "native_timer": 801
+      },
+      {
+        "before": 24,
+        "after": 20,
+        "counter": 3,
+        "native_timer": 869
+      },
+      {
+        "before": 20,
+        "after": 16,
+        "counter": 4,
+        "native_timer": 943
+      },
+      {
+        "before": 16,
+        "after": 12,
+        "counter": 5,
+        "native_timer": 1037
+      },
+      {
+        "before": 12,
+        "after": 8,
+        "counter": 6,
+        "native_timer": 1100
+      },
+      {
+        "before": 8,
+        "after": 4,
+        "counter": 7,
+        "native_timer": 1174
+      },
+      {
+        "before": 4,
+        "after": 0,
+        "counter": 8,
+        "native_timer": 1256
+      }
+    ],
+    "natural_saber_lifetime": {
+      "disposition": "natural_end",
+      "terminal": {
+        "seq": 210,
+        "frame": 2692,
+        "kind": "END_STOP",
+        "v": 47,
+        "addr": 33760,
+        "pitch": 1525,
+        "adsr_lo": 33023,
+        "adsr_hi": 8128,
+        "vol_l": 13433,
+        "vol_r": 13433,
+        "sample_bank": 30
+      },
+      "engine_frames": 27
+    },
+    "voice_owner": "0x4D4D583650320001",
+    "voice_mask": "0x00F00B09",
+    "trace_entries": 1710,
+    "pending": [
+      "Inactive STOP7 volume transition was not sampled before source-matched death record3/14 reused private23"
+    ],
+    "quit": {
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    },
+    "existing_private_cards_unchanged": true,
+    "finalized_native_capture": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-local-general-retirement-aware\\candidate\\saves\\input-recordings\\session-1792800764571887-1-0\\inputs.jsonl",
+      "sha256": "8ee6a428bacdc692ac2a66c475ec3eac645613b7350fab9973b0be6fc63bed2e",
+      "events": 11171,
+      "natives": 6804,
+      "p2_reads": 4367,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+        "manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+        "mode": "offline",
+        "profile": null,
+        "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+        "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      "requested_saber_seats": [
+        1
+      ],
+      "consumed_square_seen_anywhere": [
+        1
+      ],
+      "scope": "Ordered native N/P2 C consumption; no temporal saber association or audio/output equivalence"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-local-general-retirement-aware\\qualification.json",
+      "sha256": "d99ff9d5e74f92657136ffbc4284b5d06ff624eb4eececb5089f2b49b6c57b73"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-local-general-retirement-aware\\source-body-routes.json",
+      "sha256": "20c2a58125bfe96a323e483ee88291f2a8fcca38635c573c14dbdb7cf206d278"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-local-general-retirement-aware\\mmx6_coop_body_audio-executed-source.py",
+      "sha256": "c1aebcedce0a25515e5df1f3ac3a6f9c0b833d806a5d0d46fff83122defbe2f0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-local-general-retirement-aware\\candidate\\jump-audio\\control.jsonl",
+      "sha256": "51f728dca6c76b73167e369f36a8b7f24e8919f942630a1f771bd8f42a652660"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-local-general-retirement-aware\\candidate\\jump-audio\\stderr.log",
+      "sha256": "0c0466f2d577e03c2a9fe71575837f88ddb5924d12d0af6b1ac219c4074bf709"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\body-audio-v20-22ea525-local-general-retirement-aware\\candidate\\jump-audio\\stdout.log",
+      "sha256": "1147b1043b0c535df8879249a9257df9486fd493e06d9ce434dabbe8e1a8a4dc"
+    }
+  ],
+  "limits": [
+    "This exact local candidate corrects the observed saber3/3 sample: source Zero SHA 5e29598f0027ee1cf8634570f276c9b8d5e8a4efd1ac24dbda1a5097deb3fb63 on private44/bank31; no hardware20 KEYON after saber.",
+    "The inactive STOP7 volume transition was not sampled before source-matched death3/14 reused private23; this is pending, not a stop pass or an engine failure.",
+    "Active STOP7, remaining 33 records, co-op-off X/Zero reference runs and paired general audio remain unverified.",
+    "P1 was idle; no actual overlapping P1 attack/hurt vocal lifetime follows from preserved hardware registers.",
+    "No PCM/music continuity, original-console DSP equivalence, physical controls, cross-machine, state/rewind or full campaign qualification."
+  ],
+  "bypasses": []
+}

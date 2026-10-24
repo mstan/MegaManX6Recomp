@@ -43,8 +43,16 @@ states; old-state migration is never required.
 
 All 234 reference rows are inventoried; 4/234 (1.7%) are passed. The four
 failed rows preserve observed prior-image P2 audio ownership and stale co-op
-callbacks after native Quit -> New Game. The new image passes bounded native
-corrections; broader row requirements remain incomplete.
+callbacks after native Quit -> New Game. Retained native corrections belong to
+their exact candidate images; broader row requirements remain incomplete.
+
+Ordinary Zero audio candidate 22ea525 now has a
+[local native receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-local-body-reviewed.json)
+for 27 source-matched events across 12 original records, including corrected
+saber3/3, hurt/death and effective-bank aliases. Its 18 applicable checks pass;
+inactive STOP7 is explicitly pending after a later death sound reuses that
+voice. Active STOP7, co-op-off references and fresh paired general audio remain
+unverified. This adds bounded evidence without changing the 234 dispositions.
 
 The latest frozen candidate is v19, title source a1dac26, SDK bfbfb920,
 title compatibility mmx6-x-zero-delay-v17. Its debug and production suites

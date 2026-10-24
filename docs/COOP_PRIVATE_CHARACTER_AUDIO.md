@@ -1,9 +1,20 @@
 # Private ordinary Zero character audio candidate
 
 The v18 title candidate extends the default fixed X/P1 + ordinary Zero/P2
-audio correction to source-derived character records. Fresh native local and
-same-machine paired qualification is required. R4/R12 remain incomplete;
+audio correction to source-derived character records. Full local and
+same-machine paired qualification is still required. R4/R12 remain incomplete;
 opposite rosters and unproved child-actor calls remain outside this boundary.
+
+The [exact-image local receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-local-body-reviewed.json)
+now matches 27 native audio events across 12 original records, including the
+previously wrong saber3/3 vocal, hurt/death sounds and group3/17's effects-bank
+alias. All 18 applicable checks pass with nine stable voice leases, eight
+ordinary contacts, preserved primary hardware registers and natural Quit exit0.
+The inactive STOP7 volume transition was obscured by source-matched death3/14
+reusing private23; it remains pending. Active STOP7, the other 33 records,
+co-op-off character references, actual P1 vocal overlap and paired general
+audio remain unverified. The underlying native candidate is 22ea525; later
+commits changed the observer and retained evidence, not that game image.
 
 The original USA1.1 data contains 45 populated records and 47 voice entries
 across groups1/3. The resolver retains effective bank aliases, populated-program
