@@ -1,0 +1,1130 @@
+{
+  "schema": 1,
+  "kind": "reviewed_native_Giga_deferred_callback_recovery_and_current_build_state_with_remaining_artwork_failure",
+  "reviewed_at_utc": "2026-10-24T18:39:04.318903+00:00",
+  "issue": "beads-eio.1.45",
+  "compiled_source": "6e8570032e3327cc837a7b709fc7f4c8a5e61f6c",
+  "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+  "internal_wire": 5,
+  "semantic_core_bytes": 9550,
+  "phases": [
+    {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\qualification.json",
+        "sha256": "e4e632834db671affbce9196e1867080d95d1433e61d47355373f7b7dc51b2ea",
+        "bytes": 4526824
+      },
+      "checks": {
+        "original_shared_palette_masks_restored": true,
+        "private_mutable_backup_retained": true,
+        "immutable_overlay_tail_stays_pristine": true,
+        "native_Giga_retired": true,
+        "world_bodies_and_huds_return": true,
+        "composed_output_is_not_black": true
+      },
+      "case_checks": {
+        "native_actions_observed": true,
+        "completed_presentation_and_gpu_samples": true,
+        "original_shared_palette_masks_restored": true,
+        "private_mutable_backup_retained": true,
+        "immutable_overlay_tail_stays_pristine": true,
+        "native_Giga_retired": true,
+        "world_bodies_and_huds_return": true,
+        "composed_output_is_not_black": true
+      },
+      "snapshots": [
+        {
+          "label": "fresh-no-inventory",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\fresh-no-inventory.png",
+            "sha256": "b887dfe954dc5c6c1b6dfc967cc458a8f9e3301a7b20b7fe59c101c4b1df09a6",
+            "bytes": 2074543
+          },
+          "zero_action": 2,
+          "owned_Zero_effects": 0,
+          "gpu_commands": 698,
+          "gpu_counts": {
+            "x_sheet": 7,
+            "zero_sheet": 16,
+            "private_hud": 14,
+            "native_hud": 1
+          }
+        },
+        {
+          "label": "earned-prerequisite-no-use",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\earned-prerequisite-no-use.png",
+            "sha256": "ef8ff95bf60337a625d6411e33d54ef4e3175c2ae20e929270dfd5b29b244554",
+            "bytes": 2074543
+          },
+          "zero_action": 2,
+          "owned_Zero_effects": 0,
+          "gpu_commands": 696,
+          "gpu_counts": {
+            "x_sheet": 7,
+            "zero_sheet": 16,
+            "private_hud": 14,
+            "native_hud": 1
+          }
+        },
+        {
+          "label": "immediate-after-Zero-Giga",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\immediate-after-Zero-Giga.png",
+            "sha256": "7c18832065bea50789fb5a7885f2c270f949e3f9f79511b9fef7f1bb1b278644",
+            "bytes": 2074543
+          },
+          "zero_action": 59,
+          "owned_Zero_effects": 0,
+          "gpu_commands": 744,
+          "gpu_counts": {
+            "x_sheet": 7,
+            "zero_sheet": 22,
+            "private_hud": 38,
+            "native_hud": 1
+          }
+        },
+        {
+          "label": "step-0-additional-15-ticks",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\step-0-additional-15-ticks.png",
+            "sha256": "41d7c6a2e0a7dad8e782f9a257226e5d0eb43eb94e62f1f42ce97c944a9e1a57",
+            "bytes": 2074543
+          },
+          "zero_action": 59,
+          "owned_Zero_effects": 13,
+          "gpu_commands": 1784,
+          "gpu_counts": {
+            "x_sheet": 7,
+            "zero_sheet": 22,
+            "private_hud": 38,
+            "native_hud": 1
+          }
+        },
+        {
+          "label": "step-1-additional-15-ticks",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\step-1-additional-15-ticks.png",
+            "sha256": "217f6a01efe82c71277525640b70fccb48a699ecf574efba8b8e3edfbd99d750",
+            "bytes": 2074543
+          },
+          "zero_action": 59,
+          "owned_Zero_effects": 17,
+          "gpu_commands": 1944,
+          "gpu_counts": {
+            "x_sheet": 7,
+            "zero_sheet": 22,
+            "private_hud": 38,
+            "native_hud": 1
+          }
+        },
+        {
+          "label": "step-2-additional-15-ticks",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\step-2-additional-15-ticks.png",
+            "sha256": "6e7f7df8ccd07662e2250f3f4e43909b7e64061ebc3cde5dcaa6302d47a85920",
+            "bytes": 2074543
+          },
+          "zero_action": 59,
+          "owned_Zero_effects": 21,
+          "gpu_commands": 2200,
+          "gpu_counts": {
+            "x_sheet": 7,
+            "zero_sheet": 22,
+            "private_hud": 38,
+            "native_hud": 1
+          }
+        },
+        {
+          "label": "step-3-additional-15-ticks",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\step-3-additional-15-ticks.png",
+            "sha256": "43a76d1d77f2934e26602e9345fbed1c6879624b433cf4b2a1621b24034ebc12",
+            "bytes": 2074543
+          },
+          "zero_action": 59,
+          "owned_Zero_effects": 20,
+          "gpu_commands": 2083,
+          "gpu_counts": {
+            "x_sheet": 7,
+            "zero_sheet": 20,
+            "private_hud": 38,
+            "native_hud": 1
+          }
+        },
+        {
+          "label": "step-4-additional-60-ticks",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\step-4-additional-60-ticks.png",
+            "sha256": "62782b1285f44b640bca73562d119f4eb102ec7d0976fb0f4a310060d14a91f7",
+            "bytes": 2074543
+          },
+          "zero_action": 2,
+          "owned_Zero_effects": 0,
+          "gpu_commands": 700,
+          "gpu_counts": {
+            "x_sheet": 7,
+            "zero_sheet": 16,
+            "private_hud": 14,
+            "native_hud": 1
+          }
+        },
+        {
+          "label": "step-5-additional-300-ticks",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\step-5-additional-300-ticks.png",
+            "sha256": "51ff837c5d510ba0a38df29bcdfa665eb526b0f16a83ac8aa667615e187884dd",
+            "bytes": 2074543
+          },
+          "zero_action": 2,
+          "owned_Zero_effects": 0,
+          "gpu_commands": 696,
+          "gpu_counts": {
+            "x_sheet": 6,
+            "zero_sheet": 16,
+            "private_hud": 14,
+            "native_hud": 1
+          }
+        }
+      ]
+    },
+    {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\qualification.json",
+        "sha256": "137af42846716614960860c0042fdbe6f40a38108fff480c117e0bbe3fcce4d0",
+        "bytes": 16519652
+      },
+      "checks": {
+        "exact_current_build_key": true,
+        "same_provider_set": true,
+        "same_resource_and_original_asset_binding": true,
+        "full_private_context_and_host_input_history": true,
+        "explicit_native_and_host_input_history": true,
+        "saved_native_world_clock": true,
+        "saved_native_mode_phase": true,
+        "saved_native_menu_state": true,
+        "full_retained_bank_payloads": true,
+        "saved_sprite_bank_count": true,
+        "saved_ui_bank_count": true,
+        "persistent_private_audio_priorities": true,
+        "private_spu_owner_tags": true,
+        "private_spu_modes": true,
+        "private_spu_registers_hex": true,
+        "private_spu_bank_bindings": true,
+        "exact_64_byte_Giga_backup": true,
+        "exact_96_shared_effect_owners": true
+      },
+      "case_checks": {
+        "active_current_build_restore_exact": true,
+        "native_Giga_and_shared_effects_retire_after_restore": true,
+        "post_Giga_native_attacks_and_independent_movement": true,
+        "post_Giga_world_bodies_and_HUD_return": true
+      },
+      "snapshots": [
+        {
+          "label": "warm-fresh-no-inventory",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-fresh-no-inventory.png",
+            "sha256": "b887dfe954dc5c6c1b6dfc967cc458a8f9e3301a7b20b7fe59c101c4b1df09a6",
+            "bytes": 2074543
+          },
+          "zero_action": 2,
+          "owned_Zero_effects": 0,
+          "gpu_commands": 696,
+          "gpu_counts": {
+            "x_sheet": 7,
+            "zero_sheet": 16,
+            "private_hud": 14,
+            "native_hud": 1
+          }
+        },
+        {
+          "label": "warm-paused-active-Giga",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-paused-active-Giga.png",
+            "sha256": "aa92d1f3e622f02b0707aad167e1229f048c311cab769d653f1860d7b9a4a424",
+            "bytes": 2074543
+          },
+          "zero_action": 59,
+          "owned_Zero_effects": 10,
+          "gpu_commands": 1096,
+          "gpu_counts": {
+            "x_sheet": 0,
+            "zero_sheet": 0,
+            "private_hud": 0,
+            "native_hud": 0
+          }
+        },
+        {
+          "label": "warm-naturally-retired-before-load",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-naturally-retired-before-load.png",
+            "sha256": "5f9bfd7bf02b7e11a5c7213230b897f240b5559ca9adf625315386bf19f09668",
+            "bytes": 2074543
+          },
+          "zero_action": 2,
+          "owned_Zero_effects": 0,
+          "gpu_commands": 698,
+          "gpu_counts": {
+            "x_sheet": 7,
+            "zero_sheet": 16,
+            "private_hud": 14,
+            "native_hud": 1
+          }
+        },
+        {
+          "label": "warm-restored-active-Giga",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-restored-active-Giga.png",
+            "sha256": "c9575f21d379dc7848cdb05480155d2299c744067d82a406de9ca985869de131",
+            "bytes": 2074543
+          },
+          "zero_action": 59,
+          "owned_Zero_effects": 10,
+          "gpu_commands": 1096,
+          "gpu_counts": {
+            "x_sheet": 0,
+            "zero_sheet": 0,
+            "private_hud": 0,
+            "native_hud": 0
+          }
+        },
+        {
+          "label": "warm-restored-Giga-retired",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-restored-Giga-retired.png",
+            "sha256": "ef8ff95bf60337a625d6411e33d54ef4e3175c2ae20e929270dfd5b29b244554",
+            "bytes": 2074543
+          },
+          "zero_action": 2,
+          "owned_Zero_effects": 0,
+          "gpu_commands": 698,
+          "gpu_counts": {
+            "x_sheet": 7,
+            "zero_sheet": 16,
+            "private_hud": 14,
+            "native_hud": 1
+          }
+        },
+        {
+          "label": "warm-post-Giga-X-shot",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-post-Giga-X-shot.png",
+            "sha256": "15e95ad7090e97749ba0e8144dfc680602086f5c4d35d6d115bb2b43604fde67",
+            "bytes": 2074543
+          },
+          "zero_action": 2,
+          "owned_Zero_effects": 0,
+          "gpu_commands": 702,
+          "gpu_counts": {
+            "x_sheet": 7,
+            "zero_sheet": 16,
+            "private_hud": 14,
+            "native_hud": 1
+          }
+        },
+        {
+          "label": "warm-post-Giga-Zero-saber",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-post-Giga-Zero-saber.png",
+            "sha256": "7c9490173fd2e9bdef76d8f207b2e84b38201b55266e3e90ea4c9bcea225d608",
+            "bytes": 2074543
+          },
+          "zero_action": 62,
+          "owned_Zero_effects": 0,
+          "gpu_commands": 708,
+          "gpu_counts": {
+            "x_sheet": 6,
+            "zero_sheet": 20,
+            "private_hud": 14,
+            "native_hud": 1
+          }
+        },
+        {
+          "label": "warm-post-Giga-independent-controls",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-post-Giga-independent-controls.png",
+            "sha256": "79f74c361427c27f66d5ff21392d39ea972c4a50ad753daec341802e0ed168a8",
+            "bytes": 2074543
+          },
+          "zero_action": 5,
+          "owned_Zero_effects": 0,
+          "gpu_commands": 696,
+          "gpu_counts": {
+            "x_sheet": 7,
+            "zero_sheet": 16,
+            "private_hud": 14,
+            "native_hud": 1
+          }
+        }
+      ]
+    },
+    {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\qualification.json",
+        "sha256": "144935e83591c3bc4b8646af22e2a8a624c6ddb3514819b9dbb450343014bd3d",
+        "bytes": 10088071
+      },
+      "checks": {
+        "exact_current_build_key": true,
+        "same_provider_set": true,
+        "same_resource_and_original_asset_binding": true,
+        "full_private_context_and_host_input_history": true,
+        "explicit_native_and_host_input_history": true,
+        "saved_native_world_clock": true,
+        "saved_native_mode_phase": true,
+        "saved_native_menu_state": true,
+        "full_retained_bank_payloads": true,
+        "saved_sprite_bank_count": true,
+        "saved_ui_bank_count": true,
+        "persistent_private_audio_priorities": true,
+        "private_spu_owner_tags": true,
+        "private_spu_modes": true,
+        "private_spu_registers_hex": true,
+        "private_spu_bank_bindings": true,
+        "exact_64_byte_Giga_backup": true,
+        "exact_96_shared_effect_owners": true
+      },
+      "case_checks": {
+        "active_current_build_restore_exact": true,
+        "native_Giga_and_shared_effects_retire_after_restore": true,
+        "post_Giga_native_attacks_and_independent_movement": true,
+        "post_Giga_world_bodies_and_HUD_return": true
+      },
+      "snapshots": [
+        {
+          "label": "cold-fresh-no-inventory",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-fresh-no-inventory.png",
+            "sha256": "b887dfe954dc5c6c1b6dfc967cc458a8f9e3301a7b20b7fe59c101c4b1df09a6",
+            "bytes": 2074543
+          },
+          "zero_action": 2,
+          "owned_Zero_effects": 0,
+          "gpu_commands": 698,
+          "gpu_counts": {
+            "x_sheet": 7,
+            "zero_sheet": 16,
+            "private_hud": 14,
+            "native_hud": 1
+          }
+        },
+        {
+          "label": "cold-restored-active-Giga",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-restored-active-Giga.png",
+            "sha256": "c9575f21d379dc7848cdb05480155d2299c744067d82a406de9ca985869de131",
+            "bytes": 2074543
+          },
+          "zero_action": 59,
+          "owned_Zero_effects": 10,
+          "gpu_commands": 1096,
+          "gpu_counts": {
+            "x_sheet": 0,
+            "zero_sheet": 0,
+            "private_hud": 0,
+            "native_hud": 0
+          }
+        },
+        {
+          "label": "cold-restored-Giga-retired",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-restored-Giga-retired.png",
+            "sha256": "ef8ff95bf60337a625d6411e33d54ef4e3175c2ae20e929270dfd5b29b244554",
+            "bytes": 2074543
+          },
+          "zero_action": 2,
+          "owned_Zero_effects": 0,
+          "gpu_commands": 698,
+          "gpu_counts": {
+            "x_sheet": 7,
+            "zero_sheet": 16,
+            "private_hud": 14,
+            "native_hud": 1
+          }
+        },
+        {
+          "label": "cold-post-Giga-X-shot",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-post-Giga-X-shot.png",
+            "sha256": "b59c84bb930c82b78b8177d29390d0669609938c24929cb31e9e3e22ace2d6b4",
+            "bytes": 2074543
+          },
+          "zero_action": 2,
+          "owned_Zero_effects": 0,
+          "gpu_commands": 704,
+          "gpu_counts": {
+            "x_sheet": 8,
+            "zero_sheet": 16,
+            "private_hud": 14,
+            "native_hud": 1
+          }
+        },
+        {
+          "label": "cold-post-Giga-Zero-saber",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-post-Giga-Zero-saber.png",
+            "sha256": "953a864e7506721fcd086884fc6e073110e98a444fd5b697924f828dac24b623",
+            "bytes": 2074543
+          },
+          "zero_action": 62,
+          "owned_Zero_effects": 0,
+          "gpu_commands": 710,
+          "gpu_counts": {
+            "x_sheet": 7,
+            "zero_sheet": 20,
+            "private_hud": 14,
+            "native_hud": 1
+          }
+        },
+        {
+          "label": "cold-post-Giga-independent-controls",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-post-Giga-independent-controls.png",
+            "sha256": "c9b2bc6151b99da4882f1b9e8b8aefb945617640a4cafd411b04d87447f1de86",
+            "bytes": 2074543
+          },
+          "zero_action": 5,
+          "owned_Zero_effects": 0,
+          "gpu_commands": 696,
+          "gpu_counts": {
+            "x_sheet": 7,
+            "zero_sheet": 16,
+            "private_hud": 14,
+            "native_hud": 1
+          }
+        }
+      ]
+    }
+  ],
+  "observer_failure": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-warm\\qualification.json",
+    "sha256": "850bc29aa1240631812f4e6c267a9b4f72c2d38ea418176946c39b26fde66246",
+    "bytes": 22409979
+  },
+  "finding": "Correct owner context initializes and naturally retires shared native type17/type26 actors; native iterator reaches pool end, original64B palette masks restore, and composed world/both bodies/HUD return. Warm and fresh-process cold active Giga saves retain action59, nonzero64B backup and10+ Zero-owned shared actors;18 exact provider checks pass after actual completed load, then Giga retires, original X Square/Zero Triangle attacks and independent Right movement work. Active attack artwork still FAILED: native type17 uses Zero menu assembly but samples resident X atlas at page3E/CLUT7E50, displaying blue stage scaffolding. Issue remains open.",
+  "limits": [
+    "Same-image Windows local fixed X/P1+Zero/P2 USA1.1 intro only; no full Giga correctness, netplay, rollback, rewind, release or ledger pass.",
+    "Earned inventory prerequisite bypass only; native R2 spends72 from288 to216, no HP/ammo/clear/outcome writes. Fixture-tainted native recording correctly refused as ordinary capture and replay; cards unchanged and exits0.",
+    "GPU dumps are selected completed frames, count/sequence/source reducers rechecked. Composed review establishes remaining artwork failure, not original-emulator equivalence.",
+    "Initial warm driver wrongly inspected private Zero shots for X Square and timed out after all18 warm comparisons and retirement; retained verbatim, corrected retry reads actual native X pool800950A0.",
+    "All debug and production103 CTests passed for the frozen candidate. Old v25 failure receipts remain unchanged."
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\fresh-no-inventory.png",
+      "sha256": "b887dfe954dc5c6c1b6dfc967cc458a8f9e3301a7b20b7fe59c101c4b1df09a6",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\fresh-no-inventory-gpu.json.gz",
+      "sha256": "315e428102b359750c0f273c956d847e74dd3f89268f36e895a6efba3951dd9e",
+      "bytes": 8519
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\earned-prerequisite-no-use.png",
+      "sha256": "ef8ff95bf60337a625d6411e33d54ef4e3175c2ae20e929270dfd5b29b244554",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\earned-prerequisite-no-use-gpu.json.gz",
+      "sha256": "aa50302ebb1d83192df8fe7868d740875c90dffd23bb74c2d03f8b5e119bb7c3",
+      "bytes": 8503
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\immediate-after-Zero-Giga.png",
+      "sha256": "7c18832065bea50789fb5a7885f2c270f949e3f9f79511b9fef7f1bb1b278644",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\immediate-after-Zero-Giga-gpu.json.gz",
+      "sha256": "9fd08298f1bda368bbed8dc350dd10de1599bc1eb621c3be6462e9cf29e6cd22",
+      "bytes": 9258
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\step-0-additional-15-ticks.png",
+      "sha256": "41d7c6a2e0a7dad8e782f9a257226e5d0eb43eb94e62f1f42ce97c944a9e1a57",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\step-0-additional-15-ticks-gpu.json.gz",
+      "sha256": "d8b99f364a2210743bb232f3a6aa902b67902a5e782e1c25e05cb08eedc3c3eb",
+      "bytes": 18760
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\step-1-additional-15-ticks.png",
+      "sha256": "217f6a01efe82c71277525640b70fccb48a699ecf574efba8b8e3edfbd99d750",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\step-1-additional-15-ticks-gpu.json.gz",
+      "sha256": "eee586185a5bb5d4c4a9ebb89f57dd6a0c2a384e8f519d422dae9c2e0eaa88ce",
+      "bytes": 20990
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\step-2-additional-15-ticks.png",
+      "sha256": "6e7f7df8ccd07662e2250f3f4e43909b7e64061ebc3cde5dcaa6302d47a85920",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\step-2-additional-15-ticks-gpu.json.gz",
+      "sha256": "3174e68b476d89d2b626f71aeaca491e16a668e9bd99a1d7884206d641b3546e",
+      "bytes": 23837
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\step-3-additional-15-ticks.png",
+      "sha256": "43a76d1d77f2934e26602e9345fbed1c6879624b433cf4b2a1621b24034ebc12",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\step-3-additional-15-ticks-gpu.json.gz",
+      "sha256": "99908c5f0fba8b9796bed4902ed3e8ebe02d2b6c1cae71f3e15e63c46fb50211",
+      "bytes": 22086
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\step-4-additional-60-ticks.png",
+      "sha256": "62782b1285f44b640bca73562d119f4eb102ec7d0976fb0f4a310060d14a91f7",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\step-4-additional-60-ticks-gpu.json.gz",
+      "sha256": "e7b947217e1e1f50988ea9b6b4658b9365333e4d17c4ffa1448604f8779b1c96",
+      "bytes": 8582
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\step-5-additional-300-ticks.png",
+      "sha256": "51ff837c5d510ba0a38df29bcdfa665eb526b0f16a83ac8aa667615e187884dd",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\ammo-hud\\step-5-additional-300-ticks-gpu.json.gz",
+      "sha256": "adff6dbc72d094a3a5767141766bcf4c1784ac704489504b79280ffd4cedd6fb",
+      "bytes": 8503
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\recording-rejection\\settings.json",
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "bytes": 10329
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\recording-rejection\\content.json",
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "bytes": 503
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\recording-rejection\\simulation-contract.json",
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c",
+      "bytes": 259
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\recording-rejection\\inputs.jsonl",
+      "sha256": "820b4cf97432e8c7f3e0a49d06180fd8e90d6d2b41185030a589a54a5b80a8fc",
+      "bytes": 830010
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\recording-rejection\\status.json",
+      "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb",
+      "bytes": 211
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\recording-rejection\\card1.initial.mcd",
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "bytes": 131072
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\recording-rejection\\card2.initial.mcd",
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "bytes": 131072
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\diagnostic-runner-executed-source.py",
+      "sha256": "d4efbe4ec8d74e0e6975ec85b0eafd79dd3411fa2238be4f58f5344ebe35887a",
+      "bytes": 8348
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\mmx6_coop_hud_inventory-executed-source.py",
+      "sha256": "e503f2f99085f89fc18010f2d3e0916866d872083fb716b3a75595bd4cabdfe2",
+      "bytes": 17683
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\mmx6_coop_hud_presentation-executed-source.py",
+      "sha256": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18",
+      "bytes": 11949
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\mmx6_coop_inventory_state-executed-source.py",
+      "sha256": "211bd23caf176328cc3a24aaeae26a44b5d0dc5e48b244c1826781e9f53f61f4",
+      "bytes": 6110
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "bytes": 29983
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "870ddd670d02b366fb056173b9133fca2618b96941fcbc793c5d698deae623cb",
+      "bytes": 16689
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\mmx6_input_recording-executed-source.py",
+      "sha256": "a4d21aaa83c9104679d549c0f5fa81bf95106ce800b0601263faaff46ae5310a",
+      "bytes": 13664
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\mmx6_owned_keyboard-executed-source.py",
+      "sha256": "11b07f655dd711e5cf39c36362eec796b9eb73b86702d8100e0a958a3e348402",
+      "bytes": 4599
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\prepare_mmx6_coop_playtest-executed-source.py",
+      "sha256": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978",
+      "bytes": 10411
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\prepare_mmx6_input_replay-executed-source.py",
+      "sha256": "584c0790706a2794636f7ed1bbd5e6b904f29b8b285d6eb3a9f5373167500d95",
+      "bytes": 8385
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "e91dbde11541f68e554f94b747ba91c409a83322f7d4d60b26d1e3aefdf75ac9",
+      "bytes": 29370
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\qualify_mmx6_coop_personal_menu-executed-source.py",
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c",
+      "bytes": 16934
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "61e76f5308d9d39accf07573914c1b9fb254ee9c78e495d2f7043320e765d666",
+      "bytes": 53458
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\qualify_mmx6_input_replay-executed-source.py",
+      "sha256": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd",
+      "bytes": 28273
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\runner-executed-source.py",
+      "sha256": "ca594aa64b184761c33415ccb89f1f48194af094533cc48e33fdb359d41e48a7",
+      "bytes": 11008
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-deferred-native-callback-v26-6e85700\\qualification.json",
+      "sha256": "e4e632834db671affbce9196e1867080d95d1433e61d47355373f7b7dc51b2ea",
+      "bytes": 4526824
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-fresh-no-inventory.png",
+      "sha256": "b887dfe954dc5c6c1b6dfc967cc458a8f9e3301a7b20b7fe59c101c4b1df09a6",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-fresh-no-inventory-gpu.json.gz",
+      "sha256": "dd269687b8c782a1fe55bccb7692b51edce5f76cd2ca7d97bce44078f1b2e71c",
+      "bytes": 8492
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-paused-active-Giga.png",
+      "sha256": "aa92d1f3e622f02b0707aad167e1229f048c311cab769d653f1860d7b9a4a424",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-paused-active-Giga-gpu.json.gz",
+      "sha256": "e2a453ec2a63232bd8eb0a75e73fbfed2d4d9f2c57312d371ac7642ba3c0a52b",
+      "bytes": 10976
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-naturally-retired-before-load.png",
+      "sha256": "5f9bfd7bf02b7e11a5c7213230b897f240b5559ca9adf625315386bf19f09668",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-naturally-retired-before-load-gpu.json.gz",
+      "sha256": "de2610dc5b4ae78a79cb1677a24779af782f6b63708d413244bdbb560cf0e063",
+      "bytes": 8559
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-restored-active-Giga.png",
+      "sha256": "c9575f21d379dc7848cdb05480155d2299c744067d82a406de9ca985869de131",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-restored-active-Giga-gpu.json.gz",
+      "sha256": "baa68a25802b50de13d750ca0ed25cfbe7abbae12c2b0a03af38fe7c898c2d5b",
+      "bytes": 10959
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-restored-Giga-retired.png",
+      "sha256": "ef8ff95bf60337a625d6411e33d54ef4e3175c2ae20e929270dfd5b29b244554",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-restored-Giga-retired-gpu.json.gz",
+      "sha256": "2a56e7e9ed6b9545acdf1503f3abe31ad75a66560d7565d4d399276264e38b1f",
+      "bytes": 8554
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-post-Giga-X-shot.png",
+      "sha256": "15e95ad7090e97749ba0e8144dfc680602086f5c4d35d6d115bb2b43604fde67",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-post-Giga-X-shot-gpu.json.gz",
+      "sha256": "4cf487f1b3977dfb413fa7c244792c545114fd56d8ca77a2e1393bbde526f1ef",
+      "bytes": 8630
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-post-Giga-Zero-saber.png",
+      "sha256": "7c9490173fd2e9bdef76d8f207b2e84b38201b55266e3e90ea4c9bcea225d608",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-post-Giga-Zero-saber-gpu.json.gz",
+      "sha256": "8542f24a78d1a447d17ee9874560d1f3ae02c2e1ab37d4bfd56c64740379c2b0",
+      "bytes": 8703
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-post-Giga-independent-controls.png",
+      "sha256": "79f74c361427c27f66d5ff21392d39ea972c4a50ad753daec341802e0ed168a8",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-post-Giga-independent-controls-gpu.json.gz",
+      "sha256": "3e65a759dc832c1e51cee2fcf16c95089d83cbde59a074cd461bcfa6b69686fb",
+      "bytes": 8558
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\recording-rejection\\settings.json",
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "bytes": 10329
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\recording-rejection\\content.json",
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "bytes": 503
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\recording-rejection\\simulation-contract.json",
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c",
+      "bytes": 259
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\recording-rejection\\inputs.jsonl",
+      "sha256": "91f8531158d4316e98897115582d9fe47503986b6ccf06cabd0bf0826848f49a",
+      "bytes": 817405
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\recording-rejection\\status.json",
+      "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb",
+      "bytes": 211
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\recording-rejection\\card1.initial.mcd",
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "bytes": 131072
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\recording-rejection\\card2.initial.mcd",
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "bytes": 131072
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\diagnostic-runner-executed-source.py",
+      "sha256": "a643780a8c3bc8b9c2470ee5784aa9a88b818f9d6ac41f697b64a7afaa3ec2ba",
+      "bytes": 12217
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\mmx6_coop_hud_inventory-executed-source.py",
+      "sha256": "e503f2f99085f89fc18010f2d3e0916866d872083fb716b3a75595bd4cabdfe2",
+      "bytes": 17683
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\mmx6_coop_hud_presentation-executed-source.py",
+      "sha256": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18",
+      "bytes": 11949
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\mmx6_coop_inventory_state-executed-source.py",
+      "sha256": "211bd23caf176328cc3a24aaeae26a44b5d0dc5e48b244c1826781e9f53f61f4",
+      "bytes": 6110
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "bytes": 29983
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "870ddd670d02b366fb056173b9133fca2618b96941fcbc793c5d698deae623cb",
+      "bytes": 16689
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\mmx6_input_recording-executed-source.py",
+      "sha256": "a4d21aaa83c9104679d549c0f5fa81bf95106ce800b0601263faaff46ae5310a",
+      "bytes": 13664
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\mmx6_owned_keyboard-executed-source.py",
+      "sha256": "11b07f655dd711e5cf39c36362eec796b9eb73b86702d8100e0a958a3e348402",
+      "bytes": 4599
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\prepare_mmx6_coop_playtest-executed-source.py",
+      "sha256": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978",
+      "bytes": 10411
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\prepare_mmx6_input_replay-executed-source.py",
+      "sha256": "584c0790706a2794636f7ed1bbd5e6b904f29b8b285d6eb3a9f5373167500d95",
+      "bytes": 8385
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "e91dbde11541f68e554f94b747ba91c409a83322f7d4d60b26d1e3aefdf75ac9",
+      "bytes": 29370
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\qualify_mmx6_coop_personal_menu-executed-source.py",
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c",
+      "bytes": 16934
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "61e76f5308d9d39accf07573914c1b9fb254ee9c78e495d2f7043320e765d666",
+      "bytes": 53458
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\qualify_mmx6_input_replay-executed-source.py",
+      "sha256": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd",
+      "bytes": 28273
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\runner-executed-source.py",
+      "sha256": "ca594aa64b184761c33415ccb89f1f48194af094533cc48e33fdb359d41e48a7",
+      "bytes": 11008
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\active-Giga-snapshot.pst",
+      "sha256": "7da61d3e823522494b84a91935a48cd67b5cc7bd3935ce2abf9380ef3541603c",
+      "bytes": 1788270
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\ammo-hud\\warm-restored-probe.pst",
+      "sha256": "8de9e4da755936d766fba19c893abd902108571b262571f33f553e04a064a9a1",
+      "bytes": 1789675
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-warm\\qualification.json",
+      "sha256": "137af42846716614960860c0042fdbe6f40a38108fff480c117e0bbe3fcce4d0",
+      "bytes": 16519652
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-fresh-no-inventory.png",
+      "sha256": "b887dfe954dc5c6c1b6dfc967cc458a8f9e3301a7b20b7fe59c101c4b1df09a6",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-fresh-no-inventory-gpu.json.gz",
+      "sha256": "52dc80c295c8f00eb027e96cfae2b7c41a8949540777df684a79be2fd301d51d",
+      "bytes": 8550
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-restored-active-Giga.png",
+      "sha256": "c9575f21d379dc7848cdb05480155d2299c744067d82a406de9ca985869de131",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-restored-active-Giga-gpu.json.gz",
+      "sha256": "5d6ceed557edf4b970bafcc19e0d761b296702f8ba1202645b1212e1cdc9fea4",
+      "bytes": 10971
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-restored-Giga-retired.png",
+      "sha256": "ef8ff95bf60337a625d6411e33d54ef4e3175c2ae20e929270dfd5b29b244554",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-restored-Giga-retired-gpu.json.gz",
+      "sha256": "fbef5af9019c9f042d90b523cc1bd9a28a03c1906c8fe0222d0ba175b3377836",
+      "bytes": 8550
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-post-Giga-X-shot.png",
+      "sha256": "b59c84bb930c82b78b8177d29390d0669609938c24929cb31e9e3e22ace2d6b4",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-post-Giga-X-shot-gpu.json.gz",
+      "sha256": "23632c15607c534eabf9092603de28b5f1f12afdef4e2f74beb3f10c17e20e7d",
+      "bytes": 8635
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-post-Giga-Zero-saber.png",
+      "sha256": "953a864e7506721fcd086884fc6e073110e98a444fd5b697924f828dac24b623",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-post-Giga-Zero-saber-gpu.json.gz",
+      "sha256": "fc0352d3ec371ca7d735244ac596cb14b05a58bdd23700e9a04904f0d3783a5c",
+      "bytes": 8724
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-post-Giga-independent-controls.png",
+      "sha256": "c9b2bc6151b99da4882f1b9e8b8aefb945617640a4cafd411b04d87447f1de86",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-post-Giga-independent-controls-gpu.json.gz",
+      "sha256": "208e6ff4993388d66efcf9e703b86cc4fee0f9f0de27542838ee6d9937ee4b2b",
+      "bytes": 8545
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\recording-rejection\\settings.json",
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "bytes": 10329
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\recording-rejection\\content.json",
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "bytes": 503
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\recording-rejection\\simulation-contract.json",
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c",
+      "bytes": 259
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\recording-rejection\\inputs.jsonl",
+      "sha256": "369f5399acaddfa0a747e06984cb7a28c3034a37b19dfe6d36f9ba85aca6a3a0",
+      "bytes": 811225
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\recording-rejection\\status.json",
+      "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb",
+      "bytes": 211
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\recording-rejection\\card1.initial.mcd",
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "bytes": 131072
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\recording-rejection\\card2.initial.mcd",
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "bytes": 131072
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\diagnostic-runner-executed-source.py",
+      "sha256": "a643780a8c3bc8b9c2470ee5784aa9a88b818f9d6ac41f697b64a7afaa3ec2ba",
+      "bytes": 12217
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\mmx6_coop_hud_inventory-executed-source.py",
+      "sha256": "e503f2f99085f89fc18010f2d3e0916866d872083fb716b3a75595bd4cabdfe2",
+      "bytes": 17683
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\mmx6_coop_hud_presentation-executed-source.py",
+      "sha256": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18",
+      "bytes": 11949
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\mmx6_coop_inventory_state-executed-source.py",
+      "sha256": "211bd23caf176328cc3a24aaeae26a44b5d0dc5e48b244c1826781e9f53f61f4",
+      "bytes": 6110
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "bytes": 29983
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "870ddd670d02b366fb056173b9133fca2618b96941fcbc793c5d698deae623cb",
+      "bytes": 16689
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\mmx6_input_recording-executed-source.py",
+      "sha256": "a4d21aaa83c9104679d549c0f5fa81bf95106ce800b0601263faaff46ae5310a",
+      "bytes": 13664
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\mmx6_owned_keyboard-executed-source.py",
+      "sha256": "11b07f655dd711e5cf39c36362eec796b9eb73b86702d8100e0a958a3e348402",
+      "bytes": 4599
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\prepare_mmx6_coop_playtest-executed-source.py",
+      "sha256": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978",
+      "bytes": 10411
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\prepare_mmx6_input_replay-executed-source.py",
+      "sha256": "584c0790706a2794636f7ed1bbd5e6b904f29b8b285d6eb3a9f5373167500d95",
+      "bytes": 8385
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "e91dbde11541f68e554f94b747ba91c409a83322f7d4d60b26d1e3aefdf75ac9",
+      "bytes": 29370
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\qualify_mmx6_coop_personal_menu-executed-source.py",
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c",
+      "bytes": 16934
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "61e76f5308d9d39accf07573914c1b9fb254ee9c78e495d2f7043320e765d666",
+      "bytes": 53458
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\qualify_mmx6_input_replay-executed-source.py",
+      "sha256": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd",
+      "bytes": 28273
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\runner-executed-source.py",
+      "sha256": "ca594aa64b184761c33415ccb89f1f48194af094533cc48e33fdb359d41e48a7",
+      "bytes": 11008
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\ammo-hud\\cold-restored-probe.pst",
+      "sha256": "b6cb327aa66141414ac68ead3f8ab39129141ad86e0614c18d484eb443aed379",
+      "bytes": 1787634
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-shot-observer-cold\\qualification.json",
+      "sha256": "144935e83591c3bc4b8646af22e2a8a624c6ddb3514819b9dbb450343014bd3d",
+      "bytes": 10088071
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-v26-state-review-contact.png",
+      "sha256": "25310c80c0b113b30e231b571efd0cc020e95c2d7eaa45146a3649216785a2ba",
+      "bytes": 3247870
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-v26-recovery-contact.png",
+      "sha256": "28180ba6068dba889963e41bee22bd85d29fbd577fd0466ae1984f2f1690873a",
+      "bytes": 1401900
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-active-state-v26-6e85700-warm\\qualification.json",
+      "sha256": "850bc29aa1240631812f4e6c267a9b4f72c2d38ea418176946c39b26fde66246",
+      "bytes": 22409979
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v26-6e85700\\candidate.json",
+      "sha256": "bff5f45d6b2dccfea5122af0ca47ddf91e01f740655cec82fa8348ef571e87b5",
+      "bytes": 5141
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-remaining-render-source-notes.txt",
+      "sha256": "ec6d49f0db865e3571ccdd3c03e8d1e48c2b846bc9c68284cb0eabef54312321",
+      "bytes": 12941
+    }
+  ]
+}
