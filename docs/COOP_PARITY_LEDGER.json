@@ -5190,9 +5190,80 @@
             },
             "action": "Settle exact common capabilities/profile beforeframe0. On each peer use F7/Select+R1 and F8/Select+R3, observe completed entry refusal counters, verify backend save/load rejection, and retain each attempted browser entry for12seconds while monitoring live native/transport progress.",
             "outcome": "Both peers pass5 checks each:8 completed mapped entry refusals,4 explicit backend refusals, four12second windows with720-723 resolved ticks and721-723 native ticks. No modal browser, state generation/pending or PST file changes. All53 distinct resolved core/mod samples match,31 after refusal routes. Both owned processes exit0 normally and cards are unchanged; old12second failure is fixed on this exact image."
+          },
+          {
+            "candidate": "f339e1236e71aa172af9ea234b719baa0e4efbf2",
+            "build_identity": {
+              "exe_sha256": "be394703993ba902f77e7d2f0f5f351e6a78afac3aa60886324e35fc804420a2",
+              "manifest_sha256": "519b22de4c8cc3655cbaac37d36524c24943a34dc467bd477e720be99b606a61",
+              "compiled_source_commit": "f339e1236e71aa172af9ea234b719baa0e4efbf2",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
+            },
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-private-state\\manifest-bound-f339e12-inventory-resources-reviewed.json",
+                "sha256": "47f24bfc3ffd07c9a76dcfe750867640db0527027ff264c56f913d48e9f704c5"
+              }
+            ],
+            "limits": [
+              "F33 stays open pending a separate nonzero scene-owner restore case. Authored scene trigger/progression checks remain separate.",
+              "Earned weapon availability is a source-guarded development prerequisite bypass. Native input actually spends ammo and changes selection; no HP/ammo/selection/restoration outcomes are written.",
+              "Same Windows host, X/P1 + Zero/P2, intro, exact image/profile only. Physical devices and other hosts/OS/CPUs remain deferred.",
+              "Private priorities are zero and saved private voices inactive. Active-voice/nonzero-priority rewind and ordered native recording through rewind are not qualified.",
+              "Production lab/debug OFF builds and 103 CTests each pass; native gameplay evidence uses the exact development image. Native cards unchanged; no old-state migration required."
+            ],
+            "bypasses": [
+              "Original equipment initializer grants earned flags through dedicated development mailbox; acquisition and authored progression bypassed. No HP/ammo/selection or restoration outcome writes."
+            ],
+            "mode": "local",
+            "result": "unverified",
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "controls": [
+                "owned Win32/SDL keyboard",
+                "published controller"
+              ],
+              "audio": "emulated, muted dummy output"
+            },
+            "action": "Actual mapped save/load/rewind on both local routes after native HP damage and native input energy spending/weapon selection.",
+            "outcome": "55/55 checks per route; HP32/32 to30/28; X ammo1 288 to264, Zero ammo5 288 to216, selection0/0 to1/5, restored by actual mapped load and rewind. Four provider probes per case independently pass17 full-state comparisons each. Current-build internal wire4 rejected; normal exits0 and private cards unchanged. Nonzero scene-owner coverage remains separate."
+          },
+          {
+            "candidate": "f339e1236e71aa172af9ea234b719baa0e4efbf2",
+            "build_identity": {
+              "exe_sha256": "be394703993ba902f77e7d2f0f5f351e6a78afac3aa60886324e35fc804420a2",
+              "manifest_sha256": "519b22de4c8cc3655cbaac37d36524c24943a34dc467bd477e720be99b606a61",
+              "compiled_source_commit": "f339e1236e71aa172af9ea234b719baa0e4efbf2",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
+            },
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-private-state\\manifest-bound-f339e12-inventory-resources-reviewed.json",
+                "sha256": "47f24bfc3ffd07c9a76dcfe750867640db0527027ff264c56f913d48e9f704c5"
+              }
+            ],
+            "limits": [
+              "F33 stays open pending a separate nonzero scene-owner restore case. Authored scene trigger/progression checks remain separate.",
+              "Earned weapon availability is a source-guarded development prerequisite bypass. Native input actually spends ammo and changes selection; no HP/ammo/selection/restoration outcomes are written.",
+              "Same Windows host, X/P1 + Zero/P2, intro, exact image/profile only. Physical devices and other hosts/OS/CPUs remain deferred.",
+              "Private priorities are zero and saved private voices inactive. Active-voice/nonzero-priority rewind and ordered native recording through rewind are not qualified.",
+              "Production lab/debug OFF builds and 103 CTests each pass; native gameplay evidence uses the exact development image. Native cards unchanged; no old-state migration required."
+            ],
+            "bypasses": [
+              "Original equipment initializer grants earned flags through dedicated development mailbox; acquisition and authored progression bypassed. No HP/ammo/selection or restoration outcome writes."
+            ],
+            "mode": "netplay",
+            "result": "passed",
+            "settings": {
+              "transport": "same-machine loopback delay3",
+              "profile": "mmx6.win64-clang22.loopback revision2"
+            },
+            "action": "Revalidate current native image/profile with both peers and actual keyboard/controller refusals plus12second live windows.",
+            "outcome": "Both peers5/5 checks;8 completed entry refusals,4 backend refusals, four12second windows,719-721 resolved ticks and720-721 native ticks.53 distinct matching resolved CRC samples,30 after refusal routes. Normal owned cleanup and private cards unchanged."
           }
         ],
-        "limitations": "The22ea525 online browser dwell failure is fixed and requalified on8ad29dc/SDK5bd63adf2: actual keyboard/controller entry refusals, backend save/load rejection and four12second live windows pass on both peers. Both local UI cases restore genuinely damaged HP and native/private state, but ammo spending/weapon restoration remain unverified. Full F33 local/aggregate stays open; no old-state compatibility requirement."
+        "limitations": "Native HP, ammo and selection now genuinely diverge and restore through both local mapped UI routes (55 checks each), with current-build malformed-state rejection and full provider comparisons. Same-image netplay refusal policy requalified. F33 remains unverified only pending the explicit nonzero scene-owner state check; authored progression remains separate."
       }
     },
     {

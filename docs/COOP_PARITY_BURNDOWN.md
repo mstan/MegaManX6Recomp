@@ -512,3 +512,35 @@ from these bounded milestones.
 
 Full parity remains in progress. Bounded native checks and framework fixes do
 not close the unexecuted campaign inventory.
+
+
+## Native inventory and mapped state qualification (October 24)
+
+Candidate `f339e12` / SDK `5bd63adf2`, with QA `9bbda24`, now passes
+55 checks on each local keyboard and controller route. Actual native inputs
+spend X weapon1 energy (288 to264), Zero weapon5 energy (288 to216), and
+change selections from0/0 to1/5. Mapped load and rewind restore both complete
+resource arrays and selections. Separate native damage reduces HP32/32 to30/28;
+mapped load restores it. Each route has four actual provider probes, independently
+checked against the original saved image with17 full-state comparisons each.
+The current-build malformed internal provider is rejected, both owned games
+exit0 normally, and existing private native cards remain unchanged.
+
+Earned-weapon availability is an explicit source-guarded prerequisite bypass
+through the original equipment initializer. Acquisition/progression is not
+qualified. The fixture writes no HP, ammo, selection or restoration outcomes.
+Two earlier rewind attempts selected gameplay or a menu-closing interval;
+they remain setup misses, with unchanged restore predicates. Final attempts
+select inside the retained paused interval and pass the full comparisons.
+
+The same native image also passes both peers' state/rewind refusal policy:
+53 distinct matching resolved CRC samples (30 after refusal routes), eight
+completed mapped entry refusals, four explicit backend refusals and four
+12second live windows. All241 selected Python tests and103 CTests per debug
+and production configuration pass. Production lab/debug remain OFF.
+
+[Reviewed receipt](evidence/mmx6-private-state/manifest-bound-f339e12-inventory-resources-reviewed.json)
+binds82 retained artifacts. F33 local/aggregate remains unverified pending a
+separate nonzero scene-owner restoration check. The aggregate ledger remains
+6 passed,2 failed,226 unverified of234. Human-dependent checks are deferred;
+automatable scene, content and remaining reference checks continue serially.
