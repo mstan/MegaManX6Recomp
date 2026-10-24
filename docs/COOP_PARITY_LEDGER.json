@@ -1089,14 +1089,14 @@
           "src/mods/mmx6_coop_plugin.c:render_actor",
           "src/mods/mmx6_coop_plugin.c:draw_coop_hud"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -1140,9 +1140,93 @@
               "Native records finalized with full startup settings/cards and exact image identity; no replay or temporal action association claim from these captures."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+            "build_identity": {
+              "exe_sha256": "627cc3dcc6bf49186c83355a103e44cb1c01d395b32897c064b71ddce83075fd",
+              "manifest_sha256": "329355cb9942693df0748822cb483683132a5c970ae3e6f68825c959db1338ee",
+              "compiled_source_commit": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "b85d97157e73ab29c3460215a55a63094efa2bca"
+            },
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-hud\\manifest-bound-66f7db0-layouts-and-menu-samples-reviewed.json",
+                "sha256": "f345f0731c660612ba76da553655b7d75a3c4342a4f1608323945ce04b3bd171"
+              }
+            ],
+            "settings": {
+              "layouts": [
+                "stacked default",
+                "side_by_side"
+              ],
+              "drawable_sizes": [
+                "960x720",
+                "1200x600",
+                "640x900"
+              ],
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "audio": "emulated muted dummy"
+            },
+            "action": "Original owner Start menus, native contact changes both HP values, then owned hidden SDL window resize and composed-output anchor measurement. Both loopback peers have exact-image/profile/source gates and matching resolved CRC windows.",
+            "outcome": "Passed bounded native HP anchors in both layouts, three actual drawable aspects and both peers.",
+            "limits": [
+              "R5 local and netplay pass their bounded final-window HP-anchor check on this exact image, both layouts and three drawable aspects.",
+              "F18 previously reproduced living-X omission is absent in reviewed local and paired samples. Continuous every-frame packet coverage and actual native Quit-page suppression are still required before closing F18. Prior failure is retained.",
+              "R6 portrait/layout/HP observations pass partially; selected/spent ammo HUD ownership remains unverified in both modes.",
+              "Native inventory is fresh; no fixture/resource/outcome writes. Local recordings finalized; no replay association claim. Pair recording/replay is not claimed.",
+              "Windows same-machine X/P1 and Zero/P2 intro only; physical devices, other hosts and production native gameplay remain separate."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+            "build_identity": {
+              "exe_sha256": "627cc3dcc6bf49186c83355a103e44cb1c01d395b32897c064b71ddce83075fd",
+              "manifest_sha256": "329355cb9942693df0748822cb483683132a5c970ae3e6f68825c959db1338ee",
+              "compiled_source_commit": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "b85d97157e73ab29c3460215a55a63094efa2bca"
+            },
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-hud\\manifest-bound-66f7db0-layouts-and-menu-samples-reviewed.json",
+                "sha256": "f345f0731c660612ba76da553655b7d75a3c4342a4f1608323945ce04b3bd171"
+              }
+            ],
+            "settings": {
+              "layouts": [
+                "stacked default",
+                "side_by_side"
+              ],
+              "drawable_sizes": [
+                "960x720",
+                "1200x600",
+                "640x900"
+              ],
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "audio": "emulated muted dummy"
+            },
+            "action": "Original owner Start menus, native contact changes both HP values, then owned hidden SDL window resize and composed-output anchor measurement. Both loopback peers have exact-image/profile/source gates and matching resolved CRC windows.",
+            "outcome": "Passed bounded native HP anchors in both layouts, three actual drawable aspects and both peers.",
+            "limits": [
+              "R5 local and netplay pass their bounded final-window HP-anchor check on this exact image, both layouts and three drawable aspects.",
+              "F18 previously reproduced living-X omission is absent in reviewed local and paired samples. Continuous every-frame packet coverage and actual native Quit-page suppression are still required before closing F18. Prior failure is retained.",
+              "R6 portrait/layout/HP observations pass partially; selected/spent ammo HUD ownership remains unverified in both modes.",
+              "Native inventory is fresh; no fixture/resource/outcome writes. Local recordings finalized; no replay association claim. Pair recording/replay is not claimed.",
+              "Windows same-machine X/P1 and Zero/P2 intro only; physical devices, other hosts and production native gameplay remain separate."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Local exact-image final-window anchors qualified at three drawable aspects with actual native HP changes, both layouts. Netplay remains unverified."
+        "limitations": "Passed exact66f7db0 local and same-machine netplay final-window anchors with genuine changed HP, both layouts and three drawable aspects. Other hosts/devices are separate."
       }
     },
     {
@@ -1220,9 +1304,93 @@
               "Native records finalized with full startup settings/cards and exact image identity; no replay or temporal action association claim from these captures."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+            "build_identity": {
+              "exe_sha256": "627cc3dcc6bf49186c83355a103e44cb1c01d395b32897c064b71ddce83075fd",
+              "manifest_sha256": "329355cb9942693df0748822cb483683132a5c970ae3e6f68825c959db1338ee",
+              "compiled_source_commit": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "b85d97157e73ab29c3460215a55a63094efa2bca"
+            },
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-hud\\manifest-bound-66f7db0-layouts-and-menu-samples-reviewed.json",
+                "sha256": "f345f0731c660612ba76da553655b7d75a3c4342a4f1608323945ce04b3bd171"
+              }
+            ],
+            "settings": {
+              "layouts": [
+                "stacked default",
+                "side_by_side"
+              ],
+              "drawable_sizes": [
+                "960x720",
+                "1200x600",
+                "640x900"
+              ],
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "audio": "emulated muted dummy"
+            },
+            "action": "Original owner Start menus, native contact changes both HP values, then owned hidden SDL window resize and composed-output anchor measurement. Both loopback peers have exact-image/profile/source gates and matching resolved CRC windows.",
+            "outcome": "Both portraits/layouts and independently changed HP retained. Actual selected/spent ammo HUD remains unverified.",
+            "limits": [
+              "R5 local and netplay pass their bounded final-window HP-anchor check on this exact image, both layouts and three drawable aspects.",
+              "F18 previously reproduced living-X omission is absent in reviewed local and paired samples. Continuous every-frame packet coverage and actual native Quit-page suppression are still required before closing F18. Prior failure is retained.",
+              "R6 portrait/layout/HP observations pass partially; selected/spent ammo HUD ownership remains unverified in both modes.",
+              "Native inventory is fresh; no fixture/resource/outcome writes. Local recordings finalized; no replay association claim. Pair recording/replay is not claimed.",
+              "Windows same-machine X/P1 and Zero/P2 intro only; physical devices, other hosts and production native gameplay remain separate."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+            "build_identity": {
+              "exe_sha256": "627cc3dcc6bf49186c83355a103e44cb1c01d395b32897c064b71ddce83075fd",
+              "manifest_sha256": "329355cb9942693df0748822cb483683132a5c970ae3e6f68825c959db1338ee",
+              "compiled_source_commit": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "b85d97157e73ab29c3460215a55a63094efa2bca"
+            },
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-hud\\manifest-bound-66f7db0-layouts-and-menu-samples-reviewed.json",
+                "sha256": "f345f0731c660612ba76da553655b7d75a3c4342a4f1608323945ce04b3bd171"
+              }
+            ],
+            "settings": {
+              "layouts": [
+                "stacked default",
+                "side_by_side"
+              ],
+              "drawable_sizes": [
+                "960x720",
+                "1200x600",
+                "640x900"
+              ],
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "audio": "emulated muted dummy"
+            },
+            "action": "Original owner Start menus, native contact changes both HP values, then owned hidden SDL window resize and composed-output anchor measurement. Both loopback peers have exact-image/profile/source gates and matching resolved CRC windows.",
+            "outcome": "Both portraits/layouts and independently changed HP retained. Actual selected/spent ammo HUD remains unverified.",
+            "limits": [
+              "R5 local and netplay pass their bounded final-window HP-anchor check on this exact image, both layouts and three drawable aspects.",
+              "F18 previously reproduced living-X omission is absent in reviewed local and paired samples. Continuous every-frame packet coverage and actual native Quit-page suppression are still required before closing F18. Prior failure is retained.",
+              "R6 portrait/layout/HP observations pass partially; selected/spent ammo HUD ownership remains unverified in both modes.",
+              "Native inventory is fresh; no fixture/resource/outcome writes. Local recordings finalized; no replay association claim. Pair recording/replay is not claimed.",
+              "Windows same-machine X/P1 and Zero/P2 intro only; physical devices, other hosts and production native gameplay remain separate."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Alternate option exists in current source and both local layout/portrait/HP renderings now observed. Actual ammo ownership and paired layout qualification remain unverified."
+        "limitations": "Both layouts/portraits/independent HP now reviewed locally and on both exact-image peers. Actual selected/spent ammo HUD ownership remains unverified in both modes."
       }
     },
     {
@@ -4375,9 +4543,93 @@
               "Native records finalized with full startup settings/cards and exact image identity; no replay or temporal action association claim from these captures."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+            "build_identity": {
+              "exe_sha256": "627cc3dcc6bf49186c83355a103e44cb1c01d395b32897c064b71ddce83075fd",
+              "manifest_sha256": "329355cb9942693df0748822cb483683132a5c970ae3e6f68825c959db1338ee",
+              "compiled_source_commit": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "b85d97157e73ab29c3460215a55a63094efa2bca"
+            },
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-hud\\manifest-bound-66f7db0-layouts-and-menu-samples-reviewed.json",
+                "sha256": "f345f0731c660612ba76da553655b7d75a3c4342a4f1608323945ce04b3bd171"
+              }
+            ],
+            "settings": {
+              "layouts": [
+                "stacked default",
+                "side_by_side"
+              ],
+              "drawable_sizes": [
+                "960x720",
+                "1200x600",
+                "640x900"
+              ],
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "audio": "emulated muted dummy"
+            },
+            "action": "Original owner Start menus, native contact changes both HP values, then owned hidden SDL window resize and composed-output anchor measurement. Both loopback peers have exact-image/profile/source gates and matching resolved CRC windows.",
+            "outcome": "Reviewed sampled opening/closing world images now retain living X with Zero and both HUDs. Original menu-only pages suppress gameplay correctly. Every-frame continuity and actual Quit pages remain pending; no full row pass.",
+            "limits": [
+              "R5 local and netplay pass their bounded final-window HP-anchor check on this exact image, both layouts and three drawable aspects.",
+              "F18 previously reproduced living-X omission is absent in reviewed local and paired samples. Continuous every-frame packet coverage and actual native Quit-page suppression are still required before closing F18. Prior failure is retained.",
+              "R6 portrait/layout/HP observations pass partially; selected/spent ammo HUD ownership remains unverified in both modes.",
+              "Native inventory is fresh; no fixture/resource/outcome writes. Local recordings finalized; no replay association claim. Pair recording/replay is not claimed.",
+              "Windows same-machine X/P1 and Zero/P2 intro only; physical devices, other hosts and production native gameplay remain separate."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "unverified",
+            "candidate": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+            "build_identity": {
+              "exe_sha256": "627cc3dcc6bf49186c83355a103e44cb1c01d395b32897c064b71ddce83075fd",
+              "manifest_sha256": "329355cb9942693df0748822cb483683132a5c970ae3e6f68825c959db1338ee",
+              "compiled_source_commit": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "b85d97157e73ab29c3460215a55a63094efa2bca"
+            },
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-hud\\manifest-bound-66f7db0-layouts-and-menu-samples-reviewed.json",
+                "sha256": "f345f0731c660612ba76da553655b7d75a3c4342a4f1608323945ce04b3bd171"
+              }
+            ],
+            "settings": {
+              "layouts": [
+                "stacked default",
+                "side_by_side"
+              ],
+              "drawable_sizes": [
+                "960x720",
+                "1200x600",
+                "640x900"
+              ],
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "audio": "emulated muted dummy"
+            },
+            "action": "Original owner Start menus, native contact changes both HP values, then owned hidden SDL window resize and composed-output anchor measurement. Both loopback peers have exact-image/profile/source gates and matching resolved CRC windows.",
+            "outcome": "Reviewed sampled opening/closing world images now retain living X with Zero and both HUDs. Original menu-only pages suppress gameplay correctly. Every-frame continuity and actual Quit pages remain pending; no full row pass.",
+            "limits": [
+              "R5 local and netplay pass their bounded final-window HP-anchor check on this exact image, both layouts and three drawable aspects.",
+              "F18 previously reproduced living-X omission is absent in reviewed local and paired samples. Continuous every-frame packet coverage and actual native Quit-page suppression are still required before closing F18. Prior failure is retained.",
+              "R6 portrait/layout/HP observations pass partially; selected/spent ammo HUD ownership remains unverified in both modes.",
+              "Native inventory is fresh; no fixture/resource/outcome writes. Local recordings finalized; no replay association claim. Pair recording/replay is not claimed.",
+              "Windows same-machine X/P1 and Zero/P2 intro only; physical devices, other hosts and production native gameplay remain separate."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Native local failure reproduced on f339e12: X disappears during early P2-owned menu world draw despite living/visible native state. Local issue beads-eio.1.44 claimed for default correctness fix and exact-image local/paired validation."
+        "limitations": "66f7db0 fixes living-X omission in reviewed local/paired samples for both layouts. Historical f339e12 failure retained pending continuous transition packet coverage and native Quit-page suppression; issue beads-eio.1.44 remains open."
       }
     },
     {

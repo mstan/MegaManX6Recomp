@@ -1,0 +1,4002 @@
+{
+  "schema": 1,
+  "kind": "reviewed_local_and_loopback_HUD_layouts_with_fixed_menu_samples",
+  "reviewed_at_utc": "2026-10-24T15:45:07.639183+00:00",
+  "compiled_source": "66f7db0ee414dcbec277afc9c89f6d7a1a2e149c",
+  "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+  "qa_commit": "b85d97157e73ab29c3460215a55a63094efa2bca",
+  "exe_sha256": "627cc3dcc6bf49186c83355a103e44cb1c01d395b32897c064b71ddce83075fd",
+  "manifest_sha256": "329355cb9942693df0748822cb483683132a5c970ae3e6f68825c959db1338ee",
+  "local": [
+    {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\qualification.json",
+        "sha256": "cf2a3217bb788f414a2cd6d8a4376b20be4c1fcdbfd61578db060ce5c295a59d",
+        "size": 15331118
+      },
+      "layout": "stacked",
+      "checks": {
+        "both_original_menu_owners_complete_and_preserve_resources": true,
+        "all_final_drawable_meter_anchors": true,
+        "both_native_hp_values_changed": true
+      },
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\healthy-default-window.png",
+          "sha256": "9016a15dbaccd1f2ea59f4693b21e759d46e7ce9d0bb64875a2720be72362ca9",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\Owner0-opens-native-menu-earliest.png",
+          "sha256": "9539bf5195599f5af3e709164f6c8aa5c5a6c56876ee758a00d335d1002e1e27",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-opening-0.png",
+          "sha256": "bce6c80af889d0786a078921f3870a92fef266fa50e8180e83a7a86b7dced82b",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-opening-1.png",
+          "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-opening-2.png",
+          "sha256": "02a2faefbc07cd3b0d5efeb611004cb3c39ab653cb2672491956d1c3c9e1f2cf",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-opening-3.png",
+          "sha256": "02a2faefbc07cd3b0d5efeb611004cb3c39ab653cb2672491956d1c3c9e1f2cf",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-opening-4.png",
+          "sha256": "02a2faefbc07cd3b0d5efeb611004cb3c39ab653cb2672491956d1c3c9e1f2cf",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-opening-5.png",
+          "sha256": "0854348becff2ddc3295389e006fd34daa2154eb8a101d2ca0fc3073c90a5c9f",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-paused.png",
+          "sha256": "0854348becff2ddc3295389e006fd34daa2154eb8a101d2ca0fc3073c90a5c9f",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\Owner0-closes-native-menu-earliest.png",
+          "sha256": "02a2faefbc07cd3b0d5efeb611004cb3c39ab653cb2672491956d1c3c9e1f2cf",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-closing-0.png",
+          "sha256": "4fe40a74b23dd3eed138e63346bd25b92d7cc24dce05618f2c8dd390581e2dd4",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-closing-1.png",
+          "sha256": "6f12df9cb22dd5b60314521982a1276f1eb1cb522dd61e72e581f303c96fd08c",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-closing-2.png",
+          "sha256": "bc8ac85b59c04d44090afe1c711d894659e4c0bf7b49dff9ec3e5dd518f80f49",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-closing-3.png",
+          "sha256": "9539bf5195599f5af3e709164f6c8aa5c5a6c56876ee758a00d335d1002e1e27",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-closing-4.png",
+          "sha256": "29ecc970304160f49f3410f669107ceed843445110436326a14ca39d275c3dc7",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-closing-5.png",
+          "sha256": "51ff837c5d510ba0a38df29bcdfa665eb526b0f16a83ac8aa667615e187884dd",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-closing-6.png",
+          "sha256": "51ff837c5d510ba0a38df29bcdfa665eb526b0f16a83ac8aa667615e187884dd",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-closing-7.png",
+          "sha256": "f8043958b87171f146510adbf6337c0c50eac55a96d4fe278d6e262d2ed9dbd2",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-resumed.png",
+          "sha256": "b887dfe954dc5c6c1b6dfc967cc458a8f9e3301a7b20b7fe59c101c4b1df09a6",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\Owner1-opens-native-menu-earliest.png",
+          "sha256": "ef8ff95bf60337a625d6411e33d54ef4e3175c2ae20e929270dfd5b29b244554",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-opening-0.png",
+          "sha256": "1a03e272027ca76c273e82b48b9fe0d436baa4e78d68eb3ff84be2319cf0d3d6",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-opening-1.png",
+          "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-opening-2.png",
+          "sha256": "9306a435c4bb361ab809548b522eec93fb6c0fcf3379ff51cbfe5bd898e86f9f",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-opening-3.png",
+          "sha256": "e85e7dc9be257c4cf629ff6a554dfbb30a1d39eca13300e219253ed6d8a30b17",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-opening-4.png",
+          "sha256": "e85e7dc9be257c4cf629ff6a554dfbb30a1d39eca13300e219253ed6d8a30b17",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-opening-5.png",
+          "sha256": "d12171149d41d55e9ea7b61e0fec1c5d7ed06f6316792403de1213e8aee2abe7",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-paused.png",
+          "sha256": "d12171149d41d55e9ea7b61e0fec1c5d7ed06f6316792403de1213e8aee2abe7",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\Owner1-closes-native-menu-earliest.png",
+          "sha256": "e85e7dc9be257c4cf629ff6a554dfbb30a1d39eca13300e219253ed6d8a30b17",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-closing-0.png",
+          "sha256": "140ff23f3ec4b170481291bf8ed0595283ecad75cdaabef6c72077dd60cf60ba",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-closing-1.png",
+          "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-closing-2.png",
+          "sha256": "ab194b6100e1d6dadc30c749fa2672b083ede721959d3b5ef5910ca72438dfb5",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-closing-3.png",
+          "sha256": "ccafbb3d97ce4f17d013c087df4f19bda68b4c0d5f2eb050533f6ad760775ff3",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-closing-4.png",
+          "sha256": "d0fd0170336a80a3b7d75fd58fcb50b7a7c54cfc329bd26a0630834f0b6a1f6f",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-closing-5.png",
+          "sha256": "02244b23fd2d7c5f2e7f430839e22fe3239b325534b6ea994209610223e51558",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-closing-6.png",
+          "sha256": "198c32e5b8c4eec83ae9d475f013bfe44f46e7749a87ca9a773bdb27fa921ce5",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-closing-7.png",
+          "sha256": "62782b1285f44b640bca73562d119f4eb102ec7d0976fb0f4a310060d14a91f7",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-resumed.png",
+          "sha256": "5cee783cea4c0106c5f9ba079362b97a09ff9f8f77caf809c53d231a07f8fbf7",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\damaged-aspect-0-960x720.png",
+          "sha256": "1b92d32149e70ca1bd3651035d5d6811ed781226a20e8f64b08d41219f62380e",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\damaged-aspect-1-1200x600.png",
+          "sha256": "1c16cabbac42929b555aee0c1a187dec4039f0f260cb26f4c2b771d6be60a389",
+          "size": 2160828
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\damaged-aspect-2-640x900.png",
+          "sha256": "19d340755428473a99244e217c4ed26c3392a3b24f6e2d086bd0b732a32aab47",
+          "size": 1729098
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\damaged-aspect-3-960x720.png",
+          "sha256": "e993f2a2fafbd98a47c1c04ef6ca58e0bc0471027da3a26822be283719c97442",
+          "size": 2074543
+        }
+      ],
+      "recording": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\candidate\\saves\\input-recordings\\session-1792855284782253-1-0\\inputs.jsonl",
+        "sha256": "ec68c7ccbd520103960477877e89a8ff2d9c2e2a847731a9d556f513de088eed",
+        "events": 9949,
+        "natives": 6280,
+        "p2_reads": 3669,
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "627cc3dcc6bf49186c83355a103e44cb1c01d395b32897c064b71ddce83075fd",
+          "manifest_sha256": "329355cb9942693df0748822cb483683132a5c970ae3e6f68825c959db1338ee",
+          "mode": "offline",
+          "profile": null,
+          "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+          "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+        },
+        "requested_jump_seats": [],
+        "consumed_cross_seen_anywhere": [
+          0,
+          1
+        ],
+        "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence"
+      },
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "cards_unchanged": true
+    },
+    {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\qualification.json",
+        "sha256": "55b942d0961d300b8dc0039503716196981ab4385d0ce70696ee38a47b62646d",
+        "size": 15032269
+      },
+      "layout": "side_by_side",
+      "checks": {
+        "both_original_menu_owners_complete_and_preserve_resources": true,
+        "all_final_drawable_meter_anchors": true,
+        "both_native_hp_values_changed": true
+      },
+      "captures": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\healthy-default-window.png",
+          "sha256": "e7ba0da0c4eaa5c1e8a80348de251ca6af7e1e1c89faa0561acbcc753472060f",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\Owner0-opens-native-menu-earliest.png",
+          "sha256": "6c9504b318664779e9c3350753114637e44e0ecafa74baf63fcd802612d18dbd",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-opening-0.png",
+          "sha256": "7b0610582161b7fa9f9a136d1b786f9a61386a68bdc2afc1647568e68a11ce63",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-opening-1.png",
+          "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-opening-2.png",
+          "sha256": "cbf57d48d1648f093945e8192b5ca8ef650d766e38371781af61ad26b9d60922",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-opening-3.png",
+          "sha256": "24c157ff2bd555885a55d9194dd1b6a33f66f3995faf436c98fae2276d5295a0",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-opening-4.png",
+          "sha256": "5f00d7cc10ea03e9c14cbafc4805b327b65c3e4963a8f93c73d36641f6789eb1",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-opening-5.png",
+          "sha256": "5f00d7cc10ea03e9c14cbafc4805b327b65c3e4963a8f93c73d36641f6789eb1",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-paused.png",
+          "sha256": "52e276d85d9aa635b4ac6c01026b7b62952d48a8a99b1b9ba66965ed09b039db",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\Owner0-closes-native-menu-earliest.png",
+          "sha256": "52e276d85d9aa635b4ac6c01026b7b62952d48a8a99b1b9ba66965ed09b039db",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-closing-0.png",
+          "sha256": "7bf84ff9f70bfaf2171369b7b43de0bab1ce76f2a9bd3289f45c0494398290e0",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-closing-1.png",
+          "sha256": "5cf5fef80dc15886826c22f4e847db2371dc6b2036f72e167858dc6fc6b38309",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-closing-2.png",
+          "sha256": "4627448bb088d30fc2d7812c65f2a5aabbcb2348b60b5db3e1fdda17f4d1e96d",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-closing-3.png",
+          "sha256": "d5fd4d484f1dbb8522066fdee771264fbe83651251634fd8a404097b277e4c9c",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-closing-4.png",
+          "sha256": "d5fd4d484f1dbb8522066fdee771264fbe83651251634fd8a404097b277e4c9c",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-closing-5.png",
+          "sha256": "3d4bba9bf33ceed29484856f1767a646fa2e74affe4ab953ae71615152bde41f",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-closing-6.png",
+          "sha256": "7ab801a4c2a82d938cbf86590b562d4b982a39a0a741cf6953161b29a112b812",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-closing-7.png",
+          "sha256": "7ab801a4c2a82d938cbf86590b562d4b982a39a0a741cf6953161b29a112b812",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-resumed.png",
+          "sha256": "3d4bba9bf33ceed29484856f1767a646fa2e74affe4ab953ae71615152bde41f",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\Owner1-opens-native-menu-earliest.png",
+          "sha256": "a59f15bbc2589e0502b0370ed27987aee7e1ac971d7ec0caa6ab289b0898dea1",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-opening-0.png",
+          "sha256": "77b72648ffa078f05c644c2ff2d402fafab6d816acea8e6343632315fea13948",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-opening-1.png",
+          "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-opening-2.png",
+          "sha256": "08eacd61399bd95fbeec8304dc0424b92783ca735badd946b58db77c74c79027",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-opening-3.png",
+          "sha256": "4cdc38e2cc19c6353caf777ecaf8796cb600413596ba6d3109d596ada47b7134",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-opening-4.png",
+          "sha256": "76c6dadc853cacce5f430ea99c67ad1749c764205d112d697e26f4f14e8bb335",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-opening-5.png",
+          "sha256": "76c6dadc853cacce5f430ea99c67ad1749c764205d112d697e26f4f14e8bb335",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-paused.png",
+          "sha256": "4cdc38e2cc19c6353caf777ecaf8796cb600413596ba6d3109d596ada47b7134",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\Owner1-closes-native-menu-earliest.png",
+          "sha256": "4cdc38e2cc19c6353caf777ecaf8796cb600413596ba6d3109d596ada47b7134",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-closing-0.png",
+          "sha256": "7cfc4ae886ec33a1a0207eb2813c499ed24f505aaa3ade55b408c60ab23cabfd",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-closing-1.png",
+          "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-closing-2.png",
+          "sha256": "e69d13fb3f3e35317d0ae987e2d85171ba45653d22b8f5d8e689d463d77450f5",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-closing-3.png",
+          "sha256": "51c8520c7839b621b441e6459f4959ef87fb5214c615d52c4aeff7cda5052869",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-closing-4.png",
+          "sha256": "b4e4c81464a94fd30500e98228c3c3c3f350f868bdb230f9587f23b0e5adee9f",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-closing-5.png",
+          "sha256": "64f78840b07f1df631550b15d2b954c800f7a1264eca24312a63e9dd79ee5459",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-closing-6.png",
+          "sha256": "4345de637c4f0fb2bc48a43f6c181b382aaa14cdcd8604e5134318d7606c03d2",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-closing-7.png",
+          "sha256": "f138720bbfd6344823b8ad303fa30dde0dd97b415403de993f7835fb1febc182",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-resumed.png",
+          "sha256": "f138720bbfd6344823b8ad303fa30dde0dd97b415403de993f7835fb1febc182",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\damaged-aspect-0-960x720.png",
+          "sha256": "aa929e6f9b8fc54441c61f4a6e6736f8bb98dd3bfe282adbf9b4e6f5193358e1",
+          "size": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\damaged-aspect-1-1200x600.png",
+          "sha256": "c36f27e11ba5ded9ea91898a286afa7fbb1bb8fbed4a262ab64ccc2281bdc9f3",
+          "size": 2160828
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\damaged-aspect-2-640x900.png",
+          "sha256": "6d975d3b313680fca7c20efb27d70f33ddc06991be66d832668d195336c9b98f",
+          "size": 1729098
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\damaged-aspect-3-960x720.png",
+          "sha256": "30f123e3ff42dbb43c9db24edd607896e9d77002494627599f775cdf976e4a8f",
+          "size": 2074543
+        }
+      ],
+      "recording": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\candidate\\saves\\input-recordings\\session-1792854062234947-1-0\\inputs.jsonl",
+        "sha256": "94105a20ba35273d91e83f0b909cb176a7ae7030cc3192163807a6a2dafb3667",
+        "events": 9842,
+        "natives": 6210,
+        "p2_reads": 3632,
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "627cc3dcc6bf49186c83355a103e44cb1c01d395b32897c064b71ddce83075fd",
+          "manifest_sha256": "329355cb9942693df0748822cb483683132a5c970ae3e6f68825c959db1338ee",
+          "mode": "offline",
+          "profile": null,
+          "settings_sha256": "33f396104cb3bc11ac735d7a4a228bcd3e3b9bf2f0c46cf56aa1048a8706ce3b",
+          "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+        },
+        "requested_jump_seats": [],
+        "consumed_cross_seen_anywhere": [
+          0,
+          1
+        ],
+        "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence"
+      },
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "cards_unchanged": true
+    }
+  ],
+  "paired": [
+    {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\qualification.json",
+        "sha256": "e1d25618ce863940d8dc2b57d2d2432a04498931cd510aa675eeddace86166e2",
+        "size": 15589333
+      },
+      "layout": "stacked",
+      "checks": {
+        "both_native_menu_owners_preserve_resources_and_resume": true,
+        "both_peers_genuine_native_hp_changes": true,
+        "both_peers_all_final_drawable_meter_anchors": true
+      },
+      "peers": [
+        {
+          "captures": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-opening-earliest.png",
+              "sha256": "6dccac9af0452e4fa65d5cdeda5b2fd72a1ab41e3f63f63908084b072608df67",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-opening-0.png",
+              "sha256": "67832c9ba5b24f5b5075e4db8b425a109947833cc6f7499e3906643a27db577c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-opening-1.png",
+              "sha256": "1697d6813314d0a9935767f29180989907287afe6443c3dd0391d31bbf924046",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-opening-2.png",
+              "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-opening-3.png",
+              "sha256": "58b1682f3c1b38724bbe58bc107bdeb197fb69a70e9c0e82f64328029d1f7177",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-paused.png",
+              "sha256": "530a49424bb0f527aef70772e773e664d530629c6698df936973a34ebc4c8991",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-closing-earliest.png",
+              "sha256": "0200fe1cf7ede1486c5af39ece4e1122db3e25ab46d3ce4b145256681816b5a8",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-closing-0.png",
+              "sha256": "2e74db0c78244f32a76f0b851f642d1d2f17674392086c2ba711956f68f8a26c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-closing-1.png",
+              "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-closing-2.png",
+              "sha256": "d4563b897dc42113fe33cf954cb630974740e8c8732c71e77f5b0166bc4a6155",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-closing-3.png",
+              "sha256": "6dccac9af0452e4fa65d5cdeda5b2fd72a1ab41e3f63f63908084b072608df67",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-closing-4.png",
+              "sha256": "5475f4f4a907d11c4ecd138a80ea3871a5020a95894952dc46b3bcbf1e23c4a2",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-closing-5.png",
+              "sha256": "5475f4f4a907d11c4ecd138a80ea3871a5020a95894952dc46b3bcbf1e23c4a2",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-resumed.png",
+              "sha256": "6dccac9af0452e4fa65d5cdeda5b2fd72a1ab41e3f63f63908084b072608df67",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-opening-earliest.png",
+              "sha256": "261b4ca8c1e78400bbb99f71c481e7e7304bfb4443bc1733e9ce29d5e6ee1495",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-opening-0.png",
+              "sha256": "18843a54c64a32cecde2ca8ff4e095d714e94dfa0d240c66a07d8be423ca6e5f",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-opening-1.png",
+              "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-opening-2.png",
+              "sha256": "d10156a0f00c4ea4f8584cfc5de4eab1e934d27dc55c32fd5f146f0a0960c131",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-opening-3.png",
+              "sha256": "db84037eefa853eef0e00997a294b97a6b5f361352a30a87a92386bdf945dce6",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-paused.png",
+              "sha256": "eb1c304337e78168b9382e68c260ba2c761ac60079729fd419cbc1791398b999",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-closing-earliest.png",
+              "sha256": "eb1c304337e78168b9382e68c260ba2c761ac60079729fd419cbc1791398b999",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-closing-0.png",
+              "sha256": "6fb425ccba6f8cb020796be7f1296190b52d1fa65e90e9ccfdfca30499616f22",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-closing-1.png",
+              "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-closing-2.png",
+              "sha256": "edf3753602311cfb16d611114257fab6a75007fa8acc7dbea3ce1aa21d58d53f",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-closing-3.png",
+              "sha256": "635b683c7378af879c70005589278fb5387e3b454ac6a02581a52de8ac335a7f",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-closing-4.png",
+              "sha256": "feebdcd0780cfcb0f508d4484ce8892275d0354e97f24d2ddc07f2dd9357f3e9",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-closing-5.png",
+              "sha256": "feebdcd0780cfcb0f508d4484ce8892275d0354e97f24d2ddc07f2dd9357f3e9",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-resumed.png",
+              "sha256": "635b683c7378af879c70005589278fb5387e3b454ac6a02581a52de8ac335a7f",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\damaged-aspect-0-960x720.png",
+              "sha256": "13fa29e3acad050fe44c778cb26680eda3822bfef33ae654f5c45ead1c1b4b04",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\damaged-aspect-1-1200x600.png",
+              "sha256": "8af079952833344d685e0b8a4b3a3ed95d859cd1575711a8308416761c6f9773",
+              "size": 2160828
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\damaged-aspect-2-640x900.png",
+              "sha256": "e88ec7949ab397d62a3841c2c7cc17bcd65fb8af92ca209ca7e2911154b5a72e",
+              "size": 1729098
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\damaged-aspect-3-960x720.png",
+              "sha256": "62c654aa7c229f92efce30e975f2d914e30921b70a459a6fa03bc01b23af266a",
+              "size": 2074543
+            }
+          ],
+          "measurements": [
+            {
+              "image_size": [
+                960,
+                720
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 0.0,
+                "scale": 3.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 48.0,
+                  "y1": 80.0,
+                  "native_fill_area": 96.0
+                },
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 152.0,
+                  "y1": 184.0,
+                  "native_fill_area": 96.0
+                }
+              ]
+            },
+            {
+              "image_size": [
+                960,
+                720
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 0.0,
+                "scale": 3.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 48.0,
+                  "y1": 80.0,
+                  "native_fill_area": 96.0
+                },
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 152.0,
+                  "y1": 184.0,
+                  "native_fill_area": 96.0
+                }
+              ]
+            },
+            {
+              "image_size": [
+                960,
+                720
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 0.0,
+                "scale": 3.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 51.0,
+                  "y1": 80.0,
+                  "native_fill_area": 87.0
+                },
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 157.0,
+                  "y1": 184.0,
+                  "native_fill_area": 81.0
+                }
+              ]
+            },
+            {
+              "image_size": [
+                1200,
+                600
+              ],
+              "viewport": {
+                "x": 200.0,
+                "y": 0.0,
+                "scale": 2.5
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 24.8,
+                  "y0": 52.0,
+                  "y1": 80.0,
+                  "native_fill_area": 78.4
+                },
+                {
+                  "x0": 22.0,
+                  "x1": 24.8,
+                  "y0": 158.0,
+                  "y1": 184.0,
+                  "native_fill_area": 72.8
+                }
+              ]
+            },
+            {
+              "image_size": [
+                640,
+                900
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 210.0,
+                "scale": 2.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 53.0,
+                  "y1": 80.0,
+                  "native_fill_area": 81.0
+                },
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 158.0,
+                  "y1": 184.0,
+                  "native_fill_area": 78.0
+                }
+              ]
+            },
+            {
+              "image_size": [
+                960,
+                720
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 0.0,
+                "scale": 3.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 54.0,
+                  "y1": 80.0,
+                  "native_fill_area": 78.0
+                },
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 159.0,
+                  "y1": 184.0,
+                  "native_fill_area": 75.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "captures": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-opening-earliest.png",
+              "sha256": "6dccac9af0452e4fa65d5cdeda5b2fd72a1ab41e3f63f63908084b072608df67",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-opening-0.png",
+              "sha256": "6dccac9af0452e4fa65d5cdeda5b2fd72a1ab41e3f63f63908084b072608df67",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-opening-1.png",
+              "sha256": "1697d6813314d0a9935767f29180989907287afe6443c3dd0391d31bbf924046",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-opening-2.png",
+              "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-opening-3.png",
+              "sha256": "98623a48a2362b378cd23263af209d680d3e14decf8f930d43e4c266a0cb2c7c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-paused.png",
+              "sha256": "530a49424bb0f527aef70772e773e664d530629c6698df936973a34ebc4c8991",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-closing-earliest.png",
+              "sha256": "0200fe1cf7ede1486c5af39ece4e1122db3e25ab46d3ce4b145256681816b5a8",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-closing-0.png",
+              "sha256": "a08578c249cb416127a2cfb928d41224707dd1193f362e966e6b66fd20906df8",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-closing-1.png",
+              "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-closing-2.png",
+              "sha256": "d4563b897dc42113fe33cf954cb630974740e8c8732c71e77f5b0166bc4a6155",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-closing-3.png",
+              "sha256": "6dccac9af0452e4fa65d5cdeda5b2fd72a1ab41e3f63f63908084b072608df67",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-closing-4.png",
+              "sha256": "5475f4f4a907d11c4ecd138a80ea3871a5020a95894952dc46b3bcbf1e23c4a2",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-closing-5.png",
+              "sha256": "5475f4f4a907d11c4ecd138a80ea3871a5020a95894952dc46b3bcbf1e23c4a2",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-resumed.png",
+              "sha256": "6dccac9af0452e4fa65d5cdeda5b2fd72a1ab41e3f63f63908084b072608df67",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-opening-earliest.png",
+              "sha256": "261b4ca8c1e78400bbb99f71c481e7e7304bfb4443bc1733e9ce29d5e6ee1495",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-opening-0.png",
+              "sha256": "18843a54c64a32cecde2ca8ff4e095d714e94dfa0d240c66a07d8be423ca6e5f",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-opening-1.png",
+              "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-opening-2.png",
+              "sha256": "3488dd79f67e8600a87ae893faf75d7120c10234592a28ff0da20d61112a0e2f",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-opening-3.png",
+              "sha256": "db84037eefa853eef0e00997a294b97a6b5f361352a30a87a92386bdf945dce6",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-paused.png",
+              "sha256": "db84037eefa853eef0e00997a294b97a6b5f361352a30a87a92386bdf945dce6",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-closing-earliest.png",
+              "sha256": "eb1c304337e78168b9382e68c260ba2c761ac60079729fd419cbc1791398b999",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-closing-0.png",
+              "sha256": "1f7d510bf0a3fb2e35f722de05835d4a8f7b7937c2c93ee0a355a471cd59529d",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-closing-1.png",
+              "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-closing-2.png",
+              "sha256": "edf3753602311cfb16d611114257fab6a75007fa8acc7dbea3ce1aa21d58d53f",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-closing-3.png",
+              "sha256": "635b683c7378af879c70005589278fb5387e3b454ac6a02581a52de8ac335a7f",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-closing-4.png",
+              "sha256": "feebdcd0780cfcb0f508d4484ce8892275d0354e97f24d2ddc07f2dd9357f3e9",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-closing-5.png",
+              "sha256": "feebdcd0780cfcb0f508d4484ce8892275d0354e97f24d2ddc07f2dd9357f3e9",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-resumed.png",
+              "sha256": "635b683c7378af879c70005589278fb5387e3b454ac6a02581a52de8ac335a7f",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\damaged-aspect-0-960x720.png",
+              "sha256": "e8c2c982018b19b4e52283ec78952eb82eea9c9a11e624585fa2e639975ab3dd",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\damaged-aspect-1-1200x600.png",
+              "sha256": "e2dbbf95af26db89a54620bb7308f555643e5e192953bbf7c782f0ff3701c5ff",
+              "size": 2160828
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\damaged-aspect-2-640x900.png",
+              "sha256": "e88ec7949ab397d62a3841c2c7cc17bcd65fb8af92ca209ca7e2911154b5a72e",
+              "size": 1729098
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\damaged-aspect-3-960x720.png",
+              "sha256": "62c654aa7c229f92efce30e975f2d914e30921b70a459a6fa03bc01b23af266a",
+              "size": 2074543
+            }
+          ],
+          "measurements": [
+            {
+              "image_size": [
+                960,
+                720
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 0.0,
+                "scale": 3.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 48.0,
+                  "y1": 80.0,
+                  "native_fill_area": 96.0
+                },
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 152.0,
+                  "y1": 184.0,
+                  "native_fill_area": 96.0
+                }
+              ]
+            },
+            {
+              "image_size": [
+                960,
+                720
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 0.0,
+                "scale": 3.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 48.0,
+                  "y1": 80.0,
+                  "native_fill_area": 96.0
+                },
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 152.0,
+                  "y1": 184.0,
+                  "native_fill_area": 96.0
+                }
+              ]
+            },
+            {
+              "image_size": [
+                960,
+                720
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 0.0,
+                "scale": 3.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 51.0,
+                  "y1": 80.0,
+                  "native_fill_area": 87.0
+                },
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 157.0,
+                  "y1": 184.0,
+                  "native_fill_area": 81.0
+                }
+              ]
+            },
+            {
+              "image_size": [
+                1200,
+                600
+              ],
+              "viewport": {
+                "x": 200.0,
+                "y": 0.0,
+                "scale": 2.5
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 24.8,
+                  "y0": 52.0,
+                  "y1": 80.0,
+                  "native_fill_area": 78.4
+                },
+                {
+                  "x0": 22.0,
+                  "x1": 24.8,
+                  "y0": 158.0,
+                  "y1": 184.0,
+                  "native_fill_area": 72.8
+                }
+              ]
+            },
+            {
+              "image_size": [
+                640,
+                900
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 210.0,
+                "scale": 2.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 53.0,
+                  "y1": 80.0,
+                  "native_fill_area": 81.0
+                },
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 158.0,
+                  "y1": 184.0,
+                  "native_fill_area": 78.0
+                }
+              ]
+            },
+            {
+              "image_size": [
+                960,
+                720
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 0.0,
+                "scale": 3.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 54.0,
+                  "y1": 80.0,
+                  "native_fill_area": 78.0
+                },
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 159.0,
+                  "y1": 184.0,
+                  "native_fill_area": 75.0
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "matching_resolved_crc_samples": 73,
+      "crc_windows": 10,
+      "final_resources": [
+        [
+          [
+            26,
+            0,
+            [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          ],
+          [
+            25,
+            0,
+            [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          ]
+        ],
+        [
+          [
+            26,
+            0,
+            [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          ],
+          [
+            25,
+            0,
+            [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          ]
+        ]
+      ],
+      "cleanup": [
+        {
+          "pid": 77972,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "pid": 24736,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "cards_unchanged": true
+    },
+    {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\qualification.json",
+        "sha256": "5da8089fa166464c79e0f6576d52274485ec08a04034a68a5bb0240fec8d9613",
+        "size": 15712861
+      },
+      "layout": "side_by_side",
+      "checks": {
+        "both_native_menu_owners_preserve_resources_and_resume": true,
+        "both_peers_genuine_native_hp_changes": true,
+        "both_peers_all_final_drawable_meter_anchors": true
+      },
+      "peers": [
+        {
+          "captures": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-opening-earliest.png",
+              "sha256": "840643adb88aca582359551136a77a6942988805008faec3d8e43231573b834d",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-opening-0.png",
+              "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-opening-1.png",
+              "sha256": "238a8b9315cca999c8326e1c9b0bf6e39a305a8c8ef9b2ab21d26f0261b65471",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-opening-2.png",
+              "sha256": "f9dcead5ce84c6fc12d7c29453e5f71d3d5233ca8545d98dc491e41f88d6eb9c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-opening-3.png",
+              "sha256": "f9dcead5ce84c6fc12d7c29453e5f71d3d5233ca8545d98dc491e41f88d6eb9c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-paused.png",
+              "sha256": "238a8b9315cca999c8326e1c9b0bf6e39a305a8c8ef9b2ab21d26f0261b65471",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-closing-earliest.png",
+              "sha256": "238a8b9315cca999c8326e1c9b0bf6e39a305a8c8ef9b2ab21d26f0261b65471",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-closing-0.png",
+              "sha256": "f9dcead5ce84c6fc12d7c29453e5f71d3d5233ca8545d98dc491e41f88d6eb9c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-closing-1.png",
+              "sha256": "a810c9972a77a0d22231e324715200941cad4aa459a7516b6e7ca30fa9748c07",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-closing-2.png",
+              "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-closing-3.png",
+              "sha256": "a5ae61d26fc850077d359ad11044f13e20bc641d0aefe824cf744bfc6ae78d6f",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-closing-4.png",
+              "sha256": "0eb8c0951230d927ea9d8bb1a8e93375183180e195d603bdb03427c125f8c78c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-closing-5.png",
+              "sha256": "0eb8c0951230d927ea9d8bb1a8e93375183180e195d603bdb03427c125f8c78c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-resumed.png",
+              "sha256": "e3ba358b39593cd477edfb92e5bed35c99725e54ea9e2a43392a2ee5e12ada73",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-opening-earliest.png",
+              "sha256": "0eb8c0951230d927ea9d8bb1a8e93375183180e195d603bdb03427c125f8c78c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-opening-0.png",
+              "sha256": "f9b4f316f29ee3bf451f6fc1255c835075ccb3d7536e1043f8dad94a0fcab835",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-opening-1.png",
+              "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-opening-2.png",
+              "sha256": "22bc113cff388fce8c1cf834e0c95f4022d5b15deeb5977072d1f731d6b6c02c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-opening-3.png",
+              "sha256": "22bc113cff388fce8c1cf834e0c95f4022d5b15deeb5977072d1f731d6b6c02c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-paused.png",
+              "sha256": "855f549433df80ee0af44915cd5e7fa5976fa35bdd815a7d2bca8f9d1265a90d",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-closing-earliest.png",
+              "sha256": "855f549433df80ee0af44915cd5e7fa5976fa35bdd815a7d2bca8f9d1265a90d",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-closing-0.png",
+              "sha256": "b6a8fe9601ee9fb8b8be9683efa5c6ed0b7655c6f7cd089cb54fd0dc9800b66e",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-closing-1.png",
+              "sha256": "a44f26a0953bf03c6e1caded96b5d52da2230e14308c39f5fc42b833d0576a24",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-closing-2.png",
+              "sha256": "9ab3b6ff493427e38ff6b5c7d38d54c4b09ff31a278b2affc7bf66c7f9ad3f4a",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-closing-3.png",
+              "sha256": "9c4d5a67bfa87c1fc9ad708baabb361b98701c6414c3cf89c9387c8ac39d2f09",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-closing-4.png",
+              "sha256": "ca405a7ff30be14c5d88c2e2339c948923e587dcc96f523c84be4ab085495ea1",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-closing-5.png",
+              "sha256": "fb3c5aa25c110fddb29f30fd5ee750550e91862104553178f0c9f6d5a815543c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-resumed.png",
+              "sha256": "524fa2a02e8690180581f482fe944faf8041578634817d0c14480c906b7fdf58",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\damaged-aspect-0-960x720.png",
+              "sha256": "8ee1316ab66c08f6813f7203a6129d00b155cf446333dfa4d07548c3825c635b",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\damaged-aspect-1-1200x600.png",
+              "sha256": "c7478a459daff8c043e8d08c5b29bcfe293375f4718c5443f320c8460d8e5906",
+              "size": 2160828
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\damaged-aspect-2-640x900.png",
+              "sha256": "c1aecbfea688691e8a9dd385a16ddf5b8049d29be24c63d75c8694a9ccbb2aa4",
+              "size": 1729098
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\damaged-aspect-3-960x720.png",
+              "sha256": "0f83ad5f5bcace45280ec22441057183c51cfb53be05ae9781891eab778684b8",
+              "size": 2074543
+            }
+          ],
+          "measurements": [
+            {
+              "image_size": [
+                960,
+                720
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 0.0,
+                "scale": 3.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 48.0,
+                  "y1": 80.0,
+                  "native_fill_area": 96.0
+                },
+                {
+                  "x0": 78.0,
+                  "x1": 81.0,
+                  "y0": 48.0,
+                  "y1": 80.0,
+                  "native_fill_area": 96.0
+                }
+              ]
+            },
+            {
+              "image_size": [
+                960,
+                720
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 0.0,
+                "scale": 3.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 48.0,
+                  "y1": 80.0,
+                  "native_fill_area": 96.0
+                },
+                {
+                  "x0": 78.0,
+                  "x1": 81.0,
+                  "y0": 48.0,
+                  "y1": 80.0,
+                  "native_fill_area": 96.0
+                }
+              ]
+            },
+            {
+              "image_size": [
+                960,
+                720
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 0.0,
+                "scale": 3.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 51.0,
+                  "y1": 80.0,
+                  "native_fill_area": 87.0
+                },
+                {
+                  "x0": 78.0,
+                  "x1": 81.0,
+                  "y0": 53.0,
+                  "y1": 80.0,
+                  "native_fill_area": 81.0
+                }
+              ]
+            },
+            {
+              "image_size": [
+                1200,
+                600
+              ],
+              "viewport": {
+                "x": 200.0,
+                "y": 0.0,
+                "scale": 2.5
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 24.8,
+                  "y0": 52.0,
+                  "y1": 80.0,
+                  "native_fill_area": 78.4
+                },
+                {
+                  "x0": 78.0,
+                  "x1": 80.8,
+                  "y0": 54.0,
+                  "y1": 80.0,
+                  "native_fill_area": 72.8
+                }
+              ]
+            },
+            {
+              "image_size": [
+                640,
+                900
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 210.0,
+                "scale": 2.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 52.0,
+                  "y1": 80.0,
+                  "native_fill_area": 84.0
+                },
+                {
+                  "x0": 78.0,
+                  "x1": 81.0,
+                  "y0": 55.0,
+                  "y1": 80.0,
+                  "native_fill_area": 75.0
+                }
+              ]
+            },
+            {
+              "image_size": [
+                960,
+                720
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 0.0,
+                "scale": 3.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 53.0,
+                  "y1": 80.0,
+                  "native_fill_area": 81.0
+                },
+                {
+                  "x0": 78.0,
+                  "x1": 81.0,
+                  "y0": 56.0,
+                  "y1": 80.0,
+                  "native_fill_area": 72.0
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "captures": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-opening-earliest.png",
+              "sha256": "840643adb88aca582359551136a77a6942988805008faec3d8e43231573b834d",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-opening-0.png",
+              "sha256": "c37a1c4d3243eb126e381df726a7da6d9609167fb317483d6dd5533dd89edc73",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-opening-1.png",
+              "sha256": "238a8b9315cca999c8326e1c9b0bf6e39a305a8c8ef9b2ab21d26f0261b65471",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-opening-2.png",
+              "sha256": "f9dcead5ce84c6fc12d7c29453e5f71d3d5233ca8545d98dc491e41f88d6eb9c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-opening-3.png",
+              "sha256": "f9dcead5ce84c6fc12d7c29453e5f71d3d5233ca8545d98dc491e41f88d6eb9c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-paused.png",
+              "sha256": "238a8b9315cca999c8326e1c9b0bf6e39a305a8c8ef9b2ab21d26f0261b65471",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-closing-earliest.png",
+              "sha256": "238a8b9315cca999c8326e1c9b0bf6e39a305a8c8ef9b2ab21d26f0261b65471",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-closing-0.png",
+              "sha256": "f9dcead5ce84c6fc12d7c29453e5f71d3d5233ca8545d98dc491e41f88d6eb9c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-closing-1.png",
+              "sha256": "a810c9972a77a0d22231e324715200941cad4aa459a7516b6e7ca30fa9748c07",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-closing-2.png",
+              "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-closing-3.png",
+              "sha256": "a5ae61d26fc850077d359ad11044f13e20bc641d0aefe824cf744bfc6ae78d6f",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-closing-4.png",
+              "sha256": "0eb8c0951230d927ea9d8bb1a8e93375183180e195d603bdb03427c125f8c78c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-closing-5.png",
+              "sha256": "0eb8c0951230d927ea9d8bb1a8e93375183180e195d603bdb03427c125f8c78c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-resumed.png",
+              "sha256": "e3ba358b39593cd477edfb92e5bed35c99725e54ea9e2a43392a2ee5e12ada73",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-opening-earliest.png",
+              "sha256": "0eb8c0951230d927ea9d8bb1a8e93375183180e195d603bdb03427c125f8c78c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-opening-0.png",
+              "sha256": "62a382d5a3f197e3483345d460c8af8b09520c226af3c458b70b295e6d0b6bd0",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-opening-1.png",
+              "sha256": "6a2ae2471f11667415c19293116ac18d73688e54a3209a71a1ccf30269c56268",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-opening-2.png",
+              "sha256": "22bc113cff388fce8c1cf834e0c95f4022d5b15deeb5977072d1f731d6b6c02c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-opening-3.png",
+              "sha256": "22bc113cff388fce8c1cf834e0c95f4022d5b15deeb5977072d1f731d6b6c02c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-paused.png",
+              "sha256": "855f549433df80ee0af44915cd5e7fa5976fa35bdd815a7d2bca8f9d1265a90d",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-closing-earliest.png",
+              "sha256": "22bc113cff388fce8c1cf834e0c95f4022d5b15deeb5977072d1f731d6b6c02c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-closing-0.png",
+              "sha256": "b6a8fe9601ee9fb8b8be9683efa5c6ed0b7655c6f7cd089cb54fd0dc9800b66e",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-closing-1.png",
+              "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-closing-2.png",
+              "sha256": "387567c385b00d5822ed704bc5ca98f0663b16b9d8b6530a1ccf959886d10986",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-closing-3.png",
+              "sha256": "9c4d5a67bfa87c1fc9ad708baabb361b98701c6414c3cf89c9387c8ac39d2f09",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-closing-4.png",
+              "sha256": "0c551d3d02931514a5f025c591a8563f39b51e5b907f1232d55584770440cb2e",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-closing-5.png",
+              "sha256": "fb3c5aa25c110fddb29f30fd5ee750550e91862104553178f0c9f6d5a815543c",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-resumed.png",
+              "sha256": "524fa2a02e8690180581f482fe944faf8041578634817d0c14480c906b7fdf58",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\damaged-aspect-0-960x720.png",
+              "sha256": "8ee1316ab66c08f6813f7203a6129d00b155cf446333dfa4d07548c3825c635b",
+              "size": 2074543
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\damaged-aspect-1-1200x600.png",
+              "sha256": "c7478a459daff8c043e8d08c5b29bcfe293375f4718c5443f320c8460d8e5906",
+              "size": 2160828
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\damaged-aspect-2-640x900.png",
+              "sha256": "8f6fc2203082c63335473a2d7ec7fe9c12427aa1b546afe24129938d7cab5d66",
+              "size": 1729098
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\damaged-aspect-3-960x720.png",
+              "sha256": "0f83ad5f5bcace45280ec22441057183c51cfb53be05ae9781891eab778684b8",
+              "size": 2074543
+            }
+          ],
+          "measurements": [
+            {
+              "image_size": [
+                960,
+                720
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 0.0,
+                "scale": 3.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 48.0,
+                  "y1": 80.0,
+                  "native_fill_area": 96.0
+                },
+                {
+                  "x0": 78.0,
+                  "x1": 81.0,
+                  "y0": 48.0,
+                  "y1": 80.0,
+                  "native_fill_area": 96.0
+                }
+              ]
+            },
+            {
+              "image_size": [
+                960,
+                720
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 0.0,
+                "scale": 3.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 48.0,
+                  "y1": 80.0,
+                  "native_fill_area": 96.0
+                },
+                {
+                  "x0": 78.0,
+                  "x1": 81.0,
+                  "y0": 48.0,
+                  "y1": 80.0,
+                  "native_fill_area": 96.0
+                }
+              ]
+            },
+            {
+              "image_size": [
+                960,
+                720
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 0.0,
+                "scale": 3.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 51.0,
+                  "y1": 80.0,
+                  "native_fill_area": 87.0
+                },
+                {
+                  "x0": 78.0,
+                  "x1": 81.0,
+                  "y0": 53.0,
+                  "y1": 80.0,
+                  "native_fill_area": 81.0
+                }
+              ]
+            },
+            {
+              "image_size": [
+                1200,
+                600
+              ],
+              "viewport": {
+                "x": 200.0,
+                "y": 0.0,
+                "scale": 2.5
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 24.8,
+                  "y0": 52.0,
+                  "y1": 80.0,
+                  "native_fill_area": 78.4
+                },
+                {
+                  "x0": 78.0,
+                  "x1": 80.8,
+                  "y0": 54.0,
+                  "y1": 80.0,
+                  "native_fill_area": 72.8
+                }
+              ]
+            },
+            {
+              "image_size": [
+                640,
+                900
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 210.0,
+                "scale": 2.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 52.0,
+                  "y1": 80.0,
+                  "native_fill_area": 84.0
+                },
+                {
+                  "x0": 78.0,
+                  "x1": 81.0,
+                  "y0": 55.0,
+                  "y1": 80.0,
+                  "native_fill_area": 75.0
+                }
+              ]
+            },
+            {
+              "image_size": [
+                960,
+                720
+              ],
+              "viewport": {
+                "x": 0.0,
+                "y": 0.0,
+                "scale": 3.0
+              },
+              "boxes": [
+                {
+                  "x0": 22.0,
+                  "x1": 25.0,
+                  "y0": 53.0,
+                  "y1": 80.0,
+                  "native_fill_area": 81.0
+                },
+                {
+                  "x0": 78.0,
+                  "x1": 81.0,
+                  "y0": 56.0,
+                  "y1": 80.0,
+                  "native_fill_area": 72.0
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "matching_resolved_crc_samples": 75,
+      "crc_windows": 10,
+      "final_resources": [
+        [
+          [
+            27,
+            0,
+            [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          ],
+          [
+            24,
+            0,
+            [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          ]
+        ],
+        [
+          [
+            27,
+            0,
+            [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          ],
+          [
+            24,
+            0,
+            [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          ]
+        ]
+      ],
+      "cleanup": [
+        {
+          "pid": 13468,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "pid": 12236,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "cards_unchanged": true
+    }
+  ],
+  "validation": {
+    "python_tests_run": 785,
+    "python_skips": 12,
+    "isolated_summary": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\summary.json",
+      "sha256": "f872188a4af580fbd236aa820f766fdee8fd5275348e2b9e7607b9c58059b9e9",
+      "size": 18297
+    },
+    "native_build": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v23-66f7db0\\candidate.json",
+      "sha256": "b885fb1cc0c8f7625535f107f502de8e67b2cbbd1a254af72a8ebc55fe20ea0a",
+      "size": 4471
+    },
+    "debug_ctests": 103,
+    "production_ctests": 103,
+    "earlier_combined_attempt": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-python-tests.txt",
+      "sha256": "f06df8a9911cb2374a12b09aaeacb7f66c296b8a441770d1280ad4cf0c4b76ac",
+      "size": 138704
+    },
+    "earlier_attempt_interpretation": "A preparation test changes process TEMP to a disposable child directory; same-process unrelated suites then saw its removed directory. Fresh serial processes for all modules pass. No gameplay failure is inferred."
+  },
+  "visual_review": [
+    "All local stacked and side-by-side capture contact sheets reviewed, including earliest Start frames, opening/closing black fades, original X and Zero menu pages, resumed gameplay and every drawable-aspect image.",
+    "Both peers of both layouts reviewed separately. Both heroes and both HP meters appear in sampled world frames; menu-only pages retain original character art without gameplay bodies or gameplay meters.",
+    "The raw VRAM intro.png is not composed output and visibly contains atlas/stale-region artifacts. It is not used as presentation proof; intro-present.png is the composed output."
+  ],
+  "limits": [
+    "R5 local and netplay pass their bounded final-window HP-anchor check on this exact image, both layouts and three drawable aspects.",
+    "F18 previously reproduced living-X omission is absent in reviewed local and paired samples. Continuous every-frame packet coverage and actual native Quit-page suppression are still required before closing F18. Prior failure is retained.",
+    "R6 portrait/layout/HP observations pass partially; selected/spent ammo HUD ownership remains unverified in both modes.",
+    "Native inventory is fresh; no fixture/resource/outcome writes. Local recordings finalized; no replay association claim. Pair recording/replay is not claimed.",
+    "Windows same-machine X/P1 and Zero/P2 intro only; physical devices, other hosts and production native gameplay remain separate."
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\healthy-default-window.png",
+      "sha256": "9016a15dbaccd1f2ea59f4693b21e759d46e7ce9d0bb64875a2720be72362ca9",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\Owner0-opens-native-menu-earliest.png",
+      "sha256": "9539bf5195599f5af3e709164f6c8aa5c5a6c56876ee758a00d335d1002e1e27",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-opening-0.png",
+      "sha256": "bce6c80af889d0786a078921f3870a92fef266fa50e8180e83a7a86b7dced82b",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-opening-1.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-opening-2.png",
+      "sha256": "02a2faefbc07cd3b0d5efeb611004cb3c39ab653cb2672491956d1c3c9e1f2cf",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-opening-3.png",
+      "sha256": "02a2faefbc07cd3b0d5efeb611004cb3c39ab653cb2672491956d1c3c9e1f2cf",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-opening-4.png",
+      "sha256": "02a2faefbc07cd3b0d5efeb611004cb3c39ab653cb2672491956d1c3c9e1f2cf",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-opening-5.png",
+      "sha256": "0854348becff2ddc3295389e006fd34daa2154eb8a101d2ca0fc3073c90a5c9f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-paused.png",
+      "sha256": "0854348becff2ddc3295389e006fd34daa2154eb8a101d2ca0fc3073c90a5c9f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\Owner0-closes-native-menu-earliest.png",
+      "sha256": "02a2faefbc07cd3b0d5efeb611004cb3c39ab653cb2672491956d1c3c9e1f2cf",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-closing-0.png",
+      "sha256": "4fe40a74b23dd3eed138e63346bd25b92d7cc24dce05618f2c8dd390581e2dd4",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-closing-1.png",
+      "sha256": "6f12df9cb22dd5b60314521982a1276f1eb1cb522dd61e72e581f303c96fd08c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-closing-2.png",
+      "sha256": "bc8ac85b59c04d44090afe1c711d894659e4c0bf7b49dff9ec3e5dd518f80f49",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-closing-3.png",
+      "sha256": "9539bf5195599f5af3e709164f6c8aa5c5a6c56876ee758a00d335d1002e1e27",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-closing-4.png",
+      "sha256": "29ecc970304160f49f3410f669107ceed843445110436326a14ca39d275c3dc7",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-closing-5.png",
+      "sha256": "51ff837c5d510ba0a38df29bcdfa665eb526b0f16a83ac8aa667615e187884dd",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-closing-6.png",
+      "sha256": "51ff837c5d510ba0a38df29bcdfa665eb526b0f16a83ac8aa667615e187884dd",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-closing-7.png",
+      "sha256": "f8043958b87171f146510adbf6337c0c50eac55a96d4fe278d6e262d2ed9dbd2",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner0-resumed.png",
+      "sha256": "b887dfe954dc5c6c1b6dfc967cc458a8f9e3301a7b20b7fe59c101c4b1df09a6",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\Owner1-opens-native-menu-earliest.png",
+      "sha256": "ef8ff95bf60337a625d6411e33d54ef4e3175c2ae20e929270dfd5b29b244554",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-opening-0.png",
+      "sha256": "1a03e272027ca76c273e82b48b9fe0d436baa4e78d68eb3ff84be2319cf0d3d6",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-opening-1.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-opening-2.png",
+      "sha256": "9306a435c4bb361ab809548b522eec93fb6c0fcf3379ff51cbfe5bd898e86f9f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-opening-3.png",
+      "sha256": "e85e7dc9be257c4cf629ff6a554dfbb30a1d39eca13300e219253ed6d8a30b17",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-opening-4.png",
+      "sha256": "e85e7dc9be257c4cf629ff6a554dfbb30a1d39eca13300e219253ed6d8a30b17",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-opening-5.png",
+      "sha256": "d12171149d41d55e9ea7b61e0fec1c5d7ed06f6316792403de1213e8aee2abe7",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-paused.png",
+      "sha256": "d12171149d41d55e9ea7b61e0fec1c5d7ed06f6316792403de1213e8aee2abe7",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\Owner1-closes-native-menu-earliest.png",
+      "sha256": "e85e7dc9be257c4cf629ff6a554dfbb30a1d39eca13300e219253ed6d8a30b17",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-closing-0.png",
+      "sha256": "140ff23f3ec4b170481291bf8ed0595283ecad75cdaabef6c72077dd60cf60ba",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-closing-1.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-closing-2.png",
+      "sha256": "ab194b6100e1d6dadc30c749fa2672b083ede721959d3b5ef5910ca72438dfb5",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-closing-3.png",
+      "sha256": "ccafbb3d97ce4f17d013c087df4f19bda68b4c0d5f2eb050533f6ad760775ff3",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-closing-4.png",
+      "sha256": "d0fd0170336a80a3b7d75fd58fcb50b7a7c54cfc329bd26a0630834f0b6a1f6f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-closing-5.png",
+      "sha256": "02244b23fd2d7c5f2e7f430839e22fe3239b325534b6ea994209610223e51558",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-closing-6.png",
+      "sha256": "198c32e5b8c4eec83ae9d475f013bfe44f46e7749a87ca9a773bdb27fa921ce5",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-closing-7.png",
+      "sha256": "62782b1285f44b640bca73562d119f4eb102ec7d0976fb0f4a310060d14a91f7",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\owner1-resumed.png",
+      "sha256": "5cee783cea4c0106c5f9ba079362b97a09ff9f8f77caf809c53d231a07f8fbf7",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\damaged-aspect-0-960x720.png",
+      "sha256": "1b92d32149e70ca1bd3651035d5d6811ed781226a20e8f64b08d41219f62380e",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\damaged-aspect-1-1200x600.png",
+      "sha256": "1c16cabbac42929b555aee0c1a187dec4039f0f260cb26f4c2b771d6be60a389",
+      "size": 2160828
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\damaged-aspect-2-640x900.png",
+      "sha256": "19d340755428473a99244e217c4ed26c3392a3b24f6e2d086bd0b732a32aab47",
+      "size": 1729098
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\hud\\damaged-aspect-3-960x720.png",
+      "sha256": "e993f2a2fafbd98a47c1c04ef6ca58e0bc0471027da3a26822be283719c97442",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\candidate\\saves\\input-recordings\\session-1792855284782253-1-0\\inputs.jsonl",
+      "sha256": "ec68c7ccbd520103960477877e89a8ff2d9c2e2a847731a9d556f513de088eed",
+      "size": 1299164
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\qualification.json",
+      "sha256": "cf2a3217bb788f414a2cd6d8a4376b20be4c1fcdbfd61578db060ce5c295a59d",
+      "size": 15331118
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-opening-earliest.png",
+      "sha256": "6dccac9af0452e4fa65d5cdeda5b2fd72a1ab41e3f63f63908084b072608df67",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-opening-0.png",
+      "sha256": "67832c9ba5b24f5b5075e4db8b425a109947833cc6f7499e3906643a27db577c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-opening-1.png",
+      "sha256": "1697d6813314d0a9935767f29180989907287afe6443c3dd0391d31bbf924046",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-opening-2.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-opening-3.png",
+      "sha256": "58b1682f3c1b38724bbe58bc107bdeb197fb69a70e9c0e82f64328029d1f7177",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-paused.png",
+      "sha256": "530a49424bb0f527aef70772e773e664d530629c6698df936973a34ebc4c8991",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-closing-earliest.png",
+      "sha256": "0200fe1cf7ede1486c5af39ece4e1122db3e25ab46d3ce4b145256681816b5a8",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-closing-0.png",
+      "sha256": "2e74db0c78244f32a76f0b851f642d1d2f17674392086c2ba711956f68f8a26c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-closing-1.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-closing-2.png",
+      "sha256": "d4563b897dc42113fe33cf954cb630974740e8c8732c71e77f5b0166bc4a6155",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-closing-3.png",
+      "sha256": "6dccac9af0452e4fa65d5cdeda5b2fd72a1ab41e3f63f63908084b072608df67",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-closing-4.png",
+      "sha256": "5475f4f4a907d11c4ecd138a80ea3871a5020a95894952dc46b3bcbf1e23c4a2",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-closing-5.png",
+      "sha256": "5475f4f4a907d11c4ecd138a80ea3871a5020a95894952dc46b3bcbf1e23c4a2",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner0-resumed.png",
+      "sha256": "6dccac9af0452e4fa65d5cdeda5b2fd72a1ab41e3f63f63908084b072608df67",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-opening-earliest.png",
+      "sha256": "261b4ca8c1e78400bbb99f71c481e7e7304bfb4443bc1733e9ce29d5e6ee1495",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-opening-0.png",
+      "sha256": "18843a54c64a32cecde2ca8ff4e095d714e94dfa0d240c66a07d8be423ca6e5f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-opening-1.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-opening-2.png",
+      "sha256": "d10156a0f00c4ea4f8584cfc5de4eab1e934d27dc55c32fd5f146f0a0960c131",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-opening-3.png",
+      "sha256": "db84037eefa853eef0e00997a294b97a6b5f361352a30a87a92386bdf945dce6",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-paused.png",
+      "sha256": "eb1c304337e78168b9382e68c260ba2c761ac60079729fd419cbc1791398b999",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-closing-earliest.png",
+      "sha256": "eb1c304337e78168b9382e68c260ba2c761ac60079729fd419cbc1791398b999",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-closing-0.png",
+      "sha256": "6fb425ccba6f8cb020796be7f1296190b52d1fa65e90e9ccfdfca30499616f22",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-closing-1.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-closing-2.png",
+      "sha256": "edf3753602311cfb16d611114257fab6a75007fa8acc7dbea3ce1aa21d58d53f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-closing-3.png",
+      "sha256": "635b683c7378af879c70005589278fb5387e3b454ac6a02581a52de8ac335a7f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-closing-4.png",
+      "sha256": "feebdcd0780cfcb0f508d4484ce8892275d0354e97f24d2ddc07f2dd9357f3e9",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-closing-5.png",
+      "sha256": "feebdcd0780cfcb0f508d4484ce8892275d0354e97f24d2ddc07f2dd9357f3e9",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\owner1-resumed.png",
+      "sha256": "635b683c7378af879c70005589278fb5387e3b454ac6a02581a52de8ac335a7f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\damaged-aspect-0-960x720.png",
+      "sha256": "13fa29e3acad050fe44c778cb26680eda3822bfef33ae654f5c45ead1c1b4b04",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\damaged-aspect-1-1200x600.png",
+      "sha256": "8af079952833344d685e0b8a4b3a3ed95d859cd1575711a8308416761c6f9773",
+      "size": 2160828
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\damaged-aspect-2-640x900.png",
+      "sha256": "e88ec7949ab397d62a3841c2c7cc17bcd65fb8af92ca209ca7e2911154b5a72e",
+      "size": 1729098
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\damaged-aspect-3-960x720.png",
+      "sha256": "62c654aa7c229f92efce30e975f2d914e30921b70a459a6fa03bc01b23af266a",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-opening-earliest.png",
+      "sha256": "6dccac9af0452e4fa65d5cdeda5b2fd72a1ab41e3f63f63908084b072608df67",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-opening-0.png",
+      "sha256": "6dccac9af0452e4fa65d5cdeda5b2fd72a1ab41e3f63f63908084b072608df67",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-opening-1.png",
+      "sha256": "1697d6813314d0a9935767f29180989907287afe6443c3dd0391d31bbf924046",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-opening-2.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-opening-3.png",
+      "sha256": "98623a48a2362b378cd23263af209d680d3e14decf8f930d43e4c266a0cb2c7c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-paused.png",
+      "sha256": "530a49424bb0f527aef70772e773e664d530629c6698df936973a34ebc4c8991",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-closing-earliest.png",
+      "sha256": "0200fe1cf7ede1486c5af39ece4e1122db3e25ab46d3ce4b145256681816b5a8",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-closing-0.png",
+      "sha256": "a08578c249cb416127a2cfb928d41224707dd1193f362e966e6b66fd20906df8",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-closing-1.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-closing-2.png",
+      "sha256": "d4563b897dc42113fe33cf954cb630974740e8c8732c71e77f5b0166bc4a6155",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-closing-3.png",
+      "sha256": "6dccac9af0452e4fa65d5cdeda5b2fd72a1ab41e3f63f63908084b072608df67",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-closing-4.png",
+      "sha256": "5475f4f4a907d11c4ecd138a80ea3871a5020a95894952dc46b3bcbf1e23c4a2",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-closing-5.png",
+      "sha256": "5475f4f4a907d11c4ecd138a80ea3871a5020a95894952dc46b3bcbf1e23c4a2",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner0-resumed.png",
+      "sha256": "6dccac9af0452e4fa65d5cdeda5b2fd72a1ab41e3f63f63908084b072608df67",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-opening-earliest.png",
+      "sha256": "261b4ca8c1e78400bbb99f71c481e7e7304bfb4443bc1733e9ce29d5e6ee1495",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-opening-0.png",
+      "sha256": "18843a54c64a32cecde2ca8ff4e095d714e94dfa0d240c66a07d8be423ca6e5f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-opening-1.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-opening-2.png",
+      "sha256": "3488dd79f67e8600a87ae893faf75d7120c10234592a28ff0da20d61112a0e2f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-opening-3.png",
+      "sha256": "db84037eefa853eef0e00997a294b97a6b5f361352a30a87a92386bdf945dce6",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-paused.png",
+      "sha256": "db84037eefa853eef0e00997a294b97a6b5f361352a30a87a92386bdf945dce6",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-closing-earliest.png",
+      "sha256": "eb1c304337e78168b9382e68c260ba2c761ac60079729fd419cbc1791398b999",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-closing-0.png",
+      "sha256": "1f7d510bf0a3fb2e35f722de05835d4a8f7b7937c2c93ee0a355a471cd59529d",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-closing-1.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-closing-2.png",
+      "sha256": "edf3753602311cfb16d611114257fab6a75007fa8acc7dbea3ce1aa21d58d53f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-closing-3.png",
+      "sha256": "635b683c7378af879c70005589278fb5387e3b454ac6a02581a52de8ac335a7f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-closing-4.png",
+      "sha256": "feebdcd0780cfcb0f508d4484ce8892275d0354e97f24d2ddc07f2dd9357f3e9",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-closing-5.png",
+      "sha256": "feebdcd0780cfcb0f508d4484ce8892275d0354e97f24d2ddc07f2dd9357f3e9",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\owner1-resumed.png",
+      "sha256": "635b683c7378af879c70005589278fb5387e3b454ac6a02581a52de8ac335a7f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\damaged-aspect-0-960x720.png",
+      "sha256": "e8c2c982018b19b4e52283ec78952eb82eea9c9a11e624585fa2e639975ab3dd",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\damaged-aspect-1-1200x600.png",
+      "sha256": "e2dbbf95af26db89a54620bb7308f555643e5e192953bbf7c782f0ff3701c5ff",
+      "size": 2160828
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\damaged-aspect-2-640x900.png",
+      "sha256": "e88ec7949ab397d62a3841c2c7cc17bcd65fb8af92ca209ca7e2911154b5a72e",
+      "size": 1729098
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\damaged-aspect-3-960x720.png",
+      "sha256": "62c654aa7c229f92efce30e975f2d914e30921b70a459a6fa03bc01b23af266a",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\qualification.json",
+      "sha256": "e1d25618ce863940d8dc2b57d2d2432a04498931cd510aa675eeddace86166e2",
+      "size": 15589333
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\healthy-default-window.png",
+      "sha256": "e7ba0da0c4eaa5c1e8a80348de251ca6af7e1e1c89faa0561acbcc753472060f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\Owner0-opens-native-menu-earliest.png",
+      "sha256": "6c9504b318664779e9c3350753114637e44e0ecafa74baf63fcd802612d18dbd",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-opening-0.png",
+      "sha256": "7b0610582161b7fa9f9a136d1b786f9a61386a68bdc2afc1647568e68a11ce63",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-opening-1.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-opening-2.png",
+      "sha256": "cbf57d48d1648f093945e8192b5ca8ef650d766e38371781af61ad26b9d60922",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-opening-3.png",
+      "sha256": "24c157ff2bd555885a55d9194dd1b6a33f66f3995faf436c98fae2276d5295a0",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-opening-4.png",
+      "sha256": "5f00d7cc10ea03e9c14cbafc4805b327b65c3e4963a8f93c73d36641f6789eb1",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-opening-5.png",
+      "sha256": "5f00d7cc10ea03e9c14cbafc4805b327b65c3e4963a8f93c73d36641f6789eb1",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-paused.png",
+      "sha256": "52e276d85d9aa635b4ac6c01026b7b62952d48a8a99b1b9ba66965ed09b039db",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\Owner0-closes-native-menu-earliest.png",
+      "sha256": "52e276d85d9aa635b4ac6c01026b7b62952d48a8a99b1b9ba66965ed09b039db",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-closing-0.png",
+      "sha256": "7bf84ff9f70bfaf2171369b7b43de0bab1ce76f2a9bd3289f45c0494398290e0",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-closing-1.png",
+      "sha256": "5cf5fef80dc15886826c22f4e847db2371dc6b2036f72e167858dc6fc6b38309",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-closing-2.png",
+      "sha256": "4627448bb088d30fc2d7812c65f2a5aabbcb2348b60b5db3e1fdda17f4d1e96d",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-closing-3.png",
+      "sha256": "d5fd4d484f1dbb8522066fdee771264fbe83651251634fd8a404097b277e4c9c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-closing-4.png",
+      "sha256": "d5fd4d484f1dbb8522066fdee771264fbe83651251634fd8a404097b277e4c9c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-closing-5.png",
+      "sha256": "3d4bba9bf33ceed29484856f1767a646fa2e74affe4ab953ae71615152bde41f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-closing-6.png",
+      "sha256": "7ab801a4c2a82d938cbf86590b562d4b982a39a0a741cf6953161b29a112b812",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-closing-7.png",
+      "sha256": "7ab801a4c2a82d938cbf86590b562d4b982a39a0a741cf6953161b29a112b812",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner0-resumed.png",
+      "sha256": "3d4bba9bf33ceed29484856f1767a646fa2e74affe4ab953ae71615152bde41f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\Owner1-opens-native-menu-earliest.png",
+      "sha256": "a59f15bbc2589e0502b0370ed27987aee7e1ac971d7ec0caa6ab289b0898dea1",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-opening-0.png",
+      "sha256": "77b72648ffa078f05c644c2ff2d402fafab6d816acea8e6343632315fea13948",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-opening-1.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-opening-2.png",
+      "sha256": "08eacd61399bd95fbeec8304dc0424b92783ca735badd946b58db77c74c79027",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-opening-3.png",
+      "sha256": "4cdc38e2cc19c6353caf777ecaf8796cb600413596ba6d3109d596ada47b7134",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-opening-4.png",
+      "sha256": "76c6dadc853cacce5f430ea99c67ad1749c764205d112d697e26f4f14e8bb335",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-opening-5.png",
+      "sha256": "76c6dadc853cacce5f430ea99c67ad1749c764205d112d697e26f4f14e8bb335",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-paused.png",
+      "sha256": "4cdc38e2cc19c6353caf777ecaf8796cb600413596ba6d3109d596ada47b7134",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\Owner1-closes-native-menu-earliest.png",
+      "sha256": "4cdc38e2cc19c6353caf777ecaf8796cb600413596ba6d3109d596ada47b7134",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-closing-0.png",
+      "sha256": "7cfc4ae886ec33a1a0207eb2813c499ed24f505aaa3ade55b408c60ab23cabfd",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-closing-1.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-closing-2.png",
+      "sha256": "e69d13fb3f3e35317d0ae987e2d85171ba45653d22b8f5d8e689d463d77450f5",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-closing-3.png",
+      "sha256": "51c8520c7839b621b441e6459f4959ef87fb5214c615d52c4aeff7cda5052869",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-closing-4.png",
+      "sha256": "b4e4c81464a94fd30500e98228c3c3c3f350f868bdb230f9587f23b0e5adee9f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-closing-5.png",
+      "sha256": "64f78840b07f1df631550b15d2b954c800f7a1264eca24312a63e9dd79ee5459",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-closing-6.png",
+      "sha256": "4345de637c4f0fb2bc48a43f6c181b382aaa14cdcd8604e5134318d7606c03d2",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-closing-7.png",
+      "sha256": "f138720bbfd6344823b8ad303fa30dde0dd97b415403de993f7835fb1febc182",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\owner1-resumed.png",
+      "sha256": "f138720bbfd6344823b8ad303fa30dde0dd97b415403de993f7835fb1febc182",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\damaged-aspect-0-960x720.png",
+      "sha256": "aa929e6f9b8fc54441c61f4a6e6736f8bb98dd3bfe282adbf9b4e6f5193358e1",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\damaged-aspect-1-1200x600.png",
+      "sha256": "c36f27e11ba5ded9ea91898a286afa7fbb1bb8fbed4a262ab64ccc2281bdc9f3",
+      "size": 2160828
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\damaged-aspect-2-640x900.png",
+      "sha256": "6d975d3b313680fca7c20efb27d70f33ddc06991be66d832668d195336c9b98f",
+      "size": 1729098
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\hud\\damaged-aspect-3-960x720.png",
+      "sha256": "30f123e3ff42dbb43c9db24edd607896e9d77002494627599f775cdf976e4a8f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\candidate\\saves\\input-recordings\\session-1792854062234947-1-0\\inputs.jsonl",
+      "sha256": "94105a20ba35273d91e83f0b909cb176a7ae7030cc3192163807a6a2dafb3667",
+      "size": 1285079
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\qualification.json",
+      "sha256": "55b942d0961d300b8dc0039503716196981ab4385d0ce70696ee38a47b62646d",
+      "size": 15032269
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-opening-earliest.png",
+      "sha256": "840643adb88aca582359551136a77a6942988805008faec3d8e43231573b834d",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-opening-0.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-opening-1.png",
+      "sha256": "238a8b9315cca999c8326e1c9b0bf6e39a305a8c8ef9b2ab21d26f0261b65471",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-opening-2.png",
+      "sha256": "f9dcead5ce84c6fc12d7c29453e5f71d3d5233ca8545d98dc491e41f88d6eb9c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-opening-3.png",
+      "sha256": "f9dcead5ce84c6fc12d7c29453e5f71d3d5233ca8545d98dc491e41f88d6eb9c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-paused.png",
+      "sha256": "238a8b9315cca999c8326e1c9b0bf6e39a305a8c8ef9b2ab21d26f0261b65471",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-closing-earliest.png",
+      "sha256": "238a8b9315cca999c8326e1c9b0bf6e39a305a8c8ef9b2ab21d26f0261b65471",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-closing-0.png",
+      "sha256": "f9dcead5ce84c6fc12d7c29453e5f71d3d5233ca8545d98dc491e41f88d6eb9c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-closing-1.png",
+      "sha256": "a810c9972a77a0d22231e324715200941cad4aa459a7516b6e7ca30fa9748c07",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-closing-2.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-closing-3.png",
+      "sha256": "a5ae61d26fc850077d359ad11044f13e20bc641d0aefe824cf744bfc6ae78d6f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-closing-4.png",
+      "sha256": "0eb8c0951230d927ea9d8bb1a8e93375183180e195d603bdb03427c125f8c78c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-closing-5.png",
+      "sha256": "0eb8c0951230d927ea9d8bb1a8e93375183180e195d603bdb03427c125f8c78c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner0-resumed.png",
+      "sha256": "e3ba358b39593cd477edfb92e5bed35c99725e54ea9e2a43392a2ee5e12ada73",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-opening-earliest.png",
+      "sha256": "0eb8c0951230d927ea9d8bb1a8e93375183180e195d603bdb03427c125f8c78c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-opening-0.png",
+      "sha256": "f9b4f316f29ee3bf451f6fc1255c835075ccb3d7536e1043f8dad94a0fcab835",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-opening-1.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-opening-2.png",
+      "sha256": "22bc113cff388fce8c1cf834e0c95f4022d5b15deeb5977072d1f731d6b6c02c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-opening-3.png",
+      "sha256": "22bc113cff388fce8c1cf834e0c95f4022d5b15deeb5977072d1f731d6b6c02c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-paused.png",
+      "sha256": "855f549433df80ee0af44915cd5e7fa5976fa35bdd815a7d2bca8f9d1265a90d",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-closing-earliest.png",
+      "sha256": "855f549433df80ee0af44915cd5e7fa5976fa35bdd815a7d2bca8f9d1265a90d",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-closing-0.png",
+      "sha256": "b6a8fe9601ee9fb8b8be9683efa5c6ed0b7655c6f7cd089cb54fd0dc9800b66e",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-closing-1.png",
+      "sha256": "a44f26a0953bf03c6e1caded96b5d52da2230e14308c39f5fc42b833d0576a24",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-closing-2.png",
+      "sha256": "9ab3b6ff493427e38ff6b5c7d38d54c4b09ff31a278b2affc7bf66c7f9ad3f4a",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-closing-3.png",
+      "sha256": "9c4d5a67bfa87c1fc9ad708baabb361b98701c6414c3cf89c9387c8ac39d2f09",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-closing-4.png",
+      "sha256": "ca405a7ff30be14c5d88c2e2339c948923e587dcc96f523c84be4ab085495ea1",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-closing-5.png",
+      "sha256": "fb3c5aa25c110fddb29f30fd5ee750550e91862104553178f0c9f6d5a815543c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\owner1-resumed.png",
+      "sha256": "524fa2a02e8690180581f482fe944faf8041578634817d0c14480c906b7fdf58",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\damaged-aspect-0-960x720.png",
+      "sha256": "8ee1316ab66c08f6813f7203a6129d00b155cf446333dfa4d07548c3825c635b",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\damaged-aspect-1-1200x600.png",
+      "sha256": "c7478a459daff8c043e8d08c5b29bcfe293375f4718c5443f320c8460d8e5906",
+      "size": 2160828
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\damaged-aspect-2-640x900.png",
+      "sha256": "c1aecbfea688691e8a9dd385a16ddf5b8049d29be24c63d75c8694a9ccbb2aa4",
+      "size": 1729098
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\damaged-aspect-3-960x720.png",
+      "sha256": "0f83ad5f5bcace45280ec22441057183c51cfb53be05ae9781891eab778684b8",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-opening-earliest.png",
+      "sha256": "840643adb88aca582359551136a77a6942988805008faec3d8e43231573b834d",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-opening-0.png",
+      "sha256": "c37a1c4d3243eb126e381df726a7da6d9609167fb317483d6dd5533dd89edc73",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-opening-1.png",
+      "sha256": "238a8b9315cca999c8326e1c9b0bf6e39a305a8c8ef9b2ab21d26f0261b65471",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-opening-2.png",
+      "sha256": "f9dcead5ce84c6fc12d7c29453e5f71d3d5233ca8545d98dc491e41f88d6eb9c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-opening-3.png",
+      "sha256": "f9dcead5ce84c6fc12d7c29453e5f71d3d5233ca8545d98dc491e41f88d6eb9c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-paused.png",
+      "sha256": "238a8b9315cca999c8326e1c9b0bf6e39a305a8c8ef9b2ab21d26f0261b65471",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-closing-earliest.png",
+      "sha256": "238a8b9315cca999c8326e1c9b0bf6e39a305a8c8ef9b2ab21d26f0261b65471",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-closing-0.png",
+      "sha256": "f9dcead5ce84c6fc12d7c29453e5f71d3d5233ca8545d98dc491e41f88d6eb9c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-closing-1.png",
+      "sha256": "a810c9972a77a0d22231e324715200941cad4aa459a7516b6e7ca30fa9748c07",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-closing-2.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-closing-3.png",
+      "sha256": "a5ae61d26fc850077d359ad11044f13e20bc641d0aefe824cf744bfc6ae78d6f",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-closing-4.png",
+      "sha256": "0eb8c0951230d927ea9d8bb1a8e93375183180e195d603bdb03427c125f8c78c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-closing-5.png",
+      "sha256": "0eb8c0951230d927ea9d8bb1a8e93375183180e195d603bdb03427c125f8c78c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner0-resumed.png",
+      "sha256": "e3ba358b39593cd477edfb92e5bed35c99725e54ea9e2a43392a2ee5e12ada73",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-opening-earliest.png",
+      "sha256": "0eb8c0951230d927ea9d8bb1a8e93375183180e195d603bdb03427c125f8c78c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-opening-0.png",
+      "sha256": "62a382d5a3f197e3483345d460c8af8b09520c226af3c458b70b295e6d0b6bd0",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-opening-1.png",
+      "sha256": "6a2ae2471f11667415c19293116ac18d73688e54a3209a71a1ccf30269c56268",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-opening-2.png",
+      "sha256": "22bc113cff388fce8c1cf834e0c95f4022d5b15deeb5977072d1f731d6b6c02c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-opening-3.png",
+      "sha256": "22bc113cff388fce8c1cf834e0c95f4022d5b15deeb5977072d1f731d6b6c02c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-paused.png",
+      "sha256": "855f549433df80ee0af44915cd5e7fa5976fa35bdd815a7d2bca8f9d1265a90d",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-closing-earliest.png",
+      "sha256": "22bc113cff388fce8c1cf834e0c95f4022d5b15deeb5977072d1f731d6b6c02c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-closing-0.png",
+      "sha256": "b6a8fe9601ee9fb8b8be9683efa5c6ed0b7655c6f7cd089cb54fd0dc9800b66e",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-closing-1.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-closing-2.png",
+      "sha256": "387567c385b00d5822ed704bc5ca98f0663b16b9d8b6530a1ccf959886d10986",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-closing-3.png",
+      "sha256": "9c4d5a67bfa87c1fc9ad708baabb361b98701c6414c3cf89c9387c8ac39d2f09",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-closing-4.png",
+      "sha256": "0c551d3d02931514a5f025c591a8563f39b51e5b907f1232d55584770440cb2e",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-closing-5.png",
+      "sha256": "fb3c5aa25c110fddb29f30fd5ee750550e91862104553178f0c9f6d5a815543c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\owner1-resumed.png",
+      "sha256": "524fa2a02e8690180581f482fe944faf8041578634817d0c14480c906b7fdf58",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\damaged-aspect-0-960x720.png",
+      "sha256": "8ee1316ab66c08f6813f7203a6129d00b155cf446333dfa4d07548c3825c635b",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\damaged-aspect-1-1200x600.png",
+      "sha256": "c7478a459daff8c043e8d08c5b29bcfe293375f4718c5443f320c8460d8e5906",
+      "size": 2160828
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\damaged-aspect-2-640x900.png",
+      "sha256": "8f6fc2203082c63335473a2d7ec7fe9c12427aa1b546afe24129938d7cab5d66",
+      "size": 1729098
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\damaged-aspect-3-960x720.png",
+      "sha256": "0f83ad5f5bcace45280ec22441057183c51cfb53be05ae9781891eab778684b8",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\qualification.json",
+      "sha256": "5da8089fa166464c79e0f6576d52274485ec08a04034a68a5bb0240fec8d9613",
+      "size": 15712861
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\mmx6_coop_contact-executed-source.py",
+      "sha256": "dbcb58c53b5e1e0a7433aeb25c48beb9ae20b30c05fd11b5da60b33f40513046",
+      "size": 22689
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\mmx6_coop_hud_presentation-executed-source.py",
+      "sha256": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18",
+      "size": 11949
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "size": 29983
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "46527abb4ff87f5cbed803db726e95b0aee32a420d4b93a33e912fe1b76fa286",
+      "size": 16569
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\mmx6_coop_primary_audio-executed-source.py",
+      "sha256": "891ea9c540b3190649f1f79366425b34f645b1c5b12293d5cbcf6fd4d6cbac2c",
+      "size": 19629
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\mmx6_coop_state_resources-executed-source.py",
+      "sha256": "6c704a9f0800c2b10a795fc8307fb1840b67355c1b71c9367b3582d2c2cc24d7",
+      "size": 7783
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\mmx6_native_contact_audio-executed-source.py",
+      "sha256": "01f28d65c97f7f886bc62856c24509c13ccb274999b74e4287238b5412e8ca94",
+      "size": 16568
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\mmx6_owned_keyboard-executed-source.py",
+      "sha256": "11b07f655dd711e5cf39c36362eec796b9eb73b86702d8100e0a958a3e348402",
+      "size": 4599
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "4829fcb53086c45a2fc4198167b282a73c4e79d3e586211ff8934de168a7f49e",
+      "size": 29088
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\qualify_mmx6_coop_personal_menu-executed-source.py",
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c",
+      "size": 16934
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "eced2cb8b51c932c3a4bca24bbce5c99264aa453eb37c22e9c30f0cb2e9f5219",
+      "size": 52953
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\runner-executed-source.py",
+      "sha256": "733615c1c2eeaf89b1500e64e1181de9328c1f91e7d114f84b07cc6e8163c8dd",
+      "size": 5190
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\candidate\\preparation.json",
+      "sha256": "d54630398bc5983cd6cda36bf201e8e5d6c3f3f6ad56ebc7de5382957e82b5fd",
+      "size": 3341
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\candidate\\settings.toml",
+      "sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa",
+      "size": 272
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-stacked\\candidate\\mods\\state.toml",
+      "sha256": "5f535a15409cb3f1f354148f6c658b3c08e6387409926208cb59389c1f6a736b",
+      "size": 159
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\mmx6_coop_hud_pair-executed-source.py",
+      "sha256": "ea6c8c86648c46284d2483cee50aaa7a240ddacc3e5879627a5ff9b7e672e59c",
+      "size": 6919
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\mmx6_coop_hud_presentation-executed-source.py",
+      "sha256": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18",
+      "size": 11949
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "66166703568cc6037c3bc0c5cbd1ec0c91e63e976c1d47317860d916f757c8a0",
+      "size": 41089
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "size": 29983
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "46527abb4ff87f5cbed803db726e95b0aee32a420d4b93a33e912fe1b76fa286",
+      "size": 16569
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\mmx6_coop_native_reentry_pair-executed-source.py",
+      "sha256": "883c388ed512915b482533f625ddffde91111a7b436dbf63a538db0b9fda7b8b",
+      "size": 11435
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\mmx6_coop_state_resources-executed-source.py",
+      "sha256": "5f106493da021377dba71bd3eeaebd9d7189cc59baf5c9945d27dee2d2b09936",
+      "size": 8009
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\mmx6_owned_keyboard-executed-source.py",
+      "sha256": "11b07f655dd711e5cf39c36362eec796b9eb73b86702d8100e0a958a3e348402",
+      "size": 4599
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "4829fcb53086c45a2fc4198167b282a73c4e79d3e586211ff8934de168a7f49e",
+      "size": 29088
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "eced2cb8b51c932c3a4bca24bbce5c99264aa453eb37c22e9c30f0cb2e9f5219",
+      "size": 52953
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\qualify_mmx6_input_replay-executed-source.py",
+      "sha256": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd",
+      "size": 28273
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\runner-source.py",
+      "sha256": "a3a60eac4a1afebca281eb8fe7746ffd834e4e695608ae7b792356279a39a914",
+      "size": 81684
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\preparation.json",
+      "sha256": "fa949709994ca7de7245b79503ce9d288b2ab45fd5e6d4d416d88a4943f6a97d",
+      "size": 3349
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\settings.toml",
+      "sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa",
+      "size": 272
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\mods\\state.toml",
+      "sha256": "e1abfc7dece819f8b32a98c7ebdbe09b5fa5e5fd39cfa7acd39f7090228986e3",
+      "size": 334
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\stdout.log",
+      "sha256": "531713deefc358039265ed02be03b20f79bba5c3aedd990bc9fd27fce44297be",
+      "size": 2806
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-0\\logs\\stderr.log",
+      "sha256": "826bc49e43f2ca86bb675eb6c46ce8c9570672f12da906820607ebd34de1e610",
+      "size": 37751
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\preparation.json",
+      "sha256": "35e75b7858e31d622d3f08b7a5e0c323c7bb9c278dbf01b440fb1d50d485b8d3",
+      "size": 3349
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\settings.toml",
+      "sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa",
+      "size": 272
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\mods\\state.toml",
+      "sha256": "e1abfc7dece819f8b32a98c7ebdbe09b5fa5e5fd39cfa7acd39f7090228986e3",
+      "size": 334
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\stdout.log",
+      "sha256": "b4713c35c5163708725f7d8c514fa2d0d0fb7343c016096a2e90f55e0f0c84a3",
+      "size": 2927
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-stacked\\peer-1\\logs\\stderr.log",
+      "sha256": "8a75c00efd5c13fbe8a297ecd08f4e5121f5e3b09b02cdce0e0d52965a6ec61e",
+      "size": 37631
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\mmx6_coop_contact-executed-source.py",
+      "sha256": "dbcb58c53b5e1e0a7433aeb25c48beb9ae20b30c05fd11b5da60b33f40513046",
+      "size": 22689
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\mmx6_coop_hud_presentation-executed-source.py",
+      "sha256": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18",
+      "size": 11949
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "size": 29983
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "46527abb4ff87f5cbed803db726e95b0aee32a420d4b93a33e912fe1b76fa286",
+      "size": 16569
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\mmx6_coop_primary_audio-executed-source.py",
+      "sha256": "891ea9c540b3190649f1f79366425b34f645b1c5b12293d5cbcf6fd4d6cbac2c",
+      "size": 19629
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\mmx6_coop_state_resources-executed-source.py",
+      "sha256": "6c704a9f0800c2b10a795fc8307fb1840b67355c1b71c9367b3582d2c2cc24d7",
+      "size": 7783
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\mmx6_native_contact_audio-executed-source.py",
+      "sha256": "01f28d65c97f7f886bc62856c24509c13ccb274999b74e4287238b5412e8ca94",
+      "size": 16568
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\mmx6_owned_keyboard-executed-source.py",
+      "sha256": "11b07f655dd711e5cf39c36362eec796b9eb73b86702d8100e0a958a3e348402",
+      "size": 4599
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "4829fcb53086c45a2fc4198167b282a73c4e79d3e586211ff8934de168a7f49e",
+      "size": 29088
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\qualify_mmx6_coop_personal_menu-executed-source.py",
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c",
+      "size": 16934
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "eced2cb8b51c932c3a4bca24bbce5c99264aa453eb37c22e9c30f0cb2e9f5219",
+      "size": 52953
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\runner-executed-source.py",
+      "sha256": "733615c1c2eeaf89b1500e64e1181de9328c1f91e7d114f84b07cc6e8163c8dd",
+      "size": 5190
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\candidate\\preparation.json",
+      "sha256": "96cd1d115925922bae29247efe46de34b5a357368f2377fdb9d13a57fbf7ebfe",
+      "size": 3361
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\candidate\\settings.toml",
+      "sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa",
+      "size": 272
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-66f7db0-side-by-side\\candidate\\mods\\state.toml",
+      "sha256": "c2c5443479ef259bd732baaf23aa69839b13bb2803da5f72e715a3aca820d8f3",
+      "size": 206
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\mmx6_coop_hud_pair-executed-source.py",
+      "sha256": "ea6c8c86648c46284d2483cee50aaa7a240ddacc3e5879627a5ff9b7e672e59c",
+      "size": 6919
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\mmx6_coop_hud_presentation-executed-source.py",
+      "sha256": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18",
+      "size": 11949
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "66166703568cc6037c3bc0c5cbd1ec0c91e63e976c1d47317860d916f757c8a0",
+      "size": 41089
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "size": 29983
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "46527abb4ff87f5cbed803db726e95b0aee32a420d4b93a33e912fe1b76fa286",
+      "size": 16569
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\mmx6_coop_native_reentry_pair-executed-source.py",
+      "sha256": "883c388ed512915b482533f625ddffde91111a7b436dbf63a538db0b9fda7b8b",
+      "size": 11435
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\mmx6_coop_state_resources-executed-source.py",
+      "sha256": "5f106493da021377dba71bd3eeaebd9d7189cc59baf5c9945d27dee2d2b09936",
+      "size": 8009
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\mmx6_owned_keyboard-executed-source.py",
+      "sha256": "11b07f655dd711e5cf39c36362eec796b9eb73b86702d8100e0a958a3e348402",
+      "size": 4599
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "4829fcb53086c45a2fc4198167b282a73c4e79d3e586211ff8934de168a7f49e",
+      "size": 29088
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "eced2cb8b51c932c3a4bca24bbce5c99264aa453eb37c22e9c30f0cb2e9f5219",
+      "size": 52953
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\qualify_mmx6_input_replay-executed-source.py",
+      "sha256": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd",
+      "size": 28273
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\runner-source.py",
+      "sha256": "a3a60eac4a1afebca281eb8fe7746ffd834e4e695608ae7b792356279a39a914",
+      "size": 81684
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\preparation.json",
+      "sha256": "9a0c8807a412ca194929540035b6510ca3df612a9ae2947d22fc35c9f8625922",
+      "size": 3369
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\settings.toml",
+      "sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa",
+      "size": 272
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\mods\\state.toml",
+      "sha256": "101bf0e3a5305356bea236bc4538ad60aa105a5770228d8850b899a7c9160162",
+      "size": 381
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\stdout.log",
+      "sha256": "bb56250ef7a4c90abd74a6eef6ee2dc4c96021d8420040c426e66fa1f3533158",
+      "size": 2836
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-0\\logs\\stderr.log",
+      "sha256": "5ba4ee1d2b85994fb3041b090cea709d037c9e613a4b91599111e79752c98326",
+      "size": 39014
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\preparation.json",
+      "sha256": "1309b764c591e9f7a361b148ad0572d08dab134a3e0641b477fa593347b5e8aa",
+      "size": 3369
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\settings.toml",
+      "sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa",
+      "size": 272
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\mods\\state.toml",
+      "sha256": "101bf0e3a5305356bea236bc4538ad60aa105a5770228d8850b899a7c9160162",
+      "size": 381
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\stdout.log",
+      "sha256": "e3b2688d4ed7b5067d6b33b458c81c29258eca21c02b0118d6a00e48c92f9aae",
+      "size": 2962
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-pair-v23-66f7db0-side-by-side\\peer-1\\logs\\stderr.log",
+      "sha256": "303d9a147061077e51cb571c417197ceb84e6627d37e9812718b20d0a9f4c500",
+      "size": 39134
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-v23-hud\\hud-pair-v23-66f7db0-side-by-side-peer0-0.jpg",
+      "sha256": "87cd2d18488efa0613d65d7624aa0d4bf234ffa52e9500d6b2139d406d749f8a",
+      "size": 516175
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-v23-hud\\hud-pair-v23-66f7db0-side-by-side-peer0-1.jpg",
+      "sha256": "1a426296c950700919a6fb804bf5f96f023a584b04237654c3c7ae879b8b464e",
+      "size": 354861
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-v23-hud\\hud-pair-v23-66f7db0-side-by-side-peer1-0.jpg",
+      "sha256": "9a2eaaa6fcc8ff909ef7b655dd03f9fe004df3a0a6e6c9c1aaf2c4085f671ed3",
+      "size": 528514
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-v23-hud\\hud-pair-v23-66f7db0-side-by-side-peer1-1.jpg",
+      "sha256": "c9585a125c8b95929b699f749fc9ff2de7add8d209f8eff14462c29320beabac",
+      "size": 349218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-v23-hud\\hud-pair-v23-66f7db0-stacked-peer0-0.jpg",
+      "sha256": "ec12d3cc8f45ae98ee09a54b23ae16bb3f624819f7c60762fe1a8b00e398489d",
+      "size": 485502
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-v23-hud\\hud-pair-v23-66f7db0-stacked-peer0-1.jpg",
+      "sha256": "70dcde061289eb55b070d03aa421019508c3772503b7daa46e173fea5cc25678",
+      "size": 350511
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-v23-hud\\hud-pair-v23-66f7db0-stacked-peer1-0.jpg",
+      "sha256": "12a29d752031ddb679897900a158f13770aa0bfde71282129adc2d4906a6b31a",
+      "size": 484721
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-v23-hud\\hud-pair-v23-66f7db0-stacked-peer1-1.jpg",
+      "sha256": "51d4465e5e6bc29b2563ad8af94a7f6c3879fcf086fbfa9b0b92e825a50d0023",
+      "size": 342661
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-v23-hud\\hud-v23-66f7db0-side-by-side-peer0-0.jpg",
+      "sha256": "6d5afa2aa249ec03b5fcbdfc0ae34c8e36f0ec60e6d366ba8312476df550829c",
+      "size": 425297
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-v23-hud\\hud-v23-66f7db0-side-by-side-peer0-1.jpg",
+      "sha256": "e312f3d9c15858a31a0d78c82d01a0069e0b123465aaad4e66f1bbaf56b420fb",
+      "size": 442426
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-v23-hud\\hud-v23-66f7db0-side-by-side-peer0-2.jpg",
+      "sha256": "c92b004c91f41fe90f26e3b2caa1ca98cbaaa126106e9fad158ae44618d198bd",
+      "size": 51689
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-v23-hud\\hud-v23-66f7db0-stacked-peer0-0.jpg",
+      "sha256": "3063544578f96f463746753ed98759707186b189b2e403cad427882ad3242f3a",
+      "size": 460863
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-v23-hud\\hud-v23-66f7db0-stacked-peer0-1.jpg",
+      "sha256": "e56ccf4948aebed832c05cc4fa0920e1c43a39516c61990546156f1dcadf1189",
+      "size": 426653
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-v23-hud\\hud-v23-66f7db0-stacked-peer0-2.jpg",
+      "sha256": "7796926638b32bc3eaaaf72fe8a8182934e02058a34ce1659b134ba4ea331c89",
+      "size": 51399
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_coop_active_audio_state.txt",
+      "sha256": "6610458e0b487eba5587732ac4d3e741ec5d453cc09bdfad1f18fc3a64124121",
+      "size": 109
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_coop_hud_presentation.txt",
+      "sha256": "59f9005d72742ee9d1bc1ff48d173f86273f92b1c045c96461a1a075d65e8cb9",
+      "size": 105
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_coop_inventory_state.txt",
+      "sha256": "4cd49ad0c73a8aa832fab522c6a78b7c7920d0020aa82b81b4234fa118a1a5f0",
+      "size": 105
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_coop_mapped_state.txt",
+      "sha256": "19fb1277e806965433f37d1e1695fa8140a3bd96ce5bfc7ce965ba51f3e4e98d",
+      "size": 107
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_coop_owned_keyboard.txt",
+      "sha256": "1b6f69157102cc03f5264c937d138171570f1a3f06ab9ba2d8345507e1df7261",
+      "size": 107
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_coop_present_capture.txt",
+      "sha256": "3026ec44bc7e8defaa63d1647f3f92526bd7ac348fd584f5641c783c93dd82de",
+      "size": 107
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_coop_private_state_protocol.txt",
+      "sha256": "b0c96886a6d58845e6f15a2797f82a8d7ad801171f844b02b980bf0da668e0e7",
+      "size": 127
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_coop_scene_state.txt",
+      "sha256": "638d287c0b0a39696192d173099f90dfd19c0b1b2df974802576f431e7c9eb0b",
+      "size": 107
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_coop_state_policy.txt",
+      "sha256": "41e6ab9078ba7aff324838af7874b68bdc5f3e187f616cb40e0a1110220d5afa",
+      "size": 106
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_coop_state_protocol.txt",
+      "sha256": "b49a2145539f9ce59a9ea016d8c24778b271444b8ebb31f7ac21c1de92fe01ca",
+      "size": 106
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_coop_state_resources.txt",
+      "sha256": "1b6f69157102cc03f5264c937d138171570f1a3f06ab9ba2d8345507e1df7261",
+      "size": 107
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_coop_debug_protocol.txt",
+      "sha256": "aa40efe3b4a86ab02916f41b08c5ca351c9d9384944c9ec7308f1a145c8586bc",
+      "size": 286
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_coop_host_profile.txt",
+      "sha256": "cfd6cd74ce39143656fa09e9fe5e494c9c68aac4eba05e4f32280231f6610c83",
+      "size": 120
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_edc_ecc.txt",
+      "sha256": "794e7e4cd650159bc2137844ddc5a28a8f92c29598e38d3e86b970e50dcd2a7b",
+      "size": 131
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_alternate_route_audit.txt",
+      "sha256": "d50001090a69216c1c9dd034766136e48a60b7721fd8fb3c1c6870a8e7a990f9",
+      "size": 110
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_audio_driver_audit.txt",
+      "sha256": "a661c94ac9d16924d6b1a32f1145746616d4156eb99c6cad7c44d5cb61438a17",
+      "size": 110
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_body_audio_routes.txt",
+      "sha256": "726223d9a5f772a6a70184618d95362797c231320908d5d9e94ec4b9843f4baf",
+      "size": 107
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_content_coverage.txt",
+      "sha256": "8355350082917a908ac4594e8381c8cc7b1ce517ae864ace765dedd45f2c74aa",
+      "size": 120
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_audio_audit.txt",
+      "sha256": "759edc70b8e2d22491be466194d8ac9dc269d78f184acbba9ad624b2fced177e",
+      "size": 108
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_body_audio.txt",
+      "sha256": "235ae00f3fd12119104ee77baa2f96bb0b0647e10cdee0caa874134289a5ae63",
+      "size": 121
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_checkpoint.txt",
+      "sha256": "d045a3a81d1b5046eccaabb0bdebe8ffd2e357fa00be2916ad49b14a509afee6",
+      "size": 131
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_collision_boxes.txt",
+      "sha256": "9f19866c8af7bd0425354480972b9749c259e92bd47393c4d7e76dcf44f46db3",
+      "size": 111
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_contact.txt",
+      "sha256": "75a20febeff29d73d224421adf9d944597be2de8e1fb0a5996fa721c9fa4d189",
+      "size": 115
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_contact_runner.txt",
+      "sha256": "a8b891365bbb435bd7bed6c642219e70496046a553384837ec9931abce59a9b1",
+      "size": 107
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_content.txt",
+      "sha256": "5a385b7a7d9bca197334e0999344ecafeaaec78e308ec2ae90585529c6565569",
+      "size": 111
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_enemy_admission.txt",
+      "sha256": "f2c53ce86fe0aefcf6ae8ae62f4dcef8a139f07b7f842d88dfeaf529d78b5683",
+      "size": 111
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_hud_audit.txt",
+      "sha256": "47097993b1b631811dc0862021e111b1c8887fb6fdaa12ba52f9f74001d04f45",
+      "size": 110
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_jump_audio.txt",
+      "sha256": "76b2cdfabac0a767d8d5e5411201cdd6e9abf76949f974a0017b28a2962fc3cb",
+      "size": 135
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_jump_audio_pair.txt",
+      "sha256": "289b5402f405fdb17a46dbc25084f90139ede542c7c472aab0351cc82a953cc7",
+      "size": 121
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_jump_audio_private.txt",
+      "sha256": "08b34daf939a5fdbae65b22b43bdbe9d9199cf6fc02fa71b0f2626d4e142af34",
+      "size": 119
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_native_quit.txt",
+      "sha256": "5f2fc86119fe4b7136e7f57c646dbfea3419c4d26bb3958369ab62dcded4e0a0",
+      "size": 123
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_native_quit_runner.txt",
+      "sha256": "d640fc640f6a4b40d83b18f994b6b08b6af0a826f313cecf8c07b97459d70545",
+      "size": 116
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_native_reentry.txt",
+      "sha256": "9fddd721bce9bcfcd43fdd89f04250415145beeaee084098cd8124de8832fa01",
+      "size": 134
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_native_reentry_pair.txt",
+      "sha256": "6ea7676277db9e69f9216fe1095c44f45f6b78d50978e1c1f272866bf582129c",
+      "size": 117
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_native_reentry_runner.txt",
+      "sha256": "e6c49f4b7801127ec89f359e029e48beafba4ef7ecff7bc41e384b1420828510",
+      "size": 116
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_owned_cleanup.txt",
+      "sha256": "f2c53ce86fe0aefcf6ae8ae62f4dcef8a139f07b7f842d88dfeaf529d78b5683",
+      "size": 111
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_pair_options.txt",
+      "sha256": "8c7b48518ec30f1ea1b12187ff63bdf22cf995bed108446f99cbc30c446529ee",
+      "size": 124
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_personal_menu.txt",
+      "sha256": "5cf99b69faedf33c5ffb2368aa725c93db4278d5d614082052216293177828eb",
+      "size": 120
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_personal_menu_runner.txt",
+      "sha256": "de34224f8bc367dd4e8eb799dd85f7609c6d78619f2be48a8674f891a06daac9",
+      "size": 117
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_primary_audio.txt",
+      "sha256": "b952dcfedeb098924df82657c0a7eaafc54599572fb5786304cccc5bc23a2a67",
+      "size": 109
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_private_effects.txt",
+      "sha256": "1b629a597deab853beb5607f1e19177c21aab64349a16938de3bb9202b5db001",
+      "size": 119
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_private_pause.txt",
+      "sha256": "c5f3f3ba535f9c7e38e8e0c600d08afc1f957a27e324600a586e8c812816c632",
+      "size": 122
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_published_input.txt",
+      "sha256": "4a203f958ef9d765ff1f89816631e1bdf553b4acf1d56449f1d10ad92bb46ff3",
+      "size": 107
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_recycle_portal.txt",
+      "sha256": "e02fe2355e1085386b355e67aafe27b410ed6c4524a033147a0760f989962e75",
+      "size": 114
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_recycle_setup.txt",
+      "sha256": "481f491fde1df228512c198dfd645803c20eed71cb99ee5e9a936c8101409c37",
+      "size": 109
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_reference.txt",
+      "sha256": "28f8cac684a0061c3caee6f8f81218fa8384e04bdb55c4800b499a29be004e7b",
+      "size": 119
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_coop_reploid059.txt",
+      "sha256": "8b1cf4ff66ea650cfbd19c9cac7c8e5a5a0a52adda0acdf37bd9a6c5628f4df5",
+      "size": 114
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_death_particle_audit.txt",
+      "sha256": "394419a5e4e85e1b4a5408d91528bfca88d585e3cb9e629c6f85269d5aaf20bd",
+      "size": 110
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_input_capture_hook.txt",
+      "sha256": "383a12fba9b5b327054a24ce7e5739569c4f0b6621facd981f2d6a4271063b3c",
+      "size": 106
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_input_recording.txt",
+      "sha256": "00e422fb09c5b448e8d1af31be20f63b0dc93a305ca2a307f448d7584eb62875",
+      "size": 124
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_native_contact_audio.txt",
+      "sha256": "cd9985c714d680a4f9bfffa5f2d5874b4b713cf75659473cc7618a3818e840da",
+      "size": 112
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_native_player_init_audit.txt",
+      "sha256": "b883a03eaaa7e93bd9149c7c6534d6a36946a2f608a6ae5bc9d275ba171a5bd0",
+      "size": 107
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_native_zero_reference.txt",
+      "sha256": "78a01dddf1865ac97d2b20182af6d2ddfcb3ec51a2dc2a6bf7e384ab6f3f5d54",
+      "size": 135
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_private_action_audio_audit.txt",
+      "sha256": "da61d08836fe5d194b6e01e50bf248e67664411f3f1b223dc2360e13bf1a8275",
+      "size": 120
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_recycle_return_audit.txt",
+      "sha256": "0cc82544d791787dd684a0a356782e10d21e7c8fa6e901c9be6da18936e81b56",
+      "size": 109
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_recycle_terrain_audit.txt",
+      "sha256": "eea0b50d02d9c812c266bda64e20ba136cdbaeb98e3b8fb3756368fcbb5f3740",
+      "size": 112
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_reploid_rescue_audit.txt",
+      "sha256": "3b713044aa78ad3307cd190eff6da02210742aefe482462312691e36ea6af796",
+      "size": 115
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_tweaks_coverage.txt",
+      "sha256": "93aab7491f99e126200056d9161cc62265740ad0ecd0f431aadb47340ba2443c",
+      "size": 107
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_mmx6_world_trace.txt",
+      "sha256": "351f929ed84aacafade91b6fd67dc7be9217ffaea2ca9d1c9d59bd385ba30fb6",
+      "size": 107
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_prepare_mmx6_coop_playtest.txt",
+      "sha256": "3d739448767e135d23430c454ec8434f67db75d5bed46b65d3c6c14b993ee613",
+      "size": 109
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_prepare_mmx6_input_replay.txt",
+      "sha256": "0da5608f36c59bcd0ee587e7b929959ba1d0863882bfe115fdd31958407c4f14",
+      "size": 111
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_qualify_mmx6_coop_jump_audio.txt",
+      "sha256": "4a3a397d4b4df51233eaa1f1fa140cc58fff02916187cb5a906876d15a6b72ea",
+      "size": 127
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_qualify_mmx6_coop_recycle_portal.txt",
+      "sha256": "542a5c12316f3c384ba0ead1d0a7e3c0c1aa1e07cda2b541a0d82298b37e6747",
+      "size": 126
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_qualify_mmx6_input_replay.txt",
+      "sha256": "d4dba1505e2d05fa4b36749e5bcea3860e0a9a0037d2521a032481f6d88eaab0",
+      "size": 124
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_qualify_mmx6_native_audio.txt",
+      "sha256": "9006308d47a9575a7382b3af4166b3c56e3437f553b56f2859d6c962f008a071",
+      "size": 114
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_release_config.txt",
+      "sha256": "330eb602cbacc8889d927c9671c7b4d1a4cdfb8a7640706ee324fa1ba751bcfb",
+      "size": 106
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_tweaks_assets_psxmod.txt",
+      "sha256": "71189ffa637523178236e4307985aa9d0d830960ae44dd75409a53192c8fde4a",
+      "size": 119
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_tweaks_continuous_dash_psxmod.txt",
+      "sha256": "383a12fba9b5b327054a24ce7e5739569c4f0b6621facd981f2d6a4271063b3c",
+      "size": 106
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_tweaks_domain_psxmod.txt",
+      "sha256": "96913fde913ca793b9f3b4123223be8d95f34701a46fb7e846702d0834626145",
+      "size": 119
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_tweaks_extra_mugshots_psxmod.txt",
+      "sha256": "b6f33ca7a7aac1cecb61e8f1b8bc279d2d12a1d7c9a6d892f3fefdb33edb56c4",
+      "size": 118
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_tweaks_general_foundations_psxmod.txt",
+      "sha256": "f35676e2fffe65e13af07252b80e0519c2bfc377e50337b1363c7b7909e796dc",
+      "size": 117
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_tweaks_ingame_options_psxmod.txt",
+      "sha256": "b6f33ca7a7aac1cecb61e8f1b8bc279d2d12a1d7c9a6d892f3fefdb33edb56c4",
+      "size": 118
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_tweaks_mach_dash_psxmod.txt",
+      "sha256": "383a12fba9b5b327054a24ce7e5739569c4f0b6621facd981f2d6a4271063b3c",
+      "size": 106
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_tweaks_native_retranslation.txt",
+      "sha256": "54a73bf16fd07f2db7fbf52bc3623b02623ea379cd3593dafb419c6dace04af4",
+      "size": 108
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_tweaks_new_game_psxmod.txt",
+      "sha256": "16ec90a0a749e47d0f0b6ef3ff572822219088ddb167cd09306ec300c6a4045b",
+      "size": 121
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_tweaks_player_standalone_psxmod.txt",
+      "sha256": "351f929ed84aacafade91b6fd67dc7be9217ffaea2ca9d1c9d59bd385ba30fb6",
+      "size": 107
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_tweaks_timing_psxmod.txt",
+      "sha256": "8bca381425a5e508c6cad286932f1bccaa49c32fa71ae0df2f3c3dd34aebd221",
+      "size": 120
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_tweaks_zero_techniques_audit.txt",
+      "sha256": "5ee6a09f4d7f23d72b37fe93eca32a1a8fb08171faca1b6cd8bf23a71b0dce86",
+      "size": 106
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\test_tweaks_zero_techniques_psxmod.txt",
+      "sha256": "4a85c0eeda0f0eaa424e24d16f62b932cd861bdee89f27fe7da66687bad2dc35",
+      "size": 118
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-isolated-python-tests\\summary.json",
+      "sha256": "f872188a4af580fbd236aa820f766fdee8fd5275348e2b9e7607b9c58059b9e9",
+      "size": 18297
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v23-66f7db0\\candidate.json",
+      "sha256": "b885fb1cc0c8f7625535f107f502de8e67b2cbbd1a254af72a8ebc55fe20ea0a",
+      "size": 4471
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\hud-v23-python-tests.txt",
+      "sha256": "f06df8a9911cb2374a12b09aaeacb7f66c296b8a441770d1280ad4cf0c4b76ac",
+      "size": 138704
+    }
+  ]
+}

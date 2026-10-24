@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 7 passed (R2, R4, R7, R8, R12, R13, F33), 3 failed (R15, F18, F208), 224 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 8 passed (R2, R4, R5, R7, R8, R12, R13, F33), 3 failed (R15, F18, F208), 223 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -39,14 +39,32 @@ hashed evidence for each required mode. Do not set the completion flags under
 test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
-## Current qualification status, October 23
+## Current qualification status, October 24
 
-All 234 reference rows are inventoried; 6/234 (2.6%) are passed. R15/F208
+All 234 reference rows are inventoried; 8/234 (3.4%) are passed. R15/F208
 retain prior native Quit callback failures with broader transition checks
-incomplete. F33's online disabled-browser dwell failure is fixed and
-requalified below; local ammo/weapon restoration keeps the aggregate open.
+incomplete. F33's current-image state/resource and paired refusal checks pass.
+F18 retains its reproduced failure until the fixed image completes continuous
+transition and actual Quit-page qualification.
 Earlier audio failures remain in R4/R12 history, followed by
 current-image local and paired passes of their frozen bounded checks.
+
+The [v23 HUD receipt](evidence/mmx6-hud/manifest-bound-66f7db0-layouts-and-menu-samples-reviewed.json)
+qualifies R5 locally and on two separately staged loopback peers for both
+stacked and side-by-side layouts at 960×720, 1200×600 and 640×900 drawable
+sizes. Native contact changes both HP values; composed meter anchors remain
+correct. Both menu owners preserve personal resources and resume. The pairs
+retain 73 and 75 distinct matching resolved core/mod samples, exit normally,
+and preserve private cards. All 386 receipt artifacts were hashed; 785 Python
+tests completed successfully in isolated module processes, with 12 optional
+skips. Debug and production builds each retain 103 passing CTests.
+
+Reviewed local and both-peer opening/closing samples show the 66f7db0 fix
+retains living X in Zero-owned world draws. Original menu-only pages suppress
+gameplay bodies and meters. These samples do not establish every intervening
+frame or actual Quit-page suppression, so F18 remains open. R6 also remains
+open for selected/spent ammo HUD ownership in both layouts and modes. The
+earlier f339e12 failure receipt and all frozen X4/X5 fields remain unchanged.
 
 The [combined R4/R12 receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-R4-R12-reviewed.json)
 binds candidate22ea525 to 24 character/family/mode coverage cells, 45 actual
