@@ -14,7 +14,7 @@ publication or tracker synchronization is authorized.
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
-| [Live native coverage](COOP_X6_COVERAGE.md) | 1,665 individual cases / 3,330 independent mode results, all unverified |
+| [Live native coverage](COOP_X6_COVERAGE.md) | 1,665 individual cases / 3,330 independent mode results; 2 local passed, 3,328 mode results unverified; all aggregate cases unverified |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The frozen
 native inventory and X6-only definitions are `COOP_X6_CONTENT.json`; live native
@@ -40,6 +40,16 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 24
+
+The live content ledger now qualifies exactly two local CP2 checks on
+`777b4d0453b0f08546a6df06adb95ab5a211e8d9`:
+`s00-a0-c02/boss` and `s00-a0-c02/exit_actual_transition`. The existing native
+intro run earned the main boss defeat, timed finale and actual exit into the
+report dispatcher and stable CURRENT export. Both append-only receipts bind
+the complete original report, actual staged image and independent admission
+review, with checkpoint/protection bypasses explicit. Netplay, the other four
+CP2 checks and the whole intro obligation remain unverified. These results do
+not change the separate 234 comparison rows.
 
 All 234 reference rows are inventoried; 11/234 (4.7%) are passed. R15/F208
 retain prior native Quit callback failures with broader transition checks

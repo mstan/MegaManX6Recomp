@@ -2744,8 +2744,182 @@
       },
       "modes": {
         "local_coop": {
-          "status": "unverified",
-          "attempts": []
+          "status": "passed",
+          "attempts": [
+            {
+              "receipt": {
+                "mode": "local_coop",
+                "result": "passed",
+                "candidate": "777b4d0453b0f08546a6df06adb95ab5a211e8d9",
+                "recorded_at": "2026-10-24T21:30:59Z",
+                "build_identity": {
+                  "name": "v31 native private Giga atlas debug candidate",
+                  "image": {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\candidate\\mmx6-runtime.exe",
+                    "sha256": "20d1a7fb33afa3d8219b74e755a700d9caf5e321e947144f6254582b6c227275"
+                  },
+                  "details": {
+                    "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+                    "declared_manifest_sha256": "5d16dcdf3a860956404316efab6ae3552596dbffc87d1e24fda675b128356842",
+                    "inventory_pointer": "/locations/2",
+                    "inventory_sha256": "67508ae2e19ad07c2c5cad41e12dbeb5e446e4eb50f033efa75ed306f2636fad",
+                    "definition_sha256": "021e2b352c074a2cf989119d5b766e651f77cbb7466243ff448554e2ff56b93a"
+                  }
+                },
+                "settings": {
+                  "mode": "local offline co-op",
+                  "roster": [
+                    "X/P1 native Falcon form1",
+                    "Zero/P2"
+                  ],
+                  "input_transport": "configured published_host original gameplay input",
+                  "network": false,
+                  "rollback": false,
+                  "loader": "default native loader; interpreted overlays explicitly sealed",
+                  "drawable": [
+                    960,
+                    720
+                  ],
+                  "audio": "emulation retained; SDL dummy output muted",
+                  "profile": "owned isolated automated profile; native cards unchanged",
+                  "prerequisite_commands": [
+                    8,
+                    10
+                  ],
+                  "recording": "default enabled; fixture-tainted; ordinary finalized capture and replay refused"
+                },
+                "artifacts": [
+                  {
+                    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-progression\\manifest-bound-777b4d0-earned-intro-CURRENT-export-reviewed.json",
+                    "sha256": "5ae7e77a5c2fdf781aa0d0a75f4039cd26f019df87615cd6617025b0059ddf68",
+                    "role": "Root reviewed source-bound native boss/finale/exit/report outcome"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\qualification.json",
+                    "sha256": "b8cb4d574d3f6549e9f27f9242aa25cfb4f92f9d4c1d2828df3e0b396fda9d72",
+                    "role": "Unchanged complete original successful native report; checker must hash directly"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v31-777b4d0\\candidate.json",
+                    "sha256": "a8cb51d448f3c381b7b1c831129d43e6b1f7115a1c80974a3a9a0a720ea31382",
+                    "role": "Frozen compiled source/SDK/image/manifest provenance"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\diagnostic-runner-executed-source.py",
+                    "sha256": "1c1be97ddf7925203fb2148afc2422a6a10fcb32d39dc660a28cb643861893ff",
+                    "role": "Executed native observer and input/protection contract"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\CP2-v31-earned-exit-report-input-source-notes.txt",
+                    "sha256": "6be72eae2b5385ed3a0ea900bbcc63ac9ff2a28cc8a3f3e58a7148a7913aee67",
+                    "role": "Pinned original native exit/report source guards"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs\\qualification.json",
+                    "sha256": "2f18300ffe99be56f094569c7c31c323dc89745fd35e796b8bc3fb9534785588",
+                    "role": "Prior independent startup watchdog failure retained"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\CP2-v31-specific-live-content-local-admission-review.txt",
+                    "sha256": "758a2d016f897b92903718f7c6a1a325feac3542f90887d8863f7a74bbcd2f53",
+                    "role": "Independent exact-definition/native-outcome admission review"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\CP2-v31-live-content-milestone-readonly-reduction.json",
+                    "sha256": "67a245c0e7706c5d0145c1d13da9557cbf2d45a48e51ec9976bfdbc47607aa98",
+                    "role": "Bounded derivative of raw native milestones; original remains required"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-CP2-ready-gpu.json.gz",
+                    "sha256": "0cf4c1ac878bbe00e0d8de2aa1f514cfb8e0441770382b1dcfaa205a841dbc20",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-first-boss-admitted-gpu.json.gz",
+                    "sha256": "832fafd6da1e3c372bb42037218d59fbc10861b6d4aad3747b1456de090225ce",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-first-boss-battle-ready-gpu.json.gz",
+                    "sha256": "fe68ca6d11c05d0423359535d18aa895714b5582cee4d1dce15cd3cc6eb83130",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-charged-boss-HP-31-gpu.json.gz",
+                    "sha256": "7f1e3c69d0bcd57acdbb0a58754adde194b86520d471bb686c073ca011a1c0e7",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-charged-boss-HP-24-gpu.json.gz",
+                    "sha256": "69417e5054bf39c77d026532ef627ef0190730d717c8fcc1f7132341731da607",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-charged-boss-HP-16-gpu.json.gz",
+                    "sha256": "c5986308d26035aafd0917c5d88986d4a67350d1f0992b5933fb8e7bd931b7ed",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-charged-boss-HP-8-gpu.json.gz",
+                    "sha256": "67fcc068e1d896c2daae0eae33cb6ebcccd47fa888b75dafc1a66ea5584901ba",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-charged-boss-HP-0-gpu.json.gz",
+                    "sha256": "fce520eab56f264028cad3109fd3ddb7ceb19f40e2accc0afbe110963785ab7c",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-finale-admitted-gpu.json.gz",
+                    "sha256": "c93782a8cbcdea42ae0a648cd1685de22b4448211c4c78f12dac1a15c574dd17",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-report-CURRENT-export-complete-gpu.json.gz",
+                    "sha256": "c435f66e09b45e15e06baea4fb334d0702863c976f8232fd8928321686882bad",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-current-export.bin",
+                    "sha256": "b6bd62be2195762e62183f1c7a697a20565a478e001d277a1ca9440834fd409a",
+                    "role": "Full951-byte actually earned stable CURRENT export; no card claim"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-first-boss-battle-ready.png",
+                    "sha256": "9797e741ec482d03995c5a434100a433882cd5ba0c3863739f7c57c7ce5cf542",
+                    "role": "Composed encounter/defeat/report context; no comprehensive artwork pass"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-charged-boss-HP-0.png",
+                    "sha256": "327af28fbe439da84522652fa85b89625bc624ffad3dbf408db52bf0aa56ebff",
+                    "role": "Composed encounter/defeat/report context; no comprehensive artwork pass"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-report-CURRENT-export-complete.png",
+                    "sha256": "58fc47174737204f9315cf0dbc1460b16e35e1d52fe73ab947d2e5b190c2b0ce",
+                    "role": "Composed encounter/defeat/report context; no comprehensive artwork pass"
+                  }
+                ],
+                "limits": [
+                  "Only this CP2 location check in LOCAL_COOP. Netplay and aggregate remain unverified.",
+                  "No CP0/CP1 traversal, complete stage/placement/terrain/enemy/audio/retry audit, native card I/O, physical pad, other OS or comprehensive artwork admission.",
+                  "Type55 finale completes through the original timer901 route; no claim that its HP was defeated or that this is a named alternate/refight boss obligation.",
+                  "RAM, coherent typed seat publication and composed captures are separate observations. Retained execution SAVEs are not native cards.",
+                  "Default recording remains prerequisite-tainted and is strictly refused for ordinary finalized capture/offline replay. No finalized replay or network proof."
+                ],
+                "bypasses": [
+                  "Offline mailbox8 invokes the original CP2 initializer, bypassing traversal to stage0/section0/checkpoint2; it does not set boss defeat, timer, exit, report or CURRENT outcome.",
+                  "Offline command10 refreshes positive per-seat native iframe+61 with player HP unchanged. Protected timing is not unassisted survival.",
+                  "No player/boss HP, action, ammo, selection, token, boss phase, timer901, clear/exit/report/CURRENT success field was authored. All claimed outcomes followed original accepted inputs/native logic.",
+                  "No snapshot LOAD was needed to earn either native outcome. Earlier startup watchdog failure remains separately retained; unchanged fresh retry succeeded."
+                ],
+                "case_id": "s00-a0-c02/boss",
+                "action": "After disclosed original CP2 initialization, native P1 Right contacted the authored door and admitted main boss type48/sub0. Original native Square full charge, Jump and selector19 release created type19 projectiles and damaged the bound main target from HP32 to0; original post-defeat dialogues and timer ran to completion.",
+                "outcome": "Actual PLAY+20 main48/sub0 at8008EF48 reached state2/HP0 at287.719s/native5588; child/sub1HP127 was excluded. Native type55 finale then reached original counter901/action9 at383.516s/native6556. No boss/action/phase/HP/timer success writes."
+              },
+              "sha256": "86156b8c83023c29ebcad3af6372c826994e86ea0c07ead326376c3f4082f7f1"
+            }
+          ]
         },
         "netplay": {
           "status": "unverified",
@@ -2785,8 +2959,182 @@
       },
       "modes": {
         "local_coop": {
-          "status": "unverified",
-          "attempts": []
+          "status": "passed",
+          "attempts": [
+            {
+              "receipt": {
+                "mode": "local_coop",
+                "result": "passed",
+                "candidate": "777b4d0453b0f08546a6df06adb95ab5a211e8d9",
+                "recorded_at": "2026-10-24T21:30:59Z",
+                "build_identity": {
+                  "name": "v31 native private Giga atlas debug candidate",
+                  "image": {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\candidate\\mmx6-runtime.exe",
+                    "sha256": "20d1a7fb33afa3d8219b74e755a700d9caf5e321e947144f6254582b6c227275"
+                  },
+                  "details": {
+                    "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+                    "declared_manifest_sha256": "5d16dcdf3a860956404316efab6ae3552596dbffc87d1e24fda675b128356842",
+                    "inventory_pointer": "/locations/2",
+                    "inventory_sha256": "67508ae2e19ad07c2c5cad41e12dbeb5e446e4eb50f033efa75ed306f2636fad",
+                    "definition_sha256": "40b161bc598772bd755c1a86bd6188eaaac4df239866e1521fbdb1b3d9223128"
+                  }
+                },
+                "settings": {
+                  "mode": "local offline co-op",
+                  "roster": [
+                    "X/P1 native Falcon form1",
+                    "Zero/P2"
+                  ],
+                  "input_transport": "configured published_host original gameplay input",
+                  "network": false,
+                  "rollback": false,
+                  "loader": "default native loader; interpreted overlays explicitly sealed",
+                  "drawable": [
+                    960,
+                    720
+                  ],
+                  "audio": "emulation retained; SDL dummy output muted",
+                  "profile": "owned isolated automated profile; native cards unchanged",
+                  "prerequisite_commands": [
+                    8,
+                    10
+                  ],
+                  "recording": "default enabled; fixture-tainted; ordinary finalized capture and replay refused"
+                },
+                "artifacts": [
+                  {
+                    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-progression\\manifest-bound-777b4d0-earned-intro-CURRENT-export-reviewed.json",
+                    "sha256": "5ae7e77a5c2fdf781aa0d0a75f4039cd26f019df87615cd6617025b0059ddf68",
+                    "role": "Root reviewed source-bound native boss/finale/exit/report outcome"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\qualification.json",
+                    "sha256": "b8cb4d574d3f6549e9f27f9242aa25cfb4f92f9d4c1d2828df3e0b396fda9d72",
+                    "role": "Unchanged complete original successful native report; checker must hash directly"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v31-777b4d0\\candidate.json",
+                    "sha256": "a8cb51d448f3c381b7b1c831129d43e6b1f7115a1c80974a3a9a0a720ea31382",
+                    "role": "Frozen compiled source/SDK/image/manifest provenance"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\diagnostic-runner-executed-source.py",
+                    "sha256": "1c1be97ddf7925203fb2148afc2422a6a10fcb32d39dc660a28cb643861893ff",
+                    "role": "Executed native observer and input/protection contract"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\CP2-v31-earned-exit-report-input-source-notes.txt",
+                    "sha256": "6be72eae2b5385ed3a0ea900bbcc63ac9ff2a28cc8a3f3e58a7148a7913aee67",
+                    "role": "Pinned original native exit/report source guards"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs\\qualification.json",
+                    "sha256": "2f18300ffe99be56f094569c7c31c323dc89745fd35e796b8bc3fb9534785588",
+                    "role": "Prior independent startup watchdog failure retained"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\CP2-v31-specific-live-content-local-admission-review.txt",
+                    "sha256": "758a2d016f897b92903718f7c6a1a325feac3542f90887d8863f7a74bbcd2f53",
+                    "role": "Independent exact-definition/native-outcome admission review"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\CP2-v31-live-content-milestone-readonly-reduction.json",
+                    "sha256": "67a245c0e7706c5d0145c1d13da9557cbf2d45a48e51ec9976bfdbc47607aa98",
+                    "role": "Bounded derivative of raw native milestones; original remains required"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-CP2-ready-gpu.json.gz",
+                    "sha256": "0cf4c1ac878bbe00e0d8de2aa1f514cfb8e0441770382b1dcfaa205a841dbc20",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-first-boss-admitted-gpu.json.gz",
+                    "sha256": "832fafd6da1e3c372bb42037218d59fbc10861b6d4aad3747b1456de090225ce",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-first-boss-battle-ready-gpu.json.gz",
+                    "sha256": "fe68ca6d11c05d0423359535d18aa895714b5582cee4d1dce15cd3cc6eb83130",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-charged-boss-HP-31-gpu.json.gz",
+                    "sha256": "7f1e3c69d0bcd57acdbb0a58754adde194b86520d471bb686c073ca011a1c0e7",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-charged-boss-HP-24-gpu.json.gz",
+                    "sha256": "69417e5054bf39c77d026532ef627ef0190730d717c8fcc1f7132341731da607",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-charged-boss-HP-16-gpu.json.gz",
+                    "sha256": "c5986308d26035aafd0917c5d88986d4a67350d1f0992b5933fb8e7bd931b7ed",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-charged-boss-HP-8-gpu.json.gz",
+                    "sha256": "67fcc068e1d896c2daae0eae33cb6ebcccd47fa888b75dafc1a66ea5584901ba",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-charged-boss-HP-0-gpu.json.gz",
+                    "sha256": "fce520eab56f264028cad3109fd3ddb7ceb19f40e2accc0afbe110963785ab7c",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-finale-admitted-gpu.json.gz",
+                    "sha256": "c93782a8cbcdea42ae0a648cd1685de22b4448211c4c78f12dac1a15c574dd17",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-report-CURRENT-export-complete-gpu.json.gz",
+                    "sha256": "c435f66e09b45e15e06baea4fb334d0702863c976f8232fd8928321686882bad",
+                    "role": "Native GPU command observation; independent of composed/RAM sample"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-current-export.bin",
+                    "sha256": "b6bd62be2195762e62183f1c7a697a20565a478e001d277a1ca9440834fd409a",
+                    "role": "Full951-byte actually earned stable CURRENT export; no card claim"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-first-boss-battle-ready.png",
+                    "sha256": "9797e741ec482d03995c5a434100a433882cd5ba0c3863739f7c57c7ce5cf542",
+                    "role": "Composed encounter/defeat/report context; no comprehensive artwork pass"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-charged-boss-HP-0.png",
+                    "sha256": "327af28fbe439da84522652fa85b89625bc624ffad3dbf408db52bf0aa56ebff",
+                    "role": "Composed encounter/defeat/report context; no comprehensive artwork pass"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v31-777b4d0-report-inputs-startup-retry\\ammo-hud\\native-report-CURRENT-export-complete.png",
+                    "sha256": "58fc47174737204f9315cf0dbc1460b16e35e1d52fe73ab947d2e5b190c2b0ce",
+                    "role": "Composed encounter/defeat/report context; no comprehensive artwork pass"
+                  }
+                ],
+                "limits": [
+                  "Only this CP2 location check in LOCAL_COOP. Netplay and aggregate remain unverified.",
+                  "No CP0/CP1 traversal, complete stage/placement/terrain/enemy/audio/retry audit, native card I/O, physical pad, other OS or comprehensive artwork admission.",
+                  "Type55 finale completes through the original timer901 route; no claim that its HP was defeated or that this is a named alternate/refight boss obligation.",
+                  "RAM, coherent typed seat publication and composed captures are separate observations. Retained execution SAVEs are not native cards.",
+                  "Default recording remains prerequisite-tainted and is strictly refused for ordinary finalized capture/offline replay. No finalized replay or network proof."
+                ],
+                "bypasses": [
+                  "Offline mailbox8 invokes the original CP2 initializer, bypassing traversal to stage0/section0/checkpoint2; it does not set boss defeat, timer, exit, report or CURRENT outcome.",
+                  "Offline command10 refreshes positive per-seat native iframe+61 with player HP unchanged. Protected timing is not unassisted survival.",
+                  "No player/boss HP, action, ammo, selection, token, boss phase, timer901, clear/exit/report/CURRENT success field was authored. All claimed outcomes followed original accepted inputs/native logic.",
+                  "No snapshot LOAD was needed to earn either native outcome. Earlier startup watchdog failure remains separately retained; unchanged fresh retry succeeded."
+                ],
+                "case_id": "s00-a0-c02/exit_actual_transition",
+                "action": "After actual main-boss defeat and natural type55 timer901, source-ready original Cross responses completed dialogues4/5/6. Original report confirms advanced the real native dispatcher and pack return.",
+                "outcome": "Positive original PLAY+F=0x40 at410.781s/native6557 transitioned through observed mode0B into actual stage15/section0 report. Three samples417.687/417.766/417.844s reached report[12,5,1], PLAY+28=1 and stable full951-byte CURRENT header[1,1], SHA b6bd62be2195762e62183f1c7a697a20565a478e001d277a1ca9440834fd409a. Persistent campaign slices matched. No exit/report/CURRENT outcome writes; no native-card/import claim."
+              },
+              "sha256": "ca7c15c38f40c90a43b44726a48a1cd712043e0b42121216067f3243a14698b2"
+            }
+          ]
         },
         "netplay": {
           "status": "unverified",
