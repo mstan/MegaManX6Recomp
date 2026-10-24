@@ -1,0 +1,226 @@
+"""Native controller-mapped state UI and rewind; no direct load requests.
+
+Gameplay input uses the owned host sampler. Probe saves only inspect the actual
+provider after user-path operations; they never stand in for Square/Cross.
+"""
+import hashlib
+import math
+from pathlib import Path
+import shutil
+import struct
+import time
+import zlib
+
+import coop_debug as debug
+import qualify_mmx6_coop_personal_menu as menus
+import qualify_mmx6_coop_state as state
+
+
+SUCCESS='bounded_mapped_state_controls_observed'
+
+
+def require(ok,message):
+    if not ok:raise debug.DebugError(message)
+
+
+class PublishedAdapter(menus.OfflineMenuAdapter):
+    """Keep the existing native observation windows, replace only transport."""
+    def __init__(self,ctx,evidence,timeout=12):
+        def control(command,**fields):
+            if command=='press':
+                require(fields.get('frames')==0 and fields.get('port') in (1,2),
+                    'Published state adapter requires a persistent ordinary host hold')
+                return ctx['set_input'](fields['port']-1,0xffff^fields['buttons'])
+            if command=='clear_input' and 'layer' not in fields:
+                require(fields.get('port') in (1,2),'Published state adapter cannot clear another seat')
+                return ctx['set_input'](fields['port']-1,0)
+            return ctx['request'](command,**fields)
+        super().__init__(control,evidence,timeout=timeout)
+
+
+def operation_result(before,after,operation,slot,expected_ok):
+    require(type(before.get('generation')) is int and before.get('pending')==0,
+        'Mapped operation needs an idle native completion counter')
+    if type(after.get('generation')) is not int or not state.forward(before['generation'],after['generation']):
+        return False
+    if after.get('pending')!=0:return False
+    require((after.get('last_op'),after.get('last_slot'),after.get('last_ok'))==(operation,slot,int(expected_ok)),
+        'Mapped operation completed with the wrong operation, slot or disposition')
+    return True
+
+
+def malformed_current_wire(original):
+    """Keep the current build/framing; forge only internal provider wire4."""
+    state.parse_state_image(original)  # Bounded, valid current image first.
+    header=original[:36];count=struct.unpack_from('<I',original,28)[0]
+    at=36;parts=[header];mutated=False
+    for _ in range(count):
+        tag,flags,size=struct.unpack_from('<IIQ',original,at);at+=16
+        payload=original[at:at+size];at+=size
+        if tag==0x16:
+            raw=bytearray(zlib.decompress(payload[4:]) if flags else payload)
+            require(struct.unpack_from('<4I',raw)==(0x504e534d,1,1,0),'Unexpected offline provider framing')
+            interface,name_len,payload_len=struct.unpack_from('<III',raw,16)
+            start=28+name_len
+            require(interface==1 and bytes(raw[28:start])==b'mmx6.local-coop' and start+payload_len==len(raw),
+                'Unexpected current co-op provider identity')
+            require(struct.unpack_from('<II',raw,start)==(0x53503658,3),'Expected current internal wire3')
+            struct.pack_into('<I',raw,start+4,4);mutated=True
+            payload=struct.pack('<I',len(raw))+zlib.compress(raw) if flags else bytes(raw)
+        parts.extend([struct.pack('<IIQ',tag,flags,len(payload)),payload])
+    require(mutated and at==len(original),'Provider mutation did not cover one complete current image')
+    return b''.join(parts)
+
+
+class SlotControls:
+    def __init__(self,ctx,evidence,output):
+        self.ctx,self.evidence,self.output=ctx,evidence,output
+        evidence.update(mapped_controls=[],overlay_observations=[],overlay_captures=[])
+
+    def wait(self,test,label,timeout=18):
+        deadline=time.monotonic()+timeout
+        while time.monotonic()<deadline:
+            value=test()
+            if value:return value
+            time.sleep(.025)
+        raise debug.DebugError(label+': timed out')
+
+    def overlay(self):
+        reply=self.ctx['request']('overlay_status')
+        self.evidence['overlay_observations'].append(reply)
+        return reply
+
+    def capture(self,panel,label):
+        path=self.output/(label+'.png')
+        reply=self.ctx['request']('overlay_image',panel=panel,path=str(path))
+        require(reply.get('ok') is True and path.is_file(),'Host overlay capture did not complete')
+        self.evidence['overlay_captures'].append(dict(panel=panel,path=str(path),
+            sha256=hashlib.sha256(path.read_bytes()).hexdigest(),receipt=reply))
+
+    def hold_until(self,bits,test,label):
+        receipt=dict(label=label,seat=0,pressed=bits,source='published_host')
+        self.evidence['mapped_controls'].append(receipt)
+        try:
+            receipt['input']=self.ctx['set_input'](0,bits)
+            receipt['observed']=self.wait(test,label)
+            return receipt['observed']
+        finally:self.ctx['set_input'](0,0)
+
+    def open_slot(self,slot):
+        require(not self.overlay()['save_menu_open'],'Slot browser was already open')
+        self.hold_until(0x801,lambda:self.overlay()['save_menu_open'],'Select+R1 opens actual slot browser')
+        time.sleep(.08)
+        for _ in range(12):
+            status=self.overlay()
+            require(not status['save_unavailable'],'Current local mode blocks the slot browser')
+            if status['save_slot']==slot:return
+            current=status['save_slot']
+            self.hold_until(0x20,lambda:self.overlay()['save_slot']!=current,'Actual slot-browser Right')
+            time.sleep(.08)
+        raise debug.DebugError('Could not navigate to the requested ordinary slot')
+
+    def operation(self,operation,slot,expected_ok=True):
+        self.open_slot(slot)
+        self.capture('save_states',f'before-mapped-{operation}-{slot}')
+        before=self.ctx['request']('savestate_status')
+        record=dict(path='mapped_controller',operation=operation,slot=slot,expected_ok=expected_ok,
+            before=before,observations=[])
+        self.evidence['operations'].append(record)
+        def completed():
+            after=self.ctx['request']('savestate_status');record['observations'].append(after)
+            if operation_result(before,after,operation,slot,expected_ok):
+                record['completion']=after;return after
+        return self.hold_until(0x8000 if operation=='save' else 0x4000,completed,'Mapped '+operation)
+
+
+def restored_publications(case,saved,label):
+    anchor=case.sample(label+' first observation')['observation']['tick']
+    restored=case.wait(lambda row:all(state.reduce_private_restore(saved,row,completed_tick=anchor).values()),label)
+    checks=state.reduce_private_restore(saved,restored,completed_tick=anchor)
+    case.stable_window(label+' remains frozen')
+    return restored,checks
+
+
+def exercise(ctx,*,output,timeout=12):
+    require(ctx['mode']=='local' and ctx['input_path']=='published_host','Mapped states need the owned local host route')
+    output.mkdir(parents=True,exist_ok=False)
+    evidence={};ctx['report']['mapped_state']=evidence
+    adapter=PublishedAdapter(ctx,evidence,timeout)
+    case=state.PrivateStateCase(ctx['request'],output,evidence,timeout=timeout,
+        adapter=adapter,input_path='published_host')
+    controls=SlotControls(ctx,evidence,output)
+    evidence['limits']=['Local exact-image X/P1 + Zero/P2 intro only; physical keyboard F7/F8 and netplay are separate.',
+        'Controller shortcuts use the original host UI. Direct save RPCs only produce read-only provider probes.',
+        'Rewind seek duration is a setup heuristic; only actual restored state establishes the outcome.',
+        'A missed seek or observer setup failure is not automatically an engine defect.']
+    def probe(label,saved):
+        state.snapshot_operation(ctx['request'],'save',7,evidence['operations'])
+        image=state.copy_slot_image(ctx['candidate'],7,output/(label+'-probe.pst'))
+        evidence.setdefault('provider_probes',[]).append(dict(label=label,**image))
+        checks=state.reduce_provider_restore(saved,image['inspection'])
+        require(all(checks.values()),label+': full provider/static DSP differs from saved paused state')
+        return checks
+    try:
+        case.open_live_window()
+        before=case.stable_window('Before mapped Square save')
+        controls.operation('save',0)
+        image=state.copy_slot_image(ctx['candidate'],0,output/'mapped-save.pst')
+        evidence['mapped_saved_snapshot']=image;saved=image['inspection']
+        state.require_audio_owner_contract(saved)
+        reference=case.wait(lambda row:all(state.reduce_private_restore(saved,row,completed_tick=before[0]['observation']['tick']).values()),
+            'Native published state after mapped Square save')
+        evidence['checks']['mapped_square_saved_live_private_pools']=True
+        evidence['status']='failed_behavior'
+        case.resume_and_retire(reference,'before-mapped-load')
+        controls.operation('load',0)
+        reference,checks=restored_publications(case,saved,'Actual mapped Cross restores private pools')
+        evidence['checks'].update(checks)
+        evidence['checks']['mapped_cross_provider_probe']=all(probe('mapped-load',saved).values())
+
+        bad=malformed_current_wire(Path(image['path']).read_bytes());bad_path=output/'invalid-internal-wire4.pst'
+        bad_path.write_bytes(bad)
+        relative=Path(image['slot_relative_path'])
+        require(relative.name.endswith('_slot00.pst'),'Unexpected private state filename')
+        target=ctx['candidate']/'saves'/relative.with_name(relative.name.replace('_slot00.pst','_slot01.pst'))
+        shutil.copyfile(bad_path,target)
+        evidence['malformed_snapshot']=dict(path=str(bad_path),sha256=hashlib.sha256(bad).hexdigest(),
+            change='Only current provider internal wire3 -> unsupported wire4; current build header retained')
+        controls.operation('load',1,False)
+        restored_publications(case,saved,'Mapped malformed load leaves native paused pools intact')
+        evidence['checks']['native_malformed_provider_rejection_preserves_state']=all(probe('after-invalid',saved).values())
+
+        rewind=ctx['request']('rewind_status');evidence['rewind_initial']=rewind
+        require(rewind['enabled'] and not rewind['title_blocked'],'Local rewind is not enabled/available')
+        adapter.wait_counter('tick',240,'Retain original paused private pools in rewind history')
+        pause_end=case.stable_window('Original positive private pools retained before rewind divergence')[-1]
+        case.resume_and_retire(pause_end,'before-mapped-rewind')
+        changed=case.sample('Retired pools and moved Zero before mapped rewind')
+        require(not state.private_visible(changed),'Rewind setup did not diverge from the saved live pools')
+        rewind=ctx['request']('rewind_status');evidence['rewind_before_open']=rewind
+        require(rewind['snaps']>=20,'Insufficient actual rewind history')
+        controls.hold_until(5,lambda:controls.overlay()['rewind_open'],'Select+R3 opens actual rewind')
+        time.sleep(.1);controls.capture('rewind','mapped-rewind-open')
+        delta=(changed['observation']['tick']-pause_end['observation']['tick'])&0xffffffff
+        # Overlay-open/capture RPCs also consume presentations before the
+        # filmstrip freezes. Seek well inside the retained paused interval,
+        # rather than the short original menu-closing transition.
+        steps=math.ceil(delta/8)+12
+        require(12<=steps<=45,'Rewind setup exceeded its retained-history seek bound')
+        seconds=.28+.07*(steps-1)
+        evidence['rewind_seek_heuristic']=dict(publications_since_paused_window=delta,interval=8,
+            desired_steps=steps,held_seconds=seconds,qualification='Actual restored bytes only; duration is not a selected-tick proof')
+        try:ctx['set_input'](0,0x80);time.sleep(seconds)
+        finally:ctx['set_input'](0,0)
+        time.sleep(.1);controls.capture('rewind','mapped-rewind-selected')
+        controls.hold_until(0x4000,lambda:not controls.overlay()['rewind_open'],'Mapped Cross accepts rewind')
+        reference,checks=restored_publications(case,saved,'Actual mapped rewind restores positive original private pools')
+        evidence['checks'].update({'rewind_'+k:v for k,v in checks.items()})
+        evidence['checks']['mapped_rewind_full_provider_probe']=all(probe('rewind',saved).values())
+        case.capture('mapped-rewind-restored-live-pools')
+        case.resume_and_retire(reference,'after-mapped-rewind')
+        evidence['status']=SUCCESS
+        return evidence
+    finally:
+        for seat in (0,1):
+            try:ctx['set_input'](seat,0)
+            except Exception as error:evidence.setdefault('cleanup_errors',[]).append(str(error))

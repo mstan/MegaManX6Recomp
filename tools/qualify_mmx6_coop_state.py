@@ -412,13 +412,14 @@ def reduce_restored_retirement(reference, rows):
 
 class PrivateStateCase:
     """Original-input adapter around the existing owned baseline lifecycle."""
-    def __init__(self, control, destination, evidence, *, timeout):
+    def __init__(self, control, destination, evidence, *, timeout, adapter=None, input_path="offline_native"):
         from qualify_mmx6_coop_personal_menu import OfflineMenuAdapter
-        self.adapter = OfflineMenuAdapter(control, evidence, timeout=timeout)
+        self.adapter = adapter if adapter is not None else OfflineMenuAdapter(control, evidence, timeout=timeout)
+        self.input_path = input_path
         self.control, self.client = control, self.adapter.client
         self.destination, self.evidence, self.timeout = destination, evidence, timeout
         evidence.update(status="failed_setup", checks={}, operations=[], observations=[], captures=[], inputs=[],
-                        input_path="offline_native", artwork_review="pending", ledger_status="unverified")
+                        input_path=input_path, artwork_review="pending", ledger_status="unverified")
 
     def sample(self, label):
         row = private_sample(self.client)
@@ -436,7 +437,7 @@ class PrivateStateCase:
 
     def hold(self, seat, bits, frames, label):
         before = self.sample(label+" before")
-        receipt = dict(path="offline_native", seat=seat, pressed=bits, accepted=False, bypasses=[], label=label,
+        receipt = dict(path=self.input_path, seat=seat, pressed=bits, accepted=False, bypasses=[], label=label,
                        before_tick=before["observation"]["tick"])
         self.evidence["inputs"].append(receipt)
         self.adapter.hold(seat, bits, frames, label)
@@ -466,7 +467,7 @@ class PrivateStateCase:
                 self.evidence["opened_live_window"] = row
             return row
         before = self.sample("P2 dash input bracket start")
-        receipt = dict(path="offline_native", seat=1, pressed=0x2080, accepted=False, bypasses=[],
+        receipt = dict(path=self.input_path, seat=1, pressed=0x2080, accepted=False, bypasses=[],
                        before_tick=before["observation"]["tick"], label="Original P2 Circle+Left")
         self.evidence["inputs"].append(receipt)
         held = self.adapter.hold_observed(1, 0x2080, 8, receipt["label"], during_dash)
@@ -519,7 +520,7 @@ class PrivateStateCase:
         history = []
         self.evidence.setdefault("resume_recovery_windows", []).append(dict(label=label, observations=history))
         before = self.sample(label+" native Start bracket")
-        receipt = dict(path="offline_native", seat=0, pressed=8, accepted=False, bypasses=[], label=label,
+        receipt = dict(path=self.input_path, seat=0, pressed=8, accepted=False, bypasses=[], label=label,
                        before_tick=before["observation"]["tick"])
         self.evidence["inputs"].append(receipt)
         def observe_resume():

@@ -81,6 +81,17 @@ explicit, and zero priority values do not qualify nonzero native priorities.
 Mapped controls, rewind, rollback, native invalid-state rejection and full F33
 remain unverified. Earlier failed setup/observer attempts are retained.
 
+The [controller-mapped state receipt](evidence/mmx6-private-state/manifest-bound-22ea525-mapped-controls-reviewed.json)
+adds34 native checks for ordinary Select+R1/Square save, Cross load, rejection
+of a current-build provider forged to internal wire4, and Select+R3/Left/Cross
+rewind. Three completed probe saves preserve the complete paused host context,
+input/resources, retained graphics and nine SPU reservations. Actual native
+effect retirement and independent P2 movement recover afterward. The process
+exits0 and preserves cards; all206 selected Python checks pass. Rewind's
+recording limitation and the earlier closing-interval seek miss are explicit.
+Physical F7/F8 keyboard events, netplay and remaining F33 contexts are still
+unverified, so no comparison disposition changes.
+
 ### Earlier audio milestones
 
 These receipts retain their scopes and dispositions at the time. The current

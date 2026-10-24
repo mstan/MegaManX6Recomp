@@ -77,7 +77,7 @@ def validate_sources(build: Path, source: Path, manifest: dict) -> dict:
                 scope="Declared game and game-generated files only; other dependency roots not rehashed")
 
 
-def verify_prepared_originals(candidate: Path, original: Path, disc: Path) -> dict:
+def verify_prepared_originals(candidate: Path, original: Path, disc: Path, *, expected_rewind=False) -> dict:
     config=tomllib.loads((candidate/"game.toml").read_text(encoding="utf-8-sig"))
     if (Path(config["game"]["exe"]).resolve()!=original.resolve() or
             Path(config["game"]["disc"]).resolve()!=disc.resolve()):
@@ -87,9 +87,9 @@ def verify_prepared_originals(candidate: Path, original: Path, disc: Path) -> di
             runtime.get("bios_hle_keep_intro") is not False or runtime.get("disc_speed")!="1x"):
         raise ValueError("Jump observer requires the original default loader and authentic disc timing")
     settings=tomllib.loads((candidate/"settings.toml").read_text(encoding="utf-8-sig"))
-    if (settings["video"].get("rewind") is not False or settings["video"].get("aspect_ratio")!="4:3" or
+    if (type(expected_rewind) is not bool or settings["video"].get("rewind") is not expected_rewind or settings["video"].get("aspect_ratio")!="4:3" or
             settings["video"].get("renderer")!="opengl" or settings["video"].get("fullscreen")!=0):
-        raise ValueError("Jump observer requires the fresh native-aspect non-rewind profile")
+        raise ValueError("Source-bound observer requires native aspect, OpenGL, windowed mode and the explicit rewind preference")
     return dict(exe_sha256=preparation.sha256(original),disc=str(disc.resolve()),
                 loader="default OpenBIOS/HLE with authentic1x disc",settings_sha256=preparation.sha256(candidate/"settings.toml"))
 
@@ -230,10 +230,22 @@ def inspect_capture(candidate: Path, image: str, manifest: str, required_seats: 
                 scope="Ordered native N/P2 C consumption; no temporal "+("jump" if button==audio.CROSS else "saber")+" association or audio/output equivalence")
 
 
-def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,expected_image,first_seat,max_attempts,audio_timeout,private_banks=None,body_source=None,body_death=False,zero_overlay=None,custom_observer=None):
+def native_capture_required(candidate, *, rewind_state_case=False, custom_observer=None):
+    if type(rewind_state_case) is not bool:
+        raise ValueError('Expected explicit boolean rewind-state scope')
+    if not rewind_state_case:
+        return True
+    settings=tomllib.loads((candidate/'settings.toml').read_text(encoding='utf-8-sig'))
+    if not callable(custom_observer) or settings.get('video',{}).get('rewind') is not True:
+        raise ValueError('Only a custom state observer with explicitly enabled rewind can omit ordered recording')
+    return False
+
+
+def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,expected_image,first_seat,max_attempts,audio_timeout,private_banks=None,body_source=None,body_death=False,zero_overlay=None,custom_observer=None,rewind_state_case=False):
     host.require_windows();host.reserve(port)
     prepared=host.json_object(candidate/"preparation.json")
     baseline.candidate_environment(candidate,prepared)
+    require_capture=native_capture_required(candidate,rewind_state_case=rewind_state_case,custom_observer=custom_observer)
     environment=host.sanitized_environment(host.json_object(candidate/"environment.json"),candidate)
     output=candidate/"jump-audio";output.mkdir()
     args=[str(candidate/"mmx6-runtime.exe"),"--game",str(candidate/"game.toml"),"--memcard-dir",str(candidate/"saves"),
@@ -241,6 +253,9 @@ def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,exp
     report.update(status="failed_setup",args=args,environment=host.json_object(candidate/"environment.json"),
                   input_path="published_host",muted="SDL_AUDIODRIVER=dummy",cards_before=card_hashes(candidate),
                   diagnostics_scope="private_banks_v1" if private_banks is not None else "hardware_legacy")
+    report['ordered_native_recording_required']=require_capture
+    if not require_capture:
+        report['ordered_native_recording_limit']='Rewind timeline changes are outside the recording contract; no capture/replay qualification claimed'
     report["process_environment_overlay"]={name:environment[name] for name in
         ("SDL_AUDIODRIVER","XDG_DATA_HOME","XDG_CONFIG_HOME","PYTHONPYCACHEPREFIX")}
     process=route=control=None
@@ -263,9 +278,11 @@ def run_owned(candidate,port,boot_timeout,progress_timeout,report,contract,*,exp
                         verify_pad(control("pad_status",port=seat+1),seat)
                         route.set(seat,0)
                     report["host_preflight"]=True
-                if not report.get("first_native_record_observed"):
-                    if not host.native_capture_started(candidate):time.sleep(.03);continue
-                    report["first_native_record_observed"]=True
+                if not report.get("native_boot_gate_passed"):
+                    if require_capture:
+                        if not host.native_capture_started(candidate):time.sleep(.03);continue
+                        report["first_native_record_observed"]=True
+                    report["native_boot_gate_passed"]=True
                 mode=route.client.read(0x800CCED0,2)
                 if mode[0]==10:
                     try:

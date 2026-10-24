@@ -1,0 +1,909 @@
+{
+  "schema": 1,
+  "kind": "reviewed_native_controller_mapped_state_rewind_and_invalid_provider_rejection",
+  "reviewed_at_utc": "2026-10-24T05:09:05.412353+00:00",
+  "result": "bounded_local_mapped_controls_and_current_provider_checks_passed",
+  "candidate": {
+    "compiled_source": "22ea525bbc52b5177f501989fedc5873ef30099c",
+    "exe_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+    "manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+    "sdk": "09e8673435c73e516b420e6c13bb11f02dc8aaea",
+    "title": "mmx6-x-zero-delay-v18"
+  },
+  "raw_report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\qualification.json",
+    "sha256": "755b2170cd1af433e3232e0e0a972b0aa140d06dc37ba8ef86eedadcc972c34d",
+    "size": 9311802
+  },
+  "executed_sources": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "size": 29983
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "32d81cedabd0fecf6cff861fbe4bc225f24aeaaca4399cfa4a6653d34c853053",
+      "size": 12708
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "4829fcb53086c45a2fc4198167b282a73c4e79d3e586211ff8934de168a7f49e",
+      "size": 29088
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\qualify_mmx6_coop_personal_menu-executed-source.py",
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c",
+      "size": 16934
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "eced2cb8b51c932c3a4bca24bbce5c99264aa453eb37c22e9c30f0cb2e9f5219",
+      "size": 52953
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\runner-executed-source.py",
+      "sha256": "295814f73745176e567c2e856e644efc6f4133d3749e03debe128284ab3ded67",
+      "size": 4580
+    }
+  ],
+  "compilation_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v20-22ea525\\candidate.json",
+    "sha256": "1a73c37f0dc0c7aa7e4ec524e68561c61a04d713e39930c2ec97b0b8c2fd6500",
+    "size": 4429
+  },
+  "build_and_source_receipt": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-character-audio\\manifest-bound-22ea525-build-and-source-reviewed.json",
+    "sha256": "b0cd04af4a292649fe7cbdab4a50eac3e58ad986d7f46e532f5878e63e0e82c1",
+    "size": 6274
+  },
+  "manifest": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\frozen-build-v20-22ea525\\psx_build_manifest\\psx-runtime\\Release\\manifest.json",
+    "sha256": "26ff444b5cb1f509d8e4b9eb4f30cc393f48d835006da7b74c327a55f11a82be",
+    "size": 161853
+  },
+  "declared_source_validation": {
+    "checked_files": {
+      "game": 56,
+      "game-generated": 34
+    },
+    "checked_bytes": 43883730,
+    "generated_root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\generated-source",
+    "scope": "Declared game and game-generated files only; other dependency roots not rehashed"
+  },
+  "settings": {
+    "video": {
+      "renderer": "opengl",
+      "fullscreen": 0,
+      "window_width": 960,
+      "aspect_ratio": "4:3",
+      "rewind": true,
+      "rewind_depth": 50,
+      "rewind_interval": 8,
+      "frame_interpolation": false
+    },
+    "controller": {
+      "p1_device": "keyboard",
+      "p2_device": "keyboard",
+      "p1_mode": "digital",
+      "p2_mode": "digital"
+    },
+    "launcher": {
+      "skip_launcher": false
+    }
+  },
+  "native_input_scope": {
+    "path": "owned published host digital slots",
+    "original_actions": "P2 Circle+Left dash, P1 native Start, independent P2 Right after restore",
+    "mapped_actions": "Select+R1 slot browser; Square save0; Cross load0; Right then Cross invalid load1; Select+R3 rewind; Left seek; Cross accept",
+    "ordered_recording_required": false,
+    "ordered_recording_limit": "Rewind timeline changes are outside the recording contract; no capture/replay qualification claimed"
+  },
+  "snapshot": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\mapped-save.pst",
+    "sha256": "97e34aed290bf51e6c323ed54d1df66ec9da363006e88cba73f1f8f8ce21df4b",
+    "size": 1781266
+  },
+  "provider_probes": [
+    {
+      "label": "mapped-load",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\mapped-load-probe.pst",
+        "sha256": "75bf32ce855396d5973931b48c50a5f7da3f8b6512f841f8a1795ef320f82d22",
+        "size": 1783988
+      },
+      "checks": {
+        "exact_current_build_key": true,
+        "same_provider_set": true,
+        "same_resource_and_original_asset_binding": true,
+        "full_private_context_and_host_input_history": true,
+        "explicit_native_and_host_input_history": true,
+        "saved_native_world_clock": true,
+        "saved_native_mode_phase": true,
+        "saved_native_menu_state": true,
+        "full_retained_bank_payloads": true,
+        "saved_sprite_bank_count": true,
+        "saved_ui_bank_count": true,
+        "persistent_private_audio_priorities": true,
+        "private_spu_owner_tags": true,
+        "private_spu_modes": true,
+        "private_spu_registers_hex": true,
+        "private_spu_bank_bindings": true
+      }
+    },
+    {
+      "label": "after-invalid",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\after-invalid-probe.pst",
+        "sha256": "460bfd1925550579e486f92e9503f02fcc22f39e6432d2466ef0a64935a0dc9f",
+        "size": 1783880
+      },
+      "checks": {
+        "exact_current_build_key": true,
+        "same_provider_set": true,
+        "same_resource_and_original_asset_binding": true,
+        "full_private_context_and_host_input_history": true,
+        "explicit_native_and_host_input_history": true,
+        "saved_native_world_clock": true,
+        "saved_native_mode_phase": true,
+        "saved_native_menu_state": true,
+        "full_retained_bank_payloads": true,
+        "saved_sprite_bank_count": true,
+        "saved_ui_bank_count": true,
+        "persistent_private_audio_priorities": true,
+        "private_spu_owner_tags": true,
+        "private_spu_modes": true,
+        "private_spu_registers_hex": true,
+        "private_spu_bank_bindings": true
+      }
+    },
+    {
+      "label": "rewind",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\rewind-probe.pst",
+        "sha256": "ccd40cdd5502daa81458bd934927f51792759f7391a7171b6f583c1f4b07dc9d",
+        "size": 1790099
+      },
+      "checks": {
+        "exact_current_build_key": true,
+        "same_provider_set": true,
+        "same_resource_and_original_asset_binding": true,
+        "full_private_context_and_host_input_history": true,
+        "explicit_native_and_host_input_history": true,
+        "saved_native_world_clock": true,
+        "saved_native_mode_phase": true,
+        "saved_native_menu_state": true,
+        "full_retained_bank_payloads": true,
+        "saved_sprite_bank_count": true,
+        "saved_ui_bank_count": true,
+        "persistent_private_audio_priorities": true,
+        "private_spu_owner_tags": true,
+        "private_spu_modes": true,
+        "private_spu_registers_hex": true,
+        "private_spu_bank_bindings": true
+      }
+    }
+  ],
+  "malformed_snapshot": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\invalid-internal-wire4.pst",
+    "sha256": "089dd406567d6f90bd0f83a878ff6d9f9e94785f8f3704b019ad2c7b539a1d7b",
+    "size": 1775685,
+    "exact_change": "Only internal co-op provider wire3 -> unsupported4; current build header and other subsystem bytes unchanged",
+    "native_outcome": "Mapped Cross load1 completes generation4,last_ok0; subsequent native probe7 preserves complete paused provider, banks, resource/input identity and private SPU bindings"
+  },
+  "operations": [
+    {
+      "path": "mapped_controller",
+      "completion": {
+        "id": 1679,
+        "ok": true,
+        "generation": 1,
+        "pending": 0,
+        "last_ok": 1,
+        "last_op": "save",
+        "last_slot": 0
+      }
+    },
+    {
+      "path": "mapped_controller",
+      "completion": {
+        "id": 1786,
+        "ok": true,
+        "generation": 2,
+        "pending": 0,
+        "last_ok": 1,
+        "last_op": "load",
+        "last_slot": 0
+      }
+    },
+    {
+      "path": "read_only_provider_probe_save",
+      "completion": {
+        "id": 1801,
+        "ok": true,
+        "generation": 3,
+        "pending": 0,
+        "last_ok": 1,
+        "last_op": "save",
+        "last_slot": 7
+      }
+    },
+    {
+      "path": "mapped_controller",
+      "completion": {
+        "id": 1820,
+        "ok": true,
+        "generation": 4,
+        "pending": 0,
+        "last_ok": 0,
+        "last_op": "load",
+        "last_slot": 1
+      }
+    },
+    {
+      "path": "read_only_provider_probe_save",
+      "completion": {
+        "id": 1835,
+        "ok": true,
+        "generation": 5,
+        "pending": 0,
+        "last_ok": 1,
+        "last_op": "save",
+        "last_slot": 7
+      }
+    },
+    {
+      "path": "read_only_provider_probe_save",
+      "completion": {
+        "id": 2124,
+        "ok": true,
+        "generation": 6,
+        "pending": 0,
+        "last_ok": 1,
+        "last_op": "save",
+        "last_slot": 7
+      }
+    }
+  ],
+  "checks": {
+    "mapped_square_saved_live_private_pools": true,
+    "original_menu_resume_advances_native_world": true,
+    "native_phase1_and_phase2_observed": true,
+    "finite_all_three_retired": true,
+    "ordered_native_recovery_publications": true,
+    "recovery_personal_resources_preserved": true,
+    "recovery_original_p1_position_preserved": true,
+    "genuine_p2_input_resumed_independently": true,
+    "personal_hp_ammo_weapon_preserved": true,
+    "new_publication_after_completed_load": true,
+    "publication_after_saved_provider": true,
+    "native_p1_pause_retains_live_dash": true,
+    "saved_native_clock_restored": true,
+    "saved_native_menu_state_restored": true,
+    "full_private_body": true,
+    "full_private_shots": true,
+    "full_private_trails": true,
+    "full_private_attached": true,
+    "full_p1_body": true,
+    "native_input_history": true,
+    "mapped_cross_provider_probe": true,
+    "native_malformed_provider_rejection_preserves_state": true,
+    "rewind_new_publication_after_completed_load": true,
+    "rewind_publication_after_saved_provider": true,
+    "rewind_native_p1_pause_retains_live_dash": true,
+    "rewind_saved_native_clock_restored": true,
+    "rewind_saved_native_menu_state_restored": true,
+    "rewind_full_private_body": true,
+    "rewind_full_private_shots": true,
+    "rewind_full_private_trails": true,
+    "rewind_full_private_attached": true,
+    "rewind_full_p1_body": true,
+    "rewind_native_input_history": true,
+    "mapped_rewind_full_provider_probe": true
+  },
+  "check_count": 34,
+  "snapshot_contract": {
+    "pst": 10,
+    "provider_interface": 1,
+    "internal_wire": 3,
+    "semantic_bytes": 9390,
+    "resource_bytes": 88,
+    "private_spu_bytes": 6652,
+    "snapshot_publication": 226,
+    "native_world_clock": 183,
+    "sprite_banks": 311,
+    "ui_banks": 6
+  },
+  "rewind": {
+    "before_open": {
+      "id": 2094,
+      "ok": true,
+      "enabled": true,
+      "open": false,
+      "title_blocked": false,
+      "snaps": 50
+    },
+    "seek_setup": {
+      "publications_since_paused_window": 85,
+      "interval": 8,
+      "desired_steps": 23,
+      "held_seconds": 1.82,
+      "qualification": "Actual restored bytes only; duration is not a selected-tick proof"
+    },
+    "qualification": "Exact actual full paused provider/probe equality, returned positive live private pools, then native phase1/2 retirement and independent P2 movement; seek duration alone is not proof"
+  },
+  "owned_process": {
+    "pid": 29796,
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "private_cards": {
+    "before": {},
+    "after": {
+      "saves\\card1.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "saves\\card2.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    "unchanged": true
+  },
+  "overlay_captures": [
+    {
+      "panel": "save_states",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\before-mapped-save-0.png",
+      "sha256": "da846c868445ae4d8a01811639189ec47252d4aa70b3dd98ba984aeddcfd89a7",
+      "size": 922218
+    },
+    {
+      "panel": "save_states",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\before-mapped-load-0.png",
+      "sha256": "4f49125247e2fc2eed678c7094a1c936dfc8be0fc39b32019587597d309e4a24",
+      "size": 922218
+    },
+    {
+      "panel": "save_states",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\before-mapped-load-1.png",
+      "sha256": "16c5b44c56f34b05cf4b209490a3bec4c560b603a4fe938ae8256e3e0d9d22ed",
+      "size": 922218
+    },
+    {
+      "panel": "rewind",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\mapped-rewind-open.png",
+      "sha256": "0d6fa1b3c78171f85f8376831f126adf0acdeedefc1f224b32a8c75cc738d146",
+      "size": 338189
+    },
+    {
+      "panel": "rewind",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\mapped-rewind-selected.png",
+      "sha256": "8acb618dc3927c1638ab62ab399effaa4fb36ec90c77074006dd08549ffae55a",
+      "size": 338189
+    }
+  ],
+  "composed_captures": [
+    {
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\live-private-effects-before-save.png",
+      "sha256": "02a2faefbc07cd3b0d5efeb611004cb3c39ab653cb2672491956d1c3c9e1f2cf",
+      "size": 2074543
+    },
+    {
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\before-mapped-load-native-after-dash-retirement-and-input.png",
+      "sha256": "7f6c7cc907405b90039bf6189a5ca5c52c9a64eb472c10ae1f52457d74effa71",
+      "size": 2074543
+    },
+    {
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\before-mapped-rewind-native-after-dash-retirement-and-input.png",
+      "sha256": "03742f3b0c149f6326a0e04ce8d7cd803db959dcc725bbbdb7ea95a9859b4d88",
+      "size": 2074543
+    },
+    {
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\mapped-rewind-restored-live-pools.png",
+      "sha256": "6c0d1d15fc5f76c3d1dc37214fd9af46303d5ea9f3c74eb9075f5ba3281e35aa",
+      "size": 2074543
+    },
+    {
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\after-mapped-rewind-native-after-dash-retirement-and-input.png",
+      "sha256": "bd7eba1030ab43ac70740d28edbff3a26bf85cdc84bc9b7f89bc3a934f40e832",
+      "size": 2074543
+    }
+  ],
+  "visual_review": {
+    "reviewer": "root, solo",
+    "viewed_files": [
+      "before-mapped-save-0.png",
+      "before-mapped-load-0.png",
+      "mapped-rewind-selected.png",
+      "mapped-rewind-restored-live-pools.png",
+      "after-mapped-rewind-native-after-dash-retirement-and-input.png"
+    ],
+    "finding": "The original F7-labelled slot panel shows Square save/Cross load, first an empty slot then the native X-menu thumbnail. The selected rewind filmstrip shows the earlier X menu (28/50,F3045). Native restored menu remains intact; resumed intro shows both full meters and X/Zero bodies.",
+    "limits": "Only these five named images were visually reviewed; all ten completed captures retained. No original artwork, active-trail color, full HUD or campaign qualification."
+  },
+  "python_validation": {
+    "test_count": 206,
+    "result": "passed",
+    "log": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\python-validation.txt",
+      "sha256": "e8d9581725e522daf03589e212b4d51a5576be42bc82735ebfe97b8d70f36167",
+      "size": 311
+    }
+  },
+  "earlier_attempts": [
+    {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-first\\qualification.json",
+        "sha256": "8c4f7aa72683976d6d8f72db6114ba5b2697043662dcfa812b89f14dee34bd2f",
+        "size": 2456
+      },
+      "raw_status": "failed_setup",
+      "reviewed_disposition": "prelaunch runner setup: the shared manifest API requires two image paths; frozen plus staged image now supplied"
+    },
+    {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-two-image-bind\\qualification.json",
+        "sha256": "ff527d6d06d01d07631e22853275d1fc0ced2c1947261aad74277fe8df98a218",
+        "size": 3134
+      },
+      "raw_status": "failed_setup",
+      "reviewed_disposition": "prelaunch runner setup: jump-source validation correctly refused enabled rewind; explicit rewind expectation now required for this state case"
+    },
+    {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\qualification.json",
+        "sha256": "92e306b174e6b55383f84346d4d342c15d9526feee0c4c3146a8e4601a33eddf",
+        "size": 13309
+      },
+      "raw_status": "failed_setup",
+      "reviewed_disposition": "startup observer setup: framework rejects ordered recording with rewind; waiting for recording prevented frontend inputs. No native mapped-state outcome. Default audio/replay recording gate remains unchanged; this custom rewind scope now declares recording unavailable"
+    },
+    {
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\qualification.json",
+        "sha256": "1410184d7463861878d9db59cf40dfba76cdb29d3e748df05b3274e6ab3acfcc",
+        "size": 9938894
+      },
+      "raw_status": "failed_behavior",
+      "reviewed_disposition": "mapped save/load and native internal-wire rejection observed; rewind restored positive pools during the menu-closing interval rather than stable input-ready pause. Seek setup miss, not an established engine defect"
+    }
+  ],
+  "ledger": {
+    "F33": "unverified",
+    "other_dispositions_changed": false
+  },
+  "limits": [
+    "Exact same-image Windows local X/P1 + Zero/P2 intro only; no netplay or heterogeneous qualification.",
+    "Controller-mapped shortcuts and Square/Cross paths are exercised. Physical keyboard F7/F8 event routing remains unverified.",
+    "SDK intentionally makes ordered native-consumption recording unavailable with rewind. No recording/replay pass is claimed; existing audio/replay startup guards retain their default mandatory recording prerequisite.",
+    "Mapped operations issue no direct save/load RPC. Only later completed save7 RPCs inspect actual provider state after each user-path operation.",
+    "Current-build internal-wire4 rejection is qualified. Other malformed state families, native nonzero-priority restore, active-voice rewind, other locations and network state jumps remain separate.",
+    "Full semantic host core, complete retained sprite/UI payload and native input/body/world clock compare exactly; only the documented10-byte publication/presentation tail is excluded.",
+    "Native finite phase1/2 retirement applies to the three dash trails; attached pool bytes restore without claiming every attached-effect lifecycle.",
+    "Rewind seek timing is only setup. The earlier closing-interval miss remains retained and is not an engine defect claim.",
+    "Native cards remain separate and unchanged; no old-state compatibility/migration requirement.",
+    "The complete234-comparison burndown and F33 remain unverified beyond the stated bounded outcomes."
+  ],
+  "artifacts": [
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-character-audio\\manifest-bound-22ea525-build-and-source-reviewed.json",
+      "sha256": "b0cd04af4a292649fe7cbdab4a50eac3e58ad986d7f46e532f5878e63e0e82c1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\frozen-build-v20-22ea525\\psx_build_manifest\\psx-runtime\\Release\\manifest.json",
+      "sha256": "26ff444b5cb1f509d8e4b9eb4f30cc393f48d835006da7b74c327a55f11a82be"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v20-22ea525\\candidate.json",
+      "sha256": "1a73c37f0dc0c7aa7e4ec524e68561c61a04d713e39930c2ec97b0b8c2fd6500"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-first\\candidate\\environment.json",
+      "sha256": "1e0208cadfee8ac0a9c6b32933cc94cdb8194c5c8d8a82b534cbd5216b3f3874"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-first\\candidate\\game.toml",
+      "sha256": "04d4b9adacab4dbfe850384ba10de7a53e877ac51e400b563f33535ef4e4c94e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-first\\candidate\\preparation.json",
+      "sha256": "2b170ac4ac53d39059f1ad235fa79af6dde864bd94ced2af4732c7b3434b63e0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-first\\candidate\\settings.toml",
+      "sha256": "b550cf7c0c5adf5943c0785d278dc5cf84167602dcf49b0d66c5dff63c46ee25"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-first\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-first\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "e3a5be784ace3b85a9d17c3fbbfcd64e0adae8ee1abbdb6d125893d566d69243"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-first\\qualification.json",
+      "sha256": "8c4f7aa72683976d6d8f72db6114ba5b2697043662dcfa812b89f14dee34bd2f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-first\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "3b107c1f80a132de2fb3d33ca6190e6bb0587c5e173c161f61b8d146ec57ac64"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-first\\qualify_mmx6_coop_personal_menu-executed-source.py",
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-first\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "eced2cb8b51c932c3a4bca24bbce5c99264aa453eb37c22e9c30f0cb2e9f5219"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-first\\runner-executed-source.py",
+      "sha256": "86839d2129f667dffb6b626032e6061f0e2127532bad7c3764b9a817b3366fd6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\candidate\\environment.json",
+      "sha256": "8b873c8abd5aad1a2879fb6dbd9e440191f92e23b2254925040c3c35695a33d4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\candidate\\game.toml",
+      "sha256": "abf058a23e36c7bc851e7d72acdfdd9bd87e890e0f8109f8598b8da4ed6c2730"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\candidate\\input.ini",
+      "sha256": "93c78ec3a5240e59490da98572816ebcf1afe7462d9493f81102315239709803"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\candidate\\jump-audio\\control.jsonl",
+      "sha256": "447128fe53188e32408179bf6bd4ede64e7fc44bf6575f574b89da8e019c214f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\candidate\\jump-audio\\stderr.log",
+      "sha256": "7c20ca8fe0c09df37bc5eb6eaf38bee822797fe51ee44f42602673b64a34cccc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\candidate\\jump-audio\\stdout.log",
+      "sha256": "3ced9ef57f9f8e446b054300807d218999a52f338a299448212f9cb222966a8b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\candidate\\keybinds.ini",
+      "sha256": "6332ef4bd4b0caeb5bd42b18a4d37aa35c864735b5c8b254c996fe3718e5faec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\candidate\\preparation.json",
+      "sha256": "32fb87a9f658890b8587e9c7002f5fee291799de2e0a8e60a89f5796a39cdca4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\candidate\\psx_freeze_heartbeat.json",
+      "sha256": "4e76031af6974fd00a6676ad703d1a062cdfc993288ce35b7259c9e294b57815"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\candidate\\psx_last_run_report.json",
+      "sha256": "8055bd94d8003e54b1cee0ece82b976e2242e4378dcdc5ed68ea47bb64553909"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\candidate\\saves\\card1.mcd",
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\candidate\\saves\\card2.mcd",
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\candidate\\settings.toml",
+      "sha256": "b550cf7c0c5adf5943c0785d278dc5cf84167602dcf49b0d66c5dff63c46ee25"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\mapped-state\\after-invalid-probe.pst",
+      "sha256": "956974d24a468575167b4e5b2c7b5f4dd96d15df2ee4a1f97eb77c67e7235255"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\mapped-state\\invalid-internal-wire4.pst",
+      "sha256": "b5b362953626903dec5dcc8e168424848865150dff90d3d56a0083ccf2e55558"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\mapped-state\\mapped-load-probe.pst",
+      "sha256": "c5eb9ebe473622c77a2bf30d429e6e7a1e13c733e6c233f0a80327d0c60dca3d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\mapped-state\\mapped-save.pst",
+      "sha256": "f3a0d0a098ad715255d322cafaa9611c12c380944b82bff9ad2cb010322b4f59"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "e3a5be784ace3b85a9d17c3fbbfcd64e0adae8ee1abbdb6d125893d566d69243"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\qualification.json",
+      "sha256": "1410184d7463861878d9db59cf40dfba76cdb29d3e748df05b3274e6ab3acfcc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "4829fcb53086c45a2fc4198167b282a73c4e79d3e586211ff8934de168a7f49e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\qualify_mmx6_coop_personal_menu-executed-source.py",
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "eced2cb8b51c932c3a4bca24bbce5c99264aa453eb37c22e9c30f0cb2e9f5219"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-recording-scope\\runner-executed-source.py",
+      "sha256": "295814f73745176e567c2e856e644efc6f4133d3749e03debe128284ab3ded67"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\candidate\\environment.json",
+      "sha256": "a8d69a84b5fe1fac17a87e220a9673bdd7730eeca0e23b9189aff4226ffc55c1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\candidate\\game.toml",
+      "sha256": "a36554de2b1a1ff9ed2e6525e14f9eac87a390f57740f33643e6c9d74740f0d2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\candidate\\input.ini",
+      "sha256": "93c78ec3a5240e59490da98572816ebcf1afe7462d9493f81102315239709803"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\candidate\\jump-audio\\control.jsonl",
+      "sha256": "f938f31a37a52f8500d107a5b44b277d67abd2cf3b4d69d33e76d4a7341007e0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\candidate\\jump-audio\\stderr.log",
+      "sha256": "b1b3558d2ca7c8e8574be6800bcc4c0e95ae7e2a251aac4250fa432a8a771a28"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\candidate\\jump-audio\\stdout.log",
+      "sha256": "abc5530bccd0e7115a355a4951a62a844aba02b809dc45640646f875e46864de"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\candidate\\keybinds.ini",
+      "sha256": "6332ef4bd4b0caeb5bd42b18a4d37aa35c864735b5c8b254c996fe3718e5faec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\candidate\\preparation.json",
+      "sha256": "4a282f7f4c0bfdc0cb97f991dbf795bbf816209cbb0bd73d2cd12f9a5b0e21d7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\candidate\\psx_freeze_heartbeat.json",
+      "sha256": "8e3342ccd602426b38b669f2e15a26646330abe818196df6cff537d3b95bfe9f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\candidate\\psx_last_run_report.json",
+      "sha256": "6501eb394f3be1489ac05655eaae17bc36ee504243b9c710d3464581067f2a38"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\candidate\\saves\\card1.mcd",
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\candidate\\saves\\card2.mcd",
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\candidate\\settings.toml",
+      "sha256": "b550cf7c0c5adf5943c0785d278dc5cf84167602dcf49b0d66c5dff63c46ee25"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "e3a5be784ace3b85a9d17c3fbbfcd64e0adae8ee1abbdb6d125893d566d69243"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\qualification.json",
+      "sha256": "92e306b174e6b55383f84346d4d342c15d9526feee0c4c3146a8e4601a33eddf"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "7724751b2138a276b16b5c2dac3787f79683d99aefc447cfe3d864031402e29c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\qualify_mmx6_coop_personal_menu-executed-source.py",
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "eced2cb8b51c932c3a4bca24bbce5c99264aa453eb37c22e9c30f0cb2e9f5219"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-rewind-profile\\runner-executed-source.py",
+      "sha256": "107563a1cfc57aabec15ac04d32244ebc50038f15e9dd82f80af342db2ed9a65"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\candidate\\environment.json",
+      "sha256": "2e3e6a74d091484108b44ca2197f9f7b681ae1984205ec2024f056267bcf938a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\candidate\\game.toml",
+      "sha256": "7045d45779ac570f10ec3bacc6d906dcf12f0f57f14e65b2f803ef8c79de9dc3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\candidate\\input.ini",
+      "sha256": "93c78ec3a5240e59490da98572816ebcf1afe7462d9493f81102315239709803"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\candidate\\jump-audio\\control.jsonl",
+      "sha256": "5043402d2d5794e39ecdcabb4a522759ca3bf64ee32c5506257f59f3f6d5147b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\candidate\\jump-audio\\stderr.log",
+      "sha256": "77e58a0c424ab93c5d901c17c0a3873b2798cd264a237d63fe5c5fd494945176"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\candidate\\jump-audio\\stdout.log",
+      "sha256": "ffcb71175c0c68a067b4a7c88c5f107cf710f6ee0508f1e8855029dda0d1ba03"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\candidate\\keybinds.ini",
+      "sha256": "6332ef4bd4b0caeb5bd42b18a4d37aa35c864735b5c8b254c996fe3718e5faec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\candidate\\preparation.json",
+      "sha256": "55b31bdd7f58d8681f6152be4ef59a55423881d28a2b4e7d1b22c7a8a17b87ac"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\candidate\\psx_freeze_heartbeat.json",
+      "sha256": "f4d1617df9bc891e9107407564e7354b586a8bb33c6d32100477c0a93f57e74b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\candidate\\psx_last_run_report.json",
+      "sha256": "b4c5e024f6e1b544e1bc573cd7cc0cb151df811ee10d15ef7c7fdc2d3ebec59b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\candidate\\saves\\card1.mcd",
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\candidate\\saves\\card2.mcd",
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\candidate\\settings.toml",
+      "sha256": "b550cf7c0c5adf5943c0785d278dc5cf84167602dcf49b0d66c5dff63c46ee25"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\after-invalid-probe.pst",
+      "sha256": "460bfd1925550579e486f92e9503f02fcc22f39e6432d2466ef0a64935a0dc9f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\after-mapped-rewind-native-after-dash-retirement-and-input.png",
+      "sha256": "bd7eba1030ab43ac70740d28edbff3a26bf85cdc84bc9b7f89bc3a934f40e832"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\before-mapped-load-0.png",
+      "sha256": "4f49125247e2fc2eed678c7094a1c936dfc8be0fc39b32019587597d309e4a24"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\before-mapped-load-1.png",
+      "sha256": "16c5b44c56f34b05cf4b209490a3bec4c560b603a4fe938ae8256e3e0d9d22ed"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\before-mapped-load-native-after-dash-retirement-and-input.png",
+      "sha256": "7f6c7cc907405b90039bf6189a5ca5c52c9a64eb472c10ae1f52457d74effa71"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\before-mapped-rewind-native-after-dash-retirement-and-input.png",
+      "sha256": "03742f3b0c149f6326a0e04ce8d7cd803db959dcc725bbbdb7ea95a9859b4d88"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\before-mapped-save-0.png",
+      "sha256": "da846c868445ae4d8a01811639189ec47252d4aa70b3dd98ba984aeddcfd89a7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\invalid-internal-wire4.pst",
+      "sha256": "089dd406567d6f90bd0f83a878ff6d9f9e94785f8f3704b019ad2c7b539a1d7b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\live-private-effects-before-save.png",
+      "sha256": "02a2faefbc07cd3b0d5efeb611004cb3c39ab653cb2672491956d1c3c9e1f2cf"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\mapped-load-probe.pst",
+      "sha256": "75bf32ce855396d5973931b48c50a5f7da3f8b6512f841f8a1795ef320f82d22"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\mapped-rewind-open.png",
+      "sha256": "0d6fa1b3c78171f85f8376831f126adf0acdeedefc1f224b32a8c75cc738d146"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\mapped-rewind-restored-live-pools.png",
+      "sha256": "6c0d1d15fc5f76c3d1dc37214fd9af46303d5ea9f3c74eb9075f5ba3281e35aa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\mapped-rewind-selected.png",
+      "sha256": "8acb618dc3927c1638ab62ab399effaa4fb36ec90c77074006dd08549ffae55a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\mapped-save.pst",
+      "sha256": "97e34aed290bf51e6c323ed54d1df66ec9da363006e88cba73f1f8f8ce21df4b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mapped-state\\rewind-probe.pst",
+      "sha256": "ccd40cdd5502daa81458bd934927f51792759f7391a7171b6f583c1f4b07dc9d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "32d81cedabd0fecf6cff861fbe4bc225f24aeaaca4399cfa4a6653d34c853053"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\python-validation.txt",
+      "sha256": "e8d9581725e522daf03589e212b4d51a5576be42bc82735ebfe97b8d70f36167"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\qualification.json",
+      "sha256": "755b2170cd1af433e3232e0e0a972b0aa140d06dc37ba8ef86eedadcc972c34d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "4829fcb53086c45a2fc4198167b282a73c4e79d3e586211ff8934de168a7f49e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\qualify_mmx6_coop_personal_menu-executed-source.py",
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "eced2cb8b51c932c3a4bca24bbce5c99264aa453eb37c22e9c30f0cb2e9f5219"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-stable-rewind\\runner-executed-source.py",
+      "sha256": "295814f73745176e567c2e856e644efc6f4133d3749e03debe128284ab3ded67"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-two-image-bind\\candidate\\environment.json",
+      "sha256": "d1361f3dbb535cb5ea8961cae6e1270f0a219cc3dbf49429e711292fc23daae7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-two-image-bind\\candidate\\game.toml",
+      "sha256": "46366187d27a6bbaf19baff4969e1fe90a3246b259aa514376f61e0b47611a79"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-two-image-bind\\candidate\\preparation.json",
+      "sha256": "f1cbae5568f950259290be08ba6c4169beff7d83dd40fcb09fb87687971ae4bd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-two-image-bind\\candidate\\settings.toml",
+      "sha256": "b550cf7c0c5adf5943c0785d278dc5cf84167602dcf49b0d66c5dff63c46ee25"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-two-image-bind\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-two-image-bind\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "e3a5be784ace3b85a9d17c3fbbfcd64e0adae8ee1abbdb6d125893d566d69243"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-two-image-bind\\qualification.json",
+      "sha256": "ff527d6d06d01d07631e22853275d1fc0ced2c1947261aad74277fe8df98a218"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-two-image-bind\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "3b107c1f80a132de2fb3d33ca6190e6bb0587c5e173c161f61b8d146ec57ac64"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-two-image-bind\\qualify_mmx6_coop_personal_menu-executed-source.py",
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-two-image-bind\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "eced2cb8b51c932c3a4bca24bbce5c99264aa453eb37c22e9c30f0cb2e9f5219"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v20-22ea525-controller-two-image-bind\\runner-executed-source.py",
+      "sha256": "c6ecda335ecaa3cfacfe6f8a35b852a9d69ab2b630134bf10420503f4502e190"
+    }
+  ]
+}

@@ -9,6 +9,9 @@ Both private memory cards remain unchanged. **F33 remains unverified**:
 actual mapped save/load/rewind controls, rollback and native malformed-state
 rejection are outside this run. Its saved voices are inactive; the separate
 active-vocal case below adds bounded playback evidence.
+The controller-mapped case at the end separately qualifies Square/Cross,
+rewind and one native malformed-provider rejection. Physical F7/F8 keyboard
+events and netplay remain unverified.
 The body-only command and its historical bd7/37 receipts in
 [COOP_SNAPSHOT_BASELINE.md](COOP_SNAPSHOT_BASELINE.md) remain separate.
 
@@ -208,3 +211,44 @@ captured. The final observer waits for both silence and the recorded terminal,
 and retains the complete event suffix through the first post-load publication.
 It rejects recorder resets, eviction and missing/reordered events. All202
 selected Python checks pass, including six active-state tests.
+
+## Controller-mapped slot and rewind checks
+
+`tools/qualify_mmx6_mapped_state.py` now passes34 bounded checks on the same
+candidate22ea525/image4b31864f/manifest12fe4747, with one hidden, muted native
+process. The [reviewed receipt](evidence/mmx6-private-state/manifest-bound-22ea525-mapped-controls-reviewed.json)
+binds the executed sources, native operation completions, current-build states,
+three provider probes, host overlay images and composed gameplay captures.
+
+Original P2 Circle+Left creates the live private dash pools and original P1
+Start pauses them. Published controller Select+R1 opens the actual slot browser;
+Square saves slot0. After native resume, trail retirement and independent P2
+movement, the same browser's Cross loads slot0. A completed probe save7 compares
+the complete9390-byte semantic core, resources/input history, both bodies,
+retained sprite/UI payloads and all nine private SPU reservations exactly.
+No direct load RPC substitutes for either controller action.
+
+A private copy keeps the current build header and every other subsystem,
+changing only internal co-op wire3 to unsupported4. Cross attempts to load it
+from slot1. The native operation completes generation4 with last_ok0; another
+completed save7 proves the original paused private context and cache/bindings
+remain intact. This is actual native rejection, separate from parser tests.
+No old-state migration is required and native cards remain unchanged.
+
+With local rewind explicitly enabled at depth50/interval8, the case retains
+240 paused publications, resumes and retires the trails, and moves P2.
+Select+R3 opens the actual filmstrip; Left selects earlier history and Cross
+accepts. The restored positive pools, native menu/world clock, complete
+provider/input/cache bytes and owner bindings must match the earlier saved
+state. Native phase1/2 retirement and independent P2 movement must then work
+again. Rewind selection duration is a setup heuristic; actual restored bytes
+establish the result. The earlier miss landed in the native menu-closing
+interval and remains recorded as a seek setup miss.
+
+Rewind changes are outside the SDK's ordered native-consumption recording
+contract. This runner explicitly requires a custom rewind observer/profile
+and claims no recording/replay pass. Existing audio/replay runs still require
+the initial native recording by default, and their rewind-off profile guard
+remains intact. All206 selected Python checks pass. Physical keyboard F7/F8,
+netplay, other malformed-state classes, active-vocal rewind and full F33
+remain unverified. The owned process exits0 and both private cards are preserved.
