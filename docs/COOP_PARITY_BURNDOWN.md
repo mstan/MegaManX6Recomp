@@ -58,6 +58,18 @@ Python tests pass. The broader audio issues remain open for additional
 actions/stop callers, active STOP7, music/PCM, native state/rewind and other
 rosters/hosts; this does not qualify all audio or any other ledger row.
 
+Candidate22ea525 also has a
+[current-wire warm/cold state receipt](evidence/mmx6-private-state/manifest-bound-22ea525-reviewed.json):
+36 warm and 37 fresh-process checks preserve private actors/effects, input
+history, retained graphics and all nine SPU owner reservations. Actual completed
+saves/loads and subsequent provider probes use internal wire3, the 9390-byte
+semantic core and current 6652-byte private-SPU section. Both processes exit0
+and private cards remain unchanged; all196 selected Python checks pass.
+No private voice was playing in the saved state and all saved priority bytes
+were zero. Active audio, nonzero native priorities, mapped controls, rewind,
+rollback and native malformed-state rejection remain open. F33 and all other
+comparison dispositions remain unchanged.
+
 ### Earlier audio milestones
 
 These receipts retain their scopes and dispositions at the time. The current

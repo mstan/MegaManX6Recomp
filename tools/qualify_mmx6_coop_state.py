@@ -25,15 +25,23 @@ from coop_debug import (BODY_BYTES, DIAGNOSTIC_ADDRESS, DIAGNOSTIC_BYTES,
 
 
 # Read-only, current-build wire inspection, not an alternate state loader.
-# runtime/include/boot_state.h + runtime/src/mod_snapshot.c; game schema1 is
+# runtime/include/boot_state.h + runtime/src/mod_snapshot.c; internal game schema3 is
 # src/mods/mmx6_coop_snapshot.inc. Reject future layouts instead of guessing.
 MAX_STATE_BYTES = 64 * 1024 * 1024
-HOST_RESOURCE_BYTES = 80
+HOST_WIRE_SCHEMA = 3
+HOST_RESOURCE_BYTES = 88
 HOST_PLAYER_BYTES = 0x158 + 0x1400 + 0x120 + 0xF0
-HOST_SEMANTIC_BYTES = HOST_PLAYER_BYTES + 25 + 2*0x158 + 0x205 + 128*5 + 80*2 + 96*14
+HOST_AUDIO_PRIORITIES_OFFSET = HOST_PLAYER_BYTES + 25 + 2*0x158 + 0x205
+HOST_SEMANTIC_BYTES = HOST_AUDIO_PRIORITIES_OFFSET + 24 + 128*5 + 80*2 + 96*14
 HOST_CORE_END = HOST_RESOURCE_BYTES + HOST_SEMANTIC_BYTES
 HOST_CACHE_OFFSET = HOST_CORE_END + 10  # publication count + presentation tail
 PRIVATE_SUCCESS = "automated_private_effect_state_checks_passed_artwork_pending"
+SPU_VOICE_WIRE_BYTES = 114
+SPU_BASE_BYTES = 256*2 + 24*SPU_VOICE_WIRE_BYTES + 64
+SPU_PRIVATE_STRIDE = 16+1+8+SPU_VOICE_WIRE_BYTES
+SPU_CURRENT_BYTES = SPU_BASE_BYTES + 24*SPU_PRIVATE_STRIDE + 4
+MMX6_AUDIO_OWNER = 0x4D4D583650320001
+MMX6_AUDIO_MASK = 0x00F00B09
 
 
 def forward(old, new):
@@ -57,9 +65,9 @@ def parse_state_image(data):
         require(tag not in sections and flags in (0, 1) and size <= MAX_STATE_BYTES and at+size <= len(data),
                 "duplicate/invalid/truncated section")
         payload = data[at:at+size];at += size
-        # Only host/RAM are inspected; the runtime already validated all
+        # Only host/RAM/private-SPU are inspected; the runtime already validated all
         # subsystem payloads before reporting completed save/load operations.
-        if tag in (2, 0x16) and flags:
+        if tag in (2, 9, 0x16) and flags:
             require(len(payload) >= 4, "truncated compressed length")
             raw_size = struct.unpack_from("<I", payload)[0]
             require(0 < raw_size <= MAX_STATE_BYTES, "unbounded compressed section")
@@ -72,7 +80,7 @@ def parse_state_image(data):
                     "compressed section length/trailer mismatch")
             payload = inflated
         sections[tag] = payload
-    require(at == len(data) and 2 in sections and 0x16 in sections, "missing required inspection section/trailing data")
+    require(at == len(data) and {2,9,0x16}<=sections.keys(), "missing required inspection section/trailing data")
     ram, host = sections[2], sections[0x16]
     require(len(ram) in (2*1024*1024, 8*1024*1024), "invalid native RAM geometry")
     require(16 <= len(host) <= 16*1024*1024, "invalid host section size")
@@ -96,7 +104,7 @@ def parse_state_image(data):
             "expected one offline co-op provider")
     schema, payload = records["mmx6.local-coop"]
     require(schema == 1 and len(payload) >= HOST_CACHE_OFFSET+8 and
-            struct.unpack_from("<II", payload) == (0x53503658, 1), "unsupported X6 provider schema")
+            struct.unpack_from("<II", payload) == (0x53503658, HOST_WIRE_SCHEMA), "unsupported X6 provider schema")
     cache_at = HOST_CACHE_OFFSET
     count = struct.unpack_from("<I", payload, cache_at)[0];cache_at += 4
     require(count <= 4096, "unbounded retained sprite count")
@@ -122,11 +130,29 @@ def parse_state_image(data):
         page, clut, _, identity = struct.unpack_from("<4H", payload, cache_at+40*index)
         require(identity == 0x7000+index and clut <= 32767 and not page & 0x180, "invalid UI bank identity")
     core = payload[HOST_RESOURCE_BYTES:HOST_CORE_END]
+    spu=sections[9]
+    require(len(spu)==SPU_CURRENT_BYTES,'unsupported current private-SPU owner wire length')
+    owners=[];modes=[];registers=[];bindings=[];voices=[]
+    for slot in range(24):
+        at=SPU_BASE_BYTES+slot*SPU_PRIVATE_STRIDE
+        mode=spu[at+16];owner=struct.unpack_from('<Q',spu,at+17)[0]
+        voice=spu[at+25:at+25+SPU_VOICE_WIRE_BYTES]
+        active,addr,repeat,bank,pending=struct.unpack_from('<i4I',voice)
+        require(mode<=3 and active in (0,1) and bank<32 and pending<32,'invalid current private-SPU voice scalar')
+        owners.append(owner);modes.append(mode);registers.append(spu[at:at+16].hex());bindings.append([bank,pending])
+        voices.append(dict(slot=slot,owner_tag=f'0x{owner:016x}',active=active,addr=addr,repeat=repeat,
+            sample_bank=bank,pending_bank=pending,env_level=struct.unpack_from('<H',voice,95)[0],
+            adsr_phase=voice[101],voice_wire_hex=voice.hex()))
     input_at = HOST_PLAYER_BYTES+10+1+4
     start_at = HOST_PLAYER_BYTES+25+2*0x158+1
     return dict(build_key=[*header[:7], header[8]], provider_ids=list(records),
         provider_schema=schema, provider_payload_sha256=hashlib.sha256(payload).hexdigest(),
         resource_binding_hex=payload[:HOST_RESOURCE_BYTES].hex(), semantic_core_hex=core.hex(),
+        internal_wire_schema=HOST_WIRE_SCHEMA,
+        audio_priorities_hex=core[HOST_AUDIO_PRIORITIES_OFFSET:HOST_AUDIO_PRIORITIES_OFFSET+24].hex(),
+        private_spu=dict(owner_tags=owners,modes=modes,registers_hex=registers,bank_bindings=bindings,
+            voices=voices,guest_clock_phase=struct.unpack_from('<I',spu,len(spu)-4)[0],
+            section_sha256=hashlib.sha256(spu).hexdigest()),
         private_body_hex=core[:0x158].hex(), shots_hex=core[0x158:0x1558].hex(),
         trails_hex=core[0x1558:0x1678].hex(), attached_hex=core[0x1678:0x1768].hex(),
         p1_body_hex=ram[0x970A0:0x970A0+BODY_BYTES].hex(),
@@ -141,7 +167,7 @@ def parse_state_image(data):
 
 
 def reduce_provider_restore(saved, restored):
-    return {name: saved[key] == restored[key] for name,key in (
+    checks={name: saved[key] == restored[key] for name,key in (
         ("exact_current_build_key", "build_key"), ("same_provider_set", "provider_ids"),
         ("same_resource_and_original_asset_binding", "resource_binding_hex"),
         ("full_private_context_and_host_input_history", "semantic_core_hex"),
@@ -149,7 +175,28 @@ def reduce_provider_restore(saved, restored):
         ("saved_native_world_clock", "native_timer"), ("saved_native_mode_phase", "native_mode_phase"),
         ("saved_native_menu_state", "native_menu_state"),
         ("full_retained_bank_payloads", "banks_sha256"),
-        ("saved_sprite_bank_count", "bank_count"), ("saved_ui_bank_count", "ui_bank_count"))}
+        ("saved_sprite_bank_count", "bank_count"), ("saved_ui_bank_count", "ui_bank_count"),
+        ('persistent_private_audio_priorities','audio_priorities_hex'))}
+    for key in ('owner_tags','modes','registers_hex','bank_bindings'):
+        checks['private_spu_'+key]=saved['private_spu'][key]==restored['private_spu'][key]
+    return checks
+
+
+def require_audio_owner_contract(inspection):
+    owners=inspection['private_spu']['owner_tags']
+    expected=[MMX6_AUDIO_OWNER if MMX6_AUDIO_MASK&(1<<i) else 0 for i in range(24)]
+    if owners!=expected:
+        raise DebugError('Current-build snapshot does not retain the exact nine private voice owners')
+
+
+def validate_state_build(build, source, profiles, expected_manifest, output):
+    import coop_host_profile as manifests
+    import qualify_mmx6_coop_jump_audio as binding
+    manifest=manifests.validate_build_manifest(build,[p/'mmx6-runtime.exe' for p in profiles],
+        evidence_directory=output/'manifest')
+    if manifest['declared_sha256']!=expected_manifest:
+        raise DebugError('Native state candidate manifest differs from explicit expected identity')
+    return dict(manifest=manifest,declared_sources=binding.validate_sources(build,source,manifest))
 
 
 def private_sample(client):
@@ -551,6 +598,7 @@ def run_private_effects(args):
     report["helper_sources"] = {Path(module.__file__).name: sha256(Path(module.__file__))
         for module in (effects, menu_adapter, baseline)}
     report["wire_contract"] = dict(pst=10, msnp=1, offline_provider="mmx6.local-coop", provider_schema=1,
+        internal_wire_schema=HOST_WIRE_SCHEMA,private_spu_bytes=SPU_CURRENT_BYTES,
         source="src/mods/mmx6_coop_snapshot.inc", resources_bytes=HOST_RESOURCE_BYTES,
         semantic_core_bytes=HOST_SEMANTIC_BYTES, excluded_tail_bytes=10,
         excluded_tail_fields=["frame_count", "hud_fade", "world_packets", "hud_seat"])
@@ -572,6 +620,8 @@ def run_private_effects(args):
             raise DebugError("Warm/cold executable, DLL, original asset, BIOS or catalog identities differ")
         report["staged_image_bindings"] = staged
         report["exe_sha256"] = args.expected_sha
+        report.update(validate_state_build(args.build,args.source,[output/'warm',output/'cold'],
+            args.expected_manifest_sha256,output))
 
         def warm_exercise(control, _client, destination, evidence):
             case = PrivateStateCase(control, destination, evidence, timeout=args.progress_timeout)
@@ -582,6 +632,7 @@ def run_private_effects(args):
             snapshot_operation(control, "save", 8, evidence["operations"])
             image = copy_slot_image(output/"warm", 8, output/"snapshot.pst")
             report["snapshot"] = image;saved.update(image["inspection"])
+            require_audio_owner_contract(saved)
             published = case.wait(lambda row: all(reduce_private_restore(saved, row,
                 completed_tick=before[0]["observation"]["tick"]).values()),
                 "Fresh original private pools after completed save")
@@ -792,9 +843,10 @@ def make_parser():
     parser.add_argument("--disc", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--expected-sha")
+    parser.add_argument('--expected-manifest-sha256')
     parser.add_argument("--boot-timeout", type=float, default=200)
     parser.add_argument("--private-effects", action="store_true",
-                        help="Opt in to full live Zero private-pool warm/cold qualification; requires exact --expected-sha")
+                        help="Qualify live Zero private pools in warm/cold processes; requires exact image and manifest SHA256")
     parser.add_argument("--progress-timeout", type=float, default=12)
     return parser
 
@@ -804,6 +856,9 @@ def validate_options(parser, args):
         parser.error("--expected-sha must contain 64 lowercase hexadecimal digits")
     if args.private_effects and not args.expected_sha:
         parser.error("--private-effects requires --expected-sha")
+    if args.private_effects and (args.expected_manifest_sha256 is None or
+        re.fullmatch(r'[0-9a-f]{64}',args.expected_manifest_sha256) is None):
+        parser.error('--private-effects requires exact --expected-manifest-sha256')
     if not math.isfinite(args.boot_timeout) or not 0 < args.boot_timeout <= 600:
         parser.error("--boot-timeout must be in (0,600]")
     if not math.isfinite(args.progress_timeout) or not 0 < args.progress_timeout <= 60:

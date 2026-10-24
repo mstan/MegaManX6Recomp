@@ -33,7 +33,7 @@ def sampled(tick=10):
 
 def provider(*, tick=10, bank_count=4):
     raw = private_publication(tick)
-    metadata = struct.pack("<II", 0x53503658, 1)+bytes(state.HOST_RESOURCE_BYTES-8)
+    metadata = struct.pack("<II", 0x53503658, state.HOST_WIRE_SCHEMA)+bytes(state.HOST_RESOURCE_BYTES-8)
     core = bytearray(state.HOST_SEMANTIC_BYTES)
     core[:0x158] = raw[0x100:0x258]
     core[0x1558:0x1678] = raw[TRAILS:TRAILS+0x120]
@@ -42,6 +42,7 @@ def provider(*, tick=10, bank_count=4):
     at = state.HOST_PLAYER_BYTES+25+2*0x158
     core[at] = 1  # pause_owner+1
     core[at+3+0x200] = 1  # enrolled
+    core[state.HOST_AUDIO_PRIORITIES_OFFSET+20]=2
     tail = struct.pack("<IBIB", tick, 128, 0, 0)
     cache = struct.pack("<I", bank_count)
     for index in range(bank_count):
@@ -51,7 +52,15 @@ def provider(*, tick=10, bank_count=4):
     return metadata+core+tail+cache
 
 
-def image(payload=None, *, compress=False, build=123):
+def spu_wire():
+    raw=bytearray(state.SPU_CURRENT_BYTES)
+    for slot in range(24):
+        if state.MMX6_AUDIO_MASK&(1<<slot):
+            struct.pack_into('<Q',raw,state.SPU_BASE_BYTES+slot*state.SPU_PRIVATE_STRIDE+17,state.MMX6_AUDIO_OWNER)
+    return raw
+
+
+def image(payload=None, *, compress=False, build=123, spu=None):
     payload = provider() if payload is None else payload
     identity = b"mmx6.local-coop"
     host = struct.pack("<4I", 0x504E534D, 1, 1, 0)+struct.pack("<3I", 1, len(identity), len(payload))+identity+payload
@@ -60,8 +69,8 @@ def image(payload=None, *, compress=False, build=123):
     ram[0xCCED0:0xCCED2] = b"\x0A\x02"
     ram[0xCF814:0xCF816] = b"\x01\x00"
     struct.pack_into("<I",ram,0xCCED0+0x90,99)
-    result = struct.pack("<9I", 0x50535842, 10, 999, 0x80010000, build, 32, 42, 2, 12345)
-    for tag,data in ((2,bytes(ram)), (0x16,host)):
+    result = struct.pack("<9I", 0x50535842, 10, 999, 0x80010000, build, 32, 42, 3, 12345)
+    for tag,data in ((2,bytes(ram)), (0x16,host),(9,bytes(spu_wire() if spu is None else spu))):
         flags = int(compress)
         if compress:
             data = struct.pack("<I", len(data))+zlib.compress(data)
@@ -75,7 +84,11 @@ class StateWireTests(unittest.TestCase):
         self.assertEqual(parsed["publication_tick"], 10)
         self.assertEqual(parsed["bank_count"], 4)
         self.assertEqual(parsed["ui_bank_count"], 1)
-        self.assertEqual(len(bytes.fromhex(parsed["semantic_core_hex"])), 9366)
+        self.assertEqual(len(bytes.fromhex(parsed["semantic_core_hex"])), 9390)
+        self.assertEqual(len(bytes.fromhex(parsed['resource_binding_hex'])),88)
+        self.assertEqual(parsed['internal_wire_schema'],3)
+        self.assertEqual(bytes.fromhex(parsed['audio_priorities_hex'])[20],2)
+        state.require_audio_owner_contract(parsed)
         self.assertEqual(len(bytes.fromhex(parsed["shots_hex"])), 0x1400)
         self.assertEqual(parsed["private_body_hex"], sampled()["p2_body_hex"])
         self.assertTrue(all(state.reduce_private_restore(parsed, sampled(11), completed_tick=10).values()))
@@ -92,6 +105,30 @@ class StateWireTests(unittest.TestCase):
             changed = bytearray(provider());struct.pack_into("<I", changed, offset, 2)
             with self.assertRaises(DebugError):
                 state.parse_state_image(image(changed))
+        for version in (1,2,4):
+            changed=bytearray(provider());struct.pack_into('<I',changed,4,version)
+            with self.assertRaises(DebugError):state.parse_state_image(image(changed))
+
+    def test_audio_priorities_and_same_bank_owner_loss_are_not_normalized(self):
+        saved=state.parse_state_image(image())
+        changed=bytearray(provider());changed[state.HOST_RESOURCE_BYTES+state.HOST_AUDIO_PRIORITIES_OFFSET+20]=0
+        self.assertFalse(state.reduce_provider_restore(saved,state.parse_state_image(image(changed)))['persistent_private_audio_priorities'])
+        changed=spu_wire();at=state.SPU_BASE_BYTES+20*state.SPU_PRIVATE_STRIDE
+        struct.pack_into('<Q',changed,at+17,0)
+        restored=state.parse_state_image(image(spu=changed))
+        checks=state.reduce_provider_restore(saved,restored)
+        self.assertFalse(checks['private_spu_owner_tags'])
+        self.assertTrue(checks['private_spu_bank_bindings'])
+        with self.assertRaises(DebugError):state.require_audio_owner_contract(restored)
+
+    def test_private_voice_register_mode_bank_and_old_ownerless_wire_reject(self):
+        saved=state.parse_state_image(image());at=state.SPU_BASE_BYTES+20*state.SPU_PRIVATE_STRIDE
+        for offset,key in ((at+4,'registers_hex'),(at+16,'modes'),(at+25+12,'bank_bindings')):
+            changed=spu_wire();changed[offset]=1
+            restored=state.parse_state_image(image(spu=changed))
+            self.assertFalse(state.reduce_provider_restore(saved,restored)['private_spu_'+key])
+        for payload in (spu_wire()[:-1],spu_wire()[:-192]):
+            with self.assertRaises(DebugError):state.parse_state_image(image(spu=payload))
 
     def test_duplicate_section_and_unbounded_inflate_are_rejected(self):
         raw = bytearray(image())
@@ -187,10 +224,12 @@ class PrivateStateCliTests(unittest.TestCase):
 
     def test_existing_body_only_command_and_explicit_private_case(self):
         self.assertFalse(self.parse([]).private_effects)
-        self.assertTrue(self.parse(["--private-effects","--expected-sha","a"*64]).private_effects)
+        self.assertTrue(self.parse(["--private-effects","--expected-sha","a"*64,'--expected-manifest-sha256','b'*64]).private_effects)
 
     def test_private_case_requires_exact_sha_and_bounded_timeouts(self):
-        for extra in (["--private-effects"], ["--expected-sha","A"*64], ["--boot-timeout","nan"],
+        for extra in (["--private-effects"], ["--private-effects", "--expected-sha", "a"*64],
+                      ["--private-effects", "--expected-sha", "a"*64, "--expected-manifest-sha256", "B"*64],
+                      ["--expected-sha","A"*64], ["--boot-timeout","nan"],
                       ["--progress-timeout","inf"], ["--progress-timeout","61"]):
             with self.subTest(extra=extra), contextlib.redirect_stderr(io.StringIO()), self.assertRaises(SystemExit):
                 self.parse(extra)
@@ -210,10 +249,11 @@ class PrivateStateCliTests(unittest.TestCase):
     def test_failed_warm_setup_or_behavior_is_retained_without_a_cold_launch(self):
         for original_status in ("failed_setup", "failed_behavior"):
             with tempfile.TemporaryDirectory() as temporary:
-                args = self.parse(["--private-effects","--expected-sha","a"*64])
+                args = self.parse(["--private-effects","--expected-sha","a"*64,'--expected-manifest-sha256','b'*64])
                 args.output = Path(temporary)/"new-private-output"
                 phase = dict(status="failed", exercise=dict(status=original_status,error="retained native failure"))
                 with patch.object(state,"prepare"), patch.object(state,"staged_image_binding",return_value={"exe":"a"*64}), \
+                        patch.object(state,'validate_state_build',return_value={}), \
                         patch.object(state.baseline,"run",return_value=phase) as lifecycle:
                     result = state.run(args)
                 self.assertEqual(lifecycle.call_count,1)

@@ -4806,8 +4806,59 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+            "build_identity": {
+              "exe_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+              "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+              "compiled_source_commit": "22ea525bbc52b5177f501989fedc5873ef30099c",
+              "sdk_commit": "09e8673435c73e516b420e6c13bb11f02dc8aaea"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro stage0/section0/checkpoint0",
+              "loading": "default Seamless Loading",
+              "input": "original offline native pad through persistent OfflineMenuAdapter",
+              "state_control": "completed savestate RPC generations; no mapped user hotkeys",
+              "audio": "emulated; muted output",
+              "rollback": false
+            },
+            "action": "Original P2 Circle+Left creates three live native dash trails. Original P1 Start pauses; save8 completes. Resume, retire effects and move P2, then load8 and probe-save7. Repeat load in a fresh process with only the new snapshot transferred.",
+            "outcome": "36 warm and 37 cold checks pass: complete private body/shots/pools, native and host input history, personal resources, retained graphics payload, exact current build/resource identities and all nine private SPU reservations survive. Three trails progress through phases1/2 and retire after native resume; P2 moves independently. Both processes exit0 and private cards remain unchanged. The saved snapshot has no active private DSP voices and all priority bytes are zero. Full F33 remains unverified.",
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-private-state\\manifest-bound-22ea525-reviewed.json",
+                "sha256": "c6d2e6efc8ff365dfce81c074c62319cd6dc96e65d6b1dee11599bc4600e8ae2"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-effects-v20-22ea525-schema3\\qualification.json",
+                "sha256": "90c8f6e575ddab70223f07ec2d3d7024ddd2d846c1c67e98fb7aff0fa6c66448",
+                "size": 4510208
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v20-22ea525\\candidate.json",
+                "sha256": "1a73c37f0dc0c7aa7e4ec524e68561c61a04d713e39930c2ec97b0b8c2fd6500",
+                "size": 4429
+              }
+            ],
+            "limits": [
+              "Exact current compiled candidate, same physical Windows machine, local fixed X/P1 + Zero/P2 intro only.",
+              "Original offline native pad input opens/resumes native P1 pause; save/load operations use completed debug RPC receipts, not mapped user hotkeys.",
+              "Only the exact new snapshot transfers to the fresh cold profile; no warm cache, settings or native memory card is copied.",
+              "All saved private DSP voices are inactive and all saved priority bytes zero; active playback and nonzero native-priority restoration remain unverified.",
+              "Static private owners/modes/registers/bank bindings compare exactly; advancing voice DSP positions/envelopes/clock are recorded without equality normalization.",
+              "No native malformed-state rejection, rewind, rollback, network state transfer, alternate roster, other locations or heterogeneous qualification.",
+              "Parser negative tests are read-only inspection tests, not native loader tests.",
+              "No old-state migration or backward compatibility requirement; native memory cards remain preserved.",
+              "Historical raw artwork-pending report is unchanged; bounded visual review is recorded separately."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Bounded current-image local native warm/cold state restoration is observed. Actual mapped save/load controls, rewind, active private audio/nonzero priorities, native malformed-state rejection and netplay state behavior remain unverified. Pure parser rejection tests do not qualify the native loader."
       }
     },
     {
