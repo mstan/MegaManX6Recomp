@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 10 passed (R2, R4, R5, R7, R8, R12, R13, F10, F18, F33), 2 failed (R15, F208), 222 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 11 passed (R2, R4, R5, R7, R8, R12, R13, F10, F18, F33, F38), 2 failed (R15, F208), 221 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -41,7 +41,7 @@ states; old-state migration is never required.
 
 ## Current qualification status, October 24
 
-All 234 reference rows are inventoried; 10/234 (4.3%) are passed. R15/F208
+All 234 reference rows are inventoried; 11/234 (4.7%) are passed. R15/F208
 retain prior native Quit callback failures with broader transition checks
 incomplete. F33's current-image state/resource and paired refusal checks pass.
 F10/F18 now pass on 1f50059 after restoring the original primary sprite sheet
@@ -49,6 +49,24 @@ and frozen effects, with rendered local/paired requalification below. Their
 earlier 66f7db0 failures remain in history.
 Earlier audio failures remain in R4/R12 history, followed by
 current-image local and paired passes of their frozen bounded checks.
+
+F38 now passes its bounded default local-recording contract after independent
+review of nine complete, untainted finalized traces on the exact `1f50059`
+image: three local sessions and both peers of three paired sessions. The
+[reviewed recording index](evidence/mmx6-recordings/finalized-sessions-1f50059-non-C-reviewed.json)
+binds the image, manifest, settings/content, native/private input consumption,
+recording footer and actual finalized location. Parent gameplay failures remain
+separate; this does not qualify replay, performance or cross-build sessions.
+
+The [v31 native intro export receipt](evidence/mmx6-progression/manifest-bound-777b4d0-earned-intro-CURRENT-export-reviewed.json)
+now retains actual door contact, charged boss damage to defeat, the native
+901-tick finale, source-ready dialogue/report inputs and a stable full 951-byte
+CURRENT export matching campaign fields. Checkpoint and positive native
+invincibility counters are explicit offline prerequisites. The completed
+route saves its actually earned exit and report execution points for later
+checks on this exact build. R15/F208 stay failed until real Continue/import,
+selection, reentry and remaining required modes are validated. Native cards,
+netplay and the separate content inventory gain no pass from this result.
 
 The [v23 HUD receipt](evidence/mmx6-hud/manifest-bound-66f7db0-layouts-and-menu-samples-reviewed.json)
 qualifies R5 locally and on two separately staged loopback peers for both
