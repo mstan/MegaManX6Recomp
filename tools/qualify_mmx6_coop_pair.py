@@ -733,7 +733,7 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
                     "State policy default resident loader did not commit on both peers")
             report["checks"]["default_resident_loader_committed"]=True
             state_policy.exercise(dict(clients=clients,report=report,output=output,
-                transport_window=transport_window,matched=matched),expected_sha=args.expected_exe_sha256)
+                transport_window=transport_window,matched=matched,network=network),expected_sha=args.expected_exe_sha256)
         if audio_pair is not None and state_policy is None:
             loader_logs=[(output/f"peer-{seat}/logs/stdout.log").read_text(errors="replace") for seat in range(2)]
             require(all("title netplay loading = resident assets" in text for text in loader_logs),

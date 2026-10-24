@@ -11,6 +11,18 @@ import qualify_mmx6_coop_pair as runner
 
 
 class StatePolicyTests(unittest.TestCase):
+    def test_refusal_needs_a_new_completed_handler_counter_and_closed_browser(self):
+        before=dict(overlay=dict(save_open_refusal_generation=3),
+                    state=dict(generation=0,pending=0,last_op='save',last_slot=-1,last_ok=0))
+        after=dict(overlay=dict(save_open_refusal_generation=4,save_menu_open=False,
+                              save_unavailable=True,rewind_open=False),state=dict(before['state']))
+        self.assertTrue(subject.refused_open(before,after))
+        for fields in (dict(save_open_refusal_generation=3),dict(save_open_refusal_generation=True),
+                       dict(save_menu_open=True),dict(save_unavailable=False),dict(rewind_open=True)):
+            changed=dict(after,overlay=dict(after['overlay'],**fields))
+            self.assertFalse(subject.refused_open(before,changed))
+        self.assertFalse(subject.refused_open(before,dict(after,state=dict(after['state'],pending=1))))
+
     def test_pending_or_changed_operation_cannot_qualify_refusal(self):
         initial=dict(generation=0,pending=0,last_op='none',last_slot=-1,last_ok=0)
         self.assertTrue(subject.unchanged_operation(initial,dict(initial)))

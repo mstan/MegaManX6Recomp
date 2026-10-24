@@ -32,15 +32,25 @@ def unchanged_operation(before, after):
             all(before.get(k) == after.get(k) for k in ('generation', 'last_op', 'last_slot', 'last_ok')))
 
 
+
+def refused_open(before, after):
+    old, new = (r['overlay'].get('save_open_refusal_generation') for r in (before, after))
+    return (type(old) is int and type(new) is int and
+            0 < ((new-old) & 0xffffffff) < 0x80000000 and
+            not after['overlay']['save_menu_open'] and after['overlay']['save_unavailable'] and
+            not after['overlay']['rewind_open'] and unchanged_operation(before['state'], after['state']))
+
+
 def exercise(ctx, *, expected_sha, dwell_seconds=12):
     binding.validate_context(ctx, expected_sha)
     require(type(dwell_seconds) in (int,float) and 0 <= dwell_seconds <= 15,
-            'Online slot-browser dwell must stay within its native observation bound')
+            'Online refused-browser dwell must stay within its native observation bound')
     report, output = ctx['report'], Path(ctx['output'])
     evidence = dict(status='failed_behavior', peers=[], checks={}, limits=[
         'Two owned Windows peers on one host, exact build/profile and delay mode only.',
-        'Actual local preferences enable rewind; network policy must refuse user state jumps.',
+        'Actual local preferences enable rewind; unsupported state browser entry must be refused before a modal pause.',
         'Posted Win32/SDL keyboard events and published local host controller samples are tested; physical hardware is separate.',
+        'Completed UI-refusal counters prove mapped handler consumption; explicit backend requests independently verify save/load refusal.',
         'No ordered native recording/replay with rewind, rollback, cross-build or heterogeneous qualification.',
     ])
     report['state_policy'] = evidence
@@ -60,7 +70,7 @@ def exercise(ctx, *, expected_sha, dwell_seconds=12):
         directory = Path(peer['directory'])
         settings = tomllib.loads((directory/'settings.toml').read_text(encoding='utf-8'))
         require(settings['video']['rewind'] is True, 'An online refusal peer has rewind disabled in settings')
-        record = dict(peer=seat, checks={}, observations=[], controller_inputs=[])
+        record = dict(peer=seat, checks={}, observations=[], controller_inputs=[], backend_refusals=[])
         evidence['peers'].append(record)
         keys = keyboard.OwnedKeyboard(dict(request=client.request, report=dict(owned_pid=peer['owned_pid'])), record)
 
@@ -78,73 +88,84 @@ def exercise(ctx, *, expected_sha, dwell_seconds=12):
             try:
                 acknowledgment = client.host_input(bits)
                 record['controller_inputs'].append(dict(pressed=bits, acknowledgment=acknowledgment))
-                if predicate:
-                    return wait(predicate, label)
-                # The slot browser pauses guest simulation. A native/transport
-                # wait here deadlocks the test; the subsequent Right change is
-                # the positive consumption barrier for Square/Cross instead.
-                time.sleep(.12)
+                return wait(predicate, label) if predicate else ctx['transport_window'](4)
             finally:
                 client.host_input(0)
-                time.sleep(.04)
+                ctx['transport_window'](2)
+
+        def entry_refusal(route, label):
+            before = observe()
+            def refused():
+                after = observe()
+                return after if refused_open(before, after) else None
+            if route == 'keyboard':
+                result = keys.until('F7', refused, wait, label)
+            else:
+                result = host(0x801, refused, label)
+            record.setdefault('completed_entry_refusals',[]).append(dict(route=route,before=before,after=result))
+            return result
 
         initial, before_files = observe(), files()
         record['initial'] = initial
         require(initial['rewind']['enabled'] and not initial['overlay']['rewind_open'],
                 'Online refusal needs an enabled rewind implementation with no open timeline')
+        require(type(initial['overlay'].get('save_open_refusal_generation')) is int,
+                'Native image lacks completed browser-entry refusal diagnostics')
         require(initial['state']['pending'] == 0, 'State policy started during a pending operation')
 
-        for route in ('keyboard', 'controller'):
-            if route == 'keyboard':
-                keys.until('F7', lambda: observe()['overlay']['save_menu_open'], wait, 'Online F7 slot browser')
+        for operation in ('save','load'):
+            try:
+                client.request('savestate',op=operation,slot=0)
+            except debug.DebugError as error:
+                message=str(error)
+                require('runtime rejected command' in message and 'refused' in message,
+                        'Backend state request failed without an explicit native policy refusal: '+message)
+                record['backend_refusals'].append(dict(operation=operation,error=message))
             else:
-                host(0x801, lambda: observe()['overlay']['save_menu_open'], 'Online Select+R1 slot browser')
-            opened = observe()
-            require(opened['overlay']['save_unavailable'], 'Online slot browser did not report states unavailable')
-            dwell=dict(route=route,seconds=dwell_seconds,start_monotonic_ns=time.monotonic_ns())
+                raise debug.DebugError('Unsupported online backend state operation was staged')
+        require(unchanged_operation(initial['state'],observe()['state']),
+                'Refused backend state request changed its completion generation')
+        record['checks']['backend_save_and_load_refused']=len(record['backend_refusals'])==2
+
+        for route in ('keyboard','controller'):
+            entry_refusal(route,'Actual online browser entry refused '+route)
+            start_network=ctx['network']()
+            start_native=debug.observe(client).json()
+            dwell=dict(route=route,seconds=dwell_seconds,start_monotonic_ns=time.monotonic_ns(),
+                       network_before=start_network,native_before=start_native,network_samples=[])
             record.setdefault('disabled_browser_dwell',[]).append(dwell)
-            time.sleep(dwell_seconds)
-            dwell['end_monotonic_ns']=time.monotonic_ns()
-            capture = directory/'logs'/('online-'+route+'-state-blocked.png')
-            reply = client.request('overlay_image', panel='save_states', path=str(capture))
-            require(reply.get('ok') is True and capture.is_file(), 'Online blocked-state overlay capture failed')
-            record.setdefault('captures', []).append(dict(path=str(capture), sha256=hashlib.sha256(capture.read_bytes()).hexdigest()))
-            slot = opened['overlay']['save_slot']
-            if route == 'keyboard':
-                for key in ('S', 'L'):
-                    keys.post(key, False)
-                    keys.post(key, True)
-                keys.until('Right', lambda: observe()['overlay']['save_slot'] != slot, wait,
-                           'Positive keyboard input barrier after refused S/L')
-            else:
-                host(0x8000)
-                host(0x4000)
-                host(0x20, lambda: observe()['overlay']['save_slot'] != slot,
-                     'Positive controller input barrier after refused Square/Cross')
-            after = observe()
-            record['checks'][route+'_save_load_refused_after_input_barrier'] = (
-                after['overlay']['save_menu_open'] and after['overlay']['save_unavailable'] and
-                unchanged_operation(initial['state'], after['state']) and files() == before_files)
-            keys.until('F7', lambda: not observe()['overlay']['save_menu_open'], wait, 'Close online slot browser')
-            if route == 'keyboard':
-                keys.post('F8', False)
-                keys.post('F8', True)
+            deadline=time.monotonic()+dwell_seconds
+            while time.monotonic()<deadline:
+                time.sleep(min(.5,max(0,deadline-time.monotonic())))
+                dwell['network_samples'].append(ctx['network']())
+            dwell.update(end_monotonic_ns=time.monotonic_ns(),network_after=ctx['network'](),
+                         native_after=debug.observe(client).json())
+            advancing=all(b['resolved_through']>a['resolved_through'] for a,b in
+                          zip(start_network,dwell['network_after']))
+            native_delta=(dwell['native_after']['native_timer']-start_native['native_timer'])&0xffffffff
+            after=observe()
+            record['checks'][route+'_entry_refused_without_pausing_match']=(advancing and
+                0<native_delta<0x80000000 and not after['overlay']['save_menu_open'] and
+                unchanged_operation(initial['state'],after['state']) and files()==before_files)
+            capture=directory/'logs'/('online-'+route+'-refused-browser-gameplay.png')
+            record.setdefault('captures',[]).append(debug.capture_present(client,capture,request=client.request))
+            if route=='keyboard':
+                keys.post('F8',False)
+                keys.post('F8',True)
             else:
                 host(5)
-            keys.until('F7', lambda: observe()['overlay']['save_menu_open'], wait,
-                       'Positive F7 event barrier after refused rewind')
-            after = observe()
-            record['checks'][route+'_rewind_refused_after_input_barrier'] = (
+            entry_refusal('keyboard','Positive F7 refusal barrier after rewind '+route)
+            after=observe()
+            record['checks'][route+'_rewind_refused_after_input_barrier']=(
                 not after['overlay']['rewind_open'] and after['rewind']['enabled'] and
-                unchanged_operation(initial['state'], after['state']) and files() == before_files)
-            keys.until('F7', lambda: not observe()['overlay']['save_menu_open'], wait, 'Close rewind-refusal barrier panel')
+                unchanged_operation(initial['state'],after['state']) and files()==before_files)
             ctx['transport_window'](16)
             ctx['matched']('State/rewind refusal peer'+str(seat)+' '+route)
-        record['final'] = observe()
-        require(all(record['checks'].values()), 'Online state/rewind refusal changed native operation state')
-    evidence['checks']['both_peers_all_mapped_refusals'] = all(all(p['checks'].values()) for p in evidence['peers'])
-    evidence['checks']['fresh_resolved_crc_after_each_refusal_route'] = True
-    require(all(evidence['checks'].values()), 'Paired state policy qualification failed')
-    report['checks']['state_policy_both_peers_completed'] = True
-    evidence['status'] = 'paired_mapped_state_rewind_refusal_observed'
+        record['final']=observe()
+        require(all(record['checks'].values()),'Online refusal changed native operation state or stopped match progress')
+    evidence['checks']['both_peers_all_mapped_refusals']=all(all(p['checks'].values())for p in evidence['peers'])
+    evidence['checks']['fresh_resolved_crc_after_each_refusal_route']=True
+    require(all(evidence['checks'].values()),'Paired state policy qualification failed')
+    report['checks']['state_policy_both_peers_completed']=True
+    evidence['status']='paired_mapped_state_rewind_refusal_observed'
     return evidence
