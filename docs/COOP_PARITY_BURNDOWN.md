@@ -210,6 +210,21 @@ and effect artwork are still pending. Offline audit command10 supplies only
 bounded native iframe counters for living seats; online/production and
 projected-body writes are refused, and accepted protection taints recordings.
 
+The subsequent [Giga packet reentry receipt](evidence/mmx6-hud/manifest-bound-9cbc314-Giga-reentrant-render-full-curtain-local-reviewed.json)
+qualifies the `9cbc314` fix for a separate nested draw failure. Actual SDK
+dispatch reentered a private Giga shot through the survivor replacement,
+rewound the packet cursor and left a saved tail inside later curtain tiles.
+The draw guard now covers the entire private pass. Both debug and production
+regressions fail before the fix and pass afterward; both full suites pass
+103 tests. Two native warm/cold runs retain all 18 active-state comparisons,
+retire naturally and accept independent controls afterward. Completed GPU
+captures on both frame-buffer parities reach all 400 emitted curtain tiles
+exactly once, matching immutable arena bytes. No capacity increase is involved.
+The full curtain and long beam geometry return, but beam palette/phase
+comparison with the co-op-disabled native reference remains open. This is a
+local component result; Giga artwork, netplay and the comparison rows gain no
+pass from it.
+
 The v25 ammo probe confirms original X R1/R1/Triangle selects weapon2 and
 spends32 energy; original Zero Up+Triangle selects weapon3 and spends36.
 Both changes preserve the other actor's resources. Its repeated X attack
