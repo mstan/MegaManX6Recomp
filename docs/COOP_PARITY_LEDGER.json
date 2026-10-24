@@ -4449,17 +4449,59 @@
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "9cbc314068c7a403028461c588b76e17e34c7350",
+            "build_identity": {
+              "executable_sha256": "0524cc4ab45989ce10d64246ee183b9f7e1d2834d48b3827d942765d173c114e",
+              "compiled_manifest_sha256": "964d5ef5f01706a62a03cf8aebb728e3a4d04fb5fd30822167737960067ad65a",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
+            },
+            "settings": {
+              "mode": "offline",
+              "input_path": "published_host",
+              "roster": [
+                "X/P1",
+                "Zero/P2"
+              ],
+              "stage": 0,
+              "section": 0,
+              "layout": "stacked",
+              "private_profile": true,
+              "audio": "dummy",
+              "recording": "Finalized ordinary accepted inputs, no fixture or LOAD"
+            },
+            "action": "Dash normal Zero with stationary X; capture positive three-trail window, open native P1 menu during the dash, exercise P2 Circle/Right/Select while frozen, resume, then capture fresh native dash-jump and finite retirement.",
+            "outcome": "Dash/menu mechanics pass six bounded checks, but both actual pre/post-menu working CLUTD/E/F differ from original Zero8032/800E/8009 red silhouettes. No expected native-color retained bank reaches either completed frame; inspected composed images show full-color/white trails. Missing native type5 working-palette initialization is source-qualified separately.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-hud/manifest-bound-9cbc314-F12-dash-colors-local-failed-reviewed.json",
+                "sha256": "8d871474c6ceecc7d6e42241fb5d24d4edca3e0bbaf7c2f9b8ed320c8615eac5"
+              }
+            ],
+            "limits": [
+              "LOCAL ordinary-input fixed X/P1+normal Zero/P2 stage0 only. Netplay and alternate forms/stages remain unverified.",
+              "The parent failed later in independent F6 observer sampling. This color failure was already observed both before and after the completed menu; parent failure is preserved.",
+              "Original native Zero palette comparison is a source-bound retained component on an earlier image, independently reduced; its failed parent is not promoted.",
+              "Artwork observer retained actual working palette bytes, completed GP0, bank identities and positive native trail windows. It retained colors only for banks matching expected native red rows (none); nonmatching bank colors were not saved individually. Screenshots visibly show full-color/white trails instead of native red silhouettes.",
+              "No instruction-atomic whole-machine or full-screen pixel equivalence claim. Native publication, actual completed GPU commands and presentation are separately bracketed observations.",
+              "No pass for F6, all artwork, netplay, rollback, native cards or the full burndown follows from this failed F12 attempt."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "LOCAL failed on9cbc314: actual normal Zero dash colors wrong before and after native menu; mechanics/finite retirement pass independently. Exact source working-palette fix pending. Netplay unverified. Failed ordinary run and later separate F6 observer error preserved."
       }
     },
     {
