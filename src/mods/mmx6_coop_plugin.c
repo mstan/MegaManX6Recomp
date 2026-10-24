@@ -1516,14 +1516,21 @@ static int zero_icon_effect(uint32_t actor) {
     int slot=shared_effect_slot(actor);
     /* Original Zero801EE2DC..E304 resolves decimal offset60 in its sprite
      * assembly table. Native packed shapes add their own page to actor+40:
-     * page0 there still samples the character's different icon atlas. */
+     * page0 there still samples the character's different icon atlas.
+     * 801EAA24 also allocates personal type44 shots through8002C32C. Their
+     * ownership follows the projected PlayerContext, unlike shared type26.
+     * Admit those only while drawing Zero, including her survivor world. */
+    unsigned type=psx_mod_read_byte(actor+1);
+    int owned=slot>=0?shared_effect_owners[slot]==2 && type==26:
+        actor>=0x800950A0u && actor<0x800964A0u &&
+        !((actor-0x800950A0u)%0xA0u) && type==44 && !render_x_death &&
+        psx_mod_read_byte(PLAYER+2)==1;
     uint32_t offset=assembly?psx_mod_read_word(assembly+0x3C):ASSET_SPACE;
-    return slot>=0 && shared_effect_owners[slot]==2 && psx_mod_read_byte(actor) &&
-        psx_mod_read_byte(actor+1)==26 && offset<ASSET_SPACE &&
+    return owned && psx_mod_read_byte(actor) && offset<ASSET_SPACE &&
         psx_mod_read_word(actor+0x3C)==assembly+offset;
 }
 static uint16_t zero_atlas_effect_bank(uint16_t page,uint16_t clut,uint16_t tile,int menu) {
-    /* Original type17 UI and type26 packed icon shapes share VRAM with X's
+    /* Original type17 UI and type26/44 packed icon shapes share VRAM with X's
      * different PL00 art. Decode the original private atlas and the native
      * menu/player palette, retaining actual page, UVs, tint and blending.
      * The virtual source key is outside the compressed player archive. */
