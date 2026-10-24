@@ -113,6 +113,35 @@ def final_checks(events, selected, private):
     return checks, dict(lifetime=audio.lifetime(events, key), keyoffs=stops, replaced=replaced, snapshot=row)
 
 
+def standing_checks(events,selected,private):
+    checks,details=final_checks(events,selected,private)
+    # Natural completion does not issue STOP or zero the volume registers.
+    checks.pop('private_native_stop_observed');checks.pop('stopped_volume_zero')
+    return {'standing_saber_'+key:value for key,value in checks.items()},details
+
+
+def obscured_inactive_stop7(events,selected,before,after,trace,samples):
+    """Recognize an unobservable stop postcondition, never mark it passed."""
+    key=selected['event'];old=before['voices'][23];new=after['voices'][23]
+    if not (old['active']==0 and old['env']==0 and old['env_phase']==3 and
+            old['sample_bank']==key['sample_bank']==30 and old['start']==key['addr']):return False
+    stops=[r for r in trace['entries'] if int(r['target'],16)==0x8001750C and
+        int(r['a0'],16)==1 and int(r['a1'],16)==7 and int(r['ra'],16)==0x8003D8D0]
+    if len(stops)!=1:return False
+    stop=stops[0]['frame']
+    prior=[e for e in events if e['frame']<=stop]
+    life=audio.lifetime(prior,key)
+    if life['disposition']!='natural_end' or life['terminal']['frame']>=stop:return False
+    if any(e['kind']=='KEYON' and e['v']==47 and e['seq']>key['seq'] for e in prior):return False
+    later=[r for r in samples if r['event']['v']==47 and r['event']['frame']>stop]
+    if not later:return False
+    last=max(later,key=lambda r:r['event']['seq']);event=last['event']
+    return (last['record']['group']==3 and last['record']['record']==14 and event['sample_bank']==31 and
+        all(last['checks'].get(k) is True for k in ('private_voice_route','source_sample','pitch_adsr_numeric','original_end_marker_present')) and
+        new['sample_bank']==31 and new['start']==event['addr'] and
+        all(new[k]==event[k] for k in ('pitch','adsr_lo','adsr_hi')))
+
+
 def trace_page(ctx):
     page=ctx['request']('fntrace_dump',count=4096,seq_lo='0')
     rows=page['entries']
@@ -304,6 +333,8 @@ def exercise(ctx, contract, *, source, timeout=90, death=False, **unused):
             advance(4, 'body-audio-neutral-drain')
         case['standing_saber_terminal']=audio.lifetime(observer.events,keys[0])
         case['private_before_death']=audio.parse_private_voices(ctx['request']('spu_private_voices'))
+        checks,details=standing_checks(observer.events,case['selected'],case['private_before_death'])
+        case['checks'].update(checks);case['terminal']=details
         case['standing_saber_vocals']=[]
         driver=observer.driver();case['driver_after_saber']=driver
         for event in observer.events:
@@ -321,10 +352,8 @@ def exercise(ctx, contract, *, source, timeout=90, death=False, **unused):
             if voice['env'] == 0 and voice['env_phase'] == 3:break
             require(attempt < 30, 'Stopped saber DSP did not reach terminated envelope')
             advance(4, 'body-audio-DSP-drain');sample('body-audio-DSP-drain')
-        checks, details = final_checks(observer.events, case['selected'], case['private_after'])
         if death and case['private_before_death']['voices'][23]['active']==0:
-            checks.pop('private_native_stop_observed');case['active_phase2_stop7']='unverified: saber naturally ended before death'
-        case['checks'].update(checks);case['terminal'] = details
+            case['active_phase2_stop7']='unverified: saber naturally ended before death'
         case['trace']=trace_page(ctx)
         case['character_samples']=[identify_character(observer,event,source,case['trace']['entries'])
             for event in observer.events if event['seq']>=start and event['kind']=='KEYON' and event['sample_bank'] in (30,31) and event['v']>=24]
@@ -340,8 +369,13 @@ def exercise(ctx, contract, *, source, timeout=90, death=False, **unused):
             for r in case['trace']['entries'])
         if death:
             case['hardware_after']=audio.parse_voices(ctx['request']('spu_voices'),require_banks=True)
-            case['checks'].update(phase2_checks(case['trace'],observer.events,before_private=case['private_before_death'],
-                after_private=case['private_after'],before_hardware=case['hardware_before'],after_hardware=case['hardware_after']))
+            stop_checks=phase2_checks(case['trace'],observer.events,before_private=case['private_before_death'],
+                after_private=case['private_after'],before_hardware=case['hardware_before'],after_hardware=case['hardware_after'])
+            if not stop_checks['private23_phase2_stop'] and obscured_inactive_stop7(observer.events,case['selected'],
+                    case['private_before_death'],case['private_after'],case['trace'],case['character_samples']):
+                stop_checks.pop('private23_phase2_stop')
+                case.setdefault('pending_checks',[]).append('Inactive STOP7 volume transition was not sampled before source-matched death record3/14 reused private23')
+            case['checks'].update(stop_checks)
             actor=case['native_death']['fatal_observation']['instance']
             actor=actor or next(r['instance']for r in reversed(case['native_death']['observations'])if r['instance'])
             contacts=[r for r in case['trace']['entries']if int(r['target'],16)==contact.CONTACT]
@@ -350,7 +384,7 @@ def exercise(ctx, contract, *, source, timeout=90, death=False, **unused):
         case['banks_after'] = observer.fingerprint_banks()
         case['checks']['immutable_private_banks_stable'] = case['banks_before'] == case['banks_after']
         case['other_character_voice_events'] = [e for e in observer.events if e['seq'] >= start and e['v'] in (20,44)]
-        case['status'] = 'observations_partial' if not death else 'observations_complete' if all(case['checks'].values()) else 'comparison_failed'
+        case['status'] = 'comparison_failed' if not all(case['checks'].values()) else 'observations_partial' if not death or case.get('pending_checks') else 'observations_complete'
         if not death:case['pending_checks']=['Native phase2 STOP5/7; ordinary Square/neutral naturally ends without that trigger']
         return case
     except BaseException as error:

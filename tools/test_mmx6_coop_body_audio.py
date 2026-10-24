@@ -109,6 +109,35 @@ class BodyAudioTests(unittest.TestCase):
         call=dict(target='0x80016C48',a0='0x3',a1='0x11',a2='0x800970A0',frame=100)
         self.assertTrue(all(subject.identify_character(Bank(),event,source,[call])['checks'].values()))
 
+    def test_standing_terminal_does_not_require_an_unissued_stop(self):
+        source,key=fixture();selected=subject.identify(Bank(),key,source)
+        private=subject.audio.parse_private_voices(private_voices())
+        private['voices'][23].update(sample_bank=30,start=key['addr'],pitch=1144,adsr_lo=33023,adsr_hi=8128,
+            vol_l=100,vol_r=200,active=0,env=0,env_phase=3,mode=0)
+        events=[key,dict(key,seq=11,frame=127,kind='END_STOP')]
+        checks,_=subject.standing_checks(events,selected,private)
+        self.assertTrue(all(checks.values()))
+        self.assertNotIn('standing_saber_stopped_volume_zero',checks)
+        private['voices'][23]['sample_bank']=31
+        self.assertFalse(subject.standing_checks(events,selected,private)[0]['standing_saber_final_dsp_attribution'])
+
+    def test_inactive_stop_obscured_by_death_play_is_pending_never_a_pass(self):
+        source,key=fixture();selected=subject.identify(Bank(),key,source)
+        before=subject.audio.parse_private_voices(private_voices());after=copy.deepcopy(before)
+        before['voices'][23].update(sample_bank=30,start=key['addr'],active=0,env=0,env_phase=3)
+        later=dict(key,seq=12,frame=208,kind='KEYON',sample_bank=31,addr=39152,pitch=1290)
+        after['voices'][23].update(sample_bank=31,start=39152,pitch=1290,adsr_lo=33023,adsr_hi=8128)
+        events=[key,dict(key,seq=11,frame=127,kind='END_STOP'),later]
+        trace=dict(entries=[dict(target='0x8001750C',a0='0x1',a1='0x7',ra='0x8003D8D0',frame=200)])
+        sample=dict(event=later,record=dict(group=3,record=14),checks=dict(private_voice_route=True,
+            source_sample=True,pitch_adsr_numeric=True,original_end_marker_present=True))
+        def hidden():return subject.obscured_inactive_stop7(events,selected,before,after,trace,[sample])
+        self.assertTrue(hidden())
+        before['voices'][23]['active']=1;self.assertFalse(hidden());before['voices'][23]['active']=0
+        events.insert(2,dict(key,seq=11,frame=190));self.assertFalse(hidden());events.pop(2)
+        sample['checks']['source_sample']=False;self.assertFalse(hidden());sample['checks']['source_sample']=True
+        sample['checks']={};self.assertFalse(hidden())
+
     def test_missing_native_action_stops_at_bound_and_clears_input(self):
         report,calls=self.run_case(never_accept=True)
         self.assertEqual(calls[-1],('input',1,0));self.assertNotEqual(report['body_audio']['status'],'observations_complete')
