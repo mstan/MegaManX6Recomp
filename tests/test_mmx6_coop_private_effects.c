@@ -227,7 +227,7 @@ static void setup(CPUState *cpu){
     menu_vram_probe=gp0_upload_stage=gp0_upload_left=0;
     assets=0x9F000000u;assembly=0x9F010000u;palette_source=0x9F020000u;active_palette=0x9F024000u;
     packets=0x9F100000u;diagnostic=0x9F080000u;menu_memory=0x9F200000u;menu_assembly=menu_memory+0x14000;
-    world_packets=packets;zero_ui_pixels=test_zero_ui;memset(test_zero_ui,0,sizeof test_zero_ui);
+    world_packets=0;zero_ui_pixels=test_zero_ui;memset(test_zero_ui,0,sizeof test_zero_ui);
     static uint8_t compressed[64];zero_compressed=compressed;compressed_size=sizeof compressed;memset(compressed,0,sizeof compressed);
     put32(compressed,0x100020);const uint16_t stream[]={0x6000,0x1111,0x0001,63,0,0};
     for(unsigned i=0;i<6;++i){compressed[32+i*2]=(uint8_t)stream[i];compressed[33+i*2]=(uint8_t)(stream[i]>>8);}
@@ -251,6 +251,7 @@ static void setup(CPUState *cpu){
     for(unsigned i=0;i<0x100;++i)psx_mod_write_byte(0x800A8000+i,0xE7);
     for(unsigned i=0;i<64;++i){psx_mod_write_word(0x8008EB08+i*4,0x800B0000+i*4);psx_mod_write_word(0x800B0000+i*4,0x00FFFFFF);}
     cpu->gpr[31]=0x80020C70;cpu->gpr[4]=PLAYER;cpu->gpr[3]=0x12345678;cpu->pc=0x80010000;
+    begin_world_draw(cpu,0x80025FB0u);
 }
 static void controller_pair_and_restoration(void){
     CPUState cpu;setup(&cpu);PlayerContext resident;capture_player(&resident);uint8_t play[0xE0],camera[0x100];capture(PLAY,play,sizeof play);capture(0x800971F8,camera,sizeof camera);
@@ -363,7 +364,7 @@ static void draw_order_retained_packets_and_survivor(void){
     uint32_t second_tag=packets+40000+1*80+40;CHECK((psx_mod_read_word(second_tag)&0xFFFFFFu)==((packets+MODES_AT+2*8)&0xFFFFFFu));
     PlayerContext after;capture_player(&after);CHECK(!memcmp(&resident,&after,sizeof after) && !inside && !state_track.count && !failed);
     capture(packets,previous_frame,sizeof previous_frame);
-    psx_mod_write_word(SCRATCH,1);world_packets=packets+FRAME_ARENA;
+    psx_mod_write_word(SCRATCH,1);begin_world_draw(&cpu,0x80025FB0u);
     psx_mod_write_word(SCRATCH+0x124,0);native_budget=0;draw_count=tag_count=0;
     render(&cpu,0x800232D4);CHECK(draw_count==5 && bank_count==4 && !failed);
     CHECK(!memcmp(previous_frame,memory(packets),sizeof previous_frame)); /* Opposite DMA frame stays intact. */
@@ -504,8 +505,17 @@ static void deferred_ui_effect_retains_owner_atlas(void){
     unsigned count=bank_count;CHECK(zero_ui_effect_bank(0x3E,0x7E50,UINT16_MAX)==full && bank_count==count);
     CHECK(!zero_ui_effect_bank(0xBE,0x7E50,0) && !zero_ui_effect_bank(0x3E,0x7800,0));
 }
+static void arrival_draw_precedes_stage_callback(void){
+    CPUState cpu;setup(&cpu);stage_call=0;world_packets=0;
+    /* Original arrival draws before the first ordinary stage callback. */
+    begin_world_draw(&cpu,0x80025FB0u);render(&cpu,0x800232D4u);
+    CHECK(!failed && draw_count==1 && bank_count==1 && world_packets==packets+40);
+    psx_mod_write_word(SCRATCH,1);begin_world_draw(&cpu,0x80025FB0u);
+    CHECK(world_packets==packets+FRAME_ARENA && !stage_call && !state_track.count);
+}
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     controller_pair_and_restoration();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
     deferred_shared_effect_owner_context();
     deferred_ui_effect_retains_owner_atlas();clear_banks();
+    arrival_draw_precedes_stage_callback();clear_banks();
     puts("private native effects actual-plugin call order, gates, lifetime projection and retained packet ownership PASS");return 0;}

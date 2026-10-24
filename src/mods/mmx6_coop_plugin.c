@@ -1198,9 +1198,6 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     p2_start_previous=start;
     uint32_t stage_context[4]={raw,phase,0,0};
     STATE_WORDS(restore_stage,29,stage_context,4);
-    /* Private bodies and deferred shared UI effects append to the same
-     * retained arena, in the original world's render order. */
-    world_packets=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
     /* Menus can bypass controller entirely. Consume their Select samples so
      * a held UI press cannot become a new rejoin edge on gameplay resume. */
     if (phase || scene_owner || psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C))
@@ -1267,7 +1264,6 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     enter_zero();
     route_p2_input(raw);
     zero_world=1;
-    world_packets=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
     uint32_t result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
     stage_context[2]=result;STATE_UPDATE(restore_stage,stage_context);
     if (psx_mod_read_byte(PLAYER+4)==2) mmx6_coop_fatal(&life,1);
@@ -1551,6 +1547,13 @@ static void triangle(uint32_t dst, uint32_t next, const uint32_t *q,
         psx_mod_write_word(dst+8+i*12,q[2+v[i]*2]);
         psx_mod_write_word(dst+12+i*12,uv);
     }
+}
+static void begin_world_draw(CPUState *cpu,uint32_t address) {
+    /* Native80025FB0 precedes background and sprite/HUD emission, including
+     * the first arrival draw before stage_tick. Both private bodies and
+     * deferred shared effects append once in this original render order. */
+    if(enrolled && !failed)world_packets=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
+    (void)cpu;(void)address;
 }
 static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
     uint32_t base=psx_mod_read_word(SCRATCH+0x100);
@@ -2136,6 +2139,7 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     psx_mod_register_activation_plugin("mmx6.local-coop.prototype",activate);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002012C,controller);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800232D4,render);
+    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80025FB0,begin_world_draw);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8003BD24,native_player_init);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8001E1BC,checkpoint_native_entry);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8003D308,script_begin);
