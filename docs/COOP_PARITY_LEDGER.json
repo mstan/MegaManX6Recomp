@@ -5596,11 +5596,61 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "253c74e5a9f33549dacdd0f675b16e76b46cc91a",
+            "build_identity": {
+              "executable_sha256": "472727e56a428b878306939bb25f0f594407c072ded853a2077746bc6e43701b",
+              "compiled_manifest_sha256": "fb7e85ea35bd2bbe31cef6429aac88cd8cac4fa22e286c3e5b26beb8ec1af746",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
+            },
+            "settings": {
+              "mode": "offline",
+              "input_path": "published_host",
+              "roster": [
+                "X/P1",
+                "normalZero/P2"
+              ],
+              "stage": 0,
+              "section": 0,
+              "layout": "stacked",
+              "drawable": [
+                960,
+                720
+              ],
+              "private_profile": true,
+              "audio": "dummy",
+              "recording": "Enabled; exact fixture taint, strict capture/replay refusals"
+            },
+            "action": "Actual original initializer earned-inventory prerequisite; original R1 twice toIceBurst2 and Triangle spend; original L1 two separate nativeedges2->1->0; fresh uncharged Square/ownedtype0 child, travel/naturalretirement then separate P1/P2Right.",
+            "outcome": "All13 independent native mechanic/render-observation checks pass on163coherent rows. Fresh actual slot0 ownedtype0 travels81px and retires naturally in13native ticks; resources/checkpoint/bothcontrols retained. Three composedframes viewed. Generic greenHP failure preserved; original-source22,80/actualGP0bars/32composedfillpoints correct it independently, with7negative checks.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-hud/manifest-bound-253c74e-F31-native-buster-local-reviewed.json",
+                "sha256": "c540fd018e75beedcf591ae0d746380469133893fd8204862b020b14801972ec"
+              }
+            ],
+            "limits": [
+              "Fixed LOCAL stage0 X/P1+normalZero/P2, stacked960x720, one selected/spent IceBurst2 then L1 twice to0 and a fresh uncharged type0 buster. No everyweapon/F59/otherroster/netplay/production/aggregate claim.",
+              "Earned0->FF is an explicit prerequisite bypass through original equipment initializer command9; no acquisition credit. Actual R1/UpTriangle/Triangle actions spend each actor resources natively; no HP/ammo/selection/action/child/success writes or LOAD.",
+              "Native default recording is enabled but explicitly failed for exact unilateral debug/fixture taint. Canonical failed terminal/startup and ordinary-capture/offline-replay strict refusals are retained. No finalized capture/replay admission.",
+              "Original parent and observer remain failed because generic bright-green connected-component extraction joined IceBurst icon pixels to first HP component through93. Same observations independently pass exact original HP source coordinates/actualGP0bar/composedfill checks. Never relabels parent success or weakens mechanical predicates.",
+              "FullHP32 at each capture, natively spent X2/Zero3 ammo and exact whole resource/world identity retained through cycle/child/control. Source-anchored extractor is qualified for these full32HP bars, not arbitrary damage/colored ammo fill or portrait art.",
+              "Root inspected allthree original composed frames: both native bodies/meters and world remain visible before/aftercycle/postretirementcontrols, no disappearance. Counts alone are not body pixel proof; no exact native-renderer wholeframe or allart equivalence.",
+              "Typed diagnostic/nativePLAY/mainRAM/privatebody/pool reads are double-stable source-bound QA observations, not an instruction-atomic wholemachine state. Present images and GP0frames are separately bracketed nearby observations.",
+              "Fresh private card profile cards_before{}; existing private card invariance and ownedexit0 pass. Previously populated progress-card preservation is not exercised."
+            ],
+            "bypasses": [
+              "Earned weapon inventory via original initializer; no native acquisition credit."
+            ]
+          }
+        ],
+        "limitations": "LOCAL F31 passed253c74e actual IceBurst cycle back to buster, fresh native ownedtype0 child/travel/naturalretirement and both visible bodies/meters/controls. Failed generic-green extractor parent preserved; same run independently source-anchored and visually reviewed. Inventory prerequisite taints default recording, strict refusals retained. Netplay/aggregate unverified; one selected special/stacked layout."
       }
     },
     {
