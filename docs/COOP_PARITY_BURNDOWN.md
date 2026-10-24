@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 6 passed (R2, R4, R7, R8, R12, R13), 3 failed (R15, F33, F208), 225 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 6 passed (R2, R4, R7, R8, R12, R13), 2 failed (R15, F208), 226 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -43,8 +43,9 @@ states; old-state migration is never required.
 
 All 234 reference rows are inventoried; 6/234 (2.6%) are passed. R15/F208
 retain prior native Quit callback failures with broader transition checks
-incomplete. F33 now fails its online disabled-browser dwell case, detailed
-below. Earlier audio failures remain in R4/R12 history, followed by
+incomplete. F33's online disabled-browser dwell failure is fixed and
+requalified below; local ammo/weapon restoration keeps the aggregate open.
+Earlier audio failures remain in R4/R12 history, followed by
 current-image local and paired passes of their frozen bounded checks.
 
 The [combined R4/R12 receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-R4-R12-reviewed.json)
@@ -117,12 +118,33 @@ on both peers, with fresh resolved CRC windows, normal exits0 and unchanged
 cards. However, retaining the disabled F7 browser for12seconds reproduces
 an `emu busy or frozen` response on close and both peers end the match.
 The state generation remains0, with no pending operation or card mutation.
-F33 netplay/aggregate are therefore **failed**, while local stays unverified.
+That milestone set F33 netplay/aggregate to **failed**, with local unverified.
 All237 selected Python checks pass; they do not override this native failure.
 The first observer's invalid transport wait inside modal UI was corrected;
 the separate earlier keyboard-close failure and the short pass remain retained.
 Framework issue **beads-eio.3.382** owns the runtime fix and requalification.
 No runtime fix or changed native binary is included in this milestone.
+
+The [online-browser fix receipt](evidence/mmx6-private-state/manifest-bound-8ad29dc-online-browser-fix-reviewed.json)
+qualifies compiled game8ad29dc with SDK5bd63adf2. Titles that prohibit online
+states now refuse browser entry before its modal pause loop and show the
+unavailable message; offline entry keeps its normal path. Completed refusal
+counters prove actual keyboard/controller handler consumption. Both peers
+also reject backend save/load. Four12second windows retain live progress of
+720–723 resolved ticks per peer, followed by matching CRCs:53 distinct samples
+overall,31 after refusal routes. Both processes exit0 and cards are unchanged.
+F33 **netplay passes** this frozen refusal contract; its aggregate returns to
+unverified because local ammo spending/weapon restoration remains open.
+
+On that same image, separate keyboard and controller local cases each pass37
+checks and three17-check provider probes, restoring HP32/32 after native
+damage to30/28, private actors/effects/input history, invalid-provider rejection
+and rewind. Both exit0 with unchanged cards. An earlier observer setup miss
+read projected Zero from the borrowed physical P1 slot; its report is retained
+and the corrected route uses the coherent published P1 body. Debug and
+production each pass103/103 CTests, and239 selected Python checks pass.
+Production retains lab/debug OFF; its native gameplay is not qualified here.
+Framework issue **beads-eio.3.382** is resolved by this bounded runtime fix.
 
 ### Earlier audio milestones
 

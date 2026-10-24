@@ -1,0 +1,2258 @@
+{
+  "schema": 1,
+  "kind": "reviewed_native_unsupported_online_state_browser_fix_and_offline_regression",
+  "reviewed_at_utc": "2026-10-24T06:38:36.097814+00:00",
+  "candidate": {
+    "compiled_source": "8ad29dc274a36c8d2a89fa627b194a7937f30786",
+    "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+    "exe_sha256": "1297c432de158a9075522d185bf2bb0b388eddd1cf5147d72eef1b26a7851318",
+    "manifest_sha256": "d06b3e32c9f8ecda4d089a1ef56d43493b172c8b10fe7c803e837f260d5323df",
+    "production_exe_sha256": "aa0b26f3ff8ec6cf22c448d06b5afc2b21514a729f709d12b6f6f833360acf54",
+    "production_manifest_sha256": "7a1999950c17bd40225b6a3753cf13de4694088eb347fd1189545a0d1e7721c0",
+    "title": "mmx6-x-zero-delay-v18",
+    "qa_source_commit": "13eeb14131786ba604ccc73cfadcad51cf722bc4"
+  },
+  "compilation_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v21-8ad29dc\\candidate.json",
+    "sha256": "63e8ff15794b8320c0c88e5f64777dca96965c5dc8464804e1f66fd08b4a7a93",
+    "size": 6245
+  },
+  "source_fix": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v21-8ad29dc\\unsupported-online-browser-fix.patch",
+    "sha256": "f3178c06bd8386d88e1c0d17a3b07bafd1057f4fb2d94ac5b965c21852beabea",
+    "size": 3684
+  },
+  "ctests": {
+    "debug": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v21-8ad29dc\\debug-ctest.log",
+      "sha256": "4e3299e554e400e1e8a1f6a450e03a5bfa757ed08b4ffc4198c5f3ffb2e3456f",
+      "size": 15026
+    },
+    "production": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v21-8ad29dc\\production-ctest.log",
+      "sha256": "124ece056d5f1399912517c37f6febc7ac3db91b458bce525d3337341af55286",
+      "size": 15031
+    },
+    "debug_count": 103,
+    "production_count": 103,
+    "production_defaults": {
+      "lab": false,
+      "debug_tools": false
+    }
+  },
+  "python_validation": {
+    "result": "passed",
+    "test_count": 239,
+    "log": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v21-8ad29dc\\python-validation.txt",
+      "sha256": "15e020d0004bac4a819c1c9604b6b241c6eee2dd076be2a4a725423bb92cce82",
+      "size": 1128
+    }
+  },
+  "previous_failure": {
+    "path": "docs\\evidence\\mmx6-private-state\\manifest-bound-22ea525-resources-and-policy-reviewed.json",
+    "sha256": "8abb052c838317382e20461da2a4ad4ca7ecfa5b46f5b6f44607b2c317098564",
+    "size": 64067
+  },
+  "reference_netplay_policy": [
+    {
+      "repository": "F:\\Projects\\psxrecomp\\MegaManX4Recomp",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "src/mods/mmx4_coop_plugin.c",
+      "sha256": "f61bb4f8758660ba21e04c86ec28b5c3f22738396ff128ebf10e65fae84b7e57",
+      "excerpts": [
+        {
+          "line": 1623,
+          "text": "psx_mod_set_rewind_blocked(psx_mod_netplay_is_active());"
+        },
+        {
+          "line": 1624,
+          "text": "psx_mod_set_savestate_blocked(psx_mod_netplay_is_active());"
+        }
+      ]
+    },
+    {
+      "repository": "F:\\Projects\\psxrecomp\\MegaManX4Recomp",
+      "commit": "50593bca772b600de6911cbfecd40b0f08721147",
+      "path": "docs/COOP_NETPLAY_EVIDENCE.md",
+      "sha256": "4297648ceb9cf07b5ecea28e91ba05661b39459cb8bc99959bb5c9f46314101c",
+      "excerpts": [
+        {
+          "line": 89,
+          "text": "The profile uses delay-sync and refuses rollback, savestates and rewind."
+        }
+      ]
+    },
+    {
+      "repository": "F:\\Projects\\psxrecomp\\_wt-mmx5-x4-parity",
+      "commit": "9ed460e7b7e60769fa12bcab74e228ae19796214",
+      "path": "src/mods/mmx5_coop_plugin.c",
+      "sha256": "4d55213297606aa1db1306ef5c82d4ac1de048cad1a87052b2860596b33f38ba",
+      "excerpts": [
+        {
+          "line": 4153,
+          "text": "psx_mod_set_savestate_blocked(psx_mod_netplay_is_active());"
+        }
+      ]
+    }
+  ],
+  "local_cases": [
+    {
+      "raw_report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\qualification.json",
+        "sha256": "8b810fd217e23b6f359f31f8fd925ece335c41da40d5e7cc384dca4a3ee2f771",
+        "size": 12202243
+      },
+      "control_route": "owned_win32_keyboard",
+      "checks": {
+        "keyboard_s_saved_live_private_pools": true,
+        "original_menu_resume_advances_native_world": true,
+        "native_phase1_and_phase2_observed": true,
+        "finite_all_three_retired": true,
+        "ordered_native_recovery_publications": true,
+        "recovery_personal_resources_preserved": true,
+        "recovery_original_p1_position_preserved": true,
+        "genuine_p2_input_resumed_independently": true,
+        "personal_hp_ammo_weapon_preserved": true,
+        "new_publication_after_completed_load": true,
+        "publication_after_saved_provider": true,
+        "native_p1_pause_retains_live_dash": true,
+        "saved_native_clock_restored": true,
+        "saved_native_menu_state_restored": true,
+        "full_private_body": true,
+        "full_private_shots": true,
+        "full_private_trails": true,
+        "full_private_attached": true,
+        "full_p1_body": true,
+        "native_input_history": true,
+        "both_saved_heroes_alive": true,
+        "genuine_hp_divergence_both_heroes": true,
+        "full_personal_resources_restored": true,
+        "keyboard_l_provider_probe": true,
+        "native_malformed_provider_rejection_preserves_state": true,
+        "rewind_new_publication_after_completed_load": true,
+        "rewind_publication_after_saved_provider": true,
+        "rewind_native_p1_pause_retains_live_dash": true,
+        "rewind_saved_native_clock_restored": true,
+        "rewind_saved_native_menu_state_restored": true,
+        "rewind_full_private_body": true,
+        "rewind_full_private_shots": true,
+        "rewind_full_private_trails": true,
+        "rewind_full_private_attached": true,
+        "rewind_full_p1_body": true,
+        "rewind_native_input_history": true,
+        "mapped_rewind_full_provider_probe": true
+      },
+      "check_count": 37,
+      "damage": {
+        "hp_before": [
+          32,
+          32
+        ],
+        "hp_before_load": [
+          30,
+          28
+        ],
+        "hp_restored": [
+          32,
+          32
+        ],
+        "p1_observation_method": "published player diagnostic; separate common PLAY location, enemy-pool and placement RPCs",
+        "p1_exact_damage_caller": "unverified",
+        "ammo_spent": false,
+        "weapon_changed": false
+      },
+      "snapshot": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\mapped-save.pst",
+        "sha256": "58a75a85c3f0ba5ccc616bb2741ed24a6c68477fe4944b51422e064da6d70179",
+        "size": 1784984
+      },
+      "provider_probes": [
+        {
+          "label": "mapped-load",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\mapped-load-probe.pst",
+            "sha256": "8f5d9e3cdf76a980a98aaeb5802a865f3da7c14256feb201ca4f754de9c5c885",
+            "size": 1781642
+          },
+          "checks": {
+            "exact_current_build_key": true,
+            "same_provider_set": true,
+            "same_resource_and_original_asset_binding": true,
+            "full_private_context_and_host_input_history": true,
+            "explicit_native_and_host_input_history": true,
+            "saved_native_world_clock": true,
+            "saved_native_mode_phase": true,
+            "saved_native_menu_state": true,
+            "full_retained_bank_payloads": true,
+            "saved_sprite_bank_count": true,
+            "saved_ui_bank_count": true,
+            "persistent_private_audio_priorities": true,
+            "private_spu_owner_tags": true,
+            "private_spu_modes": true,
+            "private_spu_registers_hex": true,
+            "private_spu_bank_bindings": true,
+            "full_native_p1_body": true
+          }
+        },
+        {
+          "label": "after-invalid",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\after-invalid-probe.pst",
+            "sha256": "7190d0c7000e6de4b740fb1bb407d8b6528776134815fc467ca4be168789cb06",
+            "size": 1786029
+          },
+          "checks": {
+            "exact_current_build_key": true,
+            "same_provider_set": true,
+            "same_resource_and_original_asset_binding": true,
+            "full_private_context_and_host_input_history": true,
+            "explicit_native_and_host_input_history": true,
+            "saved_native_world_clock": true,
+            "saved_native_mode_phase": true,
+            "saved_native_menu_state": true,
+            "full_retained_bank_payloads": true,
+            "saved_sprite_bank_count": true,
+            "saved_ui_bank_count": true,
+            "persistent_private_audio_priorities": true,
+            "private_spu_owner_tags": true,
+            "private_spu_modes": true,
+            "private_spu_registers_hex": true,
+            "private_spu_bank_bindings": true,
+            "full_native_p1_body": true
+          }
+        },
+        {
+          "label": "rewind",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\rewind-probe.pst",
+            "sha256": "7740ab5ce30e52ccc79a3973166c3b46c0928ca8aa2790b72780485279e0c0b3",
+            "size": 1783005
+          },
+          "checks": {
+            "exact_current_build_key": true,
+            "same_provider_set": true,
+            "same_resource_and_original_asset_binding": true,
+            "full_private_context_and_host_input_history": true,
+            "explicit_native_and_host_input_history": true,
+            "saved_native_world_clock": true,
+            "saved_native_mode_phase": true,
+            "saved_native_menu_state": true,
+            "full_retained_bank_payloads": true,
+            "saved_sprite_bank_count": true,
+            "saved_ui_bank_count": true,
+            "persistent_private_audio_priorities": true,
+            "private_spu_owner_tags": true,
+            "private_spu_modes": true,
+            "private_spu_registers_hex": true,
+            "private_spu_bank_bindings": true,
+            "full_native_p1_body": true
+          }
+        }
+      ],
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "existing_cards_unchanged": true,
+      "keyboard_scope": "WM_KEYDOWN/WM_KEYUP to owned SDL HWND; no foreground/global injection or physical-hardware claim",
+      "executed_sources": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mmx6_coop_contact-executed-source.py",
+          "sha256": "dbcb58c53b5e1e0a7433aeb25c48beb9ae20b30c05fd11b5da60b33f40513046",
+          "size": 22689
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mmx6_coop_jump_audio_pair-executed-source.py",
+          "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+          "size": 29983
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mmx6_coop_mapped_state-executed-source.py",
+          "sha256": "d93dd87fe75bbb788eae224c2d5acfb85d8b977ea25106ae7dfe15a842c451d1",
+          "size": 14707
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mmx6_coop_primary_audio-executed-source.py",
+          "sha256": "891ea9c540b3190649f1f79366425b34f645b1c5b12293d5cbcf6fd4d6cbac2c",
+          "size": 19629
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mmx6_coop_state_resources-executed-source.py",
+          "sha256": "6c704a9f0800c2b10a795fc8307fb1840b67355c1b71c9367b3582d2c2cc24d7",
+          "size": 7783
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mmx6_native_contact_audio-executed-source.py",
+          "sha256": "01f28d65c97f7f886bc62856c24509c13ccb274999b74e4287238b5412e8ca94",
+          "size": 16568
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mmx6_owned_keyboard-executed-source.py",
+          "sha256": "11b07f655dd711e5cf39c36362eec796b9eb73b86702d8100e0a958a3e348402",
+          "size": 4599
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\qualify_mmx6_coop_jump_audio-executed-source.py",
+          "sha256": "4829fcb53086c45a2fc4198167b282a73c4e79d3e586211ff8934de168a7f49e",
+          "size": 29088
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\qualify_mmx6_coop_personal_menu-executed-source.py",
+          "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c",
+          "size": 16934
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\qualify_mmx6_coop_state-executed-source.py",
+          "sha256": "eced2cb8b51c932c3a4bca24bbce5c99264aa453eb37c22e9c30f0cb2e9f5219",
+          "size": 52953
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\runner-executed-source.py",
+          "sha256": "69d7f8cfabe3c1425c4a2b88c0af6383759e24de6b2c352f92978df4eed87833",
+          "size": 5471
+        }
+      ]
+    },
+    {
+      "raw_report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\qualification.json",
+        "sha256": "eb6b098496d3a6a6b23480ad182a7534cf630fa2736ecf6ccbfc86bf7173ec9f",
+        "size": 12401623
+      },
+      "control_route": "published_controller",
+      "checks": {
+        "mapped_square_saved_live_private_pools": true,
+        "original_menu_resume_advances_native_world": true,
+        "native_phase1_and_phase2_observed": true,
+        "finite_all_three_retired": true,
+        "ordered_native_recovery_publications": true,
+        "recovery_personal_resources_preserved": true,
+        "recovery_original_p1_position_preserved": true,
+        "genuine_p2_input_resumed_independently": true,
+        "personal_hp_ammo_weapon_preserved": true,
+        "new_publication_after_completed_load": true,
+        "publication_after_saved_provider": true,
+        "native_p1_pause_retains_live_dash": true,
+        "saved_native_clock_restored": true,
+        "saved_native_menu_state_restored": true,
+        "full_private_body": true,
+        "full_private_shots": true,
+        "full_private_trails": true,
+        "full_private_attached": true,
+        "full_p1_body": true,
+        "native_input_history": true,
+        "both_saved_heroes_alive": true,
+        "genuine_hp_divergence_both_heroes": true,
+        "full_personal_resources_restored": true,
+        "mapped_cross_provider_probe": true,
+        "native_malformed_provider_rejection_preserves_state": true,
+        "rewind_new_publication_after_completed_load": true,
+        "rewind_publication_after_saved_provider": true,
+        "rewind_native_p1_pause_retains_live_dash": true,
+        "rewind_saved_native_clock_restored": true,
+        "rewind_saved_native_menu_state_restored": true,
+        "rewind_full_private_body": true,
+        "rewind_full_private_shots": true,
+        "rewind_full_private_trails": true,
+        "rewind_full_private_attached": true,
+        "rewind_full_p1_body": true,
+        "rewind_native_input_history": true,
+        "mapped_rewind_full_provider_probe": true
+      },
+      "check_count": 37,
+      "damage": {
+        "hp_before": [
+          32,
+          32
+        ],
+        "hp_before_load": [
+          30,
+          28
+        ],
+        "hp_restored": [
+          32,
+          32
+        ],
+        "p1_observation_method": "published player diagnostic; separate common PLAY location, enemy-pool and placement RPCs",
+        "p1_exact_damage_caller": "unverified",
+        "ammo_spent": false,
+        "weapon_changed": false
+      },
+      "snapshot": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\mapped-save.pst",
+        "sha256": "ddef4922d1a2f914a0c4883bbda90dea27949e27700fec33700b3489ee55cf3c",
+        "size": 1781577
+      },
+      "provider_probes": [
+        {
+          "label": "mapped-load",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\mapped-load-probe.pst",
+            "sha256": "03c900a998ed38a192f56eb01787b2cb4a34f29545c0060cfadf942801affe62",
+            "size": 1785251
+          },
+          "checks": {
+            "exact_current_build_key": true,
+            "same_provider_set": true,
+            "same_resource_and_original_asset_binding": true,
+            "full_private_context_and_host_input_history": true,
+            "explicit_native_and_host_input_history": true,
+            "saved_native_world_clock": true,
+            "saved_native_mode_phase": true,
+            "saved_native_menu_state": true,
+            "full_retained_bank_payloads": true,
+            "saved_sprite_bank_count": true,
+            "saved_ui_bank_count": true,
+            "persistent_private_audio_priorities": true,
+            "private_spu_owner_tags": true,
+            "private_spu_modes": true,
+            "private_spu_registers_hex": true,
+            "private_spu_bank_bindings": true,
+            "full_native_p1_body": true
+          }
+        },
+        {
+          "label": "after-invalid",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\after-invalid-probe.pst",
+            "sha256": "23c2b748d2bfa0515295ebb8a3d2eaee6b63824320582567f6c8507ae917f963",
+            "size": 1782855
+          },
+          "checks": {
+            "exact_current_build_key": true,
+            "same_provider_set": true,
+            "same_resource_and_original_asset_binding": true,
+            "full_private_context_and_host_input_history": true,
+            "explicit_native_and_host_input_history": true,
+            "saved_native_world_clock": true,
+            "saved_native_mode_phase": true,
+            "saved_native_menu_state": true,
+            "full_retained_bank_payloads": true,
+            "saved_sprite_bank_count": true,
+            "saved_ui_bank_count": true,
+            "persistent_private_audio_priorities": true,
+            "private_spu_owner_tags": true,
+            "private_spu_modes": true,
+            "private_spu_registers_hex": true,
+            "private_spu_bank_bindings": true,
+            "full_native_p1_body": true
+          }
+        },
+        {
+          "label": "rewind",
+          "artifact": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\rewind-probe.pst",
+            "sha256": "759c6d5deb86ab7f8c3aac86d189c9a491aec07c78a61c0f20212ec8f1e9aa22",
+            "size": 1786475
+          },
+          "checks": {
+            "exact_current_build_key": true,
+            "same_provider_set": true,
+            "same_resource_and_original_asset_binding": true,
+            "full_private_context_and_host_input_history": true,
+            "explicit_native_and_host_input_history": true,
+            "saved_native_world_clock": true,
+            "saved_native_mode_phase": true,
+            "saved_native_menu_state": true,
+            "full_retained_bank_payloads": true,
+            "saved_sprite_bank_count": true,
+            "saved_ui_bank_count": true,
+            "persistent_private_audio_priorities": true,
+            "private_spu_owner_tags": true,
+            "private_spu_modes": true,
+            "private_spu_registers_hex": true,
+            "private_spu_bank_bindings": true,
+            "full_native_p1_body": true
+          }
+        }
+      ],
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "existing_cards_unchanged": true,
+      "keyboard_scope": null,
+      "executed_sources": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mmx6_coop_contact-executed-source.py",
+          "sha256": "dbcb58c53b5e1e0a7433aeb25c48beb9ae20b30c05fd11b5da60b33f40513046",
+          "size": 22689
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mmx6_coop_jump_audio_pair-executed-source.py",
+          "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+          "size": 29983
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mmx6_coop_mapped_state-executed-source.py",
+          "sha256": "d93dd87fe75bbb788eae224c2d5acfb85d8b977ea25106ae7dfe15a842c451d1",
+          "size": 14707
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mmx6_coop_primary_audio-executed-source.py",
+          "sha256": "891ea9c540b3190649f1f79366425b34f645b1c5b12293d5cbcf6fd4d6cbac2c",
+          "size": 19629
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mmx6_coop_state_resources-executed-source.py",
+          "sha256": "6c704a9f0800c2b10a795fc8307fb1840b67355c1b71c9367b3582d2c2cc24d7",
+          "size": 7783
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mmx6_native_contact_audio-executed-source.py",
+          "sha256": "01f28d65c97f7f886bc62856c24509c13ccb274999b74e4287238b5412e8ca94",
+          "size": 16568
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mmx6_owned_keyboard-executed-source.py",
+          "sha256": "11b07f655dd711e5cf39c36362eec796b9eb73b86702d8100e0a958a3e348402",
+          "size": 4599
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\qualify_mmx6_coop_jump_audio-executed-source.py",
+          "sha256": "4829fcb53086c45a2fc4198167b282a73c4e79d3e586211ff8934de168a7f49e",
+          "size": 29088
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\qualify_mmx6_coop_personal_menu-executed-source.py",
+          "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c",
+          "size": 16934
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\qualify_mmx6_coop_state-executed-source.py",
+          "sha256": "eced2cb8b51c932c3a4bca24bbce5c99264aa453eb37c22e9c30f0cb2e9f5219",
+          "size": 52953
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\runner-executed-source.py",
+          "sha256": "69d7f8cfabe3c1425c4a2b88c0af6383759e24de6b2c352f92978df4eed87833",
+          "size": 5471
+        }
+      ]
+    }
+  ],
+  "paired": {
+    "raw_report": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\qualification.json",
+      "sha256": "79e766d6884a504d99f089b58884832c64b3fc809bd29cf15143e0f14048ef80",
+      "size": 4031598
+    },
+    "checks": {
+      "both_peers_all_mapped_refusals": true,
+      "fresh_resolved_crc_after_each_refusal_route": true
+    },
+    "peers": [
+      {
+        "peer": 0,
+        "checks": {
+          "backend_save_and_load_refused": true,
+          "keyboard_entry_refused_without_pausing_match": true,
+          "keyboard_rewind_refused_after_input_barrier": true,
+          "controller_entry_refused_without_pausing_match": true,
+          "controller_rewind_refused_after_input_barrier": true
+        },
+        "initial": {
+          "overlay": {
+            "id": 1905,
+            "ok": true,
+            "save_menu_open": false,
+            "save_slot": 0,
+            "save_unavailable": false,
+            "rewind_open": false,
+            "rewind_blocked": false,
+            "save_open_refusal_generation": 0
+          },
+          "state": {
+            "id": 1906,
+            "ok": true,
+            "generation": 0,
+            "pending": 0,
+            "last_ok": 0,
+            "last_op": "save",
+            "last_slot": -1
+          },
+          "rewind": {
+            "id": 1907,
+            "ok": true,
+            "enabled": true,
+            "open": false,
+            "title_blocked": false,
+            "snaps": 0
+          }
+        },
+        "final": {
+          "overlay": {
+            "id": 2360,
+            "ok": true,
+            "save_menu_open": false,
+            "save_slot": 0,
+            "save_unavailable": true,
+            "rewind_open": false,
+            "rewind_blocked": false,
+            "save_open_refusal_generation": 4
+          },
+          "state": {
+            "id": 2361,
+            "ok": true,
+            "generation": 0,
+            "pending": 0,
+            "last_ok": 0,
+            "last_op": "save",
+            "last_slot": -1
+          },
+          "rewind": {
+            "id": 2362,
+            "ok": true,
+            "enabled": true,
+            "open": false,
+            "title_blocked": false,
+            "snaps": 0
+          }
+        },
+        "completed_entry_refusals": [
+          {
+            "route": "keyboard",
+            "before": {
+              "overlay": {
+                "id": 1913,
+                "ok": true,
+                "save_menu_open": false,
+                "save_slot": 0,
+                "save_unavailable": false,
+                "rewind_open": false,
+                "rewind_blocked": false,
+                "save_open_refusal_generation": 0
+              },
+              "state": {
+                "id": 1914,
+                "ok": true,
+                "generation": 0,
+                "pending": 0,
+                "last_ok": 0,
+                "last_op": "save",
+                "last_slot": -1
+              },
+              "rewind": {
+                "id": 1915,
+                "ok": true,
+                "enabled": true,
+                "open": false,
+                "title_blocked": false,
+                "snaps": 0
+              }
+            },
+            "after": {
+              "overlay": {
+                "id": 1917,
+                "ok": true,
+                "save_menu_open": false,
+                "save_slot": 0,
+                "save_unavailable": true,
+                "rewind_open": false,
+                "rewind_blocked": false,
+                "save_open_refusal_generation": 1
+              },
+              "state": {
+                "id": 1918,
+                "ok": true,
+                "generation": 0,
+                "pending": 0,
+                "last_ok": 0,
+                "last_op": "save",
+                "last_slot": -1
+              },
+              "rewind": {
+                "id": 1919,
+                "ok": true,
+                "enabled": true,
+                "open": false,
+                "title_blocked": false,
+                "snaps": 0
+              }
+            }
+          },
+          {
+            "route": "keyboard",
+            "before": {
+              "overlay": {
+                "id": 1957,
+                "ok": true,
+                "save_menu_open": false,
+                "save_slot": 0,
+                "save_unavailable": true,
+                "rewind_open": false,
+                "rewind_blocked": false,
+                "save_open_refusal_generation": 1
+              },
+              "state": {
+                "id": 1958,
+                "ok": true,
+                "generation": 0,
+                "pending": 0,
+                "last_ok": 0,
+                "last_op": "save",
+                "last_slot": -1
+              },
+              "rewind": {
+                "id": 1959,
+                "ok": true,
+                "enabled": true,
+                "open": false,
+                "title_blocked": false,
+                "snaps": 0
+              }
+            },
+            "after": {
+              "overlay": {
+                "id": 1961,
+                "ok": true,
+                "save_menu_open": false,
+                "save_slot": 0,
+                "save_unavailable": true,
+                "rewind_open": false,
+                "rewind_blocked": false,
+                "save_open_refusal_generation": 2
+              },
+              "state": {
+                "id": 1962,
+                "ok": true,
+                "generation": 0,
+                "pending": 0,
+                "last_ok": 0,
+                "last_op": "save",
+                "last_slot": -1
+              },
+              "rewind": {
+                "id": 1963,
+                "ok": true,
+                "enabled": true,
+                "open": false,
+                "title_blocked": false,
+                "snaps": 0
+              }
+            }
+          },
+          {
+            "route": "controller",
+            "before": {
+              "overlay": {
+                "id": 2127,
+                "ok": true,
+                "save_menu_open": false,
+                "save_slot": 0,
+                "save_unavailable": true,
+                "rewind_open": false,
+                "rewind_blocked": false,
+                "save_open_refusal_generation": 2
+              },
+              "state": {
+                "id": 2128,
+                "ok": true,
+                "generation": 0,
+                "pending": 0,
+                "last_ok": 0,
+                "last_op": "save",
+                "last_slot": -1
+              },
+              "rewind": {
+                "id": 2129,
+                "ok": true,
+                "enabled": true,
+                "open": false,
+                "title_blocked": false,
+                "snaps": 0
+              }
+            },
+            "after": {
+              "overlay": {
+                "id": 2132,
+                "ok": true,
+                "save_menu_open": false,
+                "save_slot": 0,
+                "save_unavailable": true,
+                "rewind_open": false,
+                "rewind_blocked": false,
+                "save_open_refusal_generation": 3
+              },
+              "state": {
+                "id": 2133,
+                "ok": true,
+                "generation": 0,
+                "pending": 0,
+                "last_ok": 0,
+                "last_op": "save",
+                "last_slot": -1
+              },
+              "rewind": {
+                "id": 2134,
+                "ok": true,
+                "enabled": true,
+                "open": false,
+                "title_blocked": false,
+                "snaps": 0
+              }
+            }
+          },
+          {
+            "route": "keyboard",
+            "before": {
+              "overlay": {
+                "id": 2188,
+                "ok": true,
+                "save_menu_open": false,
+                "save_slot": 0,
+                "save_unavailable": true,
+                "rewind_open": false,
+                "rewind_blocked": false,
+                "save_open_refusal_generation": 3
+              },
+              "state": {
+                "id": 2189,
+                "ok": true,
+                "generation": 0,
+                "pending": 0,
+                "last_ok": 0,
+                "last_op": "save",
+                "last_slot": -1
+              },
+              "rewind": {
+                "id": 2190,
+                "ok": true,
+                "enabled": true,
+                "open": false,
+                "title_blocked": false,
+                "snaps": 0
+              }
+            },
+            "after": {
+              "overlay": {
+                "id": 2192,
+                "ok": true,
+                "save_menu_open": false,
+                "save_slot": 0,
+                "save_unavailable": true,
+                "rewind_open": false,
+                "rewind_blocked": false,
+                "save_open_refusal_generation": 4
+              },
+              "state": {
+                "id": 2193,
+                "ok": true,
+                "generation": 0,
+                "pending": 0,
+                "last_ok": 0,
+                "last_op": "save",
+                "last_slot": -1
+              },
+              "rewind": {
+                "id": 2194,
+                "ok": true,
+                "enabled": true,
+                "open": false,
+                "title_blocked": false,
+                "snaps": 0
+              }
+            }
+          }
+        ],
+        "backend_refusals": [
+          {
+            "operation": "save",
+            "error": "savestate: runtime rejected command: {'id': 1908, 'ok': False, 'error': 'savestate request refused (LLE run cannot load states; check slot / configuration / netplay host)'}"
+          },
+          {
+            "operation": "load",
+            "error": "savestate: runtime rejected command: {'id': 1909, 'ok': False, 'error': 'savestate request refused (LLE run cannot load states; check slot / configuration / netplay host)'}"
+          }
+        ],
+        "dwell": [
+          {
+            "route": "keyboard",
+            "elapsed_seconds": 12.015,
+            "resolved_tick_delta": [
+              723,
+              722
+            ],
+            "native_tick_delta": 722,
+            "observed_network_samples": 24
+          },
+          {
+            "route": "controller",
+            "elapsed_seconds": 12.0,
+            "resolved_tick_delta": [
+              720,
+              720
+            ],
+            "native_tick_delta": 721,
+            "observed_network_samples": 24
+          }
+        ],
+        "keyboard_window": {
+          "hwnd": 12919384,
+          "class_name": "SDL_app",
+          "title": "MegaManX6Recomp",
+          "pid": 79568
+        },
+        "keyboard_events": [
+          {
+            "key": "F7",
+            "up": false,
+            "pid": 79568,
+            "hwnd": 12919384,
+            "message": 256,
+            "vk": 118,
+            "scan": 65,
+            "lparam": 4259841,
+            "monotonic_ns": 290014765000000,
+            "posted": true
+          },
+          {
+            "key": "F7",
+            "up": true,
+            "pid": 79568,
+            "hwnd": 12919384,
+            "message": 257,
+            "vk": 118,
+            "scan": 65,
+            "lparam": 3225485313,
+            "monotonic_ns": 290014859000000,
+            "posted": true
+          },
+          {
+            "key": "F8",
+            "up": false,
+            "pid": 79568,
+            "hwnd": 12919384,
+            "message": 256,
+            "vk": 119,
+            "scan": 66,
+            "lparam": 4325377,
+            "monotonic_ns": 290027062000000,
+            "posted": true
+          },
+          {
+            "key": "F8",
+            "up": true,
+            "pid": 79568,
+            "hwnd": 12919384,
+            "message": 257,
+            "vk": 119,
+            "scan": 66,
+            "lparam": 3225550849,
+            "monotonic_ns": 290027078000000,
+            "posted": true
+          },
+          {
+            "key": "F7",
+            "up": false,
+            "pid": 79568,
+            "hwnd": 12919384,
+            "message": 256,
+            "vk": 118,
+            "scan": 65,
+            "lparam": 4259841,
+            "monotonic_ns": 290027140000000,
+            "posted": true
+          },
+          {
+            "key": "F7",
+            "up": true,
+            "pid": 79568,
+            "hwnd": 12919384,
+            "message": 257,
+            "vk": 118,
+            "scan": 65,
+            "lparam": 3225485313,
+            "monotonic_ns": 290027171000000,
+            "posted": true
+          },
+          {
+            "key": "F7",
+            "up": false,
+            "pid": 79568,
+            "hwnd": 12919384,
+            "message": 256,
+            "vk": 118,
+            "scan": 65,
+            "lparam": 4259841,
+            "monotonic_ns": 290044203000000,
+            "posted": true
+          },
+          {
+            "key": "F7",
+            "up": true,
+            "pid": 79568,
+            "hwnd": 12919384,
+            "message": 257,
+            "vk": 118,
+            "scan": 65,
+            "lparam": 3225485313,
+            "monotonic_ns": 290044265000000,
+            "posted": true
+          }
+        ],
+        "controller_inputs": [
+          {
+            "pressed": 2049,
+            "acknowledgment": null
+          },
+          {
+            "pressed": 5,
+            "acknowledgment": null
+          }
+        ]
+      },
+      {
+        "peer": 1,
+        "checks": {
+          "backend_save_and_load_refused": true,
+          "keyboard_entry_refused_without_pausing_match": true,
+          "keyboard_rewind_refused_after_input_barrier": true,
+          "controller_entry_refused_without_pausing_match": true,
+          "controller_rewind_refused_after_input_barrier": true
+        },
+        "initial": {
+          "overlay": {
+            "id": 2106,
+            "ok": true,
+            "save_menu_open": false,
+            "save_slot": 0,
+            "save_unavailable": false,
+            "rewind_open": false,
+            "rewind_blocked": false,
+            "save_open_refusal_generation": 0
+          },
+          "state": {
+            "id": 2107,
+            "ok": true,
+            "generation": 0,
+            "pending": 0,
+            "last_ok": 0,
+            "last_op": "save",
+            "last_slot": -1
+          },
+          "rewind": {
+            "id": 2108,
+            "ok": true,
+            "enabled": true,
+            "open": false,
+            "title_blocked": false,
+            "snaps": 0
+          }
+        },
+        "final": {
+          "overlay": {
+            "id": 2584,
+            "ok": true,
+            "save_menu_open": false,
+            "save_slot": 0,
+            "save_unavailable": true,
+            "rewind_open": false,
+            "rewind_blocked": false,
+            "save_open_refusal_generation": 4
+          },
+          "state": {
+            "id": 2585,
+            "ok": true,
+            "generation": 0,
+            "pending": 0,
+            "last_ok": 0,
+            "last_op": "save",
+            "last_slot": -1
+          },
+          "rewind": {
+            "id": 2586,
+            "ok": true,
+            "enabled": true,
+            "open": false,
+            "title_blocked": false,
+            "snaps": 0
+          }
+        },
+        "completed_entry_refusals": [
+          {
+            "route": "keyboard",
+            "before": {
+              "overlay": {
+                "id": 2114,
+                "ok": true,
+                "save_menu_open": false,
+                "save_slot": 0,
+                "save_unavailable": false,
+                "rewind_open": false,
+                "rewind_blocked": false,
+                "save_open_refusal_generation": 0
+              },
+              "state": {
+                "id": 2115,
+                "ok": true,
+                "generation": 0,
+                "pending": 0,
+                "last_ok": 0,
+                "last_op": "save",
+                "last_slot": -1
+              },
+              "rewind": {
+                "id": 2116,
+                "ok": true,
+                "enabled": true,
+                "open": false,
+                "title_blocked": false,
+                "snaps": 0
+              }
+            },
+            "after": {
+              "overlay": {
+                "id": 2121,
+                "ok": true,
+                "save_menu_open": false,
+                "save_slot": 0,
+                "save_unavailable": true,
+                "rewind_open": false,
+                "rewind_blocked": false,
+                "save_open_refusal_generation": 1
+              },
+              "state": {
+                "id": 2122,
+                "ok": true,
+                "generation": 0,
+                "pending": 0,
+                "last_ok": 0,
+                "last_op": "save",
+                "last_slot": -1
+              },
+              "rewind": {
+                "id": 2123,
+                "ok": true,
+                "enabled": true,
+                "open": false,
+                "title_blocked": false,
+                "snaps": 0
+              }
+            }
+          },
+          {
+            "route": "keyboard",
+            "before": {
+              "overlay": {
+                "id": 2161,
+                "ok": true,
+                "save_menu_open": false,
+                "save_slot": 0,
+                "save_unavailable": true,
+                "rewind_open": false,
+                "rewind_blocked": false,
+                "save_open_refusal_generation": 1
+              },
+              "state": {
+                "id": 2162,
+                "ok": true,
+                "generation": 0,
+                "pending": 0,
+                "last_ok": 0,
+                "last_op": "save",
+                "last_slot": -1
+              },
+              "rewind": {
+                "id": 2163,
+                "ok": true,
+                "enabled": true,
+                "open": false,
+                "title_blocked": false,
+                "snaps": 0
+              }
+            },
+            "after": {
+              "overlay": {
+                "id": 2168,
+                "ok": true,
+                "save_menu_open": false,
+                "save_slot": 0,
+                "save_unavailable": true,
+                "rewind_open": false,
+                "rewind_blocked": false,
+                "save_open_refusal_generation": 2
+              },
+              "state": {
+                "id": 2169,
+                "ok": true,
+                "generation": 0,
+                "pending": 0,
+                "last_ok": 0,
+                "last_op": "save",
+                "last_slot": -1
+              },
+              "rewind": {
+                "id": 2170,
+                "ok": true,
+                "enabled": true,
+                "open": false,
+                "title_blocked": false,
+                "snaps": 0
+              }
+            }
+          },
+          {
+            "route": "controller",
+            "before": {
+              "overlay": {
+                "id": 2339,
+                "ok": true,
+                "save_menu_open": false,
+                "save_slot": 0,
+                "save_unavailable": true,
+                "rewind_open": false,
+                "rewind_blocked": false,
+                "save_open_refusal_generation": 2
+              },
+              "state": {
+                "id": 2340,
+                "ok": true,
+                "generation": 0,
+                "pending": 0,
+                "last_ok": 0,
+                "last_op": "save",
+                "last_slot": -1
+              },
+              "rewind": {
+                "id": 2341,
+                "ok": true,
+                "enabled": true,
+                "open": false,
+                "title_blocked": false,
+                "snaps": 0
+              }
+            },
+            "after": {
+              "overlay": {
+                "id": 2347,
+                "ok": true,
+                "save_menu_open": false,
+                "save_slot": 0,
+                "save_unavailable": true,
+                "rewind_open": false,
+                "rewind_blocked": false,
+                "save_open_refusal_generation": 3
+              },
+              "state": {
+                "id": 2348,
+                "ok": true,
+                "generation": 0,
+                "pending": 0,
+                "last_ok": 0,
+                "last_op": "save",
+                "last_slot": -1
+              },
+              "rewind": {
+                "id": 2349,
+                "ok": true,
+                "enabled": true,
+                "open": false,
+                "title_blocked": false,
+                "snaps": 0
+              }
+            }
+          },
+          {
+            "route": "keyboard",
+            "before": {
+              "overlay": {
+                "id": 2403,
+                "ok": true,
+                "save_menu_open": false,
+                "save_slot": 0,
+                "save_unavailable": true,
+                "rewind_open": false,
+                "rewind_blocked": false,
+                "save_open_refusal_generation": 3
+              },
+              "state": {
+                "id": 2404,
+                "ok": true,
+                "generation": 0,
+                "pending": 0,
+                "last_ok": 0,
+                "last_op": "save",
+                "last_slot": -1
+              },
+              "rewind": {
+                "id": 2405,
+                "ok": true,
+                "enabled": true,
+                "open": false,
+                "title_blocked": false,
+                "snaps": 0
+              }
+            },
+            "after": {
+              "overlay": {
+                "id": 2407,
+                "ok": true,
+                "save_menu_open": false,
+                "save_slot": 0,
+                "save_unavailable": true,
+                "rewind_open": false,
+                "rewind_blocked": false,
+                "save_open_refusal_generation": 4
+              },
+              "state": {
+                "id": 2408,
+                "ok": true,
+                "generation": 0,
+                "pending": 0,
+                "last_ok": 0,
+                "last_op": "save",
+                "last_slot": -1
+              },
+              "rewind": {
+                "id": 2409,
+                "ok": true,
+                "enabled": true,
+                "open": false,
+                "title_blocked": false,
+                "snaps": 0
+              }
+            }
+          }
+        ],
+        "backend_refusals": [
+          {
+            "operation": "save",
+            "error": "savestate: runtime rejected command: {'id': 2109, 'ok': False, 'error': 'savestate refused (netplay guest; host-only)'}"
+          },
+          {
+            "operation": "load",
+            "error": "savestate: runtime rejected command: {'id': 2110, 'ok': False, 'error': 'savestate refused (netplay guest; host-only)'}"
+          }
+        ],
+        "dwell": [
+          {
+            "route": "keyboard",
+            "elapsed_seconds": 12.016,
+            "resolved_tick_delta": [
+              721,
+              723
+            ],
+            "native_tick_delta": 723,
+            "observed_network_samples": 24
+          },
+          {
+            "route": "controller",
+            "elapsed_seconds": 12.016,
+            "resolved_tick_delta": [
+              722,
+              722
+            ],
+            "native_tick_delta": 723,
+            "observed_network_samples": 24
+          }
+        ],
+        "keyboard_window": {
+          "hwnd": 88280512,
+          "class_name": "SDL_app",
+          "title": "MegaManX6Recomp",
+          "pid": 67072
+        },
+        "keyboard_events": [
+          {
+            "key": "F7",
+            "up": false,
+            "pid": 67072,
+            "hwnd": 88280512,
+            "message": 256,
+            "vk": 118,
+            "scan": 65,
+            "lparam": 4259841,
+            "monotonic_ns": 290048859000000,
+            "posted": true
+          },
+          {
+            "key": "F7",
+            "up": true,
+            "pid": 67072,
+            "hwnd": 88280512,
+            "message": 257,
+            "vk": 118,
+            "scan": 65,
+            "lparam": 3225485313,
+            "monotonic_ns": 290048984000000,
+            "posted": true
+          },
+          {
+            "key": "F8",
+            "up": false,
+            "pid": 67072,
+            "hwnd": 88280512,
+            "message": 256,
+            "vk": 119,
+            "scan": 66,
+            "lparam": 4325377,
+            "monotonic_ns": 290061140000000,
+            "posted": true
+          },
+          {
+            "key": "F8",
+            "up": true,
+            "pid": 67072,
+            "hwnd": 88280512,
+            "message": 257,
+            "vk": 119,
+            "scan": 66,
+            "lparam": 3225550849,
+            "monotonic_ns": 290061171000000,
+            "posted": true
+          },
+          {
+            "key": "F7",
+            "up": false,
+            "pid": 67072,
+            "hwnd": 88280512,
+            "message": 256,
+            "vk": 118,
+            "scan": 65,
+            "lparam": 4259841,
+            "monotonic_ns": 290061218000000,
+            "posted": true
+          },
+          {
+            "key": "F7",
+            "up": true,
+            "pid": 67072,
+            "hwnd": 88280512,
+            "message": 257,
+            "vk": 118,
+            "scan": 65,
+            "lparam": 3225485313,
+            "monotonic_ns": 290061265000000,
+            "posted": true
+          },
+          {
+            "key": "F7",
+            "up": false,
+            "pid": 67072,
+            "hwnd": 88280512,
+            "message": 256,
+            "vk": 118,
+            "scan": 65,
+            "lparam": 4259841,
+            "monotonic_ns": 290078421000000,
+            "posted": true
+          },
+          {
+            "key": "F7",
+            "up": true,
+            "pid": 67072,
+            "hwnd": 88280512,
+            "message": 257,
+            "vk": 118,
+            "scan": 65,
+            "lparam": 3225485313,
+            "monotonic_ns": 290078453000000,
+            "posted": true
+          }
+        ],
+        "controller_inputs": [
+          {
+            "pressed": 2049,
+            "acknowledgment": null
+          },
+          {
+            "pressed": 5,
+            "acknowledgment": null
+          }
+        ]
+      }
+    ],
+    "profile_before_first_guest": {
+      "profile": "mmx6.win64-clang22.loopback",
+      "revision": 2,
+      "selected_sha256": "57da58a3c510e1d86c9f6007a89896e30da0b0624c4ce427a0b0f43a1e0169c9",
+      "peers": [
+        {
+          "capabilities": {
+            "actual_image_sha256": "1297c432de158a9075522d185bf2bb0b388eddd1cf5147d72eef1b26a7851318",
+            "cpu_arch": 2,
+            "features": 127,
+            "backend": 2,
+            "fp": 2,
+            "overlays": "interpreted",
+            "offers": 1
+          },
+          "settlement": {
+            "profile": "mmx6.win64-clang22.loopback",
+            "revision": 2,
+            "selected_sha256": "57da58a3c510e1d86c9f6007a89896e30da0b0624c4ce427a0b0f43a1e0169c9",
+            "cycles": 0,
+            "sim_tick": 0,
+            "before_enter_guest": 1
+          }
+        },
+        {
+          "capabilities": {
+            "actual_image_sha256": "1297c432de158a9075522d185bf2bb0b388eddd1cf5147d72eef1b26a7851318",
+            "cpu_arch": 2,
+            "features": 127,
+            "backend": 2,
+            "fp": 2,
+            "overlays": "interpreted",
+            "offers": 1
+          },
+          "settlement": {
+            "profile": "mmx6.win64-clang22.loopback",
+            "revision": 2,
+            "selected_sha256": "57da58a3c510e1d86c9f6007a89896e30da0b0624c4ce427a0b0f43a1e0169c9",
+            "cycles": 0,
+            "sim_tick": 0,
+            "before_enter_guest": 1
+          }
+        }
+      ]
+    },
+    "build_manifest": {
+      "declared_sha256": "d06b3e32c9f8ecda4d089a1ef56d43493b172c8b10fe7c803e837f260d5323df",
+      "manifest_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\frozen-build-v21-8ad29dc\\psx_build_manifest\\psx-runtime\\Release\\manifest.json",
+      "header_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\frozen-build-v21-8ad29dc\\psx_build_manifest\\psx-runtime\\Release\\manifest.h",
+      "manifest_file_sha256": "1ee363eb927c81f880de3b134a8b722f0e53a84614952d42ae3ea16c3d3e0873",
+      "header_file_sha256": "309005aa4fd0d90764d9e6b2f274de5e3a8cab78b8841903acedfc16ba65c775",
+      "declared_files": 679,
+      "staged_images_contain_compiled_sha256": true,
+      "whole_binary": false,
+      "heterogeneous_qualified": false
+    },
+    "resolved_crc_windows": [
+      {
+        "label": "initial idle",
+        "samples": [
+          {
+            "simulation_tick": 2944,
+            "core": "1d2591c2",
+            "mod": "2e733bb9"
+          },
+          {
+            "simulation_tick": 2976,
+            "core": "954d98a4",
+            "mod": "af364963"
+          },
+          {
+            "simulation_tick": 3008,
+            "core": "50d5c741",
+            "mod": "382d3783"
+          },
+          {
+            "simulation_tick": 3040,
+            "core": "db494946",
+            "mod": "1aadb3a1"
+          },
+          {
+            "simulation_tick": 3072,
+            "core": "328faeec",
+            "mod": "d758694d"
+          },
+          {
+            "simulation_tick": 3104,
+            "core": "f0bce57f",
+            "mod": "d124a88d"
+          },
+          {
+            "simulation_tick": 3136,
+            "core": "1dcbdd2b",
+            "mod": "5a7ca0bb"
+          }
+        ],
+        "resolved_through": [
+          3152,
+          3151
+        ]
+      },
+      {
+        "label": "P2 right then release",
+        "samples": [
+          {
+            "simulation_tick": 3200,
+            "core": "cbbb7ba9",
+            "mod": "87487159"
+          },
+          {
+            "simulation_tick": 3232,
+            "core": "954ee568",
+            "mod": "f8867e67"
+          },
+          {
+            "simulation_tick": 3264,
+            "core": "b339d95b",
+            "mod": "bcce9aa5"
+          },
+          {
+            "simulation_tick": 3296,
+            "core": "e5f20590",
+            "mod": "ed9ee31d"
+          },
+          {
+            "simulation_tick": 3328,
+            "core": "f92b1e43",
+            "mod": "06363aef"
+          },
+          {
+            "simulation_tick": 3360,
+            "core": "6afda7e0",
+            "mod": "e645d1ef"
+          },
+          {
+            "simulation_tick": 3392,
+            "core": "ecc1687b",
+            "mod": "2f0057dd"
+          }
+        ],
+        "resolved_through": [
+          3421,
+          3421
+        ]
+      },
+      {
+        "label": "P1 jump then settle",
+        "samples": [
+          {
+            "simulation_tick": 3488,
+            "core": "54e67944",
+            "mod": "8c3e5e47"
+          },
+          {
+            "simulation_tick": 3520,
+            "core": "fc2c1154",
+            "mod": "db3a2815"
+          },
+          {
+            "simulation_tick": 3552,
+            "core": "01664143",
+            "mod": "1001dd3f"
+          },
+          {
+            "simulation_tick": 3584,
+            "core": "9feac3b5",
+            "mod": "a86ee0df"
+          },
+          {
+            "simulation_tick": 3616,
+            "core": "467b075e",
+            "mod": "60f1ce4d"
+          },
+          {
+            "simulation_tick": 3648,
+            "core": "2971e384",
+            "mod": "772c1dad"
+          },
+          {
+            "simulation_tick": 3680,
+            "core": "c54e3347",
+            "mod": "87487159"
+          },
+          {
+            "simulation_tick": 3712,
+            "core": "49909480",
+            "mod": "f8867e67"
+          }
+        ],
+        "resolved_through": [
+          3722,
+          3721
+        ]
+      },
+      {
+        "label": "State/rewind refusal peer0 keyboard",
+        "samples": [
+          {
+            "simulation_tick": 4512,
+            "core": "5a1611a2",
+            "mod": "1001dd3f"
+          },
+          {
+            "simulation_tick": 4544,
+            "core": "6c144c6d",
+            "mod": "a86ee0df"
+          },
+          {
+            "simulation_tick": 4576,
+            "core": "d45f179c",
+            "mod": "60f1ce4d"
+          },
+          {
+            "simulation_tick": 4608,
+            "core": "baed83ce",
+            "mod": "772c1dad"
+          },
+          {
+            "simulation_tick": 4640,
+            "core": "9908b2a8",
+            "mod": "87487159"
+          },
+          {
+            "simulation_tick": 4672,
+            "core": "c08695bd",
+            "mod": "f8867e67"
+          },
+          {
+            "simulation_tick": 4704,
+            "core": "8cd7bd8c",
+            "mod": "bcce9aa5"
+          },
+          {
+            "simulation_tick": 4736,
+            "core": "97a04ce6",
+            "mod": "ed9ee31d"
+          }
+        ],
+        "resolved_through": [
+          4740,
+          4740
+        ]
+      },
+      {
+        "label": "State/rewind refusal peer0 controller",
+        "samples": [
+          {
+            "simulation_tick": 5536,
+            "core": "d0b1547c",
+            "mod": "60f1ce4d"
+          },
+          {
+            "simulation_tick": 5568,
+            "core": "a459f701",
+            "mod": "772c1dad"
+          },
+          {
+            "simulation_tick": 5600,
+            "core": "fab5ae5a",
+            "mod": "87487159"
+          },
+          {
+            "simulation_tick": 5632,
+            "core": "28027423",
+            "mod": "f8867e67"
+          },
+          {
+            "simulation_tick": 5664,
+            "core": "2341c31e",
+            "mod": "bcce9aa5"
+          },
+          {
+            "simulation_tick": 5696,
+            "core": "0e792ac1",
+            "mod": "ed9ee31d"
+          },
+          {
+            "simulation_tick": 5728,
+            "core": "f3396286",
+            "mod": "06363aef"
+          },
+          {
+            "simulation_tick": 5760,
+            "core": "7198bb11",
+            "mod": "e645d1ef"
+          }
+        ],
+        "resolved_through": [
+          5764,
+          5765
+        ]
+      },
+      {
+        "label": "State/rewind refusal peer1 keyboard",
+        "samples": [
+          {
+            "simulation_tick": 6560,
+            "core": "1de979b6",
+            "mod": "87487159"
+          },
+          {
+            "simulation_tick": 6592,
+            "core": "acb9d0ef",
+            "mod": "f8867e67"
+          },
+          {
+            "simulation_tick": 6624,
+            "core": "047a8920",
+            "mod": "bcce9aa5"
+          },
+          {
+            "simulation_tick": 6656,
+            "core": "9a92be17",
+            "mod": "ed9ee31d"
+          },
+          {
+            "simulation_tick": 6688,
+            "core": "3ed0490d",
+            "mod": "06363aef"
+          },
+          {
+            "simulation_tick": 6720,
+            "core": "c8a93b21",
+            "mod": "e645d1ef"
+          },
+          {
+            "simulation_tick": 6752,
+            "core": "be9e768d",
+            "mod": "2f0057dd"
+          }
+        ],
+        "resolved_through": [
+          6784,
+          6783
+        ]
+      },
+      {
+        "label": "State/rewind refusal peer1 controller",
+        "samples": [
+          {
+            "simulation_tick": 7584,
+            "core": "5c0803f0",
+            "mod": "bcce9aa5"
+          },
+          {
+            "simulation_tick": 7616,
+            "core": "a9ca5959",
+            "mod": "ed9ee31d"
+          },
+          {
+            "simulation_tick": 7648,
+            "core": "7562dc02",
+            "mod": "06363aef"
+          },
+          {
+            "simulation_tick": 7680,
+            "core": "1d17d83c",
+            "mod": "e645d1ef"
+          },
+          {
+            "simulation_tick": 7712,
+            "core": "cba53139",
+            "mod": "2f0057dd"
+          },
+          {
+            "simulation_tick": 7744,
+            "core": "5841d2c9",
+            "mod": "7febd5e9"
+          },
+          {
+            "simulation_tick": 7776,
+            "core": "b23ed030",
+            "mod": "376c2957"
+          },
+          {
+            "simulation_tick": 7808,
+            "core": "19e50d37",
+            "mod": "8c3e5e47"
+          }
+        ],
+        "resolved_through": [
+          7816,
+          7815
+        ]
+      }
+    ],
+    "distinct_resolved_crc_samples": 53,
+    "post_refusal_crc_samples": 31,
+    "owned_cleanup": [
+      {
+        "owned_pid": 79568,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      {
+        "owned_pid": 67072,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      }
+    ],
+    "private_cards_unchanged": true
+  },
+  "observer_setup_miss": {
+    "raw_report": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-native-resources\\qualification.json",
+      "sha256": "a5d5ecba10fe3018ca1d826bfbc43c4c722f75ae10cbc0a8a695e4212b204846",
+      "size": 2630660
+    },
+    "last_separate_physical_body_sample": {
+      "mode": [
+        10,
+        0,
+        0
+      ],
+      "stage": 0,
+      "section": 0,
+      "timer": 548,
+      "character": 1,
+      "form": 5,
+      "state": 1,
+      "action": 2,
+      "hp": 28,
+      "hp_raw": 28,
+      "pending_hit": false,
+      "iframes": 0,
+      "reaction": 1,
+      "reaction_lock": 0,
+      "terrain": 8,
+      "previous_terrain": 8,
+      "difficulty": 1,
+      "shared_parts": 1,
+      "parts": 0,
+      "x": 24674304,
+      "y": 70909952,
+      "airborne": 0,
+      "ground": true,
+      "observation_method": "separate body and PLAY RAM RPCs"
+    },
+    "classification": "Unqualified observation of borrowed P1 slot during Zero projection; not a native roster-switch claim",
+    "cleanup": {
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    },
+    "existing_cards_unchanged": true
+  },
+  "visual_review": {
+    "reviewer": "root, solo",
+    "viewed": [
+      "paired peer0 online-keyboard-refused-browser-gameplay.png",
+      "local controller after-mapped-rewind-native-after-dash-retirement-and-input.png"
+    ],
+    "finding": "Normal X/Zero intro remains visible after online refusal; offline rewind resumes both full-health bodies. UI refusal/progress/HP divergence use diagnostics and states, not images alone."
+  },
+  "framework_issue": "beads-eio.3.382",
+  "ledger": {
+    "row": "F33",
+    "local": "unverified",
+    "netplay": "passed",
+    "aggregate": "unverified"
+  },
+  "limits": [
+    "F33 netplay passes the frozen refusal contract for this exact same-host Windows image/profile; full F33 local/aggregate remain unverified for native ammo spending and weapon restoration.",
+    "Both local keyboard and controller cases genuinely damage HP and restore it. Ammo remains unspent, weapon0 unchanged, and private priorities zero; no active-voice rewind or nonzero-priority state qualification.",
+    "State/rewind UI keyboard input is posted only to the exact owned SDL HWND. Physical hardware, other hosts/OS/CPUs, rosters and campaign locations remain separate.",
+    "Backend save/load requests verify explicit rejection; mapped UI events independently complete refusal counters without opening a modal browser. No failed native operation is reclassified from a timeout.",
+    "Source-bound debug lab native gameplay is qualified here. Production is built/tested with lab/debug OFF; production native gameplay is not claimed.",
+    "Native cards remain separate and unchanged. Current-build invalid-provider rejection is qualified; no backward-state migration requirement.",
+    "Previous22ea525 dwell failure remains retained. New8ad29dc observer setup miss sampled projected Zero through borrowed physical P1 RAM and is retained; subsequent primary observations use the published coherent P1 body."
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\after-invalid-probe.pst",
+      "sha256": "7190d0c7000e6de4b740fb1bb407d8b6528776134815fc467ca4be168789cb06",
+      "size": 1786029
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\after-mapped-rewind-native-after-dash-retirement-and-input.png",
+      "sha256": "7b63363dc935ad24c809d98f4e0726cd433ec179a0212dc8772a68eb4d88f3e6",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\before-mapped-load-0.png",
+      "sha256": "cab308f0be9c59bd93d26abeb9d5e6ee21d3448babf5092f35c08890dbf3f435",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\before-mapped-load-1.png",
+      "sha256": "e5cc3813538aed40da8299e89282b97c93391be3f990d37818519e8fa24d3ff4",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\before-mapped-load-native-after-dash-retirement-and-input.png",
+      "sha256": "5e7d3993da041e77db608ed12849a9ac9d7e61781503b0a7ed6f61da1894b0bc",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\before-mapped-rewind-native-after-dash-retirement-and-input.png",
+      "sha256": "a64aee3b979e138c678433669c1c27f335999027cfd56a4a902eef60e2ed1f03",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\before-mapped-save-0.png",
+      "sha256": "da846c868445ae4d8a01811639189ec47252d4aa70b3dd98ba984aeddcfd89a7",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\invalid-internal-wire4.pst",
+      "sha256": "6574bbba97a15ef68dd6180cf95c092b5a7d405a9158d86fb8a93aaf25d77489",
+      "size": 1779727
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\live-private-effects-before-save.png",
+      "sha256": "ba290017a0115b4792125b961621edf4db86cdd4b1ce9ec893f4db7ba00ac33a",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\mapped-load-probe.pst",
+      "sha256": "8f5d9e3cdf76a980a98aaeb5802a865f3da7c14256feb201ca4f754de9c5c885",
+      "size": 1781642
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\mapped-rewind-open.png",
+      "sha256": "c5742733ff7c1777c5b48f4c83b4ac0d41c3843af6a91bc3d39a7869d67c41e5",
+      "size": 338189
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\mapped-rewind-restored-live-pools.png",
+      "sha256": "0e3afb42167a65e5570863cde135a7c8984f70bdf301ec852f4473a1dfbc5585",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\mapped-rewind-selected.png",
+      "sha256": "90b9a2a5de9ec8ddd08beac0cce6e3688b2a456ee14df73835af87f890fe559a",
+      "size": 338189
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\mapped-save.pst",
+      "sha256": "58a75a85c3f0ba5ccc616bb2741ed24a6c68477fe4944b51422e064da6d70179",
+      "size": 1784984
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\mapped-state\\rewind-probe.pst",
+      "sha256": "7740ab5ce30e52ccc79a3973166c3b46c0928ca8aa2790b72780485279e0c0b3",
+      "size": 1783005
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\candidate\\settings.toml",
+      "sha256": "b550cf7c0c5adf5943c0785d278dc5cf84167602dcf49b0d66c5dff63c46ee25",
+      "size": 311
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\candidate\\game.toml",
+      "sha256": "e0bfe0693ce38ac31124015c764eab2d281c24202657392037dbbf0cba206982",
+      "size": 12552
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\candidate\\environment.json",
+      "sha256": "3496f270ac6cc576f5ccf046183410cea3f639de938ad978922f0e6bedfb554d",
+      "size": 1288
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-coherent-primary-resources\\candidate\\preparation.json",
+      "sha256": "b1c6a9700ea2011ebf8cdc9b1a372a8b4ed5c5de5bb382d60591ef1f39a0d310",
+      "size": 3453
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\after-invalid-probe.pst",
+      "sha256": "23c2b748d2bfa0515295ebb8a3d2eaee6b63824320582567f6c8507ae917f963",
+      "size": 1782855
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\after-mapped-rewind-native-after-dash-retirement-and-input.png",
+      "sha256": "388fa99ded053133da0428326122fc3a9d4079016b745f52864c1174adcea36a",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\before-mapped-load-0.png",
+      "sha256": "ec27a92755b6509fce5edc812dc9c04d4056fb26ee7b2621f466cde688a96ecf",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\before-mapped-load-1.png",
+      "sha256": "2e03516f4ebb053a7a1a1fe5110c84db595281702be7a479a22d8e17907c782e",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\before-mapped-load-native-after-dash-retirement-and-input.png",
+      "sha256": "3467bd0bff02fb6830b072f037dd0d2b1d57fbb592f3c533a545ab543576055c",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\before-mapped-rewind-native-after-dash-retirement-and-input.png",
+      "sha256": "a64aee3b979e138c678433669c1c27f335999027cfd56a4a902eef60e2ed1f03",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\before-mapped-save-0.png",
+      "sha256": "da846c868445ae4d8a01811639189ec47252d4aa70b3dd98ba984aeddcfd89a7",
+      "size": 922218
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\invalid-internal-wire4.pst",
+      "sha256": "fc5c11f844d1c884142a4ef0185464d5ef6d616f7f284da62c90350c8faf2874",
+      "size": 1776308
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\live-private-effects-before-save.png",
+      "sha256": "958fd8fa70e8fb51b9a2829e9352f9233563a6ce27286d432805de6b32a4c937",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\mapped-load-probe.pst",
+      "sha256": "03c900a998ed38a192f56eb01787b2cb4a34f29545c0060cfadf942801affe62",
+      "size": 1785251
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\mapped-rewind-open.png",
+      "sha256": "988340645cd7c86ec13872bdaaf24d5e58d38160b86027a2e1e6c75233bdbd4e",
+      "size": 338189
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\mapped-rewind-restored-live-pools.png",
+      "sha256": "a497f0c9f89d4fa6b43c0de9a07aba1791dc6b09fa57a428bf1ee4b8ef7fc461",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\mapped-rewind-selected.png",
+      "sha256": "a0590e7a231f0ea8877f8d15c5a9ec8a73f113c0554a9b2beafa636b6b2448f1",
+      "size": 338189
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\mapped-save.pst",
+      "sha256": "ddef4922d1a2f914a0c4883bbda90dea27949e27700fec33700b3489ee55cf3c",
+      "size": 1781577
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\mapped-state\\rewind-probe.pst",
+      "sha256": "759c6d5deb86ab7f8c3aac86d189c9a491aec07c78a61c0f20212ec8f1e9aa22",
+      "size": 1786475
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\candidate\\settings.toml",
+      "sha256": "b550cf7c0c5adf5943c0785d278dc5cf84167602dcf49b0d66c5dff63c46ee25",
+      "size": 311
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\candidate\\game.toml",
+      "sha256": "0e46fa5e6ddb96ea247d655a30ad7964374c11fbaed4c7d24efc9be81bf90ac0",
+      "size": 12546
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\candidate\\environment.json",
+      "sha256": "99bd99eb49d06ee430034b869bf92de5a9aee14b251960145a593d3ad5fe3305",
+      "size": 1234
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mapped-state-v21-8ad29dc-controller-resources\\candidate\\preparation.json",
+      "sha256": "f16114d43e6a23bc301bce9477c08ab0d13285d34ee54f46d4b964189045b72c",
+      "size": 3429
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\peer-0\\settings.toml",
+      "sha256": "b8e90aa34dcfcc3865e11aa7a8354481a60d9c2e954d2a50b2570450e5d8c420",
+      "size": 311
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\peer-0\\game.toml",
+      "sha256": "cc3458e71a55adffda70d480c3bb1ef443e3f9aaf12929f35bb2a1f3840d5d49",
+      "size": 12544
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\peer-0\\environment.json",
+      "sha256": "e209b12c9753a38829a25960c94317b10d3d8065477275bbb2381cdcd992f18d",
+      "size": 1216
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\peer-0\\preparation.json",
+      "sha256": "76b343e02041d23b71ceb72ba41dc48dde61d307843dd357e094f3da6aeed0cc",
+      "size": 3421
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\peer-0\\logs\\stdout.log",
+      "sha256": "3b8361abfc5a3010e323fdfdafd9631f088cf248fec971fa2fb17352eeb31d38",
+      "size": 2914
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\peer-0\\logs\\stderr.log",
+      "sha256": "67e53ccdc60372d843cae2dc0ca25b683eb6785db0cb43f3b0596ba57d0ca6e7",
+      "size": 48210
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\peer-0\\logs\\jump-audio-host-input.jsonl",
+      "sha256": "d399266bc61b4ff874dbb71419b2a01c56163cbfbafa05fbc11d54f72658e9f7",
+      "size": 81995
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\peer-0\\logs\\online-controller-refused-browser-gameplay.png",
+      "sha256": "65b24acdb8f7ce991686c2456061a69861c2d3fe46ce31ef0b68d43d8ba787ca",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\peer-0\\logs\\online-keyboard-refused-browser-gameplay.png",
+      "sha256": "f2ce9cdb9ad933e4026c7554dbb16e174b9a17421eb4ad2773acbd915ef31458",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\peer-1\\settings.toml",
+      "sha256": "b8e90aa34dcfcc3865e11aa7a8354481a60d9c2e954d2a50b2570450e5d8c420",
+      "size": 311
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\peer-1\\game.toml",
+      "sha256": "619464caced42604e05b1aa457e0ed2b5bc7b156b65ab7e006ef0114a78a9a9c",
+      "size": 12544
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\peer-1\\environment.json",
+      "sha256": "87801acdb0394adb8c6a7a24d8dd30faefcdd818140690de6a35c49385d22c03",
+      "size": 1216
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\peer-1\\preparation.json",
+      "sha256": "de6eadfd3987c18a247092f60c5fdc1072b5775a3fbb7adcc1835caececdfb8f",
+      "size": 3421
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\peer-1\\logs\\stdout.log",
+      "sha256": "3119377d0e85c99fd1afa2932ab5b9017035d9af718f7938e0ed5755a8de9077",
+      "size": 3053
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\peer-1\\logs\\stderr.log",
+      "sha256": "db1f256171a4297c756cfce221122a91aa39c081b154379b80495b1e521af105",
+      "size": 48090
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\peer-1\\logs\\jump-audio-host-input.jsonl",
+      "sha256": "bc974e5f6ca5595f91eaaf1e447cfb1ab56434e5b8f8eaa8e9f45a2d6c831c2f",
+      "size": 7254
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\peer-1\\logs\\online-controller-refused-browser-gameplay.png",
+      "sha256": "ef2e03a7ddc7cb0923272f8897a929a45cf98cf646e824bcbe432e59dc394470",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\peer-1\\logs\\online-keyboard-refused-browser-gameplay.png",
+      "sha256": "24360ae32c87dddd2c8ae6e7d00daa780a2a2244d2e1064fdb2ee4000996a618",
+      "size": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "66166703568cc6037c3bc0c5cbd1ec0c91e63e976c1d47317860d916f757c8a0",
+      "size": 41089
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "size": 29983
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\mmx6_coop_native_reentry_pair-executed-source.py",
+      "sha256": "883c388ed512915b482533f625ddffde91111a7b436dbf63a538db0b9fda7b8b",
+      "size": 11435
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\mmx6_coop_state_policy-executed-source.py",
+      "sha256": "52b182d2785dd9e1da2cf82681ab857f6680ace40616324d6f7a7154526a30b3",
+      "size": 9443
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\mmx6_owned_keyboard-executed-source.py",
+      "sha256": "11b07f655dd711e5cf39c36362eec796b9eb73b86702d8100e0a958a3e348402",
+      "size": 4599
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "4829fcb53086c45a2fc4198167b282a73c4e79d3e586211ff8934de168a7f49e",
+      "size": 29088
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\qualify_mmx6_input_replay-executed-source.py",
+      "sha256": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd",
+      "size": 28273
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\state-policy-v21-8ad29dc-refused-entry-dwell12\\runner-source.py",
+      "sha256": "f07200b5b868ce54e5eb70188c6035ac96c3df4e62d282cf152de2e4fd8ca098",
+      "size": 78267
+    }
+  ]
+}
