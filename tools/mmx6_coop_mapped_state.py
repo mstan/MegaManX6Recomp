@@ -241,11 +241,12 @@ def exercise(ctx,*,output,timeout=12,keyboard=False,resource_sources=None,invent
         # Overlay-open/capture RPCs also consume presentations before the
         # filmstrip freezes. Seek well inside the retained paused interval,
         # rather than the short original menu-closing transition.
-        steps=math.ceil(delta/8)+12
+        margin=18 if inventory_source else 12
+        steps=math.ceil(delta/8)+margin
         require(12<=steps<=45,'Rewind setup exceeded its retained-history seek bound')
         seconds=.28+.07*(steps-1)
         evidence['rewind_seek_heuristic']=dict(publications_since_paused_window=delta,interval=8,
-            desired_steps=steps,held_seconds=seconds,qualification='Actual restored bytes only; duration is not a selected-tick proof')
+            desired_steps=steps,margin_steps=margin,held_seconds=seconds,qualification='Actual restored bytes only; duration is not a selected-tick proof')
         if controls.keyboard:controls.keyboard.held('Left',seconds)
         else:
             try:ctx['set_input'](0,0x80);time.sleep(seconds)

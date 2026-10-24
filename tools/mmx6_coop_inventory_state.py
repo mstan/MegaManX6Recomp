@@ -77,46 +77,34 @@ def spend(ctx, case, label, *, timeout=45):
     case.evidence.setdefault('native_inventory_spending', []).append(route)
     deadline = time.monotonic()+timeout
 
-    def hold(seat, bits, frames, why):
+    def accepted(seat, bits, predicate, why):
         require(time.monotonic() < deadline, 'Native inventory input deadline expired')
+        anchor = case.sample(why+' input bracket')
         try:
             receipt = ctx['set_input'](seat, bits)
-            ctx['native_advance'](frames, why)
+            row = case.wait(lambda r: state.forward(anchor['observation']['tick'], r['observation']['tick']) and
+                            predicate(r), why+' actual published result')
         finally:
             ctx['set_input'](seat, 0)
-        ctx['native_advance'](3, why+' neutral')
-        row = case.sample(why)
-        route['attempts'].append(dict(seat=seat, pressed=bits, native_ticks=frames, acknowledgment=receipt, after=row))
-        return row
+        after = case.wait(lambda r: state.forward(row['observation']['tick'], r['observation']['tick']),
+                          why+' neutral publication')
+        route['attempts'].append(dict(seat=seat, pressed=bits, acknowledgment=receipt,
+                                      before=anchor, accepted=row, after=after,
+                                      pacing='Actual consumption/publication, not world-clock progress through native screen freeze'))
+        return after
 
-    def idle(seat):
-        for _ in range(60):
-            row = case.sample(label+' native actor readiness')
-            player = row['observation']['players'][seat]
-            require(player['hp'] > 0 and row['observation']['native_phase'] == 0,
-                    'Native energy input left living gameplay')
-            if player['action'] == 2:
-                return row
-            ctx['native_advance'](3, label+' native action recovery')
-        raise debug.DebugError('Native actor did not become ready for an energy input')
+    def energy_spent(row, seat):
+        old = state.private_resources(before)[seat][2]
+        new = state.private_resources(row)[seat][2]
+        return all(0 <= b <= a for a,b in zip(old,new)) and any(b < a for a,b in zip(old,new))
 
     try:
-        for seat in (0, 1):
-            idle(seat)
-            old = state.private_resources(before)[seat]
-            for _ in range(9):
-                row = hold(seat, 0x800, 4, label+' native R1 weapon cycle')
-                if state.private_resources(row)[seat][1] != old[1]:
-                    break
-            else:
-                raise debug.DebugError('Native R1 did not change selected weapon for seat'+str(seat))
-            for bits in (0x8000, 0x1000, 0x200, 0x240, 0x1040, 0x210, 0x1010):
-                idle(seat)
-                row = hold(seat, bits, 5, label+' native selected-weapon input '+hex(bits))
-                if any(b < a for a, b in zip(old[2], state.private_resources(row)[seat][2])):
-                    break
-            else:
-                raise debug.DebugError('Native inputs did not spend energy for seat'+str(seat))
+        require([p[1] for p in state.private_resources(before)] == [0, 0],
+                'Native energy route requires the saved base selection on both actors')
+        accepted(0, 0x800, lambda r: state.private_resources(r)[0][1] == 1,
+                 label+' native X R1 selects weapon1')
+        accepted(0, 0x1000, lambda r: energy_spent(r,0), label+' native X Triangle spends weapon energy')
+        accepted(1, 0x200, lambda r: energy_spent(r,1), label+' native Zero R2 spends attack energy')
         after = case.sample(label+' both actors after actual energy use')
         route.update(after=after, checks=changed_resources(before, after))
         require(all(route['checks'].values()), 'Native ammo and selection did not both diverge from saved resources')
