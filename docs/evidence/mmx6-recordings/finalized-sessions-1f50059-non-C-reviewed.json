@@ -1,0 +1,897 @@
+{
+  "schema": 1,
+  "kind": "reviewed_multiple_finalized_native_input_recordings_non_C",
+  "F38": "bounded_local_and_netplay_recording_contract_passed",
+  "limits": [
+    "Native consumption traces and actual output-location pointers only; no offline replay, fullSIO, performance, crossbuild or all-input-mechanics claim.",
+    "Netplay traces are validated as netplay data, never passed to an offline replay admission path.",
+    "These are historical exact-image sessions, not new gameplay on the current renderer candidate. Presentation findings in their parent reports remain separate."
+  ],
+  "cases": [
+    {
+      "case": "menu-continuity-v24-1f50059-charged-native-sprites-side-by-side",
+      "mode": "offline",
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites-side-by-side\\qualification.json",
+        "bytes": 6863063,
+        "sha256": "97948caa17b91da93f636d95e1b1245d6ddeed4f084eba0bc297cd30ed49dd3a"
+      },
+      "parent_status": "native_hud_presentation_captured_review_pending",
+      "peers": [
+        {
+          "profile": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites-side-by-side\\candidate",
+          "session": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites-side-by-side\\candidate\\saves\\input-recordings\\session-1792859955834758-1-0",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "97b2281e2dabed61c40bdd319eaf6dc22623aa55371de6d2631845e3750b02e4",
+            "manifest_sha256": "9345a5ca54c490ef81f7549d199a54ef4b40c8d956bf8c2e2e0dae4c49224b49",
+            "mode": "offline",
+            "profile": null,
+            "settings_sha256": "33f396104cb3bc11ac735d7a4a228bcd3e3b9bf2f0c46cf56aa1048a8706ce3b",
+            "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          "events": 10587,
+          "natives": 6728,
+          "p2_reads": 3859,
+          "stream_sha256": "26b1e6ef740319d3bb8aa956d006d114bf3eb74a574bde75112346503c183757",
+          "primary_nonzero_native_calls": 3396,
+          "partner_nonzero_native_consumption": 72,
+          "native_callers": [
+            2147557920,
+            2147592244,
+            2147592984
+          ],
+          "first_sim_tick": null,
+          "last_sim_tick": null,
+          "actual_finalized_location_pointer": "mmx6 diagnostics: finalized capture G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites-side-by-side\\candidate\\saves\\input-recordings\\session-1792859955834758-1-0",
+          "stderr": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites-side-by-side\\candidate\\jump-audio\\stderr.log",
+            "bytes": 446,
+            "sha256": "211063cf59e448195d6d3151e013de58829601773134d35ae009aec89e9341ab"
+          },
+          "artifacts": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites-side-by-side\\candidate\\saves\\input-recordings\\session-1792859955834758-1-0\\inputs.jsonl",
+              "bytes": 1383599,
+              "sha256": "cbf204f07feac6260af97a01fb272f3484a917046fb6e07ea58d619db55ad8b3"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites-side-by-side\\candidate\\saves\\input-recordings\\session-1792859955834758-1-0\\status.json",
+              "bytes": 160,
+              "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites-side-by-side\\candidate\\saves\\input-recordings\\session-1792859955834758-1-0\\settings.json",
+              "bytes": 10356,
+              "sha256": "33f396104cb3bc11ac735d7a4a228bcd3e3b9bf2f0c46cf56aa1048a8706ce3b"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites-side-by-side\\candidate\\saves\\input-recordings\\session-1792859955834758-1-0\\content.json",
+              "bytes": 503,
+              "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites-side-by-side\\candidate\\saves\\input-recordings\\session-1792859955834758-1-0\\simulation-contract.json",
+              "bytes": 259,
+              "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites-side-by-side\\candidate\\saves\\input-recordings\\session-1792859955834758-1-0\\card1.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites-side-by-side\\candidate\\saves\\input-recordings\\session-1792859955834758-1-0\\card2.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "finalized_complete_untainted": true,
+          "startup_artifact_bindings_verified": true,
+          "actual_image_manifest_execution_verified": true
+        }
+      ],
+      "actual_execution_ids": [
+        "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9"
+      ]
+    },
+    {
+      "case": "charged-menu-v24-1f50059-local-separated",
+      "mode": "offline",
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\charged-menu-v24-1f50059-local-separated\\qualification.json",
+        "bytes": 1788672,
+        "sha256": "7aac807089e180f889d72e8008ed24fd231e1379bb9b8197c8e3c65f72d8f9c1"
+      },
+      "parent_status": "native_hud_presentation_captured_review_pending",
+      "peers": [
+        {
+          "profile": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\charged-menu-v24-1f50059-local-separated\\candidate",
+          "session": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\charged-menu-v24-1f50059-local-separated\\candidate\\saves\\input-recordings\\session-1792858636044623-1-0",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "97b2281e2dabed61c40bdd319eaf6dc22623aa55371de6d2631845e3750b02e4",
+            "manifest_sha256": "9345a5ca54c490ef81f7549d199a54ef4b40c8d956bf8c2e2e0dae4c49224b49",
+            "mode": "offline",
+            "profile": null,
+            "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+            "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          "events": 8367,
+          "natives": 5536,
+          "p2_reads": 2831,
+          "stream_sha256": "1e42393c13dffd72e986e1292ef21276c0905648e917d603aa8e351e1b4e730e",
+          "primary_nonzero_native_calls": 2096,
+          "partner_nonzero_native_consumption": 66,
+          "native_callers": [
+            2147557920,
+            2147592244,
+            2147592984
+          ],
+          "first_sim_tick": null,
+          "last_sim_tick": null,
+          "actual_finalized_location_pointer": "mmx6 diagnostics: finalized capture G:\\Temp\\Codex\\psxrecomp\\x6-parity\\charged-menu-v24-1f50059-local-separated\\candidate\\saves\\input-recordings\\session-1792858636044623-1-0",
+          "stderr": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\charged-menu-v24-1f50059-local-separated\\candidate\\jump-audio\\stderr.log",
+            "bytes": 423,
+            "sha256": "1aebca22377b29cd087dd6f4b064d4b276b21b6115495a46fdffc05b281a8ec5"
+          },
+          "artifacts": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\charged-menu-v24-1f50059-local-separated\\candidate\\saves\\input-recordings\\session-1792858636044623-1-0\\inputs.jsonl",
+              "bytes": 1097533,
+              "sha256": "462856b71ea33cb33044a7acb86cfd1c8947a60bf50ce71da8068eccdee00d65"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\charged-menu-v24-1f50059-local-separated\\candidate\\saves\\input-recordings\\session-1792858636044623-1-0\\status.json",
+              "bytes": 160,
+              "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\charged-menu-v24-1f50059-local-separated\\candidate\\saves\\input-recordings\\session-1792858636044623-1-0\\settings.json",
+              "bytes": 10329,
+              "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\charged-menu-v24-1f50059-local-separated\\candidate\\saves\\input-recordings\\session-1792858636044623-1-0\\content.json",
+              "bytes": 503,
+              "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\charged-menu-v24-1f50059-local-separated\\candidate\\saves\\input-recordings\\session-1792858636044623-1-0\\simulation-contract.json",
+              "bytes": 259,
+              "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\charged-menu-v24-1f50059-local-separated\\candidate\\saves\\input-recordings\\session-1792858636044623-1-0\\card1.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\charged-menu-v24-1f50059-local-separated\\candidate\\saves\\input-recordings\\session-1792858636044623-1-0\\card2.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "finalized_complete_untainted": true,
+          "startup_artifact_bindings_verified": true,
+          "actual_image_manifest_execution_verified": true
+        }
+      ],
+      "actual_execution_ids": [
+        "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9"
+      ]
+    },
+    {
+      "case": "menu-continuity-v24-1f50059-charged-native-sprites",
+      "mode": "offline",
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites\\qualification.json",
+        "bytes": 5685098,
+        "sha256": "070d30cfddf11295b786c00334ebd2aee12749ebbb98e05035c944356a1b14a0"
+      },
+      "parent_status": "native_hud_presentation_captured_review_pending",
+      "peers": [
+        {
+          "profile": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites\\candidate",
+          "session": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites\\candidate\\saves\\input-recordings\\session-1792859310931947-1-0",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "97b2281e2dabed61c40bdd319eaf6dc22623aa55371de6d2631845e3750b02e4",
+            "manifest_sha256": "9345a5ca54c490ef81f7549d199a54ef4b40c8d956bf8c2e2e0dae4c49224b49",
+            "mode": "offline",
+            "profile": null,
+            "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+            "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          "events": 10689,
+          "natives": 6910,
+          "p2_reads": 3779,
+          "stream_sha256": "0b35bb7e2c805cccf89c09d99d64f9ff0bd85be4f5519aef9b997d4426a1602b",
+          "primary_nonzero_native_calls": 3540,
+          "partner_nonzero_native_consumption": 70,
+          "native_callers": [
+            2147557920,
+            2147592244,
+            2147592984
+          ],
+          "first_sim_tick": null,
+          "last_sim_tick": null,
+          "actual_finalized_location_pointer": "mmx6 diagnostics: finalized capture G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites\\candidate\\saves\\input-recordings\\session-1792859310931947-1-0",
+          "stderr": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites\\candidate\\jump-audio\\stderr.log",
+            "bytes": 433,
+            "sha256": "d9baf9d2450a535cda2c8c6605c67ce303f658e66f4a842322e00900e5e283df"
+          },
+          "artifacts": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites\\candidate\\saves\\input-recordings\\session-1792859310931947-1-0\\inputs.jsonl",
+              "bytes": 1400252,
+              "sha256": "967ed6726653e2daa0c64445428b506402c803693c6000913cd5308b9c74cef3"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites\\candidate\\saves\\input-recordings\\session-1792859310931947-1-0\\status.json",
+              "bytes": 160,
+              "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites\\candidate\\saves\\input-recordings\\session-1792859310931947-1-0\\settings.json",
+              "bytes": 10329,
+              "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites\\candidate\\saves\\input-recordings\\session-1792859310931947-1-0\\content.json",
+              "bytes": 503,
+              "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites\\candidate\\saves\\input-recordings\\session-1792859310931947-1-0\\simulation-contract.json",
+              "bytes": 259,
+              "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites\\candidate\\saves\\input-recordings\\session-1792859310931947-1-0\\card1.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-v24-1f50059-charged-native-sprites\\candidate\\saves\\input-recordings\\session-1792859310931947-1-0\\card2.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "finalized_complete_untainted": true,
+          "startup_artifact_bindings_verified": true,
+          "actual_image_manifest_execution_verified": true
+        }
+      ],
+      "actual_execution_ids": [
+        "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9"
+      ]
+    },
+    {
+      "case": "menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window",
+      "mode": "netplay",
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\qualification.json",
+        "bytes": 2621521,
+        "sha256": "6407d7ed0817e47ec557f751a908ba42960599f24bd619129182bca484e97a38"
+      },
+      "parent_status": "failed",
+      "peers": [
+        {
+          "profile": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-0",
+          "session": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-0\\saves\\input-recordings\\session-1792860309976716-1-0",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "97b2281e2dabed61c40bdd319eaf6dc22623aa55371de6d2631845e3750b02e4",
+            "manifest_sha256": "9345a5ca54c490ef81f7549d199a54ef4b40c8d956bf8c2e2e0dae4c49224b49",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "6db4081f8c3d22db733f3511bab324fa4c9888fafd87b54752b02fbb48e030a2"
+            },
+            "settings_sha256": "170fbbe3274adc0a3934b340f0a499424b0ad365de97dad62c2e4b0fd256d48e",
+            "simulation_contract_sha256": "d7943ab4f9db6a8aa481123c0aa227fdcb11932d1fa0de2de898be12c3bc75f6"
+          },
+          "events": 5889,
+          "natives": 2820,
+          "p2_reads": 3069,
+          "stream_sha256": "ade5d91ce9703743991b9694bcf4740ff31623cf4dd2c3bc6908549b2e973d40",
+          "primary_nonzero_native_calls": 1202,
+          "partner_nonzero_native_consumption": 30,
+          "native_callers": [
+            2147557920,
+            2147592244,
+            2147592984
+          ],
+          "first_sim_tick": 365,
+          "last_sim_tick": 3379,
+          "actual_finalized_location_pointer": "mmx6 diagnostics: finalized capture G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-0\\saves\\input-recordings\\session-1792860309976716-1-0",
+          "stderr": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-0\\logs\\stderr.log",
+            "bytes": 21042,
+            "sha256": "68f521f7830bd62885f8dba7227d4f38b3c51b44266dc9b6535d728eac7e75b6"
+          },
+          "artifacts": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-0\\saves\\input-recordings\\session-1792860309976716-1-0\\inputs.jsonl",
+              "bytes": 756053,
+              "sha256": "7735e8e6140023ba094b946096edf1007164acce07f82f16f140ab61439f3df8"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-0\\saves\\input-recordings\\session-1792860309976716-1-0\\status.json",
+              "bytes": 160,
+              "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-0\\saves\\input-recordings\\session-1792860309976716-1-0\\settings.json",
+              "bytes": 26735,
+              "sha256": "170fbbe3274adc0a3934b340f0a499424b0ad365de97dad62c2e4b0fd256d48e"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-0\\saves\\input-recordings\\session-1792860309976716-1-0\\content.json",
+              "bytes": 567,
+              "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-0\\saves\\input-recordings\\session-1792860309976716-1-0\\simulation-contract.json",
+              "bytes": 350,
+              "sha256": "d7943ab4f9db6a8aa481123c0aa227fdcb11932d1fa0de2de898be12c3bc75f6"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-0\\saves\\input-recordings\\session-1792860309976716-1-0\\card1.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-0\\saves\\input-recordings\\session-1792860309976716-1-0\\card2.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "finalized_complete_untainted": true,
+          "startup_artifact_bindings_verified": true,
+          "actual_image_manifest_execution_verified": true
+        },
+        {
+          "profile": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-1",
+          "session": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-1\\saves\\input-recordings\\session-1792860309976131-1-0",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "97b2281e2dabed61c40bdd319eaf6dc22623aa55371de6d2631845e3750b02e4",
+            "manifest_sha256": "9345a5ca54c490ef81f7549d199a54ef4b40c8d956bf8c2e2e0dae4c49224b49",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "6db4081f8c3d22db733f3511bab324fa4c9888fafd87b54752b02fbb48e030a2"
+            },
+            "settings_sha256": "044e11d1f7a28e0f9fa2d9e77bb1569c9fcc0d972875b326848bfeb53760286e",
+            "simulation_contract_sha256": "d7943ab4f9db6a8aa481123c0aa227fdcb11932d1fa0de2de898be12c3bc75f6"
+          },
+          "events": 5893,
+          "natives": 2822,
+          "p2_reads": 3071,
+          "stream_sha256": "cc213371cacdeb9caad198880a33ab4dd7837912ddc6c2c5f8f0711f178c8a6e",
+          "primary_nonzero_native_calls": 1202,
+          "partner_nonzero_native_consumption": 30,
+          "native_callers": [
+            2147557920,
+            2147592244,
+            2147592984
+          ],
+          "first_sim_tick": 365,
+          "last_sim_tick": 3381,
+          "actual_finalized_location_pointer": "mmx6 diagnostics: finalized capture G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-1\\saves\\input-recordings\\session-1792860309976131-1-0",
+          "stderr": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-1\\logs\\stderr.log",
+            "bytes": 20982,
+            "sha256": "67993ffddbccd9a8cabfa1db6adbb3c7583b7398d30ddf0164da5aa698af2dfa"
+          },
+          "artifacts": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-1\\saves\\input-recordings\\session-1792860309976131-1-0\\inputs.jsonl",
+              "bytes": 756553,
+              "sha256": "50079d1f38263d8b33fb5c9031b58d41475f3d5c0cd547e561e2bb08140b2997"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-1\\saves\\input-recordings\\session-1792860309976131-1-0\\status.json",
+              "bytes": 160,
+              "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-1\\saves\\input-recordings\\session-1792860309976131-1-0\\settings.json",
+              "bytes": 26735,
+              "sha256": "044e11d1f7a28e0f9fa2d9e77bb1569c9fcc0d972875b326848bfeb53760286e"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-1\\saves\\input-recordings\\session-1792860309976131-1-0\\content.json",
+              "bytes": 567,
+              "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-1\\saves\\input-recordings\\session-1792860309976131-1-0\\simulation-contract.json",
+              "bytes": 350,
+              "sha256": "d7943ab4f9db6a8aa481123c0aa227fdcb11932d1fa0de2de898be12c3bc75f6"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-1\\saves\\input-recordings\\session-1792860309976131-1-0\\card1.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-side-by-side-crc-window\\peer-1\\saves\\input-recordings\\session-1792860309976131-1-0\\card2.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "finalized_complete_untainted": true,
+          "startup_artifact_bindings_verified": true,
+          "actual_image_manifest_execution_verified": true
+        }
+      ],
+      "actual_execution_ids": [
+        "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9"
+      ]
+    },
+    {
+      "case": "menu-continuity-pair-v24-1f50059-charged-stacked",
+      "mode": "netplay",
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\qualification.json",
+        "bytes": 11337555,
+        "sha256": "c93951d8ef101b75d2bbba4a3ccb3ffc139cca56afa02ad1c1bb1a0a9cf3044b"
+      },
+      "parent_status": "passed",
+      "peers": [
+        {
+          "profile": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-0",
+          "session": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-0\\saves\\input-recordings\\session-1792858726073589-1-0",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "97b2281e2dabed61c40bdd319eaf6dc22623aa55371de6d2631845e3750b02e4",
+            "manifest_sha256": "9345a5ca54c490ef81f7549d199a54ef4b40c8d956bf8c2e2e0dae4c49224b49",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "f7630c1ebaadc176b9e15e26e3839202fd841ec281fa1719b83e8b9380948c72"
+            },
+            "settings_sha256": "678ea0742d375e120ec86c29053b60d74181951ceb43831bbca670a5875771e6",
+            "simulation_contract_sha256": "7a0bd2281607a62678628eab59e1eb587866c46640aa6a66e6ab7498b961dda6"
+          },
+          "events": 18729,
+          "natives": 8356,
+          "p2_reads": 10373,
+          "stream_sha256": "e94ca30ceb999f435757b31fb32e543204edad5b8385c9136c4a062aaf06329f",
+          "primary_nonzero_native_calls": 6005,
+          "partner_nonzero_native_consumption": 109,
+          "native_callers": [
+            2147557920,
+            2147592244,
+            2147592984
+          ],
+          "first_sim_tick": 365,
+          "last_sim_tick": 8935,
+          "actual_finalized_location_pointer": "mmx6 diagnostics: finalized capture G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-0\\saves\\input-recordings\\session-1792858726073589-1-0",
+          "stderr": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-0\\logs\\stderr.log",
+            "bytes": 55380,
+            "sha256": "6a2c4f04441e088aa14dd83a3b8b19d01a04a4f988508fe3882f13181fd50bca"
+          },
+          "artifacts": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-0\\saves\\input-recordings\\session-1792858726073589-1-0\\inputs.jsonl",
+              "bytes": 2402504,
+              "sha256": "a4ea0af5913bdcf56351f80b1354b581eaf1407a851e9b421de9e1b30178eedf"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-0\\saves\\input-recordings\\session-1792858726073589-1-0\\status.json",
+              "bytes": 160,
+              "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-0\\saves\\input-recordings\\session-1792858726073589-1-0\\settings.json",
+              "bytes": 26708,
+              "sha256": "678ea0742d375e120ec86c29053b60d74181951ceb43831bbca670a5875771e6"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-0\\saves\\input-recordings\\session-1792858726073589-1-0\\content.json",
+              "bytes": 567,
+              "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-0\\saves\\input-recordings\\session-1792858726073589-1-0\\simulation-contract.json",
+              "bytes": 350,
+              "sha256": "7a0bd2281607a62678628eab59e1eb587866c46640aa6a66e6ab7498b961dda6"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-0\\saves\\input-recordings\\session-1792858726073589-1-0\\card1.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-0\\saves\\input-recordings\\session-1792858726073589-1-0\\card2.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "finalized_complete_untainted": true,
+          "startup_artifact_bindings_verified": true,
+          "actual_image_manifest_execution_verified": true
+        },
+        {
+          "profile": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-1",
+          "session": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-1\\saves\\input-recordings\\session-1792858726073629-1-0",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "97b2281e2dabed61c40bdd319eaf6dc22623aa55371de6d2631845e3750b02e4",
+            "manifest_sha256": "9345a5ca54c490ef81f7549d199a54ef4b40c8d956bf8c2e2e0dae4c49224b49",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "f7630c1ebaadc176b9e15e26e3839202fd841ec281fa1719b83e8b9380948c72"
+            },
+            "settings_sha256": "8675b5fc560c2a45be3bb48e46e7b3e21c76f071a18c8809038a7e664fd28605",
+            "simulation_contract_sha256": "7a0bd2281607a62678628eab59e1eb587866c46640aa6a66e6ab7498b961dda6"
+          },
+          "events": 18729,
+          "natives": 8356,
+          "p2_reads": 10373,
+          "stream_sha256": "717a40fbe4fc9a1318937d6a273abe9328cf315f8608d08bcdfeabe3a0eb314d",
+          "primary_nonzero_native_calls": 6005,
+          "partner_nonzero_native_consumption": 109,
+          "native_callers": [
+            2147557920,
+            2147592244,
+            2147592984
+          ],
+          "first_sim_tick": 365,
+          "last_sim_tick": 8935,
+          "actual_finalized_location_pointer": "mmx6 diagnostics: finalized capture G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-1\\saves\\input-recordings\\session-1792858726073629-1-0",
+          "stderr": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-1\\logs\\stderr.log",
+            "bytes": 55500,
+            "sha256": "a294b8e75c16314f374a14f8ec49e86136359bf9fe69c4fb80f32259123de0ba"
+          },
+          "artifacts": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-1\\saves\\input-recordings\\session-1792858726073629-1-0\\inputs.jsonl",
+              "bytes": 2402504,
+              "sha256": "1d9b09f3e8cb935212031ac860955d3930bb86902f4757410779e3109615bdf7"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-1\\saves\\input-recordings\\session-1792858726073629-1-0\\status.json",
+              "bytes": 160,
+              "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-1\\saves\\input-recordings\\session-1792858726073629-1-0\\settings.json",
+              "bytes": 26708,
+              "sha256": "8675b5fc560c2a45be3bb48e46e7b3e21c76f071a18c8809038a7e664fd28605"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-1\\saves\\input-recordings\\session-1792858726073629-1-0\\content.json",
+              "bytes": 567,
+              "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-1\\saves\\input-recordings\\session-1792858726073629-1-0\\simulation-contract.json",
+              "bytes": 350,
+              "sha256": "7a0bd2281607a62678628eab59e1eb587866c46640aa6a66e6ab7498b961dda6"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-1\\saves\\input-recordings\\session-1792858726073629-1-0\\card1.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-continuity-pair-v24-1f50059-charged-stacked\\peer-1\\saves\\input-recordings\\session-1792858726073629-1-0\\card2.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "finalized_complete_untainted": true,
+          "startup_artifact_bindings_verified": true,
+          "actual_image_manifest_execution_verified": true
+        }
+      ],
+      "actual_execution_ids": [
+        "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9"
+      ]
+    },
+    {
+      "case": "menu-post-attacks-pair-v24-1f50059",
+      "mode": "netplay",
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\qualification.json",
+        "bytes": 15400881,
+        "sha256": "7cb81ced904ab6a46434ef9c3245eb4beee73542bc24c839c40c71067be4d0c5"
+      },
+      "parent_status": "passed",
+      "peers": [
+        {
+          "profile": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-0",
+          "session": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-0\\saves\\input-recordings\\session-1792859470178556-1-0",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "97b2281e2dabed61c40bdd319eaf6dc22623aa55371de6d2631845e3750b02e4",
+            "manifest_sha256": "9345a5ca54c490ef81f7549d199a54ef4b40c8d956bf8c2e2e0dae4c49224b49",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "00ca1a3fd2c81cdcc4cf8fb23b04237c854a908555f6a7f8916d077bbbfdcb92"
+            },
+            "settings_sha256": "678ea0742d375e120ec86c29053b60d74181951ceb43831bbca670a5875771e6",
+            "simulation_contract_sha256": "2af2c5f067c6f4fbd284191a73f80b52be74308917457f79bce9e7b9fba07752"
+          },
+          "events": 8642,
+          "natives": 3813,
+          "p2_reads": 4829,
+          "stream_sha256": "8d09730687fbfd236efa076581650532f8b8a5d14b8a355c112c8f2044293a6d",
+          "primary_nonzero_native_calls": 980,
+          "partner_nonzero_native_consumption": 125,
+          "native_callers": [
+            2147557920,
+            2147592244,
+            2147592984
+          ],
+          "first_sim_tick": 365,
+          "last_sim_tick": 4371,
+          "actual_finalized_location_pointer": "mmx6 diagnostics: finalized capture G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-0\\saves\\input-recordings\\session-1792859470178556-1-0",
+          "stderr": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-0\\logs\\stderr.log",
+            "bytes": 27119,
+            "sha256": "045f11d952ab83b7b67ec563e14b45d0b7291303aef103cf6f2b105c2b151db2"
+          },
+          "artifacts": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-0\\saves\\input-recordings\\session-1792859470178556-1-0\\inputs.jsonl",
+              "bytes": 1108680,
+              "sha256": "5889cc487d4d39f0d72739d5e85487728e9b99418dce4fe9304c2b2df734ba28"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-0\\saves\\input-recordings\\session-1792859470178556-1-0\\status.json",
+              "bytes": 160,
+              "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-0\\saves\\input-recordings\\session-1792859470178556-1-0\\settings.json",
+              "bytes": 26708,
+              "sha256": "678ea0742d375e120ec86c29053b60d74181951ceb43831bbca670a5875771e6"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-0\\saves\\input-recordings\\session-1792859470178556-1-0\\content.json",
+              "bytes": 567,
+              "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-0\\saves\\input-recordings\\session-1792859470178556-1-0\\simulation-contract.json",
+              "bytes": 350,
+              "sha256": "2af2c5f067c6f4fbd284191a73f80b52be74308917457f79bce9e7b9fba07752"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-0\\saves\\input-recordings\\session-1792859470178556-1-0\\card1.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-0\\saves\\input-recordings\\session-1792859470178556-1-0\\card2.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "finalized_complete_untainted": true,
+          "startup_artifact_bindings_verified": true,
+          "actual_image_manifest_execution_verified": true
+        },
+        {
+          "profile": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-1",
+          "session": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-1\\saves\\input-recordings\\session-1792859470178704-1-0",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "97b2281e2dabed61c40bdd319eaf6dc22623aa55371de6d2631845e3750b02e4",
+            "manifest_sha256": "9345a5ca54c490ef81f7549d199a54ef4b40c8d956bf8c2e2e0dae4c49224b49",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "00ca1a3fd2c81cdcc4cf8fb23b04237c854a908555f6a7f8916d077bbbfdcb92"
+            },
+            "settings_sha256": "8675b5fc560c2a45be3bb48e46e7b3e21c76f071a18c8809038a7e664fd28605",
+            "simulation_contract_sha256": "2af2c5f067c6f4fbd284191a73f80b52be74308917457f79bce9e7b9fba07752"
+          },
+          "events": 8642,
+          "natives": 3813,
+          "p2_reads": 4829,
+          "stream_sha256": "294284305235475909b23e7ad58f7f6faae3ecf96be49369e399a37032bf9113",
+          "primary_nonzero_native_calls": 980,
+          "partner_nonzero_native_consumption": 125,
+          "native_callers": [
+            2147557920,
+            2147592244,
+            2147592984
+          ],
+          "first_sim_tick": 365,
+          "last_sim_tick": 4371,
+          "actual_finalized_location_pointer": "mmx6 diagnostics: finalized capture G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-1\\saves\\input-recordings\\session-1792859470178704-1-0",
+          "stderr": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-1\\logs\\stderr.log",
+            "bytes": 26999,
+            "sha256": "6dda37e4c95bef3065500f52d1e40cf8c16e004d0cd4a85f0e7a5cd36ae84b1c"
+          },
+          "artifacts": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-1\\saves\\input-recordings\\session-1792859470178704-1-0\\inputs.jsonl",
+              "bytes": 1108680,
+              "sha256": "8ecb1fc803d8be0547e7e3b9750df9094f2664bbad45351beaab549b80cfa632"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-1\\saves\\input-recordings\\session-1792859470178704-1-0\\status.json",
+              "bytes": 160,
+              "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-1\\saves\\input-recordings\\session-1792859470178704-1-0\\settings.json",
+              "bytes": 26708,
+              "sha256": "8675b5fc560c2a45be3bb48e46e7b3e21c76f071a18c8809038a7e664fd28605"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-1\\saves\\input-recordings\\session-1792859470178704-1-0\\content.json",
+              "bytes": 567,
+              "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-1\\saves\\input-recordings\\session-1792859470178704-1-0\\simulation-contract.json",
+              "bytes": 350,
+              "sha256": "2af2c5f067c6f4fbd284191a73f80b52be74308917457f79bce9e7b9fba07752"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-1\\saves\\input-recordings\\session-1792859470178704-1-0\\card1.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\menu-post-attacks-pair-v24-1f50059\\peer-1\\saves\\input-recordings\\session-1792859470178704-1-0\\card2.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "finalized_complete_untainted": true,
+          "startup_artifact_bindings_verified": true,
+          "actual_image_manifest_execution_verified": true
+        }
+      ],
+      "actual_execution_ids": [
+        "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9"
+      ]
+    }
+  ],
+  "compiled_source": "1f50059cf85f1022ae0097340926887de7ed13ec",
+  "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+  "checks": {
+    "three_separate_local_sessions": true,
+    "three_separate_paired_sessions": true,
+    "nine_finalized_native_consumption_traces": true,
+    "actual_finalized_non_C_location_pointers": true,
+    "canonical_complete_untainted_streams": true,
+    "both_heroes_actual_nonzero_consumption": true,
+    "actual_image_manifest_execution_and_startup_artifact_binding": true,
+    "netplay_mode_and_tick_data_retained": true
+  }
+}

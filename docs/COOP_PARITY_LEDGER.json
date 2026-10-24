@@ -6176,17 +6176,84 @@
           "src/mods/mmx6_coop_plugin.c:diagnostics",
           "src/mods/mmx6_coop_plugin.c:diagnostic_setup"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "1f50059cf85f1022ae0097340926887de7ed13ec",
+            "build_identity": {
+              "executable_sha256": "97b2281e2dabed61c40bdd319eaf6dc22623aa55371de6d2631845e3750b02e4",
+              "compiled_manifest_sha256": "9345a5ca54c490ef81f7549d199a54ef4b40c8d956bf8c2e2e0dae4c49224b49",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "be66fa2"
+            },
+            "settings": {
+              "native_mode": "offline",
+              "separate_sessions": 3,
+              "traces": 3,
+              "storage_root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity",
+              "startup": "Per-trace resolved settings/content/simulation-contract and both initial private cards retained and hash-verified",
+              "profile": "ordinary offline native-consumption"
+            },
+            "action": "Review three independent original-input sessions and actual native finalized output-location pointers; validate canonical full accepted native N/P2 event streams and bound startup bytes.",
+            "outcome": "3 complete untainted finalized traces in3 separate sessions under G:, with actual P1 nonzero native calls and actual nonzero private P2 consumption in every trace. Exact runtime image/manifest/execution and startup-artifact hashes match; native finalization logs identify every real path.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-recordings/finalized-sessions-1f50059-non-C-reviewed.json",
+                "sha256": "12f41a18d7698e5bef2a1ef3445d03c56466459b5ca2ca1a5a3ec94843e571df"
+              }
+            ],
+            "limits": [
+              "Historical exact1f50059 image sessions, independently validated in both required modes. This does not qualify new renderer gameplay, input performance/F143, full SIO, replay, rollback or crossbuild compatibility.",
+              "Parent menu/artwork and generic full-HP observer failures remain retained and separate. A canonical complete untainted recording is the F38 contract; no parent gameplay pass is inferred.",
+              "Netplay data is validated in netplay mode and retains actual simulation ticks; it is not admitted as an offline replay or substituted for resolved peer-state proof."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "1f50059cf85f1022ae0097340926887de7ed13ec",
+            "build_identity": {
+              "executable_sha256": "97b2281e2dabed61c40bdd319eaf6dc22623aa55371de6d2631845e3750b02e4",
+              "compiled_manifest_sha256": "9345a5ca54c490ef81f7549d199a54ef4b40c8d956bf8c2e2e0dae4c49224b49",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "be66fa2"
+            },
+            "settings": {
+              "native_mode": "netplay",
+              "separate_sessions": 3,
+              "traces": 6,
+              "storage_root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity",
+              "startup": "Per-trace resolved settings/content/simulation-contract and both initial private cards retained and hash-verified",
+              "profile": "mmx6.win64-clang22.loopback revision2"
+            },
+            "action": "Review three independent original-input sessions and actual native finalized output-location pointers; validate canonical full accepted native N/P2 event streams and bound startup bytes.",
+            "outcome": "6 complete untainted finalized traces in3 separate sessions under G:, with actual P1 nonzero native calls and actual nonzero private P2 consumption in every trace. Exact runtime image/manifest/execution and startup-artifact hashes match; native finalization logs identify every real path.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-recordings/finalized-sessions-1f50059-non-C-reviewed.json",
+                "sha256": "12f41a18d7698e5bef2a1ef3445d03c56466459b5ca2ca1a5a3ec94843e571df"
+              }
+            ],
+            "limits": [
+              "Historical exact1f50059 image sessions, independently validated in both required modes. This does not qualify new renderer gameplay, input performance/F143, full SIO, replay, rollback or crossbuild compatibility.",
+              "Parent menu/artwork and generic full-HP observer failures remain retained and separate. A canonical complete untainted recording is the F38 contract; no parent gameplay pass is inferred.",
+              "Netplay data is validated in netplay mode and retains actual simulation ticks; it is not admitted as an offline replay or substituted for resolved peer-state proof."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Passed bounded recording discoverability/finalization on exact1f50059:3 local sessions plus3 paired sessions(9 traces), actual non-C finalization pointers, canonical complete untainted accepted native input and startup/image bindings. No replay/performance/full-SIO/current-renderer gameplay claim."
       }
     },
     {
