@@ -15,6 +15,7 @@ import coop_debug as debug
 import qualify_mmx6_coop_personal_menu as menus
 import qualify_mmx6_coop_state as state
 import mmx6_owned_keyboard as keyboard_input
+import mmx6_coop_state_resources as resource_input
 
 
 SUCCESS='bounded_mapped_state_controls_observed'
@@ -149,7 +150,7 @@ def restored_publications(case,saved,label):
     return restored,checks
 
 
-def exercise(ctx,*,output,timeout=12,keyboard=False):
+def exercise(ctx,*,output,timeout=12,keyboard=False,resource_sources=None):
     require(ctx['mode']=='local' and ctx['input_path']=='published_host','Mapped states need the owned local host route')
     output.mkdir(parents=True,exist_ok=False)
     evidence={};ctx['report']['mapped_state']=evidence
@@ -182,9 +183,14 @@ def exercise(ctx,*,output,timeout=12,keyboard=False):
         evidence['checks']['keyboard_s_saved_live_private_pools' if keyboard else 'mapped_square_saved_live_private_pools']=True
         evidence['status']='failed_behavior'
         case.resume_and_retire(reference,'before-mapped-load')
+        damaged=resource_input.exercise(ctx,case,resource_sources) if resource_sources else None
         controls.operation('load',0)
         reference,checks=restored_publications(case,saved,'Actual keyboard L restores private pools' if keyboard else 'Actual mapped Cross restores private pools')
         evidence['checks'].update(checks)
+        if damaged is not None:
+            resource_checks=resource_input.restored_resources(before[0],damaged,reference)
+            require(all(resource_checks.values()),'Mapped load did not restore genuinely changed personal HP')
+            evidence['checks'].update(resource_checks)
         evidence['checks']['keyboard_l_provider_probe' if keyboard else 'mapped_cross_provider_probe']=all(probe('mapped-load',saved).values())
 
         bad=malformed_current_wire(Path(image['path']).read_bytes());bad_path=output/'invalid-internal-wire4.pst'

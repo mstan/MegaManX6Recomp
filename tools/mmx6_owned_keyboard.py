@@ -69,8 +69,16 @@ class OwnedKeyboard:
 
     def until(self,key,predicate,wait,label):
         self.post(key,False)
+        failure=None
         try:return wait(predicate,label)
-        finally:self.post(key,True)
+        except BaseException as error:
+            failure=error
+            raise
+        finally:
+            try:self.post(key,True)
+            except Exception as error:
+                self.evidence.setdefault('keyboard_release_errors',[]).append(dict(key=key,error=str(error)))
+                if failure is None:raise
 
     def held(self,key,seconds):
         if type(seconds) not in (int,float) or not 0<seconds<=4:raise ValueError('Require a bounded keyboard seek hold')

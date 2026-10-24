@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 6 passed (R2, R4, R7, R8, R12, R13), 2 failed (R15, F208), 226 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 6 passed (R2, R4, R7, R8, R12, R13), 3 failed (R15, F33, F208), 225 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -43,7 +43,8 @@ states; old-state migration is never required.
 
 All 234 reference rows are inventoried; 6/234 (2.6%) are passed. R15/F208
 retain prior native Quit callback failures with broader transition checks
-incomplete. Earlier audio failures remain in R4/R12 history, followed by
+incomplete. F33 now fails its online disabled-browser dwell case, detailed
+below. Earlier audio failures remain in R4/R12 history, followed by
 current-image local and paired passes of their frozen bounded checks.
 
 The [combined R4/R12 receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-R4-R12-reviewed.json)
@@ -105,6 +106,23 @@ netplay evidence explicitly block online savestates and rewind; X5 also blocks
 online savestates. X6 still needs a two-peer runtime refusal and synchronization
 check against that contract. F33 local/netplay and the234-row totals remain
 unchanged.
+
+The [native resource and paired state-policy receipt](evidence/mmx6-private-state/manifest-bound-22ea525-resources-and-policy-reviewed.json)
+adds37 local checks: authored gameplay damages X32->30 and Zero32->28 before
+F7/L restores both to32 and the saved provider/native state. Three completed
+provider probes each pass17 comparisons; the owned process exits0 and cards
+are unchanged. Ammo spending and weapon restoration remain unverified.
+The paired short case passes keyboard and controller save/load/rewind refusal
+on both peers, with fresh resolved CRC windows, normal exits0 and unchanged
+cards. However, retaining the disabled F7 browser for12seconds reproduces
+an `emu busy or frozen` response on close and both peers end the match.
+The state generation remains0, with no pending operation or card mutation.
+F33 netplay/aggregate are therefore **failed**, while local stays unverified.
+All237 selected Python checks pass; they do not override this native failure.
+The first observer's invalid transport wait inside modal UI was corrected;
+the separate earlier keyboard-close failure and the short pass remain retained.
+Framework issue **beads-eio.3.382** owns the runtime fix and requalification.
+No runtime fix or changed native binary is included in this milestone.
 
 ### Earlier audio milestones
 

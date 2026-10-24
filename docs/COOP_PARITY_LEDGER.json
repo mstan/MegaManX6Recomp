@@ -4797,14 +4797,14 @@
           "src/mods/mmx6_coop_plugin.c:diagnostics",
           "src/mods/mmx6_coop_plugin.c:diagnostic_setup"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "unverified",
-          "netplay": "unverified"
+          "netplay": "failed"
         },
         "evidence": [
           {
@@ -5014,9 +5014,94 @@
               "Unsupported internal wire4 is forged only in a disposable current-build state to test rejection; no gameplay completion/resource flags are written.",
               "Published host pad samples drive gameplay; the state/rewind UI uses posted messages scoped to the owned SDL HWND. Physical keyboard hardware remains unverified."
             ]
+          },
+          {
+            "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+            "build_identity": {
+              "exe_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+              "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+              "compiled_source_commit": "22ea525bbc52b5177f501989fedc5873ef30099c",
+              "sdk_commit": "09e8673435c73e516b420e6c13bb11f02dc8aaea"
+            },
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-private-state\\manifest-bound-22ea525-resources-and-policy-reviewed.json",
+                "sha256": "8abb052c838317382e20461da2a4ad4ca7ecfa5b46f5b6f44607b2c317098564"
+              }
+            ],
+            "limits": [
+              "HP restoration is proven after native damage to both heroes. Ammo spending and weapon changes remain unverified.",
+              "Short paired keyboard/controller refusal passed, but the12-second disabled browser dwell failed; F33 netplay is failed, not passed.",
+              "The first paired observer incorrectly waited for transport inside the modal browser. The second keyboard-close failure remains unresolved; neither historical failure is erased by the short pass.",
+              "Dwell reproduction closes via owned Win32/SDL F7 and fails before a transport wait inside the browser; raw busy response and peer match-ended logs are retained.",
+              "No engine fix or changed native binary is included. The existing browser modal pause loop is a source-supported candidate cause pending implementation and native requalification.",
+              "Same-machine Windows, exact22ea525 image/profile, X/P1 + Zero/P2 intro only; physical keyboard hardware, other locations/rosters/hosts remain separate.",
+              "No ordered recording/replay, rollback, active-voice rewind or nonzero-priority restoration qualification. Native cards are separate and preserved; old-state compatibility is never required."
+            ],
+            "bypasses": [
+              "No guest HP, ammo, completion flags or save data written. Only host input and disposable current-build state operations are used."
+            ],
+            "mode": "local",
+            "result": "unverified",
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro stage0/section0/checkpoint0",
+              "loading": "default Seamless Loading",
+              "input": "owned published host gameplay slots; Win32/SDL keyboard state UI on exact owned HWND",
+              "rewind": true,
+              "rewind_depth": 50,
+              "rewind_interval": 8,
+              "ordered_recording": "SDK excludes rewind timelines; no ordered capture/replay qualification",
+              "audio": "emulated; muted SDL dummy output",
+              "rollback": false,
+              "resource_damage": "original authored gameplay, no HP writes"
+            },
+            "action": "Damage Zero through accepted original strength4 contact, then X through native gameplay; use F7/L to restore the saved paused state and repeat invalid-provider/rewind checks.",
+            "outcome": "All37 checks pass: X32->30 and Zero32->28, then mapped load restores both32 and complete saved provider/native state; three17-check probes, natural exit0, existing cards unchanged. Ammo spending remains unverified."
+          },
+          {
+            "candidate": "22ea525bbc52b5177f501989fedc5873ef30099c",
+            "build_identity": {
+              "exe_sha256": "4b31864f20b274b902f1d78fb35b94dee0d995a5bebc14e70c409f865090ab21",
+              "declared_manifest_sha256": "12fe4747a7a23ea7460b31f030250ae931e3ca9c579dba1ab90ef950ee844311",
+              "compiled_source_commit": "22ea525bbc52b5177f501989fedc5873ef30099c",
+              "sdk_commit": "09e8673435c73e516b420e6c13bb11f02dc8aaea"
+            },
+            "artifacts": [
+              {
+                "path": "docs\\evidence\\mmx6-private-state\\manifest-bound-22ea525-resources-and-policy-reviewed.json",
+                "sha256": "8abb052c838317382e20461da2a4ad4ca7ecfa5b46f5b6f44607b2c317098564"
+              }
+            ],
+            "limits": [
+              "HP restoration is proven after native damage to both heroes. Ammo spending and weapon changes remain unverified.",
+              "Short paired keyboard/controller refusal passed, but the12-second disabled browser dwell failed; F33 netplay is failed, not passed.",
+              "The first paired observer incorrectly waited for transport inside the modal browser. The second keyboard-close failure remains unresolved; neither historical failure is erased by the short pass.",
+              "Dwell reproduction closes via owned Win32/SDL F7 and fails before a transport wait inside the browser; raw busy response and peer match-ended logs are retained.",
+              "No engine fix or changed native binary is included. The existing browser modal pause loop is a source-supported candidate cause pending implementation and native requalification.",
+              "Same-machine Windows, exact22ea525 image/profile, X/P1 + Zero/P2 intro only; physical keyboard hardware, other locations/rosters/hosts remain separate.",
+              "No ordered recording/replay, rollback, active-voice rewind or nonzero-priority restoration qualification. Native cards are separate and preserved; old-state compatibility is never required."
+            ],
+            "bypasses": [
+              "No guest HP, ammo, completion flags or save data written. Only host input and disposable current-build state operations are used."
+            ],
+            "mode": "netplay",
+            "result": "failed",
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro",
+              "transport": "same-machine loopback delay3",
+              "rewind_enabled": true,
+              "rewind_depth": 20,
+              "rewind_interval": 8,
+              "profile": "mmx6.win64-clang22.loopback revision2",
+              "audio": "emulated, muted dummy output"
+            },
+            "action": "With actual common profile before frame0, open disabled F7 browser and retain it for12seconds, then attempt refused save/load and close; inspect completed operation counter, peer liveness and native logs.",
+            "outcome": "Short keyboard/controller refusal passes both peers with fresh resolved CRC samples and natural exits0. The12second dwell reproduces emu busy/frozen on close and both peers end the match. Generation stays0/pending0 and cards unchanged. This is a failed online disposition; no runtime fix is claimed."
           }
         ],
-        "limitations": "Bounded current-wire warm/cold state, active vocal restore, controller and owned Win32/SDL keyboard state/rewind checks pass. HP/ammo/weapon were preserved without genuine resource perturbation. F33 remains unverified pending meaningful resource restoration and runtime verification of the frozen X4 online refusal contract; no old-state compatibility requirement."
+        "limitations": "Both heroes native HP divergence/restoration is proven on22ea525; ammo spending/weapon restoration remain open. Online short keyboard/controller refusal passes, but12second dwell in the disabled browser reproduces native busy/freeze and loss of match. F33 netplay/aggregate failed until the runtime behavior is fixed and requalified. No old-state compatibility requirement."
       }
     },
     {

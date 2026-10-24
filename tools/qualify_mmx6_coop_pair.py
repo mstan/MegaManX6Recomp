@@ -248,8 +248,11 @@ def run(args) -> dict:
         personal_menu = importlib.import_module("mmx6_coop_personal_menu")
         modules += (personal_menu,)
     private_pause = effects = published_input = native_quit = None
-    reentry_pair = source_validation = audio_pair = None
-    if getattr(args,"jump_audio_smoke",False):
+    reentry_pair = source_validation = audio_pair = state_policy = None
+    if getattr(args,"state_policy_smoke",False):
+        state_policy=importlib.import_module("mmx6_coop_state_policy")
+        modules+=(state_policy,state_policy.keyboard)
+    if getattr(args,"jump_audio_smoke",False) or state_policy is not None:
         audio_pair=importlib.import_module("mmx6_coop_jump_audio_pair")
         source_validation=audio_pair.sources
         modules+=(audio_pair,audio_pair.audio,audio_pair.ownership,audio_pair.ownership.host,source_validation)
@@ -352,10 +355,15 @@ def run(args) -> dict:
         report.update(jump_audio_source=audio_source,jump_audio_prepared=[],ledger_status="unverified",
             r4="unverified",r12="unverified",audible_output="not_tested",jump_audio_source_snapshots=[])
         report["checks"]["jump_audio_original_source_bound"]=True
-        report["checks"]["jump_audio_both_peers_completed"]=False
+        report["checks"]["state_policy_both_peers_completed" if state_policy is not None else "jump_audio_both_peers_completed"]=False
         for module in (audio_pair,audio_pair.audio,audio_pair.ownership,audio_pair.ownership.host,source_validation):
             path=output/(Path(module.__file__).stem+"-executed-source.py");path.write_bytes(Path(module.__file__).read_bytes())
             report["jump_audio_source_snapshots"].append(dict(path=str(path),sha256=preparation.sha256(path)))
+    if state_policy is not None:
+        report["kind"]="owned_loopback_delay_state_policy"
+        for module in (state_policy,state_policy.keyboard):
+            (output/(Path(module.__file__).stem+"-executed-source.py")).write_bytes(Path(module.__file__).read_bytes())
+        report["limits"].append("State policy uses enabled rewind preferences; no ordered recording or audio qualification is claimed")
     handles, processes, clients, reservations = [], [], [], []
     executor = ThreadPoolExecutor(max_workers=2)
     runtime_ready = False
@@ -513,8 +521,12 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             if reentry_pair is not None:
                 report["native_reentry_prepared"].append(reentry_pair.prepare_profile(directory,args.disc,args.original_disc))
             if audio_pair is not None:
-                report["jump_audio_prepared"].append(audio_pair.ownership.prepare_profile(directory,args.disc,args.original_disc))
-                audio_pair.sources.verify_prepared_originals(directory,args.original_exe,args.disc)
+                prepared=audio_pair.ownership.prepare_profile(directory,args.disc,args.original_disc)
+                if state_policy is not None:
+                    prepared=state_policy.enable_rewind(directory,prepared)
+                report["jump_audio_prepared"].append(prepared)
+                audio_pair.sources.verify_prepared_originals(directory,args.original_exe,args.disc,
+                    expected_rewind=state_policy is not None)
             environment = baseline.candidate_environment(directory, receipt)
             # Discard inherited developer/session controls, then reapply only
             # the validated private paths and fixed LAN/delay policies.
@@ -715,7 +727,14 @@ enabled = {str(not args.native_loader_diagnostic).lower()}
             all(player.hp == 32 for player in row.players) for row in settled)
         report["checks"]["mailbox_unused"] = all(row.mailbox == 0 for row in settled)
         matched("P1 jump then settle")
-        if audio_pair is not None:
+        if state_policy is not None:
+            loader_logs=[(output/f"peer-{seat}/logs/stdout.log").read_text(errors="replace") for seat in range(2)]
+            require(all("title netplay loading = resident assets" in text for text in loader_logs),
+                    "State policy default resident loader did not commit on both peers")
+            report["checks"]["default_resident_loader_committed"]=True
+            state_policy.exercise(dict(clients=clients,report=report,output=output,
+                transport_window=transport_window,matched=matched),expected_sha=args.expected_exe_sha256)
+        if audio_pair is not None and state_policy is None:
             loader_logs=[(output/f"peer-{seat}/logs/stdout.log").read_text(errors="replace") for seat in range(2)]
             require(all("title netplay loading = resident assets" in text for text in loader_logs),
                     "Audio default resident loader did not commit on both peers")
@@ -1041,6 +1060,8 @@ def make_parser():
     parser.add_argument("--native-quit-scenario",choices=("guest_authority","p1_pages_cancel","p1_pages_cancel_live_effects"),
                         help="Separate fresh native Quit authority or primary pages/cancel case; exact image, original EXE, host profile and resolved CRC required")
     parser.add_argument("--original-exe",type=Path,help="Original SLUS_013.95 source for --native-quit-scenario or --jump-audio-smoke")
+    parser.add_argument("--state-policy-smoke",action="store_true",
+                        help="Verify keyboard/controller state and rewind refusal on both admitted peers with local rewind enabled")
     parser.add_argument("--jump-audio-smoke",action="store_true",
                         help="Separate same-machine paired ground-jump private-bank/sample/DSP/lifetime observation; strict original/image/manifest/profile/CRC proof required")
     parser.add_argument("--body-audio-smoke",action="store_true",
@@ -1072,6 +1093,13 @@ def make_parser():
 
 
 def validate_options(parser, args):
+    if getattr(args,"state_policy_smoke",False):
+        if (args.jump_audio_smoke or args.body_audio_smoke or args.primary_audio_smoke or
+                args.native_quit_scenario or args.native_reentry or args.private_pause_smoke or
+                args.contact_pause_contact_smoke or args.enemy_targeting_smoke or
+                args.personal_menu_smoke or args.lifecycle_smoke or
+                args.audio_first_seat is not None or args.audio_max_attempts is not None):
+            parser.error("State policy requires its own fresh pair without other optional routes/audio options")
     if getattr(args,'primary_audio_smoke',False):
         if not args.jump_audio_smoke:
             parser.error('Primary audio requires full --jump-audio-smoke source/image/profile/CRC gates')
@@ -1100,7 +1128,7 @@ def validate_options(parser, args):
         if (args.private_pause_smoke or args.contact_pause_contact_smoke or args.enemy_targeting_smoke or
                 args.personal_menu_smoke or args.lifecycle_smoke or args.native_reentry or args.jump_audio_smoke):
             parser.error("Each native Quit scenario requires a separate fresh pair without other optional routes")
-    elif args.original_exe is not None and not args.jump_audio_smoke:
+    elif args.original_exe is not None and not args.jump_audio_smoke and not getattr(args,"state_policy_smoke",False):
         parser.error("--original-exe belongs to --native-quit-scenario or --jump-audio-smoke")
     if args.native_reentry:
         if (args.admission_only or args.native_loader_diagnostic or not args.require_state_crc or
@@ -1110,7 +1138,7 @@ def validate_options(parser, args):
         if (args.private_pause_smoke or args.contact_pause_contact_smoke or args.enemy_targeting_smoke or
                 args.personal_menu_smoke or args.lifecycle_smoke or args.native_quit_scenario or args.jump_audio_smoke):
             parser.error("Native reentry requires a separate fresh pair without other optional routes")
-    if args.jump_audio_smoke:
+    if args.jump_audio_smoke or getattr(args,"state_policy_smoke",False):
         if (args.admission_only or args.native_loader_diagnostic or not args.require_state_crc or
                 not args.require_host_profile or not args.expected_exe_sha256 or not args.expected_manifest_sha256 or
                 args.original_exe is None or args.original_disc is None or args.original_disc.suffix.lower()!=".bin" or
@@ -1141,7 +1169,7 @@ def validate_options(parser, args):
             parser.error("Contact/menu/contact requires --original-disc with the original raw BIN")
         if args.enemy_targeting_smoke:
             parser.error("Contact/menu/contact and enemy-targeting require separate fresh authored-enemy cases")
-    elif args.original_disc is not None and not args.native_reentry and not args.jump_audio_smoke:
+    elif args.original_disc is not None and not args.native_reentry and not args.jump_audio_smoke and not getattr(args,"state_policy_smoke",False):
         parser.error("--original-disc belongs to --contact-pause-contact-smoke, --native-reentry or --jump-audio-smoke")
     if args.expected_exe_sha256 is not None and (len(args.expected_exe_sha256) != 64 or
             any(c not in "0123456789abcdef" for c in args.expected_exe_sha256)):

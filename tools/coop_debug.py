@@ -109,7 +109,9 @@ class DebugClient:
         except (OSError, UnicodeError, ValueError) as error:
             raise DebugError(f"port {self.port}, {command}: {error}") from error
         if not isinstance(result, dict) or type(result.get("id")) is not int or result["id"] != request_id:
-            raise DebugError(f"{command}: invalid or mismatched response id")
+            received = result.get("id") if isinstance(result, dict) else None
+            detail = str(result.get("err", result.get("error", "")))[:160] if isinstance(result, dict) else ""
+            raise DebugError(f"{command}: invalid or mismatched response id (expected {request_id}, received {received!r}, runtime error={detail!r})")
         if result.get("ok") is not True:
             raise DebugError(f"{command}: runtime rejected command: {str(result)[:240]}")
         return result

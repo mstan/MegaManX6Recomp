@@ -37,5 +37,14 @@ class OwnedKeyboardTests(unittest.TestCase):
             keys.until('F8',lambda:False,wait,'F8')
         self.assertEqual([c.args for c in keys.post.call_args_list],[('F8',False),('F8',True)])
 
+    def test_lost_ownership_during_release_does_not_hide_the_original_error(self):
+        keys=subject.OwnedKeyboard.__new__(subject.OwnedKeyboard);keys.evidence={}
+        keys.post=Mock(side_effect=[None,RuntimeError('listener no longer owned')])
+        def wait(*args):raise ValueError('original native busy response')
+        with self.assertRaisesRegex(ValueError,'original native busy'):
+            keys.until('F7',lambda:False,wait,'F7')
+        self.assertEqual(keys.evidence['keyboard_release_errors'],
+                         [dict(key='F7',error='listener no longer owned')])
+
 
 if __name__=='__main__':unittest.main()

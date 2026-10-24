@@ -21,7 +21,8 @@ def run(args):
     try:
         original=binding.load_sources(args.original_exe,args.original_disc,args.disc,
             args.source/'docs/COOP_JUMP_AUDIO_CONTRACT.json')
-        for module in (mapped,state,owner,binding,mapped.menus,mapped.keyboard_input):
+        for module in (mapped,state,owner,binding,mapped.menus,mapped.keyboard_input,mapped.resource_input,
+                       mapped.resource_input.zero_contact,mapped.resource_input.native_contact):
             p=Path(module.__file__);(output/(p.stem+'-executed-source.py')).write_bytes(p.read_bytes())
         (output/'runner-executed-source.py').write_bytes(Path(__file__).read_bytes())
         report['original_disc']=original['disc']
@@ -36,7 +37,12 @@ def run(args):
         report.update(state.validate_state_build(args.build,args.source,[args.build,candidate],args.expected_manifest_sha256,output))
         report['originals']=owner.verify_prepared_originals(candidate,args.original_exe,args.disc,expected_rewind=True)
         report['checks']['exact_image_manifest_declared_sources_originals']=True
-        def observe(ctx):return mapped.exercise(ctx,output=output/'mapped-state',keyboard=args.keyboard)
+        resource_sources=None
+        if args.resource_damage:
+            resource_sources=dict(zero_overlay=mapped.resource_input.zero_contact.load_zero_overlay(args.original_disc),
+                target=mapped.resource_input.native_contact.load_source(args.original_exe,args.original_disc,0))
+        def observe(ctx):return mapped.exercise(ctx,output=output/'mapped-state',keyboard=args.keyboard,
+            resource_sources=resource_sources)
         owner.run_owned(candidate,args.port,args.boot_timeout,12,report['runtime'],original['contract'],
             expected_image=args.expected_exe_sha256,first_seat=0,max_attempts=8,audio_timeout=120,
             private_banks=original['private_banks'],custom_observer=observe,rewind_state_case=True)
@@ -62,6 +68,7 @@ def main():
     for name in ('expected-exe-sha256','expected-manifest-sha256'):p.add_argument('--'+name,required=True)
     p.add_argument('--port',type=int,default=24923);p.add_argument('--boot-timeout',type=int,default=200)
     p.add_argument('--keyboard',action='store_true',help='Use owned Win32/SDL F7/S/L and F8/Left/Enter instead of controller UI shortcuts')
+    p.add_argument('--resource-damage',action='store_true',help='Damage both heroes through native gameplay before mapped load0')
     a=p.parse_args()
     if not 1024<=a.port<=65535 or not 1<=a.boot_timeout<=600:p.error('Require bounded port and boot timeout')
     if any(re.fullmatch('[0-9a-f]{64}',v) is None for v in (a.expected_exe_sha256,a.expected_manifest_sha256)):
