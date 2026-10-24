@@ -1,0 +1,1255 @@
+{
+  "schema": 1,
+  "kind": "reviewed_LOCAL_F12_original_dash_pixels_and_palette_pre_post_menu_with_F6_regression",
+  "reviewed_at_utc": "2026-10-24T22:52:11.670827+00:00",
+  "issue": "beads-gxrh",
+  "compiled_source": "253c74e5a9f33549dacdd0f675b16e76b46cc91a",
+  "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+  "executable_sha256": "472727e56a428b878306939bb25f0f594407c072ded853a2077746bc6e43701b",
+  "compiled_manifest_sha256": "fb7e85ea35bd2bbe31cef6429aac88cd8cac4fa22e286c3e5b26beb8ec1af746",
+  "admitted_modes": {
+    "F12": {
+      "local": "passed",
+      "netplay": "unverified",
+      "aggregate": "unverified"
+    },
+    "F6": {
+      "local": "passed",
+      "netplay": "unverified",
+      "aggregate": "unverified"
+    }
+  },
+  "F12": {
+    "native_palette_reference": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\retained-native-Zero-dash-reference-component-reduction.json",
+      "sha256": "f30ee58e555f3e04be2cdaf23be88668d8d1d070282b59d2ba296f21bc5bb31d",
+      "colors_hex": [
+        "0000328032803280328032803280328032803280328032803280328032803280",
+        "00000e800e800e800e800e800e800e800e800e800e800e800e800e800e800e80",
+        "0000098009800980098009800980098009800980098009800980098009800980"
+      ],
+      "source_sha256": {
+        "source_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+        "source_archive_sha256": "55b03e4ecc13d6110ff300f80b7000b0f97234e19f1b846aa2b885eece30d80f",
+        "source_zero_sha256": "75a142a529ddc70f0d60ee6be32ebcdb0cf5cc90ec88e965c3b15cf0c6d21b00",
+        "sources_verified": true,
+        "running_image_sha256": "229ffec7a7dabda9742653264e1d023adde408602003df7f48b4c4d3f758d8e6"
+      }
+    },
+    "phases": [
+      {
+        "label": "pre-menu",
+        "checks": {
+          "positive_visible_native_window": true,
+          "working_colors_match_original_native": true,
+          "all_three_original_native_color_rows_reach_completed_frame": true
+        },
+        "working_trail_colors_hex": [
+          "0000328032803280328032803280328032803280328032803280328032803280",
+          "00000e800e800e800e800e800e800e800e800e800e800e800e800e800e800e80",
+          "0000098009800980098009800980098009800980098009800980098009800980"
+        ],
+        "actual_used_bank_count": 40,
+        "capture": {
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-native-Zero-dash.png",
+          "sha256": "841b49d5755322479367d40fe37072db131ba5a2d8650a89ce63a968d901b5c8",
+          "before": {
+            "id": 1402,
+            "ok": true,
+            "seq": 0,
+            "wrote": 0
+          },
+          "acknowledgement": {
+            "id": 1403,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-native-Zero-dash.png",
+            "staged": true,
+            "seq": 0
+          },
+          "completion": {
+            "id": 1404,
+            "ok": true,
+            "seq": 1,
+            "wrote": 1
+          }
+        },
+        "completed_gpu": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-completed-GP0.json.gz",
+          "sha256": "1ac464d62760ba481ab4471c96c95adcf388462eb8d5380acc990113f81ba73f",
+          "frame": 2666
+        }
+      },
+      {
+        "label": "post-menu",
+        "checks": {
+          "positive_visible_native_window": true,
+          "working_colors_match_original_native": true,
+          "all_three_original_native_color_rows_reach_completed_frame": true
+        },
+        "working_trail_colors_hex": [
+          "0000328032803280328032803280328032803280328032803280328032803280",
+          "00000e800e800e800e800e800e800e800e800e800e800e800e800e800e800e80",
+          "0000098009800980098009800980098009800980098009800980098009800980"
+        ],
+        "actual_used_bank_count": 4,
+        "capture": {
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\post-menu-native-Zero-dash.png",
+          "sha256": "202eb5c7adaf8a2f3cf12922ce5308ba451c84e1ac25a1d65019f7738338a069",
+          "before": {
+            "id": 1751,
+            "ok": true,
+            "seq": 2,
+            "wrote": 1
+          },
+          "acknowledgement": {
+            "id": 1752,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\post-menu-native-Zero-dash.png",
+            "staged": true,
+            "seq": 2
+          },
+          "completion": {
+            "id": 1754,
+            "ok": true,
+            "seq": 3,
+            "wrote": 1
+          }
+        },
+        "completed_gpu": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\post-menu-completed-GP0.json.gz",
+          "sha256": "9a4cf40311fa94bf19afa0e494b6e9746a959be7ceadf6fa784170e659a3c7bd",
+          "frame": 2936
+        }
+      }
+    ],
+    "original_bank_shape_comparison": {
+      "kind": "original_source_Zero_compression_and_actual_used_F12_retained_pixels_independent_comparison",
+      "source_Zero_DAT85_sha256": "25f558d69e38e5f170b3325e27dc49a8232860f97d97dfeb6a0ce5306364f1c8",
+      "source_graphics_sha256": "22ae0ce0483087cb597b146de9e3f646756dfcf5358fc8140067af7c0f6fbe5a",
+      "source_assembly_sha256": "116e35f693c69694e6576c582925eea8d791aa3fa5fcee0f310e8d837ebe7aaa",
+      "native_transfer_contract": "Original Zero compressed 4bpp tiles; full16-high rows then partial row; bank tile wraps nativeU/V. Colors from independently native-renderer-qualified redrows8032/800E/8009.",
+      "phases": [
+        {
+          "label": "pre-menu",
+          "all_actual_used_red_trail_bank_shapes_match_original_Zero": true,
+          "banks": [
+            {
+              "bank": 24850,
+              "source_offset": 31466,
+              "tile": 0,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 2,
+              "actual_and_original_decoded_pixels_sha256": "fcc13e7e53f96f4d29fad1cc0acf580a5436f6f7c9a0566a990ec0b381790ef8",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24854,
+              "source_offset": 31466,
+              "tile": 64,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 2,
+              "actual_and_original_decoded_pixels_sha256": "354bbeda1528ebb8961fbd7c0defe2581d6d2786d80d9788c611f4b1e659e146",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24855,
+              "source_offset": 31466,
+              "tile": 144,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 2,
+              "actual_and_original_decoded_pixels_sha256": "091c38df0694eab3708d1ef3433c7d26eadfb7b086bea2bd06d299f6057411fa",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24856,
+              "source_offset": 31466,
+              "tile": 128,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 2,
+              "actual_and_original_decoded_pixels_sha256": "2192e8afd7d7a0e020752b4dc1bad98867e0b9120b7c72483c0679fcf4cda3bc",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24857,
+              "source_offset": 31466,
+              "tile": 80,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 2,
+              "actual_and_original_decoded_pixels_sha256": "925e58a131ba75206f8ca685425e5a0af2b148e8b8f4d5dc9d2c0f0b0d144168",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24858,
+              "source_offset": 31466,
+              "tile": 96,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 2,
+              "actual_and_original_decoded_pixels_sha256": "473b43c1a098cee9513a05e8237e12df7245d3a18b465e2462561ccf7d64ca6d",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24859,
+              "source_offset": 31466,
+              "tile": 112,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 2,
+              "actual_and_original_decoded_pixels_sha256": "757ccd398df9b3b74dd20ab29e6a66e71546ae1358d1013326421a09b7c56692",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24860,
+              "source_offset": 31466,
+              "tile": 0,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 1,
+              "actual_and_original_decoded_pixels_sha256": "11d6bec07b26c94a2d9eb366e0635275f7337aa96731fe7cd3c3d6750c325662",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24864,
+              "source_offset": 31466,
+              "tile": 64,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 1,
+              "actual_and_original_decoded_pixels_sha256": "95f684ce748b013c2f2fddf3870fcb5b1874f5c38f4cf1c2d94133b1dbdc98bb",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24865,
+              "source_offset": 31466,
+              "tile": 144,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 1,
+              "actual_and_original_decoded_pixels_sha256": "946ea4ff5452bb50dbae02092f58841a5990c531e002d6b22c18bfb6d899c419",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24866,
+              "source_offset": 31466,
+              "tile": 128,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 1,
+              "actual_and_original_decoded_pixels_sha256": "7d0497545b78bc0997b1b7181d88f0ea2c4538e5eb53f847619a199fe8db8b12",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24867,
+              "source_offset": 31466,
+              "tile": 80,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 1,
+              "actual_and_original_decoded_pixels_sha256": "97f74727b834b1d035f96c1b4f89a38bc8042fd7c4a487bd7a62c2a08e8e9398",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24868,
+              "source_offset": 31466,
+              "tile": 96,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 1,
+              "actual_and_original_decoded_pixels_sha256": "3814a328dd6ab2695696ce41fba24f9ae68fbc7a36b5f6f500e9c7fcebaa0a87",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24869,
+              "source_offset": 31466,
+              "tile": 112,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 1,
+              "actual_and_original_decoded_pixels_sha256": "8509eb4d9539c534adc259e123e4df220cdc0978b6ead152bf070e39c72995ac",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24870,
+              "source_offset": 31466,
+              "tile": 0,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 0,
+              "actual_and_original_decoded_pixels_sha256": "78bdf9161255f6b0def18134af01a3dadc1e377b726fa2a76fab7b93fa48a8f7",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24874,
+              "source_offset": 31466,
+              "tile": 64,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 0,
+              "actual_and_original_decoded_pixels_sha256": "f5b44de0f2ac564fcff70db2e0cbcea46e21bea8316e535f0a121cb8dc6b41a1",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24875,
+              "source_offset": 31466,
+              "tile": 144,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 0,
+              "actual_and_original_decoded_pixels_sha256": "c2c7e74dc18e943d47d10c1219cea7ea1968b523c7eb47b2e2e3fb8e00a4d5b3",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24876,
+              "source_offset": 31466,
+              "tile": 128,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 0,
+              "actual_and_original_decoded_pixels_sha256": "e32ace35890eee729583087a5ebd9ab1c9389fc071b81d2f9d48dad94965be5e",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24877,
+              "source_offset": 31466,
+              "tile": 80,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 0,
+              "actual_and_original_decoded_pixels_sha256": "fac8fe994c130e61d3a36b8581c7d939fc58fb63686ae2619fc1a6ec8d6b7eeb",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24878,
+              "source_offset": 31466,
+              "tile": 96,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 0,
+              "actual_and_original_decoded_pixels_sha256": "ac8a614fe61a6e66b8b7a37fdb9b4b240ca3814101b04b0c8f2ec23c1c1ac4a6",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24879,
+              "source_offset": 31466,
+              "tile": 112,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 0,
+              "actual_and_original_decoded_pixels_sha256": "c2f3a2ed231dfa9c8e432efebe51790ddce5cf9724713e2025855ee4bf6fa2cc",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24895,
+              "source_offset": 31466,
+              "tile": 176,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 2,
+              "actual_and_original_decoded_pixels_sha256": "33f3b077e8abaf43a94ee6db002444aa153f3c3f4fd4195df6480a49450adff9",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24896,
+              "source_offset": 31466,
+              "tile": 208,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 2,
+              "actual_and_original_decoded_pixels_sha256": "33c82b116fd09165d08ac378560eeee1cc26d33b5bd7c4f5161f4fdebd50a8a3",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24897,
+              "source_offset": 31466,
+              "tile": 192,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 2,
+              "actual_and_original_decoded_pixels_sha256": "482fa5bfb7d6b715dcbf20b071db7ebf495f31595b8aa19a5bd6a2d3b225bd65",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24898,
+              "source_offset": 31466,
+              "tile": 176,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 1,
+              "actual_and_original_decoded_pixels_sha256": "38f42f35389ce50a3228bfec2f4ab3d981e2ce2684e0945bbb2193924f036c7b",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24899,
+              "source_offset": 31466,
+              "tile": 208,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 1,
+              "actual_and_original_decoded_pixels_sha256": "02f3054aaf7016a0a1114e6a70f64f50ed9ad5b3eb3b02f39c6159a04bd1d483",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24900,
+              "source_offset": 31466,
+              "tile": 192,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 1,
+              "actual_and_original_decoded_pixels_sha256": "11d82c168527e10493d2166481bc325a527baec2b4271dd199f681ad14bae0b1",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24901,
+              "source_offset": 31466,
+              "tile": 176,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 0,
+              "actual_and_original_decoded_pixels_sha256": "280353d8b721cab83ff8574138b93845fee91f2c9998ae3b8c2bc260d92decc9",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24902,
+              "source_offset": 31466,
+              "tile": 208,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 0,
+              "actual_and_original_decoded_pixels_sha256": "17007e0dbc586891f5d25d1e456278920b9fe395a3fc8ad6b77c7060d321c1ee",
+              "actual_completed_commands": 2
+            },
+            {
+              "bank": 24903,
+              "source_offset": 31466,
+              "tile": 192,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "f81bdcfbe88e71d428354e8227dd7effb496367040acbad959c99f9041263750",
+              "color_row": 0,
+              "actual_and_original_decoded_pixels_sha256": "afc9105fa399122f68f3b92eee6809e3ef1b9bb470db5bd843468a79879cf1a1",
+              "actual_completed_commands": 2
+            }
+          ],
+          "completed_command_count": 60
+        },
+        {
+          "label": "post-menu",
+          "all_actual_used_red_trail_bank_shapes_match_original_Zero": true,
+          "banks": [
+            {
+              "bank": 25022,
+              "source_offset": 18254,
+              "tile": 65535,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "b05db3aa17835a074229fe0a82e4a79eaef58c49a40fb3779cc5ad817c563a76",
+              "color_row": 2,
+              "actual_and_original_decoded_pixels_sha256": "c506ceb7f73e92d003c95b24d17fb1683df3575f45cf49e59c5188952f3b71bb",
+              "actual_completed_commands": 20
+            },
+            {
+              "bank": 25023,
+              "source_offset": 18254,
+              "tile": 65535,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "b05db3aa17835a074229fe0a82e4a79eaef58c49a40fb3779cc5ad817c563a76",
+              "color_row": 1,
+              "actual_and_original_decoded_pixels_sha256": "c7a828a47d5a0647c80a3026db30a38c80538fb38f867e2740303e97a58aadd4",
+              "actual_completed_commands": 20
+            },
+            {
+              "bank": 25024,
+              "source_offset": 18254,
+              "tile": 65535,
+              "native_tiles": 18,
+              "native_compressed_frame_sha256": "b05db3aa17835a074229fe0a82e4a79eaef58c49a40fb3779cc5ad817c563a76",
+              "color_row": 0,
+              "actual_and_original_decoded_pixels_sha256": "9ccb594cefb179ce13756da688776183c2073c70664fa45d31564ed10955b188",
+              "actual_completed_commands": 20
+            }
+          ],
+          "completed_command_count": 60
+        }
+      ],
+      "source_decoder_file_sha256": "451e200d95e12d660207ff36baac5039acdec97c2c3e999c2614dc9ac25ae388",
+      "limits": [
+        "Original asset decoder/transfer reference comparison, not original-hardware or full-screen pixel equivalence.",
+        "Actual completed GPU op/UV words and composed images are separate artifacts; no instruction-atomic whole-machine claim.",
+        "Normal Zero stage0 pre/post-menu only. No alternate forms, all attack families, online or aggregate result."
+      ]
+    },
+    "menu_mechanics": {
+      "p1_native_menu_freezes_private_state_under_original_p2_input": true,
+      "native_resume_advances_private_effects": true,
+      "genuine_post_resume_native_dash_and_finite_retirement": true,
+      "personal_resources_preserved": true,
+      "p1_independent": true,
+      "composed_captures_completed": true
+    },
+    "freeze_reduction": [
+      {
+        "label": "P2 Circle held in P1 pause",
+        "checks": {
+          "enough_samples": true,
+          "native_pause_owned": true,
+          "native_menu_input_state": true,
+          "world_timer_frozen": true,
+          "diagnostic_publications_advanced": true,
+          "visible_preexisting_private_trails": true,
+          "exact_private_body_frozen": true,
+          "exact_private_pools_frozen": true,
+          "personal_resources_preserved": true,
+          "original_menu_clock_retained": true,
+          "original_cursor_retained": true,
+          "ordered_publications": true,
+          "fixed_native_roster_ready": true
+        }
+      },
+      {
+        "label": "P2 Right held in P1 pause",
+        "checks": {
+          "enough_samples": true,
+          "native_pause_owned": true,
+          "native_menu_input_state": true,
+          "world_timer_frozen": true,
+          "diagnostic_publications_advanced": true,
+          "visible_preexisting_private_trails": true,
+          "exact_private_body_frozen": true,
+          "exact_private_pools_frozen": true,
+          "personal_resources_preserved": true,
+          "original_menu_clock_retained": true,
+          "original_cursor_retained": true,
+          "ordered_publications": true,
+          "fixed_native_roster_ready": true
+        }
+      },
+      {
+        "label": "P2 Select held beyond departure threshold in P1 pause",
+        "checks": {
+          "enough_samples": true,
+          "native_pause_owned": true,
+          "native_menu_input_state": true,
+          "world_timer_frozen": true,
+          "diagnostic_publications_advanced": true,
+          "visible_preexisting_private_trails": true,
+          "exact_private_body_frozen": true,
+          "exact_private_pools_frozen": true,
+          "personal_resources_preserved": true,
+          "original_menu_clock_retained": true,
+          "original_cursor_retained": true,
+          "ordered_publications": true,
+          "fixed_native_roster_ready": true
+        }
+      }
+    ],
+    "post_resume_retirement": [
+      {
+        "kind": "zero_p2_native_private_dash",
+        "status": "partial_evidence",
+        "checks": {
+          "extension_available": true,
+          "eligible_fixed_roster": true,
+          "original_input_receipts": true,
+          "ordered_publications": true,
+          "accepted_native_dash_marker": true,
+          "three_visible_native_trails": true,
+          "owner_frame_resources": true,
+          "native_links_and_cluts_retained": true,
+          "release_drains_without_retrigger": true,
+          "finite_native_retirement": true
+        },
+        "limits": [
+          "Runner must verify actual executable, input provenance and bypasses",
+          "Native visibility does not establish composed artwork or retained bank colors",
+          "Publication/native timer progress is not once-world cadence or helper invocation count",
+          "No X/P2 charge, opposite roster, R9 or ledger pass is produced"
+        ],
+        "input_receipts": [
+          {
+            "path": "published_host",
+            "seat": 1,
+            "pressed": 24608,
+            "accepted": true,
+            "bypasses": [],
+            "before_tick": 496,
+            "after_tick": 501
+          },
+          {
+            "path": "published_host",
+            "seat": 1,
+            "pressed": 0,
+            "accepted": true,
+            "bypasses": [],
+            "before_tick": 520,
+            "after_tick": 526
+          }
+        ],
+        "post_release_continuation_ticks": [
+          526,
+          529,
+          533,
+          538,
+          544
+        ],
+        "negative_drain_start_tick": 548
+      }
+    ]
+  },
+  "F6": {
+    "checks": {
+      "strict_local_published_input": true,
+      "exact_source_guards": true,
+      "ordered_coherent_typed_publications": true,
+      "single_leave_absent_join_alive": true,
+      "original_select_consumed_and_neutralized": true,
+      "held_Select_does_not_rejoin": true,
+      "primary_movement_inside_actual_JOINING": true,
+      "one_monotonic_native_beam": true,
+      "finite_ALIVE_settlement": true,
+      "personal_resources_retained": true,
+      "checkpoint_and_native_world_retained": true,
+      "p1_independent": true,
+      "p2_independent": true,
+      "measured_stationary_neutral_windows": true
+    },
+    "observations": 382,
+    "source": {
+      "original_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+      "native_guards": [
+        {
+          "address": "0x8003a980",
+          "bytes": 68,
+          "sha256": "b6b5ab63f243f021dd5a2d62e7fb15b6b3ac75169374b2af623e496860dde569"
+        },
+        {
+          "address": "0x8003b954",
+          "bytes": 176,
+          "sha256": "c58c3c4d5af14e7a04ed45969742119cf1ff806ccd353c29a4ddee9d3a300c30"
+        },
+        {
+          "address": "0x8003ba04",
+          "bytes": 256,
+          "sha256": "48381729ad96a063855aac338a3d9c5004efa8da85e333341ed045517f8d1763"
+        },
+        {
+          "address": "0x8003ad18",
+          "bytes": 72,
+          "sha256": "1e2c723392ad9497fdb184ece561e5405cf4156ae30dde1b7adaa357ba7a7a38"
+        },
+        {
+          "address": "0x80017a04",
+          "bytes": 256,
+          "sha256": "60f885acfc5b386f8c296b9e0cb87c6136c9cb770999644a7122de6b663d24a3"
+        },
+        {
+          "address": "0x8003cd44",
+          "bytes": 128,
+          "sha256": "ebae1e95ff19dcf79855866c4ee69f709e4975ebd5e3ab6474610520d491ec0e"
+        }
+      ],
+      "host_function_guards": {
+        "start_leave": "4b3d5cfec91087039ff220a319f107c81c8774fef105bf883473f084843a55f5",
+        "begin_join": "d83be5b5232cece45fb309de5205738361ba33b9eb1d1c3875291ad4617bbe01",
+        "start_join": "2ee12574594ad1b801abbd5bcdcec425a7a2cb93a59ca38a0197783db0063d06",
+        "join_animation": "734c73d4a53a8ac7612892f91c8bcfcba886e39d6b9bb7746e57420577da6433"
+      },
+      "helper_guards": {
+        "mmx6_coop_lifecycle.c": "3e488c7d08693f23b08eaa6f05e2164cf04bb030fee9c830b2d8e12ac81e57cf",
+        "mmx6_coop_lifecycle.h": "404a21913971c5171ad6d547511a8c627b045ef9ddea73dd0f545c06e506cc42"
+      },
+      "ledger_sha256": "a09eaa1c6f52fea6b2a5d5ffb2c4cbd94ddec4529d9faa1ca8eb91f8e076846b",
+      "frozen_row_sha256": "1b1320cd8d3d7f345a3d20d1f3b94ffa494dc553093b0ed3f12b50d4d53981b7",
+      "bounded_check": "Move the leader through controller input during the partner's native beam-in; verify one finite arrival and retained HP/equipment.",
+      "source_build_limit": "Owner must separately validate compiled manifest and declared source provenance"
+    },
+    "windows": {
+      "departure": [
+        5,
+        209
+      ],
+      "held_absent": [
+        209,
+        217
+      ],
+      "neutral_absent": [
+        217,
+        223
+      ],
+      "moving_join": [
+        225,
+        229
+      ],
+      "p1_control": [
+        346,
+        351
+      ],
+      "p2_control": [
+        362,
+        367
+      ]
+    },
+    "stationary_neutral_windows": [
+      {
+        "label": "F6 after previous batch exercise",
+        "window": [
+          0,
+          4
+        ]
+      },
+      {
+        "label": "Both heroes after native rejoin",
+        "window": [
+          337,
+          341
+        ]
+      },
+      {
+        "label": "Independent seat0 baseline",
+        "window": [
+          342,
+          346
+        ]
+      },
+      {
+        "label": "Independent seat0 final neutral",
+        "window": [
+          354,
+          358
+        ]
+      },
+      {
+        "label": "Independent seat1 baseline",
+        "window": [
+          358,
+          362
+        ]
+      },
+      {
+        "label": "Independent seat1 final neutral",
+        "window": [
+          377,
+          381
+        ]
+      }
+    ],
+    "captures": [
+      {
+        "label": "F6-before-departure",
+        "before_index": 4,
+        "surface": "composed_renderer_output",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\F6-moving-leader\\F6-before-departure.png",
+        "sha256": "73c98bce34612af247eaae4213bd424837a9b1f55e0c354ad2c8b65966af097c",
+        "before": {
+          "id": 1858,
+          "ok": true,
+          "seq": 5,
+          "wrote": 1
+        },
+        "acknowledgement": {
+          "id": 1859,
+          "ok": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\F6-moving-leader\\F6-before-departure.png",
+          "staged": true,
+          "seq": 5
+        },
+        "completion": {
+          "id": 1860,
+          "ok": true,
+          "seq": 6,
+          "wrote": 1
+        }
+      },
+      {
+        "label": "F6-after-native-rejoin",
+        "before_index": 341,
+        "surface": "composed_renderer_output",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\F6-moving-leader\\F6-after-native-rejoin.png",
+        "sha256": "4be9aa174e1ee9d16f8f3c66b02e383f3d1d6e40926213ecd2c3d226369d5f0d",
+        "before": {
+          "id": 1873,
+          "ok": true,
+          "seq": 6,
+          "wrote": 1
+        },
+        "acknowledgement": {
+          "id": 1874,
+          "ok": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\F6-moving-leader\\F6-after-native-rejoin.png",
+          "staged": true,
+          "seq": 6
+        },
+        "completion": {
+          "id": 1875,
+          "ok": true,
+          "seq": 7,
+          "wrote": 1
+        }
+      },
+      {
+        "label": "F6-after-independent-controls",
+        "before_index": 381,
+        "surface": "composed_renderer_output",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\F6-moving-leader\\F6-after-independent-controls.png",
+        "sha256": "0fde008330a81054c0729a2ee2e2f92fa91b99293bebf69fa72f8c367a986957",
+        "before": {
+          "id": 1884,
+          "ok": true,
+          "seq": 7,
+          "wrote": 1
+        },
+        "acknowledgement": {
+          "id": 1885,
+          "ok": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\F6-moving-leader\\F6-after-independent-controls.png",
+          "staged": true,
+          "seq": 7
+        },
+        "completion": {
+          "id": 1886,
+          "ok": true,
+          "seq": 8,
+          "wrote": 1
+        }
+      }
+    ]
+  },
+  "recording": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\candidate\\saves\\input-recordings\\session-1792881979096503-1-0\\inputs.jsonl",
+    "sha256": "381835086bcd21276727a373ef1ee85db5561672db25e558f483ecb23369d06f",
+    "events": 9236,
+    "natives": 5928,
+    "p2_reads": 3308,
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "472727e56a428b878306939bb25f0f594407c072ded853a2077746bc6e43701b",
+      "manifest_sha256": "fb7e85ea35bd2bbe31cef6429aac88cd8cac4fa22e286c3e5b26beb8ec1af746",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "requested_jump_seats": [],
+    "consumed_cross_seen_anywhere": [
+      0,
+      1
+    ],
+    "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence"
+  },
+  "parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "native_case_finalized_recording_cleanup_and_cards": true
+  },
+  "private_cards_unchanged": true,
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\qualification.json",
+      "bytes": 6603242,
+      "sha256": "b205fa0a50cdb87ee932bfc0bbf00417993989fa33e1b226aaba5f0d6f7a5a28"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v34-253c74e\\candidate.json",
+      "bytes": 7647,
+      "sha256": "dc3990a79eb2adb7c0ab7e856f8886064ba2cb18bf60b1e637abfefc597f0b79"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-F6-v34-terminal-independent-reduction.json",
+      "bytes": 18675,
+      "sha256": "de2bae0649ed05863030a9d2aab21fd2bb0b1973552d9626c67345edcd41a794"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F12-v34-original-Zero-bank-shape-comparison.json",
+      "bytes": 15798,
+      "sha256": "c0b931c4891911db5626377fe234e79bb8f42275002ceca3ba1c40da09c5b593"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\batch-runner-executed-source.py",
+      "bytes": 10075,
+      "sha256": "8ec01d389162d8834d12afb02546f2a4f930178bbacb2c68608604b65b80befb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\F6-observer-executed-source.py",
+      "bytes": 35215,
+      "sha256": "6d263748eafb58c299a1aadbb1be58a20b57c11da2dc7ac4b1c63e6154752e1c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\F6-moving-leader\\F6-observation.json",
+      "bytes": 2113027,
+      "sha256": "9d9f5838d686174068b7f474c4fa8b5e46bbb1b6942c6f8c0ee490f3821d1540"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\F6-moving-leader\\executed-observer-source.py",
+      "bytes": 35215,
+      "sha256": "6d263748eafb58c299a1aadbb1be58a20b57c11da2dc7ac4b1c63e6154752e1c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_owned_retained_bank_capture.py",
+      "bytes": 4227,
+      "sha256": "bb903368172151a4505a97657121b0dedfc5e09a21bce34a7cb34561bac51afe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\verify-v34-F12-native-bank-shapes.py",
+      "bytes": 5818,
+      "sha256": "eeb3b5c7d4c3158d1f42027ba1bf1fc05e2030d1ea334f2a5730b445a4959e61"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-v33-independent-local-admission-review.txt",
+      "bytes": 12147,
+      "sha256": "a7b47dd638a54281b9e24afdb85a1d1f3686d0d84d65aae9a57aa9eee335c35d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-v33-independent-admission-audit.json",
+      "bytes": 14139,
+      "sha256": "80f1f863bb1536aa4185ff94282061a4835175b9ee49d2d905a33fae233d9ddc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-F12-stage-working-palette-v5-draft-contract.txt",
+      "bytes": 10872,
+      "sha256": "3c05ea4e4009140d1f6bec8f76bfce04e40da674fbee4e680b66be5cd5ab7e2a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-working-palette-all-72-type5-record-bounds.json",
+      "bytes": 20076,
+      "sha256": "3362a9b98e6a1c13a475feb5f2e063bfbd58e6f5eb00579d46b8d132c836d383"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-F12-working-palette-red-ctest.log",
+      "bytes": 2324,
+      "sha256": "e6eec1b68e661d98993f30a6c0814714e77aae04c0764c224f14461cd596f19e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-F12-working-palette-green-ctest.log",
+      "bytes": 1370,
+      "sha256": "9015186cc96420bc0deccce900efd4cec0aa7f8cca60e2ad0d37627a7715f020"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\regen-v34-native-working-palette\\generated-diff.json",
+      "bytes": 4311,
+      "sha256": "02887e6a5d9ee29c0e692249b9df11f3e553a27f0edf9adb874f030a7d0ac39a"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-hud\\manifest-bound-9cbc314-F12-dash-colors-local-failed-reviewed.json",
+      "bytes": 141635,
+      "sha256": "8d871474c6ceecc7d6e42241fb5d24d4edca3e0bbaf7c2f9b8ed320c8615eac5"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-hud\\manifest-bound-9cbc314-F6-moving-primary-rejoin-local-reviewed.json",
+      "bytes": 25660,
+      "sha256": "be6b037e4e8ee910d54a8af8182bf5b0a224aa70b83a6da5dc449c941120f5bc"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_private_effects.py",
+      "bytes": 17570,
+      "sha256": "8aa7290af8316bf827024684668410b080ea5e56fbcbf7653236ad46f6bbffba"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\reviewed_published_dash_effects.py",
+      "bytes": 17527,
+      "sha256": "84ba16ed7371a16e72d28cdf7bd6ea9f680aa537ba168c7e0b2e11311ee137aa"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_private_pause.py",
+      "bytes": 24847,
+      "sha256": "660bef661e4e25d54a259e54735673d8d8ecc6d42505124c98161fdfe0644eee"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\reviewed_published_dash_pause.py",
+      "bytes": 24936,
+      "sha256": "70cfb7bc1cedaf2c3ad451051358e0712a83cf460359208601f5643d73efed9a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\retained-native-Zero-dash-reference-component-reduction.json",
+      "bytes": 6837,
+      "sha256": "f30ee58e555f3e04be2cdaf23be88668d8d1d070282b59d2ba296f21bc5bb31d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-native-Zero-dash.png",
+      "bytes": 2074543,
+      "sha256": "841b49d5755322479367d40fe37072db131ba5a2d8650a89ce63a968d901b5c8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-completed-GP0.json.gz",
+      "bytes": 10163,
+      "sha256": "1ac464d62760ba481ab4471c96c95adcf388462eb8d5380acc990113f81ba73f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6108.pixels.gz",
+      "bytes": 139,
+      "sha256": "464a1142b212c1a86a663a9fa03e95d902a32e090bd14c8470d49fc98e9b636b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-610c.pixels.gz",
+      "bytes": 127,
+      "sha256": "ad111662eb0884f64750df9a74bdf9bd8eae3fbdbeaa3634a8c859fc45e8130c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-610d.pixels.gz",
+      "bytes": 62,
+      "sha256": "5a66b1d034d47359b261e8fe387499b1ec4b12268ddafefa0f713a7950842634"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-610e.pixels.gz",
+      "bytes": 31,
+      "sha256": "5a3ec7e47221b6e973b6fc174836f6056af7f657f185aabbe10578e6ed068772"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-610f.pixels.gz",
+      "bytes": 207,
+      "sha256": "ebecdf696f038b78206f0bc2cbbe738b8790594b6adaa9f468bb32551283c1c9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6110.pixels.gz",
+      "bytes": 201,
+      "sha256": "e8db6d13568fd30a67fdece6ee59511ce236f0656d00d9a8d251dfdeb0abeb1a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6111.pixels.gz",
+      "bytes": 187,
+      "sha256": "21e8556db60304433752c091e825256b697c40c61017c709ef68072b1fdc0b42"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6112.pixels.gz",
+      "bytes": 61,
+      "sha256": "fa58c74ff992e241167f5772e29e541d8a9fd03990367c4509fc158a7b26f9c8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6116.pixels.gz",
+      "bytes": 61,
+      "sha256": "9f5a87b3979544f673f76ddadab2cfc09930ba9008c2f5688c5be31bff1634f7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6117.pixels.gz",
+      "bytes": 42,
+      "sha256": "5279853652b94998a9b3c89873714966d0240b1e6827a10382e2d22dcce09fbc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6118.pixels.gz",
+      "bytes": 31,
+      "sha256": "350a2ae0433cb9c51f4be3fb63e6edb918e7e10bba97be60c91ad4295c07d478"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6119.pixels.gz",
+      "bytes": 61,
+      "sha256": "91008c3981118c3a3b8742c1f881447a532c5774e293aadb94f9e8a870aa000a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-611a.pixels.gz",
+      "bytes": 50,
+      "sha256": "0ca211edbefe3bce3737c85dabd3ccf8035f169f76c100125362b943aeb62e21"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-611b.pixels.gz",
+      "bytes": 69,
+      "sha256": "2473ab9cff5d813cb25e091904e1699d7c3726d43abe2223ce5a3bb4725a143d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-611c.pixels.gz",
+      "bytes": 61,
+      "sha256": "bf9b622298cdf2964bab1b3cba2445549ed9d303598226b35736a9b216f71a0f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6120.pixels.gz",
+      "bytes": 61,
+      "sha256": "1f0c889d956e3b1ff0661f344ae1d8363fc43dead0c7336293e1a3e604cc12c8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6121.pixels.gz",
+      "bytes": 42,
+      "sha256": "c737d65da06cf42f9bb96279d691d798b919a27fa7d870b5bdb3c8d48bdb8372"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6122.pixels.gz",
+      "bytes": 31,
+      "sha256": "54a923908594290656b74012e5f656d473247f961591f8e340a328a8bb6efa99"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6123.pixels.gz",
+      "bytes": 61,
+      "sha256": "ed09358745501858087ef3568bc38640396ffb295f68a335b737ccb9027ddbfc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6124.pixels.gz",
+      "bytes": 50,
+      "sha256": "a5963972d744a07e9c3f82635d73461b8a8bd377dd133c151bcf54638672d15a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6125.pixels.gz",
+      "bytes": 69,
+      "sha256": "c7e72cc10dab1b866c31ab05c8d8c9701e2ff181f2c61446a2dc42da2a259c7c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6126.pixels.gz",
+      "bytes": 61,
+      "sha256": "c67c60d3124a7719391263ae71c4caeb1d66420d90afef8f6940493ea9d20d20"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-612a.pixels.gz",
+      "bytes": 61,
+      "sha256": "c87ed4b3b87cdec172dc8df88f3cef794c217246fa5cf68df2426fba72d39c6a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-612b.pixels.gz",
+      "bytes": 42,
+      "sha256": "875d97c1e42804a0bc8859e7f04dc35ebe26cd25519eafe795a3c752379126f6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-612c.pixels.gz",
+      "bytes": 31,
+      "sha256": "c7806779a168aff1c5d1749df4e98baa58038e985fbef79fe06a48da17fc670c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-612d.pixels.gz",
+      "bytes": 61,
+      "sha256": "79bd47bf3ee328ddde7ea2d2b6f4555e6b0930dbf350d52f5582d8968b4c91a5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-612e.pixels.gz",
+      "bytes": 50,
+      "sha256": "691d80075978d96586b70c750078d5ce89376a417e168603ce6164f27880b82d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-612f.pixels.gz",
+      "bytes": 70,
+      "sha256": "0b1aa1e59cbb39ccb2350108c8ddd40160943b9654df962c76401b136ecdeca5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-613c.pixels.gz",
+      "bytes": 222,
+      "sha256": "30f7e3b699d441605d5efed441d05565c70a28ece488abe201426faf40d386a5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-613d.pixels.gz",
+      "bytes": 166,
+      "sha256": "4f03a1f836c99fe1a0e290f1bf59d027c4284614b8a10be0fa15193128ed10d9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-613e.pixels.gz",
+      "bytes": 216,
+      "sha256": "746966624ba1dd599cb0b28b241d977932949968dbaf67cd48574ff59737c8e1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-613f.pixels.gz",
+      "bytes": 68,
+      "sha256": "9824e94281fcf3cb86343742fa8c0c81bd23c26becb18dccd6f7ca928c2955c5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6140.pixels.gz",
+      "bytes": 69,
+      "sha256": "4c85ace53bd615576538f5708ed45217c0a3cb6f2228555e8f4657386bde712f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6141.pixels.gz",
+      "bytes": 42,
+      "sha256": "e175a0b81805080330ca276291cf1981bd2400cca19839561d457d377c664cbc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6142.pixels.gz",
+      "bytes": 68,
+      "sha256": "b8e53b942c719b9c23001be417eabfebd9150c04e52ea007376544c9d1508c36"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6143.pixels.gz",
+      "bytes": 69,
+      "sha256": "7a73198bc4c2bbb0c61028ab9192487bc769d06595ee24e0961d5d1641a0ad7b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6144.pixels.gz",
+      "bytes": 42,
+      "sha256": "71a95757eafdc6da7e9a035fa6ac9da9510fee83e43ca92cbc7429397d80f8e4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6145.pixels.gz",
+      "bytes": 68,
+      "sha256": "e9ba2416bfa5358929008734eacc69cd109f9d9e0cfc125f6d4d4d658e848b7d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6146.pixels.gz",
+      "bytes": 71,
+      "sha256": "4327d2459f3322012a05a7c2ca79d1e85c8ba3e9b8da5e3ad5b5892ddb95e6b8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\pre-menu-used-bank-6147.pixels.gz",
+      "bytes": 42,
+      "sha256": "e310e3dc96c8a5d0185ad10030f1b6c3298212fadfa8f78367becbeea12c31ed"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\post-menu-native-Zero-dash.png",
+      "bytes": 2074543,
+      "sha256": "202eb5c7adaf8a2f3cf12922ce5308ba451c84e1ac25a1d65019f7738338a069"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\post-menu-completed-GP0.json.gz",
+      "bytes": 10149,
+      "sha256": "9a4cf40311fa94bf19afa0e494b6e9746a959be7ceadf6fa784170e659a3c7bd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\post-menu-used-bank-61bd.pixels.gz",
+      "bytes": 1504,
+      "sha256": "af8edba52c6903c3eb2c92786d6845da3e83c2a0c37d9f58a6f91766e3853b0f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\post-menu-used-bank-61be.pixels.gz",
+      "bytes": 443,
+      "sha256": "4d50c33c04a2d411d5f22a60e1d5bc190cdc24cb74e57c8c57abf282ec6df95b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\post-menu-used-bank-61bf.pixels.gz",
+      "bytes": 442,
+      "sha256": "abcf2c1e5ad94978c915f9241b8a0d5512bbab500649243ddacdc1ccd6e17b0a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\post-menu-used-bank-61c0.pixels.gz",
+      "bytes": 444,
+      "sha256": "04408a77a73f84307f941e69183b0ab014f5ccafd2266db4f07588d9427c9688"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\F6-moving-leader\\F6-before-departure.png",
+      "bytes": 2074543,
+      "sha256": "73c98bce34612af247eaae4213bd424837a9b1f55e0c354ad2c8b65966af097c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\F6-moving-leader\\F6-after-native-rejoin.png",
+      "bytes": 2074543,
+      "sha256": "4be9aa174e1ee9d16f8f3c66b02e383f3d1d6e40926213ecd2c3d226369d5f0d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\hud\\F6-moving-leader\\F6-after-independent-controls.png",
+      "bytes": 2074543,
+      "sha256": "0fde008330a81054c0729a2ee2e2f92fa91b99293bebf69fa72f8c367a986957"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\dash-menu-moving-rejoin-batch-v34-253c74e\\candidate\\saves\\input-recordings\\session-1792881979096503-1-0\\inputs.jsonl",
+      "bytes": 1206570,
+      "sha256": "381835086bcd21276727a373ef1ee85db5561672db25e558f483ecb23369d06f"
+    }
+  ],
+  "limits": [
+    "Fixed LOCAL X/P1+normal Zero/P2 stage0 ordinary input. No fixture/LOAD/source-success writes. FullHP32/ammo288/defaultparts/form baseline; no damaged/spent/acquired inventory or alternate geometry/form breadth.",
+    "Source-bound original Zero renderer palette component comes from retained earlier-image reference whose failed parent is preserved; no inherited whole-parent pass. Actual current banks are independently compared to pinned original DAT85 graphics and original native redrows.",
+    "Every actual red trail bank matches original decoded sprite/tile shape and palette. Composed source-phase frames differ from old reference; no whole-screen/hardware pixel equivalence, global fades or all attack-family claim.",
+    "Full typed bodies, native PLAY and read-only double-stable host state are matched to accepted publications. GPU commands, immutable bank payloads and composed capture are separate observations, not an instruction-atomic whole-machine snapshot.",
+    "Fresh private card profile; startup card artifacts and existing-private-card invariance are validated, not previously populated native-progress retention. Finalized recording is ordinary accepted input, not offline replay/output equivalence.",
+    "F12 failed9cbc attempt remains in ledger/evidence. LOCAL F12 and F6 passed on253c74e; their netplay and aggregate remain unverified. No Giga art/state pass from this ordinary run."
+  ],
+  "bypasses": []
+}
