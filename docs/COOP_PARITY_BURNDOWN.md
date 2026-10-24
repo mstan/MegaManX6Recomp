@@ -129,7 +129,8 @@ overlay and includes it in current-build wire4 snapshots and state digests.
 The actual-plugin two-callback regression fails before the fix in debug and
 production, then passes with the four effect/snapshot variants;49 Python state
 checks pass. Both full debug and production builds now pass103/103 CTests.
-The frozen v25 native probe confirms the original masks are restored, the
+The [reviewed v25 native probe](evidence/mmx6-hud/manifest-bound-56b3fc5-Giga-partial-repair-reviewed.json)
+confirms the original masks are restored, the
 mutable backup survives and the immutable overlay stays pristine. The world
 still becomes black with16 setup/clear GPU commands after Giga retires: this
 is a partial repair, and beads-eio.1.45 remains open for the remaining cause.

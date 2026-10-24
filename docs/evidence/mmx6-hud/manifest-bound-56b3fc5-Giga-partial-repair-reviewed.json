@@ -1,0 +1,528 @@
+{
+  "schema": 1,
+  "kind": "reviewed_partial_native_Giga_palette_backup_repair_remaining_black_render_failure",
+  "reviewed_at_utc": "2026-10-24T17:55:27.635325+00:00",
+  "issue": "beads-eio.1.45",
+  "compiled_source": "56b3fc5e2dd2fcf8bc1bf8cc402654872137f0d5",
+  "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+  "observer_source_commit": "f2f1045223ad500bcb2e28784305d10169e8e3ad",
+  "candidate": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v25-56b3fc5\\candidate.json",
+    "sha256": "311d4cb62bf54f3e6cebe357d273be5ba6529c8218a86b11ca126ab156bd1754",
+    "bytes": 4625
+  },
+  "report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\qualification.json",
+    "sha256": "7c40752e07668f90c4da60cbceb482fc4c0f47587d71983e4ccc4a6089decf55",
+    "bytes": 1763461
+  },
+  "native_recovery_checks": {
+    "original_shared_palette_masks_restored": true,
+    "private_mutable_backup_retained": true,
+    "immutable_overlay_tail_stays_pristine": true,
+    "native_Giga_retired": true,
+    "world_bodies_and_huds_return": false,
+    "composed_output_is_not_black": false
+  },
+  "snapshots": [
+    {
+      "label": "fresh-no-inventory",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\fresh-no-inventory.png",
+        "sha256": "51ff837c5d510ba0a38df29bcdfa665eb526b0f16a83ac8aa667615e187884dd",
+        "bytes": 2074543
+      },
+      "all_pixels_black": false,
+      "native_tick": 197,
+      "zero_action": 2,
+      "zero_phase": 0,
+      "zero_palette_effect_bits": 0,
+      "shared_palette_masks_hex": "000000000f000000000000f0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "private_mutable_backup_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "private_immutable_overlay_tail_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "gpu_commands": 694,
+      "gpu_counts": {
+        "x_sheet": 6,
+        "zero_sheet": 16,
+        "private_hud": 14,
+        "native_hud": 1
+      }
+    },
+    {
+      "label": "earned-prerequisite-no-use",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\earned-prerequisite-no-use.png",
+        "sha256": "b887dfe954dc5c6c1b6dfc967cc458a8f9e3301a7b20b7fe59c101c4b1df09a6",
+        "bytes": 2074543
+      },
+      "all_pixels_black": false,
+      "native_tick": 222,
+      "zero_action": 2,
+      "zero_phase": 0,
+      "zero_palette_effect_bits": 0,
+      "shared_palette_masks_hex": "000000000f000000000000f0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "private_mutable_backup_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "private_immutable_overlay_tail_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "gpu_commands": 696,
+      "gpu_counts": {
+        "x_sheet": 7,
+        "zero_sheet": 16,
+        "private_hud": 14,
+        "native_hud": 1
+      }
+    },
+    {
+      "label": "immediate-after-Zero-Giga",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\immediate-after-Zero-Giga.png",
+        "sha256": "3e87c90e14be53f3e4b1b1a0332cef3f76b5272203596691dabde3b70d61f216",
+        "bytes": 2074543
+      },
+      "all_pixels_black": false,
+      "native_tick": 245,
+      "zero_action": 59,
+      "zero_phase": 1,
+      "zero_palette_effect_bits": 1,
+      "shared_palette_masks_hex": "000000000f000000000000f0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "private_mutable_backup_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "private_immutable_overlay_tail_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "gpu_commands": 744,
+      "gpu_counts": {
+        "x_sheet": 7,
+        "zero_sheet": 22,
+        "private_hud": 38,
+        "native_hud": 1
+      }
+    },
+    {
+      "label": "step-0-additional-15-ticks",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\step-0-additional-15-ticks.png",
+        "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+        "bytes": 2074543
+      },
+      "all_pixels_black": true,
+      "native_tick": 270,
+      "zero_action": 59,
+      "zero_phase": 4,
+      "zero_palette_effect_bits": 1,
+      "shared_palette_masks_hex": "000000000f000000000000f0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "private_mutable_backup_hex": "000000000f000000000000f0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "private_immutable_overlay_tail_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "gpu_commands": 16,
+      "gpu_counts": {
+        "x_sheet": 0,
+        "zero_sheet": 0,
+        "private_hud": 0,
+        "native_hud": 0
+      }
+    },
+    {
+      "label": "step-1-additional-15-ticks",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\step-1-additional-15-ticks.png",
+        "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+        "bytes": 2074543
+      },
+      "all_pixels_black": true,
+      "native_tick": 296,
+      "zero_action": 59,
+      "zero_phase": 4,
+      "zero_palette_effect_bits": 1,
+      "shared_palette_masks_hex": "000000000f000000000000f0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "private_mutable_backup_hex": "000000000f000000000000f0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "private_immutable_overlay_tail_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "gpu_commands": 16,
+      "gpu_counts": {
+        "x_sheet": 0,
+        "zero_sheet": 0,
+        "private_hud": 0,
+        "native_hud": 0
+      }
+    },
+    {
+      "label": "step-2-additional-15-ticks",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\step-2-additional-15-ticks.png",
+        "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+        "bytes": 2074543
+      },
+      "all_pixels_black": true,
+      "native_tick": 323,
+      "zero_action": 59,
+      "zero_phase": 5,
+      "zero_palette_effect_bits": 1,
+      "shared_palette_masks_hex": "000000000f000000000000f0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "private_mutable_backup_hex": "000000000f000000000000f0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "private_immutable_overlay_tail_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "gpu_commands": 16,
+      "gpu_counts": {
+        "x_sheet": 0,
+        "zero_sheet": 0,
+        "private_hud": 0,
+        "native_hud": 0
+      }
+    },
+    {
+      "label": "step-3-additional-15-ticks",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\step-3-additional-15-ticks.png",
+        "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+        "bytes": 2074543
+      },
+      "all_pixels_black": true,
+      "native_tick": 349,
+      "zero_action": 59,
+      "zero_phase": 5,
+      "zero_palette_effect_bits": 1,
+      "shared_palette_masks_hex": "000000000f000000000000f0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "private_mutable_backup_hex": "000000000f000000000000f0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "private_immutable_overlay_tail_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "gpu_commands": 16,
+      "gpu_counts": {
+        "x_sheet": 0,
+        "zero_sheet": 0,
+        "private_hud": 0,
+        "native_hud": 0
+      }
+    },
+    {
+      "label": "step-4-additional-60-ticks",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\step-4-additional-60-ticks.png",
+        "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+        "bytes": 2074543
+      },
+      "all_pixels_black": true,
+      "native_tick": 420,
+      "zero_action": 59,
+      "zero_phase": 6,
+      "zero_palette_effect_bits": 0,
+      "shared_palette_masks_hex": "000000000f000000000000f0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "private_mutable_backup_hex": "000000000f000000000000f0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "private_immutable_overlay_tail_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "gpu_commands": 16,
+      "gpu_counts": {
+        "x_sheet": 0,
+        "zero_sheet": 0,
+        "private_hud": 0,
+        "native_hud": 0
+      }
+    },
+    {
+      "label": "step-5-additional-300-ticks",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\step-5-additional-300-ticks.png",
+        "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+        "bytes": 2074543
+      },
+      "all_pixels_black": true,
+      "native_tick": 732,
+      "zero_action": 2,
+      "zero_phase": 0,
+      "zero_palette_effect_bits": 0,
+      "shared_palette_masks_hex": "000000000f000000000000f0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "private_mutable_backup_hex": "000000000f000000000000f0ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "private_immutable_overlay_tail_hex": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "gpu_commands": 16,
+      "gpu_counts": {
+        "x_sheet": 0,
+        "zero_sheet": 0,
+        "private_hud": 0,
+        "native_hud": 0
+      }
+    }
+  ],
+  "validation_logs": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v25-56b3fc5-debug-final.log",
+      "sha256": "741953ef128876d63c1484aec2ce971af84113520fccd9dcaa42b59a74d2152d",
+      "bytes": 30476
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v25-56b3fc5-production.log",
+      "sha256": "67b274fa1cf3ac95bc84335ce9811e54ac3112250abffc75150dfd44e5881d63",
+      "bytes": 30486
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-regression-red-ctest.log",
+      "sha256": "eafbac7f26014b0036044fae842f3040a86792d5d775cd94c9180c475bd08b11",
+      "bytes": 2124
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-regression-green-ctest.log",
+      "sha256": "fccf620428f7da61a95137317ca2d7041aa342db116efbc824b11b2cd6d91ec4",
+      "bytes": 1370
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-wire4-python-state-tests-green.log",
+      "sha256": "bdf37670de9c47a848b21db95ffba436a1df81e95bfc67ab596606e6c3901549",
+      "bytes": 18978
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\freeze-v25-Giga-palette-backup.py",
+      "sha256": "d0b6af13e411450a4178044f842b2bdbbe57cc60b1fa4c925782a0cc5e26e1cc",
+      "bytes": 4200
+    }
+  ],
+  "prior_failure_receipt": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-hud\\manifest-bound-1f50059-Giga-palette-backup-failure-reviewed.json",
+    "sha256": "911881fc40c2e4c007048e9d1129f3b7cba15be46882f03845fca649ace0e8d5",
+    "bytes": 43682
+  },
+  "finding": "The original64B group1 palette/color mask table is restored exactly by native phase2 on56b3fc5, separately retained writable tail survives private callbacks, and immutable Zero source remains pristine. The composed world still becomes black and GP0streams remain16 setup/clear commands through native action2 with its E4 palette-effect bit cleared. Backup repair is verified but does not resolve the full Giga bug. No globals are forced, no full repair/ledger/replay pass.",
+  "limits": [
+    "Same-image Windows local fixedX/P1+Zero/P2 USA1.1 intro only; no paired or production gameplay result.",
+    "Earned inventory prerequisite bypass; actual original Zero R2 spends native energy. Native recording intentionally failed by fixture taint and strict capture/replay refuse it; cards retained and graceful exit0.",
+    "Selected completed GPU frames are fully retained and sequences/counts verified; samples are not continuous-frame or CPU-presentation synchronization. Native function trace armed but0entries; absent execution is not inferred.",
+    "Full debug/production103/103 CTests and actual-plugin regression remain useful bounded evidence; they do not establish native black-render recovery. Further cause under investigation.",
+    "No R6, weapon correctness, R15/F208, boss, content, save/load or netplay status promotion."
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\fresh-no-inventory.png",
+      "sha256": "51ff837c5d510ba0a38df29bcdfa665eb526b0f16a83ac8aa667615e187884dd",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\fresh-no-inventory-gpu.json.gz",
+      "sha256": "afc315d7623976c57564623027f4452eda944ffc7c04f35c1f6c1511d653ef4e",
+      "bytes": 8459
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\earned-prerequisite-no-use.png",
+      "sha256": "b887dfe954dc5c6c1b6dfc967cc458a8f9e3301a7b20b7fe59c101c4b1df09a6",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\earned-prerequisite-no-use-gpu.json.gz",
+      "sha256": "939b006a7e0cae6f0c40779f4f97c1684598b5a36ab94dace2aaca945e3bd96d",
+      "bytes": 8487
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\immediate-after-Zero-Giga.png",
+      "sha256": "3e87c90e14be53f3e4b1b1a0332cef3f76b5272203596691dabde3b70d61f216",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\immediate-after-Zero-Giga-gpu.json.gz",
+      "sha256": "dcff66fbdececdc089a728a4c16bc6eb7b0aa337c678bf85cbfd665b9761562b",
+      "bytes": 9253
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\step-0-additional-15-ticks.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\step-0-additional-15-ticks-gpu.json.gz",
+      "sha256": "4d9d9ba554266d3b37ca801989fd55e93b35e5ab1e9b7a5301717c96b01f1bf5",
+      "bytes": 422
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\step-1-additional-15-ticks.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\step-1-additional-15-ticks-gpu.json.gz",
+      "sha256": "af72390ed4c79043e6f855a058af72fe31e79d92990e081237c514d1c5b26489",
+      "bytes": 424
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\step-2-additional-15-ticks.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\step-2-additional-15-ticks-gpu.json.gz",
+      "sha256": "0e3d78437444379125becedd5acaeb094ff07b747cc4eba81f149af413a19a8c",
+      "bytes": 419
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\step-3-additional-15-ticks.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\step-3-additional-15-ticks-gpu.json.gz",
+      "sha256": "2f788c12d2db2cfcf6c2bfc913a2e5113a31c9678901aee4097448ad419b5650",
+      "bytes": 422
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\step-4-additional-60-ticks.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\step-4-additional-60-ticks-gpu.json.gz",
+      "sha256": "74a9f5dcaebd0ec6494e97e2903d4c38f9697f72c66132ca8053d7708c23b991",
+      "bytes": 421
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\step-5-additional-300-ticks.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\ammo-hud\\step-5-additional-300-ticks-gpu.json.gz",
+      "sha256": "2873e68736f9f5467ec1f350b15018eb4f4883b5b21a06a593843131f1db8e7d",
+      "bytes": 426
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\recording-rejection\\settings.json",
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "bytes": 10329
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\recording-rejection\\content.json",
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "bytes": 503
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\recording-rejection\\simulation-contract.json",
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c",
+      "bytes": 259
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\recording-rejection\\inputs.jsonl",
+      "sha256": "999a4f732586fd461d283f6e5af1953133cfe99985b2628a2f790cf95fd4cb17",
+      "bytes": 823541
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\recording-rejection\\status.json",
+      "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb",
+      "bytes": 211
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\recording-rejection\\card1.initial.mcd",
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "bytes": 131072
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\recording-rejection\\card2.initial.mcd",
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "bytes": 131072
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\diagnostic-runner-executed-source.py",
+      "sha256": "ca90eae6838bbb73043870112df858ccd268e5693fd07e43e99492637f3e83d3",
+      "bytes": 7445
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\mmx6_coop_hud_inventory-executed-source.py",
+      "sha256": "bd3a56a9b846cd98cc8e3f5f9446c29169a77be6034aab9c0208654019248204",
+      "bytes": 18671
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\mmx6_coop_hud_presentation-executed-source.py",
+      "sha256": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18",
+      "bytes": 11949
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\mmx6_coop_inventory_state-executed-source.py",
+      "sha256": "211bd23caf176328cc3a24aaeae26a44b5d0dc5e48b244c1826781e9f53f61f4",
+      "bytes": 6110
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+      "bytes": 29983
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\mmx6_coop_mapped_state-executed-source.py",
+      "sha256": "870ddd670d02b366fb056173b9133fca2618b96941fcbc793c5d698deae623cb",
+      "bytes": 16689
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\mmx6_input_recording-executed-source.py",
+      "sha256": "a4d21aaa83c9104679d549c0f5fa81bf95106ce800b0601263faaff46ae5310a",
+      "bytes": 13664
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\mmx6_owned_keyboard-executed-source.py",
+      "sha256": "11b07f655dd711e5cf39c36362eec796b9eb73b86702d8100e0a958a3e348402",
+      "bytes": 4599
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\prepare_mmx6_coop_playtest-executed-source.py",
+      "sha256": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978",
+      "bytes": 10411
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\prepare_mmx6_input_replay-executed-source.py",
+      "sha256": "584c0790706a2794636f7ed1bbd5e6b904f29b8b285d6eb3a9f5373167500d95",
+      "bytes": 8385
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "sha256": "e91dbde11541f68e554f94b747ba91c409a83322f7d4d60b26d1e3aefdf75ac9",
+      "bytes": 29370
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\qualify_mmx6_coop_personal_menu-executed-source.py",
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c",
+      "bytes": 16934
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\qualify_mmx6_coop_state-executed-source.py",
+      "sha256": "e7c9eac811f08e777933faf49e709fd0514cae9ba2a32eb139446cbea6e2f1b6",
+      "bytes": 53073
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\qualify_mmx6_input_replay-executed-source.py",
+      "sha256": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd",
+      "bytes": 28273
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\runner-executed-source.py",
+      "sha256": "ca594aa64b184761c33415ccb89f1f48194af094533cc48e33fdb359d41e48a7",
+      "bytes": 11008
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v25-56b3fc5-debug-final.log",
+      "sha256": "741953ef128876d63c1484aec2ce971af84113520fccd9dcaa42b59a74d2152d",
+      "bytes": 30476
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v25-56b3fc5-production.log",
+      "sha256": "67b274fa1cf3ac95bc84335ce9811e54ac3112250abffc75150dfd44e5881d63",
+      "bytes": 30486
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-regression-red-ctest.log",
+      "sha256": "eafbac7f26014b0036044fae842f3040a86792d5d775cd94c9180c475bd08b11",
+      "bytes": 2124
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-regression-green-ctest.log",
+      "sha256": "fccf620428f7da61a95137317ca2d7041aa342db116efbc824b11b2cd6d91ec4",
+      "bytes": 1370
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-wire4-python-state-tests-green.log",
+      "sha256": "bdf37670de9c47a848b21db95ffba436a1df81e95bfc67ab596606e6c3901549",
+      "bytes": 18978
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\freeze-v25-Giga-palette-backup.py",
+      "sha256": "d0b6af13e411450a4178044f842b2bdbbe57cc60b1fa4c925782a0cc5e26e1cc",
+      "bytes": 4200
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v25-56b3fc5\\candidate.json",
+      "sha256": "311d4cb62bf54f3e6cebe357d273be5ba6529c8218a86b11ca126ab156bd1754",
+      "bytes": 4625
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-actual-table-v25-56b3fc5\\qualification.json",
+      "sha256": "7c40752e07668f90c4da60cbceb482fc4c0f47587d71983e4ccc4a6089decf55",
+      "bytes": 1763461
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-hud\\manifest-bound-1f50059-Giga-palette-backup-failure-reviewed.json",
+      "sha256": "911881fc40c2e4c007048e9d1129f3b7cba15be46882f03845fca649ace0e8d5",
+      "bytes": 43682
+    }
+  ]
+}
