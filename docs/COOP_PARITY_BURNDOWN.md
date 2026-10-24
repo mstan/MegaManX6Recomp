@@ -68,6 +68,21 @@ checks on this exact build. R15/F208 stay failed until real Continue/import,
 selection, reentry and remaining required modes are validated. Native cards,
 netplay and the separate content inventory gain no pass from this result.
 
+F157 now passes locally on `777b4d0`. The
+[fresh Zero follow-up receipt](evidence/mmx6-combat/manifest-bound-777b4d0-F157-fresh-Zero-followups-local-reviewed.json)
+binds two complete native air-slash lifetimes against the same original CP2
+main boss, four independently observed 2 HP collisions, full retirement and
+43 pixels of native separation before the fresh follow-up. The second attack
+accepts a reused native pose token after actual cooldown/table restoration;
+post-action controls remain independent. A second reviewer rehashed all
+artifacts and independently reduced the target, player and shot evidence.
+The reached battle execution and positive invincibility counters are explicit
+offline prerequisites. The default recorder correctly ends its cold-boot
+segment at state load; strict capture and replay refuse that prefix. Its
+original inventory-parent status remains retained, with the exact expected
+segment termination verified separately. F157 netplay and aggregate remain
+unverified, with no all-boss, scaling-option or post-load recording claim.
+
 The [v23 HUD receipt](evidence/mmx6-hud/manifest-bound-66f7db0-layouts-and-menu-samples-reviewed.json)
 qualifies R5 locally and on two separately staged loopback peers for both
 stacked and side-by-side layouts at 960×720, 1200×600 and 640×900 drawable

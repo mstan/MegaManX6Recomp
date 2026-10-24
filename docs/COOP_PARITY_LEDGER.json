@@ -10696,11 +10696,62 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "777b4d0453b0f08546a6df06adb95ab5a211e8d9",
+            "build_identity": {
+              "executable_sha256": "20d1a7fb33afa3d8219b74e755a700d9caf5e321e947144f6254582b6c227275",
+              "compiled_manifest_sha256": "5d16dcdf3a860956404316efab6ae3552596dbffc87d1e24fda675b128356842",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144",
+              "qa_commit": "5836c2b"
+            },
+            "settings": {
+              "native_mode": "offline",
+              "roster": [
+                "X/P1",
+                "Zero/P2"
+              ],
+              "stage": 0,
+              "section": 0,
+              "boss": "Original main type48/sub0 via PLAY+20; HP32 at admission",
+              "private_profile": "Fresh owned hidden process, dummy audio, private cards, exact same current-build battle execution",
+              "native_damage": "Default source/live type27 disposition0/damage2; no parts modifiers or P1 attack input",
+              "recording": "Only pre-LOAD cold-boot prefix; exact state-replacement terminal, canonical startup/artifacts and both strict capture/replay refusals independently verified"
+            },
+            "action": "Continue the actually reached CP2 mainHP32 execution, admit native Zero Jump/Square airslash27, wait complete retirement/landing/neutral, separate43pixels by original Left, restore native main cooldown/table naturally, then admit a distinct native Jump/Square follow-up.",
+            "outcome": "Both complete distinct attack lifetimes damage the same living original main boss:32->28->24 through four independently observed2HP collision events. Actual private27/selected clip91, native positive cooldown/temp-table responses, complete pool retirement, explicit pre-followup cooldown0/main-table and fresh token29 reuse are retained; post-action controls remain independent.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-combat/manifest-bound-777b4d0-F157-fresh-Zero-followups-local-reviewed.json",
+                "sha256": "4c2f166a81d42462054d310cf3bcc8c96f7497a0d645bc4e8a11a08de937295c"
+              }
+            ],
+            "limits": [
+              "LOCAL exact777b4d0 execution snapshot of actually reached native CP2 HP32, not a fresh checkpoint/door run.",
+              "Original checkpoint8/protection10 prerequisites in parent run remain disclosed; this continuation uses only positive native iframe command10.",
+              "No HP/ammo/boss/action/token/outcome writes, native calls, native card or netplay admission.",
+              "State LOAD/command10 taint default recording; strict finalized capture/replay must refuse.",
+              "Two independently retired native attacks and per-collision damage only; no all-boss, original same-lifetime reference, artwork or aggregate ledger pass.",
+              "Exact offline CP2 main type48/sub0 with default native damage/parts only; no all-pose/all-boss/descriptor/scaling-option breadth or cross-build result.",
+              "Actual target RAM, private actor publications and presentation are separate RPCs; per-event cooldown gaps retain actual versus source-inferred labels.",
+              "Netplay/aggregate F157 remain unverified. No post-LOAD input recording, replay, campaign acquisition or native card qualification.",
+              "Original inventory-parent failed_setup remains retained; its expected fixture-taint string did not describe a state-LOAD prefix. The independent supplement verifies the precise intended SDK segment termination without rewriting that report.",
+              "First Jump one-tick edge was not sampled; actual rising pose, consumed held input, selected clip and actual child remain observed. Intermediate within-lifetime cooldown readiness is labelled sampled versus source-inferred; the fresh second-lifetime baseline is actually sampled.",
+              "Passed this exact LOCAL bounded fresh-follow-up contract only. No active scaling-profile breadth, opposite roster, all-pose/all-boss, netplay or aggregate pass."
+            ],
+            "bypasses": [
+              "Offline checkpoint8 originally reached CP2 before the parent earned the door/battle boundary; no door reachability pass here.",
+              "Exact-current-build LOAD of that genuinely reached battle execution; no boss/HP/ammo/action/token/success data is authored.",
+              "Strictly offline command10 refreshes positive native player invincibility counters and preserves HP; no global no-collision cheat."
+            ]
+          }
+        ],
+        "limitations": "LOCAL bounded fresh native Zero follow-up passes on777b4d0: two retired/separated airslash27 lifetimes, four actual2HP collisions, same bound CP2 main, fresh token reuse and independent controls. Offline earned-execution/positive-iframe prerequisites explicit; default pre-LOAD segment refused correctly. Netplay and aggregate remain unverified; no scaling-option/all-pose/all-boss breadth."
       }
     },
     {
