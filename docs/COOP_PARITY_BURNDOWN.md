@@ -286,8 +286,16 @@ constraints. The last poll failed living-idle roster, native idle-grounded and
 authored X; ordinary native X was at2075 versus2112, with HP26 and published
 Zero HP24. A final fixture-only read has no further readiness sample.
 No image, damage source or position-change cause was established.
-Setup coverage is now46 qualified,5 blocked (`s04-a1-c00`, `s03-a0-c05`,
-`s04-a0-c03`, `s12-a0-c02`, `s12-a0-c03`) and43 unvisited supported locations. Rendering, stage mechanics
+The [reviewed entry66973 failure](evidence/mmx6-content/manifest-bound-50f4a31-entry66973-failed-first-reviewed.json)
+adds no completed setup. Its first location, `s16-a0-c01`, exhausted1,800 reads
+after443 complete readiness polls. Root reproduced all twelve predicates,
+1,774 journal RAM links, seven source guards, eight mailbox writes and all late
+constraints. The typed publication stayed at tick158/native157 throughout;
+native X was living at the authored X1424, with action20 and PLAY+1C set.
+Five readiness predicates remained false. No tail RAM read or image exists;
+the next fixture read was refused before RPC. No cause is established.
+Setup coverage is now46 qualified,6 blocked (`s04-a1-c00`, `s03-a0-c05`,
+`s04-a0-c03`, `s12-a0-c02`, `s12-a0-c03`, `s16-a0-c01`) and42 unvisited supported locations. Rendering, stage mechanics
 and the comparison count receive no additional passes.
 F205 now passes its bounded effective-mode recording check on `f3bdbe9`, with
 107 debug and 107 production checks passing. The [LOCAL receipt](evidence/mmx6-native-replay/manifest-bound-f3bdbe9-F205-effective-mode-history-local-reviewed.json)
