@@ -63,8 +63,14 @@ gold/orange burst. Exact packet/resource comparisons agree across CPU, VRAM and
 GPU FBO. Both broader parent attempts remain partial, and original retirement
 and all-feature-disabled recording limitations are explicit. Local issue
 `beads-eio.1.46` tracks the fix; netplay and the other death/camera/retry checks
-remain unverified. The source fix is isolated in a local worktree and gains no
-pass from source review or focused unit tests.
+remain unverified. The source fix is integrated as `50f4a31`, with 103 debug
+and 103 production tests passing. Its [reviewed native resource component](evidence/mmx6-death/manifest-bound-50f4a31-Zero-FX11-resource-component-reviewed.json)
+matches original Zero texels and palette in 48 fatal-capture and 81 visible-burst
+GPU packet pairs, including the independent private atlas key and working
+palette row. The burst visibly expires and X retains control. That parent
+then stops on a real projectile hit outside its qualified damage sources;
+full both-seat death/retry, state, paired and art/camera checks remain pending.
+R3 keeps its failed disposition until its complete bounded check is requalified.
 F59's `253c74e` local Yammar texture-placement failure remains in
 history. The `c3c5bdb` fix passes 103 debug and 103 production tests and reviewed
 local native artwork plus active-effect warm/cold current-build restoration.
