@@ -48,5 +48,7 @@ finished. These rules supplement the owner's global instructions.
   storage, source-validation, cleanup and native-save protections. Old execution
   save-state compatibility is not required.
 
-Resume state: `G:/Temp/Codex/psxrecomp/x6-parity/HANDOFF-CURRENT-X6-20261025-v294.txt`.
-The live ledger and worktree take precedence over stale handoff counts or queues.
+At resumption, read `current_session_handoff` and `current_owned_root_job` in
+`G:/Temp/Codex/psxrecomp/x6-parity/storage-retention-index.json`. The initial
+execution reset is handoff v294. Live ledger, worktree and job handles take
+precedence over older handoff counts, job states or queues.
