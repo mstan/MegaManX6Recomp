@@ -1,0 +1,391 @@
+{
+  "kind": "root_reviewed_six_native_original_entry_components_in_one_owned_run",
+  "binding": {
+    "candidate_proof": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v36-50f4a31\\candidate.json",
+      "sha256": "c454fd8c17e78da36acc6de641cbc88c3319054c60ffaa014fde8bd78f1ff652"
+    },
+    "candidate_source": "50f4a31cd6c1344f4448be51e3016a84e96b2566",
+    "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+    "image": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\candidate\\mmx6-runtime.exe",
+      "sha256": "7932585a45a53eae7ad1fbdd083ecd4ff3512741ff42c841f31cada8af4db25f"
+    },
+    "declared_manifest_sha256": "595914ab91176b013ff2abd8e19fbdfdf6cf4c85b1414223fafdc0e9a57f308c",
+    "owned_pid": 81032
+  },
+  "source_packet_sha256": "877ca00c6156ba4704d11d469001f2d9f7166f646f9659e8f6fe1e6ca10b1836",
+  "actual_parent_status": "source_bound_native_entry_survey_completed_mechanics_unverified",
+  "completed": [
+    {
+      "id": "s17-a0-c00",
+      "target": "80072DB0",
+      "case": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s17-a0-c00\\entry-observations.json",
+        "bytes": 486723,
+        "sha256": "cef3db05535f6c649842cf768f4378ce875875b3ae7e327617d48aa3d117b410"
+      },
+      "checks": {
+        "resident_code_and_original_record": true,
+        "exact_mailbox8_only": true,
+        "original_initializer_observed_once": true,
+        "two_seat_grounded_camera_readiness": true,
+        "native_destination_observed": true,
+        "owned_composed_completion_retained": true
+      },
+      "initializer_once": {
+        "generation": 1,
+        "state": 3,
+        "reason": 0,
+        "stage": 17,
+        "section": 0,
+        "checkpoint": 0,
+        "nonce": 4288064001,
+        "initializer_entries": 1,
+        "record": "80072DB0",
+        "tainted": 1
+      },
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s17-a0-c00\\s17-a0-c00-composed.png",
+        "bytes": 2074543,
+        "sha256": "f46c5be23c99c8e0be073a9429073f856761d14370acd6e8bf5ae8c25acb18c5"
+      },
+      "root_image_viewed": true
+    },
+    {
+      "id": "s18-a0-c00",
+      "target": "80072E40",
+      "case": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s18-a0-c00\\entry-observations.json",
+        "bytes": 493166,
+        "sha256": "f3026a51c5430544ac928776e658b2b4734d383f6fd945e12173dcc9ac33cfbf"
+      },
+      "checks": {
+        "resident_code_and_original_record": true,
+        "exact_mailbox8_only": true,
+        "original_initializer_observed_once": true,
+        "two_seat_grounded_camera_readiness": true,
+        "native_destination_observed": true,
+        "owned_composed_completion_retained": true
+      },
+      "initializer_once": {
+        "generation": 2,
+        "state": 3,
+        "reason": 0,
+        "stage": 18,
+        "section": 0,
+        "checkpoint": 0,
+        "nonce": 3432129410,
+        "initializer_entries": 1,
+        "record": "80072E40",
+        "tainted": 1
+      },
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s18-a0-c00\\s18-a0-c00-composed.png",
+        "bytes": 2074543,
+        "sha256": "f7fc4606ae7e02e914376a2f3a3b37ce0610b6f97cfb463c2244d97acdc27868"
+      },
+      "root_image_viewed": true
+    },
+    {
+      "id": "s19-a0-c00",
+      "target": "80072EF4",
+      "case": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s19-a0-c00\\entry-observations.json",
+        "bytes": 499007,
+        "sha256": "60f13b368fa59076a1829878c6cd1ce6ab9aef524844dd3300fc24414d3ebf1e"
+      },
+      "checks": {
+        "resident_code_and_original_record": true,
+        "exact_mailbox8_only": true,
+        "original_initializer_observed_once": true,
+        "two_seat_grounded_camera_readiness": true,
+        "native_destination_observed": true,
+        "owned_composed_completion_retained": true
+      },
+      "initializer_once": {
+        "generation": 3,
+        "state": 3,
+        "reason": 0,
+        "stage": 19,
+        "section": 0,
+        "checkpoint": 0,
+        "nonce": 2624194819,
+        "initializer_entries": 1,
+        "record": "80072EF4",
+        "tainted": 1
+      },
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s19-a0-c00\\s19-a0-c00-composed.png",
+        "bytes": 2074543,
+        "sha256": "c4f5c0ebd547dd953b05a5f8e6aa0ed17efe6da7b482ce45a45d55f2b6b18359"
+      },
+      "root_image_viewed": true
+    },
+    {
+      "id": "s20-a0-c00",
+      "target": "80072F84",
+      "case": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s20-a0-c00\\entry-observations.json",
+        "bytes": 526486,
+        "sha256": "12d848343caba0080bbb786fc13e1c9b90986dc07e8c8a7710c196764681bcab"
+      },
+      "checks": {
+        "resident_code_and_original_record": true,
+        "exact_mailbox8_only": true,
+        "original_initializer_observed_once": true,
+        "two_seat_grounded_camera_readiness": true,
+        "native_destination_observed": true,
+        "owned_composed_completion_retained": true
+      },
+      "initializer_once": {
+        "generation": 4,
+        "state": 3,
+        "reason": 0,
+        "stage": 20,
+        "section": 0,
+        "checkpoint": 0,
+        "nonce": 1737260228,
+        "initializer_entries": 1,
+        "record": "80072F84",
+        "tainted": 1
+      },
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s20-a0-c00\\s20-a0-c00-composed.png",
+        "bytes": 2074543,
+        "sha256": "7dae5ae7c48f9650e509acdf9ca4d64b411173696df15796abc23c86cb2be279"
+      },
+      "root_image_viewed": true
+    },
+    {
+      "id": "s21-a0-c00",
+      "target": "80073014",
+      "case": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s21-a0-c00\\entry-observations.json",
+        "bytes": 472265,
+        "sha256": "d8975546c4ba9bfd7f770faed3677ed25b821689ce0fd4bd613e626c87e38890"
+      },
+      "checks": {
+        "resident_code_and_original_record": true,
+        "exact_mailbox8_only": true,
+        "original_initializer_observed_once": true,
+        "two_seat_grounded_camera_readiness": true,
+        "native_destination_observed": true,
+        "owned_composed_completion_retained": true
+      },
+      "initializer_once": {
+        "generation": 5,
+        "state": 3,
+        "reason": 0,
+        "stage": 21,
+        "section": 0,
+        "checkpoint": 0,
+        "nonce": 959325637,
+        "initializer_entries": 1,
+        "record": "80073014",
+        "tainted": 1
+      },
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s21-a0-c00\\s21-a0-c00-composed.png",
+        "bytes": 2074543,
+        "sha256": "3aab70f25ca1589de633d07ad77ae1833aef5fcba8db2c43592ae2ec3275c5ab"
+      },
+      "root_image_viewed": true
+    },
+    {
+      "id": "s22-a0-c00",
+      "target": "800730A4",
+      "case": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s22-a0-c00\\entry-observations.json",
+        "bytes": 541024,
+        "sha256": "8386b5ef04eb40c949bb706d84fad8d8fc6f9e3da3a85b61d090eb6c58f4dcd6"
+      },
+      "checks": {
+        "resident_code_and_original_record": true,
+        "exact_mailbox8_only": true,
+        "original_initializer_observed_once": true,
+        "two_seat_grounded_camera_readiness": true,
+        "native_destination_observed": true,
+        "owned_composed_completion_retained": true
+      },
+      "initializer_once": {
+        "generation": 6,
+        "state": 3,
+        "reason": 0,
+        "stage": 22,
+        "section": 0,
+        "checkpoint": 0,
+        "nonce": 4055358342,
+        "initializer_entries": 1,
+        "record": "800730A4",
+        "tainted": 1
+      },
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s22-a0-c00\\s22-a0-c00-composed.png",
+        "bytes": 2074543,
+        "sha256": "d1ec84a497f77dd8edb928c4ab9d7c93588ed3b7d02da03334f0f469fa5a2158"
+      },
+      "root_image_viewed": true
+    }
+  ],
+  "qualified_entry_setup_locations": 18,
+  "current_blocked_entry_locations": [
+    "s04-a1-c00",
+    "s16-a0-c00"
+  ],
+  "unvisited_supported_locations": 74,
+  "root_image_review": "All six actual composed images reviewed: living X/Zero and stacked HUD in the respective native layouts. Image completion is setup only.",
+  "prerequisite_bypass": "Actual original mailbox8 loader; exact8 writes percase. No route reachability, HP, inventory or success claim.",
+  "all_six_location_mechanics": "unverified",
+  "stage_end_transitions": "unverified",
+  "netplay": "unverified",
+  "gameplay_passes_added": 0,
+  "previous_failed_prefixes": "All original failed setup evidence retained.",
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s17-a0-c00\\entry-observations.json",
+      "bytes": 486723,
+      "sha256": "cef3db05535f6c649842cf768f4378ce875875b3ae7e327617d48aa3d117b410"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s17-a0-c00\\s17-a0-c00-composed.png",
+      "bytes": 2074543,
+      "sha256": "f46c5be23c99c8e0be073a9429073f856761d14370acd6e8bf5ae8c25acb18c5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s18-a0-c00\\entry-observations.json",
+      "bytes": 493166,
+      "sha256": "f3026a51c5430544ac928776e658b2b4734d383f6fd945e12173dcc9ac33cfbf"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s18-a0-c00\\s18-a0-c00-composed.png",
+      "bytes": 2074543,
+      "sha256": "f7fc4606ae7e02e914376a2f3a3b37ce0610b6f97cfb463c2244d97acdc27868"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s19-a0-c00\\entry-observations.json",
+      "bytes": 499007,
+      "sha256": "60f13b368fa59076a1829878c6cd1ce6ab9aef524844dd3300fc24414d3ebf1e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s19-a0-c00\\s19-a0-c00-composed.png",
+      "bytes": 2074543,
+      "sha256": "c4f5c0ebd547dd953b05a5f8e6aa0ed17efe6da7b482ce45a45d55f2b6b18359"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s20-a0-c00\\entry-observations.json",
+      "bytes": 526486,
+      "sha256": "12d848343caba0080bbb786fc13e1c9b90986dc07e8c8a7710c196764681bcab"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s20-a0-c00\\s20-a0-c00-composed.png",
+      "bytes": 2074543,
+      "sha256": "7dae5ae7c48f9650e509acdf9ca4d64b411173696df15796abc23c86cb2be279"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s21-a0-c00\\entry-observations.json",
+      "bytes": 472265,
+      "sha256": "d8975546c4ba9bfd7f770faed3677ed25b821689ce0fd4bd613e626c87e38890"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s21-a0-c00\\s21-a0-c00-composed.png",
+      "bytes": 2074543,
+      "sha256": "3aab70f25ca1589de633d07ad77ae1833aef5fcba8db2c43592ae2ec3275c5ab"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s22-a0-c00\\entry-observations.json",
+      "bytes": 541024,
+      "sha256": "8386b5ef04eb40c949bb706d84fad8d8fc6f9e3da3a85b61d090eb6c58f4dcd6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\case-s22-a0-c00\\s22-a0-c00-composed.png",
+      "bytes": 2074543,
+      "sha256": "d1ec84a497f77dd8edb928c4ab9d7c93588ed3b7d02da03334f0f469fa5a2158"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\recording-rejection\\settings.json",
+      "bytes": 10329,
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\recording-rejection\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\recording-rejection\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\recording-rejection\\inputs.jsonl",
+      "bytes": 783656,
+      "sha256": "6ace6b304dc9c1fa8608aa77842249cd7e5785ecd631e95e76a984f945b04e1d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\recording-rejection\\status.json",
+      "bytes": 211,
+      "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\recording-rejection\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\recording-rejection\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\qualification.json",
+      "bytes": 193214,
+      "sha256": "247455a2b096f30d0f43499a3d42178b0d56baacfa823a8246af2bf46f6bb291"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-source-packet.json",
+      "bytes": 128091,
+      "sha256": "4291fcc971872d03bb25c60295ecbffe68d21a00ce4c118a5fdaa54b78acca1c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\content-entry-batch\\entry-batch-report.json",
+      "bytes": 9005,
+      "sha256": "2e38414006a80b9c57b3266be2248457e2b70bf91eb4f2e5b67c68da84cd315b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-prefix17to22-v1-index.json",
+      "bytes": 4820,
+      "sha256": "7a4ec54562b855ac2d656e30e96a15c2f85b4e67534f8951ff771cb29e70236a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v36-50f4a31\\candidate.json",
+      "bytes": 7343,
+      "sha256": "c454fd8c17e78da36acc6de641cbc88c3319054c60ffaa014fde8bd78f1ff652"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-entry-prefix17to22-root-v1.py",
+      "bytes": 5200,
+      "sha256": "69578ad675dea58f11ef3046befcd8650539d89ed58037549ebf5414d7f3d836"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\candidate\\jump-audio\\control.jsonl",
+      "bytes": 12993851,
+      "sha256": "01bef52e99c785e7f6d6de0a7a77a593b394fca996ca2ca52759939b0a9c37a7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\candidate\\jump-audio\\stdout.log",
+      "bytes": 2908,
+      "sha256": "6cfab51f1d199cf19fe8a8ad91b177e03a76843b584fc5ff66fe24cb93c8835a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-prefix17to22-local-v36-50f4a31-v1\\candidate\\jump-audio\\stderr.log",
+      "bytes": 433,
+      "sha256": "f4e28eb6a673a4c423286ea265575558973a0c104c10ee4b2258818817fb111e"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-content\\manifest-bound-50f4a31-stage8-source-camera-entry-v7-reviewed.json",
+      "bytes": 10026,
+      "sha256": "82a9e80a33ba7f9c13bd10316b8d869e4c4396baf52b5420e1ebf7f27e4408e6"
+    }
+  ]
+}

@@ -139,9 +139,12 @@ clears its setup blocker after all 13 original dialogue responses and consumed
 neutral inputs. It preserves the original camera predicate's false result and
 independently checks the original subtype0 current and target bounds of 2048.
 The revised passive wait preserves the original 75-second and read limits.
-Entry setup coverage is now 12 qualified, 2 blocked and 80 unvisited supported
-locations. These are setup results; stage mechanics and the comparison count
-receive no additional passes.
+The [six-location entry batch](evidence/mmx6-content/manifest-bound-50f4a31-entry-prefix17to22-reviewed.json)
+also passes original first-section entries for stages 17–22 in one owned run.
+All six composed images and final parent checks were reviewed. Entry setup
+coverage is now 18 qualified, 2 blocked and 74 unvisited supported locations.
+These are setup results; stage mechanics and the comparison count receive no
+additional passes.
 F205 now passes its bounded effective-mode recording check on `f3bdbe9`, with
 107 debug and 107 production checks passing. The [LOCAL receipt](evidence/mmx6-native-replay/manifest-bound-f3bdbe9-F205-effective-mode-history-local-reviewed.json)
 binds 6,603 native input events and 19 actual mode transitions. The
