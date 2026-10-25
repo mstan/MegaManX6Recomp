@@ -1,0 +1,327 @@
+{
+  "kind": "root_reviewed_default43_dual_raster_and_offline_live_scale_regression",
+  "issue": "beads-f2vc",
+  "issue_outcome": "bounded_correctness_fix_validated",
+  "source": {
+    "game": "c32dd8f71889273a134a878ff5a4ab6644c537f0",
+    "SDK": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+    "image": "ff094835e1442bfdeafce053d42f4a399206714510f6734f9f88f998231ede5c",
+    "declared_manifest": "ba3379d2f0725761b30c220edb6a73c3f727ff950a4685eebd17e3ed17642f34",
+    "candidate_proof": "5b1e05bd8705c9125a8e71826d8199962bbaf36ff6bf0a0422283a9e84b52a1a"
+  },
+  "prior_default_native1_component": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-hud\\manifest-bound-c32dd8f-default-native1-and-Load-components-failed-parent-reviewed.json",
+    "bytes": 235648,
+    "sha256": "9537a4bfffefe0e5edf2e0ec576e79c5dd9da695fcf64722075fe0ce39168896"
+  },
+  "paired_configured2_component": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scale43-pair2-components-actual-root-reviewed-v1.json",
+    "bytes": 14112,
+    "sha256": "2b358bd195174d12421b26b710ee4422151794724ce3803069a28642a4feb700"
+  },
+  "actual_offline_root_session": 26489,
+  "actual_offline_cases": [
+    {
+      "configured": 1,
+      "actual_owned_PID": 68100,
+      "actual_scales": [
+        1,
+        2,
+        4,
+        6,
+        1
+      ],
+      "allocation_ceiling": 6,
+      "both_controls_resources": true,
+      "full_native_cards_after_exit": true,
+      "ordinary_recording": {
+        "native_updates": 4318,
+        "P2_reads": 1932,
+        "events": 6250,
+        "replay_qualified": false
+      },
+      "owned_exit": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "root_actual_PNGs_reviewed": 5
+    },
+    {
+      "configured": 2,
+      "actual_owned_PID": 67004,
+      "actual_scales": [
+        2,
+        4,
+        6,
+        1,
+        2
+      ],
+      "allocation_ceiling": 6,
+      "both_controls_resources": true,
+      "full_native_cards_after_exit": true,
+      "ordinary_recording": {
+        "native_updates": 4268,
+        "P2_reads": 1886,
+        "events": 6154,
+        "replay_qualified": false
+      },
+      "owned_exit": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "root_actual_PNGs_reviewed": 5
+    }
+  ],
+  "compiled_debug_production_focused_checks": 253,
+  "source_inverse_checks": 28,
+  "frozen_observer_source_tests": 23,
+  "production_lab_and_debug_default_OFF": true,
+  "original_production_branch_unchanged": true,
+  "universal_source_interface_unchanged": "Only a boolean dual-raster guard in existing OpenGL startup scope; no new imports, platform API, assembly or target dependency.",
+  "root_image_review": "All ten actual offline PNGs show both heroes, stacked meters/shared lives and coherent intro scene; eight live captures carry truthful scale OSD. All four configured2 paired PNGs were separately reviewed.",
+  "failed_original_parents_preserved": true,
+  "old_requested1_effective6_counterexample_preserved": true,
+  "comparison_passes_added": 0,
+  "F19": "unverified",
+  "R6": "unverified",
+  "F59": "unverified",
+  "F31": "unverified",
+  "limitations": [
+    "Actual current Windows debug candidate, direct same-host paired fixed1/2 and offline configured1/2 live1/2/4/6 scope. No claim of other-OS native execution or online live stepping.",
+    "Paired components come from failed parents whose unrelated/missing scenario gates remain false. No original report is promoted or rewritten.",
+    "Complete ordinary N/C consumption/startup/card recordings are validated; deterministic replay is unimplemented and unqualified.",
+    "Production118 compiled checks/default-OFF/source-inverse evidence is separate from debug native gameplay. No old-state compatibility work or native-save mutation."
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scale43-pair2-components-actual-root-reviewed-v1.json",
+      "bytes": 14112,
+      "sha256": "2b358bd195174d12421b26b710ee4422151794724ce3803069a28642a4feb700"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-hud\\manifest-bound-c32dd8f-default-native1-and-Load-components-failed-parent-reviewed.json",
+      "bytes": 235648,
+      "sha256": "9537a4bfffefe0e5edf2e0ec576e79c5dd9da695fcf64722075fe0ce39168896"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline1\\scale-observations\\initial-peer0.png",
+      "bytes": 2074543,
+      "sha256": "673ae2788e151eae4d65976d48280a2b56729dd4eb4b80a5c425759100499fd7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline1\\scale-observations\\live-1-peer0.png",
+      "bytes": 2074543,
+      "sha256": "1c7dfb25e968bfd024707ad0c44c711b68ca63cb93399f5dcccc4885142815e7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline1\\scale-observations\\live-2-peer0.png",
+      "bytes": 2074543,
+      "sha256": "634aa057fcb544cc918d3adeee8e0c5f91af2106e5688e3a16c9f66db0c0e95b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline1\\scale-observations\\live-3-peer0.png",
+      "bytes": 2074543,
+      "sha256": "01b6b0aafeb91d5b6a70fa0a41707cfa273e923c569a4f23b034ccf7142214aa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline1\\scale-observations\\live-4-peer0.png",
+      "bytes": 2074543,
+      "sha256": "394fc1c57f8c8562d5c09b88973897b63cae2b57b98843679e9057df3c4054ab"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline1\\candidate\\saves\\input-recordings\\session-1792945098501660-1-0\\inputs.jsonl",
+      "bytes": 819868,
+      "sha256": "59d87db12f7fdcc3c93adbe5082158f808658efda1e6240197b2525921a46fef"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline1\\candidate\\saves\\input-recordings\\session-1792945098501660-1-0\\status.json",
+      "bytes": 160,
+      "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline1\\candidate\\saves\\input-recordings\\session-1792945098501660-1-0\\settings.json",
+      "bytes": 10329,
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline1\\candidate\\saves\\input-recordings\\session-1792945098501660-1-0\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline1\\candidate\\saves\\input-recordings\\session-1792945098501660-1-0\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline1\\candidate\\saves\\input-recordings\\session-1792945098501660-1-0\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline1\\candidate\\saves\\input-recordings\\session-1792945098501660-1-0\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline1\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline1\\candidate\\saves\\card2.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline1\\scale43-result.json",
+      "bytes": 307341,
+      "sha256": "44b662dfc11add4b1dc7a838a8cb3b9633f5dd5bac7ecd56e6f86b1a1c3583ed"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline1\\scale-observations\\component.json",
+      "bytes": 43266,
+      "sha256": "1739cef217b6ee9568ad63b5b6f04aea61282b27b267cebe8f59db3604827a6c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline1\\candidate\\logs\\scale43-final-child-environment.json",
+      "bytes": 1700,
+      "sha256": "fbf1cd423283c3216acedbba7139184af3214a7d240e1de8192bdb718a5b2b9a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline1\\candidate\\mmx6-runtime.exe",
+      "bytes": 27468288,
+      "sha256": "ff094835e1442bfdeafce053d42f4a399206714510f6734f9f88f998231ede5c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline2\\scale-observations\\initial-peer0.png",
+      "bytes": 2074543,
+      "sha256": "145ca5c1d70a8ff011fc496d3467d782de2c5baff9edc782f5be5716d142524a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline2\\scale-observations\\live-1-peer0.png",
+      "bytes": 2074543,
+      "sha256": "e463ccd0702ea7018009b94e5a8a0fbb9e024a56f523f2177f1fe604b397f55c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline2\\scale-observations\\live-2-peer0.png",
+      "bytes": 2074543,
+      "sha256": "8a66b65f40de1815da06e797cb9bf4bf42c6db8ce91816d943f63be1148063c5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline2\\scale-observations\\live-3-peer0.png",
+      "bytes": 2074543,
+      "sha256": "d8038ea32b76255fead366b724ad2742ec820a8c9f35609c96317f17f8118c89"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline2\\scale-observations\\live-4-peer0.png",
+      "bytes": 2074543,
+      "sha256": "e59f09b0aa5a8c18f434273cc2c552dc13652b0cedba4c0a45d655e999cbb39c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline2\\candidate\\saves\\input-recordings\\session-1792945144107007-1-0\\inputs.jsonl",
+      "bytes": 807431,
+      "sha256": "31931f85ec9cc948f06048ea74f10960bfd9462f87e9d725ecc6395104eee3c7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline2\\candidate\\saves\\input-recordings\\session-1792945144107007-1-0\\status.json",
+      "bytes": 160,
+      "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline2\\candidate\\saves\\input-recordings\\session-1792945144107007-1-0\\settings.json",
+      "bytes": 10329,
+      "sha256": "23dc6ee1a3da14e036642951994c679cedbe1b7c6183839dd929a4dd546c2dfd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline2\\candidate\\saves\\input-recordings\\session-1792945144107007-1-0\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline2\\candidate\\saves\\input-recordings\\session-1792945144107007-1-0\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline2\\candidate\\saves\\input-recordings\\session-1792945144107007-1-0\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline2\\candidate\\saves\\input-recordings\\session-1792945144107007-1-0\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline2\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline2\\candidate\\saves\\card2.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline2\\scale43-result.json",
+      "bytes": 316418,
+      "sha256": "653fb3b38c5f2c2947defbb7c0fd72551d77f12acba3fd83118e86b540834fb4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline2\\scale-observations\\component.json",
+      "bytes": 44455,
+      "sha256": "1493951e0ea3f0ad278cb27584f41b857888ebf78bf0a66be3a0082407dfbf3f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline2\\candidate\\logs\\scale43-final-child-environment.json",
+      "bytes": 1700,
+      "sha256": "6847436c85e7aea6ceb50fa22422d8fa40c7f98381577a86ccebb8be701975b5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline2\\candidate\\mmx6-runtime.exe",
+      "bytes": 27468288,
+      "sha256": "ff094835e1442bfdeafce053d42f4a399206714510f6734f9f88f998231ede5c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v43-c32dd8f-v1\\candidate.json",
+      "bytes": 12308,
+      "sha256": "5b1e05bd8705c9125a8e71826d8199962bbaf36ff6bf0a0422283a9e84b52a1a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\offline-scale43-qualification.json",
+      "bytes": 774899,
+      "sha256": "8122562cdde12b14b42a25e7ca1af8d5bbdbef1347ef421140dfdc76dc98489c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\source-preflight.json",
+      "bytes": 23805,
+      "sha256": "562532013be02753b47b9555a5b5caa0c98a46775e5b048fa9f8a8d81bed41b2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\root-orchestration-executed-source.py",
+      "bytes": 3723,
+      "sha256": "8f6e1149bc89c459c819f46e4e07ae072eeaf686f8225f0413ecff5567d6e2c0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-offline-native-v43-c32dd8f-v1\\executed-source\\scale43_owned_offline.py",
+      "bytes": 29989,
+      "sha256": "0ca73752af0c1a7d662072f802be0f123f7771fe4250631e50afed99cdd0d7d3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run_scale43_offline_followthrough_root_v1.py",
+      "bytes": 3723,
+      "sha256": "8f6e1149bc89c459c819f46e4e07ae072eeaf686f8225f0413ecff5567d6e2c0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale43-v2-index.json",
+      "bytes": 17320,
+      "sha256": "9ef48a49226bca7fc69a760e8680fbef8a43ec8f5c3dc382c4d99b999f111924"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-scale43-offline-and-default-root-v1.py",
+      "bytes": 9361,
+      "sha256": "d469ca288436bfe365186b3c8d7169dc5ca67a95614510d13397c43a726a37ec"
+    }
+  ]
+}

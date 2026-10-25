@@ -50,8 +50,19 @@ The actual v40 producer card Loads and exports CURRENT on the v43 consumer;
 both ordinary ONLINE recordings, source/target card inventories, strict CRC
 windows, settled profile and graceful exits0 are independently checked.
 The run stops at the first ammo-gradient measurement. Its failed parent and
-original false flags remain; R6/F59/F31 gain no pass. Issue `beads-f2vc` stays
-open for other configured scales and ordinary offline live scale validation.
+original false flags remain; R6/F59/F31 gain no pass.
+The separate [default-scale regression receipt](evidence/mmx6-lifecycle/manifest-bound-c32dd8f-default-and-offline-live-scale-reviewed.json)
+now validates the SDK `7cb4742` fix on this exact candidate. The paired fixed2x
+component retains four composed captures, five matching resolved CRC windows,
+both finalized ordinary recordings and unchanged active/personal cards. Its
+whole parent remains failed for an unexecuted, unrelated native-reentry case.
+Two fresh offline processes complete genuine key1 cycles1/2/4/6/1 and2/4/6/1/2,
+restore their configured scales, retain both controls/resources and finalize
+ordinary recordings. All ten offline images were reviewed; both exits are0.
+The source-only guard preserves production behavior; 17 focused,118 debug and
+118 production compiled checks pass. This closes bounded issue `beads-f2vc`
+locally on the isolated SDK/candidate branches. Other-OS gameplay, online live
+stepping and the separate X6 comparison rows gain no pass.
 
 The live content ledger qualifies exactly two local CP2 checks, first on
 `777b4d0453b0f08546a6df06adb95ab5a211e8d9` and now requalified on

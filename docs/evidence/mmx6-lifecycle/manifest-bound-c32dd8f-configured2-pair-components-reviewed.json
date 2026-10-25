@@ -1,0 +1,283 @@
+{
+  "kind": "root_reviewed_actual43_configured2_pair_components_from_failed_parent",
+  "actual_root_session": 79217,
+  "parent_promoted": false,
+  "comparison_passes_added": 0,
+  "summary": {
+    "original_parent": "failed_preserved",
+    "unexecuted_default_native_reentry": "unverified",
+    "original_true_checks": 13,
+    "paired_configured2_component": "qualified",
+    "actual_profile": {
+      "profile": "mmx6.win64-clang22.loopback",
+      "revision": 2,
+      "selected_sha256": "567e10297b65ca4cc29945b2f36a9d5d169d234c214e0bda295670a3bcb0a9f8",
+      "peers": [
+        {
+          "capabilities": {
+            "actual_image_sha256": "ff094835e1442bfdeafce053d42f4a399206714510f6734f9f88f998231ede5c",
+            "cpu_arch": 2,
+            "features": 127,
+            "backend": 2,
+            "fp": 2,
+            "overlays": "interpreted",
+            "offers": 1
+          },
+          "settlement": {
+            "profile": "mmx6.win64-clang22.loopback",
+            "revision": 2,
+            "selected_sha256": "567e10297b65ca4cc29945b2f36a9d5d169d234c214e0bda295670a3bcb0a9f8",
+            "cycles": 0,
+            "sim_tick": 0,
+            "before_enter_guest": 1
+          }
+        },
+        {
+          "capabilities": {
+            "actual_image_sha256": "ff094835e1442bfdeafce053d42f4a399206714510f6734f9f88f998231ede5c",
+            "cpu_arch": 2,
+            "features": 127,
+            "backend": 2,
+            "fp": 2,
+            "overlays": "interpreted",
+            "offers": 1
+          },
+          "settlement": {
+            "profile": "mmx6.win64-clang22.loopback",
+            "revision": 2,
+            "selected_sha256": "567e10297b65ca4cc29945b2f36a9d5d169d234c214e0bda295670a3bcb0a9f8",
+            "cycles": 0,
+            "sim_tick": 0,
+            "before_enter_guest": 1
+          }
+        }
+      ]
+    },
+    "CRC_windows": 5,
+    "completed_composed_captures": 4
+  },
+  "exact_candidate": {
+    "game": "c32dd8f71889273a134a878ff5a4ab6644c537f0",
+    "SDK": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+    "image": "ff094835e1442bfdeafce053d42f4a399206714510f6734f9f88f998231ede5c",
+    "manifest": "ba3379d2f0725761b30c220edb6a73c3f727ff950a4685eebd17e3ed17642f34",
+    "proof": "5b1e05bd8705c9125a8e71826d8199962bbaf36ff6bf0a0422283a9e84b52a1a"
+  },
+  "original_parent_false_check": {
+    "native_reentry_automated_case_completed": false
+  },
+  "executed_parent": {
+    "actual_bytes": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\executed-source\\scale43_owned_pair.py",
+      "bytes": 89633,
+      "sha256": "e16211b127df3c431aeffd4521365e99bd2f1bdf13c83d9db147595cddbd85d4"
+    },
+    "normalized_LF_source_sha256": "f4256faab750aee72fe43a3249b8964d78017530df682efae7dbbfa019bfd500"
+  },
+  "ordinary_recording_native_and_P2_counts": [
+    {
+      "natives": 3741,
+      "P2_reads": 4765
+    },
+    {
+      "natives": 3742,
+      "P2_reads": 4767
+    }
+  ],
+  "corrupted_actual_evidence_refusals": 12,
+  "full_active_and_personal_cards_after_exit": true,
+  "root_images_reviewed": "All four actual configured2 PNGs: living X/Zero, stacked meters/shared life, coherent intro scene; sampled idle animation differs in one progressed image.",
+  "limitations": [
+    "The unrelated default native-reentry scenario was never executed. Its false flag and failed whole parent are immutable.",
+    "Five source-checked matching resolved core/mod CRC windows retain reduced samples; this does not fabricate two raw RPC replies per CRC sample.",
+    "Prelaunch settings digests name observations before normal shutdown rewrites; no terminal file is relabeled as those old bytes.",
+    "Configured fixed2 paired raster only. Offline live scaling remains unverified; no HUD/ammo/F59/F31/gameplay-row, original-all-art, production or other-target pass."
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\scale-observations\\configured2-initial-peer0.png",
+      "bytes": 2074543,
+      "sha256": "706ea6493b4ae37b4bab2d0eb8cbf2be1720aee08e4d73437cf4cc5616c1e010"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\scale-observations\\configured2-initial-peer1.png",
+      "bytes": 2074543,
+      "sha256": "706ea6493b4ae37b4bab2d0eb8cbf2be1720aee08e4d73437cf4cc5616c1e010"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\scale-observations\\configured2-progressed-peer0.png",
+      "bytes": 2074543,
+      "sha256": "c1390ede34ec1ece9b2433cb3cd8b5b8ac59a70fec67d749b7a1884e64c7f08d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\scale-observations\\configured2-progressed-peer1.png",
+      "bytes": 2074543,
+      "sha256": "706ea6493b4ae37b4bab2d0eb8cbf2be1720aee08e4d73437cf4cc5616c1e010"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-0\\mmx6-runtime.exe",
+      "bytes": 27468288,
+      "sha256": "ff094835e1442bfdeafce053d42f4a399206714510f6734f9f88f998231ede5c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-0\\logs\\scale43-final-child-environment.json",
+      "bytes": 1701,
+      "sha256": "dd3fb5ba4c3c1fc6ee84c2f7f9c3e2369989098be56922a0bbcfb8c778d66e9a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-1\\mmx6-runtime.exe",
+      "bytes": 27468288,
+      "sha256": "ff094835e1442bfdeafce053d42f4a399206714510f6734f9f88f998231ede5c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-1\\logs\\scale43-final-child-environment.json",
+      "bytes": 1701,
+      "sha256": "e66fdd14bede7c7a8565b7197218dd6ac983809798aa6ab6e0f9a46d24a67ba1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-0\\saves\\input-recordings\\session-1792944151616578-1-0\\inputs.jsonl",
+      "bytes": 1090429,
+      "sha256": "b48fbdf08029f02e5bd152119a203ba94f146a49c6674f172c5ca4d1182714c8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-0\\saves\\input-recordings\\session-1792944151616578-1-0\\status.json",
+      "bytes": 160,
+      "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-0\\saves\\input-recordings\\session-1792944151616578-1-0\\settings.json",
+      "bytes": 26708,
+      "sha256": "4530c366f0ee81cb8701faa1053de988c021334b0add0e14fad1660d8dcf03c9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-0\\saves\\input-recordings\\session-1792944151616578-1-0\\content.json",
+      "bytes": 567,
+      "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-0\\saves\\input-recordings\\session-1792944151616578-1-0\\simulation-contract.json",
+      "bytes": 350,
+      "sha256": "354cf18e0a266b46e0baaa35e9a23774698d11fa492c04bc64d60b7329f19449"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-0\\saves\\input-recordings\\session-1792944151616578-1-0\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-0\\saves\\input-recordings\\session-1792944151616578-1-0\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-0\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-0\\saves\\card2.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-1\\saves\\input-recordings\\session-1792944151616548-1-0\\inputs.jsonl",
+      "bytes": 1090807,
+      "sha256": "1cc6c43a5d42969449a4a118ebbcd559db10579e8e9bc8196241a8f5bcaac2af"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-1\\saves\\input-recordings\\session-1792944151616548-1-0\\status.json",
+      "bytes": 160,
+      "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-1\\saves\\input-recordings\\session-1792944151616548-1-0\\settings.json",
+      "bytes": 26708,
+      "sha256": "43751d3232ddd8f71206bdb0b471e2ddfca4d7998f61810bf431736dbd014c15"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-1\\saves\\input-recordings\\session-1792944151616548-1-0\\content.json",
+      "bytes": 567,
+      "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-1\\saves\\input-recordings\\session-1792944151616548-1-0\\simulation-contract.json",
+      "bytes": 350,
+      "sha256": "354cf18e0a266b46e0baaa35e9a23774698d11fa492c04bc64d60b7329f19449"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-1\\saves\\input-recordings\\session-1792944151616548-1-0\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-1\\saves\\input-recordings\\session-1792944151616548-1-0\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-1\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-1\\saves\\card2.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-1\\saves\\netplay\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\peer-1\\saves\\netplay\\card2.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\executed-source\\scale43_owned_pair.py",
+      "bytes": 89633,
+      "sha256": "e16211b127df3c431aeffd4521365e99bd2f1bdf13c83d9db147595cddbd85d4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\qualification.json",
+      "bytes": 3002510,
+      "sha256": "ac5bfe067f1d5bf4b24fafc131a4bdd4f302389fc014b0fa8992a1161deba873"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\scale43-result.json",
+      "bytes": 1672,
+      "sha256": "3955d9e4e3acb1e31a23cdd856cf59855905acaf723a0525c9a8a559021b6fed"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\pair2\\scale-observations\\component.json",
+      "bytes": 29827,
+      "sha256": "a388d3fc54c18b90c6c222a670463b0e53155f590cb739e3e7b02bcb1113adb9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\scale43-qualification.json",
+      "bytes": 2534,
+      "sha256": "b9b00d8ed4704dd2c6b6a6e4c56ae1165fadb7625ecf32ebba409ef6caa1734c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale-native-v43-c32dd8f-v2\\source-preflight.json",
+      "bytes": 23805,
+      "sha256": "562532013be02753b47b9555a5b5caa0c98a46775e5b048fa9f8a8d81bed41b2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\scale43-pair2-v2-actual-recordings-root-v1.json",
+      "bytes": 15422,
+      "sha256": "f08a8be96222ebd48327de879a7afef88449998e785c8b0ae2cf0520d9f9dffa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-scale43-v2-index.json",
+      "bytes": 17320,
+      "sha256": "9ef48a49226bca7fc69a760e8680fbef8a43ec8f5c3dc382c4d99b999f111924"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-scale43-pair2-components-root-v1.py",
+      "bytes": 10043,
+      "sha256": "4614b5e07a6568c053e18dde4a065d349e0fed5c3c7749c117f83c16cd51d776"
+    }
+  ]
+}
