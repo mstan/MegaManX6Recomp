@@ -52,6 +52,10 @@ gameplay checks and actual stage-end transitions require separate evidence.
 Visible background corruption remains unqualified. The receipt changes no
 gameplay coverage statuses.
 
+## Native terrain mechanics
+
+The [reviewed stages0?5 terrain batch](evidence/mmx6-content/manifest-bound-e0fdd1e-six-first-checkpoint-terrain-local-reviewed.json) adds six actual local `terrain_collision_scroll` passes, bringing local mode passes to8. Each checkpoint uses the original guarded initializer only as an approach bypass, then independently exercises both heroes' native jumps/landings and accepted walking with horizontal camera scrolling. All24 composed captures, source/image gates, native cards, strict fixture-taint refusals and owned exit0 were reviewed. Full intervening routes, other mechanics, netplay and campaign obligations remain unverified. Raw Recycle Lab vertical-camera excursions are retained separately; no vertical-camera/shake qualification is inferred.
+
 ## Initialize, check, render and record
 
 Use redirected non-C: temp/cache paths. The defaults point to the three

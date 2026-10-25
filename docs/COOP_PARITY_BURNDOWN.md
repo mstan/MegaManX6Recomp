@@ -14,7 +14,7 @@ publication or tracker synchronization is authorized.
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
-| [Live native coverage](COOP_X6_COVERAGE.md) | 1,665 individual cases / 3,330 independent mode results; 2 local passed, 3,328 mode results unverified; all aggregate cases unverified |
+| [Live native coverage](COOP_X6_COVERAGE.md) | 1,665 individual cases / 3,330 independent mode results; 8 local passed, 3,322 mode results unverified; all aggregate cases unverified |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The frozen
 native inventory and X6-only definitions are `COOP_X6_CONTENT.json`; live native
@@ -75,7 +75,7 @@ review, with checkpoint/protection bypasses explicit. Netplay, the other four
 CP2 checks and the whole intro obligation remain unverified. These results do
 not change the separate 234 comparison rows.
 
-All 234 reference rows are inventoried; 17/234 (7.3%) are passed. R15/F208
+All 234 reference rows are inventoried; 21/234 (9.0%) are passed. R15/F208
 now pass their exact bounded checks locally and in paired Windows loopback on
 `c3c5bdb`; their prior failures remain in history.
 R3 now has a reviewed local failure: Zero's native death burst uses X's blue
@@ -1135,3 +1135,5 @@ menu world draw. Local bug `beads-eio.1.44` is claimed for the default fix and
 exact-image local/paired regression. An earlier harness field-name collision
 is retained as a setup error, separately from the native rendering failure.
 Aggregate234 is7 passed,3 failed,224 unverified while this failure is open.
+
+The [six first-checkpoint terrain checks](evidence/mmx6-content/manifest-bound-e0fdd1e-six-first-checkpoint-terrain-local-reviewed.json) now pass locally on exact `e0fdd1e`: stages0?5 each retain independent X/Zero ascent, original ground collision and landing with the other hero stationary, followed by accepted movement and actual horizontal camera scrolling. All24 images were reviewed; native cards and graceful owned exit0 pass. The original checkpoint initializer bypasses reachability, and both strict recording/replay paths reject its tainted trace. This raises local native results from2 to8 without changing the234 comparisons or campaign/netplay aggregates. Recycle Lab retains three raw cameraY226 observations against vertical224 bounds; this bounded horizontal/ground check does not qualify vertical-camera/shake behavior or its cause.
