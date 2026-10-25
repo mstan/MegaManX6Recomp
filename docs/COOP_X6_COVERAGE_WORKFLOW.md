@@ -42,13 +42,13 @@ is not a migration or a way to discard results.
 
 ## Checkpoint entry survey
 
-The [reviewed entry-survey receipt](evidence/mmx6-content/manifest-bound-50f4a31-checkpoint-entry-survey-prefixes-reviewed.json)
-retains ten qualified checkpoint-entry setup components and two blocked
-entries on build `50f4a31`. The remaining 82 supported checkpoints have not
+The [reviewed entry-survey receipt](evidence/mmx6-content/manifest-bound-50f4a31-checkpoint-entry-survey-prefixes-v2-reviewed.json)
+retains eleven qualified checkpoint-entry setup components and three blocked
+entries on build `50f4a31`. The remaining 80 supported checkpoints have not
 been visited by this survey. Each setup uses the guarded original checkpoint
 loader and records that reachability bypass. These observations establish
 entry setup only; all six gameplay checks and actual stage-end transitions
-still require their own evidence. The completed prefixes and both failed
+still require their own evidence. The completed prefixes and all failed
 parent runs remain retained. This receipt does not change coverage statuses.
 
 ## Initialize, check, render and record
