@@ -87,9 +87,14 @@ within beam phase 1 and reach neutral ALIVE in 117 native ticks, retaining
 resources, world and both controls. Its independent route follows the original
 parent idle/control checks; the earlier combined dash-setup failures remain
 preserved. Five resolved CRC windows, both ordinary online recordings, native
-cards and owned exits pass. R6, F31, F59 and F157 have additional local passes;
+cards and owned exits pass. R6, F31, F59, F70 and F157 have additional local passes;
 their netplay and aggregate results
 remain unverified. F33's current-image state/resource and paired refusal checks pass.
+F70's [reviewed local run](evidence/mmx6-native-replay/manifest-bound-50f4a31-F70-disabled-diagnostics-local-reviewed.json)
+explicitly disables diagnostics, completes a valid current-build LOAD and native
+movement, and retains empty recorder inventories before/after LOAD and owned
+exit. Its netplay check remains unverified because the online profile separately
+forces co-op diagnostics.
 F10/F18 now pass on 1f50059 after restoring the original primary sprite sheet
 and frozen effects, with rendered local/paired requalification below. Their
 earlier 66f7db0 failures remain in history.

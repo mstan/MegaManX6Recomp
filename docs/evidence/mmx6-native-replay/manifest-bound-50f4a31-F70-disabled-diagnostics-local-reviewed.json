@@ -1,0 +1,211 @@
+{
+  "schema": 1,
+  "kind": "reviewed_LOCAL_F70_disabled_diagnostics_after_actual_current_build_LOAD",
+  "reviewed_at_utc": "2026-10-25T06:30:33.156818+00:00",
+  "issue": "beads-gxrh",
+  "comparison": "F70",
+  "frozen_row_sha256": "06ff2a11ef35dcba19de08ce896391c4ddfea31fa68530753777614805c6fd50",
+  "candidate": "50f4a31cd6c1344f4448be51e3016a84e96b2566",
+  "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+  "executable_sha256": "7932585a45a53eae7ad1fbdd083ecd4ff3512741ff42c841f31cada8af4db25f",
+  "compiled_manifest_sha256": "595914ab91176b013ff2abd8e19fbdfdf6cf4c85b1414223fafdc0e9a57f308c",
+  "admitted_modes": [
+    "local"
+  ],
+  "netplay": "unverified",
+  "result": "passed_LOCAL_F70_only",
+  "actual_parent_status": "diagnostics_disabled_actual_local_LOAD_no_recorder_observed",
+  "actual_parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "actual_valid_current_build_LOAD_and_execution": true,
+    "diagnostics_explicitly_disabled_without_environment_or_rewind_exception": true,
+    "no_recorder_directory_or_stream_before_after_LOAD_and_exit": true,
+    "owned_exit_cards_and_specimen_preserved": true
+  },
+  "source_profile": {
+    "mod_state": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\mods\\state.toml",
+      "sha256": "73f2bb7c372b67ff11c817df4bdd8a87e57759c1460ecff2af699c8efbc92564",
+      "bytes": 307
+    },
+    "catalog": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\mods\\bundled\\mmx6.diagnostics\\1.0.0\\manifest.toml",
+      "sha256": "4c8ee928a098500096b099f8569f1b74eed044fbc88b0fd1da2bd46dbce16cdf",
+      "bytes": 729
+    },
+    "settings": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\settings.toml",
+      "sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa",
+      "bytes": 272
+    },
+    "diagnostics_disabled": true,
+    "rewind": false,
+    "environment_recorder_overrides_absent": true,
+    "effective_environment_overlay": {
+      "SDL_AUDIODRIVER": "dummy",
+      "XDG_DATA_HOME": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\data",
+      "XDG_CONFIG_HOME": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\appdata",
+      "PYTHONPYCACHEPREFIX": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\cache\\pycache"
+    }
+  },
+  "actual_completed_LOAD": {
+    "id": 1589,
+    "ok": true,
+    "generation": 1,
+    "pending": 0,
+    "last_ok": 1,
+    "last_op": "load",
+    "last_slot": 9
+  },
+  "actual_observer_checks": {
+    "actual_current_build_LOAD_completed": true,
+    "actual_host_Right_moves_survivor": true,
+    "at_least24_more_native_updates": true,
+    "no_recorder_before_or_after_LOAD": true
+  },
+  "actual_terminal_inventory": {
+    "label": "root independent terminal inventory",
+    "saves": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\saves",
+    "scanned_entries": 5,
+    "recording_entries": [],
+    "no_recording_directory_or_stream": true
+  },
+  "inventory_milestones": [
+    {
+      "label": "before launch",
+      "saves": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\saves",
+      "scanned_entries": 0,
+      "recording_entries": [],
+      "no_recording_directory_or_stream": true
+    },
+    {
+      "label": "after actual owned process exit",
+      "saves": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\saves",
+      "scanned_entries": 5,
+      "recording_entries": [],
+      "no_recording_directory_or_stream": true
+    },
+    {
+      "label": "actual healthy intro before LOAD",
+      "saves": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\saves",
+      "scanned_entries": 4,
+      "recording_entries": [],
+      "no_recording_directory_or_stream": true
+    },
+    {
+      "label": "immediately after actual completed LOAD9",
+      "saves": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\saves",
+      "scanned_entries": 5,
+      "recording_entries": [],
+      "no_recording_directory_or_stream": true
+    },
+    {
+      "label": "after real movement and at least24 more native updates",
+      "saves": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\saves",
+      "scanned_entries": 5,
+      "recording_entries": [],
+      "no_recording_directory_or_stream": true
+    },
+    {
+      "label": "observer terminal, before owned shutdown",
+      "saves": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\saves",
+      "scanned_entries": 5,
+      "recording_entries": [],
+      "no_recording_directory_or_stream": true
+    }
+  ],
+  "actual_native_resources_preserved": true,
+  "source_live_state_sha256": "f208f05bf42928ef2735c670a9371c56b8a602de39808f341a8a7b76672b83d0",
+  "source_specimen_and_receipt_preserved": true,
+  "native_cards_unchanged": true,
+  "owned_exit": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\qualification.json",
+      "bytes": 1486979,
+      "sha256": "95ba2120f2273412f4ac63603771eb5c6301add8ff7463a33b5bc5878cb87239"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\disabled-recorder-LOAD\\F70-result.json",
+      "bytes": 1206498,
+      "sha256": "063122aaf8aa4f3e3f17b068e56220a08499c52f3d380b6428ef250239ccb204"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\runner-executed-source.py",
+      "bytes": 6376,
+      "sha256": "dd7d5b38936203ae9f642cb109e8ca69844891d9b70e8e7fcd1a8d63fc1f99f8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\mods\\state.toml",
+      "bytes": 307,
+      "sha256": "73f2bb7c372b67ff11c817df4bdd8a87e57759c1460ecff2af699c8efbc92564"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\mods\\diag-batch-original-state.toml",
+      "bytes": 155,
+      "sha256": "d4e99652ab49f60e834c814d7a6a533890333971126b1b65645e562521a0d457"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\settings.toml",
+      "bytes": 272,
+      "sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\environment.json",
+      "bytes": 1144,
+      "sha256": "739015b100d6d95abd4fecaac3fc8162ff79e915de5e2a680d3186b5a47ef239"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\jump-audio\\stdout.log",
+      "bytes": 2560,
+      "sha256": "0249b375c152ebb38e586535e6a9b1d496ffa3ac02f1441c38930d884d5b611f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\jump-audio\\stderr.log",
+      "bytes": 482,
+      "sha256": "d1b11765c98003fd53e806b4b0b2d7fe678f2535cf9c269214ba1f101321d6a1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\candidate\\jump-audio\\control.jsonl",
+      "bytes": 18876099,
+      "sha256": "6f615b76f6c55217d7c18603e35a761528f0da0951b9c96b9637498fea927cdc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-v1-index.json",
+      "bytes": 3611,
+      "sha256": "34cde025d59fa195b756c09d45c987fd80b264e256d553adbacf323715e799f6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-source-contract-v1.json",
+      "bytes": 5622,
+      "sha256": "5eec4b1004535d928171d226ca36b6782efcb3554c11669230bc6bfdba8c7322"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-source-pure-v1.log",
+      "bytes": 2317,
+      "sha256": "423154747be9eb64119d6f6c4b12893f5c120ad84259840ad3c408adacf9b3d0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-F70-diagnostics-disabled-local-v1.py",
+      "bytes": 4997,
+      "sha256": "9b40469d0bc68e7829d9707f70895ab8e6bf48beabba7542d3c10d9e8d78f133"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-local-v36-50f4a31-v1\\disabled-recorder-LOAD\\F70-disabled-after-LOAD-survivor.png",
+      "bytes": 2074543,
+      "sha256": "1eca580b25ee6eb9c236b55af0d0b4c5414b7e726de9356690de8c2e34571f5e"
+    }
+  ],
+  "limits": [
+    "One fresh owned Windows offline process, current v36 build, fixed X/P1 and fallen Zero/P2 live-death specimen.",
+    "Diagnostics is disabled by actual feature selection; no recorder environment override or rewind exception.",
+    "Read-only root terminal inventory independently confirms no recorder folder/stream.",
+    "One completed LOAD and real landing/Right movement/at least24 more native updates; no old-state compatibility claim.",
+    "Current saved death/HP prerequisites are disclosed setup, not newly earned mechanics.",
+    "No recorder exists in this test, so finalized capture/replay is not claimed.",
+    "Online source uses forced co-op diagnostics independently; offline absence does not qualify NETPLAY or aggregate F70."
+  ]
+}
