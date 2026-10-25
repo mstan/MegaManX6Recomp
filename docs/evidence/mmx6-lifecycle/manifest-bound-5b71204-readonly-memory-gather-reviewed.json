@@ -1,0 +1,2231 @@
+{
+  "kind": "root_qualified_bounded_readonly_RAM_mod_gather_compiled_and_native_component",
+  "game": "5b7120463bf208dc828ee8235b2399e8b63fbd1f",
+  "sdk": "72df2df17735b5a58945879a6f840eba0c0c91e1",
+  "compiled_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\candidate.json",
+    "bytes": 13700,
+    "sha256": "7f6f4a56c8504ef65d9f563df7a47f614c9cb4f9bb36c65b1730adef1f940972"
+  },
+  "image_sha256": "dc3fa298a45a71617df2bc102c07f95cc651a07748b4cea005e5d7e6ff3b3250",
+  "declared_manifest_sha256": "237c875232a102f8efaefff4984b724814b2dc566acd0791e3c1237609f6e05b",
+  "production_image_sha256": "2b4a4fba2b2ce5e0fa5df1a9ec08a549a2e189bdcccb9b418464b87d66c58190",
+  "production_declared_manifest_sha256": "3d87d8cb10cf047427e5c2480a186dc9d68774eef1e8da8f6eec0c18e93c5413",
+  "compiled_validation": {
+    "debug_ctests": 118,
+    "production_ctests": 118,
+    "sdk_focused_ctests": 17,
+    "skipped": 0,
+    "combined_source_checks": 28,
+    "actual_RAM_mod_geometry_alias_and_no_peripheral_fixture": true,
+    "whole_plan_prevalidation_and_snapshot_invariance": true,
+    "strict_full_request_parser_C_and_CPP": true,
+    "new_command_present_debug_absent_production_image": true,
+    "production_default_flags": {
+      "lab": false,
+      "debug_tools": false
+    }
+  },
+  "existing_allocator_reset_snapshot_resource_source_inverse": [
+    {
+      "relative": "runtime/src/memory.c",
+      "current_file": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-memory-gather-v42\\runtime\\src\\memory.c",
+        "bytes": 119621,
+        "sha256": "fac39436123ce9956479bb84940b6cd4045d58e57110b8004c195cb7cc02921f"
+      },
+      "baseline_commit": "4be6621ee61480b615a25bfdbca5f3f76d43ab7e",
+      "existing_allocator_reset_snapshot_and_resource_getter_text_unchanged": true
+    },
+    {
+      "relative": "runtime/src/mod_texture_banks.c",
+      "current_file": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-memory-gather-v42\\runtime\\src\\mod_texture_banks.c",
+        "bytes": 4906,
+        "sha256": "0601115be3e4584220cccdc0a0ff7cf34de9057d77280785534615de043f7726"
+      },
+      "baseline_commit": "4be6621ee61480b615a25bfdbca5f3f76d43ab7e",
+      "existing_allocator_reset_snapshot_and_resource_getter_text_unchanged": true
+    },
+    {
+      "relative": "runtime/src/mod_function_replacements.c",
+      "current_file": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-memory-gather-v42\\runtime\\src\\mod_function_replacements.c",
+        "bytes": 2413,
+        "sha256": "d0d0971dc63d594787c78b39cf7992e6eaab5aef4752796f11ce166a3f7fbae3"
+      },
+      "baseline_commit": "4be6621ee61480b615a25bfdbca5f3f76d43ab7e",
+      "existing_allocator_reset_snapshot_and_resource_getter_text_unchanged": true
+    }
+  ],
+  "native_validation": {
+    "source": {
+      "compiled_proof": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\candidate.json",
+        "bytes": 13700,
+        "sha256": "7f6f4a56c8504ef65d9f563df7a47f614c9cb4f9bb36c65b1730adef1f940972"
+      },
+      "manifest": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\frozen-build-v42-5b71204-v2\\psx_build_manifest\\psx-runtime\\Release\\manifest.json",
+        "bytes": 164208,
+        "sha256": "81459afe5d13ded15d08a1134c465390ac424f5a3f5529dab3fb4d173eca07b4"
+      },
+      "actual_candidate": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\candidate\\mmx6-runtime.exe",
+        "bytes": 27468288,
+        "sha256": "dc3fa298a45a71617df2bc102c07f95cc651a07748b4cea005e5d7e6ff3b3250"
+      },
+      "executed_runner": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-v42-memory-gather-native-root-v3.py",
+        "bytes": 13242,
+        "sha256": "f80293339e319776c162441bd0501af8289976858e69ea9b7f8171c91f94106e"
+      },
+      "executed_refusal_helper": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_expected_gather_refusal_root_v1.py",
+        "bytes": 1133,
+        "sha256": "21fe4bbc13205257e3c946e93f26f983fadf5ce9faade53e5d70708268412dc3"
+      },
+      "sources": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-memory-gather-v42\\runtime\\src\\debug_server.c",
+          "bytes": 784774,
+          "sha256": "d3675c4ad40c21057bcce88c0a22b1d3a2b0842802476d667693214c51878771"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-memory-gather-v42\\runtime\\include\\debug_memory_ranges.h",
+          "bytes": 9010,
+          "sha256": "6ece1034a79d96437f5b84eac4f0c45d25df4f3723b6f3140b3f335bb774f066"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-memory-gather-v42\\runtime\\src\\memory.c",
+          "bytes": 119621,
+          "sha256": "fac39436123ce9956479bb84940b6cd4045d58e57110b8004c195cb7cc02921f"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-memory-gather-v42\\runtime\\include\\psx_memory.h",
+          "bytes": 5343,
+          "sha256": "be6b173c3f706f3e22ebaff60ac03b2d1e3f72408bb8e6bae930670178e7bdad"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v42\\tools\\coop_debug.py",
+          "bytes": 12235,
+          "sha256": "61eae6837c54e191597a4829fdeb57f9b54a36229ebfd02fe60aec37b3ae1f1f"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v42\\tools\\qualify_mmx6_input_replay.py",
+          "bytes": 28273,
+          "sha256": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v42\\tools\\qualify_mmx6_coop_jump_audio.py",
+          "bytes": 29370,
+          "sha256": "e91dbde11541f68e554f94b747ba91c409a83322f7d4d60b26d1e3aefdf75ac9"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v42\\tools\\qualify_mmx6_coop_hud_inventory.py",
+          "bytes": 11008,
+          "sha256": "ca594aa64b184761c33415ccb89f1f48194af094533cc48e33fdb359d41e48a7"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v42\\tools\\mmx6_input_recording.py",
+          "bytes": 13664,
+          "sha256": "a4d21aaa83c9104679d549c0f5fa81bf95106ce800b0601263faaff46ae5310a"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v42\\tools\\mmx6_coop_checkpoint.py",
+          "bytes": 25303,
+          "sha256": "c8179ccf2d0a7de26213db480313c1640d95dadaa4c1238d4e71989f2ca70363"
+        }
+      ],
+      "full_compiled_checks": 253,
+      "source_client_id_guard_line": 114,
+      "source_client_rejection_line": 116,
+      "error_provenance": "Original DebugClient owns/validates real RPC id before its full ok:false exception; root expected id derives from actual preceding response.",
+      "transport_source": "SDK validates the entire bounded plan before copies; no step/republish; counter increments only after complete success.",
+      "raw_wire_bytes_exposed": false
+    },
+    "transport": {
+      "control_lines": 1755,
+      "gather_operations": 23,
+      "successful_captures": [
+        {
+          "operation": 0,
+          "line": 1314,
+          "id": 1314,
+          "capture_id": 1,
+          "request": "800120A0:516",
+          "bytes": 516,
+          "payload_sha256": "f847ca30abc155999faf0af61901710f515e8c709ba0270eaf8f6af7ad34a64d"
+        },
+        {
+          "operation": 1,
+          "line": 1315,
+          "id": 1315,
+          "capture_id": 2,
+          "request": "A00120A0:516",
+          "bytes": 516,
+          "payload_sha256": "f847ca30abc155999faf0af61901710f515e8c709ba0270eaf8f6af7ad34a64d"
+        },
+        {
+          "operation": 2,
+          "line": 1316,
+          "id": 1316,
+          "capture_id": 3,
+          "request": "806120A0:516",
+          "bytes": 516,
+          "payload_sha256": "f847ca30abc155999faf0af61901710f515e8c709ba0270eaf8f6af7ad34a64d"
+        },
+        {
+          "operation": 4,
+          "line": 1318,
+          "id": 1318,
+          "capture_id": 4,
+          "request": "800120A0:516",
+          "bytes": 516,
+          "payload_sha256": "f847ca30abc155999faf0af61901710f515e8c709ba0270eaf8f6af7ad34a64d"
+        },
+        {
+          "operation": 6,
+          "line": 1320,
+          "id": 1320,
+          "capture_id": 5,
+          "request": "800120A0:516",
+          "bytes": 516,
+          "payload_sha256": "f847ca30abc155999faf0af61901710f515e8c709ba0270eaf8f6af7ad34a64d"
+        },
+        {
+          "operation": 8,
+          "line": 1322,
+          "id": 1322,
+          "capture_id": 6,
+          "request": "800120A0:516",
+          "bytes": 516,
+          "payload_sha256": "f847ca30abc155999faf0af61901710f515e8c709ba0270eaf8f6af7ad34a64d"
+        },
+        {
+          "operation": 10,
+          "line": 1324,
+          "id": 1324,
+          "capture_id": 7,
+          "request": "800120A0:516",
+          "bytes": 516,
+          "payload_sha256": "f847ca30abc155999faf0af61901710f515e8c709ba0270eaf8f6af7ad34a64d"
+        },
+        {
+          "operation": 12,
+          "line": 1326,
+          "id": 1326,
+          "capture_id": 8,
+          "request": "800120A0:516",
+          "bytes": 516,
+          "payload_sha256": "f847ca30abc155999faf0af61901710f515e8c709ba0270eaf8f6af7ad34a64d"
+        },
+        {
+          "operation": 14,
+          "line": 1328,
+          "id": 1328,
+          "capture_id": 9,
+          "request": "800120A0:516",
+          "bytes": 516,
+          "payload_sha256": "f847ca30abc155999faf0af61901710f515e8c709ba0270eaf8f6af7ad34a64d"
+        },
+        {
+          "operation": 16,
+          "line": 1330,
+          "id": 1330,
+          "capture_id": 10,
+          "request": "800120A0:516",
+          "bytes": 516,
+          "payload_sha256": "f847ca30abc155999faf0af61901710f515e8c709ba0270eaf8f6af7ad34a64d"
+        },
+        {
+          "operation": 17,
+          "line": 1331,
+          "id": 1331,
+          "capture_id": 11,
+          "request": "80073D50:8,8008EAF0:16,8008EF48:7488,800970A0:344,800971F8:84,80097420:8,8009B7B0:4608,800C456C:6,800CCED0:148,800E3142:2,800F981C:66,9F080000:6488",
+          "bytes": 19266,
+          "payload_sha256": "4fac844cc7c9045c64960b9617bcf5cfc24ce11b78a2c0995bebcf8a7bb13111"
+        },
+        {
+          "operation": 18,
+          "line": 1731,
+          "id": 1731,
+          "capture_id": 12,
+          "request": "80073D50:8,8008EAF0:16,8008EF48:7488,800970A0:344,800971F8:84,80097420:8,8009B7B0:4608,800C456C:6,800CCED0:148,800E3142:2,800F981C:66,9F080000:6488",
+          "bytes": 19266,
+          "payload_sha256": "95046c047411c08cdfc16654513b252cf92a28b5893f79f488b3b1627cfb0b4d"
+        },
+        {
+          "operation": 19,
+          "line": 1734,
+          "id": 1734,
+          "capture_id": 13,
+          "request": "80073D50:8,8008EAF0:16,8008EF48:7488,800970A0:344,800971F8:84,80097420:8,8009B7B0:4608,800C456C:6,800CCED0:148,800E3142:2,800F981C:66,9F080000:6488",
+          "bytes": 19266,
+          "payload_sha256": "15f9febc25cbd28c8736b72d367b12a7d5d96f8624576945a15700fd5b12b27e"
+        },
+        {
+          "operation": 20,
+          "line": 1737,
+          "id": 1737,
+          "capture_id": 14,
+          "request": "80073D50:8,8008EAF0:16,8008EF48:7488,800970A0:344,800971F8:84,80097420:8,8009B7B0:4608,800C456C:6,800CCED0:148,800E3142:2,800F981C:66,9F080000:6488",
+          "bytes": 19266,
+          "payload_sha256": "93521ed6c6706534d5a3352c5a70bd52f3e11bf83c168161a3b98bbcb5645b01"
+        },
+        {
+          "operation": 21,
+          "line": 1740,
+          "id": 1740,
+          "capture_id": 15,
+          "request": "80073D50:8,8008EAF0:16,8008EF48:7488,800970A0:344,800971F8:84,80097420:8,8009B7B0:4608,800C456C:6,800CCED0:148,800E3142:2,800F981C:66,9F080000:6488",
+          "bytes": 19266,
+          "payload_sha256": "e1336570a113604423fade128850ba47b20d8136be0766c611c060c362e5fa62"
+        },
+        {
+          "operation": 22,
+          "line": 1743,
+          "id": 1743,
+          "capture_id": 16,
+          "request": "80073D50:8,8008EAF0:16,8008EF48:7488,800970A0:344,800971F8:84,80097420:8,8009B7B0:4608,800C456C:6,800CCED0:148,800E3142:2,800F981C:66,9F080000:6488",
+          "bytes": 19266,
+          "payload_sha256": "a122d06b7f9c8385b13bff49a48ab7e1c1e697fca50779eb1688cdb2643cbb36"
+        }
+      ],
+      "expected_whole_request_refusals": [
+        {
+          "operation": 3,
+          "line": 1317,
+          "ranges": "800120A0:4,A00120A0:4",
+          "expected_id_from_actual_preceding_success": 1317,
+          "complete_owned_exception": "read_memory_ranges: runtime rejected command: {'id': 1317, 'ok': False, 'error': 'invalid or unavailable bounded RAM/mod ranges'}",
+          "decoded": {
+            "id": 1317,
+            "ok": false,
+            "error": "invalid or unavailable bounded RAM/mod ranges"
+          },
+          "preceding_capture_id": "3",
+          "continued_capture_id": "4",
+          "raw_wire_exposed": false
+        },
+        {
+          "operation": 5,
+          "line": 1319,
+          "ranges": "800120A0:4,1F801810:4",
+          "expected_id_from_actual_preceding_success": 1319,
+          "complete_owned_exception": "read_memory_ranges: runtime rejected command: {'id': 1319, 'ok': False, 'error': 'invalid or unavailable bounded RAM/mod ranges'}",
+          "decoded": {
+            "id": 1319,
+            "ok": false,
+            "error": "invalid or unavailable bounded RAM/mod ranges"
+          },
+          "preceding_capture_id": "4",
+          "continued_capture_id": "5",
+          "raw_wire_exposed": false
+        },
+        {
+          "operation": 7,
+          "line": 1321,
+          "ranges": "800120A0:4,9F0FFFFF:1",
+          "expected_id_from_actual_preceding_success": 1321,
+          "complete_owned_exception": "read_memory_ranges: runtime rejected command: {'id': 1321, 'ok': False, 'error': 'invalid or unavailable bounded RAM/mod ranges'}",
+          "decoded": {
+            "id": 1321,
+            "ok": false,
+            "error": "invalid or unavailable bounded RAM/mod ranges"
+          },
+          "preceding_capture_id": "5",
+          "continued_capture_id": "6",
+          "raw_wire_exposed": false
+        },
+        {
+          "operation": 9,
+          "line": 1323,
+          "ranges": "00800000:4",
+          "expected_id_from_actual_preceding_success": 1323,
+          "complete_owned_exception": "read_memory_ranges: runtime rejected command: {'id': 1323, 'ok': False, 'error': 'invalid or unavailable bounded RAM/mod ranges'}",
+          "decoded": {
+            "id": 1323,
+            "ok": false,
+            "error": "invalid or unavailable bounded RAM/mod ranges"
+          },
+          "preceding_capture_id": "6",
+          "continued_capture_id": "7",
+          "raw_wire_exposed": false
+        },
+        {
+          "operation": 11,
+          "line": 1325,
+          "ranges": "800120A0:0",
+          "expected_id_from_actual_preceding_success": 1325,
+          "complete_owned_exception": "read_memory_ranges: runtime rejected command: {'id': 1325, 'ok': False, 'error': 'invalid or unavailable bounded RAM/mod ranges'}",
+          "decoded": {
+            "id": 1325,
+            "ok": false,
+            "error": "invalid or unavailable bounded RAM/mod ranges"
+          },
+          "preceding_capture_id": "7",
+          "continued_capture_id": "8",
+          "raw_wire_exposed": false
+        },
+        {
+          "operation": 13,
+          "line": 1327,
+          "ranges": "800120A0:32769",
+          "expected_id_from_actual_preceding_success": 1327,
+          "complete_owned_exception": "read_memory_ranges: runtime rejected command: {'id': 1327, 'ok': False, 'error': 'invalid or unavailable bounded RAM/mod ranges'}",
+          "decoded": {
+            "id": 1327,
+            "ok": false,
+            "error": "invalid or unavailable bounded RAM/mod ranges"
+          },
+          "preceding_capture_id": "8",
+          "continued_capture_id": "9",
+          "raw_wire_exposed": false
+        },
+        {
+          "operation": 15,
+          "line": 1329,
+          "ranges": "800120A0:4,",
+          "expected_id_from_actual_preceding_success": 1329,
+          "complete_owned_exception": "read_memory_ranges: runtime rejected command: {'id': 1329, 'ok': False, 'error': 'invalid or unavailable bounded RAM/mod ranges'}",
+          "decoded": {
+            "id": 1329,
+            "ok": false,
+            "error": "invalid or unavailable bounded RAM/mod ranges"
+          },
+          "preceding_capture_id": "9",
+          "continued_capture_id": "10",
+          "raw_wire_exposed": false
+        }
+      ],
+      "host_capture_ids": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "RPC_ids_advance_for_errors": true,
+      "host_capture_ids_not_consumed_by_errors": true,
+      "raw_wire_exposed": false,
+      "raw_wire_limit": "Read-only owned DebugClient validates actual id before rejecting ok:false; complete untruncated exception representation is retained, not raw socket bytes."
+    },
+    "metrics": [
+      {
+        "id": 1331,
+        "capture_id": "11",
+        "total": 19266,
+        "range_count": 12,
+        "ranges": [
+          {
+            "addr": "0x80073D50",
+            "len": 8,
+            "offset": 0,
+            "sha256": "da8d8f948e652263fcb4c8a24cb000a09db8fff49beb902c2434ed598176e252"
+          },
+          {
+            "addr": "0x8008EAF0",
+            "len": 16,
+            "offset": 8,
+            "sha256": "b2ec03bdb369f9907eb46c12da0f7a4deb49c29adb5c3f45b328eed4df173db5"
+          },
+          {
+            "addr": "0x8008EF48",
+            "len": 7488,
+            "offset": 24,
+            "sha256": "815a644a03ed0297e45c2df07fc6a18026d963c1d422289cbd2c00af626c61dd"
+          },
+          {
+            "addr": "0x800970A0",
+            "len": 344,
+            "offset": 7512,
+            "sha256": "399f5d46fbfae05812ae8de56203c382827536c972e98abb7a8dacdb4ba6335e"
+          },
+          {
+            "addr": "0x800971F8",
+            "len": 84,
+            "offset": 7856,
+            "sha256": "edd28728ae2297f57835a151a1682e921536dfddc11c519abf18f2869a6c7598"
+          },
+          {
+            "addr": "0x80097420",
+            "len": 8,
+            "offset": 7940,
+            "sha256": "24cdaaf7aaa0c10d8663d6327d973bc56834dc6505187c5fa0bbaf822fb632c9"
+          },
+          {
+            "addr": "0x8009B7B0",
+            "len": 4608,
+            "offset": 7948,
+            "sha256": "0754afb7eed1e4d7d1a20ebb21ce5366e7cbd1f097fc9a335cbd337cb9dfa077"
+          },
+          {
+            "addr": "0x800C456C",
+            "len": 6,
+            "offset": 12556,
+            "sha256": "b0f66adc83641586656866813fd9dd0b8ebb63796075661ba45d1aa8089e1d44"
+          },
+          {
+            "addr": "0x800CCED0",
+            "len": 148,
+            "offset": 12562,
+            "sha256": "38a06c581d0ce1f09e956fbac7b6bd609bb9abd3c3dafa1afe37b27710309d2f"
+          },
+          {
+            "addr": "0x800E3142",
+            "len": 2,
+            "offset": 12710,
+            "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+          },
+          {
+            "addr": "0x800F981C",
+            "len": 66,
+            "offset": 12712,
+            "sha256": "987ef336f0c835cf523db812718bf8f19cb2f83f5974a6191b33e2c38c907f7d"
+          },
+          {
+            "addr": "0x9F080000",
+            "len": 6488,
+            "offset": 12778,
+            "sha256": "2220ffcb036da3373e59c5b58718f5584d2950223bdc61333f25f033b5d8097c"
+          }
+        ],
+        "payload_sha256": "4fac844cc7c9045c64960b9617bcf5cfc24ce11b78a2c0995bebcf8a7bb13111",
+        "raw_typed_publication": {
+          "schema": 1,
+          "tick": 165,
+          "sequence": 330,
+          "native_timer": 164,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 1299158764,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 11010048,
+              "y_raw": 73007104,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "ordinary_live_P1_body": {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        "raw_private_P2_body": {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 11010048,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        "ordinary_PLAY90_native_timer": 164,
+        "typed_native_timer": 164,
+        "ordinary_minus_typed_clock": 0,
+        "raw_P1_equals_typed_P1": true,
+        "raw_private_P2_equals_typed_P2": true,
+        "freshness_claim": false,
+        "instruction_atomicity_claim": false,
+        "canonical_semantic_snapshot_claim": false,
+        "limit": "One handler captures current RAM plus previously published bytes; a valid even publication may be older than current native body/time."
+      },
+      {
+        "id": 1731,
+        "capture_id": "12",
+        "total": 19266,
+        "range_count": 12,
+        "ranges": [
+          {
+            "addr": "0x80073D50",
+            "len": 8,
+            "offset": 0,
+            "sha256": "da8d8f948e652263fcb4c8a24cb000a09db8fff49beb902c2434ed598176e252"
+          },
+          {
+            "addr": "0x8008EAF0",
+            "len": 16,
+            "offset": 8,
+            "sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+          },
+          {
+            "addr": "0x8008EF48",
+            "len": 7488,
+            "offset": 24,
+            "sha256": "815a644a03ed0297e45c2df07fc6a18026d963c1d422289cbd2c00af626c61dd"
+          },
+          {
+            "addr": "0x800970A0",
+            "len": 344,
+            "offset": 7512,
+            "sha256": "289e154f548ba5a4cdcac8e49147a06fc46c1f96c804018ddc8727e2090991c5"
+          },
+          {
+            "addr": "0x800971F8",
+            "len": 84,
+            "offset": 7856,
+            "sha256": "edd28728ae2297f57835a151a1682e921536dfddc11c519abf18f2869a6c7598"
+          },
+          {
+            "addr": "0x80097420",
+            "len": 8,
+            "offset": 7940,
+            "sha256": "4bd8df624f1e06641d4b0b55dc582891a29277e4d96aa289e6e6613353c2407d"
+          },
+          {
+            "addr": "0x8009B7B0",
+            "len": 4608,
+            "offset": 7948,
+            "sha256": "50a29c981f1b75c79ddb8ab6be70d0613285e0b4c11bdbf676e81eb6b8871f66"
+          },
+          {
+            "addr": "0x800C456C",
+            "len": 6,
+            "offset": 12556,
+            "sha256": "b0f66adc83641586656866813fd9dd0b8ebb63796075661ba45d1aa8089e1d44"
+          },
+          {
+            "addr": "0x800CCED0",
+            "len": 148,
+            "offset": 12562,
+            "sha256": "46b937d0dbfb421e628e9a8c89ccfed5838adfd82296964cb61359a66879191b"
+          },
+          {
+            "addr": "0x800E3142",
+            "len": 2,
+            "offset": 12710,
+            "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+          },
+          {
+            "addr": "0x800F981C",
+            "len": 66,
+            "offset": 12712,
+            "sha256": "987ef336f0c835cf523db812718bf8f19cb2f83f5974a6191b33e2c38c907f7d"
+          },
+          {
+            "addr": "0x9F080000",
+            "len": 6488,
+            "offset": 12778,
+            "sha256": "813a5aa253266290245f3860d85b54dcd9b3bdee03b6a50139ff2dea2e8b6b8c"
+          }
+        ],
+        "payload_sha256": "95046c047411c08cdfc16654513b252cf92a28b5893f79f488b3b1627cfb0b4d",
+        "raw_typed_publication": {
+          "schema": 1,
+          "tick": 331,
+          "sequence": 662,
+          "native_timer": 154,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 3459738715,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 11010048,
+              "y_raw": 73007104,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "ordinary_live_P1_body": {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        "raw_private_P2_body": {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 11010048,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        "ordinary_PLAY90_native_timer": 155,
+        "typed_native_timer": 154,
+        "ordinary_minus_typed_clock": 1,
+        "raw_P1_equals_typed_P1": true,
+        "raw_private_P2_equals_typed_P2": true,
+        "freshness_claim": false,
+        "instruction_atomicity_claim": false,
+        "canonical_semantic_snapshot_claim": false,
+        "limit": "One handler captures current RAM plus previously published bytes; a valid even publication may be older than current native body/time."
+      },
+      {
+        "id": 1734,
+        "capture_id": "13",
+        "total": 19266,
+        "range_count": 12,
+        "ranges": [
+          {
+            "addr": "0x80073D50",
+            "len": 8,
+            "offset": 0,
+            "sha256": "da8d8f948e652263fcb4c8a24cb000a09db8fff49beb902c2434ed598176e252"
+          },
+          {
+            "addr": "0x8008EAF0",
+            "len": 16,
+            "offset": 8,
+            "sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+          },
+          {
+            "addr": "0x8008EF48",
+            "len": 7488,
+            "offset": 24,
+            "sha256": "815a644a03ed0297e45c2df07fc6a18026d963c1d422289cbd2c00af626c61dd"
+          },
+          {
+            "addr": "0x800970A0",
+            "len": 344,
+            "offset": 7512,
+            "sha256": "c06d90dd347711faa6a442fa7607be25a310033a5ae2526cf8c0acb1e63edcec"
+          },
+          {
+            "addr": "0x800971F8",
+            "len": 84,
+            "offset": 7856,
+            "sha256": "edd28728ae2297f57835a151a1682e921536dfddc11c519abf18f2869a6c7598"
+          },
+          {
+            "addr": "0x80097420",
+            "len": 8,
+            "offset": 7940,
+            "sha256": "ba0bc39288e4dfa877ecf18d1d2a852c8742ba584d07e64efb7f4c72ed4a101e"
+          },
+          {
+            "addr": "0x8009B7B0",
+            "len": 4608,
+            "offset": 7948,
+            "sha256": "165258eb19be38ee20ccca932908754d2a82183dfb6b404ec4507eb6c1cc6d1c"
+          },
+          {
+            "addr": "0x800C456C",
+            "len": 6,
+            "offset": 12556,
+            "sha256": "b0f66adc83641586656866813fd9dd0b8ebb63796075661ba45d1aa8089e1d44"
+          },
+          {
+            "addr": "0x800CCED0",
+            "len": 148,
+            "offset": 12562,
+            "sha256": "00e66cfce28308d1f913b3c355795906d8952b0de8fd0fef7eae0065de109d3d"
+          },
+          {
+            "addr": "0x800E3142",
+            "len": 2,
+            "offset": 12710,
+            "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+          },
+          {
+            "addr": "0x800F981C",
+            "len": 66,
+            "offset": 12712,
+            "sha256": "987ef336f0c835cf523db812718bf8f19cb2f83f5974a6191b33e2c38c907f7d"
+          },
+          {
+            "addr": "0x9F080000",
+            "len": 6488,
+            "offset": 12778,
+            "sha256": "b64c5f092ac5bede63681f6917bf8f48abf12e225d5d6f49007c521bf8a75d0b"
+          }
+        ],
+        "payload_sha256": "15f9febc25cbd28c8736b72d367b12a7d5d96f8624576945a15700fd5b12b27e",
+        "raw_typed_publication": {
+          "schema": 1,
+          "tick": 335,
+          "sequence": 670,
+          "native_timer": 158,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 565166784,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 11010048,
+              "y_raw": 73007104,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "ordinary_live_P1_body": {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        "raw_private_P2_body": {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 11010048,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        "ordinary_PLAY90_native_timer": 159,
+        "typed_native_timer": 158,
+        "ordinary_minus_typed_clock": 1,
+        "raw_P1_equals_typed_P1": true,
+        "raw_private_P2_equals_typed_P2": true,
+        "freshness_claim": false,
+        "instruction_atomicity_claim": false,
+        "canonical_semantic_snapshot_claim": false,
+        "limit": "One handler captures current RAM plus previously published bytes; a valid even publication may be older than current native body/time."
+      },
+      {
+        "id": 1737,
+        "capture_id": "14",
+        "total": 19266,
+        "range_count": 12,
+        "ranges": [
+          {
+            "addr": "0x80073D50",
+            "len": 8,
+            "offset": 0,
+            "sha256": "da8d8f948e652263fcb4c8a24cb000a09db8fff49beb902c2434ed598176e252"
+          },
+          {
+            "addr": "0x8008EAF0",
+            "len": 16,
+            "offset": 8,
+            "sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+          },
+          {
+            "addr": "0x8008EF48",
+            "len": 7488,
+            "offset": 24,
+            "sha256": "815a644a03ed0297e45c2df07fc6a18026d963c1d422289cbd2c00af626c61dd"
+          },
+          {
+            "addr": "0x800970A0",
+            "len": 344,
+            "offset": 7512,
+            "sha256": "26c752910ba560325fdd7e5c39ab5d0c6ff47e705665b7f8306639f6a6ba9679"
+          },
+          {
+            "addr": "0x800971F8",
+            "len": 84,
+            "offset": 7856,
+            "sha256": "edd28728ae2297f57835a151a1682e921536dfddc11c519abf18f2869a6c7598"
+          },
+          {
+            "addr": "0x80097420",
+            "len": 8,
+            "offset": 7940,
+            "sha256": "4fcc5cb7d710c427324dd9ac0107d53beeb850b81bea291de441b1c99474510c"
+          },
+          {
+            "addr": "0x8009B7B0",
+            "len": 4608,
+            "offset": 7948,
+            "sha256": "3396cb98b2940d7567556290129a570d900235807ac01803aa709e55fc3178c0"
+          },
+          {
+            "addr": "0x800C456C",
+            "len": 6,
+            "offset": 12556,
+            "sha256": "b0f66adc83641586656866813fd9dd0b8ebb63796075661ba45d1aa8089e1d44"
+          },
+          {
+            "addr": "0x800CCED0",
+            "len": 148,
+            "offset": 12562,
+            "sha256": "0fb30f9872b3cfea6369685bbca4eeef3d9bf3a3c2301774ec4e7adc1b0974f4"
+          },
+          {
+            "addr": "0x800E3142",
+            "len": 2,
+            "offset": 12710,
+            "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+          },
+          {
+            "addr": "0x800F981C",
+            "len": 66,
+            "offset": 12712,
+            "sha256": "987ef336f0c835cf523db812718bf8f19cb2f83f5974a6191b33e2c38c907f7d"
+          },
+          {
+            "addr": "0x9F080000",
+            "len": 6488,
+            "offset": 12778,
+            "sha256": "ce96da4fe84ea3aa69678a8867493e44b97f9b8a40f543c57de86532a5646810"
+          }
+        ],
+        "payload_sha256": "93521ed6c6706534d5a3352c5a70bd52f3e11bf83c168161a3b98bbcb5645b01",
+        "raw_typed_publication": {
+          "schema": 1,
+          "tick": 337,
+          "sequence": 674,
+          "native_timer": 160,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 564677985,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 11010048,
+              "y_raw": 73007104,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "ordinary_live_P1_body": {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        "raw_private_P2_body": {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 11010048,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        "ordinary_PLAY90_native_timer": 160,
+        "typed_native_timer": 160,
+        "ordinary_minus_typed_clock": 0,
+        "raw_P1_equals_typed_P1": true,
+        "raw_private_P2_equals_typed_P2": true,
+        "freshness_claim": false,
+        "instruction_atomicity_claim": false,
+        "canonical_semantic_snapshot_claim": false,
+        "limit": "One handler captures current RAM plus previously published bytes; a valid even publication may be older than current native body/time."
+      },
+      {
+        "id": 1740,
+        "capture_id": "15",
+        "total": 19266,
+        "range_count": 12,
+        "ranges": [
+          {
+            "addr": "0x80073D50",
+            "len": 8,
+            "offset": 0,
+            "sha256": "da8d8f948e652263fcb4c8a24cb000a09db8fff49beb902c2434ed598176e252"
+          },
+          {
+            "addr": "0x8008EAF0",
+            "len": 16,
+            "offset": 8,
+            "sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+          },
+          {
+            "addr": "0x8008EF48",
+            "len": 7488,
+            "offset": 24,
+            "sha256": "815a644a03ed0297e45c2df07fc6a18026d963c1d422289cbd2c00af626c61dd"
+          },
+          {
+            "addr": "0x800970A0",
+            "len": 344,
+            "offset": 7512,
+            "sha256": "a424fa70f7dddbddbf7127af6de1a2ebd4999449b1a86c608d1349ae5c9ee25b"
+          },
+          {
+            "addr": "0x800971F8",
+            "len": 84,
+            "offset": 7856,
+            "sha256": "edd28728ae2297f57835a151a1682e921536dfddc11c519abf18f2869a6c7598"
+          },
+          {
+            "addr": "0x80097420",
+            "len": 8,
+            "offset": 7940,
+            "sha256": "d6659b079f678239943dca0ccab0f629a7dabcf92541146a0d4496c126a1aebd"
+          },
+          {
+            "addr": "0x8009B7B0",
+            "len": 4608,
+            "offset": 7948,
+            "sha256": "a7505c3e406cec7da5395daa45508a87d3a3102683d3c4c18c32bff17b888daa"
+          },
+          {
+            "addr": "0x800C456C",
+            "len": 6,
+            "offset": 12556,
+            "sha256": "b0f66adc83641586656866813fd9dd0b8ebb63796075661ba45d1aa8089e1d44"
+          },
+          {
+            "addr": "0x800CCED0",
+            "len": 148,
+            "offset": 12562,
+            "sha256": "d576bfb4c454e7da370a3088be8b0882f44ffffe8114502740fbd79c4eadac3d"
+          },
+          {
+            "addr": "0x800E3142",
+            "len": 2,
+            "offset": 12710,
+            "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+          },
+          {
+            "addr": "0x800F981C",
+            "len": 66,
+            "offset": 12712,
+            "sha256": "987ef336f0c835cf523db812718bf8f19cb2f83f5974a6191b33e2c38c907f7d"
+          },
+          {
+            "addr": "0x9F080000",
+            "len": 6488,
+            "offset": 12778,
+            "sha256": "77844f92b556c7da732de362ae98697cc737d9c3319cc3846723944724fd5cbd"
+          }
+        ],
+        "payload_sha256": "e1336570a113604423fade128850ba47b20d8136be0766c611c060c362e5fa62",
+        "raw_typed_publication": {
+          "schema": 1,
+          "tick": 339,
+          "sequence": 678,
+          "native_timer": 162,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 1512852424,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 11010048,
+              "y_raw": 73007104,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "ordinary_live_P1_body": {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        "raw_private_P2_body": {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 11010048,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        "ordinary_PLAY90_native_timer": 162,
+        "typed_native_timer": 162,
+        "ordinary_minus_typed_clock": 0,
+        "raw_P1_equals_typed_P1": true,
+        "raw_private_P2_equals_typed_P2": true,
+        "freshness_claim": false,
+        "instruction_atomicity_claim": false,
+        "canonical_semantic_snapshot_claim": false,
+        "limit": "One handler captures current RAM plus previously published bytes; a valid even publication may be older than current native body/time."
+      },
+      {
+        "id": 1743,
+        "capture_id": "16",
+        "total": 19266,
+        "range_count": 12,
+        "ranges": [
+          {
+            "addr": "0x80073D50",
+            "len": 8,
+            "offset": 0,
+            "sha256": "da8d8f948e652263fcb4c8a24cb000a09db8fff49beb902c2434ed598176e252"
+          },
+          {
+            "addr": "0x8008EAF0",
+            "len": 16,
+            "offset": 8,
+            "sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+          },
+          {
+            "addr": "0x8008EF48",
+            "len": 7488,
+            "offset": 24,
+            "sha256": "815a644a03ed0297e45c2df07fc6a18026d963c1d422289cbd2c00af626c61dd"
+          },
+          {
+            "addr": "0x800970A0",
+            "len": 344,
+            "offset": 7512,
+            "sha256": "1e4417388f50726a0193ec6d402ce04e2bc945094b7f945fff1f36e1e6a12922"
+          },
+          {
+            "addr": "0x800971F8",
+            "len": 84,
+            "offset": 7856,
+            "sha256": "edd28728ae2297f57835a151a1682e921536dfddc11c519abf18f2869a6c7598"
+          },
+          {
+            "addr": "0x80097420",
+            "len": 8,
+            "offset": 7940,
+            "sha256": "a18ccdba6e42234c795b2a5a11b7ab587ae8256a4ed7f61475fe25919e9d434d"
+          },
+          {
+            "addr": "0x8009B7B0",
+            "len": 4608,
+            "offset": 7948,
+            "sha256": "2eddd3e7ed067006deab881eeeb20bd594c018d0275d22ad6e126578b3151bb5"
+          },
+          {
+            "addr": "0x800C456C",
+            "len": 6,
+            "offset": 12556,
+            "sha256": "b0f66adc83641586656866813fd9dd0b8ebb63796075661ba45d1aa8089e1d44"
+          },
+          {
+            "addr": "0x800CCED0",
+            "len": 148,
+            "offset": 12562,
+            "sha256": "76884c3d68f72a6f7f6b41e9c7de4dc4dafb8b97d6ba12bf447d9d7c71d79623"
+          },
+          {
+            "addr": "0x800E3142",
+            "len": 2,
+            "offset": 12710,
+            "sha256": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7"
+          },
+          {
+            "addr": "0x800F981C",
+            "len": 66,
+            "offset": 12712,
+            "sha256": "987ef336f0c835cf523db812718bf8f19cb2f83f5974a6191b33e2c38c907f7d"
+          },
+          {
+            "addr": "0x9F080000",
+            "len": 6488,
+            "offset": 12778,
+            "sha256": "b68f66587ad8881758c4bca04630cd6f8a4504dc8ca76fc56cf6583e9b5bdc6d"
+          }
+        ],
+        "payload_sha256": "a122d06b7f9c8385b13bff49a48ab7e1c1e697fca50779eb1688cdb2643cbb36",
+        "raw_typed_publication": {
+          "schema": 1,
+          "tick": 343,
+          "sequence": 686,
+          "native_timer": 166,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 1254012064,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 11010048,
+              "y_raw": 73007104,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "ordinary_live_P1_body": {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        "raw_private_P2_body": {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 11010048,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        "ordinary_PLAY90_native_timer": 166,
+        "typed_native_timer": 166,
+        "ordinary_minus_typed_clock": 0,
+        "raw_P1_equals_typed_P1": true,
+        "raw_private_P2_equals_typed_P2": true,
+        "freshness_claim": false,
+        "instruction_atomicity_claim": false,
+        "canonical_semantic_snapshot_claim": false,
+        "limit": "One handler captures current RAM plus previously published bytes; a valid even publication may be older than current native body/time."
+      }
+    ],
+    "parent_late_gates": {
+      "original_four_parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "component_checks": {
+        "actual_full_19266_byte_floor_bundle_six_times": true,
+        "actual_original_code_KSEG_and_retail_alias_bytes": true,
+        "actual_seven_errors_no_partial_response_or_id_consumption": true,
+        "full_typed_bytes_preserved_without_freshness_claim": true,
+        "original_CP0_setup_and_separate_forward_publications": true
+      },
+      "owned_pid": 68956,
+      "shutdown": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "cards": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\candidate\\saves\\card1.mcd",
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\candidate\\saves\\card2.mcd",
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\candidate\\saves\\input-recordings\\session-1792932526748529-1-0\\card1.initial.mcd",
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\candidate\\saves\\input-recordings\\session-1792932526748529-1-0\\card2.initial.mcd",
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "checkpoint": {
+        "target": {
+          "id": "s00-a0-c00",
+          "stage": 0,
+          "section": 0,
+          "checkpoint": 0,
+          "stage_name": "Intro / Eurasia ruins",
+          "stage_role": "campaign",
+          "table": "80073134",
+          "record": "80072108",
+          "player": {
+            "x": 144,
+            "y": 976
+          },
+          "camera": {
+            "x": 0,
+            "y": 944,
+            "min_x": 0,
+            "max_x": 5120,
+            "min_y": 896,
+            "max_y": 944
+          },
+          "arrival": 64,
+          "status": "unverified",
+          "checks": {
+            "terrain_collision_scroll": "unverified",
+            "enemies_interactions": "unverified",
+            "music_sfx": "unverified",
+            "checkpoint_retry": "unverified",
+            "boss": "unverified",
+            "exit_actual_transition": "unverified"
+          }
+        },
+        "actual_completion": {
+          "generation": 1,
+          "state": 3,
+          "reason": 0,
+          "stage": 0,
+          "section": 0,
+          "checkpoint": 0,
+          "nonce": 1,
+          "initializer_entries": 1,
+          "record": "80072108",
+          "tainted": 1
+        },
+        "checks": {
+          "requested_tuple": true,
+          "original_initializer_observed_once": true,
+          "inventoried_record": true,
+          "fixture_bypass_retained": true,
+          "native_gameplay": true,
+          "publication_after_completed_receipt": true,
+          "enrolled_living_idle_roster": true,
+          "native_gameplay_tuple": true,
+          "native_entry_gates_clear": true,
+          "native_p1_visible_idle_grounded": true,
+          "native_previous_position_settled": true,
+          "native_p1_agrees_with_publication": true,
+          "p1_at_authored_x": true,
+          "selected_camera_bounds": true,
+          "camera_inside_authored_bounds": true,
+          "actors_in_current_native_viewport": true,
+          "display_enabled": true
+        }
+      },
+      "scope": "Default fixture-tainted transport run only; no HUD/mechanic/floor/API/ledger outcome inferred from generic parent status"
+    },
+    "recording": {
+      "source": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\candidate\\saves\\input-recordings\\session-1792932526748529-1-0\\inputs.jsonl",
+        "bytes": 786989,
+        "sha256": "30ebb6fb49eb7b22e333452b8fd35cf438ab1b63f54122e930131b71be1428f3"
+      },
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "dc3fa298a45a71617df2bc102c07f95cc651a07748b4cea005e5d7e6ff3b3250",
+        "manifest_sha256": "237c875232a102f8efaefff4984b724814b2dc566acd0791e3c1237609f6e05b",
+        "mode": "offline",
+        "profile": null,
+        "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+        "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      "events": 5994,
+      "natives": 4190,
+      "p2_reads": 1804,
+      "native_status": {
+        "contract": "mmx6.native-consumption.v1",
+        "epoch": 1,
+        "failure": "unilateral debug or fixture input contaminated capture",
+        "schema": 1,
+        "scope": "native-consumption diagnostics; replay unimplemented",
+        "status": "failed"
+      },
+      "independent_strict_refusals": {
+        "ordinary_capture": {
+          "type": "InvalidRecording",
+          "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+        },
+        "offline_replay": {
+          "type": "InvalidRecording",
+          "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+        }
+      },
+      "artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\recording-rejection\\settings.json",
+          "bytes": 10329,
+          "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\recording-rejection\\content.json",
+          "bytes": 503,
+          "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\recording-rejection\\simulation-contract.json",
+          "bytes": 259,
+          "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\recording-rejection\\inputs.jsonl",
+          "bytes": 786989,
+          "sha256": "30ebb6fb49eb7b22e333452b8fd35cf438ab1b63f54122e930131b71be1428f3"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\recording-rejection\\status.json",
+          "bytes": 211,
+          "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\recording-rejection\\card1.initial.mcd",
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\recording-rejection\\card2.initial.mcd",
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "finalized_capture_admitted": false,
+      "replay_admitted": false
+    }
+  },
+  "independent_actual_reduction_recomputed_exactly": true,
+  "root_checks": {
+    "compiled253_zero_skips": true,
+    "source28_passed": true,
+    "actual_16_successful_captures_and7_specific_refusals": true,
+    "six_complete12_range19266_byte_bundles": true,
+    "three_original_main_loop_RAM_aliases": true,
+    "whole_response_no_partial_success_and_errors_do_not_consume_capture_ids": true,
+    "all_four_original_parent_gates_cards_and_graceful_exit0": true,
+    "debug_command_absent_in_production_image": true,
+    "actual_clock_lag_and_raw_wire_limits_retained": true
+  },
+  "qualification": {
+    "API_component": "qualified",
+    "issue": "beads-eio.3.407",
+    "floor_timing": "unverified",
+    "floor_carry": "unverified",
+    "F39": "unverified",
+    "comparison_passes_added": 0,
+    "content_mode_passes_added": 0
+  },
+  "scope": "Source/real backing tests and one LOCAL actual transport run qualify the API component. Included typed publication can be stale; host capture ID is not a native clock. This does not establish floor timing or gameplay.",
+  "earlier_probe_failures": "v1 expected refusal raised by owned client; v2 accessed nonexistent facade counter. Both actual partial runs remain failed/unchanged.",
+  "limitations": [
+    "Source-bound complete client exceptionrepr is NOT raw socket bytes; original client validates actual response id first.",
+    "Only actual3 aliases,7 specific errors and6 bundles in one LOCAL owned run; no exhaustive API/address/paired qualification.",
+    "Gather capture_id is process-local host provenance, not a native simulation/publication clock.",
+    "Current RAM+old typed publication in one handler does not make that publication fresh; actual captures12/13 lag by1 native tick.",
+    "Checkpoint8 original CP0 is setup bypass; no floor/content/allocator-reset/F39/gameplay/state/art/HUD/ledger promotion.",
+    "Earlier v1 uncaught-error and v2 facade-counter harness failures remain failed/unchanged."
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-v42-v3-independent-index-v1.json",
+      "bytes": 10765,
+      "sha256": "c7f673767b635e5d27a4dc6ece2eb4d4b1044e8410ac0e8e2c2de35b203ffc3e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\qualification.json",
+      "bytes": 2847169,
+      "sha256": "879df063d41172832e55aaa9a02f9ffdf0433cf744eeb4b5f79584f308d29751"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\native-memory-gather-result.json",
+      "bytes": 1269671,
+      "sha256": "6db3d2ac3e4e9a6ba983c78fb7d7793d7a23772ba9a07b1446696bb8178b6535"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\candidate\\jump-audio\\control.jsonl",
+      "bytes": 7816492,
+      "sha256": "f7b6eaa1c290807b13f6732a673f3540eea6e6659fcebf4a7f5ca6da8683100d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-v42-v3-independent-control-subset-v1.json",
+      "bytes": 260575,
+      "sha256": "7520f139718759cf53abf42f67d0841e7f947f95e5907f1e5da2c3d576bb1cfc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\candidate.json",
+      "bytes": 13700,
+      "sha256": "7f6f4a56c8504ef65d9f563df7a47f614c9cb4f9bb36c65b1730adef1f940972"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\frozen-build-v42-5b71204-v2\\psx_build_manifest\\psx-runtime\\Release\\manifest.json",
+      "bytes": 164208,
+      "sha256": "81459afe5d13ded15d08a1134c465390ac424f5a3f5529dab3fb4d173eca07b4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\candidate\\mmx6-runtime.exe",
+      "bytes": 27468288,
+      "sha256": "dc3fa298a45a71617df2bc102c07f95cc651a07748b4cea005e5d7e6ff3b3250"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-v42-memory-gather-native-root-v3.py",
+      "bytes": 13242,
+      "sha256": "f80293339e319776c162441bd0501af8289976858e69ea9b7f8171c91f94106e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_expected_gather_refusal_root_v1.py",
+      "bytes": 1133,
+      "sha256": "21fe4bbc13205257e3c946e93f26f983fadf5ce9faade53e5d70708268412dc3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-memory-gather-v42\\runtime\\src\\debug_server.c",
+      "bytes": 784774,
+      "sha256": "d3675c4ad40c21057bcce88c0a22b1d3a2b0842802476d667693214c51878771"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-memory-gather-v42\\runtime\\include\\debug_memory_ranges.h",
+      "bytes": 9010,
+      "sha256": "6ece1034a79d96437f5b84eac4f0c45d25df4f3723b6f3140b3f335bb774f066"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-memory-gather-v42\\runtime\\src\\memory.c",
+      "bytes": 119621,
+      "sha256": "fac39436123ce9956479bb84940b6cd4045d58e57110b8004c195cb7cc02921f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-memory-gather-v42\\runtime\\include\\psx_memory.h",
+      "bytes": 5343,
+      "sha256": "be6b173c3f706f3e22ebaff60ac03b2d1e3f72408bb8e6bae930670178e7bdad"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v42\\tools\\coop_debug.py",
+      "bytes": 12235,
+      "sha256": "61eae6837c54e191597a4829fdeb57f9b54a36229ebfd02fe60aec37b3ae1f1f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v42\\tools\\qualify_mmx6_input_replay.py",
+      "bytes": 28273,
+      "sha256": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v42\\tools\\qualify_mmx6_coop_jump_audio.py",
+      "bytes": 29370,
+      "sha256": "e91dbde11541f68e554f94b747ba91c409a83322f7d4d60b26d1e3aefdf75ac9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v42\\tools\\qualify_mmx6_coop_hud_inventory.py",
+      "bytes": 11008,
+      "sha256": "ca594aa64b184761c33415ccb89f1f48194af094533cc48e33fdb359d41e48a7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v42\\tools\\mmx6_input_recording.py",
+      "bytes": 13664,
+      "sha256": "a4d21aaa83c9104679d549c0f5fa81bf95106ce800b0601263faaff46ae5310a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v42\\tools\\mmx6_coop_checkpoint.py",
+      "bytes": 25303,
+      "sha256": "c8179ccf2d0a7de26213db480313c1640d95dadaa4c1238d4e71989f2ca70363"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\candidate\\saves\\card2.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\candidate\\saves\\input-recordings\\session-1792932526748529-1-0\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\candidate\\saves\\input-recordings\\session-1792932526748529-1-0\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\candidate\\saves\\input-recordings\\session-1792932526748529-1-0\\inputs.jsonl",
+      "bytes": 786989,
+      "sha256": "30ebb6fb49eb7b22e333452b8fd35cf438ab1b63f54122e930131b71be1428f3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\recording-rejection\\settings.json",
+      "bytes": 10329,
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\recording-rejection\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\recording-rejection\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\recording-rejection\\inputs.jsonl",
+      "bytes": 786989,
+      "sha256": "30ebb6fb49eb7b22e333452b8fd35cf438ab1b63f54122e930131b71be1428f3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\recording-rejection\\status.json",
+      "bytes": 211,
+      "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\recording-rejection\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-native-local-v42-5b71204-v3\\recording-rejection\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-v42-v3-independent-reduction-v1.json",
+      "bytes": 57059,
+      "sha256": "2b9b807bb694ab0ed42f2b5af4a3df27af5c35674da93fd548855dc2dc060c7e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reduce_memory_gather_native_v42_v3_independent_v1.py",
+      "bytes": 22865,
+      "sha256": "5d9af2906c94027a27d03a14edc0b19ddcb2a40e2bb52743336f29da9277e261"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\audit_memory_gather_v42_v3_owned_sources_v1.py",
+      "bytes": 3552,
+      "sha256": "e60a60fa2119406f21ef919569b57f2927fe64443478fd83dc3480c05c4dd3d9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-v42-v3-owned-source-audit-v1.json",
+      "bytes": 9607,
+      "sha256": "afb868fae2cac0b504f1eef90360f2a7a6d592648401274e36b0640182f499de"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\test_memory_gather_v42_v3_independent_v1.py",
+      "bytes": 7419,
+      "sha256": "9dc926621055ad5cc35b181987f2dfa5b24802b6ac4d0f1e96e66efa7a4ae1b5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\test_memory_gather_v42_v3_independent_v1.log",
+      "bytes": 7386,
+      "sha256": "c63e6db49e7477658e800f4c42841602abc4198467e85efaa0068aa4890d9e05"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\test_memory_gather_v42_v3_domains_v2.py",
+      "bytes": 2852,
+      "sha256": "9f066d5ebd34dd9af85874b450f18d2b212909ec7302425bc3055cd06e8c11ca"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\test_memory_gather_v42_v3_domains_v2.log",
+      "bytes": 2218,
+      "sha256": "1c3cee45c37b86fc061e042695c57120c12d90edea637b604a77b14e61c4442c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\memory-gather-v42-v3-independent-review-contract-v1.txt",
+      "bytes": 6934,
+      "sha256": "03949044defd2821f3dbf80a13902d5e1b313b4a94f2e4989115989e41b79091"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\debug-configure.log",
+      "bytes": 11116,
+      "sha256": "8b50c5b70a75175cd484062489ba48d586158142860ea5ab9e14d0b2828739a3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\debug-build.log",
+      "bytes": 280194,
+      "sha256": "07f8ccdfc20c3fadf0097dbf18f6fd2e235976e9c9fcde2b79a7431dc6830f8b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\debug-ctest.log",
+      "bytes": 35570,
+      "sha256": "d0908830f7bcdf5a07ace6b011af5fb59d16dd311370e2efae4fce1ae208318e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\debug-CMakeCache.txt",
+      "bytes": 38094,
+      "sha256": "9549d4d72a7ab6f0ce4e8f0546ec35f3d6907331fce00d202e4ade78f315e8ee"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\production-configure.log",
+      "bytes": 11030,
+      "sha256": "b29d19fc7b071d933fe3dfccd78a7b24220c16a603a985c866c32d3d94c6b646"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\production-build.log",
+      "bytes": 278816,
+      "sha256": "6285afe7ce2677dd56f498b7cf10c4a6da68963dd195345a9303678841754315"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\production-ctest.log",
+      "bytes": 35580,
+      "sha256": "413ddc03a9124ee681ff665d2e8a40010dc74fde1b4e2284cfcc17bf7d0955b0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\production-CMakeCache.txt",
+      "bytes": 38228,
+      "sha256": "db615ec6e7ec017645fe9774e7496472d537d058598f24ec130ec99a3784a70c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\sdk-configure.log",
+      "bytes": 10624,
+      "sha256": "fe36932423003fcb1b8b7739eca02b34eb40061eb7f171c7408fb6b8c12db031"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\sdk-build.log",
+      "bytes": 14474,
+      "sha256": "1eb55149838534f2a09d6efe752a1a471244b87e73acd83c8077fcc776ca7519"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\sdk-ctest.log",
+      "bytes": 4960,
+      "sha256": "307e4b353be99a882a5e2514e4570c727693b892ad3b3dd79e25f756e5ef7768"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\sdk-mod_memory_snapshot_test.exe",
+      "bytes": 96256,
+      "sha256": "9a12f77dc5a52fb4e6856c54373a81033b567c98cf0458498320c5164e2f28d0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\sdk-mod_texture_banks_test.exe",
+      "bytes": 94720,
+      "sha256": "21b8e2a1641d03a86205b007b5eba43180df322a1f9048111f4843d3e9eec0d9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\sdk-mod_function_replacements_test.exe",
+      "bytes": 93184,
+      "sha256": "1564d81d8e25d32189f5960ab533c83874cf7448bf5c4da5f8e724684c020462"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\sdk-mod_resource_stats_service_test.exe",
+      "bytes": 87552,
+      "sha256": "567e18e828f2eb073409d9286d924208c724fde8f218bc211b40dea112777cf8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\sdk-mod_resource_stats_production_test.exe",
+      "bytes": 87552,
+      "sha256": "ac16f72d53ebdf224a380f230d803a44ec3c3381f9067c5ef44c57e22d72b1b0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\sdk-mod_resource_stats_fallback_test.exe",
+      "bytes": 87552,
+      "sha256": "ac16f72d53ebdf224a380f230d803a44ec3c3381f9067c5ef44c57e22d72b1b0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\sdk-debug_native_entry_context_service_test.exe",
+      "bytes": 97792,
+      "sha256": "8d53ec3fcf4ee353721332f129f8d972247891ebefcd5487d58b3c3676ab1c48"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\sdk-debug_native_entry_context_production_test.exe",
+      "bytes": 91136,
+      "sha256": "d3a84f4cb1da4adbfb1dd5c7a347f5ad80bbd356e94bda75384a7dea920e7f78"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\sdk-debug_native_entry_context_fallback_test.exe",
+      "bytes": 91136,
+      "sha256": "d3a84f4cb1da4adbfb1dd5c7a347f5ad80bbd356e94bda75384a7dea920e7f78"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\sdk-debug_memory_ranges_parse_c_test.exe",
+      "bytes": 95232,
+      "sha256": "817a64816852683be3929be8ad8bc2620a14662b7f770db7cc7b60d1b6e502df"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\sdk-debug_memory_ranges_parse_cpp_test.exe",
+      "bytes": 95232,
+      "sha256": "7972035b71a5e0e582ee0bdf8115022ba1c5ee4b258a7c585b709d4f23adfbd1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\sdk-debug_memory_ranges_debug_test.exe",
+      "bytes": 97280,
+      "sha256": "be57dfab1badb87b43ec126f86d5d6c98747578bb17ab04f66f6967a6aa58253"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\sdk-debug_memory_ranges_production_test.exe",
+      "bytes": 97280,
+      "sha256": "be57dfab1badb87b43ec126f86d5d6c98747578bb17ab04f66f6967a6aa58253"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v42-5b71204-v2\\production-mmx6-runtime.exe",
+      "bytes": 28172288,
+      "sha256": "2b4a4fba2b2ce5e0fa5df1a9ec08a549a2e189bdcccb9b418464b87d66c58190"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\freeze-v42-memory-gather-game-v2.py",
+      "bytes": 8828,
+      "sha256": "8699913464f9cb34bd3b5a724bfee65107052160a1bf9f990a5cb11a7ddebffc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\prepare-v42-memory-gather-game-v1.py",
+      "bytes": 2594,
+      "sha256": "2c03415d0b63bb900b1be1ed92276a79200bfd4062f97814f8bc4ea2bce9015b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v42-memory-gather-game-v1.ps1",
+      "bytes": 1967,
+      "sha256": "ed5964ff8a695d9b70ba677e08ab8bdadce80a331b170dc7672a5291119dcb69"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v42-memory-gather-sdk-v1.ps1",
+      "bytes": 1979,
+      "sha256": "4fa4f76487cb9236249b5cddeeb5b7dfbee6dc54927f558de2be5e3983693e71"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v42-memory-gather-sdk-v2.ps1",
+      "bytes": 1994,
+      "sha256": "3fd9f045136e983ace8536f51dfd7cc1d3f36b4404804794d6809985cdb7a6cf"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\configure-v42-memory-gather-sdk-v1.log",
+      "bytes": 15250,
+      "sha256": "1444040b78e4a83ec36654b67e43518aca000c27287f87645ec0c82c6540a12d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\candidate.json",
+      "bytes": 14366,
+      "sha256": "43eaca949faa039c247146b9ddc568d6d0d5e7436fdfac311964495288887b8e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v42-game-v1-F39-source-audit.log",
+      "bytes": 1325,
+      "sha256": "5c3fe5a1e1593cfd0236a383be23ef400578a6079f953dcee91298f46c2dafdc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v42-game-v1-game-context-source-audit.log",
+      "bytes": 1358,
+      "sha256": "2f7e4b3ba52c1d8c33b151903c603a447115d932befb6097a8cd440458123bfc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v42-game-v1-SDK-context-source-audit.log",
+      "bytes": 1334,
+      "sha256": "f867e083ec598e504ef90debc8ba1b0f20d17b6c8b9378031d5e48c6b999506e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-v42-memory-gather-root-v1.py",
+      "bytes": 5430,
+      "sha256": "ebb1c79959a001f58ede2845345335caaf3c9e0a3b04c086884885141aa184ad"
+    }
+  ]
+}

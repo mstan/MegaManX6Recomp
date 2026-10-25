@@ -163,6 +163,16 @@ test failure at a 261-character sidecar path remains preserved; only the CMake
 test output folder was shortened. This proves the API component; native
 launcher reset/rematch growth, readiness and F39 remain unverified. The current
 LAN route still needs the SDK/RNet ownership seam tracked in `beads-eio.3.406`.
+The [bounded RAM-gather receipt](evidence/mmx6-lifecycle/manifest-bound-5b71204-readonly-memory-gather-reviewed.json)
+qualifies the read-only API component (`beads-eio.3.407`) on game `5b71204` and
+SDK `72df2df`: 17 focused SDK, 118 debug and 118 production checks pass. The
+actual owned run retains sixteen successful captures, three original RAM
+aliases and seven complete refusals followed by continued valid reads. Six
+captures contain all twelve ranges and 19,266 bytes in one handler. Two retain
+a typed publication one native tick older than current RAM; host capture IDs
+do not establish freshness. The command is absent from the production image.
+Earlier probe failures remain preserved. Moving-floor timing and carry still
+require their own successful native evidence.
 
 The [actual entry-context transport receipt](evidence/mmx6-death/manifest-bound-1128b9d-native-entry-context-transport-reviewed.json)
 retains 2,757 tagged native entries, 102 read-only suppression witnesses and the
