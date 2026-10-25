@@ -7246,17 +7246,112 @@
           "src/mods/mmx6_coop_plugin.c:diagnostics",
           "src/mods/mmx6_coop_plugin.c:diagnostic_setup"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+            "build_identity": {
+              "executable_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+              "compiled_manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "platform": "Windows",
+              "configuration": "local",
+              "stdio": "inherited and detached NULL handles",
+              "input": "none; controlled pre-lobby configuration failure"
+            },
+            "action": "Launch the actual exact-image executable with an invalid two-player setup; inspect the default startup log locator, original error and absence of native recordings. Verify no-console paths and normal native boot/finalization separately.",
+            "outcome": "Default startup log preserves the original malformed player-count error before native recording and is discoverable beside the executable. Three cases exit1 as expected. Normal boot/finalized trace/cards/exit0 and9 logger tests pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-native-recording/manifest-bound-e0fdd1e-F48-startup-errors-reviewed.json",
+                "bytes": 5383,
+                "sha256": "20b17ccabf6c27f80980a6171bfbded01f0ceb06d29b9c761339d2e3c16651fc"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F48-startup-actual-v48-root-v4\\qualification.json",
+                "bytes": 8650,
+                "sha256": "582532c536ba96b47439717c65ab102a5355d81a1b80a7a8324ca8337ba970ed"
+              },
+              {
+                "path": "docs/COOP_STARTUP_LOGS.md",
+                "bytes": 741,
+                "sha256": "536830b695bac5333bad0f4d2080665bf66111e11cc30809db620fd0f035fdbb"
+              }
+            ],
+            "limits": [
+              "F48 startup logging only. A controlled malformed two-player setup stops the actual local/netplay-configured executable before lobby or gameplay. Expected native exit1 is not a peer gameplay pass.",
+              "Actual inherited stderr and detached NULL-handle local cases, plus a detached NULL-handle netplay-startup case, use the same exact image. Inherited bytes match exactly one original Windows CRT text-mode LF translation, including literal CR from the TOML source.",
+              "Existing X5 portable startup logger adapted by title prefixes. Nine meaningful existing handle/tee/unavailable-path tests pass. No new general diagnostic protocol.",
+              "Normal muted local boot reaches both heroes, keeps the startup log readable, finalizes5820 ordered events and exits0 with cards unchanged. Root viewed the composed HUD/body regression image; no other gameplay comparison is promoted.",
+              "External Discord/service failures, Internet, other hosts/OS, physical controllers and owner handoffs remain separate/deferred. The malformed configuration prevents opening a lobby; no service connection or simulation is claimed.",
+              "Earlier wrapper failures remain preserved: v1 supplied only one preflight image, v2/v3 assumed the wrong Windows newline comparison. Only the complete v4 matrix and normal-boot result are admitted.",
+              "Fix landed locally as9cb8e0a. Actual candidate is isolated e0fdd1e/SDK7cb474; R retains its earlier SDK pin and does not inherit whole-candidate gameplay qualification."
+            ],
+            "bypasses": [
+              "Deliberately malformed private two-player config; no native outcome or user card changed."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+            "build_identity": {
+              "executable_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+              "compiled_manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "platform": "Windows",
+              "configuration": "netplay",
+              "stdio": "detached NULL handles",
+              "input": "none; controlled pre-lobby configuration failure"
+            },
+            "action": "Launch the actual exact-image executable with an invalid two-player setup; inspect the default startup log locator, original error and absence of native recordings. Verify no-console paths and normal native boot/finalization separately.",
+            "outcome": "Default startup log preserves the original malformed player-count error before native recording and is discoverable beside the executable. Three cases exit1 as expected. Normal boot/finalized trace/cards/exit0 and9 logger tests pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-native-recording/manifest-bound-e0fdd1e-F48-startup-errors-reviewed.json",
+                "bytes": 5383,
+                "sha256": "20b17ccabf6c27f80980a6171bfbded01f0ceb06d29b9c761339d2e3c16651fc"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F48-startup-actual-v48-root-v4\\qualification.json",
+                "bytes": 8650,
+                "sha256": "582532c536ba96b47439717c65ab102a5355d81a1b80a7a8324ca8337ba970ed"
+              },
+              {
+                "path": "docs/COOP_STARTUP_LOGS.md",
+                "bytes": 741,
+                "sha256": "536830b695bac5333bad0f4d2080665bf66111e11cc30809db620fd0f035fdbb"
+              }
+            ],
+            "limits": [
+              "F48 startup logging only. A controlled malformed two-player setup stops the actual local/netplay-configured executable before lobby or gameplay. Expected native exit1 is not a peer gameplay pass.",
+              "Actual inherited stderr and detached NULL-handle local cases, plus a detached NULL-handle netplay-startup case, use the same exact image. Inherited bytes match exactly one original Windows CRT text-mode LF translation, including literal CR from the TOML source.",
+              "Existing X5 portable startup logger adapted by title prefixes. Nine meaningful existing handle/tee/unavailable-path tests pass. No new general diagnostic protocol.",
+              "Normal muted local boot reaches both heroes, keeps the startup log readable, finalizes5820 ordered events and exits0 with cards unchanged. Root viewed the composed HUD/body regression image; no other gameplay comparison is promoted.",
+              "External Discord/service failures, Internet, other hosts/OS, physical controllers and owner handoffs remain separate/deferred. The malformed configuration prevents opening a lobby; no service connection or simulation is claimed.",
+              "Earlier wrapper failures remain preserved: v1 supplied only one preflight image, v2/v3 assumed the wrong Windows newline comparison. Only the complete v4 matrix and normal-boot result are admitted.",
+              "Fix landed locally as9cb8e0a. Actual candidate is isolated e0fdd1e/SDK7cb474; R retains its earlier SDK pin and does not inherit whole-candidate gameplay qualification."
+            ],
+            "bypasses": [
+              "Deliberately malformed private two-player config; no native outcome or user card changed."
+            ]
+          }
+        ],
+        "limitations": "F48 default early error logging passed on exact e0fdd1e/SDK7cb474 for local and netplay-configured pre-lobby failures, including real detached NULL handles. Original configuration error is retained before native recording. Normal muted boot/finalized trace/cards/exit0 regression passes. External sign-in/service, Internet and other hosts remain separate."
       }
     },
     {

@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "kind": "F48_pre_game_startup_error_logging_review",
+  "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+  "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+  "executable_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+  "compiled_manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+  "admitted_modes": [
+    "local",
+    "netplay"
+  ],
+  "runtime_fix_local_commit": "9cb8e0a",
+  "controlled_failure_report": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F48-startup-actual-v48-root-v4\\qualification.json",
+    "bytes": 8650,
+    "sha256": "582532c536ba96b47439717c65ab102a5355d81a1b80a7a8324ca8337ba970ed"
+  },
+  "failure_logs": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F48-startup-actual-v48-root-v4\\local-tee\\saves\\diagnostics\\startup-1792968996416524-57492.log",
+      "bytes": 882,
+      "sha256": "ae64b7241e5d98db1a3c6a0ccc913b99b20c5b6dd8af9520467ce760b350e62c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F48-startup-actual-v48-root-v4\\local-none\\saves\\diagnostics\\startup-1792968996820597-77264.log",
+      "bytes": 885,
+      "sha256": "38e498805a3d3ed9f3bca243073646c50ce1da4211fbce97738b9d2f5ede84de"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F48-startup-actual-v48-root-v4\\netplay-none\\saves\\diagnostics\\startup-1792968997216793-81672.log",
+      "bytes": 891,
+      "sha256": "35d28243e80326052fb636e2ff00ae295d64a86cd5318fc9b3fe021d407f63cb"
+    }
+  ],
+  "normal_regression": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F48-normal-boot-v48-root-v1\\qualification.json",
+    "bytes": 372741,
+    "sha256": "7b42f76d04273d71334d41c3c602c14e5360ef577258cb34af6e5420d4ad449c"
+  },
+  "normal_recording": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F48-normal-boot-v48-root-v1\\candidate\\saves\\input-recordings\\session-1792969077510142-1-0\\inputs.jsonl",
+    "sha256": "79130e7f947742f1977aa94f0c4fa6a5af09803ca92f5034b852ce7d3ba66df2",
+    "events": 5820,
+    "natives": 4084,
+    "p2_reads": 1736,
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+      "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "requested_jump_seats": [],
+    "consumed_cross_seen_anywhere": [
+      0
+    ],
+    "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence"
+  },
+  "focused_checks": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F48-focused-tests-v1.log",
+    "bytes": 2822,
+    "sha256": "050e1ae29cefb0ec2956f151a8d717c15f8e2baf6813b7c3f05b11926b843e69"
+  },
+  "port_provenance": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F48-existing-X5-port-provenance-v1.json",
+    "bytes": 1635,
+    "sha256": "2dd1940dfd275612ddeed994b9b83d24feb715b869c925189ca09f14beb870d9"
+  },
+  "player_instructions": {
+    "path": "docs/COOP_STARTUP_LOGS.md",
+    "bytes": 741,
+    "sha256": "536830b695bac5333bad0f4d2080665bf66111e11cc30809db620fd0f035fdbb"
+  },
+  "limits": [
+    "F48 startup logging only. A controlled malformed two-player setup stops the actual local/netplay-configured executable before lobby or gameplay. Expected native exit1 is not a peer gameplay pass.",
+    "Actual inherited stderr and detached NULL-handle local cases, plus a detached NULL-handle netplay-startup case, use the same exact image. Inherited bytes match exactly one original Windows CRT text-mode LF translation, including literal CR from the TOML source.",
+    "Existing X5 portable startup logger adapted by title prefixes. Nine meaningful existing handle/tee/unavailable-path tests pass. No new general diagnostic protocol.",
+    "Normal muted local boot reaches both heroes, keeps the startup log readable, finalizes5820 ordered events and exits0 with cards unchanged. Root viewed the composed HUD/body regression image; no other gameplay comparison is promoted.",
+    "External Discord/service failures, Internet, other hosts/OS, physical controllers and owner handoffs remain separate/deferred. The malformed configuration prevents opening a lobby; no service connection or simulation is claimed.",
+    "Earlier wrapper failures remain preserved: v1 supplied only one preflight image, v2/v3 assumed the wrong Windows newline comparison. Only the complete v4 matrix and normal-boot result are admitted.",
+    "Fix landed locally as9cb8e0a. Actual candidate is isolated e0fdd1e/SDK7cb474; R retains its earlier SDK pin and does not inherit whole-candidate gameplay qualification."
+  ]
+}
