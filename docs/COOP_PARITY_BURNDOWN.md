@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 15 passed (R2, R4, R5, R7, R8, R12, R13, R15, F6, F10, F12, F18, F33, F38, F208), 1 failed (R3), 218 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 16 passed (R2, R4, R5, R7, R8, R12, R13, R15, F6, F10, F12, F18, F33, F38, F205, F208), 1 failed (R3), 217 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -39,7 +39,7 @@ hashed evidence for each required mode. Do not set the completion flags under
 test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
-## Current qualification status, October 24
+## Current qualification status, October 25
 
 The live content ledger qualifies exactly two local CP2 checks, first on
 `777b4d0453b0f08546a6df06adb95ab5a211e8d9` and now requalified on
@@ -52,7 +52,7 @@ review, with checkpoint/protection bypasses explicit. Netplay, the other four
 CP2 checks and the whole intro obligation remain unverified. These results do
 not change the separate 234 comparison rows.
 
-All 234 reference rows are inventoried; 15/234 (6.4%) are passed. R15/F208
+All 234 reference rows are inventoried; 16/234 (6.8%) are passed. R15/F208
 now pass their exact bounded checks locally and in paired Windows loopback on
 `c3c5bdb`; their prior failures remain in history.
 R3 now has a reviewed local failure: Zero's native death burst uses X's blue
@@ -95,6 +95,19 @@ explicitly disables diagnostics, completes a valid current-build LOAD and native
 movement, and retains empty recorder inventories before/after LOAD and owned
 exit. Its netplay check remains unverified because the online profile separately
 forces co-op diagnostics.
+F205 now passes its bounded effective-mode recording check on `f3bdbe9`, with
+107 debug and 107 production checks passing. The [LOCAL receipt](evidence/mmx6-native-replay/manifest-bound-f3bdbe9-F205-effective-mode-history-local-reviewed.json)
+binds 6,603 native input events and 19 actual mode transitions. The
+[paired receipt](evidence/mmx6-native-replay/manifest-bound-f3bdbe9-F205-effective-mode-history-paired-reviewed.json)
+binds both finalized recordings, actual profile settlement and resolved CRCs.
+Both modes witness initial readiness, actual camera policy and both owners'
+pause/resume and independent controls; all twelve composed captures were
+reviewed. The paired wrapper's late card-discovery failure remains preserved.
+An independent source/argv/startup/log-bound reduction resolves the SDK's
+expected guest card sandbox and verifies every active and personal card.
+Other scene/death/withdrawal transitions, live renderer/aspect changes,
+rollback/replay and cross-host behavior remain unexercised. Explicit online
+recording OFF is the separate F70 issue, not a pass inherited from this run.
 F10/F18 now pass on 1f50059 after restoring the original primary sprite sheet
 and frozen effects, with rendered local/paired requalification below. Their
 earlier 66f7db0 failures remain in history.

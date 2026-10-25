@@ -13199,17 +13199,88 @@
           "src/mods/mmx6_coop_plugin.c:diagnostics",
           "src/mods/mmx6_coop_plugin.c:diagnostic_setup"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "f3bdbe91b5f27b0e36b547b7de5f01c18fdc6fb7",
+            "settings": {
+              "input_path": "published_host",
+              "audio": "dummy",
+              "diagnostics_recording": true,
+              "camera": "actual shared-midpoint after enrollment",
+              "native_aspect": true,
+              "fixture": false,
+              "execution_load": false
+            },
+            "action": "Cold boot on the exact supplied image; witness actual initial ready/enrollment and each player owning native pause/resume, frozen/resumed world and independent Right; finalize default recording and owned shutdown.",
+            "outcome": "Exact build/manifest/effective startup settings and actual mode history bind to finalized native input events. Both owner windows and controls pass; source/cards/owned exit preserved.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-native-replay/manifest-bound-f3bdbe9-F205-effective-mode-history-local-reviewed.json",
+                "sha256": "7d8e5d117c6fd8376146eb73537aa7aa0ed355d061be06e2feb21e34ea3ef878"
+              }
+            ],
+            "limits": [
+              "LOCAL on the exact frozen debug/lab image only. Full107debug+107production checks pass; production gameplay is not claimed.",
+              "Actual first native sample precedes ready/enrollment; both owner pause/resume and independent Right are exercised. Other scene/death/withdrawal transitions are unexercised.",
+              "Private projection samples are explicitly unavailable and counted232; no invented fields or intermediate unsampled transition claim.",
+              "Actual title camera policy/HUD/cull margin and initial effective native-aspect video are recorded. Live renderer/viewport changes are outside the declared observer scope.",
+              "No fixture, direct guest input write or execution LOAD occurred. Native replay execution, NETPLAY and aggregate F205 remain unverified until their own reviewed evidence."
+            ],
+            "bypasses": [],
+            "build_identity": {
+              "executable_sha256": "044ad7161e849d24541f517b2926d75a58fa8155cfe8d27bb0d3b5b0f6fe4d41",
+              "compiled_manifest_sha256": "d7800a6d51386543a43da3321aefb2a8a12b85dcc0a8f9e9251ffcf708e972be",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
+            }
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "f3bdbe91b5f27b0e36b547b7de5f01c18fdc6fb7",
+            "settings": {
+              "input_path": "published_host",
+              "audio": "dummy",
+              "diagnostics_recording": true,
+              "camera": "actual shared-midpoint after enrollment",
+              "native_aspect": true,
+              "fixture": false,
+              "execution_load": false
+            },
+            "action": "Cold boot on the exact supplied image; witness actual initial ready/enrollment and each player owning native pause/resume, frozen/resumed world and independent Right; finalize default recording and owned shutdown.",
+            "outcome": "Exact build/manifest/effective startup settings and actual mode history bind to finalized native input events. Both owner windows and controls pass; source/cards/owned exit preserved. Both peers settle the actual profile before guest frame0 and match resolved simulation CRCs; saved offline co-op OFF is distinguished from actual forced co-op ON.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-native-replay/manifest-bound-f3bdbe9-F205-effective-mode-history-paired-reviewed.json",
+                "sha256": "bd03d3e22fa0203e903de772b691f212d059b1a209a343f6da307353c36fed8f"
+              }
+            ],
+            "limits": [
+              "Exact same-host Clang22 loopback profile revision2 only; actual both-peer capabilities/profile settlement at cycles0/tick0 and resolved CRC gates passed. No cross-host/cross-build/WAN/rollback claim.",
+              "Both ordinary native N/C streams and mode sidecars finalized. Actual first pre-ready state and both owners pause/resume/independent controls agree with live windows; private projections are counted as unavailable.",
+              "Actual initial build/plugin/view/HUD/native-aspect settings and title camera policy are recorded. Scene/death/withdrawal/live aspect or renderer changes are unexercised.",
+              "Original wrapper remains failed at its overly broad card-file discovery. Source-bound independent reduction resolves the expected guest saves/netplay sandbox using actual argv/startup/logs and verifies all active and personal card hashes; every other recording/finalizer gate remains intact.",
+              "No fixture/guest RAM write/execution LOAD or replay execution occurred. Explicit diagnostics OFF online is separate F70 issue49 and is not qualified by this recording-ON evidence."
+            ],
+            "bypasses": [],
+            "build_identity": {
+              "executable_sha256": "044ad7161e849d24541f517b2926d75a58fa8155cfe8d27bb0d3b5b0f6fe4d41",
+              "compiled_manifest_sha256": "d7800a6d51386543a43da3321aefb2a8a12b85dcc0a8f9e9251ffcf708e972be",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
+            }
+          }
+        ],
+        "limitations": "Passed bounded F205 LOCAL and same-host NETPLAY on f3bdbe9/SDK5bd: exact build/effective initial settings and actual pre-ready/enrollment/camera/both owner pause-resume history bind to finalized native N/C streams, independent controls and actual profile/CRC/card/owned-exit evidence. All12 composed captures reviewed. Original paired wrapper late card-discovery failure remains retained; exact source/argv/startup/log-bound guest sandbox reduction verifies every active/personal card and preserves other gates. Live renderer/aspect, other scene/death/withdrawal transitions, rollback/replay and cross-host behavior remain unexercised; diagnostics OFF is separate F70."
       }
     },
     {

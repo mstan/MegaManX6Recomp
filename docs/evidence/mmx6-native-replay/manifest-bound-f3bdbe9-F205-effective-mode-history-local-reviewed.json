@@ -1,0 +1,560 @@
+{
+  "schema": 1,
+  "kind": "reviewed_F205_LOCAL_effective_build_play_camera_mode_history",
+  "reviewed_at_utc": "2026-10-25T07:35:28.044325+00:00",
+  "issue": "beads-eio.1.47",
+  "comparison": "F205",
+  "candidate": "f3bdbe91b5f27b0e36b547b7de5f01c18fdc6fb7",
+  "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+  "binding": {
+    "proof": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v37-f3bdbe9\\candidate.json",
+      "bytes": 7335,
+      "sha256": "c110252807cd4e8ff5c3d121d965627550da1b919fe1b691398483b7ed9413e7"
+    },
+    "image_sha256": "044ad7161e849d24541f517b2926d75a58fa8155cfe8d27bb0d3b5b0f6fe4d41",
+    "manifest_sha256": "d7800a6d51386543a43da3321aefb2a8a12b85dcc0a8f9e9251ffcf708e972be",
+    "candidate_source": "f3bdbe91b5f27b0e36b547b7de5f01c18fdc6fb7",
+    "sdk": "5bd63adf265d6019a30fec221001ce481c602144"
+  },
+  "mode": "local",
+  "result": "passed",
+  "parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "actual_both_owner_menu_pause_resume_and_independent_controls": true,
+    "ordinary_default_capture_and_mode_sidecar_finalized_and_bound": true,
+    "actual_first_ready_and_ordered_owner_tuples_match_live_windows": true,
+    "actual_committed_plan_effective_video_native_cards_and_owned_exit": true,
+    "no_fixture_direct_input_or_execution_LOAD_command": true
+  },
+  "owned_exit": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "private_cards_unchanged": true,
+  "independent_native_summary": {
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "044ad7161e849d24541f517b2926d75a58fa8155cfe8d27bb0d3b5b0f6fe4d41",
+      "manifest_sha256": "d7800a6d51386543a43da3321aefb2a8a12b85dcc0a8f9e9251ffcf708e972be",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "events": 6603,
+    "natives": 4560,
+    "p2_reads": 2043,
+    "stream_sha256": "d7ef5e2d46a5d78da0884fa5ceacdf101f49f6ad7e48522ee9b178c18ab4509a",
+    "failure": null
+  },
+  "independent_mode_summary": {
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "044ad7161e849d24541f517b2926d75a58fa8155cfe8d27bb0d3b5b0f6fe4d41",
+      "manifest_sha256": "d7800a6d51386543a43da3321aefb2a8a12b85dcc0a8f9e9251ffcf708e972be",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "epoch": 1,
+    "events": 19,
+    "stream_sha256": "580d416cd877ce37921c91ad0b4e8e84f29299ace1a341a4fe647045ce656946",
+    "native_stream_sha256": "d7ef5e2d46a5d78da0884fa5ceacdf101f49f6ad7e48522ee9b178c18ab4509a",
+    "unavailable_projection_samples": 232,
+    "failure": null,
+    "first_native": 0,
+    "last_native": 4482
+  },
+  "actual_ordered_history": {
+    "first_actual_before_ready": {
+      "consumer": null,
+      "cycles": 206068119,
+      "frame": 0,
+      "input_order": 0,
+      "native": 0,
+      "order": 0,
+      "sample_source": "native-decoder",
+      "sim_tick": null,
+      "state": {
+        "co_op": {
+          "camera_policy": "native-primary",
+          "enrolled": 0,
+          "failed": 0,
+          "hud_x": 0,
+          "hud_y": 104,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "ready": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "view_x_margin": 0
+        },
+        "co_op_plugin_active": 1,
+        "native_mode": 0,
+        "native_phase": 0,
+        "primary_character": 0
+      },
+      "type": "mode"
+    },
+    "ordered_phase_matches": [
+      {
+        "label": "actual ready gameplay",
+        "order": 12,
+        "input_order": 5703,
+        "native": 4040,
+        "cycles": 1431011844,
+        "sample_source": "native-decoder",
+        "consumer": null,
+        "state": {
+          "co_op": {
+            "camera_policy": "shared-midpoint",
+            "enrolled": 1,
+            "failed": 0,
+            "hud_x": 0,
+            "hud_y": 104,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "ready": 1,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "view_x_margin": 0
+          },
+          "co_op_plugin_active": 1,
+          "native_mode": 10,
+          "native_phase": 0,
+          "primary_character": 0
+        }
+      },
+      {
+        "label": "P1 actual owned pause",
+        "order": 13,
+        "input_order": 5902,
+        "native": 4140,
+        "cycles": 1459235796,
+        "sample_source": "native-decoder",
+        "consumer": null,
+        "state": {
+          "co_op": {
+            "camera_policy": "shared-midpoint",
+            "enrolled": 1,
+            "failed": 0,
+            "hud_x": 0,
+            "hud_y": 104,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 1,
+            "ready": 1,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "view_x_margin": 0
+          },
+          "co_op_plugin_active": 1,
+          "native_mode": 10,
+          "native_phase": 2,
+          "primary_character": 0
+        }
+      },
+      {
+        "label": "P1 actual native resume",
+        "order": 15,
+        "input_order": 6117,
+        "native": 4282,
+        "cycles": 1499313664,
+        "sample_source": "native-decoder",
+        "consumer": null,
+        "state": {
+          "co_op": {
+            "camera_policy": "shared-midpoint",
+            "enrolled": 1,
+            "failed": 0,
+            "hud_x": 0,
+            "hud_y": 104,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "ready": 1,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "view_x_margin": 0
+          },
+          "co_op_plugin_active": 1,
+          "native_mode": 10,
+          "native_phase": 0,
+          "primary_character": 0
+        }
+      },
+      {
+        "label": "P2 actual owned pause",
+        "order": 16,
+        "input_order": 6236,
+        "native": 4342,
+        "cycles": 1516248303,
+        "sample_source": "native-decoder",
+        "consumer": null,
+        "state": {
+          "co_op": {
+            "camera_policy": "shared-midpoint",
+            "enrolled": 1,
+            "failed": 0,
+            "hud_x": 0,
+            "hud_y": 104,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 2,
+            "ready": 1,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "view_x_margin": 0
+          },
+          "co_op_plugin_active": 1,
+          "native_mode": 10,
+          "native_phase": 2,
+          "primary_character": 0
+        }
+      },
+      {
+        "label": "P2 actual native resume",
+        "order": 18,
+        "input_order": 6447,
+        "native": 4482,
+        "cycles": 1555761906,
+        "sample_source": "native-decoder",
+        "consumer": null,
+        "state": {
+          "co_op": {
+            "camera_policy": "shared-midpoint",
+            "enrolled": 1,
+            "failed": 0,
+            "hud_x": 0,
+            "hud_y": 104,
+            "lifecycle": [
+              0,
+              0
+            ],
+            "pause_owner": 0,
+            "ready": 1,
+            "scene_owner": 0,
+            "scene_phase": 0,
+            "view_x_margin": 0
+          },
+          "co_op_plugin_active": 1,
+          "native_mode": 10,
+          "native_phase": 0,
+          "primary_character": 0
+        }
+      }
+    ],
+    "checks": {
+      "actual_first_state_precedes_ready": true,
+      "both_live_owned_pause_resume_tuples_in_order": true,
+      "actual_committed_roster_camera_HUD_native_aspect": true
+    },
+    "limits": "Ordered actual sidecar tuples correspond to independent natural live windows; no atomic RPC/frame identity or unexercised transition claim"
+  },
+  "effective_startup_video": {
+    "aa": 1,
+    "accurate_blending": 1,
+    "active_renderer": 1,
+    "adaptive_max_den": 9,
+    "adaptive_max_num": 16,
+    "adaptive_view": 0,
+    "anisotropy": 1,
+    "aspect_den": 3,
+    "aspect_num": 4,
+    "dynamic_resolution": 0,
+    "dynamic_resolution_active": 0,
+    "dynamic_resolution_env": -1,
+    "dynamic_resolution_min": 720,
+    "dynamic_resolution_min_env": 0,
+    "fmv_chroma": 0,
+    "fmv_filter": 0,
+    "fov_scale": "0x1p+0",
+    "frame_generation": 0,
+    "frame_generation_method": 0,
+    "frame_interpolation": 0,
+    "frame_interpolation_blend": 0,
+    "frame_interpolation_fps": 0,
+    "frame_interpolation_source": 0,
+    "frame_period_ms": "0x1.0aef006d56045p+4",
+    "geometry_correction": 0,
+    "guest_frame_period_ms": "0x1.0aef006d56045p+4",
+    "host_presentation_scope": "observed presentation preferences; wall-clock/display/audio-device behavior is not replayed",
+    "internal_resolution_effective": 0,
+    "internal_resolution_env": 0,
+    "internal_resolution_mod_request": 0,
+    "internal_resolution_preference": 0,
+    "mod_texture_filter": -1,
+    "native_wide": 1,
+    "perspective_texturing": 0,
+    "pgxp_active": 0,
+    "pgxp_color_correction": 0,
+    "pgxp_cpu": 0,
+    "pgxp_cpu_effective": 0,
+    "pgxp_depth_buffer": 0,
+    "pgxp_depth_threshold": "0x1p+12",
+    "pgxp_mod_only": 0,
+    "pgxp_position_fallback": 1,
+    "pgxp_preserve_projection": 0,
+    "pgxp_seam": 0,
+    "pgxp_tolerance": "0x1p-1",
+    "pgxp_tolerance_effective": "0x1p-1",
+    "post_aa": 0,
+    "present_thread": 0,
+    "present_thread_slots": 3,
+    "projection_den": 3,
+    "projection_mode": -1,
+    "projection_num": 4,
+    "reference_lines": 240,
+    "render_thread": 0,
+    "render_thread_frames": 2,
+    "renderer_preference": 1,
+    "requested_scale": 1,
+    "retained_banks": 1,
+    "scale": 1,
+    "scale_applies": 1,
+    "scanline_strength": "0x1p-1",
+    "scanlines": 0,
+    "supersample_milli": 1000,
+    "texture_filter": 0,
+    "texture_lod": 0,
+    "vsync": 1
+  },
+  "actual_committed_plan": {
+    "committed_fingerprint": "c5ee85351ac27c40c88f8cbe3eb9f7c944e0495176e57db3a9b869cbb06113d2",
+    "derived_discs": [],
+    "overlays": [],
+    "packages": [
+      {
+        "id": "mmx6.diagnostics",
+        "version": "1.0.0"
+      },
+      {
+        "id": "mmx6.enhancement.seamless-loading",
+        "version": "0.1.0"
+      },
+      {
+        "id": "mmx6.local-coop",
+        "version": "0.0.1"
+      }
+    ],
+    "plugins": [
+      {
+        "feature": "input-recording",
+        "id": "mmx6.diagnostics",
+        "input": 0,
+        "local_view": 0,
+        "package": "mmx6.diagnostics"
+      },
+      {
+        "feature": "seamless-loading",
+        "id": "mmx6.seamless",
+        "input": 0,
+        "local_view": 0,
+        "package": "mmx6.enhancement.seamless-loading"
+      },
+      {
+        "feature": "prototype",
+        "id": "mmx6.local-coop.prototype",
+        "input": 0,
+        "local_view": 0,
+        "package": "mmx6.local-coop"
+      }
+    ],
+    "resources": [],
+    "schema": 1,
+    "selections": [
+      {
+        "enabled": 0,
+        "features": [
+          {
+            "enabled": 1,
+            "has_enabled": 1,
+            "id": "prototype",
+            "values": {}
+          }
+        ],
+        "package": "mmx6.local-coop",
+        "values": {},
+        "version": "0.0.1"
+      }
+    ],
+    "session_fingerprint": "",
+    "writes": []
+  },
+  "source_contract": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-combined-source-preflight-v3-actual\\source-contract.json",
+    "bytes": 7540,
+    "sha256": "aad6caab2b40ea79cde84522d1981809e44fd99bccae66108ef4ce2b6b1da2e8"
+  },
+  "images_reviewed_by_root": [
+    "P1 native X menu and P2 native Zero menu match their actual owner windows.",
+    "Both resumed captures show live X/Zero in the intro terrain with stacked native-aspect HUD."
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-local-v37-f3bdbe9-v1\\qualification.json",
+      "bytes": 499683,
+      "sha256": "4196d903cdff2030441aec37d5691b3610d02089e41e661474018af3429a6d89"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-local-v37-f3bdbe9-v1\\candidate\\saves\\input-recordings\\session-1792913435221314-1-0\\inputs.jsonl",
+      "bytes": 866377,
+      "sha256": "c4ffe84f7c93072de959e6c25ba444ecdb6193b73d4011158881dfb16694f560"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-local-v37-f3bdbe9-v1\\candidate\\saves\\input-recordings\\session-1792913435221314-1-0\\status.json",
+      "bytes": 160,
+      "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-local-v37-f3bdbe9-v1\\candidate\\saves\\input-recordings\\session-1792913435221314-1-0\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-local-v37-f3bdbe9-v1\\candidate\\saves\\input-recordings\\session-1792913435221314-1-0\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-local-v37-f3bdbe9-v1\\candidate\\saves\\input-recordings\\session-1792913435221314-1-0\\settings.json",
+      "bytes": 10329,
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-local-v37-f3bdbe9-v1\\candidate\\saves\\input-recordings\\session-1792913435221314-1-0\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-local-v37-f3bdbe9-v1\\candidate\\saves\\input-recordings\\session-1792913435221314-1-0\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-local-v37-f3bdbe9-v1\\candidate\\saves\\input-recordings\\session-1792913435221314-1-0\\runtime-modes.jsonl",
+      "bytes": 9610,
+      "sha256": "3ec47d0ae2837f5646a4d696ed9f89ca1b7cc4b7cc957702f4c90c5f2ff968af"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-local-v37-f3bdbe9-v1\\F205-natural-live-windows\\P1-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "722e9ab717a78613e439fae11c8d36d627f4ca27c476bf48f4e3eba2d91aee05"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-local-v37-f3bdbe9-v1\\F205-natural-live-windows\\P1-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "38c7605de379a438a73d998086b675af83b59d6c614524701e423cf056604cad"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-local-v37-f3bdbe9-v1\\F205-natural-live-windows\\P2-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "a57d09d6918718de06bc947438c5757f0b4139efcd3f1cec62019b7f2c139525"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-local-v37-f3bdbe9-v1\\F205-natural-live-windows\\P2-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "2a3f821640d30f3c415065d2a34cd4a13725704e63e2f63100935ed7f563b1a4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v37-f3bdbe9\\candidate.json",
+      "bytes": 7335,
+      "sha256": "c110252807cd4e8ff5c3d121d965627550da1b919fe1b691398483b7ed9413e7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-runtime-package-v1-index.json",
+      "bytes": 2534,
+      "sha256": "46e32f93e542d73dc9562e1c530d83a180aad9a106d81ba2663583c0eb7c2b73"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-combined-runtime-v2-index.json",
+      "bytes": 3948,
+      "sha256": "efdc18deea06e72393573acab05b0fe856378be0d13870b474c6a2335331780a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-combined-source-preflight-v3-actual\\source-contract.json",
+      "bytes": 7540,
+      "sha256": "aad6caab2b40ea79cde84522d1981809e44fd99bccae66108ef4ce2b6b1da2e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-combined-source-preflight-v3-actual\\preflight.json",
+      "bytes": 31872,
+      "sha256": "63f61019fa252e475c62973b587adc86df3b87baa59048b83d3071d2c3f7b506"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-fixture-view-boundary-source-v1.json",
+      "bytes": 2724,
+      "sha256": "3d63e19532d526ae8fe43cb34b208a337bbd6a4d4f70431b47847648e47bf70f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-local-v37-f3bdbe9-v1\\candidate\\jump-audio\\control.jsonl",
+      "bytes": 8112798,
+      "sha256": "00933cee93edc4d92bf8a2e722143c96214fae12a57d3cb513b0e1dcb3f374d3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-local-v37-f3bdbe9-v1\\owned-local-runner-executed-source.py",
+      "bytes": 7056,
+      "sha256": "88706632138458383e5f25a0c47d86728b90d05a4462f9a852d6d422489911a4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v37-batched-v3-debug.log",
+      "bytes": 31674,
+      "sha256": "0fbee5cd4ab2aa9610d4e58ad2cf9073b4601d2b078b8be82b50fb47c3aef390"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v37-batched-v3-production.log",
+      "bytes": 31684,
+      "sha256": "d9441ea11860ea13ddfa4316182f7e3b01ec93aad87996bc2c53483ec8d5e2f3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-F205-effective-mode-local-v1.py",
+      "bytes": 6203,
+      "sha256": "6b6d68d8de9e7aca18708db8b10396c0dbc04ff18c01607fe9eea4c3dbcc4bdb"
+    }
+  ],
+  "limitations": [
+    "LOCAL on the exact frozen debug/lab image only. Full107debug+107production checks pass; production gameplay is not claimed.",
+    "Actual first native sample precedes ready/enrollment; both owner pause/resume and independent Right are exercised. Other scene/death/withdrawal transitions are unexercised.",
+    "Private projection samples are explicitly unavailable and counted232; no invented fields or intermediate unsampled transition claim.",
+    "Actual title camera policy/HUD/cull margin and initial effective native-aspect video are recorded. Live renderer/viewport changes are outside the declared observer scope.",
+    "No fixture, direct guest input write or execution LOAD occurred. Native replay execution, NETPLAY and aggregate F205 remain unverified until their own reviewed evidence."
+  ]
+}
