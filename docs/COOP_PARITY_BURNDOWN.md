@@ -224,16 +224,26 @@ five rounds of 29 complete source guards, four fresh blank cards and both
 composed images. The first two rising edges were not sampled; native held
 input and source text progress were observed for all three. Old failed runs
 remain preserved without assigning them a cause.
-The [latest reviewed entry prefix](evidence/mmx6-content/manifest-bound-50f4a31-entry39852-three-components-failed-parent-reviewed.json)
+The [reviewed entry39852 prefix](evidence/mmx6-content/manifest-bound-50f4a31-entry39852-three-components-failed-parent-reviewed.json)
 adds completed individual setups at `s03-a0-c01`, `s03-a0-c03` and `s03-a0-c04`.
 Root reproduced all twelve predicates from 658 retained samples and 2,646
 journal RAM links, 28 original guards, three actual captures, four newly created
 blank cards, recording refusals and graceful exit. The batch remains failed:
 `s03-a0-c05` exhausted its setup budget with P2 at zero HP; its cause is unknown.
 The c04 image retains background corruption under `beads-eio.1.52`.
-Setup coverage is now 30 qualified, 2 blocked (`s04-a1-c00`, `s03-a0-c05`) and
-62 unvisited supported locations. Rendering, stage mechanics and the comparison
-count receive no additional passes.
+The [reviewed entry64476 prefix](evidence/mmx6-content/manifest-bound-50f4a31-entry64476-three-components-failed-parent-reviewed.json)
+adds individual setups at `s03-a0-c06`, `s03-a0-c07` and `s04-a0-c02`.
+Root recomputed751 readiness samples,3,019 journal RAM links,28 source guards
+and all twelve final predicates, reviewed the three actual images and checked
+the complete four-card inventory, strict recording refusals and owned exit0.
+The fourth location, `s04-a0-c03`, exhausts its original1,800-read budget:
+publication stays stale while ordinary X falls from Y1456 to17576 with its
+entry gate still set. No destination P2, collision or cause is established.
+The parent remains failed, and all three images retain background corruption
+under `beads-eio.1.52`.
+Setup coverage is now33 qualified,3 blocked (`s04-a1-c00`, `s03-a0-c05`,
+`s04-a0-c03`) and58 unvisited supported locations. Rendering, stage mechanics
+and the comparison count receive no additional passes.
 F205 now passes its bounded effective-mode recording check on `f3bdbe9`, with
 107 debug and 107 production checks passing. The [LOCAL receipt](evidence/mmx6-native-replay/manifest-bound-f3bdbe9-F205-effective-mode-history-local-reviewed.json)
 binds 6,603 native input events and 19 actual mode transitions. The
