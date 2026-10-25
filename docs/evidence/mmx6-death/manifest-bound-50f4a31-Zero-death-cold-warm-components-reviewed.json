@@ -1,0 +1,318 @@
+{
+  "schema": 1,
+  "kind": "reviewed_current_build_Zero_death_cold_warm_owner_cache_resource_components",
+  "reviewed_at_utc": "2026-10-25T06:15:13.391782+00:00",
+  "issue": "beads-eio.1.46",
+  "candidate": "50f4a31cd6c1344f4448be51e3016a84e96b2566",
+  "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+  "executable_sha256": "7932585a45a53eae7ad1fbdd083ecd4ff3512741ff42c841f31cada8af4db25f",
+  "compiled_manifest_sha256": "595914ab91176b013ff2abd8e19fbdfdf6cf4c85b1414223fafdc0e9a57f308c",
+  "result": "passed_bounded_current_build_cold_warm_death_components_only",
+  "source_live_snapshot_sha256": "f208f05bf42928ef2735c670a9371c56b8a602de39808f341a8a7b76672b83d0",
+  "source_live_specimen": "Actual original-fatal live Zero FX11 saved on v36 during FALLEN state3; positive P2 HP4 prerequisite disclosed by original death observer.",
+  "independent_fresh_process": true,
+  "operation_order": [
+    "SAVE8_fresh",
+    "LOAD9_cold",
+    "SAVE8_cold_probe",
+    "original_expiry_and_X_controls",
+    "LOAD9_warm",
+    "SAVE8_warm_probe",
+    "original_expiry_and_X_controls"
+  ],
+  "phases": [
+    {
+      "phase": "cold",
+      "observed_component_checks": {
+        "exact_all96_death_owner_records": true,
+        "exact_all96_owner_values": true,
+        "complete_saved_immutable_sprite_prefix": true,
+        "complete_saved_immutable_UI_prefix": true,
+        "actual_fallen_Zero_state3": true,
+        "positive_visible_saved_owner2_FX11": true,
+        "positive_original_update_callbacks": true,
+        "finite_visible_expiry_two_distinct_updates": true,
+        "canonical_native_clock_advanced": true,
+        "allocation_flags_need_not_all_zero": true,
+        "actual_survivor_inputs": {
+          "actual_Right": true,
+          "actual_Cross_rise": true,
+          "native_landing": true,
+          "fallen_Zero_position_retained": true
+        }
+      },
+      "independently_recomputed_probe_checks": {
+        "exact_all96_death_owner_records": true,
+        "exact_all96_owner_values": true,
+        "complete_saved_immutable_sprite_prefix": true,
+        "complete_saved_immutable_UI_prefix": true,
+        "actual_fallen_Zero_state3": true,
+        "positive_visible_saved_owner2_FX11": true
+      },
+      "first_observation_tick": 1123,
+      "actual_expiry_callback_sequences": [
+        4577,
+        4673
+      ],
+      "whole_semantic_core_equality_claimed": false,
+      "exact_lifetime_generation_identity_claimed": false,
+      "saved_sprite_prefix": {
+        "saved_count": 263,
+        "restored_count": 263,
+        "preserved": true,
+        "mismatch_indices": [],
+        "missing_indices": [],
+        "appended_count": 0
+      },
+      "saved_UI_prefix": {
+        "saved_count": 6,
+        "restored_count": 6,
+        "preserved": true,
+        "mismatch_indices": [],
+        "missing_indices": [],
+        "appended_count": 0
+      },
+      "actual_probe": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-cold-warm-restore-local-v36-50f4a31-v1\\ammo-hud\\current-build-Zero-death-restore\\cold-restored-probe.pst",
+        "bytes": 1893092,
+        "sha256": "303f373830ced38943c702721bf8ebfb18033622a1828557e5793647e953f5b3"
+      }
+    },
+    {
+      "phase": "warm",
+      "observed_component_checks": {
+        "exact_all96_death_owner_records": true,
+        "exact_all96_owner_values": true,
+        "complete_saved_immutable_sprite_prefix": true,
+        "complete_saved_immutable_UI_prefix": true,
+        "actual_fallen_Zero_state3": true,
+        "positive_visible_saved_owner2_FX11": true,
+        "positive_original_update_callbacks": true,
+        "finite_visible_expiry_two_distinct_updates": true,
+        "canonical_native_clock_advanced": true,
+        "allocation_flags_need_not_all_zero": true,
+        "actual_survivor_inputs": {
+          "actual_Right": true,
+          "actual_Cross_rise": true,
+          "native_landing": true,
+          "fallen_Zero_position_retained": true
+        }
+      },
+      "independently_recomputed_probe_checks": {
+        "exact_all96_death_owner_records": true,
+        "exact_all96_owner_values": true,
+        "complete_saved_immutable_sprite_prefix": true,
+        "complete_saved_immutable_UI_prefix": true,
+        "actual_fallen_Zero_state3": true,
+        "positive_visible_saved_owner2_FX11": true
+      },
+      "first_observation_tick": 1124,
+      "actual_expiry_callback_sequences": [
+        4728,
+        4792
+      ],
+      "whole_semantic_core_equality_claimed": false,
+      "exact_lifetime_generation_identity_claimed": false,
+      "saved_sprite_prefix": {
+        "saved_count": 263,
+        "restored_count": 263,
+        "preserved": true,
+        "mismatch_indices": [],
+        "missing_indices": [],
+        "appended_count": 0
+      },
+      "saved_UI_prefix": {
+        "saved_count": 6,
+        "restored_count": 6,
+        "preserved": true,
+        "mismatch_indices": [],
+        "missing_indices": [],
+        "appended_count": 0
+      },
+      "actual_probe": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-cold-warm-restore-local-v36-50f4a31-v1\\ammo-hud\\current-build-Zero-death-restore\\warm-restored-probe.pst",
+        "bytes": 1889168,
+        "sha256": "136e1b360d908239c73be3688263d054bfc869934942e4f9d280e5c93a32abd6"
+      }
+    }
+  ],
+  "restored_resources": [
+    {
+      "label": "cold-restored-visible",
+      "source_candidates": 36,
+      "unique_actual_used_GT3_pairs": 36,
+      "candidate_source_frames": [
+        105,
+        106
+      ],
+      "all_component_checks": true
+    },
+    {
+      "label": "cold-expired-survivor",
+      "source_candidates": 0,
+      "unique_actual_used_GT3_pairs": 0,
+      "candidate_source_frames": [],
+      "all_component_checks": true
+    },
+    {
+      "label": "warm-restored-visible",
+      "source_candidates": 36,
+      "unique_actual_used_GT3_pairs": 36,
+      "candidate_source_frames": [
+        108,
+        109
+      ],
+      "all_component_checks": true
+    },
+    {
+      "label": "warm-expired-survivor",
+      "source_candidates": 0,
+      "unique_actual_used_GT3_pairs": 0,
+      "candidate_source_frames": [],
+      "all_component_checks": true
+    }
+  ],
+  "composed_review": "Root viewed both actual post-LOAD gold/orange burst images and both naturally expired X-survivor images.",
+  "recording": {
+    "actual_failure": "guest execution state replaced; capture segment ended",
+    "both_strict_admission_paths_refuse": true,
+    "segment_ends_at_first_LOAD": true,
+    "post_LOAD_recording_claimed": false
+  },
+  "native_cards_unchanged": true,
+  "owned_exit": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "source_and_installed_specimen_unchanged": true,
+  "original_parent_status": "failed_setup",
+  "original_parent_error": "Inventory recording lacks the exact canonical failed fixture-taint terminal/status",
+  "original_parent_preserved": true,
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-cold-warm-restore-local-v36-50f4a31-v1\\ammo-hud\\current-build-Zero-death-restore\\cold-restored-probe.pst",
+      "bytes": 1893092,
+      "sha256": "303f373830ced38943c702721bf8ebfb18033622a1828557e5793647e953f5b3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-cold-warm-restore-local-v36-50f4a31-v1\\ammo-hud\\current-build-Zero-death-restore\\warm-restored-probe.pst",
+      "bytes": 1889168,
+      "sha256": "136e1b360d908239c73be3688263d054bfc869934942e4f9d280e5c93a32abd6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-cold-warm-restore-local-v36-50f4a31-v1\\qualification.json",
+      "bytes": 788438,
+      "sha256": "c11e7eb9782a2687f6a4a01ee62a4e81505d9e3b1fd0bef49d820868fe93b9d9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-cold-warm-restore-local-v36-50f4a31-v1\\ammo-hud\\current-build-Zero-death-restore\\restore-result.json",
+      "bytes": 530216,
+      "sha256": "336bbdbf93bb428b941772c9d17b60c97bdb11568ac0ab77d41955d6201fb5fd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-cold-warm-restore-local-v36-50f4a31-v1\\ammo-hud\\current-build-Zero-death-restore\\actual-rows.jsonl.gz",
+      "bytes": 530307,
+      "sha256": "c8c7833159611edd88a3ff500f535078a53dfc3bdf4eb7f1e166ba8cfd9e7413"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-cold-warm-restore-local-v36-50f4a31-v1\\ammo-hud\\current-build-Zero-death-restore\\cold-dispatch-trace.jsonl.gz",
+      "bytes": 37081,
+      "sha256": "ae87824ffa086a5efe4673090c461bb57eded849ebd560ed8c8d2befed5d5dea"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-cold-warm-restore-local-v36-50f4a31-v1\\ammo-hud\\current-build-Zero-death-restore\\warm-dispatch-trace.jsonl.gz",
+      "bytes": 37313,
+      "sha256": "c03eb4bdb67b558b7cf819d610f1e633fafd13bbdc91ffef7bc0f6da19fb6196"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v36-cold-warm-restored-Zero-FX11-bank-components-v1.json",
+      "bytes": 344710,
+      "sha256": "a12c0134c94b77179b8378010c27171f175d5ec60ae203fc46b66290b4f2c098"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v36-Zero-death-cold-warm-state-replaced-recording-v1.json",
+      "bytes": 6906,
+      "sha256": "0293b1525954ff74019dc797b8fc73aae108700e8c3f04c45082a5dc3c95c2b2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v36-50f4a31-v7\\ammo-hud\\native-death-camera-retry\\live-Zero-death-current-build.pst",
+      "bytes": 1889359,
+      "sha256": "f208f05bf42928ef2735c670a9371c56b8a602de39808f341a8a7b76672b83d0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v36-50f4a31-v7\\ammo-hud\\native-death-camera-retry\\live-Zero-death-state-receipt.json",
+      "bytes": 67670,
+      "sha256": "8b79ac273ad3a8fb2fc9807a11cc1ea4930da266b268004400f39b6944ffc229"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v36-50f4a31\\candidate.json",
+      "bytes": 7343,
+      "sha256": "c454fd8c17e78da36acc6de641cbc88c3319054c60ffaa014fde8bd78f1ff652"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-current-build-restore-v1-index.json",
+      "bytes": 2080,
+      "sha256": "6cf410275ac05c3ba7d75a8aa8d493e579633a564c261d7a34382f92f8a9f4ef"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-v36-Zero-death-cold-warm-restore-v1.py",
+      "bytes": 8046,
+      "sha256": "14744f2a476a2a2cbe2f32f20a61ac6d01aa1eb66ab1b533072a2b1a17671c3a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-v36-Zero-death-cold-warm-components-v1.py",
+      "bytes": 7087,
+      "sha256": "703a423872e559e38a227907c7d151df384357e6f9f67a02ce173ed613f342c7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-cold-warm-restore-local-v36-50f4a31-v1\\ammo-hud\\current-build-Zero-death-restore\\cold-restored-visible.png",
+      "bytes": 2074543,
+      "sha256": "4f765f3e1ade11a11a46b132a0e7ff62c1293715e59a9f39b711555676a06700"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-cold-warm-restore-local-v36-50f4a31-v1\\ammo-hud\\current-build-Zero-death-restore\\cold-restored-visible-completed-gp0.json.gz",
+      "bytes": 10453,
+      "sha256": "6f0bcdf9ce39473b087360c8247790de2b393ad4e63a22602fd1196e00abedc3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-cold-warm-restore-local-v36-50f4a31-v1\\ammo-hud\\current-build-Zero-death-restore\\cold-expired-survivor.png",
+      "bytes": 2074543,
+      "sha256": "4f3b59d775c336f73766fe626d03c7f2a64622eeade0992dada5243bb8ccc9eb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-cold-warm-restore-local-v36-50f4a31-v1\\ammo-hud\\current-build-Zero-death-restore\\cold-expired-survivor-completed-gp0.json.gz",
+      "bytes": 8336,
+      "sha256": "b22778b9a9aac18822d29f52fd7783290cdddc78705a0080a8af81b1299095a2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-cold-warm-restore-local-v36-50f4a31-v1\\ammo-hud\\current-build-Zero-death-restore\\warm-restored-visible.png",
+      "bytes": 2074543,
+      "sha256": "302fb4b5d65949980ad3d7583ef28efb730df98a29f39a98372ef1d31ffc456a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-cold-warm-restore-local-v36-50f4a31-v1\\ammo-hud\\current-build-Zero-death-restore\\warm-restored-visible-completed-gp0.json.gz",
+      "bytes": 10451,
+      "sha256": "88a33e24bb66ad692389fe9f3292cac51c44b43b6a779c8ebd65366dee196317"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-cold-warm-restore-local-v36-50f4a31-v1\\ammo-hud\\current-build-Zero-death-restore\\warm-expired-survivor.png",
+      "bytes": 2074543,
+      "sha256": "61d728c3b4285607d50fd7a2c827c69f5cfe59aa1cc3ba371d2b9373cc894bbb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-cold-warm-restore-local-v36-50f4a31-v1\\ammo-hud\\current-build-Zero-death-restore\\warm-expired-survivor-completed-gp0.json.gz",
+      "bytes": 8241,
+      "sha256": "138bb2d3f955fdd4bd3e87328618453261e702dc64d8cef872d60f7a4d36c1d3"
+    }
+  ],
+  "whole_state_or_lifetime_or_art_or_row_pass": false,
+  "limits": [
+    "Current-build owner/cache/visible resources/positive callback/finite visible expiry and survivor controls only.",
+    "Unpaused probes can advance; complete semantic-core equality is not asserted.",
+    "Saved immutable prefixes are exact; later appended cache records are allowed.",
+    "Original candidate frames/used GT3 comparisons are separate from nearby actual actors and source commands.",
+    "LOAD deliberately ends the default native-consumption segment; exact canonical failure/startup/cards and strict refusal checks passed independently.",
+    "Generic fixture parent remains failed and all failed/partial evidence is retained.",
+    "Both-seat fatal/retry/body-art/camera/scenery/paired/full-row requirements remain pending."
+  ]
+}

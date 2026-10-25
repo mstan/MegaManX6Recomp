@@ -68,8 +68,14 @@ and 103 production tests passing. Its [reviewed native resource component](evide
 matches original Zero texels and palette in 48 fatal-capture and 81 visible-burst
 GPU packet pairs, including the independent private atlas key and working
 palette row. The burst visibly expires and X retains control. That parent
-then stops on a real projectile hit outside its qualified damage sources;
-full both-seat death/retry, state, paired and art/camera checks remain pending.
+then stops on a real projectile hit outside its qualified damage sources.
+A separate [current-build cold/warm component receipt](evidence/mmx6-death/manifest-bound-50f4a31-Zero-death-cold-warm-components-reviewed.json)
+preserves all 96 owner records and complete saved sprite/UI cache prefixes,
+matches 36 original-resource GPU packet pairs after each LOAD, and witnesses
+native visible expiry plus X movement, jump and landing. LOAD ends the default
+recording with its exact state-replacement failure; both strict admission paths
+refuse it. The generic fixture parent remains failed. Full both-seat death/retry,
+state semantics, paired and art/camera checks remain pending.
 R3 keeps its failed disposition until its complete bounded check is requalified.
 F59's `253c74e` local Yammar texture-placement failure remains in
 history. The `c3c5bdb` fix passes 103 debug and 103 production tests and reviewed
