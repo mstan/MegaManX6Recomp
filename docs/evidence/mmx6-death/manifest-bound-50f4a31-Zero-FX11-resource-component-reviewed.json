@@ -1,0 +1,238 @@
+{
+  "schema": 1,
+  "kind": "reviewed_v36_Zero_FX11_private_original_resource_fix_component",
+  "issue": "beads-eio.1.46",
+  "reviewed_at_utc": "2026-10-25T05:04:06.770967+00:00",
+  "candidate": "50f4a31cd6c1344f4448be51e3016a84e96b2566",
+  "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+  "executable_sha256": "7932585a45a53eae7ad1fbdd083ecd4ff3512741ff42c841f31cada8af4db25f",
+  "compiled_manifest_sha256": "595914ab91176b013ff2abd8e19fbdfdf6cf4c85b1414223fafdc0e9a57f308c",
+  "result": "passed_resource_component_only",
+  "whole_R3_LOCAL_result": "failed_prior_counterexample_not_yet_requalified_full_row",
+  "source_fix": "Retain native fatal FX11 owner across callback exit/reuse/current-build snapshot; privately render Zero-owned original atlas/type5 palette while X resources remain resident.",
+  "build_validation": {
+    "debug_tests_passed": 103,
+    "production_tests_passed": 103
+  },
+  "actual_trigger": {
+    "seat": 1,
+    "actual_actor": "0x8008ef48",
+    "changes": [
+      {
+        "before": 4,
+        "after": 0,
+        "source_damage": 4,
+        "reaction": 1,
+        "expected_nonfatal_reaction": 1,
+        "trace_sequences": [
+          1405,
+          1406,
+          1408,
+          1409,
+          1411,
+          1412,
+          1414,
+          1415,
+          1417,
+          1418,
+          1420,
+          1421
+        ],
+        "trace_sequence_domain": "psx_dispatch",
+        "tick": 927
+      }
+    ],
+    "native_motion_observed": true,
+    "fatal_motion_window": {
+      "before_tick": 915,
+      "after_tick": 927,
+      "before_action": 3,
+      "before_position": [
+        25690112,
+        70909952
+      ],
+      "after_position": [
+        25853952,
+        70909952
+      ],
+      "action3_source_verified": true,
+      "action0C_source_verified": true,
+      "limit": "Actual prefatal source-qualified action3/walk/jump/fall/dash and position change across the retained lethal-contact window"
+    },
+    "native_fatal": true,
+    "origin": [
+      25853952,
+      70909952
+    ],
+    "row_index": 67,
+    "visible_capture": true,
+    "visible_expiry_observed": true,
+    "survivor_controls": {
+      "movement": true,
+      "jump": true,
+      "grounded_after_jump": true,
+      "other_actor_stationary_during_selected_input": true
+    },
+    "expiry_row_index": 83
+  },
+  "resource_comparisons": [
+    {
+      "label": "pre-first-death",
+      "row_index": 0,
+      "original_source_shape_candidates": 0,
+      "unique_actual_used_GT3_pairs": 0,
+      "candidate_frames": [],
+      "all_component_checks": true,
+      "private_FX11_allocated_slots": 0
+    },
+    {
+      "label": "death-1-fatal",
+      "row_index": 67,
+      "original_source_shape_candidates": 48,
+      "unique_actual_used_GT3_pairs": 48,
+      "candidate_frames": [
+        107,
+        110,
+        111
+      ],
+      "all_component_checks": true,
+      "private_FX11_allocated_slots": 12
+    },
+    {
+      "label": "death-1-actual-visible-burst",
+      "row_index": 68,
+      "original_source_shape_candidates": 81,
+      "unique_actual_used_GT3_pairs": 81,
+      "candidate_frames": [
+        106,
+        110,
+        111,
+        112,
+        113
+      ],
+      "all_component_checks": true,
+      "private_FX11_allocated_slots": 30
+    },
+    {
+      "label": "death-1-expired-survivor",
+      "row_index": 83,
+      "original_source_shape_candidates": 0,
+      "unique_actual_used_GT3_pairs": 0,
+      "candidate_frames": [],
+      "all_component_checks": true,
+      "private_FX11_allocated_slots": 32
+    }
+  ],
+  "reviewed_component": {
+    "exact_independent_private_atlas_key": true,
+    "original_Zero_icon_asset2_texels": true,
+    "original_default_Zero_type5_palette": true,
+    "actual_private_working_palette_row": true,
+    "exact_used_completed_GT3_membership": true,
+    "source_UV_raw_semi_16x16_geometry": true
+  },
+  "composed_review": "Root viewed actual visible gold/orange burst and expired X-survivor images; original co-op-OFF reference retained separately. No complete composed-art/occlusion/camera review.",
+  "source_reference": "Original BIN/archive and char DAT85 asset2; all raw encoded bank artifacts and completed GP0 frames retained by component/parent.",
+  "parent_status": "partial_observer_or_mechanics_failure",
+  "parent_failure": "Foreign damage actor/native caller in contact trial",
+  "parent_failed_phase": "first_X_contact",
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v36-v4-original-Zero-FX11-bank-component.json",
+      "bytes": 664346,
+      "sha256": "b7ef87cf198896c9903851c18662a2e5236d96cf6ae19d8cfa35b3b5c4791d1e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v36-50f4a31-v4\\ammo-hud\\native-death-camera-retry\\mechanics-result.json",
+      "bytes": 1165232,
+      "sha256": "ecf2e19556fd810fcdd72f23822202f4917656626b9cbe71d429cc76425d4020"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v36-50f4a31-v4\\ammo-hud\\native-death-camera-retry\\native-views.jsonl.gz",
+      "bytes": 729193,
+      "sha256": "9548e7e0e86c3ad575ce9dbc5a1aa52342e52460e3d7be2edb71185fea58b062"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v36-50f4a31-v4\\ammo-hud\\native-death-camera-retry\\native-function-entries.jsonl.gz",
+      "bytes": 17435,
+      "sha256": "5c6ed0c010005a65d06b70971e1f1392831c5f70112cc99fd9a44575f556460d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v36-50f4a31-v4\\ammo-hud\\native-death-camera-retry\\native-trace.jsonl.gz",
+      "bytes": 181378,
+      "sha256": "e222ca8938a1d00a6c5e09dd500842f7ab3bf2e965716e493ca2a4b005ed2664"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v36-50f4a31-v4\\qualification.json",
+      "bytes": 1851369,
+      "sha256": "c8503a4a3d5fa9aa18b24c8fa527ac24d3e3138b465b54e854564e0727288eb3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v36-50f4a31-v4\\ammo-hud\\actual-private-atlas-constant-symbols.json",
+      "bytes": 1823,
+      "sha256": "57c018e8cb7d0fb6d879fba2851653b215413f53f695497fc1078555f20e37ed"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v36-50f4a31\\candidate.json",
+      "bytes": 7343,
+      "sha256": "c454fd8c17e78da36acc6de641cbc88c3319054c60ffaa014fde8bd78f1ff652"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v36-native-death-capture-v4-source-review.json",
+      "bytes": 2722,
+      "sha256": "6686ae87522d444e8203efc607ecffb44ab866ec1f6cdab0069b45c88ba574fb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\retained-FX11-v1-index.json",
+      "bytes": 3428,
+      "sha256": "7ee7ab1475d9d6f70a7cf3c4360485e4f072ba5b9f47a7604d7d5fc0fa5aefa1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v36-Zero-death-FX11-debug.log",
+      "bytes": 30476,
+      "sha256": "2c14a6720906c3b3f3340e0ebfe29df18f4eecc7794b54da4d6285335371a63f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v36-Zero-death-FX11-production.log",
+      "bytes": 30486,
+      "sha256": "053912695aebcd9afb46cea62e465376a36eb9adcb08b9684ed63ad98af2e58d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-v36-death-camera-retry-local-v4.py",
+      "bytes": 14513,
+      "sha256": "47472a81890946314b36ab0c5b22264ecd81cac61d394b466af0af08effc2c34"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reduce-v36-v4-original-Zero-FX11-banks.py",
+      "bytes": 7480,
+      "sha256": "56d68078b4db992060624ce94c2388ac33f10f6764149c54111f8e02c39296b7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-v36-Zero-FX11-resource-component.py",
+      "bytes": 5604,
+      "sha256": "6c12a9500082554ac4b0753368cce54ca9ab0a30cc4fab89ca54a70b8880cec4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v36-50f4a31-v4\\ammo-hud\\native-death-camera-retry\\death-1-actual-visible-burst.png",
+      "bytes": 2074543,
+      "sha256": "f14c7c60eb18cb128c22ddeab1c9d60a0a65b1816fd7184b5762de15e7bd3053"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v36-50f4a31-v4\\ammo-hud\\native-death-camera-retry\\death-1-expired-survivor.png",
+      "bytes": 2074543,
+      "sha256": "48ecd1268b586ef0893011059a4bfe3d850829fe2ecdd80b76b86186b4f6e213"
+    }
+  ],
+  "bypasses": [
+    "Original offline command1 sets living P2 HP to positive4 before actual native record25 fatal contact. No fatal/FX/lives/action/retry/completion writes."
+  ],
+  "limits": [
+    "Resource fix component only; aggregate comparison/content ledgers unchanged.",
+    "Original source frame candidates remain separate from nearby actual actor frames and completed GP0; no one-to-one source-command actor/frame/origin claim.",
+    "No reconstructed native source quad/tint presented as actual evidence.",
+    "Finite visible native retirement does not require clearing stale allocation flags.",
+    "Real subsequent projectile HP32->31 stopped the strict observer; full both-seat/wipe/retry, state/paired/art/camera/scenery and parent late gates remain pending.",
+    "Old c3 R3LOCAL failure and every actual failed/partial parent remain preserved."
+  ],
+  "native_or_art_or_row_pass": false
+}
