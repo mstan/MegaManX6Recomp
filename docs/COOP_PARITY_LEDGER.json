@@ -7554,7 +7554,7 @@
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -7664,9 +7664,61 @@
               "Actual original command9 earned-inventory initialization bypass; native acquisition unqualified.",
               "Explicit current-build warm LOAD and cold adoption of the exact genuinely warm-activated snapshot; native card progress unchanged."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "c32dd8f71889273a134a878ff5a4ab6644c537f0",
+            "build_identity": {
+              "executable_sha256": "ff094835e1442bfdeafce053d42f4a399206714510f6734f9f88f998231ede5c",
+              "compiled_manifest_sha256": "ba3379d2f0725761b30c220edb6a73c3f727ff950a4685eebd17e3ed17642f34",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "mode": "Windows same-machine delay-mode loopback",
+              "roster": [
+                "X/P1",
+                "normalZero/P2"
+              ],
+              "stage": 1,
+              "section": 0,
+              "stage_selector": 4,
+              "layout": "stacked",
+              "drawables": [
+                [
+                  320,
+                  240
+                ],
+                [
+                  960,
+                  720
+                ]
+              ],
+              "audio": "emulated muted dummy",
+              "native_cards": "Disclosed offline FF QAcard original paired native Load"
+            },
+            "action": "Actual original P2UpTriangle selects and activates Yammar, spending288to252; then actual XTriangle spends288to256. Retain three ordered component hooks and native320/finalFit960 controller/leaf/source/UV/current-stagepalette/positiveusedbank/composed captures on both peers.",
+            "outcome": "All17actual used-bank receipts independently redecoded and match original positive nativev64 texels, UV/tile/type5colors and completedGT3. Root reviewed12representativeoriginalimages across both peers/sizes/nativeframes: coherent three green options, no added horizontal lines or broken UV edges, both heroes/meters/world retained.20CRCgroups/135samples, independent canonicalONLINErecordings/cards/ownedexit0 pass. LaterF31guardfailure/wholeFAILEDparent retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-hud/manifest-bound-c32dd8f-F59-Yammar-native-pixels-netplay-prefix-reviewed.json",
+                "sha256": "13d0cd6b5532e48ec545f56046834617019a7749a8c08ca01771ee5b3f4fb89b"
+              }
+            ],
+            "limits": [
+              "Exact gamec32dd8f/SDK7cb474, Windows same-machine delay-mode loopback, X/P1+normalZero/P2, native stage1/sec0 selector4/type5 colors, one Yammar family.",
+              "Source-qualified positive original nativev64 used texels, native UV/tile/current-stage palette and completed GT3 membership all17payloads. Root visual12representatives independently confirms this bounded appearance.",
+              "Existing F59 adapter descriptive limits still name1128/SDK3d historically; actual candidate_binding/compiled proof/executed archive is c32dd8f/7cb474. Original descriptive text is retained, not silently rewritten.",
+              "Later F31 original-code guard fails with actual span/hash values unretained. Parent remainsFAILED; F31 receives no result and R6 still needs side_by_side. No missing data is reconstructed.",
+              "Original recording branch was unentered; independent actual canonical finalized ONLINE streams/startup/card/profile/identity checks and exact strict offline refusal are retained. No offline replay or output equivalence.",
+              "LOCAL warm/cold state results, broader weapons/rosters/scenery, acquisition, rollback/paired state restoration and all native-content mechanics remain separate unverified scope."
+            ],
+            "bypasses": [
+              "Disclosed offline FF availability initializer followed by original native Save; protected QAcard copied before launch and actually Loaded by the original title on both fresh online peers. No online fixture or execution-state LOAD; no native acquisition credit."
+            ]
           }
         ],
-        "limitations": "LOCAL F59 corrected c3c5bdb nativeYammar art passes actual320/Fit960 sourcepixels/UV/palette/composedreview and active current-build warm/cold restoration. Failed253c74e and observer attempts preserved. One nativefamily/fixed stage0/normalZero only; originalinventory acquisitionbypass/LOAD explicit. Netplay and aggregate unverified; no whole-screen/allart/rollback/nativecontent admission."
+        "limitations": "Bounded F59 LOCAL original Yammar/native320-Fit960 and current-build warm/cold passesc3c5bdb; NETPLAY original Yammar/native320-Fit960 independent prefix passesc32dd8f/SDK7cb474 after all17payloads/root12image/card/recording/CRC/exit review. Actualpaired stage1/type5palette and nativeQAcardLoad bypass explicit. LaterF31guardfailure/wholeFAILEDparent preserved. One family/roster, separate exact builds; no acquisition/allart/pairedstate/rollback/replay/nativecontent claim. Aggregate remains UNVERIFIED: the independently passed LOCAL and NETPLAY receipts currently identify different exact candidates. Requalify LOCAL on c32dd8f before aggregate admission; no cross-build result transfer."
       }
     },
     {

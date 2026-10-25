@@ -103,16 +103,15 @@ R3 keeps its failed disposition until its complete bounded check is requalified.
 F59's `253c74e` local Yammar texture-placement failure remains in
 history. The `c3c5bdb` fix passes 103 debug and 103 production tests and reviewed
 local native artwork plus active-effect warm/cold current-build restoration.
-Its netplay and aggregate checks remain unverified.
+Its separate [reviewed v43 NETPLAY component](evidence/mmx6-hud/manifest-bound-c32dd8f-F59-Yammar-native-pixels-netplay-prefix-reviewed.json) now passes the frozen native-scale/final-Fit check: all17 used-bank payloads match original positive texels/UV/current-stage colors, and12 root-viewed images retain coherent options on both peers. Independent ONLINE recording, card, CRC and owned-exit checks pass. The later F31 guard failure and whole failed parent remain; no acquisition, replay or broader-art result follows.
 F12's reviewed local and paired native dash/pause evidence passes. F6 now passes
 on the same `c3c5bdb` local/paired image: both peers move P1 two pixels entirely
 within beam phase 1 and reach neutral ALIVE in 117 native ticks, retaining
 resources, world and both controls. Its independent route follows the original
 parent idle/control checks; the earlier combined dash-setup failures remain
 preserved. Five resolved CRC windows, both ordinary online recordings, native
-cards and owned exits pass. R6, F31, F59 and F157 have additional local passes;
-their netplay and aggregate results
-remain unverified. The [new disclosed FF QA-card receipt](evidence/mmx6-progression/manifest-bound-1128b9d-disclosed-FF-native-private-card-Save-local-reviewed.json)
+cards and owned exits pass. R6, F31 and F157 have additional local passes;
+their netplay and aggregate results remain unverified. F59 has independently passed modes on different exact candidates; its aggregate remains unverified until LOCAL is requalified on c32dd8f. The [new disclosed FF QA-card receipt](evidence/mmx6-progression/manifest-bound-1128b9d-disclosed-FF-native-private-card-Save-local-reviewed.json)
 binds actual `1128b9d` checkpoint setup, one offline availability grant, native
 boss/finale/report progression and same-process native Save to a fresh private
 card. Independent reduction reproduces the full card from the exact SDK blank,
