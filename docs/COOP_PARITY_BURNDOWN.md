@@ -200,10 +200,17 @@ and all twelve unchanged entry predicates. Root rechecked all 275 raw buffers,
 five rounds of 29 complete source guards, four fresh blank cards and both
 composed images. The first two rising edges were not sampled; native held
 input and source text progress were observed for all three. Old failed runs
-remain preserved without assigning them a cause. Setup coverage is now 27
-qualified, 1 blocked (`s04-a1-c00`) and 66 unvisited supported locations. These
-are setup results; rendering, stage mechanics and the comparison count receive
-no additional passes.
+remain preserved without assigning them a cause.
+The [latest reviewed entry prefix](evidence/mmx6-content/manifest-bound-50f4a31-entry39852-three-components-failed-parent-reviewed.json)
+adds completed individual setups at `s03-a0-c01`, `s03-a0-c03` and `s03-a0-c04`.
+Root reproduced all twelve predicates from 658 retained samples and 2,646
+journal RAM links, 28 original guards, three actual captures, four newly created
+blank cards, recording refusals and graceful exit. The batch remains failed:
+`s03-a0-c05` exhausted its setup budget with P2 at zero HP; its cause is unknown.
+The c04 image retains background corruption under `beads-eio.1.52`.
+Setup coverage is now 30 qualified, 2 blocked (`s04-a1-c00`, `s03-a0-c05`) and
+62 unvisited supported locations. Rendering, stage mechanics and the comparison
+count receive no additional passes.
 F205 now passes its bounded effective-mode recording check on `f3bdbe9`, with
 107 debug and 107 production checks passing. The [LOCAL receipt](evidence/mmx6-native-replay/manifest-bound-f3bdbe9-F205-effective-mode-history-local-reviewed.json)
 binds 6,603 native input events and 19 actual mode transitions. The

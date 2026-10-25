@@ -1,0 +1,1086 @@
+{
+  "kind": "root_reviewed_three_individual_native_entry_components_with_failed_parent_preserved",
+  "binding": {
+    "candidate_proof": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v36-50f4a31\\candidate.json",
+      "sha256": "c454fd8c17e78da36acc6de641cbc88c3319054c60ffaa014fde8bd78f1ff652"
+    },
+    "candidate_source": "50f4a31cd6c1344f4448be51e3016a84e96b2566",
+    "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+    "image": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\candidate\\mmx6-runtime.exe",
+      "sha256": "7932585a45a53eae7ad1fbdd083ecd4ff3512741ff42c841f31cada8af4db25f"
+    },
+    "declared_manifest_sha256": "595914ab91176b013ff2abd8e19fbdfdf6cf4c85b1414223fafdc0e9a57f308c",
+    "owned_pid": 39992
+  },
+  "source_packet_sha256": "877ca00c6156ba4704d11d469001f2d9f7166f646f9659e8f6fe1e6ca10b1836",
+  "actual_parent_status": "failed_setup",
+  "actual_batch_status": "failed_or_partial_entry_survey",
+  "full_parent_promoted": false,
+  "completed": [
+    {
+      "id": "s03-a0-c01",
+      "component": "individual_entry_setup_component_eligible_for_root_curation",
+      "case": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\content-entry-batch\\case-s03-a0-c01\\entry-observations.json",
+        "bytes": 499822,
+        "sha256": "56dd48b193dfacfbd4e7ad5bc9de6dc17425e8a665eef1a04ed6d59b52423065"
+      },
+      "capture": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\content-entry-batch\\case-s03-a0-c01\\s03-a0-c01-composed.png",
+        "bytes": 2074543,
+        "sha256": "24a98110de47ff3ee77c90536b911f7b84bd4943af2d2bc076bf247141fd8996"
+      },
+      "parent_status": "failed_setup_preserved",
+      "full_parent_promoted": false,
+      "all_six_mechanics": "unverified",
+      "stage_end_transition": "unverified",
+      "gameplay_passes_added": 0
+    },
+    {
+      "id": "s03-a0-c03",
+      "component": "individual_entry_setup_component_eligible_for_root_curation",
+      "case": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\content-entry-batch\\case-s03-a0-c03\\entry-observations.json",
+        "bytes": 493567,
+        "sha256": "b6dc1baafd4bdf537431311631c7756e3a64cb0fdf361b0c0eb8ff6341487c96"
+      },
+      "capture": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\content-entry-batch\\case-s03-a0-c03\\s03-a0-c03-composed.png",
+        "bytes": 2074543,
+        "sha256": "e371dc4d1143e39a3b96adcf450a14570457b916081a46159bc0a5e4f4351257"
+      },
+      "parent_status": "failed_setup_preserved",
+      "full_parent_promoted": false,
+      "all_six_mechanics": "unverified",
+      "stage_end_transition": "unverified",
+      "gameplay_passes_added": 0
+    },
+    {
+      "id": "s03-a0-c04",
+      "component": "individual_entry_setup_component_eligible_for_root_curation",
+      "case": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\content-entry-batch\\case-s03-a0-c04\\entry-observations.json",
+        "bytes": 561255,
+        "sha256": "fe4fb2c398756681491247b28b45147e2524e1ad2f9ee737c09d38703c3c1511"
+      },
+      "capture": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\content-entry-batch\\case-s03-a0-c04\\s03-a0-c04-composed.png",
+        "bytes": 2074543,
+        "sha256": "14a683d38c4f28138b984c88240e95b88f48f9c80aa384d97430c929e6736933"
+      },
+      "parent_status": "failed_setup_preserved",
+      "full_parent_promoted": false,
+      "all_six_mechanics": "unverified",
+      "stage_end_transition": "unverified",
+      "gameplay_passes_added": 0
+    }
+  ],
+  "blocked_fourth": {
+    "first_fresh_sample": 52,
+    "first_P2_HP0_sample": 69,
+    "final_failed_predicates": [
+      "enrolled_living_idle_roster"
+    ],
+    "no_all12_pass": true,
+    "first_fresh": {
+      "index": 52,
+      "typed_tick": 634,
+      "typed_native_timer": 3,
+      "lifecycle": [
+        0,
+        3
+      ],
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 182452224,
+          "y_raw": 152764416,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 0,
+          "hp": 32,
+          "x_raw": 184025088,
+          "y_raw": 141033472,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "ordinary_character": 0,
+      "ordinary_state": 1,
+      "ordinary_action": 2,
+      "ordinary_HP": 32,
+      "ordinary_xy_raw": [
+        182452224,
+        152764416
+      ],
+      "failed_predicates": [
+        "enrolled_living_idle_roster",
+        "actors_in_current_native_viewport"
+      ]
+    },
+    "first_P2_HP0": {
+      "index": 69,
+      "typed_tick": 745,
+      "typed_native_timer": 114,
+      "lifecycle": [
+        0,
+        4
+      ],
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 182452224,
+          "y_raw": 152764416,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 2,
+          "action": 0,
+          "hp": 0,
+          "x_raw": 184025088,
+          "y_raw": 152764416,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "ordinary_character": 0,
+      "ordinary_state": 1,
+      "ordinary_action": 2,
+      "ordinary_HP": 32,
+      "ordinary_xy_raw": [
+        182452224,
+        152764416
+      ],
+      "failed_predicates": [
+        "enrolled_living_idle_roster"
+      ]
+    },
+    "last": {
+      "index": 442,
+      "typed_tick": 3057,
+      "typed_native_timer": 2426,
+      "lifecycle": [
+        0,
+        5
+      ],
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 182452224,
+          "y_raw": 152764416,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 3,
+          "action": 0,
+          "hp": 0,
+          "x_raw": 184025088,
+          "y_raw": 152764416,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "ordinary_character": 0,
+      "ordinary_state": 1,
+      "ordinary_action": 2,
+      "ordinary_HP": 32,
+      "ordinary_xy_raw": [
+        182452224,
+        152764416
+      ],
+      "failed_predicates": [
+        "enrolled_living_idle_roster"
+      ]
+    },
+    "cause": "unverified_no_damage/hazard/instruction_trace_source_claim",
+    "source_or_engine_fix_proposed": false
+  },
+  "actual_raw_review": {
+    "readiness_samples": 658,
+    "journal_RAM_links": 2646,
+    "original_guards": 28,
+    "all_original12_recomputed": true,
+    "original_initializer_once_each": true,
+    "exact_mailbox8_writes": 32,
+    "inputs_neutral_only": true,
+    "actual_composed_completions": 3
+  },
+  "late_constraints": {
+    "exact_image_source_originals": true,
+    "owned_exit0": true,
+    "existing_cards_preserved": true,
+    "ordered_taint_strict_refusals": true
+  },
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "existing_card_baseline": {},
+  "actual_new_blank_cards": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\candidate\\saves\\card2.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\candidate\\saves\\input-recordings\\session-1792933922091302-1-0\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\candidate\\saves\\input-recordings\\session-1792933922091302-1-0\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    }
+  ],
+  "recording": {
+    "status": "failed_fixture_taint_retained_for_diagnostics",
+    "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\candidate\\saves\\input-recordings\\session-1792933922091302-1-0\\inputs.jsonl",
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "7932585a45a53eae7ad1fbdd083ecd4ff3512741ff42c841f31cada8af4db25f",
+      "manifest_sha256": "595914ab91176b013ff2abd8e19fbdfdf6cf4c85b1414223fafdc0e9a57f308c",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "terminal_failure": "unilateral debug or fixture input contaminated capture",
+    "native_status": {
+      "contract": "mmx6.native-consumption.v1",
+      "epoch": 1,
+      "failure": "unilateral debug or fixture input contaminated capture",
+      "schema": 1,
+      "scope": "native-consumption diagnostics; replay unimplemented",
+      "status": "failed"
+    },
+    "events": 5950,
+    "natives": 4170,
+    "p2_reads": 1780,
+    "strict_refusals": {
+      "ordinary_capture": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      },
+      "offline_replay": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      }
+    },
+    "finalized_capture_admitted": false,
+    "replay_admitted": false,
+    "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+  },
+  "root_image_review": "All three actual images reviewed: c01 metal interior and c03 cavern with living X/Zero and stacked HUD; c04 retains HELP reploid, living actors and HUD but corrupted black/purple background tiles under issue1.52. No original-art or mechanic result follows.",
+  "qualified_entry_setup_locations": 30,
+  "qualified_entry_setup_ids": [
+    "s00-a0-c00",
+    "s00-a0-c01",
+    "s00-a0-c02",
+    "s01-a0-c00",
+    "s01-a0-c01",
+    "s01-a0-c02",
+    "s01-a0-c03",
+    "s02-a0-c00",
+    "s02-a0-c01",
+    "s02-a0-c02",
+    "s02-a0-c03",
+    "s02-a0-c04",
+    "s02-a0-c05",
+    "s03-a0-c00",
+    "s03-a0-c01",
+    "s03-a0-c03",
+    "s03-a0-c04",
+    "s04-a0-c00",
+    "s05-a0-c00",
+    "s06-a0-c00",
+    "s07-a0-c00",
+    "s08-a0-c00",
+    "s12-a0-c00",
+    "s16-a0-c00",
+    "s17-a0-c00",
+    "s18-a0-c00",
+    "s19-a0-c00",
+    "s20-a0-c00",
+    "s21-a0-c00",
+    "s22-a0-c00"
+  ],
+  "current_blocked_entry_locations": [
+    "s03-a0-c05",
+    "s04-a1-c00"
+  ],
+  "unvisited_supported_locations": 62,
+  "unvisited_supported_ids": [
+    "s03-a0-c02",
+    "s03-a0-c06",
+    "s03-a0-c07",
+    "s04-a0-c01",
+    "s04-a0-c02",
+    "s04-a0-c03",
+    "s04-a1-c01",
+    "s04-a1-c02",
+    "s05-a0-c01",
+    "s05-a0-c02",
+    "s06-a0-c01",
+    "s06-a0-c02",
+    "s06-a0-c03",
+    "s06-a0-c04",
+    "s06-a0-c05",
+    "s07-a0-c01",
+    "s07-a0-c02",
+    "s07-a0-c03",
+    "s08-a0-c01",
+    "s08-a0-c02",
+    "s12-a0-c01",
+    "s12-a0-c02",
+    "s12-a0-c03",
+    "s12-a0-c04",
+    "s12-a0-c05",
+    "s12-a0-c06",
+    "s12-a0-c07",
+    "s12-a0-c08",
+    "s12-a0-c09",
+    "s12-a0-c10",
+    "s12-a0-c11",
+    "s12-a0-c12",
+    "s12-a0-c13",
+    "s12-a0-c14",
+    "s12-a0-c15",
+    "s12-a0-c16",
+    "s12-a0-c17",
+    "s12-a1-c00",
+    "s12-a1-c01",
+    "s16-a0-c01",
+    "s16-a0-c02",
+    "s16-a0-c03",
+    "s16-a0-c04",
+    "s17-a0-c01",
+    "s17-a0-c02",
+    "s17-a0-c03",
+    "s18-a0-c01",
+    "s18-a0-c02",
+    "s18-a0-c03",
+    "s18-a0-c04",
+    "s19-a0-c01",
+    "s19-a1-c00",
+    "s19-a1-c01",
+    "s20-a0-c01",
+    "s20-a1-c00",
+    "s20-a1-c01",
+    "s21-a0-c01",
+    "s21-a1-c00",
+    "s21-a1-c01",
+    "s22-a0-c01",
+    "s22-a1-c00",
+    "s22-a1-c01"
+  ],
+  "prerequisite_bypass": "Only the original mailbox8 checkpoint loader; route reachability is bypassed. No health/inventory/position/success writes.",
+  "all_six_location_mechanics": "unverified",
+  "stage_end_transitions": "unverified",
+  "netplay": "unverified",
+  "gameplay_mode_passes_added": 0,
+  "comparison_counts": {
+    "passed": 17,
+    "failed": 1,
+    "unverified": 216
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry39852-prefix-v1-index.json",
+      "bytes": 28793,
+      "sha256": "d77a4f5ac27990fb15b537aac2c624db555d5f053a2bc0c41e6e7e6999f3ebaa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\audit-content-entry39852-prefix-v1.py",
+      "bytes": 16800,
+      "sha256": "a659c6f619f4ee41f4bd13d6721b83305a329ed2baa72e17c4d5a77386d1e889"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\test_content_entry39852_prefix_v1.py",
+      "bytes": 5585,
+      "sha256": "3298edb38a9e902083fddcc906020467f0bb964da9d5a98f3c9b6825503818d2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\check-content-entry39852-prefix-v1.py",
+      "bytes": 1139,
+      "sha256": "f3478124bc9d379f0cf0f518df5f7e9ea2ef164ffa53e36a0248a3c46cc541b0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry39852-prefix-exact-facts-v1.json",
+      "bytes": 1773827,
+      "sha256": "ad3df38650979def288ababad02da25d222a9d4afbc894845733e15d83353bfe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry39852-prefix-findings-v1.txt",
+      "bytes": 4134,
+      "sha256": "ddcc342a285ddbda9745d833f0a8fcaa2a923fa093af63b573ced44f9a039531"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry39852-root-curation-inputs-v1.json",
+      "bytes": 4272,
+      "sha256": "265480198c2d4590333502002c6a234360de84495b4f664b5a78abdf4a1faa53"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry39852-prefix-check-1.log",
+      "bytes": 2528,
+      "sha256": "de6091fbb5d6a9bc10c68d63932502b1a5fded0643ecaa2115bc019bcaa368ef"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry39852-prefix-check-2.log",
+      "bytes": 1709,
+      "sha256": "5d7024e4cb2184aa964b81f85b8ae7575f0e22636223e67c3992baa204739d1f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\freeze-content-entry39852-prefix-v1.py",
+      "bytes": 5159,
+      "sha256": "d1ae878892ddfc48a604844bea8aec2af96d880684d4c3377d5e78991c65d83a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\verify-content-entry39852-prefix-v1.py",
+      "bytes": 1054,
+      "sha256": "151f433b09fdee35b95402d3b697b17cddd4eb4fe2d37ea0ea328eb9fff3951a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\qualification.json",
+      "bytes": 188660,
+      "sha256": "ee98e5c0d0b83f8e0a9d7c6f83284656f711bcb70374bbe90737b0a899ebf395"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\content-source-packet.json",
+      "bytes": 128091,
+      "sha256": "4291fcc971872d03bb25c60295ecbffe68d21a00ce4c118a5fdaa54b78acca1c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\diag-entry66-terminal-v1.json",
+      "bytes": 5371,
+      "sha256": "a9354ecc3ee6e2637cf77a10fa687be79a7af7b852917a2b8ecf478eca7a0160"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\diag-entry66-frozen-plan.json",
+      "bytes": 286414,
+      "sha256": "61c779b63937200a6b8bb5d2f157e29bdaaa152d8ac080a7d0f59a735eee70df"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\candidate\\jump-audio\\control.jsonl",
+      "bytes": 16369241,
+      "sha256": "8cd5a097f33df2156270382c13973bb438915ad2009a70989160e57be0344fde"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\candidate\\jump-audio\\stdout.log",
+      "bytes": 2793,
+      "sha256": "8835b486af9efac22cb0d8df23d505343778d4c5e21466cae8e3d4eff417e887"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\candidate\\jump-audio\\stderr.log",
+      "bytes": 426,
+      "sha256": "dfe13bec5781580c68591c65bd400c3f1a87e23489fc2d5c52a05cca8bc14371"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v36-50f4a31\\candidate.json",
+      "bytes": 7343,
+      "sha256": "c454fd8c17e78da36acc6de641cbc88c3319054c60ffaa014fde8bd78f1ff652"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\mmx6_content_batch_entry_v1-executed-source.py",
+      "bytes": 25885,
+      "sha256": "e281ed5925da65855012075415a45c69e4b94f8ca6639683852a44bfd428a0bd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\mmx6_coop_checkpoint-executed-source.py",
+      "bytes": 25303,
+      "sha256": "c8179ccf2d0a7de26213db480313c1640d95dadaa4c1238d4e71989f2ca70363"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\coop_debug-executed-source.py",
+      "bytes": 12235,
+      "sha256": "61eae6837c54e191597a4829fdeb57f9b54a36229ebfd02fe60aec37b3ae1f1f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\inventory_mmx6_coop_content-executed-source.py",
+      "bytes": 29885,
+      "sha256": "fb078dccd910137f28b8e9679a0f84a53abf15024aea3bb180a8796d94cf36c5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\qualify_mmx6_coop_hud_inventory-executed-source.py",
+      "bytes": 11008,
+      "sha256": "ca594aa64b184761c33415ccb89f1f48194af094533cc48e33fdb359d41e48a7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "bytes": 29370,
+      "sha256": "e91dbde11541f68e554f94b747ba91c409a83322f7d4d60b26d1e3aefdf75ac9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\mmx6_input_recording-executed-source.py",
+      "bytes": 13664,
+      "sha256": "a4d21aaa83c9104679d549c0f5fa81bf95106ce800b0601263faaff46ae5310a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\qualify_mmx6_input_replay-executed-source.py",
+      "bytes": 28273,
+      "sha256": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\content-entry-batch\\case-s03-a0-c01\\s03-a0-c01-composed.png",
+      "bytes": 2074543,
+      "sha256": "24a98110de47ff3ee77c90536b911f7b84bd4943af2d2bc076bf247141fd8996"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\content-entry-batch\\case-s03-a0-c03\\s03-a0-c03-composed.png",
+      "bytes": 2074543,
+      "sha256": "e371dc4d1143e39a3b96adcf450a14570457b916081a46159bc0a5e4f4351257"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\content-entry-batch\\case-s03-a0-c04\\s03-a0-c04-composed.png",
+      "bytes": 2074543,
+      "sha256": "14a683d38c4f28138b984c88240e95b88f48f9c80aa384d97430c929e6736933"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\content-entry-batch\\case-s03-a0-c01\\entry-observations.json",
+      "bytes": 499822,
+      "sha256": "56dd48b193dfacfbd4e7ad5bc9de6dc17425e8a665eef1a04ed6d59b52423065"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\content-entry-batch\\case-s03-a0-c03\\entry-observations.json",
+      "bytes": 493567,
+      "sha256": "b6dc1baafd4bdf537431311631c7756e3a64cb0fdf361b0c0eb8ff6341487c96"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\content-entry-batch\\case-s03-a0-c04\\entry-observations.json",
+      "bytes": 561255,
+      "sha256": "fe4fb2c398756681491247b28b45147e2524e1ad2f9ee737c09d38703c3c1511"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\content-entry-batch\\case-s03-a0-c05\\entry-observations.json",
+      "bytes": 3054203,
+      "sha256": "c7072cea0ce1168ef0b9b27c7325064a8da2d829f6ddcb8e5d8537099f07621b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\candidate\\saves\\card2.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\candidate\\saves\\input-recordings\\session-1792933922091302-1-0\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\candidate\\saves\\input-recordings\\session-1792933922091302-1-0\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\recording-rejection\\settings.json",
+      "bytes": 10329,
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\recording-rejection\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\recording-rejection\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\recording-rejection\\inputs.jsonl",
+      "bytes": 781325,
+      "sha256": "768ed07a777a86269567a187b9131ae3ea2a1c182f6121976500f8558e73ea4d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\recording-rejection\\status.json",
+      "bytes": 211,
+      "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\recording-rejection\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\recording-rejection\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\candidate\\mmx6-runtime.exe",
+      "bytes": 27430400,
+      "sha256": "7932585a45a53eae7ad1fbdd083ecd4ff3512741ff42c841f31cada8af4db25f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-local-v36-50f4a31-v1\\content-entry-batch\\entry-batch-report.json",
+      "bytes": 9131,
+      "sha256": "07cdfc7d9a73bcff44254be7b48693aa858b66778d355f28c4a45804c03ae6e3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\frozen-build-v36-50f4a31\\psx_build_manifest\\psx-runtime\\Release\\manifest.json",
+      "bytes": 162577,
+      "sha256": "fc5bc8a4446a59693e610cd7824794e1c94a01b1a9ed28f7e3b3920e7f9af8e2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\frozen-build-v36-50f4a31\\psx_build_manifest\\psx-runtime\\Release\\manifest.h",
+      "bytes": 150,
+      "sha256": "aca643b6aee680b5731b66cd20f93b77963c4338e1da4597aa0ef1aff94c2155"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-v1-index.json",
+      "bytes": 17443,
+      "sha256": "56a679f93f02c89fe2e61487a7aca7207b03ac58d25f4bb613d1a16fca63e889"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-plan-v1.py",
+      "bytes": 16111,
+      "sha256": "4311f0d2dbc812a5615f28536c8178e6d8db67961d1411cae74dbc067f94d262"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-owned-runner-v1.py",
+      "bytes": 4817,
+      "sha256": "d154b58e848b8e0a714eb5d36d31724a205a0b1245e63a9516edcaf84b93c1bd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-command-v1.ps1",
+      "bytes": 589,
+      "sha256": "7f3ded825ea4696f5c8e9d874f33118f1ed65a13ac2c01ac9a0986484ae2d7fd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-next12-source-v1.json",
+      "bytes": 286414,
+      "sha256": "61c779b63937200a6b8bb5d2f157e29bdaaa152d8ac080a7d0f59a735eee70df"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-preflight-v1.json",
+      "bytes": 2956,
+      "sha256": "244b2b4f59925c5f168e0a12a78762b2365af80116df14e02e898d31d92013b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-preflight-v1-initial-no-SDK-mapping.json",
+      "bytes": 2790,
+      "sha256": "01a5a621298e4e8b31e23c0b329e9fdd1592106676fa67b153f3c620b1072456"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\test-diag-batch-entry66-v1.py",
+      "bytes": 7030,
+      "sha256": "07e54a0c2e24d74a57c0cbeaa0ba2791b2b8c524590fc1a57231a883d9c58824"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-v1-tests.json",
+      "bytes": 253,
+      "sha256": "6449766f9ad72d0cb02d3b5d3fd5403295c665866e62faed6b2d05d89308e917"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-v1-tests.txt",
+      "bytes": 2788,
+      "sha256": "0a70d874db21809e9c1fe85743993f2140ca4f25729f1b9138d3cc01fe8c2581"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-handoff-v1.txt",
+      "bytes": 6409,
+      "sha256": "4166953c6c0c7b69ad49254f9fd46ecb7c4f2989f1b7d1050dfa4870d59919fb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-entry66-freeze-v1.py",
+      "bytes": 3024,
+      "sha256": "91c189f1e352731995ba53346d580bbbfda22bdfe5f89d4973b2684a7ca62dd4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-batch-entry-source-v1.json",
+      "bytes": 128091,
+      "sha256": "4291fcc971872d03bb25c60295ecbffe68d21a00ce4c118a5fdaa54b78acca1c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-batch-entry-v1-index.json",
+      "bytes": 4365,
+      "sha256": "6ad2c6aab00024b633785def76fd9d8729a65ee701abe16b9e93752d9d0afdfc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\candidate\\mmx6-runtime.exe",
+      "bytes": 27430400,
+      "sha256": "7932585a45a53eae7ad1fbdd083ecd4ff3512741ff42c841f31cada8af4db25f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\disc\\Mega Man X6 (USA) (v1.1).cue",
+      "bytes": 90,
+      "sha256": "3237ed931e92ba163a1985f72da805e7f53c0932bb7d8a27355f725f12380da1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\disc\\SLUS_013.95",
+      "bytes": 522240,
+      "sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\frozen-build-v36-50f4a31\\CMakeCache.txt",
+      "bytes": 38945,
+      "sha256": "26e0af0019dbdd0e7f5a4c583524dd53941801da5da5ad100034615065bc2081"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\frozen-build-v36-50f4a31\\mmx6-runtime.exe",
+      "bytes": 27430400,
+      "sha256": "7932585a45a53eae7ad1fbdd083ecd4ff3512741ff42c841f31cada8af4db25f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_content_batch_entry_v1.py",
+      "bytes": 25885,
+      "sha256": "e281ed5925da65855012075415a45c69e4b94f8ca6639683852a44bfd428a0bd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-content-batch-entry-v36-v1.py",
+      "bytes": 7001,
+      "sha256": "96e42074f948f8fb47745ce371d014c1cd6506fae617f633d533fc63e0c7d77a"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\COOP_X6_CONTENT.json",
+      "bytes": 798749,
+      "sha256": "67508ae2e19ad07c2c5cad41e12dbeb5e446e4eb50f033efa75ed306f2636fad"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_checkpoint.py",
+      "bytes": 25303,
+      "sha256": "c8179ccf2d0a7de26213db480313c1640d95dadaa4c1238d4e71989f2ca70363"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\coop_debug.py",
+      "bytes": 12235,
+      "sha256": "61eae6837c54e191597a4829fdeb57f9b54a36229ebfd02fe60aec37b3ae1f1f"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\inventory_mmx6_coop_content.py",
+      "bytes": 29885,
+      "sha256": "fb078dccd910137f28b8e9679a0f84a53abf15024aea3bb180a8796d94cf36c5"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\qualify_mmx6_coop_hud_inventory.py",
+      "bytes": 11008,
+      "sha256": "ca594aa64b184761c33415ccb89f1f48194af094533cc48e33fdb359d41e48a7"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\qualify_mmx6_coop_jump_audio.py",
+      "bytes": 29370,
+      "sha256": "e91dbde11541f68e554f94b747ba91c409a83322f7d4d60b26d1e3aefdf75ac9"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\qualify_mmx6_coop_state.py",
+      "bytes": 53820,
+      "sha256": "a7f8e768b97789bab9ff84c0d6baea9612bafc4c6d5074da73839d4ab815dcbb"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_input_recording.py",
+      "bytes": 13664,
+      "sha256": "a4d21aaa83c9104679d549c0f5fa81bf95106ce800b0601263faaff46ae5310a"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\qualify_mmx6_input_replay.py",
+      "bytes": 28273,
+      "sha256": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-content\\manifest-bound-50f4a31-checkpoint-entry-survey-prefixes-v2-reviewed.json",
+      "bytes": 33670,
+      "sha256": "87fed93addb05eb024fa3b4f8d5a5d35121b26b4482f960b543cb87ac82b78e4"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-content\\manifest-bound-50f4a31-checkpoints01to02-entry-reviewed.json",
+      "bytes": 21813,
+      "sha256": "8e4d575e82e6fa4642020cb3b0db1af2e50c65d5cbdc70fb827f07832efd0a9c"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-content\\manifest-bound-50f4a31-entry-prefix17to22-reviewed.json",
+      "bytes": 17511,
+      "sha256": "04f7340bc156209eab79c058470bef811c1da8ff14b529f761d5bd3e86d4aa2a"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-content\\manifest-bound-50f4a31-stage16-three-wait-help-entry-reviewed.json",
+      "bytes": 133914,
+      "sha256": "f4a70560738f5dcbcaebc9d9dae2195bbd04cde6095f281a87aa28a6474b5862"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-content\\manifest-bound-50f4a31-stage8-source-camera-entry-v7-reviewed.json",
+      "bytes": 10026,
+      "sha256": "82a9e80a33ba7f9c13bd10316b8d869e4c4396baf52b5420e1ebf7f27e4408e6"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\src\\mods\\mmx6_coop_checkpoint.inc",
+      "bytes": 7060,
+      "sha256": "787231bf488ed5b9da7fac9573b20036d0b2957513ebe142f033cf95e48135ee"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\src\\mods\\mmx6_coop_checkpoint_data.h",
+      "bytes": 6898,
+      "sha256": "83b16f87cb2a9b609f0f3ab3da3011868c718bd7c28d17b143da093309d2739e"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\audit_mmx6_body_audio_routes.py",
+      "bytes": 5147,
+      "sha256": "c21478397a7564144a6bf3dea6c409de210cbfad5ad77c2413554cefdc6f076c"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\audit_mmx6_coop_audio.py",
+      "bytes": 9057,
+      "sha256": "306c161f006b6eafd9ae5b98cca557eabfc229f8776ef911793b097a989898b8"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\audit_mmx6_private_action_audio.py",
+      "bytes": 13625,
+      "sha256": "4b07514dcba079b98332c8ac95e4de477d83f6dfae358c864a5fbf3e14010d79"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\coop_host_profile.py",
+      "bytes": 11181,
+      "sha256": "c11d19879b6fbe2cdc464f20b5d444598fa590d6145d795bef7a1597280cf735"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_body_audio.py",
+      "bytes": 27459,
+      "sha256": "22de2f57b6b088bed044029a66cf2a047a32ec7829e7c5eb4e6c33fad05b8bc5"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_contact.py",
+      "bytes": 22689,
+      "sha256": "dbcb58c53b5e1e0a7433aeb25c48beb9ae20b30c05fd11b5da60b33f40513046"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_hud_inventory.py",
+      "bytes": 17683,
+      "sha256": "e503f2f99085f89fc18010f2d3e0916866d872083fb716b3a75595bd4cabdfe2"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_hud_presentation.py",
+      "bytes": 11949,
+      "sha256": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_inventory_state.py",
+      "bytes": 6110,
+      "sha256": "211bd23caf176328cc3a24aaeae26a44b5d0dc5e48b244c1826781e9f53f61f4"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_jump_audio.py",
+      "bytes": 41089,
+      "sha256": "66166703568cc6037c3bc0c5cbd1ec0c91e63e976c1d47317860d916f757c8a0"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_jump_audio_pair.py",
+      "bytes": 29983,
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_mapped_state.py",
+      "bytes": 16689,
+      "sha256": "870ddd670d02b366fb056173b9133fca2618b96941fcbc793c5d698deae623cb"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_native_quit.py",
+      "bytes": 27793,
+      "sha256": "f71a5b80e3da5d322da442524c450f1d27434d2e2205a358fc58d3403b8dc61a"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_native_reentry.py",
+      "bytes": 32767,
+      "sha256": "c0fdd5fe7bf511bef710bf229754affa0c1b7431b96d13e04c5f71afda1b3960"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_native_reentry_pair.py",
+      "bytes": 11435,
+      "sha256": "883c388ed512915b482533f625ddffde91111a7b436dbf63a538db0b9fda7b8b"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_personal_menu.py",
+      "bytes": 19463,
+      "sha256": "95eda202b0a42482afb42e7b9e3b237378cfa0f362d197d6fa08522ab762adb1"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_primary_audio.py",
+      "bytes": 19629,
+      "sha256": "891ea9c540b3190649f1f79366425b34f645b1c5b12293d5cbcf6fd4d6cbac2c"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_private_effects.py",
+      "bytes": 17570,
+      "sha256": "8aa7290af8316bf827024684668410b080ea5e56fbcbf7653236ad46f6bbffba"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_private_pause.py",
+      "bytes": 24847,
+      "sha256": "660bef661e4e25d54a259e54735673d8d8ecc6d42505124c98161fdfe0644eee"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_published_input.py",
+      "bytes": 3658,
+      "sha256": "1ad70248cd065d7963b4c26c5c2c0959c78d93225de335bdb18793b00d214bf6"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_state_resources.py",
+      "bytes": 8009,
+      "sha256": "5f106493da021377dba71bd3eeaebd9d7189cc59baf5c9945d27dee2d2b09936"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_native_contact_audio.py",
+      "bytes": 16568,
+      "sha256": "01f28d65c97f7f886bc62856c24509c13ccb274999b74e4287238b5412e8ca94"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_native_zero_reference.py",
+      "bytes": 41640,
+      "sha256": "26f58a78d6f6ea97a0d5d8b84915716be6964f898765570ced62fafaec9c3fb5"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_owned_keyboard.py",
+      "bytes": 4599,
+      "sha256": "11b07f655dd711e5cf39c36362eec796b9eb73b86702d8100e0a958a3e348402"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_seamless_catalog.py",
+      "bytes": 5182,
+      "sha256": "2b96fbaac90848112e4cb6e5173c7a450a742a519075d286492f4cde27b41fd1"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\prepare_mmx6_coop_playtest.py",
+      "bytes": 10411,
+      "sha256": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\prepare_mmx6_input_replay.py",
+      "bytes": 8385,
+      "sha256": "584c0790706a2794636f7ed1bbd5e6b904f29b8b285d6eb3a9f5373167500d95"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\qualify_mmx6_coop_baseline.py",
+      "bytes": 14335,
+      "sha256": "b2e0d0195544e78ae175e9f591db33da791b4bdd2f14703d63561989e20b76f8"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\qualify_mmx6_coop_enemy_admission.py",
+      "bytes": 16151,
+      "sha256": "c953ef53a862996f508b3290e08525d80c3f1be7a734e601cf1d5f34eae8a519"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\qualify_mmx6_coop_personal_menu.py",
+      "bytes": 16934,
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\qualify_mmx6_native_audio.py",
+      "bytes": 30948,
+      "sha256": "94953a066452bfbf40cab3ee6b5dc9a7965e605366b8805f10a284ab8c2ca2fb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-entry39852-prefix-root-v1.py",
+      "bytes": 6263,
+      "sha256": "d4e4240bcb491a10cc244f43fdc14e3d084e86ce5b06a093a617e8d1f2be5c13"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry39852-prefix-root-check-v1.log",
+      "bytes": 1709,
+      "sha256": "440b5dda6a596cfdf93b0fc368a32bc6edc42da2cb2fa1174f5ee37d24894728"
+    }
+  ]
+}
