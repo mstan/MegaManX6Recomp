@@ -7289,17 +7289,69 @@
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "253c74e5a9f33549dacdd0f675b16e76b46cc91a",
+            "build_identity": {
+              "executable_sha256": "472727e56a428b878306939bb25f0f594407c072ded853a2077746bc6e43701b",
+              "compiled_manifest_sha256": "fb7e85ea35bd2bbe31cef6429aac88cd8cac4fa22e286c3e5b26beb8ec1af746",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
+            },
+            "settings": {
+              "mode": "offline",
+              "input_path": "published_host",
+              "roster": [
+                "X/P1",
+                "normalZero/P2"
+              ],
+              "stage": 0,
+              "section": 0,
+              "drawables": [
+                [
+                  320,
+                  240
+                ],
+                [
+                  960,
+                  720
+                ]
+              ],
+              "audio": "dummy",
+              "private_profile": true
+            },
+            "action": "Original initializer inventory prerequisite; genuine native Zero UpTriangle activates/spends Yammar and native XTriangle spends; capture actual controller/leaves/frame/source/CLUT/GP0/encoded used banks at native and finalFit sizes.",
+            "outcome": "Twelve of13 source/mechanical/render-observation predicates pass. Allten actual used tile4000 payloads are256 zero texels and fail original nativev64 expected opaque pixels despite correct UV and stage-working CLUT7849. Six representative PNGs reviewed: options missing, heroes/world/meters intact. Default recording taint/strict refusals/cards/exit0 retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-hud/manifest-bound-253c74e-F59-Yammar-native-placement-local-failed-reviewed.json",
+                "sha256": "1fdd7dc011fd464aab0ebf8374da726fccce4efcc3c34ce352f7931cdb126428"
+              }
+            ],
+            "limits": [
+              "Actual LOCAL normalZero/P2 Yammar family, X/P1 stage0section0. Ten captures across literal320x240 and Fit960x720, three distinct native leaf frames per size. No netplay, all-specials, fullpage runtime or whole-hardware-frame claim.",
+              "Actual original inventory initializer earned0->FF is an explicit acquisition bypass; native R1 selections, UpTriangle Yammar activation/spend and XTriangle spend are retained. No direct HP/ammo/selection/child/palette/outcome writes or LOAD.",
+              "All12 other source/ownership/coherence/size/frame/UV/palette/resource predicates pass, but actual immutable used tile4000 payload is256 zero texels in every capture. Original-source-qualified v64 placement requires positive opaque original pixels. Normalized-only zero equality fails the native contract.",
+              "Root viewed six representative original PNGs covering native frames3,4,5,6 and both sizes: both heroes/world/meters remain; native Yammar options are absent. Other four PNGs retained and hashed; allten payloads independently recomputed.",
+              "Original native parent remains failed_setup at explicit observer predicate; status reflects parent exception convention, not lack of actual gameplay. Fixture-tainted default recording canonical failure, both strict ordinary capture/replay refusals, unchanged private cards and owned exit0 are retained.",
+              "Selector and video observer preparation failures remain separate preserved attempts. Mutable stage11 selector is source-proven; current stage0half2 plus all19 code guards/writer/aux remain strict. GPU video_info.windowed is not desktop mode."
+            ],
+            "bypasses": [
+              "Earned inventory through original initializer; native acquisition unqualified."
+            ]
+          }
+        ],
+        "limitations": "LOCAL F59 failed253c74e actual privateYammar texture placement at native320/finalFit960: correct source/UV/palette but blankusedtile4000 instead of source-qualified nativev64 pixels. Original-bank equality at normalizedorigin is insufficient. Netplay unverified; one family only, failedsetup and capture artifacts preserved."
       }
     },
     {
