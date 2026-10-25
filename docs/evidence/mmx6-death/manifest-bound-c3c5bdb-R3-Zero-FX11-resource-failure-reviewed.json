@@ -1,0 +1,162 @@
+{
+  "schema": 1,
+  "kind": "reviewed_R3_LOCAL_first_Zero_native_death_FX_resource_failure",
+  "issue": "beads-eio.1.46",
+  "reviewed_at_utc": "2026-10-25T04:30:16.552291+00:00",
+  "candidate": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+  "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+  "executable_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+  "compiled_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+  "result": "failed",
+  "actual_trigger": {
+    "seat": 1,
+    "actual_actor": "0x8008ef48",
+    "changes": [
+      {
+        "before": 4,
+        "after": 0,
+        "source_damage": 4,
+        "reaction": 1,
+        "expected_nonfatal_reaction": 1,
+        "trace_sequences": [
+          1033,
+          1034,
+          1036,
+          1037
+        ],
+        "tick": 707
+      }
+    ],
+    "native_motion_observed": true,
+    "fatal_motion_window": {
+      "before_tick": 703,
+      "after_tick": 707,
+      "before_action": 4,
+      "before_position": [
+        25583616,
+        70909952
+      ],
+      "after_position": [
+        25845760,
+        70909952
+      ],
+      "action0C_source_verified": true,
+      "limit": "Actual prefatal original walk/jump/fall/dash and position change across the retained lethal-contact window"
+    },
+    "native_fatal": true,
+    "origin": [
+      25845760,
+      70909952
+    ],
+    "row_index": 83,
+    "visible_capture": true,
+    "visible_expiry_observed": true,
+    "survivor_controls": {
+      "movement": true,
+      "jump": true,
+      "grounded_after_jump": true,
+      "other_actor_stationary_during_selected_input": true
+    },
+    "expiry_row_index": 103
+  },
+  "source_comparison": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\original-Zero-and-coop-native-death-art-v35-component-comparison.json",
+    "sha256": "fd05ea62c393132394a4431d6744f9b43456bae3a78580122df942210e663f39",
+    "bytes": 2020295
+  },
+  "actual_native_original_reference": "Co-op-off actual native Zero gold/orange burst;129 completed Zero packet/shape candidates match exact original Zero icon texels and palette.",
+  "actual_coop_failure": "Zero burst is blue while X survives;48fatal/104visible X packet/shape candidates match resident X resource words andpalette, with Zero48/108 candidates different fromZero. All CPU/VRAM/FBO data agree.",
+  "root_viewed_images": [
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v35-c3c5bdb-v5\\ammo-hud\\native-death-camera-retry\\death-1-fatal.png",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v35-c3c5bdb-v5\\ammo-hud\\native-death-camera-retry\\death-1-actual-visible-burst.png",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v35-c3c5bdb-v5\\ammo-hud\\native-death-camera-retry\\death-1-expired-survivor.png",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-Zero-original-death-reference-v35-c3c5bdb-v1\\native-Zero-before-fatal.png",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-Zero-original-death-reference-v35-c3c5bdb-v1\\native-Zero-actual-fatal.png",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-Zero-original-death-reference-v35-c3c5bdb-v1\\native-Zero-original-visible-FX11.png"
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\original-Zero-and-coop-native-death-art-v35-component-comparison.json",
+      "sha256": "fd05ea62c393132394a4431d6744f9b43456bae3a78580122df942210e663f39",
+      "bytes": 2020295
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v35-c3c5bdb-v5\\ammo-hud\\native-death-camera-retry\\mechanics-result.json",
+      "sha256": "31597021f43209d77da88888ca0e0dcbda197ddd0c817dbab7701fa9dd2a806c",
+      "bytes": 955323
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v35-c3c5bdb-v5\\ammo-hud\\native-death-camera-retry\\native-views.jsonl.gz",
+      "sha256": "df814a7f83e38c1a11cadbcb5ab50614e5513bcbcbcdc53ce6d95658d99e5d86",
+      "bytes": 923579
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v35-c3c5bdb-v5\\ammo-hud\\native-death-camera-retry\\native-trace.jsonl.gz",
+      "sha256": "4a9e1318b1ab5b62619f88dcc6b8cdad5252a20a6dee9fda2031687fd71f851a",
+      "bytes": 164092
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v35-c3c5bdb-v5\\qualification.json",
+      "sha256": "01d9ba48a9ddb60220d021dd24f5016e1eae2b566cef4740c0feec59db2aeafe",
+      "bytes": 1629477
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-Zero-original-death-reference-v35-c3c5bdb-v1\\qualification.json",
+      "sha256": "93d80e940ed9215116586e0350ebb11aaaafb0ea257e0cd8e0a556fffe3db46f",
+      "bytes": 1820449
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Zero-death-FX11-resource-ownership-issue.txt",
+      "sha256": "e45b2f28da6f786a7eb708a6c2f4ad02d2361647ecdabfd49d441bfb7d120234",
+      "bytes": 2594
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-v35-R3-Zero-death-resource-failure.py",
+      "sha256": "3fa3f88908264a633b308d9cde436cc4da1557f2c3197eadc5f6b69c1f6c0f44",
+      "bytes": 6133
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v35-c3c5bdb-v5\\ammo-hud\\native-death-camera-retry\\death-1-fatal.png",
+      "sha256": "44cea7f2c3838100e94711498cae3259d708b24fa307264953ccc409d1578a43",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v35-c3c5bdb-v5\\ammo-hud\\native-death-camera-retry\\death-1-actual-visible-burst.png",
+      "sha256": "41a6f9e06c6650f46dbbe41309bbda30a28f08ff2694b48bc6151deaca2fce96",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-camera-retry-local-v35-c3c5bdb-v5\\ammo-hud\\native-death-camera-retry\\death-1-expired-survivor.png",
+      "sha256": "9cd641a2d038b5ac7a46568ced7cd8f4cb0662fc363e0558d443d1711444faf6",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-Zero-original-death-reference-v35-c3c5bdb-v1\\native-Zero-before-fatal.png",
+      "sha256": "9c146c6ae38d57a4ed512fe6532fc0c1db563ff8df0db231436637d724985276",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-Zero-original-death-reference-v35-c3c5bdb-v1\\native-Zero-actual-fatal.png",
+      "sha256": "e8e5dbcd74f50bd25b08ec48e5e0588b63cde68368ee9314be77876f9489c82c",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-Zero-original-death-reference-v35-c3c5bdb-v1\\native-Zero-original-visible-FX11.png",
+      "sha256": "8c4a5305cfc6c96b2da9c35dc08275f69d07b3103807793dd220b6581cd9f550",
+      "bytes": 2074543
+    }
+  ],
+  "limits": [
+    "Both parent attempts remain partial/failed; no full death/retirement/recording/art/camera/row admission.",
+    "Original baseline reached actual Zero fatal and visible native FX11 but sampled mode9 retry before qualified empty retirement; first three composed captures and raw observations remain valid bounded components.",
+    "All-feature-disabled original profile also disables mmx6.diagnostics; original source explicitly skips recording before opening a stream. Missing default capture is expected for this profile, but its driver strict-late-gate failure remains retained.",
+    "Native stage1 Zero FX source palette equals source intro Zero FX palette. Both actual resource texture/palette captures independently agree CPU/VRAM/FBO; co-op resources match X while baseline resources match Zero.",
+    "Exact completed-frame producer/actor/frame/origin attribution and fatal-body pixels remain separate before a complete artwork pass. Actual resource/visual ownership discrepancy is actionable evidence, not a full row pass.",
+    "R3 LOCAL failed for the actual first Zero native fatal color/resource counterexample. Other seat/rosters, full F133 fatal-body artwork, F58/F170 camera/retry and NETPLAY remainunverified.",
+    "Positive living P2HP4 setup through original offline command1 bypasses normal incoming damage amount needed to reach the fatal state; actual record25 native source applies final4HP damage and all fatal/FX/lifetime/outcomes are original.",
+    "Source-slot trace, body/native motion, visible FX11 lifetime and actual composed difference support this failure independently of the later parent observer stops. No whole-parent pass, recording finalization or original empty-retirement admission is asserted."
+  ],
+  "bypasses": [
+    "Offline existing command1 reduces living P2 HP to positive4 before ordinary input/source-attributed native lethalcontact; no HP0, lives, action, origin, FX, retry, success or completion writes."
+  ]
+}

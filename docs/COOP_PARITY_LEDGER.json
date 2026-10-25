@@ -315,17 +315,59 @@
           "src/mods/mmx6_coop_plugin.c:render_actor",
           "src/mods/mmx6_coop_plugin.c:draw_coop_hud"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+            "settings": {
+              "roster": [
+                "X/P1",
+                "normalZero/P2"
+              ],
+              "input_path": "published_host",
+              "audio": "dummy",
+              "offline": true,
+              "positive_P2_HP4_prerequisite": true
+            },
+            "action": "Original record25 contact kills Zero from4HP during measured native motion; retain native fatal/visible burst/finite visible expiry and Xsurvivor controls, compare against fresh co-op-off originalZero.",
+            "outcome": "Zero burst is blue while X survives;48fatal/104visible X packet/shape candidates match resident X resource words andpalette, with Zero48/108 candidates different fromZero. All CPU/VRAM/FBO data agree.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-death/manifest-bound-c3c5bdb-R3-Zero-FX11-resource-failure-reviewed.json",
+                "sha256": "51b335a5d9609c0131ff0e9a9b9ad2d5cb4570161434279092047629a9f52975"
+              }
+            ],
+            "limits": [
+              "Both parent attempts remain partial/failed; no full death/retirement/recording/art/camera/row admission.",
+              "Original baseline reached actual Zero fatal and visible native FX11 but sampled mode9 retry before qualified empty retirement; first three composed captures and raw observations remain valid bounded components.",
+              "All-feature-disabled original profile also disables mmx6.diagnostics; original source explicitly skips recording before opening a stream. Missing default capture is expected for this profile, but its driver strict-late-gate failure remains retained.",
+              "Native stage1 Zero FX source palette equals source intro Zero FX palette. Both actual resource texture/palette captures independently agree CPU/VRAM/FBO; co-op resources match X while baseline resources match Zero.",
+              "Exact completed-frame producer/actor/frame/origin attribution and fatal-body pixels remain separate before a complete artwork pass. Actual resource/visual ownership discrepancy is actionable evidence, not a full row pass.",
+              "R3 LOCAL failed for the actual first Zero native fatal color/resource counterexample. Other seat/rosters, full F133 fatal-body artwork, F58/F170 camera/retry and NETPLAY remainunverified.",
+              "Positive living P2HP4 setup through original offline command1 bypasses normal incoming damage amount needed to reach the fatal state; actual record25 native source applies final4HP damage and all fatal/FX/lifetime/outcomes are original.",
+              "Source-slot trace, body/native motion, visible FX11 lifetime and actual composed difference support this failure independently of the later parent observer stops. No whole-parent pass, recording finalization or original empty-retirement admission is asserted."
+            ],
+            "bypasses": [
+              "Offline existing command1 reduces living P2 HP to positive4 before ordinary input/source-attributed native lethalcontact; no HP0, lives, action, origin, FX, retry, success or completion writes."
+            ],
+            "build_identity": {
+              "executable_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+              "compiled_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
+            }
+          }
+        ],
+        "limitations": "Observed LOCAL firstZero FX11 color/resource counterexample on exactc3, trackedbeads-eio.1.46. Partialparents preserved; NETPLAY/otherseat/fullbodyart and camera/retry remainunverified. Draftsourcefix confers no pass."
       }
     },
     {

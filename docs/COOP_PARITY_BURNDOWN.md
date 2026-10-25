@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 15 passed (R2, R4, R5, R7, R8, R12, R13, R15, F6, F10, F12, F18, F33, F38, F208), 0 failed, 219 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 15 passed (R2, R4, R5, R7, R8, R12, R13, R15, F6, F10, F12, F18, F33, F38, F208), 1 failed (R3), 218 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -55,6 +55,16 @@ not change the separate 234 comparison rows.
 All 234 reference rows are inventoried; 15/234 (6.4%) are passed. R15/F208
 now pass their exact bounded checks locally and in paired Windows loopback on
 `c3c5bdb`; their prior failures remain in history.
+R3 now has a reviewed local failure: Zero's native death burst uses X's blue
+icon textures and palette while X survives. The [14-artifact failure receipt](evidence/mmx6-death/manifest-bound-c3c5bdb-R3-Zero-FX11-resource-failure-reviewed.json)
+binds the actual native lethal contact, measured movement, visible effect
+retirement and survivor controls, compared with a fresh co-op-off original Zero
+gold/orange burst. Exact packet/resource comparisons agree across CPU, VRAM and
+GPU FBO. Both broader parent attempts remain partial, and original retirement
+and all-feature-disabled recording limitations are explicit. Local issue
+`beads-eio.1.46` tracks the fix; netplay and the other death/camera/retry checks
+remain unverified. The source fix is isolated in a local worktree and gains no
+pass from source review or focused unit tests.
 F59's `253c74e` local Yammar texture-placement failure remains in
 history. The `c3c5bdb` fix passes 103 debug and 103 production tests and reviewed
 local native artwork plus active-effect warm/cold current-build restoration.
