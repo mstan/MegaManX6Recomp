@@ -1295,14 +1295,14 @@
           "src/mods/mmx6_coop_plugin.c:render_actor",
           "src/mods/mmx6_coop_plugin.c:draw_coop_hud"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -1474,9 +1474,121 @@
             "bypasses": [
               "Earned inventory prerequisite through audited offline mailbox9/original initializer; no acquisition/progression or replay claim."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "c32dd8f71889273a134a878ff5a4ab6644c537f0",
+            "build_identity": {
+              "executable_sha256": "ff094835e1442bfdeafce053d42f4a399206714510f6734f9f88f998231ede5c",
+              "compiled_manifest_sha256": "ba3379d2f0725761b30c220edb6a73c3f727ff950a4685eebd17e3ed17642f34",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "mode": "offline",
+              "layouts": [
+                "stacked",
+                "side_by_side"
+              ],
+              "roster": [
+                "X/P1",
+                "normalZero/P2"
+              ],
+              "drawables": [
+                [
+                  960,
+                  720
+                ],
+                [
+                  1200,
+                  600
+                ],
+                [
+                  640,
+                  900
+                ]
+              ],
+              "audio": "dummy"
+            },
+            "action": "Inspect native unselected X/Z portraits and HP; use original R1/R1, ZeroUpTriangle and first XTriangle. Capture both layouts/three aspects, retaining isolated resource changes and actual composed ammo fills.",
+            "outcome": "Both layouts retain native portrait/HP and selected weapon ownership. Actual X288to256 changes rendered height48to42 while Zero252/height42/full330pixel ROI stays unchanged. Original parent late card/exit and respective default recording gates pass; paired finalized ONLINE streams/profiles/CRC independently verified despite later F31 failures.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-hud/manifest-bound-c32dd8f-R6-both-modes-layouts-portraits-HP-ammo-reviewed.json",
+                "sha256": "831404037da2707b2884af1f712ffdc312332f9b8cd0a4412706e69ce4de608a"
+              }
+            ],
+            "limits": [
+              "Same exact c32dd8f/SDK7cb474 executable and compiled manifest for both modes; X/P1+normalZero/P2, Windows, offline intro and paired stage1 after actual native QAcard Load.",
+              "Both default stacked and elective side_by_side layouts; native default X/Z portraits and HP reviewed separately from selected weapon icons. All36 before/after ammo images are represented in six root-viewed source-indexed contact sheets; six LOCAL default-portrait originals and four paired default-portrait originals were directly viewed.",
+              "LOCAL24 actor/capture fill tops and paired48 actor/capture source-gradient models independently remeasured. Actual X288to256 shrinks48to42; Zero252/height42 and its full330pixel ROI remain unchanged. Three drawable aspects960x720/1200x600/640x900 per ammo case, each actual peer separately.",
+              "LOCAL original initializer9 availability bypass and paired disclosed offline FF native Save then actual original card Load are explicit prerequisites. No native acquisition, outcome repair or cross-build state claim.",
+              "Both paired parents remain FAILED: v7 later F31 guard mismatch with unavailable hashes; v8 later F31 L1 observation/tick budget failure. R6 had already completed. Independent canonical finalized ONLINE recordings/startup profiles/resolved CRC/private cards/owned exits pass; original parent recording branch remained unentered.",
+              "The LOCAL stacked portrait-only v2 parent remains failed on a fourth repeated960x720 filename after all three unique views completed. Those three independently checked components are admitted; no whole-parent pass. Earlier v1 receipt-key collision remains preserved. SBSv3 deduplicates the existing size list and completes normally.",
+              "No actual R6 GP0 membership or live linear-filter getter is inferred. Paired gradient uses qualified source/config-inferred presentation plus actual pixels. No Giga/all-art/scenery, physical-device, other-host, rollback, replay-equivalence or native-content result."
+            ],
+            "bypasses": [
+              "LOCAL original initializer9 availability bypass and paired disclosed offline FF native Save then actual original card Load are explicit prerequisites. No native acquisition, outcome repair or cross-build state claim."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "c32dd8f71889273a134a878ff5a4ab6644c537f0",
+            "build_identity": {
+              "executable_sha256": "ff094835e1442bfdeafce053d42f4a399206714510f6734f9f88f998231ede5c",
+              "compiled_manifest_sha256": "ba3379d2f0725761b30c220edb6a73c3f727ff950a4685eebd17e3ed17642f34",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "mode": "Windows same-machine delay loopback",
+              "layouts": [
+                "stacked",
+                "side_by_side"
+              ],
+              "roster": [
+                "X/P1",
+                "normalZero/P2"
+              ],
+              "drawables": [
+                [
+                  960,
+                  720
+                ],
+                [
+                  1200,
+                  600
+                ],
+                [
+                  640,
+                  900
+                ]
+              ],
+              "audio": "dummy"
+            },
+            "action": "Inspect native unselected X/Z portraits and HP; use original R1/R1, ZeroUpTriangle and first XTriangle. Capture both layouts/three aspects, retaining isolated resource changes and actual composed ammo fills.",
+            "outcome": "Both layouts retain native portrait/HP and selected weapon ownership. Actual X288to256 changes rendered height48to42 while Zero252/height42/full330pixel ROI stays unchanged. Original parent late card/exit and respective default recording gates pass; paired finalized ONLINE streams/profiles/CRC independently verified despite later F31 failures.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-hud/manifest-bound-c32dd8f-R6-both-modes-layouts-portraits-HP-ammo-reviewed.json",
+                "sha256": "831404037da2707b2884af1f712ffdc312332f9b8cd0a4412706e69ce4de608a"
+              }
+            ],
+            "limits": [
+              "Same exact c32dd8f/SDK7cb474 executable and compiled manifest for both modes; X/P1+normalZero/P2, Windows, offline intro and paired stage1 after actual native QAcard Load.",
+              "Both default stacked and elective side_by_side layouts; native default X/Z portraits and HP reviewed separately from selected weapon icons. All36 before/after ammo images are represented in six root-viewed source-indexed contact sheets; six LOCAL default-portrait originals and four paired default-portrait originals were directly viewed.",
+              "LOCAL24 actor/capture fill tops and paired48 actor/capture source-gradient models independently remeasured. Actual X288to256 shrinks48to42; Zero252/height42 and its full330pixel ROI remain unchanged. Three drawable aspects960x720/1200x600/640x900 per ammo case, each actual peer separately.",
+              "LOCAL original initializer9 availability bypass and paired disclosed offline FF native Save then actual original card Load are explicit prerequisites. No native acquisition, outcome repair or cross-build state claim.",
+              "Both paired parents remain FAILED: v7 later F31 guard mismatch with unavailable hashes; v8 later F31 L1 observation/tick budget failure. R6 had already completed. Independent canonical finalized ONLINE recordings/startup profiles/resolved CRC/private cards/owned exits pass; original parent recording branch remained unentered.",
+              "The LOCAL stacked portrait-only v2 parent remains failed on a fourth repeated960x720 filename after all three unique views completed. Those three independently checked components are admitted; no whole-parent pass. Earlier v1 receipt-key collision remains preserved. SBSv3 deduplicates the existing size list and completes normally.",
+              "No actual R6 GP0 membership or live linear-filter getter is inferred. Paired gradient uses qualified source/config-inferred presentation plus actual pixels. No Giga/all-art/scenery, physical-device, other-host, rollback, replay-equivalence or native-content result."
+            ],
+            "bypasses": [
+              "LOCAL original initializer9 availability bypass and paired disclosed offline FF native Save then actual original card Load are explicit prerequisites. No native acquisition, outcome repair or cross-build state claim."
+            ]
           }
         ],
-        "limitations": "Local rendered portraits/HP/selected-and-spent ammo pass in both layouts and three aspects on exact56b3fc5. Paired selected/spent ammo ownership remains unverified, so aggregate R6 stays unverified. Offline earned-weapon prerequisite is bypassed honestly; strict fixture-tainted recording/replay refuse admission. Separate Giga rendering issue remains open."
+        "limitations": "Bounded R6 passes LOCAL and NETPLAY on exactc32dd8f/SDK7cb474: both HUD layouts, default X/Z portraits and HP, actual selected/spent native ammo at three aspects, independent owner resources and Zero ROI. Actual same-host pair profiles/CRC/ordinary ONLINE recordings/cards/exits independently pass. Later F31/duplicate portrait-capture parent failures and old evidence remain retained. Offline inventory/native QAcard prerequisite bypasses explicit; no acquisition/all-art/scenery/rollback/native-content credit."
       }
     },
     {

@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 18 passed (R2, R4, R5, R7, R8, R12, R13, R15, F6, F10, F12, F18, F33, F38, F59, F70, F205, F208), 1 failed (R3), 215 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 19 passed (R2, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F33, F38, F59, F70, F205, F208), 1 failed (R3), 214 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -110,8 +110,7 @@ within beam phase 1 and reach neutral ALIVE in 117 native ticks, retaining
 resources, world and both controls. Its independent route follows the original
 parent idle/control checks; the earlier combined dash-setup failures remain
 preserved. Five resolved CRC windows, both ordinary online recordings, native
-cards and owned exits pass. R6, F31 and F157 have additional local passes;
-their netplay and aggregate results remain unverified. F59 now passes both modes on exact c32dd8f after the [fresh LOCAL qualification](evidence/mmx6-hud/manifest-bound-c32dd8f-F59-Yammar-native-pixels-local-reviewed.json): all23 used-bank payloads independently match original source pixels/UV/palette, and all8 native/Fit images were reviewed. Actual default recording strict refusals, private cards and owned exit0 pass. This closes the bounded comparison; previous c3 state checks do not transfer to this candidate. The [new disclosed FF QA-card receipt](evidence/mmx6-progression/manifest-bound-1128b9d-disclosed-FF-native-private-card-Save-local-reviewed.json)
+cards and owned exits pass. [R6 now passes both modes and layouts on exact c32dd8f](evidence/mmx6-hud/manifest-bound-c32dd8f-R6-both-modes-layouts-portraits-HP-ammo-reviewed.json): default X/Z portraits and HP, selected/spent native ammo at three aspects, and independent owner resources were reviewed. All36 ammo images and ten default-portrait images were inspected; source fill remeasurement, default recordings, paired CRC/profiles, cards and owned exits pass. Later F31 and redundant portrait-capture failures remain preserved. F31 and F157 retain additional local passes; their netplay and aggregate results remain unverified. F59 now passes both modes on exact c32dd8f after the [fresh LOCAL qualification](evidence/mmx6-hud/manifest-bound-c32dd8f-F59-Yammar-native-pixels-local-reviewed.json): all23 used-bank payloads independently match original source pixels/UV/palette, and all8 native/Fit images were reviewed. Actual default recording strict refusals, private cards and owned exit0 pass. This closes the bounded comparison; previous c3 state checks do not transfer to this candidate. The [new disclosed FF QA-card receipt](evidence/mmx6-progression/manifest-bound-1128b9d-disclosed-FF-native-private-card-Save-local-reviewed.json)
 binds actual `1128b9d` checkpoint setup, one offline availability grant, native
 boss/finale/report progression and same-process native Save to a fresh private
 card. Independent reduction reproduces the full card from the exact SDK blank,
