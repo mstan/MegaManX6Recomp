@@ -1,0 +1,342 @@
+{
+  "schema": 1,
+  "kind": "reviewed_c3_LOCAL_frozen_R15_F208_native_Quit_earned_CURRENT_selection_and_New_Game_guest_reentry",
+  "reviewed_at_utc": "2026-10-25T02:10:17.334362+00:00",
+  "issue": "beads-gxrh",
+  "compiled_source": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+  "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+  "executable_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+  "compiled_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+  "mode": "local",
+  "bounded_results": {
+    "R15": "passed",
+    "F208": "passed"
+  },
+  "checks": {
+    "fresh_coherent_roster_in_actually_reached_native_mission": true,
+    "actual_guest_Select_refused_before_primary_final_Quit": true,
+    "actual_final_Quit_CURRENT_import_reentry_guest_menu": true,
+    "actual_current_build_New_Game_defaults_and_guest_controls": true
+  },
+  "parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "native_resource_and_window_observations_complete": true,
+    "default_recording_taint_retained_and_replay_refused": true,
+    "owned_cleanup_private_cards": true
+  },
+  "pre_Quit_guest_authority": {
+    "status": "automated_native_quit_bounded_checks_passed_artwork_pending",
+    "checks": {
+      "enough_samples": true,
+      "native_pause_owned": true,
+      "native_menu_input_state": true,
+      "world_timer_frozen": true,
+      "diagnostic_publications_advanced": true,
+      "cursor_unchanged": true,
+      "guest_select_cannot_enter_native_quit": true,
+      "personal_resources_preserved": true,
+      "native_roster_preserved": true,
+      "original_world_resumed": true,
+      "genuine_independent_guest_input_after_cancel": true
+    }
+  },
+  "routes": [
+    {
+      "route": "current_data",
+      "checks": {
+        "actual_primary_final_quit_and_title": true,
+        "source_bound_native_frontend_route": true,
+        "fresh_native_x_zero_reentry": true,
+        "guest_owned_menu_resources_and_controls_restored": true
+      },
+      "guest_menu_checks": {
+        "owner_native_pause_and_frozen_world": true,
+        "other_start_cannot_resume": true,
+        "other_cursor_cannot_change_owner_choice": true,
+        "owner_cursor_changes_and_restores": true,
+        "both_personal_resources_preserved_in_menu": true,
+        "owner_resumes_native_world": true,
+        "both_personal_resources_preserved_after_resume": true,
+        "continued_independent_native_movement": true,
+        "continued_native_square_action": true,
+        "composed_captures_completed": true,
+        "both_heroes_healthy_after_controls": true
+      },
+      "independent_reduction": {
+        "fresh_real_publication": true,
+        "source_mapped_campaign_import_reproduced": true,
+        "actual_earned_whole_CURRENT_retained": true,
+        "raw_CURRENT_marker1": 1,
+        "actual_native_stage_counter_before_and_returned": [
+          2
+        ],
+        "actual_X_forms_0_1_Zero_excluded": true
+      },
+      "accepted_native_inputs": 105,
+      "source_import_reductions": [
+        {
+          "checks": {
+            "current_data_eligible": true,
+            "original_current_buffer_retained": true,
+            "source_imported_campaign_fields_match": true,
+            "primary_campaign_is_x_at_native_map": true
+          },
+          "differences": [],
+          "limits": [
+            "Current buffer eligibility is not earned-progress or native-card coverage",
+            "Native import does not restore PLAY+38 character or PLAY+5E armor; the real unit selector is checked separately",
+            "HP/ammo spent in the abandoned world may be refilled by original native import/initialization"
+          ]
+        }
+      ],
+      "defaults": null
+    },
+    {
+      "route": "new_game",
+      "checks": {
+        "actual_primary_final_quit_and_title": true,
+        "source_bound_native_frontend_route": true,
+        "fresh_native_x_zero_reentry": true,
+        "guest_owned_menu_resources_and_controls_restored": true
+      },
+      "guest_menu_checks": {
+        "owner_native_pause_and_frozen_world": true,
+        "other_start_cannot_resume": true,
+        "other_cursor_cannot_change_owner_choice": true,
+        "owner_cursor_changes_and_restores": true,
+        "both_personal_resources_preserved_in_menu": true,
+        "owner_resumes_native_world": true,
+        "both_personal_resources_preserved_after_resume": true,
+        "continued_independent_native_movement": true,
+        "continued_native_square_action": true,
+        "composed_captures_completed": true,
+        "both_heroes_healthy_after_controls": true
+      },
+      "independent_reduction": {
+        "fresh_real_publication": true,
+        "separate_native_New_Game_defaults_reproduced": true
+      },
+      "accepted_native_inputs": 43,
+      "source_import_reductions": null,
+      "defaults": [
+        {
+          "campaign_character": 0,
+          "armor": 1,
+          "unlocks": 1,
+          "max_hp": [
+            32,
+            32
+          ],
+          "native_body_form": 1
+        }
+      ]
+    }
+  ],
+  "execution_prerequisite": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-Quit-import-NewGame-batch-v35-c3c5bdb-v1\\ammo-hud\\earned-native-mission-before-Quit.pst",
+    "sha256": "bd33585d36561307c0b3efa0015910bd360cdb3e1d50ca0bfe0c2ad83759f33f",
+    "adopted": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\candidate\\saves\\openbios\\state_80054AD8_slot02.pst",
+    "actually_earned_route": "earned-report-Quit-import-NewGame-batch-v35-c3c5bdb-v1; original report/story/tutorial/selector reached real stage1 X+Zero mission"
+  },
+  "completed_CURRENT_reentry_snapshot": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\ammo-hud\\earned-CURRENT-import-reentered-guest-controls.pst",
+    "sha256": "e13a61929694ae49ce3e2af8259cdbcdbc5379e93ebced449745f036cf8a2887"
+  },
+  "helper_source_review": {
+    "actual": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\ammo-hud\\reviewed_published_native_reentry.py",
+      "bytes": 33922,
+      "sha256": "928c9a2a3521fda8a548ec2601498d03e4d2cdc233af1056529631b95e40318d"
+    },
+    "whole_AST_identical_to_actual_reviewed_successful_module": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v31-777b4d0-map-story-chunks\\ammo-hud\\reviewed_published_native_reentry.py",
+      "bytes": 33922,
+      "sha256": "928c9a2a3521fda8a548ec2601498d03e4d2cdc233af1056529631b95e40318d"
+    }
+  },
+  "recording": {
+    "terminal_failure": "guest execution state replaced; capture segment ended",
+    "strict_refusals": {
+      "ordinary_capture": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: guest execution state replaced; capture segment ended"
+      },
+      "offline_replay": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: guest execution state replaced; capture segment ended"
+      }
+    },
+    "finalized_capture_admitted": false,
+    "replay_admitted": false
+  },
+  "artwork_review": {
+    "status": "bounded_native_Quit_and_guest_menu_world_reentry_reviewed",
+    "viewed_images": 10,
+    "observed": "Root inspected both actual two-confirmation Quit page pairs, actual CURRENT and New Game reentered worlds and each guest-owned Zero paused/resumed composed pair. Original X/Zero identities, full meters, original menu sheet and independent guest motion/attack remain visible. One intentional execution SAVE notification is present on the New Game first Quit capture."
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\qualification.json",
+      "bytes": 114044939,
+      "sha256": "c8eb3aba0efb0e24f50657d79e8af418f96616933b2bc4d169cff8db4504fe01"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v35-c3c5bdb\\candidate.json",
+      "bytes": 6854,
+      "sha256": "a176f8dd587317e6d0fe240c871265435d92098049848b0d42bba0804b1c0d64"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\candidate\\mmx6-runtime.exe",
+      "bytes": 27429376,
+      "sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\diagnostic-runner-executed-source.py",
+      "bytes": 18877,
+      "sha256": "3f97a95bd6dca0bf7ce818831815497ffb18cdde0ce463f66d76e5166b3611ad"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v35-earned-mission-Quit-import-NewGame-batch-v2-source-review.json",
+      "bytes": 2455,
+      "sha256": "f4113d6cbb0b1ba69b43616bdd71624cf2dbd7e88f2c2ad10f7b4c3f9570dce0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-reentry-v35-c3c5bdb-v1-terminal-independent-reduction.json",
+      "bytes": 5131,
+      "sha256": "bc3537912bb04b24c702290787cfcd04b00941046b258c8bc74eb410edfbce22"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-progression\\manifest-bound-c3c5bdb-earned-intro-CURRENT-export-regression-reviewed.json",
+      "bytes": 23744,
+      "sha256": "d8d8757b294d6a348b47ad4626274275925b6cd87e04e421bc87c6f26609bd03"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\ammo-hud\\reviewed_published_native_quit.py",
+      "bytes": 27759,
+      "sha256": "7e96bc61323ae29aed84684ea1b8f956c774613c0a325412718c7eca6a521405"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\ammo-hud\\reviewed_published_native_reentry.py",
+      "bytes": 33922,
+      "sha256": "928c9a2a3521fda8a548ec2601498d03e4d2cdc233af1056529631b95e40318d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\ammo-hud\\reviewed_published_personal_menu.py",
+      "bytes": 19426,
+      "sha256": "730dd0cff5a335cec0e980366e95cc56c6dae3e923bb7e2c190c07280da76039"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-Quit-import-NewGame-batch-v35-c3c5bdb-v1\\ammo-hud\\earned-native-mission-before-Quit.pst",
+      "bytes": 2029846,
+      "sha256": "bd33585d36561307c0b3efa0015910bd360cdb3e1d50ca0bfe0c2ad83759f33f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\recording-rejection\\settings.json",
+      "bytes": 10329,
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\recording-rejection\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\recording-rejection\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\recording-rejection\\inputs.jsonl",
+      "bytes": 781271,
+      "sha256": "ce2744cbdf7c78aefbd00647e706deba4c35a4f243da796da90647a2b0064d15"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\recording-rejection\\status.json",
+      "bytes": 210,
+      "sha256": "29ddc39bf6c672b397a3ee1fa7baeffc6acada8fb66852fd2fae15723d2fa8b2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\recording-rejection\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\recording-rejection\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\ammo-hud\\native-final-quit-current-data\\peer-0-native-first-quit-page.png",
+      "bytes": 2074543,
+      "sha256": "91aba325a2bfb4eff47a5773878355f47bdaf84ba5b14da6898699f22851f6a4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\ammo-hud\\native-final-quit-current-data\\peer-0-native-second-quit-page.png",
+      "bytes": 2074543,
+      "sha256": "8109f0740538110cacef04e6cd5a9ab5c5691d63771d4ca1f0b12ced1e3a2f67"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\ammo-hud\\native-final-quit-current-data\\peer-0-native-title-after-final-quit.png",
+      "bytes": 2074543,
+      "sha256": "0134283ca7395fc43b6841665cd3378b009de8c33122ce90c03fb3d27799c69c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\ammo-hud\\native-final-quit-current-data\\peer-0-native-reentered-gameplay.png",
+      "bytes": 2074543,
+      "sha256": "855527a77a3263f1b7736acab03b0db26d8773180d636f00552026b8a4b19bde"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\ammo-hud\\native-final-quit-current-data\\personal-menu\\p2-peer-0-paused-present.png",
+      "bytes": 2074543,
+      "sha256": "f935843f8b9e81289b443d8cb01c930cc55e1a89b9a48e5c8d62364c0614a7d6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\ammo-hud\\native-final-quit-current-data\\personal-menu\\p2-peer-0-resumed-present.png",
+      "bytes": 2074543,
+      "sha256": "e7420eca8c14445381868471de37fe20368304b9ca82418efb7fd332c80c0ee4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\ammo-hud\\native-final-quit-new-game\\peer-0-native-first-quit-page.png",
+      "bytes": 2074543,
+      "sha256": "6b538b2b058d2e2cb39046c8a6a9d79be4e361cb845f00685320cd34bb11d7bc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\ammo-hud\\native-final-quit-new-game\\peer-0-native-second-quit-page.png",
+      "bytes": 2074543,
+      "sha256": "8109f0740538110cacef04e6cd5a9ab5c5691d63771d4ca1f0b12ced1e3a2f67"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\ammo-hud\\native-final-quit-new-game\\peer-0-native-title-after-final-quit.png",
+      "bytes": 2074543,
+      "sha256": "0134283ca7395fc43b6841665cd3378b009de8c33122ce90c03fb3d27799c69c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\ammo-hud\\native-final-quit-new-game\\peer-0-native-reentered-gameplay.png",
+      "bytes": 2074543,
+      "sha256": "198c32e5b8c4eec83ae9d475f013bfe44f46e7749a87ca9a773bdb27fa921ce5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\ammo-hud\\native-final-quit-new-game\\personal-menu\\p2-peer-0-paused-present.png",
+      "bytes": 2074543,
+      "sha256": "4f9360ea52e3ed014eafbe1a112370992e7b33f6a15883cc964c4202889e4cb7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\ammo-hud\\native-final-quit-new-game\\personal-menu\\p2-peer-0-resumed-present.png",
+      "bytes": 2074543,
+      "sha256": "28494dfdd9f460aeec2838ef1c6e55fce5b3bf50995d2e3d3993b6b110c9fab5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-mission-Quit-import-NewGame-batch-v35-c3c5bdb-v2\\ammo-hud\\earned-CURRENT-import-reentered-guest-controls.pst",
+      "bytes": 2084592,
+      "sha256": "e13a61929694ae49ce3e2af8259cdbcdbc5379e93ebced449745f036cf8a2887"
+    }
+  ],
+  "limits": [
+    "LOCAL exact frozen R15/F208 only. Netplay and aggregate remain unverified; prior actual failures stay in the ledger history.",
+    "Shared progression here is the actually earned intro completion/report CURRENT, followed by actual stage1 mission, primary Quit, eligible native CURRENT import and real unit0 selection. Entire source-mapped persistent payload import and fresh roster are independently checked.",
+    "Unacquired weapon/armor/Reploid/soul breadth and native card cold-Continue remain separate full-burndown X6 content obligations, not assumed passed by this bounded local row result.",
+    "Prerequisite is an actual same-c3 earned mission execution LOAD, not a native game save. Default pre-LOAD recording ends with exact state-replacement failure and is strictly refused for ordinary finalized capture/replay.",
+    "Earlier c3 v1 timeout prefix is retained unchanged. v2 restores the exact previously reviewed bounded story wrapper with actual accepted-response/source-context gates; native input/response/neutral/selection/guest menu and late parent gates are unchanged.",
+    "No source/owner native card was supplied; parent existing private-card hashes and graceful exit0 pass. No paired/cross-build/rollback/physical pad/full-artwork pass."
+  ]
+}

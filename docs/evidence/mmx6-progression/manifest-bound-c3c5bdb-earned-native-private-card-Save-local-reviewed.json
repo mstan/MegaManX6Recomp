@@ -1,0 +1,283 @@
+{
+  "schema": 1,
+  "kind": "reviewed_c3_LOCAL_actually_earned_original_native_Save_to_fresh_private_card",
+  "reviewed_at_utc": "2026-10-25T02:13:30.526563+00:00",
+  "issue": "beads-gxrh",
+  "compiled_source": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+  "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+  "executable_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+  "compiled_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+  "native_checks": {
+    "actual_report_Save_and_source_Yes_inputs": true,
+    "actual_empty_native_slot_selected": true,
+    "source_packed_persistent_campaign_matches": true,
+    "original_native_writer_successful_return": true,
+    "exact_native_write_buffer_in_actual_private_card_file": true
+  },
+  "parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "native_resource_and_window_observations_complete": true,
+    "default_recording_taint_retained_and_replay_refused": true,
+    "owned_cleanup_private_cards": true
+  },
+  "actual_native_inputs": 5,
+  "original_source_guard_windows": 7,
+  "execution_prerequisite": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\earned-native-CURRENT-report.pst",
+    "sha256": "0fc9f044feabdb42077162c0fa2f6cea00d4fe850749d487a179dc04cf601e33",
+    "adopted": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\candidate\\saves\\openbios\\state_80054AD8_slot06.pst"
+  },
+  "actual_native_card": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\candidate\\saves\\card1.mcd",
+    "sha256": "dd5e0529a0dd5a41f25ea325a49c9a1c6b39aea22ba1a1096e162a5a0e52ed7b",
+    "bytes": 131072,
+    "matching_source_native_write_buffer_offsets": [
+      8192
+    ]
+  },
+  "actual_native_write_buffer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\ammo-hud\\actual-native-card-write-buffer.bin",
+    "bytes": 8192,
+    "sha256": "8452374ac43e0f2dd757a34c4b1f3188423040c9ff4df0c8e8147dfa95813045",
+    "native_address": "0x80110f40",
+    "selected_offset": 512
+  },
+  "selected_native_slot": {
+    "index": 0,
+    "offset_in_write_buffer": 512,
+    "bytes": 956,
+    "header": [
+      0,
+      1,
+      1,
+      1
+    ],
+    "checksum": 3507,
+    "checksum_contract": "(sum first0x3B8bytes+0x55)&0xFFFF",
+    "persistent_campaign_slices_match_original_source": true
+  },
+  "native_phase_path": [
+    [
+      12,
+      5,
+      1
+    ],
+    [
+      12,
+      6,
+      0
+    ],
+    [
+      12,
+      6,
+      1
+    ],
+    [
+      12,
+      6,
+      2
+    ],
+    [
+      12,
+      6,
+      3
+    ],
+    [
+      12,
+      6,
+      4
+    ],
+    [
+      12,
+      12,
+      0
+    ],
+    [
+      12,
+      14,
+      0
+    ],
+    [
+      12,
+      15,
+      0
+    ],
+    [
+      12,
+      15,
+      0
+    ],
+    [
+      12,
+      17,
+      0
+    ],
+    [
+      12,
+      18,
+      0
+    ]
+  ],
+  "card_preservation": {
+    "parent_prelaunch_existing_cards": {},
+    "existing_prelaunch_cards_preserved": true,
+    "own_fresh_blank_card1_changed_by_original_writer": true,
+    "other_private_card_and_recorded_initial_images_unchanged": true
+  },
+  "recording": {
+    "terminal_failure": "guest execution state replaced; capture segment ended",
+    "strict_refusals": {
+      "ordinary_capture": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: guest execution state replaced; capture segment ended"
+      },
+      "offline_replay": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: guest execution state replaced; capture segment ended"
+      }
+    },
+    "finalized_capture_admitted": false,
+    "replay_admitted": false
+  },
+  "artwork_review": {
+    "status": "bounded_original_Save_UI_reviewed",
+    "viewed_images": 4,
+    "observed": "Root inspected actual Save confirmation, empty DATA1 slot, Yes0 confirmation and Save completed with native saved-slot summary. No broad game artwork admission."
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\qualification.json",
+      "bytes": 2402841,
+      "sha256": "581b1531cb986150b34732cdbc87cbe651c9e9a188ac65f5e6a2bab8dd679a19"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v35-c3c5bdb\\candidate.json",
+      "bytes": 6854,
+      "sha256": "a176f8dd587317e6d0fe240c871265435d92098049848b0d42bba0804b1c0d64"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\candidate\\mmx6-runtime.exe",
+      "bytes": 27429376,
+      "sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\diagnostic-runner-executed-source.py",
+      "bytes": 15366,
+      "sha256": "2e345d42a64451ed2263c92fcfc5840f2b8924e93c1820a3fb999b69c46b077f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v35-native-card-Save-draft-v1-focused-source-review.json",
+      "bytes": 2468,
+      "sha256": "aa141a15c3ad25f33458daf8da0cfe31343fc52d63cfc66c1d66ba6b280471bd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\earned-native-CURRENT-report.pst",
+      "bytes": 1734691,
+      "sha256": "0fc9f044feabdb42077162c0fa2f6cea00d4fe850749d487a179dc04cf601e33"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\ammo-hud\\actual-native-card-write-buffer.bin",
+      "bytes": 8192,
+      "sha256": "8452374ac43e0f2dd757a34c4b1f3188423040c9ff4df0c8e8147dfa95813045"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "dd5e0529a0dd5a41f25ea325a49c9a1c6b39aea22ba1a1096e162a5a0e52ed7b"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-progression\\manifest-bound-c3c5bdb-earned-intro-CURRENT-export-regression-reviewed.json",
+      "bytes": 23744,
+      "sha256": "d8d8757b294d6a348b47ad4626274275925b6cd87e04e421bc87c6f26609bd03"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\original-native-report-card-input-and-loop-v3.json",
+      "bytes": 58438,
+      "sha256": "4b9ceb0b1fc5c5169d36d15dfc52b140bee5a3a8e2c57aaf029fd47c696cde39"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\original-native-report-card-slot-and-write-v5.json",
+      "bytes": 76318,
+      "sha256": "78f85eb8afe182cb86b0676f1acfa4cee5a261dc1fa2f698fb40fe09a10bf04f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\original-native-report-card-create-and-write-v6.json",
+      "bytes": 58365,
+      "sha256": "83a7921050246ce783ffda89acf94551dba4947a9ccf5fc0ed0cae7af6afc8af"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\original-native-report-card-pack-and-filesystem-v7.json",
+      "bytes": 33265,
+      "sha256": "ab1995431e24805f35a61ecc4e63b38073eaf76b86178e16e295362fb7cf3378"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\ammo-hud\\actual-earned-report-before-native-Save.png",
+      "bytes": 2074543,
+      "sha256": "85487ff2a9512c6e92509a3cf1b874bc730a4bc64090179e63997608f1b29833"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\ammo-hud\\native-report-Save-Yes0.png",
+      "bytes": 2074543,
+      "sha256": "d5e01e6e388a823fd27b96d39619fa09cb13f62e4900dd8c46c7b0dc93fdabdc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\ammo-hud\\native-fresh-card-empty-slot0.png",
+      "bytes": 2074543,
+      "sha256": "6c6a2a4b3ce1f1a89ccce25a7276af1926aafd39665f9e1550705d7ec1bf9af3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\ammo-hud\\native-empty-slot-Save-Yes0.png",
+      "bytes": 2074543,
+      "sha256": "e1656fa6d7f57caddadc118d934f70596412ca58f686148456c91983ac5e5f4b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\ammo-hud\\native-original-Save-writer-returned.png",
+      "bytes": 2074543,
+      "sha256": "768ea1ffcdfb5c34009cc70bc1d8d791fa30a3ca488cc07a06aef17fa4075790"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\recording-rejection\\settings.json",
+      "bytes": 10329,
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\recording-rejection\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\recording-rejection\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\recording-rejection\\inputs.jsonl",
+      "bytes": 770687,
+      "sha256": "bad39fef0528bdb371b3a7c01a042cd7bc789d70af3c3f16d2cf5c9ab513d3a3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\recording-rejection\\status.json",
+      "bytes": 210,
+      "sha256": "29ddc39bf6c672b397a3ee1fa7baeffc6acada8fb66852fd2fae15723d2fa8b2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\recording-rejection\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\recording-rejection\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    }
+  ],
+  "limits": [
+    "Actual LOCAL native Save component only. No frozen X4 comparison row, whole X6 content obligation, native cold Load/Continue or paired pass follows.",
+    "The actually earned current-c3 report snapshot is a disclosed execution LOAD. All claimed Save/card outcomes use original native input/pack/writer; no native-card or campaign bytes are authored.",
+    "Only this own fresh default private card1 was changed. Parent prelaunch card set was empty; preservation of existing cards is not a claim that the newly saved own card stayed blank.",
+    "Native card slot header0 and retained CURRENT header1 are distinct original formats. The actual slot checksum and whole native8192B buffer match the actual128KiB file at exactly one native block.",
+    "No overwrite: actual selected slot headerFF before original Save. Optional native format branch was not exercised on this actual run.",
+    "Volatile exportclock40 and separate ordinary RAM/presentation observations remain raw; source persistent fields are independently checked without invented same-frame equality.",
+    "Default pre-LOAD recording is retained/strictly refused. New source-derived native Load helper must prove actual original read, checksum, full campaign import/export, selection/roster and late paired gates separately."
+  ]
+}

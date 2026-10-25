@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 13 passed (R2, R4, R5, R7, R8, R12, R13, F6, F10, F12, F18, F33, F38), 2 failed (R15, F208), 219 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 13 passed (R2, R4, R5, R7, R8, R12, R13, F6, F10, F12, F18, F33, F38), 0 failed, 221 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -53,8 +53,9 @@ CP2 checks and the whole intro obligation remain unverified. These results do
 not change the separate 234 comparison rows.
 
 All 234 reference rows are inventoried; 13/234 (5.6%) are passed. R15/F208
-retain prior native Quit callback failures with broader transition checks
-incomplete. F59's `253c74e` local Yammar texture-placement failure remains in
+now pass their exact bounded checks locally on `c3c5bdb`; their paired checks
+remain unverified and their prior failures remain in history.
+F59's `253c74e` local Yammar texture-placement failure remains in
 history. The `c3c5bdb` fix passes 103 debug and 103 production tests and reviewed
 local native artwork plus active-effect warm/cold current-build restoration.
 Its netplay and aggregate checks remain unverified.
@@ -64,7 +65,7 @@ within beam phase 1 and reach neutral ALIVE in 117 native ticks, retaining
 resources, world and both controls. Its independent route follows the original
 parent idle/control checks; the earlier combined dash-setup failures remain
 preserved. Five resolved CRC windows, both ordinary online recordings, native
-cards and owned exits pass. R6, F31, F59 and F157 have additional local passes;
+cards and owned exits pass. R6, R15, F31, F59, F157 and F208 have additional local passes;
 their netplay and aggregate results
 remain unverified. F33's current-image state/resource and paired refusal checks pass.
 F10/F18 now pass on 1f50059 after restoring the original primary sprite sheet
@@ -113,9 +114,32 @@ in the same process restores the actual default campaign and repeats all
 publication reductions and reviewed both paused/resumed world samples.
 The completed CURRENT path has an actually saved execution point before
 New Game. Its prerequisite LOAD and strictly refused pre-load recording are
-explicit; there is no native-card or post-load recording claim. R15/F208
-retain their failed history and remain open for independent netplay and
-unacquired campaign-progress breadth; no aggregate row is promoted.
+explicit; there is no native-card or post-load recording claim. This earlier
+receipt remains component evidence; the current local admission follows below.
+
+The [current c3 local R15/F208 receipt](evidence/mmx6-native-reentry/manifest-bound-c3c5bdb-earned-CURRENT-NewGame-R15-F208-local-reviewed.json)
+qualifies both exact frozen bounded LOCAL checks. It independently reproduces
+the original persistent campaign import and New Game defaults, actual unit0
+selection, fresh X/Zero publications and both eleven-check guest menu/control
+cases. The earned 951-byte CURRENT remains unchanged; the actual native stage
+counter is2 before Quit and at the returned map, while the report marker in
+CURRENT remains1. These raw values are retained separately. The CURRENT and
+New Game cases consume105 and43 actual native inputs, respectively. Root
+reviewed ten actual Quit/world/menu images and all original recording/card/exit
+gates. The earlier c3 prefix timeout is preserved; its observer omitted the
+already-reviewed bounded dialogue continuation wrapper. Paired equivalents
+remain unverified, so neither aggregate row is promoted. Native card
+cold-Continue and unacquired campaign breadth remain separate full-burndown
+X6 content obligations.
+
+The [current c3 native Save receipt](evidence/mmx6-progression/manifest-bound-c3c5bdb-earned-native-private-card-Save-local-reviewed.json)
+qualifies the original report Save flow into a fresh private memory card.
+The actual 8 KiB native write buffer matches one complete card block, and
+the saved campaign slot has the original valid checksum and persistent fields.
+Four actual Save/slot/confirmation/completion images were reviewed. The
+128 KiB card is retained for subsequent checks; native cold Load/Continue,
+netplay and broader campaign persistence remain unverified. This component
+does not add a passed comparison row or native coverage case.
 
 F157 now passes locally on `777b4d0`. The
 [fresh Zero follow-up receipt](evidence/mmx6-combat/manifest-bound-777b4d0-F157-fresh-Zero-followups-local-reviewed.json)
@@ -271,8 +295,10 @@ original intro finale/positive-exit/mission-report eligibility chain, nine exact
 code/table spans and the direct export callers across all59 BIN members.
 Eight pinned-source tests pass. Eligible current data is exported during report
 processing before the card-save choice; a fresh intro headerFF is ineligible.
-R15/F208 still require the actual native prerequisites, Continue/import, unit
-selection and shared progression checks. No runtime pass follows from the audit.
+The audit supplies source prerequisites for R15/F208; their actual local
+Continue/import, unit selection and shared progression are now reviewed in
+the current c3 receipt above. Their paired equivalents remain unverified.
+No runtime pass follows from the source audit alone.
 
 The [combined R4/R12 receipt](evidence/mmx6-character-audio/manifest-bound-22ea525-R4-R12-reviewed.json)
 binds candidate22ea525 to 24 character/family/mode coverage cells, 45 actual

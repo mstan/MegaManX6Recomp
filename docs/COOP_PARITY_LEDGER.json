@@ -3110,13 +3110,13 @@
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "failed",
+        "status": "unverified",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
+          "local": "passed",
           "netplay": "unverified"
         },
         "evidence": [
@@ -3406,9 +3406,51 @@
               "Production96of96 compilation/fixtures remain separate from debug-image gameplay evidence."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+            "build_identity": {
+              "executable_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+              "compiled_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
+            },
+            "settings": {
+              "mode": "owned_local",
+              "roster": [
+                "X/P1",
+                "Zero/P2"
+              ],
+              "input_path": "published_host",
+              "loader": "default Seamless Loading",
+              "audio": "dummy",
+              "network": false,
+              "rollback": false,
+              "execution_prerequisite": "actual same-c3 earned stage1 mission LOAD; all original LOAD recording refusals retained"
+            },
+            "action": "Actual guest Select/Quit rejection; primary native two-confirmation final Quit; eligible earned whole CURRENT import; native original unit0 selection and stage1 X/Zero reentry; guest-owned menu, wrong-seat resume refusal, independent motion/attack. Separate actual New Game repeats native final Quit, source-default campaign and all11guest-menu/control checks.",
+            "outcome": "LOCAL frozen bounded check passed on exactc3:105accepted native inputs for CURRENT route and43for NewGame, original source-mapped persistent campaign import reproduced, whole951B earned CURRENT unchanged, actual native stagecounter2 beforeQuit/returnedMap, fresh primaryX/guestZero roster, both11-check guest-menu cases. Root reviewed10actualQuit/world/menuPNGs; strict defaultLOAD recording refusals/privatecards/gracefulexit0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-native-reentry/manifest-bound-c3c5bdb-earned-CURRENT-NewGame-R15-F208-local-reviewed.json",
+                "sha256": "f5a3e1e0a9b2a1596c6bc0b8d01df549cd310eb3a36b8f5910dc438b89a28339"
+              }
+            ],
+            "limits": [
+              "LOCAL exact frozen R15/F208 only. Netplay and aggregate remain unverified; prior actual failures stay in the ledger history.",
+              "Shared progression here is the actually earned intro completion/report CURRENT, followed by actual stage1 mission, primary Quit, eligible native CURRENT import and real unit0 selection. Entire source-mapped persistent payload import and fresh roster are independently checked.",
+              "Unacquired weapon/armor/Reploid/soul breadth and native card cold-Continue remain separate full-burndown X6 content obligations, not assumed passed by this bounded local row result.",
+              "Prerequisite is an actual same-c3 earned mission execution LOAD, not a native game save. Default pre-LOAD recording ends with exact state-replacement failure and is strictly refused for ordinary finalized capture/replay.",
+              "Earlier c3 v1 timeout prefix is retained unchanged. v2 restores the exact previously reviewed bounded story wrapper with actual accepted-response/source-context gates; native input/response/neutral/selection/guest menu and late parent gates are unchanged.",
+              "No source/owner native card was supplied; parent existing private-card hashes and graceful exit0 pass. No paired/cross-build/rollback/physical pad/full-artwork pass."
+            ],
+            "bypasses": [
+              "Exact-current-build actual earned mission execution LOAD from the retained successful reportContinue/selector/mission prefix. Its earlier introCP2/checkpoint/native-iframe prerequisites remain explicit in the separately linked export receipt. No native card or acquired weapon/armor/Reploid/soul result is claimed."
+            ]
           }
         ],
-        "limitations": "Preserved exactv17 retired-stage failure remains. Exactv18 native New Game recovery and11-check guest menu pass locally and on one same-machine pair, with reviewed matched paired images and29 resolved CRC samples. Native Continue/current-data/selection and acquired progression remain unverified; incomplete timeout attempts are retained separately."
+        "limitations": "Exactc3 LOCAL frozen Quit/earnedCURRENT/characterselection/guest-menu and separate NewGame checks passed after independent source/raw import/default/fresh-publication and10PNG review. Earlier actual failures and the bounded observer timeout remain retained. Netplay equivalent is unverified, so aggregate stays unverified. Native card coldContinue and unacquired campaign breadth remain separate full-burndown X6 content obligations."
       }
     },
     {
@@ -13143,13 +13185,13 @@
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "failed",
+        "status": "unverified",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
+          "local": "passed",
           "netplay": "unverified"
         },
         "evidence": [
@@ -13264,9 +13306,51 @@
               "Production96of96 compilation/fixtures remain separate from debug-image gameplay evidence."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+            "build_identity": {
+              "executable_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+              "compiled_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
+            },
+            "settings": {
+              "mode": "owned_local",
+              "roster": [
+                "X/P1",
+                "Zero/P2"
+              ],
+              "input_path": "published_host",
+              "loader": "default Seamless Loading",
+              "audio": "dummy",
+              "network": false,
+              "rollback": false,
+              "execution_prerequisite": "actual same-c3 earned stage1 mission LOAD; all original LOAD recording refusals retained"
+            },
+            "action": "Actual guest Select/Quit rejection; primary native two-confirmation final Quit; eligible earned whole CURRENT import; native original unit0 selection and stage1 X/Zero reentry; guest-owned menu, wrong-seat resume refusal, independent motion/attack. Separate actual New Game repeats native final Quit, source-default campaign and all11guest-menu/control checks.",
+            "outcome": "LOCAL frozen bounded check passed on exactc3:105accepted native inputs for CURRENT route and43for NewGame, original source-mapped persistent campaign import reproduced, whole951B earned CURRENT unchanged, actual native stagecounter2 beforeQuit/returnedMap, fresh primaryX/guestZero roster, both11-check guest-menu cases. Root reviewed10actualQuit/world/menuPNGs; strict defaultLOAD recording refusals/privatecards/gracefulexit0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-native-reentry/manifest-bound-c3c5bdb-earned-CURRENT-NewGame-R15-F208-local-reviewed.json",
+                "sha256": "f5a3e1e0a9b2a1596c6bc0b8d01df549cd310eb3a36b8f5910dc438b89a28339"
+              }
+            ],
+            "limits": [
+              "LOCAL exact frozen R15/F208 only. Netplay and aggregate remain unverified; prior actual failures stay in the ledger history.",
+              "Shared progression here is the actually earned intro completion/report CURRENT, followed by actual stage1 mission, primary Quit, eligible native CURRENT import and real unit0 selection. Entire source-mapped persistent payload import and fresh roster are independently checked.",
+              "Unacquired weapon/armor/Reploid/soul breadth and native card cold-Continue remain separate full-burndown X6 content obligations, not assumed passed by this bounded local row result.",
+              "Prerequisite is an actual same-c3 earned mission execution LOAD, not a native game save. Default pre-LOAD recording ends with exact state-replacement failure and is strictly refused for ordinary finalized capture/replay.",
+              "Earlier c3 v1 timeout prefix is retained unchanged. v2 restores the exact previously reviewed bounded story wrapper with actual accepted-response/source-context gates; native input/response/neutral/selection/guest menu and late parent gates are unchanged.",
+              "No source/owner native card was supplied; parent existing private-card hashes and graceful exit0 pass. No paired/cross-build/rollback/physical pad/full-artwork pass."
+            ],
+            "bypasses": [
+              "Exact-current-build actual earned mission execution LOAD from the retained successful reportContinue/selector/mission prefix. Its earlier introCP2/checkpoint/native-iframe prerequisites remain explicit in the separately linked export receipt. No native card or acquired weapon/armor/Reploid/soul result is claimed."
+            ]
           }
         ],
-        "limitations": "Preserved exactv17 retired-stage failure remains. Exactv18 native New Game recovery and11-check guest menu pass locally and on one same-machine pair, with reviewed matched paired images and29 resolved CRC samples. Native Continue/current-data/selection and acquired progression remain unverified; incomplete timeout attempts are retained separately."
+        "limitations": "Exactc3 LOCAL frozen Quit/earnedCURRENT/characterselection/guest-menu and separate NewGame checks passed after independent source/raw import/default/fresh-publication and10PNG review. Earlier actual failures and the bounded observer timeout remain retained. Netplay equivalent is unverified, so aggregate stays unverified. Native card coldContinue and unacquired campaign breadth remain separate full-burndown X6 content obligations."
       }
     }
   ]
