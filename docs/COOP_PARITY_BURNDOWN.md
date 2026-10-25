@@ -95,6 +95,22 @@ explicitly disables diagnostics, completes a valid current-build LOAD and native
 movement, and retains empty recorder inventories before/after LOAD and owned
 exit. Its netplay check remains unverified because the online profile separately
 forces co-op diagnostics.
+The isolated follow-up now reads the actual requested recording policy separately
+from forced co-op activation, using SDK `9fd4adb` and game `31ead13`. The first
+combined build passed 110 debug and 110 production checks plus the actual SDK
+loader and focused startup/profile checks. Its fresh OFF native attempt stopped
+before controls or SAVE/LOAD because the startup witness was unavailable in the
+live redirected log; the correct single OFF witness appeared after exit. Both
+actual-TU variants reproduce the visibility gap with fully buffered stderr.
+`31ead13` explicitly flushes the startup line, and a fresh combined build and
+OFF/default-ON local/paired validation are in progress. Issue `beads-eio.1.49`
+remains open; no additional F70 mode or aggregate pass follows from these checks.
+
+F39's source audit also found that the SDK resets guest/GPU allocation extents,
+packet registrations and texture banks before each session activation, while
+X6 retains cached addresses and bank IDs. Issue `beads-eio.1.50` tracks isolated
+session-lifetime repair, a reset-between-activations fixture and actual same-PID
+launcher rematches. This is source evidence; F39 remains unverified in both modes.
 F205 now passes its bounded effective-mode recording check on `f3bdbe9`, with
 107 debug and 107 production checks passing. The [LOCAL receipt](evidence/mmx6-native-replay/manifest-bound-f3bdbe9-F205-effective-mode-history-local-reviewed.json)
 binds 6,603 native input events and 19 actual mode transitions. The
