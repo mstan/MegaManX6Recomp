@@ -107,6 +107,7 @@ renderer notes) and the remaining enhancement follow-ups.
 
 Enable **X + Zero Co-op** on the launcher's Mods page for local play. The bundled
 mod is marked **Experimental**, version **0.0.1**, and disabled by default.
+For sign-in, lobby or launch failures, see [startup error logs](docs/COOP_STARTUP_LOGS.md).
 Netplay uses the shared PSX delay-sync transport
 with X as P1 and Zero as P2. The built-in co-op logic is enabled for both peers;
 ordinary offline mod selections remain separate. Use identical builds and the

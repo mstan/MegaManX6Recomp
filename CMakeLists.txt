@@ -53,6 +53,9 @@ file(GLOB GAME_MOD_RESOLVER_SOURCES CONFIGURE_DEPENDS
 list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_frame_interpolation_plugin[.]cpp$")
 list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_seamless_store[.]cpp$")
 
+set_property(SOURCE src/mods/mmx6_startup_log.cpp APPEND PROPERTY COMPILE_DEFINITIONS
+    "MMX6_STARTUP_BUILD_ID=\"mmx6-x-zero-delay-v18\"")
+
 # The game-owned mod catalog (the two presentation enhancements plus the
 # acediez Tweaks set). Every feature stays disabled until selected on the
 # launcher's Mods page.
@@ -239,6 +242,22 @@ if(BUILD_TESTING)
                     --check --source-repo "${MMX6_X5_REFERENCE_REPO}" --root "${CMAKE_CURRENT_SOURCE_DIR}")
         endif()
     endif()
+    add_executable(mmx6_startup_log_test tests/test_mmx6_startup_log.cpp
+        src/mods/mmx6_startup_log.cpp)
+    target_include_directories(mmx6_startup_log_test PRIVATE src/mods
+        "${PSXRECOMP_V4_ROOT}/runtime/include")
+    target_compile_definitions(mmx6_startup_log_test PRIVATE MMX6_STARTUP_LOG_TEST=1)
+    target_link_libraries(mmx6_startup_log_test PRIVATE Threads::Threads)
+    set(_startup_cases normal closed unavailable pointer-unavailable)
+    if(WIN32)
+        list(APPEND _startup_cases detached null invalid tee detached-pointer-unavailable)
+    endif()
+    foreach(_startup_case IN LISTS _startup_cases)
+        add_test(NAME mmx6_startup_log_${_startup_case}_test
+            COMMAND mmx6_startup_log_test "${CMAKE_CURRENT_BINARY_DIR}/startup-${_startup_case}-qa" "${_startup_case}")
+        set_tests_properties(mmx6_startup_log_${_startup_case}_test PROPERTIES TIMEOUT 15)
+    endforeach()
+
     add_executable(mmx6_frame_interpolation_test
         tests/test_mmx6_frame_interpolation.cpp
         "${PSXRECOMP_V4_ROOT}/runtime/src/render_pass_motion.c")
