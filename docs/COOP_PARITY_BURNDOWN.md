@@ -41,6 +41,18 @@ states; old-state migration is never required.
 
 ## Current qualification status, October 25
 
+The [reviewed v43 default-resolution and native Load components](evidence/mmx6-hud/manifest-bound-c32dd8f-default-native1-and-Load-components-failed-parent-reviewed.json)
+preserve the failed paired attempt65104 on game `c32dd8f`, SDK `7cb4742`.
+Both actual child environments leave `PSX_DEBUG_TOGGLES` absent; initial and
+second-phase video observations and startup logs show native requested/effective
+1x and240 internal lines. The initial hook precedes native Yammar activation.
+The actual v40 producer card Loads and exports CURRENT on the v43 consumer;
+both ordinary ONLINE recordings, source/target card inventories, strict CRC
+windows, settled profile and graceful exits0 are independently checked.
+The run stops at the first ammo-gradient measurement. Its failed parent and
+original false flags remain; R6/F59/F31 gain no pass. Issue `beads-f2vc` stays
+open for other configured scales and ordinary offline live scale validation.
+
 The live content ledger qualifies exactly two local CP2 checks, first on
 `777b4d0453b0f08546a6df06adb95ab5a211e8d9` and now requalified on
 `c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b`:
