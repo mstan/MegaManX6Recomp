@@ -89,7 +89,17 @@ parent idle/control checks; the earlier combined dash-setup failures remain
 preserved. Five resolved CRC windows, both ordinary online recordings, native
 cards and owned exits pass. R6, F31, F59 and F157 have additional local passes;
 their netplay and aggregate results
-remain unverified. F33's current-image state/resource and paired refusal checks pass.
+remain unverified. The [new disclosed FF QA-card receipt](evidence/mmx6-progression/manifest-bound-1128b9d-disclosed-FF-native-private-card-Save-local-reviewed.json)
+binds actual `1128b9d` checkpoint setup, one offline availability grant, native
+boss/finale/report progression and same-process native Save to a fresh private
+card. Independent reduction reproduces the full card from the exact SDK blank,
+original native directory and actual writer buffer; all other cards and the
+protected DD5 source remain unchanged. All 15 images were reviewed. This
+supplies a read-only source for fresh owned QA copies; paired cold Load, mission
+entry and R6/F59 observation remain pending. Weapon acquisition is bypassed,
+and the gameplay captures retain the background corruption tracked in
+`beads-eio.1.52`. No comparison, acquired progression or artwork pass follows.
+F33's current-image state/resource and paired refusal checks pass.
 F70's [reviewed local run](evidence/mmx6-native-replay/manifest-bound-50f4a31-F70-disabled-diagnostics-local-reviewed.json)
 explicitly disables diagnostics, completes a valid current-build LOAD and native
 movement, and retains empty recorder inventories before/after LOAD and owned

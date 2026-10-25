@@ -1,0 +1,511 @@
+{
+  "schema": 1,
+  "kind": "reviewed_1128_LOCAL_disclosed_inventory_prerequisite_original_native_Save_to_fresh_private_FF_card",
+  "reviewed_at_utc": "2026-10-25T11:31:02.717956+00:00",
+  "issue": "beads-gxrh",
+  "compiled_source": "1128b9d8073098e810e25c87e73a13fc24350b43",
+  "sdk": "3d6bacdb912bf5ddd16c3abc5f4581c010f055c7",
+  "executable_sha256": "e49ee4dfa36e6e694fc822c295d189a5cc283864c4b4fd272b5d324bcb80eb4b",
+  "compiled_manifest_sha256": "bc86c0bfbad0457081600b0c3301270bdaf47b472bfc680fc7eb4810a3634121",
+  "parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "native_resource_and_window_observations_complete": true,
+    "default_recording_taint_retained_and_replay_refused": true,
+    "owned_cleanup_private_cards": true
+  },
+  "native_checks": {
+    "exactly_one_disclosed_original_initializer_grant": true,
+    "actual_native_boss_fatal_finale_exit_report": true,
+    "actual_native_report_availabilityFF_export": true,
+    "actual_native_fresh_slot_Save_writer_return": true,
+    "only_exact_expected_native_Save_card_writes": true,
+    "source_DD5_unchanged": true
+  },
+  "actual_native_card": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\candidate\\saves\\card1.mcd",
+    "bytes": 131072,
+    "sha256": "7801a0d2fe8ef077955e20541c834d9d91892717df588d9f49dbc8565ce95d29"
+  },
+  "actual_native_write_buffer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-original-Save\\actual-native-card-write-buffer.bin",
+    "bytes": 8192,
+    "sha256": "3eb0facad376ae9800529e05f236d938a573658dec9a63c36fcdfe8ace04a89b",
+    "native_address": "0x80110f40",
+    "selected_offset": 512
+  },
+  "selected_native_slot": {
+    "index": 0,
+    "offset_in_write_buffer": 512,
+    "bytes": 956,
+    "header": [
+      0,
+      1,
+      1,
+      1
+    ],
+    "earned_weapon_mask": 255,
+    "checksum": 3858,
+    "checksum_contract": "(sum first0x3B8bytes+0x55)&0xFFFF",
+    "persistent_campaign_slices_match_original_source": true
+  },
+  "independent_reduction": {
+    "native_observations": 2752,
+    "charge_attacks": 32,
+    "actual_boss_HP_path": [
+      32,
+      31,
+      30,
+      29,
+      28,
+      27,
+      26,
+      25,
+      24,
+      23,
+      22,
+      21,
+      20,
+      19,
+      18,
+      17,
+      16,
+      15,
+      14,
+      13,
+      12,
+      11,
+      10,
+      9,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      0
+    ],
+    "original_type19_shot_observed_attempts": 27,
+    "source_dialogue_contexts": [
+      "dialogue3_story16",
+      "dialogue4_finale_intro",
+      "dialogue5_finale_exit",
+      "dialogue6_finale_exit"
+    ],
+    "actual_finale_counter": 901,
+    "original_report_and_Save_full_source_guard_spans": 11,
+    "live_Save_input_pulses": 5,
+    "native_Save_phases": [
+      [
+        12,
+        5,
+        1
+      ],
+      [
+        12,
+        6,
+        1
+      ],
+      [
+        12,
+        6,
+        2
+      ],
+      [
+        12,
+        6,
+        3
+      ],
+      [
+        12,
+        11,
+        0
+      ],
+      [
+        12,
+        12,
+        0
+      ],
+      [
+        12,
+        14,
+        0
+      ],
+      [
+        12,
+        15,
+        0
+      ],
+      [
+        12,
+        15,
+        0
+      ],
+      [
+        12,
+        17,
+        0
+      ],
+      [
+        12,
+        18,
+        0
+      ]
+    ],
+    "actual_writer_port0_error0": true,
+    "first_slot_empty_before_Save": true,
+    "no_execution_LOAD": true,
+    "actual_original_parent_all_late_gates": true,
+    "owned_graceful_exit0": true,
+    "independent_whole_card_comparison_using_actual_SDK_blank_and_actual_DD5_directory_and_actual_new_writer_buffer": true,
+    "only_expected_directory_frame": [
+      128,
+      256
+    ],
+    "only_expected_native_payload": [
+      8192,
+      16384
+    ],
+    "other_private_and_recorded_cards_unchanged": true,
+    "protected_original_DD5_unchanged": true
+  },
+  "prerequisite_provenance": {
+    "offline_only": true,
+    "checkpoint": "s00-a0-c02",
+    "checkpoint_initializer_once": true,
+    "availability": "Existing offline inventory9 FF through original8003D718 AFTER checkpoint init; weapon acquisition bypassed",
+    "actor_C9_before": [
+      0,
+      0
+    ],
+    "actor_C9_after": [
+      255,
+      255
+    ],
+    "current_HP_selection_and_ammo_unchanged_by_grant": true,
+    "positive_native_iframe10_disclosed": true,
+    "native_boss_exit_report_Save_earned_without_success_flag_writes": true
+  },
+  "reviewed_QA_seed_policy": {
+    "only_owned_fresh_copies": true,
+    "source_card_must_remain_read_only": true,
+    "allowed_scope": "Native cold Load prerequisite for later current1128/SDK3d R6/F59 observations after separate validation",
+    "required_future_native_Load_and_mission_and_both_body_mask_energy_selection_checks": true
+  },
+  "root_visual_review": {
+    "actual_composed_images_viewed": 15,
+    "native_Save_UI": "Empty slot and original confirmations then Save completed observed",
+    "gameplay_background": "Black/purple/magenta scrambled background observed already in stage0CP2 and boss room; tracked beads-eio.1.52",
+    "art_or_terrain_pass": false
+  },
+  "recording": {
+    "status": "failed_fixture_taint_retained_for_diagnostics",
+    "strict_refusals": {
+      "ordinary_capture": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      },
+      "offline_replay": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      }
+    },
+    "events": 6007,
+    "native_updates": 4202,
+    "p2_reads": 1805,
+    "finalized_capture_admitted": false,
+    "replay_admitted": false
+  },
+  "frozen234_comparison_admissions": 0,
+  "native_content_mode_admissions": 0,
+  "limits": [
+    "Disclosed availability prerequisite bypass, never acquired or earned weapon progression.",
+    "Native Save/write format only; paired cold native Load/mission/R6/F59 remain unverified.",
+    "Background anomaly is retained and tracked; no artwork, terrain, full boss/content, R15 or F208 promotion.",
+    "No valid online execution LOAD, finalized ordinary capture, replay, rollback or cross-host claim.",
+    "Protected original DD5 and all old/current evidence remain unchanged; seed only fresh owned copies."
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\complete-native-CP2-route.json.gz",
+      "bytes": 1492587,
+      "sha256": "20d3e868d5756276f2ec8dbcdb5d8bb1d054f6b7346473e4daa970fce18007f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\complete-native-original-Save.json.gz",
+      "bytes": 21148,
+      "sha256": "a0404c7c36ec6f633080b94b2ec4fe6700c1813e7a9fdd8faca6d68ea1996feb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-original-Save\\actual-native-card-write-buffer.bin",
+      "bytes": 8192,
+      "sha256": "3eb0facad376ae9800529e05f236d938a573658dec9a63c36fcdfe8ace04a89b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "7801a0d2fe8ef077955e20541c834d9d91892717df588d9f49dbc8565ce95d29"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\candidate\\saves\\card2.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\candidate\\saves\\input-recordings\\session-1792927112700813-1-0\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\candidate\\saves\\input-recordings\\session-1792927112700813-1-0\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "dd5e0529a0dd5a41f25ea325a49c9a1c6b39aea22ba1a1096e162a5a0e52ed7b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-CP2-ready.png",
+      "bytes": 2074543,
+      "sha256": "3a7060b39e3be411a6b62c51defc31da22a775bb0fdb96c0949bc635775e468e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-CP2-ready-gpu.json.gz",
+      "bytes": 9513,
+      "sha256": "6edae8a56b049548e2787aaebc229b16ae03670538f35fe3070e284baf90e943"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-first-boss-admitted.png",
+      "bytes": 2074543,
+      "sha256": "0505f6e67b090e5c85c84e1671f5082ffe8144fef44815d8dd09ef09c04e823b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-first-boss-admitted-gpu.json.gz",
+      "bytes": 7988,
+      "sha256": "0d659708dac960b5ca915b99b6baebd76e788c8283aa03558f9e6d13876b0b0a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-first-boss-battle-ready.png",
+      "bytes": 2074543,
+      "sha256": "c580691404f78b0d4cc8c33deebbb3386c1d7b3c5e33949ecfb2a085b6038473"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-first-boss-battle-ready-gpu.json.gz",
+      "bytes": 11033,
+      "sha256": "0482dfaee70806dc0a97373f1853d9f6f6cc58ec133c34e19189b15e580e03fe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-charged-boss-HP-31.png",
+      "bytes": 2074543,
+      "sha256": "535fd5d8eddf0a3fae1a604afdad847b293dc3d770c2030b3f31b959bb622462"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-charged-boss-HP-31-gpu.json.gz",
+      "bytes": 10655,
+      "sha256": "22b1b9645de99f9f27a842818b068261d7e7ce90cedc36e8eebbd396265b5c7e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-charged-boss-HP-24.png",
+      "bytes": 2074543,
+      "sha256": "7432f2e79a55bdbfb31e886c5e6e18e5fb3c2f764db55aa3a33e914955a3fe22"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-charged-boss-HP-24-gpu.json.gz",
+      "bytes": 11628,
+      "sha256": "f8821d1a06f2b591b179ea006642b3a4706cad1dd33f398a8151190ec51020c4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-charged-boss-HP-16.png",
+      "bytes": 2074543,
+      "sha256": "638deb637ce452a0f9f61364b2969f0d24aa092b4fef158985fea369535c0fbd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-charged-boss-HP-16-gpu.json.gz",
+      "bytes": 11914,
+      "sha256": "db3c612b44924cc01fbad9fb55ca8840c72f867da18faacbec201130ffc22ce6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-charged-boss-HP-8.png",
+      "bytes": 2074543,
+      "sha256": "3376128e876d78b7ecb1f35d15501a616eb605ca0a0f87059d84d23d77989ce9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-charged-boss-HP-8-gpu.json.gz",
+      "bytes": 11836,
+      "sha256": "5a68b806424281aca0ae0abfbe958364156541d3e7eb946d2cfbb150923900ff"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-charged-boss-HP-0.png",
+      "bytes": 2074543,
+      "sha256": "2a1abe1964465955929adb1a182e124146430f4e11d1a1f9e479bc91a97ae67b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-charged-boss-HP-0-gpu.json.gz",
+      "bytes": 11041,
+      "sha256": "083f382bec33f97eba028339ad2d84146ce8da87a1af309cb4107e9c53a9349a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-finale-admitted.png",
+      "bytes": 2074543,
+      "sha256": "da492cc517d0ee64ed105a885422bc5508f10f28d48ef4fb6cb8fe9ceb33b01b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-finale-admitted-gpu.json.gz",
+      "bytes": 6033,
+      "sha256": "7259d587e6d0753abe4791ab98a774702966b66160bbd33b107d0de66a5411e6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-report-CURRENT-export-complete.png",
+      "bytes": 2074543,
+      "sha256": "bb8d59746dcfb628d062cd6f8fd7490fbefa0a45b1d7bb9b3ae21464ca827c4e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\native-report-CURRENT-export-complete-gpu.json.gz",
+      "bytes": 7910,
+      "sha256": "5125086b59475f35339ce9dbb9abb01d42224d5231f69b68420194318466d77f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-original-Save\\actual-earned-report-before-native-Save.png",
+      "bytes": 2074543,
+      "sha256": "e882b04f092e01a91190061049affe68c6e48841f813c11e65b8c31fb4dd466a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-original-Save\\native-report-Save-Yes0.png",
+      "bytes": 2074543,
+      "sha256": "ccc36d230d715e6cd815ca7b9abb11cd2c4c19a58e86ad75d44730bb49884537"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-original-Save\\native-fresh-card-empty-slot0.png",
+      "bytes": 2074543,
+      "sha256": "b531b7e224632457eac3cd1f4fa810bb1757d4fc5b959ba35f4a865005ee85f6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-original-Save\\native-empty-slot-Save-Yes0.png",
+      "bytes": 2074543,
+      "sha256": "e1656fa6d7f57caddadc118d934f70596412ca58f686148456c91983ac5e5f4b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-original-Save\\native-original-Save-writer-returned.png",
+      "bytes": 2074543,
+      "sha256": "3285f2837a840516c362fd6e06a83460e17376fea52cc9b116ab7c75dd6588a9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\recording-rejection\\settings.json",
+      "bytes": 10329,
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\recording-rejection\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\recording-rejection\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\recording-rejection\\inputs.jsonl",
+      "bytes": 788684,
+      "sha256": "fce906a3bfc7937efeb1f401a613ab415e5ac59cf52aaab2dd146f972d0ed3fe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\recording-rejection\\status.json",
+      "bytes": 211,
+      "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\recording-rejection\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\recording-rejection\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\collector-executed-run_offline_FF_QA_card_collector_1128_v1.py",
+      "bytes": 6503,
+      "sha256": "2b38907580fc7882df936d1c04bef1348e735a212015bfb22243ad4d923bd4b6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\collector-executed-mmx6_offline_FF_QA_card_collector_1128_v1.py",
+      "bytes": 17367,
+      "sha256": "5d369982c9a35fc444f816bee464845301a2689ccb42a910807d3089a512ef61"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\collector-executed-prepare_offline_FF_QA_card_helpers_1128_v1.py",
+      "bytes": 7184,
+      "sha256": "1cd0c5b3852dfb6dedcc57c41718250efefef22c7e6411d60d39e822b265773b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\collector-executed-mmx6_R6_paired_ammo_observer_1128_v2.py",
+      "bytes": 24936,
+      "sha256": "415c5d0db1ff1faa5f073cb2f2f8326018f10ab3ff748eb416d5148f876da820"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\collector-executed-FF_QA_card_1128_prepared_v1_package.json",
+      "bytes": 2028,
+      "sha256": "f94c4b36ae658829028f2d7c10c816e9050b40ac76352ebeeb63c5ff921ec75f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\collector-executed-FF_QA_card_1128_prepared_v1_CP2.py",
+      "bytes": 39558,
+      "sha256": "bbfdb6c1d35193fa64700c9469385eae85f584db543ff26a26e4020b42a6d025"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\collector-executed-FF_QA_card_1128_prepared_v1_Save.py",
+      "bytes": 12901,
+      "sha256": "31cbff8f296b33a75a632d8f1855c20e6a9179be171b00deebb7c1af4e460fa4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\earned-native-exit-execution.pst",
+      "bytes": 1952072,
+      "sha256": "49275d4864a53c53bb8f0a4e2b0e2ac7161e3c9e136169a652643493f0a34523"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\ammo-hud\\native-CP2-route\\earned-native-CURRENT-report.pst",
+      "bytes": 1740610,
+      "sha256": "6f7a4f3d023d89c2a7dbb266e952698cb45139c287e1fc55a0372005f828b7e9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\qualification.json",
+      "bytes": 633325,
+      "sha256": "827e4c5450db2389459513d9cd4d654e3b14c9e9ee7bbf4df5718afd890b9332"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\offline-FF-QA-card-collection-result.json",
+      "bytes": 617097,
+      "sha256": "b925a0dda8b097a82564e6fff41bffa4314d209038983015da801bfdac9079c7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\offline-FF-QA-card-collector-1128-v1-index.json",
+      "bytes": 3192,
+      "sha256": "aa6b6e59e3ed463dfa5a0eae99186c3615e74c6c100d60de9fa3b113e0e66f98"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v40-1128b9d\\candidate.json",
+      "bytes": 11884,
+      "sha256": "6085bf5ee48dd10dec71c0b30ff497434cffead55ffe57d0174aa6a9ed248d56"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\FF-QA-card-local-v40-1128b9d-v1\\candidate\\mmx6-runtime.exe",
+      "bytes": 27462656,
+      "sha256": "e49ee4dfa36e6e694fc822c295d189a5cc283864c4b4fd272b5d324bcb80eb4b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-FF-QA-native-card-root-v1.py",
+      "bytes": 15227,
+      "sha256": "4e2e0715dfa595f98e9504237696bfd059b0b9bd73e520ceaab341a1c8521de2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-offline-FF-QA-card-root-v1.ps1",
+      "bytes": 1572,
+      "sha256": "b6b427d2ac0518150a0e6652f536d1d6eae7d4b6f6d0769fa689569f9ca6fa3e"
+    }
+  ]
+}
