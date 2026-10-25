@@ -41,8 +41,9 @@ states; old-state migration is never required.
 
 ## Current qualification status, October 24
 
-The live content ledger now qualifies exactly two local CP2 checks on
-`777b4d0453b0f08546a6df06adb95ab5a211e8d9`:
+The live content ledger qualifies exactly two local CP2 checks, first on
+`777b4d0453b0f08546a6df06adb95ab5a211e8d9` and now requalified on
+`c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b`:
 `s00-a0-c02/boss` and `s00-a0-c02/exit_actual_transition`. The existing native
 intro run earned the main boss defeat, timed finale and actual exit into the
 report dispatcher and stable CURRENT export. Both append-only receipts bind
@@ -81,12 +82,25 @@ recording footer and actual finalized location. Parent gameplay failures remain
 separate; this does not qualify replay, performance or cross-build sessions.
 
 The [v31 native intro export receipt](evidence/mmx6-progression/manifest-bound-777b4d0-earned-intro-CURRENT-export-reviewed.json)
-now retains actual door contact, charged boss damage to defeat, the native
+retains actual door contact, charged boss damage to defeat, the native
 901-tick finale, source-ready dialogue/report inputs and a stable full 951-byte
 CURRENT export matching campaign fields. Checkpoint and positive native
 invincibility counters are explicit offline prerequisites. The completed
 route saves its actually earned exit and report execution points for later
 checks on this exact build. Native cards and netplay gain no pass from export.
+
+The [fresh c3 regression receipt](evidence/mmx6-progression/manifest-bound-c3c5bdb-earned-intro-CURRENT-export-regression-reviewed.json)
+independently reproduces 32 actual charged-hit reductions from boss HP32 to0,
+the native finale counter901, four source-ready dialogue contexts, positive
+exit40 and a stable full CURRENT export. All persistent campaign slices match
+the original source contract. Its current-build exit/report snapshots were
+earned without a LOAD. The earlier partial attempt stopped on an ordinary
+PLAY clock backstep during legitimate private Zero projection; it remains
+retained. The successful observer waits on the real coherent post-restore
+native clock and preserves every raw ordinary observation. The same two
+content cases have new append-only local receipts; counts stay unchanged.
+Five composed images received bounded actor/meter/report review, with full
+scenery, palette and animation correctness still unverified.
 
 The subsequent [local reentry component receipt](evidence/mmx6-native-reentry/manifest-bound-777b4d0-earned-CURRENT-and-NewGame-local-components-reviewed.json)
 qualifies actual guest Quit refusal, both primary final Quit confirmations,

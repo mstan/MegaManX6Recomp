@@ -2918,6 +2918,119 @@
                 "outcome": "Actual PLAY+20 main48/sub0 at8008EF48 reached state2/HP0 at287.719s/native5588; child/sub1HP127 was excluded. Native type55 finale then reached original counter901/action9 at383.516s/native6556. No boss/action/phase/HP/timer success writes."
               },
               "sha256": "86156b8c83023c29ebcad3af6372c826994e86ea0c07ead326376c3f4082f7f1"
+            },
+            {
+              "receipt": {
+                "mode": "local_coop",
+                "result": "passed",
+                "candidate": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+                "recorded_at": "2026-10-25T01:36:43Z",
+                "build_identity": {
+                  "name": "v35 c3 native Yammar upload debug candidate; existing CP2 regression",
+                  "image": {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\candidate\\mmx6-runtime.exe",
+                    "sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347"
+                  },
+                  "details": {
+                    "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+                    "declared_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+                    "inventory_pointer": "/locations/2",
+                    "inventory_sha256": "67508ae2e19ad07c2c5cad41e12dbeb5e446e4eb50f033efa75ed306f2636fad",
+                    "definition_sha256": "021e2b352c074a2cf989119d5b766e651f77cbb7466243ff448554e2ff56b93a"
+                  }
+                },
+                "settings": {
+                  "mode": "local offline co-op",
+                  "roster": [
+                    "X/P1 native Falcon form1",
+                    "Zero/P2"
+                  ],
+                  "input_transport": "configured published_host original gameplay input",
+                  "network": false,
+                  "rollback": false,
+                  "loader": "default native loader; interpreted overlays explicitly sealed",
+                  "drawable": [
+                    960,
+                    720
+                  ],
+                  "audio": "emulation retained; SDL dummy output muted",
+                  "profile": "owned isolated automated profile; native cards unchanged",
+                  "prerequisite_commands": [
+                    8,
+                    10
+                  ],
+                  "recording": "default enabled; fixture-tainted; ordinary finalized capture and replay refused"
+                },
+                "artifacts": [
+                  {
+                    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-progression\\manifest-bound-c3c5bdb-earned-intro-CURRENT-export-regression-reviewed.json",
+                    "sha256": "d8d8757b294d6a348b47ad4626274275925b6cd87e04e421bc87c6f26609bd03",
+                    "role": "Root independently reduced actual native boss/finale/exit/report outcome"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\qualification.json",
+                    "sha256": "9fb26a2da69487b1c12bd1b2d34d18f245ec0a2a370f558497f906deb8157239",
+                    "role": "Unchanged complete original successful native report"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v35-c3c5bdb\\candidate.json",
+                    "sha256": "a176f8dd587317e6d0fe240c871265435d92098049848b0d42bba0804b1c0d64",
+                    "role": "Exact source/SDK/image/compiled manifest provenance"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\diagnostic-runner-executed-source.py",
+                    "sha256": "b845b60058b014705d7585411ec7f64443db4e96f19784c71585598ba0f8c6f5",
+                    "role": "Actual executing current-build observer/input/protection contract"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\CP2-v31-earned-exit-report-input-source-notes.txt",
+                    "sha256": "6be72eae2b5385ed3a0ea900bbcc63ac9ff2a28cc8a3f3e58a7148a7913aee67",
+                    "role": "Original source-bound boss/finale/exit/report input contract"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v35-CP2-published-native-clock-v2-source-review.json",
+                    "sha256": "4bc45304471681e08754a9676b2d8c2375e8006a294a6971d9413719ab20b554",
+                    "role": "Actual canonical-clock wait source and 17 focused checks"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\CP2-v35-ordinary-clock-failure-independent-reduction.json",
+                    "sha256": "b362f0854db8f3c9d2a78243ffd0d35997f798d6e80561bab4b6d32d7ce345b1",
+                    "role": "Prior partial failure retained; ordinary private-projection clock explanation"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-first-boss-battle-ready.png",
+                    "sha256": "de996e0f4549690b471ed2d1f69f1b8addbb99de2373d89041b34ec1e966bb61",
+                    "role": "Actual composed encounter/defeat/report context; comprehensive artwork unverified"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-charged-boss-HP-0.png",
+                    "sha256": "4f49e79fe89fdc0da42301a27c25d06b5d73981052e1170693c1190a82d7ad08",
+                    "role": "Actual composed encounter/defeat/report context; comprehensive artwork unverified"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-report-CURRENT-export-complete.png",
+                    "sha256": "7b738a23d17e3bcf1080874158861aaa2e089bf351b24294f6a10db5e43aa96c",
+                    "role": "Actual composed encounter/defeat/report context; comprehensive artwork unverified"
+                  }
+                ],
+                "limits": [
+                  "Only this CP2 location check in LOCAL_COOP. Netplay and aggregate remain unverified.",
+                  "No CP0/CP1 traversal, complete stage/placement/terrain/enemy/audio/retry audit, native card I/O, physical pad, other OS or comprehensive artwork admission.",
+                  "Type55 finale completes through the original timer901 route; no claim that its HP was defeated or that this is a named alternate/refight boss obligation.",
+                  "RAM, coherent typed seat publication and composed captures are separate observations. Retained execution SAVEs are not native cards.",
+                  "Default recording remains prerequisite-tainted and is strictly refused for ordinary finalized capture/offline replay. No finalized replay or network proof."
+                ],
+                "bypasses": [
+                  "Offline mailbox8 invokes the original CP2 initializer, bypassing traversal to stage0/section0/checkpoint2; it does not set boss defeat, timer, exit, report or CURRENT outcome.",
+                  "Offline command10 refreshes positive per-seat native iframe+61 with player HP unchanged. Protected timing is not unassisted survival.",
+                  "No player/boss HP, action, ammo, selection, token, boss phase, timer901, clear/exit/report/CURRENT success field was authored. All claimed outcomes followed original accepted inputs/native logic.",
+                  "No snapshot LOAD was used to earn either native outcome. Prior fresh attempt stopped at HP9 on an ordinary projected-clock backstep; its actual partial evidence is retained. The successful observer uses the real coherent post-restore native clock and leaves raw ordinary observations unchanged."
+                ],
+                "case_id": "s00-a0-c02/boss",
+                "action": "After disclosed original CP2 initialization and positive per-seat native iframes, original native Right contacted the authored door and admitted main boss48/sub0. Actual Square full charge, Jump and selector19 release produced native projectile19 and 32 measured native damage events. Original post-defeat dialogue/timed finale followed.",
+                "outcome": "Actual PLAY+20 main48/sub0 at8008EF48 reached state2/HP0 at141.453s/native5821 after 32 native charged-hit HP reductions32->0; child/sub1HP127 excluded. Original type55 finale reached counter901/action9 at231.922s/native6789, with source-ready dialogues3/4/5/6. No authored boss/action/HP/timer success fields."
+              },
+              "sha256": "5d46335786953c5858d1821e0d753ca180f3bdbd9f84954b1ea88971153374f0"
             }
           ]
         },
@@ -3133,6 +3246,119 @@
                 "outcome": "Positive original PLAY+F=0x40 at410.781s/native6557 transitioned through observed mode0B into actual stage15/section0 report. Three samples417.687/417.766/417.844s reached report[12,5,1], PLAY+28=1 and stable full951-byte CURRENT header[1,1], SHA b6bd62be2195762e62183f1c7a697a20565a478e001d277a1ca9440834fd409a. Persistent campaign slices matched. No exit/report/CURRENT outcome writes; no native-card/import claim."
               },
               "sha256": "ca7c15c38f40c90a43b44726a48a1cd712043e0b42121216067f3243a14698b2"
+            },
+            {
+              "receipt": {
+                "mode": "local_coop",
+                "result": "passed",
+                "candidate": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+                "recorded_at": "2026-10-25T01:36:44Z",
+                "build_identity": {
+                  "name": "v35 c3 native Yammar upload debug candidate; existing CP2 regression",
+                  "image": {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\candidate\\mmx6-runtime.exe",
+                    "sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347"
+                  },
+                  "details": {
+                    "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+                    "declared_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+                    "inventory_pointer": "/locations/2",
+                    "inventory_sha256": "67508ae2e19ad07c2c5cad41e12dbeb5e446e4eb50f033efa75ed306f2636fad",
+                    "definition_sha256": "40b161bc598772bd755c1a86bd6188eaaac4df239866e1521fbdb1b3d9223128"
+                  }
+                },
+                "settings": {
+                  "mode": "local offline co-op",
+                  "roster": [
+                    "X/P1 native Falcon form1",
+                    "Zero/P2"
+                  ],
+                  "input_transport": "configured published_host original gameplay input",
+                  "network": false,
+                  "rollback": false,
+                  "loader": "default native loader; interpreted overlays explicitly sealed",
+                  "drawable": [
+                    960,
+                    720
+                  ],
+                  "audio": "emulation retained; SDL dummy output muted",
+                  "profile": "owned isolated automated profile; native cards unchanged",
+                  "prerequisite_commands": [
+                    8,
+                    10
+                  ],
+                  "recording": "default enabled; fixture-tainted; ordinary finalized capture and replay refused"
+                },
+                "artifacts": [
+                  {
+                    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-progression\\manifest-bound-c3c5bdb-earned-intro-CURRENT-export-regression-reviewed.json",
+                    "sha256": "d8d8757b294d6a348b47ad4626274275925b6cd87e04e421bc87c6f26609bd03",
+                    "role": "Root independently reduced actual native boss/finale/exit/report outcome"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\qualification.json",
+                    "sha256": "9fb26a2da69487b1c12bd1b2d34d18f245ec0a2a370f558497f906deb8157239",
+                    "role": "Unchanged complete original successful native report"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v35-c3c5bdb\\candidate.json",
+                    "sha256": "a176f8dd587317e6d0fe240c871265435d92098049848b0d42bba0804b1c0d64",
+                    "role": "Exact source/SDK/image/compiled manifest provenance"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\diagnostic-runner-executed-source.py",
+                    "sha256": "b845b60058b014705d7585411ec7f64443db4e96f19784c71585598ba0f8c6f5",
+                    "role": "Actual executing current-build observer/input/protection contract"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\CP2-v31-earned-exit-report-input-source-notes.txt",
+                    "sha256": "6be72eae2b5385ed3a0ea900bbcc63ac9ff2a28cc8a3f3e58a7148a7913aee67",
+                    "role": "Original source-bound boss/finale/exit/report input contract"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v35-CP2-published-native-clock-v2-source-review.json",
+                    "sha256": "4bc45304471681e08754a9676b2d8c2375e8006a294a6971d9413719ab20b554",
+                    "role": "Actual canonical-clock wait source and 17 focused checks"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\CP2-v35-ordinary-clock-failure-independent-reduction.json",
+                    "sha256": "b362f0854db8f3c9d2a78243ffd0d35997f798d6e80561bab4b6d32d7ce345b1",
+                    "role": "Prior partial failure retained; ordinary private-projection clock explanation"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-first-boss-battle-ready.png",
+                    "sha256": "de996e0f4549690b471ed2d1f69f1b8addbb99de2373d89041b34ec1e966bb61",
+                    "role": "Actual composed encounter/defeat/report context; comprehensive artwork unverified"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-charged-boss-HP-0.png",
+                    "sha256": "4f49e79fe89fdc0da42301a27c25d06b5d73981052e1170693c1190a82d7ad08",
+                    "role": "Actual composed encounter/defeat/report context; comprehensive artwork unverified"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-report-CURRENT-export-complete.png",
+                    "sha256": "7b738a23d17e3bcf1080874158861aaa2e089bf351b24294f6a10db5e43aa96c",
+                    "role": "Actual composed encounter/defeat/report context; comprehensive artwork unverified"
+                  }
+                ],
+                "limits": [
+                  "Only this CP2 location check in LOCAL_COOP. Netplay and aggregate remain unverified.",
+                  "No CP0/CP1 traversal, complete stage/placement/terrain/enemy/audio/retry audit, native card I/O, physical pad, other OS or comprehensive artwork admission.",
+                  "Type55 finale completes through the original timer901 route; no claim that its HP was defeated or that this is a named alternate/refight boss obligation.",
+                  "RAM, coherent typed seat publication and composed captures are separate observations. Retained execution SAVEs are not native cards.",
+                  "Default recording remains prerequisite-tainted and is strictly refused for ordinary finalized capture/offline replay. No finalized replay or network proof."
+                ],
+                "bypasses": [
+                  "Offline mailbox8 invokes the original CP2 initializer, bypassing traversal to stage0/section0/checkpoint2; it does not set boss defeat, timer, exit, report or CURRENT outcome.",
+                  "Offline command10 refreshes positive per-seat native iframe+61 with player HP unchanged. Protected timing is not unassisted survival.",
+                  "No player/boss HP, action, ammo, selection, token, boss phase, timer901, clear/exit/report/CURRENT success field was authored. All claimed outcomes followed original accepted inputs/native logic.",
+                  "No snapshot LOAD was used to earn either native outcome. Prior fresh attempt stopped at HP9 on an ordinary projected-clock backstep; its actual partial evidence is retained. The successful observer uses the real coherent post-restore native clock and leaves raw ordinary observations unchanged."
+                ],
+                "case_id": "s00-a0-c02/exit_actual_transition",
+                "action": "After actual original main-boss defeat and type55 timer901, source-ready native Cross responses completed the actual final dialogues. Original report confirms advanced the dispatcher and actual pack return.",
+                "outcome": "Observed original positive PLAY+F=0x40 and native mode0B led into actual stage15/section0 report. Two samples265.140/265.281s reached[12,5,1], PLAY+28=1 and stable whole951-byte CURRENT header[1,1], SHAc7b61a730357fb0957e142b66e329b4443538eff21bc53ea2950973a0ac8e80a. Independent recomputation matched every source-mapped persistent campaign slice except documented volatile exportclock40. No exit/report/CURRENT writes or native card/import claim."
+              },
+              "sha256": "b200c761ae0a70001d136fafe36d18097a4102f6b7f3c6a5ad34271c1ee3c60f"
             }
           ]
         },

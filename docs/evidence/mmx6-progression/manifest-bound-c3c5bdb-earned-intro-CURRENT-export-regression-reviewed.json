@@ -1,0 +1,727 @@
+{
+  "schema": 1,
+  "kind": "reviewed_exact_c3_native_CP2_boss_timed_finale_exit_report_CURRENT_regression",
+  "reviewed_at_utc": "2026-10-25T01:36:07.719349+00:00",
+  "issue": "beads-gxrh",
+  "compiled_source": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+  "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+  "executable_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+  "compiled_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+  "checks": {
+    "checkpoint_prerequisite_observed": true,
+    "original_door_contact": true,
+    "original_camera_opened": true,
+    "full_native_charge_and_type19_projectile": true,
+    "first_boss_native_damage_to_defeat": true,
+    "native_timed_finale901": true,
+    "ready_dialogue3_4_5_6": true,
+    "native_report_post_pack_marker": true,
+    "full_stable_CURRENT_export": true,
+    "current_campaign_slices_match": true
+  },
+  "parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "native_resource_and_window_observations_complete": true,
+    "default_recording_taint_retained_and_replay_refused": true,
+    "owned_cleanup_private_cards": true
+  },
+  "independent_reduction": {
+    "main_boss_pointer": "0x8008ef48",
+    "actual_damage": [
+      {
+        "attempt": 0,
+        "before": 32,
+        "after": 31,
+        "delta": 1,
+        "shot19_observed": false
+      },
+      {
+        "attempt": 1,
+        "before": 31,
+        "after": 30,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 2,
+        "before": 30,
+        "after": 29,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 3,
+        "before": 29,
+        "after": 28,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 4,
+        "before": 28,
+        "after": 27,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 5,
+        "before": 27,
+        "after": 26,
+        "delta": 1,
+        "shot19_observed": false
+      },
+      {
+        "attempt": 6,
+        "before": 26,
+        "after": 25,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 7,
+        "before": 25,
+        "after": 24,
+        "delta": 1,
+        "shot19_observed": false
+      },
+      {
+        "attempt": 8,
+        "before": 24,
+        "after": 23,
+        "delta": 1,
+        "shot19_observed": false
+      },
+      {
+        "attempt": 9,
+        "before": 23,
+        "after": 22,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 10,
+        "before": 22,
+        "after": 21,
+        "delta": 1,
+        "shot19_observed": false
+      },
+      {
+        "attempt": 11,
+        "before": 21,
+        "after": 20,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 12,
+        "before": 20,
+        "after": 19,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 13,
+        "before": 19,
+        "after": 18,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 14,
+        "before": 18,
+        "after": 17,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 15,
+        "before": 17,
+        "after": 16,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 16,
+        "before": 16,
+        "after": 15,
+        "delta": 1,
+        "shot19_observed": false
+      },
+      {
+        "attempt": 17,
+        "before": 15,
+        "after": 14,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 18,
+        "before": 14,
+        "after": 13,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 19,
+        "before": 13,
+        "after": 12,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 20,
+        "before": 12,
+        "after": 11,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 21,
+        "before": 11,
+        "after": 10,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 22,
+        "before": 10,
+        "after": 9,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 23,
+        "before": 9,
+        "after": 8,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 24,
+        "before": 8,
+        "after": 7,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 25,
+        "before": 7,
+        "after": 6,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 26,
+        "before": 6,
+        "after": 5,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 27,
+        "before": 5,
+        "after": 4,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 28,
+        "before": 4,
+        "after": 3,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 29,
+        "before": 3,
+        "after": 2,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 30,
+        "before": 2,
+        "after": 1,
+        "delta": 1,
+        "shot19_observed": true
+      },
+      {
+        "attempt": 31,
+        "before": 1,
+        "after": 0,
+        "delta": 1,
+        "shot19_observed": true
+      }
+    ],
+    "observed_type19_rows": 37,
+    "canonical_native_waits": [
+      {
+        "before_index": 356,
+        "after_index": 360,
+        "required": 14,
+        "actual": 18
+      },
+      {
+        "before_index": 396,
+        "after_index": 401,
+        "required": 14,
+        "actual": 14
+      },
+      {
+        "before_index": 440,
+        "after_index": 444,
+        "required": 14,
+        "actual": 14
+      },
+      {
+        "before_index": 484,
+        "after_index": 488,
+        "required": 14,
+        "actual": 14
+      },
+      {
+        "before_index": 527,
+        "after_index": 531,
+        "required": 14,
+        "actual": 15
+      },
+      {
+        "before_index": 569,
+        "after_index": 573,
+        "required": 14,
+        "actual": 16
+      },
+      {
+        "before_index": 609,
+        "after_index": 614,
+        "required": 14,
+        "actual": 15
+      },
+      {
+        "before_index": 654,
+        "after_index": 659,
+        "required": 14,
+        "actual": 19
+      },
+      {
+        "before_index": 696,
+        "after_index": 700,
+        "required": 14,
+        "actual": 15
+      },
+      {
+        "before_index": 736,
+        "after_index": 740,
+        "required": 14,
+        "actual": 14
+      },
+      {
+        "before_index": 793,
+        "after_index": 797,
+        "required": 14,
+        "actual": 14
+      },
+      {
+        "before_index": 834,
+        "after_index": 838,
+        "required": 14,
+        "actual": 16
+      },
+      {
+        "before_index": 880,
+        "after_index": 885,
+        "required": 14,
+        "actual": 15
+      },
+      {
+        "before_index": 926,
+        "after_index": 931,
+        "required": 14,
+        "actual": 16
+      },
+      {
+        "before_index": 978,
+        "after_index": 982,
+        "required": 14,
+        "actual": 14
+      },
+      {
+        "before_index": 1029,
+        "after_index": 1033,
+        "required": 14,
+        "actual": 16
+      },
+      {
+        "before_index": 1077,
+        "after_index": 1081,
+        "required": 14,
+        "actual": 14
+      },
+      {
+        "before_index": 1123,
+        "after_index": 1127,
+        "required": 14,
+        "actual": 15
+      },
+      {
+        "before_index": 1172,
+        "after_index": 1177,
+        "required": 14,
+        "actual": 15
+      },
+      {
+        "before_index": 1224,
+        "after_index": 1229,
+        "required": 14,
+        "actual": 14
+      },
+      {
+        "before_index": 1269,
+        "after_index": 1275,
+        "required": 14,
+        "actual": 15
+      },
+      {
+        "before_index": 1320,
+        "after_index": 1325,
+        "required": 14,
+        "actual": 14
+      },
+      {
+        "before_index": 1369,
+        "after_index": 1375,
+        "required": 14,
+        "actual": 15
+      },
+      {
+        "before_index": 1421,
+        "after_index": 1426,
+        "required": 14,
+        "actual": 17
+      },
+      {
+        "before_index": 1472,
+        "after_index": 1478,
+        "required": 14,
+        "actual": 16
+      },
+      {
+        "before_index": 1528,
+        "after_index": 1534,
+        "required": 14,
+        "actual": 15
+      },
+      {
+        "before_index": 1582,
+        "after_index": 1587,
+        "required": 14,
+        "actual": 14
+      },
+      {
+        "before_index": 1633,
+        "after_index": 1638,
+        "required": 14,
+        "actual": 14
+      },
+      {
+        "before_index": 1702,
+        "after_index": 1711,
+        "required": 14,
+        "actual": 15
+      },
+      {
+        "before_index": 1763,
+        "after_index": 1769,
+        "required": 14,
+        "actual": 14
+      },
+      {
+        "before_index": 1827,
+        "after_index": 1834,
+        "required": 14,
+        "actual": 14
+      },
+      {
+        "before_index": 1888,
+        "after_index": 1893,
+        "required": 14,
+        "actual": 16
+      }
+    ],
+    "ready_original_dialogue_contexts": [
+      "dialogue3_story16",
+      "dialogue4_finale_intro",
+      "dialogue5_finale_exit",
+      "dialogue6_finale_exit"
+    ],
+    "finale_counter": 904,
+    "exit40_and_mode0B": true,
+    "report_source_windows": 4,
+    "whole_CURRENT_bytes": 951,
+    "CURRENT_sha256": "c7b61a730357fb0957e142b66e329b4443538eff21bc53ea2950973a0ac8e80a",
+    "persistent_import_slices_match": true
+  },
+  "execution_snapshots": {
+    "earned_exit_execution_snapshot": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\earned-native-exit-execution.pst",
+      "bytes": 1951130,
+      "sha256": "01ef07620db7b7fcc5cda8fabca5df290d86d188d93733cf0e21154b56df5f46",
+      "native_mode_phase": [
+        10,
+        1
+      ],
+      "internal_wire": 5
+    },
+    "earned_current_execution_snapshot": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\earned-native-CURRENT-report.pst",
+      "bytes": 1734691,
+      "sha256": "0fc9f044feabdb42077162c0fa2f6cea00d4fe850749d487a179dc04cf601e33",
+      "native_mode_phase": [
+        12,
+        5
+      ],
+      "internal_wire": 5
+    }
+  },
+  "recording": {
+    "terminal_failure": "unilateral debug or fixture input contaminated capture",
+    "strict_refusals": {
+      "ordinary_capture": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      },
+      "offline_replay": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      }
+    },
+    "finalized_capture_admitted": false,
+    "replay_admitted": false
+  },
+  "artwork_review": {
+    "status": "bounded_gameplay_and_report_context_reviewed",
+    "viewed_labels": [
+      "native-first-boss-battle-ready",
+      "native-charged-boss-HP-16",
+      "native-charged-boss-HP-0",
+      "native-finale-admitted",
+      "native-report-CURRENT-export-complete"
+    ],
+    "observed": "Root inspected five actual composed captures: X and Zero identities and vertical HP meters, boss/full-charge hit context, natural finale transition and original report menu. This does not qualify complete scenery/palette/animation correctness."
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\qualification.json",
+      "bytes": 469311969,
+      "sha256": "9fb26a2da69487b1c12bd1b2d34d18f245ec0a2a370f558497f906deb8157239"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v35-c3c5bdb\\candidate.json",
+      "bytes": 6854,
+      "sha256": "a176f8dd587317e6d0fe240c871265435d92098049848b0d42bba0804b1c0d64"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\candidate\\mmx6-runtime.exe",
+      "bytes": 27429376,
+      "sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\diagnostic-runner-executed-source.py",
+      "bytes": 40361,
+      "sha256": "b845b60058b014705d7585411ec7f64443db4e96f19784c71585598ba0f8c6f5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v35-CP2-published-native-clock-v2-source-review.json",
+      "bytes": 2439,
+      "sha256": "4bc45304471681e08754a9676b2d8c2375e8006a294a6971d9413719ab20b554"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\CP2-v35-ordinary-clock-failure-independent-reduction.json",
+      "bytes": 6720,
+      "sha256": "b362f0854db8f3c9d2a78243ffd0d35997f798d6e80561bab4b6d32d7ce345b1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-report-inputs\\qualification.json",
+      "bytes": 121473891,
+      "sha256": "0a9863990633269590bc34673bcb40c26357234f863f4542327f6a03e411547a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\CP2-v31-earned-exit-report-input-source-notes.txt",
+      "bytes": 8644,
+      "sha256": "6be72eae2b5385ed3a0ea900bbcc63ac9ff2a28cc8a3f3e58a7148a7913aee67"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\earned-native-exit-execution.pst",
+      "bytes": 1951130,
+      "sha256": "01ef07620db7b7fcc5cda8fabca5df290d86d188d93733cf0e21154b56df5f46"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\earned-native-CURRENT-report.pst",
+      "bytes": 1734691,
+      "sha256": "0fc9f044feabdb42077162c0fa2f6cea00d4fe850749d487a179dc04cf601e33"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-CP2-ready.png",
+      "bytes": 2074543,
+      "sha256": "5dd29197d8122625324d106ba99ff2523ddad1b647f018fefda5551d1929ea29"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-CP2-ready-gpu.json.gz",
+      "bytes": 9574,
+      "sha256": "29d7727a4d88c02e448cd7cad9f95247cd4ef0548ab9cf7224f21af096a696a2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-first-boss-admitted.png",
+      "bytes": 2074543,
+      "sha256": "fb9d61a1c106c6044ed03899acd1f159b1aa2772f0cb8265e58414dcc1054b4a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-first-boss-admitted-gpu.json.gz",
+      "bytes": 7926,
+      "sha256": "5f053a00b629a3ac89a4a7756e13c3df74424a851e220a3a6aea2d11e75d9d14"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-first-boss-battle-ready.png",
+      "bytes": 2074543,
+      "sha256": "de996e0f4549690b471ed2d1f69f1b8addbb99de2373d89041b34ec1e966bb61"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-first-boss-battle-ready-gpu.json.gz",
+      "bytes": 10766,
+      "sha256": "61a03e6017adc7195416de1e4741945439472a8d8e9bcd7cf1b1f44a0f55cef5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-charged-boss-HP-31.png",
+      "bytes": 2074543,
+      "sha256": "8fedbe7a21074c93c6b73fe8030cd5a33200b75f5ca89aa39fe33172132eeab9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-charged-boss-HP-31-gpu.json.gz",
+      "bytes": 11373,
+      "sha256": "b3196552ab1f98da3d872d251bd8dfe722f9400266149e6be902aefd8b1a612a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-charged-boss-HP-24.png",
+      "bytes": 2074543,
+      "sha256": "c8eeb9812352970fdad5adb121a7ee5722d6e339a88dca19890fb2f04676960c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-charged-boss-HP-24-gpu.json.gz",
+      "bytes": 10646,
+      "sha256": "11561293ae24b2007bba6a8557601ea110f84dc64514eb9884ffd551bd3212c9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-charged-boss-HP-16.png",
+      "bytes": 2074543,
+      "sha256": "c88c49c1140928ac74aa8e4ba8d25b153aa74b915b0cf203a6076f9ff0bf004a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-charged-boss-HP-16-gpu.json.gz",
+      "bytes": 11515,
+      "sha256": "7dbe4a296b14cc5b374279214feefc0030ab770cf5c7b88f03fde7f4f7760bd5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-charged-boss-HP-8.png",
+      "bytes": 2074543,
+      "sha256": "103edf89c9c01b0c589fa0d2b06642305d781a5161a27fcc97006265fb6384d1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-charged-boss-HP-8-gpu.json.gz",
+      "bytes": 13021,
+      "sha256": "3d25318a58e08812cbc89de14d823ec879b7c81642f2199a3ca682c1ff8d1532"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-charged-boss-HP-0.png",
+      "bytes": 2074543,
+      "sha256": "4f49e79fe89fdc0da42301a27c25d06b5d73981052e1170693c1190a82d7ad08"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-charged-boss-HP-0-gpu.json.gz",
+      "bytes": 11335,
+      "sha256": "df9140dfc5f9b83378c2a4f37333e7ef35c50f66b44583cd6ee92f360611dc9e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-finale-admitted.png",
+      "bytes": 2074543,
+      "sha256": "1b9e72ee806e3122a278149a893f4fab50eb99931f73b6df240165e9eadd9282"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-finale-admitted-gpu.json.gz",
+      "bytes": 5975,
+      "sha256": "ec509ac740ee75355531e9aebb428507273cf8ebc79621a23115cee8ad1cdb64"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-report-CURRENT-export-complete.png",
+      "bytes": 2074543,
+      "sha256": "7b738a23d17e3bcf1080874158861aaa2e089bf351b24294f6a10db5e43aa96c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-report-CURRENT-export-complete-gpu.json.gz",
+      "bytes": 7885,
+      "sha256": "d35e78272993cd20f685e39fd725abe1e072aff1aec3fdacc1ad2d62bacc6901"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\ammo-hud\\native-current-export.bin",
+      "bytes": 951,
+      "sha256": "c7b61a730357fb0957e142b66e329b4443538eff21bc53ea2950973a0ac8e80a"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_checkpoint.py",
+      "bytes": 25303,
+      "sha256": "c8179ccf2d0a7de26213db480313c1640d95dadaa4c1238d4e71989f2ca70363"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_native_reentry.py",
+      "bytes": 32767,
+      "sha256": "c0fdd5fe7bf511bef710bf229754affa0c1b7431b96d13e04c5f71afda1b3960"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\audit_mmx6_current_data.py",
+      "bytes": 12239,
+      "sha256": "6422bbe85854ba47f878016c0dbbcb6cf9988ec7284515d45ecf389babc72310"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\recording-rejection\\settings.json",
+      "bytes": 10329,
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\recording-rejection\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\recording-rejection\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\recording-rejection\\inputs.jsonl",
+      "bytes": 795805,
+      "sha256": "ad5dfddfc4db8f2eeecc009b6338b33d9f3f12748a151f304501bbb78304d200"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\recording-rejection\\status.json",
+      "bytes": 211,
+      "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\recording-rejection\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-cp2-native-finale-v35-c3c5bdb-published-clock-v2\\recording-rejection\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    }
+  ],
+  "limits": [
+    "Regression of the same two previously qualified LOCAL CP2 native cases, not additional location or X4 row coverage. Netplay and all aggregate content cases remain unverified.",
+    "Command8 original checkpoint initializer bypasses preceding travel; command10 refreshes positive original native iframes with HP unchanged. Original native attacks/timer/dialogue/exit/report earn every claimed outcome.",
+    "No native card Save/Continue, campaign import, acquired weapon/armor/rescue persistence or character selection admission from this prerequisite run.",
+    "No snapshot LOAD in this successful route; retained SAVEs are current-build disposable execution points, never native game saves.",
+    "First fresh attempt failed on an ordinary PLAY clock backstep inside legitimate private projection. It is retained unchanged. The successful observer uses actual post-restore coherent published native clocks, with raw ordinary observations unchanged.",
+    "Ordinary RAM/publication/composed output are separate RPCs. No synthetic same-frame or comprehensive artwork claim."
+  ]
+}
