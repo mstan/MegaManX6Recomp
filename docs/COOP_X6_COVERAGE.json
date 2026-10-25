@@ -2002,7 +2002,70 @@
       "modes": {
         "local_coop": {
           "status": "unverified",
-          "attempts": []
+          "attempts": [
+            {
+              "receipt": {
+                "case_id": "X6-077",
+                "mode": "local_coop",
+                "result": "unverified",
+                "candidate": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+                "recorded_at": "2026-10-25T02:44:42Z",
+                "build_identity": {
+                  "name": "v35 c3 actual intro-earned native Save and ordinary cold-card Load component",
+                  "image": {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\candidate\\mmx6-runtime.exe",
+                    "sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347"
+                  },
+                  "details": {
+                    "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+                    "declared_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+                    "inventory_sha256": "67508ae2e19ad07c2c5cad41e12dbeb5e446e4eb50f033efa75ed306f2636fad"
+                  }
+                },
+                "settings": {
+                  "mode": "owned local offline co-op",
+                  "roster": [
+                    "X/P1",
+                    "Zero/P2"
+                  ],
+                  "input": "published_host",
+                  "audio": "SDL dummy muted",
+                  "loader": "default Seamless Loading",
+                  "rollback": false,
+                  "execution_snapshot_LOAD": false,
+                  "native_card_prerequisite": "Exclusive prelaunch copy of actual native intro-earned QA card dd5e0529; retained source unchanged",
+                  "recording": "ordinary default finalized; exact earned slot1 and authentic SDK blank slot2 startup; replay not claimed"
+                },
+                "action": "Original report Save/empty-slot confirmation writes native8192Bfile to own fresh private card. Fresh-process primary final Quit and actual native title card Load use7accepted UI inputs, exact nativefile/slot/checksum/import. Real story/map/unit0 selection and101accepted route inputs produce fresh stage1 X/Zero, then all11guest menu/control checks.",
+                "outcome": "Intro campaign Save/coldLoad component passed: actual persistent export reproduces all source campaign ranges, CURRENT c7b61a73, both source QA card and prelaunch target unchanged after coldLoad/exit0, ordinary capture finalized. Whole X6-077 remains unverified because acquired campaign breadth and paired coverage are incomplete.",
+                "artifacts": [
+                  {
+                    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-progression\\manifest-bound-c3c5bdb-earned-native-private-card-Save-local-reviewed.json",
+                    "sha256": "aa2025d3ae861b10f192e6795fe502ae83a212c0dd43603e1e8c20da7bd3e653"
+                  },
+                  {
+                    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-progression\\manifest-bound-c3c5bdb-native-earned-card-cold-Load-reentry-local-reviewed.json",
+                    "sha256": "d2454f7a40771fa77197c0688ffaf796207d0fe5d5702e424d6484179eed2ba5"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\qualification.json",
+                    "sha256": "0c3c8ad608b224237ecee7ed5b86f34bf5d7915c8d2a80333f934c6160143e5b"
+                  }
+                ],
+                "limits": [
+                  "LOCAL actually-earned intro campaign only; whole X6-077 is unverified.",
+                  "Acquired weapon/item/armor/parts/technique/soul/rank/Reploid/Nightmare persistence breadth remains unverified, as do paired equivalents.",
+                  "Original native Save used a disclosed actually-earned current-c3 report execution snapshot; coldLoad used only the persisted QA card in a new process, with no snapshot LOAD or outcome fixture.",
+                  "Source byte3 and reserved38E/38F are explicitly handled by original export contracts; no fabricated raw campaign equality or blanket volatile-byte allowance.",
+                  "No new passed native mode-result or frozen X4 comparison row follows from these components."
+                ],
+                "bypasses": [
+                  "Actually-earned current-c3 report execution LOAD was a prerequisite for native Save; the separate linked intro export receipt discloses earlier CP2/checkpoint/positive iframe prerequisites. ColdLoad source is an exact prelaunch QA native card copy, never an owner card."
+                ]
+              },
+              "sha256": "0ed68a4d32e577dc1919d00050769f2f2328af74e69734b60763b84d02da5afe"
+            }
+          ]
         },
         "netplay": {
           "status": "unverified",

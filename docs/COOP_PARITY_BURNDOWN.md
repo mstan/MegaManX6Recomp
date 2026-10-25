@@ -137,9 +137,23 @@ qualifies the original report Save flow into a fresh private memory card.
 The actual 8 KiB native write buffer matches one complete card block, and
 the saved campaign slot has the original valid checksum and persistent fields.
 Four actual Save/slot/confirmation/completion images were reviewed. The
-128 KiB card is retained for subsequent checks; native cold Load/Continue,
-netplay and broader campaign persistence remain unverified. This component
+128 KiB card is retained for subsequent checks; netplay and broader campaign
+persistence remain unverified. This component
 does not add a passed comparison row or native coverage case.
+
+The [current c3 cold native card Load receipt](evidence/mmx6-progression/manifest-bound-c3c5bdb-native-earned-card-cold-Load-reentry-local-reviewed.json)
+qualifies the actually earned intro campaign in a fresh local process. Seven
+original card UI inputs read the exact 8 KiB file and selected slot; the native
+export reproduces all source-mapped persistent campaign ranges. The original
+story/map route then consumes101 accepted inputs, selects unit0, reenters
+stage1 with fresh X/Zero and passes all11 guest menu/control checks. Six actual
+Quit/title/world/menu images were reviewed. Both the retained source card and
+its prelaunch working copy remain unchanged after graceful exit0. The ordinary
+default recording finalizes with the exact earned initial card and authentic
+SDK blank second slot; no execution LOAD, fixture or replay result is claimed.
+This is a recorded unverified X6-077 attempt with a completed intro component:
+acquired items, armor, parts, techniques, souls/ranks, Reploids, Nightmare state
+and the paired equivalents still need their own native persistence coverage.
 
 F157 now passes locally on `777b4d0`. The
 [fresh Zero follow-up receipt](evidence/mmx6-combat/manifest-bound-777b4d0-F157-fresh-Zero-followups-local-reviewed.json)

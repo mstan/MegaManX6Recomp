@@ -1,0 +1,433 @@
+{
+  "schema": 1,
+  "kind": "reviewed_c3_LOCAL_actual_native_earned_card_cold_Load_selection_roster_and_guest_menu",
+  "reviewed_at_utc": "2026-10-25T02:43:47.581394+00:00",
+  "issue": "beads-gxrh",
+  "compiled_source": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+  "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+  "executable_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+  "compiled_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+  "parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "native_observer_bounded_checks_complete": true,
+    "ordinary_default_recording_and_seeded_startup_admitted": true,
+    "reviewed_QA_source_and_seeded_existing_card_preserved": true,
+    "owned_cleanup_private_cards": true
+  },
+  "native_card_Load_checks": {
+    "original_source_and_empty_CURRENT_title": true,
+    "earned_8192Bfile_and_slot_exact": true,
+    "actual_native_slot_confirmation_inputs": true,
+    "all_source_campaign_fields_in_native_CURRENT": true,
+    "every_peer_same_CURRENT": true,
+    "whole_startup_cards_unchanged_in_process": true
+  },
+  "native_reentry_checks": {
+    "actual_primary_final_quit_and_title": true,
+    "source_bound_native_frontend_route": true,
+    "fresh_native_x_zero_reentry": true,
+    "guest_owned_menu_resources_and_controls_restored": true
+  },
+  "guest_menu_checks": {
+    "owner_native_pause_and_frozen_world": true,
+    "other_start_cannot_resume": true,
+    "other_cursor_cannot_change_owner_choice": true,
+    "owner_cursor_changes_and_restores": true,
+    "both_personal_resources_preserved_in_menu": true,
+    "owner_resumes_native_world": true,
+    "both_personal_resources_preserved_after_resume": true,
+    "continued_independent_native_movement": true,
+    "continued_native_square_action": true,
+    "composed_captures_completed": true,
+    "both_heroes_healthy_after_controls": true
+  },
+  "independent_campaign_exports": [
+    {
+      "bytes": 951,
+      "sha256": "c7b61a730357fb0957e142b66e329b4443538eff21bc53ea2950973a0ac8e80a",
+      "source_campaign_ranges": [
+        [
+          1,
+          3
+        ],
+        [
+          4,
+          910
+        ],
+        [
+          912,
+          951
+        ]
+      ],
+      "reserved_bytes_retained": true
+    }
+  ],
+  "actual_native_card_Load_inputs": 7,
+  "actual_native_route_inputs": 101,
+  "source_guards": [
+    {
+      "peer": 0,
+      "member": "exe",
+      "address": "0x80010098",
+      "bytes": 18,
+      "expected_sha256": "2d3b5353d50d328821bd359961a8993d9d02a14fe30a0e0030ab51b7e21f1779",
+      "actual_sha256": "2d3b5353d50d328821bd359961a8993d9d02a14fe30a0e0030ab51b7e21f1779",
+      "actual_bytes": 18,
+      "difference_count": 0,
+      "first_differences": []
+    },
+    {
+      "peer": 0,
+      "member": "exe",
+      "address": "0x8001bd40",
+      "bytes": 740,
+      "expected_sha256": "0cd0b74b27b104d034399664381d334dafa5b077061c6eb1ced6484a4daba681",
+      "actual_sha256": "0cd0b74b27b104d034399664381d334dafa5b077061c6eb1ced6484a4daba681",
+      "actual_bytes": 740,
+      "difference_count": 0,
+      "first_differences": []
+    },
+    {
+      "peer": 0,
+      "member": "exe",
+      "address": "0x8001c1ac",
+      "bytes": 1388,
+      "expected_sha256": "8d40d1c8e1821c96e1a3f91b90683e8e6d51725cc704e8f645e103be60065756",
+      "actual_sha256": "8d40d1c8e1821c96e1a3f91b90683e8e6d51725cc704e8f645e103be60065756",
+      "actual_bytes": 1388,
+      "difference_count": 0,
+      "first_differences": []
+    },
+    {
+      "peer": 0,
+      "member": "exe",
+      "address": "0x8001c8c4",
+      "bytes": 116,
+      "expected_sha256": "021f6ddfd46626fd6b44f80d1621e500a4f908f7b54142cf6ee38ab29259fc36",
+      "actual_sha256": "021f6ddfd46626fd6b44f80d1621e500a4f908f7b54142cf6ee38ab29259fc36",
+      "actual_bytes": 116,
+      "difference_count": 0,
+      "first_differences": []
+    },
+    {
+      "peer": 0,
+      "member": "exe",
+      "address": "0x800122a4",
+      "bytes": 300,
+      "expected_sha256": "4015c1906b9f996a71ee7e46c4674b1a73a9a64016284a2bc9bebdd2bdbae552",
+      "actual_sha256": "4015c1906b9f996a71ee7e46c4674b1a73a9a64016284a2bc9bebdd2bdbae552",
+      "actual_bytes": 300,
+      "difference_count": 0,
+      "first_differences": []
+    },
+    {
+      "peer": 0,
+      "member": "title",
+      "address": "0x800e9864",
+      "bytes": 13,
+      "expected_sha256": "1e5d16fa6e3de4b7c8ebdd4253875371168e3718ad841d36d6acc6f16f18e786",
+      "actual_sha256": "1e5d16fa6e3de4b7c8ebdd4253875371168e3718ad841d36d6acc6f16f18e786",
+      "actual_bytes": 13,
+      "difference_count": 0,
+      "first_differences": []
+    },
+    {
+      "peer": 0,
+      "member": "title",
+      "address": "0x800ea62c",
+      "bytes": 2864,
+      "expected_sha256": "470eabce493236a6a1f8c87bf282cb1d46dec5a803857a5282ae31f9402b12d2",
+      "actual_sha256": "470eabce493236a6a1f8c87bf282cb1d46dec5a803857a5282ae31f9402b12d2",
+      "actual_bytes": 2864,
+      "difference_count": 0,
+      "first_differences": []
+    },
+    {
+      "peer": 0,
+      "member": "title",
+      "address": "0x800ece54",
+      "bytes": 1280,
+      "expected_sha256": "9e1dabd52a9d52a5563efaa90036b4bce31c22c549cb24da38adb8c918a35acc",
+      "actual_sha256": "9e1dabd52a9d52a5563efaa90036b4bce31c22c549cb24da38adb8c918a35acc",
+      "actual_bytes": 1280,
+      "difference_count": 0,
+      "first_differences": []
+    },
+    {
+      "peer": 0,
+      "member": "title",
+      "address": "0x800ed760",
+      "bytes": 284,
+      "expected_sha256": "b5c78a856d9b67b4fba01bce817fbf9615a7a601da6f3b28b609fd0b7d2bb6ca",
+      "actual_sha256": "b5c78a856d9b67b4fba01bce817fbf9615a7a601da6f3b28b609fd0b7d2bb6ca",
+      "actual_bytes": 284,
+      "difference_count": 0,
+      "first_differences": []
+    },
+    {
+      "peer": 0,
+      "member": "title",
+      "address": "0x800f08fc",
+      "bytes": 44,
+      "expected_sha256": "e8bd0918ec537b5e03fafc72b446094ba7ce838cd46e930f96abc93e7f234396",
+      "actual_sha256": "e8bd0918ec537b5e03fafc72b446094ba7ce838cd46e930f96abc93e7f234396",
+      "actual_bytes": 44,
+      "difference_count": 0,
+      "first_differences": []
+    }
+  ],
+  "actual_seed": {
+    "receipt": {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-progression\\manifest-bound-c3c5bdb-earned-native-private-card-Save-local-reviewed.json",
+      "bytes": 11811,
+      "sha256": "aa2025d3ae861b10f192e6795fe502ae83a212c0dd43603e1e8c20da7bd3e653"
+    },
+    "source_card": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "dd5e0529a0dd5a41f25ea325a49c9a1c6b39aea22ba1a1096e162a5a0e52ed7b"
+    },
+    "actual_Save_report": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\qualification.json",
+      "bytes": 2402841,
+      "sha256": "581b1531cb986150b34732cdbc87cbe651c9e9a188ac65f5e6a2bab8dd679a19"
+    },
+    "native_file": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\ammo-hud\\actual-native-card-write-buffer.bin",
+      "bytes": 8192,
+      "sha256": "8452374ac43e0f2dd757a34c4b1f3188423040c9ff4df0c8e8147dfa95813045"
+    },
+    "source_compiled": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+    "source_sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+    "kind": "reviewed_earned_QA_native_card_seed_before_owned_startup",
+    "target_card": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "dd5e0529a0dd5a41f25ea325a49c9a1c6b39aea22ba1a1096e162a5a0e52ed7b"
+    },
+    "source_card_sha256_after_copy": "dd5e0529a0dd5a41f25ea325a49c9a1c6b39aea22ba1a1096e162a5a0e52ed7b",
+    "cards_before_seed": {},
+    "prelaunch_existing_cards": {
+      "saves\\card1.mcd": "dd5e0529a0dd5a41f25ea325a49c9a1c6b39aea22ba1a1096e162a5a0e52ed7b"
+    },
+    "recording_path": "ordinary_default_native_capture",
+    "fixture_or_execution_LOAD_authorized": false,
+    "limits": [
+      "Only reviewed own actually-earned QA card. No owner card or placeholder.",
+      "Existing parent process/image/source/manifest/host/recording/cleanup gates remain mandatory.",
+      "This copy is a native persisted-card prerequisite, not native cold Load success."
+    ]
+  },
+  "after_exit_card_preservation": {
+    "source_card": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "dd5e0529a0dd5a41f25ea325a49c9a1c6b39aea22ba1a1096e162a5a0e52ed7b"
+    },
+    "target_card": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "dd5e0529a0dd5a41f25ea325a49c9a1c6b39aea22ba1a1096e162a5a0e52ed7b"
+    },
+    "reviewed_source_card_unchanged": true,
+    "seeded_existing_private_target_unchanged": true
+  },
+  "recording": {
+    "status": "finalized_ordinary_native_capture_with_reviewed_earned_startup_card",
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "dd5e0529a0dd5a41f25ea325a49c9a1c6b39aea22ba1a1096e162a5a0e52ed7b"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+      "manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "finalized_capture_admitted": true,
+    "replay_admitted": false,
+    "independent_owner_inspection_reproduced": true
+  },
+  "artwork_review": {
+    "status": "bounded_native_Quit_title_roster_and_guest_menu_reviewed",
+    "viewed_images": 6,
+    "observed": "Actual two primary confirmation pages and title, normal X/Zero stage1 Amazon world, original Zero-owned menu and independent resumed guest motion/attack. No execution SAVE notice, broad scenery/palette/animation or native card UI artwork claim."
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\qualification.json",
+      "bytes": 81847530,
+      "sha256": "0c3c8ad608b224237ecee7ed5b86f34bf5d7915c8d2a80333f934c6160143e5b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v35-c3c5bdb\\candidate.json",
+      "bytes": 6854,
+      "sha256": "a176f8dd587317e6d0fe240c871265435d92098049848b0d42bba0804b1c0d64"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\candidate\\mmx6-runtime.exe",
+      "bytes": 27429376,
+      "sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\diagnostic-runner-executed-source.py",
+      "bytes": 9692,
+      "sha256": "53759b6209cae59ae88a95600eeabb22a291d7c7fc9f74ef8e38ef250de1b7f2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\runner-executed-source.py",
+      "bytes": 14080,
+      "sha256": "33d444955c1b7640131e292e35523b744df11cf08ad6de81db3362003229e17c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\native-card-seed-provenance.json",
+      "bytes": 2218,
+      "sha256": "013096d2993195026c6abb4328603d0c8248627221ca47bc11fda74183910db0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v35-native-card-cold-Load-reentry-v1-source-review.json",
+      "bytes": 3723,
+      "sha256": "4740f3d510cd4a0ae8e9cbf1f0bd5e50b7871e9d286e013bf5dffdde9467f3fd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-seed-parent-v1-source-pure-checks.json",
+      "bytes": 5722,
+      "sha256": "e5c8112629096430ca47964172035db195433ff8464b3735a81cb7412540e956"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\original-native-title-card-Load-source-v3.json",
+      "bytes": 8037,
+      "sha256": "57438861d73bb5e0c9085240627e38830ef8a19a7f25641cb4d866ab98682d4a"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-progression\\manifest-bound-c3c5bdb-earned-native-private-card-Save-local-reviewed.json",
+      "bytes": 11811,
+      "sha256": "aa2025d3ae861b10f192e6795fe502ae83a212c0dd43603e1e8c20da7bd3e653"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ammo-hud\\mmx6_native_card_seed_v1-executed-source.py",
+      "bytes": 12387,
+      "sha256": "da2765a08dea22a31f1a06efa3115bbf81319c68c45d7e814f07ad6864068ab8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ammo-hud\\mmx6_original_title_card_load_v1-executed-source.py",
+      "bytes": 24714,
+      "sha256": "9be355395f28568b4a2030ceee42a9282d739c44d45940289118af1760776801"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ammo-hud\\mmx6_reviewed_native_card_reentry_v1-executed-source.py",
+      "bytes": 5634,
+      "sha256": "ebc38b00473960ee40e16b9fd8c7ce6e70b8f1fb06d07225d3e95947cf9ffb20"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ammo-hud\\reviewed_native_card_reentry.py",
+      "bytes": 34448,
+      "sha256": "7c4bb4c7b41fb25f3f89646f351df01b034c314f5bc50d108dbbac0e77a8247f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ammo-hud\\reviewed_published_personal_menu.py",
+      "bytes": 19426,
+      "sha256": "730dd0cff5a335cec0e980366e95cc56c6dae3e923bb7e2c190c07280da76039"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ammo-hud\\native-final-quit-native-card\\actual-native-card-Load\\native-title-card-Load-component.json",
+      "bytes": 2445930,
+      "sha256": "7f624f1935b70d8e267ebdf731234f250e961fcbed65ef2a23149a071664f71e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ammo-hud\\native-final-quit-native-card\\peer-0-native-first-quit-page.png",
+      "bytes": 2074543,
+      "sha256": "91aba325a2bfb4eff47a5773878355f47bdaf84ba5b14da6898699f22851f6a4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ammo-hud\\native-final-quit-native-card\\peer-0-native-second-quit-page.png",
+      "bytes": 2074543,
+      "sha256": "8109f0740538110cacef04e6cd5a9ab5c5691d63771d4ca1f0b12ced1e3a2f67"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ammo-hud\\native-final-quit-native-card\\peer-0-native-title-after-final-quit.png",
+      "bytes": 2074543,
+      "sha256": "0134283ca7395fc43b6841665cd3378b009de8c33122ce90c03fb3d27799c69c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ammo-hud\\native-final-quit-native-card\\peer-0-native-reentered-gameplay.png",
+      "bytes": 2074543,
+      "sha256": "6870b25c540d1dd523a3b6ec57358fd47ade83f94f80a4ff45467a0c5c7dfe4d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ammo-hud\\native-final-quit-native-card\\personal-menu\\p2-peer-0-paused-present.png",
+      "bytes": 2074543,
+      "sha256": "d4611879baf88eb8a0a52a6f1e5aeb02746bc0d65f008dae74178a4f316a400f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ammo-hud\\native-final-quit-native-card\\personal-menu\\p2-peer-0-resumed-present.png",
+      "bytes": 2074543,
+      "sha256": "9fbba739e8c60af3c87a38ed91877eddeb7db567e3b84b98874f7c933dbe56b5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ordinary-recording\\settings.json",
+      "bytes": 10329,
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ordinary-recording\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ordinary-recording\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ordinary-recording\\inputs.jsonl",
+      "bytes": 6736380,
+      "sha256": "92a32010fb1fd43dd659139d9cfea1ed86d4dde83f3a6a03f2ddb3495d8381d2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ordinary-recording\\status.json",
+      "bytes": 160,
+      "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ordinary-recording\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "dd5e0529a0dd5a41f25ea325a49c9a1c6b39aea22ba1a1096e162a5a0e52ed7b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\ordinary-recording\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\earned-report-native-card-Save-v35-c3c5bdb-v1\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "dd5e0529a0dd5a41f25ea325a49c9a1c6b39aea22ba1a1096e162a5a0e52ed7b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-cold-Load-reentry-local-v35-c3c5bdb-v1\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "dd5e0529a0dd5a41f25ea325a49c9a1c6b39aea22ba1a1096e162a5a0e52ed7b"
+    }
+  ],
+  "limits": [
+    "LOCAL exact c3 intro-earned private-card cold Load/Continue component only; no new frozen comparison row or whole native-content case is promoted.",
+    "Original native report Save produced this QA card. A truthful exclusive copy is installed before process/recording startup. Source card remains unchanged and is a required retained QA deliverable.",
+    "No execution snapshot LOAD, fixture, campaign/outcome write, source-card overwrite or fabricated eligible CURRENT occurs in this run.",
+    "All source-imported campaign ranges match the actual selected slot after native export. Byte3 is a separate original global source; reserved38E/38F retain their before values. No blanket volatile-byte allowance or intermediate store atomicity claim.",
+    "The imported actual earned intro flag causes genuine story/map progression, followed by actual unit0 selection, fresh native roster and all11 guest menu/control checks.",
+    "Default ordinary cold-boot recording finalized with exact earned slot1 and authentic native blank slot2 initial images. No taint/refusal or replay success is claimed.",
+    "Paired card persistence, acquired weapons/armor/parts/techniques/souls/ranks/Reploids/Nightmare breadth and whole X6-077 remain unverified. All234+native full-burndown obligations continue."
+  ]
+}
