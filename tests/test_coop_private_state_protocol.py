@@ -81,12 +81,24 @@ def image(payload=None, *, compress=False, build=123, spu=None):
 
 
 class StateWireTests(unittest.TestCase):
+    def test_deferred_death_owner_is_checked_and_retained_after_origin_restore(self):
+        wire=bytearray(provider())
+        at=state.HOST_RESOURCE_BYTES+state.HOST_DEATH_ORIGINS_OFFSET
+        wire[at:at+2]=bytes((0,2))
+        parsed=state.parse_state_image(image(bytes(wire)))
+        core=bytes.fromhex(parsed['semantic_core_hex'])
+        self.assertEqual(core[state.HOST_DEATH_ORIGINS_OFFSET:state.HOST_DEATH_ORIGINS_OFFSET+2],bytes((0,2)))
+        for valid,owner in((0,3),(1,0),(2,2)):
+            wire[at:at+2]=bytes((valid,owner))
+            with self.subTest(valid=valid,owner=owner),self.assertRaisesRegex(DebugError,'invalid death effect owner'):
+                state.parse_state_image(image(bytes(wire)))
+
     def test_full_provider_offsets_bank_payload_and_native_history(self):
         parsed = state.parse_state_image(image(compress=True))
         self.assertEqual(parsed["publication_tick"], 10)
         self.assertEqual(parsed["bank_count"], 4)
         self.assertEqual(parsed["ui_bank_count"], 1)
-        self.assertEqual(len(bytes.fromhex(parsed["semantic_core_hex"])), 9550)
+        self.assertEqual(len(bytes.fromhex(parsed["semantic_core_hex"])), 9646)
         self.assertEqual(len(bytes.fromhex(parsed['resource_binding_hex'])),88)
         self.assertEqual(parsed['internal_wire_schema'],state.HOST_WIRE_SCHEMA)
         self.assertEqual(bytes.fromhex(parsed['zero_giga_backup_hex']),
@@ -110,7 +122,7 @@ class StateWireTests(unittest.TestCase):
             changed = bytearray(provider());struct.pack_into("<I", changed, offset, 2)
             with self.assertRaises(DebugError):
                 state.parse_state_image(image(changed))
-        for version in (1,2,3,4,state.HOST_WIRE_SCHEMA+1):
+        for version in (1,2,3,4,5,state.HOST_WIRE_SCHEMA+1):
             changed=bytearray(provider());struct.pack_into('<I',changed,4,version)
             with self.assertRaises(DebugError):state.parse_state_image(image(changed))
 

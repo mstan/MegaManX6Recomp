@@ -103,7 +103,7 @@ static int render_x_death, effect_call;
 /* Native shared112-byte effects outlive their creating player callback. */
 static uint8_t shared_effect_owners[96]; /* 0 unowned, 1 X, 2 Zero. */
 static int shared_fx_call,shared_fx_allocate_call;
-typedef struct { uint32_t x,y,assembly; uint8_t layer,valid; } DeathEffectOrigin;
+typedef struct { uint32_t x,y,assembly; uint8_t layer,valid,owner; } DeathEffectOrigin;
 static DeathEffectOrigin death_effect[96];
 typedef struct { uint32_t actor; uint8_t seat; } PickupOwner;
 static PickupOwner pickup_owners[128];
@@ -675,10 +675,12 @@ static uint32_t diagnostic_host_digest(void) {
         uint8_t bytes[4]; put32(bytes,fields[i]); HASH_BYTES(bytes,sizeof bytes);
     }
     for (size_t i=0;i<sizeof death_effect/sizeof death_effect[0];++i) {
-        uint8_t bytes[14];
-        put32(bytes,death_effect[i].x);put32(bytes+4,death_effect[i].y);
-        put32(bytes+8,death_effect[i].assembly);
-        bytes[12]=death_effect[i].layer;bytes[13]=death_effect[i].valid;
+        uint8_t bytes[15];
+        unsigned valid=death_effect[i].valid;
+        put32(bytes,valid?death_effect[i].x:0);put32(bytes+4,valid?death_effect[i].y:0);
+        put32(bytes+8,valid?death_effect[i].assembly:0);
+        bytes[12]=valid?death_effect[i].layer:0;bytes[13]=(uint8_t)valid;
+        bytes[14]=death_effect[i].owner;
         HASH_BYTES(bytes,sizeof bytes);
     }
     for (size_t i=0;i<sizeof pickup_owners/sizeof pickup_owners[0];++i) {
@@ -1568,6 +1570,18 @@ static int zero_icon_effect(uint32_t actor) {
     return owned && psx_mod_read_byte(actor) && offset<ASSET_SPACE &&
         psx_mod_read_word(actor+0x3C)==assembly+offset;
 }
+static int zero_death_effect(uint32_t actor) {
+    /* Native global FX11 resolves assembly word4 and remaps packed icon
+     * tiles (flags21). Its original origin is already retained at birth;
+     * its atlas/palette owner must also outlive the player callback. */
+    if(actor<0x800CD410u || actor>=0x800CF810u ||
+        (actor-0x800CD410u)%0x60u || !assembly)return 0;
+    unsigned slot=(actor-0x800CD410u)/0x60u;
+    uint32_t offset=psx_mod_read_word(assembly+4);
+    return death_effect[slot].owner==2 && psx_mod_read_byte(actor) &&
+        psx_mod_read_byte(actor+1)==0x11 && offset<ASSET_SPACE &&
+        psx_mod_read_word(actor+0x3C)==assembly+offset;
+}
 static uint16_t zero_atlas_effect_bank(uint16_t page,uint16_t clut,uint16_t tile,int menu) {
     /* Original type17 UI and type26/44 packed icon shapes share VRAM with X's
      * different PL00 art. Decode the original private atlas and the native
@@ -1709,7 +1723,7 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
     }
     /* Common effects use the stage's already resident textures. Only native
      * Zero frames need the retained host bank instead of X's texture slot. */
-    int ui=zero_ui_effect(actor),icons=zero_icon_effect(actor);
+    int ui=zero_ui_effect(actor),icons=zero_icon_effect(actor)||zero_death_effect(actor);
     if (!ui && !icons && !render_x_death && (table<assets || table-assets>=compressed_size)) {
         giga_packet_trace("native-only",actor);return;
     }
@@ -1802,7 +1816,7 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
     uint32_t actor=cpu->gpr[4];
     if(world_render || !enrolled || failed || psx_mod_read_byte(PLAY)!=0x0A ||
         !psx_mod_texture_banks_supported())return 0;
-    int retained=zero_ui_effect(actor)||zero_icon_effect(actor);
+    int retained=zero_ui_effect(actor)||zero_icon_effect(actor)||zero_death_effect(actor);
     if (!zero_world && !retained) return 0;
     int shot=actor>=0x800950A0 && actor<0x800964A0 && !((actor-0x800950A0)%0xA0);
     int trail=actor>=0x800972F8 && actor<0x80097418 && !((actor-0x800972F8)%0x60);
@@ -1867,12 +1881,14 @@ static int death_effect_allocate(CPUState *cpu, uint32_t address) {
     effect_call=0;
     if (actor>=0x800CD410 && actor<0x800CF810 && (actor-0x800CD410)%0x60==0) {
         DeathEffectOrigin *o=&death_effect[(actor-0x800CD410)/0x60];
-        o->valid=0;
+        /* Every allocation invalidates the preceding occupant's ownership,
+         * including unrelated effects reusing a retired FX11 slot. */
+        o->valid=0;o->owner=0;
         if (caller==0x8003DB0C || caller==0x8003DB8C) {
             o->x=psx_mod_read_word(PLAYER+8); o->y=psx_mod_read_word(PLAYER+12);
             o->layer=psx_mod_read_byte(PLAYER+0x14);
             o->assembly=psx_mod_read_word(SCRATCH+0x1C);
-            o->valid=1;
+            o->valid=1;o->owner=(uint8_t)(psx_mod_read_byte(PLAYER+2)?2:1);
         }
     }
     cpu->gpr[2]=actor;

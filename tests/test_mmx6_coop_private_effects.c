@@ -27,6 +27,7 @@ static unsigned shared_probe,shared_probe_seat,shared_probe_delete,shared_probe_
 static unsigned icon_packet_probe;
 static unsigned render_replacement_probe;
 static unsigned working_palette_probe,working_palette_probe_calls;
+static unsigned death_packet_probe,death_origin_probe;
 static uint16_t pad_buttons=0xFFFF;
 static const unsigned resource_offsets[7]={0x14,0x1C,0x24,0x28,0x38,0x3C,0xA8};
 static uint8_t *memory(uint32_t a){
@@ -129,7 +130,12 @@ static void native_draw(uint32_t actor){
     CHECK(at>=arena && at+40<=arena+40000 && mode==arena+MODES_AT+(at-arena)/5);
     uint32_t q[10]={0x09000000u|((mode+8)&0xFFFFFFu),0x2C808080u,0x0014000Au,0,0x0014001Au,0x00000010u,0x0024000Au,0x00001000u,0x0024001Au,0x00001010u};
     q[3]=(uint32_t)psx_mod_read_half(actor+0x42)<<16;
-    if(zero_ui_effect(actor)) {
+    if(death_packet_probe && actor==0x800CD410u) {
+        /* Original unflipped FX11 frame113 uses page27/UV E0,F0 and CLUT7802.
+         * Keep this external packet independent of the ownership predicate. */
+        q[1]=0x7D000000u;q[3]|=0xF0E0u;
+        memset(q+4,0,6*sizeof *q);
+    } else if(zero_ui_effect(actor)) {
         q[1]=0x7D000000u;q[3]|=0x5040u;
         memset(q+4,0,6*sizeof *q);
     } else if(icon_packet_probe && actor>=0x800950A0u && actor<0x800964A0u) {
@@ -147,7 +153,7 @@ static void native_draw(uint32_t actor){
     }
     for(unsigned i=0;i<10;++i)psx_mod_write_word(at+i*4,q[i]);
     psx_mod_write_word(mode,0x01000000u|(at&0xFFFFFFu));
-    psx_mod_write_word(mode+4,zero_ui_effect(actor)?0xE100003Eu:
+    psx_mod_write_word(mode+4,death_packet_probe && actor==0x800CD410u?0xE1000027u:zero_ui_effect(actor)?0xE100003Eu:
         icon_packet_probe==2 && actor>=0x800950A0u && actor<0x800964A0u?0xE100002Eu:0xE1000040u);
     unsigned priority=psx_mod_read_byte(actor+0x16);
     uint32_t tail=0x8008EB08u+(psx_mod_read_word(SCRATCH)&1u)*128+(priority>>4)*32+(priority&7)*4;
@@ -159,6 +165,15 @@ static void native_draw(uint32_t actor){
 }
 void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     (void)ret;CHECK(call_count<512 && state_track.count);calls[call_count++]=address;
+    if(death_origin_probe && address==0x8002C530u){cpu->gpr[2]=0x800CD410u;return;}
+    if(death_origin_probe && address==0x80047E34u){
+        CHECK(psx_mod_read_word(PLAYER+8)==400u*65536u && psx_mod_read_word(PLAYER+12)==1000u*65536u);
+        CHECK(psx_mod_read_word(SCRATCH+0x1C)==assembly);
+        uint32_t actor=cpu->gpr[4];
+        psx_mod_write_byte(actor,0x21);psx_mod_write_byte(actor+1,0x11);psx_mod_write_byte(actor+3,1);
+        psx_mod_write_word(actor+0x3C,assembly+psx_mod_read_word(assembly+4));
+        psx_mod_write_half(actor+0x42,0x7802);cpu->gpr[2]=0x8899;return;
+    }
     if(menu_vram_probe && address==0x80066150u)return;
 #ifdef MMX6_TEST_DISPATCH_CALL
     if(MMX6_TEST_DISPATCH_CALL(cpu,address,ret))return;
@@ -255,6 +270,7 @@ static void setup(CPUState *cpu){
     shared_fx_call=shared_fx_allocate_call=0;memset(shared_effect_owners,0,sizeof shared_effect_owners);
     shared_probe=shared_probe_seat=shared_probe_delete=shared_probe_calls=0;
     icon_packet_probe=render_replacement_probe=0;
+    death_packet_probe=death_origin_probe=effect_call=0;memset(death_effect,0,sizeof death_effect);
     working_palette_probe=working_palette_probe_calls=0;working_palette_assets_ready=0;
     ready=enrolled=stage_call=1;pause_owner=-1;zero_menu_loaded=0;join_phase=0;previous_input=p2_edges=0;p2_start_previous=0;
     texture_support=1;marker_override=2;terminal_player=stage_driver=0;call_count=draw_count=tag_count=native_budget=0;
@@ -619,6 +635,45 @@ static void private_giga_shots_retain_zero_source(void){
         project_player(&resident);render_replacement_probe=0;clear_banks();
     }
 }
+static void deferred_death_effect_retains_zero_source(void){
+    CPUState cpu;setup(&cpu);const uint32_t actor=0x800CD410u;
+    PlayerContext resident;capture_player(&resident);
+    psx_mod_write_word(assembly+4,0x200);
+    project_player(&p2);psx_mod_write_word(SCRATCH+0x1C,assembly);
+    death_origin_probe=1;cpu.gpr[31]=0x8003DB0Cu;
+    CHECK(death_effect_allocate(&cpu,0x8002C530u) && cpu.gpr[2]==actor);
+    CHECK(death_effect[0].valid && death_effect[0].owner==2);
+    project_player(&resident);psx_mod_write_word(SCRATCH+0x1C,0x80030000u);
+    cpu.gpr[4]=actor;CHECK(death_effect_init(&cpu,0x80047E34u));
+    CHECK(cpu.gpr[2]==0x8899 && !death_effect[0].valid && death_effect[0].owner==2);
+    CHECK(psx_mod_read_word(PLAYER+8)==144u*65536u && psx_mod_read_word(SCRATCH+0x1C)==0x80030000u);
+    CHECK(zero_death_effect(actor) && !zero_death_effect(actor+1) && !zero_death_effect(0x800CF810u));
+    life.status[1]=MMX6_COOP_FALLEN; /* Burst outlives Zero's body callback. */
+    memset(test_vram,0xBB,sizeof test_vram);
+    for(unsigned y=240;y<256;++y)for(unsigned x=504;x<508;++x)test_zero_ui[y*1024+x]=0x1111;
+    psx_mod_write_half(active_palette+2*32+2,0x4321);
+    death_packet_probe=1;
+    CHECK(render_survivor(&cpu,0x800232D4u));
+    CHECK(!failed && draw_count==1 && bank_count==1 && bank_first[0]==0x4321);
+    CHECK(banks[0].tile==0xF0E0u && world_packets==packets+40 && !world_render && !state_track.count);
+    uint32_t expanded=packets+PLAYER_PACKET_BYTES;
+    CHECK(psx_mod_read_word(expanded+4)==0x35000000u); /* Original raw texture command retained. */
+    CHECK(psx_mod_read_word(SCRATCH+0x100)==0x800A0000u);
+    uint16_t before=banks[0].id;
+    psx_mod_write_half(active_palette+2*32+2,0x5678);
+    CHECK(render_survivor(&cpu,0x800232D4u) && bank_count==2 && banks[1].id!=before && bank_first[1]==0x5678);
+    CHECK(bank_first[0]==0x4321); /* Prior packets keep immutable colors. */
+    death_effect[0].owner=1;CHECK(!zero_death_effect(actor) && !render_survivor(&cpu,0x800232D4u));
+    death_effect[0].owner=2;psx_mod_write_byte(actor+1,0x12);CHECK(!zero_death_effect(actor));
+    psx_mod_write_byte(actor+1,0x11);psx_mod_write_word(actor+0x3C,assembly);CHECK(!zero_death_effect(actor));
+    psx_mod_write_word(actor+0x3C,assembly+0x200);CHECK(zero_death_effect(actor));
+    cpu.gpr[31]=0x80020000u;
+    CHECK(death_effect_allocate(&cpu,0x8002C530u) && !death_effect[0].owner && !death_effect[0].valid);
+    CHECK(!zero_death_effect(actor)); /* Unrelated reuse never inherits Zero. */
+    cpu.gpr[31]=0x8003DB8Cu;
+    CHECK(death_effect_allocate(&cpu,0x8002C530u) && death_effect[0].owner==1);
+    death_origin_probe=death_packet_probe=0;
+}
 static void native_working_palette_class_and_load_events(void) {
     CPUState cpu;setup(&cpu);
     const unsigned member_bytes=2048+0x4000,dat_bytes=2048+2*member_bytes;
@@ -798,6 +853,7 @@ int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     arrival_draw_precedes_stage_callback();clear_banks();
     deferred_icon_effect_retains_zero_source();clear_banks();
     private_giga_shots_retain_zero_source();
+    deferred_death_effect_retains_zero_source();clear_banks();
     native_working_palette_class_and_load_events();
     yammar_native_upload_coordinates();
     puts("private native effects actual-plugin call order, gates, lifetime projection and retained packet ownership PASS");return 0;}

@@ -25,16 +25,18 @@ from coop_debug import (BODY_BYTES, DIAGNOSTIC_ADDRESS, DIAGNOSTIC_BYTES,
 
 
 # Read-only, current-build wire inspection, not an alternate state loader.
-# runtime/include/boot_state.h + runtime/src/mod_snapshot.c; internal game schema5 is
+# runtime/include/boot_state.h + runtime/src/mod_snapshot.c; internal game schema6 is
 # src/mods/mmx6_coop_snapshot.inc. Reject future layouts instead of guessing.
 MAX_STATE_BYTES = 64 * 1024 * 1024
-HOST_WIRE_SCHEMA = 5
+HOST_WIRE_SCHEMA = 6
 HOST_RESOURCE_BYTES = 88
 HOST_PLAYER_BYTES = 0x158 + 0x1400 + 0x120 + 0xF0
 HOST_AUDIO_PRIORITIES_OFFSET = HOST_PLAYER_BYTES + 25 + 2*0x158 + 0x205
 HOST_GIGA_BACKUP_BYTES = 64
 HOST_SHARED_EFFECT_OWNER_BYTES = 96
-HOST_GIGA_BACKUP_OFFSET = HOST_AUDIO_PRIORITIES_OFFSET + 24 + 128*5 + 80*2 + 96*14
+HOST_DEATH_ORIGINS_OFFSET = HOST_AUDIO_PRIORITIES_OFFSET + 24 + 128*5 + 80*2
+HOST_DEATH_ORIGIN_STRIDE = 15
+HOST_GIGA_BACKUP_OFFSET = HOST_DEATH_ORIGINS_OFFSET + 96*HOST_DEATH_ORIGIN_STRIDE
 HOST_SEMANTIC_BYTES = HOST_GIGA_BACKUP_OFFSET + HOST_GIGA_BACKUP_BYTES + HOST_SHARED_EFFECT_OWNER_BYTES
 HOST_CORE_END = HOST_RESOURCE_BYTES + HOST_SEMANTIC_BYTES
 HOST_CACHE_OFFSET = HOST_CORE_END + 10  # publication count + presentation tail
@@ -110,6 +112,10 @@ def parse_state_image(data):
             struct.unpack_from("<II", payload) == (0x53503658, HOST_WIRE_SCHEMA), "unsupported X6 provider schema")
     require(all(v <= 2 for v in payload[HOST_CORE_END-HOST_SHARED_EFFECT_OWNER_BYTES:HOST_CORE_END]),
             "invalid shared effect owner")
+    for index in range(96):
+        start=HOST_RESOURCE_BYTES+HOST_DEATH_ORIGINS_OFFSET+index*HOST_DEATH_ORIGIN_STRIDE
+        valid,owner=payload[start:start+2]
+        require(valid<=1 and owner<=2 and (not valid or owner), "invalid death effect owner")
     cache_at = HOST_CACHE_OFFSET
     count = struct.unpack_from("<I", payload, cache_at)[0];cache_at += 4
     require(count <= 4096, "unbounded retained sprite count")

@@ -1,5 +1,5 @@
 /* Executable-owned host state, included after the native implementation.
- * Schema 5 is build-specific. No old-state migration or host pointer wire. */
+ * Schema 6 is build-specific. No old-state migration or host pointer wire. */
 enum { STATE_COUNT,STATE_WRITE,STATE_READ,STATE_HASH,STATE_MAX_BYTES=16*1024*1024 };
 typedef struct {
     unsigned mode,ok;
@@ -133,11 +133,12 @@ static void state_core(StateIO *io,HostState *s) {
     for(unsigned i=0;i<96;++i) {
         DeathEffectOrigin *o=&s->deaths[i];
         unsigned valid=state_integer(io,o->valid,1,1);o->valid=(uint8_t)valid;
+        o->owner=(uint8_t)state_integer(io,o->owner,1,2);
         o->x=state_integer(io,valid?o->x:0,4,UINT32_MAX);
         o->y=state_integer(io,valid?o->y:0,4,UINT32_MAX);
         o->assembly=state_integer(io,valid?o->assembly:0,4,UINT32_MAX);
         o->layer=(uint8_t)state_integer(io,valid?o->layer:0,1,255);
-        if(valid && !state_assembly(o->assembly))io->ok=0;
+        if(valid && (!o->owner || !state_assembly(o->assembly)))io->ok=0;
     }
     if(!s->owner && s->scene_phase)io->ok=0;
     if(s->lifecycle.rejoin_pending &&
@@ -217,7 +218,7 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    state_fixed(s,0x53503658u);state_fixed(s,5);
+    state_fixed(s,0x53503658u);state_fixed(s,6);
     const uint32_t handles[]={assets,assembly,palette_source,active_palette,packets,diagnostic,menu_memory,menu_assembly,hud_packets,
         jump_audio_banks[0].guest,jump_audio_banks[1].guest};
     for(unsigned i=0;i<sizeof handles/sizeof handles[0];++i)state_fixed(s,handles[i]);
