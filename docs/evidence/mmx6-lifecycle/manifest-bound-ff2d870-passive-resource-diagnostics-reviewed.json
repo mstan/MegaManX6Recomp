@@ -1,0 +1,499 @@
+{
+  "schema": 1,
+  "kind": "root_reviewed_actual_passive_session_resource_providers_compiled_and_native_RPC_transport",
+  "reviewed_at_utc": "2026-10-25T11:51:19.298080+00:00",
+  "issue": "beads-eio.3.405",
+  "source_commit": "ff2d8701d3976f71b2447c3442d6c0f179808003",
+  "sdk_commit": "4be6621ee61480b615a25bfdbca5f3f76d43ab7e",
+  "candidate_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\candidate.json",
+    "bytes": 14366,
+    "sha256": "43eaca949faa039c247146b9ddc568d6d0d5e7436fdfac311964495288887b8e"
+  },
+  "image_sha256": "617e1bb8934d516e3344b297ac0e0cb9c6fa56bbfd4630d15820c9c714c18fef",
+  "declared_manifest_sha256": "1f8899cec1bd451df912a16dac9afb5666ac1bc83a29830dc2fd33ba76e284d0",
+  "production_image_sha256": "aec5d4678ac9b4fd9e1907b7cd261517019d4b1f5274e7b7f2d064b3eeeea974",
+  "production_manifest_sha256": "8e0c919a5a93c039ebb0cff09ec77239498e8025acf5d26423ee9763a2cf4c01",
+  "compiled_tests": {
+    "SDK_focused": 13,
+    "debug": 118,
+    "production": 118,
+    "total": 249,
+    "skips": 0
+  },
+  "source_checks": 28,
+  "compiled_contracts": [
+    "Three actual providers return direct counters without allocations, resolver/render/device callbacks or RAM/layout mutation.",
+    "Service API composition and production/link-independent UNAVAILABLE fallback pass.",
+    "Actual game session fixture still passes24 activations, resource recovery and current-build snapshot roundtrips in both variants.",
+    "Both complete game suites and six exact-exit86 peripheral rejections per build pass."
+  ],
+  "source_inverse": [
+    {
+      "relative": "runtime/src/memory.c",
+      "current_file": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-session-metrics-v41\\runtime\\src\\memory.c",
+        "bytes": 119019,
+        "sha256": "0ee8d142683be87bfbfb32fa49086b7ae708db9f3388494a32e88c4d0bb9f9b4"
+      },
+      "old_git_source_commit": "3d6bacdb912bf5ddd16c3abc5f4581c010f055c7",
+      "old_LF_source_sha256": "facef7336b4d9f095dc39940a6325de3faf0d2d9de4469d07ffe22809398b4cd",
+      "added_getter_LF_sha256": "b6df6ec1e3442a626d0c0fe237e45150d4241e6e6940d8d5dabc3eb2869b2048",
+      "exact_LF_source_inverse_after_removing_one_include_and_one_getter": true,
+      "existing_allocator_reset_and_snapshot_function_text_unchanged": true
+    },
+    {
+      "relative": "runtime/src/mod_texture_banks.c",
+      "current_file": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-session-metrics-v41\\runtime\\src\\mod_texture_banks.c",
+        "bytes": 4906,
+        "sha256": "0601115be3e4584220cccdc0a0ff7cf34de9057d77280785534615de043f7726"
+      },
+      "old_git_source_commit": "3d6bacdb912bf5ddd16c3abc5f4581c010f055c7",
+      "old_LF_source_sha256": "d1eca2d9ee961503370c72cdc41129e3ebd13373b655f809f8dfa1e3fbb59130",
+      "added_getter_LF_sha256": "0da978dc68a97b25c7f3fb212479307df56d83d5404eee00b248af9b6acba98c",
+      "exact_LF_source_inverse_after_removing_one_include_and_one_getter": true,
+      "existing_allocator_reset_and_snapshot_function_text_unchanged": true
+    },
+    {
+      "relative": "runtime/src/mod_function_replacements.c",
+      "current_file": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-session-metrics-v41\\runtime\\src\\mod_function_replacements.c",
+        "bytes": 2413,
+        "sha256": "d0d0971dc63d594787c78b39cf7992e6eaab5aef4752796f11ce166a3f7fbae3"
+      },
+      "old_git_source_commit": "3d6bacdb912bf5ddd16c3abc5f4581c010f055c7",
+      "old_LF_source_sha256": "f0ecb0b9cb2450855f3983963a14244dac1ace196c4ba78a6070af65c8dfffc5",
+      "added_getter_LF_sha256": "5023a139d5db8343c0d9f56e946a24c4763409e022ab9c542c9efd239321f622",
+      "exact_LF_source_inverse_after_removing_one_include_and_one_getter": true,
+      "existing_allocator_reset_and_snapshot_function_text_unchanged": true
+    }
+  ],
+  "native_component": {
+    "parent_checks": {
+      "exact_image_manifest_declared_sources_originals": true,
+      "native_resource_and_window_observations_complete": true,
+      "default_recording_taint_retained_and_replay_refused": true,
+      "owned_cleanup_private_cards": true
+    },
+    "checks": {
+      "actual_service_available_schema1": true,
+      "actual_capacity_used_snapshot_and_layout_consistent": true,
+      "actual_resident_banks_and_packet_and_replacement_counts_present": true,
+      "six_raw_metrics_responses_retained": true,
+      "original_CP0_setup_and_separate_forward_publications": true
+    },
+    "actual_RPC_count": 6,
+    "guest_used_bytes": 548864,
+    "guest_capacity_bytes": 1048576,
+    "DMA_used_bytes": 513024,
+    "DMA_capacity_bytes": 8388608,
+    "snapshot_bytes": 1061904,
+    "layout_cookie": 1080537090,
+    "registered_packet_arenas": 2,
+    "registered_packet_range_bytes": 327680,
+    "resident_CPU_banks_before": 186,
+    "resident_CPU_bank_bytes_before": 225792,
+    "resident_CPU_banks_after_CP0": 187,
+    "resident_CPU_bank_bytes_after_CP0": 226304,
+    "replacement_count": 33,
+    "actual_replacement_depths": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "observation_scope": "Each RPC samples current emulation-thread SDK counters; private publications are separate later reads.",
+    "owned_graceful_exit0": true,
+    "all_four_private_recorded_cards_unchanged": true,
+    "original_CP0_setup_disclosed": true,
+    "default_fixture_taint_and_strict_refusals_retained": true
+  },
+  "prior_failure": {
+    "retained": "v41-production-policy-long-path-failure-v1.json",
+    "actual_sidecar_path_chars": 261,
+    "correction": "CMake test output path only shortened; runtime recorder still safely refuses file creation failure."
+  },
+  "native_same_PID_launcher_activation_and_rematch": "unverified",
+  "F39_LOCAL": "unverified",
+  "F39_NETPLAY": "unverified",
+  "comparison_admissions": 0,
+  "native_content_admissions": 0,
+  "limits": [
+    "One actual LOCAL process proves RPC transport and real current counters; no launcher reset/rematch/resource growth verdict.",
+    "The one-bank increase after real checkpoint progression is observed; it is not a leak or ownership diagnosis.",
+    "Replacement depth is actual dynamic provider depth, not a return/seat/current-body ownership claim.",
+    "Counts are outside guest state, snapshots, digests and compatibility identity. No replay/rollback/state/paired/art pass.",
+    "Windows is the native tested host. Production and portable fallback are compiled fixture evidence, not other-host runtime qualification."
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\candidate.json",
+      "bytes": 14366,
+      "sha256": "43eaca949faa039c247146b9ddc568d6d0d5e7436fdfac311964495288887b8e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v41-passive-resource-components-v1\\debug-ctest.log",
+      "bytes": 35574,
+      "sha256": "f95d50bda1d94b3d40bd16c1fa54b2a8a6377c0a1b289138635b5b56ac3afcdb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v41-passive-resource-components-v1\\debug-actual-test-output.log",
+      "bytes": 134533,
+      "sha256": "fa738ac1163c182d21ba043ac9e9096dc7012924bafd7b582aa4fbca97223b84"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v41-passive-resource-components-v1\\debug-session_resources-debug.exe",
+      "bytes": 230912,
+      "sha256": "d8ec4f2496dc2d667bd94865c76c88142ec4c639f3f9a2f09d85763cdbb9facc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v41-passive-resource-components-v1\\debug-native_context-debug.exe",
+      "bytes": 102400,
+      "sha256": "4e25ca75b699d8d6c1dbca402f51cf5c680f9f8aa6c6ee5c66dac339c43d6afe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v41-passive-resource-components-v1\\debug-native_context_snapshot-debug.exe",
+      "bytes": 118272,
+      "sha256": "43d76183110f38f9b346498bba5648569d5600254c26134164e9d47863ff04c9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v41-passive-resource-components-v1\\debug-session_resources-production.exe",
+      "bytes": 224256,
+      "sha256": "00334c00283432b5b9bc0ba24b045f30872d6ec4b10460316e8b398b79d12059"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v41-passive-resource-components-v1\\debug-native_context-production.exe",
+      "bytes": 93184,
+      "sha256": "42ee365119b08659acf598a9d47cf2270d31a92807bf4316aebeec7a94cf9437"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v41-passive-resource-components-v1\\debug-native_context_snapshot-production.exe",
+      "bytes": 115712,
+      "sha256": "9cd8d601bc1e105523af42b3c2bbec51209886d4e8f1602cc8b368d49da4c1cc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v41-passive-resource-components-v1\\production-ctest.log",
+      "bytes": 35584,
+      "sha256": "d06462bc766df0e1a0d8b81803b37feec9b72d3cddf351927c239cdd1d6d4cb5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v41-passive-resource-components-v1\\production-actual-test-output.log",
+      "bytes": 135498,
+      "sha256": "398791c9f755c2a1f912f63c443172923ed16bfb00aaa2ff832307bfe7d79b23"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v41-passive-resource-components-v1\\production-session_resources-debug.exe",
+      "bytes": 230912,
+      "sha256": "a7bab1c936b9957f9a2ba712f3fa0959645ec568e1292cd21f02ce91800297ea"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v41-passive-resource-components-v1\\production-native_context-debug.exe",
+      "bytes": 102400,
+      "sha256": "dbe1f960865180b3e9c9abeb9024e432cab383fc056809fa800fee1122a12712"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v41-passive-resource-components-v1\\production-native_context_snapshot-debug.exe",
+      "bytes": 118272,
+      "sha256": "2bcb628c5ac16eaa54e9c1cfc45ac003cac1cf826a43499d917727ae7913740d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v41-passive-resource-components-v1\\production-session_resources-production.exe",
+      "bytes": 224256,
+      "sha256": "eb5677645912f78c1ddfaf88f81a60ec641bfa4997269136c0ab6bdb682f39ab"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v41-passive-resource-components-v1\\production-native_context-production.exe",
+      "bytes": 93184,
+      "sha256": "316d3d08f87ea9419090e0549a807911b3b722a088820bc3fc9bd8c8ab9bf429"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v41-passive-resource-components-v1\\production-native_context_snapshot-production.exe",
+      "bytes": 115712,
+      "sha256": "30b37ca09708b494c18e5de183cad98e7c3f9dcccee9b0374859a01c77a5f047"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v41-passive-resource-components-v1\\SDK-ctest.log",
+      "bytes": 3878,
+      "sha256": "92c39768f3e59271faedc5fac0a6fd5eacfd8f29545c40d8a0907ffeb0e4e6ad"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v41-passive-resource-components-v1\\SDK-actual-test-output.log",
+      "bytes": 12947,
+      "sha256": "ba878152d18a68160a75e366be3bd8e5fb97b43d03d24bf1ca9d09aa82d01515"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\debug-configure.log",
+      "bytes": 6284,
+      "sha256": "fa00fe1acbb9de11f39acc000377b2c7d0ee5a28c5804d230f8db5e0591f86cc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\debug-build.log",
+      "bytes": 31530,
+      "sha256": "0f380b0b46e454a98744c81f8cfb6e5b585a44a1e722e2ede80411cde30ec2b0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\debug-ctest.log",
+      "bytes": 35574,
+      "sha256": "f95d50bda1d94b3d40bd16c1fa54b2a8a6377c0a1b289138635b5b56ac3afcdb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\debug-CMakeCache.txt",
+      "bytes": 38172,
+      "sha256": "fb06e7ec384d9831d3050bbbd980cc9d5ad5c777ff000ad1383aacc1ac85894b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\production-configure.log",
+      "bytes": 6198,
+      "sha256": "1afe7468c91a6f607e8af655518b3e6977d28b913af7f2a27a06030c1e7ee8ea"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\production-build.log",
+      "bytes": 30854,
+      "sha256": "912dfc8ec7f45746cb68783310ece15b26d155c196bb458e96c9437c251fbe74"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\production-ctest.log",
+      "bytes": 35584,
+      "sha256": "d06462bc766df0e1a0d8b81803b37feec9b72d3cddf351927c239cdd1d6d4cb5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\production-CMakeCache.txt",
+      "bytes": 38306,
+      "sha256": "37a633ba4fb4c5cdf18b075bc593f33efb8e89d496a7bfdcbdd9140f7ae7103d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\sdk-configure.log",
+      "bytes": 10656,
+      "sha256": "957dae9de6dcda6d2c781b322d8abb3ab651363f5bd32f25c1f8ffd0eef1cc63"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\sdk-build.log",
+      "bytes": 3054,
+      "sha256": "3780c7f2368cee0854e3fe2c5a7cb5fdfb30b6a3b152bff2ba31a8c9c0928d13"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\sdk-ctest.log",
+      "bytes": 3878,
+      "sha256": "92c39768f3e59271faedc5fac0a6fd5eacfd8f29545c40d8a0907ffeb0e4e6ad"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\sdk-mod_memory_snapshot_test.exe",
+      "bytes": 96256,
+      "sha256": "0e81452b3285054309035881906238bd26d20353215b9d4ef7a3783181df80cb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\sdk-mod_texture_banks_test.exe",
+      "bytes": 94720,
+      "sha256": "866655749661606e25aef70f93b7411bdc40921f56d12e48862dafd9285c5013"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\sdk-mod_function_replacements_test.exe",
+      "bytes": 93184,
+      "sha256": "67fd36ae5dccf8be511a7a1e9d92943d50de865f9d3795c0cd5594616dc1abec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\sdk-mod_resource_stats_service_test.exe",
+      "bytes": 87552,
+      "sha256": "bfcebd5d94df3963e0ec0f14d22727e111a1dff92ce28e09efaa63b43d0404c5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\sdk-mod_resource_stats_production_test.exe",
+      "bytes": 87552,
+      "sha256": "739eada1b699d890fa93bb2ab2fc1cb6196432dcb21e4c4d9aa6da446ede9ec0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\sdk-mod_resource_stats_fallback_test.exe",
+      "bytes": 87552,
+      "sha256": "739eada1b699d890fa93bb2ab2fc1cb6196432dcb21e4c4d9aa6da446ede9ec0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\sdk-debug_native_entry_context_service_test.exe",
+      "bytes": 97792,
+      "sha256": "9061f9fcff96a1eacb0d4430042c9e1380eec2cd456987fc7eddf0012bd7c533"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\sdk-debug_native_entry_context_production_test.exe",
+      "bytes": 91136,
+      "sha256": "5f3fd9623822cc1a4557f37d4e30221cd7bcfb0cf474af5996d481e5e77a9a2f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\sdk-debug_native_entry_context_fallback_test.exe",
+      "bytes": 91136,
+      "sha256": "ebe5add12e9891520abaa5806e24830e9aaaf45effa7996c2a3950da170c4884"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v41-ff2d870\\production-mmx6-runtime.exe",
+      "bytes": 28172288,
+      "sha256": "aec5d4678ac9b4fd9e1907b7cd261517019d4b1f5274e7b7f2d064b3eeeea974"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\freeze-v41-session-metrics-game-v2.py",
+      "bytes": 9825,
+      "sha256": "2fdccd717196595d23071dba39ba4e067658ea776297c57aafdc33a366dcd2a2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\prepare-v41-session-metrics-game-build-v2.py",
+      "bytes": 4155,
+      "sha256": "ccfc68140ce4313ef6f02ffe7e5ccbacf85b2ffc1ab6e9ca4eb4a33b24ee0396"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v41-session-metrics-game-v2.ps1",
+      "bytes": 1975,
+      "sha256": "88ef7ac1f85b237fabc58c36de3235d54646caf38abf54b42dc4ac2b04d3f312"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v41-session-metrics-sdk-v3.ps1",
+      "bytes": 1843,
+      "sha256": "96decd5092f562293d50e087782c6581dfec084c91252c6f03f5cd7cc12fb36b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-F39-actual-session-red-v6.log",
+      "bytes": 2770,
+      "sha256": "9eb944a9502329034f09061bed3f1483abaf4fec578e712eecac36ef4fc50ac6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v41-session-metrics-game-v1-production.log",
+      "bytes": 37610,
+      "sha256": "624d10265888bfd37cf9dc846269b38985fdee93a58bb60b4e3aaaf0e629b038"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v41-production-policy-long-path-failure-v1.json",
+      "bytes": 6551,
+      "sha256": "f947b6471f528470e391d40bb8ac5cc9db44c95fb7a853bb766a360bd7a7f1dc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v41-game-v2-F39-source-audit.log",
+      "bytes": 1325,
+      "sha256": "efca80267ee07e357346a92bb3b11ab8c24870db63b31ccb857b9c64c24ee042"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v41-game-v2-game-context-source-audit.log",
+      "bytes": 1358,
+      "sha256": "745cc22b92a1d5b32b6dc6611396472f37fa9743392ea7d37a4563e4b61ce146"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v41-game-v2-SDK-context-source-audit.log",
+      "bytes": 1334,
+      "sha256": "550895665a28fee198d3347be4ce2773a41456b3ca740badec8c0cdac87ba7a5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-session-metrics-v41\\runtime\\src\\memory.c",
+      "bytes": 119019,
+      "sha256": "0ee8d142683be87bfbfb32fa49086b7ae708db9f3388494a32e88c4d0bb9f9b4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-session-metrics-v41\\runtime\\src\\mod_texture_banks.c",
+      "bytes": 4906,
+      "sha256": "0601115be3e4584220cccdc0a0ff7cf34de9057d77280785534615de043f7726"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-session-metrics-v41\\runtime\\src\\mod_function_replacements.c",
+      "bytes": 2413,
+      "sha256": "d0d0971dc63d594787c78b39cf7992e6eaab5aef4752796f11ce166a3f7fbae3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\session-metrics-native-local-v41-ff2d870-v1\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\session-metrics-native-local-v41-ff2d870-v1\\candidate\\saves\\card2.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\session-metrics-native-local-v41-ff2d870-v1\\candidate\\saves\\input-recordings\\session-1792928730506451-1-0\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\session-metrics-native-local-v41-ff2d870-v1\\candidate\\saves\\input-recordings\\session-1792928730506451-1-0\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\session-metrics-native-local-v41-ff2d870-v1\\recording-rejection\\settings.json",
+      "bytes": 10329,
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\session-metrics-native-local-v41-ff2d870-v1\\recording-rejection\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\session-metrics-native-local-v41-ff2d870-v1\\recording-rejection\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\session-metrics-native-local-v41-ff2d870-v1\\recording-rejection\\inputs.jsonl",
+      "bytes": 761738,
+      "sha256": "bae4a5a3a7d52ad2f1f57440d5a6310dd40034e82ffb7d0fe9c768690a5a6984"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\session-metrics-native-local-v41-ff2d870-v1\\recording-rejection\\status.json",
+      "bytes": 211,
+      "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\session-metrics-native-local-v41-ff2d870-v1\\recording-rejection\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\session-metrics-native-local-v41-ff2d870-v1\\recording-rejection\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\session-metrics-native-local-v41-ff2d870-v1\\qualification.json",
+      "bytes": 1940285,
+      "sha256": "8a34a736bbfc0d92591cfa381bf9300aa95ff009f742eddf1aae5fc00122a6e6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\session-metrics-native-local-v41-ff2d870-v1\\native-session-metrics-result.json",
+      "bytes": 816917,
+      "sha256": "af06fd3ae7bc0eed102d066dadf22dbe0bcfa395827cf937f5635d35965b608e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\session-metrics-native-local-v41-ff2d870-v1\\stats-api-executed-source.py",
+      "bytes": 9900,
+      "sha256": "4dd4f232843254e4c2b63cbe545b4ecf4e81d023174436d38cea8fdd0144d766"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\session-metrics-native-local-v41-ff2d870-v1\\stats-api-actual-build-binding.json",
+      "bytes": 783,
+      "sha256": "62947916cde5c0d016cd01683d0e25f486e3366e186616bd6f36648095483bb2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\session-metrics-native-local-v41-ff2d870-v1\\ammo-hud\\actual-session-metrics-observer.json",
+      "bytes": 772169,
+      "sha256": "ec406397b3437f8c41d8f09ad4dd963ce75d495595ce2201961c5a3b326df5ce"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\session-metrics-native-local-v41-ff2d870-v1\\candidate\\mmx6-runtime.exe",
+      "bytes": 27463680,
+      "sha256": "617e1bb8934d516e3344b297ac0e0cb9c6fa56bbfd4630d15820c9c714c18fef"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-v41-session-metrics-native-root-v1.py",
+      "bytes": 9900,
+      "sha256": "4dd4f232843254e4c2b63cbe545b4ecf4e81d023174436d38cea8fdd0144d766"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-v41-session-metrics-native-root-v1.ps1",
+      "bytes": 560,
+      "sha256": "ebd466fed69876bbf1921ecda66c4ba1f9e49d80c103a5b87f66b53c4c91d305"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-v41-passive-resource-components-root-v1.py",
+      "bytes": 10161,
+      "sha256": "ec3770bb5aeccf2badac13e5be8f789dd9584be0c959c50733e633f70ba54c48"
+    }
+  ],
+  "retention": "Selected actual test executables/logs retained; original failed profiles, images, cards and source trees preserved."
+}

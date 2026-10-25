@@ -145,8 +145,16 @@ unverified in both modes. The actual same-PID launcher attempt returned to the
 lobby before native readiness; its route is independently excluded by the
 current direct-loopback profile policy (`beads-eio.1.51`). The earliest runtime
 refusal was not retained, and cleanup required owned process termination.
-Native memory and registration tracking also needs a passive diagnostic API
-(`beads-eio.3.405`); epoch or CRC observations cannot supply those totals.
+The [passive diagnostics receipt](evidence/mmx6-lifecycle/manifest-bound-ff2d870-passive-resource-diagnostics-reviewed.json)
+now qualifies the SDK API (`beads-eio.3.405`) on game `ff2d870` and SDK `4be6621`:
+13 focused SDK tests, 118 debug tests, 118 production tests and six actual
+native RPC replies pass. The replies retain guest/DMA used bytes, registered
+packet ranges, resident CPU banks and replacement counts. Production and
+portable unavailable fallbacks pass compiled checks. The earlier production
+test failure at a 261-character sidecar path remains preserved; only the CMake
+test output folder was shortened. This proves the API component; native
+launcher reset/rematch growth, readiness and F39 remain unverified. The current
+LAN route still needs the SDK/RNet ownership seam tracked in `beads-eio.3.406`.
 
 The [actual entry-context transport receipt](evidence/mmx6-death/manifest-bound-1128b9d-native-entry-context-transport-reviewed.json)
 retains 2,757 tagged native entries, 102 read-only suppression witnesses and the
