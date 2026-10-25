@@ -1,0 +1,3937 @@
+{
+  "schema": 1,
+  "kind": "root_reviewed_LOCAL_F59_same_c32dd8f_original_Yammar_native_pixels",
+  "candidate": "c32dd8f71889273a134a878ff5a4ab6644c537f0",
+  "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+  "executable_sha256": "ff094835e1442bfdeafce053d42f4a399206714510f6734f9f88f998231ede5c",
+  "compiled_manifest_sha256": "ba3379d2f0725761b30c220edb6a73c3f727ff950a4685eebd17e3ed17642f34",
+  "admitted_mode": "local",
+  "checks": {
+    "local_owned_source_bound": true,
+    "original_native_transfer_source_qualified": true,
+    "disclosed_actual_Yammar": true,
+    "fresh_native_controller_allocation": true,
+    "coherent_private_child_identity": true,
+    "native_and_final_fit_drawables": true,
+    "representative_native_frames": true,
+    "used_Yammar_banks_and_packets": true,
+    "source_native_UV_boundaries": true,
+    "original_stage_working_palette": true,
+    "normalized_decoder_comparison_retained": true,
+    "native_upload_placement_match": true,
+    "resources_retained": true
+  },
+  "source": {
+    "frozen_row_sha256": "624d0f22c7dc2e875040487c3494581ce20fcced5aa6c5521722d37e5403e312",
+    "bounded_check": "Capture actual native special-effect frames at original scale and final fit; inspect texture upload, UV boundaries and palette independently of position.",
+    "ledger_sha256": "554f49f442b2e4a35f82c2531d152f38ec0a07aabd860ed21dc306f8e3c16e23",
+    "original_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "native_spans": [
+      [
+        2147947044,
+        4,
+        "a201a9815ec0dd4a9b9fc51d5ae75f838e6501c0b97fa7cdbc935bddad7c38e7"
+      ],
+      [
+        2147759328,
+        344,
+        "815c1b1041a7385525f209a948945af6d1eab2258e20efbca936becdcd15726e"
+      ],
+      [
+        2147759672,
+        600,
+        "7082e0ff9c62425ee37805df4359ec717970a526b30b808a288d89ea2278619b"
+      ],
+      [
+        2147760272,
+        768,
+        "eed50cefd18626c059346129452a77d0e25f28fd30e7dfa037ac161239e7efc2"
+      ],
+      [
+        2147761040,
+        556,
+        "3faf99d99fcb8c8c47401d999439091febc627de3b68e202b0a363e6d1ed7dc9"
+      ],
+      [
+        2147761596,
+        464,
+        "7662d56f6010bd29a676482aab02322a13a9399f44a7e0da90ed55c4150e8c18"
+      ],
+      [
+        2147762060,
+        204,
+        "fea00708c4f0530062367bd2b55799dbc90494235b4c8df9060bcd68d3fa80d8"
+      ],
+      [
+        2147762264,
+        1112,
+        "2bebe75c2a9aa23e8b1663c1944e45bd990a32f577ed37ce4fe12a5ae4b87113"
+      ],
+      [
+        2147967240,
+        72,
+        "f2b3f0ad0760bbd7c72fb06ea8838bdee2a4df2acef7954fd54572699243fdda"
+      ],
+      [
+        2147973568,
+        32,
+        "c9dc8f4ed7806cd75313c5e7569ad13246340041133d7a0845e722d605c63b9b"
+      ],
+      [
+        2147970880,
+        188,
+        "6bdab61960a535ae1dfa76ebd2cb3221b4bfcfdae2ea5784b0c6f7c42fd5860e"
+      ],
+      [
+        2147580324,
+        164,
+        "5c20240edf12b2a5163779c23b686ca8363678966d8c7d41a1d68ab971b65987"
+      ],
+      [
+        2147580676,
+        316,
+        "9f70cb376cf67d31c2d187179a2d83d30ea0a59c45d3f8d8caa941f3f1d1f589"
+      ],
+      [
+        2147627732,
+        1784,
+        "987a4ce60d3e7e2fca084728ba7259bacde9513006e891b26beaf9ab5b4b63d3"
+      ],
+      [
+        2147663556,
+        264,
+        "2492ec9853e233f2cb354ea127c1438086b85c67f534bbd6b8063808ba62443b"
+      ],
+      [
+        2147664684,
+        108,
+        "5f5d7b0901ab106dede77bfbccd638880699613eb7f313103f943d43846aefa9"
+      ],
+      [
+        2147932900,
+        2,
+        "99be5efb88ca2013bd8e4eb035fd42d5245468fe9afa70d8ba9c1c419a48c4e8"
+      ],
+      [
+        2147565532,
+        76,
+        "64b01d1d89b47e8bbda336f63c7fd833e1821813d2fbf059307d6ab03f7fda87"
+      ],
+      [
+        2147933008,
+        32,
+        "59f657912548361fafd8ce1786e303ad5a61dd80516e4493f055a1ea78f2d428"
+      ],
+      [
+        2147740428,
+        184,
+        "86001eeaf78aff867875e8c8cc1247dda1177046190b74f0190945580c4196f9"
+      ],
+      [
+        2147743552,
+        124,
+        "f794ef713c439dc7741d4034f8acaa4978d5fff2766b57390dcfc2540ca18a27"
+      ],
+      [
+        2147618040,
+        16,
+        "9646c9359588b1ab9498c8d6d14f04f7e1d003c632787d09faf56eda554bb902"
+      ]
+    ],
+    "zero_activation": {
+      "address": 2149491284,
+      "bytes": 248,
+      "sha256": "3f060d450064603e7794052a2ae1cdbd9d88eb22bfb8661facea8bf8571d52cb",
+      "selected_weapon": 3,
+      "native_input": "held Up and fresh Triangle edge (native held4/edge20h)",
+      "option_offset": 166,
+      "limits": "Original activation candidate; native selection, spending and presentation must be observed"
+    },
+    "native_transfer_a0_qualified": true,
+    "source_closure": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-Yammar-original-transfer-a0-closure-reviewed-v2.json",
+      "sha256": "00121a2bdfd747720e8bf2cb96c2ccb159e45e6cdbc6e24efa09912d09a9e9d0",
+      "audit_script_sha256": "90fab42415e21408e0cf3d76a5ead14f217a5ffac50a406e18e3e0af4e5cd46d",
+      "basis": {
+        "pc": "80043724",
+        "word": "1440FFD9",
+        "instruction": "bne v0,zero,8004368C",
+        "predicate": "8004371C s2=s3;80043720 v0=(s2<3); final iteration s2=3/v0=0",
+        "delay_pc": "80043728",
+        "delay_word": "02202021",
+        "delay_instruction": "addu a0,s1,zero",
+        "semantics": "Ordinary MIPS BNE, no annul: delay executes whether branch is taken or untaken. Final untaken exit restores controller a0 before4372C.",
+        "correction": "The prior F59 draft incorrectly treated43728 restoration as loop-continuation-only; it also called the predicate s2 rather than actual v0."
+      },
+      "upload": {
+        "native_transfer_a0_qualified": true,
+        "a0": "controller from saved s1",
+        "a1_x_words": 320,
+        "a2_y": 64,
+        "controller_init": {
+          "sprite_frame47": 0,
+          "cached_frame48": 255,
+          "decode_buffer49": 1
+        },
+        "graphics_table": "SCRATCH14+readword(SCRATCH14+10h)",
+        "source_offset": 226384,
+        "packed_frame0": 33554524,
+        "tiles": 32,
+        "decompressed_bytes": 4096,
+        "decode_buffer": "0x800ca868",
+        "forced_upload": "80017B28/2C read0 vsFF, so fresh controller cannot take frame-equal skip branch",
+        "rectangle": {
+          "x_words": 320,
+          "y": 64,
+          "width_words": 64,
+          "height_pixels": 32
+        },
+        "descriptor": "80017B98..C20 appends rect64words x32rows from decoded buffer, advances descriptor12bytes and writes data terminator0",
+        "native_texture_page": {
+          "x_words": 320,
+          "y": 0,
+          "known_UV_rectangle": [
+            0,
+            64,
+            256,
+            32
+          ]
+        },
+        "native_working_CLUT": 30793,
+        "working_palette_source": "stage0section0 Zero DAT2 type5, row49h"
+      }
+    },
+    "qualified_transfer": "Ordinary BNE80043724 delayMOVE80043728 restores controller a0 on final untaken exit; no later clobber before original80043778 upload. Pinned closure revalidated, no executed artwork credit.",
+    "original_flow": "Zero801EA254 ->8002C32C -> personal type1/sub0 ->EXE80071220[1]=800434E0 ->80043638 ->8002BEC4 sub1..3",
+    "ownership": "Actual private PlayerContext shot pool; visible leaves+7C point to invisible controller, never assumed PLAYER"
+  },
+  "original_reference": {
+    "DAT85_sha256": "25f558d69e38e5f170b3325e27dc49a8232860f97d97dfeb6a0ce5306364f1c8",
+    "graphics_sha256": "22ae0ce0483087cb597b146de9e3f646756dfcf5358fc8140067af7c0f6fbe5a",
+    "assembly_sha256": "116e35f693c69694e6576c582925eea8d791aa3fa5fcee0f310e8d837ebe7aaa",
+    "stage0_section0_Zero_working_DAT_record": 2,
+    "working_kind": 5,
+    "working_sha256": "d2d5e041b71c28ab4127a2ad8d14d75a8a141776f6ec8235b8e2a6e3f4a51a27",
+    "table_offset": 226292,
+    "assembly_offset": 28772,
+    "frame_count": 23,
+    "compressed_offset": 226384,
+    "compressed_sha256": "03312507ae20b172bde54212bd673af8b0d1125fa6bbd36537481e0be288cbc0",
+    "decoded_tiles": 32,
+    "origin_normalized_indices_sha256": "60077e71c56da03ccf086e9d4624c26746fa51849e728b0b1e10f9154e418bd5",
+    "native_placed_indices_sha256": "cc31ddf97e17ef2ef02f290866b6177774abc71e0383e6592b4a662a6bafc736",
+    "native_upload": {
+      "vram_x_words": 320,
+      "vram_y": 64,
+      "texture_page_x_words": 320,
+      "known_page_rectangle": [
+        0,
+        64,
+        256,
+        32
+      ]
+    },
+    "original_upload_a0_source_qualified": true,
+    "source_closure": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-Yammar-original-transfer-a0-closure-reviewed-v2.json",
+      "sha256": "00121a2bdfd747720e8bf2cb96c2ccb159e45e6cdbc6e24efa09912d09a9e9d0",
+      "audit_script_sha256": "90fab42415e21408e0cf3d76a5ead14f217a5ffac50a406e18e3e0af4e5cd46d",
+      "basis": {
+        "pc": "80043724",
+        "word": "1440FFD9",
+        "instruction": "bne v0,zero,8004368C",
+        "predicate": "8004371C s2=s3;80043720 v0=(s2<3); final iteration s2=3/v0=0",
+        "delay_pc": "80043728",
+        "delay_word": "02202021",
+        "delay_instruction": "addu a0,s1,zero",
+        "semantics": "Ordinary MIPS BNE, no annul: delay executes whether branch is taken or untaken. Final untaken exit restores controller a0 before4372C.",
+        "correction": "The prior F59 draft incorrectly treated43728 restoration as loop-continuation-only; it also called the predicate s2 rather than actual v0."
+      },
+      "upload": {
+        "native_transfer_a0_qualified": true,
+        "a0": "controller from saved s1",
+        "a1_x_words": 320,
+        "a2_y": 64,
+        "controller_init": {
+          "sprite_frame47": 0,
+          "cached_frame48": 255,
+          "decode_buffer49": 1
+        },
+        "graphics_table": "SCRATCH14+readword(SCRATCH14+10h)",
+        "source_offset": 226384,
+        "packed_frame0": 33554524,
+        "tiles": 32,
+        "decompressed_bytes": 4096,
+        "decode_buffer": "0x800ca868",
+        "forced_upload": "80017B28/2C read0 vsFF, so fresh controller cannot take frame-equal skip branch",
+        "rectangle": {
+          "x_words": 320,
+          "y": 64,
+          "width_words": 64,
+          "height_pixels": 32
+        },
+        "descriptor": "80017B98..C20 appends rect64words x32rows from decoded buffer, advances descriptor12bytes and writes data terminator0",
+        "native_texture_page": {
+          "x_words": 320,
+          "y": 0,
+          "known_UV_rectangle": [
+            0,
+            64,
+            256,
+            32
+          ]
+        },
+        "native_working_CLUT": 30793,
+        "working_palette_source": "stage0section0 Zero DAT2 type5, row49h"
+      }
+    },
+    "frames": [
+      [
+        {
+          "flags": 0,
+          "packed_tile": 0,
+          "clut": 30793,
+          "x": -16,
+          "y": -8,
+          "raw_hex": "0000f0f8"
+        },
+        {
+          "flags": 0,
+          "packed_tile": 1,
+          "clut": 30793,
+          "x": 0,
+          "y": -8,
+          "raw_hex": "000100f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 2,
+          "clut": 30793,
+          "x": -16,
+          "y": -8,
+          "raw_hex": "0002f0f8"
+        },
+        {
+          "flags": 0,
+          "packed_tile": 3,
+          "clut": 30793,
+          "x": 0,
+          "y": -8,
+          "raw_hex": "000300f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 4,
+          "clut": 30793,
+          "x": -16,
+          "y": -8,
+          "raw_hex": "0004f0f8"
+        },
+        {
+          "flags": 0,
+          "packed_tile": 5,
+          "clut": 30793,
+          "x": 0,
+          "y": -8,
+          "raw_hex": "000500f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 16,
+          "clut": 30793,
+          "x": -16,
+          "y": -8,
+          "raw_hex": "0010f0f8"
+        },
+        {
+          "flags": 0,
+          "packed_tile": 17,
+          "clut": 30793,
+          "x": 0,
+          "y": -8,
+          "raw_hex": "001100f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 13,
+          "clut": 30793,
+          "x": 12,
+          "y": -9,
+          "raw_hex": "000d0cf7"
+        },
+        {
+          "flags": 0,
+          "packed_tile": 16,
+          "clut": 30793,
+          "x": -16,
+          "y": -8,
+          "raw_hex": "0010f0f8"
+        },
+        {
+          "flags": 0,
+          "packed_tile": 17,
+          "clut": 30793,
+          "x": 0,
+          "y": -8,
+          "raw_hex": "001100f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 14,
+          "clut": 30793,
+          "x": 14,
+          "y": -9,
+          "raw_hex": "000e0ef7"
+        },
+        {
+          "flags": 0,
+          "packed_tile": 16,
+          "clut": 30793,
+          "x": -16,
+          "y": -8,
+          "raw_hex": "0010f0f8"
+        },
+        {
+          "flags": 0,
+          "packed_tile": 17,
+          "clut": 30793,
+          "x": 0,
+          "y": -8,
+          "raw_hex": "001100f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 15,
+          "clut": 30793,
+          "x": 15,
+          "y": -9,
+          "raw_hex": "000f0ff7"
+        },
+        {
+          "flags": 0,
+          "packed_tile": 16,
+          "clut": 30793,
+          "x": -16,
+          "y": -8,
+          "raw_hex": "0010f0f8"
+        },
+        {
+          "flags": 0,
+          "packed_tile": 17,
+          "clut": 30793,
+          "x": 0,
+          "y": -8,
+          "raw_hex": "001100f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 6,
+          "clut": 30793,
+          "x": -8,
+          "y": -8,
+          "raw_hex": "0006f8f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 7,
+          "clut": 30793,
+          "x": -8,
+          "y": -8,
+          "raw_hex": "0007f8f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 8,
+          "clut": 30793,
+          "x": -8,
+          "y": -8,
+          "raw_hex": "0008f8f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 9,
+          "clut": 30793,
+          "x": -8,
+          "y": -8,
+          "raw_hex": "0009f8f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 18,
+          "clut": 30793,
+          "x": -8,
+          "y": -8,
+          "raw_hex": "0012f8f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 19,
+          "clut": 30793,
+          "x": -8,
+          "y": -8,
+          "raw_hex": "0013f8f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 20,
+          "clut": 30793,
+          "x": -8,
+          "y": -8,
+          "raw_hex": "0014f8f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 21,
+          "clut": 30793,
+          "x": -8,
+          "y": -8,
+          "raw_hex": "0015f8f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 22,
+          "clut": 30793,
+          "x": -8,
+          "y": -8,
+          "raw_hex": "0016f8f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 23,
+          "clut": 30793,
+          "x": -8,
+          "y": -8,
+          "raw_hex": "0017f8f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 24,
+          "clut": 30793,
+          "x": -8,
+          "y": -8,
+          "raw_hex": "0018f8f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 13,
+          "clut": 30793,
+          "x": 12,
+          "y": -9,
+          "raw_hex": "000d0cf7"
+        },
+        {
+          "flags": 0,
+          "packed_tile": 25,
+          "clut": 30793,
+          "x": -16,
+          "y": -8,
+          "raw_hex": "0019f0f8"
+        },
+        {
+          "flags": 0,
+          "packed_tile": 26,
+          "clut": 30793,
+          "x": 0,
+          "y": -8,
+          "raw_hex": "001a00f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 14,
+          "clut": 30793,
+          "x": 14,
+          "y": -9,
+          "raw_hex": "000e0ef7"
+        },
+        {
+          "flags": 0,
+          "packed_tile": 27,
+          "clut": 30793,
+          "x": -16,
+          "y": -8,
+          "raw_hex": "001bf0f8"
+        },
+        {
+          "flags": 0,
+          "packed_tile": 28,
+          "clut": 30793,
+          "x": 0,
+          "y": -8,
+          "raw_hex": "001c00f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 15,
+          "clut": 30793,
+          "x": 15,
+          "y": -9,
+          "raw_hex": "000f0ff7"
+        },
+        {
+          "flags": 0,
+          "packed_tile": 25,
+          "clut": 30793,
+          "x": -16,
+          "y": -8,
+          "raw_hex": "0019f0f8"
+        },
+        {
+          "flags": 0,
+          "packed_tile": 26,
+          "clut": 30793,
+          "x": 0,
+          "y": -8,
+          "raw_hex": "001a00f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 29,
+          "clut": 30793,
+          "x": -16,
+          "y": -8,
+          "raw_hex": "001df0f8"
+        },
+        {
+          "flags": 0,
+          "packed_tile": 30,
+          "clut": 30793,
+          "x": 0,
+          "y": -8,
+          "raw_hex": "001e00f8"
+        }
+      ],
+      [
+        {
+          "flags": 0,
+          "packed_tile": 31,
+          "clut": 30793,
+          "x": -8,
+          "y": -8,
+          "raw_hex": "001ff8f8"
+        }
+      ]
+    ],
+    "cluts": [
+      30793
+    ],
+    "palette_rows": {
+      "30793": "0000fffff2c3e89bc18361830183a1824082e08180810080bdb55e8012800c80"
+    },
+    "limit": "Original decoded source and original-source-qualified native upload coordinates only. Ordinary BNE43724 delay43728 restores controller even on final untaken exit. No executed runtime, hardware, composed image or F59 pass"
+  },
+  "runtime": {
+    "owned_pid": 75624,
+    "cleanup": {
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    },
+    "parent_checks": {
+      "exact_image_manifest_declared_sources_originals": true,
+      "native_resource_and_window_observations_complete": true,
+      "default_recording_taint_retained_and_replay_refused": true,
+      "owned_cleanup_private_cards": true
+    },
+    "recording": {
+      "status": "failed_fixture_taint_retained_for_diagnostics",
+      "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\candidate\\saves\\input-recordings\\session-1792961795663610-1-0\\inputs.jsonl",
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "ff094835e1442bfdeafce053d42f4a399206714510f6734f9f88f998231ede5c",
+        "manifest_sha256": "ba3379d2f0725761b30c220edb6a73c3f727ff950a4685eebd17e3ed17642f34",
+        "mode": "offline",
+        "profile": null,
+        "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+        "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      "terminal_failure": "unilateral debug or fixture input contaminated capture",
+      "native_status": {
+        "contract": "mmx6.native-consumption.v1",
+        "epoch": 1,
+        "failure": "unilateral debug or fixture input contaminated capture",
+        "schema": 1,
+        "scope": "native-consumption diagnostics; replay unimplemented",
+        "status": "failed"
+      },
+      "events": 6060,
+      "natives": 4244,
+      "p2_reads": 1816,
+      "artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\recording-rejection\\settings.json",
+          "bytes": 10329,
+          "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\recording-rejection\\content.json",
+          "bytes": 503,
+          "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\recording-rejection\\simulation-contract.json",
+          "bytes": 259,
+          "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\recording-rejection\\inputs.jsonl",
+          "bytes": 795973,
+          "sha256": "ee02b5454c2b3e41b99670af317ea1d4219e4a860275d368baecf18d3708c45f"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\recording-rejection\\status.json",
+          "bytes": 211,
+          "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\recording-rejection\\card1.initial.mcd",
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\recording-rejection\\card2.initial.mcd",
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "strict_refusals": {
+        "ordinary_capture": {
+          "type": "InvalidRecording",
+          "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+        },
+        "offline_replay": {
+          "type": "InvalidRecording",
+          "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+        }
+      },
+      "finalized_capture_admitted": false,
+      "replay_admitted": false,
+      "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+    }
+  },
+  "independent_bank_comparisons": [
+    {
+      "capture": "Zero-Yammar-before-X-spend-0-320x240",
+      "bank": 24779,
+      "tile": 20480,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 119,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 2,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 3,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 4,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 5,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 7,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 8,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 9,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 2,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 3,
+            "v": 82,
+            "expected": 0,
+            "actual": 33152
+          },
+          {
+            "u": 4,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 5,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 6,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 7,
+            "v": 82,
+            "expected": 0,
+            "actual": 33152
+          },
+          {
+            "u": 8,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 9,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 10,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-before-X-spend-0-320x240",
+      "bank": 24780,
+      "tile": 20496,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 78,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 16,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 24,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 25,
+            "v": 85,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 26,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 27,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 28,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 29,
+            "v": 85,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 30,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 16,
+            "v": 86,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 17,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 18,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 19,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 20,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 21,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 22,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 23,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-before-X-spend-0-320x240",
+      "bank": 24781,
+      "tile": 16592,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 37,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 213,
+            "v": 69,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 214,
+            "v": 69,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 215,
+            "v": 69,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 212,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 213,
+            "v": 70,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 214,
+            "v": 70,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 215,
+            "v": 70,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 216,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 217,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 212,
+            "v": 71,
+            "expected": 0,
+            "actual": 65535
+          },
+          {
+            "u": 213,
+            "v": 71,
+            "expected": 0,
+            "actual": 65535
+          },
+          {
+            "u": 214,
+            "v": 71,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 215,
+            "v": 71,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 216,
+            "v": 71,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 217,
+            "v": 71,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 212,
+            "v": 72,
+            "expected": 0,
+            "actual": 65535
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-before-X-spend-1-320x240",
+      "bank": 24779,
+      "tile": 20480,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 119,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 2,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 3,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 4,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 5,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 7,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 8,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 9,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 2,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 3,
+            "v": 82,
+            "expected": 0,
+            "actual": 33152
+          },
+          {
+            "u": 4,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 5,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 6,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 7,
+            "v": 82,
+            "expected": 0,
+            "actual": 33152
+          },
+          {
+            "u": 8,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 9,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 10,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-before-X-spend-1-320x240",
+      "bank": 24780,
+      "tile": 20496,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 78,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 16,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 24,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 25,
+            "v": 85,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 26,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 27,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 28,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 29,
+            "v": 85,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 30,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 16,
+            "v": 86,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 17,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 18,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 19,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 20,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 21,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 22,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 23,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-before-X-spend-1-320x240",
+      "bank": 24781,
+      "tile": 16592,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 37,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 213,
+            "v": 69,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 214,
+            "v": 69,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 215,
+            "v": 69,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 212,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 213,
+            "v": 70,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 214,
+            "v": 70,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 215,
+            "v": 70,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 216,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 217,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 212,
+            "v": 71,
+            "expected": 0,
+            "actual": 65535
+          },
+          {
+            "u": 213,
+            "v": 71,
+            "expected": 0,
+            "actual": 65535
+          },
+          {
+            "u": 214,
+            "v": 71,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 215,
+            "v": 71,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 216,
+            "v": 71,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 217,
+            "v": 71,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 212,
+            "v": 72,
+            "expected": 0,
+            "actual": 65535
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-before-X-spend-2-320x240",
+      "bank": 24779,
+      "tile": 20480,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 119,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 2,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 3,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 4,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 5,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 7,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 8,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 9,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 2,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 3,
+            "v": 82,
+            "expected": 0,
+            "actual": 33152
+          },
+          {
+            "u": 4,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 5,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 6,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 7,
+            "v": 82,
+            "expected": 0,
+            "actual": 33152
+          },
+          {
+            "u": 8,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 9,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 10,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-before-X-spend-2-320x240",
+      "bank": 24780,
+      "tile": 20496,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 78,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 16,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 24,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 25,
+            "v": 85,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 26,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 27,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 28,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 29,
+            "v": 85,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 30,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 16,
+            "v": 86,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 17,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 18,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 19,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 20,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 21,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 22,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 23,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-before-X-spend-2-320x240",
+      "bank": 24783,
+      "tile": 16624,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 13,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 248,
+            "v": 71,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 249,
+            "v": 71,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 250,
+            "v": 71,
+            "expected": 0,
+            "actual": 33344
+          },
+          {
+            "u": 247,
+            "v": 72,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 248,
+            "v": 72,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 249,
+            "v": 72,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 250,
+            "v": 72,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 251,
+            "v": 72,
+            "expected": 0,
+            "actual": 33344
+          },
+          {
+            "u": 252,
+            "v": 72,
+            "expected": 0,
+            "actual": 33344
+          },
+          {
+            "u": 253,
+            "v": 72,
+            "expected": 0,
+            "actual": 33344
+          },
+          {
+            "u": 248,
+            "v": 73,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 249,
+            "v": 73,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 250,
+            "v": 73,
+            "expected": 0,
+            "actual": 33344
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-before-X-spend-3-320x240",
+      "bank": 24779,
+      "tile": 20480,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 119,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 2,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 3,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 4,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 5,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 7,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 8,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 9,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 2,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 3,
+            "v": 82,
+            "expected": 0,
+            "actual": 33152
+          },
+          {
+            "u": 4,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 5,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 6,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 7,
+            "v": 82,
+            "expected": 0,
+            "actual": 33152
+          },
+          {
+            "u": 8,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 9,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 10,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-before-X-spend-3-320x240",
+      "bank": 24780,
+      "tile": 20496,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 78,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 16,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 24,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 25,
+            "v": 85,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 26,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 27,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 28,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 29,
+            "v": 85,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 30,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 16,
+            "v": 86,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 17,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 18,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 19,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 20,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 21,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 22,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 23,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-before-X-spend-3-320x240",
+      "bank": 24782,
+      "tile": 16608,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 23,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 230,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 231,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 232,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 233,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 229,
+            "v": 71,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 230,
+            "v": 71,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 231,
+            "v": 71,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 232,
+            "v": 71,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 229,
+            "v": 72,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 230,
+            "v": 72,
+            "expected": 0,
+            "actual": 65535
+          },
+          {
+            "u": 231,
+            "v": 72,
+            "expected": 0,
+            "actual": 65535
+          },
+          {
+            "u": 232,
+            "v": 72,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 233,
+            "v": 72,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 234,
+            "v": 72,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 235,
+            "v": 72,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 229,
+            "v": 73,
+            "expected": 0,
+            "actual": 33441
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-after-X-spend-0-960x720",
+      "bank": 24779,
+      "tile": 20480,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 119,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 2,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 3,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 4,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 5,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 7,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 8,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 9,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 2,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 3,
+            "v": 82,
+            "expected": 0,
+            "actual": 33152
+          },
+          {
+            "u": 4,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 5,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 6,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 7,
+            "v": 82,
+            "expected": 0,
+            "actual": 33152
+          },
+          {
+            "u": 8,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 9,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 10,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-after-X-spend-0-960x720",
+      "bank": 24780,
+      "tile": 20496,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 78,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 16,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 24,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 25,
+            "v": 85,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 26,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 27,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 28,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 29,
+            "v": 85,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 30,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 16,
+            "v": 86,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 17,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 18,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 19,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 20,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 21,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 22,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 23,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-after-X-spend-0-960x720",
+      "bank": 24782,
+      "tile": 16608,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 23,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 230,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 231,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 232,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 233,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 229,
+            "v": 71,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 230,
+            "v": 71,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 231,
+            "v": 71,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 232,
+            "v": 71,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 229,
+            "v": 72,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 230,
+            "v": 72,
+            "expected": 0,
+            "actual": 65535
+          },
+          {
+            "u": 231,
+            "v": 72,
+            "expected": 0,
+            "actual": 65535
+          },
+          {
+            "u": 232,
+            "v": 72,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 233,
+            "v": 72,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 234,
+            "v": 72,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 235,
+            "v": 72,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 229,
+            "v": 73,
+            "expected": 0,
+            "actual": 33441
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-after-X-spend-1-960x720",
+      "bank": 24779,
+      "tile": 20480,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 119,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 2,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 3,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 4,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 5,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 7,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 8,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 9,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 2,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 3,
+            "v": 82,
+            "expected": 0,
+            "actual": 33152
+          },
+          {
+            "u": 4,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 5,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 6,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 7,
+            "v": 82,
+            "expected": 0,
+            "actual": 33152
+          },
+          {
+            "u": 8,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 9,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 10,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-after-X-spend-1-960x720",
+      "bank": 24780,
+      "tile": 20496,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 78,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 16,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 24,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 25,
+            "v": 85,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 26,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 27,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 28,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 29,
+            "v": 85,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 30,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 16,
+            "v": 86,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 17,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 18,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 19,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 20,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 21,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 22,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 23,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-after-X-spend-1-960x720",
+      "bank": 24781,
+      "tile": 16592,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 37,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 213,
+            "v": 69,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 214,
+            "v": 69,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 215,
+            "v": 69,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 212,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 213,
+            "v": 70,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 214,
+            "v": 70,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 215,
+            "v": 70,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 216,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 217,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 212,
+            "v": 71,
+            "expected": 0,
+            "actual": 65535
+          },
+          {
+            "u": 213,
+            "v": 71,
+            "expected": 0,
+            "actual": 65535
+          },
+          {
+            "u": 214,
+            "v": 71,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 215,
+            "v": 71,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 216,
+            "v": 71,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 217,
+            "v": 71,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 212,
+            "v": 72,
+            "expected": 0,
+            "actual": 65535
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-after-X-spend-2-960x720",
+      "bank": 24779,
+      "tile": 20480,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 119,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 2,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 3,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 4,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 5,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 7,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 8,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 9,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 2,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 3,
+            "v": 82,
+            "expected": 0,
+            "actual": 33152
+          },
+          {
+            "u": 4,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 5,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 6,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 7,
+            "v": 82,
+            "expected": 0,
+            "actual": 33152
+          },
+          {
+            "u": 8,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 9,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 10,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-after-X-spend-2-960x720",
+      "bank": 24780,
+      "tile": 20496,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 78,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 16,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 24,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 25,
+            "v": 85,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 26,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 27,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 28,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 29,
+            "v": 85,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 30,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 16,
+            "v": 86,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 17,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 18,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 19,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 20,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 21,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 22,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 23,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-after-X-spend-2-960x720",
+      "bank": 24782,
+      "tile": 16608,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 23,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 230,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 231,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 232,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 233,
+            "v": 70,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 229,
+            "v": 71,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 230,
+            "v": 71,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 231,
+            "v": 71,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 232,
+            "v": 71,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 229,
+            "v": 72,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 230,
+            "v": 72,
+            "expected": 0,
+            "actual": 65535
+          },
+          {
+            "u": 231,
+            "v": 72,
+            "expected": 0,
+            "actual": 65535
+          },
+          {
+            "u": 232,
+            "v": 72,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 233,
+            "v": 72,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 234,
+            "v": 72,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 235,
+            "v": 72,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 229,
+            "v": 73,
+            "expected": 0,
+            "actual": 33441
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-after-X-spend-3-960x720",
+      "bank": 24779,
+      "tile": 20480,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 119,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 2,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 3,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 4,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 5,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 7,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 8,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 9,
+            "v": 81,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 2,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 3,
+            "v": 82,
+            "expected": 0,
+            "actual": 33152
+          },
+          {
+            "u": 4,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 5,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 6,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 7,
+            "v": 82,
+            "expected": 0,
+            "actual": 33152
+          },
+          {
+            "u": 8,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 9,
+            "v": 82,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 10,
+            "v": 82,
+            "expected": 0,
+            "actual": 33248
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    },
+    {
+      "capture": "Zero-Yammar-after-X-spend-3-960x720",
+      "bank": 24780,
+      "tile": 20496,
+      "native": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 78,
+        "first_mismatches": [],
+        "exact_known_texels_match": true,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      },
+      "normalized": {
+        "known_upload_region": true,
+        "compared_texels": 256,
+        "expected_opaque_texels": 0,
+        "first_mismatches": [
+          {
+            "u": 16,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 24,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 25,
+            "v": 85,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 26,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 27,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 28,
+            "v": 85,
+            "expected": 0,
+            "actual": 32780
+          },
+          {
+            "u": 29,
+            "v": 85,
+            "expected": 0,
+            "actual": 33441
+          },
+          {
+            "u": 30,
+            "v": 85,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 16,
+            "v": 86,
+            "expected": 0,
+            "actual": 33537
+          },
+          {
+            "u": 17,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 18,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 19,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 20,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 21,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          },
+          {
+            "u": 22,
+            "v": 86,
+            "expected": 0,
+            "actual": 33248
+          },
+          {
+            "u": 23,
+            "v": 86,
+            "expected": 0,
+            "actual": 32768
+          }
+        ],
+        "exact_known_texels_match": false,
+        "scope": "Known native upload rectangle; untouched source-page pixels and composed blending require separate review"
+      }
+    }
+  ],
+  "root_reviewed_images": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-0-320x240.png",
+      "sha256": "6778c239727b09b6d989495721d6a132972a9c55f0f177d534eb00d7448edce3",
+      "size": [
+        320,
+        240
+      ]
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-1-320x240.png",
+      "sha256": "4fcd0ec6daf3148eba082779af70a16e72daed8d343216b9b0320c4521d271ba",
+      "size": [
+        320,
+        240
+      ]
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-2-320x240.png",
+      "sha256": "ee05f77d93a269f98d642d1532eacee9465a684e7776c5010c6b70b13b805fc2",
+      "size": [
+        320,
+        240
+      ]
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-3-320x240.png",
+      "sha256": "3c5793305f3d10c2618e587e4ccdfb48cd8ba5fda02786543c2a20de4a74fca7",
+      "size": [
+        320,
+        240
+      ]
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-0-960x720.png",
+      "sha256": "25607f0ecf13aadd72cdd16dab3fd711bb23027b98344c0d5d96631cbc4b1b77",
+      "size": [
+        960,
+        720
+      ]
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-1-960x720.png",
+      "sha256": "6e96bb41d3dd6bf700a3e43c6ce4896808475a248a6e8b2b364c73c161c33868",
+      "size": [
+        960,
+        720
+      ]
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-2-960x720.png",
+      "sha256": "c87a49283fa4fa17cc1225ff4723cc42b006df118e1925c7f01de87e12f594e3",
+      "size": [
+        960,
+        720
+      ]
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-3-960x720.png",
+      "sha256": "b3d619ff8d93fe2da32fc97197668adba9ea5633e08216217c793941f32c3fdb",
+      "size": [
+        960,
+        720
+      ]
+    }
+  ],
+  "root_visual_review": "Actual native320x240 and finalFit960x720; eight root-viewed PNGs cover at least three distinct native leaf frames per size. All three green options are coherent, with no extra horizontal band or broken UV edge in inspected samples; both heroes/HUD/world remain visible.",
+  "paired_same_candidate": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-hud\\manifest-bound-c32dd8f-F59-Yammar-native-pixels-netplay-prefix-reviewed.json",
+    "bytes": 271042,
+    "sha256": "13d0cd6b5532e48ec545f56046834617019a7749a8c08ca01771ee5b3f4fb89b"
+  },
+  "limits": [
+    "LOCAL Windows same exact c32dd8f/SDK7cb474 executable/manifest as the reviewed NETPLAY result, X/P1+normalZero/P2, stage0section0, one original Yammar family.",
+    "Actual native320x240 and finalFit960x720; eight root-viewed PNGs cover at least three distinct native leaf frames per size. All three green options are coherent, with no extra horizontal band or broken UV edge in inspected samples; both heroes/HUD/world remain visible.",
+    "All23 actual encoded used-bank payloads independently decompressed/decoded; positive original nativev64 placed texels, native UVs, current-stage palette and actual completed GP0 command membership match. Separate normalized-origin comparison is retained.",
+    "Actual original command9 inventory availability initialization is a disclosed acquisition bypass. Subsequent Zero UpTriangle activation/spend and XTriangle spend are original native inputs; no health/ammo/weapon/action/effect/outcome writes.",
+    "Default ordered recording remains fixture-tainted and strictly refused by ordinary capture and offline replay. Source/image/manifest/private-card and graceful owned exit0 gates passed.",
+    "No new warm/cold state, acquisition, all-weapons, cross-platform, rollback or native-content result. Previous c3 state receipts remain historical on their own exact candidate; earlier failures and failed paired parent remain retained."
+  ],
+  "bypasses": [
+    "Actual original command9 inventory availability initialization is a disclosed acquisition bypass. Subsequent Zero UpTriangle activation/spend and XTriangle spend are original native inputs; no health/ammo/weapon/action/effect/outcome writes."
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-0-320x240.png",
+      "bytes": 230723,
+      "sha256": "6778c239727b09b6d989495721d6a132972a9c55f0f177d534eb00d7448edce3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-0-320x240-completed-GP0.json.gz",
+      "bytes": 9763,
+      "sha256": "aa08098d04ff353d00d58e0052c582f9a61af0cb7c57a4ecf43a581e6d28b910"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-0-320x240-used-bank-60cb.pixels.gz",
+      "bytes": 197,
+      "sha256": "5a2f716baeb82dd1c6e884d4695ffb2954a91e8f8f8bf3ef1d75e16849dd0e0a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-0-320x240-used-bank-60cc.pixels.gz",
+      "bytes": 137,
+      "sha256": "70f893b8bfa0fa02b58ace94f08a943c8865f4487effcbdf4a7478ba81b66a6b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-0-320x240-used-bank-60cd.pixels.gz",
+      "bytes": 66,
+      "sha256": "6e977492446a5af7dac7782b2ed60ff001f6ec4d0350f57e6c52c9ed3e1f0268"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-1-320x240.png",
+      "bytes": 230723,
+      "sha256": "4fcd0ec6daf3148eba082779af70a16e72daed8d343216b9b0320c4521d271ba"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-1-320x240-completed-GP0.json.gz",
+      "bytes": 9806,
+      "sha256": "346ee10d4790e8de36fafac1dd8d9521253898159f07d75b1f74111e30cd92ba"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-1-320x240-used-bank-60cb.pixels.gz",
+      "bytes": 197,
+      "sha256": "5a2f716baeb82dd1c6e884d4695ffb2954a91e8f8f8bf3ef1d75e16849dd0e0a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-1-320x240-used-bank-60cc.pixels.gz",
+      "bytes": 137,
+      "sha256": "70f893b8bfa0fa02b58ace94f08a943c8865f4487effcbdf4a7478ba81b66a6b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-1-320x240-used-bank-60cd.pixels.gz",
+      "bytes": 66,
+      "sha256": "6e977492446a5af7dac7782b2ed60ff001f6ec4d0350f57e6c52c9ed3e1f0268"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-2-320x240.png",
+      "bytes": 230723,
+      "sha256": "ee05f77d93a269f98d642d1532eacee9465a684e7776c5010c6b70b13b805fc2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-2-320x240-completed-GP0.json.gz",
+      "bytes": 9788,
+      "sha256": "e0d6b7b7e6fc497a444e0cc1809fe79d6cb292bcbe78786bcce0ec98eab0f0d9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-2-320x240-used-bank-60cb.pixels.gz",
+      "bytes": 197,
+      "sha256": "5a2f716baeb82dd1c6e884d4695ffb2954a91e8f8f8bf3ef1d75e16849dd0e0a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-2-320x240-used-bank-60cc.pixels.gz",
+      "bytes": 137,
+      "sha256": "70f893b8bfa0fa02b58ace94f08a943c8865f4487effcbdf4a7478ba81b66a6b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-2-320x240-used-bank-60cf.pixels.gz",
+      "bytes": 47,
+      "sha256": "c165dfed49a51cde61a9905fdb15a7b930f4ff22268ed3263a441519ce9123b3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-3-320x240.png",
+      "bytes": 230723,
+      "sha256": "3c5793305f3d10c2618e587e4ccdfb48cd8ba5fda02786543c2a20de4a74fca7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-3-320x240-completed-GP0.json.gz",
+      "bytes": 9737,
+      "sha256": "ba9c57e366ec96ccd2bcc9febf1b201e478dfe5791a60280ec45324cbfe7a136"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-3-320x240-used-bank-60cb.pixels.gz",
+      "bytes": 197,
+      "sha256": "5a2f716baeb82dd1c6e884d4695ffb2954a91e8f8f8bf3ef1d75e16849dd0e0a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-3-320x240-used-bank-60cc.pixels.gz",
+      "bytes": 137,
+      "sha256": "70f893b8bfa0fa02b58ace94f08a943c8865f4487effcbdf4a7478ba81b66a6b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-before-X-spend-3-320x240-used-bank-60ce.pixels.gz",
+      "bytes": 62,
+      "sha256": "de392bf114f06a25f64b8fd7cfb85ceac5d33cf768b3d2b15f9900a17f14f8fa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-0-960x720.png",
+      "bytes": 2074543,
+      "sha256": "25607f0ecf13aadd72cdd16dab3fd711bb23027b98344c0d5d96631cbc4b1b77"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-0-960x720-completed-GP0.json.gz",
+      "bytes": 9958,
+      "sha256": "fa88bee530f454b78f03115202f3e85feb6c5c8cef49c37df62dee41fbc134d8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-0-960x720-used-bank-60cb.pixels.gz",
+      "bytes": 197,
+      "sha256": "5a2f716baeb82dd1c6e884d4695ffb2954a91e8f8f8bf3ef1d75e16849dd0e0a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-0-960x720-used-bank-60cc.pixels.gz",
+      "bytes": 137,
+      "sha256": "70f893b8bfa0fa02b58ace94f08a943c8865f4487effcbdf4a7478ba81b66a6b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-0-960x720-used-bank-60ce.pixels.gz",
+      "bytes": 62,
+      "sha256": "de392bf114f06a25f64b8fd7cfb85ceac5d33cf768b3d2b15f9900a17f14f8fa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-1-960x720.png",
+      "bytes": 2074543,
+      "sha256": "6e96bb41d3dd6bf700a3e43c6ce4896808475a248a6e8b2b364c73c161c33868"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-1-960x720-completed-GP0.json.gz",
+      "bytes": 10048,
+      "sha256": "c688369ea7f6aa87838975ee02ae78f14bb9fd1c8a64f24fd8ed18bafd91faba"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-1-960x720-used-bank-60cb.pixels.gz",
+      "bytes": 197,
+      "sha256": "5a2f716baeb82dd1c6e884d4695ffb2954a91e8f8f8bf3ef1d75e16849dd0e0a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-1-960x720-used-bank-60cc.pixels.gz",
+      "bytes": 137,
+      "sha256": "70f893b8bfa0fa02b58ace94f08a943c8865f4487effcbdf4a7478ba81b66a6b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-1-960x720-used-bank-60cd.pixels.gz",
+      "bytes": 66,
+      "sha256": "6e977492446a5af7dac7782b2ed60ff001f6ec4d0350f57e6c52c9ed3e1f0268"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-2-960x720.png",
+      "bytes": 2074543,
+      "sha256": "c87a49283fa4fa17cc1225ff4723cc42b006df118e1925c7f01de87e12f594e3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-2-960x720-completed-GP0.json.gz",
+      "bytes": 9981,
+      "sha256": "b2c7132d81ef77d052c56abdbe272fc08b0410d8008bec0c871580ef48100cf1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-2-960x720-used-bank-60cb.pixels.gz",
+      "bytes": 197,
+      "sha256": "5a2f716baeb82dd1c6e884d4695ffb2954a91e8f8f8bf3ef1d75e16849dd0e0a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-2-960x720-used-bank-60cc.pixels.gz",
+      "bytes": 137,
+      "sha256": "70f893b8bfa0fa02b58ace94f08a943c8865f4487effcbdf4a7478ba81b66a6b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-2-960x720-used-bank-60ce.pixels.gz",
+      "bytes": 62,
+      "sha256": "de392bf114f06a25f64b8fd7cfb85ceac5d33cf768b3d2b15f9900a17f14f8fa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-3-960x720.png",
+      "bytes": 2074543,
+      "sha256": "b3d619ff8d93fe2da32fc97197668adba9ea5633e08216217c793941f32c3fdb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-3-960x720-completed-GP0.json.gz",
+      "bytes": 9799,
+      "sha256": "5773a5a2e86b10ef8eeb37e2afa577cf5d14c4a508468235ce5b555fef02943a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-3-960x720-used-bank-60cb.pixels.gz",
+      "bytes": 197,
+      "sha256": "5a2f716baeb82dd1c6e884d4695ffb2954a91e8f8f8bf3ef1d75e16849dd0e0a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-private-Yammar\\Zero-Yammar-after-X-spend-3-960x720-used-bank-60cc.pixels.gz",
+      "bytes": 137,
+      "sha256": "70f893b8bfa0fa02b58ace94f08a943c8865f4487effcbdf4a7478ba81b66a6b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\candidate\\saves\\card2.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\candidate\\saves\\input-recordings\\session-1792961795663610-1-0\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\candidate\\saves\\input-recordings\\session-1792961795663610-1-0\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\recording-rejection\\settings.json",
+      "bytes": 10329,
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\recording-rejection\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\recording-rejection\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\recording-rejection\\inputs.jsonl",
+      "bytes": 795973,
+      "sha256": "ee02b5454c2b3e41b99670af317ea1d4219e4a860275d368baecf18d3708c45f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\recording-rejection\\status.json",
+      "bytes": 211,
+      "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\recording-rejection\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\recording-rejection\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\qualification.json",
+      "bytes": 8643787,
+      "sha256": "7c05c2d52cd07e0b15ee39d97527b120f2147dee7101379df854c147240d0d96"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\ammo-hud\\F59-independent-observer-result.json",
+      "bytes": 1983530,
+      "sha256": "a9b074136ab7e7e26eac80f528b63d06ee9f16e29008839d371b216a6fb924d2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v43-c32dd8f-v1\\candidate.json",
+      "bytes": 12308,
+      "sha256": "5b1e05bd8705c9125a8e71826d8199962bbaf36ff6bf0a0422283a9e84b52a1a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F59-local-c32dd8f-root-v1.py",
+      "bytes": 6220,
+      "sha256": "9e072c4a18205778f607edcd854c00d6ff8350e6a0e971663a64879e2f89dc31"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_f59_private_Yammar_v43_c32dd8f_root_v1.py",
+      "bytes": 33544,
+      "sha256": "3ae078ed161d305641a28cf490123f65da03eac6c9427f111142036ed7b0be79"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-F59-local-c32dd8f-root-v1.py",
+      "bytes": 9760,
+      "sha256": "2d3f2a7afd85e9f54990f2c32bc71e6a32d1bbfbb448cf34cab6070ec869768e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\prepare-F59-local-c32dd8f-root-v1.py",
+      "bytes": 2822,
+      "sha256": "915c0536ad84a32f1b31ef072b7403a9a664335adb2c1b8baac8959b365733bd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-local-c32dd8f-root-native-v1.log",
+      "bytes": 654,
+      "sha256": "53927282b9085852efedf65905f61c2faa8a8a29c718d86fb847ccdc156b6089"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-local-c32dd8f-root-preflight-v1.log",
+      "bytes": 5166,
+      "sha256": "7bfc7a8deb2c4221d70562f3cf738e61d4c73820654c4668cd396bffc6e0a189"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\executed-mmx6_f59_private_Yammar_v43_c32dd8f_root_v1.py",
+      "bytes": 33544,
+      "sha256": "3ae078ed161d305641a28cf490123f65da03eac6c9427f111142036ed7b0be79"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\executed-mmx6_F59_transfer_source_qualified_v2.py",
+      "bytes": 1153,
+      "sha256": "7da9fb4c58fa9ff7097ad36f586f9369504569a36cc07ad48bbd127356247fda"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\executed-mmx6_original_Zero_yammar_reference_qualified_v2.py",
+      "bytes": 9036,
+      "sha256": "eb00a759ef2cbb28c15a9e103c6470debf716eedd6c738102a7ebdc7e7669190"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\executed-run-F59-local-c32dd8f-root-v1.py",
+      "bytes": 6220,
+      "sha256": "9e072c4a18205778f607edcd854c00d6ff8350e6a0e971663a64879e2f89dc31"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\mmx6_coop_hud_inventory-executed-source.py",
+      "bytes": 17683,
+      "sha256": "e503f2f99085f89fc18010f2d3e0916866d872083fb716b3a75595bd4cabdfe2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\mmx6_coop_hud_presentation-executed-source.py",
+      "bytes": 11949,
+      "sha256": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\mmx6_coop_inventory_state-executed-source.py",
+      "bytes": 6110,
+      "sha256": "211bd23caf176328cc3a24aaeae26a44b5d0dc5e48b244c1826781e9f53f61f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\mmx6_coop_jump_audio_pair-executed-source.py",
+      "bytes": 29983,
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\mmx6_coop_mapped_state-executed-source.py",
+      "bytes": 16689,
+      "sha256": "870ddd670d02b366fb056173b9133fca2618b96941fcbc793c5d698deae623cb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\mmx6_input_recording-executed-source.py",
+      "bytes": 13664,
+      "sha256": "a4d21aaa83c9104679d549c0f5fa81bf95106ce800b0601263faaff46ae5310a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\mmx6_owned_keyboard-executed-source.py",
+      "bytes": 4599,
+      "sha256": "11b07f655dd711e5cf39c36362eec796b9eb73b86702d8100e0a958a3e348402"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\prepare_mmx6_coop_playtest-executed-source.py",
+      "bytes": 10411,
+      "sha256": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\prepare_mmx6_input_replay-executed-source.py",
+      "bytes": 8385,
+      "sha256": "584c0790706a2794636f7ed1bbd5e6b904f29b8b285d6eb3a9f5373167500d95"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\qualify_mmx6_coop_jump_audio-executed-source.py",
+      "bytes": 29370,
+      "sha256": "e91dbde11541f68e554f94b747ba91c409a83322f7d4d60b26d1e3aefdf75ac9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\qualify_mmx6_coop_personal_menu-executed-source.py",
+      "bytes": 16934,
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\qualify_mmx6_coop_state-executed-source.py",
+      "bytes": 53820,
+      "sha256": "a7f8e768b97789bab9ff84c0d6baea9612bafc4c6d5074da73839d4ab815dcbb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\qualify_mmx6_input_replay-executed-source.py",
+      "bytes": 28273,
+      "sha256": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-private-Yammar-local-v43-c32dd8f-root-v1\\runner-executed-source.py",
+      "bytes": 11008,
+      "sha256": "ca594aa64b184761c33415ccb89f1f48194af094533cc48e33fdb359d41e48a7"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-hud\\manifest-bound-c32dd8f-F59-Yammar-native-pixels-netplay-prefix-reviewed.json",
+      "bytes": 271042,
+      "sha256": "13d0cd6b5532e48ec545f56046834617019a7749a8c08ca01771ee5b3f4fb89b"
+    }
+  ]
+}

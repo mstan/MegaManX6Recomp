@@ -7547,7 +7547,7 @@
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
@@ -7716,9 +7716,59 @@
             "bypasses": [
               "Disclosed offline FF availability initializer followed by original native Save; protected QAcard copied before launch and actually Loaded by the original title on both fresh online peers. No online fixture or execution-state LOAD; no native acquisition credit."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "c32dd8f71889273a134a878ff5a4ab6644c537f0",
+            "build_identity": {
+              "executable_sha256": "ff094835e1442bfdeafce053d42f4a399206714510f6734f9f88f998231ede5c",
+              "compiled_manifest_sha256": "ba3379d2f0725761b30c220edb6a73c3f727ff950a4685eebd17e3ed17642f34",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "mode": "offline",
+              "input_path": "published_host",
+              "roster": [
+                "X/P1",
+                "normalZero/P2"
+              ],
+              "stage": 0,
+              "section": 0,
+              "drawables": [
+                [
+                  320,
+                  240
+                ],
+                [
+                  960,
+                  720
+                ]
+              ],
+              "audio": "dummy"
+            },
+            "action": "Original inventory initializer prerequisite; native Zero UpTriangle Yammar activation/spend, XTriangle spend, original native-size and final-Fit captures.",
+            "outcome": "All13 original F59 checks pass; root independently decoded all23 used-bank payloads and verified native placed pixels/UVs/palette/completed GP0 membership. All8 original images reviewed; source/cards/default taint strict refusals/owned exit0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-hud/manifest-bound-c32dd8f-F59-Yammar-native-pixels-local-reviewed.json",
+                "sha256": "93855e7124bb2da21f80d6985f98b648494275428df538e178a3a0ecb5ff9a23"
+              }
+            ],
+            "limits": [
+              "LOCAL Windows same exact c32dd8f/SDK7cb474 executable/manifest as the reviewed NETPLAY result, X/P1+normalZero/P2, stage0section0, one original Yammar family.",
+              "Actual native320x240 and finalFit960x720; eight root-viewed PNGs cover at least three distinct native leaf frames per size. All three green options are coherent, with no extra horizontal band or broken UV edge in inspected samples; both heroes/HUD/world remain visible.",
+              "All23 actual encoded used-bank payloads independently decompressed/decoded; positive original nativev64 placed texels, native UVs, current-stage palette and actual completed GP0 command membership match. Separate normalized-origin comparison is retained.",
+              "Actual original command9 inventory availability initialization is a disclosed acquisition bypass. Subsequent Zero UpTriangle activation/spend and XTriangle spend are original native inputs; no health/ammo/weapon/action/effect/outcome writes.",
+              "Default ordered recording remains fixture-tainted and strictly refused by ordinary capture and offline replay. Source/image/manifest/private-card and graceful owned exit0 gates passed.",
+              "No new warm/cold state, acquisition, all-weapons, cross-platform, rollback or native-content result. Previous c3 state receipts remain historical on their own exact candidate; earlier failures and failed paired parent remain retained."
+            ],
+            "bypasses": [
+              "Actual original command9 inventory availability initialization is a disclosed acquisition bypass. Subsequent Zero UpTriangle activation/spend and XTriangle spend are original native inputs; no health/ammo/weapon/action/effect/outcome writes."
+            ]
           }
         ],
-        "limitations": "Bounded F59 LOCAL original Yammar/native320-Fit960 and current-build warm/cold passesc3c5bdb; NETPLAY original Yammar/native320-Fit960 independent prefix passesc32dd8f/SDK7cb474 after all17payloads/root12image/card/recording/CRC/exit review. Actualpaired stage1/type5palette and nativeQAcardLoad bypass explicit. LaterF31guardfailure/wholeFAILEDparent preserved. One family/roster, separate exact builds; no acquisition/allart/pairedstate/rollback/replay/nativecontent claim. Aggregate remains UNVERIFIED: the independently passed LOCAL and NETPLAY receipts currently identify different exact candidates. Requalify LOCAL on c32dd8f before aggregate admission; no cross-build result transfer."
+        "limitations": "Bounded F59 LOCAL and NETPLAY now pass on the same exact c32dd8f/SDK7cb474 image/manifest: original Yammar native320/finalFit960 source pixels, UV/palette and composed review, with respective late gates. LOCAL stage0/NETPLAY stage1 explicitly retained. One family/roster; acquisition bypasses and failed parents remain explicit. Old c3 warm/cold states are historical only. No all-art/rollback/replay/native-content admission."
       }
     },
     {
