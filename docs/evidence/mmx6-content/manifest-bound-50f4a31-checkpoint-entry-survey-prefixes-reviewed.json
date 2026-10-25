@@ -1,0 +1,593 @@
+{
+  "schema": 1,
+  "kind": "reviewed_native_checkpoint_entry_components_and_preserved_failed_survey_prefixes",
+  "reviewed_at_utc": "2026-10-25T06:54:10.577235+00:00",
+  "issue": "beads-gxrh",
+  "candidate": "50f4a31cd6c1344f4448be51e3016a84e96b2566",
+  "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+  "executable_sha256": "7932585a45a53eae7ad1fbdd083ecd4ff3512741ff42c841f31cada8af4db25f",
+  "compiled_manifest_sha256": "595914ab91176b013ff2abd8e19fbdfdf6cf4c85b1414223fafdc0e9a57f308c",
+  "source_packet_sha256": "877ca00c6156ba4704d11d469001f2d9f7166f646f9659e8f6fe1e6ca10b1836",
+  "supported_source_locations": 94,
+  "unsupported_source_namespaces": 21,
+  "qualified_entry_setup_locations": 10,
+  "failed_or_partial_entry_locations": 2,
+  "unvisited_supported_locations": 82,
+  "completed_components": {
+    "s00-a0-c00": [
+      {
+        "parent": "content-entry-batch-local-v36-50f4a31-v1",
+        "case": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-local-v36-50f4a31-v1\\content-entry-batch\\case-s00-a0-c00\\entry-observations.json",
+          "bytes": 624368,
+          "sha256": "584e8b56657c6d3302249e53d58f529eb31c110183f30e7b49d205aacf6b5805"
+        },
+        "checks": {
+          "resident_code_and_original_record": true,
+          "exact_mailbox8_only": true,
+          "original_initializer_observed_once": true,
+          "two_seat_grounded_camera_readiness": true,
+          "native_destination_observed": true,
+          "owned_composed_completion_retained": true
+        },
+        "actual_composed_image": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-local-v36-50f4a31-v1\\content-entry-batch\\case-s00-a0-c00\\s00-a0-c00-composed.png",
+          "bytes": 2074543,
+          "sha256": "5cee783cea4c0106c5f9ba079362b97a09ff9f8f77caf809c53d231a07f8fbf7"
+        }
+      },
+      {
+        "parent": "content-entry-batch-23sections-local-v36-50f4a31-v1",
+        "case": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s00-a0-c00\\entry-observations.json",
+          "bytes": 624399,
+          "sha256": "b320bc8a69e99c43142a190f1b8b5816a148040e399c524adbd3215508264c97"
+        },
+        "checks": {
+          "resident_code_and_original_record": true,
+          "exact_mailbox8_only": true,
+          "original_initializer_observed_once": true,
+          "two_seat_grounded_camera_readiness": true,
+          "native_destination_observed": true,
+          "owned_composed_completion_retained": true
+        },
+        "actual_composed_image": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s00-a0-c00\\s00-a0-c00-composed.png",
+          "bytes": 2074543,
+          "sha256": "5cee783cea4c0106c5f9ba079362b97a09ff9f8f77caf809c53d231a07f8fbf7"
+        }
+      }
+    ],
+    "s00-a0-c01": [
+      {
+        "parent": "content-entry-batch-local-v36-50f4a31-v1",
+        "case": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-local-v36-50f4a31-v1\\content-entry-batch\\case-s00-a0-c01\\entry-observations.json",
+          "bytes": 619473,
+          "sha256": "eaabe299aa9187a539c6b9f5c155b2160b4f36a1d9392270f7b623f357f94da4"
+        },
+        "checks": {
+          "resident_code_and_original_record": true,
+          "exact_mailbox8_only": true,
+          "original_initializer_observed_once": true,
+          "two_seat_grounded_camera_readiness": true,
+          "native_destination_observed": true,
+          "owned_composed_completion_retained": true
+        },
+        "actual_composed_image": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-local-v36-50f4a31-v1\\content-entry-batch\\case-s00-a0-c01\\s00-a0-c01-composed.png",
+          "bytes": 2074543,
+          "sha256": "a0e36ba9baf7729776d7e6d63e41a6f90dd7e95b79c52aa6c1ab498855d89df9"
+        }
+      }
+    ],
+    "s00-a0-c02": [
+      {
+        "parent": "content-entry-batch-local-v36-50f4a31-v1",
+        "case": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-local-v36-50f4a31-v1\\content-entry-batch\\case-s00-a0-c02\\entry-observations.json",
+          "bytes": 583364,
+          "sha256": "840cf30be57041a491413fb23945e062c3f42917b4b6672d5b2cd816b2a02d60"
+        },
+        "checks": {
+          "resident_code_and_original_record": true,
+          "exact_mailbox8_only": true,
+          "original_initializer_observed_once": true,
+          "two_seat_grounded_camera_readiness": true,
+          "native_destination_observed": true,
+          "owned_composed_completion_retained": true
+        },
+        "actual_composed_image": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-local-v36-50f4a31-v1\\content-entry-batch\\case-s00-a0-c02\\s00-a0-c02-composed.png",
+          "bytes": 2074543,
+          "sha256": "9647aee7fe6be73f3bb6f0bed864756b9b6029872d93f528578ab13b250bfb21"
+        }
+      }
+    ],
+    "s01-a0-c00": [
+      {
+        "parent": "content-entry-batch-23sections-local-v36-50f4a31-v1",
+        "case": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s01-a0-c00\\entry-observations.json",
+          "bytes": 582293,
+          "sha256": "8f1450eaff96558f1c5c35e0b57359e530a92021cfaa0e8dc84987adf20221ec"
+        },
+        "checks": {
+          "resident_code_and_original_record": true,
+          "exact_mailbox8_only": true,
+          "original_initializer_observed_once": true,
+          "two_seat_grounded_camera_readiness": true,
+          "native_destination_observed": true,
+          "owned_composed_completion_retained": true
+        },
+        "actual_composed_image": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s01-a0-c00\\s01-a0-c00-composed.png",
+          "bytes": 2074543,
+          "sha256": "ea640cd961fc665447e230746188844a71d0224402880330cdd2363a93b8fab8"
+        }
+      }
+    ],
+    "s02-a0-c00": [
+      {
+        "parent": "content-entry-batch-23sections-local-v36-50f4a31-v1",
+        "case": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s02-a0-c00\\entry-observations.json",
+          "bytes": 574609,
+          "sha256": "f9f9bab8745f8c7ec9ee550d95119efa466ac4a4eedc15b701aca1bc20128e22"
+        },
+        "checks": {
+          "resident_code_and_original_record": true,
+          "exact_mailbox8_only": true,
+          "original_initializer_observed_once": true,
+          "two_seat_grounded_camera_readiness": true,
+          "native_destination_observed": true,
+          "owned_composed_completion_retained": true
+        },
+        "actual_composed_image": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s02-a0-c00\\s02-a0-c00-composed.png",
+          "bytes": 2074543,
+          "sha256": "89306484b68d0220d436c6ec8a5429b6159bd7e00e5541cbb84569d1678bca57"
+        }
+      }
+    ],
+    "s03-a0-c00": [
+      {
+        "parent": "content-entry-batch-23sections-local-v36-50f4a31-v1",
+        "case": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s03-a0-c00\\entry-observations.json",
+          "bytes": 581950,
+          "sha256": "66525803f64b02b0058e5c31501467a5e4ca272b66de5eed0d089fe0635d62f3"
+        },
+        "checks": {
+          "resident_code_and_original_record": true,
+          "exact_mailbox8_only": true,
+          "original_initializer_observed_once": true,
+          "two_seat_grounded_camera_readiness": true,
+          "native_destination_observed": true,
+          "owned_composed_completion_retained": true
+        },
+        "actual_composed_image": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s03-a0-c00\\s03-a0-c00-composed.png",
+          "bytes": 2074543,
+          "sha256": "749ac8f610acee5ff3c363b914d3a7d9fa77bdc01372ba81aec286eafff6aaba"
+        }
+      }
+    ],
+    "s04-a0-c00": [
+      {
+        "parent": "content-entry-batch-23sections-local-v36-50f4a31-v1",
+        "case": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s04-a0-c00\\entry-observations.json",
+          "bytes": 540982,
+          "sha256": "e68b688149a24c77b9478653153cd6383093b85dad434ab0d363e18bab8469ca"
+        },
+        "checks": {
+          "resident_code_and_original_record": true,
+          "exact_mailbox8_only": true,
+          "original_initializer_observed_once": true,
+          "two_seat_grounded_camera_readiness": true,
+          "native_destination_observed": true,
+          "owned_composed_completion_retained": true
+        },
+        "actual_composed_image": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s04-a0-c00\\s04-a0-c00-composed.png",
+          "bytes": 2074543,
+          "sha256": "dbee3535f975ddc5f637bfe4d4afde0e4b2b6bf8bd4ef887e2dbcada2dfd2e5f"
+        }
+      }
+    ],
+    "s05-a0-c00": [
+      {
+        "parent": "content-entry-batch-remaining12sections-local-v36-50f4a31-v1",
+        "case": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-remaining12sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s05-a0-c00\\entry-observations.json",
+          "bytes": 589366,
+          "sha256": "a309226097a7652d131cf07c2793443f42e21b1e78b336844b2d2870789b9381"
+        },
+        "checks": {
+          "resident_code_and_original_record": true,
+          "exact_mailbox8_only": true,
+          "original_initializer_observed_once": true,
+          "two_seat_grounded_camera_readiness": true,
+          "native_destination_observed": true,
+          "owned_composed_completion_retained": true
+        },
+        "actual_composed_image": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-remaining12sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s05-a0-c00\\s05-a0-c00-composed.png",
+          "bytes": 2074543,
+          "sha256": "c4c9056c564282edcd47f9bdbd7f4060c5c299be04103f0a76688279a3dfb9be"
+        }
+      }
+    ],
+    "s06-a0-c00": [
+      {
+        "parent": "content-entry-batch-remaining12sections-local-v36-50f4a31-v1",
+        "case": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-remaining12sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s06-a0-c00\\entry-observations.json",
+          "bytes": 629540,
+          "sha256": "b777711a4589bdaf9a60c7f4e0f90e81dae839aa871fd9e903cb788ffd044c0d"
+        },
+        "checks": {
+          "resident_code_and_original_record": true,
+          "exact_mailbox8_only": true,
+          "original_initializer_observed_once": true,
+          "two_seat_grounded_camera_readiness": true,
+          "native_destination_observed": true,
+          "owned_composed_completion_retained": true
+        },
+        "actual_composed_image": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-remaining12sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s06-a0-c00\\s06-a0-c00-composed.png",
+          "bytes": 2074543,
+          "sha256": "545a89b3dd92838f4b8c98cfef4a20bea35f2f034b43b8deb875a23a1edd9537"
+        }
+      }
+    ],
+    "s07-a0-c00": [
+      {
+        "parent": "content-entry-batch-remaining12sections-local-v36-50f4a31-v1",
+        "case": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-remaining12sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s07-a0-c00\\entry-observations.json",
+          "bytes": 656694,
+          "sha256": "328159c7aa72791cb659c331d54bcd77c153e9f66d4f0c6a615bd6457a737ad0"
+        },
+        "checks": {
+          "resident_code_and_original_record": true,
+          "exact_mailbox8_only": true,
+          "original_initializer_observed_once": true,
+          "two_seat_grounded_camera_readiness": true,
+          "native_destination_observed": true,
+          "owned_composed_completion_retained": true
+        },
+        "actual_composed_image": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-remaining12sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s07-a0-c00\\s07-a0-c00-composed.png",
+          "bytes": 2074543,
+          "sha256": "470f8d3a2cfc2ef09ff0f7dca98905a703de024a5ab4bb6e3ef7885ae55b346b"
+        }
+      }
+    ]
+  },
+  "failed_components": {
+    "s04-a1-c00": {
+      "parent": "content-entry-batch-23sections-local-v36-50f4a31-v1",
+      "case": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s04-a1-c00\\entry-observations.json",
+        "bytes": 3058021,
+        "sha256": "6134098940df0c74b46ad2b0d6b28a8e4a756d433cc4520c9b2b13553aae5739"
+      },
+      "error": {
+        "type": "BatchError",
+        "message": "Native entry read/time budget exhausted; retain partial evidence and stop"
+      },
+      "final_native_entry_receipt": {
+        "generation": 6,
+        "state": 3,
+        "reason": 0,
+        "stage": 4,
+        "section": 1,
+        "checkpoint": 0,
+        "nonce": 2197378502,
+        "initializer_entries": 1,
+        "record": "8007248C",
+        "tainted": 1
+      },
+      "read_count": 1800,
+      "waiting_samples": 444,
+      "first_publication_tick": 901,
+      "last_publication_tick": 2595,
+      "final_readiness_checks": {
+        "publication_after_completed_receipt": true,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": true,
+        "native_p1_visible_idle_grounded": true,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": true,
+        "p1_at_authored_x": false,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": true,
+        "display_enabled": true
+      },
+      "all_mechanics": "unverified"
+    },
+    "s08-a0-c00": {
+      "parent": "content-entry-batch-remaining12sections-local-v36-50f4a31-v1",
+      "case": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-remaining12sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s08-a0-c00\\entry-observations.json",
+        "bytes": 3054655,
+        "sha256": "d8766a19b11e0411a353e703fa9b81109273bf058f72df887114b8618645fc9d"
+      },
+      "error": {
+        "type": "BatchError",
+        "message": "Native entry read/time budget exhausted; retain partial evidence and stop"
+      },
+      "final_native_entry_receipt": {
+        "generation": 4,
+        "state": 3,
+        "reason": 0,
+        "stage": 8,
+        "section": 0,
+        "checkpoint": 0,
+        "nonce": 3215092932,
+        "initializer_entries": 1,
+        "record": "800726CC",
+        "tainted": 1
+      },
+      "read_count": 1800,
+      "waiting_samples": 443,
+      "first_publication_tick": 606,
+      "last_publication_tick": 606,
+      "final_readiness_checks": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": false,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      },
+      "all_mechanics": "unverified"
+    }
+  },
+  "actual_parents": [
+    {
+      "name": "content-entry-batch-local-v36-50f4a31-v1",
+      "status": "source_bound_native_entry_survey_completed_mechanics_unverified",
+      "error": null,
+      "checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "owned_exit_and_private_cards": true,
+        "recording_taint_retained_and_strictly_refused": true,
+        "all_requested_entry_components_observed": true
+      },
+      "owned_exit": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "cards_unchanged": true,
+      "strict_recording_refusals": true,
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-local-v36-50f4a31-v1\\qualification.json",
+        "bytes": 181685,
+        "sha256": "359c2174002cd3b371c1ae930976a1c0888bf7d5d0262f6f4e3d4c3af5228ba3"
+      }
+    },
+    {
+      "name": "content-entry-batch-23sections-local-v36-50f4a31-v1",
+      "status": "failed_setup",
+      "error": "Content entry batch stopped; partial evidence retained: Native entry read/time budget exhausted; retain partial evidence and stop",
+      "checks": {
+        "exact_image_manifest_declared_sources_originals": true
+      },
+      "owned_exit": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "cards_unchanged": true,
+      "strict_recording_refusals": true,
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\qualification.json",
+        "bytes": 204962,
+        "sha256": "fabfa7b788280a955bffd5d7f5be7c012ef45f5893f8cb2ac561923dc9fcfb1f"
+      }
+    },
+    {
+      "name": "content-entry-batch-remaining12sections-local-v36-50f4a31-v1",
+      "status": "failed_setup",
+      "error": "Content entry batch stopped; partial evidence retained: Native entry read/time budget exhausted; retain partial evidence and stop",
+      "checks": {
+        "exact_image_manifest_declared_sources_originals": true
+      },
+      "owned_exit": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "cards_unchanged": true,
+      "strict_recording_refusals": true,
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-remaining12sections-local-v36-50f4a31-v1\\qualification.json",
+        "bytes": 193212,
+        "sha256": "4b4f39516783757541c07ed5bebfeb435e610e3d4b235e5dfff557c20af16b9d"
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-local-v36-50f4a31-v1\\qualification.json",
+      "bytes": 181685,
+      "sha256": "359c2174002cd3b371c1ae930976a1c0888bf7d5d0262f6f4e3d4c3af5228ba3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-local-v36-50f4a31-v1\\content-entry-batch\\case-s00-a0-c00\\entry-observations.json",
+      "bytes": 624368,
+      "sha256": "584e8b56657c6d3302249e53d58f529eb31c110183f30e7b49d205aacf6b5805"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-local-v36-50f4a31-v1\\content-entry-batch\\case-s00-a0-c00\\s00-a0-c00-composed.png",
+      "bytes": 2074543,
+      "sha256": "5cee783cea4c0106c5f9ba079362b97a09ff9f8f77caf809c53d231a07f8fbf7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-local-v36-50f4a31-v1\\content-entry-batch\\case-s00-a0-c01\\entry-observations.json",
+      "bytes": 619473,
+      "sha256": "eaabe299aa9187a539c6b9f5c155b2160b4f36a1d9392270f7b623f357f94da4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-local-v36-50f4a31-v1\\content-entry-batch\\case-s00-a0-c01\\s00-a0-c01-composed.png",
+      "bytes": 2074543,
+      "sha256": "a0e36ba9baf7729776d7e6d63e41a6f90dd7e95b79c52aa6c1ab498855d89df9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-local-v36-50f4a31-v1\\content-entry-batch\\case-s00-a0-c02\\entry-observations.json",
+      "bytes": 583364,
+      "sha256": "840cf30be57041a491413fb23945e062c3f42917b4b6672d5b2cd816b2a02d60"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-local-v36-50f4a31-v1\\content-entry-batch\\case-s00-a0-c02\\s00-a0-c02-composed.png",
+      "bytes": 2074543,
+      "sha256": "9647aee7fe6be73f3bb6f0bed864756b9b6029872d93f528578ab13b250bfb21"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\qualification.json",
+      "bytes": 204962,
+      "sha256": "fabfa7b788280a955bffd5d7f5be7c012ef45f5893f8cb2ac561923dc9fcfb1f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s00-a0-c00\\entry-observations.json",
+      "bytes": 624399,
+      "sha256": "b320bc8a69e99c43142a190f1b8b5816a148040e399c524adbd3215508264c97"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s00-a0-c00\\s00-a0-c00-composed.png",
+      "bytes": 2074543,
+      "sha256": "5cee783cea4c0106c5f9ba079362b97a09ff9f8f77caf809c53d231a07f8fbf7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s01-a0-c00\\entry-observations.json",
+      "bytes": 582293,
+      "sha256": "8f1450eaff96558f1c5c35e0b57359e530a92021cfaa0e8dc84987adf20221ec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s01-a0-c00\\s01-a0-c00-composed.png",
+      "bytes": 2074543,
+      "sha256": "ea640cd961fc665447e230746188844a71d0224402880330cdd2363a93b8fab8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s02-a0-c00\\entry-observations.json",
+      "bytes": 574609,
+      "sha256": "f9f9bab8745f8c7ec9ee550d95119efa466ac4a4eedc15b701aca1bc20128e22"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s02-a0-c00\\s02-a0-c00-composed.png",
+      "bytes": 2074543,
+      "sha256": "89306484b68d0220d436c6ec8a5429b6159bd7e00e5541cbb84569d1678bca57"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s03-a0-c00\\entry-observations.json",
+      "bytes": 581950,
+      "sha256": "66525803f64b02b0058e5c31501467a5e4ca272b66de5eed0d089fe0635d62f3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s03-a0-c00\\s03-a0-c00-composed.png",
+      "bytes": 2074543,
+      "sha256": "749ac8f610acee5ff3c363b914d3a7d9fa77bdc01372ba81aec286eafff6aaba"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s04-a0-c00\\entry-observations.json",
+      "bytes": 540982,
+      "sha256": "e68b688149a24c77b9478653153cd6383093b85dad434ab0d363e18bab8469ca"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s04-a0-c00\\s04-a0-c00-composed.png",
+      "bytes": 2074543,
+      "sha256": "dbee3535f975ddc5f637bfe4d4afde0e4b2b6bf8bd4ef887e2dbcada2dfd2e5f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-23sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s04-a1-c00\\entry-observations.json",
+      "bytes": 3058021,
+      "sha256": "6134098940df0c74b46ad2b0d6b28a8e4a756d433cc4520c9b2b13553aae5739"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-remaining12sections-local-v36-50f4a31-v1\\qualification.json",
+      "bytes": 193212,
+      "sha256": "4b4f39516783757541c07ed5bebfeb435e610e3d4b235e5dfff557c20af16b9d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-remaining12sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s05-a0-c00\\entry-observations.json",
+      "bytes": 589366,
+      "sha256": "a309226097a7652d131cf07c2793443f42e21b1e78b336844b2d2870789b9381"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-remaining12sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s05-a0-c00\\s05-a0-c00-composed.png",
+      "bytes": 2074543,
+      "sha256": "c4c9056c564282edcd47f9bdbd7f4060c5c299be04103f0a76688279a3dfb9be"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-remaining12sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s06-a0-c00\\entry-observations.json",
+      "bytes": 629540,
+      "sha256": "b777711a4589bdaf9a60c7f4e0f90e81dae839aa871fd9e903cb788ffd044c0d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-remaining12sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s06-a0-c00\\s06-a0-c00-composed.png",
+      "bytes": 2074543,
+      "sha256": "545a89b3dd92838f4b8c98cfef4a20bea35f2f034b43b8deb875a23a1edd9537"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-remaining12sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s07-a0-c00\\entry-observations.json",
+      "bytes": 656694,
+      "sha256": "328159c7aa72791cb659c331d54bcd77c153e9f66d4f0c6a615bd6457a737ad0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-remaining12sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s07-a0-c00\\s07-a0-c00-composed.png",
+      "bytes": 2074543,
+      "sha256": "470f8d3a2cfc2ef09ff0f7dca98905a703de024a5ab4bb6e3ef7885ae55b346b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-entry-batch-remaining12sections-local-v36-50f4a31-v1\\content-entry-batch\\case-s08-a0-c00\\entry-observations.json",
+      "bytes": 3054655,
+      "sha256": "d8766a19b11e0411a353e703fa9b81109273bf058f72df887114b8618645fc9d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-batch-entry-v1-index.json",
+      "bytes": 4365,
+      "sha256": "6ad2c6aab00024b633785def76fd9d8729a65ee701abe16b9e93752d9d0afdfc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-batch-entry-source-v1.json",
+      "bytes": 128091,
+      "sha256": "4291fcc971872d03bb25c60295ecbffe68d21a00ce4c118a5fdaa54b78acca1c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-batch-entry-plans-v1.json",
+      "bytes": 3211,
+      "sha256": "3e7b2540bf12bbfd128d3746ff862e3be5c044f8504572c5828d07e9fe98b52d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-batch-entry-v1-contract.txt",
+      "bytes": 6860,
+      "sha256": "1997b61829b0efbb823ac3cc5460dabe05245d88d1b67a94063f2f71cdeedb80"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-content-entry-prefixes-v36-v1.py",
+      "bytes": 6566,
+      "sha256": "0aaa52ac19c8cdb6f9f86e7219a057edcbcbb96031d992bf1edf35a5ff1788ea"
+    }
+  ],
+  "all_six_location_mechanics": "unverified",
+  "actual_stage_end_transitions": "unverified",
+  "gameplay_mode_passes_added": 0,
+  "limitations": [
+    "Entry/setup components only; loader/initializer/ground/camera readiness and composed completion do not establish mechanics.",
+    "Only the first three-intro parent completed; the two expanded parents remain failed and their complete prefixes are retained.",
+    "Each completed entry independently retains original live guards, exact8-write mailbox transaction, native initializer once and correct destination.",
+    "No HP/inventory/position/success/exit/rescue/native-card writes; original command8 loader explicitly bypasses route reachability.",
+    "s04-a1 exact-X readiness fails during original environmental displacement; source/co-op body participation issue48 is investigated separately.",
+    "s08-a0 has a stalled prior-stage typed publication while native scripted action20 proceeds; no stage readiness or mechanics result inferred.",
+    "Source claims for all94campaignrecords are addressable setup scope, not runtime coverage. Netplay remains unverified."
+  ]
+}
