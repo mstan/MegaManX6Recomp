@@ -4181,9 +4181,51 @@
               "F12 failed9cbc attempt remains in ledger/evidence. LOCAL F12 and F6 passed on253c74e; their netplay and aggregate remain unverified. No Giga art/state pass from this ordinary run."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+            "build_identity": {
+              "executable_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+              "compiled_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
+            },
+            "settings": {
+              "mode": "offline",
+              "input_path": "published_host",
+              "roster": [
+                "X/P1",
+                "normalZero/P2"
+              ],
+              "stage": 0,
+              "section": 0,
+              "private_profile": true,
+              "audio": "dummy",
+              "fixture": false,
+              "load": false
+            },
+            "action": "Actual guest Select leave/ABSENT/rearm/rejoin; P1 Right held while native beam remains inphase1; finite arrival, neutral windows and independent controls.",
+            "outcome": "All14 independently recomputed F6 checks on377 coherent rows pass;2px primary movement whollyphase1, finite ALIVE/neutral117native ticks, six stationary windows, resources/world and both controls retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-hud/manifest-bound-c3c5bdb-F12-settled-trails-and-F6-local-regression-reviewed.json",
+                "sha256": "4d3dd29c7eef887cba1250edf75701c889656bc46159059c145043a8d91ae9ad"
+              }
+            ],
+            "limits": [
+              "Two distinct ordinary LOCAL runs on identical c3c5bdb image/manifest: native26968 for F6 mechanics; native8605 for settled F12 composed art and original menu timing. Actual reports remain separate.",
+              "Earlier native26968 F12 images showed early poses with no clear composed trails. That observation and its parent remain preserved; bank equality alone was not credited as composed art. Focused8605 waits two actual native updates and captures positive trails before/after original pause.",
+              "Root inspected both new settled F12 PNGs: native red/orange Zero trails, X/Zero bodies/meters/world intact. All30pre+3post actually used red banks and60GT3 each match pinned original Zero sprite/tile pixels and native stage palette. No whole-screen hardware/phase equality or all-attack claim.",
+              "F6 independently recomputed all14 checks on377 coherent observations: actual2px P1 movement entirely within JOINING phase1, finite ALIVE/neutral settlement117native ticks, six stationary windows and both original controls/resources/world.",
+              "No fixture, HP/ammo/equipment/action/outcome write or LOAD in either run. FullHP/ammo/default form stage0 ordinary baseline; no other-form/geometry/acquired-inventory breadth.",
+              "Both ordinary default input recordings finalized, source/manifest validation passed, fresh native private cards unchanged and owned exit0. No offline replay equivalence or populated owner-card exercise.",
+              "New candidate LOCAL regressions only. Existing253c74e F12 same-image aggregate pass remains historical; no c3c5bdb netplay/aggregate admission from these runs. F6 netplay/aggregate still unverified. Separate native-content inventory unchanged."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "LOCAL F6 passes9cbc314 and new253c74e palette candidate with actual primary movement during one finite native rejoin, default resources/world retained and both controls. No fixture/LOAD. Netplay/aggregate unverified; all prior observer failures and independent admission limits retained."
+        "limitations": "LOCAL F6 passes9cbc314 and new253c74e palette candidate with actual primary movement during one finite native rejoin, default resources/world retained and both controls. No fixture/LOAD. Netplay/aggregate unverified; all prior observer failures and independent admission limits retained. Additional c3c5bdb LOCAL regression independently reviewed:2px whollybeamphase1/117native ticks; netplay still unverified."
       }
     },
     {
@@ -4666,9 +4708,51 @@
               "Frozen F12 comparison is admitted for this bounded contract. Other ledger rows and the separate native-content inventory receive no pass from this evidence."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+            "build_identity": {
+              "executable_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+              "compiled_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
+            },
+            "settings": {
+              "mode": "offline",
+              "input_path": "published_host",
+              "roster": [
+                "X/P1",
+                "normalZero/P2"
+              ],
+              "stage": 0,
+              "section": 0,
+              "private_profile": true,
+              "audio": "dummy",
+              "fixture": false,
+              "load": false
+            },
+            "action": "Native Zero dash before/after original P1 menu; two native updates before composed art capture; frozen private actions, original resume and finite native dash drain.",
+            "outcome": "All original6 menu/dash predicates and3 private freeze windows pass. Both composed frames show native red/orange trails; all30pre+3post used red bank payloads match original Zero sprite/tile pixels/native palette,60GT3 perphase. Separate earlier early-pose images retained without composed credit.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-hud/manifest-bound-c3c5bdb-F12-settled-trails-and-F6-local-regression-reviewed.json",
+                "sha256": "4d3dd29c7eef887cba1250edf75701c889656bc46159059c145043a8d91ae9ad"
+              }
+            ],
+            "limits": [
+              "Two distinct ordinary LOCAL runs on identical c3c5bdb image/manifest: native26968 for F6 mechanics; native8605 for settled F12 composed art and original menu timing. Actual reports remain separate.",
+              "Earlier native26968 F12 images showed early poses with no clear composed trails. That observation and its parent remain preserved; bank equality alone was not credited as composed art. Focused8605 waits two actual native updates and captures positive trails before/after original pause.",
+              "Root inspected both new settled F12 PNGs: native red/orange Zero trails, X/Zero bodies/meters/world intact. All30pre+3post actually used red banks and60GT3 each match pinned original Zero sprite/tile pixels and native stage palette. No whole-screen hardware/phase equality or all-attack claim.",
+              "F6 independently recomputed all14 checks on377 coherent observations: actual2px P1 movement entirely within JOINING phase1, finite ALIVE/neutral settlement117native ticks, six stationary windows and both original controls/resources/world.",
+              "No fixture, HP/ammo/equipment/action/outcome write or LOAD in either run. FullHP/ammo/default form stage0 ordinary baseline; no other-form/geometry/acquired-inventory breadth.",
+              "Both ordinary default input recordings finalized, source/manifest validation passed, fresh native private cards unchanged and owned exit0. No offline replay equivalence or populated owner-card exercise.",
+              "New candidate LOCAL regressions only. Existing253c74e F12 same-image aggregate pass remains historical; no c3c5bdb netplay/aggregate admission from these runs. F6 netplay/aggregate still unverified. Separate native-content inventory unchanged."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Passed LOCAL and paired same-image253c74e normalZero/stage0 F12 contract. Multi-run paired art and unmodified timing components explicitly bound; older failed parents retained. No rollback/cross-host/allart or native-content coverage."
+        "limitations": "Passed LOCAL and paired same-image253c74e normalZero/stage0 F12 contract. Multi-run paired art and unmodified timing components explicitly bound; older failed parents retained. No rollback/cross-host/allart or native-content coverage. Additional c3c5bdb LOCAL regression reviewed: settled composed trails/original pixels/menu timing; c3netplay unverified."
       }
     },
     {
@@ -7289,13 +7373,13 @@
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "failed",
+        "status": "unverified",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
+          "local": "passed",
           "netplay": "unverified"
         },
         "evidence": [
@@ -7349,9 +7433,66 @@
             "bypasses": [
               "Earned inventory through original initializer; native acquisition unqualified."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+            "build_identity": {
+              "executable_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+              "compiled_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
+            },
+            "settings": {
+              "mode": "offline",
+              "input_path": "published_host",
+              "roster": [
+                "X/P1",
+                "normalZero/P2"
+              ],
+              "stage": 0,
+              "section": 0,
+              "drawables": [
+                [
+                  320,
+                  240
+                ],
+                [
+                  960,
+                  720
+                ]
+              ],
+              "private_profile": true,
+              "audio": "dummy",
+              "inventory_prerequisite": "original command9 initializer",
+              "state_operations": "current-build warm SAVE7/advance13/LOAD7/probe8; fresh cold exactsnapshot adoption/LOAD7/probe8"
+            },
+            "action": "Actual native Zero UpTriangle activates/spends original Yammar then XTriangle spends. Capture native320 and Fit960 original-source pixels/UV/palette; pauseactiveeffect with originalStart, current-build warm/cold restore, resume/source-capture/both independent controls.",
+            "outcome": "All13 fresh F59 predicates pass; all35 fresh/restored actual used-bank payloads exactly match positive original nativev64 texels and nativeUV/CLUT. Root18representativePNG+menu review shows coherent options/heroes/HUD/world. Each warm/cold restoration passes22 reparsed comparisons/full16KiB palette/seveneffectbanks and both2px controls; actual default strictrefusals/cards/ownedexit0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-hud/manifest-bound-c3c5bdb-F59-Yammar-native-pixels-and-active-state-local-reviewed.json",
+                "sha256": "1b5eb719d07ad8290faea18c41315fcaa515cfaa08203d0ee48c108025d76a0d"
+              }
+            ],
+            "limits": [
+              "LOCAL fixed X/P1+normalZero/P2 stage0section0 original Yammar family only. Fourteen fresh, nine warm-restored and twelve cold-restored actual captures at literal320x240/Fit960x720; at least three distinct native leaf animation frames per size. No all-specials, fullpage-runtime, netplay or whole-screen hardware equivalence claim.",
+              "Root viewed18 representative actual PNGs covering three distinct native frames at both sizes for fresh/warm/cold contexts, plus original ready menu: all three green Yammar options render coherently; heroes, HP/weapon meters and native world remain intact. Resumed captures retain truthful Saved slot9 OSD from the SAVE8 probe.",
+              "All35 actual encoded used bank payloads independently redecoded and compared to original source-qualified native v64 placement, exact UVs and stage0 type5 CLUT7849. Expected opaque texels are positive; normalized-origin equality is retained separately and cannot substitute for native placement.",
+              "Actual command9 original earned-inventory initializer0->FF is an acquisition prerequisite bypass. Warm then uses native selections, original Zero UpTriangle activation/spend and XTriangle spend. No direct HP/ammo/weapon/action/shot/palette/outcome write. No native acquisition or persistent memory-card progress claim.",
+              "Active warm SAVE7/actual13native-update state change/LOAD7 and separate freshly prepared cold adoption of exactly that new-build snapshot both pass22 independently reparsed provider/native/cache/palette checks plus live full16KiB palette equality. No prior-build snapshot was loaded. Cold began without any Yammar controller/source bank and does not claim fresh native cold activation.",
+              "Both actors independently moved2pixels after each restore with the other actor XY/resources retained; cache identity/encoded/decoded pixels remain exact. Build-specific state files are disposable snapshots, not native saves; no rewind/rollback or replay-equivalence admission.",
+              "Each actual original parent passes source/image/manifest, canonical default fixture-tainted recording and both strict capture/replay refusals, native private-card invariance and graceful owned exit0. LOAD execution replacement is explicit. No finalized ordinary capture is claimed for this fixture route.",
+              "Old253c74e real native-placement failure and all selector/video/preparation failures remain retained. Firstc3warm attempt passed fresh art but stopped on opening-menu readiness beforeSAVE; its full parent remains failed. v2 waits boundedly for the same original ready1 predicate, preserving every strict freeze/restore/pixel acceptance rule.",
+              "F59 LOCAL passes on c3c5bdb. Netplay and aggregate are unverified; separate native-content inventory unchanged. New candidate Giga regression is separately pending and receives no pass from this Yammar receipt."
+            ],
+            "bypasses": [
+              "Actual original command9 earned-inventory initialization bypass; native acquisition unqualified.",
+              "Explicit current-build warm LOAD and cold adoption of the exact genuinely warm-activated snapshot; native card progress unchanged."
+            ]
           }
         ],
-        "limitations": "LOCAL F59 failed253c74e actual privateYammar texture placement at native320/finalFit960: correct source/UV/palette but blankusedtile4000 instead of source-qualified nativev64 pixels. Original-bank equality at normalizedorigin is insufficient. Netplay unverified; one family only, failedsetup and capture artifacts preserved."
+        "limitations": "LOCAL F59 corrected c3c5bdb nativeYammar art passes actual320/Fit960 sourcepixels/UV/palette/composedreview and active current-build warm/cold restoration. Failed253c74e and observer attempts preserved. One nativefamily/fixed stage0/normalZero only; originalinventory acquisitionbypass/LOAD explicit. Netplay and aggregate unverified; no whole-screen/allart/rollback/nativecontent admission."
       }
     },
     {

@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 11 passed (R2, R4, R5, R7, R8, R12, R13, F10, F18, F33, F38), 2 failed (R15, F208), 221 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 12 passed (R2, R4, R5, R7, R8, R12, R13, F10, F12, F18, F33, F38), 2 failed (R15, F208), 220 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -51,9 +51,15 @@ review, with checkpoint/protection bypasses explicit. Netplay, the other four
 CP2 checks and the whole intro obligation remain unverified. These results do
 not change the separate 234 comparison rows.
 
-All 234 reference rows are inventoried; 11/234 (4.7%) are passed. R15/F208
+All 234 reference rows are inventoried; 12/234 (5.1%) are passed. R15/F208
 retain prior native Quit callback failures with broader transition checks
-incomplete. F33's current-image state/resource and paired refusal checks pass.
+incomplete. F59's `253c74e` local Yammar texture-placement failure remains in
+history. The `c3c5bdb` fix passes 103 debug and 103 production tests and reviewed
+local native artwork plus active-effect warm/cold current-build restoration.
+Its netplay and aggregate checks remain unverified.
+F12's reviewed local and paired native dash/pause evidence passes. R6, F6,
+F31, F59 and F157 have additional local passes; their netplay and aggregate results
+remain unverified. F33's current-image state/resource and paired refusal checks pass.
 F10/F18 now pass on 1f50059 after restoring the original primary sprite sheet
 and frozen effects, with rendered local/paired requalification below. Their
 earlier 66f7db0 failures remain in history.
