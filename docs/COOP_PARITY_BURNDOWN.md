@@ -278,8 +278,16 @@ The batch remains failed at `s12-a0-c02`:440 complete polls never passed all
 twelve predicates; the last full poll had X at2151 versus authored2112.
 Its final three-read partial probe contains no body/camera/GPU readiness result.
 No damage, terrain or position-change cause is established.
-Setup coverage is now46 qualified,4 blocked (`s04-a1-c00`, `s03-a0-c05`,
-`s04-a0-c03`, `s12-a0-c02`) and44 unvisited supported locations. Rendering, stage mechanics
+The [reviewed entry68897 failure](evidence/mmx6-content/manifest-bound-50f4a31-entry68897-failed-first-reviewed.json)
+adds no completed setup. Its first location, `s12-a0-c03`, exhausted1,800 reads
+after440 complete readiness polls. Root reproduced all twelve predicates,
+1,763 journal RAM links, seven source guards, eight mailbox writes and all late
+constraints. The last poll failed living-idle roster, native idle-grounded and
+authored X; ordinary native X was at2075 versus2112, with HP26 and published
+Zero HP24. A final fixture-only read has no further readiness sample.
+No image, damage source or position-change cause was established.
+Setup coverage is now46 qualified,5 blocked (`s04-a1-c00`, `s03-a0-c05`,
+`s04-a0-c03`, `s12-a0-c02`, `s12-a0-c03`) and43 unvisited supported locations. Rendering, stage mechanics
 and the comparison count receive no additional passes.
 F205 now passes its bounded effective-mode recording check on `f3bdbe9`, with
 107 debug and 107 production checks passing. The [LOCAL receipt](evidence/mmx6-native-replay/manifest-bound-f3bdbe9-F205-effective-mode-history-local-reviewed.json)
