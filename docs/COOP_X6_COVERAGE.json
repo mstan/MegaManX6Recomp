@@ -2069,7 +2069,108 @@
         },
         "netplay": {
           "status": "unverified",
-          "attempts": []
+          "attempts": [
+            {
+              "receipt": {
+                "case_id": "X6-077",
+                "mode": "netplay",
+                "result": "unverified",
+                "candidate": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+                "recorded_at": "2026-10-25T04:09:22Z",
+                "build_identity": {
+                  "name": "reviewed c3 paired actual earned-intro card Load and continuation",
+                  "image": {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-native-card-reentry-batch-v35-c3c5bdb-v5\\peer-0\\mmx6-runtime.exe",
+                    "sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347"
+                  },
+                  "details": {
+                    "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+                    "compiled_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+                    "host_profile": {
+                      "profile": "mmx6.win64-clang22.loopback",
+                      "revision": 2,
+                      "selected_sha256": "991fb9d9d0868e0a9fce42188d63ca0593727a1a878b990f27ec9778f54ff972",
+                      "peers": [
+                        {
+                          "capabilities": {
+                            "actual_image_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+                            "cpu_arch": 2,
+                            "features": 127,
+                            "backend": 2,
+                            "fp": 2,
+                            "overlays": "interpreted",
+                            "offers": 1
+                          },
+                          "settlement": {
+                            "profile": "mmx6.win64-clang22.loopback",
+                            "revision": 2,
+                            "selected_sha256": "991fb9d9d0868e0a9fce42188d63ca0593727a1a878b990f27ec9778f54ff972",
+                            "cycles": 0,
+                            "sim_tick": 0,
+                            "before_enter_guest": 1
+                          }
+                        },
+                        {
+                          "capabilities": {
+                            "actual_image_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+                            "cpu_arch": 2,
+                            "features": 127,
+                            "backend": 2,
+                            "fp": 2,
+                            "overlays": "interpreted",
+                            "offers": 1
+                          },
+                          "settlement": {
+                            "profile": "mmx6.win64-clang22.loopback",
+                            "revision": 2,
+                            "selected_sha256": "991fb9d9d0868e0a9fce42188d63ca0593727a1a878b990f27ec9778f54ff972",
+                            "cycles": 0,
+                            "sim_tick": 0,
+                            "before_enter_guest": 1
+                          }
+                        }
+                      ]
+                    }
+                  }
+                },
+                "settings": {
+                  "roster": [
+                    "X/P1",
+                    "normalZero/P2"
+                  ],
+                  "loopback": true,
+                  "input_delay": 3,
+                  "input_path": "published_host",
+                  "audio": "dummy",
+                  "native_card": "actually earned original intro Save exclusively copied before both processes/default recordings",
+                  "fixture": false,
+                  "execution_LOAD": false
+                },
+                "action": "Both peers originally Load actual earned native slot0, export campaign to CURRENT, complete story/map/unit0 selection and fresh stage1 roster; repeat genuine primary Quit/CURRENT and separate NewGame, with guest menus and independent controls after each.",
+                "outcome": "Completed bounded intro persistence component. Exact8192Bfile/956Bslot/checksum/full951Bexport and original campaign import ranges match on both peers. All33 guest checks,10resolvedCRCwindows64samples, both ordinary ONLINE recordings/profile, all native card preservation and graceful exits0 pass. Whole X6-077 stays unverified.",
+                "artifacts": [
+                  {
+                    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-native-reentry\\manifest-bound-c3c5bdb-native-card-CURRENT-NewGame-R15-F208-paired-reviewed.json",
+                    "sha256": "c5912a97e86162551387072f72e98a9df145d5eb2c94059c8e0f14ded1daf223",
+                    "role": "independently reviewed63-artifact paired component"
+                  }
+                ],
+                "limits": [
+                  "Same exact c3 image/SDK/manifest LOCAL and Windows loopback delay3 NETPLAY, fixed X/P1+normalZero/P2. No cross-host, other rosters or whole campaign/content admission.",
+                  "Actually-earned intro QAcard is exclusively copied before each process and default recording. No execution LOAD, authored CURRENT, fixture or success flag in this pair. Source QAcard and both targets preserved after exit.",
+                  "Native card file/slot/checksum/full exported campaign, guest Quit refusal, genuine primary Quit/CURRENT/map/unit0, separate NewGame defaults, fresh enrollment and all11guest menu/control checks pass on both peers.",
+                  "Original imported CURRENT marker and later native PLAY counter are retained separately; no volatile-byte normalization or invented counter increment.",
+                  "Native UI sampling discards changed slot-read brackets; accepted proof keeps exact state/phase/choice bracket. Story reserves3full phase timeouts and at most3healthy source-bound chunks. All original pressed/response/neutral checks remain.",
+                  "Ten full core/mod windows independently match terminal stderr strictly below both resolved watermarks; frontend windows additionally re-reduced after their explicit captured simulation floor. Original gameplay matching also requires fresh common diagnostic publications.",
+                  "Both canonical ordinary online N/C recordings finalize with actual settled profile991fb9d9, declared sealed content/settings and exactQAcard+SDKblank initialcards. Offline network replay is strictly refused; no paired replay/rollback claim.",
+                  "Root viewed15 actual PNGs: both-peer native stage1/current and stage0/NewGame rosters, original Zero menus and resumed attacks, genuine primary confirmation pages/title. No broad scenery/palette/animation or native-card-UI art claim.",
+                  "Prior partials v1..v4 remain failed and preserved. Native X6-077 acquired weapons/armor/parts/techniques/souls/ranks/Reploids/Nightmare breadth remainsunverified."
+                ],
+                "bypasses": []
+              },
+              "sha256": "43c0e09a01d2fa2c9e75a5a5de03db616c081365819b7834e81fe2839a4d8cc4"
+            }
+          ]
         }
       }
     },

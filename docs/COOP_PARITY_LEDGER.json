@@ -3110,14 +3110,14 @@
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -3448,9 +3448,53 @@
             "bypasses": [
               "Exact-current-build actual earned mission execution LOAD from the retained successful reportContinue/selector/mission prefix. Its earlier introCP2/checkpoint/native-iframe prerequisites remain explicit in the separately linked export receipt. No native card or acquired weapon/armor/Reploid/soul result is claimed."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+            "build_identity": {
+              "executable_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+              "compiled_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
+            },
+            "settings": {
+              "mode": "loopback",
+              "input_delay": 3,
+              "input_path": "published_host",
+              "roster": [
+                "X/P1",
+                "normalZero/P2"
+              ],
+              "private_profiles": true,
+              "audio": "dummy",
+              "fixture": false,
+              "load": false,
+              "native_earned_QA_card_seed": true
+            },
+            "action": "Actual earned-card native Load/primary Quit/title/map/unit0/fresh roster/guestmenu; actual guest campaign-Quit refusal then CURRENT import/reentry; separate NewGame/defaults/reentry and guestmenu.",
+            "outcome": "All three source-bound routes and11guestchecks each pass on both peers, with101/105/43 accepted route inputs plus7cardLoad inputs, original source guards,10fullresolvedCRCwindows, bothordinaryONLINE recordings, protected native cards and gracefulownedexits0. Same-imageLOCAL evidence alreadyreviewed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-native-reentry/manifest-bound-c3c5bdb-native-card-CURRENT-NewGame-R15-F208-paired-reviewed.json",
+                "sha256": "c5912a97e86162551387072f72e98a9df145d5eb2c94059c8e0f14ded1daf223"
+              }
+            ],
+            "limits": [
+              "Same exact c3 image/SDK/manifest LOCAL and Windows loopback delay3 NETPLAY, fixed X/P1+normalZero/P2. No cross-host, other rosters or whole campaign/content admission.",
+              "Actually-earned intro QAcard is exclusively copied before each process and default recording. No execution LOAD, authored CURRENT, fixture or success flag in this pair. Source QAcard and both targets preserved after exit.",
+              "Native card file/slot/checksum/full exported campaign, guest Quit refusal, genuine primary Quit/CURRENT/map/unit0, separate NewGame defaults, fresh enrollment and all11guest menu/control checks pass on both peers.",
+              "Original imported CURRENT marker and later native PLAY counter are retained separately; no volatile-byte normalization or invented counter increment.",
+              "Native UI sampling discards changed slot-read brackets; accepted proof keeps exact state/phase/choice bracket. Story reserves3full phase timeouts and at most3healthy source-bound chunks. All original pressed/response/neutral checks remain.",
+              "Ten full core/mod windows independently match terminal stderr strictly below both resolved watermarks; frontend windows additionally re-reduced after their explicit captured simulation floor. Original gameplay matching also requires fresh common diagnostic publications.",
+              "Both canonical ordinary online N/C recordings finalize with actual settled profile991fb9d9, declared sealed content/settings and exactQAcard+SDKblank initialcards. Offline network replay is strictly refused; no paired replay/rollback claim.",
+              "Root viewed15 actual PNGs: both-peer native stage1/current and stage0/NewGame rosters, original Zero menus and resumed attacks, genuine primary confirmation pages/title. No broad scenery/palette/animation or native-card-UI art claim.",
+              "Prior partials v1..v4 remain failed and preserved. Native X6-077 acquired weapons/armor/parts/techniques/souls/ranks/Reploids/Nightmare breadth remainsunverified."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Exactc3 LOCAL frozen Quit/earnedCURRENT/characterselection/guest-menu and separate NewGame checks passed after independent source/raw import/default/fresh-publication and10PNG review. Earlier actual failures and the bounded observer timeout remain retained. Netplay equivalent is unverified, so aggregate stays unverified. Native card coldContinue and unacquired campaign breadth remain separate full-burndown X6 content obligations."
+        "limitations": "Passed exact samec3 LOCAL and actual paired Windowsloopback delay3 bounded native Quit/Continue/selection/freshroster/guestmenu ownership and separateNewGame defaults. Actuallyearned QAcard seededbeforestartup and preserved; source/native/card/recording/profile/CRC/exit gates independentlyreviewed. Priorfailuresretained; acquiredcampaignbreadth/X6-077 and human/crosshost checksseparate."
       }
     },
     {
@@ -13185,14 +13229,14 @@
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -13348,9 +13392,53 @@
             "bypasses": [
               "Exact-current-build actual earned mission execution LOAD from the retained successful reportContinue/selector/mission prefix. Its earlier introCP2/checkpoint/native-iframe prerequisites remain explicit in the separately linked export receipt. No native card or acquired weapon/armor/Reploid/soul result is claimed."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+            "build_identity": {
+              "executable_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+              "compiled_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
+            },
+            "settings": {
+              "mode": "loopback",
+              "input_delay": 3,
+              "input_path": "published_host",
+              "roster": [
+                "X/P1",
+                "normalZero/P2"
+              ],
+              "private_profiles": true,
+              "audio": "dummy",
+              "fixture": false,
+              "load": false,
+              "native_earned_QA_card_seed": true
+            },
+            "action": "Actual earned-card native Load/primary Quit/title/map/unit0/fresh roster/guestmenu; actual guest campaign-Quit refusal then CURRENT import/reentry; separate NewGame/defaults/reentry and guestmenu.",
+            "outcome": "All three source-bound routes and11guestchecks each pass on both peers, with101/105/43 accepted route inputs plus7cardLoad inputs, original source guards,10fullresolvedCRCwindows, bothordinaryONLINE recordings, protected native cards and gracefulownedexits0. Same-imageLOCAL evidence alreadyreviewed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-native-reentry/manifest-bound-c3c5bdb-native-card-CURRENT-NewGame-R15-F208-paired-reviewed.json",
+                "sha256": "c5912a97e86162551387072f72e98a9df145d5eb2c94059c8e0f14ded1daf223"
+              }
+            ],
+            "limits": [
+              "Same exact c3 image/SDK/manifest LOCAL and Windows loopback delay3 NETPLAY, fixed X/P1+normalZero/P2. No cross-host, other rosters or whole campaign/content admission.",
+              "Actually-earned intro QAcard is exclusively copied before each process and default recording. No execution LOAD, authored CURRENT, fixture or success flag in this pair. Source QAcard and both targets preserved after exit.",
+              "Native card file/slot/checksum/full exported campaign, guest Quit refusal, genuine primary Quit/CURRENT/map/unit0, separate NewGame defaults, fresh enrollment and all11guest menu/control checks pass on both peers.",
+              "Original imported CURRENT marker and later native PLAY counter are retained separately; no volatile-byte normalization or invented counter increment.",
+              "Native UI sampling discards changed slot-read brackets; accepted proof keeps exact state/phase/choice bracket. Story reserves3full phase timeouts and at most3healthy source-bound chunks. All original pressed/response/neutral checks remain.",
+              "Ten full core/mod windows independently match terminal stderr strictly below both resolved watermarks; frontend windows additionally re-reduced after their explicit captured simulation floor. Original gameplay matching also requires fresh common diagnostic publications.",
+              "Both canonical ordinary online N/C recordings finalize with actual settled profile991fb9d9, declared sealed content/settings and exactQAcard+SDKblank initialcards. Offline network replay is strictly refused; no paired replay/rollback claim.",
+              "Root viewed15 actual PNGs: both-peer native stage1/current and stage0/NewGame rosters, original Zero menus and resumed attacks, genuine primary confirmation pages/title. No broad scenery/palette/animation or native-card-UI art claim.",
+              "Prior partials v1..v4 remain failed and preserved. Native X6-077 acquired weapons/armor/parts/techniques/souls/ranks/Reploids/Nightmare breadth remainsunverified."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Exactc3 LOCAL frozen Quit/earnedCURRENT/characterselection/guest-menu and separate NewGame checks passed after independent source/raw import/default/fresh-publication and10PNG review. Earlier actual failures and the bounded observer timeout remain retained. Netplay equivalent is unverified, so aggregate stays unverified. Native card coldContinue and unacquired campaign breadth remain separate full-burndown X6 content obligations."
+        "limitations": "Passed exact samec3 LOCAL and actual paired Windowsloopback delay3 bounded native Quit/Continue/selection/freshroster/guestmenu ownership and separateNewGame defaults. Actuallyearned QAcard seededbeforestartup and preserved; source/native/card/recording/profile/CRC/exit gates independentlyreviewed. Priorfailuresretained; acquiredcampaignbreadth/X6-077 and human/crosshost checksseparate."
       }
     }
   ]

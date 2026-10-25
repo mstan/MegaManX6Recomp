@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 13 passed (R2, R4, R5, R7, R8, R12, R13, F6, F10, F12, F18, F33, F38), 0 failed, 221 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 15 passed (R2, R4, R5, R7, R8, R12, R13, R15, F6, F10, F12, F18, F33, F38, F208), 0 failed, 219 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -52,9 +52,9 @@ review, with checkpoint/protection bypasses explicit. Netplay, the other four
 CP2 checks and the whole intro obligation remain unverified. These results do
 not change the separate 234 comparison rows.
 
-All 234 reference rows are inventoried; 13/234 (5.6%) are passed. R15/F208
-now pass their exact bounded checks locally on `c3c5bdb`; their paired checks
-remain unverified and their prior failures remain in history.
+All 234 reference rows are inventoried; 15/234 (6.4%) are passed. R15/F208
+now pass their exact bounded checks locally and in paired Windows loopback on
+`c3c5bdb`; their prior failures remain in history.
 F59's `253c74e` local Yammar texture-placement failure remains in
 history. The `c3c5bdb` fix passes 103 debug and 103 production tests and reviewed
 local native artwork plus active-effect warm/cold current-build restoration.
@@ -65,7 +65,7 @@ within beam phase 1 and reach neutral ALIVE in 117 native ticks, retaining
 resources, world and both controls. Its independent route follows the original
 parent idle/control checks; the earlier combined dash-setup failures remain
 preserved. Five resolved CRC windows, both ordinary online recordings, native
-cards and owned exits pass. R6, R15, F31, F59, F157 and F208 have additional local passes;
+cards and owned exits pass. R6, F31, F59 and F157 have additional local passes;
 their netplay and aggregate results
 remain unverified. F33's current-image state/resource and paired refusal checks pass.
 F10/F18 now pass on 1f50059 after restoring the original primary sprite sheet
@@ -127,8 +127,8 @@ CURRENT remains1. These raw values are retained separately. The CURRENT and
 New Game cases consume105 and43 actual native inputs, respectively. Root
 reviewed ten actual Quit/world/menu images and all original recording/card/exit
 gates. The earlier c3 prefix timeout is preserved; its observer omitted the
-already-reviewed bounded dialogue continuation wrapper. Paired equivalents
-remain unverified, so neither aggregate row is promoted. Native card
+already-reviewed bounded dialogue continuation wrapper. The paired admission
+below now promotes both aggregate rows. Native card
 cold-Continue and unacquired campaign breadth remain separate full-burndown
 X6 content obligations.
 
@@ -152,8 +152,26 @@ its prelaunch working copy remain unchanged after graceful exit0. The ordinary
 default recording finalizes with the exact earned initial card and authentic
 SDK blank second slot; no execution LOAD, fixture or replay result is claimed.
 This is a recorded unverified X6-077 attempt with a completed intro component:
-acquired items, armor, parts, techniques, souls/ranks, Reploids, Nightmare state
-and the paired equivalents still need their own native persistence coverage.
+acquired items, armor, parts, techniques, souls/ranks, Reploids and Nightmare
+state still need their own native persistence coverage.
+
+The [paired c3 R15/F208 receipt](evidence/mmx6-native-reentry/manifest-bound-c3c5bdb-native-card-CURRENT-NewGame-R15-F208-paired-reviewed.json)
+qualifies both bounded comparisons on the same compiled image as their local
+passes. One paired run completes original earned-card Load and reentry, CURRENT
+continuation and reentry, and a separate New Game with original defaults.
+The three routes consume101,105 and43 accepted native inputs, plus seven card
+Load inputs. Both peers reach fresh X/Zero enrollment and pass all11 guest
+menu/control checks after each route; guest campaign Quit refusal also passes.
+Independent review checks the exact native file/slot/checksum, full exported
+CURRENT and original persistent imports,160 live original code guards, ten
+resolved core/mod CRC windows containing64 samples, both finalized ordinary
+online recordings and the actual settled pre-frame0 profile. The earned source
+card, both prelaunch copies and all ten authentic host/guest card files remain
+unchanged after both graceful owned exits0. Fifteen actual composed images
+received bounded roster/menu/Quit review. The63-artifact receipt retains all
+earlier failed prefixes; offline network replay is strictly refused. Cross-host
+sessions, other rosters, broad artwork and X6-077 acquired campaign persistence
+remain separate unverified obligations.
 
 F157 now passes locally on `777b4d0`. The
 [fresh Zero follow-up receipt](evidence/mmx6-combat/manifest-bound-777b4d0-F157-fresh-Zero-followups-local-reviewed.json)
