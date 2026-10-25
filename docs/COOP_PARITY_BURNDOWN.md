@@ -99,6 +99,14 @@ supplies a read-only source for fresh owned QA copies; paired cold Load, mission
 entry and R6/F59 observation remain pending. Weapon acquisition is bypassed,
 and the gameplay captures retain the background corruption tracked in
 `beads-eio.1.52`. No comparison, acquired progression or artwork pass follows.
+The [background-render observation receipt](evidence/mmx6-hud/manifest-bound-1128b9d-CP2-background-render-observations-reviewed.json)
+retains two completed CP2 render frames, full VRAM, all GP0 headers and separate
+presented thumbnails. Root reviewed all four images: black bands and scrambled
+purple/magenta tiles remain visible. Each canonical image exactly matches its
+own source-decoded VRAM crop. Presented tags differ from the render frame by
+one and zero respectively; neither a shared-frame mapping nor a cause or
+original-artwork result is inferred. Owned marks, snapshot configuration,
+neutral input, four materialized blank cards and graceful exit all pass.
 F33's current-image state/resource and paired refusal checks pass.
 F70's [reviewed local run](evidence/mmx6-native-replay/manifest-bound-50f4a31-F70-disabled-diagnostics-local-reviewed.json)
 explicitly disables diagnostics, completes a valid current-build LOAD and native

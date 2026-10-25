@@ -1,0 +1,847 @@
+{
+  "kind": "root_reviewed_actual_v40_CP2_background_render_observations_no_art_or_mechanics_admission",
+  "binding": {
+    "game": "1128b9d8073098e810e25c87e73a13fc24350b43",
+    "sdk": "3d6bacdb912bf5ddd16c3abc5f4581c010f055c7",
+    "proof_sha256": "6085bf5ee48dd10dec71c0b30ff497434cffead55ffe57d0174aa6a9ed248d56",
+    "image_sha256": "e49ee4dfa36e6e694fc822c295d189a5cc283864c4b4fd272b5d324bcb80eb4b",
+    "manifest_sha256": "bc86c0bfbad0457081600b0c3301270bdaf47b472bfc680fc7eb4810a3634121"
+  },
+  "original_parent_and_cleanup": {
+    "original_parent_gates": {
+      "exact_image_manifest_declared_sources_originals": true,
+      "native_resource_and_window_observations_complete": true,
+      "default_recording_taint_retained_and_replay_refused": true,
+      "owned_cleanup_private_cards": true
+    },
+    "actual_PID": 71248,
+    "cleanup": {
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    },
+    "all_four_materialized_cards_unchanged": true,
+    "fixture_taint_and_both_strict_refusals": true,
+    "actual_strict_CP2_bypass": true,
+    "only_neutral_collector_input": true,
+    "exact_prior_snapshot_configuration_restored": true,
+    "fresh_profile_initial_parent_card_map": {}
+  },
+  "observations": [
+    {
+      "identity": {
+        "render_frame_F": 3096,
+        "mark_frame": 3098,
+        "mark_count": 1,
+        "display_span": [
+          3034,
+          3097
+        ],
+        "GP0_span": [
+          1671,
+          3097
+        ],
+        "rolling_RAM_span": {
+          "id": 1729,
+          "ok": true,
+          "count": 3098,
+          "oldest": 0,
+          "newest": 3097
+        },
+        "independent_presented_sequence": 2504,
+        "independent_presented_issue_tag": 3097,
+        "observed_tag_minus_render_F": 1,
+        "composed_render_alignment": "unverified"
+      },
+      "canonical_same_F_VRAM_identity": {
+        "display_crop": {
+          "x": 0,
+          "y": 240,
+          "width": 320,
+          "height": 240
+        },
+        "source_timeline_event": [
+          28541,
+          1748194560,
+          3096,
+          "disp_capture",
+          0,
+          15728640
+        ],
+        "canonical_RGB_sha256": "1d29b4b783a1bedb2e91995db50efeb2fe2476f3ed8b35efb017267357151d30",
+        "decoded_VRAM_crop_RGB_sha256": "1d29b4b783a1bedb2e91995db50efeb2fe2476f3ed8b35efb017267357151d30",
+        "differing_RGB_bytes": 0,
+        "scope": "Same retained render/display F source-surface identity only; no artwork/reference/per-draw texture/provenance verdict"
+      },
+      "artifacts": {
+        "VRAM": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture0-frame3096-VRAM.u16",
+          "bytes": 1048576,
+          "sha256": "763c96cda8bd701123712bf96a2ea1bc7dd925d26f17253c73f48bb22b5c9807"
+        },
+        "canonical": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture0-frame3096-canonical.png",
+          "bytes": 230723,
+          "sha256": "e2e2ab1f87bf325f93e44a125cdf7dc36f9eedf0adaa5ba5c92212fbde18f391"
+        },
+        "composed_thumbnail": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture0-present-sequence2504-composed-thumbnail.png",
+          "bytes": 57788,
+          "sha256": "e565ba80efac1a24b5e90b4823d1f1996576ee5dbf60a1061482dd6f5a723fdb"
+        },
+        "GP0": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture0-frame3096-GP0.json.gz",
+          "bytes": 9571,
+          "sha256": "fd15f9abfb4166a0e14d358ca861a5b1ffb39dae0c8e629e2540179cc8d7da32"
+        },
+        "timeline": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture0-frame3096-timeline.json.gz",
+          "bytes": 463,
+          "sha256": "b64f9f8427194d917cf018d1d271c4ee84dd4929411961f7ecd56a3b84ec7606"
+        }
+      },
+      "GP0": {
+        "commands": 810,
+        "sequence": [
+          1714471,
+          1715280
+        ],
+        "opcode_counts": {
+          "0x00": 5,
+          "0x01": 1,
+          "0x02": 1,
+          "0x2D": 14,
+          "0x34": 14,
+          "0x35": 16,
+          "0x38": 2,
+          "0x7D": 676,
+          "0x80": 1,
+          "0xA0": 1,
+          "0xE1": 71,
+          "0xE2": 1,
+          "0xE3": 2,
+          "0xE4": 2,
+          "0xE5": 2,
+          "0xE6": 1
+        },
+        "SPRT16_total": 676,
+        "max_words": 12,
+        "truncated_headers": 0
+      },
+      "timeline_events": 33,
+      "rolling_RAM_scope": "Requested retained frame replies from independently rolling history; no atomic frozen GPU/RAM claim",
+      "ordinary_later_reads_scope": "Actual GPU/video state replies are later than F, never same-F metadata",
+      "complete_GP0_scope": "All retained GP0 entry headers for the named frame below request cap; upload payloads/host banks not included"
+    },
+    {
+      "identity": {
+        "render_frame_F": 3119,
+        "mark_frame": 3120,
+        "mark_count": 2,
+        "display_span": [
+          3034,
+          3119
+        ],
+        "GP0_span": [
+          1681,
+          3120
+        ],
+        "rolling_RAM_span": {
+          "id": 1753,
+          "ok": true,
+          "count": 3122,
+          "oldest": 0,
+          "newest": 3121
+        },
+        "independent_presented_sequence": 2513,
+        "independent_presented_issue_tag": 3119,
+        "observed_tag_minus_render_F": 0,
+        "composed_render_alignment": "unverified"
+      },
+      "canonical_same_F_VRAM_identity": {
+        "display_crop": {
+          "x": 0,
+          "y": 0,
+          "width": 320,
+          "height": 240
+        },
+        "source_timeline_event": [
+          28642,
+          1761177600,
+          3119,
+          "disp_capture",
+          0,
+          0
+        ],
+        "canonical_RGB_sha256": "1dc9b02a5296ee1ff4bb4e6050ff68d1feb91b1385c1f2588a87e832cdea43df",
+        "decoded_VRAM_crop_RGB_sha256": "1dc9b02a5296ee1ff4bb4e6050ff68d1feb91b1385c1f2588a87e832cdea43df",
+        "differing_RGB_bytes": 0,
+        "scope": "Same retained render/display F source-surface identity only; no artwork/reference/per-draw texture/provenance verdict"
+      },
+      "artifacts": {
+        "VRAM": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture1-frame3119-VRAM.u16",
+          "bytes": 1048576,
+          "sha256": "276f8b25e48a8b185b9c2826c414051fdc123c09f096c86d416c0e1cadf5a5d1"
+        },
+        "canonical": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture1-frame3119-canonical.png",
+          "bytes": 230723,
+          "sha256": "a3688a9732dedf5f0f8c92870499d547af1362f2ca5bdfe1ec3f861557354bba"
+        },
+        "composed_thumbnail": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture1-present-sequence2513-composed-thumbnail.png",
+          "bytes": 57788,
+          "sha256": "124b9f5ee8df8270ec426d013e9ee9bf2217e509cb81987cb42df8cca6af4503"
+        },
+        "GP0": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture1-frame3119-GP0.json.gz",
+          "bytes": 9571,
+          "sha256": "029b6df34b4760cde1c927b84ef56ee340e003cef724e7bbfa7eac5b6b8c3047"
+        },
+        "timeline": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture1-frame3119-timeline.json.gz",
+          "bytes": 447,
+          "sha256": "ef8b2d2eb7b9595c0d9c4f04c068c13f77d46badd5bce8fea717c368de2ac213"
+        }
+      },
+      "GP0": {
+        "commands": 808,
+        "sequence": [
+          1721739,
+          1722546
+        ],
+        "opcode_counts": {
+          "0x00": 5,
+          "0x01": 1,
+          "0x02": 1,
+          "0x2D": 13,
+          "0x34": 14,
+          "0x35": 16,
+          "0x38": 2,
+          "0x7D": 676,
+          "0x80": 1,
+          "0xA0": 1,
+          "0xE1": 70,
+          "0xE2": 1,
+          "0xE3": 2,
+          "0xE4": 2,
+          "0xE5": 2,
+          "0xE6": 1
+        },
+        "SPRT16_total": 676,
+        "max_words": 12,
+        "truncated_headers": 0
+      },
+      "timeline_events": 31,
+      "rolling_RAM_scope": "Requested retained frame replies from independently rolling history; no atomic frozen GPU/RAM claim",
+      "ordinary_later_reads_scope": "Actual GPU/video state replies are later than F, never same-F metadata",
+      "complete_GP0_scope": "All retained GP0 entry headers for the named frame below request cap; upload payloads/host banks not included"
+    }
+  ],
+  "budget": {
+    "reads": 451,
+    "retained_bytes": 2696858,
+    "elapsed": 8.625,
+    "admission_seconds": 150,
+    "max_reads": 1024,
+    "max_bytes": 33554432,
+    "cleanup_scope": "Fixed owned restoration RPCs may run after admission budget; parent RPC timeout remains bounded"
+  },
+  "independent_reduction_recomputed_exactly": true,
+  "component_checks": {
+    "actual_package_source_proof_image_manifest": true,
+    "original_parent_all_four_gates": true,
+    "actual_own_frozen_marks_released_and_prior_snapshot_config_restored": true,
+    "four_nonvacuous_blank_native_cards_unchanged": true,
+    "exact_failed_fixture_recording_and_both_strict_refusals": true,
+    "two_actual_completed_GP0_display_VRAM_identities": true,
+    "canonical_RGB_equals_source_decoded_same_F_VRAM_crop": true,
+    "rolling_RAM_and_independent_presented_sequence_explicit": true
+  },
+  "claims": {
+    "art": false,
+    "original_reference": false,
+    "mechanics": false,
+    "root_cause": false,
+    "packet_bank_provenance": false,
+    "per_draw_texture_contents": false,
+    "atomic_RAM_GPU_same_frame": false,
+    "composed_render_alignment": false,
+    "ordinary_capture_admitted": false,
+    "replay_admitted": false,
+    "ledger": false
+  },
+  "root_image_review": {
+    "images": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture0-frame3096-canonical.png",
+        "bytes": 230723,
+        "sha256": "e2e2ab1f87bf325f93e44a125cdf7dc36f9eedf0adaa5ba5c92212fbde18f391"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture0-present-sequence2504-composed-thumbnail.png",
+        "bytes": 57788,
+        "sha256": "e565ba80efac1a24b5e90b4823d1f1996576ee5dbf60a1061482dd6f5a723fdb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture1-frame3119-canonical.png",
+        "bytes": 230723,
+        "sha256": "a3688a9732dedf5f0f8c92870499d547af1362f2ca5bdfe1ec3f861557354bba"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture1-present-sequence2513-composed-thumbnail.png",
+        "bytes": 57788,
+        "sha256": "124b9f5ee8df8270ec426d013e9ee9bf2217e509cb81987cb42df8cca6af4503"
+      }
+    ],
+    "observation": "Both canonical images and separately identified composed thumbnails show large black bands, displaced tiles and purple/magenta noise behind the living actors/HUD at original CP2. Visible anomaly retained under beads-eio.1.52; original-reference comparison and cause remain unverified.",
+    "surface_identity": "Each canonical RGB image exactly equals the source-decoded crop from its own frozen full VRAM and uniquely named same-render-frame timeline capture.",
+    "alignment": "Presented sequence2504/tag3097 and sequence2513/tag3119 are independent thumbnails. Their tag offsets1 and0 do not establish a frame mapping."
+  },
+  "disclosed_prerequisite": "One original offline command8 CP2 entry; no inventory/protection/attack/movement/LOAD by collector.",
+  "limitations": [
+    "SPRT16 count676 per frame includes arbitrary sprites/UI; no command classified as original background solely by opcode.",
+    "All GP0 headers are retained; A0 upload payload bytes and custom appended packet metadata/host bank identities are absent.",
+    "Full end-of-frame renderer VRAM is actual surface truth, not each earlier draw texture/CLUT before intervening upload/copy.",
+    "Canonical RGB exact equality is a surface identity check, not an original-game reference or faithful artwork verdict.",
+    "Pixel equality alone does not uniquely identify time or buffer: alternate idle display-buffer contents can coincide; actual source-bound frame/sequence/timeline provenance remains required.",
+    "Presentation issue-tag minus render-F happens to be1 then0; no fixed/equal-ID mapping is admitted.",
+    "Rolling requested-frame RAM and later live GPU/video responses are independently identified; no whole-machine atomic claim.",
+    "Source preflight native_runs0 labels the prelaunch source component; actual root native run is demonstrated separately here.",
+    "Fresh private profile/cards only; exact normal neutral/owned exit gates, no physical-input/cross-host/netplay qualification."
+  ],
+  "comparison_passes_added": 0,
+  "content_mode_passes_added": 0,
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-81819-v1-index.json",
+      "bytes": 27083,
+      "sha256": "d4207a04420d1ecc8928c713c0a544194a3cfafbe9498a446c7a904cb81ed226"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-81819-reduce-v1.py",
+      "bytes": 17590,
+      "sha256": "46eff8ea79d453ee6bc131b7084610b93eefd27fa30db00a9d7d8313ee92a052"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-81819-reduction-v1.json",
+      "bytes": 36006,
+      "sha256": "e48a50fc3531f1f44967200721250562f2401e000aed293b81d502189151710e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\test-diag-batch-background-81819-v1.py",
+      "bytes": 5702,
+      "sha256": "a4505ded1615646544e34a24ad25343372406cd0e99257d93f85721ca2940a1f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-81819-v1-tests.json",
+      "bytes": 279,
+      "sha256": "68a54cad55e7fd5bfc2df7f947807eb648870e39ad25bb5255df6badb4bcf14a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-81819-v1-tests.txt",
+      "bytes": 2492,
+      "sha256": "b6e4f90a3b87c829f31614e19ddb841211fddafa40108cd1f694806a06211024"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-81819-handoff-v1.txt",
+      "bytes": 5446,
+      "sha256": "b84808f0576512070f7e71d24a3dee3a655bcaf997b6af872de5ce0432f8513e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-81819-reduction-v1-initial.json",
+      "bytes": 35808,
+      "sha256": "6c99dc978015e251e2d44230fe2005ec55b01a50d3dc5ad53b0e957fa7e2cce5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-81819-v1-tests-initial-idle-buffer-assumption.txt",
+      "bytes": 3870,
+      "sha256": "a150dd185ee6d75c2ff9cb032af0ec321586c949ac13badbcd250b8a6c4c829a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\qualification.json",
+      "bytes": 904429,
+      "sha256": "bba5201d8895680a9e04948d5038a9cfdb84cbe53abc1801dce213417ba43a48"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\background-qualification.json",
+      "bytes": 24663,
+      "sha256": "36174c7a0f5ae493ac1c1cd60202294853e0615060238d0decc83397075612ca"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\collector-source-binding.json",
+      "bytes": 22783,
+      "sha256": "a5f1265e8bfe0d225a590cb77e4cabede090f2c51ecc20c7f6eaf52c9818c273"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\background-observer-result.json",
+      "bytes": 617862,
+      "sha256": "1d5da8fcc887a0508202d73c38bc731a73a99a12d0011c1cc5a77316f55f421a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\candidate\\preparation.json",
+      "bytes": 3152,
+      "sha256": "86629fe5caf7929552c3104469633a3c40d791892f2a682794301c3ee6183aca"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v40-1128b9d\\candidate.json",
+      "bytes": 11884,
+      "sha256": "6085bf5ee48dd10dec71c0b30ff497434cffead55ffe57d0174aa6a9ed248d56"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\frozen-build-v40-1128b9d\\mmx6-runtime.exe",
+      "bytes": 27462656,
+      "sha256": "e49ee4dfa36e6e694fc822c295d189a5cc283864c4b4fd272b5d324bcb80eb4b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v40-context-session-v2-debug\\psx_build_manifest\\psx-runtime\\Release\\manifest.json",
+      "bytes": 163635,
+      "sha256": "e6785d224d6887a0a5aeaff20c418e047018d4754246e45f631e47b3221f270d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\src\\mods\\mmx6_coop_plugin.c",
+      "bytes": 116800,
+      "sha256": "6a6498ec06cd13de539e5b73f6f36bccea3820ef319549e779deec380382c613"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\src\\mods\\mmx6_coop_checkpoint.inc",
+      "bytes": 7060,
+      "sha256": "787231bf488ed5b9da7fac9573b20036d0b2957513ebe142f033cf95e48135ee"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\src\\mods\\mmx6_coop_checkpoint_data.h",
+      "bytes": 6898,
+      "sha256": "83b16f87cb2a9b609f0f3ab3da3011868c718bd7c28d17b143da093309d2739e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\docs\\COOP_X6_CONTENT.json",
+      "bytes": 798749,
+      "sha256": "67508ae2e19ad07c2c5cad41e12dbeb5e446e4eb50f033efa75ed306f2636fad"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-context-integrated-v40\\runtime\\src\\debug_server.c",
+      "bytes": 782755,
+      "sha256": "e680d1a01586ebf92d5676426abcbad92cbe9670f775fd889d91a2d0b2df2690"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-context-integrated-v40\\runtime\\src\\gpu.c",
+      "bytes": 359752,
+      "sha256": "5679121f0e70ae39c70baedd2b49a180515927ce3210ed9d559f07b9489f04c2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-context-integrated-v40\\runtime\\src\\present_image_ring.c",
+      "bytes": 5877,
+      "sha256": "598880821cff979895a87b4280d5278db2dd005ff743fc01ede496808dc639ae"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-context-integrated-v40\\runtime\\include\\debug_server.h",
+      "bytes": 12490,
+      "sha256": "06214dacc84d25d2cd8b56f14c9cd7b909941c463fa55e9941c2fb28e7b3d504"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-context-integrated-v40\\runtime\\include\\gpu.h",
+      "bytes": 40660,
+      "sha256": "59acc14f3ea651837e1e74728fdea9acb13043607e77e4403348f74ed1ba71bf"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-context-integrated-v40\\runtime\\include\\present_image_ring.h",
+      "bytes": 2529,
+      "sha256": "e6900bf785774498f4362ad4f28144a8fc3c0feae2af19b93ac109b0af9623fd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-context-integrated-v40\\runtime\\src\\memcard.c",
+      "bytes": 11748,
+      "sha256": "06250e049ba5eeb4d003ae53955fed66143b622b2564971c0a5faa10495bff48"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-context-integrated-v40\\runtime\\src\\main.cpp",
+      "bytes": 1011281,
+      "sha256": "cd7e36ca70c36876029a51b5d55cd823d60897c7b790dbbd0e56e41d75de7702"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-context-integrated-v40\\runtime\\src\\gpu_gl_renderer.c",
+      "bytes": 672878,
+      "sha256": "27f574c8d80de5e72991740432842ddb3c5fa661112c1423dbaffc780e9fed7a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\audit_mmx6_body_audio_routes.py",
+      "bytes": 5147,
+      "sha256": "c21478397a7564144a6bf3dea6c409de210cbfad5ad77c2413554cefdc6f076c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\audit_mmx6_coop_audio.py",
+      "bytes": 9057,
+      "sha256": "306c161f006b6eafd9ae5b98cca557eabfc229f8776ef911793b097a989898b8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\audit_mmx6_private_action_audio.py",
+      "bytes": 13625,
+      "sha256": "4b07514dcba079b98332c8ac95e4de477d83f6dfae358c864a5fbf3e14010d79"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\coop_debug.py",
+      "bytes": 12235,
+      "sha256": "61eae6837c54e191597a4829fdeb57f9b54a36229ebfd02fe60aec37b3ae1f1f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\coop_host_profile.py",
+      "bytes": 11181,
+      "sha256": "c11d19879b6fbe2cdc464f20b5d444598fa590d6145d795bef7a1597280cf735"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\inventory_mmx6_coop_content.py",
+      "bytes": 29885,
+      "sha256": "fb078dccd910137f28b8e9679a0f84a53abf15024aea3bb180a8796d94cf36c5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_coop_body_audio.py",
+      "bytes": 27459,
+      "sha256": "22de2f57b6b088bed044029a66cf2a047a32ec7829e7c5eb4e6c33fad05b8bc5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_coop_checkpoint.py",
+      "bytes": 25303,
+      "sha256": "c8179ccf2d0a7de26213db480313c1640d95dadaa4c1238d4e71989f2ca70363"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_coop_contact.py",
+      "bytes": 22689,
+      "sha256": "dbcb58c53b5e1e0a7433aeb25c48beb9ae20b30c05fd11b5da60b33f40513046"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_coop_hud_inventory.py",
+      "bytes": 17683,
+      "sha256": "e503f2f99085f89fc18010f2d3e0916866d872083fb716b3a75595bd4cabdfe2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_coop_hud_presentation.py",
+      "bytes": 11949,
+      "sha256": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_coop_inventory_state.py",
+      "bytes": 6110,
+      "sha256": "211bd23caf176328cc3a24aaeae26a44b5d0dc5e48b244c1826781e9f53f61f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_coop_jump_audio.py",
+      "bytes": 41089,
+      "sha256": "66166703568cc6037c3bc0c5cbd1ec0c91e63e976c1d47317860d916f757c8a0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_coop_jump_audio_pair.py",
+      "bytes": 29983,
+      "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_coop_mapped_state.py",
+      "bytes": 16689,
+      "sha256": "870ddd670d02b366fb056173b9133fca2618b96941fcbc793c5d698deae623cb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_coop_native_quit.py",
+      "bytes": 27793,
+      "sha256": "f71a5b80e3da5d322da442524c450f1d27434d2e2205a358fc58d3403b8dc61a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_coop_native_reentry.py",
+      "bytes": 32767,
+      "sha256": "c0fdd5fe7bf511bef710bf229754affa0c1b7431b96d13e04c5f71afda1b3960"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_coop_native_reentry_pair.py",
+      "bytes": 11435,
+      "sha256": "883c388ed512915b482533f625ddffde91111a7b436dbf63a538db0b9fda7b8b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_coop_personal_menu.py",
+      "bytes": 19463,
+      "sha256": "95eda202b0a42482afb42e7b9e3b237378cfa0f362d197d6fa08522ab762adb1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_coop_primary_audio.py",
+      "bytes": 19629,
+      "sha256": "891ea9c540b3190649f1f79366425b34f645b1c5b12293d5cbcf6fd4d6cbac2c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_coop_private_effects.py",
+      "bytes": 17570,
+      "sha256": "8aa7290af8316bf827024684668410b080ea5e56fbcbf7653236ad46f6bbffba"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_coop_private_pause.py",
+      "bytes": 24847,
+      "sha256": "660bef661e4e25d54a259e54735673d8d8ecc6d42505124c98161fdfe0644eee"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_coop_published_input.py",
+      "bytes": 3658,
+      "sha256": "1ad70248cd065d7963b4c26c5c2c0959c78d93225de335bdb18793b00d214bf6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_coop_state_resources.py",
+      "bytes": 8009,
+      "sha256": "5f106493da021377dba71bd3eeaebd9d7189cc59baf5c9945d27dee2d2b09936"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_input_recording.py",
+      "bytes": 13664,
+      "sha256": "a4d21aaa83c9104679d549c0f5fa81bf95106ce800b0601263faaff46ae5310a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_native_contact_audio.py",
+      "bytes": 16568,
+      "sha256": "01f28d65c97f7f886bc62856c24509c13ccb274999b74e4287238b5412e8ca94"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_native_zero_reference.py",
+      "bytes": 41640,
+      "sha256": "26f58a78d6f6ea97a0d5d8b84915716be6964f898765570ced62fafaec9c3fb5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_owned_keyboard.py",
+      "bytes": 4599,
+      "sha256": "11b07f655dd711e5cf39c36362eec796b9eb73b86702d8100e0a958a3e348402"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\mmx6_seamless_catalog.py",
+      "bytes": 5182,
+      "sha256": "2b96fbaac90848112e4cb6e5173c7a450a742a519075d286492f4cde27b41fd1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\prepare_mmx6_coop_playtest.py",
+      "bytes": 10411,
+      "sha256": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\prepare_mmx6_input_replay.py",
+      "bytes": 8385,
+      "sha256": "584c0790706a2794636f7ed1bbd5e6b904f29b8b285d6eb3a9f5373167500d95"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\qualify_mmx6_coop_baseline.py",
+      "bytes": 14335,
+      "sha256": "b2e0d0195544e78ae175e9f591db33da791b4bdd2f14703d63561989e20b76f8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\qualify_mmx6_coop_enemy_admission.py",
+      "bytes": 16151,
+      "sha256": "c953ef53a862996f508b3290e08525d80c3f1be7a734e601cf1d5f34eae8a519"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\qualify_mmx6_coop_hud_inventory.py",
+      "bytes": 11008,
+      "sha256": "ca594aa64b184761c33415ccb89f1f48194af094533cc48e33fdb359d41e48a7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\qualify_mmx6_coop_jump_audio.py",
+      "bytes": 29370,
+      "sha256": "e91dbde11541f68e554f94b747ba91c409a83322f7d4d60b26d1e3aefdf75ac9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\qualify_mmx6_coop_personal_menu.py",
+      "bytes": 16934,
+      "sha256": "7ab3b636615bd0f6324728ccdf4c62a57292b5b23874a7e09491e774a8c6233c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\qualify_mmx6_coop_state.py",
+      "bytes": 53820,
+      "sha256": "a7f8e768b97789bab9ff84c0d6baea9612bafc4c6d5074da73839d4ab815dcbb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\qualify_mmx6_input_replay.py",
+      "bytes": 28273,
+      "sha256": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-integrated-v40\\tools\\qualify_mmx6_native_audio.py",
+      "bytes": 30948,
+      "sha256": "94953a066452bfbf40cab3ee6b5dc9a7965e605366b8805f10a284ab8c2ca2fb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\collector-executed-diag-batch-background-owned-runner-v3.py",
+      "bytes": 8389,
+      "sha256": "5f2d567cf465af7c2d8397db002b0a0f8330b9ff8d90e56c21f2d7c34bdd64bc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\collector-executed-diag-batch-background-observer-v3.py",
+      "bytes": 26044,
+      "sha256": "09875ca542d99511de6b11e2d47a2dda0ff70c52742159c1e91ff21e80d6bdf6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\collector-executed-diag-batch-background-contract-v3.py",
+      "bytes": 8532,
+      "sha256": "a64cb2bb299bc49236633a2b6c1e68b88e39823a380f7aa23362f619f1c725be"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\collector-executed-diag-batch-background-capture-v1.py",
+      "bytes": 5837,
+      "sha256": "119153cd64fb374f097855cc5eff7b585c25424d23ed451b43665fca7e95d4b5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\collector-original-mmx6_coop_checkpoint.py",
+      "bytes": 25303,
+      "sha256": "c8179ccf2d0a7de26213db480313c1640d95dadaa4c1238d4e71989f2ca70363"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\collector-original-COOP_X6_CONTENT.json",
+      "bytes": 798749,
+      "sha256": "67508ae2e19ad07c2c5cad41e12dbeb5e446e4eb50f033efa75ed306f2636fad"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\candidate\\saves\\card2.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\candidate\\saves\\input-recordings\\session-1792930928142158-1-0\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\candidate\\saves\\input-recordings\\session-1792930928142158-1-0\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture0-rolling-RAM-slot0.json",
+      "bytes": 329,
+      "sha256": "2c0eec5cb45c57ae0dab61b76af6e2b62f3aefdfb3b342eb2b4f2b59da4ce9dd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture0-rolling-RAM-slot1.json",
+      "bytes": 329,
+      "sha256": "818a0818dea29a6adccbe74a9b7dc41d3b8d336c85f935b7a852f662529f3018"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture0-rolling-RAM-slot2.json",
+      "bytes": 329,
+      "sha256": "a2f772bcc04bfc65343e2b06ecf12b406d562d5a2ce580aef0c711d37bcdeaf9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture0-rolling-RAM-slot3.json",
+      "bytes": 329,
+      "sha256": "1383a1ab60849da1a0feba274ecc802ad76b3a26ac0654817578aa8eab0b1ca4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture0-frame3096-VRAM.u16",
+      "bytes": 1048576,
+      "sha256": "763c96cda8bd701123712bf96a2ea1bc7dd925d26f17253c73f48bb22b5c9807"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture0-frame3096-canonical.png",
+      "bytes": 230723,
+      "sha256": "e2e2ab1f87bf325f93e44a125cdf7dc36f9eedf0adaa5ba5c92212fbde18f391"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture0-present-sequence2504-composed-thumbnail.png",
+      "bytes": 57788,
+      "sha256": "e565ba80efac1a24b5e90b4823d1f1996576ee5dbf60a1061482dd6f5a723fdb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture0-frame3096-GP0.json.gz",
+      "bytes": 9571,
+      "sha256": "fd15f9abfb4166a0e14d358ca861a5b1ffb39dae0c8e629e2540179cc8d7da32"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture0-frame3096-timeline.json.gz",
+      "bytes": 463,
+      "sha256": "b64f9f8427194d917cf018d1d271c4ee84dd4929411961f7ecd56a3b84ec7606"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture1-rolling-RAM-slot0.json",
+      "bytes": 329,
+      "sha256": "4579b10791cb4841567f6e8546e791705de444b5cff4bfaa2d0107401b059bea"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture1-rolling-RAM-slot1.json",
+      "bytes": 329,
+      "sha256": "a12dae312a026b6f4dae78bab78ede0b86c3faf0488205c298f4018e119a3aab"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture1-rolling-RAM-slot2.json",
+      "bytes": 329,
+      "sha256": "47c08df3088df401f94c17fb226c2591ce8af95cc883d2c13d015ff6d92836d0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture1-rolling-RAM-slot3.json",
+      "bytes": 329,
+      "sha256": "041df7d2c48665bcaf8a8bdcb8e22a212f08359a8c01253d8c8cf73959538363"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture1-frame3119-VRAM.u16",
+      "bytes": 1048576,
+      "sha256": "276f8b25e48a8b185b9c2826c414051fdc123c09f096c86d416c0e1cadf5a5d1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture1-frame3119-canonical.png",
+      "bytes": 230723,
+      "sha256": "a3688a9732dedf5f0f8c92870499d547af1362f2ca5bdfe1ec3f861557354bba"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture1-present-sequence2513-composed-thumbnail.png",
+      "bytes": 57788,
+      "sha256": "124b9f5ee8df8270ec426d013e9ee9bf2217e509cb81987cb42df8cca6af4503"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture1-frame3119-GP0.json.gz",
+      "bytes": 9571,
+      "sha256": "029b6df34b4760cde1c927b84ef56ee340e003cef724e7bbfa7eac5b6b8c3047"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\ammo-hud\\capture1-frame3119-timeline.json.gz",
+      "bytes": 447,
+      "sha256": "ef8b2d2eb7b9595c0d9c4f04c068c13f77d46badd5bce8fea717c368de2ac213"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\recording-rejection\\settings.json",
+      "bytes": 10329,
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\recording-rejection\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\recording-rejection\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\recording-rejection\\inputs.jsonl",
+      "bytes": 801074,
+      "sha256": "786523483c82b6b36cfbc27087b914ba0f45ccdb339f85c1c7b6ac4da516e59e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\recording-rejection\\status.json",
+      "bytes": 211,
+      "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\recording-rejection\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-native-v40-1128b9d-v3\\recording-rejection\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-background-runtime-v3-index.json",
+      "bytes": 4115,
+      "sha256": "7dcff488118384afaaef7e52292142fefd2ac978da8241e61dfb5fba4486d891"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-background-81819-root-v1.py",
+      "bytes": 3554,
+      "sha256": "cf1f8789af905a66a295e7bddc3d9533cac39f63304e8e3734b361e09fcd176a"
+    }
+  ]
+}
