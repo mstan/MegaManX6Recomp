@@ -131,8 +131,18 @@ runtime and passing 24 activations with the fix. The combined `1128b9d` game
 and `3d6bacd` SDK pass 11 SDK, 118 debug and 118 production tests, including
 current-build state roundtrips and exact peripheral rejection probes. Earlier
 link and fixture-assertion failures remain retained separately. F39 remains
-unverified in both modes pending actual same-PID launcher qualification; native
-entry-context capture and attribution also require their own runtime evidence.
+unverified in both modes. The actual same-PID launcher attempt returned to the
+lobby before native readiness; its route is independently excluded by the
+current direct-loopback profile policy (`beads-eio.1.51`). The earliest runtime
+refusal was not retained, and cleanup required owned process termination.
+Native memory and registration tracking also needs a passive diagnostic API
+(`beads-eio.3.405`); epoch or CRC observations cannot supply those totals.
+
+The [actual entry-context transport receipt](evidence/mmx6-death/manifest-bound-1128b9d-native-entry-context-transport-reviewed.json)
+retains 2,757 tagged native entries, 102 read-only suppression witnesses and the
+complete request journal. All 24 separate publication matches remain false.
+The unchanged Zero-contact trial rejects foreign caller history; no death,
+retry, accepted-hit, ownership or return qualification follows from this run.
 
 The [Stage 8 entry receipt](evidence/mmx6-content/manifest-bound-50f4a31-stage8-source-camera-entry-v7-reviewed.json)
 clears its setup blocker after all 13 original dialogue responses and consumed
@@ -141,10 +151,14 @@ independently checks the original subtype0 current and target bounds of 2048.
 The revised passive wait preserves the original 75-second and read limits.
 The [six-location entry batch](evidence/mmx6-content/manifest-bound-50f4a31-entry-prefix17to22-reviewed.json)
 also passes original first-section entries for stages 17–22 in one owned run.
-All six composed images and final parent checks were reviewed. Entry setup
-coverage is now 18 qualified, 2 blocked and 74 unvisited supported locations.
-These are setup results; stage mechanics and the comparison count receive no
-additional passes.
+All six composed images and final parent checks were reviewed.
+The [next eight-checkpoint batch](evidence/mmx6-content/manifest-bound-50f4a31-checkpoints01to02-entry-reviewed.json)
+also passes original entry transactions and final parent checks. All eight
+images were reviewed; several later checkpoints show background artifacts,
+including a magenta region at `s02-a0-c05` (`beads-eio.1.52`, original comparison
+and cause pending). Setup coverage is now 26 qualified, 2 blocked and 66
+unvisited supported locations. These are setup results; rendering, stage
+mechanics and the comparison count receive no additional passes.
 F205 now passes its bounded effective-mode recording check on `f3bdbe9`, with
 107 debug and 107 production checks passing. The [LOCAL receipt](evidence/mmx6-native-replay/manifest-bound-f3bdbe9-F205-effective-mode-history-local-reviewed.json)
 binds 6,603 native input events and 19 actual mode transitions. The

@@ -1,0 +1,144 @@
+{
+  "kind": "root_reviewed_actual_optional_same_entry_context_and_suppression_transport_component",
+  "candidate": {
+    "proof_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v40-1128b9d\\candidate.json",
+    "proof_sha256": "6085bf5ee48dd10dec71c0b30ff497434cffead55ffe57d0174aa6a9ed248d56",
+    "candidate_source": "1128b9d8073098e810e25c87e73a13fc24350b43",
+    "sdk": "3d6bacdb912bf5ddd16c3abc5f4581c010f055c7",
+    "exe_sha256": "e49ee4dfa36e6e694fc822c295d189a5cc283864c4b4fd272b5d324bcb80eb4b",
+    "declared_manifest_sha256": "bc86c0bfbad0457081600b0c3301270bdaf47b472bfc680fc7eb4810a3634121",
+    "limit": "Root must independently retain actual PID/listener/image, compiled manifest and declared source validation"
+  },
+  "whole_parent_status": "failed_setup_preserved",
+  "root_reproduction": "Actual frozen reducer --check reproduced exactly;21 focused source/data/negative checks retained.",
+  "evidence": {
+    "actual_requests": 2134,
+    "read_only_suppression_witnesses": 102,
+    "native_pulls": 49,
+    "native_contiguous_prefix": [
+      0,
+      2756
+    ],
+    "independent_dispatch_prefix": [
+      0,
+      3209
+    ],
+    "native_context_available": 2757,
+    "entry_kind": 1,
+    "epoch": 4,
+    "last_publication_site": 1,
+    "exact_separate_publication_matches": 0
+  },
+  "native_entry_limitation": "Actual same-entry raw sidecars are available. Every24 separate publication/body match is false and remains unusable for atomic attribution. Native and dispatch sequence domains remain separate.",
+  "actual_stop": "Zero contact trial retains typed HP4->0/state2/lifecycle4/counter1, but unchanged Trial rejects foreign projectile history. No admitted death, retry or first-X fatal candidate.",
+  "original_calls": "CALC2697/continuation2698 raw flags59 include zero_projected at fixed PLAYER; neither fixed address nor latest site1 proves primary ownership or return.",
+  "cleanup": "Original owned trace cleanup and graceful game exit0; private native cards unchanged. Cleanup-only post-prefix entries are not included in the selected archive.",
+  "accepted_hit_or_seat_or_native_return": "unverified",
+  "prior_quarantine": "unchanged_and_unclosed",
+  "death_retry_or_artwork": "unverified",
+  "R3": "failed_unchanged",
+  "F133": "unverified",
+  "gameplay_passes_added": 0,
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-context-v40-1128-actual-independent-reduction-v1.json",
+      "bytes": 33672,
+      "sha256": "55fd3835fc3dc18dd052e8c2d716d9ed8a3a0846b2ae14e03a678dd001581f5d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-context-one-HP-Right-local-v40-1128b9d-v1\\candidate\\mmx6-runtime.exe",
+      "bytes": 27462656,
+      "sha256": "e49ee4dfa36e6e694fc822c295d189a5cc283864c4b4fd272b5d324bcb80eb4b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v40-1128b9d\\candidate.json",
+      "bytes": 11884,
+      "sha256": "6085bf5ee48dd10dec71c0b30ff497434cffead55ffe57d0174aa6a9ed248d56"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-context-one-HP-Right-local-v40-1128b9d-v1\\qualification.json",
+      "bytes": 2218334,
+      "sha256": "05ab849942d3001633000cd786ee567d20ed8f2eb182c8029860d6238eb7376a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-context-one-HP-Right-local-v40-1128b9d-v1\\ammo-hud\\native-death-camera-retry\\mechanics-result.json",
+      "bytes": 1561588,
+      "sha256": "0eb1cf436dc1e66fedf6146b7467572a9ae362849637181330917c501a4e6efa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-context-one-HP-Right-local-v40-1128b9d-v1\\ammo-hud\\native-death-camera-retry\\native-function-entries.jsonl.gz",
+      "bytes": 25022,
+      "sha256": "bc542c8dd719d790eab9b45b04b5f5c14504fdd272a96f7cf0a2f318da144ee2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-context-one-HP-Right-local-v40-1128b9d-v1\\ammo-hud\\native-death-camera-retry\\native-trace.jsonl.gz",
+      "bytes": 18090,
+      "sha256": "8f34ea918d17c2250937ea1708511072d61954beeb89748cc5fe6d12dca71bf1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-context-one-HP-Right-local-v40-1128b9d-v1\\ammo-hud\\native-death-camera-retry\\native-views.jsonl.gz",
+      "bytes": 144037,
+      "sha256": "9e24374f9ad6d19cf1f631285135d7c4b4887115e9ba22e4141cb569c760ba95"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-context-one-HP-Right-local-v40-1128b9d-v1\\ammo-hud\\native-death-camera-retry\\native-entry-coverage-witnesses.jsonl.gz",
+      "bytes": 10633,
+      "sha256": "2fa336e66bb019f6d7414040e71623c2ab8182bf48530399c0bde5885f6cda16"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-context-one-HP-Right-local-v40-1128b9d-v1\\ammo-hud\\native-death-camera-retry\\native-entry-context-publications.jsonl.gz",
+      "bytes": 1527458,
+      "sha256": "964695487c8bc58f2968d5a34dba474fd974d367b3a575d7f59f4c1e21ba7710"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-context-one-HP-Right-local-v40-1128b9d-v1\\candidate\\jump-audio\\native-entry-request-audit.jsonl",
+      "bytes": 592163,
+      "sha256": "40f4d899582d91ee2ab5e94036fa54ebb8f27864a8a86f8b1c3aeb67b69d83a6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-context-one-HP-Right-local-v40-1128b9d-v1\\candidate\\jump-audio\\control.jsonl",
+      "bytes": 27888634,
+      "sha256": "26c40123adf6bdd62904fb325ecb56e0a1fefbee3dd4a980aec4e071c7470826"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-context-one-HP-Right-local-v40-1128b9d-v1\\context-capture-death_context_v40_root_run_v1_parent.py",
+      "bytes": 30416,
+      "sha256": "27a72a8ab9336a6869e6adaeda7d0eb3b2915cddd2122ecffadbadf940aebd97"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reduce_v40_death_entry_context_actual_v1.py",
+      "bytes": 20193,
+      "sha256": "b8da0f6079ed74cb57bf8b9254a629a74ee6d881dbafbff7c12eefa4e2939b27"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death_context_v40_root_run_v1_parent.py",
+      "bytes": 30416,
+      "sha256": "27a72a8ab9336a6869e6adaeda7d0eb3b2915cddd2122ecffadbadf940aebd97"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-context-v40-1128-actual-independent-review-v1-index.json",
+      "bytes": 2780,
+      "sha256": "2ad88b70bfbdafa6ae4a8fd60487b75732784a7e3a0ee804c7e331e151030dfd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-context-v40-1128-actual-independent-review-v1.txt",
+      "bytes": 5786,
+      "sha256": "6542e6ebbeebc7bfa91d50c9e356be854175ed85a70ce90a3ba6a3c64a868723"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-entry-context-capture-v1-index.json",
+      "bytes": 5817,
+      "sha256": "bf257ee4cb60dd3067ed3bebfba01ca4d8ee9a3f0e1a5337c609900abdce89c0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\death-context-current1128-v1-index.json",
+      "bytes": 11559,
+      "sha256": "795bc1a1722e6c0ac436c5c03ef67c8b4c1ea302ef4c71b4c843ac1a7c126220"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-v40-native-context-root-v1.py",
+      "bytes": 4130,
+      "sha256": "90fa2bd33fc8cd593ebfd0215e0720652b7d8407b36e45ebbc31a7a38fd07b56"
+    }
+  ]
+}
