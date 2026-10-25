@@ -1,0 +1,220 @@
+{
+  "kind": "root_reviewed_native_stage8_subtype0_source_camera_entry_component",
+  "binding": {
+    "candidate_proof": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v36-50f4a31\\candidate.json",
+      "sha256": "c454fd8c17e78da36acc6de641cbc88c3319054c60ffaa014fde8bd78f1ff652"
+    },
+    "candidate_source": "50f4a31cd6c1344f4448be51e3016a84e96b2566",
+    "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+    "image": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\candidate\\mmx6-runtime.exe",
+      "sha256": "7932585a45a53eae7ad1fbdd083ecd4ff3512741ff42c841f31cada8af4db25f"
+    },
+    "declared_manifest_sha256": "595914ab91176b013ff2abd8e19fbdfdf6cf4c85b1414223fafdc0e9a57f308c",
+    "owned_pid": 74324
+  },
+  "source_packet_sha256": "7d600bc796031ffd8b83ff9d3403b42886d0773be25e90c5ac802d5f36906b4c",
+  "actual_parent_status": "source_bound_native_entry_survey_completed_mechanics_unverified",
+  "original_readiness_checks": {
+    "publication_after_completed_receipt": true,
+    "enrolled_living_idle_roster": true,
+    "native_gameplay_tuple": true,
+    "native_entry_gates_clear": true,
+    "native_p1_visible_idle_grounded": true,
+    "native_previous_position_settled": true,
+    "native_p1_agrees_with_publication": true,
+    "p1_at_authored_x": true,
+    "selected_camera_bounds": false,
+    "camera_inside_authored_bounds": true,
+    "actors_in_current_native_viewport": true,
+    "display_enabled": true
+  },
+  "source_camera_checks": {
+    "exact_source_target_and_original_authored_camera": true,
+    "exact_current_and_target2048": true,
+    "actual_source_bound_released_type24_subtype0": true,
+    "actual_dialogue_retired_source_closing_control": true,
+    "actual_neutral_decoder": true,
+    "exact_native_active_camera_status": true,
+    "actual_native_X_and_no_fade": true
+  },
+  "entry_transaction": {
+    "generation": 1,
+    "state": 3,
+    "reason": 0,
+    "stage": 8,
+    "section": 0,
+    "checkpoint": 0,
+    "nonce": 383074112,
+    "initializer_entries": 1,
+    "record": "800726CC",
+    "tainted": 1
+  },
+  "original_initializer_once": true,
+  "mailbox_writes": 8,
+  "actual_dialogue": {
+    "source_waits": 13,
+    "held_progress_consumed_neutral": 13,
+    "observed_edges": 5,
+    "full_original_span_checks": 420,
+    "full_text_checks": 14
+  },
+  "actual_budget": {
+    "elapsed_seconds": 51.46900000004098,
+    "RAM_reads": 1019,
+    "atomic_probes": 105,
+    "fresh_fixture_RPCs": 199,
+    "total_sleep_wakeups": 189,
+    "early_wakes_with_residual_wait": 4
+  },
+  "root_composed_image_review": {
+    "images": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\stage8-entry\\stage8-source-text-before-cross-composed.png",
+        "bytes": 2074543,
+        "sha256": "115bcbda45a3217834b4788f16ded7f852346aef07c6e49f0432dd8cbaa6fbce"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\stage8-entry\\case-s08-a0-c00\\s08-a0-c00-composed.png",
+        "bytes": 2074543,
+        "sha256": "5d975807fa509e1717e848206f0d880160ed1d493cdd8a50436c9b0e2695a8da"
+      }
+    ],
+    "observation": "Actual Alia/X source dialogue and subsequent two living actors with stacked HUD in native Weapon Center boss intro; no boss/terrain/audio/exit correctness inferred."
+  },
+  "qualified_entry_setup_locations": 12,
+  "current_blocked_entry_locations": [
+    "s04-a1-c00",
+    "s16-a0-c00"
+  ],
+  "unvisited_supported_locations": 80,
+  "previous_stage8_failures": "Preserved; new actual result resolves setup only. Old original selected_camera_bounds=False remains visible with distinct exact original subtype0 current+target2048 guards.",
+  "scope": "Original command8 loader is disclosed prerequisite/route bypass; actual Crosses only. No authored position/HP/success writes.",
+  "whole_stage_mechanics": "unverified",
+  "actual_stage_end_transitions": "unverified",
+  "netplay": "unverified",
+  "gameplay_passes_added": 0,
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\stage8-entry\\case-s08-a0-c00\\entry-observations.json",
+      "bytes": 1398487,
+      "sha256": "365fcc7004973b089ac59284b76d767664e3d77b94108a9ba03b5488b817e23c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\stage8-entry\\stage8-source-text-before-cross-composed.png",
+      "bytes": 2074543,
+      "sha256": "115bcbda45a3217834b4788f16ded7f852346aef07c6e49f0432dd8cbaa6fbce"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\stage8-entry\\case-s08-a0-c00\\s08-a0-c00-composed.png",
+      "bytes": 2074543,
+      "sha256": "5d975807fa509e1717e848206f0d880160ed1d493cdd8a50436c9b0e2695a8da"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\recording-rejection\\settings.json",
+      "bytes": 10329,
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\recording-rejection\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\recording-rejection\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\recording-rejection\\inputs.jsonl",
+      "bytes": 787879,
+      "sha256": "b419c08c1ff01d87a2bbb013770ad8d32d8a8cb167e3711ac96e244474a122df"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\recording-rejection\\status.json",
+      "bytes": 211,
+      "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\recording-rejection\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\recording-rejection\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\qualification.json",
+      "bytes": 4348296,
+      "sha256": "22ba8ac629f0eca1fac3fa7ba54214858d12cc0e96de6fbea299cc72f1fd5b5a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\stage8-source-packet.json",
+      "bytes": 49860,
+      "sha256": "a1b9a51f4ae8fec0f20666a6a2ee6f1656e5b6ff601d601362fd9b81a0a705be"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\content-source-packet.json",
+      "bytes": 128091,
+      "sha256": "4291fcc971872d03bb25c60295ecbffe68d21a00ce4c118a5fdaa54b78acca1c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\stage8-entry\\entry-batch-report.json",
+      "bytes": 2850,
+      "sha256": "16a369f2647026938da2fd2311b311ddf5cee02733d882bdad624d17f1b02bed"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\stage8-entry\\stage8-prerequisite-observations.json",
+      "bytes": 4017071,
+      "sha256": "b205347ebb7e92826752f56a38a6dfa9abd5c37c0e5627f908b01dea1d82b77b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-v7-index.json",
+      "bytes": 11036,
+      "sha256": "373bddb53011292c3b2bced6863fcf83593ff5b5a223f8a121e83ea9ae1e8255"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-v7-preflight.json",
+      "bytes": 504,
+      "sha256": "c22220fc5762c6b1b09e37d7820302e8aabfc4597c449aa3f2ffa5ba91eb2eb9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-cadence-v7-tests.log",
+      "bytes": 4654,
+      "sha256": "d02fabaf00e7662d5f39a7d59df476fba3f24e0843ba819ff7d42f3568496d99"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-v6-failure-facts-v1-index.json",
+      "bytes": 4971,
+      "sha256": "54168a1b775436cb7eeffd2876ed2b46896ea0a17654a74d89f84a93f1829ad1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-stage8-v7-entry-root-v1.py",
+      "bytes": 7438,
+      "sha256": "d98c30df44913df943673fc889a69db4931063de4d73de5a448d0f12adce0fc4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\candidate\\jump-audio\\control.jsonl",
+      "bytes": 68452502,
+      "sha256": "e4d778fb79583afc347a2464a8df59b0bc735d543e7ff641fcf4fbf72968ac96"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\candidate\\jump-audio\\stdout.log",
+      "bytes": 2635,
+      "sha256": "a45d18681d2af613c0622046253f117419e3544af9d88684ecf2fa2017d99d44"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage8-entry-local-v36-50f4a31-v7\\candidate\\jump-audio\\stderr.log",
+      "bytes": 421,
+      "sha256": "503e8fd5ecaf3eb3a50b27f4e618e1c4bac84cac5115ce92158a1a2b5f5f3fc2"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-content\\manifest-bound-50f4a31-checkpoint-entry-survey-prefixes-v2-reviewed.json",
+      "bytes": 33670,
+      "sha256": "87fed93addb05eb024fa3b4f8d5a5d35121b26b4482f960b543cb87ac82b78e4"
+    }
+  ]
+}

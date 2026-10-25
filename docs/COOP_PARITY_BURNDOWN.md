@@ -125,10 +125,23 @@ packet registrations and texture banks before each session activation, while
 X6 retains cached addresses and bank IDs. Issue `beads-eio.1.50` tracks isolated
 session-lifetime repair, a reset-between-activations fixture and actual same-PID
 launcher rematches. The source fix reacquires session allocations and retires
-cached bank IDs and host buffers. Its actual SDK reset fixture currently fails
-to link the peripheral memory routing on Windows; those build failures are
-retained and are not a runtime regression result. F39 remains unverified in
-both modes pending executable fixture and actual same-PID qualification.
+cached bank IDs and host buffers. The [reviewed compiled result](evidence/mmx6-lifecycle/manifest-bound-1128b9d-compiled-resource-context-reviewed.json)
+binds the same actual SDK fixture failing on stale `9F080000` with the old
+runtime and passing 24 activations with the fix. The combined `1128b9d` game
+and `3d6bacd` SDK pass 11 SDK, 118 debug and 118 production tests, including
+current-build state roundtrips and exact peripheral rejection probes. Earlier
+link and fixture-assertion failures remain retained separately. F39 remains
+unverified in both modes pending actual same-PID launcher qualification; native
+entry-context capture and attribution also require their own runtime evidence.
+
+The [Stage 8 entry receipt](evidence/mmx6-content/manifest-bound-50f4a31-stage8-source-camera-entry-v7-reviewed.json)
+clears its setup blocker after all 13 original dialogue responses and consumed
+neutral inputs. It preserves the original camera predicate's false result and
+independently checks the original subtype0 current and target bounds of 2048.
+The revised passive wait preserves the original 75-second and read limits.
+Entry setup coverage is now 12 qualified, 2 blocked and 80 unvisited supported
+locations. These are setup results; stage mechanics and the comparison count
+receive no additional passes.
 F205 now passes its bounded effective-mode recording check on `f3bdbe9`, with
 107 debug and 107 production checks passing. The [LOCAL receipt](evidence/mmx6-native-replay/manifest-bound-f3bdbe9-F205-effective-mode-history-local-reviewed.json)
 binds 6,603 native input events and 19 actual mode transitions. The

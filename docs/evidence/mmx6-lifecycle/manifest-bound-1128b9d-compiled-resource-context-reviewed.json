@@ -1,0 +1,189 @@
+{
+  "kind": "root_reviewed_actual_compiled_session_resource_red_green_and_optional_entry_context",
+  "source_commit": "1128b9d8073098e810e25c87e73a13fc24350b43",
+  "sdk_commit": "3d6bacdb912bf5ddd16c3abc5f4581c010f055c7",
+  "candidate_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v40-1128b9d\\candidate.json",
+    "bytes": 11884,
+    "sha256": "6085bf5ee48dd10dec71c0b30ff497434cffead55ffe57d0174aa6a9ed248d56"
+  },
+  "image_sha256": "e49ee4dfa36e6e694fc822c295d189a5cc283864c4b4fd272b5d324bcb80eb4b",
+  "declared_manifest_sha256": "bc86c0bfbad0457081600b0c3301270bdaf47b472bfc680fc7eb4810a3634121",
+  "production_image_sha256": "9fe5a0fc9a32075ff9527a9f5ae6d6bf5fc53c47256e333bcda3dc6dddf25696",
+  "production_manifest_sha256": "7cb637b2437ea6e91bf92844897f299b49f96fede71fd16def266fd39ef7d12a",
+  "compiled_tests": {
+    "sdk": 11,
+    "debug": 118,
+    "production": 118,
+    "total": 247,
+    "skips": 0
+  },
+  "source_checks": 28,
+  "resource_regression": {
+    "red": "Old31e runtime with same five actual fixture files: both variants trap at stale9F080000 after actual SDK reset.",
+    "green": "Fixed actual plugin+SDK:24 session activations, stable allocation layout, bank retirement, allocation recovery and current-build state roundtrip pass in both fixture variants in both builds.",
+    "boundaries": "Six real peripheral rejection probes per build require named exactexit86; no unrelated device/render success substitute.",
+    "prior_link_and_bad_assert_failures": "Retained separately; not treated as regression RED."
+  },
+  "context_compiled": "Actual service/production/fallback and actual game provider/snapshot tests pass; context excluded from wire/digest and invalidated on provider reads.",
+  "current_build_state_only": true,
+  "backward_save_state_compatibility_required": false,
+  "native_same_PID_launcher_rematches": "unverified",
+  "native_context_RPC_and_first_hit_capture": "unverified",
+  "F39_LOCAL": "unverified",
+  "F39_NETPLAY": "unverified",
+  "gameplay_passes_added": 0,
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\old-runtime-red-ctest.log",
+      "bytes": 2770,
+      "sha256": "9eb944a9502329034f09061bed3f1483abaf4fec578e712eecac36ef4fc50ac6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\old-runtime-red-actual-test-output.log",
+      "bytes": 3626,
+      "sha256": "cf5128f800e3538baafc6a98aeb8412397d3f09353106be356231c9ea60fc40d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\red-resources-debug.exe",
+      "bytes": 229888,
+      "sha256": "3248ae75f9fecc3269c7faa846826433453ebfe6494603edd44619abec6e1139"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\red-resources-production.exe",
+      "bytes": 223232,
+      "sha256": "acd226f2c2f048b17bd191e14d506ce2683ba33b2ed5153fd64307a731bbdd26"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\green-sdk-ctest.log",
+      "bytes": 3388,
+      "sha256": "01bafd49e7cb748aacd28293b029a3e414ec0423106b2bd18bf6c3b9beb56181"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\green-sdk-actual-test-output.log",
+      "bytes": 23660,
+      "sha256": "d69ac7e0cc8b3c7c6d4ecc80c633c89438b352012d25db632fcc318e71c0c2d4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\sdk-context-service.exe",
+      "bytes": 97792,
+      "sha256": "5a0c67e7e6e6486c4a4e9383709a308de30d2eb37c24527598f025f76f2e65ba"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\sdk-context-production.exe",
+      "bytes": 91136,
+      "sha256": "a371e1429b63d54036b0c195fb4221974738c2ab77e7e6446dbcc52fa06da78b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\sdk-context-fallback.exe",
+      "bytes": 91136,
+      "sha256": "a371e1429b63d54036b0c195fb4221974738c2ab77e7e6446dbcc52fa06da78b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\green-debug-ctest.log",
+      "bytes": 35564,
+      "sha256": "ad30434ad918d70d4745a434c55962a8f35d6305908fe07781c92d3a0237c108"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\green-debug-actual-test-output.log",
+      "bytes": 133661,
+      "sha256": "2837b4418f2bbdd3353fe162442a84c17f82f7f2e77c52774855ce47333a60e9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\debug-session_resources-debug.exe",
+      "bytes": 230912,
+      "sha256": "6d493def3591e95ca71a6b37126b1721fac2d97fc5700317e8970b9007b10b54"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\debug-native_context-debug.exe",
+      "bytes": 102400,
+      "sha256": "6a49c4b037660f6957c43de45a0f9c1510d87c8b187c6d2cc2a9572d270e2652"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\debug-native_context_snapshot-debug.exe",
+      "bytes": 118272,
+      "sha256": "86d1043190d28796a8e05026fbb100c2ffa16f7876c3d4c90f552c3764f5c946"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\debug-session_resources-production.exe",
+      "bytes": 224256,
+      "sha256": "1fc286da464e8906bb28e60f6f6a9737a5ba95a18559a6034a1f85c26c3741c1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\debug-native_context-production.exe",
+      "bytes": 93184,
+      "sha256": "57db2906fc1970950c5d3fb2418001fe3461e07d27e73409a6f5047006b53564"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\debug-native_context_snapshot-production.exe",
+      "bytes": 115712,
+      "sha256": "c54ec388245b311da069cad04a988152d5ed77137f843721ca1d786e573c3910"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\green-production-ctest.log",
+      "bytes": 35574,
+      "sha256": "faff5fd59454bc8818e339609b5e234800a87bc496a1c2c5b03ba464def1fcfe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\green-production-actual-test-output.log",
+      "bytes": 134626,
+      "sha256": "97b4379790885357d0068081a4c9778bdde6e9a09a167a3a3248238491c530c0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\production-session_resources-debug.exe",
+      "bytes": 230912,
+      "sha256": "f2a7d802c26a0955e8f9ed733aa0eeb05e6e98a1b0e53cf97bbd36e04e675583"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\production-native_context-debug.exe",
+      "bytes": 102400,
+      "sha256": "bcced99448532a5b6a9f4645c5e0c47b462961d9192e7ac763b7b885ded9ee3b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\production-native_context_snapshot-debug.exe",
+      "bytes": 118272,
+      "sha256": "5bb0fe205bf77a630748a8662802070d1e9fe4c491f22b428be8de6acbac30dc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\production-session_resources-production.exe",
+      "bytes": 224256,
+      "sha256": "727d2943f6d072e4ae6371853296448200883166705c350d59522dd7e1fbd9e7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\production-native_context-production.exe",
+      "bytes": 93184,
+      "sha256": "cb0dc6eb6f711278739b1c23369e03b8e9e28b9fb33d1bacfb0707fee87f454a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\reviewed-v40-compiled-components-v1\\production-native_context_snapshot-production.exe",
+      "bytes": 115712,
+      "sha256": "7a3bcda1d1ce9772a7214eac1aa06a70a276334585983780b6c358c312e42310"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v40-v2-F39-source-audit.log",
+      "bytes": 1325,
+      "sha256": "5c3fe5a1e1593cfd0236a383be23ef400578a6079f953dcee91298f46c2dafdc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v40-v2-game-context-source-audit.log",
+      "bytes": 1358,
+      "sha256": "fe1a802d985d321bfc471d8b48d133d5d298afa1834364367cd9c05e8be4757e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\v40-v2-SDK-context-source-audit.log",
+      "bytes": 1334,
+      "sha256": "61759054e024bd817640a41ca53dfba4ce6b1dce319742c8a8c0cc2b84e6983e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v40-1128b9d\\candidate.json",
+      "bytes": 11884,
+      "sha256": "6085bf5ee48dd10dec71c0b30ff497434cffead55ffe57d0174aa6a9ed248d56"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-v40-compiled-components-root-v1.py",
+      "bytes": 6206,
+      "sha256": "a8781ad3f8ad001f06dcb38842b1534da7e240e4e1640b6f092f632b0772e068"
+    }
+  ],
+  "retention": "Selected actual test executables/logs retained in bounded review directory; complete existing source/build/proof/evidence preserved. Build objects remain disposable after ongoing work."
+}
