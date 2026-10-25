@@ -1,0 +1,1362 @@
+{
+  "kind": "root_reviewed_actual_Windows_full_RNet_Debug_static_module_ICE_OFF_ON_v8",
+  "actual_root_build_session": 68202,
+  "terminal_exit_code": 0,
+  "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\rnet-rb-setup-diagnostics",
+  "source_commit": "63d57e801378e25257239723379a0cd93b3b82e2",
+  "branch": "fix/rnet-rb-setup-diagnostics-local",
+  "compiler_jobs": 2,
+  "modes": [
+    {
+      "label": "ice-off-module-on",
+      "ice": "OFF",
+      "module": "ON",
+      "build_type": "Debug",
+      "assertions_enabled": true,
+      "passed": 30,
+      "failed": 0,
+      "skipped": 0,
+      "logs": {
+        "configure": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\configure-rnet-paused-lan-v8-ice-off-module-on.log",
+          "bytes": 1618,
+          "sha256": "d2849e162d2298ee3e0f6c334788fa5dd738210ce833553fea694d4cf34a6c4f"
+        },
+        "build": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on.log",
+          "bytes": 23624,
+          "sha256": "b9e182578080c9aef63089d2765b2f042d574d80b7937274ad5a16b70cf29a88"
+        },
+        "ctest": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-rnet-paused-lan-v8-ice-off-module-on.log",
+          "bytes": 6782,
+          "sha256": "9c5d509120f906d1cffac3e3a7f20041480f23b9f215c9fbdf8c640fc90bc618"
+        }
+      },
+      "binaries": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\address_test.exe",
+          "bytes": 128000,
+          "sha256": "8593b7c1c18076966d82329e67fa854bfc24d8d6c6da7cd8fe26c537cd728c1d"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\api_link_test.exe",
+          "bytes": 1522688,
+          "sha256": "ccc8148525b903fb0c60158828a1e6bcbeedacbde8c4b67f4653afcc1e2e63ee"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\auth_startup_probe.exe",
+          "bytes": 132608,
+          "sha256": "34dc47d03055db56e8047b2f789138a0512487c501a7b68e9cb39de24f72dd32"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\chat_filter_test.exe",
+          "bytes": 108544,
+          "sha256": "c2817ba683673fd9186ce0bc4c963596d922f625be032072769c4ba5106f3587"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\hash_confirm_test.exe",
+          "bytes": 103424,
+          "sha256": "7be8bd14679774f4bae83bc3ab2e5ca138a34bc67ea3ee9543c9b36628e4715c"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\host_relay_e2e.exe",
+          "bytes": 958976,
+          "sha256": "48167b99c3ca3ef7fdb2fbe978ac5d0979bcfd3a39cd950806434e5de450c421"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\host_relay_test.exe",
+          "bytes": 188416,
+          "sha256": "f8b6ca0aefe519c944fe2664c02b5cf046b118b48ca6c66678be16e64bc0c50e"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\hostport_test.exe",
+          "bytes": 107520,
+          "sha256": "b47a68041ac06f2aa3a23153c42bb0855ca47a169eb05b07ca4e4000fc5c54d5"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\input_contract_test.exe",
+          "bytes": 108544,
+          "sha256": "b3f0b66253cd27d0497c4b69b5091f58e72733f257bb44026075ee6ad308280f"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\input_hist_test.exe",
+          "bytes": 118272,
+          "sha256": "bf2721a3e029547ade5469f343813bc5e853a8f5e5205d82b34105fb98445955"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\lan_beacon_test.exe",
+          "bytes": 129024,
+          "sha256": "ab9037ad6b8dad72e14da2c6fdcbad7bed8daebf23a107f4f25e2972ba8371db"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\lan_chat_test.exe",
+          "bytes": 158720,
+          "sha256": "cc6fcc53c53cf8de1fe24b48e49d0fb6f08e11cad28e3284d5f36d8ac5082b34"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\lan_lobby_test.exe",
+          "bytes": 104960,
+          "sha256": "435689a9b2e98d514b05902b6ec8440f5c957cad308f7b454a1d676fb5e3d2cb"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\lan_paused_binding_test.exe",
+          "bytes": 323072,
+          "sha256": "ad46faa57d004d8ec1e427bd2a585840d52c804f8802d11b0b2de7be8d881952"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\lan_rematch_test.exe",
+          "bytes": 176128,
+          "sha256": "17ae8daa375b079f870800b13a9d121e169e8f78f210e530d1b7f53e655e2355"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\module_api_link_test.exe",
+          "bytes": 188928,
+          "sha256": "e9e60fc227a635fa62fcc9af7884407b13297e14f8403940d05261dff60cb32e"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\rb_ctrl_multipeer_test.exe",
+          "bytes": 318976,
+          "sha256": "c8e9908c0e91b61eac52a20feb006e3bc04e75803eea17c53267fa44b61d1152"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\rb_driver_test.exe",
+          "bytes": 87552,
+          "sha256": "70d9b6fb11f0900451cb1facd90f6cb96a83979336a02f543b66cfa0f95512fd"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\rb_post_test.exe",
+          "bytes": 89600,
+          "sha256": "adbf4392f7523180f0ef413a420311073766a4edcf4dfe98c792d367705d3a8b"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\rb_quorum_test.exe",
+          "bytes": 96768,
+          "sha256": "e2f149da427dad5fc2de3f6f3c0834e85381d18b9248837b80bb4af5d17822b2"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\rb_wire_test.exe",
+          "bytes": 130560,
+          "sha256": "e6a169adf8c779c252359ea6accfc0eaa4f76859d1581621d3c635f9cdfbd7e6"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\ring_admit_test.exe",
+          "bytes": 93696,
+          "sha256": "e86bbf113bc31d400e14e65e27384fbc47afeffcdea8783b50b5bf815e5bbf60"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\rollback_episode_test.exe",
+          "bytes": 156160,
+          "sha256": "94705f5b26f53cae4087270093c2ca0d20cc645f8bbadf69b0dd943192aeadaf"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\sched_smoke_test.exe",
+          "bytes": 371200,
+          "sha256": "abf11bb147be68a90129af9d67e5c9b3e0819372bea843637c5015d676276c6f"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\session_observer_test.exe",
+          "bytes": 311296,
+          "sha256": "3fc419118c22ab8e0b60ca8fd2f84b3460a509db394478b1fba6f8303241f81b"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\session_state_multipeer_test.exe",
+          "bytes": 312832,
+          "sha256": "01d214da70749bd4d13cc697aed779084c3254058def7c88b494652c679ae085"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\session_state_test.exe",
+          "bytes": 368128,
+          "sha256": "446b841430b30f73079418af452a4761ecf5c9b11263645fb669e77c70f75a5e"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\state_replay_test.exe",
+          "bytes": 314880,
+          "sha256": "f46184d67e7a66eb1825233f0c8afcf9c80347a88bfaa646c514ba1f533dff73"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\stun_test.exe",
+          "bytes": 125440,
+          "sha256": "e6db9c90118fd7248f058ec704ad2d7610b93dd26616cecf6997f58f54eb8448"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\udp_port_test.exe",
+          "bytes": 123392,
+          "sha256": "04aa087b78a143195837b8d275b7ce666aece5286e7ef8252a06535dfa77834b"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\wire_map_test.exe",
+          "bytes": 305664,
+          "sha256": "9e09d3f8aad5232288496a0a1f9211febedcbabf54fdd0bd0b5c9ebb01d535a6"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\librecomp_net_module.dll",
+          "bytes": 1494016,
+          "sha256": "1d08917adf85a9b2453281c7a51ce5f00fc087e00ffe453c2cb07cfe8cc78998"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\librecomp_net.a",
+          "bytes": 1713070,
+          "sha256": "4673899e13c802b3eae6ac10dae0086faf03aac6a30f4b23cdb68cf80a616633"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\librecomp_net_module.dll.a",
+          "bytes": 154696,
+          "sha256": "07e9bb80eb367cf10b646f776b937b2015c04be2be0f0440f9e8ac9feb88f0f9"
+        }
+      ],
+      "actual_four_seat_fixture": {
+        "pid": 67984,
+        "requested_ports": [
+          49472,
+          49473,
+          49474,
+          49475,
+          49476,
+          49477,
+          49478,
+          49479
+        ],
+        "both_original_passes_completed": true
+      },
+      "actual_module_export_link_test_present": true
+    },
+    {
+      "label": "ice-on-module-on",
+      "ice": "ON",
+      "module": "ON",
+      "build_type": "Debug",
+      "assertions_enabled": true,
+      "passed": 33,
+      "failed": 0,
+      "skipped": 0,
+      "logs": {
+        "configure": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\configure-rnet-paused-lan-v8-ice-on-module-on.log",
+          "bytes": 2006,
+          "sha256": "e8c0c4f8533dfbee4da8e2ac3ffc5c7149d5228ef2b2d164535b4021493c0ad4"
+        },
+        "build": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on.log",
+          "bytes": 30900,
+          "sha256": "96b3193683693b60156d4edfecc556f9ab3d1811a1a4ae4795fb46c2c240ebef"
+        },
+        "ctest": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-rnet-paused-lan-v8-ice-on-module-on.log",
+          "bytes": 7400,
+          "sha256": "9bf7a403bb6c5454a239916b498c0dc20ec7dba55e7acbb5375bf07dce275b42"
+        }
+      },
+      "binaries": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\address_test.exe",
+          "bytes": 128000,
+          "sha256": "7488a09399fd953cdff6ec55452c6bdfb4ca43ac8eb6989485d9d0e768d247af"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\api_link_test.exe",
+          "bytes": 2253312,
+          "sha256": "bf31b59ec1a678b8ca0658fde8e64d0bd4c5a575175781d448ec3c7b457d4aa2"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\auth_startup_probe.exe",
+          "bytes": 132608,
+          "sha256": "ffab407a193f5ac20ffb15e1c1440b463f1cb9676948d9136f76d9d80b58b223"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\chat_filter_test.exe",
+          "bytes": 108544,
+          "sha256": "8db1bad465ff7cf9553bc05dda6aed1627196579a2a052ab24f172536ec0ce3c"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\hash_confirm_test.exe",
+          "bytes": 103424,
+          "sha256": "c6556aa6e82f2df1861d0ca1141bcda0a6b1aca1a66d7301c01319819c08c78c"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\host_ice_test.exe",
+          "bytes": 1073664,
+          "sha256": "c3989fcb0f3f807db28422a1167d9b30fefd3b404018b28a54652b406dc35530"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\host_relay_e2e.exe",
+          "bytes": 1683968,
+          "sha256": "d2a71505ab4cc5361f6cd87947aa52999117d2930711c317db606fc84755131a"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\host_relay_test.exe",
+          "bytes": 188416,
+          "sha256": "6ef5f9207bdf3ad923afe4c2e64d05ad1b87850a8a80ec014e9976d89773459f"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\hostport_test.exe",
+          "bytes": 107520,
+          "sha256": "c6b77736803995f240797f52dcfe74dbfbf8c1cca3d66425938f8d8558953d87"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\ice_hub_test.exe",
+          "bytes": 1046016,
+          "sha256": "68bab0152687285587304b84d6cffea9a7b829f094e90b2b163d8aa02d864688"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\ice_rtt_test.exe",
+          "bytes": 832000,
+          "sha256": "237b01be56f98165c6e4b9fcae8662ae7473cf1e5095a3c2431d40bc56f886e2"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\input_contract_test.exe",
+          "bytes": 108544,
+          "sha256": "edd7b9a55f04f8370975738c254567b4daa65777a2e3bfd7e969cef615f3b7c1"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\input_hist_test.exe",
+          "bytes": 118272,
+          "sha256": "3f3e526ae93190d433bd5bdf3188977f5a2a50516bb9b40121a15512840ec0ab"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\lan_beacon_test.exe",
+          "bytes": 129024,
+          "sha256": "9645e49c17b0462086df173882a4c28d6b630e8a2ba2fa545f9a5c664d46ad01"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\lan_chat_test.exe",
+          "bytes": 158720,
+          "sha256": "021723d44f810721b15e0aa8d2f78ca2ba208f5eea4f49187ec4116fba944f15"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\lan_lobby_test.exe",
+          "bytes": 104960,
+          "sha256": "451d838134ac9e6ad056a7e8943dc4a66ed218493bbbc308b5f8522a7951795a"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\lan_paused_binding_test.exe",
+          "bytes": 1047040,
+          "sha256": "2cfbbe14913d44605ad3c025021e212794f7ba73cd39a3b252a34cf7f6047cf0"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\lan_rematch_test.exe",
+          "bytes": 176128,
+          "sha256": "aa6ec74da33249a955cf634e73b396c18626c89f581048761fd19ed406264880"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\module_api_link_test.exe",
+          "bytes": 188928,
+          "sha256": "873f0090820a1a2b7258542462eec9c46019f1b91073fd583e71be196119fc34"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\rb_ctrl_multipeer_test.exe",
+          "bytes": 1043968,
+          "sha256": "3c8cd8583ce038485f8dff63179ac3070db38bea1103a0fe1b20c522f684b998"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\rb_driver_test.exe",
+          "bytes": 87552,
+          "sha256": "334938cf8f48b4a6e0bb7a6ca36dddca1a93932df8e1ebefb356e76bd428d406"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\rb_post_test.exe",
+          "bytes": 89600,
+          "sha256": "90914eaa3a34cca57ba2565e8e3852c4bff2edbaeaa82b7b121bb382e6c87142"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\rb_quorum_test.exe",
+          "bytes": 96768,
+          "sha256": "7bc56625dd0739c6d229871bb001aeeae6229285bc2402f1721f551bc506aad2"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\rb_wire_test.exe",
+          "bytes": 130560,
+          "sha256": "58702e3c9e414e0a16f01a22fbf6e49c2dc55cca3191c0e5164c94305c74a2ce"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\ring_admit_test.exe",
+          "bytes": 93696,
+          "sha256": "a50cef46f6b8063f0167f3a2ea47c2cee9c3b779ce4a64ad57359863a570adb9"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\rollback_episode_test.exe",
+          "bytes": 156160,
+          "sha256": "5832999300a0f616c9e23851d335f84788ccc80be36ce3c5d2744b4f3fb75625"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\sched_smoke_test.exe",
+          "bytes": 1095680,
+          "sha256": "18a41dc0fa171ad6c34c5c5ed037eedd54a157e854c234965b0ae50e329acec4"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\session_observer_test.exe",
+          "bytes": 1035264,
+          "sha256": "70393133e4a5fbc7f937e97d05517510ec5870681fb2e2c855e9f3dfb398d976"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\session_state_multipeer_test.exe",
+          "bytes": 1036800,
+          "sha256": "160955995c082bb0d3419d4fef68a1f4336bcdf570365ff27b42d0c40998ffcd"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\session_state_test.exe",
+          "bytes": 1092096,
+          "sha256": "9b83c04ebec764d9be27688029f66b7941b15a33442c068aafec8244a3dd5cba"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\state_replay_test.exe",
+          "bytes": 1037824,
+          "sha256": "f0672c8bae22d63ff902e662e23c1b563b0502a1947b462617afc2718bbec852"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\stun_test.exe",
+          "bytes": 125440,
+          "sha256": "f1b80ffcacc665a86297b61752b51625f793cb078ef193a1fde587926b5fa6fa"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\udp_port_test.exe",
+          "bytes": 123392,
+          "sha256": "ff8c801dff63a82c6784ceb66d619c3000e425c3ad91e5bb55dd7979636b2ad2"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\wire_map_test.exe",
+          "bytes": 1029120,
+          "sha256": "fa6248907afdad3ca75302d1a24a5a47273e33ef440b4017c5e8d2c3ed48decc"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\librecomp_net_module.dll",
+          "bytes": 2233344,
+          "sha256": "3966c5d2a932ac7c1da799b2ee2fe739927b0d3377c76524bb3a3d2f65a2762a"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\librecomp_net.a",
+          "bytes": 1780864,
+          "sha256": "4ad7719b0d856ea8cf1630f4333b19e5622932d16c656a3af53aeaf82ac4c8fc"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\librecomp_net_module.dll.a",
+          "bytes": 216224,
+          "sha256": "7f9c045be40d3eadb2868ad49d336afc3193d2e0deb848c1c17d598e05644231"
+        }
+      ],
+      "actual_four_seat_fixture": {
+        "pid": 66692,
+        "requested_ports": [
+          60672,
+          60673,
+          60674,
+          60675,
+          60676,
+          60677,
+          60678,
+          60679
+        ],
+        "both_original_passes_completed": true
+      },
+      "actual_module_export_link_test_present": true
+    },
+    {
+      "label": "ice-off-module-off",
+      "ice": "OFF",
+      "module": "OFF",
+      "build_type": "Debug",
+      "assertions_enabled": true,
+      "passed": 29,
+      "failed": 0,
+      "skipped": 0,
+      "logs": {
+        "configure": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\configure-rnet-paused-lan-v8-ice-off-module-off.log",
+          "bytes": 1620,
+          "sha256": "6d037bdfdb72f2b6de716b9ff9f8a0eb3aac94177c51a8136d420586d9ddf52a"
+        },
+        "build": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off.log",
+          "bytes": 15010,
+          "sha256": "42dc7924070a8c98bef131abbb48feb3c64a07f1ffbfb6450382a3b1be2e3118"
+        },
+        "ctest": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-rnet-paused-lan-v8-ice-off-module-off.log",
+          "bytes": 6562,
+          "sha256": "7fec4c377b8fc102f2958fccb8b1143623ee989f077c85d47a9f7a40197a5e44"
+        }
+      },
+      "binaries": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\address_test.exe",
+          "bytes": 128000,
+          "sha256": "de370067c69b47f620c799da9577336e0555d2cc81157314a6c025e55901731a"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\api_link_test.exe",
+          "bytes": 1523200,
+          "sha256": "7dcbdb46093d286b97dad1728730fbe22437bddc6d240bbecece83f861cee4bf"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\auth_startup_probe.exe",
+          "bytes": 132608,
+          "sha256": "cbad46dbda0bfe165fdeee7c6d9899495ecaac4dfef2750188ef78c20f04581a"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\chat_filter_test.exe",
+          "bytes": 108544,
+          "sha256": "08de49118c3f1f8a61a815dbb370148a050bbb47cc22b403cdb6130412622b34"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\hash_confirm_test.exe",
+          "bytes": 103424,
+          "sha256": "f4c55ef0735145d287bd981c12c070ed8f9413320084559d264c8bbd3d8ed1c4"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\host_relay_e2e.exe",
+          "bytes": 959488,
+          "sha256": "95cf957e605a21ca296eb3b718e96f22ef5fcb142a6e8b0d66e65f8cdd0d4cf8"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\host_relay_test.exe",
+          "bytes": 188416,
+          "sha256": "9f4362c090a9f01c598568469e0bb12e15767d5e986ca732b0a344ef5cfc0858"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\hostport_test.exe",
+          "bytes": 107520,
+          "sha256": "c102a36ad769f8ad72e977637eb144f94b841be2d49408276b737a22bf233200"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\input_contract_test.exe",
+          "bytes": 108544,
+          "sha256": "8e4b0039fbf0b3beffd1be4fb3b10fab0a208aabccee61c58cb2906e9630853b"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\input_hist_test.exe",
+          "bytes": 118272,
+          "sha256": "946cd86d03f25d5c7ff3700ba5ff25a680b09604f55bf603189963ed02b30a5b"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\lan_beacon_test.exe",
+          "bytes": 129024,
+          "sha256": "f72161c1cf6013780bfc78007681d83901b854475bcd93e2abb68c5308c8d9c6"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\lan_chat_test.exe",
+          "bytes": 158720,
+          "sha256": "cea491a191ef71ef3962f5dc511c83bdfd307a5898cbd96c2df26123f453ec9d"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\lan_lobby_test.exe",
+          "bytes": 104960,
+          "sha256": "5dbfc0af2d1a7f629855dbced033d98170cb1a6d9b946a66e60da9bd2d771813"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\lan_paused_binding_test.exe",
+          "bytes": 323072,
+          "sha256": "7a79a0d7c292f26e1a08f75340e5d35258c5f70348e410e583fe33245646a1f4"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\lan_rematch_test.exe",
+          "bytes": 176128,
+          "sha256": "e0b37f88931133b04c5e77dee217d299195bec78fee7449881b6e16c28d9f55b"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\rb_ctrl_multipeer_test.exe",
+          "bytes": 318976,
+          "sha256": "df93e2f7dfc354c3795c392600e282f4a18ac76980e4f40cc2a1e1823e186ea3"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\rb_driver_test.exe",
+          "bytes": 87552,
+          "sha256": "6e52371b2cf2147d2df2de76b82b734ac92bc6641ed54ed92990045001deabbe"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\rb_post_test.exe",
+          "bytes": 89600,
+          "sha256": "e621f8a8d7a45b55c3a6e8f532f3d2e5293fa118a889828c71eb0f31447d04f3"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\rb_quorum_test.exe",
+          "bytes": 96768,
+          "sha256": "8e1f6dea6794958d75133e50f9c352a624eb82c865bad2285793a41e452482be"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\rb_wire_test.exe",
+          "bytes": 130560,
+          "sha256": "6fee5db1267210399073eeae6a2600b040cde103be6d9bdbb57f5f4513732f69"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\ring_admit_test.exe",
+          "bytes": 93696,
+          "sha256": "e5f1dff394d36fbc7aabfcac9095fa26329a2203eda36b4555efe348ad57675b"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\rollback_episode_test.exe",
+          "bytes": 156160,
+          "sha256": "d5e1325600d91faa2252f640f0dd7ea447b4e74acb25648a9718f1a656821193"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\sched_smoke_test.exe",
+          "bytes": 371200,
+          "sha256": "6a40f1ff4854f3d50f5b8839cf5496850ba7c53ddbd8ff33430507f65ce32ab5"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\session_observer_test.exe",
+          "bytes": 311296,
+          "sha256": "66af877c5a6f294fab208f6704b55dfccdf59d248f1f732d01f7b2b42d9fa801"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\session_state_multipeer_test.exe",
+          "bytes": 312832,
+          "sha256": "e757b68b79722b194b9c31b20f8ba67b477d3f21c1214fe4b186adb3b7dd0d53"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\session_state_test.exe",
+          "bytes": 368128,
+          "sha256": "a2aba0d7a53dcf0a754ccf87975e480937c9470032e20231c77975be66993b60"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\state_replay_test.exe",
+          "bytes": 314880,
+          "sha256": "75ac0533ee9b644e4906b65de1db9b2b394bdad4c53277d139dff349f7f9f111"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\stun_test.exe",
+          "bytes": 125440,
+          "sha256": "4a1fca130cdbead5fd9b1093adfe55cf88579f7b314d540223785457a407f7d0"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\udp_port_test.exe",
+          "bytes": 123392,
+          "sha256": "3437d70b1af67f25826f589c90cd3da755583c495d3ae1ac94fd5005a1b11618"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\wire_map_test.exe",
+          "bytes": 305664,
+          "sha256": "6935499a25cd49d350e9ee41abcc9a6708cce691babb5775af96fc6c0b0b0ff3"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\librecomp_net.a",
+          "bytes": 1713104,
+          "sha256": "51dd06820e049d5c3ee4ec94124e8bf1b09413b1a5618a29a730b6da0455294c"
+        }
+      ],
+      "actual_four_seat_fixture": {
+        "pid": 44576,
+        "requested_ports": [
+          56032,
+          56033,
+          56034,
+          56035,
+          56036,
+          56037,
+          56038,
+          56039
+        ],
+        "both_original_passes_completed": true
+      },
+      "actual_module_export_link_test_present": false
+    }
+  ],
+  "actual_native_tests_passed": 92,
+  "failed": 0,
+  "skipped": 0,
+  "compiler_free_generator_tests": 7,
+  "diagnostic_source_inverse_tests": 8,
+  "bounded_issues_validated": [
+    "beads-3qv.1.16",
+    "beads-3qv.1.17",
+    "beads-3qv.1.18",
+    "beads-3qv.1.19"
+  ],
+  "original_failures": "All v1-v6 build/test logs and original worktrees remain preserved. Historical setup-failure PID/cause were not retained; successful new runs do not identify that cause.",
+  "game_or_SDK_pin_changed": false,
+  "portable_other_target_validation": "unverified",
+  "credentialled_local_route": "unimplemented_unavailable",
+  "F39": "unverified",
+  "comparison_passes_added": 0,
+  "limitations": [
+    "Actual Windows native socket/API/module/ICE checks only; no OS credential/profile admission, cross-host or cross-build claim.",
+    "The four fixture/build corrections preserve runtime and all original assertions. New paused socket substrate remains opt-in and separately owned by beads-eio.3.406.",
+    "No source worktree, prior failed evidence or protected cards were cleaned or pushed."
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\configure-rnet-paused-lan-v8-ice-off-module-on.log",
+      "bytes": 1618,
+      "sha256": "d2849e162d2298ee3e0f6c334788fa5dd738210ce833553fea694d4cf34a6c4f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on.log",
+      "bytes": 23624,
+      "sha256": "b9e182578080c9aef63089d2765b2f042d574d80b7937274ad5a16b70cf29a88"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-rnet-paused-lan-v8-ice-off-module-on.log",
+      "bytes": 6782,
+      "sha256": "9c5d509120f906d1cffac3e3a7f20041480f23b9f215c9fbdf8c640fc90bc618"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\address_test.exe",
+      "bytes": 128000,
+      "sha256": "8593b7c1c18076966d82329e67fa854bfc24d8d6c6da7cd8fe26c537cd728c1d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\api_link_test.exe",
+      "bytes": 1522688,
+      "sha256": "ccc8148525b903fb0c60158828a1e6bcbeedacbde8c4b67f4653afcc1e2e63ee"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\auth_startup_probe.exe",
+      "bytes": 132608,
+      "sha256": "34dc47d03055db56e8047b2f789138a0512487c501a7b68e9cb39de24f72dd32"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\chat_filter_test.exe",
+      "bytes": 108544,
+      "sha256": "c2817ba683673fd9186ce0bc4c963596d922f625be032072769c4ba5106f3587"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\hash_confirm_test.exe",
+      "bytes": 103424,
+      "sha256": "7be8bd14679774f4bae83bc3ab2e5ca138a34bc67ea3ee9543c9b36628e4715c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\host_relay_e2e.exe",
+      "bytes": 958976,
+      "sha256": "48167b99c3ca3ef7fdb2fbe978ac5d0979bcfd3a39cd950806434e5de450c421"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\host_relay_test.exe",
+      "bytes": 188416,
+      "sha256": "f8b6ca0aefe519c944fe2664c02b5cf046b118b48ca6c66678be16e64bc0c50e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\hostport_test.exe",
+      "bytes": 107520,
+      "sha256": "b47a68041ac06f2aa3a23153c42bb0855ca47a169eb05b07ca4e4000fc5c54d5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\input_contract_test.exe",
+      "bytes": 108544,
+      "sha256": "b3f0b66253cd27d0497c4b69b5091f58e72733f257bb44026075ee6ad308280f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\input_hist_test.exe",
+      "bytes": 118272,
+      "sha256": "bf2721a3e029547ade5469f343813bc5e853a8f5e5205d82b34105fb98445955"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\lan_beacon_test.exe",
+      "bytes": 129024,
+      "sha256": "ab9037ad6b8dad72e14da2c6fdcbad7bed8daebf23a107f4f25e2972ba8371db"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\lan_chat_test.exe",
+      "bytes": 158720,
+      "sha256": "cc6fcc53c53cf8de1fe24b48e49d0fb6f08e11cad28e3284d5f36d8ac5082b34"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\lan_lobby_test.exe",
+      "bytes": 104960,
+      "sha256": "435689a9b2e98d514b05902b6ec8440f5c957cad308f7b454a1d676fb5e3d2cb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\lan_paused_binding_test.exe",
+      "bytes": 323072,
+      "sha256": "ad46faa57d004d8ec1e427bd2a585840d52c804f8802d11b0b2de7be8d881952"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\lan_rematch_test.exe",
+      "bytes": 176128,
+      "sha256": "17ae8daa375b079f870800b13a9d121e169e8f78f210e530d1b7f53e655e2355"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\module_api_link_test.exe",
+      "bytes": 188928,
+      "sha256": "e9e60fc227a635fa62fcc9af7884407b13297e14f8403940d05261dff60cb32e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\rb_ctrl_multipeer_test.exe",
+      "bytes": 318976,
+      "sha256": "c8e9908c0e91b61eac52a20feb006e3bc04e75803eea17c53267fa44b61d1152"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\rb_driver_test.exe",
+      "bytes": 87552,
+      "sha256": "70d9b6fb11f0900451cb1facd90f6cb96a83979336a02f543b66cfa0f95512fd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\rb_post_test.exe",
+      "bytes": 89600,
+      "sha256": "adbf4392f7523180f0ef413a420311073766a4edcf4dfe98c792d367705d3a8b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\rb_quorum_test.exe",
+      "bytes": 96768,
+      "sha256": "e2f149da427dad5fc2de3f6f3c0834e85381d18b9248837b80bb4af5d17822b2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\rb_wire_test.exe",
+      "bytes": 130560,
+      "sha256": "e6a169adf8c779c252359ea6accfc0eaa4f76859d1581621d3c635f9cdfbd7e6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\ring_admit_test.exe",
+      "bytes": 93696,
+      "sha256": "e86bbf113bc31d400e14e65e27384fbc47afeffcdea8783b50b5bf815e5bbf60"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\rollback_episode_test.exe",
+      "bytes": 156160,
+      "sha256": "94705f5b26f53cae4087270093c2ca0d20cc645f8bbadf69b0dd943192aeadaf"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\sched_smoke_test.exe",
+      "bytes": 371200,
+      "sha256": "abf11bb147be68a90129af9d67e5c9b3e0819372bea843637c5015d676276c6f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\session_observer_test.exe",
+      "bytes": 311296,
+      "sha256": "3fc419118c22ab8e0b60ca8fd2f84b3460a509db394478b1fba6f8303241f81b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\session_state_multipeer_test.exe",
+      "bytes": 312832,
+      "sha256": "01d214da70749bd4d13cc697aed779084c3254058def7c88b494652c679ae085"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\session_state_test.exe",
+      "bytes": 368128,
+      "sha256": "446b841430b30f73079418af452a4761ecf5c9b11263645fb669e77c70f75a5e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\state_replay_test.exe",
+      "bytes": 314880,
+      "sha256": "f46184d67e7a66eb1825233f0c8afcf9c80347a88bfaa646c514ba1f533dff73"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\stun_test.exe",
+      "bytes": 125440,
+      "sha256": "e6db9c90118fd7248f058ec704ad2d7610b93dd26616cecf6997f58f54eb8448"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\udp_port_test.exe",
+      "bytes": 123392,
+      "sha256": "04aa087b78a143195837b8d275b7ce666aece5286e7ef8252a06535dfa77834b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\wire_map_test.exe",
+      "bytes": 305664,
+      "sha256": "9e09d3f8aad5232288496a0a1f9211febedcbabf54fdd0bd0b5c9ebb01d535a6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\librecomp_net_module.dll",
+      "bytes": 1494016,
+      "sha256": "1d08917adf85a9b2453281c7a51ce5f00fc087e00ffe453c2cb07cfe8cc78998"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\librecomp_net.a",
+      "bytes": 1713070,
+      "sha256": "4673899e13c802b3eae6ac10dae0086faf03aac6a30f4b23cdb68cf80a616633"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\librecomp_net_module.dll.a",
+      "bytes": 154696,
+      "sha256": "07e9bb80eb367cf10b646f776b937b2015c04be2be0f0440f9e8ac9feb88f0f9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\CMakeCache.txt",
+      "bytes": 18782,
+      "sha256": "9fc9a940067bcb83c81b6e7ed524c37da86b001fea0a1a086c0504cf2bb25e16"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\build.ninja",
+      "bytes": 175844,
+      "sha256": "b2b46221c3e16e06cd9ae37be45b3c328a7936142c8f60e24580f2ffbe137211"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\rnet_api_link_test.c",
+      "bytes": 41304,
+      "sha256": "ee987bc18fe2267d5620a64a0188eb679a14ce1591299bcea4a35d7459c675ed"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-on\\Testing\\Temporary\\LastTest.log",
+      "bytes": 37444,
+      "sha256": "6f0241f1b5427acc7957d9dec75be9054472904f10b11efdface259b09491646"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\configure-rnet-paused-lan-v8-ice-on-module-on.log",
+      "bytes": 2006,
+      "sha256": "e8c0c4f8533dfbee4da8e2ac3ffc5c7149d5228ef2b2d164535b4021493c0ad4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on.log",
+      "bytes": 30900,
+      "sha256": "96b3193683693b60156d4edfecc556f9ab3d1811a1a4ae4795fb46c2c240ebef"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-rnet-paused-lan-v8-ice-on-module-on.log",
+      "bytes": 7400,
+      "sha256": "9bf7a403bb6c5454a239916b498c0dc20ec7dba55e7acbb5375bf07dce275b42"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\address_test.exe",
+      "bytes": 128000,
+      "sha256": "7488a09399fd953cdff6ec55452c6bdfb4ca43ac8eb6989485d9d0e768d247af"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\api_link_test.exe",
+      "bytes": 2253312,
+      "sha256": "bf31b59ec1a678b8ca0658fde8e64d0bd4c5a575175781d448ec3c7b457d4aa2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\auth_startup_probe.exe",
+      "bytes": 132608,
+      "sha256": "ffab407a193f5ac20ffb15e1c1440b463f1cb9676948d9136f76d9d80b58b223"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\chat_filter_test.exe",
+      "bytes": 108544,
+      "sha256": "8db1bad465ff7cf9553bc05dda6aed1627196579a2a052ab24f172536ec0ce3c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\hash_confirm_test.exe",
+      "bytes": 103424,
+      "sha256": "c6556aa6e82f2df1861d0ca1141bcda0a6b1aca1a66d7301c01319819c08c78c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\host_ice_test.exe",
+      "bytes": 1073664,
+      "sha256": "c3989fcb0f3f807db28422a1167d9b30fefd3b404018b28a54652b406dc35530"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\host_relay_e2e.exe",
+      "bytes": 1683968,
+      "sha256": "d2a71505ab4cc5361f6cd87947aa52999117d2930711c317db606fc84755131a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\host_relay_test.exe",
+      "bytes": 188416,
+      "sha256": "6ef5f9207bdf3ad923afe4c2e64d05ad1b87850a8a80ec014e9976d89773459f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\hostport_test.exe",
+      "bytes": 107520,
+      "sha256": "c6b77736803995f240797f52dcfe74dbfbf8c1cca3d66425938f8d8558953d87"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\ice_hub_test.exe",
+      "bytes": 1046016,
+      "sha256": "68bab0152687285587304b84d6cffea9a7b829f094e90b2b163d8aa02d864688"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\ice_rtt_test.exe",
+      "bytes": 832000,
+      "sha256": "237b01be56f98165c6e4b9fcae8662ae7473cf1e5095a3c2431d40bc56f886e2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\input_contract_test.exe",
+      "bytes": 108544,
+      "sha256": "edd7b9a55f04f8370975738c254567b4daa65777a2e3bfd7e969cef615f3b7c1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\input_hist_test.exe",
+      "bytes": 118272,
+      "sha256": "3f3e526ae93190d433bd5bdf3188977f5a2a50516bb9b40121a15512840ec0ab"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\lan_beacon_test.exe",
+      "bytes": 129024,
+      "sha256": "9645e49c17b0462086df173882a4c28d6b630e8a2ba2fa545f9a5c664d46ad01"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\lan_chat_test.exe",
+      "bytes": 158720,
+      "sha256": "021723d44f810721b15e0aa8d2f78ca2ba208f5eea4f49187ec4116fba944f15"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\lan_lobby_test.exe",
+      "bytes": 104960,
+      "sha256": "451d838134ac9e6ad056a7e8943dc4a66ed218493bbbc308b5f8522a7951795a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\lan_paused_binding_test.exe",
+      "bytes": 1047040,
+      "sha256": "2cfbbe14913d44605ad3c025021e212794f7ba73cd39a3b252a34cf7f6047cf0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\lan_rematch_test.exe",
+      "bytes": 176128,
+      "sha256": "aa6ec74da33249a955cf634e73b396c18626c89f581048761fd19ed406264880"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\module_api_link_test.exe",
+      "bytes": 188928,
+      "sha256": "873f0090820a1a2b7258542462eec9c46019f1b91073fd583e71be196119fc34"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\rb_ctrl_multipeer_test.exe",
+      "bytes": 1043968,
+      "sha256": "3c8cd8583ce038485f8dff63179ac3070db38bea1103a0fe1b20c522f684b998"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\rb_driver_test.exe",
+      "bytes": 87552,
+      "sha256": "334938cf8f48b4a6e0bb7a6ca36dddca1a93932df8e1ebefb356e76bd428d406"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\rb_post_test.exe",
+      "bytes": 89600,
+      "sha256": "90914eaa3a34cca57ba2565e8e3852c4bff2edbaeaa82b7b121bb382e6c87142"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\rb_quorum_test.exe",
+      "bytes": 96768,
+      "sha256": "7bc56625dd0739c6d229871bb001aeeae6229285bc2402f1721f551bc506aad2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\rb_wire_test.exe",
+      "bytes": 130560,
+      "sha256": "58702e3c9e414e0a16f01a22fbf6e49c2dc55cca3191c0e5164c94305c74a2ce"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\ring_admit_test.exe",
+      "bytes": 93696,
+      "sha256": "a50cef46f6b8063f0167f3a2ea47c2cee9c3b779ce4a64ad57359863a570adb9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\rollback_episode_test.exe",
+      "bytes": 156160,
+      "sha256": "5832999300a0f616c9e23851d335f84788ccc80be36ce3c5d2744b4f3fb75625"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\sched_smoke_test.exe",
+      "bytes": 1095680,
+      "sha256": "18a41dc0fa171ad6c34c5c5ed037eedd54a157e854c234965b0ae50e329acec4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\session_observer_test.exe",
+      "bytes": 1035264,
+      "sha256": "70393133e4a5fbc7f937e97d05517510ec5870681fb2e2c855e9f3dfb398d976"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\session_state_multipeer_test.exe",
+      "bytes": 1036800,
+      "sha256": "160955995c082bb0d3419d4fef68a1f4336bcdf570365ff27b42d0c40998ffcd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\session_state_test.exe",
+      "bytes": 1092096,
+      "sha256": "9b83c04ebec764d9be27688029f66b7941b15a33442c068aafec8244a3dd5cba"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\state_replay_test.exe",
+      "bytes": 1037824,
+      "sha256": "f0672c8bae22d63ff902e662e23c1b563b0502a1947b462617afc2718bbec852"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\stun_test.exe",
+      "bytes": 125440,
+      "sha256": "f1b80ffcacc665a86297b61752b51625f793cb078ef193a1fde587926b5fa6fa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\udp_port_test.exe",
+      "bytes": 123392,
+      "sha256": "ff8c801dff63a82c6784ceb66d619c3000e425c3ad91e5bb55dd7979636b2ad2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\wire_map_test.exe",
+      "bytes": 1029120,
+      "sha256": "fa6248907afdad3ca75302d1a24a5a47273e33ef440b4017c5e8d2c3ed48decc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\librecomp_net_module.dll",
+      "bytes": 2233344,
+      "sha256": "3966c5d2a932ac7c1da799b2ee2fe739927b0d3377c76524bb3a3d2f65a2762a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\librecomp_net.a",
+      "bytes": 1780864,
+      "sha256": "4ad7719b0d856ea8cf1630f4333b19e5622932d16c656a3af53aeaf82ac4c8fc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\librecomp_net_module.dll.a",
+      "bytes": 216224,
+      "sha256": "7f9c045be40d3eadb2868ad49d336afc3193d2e0deb848c1c17d598e05644231"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\CMakeCache.txt",
+      "bytes": 23005,
+      "sha256": "afa281bfcb7e93c6e6458eb9ae155df9f19f3b2e08f56879a4315a5fcb5f41ac"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\build.ninja",
+      "bytes": 253043,
+      "sha256": "e5e40c6f8f4c042181bfb390cb233ff5504a9b293dea6e84269b7aed48d95138"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\rnet_api_link_test.c",
+      "bytes": 41304,
+      "sha256": "ee987bc18fe2267d5620a64a0188eb679a14ce1591299bcea4a35d7459c675ed"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-on-module-on\\Testing\\Temporary\\LastTest.log",
+      "bytes": 52570,
+      "sha256": "1e7ce42d2c18078a546e7d6a50ed27569443344b27186a840efa21804d439108"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\configure-rnet-paused-lan-v8-ice-off-module-off.log",
+      "bytes": 1620,
+      "sha256": "6d037bdfdb72f2b6de716b9ff9f8a0eb3aac94177c51a8136d420586d9ddf52a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off.log",
+      "bytes": 15010,
+      "sha256": "42dc7924070a8c98bef131abbb48feb3c64a07f1ffbfb6450382a3b1be2e3118"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-rnet-paused-lan-v8-ice-off-module-off.log",
+      "bytes": 6562,
+      "sha256": "7fec4c377b8fc102f2958fccb8b1143623ee989f077c85d47a9f7a40197a5e44"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\address_test.exe",
+      "bytes": 128000,
+      "sha256": "de370067c69b47f620c799da9577336e0555d2cc81157314a6c025e55901731a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\api_link_test.exe",
+      "bytes": 1523200,
+      "sha256": "7dcbdb46093d286b97dad1728730fbe22437bddc6d240bbecece83f861cee4bf"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\auth_startup_probe.exe",
+      "bytes": 132608,
+      "sha256": "cbad46dbda0bfe165fdeee7c6d9899495ecaac4dfef2750188ef78c20f04581a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\chat_filter_test.exe",
+      "bytes": 108544,
+      "sha256": "08de49118c3f1f8a61a815dbb370148a050bbb47cc22b403cdb6130412622b34"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\hash_confirm_test.exe",
+      "bytes": 103424,
+      "sha256": "f4c55ef0735145d287bd981c12c070ed8f9413320084559d264c8bbd3d8ed1c4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\host_relay_e2e.exe",
+      "bytes": 959488,
+      "sha256": "95cf957e605a21ca296eb3b718e96f22ef5fcb142a6e8b0d66e65f8cdd0d4cf8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\host_relay_test.exe",
+      "bytes": 188416,
+      "sha256": "9f4362c090a9f01c598568469e0bb12e15767d5e986ca732b0a344ef5cfc0858"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\hostport_test.exe",
+      "bytes": 107520,
+      "sha256": "c102a36ad769f8ad72e977637eb144f94b841be2d49408276b737a22bf233200"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\input_contract_test.exe",
+      "bytes": 108544,
+      "sha256": "8e4b0039fbf0b3beffd1be4fb3b10fab0a208aabccee61c58cb2906e9630853b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\input_hist_test.exe",
+      "bytes": 118272,
+      "sha256": "946cd86d03f25d5c7ff3700ba5ff25a680b09604f55bf603189963ed02b30a5b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\lan_beacon_test.exe",
+      "bytes": 129024,
+      "sha256": "f72161c1cf6013780bfc78007681d83901b854475bcd93e2abb68c5308c8d9c6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\lan_chat_test.exe",
+      "bytes": 158720,
+      "sha256": "cea491a191ef71ef3962f5dc511c83bdfd307a5898cbd96c2df26123f453ec9d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\lan_lobby_test.exe",
+      "bytes": 104960,
+      "sha256": "5dbfc0af2d1a7f629855dbced033d98170cb1a6d9b946a66e60da9bd2d771813"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\lan_paused_binding_test.exe",
+      "bytes": 323072,
+      "sha256": "7a79a0d7c292f26e1a08f75340e5d35258c5f70348e410e583fe33245646a1f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\lan_rematch_test.exe",
+      "bytes": 176128,
+      "sha256": "e0b37f88931133b04c5e77dee217d299195bec78fee7449881b6e16c28d9f55b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\rb_ctrl_multipeer_test.exe",
+      "bytes": 318976,
+      "sha256": "df93e2f7dfc354c3795c392600e282f4a18ac76980e4f40cc2a1e1823e186ea3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\rb_driver_test.exe",
+      "bytes": 87552,
+      "sha256": "6e52371b2cf2147d2df2de76b82b734ac92bc6641ed54ed92990045001deabbe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\rb_post_test.exe",
+      "bytes": 89600,
+      "sha256": "e621f8a8d7a45b55c3a6e8f532f3d2e5293fa118a889828c71eb0f31447d04f3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\rb_quorum_test.exe",
+      "bytes": 96768,
+      "sha256": "8e1f6dea6794958d75133e50f9c352a624eb82c865bad2285793a41e452482be"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\rb_wire_test.exe",
+      "bytes": 130560,
+      "sha256": "6fee5db1267210399073eeae6a2600b040cde103be6d9bdbb57f5f4513732f69"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\ring_admit_test.exe",
+      "bytes": 93696,
+      "sha256": "e5f1dff394d36fbc7aabfcac9095fa26329a2203eda36b4555efe348ad57675b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\rollback_episode_test.exe",
+      "bytes": 156160,
+      "sha256": "d5e1325600d91faa2252f640f0dd7ea447b4e74acb25648a9718f1a656821193"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\sched_smoke_test.exe",
+      "bytes": 371200,
+      "sha256": "6a40f1ff4854f3d50f5b8839cf5496850ba7c53ddbd8ff33430507f65ce32ab5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\session_observer_test.exe",
+      "bytes": 311296,
+      "sha256": "66af877c5a6f294fab208f6704b55dfccdf59d248f1f732d01f7b2b42d9fa801"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\session_state_multipeer_test.exe",
+      "bytes": 312832,
+      "sha256": "e757b68b79722b194b9c31b20f8ba67b477d3f21c1214fe4b186adb3b7dd0d53"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\session_state_test.exe",
+      "bytes": 368128,
+      "sha256": "a2aba0d7a53dcf0a754ccf87975e480937c9470032e20231c77975be66993b60"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\state_replay_test.exe",
+      "bytes": 314880,
+      "sha256": "75ac0533ee9b644e4906b65de1db9b2b394bdad4c53277d139dff349f7f9f111"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\stun_test.exe",
+      "bytes": 125440,
+      "sha256": "4a1fca130cdbead5fd9b1093adfe55cf88579f7b314d540223785457a407f7d0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\udp_port_test.exe",
+      "bytes": 123392,
+      "sha256": "3437d70b1af67f25826f589c90cd3da755583c495d3ae1ac94fd5005a1b11618"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\wire_map_test.exe",
+      "bytes": 305664,
+      "sha256": "6935499a25cd49d350e9ee41abcc9a6708cce691babb5775af96fc6c0b0b0ff3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\librecomp_net.a",
+      "bytes": 1713104,
+      "sha256": "51dd06820e049d5c3ee4ec94124e8bf1b09413b1a5618a29a730b6da0455294c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\CMakeCache.txt",
+      "bytes": 18787,
+      "sha256": "3bf08c1a8b9eec822915bb237974087175ea0f7e484f7ea1ea6e177e1784bee3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\build.ninja",
+      "bytes": 131373,
+      "sha256": "2527c663b54452a1bb71c0e5c1a46cfabf7b925799881844239edc1e470d0677"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\rnet_api_link_test.c",
+      "bytes": 41304,
+      "sha256": "ee987bc18fe2267d5620a64a0188eb679a14ce1591299bcea4a35d7459c675ed"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-v8-ice-off-module-off\\Testing\\Temporary\\LastTest.log",
+      "bytes": 36749,
+      "sha256": "aea8744fd1879a62400074b47009cba12ed4973f0ee878eb3ad8ae50b07291ce"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-rnet-paused-lan-root-v8.ps1",
+      "bytes": 3677,
+      "sha256": "f44304d591c4326e20751b5591dc7b20f4286cd3ca23c392a6ecb2d23d50a716"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\rnet-api-link-v8-actual-generator-fixtures.log",
+      "bytes": 2782,
+      "sha256": "130254a2ccac47863a134a6a0c3f2e10beee7c08f2c992ecb7414fecaae48a74"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\rnet-rbsetup-root-source-check-v1.log",
+      "bytes": 1411,
+      "sha256": "c36d52f0a03c68ae311f497bc993cf5980527bfefb12ea21d8db6c12725f9673"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-rnet-api-link-v1-index.json",
+      "bytes": 4888,
+      "sha256": "ad1469378d911680a9648997a39996d22f3f9e7219cc8490b24d29cd70839ba5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-rnet-rbsetup-v1-index.json",
+      "bytes": 5007,
+      "sha256": "91c788584ec952c6d9c4e92707b9aa5be8e78d11523852829b762fa6a0bc466f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-rnet-paused-v1-index.json",
+      "bytes": 10983,
+      "sha256": "e4e46cbb5730baac1598639745938c5486263a1a1ff516fa9de17525074c16b7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\rnet-multipeer-thread-link-source-v1.json",
+      "bytes": 421,
+      "sha256": "2b2cf9ce10339eaf35bc3c05a8da69dc0bada5f5ef8ae0c49e86b5b7e28c9259"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\rnet-fixture-port-bound-source-v1.json",
+      "bytes": 601,
+      "sha256": "f65af1fbd7fbd4817ce1610f746da35e360863fd0b614ad723c986c030b141b2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\rnet-ice-rig-heap-source-v1.json",
+      "bytes": 1616,
+      "sha256": "3b31f51ebb5d2255b27ea0d487d304fb8ee713dcd71ce5e6214012c83bfdf7de"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\rnet-rb-setup-diagnostics\\CMakeLists.txt",
+      "bytes": 24936,
+      "sha256": "de81edf2869886273615d16280f312d427621a82f0c7cc0ee6a8b44c99ad0fbd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\rnet-rb-setup-diagnostics\\cmake\\RnetApiLinkTest.cmake",
+      "bytes": 5681,
+      "sha256": "52c211e0a6173214b854db3a8dd4250dc1b3a5ab8c1aa8090a68b73a6b00210d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\rnet-rb-setup-diagnostics\\tests\\rb_ctrl_multipeer_test.c",
+      "bytes": 12759,
+      "sha256": "d9226600315d2911409488c9b5398cae3cde4d158abafc79f10f1812766f5fce"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\rnet-rb-setup-diagnostics\\tests\\ice_hub_test.c",
+      "bytes": 14969,
+      "sha256": "486c5913c9414d04acdf50b6a8c2323338ecdbed5dd59e9ea6fdf844dd45b682"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\freeze-rnet-windows-full-v8-root-v1.py",
+      "bytes": 5632,
+      "sha256": "7bb6fa73990beac368f5324ea2dec98e924c642df7f3782936daae2fbf024b4b"
+    }
+  ]
+}

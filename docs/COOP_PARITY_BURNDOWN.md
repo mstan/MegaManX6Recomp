@@ -175,6 +175,17 @@ test failure at a 261-character sidecar path remains preserved; only the CMake
 test output folder was shortened. This proves the API component; native
 launcher reset/rematch growth, readiness and F39 remain unverified. The current
 LAN route still needs the SDK/RNet ownership seam tracked in `beads-eio.3.406`.
+The separate [RNet Windows matrix](evidence/mmx6-lifecycle/reviewed-rnet-63d57e8-windows-full-native-matrix.json)
+now passes92 native Debug checks on local source `63d57e8`: module enabled
+with ICE disabled30/30, module enabled with ICE enabled33/33, and module
+disabled29/29. The actual shared-module API link, paused socket binding,
+four-seat clean/impaired rollback and heap-allocated ICE scenarios pass;
+seven generator and eight diagnostic source checks also pass. Four bounded
+API-link/fixture issues are closed locally. All earlier failures remain
+retained, including intermittent setup failures with unknown historical PID.
+The game SDK pin is unchanged. Other-target builds, OS credential ownership,
+profile admission and F39 remain unverified; the provider skeleton refuses
+admission while those missing barriers remain.
 The [bounded RAM-gather receipt](evidence/mmx6-lifecycle/manifest-bound-5b71204-readonly-memory-gather-reviewed.json)
 qualifies the read-only API component (`beads-eio.3.407`) on game `5b71204` and
 SDK `72df2df`: 17 focused SDK, 118 debug and 118 production checks pass. The
