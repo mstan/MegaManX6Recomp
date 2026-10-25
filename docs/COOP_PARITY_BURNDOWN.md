@@ -186,6 +186,15 @@ retained, including intermittent setup failures with unknown historical PID.
 The game SDK pin is unchanged. Other-target builds, OS credential ownership,
 profile admission and F39 remain unverified; the provider skeleton refuses
 admission while those missing barriers remain.
+The [compiled SDK foundation receipt](evidence/mmx6-lifecycle/reviewed-sdk-9b9b017-windows-nonaccepting-foundation.json)
+retains four Windows Debug CTest checks on isolated SDK `9b9b017`: three
+compiled fixtures and seven source checks. They cover the bounded codec,
+owner thread, nonce, deadline, cancellation and actual RNet API link. This
+host's headers lack the RPC client-query flag; that branch reports unavailable
+and retains all five missing barriers. The original compile failure is kept.
+No endpoint, generated RPC stub, authenticated peer identity, socket ownership
+correlation or accepting startup gate is implemented. Active game and SDK pins
+are unchanged; `beads-eio.3.406`, portable validation and F39 remain open.
 The [bounded RAM-gather receipt](evidence/mmx6-lifecycle/manifest-bound-5b71204-readonly-memory-gather-reviewed.json)
 qualifies the read-only API component (`beads-eio.3.407`) on game `5b71204` and
 SDK `72df2df`: 17 focused SDK, 118 debug and 118 production checks pass. The

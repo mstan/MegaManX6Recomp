@@ -1,0 +1,198 @@
+{
+  "kind": "root_actual_Windows_Debug_compiled_nonaccepting_route_foundation_v2",
+  "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-local-route-query-capabilities",
+  "source_commit": "9b9b017b426bc569ca58742feb2928cd083794b6",
+  "compiler_jobs": 2,
+  "terminal_exit_code": 0,
+  "foreground_completed_without_session": true,
+  "CTest_checks": [
+    "local_route_codec_test",
+    "local_route_pending_test",
+    "local_route_source_test",
+    "local_route_rnet_api_test"
+  ],
+  "passed": 4,
+  "failed": 0,
+  "skipped": 0,
+  "actual_compiled_fixtures": 3,
+  "source_python_tests": 7,
+  "assertions_enabled": true,
+  "source_inverse_proof": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\sdk-route-query-capabilities-source-root-v2.json",
+    "bytes": 1680,
+    "sha256": "3d4697d16541c2106c7010aeaff9a27e5e110e85876b33c0c8543caaab38526f"
+  },
+  "RNet_source_commit": "6f7345896b93015c97dfb7e2215d1a9c3e016510",
+  "tested": "430-byte codec and rejection; real owner thread, OS nonce, clock, deadline, cancellation; actual nonaccepting outside-RPC fallback; real RNet API link and invalid arguments",
+  "missing_Windows_RPC_query_macro": "supported fail-closed unavailable branch only",
+  "accepting_provider_implemented": false,
+  "credential_qualification": false,
+  "generated_RPC_ABI_qualification": false,
+  "portable_other_target_qualification": false,
+  "SDK_or_game_active_pin_changed": false,
+  "F39": "unverified",
+  "comparison_passes_added": 0,
+  "original_v1_compile_failure_preserved": true,
+  "limitations": [
+    "No endpoint, listener, generated stub, actual authenticated RPC, retained process identity, kernel UDP correlation or accepting startup gate is implemented.",
+    "Missing RPC query capability retains all five barriers and CALL_CONTEXT_UNAVAILABLE; no invented flag or credential proof.",
+    "Native socket credential and supported other-target validation remain outstanding."
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-sdk-route-foundation-root-v2\\CMakeCache.txt",
+      "bytes": 24023,
+      "sha256": "6d2e9e9fa8ddc364f8b9c9a2fad11463e1170de7dda024ceadb63ea53183cf5f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-sdk-route-foundation-root-v2\\build.ninja",
+      "bytes": 112392,
+      "sha256": "8fe9c4733a319924c64d842149582e019c054d0bc0fb1fa906e5f2afd6222a81"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-sdk-route-foundation-root-v2\\CTestTestfile.cmake",
+      "bytes": 2393,
+      "sha256": "cbbdb9f15926aef8ada6bf8724bc54903d3de615ec7e737c9d5b5c9195309678"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-sdk-route-foundation-root-v2\\Testing\\Temporary\\LastTest.log",
+      "bytes": 4134,
+      "sha256": "378e5b50cd940140b5b41e90325f70bf135b1c771c8cc7a7010d458e7189872e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-sdk-route-foundation-root-v2\\libpsx_local_route_foundation.a",
+      "bytes": 152850,
+      "sha256": "e455fa6818bdd97b99df5e31d9db52c2cdf1bdde874171e8a384c13e46016802"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-sdk-route-foundation-root-v2\\local_route_codec_test.exe",
+      "bytes": 139264,
+      "sha256": "5d0ea7af644f5e7a3ded81f98ddb0f935fecb7fd46f6e7644cbf4c3ffb7478eb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-sdk-route-foundation-root-v2\\local_route_pending_test.exe",
+      "bytes": 283648,
+      "sha256": "3f3717d528315c60b43898e4fbd02f418e6d0545947677002128d2b75f7aae9b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-sdk-route-foundation-root-v2\\local_route_rnet_api_test.exe",
+      "bytes": 398336,
+      "sha256": "e9472769b55c521524ef0b6ad01d0fa4d332c7238773637c3f2c72dad44eb6d6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\configure-sdk-route-foundation-root-v2.log",
+      "bytes": 2450,
+      "sha256": "6633cc54b7f595528d8c9013565ae72fd6ed8d5517a515f2f070bad1d3a4dc86"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-sdk-route-foundation-root-v2.log",
+      "bytes": 10494,
+      "sha256": "14d0e94ce1f790463cad1081673516429ee498603dcf72939f9852371f7db4dd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-sdk-route-foundation-root-v2.log",
+      "bytes": 1206,
+      "sha256": "a665401efe673238a25a6d2bc1a4a5c984b18f85ad831be695b4c53da59caaae"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-sdk-route-foundation-root-v1.ps1",
+      "bytes": 2695,
+      "sha256": "d533c74fea723e79876551143bc79347483af0efdb402bbb7ee8156d90565569"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-sdk-route-foundation-root-v2.ps1",
+      "bytes": 2703,
+      "sha256": "b24676cb56ac8648fb87cbe6985e1d5f0f394b6b06291733336d7a64972649dc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\sdk-route-query-capabilities-source-root-v2.json",
+      "bytes": 1680,
+      "sha256": "3d4697d16541c2106c7010aeaff9a27e5e110e85876b33c0c8543caaab38526f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-sdk-route-foundation-v1-index.json",
+      "bytes": 12703,
+      "sha256": "c8392893dc32334984ee881c6e2ecb74b6021bd310800c680d190135c5a0f902"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\configure-sdk-route-foundation-root-v1.log",
+      "bytes": 2450,
+      "sha256": "235a409c96eab37b3ec765c4e9112c6b572cbbb83426c91d02afa209780068b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-sdk-route-foundation-root-v1.log",
+      "bytes": 2708,
+      "sha256": "96b13a275573afb2e2bcf5b0696a0ec975476b2bd6e3c7930a0236eb95f3b5c2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-local-route-query-capabilities\\runtime\\local_route\\CMakeLists.txt",
+      "bytes": 3778,
+      "sha256": "16119bf79712883dedca9dfb36b8a2e4b816a8899166a0e882d4231da27ee8a8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-local-route-query-capabilities\\runtime\\local_route\\README.md",
+      "bytes": 4966,
+      "sha256": "950e47143dd29485b0966c862f7d77eef53246c2ffd5a3cc38a73d99e6f17279"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-local-route-query-capabilities\\runtime\\local_route\\local_route_codec.c",
+      "bytes": 7047,
+      "sha256": "c51d0047830d19bbdc1736aa52585c45e6108612f320209164182ee572555c7e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-local-route-query-capabilities\\runtime\\local_route\\local_route_pending.cpp",
+      "bytes": 3976,
+      "sha256": "4fbdd211c3a26c7689d20193e7d913f7baf5b66591ffc8586369bb7a0f962218"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-local-route-query-capabilities\\runtime\\local_route\\local_route_rpc.cpp",
+      "bytes": 1934,
+      "sha256": "15b765954b35ebada5bdb67ac1c0d5565f6e70c3bd50806de36a5565971d91fb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-local-route-query-capabilities\\runtime\\local_route\\local_route.idl",
+      "bytes": 468,
+      "sha256": "f5a72782668ca86cdc9782120411f68ddb789d2e704197f5497b9a1cfbc6be14"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-local-route-query-capabilities\\runtime\\local_route\\tests\\test_codec.c",
+      "bytes": 4426,
+      "sha256": "ed1fb3ccd3d5aff2b807de671c1dcf389cd11571bce754d215f72db70082413f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-local-route-query-capabilities\\runtime\\local_route\\tests\\test_pending.cpp",
+      "bytes": 3725,
+      "sha256": "a96cb705eec7dc0632b3cdbcf22062fac53de7614eee1e318d0d00f446d88a6f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-local-route-query-capabilities\\runtime\\local_route\\tests\\test_source.py",
+      "bytes": 5909,
+      "sha256": "d6f17b4569d09cb48d48c891d61215d4f483e51f389a756f18026590f01098cd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-local-route-query-capabilities\\runtime\\local_route\\tests\\test_rnet_api_contract.c",
+      "bytes": 862,
+      "sha256": "615e4348a25a2ea30215db9224b942cdb41dd3f366fc5ad90073f741eb031fbf"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-local-route-query-capabilities\\runtime\\src\\psx_sha256.c",
+      "bytes": 3627,
+      "sha256": "c2d5c44a71ff0709fa02a7f61718232cfb7e91601c0ee332587eff666057f34e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-local-route-query-capabilities\\runtime\\src\\host_session_nonce.c",
+      "bytes": 1006,
+      "sha256": "95029eb779a9bf89ba388f26d3a760eada84234907359a3b35bb858cf0200777"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-local-route-query-capabilities\\runtime\\src\\netplay_host_profile.c",
+      "bytes": 11169,
+      "sha256": "260ce47df3ae220948d2b4687c5ae53467c754216bc4caefe40eab400305055b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\freeze-sdk-route-foundation-v2-root-v1.py",
+      "bytes": 5326,
+      "sha256": "64ca00eb868d470971c83ecf51abdefe507a2c88384b8d0f82fba97e34395491"
+    }
+  ]
+}
