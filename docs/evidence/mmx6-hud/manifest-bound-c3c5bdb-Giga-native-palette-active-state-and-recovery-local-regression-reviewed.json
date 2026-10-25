@@ -1,0 +1,2374 @@
+{
+  "schema": 1,
+  "kind": "reviewed_c3c5bdb_LOCAL_Giga_native_palette_full_curtain_active_state_and_recovery_regression",
+  "reviewed_at_utc": "2026-10-25T01:05:11.421109+00:00",
+  "issue": "beads-eio.1.45",
+  "compiled_source": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+  "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+  "executable_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+  "compiled_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+  "prior_reviewed_source_art": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-hud\\manifest-bound-253c74e-Giga-native-palette-full-curtain-and-recovery-local-reviewed.json",
+    "bytes": 110442,
+    "sha256": "a9aab7d96ed1a8a79a74a41176718611cdefb93bb73f5809e34c08966176cfc4"
+  },
+  "phases": [
+    {
+      "native_geometry_and_state": {
+        "phase": "warm",
+        "report": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\qualification.json",
+          "bytes": 17121178,
+          "sha256": "00862c89ae89b4dd20e5fdf388d8aec36119f033f93a03d8f605de8e9bf29412"
+        },
+        "trace": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\candidate\\jump-audio\\stdout.log",
+          "bytes": 9603197,
+          "sha256": "8b61952c446facccb55aa21ef3ffdf6455bc0d3a01775d62df701dd08e055af3"
+        },
+        "complete_private_calls": 6000,
+        "nested_same_actor_calls": 0,
+        "restore_checks": {
+          "exact_current_build_key": true,
+          "same_provider_set": true,
+          "same_resource_and_original_asset_binding": true,
+          "full_private_context_and_host_input_history": true,
+          "explicit_native_and_host_input_history": true,
+          "saved_native_world_clock": true,
+          "saved_native_mode_phase": true,
+          "saved_native_menu_state": true,
+          "full_retained_bank_payloads": true,
+          "saved_sprite_bank_count": true,
+          "saved_ui_bank_count": true,
+          "persistent_private_audio_priorities": true,
+          "private_spu_owner_tags": true,
+          "private_spu_modes": true,
+          "private_spu_registers_hex": true,
+          "private_spu_bank_bindings": true,
+          "exact_64_byte_Giga_backup": true,
+          "exact_96_shared_effect_owners": true
+        },
+        "post_action_checks": {
+          "active_current_build_restore_exact": true,
+          "native_Giga_and_shared_effects_retire_after_restore": true,
+          "post_Giga_native_attacks_and_independent_movement": true,
+          "post_Giga_world_bodies_and_HUD_return": true
+        },
+        "cards_unchanged": true,
+        "owned_exit": 0,
+        "frozen_completed_frame_membership": [
+          {
+            "frame": 2712,
+            "parity": 0,
+            "curtain_quads": 400,
+            "first_quad": 43,
+            "last_quad": 442,
+            "actual_unique_curtain_GT3s": 800,
+            "every_emitted_curtain_triangle_reached_exactly_once": true,
+            "completed_dump": {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\matched-steady-UI-world-frame-2712.json.gz",
+              "bytes": 28397,
+              "sha256": "75b88713d399a9fb8daf08b06999a2c6d81145a2ac74f577e338439734e62464"
+            }
+          },
+          {
+            "frame": 2711,
+            "parity": 1,
+            "curtain_quads": 400,
+            "first_quad": 43,
+            "last_quad": 442,
+            "actual_unique_curtain_GT3s": 800,
+            "every_emitted_curtain_triangle_reached_exactly_once": true,
+            "completed_dump": {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\matched-steady-UI-world-frame-2711.json.gz",
+              "bytes": 28392,
+              "sha256": "f450f0354d21505c400c560bd25273fb98366a80dbcfbab7f49641bc6abe96c4"
+            }
+          }
+        ]
+      },
+      "working_palette_and_used_icon_pixels": {
+        "phase": "warm",
+        "entire_16384_byte_working_palette_restored": true,
+        "saved_and_restored_working_palette_sha256": "d2d5e041b71c28ab4127a2ad8d14d75a8a141776f6ec8235b8e2a6e3f4a51a27",
+        "working_CLUT2_matches_original_native_Zero_stage0": true,
+        "active_captures": [
+          {
+            "label": "warm-restored-Giga-active-after-resume",
+            "capture": {
+              "surface": "composed_renderer_output",
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume.png",
+              "sha256": "d87abfcb6deb0a6d6f2c3f9c47b1d3017acbc55c8483400e075054644abf0744",
+              "before": {
+                "id": 1929,
+                "ok": true,
+                "seq": 4,
+                "wrote": 1
+              },
+              "acknowledgement": {
+                "id": 1930,
+                "ok": true,
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume.png",
+                "staged": true,
+                "seq": 4
+              },
+              "completion": {
+                "id": 1931,
+                "ok": true,
+                "seq": 5,
+                "wrote": 1
+              }
+            },
+            "actual_used_icon_banks": [
+              {
+                "bank": 24872,
+                "source": "0x80862a30",
+                "tile": 49360,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "99495ce0657d0870439ed9fe20fa5ce82a930e7f14a896592353aeb362fa70b2",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  48063,
+                  65535
+                ],
+                "completed_commands": 24
+              },
+              {
+                "bank": 24873,
+                "source": "0x80862a30",
+                "tile": 49376,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "b8707837759cd42af7a538421ae6ea4369c4ec28b27fc6e39e5239653f58c2ba",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  48063,
+                  65535
+                ],
+                "completed_commands": 2
+              },
+              {
+                "bank": 24874,
+                "source": "0x80862a30",
+                "tile": 53280,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "e328b7695b71aad191a424d7cd7cb6db1228609a80eb74493f449f9829202cbc",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  48063,
+                  65535
+                ],
+                "completed_commands": 2
+              },
+              {
+                "bank": 24875,
+                "source": "0x80862a30",
+                "tile": 53296,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "c1ff660eb6a867027f1a68fecd6b2083de31d9ea74001f9aaf06fd1c0d2d90b5",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  48063,
+                  65535
+                ],
+                "completed_commands": 2
+              },
+              {
+                "bank": 24876,
+                "source": "0x80862a30",
+                "tile": 53312,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "d8cfb871dd2deee3bbace30f585c7807a084ecf9215ccfe00d89f82eb7d64029",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  48063,
+                  65535
+                ],
+                "completed_commands": 2
+              },
+              {
+                "bank": 24877,
+                "source": "0x80862a30",
+                "tile": 65535,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "cbdcf9ca53cc38fba823749a55107001d96818ac573aa2a17287e0f0d782b51b",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  46308,
+                  48063,
+                  55589,
+                  55784,
+                  58726,
+                  59977,
+                  61100,
+                  62985,
+                  63311,
+                  64172,
+                  65461,
+                  65535
+                ],
+                "completed_commands": 40
+              },
+              {
+                "bank": 24882,
+                "source": "0x80862a30",
+                "tile": 53408,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "68ad7972190ead63785c35db210199b6b95ced1b317f274bb9bedd0e452f7e60",
+                "colors": [
+                  0,
+                  55784,
+                  58726,
+                  62985,
+                  64172,
+                  65535
+                ],
+                "completed_commands": 2
+              },
+              {
+                "bank": 24886,
+                "source": "0x80862a38",
+                "tile": 65535,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "f18847327667e41c54bb38cf4e2f2386a4966a6698f61d707aa9229ca060d370",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  46308,
+                  48063,
+                  55589,
+                  55784,
+                  58726,
+                  59977,
+                  61100,
+                  62985,
+                  63311,
+                  64172,
+                  65461,
+                  65535
+                ],
+                "completed_commands": 12
+              },
+              {
+                "bank": 24888,
+                "source": "0x80862a30",
+                "tile": 57344,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "dbbdeff6cf0932e9bf081cc35edc8c11751a77257238903bd9cfb109a9e509d8",
+                "colors": [
+                  0,
+                  58726,
+                  62985
+                ],
+                "completed_commands": 2
+              },
+              {
+                "bank": 24889,
+                "source": "0x80862a30",
+                "tile": 53376,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "d33a336fa8be354542bf18ab3dba990d6149e64e4e4b5aae11fcdab7a8be0441",
+                "colors": [
+                  0,
+                  55784,
+                  58726,
+                  62985,
+                  64172,
+                  65535
+                ],
+                "completed_commands": 2
+              },
+              {
+                "bank": 24890,
+                "source": "0x80862a30",
+                "tile": 53392,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "604aef55a3574f31bf1cae7d4c4556bcdcf33a57760b9fa065bc5a27dcc3466b",
+                "colors": [
+                  0,
+                  55784,
+                  58726,
+                  62985,
+                  64172,
+                  65535
+                ],
+                "completed_commands": 2
+              },
+              {
+                "bank": 24891,
+                "source": "0x80862a3c",
+                "tile": 53472,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "d317715feb92540ee62a10a5f512db59445b03ef06fadf8c611f95a58b324ba4",
+                "colors": [
+                  0,
+                  59977,
+                  61100,
+                  63311,
+                  65461,
+                  65535
+                ],
+                "completed_commands": 52
+              },
+              {
+                "bank": 24892,
+                "source": "0x80862a3c",
+                "tile": 57504,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "6f14e191ae731eb4c5294c0d15e01376edccb332b780f28d2cfdae8a6c561a5d",
+                "colors": [
+                  0,
+                  59977,
+                  61100,
+                  63311,
+                  65461,
+                  65535
+                ],
+                "completed_commands": 4
+              },
+              {
+                "bank": 24893,
+                "source": "0x80862a3c",
+                "tile": 57520,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "6669e81cc638fc1c85206464a9f9e2f60b62a39eb3990aebd1480bfa06c8c779",
+                "colors": [
+                  0,
+                  59977,
+                  61100,
+                  63311,
+                  65461,
+                  65535
+                ],
+                "completed_commands": 4
+              },
+              {
+                "bank": 24894,
+                "source": "0x80862a3c",
+                "tile": 57536,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "61245574e75e8085ca1c11fb932dd0c6d1e837f0634ec187d4928cf9c348b264",
+                "colors": [
+                  0,
+                  59977,
+                  61100,
+                  63311,
+                  65461,
+                  65535
+                ],
+                "completed_commands": 4
+              },
+              {
+                "bank": 24895,
+                "source": "0x80862a3c",
+                "tile": 57552,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "2f28905136eac6ba34c30dd58904a5a8e66472c6dd6d02d2f9d2102656a59a87",
+                "colors": [
+                  0,
+                  59977,
+                  61100,
+                  63311,
+                  65461,
+                  65535
+                ],
+                "completed_commands": 4
+              },
+              {
+                "bank": 24896,
+                "source": "0x80862a3c",
+                "tile": 65535,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "8fce361f21005df3e74c52b0f922f39b3a2486cb08605db68ccf9664ae76d5a6",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  46308,
+                  48063,
+                  55589,
+                  55784,
+                  58726,
+                  59977,
+                  61100,
+                  62985,
+                  63311,
+                  64172,
+                  65461,
+                  65535
+                ],
+                "completed_commands": 68
+              },
+              {
+                "bank": 24897,
+                "source": "0x80862a38",
+                "tile": 57552,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "cc227fc32d78a30f025de4adcdae460d31779d41e1dd59dd2b7931275258122d",
+                "colors": [
+                  0,
+                  59977,
+                  61100
+                ],
+                "completed_commands": 4
+              },
+              {
+                "bank": 24898,
+                "source": "0x80862a38",
+                "tile": 57568,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "474dcd727943ff7c1b893d5522819e8e4696dc010637e8cf43e9cffeb45b84cf",
+                "colors": [
+                  0,
+                  59977,
+                  61100,
+                  63311,
+                  65461,
+                  65535
+                ],
+                "completed_commands": 4
+              },
+              {
+                "bank": 24899,
+                "source": "0x80862a38",
+                "tile": 57584,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "f6ba9410f3cf84b0c152a15ed2860d17208fb420a7b3797d6cb0d3c45c6835b6",
+                "colors": [
+                  0,
+                  59977,
+                  61100,
+                  63311,
+                  65461,
+                  65535
+                ],
+                "completed_commands": 4
+              }
+            ]
+          }
+        ],
+        "restore_checks": {
+          "exact_current_build_key": true,
+          "same_provider_set": true,
+          "same_resource_and_original_asset_binding": true,
+          "full_private_context_and_host_input_history": true,
+          "explicit_native_and_host_input_history": true,
+          "saved_native_world_clock": true,
+          "saved_native_mode_phase": true,
+          "saved_native_menu_state": true,
+          "full_retained_bank_payloads": true,
+          "saved_sprite_bank_count": true,
+          "saved_ui_bank_count": true,
+          "persistent_private_audio_priorities": true,
+          "private_spu_owner_tags": true,
+          "private_spu_modes": true,
+          "private_spu_registers_hex": true,
+          "private_spu_bank_bindings": true,
+          "exact_64_byte_Giga_backup": true,
+          "exact_96_shared_effect_owners": true
+        },
+        "private_cards": true,
+        "cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      },
+      "parent_status": "native_ammo_hud_captured_artwork_and_ledger_pending",
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "recording": {
+        "status": "failed_fixture_taint_retained_for_diagnostics",
+        "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\candidate\\saves\\input-recordings\\session-1792889695654227-1-0\\inputs.jsonl",
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+          "manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+          "mode": "offline",
+          "profile": null,
+          "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+          "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+        },
+        "terminal_failure": "unilateral debug or fixture input contaminated capture",
+        "native_status": {
+          "contract": "mmx6.native-consumption.v1",
+          "epoch": 1,
+          "failure": "unilateral debug or fixture input contaminated capture",
+          "schema": 1,
+          "scope": "native-consumption diagnostics; replay unimplemented",
+          "status": "failed"
+        },
+        "events": 6205,
+        "natives": 4292,
+        "p2_reads": 1913,
+        "artifacts": [
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\recording-rejection\\settings.json",
+            "bytes": 10329,
+            "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\recording-rejection\\content.json",
+            "bytes": 503,
+            "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\recording-rejection\\simulation-contract.json",
+            "bytes": 259,
+            "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\recording-rejection\\inputs.jsonl",
+            "bytes": 813894,
+            "sha256": "f0cb7a53e5ca11a42930a6916c6e17195123b87bd4b7833fa9cdc9a06e3cfc13"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\recording-rejection\\status.json",
+            "bytes": 211,
+            "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\recording-rejection\\card1.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\recording-rejection\\card2.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "strict_refusals": {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          }
+        },
+        "finalized_capture_admitted": false,
+        "replay_admitted": false,
+        "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+      }
+    },
+    {
+      "native_geometry_and_state": {
+        "phase": "cold",
+        "report": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\qualification.json",
+          "bytes": 10620602,
+          "sha256": "bf93e3947940d6ca16387ff1dd39914c9c1f7f8a9de4b7cc8ead5b9756f5401f"
+        },
+        "trace": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\candidate\\jump-audio\\stdout.log",
+          "bytes": 4571956,
+          "sha256": "e4061cc960d2a0874e8ed6ee00064da502f8939d1946accae8890517b927c727"
+        },
+        "complete_private_calls": 2863,
+        "nested_same_actor_calls": 0,
+        "restore_checks": {
+          "exact_current_build_key": true,
+          "same_provider_set": true,
+          "same_resource_and_original_asset_binding": true,
+          "full_private_context_and_host_input_history": true,
+          "explicit_native_and_host_input_history": true,
+          "saved_native_world_clock": true,
+          "saved_native_mode_phase": true,
+          "saved_native_menu_state": true,
+          "full_retained_bank_payloads": true,
+          "saved_sprite_bank_count": true,
+          "saved_ui_bank_count": true,
+          "persistent_private_audio_priorities": true,
+          "private_spu_owner_tags": true,
+          "private_spu_modes": true,
+          "private_spu_registers_hex": true,
+          "private_spu_bank_bindings": true,
+          "exact_64_byte_Giga_backup": true,
+          "exact_96_shared_effect_owners": true
+        },
+        "post_action_checks": {
+          "active_current_build_restore_exact": true,
+          "native_Giga_and_shared_effects_retire_after_restore": true,
+          "post_Giga_native_attacks_and_independent_movement": true,
+          "post_Giga_world_bodies_and_HUD_return": true
+        },
+        "cards_unchanged": true,
+        "owned_exit": 0
+      },
+      "working_palette_and_used_icon_pixels": {
+        "phase": "cold",
+        "entire_16384_byte_working_palette_restored": true,
+        "saved_and_restored_working_palette_sha256": "d2d5e041b71c28ab4127a2ad8d14d75a8a141776f6ec8235b8e2a6e3f4a51a27",
+        "working_CLUT2_matches_original_native_Zero_stage0": true,
+        "active_captures": [
+          {
+            "label": "cold-restored-Giga-active-after-resume",
+            "capture": {
+              "surface": "composed_renderer_output",
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume.png",
+              "sha256": "1339fff8b89dcf7c2e93d128d2bc6ff55b346258aa86ea51bc96f313b10dc755",
+              "before": {
+                "id": 1526,
+                "ok": true,
+                "seq": 2,
+                "wrote": 1
+              },
+              "acknowledgement": {
+                "id": 1527,
+                "ok": true,
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume.png",
+                "staged": true,
+                "seq": 2
+              },
+              "completion": {
+                "id": 1528,
+                "ok": true,
+                "seq": 3,
+                "wrote": 1
+              }
+            },
+            "actual_used_icon_banks": [
+              {
+                "bank": 24872,
+                "source": "0x80862a30",
+                "tile": 49360,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "99495ce0657d0870439ed9fe20fa5ce82a930e7f14a896592353aeb362fa70b2",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  48063,
+                  65535
+                ],
+                "completed_commands": 52
+              },
+              {
+                "bank": 24873,
+                "source": "0x80862a30",
+                "tile": 49376,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "b8707837759cd42af7a538421ae6ea4369c4ec28b27fc6e39e5239653f58c2ba",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  48063,
+                  65535
+                ],
+                "completed_commands": 4
+              },
+              {
+                "bank": 24874,
+                "source": "0x80862a30",
+                "tile": 53280,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "e328b7695b71aad191a424d7cd7cb6db1228609a80eb74493f449f9829202cbc",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  48063,
+                  65535
+                ],
+                "completed_commands": 4
+              },
+              {
+                "bank": 24875,
+                "source": "0x80862a30",
+                "tile": 53296,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "c1ff660eb6a867027f1a68fecd6b2083de31d9ea74001f9aaf06fd1c0d2d90b5",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  48063,
+                  65535
+                ],
+                "completed_commands": 4
+              },
+              {
+                "bank": 24876,
+                "source": "0x80862a30",
+                "tile": 53312,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "d8cfb871dd2deee3bbace30f585c7807a084ecf9215ccfe00d89f82eb7d64029",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  48063,
+                  65535
+                ],
+                "completed_commands": 4
+              },
+              {
+                "bank": 24877,
+                "source": "0x80862a30",
+                "tile": 65535,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "cbdcf9ca53cc38fba823749a55107001d96818ac573aa2a17287e0f0d782b51b",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  46308,
+                  48063,
+                  55589,
+                  55784,
+                  58726,
+                  59977,
+                  61100,
+                  62985,
+                  63311,
+                  64172,
+                  65461,
+                  65535
+                ],
+                "completed_commands": 100
+              },
+              {
+                "bank": 24878,
+                "source": "0x80862a28",
+                "tile": 49392,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "fce0f52dc05d9cd63c45751f32b3a93ca5bbd1ae3455d8faf6693c864c936ad6",
+                "colors": [
+                  0,
+                  41434,
+                  41500
+                ],
+                "completed_commands": 4
+              },
+              {
+                "bank": 24879,
+                "source": "0x80862a30",
+                "tile": 49264,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "7e420ad026331b0f9149f722ee9f89ac3b53bd5ae74d8b223385e555f635c90b",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  48063,
+                  65535
+                ],
+                "completed_commands": 4
+              },
+              {
+                "bank": 24880,
+                "source": "0x80862a30",
+                "tile": 49280,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "a4323f6d930a046c725cdcc7fd9a37f80c7dde639326b1e4632f44ab7ff7b06f",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  48063,
+                  65535
+                ],
+                "completed_commands": 4
+              },
+              {
+                "bank": 24881,
+                "source": "0x80862a28",
+                "tile": 65535,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "ad5a0a272fca9bd2b50bf61e2bf682ab72db2fb3b51b3fefd27d89ef47ede70b",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  46308,
+                  48063,
+                  55589,
+                  55784,
+                  58726,
+                  59977,
+                  61100,
+                  62985,
+                  63311,
+                  64172,
+                  65461,
+                  65535
+                ],
+                "completed_commands": 4
+              },
+              {
+                "bank": 24882,
+                "source": "0x80862a30",
+                "tile": 53408,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "68ad7972190ead63785c35db210199b6b95ced1b317f274bb9bedd0e452f7e60",
+                "colors": [
+                  0,
+                  55784,
+                  58726,
+                  62985,
+                  64172,
+                  65535
+                ],
+                "completed_commands": 24
+              },
+              {
+                "bank": 24883,
+                "source": "0x80862a38",
+                "tile": 53440,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "cf4d07341a8084bc056292b2bf4daaef9945d6bd8ad43f47274a9e16b9741823",
+                "colors": [
+                  0,
+                  55784,
+                  58726,
+                  62985,
+                  64172,
+                  65535
+                ],
+                "completed_commands": 2
+              },
+              {
+                "bank": 24884,
+                "source": "0x80862a38",
+                "tile": 53456,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "6f83121ccdc73b467db782a384b24506c8f9f95f21c2572518b5915cb8b70217",
+                "colors": [
+                  0,
+                  55784,
+                  58726,
+                  62985,
+                  64172,
+                  65535
+                ],
+                "completed_commands": 2
+              },
+              {
+                "bank": 24885,
+                "source": "0x80862a38",
+                "tile": 53472,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "80433cfa3d0dadcbc7405f6adb723e4405d8eedafe42727d27f6d2c91d8d2ccb",
+                "colors": [
+                  0,
+                  55784,
+                  58726,
+                  62985,
+                  64172,
+                  65535
+                ],
+                "completed_commands": 2
+              },
+              {
+                "bank": 24886,
+                "source": "0x80862a38",
+                "tile": 65535,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "f18847327667e41c54bb38cf4e2f2386a4966a6698f61d707aa9229ca060d370",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  46308,
+                  48063,
+                  55589,
+                  55784,
+                  58726,
+                  59977,
+                  61100,
+                  62985,
+                  63311,
+                  64172,
+                  65461,
+                  65535
+                ],
+                "completed_commands": 14
+              },
+              {
+                "bank": 24887,
+                "source": "0x80862a38",
+                "tile": 53488,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "60e55eb944335e438f460e6d9a9937ed44a7d1ce0376ebd6edff8439482eef22",
+                "colors": [
+                  0,
+                  55784,
+                  58726,
+                  62985,
+                  64172,
+                  65535
+                ],
+                "completed_commands": 2
+              },
+              {
+                "bank": 24891,
+                "source": "0x80862a3c",
+                "tile": 53472,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "d317715feb92540ee62a10a5f512db59445b03ef06fadf8c611f95a58b324ba4",
+                "colors": [
+                  0,
+                  59977,
+                  61100,
+                  63311,
+                  65461,
+                  65535
+                ],
+                "completed_commands": 2
+              },
+              {
+                "bank": 24896,
+                "source": "0x80862a3c",
+                "tile": 65535,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "8fce361f21005df3e74c52b0f922f39b3a2486cb08605db68ccf9664ae76d5a6",
+                "colors": [
+                  0,
+                  41434,
+                  41500,
+                  44732,
+                  46308,
+                  48063,
+                  55589,
+                  55784,
+                  58726,
+                  59977,
+                  61100,
+                  62985,
+                  63311,
+                  64172,
+                  65461,
+                  65535
+                ],
+                "completed_commands": 2
+              },
+              {
+                "bank": 24897,
+                "source": "0x80862a38",
+                "tile": 57552,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "cc227fc32d78a30f025de4adcdae460d31779d41e1dd59dd2b7931275258122d",
+                "colors": [
+                  0,
+                  59977,
+                  61100
+                ],
+                "completed_commands": 2
+              },
+              {
+                "bank": 24898,
+                "source": "0x80862a38",
+                "tile": 57568,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "474dcd727943ff7c1b893d5522819e8e4696dc010637e8cf43e9cffeb45b84cf",
+                "colors": [
+                  0,
+                  59977,
+                  61100,
+                  63311,
+                  65461,
+                  65535
+                ],
+                "completed_commands": 2
+              },
+              {
+                "bank": 24899,
+                "source": "0x80862a38",
+                "tile": 57584,
+                "colors_sha256": "42f82e378e2e6f475fed6a7b4cfbcc70cfa53231d6a832bfda956af3440a7ca1",
+                "actual_pixels_sha256": "f6ba9410f3cf84b0c152a15ed2860d17208fb420a7b3797d6cb0d3c45c6835b6",
+                "colors": [
+                  0,
+                  59977,
+                  61100,
+                  63311,
+                  65461,
+                  65535
+                ],
+                "completed_commands": 2
+              }
+            ]
+          }
+        ],
+        "restore_checks": {
+          "exact_current_build_key": true,
+          "same_provider_set": true,
+          "same_resource_and_original_asset_binding": true,
+          "full_private_context_and_host_input_history": true,
+          "explicit_native_and_host_input_history": true,
+          "saved_native_world_clock": true,
+          "saved_native_mode_phase": true,
+          "saved_native_menu_state": true,
+          "full_retained_bank_payloads": true,
+          "saved_sprite_bank_count": true,
+          "saved_ui_bank_count": true,
+          "persistent_private_audio_priorities": true,
+          "private_spu_owner_tags": true,
+          "private_spu_modes": true,
+          "private_spu_registers_hex": true,
+          "private_spu_bank_bindings": true,
+          "exact_64_byte_Giga_backup": true,
+          "exact_96_shared_effect_owners": true
+        },
+        "private_cards": true,
+        "cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      },
+      "parent_status": "native_ammo_hud_captured_artwork_and_ledger_pending",
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "recording": {
+        "status": "failed_fixture_taint_retained_for_diagnostics",
+        "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\candidate\\saves\\input-recordings\\session-1792889762786239-1-0\\inputs.jsonl",
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+          "manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+          "mode": "offline",
+          "profile": null,
+          "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+          "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+        },
+        "terminal_failure": "unilateral debug or fixture input contaminated capture",
+        "native_status": {
+          "contract": "mmx6.native-consumption.v1",
+          "epoch": 1,
+          "failure": "unilateral debug or fixture input contaminated capture",
+          "schema": 1,
+          "scope": "native-consumption diagnostics; replay unimplemented",
+          "status": "failed"
+        },
+        "events": 6372,
+        "natives": 4408,
+        "p2_reads": 1964,
+        "artifacts": [
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\recording-rejection\\settings.json",
+            "bytes": 10329,
+            "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\recording-rejection\\content.json",
+            "bytes": 503,
+            "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\recording-rejection\\simulation-contract.json",
+            "bytes": 259,
+            "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\recording-rejection\\inputs.jsonl",
+            "bytes": 836025,
+            "sha256": "d3ca411e43fbf9ab14b15e930198998b6819dd6c8ec857a952dde01d884c2810"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\recording-rejection\\status.json",
+            "bytes": 211,
+            "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\recording-rejection\\card1.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\recording-rejection\\card2.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "strict_refusals": {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          }
+        },
+        "finalized_capture_admitted": false,
+        "replay_admitted": false,
+        "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+      }
+    }
+  ],
+  "root_reviewed_images": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume.png",
+      "bytes": 2074543,
+      "sha256": "d87abfcb6deb0a6d6f2c3f9c47b1d3017acbc55c8483400e075054644abf0744"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-retired.png",
+      "bytes": 2074543,
+      "sha256": "62782b1285f44b640bca73562d119f4eb102ec7d0976fb0f4a310060d14a91f7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-X-shot.png",
+      "bytes": 2074543,
+      "sha256": "7a440fb246af0d715b97d549c0f271b63be1f3f1e0ad285a933f35d1a84899a3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-Zero-saber.png",
+      "bytes": 2074543,
+      "sha256": "69bc16763d674c374d0e8e33638c3e9e19dc8594038128a7b993a7fafad64631"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-independent-controls.png",
+      "bytes": 2074543,
+      "sha256": "fd23f6d355fc2400d95a1a56a29a7facd45bd40726e75866b75a29749767d48d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume.png",
+      "bytes": 2074543,
+      "sha256": "1339fff8b89dcf7c2e93d128d2bc6ff55b346258aa86ea51bc96f313b10dc755"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-retired.png",
+      "bytes": 2074543,
+      "sha256": "1c31fe84f3cf91a24496006628d35c2d96ed43baac4a0395b064749de2360e91"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-X-shot.png",
+      "bytes": 2074543,
+      "sha256": "d1598f37f69c07c662c0cd2317ecaf07daf0f671bbbecb2769655c7e5f6ef222"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-Zero-saber.png",
+      "bytes": 2074543,
+      "sha256": "5fbefc4e0bd6741c424c1f5ed52b9aebd8d5058c3dbce40b7f5105b462ba127b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-independent-controls.png",
+      "bytes": 2074543,
+      "sha256": "ec50957632775c0df23f56627cc65f77a92b9b2d95982e5369697edaf085d6f6"
+    }
+  ],
+  "findings": [
+    "Actual bounded6000warm/2863cold private renderer calls contain zero nested same-actor calls.",
+    "Frozen completed native frames2712/2711 reach every one of400curtainquads/800triangles exactly once on both arena parities, with all original command words matching.",
+    "Each active current-build warm/cold restore retains all18provider/Giga/shared-owner comparisons, full16384byte working MODMEM palette, and actually used nativeCLUT2 icon banks (20warm/21cold independently decoded).",
+    "Root viewed all10 listed composed active/retired/Xshot/Zeroattack/independent-control frames: native white/gold/blue beams over red curtain; normal world, heroes and HUD recover, attacks/control work after natural retirement.",
+    "Both actual parents retain default fixture/LOAD taint, both strict ordinary capture/replay refusals, unchanged private cards and graceful exact-owned exit0."
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v35-c3c5bdb\\candidate.json",
+      "bytes": 6854,
+      "sha256": "a176f8dd587317e6d0fe240c871265435d92098049848b0d42bba0804b1c0d64"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-v35-full-curtain-warm-cold-independent-reduction.json",
+      "bytes": 5007,
+      "sha256": "c7725f1e7fda5c85a128b57e0547bc0afa68d6c930a732dd9f535c0dbc7ffeab"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-v35-working-palette-MODMEM-and-used-colors-independent-reduction.json",
+      "bytes": 29203,
+      "sha256": "d5e769e297bf1378e3cd69d9f0bbc63686de6ba8b72d145a2479c1a97802d5d2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\qualification.json",
+      "bytes": 17121178,
+      "sha256": "00862c89ae89b4dd20e5fdf388d8aec36119f033f93a03d8f605de8e9bf29412"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\candidate\\jump-audio\\stdout.log",
+      "bytes": 9603197,
+      "sha256": "8b61952c446facccb55aa21ef3ffdf6455bc0d3a01775d62df701dd08e055af3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\diagnostic-runner-executed-source.py",
+      "bytes": 19060,
+      "sha256": "9386c6b32e217e31a244ab48e53144c8912780e74d13daf944fbc95b1a3601da"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\active-Giga-snapshot.pst",
+      "bytes": 1846129,
+      "sha256": "e65dd961e440b5cd30b9dcb9d495a7ba283d2981ef4c06abeb3bc4ee4fdd210f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-probe.pst",
+      "bytes": 1848359,
+      "sha256": "42ba1c5f12bb79b6b57c45b638b3d495f5c78d98fb24f85c819f7684729abc9b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-fresh-no-inventory.png",
+      "bytes": 2074543,
+      "sha256": "f8043958b87171f146510adbf6337c0c50eac55a96d4fe278d6e262d2ed9dbd2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-fresh-no-inventory-gpu.json.gz",
+      "bytes": 8487,
+      "sha256": "ffa2e26bccf0e940f76f7b57b26bc9c24556f787555727c807dc74f9fccdd2d7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-fresh-no-inventory-used-bank-608b.pixels.gz",
+      "bytes": 199,
+      "sha256": "fd3fa39a08dfcdb3321fd7c15083ced4c2f084b70ef112ccc3c5217c76404fcb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-fresh-no-inventory-used-bank-60bc.pixels.gz",
+      "bytes": 192,
+      "sha256": "aefcf93849a7acb8355dc39edb8d73d1a633f691a1a25f22d68940608f06bcb1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-fresh-no-inventory-used-bank-60bd.pixels.gz",
+      "bytes": 183,
+      "sha256": "27d4b926061ee7782bdfd5cebde80c9b2b5f6dba79cc9e4553975628efeb5fea"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-fresh-no-inventory-used-bank-60be.pixels.gz",
+      "bytes": 160,
+      "sha256": "b98b0fc85b407a50210d11c3cfd5919f6107c17d32d32458bd1eba91c4601956"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-fresh-no-inventory-used-bank-60bf.pixels.gz",
+      "bytes": 235,
+      "sha256": "55f554bb46df9b04f673112636dba5717b88932d5ce47dc95a98d4066f849f44"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-fresh-no-inventory-used-bank-60c0.pixels.gz",
+      "bytes": 166,
+      "sha256": "39d1dacc5e67a265df449a92d5363fcdfe924fde636df8a2e245e3a323699491"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-fresh-no-inventory-used-bank-60c1.pixels.gz",
+      "bytes": 188,
+      "sha256": "4a068e31ca4ce58562723b3972212e754af1b139a3761820a8e0d59c25b8091c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-fresh-no-inventory-used-bank-60c2.pixels.gz",
+      "bytes": 136,
+      "sha256": "b636b9b86e2747153ac8740a0b4fcfc479ed789037e2008240237981d973ab88"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-paused-active-Giga.png",
+      "bytes": 2074543,
+      "sha256": "9fe5e1dd37b166f7d5e2c1de2384d262a036b7f8784d25d1b2d2acd59b23f750"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-paused-active-Giga-gpu.json.gz",
+      "bytes": 10953,
+      "sha256": "464640be5e38bb4ab5563580498035072e16238dbc06bff78f63f2abb55fef92"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-naturally-retired-before-load.png",
+      "bytes": 2074543,
+      "sha256": "f8043958b87171f146510adbf6337c0c50eac55a96d4fe278d6e262d2ed9dbd2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-naturally-retired-before-load-gpu.json.gz",
+      "bytes": 8580,
+      "sha256": "9334a96b7612a21a50d738bb0995e444806a46b314b81a5fef2897f0e5e02031"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-naturally-retired-before-load-used-bank-608b.pixels.gz",
+      "bytes": 199,
+      "sha256": "fd3fa39a08dfcdb3321fd7c15083ced4c2f084b70ef112ccc3c5217c76404fcb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-naturally-retired-before-load-used-bank-60bc.pixels.gz",
+      "bytes": 192,
+      "sha256": "aefcf93849a7acb8355dc39edb8d73d1a633f691a1a25f22d68940608f06bcb1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-naturally-retired-before-load-used-bank-60bd.pixels.gz",
+      "bytes": 183,
+      "sha256": "27d4b926061ee7782bdfd5cebde80c9b2b5f6dba79cc9e4553975628efeb5fea"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-naturally-retired-before-load-used-bank-60be.pixels.gz",
+      "bytes": 160,
+      "sha256": "b98b0fc85b407a50210d11c3cfd5919f6107c17d32d32458bd1eba91c4601956"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-naturally-retired-before-load-used-bank-60bf.pixels.gz",
+      "bytes": 235,
+      "sha256": "55f554bb46df9b04f673112636dba5717b88932d5ce47dc95a98d4066f849f44"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-naturally-retired-before-load-used-bank-60c0.pixels.gz",
+      "bytes": 166,
+      "sha256": "39d1dacc5e67a265df449a92d5363fcdfe924fde636df8a2e245e3a323699491"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-naturally-retired-before-load-used-bank-60c1.pixels.gz",
+      "bytes": 188,
+      "sha256": "4a068e31ca4ce58562723b3972212e754af1b139a3761820a8e0d59c25b8091c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-naturally-retired-before-load-used-bank-60c2.pixels.gz",
+      "bytes": 136,
+      "sha256": "b636b9b86e2747153ac8740a0b4fcfc479ed789037e2008240237981d973ab88"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-active-Giga.png",
+      "bytes": 2074543,
+      "sha256": "97ce107fa85646031125644cf07fefd8bd3fd232a677d7b9acf0c42fc23ef4dc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-active-Giga-gpu.json.gz",
+      "bytes": 10954,
+      "sha256": "4f5fc8913b876417560fbbfce431f87067906584fe77de09a1342b93f669a8c1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume.png",
+      "bytes": 2074543,
+      "sha256": "d87abfcb6deb0a6d6f2c3f9c47b1d3017acbc55c8483400e075054644abf0744"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-gpu.json.gz",
+      "bytes": 28490,
+      "sha256": "9c0d4c2948bd2ef74f6f59060c416ebfa026ea5a52fe87fb33e3fd5f6707b09f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-60f5.pixels.gz",
+      "bytes": 73,
+      "sha256": "42cf98c3a86bcf9d09a7f2e72b3b7d2a6118defb310664a292b44a272137c880"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-60f6.pixels.gz",
+      "bytes": 85,
+      "sha256": "fc1714faa39d13fa277be8f91d28e9916926515ef11c7a0b5808e0a25fb8edde"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-60f7.pixels.gz",
+      "bytes": 73,
+      "sha256": "8c78cb7662d66e83ad9781c243fdc2ea62ce5c983a9a5b6e804c4924a834dbec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-60f8.pixels.gz",
+      "bytes": 76,
+      "sha256": "45ad3ff57ca6f948621e9c8ee3979f193487f3f7382a048909677b99d039500a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-60f9.pixels.gz",
+      "bytes": 79,
+      "sha256": "1ccc32926495e986fa3f297ab46b624867521eec7010e3b543e6957c42625937"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-60fa.pixels.gz",
+      "bytes": 92,
+      "sha256": "bed0a1cb4df45795985ca14334bbfc6abda5977e455cb06ad68713b95946087e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-60fb.pixels.gz",
+      "bytes": 65,
+      "sha256": "e2c8003c46d6cc6ee9965240a537eb255aa7172eb900fbdf8bad0278c9b928bc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-60fc.pixels.gz",
+      "bytes": 64,
+      "sha256": "f99cf11bad0bee42d20ee254e195c1bb2ca9ae17c70356c128fec49cbef01eb3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-610b.pixels.gz",
+      "bytes": 131,
+      "sha256": "a2cb02205f25b0dfb1bdb39439a64fd712418397cdc489b049a0e2a138513bca"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-610c.pixels.gz",
+      "bytes": 195,
+      "sha256": "a9dcfe155983892ccbdb1b80237ab8ca26fd223f14a9fbb42ba9d00868058ed0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-610d.pixels.gz",
+      "bytes": 186,
+      "sha256": "1ff62cd52c7942b98c393dad81ff891ac32867cb787d993d8763576a89193886"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-610e.pixels.gz",
+      "bytes": 151,
+      "sha256": "14522fae924a105f8911e05bb60040f0998f61150e40894aa50892d9a15ad2ce"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-610f.pixels.gz",
+      "bytes": 216,
+      "sha256": "e391a52e7471cdd40c72743aa42647978cadc865466988e4b9369074434ec265"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-611c.pixels.gz",
+      "bytes": 189,
+      "sha256": "8b48fb3009688e8871aa836f9470452d481dd897d0e2ef903ae3bdcc9dd48b51"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-611d.pixels.gz",
+      "bytes": 160,
+      "sha256": "ec6f971371a7034f11fde30a8771bb63344e35c3e3b12e7b2027c5fc49d5944d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-611e.pixels.gz",
+      "bytes": 109,
+      "sha256": "5f925a04747109a8c07d21dc4dafb905dfd3e802a46ba7397be144e66467da7e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-611f.pixels.gz",
+      "bytes": 74,
+      "sha256": "c9c478940d46a9ca84f42a4c9cec7eabeab1fed14671cdd1327eb4c3c8f47813"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-6120.pixels.gz",
+      "bytes": 124,
+      "sha256": "faf31737b34e11c64c65cd10fe515d8ccc6695bc505aa82471d2211c17433e58"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-6121.pixels.gz",
+      "bytes": 34,
+      "sha256": "3fc173dd1ee51f76716fb258a30b4e7e594f0d02d6b61fab3f28fad42c55c71e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-6128.pixels.gz",
+      "bytes": 50,
+      "sha256": "bd4a9862e1396bec8d6d5db01b7a53ab32ec705dfea01ae8562ae4c33c88763e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-6129.pixels.gz",
+      "bytes": 64,
+      "sha256": "884df1cefc8009945a3a070016eb5ab9728956e2215781621dcd8155199f8996"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-612a.pixels.gz",
+      "bytes": 98,
+      "sha256": "b189b5f650f759921044a303fad1c1e32f5b9ee69ba15ca79ec44f3c230223b4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-612b.pixels.gz",
+      "bytes": 133,
+      "sha256": "215995d56c110effac94f14dacb3da6c3bc5e5aa7a36d0ed1fe6a7334eca3cbe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-612c.pixels.gz",
+      "bytes": 132,
+      "sha256": "e86d3c8a5cb77e8a9e700b72ecd7b0abd072246eb8302e024b28714af9f743c0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-612d.pixels.gz",
+      "bytes": 4411,
+      "sha256": "1b8700de9404b50f60e3899145aa557ae273c235fdf65c4638467af066406247"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-6132.pixels.gz",
+      "bytes": 50,
+      "sha256": "2cb37b161f43c4262472bd6924ccc229df56edd386142dbd2e6c97e596d37e52"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-6136.pixels.gz",
+      "bytes": 4606,
+      "sha256": "0fdaaf0cb6af82da6125781c144cd4a7d1e114ce5301755fcfb4e60f92ed022d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-6138.pixels.gz",
+      "bytes": 58,
+      "sha256": "b34906448aaba843202230ebac2f8505ba0b7a0157a98edf20ada343e9a125a3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-6139.pixels.gz",
+      "bytes": 93,
+      "sha256": "1f239284b0e216982d5c213cc05a765664953168bd046d79c1ecdaa3526503f5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-613a.pixels.gz",
+      "bytes": 56,
+      "sha256": "1e1b943d8655a4e44f5464cbf20c5b14a351934adc7f3a3ee3e62944bab98435"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-613b.pixels.gz",
+      "bytes": 48,
+      "sha256": "e8f87f51660372412cee92c12a2f592d92a0b6d66ff3c29c0f302b0e592adf8d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-613c.pixels.gz",
+      "bytes": 62,
+      "sha256": "62adfec77992ce1cfa5064080aacc96bc012b3f7d077040350e2e6aa7c68026e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-613d.pixels.gz",
+      "bytes": 96,
+      "sha256": "1d39a183bfb7334325ecb03fdb2e2f0710e823378b0e9049038252db103816ca"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-613e.pixels.gz",
+      "bytes": 132,
+      "sha256": "d167d29dbbde2261e136de8704f1552bc11f1c001db6b4c397efc0f864318e40"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-613f.pixels.gz",
+      "bytes": 132,
+      "sha256": "64320a571ae294e0d97a7eb1b7079a4e601d7a23bc6889f28b0b6226506d4789"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-6140.pixels.gz",
+      "bytes": 4563,
+      "sha256": "810a885ce491eca0585d3974465ba2e722034b36b00550aaaff088cea15d3046"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-6141.pixels.gz",
+      "bytes": 60,
+      "sha256": "de8f682800ef5cd1c3cc1cec54889849da6efe355472d9a9d60dd27b33c85d74"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-6142.pixels.gz",
+      "bytes": 94,
+      "sha256": "4bc080709969fd8f0215f34eaebe1bdccc727c80e6f41aa9ce603b5b4c2c9a75"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-active-after-resume-used-bank-6143.pixels.gz",
+      "bytes": 54,
+      "sha256": "ad6c656f5169a7971dcb367ab9253e152c5daf148cadc1ace88ef45372560c4e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-retired.png",
+      "bytes": 2074543,
+      "sha256": "62782b1285f44b640bca73562d119f4eb102ec7d0976fb0f4a310060d14a91f7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-retired-gpu.json.gz",
+      "bytes": 8486,
+      "sha256": "9bdaa9c4204a12f46a84078fe8f2dcbfcdc9a63382de857a1c24a04fa7da80d1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-retired-used-bank-6086.pixels.gz",
+      "bytes": 183,
+      "sha256": "6718dc03b8cc2d2978a703dd6e6d28b797ec70ba4d8f22c0b89b5e9453e2739e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-retired-used-bank-6087.pixels.gz",
+      "bytes": 179,
+      "sha256": "1579831401740b9c02102bdc73cca81bdd7d58e131b99bd6abfaac44cfb1bb69"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-retired-used-bank-6088.pixels.gz",
+      "bytes": 162,
+      "sha256": "b90ff3e54cca1505a5ef50274fdc8b719d68579f280c78ba41b7d3b29e2fe390"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-retired-used-bank-6089.pixels.gz",
+      "bytes": 236,
+      "sha256": "36a9b044dbe9d6a620b63e83824ab192ba1e11719f153048bbea5fe36dcd0dad"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-retired-used-bank-608a.pixels.gz",
+      "bytes": 179,
+      "sha256": "a6c0e3e1e4b2a171ad4cf8ee3aea3f841cc142ea0a4ffb5dc71a12b816feb460"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-retired-used-bank-608b.pixels.gz",
+      "bytes": 199,
+      "sha256": "fd3fa39a08dfcdb3321fd7c15083ced4c2f084b70ef112ccc3c5217c76404fcb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-retired-used-bank-608c.pixels.gz",
+      "bytes": 194,
+      "sha256": "91cf5aa4b182a60db95ae594d052fc90d5810ec83b6c80c3fd3bc0b7b9519225"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-restored-Giga-retired-used-bank-608d.pixels.gz",
+      "bytes": 133,
+      "sha256": "715892aa8a43cf5cc4fc83632d21ce986fb7b6b1ba93a6adc4b54f6ca6bc9311"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-X-shot.png",
+      "bytes": 2074543,
+      "sha256": "7a440fb246af0d715b97d549c0f271b63be1f3f1e0ad285a933f35d1a84899a3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-X-shot-gpu.json.gz",
+      "bytes": 8600,
+      "sha256": "7479172206f0f0d5a06dcd96c8eec5a8d9babcdb8d077f779ce82f002a162cbe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-X-shot-used-bank-6086.pixels.gz",
+      "bytes": 183,
+      "sha256": "6718dc03b8cc2d2978a703dd6e6d28b797ec70ba4d8f22c0b89b5e9453e2739e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-X-shot-used-bank-6087.pixels.gz",
+      "bytes": 179,
+      "sha256": "1579831401740b9c02102bdc73cca81bdd7d58e131b99bd6abfaac44cfb1bb69"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-X-shot-used-bank-6088.pixels.gz",
+      "bytes": 162,
+      "sha256": "b90ff3e54cca1505a5ef50274fdc8b719d68579f280c78ba41b7d3b29e2fe390"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-X-shot-used-bank-6089.pixels.gz",
+      "bytes": 236,
+      "sha256": "36a9b044dbe9d6a620b63e83824ab192ba1e11719f153048bbea5fe36dcd0dad"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-X-shot-used-bank-608a.pixels.gz",
+      "bytes": 179,
+      "sha256": "a6c0e3e1e4b2a171ad4cf8ee3aea3f841cc142ea0a4ffb5dc71a12b816feb460"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-X-shot-used-bank-608b.pixels.gz",
+      "bytes": 199,
+      "sha256": "fd3fa39a08dfcdb3321fd7c15083ced4c2f084b70ef112ccc3c5217c76404fcb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-X-shot-used-bank-608c.pixels.gz",
+      "bytes": 194,
+      "sha256": "91cf5aa4b182a60db95ae594d052fc90d5810ec83b6c80c3fd3bc0b7b9519225"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-X-shot-used-bank-608d.pixels.gz",
+      "bytes": 133,
+      "sha256": "715892aa8a43cf5cc4fc83632d21ce986fb7b6b1ba93a6adc4b54f6ca6bc9311"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-Zero-saber.png",
+      "bytes": 2074543,
+      "sha256": "69bc16763d674c374d0e8e33638c3e9e19dc8594038128a7b993a7fafad64631"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-Zero-saber-gpu.json.gz",
+      "bytes": 8746,
+      "sha256": "a12ecddf5815b976242f21c98e57651b47ffb291a0b17351ef7eab934b78f05f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-Zero-saber-used-bank-608b.pixels.gz",
+      "bytes": 199,
+      "sha256": "fd3fa39a08dfcdb3321fd7c15083ced4c2f084b70ef112ccc3c5217c76404fcb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-Zero-saber-used-bank-6166.pixels.gz",
+      "bytes": 94,
+      "sha256": "2a3e2fe9cbd1540fda97f2e354f623a4a1db53d5857306e17ad29f42f9a48954"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-Zero-saber-used-bank-6167.pixels.gz",
+      "bytes": 185,
+      "sha256": "d63956c6515e46d377da4bdf4007021291e7cc2b48399decd0c3590632a1f6f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-Zero-saber-used-bank-6168.pixels.gz",
+      "bytes": 142,
+      "sha256": "93db3d2295a257a7c7410d24037d3f4ff7faa80daee29e8ab6794127263f423b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-Zero-saber-used-bank-6187.pixels.gz",
+      "bytes": 182,
+      "sha256": "b65b102813bdc13c52fa83a54629a2f41bb5f2be5ac1bf4a2e4991de1e2fe96f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-Zero-saber-used-bank-6188.pixels.gz",
+      "bytes": 203,
+      "sha256": "933b525ec60d5a156ccbbb69b57e181473357064f83eb48f215a356a478e5acb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-Zero-saber-used-bank-6189.pixels.gz",
+      "bytes": 226,
+      "sha256": "2985c44641092de6c0473f3ebc9f06f5701266ad2af61bf959dc756ca47b39fb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-Zero-saber-used-bank-618a.pixels.gz",
+      "bytes": 81,
+      "sha256": "c57f668d0c47886075d41b0458bbf644093fbf0ba793ef44e2dffaacc079c5cc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-Zero-saber-used-bank-618b.pixels.gz",
+      "bytes": 182,
+      "sha256": "922001ccf8891c4ab26cf43fb280a0049ab568d207d91778c5665e54a8915de4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-Zero-saber-used-bank-618c.pixels.gz",
+      "bytes": 150,
+      "sha256": "aa1dbe23df5f48427897fab2ec09a538ac4e2a56c3aaff439cc0b1658db5bfac"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-independent-controls.png",
+      "bytes": 2074543,
+      "sha256": "fd23f6d355fc2400d95a1a56a29a7facd45bd40726e75866b75a29749767d48d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-independent-controls-gpu.json.gz",
+      "bytes": 8560,
+      "sha256": "b4b1d1b50ef49777848ab69230d0525da2a463eff6067b93727c494df09ba9fc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\warm-post-Giga-independent-controls-used-bank-6197.pixels.gz",
+      "bytes": 1088,
+      "sha256": "d5b357e7fe7612916ddbbfc18759a8dd2c66a91c7d06db36c069c1516ad934bc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\steady-UI-private-packet-arenas.bin.gz",
+      "bytes": 26469,
+      "sha256": "836812c0ddbd007bb76125900211e7ee2a8982ba43a20a33366adc26903d6b38"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\matched-steady-UI-world-frame-2712.json.gz",
+      "bytes": 28397,
+      "sha256": "75b88713d399a9fb8daf08b06999a2c6d81145a2ac74f577e338439734e62464"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\ammo-hud\\matched-steady-UI-world-frame-2711.json.gz",
+      "bytes": 28392,
+      "sha256": "f450f0354d21505c400c560bd25273fb98366a80dbcfbab7f49641bc6abe96c4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\recording-rejection\\settings.json",
+      "bytes": 10329,
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\recording-rejection\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\recording-rejection\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\recording-rejection\\inputs.jsonl",
+      "bytes": 813894,
+      "sha256": "f0cb7a53e5ca11a42930a6916c6e17195123b87bd4b7833fa9cdc9a06e3cfc13"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\recording-rejection\\status.json",
+      "bytes": 211,
+      "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\recording-rejection\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-warm\\recording-rejection\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\qualification.json",
+      "bytes": 10620602,
+      "sha256": "bf93e3947940d6ca16387ff1dd39914c9c1f7f8a9de4b7cc8ead5b9756f5401f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\candidate\\jump-audio\\stdout.log",
+      "bytes": 4571956,
+      "sha256": "e4061cc960d2a0874e8ed6ee00064da502f8939d1946accae8890517b927c727"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\diagnostic-runner-executed-source.py",
+      "bytes": 19060,
+      "sha256": "9386c6b32e217e31a244ab48e53144c8912780e74d13daf944fbc95b1a3601da"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-probe.pst",
+      "bytes": 1846032,
+      "sha256": "62385f038705d7d708b5fb704b646eca4bb550039e94d2582a80ca7000016408"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\candidate\\saves\\openbios\\state_80054AD8_slot07.pst",
+      "bytes": 1846129,
+      "sha256": "e65dd961e440b5cd30b9dcb9d495a7ba283d2981ef4c06abeb3bc4ee4fdd210f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-fresh-no-inventory.png",
+      "bytes": 2074543,
+      "sha256": "f8043958b87171f146510adbf6337c0c50eac55a96d4fe278d6e262d2ed9dbd2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-fresh-no-inventory-gpu.json.gz",
+      "bytes": 8561,
+      "sha256": "8728a258523f992ceac6bc70a3296d561c4d8e0982593973a9c4837b8259c705"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-fresh-no-inventory-used-bank-608b.pixels.gz",
+      "bytes": 199,
+      "sha256": "fd3fa39a08dfcdb3321fd7c15083ced4c2f084b70ef112ccc3c5217c76404fcb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-fresh-no-inventory-used-bank-60bc.pixels.gz",
+      "bytes": 192,
+      "sha256": "aefcf93849a7acb8355dc39edb8d73d1a633f691a1a25f22d68940608f06bcb1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-fresh-no-inventory-used-bank-60bd.pixels.gz",
+      "bytes": 183,
+      "sha256": "27d4b926061ee7782bdfd5cebde80c9b2b5f6dba79cc9e4553975628efeb5fea"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-fresh-no-inventory-used-bank-60be.pixels.gz",
+      "bytes": 160,
+      "sha256": "b98b0fc85b407a50210d11c3cfd5919f6107c17d32d32458bd1eba91c4601956"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-fresh-no-inventory-used-bank-60bf.pixels.gz",
+      "bytes": 235,
+      "sha256": "55f554bb46df9b04f673112636dba5717b88932d5ce47dc95a98d4066f849f44"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-fresh-no-inventory-used-bank-60c0.pixels.gz",
+      "bytes": 166,
+      "sha256": "39d1dacc5e67a265df449a92d5363fcdfe924fde636df8a2e245e3a323699491"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-fresh-no-inventory-used-bank-60c1.pixels.gz",
+      "bytes": 188,
+      "sha256": "4a068e31ca4ce58562723b3972212e754af1b139a3761820a8e0d59c25b8091c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-fresh-no-inventory-used-bank-60c2.pixels.gz",
+      "bytes": 136,
+      "sha256": "b636b9b86e2747153ac8740a0b4fcfc479ed789037e2008240237981d973ab88"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-active-Giga.png",
+      "bytes": 2074543,
+      "sha256": "7bf5b5776b95806677be2b6009709c51783de97b0476fad8e7256d5bc14acc86"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-active-Giga-gpu.json.gz",
+      "bytes": 10965,
+      "sha256": "dbde86a0a042491bf453a18d0f4e01a73b4fa5c8864ce222493205d8d55e0a02"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume.png",
+      "bytes": 2074543,
+      "sha256": "1339fff8b89dcf7c2e93d128d2bc6ff55b346258aa86ea51bc96f313b10dc755"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-gpu.json.gz",
+      "bytes": 28534,
+      "sha256": "3a8b9494c41d76f33056ba01eb199af803fb780ca27ffb56a1aa1dae817aef34"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-60f5.pixels.gz",
+      "bytes": 73,
+      "sha256": "42cf98c3a86bcf9d09a7f2e72b3b7d2a6118defb310664a292b44a272137c880"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-60f6.pixels.gz",
+      "bytes": 85,
+      "sha256": "fc1714faa39d13fa277be8f91d28e9916926515ef11c7a0b5808e0a25fb8edde"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-60f7.pixels.gz",
+      "bytes": 73,
+      "sha256": "8c78cb7662d66e83ad9781c243fdc2ea62ce5c983a9a5b6e804c4924a834dbec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-60f8.pixels.gz",
+      "bytes": 76,
+      "sha256": "45ad3ff57ca6f948621e9c8ee3979f193487f3f7382a048909677b99d039500a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-60f9.pixels.gz",
+      "bytes": 79,
+      "sha256": "1ccc32926495e986fa3f297ab46b624867521eec7010e3b543e6957c42625937"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-60fa.pixels.gz",
+      "bytes": 92,
+      "sha256": "bed0a1cb4df45795985ca14334bbfc6abda5977e455cb06ad68713b95946087e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-60fb.pixels.gz",
+      "bytes": 65,
+      "sha256": "e2c8003c46d6cc6ee9965240a537eb255aa7172eb900fbdf8bad0278c9b928bc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-60fc.pixels.gz",
+      "bytes": 64,
+      "sha256": "f99cf11bad0bee42d20ee254e195c1bb2ca9ae17c70356c128fec49cbef01eb3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-610b.pixels.gz",
+      "bytes": 131,
+      "sha256": "a2cb02205f25b0dfb1bdb39439a64fd712418397cdc489b049a0e2a138513bca"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-610c.pixels.gz",
+      "bytes": 195,
+      "sha256": "a9dcfe155983892ccbdb1b80237ab8ca26fd223f14a9fbb42ba9d00868058ed0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-610d.pixels.gz",
+      "bytes": 186,
+      "sha256": "1ff62cd52c7942b98c393dad81ff891ac32867cb787d993d8763576a89193886"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-610e.pixels.gz",
+      "bytes": 151,
+      "sha256": "14522fae924a105f8911e05bb60040f0998f61150e40894aa50892d9a15ad2ce"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6122.pixels.gz",
+      "bytes": 217,
+      "sha256": "03206112a36d5d17d24fe5589b7df29c9c683c4e963d448444fea9752c006fa8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6123.pixels.gz",
+      "bytes": 188,
+      "sha256": "b9aa76e1c84742cbf05dcda67c5c25cefe1729ea984da227bd0d927e7ece06a1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6124.pixels.gz",
+      "bytes": 176,
+      "sha256": "ef4802ca594257056e4a977d67d5e50852e93d72421b590b7bac5226e3646a76"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6125.pixels.gz",
+      "bytes": 90,
+      "sha256": "50df2ed154a6b7148e7c90841af8943ff556c56fe6a1efe15cc34a5f71963838"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6126.pixels.gz",
+      "bytes": 126,
+      "sha256": "3f1c847b0034e349ad0ce7c5561f58c4df5725e82cb24ca07da1c67a1daab64b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6127.pixels.gz",
+      "bytes": 44,
+      "sha256": "e9ec8ae25de7c4fb43e9095fcf5f8669fd34b0ce0c6cd1052d6433c80d773ed4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6128.pixels.gz",
+      "bytes": 50,
+      "sha256": "bd4a9862e1396bec8d6d5db01b7a53ab32ec705dfea01ae8562ae4c33c88763e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6129.pixels.gz",
+      "bytes": 64,
+      "sha256": "884df1cefc8009945a3a070016eb5ab9728956e2215781621dcd8155199f8996"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-612a.pixels.gz",
+      "bytes": 98,
+      "sha256": "b189b5f650f759921044a303fad1c1e32f5b9ee69ba15ca79ec44f3c230223b4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-612b.pixels.gz",
+      "bytes": 133,
+      "sha256": "215995d56c110effac94f14dacb3da6c3bc5e5aa7a36d0ed1fe6a7334eca3cbe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-612c.pixels.gz",
+      "bytes": 132,
+      "sha256": "e86d3c8a5cb77e8a9e700b72ecd7b0abd072246eb8302e024b28714af9f743c0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-612d.pixels.gz",
+      "bytes": 4411,
+      "sha256": "1b8700de9404b50f60e3899145aa557ae273c235fdf65c4638467af066406247"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-612e.pixels.gz",
+      "bytes": 60,
+      "sha256": "c8c94688a2f3abc2d3b251cc0023b4c7a168af055d92abddb1b8a02745962421"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-612f.pixels.gz",
+      "bytes": 94,
+      "sha256": "0eaebd3947d19bcbb24cd8e6efe4c14f4d14b01da621cdf1a4d652e585a73cbf"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6130.pixels.gz",
+      "bytes": 55,
+      "sha256": "d81593780a5de61d0b340b823583a3648574c0c804a5ce5b2f86b9d43528edb1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6131.pixels.gz",
+      "bytes": 2948,
+      "sha256": "70e92e4b8eba1b642a7976c58d178328c6c9c6a7983363bc23561101d9353345"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6132.pixels.gz",
+      "bytes": 50,
+      "sha256": "2cb37b161f43c4262472bd6924ccc229df56edd386142dbd2e6c97e596d37e52"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6133.pixels.gz",
+      "bytes": 62,
+      "sha256": "389192f46f159e006177802ddc0d319468f508738447622ed13a9fcbddf002c0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6134.pixels.gz",
+      "bytes": 93,
+      "sha256": "eef1ac294853edbbfd263280f3f389c25da594f3f142b394910041b73f768805"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6135.pixels.gz",
+      "bytes": 133,
+      "sha256": "323162192dadd26b182523630bdf75b6fd4816c01d1f43f2ed8439b5bd2e0679"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6136.pixels.gz",
+      "bytes": 4606,
+      "sha256": "0fdaaf0cb6af82da6125781c144cd4a7d1e114ce5301755fcfb4e60f92ed022d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6137.pixels.gz",
+      "bytes": 133,
+      "sha256": "f18556cc766c9cf9f48f899da6db46cbe251062ba1f9c4711c010e7bded54c98"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-613b.pixels.gz",
+      "bytes": 48,
+      "sha256": "e8f87f51660372412cee92c12a2f592d92a0b6d66ff3c29c0f302b0e592adf8d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6140.pixels.gz",
+      "bytes": 4563,
+      "sha256": "810a885ce491eca0585d3974465ba2e722034b36b00550aaaff088cea15d3046"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6141.pixels.gz",
+      "bytes": 60,
+      "sha256": "de8f682800ef5cd1c3cc1cec54889849da6efe355472d9a9d60dd27b33c85d74"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6142.pixels.gz",
+      "bytes": 94,
+      "sha256": "4bc080709969fd8f0215f34eaebe1bdccc727c80e6f41aa9ce603b5b4c2c9a75"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-active-after-resume-used-bank-6143.pixels.gz",
+      "bytes": 54,
+      "sha256": "ad6c656f5169a7971dcb367ab9253e152c5daf148cadc1ace88ef45372560c4e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-retired.png",
+      "bytes": 2074543,
+      "sha256": "1c31fe84f3cf91a24496006628d35c2d96ed43baac4a0395b064749de2360e91"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-retired-gpu.json.gz",
+      "bytes": 8606,
+      "sha256": "958ab90c10dc5a4bea71006716ffee7e8edb287cc487cf86f25992c2b80512fa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-retired-used-bank-608b.pixels.gz",
+      "bytes": 199,
+      "sha256": "fd3fa39a08dfcdb3321fd7c15083ced4c2f084b70ef112ccc3c5217c76404fcb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-retired-used-bank-60bb.pixels.gz",
+      "bytes": 131,
+      "sha256": "54940b181327f8df0d39874bcde856ddb35ea02bd621ba0b3ee10586576ab3f6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-retired-used-bank-60c3.pixels.gz",
+      "bytes": 187,
+      "sha256": "df80ca2366a3e2dff15eb445898028901b498fd57f29f5a73622da8a5cae2e2d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-retired-used-bank-60c4.pixels.gz",
+      "bytes": 181,
+      "sha256": "b0788515e2ac26c846e3e56661a55ac1dabab1d9ce26432193ce0816d8e8257d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-retired-used-bank-60c5.pixels.gz",
+      "bytes": 161,
+      "sha256": "7605b4e689354306b700d307a184a7d4eb587d723b8ada9cde01740d2cfc4cee"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-retired-used-bank-60c6.pixels.gz",
+      "bytes": 235,
+      "sha256": "60c679821746c2bf8d161553d4338112abb96ef8e8745ea1a7e08ff2b2747827"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-retired-used-bank-60c7.pixels.gz",
+      "bytes": 171,
+      "sha256": "825e654dcd63f83e14b914b9745f6fa559693142ffd5efa3c3729e554852a15d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-restored-Giga-retired-used-bank-60c8.pixels.gz",
+      "bytes": 192,
+      "sha256": "b223bf6169d2e76443d56aa04a70d21c8668395901c53be2413b5608599cb2f8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-X-shot.png",
+      "bytes": 2074543,
+      "sha256": "d1598f37f69c07c662c0cd2317ecaf07daf0f671bbbecb2769655c7e5f6ef222"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-X-shot-gpu.json.gz",
+      "bytes": 8613,
+      "sha256": "46e341f02a8ca3bd5c17058800b778e8c588a96480f482f584f8ff2656028fa7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-X-shot-used-bank-6086.pixels.gz",
+      "bytes": 183,
+      "sha256": "6718dc03b8cc2d2978a703dd6e6d28b797ec70ba4d8f22c0b89b5e9453e2739e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-X-shot-used-bank-6087.pixels.gz",
+      "bytes": 179,
+      "sha256": "1579831401740b9c02102bdc73cca81bdd7d58e131b99bd6abfaac44cfb1bb69"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-X-shot-used-bank-6088.pixels.gz",
+      "bytes": 162,
+      "sha256": "b90ff3e54cca1505a5ef50274fdc8b719d68579f280c78ba41b7d3b29e2fe390"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-X-shot-used-bank-6089.pixels.gz",
+      "bytes": 236,
+      "sha256": "36a9b044dbe9d6a620b63e83824ab192ba1e11719f153048bbea5fe36dcd0dad"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-X-shot-used-bank-608a.pixels.gz",
+      "bytes": 179,
+      "sha256": "a6c0e3e1e4b2a171ad4cf8ee3aea3f841cc142ea0a4ffb5dc71a12b816feb460"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-X-shot-used-bank-608b.pixels.gz",
+      "bytes": 199,
+      "sha256": "fd3fa39a08dfcdb3321fd7c15083ced4c2f084b70ef112ccc3c5217c76404fcb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-X-shot-used-bank-608c.pixels.gz",
+      "bytes": 194,
+      "sha256": "91cf5aa4b182a60db95ae594d052fc90d5810ec83b6c80c3fd3bc0b7b9519225"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-X-shot-used-bank-608d.pixels.gz",
+      "bytes": 133,
+      "sha256": "715892aa8a43cf5cc4fc83632d21ce986fb7b6b1ba93a6adc4b54f6ca6bc9311"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-Zero-saber.png",
+      "bytes": 2074543,
+      "sha256": "5fbefc4e0bd6741c424c1f5ed52b9aebd8d5058c3dbce40b7f5105b462ba127b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-Zero-saber-gpu.json.gz",
+      "bytes": 8762,
+      "sha256": "d07dc460e1c52121be1c48133f5a20c5ce92136b44781f01cbec282f657844ac"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-Zero-saber-used-bank-608b.pixels.gz",
+      "bytes": 199,
+      "sha256": "fd3fa39a08dfcdb3321fd7c15083ced4c2f084b70ef112ccc3c5217c76404fcb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-Zero-saber-used-bank-6166.pixels.gz",
+      "bytes": 94,
+      "sha256": "2a3e2fe9cbd1540fda97f2e354f623a4a1db53d5857306e17ad29f42f9a48954"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-Zero-saber-used-bank-6167.pixels.gz",
+      "bytes": 185,
+      "sha256": "d63956c6515e46d377da4bdf4007021291e7cc2b48399decd0c3590632a1f6f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-Zero-saber-used-bank-6168.pixels.gz",
+      "bytes": 142,
+      "sha256": "93db3d2295a257a7c7410d24037d3f4ff7faa80daee29e8ab6794127263f423b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-Zero-saber-used-bank-6187.pixels.gz",
+      "bytes": 182,
+      "sha256": "b65b102813bdc13c52fa83a54629a2f41bb5f2be5ac1bf4a2e4991de1e2fe96f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-Zero-saber-used-bank-6188.pixels.gz",
+      "bytes": 203,
+      "sha256": "933b525ec60d5a156ccbbb69b57e181473357064f83eb48f215a356a478e5acb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-Zero-saber-used-bank-6189.pixels.gz",
+      "bytes": 226,
+      "sha256": "2985c44641092de6c0473f3ebc9f06f5701266ad2af61bf959dc756ca47b39fb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-Zero-saber-used-bank-618a.pixels.gz",
+      "bytes": 81,
+      "sha256": "c57f668d0c47886075d41b0458bbf644093fbf0ba793ef44e2dffaacc079c5cc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-Zero-saber-used-bank-618b.pixels.gz",
+      "bytes": 182,
+      "sha256": "922001ccf8891c4ab26cf43fb280a0049ab568d207d91778c5665e54a8915de4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-Zero-saber-used-bank-618c.pixels.gz",
+      "bytes": 150,
+      "sha256": "aa1dbe23df5f48427897fab2ec09a538ac4e2a56c3aaff439cc0b1658db5bfac"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-independent-controls.png",
+      "bytes": 2074543,
+      "sha256": "ec50957632775c0df23f56627cc65f77a92b9b2d95982e5369697edaf085d6f6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-independent-controls-gpu.json.gz",
+      "bytes": 8594,
+      "sha256": "bcce6b0cb9be648bdf3a34193207a6703bae4c092504cc94a3626ca68f2bd49a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\ammo-hud\\cold-post-Giga-independent-controls-used-bank-6197.pixels.gz",
+      "bytes": 1088,
+      "sha256": "d5b357e7fe7612916ddbbfc18759a8dd2c66a91c7d06db36c069c1516ad934bc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\recording-rejection\\settings.json",
+      "bytes": 10329,
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\recording-rejection\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\recording-rejection\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\recording-rejection\\inputs.jsonl",
+      "bytes": 836025,
+      "sha256": "d3ca411e43fbf9ab14b15e930198998b6819dd6c8ec857a952dde01d884c2810"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\recording-rejection\\status.json",
+      "bytes": 211,
+      "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\recording-rejection\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Giga-paused-packet-link-v35-c3c5bdb-anchor-cold\\recording-rejection\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-v35-Giga-working-palette-and-recovery-regression.py",
+      "bytes": 7140,
+      "sha256": "01340d3f03165686a6be27645de35fb21a82ff4536dccb80e5c69b40d80c4903"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-v35-Giga-palette-bank-pause-anchored-warm-cold.py",
+      "bytes": 19060,
+      "sha256": "9386c6b32e217e31a244ab48e53144c8912780e74d13daf944fbc95b1a3601da"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\verify-v35-Giga-render-completeness.py",
+      "bytes": 5004,
+      "sha256": "ab926a235ac01ae53cd9ba9d1e00af325e530a282e0ca25f31befb3359a645c3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\verify-v35-Giga-working-palette-state-and-used-colors.py",
+      "bytes": 6024,
+      "sha256": "34026a8bf2e39b1437d4dc29610997deb0ca953b4caae50e717737d2d7eddff8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\prepare-v35-Giga-independent-regressions.py",
+      "bytes": 1028,
+      "sha256": "0ea40026f8a61538d325fe38d89725795b10df81c9e2d6f1b7991ad0b643ff76"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_owned_retained_bank_capture.py",
+      "bytes": 4227,
+      "sha256": "bb903368172151a4505a97657121b0dedfc5e09a21bce34a7cb34561bac51afe"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-zero-Giga-reference-v31-777b4d0-earned80\\qualification.json",
+      "bytes": 5140445,
+      "sha256": "105f6215371791e551ce0f762b5acc67372105b3d6477a8bda282ebd66b0ec4b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-zero-Giga-reference-v31-777b4d0-earned80\\owned-runner\\native-Zero-Giga-step1.png",
+      "bytes": 2074543,
+      "sha256": "ba9421f0b976c6e2ef1d695ee6c044f31051efa3a1c63ca653bae0a17f915206"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-zero-Giga-reference-v31-777b4d0-earned80\\owned-runner\\native-Zero-Giga-step2.png",
+      "bytes": 2074543,
+      "sha256": "a88260bb39c469715a0260257e931c9f9c49c6d330a235398eddb2269feef24a"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-hud\\manifest-bound-253c74e-Giga-native-palette-full-curtain-and-recovery-local-reviewed.json",
+      "bytes": 110442,
+      "sha256": "a9aab7d96ed1a8a79a74a41176718611cdefb93bb73f5809e34c08966176cfc4"
+    }
+  ],
+  "limits": [
+    "Saved/restored whole16384byte working window is independently extracted from validated SDK MODMEM section17, in addition to existing18provider comparisons.",
+    "This run does not cause a genuine different-stage palette event between save/load; equality is not mutation-sensitive proof for every working row or live-selector route.",
+    "Stage0 normal Zero actual type26/44 icon bank palette/pixels match the native type5 row. Source-frame/fullscreen/original-hardware equivalence and general fades remain separate.",
+    "Original native native-zero-Giga-reference-v31-777b4d0-earned80 remains source-bound/differently timed. No netplay/rollback/all-weapon/aggregate pass.",
+    "Regression on new c3c5bdb Yammar texture-origin candidate. No new234comparison, native-content, netplay/rollback, all-stage/form/weapon or production-gameplay admission.",
+    "Original native source-art component remains separately pinned; original framing/animation phase differs. No whole-screen hardware equivalence claim.",
+    "Original inventory initialization is a prerequisite bypass and exact current-build LOAD is explicit. Cold adopts this candidate warm snapshot; no older-build state loaded or native progress changed.",
+    "Dedicated process-local Giga trace enabled only for these runs; ordinary cases leave it unset. Known earlier failures and nativeMenu-history observer misses remain preserved in prior receipts."
+  ]
+}

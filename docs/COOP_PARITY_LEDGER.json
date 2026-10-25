@@ -4086,14 +4086,14 @@
           "src/mods/mmx6_coop_lifecycle.c:mmx6_coop_fatal",
           "src/mods/mmx6_coop_plugin.c:begin_join"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -4223,9 +4223,55 @@
               "New candidate LOCAL regressions only. Existing253c74e F12 same-image aggregate pass remains historical; no c3c5bdb netplay/aggregate admission from these runs. F6 netplay/aggregate still unverified. Separate native-content inventory unchanged."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+            "build_identity": {
+              "executable_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+              "compiled_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+              "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
+            },
+            "settings": {
+              "mode": "loopback",
+              "input_path": "published_host",
+              "input_delay": 3,
+              "roster": [
+                "X/P1",
+                "normalZero/P2"
+              ],
+              "stage": 0,
+              "section": 0,
+              "private_profiles": true,
+              "audio": "dummy",
+              "fixture": false,
+              "load": false
+            },
+            "action": "Actual guest Select leave/heldABSENT/neutralrearm/freshSelect, primaryRight during original phase1 onbothpeers, finite nativearrival/neutral settlement and both independent original controls; actual post-idle callback without dash/pause prerequisite.",
+            "outcome": "All9 paired admission and13mechanic checks EACHpeer independently pass on403/398coherentrows. Actual phase1primarytravel and<=120native settlement retained below. Six reviewedstablePNGs,37fullcoremodCRCs/fivewindows and bothordinaryonlineNCrecordings/nativecards/exits0 qualify sameimageLOCAL+netplay.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-hud/manifest-bound-c3c5bdb-F6-independent-paired-moving-primary-rejoin-reviewed.json",
+                "sha256": "56b56a04c7d5534eaa225e96084d7d93e557f67e0d12d93586cf7fa7b2ef035d"
+              }
+            ],
+            "limits": [
+              "Same exact c3c5bdb native image/manifest for reviewed LOCAL and actual two-peer loopbackdelay3 F6. Fixed X/P1+normalZero/P2 stage0/healthy-ground/default equipment only; no cross-host, opposite roster, death, retry, acquired inventory or alternate terrain breadth.",
+              "This successful paired route runs after actual original initial-idle/P2Right/P1Jump/healthy/mailbox checks. It performs no preceding dash/pause and claims no F12 result. Earlier combined-route nativeCircle-window and sampler failures remain failed and preserved.",
+              "Actual B parent copy adds only optional Python keyword and post-idle callback, reversing byte-for-byte to pinned original432b7fbc. Its actual__file__/runner-source hash6371559a are retained. Native default loader/profile/source/full resolved core-mod CRC/online recordings/native-card/owned-exit behavior is unchanged.",
+              "Independent helper replaces unrelated prior-pause dependency with actual typed parent idle/control checks and actual executing-parent source pin. Every nested raw/native/host sampler/input/guard/CRC/movement/arrival function is AST-identical to pacedv3. Thirty-two authored/source tests are preflight only, not native evidence.",
+              "Both actual peers retain complete accepted raw typed publications matched to double-stable read-only host/full body/nativePLAY state. Rejected/torn observations remain diagnostic-only. Peer clocks are asynchronous; no instruction-atomic whole-machine frame claim.",
+              "Each peer has actual primary movement>=2px entirely during native phase1, one lifecycle0->1->2->3->0, one monotonic beam1->2->0, finite neutralALIVE<=120native ticks, resources/equipment/world retained, six stationary windows and both controls. All peer reducers independently recomputed.",
+              "Root viewed allsix stable before/rejoin/controls PNGs: both native heroes, world and HUD retained; both peer images agree in each stable window. These are not incoming-phase art or original-hardware whole-screen equivalence claims.",
+              "Five resolved CRC windows contain37actual matching core/mod samples re-read from both terminal stderr logs; both F6 windows additionally rechecked strictly after captured lower bound and below both resolved watermarks.",
+              "Both ordinary online N/C recordings finalize canonically from sealed declared cold startup with two digital host devices and native blank card artifacts. Offline replay correctly refuses network traces. No paired replay/rollback/output equivalence or populated owner-card retention claim.",
+              "F6 bounded LOCAL/netplay/aggregate passes on this same candidate. Other comparison rows and separate native-content inventory receive no admission."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "LOCAL F6 passes9cbc314 and new253c74e palette candidate with actual primary movement during one finite native rejoin, default resources/world retained and both controls. No fixture/LOAD. Netplay/aggregate unverified; all prior observer failures and independent admission limits retained. Additional c3c5bdb LOCAL regression independently reviewed:2px whollybeamphase1/117native ticks; netplay still unverified."
+        "limitations": "Passed same-imagec3c5bdb LOCAL+actual loopback twopeer F6 moving-primary rejoin. Nativephase1>=2px/monotonicfinitearrival/resources/world/bothcontrols independently reviewed; strict source/profile/CRC/defaultonline recordings/cards/exits0. Independent post-idle route/sourcecopy disclosed; oldsampler/privatepause failures preserved. No cross-host/rollback/allform/terrain/nativecontent admission."
       }
     },
     {

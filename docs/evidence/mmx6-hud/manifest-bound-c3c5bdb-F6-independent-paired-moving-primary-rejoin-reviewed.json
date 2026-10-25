@@ -1,0 +1,2610 @@
+{
+  "schema": 1,
+  "kind": "reviewed_F6_same_image_LOCAL_and_actual_independent_two_peer_moving_primary_rejoin",
+  "reviewed_at_utc": "2026-10-25T01:08:06.423009+00:00",
+  "issue": "beads-gxrh",
+  "compiled_source": "c3c5bdb23e3cb19d5df4aaa1391e5ae5b1d0e14b",
+  "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+  "executable_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+  "compiled_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+  "admitted_modes": {
+    "local": "passed",
+    "netplay": "passed",
+    "aggregate": "passed"
+  },
+  "local_receipt": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-hud\\manifest-bound-c3c5bdb-F12-settled-trails-and-F6-local-regression-reviewed.json",
+    "bytes": 55617,
+    "sha256": "4d3dd29c7eef887cba1250edf75701c889656bc46159059c145043a8d91ae9ad"
+  },
+  "paired_metrics": [
+    {
+      "peer": 0,
+      "observations": 403,
+      "phase1_primary_travel_pixels": 2.0,
+      "native_arrival_and_neutral_ticks": 117,
+      "lifecycle": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "checks": {
+        "coherent_ordered_raw_typed_native_and_host": true,
+        "one_lifecycle_0_1_2_3_0": true,
+        "original_Select_departure_consumed": true,
+        "held_Select_ABSENT": true,
+        "released_and_armed": true,
+        "P1_moves_during_phase1": true,
+        "one_monotonic_beam_1_2_0": true,
+        "finite_ALIVE_within_120_native_ticks": true,
+        "resources_equipment_retained": true,
+        "world_checkpoint_retained": true,
+        "six_stationary_neutral_windows": true,
+        "P1_independent": true,
+        "P2_independent": true
+      },
+      "stationary_windows": [
+        {
+          "label": "After actual original parent idle and control checks",
+          "window": [
+            0,
+            4
+          ]
+        },
+        {
+          "label": "After native rejoin",
+          "window": [
+            344,
+            348
+          ]
+        },
+        {
+          "label": "Independent seat0 baseline",
+          "window": [
+            350,
+            354
+          ]
+        },
+        {
+          "label": "Independent seat0 final",
+          "window": [
+            368,
+            372
+          ]
+        },
+        {
+          "label": "Independent seat1 baseline",
+          "window": [
+            372,
+            376
+          ]
+        },
+        {
+          "label": "Independent seat1 final",
+          "window": [
+            397,
+            401
+          ]
+        }
+      ],
+      "sampling_rejections": 928
+    },
+    {
+      "peer": 1,
+      "observations": 398,
+      "phase1_primary_travel_pixels": 2.0,
+      "native_arrival_and_neutral_ticks": 117,
+      "lifecycle": [
+        0,
+        1,
+        2,
+        3,
+        0
+      ],
+      "checks": {
+        "coherent_ordered_raw_typed_native_and_host": true,
+        "one_lifecycle_0_1_2_3_0": true,
+        "original_Select_departure_consumed": true,
+        "held_Select_ABSENT": true,
+        "released_and_armed": true,
+        "P1_moves_during_phase1": true,
+        "one_monotonic_beam_1_2_0": true,
+        "finite_ALIVE_within_120_native_ticks": true,
+        "resources_equipment_retained": true,
+        "world_checkpoint_retained": true,
+        "six_stationary_neutral_windows": true,
+        "P1_independent": true,
+        "P2_independent": true
+      },
+      "stationary_windows": [
+        {
+          "label": "After actual original parent idle and control checks",
+          "window": [
+            0,
+            4
+          ]
+        },
+        {
+          "label": "After native rejoin",
+          "window": [
+            340,
+            344
+          ]
+        },
+        {
+          "label": "Independent seat0 baseline",
+          "window": [
+            346,
+            350
+          ]
+        },
+        {
+          "label": "Independent seat0 final",
+          "window": [
+            363,
+            367
+          ]
+        },
+        {
+          "label": "Independent seat1 baseline",
+          "window": [
+            368,
+            372
+          ]
+        },
+        {
+          "label": "Independent seat1 final",
+          "window": [
+            391,
+            395
+          ]
+        }
+      ],
+      "sampling_rejections": 812
+    }
+  ],
+  "checks": {
+    "real_two_peer_published_path": true,
+    "candidate_and_manifest_bound": true,
+    "actual_original_parent_idle_checks_completed": true,
+    "two_exact_owned_images": true,
+    "source_and_resident_guards": true,
+    "actual_network_and_resolved_CRC_gates": true,
+    "both_peer_mechanics": true,
+    "equal_personal_resource_world_baselines": true,
+    "completed_owned_composed_captures": true
+  },
+  "preceding_actual_parent_idle": {
+    "status": "observed_native_idle_checks",
+    "mode": "netplay",
+    "input_path": "published_host",
+    "candidate_exe_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+    "initial": [
+      {
+        "schema": 1,
+        "tick": 142,
+        "sequence": 284,
+        "native_timer": 141,
+        "lifecycle": [
+          0,
+          0
+        ],
+        "pause_owner": 0,
+        "scene_owner": 0,
+        "scene_phase": 0,
+        "mailbox": 0,
+        "ready": 1,
+        "enrolled": 1,
+        "failed": 0,
+        "native_mode": 10,
+        "native_phase": 0,
+        "host_digest": 1858123706,
+        "host_digest_algorithm": 1,
+        "players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 9437184,
+            "y_raw": 73072640,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 11010048,
+            "y_raw": 73007104,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "framework_digest_registered": 1
+      },
+      {
+        "schema": 1,
+        "tick": 142,
+        "sequence": 284,
+        "native_timer": 141,
+        "lifecycle": [
+          0,
+          0
+        ],
+        "pause_owner": 0,
+        "scene_owner": 0,
+        "scene_phase": 0,
+        "mailbox": 0,
+        "ready": 1,
+        "enrolled": 1,
+        "failed": 0,
+        "native_mode": 10,
+        "native_phase": 0,
+        "host_digest": 1858123706,
+        "host_digest_algorithm": 1,
+        "players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 9437184,
+            "y_raw": 73072640,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 11010048,
+            "y_raw": 73007104,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "framework_digest_registered": 1
+      }
+    ],
+    "checks": {
+      "p2_right_reaches_both_peers": true,
+      "p2_right_preserves_p1_x": true,
+      "p1_jump_reaches_both_peers": true,
+      "p1_jump_preserves_p2_y": true,
+      "both_alive_healthy": true,
+      "mailbox_unused": true
+    },
+    "running_parent_source": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_owned_pair_native_observer_v1.py",
+      "sha256": "6371559a059932733e4a65dee720dbcbb8e48de026c793961dfbf992e128832a"
+    }
+  },
+  "actual_parent_status": "passed",
+  "actual_parent_checks": {
+    "declared_build_manifest_bound_to_staged_images": true,
+    "host_profile_settled_before_guest": true,
+    "p2_right_reaches_both_peers": true,
+    "p2_right_preserves_p1_x": true,
+    "p1_jump_reaches_both_peers": true,
+    "p1_jump_preserves_p2_y": true,
+    "both_alive_healthy": true,
+    "mailbox_unused": true,
+    "additional_native_observer_complete": true,
+    "default_resident_loader_committed": true
+  },
+  "resolved_state_crc": [
+    {
+      "label": "initial idle",
+      "samples": [
+        {
+          "simulation_tick": 2912,
+          "core": "843fd4ca",
+          "mod": "a94e6645"
+        },
+        {
+          "simulation_tick": 2944,
+          "core": "22e61004",
+          "mod": "f135b2a8"
+        },
+        {
+          "simulation_tick": 2976,
+          "core": "146cc1fe",
+          "mod": "631daf9a"
+        },
+        {
+          "simulation_tick": 3008,
+          "core": "1a3cf984",
+          "mod": "99d52ac0"
+        },
+        {
+          "simulation_tick": 3040,
+          "core": "559b92ed",
+          "mod": "2564d0e0"
+        },
+        {
+          "simulation_tick": 3072,
+          "core": "05e84428",
+          "mod": "85915a00"
+        },
+        {
+          "simulation_tick": 3104,
+          "core": "f0a0688d",
+          "mod": "20437b52"
+        },
+        {
+          "simulation_tick": 3136,
+          "core": "a577959a",
+          "mod": "1940d9fe"
+        }
+      ],
+      "resolved_through": [
+        3141,
+        3141
+      ]
+    },
+    {
+      "label": "P2 right then release",
+      "samples": [
+        {
+          "simulation_tick": 3200,
+          "core": "03484d26",
+          "mod": "3009a404"
+        },
+        {
+          "simulation_tick": 3232,
+          "core": "21349211",
+          "mod": "b8afb1bc"
+        },
+        {
+          "simulation_tick": 3264,
+          "core": "07c122c7",
+          "mod": "5f4b2026"
+        },
+        {
+          "simulation_tick": 3296,
+          "core": "1d3d02a8",
+          "mod": "78d36f3c"
+        },
+        {
+          "simulation_tick": 3328,
+          "core": "9cd9144f",
+          "mod": "d877c35c"
+        },
+        {
+          "simulation_tick": 3360,
+          "core": "f6b327ca",
+          "mod": "b5a5802e"
+        },
+        {
+          "simulation_tick": 3392,
+          "core": "da14fd2f",
+          "mod": "e74b5b0e"
+        }
+      ],
+      "resolved_through": [
+        3413,
+        3413
+      ]
+    },
+    {
+      "label": "P1 jump then settle",
+      "samples": [
+        {
+          "simulation_tick": 3488,
+          "core": "ce4501dd",
+          "mod": "96f23656"
+        },
+        {
+          "simulation_tick": 3520,
+          "core": "bb073c08",
+          "mod": "9675c886"
+        },
+        {
+          "simulation_tick": 3552,
+          "core": "7d5c32d5",
+          "mod": "d68a414c"
+        },
+        {
+          "simulation_tick": 3584,
+          "core": "352aa335",
+          "mod": "5ef158ec"
+        },
+        {
+          "simulation_tick": 3616,
+          "core": "810b7fcf",
+          "mod": "886d225e"
+        },
+        {
+          "simulation_tick": 3648,
+          "core": "4c2b19f0",
+          "mod": "8a3b481a"
+        },
+        {
+          "simulation_tick": 3680,
+          "core": "394f8d1a",
+          "mod": "3009a404"
+        }
+      ],
+      "resolved_through": [
+        3712,
+        3712
+      ]
+    },
+    {
+      "label": "F6 paired before original Select departure",
+      "samples": [
+        {
+          "simulation_tick": 3968,
+          "core": "912d2963",
+          "mod": "96f23656"
+        },
+        {
+          "simulation_tick": 4000,
+          "core": "3f2c2ed1",
+          "mod": "9675c886"
+        },
+        {
+          "simulation_tick": 4032,
+          "core": "e7476f05",
+          "mod": "d68a414c"
+        },
+        {
+          "simulation_tick": 4064,
+          "core": "89333d1b",
+          "mod": "5ef158ec"
+        },
+        {
+          "simulation_tick": 4096,
+          "core": "fbcddd93",
+          "mod": "886d225e"
+        },
+        {
+          "simulation_tick": 4128,
+          "core": "08917a16",
+          "mod": "8a3b481a"
+        },
+        {
+          "simulation_tick": 4160,
+          "core": "93dc9e6c",
+          "mod": "3009a404"
+        },
+        {
+          "simulation_tick": 4192,
+          "core": "1940d176",
+          "mod": "b8afb1bc"
+        }
+      ],
+      "resolved_through": [
+        4204,
+        4204
+      ]
+    },
+    {
+      "label": "F6 paired original moving-primary rejoin and independent controls",
+      "samples": [
+        {
+          "simulation_tick": 4640,
+          "core": "24002433",
+          "mod": "d1e7a374"
+        },
+        {
+          "simulation_tick": 4672,
+          "core": "37059d4d",
+          "mod": "0aa8b8fd"
+        },
+        {
+          "simulation_tick": 4704,
+          "core": "b25fdf7e",
+          "mod": "4d14f2bb"
+        },
+        {
+          "simulation_tick": 4736,
+          "core": "999cfd70",
+          "mod": "4e249bcd"
+        },
+        {
+          "simulation_tick": 4768,
+          "core": "ddeaae78",
+          "mod": "e9d7c4ed"
+        },
+        {
+          "simulation_tick": 4800,
+          "core": "594fc0ae",
+          "mod": "633bb4f3"
+        },
+        {
+          "simulation_tick": 4832,
+          "core": "3a18c499",
+          "mod": "8032e593"
+        }
+      ],
+      "resolved_through": [
+        4863,
+        4863
+      ]
+    }
+  ],
+  "F6_crc_gates": [
+    {
+      "label": "F6 paired before original Select departure",
+      "simulation_lower_bound": 3960,
+      "network": [
+        {
+          "id": 2098,
+          "ok": true,
+          "active": 1,
+          "host": 1,
+          "rollback": 0,
+          "architecture": "p2p",
+          "max_players": 2,
+          "players": 2,
+          "tick": 4206,
+          "resolved_through": 4205,
+          "stall": "ok",
+          "remote_lead": 3,
+          "desync": 0,
+          "desync_tick": 0,
+          "local_hash": 0,
+          "remote_hash": 0
+        },
+        {
+          "id": 1918,
+          "ok": true,
+          "active": 1,
+          "host": 0,
+          "rollback": 0,
+          "architecture": "p2p",
+          "max_players": 2,
+          "players": 2,
+          "tick": 4206,
+          "resolved_through": 4205,
+          "stall": "ok",
+          "remote_lead": 2,
+          "desync": 0,
+          "desync_tick": 0,
+          "local_hash": 0,
+          "remote_hash": 0
+        }
+      ],
+      "resolved_crc": {
+        "label": "F6 paired before original Select departure",
+        "samples": [
+          {
+            "simulation_tick": 3968,
+            "core": "912d2963",
+            "mod": "96f23656"
+          },
+          {
+            "simulation_tick": 4000,
+            "core": "3f2c2ed1",
+            "mod": "9675c886"
+          },
+          {
+            "simulation_tick": 4032,
+            "core": "e7476f05",
+            "mod": "d68a414c"
+          },
+          {
+            "simulation_tick": 4064,
+            "core": "89333d1b",
+            "mod": "5ef158ec"
+          },
+          {
+            "simulation_tick": 4096,
+            "core": "fbcddd93",
+            "mod": "886d225e"
+          },
+          {
+            "simulation_tick": 4128,
+            "core": "08917a16",
+            "mod": "8a3b481a"
+          },
+          {
+            "simulation_tick": 4160,
+            "core": "93dc9e6c",
+            "mod": "3009a404"
+          },
+          {
+            "simulation_tick": 4192,
+            "core": "1940d176",
+            "mod": "b8afb1bc"
+          }
+        ],
+        "resolved_through": [
+          4204,
+          4204
+        ]
+      },
+      "matched_host": {
+        "label": "F6 paired before original Select departure",
+        "matches": [
+          {
+            "diagnostic_tick": 1203,
+            "diagnostic_sequence": 2406,
+            "host_digest": "8d8ee6ac",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1205,
+            "diagnostic_sequence": 2410,
+            "host_digest": "1929e166",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1206,
+            "diagnostic_sequence": 2412,
+            "host_digest": "18b68bfb",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1208,
+            "diagnostic_sequence": 2416,
+            "host_digest": "31cae8fd",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1210,
+            "diagnostic_sequence": 2420,
+            "host_digest": "ce64e60f",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1211,
+            "diagnostic_sequence": 2422,
+            "host_digest": "f5a16134",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1213,
+            "diagnostic_sequence": 2426,
+            "host_digest": "cdc7f78e",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1214,
+            "diagnostic_sequence": 2428,
+            "host_digest": "c020f303",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1215,
+            "diagnostic_sequence": 2430,
+            "host_digest": "c5fe7e58",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1217,
+            "diagnostic_sequence": 2434,
+            "host_digest": "6be216a2",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1219,
+            "diagnostic_sequence": 2438,
+            "host_digest": "8471711c",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1221,
+            "diagnostic_sequence": 2442,
+            "host_digest": "d9875456",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1223,
+            "diagnostic_sequence": 2446,
+            "host_digest": "3c11faa0",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1225,
+            "diagnostic_sequence": 2450,
+            "host_digest": "40df03ca",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1229,
+            "diagnostic_sequence": 2458,
+            "host_digest": "8337063e",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1231,
+            "diagnostic_sequence": 2462,
+            "host_digest": "8607d8c8",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1233,
+            "diagnostic_sequence": 2466,
+            "host_digest": "66028452",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1234,
+            "diagnostic_sequence": 2468,
+            "host_digest": "1788ac67",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1236,
+            "diagnostic_sequence": 2472,
+            "host_digest": "13b9c6e9",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1238,
+            "diagnostic_sequence": 2476,
+            "host_digest": "594f695b",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1240,
+            "diagnostic_sequence": 2480,
+            "host_digest": "598d945d",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1242,
+            "diagnostic_sequence": 2484,
+            "host_digest": "e3fff3af",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1246,
+            "diagnostic_sequence": 2492,
+            "host_digest": "9d2934ab",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1248,
+            "diagnostic_sequence": 2496,
+            "host_digest": "fc2528bd",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1249,
+            "diagnostic_sequence": 2498,
+            "host_digest": "a4b904fa",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1251,
+            "diagnostic_sequence": 2502,
+            "host_digest": "bdefbd54",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1255,
+            "diagnostic_sequence": 2510,
+            "host_digest": "bc6862ee",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1258,
+            "diagnostic_sequence": 2516,
+            "host_digest": "c875d4f5",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1261,
+            "diagnostic_sequence": 2522,
+            "host_digest": "e1b5e62c",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1263,
+            "diagnostic_sequence": 2526,
+            "host_digest": "b1c79506",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1265,
+            "diagnostic_sequence": 2530,
+            "host_digest": "5e6d9790",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1267,
+            "diagnostic_sequence": 2534,
+            "host_digest": "8797bafa",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1268,
+            "diagnostic_sequence": 2536,
+            "host_digest": "729b9b8f",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1269,
+            "diagnostic_sequence": 2538,
+            "host_digest": "021271e4",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1273,
+            "diagnostic_sequence": 2546,
+            "host_digest": "56a9e628",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1277,
+            "diagnostic_sequence": 2554,
+            "host_digest": "e91f8f9c",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1280,
+            "diagnostic_sequence": 2560,
+            "host_digest": "5087c66b",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1282,
+            "diagnostic_sequence": 2564,
+            "host_digest": "3c5a287d",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1283,
+            "diagnostic_sequence": 2566,
+            "host_digest": "4c116dea",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1285,
+            "diagnostic_sequence": 2570,
+            "host_digest": "d3c15814",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1288,
+            "diagnostic_sequence": 2576,
+            "host_digest": "1e79dd63",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1290,
+            "diagnostic_sequence": 2580,
+            "host_digest": "696eba95",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1293,
+            "diagnostic_sequence": 2586,
+            "host_digest": "10a9044c",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1296,
+            "diagnostic_sequence": 2592,
+            "host_digest": "d2c22b5b",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1299,
+            "diagnostic_sequence": 2598,
+            "host_digest": "ca63f19a",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1302,
+            "diagnostic_sequence": 2604,
+            "host_digest": "1cdc9ef1",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1303,
+            "diagnostic_sequence": 2606,
+            "host_digest": "d1ffe43e",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1305,
+            "diagnostic_sequence": 2610,
+            "host_digest": "7c9d2a48",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1307,
+            "diagnostic_sequence": 2614,
+            "host_digest": "313de092",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1308,
+            "diagnostic_sequence": 2616,
+            "host_digest": "eaa76fef",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1312,
+            "diagnostic_sequence": 2624,
+            "host_digest": "1d5b61ab",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1315,
+            "diagnostic_sequence": 2630,
+            "host_digest": "e77c97d2",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1317,
+            "diagnostic_sequence": 2634,
+            "host_digest": "3b38255c",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1319,
+            "diagnostic_sequence": 2638,
+            "host_digest": "547c128e",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1320,
+            "diagnostic_sequence": 2640,
+            "host_digest": "89436665",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1324,
+            "diagnostic_sequence": 2648,
+            "host_digest": "66cc02b9",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1326,
+            "diagnostic_sequence": 2652,
+            "host_digest": "28b793ab",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1328,
+            "diagnostic_sequence": 2656,
+            "host_digest": "744191ad",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1334,
+            "diagnostic_sequence": 2668,
+            "host_digest": "c6db1013",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1336,
+            "diagnostic_sequence": 2672,
+            "host_digest": "da6537b5",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1338,
+            "diagnostic_sequence": 2676,
+            "host_digest": "8813cac7",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1340,
+            "diagnostic_sequence": 2680,
+            "host_digest": "4798a149",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1341,
+            "diagnostic_sequence": 2682,
+            "host_digest": "adc82da6",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1343,
+            "diagnostic_sequence": 2686,
+            "host_digest": "14256670",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1345,
+            "diagnostic_sequence": 2690,
+            "host_digest": "7aff545a",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1348,
+            "diagnostic_sequence": 2696,
+            "host_digest": "b34ae6b1",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1349,
+            "diagnostic_sequence": 2698,
+            "host_digest": "7f25c3ee",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1353,
+            "diagnostic_sequence": 2706,
+            "host_digest": "6195da82",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1355,
+            "diagnostic_sequence": 2710,
+            "host_digest": "7d0cb77c",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1357,
+            "diagnostic_sequence": 2714,
+            "host_digest": "2e8ad8b6",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1358,
+            "diagnostic_sequence": 2716,
+            "host_digest": "641b6a4b",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1361,
+            "diagnostic_sequence": 2722,
+            "host_digest": "c3a2212a",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1365,
+            "diagnostic_sequence": 2730,
+            "host_digest": "9c015332",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1367,
+            "diagnostic_sequence": 2734,
+            "host_digest": "be95b074",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1369,
+            "diagnostic_sequence": 2738,
+            "host_digest": "7c29b9a6",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1372,
+            "diagnostic_sequence": 2744,
+            "host_digest": "46c3be1d",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1375,
+            "diagnostic_sequence": 2750,
+            "host_digest": "d8de97b4",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1376,
+            "diagnostic_sequence": 2752,
+            "host_digest": "c4ad6121",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1378,
+            "diagnostic_sequence": 2756,
+            "host_digest": "36761983",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1380,
+            "diagnostic_sequence": 2760,
+            "host_digest": "d18341b5",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1382,
+            "diagnostic_sequence": 2764,
+            "host_digest": "3fb7eb37",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1384,
+            "diagnostic_sequence": 2768,
+            "host_digest": "80babf99",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1387,
+            "diagnostic_sequence": 2774,
+            "host_digest": "38572b50",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1390,
+            "diagnostic_sequence": 2780,
+            "host_digest": "315b5a4f",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1391,
+            "diagnostic_sequence": 2782,
+            "host_digest": "b5adbfa4",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1393,
+            "diagnostic_sequence": 2786,
+            "host_digest": "aea9545e",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1394,
+            "diagnostic_sequence": 2788,
+            "host_digest": "78a85573",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1397,
+            "diagnostic_sequence": 2794,
+            "host_digest": "5be74132",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1398,
+            "diagnostic_sequence": 2796,
+            "host_digest": "07b6fd2c",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1401,
+            "diagnostic_sequence": 2802,
+            "host_digest": "98d78618",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1405,
+            "diagnostic_sequence": 2810,
+            "host_digest": "70eb8619",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1407,
+            "diagnostic_sequence": 2814,
+            "host_digest": "1e20bdfe",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1408,
+            "diagnostic_sequence": 2816,
+            "host_digest": "ebdc0c93",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1410,
+            "diagnostic_sequence": 2820,
+            "host_digest": "652913c5",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1412,
+            "diagnostic_sequence": 2824,
+            "host_digest": "c0800847",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1413,
+            "diagnostic_sequence": 2826,
+            "host_digest": "705e235c",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1416,
+            "diagnostic_sequence": 2832,
+            "host_digest": "1218082b",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1419,
+            "diagnostic_sequence": 2838,
+            "host_digest": "d03770aa",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1422,
+            "diagnostic_sequence": 2844,
+            "host_digest": "93f8d241",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1426,
+            "diagnostic_sequence": 2852,
+            "host_digest": "6eed8c55",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1427,
+            "diagnostic_sequence": 2854,
+            "host_digest": "07ecebe2",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1429,
+            "diagnostic_sequence": 2858,
+            "host_digest": "7e6c4e34",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1431,
+            "diagnostic_sequence": 2862,
+            "host_digest": "71b9b466",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1434,
+            "diagnostic_sequence": 2868,
+            "host_digest": "8e2200ed",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1436,
+            "diagnostic_sequence": 2872,
+            "host_digest": "60ebfa77",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1438,
+            "diagnostic_sequence": 2876,
+            "host_digest": "e9a87d19",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1445,
+            "diagnostic_sequence": 2890,
+            "host_digest": "1929e166",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          }
+        ]
+      }
+    },
+    {
+      "label": "F6 paired original moving-primary rejoin and independent controls",
+      "simulation_lower_bound": 4623,
+      "network": [
+        {
+          "id": 2285,
+          "ok": true,
+          "active": 1,
+          "host": 1,
+          "rollback": 0,
+          "architecture": "p2p",
+          "max_players": 2,
+          "players": 2,
+          "tick": 4864,
+          "resolved_through": 4863,
+          "stall": "ok",
+          "remote_lead": 3,
+          "desync": 0,
+          "desync_tick": 0,
+          "local_hash": 0,
+          "remote_hash": 0
+        },
+        {
+          "id": 2110,
+          "ok": true,
+          "active": 1,
+          "host": 0,
+          "rollback": 0,
+          "architecture": "p2p",
+          "max_players": 2,
+          "players": 2,
+          "tick": 4865,
+          "resolved_through": 4863,
+          "stall": "ok",
+          "remote_lead": 2,
+          "desync": 0,
+          "desync_tick": 0,
+          "local_hash": 0,
+          "remote_hash": 0
+        }
+      ],
+      "resolved_crc": {
+        "label": "F6 paired original moving-primary rejoin and independent controls",
+        "samples": [
+          {
+            "simulation_tick": 4640,
+            "core": "24002433",
+            "mod": "d1e7a374"
+          },
+          {
+            "simulation_tick": 4672,
+            "core": "37059d4d",
+            "mod": "0aa8b8fd"
+          },
+          {
+            "simulation_tick": 4704,
+            "core": "b25fdf7e",
+            "mod": "4d14f2bb"
+          },
+          {
+            "simulation_tick": 4736,
+            "core": "999cfd70",
+            "mod": "4e249bcd"
+          },
+          {
+            "simulation_tick": 4768,
+            "core": "ddeaae78",
+            "mod": "e9d7c4ed"
+          },
+          {
+            "simulation_tick": 4800,
+            "core": "594fc0ae",
+            "mod": "633bb4f3"
+          },
+          {
+            "simulation_tick": 4832,
+            "core": "3a18c499",
+            "mod": "8032e593"
+          }
+        ],
+        "resolved_through": [
+          4863,
+          4863
+        ]
+      },
+      "matched_host": {
+        "label": "F6 paired original moving-primary rejoin and independent controls",
+        "matches": [
+          {
+            "diagnostic_tick": 1867,
+            "diagnostic_sequence": 3734,
+            "host_digest": "b21910f9",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1869,
+            "diagnostic_sequence": 3738,
+            "host_digest": "3f37fe9f",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1870,
+            "diagnostic_sequence": 3740,
+            "host_digest": "10a9fe48",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1872,
+            "diagnostic_sequence": 3744,
+            "host_digest": "0c70395e",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1874,
+            "diagnostic_sequence": 3748,
+            "host_digest": "a9bb0f94",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1878,
+            "diagnostic_sequence": 3756,
+            "host_digest": "3e941df0",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1881,
+            "diagnostic_sequence": 3762,
+            "host_digest": "6d2b9ca8",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1883,
+            "diagnostic_sequence": 3766,
+            "host_digest": "5bda2e66",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1891,
+            "diagnostic_sequence": 3782,
+            "host_digest": "e98a2e07",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1893,
+            "diagnostic_sequence": 3786,
+            "host_digest": "8f33fdfd",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1895,
+            "diagnostic_sequence": 3790,
+            "host_digest": "23b1dd63",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1901,
+            "diagnostic_sequence": 3802,
+            "host_digest": "0024d785",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1902,
+            "diagnostic_sequence": 3804,
+            "host_digest": "227f472e",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1906,
+            "diagnostic_sequence": 3812,
+            "host_digest": "30d56aba",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1908,
+            "diagnostic_sequence": 3816,
+            "host_digest": "ba1d7c00",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1910,
+            "diagnostic_sequence": 3820,
+            "host_digest": "ff061356",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1912,
+            "diagnostic_sequence": 3824,
+            "host_digest": "dd0ee54c",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1914,
+            "diagnostic_sequence": 3828,
+            "host_digest": "7e7e0a92",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1916,
+            "diagnostic_sequence": 3832,
+            "host_digest": "011b7270",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1918,
+            "diagnostic_sequence": 3836,
+            "host_digest": "8c757126",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1920,
+            "diagnostic_sequence": 3840,
+            "host_digest": "850b76f4",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1921,
+            "diagnostic_sequence": 3842,
+            "host_digest": "9f8c4da1",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1923,
+            "diagnostic_sequence": 3846,
+            "host_digest": "138d318d",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1925,
+            "diagnostic_sequence": 3850,
+            "host_digest": "d89b608b",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1927,
+            "diagnostic_sequence": 3854,
+            "host_digest": "f8db8289",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1929,
+            "diagnostic_sequence": 3858,
+            "host_digest": "be548ff7",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1932,
+            "diagnostic_sequence": 3864,
+            "host_digest": "4ec579b6",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1935,
+            "diagnostic_sequence": 3870,
+            "host_digest": "8e7c8761",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1938,
+            "diagnostic_sequence": 3876,
+            "host_digest": "4e77b760",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1940,
+            "diagnostic_sequence": 3880,
+            "host_digest": "3604f78e",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1942,
+            "diagnostic_sequence": 3884,
+            "host_digest": "21a8a8fc",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1944,
+            "diagnostic_sequence": 3888,
+            "host_digest": "b7d3fb1a",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1947,
+            "diagnostic_sequence": 3894,
+            "host_digest": "8d2e1bf5",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1950,
+            "diagnostic_sequence": 3900,
+            "host_digest": "aba87574",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1952,
+            "diagnostic_sequence": 3904,
+            "host_digest": "9b915532",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1954,
+            "diagnostic_sequence": 3908,
+            "host_digest": "67307cf0",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1955,
+            "diagnostic_sequence": 3910,
+            "host_digest": "f096146d",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1960,
+            "diagnostic_sequence": 3920,
+            "host_digest": "f0c1cf6a",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1962,
+            "diagnostic_sequence": 3924,
+            "host_digest": "b45e5068",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1963,
+            "diagnostic_sequence": 3926,
+            "host_digest": "5d6791c5",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1972,
+            "diagnostic_sequence": 3944,
+            "host_digest": "6f6aebaa",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1974,
+            "diagnostic_sequence": 3948,
+            "host_digest": "189ea6d8",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1975,
+            "diagnostic_sequence": 3950,
+            "host_digest": "3cc6fcc5",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1977,
+            "diagnostic_sequence": 3954,
+            "host_digest": "01e2d8f1",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1979,
+            "diagnostic_sequence": 3958,
+            "host_digest": "eabca7d7",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1981,
+            "diagnostic_sequence": 3962,
+            "host_digest": "6f3fa44d",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1986,
+            "diagnostic_sequence": 3972,
+            "host_digest": "f3fa73c2",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1989,
+            "diagnostic_sequence": 3978,
+            "host_digest": "8dbee6f5",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1991,
+            "diagnostic_sequence": 3982,
+            "host_digest": "f033fcfb",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1994,
+            "diagnostic_sequence": 3988,
+            "host_digest": "301743aa",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1996,
+            "diagnostic_sequence": 3992,
+            "host_digest": "c54ce3b0",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 1998,
+            "diagnostic_sequence": 3996,
+            "host_digest": "9c29f306",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2000,
+            "diagnostic_sequence": 4000,
+            "host_digest": "bf549fdc",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2002,
+            "diagnostic_sequence": 4004,
+            "host_digest": "66a4a112",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2006,
+            "diagnostic_sequence": 4012,
+            "host_digest": "61bfb6ee",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2008,
+            "diagnostic_sequence": 4016,
+            "host_digest": "ffb34fa4",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2011,
+            "diagnostic_sequence": 4022,
+            "host_digest": "0bb2c7f7",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2015,
+            "diagnostic_sequence": 4030,
+            "host_digest": "58e86793",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2017,
+            "diagnostic_sequence": 4034,
+            "host_digest": "659ea6d9",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2020,
+            "diagnostic_sequence": 4040,
+            "host_digest": "148c0128",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2023,
+            "diagnostic_sequence": 4046,
+            "host_digest": "392b209b",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2025,
+            "diagnostic_sequence": 4050,
+            "host_digest": "63e01be1",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2027,
+            "diagnostic_sequence": 4054,
+            "host_digest": "47dd2fc7",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2028,
+            "diagnostic_sequence": 4056,
+            "host_digest": "dbec3e50",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2030,
+            "diagnostic_sequence": 4060,
+            "host_digest": "15ca3626",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2033,
+            "diagnostic_sequence": 4066,
+            "host_digest": "61c43849",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2035,
+            "diagnostic_sequence": 4070,
+            "host_digest": "2bab81af",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2036,
+            "diagnostic_sequence": 4072,
+            "host_digest": "fbb62400",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2040,
+            "diagnostic_sequence": 4080,
+            "host_digest": "138ff004",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2044,
+            "diagnostic_sequence": 4088,
+            "host_digest": "b254804e",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2050,
+            "diagnostic_sequence": 4100,
+            "host_digest": "26942558",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2052,
+            "diagnostic_sequence": 4104,
+            "host_digest": "b194ecc6",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2054,
+            "diagnostic_sequence": 4108,
+            "host_digest": "aea69354",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2056,
+            "diagnostic_sequence": 4112,
+            "host_digest": "bff39712",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2059,
+            "diagnostic_sequence": 4118,
+            "host_digest": "8ab3a24d",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2061,
+            "diagnostic_sequence": 4122,
+            "host_digest": "856e204b",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2064,
+            "diagnostic_sequence": 4128,
+            "host_digest": "990f15ca",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2065,
+            "diagnostic_sequence": 4130,
+            "host_digest": "3af0f7b7",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2067,
+            "diagnostic_sequence": 4134,
+            "host_digest": "801c6625",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2069,
+            "diagnostic_sequence": 4138,
+            "host_digest": "8396e123",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2071,
+            "diagnostic_sequence": 4142,
+            "host_digest": "b41283c1",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2073,
+            "diagnostic_sequence": 4146,
+            "host_digest": "087fbb8f",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2075,
+            "diagnostic_sequence": 4150,
+            "host_digest": "75c268bd",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2079,
+            "diagnostic_sequence": 4158,
+            "host_digest": "ac6e0ef9",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2080,
+            "diagnostic_sequence": 4160,
+            "host_digest": "8885b57a",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2082,
+            "diagnostic_sequence": 4164,
+            "host_digest": "55b115f8",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2084,
+            "diagnostic_sequence": 4168,
+            "host_digest": "fe91a766",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2086,
+            "diagnostic_sequence": 4172,
+            "host_digest": "f0969a3c",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2088,
+            "diagnostic_sequence": 4176,
+            "host_digest": "303fc852",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2094,
+            "diagnostic_sequence": 4188,
+            "host_digest": "6cd86954",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2096,
+            "diagnostic_sequence": 4192,
+            "host_digest": "33d544ea",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2097,
+            "diagnostic_sequence": 4194,
+            "host_digest": "c7522b2b",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2099,
+            "diagnostic_sequence": 4198,
+            "host_digest": "57ad8931",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2101,
+            "diagnostic_sequence": 4202,
+            "host_digest": "4983e717",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          },
+          {
+            "diagnostic_tick": 2103,
+            "diagnostic_sequence": 4206,
+            "host_digest": "78afa28d",
+            "evidence": "partial host-state observation; not a framework simulation tick"
+          }
+        ]
+      }
+    }
+  ],
+  "captures": [
+    {
+      "peer": 0,
+      "label": "before-departure",
+      "before_index": 4,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\peer-0-before-departure.png",
+      "sha256": "f2ce9cdb9ad933e4026c7554dbb16e174b9a17421eb4ad2773acbd915ef31458",
+      "before": {
+        "id": 2101,
+        "ok": true,
+        "seq": 0,
+        "wrote": 0
+      },
+      "acknowledgement": {
+        "id": 2102,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\peer-0-before-departure.png",
+        "staged": true,
+        "seq": 0
+      },
+      "completion": {
+        "id": 2104,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      }
+    },
+    {
+      "peer": 1,
+      "label": "before-departure",
+      "before_index": 4,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\peer-1-before-departure.png",
+      "sha256": "f2ce9cdb9ad933e4026c7554dbb16e174b9a17421eb4ad2773acbd915ef31458",
+      "before": {
+        "id": 1921,
+        "ok": true,
+        "seq": 0,
+        "wrote": 0
+      },
+      "acknowledgement": {
+        "id": 1922,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\peer-1-before-departure.png",
+        "staged": true,
+        "seq": 0
+      },
+      "completion": {
+        "id": 1924,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      }
+    },
+    {
+      "peer": 0,
+      "label": "after-native-rejoin",
+      "before_index": 349,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\peer-0-after-native-rejoin.png",
+      "sha256": "222274361a53521dcefe6f5f413277e0ed20ced60af11d79a895a187c91b23fc",
+      "before": {
+        "id": 2111,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2112,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\peer-0-after-native-rejoin.png",
+        "staged": true,
+        "seq": 1
+      },
+      "completion": {
+        "id": 2113,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      }
+    },
+    {
+      "peer": 1,
+      "label": "after-native-rejoin",
+      "before_index": 345,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\peer-1-after-native-rejoin.png",
+      "sha256": "222274361a53521dcefe6f5f413277e0ed20ced60af11d79a895a187c91b23fc",
+      "before": {
+        "id": 1935,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 1936,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\peer-1-after-native-rejoin.png",
+        "staged": true,
+        "seq": 1
+      },
+      "completion": {
+        "id": 1937,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      }
+    },
+    {
+      "peer": 0,
+      "label": "after-independent-controls",
+      "before_index": 401,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\peer-0-after-independent-controls.png",
+      "sha256": "9d1e9d844631d9ae2b94b8b66a37a13efdae0fcb191f5fae44f0c626415d99e8",
+      "before": {
+        "id": 2118,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2119,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\peer-0-after-independent-controls.png",
+        "staged": true,
+        "seq": 2
+      },
+      "completion": {
+        "id": 2120,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      }
+    },
+    {
+      "peer": 1,
+      "label": "after-independent-controls",
+      "before_index": 396,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\peer-1-after-independent-controls.png",
+      "sha256": "1baf6897c8e6dc04c7360de6d4b4feb0a3ac15c2dda322c5f6230d0d55bf3aae",
+      "before": {
+        "id": 1942,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 1943,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\peer-1-after-independent-controls.png",
+        "staged": true,
+        "seq": 2
+      },
+      "completion": {
+        "id": 1945,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      }
+    }
+  ],
+  "recordings": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-0\\saves\\input-recordings\\session-1792890191796964-1-0\\inputs.jsonl",
+      "bytes": 1298291,
+      "sha256": "ca7aeb967fbe4ea78ad62ef70ae87323ebf7c305d4bfcbf758a2f1e3e4e719fd",
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+        "manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+        "mode": "netplay",
+        "profile": {
+          "id": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "9cb42e107a4ddf484f452367b9d629c1549601020de3dcae1a959ac2a4bb4b8e"
+        },
+        "settings_sha256": "678ea0742d375e120ec86c29053b60d74181951ceb43831bbca670a5875771e6",
+        "simulation_contract_sha256": "01ce8ce3ceda5352ab5b40995b0d0409cd060c3585bcbe95a66a25c3b5f47b9c"
+      },
+      "events": 10143,
+      "natives": 4303,
+      "p2_reads": 5840,
+      "status": {
+        "contract": "mmx6.native-consumption.v1",
+        "epoch": 1,
+        "failure": "",
+        "schema": 1,
+        "scope": "native-consumption diagnostics; replay unimplemented",
+        "status": "finalized"
+      },
+      "startup_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-0\\saves\\input-recordings\\session-1792890191796964-1-0\\settings.json",
+          "bytes": 26708,
+          "sha256": "678ea0742d375e120ec86c29053b60d74181951ceb43831bbca670a5875771e6"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-0\\saves\\input-recordings\\session-1792890191796964-1-0\\content.json",
+          "bytes": 567,
+          "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-0\\saves\\input-recordings\\session-1792890191796964-1-0\\simulation-contract.json",
+          "bytes": 350,
+          "sha256": "01ce8ce3ceda5352ab5b40995b0d0409cd060c3585bcbe95a66a25c3b5f47b9c"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-0\\saves\\input-recordings\\session-1792890191796964-1-0\\card1.initial.mcd",
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-0\\saves\\input-recordings\\session-1792890191796964-1-0\\card2.initial.mcd",
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-0\\saves\\input-recordings\\session-1792890191796964-1-0\\status.json",
+          "bytes": 160,
+          "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+        }
+      ],
+      "native_blank_card_source": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-bridge\\runtime\\src\\memcard.c",
+        "sha256": "06250e049ba5eeb4d003ae53955fed66143b622b2564971c0a5faa10495bff48"
+      },
+      "offline_replay_refused": "network trace cannot be replayed offline",
+      "scope": "Finalized ordinary netplay consumption data; no paired replay/output equivalence"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-1\\saves\\input-recordings\\session-1792890191796796-1-0\\inputs.jsonl",
+      "bytes": 1299053,
+      "sha256": "d9ecc25775c4d044b8e54c183ab4cd69f0022be48411fc11317d756fad3db0ca",
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "8362db0ad5859b7124aa4411e3ee5de0fe040b474a1f298fbfad8aa234104347",
+        "manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
+        "mode": "netplay",
+        "profile": {
+          "id": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "9cb42e107a4ddf484f452367b9d629c1549601020de3dcae1a959ac2a4bb4b8e"
+        },
+        "settings_sha256": "8675b5fc560c2a45be3bb48e46e7b3e21c76f071a18c8809038a7e664fd28605",
+        "simulation_contract_sha256": "01ce8ce3ceda5352ab5b40995b0d0409cd060c3585bcbe95a66a25c3b5f47b9c"
+      },
+      "events": 10149,
+      "natives": 4305,
+      "p2_reads": 5844,
+      "status": {
+        "contract": "mmx6.native-consumption.v1",
+        "epoch": 1,
+        "failure": "",
+        "schema": 1,
+        "scope": "native-consumption diagnostics; replay unimplemented",
+        "status": "finalized"
+      },
+      "startup_artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-1\\saves\\input-recordings\\session-1792890191796796-1-0\\settings.json",
+          "bytes": 26708,
+          "sha256": "8675b5fc560c2a45be3bb48e46e7b3e21c76f071a18c8809038a7e664fd28605"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-1\\saves\\input-recordings\\session-1792890191796796-1-0\\content.json",
+          "bytes": 567,
+          "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-1\\saves\\input-recordings\\session-1792890191796796-1-0\\simulation-contract.json",
+          "bytes": 350,
+          "sha256": "01ce8ce3ceda5352ab5b40995b0d0409cd060c3585bcbe95a66a25c3b5f47b9c"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-1\\saves\\input-recordings\\session-1792890191796796-1-0\\card1.initial.mcd",
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-1\\saves\\input-recordings\\session-1792890191796796-1-0\\card2.initial.mcd",
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-1\\saves\\input-recordings\\session-1792890191796796-1-0\\status.json",
+          "bytes": 160,
+          "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+        }
+      ],
+      "native_blank_card_source": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\sdk-bridge\\runtime\\src\\memcard.c",
+        "sha256": "06250e049ba5eeb4d003ae53955fed66143b622b2564971c0a5faa10495bff48"
+      },
+      "offline_replay_refused": "network trace cannot be replayed offline",
+      "scope": "Finalized ordinary netplay consumption data; no paired replay/output equivalence"
+    }
+  ],
+  "private_cards": [
+    {
+      "saves\\card1.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "saves\\card2.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "saves\\input-recordings\\session-1792890191796964-1-0\\card1.initial.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "saves\\input-recordings\\session-1792890191796964-1-0\\card2.initial.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "saves\\card1.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "saves\\card2.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "saves\\input-recordings\\session-1792890191796796-1-0\\card1.initial.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "saves\\input-recordings\\session-1792890191796796-1-0\\card2.initial.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "saves\\netplay\\card1.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+      "saves\\netplay\\card2.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    }
+  ],
+  "root_visual_review": "Allsix actual stable PNGs viewed; heroes/world/HUD retained and each paired stable image agrees. No phase1 artwork admission.",
+  "earlier_failed_parents": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-original-pause-pair-v35-c3c5bdb\\qualification.json",
+      "bytes": 6141103,
+      "sha256": "3e2daba832266ab125601d18f1ff259d58fdb4950921e0e96b0331158dbf0b39"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-original-pause-pair-v35-c3c5bdb-v2\\qualification.json",
+      "bytes": 14749652,
+      "sha256": "ee44ba9ec134c8434d3580694691c0c377f1c7a27242a78c1463f9be98cfba79"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-original-pause-pair-v35-c3c5bdb-v3\\qualification.json",
+      "bytes": 1990326,
+      "sha256": "7d634ee31583812ff00531b059979f3f7e778be65c68a5a16cc8ae69f259db18"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-original-pause-pair-v35-c3c5bdb-v4\\qualification.json",
+      "bytes": 2041721,
+      "sha256": "f115c61d521a5dd6c29871dca6072deab1d286ace57e839f4acc11c9a2405172"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-0\\logs\\stderr.log",
+      "bytes": 30074,
+      "sha256": "6c0591963eb47531e1f2f4a158b11d23dac3852e13066b8f65109b9855056c32"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-0\\logs\\stdout.log",
+      "bytes": 2844,
+      "sha256": "a68c301a2312336668cba7d7e827f099630af1b24265747c23ea80368f449a26"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-1\\logs\\stderr.log",
+      "bytes": 29954,
+      "sha256": "6745e4fb4ffc98b174746ae7d3e1169cedabb8b315acd8f602646b68c45630f8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-1\\logs\\stdout.log",
+      "bytes": 2971,
+      "sha256": "b8c400104c6b207cf47c9d9e681322c09b0b430a78045c5860c554d3dccb679b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\peer-0-before-departure.png",
+      "bytes": 2074543,
+      "sha256": "f2ce9cdb9ad933e4026c7554dbb16e174b9a17421eb4ad2773acbd915ef31458"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\peer-1-before-departure.png",
+      "bytes": 2074543,
+      "sha256": "f2ce9cdb9ad933e4026c7554dbb16e174b9a17421eb4ad2773acbd915ef31458"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\peer-0-after-native-rejoin.png",
+      "bytes": 2074543,
+      "sha256": "222274361a53521dcefe6f5f413277e0ed20ced60af11d79a895a187c91b23fc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\peer-1-after-native-rejoin.png",
+      "bytes": 2074543,
+      "sha256": "222274361a53521dcefe6f5f413277e0ed20ced60af11d79a895a187c91b23fc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\peer-0-after-independent-controls.png",
+      "bytes": 2074543,
+      "sha256": "9d1e9d844631d9ae2b94b8b66a37a13efdae0fcb191f5fae44f0c626415d99e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\peer-1-after-independent-controls.png",
+      "bytes": 2074543,
+      "sha256": "1baf6897c8e6dc04c7360de6d4b4feb0a3ac15c2dda322c5f6230d0d55bf3aae"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-hud\\manifest-bound-c3c5bdb-F12-settled-trails-and-F6-local-regression-reviewed.json",
+      "bytes": 55617,
+      "sha256": "4d3dd29c7eef887cba1250edf75701c889656bc46159059c145043a8d91ae9ad"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v35-c3c5bdb\\candidate.json",
+      "bytes": 6854,
+      "sha256": "a176f8dd587317e6d0fe240c871265435d92098049848b0d42bba0804b1c0d64"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\qualification.json",
+      "bytes": 19765640,
+      "sha256": "794da880a3e432b9c0f35d046a43eade077acd397f77a92ebdb38bb663109824"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-pair-terminal-qualification.json",
+      "bytes": 10732,
+      "sha256": "7003e0310a6425ba110974af79a901861acad8307f1e6d3e774bd7fc728a520b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-v35-F6-independent-paired-reviewed-admission.py",
+      "bytes": 12484,
+      "sha256": "995dd541299c996cdcef627b383def0bda3fca62d96451ef4c13676c448e3b96"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_f6_two_peer_independent_idle_v2.py",
+      "bytes": 37476,
+      "sha256": "509b9d53a28587725192c78c42da7a1933f21435ea108f8854796560bed49d8c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_v35_paired_native_gate_helper.py",
+      "bytes": 39974,
+      "sha256": "a696fc9cc99cb15e194ef57b6a527e220e4d1e7a40dcbe3f0a16f4c4feaaf9c7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_owned_pair_native_observer_v1.py",
+      "bytes": 82848,
+      "sha256": "6371559a059932733e4a65dee720dbcbb8e48de026c793961dfbf992e128832a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-two-peer-independent-idle-v2-source-review.json",
+      "bytes": 2393,
+      "sha256": "e28deea406fd9612b9b1c43c89084aed0560f09a8090330ecc2d70c3ffea61d8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-two-peer-independent-idle-v2-source-tests.log",
+      "bytes": 3825,
+      "sha256": "36286e759a7fd57a35b1a994a4fdf3005b0042ead8121287a7ae71d50f11ada6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\prepare-v35-independent-F6-parent-and-observer-v1.py",
+      "bytes": 10705,
+      "sha256": "5f124813aa02cb1adfcd97f9a5f69115ee3b591d4fec0989b6367f38da2ad37d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\prepare-independent-F6-typed-idle-precondition-v2.py",
+      "bytes": 5189,
+      "sha256": "8d022b53c76f20f889794d74243580650a03320b6c2742dd72e8d183ab4ed759"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\F6-two-peer\\F6-pair-observation.json",
+      "bytes": 16349659,
+      "sha256": "79e46b8fceff378cb4bb16d8f5f803c3f7069a1fc365a9fd7d93da4ea51fa100"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\runner-source.py",
+      "bytes": 82848,
+      "sha256": "6371559a059932733e4a65dee720dbcbb8e48de026c793961dfbf992e128832a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\executed-run-v35-independent-F6-pair-v1.py",
+      "bytes": 7217,
+      "sha256": "87b6c1131b92c7f44c3144c51d4ecd27fe314996bcb1fabc5aaba104cbead24e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\executed-mmx6_owned_pair_native_observer_v1.py",
+      "bytes": 82848,
+      "sha256": "6371559a059932733e4a65dee720dbcbb8e48de026c793961dfbf992e128832a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\executed-mmx6_f6_two_peer_independent_idle_v2.py",
+      "bytes": 37476,
+      "sha256": "509b9d53a28587725192c78c42da7a1933f21435ea108f8854796560bed49d8c"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\qualify_mmx6_coop_pair.py",
+      "bytes": 81791,
+      "sha256": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\coop_state_crc.py",
+      "bytes": 3972,
+      "sha256": "e3df83c7e65186be58661149b52aa0897cac0dcfa941eea24ebc1871a8e820a1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-0\\saves\\input-recordings\\session-1792890191796964-1-0\\inputs.jsonl",
+      "bytes": 1298291,
+      "sha256": "ca7aeb967fbe4ea78ad62ef70ae87323ebf7c305d4bfcbf758a2f1e3e4e719fd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-0\\saves\\input-recordings\\session-1792890191796964-1-0\\settings.json",
+      "bytes": 26708,
+      "sha256": "678ea0742d375e120ec86c29053b60d74181951ceb43831bbca670a5875771e6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-0\\saves\\input-recordings\\session-1792890191796964-1-0\\content.json",
+      "bytes": 567,
+      "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-0\\saves\\input-recordings\\session-1792890191796964-1-0\\simulation-contract.json",
+      "bytes": 350,
+      "sha256": "01ce8ce3ceda5352ab5b40995b0d0409cd060c3585bcbe95a66a25c3b5f47b9c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-0\\saves\\input-recordings\\session-1792890191796964-1-0\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-0\\saves\\input-recordings\\session-1792890191796964-1-0\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-0\\saves\\input-recordings\\session-1792890191796964-1-0\\status.json",
+      "bytes": 160,
+      "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-1\\saves\\input-recordings\\session-1792890191796796-1-0\\inputs.jsonl",
+      "bytes": 1299053,
+      "sha256": "d9ecc25775c4d044b8e54c183ab4cd69f0022be48411fc11317d756fad3db0ca"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-1\\saves\\input-recordings\\session-1792890191796796-1-0\\settings.json",
+      "bytes": 26708,
+      "sha256": "8675b5fc560c2a45be3bb48e46e7b3e21c76f071a18c8809038a7e664fd28605"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-1\\saves\\input-recordings\\session-1792890191796796-1-0\\content.json",
+      "bytes": 567,
+      "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-1\\saves\\input-recordings\\session-1792890191796796-1-0\\simulation-contract.json",
+      "bytes": 350,
+      "sha256": "01ce8ce3ceda5352ab5b40995b0d0409cd060c3585bcbe95a66a25c3b5f47b9c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-1\\saves\\input-recordings\\session-1792890191796796-1-0\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-1\\saves\\input-recordings\\session-1792890191796796-1-0\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-independent-pair-v35-c3c5bdb-v1\\peer-1\\saves\\input-recordings\\session-1792890191796796-1-0\\status.json",
+      "bytes": 160,
+      "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-original-pause-pair-v35-c3c5bdb\\qualification.json",
+      "bytes": 6141103,
+      "sha256": "3e2daba832266ab125601d18f1ff259d58fdb4950921e0e96b0331158dbf0b39"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-original-pause-pair-v35-c3c5bdb\\F6-pair-terminal-qualification.json",
+      "bytes": 10942,
+      "sha256": "958ef6defcb4e7f39e7b8a9494ab627cd7adea0c1c354f835454aa7c30b932dc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-original-pause-pair-v35-c3c5bdb-v2\\qualification.json",
+      "bytes": 14749652,
+      "sha256": "ee44ba9ec134c8434d3580694691c0c377f1c7a27242a78c1463f9be98cfba79"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-original-pause-pair-v35-c3c5bdb-v2\\F6-pair-terminal-qualification.json",
+      "bytes": 11006,
+      "sha256": "3afea002926998e9e959f720ba270237b31495e9da44a110b79633c33fe46dc4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-original-pause-pair-v35-c3c5bdb-v3\\qualification.json",
+      "bytes": 1990326,
+      "sha256": "7d634ee31583812ff00531b059979f3f7e778be65c68a5a16cc8ae69f259db18"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-original-pause-pair-v35-c3c5bdb-v3\\F6-pair-terminal-qualification.json",
+      "bytes": 10973,
+      "sha256": "52192d8e5f345274e186ecf4444dcc03b9de22f40a9efbdf64a22a135cc0f5da"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-original-pause-pair-v35-c3c5bdb-v4\\qualification.json",
+      "bytes": 2041721,
+      "sha256": "f115c61d521a5dd6c29871dca6072deab1d286ace57e839f4acc11c9a2405172"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F6-original-pause-pair-v35-c3c5bdb-v4\\F6-pair-terminal-qualification.json",
+      "bytes": 10973,
+      "sha256": "8759c45d628f0951e01ee6a5f238b1453a6e2bc2836b01255e21cb2b3d267db0"
+    }
+  ],
+  "limits": [
+    "Same exact c3c5bdb native image/manifest for reviewed LOCAL and actual two-peer loopbackdelay3 F6. Fixed X/P1+normalZero/P2 stage0/healthy-ground/default equipment only; no cross-host, opposite roster, death, retry, acquired inventory or alternate terrain breadth.",
+    "This successful paired route runs after actual original initial-idle/P2Right/P1Jump/healthy/mailbox checks. It performs no preceding dash/pause and claims no F12 result. Earlier combined-route nativeCircle-window and sampler failures remain failed and preserved.",
+    "Actual B parent copy adds only optional Python keyword and post-idle callback, reversing byte-for-byte to pinned original432b7fbc. Its actual__file__/runner-source hash6371559a are retained. Native default loader/profile/source/full resolved core-mod CRC/online recordings/native-card/owned-exit behavior is unchanged.",
+    "Independent helper replaces unrelated prior-pause dependency with actual typed parent idle/control checks and actual executing-parent source pin. Every nested raw/native/host sampler/input/guard/CRC/movement/arrival function is AST-identical to pacedv3. Thirty-two authored/source tests are preflight only, not native evidence.",
+    "Both actual peers retain complete accepted raw typed publications matched to double-stable read-only host/full body/nativePLAY state. Rejected/torn observations remain diagnostic-only. Peer clocks are asynchronous; no instruction-atomic whole-machine frame claim.",
+    "Each peer has actual primary movement>=2px entirely during native phase1, one lifecycle0->1->2->3->0, one monotonic beam1->2->0, finite neutralALIVE<=120native ticks, resources/equipment/world retained, six stationary windows and both controls. All peer reducers independently recomputed.",
+    "Root viewed allsix stable before/rejoin/controls PNGs: both native heroes, world and HUD retained; both peer images agree in each stable window. These are not incoming-phase art or original-hardware whole-screen equivalence claims.",
+    "Five resolved CRC windows contain37actual matching core/mod samples re-read from both terminal stderr logs; both F6 windows additionally rechecked strictly after captured lower bound and below both resolved watermarks.",
+    "Both ordinary online N/C recordings finalize canonically from sealed declared cold startup with two digital host devices and native blank card artifacts. Offline replay correctly refuses network traces. No paired replay/rollback/output equivalence or populated owner-card retention claim.",
+    "F6 bounded LOCAL/netplay/aggregate passes on this same candidate. Other comparison rows and separate native-content inventory receive no admission."
+  ],
+  "bypasses": []
+}
