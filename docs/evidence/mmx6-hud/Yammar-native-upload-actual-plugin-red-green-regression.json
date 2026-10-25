@@ -1,0 +1,138 @@
+{
+  "schema": 1,
+  "kind": "actual_plugin_Yammar_native_upload_four_target_red_green_regression_only",
+  "issue": "beads-gxrh",
+  "source_tree_base": "81890ba",
+  "checks": {
+    "debug_meaningful_pre_fix_native_pixel_failure": true,
+    "production_meaningful_pre_fix_native_pixel_failure": true,
+    "debug_effects_and_current_build_snapshot_green": true,
+    "production_effects_and_current_build_snapshot_green": true
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-native-upload-red-debug-build.log",
+      "bytes": 3350,
+      "sha256": "81e7f6c7f13146408a45a6a3f52927d308a0b0658e372bd9bb2da6c939b2c9ad"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-native-upload-red-debug-ctest.log",
+      "bytes": 1188,
+      "sha256": "ac56e1494c87979a0a2a606f93ec1923daa23d842c3505ab55ff70ca5f9470a3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-native-upload-red-production-build.log",
+      "bytes": 3390,
+      "sha256": "df1da6f53290b0f39a4b77b26b16254d2557700f3289ee9fd648f3891a5d41d6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-native-upload-red-production-ctest.log",
+      "bytes": 2130,
+      "sha256": "51e971fac57dde318aab4562a19265723765a92dd4a4338fbc48c9f72fcba36a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-native-upload-green-debug-build.log",
+      "bytes": 3350,
+      "sha256": "81e7f6c7f13146408a45a6a3f52927d308a0b0658e372bd9bb2da6c939b2c9ad"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-native-upload-green-debug-ctest.log",
+      "bytes": 808,
+      "sha256": "437c902d724f5b8453a301e290e561d0730f28b137faa04f4d22b205c019b319"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-native-upload-green-production-build.log",
+      "bytes": 3390,
+      "sha256": "df1da6f53290b0f39a4b77b26b16254d2557700f3289ee9fd648f3891a5d41d6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-native-upload-green-production-ctest.log",
+      "bytes": 858,
+      "sha256": "164c0f741282e5109a182b9edee61216281f94d85a99292675fbb2b408d4f223"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\src\\mods\\mmx6_coop_plugin.c",
+      "bytes": 112614,
+      "sha256": "652854c2059f60928603ec4d89f198c32d4e7e4f07d640599bfd6d4081d68eb8"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tests\\test_mmx6_coop_private_effects.c",
+      "bytes": 54356,
+      "sha256": "7d664cac5fb2d732f0a0ce9943f6da72348e031a033cdc1a31e2c1ed97976101"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tests\\test_mmx6_coop_snapshot.c",
+      "bytes": 21487,
+      "sha256": "8375b79ccf8bf416665fde3aa7565a53db9086102df8381bb9faa46ef8358e08"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-Yammar-native-upload-conditional-patch-v2\\conditional-Yammar-native-upload.patch",
+      "bytes": 12670,
+      "sha256": "1fee9e461f082f9e55b6a876c8c120572708e83490c78982672041e7b91171c7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-Yammar-native-upload-conditional-patch-v2\\REVIEW-CONTRACT.txt",
+      "bytes": 10328,
+      "sha256": "b0a17351d3a0486f1fd5065f3b9df78fafc05b75a4e73ae9669fe649fc0e5437"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-Yammar-native-upload-conditional-patch-v2\\proposal.json",
+      "bytes": 1736,
+      "sha256": "533a31841df32c8311a19f3566a942c66023b7394712ff8341b871c7b775ec15"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-Yammar-native-upload-conditional-patch-v2\\source-pure-proposal-review.json",
+      "bytes": 2345,
+      "sha256": "cadd081d0bf6956403a857b02655796239fcb09b284119529161bf84fa286874"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F59-four-target-regression-batch.ps1",
+      "bytes": 1869,
+      "sha256": "a94599f570dfc999b6a7cfbb0263e9cd9f1899362feb7f352e3bc4f553492884"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F59-four-target-regression-batch-v2.ps1",
+      "bytes": 2217,
+      "sha256": "0376bb6ea63036a7319273edfb344d65a309ad2450af04882298e9f78c7d825c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-native-upload-red-production-regression.json",
+      "bytes": 180,
+      "sha256": "1e8fcec4e53914cefa309c1dbeb806122eb7ded257a016daf8843073e3ff7069"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-native-upload-green-debug-production-regression.json",
+      "bytes": 406,
+      "sha256": "c121f0e71a9a6f75337ddaf63433eaa2248893b1f9d5dd9fe98a663159b684f9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-Yammar-original-transfer-a0-closure-reviewed-v2.json",
+      "bytes": 18527,
+      "sha256": "00121a2bdfd747720e8bf2cb96c2ccb159e45e6cdbc6e24efa09912d09a9e9d0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F59-native-selector-mutability-source-proof.json",
+      "bytes": 8481,
+      "sha256": "f012c001fbbad35c8e8d40430ad7386baee7acd669385ecd55ab06d9e97c681b"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-hud\\manifest-bound-253c74e-F59-Yammar-native-placement-local-failed-reviewed.json",
+      "bytes": 567022,
+      "sha256": "1fdd7dc011fd464aab0ebf8374da726fccce4efcc3c34ce352f7931cdb126428"
+    }
+  ],
+  "behavior": "Immutable original Zero graphics-header10h/23frame32tile family uses native upload originv64 with unchanged originalUVs. Shared compressed-source cache aliases use exact encoded-pixel identity. Other resource paths remain unchanged.",
+  "implementation": {
+    "new_mutable_fields": 0,
+    "wire_changes": 0,
+    "codec_changes": 0
+  },
+  "native_candidate_build_pending": true,
+  "native_art_state_qualification_pending": true,
+  "limits": [
+    "Actual C effects/snapshot tests compile then fail native-coordinate pixels before fix and pass in both debug/production after fix.",
+    "Tests cover tile4000/5000/full8192knowntexels, both alias orders, palette immutability, bounded source/refusal/default body/trail, existing warm/malformed/allocation-failure/cold resolver/current-build cache identity and semantic digest.",
+    "First red batch script stopped on expected CTest stderr underPowerShell5; its debug logs are preserved. Corrected script completes production red and combined green. No duplicated debug red or compilation failure is credited.",
+    "No new runtime image, native art/state/netplay/rollback or F59 pass from these C regressions. Original LOCAL failure remains recorded until new-image qualification."
+  ]
+}

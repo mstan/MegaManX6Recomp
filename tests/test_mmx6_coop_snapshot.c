@@ -134,6 +134,32 @@ static void retain_native_x_pixels(void){
     psx_mod_write_half(active_palette+2*32+2,0x4321);
     CHECK(zero_atlas_effect_bank(0x2C,0x7802,UINT16_MAX,0));
 }
+
+static uint16_t saved_yammar_tile,saved_yammar_page;
+static void retain_yammar_native_upload_pixels(void) {
+    /* Actual sprite_bank -> existing wire5 encoded cache -> cold resolver.
+     * Authored source/palette geometry; no ROM fixture or new engine field. */
+    free(zero_compressed);compressed_size=0x200;zero_compressed=malloc(compressed_size);CHECK(zero_compressed);
+    memset(zero_compressed,0,compressed_size);put32(zero_compressed+0x10,0x100);
+    for(unsigned i=0;i<23;++i)put32(zero_compressed+0x100+i*4,0x0200005Cu);
+    const uint16_t words[]={0x5800,0x1111,0x0001,1023,0x2222,0x0001,1023,0,0};
+    for(unsigned i=0;i<sizeof words/sizeof *words;++i){
+        zero_compressed[0x15C+i*2]=(uint8_t)words[i];zero_compressed[0x15D+i*2]=(uint8_t)(words[i]>>8);
+    }
+    Mmx6AssetView source={zero_compressed,compressed_size,2};snapshot_assets_loaded(&source,1);
+    for(unsigned c=0;c<16;++c)psx_mod_write_half(active_palette+0x49*32+c*2,0);
+    psx_mod_write_half(active_palette+0x49*32+2,0x1234);psx_mod_write_half(active_palette+0x49*32+4,0x4321);
+    uint32_t core=state_digest();
+    saved_yammar_tile=sprite_bank(assets+0x100,0,0x7849,0x4000);
+    saved_yammar_page=sprite_bank(assets+0x100,22,0x7849,UINT16_MAX);
+    CHECK(saved_yammar_tile && saved_yammar_page && state_digest()==core);
+    uint16_t tile[256];CHECK(mmx6_pixels_decode(banks[saved_yammar_tile-0x6000].pixels,
+        banks[saved_yammar_tile-0x6000].pixel_bytes,256,tile));
+    for(unsigned i=0;i<256;++i)CHECK(tile[i]==0x1234);
+    static uint16_t page[65536];CHECK(mmx6_pixels_decode(banks[saved_yammar_page-0x6000].pixels,
+        banks[saved_yammar_page-0x6000].pixel_bytes,65536,page));
+    CHECK(!page[0] && page[64*256]==0x1234 && page[80*256]==0x4321 && !page[96*256]);
+}
 static void digest_and_readiness(void){
     uint32_t h=state_digest();++frame_count;p2_hud_fade=17;CHECK(state_digest()==h);
     psx_mod_write_byte(diagnostic+0x50,8);CHECK(!snapshot_ready() && !snapshot_bytes());
@@ -266,8 +292,10 @@ static void abandoned_guest(void){
     CHECK(state_track.count && !snapshot_ready());(void)state_digest();
 }
 int main(void){
-    pixel_edges();setup();retain_native_x_pixels();digest_and_readiness();actual_projection_backups();
+    pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
     roundtrip_and_malformed();
+    CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
+    CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);
     /* Abandoned/overflowed call records are safe owned bytes, and explicitly
      * cannot be captured/restored as a resumable C stack. Reactivation required. */
     uint32_t v=1;for(unsigned i=0;i<MMX6_STATE_FRAMES;++i)CHECK(mmx6_state_push(i,&v,4,1)!=UINT32_MAX);

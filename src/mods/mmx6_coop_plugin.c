@@ -1450,6 +1450,22 @@ static uint16_t retain_sprite_bank(uint32_t source,uint16_t tile,const uint8_t c
     memcpy(b->colors,colors,32);
     return id;
 }
+/* Original Zero801EA254/EXE80043638 resolves graphics header+10h.
+ * Its23 frames share one32-tile source;80043724's final untaken ordinary
+ * BNE still executes delay80043728(a0=s1), then80043778 uploads it at
+ * VRAM(0140h words,0040h). Page5 starts at0140h, so native UV origin is
+ * (0,64), not the body/trail origin(0,0). Admit the immutable resource and
+ * geometry, never actor position, current palette or screenshot contents. */
+static uint32_t zero_yammar_upload_table(void) {
+    if (!zero_compressed || compressed_size<0x14u) return 0;
+    uint32_t relative=le32(zero_compressed+0x10);
+    if (relative<0x14u || relative>=compressed_size ||
+        compressed_size-relative<23u*4u+2u ||
+        (uint64_t)assets+relative+0x5Cu>UINT32_MAX) return 0;
+    for (unsigned i=0;i<23;++i)
+        if (le32(zero_compressed+relative+i*4u)!=0x0200005Cu) return 0;
+    return assets+relative;
+}
 static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut, uint16_t tile) {
     uint32_t offset, packed, source;
     uint8_t decoded[32768];
@@ -1483,10 +1499,22 @@ static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut, uint1
     palette_offset=(size_t)(clut-0x7800)*32;
     if (!tiles || tiles>256 ||
         palette_offset+32>0x4000) return 0;
+    uint32_t yammar=render_x_death?0:zero_yammar_upload_table();
+    unsigned upload_y=0;
+    if (yammar && table==yammar) {
+        if (frame>=23 || packed!=0x0200005Cu) return 0;
+        upload_y=64;
+    }
+    unsigned upload_height=((tiles+15u)/16u)*16u;
+    if (upload_y>256u-upload_height) return 0;
     capture((render_x_death?saved_resources[3]:active_palette)+(uint32_t)palette_offset,colors,sizeof colors);
-    /* Zero's archive is immutable for this process/build. Only the resident
-     * X death path uses replaceable native RAM and needs content revalidation. */
-    if (!render_x_death) for (unsigned i=0;i<bank_count;++i)
+    /* Zero's archive is immutable; native upload origins can differ by
+     * table. Resident X death additionally uses replaceable native RAM. */
+    /* Different tables can reference the same compressed source with
+     * different native upload origins. For this source, decode and let the
+     * existing exact-pixel cache distinguish both aliases without new keys. */
+    if (!render_x_death && !(yammar && source==yammar+0x5Cu))
+        for (unsigned i=0;i<bank_count;++i)
         if (banks[i].source==source && banks[i].tile==tile &&
             !memcmp(banks[i].colors,colors,sizeof colors)) return banks[i].id;
     if (render_x_death) capture(source,x_compressed,available);
@@ -1495,7 +1523,7 @@ static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut, uint1
         return 0;
     memset(pixels,0,sizeof pixels);
     /* The native upload emits full 256-pixel rows, then a partial 16-high row. */
-    unsigned remaining=tiles, row=0, in=0;
+    unsigned remaining=tiles, row=upload_y, in=0;
     while (remaining) {
         unsigned chunk=remaining<16?remaining:16, width=chunk*16;
         for (unsigned y=0;y<16;++y) for (unsigned x=0;x<width;++x) {

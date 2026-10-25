@@ -722,6 +722,75 @@ static void native_working_palette_class_and_load_events(void) {
     capture(active_palette,now,sizeof now);CHECK(!memcmp(now,preserved,sizeof now));
     free(dat);clear_banks();working_palette_assets_ready=working_palette_probe=0;
 }
+
+/* Source-bound native upload contract with authored LZ/palette bytes, not ROM.
+ * First16 tiles are index1; next16 are index2. Original80017B04 places both
+ * rows atv64..95. This fails on the pre-fix plugin's origin0 placement. */
+static void yammar_native_upload_coordinates(void) {
+    CPUState cpu;setup(&cpu);
+    static uint8_t graphics[0x200];memset(graphics,0,sizeof graphics);
+    zero_compressed=graphics;compressed_size=sizeof graphics;
+    put32(graphics+0x10,0x100);
+    for(unsigned i=0;i<23;++i)put32(graphics+0x100+i*4,0x0200005Cu);
+    /* Alias points at the same compressed stream with ordinary origin0. */
+    put32(graphics+0x40,0x0200011Cu);
+    put32(graphics+0x80,0x001000F0u);
+    const uint16_t two_rows[]={0x5800,0x1111,0x0001,1023,0x2222,0x0001,1023,0,0};
+    const uint16_t one_tile[]={0x6000,0x1111,0x0001,63,0,0};
+    for(unsigned i=0;i<sizeof two_rows/sizeof *two_rows;++i){
+        graphics[0x15C+i*2]=(uint8_t)two_rows[i];graphics[0x15D+i*2]=(uint8_t)(two_rows[i]>>8);
+    }
+    for(unsigned i=0;i<sizeof one_tile/sizeof *one_tile;++i){
+        graphics[0x170+i*2]=(uint8_t)one_tile[i];graphics[0x171+i*2]=(uint8_t)(one_tile[i]>>8);
+    }
+    for(unsigned c=0;c<16;++c)psx_mod_write_half(active_palette+0x49*32+c*2,0);
+    psx_mod_write_half(active_palette+0x49*32+2,0x1234);
+    psx_mod_write_half(active_palette+0x49*32+4,0x4321);
+    const uint32_t table=assets+0x100,alias=assets+0x40;
+    uint16_t tile=sprite_bank(table,0,0x7849,0x4000);CHECK(tile);
+    uint16_t pixels[256];CHECK(mmx6_pixels_decode(banks[tile-0x6000].pixels,banks[tile-0x6000].pixel_bytes,256,pixels));
+    for(unsigned i=0;i<256;++i)CHECK(pixels[i]==0x1234);
+    uint16_t lower=sprite_bank(table,1,0x7849,0x5000);CHECK(lower && lower!=tile);
+    CHECK(mmx6_pixels_decode(banks[lower-0x6000].pixels,banks[lower-0x6000].pixel_bytes,256,pixels));
+    for(unsigned i=0;i<256;++i)CHECK(pixels[i]==0x4321);
+    static uint16_t page[65536];
+    uint16_t full=sprite_bank(table,22,0x7849,UINT16_MAX);CHECK(full);
+    CHECK(mmx6_pixels_decode(banks[full-0x6000].pixels,banks[full-0x6000].pixel_bytes,65536,page));
+    for(unsigned y=0;y<256;++y)for(unsigned x=0;x<256;++x)
+        CHECK(page[y*256+x]==(y>=64 && y<80?0x1234:y>=80 && y<96?0x4321:0));
+    CHECK(banks[full-0x6000].source==assets+0x15C && banks[full-0x6000].tile==UINT16_MAX);
+    unsigned count=bank_count;CHECK(sprite_bank(table,3,0x7849,UINT16_MAX)==full && bank_count==count);
+    /* Both source aliases must retain their actual distinct placement. */
+    uint16_t normal=sprite_bank(alias,0,0x7849,UINT16_MAX);CHECK(normal && normal!=full);
+    CHECK(mmx6_pixels_decode(banks[normal-0x6000].pixels,banks[normal-0x6000].pixel_bytes,65536,page));
+    CHECK(page[0]==0x1234 && page[16*256]==0x4321 && !page[64*256]);
+    count=bank_count;CHECK(sprite_bank(table,2,0x7849,UINT16_MAX)==full &&
+        sprite_bank(alias,0,0x7849,UINT16_MAX)==normal && bank_count==count);
+    clear_banks();normal=sprite_bank(alias,0,0x7849,UINT16_MAX);full=sprite_bank(table,0,0x7849,UINT16_MAX);
+    CHECK(normal && full && normal!=full);
+    CHECK(mmx6_pixels_decode(banks[full-0x6000].pixels,banks[full-0x6000].pixel_bytes,65536,page));
+    CHECK(!page[0] && page[64*256]==0x1234 && page[80*256]==0x4321);
+    /* Palette changes append a new immutable bank; old pixels never repaint. */
+    psx_mod_write_half(active_palette+0x49*32+2,0x5678);
+    uint16_t changed=sprite_bank(table,0,0x7849,UINT16_MAX);CHECK(changed && changed!=full);
+    CHECK(mmx6_pixels_decode(banks[full-0x6000].pixels,banks[full-0x6000].pixel_bytes,65536,page));
+    CHECK(page[64*256]==0x1234);
+    CHECK(mmx6_pixels_decode(banks[changed-0x6000].pixels,banks[changed-0x6000].pixel_bytes,65536,page));
+    CHECK(page[64*256]==0x5678);
+    count=bank_count;bank_count=4096;
+    CHECK(sprite_bank(table,0,0x7849,UINT16_MAX)==changed && bank_count==4096);bank_count=count;
+    /* Ordinary body/trail source remains origin0 and its native palette. */
+    uint16_t body=sprite_bank(assets+0x80,0,0x7800,0);CHECK(body && bank_first[body-0x6000]==0x0101);
+    uint16_t trail=sprite_bank(assets+0x80,0,0x780D,0);CHECK(trail && bank_first[trail-0x6000]==0x1111);
+    CHECK(!sprite_bank(table,23,0x7849,0x4000));
+    CHECK(!sprite_bank(table,0,0x77FF,0x4000));
+    /* Invalid/incomplete resource identity uses safe default classification. */
+    put32(graphics+0x10,UINT32_MAX);CHECK(sprite_bank(assets+0x80,0,0x7800,0)==body);
+    put32(graphics+0x10,0x100);compressed_size=0x15D;
+    CHECK(!sprite_bank(table,0,0x7849,0x4000));
+    compressed_size=sizeof graphics;CHECK(sprite_bank(table,0,0x7849,0x4000));
+    clear_banks();
+}
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     controller_pair_and_restoration();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
     deferred_shared_effect_owner_context();
@@ -730,4 +799,5 @@ int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     deferred_icon_effect_retains_zero_source();clear_banks();
     private_giga_shots_retain_zero_source();
     native_working_palette_class_and_load_events();
+    yammar_native_upload_coordinates();
     puts("private native effects actual-plugin call order, gates, lifetime projection and retained packet ownership PASS");return 0;}
