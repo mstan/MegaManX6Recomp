@@ -1,0 +1,522 @@
+{
+  "schema": 1,
+  "kind": "root_reviewed_v39_F70_explicit_OFF_LOCAL_fresh_SAVE_LOAD",
+  "reviewed_at_utc": "2026-10-25T09:30:14.477430+00:00",
+  "comparison": "F70",
+  "issue": "beads-eio.1.49",
+  "candidate": {
+    "proof": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v39-31ead13\\candidate.json",
+      "bytes": 11188,
+      "sha256": "07e53ce4a7d8441424aae4bc011e45bc8f0abb06933a5ceb4952e2319a72da7c"
+    },
+    "image_sha256": "0b37b827e0724cceb1489db5254798fc04e9f994983587e063e4bfbc0a40d07a",
+    "manifest_sha256": "ef118714f0cfa18d91d5d0d8c7f82c6623bde664dd60d0edac26d2955f90ac47",
+    "candidate_source": "31ead13360e52c8e0b57d26012ec3eef3acea648",
+    "sdk": "9fd4adb78e9197a0bd3764d8a54e80d12df5c733"
+  },
+  "source": {
+    "contract": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-policy-source-preflight-v3-actual\\source-contract.json",
+      "bytes": 10949,
+      "sha256": "0078e4236b1ddbc543662311ddf540741630529464ecf2d03558cda922c0c610"
+    },
+    "source_root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy",
+    "checked": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\CMakeLists.txt",
+        "bytes": 35192,
+        "sha256": "907452e7dcebc65de7b731b372bce59ade5a4335b3bcb9923567409472973c01"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\docs\\COOP_DIAGNOSTICS_POLICY.md",
+        "bytes": 2688,
+        "sha256": "9bc4d39e5dd510f37acbbdb39f95dee8acd00292a78cfcc9f8241f0e2bb02339"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\docs\\COOP_RECYCLE_CONVEYOR.md",
+        "bytes": 2593,
+        "sha256": "28004d91583b4ac58ec164dbc1e9d6f09ae9aef849f76d8a32cecced120adeef"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_coop_conveyor.inc",
+        "bytes": 5553,
+        "sha256": "5e4a11ad9a4186921d9fa2aae240e2809daf4ad98ade97c4dcc0e591470e9f41"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_coop_plugin.c",
+        "bytes": 114825,
+        "sha256": "1f6dab29831e503254843c3bee7f44d72d80aecdc13f1c4c0f6cf2a02efec4b2"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_coop_snapshot.inc",
+        "bytes": 18532,
+        "sha256": "a58652faadb184881dad2a064095c3a1a5c9550acd1a34db28307f9c2f766733"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_diagnostics.cpp",
+        "bytes": 21544,
+        "sha256": "35ea093cbdc41f4b1195df1d8ff97c66e8789f40c781767eaa30555ec603945c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_diagnostics.h",
+        "bytes": 1235,
+        "sha256": "6cbd7b9f103772ac952dbad349aa4d1f8146aba9c86372d5600890cca165f9eb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_input_capture.hpp",
+        "bytes": 7898,
+        "sha256": "f3772c45665dc7fcf1fef7abf8ac798b0dacc241ed022b1ec2115ee0b9329bde"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_runtime_modes.hpp",
+        "bytes": 6151,
+        "sha256": "f073603f2f0fadfe290ed5314401ffdaf4876b1761319bbbe4cc7e760e095ff5"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\mmx6_coop_default_view_fixture.h",
+        "bytes": 904,
+        "sha256": "3627f6f0245e7f7503cf7f381329ef53d092cc0c5361468f2fcd34cf91753cca"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_diagnostics.c",
+        "bytes": 15546,
+        "sha256": "37e0e1b1ec343399626f8ec58aba12215a2c2f558c4f321da7573cfdcdc1bcdd"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_hud.c",
+        "bytes": 9797,
+        "sha256": "81602e70b492df7e05aaa97f33178eb0d9d10e466d7fec5e1b7715cd2853fa86"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_intro_target.c",
+        "bytes": 6168,
+        "sha256": "b10f8d4becda78fb54c0d11c08dcbbd7f1245b14d87cbe742978455cf274fb50"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_jump_audio.c",
+        "bytes": 27578,
+        "sha256": "d534c2337a1010aa7ca3dba1fcb4dd95871bbee68d283a566805b8963f3761cd"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_private_effects.c",
+        "bytes": 58271,
+        "sha256": "a645f08bd24acdccf116921dd1f1b641d45b35abf5b877852f4eb610cb54f1c9"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_recycle_conveyor.c",
+        "bytes": 7760,
+        "sha256": "ec5997b329653389fd307796b917ec7864f437cc9037d6e56212480fceb554c2"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_recycle_portal.c",
+        "bytes": 16468,
+        "sha256": "6dfea0432a603a713fbfc35e374d19fd9eb61da8f756f95accfe2c6506434aba"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_snapshot.c",
+        "bytes": 22682,
+        "sha256": "03c9fb019082c8a12b975eee7c972a841a875135d5947abb8bb71e7b0b9d659b"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_diagnostics_policy.cpp",
+        "bytes": 5368,
+        "sha256": "c4102f7c815d1eb7bcafa5c36ccd94ee3b8fa4fe966f9aaf9bb38eede32a2ad6"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_input_capture.cpp",
+        "bytes": 13999,
+        "sha256": "6dd08875ab5c0b87295b4d0b15f09288192674874ab0b14c4deafc79df5aaace"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_native_replay.cpp",
+        "bytes": 11271,
+        "sha256": "aaaf6b5eaf164e7a537a2a876cbcbfdbe9cf7a13b4768b328399cda3643da96c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\audit_mmx6_recycle_conveyor.py",
+        "bytes": 7400,
+        "sha256": "562a8d8124f53a021b1ff3dc10d8932211e1e0ad82da5adbd2eb734e5f8c774d"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\coop_debug.py",
+        "bytes": 12235,
+        "sha256": "61eae6837c54e191597a4829fdeb57f9b54a36229ebfd02fe60aec37b3ae1f1f"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\coop_host_profile.py",
+        "bytes": 11181,
+        "sha256": "c11d19879b6fbe2cdc464f20b5d444598fa590d6145d795bef7a1597280cf735"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\mmx6_coop_hud_inventory.py",
+        "bytes": 17683,
+        "sha256": "e503f2f99085f89fc18010f2d3e0916866d872083fb716b3a75595bd4cabdfe2"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\mmx6_coop_hud_presentation.py",
+        "bytes": 11949,
+        "sha256": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\mmx6_coop_jump_audio_pair.py",
+        "bytes": 29983,
+        "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\mmx6_input_recording.py",
+        "bytes": 13664,
+        "sha256": "a4d21aaa83c9104679d549c0f5fa81bf95106ce800b0601263faaff46ae5310a"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\mmx6_runtime_modes.py",
+        "bytes": 9053,
+        "sha256": "5c3528a21058fec3de256dcdf736b3cf6944439ee7e638ad758d5aea888b1cda"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\prepare_mmx6_coop_playtest.py",
+        "bytes": 10411,
+        "sha256": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\qualify_mmx6_coop_baseline.py",
+        "bytes": 14335,
+        "sha256": "b2e0d0195544e78ae175e9f591db33da791b4bdd2f14703d63561989e20b76f8"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\qualify_mmx6_coop_jump_audio.py",
+        "bytes": 29370,
+        "sha256": "e91dbde11541f68e554f94b747ba91c409a83322f7d4d60b26d1e3aefdf75ac9"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\qualify_mmx6_coop_pair.py",
+        "bytes": 81791,
+        "sha256": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\qualify_mmx6_coop_state.py",
+        "bytes": 53820,
+        "sha256": "a7f8e768b97789bab9ff84c0d6baea9612bafc4c6d5074da73839d4ab815dcbb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\qualify_mmx6_input_replay.py",
+        "bytes": 28273,
+        "sha256": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\test_mmx6_diagnostics_policy.py",
+        "bytes": 7222,
+        "sha256": "931646e6573e0bfc5de2df4d89cc83a2e382129c17f8f2152ff8960b980dd270"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\test_mmx6_diagnostics_policy_parser.py",
+        "bytes": 3981,
+        "sha256": "99c00ae9cb2c1ad14f05a378b8c278460ba04f871added0a18a5ef8cf0b81d4d"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\test_mmx6_input_capture.py",
+        "bytes": 7651,
+        "sha256": "374049dcd9cb967f9b1194c73a69ec659ffb530c8a0f19445b133efbf6af7d58"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\test_mmx6_recycle_conveyor.py",
+        "bytes": 8050,
+        "sha256": "533ee5bfa274febc838a1417937b5ddb323d0288fc450927c1dbdb3bd64dd48c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\test_mmx6_runtime_modes.py",
+        "bytes": 7733,
+        "sha256": "d4010f2ce58354248a4691a10921aeb87062165d5aace2decc1acb0a9e16a4cd"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_coop_plugin.c",
+        "function": "shared_camera",
+        "sha256": "f3a001dc71c3846c4056b2f0b29a3dc86e516b7d107912bf2be70ece53976703"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_coop_plugin.c",
+        "function": "mmx6_coop_diagnostics_mode",
+        "sha256": "3505b9ea89b41d80c0f607515aa27090b03dea14aeb36a9e4f874be8d984f29f"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_coop_plugin.c",
+        "function": "hud_offsets",
+        "sha256": "bc597ab3c82f6cb5e147bcc15e70f04af5092c0d5a855f88ef7db8011574773b"
+      }
+    ],
+    "scope": "Frozen diagnostic implementation/codec and actual camera/getter/HUD functions; full compiled declared-source validation remains an independent parent gate",
+    "SDK_source_root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\diagnostics-policy-sdk",
+    "SDK_checked": [
+      {
+        "relative": "runtime/include/mod_runtime.h",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\diagnostics-policy-sdk\\runtime\\include\\mod_runtime.h",
+        "bytes": 9618,
+        "sha256": "a7539f7d256d6b9f14d5a863b64fc7d0c4e9ef0e3a5589794d52ebf1a2e19d7f"
+      },
+      {
+        "relative": "runtime/src/mod_runtime.cpp",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\diagnostics-policy-sdk\\runtime\\src\\mod_runtime.cpp",
+        "bytes": 148238,
+        "sha256": "48cd00014182ca1eada40a8bfa12e9e3d0ece353cd0cd528675192ffed6274c7"
+      },
+      {
+        "relative": "runtime/src/psx_netplay.c",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\diagnostics-policy-sdk\\runtime\\src\\psx_netplay.c",
+        "bytes": 229730,
+        "sha256": "7f99ddbde9f5cf6981fbbc976da801eba535105da425e4ecda0f968a541189bf"
+      }
+    ],
+    "policy_semantic_review": {
+      "Capture_sidecar_and_getter_unchanged": true,
+      "whole_CPP_except_begin_identical": true,
+      "ON_admission_replay_card_identity_worker_suffix_identical_except_reused_actual_coop_boolean": true,
+      "explicit_OFF_before_Startup_card_export_Capture": true,
+      "requested_policy_distinct_from_actual_activation": true,
+      "scope": "Only requested startup policy/schema-epoch guard/numeric witness; default ON capture implementation unchanged. Runtime regression still required.",
+      "capture_fixture_typed_policy_provider_only": true,
+      "capture_fixture_default_requested_ON_independent_of_actual_activation": true,
+      "capture_fixture_original_test_body_identical": true,
+      "runtime_delta_only_once_startup_stderr_fflush": true,
+      "runtime_policy_Capture_sidecar_getter_other_bytes_identical": true,
+      "actual_TU_fully_buffered_live_file_visibility_fixture": true,
+      "fixture_parent_retains_before_release_bytes_and_releases_child_in_finally": true
+    }
+  },
+  "compiled_SDK": {
+    "manifest": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v39-recording-policy-debug\\psx_build_manifest\\psx-runtime\\Release\\manifest.json",
+      "bytes": 162949,
+      "sha256": "bff0397d76a7df9ad760ebc90f89b781d09d7e0e8f4c3a3bdff522758ff64382"
+    },
+    "SDK_actual_declared_inputs_checked": 3
+  },
+  "local": "passed",
+  "netplay": "unverified",
+  "aggregate": "unverified",
+  "ledger_pass_count_added": 0,
+  "checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "actual_explicit_OFF_startup_witness_and_healthy_controls": true,
+    "no_recording_folders_streams_before_during_after_SAVE_LOAD_and_exit": true,
+    "actual_fresh_current_build_SAVE_LOAD_and_living_native_execution": true,
+    "native_cards_preserved_and_owned_graceful_exit0": true,
+    "no_old_state_or_fixture_input": true
+  },
+  "actual_policy_witness": {
+    "actual_startup": {
+      "schema": 1,
+      "epoch": 1,
+      "netplay": 0,
+      "policy_available": 1,
+      "feature_enabled": 0,
+      "feature_explicit": 1,
+      "policy_preserved_netplay": 0,
+      "diagnostics_plugin_active": 0,
+      "coop_plugin_active": 1,
+      "hook_active": 0,
+      "envelope_complete": 1,
+      "guest_cycles": 0,
+      "sim_tick": 0,
+      "replay_requested": 0
+    },
+    "log": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\candidate\\jump-audio\\stderr.log",
+      "bytes": 945,
+      "sha256": "a984d226d46f7c290f1092b3c31b0f6d999500a7f44a437b07714a6ddd915101"
+    },
+    "scope": "Actual requested recording policy and actual hook/co-op activation; no full-plan export claim"
+  },
+  "initial_private_profile": {
+    "state": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\candidate\\mods\\state.toml",
+      "bytes": 293,
+      "sha256": "baa92c321a0d1603fe904374b148f4a70e1ba348af335572bf504499e40dc12c"
+    },
+    "settings": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\candidate\\settings.toml",
+      "bytes": 272,
+      "sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa"
+    },
+    "catalog": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\candidate\\mods\\bundled\\mmx6.diagnostics\\1.0.0\\manifest.toml",
+      "bytes": 729,
+      "sha256": "4c8ee928a098500096b099f8569f1b74eed044fbc88b0fd1da2bd46dbce16cdf"
+    },
+    "environment": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\candidate\\environment.json",
+      "bytes": 1180,
+      "sha256": "9179a18e8353bfa4b32cd235eaf6931ba0b48c514b831f351079f09d545cd1ac"
+    },
+    "explicit_OFF": true,
+    "rewind": false,
+    "saved_coop_preference": true,
+    "actual_activation": "independently measured in startup witness"
+  },
+  "independently_revalidated_terminal_profile": {
+    "state": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\candidate\\mods\\state.toml",
+      "bytes": 307,
+      "sha256": "73f2bb7c372b67ff11c817df4bdd8a87e57759c1460ecff2af699c8efbc92564"
+    },
+    "settings": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\candidate\\settings.toml",
+      "bytes": 272,
+      "sha256": "a158f2ac5dfc4dfc2ff18bbca450ef54634aa19d3376a3728657e7aaa6ad30aa"
+    },
+    "catalog": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\candidate\\mods\\bundled\\mmx6.diagnostics\\1.0.0\\manifest.toml",
+      "bytes": 729,
+      "sha256": "4c8ee928a098500096b099f8569f1b74eed044fbc88b0fd1da2bd46dbce16cdf"
+    },
+    "environment": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\candidate\\environment.json",
+      "bytes": 1180,
+      "sha256": "9179a18e8353bfa4b32cd235eaf6931ba0b48c514b831f351079f09d545cd1ac"
+    },
+    "explicit_OFF": true,
+    "rewind": false,
+    "saved_coop_preference": true,
+    "actual_activation": "independently measured in startup witness"
+  },
+  "profile_semantics_identical_after_table_order_and_whitespace_normalization": true,
+  "fresh_snapshot": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\F70OFF-natural-windows\\fresh-current-build-SAVE9.pst",
+    "bytes": 1872594,
+    "sha256": "9e9d071aed5f8feda74c6635ed92ba886a0ec9e76b03f80e8022474d264de51b"
+  },
+  "saved_positions": [
+    9633792,
+    11206656
+  ],
+  "restored_native_timer": 237,
+  "final_native_timer": 262,
+  "independent_terminal_inventory": {
+    "label": "root independent terminal inventory",
+    "private_saves": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\candidate\\saves",
+    "scanned_entries": 6,
+    "recording_entries": [],
+    "no_recording_directory_or_stream": true
+  },
+  "observed_absence_windows": 27,
+  "private_cards_unchanged": true,
+  "owned_exit": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "images_reviewed_by_root": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\F70OFF-natural-windows\\P1-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "90965305027c1e164bfacba500887cd4770c7b967789303b77d95005aaaec7c7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\F70OFF-natural-windows\\P1-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "16cfe45388e7eddf349a3a1d24f576b8daeaade6690b8dc79d2f638ea76c4c58"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\F70OFF-natural-windows\\P2-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "16378efc4cb474be3e3b8718e284a884d7a95dd11a0b1767e62aa9ef0d0072e6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\F70OFF-natural-windows\\P2-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "2a3f821640d30f3c415065d2a34cd4a13725704e63e2f63100935ed7f563b1a4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\F70OFF-natural-windows\\after-fresh-current-LOAD9.png",
+      "bytes": 2074543,
+      "sha256": "f30f9b7ac7844952871d1d77e52e21a466551fddca856dc86594f8279e876e59"
+    }
+  ],
+  "visual_findings": "Actual blue X and red Zero native owner menus; both resumed actors with stacked HUD; fresh LOAD slot10 notification and live actors, no REC badge.",
+  "limitations": [
+    "Exact frozen debug/lab LOCAL image only; all five actual PNGs viewed.",
+    "No recorder output exists; replay is not exercised or qualified.",
+    "Separate OFF NETPLAY run failed its movement gate and has no admission from this LOCAL result.",
+    "Native cards are preserved; execution snapshots are disposable and build-specific."
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\candidate\\mods\\F70OFF-original-state.toml",
+      "bytes": 155,
+      "sha256": "d4e99652ab49f60e834c814d7a6a533890333971126b1b65645e562521a0d457"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\F70OFF-natural-windows\\fresh-current-build-SAVE9.pst",
+      "bytes": 1872594,
+      "sha256": "9e9d071aed5f8feda74c6635ed92ba886a0ec9e76b03f80e8022474d264de51b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\candidate\\saves\\card2.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\F70OFF-natural-windows\\P1-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "90965305027c1e164bfacba500887cd4770c7b967789303b77d95005aaaec7c7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\F70OFF-natural-windows\\P1-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "16cfe45388e7eddf349a3a1d24f576b8daeaade6690b8dc79d2f638ea76c4c58"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\F70OFF-natural-windows\\P2-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "16378efc4cb474be3e3b8718e284a884d7a95dd11a0b1767e62aa9ef0d0072e6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\F70OFF-natural-windows\\P2-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "2a3f821640d30f3c415065d2a34cd4a13725704e63e2f63100935ed7f563b1a4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\F70OFF-natural-windows\\after-fresh-current-LOAD9.png",
+      "bytes": 2074543,
+      "sha256": "f30f9b7ac7844952871d1d77e52e21a466551fddca856dc86594f8279e876e59"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v39-31ead13\\candidate.json",
+      "bytes": 11188,
+      "sha256": "07e53ce4a7d8441424aae4bc011e45bc8f0abb06933a5ceb4952e2319a72da7c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-policy-source-preflight-v3-actual\\source-contract.json",
+      "bytes": 10949,
+      "sha256": "0078e4236b1ddbc543662311ddf540741630529464ecf2d03558cda922c0c610"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\qualification.json",
+      "bytes": 679876,
+      "sha256": "80550a92b4cc121d81cef691a483720acd5812ddac141cb69e67ac26c0ffd9ff"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\candidate\\jump-audio\\control.jsonl",
+      "bytes": 8869355,
+      "sha256": "3e2df2c2bff7229075cb6b578754f034c4e1996b73906db6fbe7d8208f3fbe31"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-local-v39-31ead13-v1\\candidate\\jump-audio\\stderr.log",
+      "bytes": 945,
+      "sha256": "a984d226d46f7c290f1092b3c31b0f6d999500a7f44a437b07714a6ddd915101"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-policy-runtime-v2-index.json",
+      "bytes": 9187,
+      "sha256": "28e247cebe604832a00c4ca9fbade15fa7c02aca3603786bfd7e3f79a0ddb278"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-v39-F70-local-root-v1.py",
+      "bytes": 8046,
+      "sha256": "c2eddfe185bbb35dd5b7c7cba4da225cf75bfa504fbee3342d1353261f4cb385"
+    }
+  ]
+}

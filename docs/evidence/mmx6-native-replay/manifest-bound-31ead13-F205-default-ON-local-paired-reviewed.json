@@ -1,0 +1,4800 @@
+{
+  "schema": 1,
+  "kind": "root_reviewed_v39_F205_default_ON_local_and_paired_regression",
+  "reviewed_at_utc": "2026-10-25T09:22:10.298904+00:00",
+  "comparison": "F205",
+  "issue": "beads-eio.1.47",
+  "source": {
+    "contract": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-policy-source-preflight-v3-actual\\source-contract.json",
+      "bytes": 10949,
+      "sha256": "0078e4236b1ddbc543662311ddf540741630529464ecf2d03558cda922c0c610"
+    },
+    "source_root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy",
+    "checked": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\CMakeLists.txt",
+        "bytes": 35192,
+        "sha256": "907452e7dcebc65de7b731b372bce59ade5a4335b3bcb9923567409472973c01"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\docs\\COOP_DIAGNOSTICS_POLICY.md",
+        "bytes": 2688,
+        "sha256": "9bc4d39e5dd510f37acbbdb39f95dee8acd00292a78cfcc9f8241f0e2bb02339"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\docs\\COOP_RECYCLE_CONVEYOR.md",
+        "bytes": 2593,
+        "sha256": "28004d91583b4ac58ec164dbc1e9d6f09ae9aef849f76d8a32cecced120adeef"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_coop_conveyor.inc",
+        "bytes": 5553,
+        "sha256": "5e4a11ad9a4186921d9fa2aae240e2809daf4ad98ade97c4dcc0e591470e9f41"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_coop_plugin.c",
+        "bytes": 114825,
+        "sha256": "1f6dab29831e503254843c3bee7f44d72d80aecdc13f1c4c0f6cf2a02efec4b2"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_coop_snapshot.inc",
+        "bytes": 18532,
+        "sha256": "a58652faadb184881dad2a064095c3a1a5c9550acd1a34db28307f9c2f766733"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_diagnostics.cpp",
+        "bytes": 21544,
+        "sha256": "35ea093cbdc41f4b1195df1d8ff97c66e8789f40c781767eaa30555ec603945c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_diagnostics.h",
+        "bytes": 1235,
+        "sha256": "6cbd7b9f103772ac952dbad349aa4d1f8146aba9c86372d5600890cca165f9eb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_input_capture.hpp",
+        "bytes": 7898,
+        "sha256": "f3772c45665dc7fcf1fef7abf8ac798b0dacc241ed022b1ec2115ee0b9329bde"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_runtime_modes.hpp",
+        "bytes": 6151,
+        "sha256": "f073603f2f0fadfe290ed5314401ffdaf4876b1761319bbbe4cc7e760e095ff5"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\mmx6_coop_default_view_fixture.h",
+        "bytes": 904,
+        "sha256": "3627f6f0245e7f7503cf7f381329ef53d092cc0c5361468f2fcd34cf91753cca"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_diagnostics.c",
+        "bytes": 15546,
+        "sha256": "37e0e1b1ec343399626f8ec58aba12215a2c2f558c4f321da7573cfdcdc1bcdd"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_hud.c",
+        "bytes": 9797,
+        "sha256": "81602e70b492df7e05aaa97f33178eb0d9d10e466d7fec5e1b7715cd2853fa86"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_intro_target.c",
+        "bytes": 6168,
+        "sha256": "b10f8d4becda78fb54c0d11c08dcbbd7f1245b14d87cbe742978455cf274fb50"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_jump_audio.c",
+        "bytes": 27578,
+        "sha256": "d534c2337a1010aa7ca3dba1fcb4dd95871bbee68d283a566805b8963f3761cd"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_private_effects.c",
+        "bytes": 58271,
+        "sha256": "a645f08bd24acdccf116921dd1f1b641d45b35abf5b877852f4eb610cb54f1c9"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_recycle_conveyor.c",
+        "bytes": 7760,
+        "sha256": "ec5997b329653389fd307796b917ec7864f437cc9037d6e56212480fceb554c2"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_recycle_portal.c",
+        "bytes": 16468,
+        "sha256": "6dfea0432a603a713fbfc35e374d19fd9eb61da8f756f95accfe2c6506434aba"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_snapshot.c",
+        "bytes": 22682,
+        "sha256": "03c9fb019082c8a12b975eee7c972a841a875135d5947abb8bb71e7b0b9d659b"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_diagnostics_policy.cpp",
+        "bytes": 5368,
+        "sha256": "c4102f7c815d1eb7bcafa5c36ccd94ee3b8fa4fe966f9aaf9bb38eede32a2ad6"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_input_capture.cpp",
+        "bytes": 13999,
+        "sha256": "6dd08875ab5c0b87295b4d0b15f09288192674874ab0b14c4deafc79df5aaace"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_native_replay.cpp",
+        "bytes": 11271,
+        "sha256": "aaaf6b5eaf164e7a537a2a876cbcbfdbe9cf7a13b4768b328399cda3643da96c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\audit_mmx6_recycle_conveyor.py",
+        "bytes": 7400,
+        "sha256": "562a8d8124f53a021b1ff3dc10d8932211e1e0ad82da5adbd2eb734e5f8c774d"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\coop_debug.py",
+        "bytes": 12235,
+        "sha256": "61eae6837c54e191597a4829fdeb57f9b54a36229ebfd02fe60aec37b3ae1f1f"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\coop_host_profile.py",
+        "bytes": 11181,
+        "sha256": "c11d19879b6fbe2cdc464f20b5d444598fa590d6145d795bef7a1597280cf735"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\mmx6_coop_hud_inventory.py",
+        "bytes": 17683,
+        "sha256": "e503f2f99085f89fc18010f2d3e0916866d872083fb716b3a75595bd4cabdfe2"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\mmx6_coop_hud_presentation.py",
+        "bytes": 11949,
+        "sha256": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\mmx6_coop_jump_audio_pair.py",
+        "bytes": 29983,
+        "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\mmx6_input_recording.py",
+        "bytes": 13664,
+        "sha256": "a4d21aaa83c9104679d549c0f5fa81bf95106ce800b0601263faaff46ae5310a"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\mmx6_runtime_modes.py",
+        "bytes": 9053,
+        "sha256": "5c3528a21058fec3de256dcdf736b3cf6944439ee7e638ad758d5aea888b1cda"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\prepare_mmx6_coop_playtest.py",
+        "bytes": 10411,
+        "sha256": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\qualify_mmx6_coop_baseline.py",
+        "bytes": 14335,
+        "sha256": "b2e0d0195544e78ae175e9f591db33da791b4bdd2f14703d63561989e20b76f8"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\qualify_mmx6_coop_jump_audio.py",
+        "bytes": 29370,
+        "sha256": "e91dbde11541f68e554f94b747ba91c409a83322f7d4d60b26d1e3aefdf75ac9"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\qualify_mmx6_coop_pair.py",
+        "bytes": 81791,
+        "sha256": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\qualify_mmx6_coop_state.py",
+        "bytes": 53820,
+        "sha256": "a7f8e768b97789bab9ff84c0d6baea9612bafc4c6d5074da73839d4ab815dcbb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\qualify_mmx6_input_replay.py",
+        "bytes": 28273,
+        "sha256": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\test_mmx6_diagnostics_policy.py",
+        "bytes": 7222,
+        "sha256": "931646e6573e0bfc5de2df4d89cc83a2e382129c17f8f2152ff8960b980dd270"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\test_mmx6_diagnostics_policy_parser.py",
+        "bytes": 3981,
+        "sha256": "99c00ae9cb2c1ad14f05a378b8c278460ba04f871added0a18a5ef8cf0b81d4d"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\test_mmx6_input_capture.py",
+        "bytes": 7651,
+        "sha256": "374049dcd9cb967f9b1194c73a69ec659ffb530c8a0f19445b133efbf6af7d58"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\test_mmx6_recycle_conveyor.py",
+        "bytes": 8050,
+        "sha256": "533ee5bfa274febc838a1417937b5ddb323d0288fc450927c1dbdb3bd64dd48c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\test_mmx6_runtime_modes.py",
+        "bytes": 7733,
+        "sha256": "d4010f2ce58354248a4691a10921aeb87062165d5aace2decc1acb0a9e16a4cd"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_coop_plugin.c",
+        "function": "shared_camera",
+        "sha256": "f3a001dc71c3846c4056b2f0b29a3dc86e516b7d107912bf2be70ece53976703"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_coop_plugin.c",
+        "function": "mmx6_coop_diagnostics_mode",
+        "sha256": "3505b9ea89b41d80c0f607515aa27090b03dea14aeb36a9e4f874be8d984f29f"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_coop_plugin.c",
+        "function": "hud_offsets",
+        "sha256": "bc597ab3c82f6cb5e147bcc15e70f04af5092c0d5a855f88ef7db8011574773b"
+      }
+    ],
+    "scope": "Frozen diagnostic implementation/codec and actual camera/getter/HUD functions; full compiled declared-source validation remains an independent parent gate",
+    "SDK_source_root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\diagnostics-policy-sdk",
+    "SDK_checked": [
+      {
+        "relative": "runtime/include/mod_runtime.h",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\diagnostics-policy-sdk\\runtime\\include\\mod_runtime.h",
+        "bytes": 9618,
+        "sha256": "a7539f7d256d6b9f14d5a863b64fc7d0c4e9ef0e3a5589794d52ebf1a2e19d7f"
+      },
+      {
+        "relative": "runtime/src/mod_runtime.cpp",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\diagnostics-policy-sdk\\runtime\\src\\mod_runtime.cpp",
+        "bytes": 148238,
+        "sha256": "48cd00014182ca1eada40a8bfa12e9e3d0ece353cd0cd528675192ffed6274c7"
+      },
+      {
+        "relative": "runtime/src/psx_netplay.c",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\diagnostics-policy-sdk\\runtime\\src\\psx_netplay.c",
+        "bytes": 229730,
+        "sha256": "7f99ddbde9f5cf6981fbbc976da801eba535105da425e4ecda0f968a541189bf"
+      }
+    ],
+    "policy_semantic_review": {
+      "Capture_sidecar_and_getter_unchanged": true,
+      "whole_CPP_except_begin_identical": true,
+      "ON_admission_replay_card_identity_worker_suffix_identical_except_reused_actual_coop_boolean": true,
+      "explicit_OFF_before_Startup_card_export_Capture": true,
+      "requested_policy_distinct_from_actual_activation": true,
+      "scope": "Only requested startup policy/schema-epoch guard/numeric witness; default ON capture implementation unchanged. Runtime regression still required.",
+      "capture_fixture_typed_policy_provider_only": true,
+      "capture_fixture_default_requested_ON_independent_of_actual_activation": true,
+      "capture_fixture_original_test_body_identical": true,
+      "runtime_delta_only_once_startup_stderr_fflush": true,
+      "runtime_policy_Capture_sidecar_getter_other_bytes_identical": true,
+      "actual_TU_fully_buffered_live_file_visibility_fixture": true,
+      "fixture_parent_retains_before_release_bytes_and_releases_child_in_finally": true
+    }
+  },
+  "compiled_SDK": {
+    "manifest": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v39-recording-policy-debug\\psx_build_manifest\\psx-runtime\\Release\\manifest.json",
+      "bytes": 162949,
+      "sha256": "bff0397d76a7df9ad760ebc90f89b781d09d7e0e8f4c3a3bdff522758ff64382"
+    },
+    "SDK_actual_declared_inputs_checked": 3
+  },
+  "candidate": {
+    "proof": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v39-31ead13\\candidate.json",
+      "bytes": 11188,
+      "sha256": "07e53ce4a7d8441424aae4bc011e45bc8f0abb06933a5ceb4952e2319a72da7c"
+    },
+    "image_sha256": "0b37b827e0724cceb1489db5254798fc04e9f994983587e063e4bfbc0a40d07a",
+    "manifest_sha256": "ef118714f0cfa18d91d5d0d8c7f82c6623bde664dd60d0edac26d2955f90ac47",
+    "candidate_source": "31ead13360e52c8e0b57d26012ec3eef3acea648",
+    "sdk": "9fd4adb78e9197a0bd3764d8a54e80d12df5c733"
+  },
+  "local": "passed",
+  "netplay": "passed",
+  "aggregate": "passed",
+  "ledger_pass_count_added": 0,
+  "independent_stream_and_history_summaries": [
+    {
+      "native": {
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "0b37b827e0724cceb1489db5254798fc04e9f994983587e063e4bfbc0a40d07a",
+          "manifest_sha256": "ef118714f0cfa18d91d5d0d8c7f82c6623bde664dd60d0edac26d2955f90ac47",
+          "mode": "offline",
+          "profile": null,
+          "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+          "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+        },
+        "events": 6547,
+        "natives": 4532,
+        "p2_reads": 2015,
+        "stream_sha256": "c9bb4d99ef575840abf4ab41e9c12d416b64b2aa0ca0a5b4fe745fcdf0c0d0e5",
+        "failure": null
+      },
+      "modes": {
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "0b37b827e0724cceb1489db5254798fc04e9f994983587e063e4bfbc0a40d07a",
+          "manifest_sha256": "ef118714f0cfa18d91d5d0d8c7f82c6623bde664dd60d0edac26d2955f90ac47",
+          "mode": "offline",
+          "profile": null,
+          "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+          "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+        },
+        "epoch": 1,
+        "events": 19,
+        "stream_sha256": "0214daff9b1828f22819d0e0e187ddbce642038ec2ffac81863aee34f224848b",
+        "native_stream_sha256": "c9bb4d99ef575840abf4ab41e9c12d416b64b2aa0ca0a5b4fe745fcdf0c0d0e5",
+        "unavailable_projection_samples": 219,
+        "failure": null,
+        "first_native": 0,
+        "last_native": 4460
+      },
+      "history": {
+        "first_actual_before_ready": {
+          "consumer": null,
+          "cycles": 206068119,
+          "frame": 0,
+          "input_order": 0,
+          "native": 0,
+          "order": 0,
+          "sample_source": "native-decoder",
+          "sim_tick": null,
+          "state": {
+            "co_op": {
+              "camera_policy": "native-primary",
+              "enrolled": 0,
+              "failed": 0,
+              "hud_x": 0,
+              "hud_y": 104,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "ready": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "view_x_margin": 0
+            },
+            "co_op_plugin_active": 1,
+            "native_mode": 0,
+            "native_phase": 0,
+            "primary_character": 0
+          },
+          "type": "mode"
+        },
+        "ordered_phase_matches": [
+          {
+            "label": "actual ready gameplay",
+            "order": 12,
+            "input_order": 5702,
+            "native": 4040,
+            "cycles": 1431011601,
+            "sample_source": "native-decoder",
+            "consumer": null,
+            "state": {
+              "co_op": {
+                "camera_policy": "shared-midpoint",
+                "enrolled": 1,
+                "failed": 0,
+                "hud_x": 0,
+                "hud_y": 104,
+                "lifecycle": [
+                  0,
+                  0
+                ],
+                "pause_owner": 0,
+                "ready": 1,
+                "scene_owner": 0,
+                "scene_phase": 0,
+                "view_x_margin": 0
+              },
+              "co_op_plugin_active": 1,
+              "native_mode": 10,
+              "native_phase": 0,
+              "primary_character": 0
+            }
+          },
+          {
+            "label": "P1 actual owned pause",
+            "order": 13,
+            "input_order": 5877,
+            "native": 4128,
+            "cycles": 1455848661,
+            "sample_source": "native-decoder",
+            "consumer": null,
+            "state": {
+              "co_op": {
+                "camera_policy": "shared-midpoint",
+                "enrolled": 1,
+                "failed": 0,
+                "hud_x": 0,
+                "hud_y": 104,
+                "lifecycle": [
+                  0,
+                  0
+                ],
+                "pause_owner": 1,
+                "ready": 1,
+                "scene_owner": 0,
+                "scene_phase": 0,
+                "view_x_margin": 0
+              },
+              "co_op_plugin_active": 1,
+              "native_mode": 10,
+              "native_phase": 2,
+              "primary_character": 0
+            }
+          },
+          {
+            "label": "P1 actual native resume",
+            "order": 15,
+            "input_order": 6092,
+            "native": 4270,
+            "cycles": 1495927001,
+            "sample_source": "native-decoder",
+            "consumer": null,
+            "state": {
+              "co_op": {
+                "camera_policy": "shared-midpoint",
+                "enrolled": 1,
+                "failed": 0,
+                "hud_x": 0,
+                "hud_y": 104,
+                "lifecycle": [
+                  0,
+                  0
+                ],
+                "pause_owner": 0,
+                "ready": 1,
+                "scene_owner": 0,
+                "scene_phase": 0,
+                "view_x_margin": 0
+              },
+              "co_op_plugin_active": 1,
+              "native_mode": 10,
+              "native_phase": 0,
+              "primary_character": 0
+            }
+          },
+          {
+            "label": "P2 actual owned pause",
+            "order": 16,
+            "input_order": 6195,
+            "native": 4322,
+            "cycles": 1510603501,
+            "sample_source": "native-decoder",
+            "consumer": null,
+            "state": {
+              "co_op": {
+                "camera_policy": "shared-midpoint",
+                "enrolled": 1,
+                "failed": 0,
+                "hud_x": 0,
+                "hud_y": 104,
+                "lifecycle": [
+                  0,
+                  0
+                ],
+                "pause_owner": 2,
+                "ready": 1,
+                "scene_owner": 0,
+                "scene_phase": 0,
+                "view_x_margin": 0
+              },
+              "co_op_plugin_active": 1,
+              "native_mode": 10,
+              "native_phase": 2,
+              "primary_character": 0
+            }
+          },
+          {
+            "label": "P2 actual native resume",
+            "order": 18,
+            "input_order": 6403,
+            "native": 4460,
+            "cycles": 1549552409,
+            "sample_source": "native-decoder",
+            "consumer": null,
+            "state": {
+              "co_op": {
+                "camera_policy": "shared-midpoint",
+                "enrolled": 1,
+                "failed": 0,
+                "hud_x": 0,
+                "hud_y": 104,
+                "lifecycle": [
+                  0,
+                  0
+                ],
+                "pause_owner": 0,
+                "ready": 1,
+                "scene_owner": 0,
+                "scene_phase": 0,
+                "view_x_margin": 0
+              },
+              "co_op_plugin_active": 1,
+              "native_mode": 10,
+              "native_phase": 0,
+              "primary_character": 0
+            }
+          }
+        ],
+        "checks": {
+          "actual_first_state_precedes_ready": true,
+          "both_live_owned_pause_resume_tuples_in_order": true,
+          "actual_committed_roster_camera_HUD_native_aspect": true
+        },
+        "limits": "Ordered actual sidecar tuples correspond to independent natural live windows; no atomic RPC/frame identity or unexercised transition claim"
+      },
+      "actual_committed_plan": {
+        "committed_fingerprint": "c5ee85351ac27c40c88f8cbe3eb9f7c944e0495176e57db3a9b869cbb06113d2",
+        "derived_discs": [],
+        "overlays": [],
+        "packages": [
+          {
+            "id": "mmx6.diagnostics",
+            "version": "1.0.0"
+          },
+          {
+            "id": "mmx6.enhancement.seamless-loading",
+            "version": "0.1.0"
+          },
+          {
+            "id": "mmx6.local-coop",
+            "version": "0.0.1"
+          }
+        ],
+        "plugins": [
+          {
+            "feature": "input-recording",
+            "id": "mmx6.diagnostics",
+            "input": 0,
+            "local_view": 0,
+            "package": "mmx6.diagnostics"
+          },
+          {
+            "feature": "seamless-loading",
+            "id": "mmx6.seamless",
+            "input": 0,
+            "local_view": 0,
+            "package": "mmx6.enhancement.seamless-loading"
+          },
+          {
+            "feature": "prototype",
+            "id": "mmx6.local-coop.prototype",
+            "input": 0,
+            "local_view": 0,
+            "package": "mmx6.local-coop"
+          }
+        ],
+        "resources": [],
+        "schema": 1,
+        "selections": [
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 1,
+                "has_enabled": 1,
+                "id": "prototype",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.local-coop",
+            "values": {},
+            "version": "0.0.1"
+          }
+        ],
+        "session_fingerprint": "",
+        "writes": []
+      },
+      "effective_startup_video": {
+        "aa": 1,
+        "accurate_blending": 1,
+        "active_renderer": 1,
+        "adaptive_max_den": 9,
+        "adaptive_max_num": 16,
+        "adaptive_view": 0,
+        "anisotropy": 1,
+        "aspect_den": 3,
+        "aspect_num": 4,
+        "dynamic_resolution": 0,
+        "dynamic_resolution_active": 0,
+        "dynamic_resolution_env": -1,
+        "dynamic_resolution_min": 720,
+        "dynamic_resolution_min_env": 0,
+        "fmv_chroma": 0,
+        "fmv_filter": 0,
+        "fov_scale": "0x1p+0",
+        "frame_generation": 0,
+        "frame_generation_method": 0,
+        "frame_interpolation": 0,
+        "frame_interpolation_blend": 0,
+        "frame_interpolation_fps": 0,
+        "frame_interpolation_source": 0,
+        "frame_period_ms": "0x1.0aef006d56045p+4",
+        "geometry_correction": 0,
+        "guest_frame_period_ms": "0x1.0aef006d56045p+4",
+        "host_presentation_scope": "observed presentation preferences; wall-clock/display/audio-device behavior is not replayed",
+        "internal_resolution_effective": 0,
+        "internal_resolution_env": 0,
+        "internal_resolution_mod_request": 0,
+        "internal_resolution_preference": 0,
+        "mod_texture_filter": -1,
+        "native_wide": 1,
+        "perspective_texturing": 0,
+        "pgxp_active": 0,
+        "pgxp_color_correction": 0,
+        "pgxp_cpu": 0,
+        "pgxp_cpu_effective": 0,
+        "pgxp_depth_buffer": 0,
+        "pgxp_depth_threshold": "0x1p+12",
+        "pgxp_mod_only": 0,
+        "pgxp_position_fallback": 1,
+        "pgxp_preserve_projection": 0,
+        "pgxp_seam": 0,
+        "pgxp_tolerance": "0x1p-1",
+        "pgxp_tolerance_effective": "0x1p-1",
+        "post_aa": 0,
+        "present_thread": 0,
+        "present_thread_slots": 3,
+        "projection_den": 3,
+        "projection_mode": -1,
+        "projection_num": 4,
+        "reference_lines": 240,
+        "render_thread": 0,
+        "render_thread_frames": 2,
+        "renderer_preference": 1,
+        "requested_scale": 1,
+        "retained_banks": 1,
+        "scale": 1,
+        "scale_applies": 1,
+        "scanline_strength": "0x1p-1",
+        "scanlines": 0,
+        "supersample_milli": 1000,
+        "texture_filter": 0,
+        "texture_lod": 0,
+        "vsync": 1
+      },
+      "profile": null
+    },
+    {
+      "native": {
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "0b37b827e0724cceb1489db5254798fc04e9f994983587e063e4bfbc0a40d07a",
+          "manifest_sha256": "ef118714f0cfa18d91d5d0d8c7f82c6623bde664dd60d0edac26d2955f90ac47",
+          "mode": "netplay",
+          "profile": {
+            "id": "mmx6.win64-clang22.loopback",
+            "revision": 2,
+            "selected_sha256": "f078c438177ce5a511fd65206cf19604e98dc19f36ac431a42e5271d1814ce88"
+          },
+          "settings_sha256": "678ea0742d375e120ec86c29053b60d74181951ceb43831bbca670a5875771e6",
+          "simulation_contract_sha256": "a2d563a9c49c5a8135c801894e26381f930f1d43048d7a0dd923ae4fb1e60406"
+        },
+        "events": 9402,
+        "natives": 4086,
+        "p2_reads": 5316,
+        "stream_sha256": "912d2b330a0b8ab2803dccd4cf1342cfe60f452dccac20fcc19527a5f9be08f6",
+        "failure": null
+      },
+      "modes": {
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "0b37b827e0724cceb1489db5254798fc04e9f994983587e063e4bfbc0a40d07a",
+          "manifest_sha256": "ef118714f0cfa18d91d5d0d8c7f82c6623bde664dd60d0edac26d2955f90ac47",
+          "mode": "netplay",
+          "profile": {
+            "id": "mmx6.win64-clang22.loopback",
+            "revision": 2,
+            "selected_sha256": "f078c438177ce5a511fd65206cf19604e98dc19f36ac431a42e5271d1814ce88"
+          },
+          "settings_sha256": "678ea0742d375e120ec86c29053b60d74181951ceb43831bbca670a5875771e6",
+          "simulation_contract_sha256": "a2d563a9c49c5a8135c801894e26381f930f1d43048d7a0dd923ae4fb1e60406"
+        },
+        "epoch": 1,
+        "events": 19,
+        "stream_sha256": "c31e4a3b95f59a6a760eae63b33cf30f7a58447ab967c3c01a0881e9d6859a09",
+        "native_stream_sha256": "912d2b330a0b8ab2803dccd4cf1342cfe60f452dccac20fcc19527a5f9be08f6",
+        "unavailable_projection_samples": 1800,
+        "failure": null,
+        "first_native": 0,
+        "last_native": 3548
+      },
+      "history": {
+        "first_actual_before_ready": {
+          "consumer": null,
+          "cycles": 206068177,
+          "frame": 0,
+          "input_order": 0,
+          "native": 0,
+          "order": 0,
+          "sample_source": "native-decoder",
+          "sim_tick": 365,
+          "state": {
+            "co_op": {
+              "camera_policy": "native-primary",
+              "enrolled": 0,
+              "failed": 0,
+              "hud_x": 0,
+              "hud_y": 104,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "ready": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "view_x_margin": 0
+            },
+            "co_op_plugin_active": 1,
+            "native_mode": 0,
+            "native_phase": 0,
+            "primary_character": 0
+          },
+          "type": "mode"
+        },
+        "ordered_phase_matches": [
+          {
+            "label": "actual ready gameplay",
+            "order": 12,
+            "input_order": 4034,
+            "native": 2246,
+            "cycles": 1587372632,
+            "sample_source": "native-decoder",
+            "consumer": null,
+            "state": {
+              "co_op": {
+                "camera_policy": "shared-midpoint",
+                "enrolled": 1,
+                "failed": 0,
+                "hud_x": 0,
+                "hud_y": 104,
+                "lifecycle": [
+                  0,
+                  0
+                ],
+                "pause_owner": 0,
+                "ready": 1,
+                "scene_owner": 0,
+                "scene_phase": 0,
+                "view_x_margin": 0
+              },
+              "co_op_plugin_active": 1,
+              "native_mode": 10,
+              "native_phase": 0,
+              "primary_character": 0
+            }
+          },
+          {
+            "label": "P1 actual owned pause",
+            "order": 13,
+            "input_order": 6634,
+            "native": 3113,
+            "cycles": 2076777035,
+            "sample_source": "native-decoder",
+            "consumer": null,
+            "state": {
+              "co_op": {
+                "camera_policy": "shared-midpoint",
+                "enrolled": 1,
+                "failed": 0,
+                "hud_x": 0,
+                "hud_y": 104,
+                "lifecycle": [
+                  0,
+                  0
+                ],
+                "pause_owner": 1,
+                "ready": 1,
+                "scene_owner": 0,
+                "scene_phase": 0,
+                "view_x_margin": 0
+              },
+              "co_op_plugin_active": 1,
+              "native_mode": 10,
+              "native_phase": 2,
+              "primary_character": 0
+            }
+          },
+          {
+            "label": "P1 actual native resume",
+            "order": 15,
+            "input_order": 6790,
+            "native": 3190,
+            "cycles": 2120241754,
+            "sample_source": "native-decoder",
+            "consumer": null,
+            "state": {
+              "co_op": {
+                "camera_policy": "shared-midpoint",
+                "enrolled": 1,
+                "failed": 0,
+                "hud_x": 0,
+                "hud_y": 104,
+                "lifecycle": [
+                  0,
+                  0
+                ],
+                "pause_owner": 0,
+                "ready": 1,
+                "scene_owner": 0,
+                "scene_phase": 0,
+                "view_x_margin": 0
+              },
+              "co_op_plugin_active": 1,
+              "native_mode": 10,
+              "native_phase": 0,
+              "primary_character": 0
+            }
+          },
+          {
+            "label": "P2 actual owned pause",
+            "order": 16,
+            "input_order": 7635,
+            "native": 3472,
+            "cycles": 2279425445,
+            "sample_source": "native-decoder",
+            "consumer": null,
+            "state": {
+              "co_op": {
+                "camera_policy": "shared-midpoint",
+                "enrolled": 1,
+                "failed": 0,
+                "hud_x": 0,
+                "hud_y": 104,
+                "lifecycle": [
+                  0,
+                  0
+                ],
+                "pause_owner": 2,
+                "ready": 1,
+                "scene_owner": 0,
+                "scene_phase": 0,
+                "view_x_margin": 0
+              },
+              "co_op_plugin_active": 1,
+              "native_mode": 10,
+              "native_phase": 2,
+              "primary_character": 0
+            }
+          },
+          {
+            "label": "P2 actual native resume",
+            "order": 18,
+            "input_order": 7788,
+            "native": 3548,
+            "cycles": 2322325854,
+            "sample_source": "native-decoder",
+            "consumer": null,
+            "state": {
+              "co_op": {
+                "camera_policy": "shared-midpoint",
+                "enrolled": 1,
+                "failed": 0,
+                "hud_x": 0,
+                "hud_y": 104,
+                "lifecycle": [
+                  0,
+                  0
+                ],
+                "pause_owner": 0,
+                "ready": 1,
+                "scene_owner": 0,
+                "scene_phase": 0,
+                "view_x_margin": 0
+              },
+              "co_op_plugin_active": 1,
+              "native_mode": 10,
+              "native_phase": 0,
+              "primary_character": 0
+            }
+          }
+        ],
+        "checks": {
+          "actual_first_state_precedes_ready": true,
+          "both_live_owned_pause_resume_tuples_in_order": true,
+          "actual_committed_roster_camera_HUD_native_aspect": true
+        },
+        "limits": "Ordered actual sidecar tuples correspond to independent natural live windows; no atomic RPC/frame identity or unexercised transition claim"
+      },
+      "actual_committed_plan": {
+        "committed_fingerprint": "75ad9a1e5e766a97ca435d1198e5d765e3427adedae99c1d53ccbef9eaa5dcaf",
+        "derived_discs": [],
+        "overlays": [],
+        "packages": [
+          {
+            "id": "mmx6.enhancement.seamless-loading",
+            "version": "0.1.0"
+          }
+        ],
+        "plugins": [
+          {
+            "feature": "seamless-loading",
+            "id": "mmx6.seamless",
+            "input": 0,
+            "local_view": 0,
+            "package": "mmx6.enhancement.seamless-loading"
+          },
+          {
+            "feature": "",
+            "id": "mmx6.local-coop.prototype",
+            "input": 0,
+            "local_view": 0,
+            "package": ""
+          }
+        ],
+        "resources": [],
+        "schema": 1,
+        "selections": [
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "input-recording",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.diagnostics",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "frame-interpolation",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.enhancement.frame-interpolation",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 1,
+                "has_enabled": 1,
+                "id": "seamless-loading",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.enhancement.seamless-loading",
+            "values": {},
+            "version": "0.1.0"
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "widescreen",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.enhancement.widescreen",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "prototype",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.local-coop",
+            "values": {},
+            "version": "0.0.1"
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "yammark_reduce_idle_time",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.boss-attacks",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "continuous_dash_speed_hyper",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "continuous_dash_speed_normal",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.continuous-dash",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "boss_health_by_level",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "gate_orb_explosion_damage",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "gate_vulnerable_to_normal_attacks",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.damage-rules",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "black_zero_rank_unlock",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "gate_revealed_refight_souls",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "gate_revealed_souls",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normalize_unarmored_x_defense",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normalize_zero_defense",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "ultimate_armor_rank_unlock",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.general-foundations",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "voice_boss_intros",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "voice_boss_warning",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "voice_low_health",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "voice_title",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.hooks",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "settings_menu_options",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.ingame-options",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "blade_mach_dash_behavior",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.mach-dash",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "air_moves_after_dash_jump",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "allow_xtreme_item_drops",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "alternate_default_controls",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "always_drop_nightmare_orbs",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "amazon_area_extended_ceiling",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "blade_mach_dash_unlimited_repetitions",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "boss_level_rank_a",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "boss_level_rank_b",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "boss_level_rank_c",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "boss_level_rank_d",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "boss_level_rank_ga",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "boss_level_rank_pa",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "boss_level_rank_sa",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "boss_level_rank_uh",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_double_tap_dash",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_falcon_jump_air_dash",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_limited_parts_rank_ga",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_limited_parts_rank_pa",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_limited_parts_rank_uh",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_nightmare_bug",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_nightmare_cube",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_nightmare_dark",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_nightmare_fire",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_nightmare_ice",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_nightmare_iron",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_nightmare_mirror",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_nightmare_rain",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_pickup_extra_lives",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_rescue_extra_lives",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_rescue_health_refill",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_title_demos",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_x_saber_cancelling",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "dynamo_green_orb_value",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "enable_limited_parts_rank_a",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "enable_limited_parts_rank_b",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "enable_limited_parts_rank_c",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "enable_limited_parts_rank_d",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "enable_limited_parts_rank_sa",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "ex_tank_starting_lives",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "exit_stage_availability",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "faster_cutscene_text",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "higher_ceiling_jump",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "hyper_air_dash_duration",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "hyper_dash_initial_speed_bonus",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "hyper_ground_dash_duration",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "indestructible_yammark_orbs",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "infinite_lives_no_continues",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "loading_logo",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "main_boss_green_orb_value",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "main_boss_red_orb_value",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "mute_navigator_alerts",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "new_game_starting_lives",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_air_dash_duration",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_ground_dash_duration",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_initial_dash_speed",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_part_slots_rank_a",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_part_slots_rank_b",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_part_slots_rank_c",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_part_slots_rank_d",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_part_slots_rank_ga",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_part_slots_rank_pa",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_part_slots_rank_sa",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_part_slots_rank_uh",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_starting_lives",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "prevent_nightmare_orb_reversion",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "rank_soul_thresholds",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "recycle_lab_ceiling_extension",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "reploid_small_orb_value",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "reploid_status_infected_by_nightmare",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "reploid_status_infected_killed_by_player",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "reploid_status_infected_lost_offscreen",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "reploid_status_rescued_by_player",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "restore_x_charged_shot_voice",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "restore_zero_giga_attack_voice",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "retranslation",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "secret_lab_1_spikes",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "secret_lab_2_platform",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "shadow_saber_cancellable",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "skip_capcom_video",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "skip_opening_video",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "title_screen",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "unlimited_air_moves",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "unlimited_dash_duration",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "unlimited_high_jump",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "unlock_x_hover",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "virus_big_orb_value",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "virus_small_orb_value",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "wolfang_contact_damage",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "wolfang_debris_all_difficulties",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "wolfang_ice_block_damage",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "wolfang_ice_debris_damage",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "wolfang_ice_spike_damage",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "wolfang_ice_spikes_all_levels",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "wolfang_indestructible_ice_blocks",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "wolfang_indestructible_ice_spikes",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "x_hover_mode",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "yammark_contact_damage",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "yammark_firefly_damage",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "yammark_firefly_resistance",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "yammark_green_orb_damage",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "yammark_speed_orbs_easy_normal",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "yammark_speed_orbs_xtreme",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "yammark_xtreme_behavior",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.native",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "available_black_zero",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "available_blade_armor",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "available_shadow_armor",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "available_ultimate_armor",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "available_zero",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "found_reploid_mark_status",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "heart_tank_1",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "heart_tank_2",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "heart_tank_3",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "heart_tank_4",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "heart_tank_5",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "heart_tank_6",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "heart_tank_7",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "heart_tank_8",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "intro_stage_armor",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "mark_no_item_reploids",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "mark_reploids_only",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_buster_plus",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_d_barrier",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_d_converter",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_energy_saver",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_hyper_dash",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_hyperdrive",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_jumper",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_life_recover",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_master_saber",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_over_drive",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_power_drive",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_quick_charge",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_rapid_5",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_saber_extend",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_saber_plus",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_shock_buffer",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_shot_eraser",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_speed_shot",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_speedster",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_super_recover",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_ultimate_buster",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_weapon_driver",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_weapon_plus",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_weapon_recover",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_energy_up_1",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_energy_up_2",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_energy_up_3",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_energy_up_4",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_energy_up_5",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_energy_up_6",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_energy_up_7",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_energy_up_8",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_life_up_1",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_life_up_2",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_life_up_3",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_life_up_4",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_life_up_5",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_life_up_6",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_life_up_7",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_life_up_8",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "randomize_reploid_parts",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "sub_tank_1",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "sub_tank_2",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "sub_tank_3",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "sub_tank_4",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "x_energy_upgrades",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "x_life_upgrades",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "x_starting_rank",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "zero_energy_upgrades",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "zero_life_upgrades",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "zero_starting_rank",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.new-game",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_zero_weapon_autoselect",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "guard_shell_bug_fix",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "unlock_x_air_dash",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.player-standalone",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "falling_ceiling_behavior",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "move_recycle_lab_hidden_teleport",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.stage-modes",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "maximum_lives",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "nightmare_dark_opacity",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "shadow_saber_timing",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "x_saber_timing",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "zero_saber_cooldown_timing",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "zero_z_buster_timing",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.timing",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "zero_techniques",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.zero-techniques",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "8mb-ram",
+                "values": {}
+              }
+            ],
+            "package": "psx.enhancement.8mb-ram",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "pgxp",
+                "values": {}
+              }
+            ],
+            "package": "psx.enhancement.pgxp",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "bezel",
+                "values": {}
+              }
+            ],
+            "package": "psx.presentation.bezel",
+            "values": {},
+            "version": ""
+          }
+        ],
+        "session_fingerprint": "7de9fc61d6b1f08c83f4f52622bd63bdba46569c007ee4581298b4de54dacb3c",
+        "writes": []
+      },
+      "effective_startup_video": {
+        "aa": 1,
+        "accurate_blending": 1,
+        "active_renderer": 1,
+        "adaptive_max_den": 9,
+        "adaptive_max_num": 16,
+        "adaptive_view": 0,
+        "anisotropy": 1,
+        "aspect_den": 3,
+        "aspect_num": 4,
+        "dynamic_resolution": 0,
+        "dynamic_resolution_active": 0,
+        "dynamic_resolution_env": -1,
+        "dynamic_resolution_min": 720,
+        "dynamic_resolution_min_env": 0,
+        "fmv_chroma": 0,
+        "fmv_filter": 0,
+        "fov_scale": "0x1p+0",
+        "frame_generation": 0,
+        "frame_generation_method": 0,
+        "frame_interpolation": 0,
+        "frame_interpolation_blend": 0,
+        "frame_interpolation_fps": 0,
+        "frame_interpolation_source": 0,
+        "frame_period_ms": "0x1.0aef006d56045p+4",
+        "geometry_correction": 0,
+        "guest_frame_period_ms": "0x1.0aef006d56045p+4",
+        "host_presentation_scope": "observed presentation preferences; wall-clock/display/audio-device behavior is not replayed",
+        "internal_resolution_effective": 0,
+        "internal_resolution_env": 0,
+        "internal_resolution_mod_request": 0,
+        "internal_resolution_preference": 0,
+        "mod_texture_filter": -1,
+        "native_wide": 1,
+        "perspective_texturing": 0,
+        "pgxp_active": 0,
+        "pgxp_color_correction": 0,
+        "pgxp_cpu": 0,
+        "pgxp_cpu_effective": 0,
+        "pgxp_depth_buffer": 0,
+        "pgxp_depth_threshold": "0x1p+12",
+        "pgxp_mod_only": 0,
+        "pgxp_position_fallback": 1,
+        "pgxp_preserve_projection": 0,
+        "pgxp_seam": 0,
+        "pgxp_tolerance": "0x1p-1",
+        "pgxp_tolerance_effective": "0x1p-1",
+        "post_aa": 0,
+        "present_thread": 0,
+        "present_thread_slots": 3,
+        "projection_den": 3,
+        "projection_mode": -1,
+        "projection_num": 4,
+        "reference_lines": 240,
+        "render_thread": 0,
+        "render_thread_frames": 2,
+        "renderer_preference": 1,
+        "requested_scale": 1,
+        "retained_banks": 1,
+        "scale": 1,
+        "scale_applies": 1,
+        "scanline_strength": "0x1p-1",
+        "scanlines": 0,
+        "supersample_milli": 1000,
+        "texture_filter": 0,
+        "texture_lod": 0,
+        "vsync": 1
+      },
+      "profile": {
+        "id": "mmx6.win64-clang22.loopback",
+        "revision": 2,
+        "selected_sha256": "f078c438177ce5a511fd65206cf19604e98dc19f36ac431a42e5271d1814ce88"
+      }
+    },
+    {
+      "native": {
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "0b37b827e0724cceb1489db5254798fc04e9f994983587e063e4bfbc0a40d07a",
+          "manifest_sha256": "ef118714f0cfa18d91d5d0d8c7f82c6623bde664dd60d0edac26d2955f90ac47",
+          "mode": "netplay",
+          "profile": {
+            "id": "mmx6.win64-clang22.loopback",
+            "revision": 2,
+            "selected_sha256": "f078c438177ce5a511fd65206cf19604e98dc19f36ac431a42e5271d1814ce88"
+          },
+          "settings_sha256": "8675b5fc560c2a45be3bb48e46e7b3e21c76f071a18c8809038a7e664fd28605",
+          "simulation_contract_sha256": "a2d563a9c49c5a8135c801894e26381f930f1d43048d7a0dd923ae4fb1e60406"
+        },
+        "events": 9408,
+        "natives": 4088,
+        "p2_reads": 5320,
+        "stream_sha256": "d3bc9f92a278e60ebbfe858c2b0d732fd1fedeb85fd7b9bf44e557cd65a46dbb",
+        "failure": null
+      },
+      "modes": {
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "0b37b827e0724cceb1489db5254798fc04e9f994983587e063e4bfbc0a40d07a",
+          "manifest_sha256": "ef118714f0cfa18d91d5d0d8c7f82c6623bde664dd60d0edac26d2955f90ac47",
+          "mode": "netplay",
+          "profile": {
+            "id": "mmx6.win64-clang22.loopback",
+            "revision": 2,
+            "selected_sha256": "f078c438177ce5a511fd65206cf19604e98dc19f36ac431a42e5271d1814ce88"
+          },
+          "settings_sha256": "8675b5fc560c2a45be3bb48e46e7b3e21c76f071a18c8809038a7e664fd28605",
+          "simulation_contract_sha256": "a2d563a9c49c5a8135c801894e26381f930f1d43048d7a0dd923ae4fb1e60406"
+        },
+        "epoch": 1,
+        "events": 19,
+        "stream_sha256": "74008f70cb2c75ac0827471ebea585bea340fc4ed8cc5bf668182462575cec5c",
+        "native_stream_sha256": "d3bc9f92a278e60ebbfe858c2b0d732fd1fedeb85fd7b9bf44e557cd65a46dbb",
+        "unavailable_projection_samples": 1802,
+        "failure": null,
+        "first_native": 0,
+        "last_native": 3548
+      },
+      "history": {
+        "first_actual_before_ready": {
+          "consumer": null,
+          "cycles": 206068177,
+          "frame": 0,
+          "input_order": 0,
+          "native": 0,
+          "order": 0,
+          "sample_source": "native-decoder",
+          "sim_tick": 365,
+          "state": {
+            "co_op": {
+              "camera_policy": "native-primary",
+              "enrolled": 0,
+              "failed": 0,
+              "hud_x": 0,
+              "hud_y": 104,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "ready": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "view_x_margin": 0
+            },
+            "co_op_plugin_active": 1,
+            "native_mode": 0,
+            "native_phase": 0,
+            "primary_character": 0
+          },
+          "type": "mode"
+        },
+        "ordered_phase_matches": [
+          {
+            "label": "actual ready gameplay",
+            "order": 12,
+            "input_order": 4034,
+            "native": 2246,
+            "cycles": 1587372632,
+            "sample_source": "native-decoder",
+            "consumer": null,
+            "state": {
+              "co_op": {
+                "camera_policy": "shared-midpoint",
+                "enrolled": 1,
+                "failed": 0,
+                "hud_x": 0,
+                "hud_y": 104,
+                "lifecycle": [
+                  0,
+                  0
+                ],
+                "pause_owner": 0,
+                "ready": 1,
+                "scene_owner": 0,
+                "scene_phase": 0,
+                "view_x_margin": 0
+              },
+              "co_op_plugin_active": 1,
+              "native_mode": 10,
+              "native_phase": 0,
+              "primary_character": 0
+            }
+          },
+          {
+            "label": "P1 actual owned pause",
+            "order": 13,
+            "input_order": 6634,
+            "native": 3113,
+            "cycles": 2076777035,
+            "sample_source": "native-decoder",
+            "consumer": null,
+            "state": {
+              "co_op": {
+                "camera_policy": "shared-midpoint",
+                "enrolled": 1,
+                "failed": 0,
+                "hud_x": 0,
+                "hud_y": 104,
+                "lifecycle": [
+                  0,
+                  0
+                ],
+                "pause_owner": 1,
+                "ready": 1,
+                "scene_owner": 0,
+                "scene_phase": 0,
+                "view_x_margin": 0
+              },
+              "co_op_plugin_active": 1,
+              "native_mode": 10,
+              "native_phase": 2,
+              "primary_character": 0
+            }
+          },
+          {
+            "label": "P1 actual native resume",
+            "order": 15,
+            "input_order": 6790,
+            "native": 3190,
+            "cycles": 2120241754,
+            "sample_source": "native-decoder",
+            "consumer": null,
+            "state": {
+              "co_op": {
+                "camera_policy": "shared-midpoint",
+                "enrolled": 1,
+                "failed": 0,
+                "hud_x": 0,
+                "hud_y": 104,
+                "lifecycle": [
+                  0,
+                  0
+                ],
+                "pause_owner": 0,
+                "ready": 1,
+                "scene_owner": 0,
+                "scene_phase": 0,
+                "view_x_margin": 0
+              },
+              "co_op_plugin_active": 1,
+              "native_mode": 10,
+              "native_phase": 0,
+              "primary_character": 0
+            }
+          },
+          {
+            "label": "P2 actual owned pause",
+            "order": 16,
+            "input_order": 7635,
+            "native": 3472,
+            "cycles": 2279425445,
+            "sample_source": "native-decoder",
+            "consumer": null,
+            "state": {
+              "co_op": {
+                "camera_policy": "shared-midpoint",
+                "enrolled": 1,
+                "failed": 0,
+                "hud_x": 0,
+                "hud_y": 104,
+                "lifecycle": [
+                  0,
+                  0
+                ],
+                "pause_owner": 2,
+                "ready": 1,
+                "scene_owner": 0,
+                "scene_phase": 0,
+                "view_x_margin": 0
+              },
+              "co_op_plugin_active": 1,
+              "native_mode": 10,
+              "native_phase": 2,
+              "primary_character": 0
+            }
+          },
+          {
+            "label": "P2 actual native resume",
+            "order": 18,
+            "input_order": 7788,
+            "native": 3548,
+            "cycles": 2322325854,
+            "sample_source": "native-decoder",
+            "consumer": null,
+            "state": {
+              "co_op": {
+                "camera_policy": "shared-midpoint",
+                "enrolled": 1,
+                "failed": 0,
+                "hud_x": 0,
+                "hud_y": 104,
+                "lifecycle": [
+                  0,
+                  0
+                ],
+                "pause_owner": 0,
+                "ready": 1,
+                "scene_owner": 0,
+                "scene_phase": 0,
+                "view_x_margin": 0
+              },
+              "co_op_plugin_active": 1,
+              "native_mode": 10,
+              "native_phase": 0,
+              "primary_character": 0
+            }
+          }
+        ],
+        "checks": {
+          "actual_first_state_precedes_ready": true,
+          "both_live_owned_pause_resume_tuples_in_order": true,
+          "actual_committed_roster_camera_HUD_native_aspect": true
+        },
+        "limits": "Ordered actual sidecar tuples correspond to independent natural live windows; no atomic RPC/frame identity or unexercised transition claim"
+      },
+      "actual_committed_plan": {
+        "committed_fingerprint": "75ad9a1e5e766a97ca435d1198e5d765e3427adedae99c1d53ccbef9eaa5dcaf",
+        "derived_discs": [],
+        "overlays": [],
+        "packages": [
+          {
+            "id": "mmx6.enhancement.seamless-loading",
+            "version": "0.1.0"
+          }
+        ],
+        "plugins": [
+          {
+            "feature": "seamless-loading",
+            "id": "mmx6.seamless",
+            "input": 0,
+            "local_view": 0,
+            "package": "mmx6.enhancement.seamless-loading"
+          },
+          {
+            "feature": "",
+            "id": "mmx6.local-coop.prototype",
+            "input": 0,
+            "local_view": 0,
+            "package": ""
+          }
+        ],
+        "resources": [],
+        "schema": 1,
+        "selections": [
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "input-recording",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.diagnostics",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "frame-interpolation",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.enhancement.frame-interpolation",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 1,
+                "has_enabled": 1,
+                "id": "seamless-loading",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.enhancement.seamless-loading",
+            "values": {},
+            "version": "0.1.0"
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "widescreen",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.enhancement.widescreen",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "prototype",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.local-coop",
+            "values": {},
+            "version": "0.0.1"
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "yammark_reduce_idle_time",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.boss-attacks",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "continuous_dash_speed_hyper",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "continuous_dash_speed_normal",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.continuous-dash",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "boss_health_by_level",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "gate_orb_explosion_damage",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "gate_vulnerable_to_normal_attacks",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.damage-rules",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "black_zero_rank_unlock",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "gate_revealed_refight_souls",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "gate_revealed_souls",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normalize_unarmored_x_defense",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normalize_zero_defense",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "ultimate_armor_rank_unlock",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.general-foundations",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "voice_boss_intros",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "voice_boss_warning",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "voice_low_health",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "voice_title",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.hooks",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "settings_menu_options",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.ingame-options",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "blade_mach_dash_behavior",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.mach-dash",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "air_moves_after_dash_jump",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "allow_xtreme_item_drops",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "alternate_default_controls",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "always_drop_nightmare_orbs",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "amazon_area_extended_ceiling",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "blade_mach_dash_unlimited_repetitions",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "boss_level_rank_a",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "boss_level_rank_b",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "boss_level_rank_c",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "boss_level_rank_d",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "boss_level_rank_ga",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "boss_level_rank_pa",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "boss_level_rank_sa",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "boss_level_rank_uh",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_double_tap_dash",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_falcon_jump_air_dash",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_limited_parts_rank_ga",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_limited_parts_rank_pa",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_limited_parts_rank_uh",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_nightmare_bug",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_nightmare_cube",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_nightmare_dark",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_nightmare_fire",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_nightmare_ice",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_nightmare_iron",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_nightmare_mirror",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_nightmare_rain",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_pickup_extra_lives",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_rescue_extra_lives",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_rescue_health_refill",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_title_demos",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_x_saber_cancelling",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "dynamo_green_orb_value",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "enable_limited_parts_rank_a",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "enable_limited_parts_rank_b",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "enable_limited_parts_rank_c",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "enable_limited_parts_rank_d",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "enable_limited_parts_rank_sa",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "ex_tank_starting_lives",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "exit_stage_availability",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "faster_cutscene_text",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "higher_ceiling_jump",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "hyper_air_dash_duration",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "hyper_dash_initial_speed_bonus",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "hyper_ground_dash_duration",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "indestructible_yammark_orbs",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "infinite_lives_no_continues",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "loading_logo",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "main_boss_green_orb_value",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "main_boss_red_orb_value",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "mute_navigator_alerts",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "new_game_starting_lives",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_air_dash_duration",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_ground_dash_duration",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_initial_dash_speed",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_part_slots_rank_a",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_part_slots_rank_b",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_part_slots_rank_c",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_part_slots_rank_d",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_part_slots_rank_ga",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_part_slots_rank_pa",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_part_slots_rank_sa",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_part_slots_rank_uh",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "normal_starting_lives",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "prevent_nightmare_orb_reversion",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "rank_soul_thresholds",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "recycle_lab_ceiling_extension",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "reploid_small_orb_value",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "reploid_status_infected_by_nightmare",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "reploid_status_infected_killed_by_player",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "reploid_status_infected_lost_offscreen",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "reploid_status_rescued_by_player",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "restore_x_charged_shot_voice",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "restore_zero_giga_attack_voice",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "retranslation",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "secret_lab_1_spikes",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "secret_lab_2_platform",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "shadow_saber_cancellable",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "skip_capcom_video",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "skip_opening_video",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "title_screen",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "unlimited_air_moves",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "unlimited_dash_duration",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "unlimited_high_jump",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "unlock_x_hover",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "virus_big_orb_value",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "virus_small_orb_value",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "wolfang_contact_damage",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "wolfang_debris_all_difficulties",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "wolfang_ice_block_damage",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "wolfang_ice_debris_damage",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "wolfang_ice_spike_damage",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "wolfang_ice_spikes_all_levels",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "wolfang_indestructible_ice_blocks",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "wolfang_indestructible_ice_spikes",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "x_hover_mode",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "yammark_contact_damage",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "yammark_firefly_damage",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "yammark_firefly_resistance",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "yammark_green_orb_damage",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "yammark_speed_orbs_easy_normal",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "yammark_speed_orbs_xtreme",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "yammark_xtreme_behavior",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.native",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "available_black_zero",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "available_blade_armor",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "available_shadow_armor",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "available_ultimate_armor",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "available_zero",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "found_reploid_mark_status",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "heart_tank_1",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "heart_tank_2",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "heart_tank_3",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "heart_tank_4",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "heart_tank_5",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "heart_tank_6",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "heart_tank_7",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "heart_tank_8",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "intro_stage_armor",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "mark_no_item_reploids",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "mark_reploids_only",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_buster_plus",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_d_barrier",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_d_converter",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_energy_saver",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_hyper_dash",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_hyperdrive",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_jumper",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_life_recover",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_master_saber",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_over_drive",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_power_drive",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_quick_charge",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_rapid_5",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_saber_extend",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_saber_plus",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_shock_buffer",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_shot_eraser",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_speed_shot",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_speedster",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_super_recover",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_ultimate_buster",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_weapon_driver",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_weapon_plus",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "part_weapon_recover",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_energy_up_1",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_energy_up_2",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_energy_up_3",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_energy_up_4",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_energy_up_5",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_energy_up_6",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_energy_up_7",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_energy_up_8",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_life_up_1",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_life_up_2",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_life_up_3",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_life_up_4",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_life_up_5",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_life_up_6",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_life_up_7",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "parts_life_up_8",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "randomize_reploid_parts",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "sub_tank_1",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "sub_tank_2",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "sub_tank_3",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "sub_tank_4",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "x_energy_upgrades",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "x_life_upgrades",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "x_starting_rank",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "zero_energy_upgrades",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "zero_life_upgrades",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "zero_starting_rank",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.new-game",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "disable_zero_weapon_autoselect",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "guard_shell_bug_fix",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "unlock_x_air_dash",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.player-standalone",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "falling_ceiling_behavior",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "move_recycle_lab_hidden_teleport",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.stage-modes",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "maximum_lives",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "nightmare_dark_opacity",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "shadow_saber_timing",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "x_saber_timing",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "zero_saber_cooldown_timing",
+                "values": {}
+              },
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "zero_z_buster_timing",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.timing",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "zero_techniques",
+                "values": {}
+              }
+            ],
+            "package": "mmx6.tweaks.zero-techniques",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "8mb-ram",
+                "values": {}
+              }
+            ],
+            "package": "psx.enhancement.8mb-ram",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "pgxp",
+                "values": {}
+              }
+            ],
+            "package": "psx.enhancement.pgxp",
+            "values": {},
+            "version": ""
+          },
+          {
+            "enabled": 0,
+            "features": [
+              {
+                "enabled": 0,
+                "has_enabled": 1,
+                "id": "bezel",
+                "values": {}
+              }
+            ],
+            "package": "psx.presentation.bezel",
+            "values": {},
+            "version": ""
+          }
+        ],
+        "session_fingerprint": "7de9fc61d6b1f08c83f4f52622bd63bdba46569c007ee4581298b4de54dacb3c",
+        "writes": []
+      },
+      "effective_startup_video": {
+        "aa": 1,
+        "accurate_blending": 1,
+        "active_renderer": 1,
+        "adaptive_max_den": 9,
+        "adaptive_max_num": 16,
+        "adaptive_view": 0,
+        "anisotropy": 1,
+        "aspect_den": 3,
+        "aspect_num": 4,
+        "dynamic_resolution": 0,
+        "dynamic_resolution_active": 0,
+        "dynamic_resolution_env": -1,
+        "dynamic_resolution_min": 720,
+        "dynamic_resolution_min_env": 0,
+        "fmv_chroma": 0,
+        "fmv_filter": 0,
+        "fov_scale": "0x1p+0",
+        "frame_generation": 0,
+        "frame_generation_method": 0,
+        "frame_interpolation": 0,
+        "frame_interpolation_blend": 0,
+        "frame_interpolation_fps": 0,
+        "frame_interpolation_source": 0,
+        "frame_period_ms": "0x1.0aef006d56045p+4",
+        "geometry_correction": 0,
+        "guest_frame_period_ms": "0x1.0aef006d56045p+4",
+        "host_presentation_scope": "observed presentation preferences; wall-clock/display/audio-device behavior is not replayed",
+        "internal_resolution_effective": 0,
+        "internal_resolution_env": 0,
+        "internal_resolution_mod_request": 0,
+        "internal_resolution_preference": 0,
+        "mod_texture_filter": -1,
+        "native_wide": 1,
+        "perspective_texturing": 0,
+        "pgxp_active": 0,
+        "pgxp_color_correction": 0,
+        "pgxp_cpu": 0,
+        "pgxp_cpu_effective": 0,
+        "pgxp_depth_buffer": 0,
+        "pgxp_depth_threshold": "0x1p+12",
+        "pgxp_mod_only": 0,
+        "pgxp_position_fallback": 1,
+        "pgxp_preserve_projection": 0,
+        "pgxp_seam": 0,
+        "pgxp_tolerance": "0x1p-1",
+        "pgxp_tolerance_effective": "0x1p-1",
+        "post_aa": 0,
+        "present_thread": 0,
+        "present_thread_slots": 3,
+        "projection_den": 3,
+        "projection_mode": -1,
+        "projection_num": 4,
+        "reference_lines": 240,
+        "render_thread": 0,
+        "render_thread_frames": 2,
+        "renderer_preference": 1,
+        "requested_scale": 1,
+        "retained_banks": 1,
+        "scale": 1,
+        "scale_applies": 1,
+        "scanline_strength": "0x1p-1",
+        "scanlines": 0,
+        "supersample_milli": 1000,
+        "texture_filter": 0,
+        "texture_lod": 0,
+        "vsync": 1
+      },
+      "profile": {
+        "id": "mmx6.win64-clang22.loopback",
+        "revision": 2,
+        "selected_sha256": "f078c438177ce5a511fd65206cf19604e98dc19f36ac431a42e5271d1814ce88"
+      }
+    }
+  ],
+  "actual_startup_policy_witnesses": [
+    {
+      "schema": 1,
+      "epoch": 1,
+      "netplay": 0,
+      "policy_available": 1,
+      "feature_enabled": 1,
+      "feature_explicit": 0,
+      "policy_preserved_netplay": 0,
+      "diagnostics_plugin_active": 1,
+      "coop_plugin_active": 1,
+      "hook_active": 1,
+      "envelope_complete": 1,
+      "guest_cycles": 0,
+      "sim_tick": 0,
+      "replay_requested": 0
+    },
+    {
+      "schema": 1,
+      "epoch": 1,
+      "netplay": 1,
+      "policy_available": 1,
+      "feature_enabled": 1,
+      "feature_explicit": 0,
+      "policy_preserved_netplay": 1,
+      "diagnostics_plugin_active": 0,
+      "coop_plugin_active": 1,
+      "hook_active": 1,
+      "envelope_complete": 1,
+      "guest_cycles": 0,
+      "sim_tick": 0,
+      "replay_requested": 0
+    },
+    {
+      "schema": 1,
+      "epoch": 1,
+      "netplay": 1,
+      "policy_available": 1,
+      "feature_enabled": 1,
+      "feature_explicit": 0,
+      "policy_preserved_netplay": 1,
+      "diagnostics_plugin_active": 0,
+      "coop_plugin_active": 1,
+      "hook_active": 1,
+      "envelope_complete": 1,
+      "guest_cycles": 0,
+      "sim_tick": 0,
+      "replay_requested": 0
+    }
+  ],
+  "images_reviewed": [
+    {
+      "mode": "local",
+      "label": "P1-actual-paused",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-local-v39-31ead13-v1\\F205-natural-live-windows\\P1-actual-paused.png",
+        "bytes": 2074543,
+        "sha256": "715403e92fe8675e68c570c2ac7127942bdb5f3b480d5d58795b19cbdbfc990d"
+      },
+      "completion": {
+        "id": 1558,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      },
+      "review": "Root viewed actual composed PNG: native blue X menu or red Zero menu for owner; resumed world has both living actors and stacked HUD."
+    },
+    {
+      "mode": "local",
+      "label": "P1-actual-resumed",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-local-v39-31ead13-v1\\F205-natural-live-windows\\P1-actual-resumed.png",
+        "bytes": 2074543,
+        "sha256": "27263d72698e3dbbd42e8f62e0ebe101fe1e4abe42685fba6d2255194349242d"
+      },
+      "completion": {
+        "id": 1635,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      },
+      "review": "Root viewed actual composed PNG: native blue X menu or red Zero menu for owner; resumed world has both living actors and stacked HUD."
+    },
+    {
+      "mode": "local",
+      "label": "P2-actual-paused",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-local-v39-31ead13-v1\\F205-natural-live-windows\\P2-actual-paused.png",
+        "bytes": 2074543,
+        "sha256": "d9092bfe9db0dc3b6520b0b0fc3372987357bfb5e9b2b3619fdb73d645e81faa"
+      },
+      "completion": {
+        "id": 1712,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      },
+      "review": "Root viewed actual composed PNG: native blue X menu or red Zero menu for owner; resumed world has both living actors and stacked HUD."
+    },
+    {
+      "mode": "local",
+      "label": "P2-actual-resumed",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-local-v39-31ead13-v1\\F205-natural-live-windows\\P2-actual-resumed.png",
+        "bytes": 2074543,
+        "sha256": "9a89a595a0036bf01c74b96f2d46bd91cbfdb0cee6ae73709185cb4e77fbc718"
+      },
+      "completion": {
+        "id": 1817,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      },
+      "review": "Root viewed actual composed PNG: native blue X menu or red Zero menu for owner; resumed world has both living actors and stacked HUD."
+    },
+    {
+      "mode": "netplay",
+      "label": "P1-actual-paused",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\F205-natural-live-windows\\peer-0-P1-actual-paused.png",
+        "bytes": 2074543,
+        "sha256": "807d8637318a4f3043834e3764bed09e8ba4f00b1a151ea4895aea3e56476a72"
+      },
+      "completion": {
+        "id": 1936,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      },
+      "review": "Root viewed actual composed PNG: native blue X menu or red Zero menu for owner; resumed world has both living actors and stacked HUD."
+    },
+    {
+      "mode": "netplay",
+      "label": "P1-actual-paused",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\F205-natural-live-windows\\peer-1-P1-actual-paused.png",
+        "bytes": 2074543,
+        "sha256": "807d8637318a4f3043834e3764bed09e8ba4f00b1a151ea4895aea3e56476a72"
+      },
+      "completion": {
+        "id": 1751,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      },
+      "review": "Root viewed actual composed PNG: native blue X menu or red Zero menu for owner; resumed world has both living actors and stacked HUD."
+    },
+    {
+      "mode": "netplay",
+      "label": "P1-actual-resumed",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\F205-natural-live-windows\\peer-0-P1-actual-resumed.png",
+        "bytes": 2074543,
+        "sha256": "b0821c18b59fdfbbbb556c7b25750c15bb00f97f0ce0883d710db953b6d3c8dc"
+      },
+      "completion": {
+        "id": 2027,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      },
+      "review": "Root viewed actual composed PNG: native blue X menu or red Zero menu for owner; resumed world has both living actors and stacked HUD."
+    },
+    {
+      "mode": "netplay",
+      "label": "P1-actual-resumed",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\F205-natural-live-windows\\peer-1-P1-actual-resumed.png",
+        "bytes": 2074543,
+        "sha256": "b0821c18b59fdfbbbb556c7b25750c15bb00f97f0ce0883d710db953b6d3c8dc"
+      },
+      "completion": {
+        "id": 1835,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      },
+      "review": "Root viewed actual composed PNG: native blue X menu or red Zero menu for owner; resumed world has both living actors and stacked HUD."
+    },
+    {
+      "mode": "netplay",
+      "label": "P2-actual-paused",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\F205-natural-live-windows\\peer-0-P2-actual-paused.png",
+        "bytes": 2074543,
+        "sha256": "aebdd5a5f3eb2f5c4335f17e44756be4318e25e397e25738a66d8a585cdfcbd1"
+      },
+      "completion": {
+        "id": 2252,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      },
+      "review": "Root viewed actual composed PNG: native blue X menu or red Zero menu for owner; resumed world has both living actors and stacked HUD."
+    },
+    {
+      "mode": "netplay",
+      "label": "P2-actual-paused",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\F205-natural-live-windows\\peer-1-P2-actual-paused.png",
+        "bytes": 2074543,
+        "sha256": "aebdd5a5f3eb2f5c4335f17e44756be4318e25e397e25738a66d8a585cdfcbd1"
+      },
+      "completion": {
+        "id": 2063,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      },
+      "review": "Root viewed actual composed PNG: native blue X menu or red Zero menu for owner; resumed world has both living actors and stacked HUD."
+    },
+    {
+      "mode": "netplay",
+      "label": "P2-actual-resumed",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\F205-natural-live-windows\\peer-0-P2-actual-resumed.png",
+        "bytes": 2074543,
+        "sha256": "c640d9862eabf37684f1693eccd306168a1c086ce0b0b6086ccb6af24822c977"
+      },
+      "completion": {
+        "id": 2351,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      },
+      "review": "Root viewed actual composed PNG: native blue X menu or red Zero menu for owner; resumed world has both living actors and stacked HUD."
+    },
+    {
+      "mode": "netplay",
+      "label": "P2-actual-resumed",
+      "artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\F205-natural-live-windows\\peer-1-P2-actual-resumed.png",
+        "bytes": 2074543,
+        "sha256": "c640d9862eabf37684f1693eccd306168a1c086ce0b0b6086ccb6af24822c977"
+      },
+      "completion": {
+        "id": 2171,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      },
+      "review": "Root viewed actual composed PNG: native blue X menu or red Zero menu for owner; resumed world has both living actors and stacked HUD."
+    }
+  ],
+  "local_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "actual_default_ON_policy_and_activation": true,
+    "actual_both_owner_menu_pause_resume_and_independent_controls": true,
+    "ordinary_default_capture_and_mode_sidecar_finalized_and_bound": true,
+    "actual_first_ready_and_ordered_owner_tuples_match_live_windows": true,
+    "actual_committed_plan_effective_video_native_cards_and_owned_exit": true,
+    "no_fixture_direct_input_or_execution_LOAD_command": true
+  },
+  "paired_checks": {
+    "jump_audio_original_source_bound": true,
+    "F205_runtime_both_peer_windows_completed": true,
+    "declared_build_manifest_bound_to_staged_images": true,
+    "jump_audio_declared_sources_match": true,
+    "host_profile_settled_before_guest": true,
+    "p2_right_reaches_both_peers": true,
+    "p2_right_preserves_p1_x": true,
+    "p1_jump_reaches_both_peers": true,
+    "p1_jump_preserves_p2_y": true,
+    "both_alive_healthy": true,
+    "mailbox_unused": true,
+    "default_resident_loader_committed": true,
+    "F205_resolved_crc_after_case": true,
+    "F205_final_private_cards_unchanged": true,
+    "F205_owned_pair_cleanup": true,
+    "actual_default_ON_policy_and_activation_both_peers": true
+  },
+  "card_resolution": {
+    "card_discovery_only": true,
+    "inverse_AST_equal": true,
+    "original_passed_parent_required": true,
+    "late_failure_exception": false,
+    "all_other_native_mode_profile_CRC_exit_gates_unchanged": true
+  },
+  "limitations": [
+    "Exact debug/lab image, same-machine loopback pair, initial native aspect and natural owner windows only.",
+    "110/110 debug and 110/110 production compiled checks passed; production gameplay was not exercised.",
+    "No replay execution, rollback, death, live aspect, full content or human qualification is inferred.",
+    "The separate OFF pair failed; this successful ON evidence cannot admit F70 NETPLAY."
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-local-v39-31ead13-v1\\candidate\\saves\\input-recordings\\session-1792919131379066-1-0\\inputs.jsonl",
+      "bytes": 859116,
+      "sha256": "0cf4fbf65b74bee3f4259eb93230ce59c3a8ae1465a356b7acfd31b421d70523"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-local-v39-31ead13-v1\\candidate\\saves\\input-recordings\\session-1792919131379066-1-0\\status.json",
+      "bytes": 160,
+      "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-local-v39-31ead13-v1\\candidate\\saves\\input-recordings\\session-1792919131379066-1-0\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-local-v39-31ead13-v1\\candidate\\saves\\input-recordings\\session-1792919131379066-1-0\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-local-v39-31ead13-v1\\candidate\\saves\\input-recordings\\session-1792919131379066-1-0\\settings.json",
+      "bytes": 10329,
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-local-v39-31ead13-v1\\candidate\\saves\\input-recordings\\session-1792919131379066-1-0\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-local-v39-31ead13-v1\\candidate\\saves\\input-recordings\\session-1792919131379066-1-0\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-local-v39-31ead13-v1\\candidate\\saves\\input-recordings\\session-1792919131379066-1-0\\runtime-modes.jsonl",
+      "bytes": 9610,
+      "sha256": "2a101d1080f48c85057c319ae702dc9d557ce4561e75059a1e1e3e9728d12312"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\peer-0\\saves\\input-recordings\\session-1792919181186079-1-0\\inputs.jsonl",
+      "bytes": 1203914,
+      "sha256": "0358d172cc3e789d82e57f7fd82ed1db7245bd5cfdfda1d4a92e488dd694a0fa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\peer-0\\saves\\input-recordings\\session-1792919181186079-1-0\\status.json",
+      "bytes": 160,
+      "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\peer-0\\saves\\input-recordings\\session-1792919181186079-1-0\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\peer-0\\saves\\input-recordings\\session-1792919181186079-1-0\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\peer-0\\saves\\input-recordings\\session-1792919181186079-1-0\\settings.json",
+      "bytes": 26708,
+      "sha256": "678ea0742d375e120ec86c29053b60d74181951ceb43831bbca670a5875771e6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\peer-0\\saves\\input-recordings\\session-1792919181186079-1-0\\content.json",
+      "bytes": 567,
+      "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\peer-0\\saves\\input-recordings\\session-1792919181186079-1-0\\simulation-contract.json",
+      "bytes": 350,
+      "sha256": "a2d563a9c49c5a8135c801894e26381f930f1d43048d7a0dd923ae4fb1e60406"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\peer-0\\saves\\input-recordings\\session-1792919181186079-1-0\\runtime-modes.jsonl",
+      "bytes": 9735,
+      "sha256": "092ddd889e47ed3a40f6bac3b8d6ebcad2c565c3fa24008699504da7aa8a2673"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\peer-1\\saves\\input-recordings\\session-1792919181186077-1-0\\inputs.jsonl",
+      "bytes": 1204670,
+      "sha256": "54c9279e18e861665fe2482c7d2f44cec6b30f482b677fb1e713ae91bada674d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\peer-1\\saves\\input-recordings\\session-1792919181186077-1-0\\status.json",
+      "bytes": 160,
+      "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\peer-1\\saves\\input-recordings\\session-1792919181186077-1-0\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\peer-1\\saves\\input-recordings\\session-1792919181186077-1-0\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\peer-1\\saves\\input-recordings\\session-1792919181186077-1-0\\settings.json",
+      "bytes": 26708,
+      "sha256": "8675b5fc560c2a45be3bb48e46e7b3e21c76f071a18c8809038a7e664fd28605"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\peer-1\\saves\\input-recordings\\session-1792919181186077-1-0\\content.json",
+      "bytes": 567,
+      "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\peer-1\\saves\\input-recordings\\session-1792919181186077-1-0\\simulation-contract.json",
+      "bytes": 350,
+      "sha256": "a2d563a9c49c5a8135c801894e26381f930f1d43048d7a0dd923ae4fb1e60406"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\peer-1\\saves\\input-recordings\\session-1792919181186077-1-0\\runtime-modes.jsonl",
+      "bytes": 9735,
+      "sha256": "5fd117192e0f900d576617a268d37ba4fb4d83301119e40830ac34db13c3534e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-local-v39-31ead13-v1\\F205-natural-live-windows\\P1-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "715403e92fe8675e68c570c2ac7127942bdb5f3b480d5d58795b19cbdbfc990d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-local-v39-31ead13-v1\\F205-natural-live-windows\\P1-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "27263d72698e3dbbd42e8f62e0ebe101fe1e4abe42685fba6d2255194349242d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-local-v39-31ead13-v1\\F205-natural-live-windows\\P2-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "d9092bfe9db0dc3b6520b0b0fc3372987357bfb5e9b2b3619fdb73d645e81faa"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-local-v39-31ead13-v1\\F205-natural-live-windows\\P2-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "9a89a595a0036bf01c74b96f2d46bd91cbfdb0cee6ae73709185cb4e77fbc718"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\F205-natural-live-windows\\peer-0-P1-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "807d8637318a4f3043834e3764bed09e8ba4f00b1a151ea4895aea3e56476a72"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\F205-natural-live-windows\\peer-1-P1-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "807d8637318a4f3043834e3764bed09e8ba4f00b1a151ea4895aea3e56476a72"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\F205-natural-live-windows\\peer-0-P1-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "b0821c18b59fdfbbbb556c7b25750c15bb00f97f0ce0883d710db953b6d3c8dc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\F205-natural-live-windows\\peer-1-P1-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "b0821c18b59fdfbbbb556c7b25750c15bb00f97f0ce0883d710db953b6d3c8dc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\F205-natural-live-windows\\peer-0-P2-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "aebdd5a5f3eb2f5c4335f17e44756be4318e25e397e25738a66d8a585cdfcbd1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\F205-natural-live-windows\\peer-1-P2-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "aebdd5a5f3eb2f5c4335f17e44756be4318e25e397e25738a66d8a585cdfcbd1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\F205-natural-live-windows\\peer-0-P2-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "c640d9862eabf37684f1693eccd306168a1c086ce0b0b6086ccb6af24822c977"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\F205-natural-live-windows\\peer-1-P2-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "c640d9862eabf37684f1693eccd306168a1c086ce0b0b6086ccb6af24822c977"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-local-v39-31ead13-v1\\candidate\\jump-audio\\stderr.log",
+      "bytes": 716,
+      "sha256": "e69f4e27079e847a327f61351f72134c3ea83b8a2b12e75bb103a3e20d93aaeb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\peer-0\\logs\\stderr.log",
+      "bytes": 29388,
+      "sha256": "f89df3537003c5e7506d80f915a131d046c304a3634c69aa14c7133d1e515c5d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\peer-1\\logs\\stderr.log",
+      "bytes": 29268,
+      "sha256": "b2f06fad613f7ed14a30ac9c0fd42e5c86274df879bb6dc0b99d50ffed98a1cf"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v39-31ead13\\candidate.json",
+      "bytes": 11188,
+      "sha256": "07e53ce4a7d8441424aae4bc011e45bc8f0abb06933a5ceb4952e2319a72da7c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-policy-source-preflight-v3-actual\\source-contract.json",
+      "bytes": 10949,
+      "sha256": "0078e4236b1ddbc543662311ddf540741630529464ecf2d03558cda922c0c610"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-policy-runtime-v2-index.json",
+      "bytes": 9187,
+      "sha256": "28e247cebe604832a00c4ca9fbade15fa7c02aca3603786bfd7e3f79a0ddb278"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-local-v39-31ead13-v1\\qualification.json",
+      "bytes": 543199,
+      "sha256": "08da6d052bf2f3e2a708843d9f712d9dd0e819bc604b21e3813f11e9f88086d3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-ON-paired-v39-31ead13-v1\\qualification.json",
+      "bytes": 4129261,
+      "sha256": "537d670ddbd83fc10e4110d524a1f19b8477c412fa975f22b0c5ef8906f628e2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v39-recording-policy-v1-debug.log",
+      "bytes": 32602,
+      "sha256": "7fca0ba2d4714533a358e55284f3c992a69c29ecf3316caa040646d697be7974"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v39-recording-policy-v1-production.log",
+      "bytes": 32612,
+      "sha256": "74fff8a43a1c09daded4affe05bac98b42df270e1651e8217100c43e4307c873"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-v39-F205-components-root-v1.py",
+      "bytes": 6878,
+      "sha256": "226bee4dfb6a9ffae9d257b6a1020a80346ccec7249bf946bfbe011b7f533f44"
+    }
+  ]
+}

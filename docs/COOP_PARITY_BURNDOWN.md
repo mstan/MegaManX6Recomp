@@ -102,15 +102,27 @@ loader and focused startup/profile checks. Its fresh OFF native attempt stopped
 before controls or SAVE/LOAD because the startup witness was unavailable in the
 live redirected log; the correct single OFF witness appeared after exit. Both
 actual-TU variants reproduce the visibility gap with fully buffered stderr.
-`31ead13` explicitly flushes the startup line, and a fresh combined build and
-OFF/default-ON local/paired validation are in progress. Issue `beads-eio.1.49`
-remains open; no additional F70 mode or aggregate pass follows from these checks.
+`31ead13` explicitly flushes the startup line. Its fresh build passes all 110
+debug and 110 production checks, including actual-TU live-log visibility.
+The [new reviewed OFF LOCAL run](evidence/mmx6-native-replay/manifest-bound-31ead13-F70-OFF-local-current-build-reviewed.json)
+creates its own current-build SAVE9, moves P1, completes LOAD9, restores both
+positions and continues for at least24 living native updates. Both owners'
+menus/resumes/controls, empty recorder inventories, cards and owned exit0 pass.
+The separate OFF pair fails its independent P2 movement window; retained
+acknowledgments do not establish that the game consumed Right. A separate
+harness defect leaves two final cleanup check names under the F205 prefix.
+Both failures remain preserved. Issue `beads-eio.1.49` stays open; F70 NETPLAY
+and aggregate remain unverified.
 
 F39's source audit also found that the SDK resets guest/GPU allocation extents,
 packet registrations and texture banks before each session activation, while
 X6 retains cached addresses and bank IDs. Issue `beads-eio.1.50` tracks isolated
 session-lifetime repair, a reset-between-activations fixture and actual same-PID
-launcher rematches. This is source evidence; F39 remains unverified in both modes.
+launcher rematches. The source fix reacquires session allocations and retires
+cached bank IDs and host buffers. Its actual SDK reset fixture currently fails
+to link the peripheral memory routing on Windows; those build failures are
+retained and are not a runtime regression result. F39 remains unverified in
+both modes pending executable fixture and actual same-PID qualification.
 F205 now passes its bounded effective-mode recording check on `f3bdbe9`, with
 107 debug and 107 production checks passing. The [LOCAL receipt](evidence/mmx6-native-replay/manifest-bound-f3bdbe9-F205-effective-mode-history-local-reviewed.json)
 binds 6,603 native input events and 19 actual mode transitions. The
@@ -124,6 +136,12 @@ expected guest card sandbox and verifies every active and personal card.
 Other scene/death/withdrawal transitions, live renderer/aspect changes,
 rollback/replay and cross-host behavior remain unexercised. Explicit online
 recording OFF is the separate F70 issue, not a pass inherited from this run.
+The [new v39 default-ON regression receipt](evidence/mmx6-native-replay/manifest-bound-31ead13-F205-default-ON-local-paired-reviewed.json)
+independently verifies all three new finalized streams and mode histories, both
+owner windows and twelve composed images. The fresh paired parent passes with
+the source-bound guest card resolver; every active and personal card and owned
+exit is checked. This adds evidence to the existing F205 pass without changing
+the comparison count.
 F10/F18 now pass on 1f50059 after restoring the original primary sprite sheet
 and frozen effects, with rendered local/paired requalification below. Their
 earlier 66f7db0 failures remain in history.

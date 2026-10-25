@@ -8113,6 +8113,39 @@
               "compiled_manifest_sha256": "595914ab91176b013ff2abd8e19fbdfdf6cf4c85b1414223fafdc0e9a57f308c",
               "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
             }
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "31ead13360e52c8e0b57d26012ec3eef3acea648",
+            "build_identity": {
+              "executable_sha256": "0b37b827e0724cceb1489db5254798fc04e9f994983587e063e4bfbc0a40d07a",
+              "compiled_manifest_sha256": "ef118714f0cfa18d91d5d0d8c7f82c6623bde664dd60d0edac26d2955f90ac47",
+              "sdk_commit": "9fd4adb78e9197a0bd3764d8a54e80d12df5c733"
+            },
+            "settings": {
+              "input_path": "published_host",
+              "offline": true,
+              "audio": "dummy",
+              "diagnostics_feature": false,
+              "rewind": false,
+              "recorder_environment_overrides": false
+            },
+            "action": "Fresh current-process SAVE9, actual native P1 movement, current-build LOAD9 and at least24 living native updates; both owner menus/resumes and independent controls.",
+            "outcome": "Requested OFF policy and actual hook/co-op activation are separately source-bound. Completed SAVE/LOAD generations, restored positions, sampled and independent terminal recorder absence, every native card and owned exit0 pass. Root viewed five actual composed PNGs.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-native-replay/manifest-bound-31ead13-F70-OFF-local-current-build-reviewed.json",
+                "sha256": "bf62af6ae8cad1427374db5c1e813d274be63fe625dd033e138e41152a21bf65"
+              }
+            ],
+            "bypasses": [],
+            "limits": [
+              "Exact v39 debug/lab LOCAL image only; no old state or direct guest-input fixture.",
+              "Package state tables are reordered/formatted by the runtime; root reconstructed and hash-checked the initial bytes and proved exact parsed feature/package equality after sorting.",
+              "Separate OFF paired v1 failed its independent movement window; NETPLAY and aggregate remain unverified.",
+              "No recorder exists; replay execution is unqualified."
+            ]
           }
         ],
         "limitations": "LOCAL F70 passed on50f4a31: explicitly disabled diagnostics, actual current-build LOAD9/native landing/Right/24moreupdates and no recorderfolder/stream across launch/LOAD/exit; exactsource/cards/ownedexit preserved. No rewind/environment recording override. Source uses forced co-op diagnostics online, so offline absence does not qualify NETPLAY; aggregate remains unverified. Current saved-death prerequisite disclosed; no old-state/replay/cold-warm/full-state claim."
@@ -13278,6 +13311,70 @@
               "compiled_manifest_sha256": "d7800a6d51386543a43da3321aefb2a8a12b85dcc0a8f9e9251ffcf708e972be",
               "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
             }
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "31ead13360e52c8e0b57d26012ec3eef3acea648",
+            "build_identity": {
+              "executable_sha256": "0b37b827e0724cceb1489db5254798fc04e9f994983587e063e4bfbc0a40d07a",
+              "compiled_manifest_sha256": "ef118714f0cfa18d91d5d0d8c7f82c6623bde664dd60d0edac26d2955f90ac47",
+              "sdk_commit": "9fd4adb78e9197a0bd3764d8a54e80d12df5c733"
+            },
+            "settings": {
+              "input_path": "published_host",
+              "offline": true,
+              "audio": "dummy",
+              "diagnostics_feature": "default_on",
+              "aspect": "native_4_3"
+            },
+            "action": "Natural initial enrollment and both native owner menu/pause/resume/independent controls; finalize ordinary native and mode-history streams on actual owned shutdown.",
+            "outcome": "Root independently revalidated all three streams and mode sidecars, actual requested policy/activation, selected paired profile/CRC, source-bound guest card layout and every active/personal card. The fresh paired parent passed; root viewed twelve actual composed images.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-native-replay/manifest-bound-31ead13-F205-default-ON-local-paired-reviewed.json",
+                "sha256": "1e8e74747a0e8b66005ba2deaa51f82293fca7fff1ae20eb4ae2b43307e9b5a0"
+              }
+            ],
+            "bypasses": [],
+            "limits": [
+              "Exact v39 debug/lab image; same-machine Windows loopback for paired mode.",
+              "110debug+110production compiled checks pass; production native gameplay was not exercised.",
+              "No death, withdrawal, live renderer/aspect, replay, rollback, cross-host or full content pass.",
+              "Adds regression evidence to the existing F205 pass; does not qualify F70 OFF."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "31ead13360e52c8e0b57d26012ec3eef3acea648",
+            "build_identity": {
+              "executable_sha256": "0b37b827e0724cceb1489db5254798fc04e9f994983587e063e4bfbc0a40d07a",
+              "compiled_manifest_sha256": "ef118714f0cfa18d91d5d0d8c7f82c6623bde664dd60d0edac26d2955f90ac47",
+              "sdk_commit": "9fd4adb78e9197a0bd3764d8a54e80d12df5c733"
+            },
+            "settings": {
+              "input_path": "published_host",
+              "offline": false,
+              "audio": "dummy",
+              "diagnostics_feature": "default_on",
+              "aspect": "native_4_3"
+            },
+            "action": "Natural initial enrollment and both native owner menu/pause/resume/independent controls; finalize ordinary native and mode-history streams on actual owned shutdown.",
+            "outcome": "Root independently revalidated all three streams and mode sidecars, actual requested policy/activation, selected paired profile/CRC, source-bound guest card layout and every active/personal card. The fresh paired parent passed; root viewed twelve actual composed images.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-native-replay/manifest-bound-31ead13-F205-default-ON-local-paired-reviewed.json",
+                "sha256": "1e8e74747a0e8b66005ba2deaa51f82293fca7fff1ae20eb4ae2b43307e9b5a0"
+              }
+            ],
+            "bypasses": [],
+            "limits": [
+              "Exact v39 debug/lab image; same-machine Windows loopback for paired mode.",
+              "110debug+110production compiled checks pass; production native gameplay was not exercised.",
+              "No death, withdrawal, live renderer/aspect, replay, rollback, cross-host or full content pass.",
+              "Adds regression evidence to the existing F205 pass; does not qualify F70 OFF."
+            ]
           }
         ],
         "limitations": "Passed bounded F205 LOCAL and same-host NETPLAY on f3bdbe9/SDK5bd: exact build/effective initial settings and actual pre-ready/enrollment/camera/both owner pause-resume history bind to finalized native N/C streams, independent controls and actual profile/CRC/card/owned-exit evidence. All12 composed captures reviewed. Original paired wrapper late card-discovery failure remains retained; exact source/argv/startup/log-bound guest sandbox reduction verifies every active/personal card and preserves other gates. Live renderer/aspect, other scene/death/withdrawal transitions, rollback/replay and cross-host behavior remain unexercised; diagnostics OFF is separate F70."
