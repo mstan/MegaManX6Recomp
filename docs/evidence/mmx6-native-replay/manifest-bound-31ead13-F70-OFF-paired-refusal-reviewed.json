@@ -1,0 +1,1889 @@
+{
+  "schema": 1,
+  "kind": "root_reviewed_v39_F70_OFF_NETPLAY_supported_state_refusal",
+  "reviewed_at_utc": "2026-10-25T09:35:05.246157+00:00",
+  "comparison": "F70",
+  "issue": "beads-eio.1.49",
+  "candidate": {
+    "proof": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v39-31ead13\\candidate.json",
+      "bytes": 11188,
+      "sha256": "07e53ce4a7d8441424aae4bc011e45bc8f0abb06933a5ceb4952e2319a72da7c"
+    },
+    "image_sha256": "0b37b827e0724cceb1489db5254798fc04e9f994983587e063e4bfbc0a40d07a",
+    "manifest_sha256": "ef118714f0cfa18d91d5d0d8c7f82c6623bde664dd60d0edac26d2955f90ac47",
+    "candidate_source": "31ead13360e52c8e0b57d26012ec3eef3acea648",
+    "sdk": "9fd4adb78e9197a0bd3764d8a54e80d12df5c733"
+  },
+  "source": {
+    "contract": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-policy-source-preflight-v3-actual\\source-contract.json",
+      "bytes": 10949,
+      "sha256": "0078e4236b1ddbc543662311ddf540741630529464ecf2d03558cda922c0c610"
+    },
+    "source_root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy",
+    "checked": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\CMakeLists.txt",
+        "bytes": 35192,
+        "sha256": "907452e7dcebc65de7b731b372bce59ade5a4335b3bcb9923567409472973c01"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\docs\\COOP_DIAGNOSTICS_POLICY.md",
+        "bytes": 2688,
+        "sha256": "9bc4d39e5dd510f37acbbdb39f95dee8acd00292a78cfcc9f8241f0e2bb02339"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\docs\\COOP_RECYCLE_CONVEYOR.md",
+        "bytes": 2593,
+        "sha256": "28004d91583b4ac58ec164dbc1e9d6f09ae9aef849f76d8a32cecced120adeef"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_coop_conveyor.inc",
+        "bytes": 5553,
+        "sha256": "5e4a11ad9a4186921d9fa2aae240e2809daf4ad98ade97c4dcc0e591470e9f41"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_coop_plugin.c",
+        "bytes": 114825,
+        "sha256": "1f6dab29831e503254843c3bee7f44d72d80aecdc13f1c4c0f6cf2a02efec4b2"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_coop_snapshot.inc",
+        "bytes": 18532,
+        "sha256": "a58652faadb184881dad2a064095c3a1a5c9550acd1a34db28307f9c2f766733"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_diagnostics.cpp",
+        "bytes": 21544,
+        "sha256": "35ea093cbdc41f4b1195df1d8ff97c66e8789f40c781767eaa30555ec603945c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_diagnostics.h",
+        "bytes": 1235,
+        "sha256": "6cbd7b9f103772ac952dbad349aa4d1f8146aba9c86372d5600890cca165f9eb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_input_capture.hpp",
+        "bytes": 7898,
+        "sha256": "f3772c45665dc7fcf1fef7abf8ac798b0dacc241ed022b1ec2115ee0b9329bde"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_runtime_modes.hpp",
+        "bytes": 6151,
+        "sha256": "f073603f2f0fadfe290ed5314401ffdaf4876b1761319bbbe4cc7e760e095ff5"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\mmx6_coop_default_view_fixture.h",
+        "bytes": 904,
+        "sha256": "3627f6f0245e7f7503cf7f381329ef53d092cc0c5361468f2fcd34cf91753cca"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_diagnostics.c",
+        "bytes": 15546,
+        "sha256": "37e0e1b1ec343399626f8ec58aba12215a2c2f558c4f321da7573cfdcdc1bcdd"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_hud.c",
+        "bytes": 9797,
+        "sha256": "81602e70b492df7e05aaa97f33178eb0d9d10e466d7fec5e1b7715cd2853fa86"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_intro_target.c",
+        "bytes": 6168,
+        "sha256": "b10f8d4becda78fb54c0d11c08dcbbd7f1245b14d87cbe742978455cf274fb50"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_jump_audio.c",
+        "bytes": 27578,
+        "sha256": "d534c2337a1010aa7ca3dba1fcb4dd95871bbee68d283a566805b8963f3761cd"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_private_effects.c",
+        "bytes": 58271,
+        "sha256": "a645f08bd24acdccf116921dd1f1b641d45b35abf5b877852f4eb610cb54f1c9"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_recycle_conveyor.c",
+        "bytes": 7760,
+        "sha256": "ec5997b329653389fd307796b917ec7864f437cc9037d6e56212480fceb554c2"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_recycle_portal.c",
+        "bytes": 16468,
+        "sha256": "6dfea0432a603a713fbfc35e374d19fd9eb61da8f756f95accfe2c6506434aba"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_coop_snapshot.c",
+        "bytes": 22682,
+        "sha256": "03c9fb019082c8a12b975eee7c972a841a875135d5947abb8bb71e7b0b9d659b"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_diagnostics_policy.cpp",
+        "bytes": 5368,
+        "sha256": "c4102f7c815d1eb7bcafa5c36ccd94ee3b8fa4fe966f9aaf9bb38eede32a2ad6"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_input_capture.cpp",
+        "bytes": 13999,
+        "sha256": "6dd08875ab5c0b87295b4d0b15f09288192674874ab0b14c4deafc79df5aaace"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tests\\test_mmx6_native_replay.cpp",
+        "bytes": 11271,
+        "sha256": "aaaf6b5eaf164e7a537a2a876cbcbfdbe9cf7a13b4768b328399cda3643da96c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\audit_mmx6_recycle_conveyor.py",
+        "bytes": 7400,
+        "sha256": "562a8d8124f53a021b1ff3dc10d8932211e1e0ad82da5adbd2eb734e5f8c774d"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\coop_debug.py",
+        "bytes": 12235,
+        "sha256": "61eae6837c54e191597a4829fdeb57f9b54a36229ebfd02fe60aec37b3ae1f1f"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\coop_host_profile.py",
+        "bytes": 11181,
+        "sha256": "c11d19879b6fbe2cdc464f20b5d444598fa590d6145d795bef7a1597280cf735"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\mmx6_coop_hud_inventory.py",
+        "bytes": 17683,
+        "sha256": "e503f2f99085f89fc18010f2d3e0916866d872083fb716b3a75595bd4cabdfe2"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\mmx6_coop_hud_presentation.py",
+        "bytes": 11949,
+        "sha256": "6ab500862a210959120f9b28ae21574828b5811d72d00a32aebd595e186c2a18"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\mmx6_coop_jump_audio_pair.py",
+        "bytes": 29983,
+        "sha256": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\mmx6_input_recording.py",
+        "bytes": 13664,
+        "sha256": "a4d21aaa83c9104679d549c0f5fa81bf95106ce800b0601263faaff46ae5310a"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\mmx6_runtime_modes.py",
+        "bytes": 9053,
+        "sha256": "5c3528a21058fec3de256dcdf736b3cf6944439ee7e638ad758d5aea888b1cda"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\prepare_mmx6_coop_playtest.py",
+        "bytes": 10411,
+        "sha256": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\qualify_mmx6_coop_baseline.py",
+        "bytes": 14335,
+        "sha256": "b2e0d0195544e78ae175e9f591db33da791b4bdd2f14703d63561989e20b76f8"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\qualify_mmx6_coop_jump_audio.py",
+        "bytes": 29370,
+        "sha256": "e91dbde11541f68e554f94b747ba91c409a83322f7d4d60b26d1e3aefdf75ac9"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\qualify_mmx6_coop_pair.py",
+        "bytes": 81791,
+        "sha256": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\qualify_mmx6_coop_state.py",
+        "bytes": 53820,
+        "sha256": "a7f8e768b97789bab9ff84c0d6baea9612bafc4c6d5074da73839d4ab815dcbb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\qualify_mmx6_input_replay.py",
+        "bytes": 28273,
+        "sha256": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\test_mmx6_diagnostics_policy.py",
+        "bytes": 7222,
+        "sha256": "931646e6573e0bfc5de2df4d89cc83a2e382129c17f8f2152ff8960b980dd270"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\test_mmx6_diagnostics_policy_parser.py",
+        "bytes": 3981,
+        "sha256": "99c00ae9cb2c1ad14f05a378b8c278460ba04f871added0a18a5ef8cf0b81d4d"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\test_mmx6_input_capture.py",
+        "bytes": 7651,
+        "sha256": "374049dcd9cb967f9b1194c73a69ec659ffb530c8a0f19445b133efbf6af7d58"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\test_mmx6_recycle_conveyor.py",
+        "bytes": 8050,
+        "sha256": "533ee5bfa274febc838a1417937b5ddb323d0288fc450927c1dbdb3bd64dd48c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\tools\\test_mmx6_runtime_modes.py",
+        "bytes": 7733,
+        "sha256": "d4010f2ce58354248a4691a10921aeb87062165d5aace2decc1acb0a9e16a4cd"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_coop_plugin.c",
+        "function": "shared_camera",
+        "sha256": "f3a001dc71c3846c4056b2f0b29a3dc86e516b7d107912bf2be70ece53976703"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_coop_plugin.c",
+        "function": "mmx6_coop_diagnostics_mode",
+        "sha256": "3505b9ea89b41d80c0f607515aa27090b03dea14aeb36a9e4f874be8d984f29f"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recording-policy\\src\\mods\\mmx6_coop_plugin.c",
+        "function": "hud_offsets",
+        "sha256": "bc597ab3c82f6cb5e147bcc15e70f04af5092c0d5a855f88ef7db8011574773b"
+      }
+    ],
+    "scope": "Frozen diagnostic implementation/codec and actual camera/getter/HUD functions; full compiled declared-source validation remains an independent parent gate",
+    "SDK_source_root": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\diagnostics-policy-sdk",
+    "SDK_checked": [
+      {
+        "relative": "runtime/include/mod_runtime.h",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\diagnostics-policy-sdk\\runtime\\include\\mod_runtime.h",
+        "bytes": 9618,
+        "sha256": "a7539f7d256d6b9f14d5a863b64fc7d0c4e9ef0e3a5589794d52ebf1a2e19d7f"
+      },
+      {
+        "relative": "runtime/src/mod_runtime.cpp",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\diagnostics-policy-sdk\\runtime\\src\\mod_runtime.cpp",
+        "bytes": 148238,
+        "sha256": "48cd00014182ca1eada40a8bfa12e9e3d0ece353cd0cd528675192ffed6274c7"
+      },
+      {
+        "relative": "runtime/src/psx_netplay.c",
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\diagnostics-policy-sdk\\runtime\\src\\psx_netplay.c",
+        "bytes": 229730,
+        "sha256": "7f99ddbde9f5cf6981fbbc976da801eba535105da425e4ecda0f968a541189bf"
+      }
+    ],
+    "policy_semantic_review": {
+      "Capture_sidecar_and_getter_unchanged": true,
+      "whole_CPP_except_begin_identical": true,
+      "ON_admission_replay_card_identity_worker_suffix_identical_except_reused_actual_coop_boolean": true,
+      "explicit_OFF_before_Startup_card_export_Capture": true,
+      "requested_policy_distinct_from_actual_activation": true,
+      "scope": "Only requested startup policy/schema-epoch guard/numeric witness; default ON capture implementation unchanged. Runtime regression still required.",
+      "capture_fixture_typed_policy_provider_only": true,
+      "capture_fixture_default_requested_ON_independent_of_actual_activation": true,
+      "capture_fixture_original_test_body_identical": true,
+      "runtime_delta_only_once_startup_stderr_fflush": true,
+      "runtime_policy_Capture_sidecar_getter_other_bytes_identical": true,
+      "actual_TU_fully_buffered_live_file_visibility_fixture": true,
+      "fixture_parent_retains_before_release_bytes_and_releases_child_in_finally": true
+    }
+  },
+  "netplay": "passed",
+  "supported_online_state_disposition": "safe refusal; no online LOAD applied",
+  "checks": {
+    "jump_audio_original_source_bound": true,
+    "F70OFF_runtime_both_peer_windows_completed": true,
+    "declared_build_manifest_bound_to_staged_images": true,
+    "jump_audio_declared_sources_match": true,
+    "host_profile_settled_before_guest": true,
+    "p2_right_reaches_both_peers": true,
+    "p2_right_preserves_p1_x": true,
+    "p1_jump_reaches_both_peers": true,
+    "p1_jump_preserves_p2_y": true,
+    "both_alive_healthy": true,
+    "mailbox_unused": true,
+    "default_resident_loader_committed": true,
+    "F70OFF_actual_online_state_refusal_completed": true,
+    "F70OFF_resolved_crc_after_case": true,
+    "F70OFF_final_private_cards_unchanged": true,
+    "F70OFF_owned_pair_cleanup": true
+  },
+  "actual_profile": {
+    "id": "mmx6.win64-clang22.loopback",
+    "revision": 2,
+    "selected_sha256": "3588b314c85baa828f4c8f5eb03859b8cc435f2cc8555e67f6301b6397b3f3e0"
+  },
+  "application_observations": [
+    {
+      "kind": "actual_positive_motion_then_six_native_updates",
+      "owner": 0,
+      "original_anchor": {
+        "label": "actual idle before independent Right",
+        "peers": [
+          {
+            "observation": {
+              "schema": 1,
+              "tick": 1078,
+              "sequence": 2156,
+              "native_timer": 1003,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 3483189535,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 9437184,
+                  "y_raw": 73072640,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 12025856,
+                  "y_raw": 73007104,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 1
+            },
+            "menu": [
+              0,
+              0
+            ],
+            "cursor": 0
+          },
+          {
+            "observation": {
+              "schema": 1,
+              "tick": 1079,
+              "sequence": 2158,
+              "native_timer": 1004,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 2078059620,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 9437184,
+                  "y_raw": 73072640,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 12025856,
+                  "y_raw": 73007104,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 1
+            },
+            "menu": [
+              0,
+              0
+            ],
+            "cursor": 0
+          }
+        ],
+        "network": [
+          {
+            "id": 2065,
+            "ok": true,
+            "active": 1,
+            "host": 1,
+            "rollback": 0,
+            "architecture": "p2p",
+            "max_players": 2,
+            "players": 2,
+            "tick": 3790,
+            "resolved_through": 3789,
+            "stall": "ok",
+            "remote_lead": 3,
+            "desync": 0,
+            "desync_tick": 0,
+            "local_hash": 0,
+            "remote_hash": 0
+          },
+          {
+            "id": 1873,
+            "ok": true,
+            "active": 1,
+            "host": 0,
+            "rollback": 0,
+            "architecture": "p2p",
+            "max_players": 2,
+            "players": 2,
+            "tick": 3790,
+            "resolved_through": 3789,
+            "stall": "ok",
+            "remote_lead": 2,
+            "desync": 0,
+            "desync_tick": 0,
+            "local_hash": 0,
+            "remote_hash": 0
+          }
+        ]
+      },
+      "held_seconds": 12,
+      "maximum_displacement_raw": 4194304,
+      "post_application_reserve_raw": 1572864,
+      "maximum_held_native_updates": 128,
+      "maximum_post_application_updates": 24,
+      "application": {
+        "label": "actual independent Right awaiting BOTH peer positive motion",
+        "peers": [
+          {
+            "observation": {
+              "schema": 1,
+              "tick": 1086,
+              "sequence": 2172,
+              "native_timer": 1011,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 950807303,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 3,
+                  "hp": 32,
+                  "x_raw": 9535488,
+                  "y_raw": 73072640,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 12025856,
+                  "y_raw": 73007104,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 1
+            },
+            "menu": [
+              0,
+              0
+            ],
+            "cursor": 0
+          },
+          {
+            "observation": {
+              "schema": 1,
+              "tick": 1087,
+              "sequence": 2174,
+              "native_timer": 1012,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 938410732,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 3,
+                  "hp": 32,
+                  "x_raw": 9568256,
+                  "y_raw": 73072640,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 12025856,
+                  "y_raw": 73007104,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 1
+            },
+            "menu": [
+              0,
+              0
+            ],
+            "cursor": 0
+          }
+        ],
+        "network": [
+          {
+            "id": 2079,
+            "ok": true,
+            "active": 1,
+            "host": 1,
+            "rollback": 0,
+            "architecture": "p2p",
+            "max_players": 2,
+            "players": 2,
+            "tick": 3798,
+            "resolved_through": 3797,
+            "stall": "ok",
+            "remote_lead": 3,
+            "desync": 0,
+            "desync_tick": 0,
+            "local_hash": 0,
+            "remote_hash": 0
+          },
+          {
+            "id": 1885,
+            "ok": true,
+            "active": 1,
+            "host": 0,
+            "rollback": 0,
+            "architecture": "p2p",
+            "max_players": 2,
+            "players": 2,
+            "tick": 3799,
+            "resolved_through": 3798,
+            "stall": "ok",
+            "remote_lead": 2,
+            "desync": 0,
+            "desync_tick": 0,
+            "local_hash": 0,
+            "remote_hash": 0
+          }
+        ]
+      },
+      "completed": {
+        "label": "actual independent Right six native updates AFTER BOTH peer motion",
+        "peers": [
+          {
+            "observation": {
+              "schema": 1,
+              "tick": 1092,
+              "sequence": 2184,
+              "native_timer": 1017,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 858624803,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 4,
+                  "hp": 32,
+                  "x_raw": 9928704,
+                  "y_raw": 73072640,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 12025856,
+                  "y_raw": 73007104,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 1
+            },
+            "menu": [
+              0,
+              0
+            ],
+            "cursor": 0
+          },
+          {
+            "observation": {
+              "schema": 1,
+              "tick": 1093,
+              "sequence": 2186,
+              "native_timer": 1018,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 1752250400,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 4,
+                  "hp": 32,
+                  "x_raw": 10059776,
+                  "y_raw": 73072640,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 12025856,
+                  "y_raw": 73007104,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 1
+            },
+            "menu": [
+              0,
+              0
+            ],
+            "cursor": 0
+          }
+        ],
+        "network": [
+          {
+            "id": 2087,
+            "ok": true,
+            "active": 1,
+            "host": 1,
+            "rollback": 0,
+            "architecture": "p2p",
+            "max_players": 2,
+            "players": 2,
+            "tick": 3804,
+            "resolved_through": 3803,
+            "stall": "ok",
+            "remote_lead": 3,
+            "desync": 0,
+            "desync_tick": 0,
+            "local_hash": 0,
+            "remote_hash": 0
+          },
+          {
+            "id": 1893,
+            "ok": true,
+            "active": 1,
+            "host": 0,
+            "rollback": 0,
+            "architecture": "p2p",
+            "max_players": 2,
+            "players": 2,
+            "tick": 3804,
+            "resolved_through": 3803,
+            "stall": "ok",
+            "remote_lead": 2,
+            "desync": 0,
+            "desync_tick": 0,
+            "local_hash": 0,
+            "remote_hash": 0
+          }
+        ]
+      },
+      "provenance": "Actual target movement on BOTH peers proves control response; no exact native input-consumer instruction claim"
+    },
+    {
+      "kind": "actual_positive_motion_then_six_native_updates",
+      "owner": 1,
+      "original_anchor": {
+        "label": "actual idle before independent Right",
+        "peers": [
+          {
+            "observation": {
+              "schema": 1,
+              "tick": 1482,
+              "sequence": 2964,
+              "native_timer": 1328,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 4198826659,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 10584064,
+                  "y_raw": 73072640,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 12025856,
+                  "y_raw": 73007104,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 1
+            },
+            "menu": [
+              0,
+              0
+            ],
+            "cursor": 0
+          },
+          {
+            "observation": {
+              "schema": 1,
+              "tick": 1483,
+              "sequence": 2966,
+              "native_timer": 1329,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 2590128542,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 10584064,
+                  "y_raw": 73072640,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 12025856,
+                  "y_raw": 73007104,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 1
+            },
+            "menu": [
+              0,
+              0
+            ],
+            "cursor": 0
+          }
+        ],
+        "network": [
+          {
+            "id": 2429,
+            "ok": true,
+            "active": 1,
+            "host": 1,
+            "rollback": 0,
+            "architecture": "p2p",
+            "max_players": 2,
+            "players": 2,
+            "tick": 4194,
+            "resolved_through": 4193,
+            "stall": "ok",
+            "remote_lead": 3,
+            "desync": 0,
+            "desync_tick": 0,
+            "local_hash": 0,
+            "remote_hash": 0
+          },
+          {
+            "id": 2241,
+            "ok": true,
+            "active": 1,
+            "host": 0,
+            "rollback": 0,
+            "architecture": "p2p",
+            "max_players": 2,
+            "players": 2,
+            "tick": 4195,
+            "resolved_through": 4193,
+            "stall": "ok",
+            "remote_lead": 1,
+            "desync": 0,
+            "desync_tick": 0,
+            "local_hash": 0,
+            "remote_hash": 0
+          }
+        ]
+      },
+      "held_seconds": 12,
+      "maximum_displacement_raw": 4194304,
+      "post_application_reserve_raw": 1572864,
+      "maximum_held_native_updates": 128,
+      "maximum_post_application_updates": 24,
+      "application": {
+        "label": "actual independent Right awaiting BOTH peer positive motion",
+        "peers": [
+          {
+            "observation": {
+              "schema": 1,
+              "tick": 1490,
+              "sequence": 2980,
+              "native_timer": 1336,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 4023238884,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 10584064,
+                  "y_raw": 73072640,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 3,
+                  "hp": 32,
+                  "x_raw": 12091392,
+                  "y_raw": 73007104,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 1
+            },
+            "menu": [
+              0,
+              0
+            ],
+            "cursor": 0
+          },
+          {
+            "observation": {
+              "schema": 1,
+              "tick": 1491,
+              "sequence": 2982,
+              "native_timer": 1337,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 1147241978,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 10584064,
+                  "y_raw": 73072640,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 3,
+                  "hp": 32,
+                  "x_raw": 12124160,
+                  "y_raw": 73007104,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 1
+            },
+            "menu": [
+              0,
+              0
+            ],
+            "cursor": 0
+          }
+        ],
+        "network": [
+          {
+            "id": 2441,
+            "ok": true,
+            "active": 1,
+            "host": 1,
+            "rollback": 0,
+            "architecture": "p2p",
+            "max_players": 2,
+            "players": 2,
+            "tick": 4203,
+            "resolved_through": 4202,
+            "stall": "ok",
+            "remote_lead": 2,
+            "desync": 0,
+            "desync_tick": 0,
+            "local_hash": 0,
+            "remote_hash": 0
+          },
+          {
+            "id": 2255,
+            "ok": true,
+            "active": 1,
+            "host": 0,
+            "rollback": 0,
+            "architecture": "p2p",
+            "max_players": 2,
+            "players": 2,
+            "tick": 4203,
+            "resolved_through": 4202,
+            "stall": "ok",
+            "remote_lead": 2,
+            "desync": 0,
+            "desync_tick": 0,
+            "local_hash": 0,
+            "remote_hash": 0
+          }
+        ]
+      },
+      "completed": {
+        "label": "actual independent Right six native updates AFTER BOTH peer motion",
+        "peers": [
+          {
+            "observation": {
+              "schema": 1,
+              "tick": 1498,
+              "sequence": 2996,
+              "native_timer": 1344,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 1178652165,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 10584064,
+                  "y_raw": 73072640,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 4,
+                  "hp": 32,
+                  "x_raw": 12648448,
+                  "y_raw": 73007104,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 1
+            },
+            "menu": [
+              0,
+              0
+            ],
+            "cursor": 0
+          },
+          {
+            "observation": {
+              "schema": 1,
+              "tick": 1499,
+              "sequence": 2998,
+              "native_timer": 1345,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 3626498611,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 10584064,
+                  "y_raw": 73072640,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 4,
+                  "hp": 32,
+                  "x_raw": 12779520,
+                  "y_raw": 73007104,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 1
+            },
+            "menu": [
+              0,
+              0
+            ],
+            "cursor": 0
+          }
+        ],
+        "network": [
+          {
+            "id": 2453,
+            "ok": true,
+            "active": 1,
+            "host": 1,
+            "rollback": 0,
+            "architecture": "p2p",
+            "max_players": 2,
+            "players": 2,
+            "tick": 4212,
+            "resolved_through": 4211,
+            "stall": "ok",
+            "remote_lead": 3,
+            "desync": 0,
+            "desync_tick": 0,
+            "local_hash": 0,
+            "remote_hash": 0
+          },
+          {
+            "id": 2267,
+            "ok": true,
+            "active": 1,
+            "host": 0,
+            "rollback": 0,
+            "architecture": "p2p",
+            "max_players": 2,
+            "players": 2,
+            "tick": 4211,
+            "resolved_through": 4210,
+            "stall": "ok",
+            "remote_lead": 2,
+            "desync": 0,
+            "desync_tick": 0,
+            "local_hash": 0,
+            "remote_hash": 0
+          }
+        ]
+      },
+      "provenance": "Actual target movement on BOTH peers proves control response; no exact native input-consumer instruction claim"
+    }
+  ],
+  "neutral_barriers_completed": 6,
+  "state_refusal_checks": {
+    "both_actual_peers_refused_SAVE_LOAD": true,
+    "actual_resolved_CRC_after_each_peer": true,
+    "online_LOAD_not_claimed": true,
+    "LOCAL_current_build_LOAD_is_separate": true
+  },
+  "resolved_CRC_windows": 8,
+  "independently_matched_CRC_samples": 60,
+  "root_terminal_inventories": [
+    {
+      "label": "root independent terminal paired inventory",
+      "private_saves": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-0\\saves",
+      "scanned_entries": 4,
+      "recording_entries": [],
+      "no_recording_directory_or_stream": true
+    },
+    {
+      "label": "root independent terminal paired inventory",
+      "private_saves": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\saves",
+      "scanned_entries": 7,
+      "recording_entries": [],
+      "no_recording_directory_or_stream": true
+    }
+  ],
+  "all_active_and_personal_cards": [
+    {
+      "label": "root independent active and personal card inventory",
+      "role": {
+        "peer": 0,
+        "owned_argv": [
+          "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-0\\mmx6-runtime.exe",
+          "--game",
+          "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-0\\game.toml",
+          "--bios",
+          "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-0\\bios\\openbios.bin",
+          "--disc",
+          "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\disc\\Mega Man X6 (USA) (v1.1).cue",
+          "--memcard-dir",
+          "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-0\\saves",
+          "--no-launcher",
+          "--hidden-window",
+          "--renderer",
+          "opengl",
+          "--netplay",
+          "--net-slot",
+          "0",
+          "--net-input-player",
+          "0",
+          "--net-bind",
+          "127.0.0.1:30049",
+          "--net-peer",
+          "127.0.0.1:30050",
+          "--net-delay",
+          "3",
+          "--net-session-id",
+          "20261025",
+          "--debug-port",
+          "25049"
+        ],
+        "stdout": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-0\\logs\\stdout.log",
+          "bytes": 2878,
+          "sha256": "ba51cc05501102c07598f2909377e5d54c434bc57ae28834bb6cdf555241722e"
+        },
+        "guest_sandbox_markers": [],
+        "network": null,
+        "role_evidence": "actual owned argv/private overlay + compiled source default/log; no full-plan claim"
+      },
+      "files": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-0\\saves\\card1.mcd",
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-0\\saves\\card2.mcd",
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ]
+    },
+    {
+      "label": "root independent active and personal card inventory",
+      "role": {
+        "peer": 1,
+        "owned_argv": [
+          "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\mmx6-runtime.exe",
+          "--game",
+          "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\game.toml",
+          "--bios",
+          "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\bios\\openbios.bin",
+          "--disc",
+          "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\disc\\Mega Man X6 (USA) (v1.1).cue",
+          "--memcard-dir",
+          "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\saves",
+          "--no-launcher",
+          "--hidden-window",
+          "--renderer",
+          "opengl",
+          "--netplay",
+          "--net-slot",
+          "1",
+          "--net-input-player",
+          "0",
+          "--net-bind",
+          "127.0.0.1:30050",
+          "--net-peer",
+          "127.0.0.1:30049",
+          "--net-delay",
+          "3",
+          "--net-session-id",
+          "20261025",
+          "--debug-port",
+          "25050"
+        ],
+        "stdout": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\logs\\stdout.log",
+          "bytes": 3011,
+          "sha256": "eecef88619ffda92801b1e0d224e1bd5227426c2fc29f77836cbb51d9473600b"
+        },
+        "guest_sandbox_markers": [
+          "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\saves/netplay"
+        ],
+        "network": null,
+        "role_evidence": "actual owned argv/private overlay + compiled source default/log; no full-plan claim"
+      },
+      "files": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\saves\\card1.mcd",
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\saves\\netplay\\card1.mcd",
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\saves\\card2.mcd",
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\saves\\netplay\\card2.mcd",
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ]
+    }
+  ],
+  "actual_OFF_witnesses": [
+    {
+      "actual_startup": {
+        "schema": 1,
+        "epoch": 1,
+        "netplay": 1,
+        "policy_available": 1,
+        "feature_enabled": 0,
+        "feature_explicit": 1,
+        "policy_preserved_netplay": 1,
+        "diagnostics_plugin_active": 0,
+        "coop_plugin_active": 1,
+        "hook_active": 1,
+        "envelope_complete": 1,
+        "guest_cycles": 0,
+        "sim_tick": 0,
+        "replay_requested": 0
+      },
+      "log": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-0\\logs\\stderr.log",
+        "bytes": 33037,
+        "sha256": "7c43ba8b60ba69906bef348505c41ee72070cda3d8ddace9a355ead7af1e1a84"
+      },
+      "scope": "Actual requested recording policy and actual hook/co-op activation; no full-plan export claim"
+    },
+    {
+      "actual_startup": {
+        "schema": 1,
+        "epoch": 1,
+        "netplay": 1,
+        "policy_available": 1,
+        "feature_enabled": 0,
+        "feature_explicit": 1,
+        "policy_preserved_netplay": 1,
+        "diagnostics_plugin_active": 0,
+        "coop_plugin_active": 1,
+        "hook_active": 1,
+        "envelope_complete": 1,
+        "guest_cycles": 0,
+        "sim_tick": 0,
+        "replay_requested": 0
+      },
+      "log": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\logs\\stderr.log",
+        "bytes": 33157,
+        "sha256": "5b330e271758fb7d1f78f9a80243ae6a72e07f7c2fded965ea1dbe3271fc5cb8"
+      },
+      "scope": "Actual requested recording policy and actual hook/co-op activation; no full-plan export claim"
+    }
+  ],
+  "images_reviewed_by_root": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-0-P1-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "ebde4f52de3cf59017781a30a9de94f491517d825a2c3a5766822be879bd01a8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-1-P1-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "ebde4f52de3cf59017781a30a9de94f491517d825a2c3a5766822be879bd01a8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-0-P1-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "ba56bec6a407e5dc94852dcf89866fa55e0d51ffb21015d5614dbfb2fb504022"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-1-P1-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "ba56bec6a407e5dc94852dcf89866fa55e0d51ffb21015d5614dbfb2fb504022"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-0-P2-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "9e34c40ed3a7acf6db5185a71628667fbea5c620824c96db7925d5a8c59c4274"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-1-P2-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "9e34c40ed3a7acf6db5185a71628667fbea5c620824c96db7925d5a8c59c4274"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-0-P2-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "9684668286078127b6f3449078e5aae402281ca3674e4c4962b87326cce2bd31"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-1-P2-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "9684668286078127b6f3449078e5aae402281ca3674e4c4962b87326cce2bd31"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-0-after-safe-online-state-refusals.png",
+      "bytes": 2074543,
+      "sha256": "b5ab2bc231e66c1b0b4d13cae59e6caca0411522d98361fc6166b02224d3622b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-1-after-safe-online-state-refusals.png",
+      "bytes": 2074543,
+      "sha256": "e071d26b1d4dd14f69e6b0e4657039cf03b16b3523836738b95741420717874c"
+    }
+  ],
+  "visual_findings": "Both peers show native X/Zero owner menus and both living actors after resumes/refusals; no REC badge.",
+  "limitations": [
+    "Current compiled profile explicitly prohibits online execution states; this receipt qualifies exact safe refusal plus disabled-observer behavior, not a valid online LOAD.",
+    "LOCAL fresh SAVE/move/LOAD is separately reviewed on the same image.",
+    "All ten actual composed images viewed; same-machine Windows loopback only.",
+    "The earlier failed pair is retained unchanged; its input/game cause remains unisolated.",
+    "No replay, rollback, production native gameplay, human or full content qualification."
+  ],
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3-F70OFF-adapter-preflight\\F70OFF-isolated-parent-executed-source.py",
+      "bytes": 77050,
+      "sha256": "c15962b8652268cae066e95316f3875cf4e00a20ee356cd1496ad651b206928d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-0\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-0\\saves\\card2.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-0\\logs\\stdout.log",
+      "bytes": 2878,
+      "sha256": "ba51cc05501102c07598f2909377e5d54c434bc57ae28834bb6cdf555241722e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-0\\logs\\stderr.log",
+      "bytes": 33037,
+      "sha256": "7c43ba8b60ba69906bef348505c41ee72070cda3d8ddace9a355ead7af1e1a84"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-0\\logs\\jump-audio-host-input.jsonl",
+      "bytes": 85248,
+      "sha256": "f924fc93011d5495f7f81f75dcd109967496a4490b597bd67b97c542c66d90fd"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\saves\\netplay\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\saves\\card2.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\saves\\netplay\\card2.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\logs\\stdout.log",
+      "bytes": 3011,
+      "sha256": "eecef88619ffda92801b1e0d224e1bd5227426c2fc29f77836cbb51d9473600b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\logs\\stderr.log",
+      "bytes": 33157,
+      "sha256": "5b330e271758fb7d1f78f9a80243ae6a72e07f7c2fded965ea1dbe3271fc5cb8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\peer-1\\logs\\jump-audio-host-input.jsonl",
+      "bytes": 10510,
+      "sha256": "f8d2f1a3c01cd9a1c96102438bfe0ec40ef3e61625618bcca939418d60dfd48e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-0-P1-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "ebde4f52de3cf59017781a30a9de94f491517d825a2c3a5766822be879bd01a8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-1-P1-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "ebde4f52de3cf59017781a30a9de94f491517d825a2c3a5766822be879bd01a8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-0-P1-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "ba56bec6a407e5dc94852dcf89866fa55e0d51ffb21015d5614dbfb2fb504022"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-1-P1-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "ba56bec6a407e5dc94852dcf89866fa55e0d51ffb21015d5614dbfb2fb504022"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-0-P2-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "9e34c40ed3a7acf6db5185a71628667fbea5c620824c96db7925d5a8c59c4274"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-1-P2-actual-paused.png",
+      "bytes": 2074543,
+      "sha256": "9e34c40ed3a7acf6db5185a71628667fbea5c620824c96db7925d5a8c59c4274"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-0-P2-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "9684668286078127b6f3449078e5aae402281ca3674e4c4962b87326cce2bd31"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-1-P2-actual-resumed.png",
+      "bytes": 2074543,
+      "sha256": "9684668286078127b6f3449078e5aae402281ca3674e4c4962b87326cce2bd31"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-0-after-safe-online-state-refusals.png",
+      "bytes": 2074543,
+      "sha256": "b5ab2bc231e66c1b0b4d13cae59e6caca0411522d98361fc6166b02224d3622b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\F70OFF-natural-windows\\peer-1-after-safe-online-state-refusals.png",
+      "bytes": 2074543,
+      "sha256": "e071d26b1d4dd14f69e6b0e4657039cf03b16b3523836738b95741420717874c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v39-31ead13\\candidate.json",
+      "bytes": 11188,
+      "sha256": "07e53ce4a7d8441424aae4bc011e45bc8f0abb06933a5ceb4952e2319a72da7c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F205-policy-source-preflight-v3-actual\\source-contract.json",
+      "bytes": 10949,
+      "sha256": "0078e4236b1ddbc543662311ddf540741630529464ecf2d03558cda922c0c610"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v3\\qualification.json",
+      "bytes": 5323177,
+      "sha256": "2ca39511dcbe3cd11d149dcaa7a5762b0d85a05bacc07be0e9e2eec84e2d25d2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-pair-v3-index.json",
+      "bytes": 3452,
+      "sha256": "22cb309f6fdfb9dc843a0bf2b9ae4b35740b2861866d8dca51d274ae3e5f57de"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-policy-runtime-v2-index.json",
+      "bytes": 9187,
+      "sha256": "28e247cebe604832a00c4ca9fbade15fa7c02aca3603786bfd7e3f79a0ddb278"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-pair-forensic-v1-index.json",
+      "bytes": 878,
+      "sha256": "86915a4fea6817300dd0e87f7e6f70faa46d379cba190fb01e1e17029e36642e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\diag-batch-F70-OFF-paired-v39-31ead13-v1\\qualification.json",
+      "bytes": 3068308,
+      "sha256": "11311e1356e8273f1b186066028d77c90eeceff1ffdc8245a05ceba0fd56712d"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-native-replay\\manifest-bound-31ead13-F70-OFF-local-current-build-reviewed.json",
+      "bytes": 25378,
+      "sha256": "bf62af6ae8cad1427374db5c1e813d274be63fe625dd033e138e41152a21bf65"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-v39-F70-paired-root-v1.py",
+      "bytes": 10459,
+      "sha256": "6ed68cc9bcf6c472336e8c08eb2cbe4bea255b0cede95d9e3caeca5fa9c20555"
+    }
+  ]
+}

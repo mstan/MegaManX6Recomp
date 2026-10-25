@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 16 passed (R2, R4, R5, R7, R8, R12, R13, R15, F6, F10, F12, F18, F33, F38, F205, F208), 1 failed (R3), 217 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 17 passed (R2, R4, R5, R7, R8, R12, R13, R15, F6, F10, F12, F18, F33, F38, F70, F205, F208), 1 failed (R3), 216 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -52,7 +52,7 @@ review, with checkpoint/protection bypasses explicit. Netplay, the other four
 CP2 checks and the whole intro obligation remain unverified. These results do
 not change the separate 234 comparison rows.
 
-All 234 reference rows are inventoried; 16/234 (6.8%) are passed. R15/F208
+All 234 reference rows are inventoried; 17/234 (7.3%) are passed. R15/F208
 now pass their exact bounded checks locally and in paired Windows loopback on
 `c3c5bdb`; their prior failures remain in history.
 R3 now has a reviewed local failure: Zero's native death burst uses X's blue
@@ -87,7 +87,7 @@ within beam phase 1 and reach neutral ALIVE in 117 native ticks, retaining
 resources, world and both controls. Its independent route follows the original
 parent idle/control checks; the earlier combined dash-setup failures remain
 preserved. Five resolved CRC windows, both ordinary online recordings, native
-cards and owned exits pass. R6, F31, F59, F70 and F157 have additional local passes;
+cards and owned exits pass. R6, F31, F59 and F157 have additional local passes;
 their netplay and aggregate results
 remain unverified. F33's current-image state/resource and paired refusal checks pass.
 F70's [reviewed local run](evidence/mmx6-native-replay/manifest-bound-50f4a31-F70-disabled-diagnostics-local-reviewed.json)
@@ -111,8 +111,14 @@ menus/resumes/controls, empty recorder inventories, cards and owned exit0 pass.
 The separate OFF pair fails its independent P2 movement window; retained
 acknowledgments do not establish that the game consumed Right. A separate
 harness defect leaves two final cleanup check names under the F205 prefix.
-Both failures remain preserved. Issue `beads-eio.1.49` stays open; F70 NETPLAY
-and aggregate remain unverified.
+Both failures remain preserved. The [fresh v3 paired receipt](evidence/mmx6-native-replay/manifest-bound-31ead13-F70-OFF-paired-refusal-reviewed.json)
+passes both owners' controls, recorder absence, all active/personal cards and
+owned exits, with eight resolved CRC windows and60 independently matched samples.
+Both real SAVE9/LOAD9 requests safely refuse before staging on each peer, leave
+generations/snapshots unchanged and continue native execution. This follows the
+frozen counterpart's refusal/observer fallback while the current online profile
+does not support execution states. F70 now passes its supported-mode contracts;
+no valid online LOAD, replay, rollback or full state-semantics pass is claimed.
 
 F39's source audit also found that the SDK resets guest/GPU allocation extents,
 packet registrations and texture banks before each session activation, while

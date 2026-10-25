@@ -8066,14 +8066,14 @@
           "src/mods/mmx6_coop_plugin.c:diagnostics",
           "src/mods/mmx6_coop_plugin.c:diagnostic_setup"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -8146,9 +8146,47 @@
               "Separate OFF paired v1 failed its independent movement window; NETPLAY and aggregate remain unverified.",
               "No recorder exists; replay execution is unqualified."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "31ead13360e52c8e0b57d26012ec3eef3acea648",
+            "build_identity": {
+              "executable_sha256": "0b37b827e0724cceb1489db5254798fc04e9f994983587e063e4bfbc0a40d07a",
+              "compiled_manifest_sha256": "ef118714f0cfa18d91d5d0d8c7f82c6623bde664dd60d0edac26d2955f90ac47",
+              "sdk_commit": "9fd4adb78e9197a0bd3764d8a54e80d12df5c733"
+            },
+            "settings": {
+              "input_path": "published_host",
+              "audio": "dummy",
+              "diagnostics_feature": false,
+              "rewind": false,
+              "profile": "mmx6.win64-clang22.loopback",
+              "profile_revision": 2
+            },
+            "action": "Explicit OFF in both fresh private profiles; initial enrollment, both native owner menus/resumes and independent Right with actual both-peer response before six native updates; request actual SAVE9/LOAD9 on each peer.",
+            "outcome": "Both owners and both peers retain resources and controls; both SAVE/LOAD requests refuse before staging under the current unsupported-state profile. Completion generations and snapshot inventories remain unchanged, living execution continues24updates, eight resolved CRC windows/60 samples match, every active/personal card and both owned exits0 pass. Recorder folders/streams remain absent through controls/refusals/exit.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-native-replay/manifest-bound-31ead13-F70-OFF-paired-refusal-reviewed.json",
+                "sha256": "403cceb3a733e1abfbf24808dd72d6d3553d25d4a6b5edc713230392966b155b"
+              },
+              {
+                "path": "docs/evidence/mmx6-native-replay/manifest-bound-31ead13-F70-OFF-local-current-build-reviewed.json",
+                "sha256": "bf62af6ae8cad1427374db5c1e813d274be63fe625dd033e138e41152a21bf65"
+              }
+            ],
+            "limits": [
+              "Follows the frozen counterpart instruction to preserve refusal/observer tests until co-op state support exists; current online profile savestates_supported=0.",
+              "No valid online execution LOAD is applied or claimed; genuine current-build SAVE/move/LOAD is separately reviewed LOCAL on the same image.",
+              "Root viewed ten actual paired images and independently compared60 CRC samples strictly below both resolved watermarks.",
+              "The earlier v1 failed pair and its unisolated cause remain preserved; no failed-parent exception.",
+              "No replay, rollback, cross-host, production native gameplay or full state-semantics pass."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "LOCAL F70 passed on50f4a31: explicitly disabled diagnostics, actual current-build LOAD9/native landing/Right/24moreupdates and no recorderfolder/stream across launch/LOAD/exit; exactsource/cards/ownedexit preserved. No rewind/environment recording override. Source uses forced co-op diagnostics online, so offline absence does not qualify NETPLAY; aggregate remains unverified. Current saved-death prerequisite disclosed; no old-state/replay/cold-warm/full-state claim."
+        "limitations": "LOCAL actual fresh current-process SAVE9/move/LOAD9/position restoration and24livingupdates passes on31ead13. NETPLAY follows the frozen refusal/observer fallback while current profile prohibits online states: both real SAVE/LOAD requests refuse before staging with unchanged generations/snapshots, continued native execution/CRC, no recorder output, all cards and owned exits preserved. No valid online LOAD, replay, rollback, cross-host or complete state-semantics qualification. Earlier failed runs remain unchanged."
       }
     },
     {
