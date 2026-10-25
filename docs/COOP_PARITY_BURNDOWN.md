@@ -270,8 +270,16 @@ four new blank cards, strict recording refusals and owned graceful exit pass.
 The parent completed its entry survey; all six mechanics remain unverified.
 Several stage6–8 captures retain severe scrambled tiles or black rectangles,
 so background issue `beads-eio.1.52` remains open.
-Setup coverage is now45 qualified,3 blocked (`s04-a1-c00`, `s03-a0-c05`,
-`s04-a0-c03`) and46 unvisited supported locations. Rendering, stage mechanics
+The [reviewed entry2458 prefix](evidence/mmx6-content/manifest-bound-50f4a31-entry2458-one-component-failed-parent-reviewed.json)
+adds only `s12-a0-c01`. Root reproduced526 complete readiness observations,
+one partial probe,2,113 journal RAM links,14 source guards and16 exact mailbox
+writes, reviewed its actual composed image and verified all late gates.
+The batch remains failed at `s12-a0-c02`:440 complete polls never passed all
+twelve predicates; the last full poll had X at2151 versus authored2112.
+Its final three-read partial probe contains no body/camera/GPU readiness result.
+No damage, terrain or position-change cause is established.
+Setup coverage is now46 qualified,4 blocked (`s04-a1-c00`, `s03-a0-c05`,
+`s04-a0-c03`, `s12-a0-c02`) and44 unvisited supported locations. Rendering, stage mechanics
 and the comparison count receive no additional passes.
 F205 now passes its bounded effective-mode recording check on `f3bdbe9`, with
 107 debug and 107 production checks passing. The [LOCAL receipt](evidence/mmx6-native-replay/manifest-bound-f3bdbe9-F205-effective-mode-history-local-reviewed.json)
