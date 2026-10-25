@@ -293,9 +293,20 @@ constraints. The typed publication stayed at tick158/native157 throughout;
 native X was living at the authored X1424, with action20 and PLAY+1C set.
 Five readiness predicates remained false. No tail RAM read or image exists;
 the next fixture read was refused before RPC. No cause is established.
-Setup coverage is now46 qualified,6 blocked (`s04-a1-c00`, `s03-a0-c05`,
-`s04-a0-c03`, `s12-a0-c02`, `s12-a0-c03`, `s16-a0-c01`) and42 unvisited supported locations. Rendering, stage mechanics
-and the comparison count receive no additional passes.
+The [reviewed entry60751 prefix](evidence/mmx6-content/manifest-bound-50f4a31-entry60751-three-components-failed-parent-reviewed.json)
+adds three setup components: `s16-a0-c02`, `s16-a0-c03` and `s16-a0-c04`.
+All twelve readiness predicates, three root-viewed captures, 2,867 charged RAM
+reads, 28 source guards, 32 mailbox writes and late recording/card/exit checks
+were reproduced. The fourth entry, `s17-a0-c01`, exhausted 1,800 reads after
+443 complete polls; only selected camera bounds remained false. Actual camera
+bounds were `[3200,368,1200,59]`, versus authored minimum Y 1200; dynamic
+camera source evidence was absent. No cause or waiver is inferred. The failed
+parent and eight untouched later selections remain retained. Background
+corruption remains visible; these are setup observations only.
+Setup coverage is now49 qualified,7 blocked (`s04-a1-c00`, `s03-a0-c05`,
+`s04-a0-c03`, `s12-a0-c02`, `s12-a0-c03`, `s16-a0-c01`, `s17-a0-c01`)
+and38 unvisited supported locations. Rendering, stage mechanics and the
+comparison count receive no additional passes.
 F205 now passes its bounded effective-mode recording check on `f3bdbe9`, with
 107 debug and 107 production checks passing. The [LOCAL receipt](evidence/mmx6-native-replay/manifest-bound-f3bdbe9-F205-effective-mode-history-local-reviewed.json)
 binds 6,603 native input events and 19 actual mode transitions. The

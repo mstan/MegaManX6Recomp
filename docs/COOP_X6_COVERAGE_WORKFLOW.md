@@ -42,14 +42,15 @@ is not a migration or a way to discard results.
 
 ## Checkpoint entry survey
 
-The [reviewed entry-survey receipt](evidence/mmx6-content/manifest-bound-50f4a31-checkpoint-entry-survey-prefixes-v2-reviewed.json)
-retains eleven qualified checkpoint-entry setup components and three blocked
-entries on build `50f4a31`. The remaining 80 supported checkpoints have not
-been visited by this survey. Each setup uses the guarded original checkpoint
-loader and records that reachability bypass. These observations establish
-entry setup only; all six gameplay checks and actual stage-end transitions
-still require their own evidence. The completed prefixes and all failed
-parent runs remain retained. This receipt does not change coverage statuses.
+The [current reviewed entry-survey receipt](evidence/mmx6-content/manifest-bound-50f4a31-entry60751-three-components-failed-parent-reviewed.json)
+retains 49 qualified checkpoint-entry setup components and seven blocked
+entries on build `50f4a31`; 38 supported checkpoints remain unvisited.
+Its previous-receipt chain retains earlier completed components and failed
+runs. Each setup uses the guarded original checkpoint loader and records that
+reachability bypass. These observations establish entry setup only; all six
+gameplay checks and actual stage-end transitions require separate evidence.
+Visible background corruption remains unqualified. The receipt changes no
+gameplay coverage statuses.
 
 ## Initialize, check, render and record
 
