@@ -174,9 +174,18 @@ The [next eight-checkpoint batch](evidence/mmx6-content/manifest-bound-50f4a31-c
 also passes original entry transactions and final parent checks. All eight
 images were reviewed; several later checkpoints show background artifacts,
 including a magenta region at `s02-a0-c05` (`beads-eio.1.52`, original comparison
-and cause pending). Setup coverage is now 26 qualified, 2 blocked and 66
-unvisited supported locations. These are setup results; rendering, stage
-mechanics and the comparison count receive no additional passes.
+and cause pending).
+The [Stage 16 help/entry receipt](evidence/mmx6-content/manifest-bound-50f4a31-stage16-three-wait-help-entry-reviewed.json)
+also clears its setup blocker after three exact original dialogue waits,
+observed native held input and consumed neutral, actual help-actor retirement,
+and all twelve unchanged entry predicates. Root rechecked all 275 raw buffers,
+five rounds of 29 complete source guards, four fresh blank cards and both
+composed images. The first two rising edges were not sampled; native held
+input and source text progress were observed for all three. Old failed runs
+remain preserved without assigning them a cause. Setup coverage is now 27
+qualified, 1 blocked (`s04-a1-c00`) and 66 unvisited supported locations. These
+are setup results; rendering, stage mechanics and the comparison count receive
+no additional passes.
 F205 now passes its bounded effective-mode recording check on `f3bdbe9`, with
 107 debug and 107 production checks passing. The [LOCAL receipt](evidence/mmx6-native-replay/manifest-bound-f3bdbe9-F205-effective-mode-history-local-reviewed.json)
 binds 6,603 native input events and 19 actual mode transitions. The

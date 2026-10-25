@@ -1,0 +1,2967 @@
+{
+  "kind": "root_reviewed_stage16_original_three_wait_help_release_and_entry_setup",
+  "binding": {
+    "candidate_proof": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\host-lab-candidate-v36-50f4a31\\candidate.json",
+      "sha256": "c454fd8c17e78da36acc6de641cbc88c3319054c60ffaa014fde8bd78f1ff652"
+    },
+    "candidate_source": "50f4a31cd6c1344f4448be51e3016a84e96b2566",
+    "sdk": "5bd63adf265d6019a30fec221001ce481c602144",
+    "image": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\candidate\\mmx6-runtime.exe",
+      "sha256": "7932585a45a53eae7ad1fbdd083ecd4ff3512741ff42c841f31cada8af4db25f"
+    },
+    "declared_manifest_sha256": "595914ab91176b013ff2abd8e19fbdfdf6cf4c85b1414223fafdc0e9a57f308c",
+    "owned_pid": 68556
+  },
+  "source_packet_sha256": "001a7c297cccea1bbffcbf67457038fe9caed5a88248e3749ac4ba9596275e33",
+  "actual_parent_status": "source_bound_stage16_help_and_original_entry_completed_artwork_review_pending",
+  "parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "owned_exit_and_private_cards": true,
+    "recording_taint_retained_and_strictly_refused": true,
+    "source_held_response_consumed_neutral_real_release_original12_entry": true
+  },
+  "original_initializer": {
+    "mailbox_writes": 8,
+    "completed_fixture": {
+      "generation": 1,
+      "state": 3,
+      "reason": 0,
+      "stage": 16,
+      "section": 0,
+      "checkpoint": 0,
+      "nonce": 1663655744,
+      "initializer_entries": 1,
+      "record": "80072CFC",
+      "tainted": 1
+    },
+    "prerequisite_bypass": "Original command8 route entry; no position/HP/timer/seen/success writes"
+  },
+  "actual_dialogue": [
+    {
+      "page": 0,
+      "source_wait": {
+        "page": 0,
+        "offset": 78,
+        "control": 10868
+      },
+      "status": "native_held_source_response_and_consumed_neutral_observed",
+      "before": 24,
+      "held_snapshot": 25,
+      "neutral_snapshot": 27,
+      "pressed_observed": true,
+      "edge_observed": false,
+      "transition_observed": true,
+      "neutral_consumed": true,
+      "actual_counter_anchor": 2623,
+      "held_actual_counter": 2635,
+      "neutral_actual_counter": 2656
+    },
+    {
+      "page": 1,
+      "source_wait": {
+        "page": 1,
+        "offset": 142,
+        "control": 10846
+      },
+      "status": "native_held_source_response_and_consumed_neutral_observed",
+      "before": 34,
+      "held_snapshot": 36,
+      "neutral_snapshot": 38,
+      "pressed_observed": true,
+      "edge_observed": false,
+      "transition_observed": true,
+      "neutral_consumed": true,
+      "actual_counter_anchor": 2800,
+      "held_actual_counter": 2819,
+      "neutral_actual_counter": 2834
+    },
+    {
+      "page": 2,
+      "source_wait": {
+        "page": 2,
+        "offset": 180,
+        "control": 43603
+      },
+      "status": "native_held_source_response_and_consumed_neutral_observed",
+      "before": 42,
+      "held_snapshot": 43,
+      "neutral_snapshot": 45,
+      "pressed_observed": true,
+      "edge_observed": true,
+      "transition_observed": true,
+      "neutral_consumed": true,
+      "actual_counter_anchor": 2909,
+      "held_actual_counter": 2916,
+      "neutral_actual_counter": 2933
+    }
+  ],
+  "raw_validation": {
+    "snapshots": 55,
+    "raw_buffers": 275,
+    "source_guard_rounds": 5,
+    "complete_spans_per_round": 29,
+    "all_original12_independently_recomputed": true,
+    "observed_original_global_counter_not_typed_timer": true,
+    "clock_or_publication_substitution": false
+  },
+  "real_help_release_snapshot": 47,
+  "final_original12": {
+    "publication_after_completed_receipt": true,
+    "enrolled_living_idle_roster": true,
+    "native_gameplay_tuple": true,
+    "native_entry_gates_clear": true,
+    "native_p1_visible_idle_grounded": true,
+    "native_previous_position_settled": true,
+    "native_p1_agrees_with_publication": true,
+    "p1_at_authored_x": true,
+    "selected_camera_bounds": true,
+    "camera_inside_authored_bounds": true,
+    "actors_in_current_native_viewport": true,
+    "display_enabled": true
+  },
+  "observed_samples": [
+    {
+      "index": 0,
+      "counter": 2117,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 1,
+      "counter": 2139,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 2,
+      "counter": 2160,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 3,
+      "counter": 2180,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 4,
+      "counter": 2201,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 5,
+      "counter": 2222,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 6,
+      "counter": 2243,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 7,
+      "counter": 2264,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 8,
+      "counter": 2287,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 9,
+      "counter": 2308,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": false,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 10,
+      "counter": 2330,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 11,
+      "counter": 2351,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 12,
+      "counter": 2371,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 13,
+      "counter": 2392,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 14,
+      "counter": 2413,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 15,
+      "counter": 2432,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 16,
+      "counter": 2452,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 17,
+      "counter": 2474,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 18,
+      "counter": 2495,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 19,
+      "counter": 2519,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 20,
+      "counter": 2542,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 21,
+      "counter": 2562,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 22,
+      "counter": 2583,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 23,
+      "counter": 2607,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 24,
+      "counter": 2623,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 25,
+      "counter": 2635,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 26,
+      "counter": 2645,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 27,
+      "counter": 2656,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 28,
+      "counter": 2680,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 29,
+      "counter": 2701,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 30,
+      "counter": 2723,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 31,
+      "counter": 2744,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 32,
+      "counter": 2765,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 33,
+      "counter": 2787,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 34,
+      "counter": 2800,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 35,
+      "counter": 2809,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 36,
+      "counter": 2819,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 37,
+      "counter": 2826,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 38,
+      "counter": 2834,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 39,
+      "counter": 2856,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 40,
+      "counter": 2877,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 41,
+      "counter": 2897,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 42,
+      "counter": 2909,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 43,
+      "counter": 2916,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 44,
+      "counter": 2927,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 45,
+      "counter": 2933,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 46,
+      "counter": 2955,
+      "native_timer": 0,
+      "typed_tick": 164,
+      "original12": {
+        "publication_after_completed_receipt": false,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": false,
+        "native_p1_visible_idle_grounded": false,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": false,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": false,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 47,
+      "counter": 2978,
+      "native_timer": 10,
+      "typed_tick": 176,
+      "original12": {
+        "publication_after_completed_receipt": true,
+        "enrolled_living_idle_roster": false,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": true,
+        "native_p1_visible_idle_grounded": true,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": true,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": true,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 48,
+      "counter": 2989,
+      "native_timer": 21,
+      "typed_tick": 187,
+      "original12": {
+        "publication_after_completed_receipt": true,
+        "enrolled_living_idle_roster": false,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": true,
+        "native_p1_visible_idle_grounded": true,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": true,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": true,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 49,
+      "counter": 3012,
+      "native_timer": 44,
+      "typed_tick": 210,
+      "original12": {
+        "publication_after_completed_receipt": true,
+        "enrolled_living_idle_roster": false,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": true,
+        "native_p1_visible_idle_grounded": true,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": true,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": true,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 50,
+      "counter": 3034,
+      "native_timer": 66,
+      "typed_tick": 233,
+      "original12": {
+        "publication_after_completed_receipt": true,
+        "enrolled_living_idle_roster": false,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": true,
+        "native_p1_visible_idle_grounded": true,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": true,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": true,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 51,
+      "counter": 3058,
+      "native_timer": 90,
+      "typed_tick": 255,
+      "original12": {
+        "publication_after_completed_receipt": true,
+        "enrolled_living_idle_roster": false,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": true,
+        "native_p1_visible_idle_grounded": true,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": true,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": true,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 52,
+      "counter": 3075,
+      "native_timer": 107,
+      "typed_tick": 274,
+      "original12": {
+        "publication_after_completed_receipt": true,
+        "enrolled_living_idle_roster": false,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": true,
+        "native_p1_visible_idle_grounded": true,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": true,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": true,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 53,
+      "counter": 3096,
+      "native_timer": 128,
+      "typed_tick": 293,
+      "original12": {
+        "publication_after_completed_receipt": true,
+        "enrolled_living_idle_roster": false,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": true,
+        "native_p1_visible_idle_grounded": true,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": true,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": true,
+        "display_enabled": true
+      }
+    },
+    {
+      "index": 54,
+      "counter": 3120,
+      "native_timer": 152,
+      "typed_tick": 318,
+      "original12": {
+        "publication_after_completed_receipt": true,
+        "enrolled_living_idle_roster": true,
+        "native_gameplay_tuple": true,
+        "native_entry_gates_clear": true,
+        "native_p1_visible_idle_grounded": true,
+        "native_previous_position_settled": true,
+        "native_p1_agrees_with_publication": true,
+        "p1_at_authored_x": true,
+        "selected_camera_bounds": true,
+        "camera_inside_authored_bounds": true,
+        "actors_in_current_native_viewport": true,
+        "display_enabled": true
+      }
+    }
+  ],
+  "budgets": {
+    "RAM_reads": 340,
+    "output_bytes_before_summary": 19162726,
+    "first_ordinary_to_last_asset_host_seconds": 16.79700000002049
+  },
+  "native_cards": {
+    "fresh_profile_start_inventory_empty": true,
+    "actual_four_personal_and_recorded_initial_cards_exact_blank": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\candidate\\saves\\card1.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\candidate\\saves\\card2.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\candidate\\saves\\input-recordings\\session-1792931403763288-1-0\\card1.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\candidate\\saves\\input-recordings\\session-1792931403763288-1-0\\card2.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      }
+    ],
+    "legacy_callback_card_lists_empty_not_used_as_preservation_proof": true
+  },
+  "root_image_review": {
+    "images": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\stage16-original-first-source-wait-before-Cross-composed.png",
+        "bytes": 2074543,
+        "sha256": "b7e6caf6b1612bb8f0131d598eb7645a03dde04ae83060e950c83b4137010aa9"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\stage16-original-help-released-all12-entry-composed.png",
+        "bytes": 2074543,
+        "sha256": "71d781903eb267fa47949a771f38dbe9233c2f9bae58f864c7d73538556acb9a"
+      }
+    ],
+    "observation": "Actual Alia/X first source wait, then closed dialogue with both living actors and stacked HUD. No whole-stage artwork or mechanics verdict."
+  },
+  "qualified_entry_setup_locations": 27,
+  "current_blocked_entry_locations": [
+    "s04-a1-c00"
+  ],
+  "unvisited_supported_locations": 66,
+  "old_failures": "Preserved. This new current-context source-qualified run clears Stage16 setup only; old failure cause remains unverified.",
+  "scope": {
+    "entry_setup": "qualified",
+    "all_six_stage_mechanics": "unverified",
+    "actual_stage_end_transition": "unverified",
+    "paired": "unverified",
+    "comparison_passes_added": 0
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-00.bin",
+      "bytes": 255124,
+      "sha256": "0cad367eec29c750c38338b490a59bdaa08697502e302d23eee1eb4504d7f47d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-00.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-00.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-00.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-00.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-01.bin",
+      "bytes": 255124,
+      "sha256": "576d56662179239fbabd9ff2d1efa3376093a6ba789e9903fcda6d62ee9359cf"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-01.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-01.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-01.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-01.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-02.bin",
+      "bytes": 255124,
+      "sha256": "3ae3b7f269b66850712aed37a78c2be710821d5341ff113bd05825bc2088a841"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-02.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-02.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-02.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-02.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-03.bin",
+      "bytes": 255124,
+      "sha256": "b83af8e4c15f3a62b866669f6fdabce014cd5f973e9c2d98837897dc53b32e98"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-03.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-03.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-03.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-03.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-04.bin",
+      "bytes": 255124,
+      "sha256": "2ecbd1c3732c44d0dee64cd6a2e736a9fa072da1dfc213e09095e174fd9a59be"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-04.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-04.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-04.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-04.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-05.bin",
+      "bytes": 255124,
+      "sha256": "7b5f563730d0032a45e09db4f52c2e7c324f2e71c25692504f62f70dc3b1bb79"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-05.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-05.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-05.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-05.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-06.bin",
+      "bytes": 255124,
+      "sha256": "a064d4d9af147f738e7eaed8f6c71893d81a37495f5ab88593e53e97ac702d06"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-06.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-06.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-06.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-06.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-07.bin",
+      "bytes": 255124,
+      "sha256": "c7759e0e07c01410e2246a22400e61eaed15d9d9e17f0f8829c25f3c6c195090"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-07.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-07.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-07.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-07.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-08.bin",
+      "bytes": 255124,
+      "sha256": "2c5ba8ad723ae28aaaca3cac282d30367448fbc3db987e041c8442827b1480f3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-08.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-08.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-08.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-08.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-09.bin",
+      "bytes": 255124,
+      "sha256": "4e56ac8dd9f89c2b9af80f54a47a1101d7014597266efb3ba746c7dd8d1145ca"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-09.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-09.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-09.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-09.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-10.bin",
+      "bytes": 255124,
+      "sha256": "ac3faf4e6f7761baaa4d8b6e6f297978ac469b82e57c455bd00ced09677f664c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-10.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-10.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-10.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-10.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-11.bin",
+      "bytes": 255124,
+      "sha256": "24b0c0f23e9a64cec12d346574d862ea40e2083d67c94a5d8591ade910926232"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-11.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-11.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-11.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-11.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-12.bin",
+      "bytes": 255124,
+      "sha256": "2ab766b500d86e662e235c89fa6cf64ffc9e6db52bf7139aef95459e53ad121e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-12.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-12.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-12.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-12.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-13.bin",
+      "bytes": 255124,
+      "sha256": "f450b3c8950b14a5ffd6dc6ff1b569dfa42705eaaf7fee88da1a92d9e46cb5e1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-13.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-13.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-13.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-13.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-14.bin",
+      "bytes": 255124,
+      "sha256": "23f2fbedfe560de6402c8b2a0d9fdaab0c3931605e3f4323032bc782ac2bf20a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-14.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-14.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-14.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-14.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-15.bin",
+      "bytes": 255124,
+      "sha256": "d9d36bda1d816e068e0400a26e59adfe63ffdf9443524fcd227867c8479e289a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-15.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-15.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-15.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-15.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-16.bin",
+      "bytes": 255124,
+      "sha256": "5350b26831804d94821eb651fc106a7a5cb373f45f5ce5ed8e20c9e1099397cc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-16.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-16.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-16.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-16.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-17.bin",
+      "bytes": 255124,
+      "sha256": "6b4d7db220a1d4289ef9ccc7fea5ab395c6e8b358241c2f8961f5ae9ff1439a0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-17.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-17.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-17.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-17.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-18.bin",
+      "bytes": 255124,
+      "sha256": "fcc81b23fcdf817fede96c4ab8aa610445f7272b9b84f385c571b463eb44afb8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-18.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-18.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-18.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-18.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-19.bin",
+      "bytes": 255124,
+      "sha256": "443b5a0cd4e619c4c2efa119aafd3142333d66ac39aa4462dc1e229c67b56ed0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-19.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-19.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-19.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-19.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-20.bin",
+      "bytes": 255124,
+      "sha256": "4c193a60eb6b5c0335a675702677abfdee375f979ff9750e6df47fd6cf380f9a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-20.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-20.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-20.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-20.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-21.bin",
+      "bytes": 255124,
+      "sha256": "515ed9ab0a3d92c115f34c04aa58147b70ad3efbf29c10d179a7e8a78684ab7b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-21.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-21.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-21.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-21.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-22.bin",
+      "bytes": 255124,
+      "sha256": "737117b8edbf47008b3cf93c174d83513d0c5ec317b90d05b57debdcfc16bb41"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-22.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-22.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-22.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-22.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-23.bin",
+      "bytes": 255124,
+      "sha256": "9e88fed3c29851ea37743afaf8e64e42a34a9a93322f6ba3bfce809a43ac790c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-23.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-23.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-23.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-23.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-24.bin",
+      "bytes": 255124,
+      "sha256": "824c5b8535951f5d16797e05ad018aa9e5b60ec33f20c2e7855d1aa65a201d99"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-24.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-24.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-24.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-24.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-25.bin",
+      "bytes": 255124,
+      "sha256": "debe2512b3560e151eb907410025ce329c478e3582b66cecccd9eedab923d80a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-25.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-25.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-25.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-25.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-26.bin",
+      "bytes": 255124,
+      "sha256": "b5219031053298aa2640df6af932534525b14c5c69e3d4a4651410edb5116f38"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-26.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-26.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-26.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-26.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-27.bin",
+      "bytes": 255124,
+      "sha256": "e3f52b1adf3a4dc7296e0883261ea77c67d30797e09912f1b3ec3505ad876115"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-27.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-27.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-27.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-27.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-28.bin",
+      "bytes": 255124,
+      "sha256": "925e663278398b7c8a0e79fc8ec17ff1aab7aeb2a2eb2fd5e81c5cc0934f54b0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-28.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-28.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-28.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-28.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-29.bin",
+      "bytes": 255124,
+      "sha256": "d107d5368e932633a572eef87949865b6f10246743f372ca8d2cf822d56a3c26"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-29.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-29.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-29.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-29.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-30.bin",
+      "bytes": 255124,
+      "sha256": "935c8d458bc8d3e50320397edf4b157ba15e61452d966036e250c1595614d130"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-30.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-30.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-30.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-30.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-31.bin",
+      "bytes": 255124,
+      "sha256": "410c2b4dac096a5883dc5cfb2630e91e65b5ac53bbdc0e0a4bfe6fc44011ef9a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-31.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-31.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-31.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-31.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-32.bin",
+      "bytes": 255124,
+      "sha256": "137d4ecdebc5e8ddc60bd8cbf60b6025137fc01552e6eabc30ec02c74e2125ca"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-32.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-32.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-32.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-32.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-33.bin",
+      "bytes": 255124,
+      "sha256": "cc59dccab31938760f536522bd2bf9942b1eed8e1b0351b9040f191bd241315a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-33.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-33.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-33.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-33.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-34.bin",
+      "bytes": 255124,
+      "sha256": "c56f34c38b4bfdd842d73f4d4cfc800067c646b032ba764a47e1dcca6ed822b6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-34.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-34.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-34.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-34.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-35.bin",
+      "bytes": 255124,
+      "sha256": "8182da6bcba4e683e78aa96fa239c08a06e5ee1141303f13acb44b17b83f72ab"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-35.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-35.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-35.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-35.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-36.bin",
+      "bytes": 255124,
+      "sha256": "8f76ca015d83df0e0d0fdd2fd0722236161e83cb864886b6c42854a41e274505"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-36.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-36.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-36.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-36.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-37.bin",
+      "bytes": 255124,
+      "sha256": "11e6a97ba97c8a6037aac38e4b3590bf0569289afd0f52c7a5879664319edf3b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-37.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-37.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-37.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-37.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-38.bin",
+      "bytes": 255124,
+      "sha256": "acd97cdf5d5b967f408a53bbe1b89d6e07e554130d06e993d0f2d441473b529a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-38.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-38.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-38.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-38.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-39.bin",
+      "bytes": 255124,
+      "sha256": "d73f02b4e28b2f61841613419d76221fab7e61707ceedc9ea214038a2558517c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-39.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-39.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-39.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-39.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-40.bin",
+      "bytes": 255124,
+      "sha256": "31b4abfaf1b894958e293b6cce3f7d7f3d242d88ad5dcafe3353cc016bb910ef"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-40.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-40.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-40.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-40.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-41.bin",
+      "bytes": 255124,
+      "sha256": "5927ef4bf2c2ee7da83535c7ebe8e8682422e2a9d3b9e51c30a9ae9716c6c7d9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-41.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-41.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-41.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-41.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-42.bin",
+      "bytes": 255124,
+      "sha256": "6e89ea8491a3bb757a5004045e2236f125785a0bb364e67c806fbab59ccd94ad"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-42.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-42.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-42.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-42.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-43.bin",
+      "bytes": 255124,
+      "sha256": "1aa00dc40521e29b4fa705d1d9746ed8214e0ac7ab7d91a75b0f086f94b19e44"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-43.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-43.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-43.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-43.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-44.bin",
+      "bytes": 255124,
+      "sha256": "d99372817f0bca9940d12574c3eb514d7a2a291ddb271883a9bd385d17d7467f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-44.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-44.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-44.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-44.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-45.bin",
+      "bytes": 255124,
+      "sha256": "14dc0dab4b766edfbd987e0f6e4039c609b7a182d6656edd9e2b5e9c5eb4d545"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-45.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-45.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-45.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-45.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-46.bin",
+      "bytes": 255124,
+      "sha256": "d584e576ff987d56e0323f9ea9a2c7742a198cd5a11ff499cd1e24737e945deb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-46.bin",
+      "bytes": 6488,
+      "sha256": "2209655b7bfadbe579ce01743ae0bddcb5d21228fc6d4ccae1196bc637b329b9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-46.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-46.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-46.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-47.bin",
+      "bytes": 255124,
+      "sha256": "2edc437ee29a7690b70906db170203b9444011a4536e38f18f5e8be8dfad9cd7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-47.bin",
+      "bytes": 6488,
+      "sha256": "7de43c74c827ad9abeb610b3642fd01fc9b8e68234a4ce046f9e231f61252701"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-47.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-47.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-47.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-48.bin",
+      "bytes": 255124,
+      "sha256": "0579cd9688495af59229a8441d757a3602a998136f60c6b31cf4ccc19156de6f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-48.bin",
+      "bytes": 6488,
+      "sha256": "69d1cd266b99abc35bd6cc415e5c14b1c34451bdf58584ca23087c3d2fd07bb3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-48.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-48.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-48.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-49.bin",
+      "bytes": 255124,
+      "sha256": "29e505295cd16ff3f83625a7e40ac9a5d2e21eceee2e25aa59703ffb9335d0da"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-49.bin",
+      "bytes": 6488,
+      "sha256": "74473edb568292a50d54190a89407914f7338df86962f76b9e0130b4fac3df9c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-49.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-49.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-49.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-50.bin",
+      "bytes": 255124,
+      "sha256": "f10e19e6a5a7289e994bc0cccbb37b5d969c2c093315e6f71f312565849d3441"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-50.bin",
+      "bytes": 6488,
+      "sha256": "8aef0ae0b1266e7596a4ead2a9d8586dd5328ea789ae6449b3606bf0b0229ec3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-50.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-50.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-50.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-51.bin",
+      "bytes": 255124,
+      "sha256": "e5157ab0ebaff411d932951161d8c6732cb6d123149d3fb716ac61e84126394b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-51.bin",
+      "bytes": 6488,
+      "sha256": "936ae488bc43d482becdcaa360bfe93c18cacfc85ccd194232a04a734584c9c0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-51.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-51.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-51.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-52.bin",
+      "bytes": 255124,
+      "sha256": "cdecca40a2981dc9b436b753a2f56edbd80dc6ad04f9fe9f29b3184f885ead26"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-52.bin",
+      "bytes": 6488,
+      "sha256": "591ee565469dc40eb65955cd2e0137016ad8bcee35077e706fa31bcf34cf85ec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-52.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-52.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-52.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-53.bin",
+      "bytes": 255124,
+      "sha256": "3876938f81e7b52b93ecd210aee332723c0fe7f0f208a9b5140c7f23b1ae8ddb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-53.bin",
+      "bytes": 6488,
+      "sha256": "1c01e5d79b9d3795e004a2458f72176817c803f80f7484aa4f98c6f96ee1e909"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-53.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-53.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-53.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\ordinary_atomic-54.bin",
+      "bytes": 255124,
+      "sha256": "6ec9f73187d650e4756b88d6f6920caf0a082922527f2c092579d34215b96346"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_typed_publication-54.bin",
+      "bytes": 6488,
+      "sha256": "eafdf1f071b10447f5e3de8fab38b232bb5d45ab173a5c28c866118dedc901bf"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_fixture_cookie-54.bin",
+      "bytes": 32,
+      "sha256": "cbdee7ea52aff1b3170a20cee0a6ea5b82bb400ccf9149e10a8cca1d715845f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_text_pointer-54.bin",
+      "bytes": 4,
+      "sha256": "85f19d315bce9a6e24b1eb555d98ca10a74e6f287db4078db5590993b84a0ede"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\independent_full_text_asset-54.bin",
+      "bytes": 1244,
+      "sha256": "f235fb95c8a8cef1318f1c35af32b6cee9f0e57518ea53573c4ecf0703927793"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round00-group00.bin",
+      "bytes": 8536,
+      "sha256": "2c03200ba6635164183b678145ce7f408a314c824b126ad1f6ad8e7bac7cb8cc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round00-group01.bin",
+      "bytes": 45748,
+      "sha256": "79c1021ce11a22debc7fea9bc092f13a5e9707f7b9875ab410e31e54c340bbd4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round00-group02.bin",
+      "bytes": 68,
+      "sha256": "d22755900b324fe8019c1acfcd89c324f80a7ec1fb00c49af8fd4f0f83839a6e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round00-group03.bin",
+      "bytes": 1496,
+      "sha256": "b7391ea63f24989fbbebf0f2d0e0d8a3affcd1f018e43fe731cf0198a19beb22"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round00-group04.bin",
+      "bytes": 53524,
+      "sha256": "df17b76c4f3bbab6c8a40b1c99c102f5e1e1c2cad7318b1c4797d2ba54ef9b44"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round00-group05.bin",
+      "bytes": 1544,
+      "sha256": "39c45de7cc50807aea29bb26fdba504967945f97ed956ab01f246f11c0ceea61"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round01-group00.bin",
+      "bytes": 8536,
+      "sha256": "2c03200ba6635164183b678145ce7f408a314c824b126ad1f6ad8e7bac7cb8cc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round01-group01.bin",
+      "bytes": 45748,
+      "sha256": "79c1021ce11a22debc7fea9bc092f13a5e9707f7b9875ab410e31e54c340bbd4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round01-group02.bin",
+      "bytes": 68,
+      "sha256": "d22755900b324fe8019c1acfcd89c324f80a7ec1fb00c49af8fd4f0f83839a6e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round01-group03.bin",
+      "bytes": 1496,
+      "sha256": "b7391ea63f24989fbbebf0f2d0e0d8a3affcd1f018e43fe731cf0198a19beb22"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round01-group04.bin",
+      "bytes": 53524,
+      "sha256": "df17b76c4f3bbab6c8a40b1c99c102f5e1e1c2cad7318b1c4797d2ba54ef9b44"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round01-group05.bin",
+      "bytes": 1544,
+      "sha256": "39c45de7cc50807aea29bb26fdba504967945f97ed956ab01f246f11c0ceea61"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round02-group00.bin",
+      "bytes": 8536,
+      "sha256": "2c03200ba6635164183b678145ce7f408a314c824b126ad1f6ad8e7bac7cb8cc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round02-group01.bin",
+      "bytes": 45748,
+      "sha256": "79c1021ce11a22debc7fea9bc092f13a5e9707f7b9875ab410e31e54c340bbd4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round02-group02.bin",
+      "bytes": 68,
+      "sha256": "d22755900b324fe8019c1acfcd89c324f80a7ec1fb00c49af8fd4f0f83839a6e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round02-group03.bin",
+      "bytes": 1496,
+      "sha256": "b7391ea63f24989fbbebf0f2d0e0d8a3affcd1f018e43fe731cf0198a19beb22"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round02-group04.bin",
+      "bytes": 53524,
+      "sha256": "df17b76c4f3bbab6c8a40b1c99c102f5e1e1c2cad7318b1c4797d2ba54ef9b44"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round02-group05.bin",
+      "bytes": 1544,
+      "sha256": "39c45de7cc50807aea29bb26fdba504967945f97ed956ab01f246f11c0ceea61"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round03-group00.bin",
+      "bytes": 8536,
+      "sha256": "2c03200ba6635164183b678145ce7f408a314c824b126ad1f6ad8e7bac7cb8cc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round03-group01.bin",
+      "bytes": 45748,
+      "sha256": "79c1021ce11a22debc7fea9bc092f13a5e9707f7b9875ab410e31e54c340bbd4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round03-group02.bin",
+      "bytes": 68,
+      "sha256": "d22755900b324fe8019c1acfcd89c324f80a7ec1fb00c49af8fd4f0f83839a6e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round03-group03.bin",
+      "bytes": 1496,
+      "sha256": "b7391ea63f24989fbbebf0f2d0e0d8a3affcd1f018e43fe731cf0198a19beb22"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round03-group04.bin",
+      "bytes": 53524,
+      "sha256": "df17b76c4f3bbab6c8a40b1c99c102f5e1e1c2cad7318b1c4797d2ba54ef9b44"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round03-group05.bin",
+      "bytes": 1544,
+      "sha256": "39c45de7cc50807aea29bb26fdba504967945f97ed956ab01f246f11c0ceea61"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round04-group00.bin",
+      "bytes": 8536,
+      "sha256": "2c03200ba6635164183b678145ce7f408a314c824b126ad1f6ad8e7bac7cb8cc"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round04-group01.bin",
+      "bytes": 45748,
+      "sha256": "79c1021ce11a22debc7fea9bc092f13a5e9707f7b9875ab410e31e54c340bbd4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round04-group02.bin",
+      "bytes": 68,
+      "sha256": "d22755900b324fe8019c1acfcd89c324f80a7ec1fb00c49af8fd4f0f83839a6e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round04-group03.bin",
+      "bytes": 1496,
+      "sha256": "b7391ea63f24989fbbebf0f2d0e0d8a3affcd1f018e43fe731cf0198a19beb22"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round04-group04.bin",
+      "bytes": 53524,
+      "sha256": "df17b76c4f3bbab6c8a40b1c99c102f5e1e1c2cad7318b1c4797d2ba54ef9b44"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\source-round04-group05.bin",
+      "bytes": 1544,
+      "sha256": "9537ce59ce60066e72164497798e9caab434656f81abb83187314cdbc8b5eb02"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\recording-rejection\\settings.json",
+      "bytes": 10329,
+      "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\recording-rejection\\content.json",
+      "bytes": 503,
+      "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\recording-rejection\\simulation-contract.json",
+      "bytes": 259,
+      "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\recording-rejection\\inputs.jsonl",
+      "bytes": 786788,
+      "sha256": "46f91cbff19e6c769e8f4b59e953a44ea450ef8f02596caf3b8994c687a716f4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\recording-rejection\\status.json",
+      "bytes": 211,
+      "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\recording-rejection\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\recording-rejection\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\candidate\\saves\\card1.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\candidate\\saves\\card2.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\candidate\\saves\\input-recordings\\session-1792931403763288-1-0\\card1.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\candidate\\saves\\input-recordings\\session-1792931403763288-1-0\\card2.initial.mcd",
+      "bytes": 131072,
+      "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\stage16-original-first-source-wait-before-Cross-composed.png",
+      "bytes": 2074543,
+      "sha256": "b7e6caf6b1612bb8f0131d598eb7645a03dde04ae83060e950c83b4137010aa9"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\stage16-original-help-released-all12-entry-composed.png",
+      "bytes": 2074543,
+      "sha256": "71d781903eb267fa47949a771f38dbe9233c2f9bae58f864c7d73538556acb9a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_content_stage16_help_v2.py",
+      "bytes": 28757,
+      "sha256": "7beaf9fdcb45c3844ed9b3e4e2170490ee7a4c4e9b7a2c6dfeab4e9f407e5b94"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_content_stage16_neutral_v1.py",
+      "bytes": 23686,
+      "sha256": "2ab0f8d0b809518625d989b6722bf065999a8259ce153c8a5de37c653a12e95d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_content_moving_floor_v2.py",
+      "bytes": 23965,
+      "sha256": "58dc0f1f92dbddc0ffeb42d7ea5906bbc281ff6980c5d23a7aa46403f60d7e3d"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_native_reentry.py",
+      "bytes": 32767,
+      "sha256": "c0fdd5fe7bf511bef710bf229754affa0c1b7431b96d13e04c5f71afda1b3960"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_content_batch_entry_v1.py",
+      "bytes": 25885,
+      "sha256": "e281ed5925da65855012075415a45c69e4b94f8ca6639683852a44bfd428a0bd"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\mmx6_coop_checkpoint.py",
+      "bytes": 25303,
+      "sha256": "c8179ccf2d0a7de26213db480313c1640d95dadaa4c1238d4e71989f2ca70363"
+    },
+    {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\tools\\coop_debug.py",
+      "bytes": 12235,
+      "sha256": "61eae6837c54e191597a4829fdeb57f9b54a36229ebfd02fe60aec37b3ae1f1f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\qualification.json",
+      "bytes": 2094487,
+      "sha256": "10911d41c3d500b943e80cfbb19e24e3d8bacf87c521b8916f8605c0937ee8a1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-source-packet.json",
+      "bytes": 76292,
+      "sha256": "ca37274a49305c261f778b03622e0f3c55aa5abcd378a30fffb046bcd216d62a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\content-source-packet.json",
+      "bytes": 128091,
+      "sha256": "4291fcc971872d03bb25c60295ecbffe68d21a00ce4c118a5fdaa54b78acca1c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\stage16-help-observer\\stage16-help-observations.json",
+      "bytes": 1785423,
+      "sha256": "0c2b320a9331c930c6a67c8faa74f35d1b58ac1d8673472209558d62b7f920c2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-v2-index.json",
+      "bytes": 68893,
+      "sha256": "edab1fb12f1e3b8325d0f34abf226f3ad7b28482d2ec336514bbcd92eb8bad98"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-content-stage16-help-root-v2.ps1",
+      "bytes": 1290,
+      "sha256": "daf362ed860616fcbdadc64846b8b44f8f82545c3a94ac2adc342d6e4a0af4c6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-content-stage16-help-v2.py",
+      "bytes": 6363,
+      "sha256": "e54fa5be675e0cf1c8a5c30acdf665acb4e18df06387882e5fc7782362b87c10"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-stage16-help-v2-root-v1.py",
+      "bytes": 9498,
+      "sha256": "33e7e803146c6bba66097794ee3bb97fdc83c2f562b9e1adebd488edaccb666f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\candidate\\jump-audio\\control.jsonl",
+      "bytes": 36177126,
+      "sha256": "122f6a488b61f7fe0e8152291bfcdd68c69ac806368d11225f0793c2f7e56e5a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\candidate\\jump-audio\\stderr.log",
+      "bytes": 421,
+      "sha256": "59aba505d8aec96e4640ee953739e901771a50287c655321780d66a9b505fc98"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\content-stage16-help-local-v36-50f4a31-v2\\candidate\\jump-audio\\stdout.log",
+      "bytes": 2636,
+      "sha256": "c3919658f243a536106d30779a57c1e63c076f601122a6bd75053a5a8849f22b"
+    }
+  ]
+}
