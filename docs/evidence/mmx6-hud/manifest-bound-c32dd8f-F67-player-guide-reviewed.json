@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "kind": "F67_player_guide_review",
+  "candidate": "c32dd8f71889273a134a878ff5a4ab6644c537f0",
+  "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+  "executable_sha256": "ff094835e1442bfdeafce053d42f4a399206714510f6734f9f88f998231ede5c",
+  "compiled_manifest_sha256": "ba3379d2f0725761b30c220edb6a73c3f727ff950a4685eebd17e3ed17642f34",
+  "admitted_modes": [
+    "local",
+    "netplay"
+  ],
+  "guide": {
+    "path": "COOP.md",
+    "bytes": 4587,
+    "sha256": "baa86341645b0ad46679085d69e6229a32b8dd0dbe0d19ff0dfb4137c3c7d7f4"
+  },
+  "readme": {
+    "path": "README.md",
+    "bytes": 19320,
+    "sha256": "36ca3df9b4130fd8bbc2d895a0bad876d86452795b4ee97770e2f53b46871dcf"
+  },
+  "license": {
+    "path": "LICENSE",
+    "bytes": 3855,
+    "sha256": "5299c743afb90ac7c82a662f3c2e1eafc9adaced7f8d89158566d66668e55f19"
+  },
+  "screenshots": [
+    {
+      "mode": "local",
+      "layout": "stacked",
+      "original": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R6-local-portraits-c32dd8f-root-stacked-v2\\hud\\R6-default-portraits-960x720.png",
+        "bytes": 2074543,
+        "sha256": "673ae2788e151eae4d65976d48280a2b56729dd4eb4b80a5c425759100499fd7"
+      },
+      "path": ".github/screenshots/mmx6-coop-qualified-local-stacked.png",
+      "sha256": "673ae2788e151eae4d65976d48280a2b56729dd4eb4b80a5c425759100499fd7"
+    },
+    {
+      "mode": "local",
+      "layout": "side_by_side",
+      "original": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R6-local-portraits-c32dd8f-root-side_by_side-v3\\hud\\R6-default-portraits-960x720.png",
+        "bytes": 2074543,
+        "sha256": "b0a3966b68531f1f8b48db7b670f36fb2331eca59e4cc2455e2d58b6a8175005"
+      },
+      "path": ".github/screenshots/mmx6-coop-qualified-local-side-by-side.png",
+      "sha256": "b0a3966b68531f1f8b48db7b670f36fb2331eca59e4cc2455e2d58b6a8175005"
+    },
+    {
+      "mode": "netplay",
+      "layout": "side_by_side",
+      "original": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F59-F31-v43-c32dd8f-S1-default-side_by_side-v8\\native-FF-Load-R6-batch\\native-final-quit-native-card\\peer-0-native-reentered-gameplay.png",
+        "bytes": 2074543,
+        "sha256": "9852b00f3ef2c730806142c324598791a278e9e904be84bb9ffcacc043b4b6e6"
+      },
+      "path": ".github/screenshots/mmx6-coop-qualified-netplay.png",
+      "sha256": "9852b00f3ef2c730806142c324598791a278e9e904be84bb9ffcacc043b4b6e6"
+    }
+  ],
+  "existing_runtime_review": {
+    "path": "docs/evidence/mmx6-hud/manifest-bound-c32dd8f-R6-both-modes-layouts-portraits-HP-ammo-reviewed.json",
+    "bytes": 237915,
+    "sha256": "831404037da2707b2884af1f712ffdc312332f9b8cd0a4412706e69ce4de608a"
+  },
+  "checks": {
+    "player_instructions_and_controls": true,
+    "actual_package_labels_and_defaults": true,
+    "current_source_90_update_Select_rule": true,
+    "same_candidate_local_and_paired_images": true,
+    "unchanged_original_images": true,
+    "all_guide_links_resolve": true,
+    "title_license_unchanged": true,
+    "limitations_and_QA_prerequisites_disclosed": true
+  },
+  "limits": [
+    "Documentation comparison only; no additional gameplay, campaign, physical-controller, Internet or other-host qualification.",
+    "Images are unchanged reviewed same-candidate c32dd8f/SDK7cb474 captures. The paired image follows native Load of prepared QA progress; acquisition is not claimed.",
+    "Original stacked portrait parent remains failed after the three completed unique captures; paired parents remain failed on later unrelated F31 checks. Existing R6 review admits only completed components.",
+    "Existing title PolyForm Noncommercial license and separate OpenBIOS MIT attribution preserved. No relicensing or publication.",
+    "The qualified gameplay candidate is an isolated local build; current R runtime pin and deferred v47 WIP are not promoted."
+  ]
+}

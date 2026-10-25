@@ -1,5 +1,8 @@
 # MegaManX6Recomp
 
+**Playing co-op?** Start with the [player guide](COOP.md) for local/netplay
+setup, controls, HUD choices, current screenshots and known limits.
+
 > **ALPHA: experimental X + Zero two-player co-op.**
 > [Latest published alpha: v1.3.2-alpha](https://github.com/mstan/MegaManX6Recomp/releases/tag/v1.3.2-alpha).
 > Local co-op and basic netplay are playable. Full-campaign play, Internet

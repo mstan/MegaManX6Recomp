@@ -13,6 +13,10 @@ finished. These rules supplement the owner's global instructions.
   Prioritize nearly complete rows, independent inexpensive checks, then fixes
   shared by multiple rows. Begin implementation or a meaningful runtime check
   within 15 minutes; avoid another exhaustive evidence audit before acting.
+- Owner steering, 2026-10-25: maximize completed comparisons by finishing the
+  easiest remaining autonomous checks first. Put long timing investigations,
+  large new feature prerequisites and human-dependent checks at the back.
+  Preserve their work and evidence; resume them after shorter closeouts.
 - Work through compatible groups of roughly 5-10 comparisons where practical.
   Reuse one build, native setup and local/paired session when their contracts
   permit it. Keep separate per-row results. Isolate a blocked check so unrelated

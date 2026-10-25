@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 19 passed (R2, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F33, F38, F59, F70, F205, F208), 1 failed (R3), 214 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 20 passed (R2, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F33, F38, F59, F67, F70, F205, F208), 1 failed (R3), 213 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
