@@ -10854,8 +10854,75 @@
       },
       "modes": {
         "local_coop": {
-          "status": "unverified",
-          "attempts": []
+          "status": "passed",
+          "attempts": [
+            {
+              "receipt": {
+                "case_id": "s06-a0-c00/terrain_collision_scroll",
+                "mode": "local_coop",
+                "result": "passed",
+                "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+                "recorded_at": "2026-10-26T01:27:35Z",
+                "build_identity": {
+                  "name": "V48 Release development image, debug tools enabled",
+                  "image": {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\candidate\\mmx6-runtime.exe",
+                    "sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c"
+                  },
+                  "details": {
+                    "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+                    "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+                  }
+                },
+                "settings": {
+                  "roster": "X/P1 + Zero/P2",
+                  "renderer": "OpenGL shared native4:3",
+                  "loader": "default Seamless Loading",
+                  "input": "two digital keyboard slots, published owned host route",
+                  "audio": "emulated and muted dummy output"
+                },
+                "action": "Use the original source-guarded checkpoint initializer as a reachability bypass. Jump each hero independently, observe real ascent and ground collision/landing with the other actor stationary, then walk both to cause actual native camera scrolling.",
+                "outcome": "Both owned jumps ascend and land at their original floor height. Both accepted walks advance [35.5, 27.5] pixels and the actual native camera advances 33 pixels inside native horizontal bounds. All8 composed images reviewed; exact-image/source, private cards, fixture trace refusals and graceful owned exit0 pass.",
+                "artifacts": [
+                  {
+                    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-content\\manifest-bound-e0fdd1e-Inami-Laser-terrain-local-reviewed.json",
+                    "sha256": "d614ad5bdeac6c507a9cf5ad41d88fa1957f7239e77e726e949e3f86d2f03c07"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s06-a0-c00\\observations.json",
+                    "sha256": "3271cde048f182f412c7fef654556e51bc0271da9202099612d85f1ab16b0590"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s06-a0-c00\\initial.png",
+                    "sha256": "545a89b3dd92838f4b8c98cfef4a20bea35f2f034b43b8deb875a23a1edd9537"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s06-a0-c00\\seat0-native-ascent.png",
+                    "sha256": "69b7ee2fe5c0c30150a8ab319eaa18b6879a2bea566d6c0b52f9afac41fc060b"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s06-a0-c00\\seat1-native-ascent.png",
+                    "sha256": "49d091c4b32ef03d80552ce8b09865977b4b234d0e46e38988ec89a566b9a4be"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s06-a0-c00\\native-walk-scroll.png",
+                    "sha256": "6a3ff224de09abf5bc71b74cc8f9323517fd9b8e834e2c8aa4a76da7697a0116"
+                  }
+                ],
+                "limits": [
+                  "Bounded terrain near each authored checkpoint, not full intervening routes, campaign or obligation completion.",
+                  "One exact Windows image, X/P1 + Zero/P2, offline shared view only; netplay unverified.",
+                  "Actual native checkpoint loader bypasses reachability. No physics, position, HP, collision, camera or mechanic-success field writes.",
+                  "No enemy/audio/retry/boss/exit qualification. Artwork is reviewed for visible body/feet/terrain coherence only; no all-art pixel comparison.",
+                  "Weapon Center setup exhausted its native-entry read/time budget before any terrain observation; its failed_setup raw attempt remains unverified, no mechanic failure or pass inferred."
+                ],
+                "bypasses": [
+                  "Source-guarded offline checkpoint selection; authored approach/reachability skipped. No terrain/physics/result writes."
+                ]
+              },
+              "sha256": "621a6043f991ca810f51c3fd1d0f3156e65221fd9c6be2be2a50dbbda4b8447a"
+            }
+          ]
         },
         "netplay": {
           "status": "unverified",
@@ -12330,8 +12397,75 @@
       },
       "modes": {
         "local_coop": {
-          "status": "unverified",
-          "attempts": []
+          "status": "passed",
+          "attempts": [
+            {
+              "receipt": {
+                "case_id": "s07-a0-c00/terrain_collision_scroll",
+                "mode": "local_coop",
+                "result": "passed",
+                "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+                "recorded_at": "2026-10-26T01:27:35Z",
+                "build_identity": {
+                  "name": "V48 Release development image, debug tools enabled",
+                  "image": {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\candidate\\mmx6-runtime.exe",
+                    "sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c"
+                  },
+                  "details": {
+                    "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+                    "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+                  }
+                },
+                "settings": {
+                  "roster": "X/P1 + Zero/P2",
+                  "renderer": "OpenGL shared native4:3",
+                  "loader": "default Seamless Loading",
+                  "input": "two digital keyboard slots, published owned host route",
+                  "audio": "emulated and muted dummy output"
+                },
+                "action": "Use the original source-guarded checkpoint initializer as a reachability bypass. Jump each hero independently, observe real ascent and ground collision/landing with the other actor stationary, then walk both to cause actual native camera scrolling.",
+                "outcome": "Both owned jumps ascend and land at their original floor height. Both accepted walks advance [35.5, 33.5] pixels and the actual native camera advances 38 pixels inside native horizontal bounds. All8 composed images reviewed; exact-image/source, private cards, fixture trace refusals and graceful owned exit0 pass.",
+                "artifacts": [
+                  {
+                    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-content\\manifest-bound-e0fdd1e-Inami-Laser-terrain-local-reviewed.json",
+                    "sha256": "d614ad5bdeac6c507a9cf5ad41d88fa1957f7239e77e726e949e3f86d2f03c07"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s07-a0-c00\\observations.json",
+                    "sha256": "38b8f8420c73dac29ad227e28ebc4bf5a880016ba7001b494ac38a6119d49d79"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s07-a0-c00\\initial.png",
+                    "sha256": "fb205c5518987032318e2d4ccb6ec8e3c5be2835709f62be234ead523d51d4c2"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s07-a0-c00\\seat0-native-ascent.png",
+                    "sha256": "f49a63ff133f038ed434d6f482c08be9508fa02677204d580b2b620b7b92fd3f"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s07-a0-c00\\seat1-native-ascent.png",
+                    "sha256": "add18a3d2e9438845bcdf4a096fd41eee3a9dd34630c33d222fa84a32da29464"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s07-a0-c00\\native-walk-scroll.png",
+                    "sha256": "bf25d461fa3621ec59d21fbd6df32e8394b0f5a4832842908154c07839e3ed50"
+                  }
+                ],
+                "limits": [
+                  "Bounded terrain near each authored checkpoint, not full intervening routes, campaign or obligation completion.",
+                  "One exact Windows image, X/P1 + Zero/P2, offline shared view only; netplay unverified.",
+                  "Actual native checkpoint loader bypasses reachability. No physics, position, HP, collision, camera or mechanic-success field writes.",
+                  "No enemy/audio/retry/boss/exit qualification. Artwork is reviewed for visible body/feet/terrain coherence only; no all-art pixel comparison.",
+                  "Weapon Center setup exhausted its native-entry read/time budget before any terrain observation; its failed_setup raw attempt remains unverified, no mechanic failure or pass inferred."
+                ],
+                "bypasses": [
+                  "Source-guarded offline checkpoint selection; authored approach/reachability skipped. No terrain/physics/result writes."
+                ]
+              },
+              "sha256": "aa50d59146bfb8c0c243200a03c339c9b81217edba674ac612517abad3a0cfd6"
+            }
+          ]
         },
         "netplay": {
           "status": "unverified",

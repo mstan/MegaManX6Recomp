@@ -1,0 +1,174 @@
+{
+  "kind": "root_reviewed_actual_native_terrain_Inami_Laser_first_checkpoints",
+  "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+  "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+  "image": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\candidate\\mmx6-runtime.exe",
+    "sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c"
+  },
+  "manifest": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\qualification.json",
+    "sha256": "c836151da0d6e431a5b2c7a74fd99661750241ce398ed084b8164743318b2054"
+  },
+  "native_pid": 51932,
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "cards_unchanged": true,
+  "recording_scope": "Fixture-tainted default trace retained and independently refused by ordinary capture and replay; no replay pass.",
+  "cases": [
+    {
+      "id": "s06-a0-c00",
+      "source_stage": 6,
+      "source_section": 0,
+      "source_checkpoint": 0,
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s06-a0-c00\\observations.json",
+        "sha256": "3271cde048f182f412c7fef654556e51bc0271da9202099612d85f1ab16b0590"
+      },
+      "checks": {
+        "seat0_owned_ascent_original_ground_landing": true,
+        "seat1_owned_ascent_original_ground_landing": true,
+        "both_accepted_walks_actual_horizontal_camera_scroll": true
+      },
+      "jumps": [
+        {
+          "seat": 0,
+          "y_before": 39518208,
+          "y_air": 38426112,
+          "y_landed": 39518208,
+          "native_ticks": 44
+        },
+        {
+          "seat": 1,
+          "y_before": 39452672,
+          "y_air": 38360576,
+          "y_landed": 39452672,
+          "native_ticks": 47
+        }
+      ],
+      "walk_dx_pixels": [
+        35.5,
+        27.5
+      ],
+      "camera_dx": 33,
+      "vertical_camera_observations_outside_current_bounds": [],
+      "images": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s06-a0-c00\\initial.png",
+          "sha256": "545a89b3dd92838f4b8c98cfef4a20bea35f2f034b43b8deb875a23a1edd9537"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s06-a0-c00\\seat0-native-ascent.png",
+          "sha256": "69b7ee2fe5c0c30150a8ab319eaa18b6879a2bea566d6c0b52f9afac41fc060b"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s06-a0-c00\\seat1-native-ascent.png",
+          "sha256": "49d091c4b32ef03d80552ce8b09865977b4b234d0e46e38988ec89a566b9a4be"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s06-a0-c00\\native-walk-scroll.png",
+          "sha256": "6a3ff224de09abf5bc71b74cc8f9323517fd9b8e834e2c8aa4a76da7697a0116"
+        }
+      ]
+    },
+    {
+      "id": "s07-a0-c00",
+      "source_stage": 7,
+      "source_section": 0,
+      "source_checkpoint": 0,
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s07-a0-c00\\observations.json",
+        "sha256": "38b8f8420c73dac29ad227e28ebc4bf5a880016ba7001b494ac38a6119d49d79"
+      },
+      "checks": {
+        "seat0_owned_ascent_original_ground_landing": true,
+        "seat1_owned_ascent_original_ground_landing": true,
+        "both_accepted_walks_actual_horizontal_camera_scroll": true
+      },
+      "jumps": [
+        {
+          "seat": 0,
+          "y_before": 27983872,
+          "y_air": 26561536,
+          "y_landed": 27983872,
+          "native_ticks": 50
+        },
+        {
+          "seat": 1,
+          "y_before": 27918336,
+          "y_air": 26496000,
+          "y_landed": 27918336,
+          "native_ticks": 50
+        }
+      ],
+      "walk_dx_pixels": [
+        35.5,
+        33.5
+      ],
+      "camera_dx": 38,
+      "vertical_camera_observations_outside_current_bounds": [],
+      "images": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s07-a0-c00\\initial.png",
+          "sha256": "fb205c5518987032318e2d4ccb6ec8e3c5be2835709f62be234ead523d51d4c2"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s07-a0-c00\\seat0-native-ascent.png",
+          "sha256": "f49a63ff133f038ed434d6f482c08be9508fa02677204d580b2b620b7b92fd3f"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s07-a0-c00\\seat1-native-ascent.png",
+          "sha256": "add18a3d2e9438845bcdf4a096fd41eee3a9dd34630c33d222fa84a32da29464"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s07-a0-c00\\native-walk-scroll.png",
+          "sha256": "bf25d461fa3621ec59d21fbd6df32e8394b0f5a4832842908154c07839e3ed50"
+        }
+      ]
+    }
+  ],
+  "visual_review": {
+    "root_viewed_all8": true,
+    "contact_sheets": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-Inami-Laser-v48-root-visual-v1.png",
+        "sha256": "80e6ae9781c53096e4fc97720dcb248fec6ab37babf267292f916a22d1192bc4"
+      }
+    ]
+  },
+  "limits": [
+    "Bounded terrain near each authored checkpoint, not full intervening routes, campaign or obligation completion.",
+    "One exact Windows image, X/P1 + Zero/P2, offline shared view only; netplay unverified.",
+    "Actual native checkpoint loader bypasses reachability. No physics, position, HP, collision, camera or mechanic-success field writes.",
+    "No enemy/audio/retry/boss/exit qualification. Artwork is reviewed for visible body/feet/terrain coherence only; no all-art pixel comparison.",
+    "Weapon Center setup exhausted its native-entry read/time budget before any terrain observation; its failed_setup raw attempt remains unverified, no mechanic failure or pass inferred."
+  ],
+  "source": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\caller-executed-source.py",
+      "sha256": "0629bd1059d61f64ec62e3c832ed391289c4b47ff32e83536c78004034a191a2"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\actual-entry-source.json",
+      "sha256": "4291fcc971872d03bb25c60295ecbffe68d21a00ce4c118a5fdaa54b78acca1c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-native-terrain-Inami-Laser-v48-root-v1.py",
+      "sha256": "d732efa0ba04dc9fc9d4c48f896c571b93b5d38bd6d60909d2231791c25bf7a1"
+    }
+  ],
+  "incomplete_attempts": [
+    {
+      "id": "s08-a0-c00",
+      "result": "unverified",
+      "reason": "Native entry read/time budget exhausted; retain partial evidence and stop",
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s08-a0-c00\\observations.json",
+        "sha256": "d4bd1c4e338d7f201a1657de912aa0872517ddca63a80d3d5f0a232e0ef78dff"
+      }
+    }
+  ]
+}
