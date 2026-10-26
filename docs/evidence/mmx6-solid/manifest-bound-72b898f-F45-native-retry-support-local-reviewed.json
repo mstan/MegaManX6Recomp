@@ -1,0 +1,836 @@
+{
+  "schema": 1,
+  "comparison": "F45",
+  "frozen_row_sha256": "e73b5ca5a78384d567a9c683f457770225fa04c4c827e1f444491ae6d7dd3cd4",
+  "mode": "local",
+  "result": "passed",
+  "candidate": "72b898f6a714ec91b49ce306ee4959d6d5814a8b",
+  "build_identity": {
+    "executable_sha256": "b3589623f1612fe99821d5ad4eb9b7108b7e7cd550c26b0ea28045b2c7e9fc4b",
+    "compiled_manifest_sha256": "1b670b2fa63a58b7b0f2bb6268bb89e83522d8389b81983a0ebd8b04084fe337",
+    "sdk_commit": "bb5d0a7ec003d7e33270e51c270ea89dfea5c081",
+    "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\qualification.json",
+    "sha256": "023616704908342d326217f5a8777118ca9b2e6d4eb1117f69ad4b0ecaed6f3b"
+  },
+  "full_case": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\ammo-hud\\F45-prerequisite\\F45-full-observations.json",
+    "sha256": "8ab7ec24e504779b6b5faf1c70857eb94acbb7137d3586566068f575a427ee30"
+  },
+  "retry_case": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\ammo-hud\\F45-prerequisite\\native-wipe-retry\\F45-prerequisite.json",
+    "sha256": "6b8d65d8edddd97ed9d6bcbed7d4175ff24fe9d76e365122e7f68ae0d5e1bbed"
+  },
+  "fatal_witnesses": {
+    "0:1": {
+      "sample": 330,
+      "mode": 10,
+      "life": 2,
+      "player": {
+        "active": 1,
+        "character": 1,
+        "state": 2,
+        "action": 0,
+        "hp": 0,
+        "x_raw": 38486016,
+        "y_raw": 26869760,
+        "weapon": 0,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ]
+      },
+      "lifecycle": [
+        0,
+        4
+      ]
+    },
+    "0:0": {
+      "sample": 757,
+      "mode": 10,
+      "life": 2,
+      "player": {
+        "active": 1,
+        "character": 0,
+        "state": 2,
+        "action": 0,
+        "hp": 0,
+        "x_raw": 38498304,
+        "y_raw": 26935296,
+        "weapon": 0,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ]
+      },
+      "lifecycle": [
+        4,
+        5
+      ]
+    }
+  },
+  "loader_seen": [
+    true
+  ],
+  "native_retry": {
+    "initial_lives": 2,
+    "returned_lives": 1,
+    "checkpoint": [
+      0,
+      0
+    ],
+    "returned_roster": [
+      {
+        "active": 1,
+        "character": 0,
+        "state": 1,
+        "action": 2,
+        "hp": 32,
+        "x_raw": 10485760,
+        "y_raw": 25886720,
+        "weapon": 0,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ]
+      },
+      {
+        "active": 1,
+        "character": 1,
+        "state": 1,
+        "action": 2,
+        "hp": 32,
+        "x_raw": 12058624,
+        "y_raw": 25886720,
+        "weapon": 0,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ]
+      }
+    ],
+    "checks": {
+      "actual_support_carry_jump_and_free_edge_before_wipe": true,
+      "both_actual_native_deaths_after_real_support": true,
+      "original_loader_single_life_retry_same_Amazon_checkpoint_fresh_pair": true,
+      "both_fresh_native_controls_after_original_retry": true
+    }
+  },
+  "postretry_support": {
+    "0": {
+      "owner": 0,
+      "samples": {
+        "before": 64,
+        "after": 66
+      },
+      "native_before": 2526,
+      "native_after": 2534,
+      "players_before": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 31760384,
+          "y_raw": 22490624,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 25231360,
+          "y_raw": 21626880,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "players_after": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 31498240,
+          "y_raw": 22425088,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 25231360,
+          "y_raw": 21626880,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "support_before": {
+        "x": 482.0,
+        "y": 378.0
+      },
+      "support_after": {
+        "x": 479.0,
+        "y": 377.0
+      },
+      "checks": {
+        "actual_initialized_moving_support_and_neutral_guest_carry": true,
+        "ordinary_return_to_plateau_for_other_landing": true
+      },
+      "source": {
+        "member3_sha256": "68e8b41b5618ccfced88057553597749513f4aeb25191004f886f9d881b633ea",
+        "placement": "0x800f6540",
+        "seed_type": 7,
+        "initialized_type": 1,
+        "pool": "0x800c1220",
+        "slots": 80,
+        "stride": 164,
+        "callback": "800EC300/update800EBF6C calls original80031DA8; walking800EC5F4",
+        "box": "0x800f73ec",
+        "half_width": 14,
+        "half_height": 14,
+        "guards": [
+          {
+            "peer": 0,
+            "first": "0x80073d50",
+            "end": "0x80073d58",
+            "sha256": "da8d8f948e652263fcb4c8a24cb000a09db8fff49beb902c2434ed598176e252"
+          },
+          {
+            "peer": 0,
+            "first": "0x80031da8",
+            "end": "0x80031f4c",
+            "sha256": "52930ef8a5580ae57cfe9e5b6812107afc8794974e5f18230569a121c149a8f8"
+          },
+          {
+            "peer": 0,
+            "first": "0x8002e290",
+            "end": "0x8002e3c8",
+            "sha256": "fe5d0f46c36a48d0839afaa7eea38bd6b10b16353fa42e01b36d9842da1715f3"
+          },
+          {
+            "peer": 0,
+            "first": "0x80034ffc",
+            "end": "0x80035010",
+            "sha256": "781d44957ee0b04bdb1b85e209275242e10806cc797e27640d50a358b45b3609"
+          },
+          {
+            "peer": 0,
+            "first": "0x800ebf6c",
+            "end": "0x800ec150",
+            "sha256": "eaf50adde2bf05a92f67d408beaa0c4d27bb39222fa0794a7f2ba9c0f1b4d60b"
+          },
+          {
+            "peer": 0,
+            "first": "0x800ec25c",
+            "end": "0x800ec434",
+            "sha256": "39db6dd8862580753081459e7bee91bb2989145333622750a48a9c1b081fa0f8"
+          },
+          {
+            "peer": 0,
+            "first": "0x800ec5f4",
+            "end": "0x800ec650",
+            "sha256": "b741aa6b48c9a3625a4cf073ad77d9d60b42bb9461c1b228d4601cb39933e3c8"
+          },
+          {
+            "peer": 0,
+            "first": "0x800f73ec",
+            "end": "0x800f73f0",
+            "sha256": "f4d1f0340fcc86a43de78abfd2dd57baf27de9cdd498cfb96417f834a2845ef4"
+          }
+        ]
+      }
+    },
+    "1": {
+      "owner": 1,
+      "samples": {
+        "before": 23,
+        "after": 25
+      },
+      "native_before": 2676,
+      "native_after": 2682,
+      "players_before": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 26910720,
+          "y_raw": 21692416,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 28377088,
+          "y_raw": 21916672,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "players_after": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 26910720,
+          "y_raw": 21692416,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 28508160,
+          "y_raw": 21916672,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "support_before": {
+        "x": 430.0,
+        "y": 370.0
+      },
+      "support_after": {
+        "x": 433.5,
+        "y": 370.0
+      },
+      "checks": {
+        "actual_initialized_moving_support_and_neutral_guest_carry": true
+      },
+      "source": {
+        "member3_sha256": "68e8b41b5618ccfced88057553597749513f4aeb25191004f886f9d881b633ea",
+        "placement": "0x800f6540",
+        "seed_type": 7,
+        "initialized_type": 1,
+        "pool": "0x800c1220",
+        "slots": 80,
+        "stride": 164,
+        "callback": "800EC300/update800EBF6C calls original80031DA8; walking800EC5F4",
+        "box": "0x800f73ec",
+        "half_width": 14,
+        "half_height": 14,
+        "guards": [
+          {
+            "peer": 0,
+            "first": "0x80073d50",
+            "end": "0x80073d58",
+            "sha256": "da8d8f948e652263fcb4c8a24cb000a09db8fff49beb902c2434ed598176e252"
+          },
+          {
+            "peer": 0,
+            "first": "0x80031da8",
+            "end": "0x80031f4c",
+            "sha256": "52930ef8a5580ae57cfe9e5b6812107afc8794974e5f18230569a121c149a8f8"
+          },
+          {
+            "peer": 0,
+            "first": "0x8002e290",
+            "end": "0x8002e3c8",
+            "sha256": "fe5d0f46c36a48d0839afaa7eea38bd6b10b16353fa42e01b36d9842da1715f3"
+          },
+          {
+            "peer": 0,
+            "first": "0x80034ffc",
+            "end": "0x80035010",
+            "sha256": "781d44957ee0b04bdb1b85e209275242e10806cc797e27640d50a358b45b3609"
+          },
+          {
+            "peer": 0,
+            "first": "0x800ebf6c",
+            "end": "0x800ec150",
+            "sha256": "eaf50adde2bf05a92f67d408beaa0c4d27bb39222fa0794a7f2ba9c0f1b4d60b"
+          },
+          {
+            "peer": 0,
+            "first": "0x800ec25c",
+            "end": "0x800ec434",
+            "sha256": "39db6dd8862580753081459e7bee91bb2989145333622750a48a9c1b081fa0f8"
+          },
+          {
+            "peer": 0,
+            "first": "0x800ec5f4",
+            "end": "0x800ec650",
+            "sha256": "b741aa6b48c9a3625a4cf073ad77d9d60b42bb9461c1b228d4601cb39933e3c8"
+          },
+          {
+            "peer": 0,
+            "first": "0x800f73ec",
+            "end": "0x800f73f0",
+            "sha256": "f4d1f0340fcc86a43de78abfd2dd57baf27de9cdd498cfb96417f834a2845ef4"
+          }
+        ]
+      }
+    }
+  },
+  "root_composed_review": [
+    {
+      "label": "guest-neutral-native-carry",
+      "peer": 0,
+      "sample_before": 74,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\ammo-hud\\F45-prerequisite\\native-wipe-retry\\initial-actual-moving-support\\peer-0-guest-neutral-native-carry.png",
+      "sha256": "0bd9db80680349f50ff78a08cf31830bb05c3c6bf26757eb28a8cd02b4a09086",
+      "before": {
+        "id": 2373,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2374,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\ammo-hud\\F45-prerequisite\\native-wipe-retry\\initial-actual-moving-support\\peer-0-guest-neutral-native-carry.png",
+        "staged": true,
+        "seq": 1
+      },
+      "completion": {
+        "id": 2375,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      }
+    },
+    {
+      "peer": 0,
+      "label": "actual-native-team-fatal",
+      "sample_before": 758,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\ammo-hud\\F45-prerequisite\\native-wipe-retry\\peer-0-actual-native-team-fatal.png",
+      "sha256": "204ca8a7ec7987b65a9ee4d5f084f602611415d63f041ead315c74b2410ba542",
+      "before": {
+        "id": 4821,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 4822,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\ammo-hud\\F45-prerequisite\\native-wipe-retry\\peer-0-actual-native-team-fatal.png",
+        "staged": true,
+        "seq": 4
+      },
+      "completion": {
+        "id": 4824,
+        "ok": true,
+        "seq": 5,
+        "wrote": 1
+      }
+    },
+    {
+      "peer": 0,
+      "label": "original-native-retry-ready",
+      "sample_before": 1024,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\ammo-hud\\F45-prerequisite\\native-wipe-retry\\peer-0-original-native-retry-ready.png",
+      "sha256": "7562849ab606e8e179e912c55f1f7cee063a17b84ea6d322aa79db9495a1cf30",
+      "before": {
+        "id": 5623,
+        "ok": true,
+        "seq": 5,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 5624,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\ammo-hud\\F45-prerequisite\\native-wipe-retry\\peer-0-original-native-retry-ready.png",
+        "staged": true,
+        "seq": 5
+      },
+      "completion": {
+        "id": 5625,
+        "ok": true,
+        "seq": 6,
+        "wrote": 1
+      }
+    },
+    {
+      "peer": 0,
+      "label": "retry-both-original-controls",
+      "sample_before": 1050,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\ammo-hud\\F45-prerequisite\\native-wipe-retry\\peer-0-retry-both-original-controls.png",
+      "sha256": "ecb69342985f05beb0fc7a9328fc8727e9d9b4eda24763e1e9239fac0e086570",
+      "before": {
+        "id": 5712,
+        "ok": true,
+        "seq": 6,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 5713,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\ammo-hud\\F45-prerequisite\\native-wipe-retry\\peer-0-retry-both-original-controls.png",
+        "staged": true,
+        "seq": 6
+      },
+      "completion": {
+        "id": 5714,
+        "ok": true,
+        "seq": 7,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "guest-neutral-native-carry",
+      "peer": 0,
+      "sample_before": 67,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\ammo-hud\\F45-prerequisite\\postretry-primary-support\\peer-0-guest-neutral-native-carry.png",
+      "sha256": "c30d6304ed3b387b3582b5242ff99af9d0aaad07ae1f30b0788122df82966079",
+      "before": {
+        "id": 6050,
+        "ok": true,
+        "seq": 8,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 6051,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\ammo-hud\\F45-prerequisite\\postretry-primary-support\\peer-0-guest-neutral-native-carry.png",
+        "staged": true,
+        "seq": 8
+      },
+      "completion": {
+        "id": 6053,
+        "ok": true,
+        "seq": 9,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "tested-seat-returned-to-safe-plateau",
+      "peer": 0,
+      "sample_before": 83,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\ammo-hud\\F45-prerequisite\\postretry-primary-support\\peer-0-tested-seat-returned-to-safe-plateau.png",
+      "sha256": "8b253a2f70d16e82c636cc9dccb11362ef7b2c63a252501514ca8fe73573d1c0",
+      "before": {
+        "id": 6126,
+        "ok": true,
+        "seq": 9,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 6127,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\ammo-hud\\F45-prerequisite\\postretry-primary-support\\peer-0-tested-seat-returned-to-safe-plateau.png",
+        "staged": true,
+        "seq": 9
+      },
+      "completion": {
+        "id": 6128,
+        "ok": true,
+        "seq": 10,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "initialized-native-moving-support",
+      "peer": 0,
+      "sample_before": 1,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\ammo-hud\\F45-prerequisite\\postretry-guest-support\\peer-0-initialized-native-moving-support.png",
+      "sha256": "cc70110fb5ba3abcd60672102ff4d41115b1d6bc67a88c8b7c797bb81050d1b6",
+      "before": {
+        "id": 6157,
+        "ok": true,
+        "seq": 10,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 6158,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\ammo-hud\\F45-prerequisite\\postretry-guest-support\\peer-0-initialized-native-moving-support.png",
+        "staged": true,
+        "seq": 10
+      },
+      "completion": {
+        "id": 6160,
+        "ok": true,
+        "seq": 11,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "guest-neutral-native-carry",
+      "peer": 0,
+      "sample_before": 26,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\ammo-hud\\F45-prerequisite\\postretry-guest-support\\peer-0-guest-neutral-native-carry.png",
+      "sha256": "75c650938efc21fa55859b0646f5f1c808bce4a5718bc8c34a4df89b555b4220",
+      "before": {
+        "id": 6273,
+        "ok": true,
+        "seq": 11,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 6274,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\ammo-hud\\F45-prerequisite\\postretry-guest-support\\peer-0-guest-neutral-native-carry.png",
+        "staged": true,
+        "seq": 11
+      },
+      "completion": {
+        "id": 6275,
+        "ok": true,
+        "seq": 12,
+        "wrote": 1
+      }
+    }
+  ],
+  "recording_rejection": {
+    "status": "failed_fixture_taint_retained_for_diagnostics",
+    "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\candidate\\saves\\input-recordings\\session-1793040396421643-1-0\\inputs.jsonl",
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "b3589623f1612fe99821d5ad4eb9b7108b7e7cd550c26b0ea28045b2c7e9fc4b",
+      "manifest_sha256": "1b670b2fa63a58b7b0f2bb6268bb89e83522d8389b81983a0ebd8b04084fe337",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "terminal_failure": "unilateral debug or fixture input contaminated capture",
+    "native_status": {
+      "contract": "mmx6.native-consumption.v1",
+      "epoch": 1,
+      "failure": "unilateral debug or fixture input contaminated capture",
+      "schema": 1,
+      "scope": "native-consumption diagnostics; replay unimplemented",
+      "status": "failed"
+    },
+    "events": 5979,
+    "natives": 4208,
+    "p2_reads": 1771,
+    "artifacts": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\recording-rejection\\settings.json",
+        "bytes": 10329,
+        "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\recording-rejection\\content.json",
+        "bytes": 503,
+        "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\recording-rejection\\simulation-contract.json",
+        "bytes": 259,
+        "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\recording-rejection\\inputs.jsonl",
+        "bytes": 785542,
+        "sha256": "25b37098248ba993576de2266c769b150fc2c7e004e359e8ac0f13c20a97c265"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\recording-rejection\\status.json",
+        "bytes": 211,
+        "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\recording-rejection\\card1.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\recording-rejection\\card2.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      }
+    ],
+    "strict_refusals": {
+      "ordinary_capture": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      },
+      "offline_replay": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      }
+    },
+    "finalized_capture_admitted": false,
+    "replay_admitted": false,
+    "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+  },
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "actual_executed_caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\actual-adapted-caller.py",
+    "sha256": "84691155ceb2ea0d1a5be04901344e36981450515463a5fb53622d75e762f129"
+  },
+  "executed_full_helper": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v2\\F45-helper-executed-source.py",
+    "sha256": "d4a34596a963c02b1cd94192094ffd6027f1c05f5303fc6c4bfa96a54dda5473"
+  },
+  "postretry_helper": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F45_postretry_support_v54_root_v2.py",
+    "sha256": "1773a9e9e7c1b2e09eca8b5c0c6adf0c8de868a68fe8916bc8a56de31f4a45c9"
+  },
+  "prior_full_failure": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F45-full-retry-support-local-v54-root-v1\\qualification.json",
+    "sha256": "f2bae6834386f60cc52a2db151bb69691c38db02915d25f27810d948ae5f3b25"
+  },
+  "checks": {
+    "actual_support_then_original_teamwipe_and_single_life_retry": true,
+    "primary_actual_postretry_landing_carry_and_return": true,
+    "guest_actual_postretry_landing_and_carry": true
+  },
+  "limits": [
+    "Only F45 original native team retry and restored per-seat support contact/carry; no F51 extension, lift activation, pickup carry, signed-release command, platform timing or all-content claim.",
+    "Initial audited offline checkpoint8 selects AmazonC0 as a setup bypass. After actual deaths, only the original retry returns the team: no further checkpoint command, state LOAD, HP, lifecycle, position or success write.",
+    "Native enemy contact, original loader8/9, lives2->1, fresh HP32 roster and independent own controls are directly observed; each postretry seat then lands and is neutrally carried with the other hero stationary.",
+    "Original X box00020b13 gives support offset35; Zero00030b13 gives36. Actual player71 top contact and shared displacement corroborate per-seat collision; private per-actor host contact histories are not directly exposed.",
+    "LOCAL checkpoint setup taints the recording, which remains explicitly failed/refused for ordinary capture/replay. Cards and owned exit0 pass; no finalized/replay claim.",
+    "Root reviewed eight composed images. Prior fullv1 completed both postretry carries then failed an extra copied F51 edge-movement route after enemy damage. Its failure is preserved; v2 exercises the unchanged frozen F45 contract through both restored carries.",
+    "NETPLAY remains separately required on exact same candidate; no Linux, physical distinct-controller or remote-service claim."
+  ],
+  "bypasses": [
+    "Audited initial offline checkpoint8 AmazonC0; no artificial reentry after actual wipe."
+  ]
+}
