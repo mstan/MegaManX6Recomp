@@ -1,0 +1,477 @@
+{
+  "schema": 1,
+  "comparison": "F15",
+  "frozen_row_sha256": "0a4a5e40752e19592d849e88d3dd45d8d565b47f0e212df1defa3a6c391edfb1",
+  "mode": "local",
+  "result": "passed",
+  "candidate": "e2f9bc8146fe0d40e08ecb1fbc151db9c360ea5a",
+  "build_identity": {
+    "executable_sha256": "ab33f5b78af7ec9b2b02874740aada5b24a7bfca62fb8203f8c3e87437fbdd0b",
+    "compiled_manifest_sha256": "e8a3d5c68bebcfffd7d5b8caf48423b9ebeb49754a8173337f3d8e49b3567384",
+    "sdk_commit": "bb5d0a7ec003d7e33270e51c270ea89dfea5c081",
+    "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\qualification.json",
+    "sha256": "3fbabf3c4a06e49a9b5c9a56bfa37e9cfb900e860c3f95d53b0340fc4cb94965"
+  },
+  "observation": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\ammo-hud\\F15\\F15-observations-with-prerequisites.json",
+    "sha256": "8295149b0005fe6a744b6d4a383d87a341c2d44c33f29b4c3651631194b06d1a"
+  },
+  "native_source": {
+    "member": {
+      "index": 6,
+      "sector": 153,
+      "size": 42944,
+      "sha256": "c7b195e3e3968ebbd6c177cf023e47b35a9a816382c9b54ca157a80b393468f5"
+    },
+    "load_base": "800E9860",
+    "placement": "800F2B1C",
+    "singleton": "800CD340",
+    "guards": [
+      {
+        "peer": 0,
+        "first": "0x800ee158",
+        "end": "0x800ee1b8",
+        "sha256": "773f9941cc3a81fbd4c575258395c63f7bc988144a25663510a59949bd3600d6"
+      },
+      {
+        "peer": 0,
+        "first": "0x800ee924",
+        "end": "0x800eeacc",
+        "sha256": "76212077374594c573ac3c5c3c69c441fe2f065503f8c282655218351b96392b"
+      },
+      {
+        "peer": 0,
+        "first": "0x800eee70",
+        "end": "0x800eef30",
+        "sha256": "7f30b6796564cb41f1489dd7af4777cb58307ca5b210e883c55162cde2a755c4"
+      },
+      {
+        "peer": 0,
+        "first": "0x800effcc",
+        "end": "0x800f0020",
+        "sha256": "e10be2ad808da7399df3911a962665f503a5d68eb9638ffd47345be45b0e8149"
+      },
+      {
+        "peer": 0,
+        "first": "0x800ee828",
+        "end": "0x800ee924",
+        "sha256": "cfb749ca0e73ed56f68b1570bb313f405bca0d8c08546983e257de4df6fddeb3"
+      },
+      {
+        "peer": 0,
+        "first": "0x800eee00",
+        "end": "0x800eeff0",
+        "sha256": "116175edd0b07b700586ac903be1230e951bee8ef6dda6bb9510c4ed6d072a99"
+      },
+      {
+        "peer": 0,
+        "first": "0x800ef950",
+        "end": "0x800efc4c",
+        "sha256": "59c392ff5a4bb172580891588cba035896e60f54fd5ea346449ce07cf4d84b29"
+      },
+      {
+        "peer": 0,
+        "first": "0x800f3a74",
+        "end": "0x800f3aac",
+        "sha256": "8566c6acce41269e5f22b3c3c344587666f9263b8ee1b9f0833c18ff6387d0b2"
+      },
+      {
+        "peer": 0,
+        "first": "0x800f3d4c",
+        "end": "0x800f3d88",
+        "sha256": "e85cc701692237c1756dfa3e1dd35f3b9f6ca6e27010313a3fab62c9546ce5fe"
+      },
+      {
+        "peer": 0,
+        "first": "0x8006d600",
+        "end": "0x8006d620",
+        "sha256": "9bf5753d4fb7610e7c7d2f8198e0f8a057ede949c0d8deb191d1de48d8b27768"
+      },
+      {
+        "peer": 0,
+        "first": "0x8003d7ac",
+        "end": "0x8003d850",
+        "sha256": "3c73392c6ed1e4f449e0ed091d16435bd5c88be66ab046e3f0396ef019f8879f"
+      },
+      {
+        "peer": 0,
+        "first": "0x8003cd44",
+        "end": "0x8003cd9c",
+        "sha256": "ea61b9e6299e4246d9e5ee170cadcacb7fbfe6668ea34f2d18dd4a85675b8d10"
+      },
+      {
+        "peer": 0,
+        "first": "0x80037bc4",
+        "end": "0x80037c74",
+        "sha256": "b1a5d06fa55c0fcb286112bccc01f7d82c209e8d9de1bf86c6094b6e277e8a18"
+      },
+      {
+        "peer": 0,
+        "first": "0x8003ba04",
+        "end": "0x8003bb94",
+        "sha256": "ae6e274b1847b905c8d59a8638a52e8ac958f531a8ba0af4c72f3cfa40bf2554"
+      },
+      {
+        "peer": 0,
+        "first": "0x800179a4",
+        "end": "0x800179d0",
+        "sha256": "bb41e371db71000dc4ac97f153eaf668253dcc42f5ed74e93608aa6b3fd8288b"
+      }
+    ],
+    "dash": {
+      "counterpart": "Ride Armor; no Chaser identity or absence claimed",
+      "fresh_native": 256,
+      "logical_Right_Circle": 8224,
+      "action": 7,
+      "armor_animation": 5,
+      "rider_command": 47,
+      "rider_applied_animation": 47,
+      "walk_fixed_velocity": 90112,
+      "dash_fixed_velocity": 270336,
+      "velocity_semantics": "Immediate native velocity change, not a gradual acceleration ramp"
+    }
+  },
+  "actions": {
+    "0": {
+      "samples": {
+        "reference": 68,
+        "walking": 70,
+        "started": 72,
+        "traveled": 74,
+        "capture": 75,
+        "released": 77,
+        "travel": [
+          {
+            "peer": 0,
+            "world_ticks": 5,
+            "distance_px": 33.0,
+            "observed_px_per_world_tick": 6.6,
+            "source_px_per_world_tick": 4.125,
+            "limit": "Publication and armor reads are separate; exact native velocity and actual travel are checked independently."
+          }
+        ]
+      },
+      "actual": [
+        {
+          "peer": 0,
+          "published_world_ticks": 5,
+          "actual_travel_px": 33.0,
+          "native_fixed_velocity": 270336
+        }
+      ]
+    },
+    "1": {
+      "samples": {
+        "reference": 203,
+        "walking": 205,
+        "started": 207,
+        "traveled": 209,
+        "capture": 210,
+        "released": 212,
+        "travel": [
+          {
+            "peer": 0,
+            "world_ticks": 5,
+            "distance_px": 16.5,
+            "observed_px_per_world_tick": 3.3,
+            "source_px_per_world_tick": 4.125,
+            "limit": "Publication and armor reads are separate; exact native velocity and actual travel are checked independently."
+          }
+        ]
+      },
+      "actual": [
+        {
+          "peer": 0,
+          "published_world_ticks": 5,
+          "actual_travel_px": 16.5,
+          "native_fixed_velocity": 270336
+        }
+      ]
+    }
+  },
+  "root_composed_review": [
+    {
+      "label": "seat0-native-moving-rider-and-partner",
+      "peer": 0,
+      "sample": 67,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\ammo-hud\\F15\\peer-0-seat0-native-moving-rider-and-partner.png",
+      "sha256": "939a8a0ae27c9760d265817ddcf991a415c1e81940fb5d23c4aeb639fabdd4ba",
+      "before": {
+        "id": 2210,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2211,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\ammo-hud\\F15\\peer-0-seat0-native-moving-rider-and-partner.png",
+        "staged": true,
+        "seq": 2
+      },
+      "completion": {
+        "id": 2212,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "seat0-actual-native-dash-armor-and-rider-pose",
+      "peer": 0,
+      "sample": 75,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\ammo-hud\\F15\\peer-0-seat0-actual-native-dash-armor-and-rider-pose.png",
+      "sha256": "2971a4711c5b86011ec09662fa02d73aab82747ba23168bee6a8136a4f43a5f0",
+      "before": {
+        "id": 2249,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2250,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\ammo-hud\\F15\\peer-0-seat0-actual-native-dash-armor-and-rider-pose.png",
+        "staged": true,
+        "seq": 3
+      },
+      "completion": {
+        "id": 2251,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "seat0-manual-dismount-safe-feet",
+      "peer": 0,
+      "sample": 152,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\ammo-hud\\F15\\peer-0-seat0-manual-dismount-safe-feet.png",
+      "sha256": "c1ad7a66b66ddc4b3b308dfbbdc71af7467829e8c963e59a18a58b7b4cc1f381",
+      "before": {
+        "id": 2590,
+        "ok": true,
+        "seq": 6,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2591,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\ammo-hud\\F15\\peer-0-seat0-manual-dismount-safe-feet.png",
+        "staged": true,
+        "seq": 6
+      },
+      "completion": {
+        "id": 2593,
+        "ok": true,
+        "seq": 7,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "seat1-native-moving-rider-and-partner",
+      "peer": 0,
+      "sample": 202,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\ammo-hud\\F15\\peer-0-seat1-native-moving-rider-and-partner.png",
+      "sha256": "fcbf079265b98c0be2c13ab9d08983bfdf37147b3cd71e0a8d00e3cb720fded2",
+      "before": {
+        "id": 2818,
+        "ok": true,
+        "seq": 8,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2819,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\ammo-hud\\F15\\peer-0-seat1-native-moving-rider-and-partner.png",
+        "staged": true,
+        "seq": 8
+      },
+      "completion": {
+        "id": 2820,
+        "ok": true,
+        "seq": 9,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "seat1-actual-native-dash-armor-and-rider-pose",
+      "peer": 0,
+      "sample": 210,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\ammo-hud\\F15\\peer-0-seat1-actual-native-dash-armor-and-rider-pose.png",
+      "sha256": "b499ca1a3f9c553d2741a579c3781de4941cf48a3b8dd61cb71a3bc121b4f5bc",
+      "before": {
+        "id": 2857,
+        "ok": true,
+        "seq": 9,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2858,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\ammo-hud\\F15\\peer-0-seat1-actual-native-dash-armor-and-rider-pose.png",
+        "staged": true,
+        "seq": 9
+      },
+      "completion": {
+        "id": 2860,
+        "ok": true,
+        "seq": 10,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "seat1-manual-dismount-safe-feet",
+      "peer": 0,
+      "sample": 273,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\ammo-hud\\F15\\peer-0-seat1-manual-dismount-safe-feet.png",
+      "sha256": "7b8a3e4936a236237a7ebdcf4e3efe7cea180e24e7b901eb3aad5a24a4d6c38f",
+      "before": {
+        "id": 3143,
+        "ok": true,
+        "seq": 12,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 3144,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\ammo-hud\\F15\\peer-0-seat1-manual-dismount-safe-feet.png",
+        "staged": true,
+        "seq": 12
+      },
+      "completion": {
+        "id": 3146,
+        "ok": true,
+        "seq": 13,
+        "wrote": 1
+      }
+    }
+  ],
+  "recording": {
+    "status": "failed_fixture_taint_retained_for_diagnostics",
+    "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\candidate\\saves\\input-recordings\\session-1793057282881266-1-0\\inputs.jsonl",
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "ab33f5b78af7ec9b2b02874740aada5b24a7bfca62fb8203f8c3e87437fbdd0b",
+      "manifest_sha256": "e8a3d5c68bebcfffd7d5b8caf48423b9ebeb49754a8173337f3d8e49b3567384",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "terminal_failure": "unilateral debug or fixture input contaminated capture",
+    "native_status": {
+      "contract": "mmx6.native-consumption.v1",
+      "epoch": 1,
+      "failure": "unilateral debug or fixture input contaminated capture",
+      "schema": 1,
+      "scope": "native-consumption diagnostics; replay unimplemented",
+      "status": "failed"
+    },
+    "events": 5948,
+    "natives": 4158,
+    "p2_reads": 1790,
+    "artifacts": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\recording-rejection\\settings.json",
+        "bytes": 10329,
+        "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\recording-rejection\\content.json",
+        "bytes": 503,
+        "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\recording-rejection\\simulation-contract.json",
+        "bytes": 259,
+        "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\recording-rejection\\inputs.jsonl",
+        "bytes": 781136,
+        "sha256": "65250c0f435f0ff30bc4557fd39194216ecc6a77a1d2ca78ce73f73d16ff97e5"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\recording-rejection\\status.json",
+        "bytes": 211,
+        "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\recording-rejection\\card1.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\recording-rejection\\card2.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      }
+    ],
+    "strict_refusals": {
+      "ordinary_capture": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      },
+      "offline_replay": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      }
+    },
+    "finalized_capture_admitted": false,
+    "replay_admitted": false,
+    "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+  },
+  "atomic_route_reads": null,
+  "direct_source_pins": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\actual-direct-source-pins.json",
+    "sha256": "8b10c30cd093129cc7015159037c4e2c5f15a952645a19c85c5ad932838414e6"
+  },
+  "executed_parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\actual-adapted-caller.py",
+    "sha256": "7f71d8c4687123aa0eceeb01cc3ae365bf9ee77899b614dd7775631b98e7613b"
+  },
+  "executed_helper": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F15-native-armor-dash-local-v56-root-v2\\F15-helper-executed-source.py",
+    "sha256": "ccbf118c9034c5b705bf46592420ae6a140bae8eaaa0abca802bbf88464e3f6b"
+  },
+  "checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "native_resource_and_window_observations_complete": true,
+    "default_recording_taint_retained_and_replay_refused": true,
+    "owned_cleanup_private_cards": true
+  },
+  "limits": [
+    "Native authored RecycleLab Ride Armor only, X/P1 and Zero/P2 each owning the armor. This is the source-identified native mounted dash counterpart; no Ride Chaser identity, two simultaneous vehicles, other mounted entrance or campaign-wide absence is claimed.",
+    "Default ordinary Right+Circle produces original walk2 to dash7, native fixed velocity16000 to42000 (1.375 to4.125px/native update), armor animation1 to5 and command+applied rider2A to2F. Actual travel is checked separately; asynchronous publication/armor reads do not establish an exact measured distance/world-tick ratio or acceleration ramp.",
+    "Each actor dashes while its on-foot companion position/mount ownership and both personal HP/weapon/ammo banks remain unchanged. Ordinary release returns native mounted idle/walk, followed by the inherited actual manual ejection and native safe-feet route.",
+    "Root reviewed six LOCAL and twelve NET composed walk/dash/safe-feet images: correct distinct native X/Zero cockpit head and leaned armor with dash exhaust over authored terrain. Remaining inherited route captures are retained without a new whole-layering review claim.",
+    "LOCAL uses audited initial offline Recycle4/0/CP0 checkpoint as disclosed setup bypass; fixture-tainted recording is correctly rejected for ordinary capture/replay. No actor position, armor state, pose, velocity, resource or success writes.",
+    "NET uses real original card Load/story/map/fresh Recycle arrival, stable exact host profile and resolved core/mod CRC windows, complete ordinary native-consumption recordings, preserved native cards and owned graceful exits0. Same-machine Windows LAN delay3 virtual digital ports, muted4:3 OpenGL; no physical device, Linux, rollback or replay-equivalence claim.",
+    "Earlier LOCALv1 failed observer mask is preserved: authentic native Right+dash0x101 was incorrectly compared to0x102. Freshv2 only fixes that observation, retaining all source/native gates and exact game candidate. No game failure is inferred from that observer error."
+  ],
+  "bypasses": [
+    "Initial audited offline Recycle4/0/CP0 checkpoint only; fixture taint retained."
+  ]
+}
