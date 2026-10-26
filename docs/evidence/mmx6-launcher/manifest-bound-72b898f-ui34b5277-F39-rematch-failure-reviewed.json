@@ -1,0 +1,331 @@
+{
+  "schema": 1,
+  "comparison": "F39",
+  "frozen_row_sha256": "c34ec6c3eb18a798b32a4666f963e9e23ab9f8940c8f9230ffd19dc8dd1e2f09",
+  "mode": "netplay",
+  "result": "failed",
+  "candidate": "72b898f6a714ec91b49ce306ee4959d6d5814a8b",
+  "build_identity": {
+    "executable_sha256": "b3589623f1612fe99821d5ad4eb9b7108b7e7cd550c26b0ea28045b2c7e9fc4b",
+    "compiled_manifest_sha256": "1b670b2fa63a58b7b0f2bb6268bb89e83522d8389b81983a0ebd8b04084fe337",
+    "sdk_commit": "bb5d0a7ec003d7e33270e51c270ea89dfea5c081",
+    "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-same-PID-v54-root-v1\\qualification.json",
+    "sha256": "e0ed5a024ad2b7cee507b01849e8f1c9029b8761d5516aa2a899a4e7e0c961ec"
+  },
+  "passive_first_session": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-same-PID-v54-root-v1\\F39-lifecycle-passive-resources\\resources.json",
+    "sha256": "c06c68395df6beb25db20fbfd870049a39635b6bfd81532e96e7fdf3d7b0147f"
+  },
+  "crashes": [
+    {
+      "peer": 0,
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-same-PID-v54-root-v1\\peer-0\\psx_last_run_report.json",
+        "sha256": "fe71e899dc341d734c0415a5296fafba424517d382ae14dac10db105f755ebc3"
+      },
+      "frame": 30,
+      "exception": {
+        "code": "0xC0000005",
+        "address": "00007FFBA49A0C13",
+        "access": "write",
+        "fault_addr": "0x0000000000000000",
+        "rip": "0x7FFBA49A0C13",
+        "rsp": "0x1767BFDE40",
+        "stack_base": "0x1767C00000",
+        "stack_limit": "0x1767BF2000",
+        "thread_id": 49012,
+        "registers": {
+          "rax": "0xFFFFFFFFFFFED400",
+          "rcx": "0x4B0",
+          "rdx": "0x16C2EBAE000",
+          "r8": "0x12C00",
+          "r9": "0x12C00"
+        },
+        "module": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nv_dispig.inf_amd64_e384053a2a35bfc1\\nvoglv64.dll",
+        "module_base": "00007FFBA3E20000",
+        "module_offset": "0xB80C13",
+        "stack_scan": [
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xB83C05"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0x63BB30"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xB84930"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0x63BB30"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xBEDF31"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xBEDF31"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xBEC323"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xC1F590"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xBEC323"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xBA5D29"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0x9F92AC"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xA17BC6"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xA17236"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xB67351"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xBEC323"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xACFFAE"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xACFFAE"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0x4C4DF0"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0x4C5331"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xBCE8DB"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xBF8FCE"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xBF8010"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0x64C700"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0x64A7B0"
+          }
+        ]
+      }
+    },
+    {
+      "peer": 1,
+      "report": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F39-same-PID-v54-root-v1\\peer-1\\psx_last_run_report.json",
+        "sha256": "a8088b454d9b87d65b9758ccf6d5e6674a086f56e2c290582530aef64c259ad2"
+      },
+      "frame": 30,
+      "exception": {
+        "code": "0xC0000005",
+        "address": "00007FFBA49A0C13",
+        "access": "write",
+        "fault_addr": "0x0000000000000000",
+        "rip": "0x7FFBA49A0C13",
+        "rsp": "0x118BFFE280",
+        "stack_base": "0x118C000000",
+        "stack_limit": "0x118BFF2000",
+        "thread_id": 27688,
+        "registers": {
+          "rax": "0xFFFFFFFFFFFED400",
+          "rcx": "0x4B0",
+          "rdx": "0x202165B1000",
+          "r8": "0x12C00",
+          "r9": "0x12C00"
+        },
+        "module": "C:\\WINDOWS\\System32\\DriverStore\\FileRepository\\nv_dispig.inf_amd64_e384053a2a35bfc1\\nvoglv64.dll",
+        "module_base": "00007FFBA3E20000",
+        "module_offset": "0xB80C13",
+        "stack_scan": [
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xB83C05"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0x63BB30"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xB84930"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0x63BB30"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xBEDF31"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xBEDF31"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xBEC323"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xC1F590"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xBEC323"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xBA5D29"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0x9F92AC"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xA17BC6"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xA17236"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xB67351"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xBEC323"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xACFFAE"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xACFFAE"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0x4C4DF0"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0x4C5331"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xBCE8DB"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xBF8FCE"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0xBF8010"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0x64C700"
+          },
+          {
+            "module": "nvoglv64.dll",
+            "offset": "0x64A7B0"
+          }
+        ]
+      }
+    }
+  ],
+  "actual_boundary": {
+    "from_match": 1,
+    "original_PIDs": [
+      62708,
+      62132
+    ],
+    "keyboard": {
+      "keyboard_window": {
+        "hwnd": 658566,
+        "class_name": "SDL_app",
+        "title": "MegaManX6Recomp",
+        "pid": 62708
+      },
+      "keyboard_events": [
+        {
+          "key": "Escape",
+          "up": false,
+          "pid": 62708,
+          "hwnd": 658566,
+          "message": 256,
+          "vk": 27,
+          "scan": 1,
+          "lparam": 65537,
+          "posted": true
+        },
+        {
+          "key": "Escape",
+          "up": true,
+          "pid": 62708,
+          "hwnd": 658566,
+          "message": 257,
+          "vk": 27,
+          "scan": 1,
+          "lparam": 3221291009,
+          "posted": true
+        }
+      ],
+      "keyboard_scope": "WM_KEYDOWN/WM_KEYUP to owned SDL HWND; no foreground/global injection or physical-hardware claim",
+      "scope": "Owned SDL HWND Escape down/up, no global input/focus; actual BYE/lobby return required separately"
+    },
+    "status": "actual_same_PID_Escape_BYE_return_to_lobby",
+    "stdout_suffixes": [
+      "psxrecomp: netplay ended (netplay_escape) — returning to lobby\r\n",
+      "psxrecomp: netplay ended (netplay_peer_disconnect) — returning to lobby\r\n"
+    ]
+  },
+  "limits": [
+    "Actual second NET activation failed before renewed healthy enrollment; LOCAL remains unverified.",
+    "Both SEH receipts locate write-NULL in NVIDIA OpenGL module during restarted BIOS frame30. This identifies the fault location, not whether driver or SDK GL usage caused it; no exact code cause or fix is established.",
+    "First-session totals were collected, but replacement_depth is transient call nesting, not a retained allocation. It varies during passive RPCs and must be separated from persistent totals in future comparisons.",
+    "No repeated-allocation growth result, exact retired-handle ownership, offline activation, final normal rematch recording or successful process cleanup is claimed. Failed traces/cards/crash reports remain retained.",
+    "Parked after bounded investigation; prioritize independent autonomous rows before platform-specific renderer restart investigation."
+  ]
+}
