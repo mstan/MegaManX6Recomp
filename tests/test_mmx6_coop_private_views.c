@@ -129,6 +129,21 @@ static void native_arrival(int online,int split) {
     uint8_t actual[0x158];capture(PLAYER,actual,sizeof actual);CHECK(!memcmp(actual,primary,sizeof actual));
     context_equal(&before);CHECK(frame_count==1 && !state_track.count && !state_track.error);
 }
+static void native_nova_views(int online,int split) {
+    for(unsigned phase=0;phase<3;++phase) {
+        CPUState cpu;prepare_view(&cpu,online,split);native_nova_body(phase);
+        mmx6_view_sdk.local_port=1;view_pending=view_valid=0;frame_count=1;
+        independent_world_begin();CHECK(view_pending && view_valid);
+        PrivateViewContext before;memset(&before,0,sizeof before);private_context_save(&before);
+        CHECK(independent_present(&cpu,VIEW_DRAW_OT));context_equal(&before);
+        CHECK(psx_mod_read_byte(PLAY+0x1C)==1 && primary_nova_active());
+        CHECK(frame_count==1 && !state_track.count && !state_track.error);
+    }
+    for(unsigned gate=0;gate<NOVA_BLOCKED_CASES;++gate) {
+        CPUState cpu;prepare_view(&cpu,online,split);native_nova_body(0);block_native_nova(gate);
+        independent_world_begin();CHECK(!view_pending && !view_valid && !view_native_calls);
+    }
+}
 static void arrival_refusals(void) {
     const Mmx6CoopStatus blocked[]={MMX6_COOP_LEAVING,MMX6_COOP_ABSENT,MMX6_COOP_DYING,MMX6_COOP_FALLEN};
     for(unsigned i=0;i<sizeof blocked/sizeof blocked[0];++i) {
@@ -145,6 +160,7 @@ static void arrival_refusals(void) {
 }
 int main(void) {
     defaults_and_scope();reentry();native_arrival(0,1);native_arrival(1,0);arrival_refusals();
+    native_nova_views(0,1);native_nova_views(1,0);
     presentation_restore(0,1,0,0);presentation_restore(0,1,1,0);presentation_restore(0,1,0,1);
     presentation_restore(1,0,0,0);presentation_restore(1,0,1,0);presentation_restore(1,0,0,1);
     clear_banks();puts("private-view typed defaults, scope, callback/abort host restoration and reentry contracts passed (modeled rendering)");return 0;

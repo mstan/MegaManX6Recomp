@@ -523,6 +523,32 @@ static void enroll(CPUState *cpu,const Mmx6CoopRoster *roster) {
     fflush(stdout);
 }
 
+/* Retail Ultimate Nova (8003E584..8003E600, 801EC4C0..801EC678) holds
+ * PLAY+1C for X's action22, then clears it on native recovery. It does not
+ * freeze the native cameras or ordinary Zero player/input updates. Admit
+ * that live personal action only, without changing the canonical hold flag;
+ * a concurrent scene, pause, death, vehicle or other world freeze still wins. */
+static int primary_nova_active(void) {
+    if (!ready || !enrolled || failed || scene_owner || pause_owner>=0 ||
+        life.status[0]!=MMX6_COOP_ALIVE || life.status[1]!=MMX6_COOP_ALIVE ||
+        psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
+        psx_mod_read_byte(PLAY+0x0F) || psx_mod_read_byte(PLAY+0x10) ||
+        psx_mod_read_byte(PLAY+0x1C)!=1 || psx_mod_read_byte(0x8008EAFCu) ||
+        !(psx_mod_read_byte(PLAYER)&1) || psx_mod_read_byte(PLAYER+2) ||
+        psx_mod_read_byte(PLAYER+4)!=1 || psx_mod_read_byte(PLAYER+5)!=0x22 ||
+        psx_mod_read_byte(PLAYER+6)>2 || psx_mod_read_byte(PLAYER+0xE7)!=4 ||
+        psx_mod_read_byte(PLAYER+0xE0)!=1 || psx_mod_read_byte(PLAYER+0x7A)!=1 ||
+        !psx_mod_read_byte(PLAYER+0x5C) || psx_mod_read_byte(PLAYER+0x5C)>=0x80 ||
+        psx_mod_read_byte(PLAYER+0xCC) || psx_mod_read_byte(PLAYER+0xD0) ||
+        psx_mod_read_byte(PLAYER+0xD3) || psx_mod_read_byte(PLAYER+0xD4) ||
+        psx_mod_read_byte(PLAYER+0xD5)) return 0;
+    return (p2.body[0]&1) && p2.body[2]==1 && p2.body[4]==1 &&
+        p2.body[0x5C] && p2.body[0x5C]<0x80 && !p2.body[0xCC] &&
+        !p2.body[0xD0] && !p2.body[0xD3] && !p2.body[0xD4] && !p2.body[0xD5];
+}
+static int coop_world_hold(void) {
+    return psx_mod_read_byte(PLAY+0x1C) && !primary_nova_active();
+}
 static int shared_camera(void) {
     return enrolled && !scene_owner && life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE &&
         psx_mod_read_byte(PLAYER+4)==1 && psx_mod_read_byte(PLAYER+5)>=2 &&
@@ -594,7 +620,7 @@ static void camera_pits(CPUState *cpu, uint32_t address) {
     (void)address;
     if (private_draw || !enrolled || failed || (inside && !zero_world) || scene_owner ||
         cpu->gpr[4]!=0x800971F8u || psx_mod_read_byte(PLAY)!=0x0A ||
-        psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C)) return;
+        psx_mod_read_byte(PLAY+0x10) || coop_world_hold()) return;
     /* Native 8002820C owns pit death as part of camera clamping, outside
      * the player update. Use the current room's authored bottom limit for
      * each player, independent of whether their shared camera reached it.
@@ -1480,7 +1506,7 @@ static void controller(CPUState *cpu, uint32_t address) {
     }
     if (psx_mod_read_byte(PLAY+1) || (psx_mod_read_byte(PLAYER+4)!=2 &&
          (psx_mod_read_byte(PLAYER+4)!=1 || psx_mod_read_byte(PLAYER+5)<2)) ||
-        psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C)) {
+        psx_mod_read_byte(PLAY+0x10) || coop_world_hold()) {
         (void)mmx6_coop_join_input(&life,p2_input(MMX6_INPUT_CONTROLLER_BLOCKED)&1,0,0);
         return;
     }

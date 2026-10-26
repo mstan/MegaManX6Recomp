@@ -28,7 +28,7 @@ static unsigned ride_probe,ride_overlap,ride_ticks,ride_seat;
 static unsigned icon_packet_probe,dash_packet_probe;
 static unsigned render_replacement_probe;
 static unsigned working_palette_probe,working_palette_probe_calls;
-static unsigned death_packet_probe,death_origin_probe;
+static unsigned death_packet_probe,death_origin_probe,nova_probe;
 static uint16_t pad_buttons=0xFFFF;
 static const unsigned resource_offsets[7]={0x14,0x1C,0x24,0x28,0x38,0x3C,0xA8};
 #ifdef MMX6_TEST_SESSION_RESOURCES
@@ -199,6 +199,7 @@ static void native_draw(uint32_t actor){
 }
 void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     (void)ret;CHECK(call_count<512 && state_track.count);calls[call_count++]=address;
+    if(nova_probe)CHECK(psx_mod_read_byte(PLAY+0x1C)==1);
     if(ride_probe) {
         unsigned seat=psx_mod_read_byte(PLAYER+2);
         if(address==0x8002DCF4u) {
@@ -342,7 +343,7 @@ static void setup(CPUState *cpu){
     shared_probe=shared_probe_seat=shared_probe_delete=shared_probe_calls=0;
     ride_probe=ride_overlap=ride_ticks=ride_seat=ride_call=0;
     icon_packet_probe=dash_packet_probe=render_replacement_probe=0;
-    death_packet_probe=death_origin_probe=effect_call=0;memset(death_effect,0,sizeof death_effect);
+    death_packet_probe=death_origin_probe=effect_call=nova_probe=0;memset(death_effect,0,sizeof death_effect);
     working_palette_probe=working_palette_probe_calls=0;working_palette_assets_ready=0;
     ready=enrolled=stage_call=1;pause_owner=-1;zero_menu_loaded=0;join_phase=0;previous_input=p2_edges=0;p2_start_previous=0;
     texture_support=1;marker_override=2;terminal_player=stage_driver=0;call_count=draw_count=tag_count=native_budget=0;
@@ -390,6 +391,76 @@ static void controller_pair_and_restoration(void){
     CHECK(p2.shots[6]==1 && p2.effects[0x50+3] && le32(p2.effects+0x50+8)==403u<<16);
     for(unsigned i=0;i<3;++i){CHECK(p2.trails[i*0x60+3] && le32(p2.trails+i*0x60+8)==403u<<16);CHECK(le32(p2.trails+i*0x60+0x50)==(i?TRAILS+(i-1)*0x60:PLAYER));}
     CHECK(!inside && !zero_projected && !state_track.count && !state_track.error && cpu.gpr[3]==0x12345678);
+}
+static void native_nova_body(unsigned phase) {
+    psx_mod_write_byte(PLAYER+5,0x22);psx_mod_write_byte(PLAYER+6,(uint8_t)phase);
+    psx_mod_write_byte(PLAYER+0xE7,4);psx_mod_write_byte(PLAYER+0xE0,1);
+    psx_mod_write_byte(PLAYER+0x7A,1);psx_mod_write_byte(PLAYER+0xCC,0);
+    psx_mod_write_byte(PLAYER+0xD0,0);psx_mod_write_byte(PLAYER+0xD3,0);
+    psx_mod_write_byte(PLAYER+0xD4,0);psx_mod_write_byte(PLAYER+0xD5,0);
+    psx_mod_write_byte(PLAY+0x1C,1);
+}
+enum { NOVA_BLOCKED_CASES=29 };
+static void block_native_nova(unsigned gate) {
+    switch(gate) {
+    case 0:psx_mod_write_byte(PLAYER+5,0x21);break; /* Ultimate hover is not Nova. */
+    case 1:psx_mod_write_byte(PLAYER+0xE7,1);break;
+    case 2:psx_mod_write_byte(PLAYER+2,1);break;
+    case 3:psx_mod_write_byte(PLAYER+6,3);break;
+    case 4:psx_mod_write_byte(PLAYER+0xE0,0);break; /* Native recovery boundary. */
+    case 5:psx_mod_write_byte(PLAY+0x1C,2);break;
+    case 6:psx_mod_write_byte(PLAYER+0xD0,1);break;
+    case 7:psx_mod_write_byte(PLAYER+0xD4,1);break;
+    case 8:psx_mod_write_byte(PLAYER+0xD5,255);break;
+    case 9:psx_mod_write_byte(PLAY+0x10,1);break;
+    case 10:scene_owner=1;break;
+    case 11:pause_owner=1;break;
+    case 12:life.status[0]=MMX6_COOP_DYING;break;
+    case 13:life.status[1]=MMX6_COOP_DYING;break;
+    case 14:psx_mod_write_byte(PLAY+0x0F,1);break;
+    case 15:psx_mod_write_byte(0x8008EAFCu,1);break;
+    case 16:p2.body[0xD0]=1;break;
+    case 17:p2.body[0xD5]=255;break;
+    case 18:psx_mod_write_byte(PLAYER+0xCC,1);break;
+    case 19:psx_mod_write_byte(PLAYER+0xD3,1);break;
+    case 20:p2.body[0xD3]=1;break;
+    case 21:p2.body[0x5C]=0x80;break;
+    case 22:failed=1;break;
+    case 23:enrolled=0;break;
+    case 24:psx_mod_write_byte(PLAY,9);break;
+    case 25:psx_mod_write_byte(PLAY+1,2);break;
+    case 26:psx_mod_write_byte(PLAYER+0x5C,0x80);break;
+    case 27:p2.body[0xCC]=1;break;
+    case 28:life.status[1]=MMX6_COOP_JOINING;break;
+    default:CHECK(0);
+    }
+}
+static void native_nova_guest_update(void) {
+    for(unsigned phase=0;phase<3;++phase) {
+        CPUState cpu;setup(&cpu);native_nova_body(phase);
+        PlayerContext primary;capture_player(&primary);
+        uint8_t play[0xE0],after_play[0xE0];capture(PLAY,play,sizeof play);
+        uint32_t zero_x=le32(p2.body+8);
+        nova_probe=1;controller(&cpu,0);nova_probe=0;
+        CHECK(occurrences(0x8003CD44)==1 && occurrences(0x80034DCC)==1 &&
+              occurrences(0x8002012C)==1 && occurrences(0x8002F288)==1 &&
+              occurrences(0x80020D74)==1 && occurrences(0x80020DC8)==1);
+        CHECK(le32(p2.body+8)==zero_x+3*65536 && p2.body[0x5C]==32);
+        PlayerContext after;capture_player(&after);CHECK(!memcmp(&primary,&after,sizeof primary));
+        capture(PLAY,after_play,sizeof after_play);CHECK(!memcmp(play,after_play,sizeof play));
+        CHECK(!inside && !zero_projected && !state_track.count && !state_track.error);
+    }
+    for(unsigned gate=0;gate<NOVA_BLOCKED_CASES;++gate) {
+        CPUState cpu;setup(&cpu);native_nova_body(0);block_native_nova(gate);
+        uint32_t zero_x=le32(p2.body+8);controller(&cpu,0);
+        CHECK(!call_count && le32(p2.body+8)==zero_x && !inside && !state_track.count);
+    }
+    /* Retaining pit checks matters now that the guest can move during Nova. */
+    CPUState cpu;setup(&cpu);native_nova_body(1);private_draw=0;
+    psx_mod_write_word(PLAYER+12,800u<<16);
+    psx_mod_write_half(0x800971F8u+0x20,700);cpu.gpr[4]=0x800971F8u;
+    camera_pits(&cpu,0);CHECK(p2.body[0x5C]==0x80 && psx_mod_read_byte(PLAYER+0x5C)==32);
+    CHECK(psx_mod_read_byte(PLAY+0x1C)==1);
 }
 static void lifetime_and_gates(void){
     CPUState cpu;setup(&cpu);marker_override=1;controller(&cpu,0);marker_override=-1;
@@ -1015,7 +1086,7 @@ static void native_shared_ride_ownership(void) {
     ride_probe=0;
 }
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
-    controller_pair_and_restoration();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
+    controller_pair_and_restoration();native_nova_guest_update();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
     deferred_shared_effect_owner_context();
     deferred_dash_effect_uses_allocating_body();
     deferred_ui_effect_retains_owner_atlas();clear_banks();

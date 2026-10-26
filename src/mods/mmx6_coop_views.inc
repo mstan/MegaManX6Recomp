@@ -60,7 +60,7 @@ static void independent_world_begin(void) {
     view_pending=0;
     if(!enrolled || failed || inside || zero_world || scene_owner || pause_owner>=0 ||
        psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
-       psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C) ||
+       psx_mod_read_byte(PLAY+0x10) || coop_world_hold() ||
        life.status[0]!=MMX6_COOP_ALIVE ||
        (life.status[1]!=MMX6_COOP_ALIVE && life.status[1]!=MMX6_COOP_JOINING)) {
         view_valid=0;return;
