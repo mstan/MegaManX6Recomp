@@ -9,7 +9,8 @@ not execute, curate, expand or require that audit for completion. Historical
 handoffs, tracker text and the paused goal's older "plus native X6 content"
 wording are superseded by this owner correction. A native X6 location/mechanic
 may be exercised only to resolve a named comparison or its necessary setup.
-The owner's pause remains in effect until an explicit request to resume.
+The owner explicitly resumed this task solo. Do not spawn or resume subagents.
+The 234-only scope continues to override older goal and handoff wording.
 
 Owner correction, 2026-10-25: overnight work produced too much diagnostic
 machinery and too few completed comparisons. Change how work is selected and

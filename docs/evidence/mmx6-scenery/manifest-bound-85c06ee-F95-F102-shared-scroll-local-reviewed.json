@@ -1,0 +1,199 @@
+{
+  "schema": 1,
+  "kind": "root_reviewed_F95_F102_guest_led_native_shared_scenery",
+  "candidate": "85c06ee7bf9dcd1e100de8e24b28d546e95b9f9e",
+  "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+  "mode": "local",
+  "compiled_manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-local-v49-root-v1\\qualification.json",
+    "sha256": "a8721a10fea831fd0c6377866bb09e1b7439e02385f67198b5c79faac8c9211f"
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-local-v49-root-v1\\hud\\scroll-observations.json",
+    "sha256": "ef7b1180bde7518123f9c25c9c85935b3959a98df7174a4459ffe79ad6f28ce5"
+  },
+  "executed_caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-local-v49-root-v1\\caller-executed-source.py",
+    "sha256": "e9a80a1d6d3e8fa546ab62abb15e87ce29989c50a4a6f1c834a02bf6a6dceef5"
+  },
+  "executed_observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-local-v49-root-v1\\scroll-helper-executed-source.py",
+    "sha256": "21893c7cd539d90634b18773687302ffd30bca028adf5afc5607626719d4c92e"
+  },
+  "peers": [
+    {
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-local-v49-root-v1\\candidate\\mmx6-runtime.exe",
+        "sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab"
+      },
+      "stationary_X_raw": [
+        9437184,
+        73072640
+      ],
+      "guest_dx_pixels": 209.5625,
+      "native_layer_dx": [
+        100,
+        50,
+        25
+      ],
+      "unique_native_tile_keys_per_shift": {
+        "25": 271,
+        "50": 61,
+        "100": 66
+      },
+      "native_timer_before": 145,
+      "native_timer_after": 513,
+      "native_layer_records_before": [
+        {
+          "address": 2148102648,
+          "raw_hex": "0100000101000000000000000000b00300000000000000000000b00300140000b003800300140000b00380036000ab00a000a000000000000000000000000000000000000100000408f80b09000019000500ff00",
+          "mode": 1,
+          "active": 1,
+          "x_raw": 0,
+          "y_raw": 61865984,
+          "x": 0,
+          "y": 944,
+          "parent": -1
+        },
+        {
+          "address": 2148102732,
+          "raw_hex": "01000101010000000000000000000804000000000000000000000804000000000000000000000000000000000000000000000000000000000000000000000000000030020100000000000c09000019000500ff00",
+          "mode": 1,
+          "active": 1,
+          "x_raw": 0,
+          "y_raw": 67633152,
+          "x": 0,
+          "y": 1032,
+          "parent": -1
+        },
+        {
+          "address": 2148102816,
+          "raw_hex": "01000201030000000000000000006c03000000000000000000006c03000000000000000000000000000000000000000000000000000000000000000000000000000080020100000000000c08000019000500ff00",
+          "mode": 3,
+          "active": 1,
+          "x_raw": 0,
+          "y_raw": 57409536,
+          "x": 0,
+          "y": 876,
+          "parent": -1
+        }
+      ],
+      "native_layer_records_after": [
+        {
+          "address": 2148102648,
+          "raw_hex": "0100000101000000000064000000b00300000000000064000000b00300140000b003800300140000b00380036000ab00a000a000000000000000000000000000000000000100000408f80b09000019000500ff00",
+          "mode": 1,
+          "active": 1,
+          "x_raw": 6553600,
+          "y_raw": 61865984,
+          "x": 100,
+          "y": 944,
+          "parent": -1
+        },
+        {
+          "address": 2148102732,
+          "raw_hex": "01000101010000000000320000000804000000000000320000000804000000000000000000000000000000000000000000000000000000000000000000000000000030020100000000000c09000019000500ff00",
+          "mode": 1,
+          "active": 1,
+          "x_raw": 3276800,
+          "y_raw": 67633152,
+          "x": 50,
+          "y": 1032,
+          "parent": -1
+        },
+        {
+          "address": 2148102816,
+          "raw_hex": "01000201030000000000190000006c03000000000000190000006c03000000000000000000000000000000000000000000000000000000000000000000000000000080020100000000000c08000019000500ff00",
+          "mode": 3,
+          "active": 1,
+          "x_raw": 1638400,
+          "y_raw": 57409536,
+          "x": 25,
+          "y": 876,
+          "parent": -1
+        }
+      ],
+      "sampled_CPU_GPU_regions": 36,
+      "owned_exit": 0
+    }
+  ],
+  "images": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-local-v49-root-v1\\hud\\peer-0-both-alive-original-start.png",
+      "sha256": "673ae2788e151eae4d65976d48280a2b56729dd4eb4b80a5c425759100499fd7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-local-v49-root-v1\\hud\\peer-0-guest-led-shared-scrolling.png",
+      "sha256": "f1e6a84a3506c43468cea4a38b6b76d8f092c8d1f749970b6115c91db6813b5a"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-local-v49-root-v1\\hud\\peer-0-shared-scenery-after-native-updates.png",
+      "sha256": "036a47c1333d14ecbe2ca38f2036517633d4e7ad32491fd20e57b9c967680663"
+    }
+  ],
+  "all_composed_images_root_inspected": true,
+  "original_camera_code_guards": [
+    {
+      "address": 2147653016,
+      "bytes": 192,
+      "sha256": "9887cbde7c69f08e1eff0942d42fa91e6fc48a737583953729d25119e10e1612"
+    },
+    {
+      "address": 2147653208,
+      "bytes": 192,
+      "sha256": "a949af3b0a5d8d692704a17d3b78301076e18d59dc07792eb6c303b48fac5cbf"
+    }
+  ],
+  "recordings": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-local-v49-root-v1\\candidate\\saves\\input-recordings\\session-1792993777718026-1-0\\inputs.jsonl",
+      "sha256": "0840da5d755dc36bf452bae55397d02dd9c48b8f9bde56257b0a500866dd9691",
+      "events": 7242,
+      "natives": 4776,
+      "p2_reads": 2466,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+        "manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+        "mode": "offline",
+        "profile": null,
+        "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+        "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      "requested_jump_seats": [],
+      "consumed_cross_seen_anywhere": [
+        0,
+        1
+      ],
+      "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence"
+    }
+  ],
+  "parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "native_case_finalized_recording_cleanup_and_cards": true
+  },
+  "limits": [
+    "Exact85c06ee/SDK7cb474, X/P1 and normal Zero/P2, ordinary intro, OpenGL native4:3/shared midpoint camera/stacked meters, published digital input, muted dummy audio.",
+    "Ordinary guest Right and genuine grounded jumps over authored steps while X remains stationary. No fixture, relocation, protection, HP, palette, camera, layer, inventory or outcome writes. Zero takes normal native enemy contact damage while remaining alive.",
+    "Bounded authored intro scrolling: native foreground and half/quarter-speed background origins plus actual GP0 native page/UV/CLUT/y identity are compared. Native scenery is stationary when its native camera is stationary; no autonomous palette animation or arena-specific behavior is inferred.",
+    "All9 composed images were root inspected: terrain, ship and sky remain coherent and both heroes remain drawn. Zero overlaps a native enemy at the right in paired captures; this is not an unobstructed or all-art pixel-equality claim.",
+    "36 sampled native texture regions per physical process match CPU VRAM and GPU FBO. This is retained sample evidence, not a claim that every texture or complete frame equals a solo original renderer.",
+    "Typed bodies, native layer records, composed PNGs and completed GP0 frames are nearby separate read-only observations. Tile comparison requires unique unchanged native page/UV/CLUT/y keys; ambiguous repeated textures are excluded.",
+    "Same-machine Win64 loopback only. F95/F102 only; no full panorama-wrap/F189, other stages, section loads, private views, primary-dead scenery, standalone native-content audit, audio or replay qualification."
+  ],
+  "bypasses": []
+}

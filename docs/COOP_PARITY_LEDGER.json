@@ -9937,17 +9937,88 @@
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "85c06ee7bf9dcd1e100de8e24b28d546e95b9f9e",
+            "build_identity": {
+              "executable_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+              "compiled_manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "ordinary authored intro",
+              "view": "shared native4:3 midpoint OpenGL, stacked meters",
+              "input": "published digital host",
+              "audio": "dummy muted"
+            },
+            "action": "Keep X stationary and advance Zero using original Right and grounded terrain jumps. Retain native camera/layers, completed GP0 texture page/UV/CLUT identity, CPU/GPU texture samples and composed scenes before/after scrolling and later ordinary world updates.",
+            "outcome": "Original foreground and half/quarter-speed backgrounds scroll coherently with guest-only progression. Hundreds of uniquely matched native tile keys retain original page/UV/CLUT/y and move by each actual native layer delta. Both heroes stay drawn/alive; sampled texture bytes match CPU/GPU. All9 images reviewed; exact source/profile/CRC/cards/final recordings/exits pass.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scenery\\manifest-bound-85c06ee-F95-F102-shared-scroll-local-reviewed.json",
+                "sha256": "54106e022500cfc1d42db7642ff2f784a38a9a638a364ee36dc5645f09d9f8f5"
+              }
+            ],
+            "limits": [
+              "Exact85c06ee/SDK7cb474, X/P1 and normal Zero/P2, ordinary intro, OpenGL native4:3/shared midpoint camera/stacked meters, published digital input, muted dummy audio.",
+              "Ordinary guest Right and genuine grounded jumps over authored steps while X remains stationary. No fixture, relocation, protection, HP, palette, camera, layer, inventory or outcome writes. Zero takes normal native enemy contact damage while remaining alive.",
+              "Bounded authored intro scrolling: native foreground and half/quarter-speed background origins plus actual GP0 native page/UV/CLUT/y identity are compared. Native scenery is stationary when its native camera is stationary; no autonomous palette animation or arena-specific behavior is inferred.",
+              "All9 composed images were root inspected: terrain, ship and sky remain coherent and both heroes remain drawn. Zero overlaps a native enemy at the right in paired captures; this is not an unobstructed or all-art pixel-equality claim.",
+              "36 sampled native texture regions per physical process match CPU VRAM and GPU FBO. This is retained sample evidence, not a claim that every texture or complete frame equals a solo original renderer.",
+              "Typed bodies, native layer records, composed PNGs and completed GP0 frames are nearby separate read-only observations. Tile comparison requires unique unchanged native page/UV/CLUT/y keys; ambiguous repeated textures are excluded.",
+              "Same-machine Win64 loopback only. F95/F102 only; no full panorama-wrap/F189, other stages, section loads, private views, primary-dead scenery, standalone native-content audit, audio or replay qualification."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "85c06ee7bf9dcd1e100de8e24b28d546e95b9f9e",
+            "build_identity": {
+              "executable_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+              "compiled_manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "ordinary authored intro",
+              "view": "shared native4:3 midpoint OpenGL, stacked meters",
+              "input": "published digital host",
+              "audio": "dummy muted"
+            },
+            "action": "Keep X stationary and advance Zero using original Right and grounded terrain jumps. Retain native camera/layers, completed GP0 texture page/UV/CLUT identity, CPU/GPU texture samples and composed scenes before/after scrolling and later ordinary world updates.",
+            "outcome": "Original foreground and half/quarter-speed backgrounds scroll coherently with guest-only progression. Hundreds of uniquely matched native tile keys retain original page/UV/CLUT/y and move by each actual native layer delta. Both heroes stay drawn/alive; sampled texture bytes match CPU/GPU. All9 images reviewed; exact source/profile/CRC/cards/final recordings/exits pass.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scenery\\manifest-bound-85c06ee-F95-F102-shared-scroll-netplay-reviewed.json",
+                "sha256": "7388bf4240ac5e217b231213e70dcb2a642454e8841fc34124451132c6b3999b"
+              }
+            ],
+            "limits": [
+              "Exact85c06ee/SDK7cb474, X/P1 and normal Zero/P2, ordinary intro, OpenGL native4:3/shared midpoint camera/stacked meters, published digital input, muted dummy audio.",
+              "Ordinary guest Right and genuine grounded jumps over authored steps while X remains stationary. No fixture, relocation, protection, HP, palette, camera, layer, inventory or outcome writes. Zero takes normal native enemy contact damage while remaining alive.",
+              "Bounded authored intro scrolling: native foreground and half/quarter-speed background origins plus actual GP0 native page/UV/CLUT/y identity are compared. Native scenery is stationary when its native camera is stationary; no autonomous palette animation or arena-specific behavior is inferred.",
+              "All9 composed images were root inspected: terrain, ship and sky remain coherent and both heroes remain drawn. Zero overlaps a native enemy at the right in paired captures; this is not an unobstructed or all-art pixel-equality claim.",
+              "36 sampled native texture regions per physical process match CPU VRAM and GPU FBO. This is retained sample evidence, not a claim that every texture or complete frame equals a solo original renderer.",
+              "Typed bodies, native layer records, composed PNGs and completed GP0 frames are nearby separate read-only observations. Tile comparison requires unique unchanged native page/UV/CLUT/y keys; ambiguous repeated textures are excluded.",
+              "Same-machine Win64 loopback only. F95/F102 only; no full panorama-wrap/F189, other stages, section loads, private views, primary-dead scenery, standalone native-content audit, audio or replay qualification."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Passed exact85c06ee/SDK7cb474 in LOCAL and both actual Win64 loopback peers: original intro guest-only progression, stationary X, native midpoint/half/quarter layer origins and uniquely matched GP0 native tile identity, CPU/GPU samples and all9 reviewed composed scenes. No full panorama wrap, other-stage/section, private-view or primary-dead scenery claim."
       }
     },
     {
@@ -10191,24 +10262,95 @@
       "frozen_row_sha256": "f1ddd25e6a79fa5b2ff8da98dca479e5c9ca0a6fd67d334eaf4b776a8df5108a",
       "x6": {
         "workstream": "camera",
-        "mapping_state": "identified_subsystem",
+        "mapping_state": "candidate_native_scenario",
         "analogue": "Guest-led Unified scenery controller",
         "bounded_check": "Advance guest while primary lags in baseline midpoint view; verify original shared scenery clocks/uploads remain active and correctly positioned.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "85c06ee7bf9dcd1e100de8e24b28d546e95b9f9e",
+            "build_identity": {
+              "executable_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+              "compiled_manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "ordinary authored intro",
+              "view": "shared native4:3 midpoint OpenGL, stacked meters",
+              "input": "published digital host",
+              "audio": "dummy muted"
+            },
+            "action": "Keep X stationary and advance Zero using original Right and grounded terrain jumps. Retain native camera/layers, completed GP0 texture page/UV/CLUT identity, CPU/GPU texture samples and composed scenes before/after scrolling and later ordinary world updates.",
+            "outcome": "Original foreground and half/quarter-speed backgrounds scroll coherently with guest-only progression. Hundreds of uniquely matched native tile keys retain original page/UV/CLUT/y and move by each actual native layer delta. Both heroes stay drawn/alive; sampled texture bytes match CPU/GPU. All9 images reviewed; exact source/profile/CRC/cards/final recordings/exits pass.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scenery\\manifest-bound-85c06ee-F95-F102-shared-scroll-local-reviewed.json",
+                "sha256": "54106e022500cfc1d42db7642ff2f784a38a9a638a364ee36dc5645f09d9f8f5"
+              }
+            ],
+            "limits": [
+              "Exact85c06ee/SDK7cb474, X/P1 and normal Zero/P2, ordinary intro, OpenGL native4:3/shared midpoint camera/stacked meters, published digital input, muted dummy audio.",
+              "Ordinary guest Right and genuine grounded jumps over authored steps while X remains stationary. No fixture, relocation, protection, HP, palette, camera, layer, inventory or outcome writes. Zero takes normal native enemy contact damage while remaining alive.",
+              "Bounded authored intro scrolling: native foreground and half/quarter-speed background origins plus actual GP0 native page/UV/CLUT/y identity are compared. Native scenery is stationary when its native camera is stationary; no autonomous palette animation or arena-specific behavior is inferred.",
+              "All9 composed images were root inspected: terrain, ship and sky remain coherent and both heroes remain drawn. Zero overlaps a native enemy at the right in paired captures; this is not an unobstructed or all-art pixel-equality claim.",
+              "36 sampled native texture regions per physical process match CPU VRAM and GPU FBO. This is retained sample evidence, not a claim that every texture or complete frame equals a solo original renderer.",
+              "Typed bodies, native layer records, composed PNGs and completed GP0 frames are nearby separate read-only observations. Tile comparison requires unique unchanged native page/UV/CLUT/y keys; ambiguous repeated textures are excluded.",
+              "Same-machine Win64 loopback only. F95/F102 only; no full panorama-wrap/F189, other stages, section loads, private views, primary-dead scenery, standalone native-content audit, audio or replay qualification."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "85c06ee7bf9dcd1e100de8e24b28d546e95b9f9e",
+            "build_identity": {
+              "executable_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+              "compiled_manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "ordinary authored intro",
+              "view": "shared native4:3 midpoint OpenGL, stacked meters",
+              "input": "published digital host",
+              "audio": "dummy muted"
+            },
+            "action": "Keep X stationary and advance Zero using original Right and grounded terrain jumps. Retain native camera/layers, completed GP0 texture page/UV/CLUT identity, CPU/GPU texture samples and composed scenes before/after scrolling and later ordinary world updates.",
+            "outcome": "Original foreground and half/quarter-speed backgrounds scroll coherently with guest-only progression. Hundreds of uniquely matched native tile keys retain original page/UV/CLUT/y and move by each actual native layer delta. Both heroes stay drawn/alive; sampled texture bytes match CPU/GPU. All9 images reviewed; exact source/profile/CRC/cards/final recordings/exits pass.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scenery\\manifest-bound-85c06ee-F95-F102-shared-scroll-netplay-reviewed.json",
+                "sha256": "7388bf4240ac5e217b231213e70dcb2a642454e8841fc34124451132c6b3999b"
+              }
+            ],
+            "limits": [
+              "Exact85c06ee/SDK7cb474, X/P1 and normal Zero/P2, ordinary intro, OpenGL native4:3/shared midpoint camera/stacked meters, published digital input, muted dummy audio.",
+              "Ordinary guest Right and genuine grounded jumps over authored steps while X remains stationary. No fixture, relocation, protection, HP, palette, camera, layer, inventory or outcome writes. Zero takes normal native enemy contact damage while remaining alive.",
+              "Bounded authored intro scrolling: native foreground and half/quarter-speed background origins plus actual GP0 native page/UV/CLUT/y identity are compared. Native scenery is stationary when its native camera is stationary; no autonomous palette animation or arena-specific behavior is inferred.",
+              "All9 composed images were root inspected: terrain, ship and sky remain coherent and both heroes remain drawn. Zero overlaps a native enemy at the right in paired captures; this is not an unobstructed or all-art pixel-equality claim.",
+              "36 sampled native texture regions per physical process match CPU VRAM and GPU FBO. This is retained sample evidence, not a claim that every texture or complete frame equals a solo original renderer.",
+              "Typed bodies, native layer records, composed PNGs and completed GP0 frames are nearby separate read-only observations. Tile comparison requires unique unchanged native page/UV/CLUT/y keys; ambiguous repeated textures are excluded.",
+              "Same-machine Win64 loopback only. F95/F102 only; no full panorama-wrap/F189, other stages, section loads, private views, primary-dead scenery, standalone native-content audit, audio or replay qualification."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Passed exact85c06ee/SDK7cb474 in LOCAL and both actual Win64 loopback peers: original intro guest-only progression, stationary X, native midpoint/half/quarter layer origins and uniquely matched GP0 native tile identity, CPU/GPU samples and all9 reviewed composed scenes. No full panorama wrap, other-stage/section, private-view or primary-dead scenery claim."
       }
     },
     {

@@ -1,0 +1,579 @@
+{
+  "schema": 1,
+  "kind": "root_reviewed_F95_F102_guest_led_native_shared_scenery",
+  "candidate": "85c06ee7bf9dcd1e100de8e24b28d546e95b9f9e",
+  "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+  "mode": "netplay",
+  "compiled_manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-paired-v49-root-v1\\qualification.json",
+    "sha256": "0aed70b388e4eb81243d19f755d659d55331bc0c859b3c47a52d73894d905b45"
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-paired-v49-root-v1\\scroll\\scroll-observations.json",
+    "sha256": "839ebc15fd03bbbb87fcd5a41c6cd04e46b4cc4f5aad76301e080e598d4d21a5"
+  },
+  "executed_caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-paired-v49-root-v1\\caller-executed-source.py",
+    "sha256": "95d71911aaa5b42e49dee41563a1d3697e6bd37fb44e8b2af4ecede8fb18c4c7"
+  },
+  "executed_observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-paired-v49-root-v1\\F19-helper-executed-source.py",
+    "sha256": "21893c7cd539d90634b18773687302ffd30bca028adf5afc5607626719d4c92e"
+  },
+  "peers": [
+    {
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-paired-v49-root-v1\\peer-0\\mmx6-runtime.exe",
+        "sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab"
+      },
+      "stationary_X_raw": [
+        9437184,
+        73072640
+      ],
+      "guest_dx_pixels": 234.5,
+      "native_layer_dx": [
+        118,
+        59,
+        30
+      ],
+      "unique_native_tile_keys_per_shift": {
+        "30": 271,
+        "59": 61,
+        "118": 60
+      },
+      "native_timer_before": 1028,
+      "native_timer_after": 1519,
+      "native_layer_records_before": [
+        {
+          "address": 2148102648,
+          "raw_hex": "0100000101000000000006000000b00300000000000006000000b00300140000b003800300140000b00380036000ab00a000a000000000000000000000000000000000000100000408f80b09000019000500ff00",
+          "mode": 1,
+          "active": 1,
+          "x_raw": 393216,
+          "y_raw": 61865984,
+          "x": 6,
+          "y": 944,
+          "parent": -1
+        },
+        {
+          "address": 2148102732,
+          "raw_hex": "01000101010000000000030000000804000000000000030000000804000000000000000000000000000000000000000000000000000000000000000000000000000030020100000000000c09000019000500ff00",
+          "mode": 1,
+          "active": 1,
+          "x_raw": 196608,
+          "y_raw": 67633152,
+          "x": 3,
+          "y": 1032,
+          "parent": -1
+        },
+        {
+          "address": 2148102816,
+          "raw_hex": "01000201030000000000010000006c03000000000000010000006c03000000000000000000000000000000000000000000000000000000000000000000000000000080020100000000000c08000019000500ff00",
+          "mode": 3,
+          "active": 1,
+          "x_raw": 65536,
+          "y_raw": 57409536,
+          "x": 1,
+          "y": 876,
+          "parent": -1
+        }
+      ],
+      "native_layer_records_after": [
+        {
+          "address": 2148102648,
+          "raw_hex": "010000010100000000007c000000b0030000000000007c000000b00300140000b003800300140000b00380036000ab00a000a000000000000000000000000000000000000100000408f80b09000019000500ff00",
+          "mode": 1,
+          "active": 1,
+          "x_raw": 8126464,
+          "y_raw": 61865984,
+          "x": 124,
+          "y": 944,
+          "parent": -1
+        },
+        {
+          "address": 2148102732,
+          "raw_hex": "010001010100000000003e00000008040000000000003e0000000804000000000000000000000000000000000000000000000000000000000000000000000000000030020100000000000c09000019000500ff00",
+          "mode": 1,
+          "active": 1,
+          "x_raw": 4063232,
+          "y_raw": 67633152,
+          "x": 62,
+          "y": 1032,
+          "parent": -1
+        },
+        {
+          "address": 2148102816,
+          "raw_hex": "010002010300000000001f0000006c030000000000001f0000006c03000000000000000000000000000000000000000000000000000000000000000000000000000080020100000000000c08000019000500ff00",
+          "mode": 3,
+          "active": 1,
+          "x_raw": 2031616,
+          "y_raw": 57409536,
+          "x": 31,
+          "y": 876,
+          "parent": -1
+        }
+      ],
+      "sampled_CPU_GPU_regions": 36,
+      "owned_exit": 0
+    },
+    {
+      "peer": 1,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-paired-v49-root-v1\\peer-1\\mmx6-runtime.exe",
+        "sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab"
+      },
+      "stationary_X_raw": [
+        9437184,
+        73072640
+      ],
+      "guest_dx_pixels": 234.5,
+      "native_layer_dx": [
+        118,
+        59,
+        30
+      ],
+      "unique_native_tile_keys_per_shift": {
+        "30": 271,
+        "59": 61,
+        "118": 60
+      },
+      "native_timer_before": 1030,
+      "native_timer_after": 1521,
+      "native_layer_records_before": [
+        {
+          "address": 2148102648,
+          "raw_hex": "0100000101000000000006000000b00300000000000006000000b00300140000b003800300140000b00380036000ab00a000a000000000000000000000000000000000000100000408f80b09000019000500ff00",
+          "mode": 1,
+          "active": 1,
+          "x_raw": 393216,
+          "y_raw": 61865984,
+          "x": 6,
+          "y": 944,
+          "parent": -1
+        },
+        {
+          "address": 2148102732,
+          "raw_hex": "01000101010000000000030000000804000000000000030000000804000000000000000000000000000000000000000000000000000000000000000000000000000030020100000000000c09000019000500ff00",
+          "mode": 1,
+          "active": 1,
+          "x_raw": 196608,
+          "y_raw": 67633152,
+          "x": 3,
+          "y": 1032,
+          "parent": -1
+        },
+        {
+          "address": 2148102816,
+          "raw_hex": "01000201030000000000010000006c03000000000000010000006c03000000000000000000000000000000000000000000000000000000000000000000000000000080020100000000000c08000019000500ff00",
+          "mode": 3,
+          "active": 1,
+          "x_raw": 65536,
+          "y_raw": 57409536,
+          "x": 1,
+          "y": 876,
+          "parent": -1
+        }
+      ],
+      "native_layer_records_after": [
+        {
+          "address": 2148102648,
+          "raw_hex": "010000010100000000007c000000b0030000000000007c000000b00300140000b003800300140000b00380036000ab00a000a000000000000000000000000000000000000100000408f80b09000019000500ff00",
+          "mode": 1,
+          "active": 1,
+          "x_raw": 8126464,
+          "y_raw": 61865984,
+          "x": 124,
+          "y": 944,
+          "parent": -1
+        },
+        {
+          "address": 2148102732,
+          "raw_hex": "010001010100000000003e00000008040000000000003e0000000804000000000000000000000000000000000000000000000000000000000000000000000000000030020100000000000c09000019000500ff00",
+          "mode": 1,
+          "active": 1,
+          "x_raw": 4063232,
+          "y_raw": 67633152,
+          "x": 62,
+          "y": 1032,
+          "parent": -1
+        },
+        {
+          "address": 2148102816,
+          "raw_hex": "010002010300000000001f0000006c030000000000001f0000006c03000000000000000000000000000000000000000000000000000000000000000000000000000080020100000000000c08000019000500ff00",
+          "mode": 3,
+          "active": 1,
+          "x_raw": 2031616,
+          "y_raw": 57409536,
+          "x": 31,
+          "y": 876,
+          "parent": -1
+        }
+      ],
+      "sampled_CPU_GPU_regions": 36,
+      "owned_exit": 0
+    }
+  ],
+  "images": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-paired-v49-root-v1\\scroll\\peer-0-both-alive-original-start.png",
+      "sha256": "d5175cb763c8b9b47ab4ed7bfb15035e481d6388c58df4efe69c2cad79c375f1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-paired-v49-root-v1\\scroll\\peer-0-guest-led-shared-scrolling.png",
+      "sha256": "e41afb0869ca6f35e1aa8e08d09f1ebcc88266cd277f8549497423faf323f4f0"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-paired-v49-root-v1\\scroll\\peer-0-shared-scenery-after-native-updates.png",
+      "sha256": "a3fbd9fb7eac121075d031131f946eb2720e4d6bf455c2549ac61896d66a25d4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-paired-v49-root-v1\\scroll\\peer-1-both-alive-original-start.png",
+      "sha256": "d5175cb763c8b9b47ab4ed7bfb15035e481d6388c58df4efe69c2cad79c375f1"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-paired-v49-root-v1\\scroll\\peer-1-guest-led-shared-scrolling.png",
+      "sha256": "694b4a6fcab7d494d738a33e8932817fafb74a4cbba63d9e286426212b3e9145"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-paired-v49-root-v1\\scroll\\peer-1-shared-scenery-after-native-updates.png",
+      "sha256": "c581691a5dc9298dadb27a6229815871ecdd67015970307f77e92e10cf00f0cd"
+    }
+  ],
+  "all_composed_images_root_inspected": true,
+  "original_camera_code_guards": [
+    {
+      "address": 2147653016,
+      "bytes": 192,
+      "sha256": "9887cbde7c69f08e1eff0942d42fa91e6fc48a737583953729d25119e10e1612"
+    },
+    {
+      "address": 2147653208,
+      "bytes": 192,
+      "sha256": "a949af3b0a5d8d692704a17d3b78301076e18d59dc07792eb6c303b48fac5cbf"
+    }
+  ],
+  "recordings": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-paired-v49-root-v1\\peer-0\\saves\\input-recordings\\session-1792993896142139-1-0\\inputs.jsonl",
+      "sha256": "4646b081422b3494f86fec4c9d9b743ff6c420ebb65150716c90b29fd3a5acc2",
+      "events": 9076,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+        "manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+        "mode": "netplay",
+        "profile": {
+          "id": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "bb06cc2c9731a4e9cd83653ab6dcfbc35682c6d43135f87d8771bf99bb7ad110"
+        },
+        "settings_sha256": "678ea0742d375e120ec86c29053b60d74181951ceb43831bbca670a5875771e6",
+        "simulation_contract_sha256": "c7a3c61bdbd6210b524404418cd2a81bcc1d02d53d8e41446552b0afb7ef3f93"
+      }
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F95-F102-scroll-paired-v49-root-v1\\peer-1\\saves\\input-recordings\\session-1792993896142359-1-0\\inputs.jsonl",
+      "sha256": "178d3761b40f638a70ca614a6d5d45d567d5fc94112bec0241af5fe2834a56a3",
+      "events": 9085,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+        "manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+        "mode": "netplay",
+        "profile": {
+          "id": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "bb06cc2c9731a4e9cd83653ab6dcfbc35682c6d43135f87d8771bf99bb7ad110"
+        },
+        "settings_sha256": "8675b5fc560c2a45be3bb48e46e7b3e21c76f071a18c8809038a7e664fd28605",
+        "simulation_contract_sha256": "c7a3c61bdbd6210b524404418cd2a81bcc1d02d53d8e41446552b0afb7ef3f93"
+      }
+    }
+  ],
+  "parent_checks": {
+    "jump_audio_original_source_bound": true,
+    "jump_audio_both_peers_completed": true,
+    "declared_build_manifest_bound_to_staged_images": true,
+    "jump_audio_declared_sources_match": true,
+    "host_profile_settled_before_guest": true,
+    "p2_right_reaches_both_peers": true,
+    "p2_right_preserves_p1_x": true,
+    "p1_jump_reaches_both_peers": true,
+    "p1_jump_preserves_p2_y": true,
+    "both_alive_healthy": true,
+    "mailbox_unused": true,
+    "default_resident_loader_committed": true,
+    "jump_audio_resolved_crc_after_case": true,
+    "jump_audio_final_private_cards_unchanged": true,
+    "jump_audio_owned_pair_cleanup": true
+  },
+  "limits": [
+    "Exact85c06ee/SDK7cb474, X/P1 and normal Zero/P2, ordinary intro, OpenGL native4:3/shared midpoint camera/stacked meters, published digital input, muted dummy audio.",
+    "Ordinary guest Right and genuine grounded jumps over authored steps while X remains stationary. No fixture, relocation, protection, HP, palette, camera, layer, inventory or outcome writes. Zero takes normal native enemy contact damage while remaining alive.",
+    "Bounded authored intro scrolling: native foreground and half/quarter-speed background origins plus actual GP0 native page/UV/CLUT/y identity are compared. Native scenery is stationary when its native camera is stationary; no autonomous palette animation or arena-specific behavior is inferred.",
+    "All9 composed images were root inspected: terrain, ship and sky remain coherent and both heroes remain drawn. Zero overlaps a native enemy at the right in paired captures; this is not an unobstructed or all-art pixel-equality claim.",
+    "36 sampled native texture regions per physical process match CPU VRAM and GPU FBO. This is retained sample evidence, not a claim that every texture or complete frame equals a solo original renderer.",
+    "Typed bodies, native layer records, composed PNGs and completed GP0 frames are nearby separate read-only observations. Tile comparison requires unique unchanged native page/UV/CLUT/y keys; ambiguous repeated textures are excluded.",
+    "Same-machine Win64 loopback only. F95/F102 only; no full panorama-wrap/F189, other stages, section loads, private views, primary-dead scenery, standalone native-content audit, audio or replay qualification."
+  ],
+  "bypasses": [],
+  "profile": {
+    "profile": "mmx6.win64-clang22.loopback",
+    "revision": 2,
+    "selected_sha256": "bb06cc2c9731a4e9cd83653ab6dcfbc35682c6d43135f87d8771bf99bb7ad110",
+    "peers": [
+      {
+        "capabilities": {
+          "actual_image_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "bb06cc2c9731a4e9cd83653ab6dcfbc35682c6d43135f87d8771bf99bb7ad110",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      },
+      {
+        "capabilities": {
+          "actual_image_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "bb06cc2c9731a4e9cd83653ab6dcfbc35682c6d43135f87d8771bf99bb7ad110",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      }
+    ]
+  },
+  "matching_resolved_crc": [
+    {
+      "label": "initial idle",
+      "samples": [
+        {
+          "simulation_tick": 2912,
+          "core": "0ab854ea",
+          "mod": "7e934ce1"
+        },
+        {
+          "simulation_tick": 2944,
+          "core": "5034f3c8",
+          "mod": "d724d85f"
+        },
+        {
+          "simulation_tick": 2976,
+          "core": "c2b1bba7",
+          "mod": "4c80497f"
+        },
+        {
+          "simulation_tick": 3008,
+          "core": "569c83a5",
+          "mod": "bcc3a1b9"
+        },
+        {
+          "simulation_tick": 3040,
+          "core": "b0dd5563",
+          "mod": "11feef25"
+        },
+        {
+          "simulation_tick": 3072,
+          "core": "dbc30513",
+          "mod": "2c826625"
+        },
+        {
+          "simulation_tick": 3104,
+          "core": "771bc162",
+          "mod": "1517d807"
+        }
+      ],
+      "resolved_through": [
+        3126,
+        3126
+      ]
+    },
+    {
+      "label": "P2 right then release",
+      "samples": [
+        {
+          "simulation_tick": 3168,
+          "core": "866daed5",
+          "mod": "07f726ab"
+        },
+        {
+          "simulation_tick": 3200,
+          "core": "87a500fe",
+          "mod": "8d0640cd"
+        },
+        {
+          "simulation_tick": 3232,
+          "core": "0a8dcedc",
+          "mod": "453a11e7"
+        },
+        {
+          "simulation_tick": 3264,
+          "core": "92f55bb1",
+          "mod": "a1df3847"
+        },
+        {
+          "simulation_tick": 3296,
+          "core": "c063bc68",
+          "mod": "ef069885"
+        },
+        {
+          "simulation_tick": 3328,
+          "core": "330c195a",
+          "mod": "280180a5"
+        },
+        {
+          "simulation_tick": 3360,
+          "core": "d3128485",
+          "mod": "b2f15c4f"
+        },
+        {
+          "simulation_tick": 3392,
+          "core": "2e380d13",
+          "mod": "15a23043"
+        }
+      ],
+      "resolved_through": [
+        3398,
+        3398
+      ]
+    },
+    {
+      "label": "P1 jump then settle",
+      "samples": [
+        {
+          "simulation_tick": 3488,
+          "core": "1cacc0b3",
+          "mod": "1f9d2bf7"
+        },
+        {
+          "simulation_tick": 3520,
+          "core": "875ec26e",
+          "mod": "6b422835"
+        },
+        {
+          "simulation_tick": 3552,
+          "core": "6a6e8c78",
+          "mod": "bfbd5255"
+        },
+        {
+          "simulation_tick": 3584,
+          "core": "4b7820a5",
+          "mod": "c3d8ea9f"
+        },
+        {
+          "simulation_tick": 3616,
+          "core": "2635fcde",
+          "mod": "74906d7f"
+        },
+        {
+          "simulation_tick": 3648,
+          "core": "51ddb184",
+          "mod": "07f726ab"
+        },
+        {
+          "simulation_tick": 3680,
+          "core": "10a2988b",
+          "mod": "8d0640cd"
+        }
+      ],
+      "resolved_through": [
+        3701,
+        3701
+      ]
+    },
+    {
+      "label": "paired ground-jump audio then settle",
+      "samples": [
+        {
+          "simulation_tick": 4256,
+          "core": "08601a4b",
+          "mod": "f7c934b1"
+        },
+        {
+          "simulation_tick": 4288,
+          "core": "7336c733",
+          "mod": "fab14304"
+        },
+        {
+          "simulation_tick": 4320,
+          "core": "f3d67a65",
+          "mod": "73a7ef4b"
+        },
+        {
+          "simulation_tick": 4352,
+          "core": "ae67aad5",
+          "mod": "d39709ad"
+        },
+        {
+          "simulation_tick": 4384,
+          "core": "7b6c762b",
+          "mod": "b15e2e4a"
+        },
+        {
+          "simulation_tick": 4416,
+          "core": "ccbd0b73",
+          "mod": "56848011"
+        },
+        {
+          "simulation_tick": 4448,
+          "core": "15e19dbd",
+          "mod": "1ed5afe2"
+        },
+        {
+          "simulation_tick": 4480,
+          "core": "1878b3c2",
+          "mod": "9db0eb7a"
+        }
+      ],
+      "resolved_through": [
+        4483,
+        4483
+      ]
+    }
+  ]
+}

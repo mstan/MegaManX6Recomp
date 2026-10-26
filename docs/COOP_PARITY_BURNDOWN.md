@@ -12,11 +12,11 @@ Owner scope correction, October 25: this task consists exclusively of the 234
 frozen X4/X5 comparisons and validation of their native X6 counterparts.
 The separate native-content audit is outside the requested scope and is not
 a completion gate. Existing native inventory, ledgers and evidence are retained
-as historical reference. Work remains paused at the owner's request.
+as historical reference. The owner has resumed work solo on the 234 comparisons.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 25 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F31, F33, F38, F48, F58, F59, F67, F70, F205, F208), 0 failed, 209 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 27 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F31, F33, F38, F48, F58, F59, F67, F70, F95, F102, F205, F208), 0 failed, 207 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -40,6 +40,20 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 25
+
+F95 and F102 now pass on exact `85c06ee`/SDK `7cb4742` in
+[local co-op](evidence/mmx6-scenery/manifest-bound-85c06ee-F95-F102-shared-scroll-local-reviewed.json)
+and [actual paired netplay](evidence/mmx6-scenery/manifest-bound-85c06ee-F95-F102-shared-scroll-netplay-reviewed.json).
+Zero advances across original intro terrain while X stays stationary. Native
+foreground and half/quarter-speed background origins advance by100/50/25 pixels
+locally and118/59/30 on each physical peer. Hundreds of unique unchanged native
+page/UV/CLUT/y tile keys move by those respective deltas; sampled texture bytes
+match CPU VRAM and GPU FBO. All nine composed captures show coherent scenery
+with both heroes drawn. Normal enemy contact damages Zero; no protection or
+HP/position/scenery writes are used. Exact sources/profile, post-case matching
+CRCs, ordinary recordings, cards and exits0 pass. No new game-code fix was
+needed. This raises completed comparisons25to27; F189 panorama wrap and the
+separate native-content audit receive no credit.
 
 F19 now passes on exact `85c06ee`/SDK `7cb4742` in
 [local co-op](evidence/mmx6-effects/manifest-bound-85c06ee-F19-dash-owner-local-reviewed.json)
