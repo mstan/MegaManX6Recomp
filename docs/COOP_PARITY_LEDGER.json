@@ -10301,13 +10301,13 @@
           "src/mods/mmx6_coop_plugin.c:solid_player_collision",
           "src/mods/mmx6_coop_plugin.c:solid_as_zero"
         ],
-        "status": "failed",
+        "status": "unverified",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
+          "local": "passed",
           "netplay": "unverified"
         },
         "evidence": [
@@ -10345,9 +10345,46 @@
             "bypasses": [
               "Audited initial offline checkpoint only; recording taint/refusal retained."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e2f9bc8146fe0d40e08ecb1fbc151db9c360ea5a",
+            "build_identity": {
+              "executable_sha256": "ab33f5b78af7ec9b2b02874740aada5b24a7bfca62fb8203f8c3e87437fbdd0b",
+              "compiled_manifest_sha256": "e8a3d5c68bebcfffd7d5b8caf48423b9ebeb49754a8173337f3d8e49b3567384",
+              "sdk_commit": "bb5d0a7ec003d7e33270e51c270ea89dfea5c081",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "renderer": "4:3 OpenGL",
+              "input": "two digital virtual host ports",
+              "audio": "dummy muted",
+              "entry": "audited offline Recycle4/0/CP0 checkpoint only"
+            },
+            "action": "Mount each hero by original cockpit overlap, drive the authored armor while partner waits, overlap the on-foot partner and terrain while driving, then use original Up+Jump and land on native terrain.",
+            "outcome": "Both owners reach native action18/ownD5=-1 while partnerD5=0, drive13.75/16.5px with companion pose/resources unchanged, and manually eject into original action6 then safe terrain with both markers0. HP32/allammo288 retained. Composed images show correct cockpit/vehicle/partner layering; cards and ownedexit0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solid/manifest-bound-e2f9bc8-F92-native-armor-local-reviewed.json",
+                "sha256": "83dd4dde4ffacc5ef2a4ac79b4bdca8da8c172c9cc78bf833a8d359ec3095bc8"
+              }
+            ],
+            "limits": [
+              "Original RecycleLab4/0 authored armor record800F2B1C only, X/P1 and Zero/P2. No other armor family, mounted entrance, roster, platform or whole-campaign claim.",
+              "Root independently reviewed all11 composed images: each rider head remains at the native cockpit, native vehicle front occludes the lower mounted body, nearby on-foot partner and terrain compose correctly during stationary overlap and actual driving; both manual dismount images show native feet.",
+              "Parent qualification remains failed_setup solely because the completed armor observer status differs from the legacy ammo-HUD SUCCESS string. Raw report is unchanged. Its ordered-recording, exact fixture-taint refusal, owned graceful exit0 and card-preservation gates already completed; root independently rechecks the actual named actions and those gates here.",
+              "Audited initial offline checkpoint8 selects original Recycle4/0/CP0 as a reachability bypass. No observer HP, inventory, actor position, armor occupancy, action, contact, pose or success writes. Ordinary inputs perform boarding, movement and Up+Jump dismount.",
+              "Fixture-tainted native recording is correctly refused for ordinary capture/replay; no finalized capture/replay admission. Body publication and separate armor reads are asynchronous.",
+              "Prior actual V54 guest boarding failure and V55 unhooked attempts remain preserved. V56 adds the missing20A08 generated AOT hook and rider context fix. NETPLAY remains separately required on this exact candidate."
+            ],
+            "bypasses": [
+              "Initial audited offline Recycle4/0/CP0 checkpoint only; fixture taint retained."
+            ]
           }
         ],
-        "limitations": "LOCAL exact72b898f/SDKbb5d0a7/UI34b5277: X mounts, drives and Up+Jump dismounts to real floor; eligible Zero repeatedly overlaps the empty grounded native armor but never boards. Guest ownership projection is missing in current source. NETPLAY unverified; no mounted guest-render pass. Initial offline checkpoint/tainted recording refusal disclosed."
+        "limitations": "LOCAL V56 e2f9bc8 passes both native riders, actual driving/overlap and manual dismount onto real terrain with partner pose/resources preserved. Root reviewed11 composed images including correct native cockpit/front layering. Legacy parent status-label failure is explicitly retained and independently reviewed, with native cards/ownedexit0/taint refusal verified. Same-candidate NETPLAY pending; older failures retained."
       }
     },
     {
@@ -10637,11 +10674,49 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e2f9bc8146fe0d40e08ecb1fbc151db9c360ea5a",
+            "build_identity": {
+              "executable_sha256": "ab33f5b78af7ec9b2b02874740aada5b24a7bfca62fb8203f8c3e87437fbdd0b",
+              "compiled_manifest_sha256": "e8a3d5c68bebcfffd7d5b8caf48423b9ebeb49754a8173337f3d8e49b3567384",
+              "sdk_commit": "bb5d0a7ec003d7e33270e51c270ea89dfea5c081",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "renderer": "4:3 OpenGL",
+              "input": "two digital virtual host ports",
+              "audio": "dummy muted",
+              "entry": "audited offline Recycle4/0/CP0 checkpoint only"
+            },
+            "action": "Mount each hero by original cockpit overlap, drive the authored armor while partner waits, overlap the on-foot partner and terrain while driving, then use original Up+Jump and land on native terrain.",
+            "outcome": "Both owners reach native action18/ownD5=-1 while partnerD5=0, drive13.75/16.5px with companion pose/resources unchanged, and manually eject into original action6 then safe terrain with both markers0. HP32/allammo288 retained. Composed images show correct cockpit/vehicle/partner layering; cards and ownedexit0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solid/manifest-bound-e2f9bc8-F98-native-armor-local-reviewed.json",
+                "sha256": "daa3dab386bef5f59f742cf1d5779d354a1cdac9c95ad99cc50c36bd883696a4"
+              }
+            ],
+            "limits": [
+              "Original RecycleLab4/0 authored armor record800F2B1C only, X/P1 and Zero/P2. No other armor family, mounted entrance, roster, platform or whole-campaign claim.",
+              "Root independently reviewed all11 composed images: each rider head remains at the native cockpit, native vehicle front occludes the lower mounted body, nearby on-foot partner and terrain compose correctly during stationary overlap and actual driving; both manual dismount images show native feet.",
+              "Parent qualification remains failed_setup solely because the completed armor observer status differs from the legacy ammo-HUD SUCCESS string. Raw report is unchanged. Its ordered-recording, exact fixture-taint refusal, owned graceful exit0 and card-preservation gates already completed; root independently rechecks the actual named actions and those gates here.",
+              "Audited initial offline checkpoint8 selects original Recycle4/0/CP0 as a reachability bypass. No observer HP, inventory, actor position, armor occupancy, action, contact, pose or success writes. Ordinary inputs perform boarding, movement and Up+Jump dismount.",
+              "Fixture-tainted native recording is correctly refused for ordinary capture/replay; no finalized capture/replay admission. Body publication and separate armor reads are asynchronous.",
+              "Prior actual V54 guest boarding failure and V55 unhooked attempts remain preserved. V56 adds the missing20A08 generated AOT hook and rider context fix. NETPLAY remains separately required on this exact candidate."
+            ],
+            "bypasses": [
+              "Initial audited offline Recycle4/0/CP0 checkpoint only; fixture taint retained."
+            ]
+          }
+        ],
+        "limitations": "LOCAL V56 e2f9bc8 passes both native riders, actual driving/overlap and manual dismount onto real terrain with partner pose/resources preserved. Root reviewed11 composed images including correct native cockpit/front layering. Legacy parent status-label failure is explicitly retained and independently reviewed, with native cards/ownedexit0/taint refusal verified. Same-candidate NETPLAY pending; older failures retained."
       }
     },
     {

@@ -1,0 +1,496 @@
+{
+  "schema": 1,
+  "comparison": "F92",
+  "frozen_row_sha256": "bef854719b8f7702871b8cd82e9d7e702d0075ae7e9a498e85468678fe2e5498",
+  "mode": "local",
+  "result": "passed",
+  "candidate": "e2f9bc8146fe0d40e08ecb1fbc151db9c360ea5a",
+  "build_identity": {
+    "executable_sha256": "ab33f5b78af7ec9b2b02874740aada5b24a7bfca62fb8203f8c3e87437fbdd0b",
+    "compiled_manifest_sha256": "e8a3d5c68bebcfffd7d5b8caf48423b9ebeb49754a8173337f3d8e49b3567384",
+    "sdk_commit": "bb5d0a7ec003d7e33270e51c270ea89dfea5c081",
+    "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\qualification.json",
+    "sha256": "13a2ec29e6ab8c90fbfe7d629a19285bc541249b0358e2eadd29cdaf37ee35e1"
+  },
+  "observation": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\F92-F98-observations-with-prerequisites.json",
+    "sha256": "a023a71476b13a71bb3d2c2728c602155b93a124043ad5773be926fceddd0c2f"
+  },
+  "native_source": {
+    "member": {
+      "index": 6,
+      "sector": 153,
+      "size": 42944,
+      "sha256": "c7b195e3e3968ebbd6c177cf023e47b35a9a816382c9b54ca157a80b393468f5"
+    },
+    "load_base": "800E9860",
+    "placement": "800F2B1C",
+    "singleton": "800CD340",
+    "guards": [
+      {
+        "peer": 0,
+        "first": "0x800ee158",
+        "end": "0x800ee1b8",
+        "sha256": "773f9941cc3a81fbd4c575258395c63f7bc988144a25663510a59949bd3600d6"
+      },
+      {
+        "peer": 0,
+        "first": "0x800ee924",
+        "end": "0x800eeacc",
+        "sha256": "76212077374594c573ac3c5c3c69c441fe2f065503f8c282655218351b96392b"
+      },
+      {
+        "peer": 0,
+        "first": "0x800eee70",
+        "end": "0x800eef30",
+        "sha256": "7f30b6796564cb41f1489dd7af4777cb58307ca5b210e883c55162cde2a755c4"
+      },
+      {
+        "peer": 0,
+        "first": "0x800effcc",
+        "end": "0x800f0020",
+        "sha256": "e10be2ad808da7399df3911a962665f503a5d68eb9638ffd47345be45b0e8149"
+      }
+    ]
+  },
+  "actions": {
+    "0": {
+      "mount_sample": 36,
+      "movement_samples": [
+        53,
+        60
+      ],
+      "drive_pixels": 13.75,
+      "overlap_sample": 88,
+      "overlap_drive_sample": 93,
+      "airborne_sample": 107,
+      "safe_feet_sample": 112
+    },
+    "1": {
+      "mount_sample": 137,
+      "movement_samples": [
+        155,
+        162
+      ],
+      "drive_pixels": 16.5,
+      "overlap_sample": 173,
+      "overlap_drive_sample": 177,
+      "airborne_sample": 191,
+      "safe_feet_sample": 197
+    }
+  },
+  "sample_count": 199,
+  "root_composed_review": [
+    {
+      "label": "original-empty-armor-and-foot-pair",
+      "peer": 0,
+      "sample": 1,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-original-empty-armor-and-foot-pair.png",
+      "sha256": "f49b71ea9b896894a5e4e2468e913bbf45efb8947f933fad2bea4e5664005f2e",
+      "before": {
+        "id": 1784,
+        "ok": true,
+        "seq": 0,
+        "wrote": 0
+      },
+      "acknowledgement": {
+        "id": 1785,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-original-empty-armor-and-foot-pair.png",
+        "staged": true,
+        "seq": 0
+      },
+      "completion": {
+        "id": 1787,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "seat0-actual-native-mounted",
+      "peer": 0,
+      "sample": 52,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat0-actual-native-mounted.png",
+      "sha256": "e86ca5cccffa8a05ac368d2b64e469b867ef6228a38ab1cd382695bd7d7472b4",
+      "before": {
+        "id": 2014,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2015,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat0-actual-native-mounted.png",
+        "staged": true,
+        "seq": 1
+      },
+      "completion": {
+        "id": 2016,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "seat0-native-moving-rider-and-partner",
+      "peer": 0,
+      "sample": 61,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat0-native-moving-rider-and-partner.png",
+      "sha256": "6fe0e5dafe98db6ea336d25dc8ebeb90fcbf30d6f1703c0d815cb71c9f912c42",
+      "before": {
+        "id": 2057,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2058,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat0-native-moving-rider-and-partner.png",
+        "staged": true,
+        "seq": 2
+      },
+      "completion": {
+        "id": 2060,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "seat0-actual-mounted-rider-vehicle-partner-and-terrain-overlap",
+      "peer": 0,
+      "sample": 89,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat0-actual-mounted-rider-vehicle-partner-and-terrain-overlap.png",
+      "sha256": "a551fde263a92f1734163f311e07da7da1313fb99262c54da87d865326048ead",
+      "before": {
+        "id": 2177,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2178,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat0-actual-mounted-rider-vehicle-partner-and-terrain-overlap.png",
+        "staged": true,
+        "seq": 3
+      },
+      "completion": {
+        "id": 2180,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "seat0-native-overlap-driving-layering",
+      "peer": 0,
+      "sample": 94,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat0-native-overlap-driving-layering.png",
+      "sha256": "e66c3de05fae22bf149260d687dcff16d7647e41e4f74e89a3541782b9f38c1a",
+      "before": {
+        "id": 2205,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2206,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat0-native-overlap-driving-layering.png",
+        "staged": true,
+        "seq": 4
+      },
+      "completion": {
+        "id": 2207,
+        "ok": true,
+        "seq": 5,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "seat0-manual-dismount-safe-feet",
+      "peer": 0,
+      "sample": 113,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat0-manual-dismount-safe-feet.png",
+      "sha256": "5d7423a99ba1c3f8a65c00a72c73805a44178233632f6a1173021ecdc0153af5",
+      "before": {
+        "id": 2296,
+        "ok": true,
+        "seq": 5,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2297,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat0-manual-dismount-safe-feet.png",
+        "staged": true,
+        "seq": 5
+      },
+      "completion": {
+        "id": 2299,
+        "ok": true,
+        "seq": 6,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "seat1-actual-native-mounted",
+      "peer": 0,
+      "sample": 154,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat1-actual-native-mounted.png",
+      "sha256": "d077d5142cb32c48d1de3036822eb18776b84bd266ae45bf10df9b9c56bf3618",
+      "before": {
+        "id": 2480,
+        "ok": true,
+        "seq": 6,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2481,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat1-actual-native-mounted.png",
+        "staged": true,
+        "seq": 6
+      },
+      "completion": {
+        "id": 2482,
+        "ok": true,
+        "seq": 7,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "seat1-native-moving-rider-and-partner",
+      "peer": 0,
+      "sample": 163,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat1-native-moving-rider-and-partner.png",
+      "sha256": "bc0f9d583f4c7a56748edd6802065e9e16143b9d097c57a1ea647d11b00e9072",
+      "before": {
+        "id": 2523,
+        "ok": true,
+        "seq": 7,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2524,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat1-native-moving-rider-and-partner.png",
+        "staged": true,
+        "seq": 7
+      },
+      "completion": {
+        "id": 2526,
+        "ok": true,
+        "seq": 8,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "seat1-actual-mounted-rider-vehicle-partner-and-terrain-overlap",
+      "peer": 0,
+      "sample": 174,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat1-actual-mounted-rider-vehicle-partner-and-terrain-overlap.png",
+      "sha256": "01d1ae42b2a1a10ae6d0ad831492de26816856b2bd67d3134e44db926d64cc93",
+      "before": {
+        "id": 2575,
+        "ok": true,
+        "seq": 8,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2576,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat1-actual-mounted-rider-vehicle-partner-and-terrain-overlap.png",
+        "staged": true,
+        "seq": 8
+      },
+      "completion": {
+        "id": 2577,
+        "ok": true,
+        "seq": 9,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "seat1-native-overlap-driving-layering",
+      "peer": 0,
+      "sample": 178,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat1-native-overlap-driving-layering.png",
+      "sha256": "e14ec9c8bcee8e15bde4508788c971f019b05ee6228771c103e8aee235fcac36",
+      "before": {
+        "id": 2598,
+        "ok": true,
+        "seq": 9,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2599,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat1-native-overlap-driving-layering.png",
+        "staged": true,
+        "seq": 9
+      },
+      "completion": {
+        "id": 2600,
+        "ok": true,
+        "seq": 10,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "seat1-manual-dismount-safe-feet",
+      "peer": 0,
+      "sample": 198,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat1-manual-dismount-safe-feet.png",
+      "sha256": "96da637b7f385589d2ea0805539a6b5242b09a06e3b7523f330744ab8da5cef1",
+      "before": {
+        "id": 2693,
+        "ok": true,
+        "seq": 10,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2694,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\ammo-hud\\F92-F98\\peer-0-seat1-manual-dismount-safe-feet.png",
+        "staged": true,
+        "seq": 10
+      },
+      "completion": {
+        "id": 2695,
+        "ok": true,
+        "seq": 11,
+        "wrote": 1
+      }
+    }
+  ],
+  "recording_rejection": {
+    "status": "failed_fixture_taint_retained_for_diagnostics",
+    "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\candidate\\saves\\input-recordings\\session-1793045655602958-1-0\\inputs.jsonl",
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "ab33f5b78af7ec9b2b02874740aada5b24a7bfca62fb8203f8c3e87437fbdd0b",
+      "manifest_sha256": "e8a3d5c68bebcfffd7d5b8caf48423b9ebeb49754a8173337f3d8e49b3567384",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "terminal_failure": "unilateral debug or fixture input contaminated capture",
+    "native_status": {
+      "contract": "mmx6.native-consumption.v1",
+      "epoch": 1,
+      "failure": "unilateral debug or fixture input contaminated capture",
+      "schema": 1,
+      "scope": "native-consumption diagnostics; replay unimplemented",
+      "status": "failed"
+    },
+    "events": 5716,
+    "natives": 4022,
+    "p2_reads": 1694,
+    "artifacts": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\recording-rejection\\settings.json",
+        "bytes": 10329,
+        "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\recording-rejection\\content.json",
+        "bytes": 503,
+        "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\recording-rejection\\simulation-contract.json",
+        "bytes": 259,
+        "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\recording-rejection\\inputs.jsonl",
+        "bytes": 750473,
+        "sha256": "9e32e2cba761bbcbd3d784f6bf70eb79388839c81e5fd8ed854f9107d9d50e77"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\recording-rejection\\status.json",
+        "bytes": 211,
+        "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\recording-rejection\\card1.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\recording-rejection\\card2.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      }
+    ],
+    "strict_refusals": {
+      "ordinary_capture": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      },
+      "offline_replay": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      }
+    },
+    "finalized_capture_admitted": false,
+    "replay_admitted": false,
+    "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+  },
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "parent_label_failure": "Native ammo-HUD fixture observation incomplete",
+  "executed_helper": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\F92-F98-helper-executed-source.py",
+    "sha256": "ad44069c30288a916f3a0cd920ad4a982901c9b34bf07b940f91d2c531f8196c"
+  },
+  "executed_parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F92-F98-native-armor-local-v56-root-v1\\actual-adapted-caller.py",
+    "sha256": "b37b207ac3e6b4b345dfa9df1c9959a0a62b587adfb15246eda8aaa90d6111bf"
+  },
+  "limits": [
+    "Original RecycleLab4/0 authored armor record800F2B1C only, X/P1 and Zero/P2. No other armor family, mounted entrance, roster, platform or whole-campaign claim.",
+    "Root independently reviewed all11 composed images: each rider head remains at the native cockpit, native vehicle front occludes the lower mounted body, nearby on-foot partner and terrain compose correctly during stationary overlap and actual driving; both manual dismount images show native feet.",
+    "Parent qualification remains failed_setup solely because the completed armor observer status differs from the legacy ammo-HUD SUCCESS string. Raw report is unchanged. Its ordered-recording, exact fixture-taint refusal, owned graceful exit0 and card-preservation gates already completed; root independently rechecks the actual named actions and those gates here.",
+    "Audited initial offline checkpoint8 selects original Recycle4/0/CP0 as a reachability bypass. No observer HP, inventory, actor position, armor occupancy, action, contact, pose or success writes. Ordinary inputs perform boarding, movement and Up+Jump dismount.",
+    "Fixture-tainted native recording is correctly refused for ordinary capture/replay; no finalized capture/replay admission. Body publication and separate armor reads are asynchronous.",
+    "Prior actual V54 guest boarding failure and V55 unhooked attempts remain preserved. V56 adds the missing20A08 generated AOT hook and rider context fix. NETPLAY remains separately required on this exact candidate."
+  ],
+  "bypasses": [
+    "Initial audited offline Recycle4/0/CP0 checkpoint only; fixture taint retained."
+  ]
+}
