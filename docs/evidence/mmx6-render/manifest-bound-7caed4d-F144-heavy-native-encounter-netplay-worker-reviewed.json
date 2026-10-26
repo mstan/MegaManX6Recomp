@@ -1,0 +1,537 @@
+{
+  "schema": 1,
+  "comparison": "F144",
+  "frozen_row_sha256": "d3e76698a2d2fff65517afa3ec2f68df1ba25d9a2426f3e422d74e9146f904cf",
+  "mode": "netplay",
+  "status": "worker_reviewed_mode_pass_root_ledger_review_pending",
+  "candidate": {
+    "schema": 1,
+    "kind": "actual_retained_V50_native_card_consumer_binding",
+    "candidate_source": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+    "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+    "exe_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+    "declared_manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+    "debug_manifest": {
+      "manifest_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v50-ice-contact-debug\\psx_build_manifest\\psx-runtime\\Release\\manifest.json",
+      "manifest_file_sha256": "6121fd305e858af870d0a7e3e24693df6c62e2e7da844fff80f497f4206c9381"
+    }
+  },
+  "checks": {
+    "actual_native_enemy_and_both_Yammar_families": true,
+    "each_owner_actual_native_pause_and_resume": true,
+    "actual_world_continues_after_resume": true,
+    "complete_composed_GP0_palette_texel_observations": true
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\qualification.json",
+    "sha256": "4ceddbfd8a5f40c7540a8fbef7be50db719f51ea866c3e37ffd1e6ed251d18ae"
+  },
+  "case": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\F144-observations.json",
+    "sha256": "4d3f9f5d11620bc0397212c64f5edb7f5accce0e801cb2733e44f581b0b61d0e"
+  },
+  "observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144-helper-executed-source.py",
+    "sha256": "3c7e6ceab4111f5484f7b567238e1b3f310face0b99896f161cab5f335d80f2a"
+  },
+  "caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\caller-executed-source.py",
+    "sha256": "64e87d6781041f0dd88b2ac7006c48a1ebe8191cdff470d54747a6d32b61d5b7"
+  },
+  "source_contract": {
+    "original_member3_sha256": "68e8b41b5618ccfced88057553597749513f4aeb25191004f886f9d881b633ea",
+    "seed_pool": "8008EF48,48x9C",
+    "seed_dispatch": "original Amazon type7 800EC25C..800EC300 allocates8002C4C4, copies placement origin to native type1, retires seed8002C9B0",
+    "initialized_threat_pool": "800C1220,80xA4",
+    "threat_dispatch": "original800EC300..800EC434; init800EC368 sets phase1/action2/HP12 at+5C",
+    "source_guards": [
+      {
+        "peer": 0,
+        "address": "0x800ec25c",
+        "end_exclusive": "0x800ec300",
+        "sha256": "741568d81d7faafd1a07174c4950d580ca450b18eaed4389e19fbaeedbde92f4"
+      },
+      {
+        "peer": 0,
+        "address": "0x800ec300",
+        "end_exclusive": "0x800ec434",
+        "sha256": "56b91772c7a3f3ebc7628369cf87017afa3e88a2f1fa226bdc1a5770bf4ffd36"
+      },
+      {
+        "peer": 1,
+        "address": "0x800ec25c",
+        "end_exclusive": "0x800ec300",
+        "sha256": "741568d81d7faafd1a07174c4950d580ca450b18eaed4389e19fbaeedbde92f4"
+      },
+      {
+        "peer": 1,
+        "address": "0x800ec300",
+        "end_exclusive": "0x800ec434",
+        "sha256": "56b91772c7a3f3ebc7628369cf87017afa3e88a2f1fa226bdc1a5770bf4ffd36"
+      }
+    ]
+  },
+  "captures": [
+    {
+      "label": "actual-native-encounter-before-effects",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-actual-native-encounter-before-effects.png",
+        "sha256": "0b1fca073c9ef168c72fd80acdea14af7df30db645b4e57e91e10da2039d3278"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-actual-native-encounter-before-effects-completed-GP0.json.gz",
+        "sha256": "3bb2e5f3fd24fbf4ab304f3574c25b5cc736a3c022607c07c5b70dab635525cf",
+        "frame": 25921,
+        "commands": 750
+      },
+      "life_meter_anchors": {
+        "two_native_meters": true,
+        "matching_native_anchor": true
+      },
+      "palette_rows": 16,
+      "texture_regions": 4
+    },
+    {
+      "label": "actual-native-encounter-before-effects",
+      "peer": 1,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-actual-native-encounter-before-effects.png",
+        "sha256": "a9173849cdcfb3ff6e09232754695fa07367524503405dc6863b5770c9281666"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-actual-native-encounter-before-effects-completed-GP0.json.gz",
+        "sha256": "b47b292cad73ddf43654c6bfede646dd412438d40286db62b049e6e26c1d84af",
+        "frame": 25969,
+        "commands": 750
+      },
+      "life_meter_anchors": {
+        "two_native_meters": true,
+        "matching_native_anchor": true
+      },
+      "palette_rows": 16,
+      "texture_regions": 4
+    },
+    {
+      "label": "actual-heavy-native-effects",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-actual-heavy-native-effects.png",
+        "sha256": "02bb37231a678869ef237fdc14973e58a2fff5249b58c7700f6538264b3ad77f"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-actual-heavy-native-effects-completed-GP0.json.gz",
+        "sha256": "ac575546cdc25e9de924313e1b6bcf15124091c03767a7fa37e23375903358eb",
+        "frame": 26315,
+        "commands": 842
+      },
+      "life_meter_anchors": {
+        "two_native_meters": true,
+        "matching_native_anchor": true
+      },
+      "palette_rows": 16,
+      "texture_regions": 4
+    },
+    {
+      "label": "actual-heavy-native-effects",
+      "peer": 1,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-actual-heavy-native-effects.png",
+        "sha256": "80b00fa7f1075328f9e64d4ccdd2bd253f3bc200b80e34b40a0ddbea2323c8f1"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-actual-heavy-native-effects-completed-GP0.json.gz",
+        "sha256": "1ab13d8735ec433033407c0b1473a08f0e1a4eeddc314e24484418e37b0807da",
+        "frame": 26366,
+        "commands": 847
+      },
+      "life_meter_anchors": {
+        "two_native_meters": true,
+        "matching_native_anchor": true
+      },
+      "palette_rows": 16,
+      "texture_regions": 4
+    },
+    {
+      "label": "owner0-actual-native-menu",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-owner0-actual-native-menu.png",
+        "sha256": "606673840b6e113fdb2c59f92d8520f90f32771046112cb67258886732f7f66b"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-owner0-actual-native-menu-completed-GP0.json.gz",
+        "sha256": "0c442e0f2f5f9dcbf3eab0c429fd8696c5736a6282d2a167561b416bcdde060b",
+        "frame": 26474,
+        "commands": 1118
+      },
+      "life_meter_anchors": {
+        "two_native_meters": false,
+        "matching_native_anchor": false
+      },
+      "palette_rows": 0,
+      "texture_regions": 0
+    },
+    {
+      "label": "owner0-actual-native-menu",
+      "peer": 1,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-owner0-actual-native-menu.png",
+        "sha256": "b15bf0404666c59f833c531eb1788a1d27c21619f39cfac28cb88b01e944b33a"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-owner0-actual-native-menu-completed-GP0.json.gz",
+        "sha256": "3955ea91e7e73a470f41cf712f3e3d1acee4d4f924ebbdc370469623d9e6fb4a",
+        "frame": 26484,
+        "commands": 1116
+      },
+      "life_meter_anchors": {
+        "two_native_meters": false,
+        "matching_native_anchor": false
+      },
+      "palette_rows": 0,
+      "texture_regions": 0
+    },
+    {
+      "label": "owner0-actual-native-resumed",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-owner0-actual-native-resumed.png",
+        "sha256": "d3075662c3fa564b1fb0b606b1200563ca1d90d47555a3478580e79b90bf9ec4"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-owner0-actual-native-resumed-completed-GP0.json.gz",
+        "sha256": "66542afe466a3cea24568a356f30ff19b562d22cfd06a0ec2aebf84171528711",
+        "frame": 26602,
+        "commands": 844
+      },
+      "life_meter_anchors": {
+        "two_native_meters": true,
+        "matching_native_anchor": true
+      },
+      "palette_rows": 16,
+      "texture_regions": 4
+    },
+    {
+      "label": "owner0-actual-native-resumed",
+      "peer": 1,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-owner0-actual-native-resumed.png",
+        "sha256": "c09d5b180c211e61bd5146004af88dff8959f8642ab3aec1e0c2effdbb37cbce"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-owner0-actual-native-resumed-completed-GP0.json.gz",
+        "sha256": "a57a03658a7105a71fb2ece16c32b4f5f402f1a58de0cfa01127dfd04d79d038",
+        "frame": 26656,
+        "commands": 847
+      },
+      "life_meter_anchors": {
+        "two_native_meters": true,
+        "matching_native_anchor": true
+      },
+      "palette_rows": 16,
+      "texture_regions": 4
+    },
+    {
+      "label": "owner1-actual-native-menu",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-owner1-actual-native-menu.png",
+        "sha256": "c84a414428dff7d31d03b7a36e1ecc5bbdc063b28a16df33ffccaabecbdca3db"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-owner1-actual-native-menu-completed-GP0.json.gz",
+        "sha256": "033eb5e8296ab8a65086b66c6a7431065fa4aaa8e2365aff2ff4150b038f8f0f",
+        "frame": 26764,
+        "commands": 1092
+      },
+      "life_meter_anchors": {
+        "two_native_meters": false,
+        "matching_native_anchor": false
+      },
+      "palette_rows": 0,
+      "texture_regions": 0
+    },
+    {
+      "label": "owner1-actual-native-menu",
+      "peer": 1,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-owner1-actual-native-menu.png",
+        "sha256": "5aa8e8af659efaedea24fbb64f225e3a1dedba34154864dedc976e0a1ee75478"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-owner1-actual-native-menu-completed-GP0.json.gz",
+        "sha256": "681029606333c397449b42a584246900b83c4c8ce48ce489dbb7a4fe0ab78f44",
+        "frame": 26772,
+        "commands": 1092
+      },
+      "life_meter_anchors": {
+        "two_native_meters": false,
+        "matching_native_anchor": false
+      },
+      "palette_rows": 0,
+      "texture_regions": 0
+    },
+    {
+      "label": "owner1-actual-native-resumed",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-owner1-actual-native-resumed.png",
+        "sha256": "84854db34bcc02894ba105b3fa768689487311b2085d20eab5ceb813f0587cad"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-owner1-actual-native-resumed-completed-GP0.json.gz",
+        "sha256": "b749cc08da1144848619428044327bdc39c105db5259611adcfe0af668292480",
+        "frame": 26859,
+        "commands": 845
+      },
+      "life_meter_anchors": {
+        "two_native_meters": true,
+        "matching_native_anchor": true
+      },
+      "palette_rows": 16,
+      "texture_regions": 4
+    },
+    {
+      "label": "owner1-actual-native-resumed",
+      "peer": 1,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-owner1-actual-native-resumed.png",
+        "sha256": "f1a0e82621184aa78ab2b886a923b92a4bdf906229564efcd9e8a94f3a967c2a"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-owner1-actual-native-resumed-completed-GP0.json.gz",
+        "sha256": "621e393fda8af77419fb38aab01fa13d4a35031dada9b92e5207c1ca615942c2",
+        "frame": 26901,
+        "commands": 851
+      },
+      "life_meter_anchors": {
+        "two_native_meters": true,
+        "matching_native_anchor": true
+      },
+      "palette_rows": 16,
+      "texture_regions": 4
+    },
+    {
+      "label": "native-world-after-resume",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-native-world-after-resume.png",
+        "sha256": "27d9c228bb528bc82122ce9fefd8210f5184d9a0be3be8daaedc832d032baa48"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-native-world-after-resume-completed-GP0.json.gz",
+        "sha256": "429974a49923035581d2169395f67de9ce53a7e19f57fd7e1f902b4e64875ff1",
+        "frame": 26991,
+        "commands": 813
+      },
+      "life_meter_anchors": {
+        "two_native_meters": true,
+        "matching_native_anchor": true
+      },
+      "palette_rows": 16,
+      "texture_regions": 4
+    },
+    {
+      "label": "native-world-after-resume",
+      "peer": 1,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-native-world-after-resume.png",
+        "sha256": "c5f46242f053a62e8458cc09e022ff025980546304e2cfaf9430682f09de75ce"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-native-world-after-resume-completed-GP0.json.gz",
+        "sha256": "31af933a881ad5aa8f61b8c6eb7ef17585fad914bf311d609bfa5de7360e3929",
+        "frame": 27034,
+        "commands": 806
+      },
+      "life_meter_anchors": {
+        "two_native_meters": true,
+        "matching_native_anchor": true
+      },
+      "palette_rows": 16,
+      "texture_regions": 4
+    }
+  ],
+  "menus": [
+    {
+      "owner": 0,
+      "before_index": 67,
+      "opened_index": 69,
+      "resumed_index": 76
+    },
+    {
+      "owner": 1,
+      "before_index": 82,
+      "opened_index": 84,
+      "resumed_index": 91
+    }
+  ],
+  "unrelated_scenery_ROI": [
+    {
+      "peer": 0,
+      "name": "upper_native_branch",
+      "rectangle": [
+        380,
+        10,
+        750,
+        100
+      ],
+      "labels": [
+        "actual-native-encounter-before-effects",
+        "actual-heavy-native-effects",
+        "owner0-actual-native-resumed",
+        "owner1-actual-native-resumed",
+        "native-world-after-resume"
+      ],
+      "equals_pre_effects": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "sha256": [
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8",
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8",
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8",
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8",
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8"
+      ]
+    },
+    {
+      "peer": 0,
+      "name": "lower_native_rocks",
+      "rectangle": [
+        100,
+        650,
+        900,
+        710
+      ],
+      "labels": [
+        "actual-native-encounter-before-effects",
+        "actual-heavy-native-effects",
+        "owner0-actual-native-resumed",
+        "owner1-actual-native-resumed",
+        "native-world-after-resume"
+      ],
+      "equals_pre_effects": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "sha256": [
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7",
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7",
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7",
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7",
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7"
+      ]
+    },
+    {
+      "peer": 1,
+      "name": "upper_native_branch",
+      "rectangle": [
+        380,
+        10,
+        750,
+        100
+      ],
+      "labels": [
+        "actual-native-encounter-before-effects",
+        "actual-heavy-native-effects",
+        "owner0-actual-native-resumed",
+        "owner1-actual-native-resumed",
+        "native-world-after-resume"
+      ],
+      "equals_pre_effects": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "sha256": [
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8",
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8",
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8",
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8",
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8"
+      ]
+    },
+    {
+      "peer": 1,
+      "name": "lower_native_rocks",
+      "rectangle": [
+        100,
+        650,
+        900,
+        710
+      ],
+      "labels": [
+        "actual-native-encounter-before-effects",
+        "actual-heavy-native-effects",
+        "owner0-actual-native-resumed",
+        "owner1-actual-native-resumed",
+        "native-world-after-resume"
+      ],
+      "equals_pre_effects": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "sha256": [
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7",
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7",
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7",
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7",
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7"
+      ]
+    }
+  ],
+  "bypasses": [],
+  "worker_visual_review": "Inspected every named composed image. Genuine original green native threat and both native Yammar option families/effects; two life meters and layered native Amazon scenery remain intact after both owners pause/resume and at the final continuing world frame. NETPLAY has visibly complete native X and Zero menu pages on both peers. Native blue slash/projectile effects appear after the second resume; their original animation continues, while unrelated ground/tree/rock scenery and both health meters remain intact.",
+  "limits": [
+    "No all-scene or all-palette equality claim. Ordinary RAM, completed GP0, CPU/GPU texels/palettes and composed captures are nearby separate observations.",
+    "LOCAL owner0 menu capture is a black native fade; actual owned pause/resume is observed and LOCAL owner1 menu is visible. NETPLAY has complete visible X and Zero menu captures on both peers.",
+    "The LOCAL audited original checkpoint and inventory prerequisites bypass campaign reachability. Its tainted recording is explicitly refused for normal capture/replay. NETPLAY uses genuine reviewedQAcard nativeLoad/selector/mission arrival with ordinary finalizedrecordings."
+  ],
+  "resolved_core_mod_windows": [
+    {
+      "label": "initial idle",
+      "samples": 7
+    },
+    {
+      "label": "P2 right then release",
+      "samples": 7
+    },
+    {
+      "label": "P1 jump then settle",
+      "samples": 7
+    },
+    {
+      "label": "Before original native title card Load",
+      "samples": 2
+    },
+    {
+      "label": "After original native title card Load and CURRENT export",
+      "samples": 2
+    },
+    {
+      "label": "Native final Quit native_card reentry and guest menu core/mod comparison",
+      "samples": 6
+    },
+    {
+      "label": "After actual V48 native card Load F144 heavy encounter and both owned pauses",
+      "samples": 2
+    }
+  ],
+  "reviewer_source": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-review-v50-v3.py",
+    "sha256": "6dce9d33c98bb2752929bb31ca61b02827096d2c7955e4aa5a90acad89ec5a3f"
+  }
+}

@@ -1,7 +1,7 @@
 {
   "comparison": "F144",
   "kind": "pinned_original_source_explanation",
-  "status": "source_handoff_and_native_initialized_threat_observed_full_case_pending",
+  "status": "both_modes_completed_worker_visual_review_complete_root_ledger_review_pending",
   "scope": "Only named234-comparison effect-heavy scene setup. No campaign audit.",
   "original_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
   "original_Amazon_member3_sha256": "68e8b41b5618ccfced88057553597749513f4aeb25191004f886f9d881b633ea",
@@ -150,10 +150,65 @@
     "protected": "Bothpeers exitedgracefully0; source/manifest/profile/cards intact. Bothordinaryrecordings finalized. No post-caseCRCwindow andno heavy-effects/menusresult."
   },
   "next_prepared_attempt": {
-    "status": "syntax_checked_not_launched",
-    "caller": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F144-worker-heavy-paired-v50-v4.py",
-    "helper": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F144_worker_heavy_pause_v50_v4.py",
-    "change": "Independent ordinaryRight releaseatobservedx375; requirebothactualheroes oneachpeer x375..410/y<=350 onthe alreadyLOCAL-qualifiedraisedplatform. Retainexactrejectedlivingobservation/bodies. Samevisibleinitializedoriginalthreat gate andfrozenF144effect/menu/restorationchecks.",
-    "wait_for": "Root currently owns native/buildslot forV51; do notlaunchconcurrently."
+    "status": "v5_completed_passed_no_further_native_run_needed",
+    "output": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5",
+    "caller": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F144-worker-heavy-paired-v50-v5.py",
+    "helper": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F144_worker_heavy_pause_v50_v5.py",
+    "change": "Only arbitrary setup xceiling corrected to425. Minimum375/y<=350 retained. Genuine initialized visible source-bound original threat explicitlyrequiresHP12. All actual living/effects/ownedpause/restoration/profile/CRC/recording gates retained.",
+    "authorization": "Root explicitly authorized exactlyoneboundedv5retry after retained onepixelv4cause. No further retry authorized."
+  },
+  "paired_v4_result": {
+    "status": "failed_setup_threshold_no_comparison_credit",
+    "output": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v4",
+    "qualification_sha256": "81a5df23dc8dd3686a4853132ca10184f2646af388478e063005b7f855e91ab5",
+    "error": "Actual native enemy not reached by independent fresh stair jumps",
+    "exact_gate": "Every peer must have a source-bound initialized visible threat and every actual hero must satisfy375<=x<=410 andy<=350.",
+    "actual_terminal_geometry_on_both_peers": [
+      {
+        "hero": "X",
+        "x": 407.5,
+        "y": 331,
+        "hp": 32,
+        "action": 2
+      },
+      {
+        "hero": "Zero",
+        "x": 411,
+        "y": 330,
+        "hp": 32,
+        "action": 2
+      }
+    ],
+    "actual_native_threat": "Type1/phase1/HP12, source origin800F6540, visible; actual native updates continued with all heroes healthy forover1200ticks.",
+    "cause": "The observer setup ceiling rejected actual Zero411 byonepixel. This is not a demonstrated game behavior defect. No effects/menus/post-caseCRC result."
+  },
+  "paired_v5_result": {
+    "status": "all_native_case_and_parent_gates_passed_worker_visual_review_complete",
+    "output": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5",
+    "qualification_sha256": "4ceddbfd8a5f40c7540a8fbef7be50db719f51ea866c3e37ffd1e6ed251d18ae",
+    "receipt": "docs/evidence/mmx6-render/manifest-bound-7caed4d-F144-heavy-native-encounter-netplay-worker-reviewed.json",
+    "terminal_exec_session": 62732,
+    "exit_code": 0,
+    "owned_PIDs": [
+      45196,
+      80744
+    ],
+    "native_process_exit_codes": [
+      0,
+      0
+    ],
+    "core_mod_CRC_window_sample_counts": [
+      7,
+      7,
+      7,
+      2,
+      2,
+      6,
+      2
+    ],
+    "finalized_ordinary_recordings": 2,
+    "reviewed_composed_images": 14,
+    "visible_native_menus": "Both original X and Zero menu pages on both peers",
+    "bypasses": "None in this mode; actual reviewedQAcard nativeLoad/selector/mission arrival."
   }
 }
