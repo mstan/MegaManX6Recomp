@@ -70,7 +70,7 @@ static int checkpoint_stage_boundary(CPUState *cpu) {
     if(!diagnostic_mutation_allowed())reason=CHECKPOINT_FORBIDDEN;
     else if(!entry || !nonce)reason=CHECKPOINT_UNKNOWN;
     else if(!entry->campaign)reason=CHECKPOINT_NAMESPACE;
-    else if(!ready || !enrolled || failed || inside || stage_call || player_call || zero_world ||
+    else if(!ready || !enrolled || failed || inside || stage_call || player_call || ride_call || zero_world ||
             zero_projected || scene_owner || scene_phase || pause_owner>=0 || zero_menu_loaded ||
             state_track.count || state_track.error || psx_mod_read_byte(PLAY)!=10 ||
             psx_mod_read_byte(PLAY+1) || psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C) ||
@@ -111,7 +111,7 @@ static void checkpoint_native_entry(CPUState *cpu,uint32_t address) {
         checkpoint_cancel(failed?CHECKPOINT_PLUGIN_FAILED:CHECKPOINT_FORBIDDEN);return;
     }
     if(checkpoint_pending.phase!=1 || address!=0x8001E1BCu ||
-       cpu->gpr[31]!=0x8001E720u || cpu->gpr[4]!=PLAY || inside || stage_call ||
+       cpu->gpr[31]!=0x8001E720u || cpu->gpr[4]!=PLAY || inside || stage_call || ride_call ||
        zero_projected || state_track.count || state_track.error || psx_mod_read_byte(PLAY)!=9 ||
        psx_mod_read_byte(PLAY+12)!=entry->stage || psx_mod_read_byte(PLAY+13)!=entry->section ||
        psx_mod_read_byte(PLAY+0x1D)!=0) {checkpoint_cancel(CHECKPOINT_CONTEXT);return;}

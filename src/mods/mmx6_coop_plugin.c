@@ -115,6 +115,7 @@ enum { STAGE_SOLID_CONTACTS=80, WEAPON_SOLID_CONTACTS=32,
        SOLID_CONTACTS=STAGE_SOLID_CONTACTS+WEAPON_SOLID_CONTACTS };
 static SolidContact zero_solid_contacts[SOLID_CONTACTS];
 static int solid_call, solid_allocate_call;
+static int ride_call;
 /* Scene transport is independent of voluntary absence and death. The owner
  * occupies the native singleton for the one world pass until control returns. */
 static unsigned scene_owner, scene_phase;
@@ -814,6 +815,101 @@ static uint16_t p2_input(unsigned consumer) {
     }
     return mmx6_diagnostics_p2(consumer,raw,contaminated);
 }
+/* One original Recycle Lab armor, never a second vehicle/world pass. Native
+ * EE924 writes D5=1 for CD340 (2 is a different armor); 3A268 consumes it as
+ * -1, and EFFCC clears it on manual dismount. Those existing body bytes and
+ * shared RAM already belong to the snapshot/digest, so no owner cache exists. */
+#define RIDE 0x800CD340u
+enum { RIDE_NONE=2, RIDE_INVALID=3 };
+static void ride_body(unsigned seat,uint8_t body[0x158]) {
+    if(seat==(unsigned)!!zero_projected)capture(PLAYER,body,0x158);
+    else memcpy(body,seat?p2.body:p1.body,0x158);
+}
+static unsigned ride_owner(void) {
+    uint8_t body[0x158];unsigned claims=0,owner=RIDE_NONE;
+    for(unsigned seat=0;seat<2;++seat) {
+        ride_body(seat,body);
+        if(body[0xD5]==1 || body[0xD5]==255){owner=seat;++claims;}
+    }
+    return claims>1?RIDE_INVALID:owner;
+}
+static int ride_source(void) {
+    return psx_mod_read_byte(PLAY+12)==4 && !psx_mod_read_byte(PLAY+13) &&
+        psx_mod_read_byte(RIDE) && !psx_mod_read_byte(RIDE+1) &&
+        psx_mod_read_word(RIDE+0x10)==0x800F2B1Cu &&
+        psx_mod_read_word(0x80071380u)==0x800F2414u &&
+        psx_mod_read_word(0x800F2414u)==0x27BDFFE8u &&
+        psx_mod_read_word(0x800EE924u)==0x27BDFFD8u &&
+        psx_mod_read_word(0x800EEA74u)==0x24050012u;
+}
+static int ride_entry(CPUState *cpu,unsigned seat) {
+    uint8_t body[0x158];ride_body(seat,body);
+    /* Literal native EE924 eligibility plus F2414's personal hit-pause gate.
+     * The original callback still decides and performs the actual boarding. */
+    if(life.status[seat]!=MMX6_COOP_ALIVE || scene_passenger(seat) ||
+       body[0xCC] || body[0xD0] || body[0xD5] || psx_mod_read_byte(PLAY+0x0F) ||
+       (body[2] && body[0x8E]) || body[0x7A] || body[0xE0] ||
+       (int8_t)body[0x5C]<=0 || body[0xA4] || body[0x79] ||
+       (psx_mod_read_half(RIDE+0x96)&0x8200u) ||
+       !((psx_mod_read_byte(RIDE+0x70)|psx_mod_read_byte(RIDE+0x71))&8u))return 0;
+    uint8_t resident[0x158];capture(PLAYER,resident,sizeof resident);
+    uint32_t box=psx_mod_read_word(RIDE+0x68);
+    STATE_BYTES(restore_body,58,resident,sizeof resident);
+    STATE_WORDS(restore_box,59,&box,1);
+    project(PLAYER,body,sizeof body);
+    psx_mod_write_word(RIDE+0x68,0x800F3A48u);
+    uint32_t overlap=guest(cpu,0x8002DCF4u,PLAYER,RIDE);
+    psx_mod_write_word(RIDE+0x68,box);project(PLAYER,resident,sizeof resident);
+    STATE_POP(restore_box);STATE_POP(restore_body);
+    return overlap!=0;
+}
+static int ride_tick(CPUState *cpu,uint32_t address) {
+    if(ride_call || !enrolled || failed || address!=0x80020A08u ||
+       cpu->gpr[31]!=0x80020C60u || !ride_source())return 0;
+    ride_call=1;
+    unsigned owner=ride_owner();
+    if(owner==RIDE_INVALID){failed=1;ride_call=0;return 0;}
+    if(owner==RIDE_NONE && !(psx_mod_read_byte(RIDE+0x97)&0x40u) &&
+       psx_mod_read_byte(RIDE+4)==1 && !psx_mod_read_byte(RIDE+5)) {
+        /* Preserve native primary priority if both eligible boxes overlap. */
+        if(ride_entry(cpu,0))owner=0;
+        else if(ride_entry(cpu,1))owner=1;
+    }
+    unsigned resident=(unsigned)!!zero_projected;
+    if(owner==RIDE_NONE)owner=resident;
+    uint32_t context[3]={owner,(uint32_t)inside,resident};
+    STATE_WORDS(restore_context,60,context,3);
+    uint32_t result;
+    if(owner==resident)result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
+    else if(owner==1) {
+        uint8_t input[6];capture(0x800C456C,input,sizeof input);
+        STATE_BYTES(restore_input,61,input,sizeof input);
+        inside=1;enter_zero();
+        /* Armor runs before controller()'s private pass. Translate this
+         * accepted sample now without consuming that pass's edge history. */
+        uint16_t raw=p2_input(MMX6_INPUT_CONTROLLER_PLAYER);raw=(uint16_t)((raw<<8)|(raw>>8));
+        psx_mod_write_half(0x800C456C,raw);
+        psx_mod_write_half(0x800C456E,previous_input);
+        psx_mod_write_half(0x800C4570,(uint16_t)(raw&~previous_input));
+        guest(cpu,0x8003CD44u,0,0);
+        result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
+        leave_zero_context(1);inside=(int)context[1];
+        project(0x800C456C,input,sizeof input);STATE_POP(restore_input);
+    } else result=shared_effect_as_primary(cpu,address,cpu->gpr[4]);
+    STATE_POP(restore_context);ride_call=0;cpu->gpr[2]=result;return 1;
+}
+static void ride_sync_rider(void) {
+    if(!ride_source() || !(psx_mod_read_byte(RIDE+0x97)&0x40u))return;
+    unsigned owner=ride_owner();
+    if(owner>1 || owner==(unsigned)!!zero_projected)return;
+    uint8_t *body=owner?p2.body:p1.body;
+    /* Literal 31F04..31F28 copyout after shared vehicle collision. The
+     * second body-only solid pass deliberately never resolves armor twice. */
+    if(body[5]==0x12) {
+        put32(body+8,psx_mod_read_word(RIDE+8));
+        put32(body+12,psx_mod_read_word(RIDE+12));
+    }
+}
 static void scene_begin(unsigned seat, uint32_t source) {
     if (scene_owner || !enrolled || life.status[seat]!=MMX6_COOP_ALIVE) return;
     scene_owner=seat+1;
@@ -1332,7 +1428,7 @@ static uint32_t retired_host_word(const Mmx6StateFrame *frame,size_t index) {
 static int retire_quit_stage(CPUState *cpu,uint32_t address) {
     if (!cpu || address!=0x8003BD24u || inside || player_call || zero_world || zero_projected ||
         world_render || hud_call || render_x_death || effect_call || shared_fx_call || shared_fx_allocate_call || pickup_call || solid_call ||
-        solid_allocate_call || scene_call || unit_choices_call || intro_target_call ||
+        solid_allocate_call || ride_call || scene_call || unit_choices_call || intro_target_call ||
         stage_call!=1 || state_track.count!=2 || state_track.error ||
         psx_mod_read_byte(PLAY)!=9 || psx_mod_read_byte(PLAY+1) ||
         cpu->gpr[31]!=0x8001E26Cu || cpu->gpr[16]!=PLAY) return 0;
@@ -1363,6 +1459,7 @@ static void native_player_init(CPUState *cpu, uint32_t address) {
     memset(shared_effect_owners,0,sizeof shared_effect_owners);
     mmx6_coop_lifecycle_respawn(&life);
     pause_owner=-1; p2_start_previous=0;
+    ride_call=0;
 }
 static void controller(CPUState *cpu, uint32_t address) {
     (void)address;
@@ -2066,6 +2163,7 @@ static int solid_player_collision(CPUState *cpu, uint32_t address) {
         } else memset(contact,0,sizeof *contact);
         STATE_POP(restore_result);
     }
+    ride_sync_rider();
     cpu->gpr[2]=result;
     solid_call=0;
     return 1;
@@ -2257,7 +2355,7 @@ static void activate(void) {
     hud_call=hud_seat=0;
     p2_hud_fade=128;
     pickup_call=0; memset(pickup_owners,0,sizeof pickup_owners);
-    solid_call=solid_allocate_call=0;
+    solid_call=solid_allocate_call=ride_call=0;
     memset(zero_solid_contacts,0,sizeof zero_solid_contacts);
     scene_owner=scene_phase=0; scene_call=zero_projected=0;
     unit_choices_call=intro_target_call=0;
@@ -2284,6 +2382,7 @@ static void activate(void) {
         !psx_mod_set_function_replacement(0x80029658,camera_target)) failed=1;
     if (!psx_mod_set_function_replacement(0x80034DCC,player_tick) ||
         !psx_mod_set_function_replacement(0x8001E9EC,stage_tick) ||
+        !psx_mod_set_function_replacement(0x80020A08,ride_tick) ||
         !psx_mod_set_function_replacement(0x800232D4,render_survivor)) failed=1;
     if (!psx_mod_set_function_replacement(0x80014F70,working_palette_native_load)) failed=1;
     if (!psx_mod_set_function_replacement(0x80030ECC,player_contact)) failed=1;
