@@ -1,0 +1,192 @@
+{
+  "schema": 1,
+  "kind": "root_reviewed_F31_native_forward_cycle_and_original_owned_buster",
+  "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+  "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+  "image": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F31-forward-local-v48-root-v2\\candidate\\mmx6-runtime.exe",
+    "sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c"
+  },
+  "compiled_manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+  "mode": "local",
+  "checks": {
+    "actual_native_special_selected_and_spent": true,
+    "actual_forward_cycle_returns_buster": true,
+    "both_native_bodies_stay_alive_visible": true,
+    "personal_resources_preserved": true,
+    "new_owned_original_type0_buster": true,
+    "actual_child_travel_and_natural_retirement": true,
+    "composed_before_after_captured_review_pending": true
+  },
+  "peers": [
+    {
+      "peer": 0,
+      "cycle_sequence": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        0
+      ],
+      "selected_ammo_after_use": 256,
+      "shot_slot": 0,
+      "owner": "0x800970A0",
+      "shot_type": 0,
+      "travel_pixels": 54.0,
+      "native_birth_timer": 668,
+      "native_retirement_timer": 689,
+      "both_HP": [
+        32,
+        32
+      ],
+      "samples": 106
+    }
+  ],
+  "images": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F31-forward-local-v48-root-v2\\ammo-hud\\F31\\peer-0-actual-special-selected-and-spent.png",
+      "sha256": "9a3a4a210d087065fa97b21e7ddffae073bb1689ca30d5c4247b8cec5697995c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F31-forward-local-v48-root-v2\\ammo-hud\\F31\\peer-0-actual-returned-native-buster.png",
+      "sha256": "62782b1285f44b640bca73562d119f4eb102ec7d0976fb0f4a310060d14a91f7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F31-forward-local-v48-root-v2\\ammo-hud\\F31\\peer-0-actual-buster-retired-both-bodies-and-meters.png",
+      "sha256": "51ff837c5d510ba0a38df29bcdfa665eb526b0f16a83ac8aa667615e187884dd"
+    }
+  ],
+  "all_composed_images_root_inspected": true,
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F31-forward-local-v48-root-v2\\qualification.json",
+    "sha256": "f9e6cb11461bf10637865d652f014069695d0e976b2c2bf48714a7f1e131ed57"
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F31-forward-local-v48-root-v2\\ammo-hud\\F31\\F31-observations.json",
+    "sha256": "0554fa6fd05d972d0f008ca85b5087774e0aee790773b83b29a075e73be26abd"
+  },
+  "executed_caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F31-forward-local-v48-root-v2\\caller-executed-source.py",
+    "sha256": "bfe2b29e55b32d21bf4df4eec989f6156298fc13aac36e93cd053894d070aa15"
+  },
+  "executed_observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F31-forward-local-v48-root-v2\\F31-helper-executed-source.py",
+    "sha256": "a29646183f191d09fe09f9c2d347ff7df7d7e84b67cfb98995c1e93e1d4fb38b"
+  },
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "cards_preserved": true,
+  "native_setup": {
+    "kind": "original intro command9 disclosed inventory prerequisite",
+    "evidence": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F31-forward-local-v48-root-v2\\ammo-hud\\F31\\F31-observations-with-prerequisites.json",
+      "sha256": "b2d127055be1b69c63bed3c3edc1f770d445a69da1b0c0a74225b52e4ac9331e"
+    }
+  },
+  "recordings": {
+    "status": "failed_fixture_taint_retained_for_diagnostics",
+    "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F31-forward-local-v48-root-v2\\candidate\\saves\\input-recordings\\session-1792985116275711-1-0\\inputs.jsonl",
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+      "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "terminal_failure": "unilateral debug or fixture input contaminated capture",
+    "native_status": {
+      "contract": "mmx6.native-consumption.v1",
+      "epoch": 1,
+      "failure": "unilateral debug or fixture input contaminated capture",
+      "schema": 1,
+      "scope": "native-consumption diagnostics; replay unimplemented",
+      "status": "failed"
+    },
+    "events": 6059,
+    "natives": 4248,
+    "p2_reads": 1811,
+    "artifacts": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F31-forward-local-v48-root-v2\\recording-rejection\\settings.json",
+        "bytes": 10329,
+        "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F31-forward-local-v48-root-v2\\recording-rejection\\content.json",
+        "bytes": 503,
+        "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F31-forward-local-v48-root-v2\\recording-rejection\\simulation-contract.json",
+        "bytes": 259,
+        "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F31-forward-local-v48-root-v2\\recording-rejection\\inputs.jsonl",
+        "bytes": 795994,
+        "sha256": "af31ef4ee6bad1463f53ed211f1b7b46742f6fc5b16c08337c18d32590743f73"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F31-forward-local-v48-root-v2\\recording-rejection\\status.json",
+        "bytes": 211,
+        "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F31-forward-local-v48-root-v2\\recording-rejection\\card1.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F31-forward-local-v48-root-v2\\recording-rejection\\card2.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      }
+    ],
+    "strict_refusals": {
+      "ordinary_capture": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      },
+      "offline_replay": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      }
+    },
+    "finalized_capture_admitted": false,
+    "replay_admitted": false,
+    "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+  },
+  "limits": [
+    "Exact e0fdd1e/SDK7cb474 image and compiled manifest; X/P1 and normalZero/P2, shared native4:3 OpenGL, stacked meters, published digital host input and muted dummy audio.",
+    "One genuinely selected and spent IceBurst2, then original forward R1 edges3..8..0 after its actual child releases native selector locks. Actual native neutral decode separates each edge. No L1 eight-update timing, every-weapon artwork, alternate roster or broad F59 qualification.",
+    "Local starts in the ordinary intro and discloses original offline command9 equipment-inventory prerequisite. The paired case instead uses copies of the reviewed original FF_QA native Save, title Load/story/selector and original Amazon arrival. Acquisition is bypassed in both; no selection, ammo, child, HP, camera, palette or outcome writes.",
+    "All9 composed captures were inspected: both native bodies and separate stacked life meters remain visible after return to buster and its child retirement. The spent-special images also show native ammo/icon. No exact all-art or pixel-equality claim.",
+    "Typed bodies, ordinary X-context pool/PLAY and composed images are nearby separate read-only observations, not instruction-atomic whole-machine samples. Each actual physical peer independently supplies native original code guards, accepted cycling and shot lifetime.",
+    "Local default recording is correctly fixture-tainted and strict capture/replay refuses it. Paired ordinary recordings finalize; no replay or recorder-overhead qualification.",
+    "The earlier failed forward-v1 parent remains failed: fresh R1 was sent during the native IceBurst selector lock, so its edge was ignored. V2 waits for actual +99/D3/D5/E0 clear before sending a new edge. No earlier failure flags or evidence were rewritten."
+  ],
+  "curator": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-F31-forward-both-v48-root-v1.py",
+    "sha256": "222ed89b1e18f90faaff413c57b5f79d33ea8c94a484f04c538d7bf34341060d"
+  }
+}

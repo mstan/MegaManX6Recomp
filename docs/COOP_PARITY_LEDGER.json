@@ -6196,14 +6196,14 @@
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -6254,9 +6254,83 @@
             "bypasses": [
               "Earned weapon inventory via original initializer; no native acquisition credit."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+            "build_identity": {
+              "executable_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+              "compiled_manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "location": "original intro",
+              "view": "shared native4:3 OpenGL, stacked HUD",
+              "input": "owned published digital host slots",
+              "audio": "dummy muted"
+            },
+            "action": "Select and spend native IceBurst2, wait for original selector unlock, use fresh forward R1 edges through3..8..0, then fire a fresh owned original type0 buster and retain travel/natural retirement.",
+            "outcome": "Both native bodies and both life meters remain visible after actual buster return and shot retirement. Personal resources are preserved; each actual physical peer observes owned child travel and retirement. Root reviewed all composed captures; exact parent/source/card/recording/cleanup gates pass.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-hud\\manifest-bound-e0fdd1e-F31-forward-cycle-local-reviewed.json",
+                "sha256": "24d78e92947990bd1cb184f147b6d9fd90b6d4e7efcda095401d886b2ad0673c"
+              }
+            ],
+            "limits": [
+              "Exact e0fdd1e/SDK7cb474 image and compiled manifest; X/P1 and normalZero/P2, shared native4:3 OpenGL, stacked meters, published digital host input and muted dummy audio.",
+              "One genuinely selected and spent IceBurst2, then original forward R1 edges3..8..0 after its actual child releases native selector locks. Actual native neutral decode separates each edge. No L1 eight-update timing, every-weapon artwork, alternate roster or broad F59 qualification.",
+              "Local starts in the ordinary intro and discloses original offline command9 equipment-inventory prerequisite. The paired case instead uses copies of the reviewed original FF_QA native Save, title Load/story/selector and original Amazon arrival. Acquisition is bypassed in both; no selection, ammo, child, HP, camera, palette or outcome writes.",
+              "All9 composed captures were inspected: both native bodies and separate stacked life meters remain visible after return to buster and its child retirement. The spent-special images also show native ammo/icon. No exact all-art or pixel-equality claim.",
+              "Typed bodies, ordinary X-context pool/PLAY and composed images are nearby separate read-only observations, not instruction-atomic whole-machine samples. Each actual physical peer independently supplies native original code guards, accepted cycling and shot lifetime.",
+              "Local default recording is correctly fixture-tainted and strict capture/replay refuses it. Paired ordinary recordings finalize; no replay or recorder-overhead qualification.",
+              "The earlier failed forward-v1 parent remains failed: fresh R1 was sent during the native IceBurst selector lock, so its edge was ignored. V2 waits for actual +99/D3/D5/E0 clear before sending a new edge. No earlier failure flags or evidence were rewritten."
+            ],
+            "bypasses": [
+              "Original earned-weapon inventory prerequisite only; no acquisition claim."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+            "build_identity": {
+              "executable_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+              "compiled_manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "location": "original native AmazonC0 after FF_QA Load",
+              "view": "shared native4:3 OpenGL, stacked HUD",
+              "input": "owned published digital host slots",
+              "audio": "dummy muted"
+            },
+            "action": "Select and spend native IceBurst2, wait for original selector unlock, use fresh forward R1 edges through3..8..0, then fire a fresh owned original type0 buster and retain travel/natural retirement.",
+            "outcome": "Both native bodies and both life meters remain visible after actual buster return and shot retirement. Personal resources are preserved; each actual physical peer observes owned child travel and retirement. Root reviewed all composed captures; exact parent/source/card/recording/cleanup gates pass.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-hud\\manifest-bound-e0fdd1e-F31-forward-cycle-netplay-reviewed.json",
+                "sha256": "a8cc588818a89095e81aa89d9517411076953b0d90ee345e7ffefbea6eb70745"
+              }
+            ],
+            "limits": [
+              "Exact e0fdd1e/SDK7cb474 image and compiled manifest; X/P1 and normalZero/P2, shared native4:3 OpenGL, stacked meters, published digital host input and muted dummy audio.",
+              "One genuinely selected and spent IceBurst2, then original forward R1 edges3..8..0 after its actual child releases native selector locks. Actual native neutral decode separates each edge. No L1 eight-update timing, every-weapon artwork, alternate roster or broad F59 qualification.",
+              "Local starts in the ordinary intro and discloses original offline command9 equipment-inventory prerequisite. The paired case instead uses copies of the reviewed original FF_QA native Save, title Load/story/selector and original Amazon arrival. Acquisition is bypassed in both; no selection, ammo, child, HP, camera, palette or outcome writes.",
+              "All9 composed captures were inspected: both native bodies and separate stacked life meters remain visible after return to buster and its child retirement. The spent-special images also show native ammo/icon. No exact all-art or pixel-equality claim.",
+              "Typed bodies, ordinary X-context pool/PLAY and composed images are nearby separate read-only observations, not instruction-atomic whole-machine samples. Each actual physical peer independently supplies native original code guards, accepted cycling and shot lifetime.",
+              "Local default recording is correctly fixture-tainted and strict capture/replay refuses it. Paired ordinary recordings finalize; no replay or recorder-overhead qualification.",
+              "The earlier failed forward-v1 parent remains failed: fresh R1 was sent during the native IceBurst selector lock, so its edge was ignored. V2 waits for actual +99/D3/D5/E0 clear before sending a new edge. No earlier failure flags or evidence were rewritten."
+            ],
+            "bypasses": [
+              "Original earned-weapon inventory prerequisite only; no acquisition claim."
+            ]
           }
         ],
-        "limitations": "LOCAL F31 passed253c74e actual IceBurst cycle back to buster, fresh native ownedtype0 child/travel/naturalretirement and both visible bodies/meters/controls. Failed generic-green extractor parent preserved; same run independently source-anchored and visually reviewed. Inventory prerequisite taints default recording, strict refusals retained. Netplay/aggregate unverified; one selected special/stacked layout."
+        "limitations": "Passed exact e0fdd1e/SDK7cb474 LOCAL and actual paired Win64 loopback. Native spent IceBurst2, original selector-lock retirement, fresh forward R1 cycle3..8..0, owned type0 buster travel/natural retirement, both bodies/meters visible in all9 reviewed composed captures. Explicit inventory acquisition bypass; no L1 timing, other roster, every-weapon art or replay claim."
       }
     },
     {

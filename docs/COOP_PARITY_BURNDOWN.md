@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 23 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F33, F38, F48, F58, F59, F67, F70, F205, F208), 0 failed, 211 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 24 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F31, F33, F38, F48, F58, F59, F67, F70, F205, F208), 0 failed, 210 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -40,6 +40,23 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 25
+
+
+F31 now passes on the exact `e0fdd1e`/SDK `7cb4742` candidate in local co-op
+and actual paired netplay. X selects and spends native IceBurst2, waits for
+its child to release the original selector lock, then uses fresh forward R1
+edges through3..8..0 and fires a newly allocated, owned original type0 buster.
+Each actual physical peer observes travel and natural retirement. All nine
+composed images were reviewed: both bodies and both life meters stay visible.
+The local inventory prerequisite and its recording taint are explicit; the
+paired run uses the original native FF_QA card Load/story/selector/mission path,
+matching resolved CRCs, finalized ordinary recordings and unchanged cards.
+All owned exits are graceful0. This adds one full comparison, bringing the
+count to24/234; native-content coverage remains14/3330 mode results.
+The earlier failed forward-cycle run remains failed: its R1 edge arrived while
+Ice Burst held the native selector lock. The passing observer waits for the
+actual lock release before sending a fresh edge. No game-code fix was needed.
+
 
 The [reviewed v43 default-resolution and native Load components](evidence/mmx6-hud/manifest-bound-c32dd8f-default-native1-and-Load-components-failed-parent-reviewed.json)
 preserve the failed paired attempt65104 on game `c32dd8f`, SDK `7cb4742`.
