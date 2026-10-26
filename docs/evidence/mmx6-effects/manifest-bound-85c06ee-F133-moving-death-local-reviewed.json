@@ -1,0 +1,345 @@
+{
+  "schema": 1,
+  "kind": "root_reviewed_F133_original_native_motion_death_art_visible_expiry_survivor",
+  "candidate": "85c06ee7bf9dcd1e100de8e24b28d546e95b9f9e",
+  "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+  "image_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+  "compiled_manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+  "mode": "local",
+  "parents": [
+    {
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat0\\qualification.json",
+        "sha256": "843a3f641274853af3b2d58a8d85166045f79f7d820143e404c4c6c1188c8482"
+      },
+      "manifest": {
+        "declared_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+        "manifest_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v49-dash-owner-hooked-debug\\psx_build_manifest\\psx-runtime\\Release\\manifest.json",
+        "header_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v49-dash-owner-hooked-debug\\psx_build_manifest\\psx-runtime\\Release\\manifest.h",
+        "manifest_file_sha256": "c19a4df7e16adc3fd6859d80217fd2596fa72cd67dea8b3e2215a879184ab936",
+        "header_file_sha256": "fbefabde2466fe2f818e225254692ea3abe8f9f1aaffb5f2bb453886d0dee1ba",
+        "declared_files": 692,
+        "staged_images_contain_compiled_sha256": true,
+        "whole_binary": false,
+        "heterogeneous_qualified": false
+      },
+      "checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_case_finalized_recording_cleanup_and_cards": true
+      },
+      "caller": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat0\\caller-executed-source.py",
+        "sha256": "af9e2ea8d19c046e18b5c7e1476174a421df0b4bc63556b6540b90b0060f0c71"
+      },
+      "observer": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat0\\scroll-helper-executed-source.py",
+        "sha256": "ba57243e515e0442831d769112bea96b98500f1945faa34f03a1b69fb71a31c9"
+      }
+    },
+    {
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat1\\qualification.json",
+        "sha256": "346839cc506b83bf62f1f116ffb7d362794de4361cce5a731670848c4fa42eb5"
+      },
+      "manifest": {
+        "declared_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+        "manifest_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v49-dash-owner-hooked-debug\\psx_build_manifest\\psx-runtime\\Release\\manifest.json",
+        "header_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v49-dash-owner-hooked-debug\\psx_build_manifest\\psx-runtime\\Release\\manifest.h",
+        "manifest_file_sha256": "c19a4df7e16adc3fd6859d80217fd2596fa72cd67dea8b3e2215a879184ab936",
+        "header_file_sha256": "fbefabde2466fe2f818e225254692ea3abe8f9f1aaffb5f2bb453886d0dee1ba",
+        "declared_files": 692,
+        "staged_images_contain_compiled_sha256": true,
+        "whole_binary": false,
+        "heterogeneous_qualified": false
+      },
+      "checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_case_finalized_recording_cleanup_and_cards": true
+      },
+      "caller": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat1\\caller-executed-source.py",
+        "sha256": "af9e2ea8d19c046e18b5c7e1476174a421df0b4bc63556b6540b90b0060f0c71"
+      },
+      "observer": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat1\\scroll-helper-executed-source.py",
+        "sha256": "ba57243e515e0442831d769112bea96b98500f1945faa34f03a1b69fb71a31c9"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "character": "X",
+      "peer": 0,
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat0\\hud\\R3-observations.json",
+        "sha256": "46ddce806df0ef34578a8a9b0d0382122a7b04ffeb4028c5e4f28fe8a62a5c87"
+      },
+      "original_art_review": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat0-original-art-review.json",
+        "sha256": "bd9e7eb607a2c010ed8ec4035ffb705c88d3dd91e8b665997d39d96b1a305e47"
+      },
+      "motion": {
+        "earlier_index": 472,
+        "last_positive_index": 473,
+        "first_zero_index": 474,
+        "native_hp_bytes": [
+          1,
+          0
+        ],
+        "last_positive_native_action": 7,
+        "last_positive_native_timer": 1942,
+        "first_zero_native_timer": 1948,
+        "native_xy_raw": [
+          [
+            25702400,
+            70238208
+          ],
+          [
+            26226688,
+            70812672
+          ],
+          [
+            26488832,
+            70975488
+          ]
+        ],
+        "grounded_before_fatal": false,
+        "scope": "Consecutive actual native body records, not an inferred transient flag or velocity-only motion."
+      },
+      "original_FX11_comparisons": 74,
+      "fatal_position": [
+        404.1875,
+        1083.0
+      ],
+      "partner_position": [
+        249.5,
+        1114.0
+      ],
+      "effect_origins": [
+        [
+          404.1875,
+          1083.0
+        ]
+      ],
+      "visible_effect_observations": 400,
+      "visible_to_final_native_ticks": 363,
+      "images": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat0\\hud\\initial.png",
+          "sha256": "9539bf5195599f5af3e709164f6c8aa5c5a6c56876ee758a00d335d1002e1e27",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat0\\hud\\native-fatal.png",
+          "sha256": "b33bf942ee4dbcfea360272396ee91c00697b4ea9a1cb38516de91a272deccee",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat0\\hud\\native-visible-burst.png",
+          "sha256": "15425d3227d74622f2094dbe19d31257acb51225d1f48be563c94827c7621836",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat0\\hud\\naturally-expired-survivor.png",
+          "sha256": "ffdbe6880036d80e56d1162baad73ba514728b521e50c394950377f3bb00fb66",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat0\\hud\\survivor-controlled.png",
+          "sha256": "073d153e53b9d6c3082fae2e157e8cbef5d2d04abea0562afeea78f438f12adb",
+          "bytes": 2074543
+        }
+      ],
+      "contact_sheet": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat0-peer0-visual.png",
+        "sha256": "1845c163dc6066161f88289a83f62100d0579624435a062f388efa76b9a97dd1",
+        "bytes": 2486641
+      },
+      "root_visual_review": "All five composed images inspected; original character body/burst colors, finite visible effects and living survivor remain coherent.",
+      "checks": {
+        "native_fatal_distinct_partner": true,
+        "original_allocation_origin_identity": true,
+        "source_original_FX11_pixels_and_rendered_colors": true,
+        "native_visible_retirement": true,
+        "living_partner_input": true
+      }
+    },
+    {
+      "character": "Zero",
+      "peer": 0,
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat1\\hud\\R3-observations.json",
+        "sha256": "76ab4f99f5e8690ea9ea73fe92acfb3608611850b79cd8c56cb6fadbfbbc76ed"
+      },
+      "original_art_review": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat1-original-art-review.json",
+        "sha256": "44f6c380a274597bef1ee0519317e331f5898275e1cc8075fe50a8f58e513c08"
+      },
+      "motion": {
+        "earlier_index": 174,
+        "last_positive_index": 175,
+        "first_zero_index": 176,
+        "native_hp_bytes": [
+          4,
+          0
+        ],
+        "last_positive_native_action": 4,
+        "last_positive_native_timer": 906,
+        "first_zero_native_timer": 912,
+        "native_xy_raw": [
+          [
+            25653248,
+            69960704
+          ],
+          [
+            25653248,
+            70909952
+          ],
+          [
+            25915392,
+            70909952
+          ]
+        ],
+        "grounded_before_fatal": true,
+        "scope": "Consecutive actual native body records, not an inferred transient flag or velocity-only motion."
+      },
+      "original_FX11_comparisons": 84,
+      "fatal_position": [
+        395.4375,
+        1082.0
+      ],
+      "partner_position": [
+        251.5,
+        1115.0
+      ],
+      "effect_origins": [
+        [
+          395.4375,
+          1082.0
+        ]
+      ],
+      "visible_effect_observations": 446,
+      "visible_to_final_native_ticks": 370,
+      "images": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat1\\hud\\initial.png",
+          "sha256": "62782b1285f44b640bca73562d119f4eb102ec7d0976fb0f4a310060d14a91f7",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat1\\hud\\native-fatal.png",
+          "sha256": "fac21ea899208f395194c22ba9b7234e88007afed9c72f798b7ab2984a01c218",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat1\\hud\\native-visible-burst.png",
+          "sha256": "96378aec831eabec3fe5a8d701fb1e0138dcef13abcf3b09a499f88e86297c70",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat1\\hud\\naturally-expired-survivor.png",
+          "sha256": "784fab1ba1d64f9580fad11b1c597c8d1fe36ab6ef55d932cda762c713436a02",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat1\\hud\\survivor-controlled.png",
+          "sha256": "48562e879f4ef1b038708337bf99f7c8f79df07362e895f00d31a48787310af4",
+          "bytes": 2074543
+        }
+      ],
+      "contact_sheet": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat1-peer0-visual.png",
+        "sha256": "de2be037215d9d218dad299879db3b63fb2ed1b0f10cdf5c9edfe1c2836945dc",
+        "bytes": 2185144
+      },
+      "root_visual_review": "All five composed images inspected; original character body/burst colors, finite visible effects and living survivor remain coherent.",
+      "checks": {
+        "native_fatal_distinct_partner": true,
+        "original_allocation_origin_identity": true,
+        "source_original_FX11_pixels_and_rendered_colors": true,
+        "native_visible_retirement": true,
+        "living_partner_input": true
+      }
+    }
+  ],
+  "recordings": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat0\\candidate\\saves\\input-recordings\\session-1792997469465291-1-0\\inputs.jsonl",
+      "sha256": "08a35c859630bd4c8311c14ee2489f45bda99a013383bd042424e71eb1e8b5ea",
+      "events": 14443,
+      "natives": 8644,
+      "p2_reads": 5799,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+        "manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+        "mode": "offline",
+        "profile": null,
+        "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+        "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      "requested_jump_seats": [],
+      "consumed_cross_seen_anywhere": [
+        0
+      ],
+      "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F133-motion-local-v49-root-v4-seat1\\candidate\\saves\\input-recordings\\session-1792997666696833-1-0\\inputs.jsonl",
+      "sha256": "f8dce823e4b8c840c1f45df14c2a10128861535785f7e39f077c1dae2496c728",
+      "events": 10702,
+      "natives": 6564,
+      "p2_reads": 4138,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+        "manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+        "mode": "offline",
+        "profile": null,
+        "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+        "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      "requested_jump_seats": [],
+      "consumed_cross_seen_anywhere": [
+        0,
+        1
+      ],
+      "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence"
+    }
+  ],
+  "root_inspected_all_composed_images": true,
+  "limits": [
+    "Exact85c06ee/SDK7cb474, native intro, X/P1 and normal Zero/P2, shared native4:3 OpenGL/stacked meters, ordinary published input, dummy muted audio; same-machine Win64 loopback only.",
+    "Each character dies separately from original enemy contact after observed actual native motion. Consecutive last-positive and first-zero body records establish displacement into death; velocity, held input and later lifecycle publication alone are not used as proof.",
+    "No HP, position, action, physics, fatal/lifecycle, effect, palette, timer or outcome writes. Initial positive-HP fixture is explicitly disabled. No state LOAD, inventory grant or campaign prerequisite is used.",
+    "Original blue X and gold Zero FX11 frame/shape pixels, palette and actual referenced GPU packets are compared against pinned original resources. Fatal body poses and all30 composed captures were root inspected. Packet observations and read-only bodies are nearby independent reads, not an instruction-atomic whole-machine claim.",
+    "All visible owned death effects disappear naturally, with more than300 native updates observed and accepted survivor movement afterward. Original radial records can remain allocated but invisible (32 in this implementation); this is not a claim that every pool slot is freed, and no cleanup flags are forced.",
+    "Reference matches cover the actual rendered native bursts, not every possible animation frame or a full framebuffer equality claim. Native contact can obscure the fatal body against an enemy; the retained composed capture and typed body are separate evidence.",
+    "Ordinary finalized recording, exact declared sources/manifest, unchanged native cards, agreed profile, matching post-case CRCs and graceful exits0 are required. Historical failed/idle-hit attempts remain unchanged. No audio, other-stage/roster, remote-platform or separate content-audit credit."
+  ],
+  "bypasses": []
+}

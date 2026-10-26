@@ -16,7 +16,7 @@ as historical reference. The owner has resumed work solo on the 234 comparisons.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 29 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F31, F33, F38, F48, F58, F59, F67, F70, F95, F102, F121, F170, F205, F208), 0 failed, 205 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 30 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F31, F33, F38, F48, F58, F59, F67, F70, F95, F102, F121, F133, F170, F205, F208), 0 failed, 204 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -39,7 +39,22 @@ hashed evidence for each required mode. Do not set the completion flags under
 test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
-## Current qualification status, October 25
+## Current qualification status, October 26
+
+F133 now passes on exact `85c06ee`/SDK `7cb4742` in
+[local co-op](evidence/mmx6-effects/manifest-bound-85c06ee-F133-moving-death-local-reviewed.json)
+and [actual paired netplay](evidence/mmx6-effects/manifest-bound-85c06ee-F133-moving-death-netplay-reviewed.json).
+X and Zero each die separately from ordinary enemy contact while moving.
+Consecutive native body records establish actual displacement into the fatal
+HP transition on every physical process. Original blue X and gold Zero burst
+pixels, palette and used GPU packets match the original resources; all30
+composed captures were inspected. Visible effects expire naturally and each
+living survivor accepts movement afterward. Original invisible radial records
+can remain allocated; no pool-wide deallocation is claimed or forced. Exact
+sources/profile, post-case CRCs, finalized ordinary recordings, unchanged cards
+and exits0 pass. No game-code change was needed. This adds one comparison,
+bringing the count29to30; the earlier idle-hit and failed observer attempts
+remain preserved. The first30 is a milestone, and the remaining204 continue.
 
 F121 and F170 now pass on exact `85c06ee`/SDK `7cb4742` in
 [local co-op](evidence/mmx6-scenery/manifest-bound-85c06ee-F121-F170-survivor-retry-local-reviewed.json)
@@ -53,8 +68,8 @@ retry on every physical process;84 native texture regions per process match CPU
 VRAM and GPU FBO. All60 combined-batch images were reviewed. Source/profile,
 post-case matching CRCs, ordinary recordings, unchanged cards and exits0 pass;
 no fixture or game-code change was needed. This raises completed comparisons
-27to29. F133's additional original-art/expiry observations are retained, but its
-required motion-death condition is not yet qualified and it stays unverified.
+27to29. F133's earlier original-art/expiry observations remain retained; its
+separate moving-death qualification is recorded above.
 
 F95 and F102 now pass on exact `85c06ee`/SDK `7cb4742` in
 [local co-op](evidence/mmx6-scenery/manifest-bound-85c06ee-F95-F102-shared-scroll-local-reviewed.json)

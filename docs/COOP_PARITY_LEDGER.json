@@ -11562,24 +11562,95 @@
       "frozen_row_sha256": "6703f2a083034d9bb2c5274ac2a5eebdb65ef39e14a5f3c44fc89b2ef527d804",
       "x6": {
         "workstream": "render",
-        "mapping_state": "identified_subsystem",
+        "mapping_state": "candidate_native_scenario",
         "analogue": "Full death animation and effect retirement",
         "bounded_check": "Kill both characters separately during native motion; inspect fatal body art and all effects until their original finite retirement, with survivor control.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:render_actor",
           "src/mods/mmx6_coop_plugin.c:draw_coop_hud"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "85c06ee7bf9dcd1e100de8e24b28d546e95b9f9e",
+            "build_identity": {
+              "executable_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+              "compiled_manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro enemy contact, separate fresh character-death sessions",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "input": "ordinary published digital host",
+              "audio": "dummy muted"
+            },
+            "action": "Kill X and Zero separately by native enemy contact while their actual bodies move. Compare original fatal body/burst art, trace every visible owned effect to natural disappearance, then exercise the living survivor.",
+            "outcome": "Both characters move across the last-positive to first-zero native HP transition on every physical process. Original blue/gold FX11 pixels, palette and used GPU packets match source. All30 composed captures reviewed, all visible effects expire naturally, and survivor movement is accepted. Exact sources/profile/post-case CRCs, finalized ordinary recordings, unchanged cards and exits0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-effects/manifest-bound-85c06ee-F133-moving-death-local-reviewed.json",
+                "sha256": "405e736e6a241e928f84fe762e028331ab42ce713d76df762902f41c52463d2c"
+              }
+            ],
+            "limits": [
+              "Exact85c06ee/SDK7cb474, native intro, X/P1 and normal Zero/P2, shared native4:3 OpenGL/stacked meters, ordinary published input, dummy muted audio; same-machine Win64 loopback only.",
+              "Each character dies separately from original enemy contact after observed actual native motion. Consecutive last-positive and first-zero body records establish displacement into death; velocity, held input and later lifecycle publication alone are not used as proof.",
+              "No HP, position, action, physics, fatal/lifecycle, effect, palette, timer or outcome writes. Initial positive-HP fixture is explicitly disabled. No state LOAD, inventory grant or campaign prerequisite is used.",
+              "Original blue X and gold Zero FX11 frame/shape pixels, palette and actual referenced GPU packets are compared against pinned original resources. Fatal body poses and all30 composed captures were root inspected. Packet observations and read-only bodies are nearby independent reads, not an instruction-atomic whole-machine claim.",
+              "All visible owned death effects disappear naturally, with more than300 native updates observed and accepted survivor movement afterward. Original radial records can remain allocated but invisible (32 in this implementation); this is not a claim that every pool slot is freed, and no cleanup flags are forced.",
+              "Reference matches cover the actual rendered native bursts, not every possible animation frame or a full framebuffer equality claim. Native contact can obscure the fatal body against an enemy; the retained composed capture and typed body are separate evidence.",
+              "Ordinary finalized recording, exact declared sources/manifest, unchanged native cards, agreed profile, matching post-case CRCs and graceful exits0 are required. Historical failed/idle-hit attempts remain unchanged. No audio, other-stage/roster, remote-platform or separate content-audit credit."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "85c06ee7bf9dcd1e100de8e24b28d546e95b9f9e",
+            "build_identity": {
+              "executable_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+              "compiled_manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro enemy contact, separate fresh character-death sessions",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "input": "ordinary published digital host",
+              "audio": "dummy muted"
+            },
+            "action": "Kill X and Zero separately by native enemy contact while their actual bodies move. Compare original fatal body/burst art, trace every visible owned effect to natural disappearance, then exercise the living survivor.",
+            "outcome": "Both characters move across the last-positive to first-zero native HP transition on every physical process. Original blue/gold FX11 pixels, palette and used GPU packets match source. All30 composed captures reviewed, all visible effects expire naturally, and survivor movement is accepted. Exact sources/profile/post-case CRCs, finalized ordinary recordings, unchanged cards and exits0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-effects/manifest-bound-85c06ee-F133-moving-death-netplay-reviewed.json",
+                "sha256": "4e197e56d53b8e8a174a43c49002f3450e1a51de157cb55df49ed82bb54f4d20"
+              }
+            ],
+            "limits": [
+              "Exact85c06ee/SDK7cb474, native intro, X/P1 and normal Zero/P2, shared native4:3 OpenGL/stacked meters, ordinary published input, dummy muted audio; same-machine Win64 loopback only.",
+              "Each character dies separately from original enemy contact after observed actual native motion. Consecutive last-positive and first-zero body records establish displacement into death; velocity, held input and later lifecycle publication alone are not used as proof.",
+              "No HP, position, action, physics, fatal/lifecycle, effect, palette, timer or outcome writes. Initial positive-HP fixture is explicitly disabled. No state LOAD, inventory grant or campaign prerequisite is used.",
+              "Original blue X and gold Zero FX11 frame/shape pixels, palette and actual referenced GPU packets are compared against pinned original resources. Fatal body poses and all30 composed captures were root inspected. Packet observations and read-only bodies are nearby independent reads, not an instruction-atomic whole-machine claim.",
+              "All visible owned death effects disappear naturally, with more than300 native updates observed and accepted survivor movement afterward. Original radial records can remain allocated but invisible (32 in this implementation); this is not a claim that every pool slot is freed, and no cleanup flags are forced.",
+              "Reference matches cover the actual rendered native bursts, not every possible animation frame or a full framebuffer equality claim. Native contact can obscure the fatal body against an enemy; the retained composed capture and typed body are separate evidence.",
+              "Ordinary finalized recording, exact declared sources/manifest, unchanged native cards, agreed profile, matching post-case CRCs and graceful exits0 are required. Historical failed/idle-hit attempts remain unchanged. No audio, other-stage/roster, remote-platform or separate content-audit credit."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Passed exact85c06ee/SDK7cb474 LOCAL and both Win64 loopback peers: separate moving X/Zero deaths, original fatal body/burst art, natural visible effect expiry and survivor control. Actual consecutive native bodies establish motion into death. Original invisible radial records may remain allocated; no claim of pool-wide deallocation, all-frame art, other roster/stage/platform or unrelated content coverage."
       }
     },
     {
