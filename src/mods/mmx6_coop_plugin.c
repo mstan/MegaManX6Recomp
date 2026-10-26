@@ -2230,12 +2230,26 @@ static void activate(void) {
 #endif
     free(zero_compressed); zero_compressed=NULL; compressed_size=0;
     free(zero_ui_pixels); zero_ui_pixels=NULL;
+    /* The SDK retires enhancement arenas, packet registrations and every
+     * texture-bank ID before activation. No process-static address or cached
+     * ID owns storage in the replacement session, even if its number recurs. */
+    for (unsigned i=0;i<4096;++i) free(banks[i].pixels);
+    memset(banks,0,sizeof banks);bank_count=0;
+    memset(ui_banks,0,sizeof ui_banks);ui_bank_count=0;
+    assets=assembly=palette_source=active_palette=packets=diagnostic=0;
+    menu_memory=menu_assembly=hud_packets=world_packets=0;
+    memset(&p1,0,sizeof p1);memset(&p2,0,sizeof p2);
+    memset(saved_overlay,0,sizeof saved_overlay);memset(zero_overlay,0,sizeof zero_overlay);
+    memset(saved_play,0,sizeof saved_play);memset(saved_camera,0,sizeof saved_camera);
+    memset(saved_resources,0,sizeof saved_resources);saved_palette_dirty=0;
+    memset(returning_body,0,sizeof returning_body);memset(scene_body,0,sizeof scene_body);
+    memset(saved_portrait_colors,0,sizeof saved_portrait_colors);
     inside=ready=enrolled=failed=0;
     working_palette_assets_ready=0;
-    /* Immutable bank IDs and their lookup caches live for the process, as do
-     * the framework's banks. Reuse them across launcher rematches. */
+    memset(native_working_palettes,0,sizeof native_working_palettes);
+    memset(working_palette_lengths,0,sizeof working_palette_lengths);
     frame_count=0; previous_input=p2_edges=0;
-    mmx6_coop_lifecycle_init(&life); join_phase=0;
+    mmx6_coop_lifecycle_init(&life); join_phase=0;join_y=scene_y=0;
     player_call=stage_call=zero_world=world_render=0;
     pause_owner=-1; p2_start_previous=0;
     render_x_death=effect_call=shared_fx_call=shared_fx_allocate_call=0; memset(death_effect,0,sizeof death_effect);
@@ -2249,11 +2263,11 @@ static void activate(void) {
     unit_choices_call=intro_target_call=0;
     zero_menu_loaded=0;
     memset(zero_giga_backup,0,sizeof zero_giga_backup);
-    if (!assets) assets=psx_mod_alloc_guest_memory(ASSET_SPACE,16);
-    if (!diagnostic) diagnostic=psx_mod_alloc_guest_memory(0x2000,16);
-    if (!packets) packets=psx_mod_alloc_texture_packet_memory(FRAME_ARENA*2,16);
-    if (!hud_packets) hud_packets=psx_mod_alloc_texture_packet_memory(0x10000,16);
-    if (!menu_memory) menu_memory=psx_mod_alloc_gpu_dma_memory(MENU_STORAGE_BYTES,16);
+    assets=psx_mod_alloc_guest_memory(ASSET_SPACE,16);
+    diagnostic=psx_mod_alloc_guest_memory(0x2000,16);
+    packets=psx_mod_alloc_texture_packet_memory(FRAME_ARENA*2,16);
+    hud_packets=psx_mod_alloc_texture_packet_memory(0x10000,16);
+    menu_memory=psx_mod_alloc_gpu_dma_memory(MENU_STORAGE_BYTES,16);
     int audio_allocated=jump_audio_activate();
     failed=!(assets && diagnostic && packets && hud_packets && menu_memory && audio_allocated);
     if (diagnostic) for (unsigned i=0;i<0x2000;i+=4) psx_mod_write_word(diagnostic+i,0);

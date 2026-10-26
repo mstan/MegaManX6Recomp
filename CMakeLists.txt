@@ -344,7 +344,7 @@ if(BUILD_TESTING)
         add_test(NAME ${_mmx6_diag_target} COMMAND "$<TARGET_FILE:${_mmx6_diag_target}>")
     endforeach()
 
-    foreach(_mmx6_visual_kind private_effects hud resource_admission recycle_portal reentry_retirement jump_audio)
+    foreach(_mmx6_visual_kind private_effects hud resource_admission recycle_portal reentry_retirement jump_audio session_resources)
       foreach(_mmx6_effects_variant debug production)
         set(_mmx6_effects_target mmx6_coop_${_mmx6_visual_kind}_${_mmx6_effects_variant}_test)
         add_executable(${_mmx6_effects_target} tests/test_mmx6_coop_${_mmx6_visual_kind}.c
@@ -352,6 +352,13 @@ if(BUILD_TESTING)
             "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c")
         target_include_directories(${_mmx6_effects_target} PRIVATE src/mods
             "${PSXRECOMP_V4_ROOT}/runtime/include")
+        if(_mmx6_visual_kind STREQUAL "session_resources")
+            target_sources(${_mmx6_effects_target} PRIVATE tests/mmx6_coop_session_sdk_fixture.c
+                "${PSXRECOMP_V4_ROOT}/runtime/src/kernel_patch_ranges.c"
+                "${PSXRECOMP_V4_ROOT}/runtime/src/psx_ram_geometry.c")
+            target_include_directories(${_mmx6_effects_target} PRIVATE
+                "${PSXRECOMP_V4_ROOT}/runtime/src")
+        endif()
         if(_mmx6_visual_kind STREQUAL "recycle_portal")
             target_sources(${_mmx6_effects_target} PRIVATE
                 "${PSXRECOMP_V4_ROOT}/runtime/src/mod_function_replacements.c")
@@ -376,6 +383,17 @@ if(BUILD_TESTING)
         endif()
       endforeach()
     endforeach()
+
+    if(Python3_Interpreter_FOUND AND Python3_VERSION VERSION_GREATER_EQUAL 3.11)
+        add_test(NAME mmx6_coop_session_resources_source_test
+            COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_mmx6_coop_session_resources.py"
+                --sdk-root "${PSXRECOMP_V4_ROOT}")
+        add_test(NAME mmx6_coop_session_peripheral_rejection_test
+            COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/test_mmx6_coop_session_peripheral_rejection.py"
+                --debug "$<TARGET_FILE:mmx6_coop_session_resources_debug_test>"
+                --production "$<TARGET_FILE:mmx6_coop_session_resources_production_test>")
+        set_tests_properties(mmx6_coop_session_peripheral_rejection_test PROPERTIES TIMEOUT 90)
+    endif()
 
     foreach(_mmx6_header_variant debug production)
         set(_mmx6_header_target mmx6_coop_jump_audio_header_${_mmx6_header_variant}_test)
@@ -638,7 +656,7 @@ if(BUILD_TESTING)
     foreach(_target IN LISTS _mmx6_test_targets)
         if(_target MATCHES "^mmx6_.*test$")
             get_target_property(_sources ${_target} SOURCES)
-            if("${_sources}" MATCHES "tests/test_mmx6_coop_(intro_target|diagnostics|private_effects|hud|checkpoint|snapshot|resource_admission|recycle_portal|reentry_retirement|jump_audio)[.]c")
+            if("${_sources}" MATCHES "tests/test_mmx6_coop_(intro_target|diagnostics|private_effects|hud|checkpoint|snapshot|resource_admission|recycle_portal|reentry_retirement|jump_audio|session_resources)[.]c")
                 target_sources(${_target} PRIVATE src/mods/mmx6_coop_roster.c
                     src/mods/mmx6_coop_resources.c src/mods/mmx6_coop_jump_audio.c)
                 if(NOT "${_sources}" MATCHES "src/mods/mmx6_coop_assets[.]c")

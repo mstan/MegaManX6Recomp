@@ -30,7 +30,18 @@ static unsigned working_palette_probe,working_palette_probe_calls;
 static unsigned death_packet_probe,death_origin_probe;
 static uint16_t pad_buttons=0xFFFF;
 static const unsigned resource_offsets[7]={0x14,0x1C,0x24,0x28,0x38,0x3C,0xA8};
+#ifdef MMX6_TEST_SESSION_RESOURCES
+/* Only the lifecycle fixture uses the real SDK-owned arenas and extents.
+ * Existing projection fixtures retain their independent RAM contract. */
+uint8_t *mmx6_test_session_pointer(uint32_t address);
+#endif
 static uint8_t *memory(uint32_t a){
+#ifdef MMX6_TEST_SESSION_RESOURCES
+    if ((a&0x1FFFFFFFu)>=0x1F000000u && (a&0x1FFFFFFFu)<0x1F800000u)
+        return mmx6_test_session_pointer(a);
+    if ((a&0x1FFFFFFFu)>=0x00800000u && (a&0x1FFFFFFFu)<0x01000000u)
+        return mmx6_test_session_pointer(a);
+#endif
     if(a>=0x9F000000u && a<0x9F300000u)return extra+a-0x9F000000u;
     return ram+(a&0x1FFFFFu);
 }
@@ -67,10 +78,12 @@ void gpu_write_gp0(uint32_t value){
     if(!gp0_upload_left)gp0_upload_stage=0;
 }
 void gpu_set_gp0_source(uint32_t address){CHECK(menu_vram_probe && !address && !gp0_upload_stage);}
+#ifndef MMX6_TEST_SESSION_RESOURCES
 int psx_mod_define_texture_bank(uint16_t id,uint32_t width,uint32_t height,const uint16_t *pixels){
     CHECK(id>=0x6000 && id<0x7000 && width==height && (width==16 || width==256));
     bank_first[id-0x6000]=pixels[0];return 1;
 }
+#endif
 void psx_mod_tag_world_primitive(uint32_t p,int world){CHECK(world==1 && tag_count<256);tagged[tag_count++]=p;}
 static unsigned occurrences(uint32_t address){unsigned n=0;for(unsigned i=0;i<call_count;++i)n+=calls[i]==address;return n;}
 static void copy_position(uint32_t dst,uint32_t src){psx_mod_write_word(dst+8,psx_mod_read_word(src+0x18));psx_mod_write_word(dst+12,psx_mod_read_word(src+0x1C));}

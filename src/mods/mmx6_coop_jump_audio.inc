@@ -89,12 +89,14 @@ static int jump_audio_ready(void) {
 static int jump_audio_activate(void) {
     jump_audio_stop_private();
     for(unsigned i=0;i<2;++i) {
-        JumpAudioBank *b=&jump_audio_banks[i];uint32_t address=b->guest;
-        free(b->parsed);free(b->samples);memset(b,0,sizeof *b);b->guest=address;
-        if(!b->guest)b->guest=psx_mod_alloc_guest_memory(MMX6_JUMP_AUDIO_HEADER_BYTES,16);
+        JumpAudioBank *b=&jump_audio_banks[i];
+        free(b->parsed);free(b->samples);memset(b,0,sizeof *b);
+        /* Activation follows the SDK arena reset, so a previous numerical
+         * guest address is not an allocation in this session. */
+        b->guest=psx_mod_alloc_guest_memory(MMX6_JUMP_AUDIO_HEADER_BYTES,16);
     }
     jump_audio_loaded=jump_audio_call=jump_audio_keyon_call=jump_audio_stop_call=0;
-    jump_audio_calculated=jump_audio_faulted=0;jump_audio_bound_epoch=0;
+    jump_audio_calculated=jump_audio_faulted=0;jump_audio_bound_epoch=jump_audio_owned_epoch=0;
     jump_audio_clear_calculation();memset(jump_audio_priorities,0,sizeof jump_audio_priorities);
     jump_audio_stop_mask=0;
     memset(jump_audio_registers,0,sizeof jump_audio_registers);memset(jump_audio_asset_sha,0,32);
