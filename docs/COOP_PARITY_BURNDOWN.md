@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 39 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F1, F6, F10, F12, F18, F19, F22, F31, F32, F33, F38, F48, F56, F58, F59, F67, F70, F95, F102, F107, F110, F119, F121, F133, F144, F163, F170, F205, F208), 1 failed, 194 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 40 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F1, F6, F10, F12, F18, F19, F22, F31, F32, F33, F38, F48, F51, F56, F58, F59, F67, F70, F95, F102, F107, F110, F119, F121, F133, F144, F163, F170, F205, F208), 1 failed, 193 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -68,18 +68,25 @@ with write-NULL in `nvoglv64.dll +0xB80C13`. This locates the fault inside the
 OpenGL module; no exact driver-versus-SDK cause is established. Source repair
 and first-session totals do not qualify repeated allocation lifetime. The
 bounded investigation is parked while independent autonomous rows continue.
-The ledger is **39 passed /1 failed /194 unverified of234**.
+The ledger is **40 passed /1 failed /193 unverified of234**.
 
-F51 has a reviewed [LOCAL moving-support pass](evidence/mmx6-solid/manifest-bound-72b898f-F51-moving-support-local-reviewed.json)
-on the same `72b898f` candidate. The original Amazon support carries neutral
-Zero, then a fresh native jump releases contact and Right moves beyond its
-edge while X remains stationary. Root reviewed the four composed images;
-private cards and exit0 pass. The offline checkpoint prerequisite is disclosed
-and its tainted recording remains failed/refused for ordinary replay. NETPLAY
-is pending: its first attempt completed actual card Load, fresh mission and
-guest menu, then missed the neutral support window because input remained held
-during sequential peer sampling. A final attempt changes only observation and
-input-release timing. Neither setup progress nor LOCAL alone closes F51.
+F51 now passes both [LOCAL](evidence/mmx6-solid/manifest-bound-72b898f-F51-moving-support-local-reviewed.json)
+and [NETPLAY](evidence/mmx6-solid/manifest-bound-72b898f-F51-moving-support-netplay-reviewed.json)
+on exact `72b898f`/SDK `bb5d0a7`/UI `34b5277`. The original Amazon moving
+support carries neutral Zero, then a fresh native jump releases contact and
+Right moves beyond its edge while X stays stationary. Root reviewed all four
+LOCAL and eight NETPLAY composed images. Both modes preserve cards and exit0;
+NETPLAY additionally retains seven resolved CRC windows, unchanged agreed
+profile and complete ordinary recordings with their startup artifacts.
+The offline checkpoint prerequisite remains disclosed and its tainted recording
+is failed/refused for ordinary replay. NETPLAY uses actual native card Load,
+story/selector, fresh mission and guest-menu prerequisites. Its first support
+attempt ran off the edge while sequential peer reads delayed input release;
+the successful attempt uses concurrent peer reads and releases movement at the
+first observed top contact, then still requires actual neutral carry and jump
+release on both peers. Earlier failed setup evidence remains retained. This
+closes F51 only; lift admission, pickup carry, signed release commands and
+route timing remain separate comparisons.
 
 F40 remains unverified: the completed real launcher session selected one
 optionless loading token, so its disabled catalog entries do not establish a

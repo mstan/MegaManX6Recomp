@@ -1,0 +1,1054 @@
+{
+  "schema": 1,
+  "comparison": "F51",
+  "frozen_row_sha256": "93ec7c6b812a13133ff4eddf7b4d66846ae0a6bee8870d722e53b5f8ef2a7d4f",
+  "mode": "netplay",
+  "result": "passed",
+  "candidate": "72b898f6a714ec91b49ce306ee4959d6d5814a8b",
+  "build_identity": {
+    "executable_sha256": "b3589623f1612fe99821d5ad4eb9b7108b7e7cd550c26b0ea28045b2c7e9fc4b",
+    "compiled_manifest_sha256": "1b670b2fa63a58b7b0f2bb6268bb89e83522d8389b81983a0ebd8b04084fe337",
+    "sdk_commit": "bb5d0a7ec003d7e33270e51c270ea89dfea5c081",
+    "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\qualification.json",
+    "sha256": "1af027d9755e4f84b10351149a0563ddee48b52ad6fd42dec40c339c3d610100"
+  },
+  "case": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51\\F51-observations.json",
+    "sha256": "a1969f3c43e139f732a79036968dfdb92341e1ea8d0b02762afc9827d1839c68"
+  },
+  "source": {
+    "member3_sha256": "68e8b41b5618ccfced88057553597749513f4aeb25191004f886f9d881b633ea",
+    "placement": "0x800f6540",
+    "seed_type": 7,
+    "initialized_type": 1,
+    "pool": "0x800c1220",
+    "slots": 80,
+    "stride": 164,
+    "callback": "800EC300/update800EBF6C calls original80031DA8; walking800EC5F4",
+    "box": "0x800f73ec",
+    "half_width": 14,
+    "half_height": 14,
+    "guards": [
+      {
+        "peer": 0,
+        "first": "0x80073d54",
+        "end": "0x80073d58",
+        "sha256": "a402fa2ef856506f9321bfc9de0694418acca6d2e1fbcaa5ba8a352696e2a207"
+      },
+      {
+        "peer": 0,
+        "first": "0x80031da8",
+        "end": "0x80031f4c",
+        "sha256": "52930ef8a5580ae57cfe9e5b6812107afc8794974e5f18230569a121c149a8f8"
+      },
+      {
+        "peer": 0,
+        "first": "0x8002e290",
+        "end": "0x8002e3c8",
+        "sha256": "fe5d0f46c36a48d0839afaa7eea38bd6b10b16353fa42e01b36d9842da1715f3"
+      },
+      {
+        "peer": 0,
+        "first": "0x80034ffc",
+        "end": "0x80035010",
+        "sha256": "781d44957ee0b04bdb1b85e209275242e10806cc797e27640d50a358b45b3609"
+      },
+      {
+        "peer": 0,
+        "first": "0x800ebf6c",
+        "end": "0x800ec150",
+        "sha256": "eaf50adde2bf05a92f67d408beaa0c4d27bb39222fa0794a7f2ba9c0f1b4d60b"
+      },
+      {
+        "peer": 0,
+        "first": "0x800ec25c",
+        "end": "0x800ec434",
+        "sha256": "39db6dd8862580753081459e7bee91bb2989145333622750a48a9c1b081fa0f8"
+      },
+      {
+        "peer": 0,
+        "first": "0x800ec5f4",
+        "end": "0x800ec650",
+        "sha256": "b741aa6b48c9a3625a4cf073ad77d9d60b42bb9461c1b228d4601cb39933e3c8"
+      },
+      {
+        "peer": 0,
+        "first": "0x800f73ec",
+        "end": "0x800f73f0",
+        "sha256": "f4d1f0340fcc86a43de78abfd2dd57baf27de9cdd498cfb96417f834a2845ef4"
+      },
+      {
+        "peer": 1,
+        "first": "0x80073d54",
+        "end": "0x80073d58",
+        "sha256": "a402fa2ef856506f9321bfc9de0694418acca6d2e1fbcaa5ba8a352696e2a207"
+      },
+      {
+        "peer": 1,
+        "first": "0x80031da8",
+        "end": "0x80031f4c",
+        "sha256": "52930ef8a5580ae57cfe9e5b6812107afc8794974e5f18230569a121c149a8f8"
+      },
+      {
+        "peer": 1,
+        "first": "0x8002e290",
+        "end": "0x8002e3c8",
+        "sha256": "fe5d0f46c36a48d0839afaa7eea38bd6b10b16353fa42e01b36d9842da1715f3"
+      },
+      {
+        "peer": 1,
+        "first": "0x80034ffc",
+        "end": "0x80035010",
+        "sha256": "781d44957ee0b04bdb1b85e209275242e10806cc797e27640d50a358b45b3609"
+      },
+      {
+        "peer": 1,
+        "first": "0x800ebf6c",
+        "end": "0x800ec150",
+        "sha256": "eaf50adde2bf05a92f67d408beaa0c4d27bb39222fa0794a7f2ba9c0f1b4d60b"
+      },
+      {
+        "peer": 1,
+        "first": "0x800ec25c",
+        "end": "0x800ec434",
+        "sha256": "39db6dd8862580753081459e7bee91bb2989145333622750a48a9c1b081fa0f8"
+      },
+      {
+        "peer": 1,
+        "first": "0x800ec5f4",
+        "end": "0x800ec650",
+        "sha256": "b741aa6b48c9a3625a4cf073ad77d9d60b42bb9461c1b228d4601cb39933e3c8"
+      },
+      {
+        "peer": 1,
+        "first": "0x800f73ec",
+        "end": "0x800f73f0",
+        "sha256": "f4d1f0340fcc86a43de78abfd2dd57baf27de9cdd498cfb96417f834a2845ef4"
+      }
+    ]
+  },
+  "actual_windows": {
+    "neutral_carry": {
+      "samples": {
+        "before": 56,
+        "after": 58
+      },
+      "peers": [
+        {
+          "peer": 0,
+          "p1_stationary": [
+            26050560,
+            21692416
+          ],
+          "p2_before": {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 28803072,
+            "y_raw": 21954048,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          "p2_after": {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 28540928,
+            "y_raw": 21954048,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          "support_before": {
+            "x": 450.0,
+            "y": 370.0
+          },
+          "support_after": {
+            "x": 445.0,
+            "y": 370.0
+          }
+        },
+        {
+          "peer": 1,
+          "p1_stationary": [
+            26050560,
+            21692416
+          ],
+          "p2_before": {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 28803072,
+            "y_raw": 21954048,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          "p2_after": {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 28540928,
+            "y_raw": 21954048,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          "support_before": {
+            "x": 450.0,
+            "y": 370.0
+          },
+          "support_after": {
+            "x": 445.0,
+            "y": 370.0
+          }
+        }
+      ]
+    },
+    "jump_release": {
+      "samples": {
+        "before": 61,
+        "after": 63
+      },
+      "peers": [
+        {
+          "peer": 0,
+          "p1_stationary": [
+            26050560,
+            21692416
+          ],
+          "p2_before": {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 28016640,
+            "y_raw": 21954048,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          "p2_after": {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 6,
+            "hp": 32,
+            "x_raw": 27951104,
+            "y_raw": 21245952,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          "support_before": {
+            "x": 436.5,
+            "y": 370.0
+          },
+          "support_after": {
+            "x": 431.0,
+            "y": 370.0
+          }
+        },
+        {
+          "peer": 1,
+          "p1_stationary": [
+            26050560,
+            21692416
+          ],
+          "p2_before": {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 28016640,
+            "y_raw": 21954048,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          "p2_after": {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 6,
+            "hp": 32,
+            "x_raw": 27951104,
+            "y_raw": 21245952,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          "support_before": {
+            "x": 437.5,
+            "y": 370.0
+          },
+          "support_after": {
+            "x": 433.0,
+            "y": 370.0
+          }
+        }
+      ]
+    },
+    "free_edge_movement": {
+      "samples": {
+        "before": 66,
+        "after": 71
+      },
+      "peers": [
+        {
+          "peer": 0,
+          "p1_stationary": [
+            26050560,
+            21692416
+          ],
+          "p2_before": {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 7,
+            "hp": 32,
+            "x_raw": 27951104,
+            "y_raw": 18974208,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          "p2_after": {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 7,
+            "hp": 32,
+            "x_raw": 30310400,
+            "y_raw": 21964800,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          "support_before": {
+            "x": 430.0,
+            "y": 370.0
+          },
+          "support_after": {
+            "x": 430.0,
+            "y": 370.0
+          }
+        },
+        {
+          "peer": 1,
+          "p1_stationary": [
+            26050560,
+            21692416
+          ],
+          "p2_before": {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 7,
+            "hp": 32,
+            "x_raw": 27951104,
+            "y_raw": 19126272,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          "p2_after": {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 7,
+            "hp": 32,
+            "x_raw": 30179328,
+            "y_raw": 21931008,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          "support_before": {
+            "x": 430.0,
+            "y": 370.0
+          },
+          "support_after": {
+            "x": 430.0,
+            "y": 370.0
+          }
+        }
+      ]
+    }
+  },
+  "root_composed_review": [
+    {
+      "label": "initialized-native-moving-support",
+      "peer": 0,
+      "sample_before": 35,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51\\peer-0-initialized-native-moving-support.png",
+      "sha256": "d41fa5b550dcb9936f58edc277261a2950f12418aacb5f8fa88ff4735d61f512",
+      "before": {
+        "id": 19552,
+        "ok": true,
+        "seq": 6,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 19553,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51\\peer-0-initialized-native-moving-support.png",
+        "staged": true,
+        "seq": 6
+      },
+      "completion": {
+        "id": 19554,
+        "ok": true,
+        "seq": 7,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "initialized-native-moving-support",
+      "peer": 1,
+      "sample_before": 35,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51\\peer-1-initialized-native-moving-support.png",
+      "sha256": "7eb72744c556a8c768b4d51893278e21912a630889c3ffcfaba4d2f239557e0d",
+      "before": {
+        "id": 18960,
+        "ok": true,
+        "seq": 6,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 18961,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51\\peer-1-initialized-native-moving-support.png",
+        "staged": true,
+        "seq": 6
+      },
+      "completion": {
+        "id": 18963,
+        "ok": true,
+        "seq": 7,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "guest-neutral-native-carry",
+      "peer": 0,
+      "sample_before": 59,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51\\peer-0-guest-neutral-native-carry.png",
+      "sha256": "46b2d2e7190689df799a3bc88bd87bdcb2771613af3a33879f73263ba33c18d4",
+      "before": {
+        "id": 19677,
+        "ok": true,
+        "seq": 7,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 19678,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51\\peer-0-guest-neutral-native-carry.png",
+        "staged": true,
+        "seq": 7
+      },
+      "completion": {
+        "id": 19679,
+        "ok": true,
+        "seq": 8,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "guest-neutral-native-carry",
+      "peer": 1,
+      "sample_before": 59,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51\\peer-1-guest-neutral-native-carry.png",
+      "sha256": "fdc5646c663758c31f4394fa87e986322dab791927103a7019fbb6a5c7c7b247",
+      "before": {
+        "id": 19100,
+        "ok": true,
+        "seq": 7,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 19101,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51\\peer-1-guest-neutral-native-carry.png",
+        "staged": true,
+        "seq": 7
+      },
+      "completion": {
+        "id": 19102,
+        "ok": true,
+        "seq": 8,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "guest-native-jump-release",
+      "peer": 0,
+      "sample_before": 64,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51\\peer-0-guest-native-jump-release.png",
+      "sha256": "a62eee936991db09ff728c837aa8a5bef8bc451e240e37f02c8cf351e2a3f756",
+      "before": {
+        "id": 19705,
+        "ok": true,
+        "seq": 8,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 19706,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51\\peer-0-guest-native-jump-release.png",
+        "staged": true,
+        "seq": 8
+      },
+      "completion": {
+        "id": 19707,
+        "ok": true,
+        "seq": 9,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "guest-native-jump-release",
+      "peer": 1,
+      "sample_before": 64,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51\\peer-1-guest-native-jump-release.png",
+      "sha256": "8ef5d90be68cc83a83b23f1c34da694c7439375e26c3cd380a2f5d06bce376d5",
+      "before": {
+        "id": 19132,
+        "ok": true,
+        "seq": 8,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 19133,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51\\peer-1-guest-native-jump-release.png",
+        "staged": true,
+        "seq": 8
+      },
+      "completion": {
+        "id": 19134,
+        "ok": true,
+        "seq": 9,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "guest-freely-beyond-native-support",
+      "peer": 0,
+      "sample_before": 75,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51\\peer-0-guest-freely-beyond-native-support.png",
+      "sha256": "0ff90aa5465638e015ae0b94e03f6b49230ce10875ddbebf5c613a2635efd21d",
+      "before": {
+        "id": 19763,
+        "ok": true,
+        "seq": 9,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 19764,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51\\peer-0-guest-freely-beyond-native-support.png",
+        "staged": true,
+        "seq": 9
+      },
+      "completion": {
+        "id": 19766,
+        "ok": true,
+        "seq": 10,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "guest-freely-beyond-native-support",
+      "peer": 1,
+      "sample_before": 75,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51\\peer-1-guest-freely-beyond-native-support.png",
+      "sha256": "8ff99f8041826a2523205f395c0f6fba098f2f3beff63e765367d19d52a510de",
+      "before": {
+        "id": 19194,
+        "ok": true,
+        "seq": 9,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 19195,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51\\peer-1-guest-freely-beyond-native-support.png",
+        "staged": true,
+        "seq": 9
+      },
+      "completion": {
+        "id": 19196,
+        "ok": true,
+        "seq": 10,
+        "wrote": 1
+      }
+    }
+  ],
+  "recordings": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\root-finalized-recordings-reviewed.json",
+    "sha256": "384785b5073c074a6f8ab55bd8d5e3534bb1cc54f2d5facb7601ee20c69f14ae"
+  },
+  "profile": {
+    "profile": "mmx6.win64-clang22.loopback",
+    "revision": 2,
+    "selected_sha256": "933032c653927693488ac2914ce0a45f55bcece4d90aa3c03b32bfabb78309ab",
+    "peers": [
+      {
+        "capabilities": {
+          "actual_image_sha256": "b3589623f1612fe99821d5ad4eb9b7108b7e7cd550c26b0ea28045b2c7e9fc4b",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "933032c653927693488ac2914ce0a45f55bcece4d90aa3c03b32bfabb78309ab",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      },
+      {
+        "capabilities": {
+          "actual_image_sha256": "b3589623f1612fe99821d5ad4eb9b7108b7e7cd550c26b0ea28045b2c7e9fc4b",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "933032c653927693488ac2914ce0a45f55bcece4d90aa3c03b32bfabb78309ab",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      }
+    ]
+  },
+  "resolved_CRC": [
+    {
+      "label": "initial idle",
+      "samples": [
+        {
+          "simulation_tick": 2880,
+          "core": "4ee14b74",
+          "mod": "fe8ff68f"
+        },
+        {
+          "simulation_tick": 2912,
+          "core": "904cecbd",
+          "mod": "216663a9"
+        },
+        {
+          "simulation_tick": 2944,
+          "core": "c44e698d",
+          "mod": "24b61449"
+        },
+        {
+          "simulation_tick": 2976,
+          "core": "47170f23",
+          "mod": "17bdf117"
+        },
+        {
+          "simulation_tick": 3008,
+          "core": "3eab1a87",
+          "mod": "c4a1c737"
+        },
+        {
+          "simulation_tick": 3040,
+          "core": "ec002330",
+          "mod": "dacc2341"
+        },
+        {
+          "simulation_tick": 3072,
+          "core": "acf09370",
+          "mod": "a0c1889d"
+        }
+      ],
+      "resolved_through": [
+        3095,
+        3095
+      ]
+    },
+    {
+      "label": "P2 right then release",
+      "samples": [
+        {
+          "simulation_tick": 3136,
+          "core": "3853b384",
+          "mod": "1be0c10b"
+        },
+        {
+          "simulation_tick": 3168,
+          "core": "b6f1214a",
+          "mod": "bc62830d"
+        },
+        {
+          "simulation_tick": 3200,
+          "core": "b4767f93",
+          "mod": "a1798c87"
+        },
+        {
+          "simulation_tick": 3232,
+          "core": "2fce60a4",
+          "mod": "99966ce7"
+        },
+        {
+          "simulation_tick": 3264,
+          "core": "548faf32",
+          "mod": "66243745"
+        },
+        {
+          "simulation_tick": 3296,
+          "core": "67b44907",
+          "mod": "305ffd65"
+        },
+        {
+          "simulation_tick": 3328,
+          "core": "613e4755",
+          "mod": "df8a986f"
+        },
+        {
+          "simulation_tick": 3360,
+          "core": "5410395a",
+          "mod": "61c58923"
+        }
+      ],
+      "resolved_through": [
+        3366,
+        3366
+      ]
+    },
+    {
+      "label": "P1 jump then settle",
+      "samples": [
+        {
+          "simulation_tick": 3456,
+          "core": "6b812d39",
+          "mod": "55fc7597"
+        },
+        {
+          "simulation_tick": 3488,
+          "core": "cf55c36e",
+          "mod": "2e2b5bf5"
+        },
+        {
+          "simulation_tick": 3520,
+          "core": "586fc54c",
+          "mod": "36f14415"
+        },
+        {
+          "simulation_tick": 3552,
+          "core": "f48044b1",
+          "mod": "80d9b1bf"
+        },
+        {
+          "simulation_tick": 3584,
+          "core": "08b88eb8",
+          "mod": "dc2ca69f"
+        },
+        {
+          "simulation_tick": 3616,
+          "core": "b8a5c849",
+          "mod": "1be0c10b"
+        },
+        {
+          "simulation_tick": 3648,
+          "core": "d1899c38",
+          "mod": "bc62830d"
+        }
+      ],
+      "resolved_through": [
+        3668,
+        3668
+      ]
+    },
+    {
+      "label": "Before original native title card Load",
+      "samples": [
+        {
+          "simulation_tick": 3968,
+          "core": "57fba766",
+          "mod": "b7a62603"
+        },
+        {
+          "simulation_tick": 4000,
+          "core": "3ce63d3b",
+          "mod": "b7a62603"
+        }
+      ],
+      "first_simulation_tick": 3941,
+      "resolved_through": [
+        4001,
+        4001
+      ],
+      "observation_scope": "actual_resolved_framework_core_mod_CRC_frontend_no_coop_publication_claim"
+    },
+    {
+      "label": "After original native title card Load and CURRENT export",
+      "samples": [
+        {
+          "simulation_tick": 4576,
+          "core": "8f236c90",
+          "mod": "b7a62603"
+        },
+        {
+          "simulation_tick": 4608,
+          "core": "5199da35",
+          "mod": "b7a62603"
+        }
+      ],
+      "first_simulation_tick": 4557,
+      "resolved_through": [
+        4610,
+        4610
+      ],
+      "observation_scope": "actual_resolved_framework_core_mod_CRC_frontend_no_coop_publication_claim"
+    },
+    {
+      "label": "Native final Quit native_card reentry and guest menu core/mod comparison",
+      "samples": [
+        {
+          "simulation_tick": 25408,
+          "core": "baa6ac05",
+          "mod": "8340fda0"
+        },
+        {
+          "simulation_tick": 25440,
+          "core": "e5a023dc",
+          "mod": "5ec46cf3"
+        },
+        {
+          "simulation_tick": 25472,
+          "core": "1d32d746",
+          "mod": "4951c94d"
+        },
+        {
+          "simulation_tick": 25504,
+          "core": "68c3938a",
+          "mod": "6198ab7f"
+        },
+        {
+          "simulation_tick": 25536,
+          "core": "c4fe8cf3",
+          "mod": "a9030013"
+        },
+        {
+          "simulation_tick": 25568,
+          "core": "af8c77c1",
+          "mod": "361f0425"
+        },
+        {
+          "simulation_tick": 25600,
+          "core": "8475b449",
+          "mod": "5a563dc5"
+        },
+        {
+          "simulation_tick": 25632,
+          "core": "f500332f",
+          "mod": "ec9e4a87"
+        }
+      ],
+      "resolved_through": [
+        25638,
+        25638
+      ]
+    },
+    {
+      "label": "After actual V54 native card Load F51 support carry and guest jump release",
+      "samples": [
+        {
+          "simulation_tick": 26080,
+          "core": "9c32e8b6",
+          "mod": "badbf00e"
+        },
+        {
+          "simulation_tick": 26112,
+          "core": "73a25961",
+          "mod": "5f25958a"
+        }
+      ],
+      "first_simulation_tick": 26061,
+      "resolved_through": [
+        26113,
+        26113
+      ],
+      "observation_scope": "actual_resolved_framework_core_mod_CRC_frontend_no_coop_publication_claim"
+    }
+  ],
+  "actual_current_binding": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51-current-binding.json",
+    "sha256": "586948923ad920678262ea58ab92b3cd37da8d787564b726c0f5275b1654bc1d"
+  },
+  "executed_observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51-helper-executed-source.py",
+    "sha256": "597139427962c4bf5478040902ffe3a4e2ba1d735b810ddd7bac23aa3a403fd5"
+  },
+  "executed_parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\actual-adapted-F144-caller.py",
+    "sha256": "6f47302a9009401054e254ead096ff3964bc242ed54e408707e7125ff205e500"
+  },
+  "executed_adapter": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v4\\F51-parent-adapter-executed-source.py",
+    "sha256": "09fe4464c06a02c6f53390e4413dd0cf5971d648d6f74a3b61c4164ad3dce3ff"
+  },
+  "checks": {
+    "actual_native_card_Load_and_fresh_mission": true,
+    "both_actual_support_carry_jump_and_free_edge": true,
+    "source_profile_crc_ordinary_recordings_cards_owned_exits": true,
+    "root_eight_composed_images_reviewed": true
+  },
+  "limits": [
+    "Only bounded F51 moving-support guest mobility; no F46 lift/F36 pickup/F201 signed command/F204 timing claim.",
+    "Same-machine Windows delay LAN, two virtual host inputs; no physical distinct devices, Linux, remote/service or rollback claim.",
+    "Actual native FFQA card Load, source-bound story/selector and fresh mission/guest-menu prerequisites; no online fixture or execution state LOAD. Producer provenance remains disclosed separately.",
+    "Concurrent peer reads reduce control latency but individual pool/body/publication reads remain asynchronous. Native source guards, platform71 contact, matched neutral displacement and actual jump ascent/free movement corroborate observed behavior.",
+    "Root reviewed all eight composed images. Ordinary finalized consumption streams/startup artifacts/cards/profile/resolved CRC/owned exits0 pass; no replay equivalence claim.",
+    "Prior NETrootv3 approach timing failure is retained, not credited. Required LOCAL pass uses its disclosed offline checkpoint setup and tainted recording refusal."
+  ],
+  "bypasses": [],
+  "prior_failed_setup": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F51-root-moving-support-v54-v3\\qualification.json",
+    "sha256": "db701301f3dcd0a9d106dbd761270764f3c7434ab5c21216d82c219ae8ce36d7"
+  }
+}
