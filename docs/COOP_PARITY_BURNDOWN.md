@@ -70,6 +70,15 @@ and first-session totals do not qualify repeated allocation lifetime. The
 bounded investigation is parked while independent autonomous rows continue.
 The ledger is **41 passed /1 failed /192 unverified of234**.
 
+F173 and F68 now pass LOCAL on exact V57 `52d6914`: actual independent
+native4:3 panes in an8:3 window, Zero366px away from stationary X, correct
+per-pane HUDs, no distant-hero wrap in five reviewed images, and stable panes
+through three window shapes. Native world34 lies inside actual VBlank32..36;
+326 real pairs commit with no private host-state leak. The ordinary recording,
+cards and owned exit0 pass. NETPLAY remains unverified, so the aggregate count
+does not increase. This separation does not exceed the native1024px tile ring
+and supplies no F178 result.
+
 F92 and F98 now have reviewed LOCAL passes on exact V56 `e2f9bc8` for both
 native Ride Armor owners. Each hero mounts the original Recycle Lab armor,
 drives it while the companion waits, overlaps the partner/terrain and manually
