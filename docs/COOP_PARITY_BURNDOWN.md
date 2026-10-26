@@ -81,6 +81,16 @@ and exit0 remain intact. The initial offline checkpoint bypass and rejected
 tainted recording are disclosed. F98 layering images are retained as partial
 evidence; guest mounting and NETPLAY remain unverified.
 
+F204 now passes [LOCAL moving-support cadence](evidence/mmx6-solid/manifest-bound-72b898f-F204-support-cadence-local-reviewed.json)
+on exact V54; NETPLAY is running separately. During actual neutral guest
+carrying with X stationary, native world84 falls inside the SDK frame/VBlank
+bracket82..85 over1.344..1.406s. Genuine top contact, resources, no hit pause,
+real support travel and normal OpenGL presentation are retained throughout.
+Endpoint art, cards and exit0 pass. The initial offline checkpoint and recording
+refusal remain disclosed. A longer attempt reached real enemy contact after
+3.26s; that failed setup is preserved, and later free-edge damage is outside
+the admitted cadence window. No solo/private-view/long-session claim is made.
+
 F45 now passes both [LOCAL](evidence/mmx6-solid/manifest-bound-72b898f-F45-native-retry-support-local-reviewed.json)
 and [NETPLAY](evidence/mmx6-solid/manifest-bound-72b898f-F45-native-retry-support-netplay-reviewed.json)
 on the same exact candidate. After genuine support use, ordinary enemy contact

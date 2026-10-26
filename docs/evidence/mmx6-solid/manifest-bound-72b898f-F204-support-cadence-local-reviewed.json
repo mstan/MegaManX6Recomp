@@ -1,0 +1,483 @@
+{
+  "schema": 1,
+  "comparison": "F204",
+  "frozen_row_sha256": "faa9cb1930ba3dd6871fad27526380fda92a3a91109c7361e333d291e0a39ee1",
+  "mode": "local",
+  "result": "passed",
+  "candidate": "72b898f6a714ec91b49ce306ee4959d6d5814a8b",
+  "build_identity": {
+    "executable_sha256": "b3589623f1612fe99821d5ad4eb9b7108b7e7cd550c26b0ea28045b2c7e9fc4b",
+    "compiled_manifest_sha256": "1b670b2fa63a58b7b0f2bb6268bb89e83522d8389b81983a0ebd8b04084fe337",
+    "sdk_commit": "bb5d0a7ec003d7e33270e51c270ea89dfea5c081",
+    "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\qualification.json",
+    "sha256": "c676a3e526d161bd4e07ae202cb611eeb785a025dc6c8ae7d2283d9e292bee9d"
+  },
+  "measurement_case": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\ammo-hud\\F204\\F204-observations.json",
+    "sha256": "ea12b79343b3a6a9b732e2b037440de333588f7a3efa0327a7c259711db41585"
+  },
+  "actual_measurements": [
+    {
+      "peer": 0,
+      "native_world_delta": 84,
+      "vblank_delta_bracket": [
+        82,
+        85
+      ],
+      "elapsed_seconds_bracket": [
+        1.3439999999827705,
+        1.4060000000172295
+      ],
+      "world_ticks_per_second_bracket": [
+        59.74395448006447,
+        62.50000000080122
+      ],
+      "vblanks_per_second_bracket": [
+        58.321479373396265,
+        63.24404761985838
+      ],
+      "world_per_vblank_bracket": [
+        0.9882352941176471,
+        1.024390243902439
+      ],
+      "native_world_delta_inside_vblank_delta_bracket": true,
+      "actor_dx": -10.5,
+      "sampled_actor_horizontal_travel": 19.5
+    }
+  ],
+  "sample_count": 5,
+  "native_clock_guards": [
+    {
+      "peer": 0,
+      "first": "0x80034f28",
+      "end": "0x80034f64",
+      "sha256": "df1f4cb551a40173eaa3cf9b063b0e493c553eba32de2fed3392dabe4d5577fd"
+    },
+    {
+      "peer": 0,
+      "first": "0x80073a6c",
+      "end": "0x80073aac",
+      "sha256": "5ac8fd7adbfec4be116af28375036223f672eb9f0a6910985462b3b330c3cb4e"
+    }
+  ],
+  "support_source": {
+    "member3_sha256": "68e8b41b5618ccfced88057553597749513f4aeb25191004f886f9d881b633ea",
+    "placement": "0x800f6540",
+    "seed_type": 7,
+    "initialized_type": 1,
+    "pool": "0x800c1220",
+    "slots": 80,
+    "stride": 164,
+    "callback": "800EC300/update800EBF6C calls original80031DA8; walking800EC5F4",
+    "box": "0x800f73ec",
+    "half_width": 14,
+    "half_height": 14,
+    "guards": [
+      {
+        "peer": 0,
+        "first": "0x80073d54",
+        "end": "0x80073d58",
+        "sha256": "a402fa2ef856506f9321bfc9de0694418acca6d2e1fbcaa5ba8a352696e2a207"
+      },
+      {
+        "peer": 0,
+        "first": "0x80031da8",
+        "end": "0x80031f4c",
+        "sha256": "52930ef8a5580ae57cfe9e5b6812107afc8794974e5f18230569a121c149a8f8"
+      },
+      {
+        "peer": 0,
+        "first": "0x8002e290",
+        "end": "0x8002e3c8",
+        "sha256": "fe5d0f46c36a48d0839afaa7eea38bd6b10b16353fa42e01b36d9842da1715f3"
+      },
+      {
+        "peer": 0,
+        "first": "0x80034ffc",
+        "end": "0x80035010",
+        "sha256": "781d44957ee0b04bdb1b85e209275242e10806cc797e27640d50a358b45b3609"
+      },
+      {
+        "peer": 0,
+        "first": "0x800ebf6c",
+        "end": "0x800ec150",
+        "sha256": "eaf50adde2bf05a92f67d408beaa0c4d27bb39222fa0794a7f2ba9c0f1b4d60b"
+      },
+      {
+        "peer": 0,
+        "first": "0x800ec25c",
+        "end": "0x800ec434",
+        "sha256": "39db6dd8862580753081459e7bee91bb2989145333622750a48a9c1b081fa0f8"
+      },
+      {
+        "peer": 0,
+        "first": "0x800ec5f4",
+        "end": "0x800ec650",
+        "sha256": "b741aa6b48c9a3625a4cf073ad77d9d60b42bb9461c1b228d4601cb39933e3c8"
+      },
+      {
+        "peer": 0,
+        "first": "0x800f73ec",
+        "end": "0x800f73f0",
+        "sha256": "f4d1f0340fcc86a43de78abfd2dd57baf27de9cdd498cfb96417f834a2845ef4"
+      }
+    ]
+  },
+  "presentation_before": [
+    {
+      "id": 2255,
+      "ok": true,
+      "dynamic": 0,
+      "level": 1,
+      "floor": 0,
+      "alloc_scale": 6,
+      "backend": "opengl",
+      "preset": 0,
+      "reference_lines": 240,
+      "requested_scale": 1,
+      "effective_scale": 1,
+      "texture_filter": 0,
+      "internal_lines": 240,
+      "gl": 1,
+      "gl_max_dim": 32768,
+      "gl_max_scale": 32,
+      "gl_swap_interval": 0,
+      "gl_clamp_reason": 0,
+      "gl_alloc_retries": 0,
+      "gl_budget_mib": 2048,
+      "fbo_w": 1024,
+      "fbo_h": 512,
+      "hidpi_window": 0,
+      "window_w": 960,
+      "window_h": 720,
+      "drawable_w": 960,
+      "drawable_h": 720,
+      "display_x": 0,
+      "display_y": 0,
+      "display_w": 320,
+      "display_h": 240,
+      "hr_scale": 1,
+      "windowed": 0,
+      "hires_window_x": 0,
+      "hires_window_w": 0,
+      "hires_fbo_w": 0,
+      "hires_fbo_h": 0,
+      "hires_window_grows": 0,
+      "hires_window_tiles": 0,
+      "hires_window_mib": 0
+    }
+  ],
+  "presentation_after": [
+    {
+      "id": 2298,
+      "ok": true,
+      "dynamic": 0,
+      "level": 1,
+      "floor": 0,
+      "alloc_scale": 6,
+      "backend": "opengl",
+      "preset": 0,
+      "reference_lines": 240,
+      "requested_scale": 1,
+      "effective_scale": 1,
+      "texture_filter": 0,
+      "internal_lines": 240,
+      "gl": 1,
+      "gl_max_dim": 32768,
+      "gl_max_scale": 32,
+      "gl_swap_interval": 0,
+      "gl_clamp_reason": 0,
+      "gl_alloc_retries": 0,
+      "gl_budget_mib": 2048,
+      "fbo_w": 1024,
+      "fbo_h": 512,
+      "hidpi_window": 0,
+      "window_w": 960,
+      "window_h": 720,
+      "drawable_w": 960,
+      "drawable_h": 720,
+      "display_x": 0,
+      "display_y": 0,
+      "display_w": 320,
+      "display_h": 240,
+      "hr_scale": 1,
+      "windowed": 0,
+      "hires_window_x": 0,
+      "hires_window_w": 0,
+      "hires_fbo_w": 0,
+      "hires_fbo_h": 0,
+      "hires_window_grows": 0,
+      "hires_window_tiles": 0,
+      "hires_window_mib": 0
+    }
+  ],
+  "ablation_before": [
+    {
+      "id": 2256,
+      "ok": true,
+      "mode": 0
+    }
+  ],
+  "ablation_after": [
+    {
+      "id": 2299,
+      "ok": true,
+      "mode": 0
+    }
+  ],
+  "root_composed_review": [
+    {
+      "label": "initialized-native-moving-support",
+      "peer": 0,
+      "sample_before": 36,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\ammo-hud\\F204\\peer-0-initialized-native-moving-support.png",
+      "sha256": "fb06d4d0bb8ab0c6f9ec96ecf9d38a28d36c8bf80ab27c4e3f37df9d3fd58de2",
+      "before": {
+        "id": 2064,
+        "ok": true,
+        "seq": 0,
+        "wrote": 0
+      },
+      "acknowledgement": {
+        "id": 2065,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\ammo-hud\\F204\\peer-0-initialized-native-moving-support.png",
+        "staged": true,
+        "seq": 0
+      },
+      "completion": {
+        "id": 2066,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "F204-neutral-carry-before-dwell",
+      "peer": 0,
+      "sample_before": 76,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\ammo-hud\\F204\\peer-0-F204-neutral-carry-before-dwell.png",
+      "sha256": "2989da5911b78663a110dc29960c72a2c063b558ef0ba920b93ffd2f52e99727",
+      "before": {
+        "id": 2261,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2262,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\ammo-hud\\F204\\peer-0-F204-neutral-carry-before-dwell.png",
+        "staged": true,
+        "seq": 2
+      },
+      "completion": {
+        "id": 2263,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "F204-neutral-carry-after-dwell",
+      "peer": 0,
+      "sample_before": 83,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\ammo-hud\\F204\\peer-0-F204-neutral-carry-after-dwell.png",
+      "sha256": "7c2c0a65289f23f9fa0868b9e9d4a80597f82dbd4b0e58144091d94eeb8655fd",
+      "before": {
+        "id": 2304,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2305,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\ammo-hud\\F204\\peer-0-F204-neutral-carry-after-dwell.png",
+        "staged": true,
+        "seq": 3
+      },
+      "completion": {
+        "id": 2306,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "guest-native-jump-release",
+      "peer": 0,
+      "sample_before": 87,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\ammo-hud\\F204\\peer-0-guest-native-jump-release.png",
+      "sha256": "72aec6730548718aeddba53e99ea787d005a4f248f2166b0c51b2a32d57b129f",
+      "before": {
+        "id": 2327,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2328,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\ammo-hud\\F204\\peer-0-guest-native-jump-release.png",
+        "staged": true,
+        "seq": 4
+      },
+      "completion": {
+        "id": 2330,
+        "ok": true,
+        "seq": 5,
+        "wrote": 1
+      }
+    },
+    {
+      "label": "guest-freely-beyond-native-support",
+      "peer": 0,
+      "sample_before": 100,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\ammo-hud\\F204\\peer-0-guest-freely-beyond-native-support.png",
+      "sha256": "7d011ef1e5fc2005223ac6bc316ef6819d94312163d8f0e63fceb1edb8bc4e25",
+      "before": {
+        "id": 2387,
+        "ok": true,
+        "seq": 5,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2388,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\ammo-hud\\F204\\peer-0-guest-freely-beyond-native-support.png",
+        "staged": true,
+        "seq": 5
+      },
+      "completion": {
+        "id": 2389,
+        "ok": true,
+        "seq": 6,
+        "wrote": 1
+      }
+    }
+  ],
+  "recording_rejection": {
+    "status": "failed_fixture_taint_retained_for_diagnostics",
+    "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\candidate\\saves\\input-recordings\\session-1793042733037672-1-0\\inputs.jsonl",
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "b3589623f1612fe99821d5ad4eb9b7108b7e7cd550c26b0ea28045b2c7e9fc4b",
+      "manifest_sha256": "1b670b2fa63a58b7b0f2bb6268bb89e83522d8389b81983a0ebd8b04084fe337",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "terminal_failure": "unilateral debug or fixture input contaminated capture",
+    "native_status": {
+      "contract": "mmx6.native-consumption.v1",
+      "epoch": 1,
+      "failure": "unilateral debug or fixture input contaminated capture",
+      "schema": 1,
+      "scope": "native-consumption diagnostics; replay unimplemented",
+      "status": "failed"
+    },
+    "events": 5700,
+    "natives": 4018,
+    "p2_reads": 1682,
+    "artifacts": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\recording-rejection\\settings.json",
+        "bytes": 10329,
+        "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\recording-rejection\\content.json",
+        "bytes": 503,
+        "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\recording-rejection\\simulation-contract.json",
+        "bytes": 259,
+        "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\recording-rejection\\inputs.jsonl",
+        "bytes": 748481,
+        "sha256": "ca3e2fb9afd1cb9741859d19d2a2d2ed53ce9d870a8eaaae6cf82f2726ede1f2"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\recording-rejection\\status.json",
+        "bytes": 211,
+        "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\recording-rejection\\card1.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\recording-rejection\\card2.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      }
+    ],
+    "strict_refusals": {
+      "ordinary_capture": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      },
+      "offline_replay": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      }
+    },
+    "finalized_capture_admitted": false,
+    "replay_admitted": false,
+    "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+  },
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "executed_helper": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\F204-helper-executed-source.py",
+    "sha256": "6cb619d6b5df4a24a0bad3d7d948cd7eb605ab17ca5dff754877b02afd4fda34"
+  },
+  "executed_adapted_observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\ammo-hud\\F204\\F204-F51-adapted-executed-source.py",
+    "sha256": "a6f783f29a7cf37c0b84185d2dcbb2c7dd89c331c7878aec3ddbff9d4bd961c3"
+  },
+  "executed_parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F204-support-cadence-local-v54-root-v3\\actual-adapted-caller.py",
+    "sha256": "3bdbd07452edea1ba13d1b359874d1188dbadc4339cd4b42b86ce9f766c4aa82"
+  },
+  "limits": [
+    "F204 bounded normal-presentation world/VBlank cadence on one original Amazon moving-support stretch, shared view with both heroes; no private-view, solo baseline, long-session, other-route, exact audiovisual or replay equivalence claim.",
+    "Native timer84 lies inside actual SDK frame/VBlank bracket82..85 over elapsed1.344..1.406s; no repeated world update or large slowdown observed in this window. Asynchronous reads retain raw brackets; no invented universal FPS threshold.",
+    "Original F51 short actual carry, continuous genuine top/neutral input/resources/no hit pause, real support travel19.5px, stationary companion and unchanged ordinary OpenGL presentation are required. Long cumulative asynchronous carry residual is recorded, not treated as a precise atomic displacement.",
+    "Initial audited offline AmazonC0 checkpoint bypass only; no inventory/HP/position/contact/clock/success writes. Fixture-tainted recording is correctly refused for ordinary capture/replay. Native cards unchanged and owned exit0.",
+    "Five composed images reviewed. Cadence endpoint images show a healthy carried guest. Later original F51 extra free-edge traversal reaches real enemy contact and a flashing damaged guest; this is outside the admitted cadence window and supplies no new F51 pass.",
+    "Prior v1 extra2px cumulative asynchronous assertion and v2 six-second dwell reaching real enemy damage at3.26s remain failed setups. Frozen F204 prescribes a measured moving stretch, not a six-second exposure to enemies.",
+    "NETPLAY remains separately required on this same exact candidate; no physical-device, Linux or remote-service claim."
+  ],
+  "bypasses": [
+    "Initial audited offline AmazonC0 checkpoint only; fixture recording taint retained."
+  ]
+}
