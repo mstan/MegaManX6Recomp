@@ -1,0 +1,241 @@
+{
+  "schema": 1,
+  "comparison": "F68",
+  "frozen_row_sha256": "1bd2c3bcb60257dd67ba31536e2c233339bb7da92c3cbf3f87479cf3ae596948",
+  "mode": "local",
+  "result": "passed",
+  "candidate": "ef2751e5994b59b044c81cd80e36e4e1d6232140",
+  "build_identity": {
+    "executable_sha256": "477d5304a5282e753835cd1625e31fd8be2caea61cbfeecda5764f6c9ab6424e",
+    "compiled_manifest_sha256": "262f6bbf09ba8570dbcdaf655d8c5288c433db03288c2e7fa3ff48df644cb991",
+    "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+    "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\independent-views-local-v59-root-v1\\qualification.json",
+    "bytes": 4325070,
+    "sha256": "177aa52b450bf0a94dcd051458f4d6e20a6ebb619c7f79eda3abb16f5449278e"
+  },
+  "root_composed_review": [
+    {
+      "label": "initial-8by3-two-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\independent-views-local-v59-root-v1\\hud\\initial-8by3-two-views.png",
+      "bytes": 1843888,
+      "sha256": "0c375c26dd66174d46eae975c63f78403afad1cb721dd05f31ddd3479b6a8e62",
+      "window": [
+        1280,
+        480
+      ]
+    },
+    {
+      "label": "separated-native-follow",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\independent-views-local-v59-root-v1\\hud\\separated-native-follow.png",
+      "bytes": 1843888,
+      "sha256": "47c312b1d5ac57079fdcdb16310d0769632d590713a4ed027658b1787ec623f2",
+      "window": [
+        1280,
+        480
+      ]
+    },
+    {
+      "label": "resize-640x900",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\independent-views-local-v59-root-v1\\hud\\resize-640x900.png",
+      "bytes": 1729098,
+      "sha256": "81b72cf643fc37e2e8388b28adb534750ebefc59b8448f233d47cb99ea7304a2",
+      "window": [
+        640,
+        900
+      ]
+    },
+    {
+      "label": "resize-960x720",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\independent-views-local-v59-root-v1\\hud\\resize-960x720.png",
+      "bytes": 2074543,
+      "sha256": "56d37fae51216a52e9f611d3384773aec2099f60e72faa390066ec4c1e8cc0c4",
+      "window": [
+        960,
+        720
+      ]
+    },
+    {
+      "label": "resize-1280x480",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\independent-views-local-v59-root-v1\\hud\\resize-1280x480.png",
+      "bytes": 1843888,
+      "sha256": "5213c7faf1de97cd9b1181cb7f14bc96e9a341f6f6e0cb78dd894a3ed8639c97",
+      "window": [
+        1280,
+        480
+      ]
+    }
+  ],
+  "view_review": "Initial panes show both nearby heroes and correct per-pane X/Z HUD. Separated and resized images show X on original initial terrain in the left pane and Zero on a different authored platform in the right; each distant hero is absent from the other pane. Both panes retain4:3 aspect;8:3 canvas letterboxes in other window shapes.",
+  "native_positions": {
+    "primary_before": {
+      "active": 1,
+      "character": 0,
+      "state": 1,
+      "action": 2,
+      "hp": 32,
+      "x_raw": 9437184,
+      "y_raw": 73072640,
+      "weapon": 0,
+      "ammo": [
+        288,
+        288,
+        288,
+        288,
+        288,
+        288,
+        288,
+        288,
+        288
+      ]
+    },
+    "guest_before": {
+      "active": 1,
+      "character": 1,
+      "state": 1,
+      "action": 2,
+      "hp": 32,
+      "x_raw": 11010048,
+      "y_raw": 73007104,
+      "weapon": 0,
+      "ammo": [
+        288,
+        288,
+        288,
+        288,
+        288,
+        288,
+        288,
+        288,
+        288
+      ]
+    },
+    "primary_after": {
+      "active": 1,
+      "character": 0,
+      "state": 1,
+      "action": 2,
+      "hp": 32,
+      "x_raw": 9437184,
+      "y_raw": 73072640,
+      "weapon": 0,
+      "ammo": [
+        288,
+        288,
+        288,
+        288,
+        288,
+        288,
+        288,
+        288,
+        288
+      ]
+    },
+    "guest_after": {
+      "active": 1,
+      "character": 1,
+      "state": 1,
+      "action": 7,
+      "hp": 32,
+      "x_raw": 33292288,
+      "y_raw": 66722816,
+      "weapon": 0,
+      "ammo": [
+        288,
+        288,
+        288,
+        288,
+        288,
+        288,
+        288,
+        288,
+        288
+      ]
+    }
+  },
+  "world_once": {
+    "native_world_delta": 33,
+    "vblank_delta_bracket": [
+      31,
+      34
+    ]
+  },
+  "private_pairs": {
+    "initial": 49,
+    "final": 307,
+    "failed": 0,
+    "refused": 0,
+    "host_state_leaks": 0
+  },
+  "recording": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\independent-views-local-v59-root-v1\\candidate\\saves\\input-recordings\\session-1793054123514507-1-0\\inputs.jsonl",
+    "bytes": 940317,
+    "sha256": "033431440689f511425884bd3c18476602ed97f9137ee3f9044f6fdbd5199226",
+    "events": 7160,
+    "natives": 4822,
+    "p2_reads": 2338,
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "477d5304a5282e753835cd1625e31fd8be2caea61cbfeecda5764f6c9ab6424e",
+      "manifest_sha256": "262f6bbf09ba8570dbcdaf655d8c5288c433db03288c2e7fa3ff48df644cb991",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "8e9fd7a7a87441ee690edcf4f0edf1259118f959397411aa2d4c32ffce53c221",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "status": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\independent-views-local-v59-root-v1\\candidate\\saves\\input-recordings\\session-1793054123514507-1-0\\status.json",
+      "bytes": 160,
+      "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+    },
+    "startup_artifacts": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\independent-views-local-v59-root-v1\\candidate\\saves\\input-recordings\\session-1793054123514507-1-0\\settings.json",
+        "bytes": 10352,
+        "sha256": "8e9fd7a7a87441ee690edcf4f0edf1259118f959397411aa2d4c32ffce53c221"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\independent-views-local-v59-root-v1\\candidate\\saves\\input-recordings\\session-1793054123514507-1-0\\content.json",
+        "bytes": 503,
+        "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\independent-views-local-v59-root-v1\\candidate\\saves\\input-recordings\\session-1793054123514507-1-0\\simulation-contract.json",
+        "bytes": 259,
+        "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      }
+    ]
+  },
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "executed_caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\independent-views-local-v59-root-v1\\root-caller-executed-source.py",
+    "bytes": 5877,
+    "sha256": "b0084679c753e3473e99dbd03d3fa17227f2bcbaa03744bc2a2f81626413f191"
+  },
+  "limits": [
+    "Actual LOCAL split mode only: two native320x240 views in1280x480 output, separate X/Zero native following and their own meters;1280x480,640x900 and960x720 resizes reviewed. No netplay private-view or other-scene admission.",
+    "Original intro first room, X stationary144/1115, Zero ordinary Right/fresh native jumps to508 with bothHP32. Five composed images independently reviewed: after separation each hero appears only in its own pane, with no distant actor wrapping into the other image.",
+    "Native world33 inside actual SDK VBlank31..34 bracket while both real panes render;307 committed pairs with zero refusals/failures and no private host-state digest leak. This is bounded once-per-frame evidence, not a long performance benchmark.",
+    "Original cold boot and published ordinary inputs only; no checkpoint, position, health, contact or success write. Canonical complete ordinary offline trace/startup artifacts, native cards and owned graceful exit0 pass. No replay or audio equivalence claim.",
+    "364px actor separation does not exceed the original1024x512 descriptor ring; this evidence grants no F178 large-separation map-ring result. No pause/survivor/fallback, other terrain, native state-load or old-save compatibility claim.",
+    "Same-candidate NETPLAY remains required by the ledger. SDK local-pair rendering is offline-only; per-peer netplay views must be separately exercised. Original uncommitted V47 and its zero-attempt run remain preserved."
+  ],
+  "bypasses": []
+}

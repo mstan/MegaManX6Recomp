@@ -1,0 +1,1801 @@
+{
+  "schema": 1,
+  "comparison": "F68",
+  "frozen_row_sha256": "1bd2c3bcb60257dd67ba31536e2c233339bb7da92c3cbf3f87479cf3ae596948",
+  "mode": "netplay",
+  "result": "passed",
+  "candidate": "ef2751e5994b59b044c81cd80e36e4e1d6232140",
+  "build_identity": {
+    "executable_sha256": "477d5304a5282e753835cd1625e31fd8be2caea61cbfeecda5764f6c9ab6424e",
+    "compiled_manifest_sha256": "262f6bbf09ba8570dbcdaf655d8c5288c433db03288c2e7fa3ff48df644cb991",
+    "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+    "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F68-independent-paired-v59-worker-v1\\qualification.json",
+    "sha256": "4823a5242b039273027bfe5680baf265445a72e3c573cb8fd2ef4175f9ad9f79",
+    "bytes": 4698265
+  },
+  "root_composed_review": [
+    {
+      "peer": 0,
+      "label": "initial-native-owned-view",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F68-independent-paired-v59-worker-v1\\peer-0\\logs\\F68-initial-native-owned-view.png",
+      "sha256": "87716bfd5b45653569dd2d8663838c7c410460b7a9dc7df89a191bcedc7b335f",
+      "bytes": 2074543,
+      "video": {
+        "id": 1949,
+        "ok": true,
+        "dynamic": 0,
+        "level": 1,
+        "floor": 0,
+        "alloc_scale": 0,
+        "backend": "opengl",
+        "preset": 0,
+        "reference_lines": 240,
+        "requested_scale": 1,
+        "effective_scale": 1,
+        "texture_filter": 0,
+        "internal_lines": 240,
+        "gl": 1,
+        "gl_max_dim": 32768,
+        "gl_max_scale": 32,
+        "gl_swap_interval": 0,
+        "gl_clamp_reason": 0,
+        "gl_alloc_retries": 0,
+        "gl_budget_mib": 2048,
+        "fbo_w": 1024,
+        "fbo_h": 512,
+        "hidpi_window": 0,
+        "window_w": 960,
+        "window_h": 720,
+        "drawable_w": 960,
+        "drawable_h": 720,
+        "display_x": 0,
+        "display_y": 240,
+        "display_w": 320,
+        "display_h": 240,
+        "hr_scale": 1,
+        "windowed": 0,
+        "hires_window_x": 0,
+        "hires_window_w": 0,
+        "hires_fbo_w": 0,
+        "hires_fbo_h": 0,
+        "hires_window_grows": 0,
+        "hires_window_tiles": 0,
+        "hires_window_mib": 0
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 12288000,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "peer": 0,
+      "label": "separated-native-owned-view",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F68-independent-paired-v59-worker-v1\\peer-0\\logs\\F68-separated-native-owned-view.png",
+      "sha256": "0b6aa34db34e7ea51bdd746c2e5bc4d9959e37e5c3a1607a08c0bdccc4c19d0f",
+      "bytes": 2074543,
+      "video": {
+        "id": 2222,
+        "ok": true,
+        "dynamic": 0,
+        "level": 1,
+        "floor": 0,
+        "alloc_scale": 0,
+        "backend": "opengl",
+        "preset": 0,
+        "reference_lines": 240,
+        "requested_scale": 1,
+        "effective_scale": 1,
+        "texture_filter": 0,
+        "internal_lines": 240,
+        "gl": 1,
+        "gl_max_dim": 32768,
+        "gl_max_scale": 32,
+        "gl_swap_interval": 0,
+        "gl_clamp_reason": 0,
+        "gl_alloc_retries": 0,
+        "gl_budget_mib": 2048,
+        "fbo_w": 1024,
+        "fbo_h": 512,
+        "hidpi_window": 0,
+        "window_w": 960,
+        "window_h": 720,
+        "drawable_w": 960,
+        "drawable_h": 720,
+        "display_x": 0,
+        "display_y": 0,
+        "display_w": 320,
+        "display_h": 240,
+        "hr_scale": 1,
+        "windowed": 0,
+        "hires_window_x": 0,
+        "hires_window_w": 0,
+        "hires_fbo_w": 0,
+        "hires_fbo_h": 0,
+        "hires_window_grows": 0,
+        "hires_window_tiles": 0,
+        "hires_window_mib": 0
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 8,
+          "hp": 31,
+          "x_raw": 37457920,
+          "y_raw": 70975488,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 12288000,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "peer": 0,
+      "label": "separated-tall-owned-view",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F68-independent-paired-v59-worker-v1\\peer-0\\logs\\F68-separated-tall-owned-view.png",
+      "sha256": "4bb8856ae1115d3a6d1a4e5d94d31325392df255c1ed2574d6494f5558b63e4b",
+      "bytes": 1729098,
+      "video": {
+        "id": 2235,
+        "ok": true,
+        "dynamic": 0,
+        "level": 1,
+        "floor": 0,
+        "alloc_scale": 0,
+        "backend": "opengl",
+        "preset": 0,
+        "reference_lines": 240,
+        "requested_scale": 1,
+        "effective_scale": 1,
+        "texture_filter": 0,
+        "internal_lines": 240,
+        "gl": 1,
+        "gl_max_dim": 32768,
+        "gl_max_scale": 32,
+        "gl_swap_interval": 0,
+        "gl_clamp_reason": 0,
+        "gl_alloc_retries": 0,
+        "gl_budget_mib": 2048,
+        "fbo_w": 1024,
+        "fbo_h": 512,
+        "hidpi_window": 0,
+        "window_w": 640,
+        "window_h": 900,
+        "drawable_w": 640,
+        "drawable_h": 900,
+        "display_x": 0,
+        "display_y": 240,
+        "display_w": 320,
+        "display_h": 240,
+        "hr_scale": 1,
+        "windowed": 0,
+        "hires_window_x": 0,
+        "hires_window_w": 0,
+        "hires_fbo_w": 0,
+        "hires_fbo_h": 0,
+        "hires_window_grows": 0,
+        "hires_window_tiles": 0,
+        "hires_window_mib": 0
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 31,
+          "x_raw": 37457920,
+          "y_raw": 70975488,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 12288000,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "peer": 1,
+      "label": "initial-native-owned-view",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F68-independent-paired-v59-worker-v1\\peer-1\\logs\\F68-initial-native-owned-view.png",
+      "sha256": "c7042a64a97b0230d3e9fcc7d9f0c3c96c59dc923f386021b123557a7c74f7df",
+      "bytes": 2074543,
+      "video": {
+        "id": 1765,
+        "ok": true,
+        "dynamic": 0,
+        "level": 1,
+        "floor": 0,
+        "alloc_scale": 0,
+        "backend": "opengl",
+        "preset": 0,
+        "reference_lines": 240,
+        "requested_scale": 1,
+        "effective_scale": 1,
+        "texture_filter": 0,
+        "internal_lines": 240,
+        "gl": 1,
+        "gl_max_dim": 32768,
+        "gl_max_scale": 32,
+        "gl_swap_interval": 0,
+        "gl_clamp_reason": 0,
+        "gl_alloc_retries": 0,
+        "gl_budget_mib": 2048,
+        "fbo_w": 1024,
+        "fbo_h": 512,
+        "hidpi_window": 0,
+        "window_w": 960,
+        "window_h": 720,
+        "drawable_w": 960,
+        "drawable_h": 720,
+        "display_x": 0,
+        "display_y": 240,
+        "display_w": 320,
+        "display_h": 240,
+        "hr_scale": 1,
+        "windowed": 0,
+        "hires_window_x": 0,
+        "hires_window_w": 0,
+        "hires_fbo_w": 0,
+        "hires_fbo_h": 0,
+        "hires_window_grows": 0,
+        "hires_window_tiles": 0,
+        "hires_window_mib": 0
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 12288000,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "peer": 1,
+      "label": "separated-native-owned-view",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F68-independent-paired-v59-worker-v1\\peer-1\\logs\\F68-separated-native-owned-view.png",
+      "sha256": "991103c7af2602cce68fb6ec8bc16953869825011870b008786eb7405d897a56",
+      "bytes": 2074543,
+      "video": {
+        "id": 1997,
+        "ok": true,
+        "dynamic": 0,
+        "level": 1,
+        "floor": 0,
+        "alloc_scale": 0,
+        "backend": "opengl",
+        "preset": 0,
+        "reference_lines": 240,
+        "requested_scale": 1,
+        "effective_scale": 1,
+        "texture_filter": 0,
+        "internal_lines": 240,
+        "gl": 1,
+        "gl_max_dim": 32768,
+        "gl_max_scale": 32,
+        "gl_swap_interval": 0,
+        "gl_clamp_reason": 0,
+        "gl_alloc_retries": 0,
+        "gl_budget_mib": 2048,
+        "fbo_w": 1024,
+        "fbo_h": 512,
+        "hidpi_window": 0,
+        "window_w": 960,
+        "window_h": 720,
+        "drawable_w": 960,
+        "drawable_h": 720,
+        "display_x": 0,
+        "display_y": 240,
+        "display_w": 320,
+        "display_h": 240,
+        "hr_scale": 1,
+        "windowed": 0,
+        "hires_window_x": 0,
+        "hires_window_w": 0,
+        "hires_fbo_w": 0,
+        "hires_fbo_h": 0,
+        "hires_window_grows": 0,
+        "hires_window_tiles": 0,
+        "hires_window_mib": 0
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 8,
+          "hp": 31,
+          "x_raw": 37457920,
+          "y_raw": 70975488,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 12288000,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "peer": 1,
+      "label": "separated-tall-owned-view",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F68-independent-paired-v59-worker-v1\\peer-1\\logs\\F68-separated-tall-owned-view.png",
+      "sha256": "53936f03fe08663b705c70582e34008ff607a9260a12a2a70da0b5e90eaecae5",
+      "bytes": 1729098,
+      "video": {
+        "id": 2009,
+        "ok": true,
+        "dynamic": 0,
+        "level": 1,
+        "floor": 0,
+        "alloc_scale": 0,
+        "backend": "opengl",
+        "preset": 0,
+        "reference_lines": 240,
+        "requested_scale": 1,
+        "effective_scale": 1,
+        "texture_filter": 0,
+        "internal_lines": 240,
+        "gl": 1,
+        "gl_max_dim": 32768,
+        "gl_max_scale": 32,
+        "gl_swap_interval": 0,
+        "gl_clamp_reason": 0,
+        "gl_alloc_retries": 0,
+        "gl_budget_mib": 2048,
+        "fbo_w": 1024,
+        "fbo_h": 512,
+        "hidpi_window": 0,
+        "window_w": 640,
+        "window_h": 900,
+        "drawable_w": 640,
+        "drawable_h": 900,
+        "display_x": 0,
+        "display_y": 0,
+        "display_w": 320,
+        "display_h": 240,
+        "hr_scale": 1,
+        "windowed": 0,
+        "hires_window_x": 0,
+        "hires_window_w": 0,
+        "hires_fbo_w": 0,
+        "hires_fbo_h": 0,
+        "hires_window_grows": 0,
+        "hires_window_tiles": 0,
+        "hires_window_mib": 0
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 31,
+          "x_raw": 37457920,
+          "y_raw": 70975488,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 12288000,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ]
+    }
+  ],
+  "view_review": "Both peers retain the correct local hero/HUD and authored terrain. Separated and tall images show each distant other hero absent, with no actor wrap and correct4:3 canvas.",
+  "native_positions": [
+    [
+      {
+        "active": 1,
+        "character": 0,
+        "state": 1,
+        "action": 7,
+        "hp": 31,
+        "x_raw": 37457920,
+        "y_raw": 70975488,
+        "weapon": 0,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ]
+      },
+      {
+        "active": 1,
+        "character": 1,
+        "state": 1,
+        "action": 2,
+        "hp": 32,
+        "x_raw": 12288000,
+        "y_raw": 73007104,
+        "weapon": 0,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ]
+      }
+    ],
+    [
+      {
+        "active": 1,
+        "character": 0,
+        "state": 1,
+        "action": 7,
+        "hp": 31,
+        "x_raw": 37457920,
+        "y_raw": 70940160,
+        "weapon": 0,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ]
+      },
+      {
+        "active": 1,
+        "character": 1,
+        "state": 1,
+        "action": 2,
+        "hp": 32,
+        "x_raw": 12288000,
+        "y_raw": 73007104,
+        "weapon": 0,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ]
+      }
+    ]
+  ],
+  "presentation_before": [
+    {
+      "counters": {
+        "id": 1937,
+        "ok": true,
+        "frame": 3752,
+        "counters": [
+          {
+            "name": "startup.disc_hash",
+            "count": 1,
+            "last_frame": 0
+          },
+          {
+            "name": "resident.prepared",
+            "count": 1,
+            "last_frame": 0
+          },
+          {
+            "name": "mmx6.seamless.modified_members",
+            "count": 0,
+            "last_frame": 0
+          },
+          {
+            "name": "mmx6.seamless.packed_loads",
+            "count": 11,
+            "last_frame": 1116
+          },
+          {
+            "name": "mmx6.seamless.sectors",
+            "count": 2112,
+            "last_frame": 1137
+          },
+          {
+            "name": "mmx6.seamless.raw_loads",
+            "count": 11,
+            "last_frame": 1137
+          },
+          {
+            "name": "mmx6.coop.private-committed",
+            "count": 881,
+            "last_frame": 3752
+          }
+        ],
+        "overflow": 0
+      },
+      "render": {
+        "id": 1938,
+        "ok": true,
+        "plans": 0,
+        "planned": 0,
+        "wanted": 0,
+        "refused": 0,
+        "passes": 0,
+        "aborted": 0,
+        "discarded": 0,
+        "watchdog": 0,
+        "vram_leaks": 0,
+        "nesting_repairs": 0,
+        "device_reads": 0,
+        "last_device_read": "0x00000000",
+        "last_device_read_width": 0,
+        "verify_checks": 0,
+        "verify_mismatch": 0,
+        "dropped": {
+          "spu": 0,
+          "cd": 0,
+          "timer": 0,
+          "dma": 0,
+          "gpu": 0,
+          "other": 0
+        },
+        "last_pass_ms": 1.777,
+        "avg_pass_ms": 1.512,
+        "avg_begin_ms": 0.136,
+        "avg_guest_ms": 1.241,
+        "avg_end_ms": 0.006,
+        "avg_restore_ms": 0.129,
+        "guest_cycles_last": 154520,
+        "disabled": 0,
+        "promotions": 0,
+        "pass_presents": 0,
+        "blended_presents": 0,
+        "expired": 0,
+        "late_presents": 0,
+        "unmatched_flips": 0,
+        "early_presents": 0,
+        "cost_us": 0,
+        "cost_rewarms": 0,
+        "frame_images": 0,
+        "journaled": 441,
+        "image_textures": 0,
+        "image_bytes": 0,
+        "status": 4,
+        "backups_reused": 0,
+        "pass_attempts": 882,
+        "argument_refused": 0,
+        "status_refused": 0,
+        "begin_refused": 0,
+        "checkpoint_refused": 0,
+        "spans": 0,
+        "span_failures": 0,
+        "local_views": 882,
+        "local_attempts": 882,
+        "local_status": 0,
+        "admission": {
+          "plans": 0,
+          "frame": 0,
+          "zero_credit_refusals": 0,
+          "idle_ms": 0.0,
+          "present_ms": 0.0,
+          "prior_pass_ms": 0.0,
+          "present_reserve_ms": 0.0,
+          "spare_ms": 0.0,
+          "frame_ms": 0.0,
+          "cost_ms": 0.0,
+          "budget_ms": 0.0,
+          "wanted": 0,
+          "planned": 0
+        },
+        "last_failure": null,
+        "last_abort_detail": "",
+        "span_fail": {
+          "reason": 0,
+          "pc": "0x00000000",
+          "start": "0x00000000",
+          "stop": "0x00000000",
+          "ra": "0x00000000",
+          "after": "0x00000000",
+          "insns": 0
+        }
+      },
+      "stereo": {
+        "id": 1939,
+        "ok": true,
+        "attempts": 0,
+        "pairs": 0,
+        "refused": 0,
+        "failed": 0,
+        "shed": 0,
+        "status": 4,
+        "last_pair_id": 0,
+        "last_guest_cycle": 0,
+        "eye_cycles": [
+          0,
+          0
+        ],
+        "eye_hashes": [
+          "0000000000000000",
+          "0000000000000000"
+        ],
+        "eye_view": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "last_eye": -1,
+        "last_failure": "",
+        "last_failed_attempt": 0,
+        "last_failed_eye": 0,
+        "last_failed_reason": "",
+        "retained_pair_id": 0,
+        "last_pair_ms": 0.0,
+        "avg_pair_ms": 0.0,
+        "published": {
+          "valid": 0,
+          "pair_id": 0,
+          "guest_cycle": 0,
+          "width": 0,
+          "height": 0,
+          "staged_mask": 0,
+          "mode": 0,
+          "presents": 0
+        },
+        "captures": []
+      }
+    },
+    {
+      "counters": {
+        "id": 1753,
+        "ok": true,
+        "frame": 3753,
+        "counters": [
+          {
+            "name": "startup.disc_hash",
+            "count": 1,
+            "last_frame": 0
+          },
+          {
+            "name": "resident.prepared",
+            "count": 1,
+            "last_frame": 0
+          },
+          {
+            "name": "mmx6.seamless.modified_members",
+            "count": 0,
+            "last_frame": 0
+          },
+          {
+            "name": "mmx6.seamless.packed_loads",
+            "count": 11,
+            "last_frame": 1116
+          },
+          {
+            "name": "mmx6.seamless.sectors",
+            "count": 2112,
+            "last_frame": 1137
+          },
+          {
+            "name": "mmx6.seamless.raw_loads",
+            "count": 11,
+            "last_frame": 1137
+          },
+          {
+            "name": "mmx6.coop.private-committed",
+            "count": 881,
+            "last_frame": 3752
+          }
+        ],
+        "overflow": 0
+      },
+      "render": {
+        "id": 1754,
+        "ok": true,
+        "plans": 0,
+        "planned": 0,
+        "wanted": 0,
+        "refused": 0,
+        "passes": 0,
+        "aborted": 0,
+        "discarded": 0,
+        "watchdog": 0,
+        "vram_leaks": 0,
+        "nesting_repairs": 0,
+        "device_reads": 0,
+        "last_device_read": "0x00000000",
+        "last_device_read_width": 0,
+        "verify_checks": 0,
+        "verify_mismatch": 0,
+        "dropped": {
+          "spu": 0,
+          "cd": 0,
+          "timer": 0,
+          "dma": 0,
+          "gpu": 0,
+          "other": 0
+        },
+        "last_pass_ms": 1.44,
+        "avg_pass_ms": 1.461,
+        "avg_begin_ms": 0.133,
+        "avg_guest_ms": 1.196,
+        "avg_end_ms": 0.006,
+        "avg_restore_ms": 0.126,
+        "guest_cycles_last": 156003,
+        "disabled": 0,
+        "promotions": 0,
+        "pass_presents": 0,
+        "blended_presents": 0,
+        "expired": 0,
+        "late_presents": 0,
+        "unmatched_flips": 0,
+        "early_presents": 0,
+        "cost_us": 0,
+        "cost_rewarms": 0,
+        "frame_images": 0,
+        "journaled": 441,
+        "image_textures": 0,
+        "image_bytes": 0,
+        "status": 4,
+        "backups_reused": 0,
+        "pass_attempts": 882,
+        "argument_refused": 0,
+        "status_refused": 0,
+        "begin_refused": 0,
+        "checkpoint_refused": 0,
+        "spans": 0,
+        "span_failures": 0,
+        "local_views": 882,
+        "local_attempts": 882,
+        "local_status": 0,
+        "admission": {
+          "plans": 0,
+          "frame": 0,
+          "zero_credit_refusals": 0,
+          "idle_ms": 0.0,
+          "present_ms": 0.0,
+          "prior_pass_ms": 0.0,
+          "present_reserve_ms": 0.0,
+          "spare_ms": 0.0,
+          "frame_ms": 0.0,
+          "cost_ms": 0.0,
+          "budget_ms": 0.0,
+          "wanted": 0,
+          "planned": 0
+        },
+        "last_failure": null,
+        "last_abort_detail": "",
+        "span_fail": {
+          "reason": 0,
+          "pc": "0x00000000",
+          "start": "0x00000000",
+          "stop": "0x00000000",
+          "ra": "0x00000000",
+          "after": "0x00000000",
+          "insns": 0
+        }
+      },
+      "stereo": {
+        "id": 1755,
+        "ok": true,
+        "attempts": 0,
+        "pairs": 0,
+        "refused": 0,
+        "failed": 0,
+        "shed": 0,
+        "status": 4,
+        "last_pair_id": 0,
+        "last_guest_cycle": 0,
+        "eye_cycles": [
+          0,
+          0
+        ],
+        "eye_hashes": [
+          "0000000000000000",
+          "0000000000000000"
+        ],
+        "eye_view": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "last_eye": -1,
+        "last_failure": "",
+        "last_failed_attempt": 0,
+        "last_failed_eye": 0,
+        "last_failed_reason": "",
+        "retained_pair_id": 0,
+        "last_pair_ms": 0.0,
+        "avg_pair_ms": 0.0,
+        "published": {
+          "valid": 0,
+          "pair_id": 0,
+          "guest_cycle": 0,
+          "width": 0,
+          "height": 0,
+          "staged_mask": 0,
+          "mode": 0,
+          "presents": 0
+        },
+        "captures": []
+      }
+    }
+  ],
+  "presentation_after": [
+    {
+      "counters": {
+        "id": 2236,
+        "ok": true,
+        "frame": 4051,
+        "counters": [
+          {
+            "name": "startup.disc_hash",
+            "count": 1,
+            "last_frame": 0
+          },
+          {
+            "name": "resident.prepared",
+            "count": 1,
+            "last_frame": 0
+          },
+          {
+            "name": "mmx6.seamless.modified_members",
+            "count": 0,
+            "last_frame": 0
+          },
+          {
+            "name": "mmx6.seamless.packed_loads",
+            "count": 11,
+            "last_frame": 1116
+          },
+          {
+            "name": "mmx6.seamless.sectors",
+            "count": 2112,
+            "last_frame": 1137
+          },
+          {
+            "name": "mmx6.seamless.raw_loads",
+            "count": 11,
+            "last_frame": 1137
+          },
+          {
+            "name": "mmx6.coop.private-committed",
+            "count": 1180,
+            "last_frame": 4051
+          }
+        ],
+        "overflow": 0
+      },
+      "render": {
+        "id": 2237,
+        "ok": true,
+        "plans": 0,
+        "planned": 0,
+        "wanted": 0,
+        "refused": 0,
+        "passes": 0,
+        "aborted": 0,
+        "discarded": 0,
+        "watchdog": 0,
+        "vram_leaks": 0,
+        "nesting_repairs": 0,
+        "device_reads": 0,
+        "last_device_read": "0x00000000",
+        "last_device_read_width": 0,
+        "verify_checks": 0,
+        "verify_mismatch": 0,
+        "dropped": {
+          "spu": 0,
+          "cd": 0,
+          "timer": 0,
+          "dma": 0,
+          "gpu": 0,
+          "other": 0
+        },
+        "last_pass_ms": 1.986,
+        "avg_pass_ms": 1.658,
+        "avg_begin_ms": 0.158,
+        "avg_guest_ms": 1.36,
+        "avg_end_ms": 0.006,
+        "avg_restore_ms": 0.134,
+        "guest_cycles_last": 160982,
+        "disabled": 0,
+        "promotions": 0,
+        "pass_presents": 0,
+        "blended_presents": 0,
+        "expired": 0,
+        "late_presents": 0,
+        "unmatched_flips": 0,
+        "early_presents": 0,
+        "cost_us": 0,
+        "cost_rewarms": 0,
+        "frame_images": 0,
+        "journaled": 590,
+        "image_textures": 0,
+        "image_bytes": 0,
+        "status": 4,
+        "backups_reused": 0,
+        "pass_attempts": 1180,
+        "argument_refused": 0,
+        "status_refused": 0,
+        "begin_refused": 0,
+        "checkpoint_refused": 0,
+        "spans": 0,
+        "span_failures": 0,
+        "local_views": 1180,
+        "local_attempts": 1180,
+        "local_status": 0,
+        "admission": {
+          "plans": 0,
+          "frame": 0,
+          "zero_credit_refusals": 0,
+          "idle_ms": 0.0,
+          "present_ms": 0.0,
+          "prior_pass_ms": 0.0,
+          "present_reserve_ms": 0.0,
+          "spare_ms": 0.0,
+          "frame_ms": 0.0,
+          "cost_ms": 0.0,
+          "budget_ms": 0.0,
+          "wanted": 0,
+          "planned": 0
+        },
+        "last_failure": null,
+        "last_abort_detail": "",
+        "span_fail": {
+          "reason": 0,
+          "pc": "0x00000000",
+          "start": "0x00000000",
+          "stop": "0x00000000",
+          "ra": "0x00000000",
+          "after": "0x00000000",
+          "insns": 0
+        }
+      },
+      "stereo": {
+        "id": 2238,
+        "ok": true,
+        "attempts": 0,
+        "pairs": 0,
+        "refused": 0,
+        "failed": 0,
+        "shed": 0,
+        "status": 4,
+        "last_pair_id": 0,
+        "last_guest_cycle": 0,
+        "eye_cycles": [
+          0,
+          0
+        ],
+        "eye_hashes": [
+          "0000000000000000",
+          "0000000000000000"
+        ],
+        "eye_view": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "last_eye": -1,
+        "last_failure": "",
+        "last_failed_attempt": 0,
+        "last_failed_eye": 0,
+        "last_failed_reason": "",
+        "retained_pair_id": 0,
+        "last_pair_ms": 0.0,
+        "avg_pair_ms": 0.0,
+        "published": {
+          "valid": 0,
+          "pair_id": 0,
+          "guest_cycle": 0,
+          "width": 0,
+          "height": 0,
+          "staged_mask": 0,
+          "mode": 0,
+          "presents": 0
+        },
+        "captures": []
+      }
+    },
+    {
+      "counters": {
+        "id": 2010,
+        "ok": true,
+        "frame": 4049,
+        "counters": [
+          {
+            "name": "startup.disc_hash",
+            "count": 1,
+            "last_frame": 0
+          },
+          {
+            "name": "resident.prepared",
+            "count": 1,
+            "last_frame": 0
+          },
+          {
+            "name": "mmx6.seamless.modified_members",
+            "count": 0,
+            "last_frame": 0
+          },
+          {
+            "name": "mmx6.seamless.packed_loads",
+            "count": 11,
+            "last_frame": 1116
+          },
+          {
+            "name": "mmx6.seamless.sectors",
+            "count": 2112,
+            "last_frame": 1137
+          },
+          {
+            "name": "mmx6.seamless.raw_loads",
+            "count": 11,
+            "last_frame": 1137
+          },
+          {
+            "name": "mmx6.coop.private-committed",
+            "count": 1178,
+            "last_frame": 4049
+          }
+        ],
+        "overflow": 0
+      },
+      "render": {
+        "id": 2011,
+        "ok": true,
+        "plans": 0,
+        "planned": 0,
+        "wanted": 0,
+        "refused": 0,
+        "passes": 0,
+        "aborted": 0,
+        "discarded": 0,
+        "watchdog": 0,
+        "vram_leaks": 0,
+        "nesting_repairs": 0,
+        "device_reads": 0,
+        "last_device_read": "0x00000000",
+        "last_device_read_width": 0,
+        "verify_checks": 0,
+        "verify_mismatch": 0,
+        "dropped": {
+          "spu": 0,
+          "cd": 0,
+          "timer": 0,
+          "dma": 0,
+          "gpu": 0,
+          "other": 0
+        },
+        "last_pass_ms": 1.433,
+        "avg_pass_ms": 1.738,
+        "avg_begin_ms": 0.159,
+        "avg_guest_ms": 1.438,
+        "avg_end_ms": 0.007,
+        "avg_restore_ms": 0.135,
+        "guest_cycles_last": 161152,
+        "disabled": 0,
+        "promotions": 0,
+        "pass_presents": 0,
+        "blended_presents": 0,
+        "expired": 0,
+        "late_presents": 0,
+        "unmatched_flips": 0,
+        "early_presents": 0,
+        "cost_us": 0,
+        "cost_rewarms": 0,
+        "frame_images": 0,
+        "journaled": 589,
+        "image_textures": 0,
+        "image_bytes": 0,
+        "status": 4,
+        "backups_reused": 0,
+        "pass_attempts": 1179,
+        "argument_refused": 0,
+        "status_refused": 0,
+        "begin_refused": 0,
+        "checkpoint_refused": 0,
+        "spans": 0,
+        "span_failures": 0,
+        "local_views": 1179,
+        "local_attempts": 1179,
+        "local_status": 0,
+        "admission": {
+          "plans": 0,
+          "frame": 0,
+          "zero_credit_refusals": 0,
+          "idle_ms": 0.0,
+          "present_ms": 0.0,
+          "prior_pass_ms": 0.0,
+          "present_reserve_ms": 0.0,
+          "spare_ms": 0.0,
+          "frame_ms": 0.0,
+          "cost_ms": 0.0,
+          "budget_ms": 0.0,
+          "wanted": 0,
+          "planned": 0
+        },
+        "last_failure": null,
+        "last_abort_detail": "",
+        "span_fail": {
+          "reason": 0,
+          "pc": "0x00000000",
+          "start": "0x00000000",
+          "stop": "0x00000000",
+          "ra": "0x00000000",
+          "after": "0x00000000",
+          "insns": 0
+        }
+      },
+      "stereo": {
+        "id": 2012,
+        "ok": true,
+        "attempts": 0,
+        "pairs": 0,
+        "refused": 0,
+        "failed": 0,
+        "shed": 0,
+        "status": 4,
+        "last_pair_id": 0,
+        "last_guest_cycle": 0,
+        "eye_cycles": [
+          0,
+          0
+        ],
+        "eye_hashes": [
+          "0000000000000000",
+          "0000000000000000"
+        ],
+        "eye_view": [
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0
+          ]
+        ],
+        "last_eye": -1,
+        "last_failure": "",
+        "last_failed_attempt": 0,
+        "last_failed_eye": 0,
+        "last_failed_reason": "",
+        "retained_pair_id": 0,
+        "last_pair_ms": 0.0,
+        "avg_pair_ms": 0.0,
+        "published": {
+          "valid": 0,
+          "pair_id": 0,
+          "guest_cycle": 0,
+          "width": 0,
+          "height": 0,
+          "staged_mask": 0,
+          "mode": 0,
+          "presents": 0
+        },
+        "captures": []
+      }
+    }
+  ],
+  "profile_startup": {
+    "profile": "mmx6.win64-clang22.loopback",
+    "revision": 4,
+    "selected_sha256": "43fe4cf5a4a6e351ba6d60881700220c7d83cea0e1839382294b5462039035b6",
+    "peers": [
+      {
+        "capabilities": {
+          "actual_image_sha256": "477d5304a5282e753835cd1625e31fd8be2caea61cbfeecda5764f6c9ab6424e",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 4,
+          "selected_sha256": "43fe4cf5a4a6e351ba6d60881700220c7d83cea0e1839382294b5462039035b6",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      },
+      {
+        "capabilities": {
+          "actual_image_sha256": "477d5304a5282e753835cd1625e31fd8be2caea61cbfeecda5764f6c9ab6424e",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 4,
+          "selected_sha256": "43fe4cf5a4a6e351ba6d60881700220c7d83cea0e1839382294b5462039035b6",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      }
+    ]
+  },
+  "profile_final": {
+    "profile": "mmx6.win64-clang22.loopback",
+    "revision": 4,
+    "selected_sha256": "43fe4cf5a4a6e351ba6d60881700220c7d83cea0e1839382294b5462039035b6",
+    "peers": [
+      {
+        "capabilities": {
+          "actual_image_sha256": "477d5304a5282e753835cd1625e31fd8be2caea61cbfeecda5764f6c9ab6424e",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 4,
+          "selected_sha256": "43fe4cf5a4a6e351ba6d60881700220c7d83cea0e1839382294b5462039035b6",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      },
+      {
+        "capabilities": {
+          "actual_image_sha256": "477d5304a5282e753835cd1625e31fd8be2caea61cbfeecda5764f6c9ab6424e",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 4,
+          "selected_sha256": "43fe4cf5a4a6e351ba6d60881700220c7d83cea0e1839382294b5462039035b6",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      }
+    ]
+  },
+  "resolved_state_crc": [
+    {
+      "label": "initial idle",
+      "samples": [
+        {
+          "simulation_tick": 2912,
+          "core": "73e9d268",
+          "mod": "ccefaf02"
+        },
+        {
+          "simulation_tick": 2944,
+          "core": "e8df273f",
+          "mod": "004b402e"
+        },
+        {
+          "simulation_tick": 2976,
+          "core": "966e02df",
+          "mod": "95c0e6e0"
+        },
+        {
+          "simulation_tick": 3008,
+          "core": "62bdb5c9",
+          "mod": "0f88d7ce"
+        },
+        {
+          "simulation_tick": 3040,
+          "core": "a7ccdcd0",
+          "mod": "05aa1dee"
+        },
+        {
+          "simulation_tick": 3072,
+          "core": "3948b439",
+          "mod": "69a20ee6"
+        },
+        {
+          "simulation_tick": 3104,
+          "core": "47ec729b",
+          "mod": "ff44def8"
+        },
+        {
+          "simulation_tick": 3136,
+          "core": "3307a8b1",
+          "mod": "690f51f4"
+        }
+      ],
+      "resolved_through": [
+        3147,
+        3147
+      ]
+    },
+    {
+      "label": "P2 right then release",
+      "samples": [
+        {
+          "simulation_tick": 3200,
+          "core": "42d65503",
+          "mod": "065b0b99"
+        },
+        {
+          "simulation_tick": 3232,
+          "core": "96507959",
+          "mod": "c7f72a6b"
+        },
+        {
+          "simulation_tick": 3264,
+          "core": "681d0871",
+          "mod": "f438d9fd"
+        },
+        {
+          "simulation_tick": 3296,
+          "core": "04c4f705",
+          "mod": "13df6bc5"
+        },
+        {
+          "simulation_tick": 3328,
+          "core": "2c4bf931",
+          "mod": "9428963b"
+        },
+        {
+          "simulation_tick": 3360,
+          "core": "049e5464",
+          "mod": "deccfbc3"
+        },
+        {
+          "simulation_tick": 3392,
+          "core": "795a7c36",
+          "mod": "f60ca795"
+        }
+      ],
+      "resolved_through": [
+        3416,
+        3417
+      ]
+    },
+    {
+      "label": "P1 jump then settle",
+      "samples": [
+        {
+          "simulation_tick": 3488,
+          "core": "bc7dd260",
+          "mod": "f394464d"
+        },
+        {
+          "simulation_tick": 3520,
+          "core": "d99ca312",
+          "mod": "3f271fad"
+        },
+        {
+          "simulation_tick": 3552,
+          "core": "9c85d7ed",
+          "mod": "616734ab"
+        },
+        {
+          "simulation_tick": 3584,
+          "core": "c5466eee",
+          "mod": "25a6394b"
+        },
+        {
+          "simulation_tick": 3616,
+          "core": "18992f41",
+          "mod": "2b420745"
+        },
+        {
+          "simulation_tick": 3648,
+          "core": "9e1d223c",
+          "mod": "3d993f71"
+        },
+        {
+          "simulation_tick": 3680,
+          "core": "74c827e3",
+          "mod": "065b0b99"
+        },
+        {
+          "simulation_tick": 3712,
+          "core": "28529a1e",
+          "mod": "c7f72a6b"
+        }
+      ],
+      "resolved_through": [
+        3716,
+        3716
+      ]
+    },
+    {
+      "label": "F68 after actual independent peer cameras and beyond-one-pane primary separation",
+      "samples": [
+        {
+          "simulation_tick": 4064,
+          "core": "9c5aa3d4",
+          "mod": "991e0aac"
+        },
+        {
+          "simulation_tick": 4096,
+          "core": "05975121",
+          "mod": "76cb489e"
+        },
+        {
+          "simulation_tick": 4128,
+          "core": "8a115ebc",
+          "mod": "a4f3211a"
+        },
+        {
+          "simulation_tick": 4160,
+          "core": "0c95781e",
+          "mod": "8b792dc2"
+        },
+        {
+          "simulation_tick": 4192,
+          "core": "6132afcd",
+          "mod": "208413cc"
+        },
+        {
+          "simulation_tick": 4224,
+          "core": "bd196e76",
+          "mod": "af978816"
+        },
+        {
+          "simulation_tick": 4256,
+          "core": "a14990cb",
+          "mod": "98b2671e"
+        }
+      ],
+      "resolved_through": [
+        4274,
+        4273
+      ]
+    }
+  ],
+  "recordings": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F68-independent-paired-v59-worker-v1\\peer-0\\saves\\input-recordings\\session-1793054013424197-1-0\\inputs.jsonl",
+      "sha256": "585ee1d7e6c421f7009b9560dc3dafe5f090b544a07b94668ebc527cd072928c",
+      "events": 8393,
+      "natives": 3718,
+      "p2_reads": 4675,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "477d5304a5282e753835cd1625e31fd8be2caea61cbfeecda5764f6c9ab6424e",
+        "manifest_sha256": "262f6bbf09ba8570dbcdaf655d8c5288c433db03288c2e7fa3ff48df644cb991",
+        "mode": "netplay",
+        "profile": {
+          "id": "mmx6.win64-clang22.loopback",
+          "revision": 4,
+          "selected_sha256": "43fe4cf5a4a6e351ba6d60881700220c7d83cea0e1839382294b5462039035b6"
+        },
+        "settings_sha256": "0f6389782c8e67f03a1eb79878d41c23988c2a9e1f7578b4882296420f8aa4df",
+        "simulation_contract_sha256": "27574daecfae9b7315276c745a3f2467f2c66ec13fc8062401ce5482b9f25f3f"
+      },
+      "status": {
+        "contract": "mmx6.native-consumption.v1",
+        "epoch": 1,
+        "failure": "",
+        "schema": 1,
+        "scope": "native-consumption diagnostics; replay unimplemented",
+        "status": "finalized"
+      }
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F68-independent-paired-v59-worker-v1\\peer-1\\saves\\input-recordings\\session-1793054013424676-1-0\\inputs.jsonl",
+      "sha256": "cc83fe60c3cb31e7ed45ea1efe409fbf930eca904a9ef580687daa6ea96297f7",
+      "events": 8393,
+      "natives": 3718,
+      "p2_reads": 4675,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "477d5304a5282e753835cd1625e31fd8be2caea61cbfeecda5764f6c9ab6424e",
+        "manifest_sha256": "262f6bbf09ba8570dbcdaf655d8c5288c433db03288c2e7fa3ff48df644cb991",
+        "mode": "netplay",
+        "profile": {
+          "id": "mmx6.win64-clang22.loopback",
+          "revision": 4,
+          "selected_sha256": "43fe4cf5a4a6e351ba6d60881700220c7d83cea0e1839382294b5462039035b6"
+        },
+        "settings_sha256": "baa569afb88f9581811839df70810ce86622485d961bb9f004f7caf86bf443e6",
+        "simulation_contract_sha256": "27574daecfae9b7315276c745a3f2467f2c66ec13fc8062401ce5482b9f25f3f"
+      },
+      "status": {
+        "contract": "mmx6.native-consumption.v1",
+        "epoch": 1,
+        "failure": "",
+        "schema": 1,
+        "scope": "native-consumption diagnostics; replay unimplemented",
+        "status": "finalized"
+      }
+    }
+  ],
+  "checks": {
+    "jump_audio_original_source_bound": true,
+    "hud_presentation_both_peers_completed": true,
+    "declared_build_manifest_bound_to_staged_images": true,
+    "jump_audio_declared_sources_match": true,
+    "host_profile_settled_before_guest": true,
+    "p2_right_reaches_both_peers": true,
+    "p2_right_preserves_p1_x": true,
+    "p1_jump_reaches_both_peers": true,
+    "p1_jump_preserves_p2_y": true,
+    "both_alive_healthy": true,
+    "mailbox_unused": true,
+    "default_resident_loader_committed": true,
+    "jump_audio_final_private_cards_unchanged": true,
+    "jump_audio_owned_pair_cleanup": true,
+    "F68_both_finalized_ordinary_native_recordings": true
+  },
+  "executed_sources": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F68-independent-paired-v59-worker-v1\\caller-executed-source.py",
+      "sha256": "d416a42d36ef757ffdd598b61281e56d0f3af1857d247184a1fdf3c923702b4b",
+      "bytes": 9434
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F68-independent-paired-v59-worker-v1\\actual-adapted-parent.py",
+      "sha256": "dbbf304fe063c398ffbfd6b68aadf619d2832881658c69a3c290e8d63cb67f16",
+      "bytes": 54315
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F68-independent-paired-v59-worker-v1\\F68-observer-executed-source.py",
+      "sha256": "23861f4e962ce20ee5244cc1bb707c0735fc9858b948cbbcc186e6a67aa16acc",
+      "bytes": 8945
+    }
+  ],
+  "limits": [
+    "Exact-image development loopback on this host only; ordinary intro, independent peer-local4:3 views, original X/P1 movement and stationary Zero/P2. No online8:3 split-pair claim.",
+    "F68 actor wrapping only. This does not grant F173 NET, F178 tile-ring distance, fallback, survivor, arrival, replay, audio or campaign qualification. Prior setup failures remain preserved."
+  ],
+  "bypasses": []
+}

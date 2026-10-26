@@ -9291,14 +9291,14 @@
           "src/mods/mmx6_coop_plugin.c:render_actor",
           "src/mods/mmx6_coop_plugin.c:draw_coop_hud"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -9372,9 +9372,76 @@
               "Same-candidate NETPLAY remains required by the ledger. SDK local-pair rendering is offline-only; per-peer netplay views must be separately exercised. Original uncommitted V47 and its zero-attempt run remain preserved."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "ef2751e5994b59b044c81cd80e36e4e1d6232140",
+            "build_identity": {
+              "executable_sha256": "477d5304a5282e753835cd1625e31fd8be2caea61cbfeecda5764f6c9ab6424e",
+              "compiled_manifest_sha256": "262f6bbf09ba8570dbcdaf655d8c5288c433db03288c2e7fa3ff48df644cb991",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "renderer": "OpenGL, elective local_cameras=split",
+              "window": "1280x480 plus640x900/960x720 resize",
+              "input": "two digital virtual host ports",
+              "audio": "dummy muted",
+              "entry": "original cold boot intro"
+            },
+            "action": "Enable native separate local views; move only Zero by ordinary Right/fresh jumps beyond one pane, retain X stationary, measure world/VBlank and resize the actual output.",
+            "outcome": "Both native4:3 panes independently follow their own hero; after364px separation the distant hero does not wrap into the other composed view. All five images reviewed, per-paneHUD and aspect preserved. Nativeworld33/VBlank31..34,307pairs/no host leak, finalized ordinary recording/cards/ownedexit0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-ef2751e-F68-local-private-panes-reviewed.json",
+                "sha256": "8e2fe5641efdeb8efc3dfb0842be629938cf06e14026b50df7b4347d06edd1f2"
+              }
+            ],
+            "limits": [
+              "Actual LOCAL split mode only: two native320x240 views in1280x480 output, separate X/Zero native following and their own meters;1280x480,640x900 and960x720 resizes reviewed. No netplay private-view or other-scene admission.",
+              "Original intro first room, X stationary144/1115, Zero ordinary Right/fresh native jumps to508 with bothHP32. Five composed images independently reviewed: after separation each hero appears only in its own pane, with no distant actor wrapping into the other image.",
+              "Native world33 inside actual SDK VBlank31..34 bracket while both real panes render;307 committed pairs with zero refusals/failures and no private host-state digest leak. This is bounded once-per-frame evidence, not a long performance benchmark.",
+              "Original cold boot and published ordinary inputs only; no checkpoint, position, health, contact or success write. Canonical complete ordinary offline trace/startup artifacts, native cards and owned graceful exit0 pass. No replay or audio equivalence claim.",
+              "364px actor separation does not exceed the original1024x512 descriptor ring; this evidence grants no F178 large-separation map-ring result. No pause/survivor/fallback, other terrain, native state-load or old-save compatibility claim.",
+              "Same-candidate NETPLAY remains required by the ledger. SDK local-pair rendering is offline-only; per-peer netplay views must be separately exercised. Original uncommitted V47 and its zero-attempt run remain preserved."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "ef2751e5994b59b044c81cd80e36e4e1d6232140",
+            "build_identity": {
+              "executable_sha256": "477d5304a5282e753835cd1625e31fd8be2caea61cbfeecda5764f6c9ab6424e",
+              "compiled_manifest_sha256": "262f6bbf09ba8570dbcdaf655d8c5288c433db03288c2e7fa3ff48df644cb991",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "renderer": "OpenGL, cameras=independent on both peers",
+              "input": "owned published localport1 on each peer",
+              "audio": "dummy muted",
+              "entry": "ordinary intro, fresh blank private native cards"
+            },
+            "action": "Move only native X beyond one pane from stationary Zero; inspect both peer-local views and resized output, then compare resolved core/mod state.",
+            "outcome": "Both peer-local views advance with no host leak or distant actor wrapping. Three images per peer reviewed; same-candidate profile/CRC, finalized ordinary recordings, unchanged cards and ownedexit0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-ef2751e-F68-net-peer-views-reviewed.json",
+                "sha256": "82f978455c3073ae009150bf49a51fcbaaf715a09c6d6f87b0da6f50b5cac21b"
+              }
+            ],
+            "limits": [
+              "Exact-image development loopback on this host only; ordinary intro, independent peer-local4:3 views, original X/P1 movement and stationary Zero/P2. No online8:3 split-pair claim.",
+              "F68 actor wrapping only. This does not grant F173 NET, F178 tile-ring distance, fallback, survivor, arrival, replay, audio or campaign qualification. Prior setup failures remain preserved."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "LOCAL exact952dc28/SDKbb5d0a7/UI34b5277 passes actual independent4:3 panes in8:3 output, native Zero366px separation with stationary X, correct per-pane HUD/art and no cross-pane distant-hero wrap in five reviewed images. Nativeworld32 inside VBlank31..34,317 real pairs/no leaks, ordinary finalized trace/cards/ownedexit0. NETPLAY pending; no F178 ring-distance/fallback/survivor claim."
+        "limitations": "LOCAL and NETPLAY passed on exactef2751e/SDK10b9021/UI34b5277. Native heroes separated beyond one pane; all five LOCAL and six NET composed images reviewed with correct private cameras/HUD and no distant actor wrap. Both modes retain finalized ordinary recordings, cards and ownedexit0. No F173NET/F178/fallback/campaign credit."
       }
     },
     {
@@ -14434,9 +14501,45 @@
               "Same-candidate NETPLAY remains required by the ledger. SDK local-pair rendering is offline-only; per-peer netplay views must be separately exercised. Original uncommitted V47 and its zero-attempt run remain preserved."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "ef2751e5994b59b044c81cd80e36e4e1d6232140",
+            "build_identity": {
+              "executable_sha256": "477d5304a5282e753835cd1625e31fd8be2caea61cbfeecda5764f6c9ab6424e",
+              "compiled_manifest_sha256": "262f6bbf09ba8570dbcdaf655d8c5288c433db03288c2e7fa3ff48df644cb991",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "renderer": "OpenGL, elective local_cameras=split",
+              "window": "1280x480 plus640x900/960x720 resize",
+              "input": "two digital virtual host ports",
+              "audio": "dummy muted",
+              "entry": "original cold boot intro"
+            },
+            "action": "Enable native separate local views; move only Zero by ordinary Right/fresh jumps beyond one pane, retain X stationary, measure world/VBlank and resize the actual output.",
+            "outcome": "Both native4:3 panes independently follow their own hero; after364px separation the distant hero does not wrap into the other composed view. All five images reviewed, per-paneHUD and aspect preserved. Nativeworld33/VBlank31..34,307pairs/no host leak, finalized ordinary recording/cards/ownedexit0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-ef2751e-F173-local-private-panes-reviewed.json",
+                "sha256": "299102335323cb31ecebf44cbfbb454206d9a0a51f41c7d616c6552aeada3940"
+              }
+            ],
+            "limits": [
+              "Actual LOCAL split mode only: two native320x240 views in1280x480 output, separate X/Zero native following and their own meters;1280x480,640x900 and960x720 resizes reviewed. No netplay private-view or other-scene admission.",
+              "Original intro first room, X stationary144/1115, Zero ordinary Right/fresh native jumps to508 with bothHP32. Five composed images independently reviewed: after separation each hero appears only in its own pane, with no distant actor wrapping into the other image.",
+              "Native world33 inside actual SDK VBlank31..34 bracket while both real panes render;307 committed pairs with zero refusals/failures and no private host-state digest leak. This is bounded once-per-frame evidence, not a long performance benchmark.",
+              "Original cold boot and published ordinary inputs only; no checkpoint, position, health, contact or success write. Canonical complete ordinary offline trace/startup artifacts, native cards and owned graceful exit0 pass. No replay or audio equivalence claim.",
+              "364px actor separation does not exceed the original1024x512 descriptor ring; this evidence grants no F178 large-separation map-ring result. No pause/survivor/fallback, other terrain, native state-load or old-save compatibility claim.",
+              "Same-candidate NETPLAY remains required by the ledger. SDK local-pair rendering is offline-only; per-peer netplay views must be separately exercised. Original uncommitted V47 and its zero-attempt run remain preserved."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "LOCAL exact952dc28/SDKbb5d0a7/UI34b5277 passes actual independent4:3 panes in8:3 output, native Zero366px separation with stationary X, correct per-pane HUD/art and no cross-pane distant-hero wrap in five reviewed images. Nativeworld32 inside VBlank31..34,317 real pairs/no leaks, ordinary finalized trace/cards/ownedexit0. NETPLAY pending; no F178 ring-distance/fallback/survivor claim."
+        "limitations": "LOCAL exactef2751e/SDK10b9021/UI34b5277 passes actual independent4:3 panes in8:3 output, native Zero364px separation with stationary X, correct per-pane HUD/art and no cross-pane distant-hero wrap in five reviewed images. Nativeworld33 inside VBlank31..34,307 real pairs/no leaks, ordinary finalized trace/cards/ownedexit0. NETPLAY pending; no F178 ring-distance/fallback/survivor claim."
       }
     },
     {
