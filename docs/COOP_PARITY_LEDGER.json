@@ -14716,14 +14716,14 @@
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -14759,9 +14759,74 @@
               "Same-candidate NETPLAY remains required. Current forced loading-only NET profile discards coop camera options; no private NET draw credit. No other stage, fallback, survivor, replay, audio or campaign claim."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "ef2751e5994b59b044c81cd80e36e4e1d6232140",
+            "build_identity": {
+              "executable_sha256": "477d5304a5282e753835cd1625e31fd8be2caea61cbfeecda5764f6c9ab6424e",
+              "compiled_manifest_sha256": "262f6bbf09ba8570dbcdaf655d8c5288c433db03288c2e7fa3ff48df644cb991",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "renderer": "OpenGL, elective local_cameras=split",
+              "window": "1280x480 plus640x900/960x720 resize",
+              "input": "two digital published virtual host ports",
+              "audio": "dummy muted",
+              "entry": "original cold boot intro"
+            },
+            "action": "Keep X stationary; move Zero across authored terrain with fresh original ground/wall jumps and attacks beyond the1024px descriptor ring, then inspect both private views and resizes.",
+            "outcome": "X stays144 while Zero reaches1412; all six composed images show stable separate authored terrain/HUD with no ring alias. World33/VBlank31..34 and928 actual pairs/no leaks; finalized ordinary recording/cards/ownedexit0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-ef2751e-F178-local-ring-reviewed.json",
+                "sha256": "872c5d7332aa9909a747f3870f568158cd3905f0337add6471f546a68c5cb724"
+              }
+            ],
+            "limits": [
+              "LOCAL only: original intro authored terrain, stationary X144 and Zero1412,1268px separation beyond source-authenticated64-column1024px ring. No teleport, checkpoint, inventory, position, health or success writes.",
+              "Six composed images reviewed at initial, first ring crossing, endpoint and three resize shapes; independent native4:3 panes retain their own HUD and stable authored terrain without ring alias or distant actor wrap.",
+              "Ordinary fresh ground/wall jumps and attacks; each source-guarded wall jump reached nativeaction0A ascent.928 actual pairs, no failed/refused/leaked draws; nativeworld33 within actual VBlank31..34. Finalized ordinary recording/startup artifacts/cards/ownedexit0 pass.",
+              "Same-candidate NETPLAY remains required. This LOCAL receipt grants no NET private-draw credit. No other stage, fallback, survivor, replay, audio or campaign claim."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "ef2751e5994b59b044c81cd80e36e4e1d6232140",
+            "build_identity": {
+              "executable_sha256": "477d5304a5282e753835cd1625e31fd8be2caea61cbfeecda5764f6c9ab6424e",
+              "compiled_manifest_sha256": "262f6bbf09ba8570dbcdaf655d8c5288c433db03288c2e7fa3ff48df644cb991",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "renderer": "OpenGL, cameras=independent on both peers",
+              "input": "owned published localport1 on each peer",
+              "audio": "dummy muted",
+              "entry": "ordinary intro, fresh blank private native cards"
+            },
+            "action": "Keep X stationary; move Zero through original ground/wall jumps across authored terrain beyond the1024px ring, inspect both peer-local views through resizes, then compare resolved core/mod state.",
+            "outcome": "Both peer-local views advance with stable separate authored terrain and no host leak or ring alias. Six images per peer reviewed; same-candidate profile/CRC, finalized ordinary recordings, unchanged cards and ownedexit0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-ef2751e-F178-net-peer-views-reviewed.json",
+                "sha256": "b3fa5d645d1bf5f67742721180072824541a04f12e1e8782477dc0a278bfb932"
+              }
+            ],
+            "limits": [
+              "Exact-image development loopback on this host only. Ordinary intro, stationary X/P1 and native Zero/P2 ground/wall jumps beyond the source-authenticated1024px retail ring. Two independent peer-local4:3 views; no online8:3 split-pair claim.",
+              "F178 stable independent authored terrain only. Twelve NET composed images and six same-candidate LOCAL images reviewed. No other stage, long performance benchmark, shared-scene fallback, survivor, replay, audio or campaign credit. Previous failed observer resize run remains preserved."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "LOCAL exact952dc28 passes actual authored terrain across1269px separation, beyond original1024px ring, with stationary X and ordinary Zero ground/wall jumps. Six composed images reviewed, nativeworld33/VBlank30..33,966 actual pairs/no leaks, finalized recording/cards/ownedexit0. NETPLAY pending; forced loading-only profile currently discards camera options."
+        "limitations": "LOCAL and NETPLAY passed on exactef2751e/SDK10b9021/UI34b5277. Original Zero ground/wall jumps separate the heroes beyond the1024px retail ring while X remains stationary. All six LOCAL and twelve NET composed images reviewed with stable independent authored terrain and own HUDs through resizes. Native world/VBlank brackets, profile4/core+modCRC, finalized ordinary recordings/cards/ownedexit0 pass. No other stage, performance/fallback/survivor or campaign credit."
       }
     },
     {
