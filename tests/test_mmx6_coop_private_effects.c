@@ -199,7 +199,7 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     if(shared_probe && address==0x8002C398u) {
         memset(memory(0x80091298u),0,0x70);cpu->gpr[2]=0x80091298u;return;
     }
-    if(shared_probe && (address==0x801EE254u || address==0x8004AE1Cu)) {
+    if(shared_probe && (address==0x80049100u || address==0x801EE254u || address==0x8004AE1Cu)) {
         ++shared_probe_calls;CHECK(shared_fx_call);
 #ifdef MMX6_COOP_MODERN_STATE
         CHECK(!snapshot_ready());
@@ -208,6 +208,13 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
         else {
             CHECK(!zero_projected && !zero_world && psx_mod_read_byte(PLAYER+2)==0);
             CHECK(psx_mod_read_word(OVERLAY)==0x11223344 && psx_mod_read_word(SCRATCH+0x1C)==0x80030100u);
+        }
+        /* Original80049100 reads canonical PLAYER both at initialization
+         * and on subsequent follow updates. Check the allocating context,
+         * without reproducing its character/pose-dependent offset table. */
+        if(address==0x80049100u) {
+            psx_mod_write_word(cpu->gpr[4]+8,psx_mod_read_word(PLAYER+8));
+            psx_mod_write_word(cpu->gpr[4]+12,psx_mod_read_word(PLAYER+12));
         }
         psx_mod_write_byte(PLAYER+0xD8,0x4C);
         psx_mod_write_byte(cpu->gpr[4]+4,1);
@@ -529,6 +536,34 @@ static void deferred_shared_effect_owner_context(void) {
     native_player_init(&cpu,0x8003BD24u);
     for(unsigned i=0;i<96;++i)CHECK(!shared_effect_owners[i]);
 }
+static void deferred_dash_effect_uses_allocating_body(void) {
+    CPUState cpu;setup(&cpu);stage_call=0;shared_probe=1;
+    const uint32_t actor=0x80091298u,table=0x800FA640u;
+    psx_mod_write_word(PLAYER+8,32u<<16);psx_mod_write_word(PLAYER+12,1115u<<16);
+    put32(p2.body+8,168u<<16);put32(p2.body+12,1114u<<16);
+    PlayerContext primary,after;capture_player(&primary);
+    inside=1;enter_zero();CHECK(shared_effect_allocate(&cpu,0x8002C398u));
+    CHECK(cpu.gpr[2]==actor && shared_effect_owners[0]==2);
+    leave_zero_context(1);inside=0;
+    psx_mod_write_byte(actor,0x21);psx_mod_write_byte(actor+1,1);
+    psx_mod_write_word(SCRATCH+0x88,table);psx_mod_write_word(table+4,0x80049100u);
+    cpu.gpr[31]=0x80020438u;cpu.gpr[4]=actor;shared_probe_seat=1;
+    CHECK(shared_effect_callback(&cpu,0x80049100u));
+    CHECK(psx_mod_read_word(actor+8)==168u<<16 && psx_mod_read_word(actor+12)==1114u<<16);
+    capture_player(&after);CHECK(!memcmp(&primary,&after,sizeof primary));
+    CHECK(shared_probe_calls==1 && cpu.gpr[2]==0x1234 && !inside && !zero_projected && !state_track.count);
+    put32(p2.body+8,208u<<16);CHECK(shared_effect_callback(&cpu,0x80049100u));
+    CHECK(psx_mod_read_word(actor+8)==208u<<16 && psx_mod_read_word(PLAYER+8)==32u<<16);
+    cpu.gpr[31]=0x80020434u;CHECK(!shared_effect_callback(&cpu,0x80049100u));
+    cpu.gpr[31]=0x80020438u;psx_mod_write_word(table+4,0x80010000u);
+    CHECK(!shared_effect_callback(&cpu,0x80049100u));psx_mod_write_word(table+4,0x80049100u);
+    shared_probe_delete=1;CHECK(shared_effect_callback(&cpu,0x80049100u));CHECK(!shared_effect_owners[0]);
+    CHECK(shared_effect_allocate(&cpu,0x8002C398u));CHECK(shared_effect_owners[0]==1);
+    psx_mod_write_byte(actor,0x21);psx_mod_write_byte(actor+1,1);
+    shared_probe_delete=shared_probe_seat=0;CHECK(shared_effect_callback(&cpu,0x80049100u));
+    CHECK(psx_mod_read_word(actor+8)==32u<<16 && psx_mod_read_word(actor+12)==1115u<<16);
+    CHECK(shared_probe_calls==4 && !shared_fx_call && !shared_fx_allocate_call && !state_track.count && !state_track.error);
+}
 static void deferred_ui_effect_retains_owner_atlas(void){
     CPUState cpu;setup(&cpu);uint32_t actor=0x80091298u;
     psx_mod_write_byte(actor,1);psx_mod_write_byte(actor+1,17);psx_mod_write_byte(actor+3,1);
@@ -849,6 +884,7 @@ static void yammar_native_upload_coordinates(void) {
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     controller_pair_and_restoration();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
     deferred_shared_effect_owner_context();
+    deferred_dash_effect_uses_allocating_body();
     deferred_ui_effect_retains_owner_atlas();clear_banks();
     arrival_draw_precedes_stage_callback();clear_banks();
     deferred_icon_effect_retains_zero_source();clear_banks();

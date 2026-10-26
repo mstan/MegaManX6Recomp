@@ -1,5 +1,5 @@
 /* Original shared pool80091298..80093C98, allocator8002C398 and deferred
- * dispatch80020430 (return80020438). Giga creates decimal types17/26.
+ * dispatch80020430 (return80020438). Dash follow uses type1; Giga uses17/26.
  * Type26's selected801EE254 is a Zero entry but an unrelated X continuation.
  * Preserve the native selector, loop, order and shared palette/packet state;
  * run the selected callback in its allocating player's actual context. */
@@ -64,7 +64,10 @@ static int shared_effect_callback(CPUState *cpu,uint32_t address) {
     uint32_t actor=cpu->gpr[4];int slot=shared_effect_slot(actor);
     if(slot<0 || !psx_mod_read_byte(actor) || !shared_effect_owners[slot])return 0;
     unsigned type=psx_mod_read_byte(actor+1);
-    if(!((address==0x8004AE1Cu && type==17) || (address==0x801EE254u && type==26)))return 0;
+    /* Original80049100 reads canonical PLAYER for both birth and follow.
+     * A Zero-owned dash must not initialize or chase the stationary primary. */
+    if(!((address==0x80049100u && type==1) ||
+         (address==0x8004AE1Cu && type==17) || (address==0x801EE254u && type==26)))return 0;
     uint32_t table=psx_mod_read_word(SCRATCH+0x88);
     if(table<0x80010000u || table>0x801FFF00u || (table&3u) ||
        psx_mod_read_word(table+type*4u)!=address)return 0;
