@@ -1,0 +1,159 @@
+{
+  "comparison": "F144",
+  "kind": "pinned_original_source_explanation",
+  "status": "source_handoff_and_native_initialized_threat_observed_full_case_pending",
+  "scope": "Only named234-comparison effect-heavy scene setup. No campaign audit.",
+  "original_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+  "original_Amazon_member3_sha256": "68e8b41b5618ccfced88057553597749513f4aeb25191004f886f9d881b633ea",
+  "dispatch": {
+    "stage": 1,
+    "section": 0,
+    "root": "8006DC6C+8",
+    "table": "800F6780",
+    "object_id": 7,
+    "entry": "800EC25C"
+  },
+  "native_handoff": {
+    "seed_pool": "8008EF48,48x9C",
+    "new_allocator": "8002C4C4",
+    "new_pool": "800C1220,80xA4",
+    "new_type": 1,
+    "copied_fields": [
+      "flags0",
+      "subtype2",
+      "xhighA",
+      "yhighE",
+      "placement_origin10",
+      "render40",
+      "render42",
+      "graphics3C"
+    ],
+    "retirement": "8002C9B0 called on the old category0 seed"
+  },
+  "initialized_threat": {
+    "dispatch_table": "800F6AF0",
+    "type1_entry": "800EC300",
+    "phase0_init": "800EC368",
+    "HP_initial": 12,
+    "hp_offset": "5C",
+    "phase_after_init": 1,
+    "action_after_init": 2
+  },
+  "bound_original_placements": [
+    {
+      "address": "800F6540",
+      "x": 544,
+      "y": 380
+    },
+    {
+      "address": "800F6548",
+      "x": 784,
+      "y": 460
+    }
+  ],
+  "spans": [
+    {
+      "member": "exe",
+      "address": "0x8002c4c4",
+      "end_exclusive": "0x8002c530",
+      "sha256": "4669bef7a4cc12596f4e2aa63d4aa2cbec058c69b49b6a85339ddd70437c7990"
+    },
+    {
+      "member": "Amazon_member3",
+      "address": "0x800ec25c",
+      "end_exclusive": "0x800ec300",
+      "sha256": "741568d81d7faafd1a07174c4950d580ca450b18eaed4389e19fbaeedbde92f4"
+    },
+    {
+      "member": "Amazon_member3",
+      "address": "0x800ec300",
+      "end_exclusive": "0x800ec434",
+      "sha256": "56b91772c7a3f3ebc7628369cf87017afa3e88a2f1fa226bdc1a5770bf4ffd36"
+    }
+  ],
+  "failed_runtime_evidence": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v1",
+    "status": "unverified",
+    "distinction": "Independent7488-byte pool reads agree with bulkread. Sourcecategory0 type7 producer is allocated thenfreed, while boundnativeplacements remainallocated. This is expectedhandoff toanothernativepool, notproof oflostworldenemies. Original helper used wrongpool forinitializedthreats."
+  },
+  "limitations": [
+    "No renderer correctness or comparison pass fromsourcealone.",
+    "No runtime/build/source mutation.",
+    "Do not rerun old failed observers unchanged."
+  ],
+  "planned_observers": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F144_worker_heavy_pause_v50_v3.py",
+      "sha256": "20c3a1a8a4d53895fa8c1c0fe38c1acb881843337ff057b90d3276959ea2e6d7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F144-worker-heavy-local-v50-v3.py",
+      "sha256": "ce4f9c986a3b3a6114fb905dc5980653ae16ce8a97af533e52c48147cd9adb0f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F144-worker-heavy-paired-v50-v3.py",
+      "sha256": "a43c475465725ee9f2762e7aa153b3d58bf95efb4d28e3c7bd965faad7034a14"
+    }
+  ],
+  "runtime_initialized_threat_observation": {
+    "output": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v2",
+    "status": "failed_capture_not_comparison_pass",
+    "native_type": 1,
+    "native_pool": "800C1220",
+    "hp": 12,
+    "phase": 1,
+    "action": 2,
+    "origin": "800F6540",
+    "x": 526,
+    "y": 386,
+    "visible": 1,
+    "camera": {
+      "x": 241,
+      "y": 208
+    },
+    "capture": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v2\\ammo-hud\\F144\\peer-0-actual-native-encounter-before-effects.png",
+    "review": "Worker inspected composed output: real green native snail next to both actors, two green life meters and layered native Amazon foreground/background. Full effect/menu restoration not yet performed."
+  },
+  "capture_observer_fix": {
+    "reason": "Both SDKvram_peek andgl_fbo_peek caprectangles at128?128. The originalobserver requested one256-word8-bit CLUT rectangle and strictpeek rejected SDKclamping.",
+    "change": "Read each256-word8-bit CLUT as twoexact128-word rectangles. Retain allactualpaletteworddata andstrictresponsebounds.",
+    "source": "SDK43 runtime/src/debug_server.c:11037,11067"
+  },
+  "local_case_result": {
+    "status": "all_native_case_and_parent_gates_passed_worker_visual_review_complete",
+    "output": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3",
+    "qualification_sha256": "0363d03f8f68ff74f936b9d2999b832593561f94d473a25b758392fbad92524d",
+    "receipt": "docs/evidence/mmx6-render/manifest-bound-7caed4d-F144-heavy-native-encounter-local-worker-reviewed.json",
+    "comparison_aggregate": "unverified_pending_NETPLAY"
+  },
+  "paired_v3_result": {
+    "status": "failed_no_comparison_credit",
+    "output": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v3",
+    "qualification_sha256": "81c0f2f408f727da8a0a92b28c9f5fa89a45221780c32affadf05925c5ffbb1f",
+    "error": "F144 lost a living hero",
+    "completed": "Genuine reviewedQAcard nativeLoad/selector/Amazonmission andsource-bound originalvisible initializedthreat onbothpeers. Bothencounter-before-effects composedcaptures/GP0retained.",
+    "actual_last_observed_geometry": [
+      {
+        "hero": "X",
+        "x": 379.5,
+        "y": 331,
+        "hp": 32
+      },
+      {
+        "hero": "Zero",
+        "x": 447,
+        "y": 362,
+        "hp": 32
+      }
+    ],
+    "inference": "Zero onlowerledge wasclose tothe approaching originalsnail duringseveralhundred nativeupdates ofthe slowtwo-peer diagnosticcapture. Nativecontact deathis plausible, notproved becauseoriginalobserverdidnotretain rejectedlivenessstate.",
+    "protected": "Bothpeers exitedgracefully0; source/manifest/profile/cards intact. Bothordinaryrecordings finalized. No post-caseCRCwindow andno heavy-effects/menusresult."
+  },
+  "next_prepared_attempt": {
+    "status": "syntax_checked_not_launched",
+    "caller": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F144-worker-heavy-paired-v50-v4.py",
+    "helper": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F144_worker_heavy_pause_v50_v4.py",
+    "change": "Independent ordinaryRight releaseatobservedx375; requirebothactualheroes oneachpeer x375..410/y<=350 onthe alreadyLOCAL-qualifiedraisedplatform. Retainexactrejectedlivingobservation/bodies. Samevisibleinitializedoriginalthreat gate andfrozenF144effect/menu/restorationchecks.",
+    "wait_for": "Root currently owns native/buildslot forV51; do notlaunchconcurrently."
+  }
+}

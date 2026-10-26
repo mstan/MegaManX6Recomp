@@ -1,0 +1,285 @@
+{
+  "schema": 1,
+  "comparison": "F144",
+  "frozen_row_sha256": "d3e76698a2d2fff65517afa3ec2f68df1ba25d9a2426f3e422d74e9146f904cf",
+  "mode": "local",
+  "status": "worker_reviewed_mode_pass_root_ledger_review_pending",
+  "candidate": {
+    "schema": 1,
+    "kind": "actual_retained_V50_native_card_consumer_binding",
+    "candidate_source": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+    "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+    "exe_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+    "declared_manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+    "debug_manifest": {
+      "manifest_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v50-ice-contact-debug\\psx_build_manifest\\psx-runtime\\Release\\manifest.json",
+      "manifest_file_sha256": "6121fd305e858af870d0a7e3e24693df6c62e2e7da844fff80f497f4206c9381"
+    }
+  },
+  "checks": {
+    "actual_native_enemy_and_both_Yammar_families": true,
+    "each_owner_actual_native_pause_and_resume": true,
+    "actual_world_continues_after_resume": true,
+    "complete_composed_GP0_palette_texel_observations": true
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\qualification.json",
+    "sha256": "0363d03f8f68ff74f936b9d2999b832593561f94d473a25b758392fbad92524d"
+  },
+  "case": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\F144-observations-with-prerequisites.json",
+    "sha256": "f5e69598c5d20c47157d7181f64760894894bd61de80666ce53ff27ad86c3218"
+  },
+  "observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\F144-helper-executed-source.py",
+    "sha256": "20c3a1a8a4d53895fa8c1c0fe38c1acb881843337ff057b90d3276959ea2e6d7"
+  },
+  "caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\caller-executed-source.py",
+    "sha256": "ce4f9c986a3b3a6114fb905dc5980653ae16ce8a97af533e52c48147cd9adb0f"
+  },
+  "source_contract": {
+    "original_member3_sha256": "68e8b41b5618ccfced88057553597749513f4aeb25191004f886f9d881b633ea",
+    "seed_pool": "8008EF48,48x9C",
+    "seed_dispatch": "original Amazon type7 800EC25C..800EC300 allocates8002C4C4, copies placement origin to native type1, retires seed8002C9B0",
+    "initialized_threat_pool": "800C1220,80xA4",
+    "threat_dispatch": "original800EC300..800EC434; init800EC368 sets phase1/action2/HP12 at+5C",
+    "source_guards": [
+      {
+        "peer": 0,
+        "address": "0x800ec25c",
+        "end_exclusive": "0x800ec300",
+        "sha256": "741568d81d7faafd1a07174c4950d580ca450b18eaed4389e19fbaeedbde92f4"
+      },
+      {
+        "peer": 0,
+        "address": "0x800ec300",
+        "end_exclusive": "0x800ec434",
+        "sha256": "56b91772c7a3f3ebc7628369cf87017afa3e88a2f1fa226bdc1a5770bf4ffd36"
+      }
+    ]
+  },
+  "captures": [
+    {
+      "label": "actual-native-encounter-before-effects",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-actual-native-encounter-before-effects.png",
+        "sha256": "282dd07f014bdca1433d9448a1f371194320908dd411b49adfcb62ddcf647295"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-actual-native-encounter-before-effects-completed-GP0.json.gz",
+        "sha256": "7d7efc7ec8eba957360800ce3a8bcd551bb7f00dc60b43be963fbde720a5d709",
+        "frame": 3296,
+        "commands": 742
+      },
+      "life_meter_anchors": {
+        "two_native_meters": true,
+        "matching_native_anchor": true
+      },
+      "palette_rows": 16,
+      "texture_regions": 4
+    },
+    {
+      "label": "actual-heavy-native-effects",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-actual-heavy-native-effects.png",
+        "sha256": "1edce2790dcab3ca4edd63d5d1e2b1e99e167befef2ee04e80ea61268d68f113"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-actual-heavy-native-effects-completed-GP0.json.gz",
+        "sha256": "22f1690682d6793f95779c6caa4abf7bb39508b7229c6cbcb14c8af3df3be8f1",
+        "frame": 3523,
+        "commands": 819
+      },
+      "life_meter_anchors": {
+        "two_native_meters": true,
+        "matching_native_anchor": true
+      },
+      "palette_rows": 16,
+      "texture_regions": 4
+    },
+    {
+      "label": "owner0-actual-native-menu",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-owner0-actual-native-menu.png",
+        "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-owner0-actual-native-menu-completed-GP0.json.gz",
+        "sha256": "676ba4f3102dd1001cbf589bc9d13b6ee29cfcd159d24a818025c9f2fd45de35",
+        "frame": 3609,
+        "commands": 1118
+      },
+      "life_meter_anchors": null,
+      "palette_rows": 0,
+      "texture_regions": 0
+    },
+    {
+      "label": "owner0-actual-native-resumed",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-owner0-actual-native-resumed.png",
+        "sha256": "1aca6523730cb9e19e6a06a0f63938776382ac594f7bba716dc4125cfefdc2a9"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-owner0-actual-native-resumed-completed-GP0.json.gz",
+        "sha256": "a3d24abcafe5b83c05bc53d4c7f15554fdbd48e6b1002c13f4cec7f026659582",
+        "frame": 3689,
+        "commands": 814
+      },
+      "life_meter_anchors": {
+        "two_native_meters": true,
+        "matching_native_anchor": true
+      },
+      "palette_rows": 16,
+      "texture_regions": 4
+    },
+    {
+      "label": "owner1-actual-native-menu",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-owner1-actual-native-menu.png",
+        "sha256": "f847bede1145215d1de1600e05b8e47055babd9905fc90d9c51062cbac8f8bb1"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-owner1-actual-native-menu-completed-GP0.json.gz",
+        "sha256": "bcc1c304af38640cb6146fbf9d0a7bc81514e605bd0e5487d102cf22b6109523",
+        "frame": 3768,
+        "commands": 1094
+      },
+      "life_meter_anchors": null,
+      "palette_rows": 0,
+      "texture_regions": 0
+    },
+    {
+      "label": "owner1-actual-native-resumed",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-owner1-actual-native-resumed.png",
+        "sha256": "f9af6cb8414d81eac68c024f19166bdfaa00132bda3c288b3fb85efbe810e2a4"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-owner1-actual-native-resumed-completed-GP0.json.gz",
+        "sha256": "3ce958154438fa1c215db7e104d1d962b70fc8123d851cab709cc2c83bac98fc",
+        "frame": 3842,
+        "commands": 820
+      },
+      "life_meter_anchors": {
+        "two_native_meters": true,
+        "matching_native_anchor": true
+      },
+      "palette_rows": 16,
+      "texture_regions": 4
+    },
+    {
+      "label": "native-world-after-resume",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-native-world-after-resume.png",
+        "sha256": "22655ff1d7ee6b3c29b055ef0ca8aba3176c2d8a4fcd25e7d5056db48cd431bd"
+      },
+      "completed_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-native-world-after-resume-completed-GP0.json.gz",
+        "sha256": "1a86c10ef4429de2aefb67a3ccf4a8bae14cbaabdd69747654b2103e948e1bae",
+        "frame": 3916,
+        "commands": 814
+      },
+      "life_meter_anchors": {
+        "two_native_meters": true,
+        "matching_native_anchor": true
+      },
+      "palette_rows": 16,
+      "texture_regions": 4
+    }
+  ],
+  "menus": [
+    {
+      "owner": 0,
+      "before_index": 69,
+      "opened_index": 71,
+      "resumed_index": 79
+    },
+    {
+      "owner": 1,
+      "before_index": 85,
+      "opened_index": 87,
+      "resumed_index": 96
+    }
+  ],
+  "unrelated_scenery_ROI": [
+    {
+      "peer": 0,
+      "name": "upper_native_branch",
+      "rectangle": [
+        380,
+        10,
+        750,
+        100
+      ],
+      "labels": [
+        "actual-native-encounter-before-effects",
+        "actual-heavy-native-effects",
+        "owner0-actual-native-resumed",
+        "owner1-actual-native-resumed",
+        "native-world-after-resume"
+      ],
+      "equals_pre_effects": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "sha256": [
+        "377dbd0112fa5a5f0395c4511f8d082157184f354570e8c32886a36c5fd41385",
+        "377dbd0112fa5a5f0395c4511f8d082157184f354570e8c32886a36c5fd41385",
+        "377dbd0112fa5a5f0395c4511f8d082157184f354570e8c32886a36c5fd41385",
+        "377dbd0112fa5a5f0395c4511f8d082157184f354570e8c32886a36c5fd41385",
+        "377dbd0112fa5a5f0395c4511f8d082157184f354570e8c32886a36c5fd41385"
+      ]
+    },
+    {
+      "peer": 0,
+      "name": "lower_native_rocks",
+      "rectangle": [
+        100,
+        650,
+        900,
+        710
+      ],
+      "labels": [
+        "actual-native-encounter-before-effects",
+        "actual-heavy-native-effects",
+        "owner0-actual-native-resumed",
+        "owner1-actual-native-resumed",
+        "native-world-after-resume"
+      ],
+      "equals_pre_effects": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "sha256": [
+        "6c2a6f586e5dc164da90683dde7f523feaa962eac50c5ce0d04d77ed6a216d6a",
+        "6c2a6f586e5dc164da90683dde7f523feaa962eac50c5ce0d04d77ed6a216d6a",
+        "6c2a6f586e5dc164da90683dde7f523feaa962eac50c5ce0d04d77ed6a216d6a",
+        "6c2a6f586e5dc164da90683dde7f523feaa962eac50c5ce0d04d77ed6a216d6a",
+        "6c2a6f586e5dc164da90683dde7f523feaa962eac50c5ce0d04d77ed6a216d6a"
+      ]
+    }
+  ],
+  "bypasses": [
+    "Audited offline command8 selects original AmazonC0 before testing; authored reachability skipped. Audited command9 grants both native inventories only; no HP, selection, effects, action, palette, camera or outcome values are authored."
+  ],
+  "worker_visual_review": "Inspected every named composed image. Genuine original green native threat and both native Yammar option families/effects; two life meters and layered native Amazon scenery remain intact after both owners pause/resume and at the final continuing world frame.",
+  "limits": [
+    "No all-scene or all-palette equality claim. Ordinary RAM, completed GP0, CPU/GPU texels/palettes and composed captures are nearby separate observations.",
+    "LOCAL owner0 menu capture is a black native fade; actual ownedpause/resume is observed, and LOCAL owner1 menu is visible. No complete visible LOCAL X-menu screenshot is claimed.",
+    "The LOCAL audited original checkpoint and inventory prerequisites bypass campaign reachability. Its tainted recording is explicitly refused for normal capture/replay. NETPLAY uses genuine reviewedQAcard nativeLoad/selector/mission arrival with ordinary finalizedrecordings."
+  ]
+}
