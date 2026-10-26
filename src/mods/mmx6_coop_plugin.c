@@ -1570,6 +1570,15 @@ static int zero_icon_effect(uint32_t actor) {
     return owned && psx_mod_read_byte(actor) && offset<ASSET_SPACE &&
         psx_mod_read_word(actor+0x3C)==assembly+offset;
 }
+static int zero_dash_effect(uint32_t actor) {
+    int slot=shared_effect_slot(actor);
+    /* Original80049100 resolves assembly word4. Its Zero shapes and C3
+     * palette differ from the shared X atlas even after owner projection. */
+    uint32_t offset=assembly?psx_mod_read_word(assembly+4):ASSET_SPACE;
+    return slot>=0 && shared_effect_owners[slot]==2 && psx_mod_read_byte(actor) &&
+        psx_mod_read_byte(actor+1)==1 && offset<ASSET_SPACE &&
+        psx_mod_read_word(actor+0x3C)==assembly+offset;
+}
 static int zero_death_effect(uint32_t actor) {
     /* Native global FX11 resolves assembly word4 and remaps packed icon
      * tiles (flags21). Its original origin is already retained at birth;
@@ -1583,7 +1592,7 @@ static int zero_death_effect(uint32_t actor) {
         psx_mod_read_word(actor+0x3C)==assembly+offset;
 }
 static uint16_t zero_atlas_effect_bank(uint16_t page,uint16_t clut,uint16_t tile,int menu) {
-    /* Original type17 UI and type26/44 packed icon shapes share VRAM with X's
+    /* Original type1 dash, type17 UI and type26/44 icons share VRAM with X's
      * different PL00 art. Decode the original private atlas and the native
      * menu/player palette, retaining actual page, UVs, tint and blending.
      * The virtual source key is outside the compressed player archive. */
@@ -1723,7 +1732,7 @@ static void render_actor(CPUState *cpu, uint32_t actor, uint32_t arena) {
     }
     /* Common effects use the stage's already resident textures. Only native
      * Zero frames need the retained host bank instead of X's texture slot. */
-    int ui=zero_ui_effect(actor),icons=zero_icon_effect(actor)||zero_death_effect(actor);
+    int ui=zero_ui_effect(actor),icons=zero_icon_effect(actor)||zero_death_effect(actor)||zero_dash_effect(actor);
     if (!ui && !icons && !render_x_death && (table<assets || table-assets>=compressed_size)) {
         giga_packet_trace("native-only",actor);return;
     }
@@ -1816,7 +1825,7 @@ static int render_survivor(CPUState *cpu, uint32_t address) {
     uint32_t actor=cpu->gpr[4];
     if(world_render || !enrolled || failed || psx_mod_read_byte(PLAY)!=0x0A ||
         !psx_mod_texture_banks_supported())return 0;
-    int retained=zero_ui_effect(actor)||zero_icon_effect(actor)||zero_death_effect(actor);
+    int retained=zero_ui_effect(actor)||zero_icon_effect(actor)||zero_death_effect(actor)||zero_dash_effect(actor);
     if (!zero_world && !retained) return 0;
     int shot=actor>=0x800950A0 && actor<0x800964A0 && !((actor-0x800950A0)%0xA0);
     int trail=actor>=0x800972F8 && actor<0x80097418 && !((actor-0x800972F8)%0x60);
