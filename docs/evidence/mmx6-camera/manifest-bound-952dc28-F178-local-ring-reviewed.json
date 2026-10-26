@@ -1,0 +1,796 @@
+{
+  "schema": 1,
+  "comparison": "F178",
+  "frozen_row_sha256": "86f8466db244f4f02b57d052051323fa30d22aa8da0d93390037f8574b1eaca1",
+  "mode": "local",
+  "result": "passed",
+  "candidate": "952dc28ac334a98187ed546a7b6fbee2c540aef5",
+  "build_identity": {
+    "executable_sha256": "5c76a3fd89e98be3f5cbf144828de0a8581ebfdeab8f9803003f4d3b90ae0b7d",
+    "compiled_manifest_sha256": "e3f41e415177df938d9422384de6baee82fb64016e0d970c340f724a8574a418",
+    "sdk_commit": "bb5d0a7ec003d7e33270e51c270ea89dfea5c081",
+    "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F178-native-ring-local-v58-worker-v2\\qualification.json",
+    "sha256": "fa7a3d5d3a336035c5d98a2975f1d8d95a9f90115f528764c74a4c0acc181d84",
+    "bytes": 13419674
+  },
+  "root_composed_review": [
+    {
+      "label": "initial-8by3-two-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F178-native-ring-local-v58-worker-v2\\hud\\initial-8by3-two-views.png",
+      "sha256": "1bcfd8387764337c77adc7e1512359ab524d95d9544766de345f5c34cf7ea69b",
+      "bytes": 1843888,
+      "video": {
+        "id": 1318,
+        "ok": true,
+        "dynamic": 0,
+        "level": 1,
+        "floor": 0,
+        "alloc_scale": 6,
+        "backend": "opengl",
+        "preset": 0,
+        "reference_lines": 240,
+        "requested_scale": 1,
+        "effective_scale": 1,
+        "texture_filter": 0,
+        "internal_lines": 240,
+        "gl": 1,
+        "gl_max_dim": 32768,
+        "gl_max_scale": 32,
+        "gl_swap_interval": 0,
+        "gl_clamp_reason": 0,
+        "gl_alloc_retries": 0,
+        "gl_budget_mib": 2048,
+        "fbo_w": 1024,
+        "fbo_h": 512,
+        "hidpi_window": 0,
+        "window_w": 1280,
+        "window_h": 480,
+        "drawable_w": 1280,
+        "drawable_h": 480,
+        "display_x": 0,
+        "display_y": 0,
+        "display_w": 320,
+        "display_h": 240,
+        "hr_scale": 1,
+        "windowed": 0,
+        "hires_window_x": 0,
+        "hires_window_w": 0,
+        "hires_fbo_w": 0,
+        "hires_fbo_h": 0,
+        "hires_window_grows": 0,
+        "hires_window_tiles": 0,
+        "hires_window_mib": 0
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 11010048,
+          "y_raw": 73007104,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "label": "beyond-original1024px-ring",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F178-native-ring-local-v58-worker-v2\\hud\\beyond-original1024px-ring.png",
+      "sha256": "eb62b66ab235c766fcd3dac220def4941a495e9967537443ef1932b858148376",
+      "bytes": 1843888,
+      "video": {
+        "id": 1872,
+        "ok": true,
+        "dynamic": 0,
+        "level": 1,
+        "floor": 0,
+        "alloc_scale": 6,
+        "backend": "opengl",
+        "preset": 0,
+        "reference_lines": 240,
+        "requested_scale": 1,
+        "effective_scale": 1,
+        "texture_filter": 0,
+        "internal_lines": 240,
+        "gl": 1,
+        "gl_max_dim": 32768,
+        "gl_max_scale": 32,
+        "gl_swap_interval": 0,
+        "gl_clamp_reason": 0,
+        "gl_alloc_retries": 0,
+        "gl_budget_mib": 2048,
+        "fbo_w": 1024,
+        "fbo_h": 512,
+        "hidpi_window": 0,
+        "window_w": 1280,
+        "window_h": 480,
+        "drawable_w": 1280,
+        "drawable_h": 480,
+        "display_x": 0,
+        "display_y": 0,
+        "display_w": 320,
+        "display_h": 240,
+        "hr_scale": 1,
+        "windowed": 0,
+        "hires_window_x": 0,
+        "hires_window_w": 0,
+        "hires_fbo_w": 0,
+        "hires_fbo_h": 0,
+        "hires_window_grows": 0,
+        "hires_window_tiles": 0,
+        "hires_window_mib": 0
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 49,
+          "hp": 32,
+          "x_raw": 77070336,
+          "y_raw": 63748096,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "label": "separated-native-follow",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F178-native-ring-local-v58-worker-v2\\hud\\separated-native-follow.png",
+      "sha256": "7667029ffcb41368a2671a36e2dd27c831a51136cd48d522e3ba2af8454c7fd7",
+      "bytes": 1843888,
+      "video": {
+        "id": 2045,
+        "ok": true,
+        "dynamic": 0,
+        "level": 1,
+        "floor": 0,
+        "alloc_scale": 6,
+        "backend": "opengl",
+        "preset": 0,
+        "reference_lines": 240,
+        "requested_scale": 1,
+        "effective_scale": 1,
+        "texture_filter": 0,
+        "internal_lines": 240,
+        "gl": 1,
+        "gl_max_dim": 32768,
+        "gl_max_scale": 32,
+        "gl_swap_interval": 0,
+        "gl_clamp_reason": 0,
+        "gl_alloc_retries": 0,
+        "gl_budget_mib": 2048,
+        "fbo_w": 1024,
+        "fbo_h": 512,
+        "hidpi_window": 0,
+        "window_w": 1280,
+        "window_h": 480,
+        "drawable_w": 1280,
+        "drawable_h": 480,
+        "display_x": 0,
+        "display_y": 0,
+        "display_w": 320,
+        "display_h": 240,
+        "hr_scale": 1,
+        "windowed": 0,
+        "hires_window_x": 0,
+        "hires_window_w": 0,
+        "hires_fbo_w": 0,
+        "hires_fbo_h": 0,
+        "hires_window_grows": 0,
+        "hires_window_tiles": 0,
+        "hires_window_mib": 0
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 7,
+          "hp": 32,
+          "x_raw": 92602368,
+          "y_raw": 66408960,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "label": "resize-640x900",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F178-native-ring-local-v58-worker-v2\\hud\\resize-640x900.png",
+      "sha256": "b3a27dc299f8d6a3034c1215f3ef3bdba81c289ca627a6ff41b1dd34cc5d755b",
+      "bytes": 1729098,
+      "video": {
+        "id": 2064,
+        "ok": true,
+        "dynamic": 0,
+        "level": 1,
+        "floor": 0,
+        "alloc_scale": 6,
+        "backend": "opengl",
+        "preset": 0,
+        "reference_lines": 240,
+        "requested_scale": 1,
+        "effective_scale": 1,
+        "texture_filter": 0,
+        "internal_lines": 240,
+        "gl": 1,
+        "gl_max_dim": 32768,
+        "gl_max_scale": 32,
+        "gl_swap_interval": 0,
+        "gl_clamp_reason": 0,
+        "gl_alloc_retries": 0,
+        "gl_budget_mib": 2048,
+        "fbo_w": 1024,
+        "fbo_h": 512,
+        "hidpi_window": 0,
+        "window_w": 640,
+        "window_h": 900,
+        "drawable_w": 640,
+        "drawable_h": 900,
+        "display_x": 0,
+        "display_y": 0,
+        "display_w": 320,
+        "display_h": 240,
+        "hr_scale": 1,
+        "windowed": 0,
+        "hires_window_x": 0,
+        "hires_window_w": 0,
+        "hires_fbo_w": 0,
+        "hires_fbo_h": 0,
+        "hires_window_grows": 0,
+        "hires_window_tiles": 0,
+        "hires_window_mib": 0
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 92602368,
+          "y_raw": 70451200,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "label": "resize-960x720",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F178-native-ring-local-v58-worker-v2\\hud\\resize-960x720.png",
+      "sha256": "225e0666f266f933b08c4e0a4690cccf9db9339a1aa5c76945fa28caffdee323",
+      "bytes": 2074543,
+      "video": {
+        "id": 2076,
+        "ok": true,
+        "dynamic": 0,
+        "level": 1,
+        "floor": 0,
+        "alloc_scale": 6,
+        "backend": "opengl",
+        "preset": 0,
+        "reference_lines": 240,
+        "requested_scale": 1,
+        "effective_scale": 1,
+        "texture_filter": 0,
+        "internal_lines": 240,
+        "gl": 1,
+        "gl_max_dim": 32768,
+        "gl_max_scale": 32,
+        "gl_swap_interval": 0,
+        "gl_clamp_reason": 0,
+        "gl_alloc_retries": 0,
+        "gl_budget_mib": 2048,
+        "fbo_w": 1024,
+        "fbo_h": 512,
+        "hidpi_window": 0,
+        "window_w": 960,
+        "window_h": 720,
+        "drawable_w": 960,
+        "drawable_h": 720,
+        "display_x": 0,
+        "display_y": 240,
+        "display_w": 320,
+        "display_h": 240,
+        "hr_scale": 1,
+        "windowed": 0,
+        "hires_window_x": 0,
+        "hires_window_w": 0,
+        "hires_fbo_w": 0,
+        "hires_fbo_h": 0,
+        "hires_window_grows": 0,
+        "hires_window_tiles": 0,
+        "hires_window_mib": 0
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 92602368,
+          "y_raw": 70451200,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ]
+    },
+    {
+      "label": "resize-1280x480",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F178-native-ring-local-v58-worker-v2\\hud\\resize-1280x480.png",
+      "sha256": "3fb9c5016c097e3013ec7b929681f414110de8cf678496bbfb09e0e3313745ab",
+      "bytes": 1843888,
+      "video": {
+        "id": 2087,
+        "ok": true,
+        "dynamic": 0,
+        "level": 1,
+        "floor": 0,
+        "alloc_scale": 6,
+        "backend": "opengl",
+        "preset": 0,
+        "reference_lines": 240,
+        "requested_scale": 1,
+        "effective_scale": 1,
+        "texture_filter": 0,
+        "internal_lines": 240,
+        "gl": 1,
+        "gl_max_dim": 32768,
+        "gl_max_scale": 32,
+        "gl_swap_interval": 0,
+        "gl_clamp_reason": 0,
+        "gl_alloc_retries": 0,
+        "gl_budget_mib": 2048,
+        "fbo_w": 1024,
+        "fbo_h": 512,
+        "hidpi_window": 0,
+        "window_w": 1280,
+        "window_h": 480,
+        "drawable_w": 1280,
+        "drawable_h": 480,
+        "display_x": 0,
+        "display_y": 0,
+        "display_w": 320,
+        "display_h": 240,
+        "hr_scale": 1,
+        "windowed": 0,
+        "hires_window_x": 0,
+        "hires_window_w": 0,
+        "hires_fbo_w": 0,
+        "hires_fbo_h": 0,
+        "hires_window_grows": 0,
+        "hires_window_tiles": 0,
+        "hires_window_mib": 0
+      },
+      "players": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 9437184,
+          "y_raw": 73072640,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x_raw": 92602368,
+          "y_raw": 70451200,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ]
+    }
+  ],
+  "native_positions": {
+    "initial": [
+      {
+        "active": 1,
+        "character": 0,
+        "state": 1,
+        "action": 2,
+        "hp": 32,
+        "x_raw": 9437184,
+        "y_raw": 73072640,
+        "weapon": 0,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ]
+      },
+      {
+        "active": 1,
+        "character": 1,
+        "state": 1,
+        "action": 2,
+        "hp": 32,
+        "x_raw": 11010048,
+        "y_raw": 73007104,
+        "weapon": 0,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ]
+      }
+    ],
+    "final": [
+      {
+        "active": 1,
+        "character": 0,
+        "state": 1,
+        "action": 2,
+        "hp": 32,
+        "x_raw": 9437184,
+        "y_raw": 73072640,
+        "weapon": 0,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ]
+      },
+      {
+        "active": 1,
+        "character": 1,
+        "state": 1,
+        "action": 7,
+        "hp": 32,
+        "x_raw": 92602368,
+        "y_raw": 66375168,
+        "weapon": 0,
+        "ammo": [
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288,
+          288
+        ]
+      }
+    ],
+    "separation_pixels": 1269
+  },
+  "original_ring_source": {
+    "base": "800A21B8",
+    "layer_bytes": 4096,
+    "columns": 64,
+    "rows": 32,
+    "tile_pixels": 16,
+    "world_extent": [
+      1024,
+      512
+    ],
+    "guards": [
+      {
+        "first": "0x800269f4",
+        "end": "0x80026d44",
+        "sha256": "da364e4bd59b1625aaead12deba45acc2ee3fa27642beb6c564b836581858d02"
+      },
+      {
+        "first": "0x80026ecc",
+        "end": "0x800273e4",
+        "sha256": "af7c9730da75ec8c4a21fdce87b971eb1b65025161b9f9b6bceeaee5fe2836c0"
+      },
+      {
+        "first": "0x80036b10",
+        "end": "0x80036c28",
+        "sha256": "59c11f42d331a866d2fd7bb45e19c774ccfe4b30d81a2e12dc9f70a80a31efb2"
+      },
+      {
+        "first": "0x8003a33c",
+        "end": "0x8003a394",
+        "sha256": "d9027290fa43b1796511dafc015de39eee040ac7260b494340d0fa2306929de4"
+      },
+      {
+        "first": "0x8003b440",
+        "end": "0x8003b548",
+        "sha256": "69a686dda0476d899eb31e1ad3f80bcce9af692a2cef882e5b3473542ed97ea8"
+      }
+    ]
+  },
+  "wall_jumps": [
+    {
+      "phase": "complete",
+      "start_tick": 418,
+      "start_y_raw": 70132736,
+      "press_tick": 420,
+      "press_y_raw": 70132736,
+      "accepted": {
+        "tick": 423,
+        "action": 10,
+        "x_raw": 41091072,
+        "y_raw": 69764096,
+        "body_hex": "01000101010a00000000730200842804000000000040020e0000750200242e040000feff005e05000000000000420000d0f61e80ccec1e801800009fa481039f0005007803000125ff030000000000000000000004ea1e8000000000202020000000000000000001543d07800d0008000000000000000000000000008100810000000000000000000001090000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000750200242e040000000000002001000000000000000000000000"
+      }
+    },
+    {
+      "phase": "complete",
+      "start_tick": 445,
+      "start_y_raw": 67297280,
+      "press_tick": 449,
+      "press_y_raw": 67297280,
+      "accepted": {
+        "tick": 455,
+        "action": 10,
+        "x_raw": 40828928,
+        "y_raw": 66242048,
+        "body_hex": "01000101010a000000006f0200c6f203000000000040020e0000710200e2f7030000feff00da04000000000000420000d0f61e80ccec1e801800009fa481039f0005007801000125ff030000000000000000000004ea1e8000000000202020000000000000000001543d0780090002000000000000000000000000008100810000000000000000000000070000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000710200e2f7030000000000002001000000000000000000000000"
+      }
+    }
+  ],
+  "world_once": {
+    "native_world_delta": 33,
+    "vblank_delta_bracket": [
+      30,
+      33
+    ]
+  },
+  "private_pairs": {
+    "initial": 58,
+    "final": 966,
+    "failed": 0,
+    "refused": 0,
+    "host_state_leaks": 0
+  },
+  "recording": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F178-native-ring-local-v58-worker-v2\\candidate\\saves\\input-recordings\\session-1793050549965273-1-0\\inputs.jsonl",
+    "sha256": "8bc8340fba29cf87ad22e9b4901f17d45bc1f8cfe96a9e50ae215e883fba689b",
+    "bytes": 1286622,
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "5c76a3fd89e98be3f5cbf144828de0a8581ebfdeab8f9803003f4d3b90ae0b7d",
+      "manifest_sha256": "e3f41e415177df938d9422384de6baee82fb64016e0d970c340f724a8574a418",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "8e9fd7a7a87441ee690edcf4f0edf1259118f959397411aa2d4c32ffce53c221",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "events": 9779,
+    "natives": 6112,
+    "p2_reads": 3667,
+    "status": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F178-native-ring-local-v58-worker-v2\\candidate\\saves\\input-recordings\\session-1793050549965273-1-0\\status.json",
+      "sha256": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb",
+      "bytes": 160
+    }
+  },
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "executed_caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F178-native-ring-local-v58-worker-v2\\root-caller-executed-source.py",
+    "sha256": "c3f3c1efd7850ec766f60caf270d8fd262eceb98f1018d57f85751d7e9a10fa2",
+    "bytes": 8892
+  },
+  "limits": [
+    "LOCAL only: original intro authored terrain, stationary X144 and Zero1413,1269px separation beyond source-authenticated64-column1024px ring. No teleport, checkpoint, inventory, position, health or success writes.",
+    "Six composed images reviewed at initial, first ring crossing, endpoint and three resize shapes; independent native4:3 panes retain their own HUD and stable authored terrain without ring alias or distant actor wrap.",
+    "Ordinary fresh ground/wall jumps and attacks; each source-guarded wall jump reached nativeaction0A ascent.966 actual pairs, no failed/refused/leaked draws; nativeworld33 within actual VBlank30..33. Finalized ordinary recording/startup artifacts/cards/ownedexit0 pass.",
+    "Same-candidate NETPLAY remains required. Current forced loading-only NET profile discards coop camera options; no private NET draw credit. No other stage, fallback, survivor, replay, audio or campaign claim."
+  ],
+  "bypasses": []
+}
