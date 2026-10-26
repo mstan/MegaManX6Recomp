@@ -1,11 +1,22 @@
 # Mega Man X6 burndown execution
 
+Owner scope correction, 2026-10-25: ONLY the 234 frozen X4/X5 comparisons
+belong to this task. For each comparison, identify and validate the native X6
+counterpart of the reported action. X6's existing campaign is not being audited
+again. The separate 1,665-case / 3,330-mode native-content matrix and its 79
+broad obligations are OUT OF SCOPE; preserve their existing artifacts but do
+not execute, curate, expand or require that audit for completion. Historical
+handoffs, tracker text and the paused goal's older "plus native X6 content"
+wording are superseded by this owner correction. A native X6 location/mechanic
+may be exercised only to resolve a named comparison or its necessary setup.
+The owner's pause remains in effect until an explicit request to resume.
+
 Owner correction, 2026-10-25: overnight work produced too much diagnostic
 machinery and too few completed comparisons. Change how work is selected and
 finished. These rules supplement the owner's global instructions.
 
-- The objective is the full 234 frozen comparisons plus actual X6 content
-  mechanics. Measure progress by validated ledger results and integrated fixes.
+- The objective is all 234 frozen comparisons, using their native X6
+  counterparts. Measure progress by validated comparison results and integrated fixes.
   Setup visits, diagnostic transport, test counts, hashes, source maps and
   evidence packets are supporting work; never present them as completed rows.
 - At resumption, read the actual ledger and current worktree once. Make a short
@@ -42,7 +53,8 @@ finished. These rules supplement the owner's global instructions.
   backlog. Keep evidence proportional and reuse completed evidence. Report
   passed/failed/unverified counts, the delta since the last milestone, concrete
   fixes and remaining blockers. If a work block closes no rows, say so and
-  change the next block's approach. Keep native mechanics and setup counts apart.
+  change the next block's approach. Report the 234-comparison counts only;
+  setup or unrelated native-content coverage does not advance this burndown.
 - Continue solo and serially. No new/resumed subagents without fresh owner
   authorization. Local worktrees and commits only; no pushes, PRs, publication
   or remote tracker sync. One native game/pair OR one build, at most two compiler

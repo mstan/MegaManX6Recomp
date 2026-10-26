@@ -8,19 +8,19 @@ publication or tracker synchronization is authorized.
 
 ## Coverage and evidence contract
 
+Owner scope correction, October 25: this task consists exclusively of the 234
+frozen X4/X5 comparisons and validation of their native X6 counterparts.
+The separate native-content audit is outside the requested scope and is not
+a completion gate. Existing native inventory, ledgers and evidence are retained
+as historical reference. Work remains paused at the owner's request.
+
 | Inventory | Current disposition |
 | --- | --- |
 | [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 25 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F31, F33, F38, F48, F58, F59, F67, F70, F205, F208), 0 failed, 209 unverified; no inherited X4/X5 passes |
-| [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
-| Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
-| Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
-| [Live native coverage](COOP_X6_COVERAGE.md) | 1,665 individual cases / 3,330 independent mode results; 13 local and 1 netplay passed, 3,316 mode results unverified; 1 aggregate case passed, 1,664 unverified |
 
-The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The frozen
-native inventory and X6-only definitions are `COOP_X6_CONTENT.json`; live native
-attempts belong in `COOP_X6_COVERAGE.json` using its
-[append-only workflow](COOP_X6_COVERAGE_WORKFLOW.md). These are coverage
-records linked to the central Beads issue, not independent issue databases.
+The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
+`COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
+outside this task; do not resume that audit or require its remaining checks.
 The Markdown reference is generated from the comparison ledger. Preserve the
 frozen report, symptom, failure class and source hashes when changing an X6
 mapping or status.
