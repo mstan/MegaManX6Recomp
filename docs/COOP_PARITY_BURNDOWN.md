@@ -16,7 +16,7 @@ as historical reference. The owner has resumed work solo on the 234 comparisons.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 27 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F31, F33, F38, F48, F58, F59, F67, F70, F95, F102, F205, F208), 0 failed, 207 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 29 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F31, F33, F38, F48, F58, F59, F67, F70, F95, F102, F121, F170, F205, F208), 0 failed, 205 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -40,6 +40,21 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 25
+
+F121 and F170 now pass on exact `85c06ee`/SDK `7cb4742` in
+[local co-op](evidence/mmx6-scenery/manifest-bound-85c06ee-F121-F170-survivor-retry-local-reviewed.json)
+and [actual paired netplay](evidence/mmx6-scenery/manifest-bound-85c06ee-F121-F170-survivor-retry-netplay-reviewed.json).
+After actual X death, Zero advances through the original scrolling scenery.
+The distinct second native death produces the original one-life retry, authored
+camera reset, fresh healthy pair and independent controls. Later movement crosses
+different terrain with coherent original scenery. The complete468-byte map,
+70,144-byte metatile data and12,392-byte descriptors match before death and after
+retry on every physical process;84 native texture regions per process match CPU
+VRAM and GPU FBO. All60 combined-batch images were reviewed. Source/profile,
+post-case matching CRCs, ordinary recordings, unchanged cards and exits0 pass;
+no fixture or game-code change was needed. This raises completed comparisons
+27to29. F133's additional original-art/expiry observations are retained, but its
+required motion-death condition is not yet qualified and it stays unverified.
 
 F95 and F102 now pass on exact `85c06ee`/SDK `7cb4742` in
 [local co-op](evidence/mmx6-scenery/manifest-bound-85c06ee-F95-F102-shared-scroll-local-reviewed.json)

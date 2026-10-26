@@ -11048,17 +11048,90 @@
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "85c06ee7bf9dcd1e100de8e24b28d546e95b9f9e",
+            "build_identity": {
+              "executable_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+              "compiled_manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro, actual first two enemies and native checkpoint retry",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "input": "ordinary published digital host",
+              "audio": "dummy muted"
+            },
+            "action": "Let original enemy contact kill X, continue as Zero through actual scrolling scenery, suffer a distinct native second death and genuine one-life retry. Exercise both fresh controls, then advance across different authored terrain and compare actual camera, original map/metatile/descriptor bytes and referenced texture samples.",
+            "outcome": "Scenery and native parallax continue while X remains fallen. Native retry resets all3 authored layers and restores the fresh pair, independent controls and later scrolling. Complete original map assets match before death and after retry, CPU/GPU samples agree and all composed scenes were reviewed. Exact source/profile/CRC/cards/final recordings/exits pass.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scenery\\manifest-bound-85c06ee-F121-F170-survivor-retry-local-reviewed.json",
+                "sha256": "10f734708f01785a2793ab472b818f0c03610b7402a6c3cc08293aea28d4145f"
+              }
+            ],
+            "limits": [
+              "Exact85c06ee/SDK7cb474, original intro, X/P1 and normal Zero/P2, native4:3 shared OpenGL/stacked meters, ordinary published digital input, muted dummy audio; same-machine Win64 loopback only.",
+              "All deaths are original enemy contact, followed by actual native team wipe/one-life retry and independent movement over authored steps. No fixture, LOAD, HP, action, lifecycle, position, camera, layer, palette or success writes. The old optional positiveHP4 prerequisite is explicitly disabled.",
+              "F121 covers original scrolling scenery continuing under the living Zero survivor after X falls. It does not qualify autonomous palette animation/F120, private views, other stages, panorama wrap or restored movement beyond the observed intro terrain.",
+              "F170 retains actual native mode8/9 loader, authored camera reset, fresh healthy pair, independent controls, later distinct-terrain scrolling, exact map/metatile/descriptor bytes and native CPU/GPU texture samples. No independent-camera or whole-frame pixel-equality claim.",
+              "Composed captures, typed bodies, native layer/map reads and completed GPU frames are nearby separate observations. Full map data is read in bounded chunks and checked as retained source assets, not claimed instruction-atomic whole-machine state.",
+              "All60 composed images in the combined local/paired batch were root inspected. Native blue/gold death effects and both survivor/retry scenery sequences remain coherent; heroes sometimes overlap the original enemy and flash under actual contact damage.",
+              "The additional two-character death observations have original texture/palette and visible-expiry evidence, but F133 is not admitted here: the final X hit occurred during idle contact rather than the required motion. Its original radial allocations also remain invisible after native visible expiry; no forced pool clearing or invented slot-retirement claim.",
+              "Existing raw attempts and artifacts remain unchanged. No standalone native-content audit, acquisition, remote host/platform, audio equivalence or replay qualification."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "85c06ee7bf9dcd1e100de8e24b28d546e95b9f9e",
+            "build_identity": {
+              "executable_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+              "compiled_manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro, actual first two enemies and native checkpoint retry",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "input": "ordinary published digital host",
+              "audio": "dummy muted"
+            },
+            "action": "Let original enemy contact kill X, continue as Zero through actual scrolling scenery, suffer a distinct native second death and genuine one-life retry. Exercise both fresh controls, then advance across different authored terrain and compare actual camera, original map/metatile/descriptor bytes and referenced texture samples.",
+            "outcome": "Scenery and native parallax continue while X remains fallen. Native retry resets all3 authored layers and restores the fresh pair, independent controls and later scrolling. Complete original map assets match before death and after retry, CPU/GPU samples agree and all composed scenes were reviewed. Exact source/profile/CRC/cards/final recordings/exits pass.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scenery\\manifest-bound-85c06ee-F121-F170-survivor-retry-netplay-reviewed.json",
+                "sha256": "97d966eeb3ab467d17f317e76b03ba21e86f04c698c9d301588115c2a3c20c82"
+              }
+            ],
+            "limits": [
+              "Exact85c06ee/SDK7cb474, original intro, X/P1 and normal Zero/P2, native4:3 shared OpenGL/stacked meters, ordinary published digital input, muted dummy audio; same-machine Win64 loopback only.",
+              "All deaths are original enemy contact, followed by actual native team wipe/one-life retry and independent movement over authored steps. No fixture, LOAD, HP, action, lifecycle, position, camera, layer, palette or success writes. The old optional positiveHP4 prerequisite is explicitly disabled.",
+              "F121 covers original scrolling scenery continuing under the living Zero survivor after X falls. It does not qualify autonomous palette animation/F120, private views, other stages, panorama wrap or restored movement beyond the observed intro terrain.",
+              "F170 retains actual native mode8/9 loader, authored camera reset, fresh healthy pair, independent controls, later distinct-terrain scrolling, exact map/metatile/descriptor bytes and native CPU/GPU texture samples. No independent-camera or whole-frame pixel-equality claim.",
+              "Composed captures, typed bodies, native layer/map reads and completed GPU frames are nearby separate observations. Full map data is read in bounded chunks and checked as retained source assets, not claimed instruction-atomic whole-machine state.",
+              "All60 composed images in the combined local/paired batch were root inspected. Native blue/gold death effects and both survivor/retry scenery sequences remain coherent; heroes sometimes overlap the original enemy and flash under actual contact damage.",
+              "The additional two-character death observations have original texture/palette and visible-expiry evidence, but F133 is not admitted here: the final X hit occurred during idle contact rather than the required motion. Its original radial allocations also remain invisible after native visible expiry; no forced pool clearing or invented slot-retirement claim.",
+              "Existing raw attempts and artifacts remain unchanged. No standalone native-content audit, acquisition, remote host/platform, audio equivalence or replay qualification."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Passed exact85c06ee/SDK7cb474 LOCAL and both actual Win64 loopback peers: native X death/Zero survivor scenery, actual one-life team retry, authored camera reset, both fresh controls, different-terrain movement and byte-identical original map/metatile/descriptor assets with matching CPU/GPU texture samples. Shared intro view only; no private-view, autonomous palette, F133 motion-death or standalone content audit credit."
       }
     },
     {
@@ -12924,24 +12997,97 @@
       "frozen_row_sha256": "0d223b62ed52a2af89fc5b15de77c5321bea4b22a912772bc71348d3ae9522e8",
       "x6": {
         "workstream": "camera",
-        "mapping_state": "identified_subsystem",
+        "mapping_state": "candidate_native_scenario",
         "analogue": "First-death private render-state recovery",
         "bounded_check": "Capture native first death/retry and subsequent movement at distinct terrain; compare restored camera/map/texture state and final composed scenery.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "85c06ee7bf9dcd1e100de8e24b28d546e95b9f9e",
+            "build_identity": {
+              "executable_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+              "compiled_manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro, actual first two enemies and native checkpoint retry",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "input": "ordinary published digital host",
+              "audio": "dummy muted"
+            },
+            "action": "Let original enemy contact kill X, continue as Zero through actual scrolling scenery, suffer a distinct native second death and genuine one-life retry. Exercise both fresh controls, then advance across different authored terrain and compare actual camera, original map/metatile/descriptor bytes and referenced texture samples.",
+            "outcome": "Scenery and native parallax continue while X remains fallen. Native retry resets all3 authored layers and restores the fresh pair, independent controls and later scrolling. Complete original map assets match before death and after retry, CPU/GPU samples agree and all composed scenes were reviewed. Exact source/profile/CRC/cards/final recordings/exits pass.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scenery\\manifest-bound-85c06ee-F121-F170-survivor-retry-local-reviewed.json",
+                "sha256": "10f734708f01785a2793ab472b818f0c03610b7402a6c3cc08293aea28d4145f"
+              }
+            ],
+            "limits": [
+              "Exact85c06ee/SDK7cb474, original intro, X/P1 and normal Zero/P2, native4:3 shared OpenGL/stacked meters, ordinary published digital input, muted dummy audio; same-machine Win64 loopback only.",
+              "All deaths are original enemy contact, followed by actual native team wipe/one-life retry and independent movement over authored steps. No fixture, LOAD, HP, action, lifecycle, position, camera, layer, palette or success writes. The old optional positiveHP4 prerequisite is explicitly disabled.",
+              "F121 covers original scrolling scenery continuing under the living Zero survivor after X falls. It does not qualify autonomous palette animation/F120, private views, other stages, panorama wrap or restored movement beyond the observed intro terrain.",
+              "F170 retains actual native mode8/9 loader, authored camera reset, fresh healthy pair, independent controls, later distinct-terrain scrolling, exact map/metatile/descriptor bytes and native CPU/GPU texture samples. No independent-camera or whole-frame pixel-equality claim.",
+              "Composed captures, typed bodies, native layer/map reads and completed GPU frames are nearby separate observations. Full map data is read in bounded chunks and checked as retained source assets, not claimed instruction-atomic whole-machine state.",
+              "All60 composed images in the combined local/paired batch were root inspected. Native blue/gold death effects and both survivor/retry scenery sequences remain coherent; heroes sometimes overlap the original enemy and flash under actual contact damage.",
+              "The additional two-character death observations have original texture/palette and visible-expiry evidence, but F133 is not admitted here: the final X hit occurred during idle contact rather than the required motion. Its original radial allocations also remain invisible after native visible expiry; no forced pool clearing or invented slot-retirement claim.",
+              "Existing raw attempts and artifacts remain unchanged. No standalone native-content audit, acquisition, remote host/platform, audio equivalence or replay qualification."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "85c06ee7bf9dcd1e100de8e24b28d546e95b9f9e",
+            "build_identity": {
+              "executable_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+              "compiled_manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro, actual first two enemies and native checkpoint retry",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "input": "ordinary published digital host",
+              "audio": "dummy muted"
+            },
+            "action": "Let original enemy contact kill X, continue as Zero through actual scrolling scenery, suffer a distinct native second death and genuine one-life retry. Exercise both fresh controls, then advance across different authored terrain and compare actual camera, original map/metatile/descriptor bytes and referenced texture samples.",
+            "outcome": "Scenery and native parallax continue while X remains fallen. Native retry resets all3 authored layers and restores the fresh pair, independent controls and later scrolling. Complete original map assets match before death and after retry, CPU/GPU samples agree and all composed scenes were reviewed. Exact source/profile/CRC/cards/final recordings/exits pass.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scenery\\manifest-bound-85c06ee-F121-F170-survivor-retry-netplay-reviewed.json",
+                "sha256": "97d966eeb3ab467d17f317e76b03ba21e86f04c698c9d301588115c2a3c20c82"
+              }
+            ],
+            "limits": [
+              "Exact85c06ee/SDK7cb474, original intro, X/P1 and normal Zero/P2, native4:3 shared OpenGL/stacked meters, ordinary published digital input, muted dummy audio; same-machine Win64 loopback only.",
+              "All deaths are original enemy contact, followed by actual native team wipe/one-life retry and independent movement over authored steps. No fixture, LOAD, HP, action, lifecycle, position, camera, layer, palette or success writes. The old optional positiveHP4 prerequisite is explicitly disabled.",
+              "F121 covers original scrolling scenery continuing under the living Zero survivor after X falls. It does not qualify autonomous palette animation/F120, private views, other stages, panorama wrap or restored movement beyond the observed intro terrain.",
+              "F170 retains actual native mode8/9 loader, authored camera reset, fresh healthy pair, independent controls, later distinct-terrain scrolling, exact map/metatile/descriptor bytes and native CPU/GPU texture samples. No independent-camera or whole-frame pixel-equality claim.",
+              "Composed captures, typed bodies, native layer/map reads and completed GPU frames are nearby separate observations. Full map data is read in bounded chunks and checked as retained source assets, not claimed instruction-atomic whole-machine state.",
+              "All60 composed images in the combined local/paired batch were root inspected. Native blue/gold death effects and both survivor/retry scenery sequences remain coherent; heroes sometimes overlap the original enemy and flash under actual contact damage.",
+              "The additional two-character death observations have original texture/palette and visible-expiry evidence, but F133 is not admitted here: the final X hit occurred during idle contact rather than the required motion. Its original radial allocations also remain invisible after native visible expiry; no forced pool clearing or invented slot-retirement claim.",
+              "Existing raw attempts and artifacts remain unchanged. No standalone native-content audit, acquisition, remote host/platform, audio equivalence or replay qualification."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Passed exact85c06ee/SDK7cb474 LOCAL and both actual Win64 loopback peers: native X death/Zero survivor scenery, actual one-life team retry, authored camera reset, both fresh controls, different-terrain movement and byte-identical original map/metatile/descriptor assets with matching CPU/GPU texture samples. Shared intro view only; no private-view, autonomous palette, F133 motion-death or standalone content audit credit."
       }
     },
     {
