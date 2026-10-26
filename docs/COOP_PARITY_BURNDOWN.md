@@ -16,7 +16,7 @@ as historical reference. The owner has resumed work solo on the 234 comparisons.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 32 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F22, F31, F33, F38, F48, F56, F58, F59, F67, F70, F95, F102, F121, F133, F170, F205, F208), 0 failed, 202 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 33 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F22, F31, F33, F38, F48, F56, F58, F59, F67, F70, F95, F102, F107, F121, F133, F170, F205, F208), 0 failed, 201 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -40,6 +40,21 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 26
+
+F107 now passes on exact `7caed4d`/SDK `7cb4742` in
+[local co-op](evidence/mmx6-r13/manifest-bound-7caed4d-F107-native-variant-local-reviewed.json)
+and [actual paired netplay](evidence/mmx6-r13/manifest-bound-7caed4d-F107-native-variant-netplay-reviewed.json).
+The original intro's special type1/subtype1 placement is distinguished from
+subtype0 in the source. With X fixed at144, Zero alone admits its inactive
+record, original HP12/phase1 actor and subtype-specific native action2. A fresh
+Zero attack causes accepted HP loss or native death on every physical process.
+The observer retains actual bound-slot HP0/origin after native retirement;
+actor absence alone never passes. All12 composed images were reviewed, and
+current source/profile/post-case CRCs, ordinary recordings, cards and exits0
+pass. Existing R13 decoding was reused; no new game-code fix or old-build
+cleanup waiver was needed. This adds one comparison, bringing32to33 passed
+with201 unverified. Failed hurt-timed and skipped-retired-slot observations
+remain preserved; child emitters, facing and respawn receive no credit.
 
 F22 and F56 now pass on exact `7caed4d`/SDK `7cb4742` in
 [local co-op](evidence/mmx6-solids/manifest-bound-7caed4d-F22-F56-IceBurst-local-reviewed.json)

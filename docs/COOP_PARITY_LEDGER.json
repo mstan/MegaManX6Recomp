@@ -10669,24 +10669,97 @@
       "frozen_row_sha256": "827676f3a62e97dc58e2958a45f1a0603d8e86852385482d23071c32f7a576b0",
       "x6": {
         "workstream": "camera",
-        "mapping_state": "unknown_native_analogue",
+        "mapping_state": "candidate_native_scenario",
         "analogue": "Special placement-subtype admission unidentified",
         "bounded_check": "Inventory a native X6 special enemy subtype/placement and require guest-only approach to admit its real initialized actor and interaction.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+            "build_identity": {
+              "executable_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+              "compiled_manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro CP0, special type1/subtype1 record25",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "input": "ordinary published host",
+              "audio": "dummy muted"
+            },
+            "action": "Keep X fixed while Zero alone admits the original special subtype1. Require real record-bound native initialization, subtype-specific proximity response and a fresh native Zero attack that damages or kills the same original actor.",
+            "outcome": "Inactive original placement becomes the source-bound live subtype1 HP12/phase1 actor. It executes native action2 with only Zero near. Each physical process retains actual accepted HP loss or a directly observed original freed HP0 slot under Zero slash. Both heroes survive, source/profile/post-case CRC/ordinary recordings/cards/owned exits0 pass; all12 named images reviewed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-r13/manifest-bound-7caed4d-F107-native-variant-local-reviewed.json",
+                "sha256": "84ff2f7af2277249e826e94052f347b9ec9ae6ec7e18f87e7ee6c4e3141e44a6"
+              }
+            ],
+            "limits": [
+              "Exact7caed4d/SDK7cb474, native intro CP0, fixed X/P1 and normal Zero/P2, shared native4:3 OpenGL/stacked meters, ordinary published input, dummy muted audio; same-machine Win64 loopback only.",
+              "Focused source lookup identifies original type1/subtype1 placement25 at800FA2DC/416,1080 and contrasts the ordinary subtype0 placement27 at800,1048. Original800EB14C branches on subtype0 versus the special native112-pixel proximity path. This is a named F107 mapping, not a standalone content audit.",
+              "Actual inactive-before/guest-only camera admission, original record-bound HP12/phase1 initialization, subtype1 native action2 with only Zero near, and a real Zero attack HP/death transition are required independently on every physical process. X stays at144; no admission, actor, HP, pose, position, input-result or success values are written.",
+              "The existing R13 decoder and route are reused. Current clean-exit native runs supply the result; oldfbba0e3 historical termination/recording limitations are not extended or transferred to this candidate.",
+              "Live HP drops and genuine freed native HP0 are distinguished. Original8002C9B0 clears actor bytes0..7 while retaining HP/origin; a directly read cleared slot with HP0, the same original record pointer and an observed native Zero slash establishes death even if the live death frame falls between polls. Actor absence alone is insufficient.",
+              "Sampled HP deltas can combine several original collisions. This does not qualify per-hit damage, duplicate-token suppression, another subtype, emitted-child admission/F109, facing/F119, respawn/F163 or all-enemy AI/art.",
+              "Published bodies, native pool, retained slot, camera and composed captures are nearby independent reads. No instruction-atomic matched-frame assertion or full framebuffer/source-pixel comparison. All12 named composed captures were root inspected; original enemy/body contact can overlap near the right edge.",
+              "Exact declared sources/manifest, original files, stable pre-frame0/final profile, matching post-case CRCs, ordinary finalized recordings, preserved private cards and graceful owned exits0 pass. No fixture, state LOAD, remote host/platform, audio or unrelated native-content credit. Earlier observer failures remain unchanged."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+            "build_identity": {
+              "executable_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+              "compiled_manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro CP0, special type1/subtype1 record25",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "input": "ordinary published host",
+              "audio": "dummy muted"
+            },
+            "action": "Keep X fixed while Zero alone admits the original special subtype1. Require real record-bound native initialization, subtype-specific proximity response and a fresh native Zero attack that damages or kills the same original actor.",
+            "outcome": "Inactive original placement becomes the source-bound live subtype1 HP12/phase1 actor. It executes native action2 with only Zero near. Each physical process retains actual accepted HP loss or a directly observed original freed HP0 slot under Zero slash. Both heroes survive, source/profile/post-case CRC/ordinary recordings/cards/owned exits0 pass; all12 named images reviewed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-r13/manifest-bound-7caed4d-F107-native-variant-netplay-reviewed.json",
+                "sha256": "5d3799df6680459a1ee64405cf8edb5e2abed7e4f9ed45b459df60e536096b41"
+              }
+            ],
+            "limits": [
+              "Exact7caed4d/SDK7cb474, native intro CP0, fixed X/P1 and normal Zero/P2, shared native4:3 OpenGL/stacked meters, ordinary published input, dummy muted audio; same-machine Win64 loopback only.",
+              "Focused source lookup identifies original type1/subtype1 placement25 at800FA2DC/416,1080 and contrasts the ordinary subtype0 placement27 at800,1048. Original800EB14C branches on subtype0 versus the special native112-pixel proximity path. This is a named F107 mapping, not a standalone content audit.",
+              "Actual inactive-before/guest-only camera admission, original record-bound HP12/phase1 initialization, subtype1 native action2 with only Zero near, and a real Zero attack HP/death transition are required independently on every physical process. X stays at144; no admission, actor, HP, pose, position, input-result or success values are written.",
+              "The existing R13 decoder and route are reused. Current clean-exit native runs supply the result; oldfbba0e3 historical termination/recording limitations are not extended or transferred to this candidate.",
+              "Live HP drops and genuine freed native HP0 are distinguished. Original8002C9B0 clears actor bytes0..7 while retaining HP/origin; a directly read cleared slot with HP0, the same original record pointer and an observed native Zero slash establishes death even if the live death frame falls between polls. Actor absence alone is insufficient.",
+              "Sampled HP deltas can combine several original collisions. This does not qualify per-hit damage, duplicate-token suppression, another subtype, emitted-child admission/F109, facing/F119, respawn/F163 or all-enemy AI/art.",
+              "Published bodies, native pool, retained slot, camera and composed captures are nearby independent reads. No instruction-atomic matched-frame assertion or full framebuffer/source-pixel comparison. All12 named composed captures were root inspected; original enemy/body contact can overlap near the right edge.",
+              "Exact declared sources/manifest, original files, stable pre-frame0/final profile, matching post-case CRCs, ordinary finalized recordings, preserved private cards and graceful owned exits0 pass. No fixture, state LOAD, remote host/platform, audio or unrelated native-content credit. Earlier observer failures remain unchanged."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Passed exact7caed4d/SDK7cb474 LOCAL and both Win64 loopback peers: source-qualified special type1/subtype1 record25, guest-only original admission, HP12/phase1 initialization, actual native subtype response and accepted Zero HP/death interaction with X fixed. Original R13 decoder reused with full current source/profile/CRC/final recording/cards/exits0. No other subtype, child emitter, facing, respawn, per-hit damage or content-audit credit."
       }
     },
     {
