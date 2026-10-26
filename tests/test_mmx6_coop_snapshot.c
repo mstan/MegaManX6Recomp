@@ -16,6 +16,8 @@ static int allocation_fail,allocation_calls,local_scope,texture_support=1;
 static unsigned guest_calls,guest_writes,forgotten;
 static int abandon_guest;
 static int solid_dispatch,allocator_dispatch;
+static int camera_dispatch;
+static uint32_t expected_camera_axis;
 static uint32_t audio_epoch=1;
 static int foreign_audio23;
 uint32_t psx_mod_spu_sample_bank_epoch(void){return audio_epoch;}
@@ -63,6 +65,12 @@ void psx_dispatch_call(CPUState *cpu,uint32_t target,uint32_t ret){
     uint32_t h=state_digest();state_track.frame[state_track.count-1].saved[0]^=1;
     CHECK(state_digest()!=h);state_track.frame[state_track.count-1].saved[0]^=1;
     if(allocator_dispatch){cpu->gpr[2]=0x800950A0u+31*0xA0u;return;}
+    if(camera_dispatch){
+        unsigned axis=target==0x80029598u?8:12;
+        CHECK((target==0x80029598u || target==0x80029658u) &&
+              psx_mod_read_word(PLAYER+axis)==expected_camera_axis);
+        cpu->gpr[2]=77;return;
+    }
     if(solid_dispatch){
         uint32_t actor=cpu->gpr[4];CHECK(target==0x80031DA8u && actor==0x800950A0u);
         unsigned zero=psx_mod_read_byte(PLAYER+2);
@@ -267,6 +275,53 @@ static void weapon_support_projection_and_reuse(void){
     CHECK(zero_solid_contacts[111].sides==7 && zero_solid_contacts[111].carried==255);
     zero_projected=0;allocator_dispatch=0;CHECK(snapshot_ready());
 }
+static void native_health_freeze_camera(void){
+    uint8_t old_body[sizeof p2.body],old_play[0x20];
+    PlayerContext old_partner=p2;PickupOwner old_owners[128];
+    capture(PLAYER,old_body,sizeof old_body);capture(PLAY,old_play,sizeof old_play);
+    memcpy(old_owners,pickup_owners,sizeof old_owners);
+    unsigned old_scene=scene_owner;Mmx6CoopLifecycle old_life=life;
+    memset(pickup_owners,0,sizeof pickup_owners);
+    for(unsigned i=0;i<0x20;++i)psx_mod_write_byte(PLAY+i,0);
+    psx_mod_write_byte(PLAY,10);scene_owner=0;
+    life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
+    psx_mod_write_byte(PLAYER+4,1);psx_mod_write_byte(PLAYER+5,2);
+    psx_mod_write_word(PLAYER+8,144u<<16);psx_mod_write_word(PLAYER+12,1115u<<16);
+    put32(p2.body+8,392u<<16);put32(p2.body+12,1082u<<16);
+    CPUState cpu;memset(&cpu,0,sizeof cpu);camera_dispatch=1;
+    expected_camera_axis=268u<<16;
+    CHECK(camera_target(&cpu,0x80029598u)==1 && cpu.gpr[2]==77);
+    CHECK(psx_mod_read_word(PLAYER+8)==144u<<16 && !state_track.count);
+    for(unsigned i=0x10;i<0x18;++i)psx_mod_write_byte(PLAY+i,1);
+    unsigned calls=guest_calls;CHECK(!shared_camera() && !camera_target(&cpu,0x80029598u));
+    CHECK(guest_calls==calls); /* An unrelated freeze must keep native handling. */
+    uint32_t actor=0x8008EF48u;uint8_t old_actor[0x9C];capture(actor,old_actor,sizeof old_actor);
+    psx_mod_write_byte(actor,0x21);psx_mod_write_byte(actor+1,47);
+    psx_mod_write_byte(actor+2,33);psx_mod_write_byte(actor+4,2);
+    for(unsigned owner=0;owner<2;++owner){
+        pickup_owners[0]=(PickupOwner){actor,(uint8_t)owner};
+        expected_camera_axis=268u<<16;
+        CHECK(camera_target(&cpu,0x80029598u)==1 && cpu.gpr[2]==77);
+        expected_camera_axis=(1115u+1082u)<<15;
+        CHECK(camera_target(&cpu,0x80029658u)==1 && cpu.gpr[2]==77);
+        CHECK(psx_mod_read_word(PLAYER+8)==144u<<16 && psx_mod_read_word(PLAYER+12)==1115u<<16);
+    }
+    expected_camera_axis=268u<<16;
+    psx_mod_write_byte(actor+2,32);CHECK(camera_target(&cpu,0x80029598u)==1);
+    psx_mod_write_byte(actor+2,36);CHECK(!camera_target(&cpu,0x80029598u));
+    psx_mod_write_byte(actor+2,33);psx_mod_write_byte(actor+4,1);CHECK(!camera_target(&cpu,0x80029598u));
+    psx_mod_write_byte(actor+4,2);psx_mod_write_byte(actor,0);CHECK(!camera_target(&cpu,0x80029598u));
+    psx_mod_write_byte(actor,0x21);pickup_owners[0].actor=actor+1;CHECK(!camera_target(&cpu,0x80029598u));
+    pickup_owners[0].actor=0x800C5000u;CHECK(!camera_target(&cpu,0x80029598u));
+    pickup_owners[0].actor=actor;scene_owner=2;CHECK(!camera_target(&cpu,0x80029598u));scene_owner=0;
+    life.status[0]=MMX6_COOP_FALLEN;CHECK(!camera_target(&cpu,0x80029598u));life.status[0]=MMX6_COOP_ALIVE;
+    psx_mod_write_byte(PLAY+0x1C,1);CHECK(!camera_target(&cpu,0x80029598u));psx_mod_write_byte(PLAY+0x1C,0);
+    psx_mod_write_byte(PLAY+0x17,0);CHECK(!camera_target(&cpu,0x80029598u));
+    camera_dispatch=0;scene_owner=old_scene;life=old_life;p2=old_partner;
+    project(PLAYER,old_body,sizeof old_body);project(PLAY,old_play,sizeof old_play);
+    project(actor,old_actor,sizeof old_actor);memcpy(pickup_owners,old_owners,sizeof old_owners);
+    CHECK(!state_track.count && snapshot_ready());
+}
 static void roundtrip_and_malformed(void){
     zero_solid_contacts[111]=(SolidContact){13,255};
     uint8_t expected_giga[ZERO_GIGA_BACKUP_BYTES];
@@ -350,7 +405,7 @@ static void abandoned_guest(void){
 }
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
-    weapon_support_projection_and_reuse();roundtrip_and_malformed();
+    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);
     /* Abandoned/overflowed call records are safe owned bytes, and explicitly

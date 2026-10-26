@@ -523,6 +523,27 @@ static int shared_camera(void) {
         psx_mod_read_byte(PLAYER+4)==1 && psx_mod_read_byte(PLAYER+5)>=2 &&
         !psx_mod_read_byte(PLAY+0x10) && !psx_mod_read_byte(PLAY+0x1C);
 }
+static int pickup_heal_camera(void) {
+    /* Native 8004E0A8/8004DCB8 freeze ordinary health collection through
+     * 8004E78C(1), which writes PLAY+10..17. Keep both living bodies' camera
+     * during that shared freeze; movement/scene admission still uses the
+     * original shared_camera predicate. Only an owned, live native health
+     * pickup in its delayed phase qualifies, never an arbitrary scene hold. */
+    if (!ready || !enrolled || scene_owner || life.status[0]!=MMX6_COOP_ALIVE ||
+        life.status[1]!=MMX6_COOP_ALIVE || psx_mod_read_byte(PLAYER+4)!=1 ||
+        psx_mod_read_byte(PLAYER+5)<2 || psx_mod_read_byte(PLAY)!=10 ||
+        psx_mod_read_byte(PLAY+1) || psx_mod_read_byte(PLAY+0x1C)) return 0;
+    for (unsigned i=0x10;i<0x18;++i) if (psx_mod_read_byte(PLAY+i)!=1) return 0;
+    for (unsigned i=0;i<128;++i) {
+        uint32_t actor=pickup_owners[i].actor;
+        if (pickup_owners[i].seat>1 || actor<0x8008EF48u || actor>=0x80090C88u ||
+            (actor-0x8008EF48u)%0x9Cu || !(psx_mod_read_byte(actor)&1) ||
+            psx_mod_read_byte(actor+1)!=0x2F || psx_mod_read_byte(actor+4)!=2) continue;
+        unsigned kind=psx_mod_read_byte(actor+2);
+        if (kind==32 || kind==33) return 1;
+    }
+    return 0;
+}
 static void constrain_player(unsigned player) {
     if (!shared_camera()) return;
     int32_t x=(int32_t)psx_mod_read_word(PLAYER+8), z=(int32_t)le32(p2.body+8);
@@ -535,7 +556,7 @@ static void constrain_player(unsigned player) {
     if (player && limited!=z) { put32(p2.body+8,(uint32_t)limited); put32(p2.body+0x20,0); }
 }
 static int camera_target(CPUState *cpu, uint32_t address) {
-    if (inside || failed || !shared_camera()) return 0;
+    if (inside || failed || (!shared_camera() && !pickup_heal_camera())) return 0;
     unsigned axis=address==0x80029598u?8:12;
     uint32_t original=psx_mod_read_word(PLAYER+axis);
     STATE_WORDS(restore_axis,5,&original,1);
