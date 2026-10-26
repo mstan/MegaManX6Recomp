@@ -70,6 +70,24 @@ and first-session totals do not qualify repeated allocation lifetime. The
 bounded investigation is parked while independent autonomous rows continue.
 The ledger is **39 passed /1 failed /194 unverified of234**.
 
+F51 has a reviewed [LOCAL moving-support pass](evidence/mmx6-solid/manifest-bound-72b898f-F51-moving-support-local-reviewed.json)
+on the same `72b898f` candidate. The original Amazon support carries neutral
+Zero, then a fresh native jump releases contact and Right moves beyond its
+edge while X remains stationary. Root reviewed the four composed images;
+private cards and exit0 pass. The offline checkpoint prerequisite is disclosed
+and its tainted recording remains failed/refused for ordinary replay. NETPLAY
+is pending: its first attempt completed actual card Load, fresh mission and
+guest menu, then missed the neutral support window because input remained held
+during sequential peer sampling. A final attempt changes only observation and
+input-release timing. Neither setup progress nor LOCAL alone closes F51.
+
+F40 remains unverified: the completed real launcher session selected one
+optionless loading token, so its disabled catalog entries do not establish a
+larger selected-option payload. Current title policy needs a supported larger
+plan before that check is meaningful. F104 also remains unverified because the
+bounded source lookup did not identify an original slippery-floor predicate
+and contact location. These prerequisites are deferred behind shorter checks.
+
 F144 now passes on exact `7caed4d`/SDK `7cb4742` in
 [local co-op](evidence/mmx6-render/manifest-bound-7caed4d-F144-heavy-native-encounter-local-root-reviewed.json)
 and [actual paired netplay](evidence/mmx6-render/manifest-bound-7caed4d-F144-heavy-native-encounter-netplay-root-reviewed.json).
