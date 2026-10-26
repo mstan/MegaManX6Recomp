@@ -344,7 +344,7 @@ if(BUILD_TESTING)
         add_test(NAME ${_mmx6_diag_target} COMMAND "$<TARGET_FILE:${_mmx6_diag_target}>")
     endforeach()
 
-    foreach(_mmx6_visual_kind private_effects hud resource_admission recycle_portal reentry_retirement jump_audio session_resources)
+    foreach(_mmx6_visual_kind private_effects private_views hud resource_admission recycle_portal reentry_retirement jump_audio session_resources)
       foreach(_mmx6_effects_variant debug production)
         set(_mmx6_effects_target mmx6_coop_${_mmx6_visual_kind}_${_mmx6_effects_variant}_test)
         add_executable(${_mmx6_effects_target} tests/test_mmx6_coop_${_mmx6_visual_kind}.c
@@ -359,7 +359,7 @@ if(BUILD_TESTING)
             target_include_directories(${_mmx6_effects_target} PRIVATE
                 "${PSXRECOMP_V4_ROOT}/runtime/src")
         endif()
-        if(_mmx6_visual_kind STREQUAL "recycle_portal")
+        if(_mmx6_visual_kind STREQUAL "recycle_portal" OR _mmx6_visual_kind STREQUAL "private_views")
             target_sources(${_mmx6_effects_target} PRIVATE
                 "${PSXRECOMP_V4_ROOT}/runtime/src/mod_function_replacements.c")
         endif()
@@ -656,9 +656,10 @@ if(BUILD_TESTING)
     foreach(_target IN LISTS _mmx6_test_targets)
         if(_target MATCHES "^mmx6_.*test$")
             get_target_property(_sources ${_target} SOURCES)
-            if("${_sources}" MATCHES "tests/test_mmx6_coop_(intro_target|diagnostics|private_effects|hud|checkpoint|snapshot|resource_admission|recycle_portal|reentry_retirement|jump_audio|session_resources)[.]c")
+            if("${_sources}" MATCHES "tests/test_mmx6_coop_(intro_target|diagnostics|private_effects|private_views|hud|checkpoint|snapshot|resource_admission|recycle_portal|reentry_retirement|jump_audio|session_resources)[.]c")
                 target_sources(${_target} PRIVATE src/mods/mmx6_coop_roster.c
-                    src/mods/mmx6_coop_resources.c src/mods/mmx6_coop_jump_audio.c)
+                    src/mods/mmx6_coop_resources.c src/mods/mmx6_coop_jump_audio.c
+                    tests/mmx6_coop_private_view_sdk_fixture.c)
                 if(NOT "${_sources}" MATCHES "src/mods/mmx6_coop_assets[.]c")
                     target_sources(${_target} PRIVATE src/mods/mmx6_coop_assets.c)
                 endif()

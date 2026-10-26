@@ -6,6 +6,28 @@ import tomllib
 import unittest
 
 class SharedEffectEntryProfile(unittest.TestCase):
+    def test_private_view_draw_entry_is_emitted(self):
+        root = Path(__file__).resolve().parents[1]
+        for config in ('game.toml', 'packaging/release/game.toml'):
+            with self.subTest(config=config):
+                profile = tomllib.loads((root / config).read_text(encoding='utf-8'))
+                entries = [int(address, 16) for address in
+                           profile['recompiler']['mod_function_entry_funcs']]
+                self.assertEqual(entries.count(0x80066744), 1,
+                                 'compiled DrawOTag must reach private-view admission')
+
+    @unittest.skipUnless(os.environ.get('MMX6_COOP_VIEW_GENERATED_UNIT'),
+                         'set MMX6_COOP_VIEW_GENERATED_UNIT to the actual full_28.c')
+    def test_actual_generated_private_view_entry(self):
+        source = Path(os.environ['MMX6_COOP_VIEW_GENERATED_UNIT']).read_text(encoding='utf-8')
+        match = re.search(r'(?ms)^void func_80066744\(CPUState\* cpu\)\n\{(.*?)(?=^void |\Z)', source)
+        self.assertIsNotNone(match, 'actual native DrawOTag function is required')
+        entry = match[1].split('block_80066744:', 1)[0]
+        for hook in ('psx_mod_function_entry', 'psx_mod_try_function_replacement'):
+            self.assertEqual(len(re.findall(
+                rf'if \({hook}\(cpu, 0x80066744u\)\) return;', entry)), 1,
+                f'{hook} must precede the native DrawOTag body')
+
     def test_shared_ride_armor_replacement_is_emitted(self):
         root = Path(__file__).resolve().parents[1]
         source = (root / 'src/mods/mmx6_coop_plugin.c').read_text(encoding='utf-8')

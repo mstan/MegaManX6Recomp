@@ -124,6 +124,10 @@ static int32_t scene_y;
 static int scene_call, zero_projected;
 static int unit_choices_call;
 static int intro_target_call;
+/* Elective independent presentation. The canonical world still runs once. */
+static unsigned independent_views, local_split, private_draw, private_seat, view_call;
+static void independent_invalidate(void);
+static void independent_world_begin(void);
 #include "mmx6_coop_state_track.h"
 #ifdef MMX6_COOP_MODERN_STATE
 static uint8_t snapshot_asset_sha[32];
@@ -546,7 +550,7 @@ static int pickup_heal_camera(void) {
     return 0;
 }
 static void constrain_player(unsigned player) {
-    if (!shared_camera()) return;
+    if (independent_views || !shared_camera()) return;
     int32_t x=(int32_t)psx_mod_read_word(PLAYER+8), z=(int32_t)le32(p2.body+8);
     unsigned width=320u+2u*(unsigned)psx_mod_widescreen_x_margin();
     int32_t limited=mmx6_coop_limit_x(player?z:x,player?x:z,width);
@@ -557,7 +561,7 @@ static void constrain_player(unsigned player) {
     if (player && limited!=z) { put32(p2.body+8,(uint32_t)limited); put32(p2.body+0x20,0); }
 }
 static int camera_target(CPUState *cpu, uint32_t address) {
-    if (inside || failed || (!shared_camera() && !pickup_heal_camera())) return 0;
+    if (independent_views || inside || failed || (!shared_camera() && !pickup_heal_camera())) return 0;
     unsigned axis=address==0x80029598u?8:12;
     uint32_t original=psx_mod_read_word(PLAYER+axis);
     STATE_WORDS(restore_axis,5,&original,1);
@@ -588,7 +592,7 @@ static void pit_death(unsigned seat, int bottom) {
 }
 static void camera_pits(CPUState *cpu, uint32_t address) {
     (void)address;
-    if (!enrolled || failed || (inside && !zero_world) || scene_owner ||
+    if (private_draw || !enrolled || failed || (inside && !zero_world) || scene_owner ||
         cpu->gpr[4]!=0x800971F8u || psx_mod_read_byte(PLAY)!=0x0A ||
         psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C)) return;
     /* Native 8002820C owns pit death as part of camera clamping, outside
@@ -1428,7 +1432,7 @@ static uint32_t retired_host_word(const Mmx6StateFrame *frame,size_t index) {
 static int retire_quit_stage(CPUState *cpu,uint32_t address) {
     if (!cpu || address!=0x8003BD24u || inside || player_call || zero_world || zero_projected ||
         world_render || hud_call || render_x_death || effect_call || shared_fx_call || shared_fx_allocate_call || pickup_call || solid_call ||
-        solid_allocate_call || ride_call || scene_call || unit_choices_call || intro_target_call ||
+        solid_allocate_call || ride_call || view_call || private_draw || scene_call || unit_choices_call || intro_target_call ||
         stage_call!=1 || state_track.count!=2 || state_track.error ||
         psx_mod_read_byte(PLAY)!=9 || psx_mod_read_byte(PLAY+1) ||
         cpu->gpr[31]!=0x8001E26Cu || cpu->gpr[16]!=PLAY) return 0;
@@ -1812,6 +1816,7 @@ static void begin_world_draw(CPUState *cpu,uint32_t address) {
     /* Native80025FB0 precedes background and sprite/HUD emission, including
      * the first arrival draw before stage_tick. Both private bodies and
      * deferred shared effects append once in this original render order. */
+    independent_world_begin();
     if(enrolled && !failed)world_packets=packets+(psx_mod_read_word(SCRATCH)&1u)*FRAME_ARENA;
     giga_packet_trace("world-begin",0);
     (void)cpu;(void)address;
@@ -2209,7 +2214,8 @@ static int hud_icon(CPUState *cpu, uint32_t address) {
 }
 static void hud_offsets(int *x, int *y) {
     char layout[32];
-    *x=0; *y=P2_HUD_Y;
+    *x=0; *y=private_draw?0:P2_HUD_Y;
+    if(private_draw)return;
     /* Committed package options are immutable while the plugin runs. Read
      * the presentation preference directly: no new simulation/snapshot state.
      * Unknown/old configurations keep the original stacked default. */
@@ -2265,12 +2271,15 @@ static void hud_zero_packets(uint32_t arena) {
 }
 static int draw_coop_hud(CPUState *cpu, uint32_t address) {
     if (hud_call || !enrolled || failed || psx_mod_read_byte(PLAY)!=0x0A) return 0;
+    /* A private pane contains its own native meters. P1 follows the original
+     * path; P2 uses the same native HUD with its retained UI texture bank. */
+    if(private_draw && !private_seat)return 0;
     hud_call=1;
     /* Arrival and voluntary departure fade this HUD. Dead players retain
      * their meters, making the shared-life/survivor state visible. */
-    if (life.status[1]==MMX6_COOP_LEAVING || life.status[1]==MMX6_COOP_ABSENT)
+    if (!private_draw && (life.status[1]==MMX6_COOP_LEAVING || life.status[1]==MMX6_COOP_ABSENT))
         p2_hud_fade=p2_hud_fade>8?p2_hud_fade-8:0;
-    else p2_hud_fade=p2_hud_fade<120?p2_hud_fade+8:128;
+    else if(!private_draw)p2_hud_fade=p2_hud_fade<120?p2_hud_fade+8:128;
     uint8_t current[sizeof p2.body];
     capture(PLAYER,current,sizeof current);
     uint32_t sprites_now=psx_mod_read_word(SCRATCH+0x1C);
@@ -2284,7 +2293,7 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
         psx_mod_write_word(SCRATCH+0x3C,saved_resources[5]);
     }
     /* P1 and the boss HUD execute their original draw path exactly once. */
-    uint32_t result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
+    uint32_t result=private_draw?0:guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
     STATE_WORDS(restore_result,45,&result,1);
     if (zero_world) capture(PLAYER,p1.body,sizeof p1.body);
     else capture(PLAYER,current,sizeof current);
@@ -2299,8 +2308,11 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
         pools[3]=arena;STATE_WORDS(restore_pools,26,pools,4);
         for (unsigned i=0;i<3;++i) psx_mod_write_word(SCRATCH+0x108+i*4,arena+i*0x1000);
         hud_seat=1;
-        guest(cpu,0x80024F90,PLAYER,0);
-        guest(cpu,0x800249D4,PLAYER,0);
+        if(private_draw)guest(cpu,address,0,0);
+        else {
+            guest(cpu,0x80024F90,PLAYER,0);
+            guest(cpu,0x800249D4,PLAYER,0);
+        }
         hud_seat=0;
         hud_zero_packets(arena);
         for (unsigned i=0;i<3;++i) psx_mod_write_word(SCRATCH+0x108+i*4,pools[i]);
@@ -2320,6 +2332,7 @@ static int draw_coop_hud(CPUState *cpu, uint32_t address) {
 #ifdef MMX6_COOP_MODERN_STATE
 #include "mmx6_coop_snapshot.inc"
 #endif
+#include "mmx6_coop_views.inc"
 static void activate(void) {
     state_track.count=state_track.error=0;
 #ifdef MMX6_COOP_MODERN_STATE
@@ -2408,12 +2421,13 @@ static void activate(void) {
         !psx_mod_set_function_replacement(0x80049100,shared_effect_callback) ||
         !psx_mod_set_function_replacement(0x8004AE1C,shared_effect_callback) ||
         !psx_mod_set_function_replacement(0x801EE254,shared_effect_callback)) failed=1;
+    independent_activate();
     fprintf(stdout,"mmx6 co-op: development prototype active (OpenGL rendering required)\n");
 }
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
-        .compatibility_id = "mmx6-x-zero-delay-v18",
+        .compatibility_id = "mmx6-x-zero-delay-v19",
         .rollback_supported = 0,
         .savestates_supported = 0,
         .skip_bios_intro = 1,

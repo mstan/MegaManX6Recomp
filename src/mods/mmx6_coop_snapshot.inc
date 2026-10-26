@@ -55,7 +55,7 @@ static void snapshot_assets_loaded(const Mmx6AssetView *views,unsigned count) {
 static int snapshot_ready(void) {
     if(diagnostic && psx_mod_read_byte(diagnostic+0x50)==8)return 0;
     const unsigned guards[]={inside,player_call,stage_call,zero_world,world_render,
-        hud_call,render_x_death,effect_call,pickup_call,solid_call,solid_allocate_call,ride_call,
+        hud_call,render_x_death,effect_call,pickup_call,solid_call,solid_allocate_call,ride_call,view_call,private_draw,
         scene_call,zero_projected,unit_choices_call,intro_target_call,shared_fx_call,shared_fx_allocate_call,state_track.count,state_track.error,checkpoint_pending.phase,
         jump_audio_call,jump_audio_keyon_call,jump_audio_stop_call,jump_audio_faulted,
         jump_audio_slot,jump_audio_bank,jump_audio_tone,jump_audio_mode,jump_audio_calculated,jump_audio_stop_mask};
@@ -174,7 +174,7 @@ static uint32_t state_digest(void) {
     StateIO io={STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_fixed(&io,0x53483658u);state_core(&io,&core);
     const uint32_t resources[]={assets,assembly,palette_source,active_palette,packets,diagnostic,
         menu_memory,menu_assembly,hud_packets,(uint32_t)compressed_size,(unsigned)snapshot_asset_valid,
-        jump_audio_banks[0].guest,jump_audio_banks[1].guest,jump_audio_loaded};
+        jump_audio_banks[0].guest,jump_audio_banks[1].guest,jump_audio_loaded,independent_views};
     for(unsigned i=0;i<sizeof resources/sizeof resources[0];++i)state_integer(&io,resources[i],4,UINT32_MAX);
     if(snapshot_asset_valid)state_bytes(&io,snapshot_asset_sha,sizeof snapshot_asset_sha);
     const uint32_t guards[]={inside,player_call,stage_call,zero_world,world_render,hud_call,render_x_death,
@@ -218,7 +218,7 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    state_fixed(s,0x53503658u);state_fixed(s,7);
+    state_fixed(s,0x53503658u);state_fixed(s,8);state_fixed(s,independent_views);
     const uint32_t handles[]={assets,assembly,palette_source,active_palette,packets,diagnostic,menu_memory,menu_assembly,hud_packets,
         jump_audio_banks[0].guest,jump_audio_banks[1].guest};
     for(unsigned i=0;i<sizeof handles/sizeof handles[0];++i)state_fixed(s,handles[i]);
@@ -285,6 +285,7 @@ static void snapshot_read(const uint8_t *data,uint32_t len) {
     }
     bank_count=prepared_state.sprite_count;memcpy(ui_banks,prepared_state.ui,sizeof ui_banks);ui_bank_count=prepared_state.ui_count;
     prepared_state.valid=0;
+    independent_invalidate();
 }
 static int snapshot_resolve_texture(uint16_t id) {
     uint16_t pixels[65536];

@@ -61,7 +61,13 @@ uint16_t mmx6_diagnostics_p2(unsigned consumer,uint16_t buttons,int contaminated
 #ifdef MMX6_COOP_INPUT_TAINT_API
 void psx_session_input_taint_add(uint32_t flags){(void)flags;CHECK(0);}
 #endif
-int psx_mod_netplay_is_active(void){return 0;}
+int psx_mod_netplay_is_active(void){
+#ifdef MMX6_TEST_NETPLAY_ACTIVE
+    return MMX6_TEST_NETPLAY_ACTIVE;
+#else
+    return 0;
+#endif
+}
 int psx_mod_netplay_has_state_digest(void){return 1;}
 int psx_mod_texture_banks_supported(void){return texture_support;}
 int psx_mod_local_view_scope(void){return 0;}
@@ -70,6 +76,9 @@ void psx_mod_counter_add(const char *name,uint32_t count){(void)name;(void)count
 int psx_mod_read_disc_file(const char *name,void *data,uint32_t size,uint32_t *out){(void)name;(void)data;(void)size;(void)out;CHECK(0);return 0;}
 const uint16_t *gpu_get_vram(void){return test_vram;}
 void gpu_write_gp0(uint32_t value){
+#ifdef MMX6_TEST_PRIVATE_VIEW_GPU
+    if(MMX6_TEST_PRIVATE_VIEW_GPU(value,0))return;
+#endif
     CHECK(menu_vram_probe);
     if(!gp0_upload_stage){CHECK(value==0xA0000000);gp0_upload_stage=1;return;}
     if(gp0_upload_stage==1){gp0_upload_x=value&0xFFFF;gp0_upload_y=value>>16;gp0_upload_stage=2;return;}
@@ -78,7 +87,12 @@ void gpu_write_gp0(uint32_t value){
         CHECK(x<1024 && y<512 && gp0_upload_left);test_vram[y*1024+x]=(uint16_t)(value>>(i*16));++gp0_upload_at;--gp0_upload_left;}
     if(!gp0_upload_left)gp0_upload_stage=0;
 }
-void gpu_set_gp0_source(uint32_t address){CHECK(menu_vram_probe && !address && !gp0_upload_stage);}
+void gpu_set_gp0_source(uint32_t address){
+#ifdef MMX6_TEST_PRIVATE_VIEW_GPU
+    if(MMX6_TEST_PRIVATE_VIEW_GPU(address,1))return;
+#endif
+    CHECK(menu_vram_probe && !address && !gp0_upload_stage);
+}
 #ifndef MMX6_TEST_SESSION_RESOURCES
 int psx_mod_define_texture_bank(uint16_t id,uint32_t width,uint32_t height,const uint16_t *pixels){
     CHECK(id>=0x6000 && id<0x7000 && width==height && (width==16 || width==256));

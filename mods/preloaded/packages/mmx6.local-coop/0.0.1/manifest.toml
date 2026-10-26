@@ -39,3 +39,37 @@ label = "Side by side"
 [[plugin]]
 feature = "prototype"
 id = "mmx6.local-coop.prototype"
+
+[[option]]
+feature = "prototype"
+id = "local_cameras"
+label = "Local cameras"
+description = "Follow both players together, or give each player a separate 4:3 view in a side-by-side window."
+group = "Display"
+type = "choice"
+default = "unified"
+
+[[option.choice]]
+value = "unified"
+label = "Shared view"
+
+[[option.choice]]
+value = "split"
+label = "Separate views"
+
+[[option]]
+feature = "prototype"
+id = "cameras"
+label = "Netplay cameras"
+description = "Use a shared view, or let each player follow their own character. Both players must use the same setting."
+group = "Display"
+type = "choice"
+default = "unified"
+
+[[option.choice]]
+value = "unified"
+label = "Shared view"
+
+[[option.choice]]
+value = "independent"
+label = "Separate views"
