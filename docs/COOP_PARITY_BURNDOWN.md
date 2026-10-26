@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 21 passed (R2, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F33, F38, F48, F59, F67, F70, F205, F208), 1 failed (R3), 212 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 22 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F33, F38, F48, F59, F67, F70, F205, F208), 0 failed, 212 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -75,10 +75,10 @@ review, with checkpoint/protection bypasses explicit. Netplay, the other four
 CP2 checks and the whole intro obligation remain unverified. These results do
 not change the separate 234 comparison rows.
 
-All 234 reference rows are inventoried; 21/234 (9.0%) are passed. R15/F208
+All 234 reference rows are inventoried; 22/234 (9.4%) are passed. R15/F208
 now pass their exact bounded checks locally and in paired Windows loopback on
 `c3c5bdb`; their prior failures remain in history.
-R3 now has a reviewed local failure: Zero's native death burst uses X's blue
+R3 retains its historical reviewed local failure: Zero's native death burst uses X's blue
 icon textures and palette while X survives. The [14-artifact failure receipt](evidence/mmx6-death/manifest-bound-c3c5bdb-R3-Zero-FX11-resource-failure-reviewed.json)
 binds the actual native lethal contact, measured movement, visible effect
 retirement and survivor controls, compared with a fresh co-op-off original Zero
@@ -99,7 +99,7 @@ native visible expiry plus X movement, jump and landing. LOAD ends the default
 recording with its exact state-replacement failure; both strict admission paths
 refuse it. The generic fixture parent remains failed. Full both-seat death/retry,
 state semantics, paired and art/camera checks remain pending.
-R3 keeps its failed disposition until its complete bounded check is requalified.
+R3 now passes its complete bounded local/netplay check on `e0fdd1e`, as recorded below; the earlier counterexample and partial parents remain preserved.
 F59's `253c74e` local Yammar texture-placement failure remains in
 history. The `c3c5bdb` fix passes 103 debug and 103 production tests and reviewed
 local native artwork plus active-effect warm/cold current-build restoration.
@@ -1137,3 +1137,5 @@ is retained as a setup error, separately from the native rendering failure.
 Aggregate234 is7 passed,3 failed,224 unverified while this failure is open.
 
 The [six first-checkpoint terrain checks](evidence/mmx6-content/manifest-bound-e0fdd1e-six-first-checkpoint-terrain-local-reviewed.json) now pass locally on exact `e0fdd1e`: stages0?5 each retain independent X/Zero ascent, original ground collision and landing with the other hero stationary, followed by accepted movement and actual horizontal camera scrolling. All24 images were reviewed; native cards and graceful owned exit0 pass. The original checkpoint initializer bypasses reachability, and both strict recording/replay paths reject its tainted trace. This raises local native results from2 to8 without changing the234 comparisons or campaign/netplay aggregates. Recycle Lab retains three raw cameraY226 observations against vertical224 bounds; this bounded horizontal/ground check does not qualify vertical-camera/shake behavior or its cause.
+
+The [complete R3 death-burst qualification](evidence/mmx6-death/manifest-bound-e0fdd1e-R3-both-native-bursts-local-netplay-reviewed.json) passes on exact `e0fdd1e`/SDK`7cb474`. Both native X and Zero deaths occur at distinct positions locally and on each physical loopback peer; recorded native allocation origins match the fatal hero. Original asset/palette/UV comparisons and all30 reviewed composed images show blue X and gold/orange Zero particles, natural visible expiry and accepted survivor movement. Both pairs retain matching settled profiles,61 matching resolved CRC samples including15 after the R3 cases, four finalized ordinary recordings, unchanged fresh native cards and owned exits0. LOCAL Zero alone uses the existing positiveHP4 prerequisite, whose trace remains tainted and strictly refused for ordinary/replay admission. The original CPU working palette and actual rendered palette are distinguished explicitly when Zero survives. This requalifies the existing integrated `50f4a31` fix and raises comparisons21to22; no other death/retry/camera/content row receives credit.

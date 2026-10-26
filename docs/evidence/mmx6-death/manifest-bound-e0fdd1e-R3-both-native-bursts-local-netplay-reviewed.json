@@ -1,0 +1,1054 @@
+{
+  "schema": 1,
+  "kind": "root_reviewed_R3_both_native_bursts_local_and_netplay",
+  "reviewed_at_utc": "2026-10-26T00:18:02.961447+00:00",
+  "comparison": "R3",
+  "frozen_row_sha256": "fe414d5fc0d4959b059e49d17593e36ccd9894b66536a647ae69ff926949e8d4",
+  "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+  "source_fix_commit": "50f4a31cd6c1344f4448be51e3016a84e96b2566",
+  "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+  "executable_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+  "compiled_manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+  "admitted_modes": {
+    "local": "passed",
+    "netplay": "passed"
+  },
+  "checks": {
+    "each_seat_actual_native_death": true,
+    "distinct_fatal_body_and_exact_native_allocation_origins": true,
+    "original_blue_X_and_gold_Zero_pixels_UVs_and_rendered_palettes": true,
+    "natural_visible_expiry": true,
+    "living_partner_native_control": true,
+    "both_physical_online_peers_independently_observed": true,
+    "original_build_source_profile_CRC_cards_and_owned_exits": true
+  },
+  "cases": [
+    {
+      "mode": "local",
+      "peer": 0,
+      "character": "X",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat0-v3\\qualification.json",
+        "sha256": "00c004148000c862fefa9561ce82d5addfd41cff4ab29b35db6dca5eeb55fdd0",
+        "bytes": 10592475
+      },
+      "checks": {
+        "native_fatal_distinct_partner": true,
+        "original_allocation_origin_identity": true,
+        "source_original_FX11_pixels_and_rendered_colors": true,
+        "native_visible_retirement": true,
+        "living_partner_input": true
+      },
+      "fatal_position": [
+        398.1875,
+        1083.0
+      ],
+      "partner_position": [
+        277.5,
+        1114.0
+      ],
+      "native_allocation_origins": [
+        [
+          398.1875,
+          1083.0
+        ]
+      ],
+      "visible_effect_observations": 453,
+      "visible_to_final_native_ticks": 363,
+      "original_source_candidate_frames": [
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113
+      ],
+      "images": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat0-v3\\hud\\initial.png",
+          "sha256": "51ff837c5d510ba0a38df29bcdfa665eb526b0f16a83ac8aa667615e187884dd",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat0-v3\\hud\\native-fatal.png",
+          "sha256": "1697b9b25581feb33c1a034734c876b67a44635e3974f6e4b9fcdb1fb1258bed",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat0-v3\\hud\\native-visible-burst.png",
+          "sha256": "25076848579d245a4d2153625b0c85c57eaf3e2746e54ae084b7eb4aeb9f6137",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat0-v3\\hud\\naturally-expired-survivor.png",
+          "sha256": "c19dfc19ff23cb811c5ac02300ee1ff2d6899ccef50056ffef92138bb822bd62",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat0-v3\\hud\\survivor-controlled.png",
+          "sha256": "99015738e71341c6cd3bdbc12ef78b3f80a3f5c8fb4d327db8d874aff72d7dc7",
+          "bytes": 2074543
+        }
+      ],
+      "visible_GPU_artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat0-v3\\hud\\native-visible-burst-completed-gp0.json.gz",
+        "sha256": "3068b4c0f0ff5f11dae5e3cf8c3549c65e5bcbb4f3f87a40ab284f5e2626d772",
+        "bytes": 11893
+      },
+      "limits": [
+        "Read-only actor/origin records and completed GPU frames are nearby independent observations; no instruction-atomic whole-machine claim.",
+        "Reference frame/shape candidates reproduce actual packet/texture words; no invented source quad or one-to-one completed-frame actor pointer.",
+        "Post-render CPU working palette may be original X or the Zero survivor context; its actual pointer/colors are identified separately from the rendered X palette in referenced VRAM and GPU FBO."
+      ],
+      "source_candidate_comparison_records": 121,
+      "unique_actual_used_packets_or_GT3_pairs": 121
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "character": "X",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat0-v2\\qualification.json",
+        "sha256": "3c059604ea674decc5e6ff4507b21ffdfd7e7ebb32879c1518bd8bfd0196570d",
+        "bytes": 7466393
+      },
+      "checks": {
+        "native_fatal_distinct_partner": true,
+        "original_allocation_origin_identity": true,
+        "source_original_FX11_pixels_and_rendered_colors": true,
+        "native_visible_retirement": true,
+        "living_partner_input": true
+      },
+      "fatal_position": [
+        395.5,
+        1083.0
+      ],
+      "partner_position": [
+        259.0,
+        1114.0
+      ],
+      "native_allocation_origins": [
+        [
+          395.5,
+          1083.0
+        ]
+      ],
+      "visible_effect_observations": 171,
+      "visible_to_final_native_ticks": 398,
+      "original_source_candidate_frames": [
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113
+      ],
+      "images": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat0-v2\\R3-peer-0\\initial.png",
+          "sha256": "bd9936230783359abf35cd30824e9ed3e2e59baad9f05d25e9e5c684cd0b9f2c",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat0-v2\\R3-peer-0\\native-fatal.png",
+          "sha256": "4407dd5d844c30b51f63f30f133402e444e73a39aaade688cee67c4d5113bfd6",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat0-v2\\R3-peer-0\\native-visible-burst.png",
+          "sha256": "3aa439202d26fdc60f847e4c4ec8723b16571491933d70aab95a171dfe375b38",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat0-v2\\R3-peer-0\\naturally-expired-survivor.png",
+          "sha256": "2308aea6770ecf8257b0105c824adacbcfdad9d7eb3f39245c3c4481b4e4815c",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat0-v2\\R3-peer-0\\survivor-controlled.png",
+          "sha256": "d1b4ad529af372727528064467fe1f306db7a2d34e3aac482bbb84a3a98c28fd",
+          "bytes": 2074543
+        }
+      ],
+      "visible_GPU_artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat0-v2\\R3-peer-0\\native-visible-burst-completed-gp0.json.gz",
+        "sha256": "e76116c79deb6b3b52a66ec07fd7259332f8c070af09057c72ae0cce8219c9d1",
+        "bytes": 10724
+      },
+      "limits": [
+        "Read-only actor/origin records and completed GPU frames are nearby independent observations; no instruction-atomic whole-machine claim.",
+        "Reference frame/shape candidates reproduce actual packet/texture words; no invented source quad or one-to-one completed-frame actor pointer.",
+        "Post-render CPU working palette may be original X or the Zero survivor context; its actual pointer/colors are identified separately from the rendered X palette in referenced VRAM and GPU FBO."
+      ],
+      "source_candidate_comparison_records": 80,
+      "unique_actual_used_packets_or_GT3_pairs": 80
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "character": "X",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat0-v2\\qualification.json",
+        "sha256": "3c059604ea674decc5e6ff4507b21ffdfd7e7ebb32879c1518bd8bfd0196570d",
+        "bytes": 7466393
+      },
+      "checks": {
+        "native_fatal_distinct_partner": true,
+        "original_allocation_origin_identity": true,
+        "source_original_FX11_pixels_and_rendered_colors": true,
+        "native_visible_retirement": true,
+        "living_partner_input": true
+      },
+      "fatal_position": [
+        395.5,
+        1083.0
+      ],
+      "partner_position": [
+        259.0,
+        1114.0
+      ],
+      "native_allocation_origins": [
+        [
+          395.5,
+          1083.0
+        ]
+      ],
+      "visible_effect_observations": 183,
+      "visible_to_final_native_ticks": 427,
+      "original_source_candidate_frames": [
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113
+      ],
+      "images": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat0-v2\\R3-peer-1\\initial.png",
+          "sha256": "3dbbce41a038fc57a499db9080a0070d248d5b01676a7d703bcc3972214a6b87",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat0-v2\\R3-peer-1\\native-fatal.png",
+          "sha256": "43a7d88a8c2287c46c2c702c7c8686fb296f0384897e5d9a2aa1d8616e83f202",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat0-v2\\R3-peer-1\\native-visible-burst.png",
+          "sha256": "040af87ebd7118fd2e0d5691b1888baed70243aca5a034b5e6a39e70087c571e",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat0-v2\\R3-peer-1\\naturally-expired-survivor.png",
+          "sha256": "560dbf368e2dd42b333d5c3ae187121a1de76cb2cf6ed1800c3bb93194706c65",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat0-v2\\R3-peer-1\\survivor-controlled.png",
+          "sha256": "03bb73667dd7f63621e4a5c3fa7d87b69aba681caf067187df9e2855ce312cfb",
+          "bytes": 2074543
+        }
+      ],
+      "visible_GPU_artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat0-v2\\R3-peer-1\\native-visible-burst-completed-gp0.json.gz",
+        "sha256": "dff0d3d915d82b0206c708e164df312a03d2f81f26ddb3431d63e106439f7dd2",
+        "bytes": 9292
+      },
+      "limits": [
+        "Read-only actor/origin records and completed GPU frames are nearby independent observations; no instruction-atomic whole-machine claim.",
+        "Reference frame/shape candidates reproduce actual packet/texture words; no invented source quad or one-to-one completed-frame actor pointer.",
+        "Post-render CPU working palette may be original X or the Zero survivor context; its actual pointer/colors are identified separately from the rendered X palette in referenced VRAM and GPU FBO."
+      ],
+      "source_candidate_comparison_records": 36,
+      "unique_actual_used_packets_or_GT3_pairs": 36
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "character": "Zero",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat1-v3\\qualification.json",
+        "sha256": "13c7e189625efd20cb70859a71a0f104531dcb7f1b80cf0804368ed3a28ae62b",
+        "bytes": 7329191
+      },
+      "checks": {
+        "native_fatal_distinct_partner": true,
+        "original_allocation_origin_identity": true,
+        "source_original_FX11_pixels_and_rendered_colors": true,
+        "native_visible_retirement": true,
+        "living_partner_input": true
+      },
+      "fatal_position": [
+        395.5,
+        1082.0
+      ],
+      "partner_position": [
+        285.5,
+        1115.0
+      ],
+      "native_allocation_origins": [
+        [
+          395.5,
+          1082.0
+        ]
+      ],
+      "visible_effect_observations": 472,
+      "visible_to_final_native_ticks": 384,
+      "original_source_candidate_frames": [
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113
+      ],
+      "images": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat1-v3\\ammo-hud\\initial.png",
+          "sha256": "51ff837c5d510ba0a38df29bcdfa665eb526b0f16a83ac8aa667615e187884dd",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat1-v3\\ammo-hud\\native-fatal.png",
+          "sha256": "9fd0fd93f4f69050a1b2b55c938b38daf1a2a104e303fdafe8e2431c817d95aa",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat1-v3\\ammo-hud\\native-visible-burst.png",
+          "sha256": "04da60a0aea1c9110170c815315bc10fef241f16f10ecb7e933aa2bb2e24f5c9",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat1-v3\\ammo-hud\\naturally-expired-survivor.png",
+          "sha256": "e83c8d102432e4423778266be9e47d8e923b7ced4401619127896ffb0c6ae545",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat1-v3\\ammo-hud\\survivor-controlled.png",
+          "sha256": "a56e5f7a2f6a880f6bc41f130b1b4d95a25d3cf193762d518b67101857580339",
+          "bytes": 2074543
+        }
+      ],
+      "visible_GPU_artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat1-v3\\ammo-hud\\native-visible-burst-completed-gp0.json.gz",
+        "sha256": "4ee7d50bc63d7ba20871dfbcc8d34b9894078ab1dd499e039b480c67c99c51c4",
+        "bytes": 14848
+      },
+      "limits": [
+        "Read-only actor/origin records and completed GPU frames are nearby independent observations; no instruction-atomic whole-machine claim.",
+        "Reference frame/shape candidates reproduce actual packet/texture words; no invented source quad or one-to-one completed-frame actor pointer.",
+        "Post-render CPU working palette may be original X or the Zero survivor context; its actual pointer/colors are identified separately from the rendered X palette in referenced VRAM and GPU FBO."
+      ],
+      "source_candidate_comparison_records": 106,
+      "unique_actual_used_packets_or_GT3_pairs": 106
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "character": "Zero",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v2\\qualification.json",
+        "sha256": "5a9ff244f5aaae7674733a28ec094b749ee4fc55e68fb05bfad9b12bd9675c61",
+        "bytes": 8041676
+      },
+      "checks": {
+        "native_fatal_distinct_partner": true,
+        "original_allocation_origin_identity": true,
+        "source_original_FX11_pixels_and_rendered_colors": true,
+        "native_visible_retirement": true,
+        "living_partner_input": true
+      },
+      "fatal_position": [
+        398.4375,
+        1082.0
+      ],
+      "partner_position": [
+        261.5,
+        1115.0
+      ],
+      "native_allocation_origins": [
+        [
+          398.4375,
+          1082.0
+        ]
+      ],
+      "visible_effect_observations": 205,
+      "visible_to_final_native_ticks": 386,
+      "original_source_candidate_frames": [
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113
+      ],
+      "images": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v2\\R3-peer-0\\initial.png",
+          "sha256": "e451fd6d9fee5932c879362ab410368c55d24ef9915ab90f9c56fd95013aadcc",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v2\\R3-peer-0\\native-fatal.png",
+          "sha256": "c455e3e789136f97bfec018b6ffcd40a427780405e0bb044a6e3150dcdb074d3",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v2\\R3-peer-0\\native-visible-burst.png",
+          "sha256": "6b03ac0c98170bbcf31a343fdcb29cb6ff2e6a94de8320186e051094308b0699",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v2\\R3-peer-0\\naturally-expired-survivor.png",
+          "sha256": "15481d9ebfd4544e78672de36aa2297d2cbfb09211d7e6132d733de12cd02ccb",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v2\\R3-peer-0\\survivor-controlled.png",
+          "sha256": "d6591e2a9998116c8a551a9d4deffbec503912566fb712fa1212f0a931dea61f",
+          "bytes": 2074543
+        }
+      ],
+      "visible_GPU_artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v2\\R3-peer-0\\native-visible-burst-completed-gp0.json.gz",
+        "sha256": "a472e4a5cd7d2e540dad913b8c7bbcd283183cf7c56e3bd2e6b5e9e05c88fe71",
+        "bytes": 11364
+      },
+      "limits": [
+        "Read-only actor/origin records and completed GPU frames are nearby independent observations; no instruction-atomic whole-machine claim.",
+        "Reference frame/shape candidates reproduce actual packet/texture words; no invented source quad or one-to-one completed-frame actor pointer.",
+        "Post-render CPU working palette may be original X or the Zero survivor context; its actual pointer/colors are identified separately from the rendered X palette in referenced VRAM and GPU FBO."
+      ],
+      "source_candidate_comparison_records": 38,
+      "unique_actual_used_packets_or_GT3_pairs": 38
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "character": "Zero",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v2\\qualification.json",
+        "sha256": "5a9ff244f5aaae7674733a28ec094b749ee4fc55e68fb05bfad9b12bd9675c61",
+        "bytes": 8041676
+      },
+      "checks": {
+        "native_fatal_distinct_partner": true,
+        "original_allocation_origin_identity": true,
+        "source_original_FX11_pixels_and_rendered_colors": true,
+        "native_visible_retirement": true,
+        "living_partner_input": true
+      },
+      "fatal_position": [
+        398.4375,
+        1082.0
+      ],
+      "partner_position": [
+        261.5,
+        1115.0
+      ],
+      "native_allocation_origins": [
+        [
+          398.4375,
+          1082.0
+        ]
+      ],
+      "visible_effect_observations": 222,
+      "visible_to_final_native_ticks": 440,
+      "original_source_candidate_frames": [
+        105,
+        106,
+        107,
+        108,
+        109,
+        110,
+        111,
+        112,
+        113
+      ],
+      "images": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v2\\R3-peer-1\\initial.png",
+          "sha256": "e451fd6d9fee5932c879362ab410368c55d24ef9915ab90f9c56fd95013aadcc",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v2\\R3-peer-1\\native-fatal.png",
+          "sha256": "084f6b0394503b7a21e5ee943be69bd97f0077bc2fe8bdc0f9b97aec79d61c84",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v2\\R3-peer-1\\native-visible-burst.png",
+          "sha256": "80ca43788cd956564d555fa3ba7712240b909007f53f04d37ada5307da233486",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v2\\R3-peer-1\\naturally-expired-survivor.png",
+          "sha256": "9926dd7d776cd50435021ca932baea414d3d0bbcd3995877a9504df90851fccc",
+          "bytes": 2074543
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v2\\R3-peer-1\\survivor-controlled.png",
+          "sha256": "39eebbf031ab021373375b63e9de03f5c6513fdbea0ef4150f07795bbda2fe01",
+          "bytes": 2074543
+        }
+      ],
+      "visible_GPU_artifact": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v2\\R3-peer-1\\native-visible-burst-completed-gp0.json.gz",
+        "sha256": "cdd01cf4b3f020c21db6c0fca8e4b17e0e5a656a9aa634cdb21cfd66836b6c28",
+        "bytes": 9993
+      },
+      "limits": [
+        "Read-only actor/origin records and completed GPU frames are nearby independent observations; no instruction-atomic whole-machine claim.",
+        "Reference frame/shape candidates reproduce actual packet/texture words; no invented source quad or one-to-one completed-frame actor pointer.",
+        "Post-render CPU working palette may be original X or the Zero survivor context; its actual pointer/colors are identified separately from the rendered X palette in referenced VRAM and GPU FBO."
+      ],
+      "source_candidate_comparison_records": 32,
+      "unique_actual_used_packets_or_GT3_pairs": 32
+    }
+  ],
+  "parents": [
+    {
+      "mode": "local",
+      "seat": 0,
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat0-v3\\qualification.json",
+        "sha256": "00c004148000c862fefa9561ce82d5addfd41cff4ab29b35db6dca5eeb55fdd0"
+      },
+      "owned_pid": 38756,
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "cards_unchanged": true,
+      "recording": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat0-v3\\candidate\\saves\\input-recordings\\session-1792972701431448-1-0\\inputs.jsonl",
+        "sha256": "e688f66c0db93b9f2a7d0765aac834e654a2ca86ad9746f8cdf3adaa989aefd7",
+        "events": 15068,
+        "natives": 8928,
+        "p2_reads": 6140,
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+          "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+          "mode": "offline",
+          "profile": null,
+          "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+          "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+        },
+        "requested_jump_seats": [],
+        "consumed_cross_seen_anywhere": [
+          0
+        ],
+        "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence"
+      },
+      "executed_source": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat0-v3\\caller-executed-source.py",
+        "sha256": "e6acd6ee8b644af297c6f08de3a07f891ed18a41d520f463e912ce7f132edf58"
+      }
+    },
+    {
+      "mode": "local",
+      "seat": 1,
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat1-v3\\qualification.json",
+        "sha256": "13c7e189625efd20cb70859a71a0f104531dcb7f1b80cf0804368ed3a28ae62b"
+      },
+      "owned_pid": 79188,
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "cards_unchanged": true,
+      "recording": {
+        "status": "failed_fixture_taint_retained_for_diagnostics",
+        "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat1-v3\\candidate\\saves\\input-recordings\\session-1792972600255521-1-0\\inputs.jsonl",
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+          "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+          "mode": "offline",
+          "profile": null,
+          "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+          "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+        },
+        "terminal_failure": "unilateral debug or fixture input contaminated capture",
+        "native_status": {
+          "contract": "mmx6.native-consumption.v1",
+          "epoch": 1,
+          "failure": "unilateral debug or fixture input contaminated capture",
+          "schema": 1,
+          "scope": "native-consumption diagnostics; replay unimplemented",
+          "status": "failed"
+        },
+        "events": 6194,
+        "natives": 4306,
+        "p2_reads": 1888,
+        "artifacts": [
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat1-v3\\recording-rejection\\settings.json",
+            "bytes": 10329,
+            "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat1-v3\\recording-rejection\\content.json",
+            "bytes": 503,
+            "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat1-v3\\recording-rejection\\simulation-contract.json",
+            "bytes": 259,
+            "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat1-v3\\recording-rejection\\inputs.jsonl",
+            "bytes": 812883,
+            "sha256": "305b239986555ed370df793a6e5b712431c42aaff05635f2da59bfede41630ab"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat1-v3\\recording-rejection\\status.json",
+            "bytes": 211,
+            "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat1-v3\\recording-rejection\\card1.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat1-v3\\recording-rejection\\card2.initial.mcd",
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "strict_refusals": {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          }
+        },
+        "finalized_capture_admitted": false,
+        "replay_admitted": false,
+        "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+      },
+      "executed_source": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat1-v3\\caller-executed-source.py",
+        "sha256": "e6acd6ee8b644af297c6f08de3a07f891ed18a41d520f463e912ce7f132edf58"
+      }
+    },
+    {
+      "mode": "netplay",
+      "seat": 0,
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat0-v2\\qualification.json",
+        "sha256": "3c059604ea674decc5e6ff4507b21ffdfd7e7ebb32879c1518bd8bfd0196570d"
+      },
+      "owned_pids": [
+        27516,
+        67536
+      ],
+      "cleanups": [
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "cards_unchanged": true,
+      "profile": {
+        "profile": "mmx6.win64-clang22.loopback",
+        "revision": 2,
+        "selected_sha256": "9a02b2be2f2760ad19265935ee4b14c69c9a35ad58183ea60b981d7df13aec70",
+        "peers": [
+          {
+            "capabilities": {
+              "actual_image_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "9a02b2be2f2760ad19265935ee4b14c69c9a35ad58183ea60b981d7df13aec70",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          },
+          {
+            "capabilities": {
+              "actual_image_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "9a02b2be2f2760ad19265935ee4b14c69c9a35ad58183ea60b981d7df13aec70",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          }
+        ]
+      },
+      "resolved_crc_samples": 31,
+      "resolved_crc_samples_after_R3": 7,
+      "recordings": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat0-v2\\peer-0\\saves\\input-recordings\\session-1792973208361316-1-0\\inputs.jsonl",
+          "sha256": "8be2aafeabc0f60098cbe4a595b920b2907fa8ef5c11db066a0804e5508783b0",
+          "events": 14126,
+          "natives": 5838,
+          "p2_reads": 8288,
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+            "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "9a02b2be2f2760ad19265935ee4b14c69c9a35ad58183ea60b981d7df13aec70"
+            },
+            "settings_sha256": "678ea0742d375e120ec86c29053b60d74181951ceb43831bbca670a5875771e6",
+            "simulation_contract_sha256": "0093b481e0490752984dbce81d01d3a496c66cfea601a016080f8562104b8011"
+          }
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat0-v2\\peer-1\\saves\\input-recordings\\session-1792973208361754-1-0\\inputs.jsonl",
+          "sha256": "093b5ce21a1e7deb4cbcefa841b705b298aee5f5e0d9fe44539c13de38811548",
+          "events": 14130,
+          "natives": 5840,
+          "p2_reads": 8290,
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+            "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "9a02b2be2f2760ad19265935ee4b14c69c9a35ad58183ea60b981d7df13aec70"
+            },
+            "settings_sha256": "8675b5fc560c2a45be3bb48e46e7b3e21c76f071a18c8809038a7e664fd28605",
+            "simulation_contract_sha256": "0093b481e0490752984dbce81d01d3a496c66cfea601a016080f8562104b8011"
+          }
+        }
+      ],
+      "independent_peer_checks": {
+        "own_actual_native_fatal": true,
+        "own_visible_original_effects": true,
+        "own_distinct_fatal_origin": true,
+        "own_allocated_origins_near_fatal_actor": true,
+        "own_native_visible_retirement": true,
+        "own_survivor_movement_accepted": true
+      },
+      "independent_card_gate": "All real native personal/sandbox/recording-initial card files independently checked as original SDK blank131072B SHA7706c7d4; four on host, six on guest. Raw files retained.",
+      "executed_source": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat0-v2\\caller-executed-source.py",
+        "sha256": "91ce033e40a6928d4b04b53b74ff266e40b6f4938da83178071fa1711ebc7b24"
+      }
+    },
+    {
+      "mode": "netplay",
+      "seat": 1,
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v2\\qualification.json",
+        "sha256": "5a9ff244f5aaae7674733a28ec094b749ee4fc55e68fb05bfad9b12bd9675c61"
+      },
+      "owned_pids": [
+        17156,
+        57280
+      ],
+      "cleanups": [
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "cards_unchanged": true,
+      "profile": {
+        "profile": "mmx6.win64-clang22.loopback",
+        "revision": 2,
+        "selected_sha256": "c80079aabba4eacc30551a7067063cd49aea06597a18a8a4866b67af41b924eb",
+        "peers": [
+          {
+            "capabilities": {
+              "actual_image_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "c80079aabba4eacc30551a7067063cd49aea06597a18a8a4866b67af41b924eb",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          },
+          {
+            "capabilities": {
+              "actual_image_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "c80079aabba4eacc30551a7067063cd49aea06597a18a8a4866b67af41b924eb",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          }
+        ]
+      },
+      "resolved_crc_samples": 30,
+      "resolved_crc_samples_after_R3": 8,
+      "recordings": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v2\\peer-0\\saves\\input-recordings\\session-1792973078513872-1-0\\inputs.jsonl",
+          "sha256": "36a148390221fe26aad8ac6b9e62ec30e762b76c10a59db6755c15fa6bb55647",
+          "events": 11545,
+          "natives": 4752,
+          "p2_reads": 6793,
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+            "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "c80079aabba4eacc30551a7067063cd49aea06597a18a8a4866b67af41b924eb"
+            },
+            "settings_sha256": "678ea0742d375e120ec86c29053b60d74181951ceb43831bbca670a5875771e6",
+            "simulation_contract_sha256": "996e262548b54cf8f1f7590423d19ce4e24e9587695f2489ee1f09ee8a512f35"
+          }
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v2\\peer-1\\saves\\input-recordings\\session-1792973078514627-1-0\\inputs.jsonl",
+          "sha256": "7f72019f583f72dd46b3669f09dfbebe733e043e3c1f8545f228be6bdbe60cb7",
+          "events": 11554,
+          "natives": 4755,
+          "p2_reads": 6799,
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+            "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "c80079aabba4eacc30551a7067063cd49aea06597a18a8a4866b67af41b924eb"
+            },
+            "settings_sha256": "8675b5fc560c2a45be3bb48e46e7b3e21c76f071a18c8809038a7e664fd28605",
+            "simulation_contract_sha256": "996e262548b54cf8f1f7590423d19ce4e24e9587695f2489ee1f09ee8a512f35"
+          }
+        }
+      ],
+      "independent_peer_checks": {
+        "own_actual_native_fatal": true,
+        "own_visible_original_effects": true,
+        "own_distinct_fatal_origin": true,
+        "own_allocated_origins_near_fatal_actor": true,
+        "own_native_visible_retirement": true,
+        "own_survivor_movement_accepted": true
+      },
+      "independent_card_gate": "All real native personal/sandbox/recording-initial card files independently checked as original SDK blank131072B SHA7706c7d4; four on host, six on guest. Raw files retained.",
+      "executed_source": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v2\\caller-executed-source.py",
+        "sha256": "91ce033e40a6928d4b04b53b74ff266e40b6f4938da83178071fa1711ebc7b24"
+      }
+    }
+  ],
+  "original_art_review": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-v48-original-art-review-v1.json",
+    "sha256": "b03415a90f8b0064441bf2fa35a6cd7aa3231d285d5049c516df3be50d71059d"
+  },
+  "root_visual_review": {
+    "all30_composed_images_inspected": true,
+    "contact_sheets": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-v48-root-visual-1.png",
+        "sha256": "624489992229515c0499ceb28390b413e18e43a61f6ec0b12dd96ea293469234"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-v48-root-visual-2.png",
+        "sha256": "ad06c1945462dea8ff8cc5efe8e954d299493908d70db6b857a8273b74feb855"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-v48-root-visual-3.png",
+        "sha256": "7bceb3c32fc24c9227d8e2a005aaacdacfcf7d7c7ab4de25d50c4be94beb2a67"
+      }
+    ],
+    "observation": "X uses original blue/cyan body/orbs and Zero uses original gold/orange orbs at the fatal actor side. Each burst disappears naturally; the other hero remains visible and moves under its own input."
+  },
+  "prior_attempts": [
+    {
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat1-v1\\qualification.json",
+        "sha256": "40a3a613e3dfc2156fcb5a5a0ece30bfcdcd42752308730c620b81d302781066"
+      },
+      "disposition": "Completed component; most burst clipped after survivor-camera return. New capture positions stationary partner closer.",
+      "promoted": false
+    },
+    {
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat0-v1\\qualification.json",
+        "sha256": "44da4b52c173218d6993e14c267eebea666ccf55c093e9f95ce0417043c0cf64"
+      },
+      "disposition": "Native recoil moved X back below first ledge; route timed out, no native death.",
+      "promoted": false
+    },
+    {
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-local-v48-root-seat0-v2\\qualification.json",
+        "sha256": "f66edc58ea6259e008b01019ef89438846db6b4e06ff2d79c7f301ef395b9458"
+      },
+      "disposition": "Native X death occurred; old capture helper rejected the actual valid private working-palette pointer.",
+      "promoted": false
+    },
+    {
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R3-native-burst-paired-v48-root-seat1-v1\\qualification.json",
+        "sha256": "0a18e5864c2e1fbef5bf221e07847d1607c10bbc38d2efa8162026584e20c626"
+      },
+      "disposition": "Native Zero death occurred on both peers; requested100px separation gate stopped at actual96.94px. Earlier partner input/release compensates measured paired observation latency.",
+      "promoted": false
+    }
+  ],
+  "limits": [
+    "Exact V48 game e0fdd1e / SDK7cb474 / Windows x64 development profile only; X/P1 and Zero/P2, original intro first enemy. Opposite roster and other hosts/OS/CPUs are separate.",
+    "Two fresh local runs and two fresh paired runs; no same-process rematch or team-wipe/retry qualification.",
+    "Default shared native4:3 view. Some outward particles naturally leave the viewport. Native allocation records retain exact fatal-body origins; no private-camera or all-scenery claim.",
+    "Finite visible expiry is observed through original native updates. Invisible native radial allocations may remain; no forced pool clearing or invented slot retirement.",
+    "Actor/origin reads, immutable bank prefixes, completed GP0 frames, VRAM/FBO rows and composed output are nearby independent observations; no instruction-atomic full-machine or one-to-one packet/actor-frame claim.",
+    "Original decoder frame/shape alternatives may match one actual packet more than once; comparison records are not particle or gameplay-pass counts.",
+    "After primary death, post-render scratch may reference original X RAM or the exact Zero private working allocation. Its actual pointer/colors are checked separately; original X rendered colors use actual referenced VRAM and GPU FBO, while Zero uses original-matched immutable private RGB555 banks. Existing comparator CPU-context flags remain unmodified in the raw review.",
+    "Only LOCAL Zero lowers current HP to positive4 via existing offline command1. Actual original contacts must cause fatal and all effects. LOCAL X and both peers of both online runs start fullHP32 with no fixture/result writes.",
+    "LOCAL X ordinary native recording finalized15068 events. LOCAL Zero fixture-tainted capture is retained and strictly refused by ordinary/replay admission. Four ONLINE traces finalize canonically; no replay pass.",
+    "Existing owned pair audio-phase callback is explicitly replaced by named R3 observations. Structural audio-prefixed gate labels remain; no audio row or service/lobby/Host-Join qualification follows.",
+    "Historical failed/partial evidence remains. R3 source fix50f4a31 is already integrated; no new game-code fix or other comparison/content pass is claimed by this QA commit."
+  ],
+  "curator": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-R3-v48-root-v1.py",
+    "sha256": "4fe4dbd550427da95091f41a31cc73ff0bb02b4d99a2bb314e259a8a5a49df99"
+  }
+}

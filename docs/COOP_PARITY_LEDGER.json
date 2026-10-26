@@ -315,14 +315,14 @@
           "src/mods/mmx6_coop_plugin.c:render_actor",
           "src/mods/mmx6_coop_plugin.c:draw_coop_hud"
         ],
-        "status": "failed",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -365,9 +365,91 @@
               "compiled_manifest_sha256": "a1bb4d7cd27fd78df596a23e23318153ee556f7b2fae117ba288ac35b9ee2c50",
               "sdk_commit": "5bd63adf265d6019a30fec221001ce481c602144"
             }
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+            "build_identity": {
+              "executable_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+              "compiled_manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "location": "original intro first native enemy",
+              "view": "shared native4:3 OpenGL",
+              "input": "owned published digital keyboard slots",
+              "audio": "emulated and muted dummy output",
+              "transport": "offline"
+            },
+            "action": "Kill each seat through original native contact at a distinct position; observe actual allocation origins, original-colored composed particles, natural visible expiry and the surviving partner accepting input.",
+            "outcome": "Both characters pass their native burst checks. Root reviewed all30 local/physical-peer images; original native X texture/UV/VRAM/FBO and original Zero immutable-bank/palette/UV comparisons pass. Native origins exactly match each actual fatal body. Both online peers independently pass each death case with61 matching resolved CRC samples,15 after the named R3 cases, four finalized ordinary traces, unchanged native cards and owned exits0.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-death\\manifest-bound-e0fdd1e-R3-both-native-bursts-local-netplay-reviewed.json",
+                "sha256": "15ef2df3c2e985c2ecc1feffcd42117b698e7dbc177ea494b71654a6ac3a203a"
+              }
+            ],
+            "limits": [
+              "Exact V48 game e0fdd1e / SDK7cb474 / Windows x64 development profile only; X/P1 and Zero/P2, original intro first enemy. Opposite roster and other hosts/OS/CPUs are separate.",
+              "Two fresh local runs and two fresh paired runs; no same-process rematch or team-wipe/retry qualification.",
+              "Default shared native4:3 view. Some outward particles naturally leave the viewport. Native allocation records retain exact fatal-body origins; no private-camera or all-scenery claim.",
+              "Finite visible expiry is observed through original native updates. Invisible native radial allocations may remain; no forced pool clearing or invented slot retirement.",
+              "Actor/origin reads, immutable bank prefixes, completed GP0 frames, VRAM/FBO rows and composed output are nearby independent observations; no instruction-atomic full-machine or one-to-one packet/actor-frame claim.",
+              "Original decoder frame/shape alternatives may match one actual packet more than once; comparison records are not particle or gameplay-pass counts.",
+              "After primary death, post-render scratch may reference original X RAM or the exact Zero private working allocation. Its actual pointer/colors are checked separately; original X rendered colors use actual referenced VRAM and GPU FBO, while Zero uses original-matched immutable private RGB555 banks. Existing comparator CPU-context flags remain unmodified in the raw review.",
+              "Only LOCAL Zero lowers current HP to positive4 via existing offline command1. Actual original contacts must cause fatal and all effects. LOCAL X and both peers of both online runs start fullHP32 with no fixture/result writes.",
+              "LOCAL X ordinary native recording finalized15068 events. LOCAL Zero fixture-tainted capture is retained and strictly refused by ordinary/replay admission. Four ONLINE traces finalize canonically; no replay pass.",
+              "Existing owned pair audio-phase callback is explicitly replaced by named R3 observations. Structural audio-prefixed gate labels remain; no audio row or service/lobby/Host-Join qualification follows.",
+              "Historical failed/partial evidence remains. R3 source fix50f4a31 is already integrated; no new game-code fix or other comparison/content pass is claimed by this QA commit."
+            ],
+            "bypasses": [
+              "LOCAL Zero only: existing offline positiveHP4 prerequisite; no fatal/FX/position/action/result writes."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+            "build_identity": {
+              "executable_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+              "compiled_manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "location": "original intro first native enemy",
+              "view": "shared native4:3 OpenGL",
+              "input": "owned published digital keyboard slots",
+              "audio": "emulated and muted dummy output",
+              "transport": "same-machine direct loopback delay3, mmx6.win64-clang22.loopback revision2"
+            },
+            "action": "Kill each seat through original native contact at a distinct position; observe actual allocation origins, original-colored composed particles, natural visible expiry and the surviving partner accepting input.",
+            "outcome": "Both characters pass their native burst checks. Root reviewed all30 local/physical-peer images; original native X texture/UV/VRAM/FBO and original Zero immutable-bank/palette/UV comparisons pass. Native origins exactly match each actual fatal body. Both online peers independently pass each death case with61 matching resolved CRC samples,15 after the named R3 cases, four finalized ordinary traces, unchanged native cards and owned exits0.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-death\\manifest-bound-e0fdd1e-R3-both-native-bursts-local-netplay-reviewed.json",
+                "sha256": "15ef2df3c2e985c2ecc1feffcd42117b698e7dbc177ea494b71654a6ac3a203a"
+              }
+            ],
+            "limits": [
+              "Exact V48 game e0fdd1e / SDK7cb474 / Windows x64 development profile only; X/P1 and Zero/P2, original intro first enemy. Opposite roster and other hosts/OS/CPUs are separate.",
+              "Two fresh local runs and two fresh paired runs; no same-process rematch or team-wipe/retry qualification.",
+              "Default shared native4:3 view. Some outward particles naturally leave the viewport. Native allocation records retain exact fatal-body origins; no private-camera or all-scenery claim.",
+              "Finite visible expiry is observed through original native updates. Invisible native radial allocations may remain; no forced pool clearing or invented slot retirement.",
+              "Actor/origin reads, immutable bank prefixes, completed GP0 frames, VRAM/FBO rows and composed output are nearby independent observations; no instruction-atomic full-machine or one-to-one packet/actor-frame claim.",
+              "Original decoder frame/shape alternatives may match one actual packet more than once; comparison records are not particle or gameplay-pass counts.",
+              "After primary death, post-render scratch may reference original X RAM or the exact Zero private working allocation. Its actual pointer/colors are checked separately; original X rendered colors use actual referenced VRAM and GPU FBO, while Zero uses original-matched immutable private RGB555 banks. Existing comparator CPU-context flags remain unmodified in the raw review.",
+              "Only LOCAL Zero lowers current HP to positive4 via existing offline command1. Actual original contacts must cause fatal and all effects. LOCAL X and both peers of both online runs start fullHP32 with no fixture/result writes.",
+              "LOCAL X ordinary native recording finalized15068 events. LOCAL Zero fixture-tainted capture is retained and strictly refused by ordinary/replay admission. Four ONLINE traces finalize canonically; no replay pass.",
+              "Existing owned pair audio-phase callback is explicitly replaced by named R3 observations. Structural audio-prefixed gate labels remain; no audio row or service/lobby/Host-Join qualification follows.",
+              "Historical failed/partial evidence remains. R3 source fix50f4a31 is already integrated; no new game-code fix or other comparison/content pass is claimed by this QA commit."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Observed LOCAL firstZero FX11 color/resource counterexample on exactc3, trackedbeads-eio.1.46. Sourcefix50f4a31 has reviewed original Zero native resource component evidence: 48fatal and81visible used GPU packet pairs with actual private atlas/palette identity, finite visible expiry and Xsurvivor controls. A separate fresh current-build cold/warm component preserves all96owner records and complete saved sprite/UI prefixes, matches36original-resource GPU packet pairs after each LOAD and observes native visible expiry/Xmovement/jump/landing. Canonical state-replacement recording failure and both strict admission refusals are independently qualified; generic fixture parent remains failed. Full both-seat death/retry, state semantics, paired, body-art and camera/scenery checks remain pending. Partialparents and priorfailure preserved; no aggregate or mode pass from these components."
+        "limitations": "Bounded R3 passed on exacte0fdd1e/SDK7cb474: actual X/P1 and Zero/P2 native deaths at distinct positions, original blue/gold textures/palettes and origins, natural visible expiry and surviving partner control in LOCAL and both physical NETPLAY peers. All30 images reviewed. Earlier blue-Zero failure and partial parents remain historical; sourcefix50f4a31 is integrated. Offline positiveP2HP4 bypass and strict recording refusal are explicit. No F133/F58/F170, rematch/retry/private-view/opposite-roster/other-host pass."
       }
     },
     {
