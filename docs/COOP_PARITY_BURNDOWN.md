@@ -55,8 +55,10 @@ A fresh attempt mirrored the existing paired movement/jump readiness baseline
 before passing the unchanged menu observer. No rematch, remote-service, Linux
 or distinct physical-controller credit is inferred. The SDK preserves selected
 loopback binds and allocated guest ports; UI restores seated LAN resume mode.
-The game session ownership repair is in this isolated candidate; its local source
-commits are being integrated separately.
+The game session ownership repair is integrated locally as `fed8a26` and
+`d1f1d83`; its four focused debug/production/source/rejection checks pass.
+Integration source matches the qualified isolated candidate. This repair does
+not resolve the separate rematch renderer crash.
 
 F39 is now explicitly **failed** in NETPLAY, with LOCAL unverified. The
 [actual rematch failure](evidence/mmx6-launcher/manifest-bound-72b898f-ui34b5277-F39-rematch-failure-reviewed.json)
