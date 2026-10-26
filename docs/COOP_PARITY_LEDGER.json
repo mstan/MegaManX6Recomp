@@ -8053,11 +8053,49 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "72b898f6a714ec91b49ce306ee4959d6d5814a8b",
+            "build_identity": {
+              "executable_sha256": "b3589623f1612fe99821d5ad4eb9b7108b7e7cd550c26b0ea28045b2c7e9fc4b",
+              "compiled_manifest_sha256": "1b670b2fa63a58b7b0f2bb6268bb89e83522d8389b81983a0ebd8b04084fe337",
+              "sdk_commit": "bb5d0a7ec003d7e33270e51c270ea89dfea5c081",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "renderer": "4:3 OpenGL",
+              "input": "two digital virtual host ports",
+              "audio": "dummy muted",
+              "entry": "audited offline AmazonC0 checkpoint positioning"
+            },
+            "action": "Traverse native stairs, approach original initialized placement59 moving support using guest inputs, neutralize for actual carrying, then fresh Cross jump and Right beyond the support edge.",
+            "outcome": "Live type1 HP12 support carries neutral Zero by3px; fresh jump rises27.48px into action6 with contact71 cleared and HP32; later Right moves30px beyond edge. X remains exactly387.5/331 through observed windows. Composed native art/cards/exit0 reviewed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solid/manifest-bound-72b898f-F51-moving-support-local-reviewed.json",
+                "sha256": "3d812e5dcf9973e471f6117a1828354f743f05979f21faf4ca37650acfbc08d1"
+              }
+            ],
+            "limits": [
+              "Only bounded F51 native moving-support mobility, not F46 lift activation, F36 pickup carry, F201 signed release or F204 timing.",
+              "Audited offline command8 selects original AmazonC0 as a setup bypass; subsequent stair traversal, support carry, guest jump and free movement use published host buttons only. No inventory/HP/action/position/contact/outcome writes in the observed check.",
+              "Separate native pool and published body reads are not atomic. Original playerbox00030b13 means bottom+22; support00000e0e gives body origin36px above center. Native player+71bit8 is support contact; +70 is terrain. Actual neutral matched displacement corroborates carrying.",
+              "Private per-actor guest contact history remains host-owned and unexposed; no direct contact-history serialization claim.",
+              "Fixture-tainted LOCAL recording is explicitly failed and refused by ordinary capture/replay validators. No finalized or replay credit.",
+              "Root reviewed all four composed images; actual native card preservation and owned exit0 pass. NETPLAY remains separately required on exact same candidate."
+            ],
+            "bypasses": [
+              "Audited offline command8 selects original AmazonC0 before F51; stage reachability bypass only. No inventory, HP, position, contact, action, enemy or success values are written by the F51 observer. Recording retains fixture taint; no finalized capture/replay claim."
+            ]
+          }
+        ],
+        "limitations": "LOCAL exact72b898f/SDKbb5d0a7/UI34b5277 passes real Amazon moving-support neutral carry, guest native jump/release and free edge movement, with primary stationary and HP32. Offlinecheckpoint prerequisite disclosed/tainted recording refused. NETPLAY pending; no other support subtype/lift/pickup/timing claim."
       }
     },
     {
