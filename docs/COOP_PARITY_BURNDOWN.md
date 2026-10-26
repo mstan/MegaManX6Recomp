@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1â€“R26 and F1â€“F208 | 41 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F1, F6, F10, F12, F18, F19, F22, F31, F32, F33, F38, F45, F48, F51, F56, F58, F59, F67, F70, F95, F102, F107, F110, F119, F121, F133, F144, F163, F170, F205, F208), 1 failed, 192 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1Ã¢â‚¬â€œR26 and F1Ã¢â‚¬â€œF208 | 41 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F1, F6, F10, F12, F18, F19, F22, F31, F32, F33, F38, F45, F48, F51, F56, F58, F59, F67, F70, F95, F102, F107, F110, F119, F121, F133, F144, F163, F170, F205, F208), 1 failed, 192 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -81,8 +81,12 @@ native armor update in its rider's context.
 The LOCAL parent retains a stale completion-label failure after the actual
 scenario completed; the independent review verifies the full named actions,
 recording-taint refusal, cards and owned exit0. Initial offline checkpoint
-positioning is disclosed. Same-candidate NETPLAY is in progress; both aggregate
-rows remain unverified. No native mounted-entrance inference is made.
+positioning is disclosed. Same-candidate NETPLAY stopped before reaching armor: native card Load passed,
+then the story-to-map setup lost debug responsiveness and both matches ended.
+Cards and raw traces remain preserved; the strict owned cleanup gate failed.
+NETPLAY is parked, and both aggregate rows remain unverified. The armor fix
+is integrated locally as `7bd93ed` and `c3a70aa`, with changed source bytes
+identical to the reviewed V56 candidate. No mounted-entrance inference is made.
 
 F204 now passes [LOCAL moving-support cadence](evidence/mmx6-solid/manifest-bound-72b898f-F204-support-cadence-local-reviewed.json)
 on exact V54; NETPLAY remains unverified after two setup stops. During actual neutral guest
@@ -498,7 +502,7 @@ neutral inputs. It preserves the original camera predicate's false result and
 independently checks the original subtype0 current and target bounds of 2048.
 The revised passive wait preserves the original 75-second and read limits.
 The [six-location entry batch](evidence/mmx6-content/manifest-bound-50f4a31-entry-prefix17to22-reviewed.json)
-also passes original first-section entries for stages 17â€“22 in one owned run.
+also passes original first-section entries for stages 17Ã¢â‚¬â€œ22 in one owned run.
 All six composed images and final parent checks were reviewed.
 The [next eight-checkpoint batch](evidence/mmx6-content/manifest-bound-50f4a31-checkpoints01to02-entry-reviewed.json)
 also passes original entry transactions and final parent checks. All eight
@@ -531,13 +535,13 @@ entry gate still set. No destination P2, collision or cause is established.
 The parent remains failed, and all three images retain background corruption
 under `beads-eio.1.52`.
 The [reviewed entry88171 batch](evidence/mmx6-content/manifest-bound-50f4a31-entry88171-twelve-components-reviewed.json)
-adds twelve individual setups: stage5 c01/c02, stage6 c01â€“c05, stage7 c01â€“c03
+adds twelve individual setups: stage5 c01/c02, stage6 c01Ã¢â‚¬â€œc05, stage7 c01Ã¢â‚¬â€œc03
 and stage8 c01/c02, all in section0. Root independently reproduced964 readiness
 samples,3,904 journal RAM links,84 original guards and96 exact mailbox writes,
 then viewed all twelve actual composed captures. All original final predicates,
 four new blank cards, strict recording refusals and owned graceful exit pass.
 The parent completed its entry survey; all six mechanics remain unverified.
-Several stage6â€“8 captures retain severe scrambled tiles or black rectangles,
+Several stage6Ã¢â‚¬â€œ8 captures retain severe scrambled tiles or black rectangles,
 so background issue `beads-eio.1.52` remains open.
 The [reviewed entry2458 prefix](evidence/mmx6-content/manifest-bound-50f4a31-entry2458-one-component-failed-parent-reviewed.json)
 adds only `s12-a0-c01`. Root reproduced526 complete readiness observations,
@@ -718,7 +722,7 @@ unverified, with no all-boss, scaling-option or post-load recording claim.
 
 The [v23 HUD receipt](evidence/mmx6-hud/manifest-bound-66f7db0-layouts-and-menu-samples-reviewed.json)
 qualifies R5 locally and on two separately staged loopback peers for both
-stacked and side-by-side layouts at 960Ã—720, 1200Ã—600 and 640Ã—900 drawable
+stacked and side-by-side layouts at 960Ãƒâ€”720, 1200Ãƒâ€”600 and 640Ãƒâ€”900 drawable
 sizes. Native contact changes both HP values; composed meter anchors remain
 correct. Both menu owners preserve personal resources and resume. The pairs
 retain 73 and 75 distinct matching resolved core/mod samples, exit normally,
@@ -753,7 +757,7 @@ rendering and exact-image requalification under beads-eio.1.44. R5 remains passe
 
 The [v24 menu restoration receipt](evidence/mmx6-hud/manifest-bound-1f50059-menu-restoration-reviewed.json)
 qualifies F10 and F18 locally and on exact-image loopback peers. Candidate
-1f50059 retains/restores X's original 64-word Ã— 256-row VRAM sheet across
+1f50059 retains/restores X's original 64-word Ãƒâ€” 256-row VRAM sheet across
 borrowed native menu stages and renders the complete frozen primary personal
 effect pools during Zero-owned world drawing. Actual-plugin regressions verify
 the native GP0 transfer rectangle, six render dispatches and context restoration.
@@ -943,7 +947,7 @@ states now refuse browser entry before its modal pause loop and show the
 unavailable message; offline entry keeps its normal path. Completed refusal
 counters prove actual keyboard/controller handler consumption. Both peers
 also reject backend save/load. Four12second windows retain live progress of
-720â€“723 resolved ticks per peer, followed by matching CRCs:53 distinct samples
+720Ã¢â‚¬â€œ723 resolved ticks per peer, followed by matching CRCs:53 distinct samples
 overall,31 after refusal routes. Both processes exit0 and cards are unchanged.
 F33 **netplay passes** this frozen refusal contract; its aggregate returns to
 unverified because local ammo spending/weapon restoration remains open.
