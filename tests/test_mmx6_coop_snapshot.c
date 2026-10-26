@@ -15,6 +15,7 @@ static void *test_malloc(size_t bytes);
 static int allocation_fail,allocation_calls,local_scope,texture_support=1;
 static unsigned guest_calls,guest_writes,forgotten;
 static int abandon_guest;
+static int solid_dispatch,allocator_dispatch;
 static uint32_t audio_epoch=1;
 static int foreign_audio23;
 uint32_t psx_mod_spu_sample_bank_epoch(void){return audio_epoch;}
@@ -61,6 +62,17 @@ void psx_dispatch_call(CPUState *cpu,uint32_t target,uint32_t ret){
     if(abandon_guest)longjmp(abandon_target,1);
     uint32_t h=state_digest();state_track.frame[state_track.count-1].saved[0]^=1;
     CHECK(state_digest()!=h);state_track.frame[state_track.count-1].saved[0]^=1;
+    if(allocator_dispatch){cpu->gpr[2]=0x800950A0u+31*0xA0u;return;}
+    if(solid_dispatch){
+        uint32_t actor=cpu->gpr[4];CHECK(target==0x80031DA8u && actor==0x800950A0u);
+        unsigned zero=psx_mod_read_byte(PLAYER+2);
+        CHECK(psx_mod_read_byte(actor+0x72)==(zero?5:3));
+        CHECK(psx_mod_read_byte(actor+0x76)==(zero?6:4));
+        psx_mod_write_byte(actor+0x72,(uint8_t)(zero?11:9));
+        psx_mod_write_byte(actor+0x76,(uint8_t)(zero?255:10));
+        psx_mod_write_word(PLAYER+8,zero?222:111);
+        cpu->gpr[2]=zero?17:42;return;
+    }
     cpu->gpr[2]=42;cpu->gpr[3]^=123;cpu->pc=0x80012340;
 }
 
@@ -229,7 +241,34 @@ static void actual_projection_backups(void){
     CHECK(psx_mod_read_byte(0x800C1220+0x72)==1 && psx_mod_read_byte(0x800C1220+0x76)==2);
     CHECK(zero_solid_contacts[3].carried==255 && !state_track.count && snapshot_ready());
 }
+static void weapon_support_projection_and_reuse(void){
+    CHECK(solid_contact(0x800950A0u)==&zero_solid_contacts[80]);
+    CHECK(solid_contact(0x80096400u)==&zero_solid_contacts[111]);
+    CHECK(!solid_contact(0x8009509Fu) && !solid_contact(0x800950A1u) && !solid_contact(0x800964A0u));
+    CPUState cpu;memset(&cpu,0,sizeof cpu);cpu.gpr[4]=0x800950A0u;
+    psx_mod_write_byte(PLAY,10);psx_mod_write_byte(PLAYER+2,0);
+    psx_mod_write_byte(PLAYER+0xCC,0);p2.body[2]=1;
+    psx_mod_write_byte(cpu.gpr[4]+0x72,3);psx_mod_write_byte(cpu.gpr[4]+0x76,4);
+    psx_mod_write_byte(cpu.gpr[4]+0x73,23);psx_mod_write_byte(cpu.gpr[4]+0x77,27);
+    zero_solid_contacts[80]=(SolidContact){5,6};
+    solid_dispatch=1;CHECK(solid_player_collision(&cpu,0x80031DA8u)==1);solid_dispatch=0;
+    CHECK(cpu.gpr[2]==42 && psx_mod_read_word(PLAYER+8)==111 && p2.body[8]==222 && !p2.body[9] && !p2.body[10] && !p2.body[11]);
+    CHECK(psx_mod_read_byte(cpu.gpr[4]+0x72)==9 && psx_mod_read_byte(cpu.gpr[4]+0x76)==10);
+    CHECK(psx_mod_read_byte(cpu.gpr[4]+0x73)==23 && psx_mod_read_byte(cpu.gpr[4]+0x77)==27);
+    CHECK(zero_solid_contacts[80].sides==11 && zero_solid_contacts[80].carried==255 && !state_track.count);
+    /* Reallocation clears only the resident X slot, including the last slot.
+     * A projected Zero allocation aliases that address but owns another pool. */
+    allocator_dispatch=1;zero_solid_contacts[111]=(SolidContact){7,255};
+    CHECK(solid_allocate(&cpu,0x8002C32Cu)==1 && cpu.gpr[2]==0x80096400u);
+    CHECK(!zero_solid_contacts[111].sides && !zero_solid_contacts[111].carried);
+    zero_solid_contacts[111]=(SolidContact){7,255};zero_projected=1;
+    CHECK(!solid_contact(0x80096400u));CHECK(solid_contact(0x800C1220u)==&zero_solid_contacts[0]);
+    CHECK(solid_allocate(&cpu,0x8002C32Cu)==1);
+    CHECK(zero_solid_contacts[111].sides==7 && zero_solid_contacts[111].carried==255);
+    zero_projected=0;allocator_dispatch=0;CHECK(snapshot_ready());
+}
 static void roundtrip_and_malformed(void){
+    zero_solid_contacts[111]=(SolidContact){13,255};
     uint8_t expected_giga[ZERO_GIGA_BACKUP_BYTES];
     uint8_t expected_owners[96];
     for(unsigned i=0;i<sizeof expected_giga;++i)zero_giga_backup[i]=expected_giga[i]=(uint8_t)(i*11u+3u);
@@ -265,12 +304,14 @@ static void roundtrip_and_malformed(void){
     }
     uint32_t original=state_digest(),original_diagnostic=diagnostic_host_digest(),saved_hash[8192];memcpy(saved_hash,texture_hash,sizeof saved_hash);
     CHECK(snapshot_validate(wire,len));p2.body[0x5C]=1;previous_input^=0x101;zero_solid_contacts[3].carried=0;
+    zero_solid_contacts[111]=(SolidContact){0,0};
     memset(jump_audio_priorities,0,sizeof jump_audio_priorities);
     memset(zero_giga_backup,0,sizeof zero_giga_backup);
     memset(shared_effect_owners,0,sizeof shared_effect_owners);
     memset(death_effect,0,sizeof death_effect);
     int allocations=allocation_calls;allocation_fail=1;snapshot_read(wire,len);allocation_fail=0;
     CHECK(allocation_calls==allocations && state_digest()==original && p2.body[0x5C]==23);
+    CHECK(zero_solid_contacts[111].sides==13 && zero_solid_contacts[111].carried==255);
     CHECK(diagnostic_host_digest()==original_diagnostic);
     CHECK(!memcmp(zero_giga_backup,expected_giga,sizeof expected_giga));
     CHECK(!memcmp(shared_effect_owners,expected_owners,sizeof expected_owners));
@@ -309,7 +350,7 @@ static void abandoned_guest(void){
 }
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
-    roundtrip_and_malformed();
+    weapon_support_projection_and_reuse();roundtrip_and_malformed();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);
     /* Abandoned/overflowed call records are safe owned bytes, and explicitly

@@ -108,10 +108,12 @@ static DeathEffectOrigin death_effect[96];
 typedef struct { uint32_t actor; uint8_t seat; } PickupOwner;
 static PickupOwner pickup_owners[128];
 static int pickup_call;
-/* Native stage solids keep one player's previous contact at +72/+76.
+/* Native stage solids and X's Ice Burst keep one player's contact at +72/+76.
  * Keep Zero's copy on the host; +73/+77 still belong to the ride armor. */
 typedef struct { uint8_t sides, carried; } SolidContact;
-static SolidContact zero_solid_contacts[80];
+enum { STAGE_SOLID_CONTACTS=80, WEAPON_SOLID_CONTACTS=32,
+       SOLID_CONTACTS=STAGE_SOLID_CONTACTS+WEAPON_SOLID_CONTACTS };
+static SolidContact zero_solid_contacts[SOLID_CONTACTS];
 static int solid_call, solid_allocate_call;
 /* Scene transport is independent of voluntary absence and death. The owner
  * occupies the native singleton for the one world pass until control returns. */
@@ -1968,8 +1970,15 @@ static int player_contact(CPUState *cpu, uint32_t address) {
     return 1;
 }
 static SolidContact *solid_contact(uint32_t actor) {
-    if (actor<0x800C1220u || actor>=0x800C4560u || (actor-0x800C1220u)%0xA4) return NULL;
-    return &zero_solid_contacts[(actor-0x800C1220u)/0xA4];
+    if (actor>=0x800C1220u && actor<0x800C4560u && !((actor-0x800C1220u)%0xA4))
+        return &zero_solid_contacts[(actor-0x800C1220u)/0xA4];
+    /* Personal pools share their guest addresses during projection. Only the
+     * resident X pool owns these contacts; a projected Zero shot must neither
+     * use nor clear an unrelated X block's saved partner history. */
+    if (!zero_projected && actor>=0x800950A0u && actor<0x800964A0u &&
+        !((actor-0x800950A0u)%0xA0))
+        return &zero_solid_contacts[STAGE_SOLID_CONTACTS+(actor-0x800950A0u)/0xA0];
+    return NULL;
 }
 static int solid_allocate(CPUState *cpu, uint32_t address) {
     if (solid_allocate_call || !enrolled || failed) return 0;
@@ -2244,7 +2253,8 @@ static void activate(void) {
     if (!psx_mod_set_function_replacement(0x80014F70,working_palette_native_load)) failed=1;
     if (!psx_mod_set_function_replacement(0x80030ECC,player_contact)) failed=1;
     if (!psx_mod_set_function_replacement(0x80031DA8,solid_player_collision) ||
-        !psx_mod_set_function_replacement(0x8002C4C4,solid_allocate)) failed=1;
+        !psx_mod_set_function_replacement(0x8002C4C4,solid_allocate) ||
+        !psx_mod_set_function_replacement(0x8002C32C,solid_allocate)) failed=1;
     if (!psx_mod_set_function_replacement(0x8004E26C,pickup_collect) ||
         !psx_mod_set_function_replacement(0x8004DCB8,pickup_tick) ||
         /* Reploids have their own contact and delayed-healing routines.

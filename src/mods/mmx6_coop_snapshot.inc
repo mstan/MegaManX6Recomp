@@ -1,5 +1,5 @@
 /* Executable-owned host state, included after the native implementation.
- * Schema 6 is build-specific. No old-state migration or host pointer wire. */
+ * Schema 7 is build-specific. No old-state migration or host pointer wire. */
 enum { STATE_COUNT,STATE_WRITE,STATE_READ,STATE_HASH,STATE_MAX_BYTES=16*1024*1024 };
 typedef struct {
     unsigned mode,ok;
@@ -75,7 +75,7 @@ typedef struct {
     uint32_t enrolled,failed,frame_count,hud_fade,world_packets,hud_seat;
     int pause;
     PickupOwner pickups[128];
-    SolidContact contacts[80];
+    SolidContact contacts[SOLID_CONTACTS];
     DeathEffectOrigin deaths[96];
     uint8_t audio_priorities[24];
     uint8_t giga_backup[ZERO_GIGA_BACKUP_BYTES];
@@ -127,7 +127,7 @@ static void state_core(StateIO *io,HostState *s) {
         s->pickups[i].actor=actor;s->pickups[i].seat=(uint8_t)seat;
         if(actor)for(unsigned j=0;j<i;++j)if(s->pickups[j].actor==actor)io->ok=0;
     }
-    for(unsigned i=0;i<80;++i) {
+    for(unsigned i=0;i<SOLID_CONTACTS;++i) {
         FIELD(contacts[i].sides,1,255);FIELD(contacts[i].carried,1,255);
     }
     for(unsigned i=0;i<96;++i) {
@@ -218,7 +218,7 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    state_fixed(s,0x53503658u);state_fixed(s,6);
+    state_fixed(s,0x53503658u);state_fixed(s,7);
     const uint32_t handles[]={assets,assembly,palette_source,active_palette,packets,diagnostic,menu_memory,menu_assembly,hud_packets,
         jump_audio_banks[0].guest,jump_audio_banks[1].guest};
     for(unsigned i=0;i<sizeof handles/sizeof handles[0];++i)state_fixed(s,handles[i]);
