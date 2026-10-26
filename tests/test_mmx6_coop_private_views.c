@@ -2,11 +2,10 @@
  * No real renderer, GPU checkpoint, watchdog or native-game qualification. */
 #include "cpu_state.h"
 #include "mmx6_coop_private_view_sdk_fixture.h"
-static int fixture_online;
 static unsigned view_native_calls,view_gpu_words,view_callback_calls,view_refuse,view_abort;
 static int view_native(CPUState *,uint32_t,uint32_t);
 static int view_gpu(uint32_t,unsigned);
-#define MMX6_TEST_NETPLAY_ACTIVE fixture_online
+#define MMX6_TEST_NETPLAY_ACTIVE mmx6_view_sdk.online
 #define MMX6_TEST_DISPATCH_CALL view_native
 #define MMX6_TEST_PRIVATE_VIEW_GPU view_gpu
 #define main unused_private_effects_fixture_main
@@ -42,7 +41,7 @@ static int model_transaction(CPUState *cpu,PSXModRenderPassFn callback,void *use
     memcpy(ram,guest_ram,sizeof ram);*cpu=saved;return ok;
 }
 static void prepare_view(CPUState *cpu,int online,int split) {
-    setup(cpu);mmx6_view_sdk_reset();fixture_online=online;
+    setup(cpu);mmx6_view_sdk_reset();mmx6_view_sdk.online=online;
     view_native_calls=view_gpu_words=view_callback_calls=view_refuse=view_abort=0;
     inside=player_call=stage_call=zero_world=world_render=hud_call=ride_call=pickup_call=solid_call=0;
     private_draw=private_seat=view_call=zero_projected=0;local_split=split;independent_views=1;
@@ -84,7 +83,7 @@ static void defaults_and_scope(void) {
     CHECK(!psx_mod_render_local_pair(&cpu,&pair,forbidden_callback,NULL)); /* no modeled backend */
     mmx6_view_sdk.transaction=model_transaction;
     CHECK(!psx_mod_render_local_view(&cpu,&rect,forbidden_callback,NULL)); /* offline */
-    fixture_online=1;CHECK(!psx_mod_set_local_pair_presentation(1));
+    mmx6_view_sdk.online=1;CHECK(!psx_mod_set_local_pair_presentation(1));
     CHECK(!psx_mod_render_local_pair(&cpu,&pair,forbidden_callback,NULL)); /* netplay */
     mmx6_view_sdk.cameras="independent";independent_activate();
     CHECK(independent_views && !local_split && !mmx6_view_sdk.pair_enabled);
