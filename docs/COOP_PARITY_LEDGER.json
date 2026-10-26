@@ -7652,17 +7652,84 @@
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "ef2751e5994b59b044c81cd80e36e4e1d6232140",
+            "build_identity": {
+              "executable_sha256": "477d5304a5282e753835cd1625e31fd8be2caea61cbfeecda5764f6c9ab6424e",
+              "compiled_manifest_sha256": "262f6bbf09ba8570dbcdaf655d8c5288c433db03288c2e7fa3ff48df644cb991",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "renderer": "OpenGL native private views",
+              "roster": "X/P1 + Zero/P2",
+              "viewport": "960x720",
+              "audio": "muted dummy",
+              "entry": "ordinary cold boot intro",
+              "camera": "local_cameras=split"
+            },
+            "action": "Move only Zero to the authored distant-rock endpoint, then retain neutral controls for at least six measured seconds; compare world/VBlank cadence, actual private-view progress and renderer phase costs.",
+            "outcome": "Actual world cadence bounds remain55..65Hz and world updates match the VBlank envelope while private images advance. Renderer last/average and phase costs, reviewed before/after images, ordinary finalized recordings/cards/ownedexit0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-ef2751e-F43-local-performance-reviewed.json",
+                "sha256": "3d171d653cf687f5261001261c965ef7f246b5de310447733a5d6d87807e52c2"
+              }
+            ],
+            "limits": [
+              "Bounded original intro route and neutral distant-rock endpoint on this host/build, normal host pacing and 960x720 output. Two actual local native panes, or one actual native private view per netplay peer. No universal FPS, all-encounter, heavy-battle or cross-build qualification.",
+              "Actual native world/VBlank and monotonic bounds cover at least six seconds. Renderer last/average and begin/guest/end/restore timings report private render work, not another simulation. No invented shared-view baseline or frame-pacing percentile claim.",
+              "Root reviewed the two LOCAL or four NET images bracketing the performance window. The inherited route captures are retained; this receipt does not requalify their F178 terrain contract. Ordinary source-guarded inputs only; no guest position/health/success writes, clock scaling or turbo."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "ef2751e5994b59b044c81cd80e36e4e1d6232140",
+            "build_identity": {
+              "executable_sha256": "477d5304a5282e753835cd1625e31fd8be2caea61cbfeecda5764f6c9ab6424e",
+              "compiled_manifest_sha256": "262f6bbf09ba8570dbcdaf655d8c5288c433db03288c2e7fa3ff48df644cb991",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "renderer": "OpenGL native private views",
+              "roster": "X/P1 + Zero/P2",
+              "viewport": "960x720",
+              "audio": "muted dummy",
+              "entry": "ordinary cold boot intro",
+              "camera": "cameras=independent on both peers"
+            },
+            "action": "Move only Zero to the authored distant-rock endpoint, then retain neutral controls for at least six measured seconds; compare world/VBlank cadence, actual private-view progress and renderer phase costs.",
+            "outcome": "Actual world cadence bounds remain55..65Hz and world updates match the VBlank envelope while private images advance. Renderer last/average and phase costs, reviewed before/after images, ordinary finalized recordings/cards/ownedexit0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-ef2751e-F43-netplay-performance-reviewed.json",
+                "sha256": "65efe2dc2826b1327b8c402922a81e9e789ebbcdde9587dea593164e59849055"
+              }
+            ],
+            "limits": [
+              "Bounded original intro route and neutral distant-rock endpoint on this host/build, normal host pacing and 960x720 output. Two actual local native panes, or one actual native private view per netplay peer. No universal FPS, all-encounter, heavy-battle or cross-build qualification.",
+              "Actual native world/VBlank and monotonic bounds cover at least six seconds. Renderer last/average and begin/guest/end/restore timings report private render work, not another simulation. No invented shared-view baseline or frame-pacing percentile claim.",
+              "Root reviewed the two LOCAL or four NET images bracketing the performance window. The inherited route captures are retained; this receipt does not requalify their F178 terrain contract. Ordinary source-guarded inputs only; no guest position/health/success writes, clock scaling or turbo."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "LOCAL and NETPLAY on exactef2751e/SDK10b9021/UI34b5277 pass actual >=6-second55..65Hz native world cadence inside SDK VBlank brackets, advancing private views and measured renderer costs on the same authored intro route/neutral endpoint. All six timed-window images reviewed; ordinary finalized recordings, profile/core+modCRC, native cards and ownedexit0 pass. No universal FPS/all-encounter/heavy-battle or frame-pacing percentile claim."
       }
     },
     {
