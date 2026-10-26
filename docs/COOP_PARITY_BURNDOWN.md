@@ -16,7 +16,7 @@ as historical reference. The owner has resumed work solo on the 234 comparisons.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 30 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F31, F33, F38, F48, F58, F59, F67, F70, F95, F102, F121, F133, F170, F205, F208), 0 failed, 204 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 32 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F22, F31, F33, F38, F48, F56, F58, F59, F67, F70, F95, F102, F121, F133, F170, F205, F208), 0 failed, 202 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -40,6 +40,23 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 26
+
+F22 and F56 now pass on exact `7caed4d`/SDK `7cb4742` in
+[local co-op](evidence/mmx6-solids/manifest-bound-7caed4d-F22-F56-IceBurst-local-reviewed.json)
+and [actual paired netplay](evidence/mmx6-solids/manifest-bound-7caed4d-F22-F56-IceBurst-netplay-reviewed.json).
+The original Ice Burst contact callback previously skipped Zero because it
+recognized only stage-object addresses. The fix adds resident weapon contacts,
+clears them on native slot allocation, excludes projected Zero aliases and
+preserves both players' histories in current-build snapshot schema7.
+Zero now stops at the block's side, stands on its actual top, jumps off and
+lands freely while X stays still. The original block retires naturally and both
+players recover independent controls. All21 interaction images were reviewed;
+debug/production contact, slot-reuse and snapshot tests pass. LOCAL's inventory
+prerequisite and rejected tainted recording are explicit; the pair uses genuine
+QA-card Load and finalized ordinary recordings. Final CRCs, cards and exits0
+pass. The source fix is integrated locally as `34b5f68`. This adds two
+comparisons, bringing30to32 passed with202 unverified. Failed setup and
+pre-neutral-baseline observer attempts remain unchanged.
 
 F133 now passes on exact `85c06ee`/SDK `7cb4742` in
 [local co-op](evidence/mmx6-effects/manifest-bound-85c06ee-F133-moving-death-local-reviewed.json)

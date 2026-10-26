@@ -1,0 +1,469 @@
+{
+  "schema": 1,
+  "kind": "root_reviewed_F22_F56_original_IceBurst_partner_collision_support_and_expiry",
+  "candidate": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+  "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+  "image_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+  "compiled_manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+  "mode": "local",
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\qualification.json",
+    "sha256": "80f61f2beb12c6318339b0be032a48158f0a33db71f2a657ffc6bd11d6fc36e8"
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\ice-support-observations.json",
+    "sha256": "1795b69248504b36b4c53a0cbed9614ae9955acc77c93cfdeddf7f7245131f90"
+  },
+  "caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\caller-executed-source.py",
+    "sha256": "e83019c6e0c33bff1589855e71a9584181284a62018105d5ef02ae3872fa21b3"
+  },
+  "observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ice-observer-executed-source.py",
+    "sha256": "e8fbe3255036821a2ed7124cba2174197b03d64652bed5ac3e006697dea2d8c5"
+  },
+  "parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "native_resource_and_window_observations_complete": true,
+    "default_recording_taint_retained_and_replay_refused": true,
+    "owned_cleanup_private_cards": true
+  },
+  "behavior_checks": {
+    "original_source_owned_type2_and_cost": true,
+    "actual_finite_side_contact": true,
+    "actual_original_top_support": true,
+    "native_jump_on_and_off": true,
+    "native_finite_allocator_retirement": true,
+    "stationary_primary_and_partner_resources_preserved": true,
+    "both_fresh_independent_controls": true
+  },
+  "physical_processes": [
+    {
+      "peer": 0,
+      "actual_read_only_history_symbol": {
+        "peer": 0,
+        "pid": 59988,
+        "address": 140695883446880,
+        "bytes": 224,
+        "access": "QUERY_INFORMATION|VM_READ only"
+      },
+      "side_xy": [
+        206.5,
+        1114.0
+      ],
+      "held_xy": [
+        206.5,
+        1114.0
+      ],
+      "side_history": [
+        1,
+        1
+      ],
+      "top_xy": [
+        236.5,
+        1082.5234375
+      ],
+      "top_history": [
+        8,
+        1
+      ],
+      "original_block": {
+        "slot": 0,
+        "allocation": 1,
+        "state": 1,
+        "phase": 2,
+        "x": 233.0,
+        "y": 1120.0,
+        "support": 1,
+        "timer": 54,
+        "native_contacts": [
+          8,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "box_pointer": "0x801f395c",
+        "box_hex": "00001010",
+        "hex": "01020001010200000000e9000000600400000000004001020000e9000000600400000000000000000000000000000000d879078014700780dc0114808c2515802005017801000000ff000000000000000000000000000000000000000000000000000000000000015c391f8009000000080000000001000000000000a07009800000000000000000360000000803040200000000000000000000000000000000"
+      },
+      "actual_native_body_box": {
+        "pointer": 2147958100,
+        "origin": "native_ram",
+        "available": true,
+        "hex": "00030b13"
+      },
+      "jumped_off_xy": [
+        184.5,
+        1015.1875
+      ],
+      "landed_xy": [
+        178.5,
+        1114.0
+      ],
+      "observed_active_timer_range": [
+        2,
+        179
+      ],
+      "retired_native_tick": 494,
+      "ammo_before": 288,
+      "ammo_after": 256,
+      "captures": [
+        {
+          "label": "before-ice",
+          "peer": 0,
+          "row_index": 3,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-before-ice.png",
+            "sha256": "f8043958b87171f146510adbf6337c0c50eac55a96d4fe278d6e262d2ed9dbd2",
+            "before": {
+              "id": 1678,
+              "ok": true,
+              "seq": 0,
+              "wrote": 0
+            },
+            "acknowledgement": {
+              "id": 1679,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-before-ice.png",
+              "staged": true,
+              "seq": 0
+            },
+            "completion": {
+              "id": 1681,
+              "ok": true,
+              "seq": 1,
+              "wrote": 1
+            }
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-before-ice-GP0.json.gz",
+            "sha256": "e5dfa2ac59cccf470f95e0bd4ab356bce21b51a0abc0223201b10442776be617",
+            "frame": 2684
+          }
+        },
+        {
+          "label": "native-grounded-ice",
+          "peer": 0,
+          "row_index": 29,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-native-grounded-ice.png",
+            "sha256": "d435866d31e4b138ad895738c85e347a5581e6b452a385d3a7ea06a0537b0405",
+            "before": {
+              "id": 1783,
+              "ok": true,
+              "seq": 1,
+              "wrote": 1
+            },
+            "acknowledgement": {
+              "id": 1784,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-native-grounded-ice.png",
+              "staged": true,
+              "seq": 1
+            },
+            "completion": {
+              "id": 1786,
+              "ok": true,
+              "seq": 2,
+              "wrote": 1
+            }
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-native-grounded-ice-GP0.json.gz",
+            "sha256": "fb30c94bab4f4f71084d2f7cf7532eed879f0440a54ba1f186ff903b5f7ed0c0",
+            "frame": 2756
+          }
+        },
+        {
+          "label": "actual-zero-side-contact",
+          "peer": 0,
+          "row_index": 44,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-actual-zero-side-contact.png",
+            "sha256": "fe0e873ca294771ff2ea9d20b8ac63651f6e6d83c4012d25249a8d57bfe0aa8b",
+            "before": {
+              "id": 1854,
+              "ok": true,
+              "seq": 2,
+              "wrote": 1
+            },
+            "acknowledgement": {
+              "id": 1855,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-actual-zero-side-contact.png",
+              "staged": true,
+              "seq": 2
+            },
+            "completion": {
+              "id": 1856,
+              "ok": true,
+              "seq": 3,
+              "wrote": 1
+            }
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-actual-zero-side-contact-GP0.json.gz",
+            "sha256": "e8cc66916215ea51eca51b5c5e7ceb7648db37c8800ad2e70e415206a4d13ee6",
+            "frame": 2804
+          }
+        },
+        {
+          "label": "actual-zero-supported-top",
+          "peer": 0,
+          "row_index": 68,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-actual-zero-supported-top.png",
+            "sha256": "8220391b180d8b28f608fb16e75da1da9a2920a64c58f0d6d75fe350efc731a1",
+            "before": {
+              "id": 1960,
+              "ok": true,
+              "seq": 3,
+              "wrote": 1
+            },
+            "acknowledgement": {
+              "id": 1961,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-actual-zero-supported-top.png",
+              "staged": true,
+              "seq": 3
+            },
+            "completion": {
+              "id": 1963,
+              "ok": true,
+              "seq": 4,
+              "wrote": 1
+            }
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-actual-zero-supported-top-GP0.json.gz",
+            "sha256": "99d212934e01ab401c739c8e94a3f155c526775b6fb30cbf027c233899c51baa",
+            "frame": 2877
+          }
+        },
+        {
+          "label": "zero-free-after-jump",
+          "peer": 0,
+          "row_index": 101,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-zero-free-after-jump.png",
+            "sha256": "53df7e88a6967823a4ea4b5bbe61e258d413272035c51052bc380d173f6d7ce3",
+            "before": {
+              "id": 2087,
+              "ok": true,
+              "seq": 4,
+              "wrote": 1
+            },
+            "acknowledgement": {
+              "id": 2088,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-zero-free-after-jump.png",
+              "staged": true,
+              "seq": 4
+            },
+            "completion": {
+              "id": 2090,
+              "ok": true,
+              "seq": 5,
+              "wrote": 1
+            }
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-zero-free-after-jump-GP0.json.gz",
+            "sha256": "da570973b13c7da67f43bd33c29ad297f3292ea7143a6d09a69dc5d4dd5866de",
+            "frame": 2961
+          }
+        },
+        {
+          "label": "native-ice-retired",
+          "peer": 0,
+          "row_index": 103,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-native-ice-retired.png",
+            "sha256": "53df7e88a6967823a4ea4b5bbe61e258d413272035c51052bc380d173f6d7ce3",
+            "before": {
+              "id": 2099,
+              "ok": true,
+              "seq": 5,
+              "wrote": 1
+            },
+            "acknowledgement": {
+              "id": 2100,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-native-ice-retired.png",
+              "staged": true,
+              "seq": 5
+            },
+            "completion": {
+              "id": 2101,
+              "ok": true,
+              "seq": 6,
+              "wrote": 1
+            }
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-native-ice-retired-GP0.json.gz",
+            "sha256": "4c91030c4f1443c80bb7afb596502242388af1bb581e0d5cde225d0f0770ccec",
+            "frame": 2965
+          }
+        },
+        {
+          "label": "both-controls-recovered",
+          "peer": 0,
+          "row_index": 117,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-both-controls-recovered.png",
+            "sha256": "e4a45cd442ab06920d8038019fa33e99440f4b230846ab046f2036e17f76b19e",
+            "before": {
+              "id": 2154,
+              "ok": true,
+              "seq": 6,
+              "wrote": 1
+            },
+            "acknowledgement": {
+              "id": 2155,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-both-controls-recovered.png",
+              "staged": true,
+              "seq": 6
+            },
+            "completion": {
+              "id": 2156,
+              "ok": true,
+              "seq": 7,
+              "wrote": 1
+            }
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\ammo-hud\\ice-support\\peer0-both-controls-recovered-GP0.json.gz",
+            "sha256": "22286162a401af86af0fa4e967b0cacc73114334c7b0556ac21cdcae30d6427e",
+            "frame": 3002
+          }
+        }
+      ],
+      "root_visual_review": "All seven composed interaction images inspected; actual side block, top support, jump release, expiry and both live bodies/meters/scenery remain coherent."
+    }
+  ],
+  "recordings": {
+    "status": "failed_fixture_taint_retained_for_diagnostics",
+    "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\candidate\\saves\\input-recordings\\session-1792999352102804-1-0\\inputs.jsonl",
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+      "manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "terminal_failure": "unilateral debug or fixture input contaminated capture",
+    "native_status": {
+      "contract": "mmx6.native-consumption.v1",
+      "epoch": 1,
+      "failure": "unilateral debug or fixture input contaminated capture",
+      "schema": 1,
+      "scope": "native-consumption diagnostics; replay unimplemented",
+      "status": "failed"
+    },
+    "events": 5992,
+    "natives": 4208,
+    "p2_reads": 1784,
+    "artifacts": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\recording-rejection\\settings.json",
+        "bytes": 10329,
+        "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\recording-rejection\\content.json",
+        "bytes": 503,
+        "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\recording-rejection\\simulation-contract.json",
+        "bytes": 259,
+        "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\recording-rejection\\inputs.jsonl",
+        "bytes": 787229,
+        "sha256": "49be48b4ba10f0ce5fbe3d20f191241b2fac1f4c01f95330037d5051f5480fbb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\recording-rejection\\status.json",
+        "bytes": 211,
+        "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\recording-rejection\\card1.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-support-local-v50-root-v1\\recording-rejection\\card2.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      }
+    ],
+    "strict_refusals": {
+      "ordinary_capture": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      },
+      "offline_replay": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      }
+    },
+    "finalized_capture_admitted": false,
+    "replay_admitted": false,
+    "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+  },
+  "regression_tests": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\test-v50-ice-contact-focused.log",
+    "sha256": "b8bd9881138cda51e60054223a97913cdf9a2831c516a867b0a6af3bf8134d3b"
+  },
+  "generated_entry_provenance": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\generated-v50-ice-contact-provenance.json",
+    "sha256": "19bc163c54aaead5469d79e57b94bfd5b9222e24ea37c88a3d0f95663039bd18"
+  },
+  "pre_fix_observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F22-F56-ice-contact-local-v49-root-v2\\ammo-hud\\ice-contact\\ice-contact-observations.json",
+    "sha256": "fde5285f88763b5fcc2302226c7d950a962171ffcb938308f7542780ffa8d68e"
+  },
+  "limits": [
+    "Exact7caed4d/SDK7cb474, X/P1 and normal Zero/P2, shared native4:3 OpenGL/stacked meters, ordinary published digital inputs, dummy muted audio; same-machine Win64 loopback only.",
+    "LOCAL uses the audited offline command9 earned-inventory prerequisite only. Its default trace is correctly tainted and both strict finalized capture/replay paths refuse it. Paired netplay uses the unchanged original1128 native FF QA card copied before startup, actual native title Load/story/selector/mission/arrival and finalized ordinary recordings. Neither path qualifies acquisition of all weapons.",
+    "Original X type2 Ice Burst is selected and created through native R1/ Triangle; live original dispatch/contact words, source support box801F395C=00001010, actual ammo cost, ground activation and full finite allocation lifetime are retained. No block, HP, selection, pose, contact, position, velocity, timer or success values are authored.",
+    "F22 requires actual other-character top support and native jump-on/jump-off plus original block retirement. F56 separately requires actual side blocking, finite reactions, neutral/standing top contact and subsequent independent controls. Saved partner history01/01 and08/01 support the native body/foot-box and composed observations; coordinates alone are insufficient.",
+    "Read-only owned host histories, coherent published player/box data, ordinary actor pool, completed GPU frames and composed images are nearby independent observations, not an atomic whole-machine claim. Original block and Zero body box bytes are retained; no invented collision repair is used.",
+    "The implementation keeps original X contact/result, isolates partner stage/personal-pool history, clears a resident weapon slot on native allocation, excludes projected Zero aliases and serializes current-build contacts in schema7. Both debug and production compiled regression tests pass, including slot reuse and snapshot restoration. No old-state migration or compatibility is required.",
+    "All21 named composed interaction captures were root inspected. Native ice, both bodies/meters and scenery remain coherent. GPU dumps support identity/presentation; no original all-frame texture/palette equivalence or every-weapon/roster/platform claim.",
+    "The pre-fix native failure and setup/observer failures remain unchanged. No source-only pass, unrelated native-content audit, independent views, boss/door progression or human-dependent qualification is claimed."
+  ],
+  "bypasses": [
+    "Audited offline command9 earned-inventory prerequisite only; no HP, selection, block, contact, position, timer or success writes."
+  ]
+}

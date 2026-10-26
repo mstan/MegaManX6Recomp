@@ -5926,24 +5926,99 @@
       "frozen_row_sha256": "6c2b870e4c03af0a2204e96448883ebee2bf59e7fdc37d43b65005c7f340a4f4",
       "x6": {
         "workstream": "solid",
-        "mapping_state": "unknown_native_analogue",
+        "mapping_state": "candidate_native_scenario",
         "analogue": "Partner support on an owned X6 weapon unidentified",
         "bounded_check": "Audit native weapon solids before selecting a test; require a real other-character support/jump interaction and native expiry, or documented content absence.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:solid_player_collision",
           "src/mods/mmx6_coop_plugin.c:solid_as_zero"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+            "build_identity": {
+              "executable_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+              "compiled_manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro offline; actual native FF QA Load/mission route online",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "input": "ordinary published digital host",
+              "audio": "dummy muted"
+            },
+            "action": "Use original R1/Triangle to create and ground native X Ice Burst. Keep X still while Zero approaches its side, is blocked, jumps onto the actual top, stands, jumps off, lands freely, waits for native expiry and exercises both independent controls.",
+            "outcome": "Partner side history01/01 and stable X confirm actual blocking; top history08/01, native Zero body/box and higher stable feet confirm real support. Native jumps and reactions settle, original block retires naturally, resources remain private and both controls recover. Source/manifest, cards, paired profile/CRC/ordinary recording and graceful exits0 pass. Offline inventory prerequisite and strict recording refusals are explicit.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solids/manifest-bound-7caed4d-F22-F56-IceBurst-local-reviewed.json",
+                "sha256": "2e9f49355c492b51b893c78c1d4c644f324a05a430acc4faf108e23b627795b0"
+              }
+            ],
+            "limits": [
+              "Exact7caed4d/SDK7cb474, X/P1 and normal Zero/P2, shared native4:3 OpenGL/stacked meters, ordinary published digital inputs, dummy muted audio; same-machine Win64 loopback only.",
+              "LOCAL uses the audited offline command9 earned-inventory prerequisite only. Its default trace is correctly tainted and both strict finalized capture/replay paths refuse it. Paired netplay uses the unchanged original1128 native FF QA card copied before startup, actual native title Load/story/selector/mission/arrival and finalized ordinary recordings. Neither path qualifies acquisition of all weapons.",
+              "Original X type2 Ice Burst is selected and created through native R1/ Triangle; live original dispatch/contact words, source support box801F395C=00001010, actual ammo cost, ground activation and full finite allocation lifetime are retained. No block, HP, selection, pose, contact, position, velocity, timer or success values are authored.",
+              "F22 requires actual other-character top support and native jump-on/jump-off plus original block retirement. F56 separately requires actual side blocking, finite reactions, neutral/standing top contact and subsequent independent controls. Saved partner history01/01 and08/01 support the native body/foot-box and composed observations; coordinates alone are insufficient.",
+              "Read-only owned host histories, coherent published player/box data, ordinary actor pool, completed GPU frames and composed images are nearby independent observations, not an atomic whole-machine claim. Original block and Zero body box bytes are retained; no invented collision repair is used.",
+              "The implementation keeps original X contact/result, isolates partner stage/personal-pool history, clears a resident weapon slot on native allocation, excludes projected Zero aliases and serializes current-build contacts in schema7. Both debug and production compiled regression tests pass, including slot reuse and snapshot restoration. No old-state migration or compatibility is required.",
+              "All21 named composed interaction captures were root inspected. Native ice, both bodies/meters and scenery remain coherent. GPU dumps support identity/presentation; no original all-frame texture/palette equivalence or every-weapon/roster/platform claim.",
+              "The pre-fix native failure and setup/observer failures remain unchanged. No source-only pass, unrelated native-content audit, independent views, boss/door progression or human-dependent qualification is claimed."
+            ],
+            "bypasses": [
+              "Offline earned-inventory command9 prerequisite; tainted default capture and replay correctly refused."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+            "build_identity": {
+              "executable_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+              "compiled_manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro offline; actual native FF QA Load/mission route online",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "input": "ordinary published digital host",
+              "audio": "dummy muted"
+            },
+            "action": "Use original R1/Triangle to create and ground native X Ice Burst. Keep X still while Zero approaches its side, is blocked, jumps onto the actual top, stands, jumps off, lands freely, waits for native expiry and exercises both independent controls.",
+            "outcome": "Partner side history01/01 and stable X confirm actual blocking; top history08/01, native Zero body/box and higher stable feet confirm real support. Native jumps and reactions settle, original block retires naturally, resources remain private and both controls recover. Source/manifest, cards, paired profile/CRC/ordinary recording and graceful exits0 pass. Offline inventory prerequisite and strict recording refusals are explicit.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solids/manifest-bound-7caed4d-F22-F56-IceBurst-netplay-reviewed.json",
+                "sha256": "13039affc9511084939a18535d5191e1282d20de91d1982dc027442547d1058e"
+              }
+            ],
+            "limits": [
+              "Exact7caed4d/SDK7cb474, X/P1 and normal Zero/P2, shared native4:3 OpenGL/stacked meters, ordinary published digital inputs, dummy muted audio; same-machine Win64 loopback only.",
+              "LOCAL uses the audited offline command9 earned-inventory prerequisite only. Its default trace is correctly tainted and both strict finalized capture/replay paths refuse it. Paired netplay uses the unchanged original1128 native FF QA card copied before startup, actual native title Load/story/selector/mission/arrival and finalized ordinary recordings. Neither path qualifies acquisition of all weapons.",
+              "Original X type2 Ice Burst is selected and created through native R1/ Triangle; live original dispatch/contact words, source support box801F395C=00001010, actual ammo cost, ground activation and full finite allocation lifetime are retained. No block, HP, selection, pose, contact, position, velocity, timer or success values are authored.",
+              "F22 requires actual other-character top support and native jump-on/jump-off plus original block retirement. F56 separately requires actual side blocking, finite reactions, neutral/standing top contact and subsequent independent controls. Saved partner history01/01 and08/01 support the native body/foot-box and composed observations; coordinates alone are insufficient.",
+              "Read-only owned host histories, coherent published player/box data, ordinary actor pool, completed GPU frames and composed images are nearby independent observations, not an atomic whole-machine claim. Original block and Zero body box bytes are retained; no invented collision repair is used.",
+              "The implementation keeps original X contact/result, isolates partner stage/personal-pool history, clears a resident weapon slot on native allocation, excludes projected Zero aliases and serializes current-build contacts in schema7. Both debug and production compiled regression tests pass, including slot reuse and snapshot restoration. No old-state migration or compatibility is required.",
+              "All21 named composed interaction captures were root inspected. Native ice, both bodies/meters and scenery remain coherent. GPU dumps support identity/presentation; no original all-frame texture/palette equivalence or every-weapon/roster/platform claim.",
+              "The pre-fix native failure and setup/observer failures remain unchanged. No source-only pass, unrelated native-content audit, independent views, boss/door progression or human-dependent qualification is claimed."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Passed exact7caed4d/SDK7cb474 LOCAL and both actual Win64 loopback peers: original X IceBurst supports Zero, finite side/top reactions, native jump on/off, original allocator expiry and both controls. Resident/projected pool ownership, reuse and current-build snapshot7 regression checks pass. LOCAL inventory bypass/tainted trace explicit; paired genuine QA-card Load and ordinary recording. No other weapon/roster/platform or content-audit credit."
       }
     },
     {
@@ -7978,24 +8053,99 @@
       "frozen_row_sha256": "9633d14de518a8cc1d5db58dec828586c29c475a3cc9b7085b2869497f79965f",
       "x6": {
         "workstream": "solid",
-        "mapping_state": "unknown_native_analogue",
+        "mapping_state": "candidate_native_scenario",
         "analogue": "Owned weapon repeated-contact analogue unidentified",
         "bounded_check": "Locate an actual support-capable X6 weapon before testing guest touch/top contact; require finite native reaction and free movement afterward.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:solid_player_collision",
           "src/mods/mmx6_coop_plugin.c:solid_as_zero"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+            "build_identity": {
+              "executable_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+              "compiled_manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro offline; actual native FF QA Load/mission route online",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "input": "ordinary published digital host",
+              "audio": "dummy muted"
+            },
+            "action": "Use original R1/Triangle to create and ground native X Ice Burst. Keep X still while Zero approaches its side, is blocked, jumps onto the actual top, stands, jumps off, lands freely, waits for native expiry and exercises both independent controls.",
+            "outcome": "Partner side history01/01 and stable X confirm actual blocking; top history08/01, native Zero body/box and higher stable feet confirm real support. Native jumps and reactions settle, original block retires naturally, resources remain private and both controls recover. Source/manifest, cards, paired profile/CRC/ordinary recording and graceful exits0 pass. Offline inventory prerequisite and strict recording refusals are explicit.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solids/manifest-bound-7caed4d-F22-F56-IceBurst-local-reviewed.json",
+                "sha256": "2e9f49355c492b51b893c78c1d4c644f324a05a430acc4faf108e23b627795b0"
+              }
+            ],
+            "limits": [
+              "Exact7caed4d/SDK7cb474, X/P1 and normal Zero/P2, shared native4:3 OpenGL/stacked meters, ordinary published digital inputs, dummy muted audio; same-machine Win64 loopback only.",
+              "LOCAL uses the audited offline command9 earned-inventory prerequisite only. Its default trace is correctly tainted and both strict finalized capture/replay paths refuse it. Paired netplay uses the unchanged original1128 native FF QA card copied before startup, actual native title Load/story/selector/mission/arrival and finalized ordinary recordings. Neither path qualifies acquisition of all weapons.",
+              "Original X type2 Ice Burst is selected and created through native R1/ Triangle; live original dispatch/contact words, source support box801F395C=00001010, actual ammo cost, ground activation and full finite allocation lifetime are retained. No block, HP, selection, pose, contact, position, velocity, timer or success values are authored.",
+              "F22 requires actual other-character top support and native jump-on/jump-off plus original block retirement. F56 separately requires actual side blocking, finite reactions, neutral/standing top contact and subsequent independent controls. Saved partner history01/01 and08/01 support the native body/foot-box and composed observations; coordinates alone are insufficient.",
+              "Read-only owned host histories, coherent published player/box data, ordinary actor pool, completed GPU frames and composed images are nearby independent observations, not an atomic whole-machine claim. Original block and Zero body box bytes are retained; no invented collision repair is used.",
+              "The implementation keeps original X contact/result, isolates partner stage/personal-pool history, clears a resident weapon slot on native allocation, excludes projected Zero aliases and serializes current-build contacts in schema7. Both debug and production compiled regression tests pass, including slot reuse and snapshot restoration. No old-state migration or compatibility is required.",
+              "All21 named composed interaction captures were root inspected. Native ice, both bodies/meters and scenery remain coherent. GPU dumps support identity/presentation; no original all-frame texture/palette equivalence or every-weapon/roster/platform claim.",
+              "The pre-fix native failure and setup/observer failures remain unchanged. No source-only pass, unrelated native-content audit, independent views, boss/door progression or human-dependent qualification is claimed."
+            ],
+            "bypasses": [
+              "Offline earned-inventory command9 prerequisite; tainted default capture and replay correctly refused."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+            "build_identity": {
+              "executable_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+              "compiled_manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro offline; actual native FF QA Load/mission route online",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "input": "ordinary published digital host",
+              "audio": "dummy muted"
+            },
+            "action": "Use original R1/Triangle to create and ground native X Ice Burst. Keep X still while Zero approaches its side, is blocked, jumps onto the actual top, stands, jumps off, lands freely, waits for native expiry and exercises both independent controls.",
+            "outcome": "Partner side history01/01 and stable X confirm actual blocking; top history08/01, native Zero body/box and higher stable feet confirm real support. Native jumps and reactions settle, original block retires naturally, resources remain private and both controls recover. Source/manifest, cards, paired profile/CRC/ordinary recording and graceful exits0 pass. Offline inventory prerequisite and strict recording refusals are explicit.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solids/manifest-bound-7caed4d-F22-F56-IceBurst-netplay-reviewed.json",
+                "sha256": "13039affc9511084939a18535d5191e1282d20de91d1982dc027442547d1058e"
+              }
+            ],
+            "limits": [
+              "Exact7caed4d/SDK7cb474, X/P1 and normal Zero/P2, shared native4:3 OpenGL/stacked meters, ordinary published digital inputs, dummy muted audio; same-machine Win64 loopback only.",
+              "LOCAL uses the audited offline command9 earned-inventory prerequisite only. Its default trace is correctly tainted and both strict finalized capture/replay paths refuse it. Paired netplay uses the unchanged original1128 native FF QA card copied before startup, actual native title Load/story/selector/mission/arrival and finalized ordinary recordings. Neither path qualifies acquisition of all weapons.",
+              "Original X type2 Ice Burst is selected and created through native R1/ Triangle; live original dispatch/contact words, source support box801F395C=00001010, actual ammo cost, ground activation and full finite allocation lifetime are retained. No block, HP, selection, pose, contact, position, velocity, timer or success values are authored.",
+              "F22 requires actual other-character top support and native jump-on/jump-off plus original block retirement. F56 separately requires actual side blocking, finite reactions, neutral/standing top contact and subsequent independent controls. Saved partner history01/01 and08/01 support the native body/foot-box and composed observations; coordinates alone are insufficient.",
+              "Read-only owned host histories, coherent published player/box data, ordinary actor pool, completed GPU frames and composed images are nearby independent observations, not an atomic whole-machine claim. Original block and Zero body box bytes are retained; no invented collision repair is used.",
+              "The implementation keeps original X contact/result, isolates partner stage/personal-pool history, clears a resident weapon slot on native allocation, excludes projected Zero aliases and serializes current-build contacts in schema7. Both debug and production compiled regression tests pass, including slot reuse and snapshot restoration. No old-state migration or compatibility is required.",
+              "All21 named composed interaction captures were root inspected. Native ice, both bodies/meters and scenery remain coherent. GPU dumps support identity/presentation; no original all-frame texture/palette equivalence or every-weapon/roster/platform claim.",
+              "The pre-fix native failure and setup/observer failures remain unchanged. No source-only pass, unrelated native-content audit, independent views, boss/door progression or human-dependent qualification is claimed."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Passed exact7caed4d/SDK7cb474 LOCAL and both actual Win64 loopback peers: original X IceBurst supports Zero, finite side/top reactions, native jump on/off, original allocator expiry and both controls. Resident/projected pool ownership, reuse and current-build snapshot7 regression checks pass. LOCAL inventory bypass/tainted trace explicit; paired genuine QA-card Load and ordinary recording. No other weapon/roster/platform or content-audit credit."
       }
     },
     {
