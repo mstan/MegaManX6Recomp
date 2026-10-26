@@ -61,7 +61,8 @@ static void independent_world_begin(void) {
     if(!enrolled || failed || inside || zero_world || scene_owner || pause_owner>=0 ||
        psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
        psx_mod_read_byte(PLAY+0x10) || psx_mod_read_byte(PLAY+0x1C) ||
-       life.status[0]!=MMX6_COOP_ALIVE || life.status[1]!=MMX6_COOP_ALIVE) {
+       life.status[0]!=MMX6_COOP_ALIVE ||
+       (life.status[1]!=MMX6_COOP_ALIVE && life.status[1]!=MMX6_COOP_JOINING)) {
         view_valid=0;return;
     }
     uint32_t buffer=psx_mod_read_word(0x8009B7A0u);
@@ -88,6 +89,13 @@ static int private_draw_image(CPUState *cpu,void *user,uint32_t unused) {
     if(private_seat) {
         uint8_t body[sizeof p2.body];capture(PLAYER,body,sizeof body);
         project(PLAYER,p2.body,sizeof p2.body);
+        /* The native incoming beam starts above the room. Keep its camera
+         * on the real landing point while drawing the actual beam body. The
+         * projection is draw-only and never changes either player's update. */
+        if(life.status[1]==MMX6_COOP_JOINING) {
+            psx_mod_write_word(PLAYER+12,(uint32_t)join_y);
+            psx_mod_write_word(PLAYER+0x1C,(uint32_t)join_y);
+        }
         /* Original three camera updates only. Native pit/player clamping and
          * any authored scratch changes are sandboxed, never gameplay ticks. */
         guest(cpu,0x8002927C,0,0);guest(cpu,0x8002935C,0,0);guest(cpu,0x800293CC,0,0);
