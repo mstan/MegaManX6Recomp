@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 37 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F22, F31, F33, F38, F48, F56, F58, F59, F67, F70, F95, F102, F107, F110, F119, F121, F133, F144, F163, F170, F205, F208), 1 failed, 196 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 39 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F1, F6, F10, F12, F18, F19, F22, F31, F32, F33, F38, F48, F56, F58, F59, F67, F70, F95, F102, F107, F110, F119, F121, F133, F144, F163, F170, F205, F208), 1 failed, 194 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -42,19 +42,21 @@ states; old-state migration is never required.
 
 ## Current qualification status, October 26
 
-F1 and F32 now have reviewed NETPLAY mode passes on exact game `72b898f`,
-SDK `bb5d0a7` and UI `34b5277`, using real rendered Host/Create/Join/Play.
-The [shared first-start review](evidence/mmx6-launcher/manifest-bound-72b898f-ui34b5277-F1-F32-netplay-reviewed.json)
-retains both healthy native peers, both owner menus/resumes and independent
-inputs, six resolved core/mod CRC windows, finalized ordinary recordings,
-unchanged private cards and clean exits0. Root reviewed the distinct composed
-images and byte-identical peer copies. LOCAL is pending its separate real
-DashboardPlay check; neither comparison is aggregate-passed yet. The SDK
-preserves selected loopback binds and allocated guest ports without changing
-profile admission. The UI restores its LAN choice from an already seated
-resume endpoint. The game session ownership repair is present in this isolated
-candidate; these local source commits have not yet been integrated into this
-worktree.
+F1 and F32 now pass both required modes on exact game `72b898f`,
+SDK `bb5d0a7` and UI `34b5277`. The
+[real Host/Create/Join/Play review](evidence/mmx6-launcher/manifest-bound-72b898f-ui34b5277-F1-F32-netplay-reviewed.json)
+retains both healthy peers, six resolved CRC windows and ordinary recordings.
+The separate [real Dashboard Play review](evidence/mmx6-launcher/manifest-bound-72b898f-ui34b5277-F1-F32-local-reviewed.json)
+retains fresh offline startup, both owners' native menus/resumes and independent
+controls. Root reviewed the composed images and frontend states in both modes;
+startup artifacts, unchanged native cards and clean exits0 pass. The first LOCAL
+attempt's short Right window showed no motion; its failed setup remains retained.
+A fresh attempt mirrored the existing paired movement/jump readiness baseline
+before passing the unchanged menu observer. No rematch, remote-service, Linux
+or distinct physical-controller credit is inferred. The SDK preserves selected
+loopback binds and allocated guest ports; UI restores seated LAN resume mode.
+The game session ownership repair is in this isolated candidate; its local source
+commits are being integrated separately.
 
 F39 is now explicitly **failed** in NETPLAY, with LOCAL unverified. The
 [actual rematch failure](evidence/mmx6-launcher/manifest-bound-72b898f-ui34b5277-F39-rematch-failure-reviewed.json)
@@ -64,7 +66,7 @@ with write-NULL in `nvoglv64.dll +0xB80C13`. This locates the fault inside the
 OpenGL module; no exact driver-versus-SDK cause is established. Source repair
 and first-session totals do not qualify repeated allocation lifetime. The
 bounded investigation is parked while independent autonomous rows continue.
-The ledger is **37 passed /1 failed /196 unverified of234**.
+The ledger is **39 passed /1 failed /194 unverified of234**.
 
 F144 now passes on exact `7caed4d`/SDK `7cb4742` in
 [local co-op](evidence/mmx6-render/manifest-bound-7caed4d-F144-heavy-native-encounter-local-root-reviewed.json)
