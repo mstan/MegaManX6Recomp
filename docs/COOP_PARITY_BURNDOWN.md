@@ -12,11 +12,12 @@ Owner scope correction, October 25: this task consists exclusively of the 234
 frozen X4/X5 comparisons and validation of their native X6 counterparts.
 The separate native-content audit is outside the requested scope and is not
 a completion gate. Existing native inventory, ledgers and evidence are retained
-as historical reference. The owner has resumed work solo on the 234 comparisons.
+as historical reference. The owner currently permits one worker alongside the primary agent on the 234
+comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 35 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F22, F31, F33, F38, F48, F56, F58, F59, F67, F70, F95, F102, F107, F119, F121, F133, F163, F170, F205, F208), 0 failed, 199 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 36 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F22, F31, F33, F38, F48, F56, F58, F59, F67, F70, F95, F102, F107, F110, F119, F121, F133, F163, F170, F205, F208), 0 failed, 198 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -40,6 +41,22 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 26
+
+F110 now passes on exact `001f5b4`/SDK `7cb4742` in
+[local co-op](evidence/mmx6-pickups/manifest-bound-001f5b4-F110-native-large-health-local-reviewed.json)
+and [actual paired netplay](evidence/mmx6-pickups/manifest-bound-001f5b4-F110-native-large-health-netplay-reviewed.json).
+A genuine original large-health drop heals the guest while X stays at144 with
+HP32 and unchanged resources. V50 reproduced the bug: its original delayed
+healing freeze disabled shared camera selection, sending camera X100 to75 and27.
+The fix keeps midpoint targeting during a tracked native health pickup's phase2,
+while preserving ordinary movement and scene freeze rules. Native local guest
+HP28->32 and paired HP16->32 retain camera X107/108, then release the original
+freeze and accept fresh guest movement. All nine composed images were reviewed;
+focused debug/production camera and snapshot tests, current source/profile,
+post-case CRCs, ordinary recordings, cards and exits0 pass. Failed V50 evidence
+is preserved. No item/RNG/HP/camera result writes or private-view claim.
+This adds one comparison, bringing35to36 passed with198 unverified. Source fix
+is integrated locally as `03ed9d8`; no remote publication.
 
 F119 now passes on exact `7caed4d`/SDK `7cb4742` in
 [local co-op](evidence/mmx6-r13/manifest-bound-7caed4d-F119-native-respawn-facing-local-reviewed.json)

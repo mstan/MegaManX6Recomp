@@ -10853,25 +10853,96 @@
       "frozen_row_sha256": "4a9bda7c042aca488f0b6a1d3c1efea3855918da681776a911e15d7ca102ad22",
       "x6": {
         "workstream": "pickup",
-        "mapping_state": "identified_subsystem",
-        "analogue": "Delayed health pickup camera ownership",
+        "mapping_state": "candidate_native_scenario",
+        "analogue": "Original large-health guest delayed healing retains shared camera",
         "bounded_check": "Collect large health with guest while primary is stationary; retain collector HP and actual camera ownership throughout native delayed healing.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:pickup_as_seat",
           "src/mods/mmx6_coop_plugin.c:pickup_tick",
           "src/mods/mmx6_coop_plugin.c:nightmare_soul"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "001f5b40f5468a749609aea34563dabe8c3d4532",
+            "build_identity": {
+              "executable_sha256": "f26f712b786455d92d25d68f2bffd2d9a2716cf60de9b97c4f022814ae2f2946",
+              "compiled_manifest_sha256": "b610f81ae72994da35bb4b8f177a8ce3b0e443f702d02fedf697f88acbd2d7cc",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro genuine large-health33 drop",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "input": "ordinary published host",
+              "audio": "dummy muted"
+            },
+            "action": "With primary fixed, genuinely damage guest, kill and rearm the original enemy until its native large-health drop, overlap with guest, observe delayed phase2/collector/HP/camera and recover fresh native control.",
+            "outcome": "Actual native large health heals guest with collector2 while primary HP/resources/position remain fixed. Shared midpoint camera persists across observed native delayed healing and world/control resumes. All composed captures reviewed; source/profile/post-case CRC/ordinary recordings/cards/exits0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-pickups/manifest-bound-001f5b4-F110-native-large-health-local-reviewed.json",
+                "sha256": "9f7e24d1e3e117c705c393673ae93a02695bd6ed73e2e52ae5070671c8c2a74c"
+              }
+            ],
+            "limits": [
+              "Exact001f5b4/SDK7cb4742, X/P1 and normal Zero/P2, original intro record25 and genuine native large-health33 death drop. Shared native4:3 OpenGL with stacked meters; LOCAL and both Win64 same-host delay3 peers only.",
+              "Only ordinary published input: actual original enemy attacks damage Zero, actual guest Z-Buster kills and native out/in rearm cycles produce original RNG drops. No HP, item, position, flags, RNG, inventory, camera or outcome writes and no state LOAD. The RNG is not guaranteed to produce a large drop on every future attempt.",
+              "Native item47/subtype33 reaches delayed phase2 with observed collector2, increases nonfull guest HP, ends the original freeze, and restores actual guest control while primary x144/HP32/resources remain unchanged. The original native heal routine is retained.",
+              "The camera fix recognizes only a tracked live native health pickup phase2 and the original eight-byte health freeze. It preserves the midpoint camera without allowing shared movement or arbitrary scenes during that freeze. Both collector seats, both health sizes, unrelated freezes, bad actors and snapshot restoration have focused debug/production coverage; native F110 qualification exercises large health with the guest.",
+              "Camera, actor, HP and native timer reads are nearby separate observations, not an instruction-atomic or every-frame trace. All nine final composed captures are reviewed. Images establish composed before/after restoration; phase2 camera ownership is established by retained native samples and source-bound hooks.",
+              "The V50 failed LOCAL trial is retained: a genuine collector2 large-health phase2 increased Zero HP28->32 while fixed primary stayed144, but camera X fell100->75->27 rather than retaining the shared midpoint near108. That candidate is not admitted for F110.",
+              "Current source/image/manifest, native originals, default finalized ordinary recordings, unchanged private cards, agreed pre-frame0/final paired profile, matching resolved core/mod CRC after the case, and graceful owned exits0 are required. No other items, private-view implementation, physical devices, remote platforms or excluded native-content audit credit."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "001f5b40f5468a749609aea34563dabe8c3d4532",
+            "build_identity": {
+              "executable_sha256": "f26f712b786455d92d25d68f2bffd2d9a2716cf60de9b97c4f022814ae2f2946",
+              "compiled_manifest_sha256": "b610f81ae72994da35bb4b8f177a8ce3b0e443f702d02fedf697f88acbd2d7cc",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro genuine large-health33 drop",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "input": "ordinary published host",
+              "audio": "dummy muted"
+            },
+            "action": "With primary fixed, genuinely damage guest, kill and rearm the original enemy until its native large-health drop, overlap with guest, observe delayed phase2/collector/HP/camera and recover fresh native control.",
+            "outcome": "Actual native large health heals guest with collector2 while primary HP/resources/position remain fixed. Shared midpoint camera persists across observed native delayed healing and world/control resumes. All composed captures reviewed; source/profile/post-case CRC/ordinary recordings/cards/exits0 pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-pickups/manifest-bound-001f5b4-F110-native-large-health-netplay-reviewed.json",
+                "sha256": "a3a2693050d855b590a0afd2ee29451eb4c3ad0febae9903b0afa54b8f824393"
+              }
+            ],
+            "limits": [
+              "Exact001f5b4/SDK7cb4742, X/P1 and normal Zero/P2, original intro record25 and genuine native large-health33 death drop. Shared native4:3 OpenGL with stacked meters; LOCAL and both Win64 same-host delay3 peers only.",
+              "Only ordinary published input: actual original enemy attacks damage Zero, actual guest Z-Buster kills and native out/in rearm cycles produce original RNG drops. No HP, item, position, flags, RNG, inventory, camera or outcome writes and no state LOAD. The RNG is not guaranteed to produce a large drop on every future attempt.",
+              "Native item47/subtype33 reaches delayed phase2 with observed collector2, increases nonfull guest HP, ends the original freeze, and restores actual guest control while primary x144/HP32/resources remain unchanged. The original native heal routine is retained.",
+              "The camera fix recognizes only a tracked live native health pickup phase2 and the original eight-byte health freeze. It preserves the midpoint camera without allowing shared movement or arbitrary scenes during that freeze. Both collector seats, both health sizes, unrelated freezes, bad actors and snapshot restoration have focused debug/production coverage; native F110 qualification exercises large health with the guest.",
+              "Camera, actor, HP and native timer reads are nearby separate observations, not an instruction-atomic or every-frame trace. All nine final composed captures are reviewed. Images establish composed before/after restoration; phase2 camera ownership is established by retained native samples and source-bound hooks.",
+              "The V50 failed LOCAL trial is retained: a genuine collector2 large-health phase2 increased Zero HP28->32 while fixed primary stayed144, but camera X fell100->75->27 rather than retaining the shared midpoint near108. That candidate is not admitted for F110.",
+              "Current source/image/manifest, native originals, default finalized ordinary recordings, unchanged private cards, agreed pre-frame0/final paired profile, matching resolved core/mod CRC after the case, and graceful owned exits0 are required. No other items, private-view implementation, physical devices, remote platforms or excluded native-content audit credit."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Passed exact001f5b4/SDK7cb4742 LOCAL and both Win64 loopback peers after reproducing V50 camera drift. Genuine large-health33 native drop, collector2/phase2/HP gain, fixed primary resources and midpoint camera, original freeze release and fresh guest control. No result writes or private-view/all-item/excluded audit credit."
       }
     },
     {

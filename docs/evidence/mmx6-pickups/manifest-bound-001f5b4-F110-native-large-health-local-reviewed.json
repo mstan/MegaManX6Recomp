@@ -1,0 +1,956 @@
+{
+  "schema": 1,
+  "comparison": "F110",
+  "frozen_row_sha256": "4a9bda7c042aca488f0b6a1d3c1efea3855918da681776a911e15d7ca102ad22",
+  "kind": "root_reviewed_native_large_health_delayed_guest_camera",
+  "candidate": {
+    "candidate_source": "001f5b40f5468a749609aea34563dabe8c3d4532",
+    "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-pickup-heal-camera-v51",
+    "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+    "build": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v51-pickup-heal-camera-debug",
+    "executable": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v51-pickup-heal-camera-debug\\mmx6-runtime.exe",
+    "exe_sha256": "f26f712b786455d92d25d68f2bffd2d9a2716cf60de9b97c4f022814ae2f2946",
+    "declared_manifest_sha256": "b610f81ae72994da35bb4b8f177a8ce3b0e443f702d02fedf697f88acbd2d7cc",
+    "manifest_file_sha256": "9ae4aa58aee3a2d2e5a78f24c9e725573799d9888ca0a1b8354fa5836b7dad57",
+    "baseline": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+    "generated_source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\generated-source-v50-ice-contact",
+    "qualification_scope": "F110 native large health delayed guest healing camera",
+    "tests": [
+      "mmx6_coop_snapshot_debug_test",
+      "mmx6_coop_snapshot_production_test"
+    ],
+    "tests_passed": true
+  },
+  "mode": "local",
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-local-v51-root-v1\\qualification.json",
+    "sha256": "1ef9fed9f97d50e7cf78a8cee9e2fb540c33a285abaa287e4cb866e73816c0b6"
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-local-v51-root-v1\\hud\\F110\\F110-observations.json",
+    "sha256": "0035a70cf9041f187b6b45ac1dcc00f212788fdfae4c1387c7b9b1454b3c985d"
+  },
+  "caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-local-v51-root-v1\\caller-executed-source.py",
+    "sha256": "a61e765fcd079595a022f96d37827d88d41f1892cc210eab61e91e401f1e2577"
+  },
+  "observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-local-v51-root-v1\\F110-observer-executed-source.py",
+    "sha256": "8d1e782971fb36ffe5d89ff491a086eaa906053ccec40c86cc5942979e17ee56"
+  },
+  "parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "native_case_finalized_recording_cleanup_and_cards": true
+  },
+  "behavior_checks": {
+    "genuine_original_large_health33_drop": true,
+    "actual_guest_overlap_and_collector2": true,
+    "native_delayed_phase2_and_HP_increase": true,
+    "primary_HP_ammo_position_retained": true,
+    "shared_native_camera_retained_through_healing": true,
+    "actual_world_release_and_controls": true,
+    "no_prerequisite_or_outcome_writes": true
+  },
+  "source_guards": {
+    "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "guards": [
+      {
+        "address": "0x8004e680",
+        "bytes": 264,
+        "sha256": "af5181a92089cf118595a7f536115d3fb09ba2f4795690f8501b8f5b27da054d",
+        "hex": "d8ffbd272000b4af21a08000002e0500032e0500003406001c00b3af039c06000d80033c38cf6290003c07001800b2af039407002400bfaf1400b1af0200422c2a0040101000b0af401005002110450040100200b5b4000cff00513021204000ff0010240880023c6088452401000326ff007030211011022110450000004390ff00843023188300ffff64300001822cf7ff4014010003261400001200000000fdae000c00000000212840000f00a010210002242f0003240000a2a00880023cf0884224211002020100a3a0ffff43900a00b3a40e00b2a40200a3a0140082921000a0ac8200a0a01400a2a02400bf8f2000b48f1c00b38f1800b28f1400b18f1000b08f0800e003"
+      },
+      {
+        "address": "0x8004dcb8",
+        "bytes": 560,
+        "sha256": "7affc027a13b338f0ed6d311e991b3f163e78a3385ac1facb9a77f5c54fc6d9e",
+        "hex": "e0ffbd271000b0af218080001800bfaf1400b1af060002820000000032004014800003268400029200000000ffff4224040062a0ff0042303300401421886000020002240980033ca07066240d80033cd0ce63245b006824840002a25c00c5900200c4808000a23000160200033e020021208800000083807f00a2302a104300090040140100a22401000224060002a20200c380000000002118680000006290593701082510e2002510e2005c00c2a0212000000d000524125b000c213000008300039200000000ffff6324030023a2ff0063300c00601401000224060002a270370108030000a2e339010c212000000000039203000224040002a2050000a2f7006330000003a21800bf8f1400b18f1000b08f0800e0032000bd27c8ffbd27ff00a530050002243400bfaf3000beaf2c00b7af2800b6af2400b5af2000b4af1c00b3af1800b2af1400b1af0d00a2141000b0af04001424010017240980043ca0708324ec00628c00000000400042301c0040102118800006001424a737010802001724060002240d00a2140700022410001424020017240980043ca0708324ec00628c00000000400042300d0040102118800016001424a7370108030017240600a21421b800000980033ca07062244a015494a73701080400172421a000000980033c401014002110540040100200a070712402002382000000002e006014ffff5430010013240d801e3c42901400aa00302693002282000000001400531400000000000003864a01228600000000"
+      },
+      {
+        "address": "0x8004e26c",
+        "bytes": 356,
+        "sha256": "451059c286cb7a503aaad847f1b841c39b0654d8588ff5d5fb1c9fb0219f20b0",
+        "hex": "e0ffbd271400b1af218880000980023ca07045241800bfaf1000b0afd500a3800000000008006010218040000d80023c40d345240500a380000000000200601400000000b000a5245c00a290000000007f004230c0004010000000003db7000c21202002bc0040100000000082002392000000000c00622cb5004010050020a20180023c4416422480180300211862000000648c0000000008008000000000000d80023cd0ce462401000424020023826c00c78c041864002410e300a50040140300022421200000150005242510e300a07003266c00c2ac020067805b00c6242138e6000000e2902130000002004224125b000c0000e2a070390108030002240d80023cd0ce46240100043c020023826c00c78cf0ff6324041864002410e3008c0040140300022421200000150005242510e300a07003266c00c2ac020067806100c6242138e6000000e2902130000002004224125b000c0000e2a07039010803000224"
+      },
+      {
+        "address": "0x800788de",
+        "bytes": 24,
+        "sha256": "682ca16f11293b040aac6d8e8dc796a2741951c983cf679c945bbf447acb4da4",
+        "hex": "c00a20061000c0100a200600801828380800202123242600"
+      }
+    ],
+    "large_health_kind": 33,
+    "table21_weights": [
+      192,
+      10,
+      32,
+      6,
+      16,
+      0
+    ],
+    "native_kinds": [
+      32,
+      33,
+      35,
+      36,
+      38
+    ],
+    "input": "Ordinary native death/drop; no RNG seed or timing/outcome writes"
+  },
+  "physical_processes": [
+    {
+      "peer": 0,
+      "large_health_found": {
+        "observation": {
+          "schema": 1,
+          "tick": 7018,
+          "sequence": 14036,
+          "native_timer": 7017,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 2660271469,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 28,
+              "x_raw": 24907776,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "camera": [
+          102,
+          944
+        ],
+        "previous_camera": [
+          102,
+          944
+        ],
+        "record_hex": "00010110a001380400010100",
+        "record_allocated": false,
+        "instance": null,
+        "live_pool": [
+          {
+            "address": "0x8008efe4",
+            "slot": 1,
+            "origin": "0x0",
+            "flags": 33,
+            "type": 47,
+            "subtype": 33,
+            "render": 1,
+            "phase": 1,
+            "action": 0,
+            "subaction": 0,
+            "hp": 0,
+            "strength": 0,
+            "iframe": 0,
+            "x_raw": 27262976,
+            "y_raw": 72024064,
+            "x": 416.0,
+            "y": 1099.0,
+            "body_hex": "212f2101010000000000a00100004b0400000000000005030000a00100004b04000000000040fcff0000000000800000c0870780d08407800000000098b914800000077801000106ff00000000000000000000000000000000000000000000000000000000000000fc8707800e000000080000000000000000000000000000009e000300000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "native_shared_gate": 0,
+        "p2_hit_counter": 30,
+        "p2_contact_counter": 1,
+        "p1_body_hex": "01000001010200000000900000005b0400000000004002050000900000005b0400000000001afbff0000000000420000d44a1f8094411f80cc3a1080687c14800005007803000175750300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000100000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+        "p2_body_hex": "010001010102000000107c0100003a04000000000040020500107c0100003a0400000000000000000000000000000000d0f61e8014eb1e801800009fa481039f0005007801000103ff03000000000000000000001cea1e80000000001c1c20000000000100000000543d07800c0000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000107c0100003a040000000000002001000000000000000000000000",
+        "body_observation": {
+          "schema": 1,
+          "tick": 7024,
+          "sequence": 14048,
+          "native_timer": 7023,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 3061448575,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 28,
+              "x_raw": 24907776,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "high": 16,
+        "collect_address": 0,
+        "collector": 0,
+        "native_heal_freeze_hex": "0000000000000000"
+      },
+      "healing_begin": {
+        "observation": {
+          "schema": 1,
+          "tick": 7049,
+          "sequence": 14098,
+          "native_timer": 7048,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 150570558,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 4,
+              "hp": 29,
+              "x_raw": 25792512,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "camera": [
+          108,
+          944
+        ],
+        "previous_camera": [
+          108,
+          944
+        ],
+        "record_hex": "00010110a001380400010100",
+        "record_allocated": false,
+        "instance": null,
+        "live_pool": [
+          {
+            "address": "0x8008efe4",
+            "slot": 1,
+            "origin": "0x0",
+            "flags": 41,
+            "type": 47,
+            "subtype": 33,
+            "render": 0,
+            "phase": 2,
+            "action": 0,
+            "subaction": 0,
+            "hp": 0,
+            "strength": 0,
+            "iframe": 0,
+            "x_raw": 27262976,
+            "y_raw": 72024064,
+            "x": 416.0,
+            "y": 1099.0,
+            "body_hex": "292f2100020000000000a00100004b0400000000000005030000a00100004b04000000000040fcff0000000000800000c0870780e08407800000000098b91480000007780300fd08ff00000000000000000000000000000000000000000000000000000000000000fc8707800e000000080000000000000000000000000000008400030e010000000000000000000000000000000000000000000000"
+          }
+        ],
+        "native_shared_gate": 1,
+        "p2_hit_counter": 30,
+        "p2_contact_counter": 1,
+        "p1_body_hex": "01000001010200000000900000005b0400000000004002050000900000005b0400000000001afbff0000000000420000d44a1f80a0411f80cc3a1080687c1480000500780800f377770300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000100000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+        "p2_body_hex": "01000101010400000090890100003a0400000000004002080090870100003a0400000200000000000000000000000000d0f61e806ceb1e801800009fa481039f000500780201010cff030000000000000000000004ea1e80000000001f1f20000000000100000000543d0780090000000800000000000000000000000100010000000100000000000108000000000000000000000000000000000000000000000000000000400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000090870100003a040000000000002001000000000000000000000000",
+        "body_observation": {
+          "schema": 1,
+          "tick": 7053,
+          "sequence": 14106,
+          "native_timer": 7052,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 334969922,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 4,
+              "hp": 31,
+              "x_raw": 25792512,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "high": 16,
+        "collect_address": 2148069348,
+        "collector": 2,
+        "native_heal_freeze_hex": "0101010101010101"
+      },
+      "healed": {
+        "observation": {
+          "schema": 1,
+          "tick": 7057,
+          "sequence": 14114,
+          "native_timer": 7056,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 3898304356,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 4,
+              "hp": 32,
+              "x_raw": 25792512,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "camera": [
+          108,
+          944
+        ],
+        "previous_camera": [
+          108,
+          944
+        ],
+        "record_hex": "00010110a001380400010100",
+        "record_allocated": false,
+        "instance": null,
+        "live_pool": [
+          {
+            "address": "0x8008efe4",
+            "slot": 1,
+            "origin": "0x0",
+            "flags": 33,
+            "type": 47,
+            "subtype": 33,
+            "render": 0,
+            "phase": 3,
+            "action": 0,
+            "subaction": 1,
+            "hp": 0,
+            "strength": 0,
+            "iframe": 0,
+            "x_raw": 27262976,
+            "y_raw": 72024064,
+            "x": 416.0,
+            "y": 1099.0,
+            "body_hex": "212f2100030001000000a00100004b0400000000000005030000a00100004b04000000000040fcff0000000000800000c0870780e08407800000000098b91480000007780300fd08ff00000000000000000000000000000000000000000000000000000000000000fc8707800e000000080000000000000000000000000000008400030b020000000000000000000000000000000000000000000000"
+          }
+        ],
+        "native_shared_gate": 0,
+        "p2_hit_counter": 30,
+        "p2_contact_counter": 1,
+        "p1_body_hex": "01000001010200000000900000005b0400000000004002050000900000005b0400000000001afbff0000000000420000d44a1f80a0411f80cc3a1080687c1480000500780700f377770300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000100000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+        "p2_body_hex": "01000101010500000090890100003a0400000000004002090090890100003a0400000200000000000000000000000000d0f61e809ceb1e801800009fa481039f0005007804000108ff030000000000000000000004ea1e8000000000202020000000000100000000543d0780090000000800000000000000000000000000010000000100000000000008000000000000000000000000000000000000000000000000000000400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000090890100003a040000000000002001000000000000000000000000",
+        "body_observation": {
+          "schema": 1,
+          "tick": 7059,
+          "sequence": 14118,
+          "native_timer": 7058,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 3222830264,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 5,
+              "hp": 32,
+              "x_raw": 25792512,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "high": 16,
+        "collect_address": 2148069348,
+        "collector": 2,
+        "native_heal_freeze_hex": "0000000000000000"
+      },
+      "actual_phase2_samples": [
+        {
+          "index": 961,
+          "camera": [
+            108,
+            944
+          ],
+          "expected_camera_X": 108.78125,
+          "collector": 2,
+          "HP": 29,
+          "freeze": "0101010101010101",
+          "native_timer": 7048
+        }
+      ],
+      "fresh_control": {
+        "before_index": 965,
+        "accepted_index": 967
+      },
+      "after_release": {
+        "observation": {
+          "schema": 1,
+          "tick": 7136,
+          "sequence": 14272,
+          "native_timer": 7135,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 2534515848,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 24514560,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "camera": [
+          99,
+          944
+        ],
+        "previous_camera": [
+          99,
+          944
+        ],
+        "record_hex": "00010110a001380400010100",
+        "record_allocated": false,
+        "instance": null,
+        "live_pool": [],
+        "native_shared_gate": 0,
+        "p2_hit_counter": 30,
+        "p2_contact_counter": 1,
+        "p1_body_hex": "01000001010200000000900000005b0400000000004002050000900000005b0400000000001afbff0000000000420000d44a1f8084411f80cc3a1080687c14800005007806000100000300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000100000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+        "p2_body_hex": "01000101010200000010760100003a0400000000000002050010760100003a040000feff000000000000000000000000d0f61e8000eb1e801800009fa481039f0005007801000100ff03000000000000000000001cea1e8000000000202020000000000100000000543d0780060000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000010760100003a040000000000002001000000000000000000000000",
+        "body_observation": {
+          "schema": 1,
+          "tick": 7143,
+          "sequence": 14286,
+          "native_timer": 7142,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 3530517217,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 24514560,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "high": 16,
+        "collect_address": 2148069348,
+        "collector": 2,
+        "native_heal_freeze_hex": "0000000000000000"
+      },
+      "captures": [
+        {
+          "label": "original-large-health-before-guest-collection",
+          "peer": 0,
+          "row_index": 958,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-local-v51-root-v1\\hud\\F110\\peer0-original-large-health-before-guest-collection.png",
+            "sha256": "0ea67ef877d2b31e690deb374213840bcb01b9624b79c46398484515caed3214",
+            "before": {
+              "id": 11484,
+              "ok": true,
+              "seq": 4,
+              "wrote": 1
+            },
+            "acknowledgement": {
+              "id": 11485,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-local-v51-root-v1\\hud\\F110\\peer0-original-large-health-before-guest-collection.png",
+              "staged": true,
+              "seq": 4
+            },
+            "completion": {
+              "id": 11486,
+              "ok": true,
+              "seq": 5,
+              "wrote": 1
+            }
+          }
+        },
+        {
+          "label": "large-health-native-collector-healed",
+          "peer": 0,
+          "row_index": 963,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-local-v51-root-v1\\hud\\F110\\peer0-large-health-native-collector-healed.png",
+            "sha256": "bcf0c226966b3966cb84c58372a4b71ad5320b88a240a2f87738ce6b07fbb76c",
+            "before": {
+              "id": 11541,
+              "ok": true,
+              "seq": 5,
+              "wrote": 1
+            },
+            "acknowledgement": {
+              "id": 11542,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-local-v51-root-v1\\hud\\F110\\peer0-large-health-native-collector-healed.png",
+              "staged": true,
+              "seq": 5
+            },
+            "completion": {
+              "id": 11543,
+              "ok": true,
+              "seq": 6,
+              "wrote": 1
+            }
+          }
+        },
+        {
+          "label": "native-world-after-large-health",
+          "peer": 0,
+          "row_index": 973,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-local-v51-root-v1\\hud\\F110\\peer0-native-world-after-large-health.png",
+            "sha256": "c241aa505647816438d724ac48446bc61de583ba6be69fd57829da226fb28667",
+            "before": {
+              "id": 11648,
+              "ok": true,
+              "seq": 6,
+              "wrote": 1
+            },
+            "acknowledgement": {
+              "id": 11649,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-local-v51-root-v1\\hud\\F110\\peer0-native-world-after-large-health.png",
+              "staged": true,
+              "seq": 6
+            },
+            "completion": {
+              "id": 11651,
+              "ok": true,
+              "seq": 7,
+              "wrote": 1
+            }
+          }
+        }
+      ],
+      "visual_review": "Root inspected all three composed images per physical process: original drop, healed collector and fresh native control. Both meters and original scenery restore. Transient camera behavior uses actual phase2 samples."
+    }
+  ],
+  "recordings": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-local-v51-root-v1\\candidate\\saves\\input-recordings\\session-1793027825373308-1-0\\inputs.jsonl",
+      "sha256": "b9aa66016df7ea33bdf09ba7db7f7030124a642dd84f4c22d477a02dd6e39680",
+      "events": 33924,
+      "natives": 18158,
+      "p2_reads": 15766,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "f26f712b786455d92d25d68f2bffd2d9a2716cf60de9b97c4f022814ae2f2946",
+        "manifest_sha256": "b610f81ae72994da35bb4b8f177a8ce3b0e443f702d02fedf697f88acbd2d7cc",
+        "mode": "offline",
+        "profile": null,
+        "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+        "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      "requested_jump_seats": [],
+      "consumed_cross_seen_anywhere": [
+        0,
+        1
+      ],
+      "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence"
+    }
+  ],
+  "failed_baseline": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-local-v50-root-v1\\qualification.json",
+      "sha256": "589f97bd070010cd30f99316d0db4d5d7515f8f0a76234e35307024f37ed5aec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-local-v50-root-v1\\hud\\F110\\F110-observations.json",
+      "sha256": "ba1cffbb2801efa652dbed4762c1cbc88a52a28868f06736417f7bb952d9ac36"
+    }
+  ],
+  "focused_test_log": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\test-v51-pickup-heal-camera-focused.log",
+    "sha256": "e82d87c249de00dec2d93035cf3a130e2791887216b12e5fbf23f2febfcf454e"
+  },
+  "limits": [
+    "Exact001f5b4/SDK7cb4742, X/P1 and normal Zero/P2, original intro record25 and genuine native large-health33 death drop. Shared native4:3 OpenGL with stacked meters; LOCAL and both Win64 same-host delay3 peers only.",
+    "Only ordinary published input: actual original enemy attacks damage Zero, actual guest Z-Buster kills and native out/in rearm cycles produce original RNG drops. No HP, item, position, flags, RNG, inventory, camera or outcome writes and no state LOAD. The RNG is not guaranteed to produce a large drop on every future attempt.",
+    "Native item47/subtype33 reaches delayed phase2 with observed collector2, increases nonfull guest HP, ends the original freeze, and restores actual guest control while primary x144/HP32/resources remain unchanged. The original native heal routine is retained.",
+    "The camera fix recognizes only a tracked live native health pickup phase2 and the original eight-byte health freeze. It preserves the midpoint camera without allowing shared movement or arbitrary scenes during that freeze. Both collector seats, both health sizes, unrelated freezes, bad actors and snapshot restoration have focused debug/production coverage; native F110 qualification exercises large health with the guest.",
+    "Camera, actor, HP and native timer reads are nearby separate observations, not an instruction-atomic or every-frame trace. All nine final composed captures are reviewed. Images establish composed before/after restoration; phase2 camera ownership is established by retained native samples and source-bound hooks.",
+    "The V50 failed LOCAL trial is retained: a genuine collector2 large-health phase2 increased Zero HP28->32 while fixed primary stayed144, but camera X fell100->75->27 rather than retaining the shared midpoint near108. That candidate is not admitted for F110.",
+    "Current source/image/manifest, native originals, default finalized ordinary recordings, unchanged private cards, agreed pre-frame0/final paired profile, matching resolved core/mod CRC after the case, and graceful owned exits0 are required. No other items, private-view implementation, physical devices, remote platforms or excluded native-content audit credit."
+  ],
+  "bypasses": []
+}

@@ -1,0 +1,2020 @@
+{
+  "schema": 1,
+  "comparison": "F110",
+  "frozen_row_sha256": "4a9bda7c042aca488f0b6a1d3c1efea3855918da681776a911e15d7ca102ad22",
+  "kind": "root_reviewed_native_large_health_delayed_guest_camera",
+  "candidate": {
+    "candidate_source": "001f5b40f5468a749609aea34563dabe8c3d4532",
+    "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-pickup-heal-camera-v51",
+    "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+    "build": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v51-pickup-heal-camera-debug",
+    "executable": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v51-pickup-heal-camera-debug\\mmx6-runtime.exe",
+    "exe_sha256": "f26f712b786455d92d25d68f2bffd2d9a2716cf60de9b97c4f022814ae2f2946",
+    "declared_manifest_sha256": "b610f81ae72994da35bb4b8f177a8ce3b0e443f702d02fedf697f88acbd2d7cc",
+    "manifest_file_sha256": "9ae4aa58aee3a2d2e5a78f24c9e725573799d9888ca0a1b8354fa5836b7dad57",
+    "baseline": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+    "generated_source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\generated-source-v50-ice-contact",
+    "qualification_scope": "F110 native large health delayed guest healing camera",
+    "tests": [
+      "mmx6_coop_snapshot_debug_test",
+      "mmx6_coop_snapshot_production_test"
+    ],
+    "tests_passed": true
+  },
+  "mode": "netplay",
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-paired-v51-root-v1\\qualification.json",
+    "sha256": "af626d3c70e601ff237239564286a0ee3421941bbf9832c974b4a1a2511a48ef"
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-paired-v51-root-v1\\F110\\F110-observations.json",
+    "sha256": "f2c864d38727f7659d6c23ab4f80432e6d223e904bd2df1077f928de9020c27e"
+  },
+  "caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-paired-v51-root-v1\\caller-executed-source.py",
+    "sha256": "ff61e2a250169451ef0d1a07eab207700714a8be5b6a4dd696b78188cc6f53cf"
+  },
+  "observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-paired-v51-root-v1\\F110-observer-executed-source.py",
+    "sha256": "8d1e782971fb36ffe5d89ff491a086eaa906053ccec40c86cc5942979e17ee56"
+  },
+  "parent_checks": {
+    "jump_audio_original_source_bound": true,
+    "jump_audio_both_peers_completed": true,
+    "declared_build_manifest_bound_to_staged_images": true,
+    "jump_audio_declared_sources_match": true,
+    "host_profile_settled_before_guest": true,
+    "p2_right_reaches_both_peers": true,
+    "p2_right_preserves_p1_x": true,
+    "p1_jump_reaches_both_peers": true,
+    "p1_jump_preserves_p2_y": true,
+    "both_alive_healthy": true,
+    "mailbox_unused": true,
+    "default_resident_loader_committed": true,
+    "jump_audio_resolved_crc_after_case": true,
+    "jump_audio_final_private_cards_unchanged": true,
+    "jump_audio_owned_pair_cleanup": true
+  },
+  "behavior_checks": {
+    "genuine_original_large_health33_drop": true,
+    "actual_guest_overlap_and_collector2": true,
+    "native_delayed_phase2_and_HP_increase": true,
+    "primary_HP_ammo_position_retained": true,
+    "shared_native_camera_retained_through_healing": true,
+    "actual_world_release_and_controls": true,
+    "no_prerequisite_or_outcome_writes": true
+  },
+  "source_guards": {
+    "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "guards": [
+      {
+        "address": "0x8004e680",
+        "bytes": 264,
+        "sha256": "af5181a92089cf118595a7f536115d3fb09ba2f4795690f8501b8f5b27da054d",
+        "hex": "d8ffbd272000b4af21a08000002e0500032e0500003406001c00b3af039c06000d80033c38cf6290003c07001800b2af039407002400bfaf1400b1af0200422c2a0040101000b0af401005002110450040100200b5b4000cff00513021204000ff0010240880023c6088452401000326ff007030211011022110450000004390ff00843023188300ffff64300001822cf7ff4014010003261400001200000000fdae000c00000000212840000f00a010210002242f0003240000a2a00880023cf0884224211002020100a3a0ffff43900a00b3a40e00b2a40200a3a0140082921000a0ac8200a0a01400a2a02400bf8f2000b48f1c00b38f1800b28f1400b18f1000b08f0800e003"
+      },
+      {
+        "address": "0x8004dcb8",
+        "bytes": 560,
+        "sha256": "7affc027a13b338f0ed6d311e991b3f163e78a3385ac1facb9a77f5c54fc6d9e",
+        "hex": "e0ffbd271000b0af218080001800bfaf1400b1af060002820000000032004014800003268400029200000000ffff4224040062a0ff0042303300401421886000020002240980033ca07066240d80033cd0ce63245b006824840002a25c00c5900200c4808000a23000160200033e020021208800000083807f00a2302a104300090040140100a22401000224060002a20200c380000000002118680000006290593701082510e2002510e2005c00c2a0212000000d000524125b000c213000008300039200000000ffff6324030023a2ff0063300c00601401000224060002a270370108030000a2e339010c212000000000039203000224040002a2050000a2f7006330000003a21800bf8f1400b18f1000b08f0800e0032000bd27c8ffbd27ff00a530050002243400bfaf3000beaf2c00b7af2800b6af2400b5af2000b4af1c00b3af1800b2af1400b1af0d00a2141000b0af04001424010017240980043ca0708324ec00628c00000000400042301c0040102118800006001424a737010802001724060002240d00a2140700022410001424020017240980043ca0708324ec00628c00000000400042300d0040102118800016001424a7370108030017240600a21421b800000980033ca07062244a015494a73701080400172421a000000980033c401014002110540040100200a070712402002382000000002e006014ffff5430010013240d801e3c42901400aa00302693002282000000001400531400000000000003864a01228600000000"
+      },
+      {
+        "address": "0x8004e26c",
+        "bytes": 356,
+        "sha256": "451059c286cb7a503aaad847f1b841c39b0654d8588ff5d5fb1c9fb0219f20b0",
+        "hex": "e0ffbd271400b1af218880000980023ca07045241800bfaf1000b0afd500a3800000000008006010218040000d80023c40d345240500a380000000000200601400000000b000a5245c00a290000000007f004230c0004010000000003db7000c21202002bc0040100000000082002392000000000c00622cb5004010050020a20180023c4416422480180300211862000000648c0000000008008000000000000d80023cd0ce462401000424020023826c00c78c041864002410e300a50040140300022421200000150005242510e300a07003266c00c2ac020067805b00c6242138e6000000e2902130000002004224125b000c0000e2a070390108030002240d80023cd0ce46240100043c020023826c00c78cf0ff6324041864002410e3008c0040140300022421200000150005242510e300a07003266c00c2ac020067806100c6242138e6000000e2902130000002004224125b000c0000e2a07039010803000224"
+      },
+      {
+        "address": "0x800788de",
+        "bytes": 24,
+        "sha256": "682ca16f11293b040aac6d8e8dc796a2741951c983cf679c945bbf447acb4da4",
+        "hex": "c00a20061000c0100a200600801828380800202123242600"
+      }
+    ],
+    "large_health_kind": 33,
+    "table21_weights": [
+      192,
+      10,
+      32,
+      6,
+      16,
+      0
+    ],
+    "native_kinds": [
+      32,
+      33,
+      35,
+      36,
+      38
+    ],
+    "input": "Ordinary native death/drop; no RNG seed or timing/outcome writes"
+  },
+  "physical_processes": [
+    {
+      "peer": 0,
+      "large_health_found": {
+        "observation": {
+          "schema": 1,
+          "tick": 4416,
+          "sequence": 8832,
+          "native_timer": 4415,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 279399426,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 16,
+              "x_raw": 24854528,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "camera": [
+          101,
+          944
+        ],
+        "previous_camera": [
+          101,
+          944
+        ],
+        "record_hex": "00010110a001380400010100",
+        "record_allocated": false,
+        "instance": null,
+        "live_pool": [
+          {
+            "address": "0x8008efe4",
+            "slot": 1,
+            "origin": "0x0",
+            "flags": 33,
+            "type": 47,
+            "subtype": 33,
+            "render": 1,
+            "phase": 1,
+            "action": 0,
+            "subaction": 0,
+            "hp": 0,
+            "strength": 0,
+            "iframe": 0,
+            "x_raw": 27262976,
+            "y_raw": 72024064,
+            "x": 416.0,
+            "y": 1099.0,
+            "body_hex": "212f2101010000000000a00100004b0400000000000005030000a00100004b04000000000040fcff0000000000800000c0870780dc8407800000000098b914800000077806000109ff00000000000000000000000000000000000000000000000000000000000000fc8707800e000000080000000000000000000000000000008e000300000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "native_shared_gate": 0,
+        "p2_hit_counter": 12,
+        "p2_contact_counter": 4,
+        "p1_body_hex": "01000001010200000000900000005b0400000000004002050000900000005b040000000000d8faff0000000000420000d44a1f8080411f80cc3a1080687c14800005007808000173730300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+        "p2_body_hex": "010001010102000000407b0100003a04000000000040020500407b0100003a0400000000000000000000000000000000d0f61e8018eb1e801800009fa481039f000500781e000104ff03000000000000000000001cea1e8000000000101020000000000100000000543d07800b0000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000407b0100003a040000000000002001000000000000000000000000",
+        "body_observation": {
+          "schema": 1,
+          "tick": 4418,
+          "sequence": 8836,
+          "native_timer": 4417,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 1661366256,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 16,
+              "x_raw": 24854528,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "high": 16,
+        "collect_address": 0,
+        "collector": 0,
+        "native_heal_freeze_hex": "0000000000000000"
+      },
+      "healing_begin": {
+        "observation": {
+          "schema": 1,
+          "tick": 4459,
+          "sequence": 8918,
+          "native_timer": 4458,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 150478878,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 4,
+              "hp": 16,
+              "x_raw": 25477120,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "camera": [
+          107,
+          944
+        ],
+        "previous_camera": [
+          106,
+          944
+        ],
+        "record_hex": "00010110a001380400010100",
+        "record_allocated": false,
+        "instance": null,
+        "live_pool": [
+          {
+            "address": "0x8008efe4",
+            "slot": 1,
+            "origin": "0x0",
+            "flags": 41,
+            "type": 47,
+            "subtype": 33,
+            "render": 1,
+            "phase": 2,
+            "action": 0,
+            "subaction": 0,
+            "hp": 0,
+            "strength": 0,
+            "iframe": 0,
+            "x_raw": 27262976,
+            "y_raw": 72024064,
+            "x": 416.0,
+            "y": 1099.0,
+            "body_hex": "292f2101020000000000a00100004b0400000000000005030000a00100004b04000000000040fcff0000000000800000c0870780d48407800000000098b914800000077804000107ff00000000000000000000000000000000000000000000000000000000000000fc8707800e0000000800000000000000000000000000000063000310020000000000000000000000000000000000000000000000"
+          }
+        ],
+        "native_shared_gate": 1,
+        "p2_hit_counter": 12,
+        "p2_contact_counter": 4,
+        "p1_body_hex": "01000001010200000000900000005b0400000000004002050000900000005b040000000000d8faff0000000000420000d44a1f8090411f80cc3a1080687c14800005007804000174740300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+        "p2_body_hex": "010001010104000000c0880100003a04000000000040020800c0860100003a0400000200000000000000000000000000d0f61e806ceb1e801800009fa481039f000500780201010cff030000000000000000000004ea1e8000000000101020000000000100000000543d0780080000000800000000000000000000000100010000000100000000000108000000000000000000000000000000000000000000000000000000400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000c0860100003a040000000000002001000000000000000000000000",
+        "body_observation": {
+          "schema": 1,
+          "tick": 4461,
+          "sequence": 8922,
+          "native_timer": 4460,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 2201291784,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 4,
+              "hp": 16,
+              "x_raw": 25739264,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "high": 16,
+        "collect_address": 2148069348,
+        "collector": 2,
+        "native_heal_freeze_hex": "0101010101010101"
+      },
+      "healed": {
+        "observation": {
+          "schema": 1,
+          "tick": 4505,
+          "sequence": 9010,
+          "native_timer": 4504,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 1966392275,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 25739264,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "camera": [
+          108,
+          944
+        ],
+        "previous_camera": [
+          108,
+          944
+        ],
+        "record_hex": "00010110a001380400010100",
+        "record_allocated": false,
+        "instance": null,
+        "live_pool": [],
+        "native_shared_gate": 0,
+        "p2_hit_counter": 12,
+        "p2_contact_counter": 4,
+        "p1_body_hex": "01000001010200000000900000005b0400000000004002050000900000005b040000000000d8faff0000000000420000d44a1f809c411f80cc3a1080687c1480000500780b000100000300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+        "p2_body_hex": "010001010102000000c0880100003a04000000000040020500c0880100003a0400000200000000000000000000000000d0f61e8000eb1e801800009fa481039f0005007814000100ff03000000000000000000001cea1e8000000000202020000000000100000000543d0780080000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000c0880100003a040000000000002001000000000000000000000000",
+        "body_observation": {
+          "schema": 1,
+          "tick": 4507,
+          "sequence": 9014,
+          "native_timer": 4506,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 3061531781,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 25739264,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "high": 16,
+        "collect_address": 2148069348,
+        "collector": 2,
+        "native_heal_freeze_hex": "0000000000000000"
+      },
+      "actual_phase2_samples": [
+        {
+          "index": 238,
+          "camera": [
+            107,
+            944
+          ],
+          "expected_camera_X": 106.375,
+          "collector": 2,
+          "HP": 16,
+          "freeze": "0101010101010101",
+          "native_timer": 4458
+        },
+        {
+          "index": 239,
+          "camera": [
+            108,
+            944
+          ],
+          "expected_camera_X": 108.375,
+          "collector": 2,
+          "HP": 21,
+          "freeze": "0101010101010101",
+          "native_timer": 4470
+        },
+        {
+          "index": 240,
+          "camera": [
+            108,
+            944
+          ],
+          "expected_camera_X": 108.375,
+          "collector": 2,
+          "HP": 29,
+          "freeze": "0000000000000000",
+          "native_timer": 4487
+        }
+      ],
+      "fresh_control": {
+        "before_index": 244,
+        "accepted_index": 246
+      },
+      "after_release": {
+        "observation": {
+          "schema": 1,
+          "tick": 4620,
+          "sequence": 9240,
+          "native_timer": 4619,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 442816921,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 22888448,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "camera": [
+          86,
+          944
+        ],
+        "previous_camera": [
+          86,
+          944
+        ],
+        "record_hex": "00010110a001380400010100",
+        "record_allocated": false,
+        "instance": null,
+        "live_pool": [],
+        "native_shared_gate": 0,
+        "p2_hit_counter": 12,
+        "p2_contact_counter": 4,
+        "p1_body_hex": "01000001010200000000900000005b0400000000004002050000900000005b040000000000d8faff0000000000420000d44a1f8088411f80cc3a1080687c14800005007804000177770300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+        "p2_body_hex": "010001010102000000405d0100003a04000000000000020500405d0100003a040000feff000000000000000000000000d0f61e800ceb1e801800009fa481039f0005007801000101ff03000000000000000000001cea1e8000000000202020000000000100000000543d07800d0000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000405d0100003a040000000000002001000000000000000000000000",
+        "body_observation": {
+          "schema": 1,
+          "tick": 4623,
+          "sequence": 9246,
+          "native_timer": 4622,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 4055957669,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 22888448,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "high": 16,
+        "collect_address": 2148069348,
+        "collector": 2,
+        "native_heal_freeze_hex": "0000000000000000"
+      },
+      "captures": [
+        {
+          "label": "original-large-health-before-guest-collection",
+          "peer": 0,
+          "row_index": 236,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-paired-v51-root-v1\\F110\\peer0-original-large-health-before-guest-collection.png",
+            "sha256": "5150ba7d2342f2d384f01289ada7811d6fa1c543150ee7615e138e2d64e7931e",
+            "before": {
+              "id": 4606,
+              "ok": true,
+              "seq": 4,
+              "wrote": 1
+            },
+            "acknowledgement": {
+              "id": 4607,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-paired-v51-root-v1\\F110\\peer0-original-large-health-before-guest-collection.png",
+              "staged": true,
+              "seq": 4
+            },
+            "completion": {
+              "id": 4609,
+              "ok": true,
+              "seq": 5,
+              "wrote": 1
+            }
+          }
+        },
+        {
+          "label": "large-health-native-collector-healed",
+          "peer": 0,
+          "row_index": 242,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-paired-v51-root-v1\\F110\\peer0-large-health-native-collector-healed.png",
+            "sha256": "331def7fdda585dd0ac6c3037c4faf1764b2b9f3e2d03c224ed01b3420014ccb",
+            "before": {
+              "id": 4670,
+              "ok": true,
+              "seq": 5,
+              "wrote": 1
+            },
+            "acknowledgement": {
+              "id": 4671,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-paired-v51-root-v1\\F110\\peer0-large-health-native-collector-healed.png",
+              "staged": true,
+              "seq": 5
+            },
+            "completion": {
+              "id": 4672,
+              "ok": true,
+              "seq": 6,
+              "wrote": 1
+            }
+          }
+        },
+        {
+          "label": "native-world-after-large-health",
+          "peer": 0,
+          "row_index": 251,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-paired-v51-root-v1\\F110\\peer0-native-world-after-large-health.png",
+            "sha256": "8d041af86573bdc4007589fe7689a39780cc7a008344bde5fd28e368f5ba54b3",
+            "before": {
+              "id": 4763,
+              "ok": true,
+              "seq": 6,
+              "wrote": 1
+            },
+            "acknowledgement": {
+              "id": 4764,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-paired-v51-root-v1\\F110\\peer0-native-world-after-large-health.png",
+              "staged": true,
+              "seq": 6
+            },
+            "completion": {
+              "id": 4766,
+              "ok": true,
+              "seq": 7,
+              "wrote": 1
+            }
+          }
+        }
+      ],
+      "visual_review": "Root inspected all three composed images per physical process: original drop, healed collector and fresh native control. Both meters and original scenery restore. Transient camera behavior uses actual phase2 samples."
+    },
+    {
+      "peer": 1,
+      "large_health_found": {
+        "observation": {
+          "schema": 1,
+          "tick": 4422,
+          "sequence": 8844,
+          "native_timer": 4421,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 2730555108,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 16,
+              "x_raw": 24854528,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "camera": [
+          101,
+          944
+        ],
+        "previous_camera": [
+          101,
+          944
+        ],
+        "record_hex": "00010110a001380400010100",
+        "record_allocated": false,
+        "instance": null,
+        "live_pool": [
+          {
+            "address": "0x8008efe4",
+            "slot": 1,
+            "origin": "0x0",
+            "flags": 33,
+            "type": 47,
+            "subtype": 33,
+            "render": 1,
+            "phase": 1,
+            "action": 0,
+            "subaction": 0,
+            "hp": 0,
+            "strength": 0,
+            "iframe": 0,
+            "x_raw": 27262976,
+            "y_raw": 72024064,
+            "x": 416.0,
+            "y": 1099.0,
+            "body_hex": "212f2101010000000000a00100004b0400000000000005030000a00100004b04000000000040fcff0000000000800000c0870780dc8407800000000098b914800000077801000109ff00000000000000000000000000000000000000000000000000000000000000fc8707800e0000000800000000000000000000000000000089000300000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "native_shared_gate": 0,
+        "p2_hit_counter": 12,
+        "p2_contact_counter": 4,
+        "p1_body_hex": "01000001010200000000900000005b0400000000004002050000900000005b040000000000d8faff0000000000420000d44a1f8080411f80cc3a1080687c14800005007802000173730300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+        "p2_body_hex": "010001010102000000407b0100003a04000000000040020500407b0100003a0400000000000000000000000000000000d0f61e8018eb1e801800009fa481039f0005007818000104ff03000000000000000000001cea1e8000000000101020000000000100000000543d07800b0000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000407b0100003a040000000000002001000000000000000000000000",
+        "body_observation": {
+          "schema": 1,
+          "tick": 4424,
+          "sequence": 8848,
+          "native_timer": 4423,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 3723214570,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 16,
+              "x_raw": 24854528,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "high": 16,
+        "collect_address": 0,
+        "collector": 0,
+        "native_heal_freeze_hex": "0000000000000000"
+      },
+      "healing_begin": {
+        "observation": {
+          "schema": 1,
+          "tick": 4463,
+          "sequence": 8926,
+          "native_timer": 4462,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 3551036018,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 4,
+              "hp": 17,
+              "x_raw": 25739264,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "camera": [
+          108,
+          944
+        ],
+        "previous_camera": [
+          108,
+          944
+        ],
+        "record_hex": "00010110a001380400010100",
+        "record_allocated": false,
+        "instance": null,
+        "live_pool": [
+          {
+            "address": "0x8008efe4",
+            "slot": 1,
+            "origin": "0x0",
+            "flags": 41,
+            "type": 47,
+            "subtype": 33,
+            "render": 0,
+            "phase": 2,
+            "action": 0,
+            "subaction": 0,
+            "hp": 0,
+            "strength": 0,
+            "iframe": 0,
+            "x_raw": 27262976,
+            "y_raw": 72024064,
+            "x": 416.0,
+            "y": 1099.0,
+            "body_hex": "292f2100020000000000a00100004b0400000000000005030000a00100004b04000000000040fcff0000000000800000c0870780d48407800000000098b914800000077804000107ff00000000000000000000000000000000000000000000000000000000000000fc8707800e000000080000000000000000000000000000006300030f010000000000000000000000000000000000000000000000"
+          }
+        ],
+        "native_shared_gate": 1,
+        "p2_hit_counter": 12,
+        "p2_contact_counter": 4,
+        "p1_body_hex": "01000001010200000000900000005b0400000000004002050000900000005b040000000000d8faff0000000000420000d44a1f8090411f80cc3a1080687c14800005007804000174740300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+        "p2_body_hex": "010001010104000000c0880100003a04000000000040020800c0860100003a0400000200000000000000000000000000d0f61e806ceb1e801800009fa481039f000500780201010cff030000000000000000000004ea1e8000000000121220000000000100000000543d0780080000000800000000000000000000000100010000000100000000000108000000000000000000000000000000000000000000000000000000400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000c0860100003a040000000000002001000000000000000000000000",
+        "body_observation": {
+          "schema": 1,
+          "tick": 4466,
+          "sequence": 8932,
+          "native_timer": 4465,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 3570656176,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 4,
+              "hp": 18,
+              "x_raw": 25739264,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "high": 16,
+        "collect_address": 2148069348,
+        "collector": 2,
+        "native_heal_freeze_hex": "0101010101010101"
+      },
+      "healed": {
+        "observation": {
+          "schema": 1,
+          "tick": 4510,
+          "sequence": 9020,
+          "native_timer": 4509,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 256007104,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 25739264,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "camera": [
+          108,
+          944
+        ],
+        "previous_camera": [
+          108,
+          944
+        ],
+        "record_hex": "00010110a001380400010100",
+        "record_allocated": false,
+        "instance": null,
+        "live_pool": [],
+        "native_shared_gate": 0,
+        "p2_hit_counter": 12,
+        "p2_contact_counter": 4,
+        "p1_body_hex": "01000001010200000000900000005b0400000000004002050000900000005b040000000000d8faff0000000000420000d44a1f809c411f80cc3a1080687c14800005007806000100000300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+        "p2_body_hex": "010001010102000000c0880100003a04000000000040020500c0880100003a0400000200000000000000000000000000d0f61e8000eb1e801800009fa481039f000500780f000100ff03000000000000000000001cea1e8000000000202020000000000100000000543d0780080000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000c0880100003a040000000000002001000000000000000000000000",
+        "body_observation": {
+          "schema": 1,
+          "tick": 4512,
+          "sequence": 9024,
+          "native_timer": 4511,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 1272646570,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 25739264,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "high": 16,
+        "collect_address": 2148069348,
+        "collector": 2,
+        "native_heal_freeze_hex": "0000000000000000"
+      },
+      "actual_phase2_samples": [
+        {
+          "index": 238,
+          "camera": [
+            108,
+            944
+          ],
+          "expected_camera_X": 108.375,
+          "collector": 2,
+          "HP": 17,
+          "freeze": "0101010101010101",
+          "native_timer": 4462
+        },
+        {
+          "index": 239,
+          "camera": [
+            108,
+            944
+          ],
+          "expected_camera_X": 108.375,
+          "collector": 2,
+          "HP": 25,
+          "freeze": "0101010101010101",
+          "native_timer": 4479
+        }
+      ],
+      "fresh_control": {
+        "before_index": 244,
+        "accepted_index": 246
+      },
+      "after_release": {
+        "observation": {
+          "schema": 1,
+          "tick": 4626,
+          "sequence": 9252,
+          "native_timer": 4625,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 2252516431,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 22888448,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "camera": [
+          86,
+          944
+        ],
+        "previous_camera": [
+          86,
+          944
+        ],
+        "record_hex": "00010110a001380400010100",
+        "record_allocated": false,
+        "instance": null,
+        "live_pool": [],
+        "native_shared_gate": 0,
+        "p2_hit_counter": 12,
+        "p2_contact_counter": 4,
+        "p1_body_hex": "01000001010200000000900000005b0400000000004002050000900000005b040000000000d8faff0000000000420000d44a1f808c411f80cc3a1080687c14800005007808000100000300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000900000005b040000000000002001000000000000000000000000",
+        "p2_body_hex": "010001010102000000405d0100003a04000000000000020500405d0100003a040000feff000000000000000000000000d0f61e8010eb1e801800009fa481039f000500780f000100ff03000000000000000000001cea1e8000000000202020000000000100000000543d07800d0000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000405d0100003a040000000000002001000000000000000000000000",
+        "body_observation": {
+          "schema": 1,
+          "tick": 4630,
+          "sequence": 9260,
+          "native_timer": 4629,
+          "lifecycle": [
+            0,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 41478539,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 9437184,
+              "y_raw": 73072640,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 22888448,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 1
+        },
+        "high": 16,
+        "collect_address": 2148069348,
+        "collector": 2,
+        "native_heal_freeze_hex": "0000000000000000"
+      },
+      "captures": [
+        {
+          "label": "original-large-health-before-guest-collection",
+          "peer": 1,
+          "row_index": 236,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-paired-v51-root-v1\\F110\\peer1-original-large-health-before-guest-collection.png",
+            "sha256": "5150ba7d2342f2d384f01289ada7811d6fa1c543150ee7615e138e2d64e7931e",
+            "before": {
+              "id": 4527,
+              "ok": true,
+              "seq": 4,
+              "wrote": 1
+            },
+            "acknowledgement": {
+              "id": 4528,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-paired-v51-root-v1\\F110\\peer1-original-large-health-before-guest-collection.png",
+              "staged": true,
+              "seq": 4
+            },
+            "completion": {
+              "id": 4529,
+              "ok": true,
+              "seq": 5,
+              "wrote": 1
+            }
+          }
+        },
+        {
+          "label": "large-health-native-collector-healed",
+          "peer": 1,
+          "row_index": 242,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-paired-v51-root-v1\\F110\\peer1-large-health-native-collector-healed.png",
+            "sha256": "331def7fdda585dd0ac6c3037c4faf1764b2b9f3e2d03c224ed01b3420014ccb",
+            "before": {
+              "id": 4594,
+              "ok": true,
+              "seq": 5,
+              "wrote": 1
+            },
+            "acknowledgement": {
+              "id": 4595,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-paired-v51-root-v1\\F110\\peer1-large-health-native-collector-healed.png",
+              "staged": true,
+              "seq": 5
+            },
+            "completion": {
+              "id": 4596,
+              "ok": true,
+              "seq": 6,
+              "wrote": 1
+            }
+          }
+        },
+        {
+          "label": "native-world-after-large-health",
+          "peer": 1,
+          "row_index": 251,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-paired-v51-root-v1\\F110\\peer1-native-world-after-large-health.png",
+            "sha256": "296058b4bdde9092aa98e360484875f52df6c0dc17c7d21f6d46834732ade684",
+            "before": {
+              "id": 4691,
+              "ok": true,
+              "seq": 6,
+              "wrote": 1
+            },
+            "acknowledgement": {
+              "id": 4692,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-paired-v51-root-v1\\F110\\peer1-native-world-after-large-health.png",
+              "staged": true,
+              "seq": 6
+            },
+            "completion": {
+              "id": 4694,
+              "ok": true,
+              "seq": 7,
+              "wrote": 1
+            }
+          }
+        }
+      ],
+      "visual_review": "Root inspected all three composed images per physical process: original drop, healed collector and fresh native control. Both meters and original scenery restore. Transient camera behavior uses actual phase2 samples."
+    }
+  ],
+  "recordings": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-paired-v51-root-v1\\peer-0\\saves\\input-recordings\\session-1793028020539473-1-0\\inputs.jsonl",
+      "sha256": "bb2a529876ea6225ada4f6d850355c1c588c628ebfc87552dbb32509f0dcde35",
+      "events": 18403,
+      "natives": 7041,
+      "p2_reads": 11362,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "f26f712b786455d92d25d68f2bffd2d9a2716cf60de9b97c4f022814ae2f2946",
+        "manifest_sha256": "b610f81ae72994da35bb4b8f177a8ce3b0e443f702d02fedf697f88acbd2d7cc",
+        "mode": "netplay",
+        "profile": {
+          "id": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "58f2649d10b5ceba019fd095d753929cff6ac1d89d7ce866059de8b305ed420e"
+        },
+        "settings_sha256": "678ea0742d375e120ec86c29053b60d74181951ceb43831bbca670a5875771e6",
+        "simulation_contract_sha256": "02b84ba92b55b01b96eb4af3ae2e5dac0f91438cf78fdf29d53ae60048ce3e1f"
+      }
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-paired-v51-root-v1\\peer-1\\saves\\input-recordings\\session-1793028020539801-1-0\\inputs.jsonl",
+      "sha256": "c388896f503fad3228b18d4031bce33e8c0238aa1af528ca55500ba6c562080d",
+      "events": 18409,
+      "natives": 7043,
+      "p2_reads": 11366,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "f26f712b786455d92d25d68f2bffd2d9a2716cf60de9b97c4f022814ae2f2946",
+        "manifest_sha256": "b610f81ae72994da35bb4b8f177a8ce3b0e443f702d02fedf697f88acbd2d7cc",
+        "mode": "netplay",
+        "profile": {
+          "id": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "58f2649d10b5ceba019fd095d753929cff6ac1d89d7ce866059de8b305ed420e"
+        },
+        "settings_sha256": "8675b5fc560c2a45be3bb48e46e7b3e21c76f071a18c8809038a7e664fd28605",
+        "simulation_contract_sha256": "02b84ba92b55b01b96eb4af3ae2e5dac0f91438cf78fdf29d53ae60048ce3e1f"
+      }
+    }
+  ],
+  "failed_baseline": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-local-v50-root-v1\\qualification.json",
+      "sha256": "589f97bd070010cd30f99316d0db4d5d7515f8f0a76234e35307024f37ed5aec"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F110-large-health-local-v50-root-v1\\hud\\F110\\F110-observations.json",
+      "sha256": "ba1cffbb2801efa652dbed4762c1cbc88a52a28868f06736417f7bb952d9ac36"
+    }
+  ],
+  "focused_test_log": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\test-v51-pickup-heal-camera-focused.log",
+    "sha256": "e82d87c249de00dec2d93035cf3a130e2791887216b12e5fbf23f2febfcf454e"
+  },
+  "limits": [
+    "Exact001f5b4/SDK7cb4742, X/P1 and normal Zero/P2, original intro record25 and genuine native large-health33 death drop. Shared native4:3 OpenGL with stacked meters; LOCAL and both Win64 same-host delay3 peers only.",
+    "Only ordinary published input: actual original enemy attacks damage Zero, actual guest Z-Buster kills and native out/in rearm cycles produce original RNG drops. No HP, item, position, flags, RNG, inventory, camera or outcome writes and no state LOAD. The RNG is not guaranteed to produce a large drop on every future attempt.",
+    "Native item47/subtype33 reaches delayed phase2 with observed collector2, increases nonfull guest HP, ends the original freeze, and restores actual guest control while primary x144/HP32/resources remain unchanged. The original native heal routine is retained.",
+    "The camera fix recognizes only a tracked live native health pickup phase2 and the original eight-byte health freeze. It preserves the midpoint camera without allowing shared movement or arbitrary scenes during that freeze. Both collector seats, both health sizes, unrelated freezes, bad actors and snapshot restoration have focused debug/production coverage; native F110 qualification exercises large health with the guest.",
+    "Camera, actor, HP and native timer reads are nearby separate observations, not an instruction-atomic or every-frame trace. All nine final composed captures are reviewed. Images establish composed before/after restoration; phase2 camera ownership is established by retained native samples and source-bound hooks.",
+    "The V50 failed LOCAL trial is retained: a genuine collector2 large-health phase2 increased Zero HP28->32 while fixed primary stayed144, but camera X fell100->75->27 rather than retaining the shared midpoint near108. That candidate is not admitted for F110.",
+    "Current source/image/manifest, native originals, default finalized ordinary recordings, unchanged private cards, agreed pre-frame0/final paired profile, matching resolved core/mod CRC after the case, and graceful owned exits0 are required. No other items, private-view implementation, physical devices, remote platforms or excluded native-content audit credit."
+  ],
+  "bypasses": [],
+  "profile": {
+    "profile": "mmx6.win64-clang22.loopback",
+    "revision": 2,
+    "selected_sha256": "58f2649d10b5ceba019fd095d753929cff6ac1d89d7ce866059de8b305ed420e",
+    "peers": [
+      {
+        "capabilities": {
+          "actual_image_sha256": "f26f712b786455d92d25d68f2bffd2d9a2716cf60de9b97c4f022814ae2f2946",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "58f2649d10b5ceba019fd095d753929cff6ac1d89d7ce866059de8b305ed420e",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      },
+      {
+        "capabilities": {
+          "actual_image_sha256": "f26f712b786455d92d25d68f2bffd2d9a2716cf60de9b97c4f022814ae2f2946",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "58f2649d10b5ceba019fd095d753929cff6ac1d89d7ce866059de8b305ed420e",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      }
+    ]
+  },
+  "resolved_state_crc": [
+    {
+      "label": "initial idle",
+      "samples": [
+        {
+          "simulation_tick": 2912,
+          "core": "18cffd57",
+          "mod": "a39dcb90"
+        },
+        {
+          "simulation_tick": 2944,
+          "core": "6e5f85f9",
+          "mod": "14b824f0"
+        },
+        {
+          "simulation_tick": 2976,
+          "core": "a269da7d",
+          "mod": "bfaf8ef6"
+        },
+        {
+          "simulation_tick": 3008,
+          "core": "023c22f2",
+          "mod": "e6b9d816"
+        },
+        {
+          "simulation_tick": 3040,
+          "core": "05b31c01",
+          "mod": "10e06708"
+        },
+        {
+          "simulation_tick": 3072,
+          "core": "99acb048",
+          "mod": "6e8cd13c"
+        },
+        {
+          "simulation_tick": 3104,
+          "core": "e982ee74",
+          "mod": "590556f4"
+        },
+        {
+          "simulation_tick": 3136,
+          "core": "57a9879f",
+          "mod": "d7dd3216"
+        }
+      ],
+      "resolved_through": [
+        3152,
+        3152
+      ]
+    },
+    {
+      "label": "P2 right then release",
+      "samples": [
+        {
+          "simulation_tick": 3200,
+          "core": "640bce93",
+          "mod": "a85a455d"
+        },
+        {
+          "simulation_tick": 3232,
+          "core": "010abb2a",
+          "mod": "7864c38f"
+        },
+        {
+          "simulation_tick": 3264,
+          "core": "b4bf9e54",
+          "mod": "c98ccbc9"
+        },
+        {
+          "simulation_tick": 3296,
+          "core": "72901b4d",
+          "mod": "290304e9"
+        },
+        {
+          "simulation_tick": 3328,
+          "core": "2c05c0cb",
+          "mod": "ad705727"
+        },
+        {
+          "simulation_tick": 3360,
+          "core": "94090d2f",
+          "mod": "0fa44d3f"
+        },
+        {
+          "simulation_tick": 3392,
+          "core": "d7ea902c",
+          "mod": "5e755611"
+        }
+      ],
+      "resolved_through": [
+        3421,
+        3420
+      ]
+    },
+    {
+      "label": "P1 jump then settle",
+      "samples": [
+        {
+          "simulation_tick": 3488,
+          "core": "2025bceb",
+          "mod": "c1df3bf9"
+        },
+        {
+          "simulation_tick": 3520,
+          "core": "4c016ab0",
+          "mod": "2d2586d9"
+        },
+        {
+          "simulation_tick": 3552,
+          "core": "88d5d133",
+          "mod": "4e642d97"
+        },
+        {
+          "simulation_tick": 3584,
+          "core": "3c078c6c",
+          "mod": "289e49b7"
+        },
+        {
+          "simulation_tick": 3616,
+          "core": "88b39ada",
+          "mod": "9a1ab221"
+        },
+        {
+          "simulation_tick": 3648,
+          "core": "27084cbe",
+          "mod": "9fd72ad5"
+        },
+        {
+          "simulation_tick": 3680,
+          "core": "9704b480",
+          "mod": "a85a455d"
+        },
+        {
+          "simulation_tick": 3712,
+          "core": "7b825262",
+          "mod": "7864c38f"
+        }
+      ],
+      "resolved_through": [
+        3720,
+        3720
+      ]
+    },
+    {
+      "label": "paired ground-jump audio then settle",
+      "samples": [
+        {
+          "simulation_tick": 7392,
+          "core": "b208ca49",
+          "mod": "32c26cd0"
+        },
+        {
+          "simulation_tick": 7424,
+          "core": "3f0ce0e1",
+          "mod": "55d8dd92"
+        },
+        {
+          "simulation_tick": 7456,
+          "core": "8ae24831",
+          "mod": "94b08db2"
+        },
+        {
+          "simulation_tick": 7488,
+          "core": "71b013dc",
+          "mod": "24e69ec8"
+        },
+        {
+          "simulation_tick": 7520,
+          "core": "8c319947",
+          "mod": "a78e2928"
+        },
+        {
+          "simulation_tick": 7552,
+          "core": "8caa783c",
+          "mod": "6c96758c"
+        },
+        {
+          "simulation_tick": 7584,
+          "core": "a16fbd6c",
+          "mod": "b0f145da"
+        }
+      ],
+      "resolved_through": [
+        7606,
+        7606
+      ]
+    }
+  ]
+}
