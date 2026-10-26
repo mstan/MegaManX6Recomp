@@ -16,7 +16,7 @@ as historical reference. The owner has resumed work solo on the 234 comparisons.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 34 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F22, F31, F33, F38, F48, F56, F58, F59, F67, F70, F95, F102, F107, F121, F133, F163, F170, F205, F208), 0 failed, 200 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 35 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F22, F31, F33, F38, F48, F56, F58, F59, F67, F70, F95, F102, F107, F119, F121, F133, F163, F170, F205, F208), 0 failed, 199 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -40,6 +40,23 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 26
+
+F119 now passes on exact `7caed4d`/SDK `7cb4742` in
+[local co-op](evidence/mmx6-r13/manifest-bound-7caed4d-F119-native-respawn-facing-local-reviewed.json)
+and [actual paired netplay](evidence/mmx6-r13/manifest-bound-7caed4d-F119-native-respawn-facing-netplay-reviewed.json).
+Original enemy contact kills X to the right of the authored enemy site.
+Surviving Zero retires that enemy and traverses the original two outside/inside
+rearm cycles. The real HP12 respawn faces the eligible guest to its left,
+opposite the closer fallen primary to its right. Fresh native guest slashes
+then cause actual HP loss on every physical process. All twelve composed
+captures were reviewed; source/profile/post-case CRCs, ordinary recordings,
+cards and graceful exits0 pass. The earlier paired observer required another
+complete kill beyond the frozen facing/interaction contract and failed that
+extra gate; it remains unadmitted. No gameplay fix or result writes were needed.
+This adds one comparison, bringing34to35 passed with199 unverified. This is
+the ineligible-primary case; living off-camera-primary and unrelated native
+pickup artwork remain unverified. Its real out/in rearm cycles differ from
+F163's retained high10 entry inside one eligibility window.
 
 F163 now passes on exact `7caed4d`/SDK `7cb4742` in
 [local co-op](evidence/mmx6-r13/manifest-bound-7caed4d-F163-native-retire-late-primary-local-reviewed.json)

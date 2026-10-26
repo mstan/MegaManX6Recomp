@@ -11189,24 +11189,97 @@
       "frozen_row_sha256": "2146de279c91090f76a456271854bed2492acfa870a5b21eed8916304a9441e0",
       "x6": {
         "workstream": "camera",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Enemy initial facing with nearby off-camera primary",
+        "mapping_state": "candidate_native_scenario",
+        "analogue": "Original intro enemy respawn faces eligible survivor over closer fallen primary",
         "bounded_check": "Map an actual spawn initializer; approach with guest while primary is nearby but ineligible/off-camera and inspect initial facing plus native interaction.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+            "build_identity": {
+              "executable_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+              "compiled_manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro record25/type1-subtype1 native respawn",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "input": "ordinary published host",
+              "audio": "dummy muted"
+            },
+            "action": "Allow real enemy contact to kill primary to the right of authored site; retire the original enemy, traverse both original rearm cycles with surviving guest left, inspect real initialized respawn facing and land fresh native guest attacks.",
+            "outcome": "Each physical process retains closer fallen primary right of x416 and living eligible guest left. Real HP12/phase1 native respawn faces left flag0, opposite the closer corpse expected flag40. Fresh guest native Slash reduces same original actor HP. Current source/profile/post-case CRC/ordinary recordings/cards/graceful exits0 pass; twelve composed captures reviewed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-r13/manifest-bound-7caed4d-F119-native-respawn-facing-local-reviewed.json",
+                "sha256": "bd2de28c2625788ad1ff45b47de8974b3e27fc487942fbe478fa965698cb0d01"
+              }
+            ],
+            "limits": [
+              "Exact7caed4d/SDK7cb474, fixed X/P1 and normal Zero/P2, original intro record25/type1-subtype1, shared native4:3 OpenGL/stacked meters and ordinary published input. LOCAL and both Win64 same-host delay3 peers only.",
+              "Native enemy contact genuinely kills primary on the right of authoredx416. Primary remains FALLEN/HP0; living Zero performs real native attacks and the original outside/inside two-cycle eligibility progression high10->20->30->40->10. No HP, actor, eligibility, spawn, position, timer, inventory or success writes and no state LOAD.",
+              "This is the frozen ineligible-primary counterpart: the closer primary is fallen, rather than a living primary excluded by another camera. The source-qualified native initializer receives the surviving Zero singleton; record-bound real HP12/phase1 respawn faces left toward that eligible guest, opposite the closer right corpse. Living off-camera-primary and other rosters/enemy families remain separate.",
+              "Original constructor800EAFFC..B0E0 compares native PLAYER X at800EB064..80 and writes actor15 facing0/40. Eligibility29E7C and out-of-window2A268..2F4 drive the actual two complete rearm cycles. This differs from F163 staying inside the same high10 eligibility window; no contradiction or forced per-hero respawn is implied.",
+              "Fresh respawn interaction is proven by actual origin-bound native enemy HP loss under fresh guest Square/Slash48, with each physical process sampled independently. F119 requires facing and a native interaction; complete second-enemy destruction is not required. The earlier pairedv1 passed those observations but failed its extra retirement gate and lacked post-case CRC; it remains unadmitted.",
+              "Bodies, pool/record and camera/source reads are nearby separate samples, not an instruction-atomic initializer trace. All twelve named composed captures inspected. Original initialized enemy facing also has direct native body evidence; no full-pixel reference, every-enemy, independent-view or entire-campaign claim.",
+              "The LOCAL final image contains a separate native drop subtype36 glyph whose art is not qualified here. F119 does not credit pickup artwork or large-health behavior.",
+              "Exact source/image/manifest and native originals, ordinary finalized recordings, unchanged private cards, agreed pre-frame0/final paired profile, matching resolved core/mod CRC after the case and graceful owned exits0 are required. No audio, physical devices, remote platforms or excluded native-content audit credit."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+            "build_identity": {
+              "executable_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+              "compiled_manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro record25/type1-subtype1 native respawn",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "input": "ordinary published host",
+              "audio": "dummy muted"
+            },
+            "action": "Allow real enemy contact to kill primary to the right of authored site; retire the original enemy, traverse both original rearm cycles with surviving guest left, inspect real initialized respawn facing and land fresh native guest attacks.",
+            "outcome": "Each physical process retains closer fallen primary right of x416 and living eligible guest left. Real HP12/phase1 native respawn faces left flag0, opposite the closer corpse expected flag40. Fresh guest native Slash reduces same original actor HP. Current source/profile/post-case CRC/ordinary recordings/cards/graceful exits0 pass; twelve composed captures reviewed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-r13/manifest-bound-7caed4d-F119-native-respawn-facing-netplay-reviewed.json",
+                "sha256": "25db232e14e85dbd19659bf40f5b544ecfeb16e47bbad0e9ec1249973f128240"
+              }
+            ],
+            "limits": [
+              "Exact7caed4d/SDK7cb474, fixed X/P1 and normal Zero/P2, original intro record25/type1-subtype1, shared native4:3 OpenGL/stacked meters and ordinary published input. LOCAL and both Win64 same-host delay3 peers only.",
+              "Native enemy contact genuinely kills primary on the right of authoredx416. Primary remains FALLEN/HP0; living Zero performs real native attacks and the original outside/inside two-cycle eligibility progression high10->20->30->40->10. No HP, actor, eligibility, spawn, position, timer, inventory or success writes and no state LOAD.",
+              "This is the frozen ineligible-primary counterpart: the closer primary is fallen, rather than a living primary excluded by another camera. The source-qualified native initializer receives the surviving Zero singleton; record-bound real HP12/phase1 respawn faces left toward that eligible guest, opposite the closer right corpse. Living off-camera-primary and other rosters/enemy families remain separate.",
+              "Original constructor800EAFFC..B0E0 compares native PLAYER X at800EB064..80 and writes actor15 facing0/40. Eligibility29E7C and out-of-window2A268..2F4 drive the actual two complete rearm cycles. This differs from F163 staying inside the same high10 eligibility window; no contradiction or forced per-hero respawn is implied.",
+              "Fresh respawn interaction is proven by actual origin-bound native enemy HP loss under fresh guest Square/Slash48, with each physical process sampled independently. F119 requires facing and a native interaction; complete second-enemy destruction is not required. The earlier pairedv1 passed those observations but failed its extra retirement gate and lacked post-case CRC; it remains unadmitted.",
+              "Bodies, pool/record and camera/source reads are nearby separate samples, not an instruction-atomic initializer trace. All twelve named composed captures inspected. Original initialized enemy facing also has direct native body evidence; no full-pixel reference, every-enemy, independent-view or entire-campaign claim.",
+              "The LOCAL final image contains a separate native drop subtype36 glyph whose art is not qualified here. F119 does not credit pickup artwork or large-health behavior.",
+              "Exact source/image/manifest and native originals, ordinary finalized recordings, unchanged private cards, agreed pre-frame0/final paired profile, matching resolved core/mod CRC after the case and graceful owned exits0 are required. No audio, physical devices, remote platforms or excluded native-content audit credit."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Passed exact7caed4d/SDK7cb474 LOCAL and both Win64 loopback peers: genuine primary death, original two out/in rearm cycles, initialized HP12 native respawn faces living guest opposite closer ineligible corpse, and real native guest HP damage. Frozen ineligible-primary case only; no living off-camera-primary, all-enemy, pickup-art, private-view or excluded content-audit credit."
       }
     },
     {

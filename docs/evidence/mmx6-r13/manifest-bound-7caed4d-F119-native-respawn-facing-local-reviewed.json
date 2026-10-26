@@ -1,0 +1,851 @@
+{
+  "schema": 1,
+  "kind": "root_reviewed_F119_native_respawn_faces_eligible_guest_with_closer_fallen_primary",
+  "candidate": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+  "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+  "image_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+  "compiled_manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+  "mode": "local",
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F119-respawn-facing-local-v50-root-v1\\qualification.json",
+    "sha256": "77b75843c20c68c0a8233d6bee28bad592fa9a4991970eadc89bbbc615c75eae"
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F119-respawn-facing-local-v50-root-v1\\hud\\F119\\F119-observations.json",
+    "sha256": "b30e7be29b1e8afa704f8bb42071c9f17d8f498ff64763b0cd1d3d6e2052d137"
+  },
+  "caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F119-respawn-facing-local-v50-root-v1\\caller-executed-source.py",
+    "sha256": "8927b17acdb6b7e3de1d35184c6cd22c822ed17e993c9c580f589d02dd1e4927"
+  },
+  "observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F119-respawn-facing-local-v50-root-v1\\F119-observer-executed-source.py",
+    "sha256": "72de541f08c59e1ce9b230e0e1ae0888e0168997c77d91283b0a513a800784e9"
+  },
+  "observer_revision": 1,
+  "parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "native_case_finalized_recording_cleanup_and_cards": true
+  },
+  "behavior_checks": {
+    "actual_primary_death_without_fixture": true,
+    "closer_primary_ineligible_opposite_side": true,
+    "original_two_native_rearm_cycles": true,
+    "real_HP12_respawn_faces_eligible_guest": true,
+    "fresh_native_guest_attack_retires_respawn": true,
+    "no_outcome_or_prerequisite_writes": true
+  },
+  "source_guards": {},
+  "physical_processes": [
+    {
+      "peer": 0,
+      "original_fallen_primary": {
+        "observation": {
+          "schema": 1,
+          "tick": 1641,
+          "sequence": 3282,
+          "native_timer": 1640,
+          "lifecycle": [
+            5,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 1212303502,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 3,
+              "action": 0,
+              "hp": 0,
+              "x_raw": 28155904,
+              "y_raw": 70975488,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 2,
+              "hp": 32,
+              "x_raw": 18317312,
+              "y_raw": 73007104,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "p1_body_hex": "010000000300000000a0ad0100003b04000000000040022100a0ad0100003b0400000200000000000000000000000000d44a1f8028451f80cc3a1080687c1480000500780300016aff03000000000000000000000000000000000000000020000000000400000000000000000d0000000000000000000000000000000000000000000000000000000008000000ff0000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000010014400000000300000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000a0ad0100003b040000000000002001000000000000000000000000",
+        "p2_body_hex": "01000101010200000080170100005a0400000000004002050080170100005a0400000200000000000000000000000000d0f61e8028eb1e801800009fa481039f000500780e0001040403000000000000000000001cea1e8000000000202020000000000000000000543d0780070000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000080170100005a040000000000002001000000000000000000000000",
+        "target": {
+          "address": "0x8008ef48",
+          "slot": 0,
+          "origin": "0x800fa2dc",
+          "flags": 65,
+          "type": 1,
+          "subtype": 1,
+          "render": 1,
+          "phase": 1,
+          "action": 1,
+          "subaction": 0,
+          "hp": 12,
+          "strength": 4,
+          "iframe": 0,
+          "x_raw": 27262976,
+          "y_raw": 70778880,
+          "x": 416.0,
+          "y": 1080.0,
+          "body_hex": "41010101010100000000a00100003804dca20f80000006000000a001000038040000000000000000000000000000000024ab0f80e8aa0f80000000003462158010018c7801000000ff00000000000000e0aa0f80e4aa0f80dc4307800c0000000400000000000000dcaa0f80000000000800000000000000000000007800000000000000000000000000000000000000000000000000000000000000"
+        },
+        "live_pool": [
+          {
+            "address": "0x8008ef48",
+            "slot": 0,
+            "origin": "0x800fa2dc",
+            "flags": 65,
+            "type": 1,
+            "subtype": 1,
+            "render": 1,
+            "phase": 1,
+            "action": 1,
+            "subaction": 0,
+            "hp": 12,
+            "strength": 4,
+            "iframe": 0,
+            "x_raw": 27262976,
+            "y_raw": 70778880,
+            "x": 416.0,
+            "y": 1080.0,
+            "body_hex": "41010101010100000000a00100003804dca20f80000006000000a001000038040000000000000000000000000000000024ab0f80e8aa0f80000000003462158010018c7801000000ff00000000000000e0aa0f80e4aa0f80dc4307800c0000000400000000000000dcaa0f80000000000800000000000000000000007800000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "address": "0x8008efe4",
+            "slot": 1,
+            "origin": "0x800fa2b4",
+            "flags": 65,
+            "type": 5,
+            "subtype": 1,
+            "render": 0,
+            "phase": 3,
+            "action": 3,
+            "subaction": 0,
+            "hp": 5,
+            "strength": 3,
+            "iframe": 0,
+            "x_raw": 36700160,
+            "y_raw": 65011712,
+            "x": 560.0,
+            "y": 992.0,
+            "body_hex": "4105010003030000000030020000e003b4a20f8000000400000000000000000000000000000000000000000000000000c4ad0f8054ad0f800000000024691580b001c47801000100ff0000000000000000ae0f80f8ad0f80dc43078005000000030000000000000000000000000000000000000000000000000000000000000000030000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "record_hex": "01010110a0013804",
+        "high": 16,
+        "camera": [
+          119,
+          944
+        ]
+      },
+      "native_rearm": [
+        {
+          "high": 32,
+          "record_hex": "00010120a0013804",
+          "camera": [
+            0,
+            944
+          ],
+          "native_timer": 2050
+        },
+        {
+          "high": 48,
+          "record_hex": "00010130a0013804",
+          "camera": [
+            95,
+            944
+          ],
+          "native_timer": 2129
+        },
+        {
+          "high": 64,
+          "record_hex": "00010140a0013804",
+          "camera": [
+            0,
+            944
+          ],
+          "native_timer": 2204
+        },
+        {
+          "high": 16,
+          "record_hex": "01010110a0013804",
+          "camera": [
+            89,
+            944
+          ],
+          "native_timer": 2273
+        }
+      ],
+      "initialized_respawn": {
+        "observation": {
+          "schema": 1,
+          "tick": 2277,
+          "sequence": 4554,
+          "native_timer": 2276,
+          "lifecycle": [
+            5,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 1069682335,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 3,
+              "action": 0,
+              "hp": 0,
+              "x_raw": 28155904,
+              "y_raw": 70975488,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 5,
+              "hp": 28,
+              "x_raw": 16355328,
+              "y_raw": 73007104,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "p1_body_hex": "010000000300000000a0ad0100003b04000000000040022100a0ad0100003b0400000200000000000000000000000000d44a1f8028451f80cc3a1080687c1480000500780300016aff03000000000000000000000000000000000000000020000000000400000000000000000d0000000000000000000000000000000000000000000000000000000008000000ff0000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000010014400000000300000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000a0ad0100003b040000000000002001000000000000000000000000",
+        "p2_body_hex": "01000101010500000090f90000005a0400000000004002090090f90000005a0400000200000000000000000000000000d0f61e809ceb1e801800009fa481039f000500780100010808030000000000000000000004ea1e80000000001c1c20000000000100000000543d0780090000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000090f90000005a040000000000002001000000000000000000000000",
+        "target": {
+          "address": "0x8008ef48",
+          "slot": 0,
+          "origin": "0x800fa2dc",
+          "flags": 65,
+          "type": 1,
+          "subtype": 1,
+          "render": 1,
+          "phase": 1,
+          "action": 1,
+          "subaction": 0,
+          "hp": 12,
+          "strength": 4,
+          "iframe": 0,
+          "x_raw": 27262976,
+          "y_raw": 70778880,
+          "x": 416.0,
+          "y": 1080.0,
+          "body_hex": "41010101010100000000a00100003804dca20f80000006000000a001000038040000000000000000000000000000000024ab0f80e8aa0f80000000003462158010018c7801000000ff00000000000000e0aa0f80e4aa0f80dc4307800c0000000400000000000000dcaa0f80000000000800000000000000000000000100000000000000000000000000000000000000000000000000000000000000"
+        },
+        "live_pool": [
+          {
+            "address": "0x8008ef48",
+            "slot": 0,
+            "origin": "0x800fa2dc",
+            "flags": 65,
+            "type": 1,
+            "subtype": 1,
+            "render": 1,
+            "phase": 1,
+            "action": 1,
+            "subaction": 0,
+            "hp": 12,
+            "strength": 4,
+            "iframe": 0,
+            "x_raw": 27262976,
+            "y_raw": 70778880,
+            "x": 416.0,
+            "y": 1080.0,
+            "body_hex": "41010101010100000000a00100003804dca20f80000006000000a001000038040000000000000000000000000000000024ab0f80e8aa0f80000000003462158010018c7801000000ff00000000000000e0aa0f80e4aa0f80dc4307800c0000000400000000000000dcaa0f80000000000800000000000000000000000100000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "address": "0x8008efe4",
+            "slot": 1,
+            "origin": "0x800fa2b4",
+            "flags": 65,
+            "type": 5,
+            "subtype": 1,
+            "render": 0,
+            "phase": 3,
+            "action": 3,
+            "subaction": 0,
+            "hp": 5,
+            "strength": 3,
+            "iframe": 0,
+            "x_raw": 36700160,
+            "y_raw": 65011712,
+            "x": 560.0,
+            "y": 992.0,
+            "body_hex": "4105010003030000000030020000e003b4a20f8000000400000000000000000000000000000000000000000000000000c4ad0f8054ad0f800000000024691580b001c47801000100ff0000000000000000ae0f80f8ad0f80dc43078005000000030000000000000000000000000000000000000000000000000000000000000000030000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "record_hex": "01010110a0013804",
+        "high": 16,
+        "camera": [
+          89,
+          944
+        ]
+      },
+      "discriminating_facing": {
+        "native_flag": 0,
+        "eligible_guest_direction": "left",
+        "closer_corpse_direction": "right",
+        "closer_corpse_distance": 13.625,
+        "guest_distance": 166.4375,
+        "corpse_native_facing_would_be": 64
+      },
+      "accepted_native_damage": [
+        {
+          "index": 545,
+          "HP": 8,
+          "native_timer": 2407,
+          "guest_action": 48
+        },
+        {
+          "index": 546,
+          "HP": 8,
+          "native_timer": 2411,
+          "guest_action": 48
+        },
+        {
+          "index": 547,
+          "HP": 8,
+          "native_timer": 2417,
+          "guest_action": 48
+        },
+        {
+          "index": 548,
+          "HP": 8,
+          "native_timer": 2421,
+          "guest_action": 48
+        },
+        {
+          "index": 549,
+          "HP": 8,
+          "native_timer": 2424,
+          "guest_action": 48
+        },
+        {
+          "index": 550,
+          "HP": 8,
+          "native_timer": 2426,
+          "guest_action": 48
+        },
+        {
+          "index": 551,
+          "HP": 8,
+          "native_timer": 2428,
+          "guest_action": 48
+        },
+        {
+          "index": 552,
+          "HP": 8,
+          "native_timer": 2432,
+          "guest_action": 48
+        },
+        {
+          "index": 553,
+          "HP": 8,
+          "native_timer": 2437,
+          "guest_action": 48
+        },
+        {
+          "index": 554,
+          "HP": 8,
+          "native_timer": 2441,
+          "guest_action": 48
+        },
+        {
+          "index": 555,
+          "HP": 8,
+          "native_timer": 2444,
+          "guest_action": 48
+        },
+        {
+          "index": 556,
+          "HP": 8,
+          "native_timer": 2450,
+          "guest_action": 48
+        },
+        {
+          "index": 557,
+          "HP": 8,
+          "native_timer": 2453,
+          "guest_action": 48
+        },
+        {
+          "index": 558,
+          "HP": 8,
+          "native_timer": 2455,
+          "guest_action": 48
+        },
+        {
+          "index": 559,
+          "HP": 8,
+          "native_timer": 2460,
+          "guest_action": 2
+        },
+        {
+          "index": 560,
+          "HP": 8,
+          "native_timer": 2465,
+          "guest_action": 2
+        },
+        {
+          "index": 561,
+          "HP": 4,
+          "native_timer": 2467,
+          "guest_action": 48
+        },
+        {
+          "index": 562,
+          "HP": 4,
+          "native_timer": 2473,
+          "guest_action": 48
+        },
+        {
+          "index": 563,
+          "HP": 4,
+          "native_timer": 2477,
+          "guest_action": 48
+        },
+        {
+          "index": 564,
+          "HP": 4,
+          "native_timer": 2479,
+          "guest_action": 48
+        },
+        {
+          "index": 565,
+          "HP": 4,
+          "native_timer": 2482,
+          "guest_action": 48
+        },
+        {
+          "index": 566,
+          "HP": 4,
+          "native_timer": 2485,
+          "guest_action": 48
+        },
+        {
+          "index": 567,
+          "HP": 4,
+          "native_timer": 2488,
+          "guest_action": 17
+        },
+        {
+          "index": 568,
+          "HP": 4,
+          "native_timer": 2490,
+          "guest_action": 17
+        },
+        {
+          "index": 569,
+          "HP": 4,
+          "native_timer": 2494,
+          "guest_action": 17
+        },
+        {
+          "index": 570,
+          "HP": 4,
+          "native_timer": 2499,
+          "guest_action": 17
+        },
+        {
+          "index": 571,
+          "HP": 4,
+          "native_timer": 2503,
+          "guest_action": 2
+        },
+        {
+          "index": 572,
+          "HP": 4,
+          "native_timer": 2507,
+          "guest_action": 2
+        },
+        {
+          "index": 573,
+          "HP": 4,
+          "native_timer": 2510,
+          "guest_action": 2
+        },
+        {
+          "index": 574,
+          "HP": 4,
+          "native_timer": 2516,
+          "guest_action": 2
+        },
+        {
+          "index": 575,
+          "HP": 4,
+          "native_timer": 2518,
+          "guest_action": 2
+        },
+        {
+          "index": 576,
+          "HP": 4,
+          "native_timer": 2520,
+          "guest_action": 2
+        },
+        {
+          "index": 577,
+          "HP": 0,
+          "native_timer": 2523,
+          "guest_action": 2
+        }
+      ],
+      "after_fresh_interaction": {
+        "observation": {
+          "schema": 1,
+          "tick": 2575,
+          "sequence": 5150,
+          "native_timer": 2574,
+          "lifecycle": [
+            5,
+            0
+          ],
+          "pause_owner": 0,
+          "scene_owner": 0,
+          "scene_phase": 0,
+          "mailbox": 0,
+          "ready": 1,
+          "enrolled": 1,
+          "failed": 0,
+          "native_mode": 10,
+          "native_phase": 0,
+          "host_digest": 1780418955,
+          "host_digest_algorithm": 1,
+          "players": [
+            {
+              "active": 1,
+              "character": 0,
+              "state": 3,
+              "action": 0,
+              "hp": 0,
+              "x_raw": 28155904,
+              "y_raw": 70975488,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            },
+            {
+              "active": 1,
+              "character": 1,
+              "state": 1,
+              "action": 48,
+              "hp": 26,
+              "x_raw": 24588288,
+              "y_raw": 70909952,
+              "weapon": 0,
+              "ammo": [
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288,
+                288
+              ]
+            }
+          ],
+          "framework_digest_registered": 0
+        },
+        "p1_body_hex": "010000000300000000a0ad0100003b04000000000040022100a0ad0100003b0400000200000000000000000000000000d44a1f8028451f80cc3a1080687c1480000500780300016aff03000000000000000000000000000000000000000020000000000400000000000000000d0000000000000000000000000000000000000000000000000000000008000000ff0000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000010014400000000300000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000a0ad0100003b040000000000002001000000000000000000000000",
+        "p2_body_hex": "01000101013001000030770100003a0400000000004002580030770100003a0400000000000000000000000000000000d0f61e80bcef1e801800009fa481039f000500780240017f7f030000000000000000000004ea1e80000000001a1a20000000000100000000543d0780070000000800000000000000000000000000000000000000000000000008000000000100000000000000000000000000000000000000000000400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000030770100003a040000000000002001000000000000000000000000",
+        "target": null,
+        "live_pool": [
+          {
+            "address": "0x8008efe4",
+            "slot": 1,
+            "origin": "0x800fa2b4",
+            "flags": 65,
+            "type": 5,
+            "subtype": 1,
+            "render": 0,
+            "phase": 3,
+            "action": 3,
+            "subaction": 0,
+            "hp": 5,
+            "strength": 3,
+            "iframe": 0,
+            "x_raw": 36700160,
+            "y_raw": 65011712,
+            "x": 560.0,
+            "y": 992.0,
+            "body_hex": "4105010003030000000030020000e003b4a20f8000000400000000000000000000000000000000000000000000000000c4ad0f8054ad0f800000000024691580b001c47801000100ff0000000000000000ae0f80f8ad0f80dc43078005000000030000000000000000000000000000000000000000000000000000000000000000030000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "address": "0x8008f080",
+            "slot": 2,
+            "origin": "0x0",
+            "flags": 33,
+            "type": 47,
+            "subtype": 36,
+            "render": 1,
+            "phase": 1,
+            "action": 0,
+            "subaction": 0,
+            "hp": 0,
+            "strength": 0,
+            "iframe": 0,
+            "x_raw": 27262976,
+            "y_raw": 71892992,
+            "x": 416.0,
+            "y": 1097.0,
+            "body_hex": "212f2401010000000000a0010000490400000000000005060000a00100004904000000000040fcff0000000000800000c0870780e48407800000000078c7039f000007780600010aff00000000000000000000000000000000000000000000000000000000000000088807800f00000008000000000000000000000000000000bc000600000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "record_hex": "00010110a0013804",
+        "high": 16,
+        "camera": [
+          215,
+          944
+        ]
+      },
+      "captures": [
+        {
+          "label": "closer-primary-fallen",
+          "peer": 0,
+          "row_index": 356,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F119-respawn-facing-local-v50-root-v1\\hud\\F119\\peer0-closer-primary-fallen.png",
+            "sha256": "b0e77860500a4b180bd48b4e0b31d30a6a4d761ce00dc1d4fff233b1cae725d7",
+            "before": {
+              "id": 3499,
+              "ok": true,
+              "seq": 0,
+              "wrote": 0
+            },
+            "acknowledgement": {
+              "id": 3500,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F119-respawn-facing-local-v50-root-v1\\hud\\F119\\peer0-closer-primary-fallen.png",
+              "staged": true,
+              "seq": 0
+            },
+            "completion": {
+              "id": 3501,
+              "ok": true,
+              "seq": 1,
+              "wrote": 1
+            }
+          }
+        },
+        {
+          "label": "guest-original-kill-before-native-rearm",
+          "peer": 0,
+          "row_index": 427,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F119-respawn-facing-local-v50-root-v1\\hud\\F119\\peer0-guest-original-kill-before-native-rearm.png",
+            "sha256": "8573052c03e37f5f4a15206ff998034d4a0778d6afadb69396af59e94f857dd3",
+            "before": {
+              "id": 3875,
+              "ok": true,
+              "seq": 1,
+              "wrote": 1
+            },
+            "acknowledgement": {
+              "id": 3876,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F119-respawn-facing-local-v50-root-v1\\hud\\F119\\peer0-guest-original-kill-before-native-rearm.png",
+              "staged": true,
+              "seq": 1
+            },
+            "completion": {
+              "id": 3877,
+              "ok": true,
+              "seq": 2,
+              "wrote": 1
+            }
+          }
+        },
+        {
+          "label": "native-respawn-faces-survivor-left",
+          "peer": 0,
+          "row_index": 513,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F119-respawn-facing-local-v50-root-v1\\hud\\F119\\peer0-native-respawn-faces-survivor-left.png",
+            "sha256": "97657bb02d1282a3c637efb85a303c5ec1c157b3f583324c6eb44191f814cac0",
+            "before": {
+              "id": 4324,
+              "ok": true,
+              "seq": 2,
+              "wrote": 1
+            },
+            "acknowledgement": {
+              "id": 4325,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F119-respawn-facing-local-v50-root-v1\\hud\\F119\\peer0-native-respawn-faces-survivor-left.png",
+              "staged": true,
+              "seq": 2
+            },
+            "completion": {
+              "id": 4327,
+              "ok": true,
+              "seq": 3,
+              "wrote": 1
+            }
+          }
+        },
+        {
+          "label": "fresh-respawn-native-attack-retirement",
+          "peer": 0,
+          "row_index": 592,
+          "present": {
+            "surface": "composed_renderer_output",
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F119-respawn-facing-local-v50-root-v1\\hud\\F119\\peer0-fresh-respawn-native-attack-retirement.png",
+            "sha256": "a75d2be5973fa4c79805d49b6f6de4ddf495c9918b2eba1650c810c8b5d0755b",
+            "before": {
+              "id": 4743,
+              "ok": true,
+              "seq": 3,
+              "wrote": 1
+            },
+            "acknowledgement": {
+              "id": 4744,
+              "ok": true,
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F119-respawn-facing-local-v50-root-v1\\hud\\F119\\peer0-fresh-respawn-native-attack-retirement.png",
+              "staged": true,
+              "seq": 3
+            },
+            "completion": {
+              "id": 4746,
+              "ok": true,
+              "seq": 4,
+              "wrote": 1
+            }
+          }
+        }
+      ],
+      "root_visual_review": "All four named composed captures inspected: native primary burst/fallen meter, living Zero, original retirement, original reinitialized enemy to the right facing guest left, and guest attack continuation. No pickup-art qualification."
+    }
+  ],
+  "recordings": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F119-respawn-facing-local-v50-root-v1\\candidate\\saves\\input-recordings\\session-1793022227243069-1-0\\inputs.jsonl",
+      "sha256": "63d106acaa03df9e901a442fb313a8eb60ade99001a4b5807df2637ca65deac6",
+      "events": 14781,
+      "natives": 9118,
+      "p2_reads": 5663,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+        "manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+        "mode": "offline",
+        "profile": null,
+        "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+        "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      "requested_jump_seats": [],
+      "consumed_cross_seen_anywhere": [
+        0,
+        1
+      ],
+      "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence"
+    }
+  ],
+  "limits": [
+    "Exact7caed4d/SDK7cb474, fixed X/P1 and normal Zero/P2, original intro record25/type1-subtype1, shared native4:3 OpenGL/stacked meters and ordinary published input. LOCAL and both Win64 same-host delay3 peers only.",
+    "Native enemy contact genuinely kills primary on the right of authoredx416. Primary remains FALLEN/HP0; living Zero performs real native attacks and the original outside/inside two-cycle eligibility progression high10->20->30->40->10. No HP, actor, eligibility, spawn, position, timer, inventory or success writes and no state LOAD.",
+    "This is the frozen ineligible-primary counterpart: the closer primary is fallen, rather than a living primary excluded by another camera. The source-qualified native initializer receives the surviving Zero singleton; record-bound real HP12/phase1 respawn faces left toward that eligible guest, opposite the closer right corpse. Living off-camera-primary and other rosters/enemy families remain separate.",
+    "Original constructor800EAFFC..B0E0 compares native PLAYER X at800EB064..80 and writes actor15 facing0/40. Eligibility29E7C and out-of-window2A268..2F4 drive the actual two complete rearm cycles. This differs from F163 staying inside the same high10 eligibility window; no contradiction or forced per-hero respawn is implied.",
+    "Fresh respawn interaction is proven by actual origin-bound native enemy HP loss under fresh guest Square/Slash48, with each physical process sampled independently. F119 requires facing and a native interaction; complete second-enemy destruction is not required. The earlier pairedv1 passed those observations but failed its extra retirement gate and lacked post-case CRC; it remains unadmitted.",
+    "Bodies, pool/record and camera/source reads are nearby separate samples, not an instruction-atomic initializer trace. All twelve named composed captures inspected. Original initialized enemy facing also has direct native body evidence; no full-pixel reference, every-enemy, independent-view or entire-campaign claim.",
+    "The LOCAL final image contains a separate native drop subtype36 glyph whose art is not qualified here. F119 does not credit pickup artwork or large-health behavior.",
+    "Exact source/image/manifest and native originals, ordinary finalized recordings, unchanged private cards, agreed pre-frame0/final paired profile, matching resolved core/mod CRC after the case and graceful owned exits0 are required. No audio, physical devices, remote platforms or excluded native-content audit credit."
+  ],
+  "bypasses": []
+}
