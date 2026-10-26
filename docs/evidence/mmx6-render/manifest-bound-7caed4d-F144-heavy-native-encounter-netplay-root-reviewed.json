@@ -1,0 +1,617 @@
+{
+  "schema": 1,
+  "comparison": "F144",
+  "frozen_row_sha256": "d3e76698a2d2fff65517afa3ec2f68df1ba25d9a2426f3e422d74e9146f904cf",
+  "mode": "netplay",
+  "result": "passed",
+  "candidate": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+  "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+  "exe_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+  "compiled_manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+  "worker_receipt": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-render\\manifest-bound-7caed4d-F144-heavy-native-encounter-netplay-worker-reviewed.json",
+    "sha256": "bbf89f8f479d5032ed5d3a184235bbc4f19f4776aa70baf2c58c163f6721f92b"
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\qualification.json",
+    "sha256": "4ceddbfd8a5f40c7540a8fbef7be50db719f51ea866c3e37ffd1e6ed251d18ae"
+  },
+  "case": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\F144-observations.json",
+    "sha256": "4d3f9f5d11620bc0397212c64f5edb7f5accce0e801cb2733e44f581b0b61d0e"
+  },
+  "root_composed_review": [
+    {
+      "label": "actual-native-encounter-before-effects",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-actual-native-encounter-before-effects.png",
+        "sha256": "0b1fca073c9ef168c72fd80acdea14af7df30db645b4e57e91e10da2039d3278"
+      }
+    },
+    {
+      "label": "actual-native-encounter-before-effects",
+      "peer": 1,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-actual-native-encounter-before-effects.png",
+        "sha256": "a9173849cdcfb3ff6e09232754695fa07367524503405dc6863b5770c9281666"
+      }
+    },
+    {
+      "label": "actual-heavy-native-effects",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-actual-heavy-native-effects.png",
+        "sha256": "02bb37231a678869ef237fdc14973e58a2fff5249b58c7700f6538264b3ad77f"
+      }
+    },
+    {
+      "label": "actual-heavy-native-effects",
+      "peer": 1,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-actual-heavy-native-effects.png",
+        "sha256": "80b00fa7f1075328f9e64d4ccdd2bd253f3bc200b80e34b40a0ddbea2323c8f1"
+      }
+    },
+    {
+      "label": "owner0-actual-native-menu",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-owner0-actual-native-menu.png",
+        "sha256": "606673840b6e113fdb2c59f92d8520f90f32771046112cb67258886732f7f66b"
+      }
+    },
+    {
+      "label": "owner0-actual-native-menu",
+      "peer": 1,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-owner0-actual-native-menu.png",
+        "sha256": "b15bf0404666c59f833c531eb1788a1d27c21619f39cfac28cb88b01e944b33a"
+      }
+    },
+    {
+      "label": "owner0-actual-native-resumed",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-owner0-actual-native-resumed.png",
+        "sha256": "d3075662c3fa564b1fb0b606b1200563ca1d90d47555a3478580e79b90bf9ec4"
+      }
+    },
+    {
+      "label": "owner0-actual-native-resumed",
+      "peer": 1,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-owner0-actual-native-resumed.png",
+        "sha256": "c09d5b180c211e61bd5146004af88dff8959f8642ab3aec1e0c2effdbb37cbce"
+      }
+    },
+    {
+      "label": "owner1-actual-native-menu",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-owner1-actual-native-menu.png",
+        "sha256": "c84a414428dff7d31d03b7a36e1ecc5bbdc063b28a16df33ffccaabecbdca3db"
+      }
+    },
+    {
+      "label": "owner1-actual-native-menu",
+      "peer": 1,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-owner1-actual-native-menu.png",
+        "sha256": "5aa8e8af659efaedea24fbb64f225e3a1dedba34154864dedc976e0a1ee75478"
+      }
+    },
+    {
+      "label": "owner1-actual-native-resumed",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-owner1-actual-native-resumed.png",
+        "sha256": "84854db34bcc02894ba105b3fa768689487311b2085d20eab5ceb813f0587cad"
+      }
+    },
+    {
+      "label": "owner1-actual-native-resumed",
+      "peer": 1,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-owner1-actual-native-resumed.png",
+        "sha256": "f1a0e82621184aa78ab2b886a923b92a4bdf906229564efcd9e8a94f3a967c2a"
+      }
+    },
+    {
+      "label": "native-world-after-resume",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-0-native-world-after-resume.png",
+        "sha256": "27d9c228bb528bc82122ce9fefd8210f5184d9a0be3be8daaedc832d032baa48"
+      }
+    },
+    {
+      "label": "native-world-after-resume",
+      "peer": 1,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\F144\\peer-1-native-world-after-resume.png",
+        "sha256": "c5f46242f053a62e8458cc09e022ff025980546304e2cfaf9430682f09de75ce"
+      }
+    }
+  ],
+  "unrelated_scenery_ROI": [
+    {
+      "peer": 0,
+      "name": "upper_native_branch",
+      "rectangle": [
+        380,
+        10,
+        750,
+        100
+      ],
+      "labels": [
+        "actual-native-encounter-before-effects",
+        "actual-heavy-native-effects",
+        "owner0-actual-native-resumed",
+        "owner1-actual-native-resumed",
+        "native-world-after-resume"
+      ],
+      "equals_pre_effects": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "sha256": [
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8",
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8",
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8",
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8",
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8"
+      ]
+    },
+    {
+      "peer": 0,
+      "name": "lower_native_rocks",
+      "rectangle": [
+        100,
+        650,
+        900,
+        710
+      ],
+      "labels": [
+        "actual-native-encounter-before-effects",
+        "actual-heavy-native-effects",
+        "owner0-actual-native-resumed",
+        "owner1-actual-native-resumed",
+        "native-world-after-resume"
+      ],
+      "equals_pre_effects": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "sha256": [
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7",
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7",
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7",
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7",
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7"
+      ]
+    },
+    {
+      "peer": 1,
+      "name": "upper_native_branch",
+      "rectangle": [
+        380,
+        10,
+        750,
+        100
+      ],
+      "labels": [
+        "actual-native-encounter-before-effects",
+        "actual-heavy-native-effects",
+        "owner0-actual-native-resumed",
+        "owner1-actual-native-resumed",
+        "native-world-after-resume"
+      ],
+      "equals_pre_effects": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "sha256": [
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8",
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8",
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8",
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8",
+        "d5c3e75ebbeac6036acf574e29a32ded545b3869cce4885cd8b38df5757157e8"
+      ]
+    },
+    {
+      "peer": 1,
+      "name": "lower_native_rocks",
+      "rectangle": [
+        100,
+        650,
+        900,
+        710
+      ],
+      "labels": [
+        "actual-native-encounter-before-effects",
+        "actual-heavy-native-effects",
+        "owner0-actual-native-resumed",
+        "owner1-actual-native-resumed",
+        "native-world-after-resume"
+      ],
+      "equals_pre_effects": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "sha256": [
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7",
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7",
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7",
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7",
+        "2ab97da5118e8397c565fcbcbf082ac896b6b40e6361b086ad6cd8a6ef309dd7"
+      ]
+    }
+  ],
+  "limits": [
+    "No all-scene or all-palette equality claim. Ordinary RAM, completed GP0, CPU/GPU texels/palettes and composed captures are nearby separate observations.",
+    "LOCAL owner0 menu capture is a black native fade; actual owned pause/resume is observed and LOCAL owner1 menu is visible. NETPLAY has complete visible X and Zero menu captures on both peers.",
+    "The LOCAL audited original checkpoint and inventory prerequisites bypass campaign reachability. Its tainted recording is explicitly refused for normal capture/replay. NETPLAY uses genuine reviewedQAcard nativeLoad/selector/mission arrival with ordinary finalizedrecordings.",
+    "Root independently reviewed every composed capture. Both life meters, upper branch and lower layered rocks remain intact across before-effects, heavy-effects, both owned resumes and the final continuing world. The two sampled scenery rectangles exactly match within each physical process; this does not establish every pixel, palette or scene.",
+    "Original Amazon type7 category0 seed hands off through native8002C4C4 into real type1/HP12 actors in the80xA4 pool. The old48x9C-only observer was incorrect. The concrete native pool correction and split128-word CLUT reads fix observation only; no game behavior or outcome was patched for F144.",
+    "Earlier wrong-pool, CLUT-clamp, paired liveness and paired setup-bound failures remain retained. Pairedv4 actually retained both healthy actors on the raised platform, but Zero411 exceeded the arbitrary410 setup ceiling. Finalv5 changes only that ceiling425 and explicitly requires original HP12; actual liveness, effects, pause and render-restoration gates remain."
+  ],
+  "bypasses": [],
+  "host_profile": {
+    "profile": "mmx6.win64-clang22.loopback",
+    "revision": 2,
+    "selected_sha256": "8bd438b2e22c86897fadedb05911d42aaa5f6c117ab02729acbbb27c05ffeea2",
+    "peers": [
+      {
+        "capabilities": {
+          "actual_image_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "8bd438b2e22c86897fadedb05911d42aaa5f6c117ab02729acbbb27c05ffeea2",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      },
+      {
+        "capabilities": {
+          "actual_image_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "8bd438b2e22c86897fadedb05911d42aaa5f6c117ab02729acbbb27c05ffeea2",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      }
+    ]
+  },
+  "resolved_state_crc": [
+    {
+      "label": "initial idle",
+      "samples": [
+        {
+          "simulation_tick": 3040,
+          "core": "9ced1c2f",
+          "mod": "ae170eb7"
+        },
+        {
+          "simulation_tick": 3072,
+          "core": "08c4a22f",
+          "mod": "825dc8a3"
+        },
+        {
+          "simulation_tick": 3104,
+          "core": "a7afe0b1",
+          "mod": "80cf10e5"
+        },
+        {
+          "simulation_tick": 3136,
+          "core": "827f4c90",
+          "mod": "f0cbb5ef"
+        },
+        {
+          "simulation_tick": 3168,
+          "core": "776377a1",
+          "mod": "9dd2094f"
+        },
+        {
+          "simulation_tick": 3200,
+          "core": "6c604bac",
+          "mod": "4d8fb20d"
+        },
+        {
+          "simulation_tick": 3232,
+          "core": "bc7bb86e",
+          "mod": "a1fb01ad"
+        }
+      ],
+      "resolved_through": [
+        3247,
+        3249
+      ]
+    },
+    {
+      "label": "P2 right then release",
+      "samples": [
+        {
+          "simulation_tick": 3296,
+          "core": "0cc8f143",
+          "mod": "6dd102b3"
+        },
+        {
+          "simulation_tick": 3328,
+          "core": "1df09d77",
+          "mod": "59ff78b5"
+        },
+        {
+          "simulation_tick": 3360,
+          "core": "da03e2e2",
+          "mod": "094a9bdf"
+        },
+        {
+          "simulation_tick": 3392,
+          "core": "e4a6e8ee",
+          "mod": "fcf349bf"
+        },
+        {
+          "simulation_tick": 3424,
+          "core": "0e9937ed",
+          "mod": "35a70a6d"
+        },
+        {
+          "simulation_tick": 3456,
+          "core": "81700d93",
+          "mod": "76fafe8d"
+        },
+        {
+          "simulation_tick": 3488,
+          "core": "c3d0b90c",
+          "mod": "5e8754a7"
+        }
+      ],
+      "resolved_through": [
+        3518,
+        3518
+      ]
+    },
+    {
+      "label": "P1 jump then settle",
+      "samples": [
+        {
+          "simulation_tick": 3584,
+          "core": "f23d98d3",
+          "mod": "a17bcbcf"
+        },
+        {
+          "simulation_tick": 3616,
+          "core": "0453925f",
+          "mod": "34260caf"
+        },
+        {
+          "simulation_tick": 3648,
+          "core": "a89b5757",
+          "mod": "3ae535dd"
+        },
+        {
+          "simulation_tick": 3680,
+          "core": "20273d9a",
+          "mod": "03e3697d"
+        },
+        {
+          "simulation_tick": 3712,
+          "core": "dc581bd7",
+          "mod": "219af2f7"
+        },
+        {
+          "simulation_tick": 3744,
+          "core": "1e3f8fc3",
+          "mod": "0e49f857"
+        },
+        {
+          "simulation_tick": 3776,
+          "core": "dc80a89a",
+          "mod": "6dd102b3"
+        }
+      ],
+      "resolved_through": [
+        3796,
+        3796
+      ]
+    },
+    {
+      "label": "Before original native title card Load",
+      "samples": [
+        {
+          "simulation_tick": 4096,
+          "core": "1975a5f6",
+          "mod": "5cd93fc3"
+        },
+        {
+          "simulation_tick": 4128,
+          "core": "db3ccb2a",
+          "mod": "5cd93fc3"
+        }
+      ],
+      "first_simulation_tick": 4069,
+      "resolved_through": [
+        4130,
+        4129
+      ],
+      "observation_scope": "actual_resolved_framework_core_mod_CRC_frontend_no_coop_publication_claim"
+    },
+    {
+      "label": "After original native title card Load and CURRENT export",
+      "samples": [
+        {
+          "simulation_tick": 4704,
+          "core": "e78c7ccb",
+          "mod": "5cd93fc3"
+        },
+        {
+          "simulation_tick": 4736,
+          "core": "cb42d501",
+          "mod": "5cd93fc3"
+        }
+      ],
+      "first_simulation_tick": 4682,
+      "resolved_through": [
+        4738,
+        4737
+      ],
+      "observation_scope": "actual_resolved_framework_core_mod_CRC_frontend_no_coop_publication_claim"
+    },
+    {
+      "label": "Native final Quit native_card reentry and guest menu core/mod comparison",
+      "samples": [
+        {
+          "simulation_tick": 25504,
+          "core": "82727faf",
+          "mod": "2f5b6a75"
+        },
+        {
+          "simulation_tick": 25536,
+          "core": "43b7fcb5",
+          "mod": "6b513a12"
+        },
+        {
+          "simulation_tick": 25568,
+          "core": "951f0a54",
+          "mod": "ced71338"
+        },
+        {
+          "simulation_tick": 25600,
+          "core": "61795c92",
+          "mod": "74aa6676"
+        },
+        {
+          "simulation_tick": 25632,
+          "core": "b15c2e72",
+          "mod": "c3036ca6"
+        },
+        {
+          "simulation_tick": 25664,
+          "core": "e7e1c426",
+          "mod": "9b33c2c0"
+        }
+      ],
+      "resolved_through": [
+        25680,
+        25680
+      ]
+    },
+    {
+      "label": "After actual V48 native card Load F144 heavy encounter and both owned pauses",
+      "samples": [
+        {
+          "simulation_tick": 27104,
+          "core": "e7763f52",
+          "mod": "b02b65ff"
+        },
+        {
+          "simulation_tick": 27136,
+          "core": "d2f99af9",
+          "mod": "e2fa3fc9"
+        }
+      ],
+      "first_simulation_tick": 27096,
+      "resolved_through": [
+        27139,
+        27139
+      ],
+      "observation_scope": "actual_resolved_framework_core_mod_CRC_frontend_no_coop_publication_claim"
+    }
+  ],
+  "recordings": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\peer-0\\saves\\input-recordings\\session-1793028962086808-1-0\\inputs.jsonl",
+      "sha256": "7fc403427412bf548a56954fce42879ce490cc79d6665c2aca7e7f69b12b5d43",
+      "events": 34299,
+      "failure": null,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7801a0d2fe8ef077955e20541c834d9d91892717df588d9f49dbc8565ce95d29"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+        "manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+        "mode": "netplay",
+        "profile": {
+          "id": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "8bd438b2e22c86897fadedb05911d42aaa5f6c117ab02729acbbb27c05ffeea2"
+        },
+        "settings_sha256": "678ea0742d375e120ec86c29053b60d74181951ceb43831bbca670a5875771e6",
+        "simulation_contract_sha256": "24c2016240cbb01aa096d1c97f800bff309c3800f8ba3ca084c042c9583ee129"
+      }
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-F144-worker-heavy-v50-v5\\peer-1\\saves\\input-recordings\\session-1793028962015012-1-0\\inputs.jsonl",
+      "sha256": "23e68db54d158df23f0c58456e8622df4193d240461452d4d3b22b906292b965",
+      "events": 34308,
+      "failure": null,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7801a0d2fe8ef077955e20541c834d9d91892717df588d9f49dbc8565ce95d29"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+        "manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+        "mode": "netplay",
+        "profile": {
+          "id": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "8bd438b2e22c86897fadedb05911d42aaa5f6c117ab02729acbbb27c05ffeea2"
+        },
+        "settings_sha256": "8675b5fc560c2a45be3bb48e46e7b3e21c76f071a18c8809038a7e664fd28605",
+        "simulation_contract_sha256": "24c2016240cbb01aa096d1c97f800bff309c3800f8ba3ca084c042c9583ee129"
+      }
+    }
+  ]
+}

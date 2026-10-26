@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 36 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F22, F31, F33, F38, F48, F56, F58, F59, F67, F70, F95, F102, F107, F110, F119, F121, F133, F163, F170, F205, F208), 0 failed, 198 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 37 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F22, F31, F33, F38, F48, F56, F58, F59, F67, F70, F95, F102, F107, F110, F119, F121, F133, F144, F163, F170, F205, F208), 0 failed, 197 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -42,6 +42,22 @@ states; old-state migration is never required.
 
 ## Current qualification status, October 26
 
+F144 now passes on exact `7caed4d`/SDK `7cb4742` in
+[local co-op](evidence/mmx6-render/manifest-bound-7caed4d-F144-heavy-native-encounter-local-root-reviewed.json)
+and [actual paired netplay](evidence/mmx6-render/manifest-bound-7caed4d-F144-heavy-native-encounter-netplay-root-reviewed.json).
+The original Amazon seed transfers into a different native enemy pool; fixing
+that observer identified the real initialized threat. Both native Yammar effect
+families remain visible through each owner's pause/resume. All 21 composed images
+were independently reviewed: two intact life meters and unrelated layered
+scenery restore in every final world view. Sampled branch/rock rectangles match
+across all five world captures per process. Actual GP0, palette and texel evidence
+is retained without claiming universal pixel/palette equality. LOCAL's checkpoint
+and inventory bypass, recording refusal and black owner0 menu fade are explicit.
+NETPLAY uses actual native QAcard Load and visibly complete X/Zero menus on both
+peers; final CRCs, profiles, ordinary recordings, cards and exits0 pass. Earlier
+observer/setup failures remain retained. No game-code fix was needed for F144.
+This adds one comparison, bringing 36 to 37 passed with197 unverified.
+
 F110 now passes on exact `001f5b4`/SDK `7cb4742` in
 [local co-op](evidence/mmx6-pickups/manifest-bound-001f5b4-F110-native-large-health-local-reviewed.json)
 and [actual paired netplay](evidence/mmx6-pickups/manifest-bound-001f5b4-F110-native-large-health-netplay-reviewed.json).
@@ -55,7 +71,7 @@ freeze and accept fresh guest movement. All nine composed images were reviewed;
 focused debug/production camera and snapshot tests, current source/profile,
 post-case CRCs, ordinary recordings, cards and exits0 pass. Failed V50 evidence
 is preserved. No item/RNG/HP/camera result writes or private-view claim.
-This adds one comparison, bringing35to36 passed with198 unverified. Source fix
+This adds one comparison, bringing 35 to 36 passed with198 unverified. Source fix
 is integrated locally as `03ed9d8`; no remote publication.
 
 F119 now passes on exact `7caed4d`/SDK `7cb4742` in

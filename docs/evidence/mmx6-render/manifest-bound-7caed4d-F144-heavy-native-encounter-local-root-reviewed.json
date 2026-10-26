@@ -1,0 +1,156 @@
+{
+  "schema": 1,
+  "comparison": "F144",
+  "frozen_row_sha256": "d3e76698a2d2fff65517afa3ec2f68df1ba25d9a2426f3e422d74e9146f904cf",
+  "mode": "local",
+  "result": "passed",
+  "candidate": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+  "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+  "exe_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+  "compiled_manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+  "worker_receipt": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-render\\manifest-bound-7caed4d-F144-heavy-native-encounter-local-worker-reviewed.json",
+    "sha256": "ae5cf46b2bb748a08d5f0b06ea91b28543de91366caa45c2397c491677bdf376"
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\qualification.json",
+    "sha256": "0363d03f8f68ff74f936b9d2999b832593561f94d473a25b758392fbad92524d"
+  },
+  "case": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\F144-observations-with-prerequisites.json",
+    "sha256": "f5e69598c5d20c47157d7181f64760894894bd61de80666ce53ff27ad86c3218"
+  },
+  "root_composed_review": [
+    {
+      "label": "actual-native-encounter-before-effects",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-actual-native-encounter-before-effects.png",
+        "sha256": "282dd07f014bdca1433d9448a1f371194320908dd411b49adfcb62ddcf647295"
+      }
+    },
+    {
+      "label": "actual-heavy-native-effects",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-actual-heavy-native-effects.png",
+        "sha256": "1edce2790dcab3ca4edd63d5d1e2b1e99e167befef2ee04e80ea61268d68f113"
+      }
+    },
+    {
+      "label": "owner0-actual-native-menu",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-owner0-actual-native-menu.png",
+        "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373"
+      }
+    },
+    {
+      "label": "owner0-actual-native-resumed",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-owner0-actual-native-resumed.png",
+        "sha256": "1aca6523730cb9e19e6a06a0f63938776382ac594f7bba716dc4125cfefdc2a9"
+      }
+    },
+    {
+      "label": "owner1-actual-native-menu",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-owner1-actual-native-menu.png",
+        "sha256": "f847bede1145215d1de1600e05b8e47055babd9905fc90d9c51062cbac8f8bb1"
+      }
+    },
+    {
+      "label": "owner1-actual-native-resumed",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-owner1-actual-native-resumed.png",
+        "sha256": "f9af6cb8414d81eac68c024f19166bdfaa00132bda3c288b3fb85efbe810e2a4"
+      }
+    },
+    {
+      "label": "native-world-after-resume",
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F144-worker-heavy-local-v50-v3\\ammo-hud\\F144\\peer-0-native-world-after-resume.png",
+        "sha256": "22655ff1d7ee6b3c29b055ef0ca8aba3176c2d8a4fcd25e7d5056db48cd431bd"
+      }
+    }
+  ],
+  "unrelated_scenery_ROI": [
+    {
+      "peer": 0,
+      "name": "upper_native_branch",
+      "rectangle": [
+        380,
+        10,
+        750,
+        100
+      ],
+      "labels": [
+        "actual-native-encounter-before-effects",
+        "actual-heavy-native-effects",
+        "owner0-actual-native-resumed",
+        "owner1-actual-native-resumed",
+        "native-world-after-resume"
+      ],
+      "equals_pre_effects": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "sha256": [
+        "377dbd0112fa5a5f0395c4511f8d082157184f354570e8c32886a36c5fd41385",
+        "377dbd0112fa5a5f0395c4511f8d082157184f354570e8c32886a36c5fd41385",
+        "377dbd0112fa5a5f0395c4511f8d082157184f354570e8c32886a36c5fd41385",
+        "377dbd0112fa5a5f0395c4511f8d082157184f354570e8c32886a36c5fd41385",
+        "377dbd0112fa5a5f0395c4511f8d082157184f354570e8c32886a36c5fd41385"
+      ]
+    },
+    {
+      "peer": 0,
+      "name": "lower_native_rocks",
+      "rectangle": [
+        100,
+        650,
+        900,
+        710
+      ],
+      "labels": [
+        "actual-native-encounter-before-effects",
+        "actual-heavy-native-effects",
+        "owner0-actual-native-resumed",
+        "owner1-actual-native-resumed",
+        "native-world-after-resume"
+      ],
+      "equals_pre_effects": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "sha256": [
+        "6c2a6f586e5dc164da90683dde7f523feaa962eac50c5ce0d04d77ed6a216d6a",
+        "6c2a6f586e5dc164da90683dde7f523feaa962eac50c5ce0d04d77ed6a216d6a",
+        "6c2a6f586e5dc164da90683dde7f523feaa962eac50c5ce0d04d77ed6a216d6a",
+        "6c2a6f586e5dc164da90683dde7f523feaa962eac50c5ce0d04d77ed6a216d6a",
+        "6c2a6f586e5dc164da90683dde7f523feaa962eac50c5ce0d04d77ed6a216d6a"
+      ]
+    }
+  ],
+  "limits": [
+    "No all-scene or all-palette equality claim. Ordinary RAM, completed GP0, CPU/GPU texels/palettes and composed captures are nearby separate observations.",
+    "LOCAL owner0 menu capture is a black native fade; actual ownedpause/resume is observed, and LOCAL owner1 menu is visible. No complete visible LOCAL X-menu screenshot is claimed.",
+    "The LOCAL audited original checkpoint and inventory prerequisites bypass campaign reachability. Its tainted recording is explicitly refused for normal capture/replay. NETPLAY uses genuine reviewedQAcard nativeLoad/selector/mission arrival with ordinary finalizedrecordings.",
+    "Root independently reviewed every composed capture. Both life meters, upper branch and lower layered rocks remain intact across before-effects, heavy-effects, both owned resumes and the final continuing world. The two sampled scenery rectangles exactly match within each physical process; this does not establish every pixel, palette or scene.",
+    "Original Amazon type7 category0 seed hands off through native8002C4C4 into real type1/HP12 actors in the80xA4 pool. The old48x9C-only observer was incorrect. The concrete native pool correction and split128-word CLUT reads fix observation only; no game behavior or outcome was patched for F144.",
+    "Earlier wrong-pool, CLUT-clamp, paired liveness and paired setup-bound failures remain retained. Pairedv4 actually retained both healthy actors on the raised platform, but Zero411 exceeded the arbitrary410 setup ceiling. Finalv5 changes only that ceiling425 and explicitly requires original HP12; actual liveness, effects, pause and render-restoration gates remain."
+  ],
+  "bypasses": [
+    "Audited offline command8 selects original AmazonC0 before testing; authored reachability skipped. Audited command9 grants both native inventories only; no HP, selection, effects, action, palette, camera or outcome values are authored."
+  ]
+}

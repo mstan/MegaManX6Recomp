@@ -12411,24 +12411,95 @@
       "frozen_row_sha256": "d3e76698a2d2fff65517afa3ec2f68df1ba25d9a2426f3e422d74e9146f904cf",
       "x6": {
         "workstream": "render",
-        "mapping_state": "identified_subsystem",
-        "analogue": "Heavy-scene HUD/scenery integrity",
+        "mapping_state": "candidate_native_scenario",
+        "analogue": "Native Amazon heavy-effects life-meter and layered-scenery restoration",
         "bounded_check": "Run an actual effect-heavy X6 encounter and owned pause; inspect life bars, unrelated scenery and render restoration in final composed images.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:render_actor",
           "src/mods/mmx6_coop_plugin.c:draw_coop_hud"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+            "build_identity": {
+              "executable_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+              "compiled_manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original Amazon initialized native encounter",
+              "effects": "both native Yammar families",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "audio": "dummy muted"
+            },
+            "action": "Admit the source-bound visible original threat, activate both native Yammar effects, pause/resume under each owning actor, then inspect life meters, unrelated layered scenery and final native continuation.",
+            "outcome": "Original threat and both actual effects observed. Each owned native pause/resume completes; final native world continues with intact life meters and retained scenery rectangles. Composed captures and original completed GP0/palette/texels retained, cards/owned exits0 and appropriate recording guards pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-render/manifest-bound-7caed4d-F144-heavy-native-encounter-local-root-reviewed.json",
+                "sha256": "a4ebb32177d1179846566d2aaa1b1d4884781afdf4461ca494d5c8ec95d36284"
+              }
+            ],
+            "limits": [
+              "No all-scene or all-palette equality claim. Ordinary RAM, completed GP0, CPU/GPU texels/palettes and composed captures are nearby separate observations.",
+              "LOCAL owner0 menu capture is a black native fade; actual ownedpause/resume is observed, and LOCAL owner1 menu is visible. No complete visible LOCAL X-menu screenshot is claimed.",
+              "The LOCAL audited original checkpoint and inventory prerequisites bypass campaign reachability. Its tainted recording is explicitly refused for normal capture/replay. NETPLAY uses genuine reviewedQAcard nativeLoad/selector/mission arrival with ordinary finalizedrecordings.",
+              "Root independently reviewed every composed capture. Both life meters, upper branch and lower layered rocks remain intact across before-effects, heavy-effects, both owned resumes and the final continuing world. The two sampled scenery rectangles exactly match within each physical process; this does not establish every pixel, palette or scene.",
+              "Original Amazon type7 category0 seed hands off through native8002C4C4 into real type1/HP12 actors in the80xA4 pool. The old48x9C-only observer was incorrect. The concrete native pool correction and split128-word CLUT reads fix observation only; no game behavior or outcome was patched for F144.",
+              "Earlier wrong-pool, CLUT-clamp, paired liveness and paired setup-bound failures remain retained. Pairedv4 actually retained both healthy actors on the raised platform, but Zero411 exceeded the arbitrary410 setup ceiling. Finalv5 changes only that ceiling425 and explicitly requires original HP12; actual liveness, effects, pause and render-restoration gates remain."
+            ],
+            "bypasses": [
+              "Audited offline command8 selects original AmazonC0 before testing; authored reachability skipped. Audited command9 grants both native inventories only; no HP, selection, effects, action, palette, camera or outcome values are authored."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+            "build_identity": {
+              "executable_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+              "compiled_manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original Amazon initialized native encounter",
+              "effects": "both native Yammar families",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "audio": "dummy muted"
+            },
+            "action": "Admit the source-bound visible original threat, activate both native Yammar effects, pause/resume under each owning actor, then inspect life meters, unrelated layered scenery and final native continuation.",
+            "outcome": "Original threat and both actual effects observed. Each owned native pause/resume completes; final native world continues with intact life meters and retained scenery rectangles. Composed captures and original completed GP0/palette/texels retained, cards/owned exits0 and appropriate recording guards pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-render/manifest-bound-7caed4d-F144-heavy-native-encounter-netplay-root-reviewed.json",
+                "sha256": "932c08e15541bd1d0b8320c39bb98a48504b5d70f2927b38c033679d8161fc7d"
+              }
+            ],
+            "limits": [
+              "No all-scene or all-palette equality claim. Ordinary RAM, completed GP0, CPU/GPU texels/palettes and composed captures are nearby separate observations.",
+              "LOCAL owner0 menu capture is a black native fade; actual owned pause/resume is observed and LOCAL owner1 menu is visible. NETPLAY has complete visible X and Zero menu captures on both peers.",
+              "The LOCAL audited original checkpoint and inventory prerequisites bypass campaign reachability. Its tainted recording is explicitly refused for normal capture/replay. NETPLAY uses genuine reviewedQAcard nativeLoad/selector/mission arrival with ordinary finalizedrecordings.",
+              "Root independently reviewed every composed capture. Both life meters, upper branch and lower layered rocks remain intact across before-effects, heavy-effects, both owned resumes and the final continuing world. The two sampled scenery rectangles exactly match within each physical process; this does not establish every pixel, palette or scene.",
+              "Original Amazon type7 category0 seed hands off through native8002C4C4 into real type1/HP12 actors in the80xA4 pool. The old48x9C-only observer was incorrect. The concrete native pool correction and split128-word CLUT reads fix observation only; no game behavior or outcome was patched for F144.",
+              "Earlier wrong-pool, CLUT-clamp, paired liveness and paired setup-bound failures remain retained. Pairedv4 actually retained both healthy actors on the raised platform, but Zero411 exceeded the arbitrary410 setup ceiling. Finalv5 changes only that ceiling425 and explicitly requires original HP12; actual liveness, effects, pause and render-restoration gates remain."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Passed exact7caed4d/SDK7cb4742 LOCAL and both Win64 loopback peers; both actual native Yammar families, initialized original threat, each owned pause/resume, composed life meters/scenery and final native world restoration. LOCAL prerequisite checkpoint/inventory bypass and black owner0 menu fade explicit; NETPLAY actual native QAcard Load. No all-scene/all-palette/private-view/excluded audit claim."
       }
     },
     {
