@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; general private Zero character audio and schema3 require fresh exact-image native qualification",
+  "status": "development-candidate-only; independent private views and schema8 require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 2,
+  "revision": 3,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v18",
+    "title_compatibility": "mmx6-x-zero-delay-v19",
     "slots": 2,
     "players": 2,
     "occupied_mask": 3,
