@@ -10,7 +10,7 @@ publication or tracker synchronization is authorized.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 24 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F31, F33, F38, F48, F58, F59, F67, F70, F205, F208), 0 failed, 210 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 25 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F31, F33, F38, F48, F58, F59, F67, F70, F205, F208), 0 failed, 209 unverified; no inherited X4/X5 passes |
 | [79 X6-specific obligations](COOP_X6_CONTENT.md), X6-001–079 | 79 unverified, separately for local co-op and netplay |
 | Native content | 115 checkpoint records, 1,964 primary placements, 365 secondary placements |
 | Rescuable Reploids | All 128 native IDs; seven independent rescue/infection/reward/persistence checks each, all unverified |
@@ -40,6 +40,23 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 25
+
+F19 now passes on exact `85c06ee`/SDK `7cb4742` in
+[local co-op](evidence/mmx6-effects/manifest-bound-85c06ee-F19-dash-owner-local-reviewed.json)
+and [actual paired netplay](evidence/mmx6-effects/manifest-bound-85c06ee-F19-dash-owner-netplay-reviewed.json).
+The original type1 follow effect used canonical X for deferred initialization
+and updates, then shared X artwork even after owner projection. The fix runs
+the selected native callback in its allocating player's context, emits its
+generated entry hook and retains Zero's original common atlas/C3 palette.
+Both directions retain native Zero origin/facing, original C5 dust and actual
+used private C3 pixels, natural expiry and the same effect-slot reuse while X
+and both personal resources remain unchanged. All15 composed images were
+reviewed; original recordings finalize, cards remain unchanged and all owned
+exits are0. Short paired follow art is read from explicitly retained native
+constructor frames; earlier failed attempts remain unchanged. X is partly
+obscured by foreground/HUD at the far left, so stationary X is established by
+complete native body reads. This closes one comparison:25/234, with native
+content unchanged at14/3330 mode results.
 
 
 F31 now passes on the exact `e0fdd1e`/SDK `7cb4742` candidate in local co-op

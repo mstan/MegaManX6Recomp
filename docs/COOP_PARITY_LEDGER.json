@@ -5741,7 +5741,7 @@
       "frozen_row_sha256": "c1b0783b3ec7fcecbddcef326e77c6821961ae8bf4987ecf6eedbe928b82ebd9",
       "x6": {
         "workstream": "assets",
-        "mapping_state": "identified_subsystem",
+        "mapping_state": "candidate_native_scenario",
         "analogue": "Owned dash-exhaust deferred origin",
         "bounded_check": "Dash Zero with X stationary, including a reused effect slot; inspect native origin, facing, palette and natural expiry.",
         "baseline_anchors": [
@@ -5749,17 +5749,90 @@
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "85c06ee7bf9dcd1e100de8e24b28d546e95b9f9e",
+            "build_identity": {
+              "executable_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+              "compiled_manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro",
+              "input": "published digital host",
+              "renderer": "OpenGL shared native4:3, stacked meters",
+              "audio": "dummy muted"
+            },
+            "action": "Separate heroes through ordinary movement; keep X stationary; native Zero right/left held dashes with the same reused shared effect slot. Retain original dust and deferred follow constructors, actual used atlas/palette/GP0, then natural expiry.",
+            "outcome": "Both directions use native Zero integer origin/facing. Native type1 initializes/follows Zero with his original common assembly and actual private C3 artwork; C5 dust matches original CPU/GPU texels/palette. X and both personal resources stay unchanged; all composed images reviewed, ordinary recordings finalized, cards unchanged, owned exits0.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-effects\\manifest-bound-85c06ee-F19-dash-owner-local-reviewed.json",
+                "sha256": "f3cce8911c21974572cf85069f72cdc1d739413e80f94edaa7275d2bbc9b8c86"
+              }
+            ],
+            "limits": [
+              "Exact 85c06ee/SDK7cb474 image and compiled manifest; X/P1 and normal Zero/P2, original intro, shared native4:3 OpenGL, stacked meters, published digital host input, muted dummy audio.",
+              "Ordinary native movement and two opposing held dashes only. No fixture, teleport, HP/ammo/inventory, effect, clock, palette, camera or success writes. Fresh private blank cards; no native acquisition or populated-save preservation claim.",
+              "Original class21/type3/subtype2 white dust and the separately allocated native type1 follow effect are both inspected. The earlier subtype1-only reference is not used to classify ordinary Zero dust.",
+              "Actual type1 Zero common atlas and C3 palette are private retained resources. Shared X VRAM C3 is allowed to differ; only actual used private-bank payloads prove Zero art. Native C5 dust CPU VRAM and GPU FBO samples match original bytes.",
+              "Composed PNGs, typed bodies/pool reads and completed GP0 frames are nearby separate observations. Paired dash0 follow art uses explicitly labelled actual retained constructor frames3988; these are not relabelled as the later composed capture.",
+              "All15 composed images were root inspected. Zero and his effects appear together; X is partly obscured by foreground/HUD at the far left. Stationary X is established by complete native body observations, not an unobstructed body-image claim.",
+              "Same-machine direct Win64 loopback only; no cross-host/platform, every-stage/vehicle, other-roster, save/replay, audio-equivalence or whole-frame pixel-equivalence credit.",
+              "Earlier failed/unhooked/wrong-atlas attempts remain unchanged. The final paired-v4 attempt lacked a short-lived follow-art witness; v5 reads the original retained constructor frame without changing native effect lifetime."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "85c06ee7bf9dcd1e100de8e24b28d546e95b9f9e",
+            "build_identity": {
+              "executable_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+              "compiled_manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro",
+              "input": "published digital host",
+              "renderer": "OpenGL shared native4:3, stacked meters",
+              "audio": "dummy muted"
+            },
+            "action": "Separate heroes through ordinary movement; keep X stationary; native Zero right/left held dashes with the same reused shared effect slot. Retain original dust and deferred follow constructors, actual used atlas/palette/GP0, then natural expiry.",
+            "outcome": "Both directions use native Zero integer origin/facing. Native type1 initializes/follows Zero with his original common assembly and actual private C3 artwork; C5 dust matches original CPU/GPU texels/palette. X and both personal resources stay unchanged; all composed images reviewed, ordinary recordings finalized, cards unchanged, owned exits0.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-effects\\manifest-bound-85c06ee-F19-dash-owner-netplay-reviewed.json",
+                "sha256": "60620ce4f72ff7876645c5ca528a27f3d1b638255faef5d845145037157048fe"
+              }
+            ],
+            "limits": [
+              "Exact 85c06ee/SDK7cb474 image and compiled manifest; X/P1 and normal Zero/P2, original intro, shared native4:3 OpenGL, stacked meters, published digital host input, muted dummy audio.",
+              "Ordinary native movement and two opposing held dashes only. No fixture, teleport, HP/ammo/inventory, effect, clock, palette, camera or success writes. Fresh private blank cards; no native acquisition or populated-save preservation claim.",
+              "Original class21/type3/subtype2 white dust and the separately allocated native type1 follow effect are both inspected. The earlier subtype1-only reference is not used to classify ordinary Zero dust.",
+              "Actual type1 Zero common atlas and C3 palette are private retained resources. Shared X VRAM C3 is allowed to differ; only actual used private-bank payloads prove Zero art. Native C5 dust CPU VRAM and GPU FBO samples match original bytes.",
+              "Composed PNGs, typed bodies/pool reads and completed GP0 frames are nearby separate observations. Paired dash0 follow art uses explicitly labelled actual retained constructor frames3988; these are not relabelled as the later composed capture.",
+              "All15 composed images were root inspected. Zero and his effects appear together; X is partly obscured by foreground/HUD at the far left. Stationary X is established by complete native body observations, not an unobstructed body-image claim.",
+              "Same-machine direct Win64 loopback only; no cross-host/platform, every-stage/vehicle, other-roster, save/replay, audio-equivalence or whole-frame pixel-equivalence credit.",
+              "Earlier failed/unhooked/wrong-atlas attempts remain unchanged. The final paired-v4 attempt lacked a short-lived follow-art witness; v5 reads the original retained constructor frame without changing native effect lifetime."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Passed exact85c06ee/SDK7cb474 in LOCAL and actual paired Win64 loopback. Two opposing native Zero dashes, stationary X, native subtype2 dust plus corrected type1 deferred owner/art, same slot reuse, original palette/texels and natural expiry. All15 composed captures reviewed; ordinary recordings finalize and cards/owned exits pass. Bounded intro/roster only; native-content coverage unchanged."
       }
     },
     {

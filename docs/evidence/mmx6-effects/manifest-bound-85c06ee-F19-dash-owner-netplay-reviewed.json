@@ -1,0 +1,596 @@
+{
+  "schema": 1,
+  "kind": "root_reviewed_F19_native_Zero_dash_owner_origin_facing_palette_and_expiry",
+  "candidate": "85c06ee7bf9dcd1e100de8e24b28d546e95b9f9e",
+  "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+  "compiled_manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+  "mode": "netplay",
+  "checks": {
+    "actual_used_Zero_follow_atlas_palette_matches_original": true,
+    "actual_native_deferred_follow_uses_Zero_context": true,
+    "actual_native_deferred_follow_producer_and_callback": true,
+    "actual_two_direction_owned_Zero_dash": true,
+    "actual_same_slot_reused": true,
+    "stationary_primary_far_from_Zero": true,
+    "native_first8byte_retirement_each": true,
+    "original_native_packet_palette_texel_art_captured_review_pending": true
+  },
+  "peers": [
+    {
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\peer-0\\mmx6-runtime.exe",
+        "sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab"
+      },
+      "stationary_primary_raw": [
+        557056,
+        73072640
+      ],
+      "dashes": [
+        {
+          "number": 0,
+          "slot": 0,
+          "facing": 64,
+          "origin_raw": [
+            7733248,
+            74121216
+          ],
+          "native_retirement_timer": 1335
+        },
+        {
+          "number": 1,
+          "slot": 0,
+          "facing": 0,
+          "origin_raw": [
+            19464192,
+            74121216
+          ],
+          "native_retirement_timer": 1415
+        }
+      ],
+      "native_Zero_follow_constructors": [
+        {
+          "seq": 7,
+          "target": "0x80049748",
+          "ra": "0x80049190",
+          "a0": "0x80091308",
+          "a1": "0x800970A0",
+          "a2": "0x9F03A950",
+          "a3": "0x00002820",
+          "s3": "0xFF000000",
+          "sp": "0x801FEF50",
+          "frame": 3987
+        },
+        {
+          "seq": 75,
+          "target": "0x80049748",
+          "ra": "0x80049190",
+          "a0": "0x80091308",
+          "a1": "0x800970A0",
+          "a2": "0x9F03A950",
+          "a3": "0x00002820",
+          "s3": "0xFF000000",
+          "sp": "0x801FEF50",
+          "frame": 4080
+        }
+      ],
+      "observed_native_follow_positions": 8
+    },
+    {
+      "peer": 1,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\peer-1\\mmx6-runtime.exe",
+        "sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab"
+      },
+      "stationary_primary_raw": [
+        557056,
+        73072640
+      ],
+      "dashes": [
+        {
+          "number": 0,
+          "slot": 0,
+          "facing": 64,
+          "origin_raw": [
+            7733248,
+            74121216
+          ],
+          "native_retirement_timer": 1338
+        },
+        {
+          "number": 1,
+          "slot": 0,
+          "facing": 0,
+          "origin_raw": [
+            19464192,
+            74121216
+          ],
+          "native_retirement_timer": 1422
+        }
+      ],
+      "native_Zero_follow_constructors": [
+        {
+          "seq": 7,
+          "target": "0x80049748",
+          "ra": "0x80049190",
+          "a0": "0x80091308",
+          "a1": "0x800970A0",
+          "a2": "0x9F03A950",
+          "a3": "0x00002820",
+          "s3": "0xFF000000",
+          "sp": "0x801FEF50",
+          "frame": 3987
+        },
+        {
+          "seq": 75,
+          "target": "0x80049748",
+          "ra": "0x80049190",
+          "a0": "0x80091308",
+          "a1": "0x800970A0",
+          "a2": "0x9F03A950",
+          "a3": "0x00002820",
+          "s3": "0xFF000000",
+          "sp": "0x801FEF50",
+          "frame": 4080
+        }
+      ],
+      "observed_native_follow_positions": 8
+    }
+  ],
+  "art": [
+    {
+      "peer": 0,
+      "label": "dash0-actual-owned-exhaust",
+      "native_C5_packet_regions": 3,
+      "original_Zero_C3_RGB555_regions": 11,
+      "follow_retained_frames": [
+        3987,
+        3988
+      ],
+      "actual_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\F19\\peer-0-dash0-actual-owned-exhaust-completed-GP0.json.gz",
+        "sha256": "f254b30d4d4e9dbe956a00df093a4022d70468273789c84936e8239623b12d5b",
+        "frame": 4008
+      }
+    },
+    {
+      "peer": 1,
+      "label": "dash0-actual-owned-exhaust",
+      "native_C5_packet_regions": 3,
+      "original_Zero_C3_RGB555_regions": 11,
+      "follow_retained_frames": [
+        3987,
+        3988
+      ],
+      "actual_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\F19\\peer-1-dash0-actual-owned-exhaust-completed-GP0.json.gz",
+        "sha256": "393e3491922287fa42074d8f8e347b14ce014e9185d2e723359fe88686870528",
+        "frame": 4010
+      }
+    },
+    {
+      "peer": 0,
+      "label": "dash1-actual-owned-exhaust",
+      "native_C5_packet_regions": 6,
+      "original_Zero_C3_RGB555_regions": 11,
+      "follow_retained_frames": [],
+      "actual_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\F19\\peer-0-dash1-actual-owned-exhaust-completed-GP0.json.gz",
+        "sha256": "c77071e3c4c92fd23b515fde8a115c0364244079508dd9eddf71bda725807d7f",
+        "frame": 4094
+      }
+    },
+    {
+      "peer": 1,
+      "label": "dash1-actual-owned-exhaust",
+      "native_C5_packet_regions": 6,
+      "original_Zero_C3_RGB555_regions": 11,
+      "follow_retained_frames": [],
+      "actual_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\F19\\peer-1-dash1-actual-owned-exhaust-completed-GP0.json.gz",
+        "sha256": "037f9fb4cd6f50e3ac4f54c0a80c2c9608df1082d2a1a985dfcdb5d89ebcaf5c",
+        "frame": 4094
+      }
+    }
+  ],
+  "images": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\F19\\peer-0-positioned-before-dashes.png",
+      "sha256": "c131d5c2b9c78c2cf50337321e05dd234b9debcfc7ecc36d69761e516a6bb632"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\F19\\peer-1-positioned-before-dashes.png",
+      "sha256": "c131d5c2b9c78c2cf50337321e05dd234b9debcfc7ecc36d69761e516a6bb632"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\F19\\peer-0-dash0-actual-owned-exhaust.png",
+      "sha256": "adf5a36d37854954386eb85e0ba15678aa984fc9fc64fd88eaf792a8f0b804b7"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\F19\\peer-1-dash0-actual-owned-exhaust.png",
+      "sha256": "aa59ab245676cb64c03d87183e140dbf78fd5a689bb29d428adf926d3f305d54"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\F19\\peer-0-dash0-naturally-retired.png",
+      "sha256": "0119a440f97e3df25a572deb770469f2c6732c0f1a7819340caf9d37d8e0b367"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\F19\\peer-1-dash0-naturally-retired.png",
+      "sha256": "87eb6cfb34c403c2179d9dd7e205f89b0538011992dfdc6d1495dd5530bf9b5b"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\F19\\peer-0-dash1-actual-owned-exhaust.png",
+      "sha256": "398107fa6d48676846591810699709fdcc90a3105072f6813382e8000dc0d2a6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\F19\\peer-1-dash1-actual-owned-exhaust.png",
+      "sha256": "649b7df2be37885d3eedb99271dc1de634dc20f8fc9ff0be418e89116dfe4522"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\F19\\peer-0-dash1-naturally-retired.png",
+      "sha256": "d45baa29f104d592762647c67e5f8edcd60393684be5e9c54f2b3fb9cff3da9d"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\F19\\peer-1-dash1-naturally-retired.png",
+      "sha256": "cd4478cfe309968781df763df2b2951933976402eac9b779cf7156ebfbd6d7bb"
+    }
+  ],
+  "all_composed_images_root_inspected": true,
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\qualification.json",
+    "sha256": "5bc6dba8fa0f43e4b65b3939847b1175769bc701ad106ed35696edbdb401c9a7"
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\F19\\F19-observations.json",
+    "sha256": "db9f85d797d095115e061e2a1ee4fd32228b9219fb463762629244f4d8987104"
+  },
+  "executed_caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\caller-executed-source.py",
+    "sha256": "8103ec1e383d6fca47e4670a8ae78a9ec716adaf3e1de4fbdd4049bea740f4ef"
+  },
+  "executed_observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\F19-helper-executed-source.py",
+    "sha256": "8de1f0c13f7a699bd2d2d31b4a3d1e62f1d192946cc8685c2fce290844d1ae1e"
+  },
+  "recordings": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\peer-0\\saves\\input-recordings\\session-1792991193272484-1-0\\inputs.jsonl",
+      "sha256": "6a712d29ac847d1dfb828504605d94d6b13cd5b757267872bad08f3ce4556b08",
+      "events": 8812,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+        "manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+        "mode": "netplay",
+        "profile": {
+          "id": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "6a63fa293da71e1646d802f32d19cfe79201e2097b3b4989cbae8e34df47fa4b"
+        },
+        "settings_sha256": "678ea0742d375e120ec86c29053b60d74181951ceb43831bbca670a5875771e6",
+        "simulation_contract_sha256": "5f3c811eddf7bc546d056b6a8903e151db78c8e5dae29be333b9686bb95ecb8c"
+      }
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-paired-v49-root-v5\\peer-1\\saves\\input-recordings\\session-1792991193272802-1-0\\inputs.jsonl",
+      "sha256": "408c66b84b82a58bd039c5656604366dedb8f67cf6b2ba0fc00947d6c026fac4",
+      "events": 8818,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+        "manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+        "mode": "netplay",
+        "profile": {
+          "id": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "6a63fa293da71e1646d802f32d19cfe79201e2097b3b4989cbae8e34df47fa4b"
+        },
+        "settings_sha256": "8675b5fc560c2a45be3bb48e46e7b3e21c76f071a18c8809038a7e664fd28605",
+        "simulation_contract_sha256": "5f3c811eddf7bc546d056b6a8903e151db78c8e5dae29be333b9686bb95ecb8c"
+      }
+    }
+  ],
+  "parent_checks": {
+    "jump_audio_original_source_bound": true,
+    "jump_audio_both_peers_completed": true,
+    "declared_build_manifest_bound_to_staged_images": true,
+    "jump_audio_declared_sources_match": true,
+    "host_profile_settled_before_guest": true,
+    "p2_right_reaches_both_peers": true,
+    "p2_right_preserves_p1_x": true,
+    "p1_jump_reaches_both_peers": true,
+    "p1_jump_preserves_p2_y": true,
+    "both_alive_healthy": true,
+    "mailbox_unused": true,
+    "default_resident_loader_committed": true,
+    "jump_audio_resolved_crc_after_case": true,
+    "jump_audio_final_private_cards_unchanged": true,
+    "jump_audio_owned_pair_cleanup": true
+  },
+  "limits": [
+    "Exact 85c06ee/SDK7cb474 image and compiled manifest; X/P1 and normal Zero/P2, original intro, shared native4:3 OpenGL, stacked meters, published digital host input, muted dummy audio.",
+    "Ordinary native movement and two opposing held dashes only. No fixture, teleport, HP/ammo/inventory, effect, clock, palette, camera or success writes. Fresh private blank cards; no native acquisition or populated-save preservation claim.",
+    "Original class21/type3/subtype2 white dust and the separately allocated native type1 follow effect are both inspected. The earlier subtype1-only reference is not used to classify ordinary Zero dust.",
+    "Actual type1 Zero common atlas and C3 palette are private retained resources. Shared X VRAM C3 is allowed to differ; only actual used private-bank payloads prove Zero art. Native C5 dust CPU VRAM and GPU FBO samples match original bytes.",
+    "Composed PNGs, typed bodies/pool reads and completed GP0 frames are nearby separate observations. Paired dash0 follow art uses explicitly labelled actual retained constructor frames3988; these are not relabelled as the later composed capture.",
+    "All15 composed images were root inspected. Zero and his effects appear together; X is partly obscured by foreground/HUD at the far left. Stationary X is established by complete native body observations, not an unobstructed body-image claim.",
+    "Same-machine direct Win64 loopback only; no cross-host/platform, every-stage/vehicle, other-roster, save/replay, audio-equivalence or whole-frame pixel-equivalence credit.",
+    "Earlier failed/unhooked/wrong-atlas attempts remain unchanged. The final paired-v4 attempt lacked a short-lived follow-art witness; v5 reads the original retained constructor frame without changing native effect lifetime."
+  ],
+  "bypasses": [],
+  "profile": {
+    "profile": "mmx6.win64-clang22.loopback",
+    "revision": 2,
+    "selected_sha256": "6a63fa293da71e1646d802f32d19cfe79201e2097b3b4989cbae8e34df47fa4b",
+    "peers": [
+      {
+        "capabilities": {
+          "actual_image_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "6a63fa293da71e1646d802f32d19cfe79201e2097b3b4989cbae8e34df47fa4b",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      },
+      {
+        "capabilities": {
+          "actual_image_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "6a63fa293da71e1646d802f32d19cfe79201e2097b3b4989cbae8e34df47fa4b",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      }
+    ]
+  },
+  "resolved_state_crc": [
+    {
+      "label": "initial idle",
+      "samples": [
+        {
+          "simulation_tick": 2944,
+          "core": "1aca76a4",
+          "mod": "99baa408"
+        },
+        {
+          "simulation_tick": 2976,
+          "core": "6f7667a8",
+          "mod": "cbf42f1e"
+        },
+        {
+          "simulation_tick": 3008,
+          "core": "a6a6df10",
+          "mod": "070afd56"
+        },
+        {
+          "simulation_tick": 3040,
+          "core": "6ee593ea",
+          "mod": "2184d360"
+        },
+        {
+          "simulation_tick": 3072,
+          "core": "a8cf0cbd",
+          "mod": "19f077a4"
+        },
+        {
+          "simulation_tick": 3104,
+          "core": "edab972b",
+          "mod": "08a39a3b"
+        },
+        {
+          "simulation_tick": 3136,
+          "core": "7ca4ed05",
+          "mod": "eb78836e"
+        }
+      ],
+      "resolved_through": [
+        3153,
+        3154
+      ]
+    },
+    {
+      "label": "P2 right then release",
+      "samples": [
+        {
+          "simulation_tick": 3200,
+          "core": "3c289687",
+          "mod": "f2ce41f1"
+        },
+        {
+          "simulation_tick": 3232,
+          "core": "f9e956a9",
+          "mod": "0c1a7d13"
+        },
+        {
+          "simulation_tick": 3264,
+          "core": "cb0e29bb",
+          "mod": "505a52d5"
+        },
+        {
+          "simulation_tick": 3296,
+          "core": "6cbae189",
+          "mod": "a3439145"
+        },
+        {
+          "simulation_tick": 3328,
+          "core": "eb3d9c3a",
+          "mod": "0f01481b"
+        },
+        {
+          "simulation_tick": 3360,
+          "core": "c22aa943",
+          "mod": "ae7ba823"
+        },
+        {
+          "simulation_tick": 3392,
+          "core": "07b7ffff",
+          "mod": "b669a38d"
+        },
+        {
+          "simulation_tick": 3424,
+          "core": "58358fe6",
+          "mod": "2df6c0a1"
+        }
+      ],
+      "resolved_through": [
+        3426,
+        3426
+      ]
+    },
+    {
+      "label": "P1 jump then settle",
+      "samples": [
+        {
+          "simulation_tick": 3488,
+          "core": "f3d23361",
+          "mod": "294f269b"
+        },
+        {
+          "simulation_tick": 3520,
+          "core": "7dc66955",
+          "mod": "ad7e9205"
+        },
+        {
+          "simulation_tick": 3552,
+          "core": "72ee0623",
+          "mod": "8478dc4b"
+        },
+        {
+          "simulation_tick": 3584,
+          "core": "e6add065",
+          "mod": "562d916b"
+        },
+        {
+          "simulation_tick": 3616,
+          "core": "21ae1e4c",
+          "mod": "942436bd"
+        },
+        {
+          "simulation_tick": 3648,
+          "core": "3a4b0ec4",
+          "mod": "38d9b45d"
+        },
+        {
+          "simulation_tick": 3680,
+          "core": "e8f825f8",
+          "mod": "f2ce41f1"
+        },
+        {
+          "simulation_tick": 3712,
+          "core": "c8069fcd",
+          "mod": "0c1a7d13"
+        }
+      ],
+      "resolved_through": [
+        3724,
+        3725
+      ]
+    },
+    {
+      "label": "paired ground-jump audio then settle",
+      "samples": [
+        {
+          "simulation_tick": 4160,
+          "core": "2ea8c168",
+          "mod": "483994fe"
+        },
+        {
+          "simulation_tick": 4192,
+          "core": "f12e1dea",
+          "mod": "ec950990"
+        },
+        {
+          "simulation_tick": 4224,
+          "core": "e0dc9e7f",
+          "mod": "51851c4c"
+        },
+        {
+          "simulation_tick": 4256,
+          "core": "a8f57e1f",
+          "mod": "43eb71f6"
+        },
+        {
+          "simulation_tick": 4288,
+          "core": "07a783ec",
+          "mod": "3d37b656"
+        },
+        {
+          "simulation_tick": 4320,
+          "core": "70bb983f",
+          "mod": "e6c95b58"
+        },
+        {
+          "simulation_tick": 4352,
+          "core": "a84ab4a7",
+          "mod": "b8403988"
+        },
+        {
+          "simulation_tick": 4384,
+          "core": "d3124713",
+          "mod": "da211fee"
+        }
+      ],
+      "resolved_through": [
+        4398,
+        4398
+      ]
+    }
+  ],
+  "owned_cleanup": [
+    {
+      "owned_pid": 49872,
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    },
+    {
+      "owned_pid": 53204,
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    }
+  ],
+  "cards_preserved": true
+}

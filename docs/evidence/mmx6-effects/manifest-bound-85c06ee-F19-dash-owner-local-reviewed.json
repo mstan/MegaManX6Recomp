@@ -1,0 +1,200 @@
+{
+  "schema": 1,
+  "kind": "root_reviewed_F19_native_Zero_dash_owner_origin_facing_palette_and_expiry",
+  "candidate": "85c06ee7bf9dcd1e100de8e24b28d546e95b9f9e",
+  "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+  "compiled_manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+  "mode": "local",
+  "checks": {
+    "actual_used_Zero_follow_atlas_palette_matches_original": true,
+    "actual_native_deferred_follow_uses_Zero_context": true,
+    "actual_native_deferred_follow_producer_and_callback": true,
+    "actual_two_direction_owned_Zero_dash": true,
+    "actual_same_slot_reused": true,
+    "stationary_primary_far_from_Zero": true,
+    "native_first8byte_retirement_each": true,
+    "original_native_packet_palette_texel_art_captured_review_pending": true
+  },
+  "peers": [
+    {
+      "peer": 0,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-local-v49-root-v5\\candidate\\mmx6-runtime.exe",
+        "sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab"
+      },
+      "stationary_primary_raw": [
+        2260992,
+        73072640
+      ],
+      "dashes": [
+        {
+          "number": 0,
+          "slot": 0,
+          "facing": 64,
+          "origin_raw": [
+            9306112,
+            74121216
+          ],
+          "native_retirement_timer": 315
+        },
+        {
+          "number": 1,
+          "slot": 0,
+          "facing": 0,
+          "origin_raw": [
+            17235968,
+            74121216
+          ],
+          "native_retirement_timer": 371
+        }
+      ],
+      "native_Zero_follow_constructors": [
+        {
+          "seq": 7,
+          "target": "0x80049748",
+          "ra": "0x80049190",
+          "a0": "0x80091308",
+          "a1": "0x800970A0",
+          "a2": "0x9F03A950",
+          "a3": "0x00002820",
+          "s3": "0xFF000000",
+          "sp": "0x801FEF50",
+          "frame": 2692
+        },
+        {
+          "seq": 51,
+          "target": "0x80049748",
+          "ra": "0x80049190",
+          "a0": "0x80091308",
+          "a1": "0x800970A0",
+          "a2": "0x9F03A950",
+          "a3": "0x00002820",
+          "s3": "0xFF000000",
+          "sp": "0x801FEF50",
+          "frame": 2758
+        }
+      ],
+      "observed_native_follow_positions": 7
+    }
+  ],
+  "art": [
+    {
+      "peer": 0,
+      "label": "dash0-actual-owned-exhaust",
+      "native_C5_packet_regions": 7,
+      "original_Zero_C3_RGB555_regions": 11,
+      "follow_retained_frames": [],
+      "actual_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-local-v49-root-v5\\hud\\peer-0-dash0-actual-owned-exhaust-completed-GP0.json.gz",
+        "sha256": "ade30a4de8b1d1a6174e61b639d17bd8a41141961165d94447feff35dab568c8",
+        "frame": 2704
+      }
+    },
+    {
+      "peer": 0,
+      "label": "dash1-actual-owned-exhaust",
+      "native_C5_packet_regions": 6,
+      "original_Zero_C3_RGB555_regions": 14,
+      "follow_retained_frames": [],
+      "actual_GP0": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-local-v49-root-v5\\hud\\peer-0-dash1-actual-owned-exhaust-completed-GP0.json.gz",
+        "sha256": "2d3c189eaa79f031ac2b6ab51c4512cb368f8b0509ca247f5f2a6546d51244dd",
+        "frame": 2765
+      }
+    }
+  ],
+  "images": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-local-v49-root-v5\\hud\\peer-0-positioned-before-dashes.png",
+      "sha256": "21f6a8fda519477777eb9991800fa59a95892364785317399766d8b6c2bfbb88"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-local-v49-root-v5\\hud\\peer-0-dash0-actual-owned-exhaust.png",
+      "sha256": "ef96475ee7734a5c04831d55c3432408e1d75d879668055cf1b34fdb8974207c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-local-v49-root-v5\\hud\\peer-0-dash0-naturally-retired.png",
+      "sha256": "a9f4154cb5573f75beb01be8d6038184fff15a5bef06ae3b07ffaa23bf17a255"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-local-v49-root-v5\\hud\\peer-0-dash1-actual-owned-exhaust.png",
+      "sha256": "6ec783065340a599ef0149cc84fe1f309d85480bb9a4f8067cb860188da34c7f"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-local-v49-root-v5\\hud\\peer-0-dash1-naturally-retired.png",
+      "sha256": "0d7ad457346f71f47e0346fe11ca9d7d9245ad4228c4f2a9e0c58ae927c213e6"
+    }
+  ],
+  "all_composed_images_root_inspected": true,
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-local-v49-root-v5\\qualification.json",
+    "sha256": "7ec585eff85b5d9224904a0cd04433bf3f526e695963eca733bd77e789ff738f"
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-local-v49-root-v5\\hud\\F19-observations.json",
+    "sha256": "a527109404ffb6de1ee136f3f60b5679928c44bb94254d4360dedf4e67fccb7b"
+  },
+  "executed_caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-local-v49-root-v5\\caller-executed-source.py",
+    "sha256": "b191f5c3f03318111e0118acbb6c800f26119706ac307dba3c903e1580d7c860"
+  },
+  "executed_observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-local-v49-root-v5\\F19-helper-executed-source.py",
+    "sha256": "ad764a42849413aa69a470f99521eda571adba1558edf1a64df982598a2ab626"
+  },
+  "recordings": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F19-dash-owner-local-v49-root-v5\\candidate\\saves\\input-recordings\\session-1792990608697786-1-0\\inputs.jsonl",
+      "sha256": "8fc59ad0b2987f7e31f84eb8dc64d7f4a41abffbada42014f947bc3430a2207e",
+      "events": 6865,
+      "natives": 4594,
+      "p2_reads": 2271,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "fe66e0c3cec13a88c978b2e889bd98f9077fa2222008a6f95371f7aa4453ffab",
+        "manifest_sha256": "04b3afe64f3bcfd6000788f2db2625aac01ab30af4f98c77678be9b32c9928bf",
+        "mode": "offline",
+        "profile": null,
+        "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+        "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      "requested_jump_seats": [],
+      "consumed_cross_seen_anywhere": [
+        0
+      ],
+      "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence"
+    }
+  ],
+  "parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "native_case_finalized_recording_cleanup_and_cards": true
+  },
+  "limits": [
+    "Exact 85c06ee/SDK7cb474 image and compiled manifest; X/P1 and normal Zero/P2, original intro, shared native4:3 OpenGL, stacked meters, published digital host input, muted dummy audio.",
+    "Ordinary native movement and two opposing held dashes only. No fixture, teleport, HP/ammo/inventory, effect, clock, palette, camera or success writes. Fresh private blank cards; no native acquisition or populated-save preservation claim.",
+    "Original class21/type3/subtype2 white dust and the separately allocated native type1 follow effect are both inspected. The earlier subtype1-only reference is not used to classify ordinary Zero dust.",
+    "Actual type1 Zero common atlas and C3 palette are private retained resources. Shared X VRAM C3 is allowed to differ; only actual used private-bank payloads prove Zero art. Native C5 dust CPU VRAM and GPU FBO samples match original bytes.",
+    "Composed PNGs, typed bodies/pool reads and completed GP0 frames are nearby separate observations. Paired dash0 follow art uses explicitly labelled actual retained constructor frames3988; these are not relabelled as the later composed capture.",
+    "All15 composed images were root inspected. Zero and his effects appear together; X is partly obscured by foreground/HUD at the far left. Stationary X is established by complete native body observations, not an unobstructed body-image claim.",
+    "Same-machine direct Win64 loopback only; no cross-host/platform, every-stage/vehicle, other-roster, save/replay, audio-equivalence or whole-frame pixel-equivalence credit.",
+    "Earlier failed/unhooked/wrong-atlas attempts remain unchanged. The final paired-v4 attempt lacked a short-lived follow-art witness; v5 reads the original retained constructor frame without changing native effect lifetime."
+  ],
+  "bypasses": [],
+  "owned_cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "cards_preserved": true
+}
