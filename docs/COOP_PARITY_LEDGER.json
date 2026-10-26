@@ -7798,17 +7798,90 @@
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+            "build_identity": {
+              "executable_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+              "compiled_manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro native first and second enemy",
+              "view": "shared native4:3 OpenGL",
+              "input": "owned published digital slots",
+              "audio": "emulated and muted dummy output",
+              "transport": "offline"
+            },
+            "action": "Kill primary through actual native contact, advance surviving Zero beyond the old corpse, kill Zero at the second enemy; observe last valid native cameras, exactly one native retry and independent fresh controls.",
+            "outcome": "Last-survivor world/parallax cameras hold unchanged through second death and the original loader until authored checkpoint initialization. Camera never chases the old primary corpse. One life is spent; fresh native pair accepts each own input. Root reviewed all15 composed images across local and both physical peers.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-death\\manifest-bound-e0fdd1e-F58-native-teamwipe-camera-local-netplay-reviewed.json",
+                "sha256": "460d2e57e239d5c134e773097c36f7b261d11718cb2fc7edd64d61da854bdd77"
+              }
+            ],
+            "limits": [
+              "Exact V48 e0fdd1e / SDK7cb474 Windows x64, X/P1 plus Zero/P2, default shared native4:3 OpenGL view and original intro first two enemies; bounded horizontal survivor progression, no literal climb or all-stage claim.",
+              "Three native camera structures are the main world and parallax layers, not independent private views. No F170 private-view/map/texture, other roster, boss, opposite death order, lobby/Host-Join, remote host, audio or replay qualification.",
+              "Readonly actual PLAY and player/camera bytes and typed public observations are nearby separate RPC reads; native mode publications can lag original RAM. Samples retain their raw data; no instruction-atomic or every-frame claim.",
+              "The last-survivor camera holds through death and the native mode9 loader until original checkpoint initialization resets to authored camera0/944 and player144/976. Fresh arrival then restores native idle and ordinary input.",
+              "Existing first-X native death observer is reused as the prerequisite with fullHP32. No guest position, health, action, lifecycle, retry, camera or success writes, no result-flag bypasses.",
+              "Pair v1 completed the native wipe/retry but failed its final independent-input observer because the previous peer input release was still in flight. Retained failed parent is not promoted; v2 waits actual neutral delivery and movement on both physical peers. Game and build are identical.",
+              "Existing pair parent retains audio-prefixed structural field labels after replacing the phase with F58. Those labels convey ownership/source/profile/card/CRC gates only; no audio credit. Native content ledger is unchanged."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+            "build_identity": {
+              "executable_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+              "compiled_manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "location": "intro native first and second enemy",
+              "view": "shared native4:3 OpenGL",
+              "input": "owned published digital slots",
+              "audio": "emulated and muted dummy output",
+              "transport": "same-machine direct loopback delay3, mmx6.win64-clang22.loopback revision2"
+            },
+            "action": "Kill primary through actual native contact, advance surviving Zero beyond the old corpse, kill Zero at the second enemy; observe last valid native cameras, exactly one native retry and independent fresh controls.",
+            "outcome": "Last-survivor world/parallax cameras hold unchanged through second death and the original loader until authored checkpoint initialization. Camera never chases the old primary corpse. One life is spent; fresh native pair accepts each own input. Root reviewed all15 composed images across local and both physical peers.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-death\\manifest-bound-e0fdd1e-F58-native-teamwipe-camera-local-netplay-reviewed.json",
+                "sha256": "460d2e57e239d5c134e773097c36f7b261d11718cb2fc7edd64d61da854bdd77"
+              }
+            ],
+            "limits": [
+              "Exact V48 e0fdd1e / SDK7cb474 Windows x64, X/P1 plus Zero/P2, default shared native4:3 OpenGL view and original intro first two enemies; bounded horizontal survivor progression, no literal climb or all-stage claim.",
+              "Three native camera structures are the main world and parallax layers, not independent private views. No F170 private-view/map/texture, other roster, boss, opposite death order, lobby/Host-Join, remote host, audio or replay qualification.",
+              "Readonly actual PLAY and player/camera bytes and typed public observations are nearby separate RPC reads; native mode publications can lag original RAM. Samples retain their raw data; no instruction-atomic or every-frame claim.",
+              "The last-survivor camera holds through death and the native mode9 loader until original checkpoint initialization resets to authored camera0/944 and player144/976. Fresh arrival then restores native idle and ordinary input.",
+              "Existing first-X native death observer is reused as the prerequisite with fullHP32. No guest position, health, action, lifecycle, retry, camera or success writes, no result-flag bypasses.",
+              "Pair v1 completed the native wipe/retry but failed its final independent-input observer because the previous peer input release was still in flight. Retained failed parent is not promoted; v2 waits actual neutral delivery and movement on both physical peers. Game and build are identical.",
+              "Existing pair parent retains audio-prefixed structural field labels after replacing the phase with F58. Those labels convey ownership/source/profile/card/CRC gates only; no audio credit. Native content ledger is unchanged."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Bounded horizontal F58 passed on exact e0fdd1e/SDK7cb474 in LOCAL and both physical NETPLAY peers. Native second fatal remains over150px beyond the old primary corpse; all three native camera layers hold their last-survivor values through actual team wipe until authored checkpoint reset. Exactly one native retry spends one life and restores both independent controls. All15 images reviewed; failed paired observer v1 retained. No private-camera/F170, other-stage/roster/order/host or native-content credit."
       }
     },
     {
