@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 41 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F1, F6, F10, F12, F18, F19, F22, F31, F32, F33, F38, F45, F48, F51, F56, F58, F59, F67, F70, F95, F102, F107, F110, F119, F121, F133, F144, F163, F170, F205, F208), 1 failed, 192 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 41 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F1, F6, F10, F12, F18, F19, F22, F31, F32, F33, F38, F45, F48, F51, F56, F58, F59, F67, F70, F95, F102, F107, F110, F119, F121, F133, F144, F163, F170, F205, F208), 2 failed, 191 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -68,7 +68,18 @@ with write-NULL in `nvoglv64.dll +0xB80C13`. This locates the fault inside the
 OpenGL module; no exact driver-versus-SDK cause is established. Source repair
 and first-session totals do not qualify repeated allocation lifetime. The
 bounded investigation is parked while independent autonomous rows continue.
-The ledger is **41 passed /1 failed /192 unverified of234**.
+The ledger is **41 passed /2 failed /191 unverified of234**.
+
+F92 now has a reviewed [LOCAL guest Ride Armor failure](evidence/mmx6-solid/manifest-bound-72b898f-F92-guest-ride-armor-failure-local-reviewed.json)
+on exact V54. At original Recycle Lab4/0/CP0, X boards by native cockpit jump,
+drives, overlaps the partner and manually dismounts onto real floor. Eligible
+Zero repeatedly intersects the empty grounded armor's original entry box but
+never receives native ownership or mounted action18. Source inspection agrees:
+the shared armor driver reads the resident player and guest solid retry excludes
+the armor. A repair still needs native qualification. Resources, native cards
+and exit0 remain intact. The initial offline checkpoint bypass and rejected
+tainted recording are disclosed. F98 layering images are retained as partial
+evidence; guest mounting and NETPLAY remain unverified.
 
 F45 now passes both [LOCAL](evidence/mmx6-solid/manifest-bound-72b898f-F45-native-retry-support-local-reviewed.json)
 and [NETPLAY](evidence/mmx6-solid/manifest-bound-72b898f-F45-native-retry-support-netplay-reviewed.json)
