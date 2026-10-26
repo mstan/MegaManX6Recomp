@@ -7727,14 +7727,14 @@
           "src/mods/mmx6_coop_plugin.c:solid_player_collision",
           "src/mods/mmx6_coop_plugin.c:solid_as_zero"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -7774,9 +7774,46 @@
             "bypasses": [
               "Audited initial offline checkpoint8 AmazonC0; no artificial reentry after actual wipe."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "72b898f6a714ec91b49ce306ee4959d6d5814a8b",
+            "build_identity": {
+              "executable_sha256": "b3589623f1612fe99821d5ad4eb9b7108b7e7cd550c26b0ea28045b2c7e9fc4b",
+              "compiled_manifest_sha256": "1b670b2fa63a58b7b0f2bb6268bb89e83522d8389b81983a0ebd8b04084fe337",
+              "sdk_commit": "bb5d0a7ec003d7e33270e51c270ea89dfea5c081",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "renderer": "4:3 OpenGL",
+              "input": "two owning virtual host ports",
+              "transport": "same-machine LAN delay3",
+              "audio": "dummy muted",
+              "entry": "actual original native FFQA card Load and fresh Amazon mission"
+            },
+            "action": "Use original support, take ordinary enemy contact until both heroes actually die, observe original one-life CP0 retry, then land and neutrally ride the original support separately with X and Zero.",
+            "outcome": "Both peers observe all four fatal witnesses, original retry/lives2->1/fresh HP32 and independent controls. Each hero regains actual top contact and matched neutral carrying with companion stationary; primary returns to terrain before guest test.16 composed images and final profile/CRC/ordinary traces/cards/owned exits0 reviewed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solid/manifest-bound-72b898f-F45-native-retry-support-netplay-reviewed.json",
+                "sha256": "6671cbeb302359c137172d7a8b4b80017124a175b98a79733be75b69d3e2f52e"
+              }
+            ],
+            "limits": [
+              "Only bounded F45 original team retry and restored per-seat support contact/carry; no lift, pickup, signed-release, platform timing or full campaign claim.",
+              "Actual native FFQA card Load, source-bound story/selector and fresh Amazon mission/guest-menu prerequisites; no online fixture, checkpoint command, execution state LOAD, HP, position, lifecycle or success write.",
+              "Both peers directly witness both original enemy deaths, loader8/9, exactly one life spent, same CP0, fresh HP32 actors and independent controls. Each seat then actually lands and is neutrally carried while its companion stays stationary; primary returns to actual terrain before guest test.",
+              "Native source boxes/top contact and matched displacement corroborate collision. Per-actor guest contact histories remain host-private; individual body/pool reads are asynchronous.",
+              "Root independently reviewed16 composed images. Eight resolved CRC windows, exact startup/final profile, two canonical complete ordinary consumption streams with startup artifacts, preserved cards and both owned exits0 pass. No replay or audio equivalence claim.",
+              "Same-machine Windows LAN delay3 and virtual digital host ports only; no physical distinct-controller, Linux, remote-service or rollback claim.",
+              "Required LOCAL uses disclosed initial offline checkpoint bypass and correctly refused fixture-tainted recording. Prior LOCALv1 extra copied F51 edge-route failure remains preserved; no scope change to frozen F45."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "LOCAL exact72b898f/SDKbb5d0a7/UI34b5277 passes actual Amazon support use, both native enemy deaths, original single-life CP0 retry and restored X/Zero neutral support carrying with other actor stationary. Initial checkpoint bypass/tainted recording refusal disclosed. NETPLAY pending; no other platform/replay contract inherited."
+        "limitations": "Reviewed LOCAL and NETPLAY exact72b898f/SDKbb5d0a7/UI34b5277 pass actual support use, both native enemy deaths, original single-life CP0 retry and restored X/Zero neutral support carrying with other actor stationary. LOCAL initial checkpoint/tainted recording refusal and native-card NET provenance disclosed. No other platform/replay contract inherited."
       }
     },
     {

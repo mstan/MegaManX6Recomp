@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 40 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F1, F6, F10, F12, F18, F19, F22, F31, F32, F33, F38, F48, F51, F56, F58, F59, F67, F70, F95, F102, F107, F110, F119, F121, F133, F144, F163, F170, F205, F208), 1 failed, 193 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 41 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F1, F6, F10, F12, F18, F19, F22, F31, F32, F33, F38, F45, F48, F51, F56, F58, F59, F67, F70, F95, F102, F107, F110, F119, F121, F133, F144, F163, F170, F205, F208), 1 failed, 192 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -68,7 +68,22 @@ with write-NULL in `nvoglv64.dll +0xB80C13`. This locates the fault inside the
 OpenGL module; no exact driver-versus-SDK cause is established. Source repair
 and first-session totals do not qualify repeated allocation lifetime. The
 bounded investigation is parked while independent autonomous rows continue.
-The ledger is **40 passed /1 failed /193 unverified of234**.
+The ledger is **41 passed /1 failed /192 unverified of234**.
+
+F45 now passes both [LOCAL](evidence/mmx6-solid/manifest-bound-72b898f-F45-native-retry-support-local-reviewed.json)
+and [NETPLAY](evidence/mmx6-solid/manifest-bound-72b898f-F45-native-retry-support-netplay-reviewed.json)
+on the same exact candidate. After genuine support use, ordinary enemy contact
+kills both heroes. Original loader8/9 spends one life and restores the same
+Amazon CP0 with healthy independently controlled actors. X and Zero each land
+and receive neutral native support carrying again while their companion stays
+stationary; X returns to actual terrain before Zero's check. Root reviewed
+eight LOCAL and sixteen NETPLAY composed images. NETPLAY retains eight resolved
+CRC windows, unchanged agreed profile, two complete ordinary recordings and
+their startup artifacts. Cards remain unchanged and all owned exits are0.
+LOCAL's initial checkpoint setup and refused tainted recording remain explicit;
+NETPLAY uses original native card Load and fresh mission entry. An earlier
+LOCAL attempt completed both carries then failed extra copied F51 edge movement;
+that evidence is retained. This closes the unchanged F45 retry/contact contract.
 
 F51 now passes both [LOCAL](evidence/mmx6-solid/manifest-bound-72b898f-F51-moving-support-local-reviewed.json)
 and [NETPLAY](evidence/mmx6-solid/manifest-bound-72b898f-F51-moving-support-netplay-reviewed.json)
