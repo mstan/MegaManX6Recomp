@@ -235,6 +235,8 @@ if(BUILD_TESTING)
             COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_coop_state_protocol.py")
         add_test(NAME mmx6_coop_private_state_protocol_test
             COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_coop_private_state_protocol.py")
+        add_test(NAME mmx6_coop_shared_hook_profile
+            COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tests/test_mmx6_coop_shared_hook_profile.py")
         set(MMX6_X5_REFERENCE_REPO "" CACHE PATH "Optional local X5 Git repository for frozen-reference provenance checks")
         if(MMX6_X5_REFERENCE_REPO)
             add_test(NAME mmx6_coop_reference_provenance
