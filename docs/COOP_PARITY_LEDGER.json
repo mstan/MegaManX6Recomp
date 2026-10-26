@@ -13028,24 +13028,95 @@
       "frozen_row_sha256": "5cee3b55738ce8f37a2178239d977418b65c76281429a4b744c2e64644b30980",
       "x6": {
         "workstream": "camera",
-        "mapping_state": "unknown_native_analogue",
+        "mapping_state": "candidate_native_scenario",
         "analogue": "Native enemy retirement/re-entry policy unidentified",
         "bounded_check": "Source-map one enemy's spawn/retire/respawn eligibility; admit by guest, retire natively and bring primary later without forcing a respawn not promised by X6.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+            "build_identity": {
+              "executable_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+              "compiled_manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro CP0/type1-subtype1 record25",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "input": "ordinary published host",
+              "audio": "dummy muted"
+            },
+            "action": "Admit and kill the original enemy with guest while primary stays behind. Retain its native HP0/free and entry latch, then move primary past the original placement and observe native entry eligibility and control without resetting spawn flags.",
+            "outcome": "Original source promises no new actor while entry high10 persists. Actual guest kill frees the original actor and allocation bit; high10 remains. X follows from144 past416, both heroes stay alive and another24-plus native updates preserve the intended suppressed original entry. Source/profile/post-case CRC/ordinary recordings/cards/exits0 pass; all nine follow-up images reviewed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-r13/manifest-bound-7caed4d-F163-native-retire-late-primary-local-reviewed.json",
+                "sha256": "863cadd559314143c994cf9abb9e88b2c7328f5bf9137af730bb035aba99f834"
+              }
+            ],
+            "limits": [
+              "Exact7caed4d/SDK7cb474, original intro CP0/type1-subtype1 record25, X/P1 and normal Zero/P2, shared native4:3 OpenGL/stacked meters, ordinary published inputs, dummy muted audio; Win64 same-machine loopback only.",
+              "The native counterpart is a source-qualified killed original entry, rather than an assumed per-player bird respawn. At observed native PLAY+68 value1 and original category-low0, original29E7C admits high0 and writes high10; existing high10 returns1 and scanner2A12C/134 skips allocation. Merely arriving as another hero does not promise a new enemy. Original placement reset2A33C..3AC is source-mapped, not executed or claimed as another retry test here.",
+              "Raw report key difficulty is only the read byte at PLAY+68. Its broader gameplay meaning is not assumed and no difficulty-setting contract is claimed.",
+              "Zero genuinely admits the original actor and kills it with native attacks. Actual bound-slot HP0/free, original record allocation-bit release and retained high10 are observed before X moves. X then crosses the original x416 placement after death and native time continues with no second original actor. No actor, HP, record, spawn, position, physics, lifecycle or success writes.",
+              "The native pool can reuse the freed slot for another authored enemy. Identity binds the original record pointer, not a permanently reserved address. Initial HP0/retirement is observed before that reuse; later unrelated origins do not count as respawning this enemy.",
+              "Bodies, native pool/record, retained slot, source code and camera are separate nearby read-only observations, not an atomic snapshot. All nine named follow-up composed captures were root inspected; no all-enemy, source-pixel, independent-view or whole-campaign claim.",
+              "Source/manifest, native originals, agreed pre-frame0/final profile, matching post-case CRCs, finalized ordinary recordings, preserved private cards and graceful owned exits0 pass. No fixture or state LOAD. No forced respawn, native reset gameplay, facing/F119, child emitter/F109, audio, remote-platform or unrelated content-audit credit."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "7caed4d8dd0ba1757052bac9fe7363d735ab4f2f",
+            "build_identity": {
+              "executable_sha256": "6facb053998ef4176048e63179bd9da5a881285a7be61dde263299c640844e33",
+              "compiled_manifest_sha256": "c6cd3a4f8e06e485c9b4fd10328fe1d87e7841f7e765b06a6ed872fc94588e1b",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + normal Zero/P2",
+              "location": "original intro CP0/type1-subtype1 record25",
+              "view": "shared native4:3 OpenGL/stacked meters",
+              "input": "ordinary published host",
+              "audio": "dummy muted"
+            },
+            "action": "Admit and kill the original enemy with guest while primary stays behind. Retain its native HP0/free and entry latch, then move primary past the original placement and observe native entry eligibility and control without resetting spawn flags.",
+            "outcome": "Original source promises no new actor while entry high10 persists. Actual guest kill frees the original actor and allocation bit; high10 remains. X follows from144 past416, both heroes stay alive and another24-plus native updates preserve the intended suppressed original entry. Source/profile/post-case CRC/ordinary recordings/cards/exits0 pass; all nine follow-up images reviewed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-r13/manifest-bound-7caed4d-F163-native-retire-late-primary-netplay-reviewed.json",
+                "sha256": "7d14a035372f40d7be7d211c315f796a88cfe3c7c1f58db17bfbc1d86934b950"
+              }
+            ],
+            "limits": [
+              "Exact7caed4d/SDK7cb474, original intro CP0/type1-subtype1 record25, X/P1 and normal Zero/P2, shared native4:3 OpenGL/stacked meters, ordinary published inputs, dummy muted audio; Win64 same-machine loopback only.",
+              "The native counterpart is a source-qualified killed original entry, rather than an assumed per-player bird respawn. At observed native PLAY+68 value1 and original category-low0, original29E7C admits high0 and writes high10; existing high10 returns1 and scanner2A12C/134 skips allocation. Merely arriving as another hero does not promise a new enemy. Original placement reset2A33C..3AC is source-mapped, not executed or claimed as another retry test here.",
+              "Raw report key difficulty is only the read byte at PLAY+68. Its broader gameplay meaning is not assumed and no difficulty-setting contract is claimed.",
+              "Zero genuinely admits the original actor and kills it with native attacks. Actual bound-slot HP0/free, original record allocation-bit release and retained high10 are observed before X moves. X then crosses the original x416 placement after death and native time continues with no second original actor. No actor, HP, record, spawn, position, physics, lifecycle or success writes.",
+              "The native pool can reuse the freed slot for another authored enemy. Identity binds the original record pointer, not a permanently reserved address. Initial HP0/retirement is observed before that reuse; later unrelated origins do not count as respawning this enemy.",
+              "Bodies, native pool/record, retained slot, source code and camera are separate nearby read-only observations, not an atomic snapshot. All nine named follow-up composed captures were root inspected; no all-enemy, source-pixel, independent-view or whole-campaign claim.",
+              "Source/manifest, native originals, agreed pre-frame0/final profile, matching post-case CRCs, finalized ordinary recordings, preserved private cards and graceful owned exits0 pass. No fixture or state LOAD. No forced respawn, native reset gameplay, facing/F119, child emitter/F109, audio, remote-platform or unrelated content-audit credit."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Passed exact7caed4d/SDK7cb474 LOCAL and both Win64 loopback peers: genuine guest original kill, actual HP0/free and native high10 entry latch, later primary crosses originalx416 and source-promised no-respawn behavior persists with both controls/alive. Original source gates/reset mapped and current late gates pass; no forced per-hero respawn, actual entry-reset/retry, every-enemy, other view/platform or content-audit credit."
       }
     },
     {

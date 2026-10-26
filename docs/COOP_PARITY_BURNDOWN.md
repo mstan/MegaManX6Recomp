@@ -16,7 +16,7 @@ as historical reference. The owner has resumed work solo on the 234 comparisons.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 33 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F22, F31, F33, F38, F48, F56, F58, F59, F67, F70, F95, F102, F107, F121, F133, F170, F205, F208), 0 failed, 201 unverified; no inherited X4/X5 passes |
+| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1–R26 and F1–F208 | 34 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F6, F10, F12, F18, F19, F22, F31, F33, F38, F48, F56, F58, F59, F67, F70, F95, F102, F107, F121, F133, F163, F170, F205, F208), 0 failed, 200 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -40,6 +40,20 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 26
+
+F163 now passes on exact `7caed4d`/SDK `7cb4742` in
+[local co-op](evidence/mmx6-r13/manifest-bound-7caed4d-F163-native-retire-late-primary-local-reviewed.json)
+and [actual paired netplay](evidence/mmx6-r13/manifest-bound-7caed4d-F163-native-retire-late-primary-netplay-reviewed.json).
+Zero genuinely kills the original enemy while X stays behind. Original HP0,
+allocator retirement and the native entry latch are retained. Source analysis
+shows that this latched entry does not promise another enemy merely because
+the trailing hero arrives. X then moves from144 past the original416 position;
+the intended native suppression persists for another24-plus updates with both
+heroes alive. All nine follow-up images were reviewed; source/profile/final
+CRCs, ordinary recordings, cards and exits0 pass. No spawn flags were forced,
+and no new game-code fix was needed. This adds one comparison, bringing33to34
+passed with200 unverified. Original entry-reset code is mapped separately;
+another retry or all-enemy respawn policy is not claimed.
 
 F107 now passes on exact `7caed4d`/SDK `7cb4742` in
 [local co-op](evidence/mmx6-r13/manifest-bound-7caed4d-F107-native-variant-local-reviewed.json)
