@@ -2444,11 +2444,49 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+            "build_identity": {
+              "executable_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+              "compiled_manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "location": "original safe intro CP2 room; original door approached with each leader separately",
+              "view": "native4:3 shared OpenGL",
+              "input": "owned published digital slots",
+              "audio": "emulated and muted dummy output"
+            },
+            "action": "After original offline checkpoint initialization and native arrival, lead with the required actor through the actual door; observe original boss activation/full HP, completed scene release, passenger landing and both independent controls.",
+            "outcome": "Guest owns the native scene with primary over100px behind. Both lead orders complete native main-boss initialization at32HP, clear the scene lock, land the passenger and accept each own movement. All10 composed images reviewed; offline-setup scenery corruption is retained separately.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-lifecycle\\manifest-bound-e0fdd1e-intro-admission-both-leaders-local-reviewed.json",
+                "sha256": "bd51a39c7bd5f32ef13b1d92156c4c5ab5aae5131f42ffab30e3871473470b15"
+              }
+            ],
+            "limits": [
+              "LOCAL exact V48 e0fdd1e/SDK7cb474, X/P1 and Zero/P2, native intro CP2, shared native4:3 OpenGL, published digital host input and muted dummy audio.",
+              "Audited original checkpoint command8 reaches the safe CP2 room before each lead order. Stage reachability and earlier intro geometry are bypassed. Every subsequent door contact, camera opening, original boss allocation/HP fill, scene release, passenger landing and movement uses native execution and ordinary inputs. No health, door, actor, scene, camera, token or outcome writes.",
+              "All10 composed images were inspected. The CP2 fixture path visibly corrupts scenery; these behavioral admission results do not qualify rendering, terrain artwork, map/texture restoration or F170. Normal native approach needs a separate check to establish the affected loading path.",
+              "Native boss type is decimal48/hex30, bound by actual PLAY+20 and original enemy pool bytes. The first failed observer incorrectly expected hex48. The second compared a live tuple lifecycle to a list; both failed reports remain unmodified and are not promoted.",
+              "Default recording is intentionally fixture-tainted; both strict finalized capture and replay refuse it. Native cards remain unchanged and the owned process exits gracefully0. No native save/load or replay qualification.",
+              "Both actual lead orders pass local R11/F2/F5 contracts only. F53 qualified-route breadth, R22 full-foot-box observations, netplay, other rosters/stages/hosts and aggregate comparisons remain unverified. No native content result is added.",
+              "Typed player publications, ordinary PLAY/actor/camera RAM and composed captures are nearby separate reads; no instruction-atomic full-machine claim."
+            ],
+            "bypasses": [
+              "Original audited offline command8 CP2 setup before each leader. No door, actor, HP, script, camera, token or outcome writes."
+            ]
+          }
+        ],
+        "limitations": "LOCAL bounded admission passes on exact e0fdd1e/SDK7cb474 using the audited CP2 prerequisite: guest-first for R11/F2, both leaders for F5, original boss fullHP/scene release/passenger landing/independent controls. Checkpoint reachability bypass and scenery corruption explicit. Netplay and aggregate remain unverified; no F53/R22/F170/content pass."
       }
     },
     {
@@ -4264,11 +4302,49 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+            "build_identity": {
+              "executable_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+              "compiled_manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "location": "original safe intro CP2 room; original door approached with each leader separately",
+              "view": "native4:3 shared OpenGL",
+              "input": "owned published digital slots",
+              "audio": "emulated and muted dummy output"
+            },
+            "action": "After original offline checkpoint initialization and native arrival, lead with the required actor through the actual door; observe original boss activation/full HP, completed scene release, passenger landing and both independent controls.",
+            "outcome": "Guest owns the native scene with primary over100px behind. Both lead orders complete native main-boss initialization at32HP, clear the scene lock, land the passenger and accept each own movement. All10 composed images reviewed; offline-setup scenery corruption is retained separately.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-lifecycle\\manifest-bound-e0fdd1e-intro-admission-both-leaders-local-reviewed.json",
+                "sha256": "bd51a39c7bd5f32ef13b1d92156c4c5ab5aae5131f42ffab30e3871473470b15"
+              }
+            ],
+            "limits": [
+              "LOCAL exact V48 e0fdd1e/SDK7cb474, X/P1 and Zero/P2, native intro CP2, shared native4:3 OpenGL, published digital host input and muted dummy audio.",
+              "Audited original checkpoint command8 reaches the safe CP2 room before each lead order. Stage reachability and earlier intro geometry are bypassed. Every subsequent door contact, camera opening, original boss allocation/HP fill, scene release, passenger landing and movement uses native execution and ordinary inputs. No health, door, actor, scene, camera, token or outcome writes.",
+              "All10 composed images were inspected. The CP2 fixture path visibly corrupts scenery; these behavioral admission results do not qualify rendering, terrain artwork, map/texture restoration or F170. Normal native approach needs a separate check to establish the affected loading path.",
+              "Native boss type is decimal48/hex30, bound by actual PLAY+20 and original enemy pool bytes. The first failed observer incorrectly expected hex48. The second compared a live tuple lifecycle to a list; both failed reports remain unmodified and are not promoted.",
+              "Default recording is intentionally fixture-tainted; both strict finalized capture and replay refuse it. Native cards remain unchanged and the owned process exits gracefully0. No native save/load or replay qualification.",
+              "Both actual lead orders pass local R11/F2/F5 contracts only. F53 qualified-route breadth, R22 full-foot-box observations, netplay, other rosters/stages/hosts and aggregate comparisons remain unverified. No native content result is added.",
+              "Typed player publications, ordinary PLAY/actor/camera RAM and composed captures are nearby separate reads; no instruction-atomic full-machine claim."
+            ],
+            "bypasses": [
+              "Original audited offline command8 CP2 setup before each leader. No door, actor, HP, script, camera, token or outcome writes."
+            ]
+          }
+        ],
+        "limitations": "LOCAL bounded admission passes on exact e0fdd1e/SDK7cb474 using the audited CP2 prerequisite: guest-first for R11/F2, both leaders for F5, original boss fullHP/scene release/passenger landing/independent controls. Checkpoint reachability bypass and scenery corruption explicit. Netplay and aggregate remain unverified; no F53/R22/F170/content pass."
       }
     },
     {
@@ -4377,11 +4453,49 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+            "build_identity": {
+              "executable_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+              "compiled_manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+              "sdk_commit": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "location": "original safe intro CP2 room; original door approached with each leader separately",
+              "view": "native4:3 shared OpenGL",
+              "input": "owned published digital slots",
+              "audio": "emulated and muted dummy output"
+            },
+            "action": "After original offline checkpoint initialization and native arrival, lead with the required actor through the actual door; observe original boss activation/full HP, completed scene release, passenger landing and both independent controls.",
+            "outcome": "Guest owns the native scene with primary over100px behind. Both lead orders complete native main-boss initialization at32HP, clear the scene lock, land the passenger and accept each own movement. All10 composed images reviewed; offline-setup scenery corruption is retained separately.",
+            "artifacts": [
+              {
+                "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-lifecycle\\manifest-bound-e0fdd1e-intro-admission-both-leaders-local-reviewed.json",
+                "sha256": "bd51a39c7bd5f32ef13b1d92156c4c5ab5aae5131f42ffab30e3871473470b15"
+              }
+            ],
+            "limits": [
+              "LOCAL exact V48 e0fdd1e/SDK7cb474, X/P1 and Zero/P2, native intro CP2, shared native4:3 OpenGL, published digital host input and muted dummy audio.",
+              "Audited original checkpoint command8 reaches the safe CP2 room before each lead order. Stage reachability and earlier intro geometry are bypassed. Every subsequent door contact, camera opening, original boss allocation/HP fill, scene release, passenger landing and movement uses native execution and ordinary inputs. No health, door, actor, scene, camera, token or outcome writes.",
+              "All10 composed images were inspected. The CP2 fixture path visibly corrupts scenery; these behavioral admission results do not qualify rendering, terrain artwork, map/texture restoration or F170. Normal native approach needs a separate check to establish the affected loading path.",
+              "Native boss type is decimal48/hex30, bound by actual PLAY+20 and original enemy pool bytes. The first failed observer incorrectly expected hex48. The second compared a live tuple lifecycle to a list; both failed reports remain unmodified and are not promoted.",
+              "Default recording is intentionally fixture-tainted; both strict finalized capture and replay refuse it. Native cards remain unchanged and the owned process exits gracefully0. No native save/load or replay qualification.",
+              "Both actual lead orders pass local R11/F2/F5 contracts only. F53 qualified-route breadth, R22 full-foot-box observations, netplay, other rosters/stages/hosts and aggregate comparisons remain unverified. No native content result is added.",
+              "Typed player publications, ordinary PLAY/actor/camera RAM and composed captures are nearby separate reads; no instruction-atomic full-machine claim."
+            ],
+            "bypasses": [
+              "Original audited offline command8 CP2 setup before each leader. No door, actor, HP, script, camera, token or outcome writes."
+            ]
+          }
+        ],
+        "limitations": "LOCAL bounded admission passes on exact e0fdd1e/SDK7cb474 using the audited CP2 prerequisite: guest-first for R11/F2, both leaders for F5, original boss fullHP/scene release/passenger landing/independent controls. Checkpoint reachability bypass and scenery corruption explicit. Netplay and aggregate remain unverified; no F53/R22/F170/content pass."
       }
     },
     {

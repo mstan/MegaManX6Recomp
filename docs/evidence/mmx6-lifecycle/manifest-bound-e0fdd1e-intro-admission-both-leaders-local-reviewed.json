@@ -1,0 +1,312 @@
+{
+  "schema": 1,
+  "kind": "reviewed_LOCAL_intro_admission_both_leaders",
+  "reviewed_at_utc": "2026-10-26T01:14:52.875164+00:00",
+  "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+  "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+  "executable_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+  "compiled_manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+  "admitted_mode": "local",
+  "comparisons": [
+    "R11",
+    "F2",
+    "F5"
+  ],
+  "aggregate_admitted": false,
+  "cases": [
+    {
+      "leader": 1,
+      "samples": 310,
+      "scene_begin_index": 17,
+      "scene_owner": 2,
+      "scene_begin_x": [
+        5904.0,
+        6037.5
+      ],
+      "battle_ready_index": 292,
+      "native_boss": {
+        "address": "0x8008ef48",
+        "type_decimal": 48,
+        "HP": 32,
+        "state": 1,
+        "action": 9
+      },
+      "landed_actors": [
+        {
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x": 6145.046875,
+          "y": 395.0
+        },
+        {
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x": 6145.046875,
+          "y": 394.0
+        }
+      ],
+      "independent_controls": [
+        {
+          "seat": 0,
+          "before_x": [
+            6145.046875,
+            6145.046875
+          ],
+          "accepted_x": [
+            6142.546875,
+            6145.046875
+          ]
+        },
+        {
+          "seat": 1,
+          "before_x": [
+            6137.546875,
+            6145.046875
+          ],
+          "accepted_x": [
+            6137.546875,
+            6141.546875
+          ]
+        }
+      ]
+    },
+    {
+      "leader": 0,
+      "samples": 359,
+      "scene_begin_index": 19,
+      "scene_owner": 1,
+      "scene_begin_x": [
+        6037.5,
+        5928.0
+      ],
+      "battle_ready_index": 339,
+      "native_boss": {
+        "address": "0x8008ef48",
+        "type_decimal": 48,
+        "HP": 32,
+        "state": 1,
+        "action": 8
+      },
+      "landed_actors": [
+        {
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x": 6145.046875,
+          "y": 395.0
+        },
+        {
+          "state": 1,
+          "action": 2,
+          "hp": 32,
+          "x": 6145.046875,
+          "y": 395.0
+        }
+      ],
+      "independent_controls": [
+        {
+          "seat": 0,
+          "before_x": [
+            6145.046875,
+            6145.046875
+          ],
+          "accepted_x": [
+            6142.546875,
+            6145.046875
+          ]
+        },
+        {
+          "seat": 1,
+          "before_x": [
+            6139.546875,
+            6145.046875
+          ],
+          "accepted_x": [
+            6139.546875,
+            6141.546875
+          ]
+        }
+      ]
+    }
+  ],
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\qualification.json",
+    "sha256": "323652f0d07c20f87d699f43b58fce762a4a4f13181f03c82164e2dbaab80da4"
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\ammo-hud\\intro-admission-observations.json",
+    "sha256": "320d7e3b33934430d8fb5c2901efb08b29cee75e579f3f548a16f50262763aed"
+  },
+  "executed_source": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\caller-executed-source.py",
+    "sha256": "d4decd076f2bf1e943b944e4ac39afce84245d40af6b3ee75d10238d04566f31"
+  },
+  "owned_pid": 66684,
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "cards_unchanged": true,
+  "recording_rejection": {
+    "status": "failed_fixture_taint_retained_for_diagnostics",
+    "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\candidate\\saves\\input-recordings\\session-1792976455623349-1-0\\inputs.jsonl",
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+      "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "terminal_failure": "unilateral debug or fixture input contaminated capture",
+    "native_status": {
+      "contract": "mmx6.native-consumption.v1",
+      "epoch": 1,
+      "failure": "unilateral debug or fixture input contaminated capture",
+      "schema": 1,
+      "scope": "native-consumption diagnostics; replay unimplemented",
+      "status": "failed"
+    },
+    "events": 6018,
+    "natives": 4228,
+    "p2_reads": 1790,
+    "artifacts": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\recording-rejection\\settings.json",
+        "bytes": 10329,
+        "sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\recording-rejection\\content.json",
+        "bytes": 503,
+        "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\recording-rejection\\simulation-contract.json",
+        "bytes": 259,
+        "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\recording-rejection\\inputs.jsonl",
+        "bytes": 790591,
+        "sha256": "250476f06c66e5842d6f9fe9a871b7900089d83b79264c1dd173507dcea809b6"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\recording-rejection\\status.json",
+        "bytes": 211,
+        "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\recording-rejection\\card1.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\recording-rejection\\card2.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      }
+    ],
+    "strict_refusals": {
+      "ordinary_capture": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      },
+      "offline_replay": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      }
+    },
+    "finalized_capture_admitted": false,
+    "replay_admitted": false,
+    "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+  },
+  "root_visual_review": {
+    "contact_sheet": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-visual-v1.png",
+      "sha256": "5c8844a61eefb22c6c598ad159d5a8a9d9e8fecab5ac755222ff0f78c815bbaf"
+    },
+    "images": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\ammo-hud\\leader1-safe-native-CP2.png",
+        "sha256": "5dd29197d8122625324d106ba99ff2523ddad1b647f018fefda5551d1929ea29"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\ammo-hud\\leader1-original-door-scene-begin.png",
+        "sha256": "59165ef0fec3623a941675407b2b66726c08613fa1bde4e4358f8dccede5a7a2"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\ammo-hud\\leader1-original-main-boss-allocated.png",
+        "sha256": "c522fea84d3f0ec199d5ac9e055625428137da5e0ae2cd1f71b86f8cc9de4501"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\ammo-hud\\leader1-native-boss-ready-both-landed.png",
+        "sha256": "455ed438ae91452174d2c4e806b10e7778e2fdf279f4c6562cba3997a53af4b1"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\ammo-hud\\leader1-both-native-controls-restored.png",
+        "sha256": "5919aa4b3050a122054f36d65ddefae79ec212a34faf99f42fc8cec82f48c620"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\ammo-hud\\leader0-safe-native-CP2.png",
+        "sha256": "5dd29197d8122625324d106ba99ff2523ddad1b647f018fefda5551d1929ea29"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\ammo-hud\\leader0-original-door-scene-begin.png",
+        "sha256": "571d86a2c3eb1024b3049001c2a4b893b0984564eb4c57c461f5c2caa6c6b1b6"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\ammo-hud\\leader0-original-main-boss-allocated.png",
+        "sha256": "ae7e825a7affc3cb1fab1b5b9495325246fcf317d60a9f178fb7a59e148e2d3b"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\ammo-hud\\leader0-native-boss-ready-both-landed.png",
+        "sha256": "69a5879b06c1a967e68b921f9cb263b4e3d667c72654e4b7687172a85dbb9047"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v3\\ammo-hud\\leader0-both-native-controls-restored.png",
+        "sha256": "740a5b5de707af704161e2ca90dda81e04f8e0cca7ca4bb60b44f0422d65c8a8"
+      }
+    ],
+    "all10_inspected": true,
+    "scenery_status": "observed_corruption_after_offline_CP2_setup"
+  },
+  "prior_failed_parents": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v1\\qualification.json",
+      "sha256": "bbb6839d1bae0a9d90f05109c00e18a366a807251220a4502415d11e34d05753"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-admission-local-v48-root-v2\\qualification.json",
+      "sha256": "1492a2716d51aafe6ec2dd93f3e6b32da1d04c4c6ebc89117ce6815ece6a1be2"
+    }
+  ],
+  "limits": [
+    "LOCAL exact V48 e0fdd1e/SDK7cb474, X/P1 and Zero/P2, native intro CP2, shared native4:3 OpenGL, published digital host input and muted dummy audio.",
+    "Audited original checkpoint command8 reaches the safe CP2 room before each lead order. Stage reachability and earlier intro geometry are bypassed. Every subsequent door contact, camera opening, original boss allocation/HP fill, scene release, passenger landing and movement uses native execution and ordinary inputs. No health, door, actor, scene, camera, token or outcome writes.",
+    "All10 composed images were inspected. The CP2 fixture path visibly corrupts scenery; these behavioral admission results do not qualify rendering, terrain artwork, map/texture restoration or F170. Normal native approach needs a separate check to establish the affected loading path.",
+    "Native boss type is decimal48/hex30, bound by actual PLAY+20 and original enemy pool bytes. The first failed observer incorrectly expected hex48. The second compared a live tuple lifecycle to a list; both failed reports remain unmodified and are not promoted.",
+    "Default recording is intentionally fixture-tainted; both strict finalized capture and replay refuse it. Native cards remain unchanged and the owned process exits gracefully0. No native save/load or replay qualification.",
+    "Both actual lead orders pass local R11/F2/F5 contracts only. F53 qualified-route breadth, R22 full-foot-box observations, netplay, other rosters/stages/hosts and aggregate comparisons remain unverified. No native content result is added.",
+    "Typed player publications, ordinary PLAY/actor/camera RAM and composed captures are nearby separate reads; no instruction-atomic full-machine claim."
+  ],
+  "curator": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-intro-admission-local-v48-root-v1.py",
+    "sha256": "10252aa2b2a1fc224c897f2b1fb027fb41173f4dc110f120767f5c2878cd26b0"
+  }
+}
