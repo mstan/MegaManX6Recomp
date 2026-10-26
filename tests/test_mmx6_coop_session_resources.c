@@ -24,6 +24,17 @@ static void *live_buffers[16384];
 static unsigned host_buffers,guest_allocations,fail_guest_allocation;
 static uint64_t owners[24];
 static uint32_t stopped_owned;
+static unsigned option_reads;
+int psx_mod_option_value(const char *package,const char *feature,const char *option,
+    char *out,uint32_t capacity) {
+    /* This fixture's committed plan has only the manifest's default HUD
+     * choice. Any new option dependency must be specified here explicitly. */
+    static const char value[]="stacked";
+    CHECK(package&&feature&&option&&out&&capacity>=sizeof value);
+    CHECK(!strcmp(package,"mmx6.local-coop")&&!strcmp(feature,"prototype")&&
+        !strcmp(option,"hud_layout"));
+    memcpy(out,value,sizeof value);++option_reads;return 1;
+}
 static void *session_malloc(size_t size) {
     void *p=malloc(size);if(!p)return NULL;
     for(unsigned i=0;i<16384;++i)if(!live_buffers[i]){live_buffers[i]=p;++host_buffers;return p;}
@@ -68,6 +79,9 @@ uint32_t psx_mod_call_guest_uncharged(CPUState *cpu,uint32_t target,uint32_t ret
     (void)cpu;(void)target;(void)ret;(void)a0;(void)a1;(void)a2;(void)a3;(void)budget;(void)charged;CHECK(0);return 0;
 }
 static void allocated(void) {
+    int hud_x=-1,hud_y=-1;unsigned before=option_reads;
+    hud_offsets(&hud_x,&hud_y);
+    CHECK(option_reads==before+1&&hud_x==0&&hud_y==P2_HUD_Y);
     Mmx6SessionResources r=mmx6_test_session_resources();
     CHECK(!failed&&!ready&&!enrolled&&r.guest_used==ASSET_SPACE+0x2000+2*MMX6_JUMP_AUDIO_HEADER_BYTES);
     CHECK(r.dma_used==FRAME_ARENA*2+0x10000+MENU_STORAGE_BYTES&&r.packet_arenas==2);

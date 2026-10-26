@@ -70,6 +70,15 @@ class SessionContract(unittest.TestCase):
             'snapshot_read(state,n);snapshot_resources_restored()','psx_mod_memory_snapshot_read(arena,m)',
             'fail_guest_allocation=1','CHECK(!host_buffers)','owners[0]==JUMP_AUDIO_OWNER+1'):
             self.assertIn(token,test)
+    def test_fixture_option_boundary_is_exact_and_exercises_current_default(self):
+        test=(ROOT/'tests/test_mmx6_coop_session_resources.c').read_text(encoding='utf-8')
+        option=function(test,'psx_mod_option_value')
+        for token in('"mmx6.local-coop"','"prototype"','"hud_layout"',
+                     'value[]="stacked"','capacity>=sizeof value','++option_reads'):
+            self.assertIn(token,option)
+        self.assertIn('hud_offsets(&hud_x,&hud_y)',function(test,'allocated'))
+        self.assertIn('option_reads==before+1&&hud_x==0&&hud_y==P2_HUD_Y',
+                      function(test,'allocated'))
     def test_both_fixture_variants_have_all_actual_providers(self):
         cmake=(ROOT/'CMakeLists.txt').read_text(encoding='utf-8')
         self.assertRegex(cmake,r'foreach\(_mmx6_visual_kind\b[^)]*\bsession_resources\b')
