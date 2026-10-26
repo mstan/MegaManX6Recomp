@@ -1,8 +1,8 @@
 {
   "schema": 1,
-  "status": "development-candidate-only; independent private views and schema8 require fresh exact-image native qualification",
+  "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 3,
+  "revision": 4,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,10 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v19",
+    "title_compatibility": "mmx6-x-zero-delay-v20",
+    "settings_package_id": "mmx6.local-coop",
+    "settings_feature_id": "prototype",
+    "settings_loading_api_minimum": 1,
     "slots": 2,
     "players": 2,
     "occupied_mask": 3,
@@ -68,6 +71,7 @@
   },
   "required_fresh_evidence": [
     "both peers use identical final candidate actual executable SHA and declared manifest",
+    "both peers commit the declared co-op settings and native loader before boot; runtime option lookup reads the committed settings",
     "same selected profile/revision/selection SHA on both peers after mutual agreement, logged cycle0/tick0 before guest dispatch",
     "default resident loader, OpenBIOS and retained OpenGL intro/input/lifecycle with resolved core/mod matching",
     "fresh restart/rematch settles again with fresh nonces before guest dispatch",
@@ -165,5 +169,11 @@
     "documentation": "docs/COOP_PRIVATE_CHARACTER_AUDIO.md",
     "fresh_native_qualification": "required; older v16/v17 image receipts do not transfer",
     "limits": "Other rosters and unproved child actor calls, current-image sample identity/lifetimes, active STOP7, state/rewind, full local/paired campaign and physical/cross-machine profiles remain unqualified"
+  },
+  "title_changes_v20": {
+    "scope": "The forced title profile explicitly declares mmx6.local-coop/prototype settings while retaining the separate native Seamless Loading selection.",
+    "api_guard": "Settings IDs and their title-admission checks are compiled only when PSX_MOD_NETPLAY_SETTINGS_LOADING_API >= 1. Older SDKs retain the loading-only shared-camera fallback without accessing the new fields.",
+    "unchanged": "Private-view and snapshot implementations, all renderer/default/capability/image/scope guards, and default host-lab disabled policy.",
+    "fresh_native_qualification": "required; v19 or prior exact-image evidence does not transfer"
   }
 }

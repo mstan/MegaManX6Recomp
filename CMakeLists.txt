@@ -54,7 +54,7 @@ list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_frame_interpolation_pl
 list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_seamless_store[.]cpp$")
 
 set_property(SOURCE src/mods/mmx6_startup_log.cpp APPEND PROPERTY COMPILE_DEFINITIONS
-    "MMX6_STARTUP_BUILD_ID=\"mmx6-x-zero-delay-v19\"")
+    "MMX6_STARTUP_BUILD_ID=\"mmx6-x-zero-delay-v20\"")
 
 # The game-owned mod catalog (the two presentation enhancements plus the
 # acediez Tweaks set). Every feature stays disabled until selected on the
@@ -167,7 +167,7 @@ if(BUILD_TESTING)
         list(APPEND _lab_sdk_sources "${PSXRECOMP_V4_ROOT}/runtime/src/netplay_host_profile.c"
             "${PSXRECOMP_V4_ROOT}/runtime/src/psx_sha256.c")
     endif()
-    foreach(_lab_variant enabled disabled wrong-contract pgxp)
+    foreach(_lab_variant enabled disabled wrong-contract pgxp legacy-settings-api)
         set(_lab_test mmx6_host_lab_${_lab_variant}_test)
         add_executable(${_lab_test} tests/test_mmx6_coop_host_lab.c ${_lab_sdk_sources})
         target_include_directories(${_lab_test} PRIVATE tests src/mods "${PSXRECOMP_V4_ROOT}/runtime/include")
@@ -176,7 +176,8 @@ if(BUILD_TESTING)
             target_compile_definitions(${_lab_test} PRIVATE MMX6_ENABLE_LOOPBACK_HOST_LAB=0)
         else()
             target_compile_definitions(${_lab_test} PRIVATE MMX6_ENABLE_LOOPBACK_HOST_LAB=1)
-            if(_lab_variant STREQUAL "enabled" AND WIN32 AND MINGW AND CMAKE_SIZEOF_VOID_P EQUAL 8
+            if((_lab_variant STREQUAL "enabled" OR _lab_variant STREQUAL "legacy-settings-api")
+                AND WIN32 AND MINGW AND CMAKE_SIZEOF_VOID_P EQUAL 8
                 AND CMAKE_SYSTEM_PROCESSOR MATCHES "^(AMD64|amd64|x86_64|X86_64)$"
                 AND CMAKE_C_COMPILER_ID STREQUAL "Clang" AND CMAKE_C_COMPILER_VERSION VERSION_EQUAL "22.1.8")
                 set(_lab_expected 1)
@@ -187,6 +188,9 @@ if(BUILD_TESTING)
         endif()
         if(_lab_variant STREQUAL "pgxp")
             target_compile_definitions(${_lab_test} PRIVATE PSX_PGXP=1)
+        endif()
+        if(_lab_variant STREQUAL "legacy-settings-api")
+            target_compile_definitions(${_lab_test} PRIVATE MMX6_HOST_LAB_TEST_LEGACY_SETTINGS_API=1)
         endif()
         target_compile_definitions(${_lab_test} PRIVATE MMX6_HOST_LAB_EXPECT_OFFER=${_lab_expected})
         add_test(NAME ${_lab_test} COMMAND ${_lab_test})

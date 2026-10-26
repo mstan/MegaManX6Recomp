@@ -48,6 +48,10 @@ static int lab_title_eligible(const PSXModNetplayProfile *p){
         p->compatibility_id&&!strcmp(p->compatibility_id,MMX6_HOST_LAB_TITLE_COMPATIBILITY)&&
         !p->rollback_supported&&!p->savestates_supported&&p->skip_bios_intro==1&&
         p->requires_retained_texture_banks==1&&p->state_digest&&
+#if defined(PSX_MOD_NETPLAY_SETTINGS_LOADING_API) && PSX_MOD_NETPLAY_SETTINGS_LOADING_API >= 1
+        p->settings_package_id&&!strcmp(p->settings_package_id,"mmx6.local-coop")&&
+        p->settings_feature_id&&!strcmp(p->settings_feature_id,"prototype")&&
+#endif
         p->loading_package_id&&!strcmp(p->loading_package_id,"mmx6.enhancement.seamless-loading")&&
         p->loading_feature_id&&!strcmp(p->loading_feature_id,"seamless-loading")&&
         p->loading_plugin_id&&!strcmp(p->loading_plugin_id,"mmx6.seamless");

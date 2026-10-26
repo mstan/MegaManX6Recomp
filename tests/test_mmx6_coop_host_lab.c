@@ -1,6 +1,11 @@
 #ifndef PSX_EXECUTION_PROFILE_CONFIG
 #define PSX_EXECUTION_PROFILE_CONFIG "mmx6_host_lab_test_profile.h"
 #endif
+#ifdef MMX6_HOST_LAB_TEST_LEGACY_SETTINGS_API
+/* Model the old API path without referring to the added profile fields. */
+#include "mod_netplay.h"
+#undef PSX_MOD_NETPLAY_SETTINGS_LOADING_API
+#endif
 #include "../src/mods/mmx6_coop_host_lab.c"
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,8 +28,11 @@ static PSXModNetplayHostStartup valid(void){
     c.declared_build_manifest_schema=1;c.builtin_bios_image_id="OPENBIOS";
     c.builtin_bios_image_wordsum=0xc4daeb88u;c.slot_count=c.player_count=2;c.occupied_mask=3;
     c.loading_enabled=1;c.renderer=1;c.retained_texture_banks=1;c.aspect_index=0;
-    title=(PSXModNetplayProfile){.plugin_id="mmx6.local-coop.prototype",.compatibility_id="mmx6-x-zero-delay-v19",
+    title=(PSXModNetplayProfile){.plugin_id="mmx6.local-coop.prototype",.compatibility_id="mmx6-x-zero-delay-v20",
         .skip_bios_intro=1,.state_digest=digest,.requires_retained_texture_banks=1,
+#if defined(PSX_MOD_NETPLAY_SETTINGS_LOADING_API) && PSX_MOD_NETPLAY_SETTINGS_LOADING_API >= 1
+        .settings_package_id="mmx6.local-coop",.settings_feature_id="prototype",
+#endif
         .loading_package_id="mmx6.enhancement.seamless-loading",.loading_feature_id="seamless-loading",
         .loading_plugin_id="mmx6.seamless"};
     return c;
@@ -43,7 +51,7 @@ int main(void){
     if(MMX6_HOST_LAB_EXPECT_OFFER){
         CHECK(cat.count==1&&cat.rules&&cat.rules->flags==PSX_HOST_PROFILE_DIRECT_LOOPBACK);
         CHECK(!strcmp(cat.rules->profile,"mmx6.win64-clang22.loopback"));
-        CHECK(cat.rules->revision==3&&cat.rules->implementation_count==1);
+        CHECK(cat.rules->revision==4&&cat.rules->implementation_count==1);
         PSXHostCapabilities caps;CHECK(psx_host_caps_init(&caps,&c.cpu,2,2,artifact));
         CHECK(psx_host_caps_offer(&caps,cat.rules,2)&&psx_host_caps_validate(&caps,&cat));
         CHECK(!psx_host_caps_offer(&caps,cat.rules,1));
@@ -67,6 +75,8 @@ int main(void){
     REJECT(actual_executable_sha256,NULL);uint8_t zero[32]={0};REJECT(actual_executable_sha256,zero);
     c=valid();CHECK(!lab_context_eligible(&c,"bad-contract"));CHECK(!lab_context_eligible(&c,NULL));
     c.player_count=0;c.occupied_mask=0;CHECK(lab_context_eligible(&c,MMX6_HOST_LAB_EXECUTION_ID));
+    c=valid();title.compatibility_id="mmx6-x-zero-delay-v19";CHECK(!lab_title_eligible(&title));
+    CHECK(!mmx6_coop_lab_host_profiles(&c,&cat)&&!cat.rules&&!cat.count);
     c=valid();title.compatibility_id="mmx6-x-zero-delay-v18";CHECK(!lab_title_eligible(&title));
     CHECK(!mmx6_coop_lab_host_profiles(&c,&cat));
     c=valid();title.compatibility_id="mmx6-x-zero-delay-v15";CHECK(!lab_title_eligible(&title));
@@ -76,6 +86,16 @@ int main(void){
     c=valid();title.state_digest=NULL;CHECK(!lab_title_eligible(&title));
     c=valid();title.requires_retained_texture_banks=0;CHECK(!lab_title_eligible(&title));
     c=valid();title.loading_plugin_id="other-loader";CHECK(!lab_title_eligible(&title));
+#if defined(PSX_MOD_NETPLAY_SETTINGS_LOADING_API) && PSX_MOD_NETPLAY_SETTINGS_LOADING_API >= 1
+    c=valid();title.settings_package_id=NULL;CHECK(!lab_title_eligible(&title));
+    CHECK(!mmx6_coop_lab_host_profiles(&c,&cat)&&!cat.rules&&!cat.count);
+    c=valid();title.settings_package_id="";CHECK(!lab_title_eligible(&title));
+    c=valid();title.settings_package_id="another-package";CHECK(!lab_title_eligible(&title));
+    c=valid();title.settings_feature_id=NULL;CHECK(!lab_title_eligible(&title));
+    CHECK(!mmx6_coop_lab_host_profiles(&c,&cat)&&!cat.rules&&!cat.count);
+    c=valid();title.settings_feature_id="";CHECK(!lab_title_eligible(&title));
+    c=valid();title.settings_feature_id="another-feature";CHECK(!lab_title_eligible(&title));
+#endif
     printf("lab eligibility: PASS (actual offer=%d; no native qualification)\n",MMX6_HOST_LAB_EXPECT_OFFER);
     return 0;
 }

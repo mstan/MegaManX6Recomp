@@ -2427,12 +2427,16 @@ static void activate(void) {
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
-        .compatibility_id = "mmx6-x-zero-delay-v19",
+        .compatibility_id = "mmx6-x-zero-delay-v20",
         .rollback_supported = 0,
         .savestates_supported = 0,
         .skip_bios_intro = 1,
         .fixed_aspect_mask = 7,
         .widescreen_plugin_id = "mmx6.widescreen",
+#if defined(PSX_MOD_NETPLAY_SETTINGS_LOADING_API) && PSX_MOD_NETPLAY_SETTINGS_LOADING_API >= 1
+        .settings_package_id = "mmx6.local-coop",
+        .settings_feature_id = "prototype",
+#endif
 #ifdef MMX6_COOP_MODERN_STATE
         .state_digest = state_digest,
         .requires_retained_texture_banks = 1,
