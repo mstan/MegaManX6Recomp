@@ -4436,8 +4436,75 @@
       },
       "modes": {
         "local_coop": {
-          "status": "unverified",
-          "attempts": []
+          "status": "passed",
+          "attempts": [
+            {
+              "receipt": {
+                "case_id": "s01-a0-c03/terrain_collision_scroll",
+                "mode": "local_coop",
+                "result": "passed",
+                "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+                "recorded_at": "2026-10-26T01:39:35Z",
+                "build_identity": {
+                  "name": "V48 Release development image, debug tools enabled",
+                  "image": {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\candidate\\mmx6-runtime.exe",
+                    "sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c"
+                  },
+                  "details": {
+                    "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+                    "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+                  }
+                },
+                "settings": {
+                  "roster": "X/P1 + Zero/P2",
+                  "renderer": "OpenGL shared native4:3",
+                  "loader": "default Seamless Loading",
+                  "input": "two digital keyboard slots, published owned host route",
+                  "audio": "emulated and muted dummy output"
+                },
+                "action": "Use the original source-guarded checkpoint initializer as a reachability bypass. Jump each hero independently, observe real ascent and ground collision/landing with the other actor stationary, then walk both to cause actual native camera scrolling.",
+                "outcome": "Both owned jumps ascend and land at their original floor height. Both accepted walks advance [49.5, 47.5] pixels and the actual native camera advances 16 pixels inside native horizontal bounds. All12 composed images reviewed; exact-image/source, private cards, fixture trace refusals and graceful owned exit0 pass.",
+                "artifacts": [
+                  {
+                    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-content\\manifest-bound-e0fdd1e-Amazon-NorthPole-Inami-later-terrain-local-reviewed.json",
+                    "sha256": "b6779b149e40dcf0b58ed6026171df1fa08429e374146372233850725633fc72"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\ammo-hud\\s01-a0-c03\\observations.json",
+                    "sha256": "1017b493c9aa8d44beadff4a49f0b2ae8d358c04d88988cd15f0c6aa4b508cf4"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\ammo-hud\\s01-a0-c03\\initial.png",
+                    "sha256": "cb5a4c507b6d694b60beb5e0c92389dd43fae4753a92739d2c8ce31e9cf12f96"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\ammo-hud\\s01-a0-c03\\seat0-native-ascent.png",
+                    "sha256": "dc8d4bb4265918bd7dc02f4df8f958e3b6f2980a1e7ebeb36db5cc79d9077a2a"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\ammo-hud\\s01-a0-c03\\seat1-native-ascent.png",
+                    "sha256": "5f8ea970d4dd88c1fafefd2742d352b414b790013c1ec402370600d6079398a4"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\ammo-hud\\s01-a0-c03\\native-walk-scroll.png",
+                    "sha256": "00a1fc645c0ebeb0f2269d3c6185aa58bb88aad98295137e98d669c3c72fe1f5"
+                  }
+                ],
+                "limits": [
+                  "Bounded terrain near each authored checkpoint, not full intervening routes, campaign or obligation completion.",
+                  "One exact Windows image, X/P1 + Zero/P2, offline shared view only; netplay unverified.",
+                  "Actual native checkpoint loader bypasses reachability. No physics, position, HP, collision, camera or mechanic-success field writes.",
+                  "No enemy/audio/retry/boss/exit qualification. Artwork is reviewed for visible body/feet/terrain coherence only; no all-art pixel comparison.",
+                  "InamiC3 completes both independent jumps/landings but the ordinary walk leaves its starting platform and Zero reaches native fatalHP0x80. No safe scrolling pass or terrain defect is inferred. Following InamiC4 setup is rejected with reason4/initializer0 in this changed context; LaserC2 is not attempted. These raw incomplete cases stay unverified."
+                ],
+                "bypasses": [
+                  "Source-guarded offline checkpoint selection; authored approach/reachability skipped. No terrain/physics/result writes."
+                ]
+              },
+              "sha256": "4d949f3a50137315053c04d5bad9f6bed345c716fd973f36fd95f9055adb70f9"
+            }
+          ]
         },
         "netplay": {
           "status": "unverified",
@@ -4995,8 +5062,75 @@
       },
       "modes": {
         "local_coop": {
-          "status": "unverified",
-          "attempts": []
+          "status": "passed",
+          "attempts": [
+            {
+              "receipt": {
+                "case_id": "s02-a0-c01/terrain_collision_scroll",
+                "mode": "local_coop",
+                "result": "passed",
+                "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+                "recorded_at": "2026-10-26T01:39:35Z",
+                "build_identity": {
+                  "name": "V48 Release development image, debug tools enabled",
+                  "image": {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\candidate\\mmx6-runtime.exe",
+                    "sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c"
+                  },
+                  "details": {
+                    "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+                    "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+                  }
+                },
+                "settings": {
+                  "roster": "X/P1 + Zero/P2",
+                  "renderer": "OpenGL shared native4:3",
+                  "loader": "default Seamless Loading",
+                  "input": "two digital keyboard slots, published owned host route",
+                  "audio": "emulated and muted dummy output"
+                },
+                "action": "Use the original source-guarded checkpoint initializer as a reachability bypass. Jump each hero independently, observe real ascent and ground collision/landing with the other actor stationary, then walk both to cause actual native camera scrolling.",
+                "outcome": "Both owned jumps ascend and land at their original floor height. Both accepted walks advance [65.5, 63.5] pixels and the actual native camera advances 16 pixels inside native horizontal bounds. All12 composed images reviewed; exact-image/source, private cards, fixture trace refusals and graceful owned exit0 pass.",
+                "artifacts": [
+                  {
+                    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-content\\manifest-bound-e0fdd1e-Amazon-NorthPole-Inami-later-terrain-local-reviewed.json",
+                    "sha256": "b6779b149e40dcf0b58ed6026171df1fa08429e374146372233850725633fc72"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\ammo-hud\\s02-a0-c01\\observations.json",
+                    "sha256": "b36ae6610a31aa428b032131bf923ec66af7743014aeb957414682f744c610a0"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\ammo-hud\\s02-a0-c01\\initial.png",
+                    "sha256": "b576733092dbcd3b6b300bc01a0bc4c1626f68b870b80f043d304885716c81c0"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\ammo-hud\\s02-a0-c01\\seat0-native-ascent.png",
+                    "sha256": "a8f590e9a3258ec207c601280422f5c804a491fdabb3b67e0812eab77f1488c6"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\ammo-hud\\s02-a0-c01\\seat1-native-ascent.png",
+                    "sha256": "0a4ae08b56e66d5f719ba2ddbdd32f36ad38179c57d5058acdb404c94fff89a0"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\ammo-hud\\s02-a0-c01\\native-walk-scroll.png",
+                    "sha256": "845226881a40a8e75de34a2b7f5fd63cab06bb4370cc315e947cd7bd8f8db43f"
+                  }
+                ],
+                "limits": [
+                  "Bounded terrain near each authored checkpoint, not full intervening routes, campaign or obligation completion.",
+                  "One exact Windows image, X/P1 + Zero/P2, offline shared view only; netplay unverified.",
+                  "Actual native checkpoint loader bypasses reachability. No physics, position, HP, collision, camera or mechanic-success field writes.",
+                  "No enemy/audio/retry/boss/exit qualification. Artwork is reviewed for visible body/feet/terrain coherence only; no all-art pixel comparison.",
+                  "InamiC3 completes both independent jumps/landings but the ordinary walk leaves its starting platform and Zero reaches native fatalHP0x80. No safe scrolling pass or terrain defect is inferred. Following InamiC4 setup is rejected with reason4/initializer0 in this changed context; LaserC2 is not attempted. These raw incomplete cases stay unverified."
+                ],
+                "bypasses": [
+                  "Source-guarded offline checkpoint selection; authored approach/reachability skipped. No terrain/physics/result writes."
+                ]
+              },
+              "sha256": "afa18ce898f44e9f4094be80fc6eb51e5aab87e77ff148a3d48f6563395a0b07"
+            }
+          ]
         },
         "netplay": {
           "status": "unverified",
@@ -11413,8 +11547,75 @@
       },
       "modes": {
         "local_coop": {
-          "status": "unverified",
-          "attempts": []
+          "status": "passed",
+          "attempts": [
+            {
+              "receipt": {
+                "case_id": "s06-a0-c02/terrain_collision_scroll",
+                "mode": "local_coop",
+                "result": "passed",
+                "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+                "recorded_at": "2026-10-26T01:39:35Z",
+                "build_identity": {
+                  "name": "V48 Release development image, debug tools enabled",
+                  "image": {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\candidate\\mmx6-runtime.exe",
+                    "sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c"
+                  },
+                  "details": {
+                    "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+                    "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+                  }
+                },
+                "settings": {
+                  "roster": "X/P1 + Zero/P2",
+                  "renderer": "OpenGL shared native4:3",
+                  "loader": "default Seamless Loading",
+                  "input": "two digital keyboard slots, published owned host route",
+                  "audio": "emulated and muted dummy output"
+                },
+                "action": "Use the original source-guarded checkpoint initializer as a reachability bypass. Jump each hero independently, observe real ascent and ground collision/landing with the other actor stationary, then walk both to cause actual native camera scrolling.",
+                "outcome": "Both owned jumps ascend and land at their original floor height. Both accepted walks advance [31.5, 29.5] pixels and the actual native camera advances 32 pixels inside native horizontal bounds. All12 composed images reviewed; exact-image/source, private cards, fixture trace refusals and graceful owned exit0 pass.",
+                "artifacts": [
+                  {
+                    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-content\\manifest-bound-e0fdd1e-Amazon-NorthPole-Inami-later-terrain-local-reviewed.json",
+                    "sha256": "b6779b149e40dcf0b58ed6026171df1fa08429e374146372233850725633fc72"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\ammo-hud\\s06-a0-c02\\observations.json",
+                    "sha256": "6660c885a918653e19dbb33089331532b025aaf0acb97d0fce6e27960ac05d99"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\ammo-hud\\s06-a0-c02\\initial.png",
+                    "sha256": "d278ca18e86eb38553d21d7642437057c9d23473afdeb1126710916845ffb1ec"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\ammo-hud\\s06-a0-c02\\seat0-native-ascent.png",
+                    "sha256": "2f4c1fe6d7c56d9aa19f9f435d5bab591e7d103a57769d0c068fd78a3006a633"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\ammo-hud\\s06-a0-c02\\seat1-native-ascent.png",
+                    "sha256": "6cc7a8066419b3daea9d135c21baf7d8d920dd251fa6a3905d5082855e6cde9c"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\ammo-hud\\s06-a0-c02\\native-walk-scroll.png",
+                    "sha256": "937b89ab0bba730f5c6eac01612801ddfcdf32e9520fa1ad2da3d81df6f70ba7"
+                  }
+                ],
+                "limits": [
+                  "Bounded terrain near each authored checkpoint, not full intervening routes, campaign or obligation completion.",
+                  "One exact Windows image, X/P1 + Zero/P2, offline shared view only; netplay unverified.",
+                  "Actual native checkpoint loader bypasses reachability. No physics, position, HP, collision, camera or mechanic-success field writes.",
+                  "No enemy/audio/retry/boss/exit qualification. Artwork is reviewed for visible body/feet/terrain coherence only; no all-art pixel comparison.",
+                  "InamiC3 completes both independent jumps/landings but the ordinary walk leaves its starting platform and Zero reaches native fatalHP0x80. No safe scrolling pass or terrain defect is inferred. Following InamiC4 setup is rejected with reason4/initializer0 in this changed context; LaserC2 is not attempted. These raw incomplete cases stay unverified."
+                ],
+                "bypasses": [
+                  "Source-guarded offline checkpoint selection; authored approach/reachability skipped. No terrain/physics/result writes."
+                ]
+              },
+              "sha256": "e7b2bf8aa574621f464bcaa1128bb84a845a89f846c512390867eb5d84889914"
+            }
+          ]
         },
         "netplay": {
           "status": "unverified",
@@ -11660,7 +11861,63 @@
       "modes": {
         "local_coop": {
           "status": "unverified",
-          "attempts": []
+          "attempts": [
+            {
+              "receipt": {
+                "case_id": "s06-a0-c03/terrain_collision_scroll",
+                "mode": "local_coop",
+                "result": "unverified",
+                "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+                "recorded_at": "2026-10-26T01:44:36Z",
+                "build_identity": {
+                  "name": "V48 Release development image, debug tools enabled",
+                  "image": {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v48-startup-debug\\mmx6-runtime.exe",
+                    "sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c"
+                  },
+                  "details": {
+                    "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+                    "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+                  }
+                },
+                "settings": {
+                  "roster": "X/P1 + Zero/P2",
+                  "renderer": "OpenGL shared native4:3",
+                  "input": "owned published digital host inputs",
+                  "audio": "emulated and muted dummy output"
+                },
+                "action": "Request the original audited checkpoint entry, then attempt each native ascent/landing and ordinary walking/scrolling while preserving raw partial evidence.",
+                "outcome": "Incomplete bounded terrain attempt: Terrain left ordinary living world. Raw status failed_behavior and partial checks {\"seat0_owned_ascent_original_ground_landing\": true, \"seat1_owned_ascent_original_ground_landing\": true}. No full terrain pass or engine defect is inferred.",
+                "artifacts": [
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\qualification.json",
+                    "sha256": "f27787b192968eed4640090a4fe240fef7f439be7b1cfb3ac4dd40e8c58d8419"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\ammo-hud\\s06-a0-c03\\observations.json",
+                    "sha256": "faf1e0547568cceed8b885be39a4626169ca049c826a24c5f8ea8efd18d63875"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\caller-executed-source.py",
+                    "sha256": "14a55154616a39324574319a3fd22b4c8bb8986d73d12b25f49389e707982c60"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\record-native-terrain-incomplete-v48-root-v1.py",
+                    "sha256": "267fc35eda4a2647e06f79fe8df7eadea54728a2c0e4a139cf8b05b08d59fc40"
+                  }
+                ],
+                "limits": [
+                  "Setup/readiness failures and a rejected later request do not establish mechanic failure. InamiC3 retains two successful jump components but its walk loses ordinary living control; safe scrolling remains unverified.",
+                  "No inherited qualification from source50 setup records; exact V48 native/public readings and actual failed bounds remain unchanged. No netplay, whole-location, campaign or comparison qualification.",
+                  "Owned source/manifest gates, unchanged native cards, graceful0 and strict fixture-taint capture/replay refusal retained in parent; a successful parent only admits these safety gates."
+                ],
+                "bypasses": [
+                  "Original offline checkpoint initializer skips reachability; no terrain/physics/camera/HP/outcome writes."
+                ]
+              },
+              "sha256": "b97bf1819316635e7900f40eb0901f9b78bcf5ecf7352e2b58b299b014b45601"
+            }
+          ]
         },
         "netplay": {
           "status": "unverified",
@@ -11906,7 +12163,63 @@
       "modes": {
         "local_coop": {
           "status": "unverified",
-          "attempts": []
+          "attempts": [
+            {
+              "receipt": {
+                "case_id": "s06-a0-c04/terrain_collision_scroll",
+                "mode": "local_coop",
+                "result": "unverified",
+                "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+                "recorded_at": "2026-10-26T01:44:39Z",
+                "build_identity": {
+                  "name": "V48 Release development image, debug tools enabled",
+                  "image": {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v48-startup-debug\\mmx6-runtime.exe",
+                    "sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c"
+                  },
+                  "details": {
+                    "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+                    "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+                  }
+                },
+                "settings": {
+                  "roster": "X/P1 + Zero/P2",
+                  "renderer": "OpenGL shared native4:3",
+                  "input": "owned published digital host inputs",
+                  "audio": "emulated and muted dummy output"
+                },
+                "action": "Request the original audited checkpoint entry, then attempt each native ascent/landing and ordinary walking/scrolling while preserving raw partial evidence.",
+                "outcome": "Incomplete bounded terrain attempt: Checkpoint fixture failed/rejected: {'generation': 5, 'state': 5, 'reason': 4, 'stage': 6, 'section': 0, 'checkpoint': 4, 'nonce': 1708287808, 'initializer_entries': 0, 'record': '800725F4', 'tainted': 1}. Raw status failed_setup and partial checks {}. No full terrain pass or engine defect is inferred.",
+                "artifacts": [
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\qualification.json",
+                    "sha256": "f27787b192968eed4640090a4fe240fef7f439be7b1cfb3ac4dd40e8c58d8419"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\ammo-hud\\s06-a0-c04\\observations.json",
+                    "sha256": "211686c7b53a182288297216a6e767b2dc261f1ac3f9f3bf5ae3cf7a3f5ec601"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-working-stages-local-v48-root-v1\\caller-executed-source.py",
+                    "sha256": "14a55154616a39324574319a3fd22b4c8bb8986d73d12b25f49389e707982c60"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\record-native-terrain-incomplete-v48-root-v1.py",
+                    "sha256": "267fc35eda4a2647e06f79fe8df7eadea54728a2c0e4a139cf8b05b08d59fc40"
+                  }
+                ],
+                "limits": [
+                  "Setup/readiness failures and a rejected later request do not establish mechanic failure. InamiC3 retains two successful jump components but its walk loses ordinary living control; safe scrolling remains unverified.",
+                  "No inherited qualification from source50 setup records; exact V48 native/public readings and actual failed bounds remain unchanged. No netplay, whole-location, campaign or comparison qualification.",
+                  "Owned source/manifest gates, unchanged native cards, graceful0 and strict fixture-taint capture/replay refusal retained in parent; a successful parent only admits these safety gates."
+                ],
+                "bypasses": [
+                  "Original offline checkpoint initializer skips reachability; no terrain/physics/camera/HP/outcome writes."
+                ]
+              },
+              "sha256": "2d7d4c221ce90d95f92fa41f231ed0b62a294c6c911a14e97f59800ca53b2874"
+            }
+          ]
         },
         "netplay": {
           "status": "unverified",
@@ -13449,7 +13762,63 @@
       "modes": {
         "local_coop": {
           "status": "unverified",
-          "attempts": []
+          "attempts": [
+            {
+              "receipt": {
+                "case_id": "s08-a0-c00/terrain_collision_scroll",
+                "mode": "local_coop",
+                "result": "unverified",
+                "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+                "recorded_at": "2026-10-26T01:44:27Z",
+                "build_identity": {
+                  "name": "V48 Release development image, debug tools enabled",
+                  "image": {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v48-startup-debug\\mmx6-runtime.exe",
+                    "sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c"
+                  },
+                  "details": {
+                    "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+                    "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+                  }
+                },
+                "settings": {
+                  "roster": "X/P1 + Zero/P2",
+                  "renderer": "OpenGL shared native4:3",
+                  "input": "owned published digital host inputs",
+                  "audio": "emulated and muted dummy output"
+                },
+                "action": "Request the original audited checkpoint entry, then attempt each native ascent/landing and ordinary walking/scrolling while preserving raw partial evidence.",
+                "outcome": "Incomplete bounded terrain attempt: Native entry read/time budget exhausted; retain partial evidence and stop. Raw status failed_setup and partial checks {}. No full terrain pass or engine defect is inferred.",
+                "artifacts": [
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\qualification.json",
+                    "sha256": "c836151da0d6e431a5b2c7a74fd99661750241ce398ed084b8164743318b2054"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\ammo-hud\\s08-a0-c00\\observations.json",
+                    "sha256": "d4bd1c4e338d7f201a1657de912aa0872517ddca63a80d3d5f0a232e0ef78dff"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-next-six-local-v48-root-v1\\caller-executed-source.py",
+                    "sha256": "0629bd1059d61f64ec62e3c832ed391289c4b47ff32e83536c78004034a191a2"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\record-native-terrain-incomplete-v48-root-v1.py",
+                    "sha256": "267fc35eda4a2647e06f79fe8df7eadea54728a2c0e4a139cf8b05b08d59fc40"
+                  }
+                ],
+                "limits": [
+                  "Setup/readiness failures and a rejected later request do not establish mechanic failure. InamiC3 retains two successful jump components but its walk loses ordinary living control; safe scrolling remains unverified.",
+                  "No inherited qualification from source50 setup records; exact V48 native/public readings and actual failed bounds remain unchanged. No netplay, whole-location, campaign or comparison qualification.",
+                  "Owned source/manifest gates, unchanged native cards, graceful0 and strict fixture-taint capture/replay refusal retained in parent; a successful parent only admits these safety gates."
+                ],
+                "bypasses": [
+                  "Original offline checkpoint initializer skips reachability; no terrain/physics/camera/HP/outcome writes."
+                ]
+              },
+              "sha256": "f78093bc1f97785e59448d058913becf2ba4c37442cf281d9fda7fcf2ab07ad3"
+            }
+          ]
         },
         "netplay": {
           "status": "unverified",
@@ -24273,7 +24642,63 @@
       "modes": {
         "local_coop": {
           "status": "unverified",
-          "attempts": []
+          "attempts": [
+            {
+              "receipt": {
+                "case_id": "s16-a0-c00/terrain_collision_scroll",
+                "mode": "local_coop",
+                "result": "unverified",
+                "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+                "recorded_at": "2026-10-26T01:44:32Z",
+                "build_identity": {
+                  "name": "V48 Release development image, debug tools enabled",
+                  "image": {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v48-startup-debug\\mmx6-runtime.exe",
+                    "sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c"
+                  },
+                  "details": {
+                    "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+                    "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+                  }
+                },
+                "settings": {
+                  "roster": "X/P1 + Zero/P2",
+                  "renderer": "OpenGL shared native4:3",
+                  "input": "owned published digital host inputs",
+                  "audio": "emulated and muted dummy output"
+                },
+                "action": "Request the original audited checkpoint entry, then attempt each native ascent/landing and ordinary walking/scrolling while preserving raw partial evidence.",
+                "outcome": "Incomplete bounded terrain attempt: Native entry read/time budget exhausted; retain partial evidence and stop. Raw status failed_setup and partial checks {}. No full terrain pass or engine defect is inferred.",
+                "artifacts": [
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-fortress-three-local-v48-root-v1\\qualification.json",
+                    "sha256": "0e56a6b21a239aac1103d783e15175000f6086a041a3e3cd930c14c1a23503b7"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-fortress-three-local-v48-root-v1\\ammo-hud\\s16-a0-c00\\observations.json",
+                    "sha256": "34e07e683b9bfc479af859ac1fa5f950da0e274b60511fcde862cdaa93baf8f0"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-terrain-fortress-three-local-v48-root-v1\\caller-executed-source.py",
+                    "sha256": "ac3dca3e40414996806052b0b21538fae83b7bbc891023d8cfd5f65efecc0aff"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\record-native-terrain-incomplete-v48-root-v1.py",
+                    "sha256": "267fc35eda4a2647e06f79fe8df7eadea54728a2c0e4a139cf8b05b08d59fc40"
+                  }
+                ],
+                "limits": [
+                  "Setup/readiness failures and a rejected later request do not establish mechanic failure. InamiC3 retains two successful jump components but its walk loses ordinary living control; safe scrolling remains unverified.",
+                  "No inherited qualification from source50 setup records; exact V48 native/public readings and actual failed bounds remain unchanged. No netplay, whole-location, campaign or comparison qualification.",
+                  "Owned source/manifest gates, unchanged native cards, graceful0 and strict fixture-taint capture/replay refusal retained in parent; a successful parent only admits these safety gates."
+                ],
+                "bypasses": [
+                  "Original offline checkpoint initializer skips reachability; no terrain/physics/camera/HP/outcome writes."
+                ]
+              },
+              "sha256": "670ce050876d60892c8e44273896f1ca94dc26f766b9f8ec3325ffee895425a0"
+            }
+          ]
         },
         "netplay": {
           "status": "unverified",
