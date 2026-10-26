@@ -1,0 +1,280 @@
+{
+  "schema": 1,
+  "kind": "root_reviewed_actual_paired_native_card_Load_and_Amazon_C0_terrain",
+  "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+  "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0",
+  "image": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\peer-0\\mmx6-runtime.exe",
+    "sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c"
+  },
+  "manifest": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\qualification.json",
+    "sha256": "6d8d962861f78e25bc4b66134139585f21b58ef8dfdeb6cade0f642a5dd8c994"
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\Amazon-C0-terrain\\observations.json",
+    "sha256": "79040cc11e71b7b93e9eeef4bbb440d499b65d7f1bd3098c365fb003abb6dde4"
+  },
+  "cases": [
+    {
+      "physical_peer": 0,
+      "samples": 45,
+      "jumps": [
+        {
+          "seat": 0,
+          "before_y": 395.0,
+          "air_y": 383.6328125,
+          "land_y": 395.0
+        },
+        {
+          "seat": 1,
+          "before_y": 394.0,
+          "air_y": 377.3359375,
+          "land_y": 394.0
+        }
+      ],
+      "walk_dx_pixels": [
+        33.5,
+        35.5
+      ],
+      "camera_dx": 39,
+      "vertical_camera_excursions": [],
+      "images": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\Amazon-C0-terrain\\peer-0-native-arrival.png",
+          "sha256": "d0e00195523123c266b15bb25b7cd60a4c2cde2c2ca6fdf49d183bdb1cca5b57"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\Amazon-C0-terrain\\peer-0-seat0-original-ascent.png",
+          "sha256": "1263601c1b1fb0dc2cc538bb9df40602e85c36edf6288791a614c5584504831a"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\Amazon-C0-terrain\\peer-0-seat1-original-ascent.png",
+          "sha256": "b7e33c6a681db8d001fd1e3dcbfb5932afc54ec8f33159e6998286871108aa71"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\Amazon-C0-terrain\\peer-0-native-walk-scroll.png",
+          "sha256": "6ea95b16a07d40eedf7e33003e05523af9870a2cbf6833ec946581381e9e14f6"
+        }
+      ]
+    },
+    {
+      "physical_peer": 1,
+      "samples": 45,
+      "jumps": [
+        {
+          "seat": 0,
+          "before_y": 395.0,
+          "air_y": 383.6328125,
+          "land_y": 395.0
+        },
+        {
+          "seat": 1,
+          "before_y": 394.0,
+          "air_y": 377.3359375,
+          "land_y": 394.0
+        }
+      ],
+      "walk_dx_pixels": [
+        39.5,
+        41.5
+      ],
+      "camera_dx": 43,
+      "vertical_camera_excursions": [],
+      "images": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\Amazon-C0-terrain\\peer-1-native-arrival.png",
+          "sha256": "d0e00195523123c266b15bb25b7cd60a4c2cde2c2ca6fdf49d183bdb1cca5b57"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\Amazon-C0-terrain\\peer-1-seat0-original-ascent.png",
+          "sha256": "1263601c1b1fb0dc2cc538bb9df40602e85c36edf6288791a614c5584504831a"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\Amazon-C0-terrain\\peer-1-seat1-original-ascent.png",
+          "sha256": "5f7e9822cba4d5cc19ae78ba054a7fb7ed596ac887c111528afea7246f4c10b5"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\Amazon-C0-terrain\\peer-1-native-walk-scroll.png",
+          "sha256": "36686b958d21913f92b8883591117c317298a8f6ed320abb38069f895dd0cc48"
+        }
+      ]
+    }
+  ],
+  "profile": {
+    "profile": "mmx6.win64-clang22.loopback",
+    "revision": 2,
+    "selected_sha256": "dd3c7a70bdc5c88961a026b60b43541f196b22f977d5fb9cc49ea2f986a46c18",
+    "peers": [
+      {
+        "capabilities": {
+          "actual_image_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "dd3c7a70bdc5c88961a026b60b43541f196b22f977d5fb9cc49ea2f986a46c18",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      },
+      {
+        "capabilities": {
+          "actual_image_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "dd3c7a70bdc5c88961a026b60b43541f196b22f977d5fb9cc49ea2f986a46c18",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      }
+    ]
+  },
+  "matching_resolved_crc_samples": 35,
+  "matching_resolved_crc_samples_after_terrain": 2,
+  "native_Load_checks": {
+    "original_source_and_empty_CURRENT_title": true,
+    "earned_8192Bfile_and_slot_exact": true,
+    "actual_native_slot_confirmation_inputs": true,
+    "all_source_campaign_fields_in_native_CURRENT": true,
+    "every_peer_same_CURRENT": true,
+    "whole_startup_cards_unchanged_in_process": true
+  },
+  "native_reentry_checks": {
+    "actual_primary_final_quit_and_title": true,
+    "source_bound_native_frontend_route": true,
+    "fresh_native_x_zero_reentry": true,
+    "guest_owned_menu_resources_and_controls_restored": true,
+    "resolved_core_mod_crc_completed": true
+  },
+  "recordings": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\peer-0\\saves\\input-recordings\\session-1792980766069658-1-0\\inputs.jsonl",
+      "sha256": "4c5e35d061fea32516b43debdfa44908c86fcbbe81ca4fe4043324c663e8b003",
+      "events": 30685,
+      "failure": null,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7801a0d2fe8ef077955e20541c834d9d91892717df588d9f49dbc8565ce95d29"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+        "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+        "mode": "netplay",
+        "profile": {
+          "id": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "dd3c7a70bdc5c88961a026b60b43541f196b22f977d5fb9cc49ea2f986a46c18"
+        },
+        "settings_sha256": "678ea0742d375e120ec86c29053b60d74181951ceb43831bbca670a5875771e6",
+        "simulation_contract_sha256": "8ef4d825a83e8a854f9f521093b9b028a6f8207bafe3d51a01225eea6c8cf591"
+      }
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\peer-1\\saves\\input-recordings\\session-1792980766070099-1-0\\inputs.jsonl",
+      "sha256": "84b45dd368ceb77f10b13ca9760f2116ce0667f800e38e0f64b3c373440320cb",
+      "events": 30688,
+      "failure": null,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7801a0d2fe8ef077955e20541c834d9d91892717df588d9f49dbc8565ce95d29"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c",
+        "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+        "mode": "netplay",
+        "profile": {
+          "id": "mmx6.win64-clang22.loopback",
+          "revision": 2,
+          "selected_sha256": "dd3c7a70bdc5c88961a026b60b43541f196b22f977d5fb9cc49ea2f986a46c18"
+        },
+        "settings_sha256": "8675b5fc560c2a45be3bb48e46e7b3e21c76f071a18c8809038a7e664fd28605",
+        "simulation_contract_sha256": "8ef4d825a83e8a854f9f521093b9b028a6f8207bafe3d51a01225eea6c8cf591"
+      }
+    }
+  ],
+  "owned_exits": [
+    {
+      "pid": 22604,
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    },
+    {
+      "pid": 6360,
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    }
+  ],
+  "all_source_and_active_cards_preserved": true,
+  "root_visual_review": {
+    "all8_inspected": true,
+    "contact_sheet": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-Amazon-paired-v48-root-visual-v1.png",
+      "sha256": "e1ea8d6463da8a8d1cd222e25f9149002e4c390eb28add162067a5cf68800349"
+    },
+    "observation": "Both physical peers show coherent original grass/platform scenery and blue X/red Zero, each owned jump with partner stationary, then both heroes moving with actual scenery/camera scrolling."
+  },
+  "current_consumer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-card-consumer-v48-root-v1.json",
+    "sha256": "7d4430b7dffa0aac19976b5744392704360a82df24ff1e4da338aaee11c5da5c"
+  },
+  "current_consumer_config": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-default-consumer-v48-root-v1.json",
+    "sha256": "559f34b2b4a6d4616fb6d1895898dc3fc7c406bf2167852f437ee47772bb033f"
+  },
+  "executed_caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\caller-executed-source.py",
+    "sha256": "b6a83bc6968ca01b4b4e910f3512cd95f2e98b7d5e862177a8c584f79789300c"
+  },
+  "prior_failed_parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v1\\qualification.json",
+    "sha256": "e835e0de7268ddf4e4227ceeec42bd41afbae99520eaa48732e7d47ad3d94031"
+  },
+  "limits": [
+    "Exact V48 e0fdd1e/SDK7cb474, X/P1 plus Zero/P2, native Amazon C0, shared native4:3 OpenGL, same-machine direct127 delay3 Win64 loopback revision2 only.",
+    "Original reviewed FF_QA card was saved by original native game after a disclosed offline inventory prerequisite. Both fresh owned prelaunch profiles receive immutable copies; current consumer identity is independently checked. No acquired-weapons/progress, native Save, replay or cross-build execution-state compatibility claim.",
+    "The original title Load, selected8192B file/slot, full campaign import/CURRENT agreement, source-checked story dialogue, real selector/Falcon choice, mission arrival and guest menu/control all complete before terrain checks. No in-session fixture, snapshot, HP, position, collision, camera or result writes.",
+    "Bounded per-checkpoint terrain only: actual independent ascents/original ground landings and accepted walking/horizontal camera scrolling. No whole-stage, other-mechanic, audio, private-view or234comparison pass.",
+    "Typed body publications, ordinary PLAY/camera and captures are nearby separate observations; no instruction-atomic whole-machine claim. All8 terrain composed images inspected, not an all-art pixel comparison.",
+    "Failed v1 parent remains failed: native Load completed but caller omitted reviewed map9/source_bound_progress hook and baseline capture. No flags or failed report were rewritten. V2 reuses original reviewed hooks, actual pre-route card baseline and requires full native helper completion before setting its completion flag."
+  ],
+  "curator": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\curate-native-card-Amazon-paired-v48-root-v1.py",
+    "sha256": "8dbb4609d0e9469fb915d72566c5dd702b9eb2c616ba521ea281fa500054db7c"
+  }
+}

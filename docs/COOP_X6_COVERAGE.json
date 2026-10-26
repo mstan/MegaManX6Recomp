@@ -3702,8 +3702,93 @@
           ]
         },
         "netplay": {
-          "status": "unverified",
-          "attempts": []
+          "status": "passed",
+          "attempts": [
+            {
+              "receipt": {
+                "case_id": "s01-a0-c00/terrain_collision_scroll",
+                "mode": "netplay",
+                "result": "passed",
+                "candidate": "e0fdd1eb5a1d7d1f2613de808612ee5b21cbfd70",
+                "recorded_at": "2026-10-26T02:34:27Z",
+                "build_identity": {
+                  "name": "V48 Release development image with actual same-machine Win64 profile",
+                  "image": {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\peer-0\\mmx6-runtime.exe",
+                    "sha256": "820e1b2a65c7aac4fbe688d9046977e87753728045edadb4291c7aff6c62af8c"
+                  },
+                  "details": {
+                    "manifest_sha256": "7f35566c8c6fcc7356adba62705ec8771d0e69ba98e2e3a46e7fd01f07274fe9",
+                    "sdk": "7cb474254b64851d8ab8ba20ccb0f50949e7c4c0"
+                  }
+                },
+                "settings": {
+                  "roster": "X/P1 + Zero/P2, original Falcon1 selected",
+                  "renderer": "shared native4:3 OpenGL",
+                  "loader": "default Seamless Loading",
+                  "input": "two actual LOCALport1 published keyboard slots, logicalseat0/1",
+                  "network": "same-machine direct127delay3, Win64 loopback revision2",
+                  "audio": "emulated and muted dummy output"
+                },
+                "action": "Before launch seed reviewed native FF_QA cards, complete original native title Load/story/selector/mission arrival, jump each hero independently and retain actual ground collision/landing, then walk both and observe actual horizontal camera scrolling independently on both physical peers.",
+                "outcome": "Both physical peers pass both owned jump/ground landings with the other hero stationary, then both native walks and camera advance. All8 composed terrain images reviewed. Exact source/SDK/compiledmanifest/profile,35matching resolved CRCsamples including2afterterrain, two finalized ordinary recordings, all preserved cards and both owned exits0 pass. Exact candidate matches the retained local result.",
+                "artifacts": [
+                  {
+                    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-content\\manifest-bound-e0fdd1e-Amazon-C0-native-card-netplay-terrain-reviewed.json",
+                    "sha256": "9a880fa657ac4050cf00796db85eb411e8b04d5eb4309352ea138379f155c3c5"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\Amazon-C0-terrain\\observations.json",
+                    "sha256": "79040cc11e71b7b93e9eeef4bbb440d499b65d7f1bd3098c365fb003abb6dde4"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\Amazon-C0-terrain\\peer-0-native-arrival.png",
+                    "sha256": "d0e00195523123c266b15bb25b7cd60a4c2cde2c2ca6fdf49d183bdb1cca5b57"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\Amazon-C0-terrain\\peer-0-seat0-original-ascent.png",
+                    "sha256": "1263601c1b1fb0dc2cc538bb9df40602e85c36edf6288791a614c5584504831a"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\Amazon-C0-terrain\\peer-0-seat1-original-ascent.png",
+                    "sha256": "b7e33c6a681db8d001fd1e3dcbfb5932afc54ec8f33159e6998286871108aa71"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\Amazon-C0-terrain\\peer-0-native-walk-scroll.png",
+                    "sha256": "6ea95b16a07d40eedf7e33003e05523af9870a2cbf6833ec946581381e9e14f6"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\Amazon-C0-terrain\\peer-1-native-arrival.png",
+                    "sha256": "d0e00195523123c266b15bb25b7cd60a4c2cde2c2ca6fdf49d183bdb1cca5b57"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\Amazon-C0-terrain\\peer-1-seat0-original-ascent.png",
+                    "sha256": "1263601c1b1fb0dc2cc538bb9df40602e85c36edf6288791a614c5584504831a"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\Amazon-C0-terrain\\peer-1-seat1-original-ascent.png",
+                    "sha256": "5f7e9822cba4d5cc19ae78ba054a7fb7ed596ac887c111528afea7246f4c10b5"
+                  },
+                  {
+                    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-FF-R6-native-stage-v48-root-v2\\Amazon-C0-terrain\\peer-1-native-walk-scroll.png",
+                    "sha256": "36686b958d21913f92b8883591117c317298a8f6ed320abb38069f895dd0cc48"
+                  }
+                ],
+                "limits": [
+                  "Exact V48 e0fdd1e/SDK7cb474, X/P1 plus Zero/P2, native Amazon C0, shared native4:3 OpenGL, same-machine direct127 delay3 Win64 loopback revision2 only.",
+                  "Original reviewed FF_QA card was saved by original native game after a disclosed offline inventory prerequisite. Both fresh owned prelaunch profiles receive immutable copies; current consumer identity is independently checked. No acquired-weapons/progress, native Save, replay or cross-build execution-state compatibility claim.",
+                  "The original title Load, selected8192B file/slot, full campaign import/CURRENT agreement, source-checked story dialogue, real selector/Falcon choice, mission arrival and guest menu/control all complete before terrain checks. No in-session fixture, snapshot, HP, position, collision, camera or result writes.",
+                  "Bounded per-checkpoint terrain only: actual independent ascents/original ground landings and accepted walking/horizontal camera scrolling. No whole-stage, other-mechanic, audio, private-view or234comparison pass.",
+                  "Typed body publications, ordinary PLAY/camera and captures are nearby separate observations; no instruction-atomic whole-machine claim. All8 terrain composed images inspected, not an all-art pixel comparison.",
+                  "Failed v1 parent remains failed: native Load completed but caller omitted reviewed map9/source_bound_progress hook and baseline capture. No flags or failed report were rewritten. V2 reuses original reviewed hooks, actual pre-route card baseline and requires full native helper completion before setting its completion flag."
+                ],
+                "bypasses": [
+                  "Original reviewed FF_QA card includes disclosed offline inventory prerequisite; copied only before Popen and imported by native Load. No acquisition proof."
+                ]
+              },
+              "sha256": "b1e40159e5de5a1b1dcf1028dd6a2c02bb8acbb1b13cbf7e0ea232c800954e62"
+            }
+          ]
         }
       }
     },
