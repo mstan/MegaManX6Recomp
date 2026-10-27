@@ -7,7 +7,26 @@ enum { VIEW_CAMERA=0x800971F8u, VIEW_BUFFER=0x800C4578u,
 static uint8_t view_cameras[2][0xFC];
 static uint32_t view_frame, view_buffer, view_ot[32];
 static unsigned view_valid, view_pending;
-static void independent_invalidate(void) { view_valid=view_pending=0; }
+static unsigned view_menu_history;
+static uint8_t view_menu_stage,view_menu_section,view_menu_checkpoint;
+static void independent_invalidate(void) { view_valid=view_pending=view_menu_history=0; }
+
+/* A native personal menu suspends the world but diagnostics keep publishing.
+ * Preserve the guest camera's history, never a stale rendered image. A scene,
+ * life, room/checkpoint or load boundary still discards that history. */
+static int independent_menu_context(void) {
+    return enrolled && !failed && !scene_owner && psx_mod_read_byte(PLAY)==10 &&
+        life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE;
+}
+static void independent_menu_begin(void) {
+    if(private_draw || !independent_views || !view_valid || view_menu_history ||
+       pause_owner<0 || !independent_menu_context() ||
+       (psx_mod_read_byte(PLAY+1)!=0 && psx_mod_read_byte(PLAY+1)!=2))return;
+    view_menu_stage=psx_mod_read_byte(PLAY+12);
+    view_menu_section=psx_mod_read_byte(PLAY+13);
+    view_menu_checkpoint=psx_mod_read_byte(PLAY+0x1D);
+    view_menu_history=1;
+}
 
 /* Immutable texture banks may grow while drawing. All mutable co-op host
  * context is restored after each pane, and again after an aborted callback.
@@ -58,20 +77,27 @@ static void private_context_restore(const PrivateViewContext *s) {
 static void independent_world_begin(void) {
     if(private_draw || !independent_views)return;
     view_pending=0;
+    int menu_history=view_menu_history && independent_menu_context() &&
+        psx_mod_read_byte(PLAY+12)==view_menu_stage &&
+        psx_mod_read_byte(PLAY+13)==view_menu_section &&
+        psx_mod_read_byte(PLAY+0x1D)==view_menu_checkpoint;
     if(!enrolled || failed || inside || zero_world || scene_owner || pause_owner>=0 ||
        psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
        psx_mod_read_byte(PLAY+0x10) || coop_world_hold() ||
        life.status[0]!=MMX6_COOP_ALIVE ||
        (life.status[1]!=MMX6_COOP_ALIVE && life.status[1]!=MMX6_COOP_JOINING)) {
-        view_valid=0;return;
+        if(!menu_history || (pause_owner<0 && psx_mod_read_byte(PLAY+1)!=2))
+            independent_invalidate();
+        return;
     }
     uint32_t buffer=psx_mod_read_word(0x8009B7A0u);
     if(buffer!=VIEW_BUFFER && buffer!=VIEW_BUFFER+VIEW_STRIDE)return;
-    if(!view_valid || frame_count!=view_frame+1) {
+    if(!view_valid || (!menu_history && frame_count!=view_frame+1)) {
         capture(VIEW_CAMERA,view_cameras[0],sizeof view_cameras[0]);
         memcpy(view_cameras[1],view_cameras[0],sizeof view_cameras[0]);
         view_valid=1;
     }
+    view_menu_history=0;
     /* Always take authored room/mode/atlas fields from this world's update.
      * Only the other camera's current/previous positions retain its history. */
     for(unsigned layer=0;layer<3;++layer) {
@@ -153,7 +179,7 @@ static void independent_activate(void) {
     char option[24];int online=psx_mod_netplay_is_active();
     local_split=!online && psx_mod_current_option_value("local_cameras",option,sizeof option) && !strcmp(option,"split");
     independent_views=local_split || (online && psx_mod_current_option_value("cameras",option,sizeof option) && !strcmp(option,"independent"));
-    private_draw=private_seat=view_valid=view_pending=view_call=0;
+    private_draw=private_seat=view_valid=view_pending=view_call=view_menu_history=0;
     view_frame=view_buffer=0;memset(view_cameras,0,sizeof view_cameras);
     if(independent_views)(void)psx_mod_set_fixed_display_aspect(4,3);
     (void)psx_mod_set_local_pair_presentation((int)local_split);
@@ -162,6 +188,7 @@ static void independent_activate(void) {
 #else
 /* Older SDKs retain the working shared renderer. */
 static void independent_invalidate(void) {}
+static void independent_menu_begin(void) {}
 static void independent_world_begin(void) {}
 static void independent_activate(void) { independent_views=local_split=private_draw=private_seat=0; }
 #endif

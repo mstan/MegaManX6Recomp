@@ -127,6 +127,7 @@ static int intro_target_call;
 /* Elective independent presentation. The canonical world still runs once. */
 static unsigned independent_views, local_split, private_draw, private_seat, view_call;
 static void independent_invalidate(void);
+static void independent_menu_begin(void);
 static void independent_world_begin(void);
 #include "mmx6_coop_state_track.h"
 #ifdef MMX6_COOP_MODERN_STATE
@@ -1378,6 +1379,7 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
         life.select_frames=0;
         if (pause_owner<0) pause_owner=mmx6_coop_living(&life,0)?0:1;
     }
+    independent_menu_begin();
     int survivor=(!life.wipe || life.wipe==2) &&
         (life.status[0]==MMX6_COOP_DYING || life.status[0]==MMX6_COOP_FALLEN) &&
         life.status[1]!=MMX6_COOP_ABSENT && (life.wipe || life.status[1]!=MMX6_COOP_FALLEN);

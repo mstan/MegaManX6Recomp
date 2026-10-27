@@ -59,7 +59,7 @@ static void prepare_view(CPUState *cpu,int online,int split) {
     arrival_probe=arrival_camera_calls=0;
     inside=player_call=stage_call=zero_world=world_render=hud_call=ride_call=pickup_call=solid_call=0;
     private_draw=private_seat=view_call=zero_projected=0;local_split=split;independent_views=1;
-    view_buffer=VIEW_BUFFER;view_pending=view_valid=1;
+    view_buffer=VIEW_BUFFER;view_pending=view_valid=1;view_menu_history=0;
     psx_mod_write_word(0x8009B7A0u,view_buffer);
     psx_mod_write_half(view_buffer+0x18,320);psx_mod_write_half(view_buffer+0x1A,240);
     cpu->gpr[31]=0x80012128u;cpu->gpr[4]=view_buffer+0xEC;
@@ -158,9 +158,53 @@ static void arrival_refusals(void) {
         independent_world_begin();CHECK(!view_pending && !view_valid && !view_native_calls);
     }
 }
+static void native_menu_camera_history(int online,int split) {
+    for(int owner=0;owner<2;++owner)for(unsigned boundary=0;boundary<8;++boundary) {
+        CPUState cpu;prepare_view(&cpu,online,split);
+        memset(view_cameras[1],0x53,sizeof view_cameras[1]);
+        memset(ram+(VIEW_CAMERA&0x1FFFFFu),0x27,sizeof view_cameras[0]);
+        uint8_t prior[sizeof view_cameras[1]];memcpy(prior,view_cameras[1],sizeof prior);
+        view_frame=10;frame_count=11;pause_owner=owner;
+        independent_menu_begin();CHECK(view_menu_history);
+        psx_mod_write_byte(PLAY+1,2);
+        for(unsigned frame=0;frame<20;++frame) {
+            ++frame_count;independent_world_begin();
+            CHECK(!view_pending && view_valid && view_menu_history && !view_native_calls);
+            CHECK(!memcmp(prior,view_cameras[1],sizeof prior));
+        }
+        if(boundary==1)psx_mod_write_byte(PLAY+12,1);
+        if(boundary==2)psx_mod_write_byte(PLAY+13,1);
+        if(boundary==3)psx_mod_write_byte(PLAY+0x1D,1);
+        if(boundary==4)scene_owner=1;
+        if(boundary==5)life.status[1]=MMX6_COOP_ABSENT;
+        if(boundary==6)independent_invalidate(); /* current-build load */
+        if(boundary==7)psx_mod_write_byte(PLAY+0x1C,1);
+        psx_mod_write_byte(PLAY+1,0);pause_owner=-1;++frame_count;
+        independent_world_begin();
+        if(boundary==4 || boundary==5 || boundary==7) {
+            CHECK(!view_pending && !view_valid && !view_menu_history);continue;
+        }
+        CHECK(view_pending && view_valid && !view_menu_history);
+        for(unsigned layer=0;layer<3;++layer) {
+            uint8_t actual[0x54];capture(VIEW_CAMERA+layer*0x54,actual,sizeof actual);
+            CHECK(!memcmp(view_cameras[1]+layer*0x54,actual,8));
+            CHECK(!memcmp(view_cameras[1]+layer*0x54+0x1C,actual+0x1C,0x38));
+            CHECK(!memcmp(view_cameras[1]+layer*0x54+8,
+                boundary?actual+8:prior+layer*0x54+8,0x14));
+        }
+        PrivateViewContext saved;memset(&saved,0,sizeof saved);private_context_save(&saved);
+        CHECK(independent_present(&cpu,VIEW_DRAW_OT));context_equal(&saved);
+    }
+    CPUState cpu;prepare_view(&cpu,online,split);
+    view_frame=1;frame_count=50;memset(view_cameras[1],0x53,sizeof view_cameras[1]);
+    independent_world_begin();uint8_t canonical[sizeof view_cameras[1]];
+    capture(VIEW_CAMERA,canonical,sizeof canonical);
+    CHECK(!memcmp(canonical,view_cameras[1],sizeof canonical)); /* unexplained gap still resets */
+}
 int main(void) {
     defaults_and_scope();reentry();native_arrival(0,1);native_arrival(1,0);arrival_refusals();
     native_nova_views(0,1);native_nova_views(1,0);
+    native_menu_camera_history(0,1);native_menu_camera_history(1,0);
     presentation_restore(0,1,0,0);presentation_restore(0,1,1,0);presentation_restore(0,1,0,1);
     presentation_restore(1,0,0,0);presentation_restore(1,0,1,0);presentation_restore(1,0,0,1);
     clear_banks();puts("private-view typed defaults, scope, callback/abort host restoration and reentry contracts passed (modeled rendering)");return 0;
