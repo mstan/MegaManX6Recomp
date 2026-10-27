@@ -4303,8 +4303,37 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "f7b7383577e9c52ccc001e2559bb02ba3e5ffd51",
+            "build_identity": {
+              "executable_sha256": "2d510ce79ea4312cc6b3697d33ff44cf66c0791adeed7093fb8f9258d3ac2c52",
+              "compiled_manifest_sha256": "7f8c5d19025ec4828feb88e4b8f84f1e5cc17dfabb9409788949378144983b96",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "route": "ordinary native coldintro CP0, accepted two-pad inputs",
+              "audio": "muted dummy"
+            },
+            "action": "Walk/jump to original upper-floor edge; attempt Select90 departure/absence/fresh native return with fullfoot/resource/world guards.",
+            "outcome": "V1 idle stored-velocity assumption corrected by native source; V2 earns actual edge and lifecycle but original enemyhurt/knockback invalidates stable primaryedge during return. Sample cap and owned termination follow; no pass or gameplayfailure. Parked after two current setups.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-lifecycle/manifest-bound-f7b7383-R25-local-setups-deferred.json",
+                "sha256": "f765cf4857ae085c89a61dc3337171547eff09b376250c0b2762b33e4e668692"
+              }
+            ],
+            "limits": [
+              "Only R25 setup and measurement evidence, not safearrival/resource-preservation/world-cadence/currentbuild replay or nativecontent qualification. Sourcebox/grounding knowledge is retained; no native runtime credit from source alone.",
+              "All ordinary recordings, native cards, logs, failed/completedraw and executing source remain in owned scratch; original dirtyHUD/V47 preserved. No push, PR, remote sync, delivery or native source change."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "LOCAL exactf7b7383 two current setup attempts retained/deferred: nativeidle stored24 falseguard fixed in observer; second reaches actual upperedge/Select90/absence/freshJOIN, then originalenemyhurt/knockback invalidates prepared stationaryedge before return. Later500samplecap/ownedtermination1. No nativearrival verdict, no NET or aggregatecredit; futureclear actual threat throughnativegameplay and fail promptlyonhurt."
       }
     },
     {

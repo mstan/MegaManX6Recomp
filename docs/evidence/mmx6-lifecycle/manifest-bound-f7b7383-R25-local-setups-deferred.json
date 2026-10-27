@@ -1,0 +1,413 @@
+{
+  "schema": 1,
+  "comparison": "R25",
+  "frozen_row_sha256": "738647fb6fc6462d6b90ebe5eb46fe08966d75d7225fed5d9b73cdd49ce5d9c7",
+  "result": "unverified",
+  "candidate": "f7b7383577e9c52ccc001e2559bb02ba3e5ffd51",
+  "cases": [
+    {
+      "attempt": 1,
+      "owned_session": 85203,
+      "root_exit_code": 1,
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-native-edge-local-v68-root-v1\\qualification.json",
+        "bytes": 1381559,
+        "sha256": "4d3c5640ca28df9c299d9bf48e21e2364169359b39b397a082d9e00e56c5531a"
+      },
+      "raw": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-native-edge-local-v68-root-v1\\hud\\observations.json",
+        "bytes": 1130718,
+        "sha256": "bc81ff620d05dcfcb2bd44acb5a74cd1eb483516eddbf3d7c1386455f48bf16f"
+      },
+      "observer": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-native-edge-local-v68-root-v1\\mmx6_R25_native_edge_v68_worker_v1.py.executed",
+        "bytes": 18389,
+        "sha256": "02c9717fc50e2df0ca40b0d10dacbe3e8d502ab43bf295c4300a742c25f6fe44"
+      },
+      "caller": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-native-edge-local-v68-root-v1\\caller-executed-source.py",
+        "bytes": 8539,
+        "sha256": "38432bae69dca477aeb10a1f6571590b2792602bb1367af9c7f235d1a720b3a3"
+      },
+      "error": "cold intro lower-floor idle after mandatory baseline timed out",
+      "samples": 323,
+      "initial": {
+        "schema": 1,
+        "tick": 152,
+        "sequence": 304,
+        "native_timer": 151,
+        "lifecycle": [
+          0,
+          0
+        ],
+        "pause_owner": 0,
+        "scene_owner": 0,
+        "scene_phase": 0,
+        "mailbox": 0,
+        "ready": 1,
+        "enrolled": 1,
+        "failed": 0,
+        "native_mode": 10,
+        "native_phase": 0,
+        "host_digest": 3726487698,
+        "host_digest_algorithm": 1,
+        "players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 9437184,
+            "y_raw": 73072640,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 11010048,
+            "y_raw": 73007104,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "framework_digest_registered": 0
+      },
+      "final": {
+        "schema": 1,
+        "tick": 749,
+        "sequence": 1498,
+        "native_timer": 748,
+        "lifecycle": [
+          0,
+          0
+        ],
+        "pause_owner": 0,
+        "scene_owner": 0,
+        "scene_phase": 0,
+        "mailbox": 0,
+        "ready": 1,
+        "enrolled": 1,
+        "failed": 0,
+        "native_mode": 10,
+        "native_phase": 0,
+        "host_digest": 1602121924,
+        "host_digest_algorithm": 1,
+        "players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 9437184,
+            "y_raw": 73072640,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 11010048,
+            "y_raw": 73007104,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "framework_digest_registered": 0
+      },
+      "owned_cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "private_cards_unchanged": true,
+      "standing_intervals": [],
+      "captures": []
+    },
+    {
+      "attempt": 2,
+      "owned_session": 70038,
+      "root_exit_code": 1,
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-native-edge-local-v68-root-v2\\qualification.json",
+        "bytes": 2085430,
+        "sha256": "ed91695a4a0431ba5cfdc1f359adff917130b669ce8a1a2063934f0cb2df923a"
+      },
+      "raw": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-native-edge-local-v68-root-v2\\hud\\observations.json",
+        "bytes": 1772987,
+        "sha256": "eeca0e1c16d39cca7b7a1bf426cbe9484e811b14a0f7e8df56a91fc19f65a1ee"
+      },
+      "observer": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-native-edge-local-v68-root-v2\\mmx6_R25_native_edge_v68_worker_v2.py.executed",
+        "bytes": 20691,
+        "sha256": "4c219ed02512d7ba897960a3d1ae40feab1eb8976106593f34341bf865f15244"
+      },
+      "caller": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-native-edge-local-v68-root-v2\\caller-executed-source.py",
+        "bytes": 8539,
+        "sha256": "7815901b98a7e981bdf132c2d2b0e1648ae0b555672086ffa59480481856a68c"
+      },
+      "error": "R25 bounded native observation expired",
+      "samples": 500,
+      "initial": {
+        "schema": 1,
+        "tick": 155,
+        "sequence": 310,
+        "native_timer": 154,
+        "lifecycle": [
+          0,
+          0
+        ],
+        "pause_owner": 0,
+        "scene_owner": 0,
+        "scene_phase": 0,
+        "mailbox": 0,
+        "ready": 1,
+        "enrolled": 1,
+        "failed": 0,
+        "native_mode": 10,
+        "native_phase": 0,
+        "host_digest": 3541876571,
+        "host_digest_algorithm": 1,
+        "players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 9437184,
+            "y_raw": 73072640,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 11010048,
+            "y_raw": 73007104,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "framework_digest_registered": 0
+      },
+      "final": {
+        "schema": 1,
+        "tick": 1013,
+        "sequence": 2026,
+        "native_timer": 1012,
+        "lifecycle": [
+          0,
+          0
+        ],
+        "pause_owner": 0,
+        "scene_owner": 0,
+        "scene_phase": 0,
+        "mailbox": 0,
+        "ready": 1,
+        "enrolled": 1,
+        "failed": 0,
+        "native_mode": 10,
+        "native_phase": 0,
+        "host_digest": 1020853834,
+        "host_digest_algorithm": 1,
+        "players": [
+          {
+            "active": 1,
+            "character": 0,
+            "state": 1,
+            "action": 2,
+            "hp": 29,
+            "x_raw": 19804160,
+            "y_raw": 73072640,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          },
+          {
+            "active": 1,
+            "character": 1,
+            "state": 1,
+            "action": 2,
+            "hp": 32,
+            "x_raw": 20979712,
+            "y_raw": 70909952,
+            "weapon": 0,
+            "ammo": [
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288,
+              288
+            ]
+          }
+        ],
+        "framework_digest_registered": 0
+      },
+      "owned_cleanup": {
+        "natural_exit_timeout": {
+          "type": "TimeoutExpired",
+          "message": "Command '['G:\\\\Temp\\\\Codex\\\\psxrecomp\\\\x6-parity\\\\R25-native-edge-local-v68-root-v2\\\\candidate\\\\mmx6-runtime.exe', '--game', 'G:\\\\Temp\\\\Codex\\\\psxrecomp\\\\x6-parity\\\\R25-native-edge-local-v68-root-v2\\\\candidate\\\\game.toml', '--memcard-dir', 'G:\\\\Temp\\\\Codex\\\\psxrecomp\\\\x6-parity\\\\R25-native-edge-local-v68-root-v2\\\\candidate\\\\saves', '--seal-interpreted-overlays', '--hidden-window', '--debug-port', '27105']' timed out after 5 seconds"
+        },
+        "shutdown": "owned_popen_terminated",
+        "exit_code": 1
+      },
+      "private_cards_unchanged": true,
+      "standing_intervals": [
+        {
+          "first": 0,
+          "last": 6,
+          "label": "cold intro lower-floor idle after mandatory baseline",
+          "native_updates": [
+            8
+          ]
+        },
+        {
+          "first": 83,
+          "last": 87,
+          "label": "native upper-floor grounding",
+          "native_updates": [
+            8
+          ]
+        },
+        {
+          "first": 103,
+          "last": 106,
+          "label": "both peer observations settle full primary foot beside real edge",
+          "native_updates": [
+            6
+          ]
+        }
+      ],
+      "captures": [
+        {
+          "peer": 0,
+          "foot_row": 106,
+          "label": "actual-primary-full-feet-near-edge",
+          "surface": "composed_renderer_output",
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-native-edge-local-v68-root-v2\\hud\\peer-0-actual-primary-full-feet-near-edge.png",
+          "sha256": "78af7c5acd84623dcc8fbc1c6df6e9964b8a28adb5d02dec44560eb394eb3747",
+          "before": {
+            "id": 1774,
+            "ok": true,
+            "seq": 0,
+            "wrote": 0
+          },
+          "acknowledgement": {
+            "id": 1775,
+            "ok": true,
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-native-edge-local-v68-root-v2\\hud\\peer-0-actual-primary-full-feet-near-edge.png",
+            "staged": true,
+            "seq": 0
+          },
+          "completion": {
+            "id": 1776,
+            "ok": true,
+            "seq": 1,
+            "wrote": 1
+          }
+        }
+      ]
+    }
+  ],
+  "source_correction": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R25-native-edge-v68-worker-v2-correction.txt",
+    "bytes": 2307,
+    "sha256": "925ac15700a823c1c7fbcad29e0c47b518a37df532d034153f9ef198cc465970"
+  },
+  "findings": [
+    "V1 reached source-correct native idle CP0 but wrongly demanded inactive body+24 velocity0. Ground8/air0/action2/zeroYfraction/fullfeet1136 and unchanged positions persisted597 actual native updates. Original floor/idle never require this storage be cleared; V2 corrects observer only and preserves V1.",
+    "V2 earned ordinary native jump/walk/upper edge, stable full standing feet1104, true Select90 departure/absence/fresh JOIN. Subsequent original primaryhurt32->29 and knockback from prepared edge to302.1875/lowerfloor invalidated required stationary fullfoot edge interval before return settled. Guest laterALIVE320.125/1082; that is not a qualified edge arrival result.",
+    "V2 then reached500sample cap waiting for invalidated precondition, and finaldebugquit required owned termination exit1. Wholeparent fails setup/cleanup. No NET launched and no mechanics verdict/aggregate credit inferred.",
+    "Park after two current attempts. A future run must clear the actual authored threat through native gameplay before the measured edge interval and reject intervening hurt/position change promptly; no blind retry, protection/success writes or weakened collision/resource gates."
+  ],
+  "limits": [
+    "Only R25 setup and measurement evidence, not safearrival/resource-preservation/world-cadence/currentbuild replay or nativecontent qualification. Sourcebox/grounding knowledge is retained; no native runtime credit from source alone.",
+    "All ordinary recordings, native cards, logs, failed/completedraw and executing source remain in owned scratch; original dirtyHUD/V47 preserved. No push, PR, remote sync, delivery or native source change."
+  ]
+}

@@ -42,6 +42,13 @@ states; old-state migration is never required.
 
 ## Current qualification status, October 26
 
+R25 remains unverified after [two retained LOCAL setups](evidence/mmx6-lifecycle/manifest-bound-f7b7383-R25-local-setups-deferred.json).
+The second reaches the native platform edge and actual withdrawal/return,
+but enemy hurt knocks the primary off the prepared edge before completion.
+No paired attempt follows; clear the authored threat before a future measured
+interval. The first observer's inactive-velocity assumption is corrected from
+native source; it was a setup measurement error. Counts stay56/5/173.
+
 **F53 is closed:56 passed /5 failed /173 unverified (23.9%).**
 The [independent intro-door crash review](evidence/mmx6-lifecycle/manifest-bound-f7b7383-F53-native-intro-admission-local-netplay-reviewed.json)
 binds the actual V68 LOCAL/NET guest admission, live32HP boss and
