@@ -231,8 +231,8 @@ static void native_shared_weather_frames(int online,int split) {
         psx_mod_write_word(VIEW_CAMERA+0x54+12,weather_y);
         psx_mod_write_byte(VIEW_CAMERA+0x54+0x4C,1);
         independent_world_begin();CHECK(view_pending && view_valid);
-        CHECK(get32(view_cameras[1]+8)==123u*65536);
-        CHECK(get32(view_cameras[1]+2*0x54+8)==47u*65536);
+        CHECK(le32(view_cameras[1]+8)==123u*65536);
+        CHECK(le32(view_cameras[1]+2*0x54+8)==47u*65536);
         weather_probe=1;CHECK(independent_present(&cpu,VIEW_DRAW_OT));weather_probe=0;
         CHECK(weather_world_updates==phase+1 && weather_draws==(phase+1)*(split?2u:1u));
         CHECK(psx_mod_read_word(VIEW_CAMERA+0x54+8)==weather_x);
@@ -247,7 +247,7 @@ static void native_shared_weather_frames(int online,int split) {
         psx_mod_write_byte(VIEW_CAMERA+0x54+4,other==2?4:5);
         put32(view_cameras[1]+0x54+8,99u*65536);
         psx_mod_write_word(VIEW_CAMERA+0x54+8,0);
-        independent_world_begin();CHECK(get32(view_cameras[1]+0x54+8)==99u*65536);
+        independent_world_begin();CHECK(le32(view_cameras[1]+0x54+8)==99u*65536);
     }
 }
 int main(void) {
