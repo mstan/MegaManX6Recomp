@@ -140,6 +140,12 @@ static void snapshot_assets_loaded(const Mmx6AssetView *views,unsigned count);
 #endif
 
 static int scene_passenger(unsigned seat) { return scene_phase && scene_owner!=seat+1; }
+/* Both ALIVE actors produce phase0 together only after authenticated Both
+ * door admission. Other native scenes use the existing passenger phases. */
+static int both_door_traversal_active(void) {
+    return both_doors && scene_owner && !scene_phase && pause_owner<0 &&
+        life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE;
+}
 
 static void put32(uint8_t *p, uint32_t v) {
     for (unsigned i=0;i<4;++i) p[i]=(uint8_t)(v>>(8*i));
@@ -1070,7 +1076,19 @@ static int door_begin(CPUState *cpu, uint32_t address) {
         /* Both bodies already passed the original native eligibility. Keep
          * the native scene lock, without withdrawing/rejoining a passenger.
          * Other doors, portals and scripted scenes retain their own policy. */
-        if (both_doors) scene_phase=0;
+        if (both_doors) {
+            scene_phase=0;
+            /* Native AI admitted every living original body box, but sets
+             * D4 only on its resident player. Give the other admitted body
+             * that same native traversal request. Its own original player
+             * controller performs the walk; never copy a position/pose or
+             * run the shared door AI, effects or camera a second time. */
+            if (life.status[seat^1]==MMX6_COOP_ALIVE) {
+                uint8_t request=psx_mod_read_byte(PLAYER+0xD4);
+                if (seat) p1.body[0xD4]=request;
+                else p2.body[0xD4]=request;
+            }
+        }
     }
     if (seat) { leave_zero_context(1); inside=0; }
     scene_call=0;
@@ -1602,7 +1620,7 @@ static void controller(CPUState *cpu, uint32_t address) {
     if (cpu->gpr[31]!=0x80020C70u) return;
     if (scene_owner || clear_phase) {
         (void)mmx6_coop_join_input(&life,p2_input(MMX6_INPUT_CONTROLLER_SCENE)&1,0,0);
-        return;
+        if (!both_door_traversal_active()) return;
     }
     if (psx_mod_read_byte(PLAY)!=0x0A || !psx_mod_read_byte(PLAYER)) {
         (void)mmx6_coop_join_input(&life,p2_input(MMX6_INPUT_CONTROLLER_INACTIVE)&1,0,0);
@@ -1610,7 +1628,7 @@ static void controller(CPUState *cpu, uint32_t address) {
     }
     if (psx_mod_read_byte(PLAY+1) || (psx_mod_read_byte(PLAYER+4)!=2 &&
          (psx_mod_read_byte(PLAYER+4)!=1 || psx_mod_read_byte(PLAYER+5)<2)) ||
-        psx_mod_read_byte(PLAY+0x10) || coop_world_hold()) {
+        psx_mod_read_byte(PLAY+0x10) || (coop_world_hold() && !both_door_traversal_active())) {
         (void)mmx6_coop_join_input(&life,p2_input(MMX6_INPUT_CONTROLLER_BLOCKED)&1,0,0);
         return;
     }
@@ -1636,7 +1654,8 @@ static void controller(CPUState *cpu, uint32_t address) {
         uint8_t saved_input[6];
         if (!stage_call) diagnostic_setup(cpu);
         int safe=!psx_mod_read_byte(PLAYER+0x67) && (psx_mod_read_byte(PLAYER+0x70)&8);
-        Mmx6CoopJoinAction action=mmx6_coop_join_input(&life,raw&1,1,safe);
+        Mmx6CoopJoinAction action=scene_owner?MMX6_COOP_NO_ACTION:
+            mmx6_coop_join_input(&life,raw&1,1,safe);
         if (action==MMX6_COOP_LEAVE) start_leave(cpu);
         else if (action==MMX6_COOP_JOIN) start_join(cpu);
         raw=(uint16_t)((raw<<8)|(raw>>8)); /* Native PadRead byte order. */

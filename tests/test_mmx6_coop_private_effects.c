@@ -1512,6 +1512,12 @@ static void native_either_both_door_admission(void) {
     door_setup(&cpu,1,400,480);check_door_result(&cpu,0,0);
     CHECK(!psx_mod_read_byte(PLAYER+0xD4) && !p2.body[0xD4]);
     door_setup(&cpu,1,480,480);check_door_result(&cpu,1,0);
+    CHECK(psx_mod_read_byte(PLAYER+0xD4)==1 && p2.body[0xD4]==1 &&
+        both_door_traversal_active());
+    /* Permissions come from the real native admission. Other scenes/menu
+     * phases cannot opt the private player into world-scene execution. */
+    pause_owner=1;CHECK(!both_door_traversal_active());pause_owner=-1;
+    scene_phase=1;CHECK(!both_door_traversal_active());scene_phase=0;
     unsigned before=call_count;scene_tick(&cpu);
     CHECK(scene_owner==1 && !scene_phase && call_count==before && !scene_passenger(1));
     psx_mod_write_byte(PLAYER+0xD4,0);psx_mod_write_byte(PLAY+0x1C,0);scene_tick(&cpu);
