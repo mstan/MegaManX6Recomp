@@ -1,0 +1,3071 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F128"
+  ],
+  "frozen_row_sha256": {
+    "F128": "baed1c8513186ecfad45c06a76755bfe7ca3b044b8c98c2066d8d1a3fdfe0157"
+  },
+  "result": "passed",
+  "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-v82-final-binding-root-v1.json",
+    "binding_sha256": "0172ea22254cee069ec4f1d3c401f14ea050cd018efbcc7d7f7265d10379a12a",
+    "image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+    "manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+    "provenance_sha256": "6a3d1bd53edc47b8f248fef3b452154cfb936a4df0e63a6a9798774e58eafd2d",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v82-nearby-explosion-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v31",
+    "host_revision": 14
+  },
+  "integrated_source_commit": "41de9b10e64c444f3ac7440e390581eba83c9ae7",
+  "integrated_code_equals_tested_candidate": true,
+  "observer_pins": {
+    "local": {
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_Yammark_finalhit_v82_root_v2.py": "2fa5dbddfa590ed0dbc1ab3ce492561a7b971c236744e4133a6c5fff26627853",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_Yammark_frontend_v82_root_v2.py": "6b8ad9d98b7de7f8d6a3b45cf7ccd49aafd68f6f01c8b4d33b022d36ec87f623",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F89_Investigator_entry_v70_root_v2.py": "bb0d461944f22c03c60cc340427edd352870dba73fd36e965879aa090ca15605"
+    },
+    "netplay": {
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_Yammark_frontend_v82_root_v2.py": "6b8ad9d98b7de7f8d6a3b45cf7ccd49aafd68f6f01c8b4d33b022d36ec87f623",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F89_Investigator_entry_v70_root_v2.py": "bb0d461944f22c03c60cc340427edd352870dba73fd36e965879aa090ca15605",
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_Yammark_finalhit_v82_root_v3.py": "8b0a4ff28421259037a61688e7501e56dad54e190289f9b9c230efa21aa88ecd"
+    }
+  },
+  "executed_callers": {
+    "local": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-Yammark-finalhit-v82-root-v2.py",
+      "bytes": 8323,
+      "sha256": "40c50389ef6ad3a3f9b36c191aa2eda6e1560a89bd640f68df266865fe6f0cd7"
+    },
+    "netplay": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-Yammark-finalhit-v82-root-v3.py",
+      "bytes": 8323,
+      "sha256": "63c963e20523b4e13a255d9d0a92bd46782106088b4522c8ad739670e129ba10"
+    }
+  },
+  "modes": {
+    "local": {
+      "result": "passed",
+      "raw_parent_status": "agreed_fixture_native_intro_observations_complete_review_pending",
+      "raw_parent_error": null,
+      "required_runtime_gates": {
+        "all_existing_parent_checks": true,
+        "actual_native_contract": true,
+        "resolved_core_mod_crc": false
+      },
+      "parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v82-root-v2\\qualification.json",
+        "bytes": 25372650,
+        "sha256": "1b6f46a55999867d47296b23f7fea354f0a2f02ee2393bf1f3c5e0c509cd7b57"
+      },
+      "combat": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v82-root-v2\\ammo-hud\\intro-admission\\Yammark-finalhit\\observations.json",
+        "bytes": 7959204,
+        "sha256": "a59f5a4afc0e8c8826933e56c48ebd9d230cd98b97991ce2292aab8693b85116"
+      },
+      "entry": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v82-root-v2\\ammo-hud\\intro-admission\\Investigator-entry\\observations.json",
+        "bytes": 3450105,
+        "sha256": "aedeb09ab9d99b9b177f38a35b106fe3cb528bd32ce10d42cc5321251086d56f"
+      },
+      "checks": {
+        "actual_guest_lethal": true,
+        "ordinary_inputs_only": true,
+        "actual_native_clear_followup_observed": true,
+        "both_visible_native_victory": true,
+        "each_native_victory_once": true,
+        "each_native_departure_once": true,
+        "no_early_living_passenger_withdrawal": true,
+        "both_still_living": true,
+        "both_native_state3_at_frontend": true
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "actual_guest_lethal": {
+        "offer": 5,
+        "row": 247,
+        "main": {
+          "slot": null,
+          "owner": null,
+          "address": "0x8008ef48",
+          "allocation": 65,
+          "active": 65,
+          "type": 49,
+          "subtype": 0,
+          "visible": 1,
+          "state": 2,
+          "action": 1,
+          "phase": 0,
+          "phase2": 0,
+          "x": 5152,
+          "y": 2056,
+          "x_raw": 337654048,
+          "y_raw": 134742016,
+          "layer": 0,
+          "facing": 0,
+          "selected_clip": 7,
+          "sprite_frame": 16,
+          "animation_cursor": "0x800f7aa4",
+          "command": [
+            1,
+            0,
+            0,
+            16
+          ],
+          "attack": "0x800f7954",
+          "hurt": "0x800f7958",
+          "table": "0x80074bfc",
+          "hp": 0,
+          "iframe": 25,
+          "disposition": 0,
+          "token": 0,
+          "remembered_token": 1,
+          "recovery": 0,
+          "feedback": 0,
+          "hex": "41310001020100002031201400000808c0660f8000000507203120140000080800000000000000000000000000000000447b0f80a47a0f8000000000708d1580e0014c7901000010ff0001000000000054790f8058790f80fc4b078000070000041900000001000050790f80000000000800000000000000000000007d001700b0b70980000003030000000000000000000000000000000000000000",
+          "hurt_rect": [
+            5144,
+            2040,
+            5168,
+            2088
+          ]
+        }
+      },
+      "attack_offers": [
+        {
+          "attempt": 0,
+          "attack_kind": "air",
+          "before": 35,
+          "after": 47,
+          "before_hp": 32,
+          "after_hp": 30,
+          "hp_delta": 2,
+          "emitted_types": [
+            27
+          ],
+          "pose_seen": true,
+          "actual_body_actions": [
+            6,
+            17,
+            49,
+            50
+          ],
+          "expected_native_types": [
+            27
+          ]
+        },
+        {
+          "attempt": 1,
+          "attack_kind": "air",
+          "before": 75,
+          "after": 101,
+          "before_hp": 30,
+          "after_hp": 26,
+          "hp_delta": 4,
+          "emitted_types": [
+            27
+          ],
+          "pose_seen": true,
+          "actual_body_actions": [
+            2,
+            5,
+            8,
+            49,
+            50
+          ],
+          "expected_native_types": [
+            27
+          ]
+        },
+        {
+          "attempt": 2,
+          "attack_kind": "air",
+          "before": 115,
+          "after": 147,
+          "before_hp": 26,
+          "after_hp": 18,
+          "hp_delta": 8,
+          "emitted_types": [
+            27
+          ],
+          "pose_seen": true,
+          "actual_body_actions": [
+            5,
+            6,
+            8,
+            17,
+            49,
+            50
+          ],
+          "expected_native_types": [
+            27
+          ]
+        },
+        {
+          "attempt": 3,
+          "attack_kind": "air",
+          "before": 187,
+          "after": 196,
+          "before_hp": 18,
+          "after_hp": 16,
+          "hp_delta": 2,
+          "emitted_types": [
+            27
+          ],
+          "pose_seen": true,
+          "actual_body_actions": [
+            17,
+            49,
+            50
+          ],
+          "expected_native_types": [
+            27
+          ]
+        },
+        {
+          "attempt": 4,
+          "attack_kind": "air",
+          "before": 212,
+          "after": 242,
+          "before_hp": 16,
+          "after_hp": 10,
+          "hp_delta": 6,
+          "emitted_types": [
+            27
+          ],
+          "pose_seen": true,
+          "actual_body_actions": [
+            2,
+            5,
+            8,
+            49,
+            50
+          ],
+          "expected_native_types": [
+            27
+          ]
+        },
+        {
+          "attempt": 5,
+          "attack_kind": "ground",
+          "before": 244,
+          "after": 247,
+          "before_hp": 10,
+          "after_hp": 0,
+          "hp_delta": 10,
+          "emitted_types": [
+            24
+          ],
+          "pose_seen": true,
+          "actual_body_actions": [
+            2,
+            48
+          ],
+          "expected_native_types": [
+            24,
+            25,
+            26
+          ]
+        }
+      ],
+      "victory_histories": [
+        {
+          "peer": 0,
+          "seat": 0,
+          "sequence": [
+            [
+              1,
+              20,
+              true
+            ],
+            [
+              1,
+              25,
+              true
+            ],
+            [
+              1,
+              1,
+              true
+            ],
+            [
+              3,
+              0,
+              false
+            ]
+          ],
+          "pose_entries": 1,
+          "departure_entries": 1,
+          "early_outgoing_before_victory": false,
+          "min_hp": 28
+        },
+        {
+          "peer": 0,
+          "seat": 1,
+          "sequence": [
+            [
+              1,
+              48,
+              true
+            ],
+            [
+              1,
+              2,
+              true
+            ],
+            [
+              1,
+              25,
+              true
+            ],
+            [
+              1,
+              1,
+              true
+            ],
+            [
+              3,
+              0,
+              false
+            ]
+          ],
+          "pose_entries": 1,
+          "departure_entries": 1,
+          "early_outgoing_before_victory": false,
+          "min_hp": 14
+        }
+      ],
+      "both_visible_victory_rows": [
+        394,
+        395,
+        396,
+        397,
+        398,
+        399,
+        400,
+        401,
+        402,
+        403,
+        404,
+        405,
+        406,
+        407,
+        408,
+        409,
+        410,
+        411,
+        412,
+        413,
+        414,
+        415,
+        416,
+        417,
+        418,
+        419,
+        420,
+        421,
+        422,
+        423,
+        424,
+        425,
+        426,
+        427,
+        428,
+        429,
+        430,
+        431,
+        432,
+        433,
+        434,
+        435,
+        436,
+        437,
+        438,
+        439,
+        440,
+        441,
+        442,
+        443,
+        444,
+        445,
+        446,
+        447,
+        448,
+        449,
+        450,
+        451,
+        452,
+        453,
+        454,
+        455,
+        456,
+        457,
+        458,
+        459,
+        460,
+        461,
+        462,
+        463,
+        464,
+        465,
+        466,
+        467,
+        468,
+        469,
+        470,
+        471,
+        472,
+        473,
+        474,
+        475,
+        476,
+        477
+      ],
+      "source_guards": [
+        {
+          "peer": 0,
+          "address": "0x80074bfc",
+          "bytes": 160,
+          "sha256": "e5c12c1686d1135c1dc2e935451f27d29c550bc234634c653db9ac2a7676f7e8"
+        },
+        {
+          "peer": 0,
+          "address": "0x800efb9c",
+          "bytes": 412,
+          "sha256": "849fa379c90b26fcecb9952faf6d5876a2bd745ebeb15007972e8501a9479ee6"
+        },
+        {
+          "peer": 0,
+          "address": "0x800f7950",
+          "bytes": 12,
+          "sha256": "a447723c5293188c22547320dd5cd891427bb0482f24736c4738dd0e7c6bdb97"
+        },
+        {
+          "peer": 0,
+          "address": "0x80031474",
+          "bytes": 1400,
+          "sha256": "25da3e15379f3672fdd126d01a7d85aba0c5d073d8efdbae31f971b8d69abbdc"
+        }
+      ],
+      "owned_cleanup": [
+        {
+          "owned_pid": 26472,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "recording_refusals": [
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+            "manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+            "mode": "offline",
+            "profile": null,
+            "settings_sha256": "97f0ca7cabfda88f3f94b5d81364d9e9d6f343400e2cd52eeee9c93d3d09a9b7",
+            "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false
+        }
+      ],
+      "resolved_crc": [],
+      "host_profile_final": null,
+      "frontend": {
+        "artifact": {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v82-root-v2\\ammo-hud\\intro-admission\\Yammark-frontend\\observations.json",
+          "bytes": 4502324,
+          "sha256": "ec0ec34fb99607faa479a0ae1c66bbbc661db84b105fad3016403ec3b7a33c46"
+        },
+        "status": "failed_partial",
+        "error": "Original report phase2 text acceleration Cross: native response timed out",
+        "checks": {},
+        "admitted_for_F128": false
+      }
+    },
+    "netplay": {
+      "result": "passed",
+      "raw_parent_status": "failed",
+      "raw_parent_error": "paired ground-jump audio then settle: insufficient common diagnostic publication counts",
+      "required_runtime_gates": {
+        "all_existing_parent_checks": true,
+        "actual_native_contract": true,
+        "resolved_core_mod_crc": true
+      },
+      "parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\qualification.json",
+        "bytes": 23626445,
+        "sha256": "98a85743037152477313f94a4991fe7d19a8b8aef4a51a0679f4fa78a9bc29d2"
+      },
+      "combat": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\observations.json",
+        "bytes": 11040131,
+        "sha256": "01f8d452c4b24d7ebfb7679bf83e39195df8a98660d9f19fe7881d8c0701e45a"
+      },
+      "entry": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Investigator-entry\\observations.json",
+        "bytes": 4023187,
+        "sha256": "6c6244e8a08d04c8469ce84d1ebbf60735455f8271c10a81e864d73d8425a114"
+      },
+      "checks": {
+        "actual_guest_lethal": true,
+        "ordinary_inputs_only": true,
+        "actual_native_clear_followup_observed": true,
+        "both_visible_native_victory": true,
+        "each_native_victory_once": true,
+        "each_native_departure_once": true,
+        "no_early_living_passenger_withdrawal": true,
+        "both_still_living": true,
+        "both_native_state3_at_frontend": true
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "actual_guest_lethal": {
+        "offer": 5,
+        "row": 199,
+        "main": {
+          "slot": null,
+          "owner": null,
+          "address": "0x8008ef48",
+          "allocation": 65,
+          "active": 65,
+          "type": 49,
+          "subtype": 0,
+          "visible": 1,
+          "state": 2,
+          "action": 1,
+          "phase": 0,
+          "phase2": 0,
+          "x": 5152,
+          "y": 2056,
+          "x_raw": 337654048,
+          "y_raw": 134742016,
+          "layer": 0,
+          "facing": 0,
+          "selected_clip": 7,
+          "sprite_frame": 16,
+          "animation_cursor": "0x800f7aa4",
+          "command": [
+            1,
+            0,
+            0,
+            16
+          ],
+          "attack": "0x800f7954",
+          "hurt": "0x800f7958",
+          "table": "0x80074bfc",
+          "hp": 0,
+          "iframe": 25,
+          "disposition": 0,
+          "token": 0,
+          "remembered_token": 1,
+          "recovery": 0,
+          "feedback": 0,
+          "hex": "41310001020100002031201400000808c0660f8000000507203120140000080800000000000000000000000000000000447b0f80a47a0f8000000000708d1580e0014c7901000010ff0001000000000054790f8058790f80fc4b078000030000041900000001000050790f800000000008000000000000000000000079001300b0b70980000002020000000000000000000000000000000000000000",
+          "hurt_rect": [
+            5144,
+            2040,
+            5168,
+            2088
+          ]
+        }
+      },
+      "attack_offers": [
+        {
+          "attempt": 0,
+          "attack_kind": "air",
+          "before": 24,
+          "after": 32,
+          "before_hp": 32,
+          "after_hp": 30,
+          "hp_delta": 2,
+          "emitted_types": [
+            27
+          ],
+          "pose_seen": true,
+          "actual_body_actions": [
+            6,
+            17,
+            49,
+            50
+          ],
+          "expected_native_types": [
+            27
+          ]
+        },
+        {
+          "attempt": 1,
+          "attack_kind": "air",
+          "before": 55,
+          "after": 72,
+          "before_hp": 30,
+          "after_hp": 24,
+          "hp_delta": 6,
+          "emitted_types": [
+            27
+          ],
+          "pose_seen": true,
+          "actual_body_actions": [
+            2,
+            5,
+            6,
+            8,
+            49,
+            50
+          ],
+          "expected_native_types": [
+            27
+          ]
+        },
+        {
+          "attempt": 2,
+          "attack_kind": "air",
+          "before": 99,
+          "after": 120,
+          "before_hp": 24,
+          "after_hp": 18,
+          "hp_delta": 6,
+          "emitted_types": [
+            27
+          ],
+          "pose_seen": true,
+          "actual_body_actions": [
+            2,
+            5,
+            6,
+            8,
+            49,
+            50
+          ],
+          "expected_native_types": [
+            27
+          ]
+        },
+        {
+          "attempt": 3,
+          "attack_kind": "air",
+          "before": 132,
+          "after": 152,
+          "before_hp": 18,
+          "after_hp": 12,
+          "hp_delta": 6,
+          "emitted_types": [
+            27
+          ],
+          "pose_seen": true,
+          "actual_body_actions": [
+            2,
+            5,
+            6,
+            8,
+            49,
+            50
+          ],
+          "expected_native_types": [
+            27
+          ]
+        },
+        {
+          "attempt": 4,
+          "attack_kind": "air",
+          "before": 163,
+          "after": 184,
+          "before_hp": 12,
+          "after_hp": 6,
+          "hp_delta": 6,
+          "emitted_types": [
+            27
+          ],
+          "pose_seen": true,
+          "actual_body_actions": [
+            2,
+            5,
+            6,
+            8,
+            49,
+            50
+          ],
+          "expected_native_types": [
+            27
+          ]
+        },
+        {
+          "attempt": 5,
+          "attack_kind": "ground",
+          "before": 196,
+          "after": 199,
+          "before_hp": 6,
+          "after_hp": 0,
+          "hp_delta": 6,
+          "emitted_types": [
+            24
+          ],
+          "pose_seen": true,
+          "actual_body_actions": [
+            2,
+            48
+          ],
+          "expected_native_types": [
+            24,
+            25,
+            26
+          ]
+        }
+      ],
+      "victory_histories": [
+        {
+          "peer": 0,
+          "seat": 0,
+          "sequence": [
+            [
+              1,
+              20,
+              true
+            ],
+            [
+              1,
+              25,
+              true
+            ],
+            [
+              1,
+              1,
+              true
+            ],
+            [
+              3,
+              0,
+              false
+            ]
+          ],
+          "pose_entries": 1,
+          "departure_entries": 1,
+          "early_outgoing_before_victory": false,
+          "min_hp": 24
+        },
+        {
+          "peer": 0,
+          "seat": 1,
+          "sequence": [
+            [
+              1,
+              48,
+              true
+            ],
+            [
+              1,
+              2,
+              true
+            ],
+            [
+              1,
+              25,
+              true
+            ],
+            [
+              1,
+              1,
+              true
+            ],
+            [
+              3,
+              0,
+              false
+            ]
+          ],
+          "pose_entries": 1,
+          "departure_entries": 1,
+          "early_outgoing_before_victory": false,
+          "min_hp": 18
+        },
+        {
+          "peer": 1,
+          "seat": 0,
+          "sequence": [
+            [
+              1,
+              20,
+              true
+            ],
+            [
+              1,
+              25,
+              true
+            ],
+            [
+              1,
+              1,
+              true
+            ],
+            [
+              3,
+              0,
+              false
+            ]
+          ],
+          "pose_entries": 1,
+          "departure_entries": 1,
+          "early_outgoing_before_victory": false,
+          "min_hp": 24
+        },
+        {
+          "peer": 1,
+          "seat": 1,
+          "sequence": [
+            [
+              1,
+              48,
+              true
+            ],
+            [
+              1,
+              2,
+              true
+            ],
+            [
+              1,
+              25,
+              true
+            ],
+            [
+              1,
+              1,
+              true
+            ],
+            [
+              3,
+              0,
+              false
+            ]
+          ],
+          "pose_entries": 1,
+          "departure_entries": 1,
+          "early_outgoing_before_victory": false,
+          "min_hp": 18
+        }
+      ],
+      "both_visible_victory_rows": [
+        298,
+        299,
+        300,
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324,
+        325,
+        326,
+        327,
+        328,
+        329,
+        330,
+        331,
+        332,
+        333,
+        334,
+        335,
+        336,
+        337,
+        338,
+        339,
+        340
+      ],
+      "source_guards": [
+        {
+          "peer": 0,
+          "address": "0x80074bfc",
+          "bytes": 160,
+          "sha256": "e5c12c1686d1135c1dc2e935451f27d29c550bc234634c653db9ac2a7676f7e8"
+        },
+        {
+          "peer": 1,
+          "address": "0x80074bfc",
+          "bytes": 160,
+          "sha256": "e5c12c1686d1135c1dc2e935451f27d29c550bc234634c653db9ac2a7676f7e8"
+        },
+        {
+          "peer": 0,
+          "address": "0x800efb9c",
+          "bytes": 412,
+          "sha256": "849fa379c90b26fcecb9952faf6d5876a2bd745ebeb15007972e8501a9479ee6"
+        },
+        {
+          "peer": 1,
+          "address": "0x800efb9c",
+          "bytes": 412,
+          "sha256": "849fa379c90b26fcecb9952faf6d5876a2bd745ebeb15007972e8501a9479ee6"
+        },
+        {
+          "peer": 0,
+          "address": "0x800f7950",
+          "bytes": 12,
+          "sha256": "a447723c5293188c22547320dd5cd891427bb0482f24736c4738dd0e7c6bdb97"
+        },
+        {
+          "peer": 1,
+          "address": "0x800f7950",
+          "bytes": 12,
+          "sha256": "a447723c5293188c22547320dd5cd891427bb0482f24736c4738dd0e7c6bdb97"
+        },
+        {
+          "peer": 0,
+          "address": "0x80031474",
+          "bytes": 1400,
+          "sha256": "25da3e15379f3672fdd126d01a7d85aba0c5d073d8efdbae31f971b8d69abbdc"
+        },
+        {
+          "peer": 1,
+          "address": "0x80031474",
+          "bytes": 1400,
+          "sha256": "25da3e15379f3672fdd126d01a7d85aba0c5d073d8efdbae31f971b8d69abbdc"
+        }
+      ],
+      "owned_cleanup": [
+        {
+          "owned_pid": 71108,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "owned_pid": 18372,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "recording_refusals": [
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+            "manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 14,
+              "selected_sha256": "444adc62936aad9925dfe6a93dddc258257d6dd5a1ec07bb3d3fce0e50d85c01"
+            },
+            "settings_sha256": "a8b2f045488f2b4046521022448a0f2cc82a23afe16826fbad94eed356873d64",
+            "simulation_contract_sha256": "7d36c153223e23326c703edc5047e98da9cc2ecf89f4c1d9cfa8000dfca331d1"
+          },
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false
+        },
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+            "manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 14,
+              "selected_sha256": "444adc62936aad9925dfe6a93dddc258257d6dd5a1ec07bb3d3fce0e50d85c01"
+            },
+            "settings_sha256": "50265a34d58532a6ae4397e2a427e627c6cfa07edceb38ce96dbbad1c461482e",
+            "simulation_contract_sha256": "7d36c153223e23326c703edc5047e98da9cc2ecf89f4c1d9cfa8000dfca331d1"
+          },
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false
+        }
+      ],
+      "resolved_crc": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 3488,
+              "core": "9d9d3ad8",
+              "mod": "6a980303"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "c0e63cf7",
+              "mod": "367a4699"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "c29b0fc6",
+              "mod": "f8357839"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "8248626f",
+              "mod": "38865fe5"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "f3f126d9",
+              "mod": "1571888b"
+            },
+            {
+              "simulation_tick": 3648,
+              "core": "8d185c22",
+              "mod": "5f9ebaf1"
+            }
+          ],
+          "resolved_through": [
+            3668,
+            3669
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3712,
+              "core": "0e6ef189",
+              "mod": "0a99ac4a"
+            },
+            {
+              "simulation_tick": 3744,
+              "core": "8c6947aa",
+              "mod": "a2306388"
+            },
+            {
+              "simulation_tick": 3776,
+              "core": "86904d58",
+              "mod": "00488cae"
+            },
+            {
+              "simulation_tick": 3808,
+              "core": "fd353136",
+              "mod": "b804a28e"
+            },
+            {
+              "simulation_tick": 3840,
+              "core": "660558e6",
+              "mod": "c253c6a0"
+            },
+            {
+              "simulation_tick": 3872,
+              "core": "f7a44a61",
+              "mod": "56ef7d40"
+            },
+            {
+              "simulation_tick": 3904,
+              "core": "29d3ae10",
+              "mod": "06d4e896"
+            }
+          ],
+          "resolved_through": [
+            3915,
+            3915
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 4000,
+              "core": "135e2717",
+              "mod": "c86f9800"
+            },
+            {
+              "simulation_tick": 4032,
+              "core": "3686a6ae",
+              "mod": "ed29e81e"
+            },
+            {
+              "simulation_tick": 4064,
+              "core": "51a9e826",
+              "mod": "cac13510"
+            },
+            {
+              "simulation_tick": 4096,
+              "core": "2c504a63",
+              "mod": "2c6c2e30"
+            },
+            {
+              "simulation_tick": 4128,
+              "core": "55876bb6",
+              "mod": "4157c146"
+            },
+            {
+              "simulation_tick": 4160,
+              "core": "9e58709e",
+              "mod": "c24e49e6"
+            },
+            {
+              "simulation_tick": 4192,
+              "core": "01d0d3e5",
+              "mod": "0a99ac4a"
+            }
+          ],
+          "resolved_through": [
+            4195,
+            4195
+          ]
+        },
+        {
+          "label": "retained SDK resolved core/mod after actual native clear and callback; diagnostic gameplay publication stopped",
+          "samples": [
+            {
+              "simulation_tick": 12160,
+              "core": "1a26e98e",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12192,
+              "core": "ded41002",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12224,
+              "core": "154ad7f9",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12256,
+              "core": "d63d584c",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12288,
+              "core": "c2a4d67f",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12320,
+              "core": "9ca5bd9c",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12352,
+              "core": "d494bd31",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12384,
+              "core": "5af02e97",
+              "mod": "39a4b4a6"
+            }
+          ],
+          "resolved_through": [
+            12389,
+            12390
+          ],
+          "after": 12155,
+          "all_combat_through_report_samples": [
+            {
+              "simulation_tick": 4224,
+              "core": "32658c2c",
+              "mod": "500c2795"
+            },
+            {
+              "simulation_tick": 4256,
+              "core": "5b41bb35",
+              "mod": "a6434866"
+            },
+            {
+              "simulation_tick": 4288,
+              "core": "b5e2fdc3",
+              "mod": "fca7eefb"
+            },
+            {
+              "simulation_tick": 4320,
+              "core": "6f4e16da",
+              "mod": "fca7eefb"
+            },
+            {
+              "simulation_tick": 4352,
+              "core": "9f7475ab",
+              "mod": "fca7eefb"
+            },
+            {
+              "simulation_tick": 4384,
+              "core": "37622230",
+              "mod": "fca7eefb"
+            },
+            {
+              "simulation_tick": 4416,
+              "core": "59adad22",
+              "mod": "fca7eefb"
+            },
+            {
+              "simulation_tick": 4448,
+              "core": "d69f33c3",
+              "mod": "fca7eefb"
+            },
+            {
+              "simulation_tick": 4480,
+              "core": "0c7ca86f",
+              "mod": "fca7eefb"
+            },
+            {
+              "simulation_tick": 4512,
+              "core": "4ef0cfba",
+              "mod": "fca7eefb"
+            },
+            {
+              "simulation_tick": 4544,
+              "core": "97ebbeab",
+              "mod": "fa9d95c2"
+            },
+            {
+              "simulation_tick": 4576,
+              "core": "ce3342d0",
+              "mod": "4ada884d"
+            },
+            {
+              "simulation_tick": 4608,
+              "core": "2d40824c",
+              "mod": "e609f415"
+            },
+            {
+              "simulation_tick": 4640,
+              "core": "e4030365",
+              "mod": "391f88e4"
+            },
+            {
+              "simulation_tick": 4672,
+              "core": "b87c9768",
+              "mod": "081bac43"
+            },
+            {
+              "simulation_tick": 4704,
+              "core": "ecfddcf5",
+              "mod": "9a197038"
+            },
+            {
+              "simulation_tick": 4736,
+              "core": "c24ec9f7",
+              "mod": "1854a666"
+            },
+            {
+              "simulation_tick": 4768,
+              "core": "d9e5ea1c",
+              "mod": "9ed9cf4a"
+            },
+            {
+              "simulation_tick": 4800,
+              "core": "ac04e732",
+              "mod": "bedafd7b"
+            },
+            {
+              "simulation_tick": 4832,
+              "core": "756afd3f",
+              "mod": "97d79dc5"
+            },
+            {
+              "simulation_tick": 4864,
+              "core": "cb968d17",
+              "mod": "67b4ce44"
+            },
+            {
+              "simulation_tick": 4896,
+              "core": "64ae1034",
+              "mod": "a719e514"
+            },
+            {
+              "simulation_tick": 4928,
+              "core": "c04ed70e",
+              "mod": "ec230a89"
+            },
+            {
+              "simulation_tick": 4960,
+              "core": "71472333",
+              "mod": "15b6ecf8"
+            },
+            {
+              "simulation_tick": 4992,
+              "core": "1619159e",
+              "mod": "bce36a93"
+            },
+            {
+              "simulation_tick": 5024,
+              "core": "8fa11ae5",
+              "mod": "54840d68"
+            },
+            {
+              "simulation_tick": 5056,
+              "core": "c251c349",
+              "mod": "0ae9a971"
+            },
+            {
+              "simulation_tick": 5088,
+              "core": "0c81bbd8",
+              "mod": "9e561a50"
+            },
+            {
+              "simulation_tick": 5120,
+              "core": "73c9c630",
+              "mod": "bf1a6cc6"
+            },
+            {
+              "simulation_tick": 5152,
+              "core": "da93a30f",
+              "mod": "8e1f2d66"
+            },
+            {
+              "simulation_tick": 5184,
+              "core": "42ecb8f7",
+              "mod": "cd7ae4f8"
+            },
+            {
+              "simulation_tick": 5216,
+              "core": "83bd34db",
+              "mod": "a58d0598"
+            },
+            {
+              "simulation_tick": 5248,
+              "core": "c8af82bd",
+              "mod": "d5a4a830"
+            },
+            {
+              "simulation_tick": 5280,
+              "core": "a7c8ef4b",
+              "mod": "40a9817e"
+            },
+            {
+              "simulation_tick": 5312,
+              "core": "c35c50fd",
+              "mod": "171c9f80"
+            },
+            {
+              "simulation_tick": 5344,
+              "core": "a438b2b8",
+              "mod": "e28145e0"
+            },
+            {
+              "simulation_tick": 5376,
+              "core": "edb424d4",
+              "mod": "f84f94d6"
+            },
+            {
+              "simulation_tick": 5408,
+              "core": "b88a88cd",
+              "mod": "e1c49976"
+            },
+            {
+              "simulation_tick": 5440,
+              "core": "319899da",
+              "mod": "1a1d13e8"
+            },
+            {
+              "simulation_tick": 5472,
+              "core": "0901ba20",
+              "mod": "8f5cb49d"
+            },
+            {
+              "simulation_tick": 5504,
+              "core": "daea5496",
+              "mod": "54840d68"
+            },
+            {
+              "simulation_tick": 5536,
+              "core": "f64ddd4f",
+              "mod": "0ae9a971"
+            },
+            {
+              "simulation_tick": 5568,
+              "core": "4e62822f",
+              "mod": "9e561a50"
+            },
+            {
+              "simulation_tick": 5600,
+              "core": "d2d98d26",
+              "mod": "bf1a6cc6"
+            },
+            {
+              "simulation_tick": 5632,
+              "core": "0dd3ea84",
+              "mod": "8e1f2d66"
+            },
+            {
+              "simulation_tick": 5664,
+              "core": "04642e11",
+              "mod": "cd7ae4f8"
+            },
+            {
+              "simulation_tick": 5696,
+              "core": "e66c5ed9",
+              "mod": "a58d0598"
+            },
+            {
+              "simulation_tick": 5728,
+              "core": "cac7e6aa",
+              "mod": "d5a4a830"
+            },
+            {
+              "simulation_tick": 5760,
+              "core": "ab746212",
+              "mod": "40a9817e"
+            },
+            {
+              "simulation_tick": 5792,
+              "core": "eea2c4b8",
+              "mod": "171c9f80"
+            },
+            {
+              "simulation_tick": 5824,
+              "core": "647b27e8",
+              "mod": "e28145e0"
+            },
+            {
+              "simulation_tick": 5856,
+              "core": "b837cce4",
+              "mod": "f84f94d6"
+            },
+            {
+              "simulation_tick": 5888,
+              "core": "70fd3e8c",
+              "mod": "e1c49976"
+            },
+            {
+              "simulation_tick": 5920,
+              "core": "4dc0b772",
+              "mod": "1a1d13e8"
+            },
+            {
+              "simulation_tick": 5952,
+              "core": "78c40326",
+              "mod": "8f5cb49d"
+            },
+            {
+              "simulation_tick": 5984,
+              "core": "193eb33f",
+              "mod": "54840d68"
+            },
+            {
+              "simulation_tick": 6016,
+              "core": "4c0c7c22",
+              "mod": "0ae9a971"
+            },
+            {
+              "simulation_tick": 6048,
+              "core": "b19d109e",
+              "mod": "487be310"
+            },
+            {
+              "simulation_tick": 6080,
+              "core": "016adeec",
+              "mod": "bf1a6cc6"
+            },
+            {
+              "simulation_tick": 6112,
+              "core": "7fd01e3a",
+              "mod": "8e1f2d66"
+            },
+            {
+              "simulation_tick": 6144,
+              "core": "aae0966d",
+              "mod": "2b5d3638"
+            },
+            {
+              "simulation_tick": 6176,
+              "core": "b0b5322b",
+              "mod": "a58d0598"
+            },
+            {
+              "simulation_tick": 6208,
+              "core": "f9a5f9e4",
+              "mod": "d5a4a830"
+            },
+            {
+              "simulation_tick": 6240,
+              "core": "1ffc61ca",
+              "mod": "40a9817e"
+            },
+            {
+              "simulation_tick": 6272,
+              "core": "bf2a728f",
+              "mod": "171c9f80"
+            },
+            {
+              "simulation_tick": 6304,
+              "core": "83c82b55",
+              "mod": "e28145e0"
+            },
+            {
+              "simulation_tick": 6336,
+              "core": "d8f862ba",
+              "mod": "f84f94d6"
+            },
+            {
+              "simulation_tick": 6368,
+              "core": "19cc94f9",
+              "mod": "e1c49976"
+            },
+            {
+              "simulation_tick": 6400,
+              "core": "aef73985",
+              "mod": "1a1d13e8"
+            },
+            {
+              "simulation_tick": 6432,
+              "core": "ec133a63",
+              "mod": "8f5cb49d"
+            },
+            {
+              "simulation_tick": 6464,
+              "core": "511a7d17",
+              "mod": "54840d68"
+            },
+            {
+              "simulation_tick": 6496,
+              "core": "ba350a7e",
+              "mod": "63d232b1"
+            },
+            {
+              "simulation_tick": 6528,
+              "core": "0eb4240c",
+              "mod": "9e561a50"
+            },
+            {
+              "simulation_tick": 6560,
+              "core": "8f4e957d",
+              "mod": "bf1a6cc6"
+            },
+            {
+              "simulation_tick": 6592,
+              "core": "26d64352",
+              "mod": "8e1f2d66"
+            },
+            {
+              "simulation_tick": 6624,
+              "core": "a3949bda",
+              "mod": "2b5d3638"
+            },
+            {
+              "simulation_tick": 6656,
+              "core": "1e4eb566",
+              "mod": "a58d0598"
+            },
+            {
+              "simulation_tick": 6688,
+              "core": "b0074ab7",
+              "mod": "d5a4a830"
+            },
+            {
+              "simulation_tick": 6720,
+              "core": "fb738657",
+              "mod": "40a9817e"
+            },
+            {
+              "simulation_tick": 6752,
+              "core": "4d75e03e",
+              "mod": "171c9f80"
+            },
+            {
+              "simulation_tick": 6784,
+              "core": "61376d7b",
+              "mod": "d1129120"
+            },
+            {
+              "simulation_tick": 6816,
+              "core": "1a680dd4",
+              "mod": "f84f94d6"
+            },
+            {
+              "simulation_tick": 6848,
+              "core": "9b897116",
+              "mod": "e1c49976"
+            },
+            {
+              "simulation_tick": 6880,
+              "core": "78bf1414",
+              "mod": "fefc5628"
+            },
+            {
+              "simulation_tick": 6912,
+              "core": "51afcf94",
+              "mod": "8f5cb49d"
+            },
+            {
+              "simulation_tick": 6944,
+              "core": "6d3b7efa",
+              "mod": "54840d68"
+            },
+            {
+              "simulation_tick": 6976,
+              "core": "dc79ec07",
+              "mod": "0ae9a971"
+            },
+            {
+              "simulation_tick": 7008,
+              "core": "ed4b9a9d",
+              "mod": "9e561a50"
+            },
+            {
+              "simulation_tick": 7040,
+              "core": "3574d65b",
+              "mod": "bf1a6cc6"
+            },
+            {
+              "simulation_tick": 7072,
+              "core": "6fad519d",
+              "mod": "8e1f2d66"
+            },
+            {
+              "simulation_tick": 7104,
+              "core": "a36628cd",
+              "mod": "cd7ae4f8"
+            },
+            {
+              "simulation_tick": 7136,
+              "core": "4dd4c246",
+              "mod": "a58d0598"
+            },
+            {
+              "simulation_tick": 7168,
+              "core": "1d86c869",
+              "mod": "d5a4a830"
+            },
+            {
+              "simulation_tick": 7200,
+              "core": "15a515f1",
+              "mod": "40a9817e"
+            },
+            {
+              "simulation_tick": 7232,
+              "core": "53b237a3",
+              "mod": "171c9f80"
+            },
+            {
+              "simulation_tick": 7264,
+              "core": "c292fa61",
+              "mod": "e28145e0"
+            },
+            {
+              "simulation_tick": 7296,
+              "core": "441b00c6",
+              "mod": "f84f94d6"
+            },
+            {
+              "simulation_tick": 7328,
+              "core": "46dd70a1",
+              "mod": "e1c49976"
+            },
+            {
+              "simulation_tick": 7360,
+              "core": "6284a56f",
+              "mod": "1a1d13e8"
+            },
+            {
+              "simulation_tick": 7392,
+              "core": "4c441ab2",
+              "mod": "8f5cb49d"
+            },
+            {
+              "simulation_tick": 7424,
+              "core": "cdb36c7d",
+              "mod": "54840d68"
+            },
+            {
+              "simulation_tick": 7456,
+              "core": "8d894858",
+              "mod": "0ae9a971"
+            },
+            {
+              "simulation_tick": 7488,
+              "core": "7a5537ce",
+              "mod": "9e561a50"
+            },
+            {
+              "simulation_tick": 7520,
+              "core": "70c36bc5",
+              "mod": "bf1a6cc6"
+            },
+            {
+              "simulation_tick": 7552,
+              "core": "0c46e558",
+              "mod": "8e1f2d66"
+            },
+            {
+              "simulation_tick": 7584,
+              "core": "03687635",
+              "mod": "2b5d3638"
+            },
+            {
+              "simulation_tick": 7616,
+              "core": "e14185bd",
+              "mod": "a58d0598"
+            },
+            {
+              "simulation_tick": 7648,
+              "core": "8ace225b",
+              "mod": "d5a4a830"
+            },
+            {
+              "simulation_tick": 7680,
+              "core": "044be6cb",
+              "mod": "40a9817e"
+            },
+            {
+              "simulation_tick": 7712,
+              "core": "f844bfb5",
+              "mod": "171c9f80"
+            },
+            {
+              "simulation_tick": 7744,
+              "core": "2411d7a6",
+              "mod": "d1129120"
+            },
+            {
+              "simulation_tick": 7776,
+              "core": "73584377",
+              "mod": "f84f94d6"
+            },
+            {
+              "simulation_tick": 7808,
+              "core": "75ba9085",
+              "mod": "e1c49976"
+            },
+            {
+              "simulation_tick": 7840,
+              "core": "286c109c",
+              "mod": "1a1d13e8"
+            },
+            {
+              "simulation_tick": 7872,
+              "core": "1c2fb7db",
+              "mod": "8f5cb49d"
+            },
+            {
+              "simulation_tick": 7904,
+              "core": "106773c7",
+              "mod": "54840d68"
+            },
+            {
+              "simulation_tick": 7936,
+              "core": "272bd3aa",
+              "mod": "97c8345c"
+            },
+            {
+              "simulation_tick": 7968,
+              "core": "239e99df",
+              "mod": "5f974968"
+            },
+            {
+              "simulation_tick": 8000,
+              "core": "913ca3ec",
+              "mod": "67afdcac"
+            },
+            {
+              "simulation_tick": 8032,
+              "core": "9e935cf8",
+              "mod": "596588c7"
+            },
+            {
+              "simulation_tick": 8064,
+              "core": "b2d4a19d",
+              "mod": "db89e3bf"
+            },
+            {
+              "simulation_tick": 8096,
+              "core": "f33becef",
+              "mod": "a8cf9381"
+            },
+            {
+              "simulation_tick": 8128,
+              "core": "4b14a3ab",
+              "mod": "84664b05"
+            },
+            {
+              "simulation_tick": 8160,
+              "core": "edf4286e",
+              "mod": "ce340c22"
+            },
+            {
+              "simulation_tick": 8192,
+              "core": "504ef56c",
+              "mod": "d4ddc4e6"
+            },
+            {
+              "simulation_tick": 8224,
+              "core": "057bfbd3",
+              "mod": "7a25cf04"
+            },
+            {
+              "simulation_tick": 8256,
+              "core": "b31e3fa7",
+              "mod": "ca5eb553"
+            },
+            {
+              "simulation_tick": 8288,
+              "core": "62a917d2",
+              "mod": "0c83a27d"
+            },
+            {
+              "simulation_tick": 8320,
+              "core": "743a1764",
+              "mod": "dd5c9811"
+            },
+            {
+              "simulation_tick": 8352,
+              "core": "78e452c5",
+              "mod": "7078e1d8"
+            },
+            {
+              "simulation_tick": 8384,
+              "core": "59936c5f",
+              "mod": "8dd4793c"
+            },
+            {
+              "simulation_tick": 8416,
+              "core": "6ea72b5d",
+              "mod": "7c726d1d"
+            },
+            {
+              "simulation_tick": 8448,
+              "core": "a185bae7",
+              "mod": "cf20a143"
+            },
+            {
+              "simulation_tick": 8480,
+              "core": "787e98c5",
+              "mod": "da833206"
+            },
+            {
+              "simulation_tick": 8512,
+              "core": "e52ca4f2",
+              "mod": "a98a76ff"
+            },
+            {
+              "simulation_tick": 8544,
+              "core": "a99854b9",
+              "mod": "494916c8"
+            },
+            {
+              "simulation_tick": 8576,
+              "core": "65e4fa89",
+              "mod": "244d6be4"
+            },
+            {
+              "simulation_tick": 8608,
+              "core": "391b2c2e",
+              "mod": "a79dd260"
+            },
+            {
+              "simulation_tick": 8640,
+              "core": "43563e06",
+              "mod": "ce207c1e"
+            },
+            {
+              "simulation_tick": 8672,
+              "core": "5af4b19a",
+              "mod": "d8d723eb"
+            },
+            {
+              "simulation_tick": 8704,
+              "core": "7780ccb4",
+              "mod": "91521160"
+            },
+            {
+              "simulation_tick": 8736,
+              "core": "e9e7b130",
+              "mod": "e0ada1ce"
+            },
+            {
+              "simulation_tick": 8768,
+              "core": "fa1d4f3c",
+              "mod": "97956028"
+            },
+            {
+              "simulation_tick": 8800,
+              "core": "8f29dbda",
+              "mod": "d0c282a0"
+            },
+            {
+              "simulation_tick": 8832,
+              "core": "8cbc32a6",
+              "mod": "74c223af"
+            },
+            {
+              "simulation_tick": 8864,
+              "core": "d83ea80e",
+              "mod": "9000e6a7"
+            },
+            {
+              "simulation_tick": 8896,
+              "core": "7f8e3321",
+              "mod": "16860974"
+            },
+            {
+              "simulation_tick": 8928,
+              "core": "687e7a9c",
+              "mod": "6c7c906e"
+            },
+            {
+              "simulation_tick": 8960,
+              "core": "3d28e0c8",
+              "mod": "e660f341"
+            },
+            {
+              "simulation_tick": 8992,
+              "core": "ea7bf074",
+              "mod": "dc250467"
+            },
+            {
+              "simulation_tick": 9024,
+              "core": "235caeda",
+              "mod": "b3c0bc6e"
+            },
+            {
+              "simulation_tick": 9056,
+              "core": "7e2feaeb",
+              "mod": "16b3e810"
+            },
+            {
+              "simulation_tick": 9088,
+              "core": "30681a2c",
+              "mod": "0c04e7a3"
+            },
+            {
+              "simulation_tick": 9120,
+              "core": "3c193cce",
+              "mod": "759ad679"
+            },
+            {
+              "simulation_tick": 9152,
+              "core": "4be7abd4",
+              "mod": "e3798275"
+            },
+            {
+              "simulation_tick": 9184,
+              "core": "adca8031",
+              "mod": "d2da27b4"
+            },
+            {
+              "simulation_tick": 9216,
+              "core": "e9f55a11",
+              "mod": "75b64a07"
+            },
+            {
+              "simulation_tick": 9248,
+              "core": "607ab96e",
+              "mod": "40a90b8d"
+            },
+            {
+              "simulation_tick": 9280,
+              "core": "0362784b",
+              "mod": "23b441fa"
+            },
+            {
+              "simulation_tick": 9312,
+              "core": "43bb9d05",
+              "mod": "88b74d92"
+            },
+            {
+              "simulation_tick": 9344,
+              "core": "bb3b0091",
+              "mod": "9cedaef5"
+            },
+            {
+              "simulation_tick": 9376,
+              "core": "d6536e3e",
+              "mod": "79291f81"
+            },
+            {
+              "simulation_tick": 9408,
+              "core": "576fe944",
+              "mod": "cb744b1f"
+            },
+            {
+              "simulation_tick": 9440,
+              "core": "f07867b8",
+              "mod": "6c776a81"
+            },
+            {
+              "simulation_tick": 9472,
+              "core": "b0ae0bfc",
+              "mod": "f97650d1"
+            },
+            {
+              "simulation_tick": 9504,
+              "core": "fba31358",
+              "mod": "2c2dbbcb"
+            },
+            {
+              "simulation_tick": 9536,
+              "core": "af880702",
+              "mod": "3d407e8b"
+            },
+            {
+              "simulation_tick": 9568,
+              "core": "796e0981",
+              "mod": "3a05d686"
+            },
+            {
+              "simulation_tick": 9600,
+              "core": "27618e7b",
+              "mod": "28408263"
+            },
+            {
+              "simulation_tick": 9632,
+              "core": "5d0b9960",
+              "mod": "01fa12c9"
+            },
+            {
+              "simulation_tick": 9664,
+              "core": "c101ce58",
+              "mod": "e9feecdb"
+            },
+            {
+              "simulation_tick": 9696,
+              "core": "ed528d81",
+              "mod": "212086e8"
+            },
+            {
+              "simulation_tick": 9728,
+              "core": "5acb2448",
+              "mod": "b2d6df0e"
+            },
+            {
+              "simulation_tick": 9760,
+              "core": "e641c50d",
+              "mod": "9ed5122c"
+            },
+            {
+              "simulation_tick": 9792,
+              "core": "0ea64cb7",
+              "mod": "1926a5e2"
+            },
+            {
+              "simulation_tick": 9824,
+              "core": "92ae1043",
+              "mod": "87cb0d0d"
+            },
+            {
+              "simulation_tick": 9856,
+              "core": "0fbc8963",
+              "mod": "d34a536d"
+            },
+            {
+              "simulation_tick": 9888,
+              "core": "6b66241c",
+              "mod": "e6659687"
+            },
+            {
+              "simulation_tick": 9920,
+              "core": "fa681a5b",
+              "mod": "930ff303"
+            },
+            {
+              "simulation_tick": 9952,
+              "core": "eeb8ca91",
+              "mod": "63896be1"
+            },
+            {
+              "simulation_tick": 9984,
+              "core": "f7806f4b",
+              "mod": "4a3f17d1"
+            },
+            {
+              "simulation_tick": 10016,
+              "core": "ae8808e9",
+              "mod": "dfe76f8f"
+            },
+            {
+              "simulation_tick": 10048,
+              "core": "a71e20ea",
+              "mod": "1c5b999d"
+            },
+            {
+              "simulation_tick": 10080,
+              "core": "ce980a9e",
+              "mod": "6f1bee7d"
+            },
+            {
+              "simulation_tick": 10112,
+              "core": "956ba7fd",
+              "mod": "9c669cb7"
+            },
+            {
+              "simulation_tick": 10144,
+              "core": "e1837179",
+              "mod": "2a07ef17"
+            },
+            {
+              "simulation_tick": 10176,
+              "core": "f2cd7833",
+              "mod": "40e6633b"
+            },
+            {
+              "simulation_tick": 10208,
+              "core": "9607c3ab",
+              "mod": "9cf5f955"
+            },
+            {
+              "simulation_tick": 10240,
+              "core": "00013376",
+              "mod": "0e24dfdf"
+            },
+            {
+              "simulation_tick": 10272,
+              "core": "92b6a792",
+              "mod": "51c6b57f"
+            },
+            {
+              "simulation_tick": 10304,
+              "core": "dc06bb7b",
+              "mod": "87cb0d0d"
+            },
+            {
+              "simulation_tick": 10336,
+              "core": "2a5b172f",
+              "mod": "d34a536d"
+            },
+            {
+              "simulation_tick": 10368,
+              "core": "c2a004eb",
+              "mod": "e6659687"
+            },
+            {
+              "simulation_tick": 10400,
+              "core": "959c8b7a",
+              "mod": "930ff303"
+            },
+            {
+              "simulation_tick": 10432,
+              "core": "7c97b2ce",
+              "mod": "63896be1"
+            },
+            {
+              "simulation_tick": 10464,
+              "core": "09988aa8",
+              "mod": "4a3f17d1"
+            },
+            {
+              "simulation_tick": 10496,
+              "core": "5f2f3737",
+              "mod": "f3360fee"
+            },
+            {
+              "simulation_tick": 10528,
+              "core": "4bd81bb2",
+              "mod": "2e6c0867"
+            },
+            {
+              "simulation_tick": 10560,
+              "core": "8d8cde6c",
+              "mod": "7a771fa9"
+            },
+            {
+              "simulation_tick": 10592,
+              "core": "9c8481a9",
+              "mod": "c1ac935b"
+            },
+            {
+              "simulation_tick": 10624,
+              "core": "635f2bd8",
+              "mod": "b2ca757b"
+            },
+            {
+              "simulation_tick": 10656,
+              "core": "d25bda28",
+              "mod": "7a4272bf"
+            },
+            {
+              "simulation_tick": 10688,
+              "core": "d90f5688",
+              "mod": "6d2a5aa1"
+            },
+            {
+              "simulation_tick": 10720,
+              "core": "920ade53",
+              "mod": "7e42c3ed"
+            },
+            {
+              "simulation_tick": 10752,
+              "core": "54b0fc6a",
+              "mod": "1fb72883"
+            },
+            {
+              "simulation_tick": 10784,
+              "core": "962e044d",
+              "mod": "9584b8d9"
+            },
+            {
+              "simulation_tick": 10816,
+              "core": "6d6d8b1a",
+              "mod": "4f2a9122"
+            },
+            {
+              "simulation_tick": 10848,
+              "core": "2b5673e9",
+              "mod": "11bc669a"
+            },
+            {
+              "simulation_tick": 10880,
+              "core": "f5aa7a49",
+              "mod": "59527c70"
+            },
+            {
+              "simulation_tick": 10912,
+              "core": "db78addd",
+              "mod": "58ba726d"
+            },
+            {
+              "simulation_tick": 10944,
+              "core": "8d7ed6f2",
+              "mod": "7d02ce5c"
+            },
+            {
+              "simulation_tick": 10976,
+              "core": "a5a7a1fa",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11008,
+              "core": "84e4c9e7",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11040,
+              "core": "8c5f74d7",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11072,
+              "core": "23f3cd1a",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11104,
+              "core": "91a3a5bd",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11136,
+              "core": "df02b500",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11168,
+              "core": "3034a296",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11200,
+              "core": "2a6ccc92",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11232,
+              "core": "f3b24b89",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11264,
+              "core": "9439d37a",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11296,
+              "core": "62c51732",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11328,
+              "core": "979a287a",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11360,
+              "core": "d18baa8f",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11392,
+              "core": "4b7aa932",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11424,
+              "core": "ea1ee7ac",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11456,
+              "core": "c87fc0ca",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11488,
+              "core": "14a5f68e",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11520,
+              "core": "9bc9446f",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11552,
+              "core": "b92afde6",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11584,
+              "core": "d63fbaf3",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11616,
+              "core": "cafe7e84",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11648,
+              "core": "14e519d9",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11680,
+              "core": "a4c40260",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11712,
+              "core": "e0a76b59",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11744,
+              "core": "760e76f8",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11776,
+              "core": "ba413937",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11808,
+              "core": "66bde8f9",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11840,
+              "core": "810768e7",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11872,
+              "core": "022cdf0a",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11904,
+              "core": "bfd8045e",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11936,
+              "core": "c5162ac3",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 11968,
+              "core": "aac01386",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12000,
+              "core": "0558595a",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12032,
+              "core": "c3580c0e",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12064,
+              "core": "2de16049",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12096,
+              "core": "2f093982",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12128,
+              "core": "e5fa2fc8",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12160,
+              "core": "1a26e98e",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12192,
+              "core": "ded41002",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12224,
+              "core": "154ad7f9",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12256,
+              "core": "d63d584c",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12288,
+              "core": "c2a4d67f",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12320,
+              "core": "9ca5bd9c",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12352,
+              "core": "d494bd31",
+              "mod": "39a4b4a6"
+            },
+            {
+              "simulation_tick": 12384,
+              "core": "5af02e97",
+              "mod": "39a4b4a6"
+            }
+          ],
+          "parser": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\coop_state_crc.py",
+            "bytes": 3972,
+            "sha256": "e3df83c7e65186be58661149b52aa0897cac0dcfa941eea24ebc1871a8e820a1"
+          },
+          "logs": [
+            {
+              "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\peer-0\\logs\\stderr.log",
+              "bytes": 76765,
+              "sha256": "80306fc7376816afc3dc102d792f89a5fdd5721a63f87c8e6607958383a07247"
+            },
+            {
+              "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\peer-1\\logs\\stderr.log",
+              "bytes": 76885,
+              "sha256": "8be53be71c9164f9e342807e87c152605f4ccf28bd23ec695b986ef52c522801"
+            }
+          ],
+          "final_network": [
+            {
+              "id": 8266,
+              "ok": true,
+              "active": 1,
+              "host": 1,
+              "rollback": 0,
+              "architecture": "p2p",
+              "max_players": 2,
+              "players": 2,
+              "tick": 12390,
+              "resolved_through": 12389,
+              "stall": "ok",
+              "remote_lead": 4,
+              "desync": 0,
+              "desync_tick": 0,
+              "local_hash": 0,
+              "remote_hash": 0
+            },
+            {
+              "id": 8248,
+              "ok": true,
+              "active": 1,
+              "host": 0,
+              "rollback": 0,
+              "architecture": "p2p",
+              "max_players": 2,
+              "players": 2,
+              "tick": 12394,
+              "resolved_through": 12390,
+              "stall": "ok",
+              "remote_lead": 0,
+              "desync": 0,
+              "desync_tick": 0,
+              "local_hash": 0,
+              "remote_hash": 0
+            }
+          ],
+          "raw_parent_status": "failed",
+          "raw_parent_error": "paired ground-jump audio then settle: insufficient common diagnostic publication counts",
+          "raw_parent_unchanged": true
+        }
+      ],
+      "host_profile_final": {
+        "profile": "mmx6.win64-clang22.loopback",
+        "revision": 14,
+        "selected_sha256": "444adc62936aad9925dfe6a93dddc258257d6dd5a1ec07bb3d3fce0e50d85c01",
+        "peers": [
+          {
+            "capabilities": {
+              "actual_image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 14,
+              "selected_sha256": "444adc62936aad9925dfe6a93dddc258257d6dd5a1ec07bb3d3fce0e50d85c01",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          },
+          {
+            "capabilities": {
+              "actual_image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 14,
+              "selected_sha256": "444adc62936aad9925dfe6a93dddc258257d6dd5a1ec07bb3d3fce0e50d85c01",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          }
+        ]
+      },
+      "frontend": {
+        "artifact": {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-frontend\\observations.json",
+          "bytes": 5470663,
+          "sha256": "f7527b1530ab92fb0ff9ca62e7d34eb08c9a48bf0d3bdcabfbe712b70f8dde93"
+        },
+        "status": "failed_partial",
+        "error": "Original report phase2 text acceleration Cross: native response timed out",
+        "checks": {},
+        "admitted_for_F128": false
+      }
+    }
+  },
+  "composed_images": [
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "actual-Yammark-battle-entry",
+      "row": 0,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v82-root-v2\\ammo-hud\\intro-admission\\Yammark-finalhit\\peer-0-actual-Yammark-battle-entry.png",
+        "bytes": 2074543,
+        "sha256": "bc3837023e8fa8fe718be2d32b3aaf8413e7039735e00cb5386423bcfe076c56"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "actual-guest-Yammark-lethal",
+      "row": 247,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v82-root-v2\\ammo-hud\\intro-admission\\Yammark-finalhit\\peer-0-actual-guest-Yammark-lethal.png",
+        "bytes": 2074543,
+        "sha256": "13f21b1d1d2443b5e3c4cbadc16101d8cafc5caea52bfe0f00b4c1b1f3625ae6"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "native-peer0-seat1-state1-action25-visible1",
+      "row": 393,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v82-root-v2\\ammo-hud\\intro-admission\\Yammark-finalhit\\peer-0-native-peer0-seat1-state1-action25-visible1.png",
+        "bytes": 2074543,
+        "sha256": "327a31ed01244197f5bed234f1a17cb809f56a14c1f53465587e6db83f05d353"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "native-peer0-seat0-state1-action25-visible1",
+      "row": 394,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v82-root-v2\\ammo-hud\\intro-admission\\Yammark-finalhit\\peer-0-native-peer0-seat0-state1-action25-visible1.png",
+        "bytes": 2074543,
+        "sha256": "40ee9f5abab3934212cfd2d813c7b00b2211c240dea7fc3f35d496cf8e962ce8"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "native-peer0-seat1-state1-action1-visible1",
+      "row": 478,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v82-root-v2\\ammo-hud\\intro-admission\\Yammark-finalhit\\peer-0-native-peer0-seat1-state1-action1-visible1.png",
+        "bytes": 2074543,
+        "sha256": "c82d9846fd1858925f60d5dcceeb702022eb0f6f2090df4f22352ff6735ff2db"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "native-peer0-seat0-state1-action1-visible1",
+      "row": 479,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v82-root-v2\\ammo-hud\\intro-admission\\Yammark-finalhit\\peer-0-native-peer0-seat0-state1-action1-visible1.png",
+        "bytes": 2074543,
+        "sha256": "6df8c54781f793116d2e3023869ce346afbfc05ef8d5dc00b3c24fa6802f083e"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "first-native-post-clear-frontend",
+      "row": 496,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v82-root-v2\\ammo-hud\\intro-admission\\Yammark-finalhit\\peer-0-first-native-post-clear-frontend.png",
+        "bytes": 2074543,
+        "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "actual-Yammark-battle-entry",
+      "row": 0,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-0-actual-Yammark-battle-entry.png",
+        "bytes": 2074543,
+        "sha256": "fe5a4e3db91d165ce5255a649028eaa9c40b6e25bacec20a1fe809b148ef5dbe"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "actual-Yammark-battle-entry",
+      "row": 0,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-1-actual-Yammark-battle-entry.png",
+        "bytes": 2074543,
+        "sha256": "0fd1adeed2dc2e3318dde90b6372d7eeb27f35530cf70d70902a8494ba6b87ea"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "actual-guest-Yammark-lethal",
+      "row": 199,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-0-actual-guest-Yammark-lethal.png",
+        "bytes": 2074543,
+        "sha256": "e442f402e02d20cc86cd0b3bfea195cee1cd43fa7447ea82faafe4479e56d623"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "actual-guest-Yammark-lethal",
+      "row": 199,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-1-actual-guest-Yammark-lethal.png",
+        "bytes": 2074543,
+        "sha256": "e442f402e02d20cc86cd0b3bfea195cee1cd43fa7447ea82faafe4479e56d623"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "native-peer0-seat1-state1-action25-visible1",
+      "row": 297,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-0-native-peer0-seat1-state1-action25-visible1.png",
+        "bytes": 2074543,
+        "sha256": "4987c6b7369f68be6e98ff66d04d421c354674918a81a65c7545068c7fbdfb77"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "native-peer0-seat1-state1-action25-visible1",
+      "row": 297,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-1-native-peer0-seat1-state1-action25-visible1.png",
+        "bytes": 2074543,
+        "sha256": "4987c6b7369f68be6e98ff66d04d421c354674918a81a65c7545068c7fbdfb77"
+      },
+      "personally_reviewed": false,
+      "review": "Redundant opposite-peer milestone capture retained; no separate artwork claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "native-peer1-seat0-state1-action25-visible1",
+      "row": 297,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-0-native-peer1-seat0-state1-action25-visible1.png",
+        "bytes": 2074543,
+        "sha256": "4987c6b7369f68be6e98ff66d04d421c354674918a81a65c7545068c7fbdfb77"
+      },
+      "personally_reviewed": false,
+      "review": "Redundant opposite-peer milestone capture retained; no separate artwork claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "native-peer1-seat0-state1-action25-visible1",
+      "row": 297,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-1-native-peer1-seat0-state1-action25-visible1.png",
+        "bytes": 2074543,
+        "sha256": "7fb773d8bc2d67cde30ec8d5a45dad649b429a5a0df620549254dbfad03fc71e"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "native-peer1-seat1-state1-action25-visible1",
+      "row": 297,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-0-native-peer1-seat1-state1-action25-visible1.png",
+        "bytes": 2074543,
+        "sha256": "7fb773d8bc2d67cde30ec8d5a45dad649b429a5a0df620549254dbfad03fc71e"
+      },
+      "personally_reviewed": false,
+      "review": "Redundant opposite-peer milestone capture retained; no separate artwork claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "native-peer1-seat1-state1-action25-visible1",
+      "row": 297,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-1-native-peer1-seat1-state1-action25-visible1.png",
+        "bytes": 2074543,
+        "sha256": "ff01a42ebb4f6fe3d1b7f00987c1df9297372435ef01a2e6cf5173b8c56ca428"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "native-peer0-seat0-state1-action25-visible1",
+      "row": 298,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-0-native-peer0-seat0-state1-action25-visible1.png",
+        "bytes": 2074543,
+        "sha256": "ccc5d4d6e1afddf9a489262a658bc452dbcfa4551002f12080b209061f88fd4d"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "native-peer0-seat0-state1-action25-visible1",
+      "row": 298,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-1-native-peer0-seat0-state1-action25-visible1.png",
+        "bytes": 2074543,
+        "sha256": "ccc5d4d6e1afddf9a489262a658bc452dbcfa4551002f12080b209061f88fd4d"
+      },
+      "personally_reviewed": false,
+      "review": "Redundant opposite-peer milestone capture retained; no separate artwork claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "native-peer0-seat1-state1-action1-visible1",
+      "row": 341,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-0-native-peer0-seat1-state1-action1-visible1.png",
+        "bytes": 2074543,
+        "sha256": "0af779eed417aa37d269967e9f634a8af955a9ac4857c595c60a68d8842b855d"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "native-peer0-seat1-state1-action1-visible1",
+      "row": 341,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-1-native-peer0-seat1-state1-action1-visible1.png",
+        "bytes": 2074543,
+        "sha256": "dbfbb27b047a171d689b2ef603e31740300a14a95fac8310808e613995ca1a11"
+      },
+      "personally_reviewed": false,
+      "review": "Redundant opposite-peer milestone capture retained; no separate artwork claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "native-peer1-seat0-state1-action1-visible1",
+      "row": 341,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-0-native-peer1-seat0-state1-action1-visible1.png",
+        "bytes": 2074543,
+        "sha256": "dbfbb27b047a171d689b2ef603e31740300a14a95fac8310808e613995ca1a11"
+      },
+      "personally_reviewed": false,
+      "review": "Redundant opposite-peer milestone capture retained; no separate artwork claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "native-peer1-seat0-state1-action1-visible1",
+      "row": 341,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-1-native-peer1-seat0-state1-action1-visible1.png",
+        "bytes": 2074543,
+        "sha256": "4e4e70e89b145d7b35d459effcd598ce64dc0150a31744374dfe624a95fa1f28"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "native-peer1-seat1-state1-action1-visible1",
+      "row": 341,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-0-native-peer1-seat1-state1-action1-visible1.png",
+        "bytes": 2074543,
+        "sha256": "4e4e70e89b145d7b35d459effcd598ce64dc0150a31744374dfe624a95fa1f28"
+      },
+      "personally_reviewed": false,
+      "review": "Redundant opposite-peer milestone capture retained; no separate artwork claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "native-peer1-seat1-state1-action1-visible1",
+      "row": 341,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-1-native-peer1-seat1-state1-action1-visible1.png",
+        "bytes": 2074543,
+        "sha256": "ba901438fb3106db855501d77fabda8af1ab71a483579e00715f8eea59d5c7dc"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "native-peer0-seat0-state1-action1-visible1",
+      "row": 342,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-0-native-peer0-seat0-state1-action1-visible1.png",
+        "bytes": 2074543,
+        "sha256": "5de1eede7d8fa148e3b5b05bfb422368086c1996c5d30831337ed0e1b6ba8f61"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "native-peer0-seat0-state1-action1-visible1",
+      "row": 342,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-1-native-peer0-seat0-state1-action1-visible1.png",
+        "bytes": 2074543,
+        "sha256": "045fe71227b5f877e8051e51f04849c9f0a41974d801115b01b8f8c1230248e0"
+      },
+      "personally_reviewed": false,
+      "review": "Redundant opposite-peer milestone capture retained; no separate artwork claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "first-native-post-clear-frontend",
+      "row": 350,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-0-first-native-post-clear-frontend.png",
+        "bytes": 2074543,
+        "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "first-native-post-clear-frontend",
+      "row": 350,
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-netplay-v82-root-v3\\intro-admission\\Yammark-finalhit\\peer-1-first-native-post-clear-frontend.png",
+        "bytes": 2074543,
+        "sha256": "c09874d9e61b871368ae088c75b7087025403ad15af886df9d2f1bbd173fab63"
+      },
+      "personally_reviewed": true,
+      "review": "Actual hero victory/departure art retained; primary partly overlaps HUD, corrupt scenery and bright slash art explicit. First frontend may be black during fade; not selector proof."
+    }
+  ],
+  "source_notes": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-victory-current-V82-source-gates-worker-v1.txt",
+      "bytes": 8740,
+      "sha256": "033ced2bd71df052daf485b6c2502ae2be42547817882e1090f2d76a839f0e40"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-report-weapon-text-source-v82-worker-v1.txt",
+      "bytes": 4555,
+      "sha256": "ad5b8fe5940fe4a0389fc595b35c54a051bfbe0f8c6b2b248a2c2ddc8d06a9af"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-report-additional-text-map-source-v82-worker-v1.txt",
+      "bytes": 4568,
+      "sha256": "f29d8145123c8ae4b3fce12964f3b058c728e5f870c417a3478eb89bd8a22450"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F128-post-exit-publication-v82-source-worker-v1.txt",
+      "bytes": 4454,
+      "sha256": "5b8174e75a10f72af556c125ccac046e0c09f9d39bc33b4da7e5b89edc3b95b6"
+    }
+  ],
+  "limits": [
+    "F128 only: actual Commander Yammark49/0 origin800F66C0 guest finalhit with primary alive, shared native25/outgoing1/state3 in LOCAL and NET on one frozen candidate. No other finisher, other Investigator or campaign breadth inference.",
+    "Original AmazonCP2 LAB initializer bypasses prior route; actual native last door, original conversation and fullHP boss are earned by the retained entry observer. No protection,HP/ammo/pose/position/phase/contact/success writes or execution-state load. Fixture taint refuses ordinary capture/replay.",
+    "Only actual source-owned Zero melee and original main HP/state establish finalhit. Original attack modifiers apply; no assumed fixed2/2/5 HP damage from source base tables.",
+    "Existing native shared-victory fix is already integrated: genuine original3D308/script20 finalhit admission, each body native recovery/landing/victory/departure and last-body handoff fence. No manufactured victory state.",
+    "NET raw parent remains failed ONLY because its generic final matched() requires changing gameplay diagnostic publication counts after both bodies have retired. All14 source/profile/cards/cleanup checks pass. The unchanged standard coop_state_crc parser/verifier compares256 common resolved core+nonzero-mod samples4224..12384 and eight AFTER callback start12155, strictly below actual both-peer failure-diagnostic watermark12389. Raw q/logs are unchanged and hashed; no CRC check is waived or speculative tip accepted. LOCAL parent all4 gates pass.",
+    "R19 report/selector continuation remains INCOMPLETE and is explicitly separate from the earlier complete F128 native endpoint. Original text-speed pulse required persistent+0Fzero and timed out; neither selector return nor native Save is credited. F90 needs primary finisher too and remains failed; F13/F17/F69 unverified.",
+    "Root personally reviewed relevant native entry/lethal/bothvictory/bothdeparture/firstfrontend captures per physical process. Primary partly overlaps HUD; corrupt scenery, overlapping initial heroes, shared fallback victory panes and bright melee sprites remain visible. No general artwork/HUD/palette/private-camera or audio fidelity claim.",
+    "All historical V70 failure, V71 partial setups, V82LOCALv1 report4 blocker and V82v2 incomplete frontend and NETv2 jump-interruption evidence retained. Final NETv3 input aiming uses an available full60px stance and original ground24 vertical reach; LOCALv2 is already qualified on the same immutable image/source. Different ordinary control trajectories/observer revisions do not transfer evidence to another candidate. No cross-candidate credit transfer."
+  ]
+}

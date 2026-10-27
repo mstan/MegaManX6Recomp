@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 77 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F79, F89, F91, F92, F95, F97, F98, F101, F102, F107, F110, F114, F116, F119, F121, F133, F137, F144, F157, F163, F170, F173, F177, F178, F184, F191, F197, F198, F204, F205, F208), 4 failed, 153 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 78 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F79, F89, F91, F92, F95, F97, F98, F101, F102, F107, F110, F114, F116, F119, F121, F128, F133, F137, F144, F157, F163, F170, F173, F177, F178, F184, F191, F197, F198, F204, F205, F208), 4 failed, 152 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,8 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 27
+
+**F128 is closed: 78 passed / 4 failed / 152 unverified (33.3%).** The [same-candidate native guest finalhit/victory review](evidence/mmx6-scene/manifest-bound-dcc1002-F128-guest-native-victory-reviewed.json) proves an actual Yammark kill with the primary alive, both visible native victory poses exactly once, then each original departure/state3 in LOCAL and NET. Required source/profile/cards/owned-exit gates and strict fixture recording refusals pass. The raw NET parent stops on its post-exit gameplay-publication counter expectation; retained logs independently pass the standard resolved core/mod CRC check across256 samples, including8 after the callback. The unrelated R19 selector continuation remains incomplete; F90 still needs the other finisher. This adds one since77.
 
 F199 remains unverified after [two same-candidate LOCAL setups](evidence/mmx6-solid/manifest-bound-dcc1002-F199-local-setups-deferred.json). The first short Right pulses admit native double-tap dash before the intended boundary. The changed second attempt stops beforeRight because its body publication still predates the separateREADY receipt; no actual position escape is inferred. Both owned exits/cards pass. Further timing variants are deferred; counts remain77/4/153.
 

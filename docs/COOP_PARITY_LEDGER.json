@@ -14464,7 +14464,7 @@
       "frozen_row_sha256": "baed1c8513186ecfad45c06a76755bfe7ca3b044b8c98c2066d8d1a3fdfe0157",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Primary remains after guest final hit",
         "bounded_check": "Let guest land a native Investigator kill while primary remains alive; primary must not be withdrawn as a passenger before shared native victory.",
         "baseline_anchors": [
@@ -14472,17 +14472,92 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "pre-agreed original AmazonCP2, native lastdoor/conversation, actual fullHP boss"
+            },
+            "action": "Guest lands actual native Investigator kill with living primary, then both actual once-only native victory and outgoing departure.",
+            "outcome": "Both living heroes enter native25once visibly together and each outgoing1once/state3 before original report, without primary or guest premature passenger withdrawal.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-dcc1002-F128-guest-native-victory-reviewed.json",
+                "sha256": "86f636e4255214b1ed3e1f6d507f1fd600d2a770bf83dfbeee636ae6ba968fda"
+              }
+            ],
+            "limits": [
+              "F128 only: actual Commander Yammark49/0 origin800F66C0 guest finalhit with primary alive, shared native25/outgoing1/state3 in LOCAL and NET on one frozen candidate. No other finisher, other Investigator or campaign breadth inference.",
+              "Original AmazonCP2 LAB initializer bypasses prior route; actual native last door, original conversation and fullHP boss are earned by the retained entry observer. No protection,HP/ammo/pose/position/phase/contact/success writes or execution-state load. Fixture taint refuses ordinary capture/replay.",
+              "Only actual source-owned Zero melee and original main HP/state establish finalhit. Original attack modifiers apply; no assumed fixed2/2/5 HP damage from source base tables.",
+              "Existing native shared-victory fix is already integrated: genuine original3D308/script20 finalhit admission, each body native recovery/landing/victory/departure and last-body handoff fence. No manufactured victory state.",
+              "NET raw parent remains failed ONLY because its generic final matched() requires changing gameplay diagnostic publication counts after both bodies have retired. All14 source/profile/cards/cleanup checks pass. The unchanged standard coop_state_crc parser/verifier compares256 common resolved core+nonzero-mod samples4224..12384 and eight AFTER callback start12155, strictly below actual both-peer failure-diagnostic watermark12389. Raw q/logs are unchanged and hashed; no CRC check is waived or speculative tip accepted. LOCAL parent all4 gates pass.",
+              "R19 report/selector continuation remains INCOMPLETE and is explicitly separate from the earlier complete F128 native endpoint. Original text-speed pulse required persistent+0Fzero and timed out; neither selector return nor native Save is credited. F90 needs primary finisher too and remains failed; F13/F17/F69 unverified.",
+              "Root personally reviewed relevant native entry/lethal/bothvictory/bothdeparture/firstfrontend captures per physical process. Primary partly overlaps HUD; corrupt scenery, overlapping initial heroes, shared fallback victory panes and bright melee sprites remain visible. No general artwork/HUD/palette/private-camera or audio fidelity claim.",
+              "All historical V70 failure, V71 partial setups, V82LOCALv1 report4 blocker and V82v2 incomplete frontend and NETv2 jump-interruption evidence retained. Final NETv3 input aiming uses an available full60px stance and original ground24 vertical reach; LOCALv2 is already qualified on the same immutable image/source. Different ordinary control trajectories/observer revisions do not transfer evidence to another candidate. No cross-candidate credit transfer."
+            ],
+            "bypasses": [
+              "Original AmazonCP2 LAB initializer bypasses prior route; actual native last door, original conversation and fullHP boss are earned by the retained entry observer. No protection,HP/ammo/pose/position/phase/contact/success writes or execution-state load. Fixture taint refuses ordinary capture/replay."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "pre-agreed original AmazonCP2, native lastdoor/conversation, actual fullHP boss"
+            },
+            "action": "Guest lands actual native Investigator kill with living primary, then both actual once-only native victory and outgoing departure.",
+            "outcome": "Both living heroes enter native25once visibly together and each outgoing1once/state3 before original report, without primary or guest premature passenger withdrawal.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-dcc1002-F128-guest-native-victory-reviewed.json",
+                "sha256": "86f636e4255214b1ed3e1f6d507f1fd600d2a770bf83dfbeee636ae6ba968fda"
+              }
+            ],
+            "limits": [
+              "F128 only: actual Commander Yammark49/0 origin800F66C0 guest finalhit with primary alive, shared native25/outgoing1/state3 in LOCAL and NET on one frozen candidate. No other finisher, other Investigator or campaign breadth inference.",
+              "Original AmazonCP2 LAB initializer bypasses prior route; actual native last door, original conversation and fullHP boss are earned by the retained entry observer. No protection,HP/ammo/pose/position/phase/contact/success writes or execution-state load. Fixture taint refuses ordinary capture/replay.",
+              "Only actual source-owned Zero melee and original main HP/state establish finalhit. Original attack modifiers apply; no assumed fixed2/2/5 HP damage from source base tables.",
+              "Existing native shared-victory fix is already integrated: genuine original3D308/script20 finalhit admission, each body native recovery/landing/victory/departure and last-body handoff fence. No manufactured victory state.",
+              "NET raw parent remains failed ONLY because its generic final matched() requires changing gameplay diagnostic publication counts after both bodies have retired. All14 source/profile/cards/cleanup checks pass. The unchanged standard coop_state_crc parser/verifier compares256 common resolved core+nonzero-mod samples4224..12384 and eight AFTER callback start12155, strictly below actual both-peer failure-diagnostic watermark12389. Raw q/logs are unchanged and hashed; no CRC check is waived or speculative tip accepted. LOCAL parent all4 gates pass.",
+              "R19 report/selector continuation remains INCOMPLETE and is explicitly separate from the earlier complete F128 native endpoint. Original text-speed pulse required persistent+0Fzero and timed out; neither selector return nor native Save is credited. F90 needs primary finisher too and remains failed; F13/F17/F69 unverified.",
+              "Root personally reviewed relevant native entry/lethal/bothvictory/bothdeparture/firstfrontend captures per physical process. Primary partly overlaps HUD; corrupt scenery, overlapping initial heroes, shared fallback victory panes and bright melee sprites remain visible. No general artwork/HUD/palette/private-camera or audio fidelity claim.",
+              "All historical V70 failure, V71 partial setups, V82LOCALv1 report4 blocker and V82v2 incomplete frontend and NETv2 jump-interruption evidence retained. Final NETv3 input aiming uses an available full60px stance and original ground24 vertical reach; LOCALv2 is already qualified on the same immutable image/source. Different ordinary control trajectories/observer revisions do not transfer evidence to another candidate. No cross-candidate credit transfer."
+            ],
+            "bypasses": [
+              "Original AmazonCP2 LAB initializer bypasses prior route; actual native last door, original conversation and fullHP boss are earned by the retained entry observer. No protection,HP/ammo/pose/position/phase/contact/success writes or execution-state load. Fixture taint refuses ordinary capture/replay."
+            ]
+          }
+        ],
+        "limitations": "Exactdcc1002 LOCAL+NET actualguestkill, bothliving native25/outgoing/state3 and noearlyprimarywithdrawal qualified. OriginalCP2 route bypass/scenery/HUD overlap explicit. R19selector/nativeSave and F90otherfinisher not qualified."
       }
     },
     {
