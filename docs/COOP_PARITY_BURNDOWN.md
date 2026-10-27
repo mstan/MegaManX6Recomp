@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 61 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F8, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F67, F68, F70, F89, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F157, F163, F170, F178, F204, F205, F208), 5 failed, 168 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 61 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F8, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F67, F68, F70, F89, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F157, F163, F170, F178, F204, F205, F208), 6 failed, 167 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,13 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 26
+
+**F90 now has a native LOCAL failure: 61 passed / 6 failed / 167 unverified.**
+An [actual guest Investigator kill](evidence/mmx6-scene/manifest-bound-7f59990-F90-guest-kill-local-failed-reviewed.json)
+earns32->0 through seven accepted airslash lifetimes with both heroes alive.
+The generic death scene beams Zero out before X alone celebrates.
+The shared-victory fix is being implemented separately. No new pass;
+R19/F128, selector return and the other finisher remain unverified.
 
 **F8 and F89 are closed: 61 passed / 5 failed / 168 unverified (26.1%).**
 The [same-candidate Investigator comparison receipt](evidence/mmx6-camera/manifest-bound-7f59990-F8-F89-local-netplay-reviewed.json)

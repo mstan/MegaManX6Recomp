@@ -11630,17 +11630,54 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "7f59990e052422aa845837b26470117f57de3c72",
+            "build_identity": {
+              "executable_sha256": "c7c981e384a4b8000a5866f7a6128b330f8f6166330d04bb4d914a06c6abd223",
+              "compiled_manifest_sha256": "4bbf3327e831a652ddbef3ce5aa9e015f9f4ddc1a64f9f08e347096aa7493ff3",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "transport": "one owned local process",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original AmazonCP2"
+            },
+            "action": "Earn actual guest air27 Investigator kill with living primary; observe both native victory/departure states.",
+            "outcome": "Guest kill32->0 with P1HP23/Zero22. Scriptowner1 immediately withdraws Zero; X alone reaches25 and outgoing1, Zero stays hidden/state3 and never enters25. F90 fails locally.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-7f59990-F90-guest-kill-local-failed-reviewed.json",
+                "sha256": "353e3a13a90a1b790872109d635edbbe9e5596f701d5ee822078b638630ff34e"
+              }
+            ],
+            "limits": [
+              "F90 LOCAL fails on a genuine Zero-owned native Investigator kill while both heroes live. One counterexample disproves both-hero victory contract; no NET or other-finisher verdict inferred.",
+              "Seven accepted native air27/pose49 lifetimes consume32HP with actual4/6HP totals; one native hurt17 jump interruption offers no Square. No protection or HP/position/contact/pose/token/outcome writes.",
+              "At lethal original script selects P1 scene owner1 and sends Zero outgoing1; Zero then remains hidden/state3 while X alone enters native25 and outgoing1. This is not a demonstrated early P1 withdrawal for F128.",
+              "Native timer freezes1662 during script; SDK/controller/scene updates continue. Samples and images are separate observations, not exact collision-instruction timestamps.",
+              "Agreed original AmazonCP2 bypasses prior route; actual last door, dialogue, boss fill, fight, lethal/death/reward and native return-mode12 begin afterward. Actual selector, second guest cycle and P1-finisher case are not qualified; R19/F128 remain unverified.",
+              "All LOCAL parent/source/image/profile/card/owned-exit and strict fixture-taint recording/replay refusal gates pass. Six reviewed combat/clear images retain corrupt scenery, overlapping heroes, ordinary hurt/flash and HUD clipping. No scenery/font/color qualification. Earlier v1/v2 failures remain unchanged."
+            ],
+            "bypasses": [
+              "Pre-agreed original AmazonCP2 reachability only."
+            ]
+          }
+        ],
+        "limitations": "Exact7f59990 actual LOCAL guest kill confirms early companion withdrawal: Zero never enters25 while X alone celebrates. Native both-hero victory fix required. NET/P1finisher/actualselector remain unverified; all source/cards/ownedexit0/taintrefusal gates pass. No F128 early-primary-withdrawal claim."
       }
     },
     {

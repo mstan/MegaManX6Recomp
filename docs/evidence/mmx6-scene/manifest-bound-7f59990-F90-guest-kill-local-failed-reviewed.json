@@ -1,0 +1,441 @@
+{
+  "schema": 1,
+  "comparison": "F90",
+  "frozen_row_sha256": "e145b0cbf26d11f59e912bf85dc29c7e1c8203d5b8d5df58230593e7e9cb300c",
+  "result": "failed",
+  "mode": "local",
+  "candidate": "7f59990e052422aa845837b26470117f57de3c72",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-v70-final-binding-root-v1.json",
+    "binding_sha256": "a15740bac352664b3cfcd7f4655f70055604919a0589e0a6db936c41fb730c3a",
+    "image_sha256": "c7c981e384a4b8000a5866f7a6128b330f8f6166330d04bb4d914a06c6abd223",
+    "manifest_sha256": "4bbf3327e831a652ddbef3ce5aa9e015f9f4ddc1a64f9f08e347096aa7493ff3",
+    "provenance_sha256": "27cb2080aaa6fed2e47d3f19fcdff92eb536fdca84d89020d737c9cb1b217400",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v70-investigator-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "7f59990e052422aa845837b26470117f57de3c72",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v24",
+    "host_revision": 7
+  },
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v70-root-v3\\qualification.json",
+    "bytes": 26251347,
+    "sha256": "291f020f2ca9d1bd7c970e28bda02e6d08cbfc90fc1ead1e5e22248bdf8f7850"
+  },
+  "raw": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v70-root-v3\\ammo-hud\\intro-admission\\Yammark-finalhit\\observations.json",
+    "bytes": 10493887,
+    "sha256": "323faeac18460de8e31d281ec4cc0b0568cbe2e2b4d5504492be9918b2e25080"
+  },
+  "actual_guest_lethal": {
+    "offer": 7,
+    "row": 343,
+    "main": {
+      "slot": null,
+      "owner": null,
+      "address": "0x8008ef48",
+      "allocation": 65,
+      "active": 65,
+      "type": 49,
+      "subtype": 0,
+      "visible": 1,
+      "state": 2,
+      "action": 1,
+      "phase": 0,
+      "phase2": 0,
+      "x": 5153,
+      "y": 2000,
+      "x_raw": 337719488,
+      "y_raw": 131091648,
+      "layer": 0,
+      "facing": 64,
+      "selected_clip": 7,
+      "sprite_frame": 16,
+      "animation_cursor": "0x800f7aa4",
+      "command": [
+        1,
+        0,
+        0,
+        16
+      ],
+      "attack": "0x800f7954",
+      "hurt": "0x800f7958",
+      "table": "0x80074bfc",
+      "hp": 0,
+      "iframe": 25,
+      "disposition": 0,
+      "token": 0,
+      "remembered_token": 33,
+      "recovery": 0,
+      "feedback": 0,
+      "hex": "4131000102010000c0302114c04cd007c0660f8000400507c0302114c04cd007608c0000000000000000000000000000447b0f80a47a0f8000000000708d1580e0014c7901000010ff0001000000000054790f8058790f80fc4b078000010000041900000021000050790f80010008000000000000000000000000007d001700b0b70980000000010000000000000000000000000000000000000000",
+      "hurt_rect": [
+        5137,
+        1984,
+        5161,
+        2032
+      ]
+    }
+  },
+  "accepted_offers": [
+    {
+      "attempt": 0,
+      "before_hp": 32,
+      "after_hp": 28,
+      "hp_delta": 4,
+      "emitted_types": [
+        27
+      ],
+      "pose_seen": true
+    },
+    {
+      "attempt": 2,
+      "before_hp": 28,
+      "after_hp": 24,
+      "hp_delta": 4,
+      "emitted_types": [
+        27
+      ],
+      "pose_seen": true
+    },
+    {
+      "attempt": 3,
+      "before_hp": 24,
+      "after_hp": 20,
+      "hp_delta": 4,
+      "emitted_types": [
+        27
+      ],
+      "pose_seen": true
+    },
+    {
+      "attempt": 4,
+      "before_hp": 20,
+      "after_hp": 14,
+      "hp_delta": 6,
+      "emitted_types": [
+        27
+      ],
+      "pose_seen": true
+    },
+    {
+      "attempt": 5,
+      "before_hp": 14,
+      "after_hp": 10,
+      "hp_delta": 4,
+      "emitted_types": [
+        27
+      ],
+      "pose_seen": true
+    },
+    {
+      "attempt": 6,
+      "before_hp": 10,
+      "after_hp": 4,
+      "hp_delta": 6,
+      "emitted_types": [
+        27
+      ],
+      "pose_seen": true
+    },
+    {
+      "attempt": 7,
+      "before_hp": 4,
+      "after_hp": 0,
+      "hp_delta": 4,
+      "emitted_types": [
+        27
+      ],
+      "pose_seen": true
+    }
+  ],
+  "actual_transitions": [
+    {
+      "row": 342,
+      "native_timer": 1656,
+      "scene_owner": 0,
+      "scene_phase": 0,
+      "bodies": [
+        {
+          "active": 1,
+          "visible": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 23
+        },
+        {
+          "active": 1,
+          "visible": 1,
+          "state": 1,
+          "action": 50,
+          "hp": 22
+        }
+      ],
+      "mode": [
+        10,
+        0,
+        0,
+        0
+      ],
+      "clear0F": 0,
+      "world_hold1C": 0
+    },
+    {
+      "row": 343,
+      "native_timer": 1662,
+      "scene_owner": 1,
+      "scene_phase": 2,
+      "bodies": [
+        {
+          "active": 1,
+          "visible": 1,
+          "state": 1,
+          "action": 20,
+          "hp": 23
+        },
+        {
+          "active": 1,
+          "visible": 1,
+          "state": 1,
+          "action": 1,
+          "hp": 22
+        }
+      ],
+      "mode": [
+        10,
+        0,
+        0,
+        0
+      ],
+      "clear0F": 0,
+      "world_hold1C": 1
+    },
+    {
+      "row": 364,
+      "native_timer": 1662,
+      "scene_owner": 1,
+      "scene_phase": 3,
+      "bodies": [
+        {
+          "active": 1,
+          "visible": 1,
+          "state": 1,
+          "action": 20,
+          "hp": 23
+        },
+        {
+          "active": 1,
+          "visible": 0,
+          "state": 3,
+          "action": 0,
+          "hp": 22
+        }
+      ],
+      "mode": [
+        10,
+        0,
+        0,
+        0
+      ],
+      "clear0F": 0,
+      "world_hold1C": 1
+    },
+    {
+      "row": 521,
+      "native_timer": 1662,
+      "scene_owner": 1,
+      "scene_phase": 3,
+      "bodies": [
+        {
+          "active": 1,
+          "visible": 1,
+          "state": 1,
+          "action": 25,
+          "hp": 23
+        },
+        {
+          "active": 1,
+          "visible": 0,
+          "state": 3,
+          "action": 0,
+          "hp": 22
+        }
+      ],
+      "mode": [
+        10,
+        0,
+        0,
+        0
+      ],
+      "clear0F": 16,
+      "world_hold1C": 1
+    },
+    {
+      "row": 633,
+      "native_timer": 1662,
+      "scene_owner": 1,
+      "scene_phase": 3,
+      "bodies": [
+        {
+          "active": 1,
+          "visible": 1,
+          "state": 1,
+          "action": 1,
+          "hp": 23
+        },
+        {
+          "active": 1,
+          "visible": 0,
+          "state": 3,
+          "action": 0,
+          "hp": 22
+        }
+      ],
+      "mode": [
+        10,
+        0,
+        0,
+        0
+      ],
+      "clear0F": 16,
+      "world_hold1C": 1
+    },
+    {
+      "row": 642,
+      "native_timer": 1662,
+      "scene_owner": 1,
+      "scene_phase": 3,
+      "bodies": [
+        {
+          "active": 1,
+          "visible": 0,
+          "state": 3,
+          "action": 0,
+          "hp": 23
+        },
+        {
+          "active": 1,
+          "visible": 0,
+          "state": 3,
+          "action": 0,
+          "hp": 22
+        }
+      ],
+      "mode": [
+        10,
+        1,
+        0,
+        0
+      ],
+      "clear0F": 16,
+      "world_hold1C": 1
+    },
+    {
+      "row": 652,
+      "native_timer": 1662,
+      "scene_owner": 1,
+      "scene_phase": 3,
+      "bodies": [
+        {
+          "active": 1,
+          "visible": 0,
+          "state": 3,
+          "action": 0,
+          "hp": 23
+        },
+        {
+          "active": 1,
+          "visible": 0,
+          "state": 3,
+          "action": 0,
+          "hp": 22
+        }
+      ],
+      "mode": [
+        12,
+        0,
+        0,
+        0
+      ],
+      "clear0F": 0,
+      "world_hold1C": 1
+    }
+  ],
+  "reviewed_images": [
+    {
+      "label": "actual-Yammark-battle-entry",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v70-root-v3\\ammo-hud\\intro-admission\\Yammark-finalhit\\peer-0-actual-Yammark-battle-entry.png",
+        "bytes": 2074543,
+        "sha256": "983d8c368bfbca19deaf7c615884d063b92706ead6b52ad9f3c04a8953e73c2f"
+      },
+      "review": "Root viewed actual composed frame: native air-slash/lethal art, early Zero beam and X-only victory/outgoing corroborate raw state. X is partly behind left HUD; scenery corrupt. First mode12 image is black and does not prove initialized report panel or selector."
+    },
+    {
+      "label": "actual-guest-Yammark-lethal",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v70-root-v3\\ammo-hud\\intro-admission\\Yammark-finalhit\\peer-0-actual-guest-Yammark-lethal.png",
+        "bytes": 2074543,
+        "sha256": "d7304624eb9d07d1fd64d16b7b21d70a53a152dd8be612d13f99f4b4d985c4e1"
+      },
+      "review": "Root viewed actual composed frame: native air-slash/lethal art, early Zero beam and X-only victory/outgoing corroborate raw state. X is partly behind left HUD; scenery corrupt. First mode12 image is black and does not prove initialized report panel or selector."
+    },
+    {
+      "label": "native-peer0-seat1-state1-action1-visible1",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v70-root-v3\\ammo-hud\\intro-admission\\Yammark-finalhit\\peer-0-native-peer0-seat1-state1-action1-visible1.png",
+        "bytes": 2074543,
+        "sha256": "d7304624eb9d07d1fd64d16b7b21d70a53a152dd8be612d13f99f4b4d985c4e1"
+      },
+      "review": "Root viewed actual composed frame: native air-slash/lethal art, early Zero beam and X-only victory/outgoing corroborate raw state. X is partly behind left HUD; scenery corrupt. First mode12 image is black and does not prove initialized report panel or selector."
+    },
+    {
+      "label": "native-peer0-seat0-state1-action25-visible1",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v70-root-v3\\ammo-hud\\intro-admission\\Yammark-finalhit\\peer-0-native-peer0-seat0-state1-action25-visible1.png",
+        "bytes": 2074543,
+        "sha256": "4c1483172d5a6f59db7a3903856cb0cc82666b0403e28568a5037f6946953803"
+      },
+      "review": "Root viewed actual composed frame: native air-slash/lethal art, early Zero beam and X-only victory/outgoing corroborate raw state. X is partly behind left HUD; scenery corrupt. First mode12 image is black and does not prove initialized report panel or selector."
+    },
+    {
+      "label": "native-peer0-seat0-state1-action1-visible1",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v70-root-v3\\ammo-hud\\intro-admission\\Yammark-finalhit\\peer-0-native-peer0-seat0-state1-action1-visible1.png",
+        "bytes": 2074543,
+        "sha256": "7bf23f06adc5d278371d23bb12fcc431f73d33af21485dac1882ef2292eb28c0"
+      },
+      "review": "Root viewed actual composed frame: native air-slash/lethal art, early Zero beam and X-only victory/outgoing corroborate raw state. X is partly behind left HUD; scenery corrupt. First mode12 image is black and does not prove initialized report panel or selector."
+    },
+    {
+      "label": "first-native-post-clear-frontend",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v70-root-v3\\ammo-hud\\intro-admission\\Yammark-finalhit\\peer-0-first-native-post-clear-frontend.png",
+        "bytes": 2074543,
+        "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373"
+      },
+      "review": "Root viewed actual composed frame: native air-slash/lethal art, early Zero beam and X-only victory/outgoing corroborate raw state. X is partly behind left HUD; scenery corrupt. First mode12 image is black and does not prove initialized report panel or selector."
+    }
+  ],
+  "observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_Yammark_finalhit_v70_root_v3.py",
+    "bytes": 15076,
+    "sha256": "80123c53355a1ed368424d0b381dd126a6d0df26ee4bf9c22da7119d402287b7"
+  },
+  "caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Yammark-local-v70-root-v3\\root-executed-source.py",
+    "bytes": 6066,
+    "sha256": "dd849c35f26d6f7fe62c55334d46bb77e4d4c6e7ea6d64ad27b837076e9781d7"
+  },
+  "limits": [
+    "F90 LOCAL fails on a genuine Zero-owned native Investigator kill while both heroes live. One counterexample disproves both-hero victory contract; no NET or other-finisher verdict inferred.",
+    "Seven accepted native air27/pose49 lifetimes consume32HP with actual4/6HP totals; one native hurt17 jump interruption offers no Square. No protection or HP/position/contact/pose/token/outcome writes.",
+    "At lethal original script selects P1 scene owner1 and sends Zero outgoing1; Zero then remains hidden/state3 while X alone enters native25 and outgoing1. This is not a demonstrated early P1 withdrawal for F128.",
+    "Native timer freezes1662 during script; SDK/controller/scene updates continue. Samples and images are separate observations, not exact collision-instruction timestamps.",
+    "Agreed original AmazonCP2 bypasses prior route; actual last door, dialogue, boss fill, fight, lethal/death/reward and native return-mode12 begin afterward. Actual selector, second guest cycle and P1-finisher case are not qualified; R19/F128 remain unverified.",
+    "All LOCAL parent/source/image/profile/card/owned-exit and strict fixture-taint recording/replay refusal gates pass. Six reviewed combat/clear images retain corrupt scenery, overlapping heroes, ordinary hurt/flash and HUD clipping. No scenery/font/color qualification. Earlier v1/v2 failures remain unchanged."
+  ]
+}
