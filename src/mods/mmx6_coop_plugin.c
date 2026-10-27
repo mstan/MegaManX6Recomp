@@ -123,6 +123,8 @@ static uint8_t scene_body[0x158];
 static int32_t scene_y;
 static int scene_call, zero_projected;
 static unsigned clear_phase,clear_members,clear_started;
+/* Immutable committed gameplay choice; Either retains the original policy. */
+static unsigned both_doors;
 static int unit_choices_call;
 static int intro_target_call;
 /* Elective independent presentation. The canonical world still runs once. */
@@ -1001,27 +1003,68 @@ static void script_begin(CPUState *cpu, uint32_t address) {
     if (!scene_call && !failed) scene_begin(zero_projected?1:0,address);
 }
 #include "mmx6_coop_recycle_portal.inc"
+static int door_eligibility(CPUState *cpu, uint32_t address) {
+    /* Original 80050250 calls its pure predicate at 80050360, after its
+     * subtype prerequisites and once-only native collision/drawing. Veto
+     * only this admission; never manufacture a successful native overlap.
+     * The callback frame already owns/digests these future-restored words,
+     * including across guest yields. No untracked gate or host pointer. */
+    if (address!=0x80050C88u || cpu->gpr[31]!=0x80050368u ||
+        !scene_call || failed || !enrolled) return 0;
+    for (unsigned i=state_track.count;i;--i) {
+        const Mmx6StateFrame *f=&state_track.frame[i-1];
+        if (f->tag!=35 || !f->words || f->bytes!=6*4u) continue;
+        uint32_t context[6];memcpy(context,f->saved,sizeof context);
+        if (context[0]==0x80050250u && context[1]==cpu->gpr[4] &&
+            context[4] && context[5] && !context[3]) {
+            cpu->gpr[2]=0;return 1;
+        }
+        return 0;
+    }
+    return 0;
+}
+static uint32_t door_probe(CPUState *cpu,uint32_t actor,unsigned both) {
+    if (both) {
+        /* Native 80050C88 dereferences four-byte authored boxes. A not-yet
+         * present body/box cannot supply permission for Both. */
+        uint32_t a=psx_mod_read_word(actor+0x68),p=psx_mod_read_word(PLAYER+0x68);
+        if (!psx_mod_read_byte(PLAYER) || a<0x80010000u || a>0x801FFFFCu ||
+            p<0x80010000u || p>0x801FFFFCu) return 0;
+    }
+    return guest(cpu,0x80050C88u,actor,0);
+}
 static int door_begin(CPUState *cpu, uint32_t address) {
     if (scene_call || inside || !enrolled || failed || scene_owner) return 0;
     uint32_t actor=cpu->gpr[4];
     scene_call=1;
     unsigned seat=0;
-    uint32_t context[4]={address,actor,seat,0};STATE_WORDS(restore_door,35,context,4);
-    uint32_t hit=life.status[0]==MMX6_COOP_ALIVE?guest(cpu,0x80050C88,actor,0):0;
-    if (!hit && life.status[1]==MMX6_COOP_ALIVE) {
+    uint32_t context[6]={address,actor,seat,0,both_doors,0};STATE_WORDS(restore_door,35,context,6);
+    unsigned present=life.status[0]==MMX6_COOP_ALIVE;
+    uint32_t hit=present?door_probe(cpu,actor,both_doors):0;
+    unsigned all=hit;
+    if ((both_doors || !hit) && life.status[1]==MMX6_COOP_ALIVE) {
         inside=1;
         enter_zero();
-        hit=guest(cpu,0x80050C88,actor,0);
+        uint32_t second=door_probe(cpu,actor,both_doors);
         leave_zero();
         inside=0;
-        if (hit) seat=1;
+        if (second && !hit) seat=1;
+        all=(!present || all) && second;
+        present=1;hit|=second;
     }
+    if (both_doors) hit=present && all;
     /* Probe only the pure native overlap test. Door AI, effects and room
      * changes still execute once, under the touching player's context. */
-    context[2]=seat;context[3]=hit;STATE_UPDATE(restore_door,context);
+    context[2]=seat;context[3]=hit;context[5]=1;STATE_UPDATE(restore_door,context);
     if (seat) { inside=1; enter_zero(); }
     uint32_t result=guest(cpu,address,actor,cpu->gpr[5]);
-    if (hit && psx_mod_read_byte(PLAYER+0xD4)) scene_begin(seat,address);
+    if (hit && psx_mod_read_byte(PLAYER+0xD4)) {
+        scene_begin(seat,address);
+        /* Both bodies already passed the original native eligibility. Keep
+         * the native scene lock, without withdrawing/rejoining a passenger.
+         * Other doors, portals and scripted scenes retain their own policy. */
+        if (both_doors) scene_phase=0;
+    }
     if (seat) { leave_zero_context(1); inside=0; }
     scene_call=0;
     STATE_POP(restore_door);
@@ -2461,6 +2504,9 @@ static void activate(void) {
     memset(zero_solid_contacts,0,sizeof zero_solid_contacts);
     scene_owner=scene_phase=0; scene_call=zero_projected=0;
     shared_clear_reset();
+    char doors[16];
+    both_doors=psx_mod_option_value("mmx6.local-coop","prototype","doors",doors,sizeof doors) &&
+        !strcmp(doors,"both");
     unit_choices_call=intro_target_call=0;
     zero_menu_loaded=0;
     memset(zero_giga_backup,0,sizeof zero_giga_backup);
@@ -2500,7 +2546,8 @@ static void activate(void) {
         !psx_mod_set_function_replacement(0x8004EECC,pickup_collect) ||
         !psx_mod_set_function_replacement(0x8004EC30,pickup_tick)) failed=1;
     if (!psx_mod_set_function_replacement(0x80040800,nightmare_soul)) failed=1;
-    if (!psx_mod_set_function_replacement(0x80050250,door_begin)) failed=1;
+    if (!psx_mod_set_function_replacement(0x80050250,door_begin) ||
+        !psx_mod_set_function_replacement(0x80050C88,door_eligibility)) failed=1;
     if (!psx_mod_set_function_replacement(0x80051924,interaction_begin) ||
         !psx_mod_set_function_replacement(0x80052F64,interaction_begin)) failed=1;
     if (!psx_mod_set_function_replacement(0x800244C0,draw_coop_hud) ||

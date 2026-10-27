@@ -203,6 +203,7 @@ static void digest_and_readiness(void){
     PERTURB(shared_effect_owners[7]);
     PERTURB(checkpoint_lab_option);PERTURB(checkpoint_lab_state);PERTURB(checkpoint_lab_previous);
     PERTURB(checkpoint_pending.authority);
+    PERTURB(both_doors);
     PERTURB(saved_portrait_colors[7]);PERTURB(pickup_owners[0].seat);PERTURB(zero_solid_contacts[3].carried);
     PERTURB(death_effect[2].x);
     PERTURB(death_effect[3].owner);
@@ -337,6 +338,7 @@ static void roundtrip_and_malformed(void){
     for(unsigned i=0;i<96;++i)shared_effect_owners[i]=expected_owners[i]=(uint8_t)(i%3);
     uint32_t len=snapshot_bytes();CHECK(len && len<STATE_MAX_BYTES);
     uint8_t *wire=malloc(len+1),*bad=malloc(len+1);CHECK(wire && bad && snapshot_write(wire,len));
+    both_doors^=1;reject_unchanged(wire,len);both_doors^=1; /* Committed gameplay policy is fixed. */
     /* Locate the unique typed pending origin, then reject foreign owners
      * and a pending origin with no owner before committing any host state. */
     const uint8_t origin[]={1,2,123,0,0,0,200,1,0,0,0,0,3,128,2};

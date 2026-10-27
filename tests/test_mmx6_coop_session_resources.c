@@ -27,13 +27,13 @@ static uint32_t stopped_owned;
 static unsigned option_reads;
 int psx_mod_option_value(const char *package,const char *feature,const char *option,
     char *out,uint32_t capacity) {
-    /* This fixture's committed plan has only the manifest's default HUD
-     * choice. Any new option dependency must be specified here explicitly. */
-    static const char value[]="stacked";
-    CHECK(package&&feature&&option&&out&&capacity>=sizeof value);
-    CHECK(!strcmp(package,"mmx6.local-coop")&&!strcmp(feature,"prototype")&&
-        !strcmp(option,"hud_layout"));
-    memcpy(out,value,sizeof value);++option_reads;return 1;
+    /* Explicit committed defaults for the settings read by actual activation
+     * and HUD drawing. Camera options use the existing current-plugin API. */
+    CHECK(package&&feature&&option&&out);
+    CHECK(!strcmp(package,"mmx6.local-coop")&&!strcmp(feature,"prototype"));
+    const char *value=!strcmp(option,"doors")?"either":!strcmp(option,"hud_layout")?"stacked":NULL;
+    CHECK(value && capacity>strlen(value));
+    strcpy(out,value);++option_reads;return 1;
 }
 static void *session_malloc(size_t size) {
     void *p=malloc(size);if(!p)return NULL;
