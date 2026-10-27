@@ -1,0 +1,143 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F113",
+    "F175"
+  ],
+  "mode": "local",
+  "result": "failed",
+  "candidate": "a878af43a632753163885b134b1adb9663947229",
+  "explicit_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F42-v62-final-binding-root-v1.json",
+    "binding_sha256": "8883b1a5a13801e680a56812906383976ca37bb06fee85650dd2f9b2559fb0b2",
+    "image_sha256": "eda4808597410413499baa9bbfe48d3adcdaccd24a02503ef335984883543736",
+    "manifest_sha256": "ddd06bfbc6ed01382c6ff750161856214c8d3ee98ad63dd22cd4f92a8dd670c3",
+    "provenance_sha256": "732d55c8c38d2e4ec5a02e148453515e8c5df0df2c34ecabb1934512d84b1824",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v62-private-menu-camera-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "a878af43a632753163885b134b1adb9663947229",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v20",
+    "host_revision": 4
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F113-weather-local-v62-root-v3\\qualification.json",
+    "sha256": "885a6cd38b945229f1781135bb340a786b90ef253506c0641c539b9fc5e8532a"
+  },
+  "observation": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F113-weather-local-v62-root-v3\\ammo-hud\\weather\\weather-both-alive\\weather-observations.json",
+    "sha256": "37fede48a5fc4f55c2989dd0785128183e7765fc56583584a7fdad867a741520"
+  },
+  "source_guards": [
+    {
+      "address": 2148455696,
+      "bytes": 1052,
+      "sha256": "8ff15fc79297f56c48af5309b4112822bee813bbaa01972fba975b8dc8a0c01a",
+      "live_hex": null
+    },
+    {
+      "address": 2148454796,
+      "bytes": 600,
+      "sha256": "f3b31a2d1e14aa63ec9b3845a6b69573b8f982fb9513bcf5c9f18b1a2ffedcf6",
+      "live_hex": null
+    },
+    {
+      "address": 2148455396,
+      "bytes": 300,
+      "sha256": "6ef8046808b99ad6ec51b96aee446e0229c25f72418f8c432fd20f86b1cf98b2",
+      "live_hex": null
+    },
+    {
+      "address": 2148491436,
+      "bytes": 20,
+      "sha256": "e96ec415ee3062f93f97d2fe17885bc8cce076ec74c83cfa2faeb0d6063f762b",
+      "live_hex": null
+    },
+    {
+      "address": 2148488096,
+      "bytes": 8,
+      "sha256": "fc33b2d5e15de635c096b9c834d880412d151c978cf4507c0038fd44995dcbf5",
+      "live_hex": [
+        "000b000300000000"
+      ]
+    },
+    {
+      "address": 2147660756,
+      "bytes": 60,
+      "sha256": "b93268813cbbd5926cc6df3cd521add9d968ec632b290d2a88e70a6bce8d3e6e",
+      "live_hex": null
+    },
+    {
+      "address": 2147580992,
+      "bytes": 152,
+      "sha256": "e0d89064f1b9c30a877faa9bdc41eadc72412d2d15018377bfd300679dc6a6c4",
+      "live_hex": null
+    },
+    {
+      "address": 2147935072,
+      "bytes": 8,
+      "sha256": "e1a884073de6dc3988e544b7678028a2f147ac2b38d7a18d0539b5b6bea9ae79",
+      "live_hex": null
+    },
+    {
+      "address": 2148490896,
+      "bytes": 28,
+      "sha256": "365c470e053c0a758e247b47cf22e705943ef5b1f91fd41c76dd332425c0c715",
+      "live_hex": null
+    }
+  ],
+  "root_composed_review": [
+    {
+      "peer": 0,
+      "label": "native-atlas-512",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F113-weather-local-v62-root-v3\\ammo-hud\\weather\\weather-both-alive\\peer-0-native-atlas-512.png",
+      "sha256": "53e158d4a59768c9c298fdc92d7990766e7bb5195bb93c7b607068c4990f4504",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "native-atlas-768",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F113-weather-local-v62-root-v3\\ammo-hud\\weather\\weather-both-alive\\peer-0-native-atlas-768.png",
+      "sha256": "867da8d1ce36f18ca81da33eb3f75d1180e44b2a858196b316e0585cd1580212",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "native-atlas-1024",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F113-weather-local-v62-root-v3\\ammo-hud\\weather\\weather-both-alive\\peer-0-native-atlas-1024.png",
+      "sha256": "9ce1394d0e7b647cfb74ad8eff80a1a25544f522b23d419df02b4b05dadc5db5",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "native-atlas-0",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F113-weather-local-v62-root-v3\\ammo-hud\\weather\\weather-both-alive\\peer-0-native-atlas-0.png",
+      "sha256": "519bc1d0db3efbde13d1308d6b0e8ff207fc2fb0f6ccfa3379f18cbe13f6caf1",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "native-atlas-256",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F113-weather-local-v62-root-v3\\ammo-hud\\weather\\weather-both-alive\\peer-0-native-atlas-256.png",
+      "sha256": "762804c2ea1f975f6d3b7f82694a38c592cfa3605a25dafc01f3eb92193d530b",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "native-weather-final",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F113-weather-local-v62-root-v3\\ammo-hud\\weather\\weather-both-alive\\peer-0-native-weather-final.png",
+      "sha256": "2eb70271561bb9417f43d84254784a4af787a7578fcd4e227e264baea5c1c922",
+      "surface": "composed_renderer_output"
+    }
+  ],
+  "finding": "Root reviewed all six completed native weather images. X pane has dense changing diagonal rain, while Zero pane has no rain at any observed original five-frame atlas phase, despite nearby stationary X1256/Zero1275 in the same genuine rain room. Generic world ROI variation passes on other scenery and is not rain proof. Required both-living weather publication fails; no survivor or distinct-scroll pass follows.",
+  "bypasses": [
+    "Source-bound offline checkpoint6/0/CP1 at1120 bypasses stage reachability; original ordinaryRight/Jump reaches realrain without weatherflag/index/counter/HP/position writes. Canonical recording fixture taint retained and ordinary capture/replay refused."
+  ],
+  "limits": [
+    "After-death F113 and separate F175 autonomous scroll remain unverified, but this directly observed mandatory both-view atlas failure establishes LOCAL failure for each comparison. No NET on known-bad V62.",
+    "Earlier CP0 pit death and CP1 overstrict ground-bit setup failures preserved. Corrected idle+stationary setup completes; no scene/rain flags seeded."
+  ]
+}

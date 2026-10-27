@@ -11999,24 +11999,57 @@
       "frozen_row_sha256": "6e329da22dd32882ef3b4dc690c4696182d76066c638a080a695364ae3f71118",
       "x6": {
         "workstream": "camera",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Shared weather atlas publication analogue unidentified",
+        "mapping_state": "candidate_native_scenario",
+        "analogue": "Original Turtloid stage6/0 weather object11 five-frame atlas and refresh publication",
         "bounded_check": "Identify original X6 weather sprites/refresh metadata; compare both future views with both alive and after primary death.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "a878af43a632753163885b134b1adb9663947229",
+            "build_identity": {
+              "executable_sha256": "eda4808597410413499baa9bbfe48d3adcdaccd24a02503ef335984883543736",
+              "compiled_manifest_sha256": "ddd06bfbc6ed01382c6ff750161856214c8d3ee98ad63dd22cd4f92a8dd670c3",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "cameras": "native local split8:3",
+              "renderer": "960x720 OpenGL",
+              "entry": "source-bound Turtloid6/0/CP1 setup + ordinaryfirst-rainapproach",
+              "audio": "dummy muted"
+            },
+            "action": "Observe original weather controller and five native atlas frames with both heroes stationary in actual rain; inspect both composed panes.",
+            "outcome": "Root reviewed all six completed native weather images. X pane has dense changing diagonal rain, while Zero pane has no rain at any observed original five-frame atlas phase, despite nearby stationary X1256/Zero1275 in the same genuine rain room. Generic world ROI variation passes on other scenery and is not rain proof. Required both-living weather publication fails; no survivor or distinct-scroll pass follows.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-a878af4-F113-F175-local-missing-rain-failure-reviewed.json",
+                "sha256": "967b6ef03e22fe69c44c2b717c36d03bed2d9ec431523dbf0d4da6ae57c7cdf9"
+              }
+            ],
+            "limits": [
+              "After-death F113 and separate F175 autonomous scroll remain unverified, but this directly observed mandatory both-view atlas failure establishes LOCAL failure for each comparison. No NET on known-bad V62.",
+              "Earlier CP0 pit death and CP1 overstrict ground-bit setup failures preserved. Corrected idle+stationary setup completes; no scene/rain flags seeded."
+            ],
+            "bypasses": [
+              "Source-bound offline checkpoint6/0/CP1 at1120 bypasses stage reachability; original ordinaryRight/Jump reaches realrain without weatherflag/index/counter/HP/position writes. Canonical recording fixture taint retained and ordinary capture/replay refused."
+            ]
+          }
+        ],
+        "limitations": "Root reviewed all six completed native weather images. X pane has dense changing diagonal rain, while Zero pane has no rain at any observed original five-frame atlas phase, despite nearby stationary X1256/Zero1275 in the same genuine rain room. Generic world ROI variation passes on other scenery and is not rain proof. Required both-living weather publication fails; no survivor or distinct-scroll pass follows."
       }
     },
     {
@@ -14915,17 +14948,50 @@
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "a878af43a632753163885b134b1adb9663947229",
+            "build_identity": {
+              "executable_sha256": "eda4808597410413499baa9bbfe48d3adcdaccd24a02503ef335984883543736",
+              "compiled_manifest_sha256": "ddd06bfbc6ed01382c6ff750161856214c8d3ee98ad63dd22cd4f92a8dd670c3",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "cameras": "native local split8:3",
+              "renderer": "960x720 OpenGL",
+              "entry": "source-bound Turtloid6/0/CP1 setup + ordinaryfirst-rainapproach",
+              "audio": "dummy muted"
+            },
+            "action": "Observe original weather controller and five native atlas frames with both heroes stationary in actual rain; inspect both composed panes.",
+            "outcome": "Root reviewed all six completed native weather images. X pane has dense changing diagonal rain, while Zero pane has no rain at any observed original five-frame atlas phase, despite nearby stationary X1256/Zero1275 in the same genuine rain room. Generic world ROI variation passes on other scenery and is not rain proof. Required both-living weather publication fails; no survivor or distinct-scroll pass follows.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-a878af4-F113-F175-local-missing-rain-failure-reviewed.json",
+                "sha256": "967b6ef03e22fe69c44c2b717c36d03bed2d9ec431523dbf0d4da6ae57c7cdf9"
+              }
+            ],
+            "limits": [
+              "After-death F113 and separate F175 autonomous scroll remain unverified, but this directly observed mandatory both-view atlas failure establishes LOCAL failure for each comparison. No NET on known-bad V62.",
+              "Earlier CP0 pit death and CP1 overstrict ground-bit setup failures preserved. Corrected idle+stationary setup completes; no scene/rain flags seeded."
+            ],
+            "bypasses": [
+              "Source-bound offline checkpoint6/0/CP1 at1120 bypasses stage reachability; original ordinaryRight/Jump reaches realrain without weatherflag/index/counter/HP/position writes. Canonical recording fixture taint retained and ordinary capture/replay refused."
+            ]
+          }
+        ],
+        "limitations": "Root reviewed all six completed native weather images. X pane has dense changing diagonal rain, while Zero pane has no rain at any observed original five-frame atlas phase, despite nearby stationary X1256/Zero1275 in the same genuine rain room. Generic world ROI variation passes on other scenery and is not rain proof. Required both-living weather publication fails; no survivor or distinct-scroll pass follows."
       }
     },
     {
