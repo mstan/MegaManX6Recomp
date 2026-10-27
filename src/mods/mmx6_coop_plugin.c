@@ -1356,6 +1356,7 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     diagnostic_inventory_setup(cpu);
     diagnostic_setup(cpu);
     uint16_t raw=p2_input(MMX6_INPUT_STAGE);
+    if(checkpoint_lab_boundary(raw))return 1;
     int start=!!(raw&8), pressed=start&&!p2_start_previous;
     unsigned phase=psx_mod_read_byte(PLAY+1);
     p2_start_previous=start;
@@ -2455,7 +2456,7 @@ static void activate(void) {
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
-        .compatibility_id = "mmx6-x-zero-delay-v20",
+        .compatibility_id = "mmx6-x-zero-delay-v22",
         .rollback_supported = 0,
         .savestates_supported = 0,
         .skip_bios_intro = 1,

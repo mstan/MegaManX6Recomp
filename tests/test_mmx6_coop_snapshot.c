@@ -196,6 +196,8 @@ static void digest_and_readiness(void){
     PERTURB(p2.shots[6]);PERTURB(previous_input);PERTURB(p2_start_previous);
     PERTURB(zero_giga_backup[7]);
     PERTURB(shared_effect_owners[7]);
+    PERTURB(checkpoint_lab_option);PERTURB(checkpoint_lab_state);PERTURB(checkpoint_lab_previous);
+    PERTURB(checkpoint_pending.authority);
     PERTURB(saved_portrait_colors[7]);PERTURB(pickup_owners[0].seat);PERTURB(zero_solid_contacts[3].carried);
     PERTURB(death_effect[2].x);
     PERTURB(death_effect[3].owner);
@@ -342,8 +344,8 @@ static void roundtrip_and_malformed(void){
     reject_unchanged(wire,0);reject_unchanged(wire,1);reject_unchanged(wire,len-1);
     memcpy(bad,wire,len);bad[len]=0;reject_unchanged(bad,len+1);
     memcpy(bad,wire,len);put32(bad+4,2);reject_unchanged(bad,len); /* Disposable older wire schema. */
-    memcpy(bad,wire,len);bad[8]^=1;reject_unchanged(bad,len); /* Fixed guest allocation identity. */
-    memcpy(bad,wire,len);bad[8+9*4]^=1;reject_unchanged(bad,len); /* Retained audio header allocation. */
+    memcpy(bad,wire,len);bad[16]^=1;reject_unchanged(bad,len); /* Fixed guest allocation identity. */
+    memcpy(bad,wire,len);bad[16+9*4]^=1;reject_unchanged(bad,len); /* Retained audio header allocation. */
     StateIO resources={STATE_COUNT,1,NULL,NULL,0,0,0};snapshot_resources(&resources);
     memcpy(bad,wire,len);bad[resources.pos-32]^=1;reject_unchanged(bad,len); /* Immutable asset SHA256. */
     memcpy(bad,wire,len);bad[resources.pos+sizeof p2]=255;reject_unchanged(bad,len); /* Lifecycle enum. */
@@ -393,6 +395,20 @@ static void roundtrip_and_malformed(void){
     CHECK(!installed_resolver(0x5FFF));CHECK(!installed_resolver(0x8000));
     free(wire);free(bad);
 }
+static void agreed_latch_snapshot(void) {
+    checkpoint_lab_option=1;
+    for(unsigned state=CHECKPOINT_LAB_ARMED;state<=CHECKPOINT_LAB_CONSUMED;++state) {
+        checkpoint_lab_state=state;checkpoint_lab_previous=1;
+        uint32_t length=snapshot_bytes(),digest=state_digest();uint8_t *wire=malloc(length);CHECK(wire);
+        CHECK(snapshot_write(wire,length));
+        checkpoint_lab_option=0;CHECK(!snapshot_validate(wire,length));checkpoint_lab_option=1;
+        checkpoint_lab_state=checkpoint_lab_previous=0;
+        CHECK(snapshot_validate(wire,length));snapshot_read(wire,length);
+        CHECK(checkpoint_lab_state==state && checkpoint_lab_previous==1 && state_digest()==digest);
+        free(wire);
+    }
+    checkpoint_lab_option=checkpoint_lab_state=checkpoint_lab_previous=0;
+}
 static void abandoned_guest(void){
     /* Exercise the SDK's actual supported landing, including MinGW GNU's
      * large-frame case. The target function has not returned when dispatched
@@ -405,7 +421,7 @@ static void abandoned_guest(void){
 }
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
-    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();
+    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);
     /* Abandoned/overflowed call records are safe owned bytes, and explicitly

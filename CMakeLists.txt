@@ -54,7 +54,7 @@ list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_frame_interpolation_pl
 list(FILTER GAME_MOD_RESOLVER_SOURCES EXCLUDE REGEX "mmx6_seamless_store[.]cpp$")
 
 set_property(SOURCE src/mods/mmx6_startup_log.cpp APPEND PROPERTY COMPILE_DEFINITIONS
-    "MMX6_STARTUP_BUILD_ID=\"mmx6-x-zero-delay-v20\"")
+    "MMX6_STARTUP_BUILD_ID=\"mmx6-x-zero-delay-v22\"")
 
 # The game-owned mod catalog (the two presentation enhancements plus the
 # acediez Tweaks set). Every feature stays disabled until selected on the
@@ -72,6 +72,21 @@ set_property(SOURCE src/mods/mmx6_startup_log.cpp APPEND PROPERTY COMPILE_DEFINI
 # neither the launcher nor the release packager's Add-ModCatalog reads.
 # Bead beads-eio.3.101.
 set(MMX6_PRELOADED_MODS "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded")
+if(MMX6_ENABLE_LOOPBACK_HOST_LAB)
+    # This extra prerequisite control exists only in the explicit lab catalog.
+    # Normal source/release catalogs never acquire it. The framework still
+    # owns final staging and catalog validation of this generated input tree.
+    set(_mmx6_coop_manifest "packages/mmx6.local-coop/0.0.1/manifest.toml")
+    set(_mmx6_checkpoint_option "${CMAKE_CURRENT_SOURCE_DIR}/packaging/lab/coop-checkpoint-option.toml")
+    set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+        "${MMX6_PRELOADED_MODS}/${_mmx6_coop_manifest}" "${_mmx6_checkpoint_option}")
+    file(READ "${MMX6_PRELOADED_MODS}/${_mmx6_coop_manifest}" _mmx6_coop_catalog)
+    file(READ "${_mmx6_checkpoint_option}" _mmx6_checkpoint_catalog)
+    set(_mmx6_lab_catalog "${CMAKE_CURRENT_BINARY_DIR}/mmx6-lab-catalog")
+    file(COPY "${MMX6_PRELOADED_MODS}/" DESTINATION "${_mmx6_lab_catalog}")
+    file(WRITE "${_mmx6_lab_catalog}/${_mmx6_coop_manifest}" "${_mmx6_coop_catalog}\n${_mmx6_checkpoint_catalog}")
+    set(MMX6_PRELOADED_MODS "${_mmx6_lab_catalog}")
+endif()
 
 # Seamless Loading replaces the generic CD-speed and host-turbo builtins:
 # neither may change guest CD or audio pacing in this catalog. Restore the
@@ -427,7 +442,7 @@ if(BUILD_TESTING)
     target_include_directories(mmx6_coop_resources_test PRIVATE src/mods)
     add_test(NAME mmx6_coop_resources_test COMMAND "$<TARGET_FILE:mmx6_coop_resources_test>")
 
-    foreach(_mmx6_checkpoint_variant debug production)
+    foreach(_mmx6_checkpoint_variant debug production agreed_lab)
         set(_mmx6_checkpoint_target mmx6_coop_checkpoint_${_mmx6_checkpoint_variant}_test)
         add_executable(${_mmx6_checkpoint_target} tests/test_mmx6_coop_checkpoint.c
             src/mods/mmx6_coop_lifecycle.c src/mods/mmx6_coop_assets.c)
@@ -435,6 +450,9 @@ if(BUILD_TESTING)
             "${PSXRECOMP_V4_ROOT}/runtime/include")
         if(_mmx6_checkpoint_variant STREQUAL "production")
             target_compile_definitions(${_mmx6_checkpoint_target} PRIVATE PSX_NO_DEBUG_TOOLS)
+        endif()
+        if(_mmx6_checkpoint_variant STREQUAL "agreed_lab")
+            target_compile_definitions(${_mmx6_checkpoint_target} PRIVATE MMX6_ENABLE_LOOPBACK_HOST_LAB=1)
         endif()
         if(MSVC)
             target_compile_options(${_mmx6_checkpoint_target} PRIVATE /O2 /Gy /Gw)

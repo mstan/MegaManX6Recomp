@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 4,
+  "revision": 5,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v20",
+    "title_compatibility": "mmx6-x-zero-delay-v22",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -175,5 +175,17 @@
     "api_guard": "Settings IDs and their title-admission checks are compiled only when PSX_MOD_NETPLAY_SETTINGS_LOADING_API >= 1. Older SDKs retain the loading-only shared-camera fallback without accessing the new fields.",
     "unchanged": "Private-view and snapshot implementations, all renderer/default/capability/image/scope guards, and default host-lab disabled policy.",
     "fresh_native_qualification": "required; v19 or prior exact-image evidence does not transfer"
+  },
+  "title_changes_v22": {
+    "scope": "Lab-only agreed intro checkpoint2 prerequisite, not route/retry/progression qualification. Either remains the unchanged native door policy; no Both-policy changes are included.",
+    "catalog": "MMX6_ENABLE_LOOPBACK_HOST_LAB generates a private catalog with prototype lab_checkpoint=off|intro_cp2; normal/release source catalogs omit this option.",
+    "trigger": "After the mandatory ordinary intro movement/jump baseline, accepted P2 logical L3+R3 exactly0x0006 arms once; wait for both ALIVE/enrolled/grounded/idle at safe original intro0/0/CP0 stage boundary.",
+    "authority": "Offline command8 remains forbidden online. Separate agreed authority requires the immutable committed option, consumed latch, exact expected settled loopback profile/revision/qualification online, and every existing source/initializer guard. LOCAL uses the same explicit lab build/option.",
+    "native_entry": "Existing mode8 load and original8001E1BC initializer at RA8001E720; only original tuple0/0/2, record80072150, fixed nonce0x4C435032. No HP/position/outcome writes outside original initialization.",
+    "receipt": "Existing CKP1+A0; +BD authority0offline/1agreed, +BE latch0waiting/1armed/2consumed, +BF previous-chord boolean. Existing generation, initializer count and sticky tainted fields remain.",
+    "state": "Committed option is fixed snapshot identity; latch/edge state serialize and digest; pending authority joins existing phase/index/nonce digest and pending snapshot refusal.",
+    "snapshot_schema": 9,
+    "recording": "Sticky GAME_MAILBOX taint is retained; strict ordinary-input capture/replay must refuse. Fixture parent must disclose bypass and preserve matching resolved CRC, exact-image/profile, cards and owned cleanup.",
+    "fresh_native_qualification": "Required on this exact image. Source/unit checks and retained prior-candidate evidence grant no comparison pass."
   }
 }

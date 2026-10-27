@@ -1,5 +1,5 @@
 /* Executable-owned host state, included after the native implementation.
- * Schema 7 is build-specific. No old-state migration or host pointer wire. */
+ * Schema 9 is build-specific. No old-state migration or host pointer wire. */
 enum { STATE_COUNT,STATE_WRITE,STATE_READ,STATE_HASH,STATE_MAX_BYTES=16*1024*1024 };
 typedef struct {
     unsigned mode,ok;
@@ -56,7 +56,8 @@ static int snapshot_ready(void) {
     if(diagnostic && psx_mod_read_byte(diagnostic+0x50)==8)return 0;
     const unsigned guards[]={inside,player_call,stage_call,zero_world,world_render,
         hud_call,render_x_death,effect_call,pickup_call,solid_call,solid_allocate_call,ride_call,view_call,private_draw,
-        scene_call,zero_projected,unit_choices_call,intro_target_call,shared_fx_call,shared_fx_allocate_call,state_track.count,state_track.error,checkpoint_pending.phase,
+        scene_call,zero_projected,unit_choices_call,intro_target_call,shared_fx_call,shared_fx_allocate_call,state_track.count,state_track.error,
+        checkpoint_pending.phase,checkpoint_pending.index,checkpoint_pending.nonce,checkpoint_pending.authority,
         jump_audio_call,jump_audio_keyon_call,jump_audio_stop_call,jump_audio_faulted,
         jump_audio_slot,jump_audio_bank,jump_audio_tone,jump_audio_mode,jump_audio_calculated,jump_audio_stop_mask};
     for(unsigned i=0;i<sizeof guards/sizeof guards[0];++i)if(guards[i])return 0;
@@ -80,6 +81,7 @@ typedef struct {
     uint8_t audio_priorities[24];
     uint8_t giga_backup[ZERO_GIGA_BACKUP_BYTES];
     uint8_t shared_owners[96];
+    uint32_t lab_state,lab_previous;
 } HostState;
 static void state_capture(HostState *s) {
     memset(s,0,sizeof *s);s->player=p2;s->lifecycle=life;
@@ -95,6 +97,7 @@ static void state_capture(HostState *s) {
     memcpy(s->audio_priorities,jump_audio_priorities,sizeof jump_audio_priorities);
     memcpy(s->giga_backup,zero_giga_backup,sizeof zero_giga_backup);
     memcpy(s->shared_owners,shared_effect_owners,sizeof shared_effect_owners);
+    s->lab_state=checkpoint_lab_state;s->lab_previous=checkpoint_lab_previous;
 }
 static int state_actor(uint32_t address) {
     return !address || (address>=0x80010000u && address<=0x801FFF00u && !(address&3));
@@ -144,6 +147,8 @@ static void state_core(StateIO *io,HostState *s) {
     if(s->lifecycle.rejoin_pending &&
         ((s->lifecycle.status[1]!=MMX6_COOP_ABSENT && s->lifecycle.status[1]!=MMX6_COOP_LEAVING) ||
          !mmx6_coop_living(&s->lifecycle,0) || s->lifecycle.wipe))io->ok=0;
+    FIELD(lab_state,1,CHECKPOINT_LAB_CONSUMED);FIELD(lab_previous,1,1);
+    if(!checkpoint_lab_option && (s->lab_state || s->lab_previous))io->ok=0;
     state_bytes(io,s->giga_backup,sizeof s->giga_backup);
     for(unsigned i=0;i<96;++i)s->shared_owners[i]=(uint8_t)state_integer(io,s->shared_owners[i],1,2);
     if(io->mode!=STATE_HASH) {
@@ -165,6 +170,7 @@ static void state_commit(const HostState *s) {
     memcpy(jump_audio_priorities,s->audio_priorities,sizeof jump_audio_priorities);
     memcpy(zero_giga_backup,s->giga_backup,sizeof zero_giga_backup);
     memcpy(shared_effect_owners,s->shared_owners,sizeof shared_effect_owners);
+    checkpoint_lab_state=s->lab_state;checkpoint_lab_previous=s->lab_previous;
     /* These backups are meaningful only under rejected live projections. */
     memset(&p1,0,sizeof p1);memset(saved_overlay,0,sizeof saved_overlay);memset(saved_play,0,sizeof saved_play);
     memset(saved_camera,0,sizeof saved_camera);memset(saved_resources,0,sizeof saved_resources);saved_palette_dirty=0;
@@ -174,13 +180,13 @@ static uint32_t state_digest(void) {
     StateIO io={STATE_HASH,1,NULL,NULL,0,0,2166136261u};state_fixed(&io,0x53483658u);state_core(&io,&core);
     const uint32_t resources[]={assets,assembly,palette_source,active_palette,packets,diagnostic,
         menu_memory,menu_assembly,hud_packets,(uint32_t)compressed_size,(unsigned)snapshot_asset_valid,
-        jump_audio_banks[0].guest,jump_audio_banks[1].guest,jump_audio_loaded,independent_views};
+        jump_audio_banks[0].guest,jump_audio_banks[1].guest,jump_audio_loaded,independent_views,checkpoint_lab_option};
     for(unsigned i=0;i<sizeof resources/sizeof resources[0];++i)state_integer(&io,resources[i],4,UINT32_MAX);
     if(snapshot_asset_valid)state_bytes(&io,snapshot_asset_sha,sizeof snapshot_asset_sha);
     const uint32_t guards[]={inside,player_call,stage_call,zero_world,world_render,hud_call,render_x_death,
         effect_call,pickup_call,solid_call,solid_allocate_call,ride_call,scene_call,zero_projected,unit_choices_call,intro_target_call,shared_fx_call,shared_fx_allocate_call,
         state_track.count,state_track.error,(unsigned)ready,checkpoint_pending.phase,
-        checkpoint_pending.index,checkpoint_pending.nonce,jump_audio_call,jump_audio_keyon_call,jump_audio_stop_call,
+        checkpoint_pending.index,checkpoint_pending.nonce,checkpoint_pending.authority,jump_audio_call,jump_audio_keyon_call,jump_audio_stop_call,
         jump_audio_slot,jump_audio_bank,jump_audio_tone,jump_audio_mode,jump_audio_calculated,jump_audio_faulted,jump_audio_stop_mask,
         (unsigned)!jump_audio_extra_idle()};
     for(unsigned i=0;i<sizeof guards/sizeof guards[0];++i)state_integer(&io,guards[i],4,UINT32_MAX);
@@ -218,7 +224,7 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    state_fixed(s,0x53503658u);state_fixed(s,8);state_fixed(s,independent_views);
+    state_fixed(s,0x53503658u);state_fixed(s,9);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
     const uint32_t handles[]={assets,assembly,palette_source,active_palette,packets,diagnostic,menu_memory,menu_assembly,hud_packets,
         jump_audio_banks[0].guest,jump_audio_banks[1].guest};
     for(unsigned i=0;i<sizeof handles/sizeof handles[0];++i)state_fixed(s,handles[i]);

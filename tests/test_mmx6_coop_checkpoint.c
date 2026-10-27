@@ -11,6 +11,18 @@ static uint16_t checkpoint_vram[1024*512];
 const uint16_t *gpu_get_vram(void){return checkpoint_vram;}
 void gpu_set_gp0_source(uint32_t source){(void)source;}
 void gpu_write_gp0(uint32_t value){(void)value;}
+#ifdef MMX6_COOP_AGREED_CHECKPOINT
+static const char *test_lab_option="off";
+static unsigned test_lab_ready=1,test_lab_failed,test_lab_selected=1;
+static PSXHostSelection test_lab_profile;
+int psx_mod_option_value(const char *package,const char *feature,const char *option,char *out,uint32_t size) {
+    CHECK(!strcmp(package,"mmx6.local-coop") && !strcmp(feature,"prototype") && !strcmp(option,"lab_checkpoint"));
+    CHECK(size>strlen(test_lab_option));strcpy(out,test_lab_option);return 1;
+}
+int psx_netplay_host_profile_ready(void){return (int)test_lab_ready;}
+int psx_netplay_host_profile_failed(void){return (int)test_lab_failed;}
+int psx_netplay_host_profile_selection(PSXHostSelection *out){*out=test_lab_profile;return (int)test_lab_selected;}
+#endif
 
 static void setup_checkpoint(CPUState *cpu,unsigned stage,unsigned section,unsigned cp) {
     memcpy(test_ram,original_ram,sizeof test_ram);memset(test_diagnostic,0,sizeof test_diagnostic);
@@ -45,6 +57,75 @@ static void mode9(CPUState *cpu) {
     psx_mod_write_byte(PLAY,9);psx_mod_write_byte(PLAY+0x1D,0);
     cpu->gpr[31]=0x8001E720;cpu->gpr[4]=PLAY;
 }
+#ifdef MMX6_COOP_AGREED_CHECKPOINT
+static void setup_agreed(CPUState *cpu,int online) {
+    test_lab_option="intro_cp2";setup_checkpoint(cpu,0,0,2);test_online=online;
+    const uint8_t expected[32]=MMX6_HOST_LAB_QUALIFICATION_BYTES;
+    memset(&test_lab_profile,0,sizeof test_lab_profile);
+    strcpy(test_lab_profile.profile,MMX6_HOST_LAB_PROFILE);test_lab_profile.revision=MMX6_HOST_LAB_REVISION;
+    test_lab_profile.flags=PSX_HOST_PROFILE_DIRECT_LOOPBACK;
+    memcpy(test_lab_profile.qualification,expected,sizeof expected);
+    test_lab_ready=test_lab_selected=1;test_lab_failed=0;
+    psx_mod_write_byte(diagnostic+0x50,0);psx_mod_write_byte(PLAY+0x1D,0);
+    psx_mod_write_byte(PLAYER+5,2);psx_mod_write_byte(PLAYER+0x67,0);psx_mod_write_byte(PLAYER+0x70,8);
+    psx_mod_write_byte(PLAYER,1);
+    p2.body[0x67]=0;p2.body[0x70]=8;
+    CHECK(checkpoint_lab_option==1 && !checkpoint_lab_state && !checkpoint_lab_previous);
+}
+static void agreed_checkpoint_boundary(CPUState *cpu) {
+    /* Configured destination alone must never race the parent's normal intro
+     * P2-walk/P1-jump baseline. Only a fresh accepted native chord arms it. */
+    setup_agreed(cpu,1);CHECK(!checkpoint_lab_boundary(0) && !checkpoint_pending.phase && !checkpoint_lab_state);
+    CHECK(!checkpoint_lab_boundary(2) && !checkpoint_lab_boundary(4) && !checkpoint_lab_boundary(7) && !checkpoint_lab_state);
+    checkpoint_lab_option=0;memcpy(before_ram,test_ram,sizeof test_ram);
+    CHECK(!checkpoint_lab_boundary(6) && !checkpoint_lab_state && !memcmp(before_ram,test_ram,sizeof test_ram));
+    for(int online=0;online<=1;++online) {
+        setup_agreed(cpu,online);PlayerContext body=p2;memcpy(before_ram,test_ram,sizeof test_ram);
+        pause_owner=1;CHECK(!checkpoint_lab_boundary(6));
+        CHECK(checkpoint_lab_state==CHECKPOINT_LAB_ARMED && !checkpoint_pending.phase && !guest_calls &&
+            !memcmp(before_ram,test_ram,sizeof test_ram));
+        CHECK(psx_mod_read_byte(diagnostic+0xBE)==1);
+        CHECK(!checkpoint_lab_boundary(0) && checkpoint_lab_state==CHECKPOINT_LAB_ARMED);
+        pause_owner=-1;p2.body[5]=7;CHECK(!checkpoint_lab_boundary(0) && !checkpoint_pending.phase);
+        p2.body[5]=2;CHECK(checkpoint_lab_boundary(0));
+        before_ram[PLAY&0x1FFFFF]=8;
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof p2) && !guest_calls);
+        CHECK(checkpoint_pending.phase==1 && checkpoint_pending.index==2 && checkpoint_pending.authority==CHECKPOINT_AGREED &&
+            checkpoint_pending.nonce==CHECKPOINT_LAB_NONCE && checkpoint_lab_state==CHECKPOINT_LAB_CONSUMED);
+        CHECK(psx_mod_read_byte(diagnostic+0xBD)==1 && psx_mod_read_byte(diagnostic+0xBE)==2 &&
+            psx_mod_read_byte(diagnostic+0xBC)==1 && psx_mod_read_word(diagnostic+0xA4)==1 &&
+            checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
+        mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+        CHECK(checkpoint_pending.phase==2 && psx_mod_read_byte(PLAY+0x1D)==2 && psx_mod_read_word(diagnostic+0xB4)==1);
+        psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase);
+        CHECK(psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE);
+        psx_mod_write_byte(PLAY+0x1D,0); /* Test a later native retry, not a game write. */
+        CHECK(!checkpoint_lab_boundary(0) && !checkpoint_lab_boundary(6));
+        CHECK(psx_mod_read_word(diagnostic+0xA4)==1 && checkpoint_lab_state==CHECKPOINT_LAB_CONSUMED);
+    }
+    /* Identical selected profile is a prerequisite, never inferred from
+     * active netplay, a version string or the compile-time lab flag. */
+    for(unsigned wrong=0;wrong<7;++wrong) {
+        setup_agreed(cpu,1);memcpy(before_ram,test_ram,sizeof test_ram);
+        if(wrong==0)test_lab_ready=0;if(wrong==1)test_lab_failed=1;
+        if(wrong==2)test_lab_selected=0;if(wrong==3)test_lab_profile.profile[0]^=1;
+        if(wrong==4)++test_lab_profile.revision;if(wrong==5)test_lab_profile.flags=0;
+        if(wrong==6)test_lab_profile.qualification[0]^=1;
+        CHECK(!checkpoint_lab_boundary(6) && !checkpoint_pending.phase && !guest_calls &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !checkpoint_test_taint);
+        CHECK(psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_REJECTED && psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_FORBIDDEN);
+    }
+    setup_agreed(cpu,1);psx_mod_write_byte(checkpoint_code[0].first,0);
+    CHECK(!checkpoint_lab_boundary(6) && !checkpoint_pending.phase && !checkpoint_test_taint);
+    CHECK(psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE);
+    setup_agreed(cpu,1);CHECK(checkpoint_lab_boundary(6));mode9(cpu);test_lab_ready=0;
+    checkpoint_native_entry(cpu,0x8001E1BCu);CHECK(!checkpoint_pending.phase && !psx_mod_read_byte(PLAY+0x1D));
+    CHECK(psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_FORBIDDEN);
+    setup_agreed(cpu,1);psx_mod_write_byte(diagnostic+0x50,8);
+    rejected_checkpoint(cpu,CHECKPOINT_FORBIDDEN); /* Configured lab never authorizes online command8. */
+    test_lab_option="off";checkpoint_reset();CHECK(!checkpoint_lab_option && !checkpoint_lab_state && !checkpoint_lab_previous);
+}
+#endif
 int main(int argc,char **argv) {
     const char *source=argc==2?argv[1]:getenv("MMX6_CONTENT_EXE");
     if(!source || !*source){puts("SKIP: MMX6_CONTENT_EXE must name the original USA v1.1 EXE");return 77;}
@@ -129,6 +210,9 @@ int main(int argc,char **argv) {
 #endif
     setup_checkpoint(&cpu,0,0,1);checkpoint_reset();
     CHECK(!checkpoint_pending.phase && !psx_mod_read_byte(diagnostic+0x50));
+#endif
+#ifdef MMX6_COOP_AGREED_CHECKPOINT
+    agreed_checkpoint_boundary(&cpu);
 #endif
     puts("private checkpoint actual-plugin ordering, inventory, reset and rejection PASS");return 0;
 }

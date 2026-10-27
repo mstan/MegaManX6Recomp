@@ -1,0 +1,17 @@
+# Appended only to the generated MMX6_ENABLE_LOOPBACK_HOST_LAB catalog.
+[[option]]
+feature = "prototype"
+id = "lab_checkpoint"
+label = "Lab checkpoint prerequisite"
+description = "Lab comparison setup only. After the ordinary intro baseline, Player 2 presses L3 + R3 to enter the original intro checkpoint 2 once. This bypasses reachability and refuses ordinary input recording qualification. Both peers must agree before launch."
+group = "Lab validation"
+type = "choice"
+default = "off"
+
+[[option.choice]]
+value = "off"
+label = "Off"
+
+[[option.choice]]
+value = "intro_cp2"
+label = "Intro checkpoint 2 prerequisite"
