@@ -29,6 +29,7 @@ static unsigned icon_packet_probe,dash_packet_probe;
 static unsigned render_replacement_probe;
 static unsigned working_palette_probe,working_palette_probe_calls;
 static unsigned death_packet_probe,death_origin_probe,nova_probe;
+static unsigned scene_transport_probe;
 static uint16_t pad_buttons=0xFFFF;
 static const unsigned resource_offsets[7]={0x14,0x1C,0x24,0x28,0x38,0x3C,0xA8};
 #ifdef MMX6_TEST_SESSION_RESOURCES
@@ -199,6 +200,36 @@ static void native_draw(uint32_t actor){
 }
 void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
     (void)ret;CHECK(call_count<512 && state_track.count);calls[call_count++]=address;
+    if(scene_transport_probe) {
+        /* Bounded original beam/cancellation contracts; these do not rebuild
+         * or repair fixed actor metadata on the plugin's behalf. */
+        CHECK(scene_call && scene_owner && inside);
+        unsigned passenger=scene_transport_probe-1;
+        CHECK(psx_mod_read_byte(PLAYER+2)==passenger && zero_projected==(int)passenger);
+        if(address==0x8003A980u) {
+            psx_mod_write_byte(PLAYER+0xCF,1);psx_mod_write_byte(PLAYER+0x84,0);
+            psx_mod_write_byte(PLAYER+0x8C,0);return;
+        }
+        if(address==0x8003BA04u) { psx_mod_write_byte(PLAYER+0x46,0);return; }
+        if(address==0x8003B954u) {
+            psx_mod_write_word(PLAYER+0x20,0);psx_mod_write_word(PLAYER+0x24,8u<<16);
+            psx_mod_write_word(PLAYER+0x68,0);psx_mod_write_byte(PLAYER+0x67,1);
+            psx_mod_write_byte(PLAYER+5,1);psx_mod_write_byte(PLAYER+6,0);return;
+        }
+        if(address==0x8003674Cu) {
+            psx_mod_write_byte(PLAYER+3,0);psx_mod_write_byte(PLAYER+4,3);
+            psx_mod_write_byte(PLAYER+5,0);psx_mod_write_byte(PLAYER+6,0);return;
+        }
+        if(address==0x80017A04u)return;
+        if(address==0x8003AD18u) {
+            psx_mod_write_byte(PLAYER+4,1);psx_mod_write_byte(PLAYER+5,2);
+            psx_mod_write_byte(PLAYER+0x67,0);return;
+        }
+        if(address==0x8003CCBCu) {
+            psx_mod_write_word(PLAYER+0x68,passenger?0x80073D54u:0x80073D50u);return;
+        }
+        CHECK(0);
+    }
     if(nova_probe)CHECK(psx_mod_read_byte(PLAY+0x1C)==1);
     if(ride_probe) {
         unsigned seat=psx_mod_read_byte(PLAYER+2);
@@ -343,7 +374,7 @@ static void setup(CPUState *cpu){
     shared_probe=shared_probe_seat=shared_probe_delete=shared_probe_calls=0;
     ride_probe=ride_overlap=ride_ticks=ride_seat=ride_call=0;
     icon_packet_probe=dash_packet_probe=render_replacement_probe=0;
-    death_packet_probe=death_origin_probe=effect_call=nova_probe=0;memset(death_effect,0,sizeof death_effect);
+    death_packet_probe=death_origin_probe=effect_call=nova_probe=scene_transport_probe=0;memset(death_effect,0,sizeof death_effect);
     working_palette_probe=working_palette_probe_calls=0;working_palette_assets_ready=0;
     ready=enrolled=stage_call=1;pause_owner=-1;zero_menu_loaded=0;join_phase=0;previous_input=p2_edges=0;p2_start_previous=0;
     texture_support=1;marker_override=2;terminal_player=stage_driver=0;call_count=draw_count=tag_count=native_budget=0;
@@ -391,6 +422,95 @@ static void controller_pair_and_restoration(void){
     CHECK(p2.shots[6]==1 && p2.effects[0x50+3] && le32(p2.effects+0x50+8)==403u<<16);
     for(unsigned i=0;i<3;++i){CHECK(p2.trails[i*0x60+3] && le32(p2.trails+i*0x60+8)==403u<<16);CHECK(le32(p2.trails+i*0x60+0x50)==(i?TRAILS+(i-1)*0x60:PLAYER));}
     CHECK(!inside && !zero_projected && !state_track.count && !state_track.error && cpu.gpr[3]==0x12345678);
+}
+static void check_retired_fixed_pools(const PlayerContext *before,const PlayerContext *after) {
+    for(unsigned i=0;i<sizeof after->shots;++i)CHECK(!after->shots[i]);
+    for(unsigned i=0;i<sizeof after->trails;++i)
+        CHECK(after->trails[i]==((i%0x60==3 || i%0x60==4)?0:before->trails[i]));
+    for(unsigned i=0;i<sizeof after->effects;++i)
+        CHECK(after->effects[i]==((i%0x50==3 || i%0x50==4)?0:before->effects[i]));
+}
+static void scene_passengers_keep_native_fixed_effects(void) {
+    for(unsigned passenger=0;passenger<2;++passenger) {
+        CPUState cpu;setup(&cpu);
+        /* Model the already-earned original native constructor in each seat,
+         * with distinct resource identities and active pre-scene combat. */
+        PlayerContext primary=p2;
+        primary.body[2]=0;primary.body[0xE7]=1;
+        primary.body[0x70]=p2.body[0x70]=8;
+        put32(primary.body+8,144u<<16);put32(primary.body+0x18,144u<<16);
+        put32(primary.body+0x38,0x80040000u);put32(primary.body+0x3C,0x80041000u);
+        primary.body[0x40]=primary.body[0x41]=0;primary.effects[0xA0]=0x21;
+        for(unsigned i=0;i<3;++i) {
+            uint8_t *t=primary.trails+i*0x60;
+            put32(t+0x38,0x80040000u);put32(t+0x3C,0x80041000u);
+        }
+        project_player(&primary);
+        PlayerContext active=passenger?p2:primary;
+        memset(active.shots,0x6D,sizeof active.shots);active.body[0x8C]=1;
+        for(unsigned i=0;i<3;++i) {
+            uint8_t *t=active.trails+i*0x60;t[3]=t[4]=1;t[5]=2;
+            put32(t+8,le32(active.body+8));put32(t+12,le32(active.body+12));
+            put32(t+0x18,le32(active.body+8));put32(t+0x1C,le32(active.body+12));
+            t[0x54]=3;t[0x56]=8;t[0x58]=(uint8_t)((5-i)*2);
+            uint8_t *e=active.effects+i*0x50;
+            if(e[0])e[3]=e[4]=1;
+        }
+        if(passenger)p2=active;else project_player(&active);
+        PlayerContext leader;
+        if(passenger)capture_player(&leader);else leader=p2;
+        psx_mod_write_half(0x80097206u,980);psx_mod_write_byte(PLAY+0x1C,1);
+        scene_transport_probe=passenger+1;
+        scene_begin(passenger^1,0x80050250u);
+        CHECK(scene_owner==(passenger^1)+1 && scene_phase==1);
+        scene_tick(&cpu);CHECK(scene_phase==2);
+        PlayerContext retired;
+        if(passenger)retired=p2;else capture_player(&retired);
+        check_retired_fixed_pools(&active,&retired);
+        CHECK(!retired.body[0x8C] && retired.body[0x5C]==32);
+        scene_tick(&cpu);CHECK(scene_phase==3);
+        unsigned calls_before=call_count;scene_tick(&cpu);
+        CHECK(scene_phase==3 && call_count==calls_before); /* Native lock still owns the destination. */
+        psx_mod_write_byte(PLAY+0x1C,0);
+        scene_tick(&cpu);CHECK(scene_phase==4);
+        for(unsigned n=0;n<12 && scene_owner;++n)scene_tick(&cpu);
+        CHECK(!scene_owner && !scene_phase && !state_track.count && !state_track.error && !failed);
+        if(passenger)retired=p2;else capture_player(&retired);
+        check_retired_fixed_pools(&active,&retired);
+        CHECK(retired.body[4]==1 && retired.body[5]==2 && !retired.body[0x8C] && retired.body[0x5C]==32);
+        PlayerContext unchanged;
+        if(passenger)capture_player(&unchanged);else unchanged=p2;
+        CHECK(!memcmp(&leader,&unchanged,sizeof leader));
+        CHECK(life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE);
+        /* A fresh native marker must use the retained constructor, including
+         * slot-specific parents/tails. No observer or fixture repairs it. */
+        scene_transport_probe=0;
+        if(passenger)enter_zero();
+        psx_mod_write_byte(PLAYER+0x8C,1);native_trails();
+        for(unsigned i=0;i<3;++i) {
+            uint32_t t=TRAILS+i*0x60;
+            CHECK(psx_mod_read_byte(t)==0x11 && psx_mod_read_byte(t+2)==i);
+            CHECK(psx_mod_read_byte(t+3)==1 && psx_mod_read_byte(t+4)==1 && !psx_mod_read_byte(t+5));
+            CHECK(psx_mod_read_word(t+0x50)==(i?TRAILS+(i-1)*0x60:PLAYER));
+            CHECK(psx_mod_read_half(t+0x42)==0x780D+i && psx_mod_read_byte(t+0x16)==4);
+            CHECK(psx_mod_read_half(t+0x58)==(5-i)*2);
+            CHECK(psx_mod_read_word(t+8)==psx_mod_read_word(PLAYER+8) && psx_mod_read_word(t+12)==psx_mod_read_word(PLAYER+12));
+            CHECK(psx_mod_read_word(t+0x38)==psx_mod_read_word(PLAYER+0x38));
+        }
+        if(!passenger) {
+            psx_mod_write_byte(PLAYER+0x9C,2);native_attached();
+            CHECK(psx_mod_read_byte(EFFECTS+3)==1 && psx_mod_read_byte(EFFECTS+4)==1);
+            psx_mod_write_byte(PLAYER+5,0x23);psx_mod_write_byte(PLAYER+6,1);native_attached();
+            CHECK(psx_mod_read_byte(EFFECTS+0xA0)==0x21 && psx_mod_read_byte(EFFECTS+0xA3)==1);
+        }
+        if(passenger)leave_zero();
+    }
+    /* Voluntary Zero departure uses the same host cancellation helper. */
+    CPUState cpu;setup(&cpu);PlayerContext active=p2;
+    memset(active.shots,0x27,sizeof active.shots);
+    for(unsigned i=0;i<3;++i){active.trails[i*0x60+3]=active.trails[i*0x60+4]=1;
+        if(active.effects[i*0x50])active.effects[i*0x50+3]=active.effects[i*0x50+4]=1;}
+    p2=active;clear_p2_combat();check_retired_fixed_pools(&active,&p2);
 }
 static void native_nova_body(unsigned phase) {
     psx_mod_write_byte(PLAYER+5,0x22);psx_mod_write_byte(PLAYER+6,(uint8_t)phase);
@@ -1086,7 +1206,7 @@ static void native_shared_ride_ownership(void) {
     ride_probe=0;
 }
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
-    controller_pair_and_restoration();native_nova_guest_update();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
+    controller_pair_and_restoration();scene_passengers_keep_native_fixed_effects();native_nova_guest_update();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
     deferred_shared_effect_owner_context();
     deferred_dash_effect_uses_allocating_body();
     deferred_ui_effect_retains_owner_atlas();clear_banks();

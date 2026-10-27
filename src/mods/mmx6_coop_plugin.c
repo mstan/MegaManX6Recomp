@@ -632,8 +632,14 @@ static void camera_pits(CPUState *cpu, uint32_t address) {
 }
 static void clear_p2_combat(void) {
     memset(p2.shots,0,sizeof p2.shots);
-    memset(p2.trails,0,sizeof p2.trails);
-    memset(p2.effects,0,sizeof p2.effects);
+    /* These fixed actors are initialized by native8003BFBC..8003C0A8,
+     * unlike dynamically allocated shots. Retire visibility/activity as
+     * native80020EE4/EEEC and80020C18/C20 do; keep their indices, parents,
+     * animation resources and palettes for the next accepted action. */
+    for(unsigned i=0;i<3;++i) {
+        p2.trails[i*0x60+3]=p2.trails[i*0x60+4]=0;
+        p2.effects[i*0x50+3]=p2.effects[i*0x50+4]=0;
+    }
 }
 static void start_leave(CPUState *cpu) {
     memcpy(returning_body,p2.body,sizeof returning_body);
@@ -1092,11 +1098,16 @@ static void scene_tick(CPUState *cpu) {
         }
         capture(PLAYER,scene_body,sizeof scene_body);
         if (passenger) clear_p2_combat();
-        /* Clear the resident pools too; they will be captured on projection
-         * exit. Otherwise a cancelled saber can survive the teleport. */
+        /* Clear dynamic shots, including a cancelled saber, in the resident
+         * context too. Fixed effects keep their native constructor metadata;
+         * wiping it leaves the next dash with zero parents and palettes. */
         for (unsigned i=0;i<sizeof p2.shots;i+=4) psx_mod_write_word(0x800950A0+i,0);
-        for (unsigned i=0;i<sizeof p2.trails;i+=4) psx_mod_write_word(0x800972F8+i,0);
-        for (unsigned i=0;i<sizeof p2.effects;i+=4) psx_mod_write_word(0x800911A8+i,0);
+        for(unsigned i=0;i<3;++i) {
+            psx_mod_write_byte(0x800972F8u+i*0x60+3,0);
+            psx_mod_write_byte(0x800972F8u+i*0x60+4,0);
+            psx_mod_write_byte(0x800911A8u+i*0x50+3,0);
+            psx_mod_write_byte(0x800911A8u+i*0x50+4,0);
+        }
         guest(cpu,0x8003A980,PLAYER,0);
         guest(cpu,0x8003BA04,PLAYER,3);
         guest(cpu,0x8003B954,PLAYER,0);
