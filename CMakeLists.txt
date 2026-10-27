@@ -522,6 +522,9 @@ if(BUILD_TESTING)
         add_test(NAME mmx6_native_input_hook_emission_test
             COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/check_mmx6_input_capture_hook.py"
                 --unit "${CMAKE_CURRENT_SOURCE_DIR}/${GAME_GENERATED_DIR}/SLUS_013.95_full_00.c")
+        add_test(NAME mmx6_native_dialogue_palette_hook_emission_test
+            COMMAND "${Python3_EXECUTABLE}" "${CMAKE_CURRENT_SOURCE_DIR}/tools/check_mmx6_dialogue_palette_hook.py"
+                --unit "${CMAKE_CURRENT_SOURCE_DIR}/${GAME_GENERATED_DIR}/SLUS_013.95_full_08.c")
     endif()
 
     # These tests require the modern host-state API. Legacy SDK builds retain

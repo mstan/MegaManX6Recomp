@@ -1048,6 +1048,60 @@ static void deferred_death_effect_retains_zero_source(void){
     CHECK(death_effect_allocate(&cpu,0x8002C530u) && death_effect[0].owner==1);
     death_origin_probe=death_packet_probe=0;
 }
+static void native_shared_dialogue_palette(void) {
+    for(unsigned alternate=0;alternate<2;++alternate) {
+        CPUState cpu;setup(&cpu);
+        unsigned first=alternate?0x5E:0x15;
+        uint32_t resident=psx_mod_read_word(SCRATCH+0x28),offset=first*32;
+        uint8_t baseline[64],private_before[64],original[64],speaker[32],actual[64];
+        for(unsigned i=0;i<64;++i) {
+            baseline[i]=(uint8_t)(i+1);private_before[i]=(uint8_t)(i+81);
+            original[i]=(uint8_t)(i+151);
+        }
+        for(unsigned i=0;i<32;++i)speaker[i]=(uint8_t)(255-i);
+        project(resident+offset,baseline,64);project(active_palette+offset,private_before,64);
+        project(0x8006E408u,original,64);project(0x8006E484u,speaker,32);
+        psx_mod_write_half(0x80090D6Au,(uint16_t)alternate);
+        psx_mod_write_byte(resident+offset-1,0xA7);psx_mod_write_byte(resident+offset+64,0xB8);
+        enter_zero();
+        /* Original constructor backs up the projected private bank first. */
+        project(0x800E33D8u,private_before,64);
+        cpu.gpr[4]=first;cpu.gpr[5]=0x8006E408u;cpu.gpr[6]=2;
+        cpu.gpr[31]=alternate?0x800219B0u:0x8002199Cu;
+        CPUState before=cpu;
+        dialogue_palette_load(&cpu,0x8002B3D4u);
+        CHECK(!memcmp(&before,&cpu,sizeof cpu));
+        capture(0x800E33D8u,actual,64);CHECK(!memcmp(actual,baseline,64));
+        capture(resident+offset,actual,64);CHECK(!memcmp(actual,original,64));
+        capture(active_palette+offset,actual,64);CHECK(!memcmp(actual,private_before,64));
+        /* Model only the external native loader's documented memcpy/dirty
+         * contract. The hook leaves it to execute, with registers intact. */
+        project(active_palette+offset,original,64);psx_mod_write_byte(0x800C4560u,1);
+        cpu.gpr[4]=first+1;cpu.gpr[5]=0x8006E484u;cpu.gpr[6]=1;
+        for(unsigned later=0;later<2;++later) {
+            cpu.gpr[31]=later?0x800225D8u:(alternate?0x8002289Cu:0x80022884u);
+            dialogue_palette_load(&cpu,0x8002B3D4u);
+            capture(resident+offset,actual,64);
+            CHECK(!memcmp(actual,original,32) && !memcmp(actual+32,speaker,32));
+        }
+        project(resident+offset,original,64);cpu.gpr[31]=0x80020000u;
+        dialogue_palette_load(&cpu,0x8002B3D4u);
+        capture(resident+offset,actual,64);CHECK(!memcmp(actual,original,64));
+        cpu.gpr[31]=0x800225D8u;cpu.gpr[6]=2;
+        dialogue_palette_load(&cpu,0x8002B3D4u);
+        capture(resident+offset,actual,64);CHECK(!memcmp(actual,original,64));
+        cpu.gpr[4]=first;cpu.gpr[5]=0x800E33D8u;cpu.gpr[6]=2;
+        cpu.gpr[31]=alternate?0x800221D4u:0x800221BCu;
+        dialogue_palette_load(&cpu,0x8002B3D4u);
+        capture(resident+offset,actual,64);CHECK(!memcmp(actual,baseline,64));
+        CHECK(psx_mod_read_byte(resident+offset-1)==0xA7 && psx_mod_read_byte(resident+offset+64)==0xB8);
+        project(active_palette+offset,baseline,64);leave_zero();
+        CHECK(psx_mod_read_byte(0x800C4560u)==0x73 && !zero_projected);
+        cpu.gpr[5]=0x8006E408u;cpu.gpr[31]=alternate?0x800219B0u:0x8002199Cu;
+        dialogue_palette_load(&cpu,0x8002B3D4u);
+        capture(resident+offset,actual,64);CHECK(!memcmp(actual,baseline,64));
+    }
+}
 static void native_working_palette_class_and_load_events(void) {
     CPUState cpu;setup(&cpu);
     const unsigned member_bytes=2048+0x4000,dat_bytes=2048+2*member_bytes;
@@ -1344,6 +1398,7 @@ int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     deferred_dash_effect_retains_zero_atlas();clear_banks();
     private_giga_shots_retain_zero_source();
     deferred_death_effect_retains_zero_source();clear_banks();
+    native_shared_dialogue_palette();
     native_working_palette_class_and_load_events();
     yammar_native_upload_coordinates();
     native_shared_ride_ownership();
