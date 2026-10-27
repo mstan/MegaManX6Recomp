@@ -1,0 +1,1341 @@
+{
+  "schema": 1,
+  "comparison": "F23",
+  "frozen_row_sha256": "9d4dc744777cc8cd31f5c1a0f68e92a19424f28687846487475bb447385920ac",
+  "candidate": "f7b7383577e9c52ccc001e2559bb02ba3e5ffd51",
+  "result": "passed",
+  "binding": {
+    "image_sha256": "2d510ce79ea4312cc6b3697d33ff44cf66c0791adeed7093fb8f9258d3ac2c52",
+    "manifest_sha256": "7f8c5d19025ec4828feb88e4b8f84f1e5cc17dfabb9409788949378144983b96",
+    "provenance_sha256": "6b7d7c878e02002bb2b17101aa5f498b99157bb44c3a139d0701dc83c0590a1c"
+  },
+  "cases": [
+    {
+      "mode": "local",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-local-v68-root-v1\\qualification.json",
+        "bytes": 4836727,
+        "sha256": "6416c620b05d47df35b1e772a7e60e78300f867b61403fe74c9ab827f499bf17"
+      },
+      "raw_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-local-v68-root-v1\\ammo-hud\\intro-admission\\F23\\observations.json",
+        "bytes": 337777,
+        "sha256": "2c599cace60949184c9d2cff59c5f69a31c2ecbaaa6a6f766fe882a1e16dc058"
+      },
+      "actual_door": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-local-v68-root-v1\\ammo-hud\\intro-admission\\observations.json",
+        "bytes": 1962734,
+        "sha256": "a1e8793dfa0086c7459a15c64908285c6e62225f45a0bd8b07ca10791c7ea3a8"
+      },
+      "source_guards": [
+        {
+          "address": "0x80020c40",
+          "bytes": 1192,
+          "sha256": "94aede6da50519e2de8e52f5511114af3788360ed8ea568e899657022963ee15"
+        },
+        {
+          "address": "0x800357a8",
+          "bytes": 300,
+          "sha256": "f6852bd7ee4b24c28c60575cd19d08ecd1b05686798ec8b0590fa8a893133b7b"
+        },
+        {
+          "address": "0x80073cec",
+          "bytes": 6,
+          "sha256": "31e54fa8907c91ccf79000410eae1ea1cb5b65bc2893faaccdb4b7782a286b4c"
+        }
+      ],
+      "source_observer": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F23_postdoor_v67_root_v1.py",
+        "sha256": "fb0c563146900794e366593159815204174d489550b09c509bc8bdd510792846"
+      },
+      "primary_dashes": [
+        {
+          "peer": 0,
+          "primary_body_hex": "01000001010c010000ac1f1800008b01000000000040021000ec191800008b01009005000000000000d0ffff00000000d44a1f8070431f80cc3a1080687c1480000500780109014b4b03000000000000000000005c3f1f8000000000202020000012000000000000583d07800f0000000800000000000000000000000101010100000100011901000208000001000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000ec191800008b010000000000002001000000000000000000000000",
+          "separate_private_Zero_body_hex": "0100010101020000000c011800008a010000000000400205000c011800008a0100000100000000000000000000000000d0f61e8018eb1e801800009fa481039f00050078020001040403000000000000000000001cea1e8000000000202020000000000000000000543d0780010000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a00500000001000080010000000200000002000080010000200400002004000042000000000000000c011800008a010000000000002001000000000000000000000000",
+          "restored_native_trails": [
+            {
+              "slot": 0,
+              "allocation": 17,
+              "visible": 1,
+              "active": 1,
+              "parent": "0x800970a0",
+              "native_CLUT": "0x780d",
+              "compression": "0x80103acc",
+              "assembly": "0x80147c68",
+              "frame": 75,
+              "facing": 64,
+              "native_counters": [
+                2,
+                8,
+                10
+              ]
+            },
+            {
+              "slot": 1,
+              "allocation": 17,
+              "visible": 1,
+              "active": 1,
+              "parent": "0x800972f8",
+              "native_CLUT": "0x780e",
+              "compression": "0x80103acc",
+              "assembly": "0x80147c68",
+              "frame": 75,
+              "facing": 64,
+              "native_counters": [
+                2,
+                8,
+                8
+              ]
+            },
+            {
+              "slot": 2,
+              "allocation": 17,
+              "visible": 1,
+              "active": 1,
+              "parent": "0x80097358",
+              "native_CLUT": "0x780f",
+              "compression": "0x80103acc",
+              "assembly": "0x80147c68",
+              "frame": 75,
+              "facing": 64,
+              "native_counters": [
+                2,
+                8,
+                6
+              ]
+            }
+          ],
+          "seat": 0,
+          "direction": 1,
+          "input_index": 2,
+          "before": 0,
+          "active": 8,
+          "capture": 9,
+          "retired": 18,
+          "native_world_updates": 39,
+          "sdk_bracket": [
+            36,
+            42
+          ],
+          "observed_release_active_phases": [
+            0,
+            1,
+            2
+          ],
+          "primary_HP_drop": false,
+          "primary_native_hurt": false,
+          "retirement": "original native neutral retirement",
+          "Zero_motion_observed": false,
+          "Zero_HP_drop": false,
+          "Zero_native_hurt": false
+        }
+      ],
+      "packet_witnesses": [
+        {
+          "peer": 0,
+          "whole_completed_frame": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-local-v68-root-v1\\ammo-hud\\intro-admission\\F23\\peer-0-primary-native-dash-both-bodies-GP0.json.gz",
+            "bytes": 11862,
+            "sha256": "6f312c4299c0d17d4de15d377daa9c55433f7999bda08547232762b5a2fb92ad"
+          },
+          "frame": 4352,
+          "nearby_native_actor_anchors": [
+            [
+              99.984375,
+              171.0
+            ],
+            [
+              81.046875,
+              170.0
+            ]
+          ],
+          "native_CLUT7800_sprite_candidates_near_X": [
+            {
+              "index": 892,
+              "source": "0x000A51BC",
+              "opcode": "0x2D",
+              "vertices": [
+                [
+                  122,
+                  171
+                ],
+                [
+                  137,
+                  171
+                ],
+                [
+                  122,
+                  187
+                ],
+                [
+                  137,
+                  187
+                ]
+              ]
+            },
+            {
+              "index": 894,
+              "source": "0x000A51E4",
+              "opcode": "0x2D",
+              "vertices": [
+                [
+                  100,
+                  163
+                ],
+                [
+                  116,
+                  163
+                ],
+                [
+                  100,
+                  179
+                ],
+                [
+                  116,
+                  179
+                ]
+              ]
+            },
+            {
+              "index": 896,
+              "source": "0x000A520C",
+              "opcode": "0x2D",
+              "vertices": [
+                [
+                  116,
+                  179
+                ],
+                [
+                  132,
+                  179
+                ],
+                [
+                  116,
+                  195
+                ],
+                [
+                  132,
+                  195
+                ]
+              ]
+            },
+            {
+              "index": 898,
+              "source": "0x000A5234",
+              "opcode": "0x2D",
+              "vertices": [
+                [
+                  100,
+                  179
+                ],
+                [
+                  116,
+                  179
+                ],
+                [
+                  100,
+                  195
+                ],
+                [
+                  116,
+                  195
+                ]
+              ]
+            },
+            {
+              "index": 900,
+              "source": "0x000A525C",
+              "opcode": "0x2D",
+              "vertices": [
+                [
+                  84,
+                  179
+                ],
+                [
+                  100,
+                  179
+                ],
+                [
+                  84,
+                  195
+                ],
+                [
+                  100,
+                  195
+                ]
+              ]
+            },
+            {
+              "index": 902,
+              "source": "0x000A5284",
+              "opcode": "0x2D",
+              "vertices": [
+                [
+                  116,
+                  163
+                ],
+                [
+                  132,
+                  163
+                ],
+                [
+                  116,
+                  179
+                ],
+                [
+                  132,
+                  179
+                ]
+              ]
+            }
+          ],
+          "retained_sprite_packet_count": 16,
+          "earliest_retained_source_pair_near_Zero": [
+            {
+              "index": 868,
+              "source": "0x00809C44",
+              "bank": "60CC",
+              "vertices": [
+                [
+                  81,
+                  146
+                ],
+                [
+                  96,
+                  146
+                ],
+                [
+                  81,
+                  162
+                ]
+              ]
+            },
+            {
+              "index": 869,
+              "source": "0x00809C6C",
+              "bank": "60CC",
+              "vertices": [
+                [
+                  81,
+                  162
+                ],
+                [
+                  96,
+                  146
+                ],
+                [
+                  96,
+                  162
+                ]
+              ]
+            }
+          ],
+          "native_primitive_source": "SDK10b9021 runtime/src/gpu.c:5849 and6236: 7C..7F are3word16x16 textured sprites;2C..2F are9wordFT4. Actual Left-facing X uses7D, Right-facing uses2D; preserve both literal opcodes.",
+          "attribution_limit": "CLUT/bank alone is not unique identity. Actual body/owned-trail metadata, original private body-before-effects source order, native/retained geometry and composed review are combined. Original full frame remains untouched; no registered arena snapshot or every-triangle ownership claim."
+        }
+      ],
+      "root_composed_review": [
+        {
+          "peer": 0,
+          "label": "safe-native-CP2",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-local-v68-root-v1\\ammo-hud\\intro-admission\\peer-0-safe-native-CP2.png",
+            "bytes": 2074543,
+            "sha256": "52778886e6904ea499074322a3c97a19f6c390753865376c25f0a02e370ad4fc"
+          },
+          "root_visual_review": "Actual CP2 arrival shows both heroes; guest-owned door image shows Zero at door and X in native passenger beam. Known corrupt scenery retained without rendering credit."
+        },
+        {
+          "peer": 0,
+          "label": "original-door-scene-begin",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-local-v68-root-v1\\ammo-hud\\intro-admission\\peer-0-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "8e54c9d0aa34653188e78ddaf9bc6c173326f3979138e675dac2c0c50b8039ba"
+          },
+          "root_visual_review": "Actual CP2 arrival shows both heroes; guest-owned door image shows Zero at door and X in native passenger beam. Known corrupt scenery retained without rendering credit."
+        },
+        {
+          "peer": 0,
+          "label": "primary-native-dash-both-bodies",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-local-v68-root-v1\\ammo-hud\\intro-admission\\F23\\peer-0-primary-native-dash-both-bodies.png",
+            "bytes": 2074543,
+            "sha256": "5ca574142e5043e60cac87898ec8c6fd2d2e70152112c01833fb74cfd8bb41ec"
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-local-v68-root-v1\\ammo-hud\\intro-admission\\F23\\peer-0-primary-native-dash-both-bodies-GP0.json.gz",
+            "bytes": 11862,
+            "sha256": "6f312c4299c0d17d4de15d377daa9c55433f7999bda08547232762b5a2fb92ad"
+          },
+          "root_visual_review": "Native X dash body/blue afterimages and white native dash art remain visible beside distinct red Zero. Boss/projectiles and overlapping actor layers are normal composed scene content.",
+          "nearby_present_event_intervals_ms": [
+            17,
+            16,
+            18,
+            27,
+            16,
+            20,
+            25
+          ],
+          "nearby_median_ms": 18,
+          "cadence_limit": "Nearby asynchronous completed presents, not a precisely isolated active-dash performance benchmark."
+        },
+        {
+          "peer": 0,
+          "label": "primary-trails-retired-both-bodies",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-local-v68-root-v1\\ammo-hud\\intro-admission\\F23\\peer-0-primary-trails-retired-both-bodies.png",
+            "bytes": 2074543,
+            "sha256": "f447e12538470fc597beb8586db725a9682013f378835fb09740ad508ff54cce"
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-local-v68-root-v1\\ammo-hud\\intro-admission\\F23\\peer-0-primary-trails-retired-both-bodies-GP0.json.gz",
+            "bytes": 11271,
+            "sha256": "e61f9881996c63dffbda38b8b8dd2356e23a32b4aef4019176fea961fff1e622"
+          },
+          "root_visual_review": "After primary trail retirement, both native heroes remain rendered; later ordinary Zero hurt/projectile overlap may appear. No lingering corrupted trail actor.",
+          "nearby_present_event_intervals_ms": [
+            16,
+            17,
+            15,
+            15,
+            15,
+            23,
+            18
+          ],
+          "nearby_median_ms": 16,
+          "cadence_limit": "Nearby asynchronous completed presents, not a precisely isolated active-dash performance benchmark."
+        }
+      ],
+      "resolved_crc": null,
+      "visibility_setup": null,
+      "recording_refusals": [
+        {
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "2d510ce79ea4312cc6b3697d33ff44cf66c0791adeed7093fb8f9258d3ac2c52",
+            "manifest_sha256": "7f8c5d19025ec4828feb88e4b8f84f1e5cc17dfabb9409788949378144983b96",
+            "mode": "offline",
+            "profile": null,
+            "settings_sha256": "4e105a49292dabb46b0f75ebcf5c15410d49e88774db251e86c0f411744ca28b",
+            "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          "refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "mode": "netplay",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-netplay-v68-root-v1\\qualification.json",
+        "bytes": 6105995,
+        "sha256": "4956b109e04728bd1f161b06804f5ca8a5e421c1749515848d2de5ba0f0aa133"
+      },
+      "raw_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-netplay-v68-root-v1\\intro-admission\\F23\\observations.json",
+        "bytes": 666392,
+        "sha256": "3bf57684384e698b4e9b64102e199bcdf7c359fb34ac9a4eb36280cff4cf0a5d"
+      },
+      "actual_door": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-netplay-v68-root-v1\\intro-admission\\observations.json",
+        "bytes": 2865894,
+        "sha256": "7085c78f7eb685b65ae34ae7a0d802e9ee0a9e16fb475d26bb17a25e629ecf56"
+      },
+      "source_guards": [
+        {
+          "address": "0x80020c40",
+          "bytes": 1192,
+          "sha256": "94aede6da50519e2de8e52f5511114af3788360ed8ea568e899657022963ee15"
+        },
+        {
+          "address": "0x800357a8",
+          "bytes": 300,
+          "sha256": "f6852bd7ee4b24c28c60575cd19d08ecd1b05686798ec8b0590fa8a893133b7b"
+        },
+        {
+          "address": "0x80073cec",
+          "bytes": 6,
+          "sha256": "31e54fa8907c91ccf79000410eae1ea1cb5b65bc2893faaccdb4b7782a286b4c"
+        }
+      ],
+      "source_observer": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F23_postdoor_v67_root_v1.py",
+        "sha256": "fb0c563146900794e366593159815204174d489550b09c509bc8bdd510792846"
+      },
+      "primary_dashes": [
+        {
+          "peer": 0,
+          "primary_body_hex": "01000001010c010000fc131800008b01000000000040021000dc0d1800008b0100f005000000000000d0ffff00000000d44a1f8068431f80cc3a1080687c148000050078010701494903000000000000000000005c3f1f800000000020202000000a000000000000583d0780030000000800000000000000000000000101010100000100011b01000408000001000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000dc0d1800008b010000000000002001000000000000000000000000",
+          "separate_private_Zero_body_hex": "0100010101020000000c011800008a010000000000400205000c011800008a0100000100000000000000000000000000d0f61e801ceb1e801800009fa481039f00050078050001050403000000000000000000001cea1e8000000000202020000000000000000000543d0780010000000800000000000000000000000000000000000000000000000008000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a00500000001000080010000000200000002000080010000200400002004000042000000000000000c011800008a010000000000002001000000000000000000000000",
+          "restored_native_trails": [
+            {
+              "slot": 0,
+              "allocation": 17,
+              "visible": 1,
+              "active": 1,
+              "parent": "0x800970a0",
+              "native_CLUT": "0x780d",
+              "compression": "0x80103acc",
+              "assembly": "0x80147c68",
+              "frame": 73,
+              "facing": 64,
+              "native_counters": [
+                0,
+                8,
+                10
+              ]
+            },
+            {
+              "slot": 1,
+              "allocation": 17,
+              "visible": 1,
+              "active": 1,
+              "parent": "0x800972f8",
+              "native_CLUT": "0x780e",
+              "compression": "0x80103acc",
+              "assembly": "0x80147c68",
+              "frame": 73,
+              "facing": 64,
+              "native_counters": [
+                0,
+                8,
+                8
+              ]
+            },
+            {
+              "slot": 2,
+              "allocation": 17,
+              "visible": 1,
+              "active": 1,
+              "parent": "0x80097358",
+              "native_CLUT": "0x780f",
+              "compression": "0x80103acc",
+              "assembly": "0x80147c68",
+              "frame": 73,
+              "facing": 64,
+              "native_counters": [
+                0,
+                8,
+                6
+              ]
+            }
+          ],
+          "seat": 0,
+          "direction": 1,
+          "input_index": 2,
+          "before": 0,
+          "active": 6,
+          "capture": 7,
+          "retired": 17,
+          "native_world_updates": 41,
+          "sdk_bracket": [
+            40,
+            43
+          ],
+          "observed_release_active_phases": [
+            0,
+            1,
+            2
+          ],
+          "primary_HP_drop": false,
+          "primary_native_hurt": false,
+          "retirement": "original native neutral retirement",
+          "Zero_motion_observed": true,
+          "Zero_HP_drop": true,
+          "Zero_native_hurt": true
+        },
+        {
+          "peer": 1,
+          "primary_body_hex": "01000001010c010000bc2f1800008b01000000000000021000dc351800008b010010faff0000000000d0ffff00000000d44a1f8068431f80cc3a1080687c148000050078010701494903000000000000000000005c3f1f8000000000202020000000000000000000583d07800f0000000800000000000000000000000201020100000200011b01000408000001000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000dc351800008b010000000000002001000000000000000000000000",
+          "separate_private_Zero_body_hex": "0100010101020000001cef1700008a010000000000400205001cef1700008a0100000000000000000000000000000000d0f61e8000eb1e801800009fa481039f0005007803000100ff03000000000000000000001cea1e80000000001c1c20000027000100000000543d07800f00000008000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000001000000ff400000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a00500000001000080010000000200000002000080010000200400002004000042000000000000001cef1700008a010000000000002001000000000000000000000000",
+          "restored_native_trails": [
+            {
+              "slot": 0,
+              "allocation": 17,
+              "visible": 1,
+              "active": 1,
+              "parent": "0x800970a0",
+              "native_CLUT": "0x780d",
+              "compression": "0x80103acc",
+              "assembly": "0x80147c68",
+              "frame": 73,
+              "facing": 0,
+              "native_counters": [
+                0,
+                8,
+                10
+              ]
+            },
+            {
+              "slot": 1,
+              "allocation": 17,
+              "visible": 1,
+              "active": 1,
+              "parent": "0x800972f8",
+              "native_CLUT": "0x780e",
+              "compression": "0x80103acc",
+              "assembly": "0x80147c68",
+              "frame": 73,
+              "facing": 0,
+              "native_counters": [
+                0,
+                8,
+                8
+              ]
+            },
+            {
+              "slot": 2,
+              "allocation": 17,
+              "visible": 1,
+              "active": 1,
+              "parent": "0x80097358",
+              "native_CLUT": "0x780f",
+              "compression": "0x80103acc",
+              "assembly": "0x80147c68",
+              "frame": 73,
+              "facing": 0,
+              "native_counters": [
+                0,
+                8,
+                6
+              ]
+            }
+          ],
+          "seat": 0,
+          "direction": -1,
+          "input_index": 4,
+          "before": 21,
+          "active": 26,
+          "capture": 27,
+          "retired": 40,
+          "native_world_updates": 42,
+          "sdk_bracket": [
+            40,
+            46
+          ],
+          "observed_release_active_phases": [
+            0,
+            1,
+            2
+          ],
+          "primary_HP_drop": false,
+          "primary_native_hurt": false,
+          "retirement": "original native neutral retirement",
+          "Zero_motion_observed": false,
+          "Zero_HP_drop": false,
+          "Zero_native_hurt": false
+        }
+      ],
+      "packet_witnesses": [
+        {
+          "peer": 0,
+          "whole_completed_frame": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-netplay-v68-root-v1\\intro-admission\\F23\\peer-0-primary-native-dash-both-bodies-GP0.json.gz",
+            "bytes": 11928,
+            "sha256": "a9f06bb2633e72fa570ff4c31dbb2d83430a82cd6a25a1343e6bf8ccb296151c"
+          },
+          "frame": 5548,
+          "nearby_native_actor_anchors": [
+            [
+              93.859375,
+              171.0
+            ],
+            [
+              81.046875,
+              170.0
+            ]
+          ],
+          "native_CLUT7800_sprite_candidates_near_X": [
+            {
+              "index": 916,
+              "source": "0x000A51BC",
+              "opcode": "0x2D",
+              "vertices": [
+                [
+                  110,
+                  171
+                ],
+                [
+                  125,
+                  171
+                ],
+                [
+                  110,
+                  187
+                ],
+                [
+                  125,
+                  187
+                ]
+              ]
+            },
+            {
+              "index": 918,
+              "source": "0x000A51E4",
+              "opcode": "0x2D",
+              "vertices": [
+                [
+                  104,
+                  163
+                ],
+                [
+                  120,
+                  163
+                ],
+                [
+                  104,
+                  179
+                ],
+                [
+                  120,
+                  179
+                ]
+              ]
+            },
+            {
+              "index": 920,
+              "source": "0x000A520C",
+              "opcode": "0x2D",
+              "vertices": [
+                [
+                  88,
+                  163
+                ],
+                [
+                  104,
+                  163
+                ],
+                [
+                  88,
+                  179
+                ],
+                [
+                  104,
+                  179
+                ]
+              ]
+            },
+            {
+              "index": 922,
+              "source": "0x000A5234",
+              "opcode": "0x2D",
+              "vertices": [
+                [
+                  104,
+                  179
+                ],
+                [
+                  120,
+                  179
+                ],
+                [
+                  104,
+                  195
+                ],
+                [
+                  120,
+                  195
+                ]
+              ]
+            },
+            {
+              "index": 924,
+              "source": "0x000A525C",
+              "opcode": "0x2D",
+              "vertices": [
+                [
+                  88,
+                  179
+                ],
+                [
+                  104,
+                  179
+                ],
+                [
+                  88,
+                  195
+                ],
+                [
+                  104,
+                  195
+                ]
+              ]
+            },
+            {
+              "index": 926,
+              "source": "0x000A5284",
+              "opcode": "0x2D",
+              "vertices": [
+                [
+                  72,
+                  179
+                ],
+                [
+                  88,
+                  179
+                ],
+                [
+                  72,
+                  195
+                ],
+                [
+                  88,
+                  195
+                ]
+              ]
+            }
+          ],
+          "retained_sprite_packet_count": 16,
+          "earliest_retained_source_pair_near_Zero": [
+            {
+              "index": 892,
+              "source": "0x00809C44",
+              "bank": "60D3",
+              "vertices": [
+                [
+                  81,
+                  146
+                ],
+                [
+                  96,
+                  146
+                ],
+                [
+                  81,
+                  162
+                ]
+              ]
+            },
+            {
+              "index": 893,
+              "source": "0x00809C6C",
+              "bank": "60D3",
+              "vertices": [
+                [
+                  81,
+                  162
+                ],
+                [
+                  96,
+                  146
+                ],
+                [
+                  96,
+                  162
+                ]
+              ]
+            }
+          ],
+          "native_primitive_source": "SDK10b9021 runtime/src/gpu.c:5849 and6236: 7C..7F are3word16x16 textured sprites;2C..2F are9wordFT4. Actual Left-facing X uses7D, Right-facing uses2D; preserve both literal opcodes.",
+          "attribution_limit": "CLUT/bank alone is not unique identity. Actual body/owned-trail metadata, original private body-before-effects source order, native/retained geometry and composed review are combined. Original full frame remains untouched; no registered arena snapshot or every-triangle ownership claim."
+        },
+        {
+          "peer": 1,
+          "whole_completed_frame": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-netplay-v68-root-v1\\intro-admission\\F23\\peer-1-primary-native-dash-both-bodies-GP0.json.gz",
+            "bytes": 11438,
+            "sha256": "37a1f4fc906e0c5f97db19d8fffbb8fd106bbdfbb9a976f849a0ee864c8ad304"
+          },
+          "frame": 5600,
+          "nearby_native_actor_anchors": [
+            [
+              127.734375,
+              171.0
+            ],
+            [
+              63.109375,
+              170.0
+            ]
+          ],
+          "native_CLUT7800_sprite_candidates_near_X": [
+            {
+              "index": 896,
+              "source": "0x000A51BC",
+              "opcode": "0x7D",
+              "vertices": [
+                [
+                  100,
+                  171
+                ],
+                [
+                  116,
+                  171
+                ],
+                [
+                  100,
+                  187
+                ],
+                [
+                  116,
+                  187
+                ]
+              ]
+            },
+            {
+              "index": 898,
+              "source": "0x000A51E4",
+              "opcode": "0x7D",
+              "vertices": [
+                [
+                  106,
+                  163
+                ],
+                [
+                  122,
+                  163
+                ],
+                [
+                  106,
+                  179
+                ],
+                [
+                  122,
+                  179
+                ]
+              ]
+            },
+            {
+              "index": 900,
+              "source": "0x000A520C",
+              "opcode": "0x7D",
+              "vertices": [
+                [
+                  122,
+                  163
+                ],
+                [
+                  138,
+                  163
+                ],
+                [
+                  122,
+                  179
+                ],
+                [
+                  138,
+                  179
+                ]
+              ]
+            },
+            {
+              "index": 902,
+              "source": "0x000A5234",
+              "opcode": "0x7D",
+              "vertices": [
+                [
+                  106,
+                  179
+                ],
+                [
+                  122,
+                  179
+                ],
+                [
+                  106,
+                  195
+                ],
+                [
+                  122,
+                  195
+                ]
+              ]
+            },
+            {
+              "index": 904,
+              "source": "0x000A525C",
+              "opcode": "0x7D",
+              "vertices": [
+                [
+                  122,
+                  179
+                ],
+                [
+                  138,
+                  179
+                ],
+                [
+                  122,
+                  195
+                ],
+                [
+                  138,
+                  195
+                ]
+              ]
+            },
+            {
+              "index": 906,
+              "source": "0x000A5284",
+              "opcode": "0x7D",
+              "vertices": [
+                [
+                  138,
+                  179
+                ],
+                [
+                  154,
+                  179
+                ],
+                [
+                  138,
+                  195
+                ],
+                [
+                  154,
+                  195
+                ]
+              ]
+            }
+          ],
+          "retained_sprite_packet_count": 16,
+          "earliest_retained_source_pair_near_Zero": [
+            {
+              "index": 872,
+              "source": "0x00809C44",
+              "bank": "610C",
+              "vertices": [
+                [
+                  63,
+                  146
+                ],
+                [
+                  78,
+                  146
+                ],
+                [
+                  63,
+                  162
+                ]
+              ]
+            },
+            {
+              "index": 873,
+              "source": "0x00809C6C",
+              "bank": "610C",
+              "vertices": [
+                [
+                  63,
+                  162
+                ],
+                [
+                  78,
+                  146
+                ],
+                [
+                  78,
+                  162
+                ]
+              ]
+            }
+          ],
+          "native_primitive_source": "SDK10b9021 runtime/src/gpu.c:5849 and6236: 7C..7F are3word16x16 textured sprites;2C..2F are9wordFT4. Actual Left-facing X uses7D, Right-facing uses2D; preserve both literal opcodes.",
+          "attribution_limit": "CLUT/bank alone is not unique identity. Actual body/owned-trail metadata, original private body-before-effects source order, native/retained geometry and composed review are combined. Original full frame remains untouched; no registered arena snapshot or every-triangle ownership claim."
+        }
+      ],
+      "root_composed_review": [
+        {
+          "peer": 0,
+          "label": "safe-native-CP2",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-netplay-v68-root-v1\\intro-admission\\peer-0-safe-native-CP2.png",
+            "bytes": 2074543,
+            "sha256": "9647aee7fe6be73f3bb6f0bed864756b9b6029872d93f528578ab13b250bfb21"
+          },
+          "root_visual_review": "Actual CP2 arrival shows both heroes; guest-owned door image shows Zero at door and X in native passenger beam. Known corrupt scenery retained without rendering credit."
+        },
+        {
+          "peer": 1,
+          "label": "safe-native-CP2",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-netplay-v68-root-v1\\intro-admission\\peer-1-safe-native-CP2.png",
+            "bytes": 2074543,
+            "sha256": "5dd29197d8122625324d106ba99ff2523ddad1b647f018fefda5551d1929ea29"
+          },
+          "root_visual_review": "Actual CP2 arrival shows both heroes; guest-owned door image shows Zero at door and X in native passenger beam. Known corrupt scenery retained without rendering credit."
+        },
+        {
+          "peer": 0,
+          "label": "original-door-scene-begin",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-netplay-v68-root-v1\\intro-admission\\peer-0-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "8b1c714c874efbfdce92728bd42af70f1cf7b5563ad1a3b4af2896d173444458"
+          },
+          "root_visual_review": "Actual CP2 arrival shows both heroes; guest-owned door image shows Zero at door and X in native passenger beam. Known corrupt scenery retained without rendering credit."
+        },
+        {
+          "peer": 1,
+          "label": "original-door-scene-begin",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-netplay-v68-root-v1\\intro-admission\\peer-1-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "20600f73c1db6d035972cb432c384034dae6a2af7155f0ee22f784515ddce161"
+          },
+          "root_visual_review": "Actual CP2 arrival shows both heroes; guest-owned door image shows Zero at door and X in native passenger beam. Known corrupt scenery retained without rendering credit."
+        },
+        {
+          "peer": 0,
+          "label": "primary-native-dash-both-bodies",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-netplay-v68-root-v1\\intro-admission\\F23\\peer-0-primary-native-dash-both-bodies.png",
+            "bytes": 2074543,
+            "sha256": "5b2e022d27e57d91d549c0c1603c8f05d8c8722f37f3d86829676ad431a1408a"
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-netplay-v68-root-v1\\intro-admission\\F23\\peer-0-primary-native-dash-both-bodies-GP0.json.gz",
+            "bytes": 11928,
+            "sha256": "a9f06bb2633e72fa570ff4c31dbb2d83430a82cd6a25a1343e6bf8ccb296151c"
+          },
+          "root_visual_review": "Native X dash body/blue afterimages and white native dash art remain visible beside distinct red Zero. Boss/projectiles and overlapping actor layers are normal composed scene content.",
+          "nearby_present_event_intervals_ms": [
+            23,
+            18,
+            24,
+            18,
+            20,
+            21,
+            21
+          ],
+          "nearby_median_ms": 21,
+          "cadence_limit": "Nearby asynchronous completed presents, not a precisely isolated active-dash performance benchmark."
+        },
+        {
+          "peer": 0,
+          "label": "primary-trails-retired-both-bodies",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-netplay-v68-root-v1\\intro-admission\\F23\\peer-0-primary-trails-retired-both-bodies.png",
+            "bytes": 2074543,
+            "sha256": "b2ce4d6db73f9804be7c404a957d500ecdae930e287fec561cbabbde23f0fdf5"
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-netplay-v68-root-v1\\intro-admission\\F23\\peer-0-primary-trails-retired-both-bodies-GP0.json.gz",
+            "bytes": 11343,
+            "sha256": "3bfc9f1fb09cf0fb5daa7bf4cf66968b50bd5ca58c6944244ad15ef33e16458a"
+          },
+          "root_visual_review": "After primary trail retirement, both native heroes remain rendered; later ordinary Zero hurt/projectile overlap may appear. No lingering corrupted trail actor.",
+          "nearby_present_event_intervals_ms": [
+            21,
+            20,
+            19,
+            20,
+            22,
+            26,
+            18
+          ],
+          "nearby_median_ms": 20,
+          "cadence_limit": "Nearby asynchronous completed presents, not a precisely isolated active-dash performance benchmark."
+        },
+        {
+          "peer": 1,
+          "label": "primary-native-dash-both-bodies",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-netplay-v68-root-v1\\intro-admission\\F23\\peer-1-primary-native-dash-both-bodies.png",
+            "bytes": 2074543,
+            "sha256": "0903adfeafa41bc625604b0964723e41aa00bcb35ed90a5a01115d92f87a4dd3"
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-netplay-v68-root-v1\\intro-admission\\F23\\peer-1-primary-native-dash-both-bodies-GP0.json.gz",
+            "bytes": 11438,
+            "sha256": "37a1f4fc906e0c5f97db19d8fffbb8fd106bbdfbb9a976f849a0ee864c8ad304"
+          },
+          "root_visual_review": "NET peer1: native X Left dash/blue afterimages and white dash art are clear; an original boss explosion visually occludes most of Zero. Its actual native body and composed-body GT3 geometry remain in the retained frame; the following retired frame shows both heroes together. No fully unobscured Zero artwork is claimed for this active image.",
+          "nearby_present_event_intervals_ms": [
+            17,
+            22,
+            16,
+            16,
+            17,
+            24,
+            18
+          ],
+          "nearby_median_ms": 17,
+          "cadence_limit": "Nearby asynchronous completed presents, not a precisely isolated active-dash performance benchmark."
+        },
+        {
+          "peer": 1,
+          "label": "primary-trails-retired-both-bodies",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-netplay-v68-root-v1\\intro-admission\\F23\\peer-1-primary-trails-retired-both-bodies.png",
+            "bytes": 2074543,
+            "sha256": "7dabcd7f37b6146680e27ee732d15e46754ab1a64c50bf5c8ead3411fae93c3d"
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-netplay-v68-root-v1\\intro-admission\\F23\\peer-1-primary-trails-retired-both-bodies-GP0.json.gz",
+            "bytes": 10617,
+            "sha256": "c0873c252619e7fa4200f62a5c75528cad2797b72d797b6d12e2feb7499ecc2d"
+          },
+          "root_visual_review": "After primary trail retirement, both native heroes remain rendered; later ordinary Zero hurt/projectile overlap may appear. No lingering corrupted trail actor.",
+          "nearby_present_event_intervals_ms": [
+            17,
+            16,
+            19,
+            16,
+            17,
+            21,
+            19
+          ],
+          "nearby_median_ms": 17,
+          "cadence_limit": "Nearby asynchronous completed presents, not a precisely isolated active-dash performance benchmark."
+        }
+      ],
+      "resolved_crc": [
+        {
+          "label": "initial idle",
+          "samples": 7,
+          "last_tick": 3104,
+          "resolved_through": [
+            3136,
+            3136
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": 8,
+          "last_tick": 3392,
+          "resolved_through": [
+            3406,
+            3406
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": 7,
+          "last_tick": 3680,
+          "resolved_through": [
+            3706,
+            3706
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": 8,
+          "last_tick": 5888,
+          "resolved_through": [
+            5890,
+            5890
+          ]
+        }
+      ],
+      "visibility_setup": null,
+      "recording_refusals": [
+        {
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "2d510ce79ea4312cc6b3697d33ff44cf66c0791adeed7093fb8f9258d3ac2c52",
+            "manifest_sha256": "7f8c5d19025ec4828feb88e4b8f84f1e5cc17dfabb9409788949378144983b96",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 5,
+              "selected_sha256": "581805deb9bca0a8b96bd17173b874d100d9405469b40e371d5be64ac9501a8f"
+            },
+            "settings_sha256": "c578cadc553f83677af10928b7e9889ee8adf159eebd973db144befd14a652d9",
+            "simulation_contract_sha256": "3b3d86bcf1b3f576eda0b26d158a56954a2f2c301d0b349f2513af6726762e95"
+          },
+          "refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          }
+        },
+        {
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "2d510ce79ea4312cc6b3697d33ff44cf66c0791adeed7093fb8f9258d3ac2c52",
+            "manifest_sha256": "7f8c5d19025ec4828feb88e4b8f84f1e5cc17dfabb9409788949378144983b96",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 5,
+              "selected_sha256": "581805deb9bca0a8b96bd17173b874d100d9405469b40e371d5be64ac9501a8f"
+            },
+            "settings_sha256": "c7065c8b465103a9b72293810ac368fa837d2576c538e5d2a81c3bf46aac55ab",
+            "simulation_contract_sha256": "3b3d86bcf1b3f576eda0b26d158a56954a2f2c301d0b349f2513af6726762e95"
+          },
+          "refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "reviewed_images": 12,
+  "focused_tests": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v68-native-trails-focused-root-v1.log",
+    "bytes": 6124,
+    "sha256": "84baa37c4cb6b3075ff9f708999015cc0b3d0858689070930475fd20cbca3c5f"
+  },
+  "limits": [
+    "Only F23 closes on immutablef7b7383/SDK10b/UI34b, both required modes. Previous50cc26e actual failed native trail records remain retained and are superseded only by these new runtime cases.",
+    "Fix preserves already-earned native fixed-pool constructor metadata while retiring visibility/active flags; dynamic shots remain fully cleared. No new initializer, observer repair, outcome write, schema/field/AOT/hook/profile change.",
+    "21 focused checks pass, including meaningful scene regression for both passenger seats, no old combat resurrection, fresh trails/charge/Falcon effects, lifecycle/snapshot/private-view/resource/HUD/negotiated checkpoint gates. Modeled native fixture contracts complement actual LOCAL/NET X-passenger cases; no independent live Zero-passenger dash credit is inferred.",
+    "Three actual P1 dashes retain original action12/positive marker/travel, valid3slot constructor identity/parents/palettes/resources/frame/facing, visible separate Zero, finite retirement and independent native-world/SDK brackets. Damage cancellation is labelled separately from natural drain.",
+    "Twelve composed images reviewed. Native X body/dash/afterimage art is clear in all3 active images. Zero is visible in LOCAL/NETpeer0 active images; NETpeer1 active image has ordinary boss-explosion occlusion. Actual Zero body plus completed-frame body geometry remain retained, and the subsequent retired image shows both heroes. The contract inspects both actors/effects across this native sequence; no fully unobscured Zero artwork in that one active frame is claimed. Normal later hurt/overlap/corrupt scenery confer no general rendering/content/route or active-slash qualification.",
+    "Extra NETv2 visibility-setup attempt is retained separately and NOT admitted. It stopped on peer0 before the planned extra movement: native body/trail animation samples were from different update phases (body73 versus trails75) between accepted rows and capture. No loss of constructor metadata, new gameplay regression, Zero blink or NETv2 pass is inferred. Both admitted modes use the unchanged strict original observer.",
+    "Whole completed GP0 frames retained. Literal native palette/bank IDs alone are not unique body identity; typed native actor/owned trail metadata, original draw order, nearby geometry and reviewed composed art are combined. No registered-arena snapshot or every-triangle ownership claim.",
+    "Native world advancement is inside actual SDK VBlank brackets, with no render mismatch/watchdog/device-read/VRAM leak. Nearby present timestamps are retained; no targetFPS/long-duration or precisely isolated active-dash benchmark is claimed.",
+    "Pre-agreed LABCP2 is a reachability bypass; real original guest door/boss32HP/passenger landing precede each action. Strict fixture-tainted ordinary capture/replay refuse, settled profiles/resolved full core/modCRC/private cards/owned exits0 remain required."
+  ],
+  "bypasses": [
+    "Pre-agreed original introCP2 reachability prerequisite; genuine native guest door/boss and primary dash occur afterward."
+  ]
+}

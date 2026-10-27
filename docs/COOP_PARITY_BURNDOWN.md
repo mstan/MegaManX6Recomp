@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 53 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, F1, F2, F5, F6, F10, F12, F14, F15, F18, F19, F22, F31, F32, F33, F38, F42, F43, F45, F48, F51, F56, F58, F59, F65, F67, F68, F70, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F163, F170, F178, F205, F208), 6 failed, 175 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 54 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, F1, F2, F5, F6, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F56, F58, F59, F65, F67, F68, F70, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F163, F170, F178, F205, F208), 5 failed, 175 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,20 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 26
+
+**F23 is fixed and closed:54 passed /5 failed /175 unverified (23.1%).**
+Scene passenger cleanup now preserves native fixed-effect constructor
+metadata while retiring active effects; dynamic shots still clear.
+The [same-candidate LOCAL and NET result](evidence/mmx6-camera/manifest-bound-f7b7383-F23-native-postdoor-local-netplay-reviewed.json)
+uses immutable`f7b7383`, unchanged strict observers, three actual
+primary dashes and12 reviewed images. Both body/owned-effect
+packets and native Xdash art are retained; normal NETpeer1 explosion
+occlusion of Zero is explicit and both heroes show after retirement.
+Finite native effect retirement and world/VBlank brackets
+pass.21 focused checks, profile/resolvedCRC/cards/ownedcleanup and
+strict trace refusals pass. Earlier failed native records remain.
+F157 NET stays deferred after two ordinary damage interruptions;
+R22 full-foot landing/control is the next short native contract.
 
 **F23 exposes a native defect:53 passed /6 failed /175 unverified.**
 The [actual primary-dash failure](evidence/mmx6-camera/manifest-bound-50cc26e-F23-native-primary-trails-failed.json)
