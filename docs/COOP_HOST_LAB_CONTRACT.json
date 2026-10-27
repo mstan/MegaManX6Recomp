@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 11,
+  "revision": 12,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v28",
+    "title_compatibility": "mmx6-x-zero-delay-v29",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -235,5 +235,13 @@
     "prerequisite": "Development-only negotiated lab_checkpoint=intro_before_doors uses originalCP1 then source-qualified living body poses X5692/Y395,Zero5716/Y394 and nativeapproachcamera5424/256 with authoredlimits. Invoke only original primary placement scanner with originalfullwindow envelope/flag0, preserving alreadyresident secondarycontrollers. Do not set HP/action/ground/doorack/placement/CP2/successflags. Observe native grounding and firstdoor allocation after at least two native worldupdates before ready. One-shot latch, sourcevalidation, profileauthority, digest/pending-snapshot refusal and strict recording/replay taint remain.",
     "defaults": "Shared view/Either policy and all ordinary no-fixture starts remain unchanged. This fixture bypasses approach traversal only and is never campaign/retry/ordinary recording evidence.",
     "qualification": "Fresh exactcandidate LOCAL+NET, both physicalpeer observations, two distinct authoredplacement origins/subtypes in one session, singlehero refusal at each, fullbody nativecrossings, no passenger lifecycle, independent committed views during native opening/traversal and composed pane review. Preserve source/profile/CRC/cards/ownedcleanup/strict fixture recording and replay refusal. No passedrow from source/test/setup alone."
+  },
+  "title_changes_v29": {
+    "scope": "Frozen F197/F198: observe one original nearby explosion and both actual native draw cameras; no native explosion or quake completion is installed by the prerequisite.",
+    "prerequisite": "Development-only negotiated lab_checkpoint=intro_before_explosion uses original CP1 then source-qualified healthy idle body poses X4736/Y843, Zero4760/Y842, native camera4576/704 and authored current/target bounds1968..5120/704..704. Run only original primary scanner29F38(4528,4944,656,992,flag0), preserving resident secondary controllers. Require both full envelopes air, 44 solid foot pixels, >=2 native updates, native grounding and original category0/type0/sub1 producer at authored origin800FA384 before ready. No HP/action/ground/actor/outcome/quake writes. Native waiting/fall/contact/explosion remain actual original behavior.",
+    "authority": "Reuse exact agreed lab profile authority, source guards, consumed one-shot latch and snapshot identity; pending checkpoint refuses snapshot capture. Sticky fixture taint must refuse strict ordinary-input recording and replay. Default option remains off and absent from production catalogs.",
+    "observation": "Optional existing SDK native-entry context provider reads only host-owned camera arrays at actual private80025FB0 entry. It identifies the pane/frame and raw cameraX/Y plus native quake state after the original per-view camera updates. No guest diagnostic writes, simulation/digest/snapshot changes or provider service changes. Unavailable service or registration failure remains nonfatal and portable. Entry epochs can differ across sandbox restores; join by actual host frame and seat.",
+    "snapshot_schema": 11,
+    "qualification": "Fresh same-candidate LOCAL and NET required: actual original producer fall/contact, original explosion effects and damage behavior, original quake commands, per-pane quiet/shake/quiet rendered offsets and composed visibility. Retain exact source/image/manifest/provenance, settled profile, resolved CRC agreement, native cards, owned exits and strict fixture recording/replay refusals. Setup, registration, source tests and counters alone grant no comparison pass. Prior V79 evidence does not transfer."
   }
 }
