@@ -42,6 +42,20 @@ states; old-state migration is never required.
 
 ## Current qualification status, October 26
 
+The Both-door family is now deferred after two second-body traversal attempts.
+V66 `39e1706` requests and runs Zero's original walk, but Zero remains in native
+action19/D4=FF awaiting the shared door's later D4=-2 handshake. The current
+implementation and its19 passing CTests stay isolated; they are not integrated
+or counted as a qualified feature. F137/F79 remain failed pending complete
+requalification. The final V66 living guard stops before retaining the offending
+sample, so no exact terminal-death cause is claimed. Future work must implement
+the original dual-body handshake and retain raw failure state before validation.
+The next autonomous closeout returns to R11/F2 NET on their exact V48 candidate:
+the old x1973 route blocker is source-bound to a real HP32 solid covering the
+ladder, requiring ground attacks/removal then original Down/climb. The new
+paired attempt uses this specific source correction, with no fixture writes.
+
+
 F79 now records the [actual V65 second-body traversal failure](evidence/mmx6-camera/manifest-bound-a999373-F79-native-second-body-traversal-failure-reviewed.json).
 The menu-lock repair works, but merely suppressing the passenger beam leaves
 Zero outside the arena. Native boss release places X6145.046875 while Zero

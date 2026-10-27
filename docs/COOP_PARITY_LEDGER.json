@@ -10346,6 +10346,40 @@
             "bypasses": [
               "Original offline introCP2 reachability only; no tested outcome writes."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "39e1706d63b8bf197c292dc3fc583eba1f829050",
+            "build_identity": {
+              "executable_sha256": "42e038a3034f62d365cc97393825478e08373cfb20627cd2364645d253982b2c",
+              "compiled_manifest_sha256": "a90fb8b1f85e6a5738a38e8b8a6bac3d3e9c8c47dc8ccc32d1d3519352197a16",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "both",
+              "view": "shared native4:3 OpenGL",
+              "entry": "original offline introCP2 prerequisite",
+              "audio": "muted dummy"
+            },
+            "action": "Requalify each original player traversal after propagating actual native D4 permission; require both full native boxes beyond the original far door edge.",
+            "outcome": "No full result. Zero enters original action19 but stays at6037.5 awaitingD4=FF; original shared door updates only resident-player D4=-2 handshake. Last retained row has X6091.984375/HP2 and Zero6037.5/HP32; parent later stops on living/no-transport guard, offending sample not retained. Two traversal attempts now parked; no further blind run.",
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v66-root-v1\\qualification.json",
+                "sha256": "0a8fa76d3ed057b05c71bb9bda77967053fa002b47f35437c1f8b364c16d542c"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v66-root-v1\\ammo-hud\\Both-door\\observations.json",
+                "sha256": "877448ae482bc06304eae4aee2ff9e1be5e44d36c659f4a686ddd8ae525422da"
+              }
+            ],
+            "limits": [
+              "V66 Both feature remains isolated and unintegrated. Native shared handshake80050540..80050574 sets only residentD4=-2 after negative wait; a complete dual-body handshake and release implementation is still needed. Do not repeat shared doorAI/world twice or teleport partner.",
+              "No claim about exact terminal native fatal/cause: failure occurred before invalid sample append and terminalcapture retried same guarded path. Next observer must preserve offending raw state BEFORE validating and capture terminal directly.",
+              "All CTests19 passed, but native fullBoth crossing fails; native evidence overrides fixture/model green. Cards unchanged, strictfixturetaint/refusal andownedexit0 preserved."
+            ]
           }
         ],
         "limitations": "LOCAL exactV65 a999373 genuinely fixes owner menu premature door lock, but Both traversal still leaves Zero6037.5 outside door6064 whileX reaches6145.046875/nativeboss32HP. Rootall9images reject scalarpass; fullbodyclearance was missing from observer. Fix39e1706 isolatedV66 building; NET/fullrequalification missing."
