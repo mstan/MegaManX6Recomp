@@ -122,6 +122,7 @@ static unsigned scene_owner, scene_phase;
 static uint8_t scene_body[0x158];
 static int32_t scene_y;
 static int scene_call, zero_projected;
+static unsigned clear_phase,clear_members,clear_started;
 static int unit_choices_call;
 static int intro_target_call;
 /* Elective independent presentation. The canonical world still runs once. */
@@ -530,7 +531,7 @@ static void enroll(CPUState *cpu,const Mmx6CoopRoster *roster) {
  * that live personal action only, without changing the canonical hold flag;
  * a concurrent scene, pause, death, vehicle or other world freeze still wins. */
 static int primary_nova_active(void) {
-    if (!ready || !enrolled || failed || scene_owner || pause_owner>=0 ||
+    if (!ready || !enrolled || failed || scene_owner || clear_phase || pause_owner>=0 ||
         life.status[0]!=MMX6_COOP_ALIVE || life.status[1]!=MMX6_COOP_ALIVE ||
         psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
         psx_mod_read_byte(PLAY+0x0F) || psx_mod_read_byte(PLAY+0x10) ||
@@ -551,7 +552,7 @@ static int coop_world_hold(void) {
     return psx_mod_read_byte(PLAY+0x1C) && !primary_nova_active();
 }
 static int shared_camera(void) {
-    return enrolled && !scene_owner && life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE &&
+    return enrolled && !scene_owner && !clear_phase && life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE &&
         psx_mod_read_byte(PLAYER+4)==1 && psx_mod_read_byte(PLAYER+5)>=2 &&
         !psx_mod_read_byte(PLAY+0x10) && !psx_mod_read_byte(PLAY+0x1C);
 }
@@ -947,8 +948,9 @@ static void ride_sync_rider(void) {
         put32(body+12,psx_mod_read_word(RIDE+12));
     }
 }
+#include "mmx6_coop_victory.inc"
 static void scene_begin(unsigned seat, uint32_t source) {
-    if (scene_owner || !enrolled || life.status[seat]!=MMX6_COOP_ALIVE) return;
+    if (scene_owner || clear_phase || !enrolled || life.status[seat]!=MMX6_COOP_ALIVE) return;
     scene_owner=seat+1;
     scene_phase=0;
     life.select_frames=0;
@@ -960,7 +962,7 @@ static void scene_begin(unsigned seat, uint32_t source) {
         (seat==0 && life.status[1]==MMX6_COOP_JOINING)) scene_phase=1;
 }
 static void script_begin(CPUState *cpu, uint32_t address) {
-    (void)cpu;
+    if(shared_clear_admit(cpu,address))return;
     if (!scene_call && !failed) scene_begin(zero_projected?1:0,address);
 }
 #include "mmx6_coop_recycle_portal.inc"
@@ -1381,7 +1383,7 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
         pause_owner=-1;
         /* Match the native pause gate. Simultaneous requests go to P1; an
          * absent/dead/departing actor cannot become the menu's owner. */
-        if (!scene_owner && !psx_mod_read_byte(PLAY+0x1C) && !psx_mod_read_byte(PLAY+0x10) &&
+        if (!scene_owner && !clear_phase && !psx_mod_read_byte(PLAY+0x1C) && !psx_mod_read_byte(PLAY+0x10) &&
             !psx_mod_read_byte(PLAY+0x0F) && !psx_mod_read_byte(0x80097424)) {
             if (life.status[0]==MMX6_COOP_ALIVE && (psx_mod_read_half(0x800C4570)&0x0800))
                 pause_owner=0;
@@ -1396,11 +1398,12 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
         (life.status[0]==MMX6_COOP_DYING || life.status[0]==MMX6_COOP_FALLEN) &&
         life.status[1]!=MMX6_COOP_ABSENT && (life.wipe || life.status[1]!=MMX6_COOP_FALLEN);
     stage_context[3]=(uint32_t)survivor;STATE_UPDATE(restore_stage,stage_context);
-    if (!survivor && pause_owner!=1 && scene_owner!=2) {
+    if (!survivor && pause_owner!=1 && scene_owner!=2 && !shared_clear_zero_world()) {
         stage_call=1;
         uint32_t result=guest(cpu,address,cpu->gpr[4],cpu->gpr[5]);
         stage_context[2]=result;STATE_UPDATE(restore_stage,stage_context);
         if (!psx_mod_read_byte(PLAY+1)) scene_tick(cpu);
+        shared_clear_tick(cpu,0);
         diagnostics((uint16_t)((raw<<8)|(raw>>8)));
         if (psx_mod_read_byte(PLAY)!=0x0A) enrolled=0;
         cpu->gpr[2]=result;
@@ -1450,6 +1453,7 @@ static int stage_tick(CPUState *cpu, uint32_t address) {
     project(0x800C456C,input,sizeof input);
     STATE_POP(restore_input);
     if (!psx_mod_read_byte(PLAY+1)) scene_tick(cpu);
+    shared_clear_tick(cpu,1);
     diagnostics(raw);
     if (zero_menu_loaded && psx_mod_read_byte(PLAY+1)!=2) menu_vram(cpu,0);
     if (psx_mod_read_byte(PLAY)!=0x0A) enrolled=0;
@@ -1498,6 +1502,7 @@ static void native_player_init(CPUState *cpu, uint32_t address) {
      * an ordinary door. The host body is enrolled after the new X body lands. */
     enrolled=0;
     scene_owner=scene_phase=0;
+    shared_clear_reset();
     memset(pickup_owners,0,sizeof pickup_owners);
     memset(zero_solid_contacts,0,sizeof zero_solid_contacts);
     memset(shared_effect_owners,0,sizeof shared_effect_owners);
@@ -1510,7 +1515,7 @@ static void controller(CPUState *cpu, uint32_t address) {
     if (inside || failed) return;
     /* Only the normal gameplay driver's post-player boundary. */
     if (cpu->gpr[31]!=0x80020C70u) return;
-    if (scene_owner) {
+    if (scene_owner || clear_phase) {
         (void)mmx6_coop_join_input(&life,p2_input(MMX6_INPUT_CONTROLLER_SCENE)&1,0,0);
         return;
     }
@@ -2411,6 +2416,7 @@ static void activate(void) {
     solid_call=solid_allocate_call=ride_call=0;
     memset(zero_solid_contacts,0,sizeof zero_solid_contacts);
     scene_owner=scene_phase=0; scene_call=zero_projected=0;
+    shared_clear_reset();
     unit_choices_call=intro_target_call=0;
     zero_menu_loaded=0;
     memset(zero_giga_backup,0,sizeof zero_giga_backup);
@@ -2467,7 +2473,7 @@ static void activate(void) {
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
-        .compatibility_id = "mmx6-x-zero-delay-v24",
+        .compatibility_id = "mmx6-x-zero-delay-v25",
         .rollback_supported = 0,
         .savestates_supported = 0,
         .skip_bios_intro = 1,

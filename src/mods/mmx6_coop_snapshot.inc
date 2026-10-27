@@ -1,5 +1,5 @@
 /* Executable-owned host state, included after the native implementation.
- * Schema 9 is build-specific. No old-state migration or host pointer wire. */
+ * Schema 10 is build-specific. No old-state migration or host pointer wire. */
 enum { STATE_COUNT,STATE_WRITE,STATE_READ,STATE_HASH,STATE_MAX_BYTES=16*1024*1024 };
 typedef struct {
     unsigned mode,ok;
@@ -53,6 +53,7 @@ static void snapshot_assets_loaded(const Mmx6AssetView *views,unsigned count) {
     psx_sha256_final(&sha,snapshot_asset_sha);snapshot_asset_valid=1;
 }
 static int snapshot_ready(void) {
+    if(clear_phase==CLEAR_ADMITTED)return 0; /* Only exists within the lethal world callback. */
     if(diagnostic && psx_mod_read_byte(diagnostic+0x50)==8)return 0;
     const unsigned guards[]={inside,player_call,stage_call,zero_world,world_render,
         hud_call,render_x_death,effect_call,pickup_call,solid_call,solid_allocate_call,ride_call,view_call,private_draw,
@@ -82,6 +83,7 @@ typedef struct {
     uint8_t giga_backup[ZERO_GIGA_BACKUP_BYTES];
     uint8_t shared_owners[96];
     uint32_t lab_state,lab_previous;
+    uint32_t clear_phase,clear_members,clear_started;
 } HostState;
 static void state_capture(HostState *s) {
     memset(s,0,sizeof *s);s->player=p2;s->lifecycle=life;
@@ -98,6 +100,7 @@ static void state_capture(HostState *s) {
     memcpy(s->giga_backup,zero_giga_backup,sizeof zero_giga_backup);
     memcpy(s->shared_owners,shared_effect_owners,sizeof shared_effect_owners);
     s->lab_state=checkpoint_lab_state;s->lab_previous=checkpoint_lab_previous;
+    s->clear_phase=clear_phase;s->clear_members=clear_members;s->clear_started=clear_started;
 }
 static int state_actor(uint32_t address) {
     return !address || (address>=0x80010000u && address<=0x801FFF00u && !(address&3));
@@ -144,6 +147,13 @@ static void state_core(StateIO *io,HostState *s) {
         if(valid && (!o->owner || !state_assembly(o->assembly)))io->ok=0;
     }
     if(!s->owner && s->scene_phase)io->ok=0;
+    FIELD(clear_phase,1,CLEAR_VICTORY);FIELD(clear_members,1,3);FIELD(clear_started,1,3);
+    if(s->clear_phase==CLEAR_ADMITTED && io->mode!=STATE_HASH)io->ok=0;
+    if(!s->clear_phase) {
+        if(s->clear_members || s->clear_started)io->ok=0;
+    } else if(!s->enrolled || s->owner || s->scene_phase || s->clear_members!=3 ||
+              (s->clear_started&~s->clear_members) ||
+              (s->clear_phase<CLEAR_VICTORY && s->clear_started))io->ok=0;
     if(s->lifecycle.rejoin_pending &&
         ((s->lifecycle.status[1]!=MMX6_COOP_ABSENT && s->lifecycle.status[1]!=MMX6_COOP_LEAVING) ||
          !mmx6_coop_living(&s->lifecycle,0) || s->lifecycle.wipe))io->ok=0;
@@ -171,6 +181,7 @@ static void state_commit(const HostState *s) {
     memcpy(zero_giga_backup,s->giga_backup,sizeof zero_giga_backup);
     memcpy(shared_effect_owners,s->shared_owners,sizeof shared_effect_owners);
     checkpoint_lab_state=s->lab_state;checkpoint_lab_previous=s->lab_previous;
+    clear_phase=s->clear_phase;clear_members=s->clear_members;clear_started=s->clear_started;
     /* These backups are meaningful only under rejected live projections. */
     memset(&p1,0,sizeof p1);memset(saved_overlay,0,sizeof saved_overlay);memset(saved_play,0,sizeof saved_play);
     memset(saved_camera,0,sizeof saved_camera);memset(saved_resources,0,sizeof saved_resources);saved_palette_dirty=0;
@@ -224,7 +235,7 @@ static void snapshot_discard_prepared(void) {
     memset(&prepared_state,0,sizeof prepared_state);
 }
 static void snapshot_resources(StateIO *s) {
-    state_fixed(s,0x53503658u);state_fixed(s,9);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
+    state_fixed(s,0x53503658u);state_fixed(s,10);state_fixed(s,independent_views);state_fixed(s,checkpoint_lab_option);
     const uint32_t handles[]={assets,assembly,palette_source,active_palette,packets,diagnostic,menu_memory,menu_assembly,hud_packets,
         jump_audio_banks[0].guest,jump_audio_banks[1].guest};
     for(unsigned i=0;i<sizeof handles/sizeof handles[0];++i)state_fixed(s,handles[i]);
