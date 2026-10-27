@@ -124,6 +124,53 @@ static void reentry(void) {
     state_track.count=0;state_track.error=1;CHECK(!independent_present(&cpu,VIEW_DRAW_OT));
     CHECK(!view_native_calls && !mmx6_view_sdk.pair_calls && !mmx6_view_sdk.view_calls && view_pending);
 }
+static void prepare_door_view(CPUState *cpu,int online,int split,unsigned phase) {
+    prepare_view(cpu,online,split);
+    both_doors=1;scene_owner=1;scene_phase=0;both_door_members=3;
+    both_door_actor=0x800C1220u;both_door_origin=0x800FA2A4u;
+    psx_mod_write_byte(both_door_actor,1);psx_mod_write_byte(both_door_actor+1,8);
+    psx_mod_write_byte(both_door_actor+4,1);psx_mod_write_byte(both_door_actor+5,(uint8_t)phase);
+    psx_mod_write_word(both_door_actor+0x10,both_door_origin);
+    psx_mod_write_byte(PLAYER+0xD4,phase==1?1:0xFE);p2.body[0xD4]=phase==1?1:0xFE;
+    psx_mod_write_byte(PLAY+0x10,1);
+    psx_mod_write_byte(PLAY+0x1C,1); /* Original door hold persists through traversal. */
+    frame_count=1;view_pending=view_valid=0;
+}
+static void admitted_door_views(int online,int split) {
+    for(unsigned phase=1;phase<=3;++phase)for(unsigned owner=1;owner<=2;++owner) {
+        CPUState cpu;prepare_door_view(&cpu,online,split,phase);scene_owner=owner;
+        CHECK(independent_door_context());independent_world_begin();CHECK(view_valid && view_pending);
+        PrivateViewContext before;memset(&before,0,sizeof before);private_context_save(&before);
+        CHECK(independent_present(&cpu,VIEW_DRAW_OT));context_equal(&before);
+        CHECK(both_door_members==3 && scene_owner==owner && !scene_phase && !failed);
+        CHECK(psx_mod_read_byte(PLAY+0x10)==1 && psx_mod_read_byte(PLAY+0x1C)==1 &&
+            frame_count==1 && !state_track.count && !state_track.error);
+    }
+    for(unsigned gate=0;gate<18;++gate) {
+        CPUState cpu;prepare_door_view(&cpu,online,split,2);
+        switch(gate) {
+        case 0:both_doors=0;break;
+        case 1:both_door_members=1;break;
+        case 2:scene_phase=1;break;
+        case 3:psx_mod_write_byte(both_door_actor,0);break;
+        case 4:psx_mod_write_word(both_door_actor+0x10,both_door_origin+8);break;
+        case 5:psx_mod_write_byte(both_door_actor+1,7);break;
+        case 6:psx_mod_write_byte(both_door_actor+4,2);break;
+        case 7:psx_mod_write_byte(both_door_actor+5,0);break;
+        case 8:psx_mod_write_byte(both_door_actor+5,4);break;
+        case 9:psx_mod_write_byte(PLAYER+0xD4,0);p2.body[0xD4]=0;break;
+        case 10:life.status[0]=MMX6_COOP_DYING;break;
+        case 11:life.status[1]=MMX6_COOP_JOINING;break;
+        case 12:pause_owner=0;break;
+        case 13:scene_owner=0;break; /* A world hold without an authenticated door refuses. */
+        case 14:psx_mod_write_byte(PLAY+1,2);break;
+        case 15:clear_phase=1;break;
+        case 16:psx_mod_write_byte(PLAY,9);break;
+        case 17:both_door_actor+=4;break;
+        }
+        independent_world_begin();CHECK(!view_valid && !view_pending && !view_native_calls);
+    }
+}
 static void native_arrival(int online,int split) {
     CPUState cpu;prepare_view(&cpu,online,split);
     mmx6_view_sdk.local_port=1;
@@ -257,6 +304,7 @@ static void native_shared_weather_frames(int online,int split) {
 }
 int main(void) {
     defaults_and_scope();reentry();native_arrival(0,1);native_arrival(1,0);arrival_refusals();
+    admitted_door_views(0,1);admitted_door_views(1,0);admitted_door_views(1,1);
     native_nova_views(0,1);native_nova_views(1,0);
     native_menu_camera_history(0,1);native_menu_camera_history(1,0);
     native_shared_weather_frames(0,1);native_shared_weather_frames(1,0);

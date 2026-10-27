@@ -50,7 +50,12 @@ void psx_mod_write_code_word(uint32_t address,uint32_t value) { psx_mod_write_wo
 int psx_mod_netplay_is_active(void) { return test_online; }
 void psx_mod_counter_add(const char *name,uint32_t count) { CHECK(strstr(name,"rejected"));rejected+=count; }
 uint16_t sio_get_pad_buttons_slot(int slot) { CHECK(slot==1);++sio_reads;return 0xFFDF; }
-void psx_dispatch_call(CPUState *cpu,uint32_t target,uint32_t ret) { (void)cpu;(void)target;(void)ret;++guest_calls; }
+void psx_dispatch_call(CPUState *cpu,uint32_t target,uint32_t ret) {
+#ifdef MMX6_TEST_GUEST_DISPATCH
+    if(MMX6_TEST_GUEST_DISPATCH(cpu,target,ret))return;
+#endif
+    (void)cpu;(void)target;(void)ret;++guest_calls;
+}
 
 static void queue(unsigned command) {
     psx_mod_write_byte(diagnostic+0x50,(uint8_t)command);
