@@ -1,0 +1,898 @@
+{
+  "schema": 1,
+  "comparison": "F5",
+  "frozen_row_sha256": "e4e2d4e74a6776fe87c6cca6e8a97f6ed114e080ade432cd04d2d9470bc495c6",
+  "result": "passed",
+  "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+  "binding": {
+    "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+    "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+    "provenance_sha256": "ebed9f24406a7e44224ac0f7ee605048ee6f614faed59a3b11a203fb0b14e88a"
+  },
+  "cases": [
+    {
+      "mode": "local",
+      "leader": 1,
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader1-v67-root-v1\\qualification.json",
+        "bytes": 4168596,
+        "sha256": "77651d536b78f6835d9a910dd851aa1df59a66e09cf91db5f648df677acdcdb3"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader1-v67-root-v1\\ammo-hud\\intro-admission\\observations.json",
+        "bytes": 1830419,
+        "sha256": "2957f21f55930a5fd8ab5c6c17f3df16c75d1c9d4ea77b422b0e548a245fd403"
+      },
+      "source_guards": [
+        {
+          "address": "0x80050250",
+          "bytes": 804,
+          "sha256": "60f5e79f358772a0c18f11c33ce51c4b6d90fc10a5113194a6181c8ee5ef9ab5"
+        },
+        {
+          "address": "0x80050c88",
+          "bytes": 372,
+          "sha256": "f028293571f755b02fc603931f8c96383534855e2632007875333ec51cd3239b"
+        }
+      ],
+      "agreed_checkpoint": {
+        "generation": 1,
+        "state": 3,
+        "reason": 0,
+        "stage": 0,
+        "section": 0,
+        "checkpoint": 2,
+        "nonce": 1279479858,
+        "initializer_entries": 1,
+        "record": "80072150",
+        "tainted": 1,
+        "authority": 1,
+        "latch": 2
+      },
+      "scene_begin": [
+        {
+          "peer": 0,
+          "row_index": 101
+        }
+      ],
+      "battle_ready_index": 342,
+      "controls": [
+        {
+          "seat": 0,
+          "before": 343,
+          "accepted": 345,
+          "native_walk_and_nonparticipant": [
+            {
+              "peer": 0,
+              "controlled_native_action": 3,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "interpretation": "stationary"
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "before": 350,
+          "accepted": 353,
+          "native_walk_and_nonparticipant": [
+            {
+              "peer": 0,
+              "controlled_native_action": 4,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "interpretation": "stationary"
+            }
+          ]
+        }
+      ],
+      "root_composed_review": [
+        {
+          "peer": 0,
+          "label": "safe-native-CP2",
+          "row_index": 10,
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader1-v67-root-v1\\ammo-hud\\intro-admission\\peer-0-safe-native-CP2.png",
+            "bytes": 2074543,
+            "sha256": "5aca1f7655c5617ff3b31e6e76083e797db1ef71f146ca3cb774d90cec82fafa"
+          },
+          "root_visual_review": "Captured during fade; no initial visual or map credit."
+        },
+        {
+          "peer": 0,
+          "label": "original-door-scene-begin",
+          "row_index": 102,
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader1-v67-root-v1\\ammo-hud\\intro-admission\\peer-0-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "bf1801beb90ae6f4d552e8811c15535396a119e73e86231184af76002c6ba820"
+          },
+          "root_visual_review": "Zero at right native door with original blue X passenger beam; corrupted background."
+        },
+        {
+          "peer": 0,
+          "label": "native-boss-both-controls-restored",
+          "row_index": 356,
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader1-v67-root-v1\\ammo-hud\\intro-admission\\peer-0-native-boss-both-controls-restored.png",
+            "bytes": 2074543,
+            "sha256": "1c59549bf7980fd4f33dd2e5ad183d7b7d8a66af8fdc10e4688ed6610da8258c"
+          },
+          "root_visual_review": "Original D-1000/full meter; X/Zero overlap or partially occlude. Primary LOCAL final frame additionally has ordinary Zero damage/invulnerability flash AFTER both restored32HP and accepted controls. No general body-visibility/rendering credit."
+        }
+      ],
+      "matching_crc": null,
+      "recorder_refusals": [
+        {
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+            "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+            "mode": "offline",
+            "profile": null,
+            "settings_sha256": "4e105a49292dabb46b0f75ebcf5c15410d49e88774db251e86c0f411744ca28b",
+            "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          "refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "mode": "netplay",
+      "leader": 1,
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-netplay-leader1-v67-root-v2\\qualification.json",
+        "bytes": 5065583,
+        "sha256": "661cca94161ff9514eb76b56d97bcf8c12560353f0346375db87a756b720f7a9"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-netplay-leader1-v67-root-v2\\intro-admission\\observations.json",
+        "bytes": 2539627,
+        "sha256": "179a8688da6ea2a5a3ee7116460dbc43f36f2dbe0fd09fc1473ab05b172392c0"
+      },
+      "source_guards": [
+        {
+          "address": "0x80050250",
+          "bytes": 804,
+          "sha256": "60f5e79f358772a0c18f11c33ce51c4b6d90fc10a5113194a6181c8ee5ef9ab5"
+        },
+        {
+          "address": "0x80050c88",
+          "bytes": 372,
+          "sha256": "f028293571f755b02fc603931f8c96383534855e2632007875333ec51cd3239b"
+        }
+      ],
+      "agreed_checkpoint": {
+        "generation": 1,
+        "state": 3,
+        "reason": 0,
+        "stage": 0,
+        "section": 0,
+        "checkpoint": 2,
+        "nonce": 1279479858,
+        "initializer_entries": 1,
+        "record": "80072150",
+        "tainted": 1,
+        "authority": 1,
+        "latch": 2
+      },
+      "scene_begin": [
+        {
+          "peer": 0,
+          "row_index": 72
+        },
+        {
+          "peer": 1,
+          "row_index": 72
+        }
+      ],
+      "battle_ready_index": 237,
+      "controls": [
+        {
+          "seat": 0,
+          "before": 238,
+          "accepted": 240,
+          "native_walk_and_nonparticipant": [
+            {
+              "peer": 0,
+              "controlled_native_action": 3,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "interpretation": "stationary"
+            },
+            {
+              "peer": 1,
+              "controlled_native_action": 4,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "interpretation": "stationary"
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "before": 244,
+          "accepted": 246,
+          "native_walk_and_nonparticipant": [
+            {
+              "peer": 0,
+              "controlled_native_action": 4,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "interpretation": "stationary"
+            },
+            {
+              "peer": 1,
+              "controlled_native_action": 4,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "interpretation": "stationary"
+            }
+          ]
+        }
+      ],
+      "root_composed_review": [
+        {
+          "peer": 0,
+          "label": "safe-native-CP2",
+          "row_index": 8,
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-netplay-leader1-v67-root-v2\\intro-admission\\peer-0-safe-native-CP2.png",
+            "bytes": 2074543,
+            "sha256": "46146331e37aeed39d9c0773217307637193c55bb452daf723f73f4f0f0d2269"
+          },
+          "root_visual_review": "Captured during fade; no initial visual or map credit."
+        },
+        {
+          "peer": 1,
+          "label": "safe-native-CP2",
+          "row_index": 8,
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-netplay-leader1-v67-root-v2\\intro-admission\\peer-1-safe-native-CP2.png",
+            "bytes": 2074543,
+            "sha256": "26d52891b265ac06ef481564ade9098d7475c6840f5fcf937aec80ac89380c5d"
+          },
+          "root_visual_review": "Captured during fade; no initial visual or map credit."
+        },
+        {
+          "peer": 0,
+          "label": "original-door-scene-begin",
+          "row_index": 73,
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-netplay-leader1-v67-root-v2\\intro-admission\\peer-0-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "c20d7ac1584fa1639ea60a2cd7c3b6ee54be53bb5c03f5b71ce91062b54cbf42"
+          },
+          "root_visual_review": "Zero at right native door with original blue X passenger beam; corrupted background."
+        },
+        {
+          "peer": 1,
+          "label": "original-door-scene-begin",
+          "row_index": 73,
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-netplay-leader1-v67-root-v2\\intro-admission\\peer-1-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "c20d7ac1584fa1639ea60a2cd7c3b6ee54be53bb5c03f5b71ce91062b54cbf42"
+          },
+          "root_visual_review": "Zero at right native door with original blue X passenger beam; corrupted background."
+        },
+        {
+          "peer": 0,
+          "label": "native-boss-both-controls-restored",
+          "row_index": 250,
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-netplay-leader1-v67-root-v2\\intro-admission\\peer-0-native-boss-both-controls-restored.png",
+            "bytes": 2074543,
+            "sha256": "76304e94dd6a959f5ac7856e1c60706f444be3d2896db80c69f3a378bda3276c"
+          },
+          "root_visual_review": "Original D-1000/full meter; X/Zero overlap or partially occlude. Primary LOCAL final frame additionally has ordinary Zero damage/invulnerability flash AFTER both restored32HP and accepted controls. No general body-visibility/rendering credit."
+        },
+        {
+          "peer": 1,
+          "label": "native-boss-both-controls-restored",
+          "row_index": 250,
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-netplay-leader1-v67-root-v2\\intro-admission\\peer-1-native-boss-both-controls-restored.png",
+            "bytes": 2074543,
+            "sha256": "1d334801bbc72496ea085c2b25db29caf9da1541ff1421cbd0d9f06365d786cd"
+          },
+          "root_visual_review": "Original D-1000/full meter; X/Zero overlap or partially occlude. Primary LOCAL final frame additionally has ordinary Zero damage/invulnerability flash AFTER both restored32HP and accepted controls. No general body-visibility/rendering credit."
+        }
+      ],
+      "matching_crc": [
+        {
+          "label": "initial idle",
+          "samples": 7,
+          "last_tick": 3104,
+          "resolved_through": [
+            3128,
+            3128
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": 8,
+          "last_tick": 3392,
+          "resolved_through": [
+            3394,
+            3394
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": 8,
+          "last_tick": 3680,
+          "resolved_through": [
+            3693,
+            3693
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": 6,
+          "last_tick": 5760,
+          "resolved_through": [
+            5764,
+            5763
+          ]
+        }
+      ],
+      "recorder_refusals": [
+        {
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+            "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 5,
+              "selected_sha256": "c78f8207abf7e3b93358a00f9ab068a79cf1a7bcea0db4724cc011aa686cb3b5"
+            },
+            "settings_sha256": "c578cadc553f83677af10928b7e9889ee8adf159eebd973db144befd14a652d9",
+            "simulation_contract_sha256": "7098318440e932fab98db6b949589ea4d39a0d0234cc31a59f3fd1825c471100"
+          },
+          "refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          }
+        },
+        {
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+            "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 5,
+              "selected_sha256": "c78f8207abf7e3b93358a00f9ab068a79cf1a7bcea0db4724cc011aa686cb3b5"
+            },
+            "settings_sha256": "c7065c8b465103a9b72293810ac368fa837d2576c538e5d2a81c3bf46aac55ab",
+            "simulation_contract_sha256": "7098318440e932fab98db6b949589ea4d39a0d0234cc31a59f3fd1825c471100"
+          },
+          "refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "mode": "local",
+      "leader": 0,
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader0-v67-root-v3\\qualification.json",
+        "bytes": 3990145,
+        "sha256": "bfc62544d543198ef54ae1ad27fc5d288b1b903a6409717c341727e96f8ccfb2"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader0-v67-root-v3\\ammo-hud\\intro-admission\\observations.json",
+        "bytes": 1746710,
+        "sha256": "dd5c0c73f9c4a3e4475bc681838a62243b0b95e99bef1d9dc37886a56d066094"
+      },
+      "source_guards": [
+        {
+          "address": "0x80050250",
+          "bytes": 804,
+          "sha256": "60f5e79f358772a0c18f11c33ce51c4b6d90fc10a5113194a6181c8ee5ef9ab5"
+        },
+        {
+          "address": "0x80050c88",
+          "bytes": 372,
+          "sha256": "f028293571f755b02fc603931f8c96383534855e2632007875333ec51cd3239b"
+        }
+      ],
+      "agreed_checkpoint": {
+        "generation": 1,
+        "state": 3,
+        "reason": 0,
+        "stage": 0,
+        "section": 0,
+        "checkpoint": 2,
+        "nonce": 1279479858,
+        "initializer_entries": 1,
+        "record": "80072150",
+        "tainted": 1,
+        "authority": 1,
+        "latch": 2
+      },
+      "scene_begin": [
+        {
+          "peer": 0,
+          "row_index": 106
+        }
+      ],
+      "battle_ready_index": 324,
+      "controls": [
+        {
+          "seat": 0,
+          "before": 325,
+          "accepted": 328,
+          "native_walk_and_nonparticipant": [
+            {
+              "peer": 0,
+              "controlled_native_action": 4,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "interpretation": "stationary"
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "before": 332,
+          "accepted": 335,
+          "native_walk_and_nonparticipant": [
+            {
+              "peer": 0,
+              "controlled_native_action": 3,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "interpretation": "stationary"
+            }
+          ]
+        }
+      ],
+      "root_composed_review": [
+        {
+          "peer": 0,
+          "label": "safe-native-CP2",
+          "row_index": 90,
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader0-v67-root-v3\\ammo-hud\\intro-admission\\peer-0-safe-native-CP2.png",
+            "bytes": 2074543,
+            "sha256": "9647aee7fe6be73f3bb6f0bed864756b9b6029872d93f528578ab13b250bfb21"
+          },
+          "root_visual_review": "Both original bodies visible at authored arrivals; corrupt background remains."
+        },
+        {
+          "peer": 0,
+          "label": "original-door-scene-begin",
+          "row_index": 107,
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader0-v67-root-v3\\ammo-hud\\intro-admission\\peer-0-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "a2ae2efa50026a4d1301a6264010fdff113648a042567f39f39de1b301f43f1f"
+          },
+          "root_visual_review": "X at right native door, red Zero passenger/transport visible, corrupted background."
+        },
+        {
+          "peer": 0,
+          "label": "native-boss-both-controls-restored",
+          "row_index": 340,
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader0-v67-root-v3\\ammo-hud\\intro-admission\\peer-0-native-boss-both-controls-restored.png",
+            "bytes": 2074543,
+            "sha256": "e98ac10584fb703252a1239e4906e63779964ad9fe85157772172410c08542f7"
+          },
+          "root_visual_review": "Original D-1000/full meter; X/Zero overlap or partially occlude. Primary LOCAL final frame additionally has ordinary Zero damage/invulnerability flash AFTER both restored32HP and accepted controls. No general body-visibility/rendering credit."
+        }
+      ],
+      "matching_crc": null,
+      "recorder_refusals": [
+        {
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+            "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+            "mode": "offline",
+            "profile": null,
+            "settings_sha256": "4e105a49292dabb46b0f75ebcf5c15410d49e88774db251e86c0f411744ca28b",
+            "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          "refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "mode": "netplay",
+      "leader": 0,
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-netplay-leader0-v67-root-v3\\qualification.json",
+        "bytes": 5134680,
+        "sha256": "425e662f98a0032e371116f3cb6896272cacd27468a8ad788666dd1fc00cd11d"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-netplay-leader0-v67-root-v3\\intro-admission\\observations.json",
+        "bytes": 2594195,
+        "sha256": "fa20aab053003be1b9bde6615aaf2af7c4d6c7760dfad97c3c50d7d294727856"
+      },
+      "source_guards": [
+        {
+          "address": "0x80050250",
+          "bytes": 804,
+          "sha256": "60f5e79f358772a0c18f11c33ce51c4b6d90fc10a5113194a6181c8ee5ef9ab5"
+        },
+        {
+          "address": "0x80050c88",
+          "bytes": 372,
+          "sha256": "f028293571f755b02fc603931f8c96383534855e2632007875333ec51cd3239b"
+        }
+      ],
+      "agreed_checkpoint": {
+        "generation": 1,
+        "state": 3,
+        "reason": 0,
+        "stage": 0,
+        "section": 0,
+        "checkpoint": 2,
+        "nonce": 1279479858,
+        "initializer_entries": 1,
+        "record": "80072150",
+        "tainted": 1,
+        "authority": 1,
+        "latch": 2
+      },
+      "scene_begin": [
+        {
+          "peer": 0,
+          "row_index": 80
+        },
+        {
+          "peer": 1,
+          "row_index": 80
+        }
+      ],
+      "battle_ready_index": 242,
+      "controls": [
+        {
+          "seat": 0,
+          "before": 243,
+          "accepted": 246,
+          "native_walk_and_nonparticipant": [
+            {
+              "peer": 0,
+              "controlled_native_action": 3,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "interpretation": "stationary"
+            },
+            {
+              "peer": 1,
+              "controlled_native_action": 4,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "interpretation": "stationary"
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "before": 249,
+          "accepted": 252,
+          "native_walk_and_nonparticipant": [
+            {
+              "peer": 0,
+              "controlled_native_action": 4,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "interpretation": "stationary"
+            },
+            {
+              "peer": 1,
+              "controlled_native_action": 4,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "interpretation": "stationary"
+            }
+          ]
+        }
+      ],
+      "root_composed_review": [
+        {
+          "peer": 0,
+          "label": "safe-native-CP2",
+          "row_index": 66,
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-netplay-leader0-v67-root-v3\\intro-admission\\peer-0-safe-native-CP2.png",
+            "bytes": 2074543,
+            "sha256": "52778886e6904ea499074322a3c97a19f6c390753865376c25f0a02e370ad4fc"
+          },
+          "root_visual_review": "Both original bodies visible at authored arrivals; corrupt background remains."
+        },
+        {
+          "peer": 1,
+          "label": "safe-native-CP2",
+          "row_index": 66,
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-netplay-leader0-v67-root-v3\\intro-admission\\peer-1-safe-native-CP2.png",
+            "bytes": 2074543,
+            "sha256": "f52a3088e09c5f6dd7710ceb138779107a33ace74cc5967ee897ffa7b9338b69"
+          },
+          "root_visual_review": "Both original bodies visible at authored arrivals; corrupt background remains."
+        },
+        {
+          "peer": 0,
+          "label": "original-door-scene-begin",
+          "row_index": 81,
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-netplay-leader0-v67-root-v3\\intro-admission\\peer-0-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "a94767c57c50657e1fef6bbf4f339efe9e2537641d43c7482058fe7e4043c547"
+          },
+          "root_visual_review": "X at right native door, red Zero passenger/transport visible, corrupted background."
+        },
+        {
+          "peer": 1,
+          "label": "original-door-scene-begin",
+          "row_index": 81,
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-netplay-leader0-v67-root-v3\\intro-admission\\peer-1-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "3b5f7eb55fda04b432f342faacb497c2b47740e1d5ea91b1610b9af7db377ef4"
+          },
+          "root_visual_review": "X at right native door, red Zero passenger/transport visible, corrupted background."
+        },
+        {
+          "peer": 0,
+          "label": "native-boss-both-controls-restored",
+          "row_index": 256,
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-netplay-leader0-v67-root-v3\\intro-admission\\peer-0-native-boss-both-controls-restored.png",
+            "bytes": 2074543,
+            "sha256": "9232193cc43aa4b8569805948edac6dbf0b20f21f2d24e23d4695fca11aa4c79"
+          },
+          "root_visual_review": "Original D-1000/full meter; X/Zero overlap or partially occlude. Primary LOCAL final frame additionally has ordinary Zero damage/invulnerability flash AFTER both restored32HP and accepted controls. No general body-visibility/rendering credit."
+        },
+        {
+          "peer": 1,
+          "label": "native-boss-both-controls-restored",
+          "row_index": 256,
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-netplay-leader0-v67-root-v3\\intro-admission\\peer-1-native-boss-both-controls-restored.png",
+            "bytes": 2074543,
+            "sha256": "202fecdea5868e3dd0b0e27626c4a844a78e3ae1bba3589681e829e8b07781e7"
+          },
+          "root_visual_review": "Original D-1000/full meter; X/Zero overlap or partially occlude. Primary LOCAL final frame additionally has ordinary Zero damage/invulnerability flash AFTER both restored32HP and accepted controls. No general body-visibility/rendering credit."
+        }
+      ],
+      "matching_crc": [
+        {
+          "label": "initial idle",
+          "samples": 7,
+          "last_tick": 3008,
+          "resolved_through": [
+            3026,
+            3027
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": 8,
+          "last_tick": 3296,
+          "resolved_through": [
+            3299,
+            3299
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": 7,
+          "last_tick": 3584,
+          "resolved_through": [
+            3600,
+            3600
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": 7,
+          "last_tick": 5728,
+          "resolved_through": [
+            5759,
+            5759
+          ]
+        }
+      ],
+      "recorder_refusals": [
+        {
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+            "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 5,
+              "selected_sha256": "a4d77dd363eae83a8c71bd6284d55ff40f3a5b18595079f883ce922f919072fb"
+            },
+            "settings_sha256": "c578cadc553f83677af10928b7e9889ee8adf159eebd973db144befd14a652d9",
+            "simulation_contract_sha256": "8a850c68e9cc933b4e7295611dc3d7a91000db14bd672776b419a7e464f8a2ca"
+          },
+          "refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          }
+        },
+        {
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+            "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 5,
+              "selected_sha256": "a4d77dd363eae83a8c71bd6284d55ff40f3a5b18595079f883ce922f919072fb"
+            },
+            "settings_sha256": "c7065c8b465103a9b72293810ac368fa837d2576c538e5d2a81c3bf46aac55ab",
+            "simulation_contract_sha256": "8a850c68e9cc933b4e7295611dc3d7a91000db14bd672776b419a7e464f8a2ca"
+          },
+          "refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "reviewed_images": 18,
+  "native_passenger_source": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-passenger-transport-source-root-v1.txt",
+    "bytes": 988,
+    "sha256": "d19b5ec0d8946e425acb3c7d1849d47ad46b2d95345da0bcc9d521f1c78775a9"
+  },
+  "excluded_first_primary_attempt": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader0-v67-root-v2\\qualification.json",
+    "bytes": 586812,
+    "sha256": "20b308c6762d27331ee468d95cd801e77d166d9545ebb17ff842b1c0a759905f"
+  },
+  "limits": [
+    "Exactly the bounded F5 intro arena with BOTH native leaders, each in a separate fresh LOCAL and NET session, all on identical50cc26e image/manifest/SDK10b/UI34b. No campaign, all-arena, other-roster/host or F53 breadth claim.",
+    "Private negotiated intro_cp2/one-shot accepted chord is a reachability prerequisite. Actual door contact, original boss allocation/fullHP, passenger outgoing/incoming/landing, scene release and both fresh controls occur afterward through native execution and published inputs. No tested outcome flags are written.",
+    "All18 composed images reviewed across four cases. Guest initial captures are during fade. Checkpoint scenery is corrupt and bodies overlap/occlude after controls; primary LOCAL final capture additionally has ordinary post-control Zero damage/flash. No rendering, F170, F14/F23 or content credit.",
+    "Original passenger body is saved/restored across scene transport. The first primary LOCAL observer stopped on phase2/ALIVE passenger HP0; it mistook a transport observation for death. Failed raw remains excluded. Final qualification requires both restored32HP, phase0/owner0, landed and controllable.",
+    "Native recording remains explicitly tainted, strict capture and offline replay refused. Every owned process exits0 and native cards are unchanged. Each NET pair agrees on its own negotiated profile and matching postcase resolved core/mod CRC; no cross-session selected-profile digest equality is assumed.",
+    "QA corrections retain X startup3/steady4 and real authored-arrival readiness; exact pinned executed observers retained. Source/product integration in main has no native C/catalog/contract/fixture difference from immutable qualified V67. Nearby diagnostic/RAM/render reads are not instruction-atomic."
+  ],
+  "bypasses": [
+    "Pre-agreed original intro CP2 initialization only; ordinary prior-route reachability is bypassed, native door/boss/passenger/control outcomes are not written."
+  ]
+}

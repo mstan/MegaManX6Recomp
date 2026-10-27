@@ -4671,14 +4671,14 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -4717,9 +4717,87 @@
             "bypasses": [
               "Original audited offline command8 CP2 setup before each leader. No door, actor, HP, script, camera, token or outcome writes."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+            "build_identity": {
+              "executable_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+              "compiled_manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + base Zero/P2",
+              "location": "original intro CP2/actual D-1000 arena",
+              "leaders": "X separately and Zero separately",
+              "view": "shared4:3 OpenGL",
+              "input": "owned published digital host pads",
+              "audio": "muted dummy",
+              "prerequisite": "agreed LAB intro_cp2; native original initializer once"
+            },
+            "action": "Trigger original intro arena with each leader separately; require original boss32HP, completed native passenger landing/scene release and each independent native walk; paired mode additionally requires both own observations and resolved CRC.",
+            "outcome": "Both native leaders fully initialize the genuine boss and restore passenger plus both controls in this mode on the same exact candidate; allocation alone is not used. All composed images reviewed; setup, taint and rendering limits retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-lifecycle/manifest-bound-50cc26e-F5-either-leader-local-netplay-reviewed.json",
+                "sha256": "ab219c244339f9e7ed001e36e8e9479775e7681e8d40ee8f82625a2bc35d55d5"
+              }
+            ],
+            "limits": [
+              "Exactly the bounded F5 intro arena with BOTH native leaders, each in a separate fresh LOCAL and NET session, all on identical50cc26e image/manifest/SDK10b/UI34b. No campaign, all-arena, other-roster/host or F53 breadth claim.",
+              "Private negotiated intro_cp2/one-shot accepted chord is a reachability prerequisite. Actual door contact, original boss allocation/fullHP, passenger outgoing/incoming/landing, scene release and both fresh controls occur afterward through native execution and published inputs. No tested outcome flags are written.",
+              "All18 composed images reviewed across four cases. Guest initial captures are during fade. Checkpoint scenery is corrupt and bodies overlap/occlude after controls; primary LOCAL final capture additionally has ordinary post-control Zero damage/flash. No rendering, F170, F14/F23 or content credit.",
+              "Original passenger body is saved/restored across scene transport. The first primary LOCAL observer stopped on phase2/ALIVE passenger HP0; it mistook a transport observation for death. Failed raw remains excluded. Final qualification requires both restored32HP, phase0/owner0, landed and controllable.",
+              "Native recording remains explicitly tainted, strict capture and offline replay refused. Every owned process exits0 and native cards are unchanged. Each NET pair agrees on its own negotiated profile and matching postcase resolved core/mod CRC; no cross-session selected-profile digest equality is assumed.",
+              "QA corrections retain X startup3/steady4 and real authored-arrival readiness; exact pinned executed observers retained. Source/product integration in main has no native C/catalog/contract/fixture difference from immutable qualified V67. Nearby diagnostic/RAM/render reads are not instruction-atomic."
+            ],
+            "bypasses": [
+              "Pre-agreed original intro CP2 initialization only; ordinary prior-route reachability is bypassed, native door/boss/passenger/control outcomes are not written."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+            "build_identity": {
+              "executable_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+              "compiled_manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + base Zero/P2",
+              "location": "original intro CP2/actual D-1000 arena",
+              "leaders": "X separately and Zero separately",
+              "view": "shared4:3 OpenGL",
+              "input": "owned published digital host pads",
+              "audio": "muted dummy",
+              "prerequisite": "agreed LAB intro_cp2; native original initializer once"
+            },
+            "action": "Trigger original intro arena with each leader separately; require original boss32HP, completed native passenger landing/scene release and each independent native walk; paired mode additionally requires both own observations and resolved CRC.",
+            "outcome": "Both native leaders fully initialize the genuine boss and restore passenger plus both controls in this mode on the same exact candidate; allocation alone is not used. All composed images reviewed; setup, taint and rendering limits retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-lifecycle/manifest-bound-50cc26e-F5-either-leader-local-netplay-reviewed.json",
+                "sha256": "ab219c244339f9e7ed001e36e8e9479775e7681e8d40ee8f82625a2bc35d55d5"
+              }
+            ],
+            "limits": [
+              "Exactly the bounded F5 intro arena with BOTH native leaders, each in a separate fresh LOCAL and NET session, all on identical50cc26e image/manifest/SDK10b/UI34b. No campaign, all-arena, other-roster/host or F53 breadth claim.",
+              "Private negotiated intro_cp2/one-shot accepted chord is a reachability prerequisite. Actual door contact, original boss allocation/fullHP, passenger outgoing/incoming/landing, scene release and both fresh controls occur afterward through native execution and published inputs. No tested outcome flags are written.",
+              "All18 composed images reviewed across four cases. Guest initial captures are during fade. Checkpoint scenery is corrupt and bodies overlap/occlude after controls; primary LOCAL final capture additionally has ordinary post-control Zero damage/flash. No rendering, F170, F14/F23 or content credit.",
+              "Original passenger body is saved/restored across scene transport. The first primary LOCAL observer stopped on phase2/ALIVE passenger HP0; it mistook a transport observation for death. Failed raw remains excluded. Final qualification requires both restored32HP, phase0/owner0, landed and controllable.",
+              "Native recording remains explicitly tainted, strict capture and offline replay refused. Every owned process exits0 and native cards are unchanged. Each NET pair agrees on its own negotiated profile and matching postcase resolved core/mod CRC; no cross-session selected-profile digest equality is assumed.",
+              "QA corrections retain X startup3/steady4 and real authored-arrival readiness; exact pinned executed observers retained. Source/product integration in main has no native C/catalog/contract/fixture difference from immutable qualified V67. Nearby diagnostic/RAM/render reads are not instruction-atomic."
+            ],
+            "bypasses": [
+              "Pre-agreed original intro CP2 initialization only; ordinary prior-route reachability is bypassed, native door/boss/passenger/control outcomes are not written."
+            ]
           }
         ],
-        "limitations": "LOCAL bounded admission passes on exact e0fdd1e/SDK7cb474 using the audited CP2 prerequisite: guest-first for R11/F2, both leaders for F5, original boss fullHP/scene release/passenger landing/independent controls. Checkpoint reachability bypass and scenery corruption explicit. Netplay and aggregate remain unverified; no F53/R22/F170/content pass."
+        "limitations": "Both leaders pass native intro boss initialization, passenger return and fresh independent controls in LOCAL and NET on exact50cc26e. Agreed checkpoint reachability bypass, refused trace/replay, corrupt scenery, overlap and ordinary later boss damage explicit; no broader content/rendering credit."
       }
     },
     {

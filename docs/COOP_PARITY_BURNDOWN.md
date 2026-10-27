@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 51 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, F1, F2, F6, F10, F12, F15, F18, F19, F22, F31, F32, F33, F38, F42, F43, F45, F48, F51, F56, F58, F59, F65, F67, F68, F70, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F163, F170, F178, F205, F208), 5 failed, 178 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 52 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, F1, F2, F5, F6, F10, F12, F15, F18, F19, F22, F31, F32, F33, F38, F42, F43, F45, F48, F51, F56, F58, F59, F65, F67, F68, F70, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F163, F170, F178, F205, F208), 5 failed, 177 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,17 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 26
+
+**F5 is also closed: 52 passed /5 failed /177 unverified (22.2%).**
+This work block closes3 comparisons: R11, F2 and F5. The [four actual leader/mode cases](evidence/mmx6-lifecycle/manifest-bound-50cc26e-F5-either-leader-local-netplay-reviewed.json)
+all use the same V67 `50cc26e` native candidate and complete original boss
+activation/full HP, native passenger return and independent controls.
+All18 composed images are reviewed; both paired runs retain matching
+resolved core/mod CRC, agreed profiles, unchanged cards and owned exits0.
+The qualified private LAB setup is integrated locally. Online command8
+remains forbidden and the control is absent from the normal catalog.
+The next short check is F14, reusing this guest-owned door and the existing
+native dash observer. Long Both-door/weather timing work stays deferred.
 
 **R11 and F2 are now closed: 51 passed /5 failed /178 unverified.** Both
 required modes use exact V67 `50cc26e`. The [reviewed paired result](evidence/mmx6-lifecycle/manifest-bound-50cc26e-intro-guest-admission-netplay-reviewed.json)
