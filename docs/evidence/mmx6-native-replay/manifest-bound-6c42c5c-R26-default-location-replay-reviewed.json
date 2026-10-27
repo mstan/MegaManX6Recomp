@@ -1,0 +1,329 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "R26"
+  ],
+  "result": "passed",
+  "frozen_row_sha256": {
+    "R26": "1dc2879967a6b90e53636c36de8d27485a397f281af562d334a6979f6bcdc81f"
+  },
+  "candidate": {
+    "candidate_source": "6c42c5c4afa68bb7dfe60097e091a6a551940d9a",
+    "exe_sha256": "089bb606b5dff06cdcea3e3adbcb1e728379e1045cdd7eedca097e1d3899ca25",
+    "declared_manifest_sha256": "8e10381c97c8c8ad22698648328ed7c2b6930c4175346c0544905d79bc8a9f15"
+  },
+  "modes": {
+    "local": {
+      "result": "passed",
+      "existing_actual_capture_and_replay": {
+        "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-native-replay\\manifest-bound-6c42c5c-reviewed.json",
+        "sha256": "7649324d2c86387b7ef8ea720921c8c88520ce0c4941afd27bbdfea103fc3a4a",
+        "bytes": 5942
+      },
+      "default_and_actual_location": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R26-default-location-and-NET-reuse-v88-worker-v2.json",
+        "sha256": "a36bb404a60e805e0bcd002e0309789b3a19f10f936e22db4f4df6c58e45eefb",
+        "bytes": 5175
+      },
+      "trace": {
+        "directory": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-capture-replay-v13-6c42c5c\\record\\saves\\input-recordings\\session-1792770795875409-1-0",
+        "identity": {
+          "baseline": null,
+          "cards": [
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+          "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+          "image_sha256": "089bb606b5dff06cdcea3e3adbcb1e728379e1045cdd7eedca097e1d3899ca25",
+          "manifest_sha256": "8e10381c97c8c8ad22698648328ed7c2b6930c4175346c0544905d79bc8a9f15",
+          "mode": "offline",
+          "profile": null,
+          "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+          "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+        },
+        "events": 5913,
+        "natives": 4140,
+        "p2_reads": 1773,
+        "repeated_native_frames": 2085,
+        "actual_p1_cross_word_anywhere": true,
+        "actual_p2_right_read": true,
+        "trace_sha256": "d57ba2fe71bbcd8d79e2694d22ea02e885292121ef99042f840b45b2d214db68"
+      },
+      "fresh_exact_replay": {
+        "report": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-replay-v13-6c42c5c-lf-marker\\qualification.json",
+          "sha256": "05fb5e3ee98ca8221fda7fdc6c70f1f543005f470d74eef3e03c2b7d75edef86"
+        },
+        "result": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-replay-v13-6c42c5c-lf-marker\\replay-result.json",
+          "sha256": "8639d62e682c979d871a6cf18980c8be72608ddbc5b31d5573a2b2be4a0bc955"
+        },
+        "consumed": {
+          "consumed": 5913,
+          "contract": "mmx6.native-consumption.v1",
+          "epoch": 1,
+          "events": 5913,
+          "failure": "",
+          "schema": 1,
+          "scope": "ordered native/P2 consumption only; no full SIO or outcome qualification",
+          "status": "consumed",
+          "trace_sha256": "d57ba2fe71bbcd8d79e2694d22ea02e885292121ef99042f840b45b2d214db68"
+        },
+        "process": {
+          "owned_pid": 81580,
+          "cleanup": {
+            "shutdown": "already_exited",
+            "exit_code": 0
+          }
+        },
+        "exact_lf_marker": {
+          "sha256": "7f99350960ce069200f843b6ab907e4722ad8990826f7795ca07f08d1e683247",
+          "bytes": 160,
+          "LF": 3,
+          "CR": 0
+        }
+      },
+      "default_activation": {
+        "manifest_default_enabled": true,
+        "actual_resolved_startup_diagnostics_plugin": [
+          {
+            "feature": "input-recording",
+            "id": "mmx6.diagnostics",
+            "input": 0,
+            "local_view": 0,
+            "package": "mmx6.diagnostics"
+          }
+        ],
+        "actual_diagnostics_selection_overrides": [],
+        "retained_launch_environment_MMXX6_INPUT_overrides": {},
+        "runner_strips_inherited_input_recording_replay_controls": true,
+        "settings_sha256": "66e997fe96c3b5e1b283eb0bee06bf35e6564bf12406b846ed23c1028be5ed35",
+        "environment_sha256": "f14b7e20c7076ed6962d5c504defd397971a66f2a475ec1e04f5da62c0569af5",
+        "source_runner_sha256": "0d10b0a2692a590f26f9f8546577a8e290bb03efcfdfdf27680c8b47107318bd"
+      },
+      "actual_full_location": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-capture-replay-v13-6c42c5c\\record\\native-recording\\stderr.log",
+        "line_number": 4,
+        "literal_line": "mmx6 diagnostics: finalized capture G:\\Temp\\Codex\\psxrecomp\\x6-parity\\native-capture-replay-v13-6c42c5c\\record\\saves\\input-recordings\\session-1792770795875409-1-0",
+        "finding": "The actual replay-qualified run emitted its full real existing recording directory to stderr at normal finalization, not merely an inferred default path.",
+        "original_scope_support": "COOP_INPUT_RECORDING_AUDIT.md lines151-154 says original X4/X5 make the real location visible in OSD/log and requires explicit readable location.",
+        "honest_limit": "This log is real retained application output. It is not evidence of an actual launcher location widget, OSD text, folder-opening action, or runtime discovery screenshot. The previous reviewed receipt explicitly excluded UI/location; retain that history. Root must decide whether the frozen OSD/log criterion plus actual UI discovery is sufficient."
+      }
+    },
+    "netplay": {
+      "result": "passed",
+      "original_native_parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R26-native-record-netplay-6c42c5c-root-v2\\qualification.json",
+        "sha256": "61640d00198cc48966200cd0d5b3b81fad8abe63cf78ba6daa3a11cfb24cce1d",
+        "bytes": 1900113
+      },
+      "raw_wrapper": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R26-native-record-netplay-6c42c5c-root-v2\\R26-specific-review-pending.json",
+        "sha256": "94326d7f823a7ac2af39c7fadc0b8a0cff15e64006df36f4629350a0b2107a96",
+        "bytes": 5768
+      },
+      "independent_decoder_review": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R26-native-pad-decoding-and-completed-NET-review-worker-v1.json",
+        "sha256": "26e199e5047bbeecb9bc9e50b52747436f8b9d944271c3937a58ee197eb9c6a6",
+        "bytes": 19684
+      },
+      "actual_recordings": [
+        {
+          "directory": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R26-native-record-netplay-6c42c5c-root-v2\\peer-0\\saves\\input-recordings\\session-1793143440673759-1-0",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "089bb606b5dff06cdcea3e3adbcb1e728379e1045cdd7eedca097e1d3899ca25",
+            "manifest_sha256": "8e10381c97c8c8ad22698648328ed7c2b6930c4175346c0544905d79bc8a9f15",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "d6ea0eb0b2666d7e738c95add260d257a03fc3ce709672929180816acb8180b5"
+            },
+            "settings_sha256": "c0a9d7cd055d1ae6ee47f0e3cf89cbb2b495036fddc7001831fe81aa8888341b",
+            "simulation_contract_sha256": "26cbd5f2d465bd8f9e3a3cdae6839def9d772123e233d0216299d4c9b503d33c"
+          },
+          "events": 6651,
+          "natives": 3100,
+          "p2_reads": 3551,
+          "trace_sha256": "97245171d43753574927882c96d5e16a0c62820a3bc2356bb535778e52e4df41",
+          "accepted_p1_cross": true,
+          "accepted_p2_right": true,
+          "strict_expected_offline_replay_rejection": {
+            "codec": "network trace cannot be replayed offline",
+            "launcher_preparation": "Only complete offline cold-boot native-consumption traces are supported"
+          },
+          "actual_location_lines": [
+            "mmx6 diagnostics: finalized capture F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R26-native-record-netplay-6c42c5c-root-v2\\peer-0\\saves\\input-recordings\\session-1793143440673759-1-0"
+          ],
+          "startup_artifacts": {
+            "card1.initial.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+            "card2.initial.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+            "content.json": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "settings.json": "c0a9d7cd055d1ae6ee47f0e3cf89cbb2b495036fddc7001831fe81aa8888341b",
+            "simulation-contract.json": "26cbd5f2d465bd8f9e3a3cdae6839def9d772123e233d0216299d4c9b503d33c",
+            "status.json": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+          },
+          "peer": 0,
+          "source_qualified_native_mask_stats": {
+            "native_p1_cross_held": 631,
+            "native_p1_cross_fresh_edges": 39,
+            "wrong_raw_sdk_cross_mask_in_native_p1": 0,
+            "native_p2_right_held": 15,
+            "raw_P2_consumer_right": 30
+          },
+          "native_starting_cards_match_current_private_cards": true,
+          "owned_cleanup": {
+            "shutdown": "graceful_owned_debug",
+            "exit_code": 0
+          }
+        },
+        {
+          "directory": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R26-native-record-netplay-6c42c5c-root-v2\\peer-1\\saves\\input-recordings\\session-1793143440752722-1-0",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "089bb606b5dff06cdcea3e3adbcb1e728379e1045cdd7eedca097e1d3899ca25",
+            "manifest_sha256": "8e10381c97c8c8ad22698648328ed7c2b6930c4175346c0544905d79bc8a9f15",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 2,
+              "selected_sha256": "d6ea0eb0b2666d7e738c95add260d257a03fc3ce709672929180816acb8180b5"
+            },
+            "settings_sha256": "f281bca9106899faa9a42ca1b6a713b9dff33490d6960651b7286e7611be4a5f",
+            "simulation_contract_sha256": "26cbd5f2d465bd8f9e3a3cdae6839def9d772123e233d0216299d4c9b503d33c"
+          },
+          "events": 6651,
+          "natives": 3100,
+          "p2_reads": 3551,
+          "trace_sha256": "6832cf8192e918ccddc9aeeaec32c20140f9c793fd9a2841a5329a7765687766",
+          "accepted_p1_cross": true,
+          "accepted_p2_right": true,
+          "strict_expected_offline_replay_rejection": {
+            "codec": "network trace cannot be replayed offline",
+            "launcher_preparation": "Only complete offline cold-boot native-consumption traces are supported"
+          },
+          "actual_location_lines": [
+            "mmx6 diagnostics: finalized capture F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R26-native-record-netplay-6c42c5c-root-v2\\peer-1\\saves\\input-recordings\\session-1793143440752722-1-0"
+          ],
+          "startup_artifacts": {
+            "card1.initial.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+            "card2.initial.mcd": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8",
+            "content.json": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "settings.json": "f281bca9106899faa9a42ca1b6a713b9dff33490d6960651b7286e7611be4a5f",
+            "simulation-contract.json": "26cbd5f2d465bd8f9e3a3cdae6839def9d772123e233d0216299d4c9b503d33c",
+            "status.json": "abbadc5f1f1f3b0aaa6efb7b171bb66d68c01e1f05c71070c93d7e0d3913cfbb"
+          },
+          "peer": 1,
+          "source_qualified_native_mask_stats": {
+            "native_p1_cross_held": 631,
+            "native_p1_cross_fresh_edges": 39,
+            "wrong_raw_sdk_cross_mask_in_native_p1": 0,
+            "native_p2_right_held": 15,
+            "raw_P2_consumer_right": 30
+          },
+          "native_starting_cards_match_current_private_cards": true,
+          "owned_cleanup": {
+            "shutdown": "graceful_owned_debug",
+            "exit_code": 0
+          }
+        }
+      ],
+      "resolved_CRC_windows": [
+        {
+          "label": "initial idle",
+          "samples": 7
+        },
+        {
+          "label": "P2 right then release",
+          "samples": 8
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": 8
+        }
+      ],
+      "raw_wrapper_status": "failed_setup",
+      "raw_wrapper_error": "Both actual accepted input streams were not retained"
+    }
+  },
+  "decoder": {
+    "exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "address": "0x80012a34",
+    "bytes": 544,
+    "sha256": "8ca7b0e60a42934a40186be927ca9ec2683f2ace00b37edd0b2f9a293ef379fa",
+    "instruction_words": {
+      "0x80012a88": "0x90640002",
+      "0x80012a8c": "0x90620003",
+      "0x80012a94": "0x43200",
+      "0x80012a98": "0xc21027",
+      "0x80012aa0": "0x3046ffff",
+      "0x80012b24": "0xa486456c",
+      "0x80012b34": "0xa4820002",
+      "0x80012b40": "0xa4820004",
+      "0x80012c2c": "0xa4864758",
+      "0x80012c30": "0xa4620002",
+      "0x80012c40": "0xa4620004"
+    },
+    "ABI": "Digital SIO active-low low-byte/high-byte reply -> original12A94 firstbyte<<8 then12A98 NOR with secondbyte. SDK Crosspressed4000 becomes rawBFFF, bytesFF/BF, native0040; SDK Right0020 becomes native2000. Native held/previous/fresh-edge at C456C and C4758 are sampled AFTER decoder by hook12C44. P2C consumers retain the original raw SDK mask0020, a separate ABI."
+  },
+  "exact_old_SDK": {
+    "commit": "6212e68066a6977dc587e8fca71f27dac9b002fc",
+    "file": "runtime/src/sio.c",
+    "file_sha256": "139a172676a04807471b3d1169b7521a981bcd8ded9c3c9abb27c931344db83a",
+    "line": 1416,
+    "source_excerpt": "            /* Read poll. Analog (or in-config) uses the 8-byte format with the\n             * four stick axes; a plain digital pad uses the 4-byte format. */\n            const uint16_t btn = pad_buttons[lp];\n            pad_response[0] = cur_id;\n            pad_response[1] = 0x5A;\n            pad_response[2] = (uint8_t)(btn & 0xFF);\n            pad_response[3] = (uint8_t)(btn >> 8);\n            if (pad_analog[lp] == SIO_PAD_JOGCON) {"
+  },
+  "native_mask_correction": {
+    "trace_sha256": "d57ba2fe71bbcd8d79e2694d22ea02e885292121ef99042f840b45b2d214db68",
+    "native_p1_cross_held": 764,
+    "wrong_sdk_cross_mask_native_p1": 0,
+    "note": "Historical actual_p1_cross_word_anywhere label/classifier was inaccurate. Native Cross is0040; original replay still consumed all5913 exact recorded events. No historical raw/receipt rewritten."
+  },
+  "limits": [
+    "Frozen R26 default diagnostics, both accepted inputs, actual starting settings/cards, visible location and strict same-build native-consumption replay only. One exact retained Windows x64 candidate6c42c5c/image089bb606/manifest8e10381c is used in both modes; no newer-build pass is transferred.",
+    "Default diagnostics is enabled through the normal manifest/resolved package in LOCAL and the forced title diagnostics hook in NET. No MMX6_INPUT_* force-on/path/replay override is used for recording. Default resident loading remains active. Offline interpreter sealing is explicit in original LOCAL evidence; NET selects its actual common profile2 without that offline-only flag.",
+    "Actual full finalized recording paths are present in real application stderr for LOCAL and both NET peers, satisfying the original OSD/log location contract. No dynamic launcher path widget, OSD text, folder-opening action or actual Mods discovery click is claimed or required by this frozen action.",
+    "LOCAL original4140N+1773C=5913 ordered events and actual current-startup bundle/cards were retained; a fresh private exact-image replay consumes every5913 and exits0. Repeated native-frame events are not deduplicated. Raw SIO/publication, whole-machine replay, end-state RAM, rendered/audio outcome equality and every next-read boundary are not claimed.",
+    "Both NET streams finalize6651 events3100N+3551C with actual current-startup settings/cards/content/contract, acknowledged native movement/jump, common profile2, matching resolved core/mod CRC windows and owned exits0. NET traces are intentionally refused by the offline codec and replay preparer, with no output created. No online replay feature is claimed; original frozen diagnostics supports strict offline replay only.",
+    "The NET wrapper raw report remains failed_setup solely because its review classifier searched SDK Cross4000 in native postdecode N words. Exact original decoder/oldSDK source proves Cross0040 and Right2000 in N, while P2C keeps raw Right20. An independent read-only review changes only that mask and retains every startup/cards/path/refusal check. Historical LOCAL actual_p1_cross_word_anywhere was also mislabeled; correct nativeCrossheld764 rows are now established without rewriting its old receipt or actual5913-event replay.",
+    "The initial R26NETv1 offline-only flag refusal and NETv2 wrapper classification failure remain preserved. Neither raw failure is promoted to a full wrapper pass. Current R26 result is independently derived from completed native components and exact source-qualified parsing.",
+    "Separate production host-lab-default-off evidence concerns the enhanced loopback lab build option and is retained as originally recorded; this result does not claim a new production release, delivery archive, cross-host qualification or native3330 content audit."
+  ],
+  "executed_review_script": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-R26-default-record-replay-6c42c5c-root-v1.py",
+    "sha256": "e56f02d5e327d7b49680e01f06b2e2b6683e06f1dd5c95407e7fe3b0feb08465",
+    "bytes": 12723
+  }
+}

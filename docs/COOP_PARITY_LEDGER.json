@@ -4549,20 +4549,21 @@
       "x6": {
         "workstream": "diagnostics",
         "mapping_state": "identified_subsystem",
-        "analogue": "Default accepted-input recording and replay",
-        "bounded_check": "The baseline RAM mailbox is not a recorder; qualify default-on files containing both accepted pads, starting settings/cards and exact-build replay.",
+        "analogue": "Default X6 native-consumption diagnostics, actual recording path and strict private exact-image replay",
+        "bounded_check": "Use normal default diagnostics and both accepted pads, validate actual current-startup settings/cards and full path in the application log, then replay every ordered offline native-consumption event in a fresh private same-image process; in netplay validate both finalized current-startup streams and strict expected offline-replay refusal.",
         "baseline_anchors": [
-          "src/mods/mmx6_coop_plugin.c:diagnostics",
-          "src/mods/mmx6_coop_plugin.c:diagnostic_setup"
+          "src/mods/mmx6_diagnostics.cpp",
+          "src/mods/mmx6_input_capture.hpp",
+          "tools/prepare_mmx6_input_replay.py"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -4613,9 +4614,83 @@
               "No prior v11/v12 comparison pass transfers to this new image."
             ],
             "bypasses": []
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "6c42c5c4afa68bb7dfe60097e091a6a551940d9a",
+            "build_identity": {
+              "executable_sha256": "089bb606b5dff06cdcea3e3adbcb1e728379e1045cdd7eedca097e1d3899ca25",
+              "compiled_manifest_sha256": "8e10381c97c8c8ad22698648328ed7c2b6930c4175346c0544905d79bc8a9f15",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc",
+              "ui_commit": "b964eabe5a3438b8ed121064354ba27c1accef3f"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "recording": "normal default native-consumption package/hook",
+              "loader": "default resident",
+              "host_profile_revision": null,
+              "audio": "muted dummy"
+            },
+            "action": "Record both real accepted pads and actual startup bundle/cards, observe full location in application log; strict fresh same-image offline replay or intentional NET offline-replay rejection.",
+            "outcome": "LOCAL5913 exact events replayed; both NET6651-event streams finalized, startup/cards/path verified and strict offline-replay refusal observed. Raw classifier failure is preserved separately.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-native-replay/manifest-bound-6c42c5c-R26-default-location-replay-reviewed.json",
+                "sha256": "15fa563609bb3b22065edc73b30a4b4cec276932f5f1744832a54b6d923f8f11"
+              }
+            ],
+            "limits": [
+              "Frozen R26 default diagnostics, both accepted inputs, actual starting settings/cards, visible location and strict same-build native-consumption replay only. One exact retained Windows x64 candidate6c42c5c/image089bb606/manifest8e10381c is used in both modes; no newer-build pass is transferred.",
+              "Default diagnostics is enabled through the normal manifest/resolved package in LOCAL and the forced title diagnostics hook in NET. No MMX6_INPUT_* force-on/path/replay override is used for recording. Default resident loading remains active. Offline interpreter sealing is explicit in original LOCAL evidence; NET selects its actual common profile2 without that offline-only flag.",
+              "Actual full finalized recording paths are present in real application stderr for LOCAL and both NET peers, satisfying the original OSD/log location contract. No dynamic launcher path widget, OSD text, folder-opening action or actual Mods discovery click is claimed or required by this frozen action.",
+              "LOCAL original4140N+1773C=5913 ordered events and actual current-startup bundle/cards were retained; a fresh private exact-image replay consumes every5913 and exits0. Repeated native-frame events are not deduplicated. Raw SIO/publication, whole-machine replay, end-state RAM, rendered/audio outcome equality and every next-read boundary are not claimed.",
+              "Both NET streams finalize6651 events3100N+3551C with actual current-startup settings/cards/content/contract, acknowledged native movement/jump, common profile2, matching resolved core/mod CRC windows and owned exits0. NET traces are intentionally refused by the offline codec and replay preparer, with no output created. No online replay feature is claimed; original frozen diagnostics supports strict offline replay only.",
+              "The NET wrapper raw report remains failed_setup solely because its review classifier searched SDK Cross4000 in native postdecode N words. Exact original decoder/oldSDK source proves Cross0040 and Right2000 in N, while P2C keeps raw Right20. An independent read-only review changes only that mask and retains every startup/cards/path/refusal check. Historical LOCAL actual_p1_cross_word_anywhere was also mislabeled; correct nativeCrossheld764 rows are now established without rewriting its old receipt or actual5913-event replay.",
+              "The initial R26NETv1 offline-only flag refusal and NETv2 wrapper classification failure remain preserved. Neither raw failure is promoted to a full wrapper pass. Current R26 result is independently derived from completed native components and exact source-qualified parsing.",
+              "Separate production host-lab-default-off evidence concerns the enhanced loopback lab build option and is retained as originally recorded; this result does not claim a new production release, delivery archive, cross-host qualification or native3330 content audit."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "6c42c5c4afa68bb7dfe60097e091a6a551940d9a",
+            "build_identity": {
+              "executable_sha256": "089bb606b5dff06cdcea3e3adbcb1e728379e1045cdd7eedca097e1d3899ca25",
+              "compiled_manifest_sha256": "8e10381c97c8c8ad22698648328ed7c2b6930c4175346c0544905d79bc8a9f15",
+              "sdk_commit": "6212e68066a6977dc587e8fca71f27dac9b002fc",
+              "ui_commit": "b964eabe5a3438b8ed121064354ba27c1accef3f"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "recording": "normal default native-consumption package/hook",
+              "loader": "default resident",
+              "host_profile_revision": 2,
+              "audio": "muted dummy"
+            },
+            "action": "Record both real accepted pads and actual startup bundle/cards, observe full location in application log; strict fresh same-image offline replay or intentional NET offline-replay rejection.",
+            "outcome": "LOCAL5913 exact events replayed; both NET6651-event streams finalized, startup/cards/path verified and strict offline-replay refusal observed. Raw classifier failure is preserved separately.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-native-replay/manifest-bound-6c42c5c-R26-default-location-replay-reviewed.json",
+                "sha256": "15fa563609bb3b22065edc73b30a4b4cec276932f5f1744832a54b6d923f8f11"
+              }
+            ],
+            "limits": [
+              "Frozen R26 default diagnostics, both accepted inputs, actual starting settings/cards, visible location and strict same-build native-consumption replay only. One exact retained Windows x64 candidate6c42c5c/image089bb606/manifest8e10381c is used in both modes; no newer-build pass is transferred.",
+              "Default diagnostics is enabled through the normal manifest/resolved package in LOCAL and the forced title diagnostics hook in NET. No MMX6_INPUT_* force-on/path/replay override is used for recording. Default resident loading remains active. Offline interpreter sealing is explicit in original LOCAL evidence; NET selects its actual common profile2 without that offline-only flag.",
+              "Actual full finalized recording paths are present in real application stderr for LOCAL and both NET peers, satisfying the original OSD/log location contract. No dynamic launcher path widget, OSD text, folder-opening action or actual Mods discovery click is claimed or required by this frozen action.",
+              "LOCAL original4140N+1773C=5913 ordered events and actual current-startup bundle/cards were retained; a fresh private exact-image replay consumes every5913 and exits0. Repeated native-frame events are not deduplicated. Raw SIO/publication, whole-machine replay, end-state RAM, rendered/audio outcome equality and every next-read boundary are not claimed.",
+              "Both NET streams finalize6651 events3100N+3551C with actual current-startup settings/cards/content/contract, acknowledged native movement/jump, common profile2, matching resolved core/mod CRC windows and owned exits0. NET traces are intentionally refused by the offline codec and replay preparer, with no output created. No online replay feature is claimed; original frozen diagnostics supports strict offline replay only.",
+              "The NET wrapper raw report remains failed_setup solely because its review classifier searched SDK Cross4000 in native postdecode N words. Exact original decoder/oldSDK source proves Cross0040 and Right2000 in N, while P2C keeps raw Right20. An independent read-only review changes only that mask and retains every startup/cards/path/refusal check. Historical LOCAL actual_p1_cross_word_anywhere was also mislabeled; correct nativeCrossheld764 rows are now established without rewriting its old receipt or actual5913-event replay.",
+              "The initial R26NETv1 offline-only flag refusal and NETv2 wrapper classification failure remain preserved. Neither raw failure is promoted to a full wrapper pass. Current R26 result is independently derived from completed native components and exact source-qualified parsing.",
+              "Separate production host-lab-default-off evidence concerns the enhanced loopback lab build option and is retained as originally recorded; this result does not claim a new production release, delivery archive, cross-host qualification or native3330 content audit."
+            ],
+            "bypasses": []
           }
         ],
-        "limitations": "Default diagnostics produced a finalized5913-event native trace on exact089bb606/manifest8e10381c; fresh private same-image replay consumed all5913 and exited0 after Windows marker-byte fix13fa4cd. Actual native P1 jump/P2 movement checks pass during recording. Ordered N/C consumption excludes raw SIO/publication and has no capture-end outcome/artwork equality claim; diagnostics UI/location presentation and fullR26 remain unverified. See docs/evidence/mmx6-native-replay/manifest-bound-6c42c5c-reviewed.json."
+        "limitations": "Frozen R26 default diagnostics, both accepted inputs, actual starting settings/cards, visible location and strict same-build native-consumption replay only. One exact retained Windows x64 candidate6c42c5c/image089bb606/manifest8e10381c is used in both modes; no newer-build pass is transferred. Default diagnostics is enabled through the normal manifest/resolved package in LOCAL and the forced title diagnostics hook in NET. No MMX6_INPUT_* force-on/path/replay override is used for recording. Default resident loading remains active. Offline interpreter sealing is explicit in original LOCAL evidence; NET selects its actual common profile2 without that offline-only flag. Actual full finalized recording paths are present in real application stderr for LOCAL and both NET peers, satisfying the original OSD/log location contract. No dynamic launcher path widget, OSD text, folder-opening action or actual Mods discovery click is claimed or required by this frozen action. LOCAL original4140N+1773C=5913 ordered events and actual current-startup bundle/cards were retained; a fresh private exact-image replay consumes every5913 and exits0. Repeated native-frame events are not deduplicated. Raw SIO/publication, whole-machine replay, end-state RAM, rendered/audio outcome equality and every next-read boundary are not claimed. Both NET streams finalize6651 events3100N+3551C with actual current-startup settings/cards/content/contract, acknowledged native movement/jump, common profile2, matching resolved core/mod CRC windows and owned exits0. NET traces are intentionally refused by the offline codec and replay preparer, with no output created. No online replay feature is claimed; original frozen diagnostics supports strict offline replay only. The NET wrapper raw report remains failed_setup solely because its review classifier searched SDK Cross4000 in native postdecode N words. Exact original decoder/oldSDK source proves Cross0040 and Right2000 in N, while P2C keeps raw Right20. An independent read-only review changes only that mask and retains every startup/cards/path/refusal check. Historical LOCAL actual_p1_cross_word_anywhere was also mislabeled; correct nativeCrossheld764 rows are now established without rewriting its old receipt or actual5913-event replay. The initial R26NETv1 offline-only flag refusal and NETv2 wrapper classification failure remain preserved. Neither raw failure is promoted to a full wrapper pass. Current R26 result is independently derived from completed native components and exact source-qualified parsing. Separate production host-lab-default-off evidence concerns the enhanced loopback lab build option and is retained as originally recorded; this result does not claim a new production release, delivery archive, cross-host qualification or native3330 content audit."
       }
     },
     {
