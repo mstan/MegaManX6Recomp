@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 63 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F89, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F157, F163, F170, F178, F204, F205, F208), 6 failed, 165 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 64 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F89, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F157, F163, F170, F178, F204, F205, F208), 6 failed, 164 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,8 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 27
+
+**F73 is closed:64 passed /6 failed /164 unverified (27.4%).** The [same-candidate native primary transport review](evidence/mmx6-lifecycle/manifest-bound-e07ff56-F73-local-netplay-reviewed.json) reuses the completed LOCAL/NET V73 executions. Each physical process retains one original outgoing/hidden/return cycle, active guest stage1/0/CP2, unchanged personal resources/progression, one setup initializer and both independent native walks. Actual boss admission/script timer changes remain native; prerequisite bypass, strict recording refusal and scenery/overlap limits remain explicit. Four relevant composed images were reviewed. This adds one since63 without a duplicate native run.
 
 The [retained weapon-palette correction](evidence/mmx6-assets/manifest-bound-b9d0b93-F50-retained-palette-local-component-reviewed.json) is integrated locally at `68cd03f`. Native LOCAL Yammar uses the original palette row and all seven retained tiles (1,792 pixels) match the original DAT85 texture/colors; the former row is demonstrably different. All21 focused checks pass. **F50 stays unverified**: the full acquired-family, retirement and NET contract remains open. This block closes no comparisons; counts stay63/6/165, and the next block switches to shorter named checks.
 
