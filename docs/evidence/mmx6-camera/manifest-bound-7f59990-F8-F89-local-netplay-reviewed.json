@@ -1,0 +1,3936 @@
+{
+  "schema": 1,
+  "comparisons": {
+    "F8": "236f7ae62e0d75f70e763ccdf3d806b26fa3caac9ac55258d0d18440fa8a1b54",
+    "F89": "2e338d0d9bc8ef7c9ef158bf081909b26306164d55660d01ff46fef92af21580"
+  },
+  "result": "passed",
+  "candidate": "7f59990e052422aa845837b26470117f57de3c72",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-v70-final-binding-root-v1.json",
+    "binding_sha256": "a15740bac352664b3cfcd7f4655f70055604919a0589e0a6db936c41fb730c3a",
+    "image_sha256": "c7c981e384a4b8000a5866f7a6128b330f8f6166330d04bb4d914a06c6abd223",
+    "manifest_sha256": "4bbf3327e831a652ddbef3ce5aa9e015f9f4ddc1a64f9f08e347096aa7493ff3",
+    "provenance_sha256": "27cb2080aaa6fed2e47d3f19fcdff92eb536fdca84d89020d737c9cb1b217400",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v70-investigator-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "7f59990e052422aa845837b26470117f57de3c72",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v24",
+    "host_revision": 7
+  },
+  "modes": {
+    "local": {
+      "result": "passed",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-local-v70-root-v3\\qualification.json",
+        "bytes": 6516399,
+        "sha256": "6579fb60b9685bcdd8233ab36a850b1f63d4f008685fe615d7691ad5531c4aac"
+      },
+      "entry": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-local-v70-root-v3\\ammo-hud\\intro-admission\\Investigator-entry\\observations.json",
+        "bytes": 3505522,
+        "sha256": "717617a4461b108022181e594071f3feaa19f05769faaa9999ea86c8fee3ff1d"
+      },
+      "arena": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-local-v70-root-v3\\ammo-hud\\intro-admission\\F89-arena\\observations.json",
+        "bytes": 1121815,
+        "sha256": "47fec85f4d7b49ce606aa350742e8a18bcd41f533a882d8fbf49367f5a27c346"
+      },
+      "entry_checks": {
+        "agreed_checkpoint_complete": true,
+        "original_leader_selected": true,
+        "actual_native_contact": true,
+        "original_boss_fullHP_released": true,
+        "passenger_landed_both_healthy": true,
+        "independent_native_controls": true,
+        "no_repeated_initializer": true
+      },
+      "arena_checks": {
+        "original_Amazon_terrain_and_current_body_boxes": true,
+        "both_native_heroes_traverse_full_source_arena_width": true,
+        "both_physical_wall_endpoints_grounded_and_stable_while_input_held": true,
+        "full_foot_floor_and_body_clear_in_original_and_live_terrain": true,
+        "actual_current_target_arena_camera_limits_retained": true,
+        "actual_own_composed_endpoint_captures_each_process": true,
+        "no_position_contact_HP_or_success_writes": true
+      },
+      "entry_source_guards": [
+        {
+          "peer": 0,
+          "kind": "exe",
+          "address": "0x800721bc",
+          "bytes": 36,
+          "sha256": "a2ca68c812cc76e351516efaeaa9995b05ab4375cfe5da996fb202414320f979",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "exe",
+          "address": "0x80050760",
+          "bytes": 32,
+          "sha256": "859db1d10c1625819bf0fda487e280e2b239ef551ac4232f308b23c9c8e52da1",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "exe",
+          "address": "0x80078dc8",
+          "bytes": 4,
+          "sha256": "d8ddfc94e7201527a6a93ee04aed8c5c122ac38af6dbf6e5f1caefba2597230d",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "exe",
+          "address": "0x80073d50",
+          "bytes": 8,
+          "sha256": "da8d8f948e652263fcb4c8a24cb000a09db8fff49beb902c2434ed598176e252",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "exe",
+          "address": "0x80025fd8",
+          "bytes": 80,
+          "sha256": "a067a21860c51b6972f121e7bd413a557d4c9d9ada1ff70a72c770b9d1f16157",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "member3",
+          "address": "0x800e9908",
+          "bytes": 8,
+          "sha256": "6d16a7fb130f843858d420149bbe877e0d019e5d43b4c1e497dbac10fac4781e",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "exe",
+          "address": "0x80022000",
+          "bytes": 380,
+          "sha256": "435082e0ce3f67280b494852ed5a835c0c0b931948fd437626561e47dae89a8a",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "exe",
+          "address": "0x800227f8",
+          "bytes": 16,
+          "sha256": "a834853587e360cd56f7647bf6e5648a8ad6c393f7260fe77f808cc05edd5348",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "exe",
+          "address": "0x8002a140",
+          "bytes": 88,
+          "sha256": "3ec904bc53f56ebbf21cfc9ab047d8a50aac47a70c3bff44a1ed84985b63b84d",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "exe",
+          "address": "0x8002a254",
+          "bytes": 20,
+          "sha256": "9a76756a228e340e960ce17f8dd26714f2dedc0ee4816d9e351f20689bd95587",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "member3",
+          "address": "0x800f6488",
+          "bytes": 8,
+          "sha256": "6afb92a1b32583569cb6660c6853c338e206729d05c58bf4af0a87b98c83a65a",
+          "matches_original": true,
+          "exact_immutable_bytes": false,
+          "native_placement_spawned_bit0": true,
+          "actual_placement_hex": "01080404f013e007"
+        },
+        {
+          "peer": 0,
+          "kind": "member3",
+          "address": "0x800f66c0",
+          "bytes": 8,
+          "sha256": "644fc4e06d398e203c2db6a0ea99313eb477cce39a9c8dc29bfb6a97c29d0e9a",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": "00310000a014e007"
+        },
+        {
+          "peer": 0,
+          "kind": "member3",
+          "address": "0x800f6844",
+          "bytes": 4,
+          "sha256": "3dc17249909488becef780ff84f68ef238df3088691b566c2ea4a69560d26d0e",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "member3",
+          "address": "0x800f7bdc",
+          "bytes": 16,
+          "sha256": "733a284a1f81dac202e247c78746e40b2ed842fa373730194f68819176753c82",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "member3",
+          "address": "0x800ef810",
+          "bytes": 908,
+          "sha256": "3942b69051d1ab811fc166bc68496a4b91786a732bf3a812122aa81f9d40baae",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "member3",
+          "address": "0x800efb9c",
+          "bytes": 412,
+          "sha256": "849fa379c90b26fcecb9952faf6d5876a2bd745ebeb15007972e8501a9479ee6",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "member3",
+          "address": "0x800f43f4",
+          "bytes": 276,
+          "sha256": "eb54d67d1d3f5d9712e4e078fe2265995286b6ee9d4da78ac0485adfae35e4dd",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "member3",
+          "address": "0x800f4588",
+          "bytes": 236,
+          "sha256": "397921a5ce56ad98aa5b78fecda7dbb534e5fc6bc7673e8bdd09c15cb2886197",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        }
+      ],
+      "arena_source_guards": [
+        {
+          "address": "0x80028078",
+          "bytes": 124,
+          "sha256": "65f9eb9f635a842727e63d387ff1d2f10586d0d4d24c446893ed115e708ae2d2"
+        },
+        {
+          "address": "0x80030304",
+          "bytes": 264,
+          "sha256": "1de2c8cffd1cc6e9ef9dcf991e3ace3ac64510186096e20d32b02d298ba689d8"
+        },
+        {
+          "address": "0x800304d8",
+          "bytes": 148,
+          "sha256": "aa5ca022636f3ec10dbc7acb94a285de68abb23876b7c0270c50fa36f3f2a268"
+        },
+        {
+          "address": "0x80030628",
+          "bytes": 196,
+          "sha256": "0909f0ad99941e13350a4d03537216724aa5e358a2a77bee7dae066d48b05fb4"
+        },
+        {
+          "address": "0x80030834",
+          "bytes": 132,
+          "sha256": "e94dba8f538e844e0c8ec0fb09c4b5e0ef0d190e2b8e9a7b982dd1e0c559e101"
+        },
+        {
+          "address": "0x8003ccbc",
+          "bytes": 68,
+          "sha256": "537f24ae8672645fb7a217bcb99b0acadaa110d3dc01f84d33f24f53d3acad99"
+        },
+        {
+          "address": "0x80073d50",
+          "bytes": 8,
+          "sha256": "da8d8f948e652263fcb4c8a24cb000a09db8fff49beb902c2434ed598176e252"
+        }
+      ],
+      "prerequisite": {
+        "generation": 1,
+        "state": 3,
+        "reason": 0,
+        "stage": 1,
+        "section": 0,
+        "checkpoint": 2,
+        "nonce": 1279476018,
+        "initializer_entries": 1,
+        "record": "800721BC",
+        "tainted": 1,
+        "authority": 1,
+        "latch": 2
+      },
+      "raw_F8_component": {
+        "frozen_row_sha256": "236f7ae62e0d75f70e763ccdf3d806b26fa3caac9ac55258d0d18440fa8a1b54",
+        "pre_scene_distant_living_rows": [
+          86,
+          87
+        ],
+        "during_actual_conversation_distant_rows": [
+          286,
+          300,
+          329,
+          351,
+          375,
+          402,
+          420,
+          455,
+          486,
+          512,
+          547,
+          579
+        ],
+        "actual_dialogue_offers": 12,
+        "both_native_visible_grounded_returned": false,
+        "separate_native_controls": true,
+        "ready_for_independent_review": false,
+        "row_admission": false,
+        "artwork_review": "pending",
+        "limits": [
+          "Source-bound native passenger reset can temporarily clear P1body HP/active; lifecycleALIVE and healthy pre-scene body preserve living-partner identity.",
+          "Distant means primary remains outside last-door admission while guest enters arena; exact raw positions/body states retained, not a camera-count claim.",
+          "If no actual boss dialogue or primary already returned before it, this F8 component is not ready; do not infer pass from door entry alone.",
+          "Composed art and all parent profile/CRC/cards/owned-exit/fixture trace refusals require root review."
+        ]
+      },
+      "before_scene": {
+        "index": 87,
+        "peers": [
+          {
+            "peer": 0,
+            "scene": [
+              0,
+              0
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x": 4960.0,
+                "y": 1999.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d50"
+              },
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 4,
+                "hp": 32,
+                "x": 5069.5,
+                "y": 2025.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d54"
+              }
+            ]
+          }
+        ]
+      },
+      "actual_conversation": {
+        "index": 286,
+        "peers": [
+          {
+            "peer": 0,
+            "scene": [
+              2,
+              3
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "active": 1,
+                "visible": 0,
+                "state": 3,
+                "action": 0,
+                "hp": 32,
+                "x": 4960.0,
+                "y": 1839.0,
+                "ground70": 8,
+                "air67": 1,
+                "box68": "0x0"
+              },
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 20,
+                "hp": 32,
+                "x": 5184.40625,
+                "y": 2074.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d54"
+              }
+            ]
+          }
+        ]
+      },
+      "dialogue_offers": [
+        {
+          "before": 286,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1b04",
+              "control": 10341,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 0
+            }
+          ],
+          "after": 287,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1b08",
+              "control": 22627,
+              "timer": 2,
+              "active": 1,
+              "phase": 2,
+              "page": 1
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 288
+        },
+        {
+          "before": 300,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1b2c",
+              "control": 11358,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 1
+            }
+          ],
+          "after": 301,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1b50",
+              "control": 23651,
+              "timer": 1,
+              "active": 1,
+              "phase": 2,
+              "page": 2
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 303
+        },
+        {
+          "before": 329,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1b9a",
+              "control": 11361,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 2
+            }
+          ],
+          "after": 330,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1bc0",
+              "control": 7205,
+              "timer": 4,
+              "active": 1,
+              "phase": 2,
+              "page": 3
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 332
+        },
+        {
+          "before": 351,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1bf4",
+              "control": 11358,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 3
+            }
+          ],
+          "after": 352,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1c18",
+              "control": 23651,
+              "timer": 0,
+              "active": 1,
+              "phase": 1,
+              "page": 4
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 354
+        },
+        {
+          "before": 375,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1c46",
+              "control": 10337,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 4
+            }
+          ],
+          "after": 376,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1c4a",
+              "control": 22627,
+              "timer": 1,
+              "active": 1,
+              "phase": 2,
+              "page": 5
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 378
+        },
+        {
+          "before": 402,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1c80",
+              "control": 10323,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 5
+            }
+          ],
+          "after": 403,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1c86",
+              "control": 6180,
+              "timer": 1,
+              "active": 1,
+              "phase": 2,
+              "page": 6
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 406
+        },
+        {
+          "before": 420,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1ca8",
+              "control": 11347,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 6
+            }
+          ],
+          "after": 421,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1ccc",
+              "control": 23651,
+              "timer": 1,
+              "active": 1,
+              "phase": 2,
+              "page": 7
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 423
+        },
+        {
+          "before": 455,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1d16",
+              "control": 11411,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 7
+            }
+          ],
+          "after": 456,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1d3a",
+              "control": 23651,
+              "timer": 2,
+              "active": 1,
+              "phase": 2,
+              "page": 8
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 458
+        },
+        {
+          "before": 486,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1d76",
+              "control": 11413,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 8
+            }
+          ],
+          "after": 487,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1d9a",
+              "control": 23651,
+              "timer": 3,
+              "active": 1,
+              "phase": 2,
+              "page": 9
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 489
+        },
+        {
+          "before": 512,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1dd0",
+              "control": 11361,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 9
+            }
+          ],
+          "after": 513,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1df4",
+              "control": 23651,
+              "timer": 2,
+              "active": 1,
+              "phase": 2,
+              "page": 10
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 516
+        },
+        {
+          "before": 547,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1e34",
+              "control": 11379,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 10
+            }
+          ],
+          "after": 548,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1e58",
+              "control": 23651,
+              "timer": 1,
+              "active": 1,
+              "phase": 2,
+              "page": 11
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 550
+        },
+        {
+          "before": 579,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1e98",
+              "control": 43603,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 11
+            }
+          ],
+          "after": 580,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1e98",
+              "control": 43603,
+              "timer": 49,
+              "active": 128,
+              "phase": 4,
+              "page": 11
+            }
+          ],
+          "progress": [
+            "native_box_closing"
+          ],
+          "neutral_after": 581
+        }
+      ],
+      "first_battle_ready": {
+        "index": 640,
+        "peers": [
+          {
+            "peer": 0,
+            "scene": [
+              0,
+              0
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x": 5184.40625,
+                "y": 2074.0,
+                "ground70": 0,
+                "air67": 0,
+                "box68": "0x80073d50"
+              },
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x": 5184.40625,
+                "y": 2074.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d54"
+              }
+            ]
+          }
+        ]
+      },
+      "later_returned_both_full_feet": {
+        "index": 0,
+        "peers": [
+          {
+            "peer": 0,
+            "scene": [
+              0,
+              0
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x": 5200.40625,
+                "y": 2075.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d50"
+              },
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x": 5191.90625,
+                "y": 2074.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d54"
+              }
+            ]
+          }
+        ]
+      },
+      "both_full_foot_rows": 172,
+      "controls": [
+        {
+          "seat": 0,
+          "before": 641,
+          "accepted": 643,
+          "native_walk_and_nonparticipant": [
+            {
+              "peer": 0,
+              "native_walk_action": 4,
+              "controlled_travel": 8.0,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "classification": "stationary"
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "before": 648,
+          "accepted": 650,
+          "native_walk_and_nonparticipant": [
+            {
+              "peer": 0,
+              "native_walk_action": 3,
+              "controlled_travel": 2.5,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "classification": "stationary"
+            }
+          ]
+        }
+      ],
+      "native_wall_walks": [
+        {
+          "seat": 0,
+          "direction": "left",
+          "target_source_center": 5131,
+          "samples": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
+          ],
+          "before": 0,
+          "endpoint": 20,
+          "stable_from": 17,
+          "actual_endpoints": [
+            {
+              "box": [
+                5120,
+                2058,
+                5142,
+                2096
+              ],
+              "center_x": 5131.0,
+              "center_y": 2075,
+              "action": 2,
+              "ground70": 10,
+              "air67": 0,
+              "held7C": 2,
+              "hp": 32,
+              "stored_vertical_velocity24": 0,
+              "source_and_live_full_foot_and_body_clear": true
+            }
+          ]
+        },
+        {
+          "seat": 0,
+          "direction": "right",
+          "target_source_center": 5429,
+          "samples": [
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69,
+            70,
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112
+          ],
+          "before": 21,
+          "endpoint": 112,
+          "stable_from": 109,
+          "actual_endpoints": [
+            {
+              "box": [
+                5418,
+                2058,
+                5440,
+                2096
+              ],
+              "center_x": 5429.625,
+              "center_y": 2075,
+              "action": 2,
+              "ground70": 9,
+              "air67": 0,
+              "held7C": 1,
+              "hp": 29,
+              "stored_vertical_velocity24": 0,
+              "source_and_live_full_foot_and_body_clear": true
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "direction": "left",
+          "target_source_center": 5131,
+          "samples": [
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124,
+            125,
+            126,
+            127,
+            128,
+            129,
+            130,
+            131,
+            132,
+            133,
+            134,
+            135,
+            136,
+            137,
+            138,
+            139,
+            140,
+            141,
+            142,
+            143,
+            144,
+            145,
+            146
+          ],
+          "before": 113,
+          "endpoint": 146,
+          "stable_from": 143,
+          "actual_endpoints": [
+            {
+              "box": [
+                5120,
+                2058,
+                5142,
+                2096
+              ],
+              "center_x": 5131.0,
+              "center_y": 2074,
+              "action": 2,
+              "ground70": 10,
+              "air67": 0,
+              "held7C": 2,
+              "hp": 28,
+              "stored_vertical_velocity24": 0,
+              "source_and_live_full_foot_and_body_clear": true
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "direction": "right",
+          "target_source_center": 5429,
+          "samples": [
+            148,
+            149,
+            150,
+            151,
+            152,
+            153,
+            154,
+            155,
+            156,
+            157,
+            158,
+            159,
+            160,
+            161,
+            162,
+            163,
+            164,
+            165,
+            166,
+            167,
+            168,
+            169,
+            170,
+            171,
+            172,
+            173,
+            174,
+            175,
+            176,
+            177,
+            178,
+            179,
+            180,
+            181,
+            182,
+            183,
+            184,
+            185,
+            186,
+            187,
+            188,
+            189,
+            190,
+            191,
+            192,
+            193,
+            194,
+            195,
+            196,
+            197,
+            198,
+            199,
+            200,
+            201,
+            202,
+            203,
+            204,
+            205,
+            206,
+            207,
+            208,
+            209,
+            210,
+            211,
+            212,
+            213,
+            214,
+            215,
+            216,
+            217,
+            218,
+            219
+          ],
+          "before": 147,
+          "endpoint": 219,
+          "stable_from": 216,
+          "actual_endpoints": [
+            {
+              "box": [
+                5418,
+                2058,
+                5440,
+                2096
+              ],
+              "center_x": 5429.3125,
+              "center_y": 2074,
+              "action": 2,
+              "ground70": 9,
+              "air67": 0,
+              "held7C": 1,
+              "hp": 24,
+              "stored_vertical_velocity24": 0,
+              "source_and_live_full_foot_and_body_clear": true
+            }
+          ]
+        }
+      ],
+      "physical_arena": {
+        "x_inclusive": [
+          5120,
+          5439
+        ],
+        "y_inclusive": [
+          2058,
+          2095
+        ],
+        "floor": 2096,
+        "static_standing_centers": [
+          5131,
+          5429
+        ],
+        "native_wall_contact_tolerance_pixels": 2
+      },
+      "live_collision_assets": [
+        {
+          "peer": 0,
+          "pointers": "38740980b0b71980b0691b80",
+          "metatiles_sha256": "b78b161e9984fb96a0d05196e565e2decb5350acdbb313702276e564829c2300",
+          "descriptors_sha256": "bc2763f3b9281d965fe9ca5e2c39acd86acb979f410237089e9874f59213c1f7"
+        }
+      ],
+      "resolved_crc": [],
+      "strict_refusals": [
+        {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          }
+        }
+      ],
+      "observers": {
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F89_Investigator_entry_v70_root_v2.py": "bb0d461944f22c03c60cc340427edd352870dba73fd36e965879aa090ca15605",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F89_arena_width_v70_root_v1.py": "4bb08058013a218e86d66aaff6f4f3c567c85cb13d74a949e3b895f361fa9eb0"
+      },
+      "root_caller": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-local-v70-root-v3\\root-executed-source.py",
+        "bytes": 5968,
+        "sha256": "8034aa6757c6d35c46926385d5812a7d8f7531424148c0a1e1ae05156d0c082e"
+      }
+    },
+    "netplay": {
+      "result": "passed",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\qualification.json",
+        "bytes": 7631058,
+        "sha256": "4839664bed638443097a6315505ae2328fab705f7ba8f2c0819d406a89977509"
+      },
+      "entry": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\Investigator-entry\\observations.json",
+        "bytes": 3799158,
+        "sha256": "0079804c9e417535cd4792b7115b54793eca15e5310e4c1cc9f19cd8b0b053eb"
+      },
+      "arena": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\F89-arena\\observations.json",
+        "bytes": 1248332,
+        "sha256": "e3b18f3c00b7ea41dfe87bb0f382cc308d8199697ba419eb27af9cdb697213b5"
+      },
+      "entry_checks": {
+        "agreed_checkpoint_complete": true,
+        "original_leader_selected": true,
+        "actual_native_contact": true,
+        "original_boss_fullHP_released": true,
+        "passenger_landed_both_healthy": true,
+        "independent_native_controls": true,
+        "no_repeated_initializer": true
+      },
+      "arena_checks": {
+        "original_Amazon_terrain_and_current_body_boxes": true,
+        "both_native_heroes_traverse_full_source_arena_width": true,
+        "both_physical_wall_endpoints_grounded_and_stable_while_input_held": true,
+        "full_foot_floor_and_body_clear_in_original_and_live_terrain": true,
+        "actual_current_target_arena_camera_limits_retained": true,
+        "actual_own_composed_endpoint_captures_each_process": true,
+        "no_position_contact_HP_or_success_writes": true
+      },
+      "entry_source_guards": [
+        {
+          "peer": 0,
+          "kind": "exe",
+          "address": "0x800721bc",
+          "bytes": 36,
+          "sha256": "a2ca68c812cc76e351516efaeaa9995b05ab4375cfe5da996fb202414320f979",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 1,
+          "kind": "exe",
+          "address": "0x800721bc",
+          "bytes": 36,
+          "sha256": "a2ca68c812cc76e351516efaeaa9995b05ab4375cfe5da996fb202414320f979",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "exe",
+          "address": "0x80050760",
+          "bytes": 32,
+          "sha256": "859db1d10c1625819bf0fda487e280e2b239ef551ac4232f308b23c9c8e52da1",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 1,
+          "kind": "exe",
+          "address": "0x80050760",
+          "bytes": 32,
+          "sha256": "859db1d10c1625819bf0fda487e280e2b239ef551ac4232f308b23c9c8e52da1",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "exe",
+          "address": "0x80078dc8",
+          "bytes": 4,
+          "sha256": "d8ddfc94e7201527a6a93ee04aed8c5c122ac38af6dbf6e5f1caefba2597230d",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 1,
+          "kind": "exe",
+          "address": "0x80078dc8",
+          "bytes": 4,
+          "sha256": "d8ddfc94e7201527a6a93ee04aed8c5c122ac38af6dbf6e5f1caefba2597230d",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "exe",
+          "address": "0x80073d50",
+          "bytes": 8,
+          "sha256": "da8d8f948e652263fcb4c8a24cb000a09db8fff49beb902c2434ed598176e252",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 1,
+          "kind": "exe",
+          "address": "0x80073d50",
+          "bytes": 8,
+          "sha256": "da8d8f948e652263fcb4c8a24cb000a09db8fff49beb902c2434ed598176e252",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "exe",
+          "address": "0x80025fd8",
+          "bytes": 80,
+          "sha256": "a067a21860c51b6972f121e7bd413a557d4c9d9ada1ff70a72c770b9d1f16157",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 1,
+          "kind": "exe",
+          "address": "0x80025fd8",
+          "bytes": 80,
+          "sha256": "a067a21860c51b6972f121e7bd413a557d4c9d9ada1ff70a72c770b9d1f16157",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "member3",
+          "address": "0x800e9908",
+          "bytes": 8,
+          "sha256": "6d16a7fb130f843858d420149bbe877e0d019e5d43b4c1e497dbac10fac4781e",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 1,
+          "kind": "member3",
+          "address": "0x800e9908",
+          "bytes": 8,
+          "sha256": "6d16a7fb130f843858d420149bbe877e0d019e5d43b4c1e497dbac10fac4781e",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "exe",
+          "address": "0x80022000",
+          "bytes": 380,
+          "sha256": "435082e0ce3f67280b494852ed5a835c0c0b931948fd437626561e47dae89a8a",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 1,
+          "kind": "exe",
+          "address": "0x80022000",
+          "bytes": 380,
+          "sha256": "435082e0ce3f67280b494852ed5a835c0c0b931948fd437626561e47dae89a8a",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "exe",
+          "address": "0x800227f8",
+          "bytes": 16,
+          "sha256": "a834853587e360cd56f7647bf6e5648a8ad6c393f7260fe77f808cc05edd5348",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 1,
+          "kind": "exe",
+          "address": "0x800227f8",
+          "bytes": 16,
+          "sha256": "a834853587e360cd56f7647bf6e5648a8ad6c393f7260fe77f808cc05edd5348",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "exe",
+          "address": "0x8002a140",
+          "bytes": 88,
+          "sha256": "3ec904bc53f56ebbf21cfc9ab047d8a50aac47a70c3bff44a1ed84985b63b84d",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 1,
+          "kind": "exe",
+          "address": "0x8002a140",
+          "bytes": 88,
+          "sha256": "3ec904bc53f56ebbf21cfc9ab047d8a50aac47a70c3bff44a1ed84985b63b84d",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "exe",
+          "address": "0x8002a254",
+          "bytes": 20,
+          "sha256": "9a76756a228e340e960ce17f8dd26714f2dedc0ee4816d9e351f20689bd95587",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 1,
+          "kind": "exe",
+          "address": "0x8002a254",
+          "bytes": 20,
+          "sha256": "9a76756a228e340e960ce17f8dd26714f2dedc0ee4816d9e351f20689bd95587",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "member3",
+          "address": "0x800f6488",
+          "bytes": 8,
+          "sha256": "6afb92a1b32583569cb6660c6853c338e206729d05c58bf4af0a87b98c83a65a",
+          "matches_original": true,
+          "exact_immutable_bytes": false,
+          "native_placement_spawned_bit0": true,
+          "actual_placement_hex": "01080404f013e007"
+        },
+        {
+          "peer": 1,
+          "kind": "member3",
+          "address": "0x800f6488",
+          "bytes": 8,
+          "sha256": "6afb92a1b32583569cb6660c6853c338e206729d05c58bf4af0a87b98c83a65a",
+          "matches_original": true,
+          "exact_immutable_bytes": false,
+          "native_placement_spawned_bit0": true,
+          "actual_placement_hex": "01080404f013e007"
+        },
+        {
+          "peer": 0,
+          "kind": "member3",
+          "address": "0x800f66c0",
+          "bytes": 8,
+          "sha256": "644fc4e06d398e203c2db6a0ea99313eb477cce39a9c8dc29bfb6a97c29d0e9a",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": "00310000a014e007"
+        },
+        {
+          "peer": 1,
+          "kind": "member3",
+          "address": "0x800f66c0",
+          "bytes": 8,
+          "sha256": "644fc4e06d398e203c2db6a0ea99313eb477cce39a9c8dc29bfb6a97c29d0e9a",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": "00310000a014e007"
+        },
+        {
+          "peer": 0,
+          "kind": "member3",
+          "address": "0x800f6844",
+          "bytes": 4,
+          "sha256": "3dc17249909488becef780ff84f68ef238df3088691b566c2ea4a69560d26d0e",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 1,
+          "kind": "member3",
+          "address": "0x800f6844",
+          "bytes": 4,
+          "sha256": "3dc17249909488becef780ff84f68ef238df3088691b566c2ea4a69560d26d0e",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "member3",
+          "address": "0x800f7bdc",
+          "bytes": 16,
+          "sha256": "733a284a1f81dac202e247c78746e40b2ed842fa373730194f68819176753c82",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 1,
+          "kind": "member3",
+          "address": "0x800f7bdc",
+          "bytes": 16,
+          "sha256": "733a284a1f81dac202e247c78746e40b2ed842fa373730194f68819176753c82",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "member3",
+          "address": "0x800ef810",
+          "bytes": 908,
+          "sha256": "3942b69051d1ab811fc166bc68496a4b91786a732bf3a812122aa81f9d40baae",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 1,
+          "kind": "member3",
+          "address": "0x800ef810",
+          "bytes": 908,
+          "sha256": "3942b69051d1ab811fc166bc68496a4b91786a732bf3a812122aa81f9d40baae",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "member3",
+          "address": "0x800efb9c",
+          "bytes": 412,
+          "sha256": "849fa379c90b26fcecb9952faf6d5876a2bd745ebeb15007972e8501a9479ee6",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 1,
+          "kind": "member3",
+          "address": "0x800efb9c",
+          "bytes": 412,
+          "sha256": "849fa379c90b26fcecb9952faf6d5876a2bd745ebeb15007972e8501a9479ee6",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "member3",
+          "address": "0x800f43f4",
+          "bytes": 276,
+          "sha256": "eb54d67d1d3f5d9712e4e078fe2265995286b6ee9d4da78ac0485adfae35e4dd",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 1,
+          "kind": "member3",
+          "address": "0x800f43f4",
+          "bytes": 276,
+          "sha256": "eb54d67d1d3f5d9712e4e078fe2265995286b6ee9d4da78ac0485adfae35e4dd",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 0,
+          "kind": "member3",
+          "address": "0x800f4588",
+          "bytes": 236,
+          "sha256": "397921a5ce56ad98aa5b78fecda7dbb534e5fc6bc7673e8bdd09c15cb2886197",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        },
+        {
+          "peer": 1,
+          "kind": "member3",
+          "address": "0x800f4588",
+          "bytes": 236,
+          "sha256": "397921a5ce56ad98aa5b78fecda7dbb534e5fc6bc7673e8bdd09c15cb2886197",
+          "matches_original": true,
+          "exact_immutable_bytes": true,
+          "native_placement_spawned_bit0": false,
+          "actual_placement_hex": null
+        }
+      ],
+      "arena_source_guards": [
+        {
+          "address": "0x80028078",
+          "bytes": 124,
+          "sha256": "65f9eb9f635a842727e63d387ff1d2f10586d0d4d24c446893ed115e708ae2d2"
+        },
+        {
+          "address": "0x80030304",
+          "bytes": 264,
+          "sha256": "1de2c8cffd1cc6e9ef9dcf991e3ace3ac64510186096e20d32b02d298ba689d8"
+        },
+        {
+          "address": "0x800304d8",
+          "bytes": 148,
+          "sha256": "aa5ca022636f3ec10dbc7acb94a285de68abb23876b7c0270c50fa36f3f2a268"
+        },
+        {
+          "address": "0x80030628",
+          "bytes": 196,
+          "sha256": "0909f0ad99941e13350a4d03537216724aa5e358a2a77bee7dae066d48b05fb4"
+        },
+        {
+          "address": "0x80030834",
+          "bytes": 132,
+          "sha256": "e94dba8f538e844e0c8ec0fb09c4b5e0ef0d190e2b8e9a7b982dd1e0c559e101"
+        },
+        {
+          "address": "0x8003ccbc",
+          "bytes": 68,
+          "sha256": "537f24ae8672645fb7a217bcb99b0acadaa110d3dc01f84d33f24f53d3acad99"
+        },
+        {
+          "address": "0x80073d50",
+          "bytes": 8,
+          "sha256": "da8d8f948e652263fcb4c8a24cb000a09db8fff49beb902c2434ed598176e252"
+        }
+      ],
+      "prerequisite": {
+        "generation": 1,
+        "state": 3,
+        "reason": 0,
+        "stage": 1,
+        "section": 0,
+        "checkpoint": 2,
+        "nonce": 1279476018,
+        "initializer_entries": 1,
+        "record": "800721BC",
+        "tainted": 1,
+        "authority": 1,
+        "latch": 2
+      },
+      "raw_F8_component": {
+        "frozen_row_sha256": "236f7ae62e0d75f70e763ccdf3d806b26fa3caac9ac55258d0d18440fa8a1b54",
+        "pre_scene_distant_living_rows": [
+          48
+        ],
+        "during_actual_conversation_distant_rows": [
+          162,
+          171,
+          188,
+          200,
+          212,
+          225,
+          234,
+          253,
+          269,
+          283,
+          300,
+          317
+        ],
+        "actual_dialogue_offers": 12,
+        "both_native_visible_grounded_returned": true,
+        "separate_native_controls": true,
+        "ready_for_independent_review": true,
+        "row_admission": false,
+        "artwork_review": "pending",
+        "limits": [
+          "Source-bound native passenger reset can temporarily clear P1body HP/active; lifecycleALIVE and healthy pre-scene body preserve living-partner identity.",
+          "Distant means primary remains outside last-door admission while guest enters arena; exact raw positions/body states retained, not a camera-count claim.",
+          "If no actual boss dialogue or primary already returned before it, this F8 component is not ready; do not infer pass from door entry alone.",
+          "Composed art and all parent profile/CRC/cards/owned-exit/fixture trace refusals require root review."
+        ]
+      },
+      "before_scene": {
+        "index": 48,
+        "peers": [
+          {
+            "peer": 0,
+            "scene": [
+              0,
+              0
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x": 4960.0,
+                "y": 1999.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d50"
+              },
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 4,
+                "hp": 32,
+                "x": 5065.5,
+                "y": 2024.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d54"
+              }
+            ]
+          },
+          {
+            "peer": 1,
+            "scene": [
+              0,
+              0
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x": 4960.0,
+                "y": 1999.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d50"
+              },
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 4,
+                "hp": 32,
+                "x": 5071.5,
+                "y": 2025.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d54"
+              }
+            ]
+          }
+        ]
+      },
+      "actual_conversation": {
+        "index": 162,
+        "peers": [
+          {
+            "peer": 0,
+            "scene": [
+              2,
+              3
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "active": 1,
+                "visible": 0,
+                "state": 3,
+                "action": 0,
+                "hp": 32,
+                "x": 4960.0,
+                "y": 1839.0,
+                "ground70": 8,
+                "air67": 1,
+                "box68": "0x0"
+              },
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 20,
+                "hp": 32,
+                "x": 5184.40625,
+                "y": 2074.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d54"
+              }
+            ]
+          },
+          {
+            "peer": 1,
+            "scene": [
+              2,
+              3
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "active": 1,
+                "visible": 0,
+                "state": 3,
+                "action": 0,
+                "hp": 32,
+                "x": 4960.0,
+                "y": 1839.0,
+                "ground70": 8,
+                "air67": 1,
+                "box68": "0x0"
+              },
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 20,
+                "hp": 32,
+                "x": 5184.40625,
+                "y": 2074.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d54"
+              }
+            ]
+          }
+        ]
+      },
+      "dialogue_offers": [
+        {
+          "before": 162,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1b04",
+              "control": 10341,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 0
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1b04",
+              "control": 10341,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 0
+            }
+          ],
+          "after": 163,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1b08",
+              "control": 22627,
+              "timer": 2,
+              "active": 1,
+              "phase": 2,
+              "page": 1
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1b08",
+              "control": 22627,
+              "timer": 1,
+              "active": 1,
+              "phase": 2,
+              "page": 1
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced",
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 164
+        },
+        {
+          "before": 171,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1b2c",
+              "control": 11358,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 1
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1b2c",
+              "control": 11358,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 1
+            }
+          ],
+          "after": 173,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1b54",
+              "control": 7284,
+              "timer": 4,
+              "active": 1,
+              "phase": 2,
+              "page": 2
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1b54",
+              "control": 7284,
+              "timer": 1,
+              "active": 1,
+              "phase": 2,
+              "page": 2
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced",
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 174
+        },
+        {
+          "before": 188,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1b9a",
+              "control": 11361,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 2
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1b9a",
+              "control": 11361,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 2
+            }
+          ],
+          "after": 189,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1bbe",
+              "control": 23651,
+              "timer": 0,
+              "active": 1,
+              "phase": 1,
+              "page": 3
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1bc0",
+              "control": 7205,
+              "timer": 0,
+              "active": 1,
+              "phase": 1,
+              "page": 3
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced",
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 190
+        },
+        {
+          "before": 200,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1bf4",
+              "control": 11358,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 3
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1bf4",
+              "control": 11358,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 3
+            }
+          ],
+          "after": 202,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1c1c",
+              "control": 7312,
+              "timer": 4,
+              "active": 1,
+              "phase": 2,
+              "page": 4
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1c1c",
+              "control": 7312,
+              "timer": 0,
+              "active": 1,
+              "phase": 1,
+              "page": 4
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced",
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 203
+        },
+        {
+          "before": 212,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1c46",
+              "control": 10337,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 4
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1c46",
+              "control": 10337,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 4
+            }
+          ],
+          "after": 213,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1c4a",
+              "control": 22627,
+              "timer": 2,
+              "active": 1,
+              "phase": 2,
+              "page": 5
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1c4c",
+              "control": 6196,
+              "timer": 4,
+              "active": 1,
+              "phase": 2,
+              "page": 5
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced",
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 214
+        },
+        {
+          "before": 225,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1c80",
+              "control": 10323,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 5
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1c80",
+              "control": 10323,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 5
+            }
+          ],
+          "after": 226,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1c84",
+              "control": 22627,
+              "timer": 4,
+              "active": 1,
+              "phase": 2,
+              "page": 6
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1c86",
+              "control": 6180,
+              "timer": 3,
+              "active": 1,
+              "phase": 2,
+              "page": 6
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced",
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 227
+        },
+        {
+          "before": 234,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1ca8",
+              "control": 11347,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 6
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1ca8",
+              "control": 11347,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 6
+            }
+          ],
+          "after": 236,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1cd0",
+              "control": 7221,
+              "timer": 2,
+              "active": 1,
+              "phase": 2,
+              "page": 7
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1cd2",
+              "control": 7329,
+              "timer": 2,
+              "active": 1,
+              "phase": 2,
+              "page": 7
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced",
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 238
+        },
+        {
+          "before": 253,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1d16",
+              "control": 11411,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 7
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1d16",
+              "control": 11411,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 7
+            }
+          ],
+          "after": 255,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1d3c",
+              "control": 7280,
+              "timer": 1,
+              "active": 1,
+              "phase": 2,
+              "page": 8
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1d3e",
+              "control": 7302,
+              "timer": 2,
+              "active": 1,
+              "phase": 2,
+              "page": 8
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced",
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 256
+        },
+        {
+          "before": 269,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1d76",
+              "control": 11413,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 8
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1d76",
+              "control": 11413,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 8
+            }
+          ],
+          "after": 271,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1d9e",
+              "control": 7302,
+              "timer": 3,
+              "active": 1,
+              "phase": 2,
+              "page": 9
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1da0",
+              "control": 7312,
+              "timer": 3,
+              "active": 1,
+              "phase": 2,
+              "page": 9
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced",
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 272
+        },
+        {
+          "before": 283,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1dd0",
+              "control": 11361,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 9
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1dd0",
+              "control": 11361,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 9
+            }
+          ],
+          "after": 284,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1df4",
+              "control": 23651,
+              "timer": 1,
+              "active": 1,
+              "phase": 2,
+              "page": 10
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1df8",
+              "control": 7221,
+              "timer": 4,
+              "active": 1,
+              "phase": 2,
+              "page": 10
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced",
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 285
+        },
+        {
+          "before": 300,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1e34",
+              "control": 11379,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 10
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1e34",
+              "control": 11379,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 10
+            }
+          ],
+          "after": 301,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1e58",
+              "control": 23651,
+              "timer": 4,
+              "active": 1,
+              "phase": 2,
+              "page": 11
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1e5a",
+              "control": 7283,
+              "timer": 4,
+              "active": 1,
+              "phase": 2,
+              "page": 11
+            }
+          ],
+          "progress": [
+            "native_text_cursor_advanced",
+            "native_text_cursor_advanced"
+          ],
+          "neutral_after": 302
+        },
+        {
+          "before": 317,
+          "seat": 1,
+          "before_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1e98",
+              "control": 43603,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 11
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1e98",
+              "control": 43603,
+              "timer": 0,
+              "active": 255,
+              "phase": 3,
+              "page": 11
+            }
+          ],
+          "after": 319,
+          "after_dialogue": [
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1e98",
+              "control": 43603,
+              "timer": 40,
+              "active": 128,
+              "phase": 4,
+              "page": 11
+            },
+            {
+              "stage": 1,
+              "section": 0,
+              "mode": [
+                10,
+                0,
+                0
+              ],
+              "cursor": "0x801c1e98",
+              "control": 43603,
+              "timer": 33,
+              "active": 128,
+              "phase": 4,
+              "page": 11
+            }
+          ],
+          "progress": [
+            "native_box_closing",
+            "native_box_closing"
+          ],
+          "neutral_after": 320
+        }
+      ],
+      "first_battle_ready": {
+        "index": 348,
+        "peers": [
+          {
+            "peer": 0,
+            "scene": [
+              0,
+              0
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x": 5184.40625,
+                "y": 2075.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d50"
+              },
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x": 5184.40625,
+                "y": 2074.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d54"
+              }
+            ]
+          },
+          {
+            "peer": 1,
+            "scene": [
+              0,
+              0
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x": 5184.40625,
+                "y": 2075.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d50"
+              },
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x": 5184.40625,
+                "y": 2074.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d54"
+              }
+            ]
+          }
+        ]
+      },
+      "later_returned_both_full_feet": {
+        "index": 0,
+        "peers": [
+          {
+            "peer": 0,
+            "scene": [
+              0,
+              0
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x": 5203.90625,
+                "y": 2075.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d50"
+              },
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x": 5215.90625,
+                "y": 2074.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d54"
+              }
+            ]
+          },
+          {
+            "peer": 1,
+            "scene": [
+              0,
+              0
+            ],
+            "lifecycle": [
+              0,
+              0
+            ],
+            "bodies": [
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x": 5203.90625,
+                "y": 2075.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d50"
+              },
+              {
+                "active": 1,
+                "visible": 1,
+                "state": 1,
+                "action": 2,
+                "hp": 32,
+                "x": 5215.90625,
+                "y": 2074.0,
+                "ground70": 8,
+                "air67": 0,
+                "box68": "0x80073d54"
+              }
+            ]
+          }
+        ]
+      },
+      "both_full_foot_rows": 94,
+      "controls": [
+        {
+          "seat": 0,
+          "before": 349,
+          "accepted": 351,
+          "native_walk_and_nonparticipant": [
+            {
+              "peer": 0,
+              "native_walk_action": 3,
+              "controlled_travel": 2.0,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "classification": "stationary"
+            },
+            {
+              "peer": 1,
+              "native_walk_action": 3,
+              "controlled_travel": 2.5,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "classification": "stationary"
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "before": 354,
+          "accepted": 356,
+          "native_walk_and_nonparticipant": [
+            {
+              "peer": 0,
+              "native_walk_action": 4,
+              "controlled_travel": 3.5,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "classification": "stationary"
+            },
+            {
+              "peer": 1,
+              "native_walk_action": 4,
+              "controlled_travel": 9.5,
+              "other_stationary": true,
+              "other_HP_drop": false,
+              "other_native_hurt": false,
+              "classification": "stationary"
+            }
+          ]
+        }
+      ],
+      "native_wall_walks": [
+        {
+          "seat": 0,
+          "direction": "left",
+          "target_source_center": 5131,
+          "samples": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23
+          ],
+          "before": 0,
+          "endpoint": 23,
+          "stable_from": 21,
+          "actual_endpoints": [
+            {
+              "box": [
+                5120,
+                2058,
+                5142,
+                2096
+              ],
+              "center_x": 5131.0,
+              "center_y": 2075,
+              "action": 2,
+              "ground70": 10,
+              "air67": 0,
+              "held7C": 2,
+              "hp": 31,
+              "stored_vertical_velocity24": 0,
+              "source_and_live_full_foot_and_body_clear": true
+            },
+            {
+              "box": [
+                5120,
+                2058,
+                5142,
+                2096
+              ],
+              "center_x": 5131.0,
+              "center_y": 2075,
+              "action": 2,
+              "ground70": 10,
+              "air67": 0,
+              "held7C": 2,
+              "hp": 31,
+              "stored_vertical_velocity24": 0,
+              "source_and_live_full_foot_and_body_clear": true
+            }
+          ]
+        },
+        {
+          "seat": 0,
+          "direction": "right",
+          "target_source_center": 5429,
+          "samples": [
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61,
+            62,
+            63,
+            64,
+            65,
+            66,
+            67,
+            68,
+            69
+          ],
+          "before": 24,
+          "endpoint": 69,
+          "stable_from": 67,
+          "actual_endpoints": [
+            {
+              "box": [
+                5418,
+                2058,
+                5440,
+                2096
+              ],
+              "center_x": 5429.9375,
+              "center_y": 2075,
+              "action": 2,
+              "ground70": 9,
+              "air67": 0,
+              "held7C": 1,
+              "hp": 29,
+              "stored_vertical_velocity24": 0,
+              "source_and_live_full_foot_and_body_clear": true
+            },
+            {
+              "box": [
+                5418,
+                2058,
+                5440,
+                2096
+              ],
+              "center_x": 5429.9375,
+              "center_y": 2075,
+              "action": 2,
+              "ground70": 9,
+              "air67": 0,
+              "held7C": 1,
+              "hp": 29,
+              "stored_vertical_velocity24": 0,
+              "source_and_live_full_foot_and_body_clear": true
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "direction": "left",
+          "target_source_center": 5131,
+          "samples": [
+            71,
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80,
+            81,
+            82,
+            83,
+            84,
+            85,
+            86,
+            87,
+            88
+          ],
+          "before": 70,
+          "endpoint": 88,
+          "stable_from": 86,
+          "actual_endpoints": [
+            {
+              "box": [
+                5120,
+                2058,
+                5142,
+                2096
+              ],
+              "center_x": 5131.0,
+              "center_y": 2074,
+              "action": 2,
+              "ground70": 10,
+              "air67": 0,
+              "held7C": 2,
+              "hp": 26,
+              "stored_vertical_velocity24": 0,
+              "source_and_live_full_foot_and_body_clear": true
+            },
+            {
+              "box": [
+                5120,
+                2058,
+                5142,
+                2096
+              ],
+              "center_x": 5131.0,
+              "center_y": 2074,
+              "action": 2,
+              "ground70": 10,
+              "air67": 0,
+              "held7C": 2,
+              "hp": 26,
+              "stored_vertical_velocity24": 0,
+              "source_and_live_full_foot_and_body_clear": true
+            }
+          ]
+        },
+        {
+          "seat": 1,
+          "direction": "right",
+          "target_source_center": 5429,
+          "samples": [
+            90,
+            91,
+            92,
+            93,
+            94,
+            95,
+            96,
+            97,
+            98,
+            99,
+            100,
+            101,
+            102,
+            103,
+            104,
+            105,
+            106,
+            107,
+            108,
+            109,
+            110,
+            111,
+            112,
+            113,
+            114,
+            115,
+            116,
+            117,
+            118,
+            119,
+            120,
+            121,
+            122,
+            123,
+            124
+          ],
+          "before": 89,
+          "endpoint": 124,
+          "stable_from": 123,
+          "actual_endpoints": [
+            {
+              "box": [
+                5418,
+                2058,
+                5440,
+                2096
+              ],
+              "center_x": 5429.0,
+              "center_y": 2074,
+              "action": 2,
+              "ground70": 9,
+              "air67": 0,
+              "held7C": 1,
+              "hp": 26,
+              "stored_vertical_velocity24": 0,
+              "source_and_live_full_foot_and_body_clear": true
+            },
+            {
+              "box": [
+                5418,
+                2058,
+                5440,
+                2096
+              ],
+              "center_x": 5429.0,
+              "center_y": 2074,
+              "action": 2,
+              "ground70": 9,
+              "air67": 0,
+              "held7C": 1,
+              "hp": 26,
+              "stored_vertical_velocity24": 0,
+              "source_and_live_full_foot_and_body_clear": true
+            }
+          ]
+        }
+      ],
+      "physical_arena": {
+        "x_inclusive": [
+          5120,
+          5439
+        ],
+        "y_inclusive": [
+          2058,
+          2095
+        ],
+        "floor": 2096,
+        "static_standing_centers": [
+          5131,
+          5429
+        ],
+        "native_wall_contact_tolerance_pixels": 2
+      },
+      "live_collision_assets": [
+        {
+          "peer": 0,
+          "pointers": "38740980b0b71980b0691b80",
+          "metatiles_sha256": "b78b161e9984fb96a0d05196e565e2decb5350acdbb313702276e564829c2300",
+          "descriptors_sha256": "bc2763f3b9281d965fe9ca5e2c39acd86acb979f410237089e9874f59213c1f7"
+        },
+        {
+          "peer": 1,
+          "pointers": "38740980b0b71980b0691b80",
+          "metatiles_sha256": "b78b161e9984fb96a0d05196e565e2decb5350acdbb313702276e564829c2300",
+          "descriptors_sha256": "bc2763f3b9281d965fe9ca5e2c39acd86acb979f410237089e9874f59213c1f7"
+        }
+      ],
+      "resolved_crc": [
+        {
+          "label": "initial idle",
+          "samples": 8,
+          "last_tick": 3168,
+          "resolved_through": [
+            3182,
+            3182
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": 7,
+          "last_tick": 3424,
+          "resolved_through": [
+            3450,
+            3450
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": 8,
+          "last_tick": 3744,
+          "resolved_through": [
+            3751,
+            3749
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": 5,
+          "last_tick": 8576,
+          "resolved_through": [
+            8590,
+            8590
+          ]
+        }
+      ],
+      "strict_refusals": [
+        {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "network trace cannot be replayed offline"
+          }
+        },
+        {
+          "ordinary_capture": {
+            "type": "InvalidRecording",
+            "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+          },
+          "offline_replay": {
+            "type": "InvalidRecording",
+            "message": "network trace cannot be replayed offline"
+          }
+        }
+      ],
+      "observers": {
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F89_Investigator_entry_v70_root_v2.py": "bb0d461944f22c03c60cc340427edd352870dba73fd36e965879aa090ca15605",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F89_arena_width_v70_root_v1.py": "4bb08058013a218e86d66aaff6f4f3c567c85cb13d74a949e3b895f361fa9eb0"
+      },
+      "root_caller": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\root-executed-source.py",
+        "bytes": 5968,
+        "sha256": "8034aa6757c6d35c46926385d5812a7d8f7531424148c0a1e1ae05156d0c082e"
+      }
+    }
+  },
+  "reviewed_images": [
+    {
+      "mode": "local",
+      "group": "entry",
+      "peer": 0,
+      "label": "safe-native-AmazonCP2",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-local-v70-root-v3\\ammo-hud\\intro-admission\\Investigator-entry\\peer-0-safe-native-AmazonCP2.png",
+        "bytes": 2074543,
+        "sha256": "d714c7794278661fe37e7e608d3d30990691bdf477a26aecbe0bcc28901ba609"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "local",
+      "group": "entry",
+      "peer": 0,
+      "label": "original-door-scene-begin",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-local-v70-root-v3\\ammo-hud\\intro-admission\\Investigator-entry\\peer-0-original-door-scene-begin.png",
+        "bytes": 2074543,
+        "sha256": "0dc133d2764a860fd33429ec32b77ca2c873284ccb923d0a25c6c28358251668"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "local",
+      "group": "entry",
+      "peer": 0,
+      "label": "actual-native-Yammark-conversation-before-confirm",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-local-v70-root-v3\\ammo-hud\\intro-admission\\Investigator-entry\\peer-0-actual-native-Yammark-conversation-before-confirm.png",
+        "bytes": 2074543,
+        "sha256": "f185995f76470c89450e8b4b25adbb861bffb524674b2bebdfb01051e2d517f0"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "local",
+      "group": "entry",
+      "peer": 0,
+      "label": "native-boss-both-controls-restored",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-local-v70-root-v3\\ammo-hud\\intro-admission\\Investigator-entry\\peer-0-native-boss-both-controls-restored.png",
+        "bytes": 2074543,
+        "sha256": "ce2f1d10de95715d8f191025fc595bdd7a77f824df88a813a49c8f06c5dc1a91"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "local",
+      "group": "arena",
+      "peer": 0,
+      "label": "seat0 left",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-local-v70-root-v3\\ammo-hud\\intro-admission\\F89-arena\\peer-0-seat-0-left-native-wall.png",
+        "bytes": 2074543,
+        "sha256": "90d5c56a36705a5312ffec89a0db3fb0c05f249e66d95d1a2ab591057c824bc5"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "local",
+      "group": "arena",
+      "peer": 0,
+      "label": "seat0 right",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-local-v70-root-v3\\ammo-hud\\intro-admission\\F89-arena\\peer-0-seat-0-right-native-wall.png",
+        "bytes": 2074543,
+        "sha256": "e357e4a2b827d0b1dff78361444fa6c94ee4ba6361bddc4d07655e0765588d7a"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "local",
+      "group": "arena",
+      "peer": 0,
+      "label": "seat1 left",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-local-v70-root-v3\\ammo-hud\\intro-admission\\F89-arena\\peer-0-seat-1-left-native-wall.png",
+        "bytes": 2074543,
+        "sha256": "20d259e1f6d3ec77e54665307af0863b1edae37f59d392765e659d7870bc8f6e"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "local",
+      "group": "arena",
+      "peer": 0,
+      "label": "seat1 right",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-local-v70-root-v3\\ammo-hud\\intro-admission\\F89-arena\\peer-0-seat-1-right-native-wall.png",
+        "bytes": 2074543,
+        "sha256": "8f6a9c2d87b28762591c7b4315432bd372cedca5e0e210fccd5e27d315e2fffc"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "netplay",
+      "group": "entry",
+      "peer": 0,
+      "label": "safe-native-AmazonCP2",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\Investigator-entry\\peer-0-safe-native-AmazonCP2.png",
+        "bytes": 2074543,
+        "sha256": "6cee529e2f9bc6dbe31fd24a99db1dde540ef487686cfe848db7396100603e2b"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "netplay",
+      "group": "entry",
+      "peer": 1,
+      "label": "safe-native-AmazonCP2",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\Investigator-entry\\peer-1-safe-native-AmazonCP2.png",
+        "bytes": 2074543,
+        "sha256": "7c21c483f588b14114750de573ea4326029f927c3995928f0000a831bd3c55dd"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "netplay",
+      "group": "entry",
+      "peer": 0,
+      "label": "original-door-scene-begin",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\Investigator-entry\\peer-0-original-door-scene-begin.png",
+        "bytes": 2074543,
+        "sha256": "e4b044833d2be6ceec8900f1ac999c382a381fa5f1337204e1421e24ff9740cb"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "netplay",
+      "group": "entry",
+      "peer": 1,
+      "label": "original-door-scene-begin",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\Investigator-entry\\peer-1-original-door-scene-begin.png",
+        "bytes": 2074543,
+        "sha256": "05101c5b6a8b55b8cc841713fd072adae522c037d1167ebe18a505123daa9ab7"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "netplay",
+      "group": "entry",
+      "peer": 0,
+      "label": "actual-native-Yammark-conversation-before-confirm",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\Investigator-entry\\peer-0-actual-native-Yammark-conversation-before-confirm.png",
+        "bytes": 2074543,
+        "sha256": "6c29f24dbfbb888d926d71c3794e3d274b7b41b4f002d6c27583f21280bc14db"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "netplay",
+      "group": "entry",
+      "peer": 1,
+      "label": "actual-native-Yammark-conversation-before-confirm",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\Investigator-entry\\peer-1-actual-native-Yammark-conversation-before-confirm.png",
+        "bytes": 2074543,
+        "sha256": "307f35880398e7b24b1fd57dca85d07c646cd7ad1e64c0534667bdba8d08793c"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "netplay",
+      "group": "entry",
+      "peer": 0,
+      "label": "native-boss-both-controls-restored",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\Investigator-entry\\peer-0-native-boss-both-controls-restored.png",
+        "bytes": 2074543,
+        "sha256": "398feec0d492921c58cbdc5e9323993ea5db0565c617e583c52b52959e8364cd"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "netplay",
+      "group": "entry",
+      "peer": 1,
+      "label": "native-boss-both-controls-restored",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\Investigator-entry\\peer-1-native-boss-both-controls-restored.png",
+        "bytes": 2074543,
+        "sha256": "b9049d2213979e567637036d0b3b2b1f9a50076ea08e25526af06ec55d2dc0ab"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "netplay",
+      "group": "arena",
+      "peer": 0,
+      "label": "seat0 left",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\F89-arena\\peer-0-seat-0-left-native-wall.png",
+        "bytes": 2074543,
+        "sha256": "30a8e9345073330ff2fa67c8067eadfab731279d600ad110341de33e96a0c8f5"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "netplay",
+      "group": "arena",
+      "peer": 1,
+      "label": "seat0 left",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\F89-arena\\peer-1-seat-0-left-native-wall.png",
+        "bytes": 2074543,
+        "sha256": "179ff3f9bbb221ddccdb335317824419a93080094971173d0eb64634f214b24b"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "netplay",
+      "group": "arena",
+      "peer": 0,
+      "label": "seat0 right",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\F89-arena\\peer-0-seat-0-right-native-wall.png",
+        "bytes": 2074543,
+        "sha256": "5235b7a15e922f2c6f74b58dc5b140257d055273f129fdfa85e5c57e1b37f235"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "netplay",
+      "group": "arena",
+      "peer": 1,
+      "label": "seat0 right",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\F89-arena\\peer-1-seat-0-right-native-wall.png",
+        "bytes": 2074543,
+        "sha256": "6057512ea2dae8af0637c2386f321a10bcd70f2e1cd1b0cb9df2bc2bdc9668e1"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "netplay",
+      "group": "arena",
+      "peer": 0,
+      "label": "seat1 left",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\F89-arena\\peer-0-seat-1-left-native-wall.png",
+        "bytes": 2074543,
+        "sha256": "43a928eafcd3782e14b9aecce393c8ab8db9e7cf81b5a3bd1aaee2dd6728b9a3"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "netplay",
+      "group": "arena",
+      "peer": 1,
+      "label": "seat1 left",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\F89-arena\\peer-1-seat-1-left-native-wall.png",
+        "bytes": 2074543,
+        "sha256": "bbbc42b04a9679f82759f3870e426e6f0620d214456f59fdbb0baa95ab7bb4c2"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "netplay",
+      "group": "arena",
+      "peer": 0,
+      "label": "seat1 right",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\F89-arena\\peer-0-seat-1-right-native-wall.png",
+        "bytes": 2074543,
+        "sha256": "60fe7cb353ba6fc549c09971f34887aa8a3e0ac33b8d08d17f2b9bc2d1b73d9f"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    },
+    {
+      "mode": "netplay",
+      "group": "arena",
+      "peer": 1,
+      "label": "seat1 right",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Investigator-netplay-v70-root-v3\\intro-admission\\F89-arena\\peer-1-seat-1-right-native-wall.png",
+        "bytes": 2074543,
+        "sha256": "4d32957a10d490d2048a12840d9f2c05a8618ee5c3b8ddf9dce72ef00ae0def4"
+      },
+      "review": "Root inspected actual composed output. Native conversation/bodies and physical-wall endpoints corroborated by raw state; normal overlap, native hurt/flash and viewport/HUD clipping retained. Corrupt scenery and garbled dialogue portraits do not qualify F9 or general rendering."
+    }
+  ],
+  "source_terrain": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F89-original-Amazon-terrain-v70-root-v1.json",
+    "bytes": 8300,
+    "sha256": "7b77d4a46fbddce7e86f195a51a393fba0ca1f07e4a95c94fb2b9f9805616605"
+  },
+  "limits": [
+    "Only frozen F8 and F89 close on identical7f59990 LOCAL+NET; no additional native-content audit, boss defeat, victory/departure/selector, roster/configuration or general rendering credit.",
+    "F8 actually keeps healthy X outside the last door while Zero earns original Yammark conversation. Native phase3 temporarily hides outgoing X; lifecycleALIVE, healthy pre-scene identity, twelve real dialogue offers, later both visible/healthy and separate native controls prove return.",
+    "LOCAL raw F8 readiness remains false: the first released X sample is atY2074/ground0 (standing offset2+radius19 gives foot2095), while Zero offset3 gives foot2096. Later actual X naturally resolvesY2075 and both full22pixel feet match source/live floor2096. Frozen F8 requires returned bodies/controls, not instantaneous first-publication ground. No raw evidence is rewritten.",
+    "F89 physical clear width is320px (5120..5439), bounded by walls5119/5440 andfloor2096; camera envelope is352px. Both heroes hold nativeLeft/Right to standing centers5131/~5429, full-body/source/live collision, six stable native updates, camera limits5136/5104/1904/1904. Two-pixel wall tolerance allows ordinary integer/fractional resolution, not an interior wall.",
+    "Native hurt/HP loss, body overlap, blue damage flash and far-actor viewport/HUD clipping remain. Scenery and dialogue portraits visibly corrupt; no font/palette/F9/general-rendering pass. Source, diagnostics, RPC and images are separate asynchronous observations, not an exact collision-instruction timestamp.",
+    "Pre-agreed lab-only AmazonCP2 bypasses prior traversal; original initializer runs once and actual last door, dialogue, fill/release and mechanics are earned afterward. No protection, position/contact/HP/ammo/pose/clock/outcome writes during mechanics; all online mailbox mutation remains forbidden.",
+    "Four LOCAL and fifteen NET parent gates pass, including declared profile/source/image binding, four resolved full core/modCRC windows, private cards, all three owned exits0 and strict fixture-tainted ordinary capture/replay refusals. Earlier v1 callback-alias and v2 native-spawnflag guard failures remain preserved."
+  ],
+  "bypasses": [
+    "Pre-agreed original AmazonCP2 reachability only."
+  ]
+}

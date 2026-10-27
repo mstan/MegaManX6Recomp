@@ -5187,17 +5187,94 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "7f59990e052422aa845837b26470117f57de3c72",
+            "build_identity": {
+              "executable_sha256": "c7c981e384a4b8000a5866f7a6128b330f8f6166330d04bb4d914a06c6abd223",
+              "compiled_manifest_sha256": "4bbf3327e831a652ddbef3ce5aa9e015f9f4ddc1a64f9f08e347096aa7493ff3",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "transport": "one owned LOCAL process",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original AmazonCP2",
+              "cameras": "split"
+            },
+            "action": "Complete real Yammark conversation with healthy X outside last door, return both bodies and accept separate native Right inputs.",
+            "outcome": "Full frozen contract passed through actual native observations and independent root image review; early LOCAL F8 ground predicate and rendering limits retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-7f59990-F8-F89-local-netplay-reviewed.json",
+                "sha256": "e961e801effc4f5768f362dcb145de1a6b9e0b8602fbcde2cb35eb463fa2d01e"
+              }
+            ],
+            "limits": [
+              "Only frozen F8 and F89 close on identical7f59990 LOCAL+NET; no additional native-content audit, boss defeat, victory/departure/selector, roster/configuration or general rendering credit.",
+              "F8 actually keeps healthy X outside the last door while Zero earns original Yammark conversation. Native phase3 temporarily hides outgoing X; lifecycleALIVE, healthy pre-scene identity, twelve real dialogue offers, later both visible/healthy and separate native controls prove return.",
+              "LOCAL raw F8 readiness remains false: the first released X sample is atY2074/ground0 (standing offset2+radius19 gives foot2095), while Zero offset3 gives foot2096. Later actual X naturally resolvesY2075 and both full22pixel feet match source/live floor2096. Frozen F8 requires returned bodies/controls, not instantaneous first-publication ground. No raw evidence is rewritten.",
+              "F89 physical clear width is320px (5120..5439), bounded by walls5119/5440 andfloor2096; camera envelope is352px. Both heroes hold nativeLeft/Right to standing centers5131/~5429, full-body/source/live collision, six stable native updates, camera limits5136/5104/1904/1904. Two-pixel wall tolerance allows ordinary integer/fractional resolution, not an interior wall.",
+              "Native hurt/HP loss, body overlap, blue damage flash and far-actor viewport/HUD clipping remain. Scenery and dialogue portraits visibly corrupt; no font/palette/F9/general-rendering pass. Source, diagnostics, RPC and images are separate asynchronous observations, not an exact collision-instruction timestamp.",
+              "Pre-agreed lab-only AmazonCP2 bypasses prior traversal; original initializer runs once and actual last door, dialogue, fill/release and mechanics are earned afterward. No protection, position/contact/HP/ammo/pose/clock/outcome writes during mechanics; all online mailbox mutation remains forbidden.",
+              "Four LOCAL and fifteen NET parent gates pass, including declared profile/source/image binding, four resolved full core/modCRC windows, private cards, all three owned exits0 and strict fixture-tainted ordinary capture/replay refusals. Earlier v1 callback-alias and v2 native-spawnflag guard failures remain preserved."
+            ],
+            "bypasses": [
+              "Pre-agreed original AmazonCP2 reachability only."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "7f59990e052422aa845837b26470117f57de3c72",
+            "build_identity": {
+              "executable_sha256": "c7c981e384a4b8000a5866f7a6128b330f8f6166330d04bb4d914a06c6abd223",
+              "compiled_manifest_sha256": "4bbf3327e831a652ddbef3ce5aa9e015f9f4ddc1a64f9f08e347096aa7493ff3",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "transport": "two owned loopback peers",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original AmazonCP2",
+              "cameras": "independent"
+            },
+            "action": "Complete real Yammark conversation with healthy X outside last door, return both bodies and accept separate native Right inputs.",
+            "outcome": "Full frozen contract passed through actual native observations and independent root image review; early LOCAL F8 ground predicate and rendering limits retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-7f59990-F8-F89-local-netplay-reviewed.json",
+                "sha256": "e961e801effc4f5768f362dcb145de1a6b9e0b8602fbcde2cb35eb463fa2d01e"
+              }
+            ],
+            "limits": [
+              "Only frozen F8 and F89 close on identical7f59990 LOCAL+NET; no additional native-content audit, boss defeat, victory/departure/selector, roster/configuration or general rendering credit.",
+              "F8 actually keeps healthy X outside the last door while Zero earns original Yammark conversation. Native phase3 temporarily hides outgoing X; lifecycleALIVE, healthy pre-scene identity, twelve real dialogue offers, later both visible/healthy and separate native controls prove return.",
+              "LOCAL raw F8 readiness remains false: the first released X sample is atY2074/ground0 (standing offset2+radius19 gives foot2095), while Zero offset3 gives foot2096. Later actual X naturally resolvesY2075 and both full22pixel feet match source/live floor2096. Frozen F8 requires returned bodies/controls, not instantaneous first-publication ground. No raw evidence is rewritten.",
+              "F89 physical clear width is320px (5120..5439), bounded by walls5119/5440 andfloor2096; camera envelope is352px. Both heroes hold nativeLeft/Right to standing centers5131/~5429, full-body/source/live collision, six stable native updates, camera limits5136/5104/1904/1904. Two-pixel wall tolerance allows ordinary integer/fractional resolution, not an interior wall.",
+              "Native hurt/HP loss, body overlap, blue damage flash and far-actor viewport/HUD clipping remain. Scenery and dialogue portraits visibly corrupt; no font/palette/F9/general-rendering pass. Source, diagnostics, RPC and images are separate asynchronous observations, not an exact collision-instruction timestamp.",
+              "Pre-agreed lab-only AmazonCP2 bypasses prior traversal; original initializer runs once and actual last door, dialogue, fill/release and mechanics are earned afterward. No protection, position/contact/HP/ammo/pose/clock/outcome writes during mechanics; all online mailbox mutation remains forbidden.",
+              "Four LOCAL and fifteen NET parent gates pass, including declared profile/source/image binding, four resolved full core/modCRC windows, private cards, all three owned exits0 and strict fixture-tainted ordinary capture/replay refusals. Earlier v1 callback-alias and v2 native-spawnflag guard failures remain preserved."
+            ],
+            "bypasses": [
+              "Pre-agreed original AmazonCP2 reachability only."
+            ]
+          }
+        ],
+        "limitations": "Exact7f59990 LOCAL+NET only. Real distant-living-partner conversation, both returned bodies and separate controls; first LOCAL X ground0/foot2095 preserved, later natural fullfeet2096. AgreedCP2 reachability bypass, native hurt/overlap, corrupt scenery/portraits and asynchronous observation limits retained. All final parent/profile/CRC/cards/ownedexit/refusal gates pass. No victory/progression/general-rendering credit."
       }
     },
     {
@@ -11438,17 +11515,94 @@
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "7f59990e052422aa845837b26470117f57de3c72",
+            "build_identity": {
+              "executable_sha256": "c7c981e384a4b8000a5866f7a6128b330f8f6166330d04bb4d914a06c6abd223",
+              "compiled_manifest_sha256": "4bbf3327e831a652ddbef3ce5aa9e015f9f4ddc1a64f9f08e347096aa7493ff3",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "transport": "one owned LOCAL process",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original AmazonCP2",
+              "cameras": "split"
+            },
+            "action": "After actual Investigator door/dialogue, walk each hero to both source-qualified physical walls with native terrain and camera bounds.",
+            "outcome": "Full frozen contract passed through actual native observations and independent root image review; early LOCAL F8 ground predicate and rendering limits retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-7f59990-F8-F89-local-netplay-reviewed.json",
+                "sha256": "e961e801effc4f5768f362dcb145de1a6b9e0b8602fbcde2cb35eb463fa2d01e"
+              }
+            ],
+            "limits": [
+              "Only frozen F8 and F89 close on identical7f59990 LOCAL+NET; no additional native-content audit, boss defeat, victory/departure/selector, roster/configuration or general rendering credit.",
+              "F8 actually keeps healthy X outside the last door while Zero earns original Yammark conversation. Native phase3 temporarily hides outgoing X; lifecycleALIVE, healthy pre-scene identity, twelve real dialogue offers, later both visible/healthy and separate native controls prove return.",
+              "LOCAL raw F8 readiness remains false: the first released X sample is atY2074/ground0 (standing offset2+radius19 gives foot2095), while Zero offset3 gives foot2096. Later actual X naturally resolvesY2075 and both full22pixel feet match source/live floor2096. Frozen F8 requires returned bodies/controls, not instantaneous first-publication ground. No raw evidence is rewritten.",
+              "F89 physical clear width is320px (5120..5439), bounded by walls5119/5440 andfloor2096; camera envelope is352px. Both heroes hold nativeLeft/Right to standing centers5131/~5429, full-body/source/live collision, six stable native updates, camera limits5136/5104/1904/1904. Two-pixel wall tolerance allows ordinary integer/fractional resolution, not an interior wall.",
+              "Native hurt/HP loss, body overlap, blue damage flash and far-actor viewport/HUD clipping remain. Scenery and dialogue portraits visibly corrupt; no font/palette/F9/general-rendering pass. Source, diagnostics, RPC and images are separate asynchronous observations, not an exact collision-instruction timestamp.",
+              "Pre-agreed lab-only AmazonCP2 bypasses prior traversal; original initializer runs once and actual last door, dialogue, fill/release and mechanics are earned afterward. No protection, position/contact/HP/ammo/pose/clock/outcome writes during mechanics; all online mailbox mutation remains forbidden.",
+              "Four LOCAL and fifteen NET parent gates pass, including declared profile/source/image binding, four resolved full core/modCRC windows, private cards, all three owned exits0 and strict fixture-tainted ordinary capture/replay refusals. Earlier v1 callback-alias and v2 native-spawnflag guard failures remain preserved."
+            ],
+            "bypasses": [
+              "Pre-agreed original AmazonCP2 reachability only."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "7f59990e052422aa845837b26470117f57de3c72",
+            "build_identity": {
+              "executable_sha256": "c7c981e384a4b8000a5866f7a6128b330f8f6166330d04bb4d914a06c6abd223",
+              "compiled_manifest_sha256": "4bbf3327e831a652ddbef3ce5aa9e015f9f4ddc1a64f9f08e347096aa7493ff3",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "transport": "two owned loopback peers",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original AmazonCP2",
+              "cameras": "independent"
+            },
+            "action": "After actual Investigator door/dialogue, walk each hero to both source-qualified physical walls with native terrain and camera bounds.",
+            "outcome": "Full frozen contract passed through actual native observations and independent root image review; early LOCAL F8 ground predicate and rendering limits retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-7f59990-F8-F89-local-netplay-reviewed.json",
+                "sha256": "e961e801effc4f5768f362dcb145de1a6b9e0b8602fbcde2cb35eb463fa2d01e"
+              }
+            ],
+            "limits": [
+              "Only frozen F8 and F89 close on identical7f59990 LOCAL+NET; no additional native-content audit, boss defeat, victory/departure/selector, roster/configuration or general rendering credit.",
+              "F8 actually keeps healthy X outside the last door while Zero earns original Yammark conversation. Native phase3 temporarily hides outgoing X; lifecycleALIVE, healthy pre-scene identity, twelve real dialogue offers, later both visible/healthy and separate native controls prove return.",
+              "LOCAL raw F8 readiness remains false: the first released X sample is atY2074/ground0 (standing offset2+radius19 gives foot2095), while Zero offset3 gives foot2096. Later actual X naturally resolvesY2075 and both full22pixel feet match source/live floor2096. Frozen F8 requires returned bodies/controls, not instantaneous first-publication ground. No raw evidence is rewritten.",
+              "F89 physical clear width is320px (5120..5439), bounded by walls5119/5440 andfloor2096; camera envelope is352px. Both heroes hold nativeLeft/Right to standing centers5131/~5429, full-body/source/live collision, six stable native updates, camera limits5136/5104/1904/1904. Two-pixel wall tolerance allows ordinary integer/fractional resolution, not an interior wall.",
+              "Native hurt/HP loss, body overlap, blue damage flash and far-actor viewport/HUD clipping remain. Scenery and dialogue portraits visibly corrupt; no font/palette/F9/general-rendering pass. Source, diagnostics, RPC and images are separate asynchronous observations, not an exact collision-instruction timestamp.",
+              "Pre-agreed lab-only AmazonCP2 bypasses prior traversal; original initializer runs once and actual last door, dialogue, fill/release and mechanics are earned afterward. No protection, position/contact/HP/ammo/pose/clock/outcome writes during mechanics; all online mailbox mutation remains forbidden.",
+              "Four LOCAL and fifteen NET parent gates pass, including declared profile/source/image binding, four resolved full core/modCRC windows, private cards, all three owned exits0 and strict fixture-tainted ordinary capture/replay refusals. Earlier v1 callback-alias and v2 native-spawnflag guard failures remain preserved."
+            ],
+            "bypasses": [
+              "Pre-agreed original AmazonCP2 reachability only."
+            ]
+          }
+        ],
+        "limitations": "Exact7f59990 LOCAL+NET only. Both heroes traverse source/live physical320px arena to both stable native wall contacts, fullfeet2096 and original camera limits; integer wall tolerance2px. AgreedCP2 reachability bypass, native hurt/overlap, corrupt scenery/portraits and asynchronous observation limits retained. All final parent/profile/CRC/cards/ownedexit/refusal gates pass. No victory/progression/general-rendering credit."
       }
     },
     {
