@@ -78,7 +78,7 @@ label = "Separate views"
 feature = "prototype"
 id = "cameras"
 label = "Netplay cameras"
-description = "Use a shared view, or let each player follow their own character. Both players must use the same setting."
+description = "Use a shared view, follow your own character, or show both characters in side-by-side views. Both players must use the same setting."
 group = "Display"
 type = "choice"
 default = "unified"
@@ -90,3 +90,7 @@ label = "Shared view"
 [[option.choice]]
 value = "independent"
 label = "Separate views"
+
+[[option.choice]]
+value = "split"
+label = "Side by side"

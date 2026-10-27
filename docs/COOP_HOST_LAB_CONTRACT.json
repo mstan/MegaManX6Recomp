@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 9,
+  "revision": 10,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v26",
+    "title_compatibility": "mmx6-x-zero-delay-v27",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -219,5 +219,13 @@
     "progression": "Wrap original outer actor80050DFC across native phases. Phase1 projects an unacknowledged admitted body so original50540 cannot open early. Mirror original FE/box-clear body commands only after real negative acknowledgements. Phase3 advances each admitted living body by original door84 fixed-point delta, with trailing body resident for original camera/close logic. Native animation, camera, sound, drawing and world execute once. Native release0 restores each original standing box through3CCBC.",
     "state": "Exact typed stage-door slot, authored placement origin and authenticated living-member mask serialize/digest. Live allocation/type/origin are revalidated; a missing or reused door with pending requests rejects instead of inventing release or continuing motion. Reject malformed slot/origin/ownership/shared-clear combinations. Both option is fixed snapshot identity. Schema11 is build-specific; no migration.",
     "qualification": "Fresh exact-candidate LOCAL and NET full-box crossing/control, waiting movement/menu and absent/fallen policy checks remain required. Source/tests and prior candidates grant no pass. Retain source/profile/CRC, native cards, owned cleanup and strict fixture capture/replay refusals."
+  },
+  "title_changes_v27": {
+    "scope": "Elective online cameras=split presents both native4:3 panes in an8:3 canvas on each peer for frozenF173/F177. Shared view remains default; cameras=independent remains one own-character view per peer; offline local_cameras policy is unchanged.",
+    "permission": "Only selected online split opts into the existing reversible netplay render-pass API before enabling the local-pair canvas. Session reset revokes permission; other branches do not revoke another trusted plugin request.",
+    "simulation": "Existing private per-body draw-only callbacks, complete guest/device/VRAM and mutable host-context restoration, state-leak counter and atomic pair publication remain. Shared simulation advances once. Resimulation, rewind, LS/replay and unsupported backend refusals remain SDK gates.",
+    "fallback": "Selected8:3 canvas persists during native shared scenes and native owner menus. Private commits suspend and resume from appropriate cameras; no stale private frame substitution.",
+    "identity": "Typed netplay cameras choice is part of the existing committed effective plan. Both peers must select the same value and exact candidate/profile; no weakened build checks, new simulation field or save migration.",
+    "qualification": "Fresh exact-candidate LOCAL+NET pane aspect/follow, native world-once, native menu fallback/resize/resume and per-peer composed review required. Existing LOCAL passes or SDK fixtures do not qualify this build."
   }
 }

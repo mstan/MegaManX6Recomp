@@ -68,6 +68,7 @@ static void prepare_view(CPUState *cpu,int online,int split) {
     weather_probe=weather_world_updates=weather_draws=0;
     inside=player_call=stage_call=zero_world=world_render=hud_call=ride_call=pickup_call=solid_call=0;
     private_draw=private_seat=view_call=zero_projected=0;local_split=split;independent_views=1;
+    if(online && split)CHECK(psx_mod_set_render_pass_netplay(1));
     view_buffer=VIEW_BUFFER;view_pending=view_valid=1;view_menu_history=0;
     psx_mod_write_word(0x8009B7A0u,view_buffer);
     psx_mod_write_half(view_buffer+0x18,320);psx_mod_write_half(view_buffer+0x1A,240);
@@ -109,7 +110,11 @@ static void defaults_and_scope(void) {
     mmx6_view_sdk.online=1;CHECK(!psx_mod_set_local_pair_presentation(1));
     CHECK(!psx_mod_render_local_pair(&cpu,&pair,forbidden_callback,NULL)); /* netplay */
     mmx6_view_sdk.cameras="independent";independent_activate();
-    CHECK(independent_views && !local_split && !mmx6_view_sdk.pair_enabled);
+    CHECK(independent_views && !local_split && !mmx6_view_sdk.pair_enabled && !mmx6_view_sdk.netplay_allowed);
+    mmx6_view_sdk.cameras="split";independent_activate();
+    CHECK(independent_views && local_split && mmx6_view_sdk.pair_enabled && mmx6_view_sdk.netplay_allowed);
+    mmx6_view_sdk_reset();mmx6_view_sdk.online=1;independent_activate();
+    CHECK(!independent_views && !local_split && !mmx6_view_sdk.pair_enabled && !mmx6_view_sdk.netplay_allowed);
 }
 static void reentry(void) {
     CPUState cpu;prepare_view(&cpu,0,1);
@@ -257,5 +262,6 @@ int main(void) {
     native_shared_weather_frames(0,1);native_shared_weather_frames(1,0);
     presentation_restore(0,1,0,0);presentation_restore(0,1,1,0);presentation_restore(0,1,0,1);
     presentation_restore(1,0,0,0);presentation_restore(1,0,1,0);presentation_restore(1,0,0,1);
+    presentation_restore(1,1,0,0);presentation_restore(1,1,1,0);presentation_restore(1,1,0,1);
     clear_banks();puts("private-view typed defaults, scope, callback/abort host restoration and reentry contracts passed (modeled rendering)");return 0;
 }

@@ -186,10 +186,18 @@ static int independent_present(CPUState *cpu,uint32_t address) {
 static void independent_activate(void) {
     char option[24];int online=psx_mod_netplay_is_active();
     local_split=!online && psx_mod_current_option_value("local_cameras",option,sizeof option) && !strcmp(option,"split");
-    independent_views=local_split || (online && psx_mod_current_option_value("cameras",option,sizeof option) && !strcmp(option,"independent"));
+    int own_view=0;
+    if(online && psx_mod_current_option_value("cameras",option,sizeof option)) {
+        local_split=!strcmp(option,"split");
+        own_view=!strcmp(option,"independent");
+    }
+    independent_views=local_split || own_view;
     private_draw=private_seat=view_valid=view_pending=view_call=view_menu_history=0;
     view_frame=view_buffer=0;memset(view_cameras,0,sizeof view_cameras);
     if(independent_views)(void)psx_mod_set_fixed_display_aspect(4,3);
+    /* The session reset revokes this SDK permission. Request it only for
+     * the explicitly selected online pair, before enabling its canvas. */
+    if(online && local_split)(void)psx_mod_set_render_pass_netplay(1);
     (void)psx_mod_set_local_pair_presentation((int)local_split);
     if(!psx_mod_set_function_replacement(VIEW_DRAW_OT,independent_present))failed=1;
 }

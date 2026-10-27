@@ -20,8 +20,11 @@ int psx_mod_set_fixed_display_aspect(uint32_t n,uint32_t d) {
 }
 int psx_mod_set_local_pair_presentation(int enabled) {
     if(enabled!=0 && enabled!=1)return 0;
-    if(enabled && mmx6_view_sdk.online)return 0;
+    if(enabled && mmx6_view_sdk.online && !mmx6_view_sdk.netplay_allowed)return 0;
     mmx6_view_sdk.pair_enabled=enabled;return 1;
+}
+int psx_mod_set_render_pass_netplay(int enabled) {
+    mmx6_view_sdk.netplay_allowed=!!enabled;return 1;
 }
 int psx_mod_render_local_view(CPUState *cpu,const PSXModRenderPass *r,PSXModRenderPassFn fn,void *user) {
     ++mmx6_view_sdk.view_calls;
@@ -33,7 +36,7 @@ int psx_mod_render_local_view(CPUState *cpu,const PSXModRenderPass *r,PSXModRend
 }
 int psx_mod_render_local_pair(CPUState *cpu,const PSXModStereoFrame *f,PSXModStereoFn fn,void *user) {
     ++mmx6_view_sdk.pair_calls;
-    if(mmx6_view_sdk.online || !cpu || !f || f->struct_size!=sizeof *f ||
+    if((mmx6_view_sdk.online && !mmx6_view_sdk.netplay_allowed) || !cpu || !f || f->struct_size!=sizeof *f ||
        !f->w || !f->h || f->period_vblanks<1 || f->period_vblanks>8 ||
        !fn || mmx6_view_sdk.busy || !mmx6_view_sdk.transaction)return 0;
     mmx6_view_sdk.busy=1;

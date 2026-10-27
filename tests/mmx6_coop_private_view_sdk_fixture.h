@@ -7,7 +7,7 @@
 typedef int (*Mmx6ViewFixtureTransaction)(CPUState *,PSXModRenderPassFn,void *,uint32_t);
 typedef struct {
     const char *local_cameras,*cameras;
-    int online,local_port,pair_enabled,busy;
+    int online,local_port,pair_enabled,busy,netplay_allowed;
     unsigned pair_calls,view_calls,aspect_calls;
     Mmx6ViewFixtureTransaction transaction;
 } Mmx6ViewSdkFixture;
