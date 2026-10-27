@@ -22,13 +22,22 @@ enum { CHECKPOINT_OK=0,CHECKPOINT_FORBIDDEN=1,CHECKPOINT_UNKNOWN=2,
 enum { CHECKPOINT_OFFLINE=0,CHECKPOINT_AGREED=1,
     CHECKPOINT_LAB_WAITING=0,CHECKPOINT_LAB_ARMED=1,CHECKPOINT_LAB_CONSUMED=2 };
 enum { CHECKPOINT_LAB_NONCE=0x4C435032u }; /* Immutable intro CP2 request identity. */
+enum { CHECKPOINT_LAB_AMAZON_NONCE=0x4C434130u }; /* Immutable Amazon CP0 identity. */
 typedef struct { unsigned phase,index; uint32_t nonce; unsigned authority; } Mmx6CheckpointPending;
 static Mmx6CheckpointPending checkpoint_pending;
 static unsigned checkpoint_lab_option,checkpoint_lab_state,checkpoint_lab_previous;
 
+static unsigned checkpoint_lab_index(void) {
+    return checkpoint_lab_option==1?2:checkpoint_lab_option==2?3:115;
+}
+static uint32_t checkpoint_lab_nonce(void) {
+    return checkpoint_lab_option==1?CHECKPOINT_LAB_NONCE:
+        checkpoint_lab_option==2?CHECKPOINT_LAB_AMAZON_NONCE:0;
+}
+
 static int checkpoint_lab_authorized(void) {
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
-    if(!checkpoint_lab_option)return 0;
+    if(checkpoint_lab_index()>=115)return 0;
     if(!psx_mod_netplay_is_active())return 1; /* Same lab candidate's LOCAL lane. */
     PSXHostSelection selected;
     const uint8_t expected[32]=MMX6_HOST_LAB_QUALIFICATION_BYTES;
@@ -77,6 +86,7 @@ static void checkpoint_reset(void) {
     char option[24];
     if(psx_mod_option_value("mmx6.local-coop","prototype","lab_checkpoint",option,sizeof option)) {
         if(!strcmp(option,"intro_cp2"))checkpoint_lab_option=1;
+        else if(!strcmp(option,"amazon_cp0"))checkpoint_lab_option=2;
         else if(strcmp(option,"off"))failed=1;
     }
 #endif
@@ -105,7 +115,8 @@ static int checkpoint_request(unsigned stage,unsigned section,unsigned cp,uint32
     else if(!entry || !nonce)reason=CHECKPOINT_UNKNOWN;
     else if(!entry->campaign)reason=CHECKPOINT_NAMESPACE;
     else if(!checkpoint_safe_boundary())reason=CHECKPOINT_UNSAFE;
-    else if(authority==CHECKPOINT_AGREED && (index!=2 || nonce!=CHECKPOINT_LAB_NONCE))reason=CHECKPOINT_UNKNOWN;
+    else if(authority==CHECKPOINT_AGREED &&
+        (index!=checkpoint_lab_index() || nonce!=checkpoint_lab_nonce()))reason=CHECKPOINT_UNKNOWN;
     else if(!checkpoint_source(entry))reason=CHECKPOINT_SOURCE;
     /* Reject before any authoritative game write. These are diagnostic receipts. */
     psx_mod_write_byte(diagnostic+0x50,0);
@@ -171,7 +182,11 @@ static int checkpoint_lab_boundary(uint16_t raw) {
     if(psx_mod_read_byte(PLAY+12) || psx_mod_read_byte(PLAY+13) || psx_mod_read_byte(PLAY+0x1D)) {
         checkpoint_status(CHECKPOINT_REJECTED,CHECKPOINT_ORDER);return 0;
     }
-    return checkpoint_request(0,0,2,CHECKPOINT_LAB_NONCE,CHECKPOINT_AGREED);
+    unsigned index=checkpoint_lab_index();
+    if(index>=115) {checkpoint_status(CHECKPOINT_REJECTED,CHECKPOINT_UNKNOWN);return 0;}
+    const Mmx6Checkpoint *entry=&checkpoint_inventory[index];
+    return checkpoint_request(entry->stage,entry->section,entry->checkpoint,
+        checkpoint_lab_nonce(),CHECKPOINT_AGREED);
 #else
     (void)raw;return 0;
 #endif

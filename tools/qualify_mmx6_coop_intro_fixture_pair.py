@@ -20,20 +20,21 @@ import qualify_mmx6_coop_pair as parent
 SUCCESS = 'agreed_fixture_native_intro_observations_complete_review_pending'
 
 
-def select_checkpoint(directory, *, enabled):
+def select_checkpoint(directory, *, enabled, option=intro.OPTION):
     """Fresh prelaunch preferences only; the SDK negotiates this typed option."""
     directory = Path(directory)
     catalog = tomllib.loads((directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
     options = [o for o in catalog.get('option', []) if o.get('id') == 'lab_checkpoint']
     if (len(options) != 1 or options[0].get('default') != 'off' or options[0].get('feature') != 'prototype'
-            or {c['value'] for c in options[0].get('choice', [])} != {'off', intro.OPTION}):
+            or {c['value'] for c in options[0].get('choice', [])} != {'off', intro.OPTION, 'amazon_cp0'}
+            or option not in (intro.OPTION, 'amazon_cp0')):
         raise ValueError('Staged image lacks the private typed LAB checkpoint catalog')
     path = directory/'mods/state.toml'; text = path.read_text(encoding='utf-8')
     anchor = 'id = "prototype"\nenabled = '+str(enabled).lower()+'\n'
     if text.count(anchor) != 1 or 'lab_checkpoint' in text:
         raise ValueError('Unexpected fresh co-op feature preferences')
-    path.write_bytes(text.replace(anchor, anchor+'[feature.values]\nlab_checkpoint = "'+intro.OPTION+'"\n').encode('utf-8'))
-    return dict(option=intro.OPTION, state_sha256=preparation.sha256(path),
+    path.write_bytes(text.replace(anchor, anchor+'[feature.values]\nlab_checkpoint = "'+option+'"\n').encode('utf-8'))
+    return dict(option=option, state_sha256=preparation.sha256(path),
         catalog_sha256=preparation.sha256(directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml'))
 
 

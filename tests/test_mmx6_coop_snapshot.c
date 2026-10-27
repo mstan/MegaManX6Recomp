@@ -396,16 +396,19 @@ static void roundtrip_and_malformed(void){
     free(wire);free(bad);
 }
 static void agreed_latch_snapshot(void) {
-    checkpoint_lab_option=1;
-    for(unsigned state=CHECKPOINT_LAB_ARMED;state<=CHECKPOINT_LAB_CONSUMED;++state) {
-        checkpoint_lab_state=state;checkpoint_lab_previous=1;
-        uint32_t length=snapshot_bytes(),digest=state_digest();uint8_t *wire=malloc(length);CHECK(wire);
-        CHECK(snapshot_write(wire,length));
-        checkpoint_lab_option=0;CHECK(!snapshot_validate(wire,length));checkpoint_lab_option=1;
-        checkpoint_lab_state=checkpoint_lab_previous=0;
-        CHECK(snapshot_validate(wire,length));snapshot_read(wire,length);
-        CHECK(checkpoint_lab_state==state && checkpoint_lab_previous==1 && state_digest()==digest);
-        free(wire);
+    for(unsigned option=1;option<=2;++option) {
+        checkpoint_lab_option=option;
+        for(unsigned state=CHECKPOINT_LAB_ARMED;state<=CHECKPOINT_LAB_CONSUMED;++state) {
+            checkpoint_lab_state=state;checkpoint_lab_previous=1;
+            uint32_t length=snapshot_bytes(),digest=state_digest();uint8_t *wire=malloc(length);CHECK(wire);
+            CHECK(snapshot_write(wire,length));
+            checkpoint_lab_option=0;CHECK(!snapshot_validate(wire,length));
+            checkpoint_lab_option=3-option;CHECK(!snapshot_validate(wire,length));checkpoint_lab_option=option;
+            checkpoint_lab_state=checkpoint_lab_previous=0;
+            CHECK(snapshot_validate(wire,length));snapshot_read(wire,length);
+            CHECK(checkpoint_lab_state==state && checkpoint_lab_previous==1 && state_digest()==digest);
+            free(wire);
+        }
     }
     checkpoint_lab_option=checkpoint_lab_state=checkpoint_lab_previous=0;
 }

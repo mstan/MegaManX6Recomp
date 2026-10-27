@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 5,
+  "revision": 6,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v22",
+    "title_compatibility": "mmx6-x-zero-delay-v23",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -187,5 +187,14 @@
     "snapshot_schema": 9,
     "recording": "Sticky GAME_MAILBOX taint is retained; strict ordinary-input capture/replay must refuse. Fixture parent must disclose bypass and preserve matching resolved CRC, exact-image/profile, cards and owned cleanup.",
     "fresh_native_qualification": "Required on this exact image. Source/unit checks and retained prior-candidate evidence grant no comparison pass."
+  },
+  "title_changes_v23": {
+    "scope": "Extend existing private agreed prerequisite with exactly Amazon1/0/CP0 for named F204/F64/F49 comparisons; no route, retry, progression or native-content audit qualification.",
+    "catalog": "Only MMX6_ENABLE_LOOPBACK_HOST_LAB generated catalogs expose lab_checkpoint=off|intro_cp2|amazon_cp0, defaultoff; normal/release catalogs omit it.",
+    "authority": "Same accepted one-shot P2 L3+R3 after ordinary intro baseline at grounded original0/0/CP0 boundary. Exact settled profile revision6/semanticqualification remains required online; all online mailbox mutation including command8 remains forbidden.",
+    "native_entry": "Existing original mode8/9 entry and original initializer once: intro index2 tuple0/0/2 record80072150 nonce4C435032, or Amazon index3 tuple1/0/0 record80072174 nonce4C434130. Selected immutable option exclusively binds destination/nonce; no direct HP/ammo/position/contact/clock/success writes.",
+    "state": "No new persistent fields or layout; existing fixed option identity distinguishes destinations and existing latch/edge/pendingauthority digest and serializer gates remain. Old-state compatibility is not required.",
+    "recording": "Same sticky GAME_MAILBOX fixture taint; canonical ordinary capture and replay must refuse; retain full resolved core/mod CRC, private cards, image/profile/source binding and owned cleanup.",
+    "qualification": "Actual native LOCAL+NET entry and each named comparison require new exact-candidate evidence; source/test/setup passes add no comparison credit."
   }
 }

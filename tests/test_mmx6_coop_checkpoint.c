@@ -125,6 +125,52 @@ static void agreed_checkpoint_boundary(CPUState *cpu) {
     rejected_checkpoint(cpu,CHECKPOINT_FORBIDDEN); /* Configured lab never authorizes online command8. */
     test_lab_option="off";checkpoint_reset();CHECK(!checkpoint_lab_option && !checkpoint_lab_state && !checkpoint_lab_previous);
 }
+static void agreed_amazon_boundary(CPUState *cpu) {
+    for(int online=0;online<=1;++online) {
+        setup_agreed(cpu,online);test_lab_option="amazon_cp0";checkpoint_reset();
+        CHECK(checkpoint_lab_option==2 && checkpoint_lab_index()==3 &&
+            checkpoint_lab_nonce()==CHECKPOINT_LAB_AMAZON_NONCE);
+        /* A consumed chord cannot authorize a different destination or nonce. */
+        checkpoint_lab_state=CHECKPOINT_LAB_CONSUMED;
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext body=p2;
+        CHECK(!checkpoint_request(0,0,2,CHECKPOINT_LAB_NONCE,CHECKPOINT_AGREED));
+        CHECK(psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_UNKNOWN &&
+            !checkpoint_pending.phase && !checkpoint_test_taint && !guest_calls &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof p2));
+        CHECK(!checkpoint_request(1,0,0,CHECKPOINT_LAB_NONCE,CHECKPOINT_AGREED));
+        CHECK(psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_UNKNOWN && !checkpoint_pending.phase);
+        CHECK(!checkpoint_request(0,0,2,CHECKPOINT_LAB_AMAZON_NONCE,CHECKPOINT_AGREED));
+        CHECK(psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_UNKNOWN && !checkpoint_pending.phase &&
+            !checkpoint_test_taint && !memcmp(before_ram,test_ram,sizeof test_ram));
+        checkpoint_reset();memcpy(before_ram,test_ram,sizeof test_ram);
+        CHECK(!checkpoint_lab_boundary(0) && !checkpoint_pending.phase);
+        CHECK(checkpoint_lab_boundary(6));
+        before_ram[PLAY&0x1FFFFF]=8;before_ram[(PLAY+12)&0x1FFFFF]=1;
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof p2) && !guest_calls);
+        CHECK(checkpoint_pending.phase==1 && checkpoint_pending.index==3 &&
+            checkpoint_pending.authority==CHECKPOINT_AGREED &&
+            checkpoint_pending.nonce==CHECKPOINT_LAB_AMAZON_NONCE &&
+            psx_mod_read_word(diagnostic+0xB8)==0x80072174u &&
+            checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
+        mode9(cpu);checkpoint_native_entry(cpu,0x8001E1BCu);
+        CHECK(checkpoint_pending.phase==2 && !psx_mod_read_byte(PLAY+0x1D) &&
+            psx_mod_read_word(diagnostic+0xB4)==1 && !guest_calls);
+        psx_mod_write_byte(PLAY,10);CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase);
+        CHECK(psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE);
+        CHECK(!checkpoint_lab_boundary(0) && !checkpoint_lab_boundary(6));
+        CHECK(psx_mod_read_word(diagnostic+0xA4)==1);
+        if(online) {
+            setup_agreed(cpu,1);test_lab_option="amazon_cp0";checkpoint_reset();
+            psx_mod_write_byte(diagnostic+0x50,8);rejected_checkpoint(cpu,CHECKPOINT_FORBIDDEN);
+        }
+    }
+    setup_agreed(cpu,1);test_lab_option="amazon_cp0";checkpoint_reset();test_lab_ready=0;
+    memcpy(before_ram,test_ram,sizeof test_ram);
+    CHECK(!checkpoint_lab_boundary(6) && !checkpoint_pending.phase && !checkpoint_test_taint &&
+        !memcmp(before_ram,test_ram,sizeof test_ram));
+    CHECK(psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_FORBIDDEN);
+    test_lab_option="off";checkpoint_reset();
+}
 #endif
 int main(int argc,char **argv) {
     const char *source=argc==2?argv[1]:getenv("MMX6_CONTENT_EXE");
@@ -212,7 +258,7 @@ int main(int argc,char **argv) {
     CHECK(!checkpoint_pending.phase && !psx_mod_read_byte(diagnostic+0x50));
 #endif
 #ifdef MMX6_COOP_AGREED_CHECKPOINT
-    agreed_checkpoint_boundary(&cpu);
+    agreed_checkpoint_boundary(&cpu);agreed_amazon_boundary(&cpu);
 #endif
     puts("private checkpoint actual-plugin ordering, inventory, reset and rejection PASS");return 0;
 }
