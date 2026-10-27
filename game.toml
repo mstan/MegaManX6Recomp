@@ -34,7 +34,7 @@ memcard_dir = "saves"
 # fundamentally unsafe: it changes how many VBlanks/callbacks fall between the
 # game's state transitions, so timing-sensitive titles break. MMX6 proves it —
 # at 4x/instant it wedges at boot because its Psy-Q VSync callback (which ticks a
-# counter the loader busy-waits on, func 0x80060ADC / counter 0x8008C8E4) is torn
+# counter the loader busy-waits on, func 0x80060ADC / counter 0x8007C8E4) is torn
 # down early when the read completes "too fast", so the counter freezes and the
 # wait never returns. (The CD response arbiter + authentic command latencies in
 # cdrom.c are still correct and shipped; they just can't make device-instant

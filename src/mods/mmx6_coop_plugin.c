@@ -1526,9 +1526,17 @@ static void activate(void) {
 }
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
-        "mmx6.local-coop.prototype", "mmx6-x-zero-delay-v6", 0, 0, 1, 7,
-        "mmx6.widescreen", "mmx6.enhancement.seamless-loading",
-        "seamless-loading", "mmx6.seamless"
+        .plugin_id = "mmx6.local-coop.prototype",
+        .compatibility_id = "mmx6-x-zero-delay-v7-modern-sdk",
+        .rollback_supported = 0,
+        .savestates_supported = 0,
+        .skip_bios_intro = 1,
+        .fixed_aspect_mask = 7,
+        .widescreen_plugin_id = "mmx6.widescreen",
+        .requires_retained_texture_banks = 1,
+        .loading_package_id = "mmx6.enhancement.seamless-loading",
+        .loading_feature_id = "seamless-loading",
+        .loading_plugin_id = "mmx6.seamless"
     };
     psx_mod_register_netplay_profile(&netplay_profile);
     psx_mod_register_activation_plugin("mmx6.local-coop.prototype",activate);
