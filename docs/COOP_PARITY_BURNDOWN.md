@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 61 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F8, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F67, F68, F70, F89, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F157, F163, F170, F178, F204, F205, F208), 6 failed, 167 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 62 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F8, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F89, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F157, F163, F170, F178, F204, F205, F208), 6 failed, 166 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,14 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 26
+
+**F66 is closed: 62 passed / 6 failed / 166 unverified (26.5%).**
+The [same-candidate native intro boss/projectile comparison](evidence/mmx6-camera/manifest-bound-3072f22-F66-local-netplay-reviewed.json)
+passes LOCAL and NET. Actual separated views preserve source-correct boss
+and aimed-shot placement; X takes native2HP hits and captured shots retire.
+All final source/profile/CRC/cards/owned-exit checks pass. Corrupt scenery,
+the CP2 prerequisite bypass and the precise private-box/asset limits remain
+explicit. Earlier failed observers are retained. This adds one since61.
 
 **F90 now has a native LOCAL failure: 61 passed / 6 failed / 167 unverified.**
 An [actual guest Investigator kill](evidence/mmx6-scene/manifest-bound-7f59990-F90-guest-kill-local-failed-reviewed.json)

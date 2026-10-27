@@ -10231,17 +10231,96 @@
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "3072f2235eefee4253382024bf537bdef97b605e",
+            "build_identity": {
+              "executable_sha256": "159310d5d9c8f9aa97f50d2834b762b203c1fcf108744892e1ac9ff75a23ac97",
+              "compiled_manifest_sha256": "821e47a8e37e873e49e0f3c77340b3d329e74635d3cfda77b2b2d51be7143ad0",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "views": "LOCALsplit8:3",
+              "input": "ordinary published host pads",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original introCP2"
+            },
+            "action": "Separate living heroes after actual guest-led intro boss admission; follow source-owned aimed shots in native world space through composed drawing, real X hit and native retirement.",
+            "outcome": "Original boss/shot projection follows each authored camera without wrapping; fresh captured subtype2 travels, hits X for2HP and directly retires. All parent/source/profile/CRC/cards/owned-exit gates pass; images personally reviewed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-3072f22-F66-local-netplay-reviewed.json",
+                "sha256": "2acdafc9f8e758de14e6a53a99e5bdcd18b7ff825cb6bbcf67bff5dd8e1e5165"
+              }
+            ],
+            "limits": [
+              "Only frozen F66 closes: original intro D1000, X/P1 and Zero/P2, shared native simulation with LOCAL8:3 native4:3 panes or NET own peer-local4:3 views, muted audio, exact V71 source3072f22/SDK10b9021/UI34b5277/title25/host8.",
+              "Pre-agreed LAB introCP2 and accepted one-shot P2 chord bypass unrelated intro traversal. Actual guest-owned door, original boss fill/release, ordinary separation and every attack/HP/retirement outcome run natively. No online command8, protection, HP/position/scene/camera/token/outcome writes.",
+              "Original cameraXclamp6064..6144 permits the large boss to be visible in both views. Nine composed captures and four atomic LOCAL pairs were personally reviewed; each left/right file is pixel-identical to its reviewed pair half. Boss and projectile placement follows world coordinates, and left-side contact effects do not wrap into Zero's view.",
+              "Actual type1/sub2 is source-owned aimed live ordnance, distinct from decorative subtype0. A genuinely fresh, captured moving subtype2 generation directly reaches native empty-header retirement on every process in the passing runs. Contact does not itself consume this subtype; exact intervening retirement cause is not claimed.",
+              "X takes20->18 LOCAL and17->15 on both NET peers with source-owned attack-box overlap and native pending hurt/recoil. Original strength4/Falcon reduction explains2HP; contemporaneous strength6 body contact would cause3HP under pinned normal context. P2 private Zero hurt-box attribution is explicitly unqualified; no restored X-bank box is borrowed for Zero.",
+              "Twelve original/live code/table/descriptor guards, native pools/camera/PLAY atomic snapshot, separate coherent typed body publication, live loaded-DAT assembly pieces and retained GP0 establish the bounded geometry. No original DAT texture/palette equality or instruction-atomic correspondence with screenshots is claimed. Authored baseY224 may carry native quake offsets.",
+              "Corrupt checkpoint background, ordinary flashes, body/HUD occlusion and separate capture times remain visible. No general rendering, palette restoration, all bosses/rosters, P2-only targeting, defeat/victory/report/selector, ordinary route, native-content audit or cross-machine/OS claim.",
+              "All four LOCAL and15 NET parent gates, four resolved core/mod CRC windows, matching prelaunch profiles, private cards and three graceful owned exit0 pass. Strict fixture-tainted finalized capture and replay remain refused. Earlier failed observer attempts v1..v6 remain unchanged; v7 was reviewed but not launched."
+            ],
+            "bypasses": [
+              "Agreed original introCP2 reachability prerequisite only."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "3072f2235eefee4253382024bf537bdef97b605e",
+            "build_identity": {
+              "executable_sha256": "159310d5d9c8f9aa97f50d2834b762b203c1fcf108744892e1ac9ff75a23ac97",
+              "compiled_manifest_sha256": "821e47a8e37e873e49e0f3c77340b3d329e74635d3cfda77b2b2d51be7143ad0",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "views": "NET peer-local independent4:3",
+              "input": "ordinary published host pads",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original introCP2"
+            },
+            "action": "Separate living heroes after actual guest-led intro boss admission; follow source-owned aimed shots in native world space through composed drawing, real X hit and native retirement.",
+            "outcome": "Original boss/shot projection follows each authored camera without wrapping; fresh captured subtype2 travels, hits X for2HP and directly retires. All parent/source/profile/CRC/cards/owned-exit gates pass; images personally reviewed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-3072f22-F66-local-netplay-reviewed.json",
+                "sha256": "2acdafc9f8e758de14e6a53a99e5bdcd18b7ff825cb6bbcf67bff5dd8e1e5165"
+              }
+            ],
+            "limits": [
+              "Only frozen F66 closes: original intro D1000, X/P1 and Zero/P2, shared native simulation with LOCAL8:3 native4:3 panes or NET own peer-local4:3 views, muted audio, exact V71 source3072f22/SDK10b9021/UI34b5277/title25/host8.",
+              "Pre-agreed LAB introCP2 and accepted one-shot P2 chord bypass unrelated intro traversal. Actual guest-owned door, original boss fill/release, ordinary separation and every attack/HP/retirement outcome run natively. No online command8, protection, HP/position/scene/camera/token/outcome writes.",
+              "Original cameraXclamp6064..6144 permits the large boss to be visible in both views. Nine composed captures and four atomic LOCAL pairs were personally reviewed; each left/right file is pixel-identical to its reviewed pair half. Boss and projectile placement follows world coordinates, and left-side contact effects do not wrap into Zero's view.",
+              "Actual type1/sub2 is source-owned aimed live ordnance, distinct from decorative subtype0. A genuinely fresh, captured moving subtype2 generation directly reaches native empty-header retirement on every process in the passing runs. Contact does not itself consume this subtype; exact intervening retirement cause is not claimed.",
+              "X takes20->18 LOCAL and17->15 on both NET peers with source-owned attack-box overlap and native pending hurt/recoil. Original strength4/Falcon reduction explains2HP; contemporaneous strength6 body contact would cause3HP under pinned normal context. P2 private Zero hurt-box attribution is explicitly unqualified; no restored X-bank box is borrowed for Zero.",
+              "Twelve original/live code/table/descriptor guards, native pools/camera/PLAY atomic snapshot, separate coherent typed body publication, live loaded-DAT assembly pieces and retained GP0 establish the bounded geometry. No original DAT texture/palette equality or instruction-atomic correspondence with screenshots is claimed. Authored baseY224 may carry native quake offsets.",
+              "Corrupt checkpoint background, ordinary flashes, body/HUD occlusion and separate capture times remain visible. No general rendering, palette restoration, all bosses/rosters, P2-only targeting, defeat/victory/report/selector, ordinary route, native-content audit or cross-machine/OS claim.",
+              "All four LOCAL and15 NET parent gates, four resolved core/mod CRC windows, matching prelaunch profiles, private cards and three graceful owned exit0 pass. Strict fixture-tainted finalized capture and replay remain refused. Earlier failed observer attempts v1..v6 remain unchanged; v7 was reviewed but not launched."
+            ],
+            "bypasses": [
+              "Agreed original introCP2 reachability prerequisite only."
+            ]
+          }
+        ],
+        "limitations": "Exact3072f22 LOCAL+NET original D1000/private cameras/source-owned subtype2: actual separated views, native X20->18 or17->15/overlap/recoil, fresh captured flight and direct header0 retirement. Nine composed images/four atomic pairs reviewed;12live guards, resolvedCRC/profiles/cards/threeexit0 pass. CP2 bypass, corrupt scenery, async liveDAT/GP0 scope and unqualified P2-private-box attribution explicit; no defeat/selector/other-rendering credit."
       }
     },
     {
