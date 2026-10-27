@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 69 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F79, F89, F92, F95, F98, F102, F107, F110, F114, F119, F121, F133, F137, F144, F157, F163, F170, F173, F177, F178, F204, F205, F208), 4 failed, 161 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 72 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F79, F89, F91, F92, F95, F98, F101, F102, F107, F110, F114, F116, F119, F121, F133, F137, F144, F157, F163, F170, F173, F177, F178, F204, F205, F208), 4 failed, 158 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,8 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 27
+
+**F101/F116/F91 are closed: 72 passed / 4 failed / 158 unverified (30.8%).** The [same-candidate two-door/scene review](evidence/mmx6-scene/manifest-bound-4cb5f59-two-Both-doors-local-netplay-reviewed.json) qualifies both original intro doors in one LOCAL/NET session: lone-hero refusal, both full native crossings, private pairs throughout opening/traversal, and native camera commitment before the following dialogue. Eleven ordinary P1 Cross responses per process retire the original NPC scene; both heroes reach the next door without passenger transport. Root reviewed33 composed images. The declared approach bypass, original scenery corruption, strict fixture recording/replay refusals and prior incomplete observers remain explicit. This adds three since69.
 
 **F173/F177 are closed: 69 passed / 4 failed / 161 unverified (29.5%).** F173's [LOCAL](evidence/mmx6-camera/manifest-bound-524c037-F173-local-reviewed.json) and [NET](evidence/mmx6-camera/manifest-bound-524c037-F173-netplay-reviewed.json) reviews qualify two native 4:3 panes in an 8:3 canvas, separate following and original-once world updates on the same V77 candidate. F177's [LOCAL](evidence/mmx6-camera/manifest-bound-9622eb7-SDKf381d12-F177-local-reviewed.json) and [NET](evidence/mmx6-camera/manifest-bound-9622eb7-SDKf381d12-F177-netplay-reviewed.json) reviews qualify fresh V78 native owner-menu fallback, resize and private-view resume: six complete resize intervals retain 8:3 across 622 actual presents, with no 4:3 transient or GL error. Native world/resources/private commits freeze correctly; profile/CRC, ordinary recordings, cards and owned exits pass. Earlier failed evidence remains retained. This adds two since 67; earlier milestones below are history.
 

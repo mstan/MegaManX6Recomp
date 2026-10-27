@@ -12035,7 +12035,7 @@
       "frozen_row_sha256": "633aa85b1b313ced93df65310ec39b1b159e2638fb93920cf15b7bac4450688c",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Both-door commit before following story scene",
         "bounded_check": "Use a door immediately followed by dialogue; require both-player crossing/camera commitment before native scene admission, without early passenger transport.",
         "baseline_anchors": [
@@ -12043,17 +12043,90 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "4cb5f59c18ff9834cc63590c88480c3be1aa61a3",
+            "build_identity": {
+              "executable_sha256": "cc0523d6d63426df5365538764e05b075f0d4dd39af950680898a69967a6d7a8",
+              "compiled_manifest_sha256": "7e4e3c5a440b738e861b37ea1f5cde76de31e3dd2f2c84b6ba862fbe2b85017a",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "both",
+              "local_cameras": "split",
+              "cameras": "split",
+              "prerequisite": "negotiated intro_before_doors",
+              "audio": "muted dummy"
+            },
+            "action": "Cross the first Both door into its original following NPC dialogue; require full-box/camera commitment before actual text admission.",
+            "outcome": "Every observed active dialogue retains both boxes beyond5760 and native camera5744/Y224 committed; original typed NPC waits for door action, eleven consumed P1 Cross responses retire text and native departure clears locks. Both living heroes reach the next door without passenger transport.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-4cb5f59-two-Both-doors-local-netplay-reviewed.json",
+                "sha256": "e3af0f9ed829ca5db6a10ba1b7677a5382b29f457ca647278211d9925834c52c"
+              }
+            ],
+            "limits": [
+              "Exact V79 LOCAL and loopback NET on one Windows host, X/P1 + Zero/P2, Both doors, two private4:3 panes in8:3 canvas. Original native camera clamps legitimately align views here; pane ownership/private commit during locks is observed, not inferred from distinct scrolling.",
+              "Original intro subtype2/originFA2A4 then subtype1/originFA2AC, native NPC dialogue2 between them. No fortress/consecutive-boss-door/F83/F164, absent/fallen/F61, every subtype, physical device, other OS or remote-host credit.",
+              "Original scenery/portrait corruption and close actor overlap remain visible and separate from these door/view/scene contracts. Both actual door placements/rendering and native traversal were reviewed. No broad scenery/visual campaign qualification.",
+              "LOCAL V2 and NET V4 observers differ by declaring the already-used published_host context for generic pulse and rechecking the same typed NPC slot after a separate text read. Both raw before/after samples remain; actual feature contract/compiled game/settings are identical. All source copies and prior incomplete executions are retained.",
+              "The development negotiated CP1/pose prerequisite bypasses approach traversal only. Strict tainted recording and replay refusals are required; no ordinary launch/full route/finalized capture/replay/audio or native-content audit claim."
+            ],
+            "bypasses": [
+              "Explicit intro_before_doors first initializes nativeCP1 then places living bodies/camera on source-qualified ground and invokes the original primary scanner once. No HP/action/ground/D4/CP2/door admission/scene or success flags assigned. Native original grounding/door allocation observed before readiness; subsequent gameplay uses ordinary inputs/read-only observation."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "4cb5f59c18ff9834cc63590c88480c3be1aa61a3",
+            "build_identity": {
+              "executable_sha256": "cc0523d6d63426df5365538764e05b075f0d4dd39af950680898a69967a6d7a8",
+              "compiled_manifest_sha256": "7e4e3c5a440b738e861b37ea1f5cde76de31e3dd2f2c84b6ba862fbe2b85017a",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "both",
+              "local_cameras": "split",
+              "cameras": "split",
+              "prerequisite": "negotiated intro_before_doors",
+              "audio": "muted dummy"
+            },
+            "action": "Cross the first Both door into its original following NPC dialogue; require full-box/camera commitment before actual text admission.",
+            "outcome": "Every observed active dialogue retains both boxes beyond5760 and native camera5744/Y224 committed; original typed NPC waits for door action, eleven consumed P1 Cross responses retire text and native departure clears locks. Both living heroes reach the next door without passenger transport.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-4cb5f59-two-Both-doors-local-netplay-reviewed.json",
+                "sha256": "e3af0f9ed829ca5db6a10ba1b7677a5382b29f457ca647278211d9925834c52c"
+              }
+            ],
+            "limits": [
+              "Exact V79 LOCAL and loopback NET on one Windows host, X/P1 + Zero/P2, Both doors, two private4:3 panes in8:3 canvas. Original native camera clamps legitimately align views here; pane ownership/private commit during locks is observed, not inferred from distinct scrolling.",
+              "Original intro subtype2/originFA2A4 then subtype1/originFA2AC, native NPC dialogue2 between them. No fortress/consecutive-boss-door/F83/F164, absent/fallen/F61, every subtype, physical device, other OS or remote-host credit.",
+              "Original scenery/portrait corruption and close actor overlap remain visible and separate from these door/view/scene contracts. Both actual door placements/rendering and native traversal were reviewed. No broad scenery/visual campaign qualification.",
+              "LOCAL V2 and NET V4 observers differ by declaring the already-used published_host context for generic pulse and rechecking the same typed NPC slot after a separate text read. Both raw before/after samples remain; actual feature contract/compiled game/settings are identical. All source copies and prior incomplete executions are retained.",
+              "The development negotiated CP1/pose prerequisite bypasses approach traversal only. Strict tainted recording and replay refusals are required; no ordinary launch/full route/finalized capture/replay/audio or native-content audit claim."
+            ],
+            "bypasses": [
+              "Explicit intro_before_doors first initializes nativeCP1 then places living bodies/camera on source-qualified ground and invokes the original primary scanner once. No HP/action/ground/D4/CP2/door admission/scene or success flags assigned. Native original grounding/door allocation observed before readiness; subsequent gameplay uses ordinary inputs/read-only observation."
+            ]
+          }
+        ],
+        "limitations": "Same exact4cb5f59/SDKf381d124 LOCAL+NET full named contract passed; root reviewed33 composed images. Declared CP1/pose approach bypass, original camera clamps, scenery corruption and strict fixture recording/replay refusals disclosed. Prior incomplete observer runs retained. No F61/F83/F97/F164 or broad campaign credit."
       }
     },
     {
@@ -12665,7 +12738,7 @@
       "frozen_row_sha256": "092643994f0c182e11b3d49d689d03a69f9cf79641c1ad12311fc1284a7cd368",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Second Both-door presence in independent netplay",
         "bounded_check": "Use two original doors in one peer session; both placements render/admit under private windows and retain the selected Both policy.",
         "baseline_anchors": [
@@ -12673,17 +12746,90 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "4cb5f59c18ff9834cc63590c88480c3be1aa61a3",
+            "build_identity": {
+              "executable_sha256": "cc0523d6d63426df5365538764e05b075f0d4dd39af950680898a69967a6d7a8",
+              "compiled_manifest_sha256": "7e4e3c5a440b738e861b37ea1f5cde76de31e3dd2f2c84b6ba862fbe2b85017a",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "both",
+              "local_cameras": "split",
+              "cameras": "split",
+              "prerequisite": "negotiated intro_before_doors",
+              "audio": "muted dummy"
+            },
+            "action": "Reach/admit/render both authored original doors in one session under private views with Both policy.",
+            "outcome": "Both distinct typed placements are present, refuse a lone eligible actor, open after both qualify and complete both full native box crossings on every process.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-4cb5f59-two-Both-doors-local-netplay-reviewed.json",
+                "sha256": "e3af0f9ed829ca5db6a10ba1b7677a5382b29f457ca647278211d9925834c52c"
+              }
+            ],
+            "limits": [
+              "Exact V79 LOCAL and loopback NET on one Windows host, X/P1 + Zero/P2, Both doors, two private4:3 panes in8:3 canvas. Original native camera clamps legitimately align views here; pane ownership/private commit during locks is observed, not inferred from distinct scrolling.",
+              "Original intro subtype2/originFA2A4 then subtype1/originFA2AC, native NPC dialogue2 between them. No fortress/consecutive-boss-door/F83/F164, absent/fallen/F61, every subtype, physical device, other OS or remote-host credit.",
+              "Original scenery/portrait corruption and close actor overlap remain visible and separate from these door/view/scene contracts. Both actual door placements/rendering and native traversal were reviewed. No broad scenery/visual campaign qualification.",
+              "LOCAL V2 and NET V4 observers differ by declaring the already-used published_host context for generic pulse and rechecking the same typed NPC slot after a separate text read. Both raw before/after samples remain; actual feature contract/compiled game/settings are identical. All source copies and prior incomplete executions are retained.",
+              "The development negotiated CP1/pose prerequisite bypasses approach traversal only. Strict tainted recording and replay refusals are required; no ordinary launch/full route/finalized capture/replay/audio or native-content audit claim."
+            ],
+            "bypasses": [
+              "Explicit intro_before_doors first initializes nativeCP1 then places living bodies/camera on source-qualified ground and invokes the original primary scanner once. No HP/action/ground/D4/CP2/door admission/scene or success flags assigned. Native original grounding/door allocation observed before readiness; subsequent gameplay uses ordinary inputs/read-only observation."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "4cb5f59c18ff9834cc63590c88480c3be1aa61a3",
+            "build_identity": {
+              "executable_sha256": "cc0523d6d63426df5365538764e05b075f0d4dd39af950680898a69967a6d7a8",
+              "compiled_manifest_sha256": "7e4e3c5a440b738e861b37ea1f5cde76de31e3dd2f2c84b6ba862fbe2b85017a",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "both",
+              "local_cameras": "split",
+              "cameras": "split",
+              "prerequisite": "negotiated intro_before_doors",
+              "audio": "muted dummy"
+            },
+            "action": "Reach/admit/render both authored original doors in one session under private views with Both policy.",
+            "outcome": "Both distinct typed placements are present, refuse a lone eligible actor, open after both qualify and complete both full native box crossings on every process.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-4cb5f59-two-Both-doors-local-netplay-reviewed.json",
+                "sha256": "e3af0f9ed829ca5db6a10ba1b7677a5382b29f457ca647278211d9925834c52c"
+              }
+            ],
+            "limits": [
+              "Exact V79 LOCAL and loopback NET on one Windows host, X/P1 + Zero/P2, Both doors, two private4:3 panes in8:3 canvas. Original native camera clamps legitimately align views here; pane ownership/private commit during locks is observed, not inferred from distinct scrolling.",
+              "Original intro subtype2/originFA2A4 then subtype1/originFA2AC, native NPC dialogue2 between them. No fortress/consecutive-boss-door/F83/F164, absent/fallen/F61, every subtype, physical device, other OS or remote-host credit.",
+              "Original scenery/portrait corruption and close actor overlap remain visible and separate from these door/view/scene contracts. Both actual door placements/rendering and native traversal were reviewed. No broad scenery/visual campaign qualification.",
+              "LOCAL V2 and NET V4 observers differ by declaring the already-used published_host context for generic pulse and rechecking the same typed NPC slot after a separate text read. Both raw before/after samples remain; actual feature contract/compiled game/settings are identical. All source copies and prior incomplete executions are retained.",
+              "The development negotiated CP1/pose prerequisite bypasses approach traversal only. Strict tainted recording and replay refusals are required; no ordinary launch/full route/finalized capture/replay/audio or native-content audit claim."
+            ],
+            "bypasses": [
+              "Explicit intro_before_doors first initializes nativeCP1 then places living bodies/camera on source-qualified ground and invokes the original primary scanner once. No HP/action/ground/D4/CP2/door admission/scene or success flags assigned. Native original grounding/door allocation observed before readiness; subsequent gameplay uses ordinary inputs/read-only observation."
+            ]
+          }
+        ],
+        "limitations": "Same exact4cb5f59/SDKf381d124 LOCAL+NET full named contract passed; root reviewed33 composed images. Declared CP1/pose approach bypass, original camera clamps, scenery corruption and strict fixture recording/replay refusals disclosed. Prior incomplete observer runs retained. No F61/F83/F97/F164 or broad campaign credit."
       }
     },
     {
@@ -13580,24 +13726,97 @@
       "frozen_row_sha256": "153fda25d07421b5291c4f70afd80ec209d5b70d8eb7244b0b4a93781f7d7808",
       "x6": {
         "workstream": "camera",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Private cameras while Both doors wait",
         "bounded_check": "At each of two real Both doors, leave one actor outside and inspect independent views throughout native opening, waiting and final traversal.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "4cb5f59c18ff9834cc63590c88480c3be1aa61a3",
+            "build_identity": {
+              "executable_sha256": "cc0523d6d63426df5365538764e05b075f0d4dd39af950680898a69967a6d7a8",
+              "compiled_manifest_sha256": "7e4e3c5a440b738e861b37ea1f5cde76de31e3dd2f2c84b6ba862fbe2b85017a",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "both",
+              "local_cameras": "split",
+              "cameras": "split",
+              "prerequisite": "negotiated intro_before_doors",
+              "audio": "muted dummy"
+            },
+            "action": "At each original Both door leave one hero outside, then inspect private views during native opening and final traversal.",
+            "outcome": "Actual private pairs/4:3 owner HUDs continue while waiting and opening/traversal commits grow for each door/physical process without context leak; native camera clamps and original release are retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-4cb5f59-two-Both-doors-local-netplay-reviewed.json",
+                "sha256": "e3af0f9ed829ca5db6a10ba1b7677a5382b29f457ca647278211d9925834c52c"
+              }
+            ],
+            "limits": [
+              "Exact V79 LOCAL and loopback NET on one Windows host, X/P1 + Zero/P2, Both doors, two private4:3 panes in8:3 canvas. Original native camera clamps legitimately align views here; pane ownership/private commit during locks is observed, not inferred from distinct scrolling.",
+              "Original intro subtype2/originFA2A4 then subtype1/originFA2AC, native NPC dialogue2 between them. No fortress/consecutive-boss-door/F83/F164, absent/fallen/F61, every subtype, physical device, other OS or remote-host credit.",
+              "Original scenery/portrait corruption and close actor overlap remain visible and separate from these door/view/scene contracts. Both actual door placements/rendering and native traversal were reviewed. No broad scenery/visual campaign qualification.",
+              "LOCAL V2 and NET V4 observers differ by declaring the already-used published_host context for generic pulse and rechecking the same typed NPC slot after a separate text read. Both raw before/after samples remain; actual feature contract/compiled game/settings are identical. All source copies and prior incomplete executions are retained.",
+              "The development negotiated CP1/pose prerequisite bypasses approach traversal only. Strict tainted recording and replay refusals are required; no ordinary launch/full route/finalized capture/replay/audio or native-content audit claim."
+            ],
+            "bypasses": [
+              "Explicit intro_before_doors first initializes nativeCP1 then places living bodies/camera on source-qualified ground and invokes the original primary scanner once. No HP/action/ground/D4/CP2/door admission/scene or success flags assigned. Native original grounding/door allocation observed before readiness; subsequent gameplay uses ordinary inputs/read-only observation."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "4cb5f59c18ff9834cc63590c88480c3be1aa61a3",
+            "build_identity": {
+              "executable_sha256": "cc0523d6d63426df5365538764e05b075f0d4dd39af950680898a69967a6d7a8",
+              "compiled_manifest_sha256": "7e4e3c5a440b738e861b37ea1f5cde76de31e3dd2f2c84b6ba862fbe2b85017a",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "both",
+              "local_cameras": "split",
+              "cameras": "split",
+              "prerequisite": "negotiated intro_before_doors",
+              "audio": "muted dummy"
+            },
+            "action": "At each original Both door leave one hero outside, then inspect private views during native opening and final traversal.",
+            "outcome": "Actual private pairs/4:3 owner HUDs continue while waiting and opening/traversal commits grow for each door/physical process without context leak; native camera clamps and original release are retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-4cb5f59-two-Both-doors-local-netplay-reviewed.json",
+                "sha256": "e3af0f9ed829ca5db6a10ba1b7677a5382b29f457ca647278211d9925834c52c"
+              }
+            ],
+            "limits": [
+              "Exact V79 LOCAL and loopback NET on one Windows host, X/P1 + Zero/P2, Both doors, two private4:3 panes in8:3 canvas. Original native camera clamps legitimately align views here; pane ownership/private commit during locks is observed, not inferred from distinct scrolling.",
+              "Original intro subtype2/originFA2A4 then subtype1/originFA2AC, native NPC dialogue2 between them. No fortress/consecutive-boss-door/F83/F164, absent/fallen/F61, every subtype, physical device, other OS or remote-host credit.",
+              "Original scenery/portrait corruption and close actor overlap remain visible and separate from these door/view/scene contracts. Both actual door placements/rendering and native traversal were reviewed. No broad scenery/visual campaign qualification.",
+              "LOCAL V2 and NET V4 observers differ by declaring the already-used published_host context for generic pulse and rechecking the same typed NPC slot after a separate text read. Both raw before/after samples remain; actual feature contract/compiled game/settings are identical. All source copies and prior incomplete executions are retained.",
+              "The development negotiated CP1/pose prerequisite bypasses approach traversal only. Strict tainted recording and replay refusals are required; no ordinary launch/full route/finalized capture/replay/audio or native-content audit claim."
+            ],
+            "bypasses": [
+              "Explicit intro_before_doors first initializes nativeCP1 then places living bodies/camera on source-qualified ground and invokes the original primary scanner once. No HP/action/ground/D4/CP2/door admission/scene or success flags assigned. Native original grounding/door allocation observed before readiness; subsequent gameplay uses ordinary inputs/read-only observation."
+            ]
+          }
+        ],
+        "limitations": "Same exact4cb5f59/SDKf381d124 LOCAL+NET full named contract passed; root reviewed33 composed images. Declared CP1/pose approach bypass, original camera clamps, scenery corruption and strict fixture recording/replay refusals disclosed. Prior incomplete observer runs retained. No F61/F83/F97/F164 or broad campaign credit."
       }
     },
     {
