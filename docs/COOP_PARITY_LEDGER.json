@@ -3995,8 +3995,46 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "local_cameras": "split",
+              "audio": "muted dummy",
+              "lab_checkpoint": "amazon_cp2",
+              "native_report_choice": 1,
+              "no_save": true
+            },
+            "action": "Follow actualnativeguestkill/sharedvictory/report/noSave/story toward selector, with optionalF13 only after actualselector.",
+            "outcome": "Requiredselector notobserved in two900sample native story continuations; optionalF13 neverentered. Bothownedprocessesexit0/cardsunchanged. No passed/failed gameplay verdict for either full comparison.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-dcc1002-R19-F13-story-setups-deferred.json",
+                "sha256": "8066a5bbc3f0935fadcd83c32e321dbd5bcbbced7beda921f466bc49b528babc"
+              }
+            ],
+            "limits": [
+              "R19 remains unverified: both samecandidate LOCAL native guestkills and both native victory/departure components completed, but neither observed the required actual selector return. No NETR19 result or inherited completion.",
+              "Original report/noSave return proceeds into genuine native stage11 story. First combinedattempt900samplebound stopped while mode20/5/0 text stilltyped; changedsecondalso allowed source-qualified story-phase2Cross and accepted75inputs/36typing offers, yet same900samplebound endedmode20/5/0 closing80/4. Do not infer the next frontend or widen this long timing investigation now.",
+              "F13 remains unverified and was NEVER entered: its strict actual earned selector prerequisite was not observed. No fresh stage, partner dash, owned trail, art or NET verdict follows from the source-only helper draft.",
+              "OriginalAmazonCP2 priorroute bypass remains; actual native bossdoor/conversation/fullHP main and ordinary attacks/reward/report/story controls are retained. No HP/pose/position/phase/contact/clear/success writes or stateLOAD. Selected noSave choice1; privatecards unchanged and ownedprocessesexit0.",
+              "Preserve both raw outcomes and all earlier wrong-overlay/report observer attempts. ParkR19/F13 behind independent checks; no third combined LOCAL timingvariant thisblock. Root movesF90 primaryfinisher, whose nativevictory endpoint does not require this long story continuation."
+            ],
+            "bypasses": [
+              "OriginalAmazonCP2 priorroute bypass remains; actual native bossdoor/conversation/fullHP main and ordinary attacks/reward/report/story controls are retained. No HP/pose/position/phase/contact/clear/success writes or stateLOAD. Selected noSave choice1; privatecards unchanged and ownedprocessesexit0."
+            ]
+          }
+        ],
+        "limitations": "Actual guestclear/bothnativevictories and originalreport/noSave/story progress retained, but requiredselector unobserved after two900sample story bounds. NETunverified; long timing continuation deferred."
       }
     },
     {
@@ -5876,8 +5914,46 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "local_cameras": "split",
+              "audio": "muted dummy",
+              "lab_checkpoint": "amazon_cp2",
+              "native_report_choice": 1,
+              "no_save": true
+            },
+            "action": "Follow actualnativeguestkill/sharedvictory/report/noSave/story toward selector, with optionalF13 only after actualselector.",
+            "outcome": "Requiredselector notobserved in two900sample native story continuations; optionalF13 neverentered. Bothownedprocessesexit0/cardsunchanged. No passed/failed gameplay verdict for either full comparison.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-dcc1002-R19-F13-story-setups-deferred.json",
+                "sha256": "8066a5bbc3f0935fadcd83c32e321dbd5bcbbced7beda921f466bc49b528babc"
+              }
+            ],
+            "limits": [
+              "R19 remains unverified: both samecandidate LOCAL native guestkills and both native victory/departure components completed, but neither observed the required actual selector return. No NETR19 result or inherited completion.",
+              "Original report/noSave return proceeds into genuine native stage11 story. First combinedattempt900samplebound stopped while mode20/5/0 text stilltyped; changedsecondalso allowed source-qualified story-phase2Cross and accepted75inputs/36typing offers, yet same900samplebound endedmode20/5/0 closing80/4. Do not infer the next frontend or widen this long timing investigation now.",
+              "F13 remains unverified and was NEVER entered: its strict actual earned selector prerequisite was not observed. No fresh stage, partner dash, owned trail, art or NET verdict follows from the source-only helper draft.",
+              "OriginalAmazonCP2 priorroute bypass remains; actual native bossdoor/conversation/fullHP main and ordinary attacks/reward/report/story controls are retained. No HP/pose/position/phase/contact/clear/success writes or stateLOAD. Selected noSave choice1; privatecards unchanged and ownedprocessesexit0.",
+              "Preserve both raw outcomes and all earlier wrong-overlay/report observer attempts. ParkR19/F13 behind independent checks; no third combined LOCAL timingvariant thisblock. Root movesF90 primaryfinisher, whose nativevictory endpoint does not require this long story continuation."
+            ],
+            "bypasses": [
+              "OriginalAmazonCP2 priorroute bypass remains; actual native bossdoor/conversation/fullHP main and ordinary attacks/reward/report/story controls are retained. No HP/pose/position/phase/contact/clear/success writes or stateLOAD. Selected noSave choice1; privatecards unchanged and ownedprocessesexit0."
+            ]
+          }
+        ],
+        "limitations": "Postclear dash NEVERentered: actual earned selector prerequisite unobserved in two nativeR19 story continuations. No freshstage/dash/trail/art/NET verdict; sourcehelper preservedonly."
       }
     },
     {

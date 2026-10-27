@@ -1,0 +1,482 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "R19",
+    "F13"
+  ],
+  "frozen_row_sha256": {
+    "R19": "bc61483131ca6eee65995555543630cc8695aec29a0becf72b3b9b2e3dde842d",
+    "F13": "d140e906f246683abcf46b832fefa540a738d4ad3676760ca7f33f68e933c672"
+  },
+  "result": "unverified_deferred",
+  "attempts": [
+    {
+      "attempt": 1,
+      "parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v1\\qualification.json",
+        "bytes": 23611892,
+        "sha256": "2a99cf9d9203c77bdea1857cf945ca2a854ff2b2d5f11c865d146d2cb3ae1478"
+      },
+      "combat": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v1\\ammo-hud\\intro-admission\\R19-Yammark-finalhit\\observations.json",
+        "bytes": 7707046,
+        "sha256": "c04c1e342def786a8e7e7ca08ea526047b0c1f30a596513fc7ebc1a6e037e94d"
+      },
+      "frontend": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v1\\ammo-hud\\intro-admission\\R19-native-frontend\\observations.json",
+        "bytes": 11085075,
+        "sha256": "fe4a760f4bcb7d04da0d699f11c3e76acffe8cc1b542a886dc55290db89dda9d"
+      },
+      "log": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-R19-F13-local-v82-root-v1.log",
+        "bytes": 2084,
+        "sha256": "9e20327a09f429f62b089e84b90f2db76aa31f676865953af1f71dcc015d1c46"
+      },
+      "parent_status": "failed_setup",
+      "error": "Bounded native report/selector deadline expired",
+      "source_parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true
+      },
+      "combat_checks": {
+        "actual_guest_lethal": true,
+        "ordinary_inputs_only": true,
+        "actual_native_clear_followup_observed": true,
+        "both_visible_native_victory": true,
+        "each_native_victory_once": true,
+        "each_native_departure_once": true,
+        "no_early_living_passenger_withdrawal": true,
+        "both_still_living": true,
+        "both_native_state3_at_frontend": true
+      },
+      "actual_guest_lethal": {
+        "offer": 8,
+        "row": 229,
+        "main": {
+          "slot": null,
+          "owner": null,
+          "address": "0x8008ef48",
+          "allocation": 65,
+          "active": 65,
+          "type": 49,
+          "subtype": 0,
+          "visible": 1,
+          "state": 2,
+          "action": 1,
+          "phase": 0,
+          "phase2": 0,
+          "x": 5152,
+          "y": 2056,
+          "x_raw": 337668864,
+          "y_raw": 134742016,
+          "layer": 0,
+          "facing": 0,
+          "selected_clip": 7,
+          "sprite_frame": 16,
+          "animation_cursor": "0x800f7aa4",
+          "command": [
+            1,
+            0,
+            0,
+            16
+          ],
+          "attack": "0x800f7954",
+          "hurt": "0x800f7958",
+          "table": "0x80074bfc",
+          "hp": 0,
+          "iframe": 25,
+          "disposition": 0,
+          "token": 0,
+          "remembered_token": 29,
+          "recovery": 0,
+          "feedback": 0,
+          "hex": "4131000102010000006b201400000808c0660f8000000507006b20140000080800000000000000000000000000000000447b0f80a47a0f8000000000708d1580e0014c7901000010ff0001000000000054790f8058790f80fc4b07800001000004190000001d000050790f80000000000800000000000000000000007a001400b0b70980000003030000000000000000000000000000000000000000",
+          "hurt_rect": [
+            5144,
+            2040,
+            5168,
+            2088
+          ]
+        }
+      },
+      "victory_histories": [
+        {
+          "peer": 0,
+          "seat": 0,
+          "sequence": [
+            [
+              1,
+              2,
+              true
+            ],
+            [
+              1,
+              20,
+              true
+            ],
+            [
+              1,
+              25,
+              true
+            ],
+            [
+              1,
+              1,
+              true
+            ],
+            [
+              3,
+              0,
+              false
+            ]
+          ],
+          "pose_entries": 1,
+          "departure_entries": 1,
+          "early_outgoing_before_victory": false,
+          "min_hp": 26
+        },
+        {
+          "peer": 0,
+          "seat": 1,
+          "sequence": [
+            [
+              1,
+              50,
+              true
+            ],
+            [
+              1,
+              8,
+              true
+            ],
+            [
+              1,
+              5,
+              true
+            ],
+            [
+              1,
+              2,
+              true
+            ],
+            [
+              1,
+              25,
+              true
+            ],
+            [
+              1,
+              1,
+              true
+            ],
+            [
+              3,
+              0,
+              false
+            ]
+          ],
+          "pose_entries": 1,
+          "departure_entries": 1,
+          "early_outgoing_before_victory": false,
+          "min_hp": 22
+        }
+      ],
+      "last_frontend": {
+        "mode": [
+          20,
+          5,
+          0
+        ],
+        "stage": 11,
+        "section": 0,
+        "fade": 0,
+        "dialogue_hex": "ba831480a01685ff2d00040001020001",
+        "choice": 1,
+        "decoded": [
+          0,
+          0,
+          0
+        ]
+      },
+      "samples": 900,
+      "ordinary_inputs": 42,
+      "typing_inputs": 16,
+      "no_save_choice": {
+        "before": [
+          0
+        ],
+        "after": [
+          1
+        ]
+      },
+      "F13_entered": false,
+      "cleanup": {
+        "pid": 46132,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0,
+        "cards_unchanged": true
+      },
+      "binding": {
+        "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-v82-final-binding-root-v1.json",
+        "binding_sha256": "0172ea22254cee069ec4f1d3c401f14ea050cd018efbcc7d7f7265d10379a12a",
+        "image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+        "manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+        "provenance_sha256": "6a3d1bd53edc47b8f248fef3b452154cfb936a4df0e63a6a9798774e58eafd2d",
+        "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v82-nearby-explosion-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+        "source_heads": {
+          "game": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+          "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+          "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+        },
+        "title": "mmx6-x-zero-delay-v31",
+        "host_revision": 14
+      },
+      "observer_pins": {
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F89_Investigator_entry_v70_root_v2.py": "bb0d461944f22c03c60cc340427edd352870dba73fd36e965879aa090ca15605",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_Yammark_finalhit_v82_root_v3.py": "8b0a4ff28421259037a61688e7501e56dad54e190289f9b9c230efa21aa88ecd",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_R19_frontend_v82_worker_v2.py": "f22eb9b75ce4f99b6f98a8ab4aebbcfcb342cc92add6477e2bc21ab61564408e",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-v31-F157-native-Zero-CP2-fresh-followup-v2.py": "d638f9aed1dd403ec3e333eea8bd3a244742ef20a2983c61ddf66c3ddf959781",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\qualify_mmx6_coop_intro_fixture_pair.py": "964ba7331d99054d6978cd0b382c229a168fc57bc56ce2b46856bba2fa9dfaa4",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\qualify_mmx6_coop_pair.py": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\mmx6_coop_intro_fixture.py": "ca7d472393f0e2e56eb731083da1720ae7ca8da031156ea0fe6d295366ec8782",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\qualify_mmx6_coop_hud_inventory.py": "e74133343b72379ac820b7d10a236e06d461a625267b315dd57bf8cf63676bf8",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F13_postclear_dash_v82_worker_v1.py": "89f5763ab3597d0363bcba56f3c8482ea655af41242534b44c1980356317c709",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F14_postdoor_v67_root_v1.py": "019bb5494a6f649b6aac7aaab2e05b59d1f8db5d82b5df0cbda5e15e304bb3f6"
+      }
+    },
+    {
+      "attempt": 2,
+      "parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v2\\qualification.json",
+        "bytes": 26074772,
+        "sha256": "4d5fa3c0151444d6f219e3ea95188abd50c4b43fbc7833c9e03936fc95fd61a8"
+      },
+      "combat": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v2\\ammo-hud\\intro-admission\\R19-Yammark-finalhit\\observations.json",
+        "bytes": 8197775,
+        "sha256": "fabf2e5f514573c68a8e9561c121abd4ad53b3d430c34f3a90e7cbf22e6205a1"
+      },
+      "frontend": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\R19-F13-local-v82-root-v2\\ammo-hud\\intro-admission\\R19-native-frontend\\observations.json",
+        "bytes": 12603140,
+        "sha256": "c76058a65cf09be74f4be5ce32a631cddd18828646eea6a2977f4e33cfaaf004"
+      },
+      "log": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-R19-F13-local-v82-root-v2.log",
+        "bytes": 1696,
+        "sha256": "bef7fce19e802241a07e436c5a9fa5ab6e60d7cdf4dffa70b8a7be40b36aed0f"
+      },
+      "parent_status": "failed_setup",
+      "error": "Bounded native report/selector deadline expired",
+      "source_parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true
+      },
+      "combat_checks": {
+        "actual_guest_lethal": true,
+        "ordinary_inputs_only": true,
+        "actual_native_clear_followup_observed": true,
+        "both_visible_native_victory": true,
+        "each_native_victory_once": true,
+        "each_native_departure_once": true,
+        "no_early_living_passenger_withdrawal": true,
+        "both_still_living": true,
+        "both_native_state3_at_frontend": true
+      },
+      "actual_guest_lethal": {
+        "offer": 7,
+        "row": 246,
+        "main": {
+          "slot": null,
+          "owner": null,
+          "address": "0x8008ef48",
+          "allocation": 65,
+          "active": 65,
+          "type": 49,
+          "subtype": 0,
+          "visible": 1,
+          "state": 2,
+          "action": 1,
+          "phase": 0,
+          "phase2": 0,
+          "x": 5152,
+          "y": 2056,
+          "x_raw": 337654048,
+          "y_raw": 134742016,
+          "layer": 0,
+          "facing": 0,
+          "selected_clip": 7,
+          "sprite_frame": 16,
+          "animation_cursor": "0x800f7aa4",
+          "command": [
+            1,
+            0,
+            0,
+            16
+          ],
+          "attack": "0x800f7954",
+          "hurt": "0x800f7958",
+          "table": "0x80074bfc",
+          "hp": 0,
+          "iframe": 25,
+          "disposition": 0,
+          "token": 0,
+          "remembered_token": 33,
+          "recovery": 0,
+          "feedback": 0,
+          "hex": "41310001020100002031201400000808c0660f8000000507203120140000080800000000000000000000000000000000447b0f80a47a0f8000000000708d1580e0014c7901000010ff0001000000000054790f8058790f80fc4b078000010000041900000021000050790f80000000000800000000000000000000007c001600b0b70980000003030000000000000000000000000000000000000000",
+          "hurt_rect": [
+            5144,
+            2040,
+            5168,
+            2088
+          ]
+        }
+      },
+      "victory_histories": [
+        {
+          "peer": 0,
+          "seat": 0,
+          "sequence": [
+            [
+              1,
+              20,
+              true
+            ],
+            [
+              1,
+              25,
+              true
+            ],
+            [
+              1,
+              1,
+              true
+            ],
+            [
+              3,
+              0,
+              false
+            ]
+          ],
+          "pose_entries": 1,
+          "departure_entries": 1,
+          "early_outgoing_before_victory": false,
+          "min_hp": 25
+        },
+        {
+          "peer": 0,
+          "seat": 1,
+          "sequence": [
+            [
+              1,
+              50,
+              true
+            ],
+            [
+              1,
+              8,
+              true
+            ],
+            [
+              1,
+              5,
+              true
+            ],
+            [
+              1,
+              2,
+              true
+            ],
+            [
+              1,
+              25,
+              true
+            ],
+            [
+              1,
+              1,
+              true
+            ],
+            [
+              3,
+              0,
+              false
+            ]
+          ],
+          "pose_entries": 1,
+          "departure_entries": 1,
+          "early_outgoing_before_victory": false,
+          "min_hp": 26
+        }
+      ],
+      "last_frontend": {
+        "mode": [
+          20,
+          5,
+          0
+        ],
+        "stage": 11,
+        "section": 0,
+        "fade": 0,
+        "dialogue_hex": "ce87148061a4a7002d000f0080040002",
+        "choice": 1,
+        "decoded": [
+          0,
+          0,
+          0
+        ]
+      },
+      "samples": 900,
+      "ordinary_inputs": 75,
+      "typing_inputs": 36,
+      "no_save_choice": {
+        "before": [
+          0
+        ],
+        "after": [
+          1
+        ]
+      },
+      "F13_entered": false,
+      "cleanup": {
+        "pid": 17136,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0,
+        "cards_unchanged": true
+      },
+      "binding": {
+        "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-v82-final-binding-root-v1.json",
+        "binding_sha256": "0172ea22254cee069ec4f1d3c401f14ea050cd018efbcc7d7f7265d10379a12a",
+        "image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+        "manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+        "provenance_sha256": "6a3d1bd53edc47b8f248fef3b452154cfb936a4df0e63a6a9798774e58eafd2d",
+        "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v82-nearby-explosion-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+        "source_heads": {
+          "game": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+          "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+          "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+        },
+        "title": "mmx6-x-zero-delay-v31",
+        "host_revision": 14
+      },
+      "observer_pins": {
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F89_Investigator_entry_v70_root_v2.py": "bb0d461944f22c03c60cc340427edd352870dba73fd36e965879aa090ca15605",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_Yammark_finalhit_v82_root_v3.py": "8b0a4ff28421259037a61688e7501e56dad54e190289f9b9c230efa21aa88ecd",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_R19_frontend_v82_root_v1.py": "a5bfbcecbbc6023fd21ffd86c10b5863efd6f8c4c47ce2eb61f47785ee02ae54",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-v31-F157-native-Zero-CP2-fresh-followup-v2.py": "d638f9aed1dd403ec3e333eea8bd3a244742ef20a2983c61ddf66c3ddf959781",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\qualify_mmx6_coop_intro_fixture_pair.py": "964ba7331d99054d6978cd0b382c229a168fc57bc56ce2b46856bba2fa9dfaa4",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\qualify_mmx6_coop_pair.py": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\mmx6_coop_intro_fixture.py": "ca7d472393f0e2e56eb731083da1720ae7ca8da031156ea0fe6d295366ec8782",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\qualify_mmx6_coop_hud_inventory.py": "e74133343b72379ac820b7d10a236e06d461a625267b315dd57bf8cf63676bf8",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F13_postclear_dash_v82_worker_v1.py": "89f5763ab3597d0363bcba56f3c8482ea655af41242534b44c1980356317c709",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F14_postdoor_v67_root_v1.py": "019bb5494a6f649b6aac7aaab2e05b59d1f8db5d82b5df0cbda5e15e304bb3f6"
+      }
+    }
+  ],
+  "limits": [
+    "R19 remains unverified: both samecandidate LOCAL native guestkills and both native victory/departure components completed, but neither observed the required actual selector return. No NETR19 result or inherited completion.",
+    "Original report/noSave return proceeds into genuine native stage11 story. First combinedattempt900samplebound stopped while mode20/5/0 text stilltyped; changedsecondalso allowed source-qualified story-phase2Cross and accepted75inputs/36typing offers, yet same900samplebound endedmode20/5/0 closing80/4. Do not infer the next frontend or widen this long timing investigation now.",
+    "F13 remains unverified and was NEVER entered: its strict actual earned selector prerequisite was not observed. No fresh stage, partner dash, owned trail, art or NET verdict follows from the source-only helper draft.",
+    "OriginalAmazonCP2 priorroute bypass remains; actual native bossdoor/conversation/fullHP main and ordinary attacks/reward/report/story controls are retained. No HP/pose/position/phase/contact/clear/success writes or stateLOAD. Selected noSave choice1; privatecards unchanged and ownedprocessesexit0.",
+    "Preserve both raw outcomes and all earlier wrong-overlay/report observer attempts. ParkR19/F13 behind independent checks; no third combined LOCAL timingvariant thisblock. Root movesF90 primaryfinisher, whose nativevictory endpoint does not require this long story continuation."
+  ]
+}
