@@ -8,6 +8,8 @@ static int view_gpu(uint32_t,unsigned);
 static unsigned arrival_probe,arrival_camera_calls;
 static int32_t arrival_target;
 static uint8_t arrival_body[0x158];
+static unsigned weather_probe,weather_world_updates,weather_draws;
+static uint32_t weather_x,weather_y;
 #define MMX6_TEST_NETPLAY_ACTIVE mmx6_view_sdk.online
 #define MMX6_TEST_DISPATCH_CALL view_native
 #define MMX6_TEST_PRIVATE_VIEW_GPU view_gpu
@@ -35,6 +37,12 @@ static int view_native(CPUState *cpu,uint32_t address,uint32_t ret) {
         return 1;
     }
     CHECK(address==0x80025FB0u && private_draw);
+    if(weather_probe) {
+        CHECK(psx_mod_read_word(VIEW_CAMERA+0x54+8)==weather_x);
+        CHECK(psx_mod_read_word(VIEW_CAMERA+0x54+12)==weather_y);
+        CHECK(psx_mod_read_byte(VIEW_CAMERA+0x54+0x4C)==1);
+        ++weather_draws;
+    }
     if(arrival_probe)CHECK(!memcmp(p2.body,arrival_body,sizeof arrival_body));
     ++view_callback_calls;disturb_host();if(view_refuse)failed=1;return 1;
 }
@@ -57,6 +65,7 @@ static void prepare_view(CPUState *cpu,int online,int split) {
     setup(cpu);mmx6_view_sdk_reset();mmx6_view_sdk.online=online;
     view_native_calls=view_gpu_words=view_callback_calls=view_refuse=view_abort=0;
     arrival_probe=arrival_camera_calls=0;
+    weather_probe=weather_world_updates=weather_draws=0;
     inside=player_call=stage_call=zero_world=world_render=hud_call=ride_call=pickup_call=solid_call=0;
     private_draw=private_seat=view_call=zero_projected=0;local_split=split;independent_views=1;
     view_buffer=VIEW_BUFFER;view_pending=view_valid=1;view_menu_history=0;
@@ -201,10 +210,51 @@ static void native_menu_camera_history(int online,int split) {
     capture(VIEW_CAMERA,canonical,sizeof canonical);
     CHECK(!memcmp(canonical,view_cameras[1],sizeof canonical)); /* unexplained gap still resets */
 }
+static void native_shared_weather_frames(int online,int split) {
+    CPUState cpu;prepare_view(&cpu,online,split);
+    psx_mod_write_byte(PLAY+12,6);psx_mod_write_byte(PLAY+13,0);
+    psx_mod_write_byte(VIEW_CAMERA+0x54+4,5);
+    /* Original waiting weather has a blank atlas at X320. Its native state
+     * then starts rain and cycles five Y origins, without moving either hero.
+     * Both private draw callbacks must see that world's frame, not the blank
+     * origin saved when the guest camera was first initialized. */
+    memset(view_cameras[1],0,sizeof view_cameras[1]);
+    put32(view_cameras[1]+0x54+8,320u*65536);
+    put32(view_cameras[1]+8,123u*65536);
+    put32(view_cameras[1]+2*0x54+8,47u*65536);
+    view_frame=10;frame_count=11;
+    for(unsigned phase=0;phase<7;++phase) {
+        weather_x=(phase==6?320u:0u)*65536;
+        weather_y=(phase==6?0u:(phase%5)*256u)*65536;
+        ++weather_world_updates; /* explicit native-once producer model */
+        psx_mod_write_word(VIEW_CAMERA+0x54+8,weather_x);
+        psx_mod_write_word(VIEW_CAMERA+0x54+12,weather_y);
+        psx_mod_write_byte(VIEW_CAMERA+0x54+0x4C,1);
+        independent_world_begin();CHECK(view_pending && view_valid);
+        CHECK(get32(view_cameras[1]+8)==123u*65536);
+        CHECK(get32(view_cameras[1]+2*0x54+8)==47u*65536);
+        weather_probe=1;CHECK(independent_present(&cpu,VIEW_DRAW_OT));weather_probe=0;
+        CHECK(weather_world_updates==phase+1 && weather_draws==(phase+1)*(split?2u:1u));
+        CHECK(psx_mod_read_word(VIEW_CAMERA+0x54+8)==weather_x);
+        CHECK(psx_mod_read_word(VIEW_CAMERA+0x54+12)==weather_y);
+        CHECK(frame_count==11+phase);++frame_count;
+    }
+    /* An unrelated authored room/mode keeps its own guest camera history. */
+    for(unsigned other=0;other<3;++other) {
+        prepare_view(&cpu,online,split);view_frame=10;frame_count=11;
+        psx_mod_write_byte(PLAY+12,other==0?7:6);
+        psx_mod_write_byte(PLAY+13,other==1?1:0);
+        psx_mod_write_byte(VIEW_CAMERA+0x54+4,other==2?4:5);
+        put32(view_cameras[1]+0x54+8,99u*65536);
+        psx_mod_write_word(VIEW_CAMERA+0x54+8,0);
+        independent_world_begin();CHECK(get32(view_cameras[1]+0x54+8)==99u*65536);
+    }
+}
 int main(void) {
     defaults_and_scope();reentry();native_arrival(0,1);native_arrival(1,0);arrival_refusals();
     native_nova_views(0,1);native_nova_views(1,0);
     native_menu_camera_history(0,1);native_menu_camera_history(1,0);
+    native_shared_weather_frames(0,1);native_shared_weather_frames(1,0);
     presentation_restore(0,1,0,0);presentation_restore(0,1,1,0);presentation_restore(0,1,0,1);
     presentation_restore(1,0,0,0);presentation_restore(1,0,1,0);presentation_restore(1,0,0,1);
     clear_banks();puts("private-view typed defaults, scope, callback/abort host restoration and reentry contracts passed (modeled rendering)");return 0;

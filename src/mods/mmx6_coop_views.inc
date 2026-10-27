@@ -101,6 +101,14 @@ static void independent_world_begin(void) {
     /* Always take authored room/mode/atlas fields from this world's update.
      * Only the other camera's current/previous positions retain its history. */
     for(unsigned layer=0;layer<3;++layer) {
+        /* Turtloid's original weather controller (800ED510) owns layer1
+         * mode5 X/Y as blank/rain and five-frame atlas selectors. They are
+         * shared animation metadata, not this hero's camera position. */
+        if(layer==1 && psx_mod_read_byte(PLAY+12)==6 &&
+           !psx_mod_read_byte(PLAY+13) && psx_mod_read_byte(VIEW_CAMERA+0x54+4)==5) {
+            capture(VIEW_CAMERA+0x54,view_cameras[1]+0x54,0x54);
+            continue;
+        }
         uint8_t position[0x14];memcpy(position,view_cameras[1]+layer*0x54+8,sizeof position);
         capture(VIEW_CAMERA+layer*0x54,view_cameras[1]+layer*0x54,0x54);
         memcpy(view_cameras[1]+layer*0x54+8,position,sizeof position);
