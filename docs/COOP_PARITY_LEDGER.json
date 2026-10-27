@@ -18179,24 +18179,101 @@
       "frozen_row_sha256": "52099aa36e9f5b991c4f9dde15e66bf9ceba3ec5b85fb4d5db1e454aa49c18f5",
       "x6": {
         "workstream": "render",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Nearby original explosion in both views",
         "bounded_check": "With two actual views nearby, trigger one native explosion and inspect shared world effect/damage plus each view's local shake and visibility.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:render_actor",
           "src/mods/mmx6_coop_plugin.c:draw_coop_hud"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "cameras": "split",
+              "local_cameras": "split",
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "pre-agreed original introCP1 then native falling impact"
+            },
+            "action": "Observe source-attributed original fall/contact/impact effects and actual native private-camera quiet/shake/quiet in both nearby panes.",
+            "outcome": "Original native impact and aftershocks retain shared visible smoke/particles. Every physical process has matching same-frame native quake fields and actualY705/708 offsets in both panes, followed by quietY704. Native health context inspected; no radial blast-damage path or contact-hit claim.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-dcc1002-F197-F198-nearby-explosion-reviewed.json",
+                "sha256": "08ce4b2f40d86c2d60b9dd5552cc678cd1aafd45d7812c7b34439ce7e12c7596"
+              }
+            ],
+            "limits": [
+              "One native intro falling-controller impact and its aftershocks, category0/type0/sub1 origin800FA384, with both heroes nearby and two4:3 panes on each physical process. No every explosion, distant event, campaign or other profile/OS inference.",
+              "Agreed LAB prerequisite initializes original CP1 and places bodies/camera on source-qualified ground, then runs only original primary placement scanner once. Waiting/fall/contact/terrain edits/effects/quake and native health outcomes remain original; route traversal is bypassed. Strict ordinary capture and offline replay refuse fixture taint.",
+              "Original producer contact strength8 and attack rectangle(-14,-40,28,80) are separate from its cosmetic type3 particles and type4 debris. E9F1C/EA09C do not create radial blast damage. Body/HP histories are inspected and retained, but incidental losses are not attributed to this producer; damaging contact, complete hurt-box overlap and type4-pool detail are not qualified.",
+              "Nearby other original controllers also quake. InitialE9F1C callerRAEA074 identifies its producer inS1; aftershockEA09C callerRAEA174 usesS0. Only source-attributed commands for this actualFA384 actor establish once-per-world event, not a count of every room command.",
+              "Dispatcher traces omit direct compiled producer calls. Actual source-pinned action3/Y descent, later contact4/burst and recovery5 establish fall progression. Actual private25FB0 entry context establishes both same-frame quake inputs/offsets through quiet/shake/quiet; no call census inferred from incomplete dispatcher trace.",
+              "Root reviewed all18 composed captures. Existing corrupt scenery, initial hero overlap, incidental hurt sprites and bright/olive effect disks remain explicit; no general artwork, palette or HUD-fidelity pass. Still images establish visibility; actual camera offsets independently establish shake.",
+              "Prior V80/V81 source refusal, V82 observer failures and G-drive NET watchdog boot failure remain retained. Final LOCAL usesG output and successful NET usesverifiedidleF output, with identical source/image/observer/gameplay settings and watchdog. Storage contention is plausible, not proven causal. No failed-run credit transfer."
+            ],
+            "bypasses": [
+              "Agreed LAB prerequisite initializes original CP1 and places bodies/camera on source-qualified ground, then runs only original primary placement scanner once. Waiting/fall/contact/terrain edits/effects/quake and native health outcomes remain original; route traversal is bypassed. Strict ordinary capture and offline replay refuse fixture taint."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "cameras": "split",
+              "local_cameras": "split",
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "pre-agreed original introCP1 then native falling impact"
+            },
+            "action": "Observe source-attributed original fall/contact/impact effects and actual native private-camera quiet/shake/quiet in both nearby panes.",
+            "outcome": "Original native impact and aftershocks retain shared visible smoke/particles. Every physical process has matching same-frame native quake fields and actualY705/708 offsets in both panes, followed by quietY704. Native health context inspected; no radial blast-damage path or contact-hit claim.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-dcc1002-F197-F198-nearby-explosion-reviewed.json",
+                "sha256": "08ce4b2f40d86c2d60b9dd5552cc678cd1aafd45d7812c7b34439ce7e12c7596"
+              }
+            ],
+            "limits": [
+              "One native intro falling-controller impact and its aftershocks, category0/type0/sub1 origin800FA384, with both heroes nearby and two4:3 panes on each physical process. No every explosion, distant event, campaign or other profile/OS inference.",
+              "Agreed LAB prerequisite initializes original CP1 and places bodies/camera on source-qualified ground, then runs only original primary placement scanner once. Waiting/fall/contact/terrain edits/effects/quake and native health outcomes remain original; route traversal is bypassed. Strict ordinary capture and offline replay refuse fixture taint.",
+              "Original producer contact strength8 and attack rectangle(-14,-40,28,80) are separate from its cosmetic type3 particles and type4 debris. E9F1C/EA09C do not create radial blast damage. Body/HP histories are inspected and retained, but incidental losses are not attributed to this producer; damaging contact, complete hurt-box overlap and type4-pool detail are not qualified.",
+              "Nearby other original controllers also quake. InitialE9F1C callerRAEA074 identifies its producer inS1; aftershockEA09C callerRAEA174 usesS0. Only source-attributed commands for this actualFA384 actor establish once-per-world event, not a count of every room command.",
+              "Dispatcher traces omit direct compiled producer calls. Actual source-pinned action3/Y descent, later contact4/burst and recovery5 establish fall progression. Actual private25FB0 entry context establishes both same-frame quake inputs/offsets through quiet/shake/quiet; no call census inferred from incomplete dispatcher trace.",
+              "Root reviewed all18 composed captures. Existing corrupt scenery, initial hero overlap, incidental hurt sprites and bright/olive effect disks remain explicit; no general artwork, palette or HUD-fidelity pass. Still images establish visibility; actual camera offsets independently establish shake.",
+              "Prior V80/V81 source refusal, V82 observer failures and G-drive NET watchdog boot failure remain retained. Final LOCAL usesG output and successful NET usesverifiedidleF output, with identical source/image/observer/gameplay settings and watchdog. Storage contention is plausible, not proven causal. No failed-run credit transfer."
+            ],
+            "bypasses": [
+              "Agreed LAB prerequisite initializes original CP1 and places bodies/camera on source-qualified ground, then runs only original primary placement scanner once. Waiting/fall/contact/terrain edits/effects/quake and native health outcomes remain original; route traversal is bypassed. Strict ordinary capture and offline replay refuse fixture taint."
+            ]
+          }
+        ],
+        "limitations": "Exactdcc1002 LOCAL+NET nearby native impact/aftershock presentation and actual per-view shake reviewed. AgreedCP1/pose prerequisite, corrupt scenery/overlap and non-attributed health changes explicit; no contact-damage, radial blast, distant-event or general artwork claim."
       }
     },
     {
@@ -18216,24 +18293,101 @@
       "frozen_row_sha256": "eba8950ac24a23657542597743429f4ad0bdebe5326befc89141094e3342aefd",
       "x6": {
         "workstream": "camera",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Nearby camera shake from native explosion",
         "bounded_check": "Retain camera offsets through an original nearby explosion for each view; visible particles alone cannot establish correct native screen shake.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "cameras": "split",
+              "local_cameras": "split",
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "pre-agreed original introCP1 then native falling impact"
+            },
+            "action": "Observe source-attributed original fall/contact/impact effects and actual native private-camera quiet/shake/quiet in both nearby panes.",
+            "outcome": "Original native impact and aftershocks retain shared visible smoke/particles. Every physical process has matching same-frame native quake fields and actualY705/708 offsets in both panes, followed by quietY704. Native health context inspected; no radial blast-damage path or contact-hit claim.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-dcc1002-F197-F198-nearby-explosion-reviewed.json",
+                "sha256": "08ce4b2f40d86c2d60b9dd5552cc678cd1aafd45d7812c7b34439ce7e12c7596"
+              }
+            ],
+            "limits": [
+              "One native intro falling-controller impact and its aftershocks, category0/type0/sub1 origin800FA384, with both heroes nearby and two4:3 panes on each physical process. No every explosion, distant event, campaign or other profile/OS inference.",
+              "Agreed LAB prerequisite initializes original CP1 and places bodies/camera on source-qualified ground, then runs only original primary placement scanner once. Waiting/fall/contact/terrain edits/effects/quake and native health outcomes remain original; route traversal is bypassed. Strict ordinary capture and offline replay refuse fixture taint.",
+              "Original producer contact strength8 and attack rectangle(-14,-40,28,80) are separate from its cosmetic type3 particles and type4 debris. E9F1C/EA09C do not create radial blast damage. Body/HP histories are inspected and retained, but incidental losses are not attributed to this producer; damaging contact, complete hurt-box overlap and type4-pool detail are not qualified.",
+              "Nearby other original controllers also quake. InitialE9F1C callerRAEA074 identifies its producer inS1; aftershockEA09C callerRAEA174 usesS0. Only source-attributed commands for this actualFA384 actor establish once-per-world event, not a count of every room command.",
+              "Dispatcher traces omit direct compiled producer calls. Actual source-pinned action3/Y descent, later contact4/burst and recovery5 establish fall progression. Actual private25FB0 entry context establishes both same-frame quake inputs/offsets through quiet/shake/quiet; no call census inferred from incomplete dispatcher trace.",
+              "Root reviewed all18 composed captures. Existing corrupt scenery, initial hero overlap, incidental hurt sprites and bright/olive effect disks remain explicit; no general artwork, palette or HUD-fidelity pass. Still images establish visibility; actual camera offsets independently establish shake.",
+              "Prior V80/V81 source refusal, V82 observer failures and G-drive NET watchdog boot failure remain retained. Final LOCAL usesG output and successful NET usesverifiedidleF output, with identical source/image/observer/gameplay settings and watchdog. Storage contention is plausible, not proven causal. No failed-run credit transfer."
+            ],
+            "bypasses": [
+              "Agreed LAB prerequisite initializes original CP1 and places bodies/camera on source-qualified ground, then runs only original primary placement scanner once. Waiting/fall/contact/terrain edits/effects/quake and native health outcomes remain original; route traversal is bypassed. Strict ordinary capture and offline replay refuse fixture taint."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "cameras": "split",
+              "local_cameras": "split",
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "pre-agreed original introCP1 then native falling impact"
+            },
+            "action": "Observe source-attributed original fall/contact/impact effects and actual native private-camera quiet/shake/quiet in both nearby panes.",
+            "outcome": "Original native impact and aftershocks retain shared visible smoke/particles. Every physical process has matching same-frame native quake fields and actualY705/708 offsets in both panes, followed by quietY704. Native health context inspected; no radial blast-damage path or contact-hit claim.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-dcc1002-F197-F198-nearby-explosion-reviewed.json",
+                "sha256": "08ce4b2f40d86c2d60b9dd5552cc678cd1aafd45d7812c7b34439ce7e12c7596"
+              }
+            ],
+            "limits": [
+              "One native intro falling-controller impact and its aftershocks, category0/type0/sub1 origin800FA384, with both heroes nearby and two4:3 panes on each physical process. No every explosion, distant event, campaign or other profile/OS inference.",
+              "Agreed LAB prerequisite initializes original CP1 and places bodies/camera on source-qualified ground, then runs only original primary placement scanner once. Waiting/fall/contact/terrain edits/effects/quake and native health outcomes remain original; route traversal is bypassed. Strict ordinary capture and offline replay refuse fixture taint.",
+              "Original producer contact strength8 and attack rectangle(-14,-40,28,80) are separate from its cosmetic type3 particles and type4 debris. E9F1C/EA09C do not create radial blast damage. Body/HP histories are inspected and retained, but incidental losses are not attributed to this producer; damaging contact, complete hurt-box overlap and type4-pool detail are not qualified.",
+              "Nearby other original controllers also quake. InitialE9F1C callerRAEA074 identifies its producer inS1; aftershockEA09C callerRAEA174 usesS0. Only source-attributed commands for this actualFA384 actor establish once-per-world event, not a count of every room command.",
+              "Dispatcher traces omit direct compiled producer calls. Actual source-pinned action3/Y descent, later contact4/burst and recovery5 establish fall progression. Actual private25FB0 entry context establishes both same-frame quake inputs/offsets through quiet/shake/quiet; no call census inferred from incomplete dispatcher trace.",
+              "Root reviewed all18 composed captures. Existing corrupt scenery, initial hero overlap, incidental hurt sprites and bright/olive effect disks remain explicit; no general artwork, palette or HUD-fidelity pass. Still images establish visibility; actual camera offsets independently establish shake.",
+              "Prior V80/V81 source refusal, V82 observer failures and G-drive NET watchdog boot failure remain retained. Final LOCAL usesG output and successful NET usesverifiedidleF output, with identical source/image/observer/gameplay settings and watchdog. Storage contention is plausible, not proven causal. No failed-run credit transfer."
+            ],
+            "bypasses": [
+              "Agreed LAB prerequisite initializes original CP1 and places bodies/camera on source-qualified ground, then runs only original primary placement scanner once. Waiting/fall/contact/terrain edits/effects/quake and native health outcomes remain original; route traversal is bypassed. Strict ordinary capture and offline replay refuse fixture taint."
+            ]
+          }
+        ],
+        "limitations": "Exactdcc1002 LOCAL+NET nearby native impact/aftershock presentation and actual per-view shake reviewed. AgreedCP1/pose prerequisite, corrupt scenery/overlap and non-attributed health changes explicit; no contact-damage, radial blast, distant-event or general artwork claim."
       }
     },
     {

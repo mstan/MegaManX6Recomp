@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 75 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F79, F89, F91, F92, F95, F97, F98, F101, F102, F107, F110, F114, F116, F119, F121, F133, F137, F144, F157, F163, F170, F173, F177, F178, F184, F191, F204, F205, F208), 4 failed, 155 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 77 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F79, F89, F91, F92, F95, F97, F98, F101, F102, F107, F110, F114, F116, F119, F121, F133, F137, F144, F157, F163, F170, F173, F177, F178, F184, F191, F197, F198, F204, F205, F208), 4 failed, 153 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,8 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 27
+
+**F197/F198 are closed: 77 passed / 4 failed / 153 unverified (32.9%).** The [same-candidate nearby native explosion review](evidence/mmx6-camera/manifest-bound-dcc1002-F197-F198-nearby-explosion-reviewed.json) qualifies actual falling impact/aftershocks, visible shared particles and both native private-camera offsets through quiet/shake/quiet in LOCAL and NET. The extra Zero quake tick is fixed by preserving the original pre-update input. All4 LOCAL/15 NET parent gates, resolved CRC, cards and owned exits pass; all18 composed captures reviewed. Native cosmetic-burst/contact-damage distinction and scenery limits remain explicit. This adds two since75.
 
 **F184 is closed: 75 passed / 4 failed / 155 unverified (32.1%).** The [initial native midboss camera review](evidence/mmx6-scene/manifest-bound-50cc26e-F184-initial-midboss-camera-reviewed.json) reuses completed exact50cc26e LOCAL/NET. Only Zero approaches; X stays5904 at admission. First allocation occurs during the original authored door sweep, then both physical peers reach6064/224 before released initial combat. Native boss32→28→24 establishes actual interaction separately from eventual defeat/exit. All12 composed images re-reviewed, with prerequisite scenery/overlap limits retained; no new runtime needed.
 

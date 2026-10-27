@@ -1,0 +1,3901 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F197",
+    "F198"
+  ],
+  "frozen_row_sha256": {
+    "F197": "52099aa36e9f5b991c4f9dde15e66bf9ceba3ec5b85fb4d5db1e454aa49c18f5",
+    "F198": "eba8950ac24a23657542597743429f4ad0bdebe5326befc89141094e3342aefd"
+  },
+  "result": "passed",
+  "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-v82-final-binding-root-v1.json",
+    "binding_sha256": "0172ea22254cee069ec4f1d3c401f14ea050cd018efbcc7d7f7265d10379a12a",
+    "image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+    "manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+    "provenance_sha256": "6a3d1bd53edc47b8f248fef3b452154cfb936a4df0e63a6a9798774e58eafd2d",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v82-nearby-explosion-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v31",
+    "host_revision": 14
+  },
+  "integrated_source_commit": "ac864410ebc973a9097a9ff60283e5409ac3cc1c",
+  "integrated_code_equals_tested_candidate": true,
+  "observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_nearby_explosion_v82_root_v3.py",
+    "bytes": 17031,
+    "sha256": "0f7a66056616e29b9f7f2c64c63b06d72a7bdf96a61f64dccb3b2ced647676d8"
+  },
+  "source_review": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F197-world-damage-source-v82-worker-v1.txt",
+    "bytes": 8013,
+    "sha256": "5d528b0bc8e91653262f4d79c94e9fe817660e9f0392a6a186f4f022dd3fd860"
+  },
+  "original_source_spans_rechecked": [
+    {
+      "first": "0x800e9f1c",
+      "end": "0x800ea8e0",
+      "sha256": "e2bda9cff14fd0efdd904ac35f896a1b74c4d2c2684f83b780170d0aed35274e"
+    },
+    {
+      "first": "0x800477e4",
+      "end": "0x800478f0",
+      "sha256": "2e9c08c870d6ef86aff668f069fb49995285d3cbc2cf200d1dfcb77c3aa584ff"
+    },
+    {
+      "first": "0x80049ebc",
+      "end": "0x80049f98",
+      "sha256": "550c350b4b8e0174834a331d871a69c2aced7d504923903beedc7a2f8c0f17c7"
+    },
+    {
+      "first": "0x8004a194",
+      "end": "0x8004a398",
+      "sha256": "696de697f42c3e4480b4cc023bfe615d53326149a317c14e8763ee9b913e2c98"
+    },
+    {
+      "first": "0x8002d230",
+      "end": "0x8002d2b0",
+      "sha256": "2a4f0d8b73820e1b22335b4c26a4aeec9439f0cd3680a737c806c0750f7c5c34"
+    }
+  ],
+  "implementation": "Capture original canonical2927C pre-update quake input once per host frame and run each native private camera once from that same input. Per-view positions/other authored fields and original clamping remain local; cache is host-only and excluded from simulation snapshots/digests.",
+  "modes": {
+    "local": {
+      "result": "passed",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-local-v82-root-v3\\qualification.json",
+        "bytes": 9648416,
+        "sha256": "857db5218f651267dc7b9006d770228946f8218e9009da9eab4d8fe9ce9f0928"
+      },
+      "native_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-local-v82-root-v3\\ammo-hud\\intro-admission\\observations.json",
+        "bytes": 4291912,
+        "sha256": "19d1aa8646832a5b0442ebb35bcc3896d073df6a5ae8d74c4d5e453e57c23984"
+      },
+      "executed_source_pins": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-local-v82-root-v3\\executed-source-pins.json",
+        "bytes": 1370,
+        "sha256": "3336f3df41dfb61edfe19de2a249de7756e1cee926ee2bd60dc2f5469003887e"
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "native_checks": {
+        "native_original_fall_contact_explosion": true,
+        "original_shared_world_burst_and_quake_once": true,
+        "both_actual_private_cameras_displace_and_return": true,
+        "shared_quake_native_phase_once_per_view": true,
+        "native_body_health_history_retained": true
+      },
+      "witnesses": [
+        {
+          "peer": 0,
+          "actual_native_cameras": {
+            "peer": 0,
+            "seats": [
+              {
+                "seat": 0,
+                "draw_entries": 376,
+                "displaced_entries": 18,
+                "displaced_Y_raw": [
+                  46202880,
+                  46399488
+                ],
+                "quiet_entries": 186
+              },
+              {
+                "seat": 1,
+                "draw_entries": 376,
+                "displaced_entries": 18,
+                "displaced_Y_raw": [
+                  46202880,
+                  46399488
+                ],
+                "quiet_entries": 186
+              }
+            ],
+            "shared_quake_phase_mismatches": []
+          },
+          "producer_addresses": [
+            "0x8008efe4"
+          ],
+          "original_commands": [
+            {
+              "sequence": 33105,
+              "frame": 3221,
+              "caller": "0x800EA074",
+              "producer_register": "s1",
+              "producer": "0x8008efe4",
+              "arguments": [
+                8,
+                4,
+                2
+              ],
+              "six_native_stores": [
+                {
+                  "seq": 33105,
+                  "addr": "0x0009722F",
+                  "old": "0x00000000",
+                  "new": "0x00000008",
+                  "ra": "0x800EA074",
+                  "func": "0x000029CC",
+                  "pc": "0x80029494",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF00",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x00000008",
+                  "a1": "0x00000004",
+                  "a2": "0x00000002",
+                  "a3": "0x00000001",
+                  "t0": "0x00000048",
+                  "t1": "0x800D0000",
+                  "s0": "0x800971F8",
+                  "s1": "0x8008EFE4",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3221,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 33106,
+                  "addr": "0x0009723E",
+                  "old": "0x00000000",
+                  "new": "0x00000004",
+                  "ra": "0x800EA074",
+                  "func": "0x000029CC",
+                  "pc": "0x80029498",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF00",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x00000008",
+                  "a1": "0x00000004",
+                  "a2": "0x00000002",
+                  "a3": "0x00000001",
+                  "t0": "0x00000048",
+                  "t1": "0x800D0000",
+                  "s0": "0x800971F8",
+                  "s1": "0x8008EFE4",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3221,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 33107,
+                  "addr": "0x00097237",
+                  "old": "0x00000000",
+                  "new": "0x00000004",
+                  "ra": "0x800EA074",
+                  "func": "0x000029CC",
+                  "pc": "0x8002949C",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF00",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x00000008",
+                  "a1": "0x00000004",
+                  "a2": "0x00000002",
+                  "a3": "0x00000001",
+                  "t0": "0x00000048",
+                  "t1": "0x800D0000",
+                  "s0": "0x800971F8",
+                  "s1": "0x8008EFE4",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3221,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 33108,
+                  "addr": "0x00097235",
+                  "old": "0x00000000",
+                  "new": "0x00000002",
+                  "ra": "0x800EA074",
+                  "func": "0x000029CC",
+                  "pc": "0x800294A0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF00",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x00000008",
+                  "a1": "0x00000004",
+                  "a2": "0x00000002",
+                  "a3": "0x00000001",
+                  "t0": "0x00000048",
+                  "t1": "0x800D0000",
+                  "s0": "0x800971F8",
+                  "s1": "0x8008EFE4",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3221,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 33109,
+                  "addr": "0x00097233",
+                  "old": "0x00000000",
+                  "new": "0x00000002",
+                  "ra": "0x800EA074",
+                  "func": "0x000029CC",
+                  "pc": "0x800294A4",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF00",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x00000008",
+                  "a1": "0x00000004",
+                  "a2": "0x00000002",
+                  "a3": "0x00000001",
+                  "t0": "0x00000048",
+                  "t1": "0x800D0000",
+                  "s0": "0x800971F8",
+                  "s1": "0x8008EFE4",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3221,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 33110,
+                  "addr": "0x0009722C",
+                  "old": "0x00000000",
+                  "new": "0x00000001",
+                  "ra": "0x800EA074",
+                  "func": "0x000029CC",
+                  "pc": "0x800294B0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF00",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000001",
+                  "a0": "0x00000008",
+                  "a1": "0x00000004",
+                  "a2": "0x00000002",
+                  "a3": "0x00000001",
+                  "t0": "0x00000048",
+                  "t1": "0x800D0000",
+                  "s0": "0x800971F8",
+                  "s1": "0x8008EFE4",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3221,
+                  "w": 2,
+                  "dma_ch": -1
+                }
+              ]
+            },
+            {
+              "sequence": 35919,
+              "frame": 3234,
+              "caller": "0x800EA174",
+              "producer_register": "s0",
+              "producer": "0x8008efe4",
+              "arguments": [
+                12,
+                1,
+                2
+              ],
+              "six_native_stores": [
+                {
+                  "seq": 35919,
+                  "addr": "0x0009722F",
+                  "old": "0x00000000",
+                  "new": "0x0000000C",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x80029494",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3234,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 35920,
+                  "addr": "0x0009723E",
+                  "old": "0x00000004",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x80029498",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3234,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 35921,
+                  "addr": "0x00097237",
+                  "old": "0x00000084",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x8002949C",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3234,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 35922,
+                  "addr": "0x00097235",
+                  "old": "0x00000001",
+                  "new": "0x00000002",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294A0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3234,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 35923,
+                  "addr": "0x00097233",
+                  "old": "0x00000002",
+                  "new": "0x00000002",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294A4",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3234,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 35924,
+                  "addr": "0x0009722C",
+                  "old": "0x00000000",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294B0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000001",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3234,
+                  "w": 2,
+                  "dma_ch": -1
+                }
+              ]
+            },
+            {
+              "sequence": 39485,
+              "frame": 3250,
+              "caller": "0x800EA174",
+              "producer_register": "s0",
+              "producer": "0x8008efe4",
+              "arguments": [
+                12,
+                1,
+                2
+              ],
+              "six_native_stores": [
+                {
+                  "seq": 39485,
+                  "addr": "0x0009722F",
+                  "old": "0x00000000",
+                  "new": "0x0000000C",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x80029494",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3250,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 39486,
+                  "addr": "0x0009723E",
+                  "old": "0x00000001",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x80029498",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3250,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 39487,
+                  "addr": "0x00097237",
+                  "old": "0x00000081",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x8002949C",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3250,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 39488,
+                  "addr": "0x00097235",
+                  "old": "0x00000001",
+                  "new": "0x00000002",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294A0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3250,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 39489,
+                  "addr": "0x00097233",
+                  "old": "0x00000002",
+                  "new": "0x00000002",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294A4",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3250,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 39490,
+                  "addr": "0x0009722C",
+                  "old": "0x00000000",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294B0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000001",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3250,
+                  "w": 2,
+                  "dma_ch": -1
+                }
+              ]
+            },
+            {
+              "sequence": 43931,
+              "frame": 3266,
+              "caller": "0x800EA174",
+              "producer_register": "s0",
+              "producer": "0x8008efe4",
+              "arguments": [
+                12,
+                1,
+                2
+              ],
+              "six_native_stores": [
+                {
+                  "seq": 43931,
+                  "addr": "0x0009722F",
+                  "old": "0x00000000",
+                  "new": "0x0000000C",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x80029494",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3266,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 43932,
+                  "addr": "0x0009723E",
+                  "old": "0x00000001",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x80029498",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3266,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 43933,
+                  "addr": "0x00097237",
+                  "old": "0x00000081",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x8002949C",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3266,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 43934,
+                  "addr": "0x00097235",
+                  "old": "0x00000001",
+                  "new": "0x00000002",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294A0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3266,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 43935,
+                  "addr": "0x00097233",
+                  "old": "0x00000002",
+                  "new": "0x00000002",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294A4",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3266,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 43936,
+                  "addr": "0x0009722C",
+                  "old": "0x00000000",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294B0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000001",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 3266,
+                  "w": 2,
+                  "dma_ch": -1
+                }
+              ]
+            }
+          ],
+          "maximum_typed_parent_owned_particles": 21,
+          "particle_selectors": [
+            7,
+            8,
+            9
+          ],
+          "producer_trajectory": {
+            "peer": 0,
+            "trajectory": [
+              {
+                "index": 58,
+                "native_timer": 131,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 59,
+                "native_timer": 138,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 60,
+                "native_timer": 144,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 61,
+                "native_timer": 149,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 62,
+                "native_timer": 154,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 63,
+                "native_timer": 160,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 64,
+                "native_timer": 165,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 65,
+                "native_timer": 170,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 66,
+                "native_timer": 175,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 67,
+                "native_timer": 181,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 68,
+                "native_timer": 187,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 69,
+                "native_timer": 195,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 70,
+                "native_timer": 201,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 71,
+                "native_timer": 209,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 72,
+                "native_timer": 217,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 73,
+                "native_timer": 224,
+                "x_raw": 306184192,
+                "y_raw": 48295936,
+                "action": 3,
+                "phase": 1
+              },
+              {
+                "index": 74,
+                "native_timer": 232,
+                "x_raw": 306184192,
+                "y_raw": 48726016,
+                "action": 3,
+                "phase": 1
+              },
+              {
+                "index": 75,
+                "native_timer": 238,
+                "x_raw": 306184192,
+                "y_raw": 49414144,
+                "action": 3,
+                "phase": 1
+              },
+              {
+                "index": 76,
+                "native_timer": 244,
+                "x_raw": 306184192,
+                "y_raw": 50397184,
+                "action": 3,
+                "phase": 1
+              },
+              {
+                "index": 77,
+                "native_timer": 249,
+                "x_raw": 306184192,
+                "y_raw": 51441664,
+                "action": 3,
+                "phase": 1
+              },
+              {
+                "index": 78,
+                "native_timer": 254,
+                "x_raw": 306184192,
+                "y_raw": 52690944,
+                "action": 3,
+                "phase": 1
+              },
+              {
+                "index": 79,
+                "native_timer": 259,
+                "x_raw": 306184192,
+                "y_raw": 53837824,
+                "action": 3,
+                "phase": 1
+              },
+              {
+                "index": 80,
+                "native_timer": 264,
+                "x_raw": 306184192,
+                "y_raw": 56160256,
+                "action": 3,
+                "phase": 1
+              },
+              {
+                "index": 81,
+                "native_timer": 271,
+                "x_raw": 306184192,
+                "y_raw": 56229888,
+                "action": 4,
+                "phase": 3
+              },
+              {
+                "index": 82,
+                "native_timer": 280,
+                "x_raw": 306184192,
+                "y_raw": 56229888,
+                "action": 4,
+                "phase": 3
+              },
+              {
+                "index": 83,
+                "native_timer": 286,
+                "x_raw": 306184192,
+                "y_raw": 56229888,
+                "action": 4,
+                "phase": 3
+              },
+              {
+                "index": 84,
+                "native_timer": 294,
+                "x_raw": 306184192,
+                "y_raw": 56229888,
+                "action": 4,
+                "phase": 3
+              },
+              {
+                "index": 85,
+                "native_timer": 300,
+                "x_raw": 306184192,
+                "y_raw": 56229888,
+                "action": 4,
+                "phase": 3
+              },
+              {
+                "index": 86,
+                "native_timer": 305,
+                "x_raw": 306184192,
+                "y_raw": 56229888,
+                "action": 4,
+                "phase": 3
+              },
+              {
+                "index": 87,
+                "native_timer": 312,
+                "x_raw": 306184192,
+                "y_raw": 56229888,
+                "action": 4,
+                "phase": 3
+              },
+              {
+                "index": 88,
+                "native_timer": 318,
+                "x_raw": 306184192,
+                "y_raw": 56229888,
+                "action": 4,
+                "phase": 3
+              },
+              {
+                "index": 89,
+                "native_timer": 323,
+                "x_raw": 306184192,
+                "y_raw": 56229888,
+                "action": 4,
+                "phase": 3
+              },
+              {
+                "index": 90,
+                "native_timer": 330,
+                "x_raw": 306184192,
+                "y_raw": 56197120,
+                "action": 5,
+                "phase": 1
+              },
+              {
+                "index": 91,
+                "native_timer": 335,
+                "x_raw": 306184192,
+                "y_raw": 56033280,
+                "action": 5,
+                "phase": 1
+              },
+              {
+                "index": 92,
+                "native_timer": 341,
+                "x_raw": 306184192,
+                "y_raw": 55836672,
+                "action": 5,
+                "phase": 1
+              },
+              {
+                "index": 93,
+                "native_timer": 346,
+                "x_raw": 306184192,
+                "y_raw": 55640064,
+                "action": 5,
+                "phase": 1
+              },
+              {
+                "index": 94,
+                "native_timer": 354,
+                "x_raw": 306184192,
+                "y_raw": 55443456,
+                "action": 5,
+                "phase": 1
+              }
+            ],
+            "dispatcher_trace_limit": "Direct compiled producer calls are absent; retained helper dispatcher trace is not used as a complete call census."
+          },
+          "body_health_context": [
+            {
+              "seat": 0,
+              "HP_values": [
+                30,
+                31,
+                32,
+                159
+              ],
+              "X_range_raw": [
+                308027392,
+                310378496
+              ],
+              "Y_range_raw": [
+                55246848,
+                55246848
+              ],
+              "limits": "HP deltas are retained observations; no contact-damage attribution or collision-negative pass. This burst has no native radial damage path."
+            },
+            {
+              "seat": 1,
+              "HP_values": [
+                23,
+                26,
+                29,
+                32
+              ],
+              "X_range_raw": [
+                309600256,
+                311951360
+              ],
+              "Y_range_raw": [
+                55181312,
+                55181312
+              ],
+              "limits": "HP deltas are retained observations; no contact-damage attribution or collision-negative pass. This burst has no native radial damage path."
+            }
+          ],
+          "canonical_trace_query": {
+            "total": 58837,
+            "available": 58837,
+            "emitted": 48,
+            "pc_lo": "0x80029494",
+            "pc_hi": "0x800294B4"
+          }
+        }
+      ],
+      "owned_cleanup": [
+        {
+          "owned_pid": 76828,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "recording_refusals": [
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+            "manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+            "mode": "offline",
+            "profile": null,
+            "settings_sha256": "988b297888a0fed84cb8481b4ecde9d165ccb98f20beb6b26aece025baf16f74",
+            "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false
+        }
+      ],
+      "resolved_crc": [],
+      "host_profile_final": null,
+      "live_original_source_guards": [
+        {
+          "address": "0x80029f38",
+          "bytes": 1028,
+          "sha256": "4cc5c282ba6f2a26f531dd282c241da0eab842c45d20653424c3e67fdba80de1"
+        },
+        {
+          "address": "0x8002943c",
+          "bytes": 120,
+          "sha256": "6075dff66ecfcbacb282ddda89f8a1c3533ab1683616e32ca30df7b8b26fdaea"
+        },
+        {
+          "address": "0x80029afc",
+          "bytes": 176,
+          "sha256": "40d3fb5f8dcac069c24da48958efcc0c2c502efd6df0d85b9935329257655fa3"
+        },
+        {
+          "address": "0x8002d230",
+          "bytes": 128,
+          "sha256": "2a4f0d8b73820e1b22335b4c26a4aeec9439f0cd3680a737c806c0750f7c5c34"
+        },
+        {
+          "address": "0x80079210",
+          "bytes": 32,
+          "sha256": "5569727c205b5f4cdbf19ca9849235e51ff800e64ee956e32ac978396cfdad24"
+        },
+        {
+          "address": "0x800477e4",
+          "bytes": 268,
+          "sha256": "2e9c08c870d6ef86aff668f069fb49995285d3cbc2cf200d1dfcb77c3aa584ff"
+        },
+        {
+          "address": "0x800e9f1c",
+          "bytes": 700,
+          "sha256": "5704e34728d15883afe3d557d1b27bfd97e78ec138a04160612d42a44283db90",
+          "original_bin2_sha256": "d8bcf3aea6caf1dd4098b681ad912692835d726dfe16fddca779e82d894de607"
+        },
+        {
+          "address": "0x800faa64",
+          "bytes": 100,
+          "sha256": "cae9bedfcb9308dda39ac6e2fb3771098551f56f8c5561d87f4d7a1c2d9c3cd5",
+          "original_bin2_sha256": "d8bcf3aea6caf1dd4098b681ad912692835d726dfe16fddca779e82d894de607"
+        },
+        {
+          "address": "0x800fa384",
+          "bytes": 8,
+          "sha256": "6e5bc19b9ff48fb730343e1971b2483aee0a97f1a30319d5cd0f62d60734fa6d",
+          "original_bin2_sha256": "d8bcf3aea6caf1dd4098b681ad912692835d726dfe16fddca779e82d894de607"
+        }
+      ]
+    },
+    "netplay": {
+      "result": "passed",
+      "parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-netplay-v82-root-v4\\qualification.json",
+        "bytes": 9153316,
+        "sha256": "81e516fb4f7f8334eacd6f48606908b049fc5859a1dfdc77552a76d3935832e3"
+      },
+      "native_observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-netplay-v82-root-v4\\intro-admission\\observations.json",
+        "bytes": 6422158,
+        "sha256": "9c703172d32dac03d2e4984b6a2a408a263a19cad1e45aa1d849ee625729d85e"
+      },
+      "executed_source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-netplay-v82-root-v4\\executed-source-pins.json",
+        "bytes": 1370,
+        "sha256": "2d3bf89e27eb5ab27ee648e017364b87770c1450e578d5325731d50f507a2619"
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "native_checks": {
+        "native_original_fall_contact_explosion": true,
+        "original_shared_world_burst_and_quake_once": true,
+        "both_actual_private_cameras_displace_and_return": true,
+        "shared_quake_native_phase_once_per_view": true,
+        "native_body_health_history_retained": true
+      },
+      "witnesses": [
+        {
+          "peer": 0,
+          "actual_native_cameras": {
+            "peer": 0,
+            "seats": [
+              {
+                "seat": 0,
+                "draw_entries": 401,
+                "displaced_entries": 18,
+                "displaced_Y_raw": [
+                  46202880,
+                  46399488
+                ],
+                "quiet_entries": 199
+              },
+              {
+                "seat": 1,
+                "draw_entries": 401,
+                "displaced_entries": 18,
+                "displaced_Y_raw": [
+                  46202880,
+                  46399488
+                ],
+                "quiet_entries": 199
+              }
+            ],
+            "shared_quake_phase_mismatches": []
+          },
+          "producer_addresses": [
+            "0x8008efe4"
+          ],
+          "original_commands": [
+            {
+              "sequence": 33365,
+              "frame": 4311,
+              "caller": "0x800EA074",
+              "producer_register": "s1",
+              "producer": "0x8008efe4",
+              "arguments": [
+                8,
+                4,
+                2
+              ],
+              "six_native_stores": [
+                {
+                  "seq": 33365,
+                  "addr": "0x0009722F",
+                  "old": "0x00000000",
+                  "new": "0x00000008",
+                  "ra": "0x800EA074",
+                  "func": "0x000029CC",
+                  "pc": "0x80029494",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF00",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x00000008",
+                  "a1": "0x00000004",
+                  "a2": "0x00000002",
+                  "a3": "0x00000001",
+                  "t0": "0x00000048",
+                  "t1": "0x800D0000",
+                  "s0": "0x800971F8",
+                  "s1": "0x8008EFE4",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4311,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 33366,
+                  "addr": "0x0009723E",
+                  "old": "0x00000000",
+                  "new": "0x00000004",
+                  "ra": "0x800EA074",
+                  "func": "0x000029CC",
+                  "pc": "0x80029498",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF00",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x00000008",
+                  "a1": "0x00000004",
+                  "a2": "0x00000002",
+                  "a3": "0x00000001",
+                  "t0": "0x00000048",
+                  "t1": "0x800D0000",
+                  "s0": "0x800971F8",
+                  "s1": "0x8008EFE4",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4311,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 33367,
+                  "addr": "0x00097237",
+                  "old": "0x00000000",
+                  "new": "0x00000004",
+                  "ra": "0x800EA074",
+                  "func": "0x000029CC",
+                  "pc": "0x8002949C",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF00",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x00000008",
+                  "a1": "0x00000004",
+                  "a2": "0x00000002",
+                  "a3": "0x00000001",
+                  "t0": "0x00000048",
+                  "t1": "0x800D0000",
+                  "s0": "0x800971F8",
+                  "s1": "0x8008EFE4",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4311,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 33368,
+                  "addr": "0x00097235",
+                  "old": "0x00000000",
+                  "new": "0x00000002",
+                  "ra": "0x800EA074",
+                  "func": "0x000029CC",
+                  "pc": "0x800294A0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF00",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x00000008",
+                  "a1": "0x00000004",
+                  "a2": "0x00000002",
+                  "a3": "0x00000001",
+                  "t0": "0x00000048",
+                  "t1": "0x800D0000",
+                  "s0": "0x800971F8",
+                  "s1": "0x8008EFE4",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4311,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 33369,
+                  "addr": "0x00097233",
+                  "old": "0x00000000",
+                  "new": "0x00000002",
+                  "ra": "0x800EA074",
+                  "func": "0x000029CC",
+                  "pc": "0x800294A4",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF00",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x00000008",
+                  "a1": "0x00000004",
+                  "a2": "0x00000002",
+                  "a3": "0x00000001",
+                  "t0": "0x00000048",
+                  "t1": "0x800D0000",
+                  "s0": "0x800971F8",
+                  "s1": "0x8008EFE4",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4311,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 33370,
+                  "addr": "0x0009722C",
+                  "old": "0x00000000",
+                  "new": "0x00000001",
+                  "ra": "0x800EA074",
+                  "func": "0x000029CC",
+                  "pc": "0x800294B0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF00",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000001",
+                  "a0": "0x00000008",
+                  "a1": "0x00000004",
+                  "a2": "0x00000002",
+                  "a3": "0x00000001",
+                  "t0": "0x00000048",
+                  "t1": "0x800D0000",
+                  "s0": "0x800971F8",
+                  "s1": "0x8008EFE4",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4311,
+                  "w": 2,
+                  "dma_ch": -1
+                }
+              ]
+            },
+            {
+              "sequence": 36179,
+              "frame": 4324,
+              "caller": "0x800EA174",
+              "producer_register": "s0",
+              "producer": "0x8008efe4",
+              "arguments": [
+                12,
+                1,
+                2
+              ],
+              "six_native_stores": [
+                {
+                  "seq": 36179,
+                  "addr": "0x0009722F",
+                  "old": "0x00000000",
+                  "new": "0x0000000C",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x80029494",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4324,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 36180,
+                  "addr": "0x0009723E",
+                  "old": "0x00000004",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x80029498",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4324,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 36181,
+                  "addr": "0x00097237",
+                  "old": "0x00000084",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x8002949C",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4324,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 36182,
+                  "addr": "0x00097235",
+                  "old": "0x00000001",
+                  "new": "0x00000002",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294A0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4324,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 36183,
+                  "addr": "0x00097233",
+                  "old": "0x00000002",
+                  "new": "0x00000002",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294A4",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4324,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 36184,
+                  "addr": "0x0009722C",
+                  "old": "0x00000000",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294B0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000001",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4324,
+                  "w": 2,
+                  "dma_ch": -1
+                }
+              ]
+            },
+            {
+              "sequence": 39745,
+              "frame": 4340,
+              "caller": "0x800EA174",
+              "producer_register": "s0",
+              "producer": "0x8008efe4",
+              "arguments": [
+                12,
+                1,
+                2
+              ],
+              "six_native_stores": [
+                {
+                  "seq": 39745,
+                  "addr": "0x0009722F",
+                  "old": "0x00000000",
+                  "new": "0x0000000C",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x80029494",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4340,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 39746,
+                  "addr": "0x0009723E",
+                  "old": "0x00000001",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x80029498",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4340,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 39747,
+                  "addr": "0x00097237",
+                  "old": "0x00000081",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x8002949C",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4340,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 39748,
+                  "addr": "0x00097235",
+                  "old": "0x00000001",
+                  "new": "0x00000002",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294A0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4340,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 39749,
+                  "addr": "0x00097233",
+                  "old": "0x00000002",
+                  "new": "0x00000002",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294A4",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4340,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 39750,
+                  "addr": "0x0009722C",
+                  "old": "0x00000000",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294B0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000001",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4340,
+                  "w": 2,
+                  "dma_ch": -1
+                }
+              ]
+            },
+            {
+              "sequence": 44191,
+              "frame": 4356,
+              "caller": "0x800EA174",
+              "producer_register": "s0",
+              "producer": "0x8008efe4",
+              "arguments": [
+                12,
+                1,
+                2
+              ],
+              "six_native_stores": [
+                {
+                  "seq": 44191,
+                  "addr": "0x0009722F",
+                  "old": "0x00000000",
+                  "new": "0x0000000C",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x80029494",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4356,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 44192,
+                  "addr": "0x0009723E",
+                  "old": "0x00000001",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x80029498",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4356,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 44193,
+                  "addr": "0x00097237",
+                  "old": "0x00000081",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x8002949C",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4356,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 44194,
+                  "addr": "0x00097235",
+                  "old": "0x00000001",
+                  "new": "0x00000002",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294A0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4356,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 44195,
+                  "addr": "0x00097233",
+                  "old": "0x00000002",
+                  "new": "0x00000002",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294A4",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4356,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 44196,
+                  "addr": "0x0009722C",
+                  "old": "0x00000000",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294B0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000001",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4356,
+                  "w": 2,
+                  "dma_ch": -1
+                }
+              ]
+            }
+          ],
+          "maximum_typed_parent_owned_particles": 18,
+          "particle_selectors": [
+            7,
+            8,
+            9
+          ],
+          "producer_trajectory": {
+            "peer": 0,
+            "trajectory": [
+              {
+                "index": 31,
+                "native_timer": 132,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 32,
+                "native_timer": 148,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 33,
+                "native_timer": 162,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 34,
+                "native_timer": 173,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 35,
+                "native_timer": 185,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 36,
+                "native_timer": 196,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 37,
+                "native_timer": 209,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 38,
+                "native_timer": 222,
+                "x_raw": 306184192,
+                "y_raw": 48267264,
+                "action": 3,
+                "phase": 1
+              },
+              {
+                "index": 39,
+                "native_timer": 239,
+                "x_raw": 306184192,
+                "y_raw": 49557504,
+                "action": 3,
+                "phase": 1
+              },
+              {
+                "index": 40,
+                "native_timer": 251,
+                "x_raw": 306184192,
+                "y_raw": 51916800,
+                "action": 3,
+                "phase": 1
+              },
+              {
+                "index": 41,
+                "native_timer": 261,
+                "x_raw": 306184192,
+                "y_raw": 54784000,
+                "action": 3,
+                "phase": 1
+              },
+              {
+                "index": 42,
+                "native_timer": 278,
+                "x_raw": 306184192,
+                "y_raw": 56229888,
+                "action": 4,
+                "phase": 3
+              },
+              {
+                "index": 43,
+                "native_timer": 299,
+                "x_raw": 306184192,
+                "y_raw": 56229888,
+                "action": 4,
+                "phase": 3
+              },
+              {
+                "index": 44,
+                "native_timer": 310,
+                "x_raw": 306184192,
+                "y_raw": 56229888,
+                "action": 4,
+                "phase": 3
+              },
+              {
+                "index": 45,
+                "native_timer": 322,
+                "x_raw": 306184192,
+                "y_raw": 56229888,
+                "action": 4,
+                "phase": 3
+              },
+              {
+                "index": 46,
+                "native_timer": 334,
+                "x_raw": 306184192,
+                "y_raw": 56033280,
+                "action": 5,
+                "phase": 1
+              },
+              {
+                "index": 47,
+                "native_timer": 346,
+                "x_raw": 306184192,
+                "y_raw": 55672832,
+                "action": 5,
+                "phase": 1
+              },
+              {
+                "index": 48,
+                "native_timer": 356,
+                "x_raw": 306184192,
+                "y_raw": 55312384,
+                "action": 5,
+                "phase": 1
+              },
+              {
+                "index": 49,
+                "native_timer": 366,
+                "x_raw": 306184192,
+                "y_raw": 55050240,
+                "action": 5,
+                "phase": 1
+              }
+            ],
+            "dispatcher_trace_limit": "Direct compiled producer calls are absent; retained helper dispatcher trace is not used as a complete call census."
+          },
+          "body_health_context": [
+            {
+              "seat": 0,
+              "HP_values": [
+                30,
+                31,
+                32
+              ],
+              "X_range_raw": [
+                308027392,
+                310378496
+              ],
+              "Y_range_raw": [
+                55246848,
+                55246848
+              ],
+              "limits": "HP deltas are retained observations; no contact-damage attribution or collision-negative pass. This burst has no native radial damage path."
+            },
+            {
+              "seat": 1,
+              "HP_values": [
+                23,
+                26,
+                29,
+                32
+              ],
+              "X_range_raw": [
+                309600256,
+                311951360
+              ],
+              "Y_range_raw": [
+                55181312,
+                55181312
+              ],
+              "limits": "HP deltas are retained observations; no contact-damage attribution or collision-negative pass. This burst has no native radial damage path."
+            }
+          ],
+          "canonical_trace_query": {
+            "total": 63617,
+            "available": 63617,
+            "emitted": 48,
+            "pc_lo": "0x80029494",
+            "pc_hi": "0x800294B4"
+          }
+        },
+        {
+          "peer": 1,
+          "actual_native_cameras": {
+            "peer": 1,
+            "seats": [
+              {
+                "seat": 0,
+                "draw_entries": 402,
+                "displaced_entries": 18,
+                "displaced_Y_raw": [
+                  46202880,
+                  46399488
+                ],
+                "quiet_entries": 204
+              },
+              {
+                "seat": 1,
+                "draw_entries": 402,
+                "displaced_entries": 18,
+                "displaced_Y_raw": [
+                  46202880,
+                  46399488
+                ],
+                "quiet_entries": 204
+              }
+            ],
+            "shared_quake_phase_mismatches": []
+          },
+          "producer_addresses": [
+            "0x8008efe4"
+          ],
+          "original_commands": [
+            {
+              "sequence": 33265,
+              "frame": 4311,
+              "caller": "0x800EA074",
+              "producer_register": "s1",
+              "producer": "0x8008efe4",
+              "arguments": [
+                8,
+                4,
+                2
+              ],
+              "six_native_stores": [
+                {
+                  "seq": 33265,
+                  "addr": "0x0009722F",
+                  "old": "0x00000000",
+                  "new": "0x00000008",
+                  "ra": "0x800EA074",
+                  "func": "0x000029CC",
+                  "pc": "0x80029494",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF00",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x00000008",
+                  "a1": "0x00000004",
+                  "a2": "0x00000002",
+                  "a3": "0x00000001",
+                  "t0": "0x00000048",
+                  "t1": "0x800D0000",
+                  "s0": "0x800971F8",
+                  "s1": "0x8008EFE4",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4311,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 33266,
+                  "addr": "0x0009723E",
+                  "old": "0x00000000",
+                  "new": "0x00000004",
+                  "ra": "0x800EA074",
+                  "func": "0x000029CC",
+                  "pc": "0x80029498",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF00",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x00000008",
+                  "a1": "0x00000004",
+                  "a2": "0x00000002",
+                  "a3": "0x00000001",
+                  "t0": "0x00000048",
+                  "t1": "0x800D0000",
+                  "s0": "0x800971F8",
+                  "s1": "0x8008EFE4",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4311,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 33267,
+                  "addr": "0x00097237",
+                  "old": "0x00000000",
+                  "new": "0x00000004",
+                  "ra": "0x800EA074",
+                  "func": "0x000029CC",
+                  "pc": "0x8002949C",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF00",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x00000008",
+                  "a1": "0x00000004",
+                  "a2": "0x00000002",
+                  "a3": "0x00000001",
+                  "t0": "0x00000048",
+                  "t1": "0x800D0000",
+                  "s0": "0x800971F8",
+                  "s1": "0x8008EFE4",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4311,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 33268,
+                  "addr": "0x00097235",
+                  "old": "0x00000000",
+                  "new": "0x00000002",
+                  "ra": "0x800EA074",
+                  "func": "0x000029CC",
+                  "pc": "0x800294A0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF00",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x00000008",
+                  "a1": "0x00000004",
+                  "a2": "0x00000002",
+                  "a3": "0x00000001",
+                  "t0": "0x00000048",
+                  "t1": "0x800D0000",
+                  "s0": "0x800971F8",
+                  "s1": "0x8008EFE4",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4311,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 33269,
+                  "addr": "0x00097233",
+                  "old": "0x00000000",
+                  "new": "0x00000002",
+                  "ra": "0x800EA074",
+                  "func": "0x000029CC",
+                  "pc": "0x800294A4",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF00",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x00000008",
+                  "a1": "0x00000004",
+                  "a2": "0x00000002",
+                  "a3": "0x00000001",
+                  "t0": "0x00000048",
+                  "t1": "0x800D0000",
+                  "s0": "0x800971F8",
+                  "s1": "0x8008EFE4",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4311,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 33270,
+                  "addr": "0x0009722C",
+                  "old": "0x00000000",
+                  "new": "0x00000001",
+                  "ra": "0x800EA074",
+                  "func": "0x000029CC",
+                  "pc": "0x800294B0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF00",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000001",
+                  "a0": "0x00000008",
+                  "a1": "0x00000004",
+                  "a2": "0x00000002",
+                  "a3": "0x00000001",
+                  "t0": "0x00000048",
+                  "t1": "0x800D0000",
+                  "s0": "0x800971F8",
+                  "s1": "0x8008EFE4",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4311,
+                  "w": 2,
+                  "dma_ch": -1
+                }
+              ]
+            },
+            {
+              "sequence": 36079,
+              "frame": 4324,
+              "caller": "0x800EA174",
+              "producer_register": "s0",
+              "producer": "0x8008efe4",
+              "arguments": [
+                12,
+                1,
+                2
+              ],
+              "six_native_stores": [
+                {
+                  "seq": 36079,
+                  "addr": "0x0009722F",
+                  "old": "0x00000000",
+                  "new": "0x0000000C",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x80029494",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4324,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 36080,
+                  "addr": "0x0009723E",
+                  "old": "0x00000004",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x80029498",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4324,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 36081,
+                  "addr": "0x00097237",
+                  "old": "0x00000084",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x8002949C",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4324,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 36082,
+                  "addr": "0x00097235",
+                  "old": "0x00000001",
+                  "new": "0x00000002",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294A0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4324,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 36083,
+                  "addr": "0x00097233",
+                  "old": "0x00000002",
+                  "new": "0x00000002",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294A4",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4324,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 36084,
+                  "addr": "0x0009722C",
+                  "old": "0x00000000",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294B0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000001",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4324,
+                  "w": 2,
+                  "dma_ch": -1
+                }
+              ]
+            },
+            {
+              "sequence": 39645,
+              "frame": 4340,
+              "caller": "0x800EA174",
+              "producer_register": "s0",
+              "producer": "0x8008efe4",
+              "arguments": [
+                12,
+                1,
+                2
+              ],
+              "six_native_stores": [
+                {
+                  "seq": 39645,
+                  "addr": "0x0009722F",
+                  "old": "0x00000000",
+                  "new": "0x0000000C",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x80029494",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4340,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 39646,
+                  "addr": "0x0009723E",
+                  "old": "0x00000001",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x80029498",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4340,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 39647,
+                  "addr": "0x00097237",
+                  "old": "0x00000081",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x8002949C",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4340,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 39648,
+                  "addr": "0x00097235",
+                  "old": "0x00000001",
+                  "new": "0x00000002",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294A0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4340,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 39649,
+                  "addr": "0x00097233",
+                  "old": "0x00000002",
+                  "new": "0x00000002",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294A4",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4340,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 39650,
+                  "addr": "0x0009722C",
+                  "old": "0x00000000",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294B0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000001",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4340,
+                  "w": 2,
+                  "dma_ch": -1
+                }
+              ]
+            },
+            {
+              "sequence": 44091,
+              "frame": 4356,
+              "caller": "0x800EA174",
+              "producer_register": "s0",
+              "producer": "0x8008efe4",
+              "arguments": [
+                12,
+                1,
+                2
+              ],
+              "six_native_stores": [
+                {
+                  "seq": 44091,
+                  "addr": "0x0009722F",
+                  "old": "0x00000000",
+                  "new": "0x0000000C",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x80029494",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4356,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 44092,
+                  "addr": "0x0009723E",
+                  "old": "0x00000001",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x80029498",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4356,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 44093,
+                  "addr": "0x00097237",
+                  "old": "0x00000081",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x8002949C",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4356,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 44094,
+                  "addr": "0x00097235",
+                  "old": "0x00000001",
+                  "new": "0x00000002",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294A0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4356,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 44095,
+                  "addr": "0x00097233",
+                  "old": "0x00000002",
+                  "new": "0x00000002",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294A4",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000000",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4356,
+                  "w": 1,
+                  "dma_ch": -1
+                },
+                {
+                  "seq": 44096,
+                  "addr": "0x0009722C",
+                  "old": "0x00000000",
+                  "new": "0x00000001",
+                  "ra": "0x800EA174",
+                  "func": "0x1FC085D8",
+                  "pc": "0x800294B0",
+                  "cpu_pc": "0x00000000",
+                  "sp": "0x801FEF08",
+                  "v0": "0x800971F8",
+                  "v1": "0x00000001",
+                  "a0": "0x0000000C",
+                  "a1": "0x00000001",
+                  "a2": "0x00000002",
+                  "a3": "0x00000000",
+                  "t0": "0x00000004",
+                  "t1": "0x800E41B0",
+                  "s0": "0x8008EFE4",
+                  "s1": "0x80090C88",
+                  "s2": "0x800CCED0",
+                  "s3": "0x80090000",
+                  "s4": "0x80097420",
+                  "s5": "0x800D0000",
+                  "frame": 4356,
+                  "w": 2,
+                  "dma_ch": -1
+                }
+              ]
+            }
+          ],
+          "maximum_typed_parent_owned_particles": 19,
+          "particle_selectors": [
+            7,
+            8,
+            9
+          ],
+          "producer_trajectory": {
+            "peer": 1,
+            "trajectory": [
+              {
+                "index": 31,
+                "native_timer": 137,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 32,
+                "native_timer": 154,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 33,
+                "native_timer": 166,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 34,
+                "native_timer": 178,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 35,
+                "native_timer": 189,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 36,
+                "native_timer": 201,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 37,
+                "native_timer": 214,
+                "x_raw": 306184192,
+                "y_raw": 48234496,
+                "action": 2,
+                "phase": 1
+              },
+              {
+                "index": 38,
+                "native_timer": 229,
+                "x_raw": 306184192,
+                "y_raw": 48562176,
+                "action": 3,
+                "phase": 1
+              },
+              {
+                "index": 39,
+                "native_timer": 244,
+                "x_raw": 306184192,
+                "y_raw": 50589696,
+                "action": 3,
+                "phase": 1
+              },
+              {
+                "index": 40,
+                "native_timer": 257,
+                "x_raw": 306184192,
+                "y_raw": 53248000,
+                "action": 3,
+                "phase": 1
+              },
+              {
+                "index": 41,
+                "native_timer": 267,
+                "x_raw": 306184192,
+                "y_raw": 56229888,
+                "action": 4,
+                "phase": 2
+              },
+              {
+                "index": 42,
+                "native_timer": 285,
+                "x_raw": 306184192,
+                "y_raw": 56229888,
+                "action": 4,
+                "phase": 3
+              },
+              {
+                "index": 43,
+                "native_timer": 305,
+                "x_raw": 306184192,
+                "y_raw": 56229888,
+                "action": 4,
+                "phase": 3
+              },
+              {
+                "index": 44,
+                "native_timer": 318,
+                "x_raw": 306184192,
+                "y_raw": 56229888,
+                "action": 4,
+                "phase": 3
+              },
+              {
+                "index": 45,
+                "native_timer": 328,
+                "x_raw": 306184192,
+                "y_raw": 56229888,
+                "action": 5,
+                "phase": 0
+              },
+              {
+                "index": 46,
+                "native_timer": 340,
+                "x_raw": 306184192,
+                "y_raw": 55836672,
+                "action": 5,
+                "phase": 1
+              },
+              {
+                "index": 47,
+                "native_timer": 351,
+                "x_raw": 306184192,
+                "y_raw": 55541760,
+                "action": 5,
+                "phase": 1
+              },
+              {
+                "index": 48,
+                "native_timer": 361,
+                "x_raw": 306184192,
+                "y_raw": 55181312,
+                "action": 5,
+                "phase": 1
+              },
+              {
+                "index": 49,
+                "native_timer": 370,
+                "x_raw": 306184192,
+                "y_raw": 54886400,
+                "action": 5,
+                "phase": 1
+              }
+            ],
+            "dispatcher_trace_limit": "Direct compiled producer calls are absent; retained helper dispatcher trace is not used as a complete call census."
+          },
+          "body_health_context": [
+            {
+              "seat": 0,
+              "HP_values": [
+                30,
+                31,
+                32,
+                159
+              ],
+              "X_range_raw": [
+                308027392,
+                310378496
+              ],
+              "Y_range_raw": [
+                55246848,
+                55246848
+              ],
+              "limits": "HP deltas are retained observations; no contact-damage attribution or collision-negative pass. This burst has no native radial damage path."
+            },
+            {
+              "seat": 1,
+              "HP_values": [
+                23,
+                26,
+                29,
+                32
+              ],
+              "X_range_raw": [
+                309600256,
+                311951360
+              ],
+              "Y_range_raw": [
+                55181312,
+                55181312
+              ],
+              "limits": "HP deltas are retained observations; no contact-damage attribution or collision-negative pass. This burst has no native radial damage path."
+            }
+          ],
+          "canonical_trace_query": {
+            "total": 65677,
+            "available": 65677,
+            "emitted": 48,
+            "pc_lo": "0x80029494",
+            "pc_hi": "0x800294B4"
+          }
+        }
+      ],
+      "owned_cleanup": [
+        {
+          "owned_pid": 70088,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "owned_pid": 46588,
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "recording_refusals": [
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+            "manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 14,
+              "selected_sha256": "9bc32dcd802ecdeb0fedde7a1649baa9f35692df1fb824491e87a14c65af53a8"
+            },
+            "settings_sha256": "0fa7315d6512a3833aaf431808bfb9ecd8a586abbb5aedfb85e09b379faec1c8",
+            "simulation_contract_sha256": "97fa796193ff4c4e476820c64abac70dc2c8bf274bfe53083e434d67a62b2f5f"
+          },
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false
+        },
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+            "manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 14,
+              "selected_sha256": "9bc32dcd802ecdeb0fedde7a1649baa9f35692df1fb824491e87a14c65af53a8"
+            },
+            "settings_sha256": "63c5af62b7c82058dbbd15a2f04782de9be8e3a1349d5f8b4eefd11e5bdc416a",
+            "simulation_contract_sha256": "97fa796193ff4c4e476820c64abac70dc2c8bf274bfe53083e434d67a62b2f5f"
+          },
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false
+        }
+      ],
+      "resolved_crc": [
+        {
+          "label": "initial idle",
+          "samples": [
+            {
+              "simulation_tick": 2912,
+              "core": "222edfed",
+              "mod": "1558cead"
+            },
+            {
+              "simulation_tick": 2944,
+              "core": "73f2e5a1",
+              "mod": "115f1d0d"
+            },
+            {
+              "simulation_tick": 2976,
+              "core": "3a88fa9b",
+              "mod": "caa16993"
+            },
+            {
+              "simulation_tick": 3008,
+              "core": "96abb3a7",
+              "mod": "a66fc0b3"
+            },
+            {
+              "simulation_tick": 3040,
+              "core": "1f9021ec",
+              "mod": "5e8a5125"
+            },
+            {
+              "simulation_tick": 3072,
+              "core": "a96a97b6",
+              "mod": "ecec1589"
+            },
+            {
+              "simulation_tick": 3104,
+              "core": "c6a2b061",
+              "mod": "1c086489"
+            }
+          ],
+          "resolved_through": [
+            3130,
+            3130
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": [
+            {
+              "simulation_tick": 3168,
+              "core": "45b5ff25",
+              "mod": "96f876da"
+            },
+            {
+              "simulation_tick": 3200,
+              "core": "1e88fa0c",
+              "mod": "5b61dad4"
+            },
+            {
+              "simulation_tick": 3232,
+              "core": "2f54ff80",
+              "mod": "76a33f7e"
+            },
+            {
+              "simulation_tick": 3264,
+              "core": "ab6596da",
+              "mod": "8b258cde"
+            },
+            {
+              "simulation_tick": 3296,
+              "core": "890eb6d9",
+              "mod": "0aa0e78c"
+            },
+            {
+              "simulation_tick": 3328,
+              "core": "4b5d4a76",
+              "mod": "1e9abdac"
+            },
+            {
+              "simulation_tick": 3360,
+              "core": "f7c107e9",
+              "mod": "7c6d40a6"
+            },
+            {
+              "simulation_tick": 3392,
+              "core": "1986333a",
+              "mod": "f57a8f52"
+            }
+          ],
+          "resolved_through": [
+            3397,
+            3397
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": [
+            {
+              "simulation_tick": 3488,
+              "core": "d79c18a0",
+              "mod": "71b8808e"
+            },
+            {
+              "simulation_tick": 3520,
+              "core": "4d5b64d4",
+              "mod": "ef8c547c"
+            },
+            {
+              "simulation_tick": 3552,
+              "core": "b4b876b0",
+              "mod": "73d0da9c"
+            },
+            {
+              "simulation_tick": 3584,
+              "core": "60ce48cb",
+              "mod": "b17d68e4"
+            },
+            {
+              "simulation_tick": 3616,
+              "core": "ad35658e",
+              "mod": "a5da1356"
+            },
+            {
+              "simulation_tick": 3648,
+              "core": "0282fc85",
+              "mod": "96f876da"
+            },
+            {
+              "simulation_tick": 3680,
+              "core": "73bc5c58",
+              "mod": "5b61dad4"
+            }
+          ],
+          "resolved_through": [
+            3697,
+            3696
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": [
+            {
+              "simulation_tick": 4448,
+              "core": "0916f34b",
+              "mod": "77c39fb5"
+            },
+            {
+              "simulation_tick": 4480,
+              "core": "c38d8772",
+              "mod": "19108d5e"
+            },
+            {
+              "simulation_tick": 4512,
+              "core": "2821c677",
+              "mod": "cd6f87c4"
+            },
+            {
+              "simulation_tick": 4544,
+              "core": "8ca03774",
+              "mod": "12d916d7"
+            },
+            {
+              "simulation_tick": 4576,
+              "core": "a30bfc4e",
+              "mod": "f185f00f"
+            }
+          ],
+          "resolved_through": [
+            4598,
+            4598
+          ]
+        }
+      ],
+      "host_profile_final": {
+        "profile": "mmx6.win64-clang22.loopback",
+        "revision": 14,
+        "selected_sha256": "9bc32dcd802ecdeb0fedde7a1649baa9f35692df1fb824491e87a14c65af53a8",
+        "peers": [
+          {
+            "capabilities": {
+              "actual_image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 14,
+              "selected_sha256": "9bc32dcd802ecdeb0fedde7a1649baa9f35692df1fb824491e87a14c65af53a8",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          },
+          {
+            "capabilities": {
+              "actual_image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "cpu_arch": 2,
+              "features": 127,
+              "backend": 2,
+              "fp": 2,
+              "overlays": "interpreted",
+              "offers": 1
+            },
+            "settlement": {
+              "profile": "mmx6.win64-clang22.loopback",
+              "revision": 14,
+              "selected_sha256": "9bc32dcd802ecdeb0fedde7a1649baa9f35692df1fb824491e87a14c65af53a8",
+              "cycles": 0,
+              "sim_tick": 0,
+              "before_enter_guest": 1
+            }
+          }
+        ]
+      },
+      "live_original_source_guards": [
+        {
+          "address": "0x80029f38",
+          "bytes": 1028,
+          "sha256": "4cc5c282ba6f2a26f531dd282c241da0eab842c45d20653424c3e67fdba80de1"
+        },
+        {
+          "address": "0x8002943c",
+          "bytes": 120,
+          "sha256": "6075dff66ecfcbacb282ddda89f8a1c3533ab1683616e32ca30df7b8b26fdaea"
+        },
+        {
+          "address": "0x80029afc",
+          "bytes": 176,
+          "sha256": "40d3fb5f8dcac069c24da48958efcc0c2c502efd6df0d85b9935329257655fa3"
+        },
+        {
+          "address": "0x8002d230",
+          "bytes": 128,
+          "sha256": "2a4f0d8b73820e1b22335b4c26a4aeec9439f0cd3680a737c806c0750f7c5c34"
+        },
+        {
+          "address": "0x80079210",
+          "bytes": 32,
+          "sha256": "5569727c205b5f4cdbf19ca9849235e51ff800e64ee956e32ac978396cfdad24"
+        },
+        {
+          "address": "0x800477e4",
+          "bytes": 268,
+          "sha256": "2e9c08c870d6ef86aff668f069fb49995285d3cbc2cf200d1dfcb77c3aa584ff"
+        },
+        {
+          "address": "0x800e9f1c",
+          "bytes": 700,
+          "sha256": "5704e34728d15883afe3d557d1b27bfd97e78ec138a04160612d42a44283db90",
+          "original_bin2_sha256": "d8bcf3aea6caf1dd4098b681ad912692835d726dfe16fddca779e82d894de607"
+        },
+        {
+          "address": "0x800faa64",
+          "bytes": 100,
+          "sha256": "cae9bedfcb9308dda39ac6e2fb3771098551f56f8c5561d87f4d7a1c2d9c3cd5",
+          "original_bin2_sha256": "d8bcf3aea6caf1dd4098b681ad912692835d726dfe16fddca779e82d894de607"
+        },
+        {
+          "address": "0x800fa384",
+          "bytes": 8,
+          "sha256": "6e5bc19b9ff48fb730343e1971b2483aee0a97f1a30319d5cd0f62d60734fa6d",
+          "original_bin2_sha256": "d8bcf3aea6caf1dd4098b681ad912692835d726dfe16fddca779e82d894de607"
+        }
+      ]
+    }
+  },
+  "personally_reviewed_images": [
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "original-producer-ready",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-local-v82-root-v3\\ammo-hud\\intro-admission\\peer-0-original-producer-ready.png",
+        "bytes": 2074543,
+        "sha256": "d78ea0bc8af9726a1f4a918ccd7e5ce3b428ee38604487e1c73319c3403a68be"
+      },
+      "personally_reviewed": true,
+      "review": "Both nearby panes retain the authored falling producer and visible impact smoke/particles. Original bright/olive flash disks, overlapping heroes, incidental native hurt sprites and existing corrupt scenery remain visible. Native shake is established by actual camera traces, not these still images. No general scenery, palette fidelity, contact-damage or distant-event claim."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "native-action3-phase1",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-local-v82-root-v3\\ammo-hud\\intro-admission\\peer-0-native-action3-phase1.png",
+        "bytes": 2074543,
+        "sha256": "d3be6e2c42bcab01df4ca23944e7538b91a5755a865c77818e66cc16754c9f5b"
+      },
+      "personally_reviewed": true,
+      "review": "Both nearby panes retain the authored falling producer and visible impact smoke/particles. Original bright/olive flash disks, overlapping heroes, incidental native hurt sprites and existing corrupt scenery remain visible. Native shake is established by actual camera traces, not these still images. No general scenery, palette fidelity, contact-damage or distant-event claim."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "original-explosion-quake",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-local-v82-root-v3\\ammo-hud\\intro-admission\\peer-0-original-explosion-quake.png",
+        "bytes": 2074543,
+        "sha256": "894ead43ed692c91db6ede653be2976080a4d60c9eab1a910caa45b227319ced"
+      },
+      "personally_reviewed": true,
+      "review": "Both nearby panes retain the authored falling producer and visible impact smoke/particles. Original bright/olive flash disks, overlapping heroes, incidental native hurt sprites and existing corrupt scenery remain visible. Native shake is established by actual camera traces, not these still images. No general scenery, palette fidelity, contact-damage or distant-event claim."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "native-action4-phase3",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-local-v82-root-v3\\ammo-hud\\intro-admission\\peer-0-native-action4-phase3.png",
+        "bytes": 2074543,
+        "sha256": "50079b710f87ce65471257e57ee9d26644b563f010da5347be4d3c35126672a3"
+      },
+      "personally_reviewed": true,
+      "review": "Both nearby panes retain the authored falling producer and visible impact smoke/particles. Original bright/olive flash disks, overlapping heroes, incidental native hurt sprites and existing corrupt scenery remain visible. Native shake is established by actual camera traces, not these still images. No general scenery, palette fidelity, contact-damage or distant-event claim."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "original-explosion-particles",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-local-v82-root-v3\\ammo-hud\\intro-admission\\peer-0-original-explosion-particles.png",
+        "bytes": 2074543,
+        "sha256": "9594754d7a53f2e954f75a028b7fe7e39a27e8c46834df0a0363255246c3fcf6"
+      },
+      "personally_reviewed": true,
+      "review": "Both nearby panes retain the authored falling producer and visible impact smoke/particles. Original bright/olive flash disks, overlapping heroes, incidental native hurt sprites and existing corrupt scenery remain visible. Native shake is established by actual camera traces, not these still images. No general scenery, palette fidelity, contact-damage or distant-event claim."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "post-original-explosion-quiet",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-local-v82-root-v3\\ammo-hud\\intro-admission\\peer-0-post-original-explosion-quiet.png",
+        "bytes": 2074543,
+        "sha256": "0986aef99774db481fcc86b386534de667921b8ea8d77037062622c1f981a092"
+      },
+      "personally_reviewed": true,
+      "review": "Both nearby panes retain the authored falling producer and visible impact smoke/particles. Original bright/olive flash disks, overlapping heroes, incidental native hurt sprites and existing corrupt scenery remain visible. Native shake is established by actual camera traces, not these still images. No general scenery, palette fidelity, contact-damage or distant-event claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "original-producer-ready",
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-netplay-v82-root-v4\\intro-admission\\peer-0-original-producer-ready.png",
+        "bytes": 2074543,
+        "sha256": "c818ddf784947881a643e0551871dd872043ba5281b879cf3b32fba0b3d089b7"
+      },
+      "personally_reviewed": true,
+      "review": "Both nearby panes retain the authored falling producer and visible impact smoke/particles. Original bright/olive flash disks, overlapping heroes, incidental native hurt sprites and existing corrupt scenery remain visible. Native shake is established by actual camera traces, not these still images. No general scenery, palette fidelity, contact-damage or distant-event claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "original-producer-ready",
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-netplay-v82-root-v4\\intro-admission\\peer-1-original-producer-ready.png",
+        "bytes": 2074543,
+        "sha256": "31fa5a5935921c4909fdd51d855d50d1d5a9bba4ab6efdd7aeb985d1bc5504a9"
+      },
+      "personally_reviewed": true,
+      "review": "Both nearby panes retain the authored falling producer and visible impact smoke/particles. Original bright/olive flash disks, overlapping heroes, incidental native hurt sprites and existing corrupt scenery remain visible. Native shake is established by actual camera traces, not these still images. No general scenery, palette fidelity, contact-damage or distant-event claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "native-action3-phase1",
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-netplay-v82-root-v4\\intro-admission\\peer-0-native-action3-phase1.png",
+        "bytes": 2074543,
+        "sha256": "941bf11698150d7b7de5ca25a53a28e70e5ea80e5df009264882e6852658509c"
+      },
+      "personally_reviewed": true,
+      "review": "Both nearby panes retain the authored falling producer and visible impact smoke/particles. Original bright/olive flash disks, overlapping heroes, incidental native hurt sprites and existing corrupt scenery remain visible. Native shake is established by actual camera traces, not these still images. No general scenery, palette fidelity, contact-damage or distant-event claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "native-action3-phase1",
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-netplay-v82-root-v4\\intro-admission\\peer-1-native-action3-phase1.png",
+        "bytes": 2074543,
+        "sha256": "28fe7fb7b38945c1763228095c8f54c59e77a958d7ee6b5541b937e997490df2"
+      },
+      "personally_reviewed": true,
+      "review": "Both nearby panes retain the authored falling producer and visible impact smoke/particles. Original bright/olive flash disks, overlapping heroes, incidental native hurt sprites and existing corrupt scenery remain visible. Native shake is established by actual camera traces, not these still images. No general scenery, palette fidelity, contact-damage or distant-event claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "original-explosion-quake",
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-netplay-v82-root-v4\\intro-admission\\peer-0-original-explosion-quake.png",
+        "bytes": 2074543,
+        "sha256": "a49721733042f6334af58b86421ecea6f302f5c30658ed29e57e2a9b1aad4d7d"
+      },
+      "personally_reviewed": true,
+      "review": "Both nearby panes retain the authored falling producer and visible impact smoke/particles. Original bright/olive flash disks, overlapping heroes, incidental native hurt sprites and existing corrupt scenery remain visible. Native shake is established by actual camera traces, not these still images. No general scenery, palette fidelity, contact-damage or distant-event claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "original-explosion-quake",
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-netplay-v82-root-v4\\intro-admission\\peer-1-original-explosion-quake.png",
+        "bytes": 2074543,
+        "sha256": "6cac99b33ac159429431ddfbdc09670b298b7a02ca26b02594e77d5a37ffe99b"
+      },
+      "personally_reviewed": true,
+      "review": "Both nearby panes retain the authored falling producer and visible impact smoke/particles. Original bright/olive flash disks, overlapping heroes, incidental native hurt sprites and existing corrupt scenery remain visible. Native shake is established by actual camera traces, not these still images. No general scenery, palette fidelity, contact-damage or distant-event claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "native-action4-phase3",
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-netplay-v82-root-v4\\intro-admission\\peer-0-native-action4-phase3.png",
+        "bytes": 2074543,
+        "sha256": "9523a1cd2de90cd726e1b7dea5be91119d9862e9c32b41d438a7e2deec36d944"
+      },
+      "personally_reviewed": true,
+      "review": "Both nearby panes retain the authored falling producer and visible impact smoke/particles. Original bright/olive flash disks, overlapping heroes, incidental native hurt sprites and existing corrupt scenery remain visible. Native shake is established by actual camera traces, not these still images. No general scenery, palette fidelity, contact-damage or distant-event claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "native-action4-phase3",
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-netplay-v82-root-v4\\intro-admission\\peer-1-native-action4-phase3.png",
+        "bytes": 2074543,
+        "sha256": "741674ab83302546b6a210f2fde07a595cac8fb9cbbca6293717513132c49261"
+      },
+      "personally_reviewed": true,
+      "review": "Both nearby panes retain the authored falling producer and visible impact smoke/particles. Original bright/olive flash disks, overlapping heroes, incidental native hurt sprites and existing corrupt scenery remain visible. Native shake is established by actual camera traces, not these still images. No general scenery, palette fidelity, contact-damage or distant-event claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "original-explosion-particles",
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-netplay-v82-root-v4\\intro-admission\\peer-0-original-explosion-particles.png",
+        "bytes": 2074543,
+        "sha256": "6f94fad52859cc1bfb8d65fd73486c8f2b2ae442e607d9db70b021f8dfaf7ad6"
+      },
+      "personally_reviewed": true,
+      "review": "Both nearby panes retain the authored falling producer and visible impact smoke/particles. Original bright/olive flash disks, overlapping heroes, incidental native hurt sprites and existing corrupt scenery remain visible. Native shake is established by actual camera traces, not these still images. No general scenery, palette fidelity, contact-damage or distant-event claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "original-explosion-particles",
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-netplay-v82-root-v4\\intro-admission\\peer-1-original-explosion-particles.png",
+        "bytes": 2074543,
+        "sha256": "8e1283bbfd6d2215b5a5d6f24fe7b1c7f49a4c661068d7b5b35862bcfd9215fe"
+      },
+      "personally_reviewed": true,
+      "review": "Both nearby panes retain the authored falling producer and visible impact smoke/particles. Original bright/olive flash disks, overlapping heroes, incidental native hurt sprites and existing corrupt scenery remain visible. Native shake is established by actual camera traces, not these still images. No general scenery, palette fidelity, contact-damage or distant-event claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "post-original-explosion-quiet",
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-netplay-v82-root-v4\\intro-admission\\peer-0-post-original-explosion-quiet.png",
+        "bytes": 2074543,
+        "sha256": "e97a622e97479a28ddcf86cf0b2f43c043c874b7f3c2adc0dc98b7e6a9750697"
+      },
+      "personally_reviewed": true,
+      "review": "Both nearby panes retain the authored falling producer and visible impact smoke/particles. Original bright/olive flash disks, overlapping heroes, incidental native hurt sprites and existing corrupt scenery remain visible. Native shake is established by actual camera traces, not these still images. No general scenery, palette fidelity, contact-damage or distant-event claim."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "post-original-explosion-quiet",
+      "image": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-netplay-v82-root-v4\\intro-admission\\peer-1-post-original-explosion-quiet.png",
+        "bytes": 2074543,
+        "sha256": "382b4f7aa414624f6c06903b512e2a524e4e0246144b55721fa855c0edfbf951"
+      },
+      "personally_reviewed": true,
+      "review": "Both nearby panes retain the authored falling producer and visible impact smoke/particles. Original bright/olive flash disks, overlapping heroes, incidental native hurt sprites and existing corrupt scenery remain visible. Native shake is established by actual camera traces, not these still images. No general scenery, palette fidelity, contact-damage or distant-event claim."
+    }
+  ],
+  "validation_logs": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v82-nearby-explosion-focused-root-v1.log",
+      "bytes": 7256,
+      "sha256": "eb5dfb7aec34492cd6216b648702c5dd493948ee4d0f479f3cdc32243ea20e89"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\test-v81-emitted-hooks-root-v1.log",
+      "bytes": 884,
+      "sha256": "082bea67f797749eae938c7dab865ff9bf099270d6a680f439c469c12c8d4303"
+    }
+  ],
+  "limits": [
+    "One native intro falling-controller impact and its aftershocks, category0/type0/sub1 origin800FA384, with both heroes nearby and two4:3 panes on each physical process. No every explosion, distant event, campaign or other profile/OS inference.",
+    "Agreed LAB prerequisite initializes original CP1 and places bodies/camera on source-qualified ground, then runs only original primary placement scanner once. Waiting/fall/contact/terrain edits/effects/quake and native health outcomes remain original; route traversal is bypassed. Strict ordinary capture and offline replay refuse fixture taint.",
+    "Original producer contact strength8 and attack rectangle(-14,-40,28,80) are separate from its cosmetic type3 particles and type4 debris. E9F1C/EA09C do not create radial blast damage. Body/HP histories are inspected and retained, but incidental losses are not attributed to this producer; damaging contact, complete hurt-box overlap and type4-pool detail are not qualified.",
+    "Nearby other original controllers also quake. InitialE9F1C callerRAEA074 identifies its producer inS1; aftershockEA09C callerRAEA174 usesS0. Only source-attributed commands for this actualFA384 actor establish once-per-world event, not a count of every room command.",
+    "Dispatcher traces omit direct compiled producer calls. Actual source-pinned action3/Y descent, later contact4/burst and recovery5 establish fall progression. Actual private25FB0 entry context establishes both same-frame quake inputs/offsets through quiet/shake/quiet; no call census inferred from incomplete dispatcher trace.",
+    "Root reviewed all18 composed captures. Existing corrupt scenery, initial hero overlap, incidental hurt sprites and bright/olive effect disks remain explicit; no general artwork, palette or HUD-fidelity pass. Still images establish visibility; actual camera offsets independently establish shake.",
+    "Prior V80/V81 source refusal, V82 observer failures and G-drive NET watchdog boot failure remain retained. Final LOCAL usesG output and successful NET usesverifiedidleF output, with identical source/image/observer/gameplay settings and watchdog. Storage contention is plausible, not proven causal. No failed-run credit transfer."
+  ]
+}
