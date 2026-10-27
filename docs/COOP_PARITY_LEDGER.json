@@ -9054,17 +9054,96 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "f7b7383577e9c52ccc001e2559bb02ba3e5ffd51",
+            "build_identity": {
+              "executable_sha256": "2d510ce79ea4312cc6b3697d33ff44cf66c0791adeed7093fb8f9258d3ac2c52",
+              "compiled_manifest_sha256": "7f8c5d19025ec4828feb88e4b8f84f1e5cc17dfabb9409788949378144983b96",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "stage": 0,
+              "section": 0,
+              "audio": "muted dummy",
+              "view": "shared4:3 OpenGL",
+              "prerequisite": "pre-agreed nativeCP2"
+            },
+            "action": "Cross actual original intro door guest first; retain native admission/controller release, live32HP boss, both accepted independent walks, full crash diagnostics and same-candidate separately named render counters.",
+            "outcome": "Native owner2 admission completes into live mode10/phase0 with both32HP and script ownership cleared; both ordinary walks accepted on each process. Full logs/final atexit tcp_quit/exit0/probe0, exact profile/resolvedCRC/cards/strict trace refusals pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-lifecycle/manifest-bound-f7b7383-F53-native-intro-admission-local-netplay-reviewed.json",
+                "sha256": "dbe113a4eddc00eb2910bbe4a5291d832b56e8abdc59673372192576238ccdae"
+              }
+            ],
+            "limits": [
+              "F53 alone is independently evaluated against its frozen row. X4 item53 is guest-led intro-door crash risk; item54 separately covers post-victory lock. Original completion here is native admission/controller completion into live fight and controls, not boss defeat or campaign completion.",
+              "Pre-agreed source-bound native CP2 is an explicit reachability bypass. Actual authored arrival, original closed-door contact by Zero with X133px behind, original camera/scanner/boss HP fill/passenger landing and both ordinary accepted controls occur afterward. Ordinary intro traversal/default launch remain unqualified.",
+              "Both modes use immutable f7b7383/image2d510ce/manifest7f8c5d1, SDK10b9021/UI34b5277. No credit transfers from older candidates or comparison statuses. Earlier receipts retaining no-F53 limits remain unchanged; this receipt makes a new explicit scope/runtime decision.",
+              "Full startup/stdout/stderr and final process reports retained for the actual admission/control executions. Only failed-capture messages are the required fixture-taint recording refusal. All three actual processes end atexit/tcp_quit/owned exit0 with unsupported-midblock and execution-probe trip counts0. Actual native forward progress, boss32HP release and independent movement establish completion; absence of log tokens alone does not.",
+              "Render watchdog/verification/VRAM/device-read counters0 are from explicitly separate F23 same-candidate, same original guest-admission executions. They supplement and are not attributed to R22 processes. No claim about every possible original tester crash trigger or long-duration stability.",
+              "Previously reviewed composed arrival/beam/controls images remain in the R22 receipt; normal overlap, boss explosions/hurt and corrupt checkpoint scenery remain explicit. No general rendering, content, full intro route, victory, finale, survivor/all-roster or other-host credit.",
+              "Exact profile/resolved full core/modCRC, private card preservation, graceful owned exits and strict fixture-tainted capture/replay refusals remain required. No writes to door/controller/success/HP/contact and no direct admission calls are used to earn this result."
+            ],
+            "bypasses": [
+              "Pre-agreed original native CP2 reachability only; actual guest door/controller/live boss and both controls afterward."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "f7b7383577e9c52ccc001e2559bb02ba3e5ffd51",
+            "build_identity": {
+              "executable_sha256": "2d510ce79ea4312cc6b3697d33ff44cf66c0791adeed7093fb8f9258d3ac2c52",
+              "compiled_manifest_sha256": "7f8c5d19025ec4828feb88e4b8f84f1e5cc17dfabb9409788949378144983b96",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "stage": 0,
+              "section": 0,
+              "audio": "muted dummy",
+              "view": "shared4:3 OpenGL",
+              "prerequisite": "pre-agreed nativeCP2"
+            },
+            "action": "Cross actual original intro door guest first; retain native admission/controller release, live32HP boss, both accepted independent walks, full crash diagnostics and same-candidate separately named render counters.",
+            "outcome": "Native owner2 admission completes into live mode10/phase0 with both32HP and script ownership cleared; both ordinary walks accepted on each process. Full logs/final atexit tcp_quit/exit0/probe0, exact profile/resolvedCRC/cards/strict trace refusals pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-lifecycle/manifest-bound-f7b7383-F53-native-intro-admission-local-netplay-reviewed.json",
+                "sha256": "dbe113a4eddc00eb2910bbe4a5291d832b56e8abdc59673372192576238ccdae"
+              }
+            ],
+            "limits": [
+              "F53 alone is independently evaluated against its frozen row. X4 item53 is guest-led intro-door crash risk; item54 separately covers post-victory lock. Original completion here is native admission/controller completion into live fight and controls, not boss defeat or campaign completion.",
+              "Pre-agreed source-bound native CP2 is an explicit reachability bypass. Actual authored arrival, original closed-door contact by Zero with X133px behind, original camera/scanner/boss HP fill/passenger landing and both ordinary accepted controls occur afterward. Ordinary intro traversal/default launch remain unqualified.",
+              "Both modes use immutable f7b7383/image2d510ce/manifest7f8c5d1, SDK10b9021/UI34b5277. No credit transfers from older candidates or comparison statuses. Earlier receipts retaining no-F53 limits remain unchanged; this receipt makes a new explicit scope/runtime decision.",
+              "Full startup/stdout/stderr and final process reports retained for the actual admission/control executions. Only failed-capture messages are the required fixture-taint recording refusal. All three actual processes end atexit/tcp_quit/owned exit0 with unsupported-midblock and execution-probe trip counts0. Actual native forward progress, boss32HP release and independent movement establish completion; absence of log tokens alone does not.",
+              "Render watchdog/verification/VRAM/device-read counters0 are from explicitly separate F23 same-candidate, same original guest-admission executions. They supplement and are not attributed to R22 processes. No claim about every possible original tester crash trigger or long-duration stability.",
+              "Previously reviewed composed arrival/beam/controls images remain in the R22 receipt; normal overlap, boss explosions/hurt and corrupt checkpoint scenery remain explicit. No general rendering, content, full intro route, victory, finale, survivor/all-roster or other-host credit.",
+              "Exact profile/resolved full core/modCRC, private card preservation, graceful owned exits and strict fixture-tainted capture/replay refusals remain required. No writes to door/controller/success/HP/contact and no direct admission calls are used to earn this result."
+            ],
+            "bypasses": [
+              "Pre-agreed original native CP2 reachability only; actual guest door/controller/live boss and both controls afterward."
+            ]
+          }
+        ],
+        "limitations": "Independent frozen F53 review on exactf7b7383 LOCAL+NET: qualified disclosed nativeCP2 prerequisite, actual guest-led original door/controller completion, boss32HP/live controls, full startup/process logs and graceful reports. Separate same-candidate F23 render counters explicitly labelled. No ordinary full route/victory/finale/general rendering or every-crash-trigger claim; older no-F53 receipts unchanged."
       }
     },
     {
