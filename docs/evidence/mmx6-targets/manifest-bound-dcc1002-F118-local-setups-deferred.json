@@ -1,0 +1,105 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F118"
+  ],
+  "frozen_row_sha256": "acb28f65a5014098b5cc8e1705294b0319bc387b73d4a4413a3433121239654c",
+  "result": "deferred_two_LOCAL_setups_no_native_secondary_damage_observed",
+  "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+  "source_analogue": "Original Yammark49/sub1 ownHP8, mainparent+80, own hurtF7964 and F1B88->31474; actualdamage remains unobserved",
+  "source_packet": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F118-native-secondary-target-ready-v82-worker-v1.json",
+    "bytes": 4577,
+    "sha256": "372cea85ccfec214c7d72fedb5d75e300bf759f6a973ee1ba94ea509be807e97"
+  },
+  "attempts": [
+    {
+      "session_id": 38760,
+      "version": 1,
+      "parent_status": "failed_setup",
+      "error": "Child left original ground reach/facing; no chase",
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true
+      },
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "cards_unchanged": true,
+      "observer_status": "failed_setup",
+      "samples": 37,
+      "offers": 0,
+      "selected_child": "0x8008efe4",
+      "outcome": "Static approach crossed moving child; original reach/facing failed before Square.",
+      "artifacts": [
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F118-local-v82-root-v1\\qualification.json",
+          "bytes": 5314581,
+          "sha256": "b5dcad949e5641ae811f88322f989ba40862061f692a4ac3a648f3a26048551c"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F118-local-v82-root-v1\\ammo-hud\\intro-admission\\F118-secondary-target\\observations.json",
+          "bytes": 1688837,
+          "sha256": "a0d864f1fa30e84a39aecbadaaa57079a3f51b9620c5dbaad9407e26d6d3a429"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F118-local-v82-root-v1\\ammo-hud\\intro-admission\\F118-Investigator-entry\\observations.json",
+          "bytes": 3022459,
+          "sha256": "402f6ea4d3c50479ad392498b977befc57318c089d7adc815b645e9b790fac53"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F118-local-v82-root-v1\\worker-executed-source.py",
+          "bytes": 7069,
+          "sha256": "2291cb314fded7dc6ee23ec51d747e15cb432bf66fd36058185405ed2dd9c69c"
+        }
+      ]
+    },
+    {
+      "session_id": 20300,
+      "version": 2,
+      "parent_status": "failed_setup",
+      "error": "Actual owned ground24 birth not retained",
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true
+      },
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "cards_unchanged": true,
+      "observer_status": "failed_partial",
+      "samples": 94,
+      "offers": 1,
+      "selected_child": "0x8008f080",
+      "outcome": "Keep entry position, wait actual child reach/facing; one Square offered but native contact/knockback interrupted before any24/body48 birth or child HP loss.",
+      "artifacts": [
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F118-local-v82-root-v2\\qualification.json",
+          "bytes": 7583277,
+          "sha256": "c348e3f8530eab1033dedbc6f00a513077127f9f478773c097c853ffc0e22199"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F118-local-v82-root-v2\\ammo-hud\\intro-admission\\F118-secondary-target\\observations.json",
+          "bytes": 4165015,
+          "sha256": "57c918eda07bf2b86e20ed552c192d9175004f6b6cfe4f60ae0ab5c1dd814ecf"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F118-local-v82-root-v2\\ammo-hud\\intro-admission\\F118-Investigator-entry\\observations.json",
+          "bytes": 2780862,
+          "sha256": "660ebe22f1f419e3f7f1cd9751c34c330e6b4391c29aa4bd604ff90b40f3c983"
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F118-local-v82-root-v2\\worker-executed-source.py",
+          "bytes": 7067,
+          "sha256": "f453775a9472865e50f7a82ed4dfe11de4a02e575bdf08e6248644484262fae5"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "No child damage, no owned24/body48 or hit-overlap proof, no NETcase, no F118pass or demonstratedgamefailure. Source-qualified damageablechild is a candidate analogue only.",
+    "Source/fullHP entry completed, but parent only finished initial exact-image/source check before callback failure. Do not claim later profile/CRC/taint-refusal gates completed.",
+    "Ordinary guest inputs, P1neutral, no HP/protection/pose/position/contact/phase/outcome writes. Existing cards unchanged; ownedprocesses exit0.",
+    "Keep both raw setups; defer further F118timing variants thisblock and move independent R25edge."
+  ]
+}
