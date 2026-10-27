@@ -5601,14 +5601,14 @@
           "src/mods/mmx6_coop_plugin.c:render_actor",
           "src/mods/mmx6_coop_plugin.c:draw_coop_hud"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -5647,9 +5647,85 @@
             "bypasses": [
               "Original audited offline checkpointCP2 reachability only; no tested outcome writes."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+            "build_identity": {
+              "executable_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+              "compiled_manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + base Zero/P2",
+              "view": "shared4:3 OpenGL",
+              "input": "own published digital host pads",
+              "prerequisite": "pre-agreed original introCP2; actual guest-led door and native boss release",
+              "audio": "muted dummy"
+            },
+            "action": "After genuine guest-led native door/boss activation/passenger landing, dash Zero with X visible; retain both native body snapshots, complete GPU packet frame, composed body art and distinct owned native trail chain.",
+            "outcome": "Fresh native Zero dash/travel/3owned trails and natural phases0/1/2 retirement with X rendered passed; own process observations and reviewed art retained for every required peer, including ordinary X recoil/flash in NET. Exact candidate/profile/resolved CRC/card/cleanup and trace refusals retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-50cc26e-F14-native-postdoor-local-netplay-reviewed.json",
+                "sha256": "a9684e502d2046c18e2440643106946f1bd33bd0e2942cf98b68ba19b029aba7"
+              }
+            ],
+            "limits": [
+              "Only F14 closes: the same immutable V67 50cc26e/image/manifest/SDK10b/UI34b in LOCAL and two-peer NET. No F23, broader effect/door, other-host/roster, content or general rendering qualification.",
+              "Genuine guest-owned original door, original boss32HP and native passenger/leader landings precede every fresh dash. Pre-agreed CP2 reachability is an explicit bypass; no tested door, HP, position, marker, effect, camera or outcome writes.",
+              "All12 composed images reviewed:4 LOCAL and8 NET. Active dash images show native X and Zero with distinct owned Zero dash art. NETpeer1 X has ordinary hurt/flash/recoil but remains rendered. Final overlap/scenery corruption remain explicit.",
+              "All3 actual dashes show positive native marker,3 linked owned original trails matching owner resources/frame/facing, actual travel, visible X at capture, observed release phases0/1/2 and natural finite retirement. No Zero damage/cancellation is mislabeled as natural drain.",
+              "Completed GP0 frames retain native and retained sprite commands plus actual geometry/source addresses. CLUT7800 and reconstructed retained-bank IDs alone are NOT unique body identities; native snapshots/ownership, original render order and reviewed geometry/art supply the combined evidence. No literal trailCLUT or every-triangle attribution claim.",
+              "Native world36/39/42updates is inside actual SDK brackets35..37/38..41/41..43. RAM, GPU-frame and composed-present observations are nearby separate reads, not an atomic whole-machine frame.",
+              "Native recording remains fixture-tainted; strict finalized capture and offline replay refuse it. Paired resolved core/mod CRC and profile agreement, unchanged private cards and all owned exits0 remain required and retained."
+            ],
+            "bypasses": [
+              "Pre-agreed original introCP2 reachability prerequisite; genuine native guest door/boss release/passenger landing and fresh dash occur afterward."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+            "build_identity": {
+              "executable_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+              "compiled_manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + base Zero/P2",
+              "view": "shared4:3 OpenGL",
+              "input": "own published digital host pads",
+              "prerequisite": "pre-agreed original introCP2; actual guest-led door and native boss release",
+              "audio": "muted dummy"
+            },
+            "action": "After genuine guest-led native door/boss activation/passenger landing, dash Zero with X visible; retain both native body snapshots, complete GPU packet frame, composed body art and distinct owned native trail chain.",
+            "outcome": "Fresh native Zero dash/travel/3owned trails and natural phases0/1/2 retirement with X rendered passed; own process observations and reviewed art retained for every required peer, including ordinary X recoil/flash in NET. Exact candidate/profile/resolved CRC/card/cleanup and trace refusals retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-50cc26e-F14-native-postdoor-local-netplay-reviewed.json",
+                "sha256": "a9684e502d2046c18e2440643106946f1bd33bd0e2942cf98b68ba19b029aba7"
+              }
+            ],
+            "limits": [
+              "Only F14 closes: the same immutable V67 50cc26e/image/manifest/SDK10b/UI34b in LOCAL and two-peer NET. No F23, broader effect/door, other-host/roster, content or general rendering qualification.",
+              "Genuine guest-owned original door, original boss32HP and native passenger/leader landings precede every fresh dash. Pre-agreed CP2 reachability is an explicit bypass; no tested door, HP, position, marker, effect, camera or outcome writes.",
+              "All12 composed images reviewed:4 LOCAL and8 NET. Active dash images show native X and Zero with distinct owned Zero dash art. NETpeer1 X has ordinary hurt/flash/recoil but remains rendered. Final overlap/scenery corruption remain explicit.",
+              "All3 actual dashes show positive native marker,3 linked owned original trails matching owner resources/frame/facing, actual travel, visible X at capture, observed release phases0/1/2 and natural finite retirement. No Zero damage/cancellation is mislabeled as natural drain.",
+              "Completed GP0 frames retain native and retained sprite commands plus actual geometry/source addresses. CLUT7800 and reconstructed retained-bank IDs alone are NOT unique body identities; native snapshots/ownership, original render order and reviewed geometry/art supply the combined evidence. No literal trailCLUT or every-triangle attribution claim.",
+              "Native world36/39/42updates is inside actual SDK brackets35..37/38..41/41..43. RAM, GPU-frame and composed-present observations are nearby separate reads, not an atomic whole-machine frame.",
+              "Native recording remains fixture-tainted; strict finalized capture and offline replay refuse it. Paired resolved core/mod CRC and profile agreement, unchanged private cards and all owned exits0 remain required and retained."
+            ],
+            "bypasses": [
+              "Pre-agreed original introCP2 reachability prerequisite; genuine native guest door/boss release/passenger landing and fresh dash occur afterward."
+            ]
           }
         ],
-        "limitations": "LOCAL exactV63 9b93b45 completed genuine guest-owned intro door/native boss release, fresh Zero dash, original private trail ownership/travel/natural retirement with X visible and stationary, actual packet dump and all3 images reviewed. Checkpoint scenery corruption/fixture taint and later unrelated P1 observer failure disclosed; NETPLAY/aggregate remain unverified."
+        "limitations": "F14 LOCAL+NET passed on exact50cc26e: genuine guest-owned door/native release, fresh Zero dash with native X visible, actual owned trails/body/packet/art observations and natural retirement. Setup bypass, corrupt background, overlap, ordinary NET X damage/flash and non-atomic packet attribution limits explicit. No F23/content/general-rendering credit."
       }
     },
     {

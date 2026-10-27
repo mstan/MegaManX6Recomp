@@ -1,0 +1,1087 @@
+{
+  "schema": 1,
+  "comparison": "F14",
+  "frozen_row_sha256": "a95d2c2fb030b48e40919ef3039fc890f705f8c7651ac1245775b195f5fa8a54",
+  "result": "passed",
+  "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+  "binding": {
+    "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+    "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+    "provenance_sha256": "ebed9f24406a7e44224ac0f7ee605048ee6f614faed59a3b11a203fb0b14e88a"
+  },
+  "cases": [
+    {
+      "mode": "local",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-local-v67-root-v1\\qualification.json",
+        "bytes": 4658574,
+        "sha256": "91cf304cbc64951260bd305a39987f5e080b99d577a27370007ec178e17545c6"
+      },
+      "native_dash_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F14\\observations.json",
+        "bytes": 279923,
+        "sha256": "914cba0da4a4a7b6bb0feb85adb94a9eaa974017f0add9b0f77a8a7a00f4b253"
+      },
+      "native_door_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\observations.json",
+        "bytes": 1906969,
+        "sha256": "346e563046809848e4f7af7eabb001ffea53c5ec879ccdc25e2e055bddfc4d44"
+      },
+      "dashes": [
+        {
+          "peer": 0,
+          "seat": 1,
+          "direction": 1,
+          "input_index": 2,
+          "before": 0,
+          "active": 5,
+          "capture": 6,
+          "capture_completed": 7,
+          "retired": 16,
+          "native_world_updates": 36,
+          "sdk_bracket": [
+            35,
+            37
+          ],
+          "observed_release_active_phases": [
+            0,
+            1,
+            2
+          ],
+          "Zero_HP_drop": false,
+          "Zero_native_hurt": false,
+          "retirement": "original native neutral retirement",
+          "primary_motion_observed": false,
+          "primary_HP_drop": false,
+          "primary_native_hurt": false
+        }
+      ],
+      "source_observer": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F14_postdoor_v67_root_v1.py",
+        "sha256": "019bb5494a6f649b6aac7aaab2e05b59d1f8db5d82b5df0cbda5e15e304bb3f6"
+      },
+      "actual_intro_observer": {
+        "sha256": "dfb0b86ed00ea8f4911241a0f375d7e3edce9d50fa75c51185deeb01ba1035e4",
+        "changes": "Require actual authored CP2 player arrivals; allow nonfatal passenger body only with actual owner, transportphase2/3 and ALIVE lifecycle; later require both healthy/landed/controls"
+      },
+      "packet_witnesses": [
+        {
+          "peer": 0,
+          "whole_completed_frame": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F14\\peer-0-zero-native-dash-both-bodies-GP0.json.gz",
+            "bytes": 12741,
+            "sha256": "9387abf07205c7e76dd91bb1247b03b57c36e3c3d31c471b2cccdf0c690ebf74"
+          },
+          "frame": 4416,
+          "nearby_native_actor_anchors": [
+            [
+              81.046875,
+              171.0
+            ],
+            [
+              99.984375,
+              170.0
+            ]
+          ],
+          "native_CLUT7800_sprite_candidates_near_X": [
+            {
+              "index": 968,
+              "source": "0x000A51BC",
+              "vertices": [
+                [
+                  84,
+                  162
+                ],
+                [
+                  99,
+                  162
+                ],
+                [
+                  84,
+                  178
+                ],
+                [
+                  99,
+                  178
+                ]
+              ]
+            },
+            {
+              "index": 970,
+              "source": "0x000A51E4",
+              "vertices": [
+                [
+                  68,
+                  162
+                ],
+                [
+                  84,
+                  162
+                ],
+                [
+                  68,
+                  178
+                ],
+                [
+                  84,
+                  178
+                ]
+              ]
+            },
+            {
+              "index": 972,
+              "source": "0x000A520C",
+              "vertices": [
+                [
+                  84,
+                  178
+                ],
+                [
+                  100,
+                  178
+                ],
+                [
+                  84,
+                  194
+                ],
+                [
+                  100,
+                  194
+                ]
+              ]
+            },
+            {
+              "index": 974,
+              "source": "0x000A5234",
+              "vertices": [
+                [
+                  68,
+                  178
+                ],
+                [
+                  84,
+                  178
+                ],
+                [
+                  68,
+                  194
+                ],
+                [
+                  84,
+                  194
+                ]
+              ]
+            },
+            {
+              "index": 976,
+              "source": "0x000A525C",
+              "vertices": [
+                [
+                  52,
+                  178
+                ],
+                [
+                  68,
+                  178
+                ],
+                [
+                  52,
+                  194
+                ],
+                [
+                  68,
+                  194
+                ]
+              ]
+            },
+            {
+              "index": 978,
+              "source": "0x000A5284",
+              "vertices": [
+                [
+                  68,
+                  146
+                ],
+                [
+                  84,
+                  146
+                ],
+                [
+                  68,
+                  162
+                ],
+                [
+                  84,
+                  162
+                ]
+              ]
+            },
+            {
+              "index": 980,
+              "source": "0x000A52AC",
+              "vertices": [
+                [
+                  84,
+                  146
+                ],
+                [
+                  100,
+                  146
+                ],
+                [
+                  84,
+                  162
+                ],
+                [
+                  100,
+                  162
+                ]
+              ]
+            }
+          ],
+          "retained_sprite_packet_count": 88,
+          "earliest_retained_source_pair_near_Zero": [
+            {
+              "index": 938,
+              "source": "0x00809C44",
+              "bank": "60F8",
+              "vertices": [
+                [
+                  113,
+                  160
+                ],
+                [
+                  128,
+                  160
+                ],
+                [
+                  113,
+                  176
+                ]
+              ]
+            },
+            {
+              "index": 939,
+              "source": "0x00809C6C",
+              "bank": "60F8",
+              "vertices": [
+                [
+                  113,
+                  176
+                ],
+                [
+                  128,
+                  160
+                ],
+                [
+                  128,
+                  176
+                ]
+              ]
+            }
+          ],
+          "exact_retained_bank_decode": "(word3>>24) | ((word6>>24)<<8), 9-word GT3 opcode34..37",
+          "attribution_limit": "CLUT/bank alone is not unique actor identity. Native actor/trail ownership, original body-before-trails render order, packet geometry and reviewed composed art are combined; the complete unfiltered frame remains retained. No per-packet bank-content/registered-arena snapshot or every-triangle ownership is claimed."
+        }
+      ],
+      "root_composed_review": [
+        {
+          "peer": 0,
+          "label": "safe-native-CP2",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\peer-0-safe-native-CP2.png",
+            "bytes": 2074543,
+            "sha256": "03b38d0e37100930411c4dd08b226be0124cf3b68d6b7303b78ce8396b9b00ec"
+          },
+          "root_visual_review": "Both native X/Zero bodies visible at actual authored arrival, with known corrupt checkpoint scenery."
+        },
+        {
+          "peer": 0,
+          "label": "original-door-scene-begin",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\peer-0-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "49ac0586cdd92eb8de033ceccea936efac1228194f99bf4978e3d1dbf1150f53"
+          },
+          "root_visual_review": "Zero at original right door while X executes original blue outgoing passenger beam. No scenery/rendering credit."
+        },
+        {
+          "peer": 0,
+          "label": "zero-native-dash-both-bodies",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F14\\peer-0-zero-native-dash-both-bodies.png",
+            "bytes": 2074543,
+            "sha256": "21a772932223190ca997d27f842344cc1c7deb4abc73bb62baa5302086d1b81e"
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F14\\peer-0-zero-native-dash-both-bodies-GP0.json.gz",
+            "bytes": 12741,
+            "sha256": "9387abf07205c7e76dd91bb1247b03b57c36e3c3d31c471b2cccdf0c690ebf74"
+          },
+          "root_visual_review": "Full colored native X remains visible beside the distinct red Zero Right dash, with actual red/white afterimages and native dash art. No primary disappearance."
+        },
+        {
+          "peer": 0,
+          "label": "zero-trails-retired-both-bodies",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F14\\peer-0-zero-trails-retired-both-bodies.png",
+            "bytes": 2074543,
+            "sha256": "39eaa277bb67b6bdd33e51dbb7bca1d7231623a85d83f15cec2db8f0592f1b8e"
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F14\\peer-0-zero-trails-retired-both-bodies-GP0.json.gz",
+            "bytes": 10909,
+            "sha256": "c66b4685d63e96cef0bdaf92fdef7df972f2e0d9b9d6316b216e27892786cf0d"
+          },
+          "root_visual_review": "After native trail retirement, both X and Zero remain visible; NETpeer1 has partial normal body overlap. Known corrupt background grants no rendering credit."
+        }
+      ],
+      "matching_resolved_crc": null,
+      "recording_refusals": [
+        {
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+            "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+            "mode": "offline",
+            "profile": null,
+            "settings_sha256": "4e105a49292dabb46b0f75ebcf5c15410d49e88774db251e86c0f411744ca28b",
+            "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          "refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "mode": "netplay",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-netplay-v67-root-v1\\qualification.json",
+        "bytes": 6254968,
+        "sha256": "dcf2915e6f29b04edce17615886b04bb33277a2b8a7f4445d864248f4bd1c6f5"
+      },
+      "native_dash_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-netplay-v67-root-v1\\intro-admission\\F14\\observations.json",
+        "bytes": 782768,
+        "sha256": "fc72d80abb3a4d801887dd0fc2c55723e75bdd0cdf10996d2d68e1901cad0cf4"
+      },
+      "native_door_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-netplay-v67-root-v1\\intro-admission\\observations.json",
+        "bytes": 2929750,
+        "sha256": "0a39046060e753bbcc2a5c75864430f5561676312c7084eb50871f83e466d182"
+      },
+      "dashes": [
+        {
+          "peer": 0,
+          "seat": 1,
+          "direction": 1,
+          "input_index": 2,
+          "before": 0,
+          "active": 11,
+          "capture": 12,
+          "capture_completed": 13,
+          "retired": 23,
+          "native_world_updates": 39,
+          "sdk_bracket": [
+            38,
+            41
+          ],
+          "observed_release_active_phases": [
+            0,
+            1,
+            2
+          ],
+          "Zero_HP_drop": false,
+          "Zero_native_hurt": false,
+          "retirement": "original native neutral retirement",
+          "primary_motion_observed": false,
+          "primary_HP_drop": true,
+          "primary_native_hurt": false
+        },
+        {
+          "peer": 1,
+          "seat": 1,
+          "direction": -1,
+          "input_index": 4,
+          "before": 27,
+          "active": 37,
+          "capture": 38,
+          "capture_completed": 39,
+          "retired": 56,
+          "native_world_updates": 42,
+          "sdk_bracket": [
+            41,
+            43
+          ],
+          "observed_release_active_phases": [
+            0,
+            1,
+            2
+          ],
+          "Zero_HP_drop": false,
+          "Zero_native_hurt": false,
+          "retirement": "original native neutral retirement",
+          "primary_motion_observed": true,
+          "primary_HP_drop": false,
+          "primary_native_hurt": true
+        }
+      ],
+      "source_observer": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F14_postdoor_v67_root_v1.py",
+        "sha256": "019bb5494a6f649b6aac7aaab2e05b59d1f8db5d82b5df0cbda5e15e304bb3f6"
+      },
+      "actual_intro_observer": {
+        "sha256": "dfb0b86ed00ea8f4911241a0f375d7e3edce9d50fa75c51185deeb01ba1035e4",
+        "changes": "Require actual authored CP2 player arrivals; allow nonfatal passenger body only with actual owner, transportphase2/3 and ALIVE lifecycle; later require both healthy/landed/controls"
+      },
+      "packet_witnesses": [
+        {
+          "peer": 0,
+          "whole_completed_frame": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-netplay-v67-root-v1\\intro-admission\\F14\\peer-0-zero-native-dash-both-bodies-GP0.json.gz",
+            "bytes": 12921,
+            "sha256": "2f02e66f565a0cc3cd408b50752ce9b5273a36b4fa2646af61d76defa91b1a1b"
+          },
+          "frame": 5567,
+          "nearby_native_actor_anchors": [
+            [
+              81.046875,
+              171.0
+            ],
+            [
+              99.984375,
+              170.0
+            ]
+          ],
+          "native_CLUT7800_sprite_candidates_near_X": [
+            {
+              "index": 976,
+              "source": "0x000A51BC",
+              "vertices": [
+                [
+                  84,
+                  178
+                ],
+                [
+                  100,
+                  178
+                ],
+                [
+                  84,
+                  194
+                ],
+                [
+                  100,
+                  194
+                ]
+              ]
+            },
+            {
+              "index": 978,
+              "source": "0x000A51E4",
+              "vertices": [
+                [
+                  68,
+                  178
+                ],
+                [
+                  84,
+                  178
+                ],
+                [
+                  68,
+                  194
+                ],
+                [
+                  84,
+                  194
+                ]
+              ]
+            },
+            {
+              "index": 980,
+              "source": "0x000A520C",
+              "vertices": [
+                [
+                  52,
+                  178
+                ],
+                [
+                  68,
+                  178
+                ],
+                [
+                  52,
+                  194
+                ],
+                [
+                  68,
+                  194
+                ]
+              ]
+            },
+            {
+              "index": 982,
+              "source": "0x000A5234",
+              "vertices": [
+                [
+                  84,
+                  162
+                ],
+                [
+                  99,
+                  162
+                ],
+                [
+                  84,
+                  178
+                ],
+                [
+                  99,
+                  178
+                ]
+              ]
+            },
+            {
+              "index": 984,
+              "source": "0x000A525C",
+              "vertices": [
+                [
+                  68,
+                  162
+                ],
+                [
+                  84,
+                  162
+                ],
+                [
+                  68,
+                  178
+                ],
+                [
+                  84,
+                  178
+                ]
+              ]
+            },
+            {
+              "index": 986,
+              "source": "0x000A5284",
+              "vertices": [
+                [
+                  78,
+                  146
+                ],
+                [
+                  94,
+                  146
+                ],
+                [
+                  78,
+                  162
+                ],
+                [
+                  94,
+                  162
+                ]
+              ]
+            }
+          ],
+          "retained_sprite_packet_count": 88,
+          "earliest_retained_source_pair_near_Zero": [
+            {
+              "index": 946,
+              "source": "0x00809C44",
+              "bank": "610F",
+              "vertices": [
+                [
+                  113,
+                  160
+                ],
+                [
+                  128,
+                  160
+                ],
+                [
+                  113,
+                  176
+                ]
+              ]
+            },
+            {
+              "index": 947,
+              "source": "0x00809C6C",
+              "bank": "610F",
+              "vertices": [
+                [
+                  113,
+                  176
+                ],
+                [
+                  128,
+                  160
+                ],
+                [
+                  128,
+                  176
+                ]
+              ]
+            }
+          ],
+          "exact_retained_bank_decode": "(word3>>24) | ((word6>>24)<<8), 9-word GT3 opcode34..37",
+          "attribution_limit": "CLUT/bank alone is not unique actor identity. Native actor/trail ownership, original body-before-trails render order, packet geometry and reviewed composed art are combined; the complete unfiltered frame remains retained. No per-packet bank-content/registered-arena snapshot or every-triangle ownership is claimed."
+        },
+        {
+          "peer": 1,
+          "whole_completed_frame": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-netplay-v67-root-v1\\intro-admission\\F14\\peer-1-zero-native-dash-both-bodies-GP0.json.gz",
+            "bytes": 12839,
+            "sha256": "8d7c3bbe3a5511a23dd1f234af30103d6678eaf6cc70b976c705093dcbd790c1"
+          },
+          "frame": 5621,
+          "nearby_native_actor_anchors": [
+            [
+              63.109375,
+              171.0
+            ],
+            [
+              127.734375,
+              170.0
+            ]
+          ],
+          "native_CLUT7800_sprite_candidates_near_X": [
+            {
+              "index": 976,
+              "source": "0x000A51BC",
+              "vertices": [
+                [
+                  66,
+                  178
+                ],
+                [
+                  82,
+                  178
+                ],
+                [
+                  66,
+                  194
+                ],
+                [
+                  82,
+                  194
+                ]
+              ]
+            },
+            {
+              "index": 978,
+              "source": "0x000A51E4",
+              "vertices": [
+                [
+                  50,
+                  178
+                ],
+                [
+                  66,
+                  178
+                ],
+                [
+                  50,
+                  194
+                ],
+                [
+                  66,
+                  194
+                ]
+              ]
+            },
+            {
+              "index": 980,
+              "source": "0x000A520C",
+              "vertices": [
+                [
+                  34,
+                  178
+                ],
+                [
+                  50,
+                  178
+                ],
+                [
+                  34,
+                  194
+                ],
+                [
+                  50,
+                  194
+                ]
+              ]
+            },
+            {
+              "index": 982,
+              "source": "0x000A5234",
+              "vertices": [
+                [
+                  66,
+                  162
+                ],
+                [
+                  81,
+                  162
+                ],
+                [
+                  66,
+                  178
+                ],
+                [
+                  81,
+                  178
+                ]
+              ]
+            },
+            {
+              "index": 984,
+              "source": "0x000A525C",
+              "vertices": [
+                [
+                  50,
+                  162
+                ],
+                [
+                  66,
+                  162
+                ],
+                [
+                  50,
+                  178
+                ],
+                [
+                  66,
+                  178
+                ]
+              ]
+            },
+            {
+              "index": 986,
+              "source": "0x000A5284",
+              "vertices": [
+                [
+                  60,
+                  146
+                ],
+                [
+                  76,
+                  146
+                ],
+                [
+                  60,
+                  162
+                ],
+                [
+                  76,
+                  162
+                ]
+              ]
+            }
+          ],
+          "retained_sprite_packet_count": 88,
+          "earliest_retained_source_pair_near_Zero": [
+            {
+              "index": 946,
+              "source": "0x00809C44",
+              "bank": "6165",
+              "vertices": [
+                [
+                  97,
+                  160
+                ],
+                [
+                  113,
+                  160
+                ],
+                [
+                  97,
+                  176
+                ]
+              ]
+            },
+            {
+              "index": 947,
+              "source": "0x00809C6C",
+              "bank": "6165",
+              "vertices": [
+                [
+                  97,
+                  176
+                ],
+                [
+                  113,
+                  160
+                ],
+                [
+                  113,
+                  176
+                ]
+              ]
+            }
+          ],
+          "exact_retained_bank_decode": "(word3>>24) | ((word6>>24)<<8), 9-word GT3 opcode34..37",
+          "attribution_limit": "CLUT/bank alone is not unique actor identity. Native actor/trail ownership, original body-before-trails render order, packet geometry and reviewed composed art are combined; the complete unfiltered frame remains retained. No per-packet bank-content/registered-arena snapshot or every-triangle ownership is claimed."
+        }
+      ],
+      "root_composed_review": [
+        {
+          "peer": 0,
+          "label": "safe-native-CP2",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-netplay-v67-root-v1\\intro-admission\\peer-0-safe-native-CP2.png",
+            "bytes": 2074543,
+            "sha256": "52778886e6904ea499074322a3c97a19f6c390753865376c25f0a02e370ad4fc"
+          },
+          "root_visual_review": "Both native X/Zero bodies visible at actual authored arrival, with known corrupt checkpoint scenery."
+        },
+        {
+          "peer": 1,
+          "label": "safe-native-CP2",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-netplay-v67-root-v1\\intro-admission\\peer-1-safe-native-CP2.png",
+            "bytes": 2074543,
+            "sha256": "f52a3088e09c5f6dd7710ceb138779107a33ace74cc5967ee897ffa7b9338b69"
+          },
+          "root_visual_review": "Both native X/Zero bodies visible at actual authored arrival, with known corrupt checkpoint scenery."
+        },
+        {
+          "peer": 0,
+          "label": "original-door-scene-begin",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-netplay-v67-root-v1\\intro-admission\\peer-0-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "d097bfaf11d19b67f36044b496bd475e74d596c615f4ac3bf7e1078596783d9f"
+          },
+          "root_visual_review": "Zero at original right door while X executes original blue outgoing passenger beam. No scenery/rendering credit."
+        },
+        {
+          "peer": 1,
+          "label": "original-door-scene-begin",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-netplay-v67-root-v1\\intro-admission\\peer-1-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "c20d7ac1584fa1639ea60a2cd7c3b6ee54be53bb5c03f5b71ce91062b54cbf42"
+          },
+          "root_visual_review": "Zero at original right door while X executes original blue outgoing passenger beam. No scenery/rendering credit."
+        },
+        {
+          "peer": 0,
+          "label": "zero-native-dash-both-bodies",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-netplay-v67-root-v1\\intro-admission\\F14\\peer-0-zero-native-dash-both-bodies.png",
+            "bytes": 2074543,
+            "sha256": "510c66c39ed59e8754afe601bac672345d080be93d1388c3052a85fe21f3365a"
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-netplay-v67-root-v1\\intro-admission\\F14\\peer-0-zero-native-dash-both-bodies-GP0.json.gz",
+            "bytes": 12921,
+            "sha256": "2f02e66f565a0cc3cd408b50752ce9b5273a36b4fa2646af61d76defa91b1a1b"
+          },
+          "root_visual_review": "Full colored native X remains visible beside the distinct red Zero Right dash, with actual red/white afterimages and native dash art. No primary disappearance."
+        },
+        {
+          "peer": 0,
+          "label": "zero-trails-retired-both-bodies",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-netplay-v67-root-v1\\intro-admission\\F14\\peer-0-zero-trails-retired-both-bodies.png",
+            "bytes": 2074543,
+            "sha256": "54afee7257fa33227677bb4611e76111ec489a27c61e5adc826120389494dbe6"
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-netplay-v67-root-v1\\intro-admission\\F14\\peer-0-zero-trails-retired-both-bodies-GP0.json.gz",
+            "bytes": 11169,
+            "sha256": "b14a6fb9a8c59067757986f529c248f5c251638fbb45dcbc59540bb160cb9569"
+          },
+          "root_visual_review": "After native trail retirement, both X and Zero remain visible; NETpeer1 has partial normal body overlap. Known corrupt background grants no rendering credit."
+        },
+        {
+          "peer": 1,
+          "label": "zero-native-dash-both-bodies",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-netplay-v67-root-v1\\intro-admission\\F14\\peer-1-zero-native-dash-both-bodies.png",
+            "bytes": 2074543,
+            "sha256": "96bc8345f6866194333a3dce3603fa4b6227a7eb8401970429b72a81135a294f"
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-netplay-v67-root-v1\\intro-admission\\F14\\peer-1-zero-native-dash-both-bodies-GP0.json.gz",
+            "bytes": 12839,
+            "sha256": "8d7c3bbe3a5511a23dd1f234af30103d6678eaf6cc70b976c705093dcbd790c1"
+          },
+          "root_visual_review": "X remains visibly rendered in blue/white hurt/invulnerability flash, partly overlapped by the original boss projectile; distinct red Zero dashes Left with its visible native white/blue dash art. Actual X recoil/damage is retained, not mistaken for disappearance."
+        },
+        {
+          "peer": 1,
+          "label": "zero-trails-retired-both-bodies",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-netplay-v67-root-v1\\intro-admission\\F14\\peer-1-zero-trails-retired-both-bodies.png",
+            "bytes": 2074543,
+            "sha256": "f3ac92cebbee075695d46912e844347ca15295c0de12267ecb7fdc5e9d8aa02d"
+          },
+          "GP0": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F14-intro-fixture-netplay-v67-root-v1\\intro-admission\\F14\\peer-1-zero-trails-retired-both-bodies-GP0.json.gz",
+            "bytes": 10793,
+            "sha256": "23b2e020b9dc1b010d862241de107fa59e9ca46dce602e3006ffcb082d6a0cfc"
+          },
+          "root_visual_review": "After native trail retirement, both X and Zero remain visible; NETpeer1 has partial normal body overlap. Known corrupt background grants no rendering credit."
+        }
+      ],
+      "matching_resolved_crc": [
+        {
+          "label": "initial idle",
+          "samples": 8,
+          "last_tick": 3136,
+          "resolved_through": [
+            3148,
+            3148
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": 7,
+          "last_tick": 3392,
+          "resolved_through": [
+            3422,
+            3421
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": 8,
+          "last_tick": 3712,
+          "resolved_through": [
+            3723,
+            3723
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": 6,
+          "last_tick": 5856,
+          "resolved_through": [
+            5884,
+            5884
+          ]
+        }
+      ],
+      "recording_refusals": [
+        {
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+            "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 5,
+              "selected_sha256": "efba0b47df92f08282bd525dc765e772383fd328faa2caa40de235f8004240ca"
+            },
+            "settings_sha256": "c578cadc553f83677af10928b7e9889ee8adf159eebd973db144befd14a652d9",
+            "simulation_contract_sha256": "b2a76e200fba63f5eeedf3ed4448cd3e77aa5f0d1db4f49628732e4bdade9fcb"
+          },
+          "refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          }
+        },
+        {
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+            "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 5,
+              "selected_sha256": "efba0b47df92f08282bd525dc765e772383fd328faa2caa40de235f8004240ca"
+            },
+            "settings_sha256": "c7065c8b465103a9b72293810ac368fa837d2576c538e5d2a81c3bf46aac55ab",
+            "simulation_contract_sha256": "b2a76e200fba63f5eeedf3ed4448cd3e77aa5f0d1db4f49628732e4bdade9fcb"
+          },
+          "refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "reviewed_images": 12,
+  "source_protocol": {
+    "game": "src/mods/mmx6_coop_plugin.c:1780 triangle tags;1853 render_actor;1931 body-before-trails render",
+    "sdk": "runtime/src/mod_texture_banks.c:101 registered-arena GT3 bank decoder",
+    "limitation": "Complete raw frames retained; packet classifications are combined with geometry/native state/composed review, not claimed as unique actor IDs."
+  },
+  "limits": [
+    "Only F14 closes: the same immutable V67 50cc26e/image/manifest/SDK10b/UI34b in LOCAL and two-peer NET. No F23, broader effect/door, other-host/roster, content or general rendering qualification.",
+    "Genuine guest-owned original door, original boss32HP and native passenger/leader landings precede every fresh dash. Pre-agreed CP2 reachability is an explicit bypass; no tested door, HP, position, marker, effect, camera or outcome writes.",
+    "All12 composed images reviewed:4 LOCAL and8 NET. Active dash images show native X and Zero with distinct owned Zero dash art. NETpeer1 X has ordinary hurt/flash/recoil but remains rendered. Final overlap/scenery corruption remain explicit.",
+    "All3 actual dashes show positive native marker,3 linked owned original trails matching owner resources/frame/facing, actual travel, visible X at capture, observed release phases0/1/2 and natural finite retirement. No Zero damage/cancellation is mislabeled as natural drain.",
+    "Completed GP0 frames retain native and retained sprite commands plus actual geometry/source addresses. CLUT7800 and reconstructed retained-bank IDs alone are NOT unique body identities; native snapshots/ownership, original render order and reviewed geometry/art supply the combined evidence. No literal trailCLUT or every-triangle attribution claim.",
+    "Native world36/39/42updates is inside actual SDK brackets35..37/38..41/41..43. RAM, GPU-frame and composed-present observations are nearby separate reads, not an atomic whole-machine frame.",
+    "Native recording remains fixture-tainted; strict finalized capture and offline replay refuse it. Paired resolved core/mod CRC and profile agreement, unchanged private cards and all owned exits0 remain required and retained."
+  ],
+  "bypasses": [
+    "Pre-agreed original introCP2 reachability prerequisite; genuine native guest door/boss release/passenger landing and fresh dash occur afterward."
+  ]
+}
