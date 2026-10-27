@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 79 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, R25, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F79, F89, F91, F92, F95, F97, F98, F101, F102, F107, F110, F114, F116, F119, F121, F128, F133, F137, F144, F157, F163, F170, F173, F177, F178, F184, F191, F197, F198, F204, F205, F208), 4 failed, 151 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 80 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, R25, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F79, F89, F91, F92, F95, F97, F98, F101, F102, F107, F110, F114, F116, F118, F119, F121, F128, F133, F137, F144, F157, F163, F170, F173, F177, F178, F184, F191, F197, F198, F204, F205, F208), 4 failed, 150 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,8 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 27
+
+**F118 is closed: 80 passed / 4 failed / 150 unverified (34.2%), one more since79.** The [same-candidate child-damage review](evidence/mmx6-targets/manifest-bound-e204513-F118-protected-child-reviewed.json) proves native owned Zero24 damages an independently damageable Yammark child while the main stays32HP, followed by actual attack retirement and idle recovery in LOCAL and on both NET peers. NET raw helper remains failed because it checks damage after the birth window; its retained birth sample already contains both actual8->4 child drops and source-box overlap. The raw post-exit parent failure is also preserved; the standard resolved CRC verifier passes259 combat/exit samples, including7 after the callback, with unchanged profile/source/cards/cleanup/taint gates. Protection is an explicit setup bypass. Four images were reviewed; NET captures establish entry context, while retained RAM proves damage. F90 needs the other finisher; F132 remains unverified.
 
 **R25 is closed: 79 passed / 4 failed / 151 unverified (33.8%), one more since78.** The [same-candidate native edge review](evidence/mmx6-lifecycle/manifest-bound-e204513-R25-protected-native-edge-reviewed.json) proves actual Select90 withdrawal, absence, fresh arrival beside edge4800, full original standing support, unchanged resources/checkpoint and independent guest Jump/landing in LOCAL and NET. The new default-off LAB contact-protection prerequisite removes unrelated hostile interruptions without writing HP/positions/outcomes or changing native terrain/arrival. Required source/profile/CRC/cards/cleanup/taint-refusal gates pass; all9 images were reviewed. Hero overlap and scenery/HUD corruption remain explicit. F90/F118/F132 need their separate outcomes.
 
