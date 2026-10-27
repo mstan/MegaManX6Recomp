@@ -2484,9 +2484,46 @@
             "bypasses": [
               "Original audited offline command8 CP2 setup before each leader. No door, actor, HP, script, camera, token or outcome writes."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+            "build_identity": {
+              "executable_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+              "compiled_manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + base Zero/P2",
+              "location": "original safe intro CP2",
+              "view": "shared native4:3 OpenGL",
+              "input": "owned published digital host pads",
+              "prerequisite": "pre-agreed LAB intro_cp2 + accepted one-shot P2 chord",
+              "audio": "muted dummy"
+            },
+            "action": "Lead with Zero through the original authored intro door after safe checkpoint initialization; observe original boss fullHP/native release, passenger landing and fresh independent native walks.",
+            "outcome": "Zero owns scene with X133px behind; original boss reaches32HP and releases scene, both actors land at32HP, each accepted own native walk while the other stays stationary. All3 images reviewed with fade/background/overlap limits.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-lifecycle/manifest-bound-50cc26e-intro-guest-admission-local-reviewed.json",
+                "sha256": "711ed6d0ff84b878e7d4d8194316326765a4a4bdf17026a90ebce82ae7c32c7e"
+              }
+            ],
+            "limits": [
+              "Exact V67 50cc26e / SDK10b9021 / UI34b5277, base X/P1 and Zero/P2, shared native4:3 OpenGL, published digital host inputs, emulated muted audio.",
+              "The LAB-only prelaunch intro_cp2 option plus accepted one-shot P2 L3+R3 bypasses unrelated intro traversal. Original guarded mode8/mode9 initialization runs once; no command8, HP, actor position, door, scene, camera or success writes are issued by the observer.",
+              "Only guest-led LOCAL R11/F2 behavior is admitted. Netplay/aggregate and current-candidate primary-led F5 remain unverified. No content audit, F14/F23, rendering, F170 or route reachability credit.",
+              "All3 images reviewed. CP2 image is during fade; later checkpoint scenery is corrupt. Final sprites overlap. These are behavioral door/boss/passenger/control observations, not full art/geometry qualification.",
+              "Native default recording remains explicitly fixture-tainted; strict finalized capture and offline replay both refuse it. Cards unchanged, owned exit0. Separate RAM/input/render reads are not instruction-atomic observations."
+            ],
+            "bypasses": [
+              "Pre-agreed LAB intro CP2 initializer replaces unrelated intro traversal; native door contact, boss activation, passenger landing and controls are exercised afterward."
+            ]
           }
         ],
-        "limitations": "LOCAL bounded admission passes on exact e0fdd1e/SDK7cb474 using the audited CP2 prerequisite: guest-first for R11/F2, both leaders for F5, original boss fullHP/scene release/passenger landing/independent controls. Checkpoint reachability bypass and scenery corruption explicit. Netplay and aggregate remain unverified; no F53/R22/F170/content pass."
+        "limitations": "Current-candidate V67 guest-led LOCAL admission passed with explicit agreed checkpoint reachability bypass and scenery corruption; NETPLAY and aggregate still unverified. Older V48 LOCAL evidence remains retained."
       }
     },
     {
@@ -4412,9 +4449,46 @@
             "bypasses": [
               "Original audited offline command8 CP2 setup before each leader. No door, actor, HP, script, camera, token or outcome writes."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+            "build_identity": {
+              "executable_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+              "compiled_manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + base Zero/P2",
+              "location": "original safe intro CP2",
+              "view": "shared native4:3 OpenGL",
+              "input": "owned published digital host pads",
+              "prerequisite": "pre-agreed LAB intro_cp2 + accepted one-shot P2 chord",
+              "audio": "muted dummy"
+            },
+            "action": "Lead with Zero through the original authored intro door after safe checkpoint initialization; observe original boss fullHP/native release, passenger landing and fresh independent native walks.",
+            "outcome": "Zero owns scene with X133px behind; original boss reaches32HP and releases scene, both actors land at32HP, each accepted own native walk while the other stays stationary. All3 images reviewed with fade/background/overlap limits.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-lifecycle/manifest-bound-50cc26e-intro-guest-admission-local-reviewed.json",
+                "sha256": "711ed6d0ff84b878e7d4d8194316326765a4a4bdf17026a90ebce82ae7c32c7e"
+              }
+            ],
+            "limits": [
+              "Exact V67 50cc26e / SDK10b9021 / UI34b5277, base X/P1 and Zero/P2, shared native4:3 OpenGL, published digital host inputs, emulated muted audio.",
+              "The LAB-only prelaunch intro_cp2 option plus accepted one-shot P2 L3+R3 bypasses unrelated intro traversal. Original guarded mode8/mode9 initialization runs once; no command8, HP, actor position, door, scene, camera or success writes are issued by the observer.",
+              "Only guest-led LOCAL R11/F2 behavior is admitted. Netplay/aggregate and current-candidate primary-led F5 remain unverified. No content audit, F14/F23, rendering, F170 or route reachability credit.",
+              "All3 images reviewed. CP2 image is during fade; later checkpoint scenery is corrupt. Final sprites overlap. These are behavioral door/boss/passenger/control observations, not full art/geometry qualification.",
+              "Native default recording remains explicitly fixture-tainted; strict finalized capture and offline replay both refuse it. Cards unchanged, owned exit0. Separate RAM/input/render reads are not instruction-atomic observations."
+            ],
+            "bypasses": [
+              "Pre-agreed LAB intro CP2 initializer replaces unrelated intro traversal; native door contact, boss activation, passenger landing and controls are exercised afterward."
+            ]
           }
         ],
-        "limitations": "LOCAL bounded admission passes on exact e0fdd1e/SDK7cb474 using the audited CP2 prerequisite: guest-first for R11/F2, both leaders for F5, original boss fullHP/scene release/passenger landing/independent controls. Checkpoint reachability bypass and scenery corruption explicit. Netplay and aggregate remain unverified; no F53/R22/F170/content pass."
+        "limitations": "Current-candidate V67 guest-led LOCAL admission passed with explicit agreed checkpoint reachability bypass and scenery corruption; NETPLAY and aggregate still unverified. Older V48 LOCAL evidence remains retained."
       }
     },
     {

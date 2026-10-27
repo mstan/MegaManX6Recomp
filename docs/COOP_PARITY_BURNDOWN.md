@@ -42,6 +42,19 @@ states; old-state migration is never required.
 
 ## Current qualification status, October 26
 
+V67 `50cc26e` now completes the guest-led LOCAL R11/F2 contract on the current
+candidate: Zero claims the original door with X133px behind, the original boss
+fills to32HP, the passenger lands, and each actor accepts its own native walk
+while the other stays stationary. The [reviewed LOCAL evidence](evidence/mmx6-lifecycle/manifest-bound-50cc26e-intro-guest-admission-local-reviewed.json)
+retains all3 images, exact source/image binding, unchanged cards and owned exit0.
+The private pre-agreed checkpoint is an explicit reachability bypass; native
+recording/replay remain refused and corrupt checkpoint scenery gets no rendering
+credit. A separate paired run is checking the same candidate. Aggregate remains
+**49 passed /5 failed /180 unverified** until the required mode completes.
+The ordinary intro route is deferred after its unrelated block/ladder stalls;
+the native campaign is outside this task. V67 stays isolated pending paired
+validation; the unqualified Both-door V64–V66 implementations remain parked.
+
 The Both-door family is now deferred after two second-body traversal attempts.
 V66 `39e1706` requests and runs Zero's original walk, but Zero remains in native
 action19/D4=FF awaiting the shared door's later D4=-2 handshake. The current

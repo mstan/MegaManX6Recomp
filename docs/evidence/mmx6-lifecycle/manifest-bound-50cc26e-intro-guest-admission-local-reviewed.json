@@ -1,0 +1,234 @@
+{
+  "schema": 1,
+  "comparisons": {
+    "R11": "e1a2d9e5797850c670e6b7b6c94d94057285393a50eb70afe3be7cf51665c9d3",
+    "F2": "542ff67cd41990718b21bc5fb75eac99a99959d272a758fef27276c892010b71"
+  },
+  "mode": "local",
+  "result": "passed",
+  "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-v67-final-binding-root-v1.json",
+    "binding_sha256": "2beab5c7cb4850cbff49e547d56bbeacb31a56e65911c36e12a369a7739b2317",
+    "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+    "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+    "provenance_sha256": "ebed9f24406a7e44224ac0f7ee605048ee6f614faed59a3b11a203fb0b14e88a",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v67-agreed-checkpoint-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v22",
+    "host_revision": 5
+  },
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader1-v67-root-v1\\qualification.json",
+    "bytes": 4168596,
+    "sha256": "77651d536b78f6835d9a910dd851aa1df59a66e09cf91db5f648df677acdcdb3"
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader1-v67-root-v1\\ammo-hud\\intro-admission\\observations.json",
+    "bytes": 1830419,
+    "sha256": "2957f21f55930a5fd8ab5c6c17f3df16c75d1c9d4ea77b422b0e548a245fd403"
+  },
+  "original_source_guards": [
+    {
+      "address": "0x80050250",
+      "bytes": 804,
+      "sha256": "60f5e79f358772a0c18f11c33ce51c4b6d90fc10a5113194a6181c8ee5ef9ab5"
+    },
+    {
+      "address": "0x80050c88",
+      "bytes": 372,
+      "sha256": "f028293571f755b02fc603931f8c96383534855e2632007875333ec51cd3239b"
+    }
+  ],
+  "agreed_checkpoint": {
+    "generation": 1,
+    "state": 3,
+    "reason": 0,
+    "stage": 0,
+    "section": 0,
+    "checkpoint": 2,
+    "nonce": 1279479858,
+    "initializer_entries": 1,
+    "record": "80072150",
+    "tainted": 1,
+    "authority": 1,
+    "latch": 2
+  },
+  "scene_begin": [
+    {
+      "peer": 0,
+      "row_index": 101
+    }
+  ],
+  "battle_ready_index": 342,
+  "controls": [
+    {
+      "seat": 0,
+      "before": 343,
+      "accepted": 345,
+      "native_walk_and_nonparticipant": [
+        {
+          "peer": 0,
+          "controlled_native_action": 3,
+          "other_stationary": true,
+          "other_HP_drop": false,
+          "other_native_hurt": false,
+          "interpretation": "stationary"
+        }
+      ]
+    },
+    {
+      "seat": 1,
+      "before": 350,
+      "accepted": 353,
+      "native_walk_and_nonparticipant": [
+        {
+          "peer": 0,
+          "controlled_native_action": 4,
+          "other_stationary": true,
+          "other_HP_drop": false,
+          "other_native_hurt": false,
+          "interpretation": "stationary"
+        }
+      ]
+    }
+  ],
+  "root_composed_review": [
+    {
+      "label": "safe-native-CP2",
+      "row_index": 10,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader1-v67-root-v1\\ammo-hud\\intro-admission\\peer-0-safe-native-CP2.png",
+        "bytes": 2074543,
+        "sha256": "5aca1f7655c5617ff3b31e6e76083e797db1ef71f146ca3cb774d90cec82fafa"
+      },
+      "root_visual_review": "Captured during the native fade; near-black image grants no initial visual/readiness or map credit. Raw original initializer and idle arrival are retained separately."
+    },
+    {
+      "label": "original-door-scene-begin",
+      "row_index": 102,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader1-v67-root-v1\\ammo-hud\\intro-admission\\peer-0-original-door-scene-begin.png",
+        "bytes": 2074543,
+        "sha256": "bf1801beb90ae6f4d552e8811c15535396a119e73e86231184af76002c6ba820"
+      },
+      "root_visual_review": "Zero at the authored right door; original X passenger transport visible. Corrupt checkpoint background is explicit; native scene ownership/contact are independently retained."
+    },
+    {
+      "label": "native-boss-both-controls-restored",
+      "row_index": 356,
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader1-v67-root-v1\\ammo-hud\\intro-admission\\peer-0-native-boss-both-controls-restored.png",
+        "bytes": 2074543,
+        "sha256": "1c59549bf7980fd4f33dd2e5ad183d7b7d8a66af8fdc10e4688ed6610da8258c"
+      },
+      "root_visual_review": "Original D-1000 and full boss meter visible; both X/Zero sprites overlap near the left arena edge after independent inputs. Corrupt background grants no map/rendering credit."
+    }
+  ],
+  "recording": {
+    "status": "failed_fixture_taint_retained_for_diagnostics",
+    "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader1-v67-root-v1\\candidate\\saves\\input-recordings\\session-1793071098459982-1-0\\inputs.jsonl",
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+      "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "4e105a49292dabb46b0f75ebcf5c15410d49e88774db251e86c0f411744ca28b",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "terminal_failure": "unilateral debug or fixture input contaminated capture",
+    "native_status": {
+      "contract": "mmx6.native-consumption.v1",
+      "epoch": 1,
+      "failure": "unilateral debug or fixture input contaminated capture",
+      "schema": 1,
+      "scope": "native-consumption diagnostics; replay unimplemented",
+      "status": "failed"
+    },
+    "events": 6033,
+    "natives": 4234,
+    "p2_reads": 1799,
+    "artifacts": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader1-v67-root-v1\\recording-rejection\\settings.json",
+        "bytes": 10357,
+        "sha256": "4e105a49292dabb46b0f75ebcf5c15410d49e88774db251e86c0f411744ca28b"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader1-v67-root-v1\\recording-rejection\\content.json",
+        "bytes": 503,
+        "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader1-v67-root-v1\\recording-rejection\\simulation-contract.json",
+        "bytes": 259,
+        "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader1-v67-root-v1\\recording-rejection\\inputs.jsonl",
+        "bytes": 792541,
+        "sha256": "51f6ea57a04ea175c15d84e7247200ac11dcedce09963dbd3c88bb66e1e08db2"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader1-v67-root-v1\\recording-rejection\\status.json",
+        "bytes": 211,
+        "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader1-v67-root-v1\\recording-rejection\\card1.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-fixture-local-leader1-v67-root-v1\\recording-rejection\\card2.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      }
+    ],
+    "strict_refusals": {
+      "ordinary_capture": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      },
+      "offline_replay": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      }
+    },
+    "finalized_capture_admitted": false,
+    "replay_admitted": false,
+    "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+  },
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "cards_unchanged": true,
+  "limits": [
+    "Exact V67 50cc26e / SDK10b9021 / UI34b5277, base X/P1 and Zero/P2, shared native4:3 OpenGL, published digital host inputs, emulated muted audio.",
+    "The LAB-only prelaunch intro_cp2 option plus accepted one-shot P2 L3+R3 bypasses unrelated intro traversal. Original guarded mode8/mode9 initialization runs once; no command8, HP, actor position, door, scene, camera or success writes are issued by the observer.",
+    "Only guest-led LOCAL R11/F2 behavior is admitted. Netplay/aggregate and current-candidate primary-led F5 remain unverified. No content audit, F14/F23, rendering, F170 or route reachability credit.",
+    "All3 images reviewed. CP2 image is during fade; later checkpoint scenery is corrupt. Final sprites overlap. These are behavioral door/boss/passenger/control observations, not full art/geometry qualification.",
+    "Native default recording remains explicitly fixture-tainted; strict finalized capture and offline replay both refuse it. Cards unchanged, owned exit0. Separate RAM/input/render reads are not instruction-atomic observations."
+  ],
+  "bypasses": [
+    "Pre-agreed LAB intro CP2 initializer replaces unrelated intro traversal; native door contact, boss activation, passenger landing and controls are exercised afterward."
+  ]
+}
