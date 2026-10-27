@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4 comparisons](COOP_X4_REFERENCE.md), original R1Ã¢â‚¬â€œR26 and F1Ã¢â‚¬â€œF208 | 41 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F1, F6, F10, F12, F18, F19, F22, F31, F32, F33, F38, F45, F48, F51, F56, F58, F59, F67, F70, F95, F102, F107, F110, F119, F121, F133, F144, F163, F170, F205, F208), 1 failed, 192 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 48 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F1, F6, F10, F12, F15, F18, F19, F22, F31, F32, F33, F38, F43, F45, F48, F51, F56, F58, F59, F65, F67, F68, F70, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F163, F170, F178, F205, F208), 1 failed, 185 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,23 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 26
+
+
+F65 is fully closed on the same exact V61 `afdaaca` candidate in
+[LOCAL](evidence/mmx6-camera/manifest-bound-afdaaca-F65-local-reviewed.json) and
+[NETPLAY](evidence/mmx6-camera/manifest-bound-afdaaca-F65-netplay-reviewed.json).
+The integrated fixes preserve private landing views during the native incoming
+Zero beam and retain Zero controls, pit safety and independent owner cameras
+during genuine Ultimate Nova without rewriting the original global lock.
+Root reviewed all seven LOCAL and fourteen NET composed images. Original
+Nova admission and natural cleanup, native departure/absence/fresh JOINING and
+ALIVE control, personal resources, finalized ordinary recordings, fixed profiles,
+resolved paired CRC windows, unchanged cards and owned exits0 passed.
+LEAVING retains the existing shared-view/stacked-HUD fallback; no private-view
+claim is made during that phase. Optional R25 edge setup failed to reach its
+required pose in two bounded attempts and remains unverified and deferred.
+The comparison total is now **48 passed / 1 failed / 185 unverified of234**.
+
 
 F1 and F32 now pass both required modes on exact game `72b898f`,
 SDK `bb5d0a7` and UI `34b5277`. The
@@ -68,7 +85,7 @@ with write-NULL in `nvoglv64.dll +0xB80C13`. This locates the fault inside the
 OpenGL module; no exact driver-versus-SDK cause is established. Source repair
 and first-session totals do not qualify repeated allocation lifetime. The
 bounded investigation is parked while independent autonomous rows continue.
-The ledger is **41 passed /1 failed /192 unverified of234**.
+The ledger is **48 passed /1 failed /185 unverified of234 (20.5%)**.
 
 F173 and F68 now pass LOCAL on exact V57 `52d6914`: actual independent
 native4:3 panes in an8:3 window, Zero366px away from stationary X, correct

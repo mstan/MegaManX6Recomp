@@ -1,0 +1,1673 @@
+{
+  "schema": 1,
+  "comparison": "F65",
+  "frozen_row_sha256": "fe235e413779f1750a14f096e728e5393e4d7a2def8ded91b9ab2236a0cc83ab",
+  "mode": "local",
+  "result": "passed",
+  "candidate": "afdaacad47c569438e82190ad88808aa8ffffdcd",
+  "build_identity": {
+    "executable_sha256": "7232bb6e166158346707c6bac652b89b41c28f4eccfc5e8cfa006d27f8ed317a",
+    "compiled_manifest_sha256": "ca133bf78d34b2bcfeb390b92cabe49814a2fa44fad4dc149dd772c0349c7930",
+    "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+    "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-native-camera-local-v61-root-v2\\qualification.json",
+    "sha256": "747c11f2bd1564aa60c9c9b8f30de2ce7a02f0bd579474b881c127d5e93ba733"
+  },
+  "observation": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-native-camera-local-v61-root-v2\\hud\\F65-observations.json",
+    "sha256": "76810732cdb2d4665c23a0d6b56e13ec4c9f8954dbd2ed3cc45fa86020bf3f9d"
+  },
+  "explicit_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-v61-final-binding-root-v1.json",
+    "binding_sha256": "827c18c92db87451e74a14302cd9b5edd71549a6ed7672c9c40c37c752467814",
+    "image_sha256": "7232bb6e166158346707c6bac652b89b41c28f4eccfc5e8cfa006d27f8ed317a",
+    "manifest_sha256": "ca133bf78d34b2bcfeb390b92cabe49814a2fa44fad4dc149dd772c0349c7930",
+    "provenance_sha256": "5ee9c99ee90294a8d3e457a79440f210400103c573f93b8e016d71856c9919fe",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v61-native-nova-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "afdaacad47c569438e82190ad88808aa8ffffdcd",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v20",
+    "host_revision": 4
+  },
+  "source_guards": [
+    {
+      "first": "8003E344",
+      "end_exclusive": "8003E614",
+      "bytes": 720,
+      "sha256": "03e329b929f5f63528d531a57569fd654ca17bac8790d6f75b46e5099954917b",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "8002927C",
+      "end_exclusive": "8002935C",
+      "bytes": 224,
+      "sha256": "d9ed7c9aa57753adbcead391e60d469bf4c2f491556743b82c1ef014804e0ace",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "8002935C",
+      "end_exclusive": "800293CC",
+      "bytes": 112,
+      "sha256": "4631ccb4188992defedb36114d439cdbf4a92a6c66f4cffbc5a477eeac6d6e6d",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "800293CC",
+      "end_exclusive": "8002943C",
+      "bytes": 112,
+      "sha256": "f38c927a96120694132877558621bc3409cd7a6e08ca1344cb75fadbec542c09",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "80020CC8",
+      "end_exclusive": "80020CE0",
+      "bytes": 24,
+      "sha256": "4cb09c63e5407ab4ef130036be94f0606f8d7995095faea0150cc15a93e52fdc",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "80073B54",
+      "end_exclusive": "80073B58",
+      "bytes": 4,
+      "sha256": "90d92a4bcde52cfc8f955166e9ae6126dffbc09d2e942ecdb81aa26b004267f9",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "8006D600",
+      "end_exclusive": "8006D620",
+      "bytes": 32,
+      "sha256": "9bf5753d4fb7610e7c7d2f8198e0f8a057ede949c0d8deb191d1de48d8b27768",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "8003D7AC",
+      "end_exclusive": "8003D850",
+      "bytes": 164,
+      "sha256": "3c73392c6ed1e4f449e0ed091d16435bd5c88be66ab046e3f0396ef019f8879f",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "801EB844",
+      "end_exclusive": "801EB8B8",
+      "bytes": 116,
+      "sha256": "74846f648dddbd37a7e55e76e31dcc74d94958daa93a7d644b62a24612616800",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "801EC4C0",
+      "end_exclusive": "801EC678",
+      "bytes": 440,
+      "sha256": "555ac900d039cc81a29a7b297b91de20fae9a8b015f36419f405f9c181bd22b1",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "801EC678",
+      "end_exclusive": "801EC6C8",
+      "bytes": 80,
+      "sha256": "a9e94e50e1b616e7fca28a56c22162d4e372298fb2734d63ed571a219f0e9c62",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "801F3724",
+      "end_exclusive": "801F3730",
+      "bytes": 12,
+      "sha256": "2414dd0e4def2908a4f1aee04f9799007227b99a75b6b2e4abff288c37d18373",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "0x80034ff8",
+      "end": "0x80035010",
+      "sha256": "0811a345ec78521ad504572c4af7782180fadd2bc414ba8e4da9bc39ce1371d1"
+    },
+    {
+      "first": "0x80039c40",
+      "end": "0x80039c9c",
+      "sha256": "1f78e95d06052e22c1fb6bdf3b26bb5a36e5e92fab184de00b9cd426569c7992"
+    },
+    {
+      "first": "0x8003af1c",
+      "end": "0x8003aff4",
+      "sha256": "edb4af58ccfefaaa5df5282090250667a6580816d570c26e96126bcd0782feeb"
+    }
+  ],
+  "title_cheat": {
+    "kind": "F65_genuine_native_Ultimate_title_inputs",
+    "status": "native_counter4_observed_form4_admission_pending",
+    "inputs": [
+      {
+        "bits": 0,
+        "label": "neutral before first fresh original Left",
+        "ack": {
+          "seat": 0,
+          "pressed": 0,
+          "status": {
+            "id": 270,
+            "ok": true,
+            "pad": "0xFFFF",
+            "slot0": {
+              "buttons": "0xFFFF",
+              "connected": true,
+              "analog": false,
+              "type": 0,
+              "sticks": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "negcon": [
+                0,
+                0,
+                0
+              ],
+              "mode_locked": false
+            },
+            "slot1": {
+              "buttons": "0xFFFF",
+              "connected": true,
+              "analog": false,
+              "type": 0,
+              "sticks": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "negcon": [
+                0,
+                0,
+                0
+              ],
+              "mode_locked": false
+            },
+            "override": -1,
+            "override_frames": 0,
+            "override_pad_type": -1,
+            "override_p2": -1,
+            "override_p2_frames": 0,
+            "override_axes": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "override_axes_valid": false,
+            "host_input_slots": 2,
+            "host_port": 1,
+            "host_layer": true,
+            "host_buttons": "0xFFFF",
+            "host_axes": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "host_lt": 0,
+            "host_rt": 0
+          }
+        }
+      },
+      {
+        "bits": 128,
+        "label": "fresh original Left",
+        "ack": {
+          "seat": 0,
+          "pressed": 128,
+          "status": {
+            "id": 277,
+            "ok": true,
+            "pad": "0xFF7F",
+            "slot0": {
+              "buttons": "0xFF7F",
+              "connected": true,
+              "analog": false,
+              "type": 0,
+              "sticks": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "negcon": [
+                0,
+                0,
+                0
+              ],
+              "mode_locked": false
+            },
+            "slot1": {
+              "buttons": "0xFFFF",
+              "connected": true,
+              "analog": false,
+              "type": 0,
+              "sticks": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "negcon": [
+                0,
+                0,
+                0
+              ],
+              "mode_locked": false
+            },
+            "override": -1,
+            "override_frames": 0,
+            "override_pad_type": -1,
+            "override_p2": -1,
+            "override_p2_frames": 0,
+            "override_axes": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "override_axes_valid": false,
+            "host_input_slots": 2,
+            "host_port": 1,
+            "host_layer": true,
+            "host_buttons": "0xFF7F",
+            "host_axes": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "host_lt": 0,
+            "host_rt": 0
+          }
+        }
+      },
+      {
+        "bits": 0,
+        "label": "native accepted edge; ordinary release",
+        "ack": {
+          "seat": 0,
+          "pressed": 0,
+          "status": {
+            "id": 284,
+            "ok": true,
+            "pad": "0xFF7F",
+            "slot0": {
+              "buttons": "0xFF7F",
+              "connected": true,
+              "analog": false,
+              "type": 0,
+              "sticks": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "negcon": [
+                0,
+                0,
+                0
+              ],
+              "mode_locked": false
+            },
+            "slot1": {
+              "buttons": "0xFFFF",
+              "connected": true,
+              "analog": false,
+              "type": 0,
+              "sticks": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "negcon": [
+                0,
+                0,
+                0
+              ],
+              "mode_locked": false
+            },
+            "override": -1,
+            "override_frames": 0,
+            "override_pad_type": -1,
+            "override_p2": -1,
+            "override_p2_frames": 0,
+            "override_axes": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "override_axes_valid": false,
+            "host_input_slots": 2,
+            "host_port": 1,
+            "host_layer": true,
+            "host_buttons": "0xFFFF",
+            "host_axes": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "host_lt": 0,
+            "host_rt": 0
+          }
+        }
+      },
+      {
+        "bits": 128,
+        "label": "fresh original Left",
+        "ack": {
+          "seat": 0,
+          "pressed": 128,
+          "status": {
+            "id": 291,
+            "ok": true,
+            "pad": "0xFF7F",
+            "slot0": {
+              "buttons": "0xFF7F",
+              "connected": true,
+              "analog": false,
+              "type": 0,
+              "sticks": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "negcon": [
+                0,
+                0,
+                0
+              ],
+              "mode_locked": false
+            },
+            "slot1": {
+              "buttons": "0xFFFF",
+              "connected": true,
+              "analog": false,
+              "type": 0,
+              "sticks": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "negcon": [
+                0,
+                0,
+                0
+              ],
+              "mode_locked": false
+            },
+            "override": -1,
+            "override_frames": 0,
+            "override_pad_type": -1,
+            "override_p2": -1,
+            "override_p2_frames": 0,
+            "override_axes": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "override_axes_valid": false,
+            "host_input_slots": 2,
+            "host_port": 1,
+            "host_layer": true,
+            "host_buttons": "0xFF7F",
+            "host_axes": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "host_lt": 0,
+            "host_rt": 0
+          }
+        }
+      },
+      {
+        "bits": 0,
+        "label": "native accepted edge; ordinary release",
+        "ack": {
+          "seat": 0,
+          "pressed": 0,
+          "status": {
+            "id": 298,
+            "ok": true,
+            "pad": "0xFFFF",
+            "slot0": {
+              "buttons": "0xFFFF",
+              "connected": true,
+              "analog": false,
+              "type": 0,
+              "sticks": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "negcon": [
+                0,
+                0,
+                0
+              ],
+              "mode_locked": false
+            },
+            "slot1": {
+              "buttons": "0xFFFF",
+              "connected": true,
+              "analog": false,
+              "type": 0,
+              "sticks": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "negcon": [
+                0,
+                0,
+                0
+              ],
+              "mode_locked": false
+            },
+            "override": -1,
+            "override_frames": 0,
+            "override_pad_type": -1,
+            "override_p2": -1,
+            "override_p2_frames": 0,
+            "override_axes": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "override_axes_valid": false,
+            "host_input_slots": 2,
+            "host_port": 1,
+            "host_layer": true,
+            "host_buttons": "0xFFFF",
+            "host_axes": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "host_lt": 0,
+            "host_rt": 0
+          }
+        }
+      },
+      {
+        "bits": 128,
+        "label": "fresh original Left",
+        "ack": {
+          "seat": 0,
+          "pressed": 128,
+          "status": {
+            "id": 305,
+            "ok": true,
+            "pad": "0xFF7F",
+            "slot0": {
+              "buttons": "0xFF7F",
+              "connected": true,
+              "analog": false,
+              "type": 0,
+              "sticks": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "negcon": [
+                0,
+                0,
+                0
+              ],
+              "mode_locked": false
+            },
+            "slot1": {
+              "buttons": "0xFFFF",
+              "connected": true,
+              "analog": false,
+              "type": 0,
+              "sticks": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "negcon": [
+                0,
+                0,
+                0
+              ],
+              "mode_locked": false
+            },
+            "override": -1,
+            "override_frames": 0,
+            "override_pad_type": -1,
+            "override_p2": -1,
+            "override_p2_frames": 0,
+            "override_axes": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "override_axes_valid": false,
+            "host_input_slots": 2,
+            "host_port": 1,
+            "host_layer": true,
+            "host_buttons": "0xFF7F",
+            "host_axes": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "host_lt": 0,
+            "host_rt": 0
+          }
+        }
+      },
+      {
+        "bits": 0,
+        "label": "native accepted edge; ordinary release",
+        "ack": {
+          "seat": 0,
+          "pressed": 0,
+          "status": {
+            "id": 312,
+            "ok": true,
+            "pad": "0xFF7F",
+            "slot0": {
+              "buttons": "0xFF7F",
+              "connected": true,
+              "analog": false,
+              "type": 0,
+              "sticks": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "negcon": [
+                0,
+                0,
+                0
+              ],
+              "mode_locked": false
+            },
+            "slot1": {
+              "buttons": "0xFFFF",
+              "connected": true,
+              "analog": false,
+              "type": 0,
+              "sticks": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "negcon": [
+                0,
+                0,
+                0
+              ],
+              "mode_locked": false
+            },
+            "override": -1,
+            "override_frames": 0,
+            "override_pad_type": -1,
+            "override_p2": -1,
+            "override_p2_frames": 0,
+            "override_axes": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "override_axes_valid": false,
+            "host_input_slots": 2,
+            "host_port": 1,
+            "host_layer": true,
+            "host_buttons": "0xFFFF",
+            "host_axes": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "host_lt": 0,
+            "host_rt": 0
+          }
+        }
+      },
+      {
+        "bits": 32,
+        "label": "fresh original Right",
+        "ack": {
+          "seat": 0,
+          "pressed": 32,
+          "status": {
+            "id": 319,
+            "ok": true,
+            "pad": "0xFFDF",
+            "slot0": {
+              "buttons": "0xFFDF",
+              "connected": true,
+              "analog": false,
+              "type": 0,
+              "sticks": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "negcon": [
+                0,
+                0,
+                0
+              ],
+              "mode_locked": false
+            },
+            "slot1": {
+              "buttons": "0xFFFF",
+              "connected": true,
+              "analog": false,
+              "type": 0,
+              "sticks": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "negcon": [
+                0,
+                0,
+                0
+              ],
+              "mode_locked": false
+            },
+            "override": -1,
+            "override_frames": 0,
+            "override_pad_type": -1,
+            "override_p2": -1,
+            "override_p2_frames": 0,
+            "override_axes": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "override_axes_valid": false,
+            "host_input_slots": 2,
+            "host_port": 1,
+            "host_layer": true,
+            "host_buttons": "0xFFDF",
+            "host_axes": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "host_lt": 0,
+            "host_rt": 0
+          }
+        }
+      },
+      {
+        "bits": 0,
+        "label": "native accepted edge; ordinary release",
+        "ack": {
+          "seat": 0,
+          "pressed": 0,
+          "status": {
+            "id": 326,
+            "ok": true,
+            "pad": "0xFFFF",
+            "slot0": {
+              "buttons": "0xFFFF",
+              "connected": true,
+              "analog": false,
+              "type": 0,
+              "sticks": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "negcon": [
+                0,
+                0,
+                0
+              ],
+              "mode_locked": false
+            },
+            "slot1": {
+              "buttons": "0xFFFF",
+              "connected": true,
+              "analog": false,
+              "type": 0,
+              "sticks": [
+                128,
+                128,
+                128,
+                128
+              ],
+              "negcon": [
+                0,
+                0,
+                0
+              ],
+              "mode_locked": false
+            },
+            "override": -1,
+            "override_frames": 0,
+            "override_pad_type": -1,
+            "override_p2": -1,
+            "override_p2_frames": 0,
+            "override_axes": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "override_axes_valid": false,
+            "host_input_slots": 2,
+            "host_port": 1,
+            "host_layer": true,
+            "host_buttons": "0xFFFF",
+            "host_axes": [
+              128,
+              128,
+              128,
+              128
+            ],
+            "host_lt": 0,
+            "host_rt": 0
+          }
+        }
+      }
+    ],
+    "observations": [
+      {
+        "phase": "release",
+        "index": 0,
+        "peers": [
+          {
+            "frontend": [
+              6,
+              1,
+              0,
+              0
+            ],
+            "fade": 0,
+            "counter": 0,
+            "frame": 173
+          }
+        ]
+      },
+      {
+        "phase": "release",
+        "index": 0,
+        "peers": [
+          {
+            "frontend": [
+              6,
+              1,
+              0,
+              0
+            ],
+            "fade": 0,
+            "counter": 0,
+            "frame": 190
+          }
+        ]
+      },
+      {
+        "phase": "held",
+        "index": 0,
+        "peers": [
+          {
+            "frontend": [
+              6,
+              1,
+              0,
+              0
+            ],
+            "fade": 0,
+            "counter": 1,
+            "frame": 197
+          }
+        ]
+      },
+      {
+        "phase": "release",
+        "index": 1,
+        "peers": [
+          {
+            "frontend": [
+              6,
+              1,
+              0,
+              0
+            ],
+            "fade": 0,
+            "counter": 1,
+            "frame": 204
+          }
+        ]
+      },
+      {
+        "phase": "held",
+        "index": 1,
+        "peers": [
+          {
+            "frontend": [
+              6,
+              1,
+              0,
+              0
+            ],
+            "fade": 0,
+            "counter": 2,
+            "frame": 210
+          }
+        ]
+      },
+      {
+        "phase": "release",
+        "index": 2,
+        "peers": [
+          {
+            "frontend": [
+              6,
+              1,
+              0,
+              0
+            ],
+            "fade": 0,
+            "counter": 2,
+            "frame": 216
+          }
+        ]
+      },
+      {
+        "phase": "held",
+        "index": 2,
+        "peers": [
+          {
+            "frontend": [
+              6,
+              1,
+              0,
+              0
+            ],
+            "fade": 0,
+            "counter": 3,
+            "frame": 222
+          }
+        ]
+      },
+      {
+        "phase": "release",
+        "index": 3,
+        "peers": [
+          {
+            "frontend": [
+              6,
+              1,
+              0,
+              0
+            ],
+            "fade": 0,
+            "counter": 3,
+            "frame": 228
+          }
+        ]
+      },
+      {
+        "phase": "held",
+        "index": 3,
+        "peers": [
+          {
+            "frontend": [
+              6,
+              1,
+              0,
+              0
+            ],
+            "fade": 0,
+            "counter": 4,
+            "frame": 234
+          }
+        ]
+      },
+      {
+        "phase": "release",
+        "index": 4,
+        "peers": [
+          {
+            "frontend": [
+              6,
+              1,
+              0,
+              0
+            ],
+            "fade": 0,
+            "counter": 4,
+            "frame": 242
+          }
+        ]
+      }
+    ],
+    "source_guards": [
+      {
+        "peer": 0,
+        "first": "0x8001cd5c",
+        "end": "0x8001ce68",
+        "sha256": "f1246515cafaa0c4e46ceccc810fb15bd149abf108c853bb649bb980b10fc576"
+      },
+      {
+        "peer": 0,
+        "first": "0x8001cf78",
+        "end": "0x8001d0e4",
+        "sha256": "cb890c73e2ef07bd553e5df5bf5110193e42c6cf17418d42279d943b3311d6a1"
+      },
+      {
+        "peer": 0,
+        "first": "0x8001d9cc",
+        "end": "0x8001da20",
+        "sha256": "f96fbe74611a8e502561faf57733876f4661439edca506ab8e42b9c06999bd81"
+      },
+      {
+        "peer": 0,
+        "first": "0x8001da20",
+        "end": "0x8001daf8",
+        "sha256": "54026dbfcaba183fecd5c9cb2e67e8d6fb34c4935f2ab6c254bc0ba0c322a50a"
+      },
+      {
+        "peer": 0,
+        "first": "0x800710d0",
+        "end": "0x800710d8",
+        "sha256": "ae6cf0e92cedfed55ed119d7aa3a0e1adfeb7515685939a04514a34c1e6907b3"
+      },
+      {
+        "peer": 0,
+        "first": "0x800710e8",
+        "end": "0x80071104",
+        "sha256": "e08fedced6b976a13dad04a7b1b59cf44d6264678077d7949bf7f7dc0a9237cd"
+      }
+    ],
+    "limits": [
+      "Source/inputs only; actual Ultimate form4 admission and full F65 observations remain separate required gates."
+    ]
+  },
+  "active_Nova": {
+    "started": 64,
+    "motion": 70,
+    "zero_delta_px": 27.0,
+    "native_world_delta": 23,
+    "vblank_bracket": [
+      20,
+      26
+    ],
+    "presentation_before": [
+      {
+        "counters": {
+          "id": 1909,
+          "ok": true,
+          "frame": 2875,
+          "counters": [
+            {
+              "name": "startup.disc_hash",
+              "count": 1,
+              "last_frame": 0
+            },
+            {
+              "name": "resident.prepared",
+              "count": 1,
+              "last_frame": 0
+            },
+            {
+              "name": "mmx6.seamless.modified_members",
+              "count": 0,
+              "last_frame": 0
+            },
+            {
+              "name": "mmx6.seamless.packed_loads",
+              "count": 11,
+              "last_frame": 1010
+            },
+            {
+              "name": "mmx6.seamless.sectors",
+              "count": 2098,
+              "last_frame": 1031
+            },
+            {
+              "name": "mmx6.seamless.raw_loads",
+              "count": 11,
+              "last_frame": 1031
+            },
+            {
+              "name": "mmx6.coop.private-committed",
+              "count": 394,
+              "last_frame": 2875
+            }
+          ],
+          "overflow": 0
+        },
+        "render": {
+          "id": 1910,
+          "ok": true,
+          "plans": 0,
+          "planned": 0,
+          "wanted": 0,
+          "refused": 0,
+          "passes": 790,
+          "aborted": 0,
+          "discarded": 0,
+          "watchdog": 0,
+          "vram_leaks": 0,
+          "nesting_repairs": 0,
+          "device_reads": 0,
+          "last_device_read": "0x00000000",
+          "last_device_read_width": 0,
+          "verify_checks": 0,
+          "verify_mismatch": 0,
+          "dropped": {
+            "spu": 0,
+            "cd": 0,
+            "timer": 0,
+            "dma": 0,
+            "gpu": 0,
+            "other": 0
+          },
+          "last_pass_ms": 1.9,
+          "avg_pass_ms": 2.062,
+          "avg_begin_ms": 0.333,
+          "avg_guest_ms": 1.532,
+          "avg_end_ms": 0.069,
+          "avg_restore_ms": 0.128,
+          "guest_cycles_last": 156262,
+          "disabled": 0,
+          "promotions": 0,
+          "pass_presents": 0,
+          "blended_presents": 0,
+          "expired": 0,
+          "late_presents": 0,
+          "unmatched_flips": 0,
+          "early_presents": 0,
+          "cost_us": 0,
+          "cost_rewarms": 0,
+          "frame_images": 0,
+          "journaled": 394,
+          "image_textures": 0,
+          "image_bytes": 0,
+          "status": 1,
+          "backups_reused": 395,
+          "pass_attempts": 790,
+          "argument_refused": 0,
+          "status_refused": 0,
+          "begin_refused": 0,
+          "checkpoint_refused": 0,
+          "spans": 0,
+          "span_failures": 0,
+          "local_views": 0,
+          "local_attempts": 0,
+          "local_status": 4,
+          "admission": {
+            "plans": 0,
+            "frame": 0,
+            "zero_credit_refusals": 0,
+            "idle_ms": 0.0,
+            "present_ms": 0.0,
+            "prior_pass_ms": 0.0,
+            "present_reserve_ms": 0.0,
+            "spare_ms": 0.0,
+            "frame_ms": 0.0,
+            "cost_ms": 0.0,
+            "budget_ms": 0.0,
+            "wanted": 0,
+            "planned": 0
+          },
+          "last_failure": null,
+          "last_abort_detail": "",
+          "span_fail": {
+            "reason": 0,
+            "pc": "0x00000000",
+            "start": "0x00000000",
+            "stop": "0x00000000",
+            "ra": "0x00000000",
+            "after": "0x00000000",
+            "insns": 0
+          }
+        },
+        "stereo": {
+          "id": 1911,
+          "ok": true,
+          "attempts": 396,
+          "pairs": 396,
+          "refused": 0,
+          "failed": 0,
+          "shed": 0,
+          "status": 0,
+          "last_pair_id": 396,
+          "last_guest_cycle": 1624060634,
+          "eye_cycles": [
+            1624060634,
+            1624060634
+          ],
+          "eye_hashes": [
+            "0000000000000000",
+            "0000000000000000"
+          ],
+          "eye_view": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "last_eye": 1,
+          "last_failure": "",
+          "last_failed_attempt": 0,
+          "last_failed_eye": 0,
+          "last_failed_reason": "",
+          "retained_pair_id": 0,
+          "last_pair_ms": 3.243,
+          "avg_pair_ms": 4.089,
+          "published": {
+            "valid": 1,
+            "pair_id": 396,
+            "guest_cycle": 1624060634,
+            "width": 320,
+            "height": 240,
+            "staged_mask": 3,
+            "mode": 2,
+            "presents": 395
+          },
+          "captures": []
+        }
+      }
+    ],
+    "presentation_after": [
+      {
+        "counters": {
+          "id": 1934,
+          "ok": true,
+          "frame": 2892,
+          "counters": [
+            {
+              "name": "startup.disc_hash",
+              "count": 1,
+              "last_frame": 0
+            },
+            {
+              "name": "resident.prepared",
+              "count": 1,
+              "last_frame": 0
+            },
+            {
+              "name": "mmx6.seamless.modified_members",
+              "count": 0,
+              "last_frame": 0
+            },
+            {
+              "name": "mmx6.seamless.packed_loads",
+              "count": 11,
+              "last_frame": 1010
+            },
+            {
+              "name": "mmx6.seamless.sectors",
+              "count": 2098,
+              "last_frame": 1031
+            },
+            {
+              "name": "mmx6.seamless.raw_loads",
+              "count": 11,
+              "last_frame": 1031
+            },
+            {
+              "name": "mmx6.coop.private-committed",
+              "count": 411,
+              "last_frame": 2892
+            }
+          ],
+          "overflow": 0
+        },
+        "render": {
+          "id": 1935,
+          "ok": true,
+          "plans": 0,
+          "planned": 0,
+          "wanted": 0,
+          "refused": 0,
+          "passes": 822,
+          "aborted": 0,
+          "discarded": 0,
+          "watchdog": 0,
+          "vram_leaks": 0,
+          "nesting_repairs": 0,
+          "device_reads": 0,
+          "last_device_read": "0x00000000",
+          "last_device_read_width": 0,
+          "verify_checks": 0,
+          "verify_mismatch": 0,
+          "dropped": {
+            "spu": 0,
+            "cd": 0,
+            "timer": 0,
+            "dma": 0,
+            "gpu": 0,
+            "other": 0
+          },
+          "last_pass_ms": 2.038,
+          "avg_pass_ms": 1.854,
+          "avg_begin_ms": 0.321,
+          "avg_guest_ms": 1.353,
+          "avg_end_ms": 0.058,
+          "avg_restore_ms": 0.123,
+          "guest_cycles_last": 155966,
+          "disabled": 0,
+          "promotions": 0,
+          "pass_presents": 0,
+          "blended_presents": 0,
+          "expired": 0,
+          "late_presents": 0,
+          "unmatched_flips": 0,
+          "early_presents": 0,
+          "cost_us": 0,
+          "cost_rewarms": 0,
+          "frame_images": 0,
+          "journaled": 410,
+          "image_textures": 0,
+          "image_bytes": 0,
+          "status": 1,
+          "backups_reused": 411,
+          "pass_attempts": 822,
+          "argument_refused": 0,
+          "status_refused": 0,
+          "begin_refused": 0,
+          "checkpoint_refused": 0,
+          "spans": 0,
+          "span_failures": 0,
+          "local_views": 0,
+          "local_attempts": 0,
+          "local_status": 4,
+          "admission": {
+            "plans": 0,
+            "frame": 0,
+            "zero_credit_refusals": 0,
+            "idle_ms": 0.0,
+            "present_ms": 0.0,
+            "prior_pass_ms": 0.0,
+            "present_reserve_ms": 0.0,
+            "spare_ms": 0.0,
+            "frame_ms": 0.0,
+            "cost_ms": 0.0,
+            "budget_ms": 0.0,
+            "wanted": 0,
+            "planned": 0
+          },
+          "last_failure": null,
+          "last_abort_detail": "",
+          "span_fail": {
+            "reason": 0,
+            "pc": "0x00000000",
+            "start": "0x00000000",
+            "stop": "0x00000000",
+            "ra": "0x00000000",
+            "after": "0x00000000",
+            "insns": 0
+          }
+        },
+        "stereo": {
+          "id": 1936,
+          "ok": true,
+          "attempts": 412,
+          "pairs": 412,
+          "refused": 0,
+          "failed": 0,
+          "shed": 0,
+          "status": 0,
+          "last_pair_id": 412,
+          "last_guest_cycle": 1633092219,
+          "eye_cycles": [
+            1633092219,
+            1633092219
+          ],
+          "eye_hashes": [
+            "0000000000000000",
+            "0000000000000000"
+          ],
+          "eye_view": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "last_eye": 1,
+          "last_failure": "",
+          "last_failed_attempt": 0,
+          "last_failed_eye": 0,
+          "last_failed_reason": "",
+          "retained_pair_id": 0,
+          "last_pair_ms": 3.854,
+          "avg_pair_ms": 3.77,
+          "published": {
+            "valid": 1,
+            "pair_id": 412,
+            "guest_cycle": 1633092219,
+            "width": 320,
+            "height": 240,
+            "staged_mask": 3,
+            "mode": 2,
+            "presents": 411
+          },
+          "captures": []
+        }
+      }
+    ]
+  },
+  "join_indices": {
+    "start": 196,
+    "leaving": 225,
+    "absent": 261,
+    "joining": 265,
+    "alive": 299,
+    "controlled": 303
+  },
+  "root_composed_review": [
+    {
+      "peer": 0,
+      "label": "initial-Ultimate-and-Zero",
+      "before_sample": 1,
+      "after_sample": 2,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-native-camera-local-v61-root-v2\\hud\\peer-0-initial-Ultimate-and-Zero.png",
+      "sha256": "9d6bf3811211fb31f659897378fc4e82d08b44a9f69244d64330fe9ac4d366ea",
+      "before": {
+        "id": 1619,
+        "ok": true,
+        "seq": 0,
+        "wrote": 0
+      },
+      "acknowledgement": {
+        "id": 1620,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-native-camera-local-v61-root-v2\\hud\\peer-0-initial-Ultimate-and-Zero.png",
+        "staged": true,
+        "seq": 0
+      },
+      "completion": {
+        "id": 1622,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      }
+    },
+    {
+      "peer": 0,
+      "label": "Nova-before-separated-owner-views",
+      "before_sample": 62,
+      "after_sample": 63,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-native-camera-local-v61-root-v2\\hud\\peer-0-Nova-before-separated-owner-views.png",
+      "sha256": "d506c52f991d02ce10da5b8f5fd7922efdbc6c2d8c2010a6201f31d9ccc1cc4b",
+      "before": {
+        "id": 1885,
+        "ok": true,
+        "seq": 1,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 1886,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-native-camera-local-v61-root-v2\\hud\\peer-0-Nova-before-separated-owner-views.png",
+        "staged": true,
+        "seq": 1
+      },
+      "completion": {
+        "id": 1888,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      }
+    },
+    {
+      "peer": 0,
+      "label": "Nova-active-own-view-terrain-and-HUD",
+      "before_sample": 72,
+      "after_sample": 73,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-native-camera-local-v61-root-v2\\hud\\peer-0-Nova-active-own-view-terrain-and-HUD.png",
+      "sha256": "2b38f37cc315c33f81bf477ddb26840c356801f645378ee2add69efa505e4235",
+      "before": {
+        "id": 1947,
+        "ok": true,
+        "seq": 2,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 1948,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-native-camera-local-v61-root-v2\\hud\\peer-0-Nova-active-own-view-terrain-and-HUD.png",
+        "staged": true,
+        "seq": 2
+      },
+      "completion": {
+        "id": 1949,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      }
+    },
+    {
+      "peer": 0,
+      "label": "Nova-natural-recovery",
+      "before_sample": 78,
+      "after_sample": 79,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-native-camera-local-v61-root-v2\\hud\\peer-0-Nova-natural-recovery.png",
+      "sha256": "1ae980ce59abeb9e7b259f95e1ffd0757af15c3aa66cf7e2e11e09ac5afcbda5",
+      "before": {
+        "id": 1974,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 1975,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-native-camera-local-v61-root-v2\\hud\\peer-0-Nova-natural-recovery.png",
+        "staged": true,
+        "seq": 3
+      },
+      "completion": {
+        "id": 1976,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      }
+    },
+    {
+      "peer": 0,
+      "label": "actual-voluntary-departure",
+      "before_sample": 226,
+      "after_sample": 227,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-native-camera-local-v61-root-v2\\hud\\peer-0-actual-voluntary-departure.png",
+      "sha256": "92a80b34224bf1b5778747476ad1704a1482f60c47f5b307bc2f9a1e29faf444",
+      "before": {
+        "id": 2888,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 2889,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-native-camera-local-v61-root-v2\\hud\\peer-0-actual-voluntary-departure.png",
+        "staged": true,
+        "seq": 4
+      },
+      "completion": {
+        "id": 2891,
+        "ok": true,
+        "seq": 5,
+        "wrote": 1
+      }
+    },
+    {
+      "peer": 0,
+      "label": "actual-JOINING-private-HUD-and-incoming-beam",
+      "before_sample": 266,
+      "after_sample": 267,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-native-camera-local-v61-root-v2\\hud\\peer-0-actual-JOINING-private-HUD-and-incoming-beam.png",
+      "sha256": "6649f7594311554d68793593127fcbe31346f71dcd6dbb0f4d65aec1388cefba",
+      "before": {
+        "id": 3099,
+        "ok": true,
+        "seq": 5,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 3100,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-native-camera-local-v61-root-v2\\hud\\peer-0-actual-JOINING-private-HUD-and-incoming-beam.png",
+        "staged": true,
+        "seq": 5
+      },
+      "completion": {
+        "id": 3102,
+        "ok": true,
+        "seq": 6,
+        "wrote": 1
+      }
+    },
+    {
+      "peer": 0,
+      "label": "actual-rejoined-ALIVE-owned-control",
+      "before_sample": 304,
+      "after_sample": 305,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-native-camera-local-v61-root-v2\\hud\\peer-0-actual-rejoined-ALIVE-owned-control.png",
+      "sha256": "eb42b44b342012ffec7245ced771da65e52340f0af70ec11ea76a6146312bd53",
+      "before": {
+        "id": 3305,
+        "ok": true,
+        "seq": 6,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 3306,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-native-camera-local-v61-root-v2\\hud\\peer-0-actual-rejoined-ALIVE-owned-control.png",
+        "staged": true,
+        "seq": 6
+      },
+      "completion": {
+        "id": 3307,
+        "ok": true,
+        "seq": 7,
+        "wrote": 1
+      }
+    }
+  ],
+  "recording": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-native-camera-local-v61-root-v2\\candidate\\saves\\input-recordings\\session-1793060236371573-1-0\\inputs.jsonl",
+    "sha256": "474902b9d48db4468bcc7a8176b3d22b5850a2b3f1c671e29c3581786551a2a1",
+    "events": 10587,
+    "natives": 6536,
+    "p2_reads": 4051,
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "7232bb6e166158346707c6bac652b89b41c28f4eccfc5e8cfa006d27f8ed317a",
+      "manifest_sha256": "ca133bf78d34b2bcfeb390b92cabe49814a2fa44fad4dc149dd772c0349c7930",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "8e9fd7a7a87441ee690edcf4f0edf1259118f959397411aa2d4c32ffce53c221",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "requested_jump_seats": [],
+    "consumed_cross_seen_anywhere": [
+      0,
+      1
+    ],
+    "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence"
+  },
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "source_pins": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F65-R25-v61-root-prelaunch-source-pins-v2.json",
+    "sha256": "b5118a47358010e4898222a0d591f1639e742808972958c6ade93fcc0390a653"
+  },
+  "limits": [
+    "Genuine original title Left/Left/Left/Right selects Ultimate X/P1 alongside ordinary Zero/P2; original eligibility/full energy/R2/action22/phase2/vx8 and natural canonical lock cleanup observed. No armor, energy, action, lifecycle, HP, position, checkpoint or success writes.",
+    "Root reviewed all seven LOCAL composed images. During actual golden Nova, X camera moves with X while Zero remains centered in its own moving terrain; own X/Zero HUDs persist. Incoming red beam uses the native landing view and dim own Zero HUD, followed by actual ALIVE control. Private XY is not published; no invented exact private-camera coordinate metric.",
+    "Actual active native world delta23 lies inside SDK VBlank bracket20..26, with advancing private pairs and no host-state leak. Actual Zero motion and personal resources retained. No broad performance, every attack, scene, room or concurrent lifecycle claim.",
+    "Source-authenticated optional R25 approach missed its specified edge because native Nova had already landed upper-floor X368.5; the optional case records unverified and F65 completes unchanged. No R25 edge credit is inherited from this run.",
+    "Same-machine Windows ordinary host digital ports, 960x720 OpenGL with two4:3 native panes in an8:3 letterboxed canvas, muted audio. Complete ordinary native-consumption recording, preserved cards and owned graceful exit0; no replay/audio equivalence, Linux, remote-peer or rollback claim.",
+    "Earlier actual LOCAL first capture wrapper duplicate-field error and its raw evidence are preserved; genuine title selection already passed there. Same-candidate NETPLAY remains separately required."
+  ],
+  "bypasses": []
+}

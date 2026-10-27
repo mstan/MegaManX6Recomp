@@ -9222,17 +9222,90 @@
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "afdaacad47c569438e82190ad88808aa8ffffdcd",
+            "build_identity": {
+              "executable_sha256": "7232bb6e166158346707c6bac652b89b41c28f4eccfc5e8cfa006d27f8ed317a",
+              "compiled_manifest_sha256": "ca133bf78d34b2bcfeb390b92cabe49814a2fa44fad4dc149dd772c0349c7930",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "original title-code Ultimate X/P1 + ordinary Zero/P2",
+              "cameras": "local split, actual two4:3 panes",
+              "renderer": "960x720 OpenGL",
+              "input": "ordinary host digital ports",
+              "audio": "dummy muted",
+              "entry": "original title and native intro"
+            },
+            "action": "After genuine title-code Ultimate selection and actual private-view separation, use original R2 Nova while Zero moves; then hold Select90, finish native departure/absence, fresh Select, incoming JOINING beam and own ALIVE control.",
+            "outcome": "Actual native action22/phase2/vx8, canonical hold and natural cleanup; independent Zero motion, moving owner terrain/own HUDs, single-world VBlank bracket and leak-free private pairs. Native incoming beam/own dim Zero HUD/returned control, resources, ordinary finalized trace/cards/ownedexit0 passed; root reviewed all7 images.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-afdaaca-F65-local-reviewed.json",
+                "sha256": "47c670c28bfe6d0bbfa61b6f76899988ef135a58c0cf73d46995c12b1de8c4dc"
+              }
+            ],
+            "limits": [
+              "Genuine original title Left/Left/Left/Right selects Ultimate X/P1 alongside ordinary Zero/P2; original eligibility/full energy/R2/action22/phase2/vx8 and natural canonical lock cleanup observed. No armor, energy, action, lifecycle, HP, position, checkpoint or success writes.",
+              "Root reviewed all seven LOCAL composed images. During actual golden Nova, X camera moves with X while Zero remains centered in its own moving terrain; own X/Zero HUDs persist. Incoming red beam uses the native landing view and dim own Zero HUD, followed by actual ALIVE control. Private XY is not published; no invented exact private-camera coordinate metric.",
+              "Actual active native world delta23 lies inside SDK VBlank bracket20..26, with advancing private pairs and no host-state leak. Actual Zero motion and personal resources retained. No broad performance, every attack, scene, room or concurrent lifecycle claim.",
+              "Source-authenticated optional R25 approach missed its specified edge because native Nova had already landed upper-floor X368.5; the optional case records unverified and F65 completes unchanged. No R25 edge credit is inherited from this run.",
+              "Same-machine Windows ordinary host digital ports, 960x720 OpenGL with two4:3 native panes in an8:3 letterboxed canvas, muted audio. Complete ordinary native-consumption recording, preserved cards and owned graceful exit0; no replay/audio equivalence, Linux, remote-peer or rollback claim.",
+              "Earlier actual LOCAL first capture wrapper duplicate-field error and its raw evidence are preserved; genuine title selection already passed there. Same-candidate NETPLAY remains separately required."
+            ],
+            "bypasses": []
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "afdaacad47c569438e82190ad88808aa8ffffdcd",
+            "build_identity": {
+              "executable_sha256": "7232bb6e166158346707c6bac652b89b41c28f4eccfc5e8cfa006d27f8ed317a",
+              "compiled_manifest_sha256": "ca133bf78d34b2bcfeb390b92cabe49814a2fa44fad4dc149dd772c0349c7930",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "original title-code Ultimate X/P1 + ordinary Zero/P2",
+              "cameras": "one private4:3 owner view per peer",
+              "renderer": "960x720 OpenGL",
+              "input": "ordinary host digital ports",
+              "audio": "dummy muted",
+              "entry": "original title and native intro",
+              "profile_revision": 4
+            },
+            "action": "Genuine native R2 Nova while Zero moves; natural recovery, ordinary Select90 departure/absence and fresh Select incoming JOINING beam/ALIVE controls on both peers.",
+            "outcome": "Actual original Nova and natural lock cleanup with independent owner terrain/cameras/HUDs; single-world VBlank bracket and no leak. Genuine incoming beam/owner dim HUDs, personal resources and independent controls retained on both peers; all14 composed images reviewed, four resolved CRC windows, ordinary recordings/cards/owned exits0 passed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-afdaaca-F65-netplay-reviewed.json",
+                "sha256": "885a29f0c097e60e360dabe46e606cd29e48849e0afbb9799ff78b69087d563f"
+              }
+            ],
+            "limits": [
+              "Same exact V61 afdaaca/SDK10b9021/UI34b5277 as the reviewed LOCAL pass. Ordinary original title Left3/Right1 counters1..4 select genuine Ultimate X with ordinary Zero. Native R2 admission/full energy/action22/phase2/vx8/canonical lock and natural cleanup observed on both peers; no game-state writes.",
+              "Root reviewed all14 NET composed images: actual golden Nova with owner X view/HUD while Zero moves in its own terrain/view/HUD; actual incoming red beam uses landing view and dim own Zero HUD, then returned ALIVE controls. Native world23 inside SDK VBlank19..26 on both peers, advancing private commits/local views, zero stereo pairs and no host-state leak.",
+              "LEAVING uses the existing shared-view/stacked-HUD fallback on both peers. No private-view or full outgoing-animation presentation claim is made during LEAVING. Actual JOINING switches to the qualified owner view/HUD.",
+              "Optional source-authenticated R25 approach missed the required full-foot edge interval after20 bounded pulses. R25 remains unverified and is parked; neither this result nor LOCAL general return receives R25 credit.",
+              "Same-machine Windows loopback digital ports, 960x720 OpenGL private4:3 owner views, original intro and this roster/action only. Four resolved core/mod CRC windows, fixed settled profile4, two finalized ordinary native-consumption recordings, unchanged cards, owned graceful exits0. No broad FPS, every attack/room, Linux, remote peer, rollback or replay-equivalence claim."
+            ],
+            "bypasses": []
+          }
+        ],
+        "limitations": "Same exactV61 LOCAL and NETPLAY passed genuine native Ultimate Nova with moving independent Zero/private cameras and actual incoming beam/owner HUD/ALIVE control. Root reviewed7+14 composed images. LEAVING retains shared-view stacked-HUD fallback; R25 edge remains unverified. Bounded Windows intro/roster/action only; full traces/profile/CRCs/cards/owned exits0 retained."
       }
     },
     {
