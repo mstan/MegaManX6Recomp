@@ -169,8 +169,13 @@ static void retain_yammar_native_upload_pixels(void) {
         zero_compressed[0x15C+i*2]=(uint8_t)words[i];zero_compressed[0x15D+i*2]=(uint8_t)(words[i]>>8);
     }
     Mmx6AssetView source={zero_compressed,compressed_size,2};snapshot_assets_loaded(&source,1);
-    for(unsigned c=0;c<16;++c)psx_mod_write_half(active_palette+0x49*32+c*2,0);
-    psx_mod_write_half(active_palette+0x49*32+2,0x1234);psx_mod_write_half(active_palette+0x49*32+4,0x4321);
+    /* CLUT 7849 is VRAM (144,481), byte 320 in the native 256-word rectangle.
+     * Poison the former linear offset so cold reconstruction tests the source. */
+    for(unsigned c=0;c<16;++c){
+        psx_mod_write_half(active_palette+0x320+c*2,0);
+        psx_mod_write_half(active_palette+0x920+c*2,0x7654);
+    }
+    psx_mod_write_half(active_palette+0x322,0x1234);psx_mod_write_half(active_palette+0x324,0x4321);
     uint32_t core=state_digest();
     saved_yammar_tile=sprite_bank(assets+0x100,0,0x7849,0x4000);
     saved_yammar_page=sprite_bank(assets+0x100,22,0x7849,UINT16_MAX);

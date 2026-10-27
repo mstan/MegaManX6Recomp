@@ -945,7 +945,8 @@ static void deferred_icon_effect_retains_zero_source(void){
     shared_effect_owners[0]=1;CHECK(!render_survivor(&cpu,0x800232D4u));
     shared_effect_owners[0]=2;psx_mod_write_word(actor+0x3C,assembly);
     CHECK(!render_survivor(&cpu,0x800232D4u));
-    CHECK(!zero_atlas_effect_bank(0x2C,0x77FF,0,0) && !zero_atlas_effect_bank(0x2C,0x7A00,0,0));
+    /* Reject coordinates outside the native (0,480,256,32) upload. */
+    CHECK(!zero_atlas_effect_bank(0x2C,0x77FF,0,0) && !zero_atlas_effect_bank(0x2C,0x8000,0,0));
 }
 static void deferred_dash_effect_retains_zero_atlas(void) {
     CPUState cpu;setup(&cpu);const uint32_t actor=0x80091298u;
