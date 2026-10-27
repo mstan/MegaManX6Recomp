@@ -1,0 +1,179 @@
+{
+  "schema": 1,
+  "comparison": "F137",
+  "frozen_row_sha256": "98c0ebfd54f95c955bdfae7e19f710f0231374bf2f4dbbe7a786ecc8afc386c5",
+  "mode": "local",
+  "result": "failed",
+  "candidate": "2b2b5b2c22c58ac1f500ae0f681dd4db0f367748",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-v64-final-binding-root-v1.json",
+    "binding_sha256": "da7714d14f6e5cde87b9987b0df980feb62e24fb9ee48be0439fb8d118df0367",
+    "image_sha256": "b1c38c524457f2f582c208c826fc8393ad871f19bc96420d21280edc2e86ea8b",
+    "manifest_sha256": "e0aa9cd3898aea57041370f94176a5cbcbc73dbc42c4c65ff4283465cd3f761d",
+    "provenance_sha256": "fc5c6757e03c4cc4158e4a33fca7dbc03a6e1097641e73caafdaa973e3005b9b",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v64-both-door-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "2b2b5b2c22c58ac1f500ae0f681dd4db0f367748",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v21",
+    "host_revision": 4
+  },
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v64-root-v2\\qualification.json",
+    "sha256": "1601dbeeb361e09b315d016454377ffa9d54fcef8c32e74b7cda67382360d4f4",
+    "bytes": 4477634
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v64-root-v2\\ammo-hud\\Both-door\\observations.json",
+    "sha256": "8e8650bfe92e5d895fb610046d910d879b4cd964e6559ae29337d0db6fda0e62",
+    "bytes": 3510152
+  },
+  "source_pins": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v64-root-v2\\source-pins.json",
+    "sha256": "36c331b74c1bb74b8c32b7ef50a4cafc26e595f805d05aae122b90917f34eb77",
+    "bytes": 447
+  },
+  "original_native_door_guards": [
+    {
+      "address": "0x80050250",
+      "bytes": 804,
+      "sha256": "60f5e79f358772a0c18f11c33ce51c4b6d90fc10a5113194a6181c8ee5ef9ab5"
+    },
+    {
+      "address": "0x80050c88",
+      "bytes": 312,
+      "sha256": "c5febbed0d549831f1f8ff9704d9bf84d7b489b7ae17488a43d95299b0b54216"
+    }
+  ],
+  "failure_witness": {
+    "first_sample": 52,
+    "last_sample": 158,
+    "native_world_advanced": 749,
+    "native_eligibility": [
+      false,
+      true
+    ],
+    "Zero_D4": 1,
+    "PLAY_1C": 1,
+    "scene_owner": 0,
+    "boss": null
+  },
+  "selected_root_review": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v64-root-v2\\ammo-hud\\Both-door\\only-Zero-at-waiting-Both-door.png",
+      "sha256": "f330a2a59cbc3f63a36e0c1da04f01febe35f02577abadc9d40887ca1c7c29c7",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v64-root-v2\\ammo-hud\\Both-door\\Zero-own-menu-at-waiting-door.png",
+      "sha256": "3018ded7a6c9d88611880222942075b419efa280064176ab7f6057cfa1cf34d9",
+      "bytes": 2074543
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v64-root-v2\\ammo-hud\\Both-door\\terminal-observation.png",
+      "sha256": "833bb7631a158ca28bc3df6311edcd8b09767d8972bf34aa269fcf4ceff73724",
+      "bytes": 2074543
+    }
+  ],
+  "recording": {
+    "status": "failed_fixture_taint_retained_for_diagnostics",
+    "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v64-root-v2\\candidate\\saves\\input-recordings\\session-1793067668583772-1-0\\inputs.jsonl",
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "b1c38c524457f2f582c208c826fc8393ad871f19bc96420d21280edc2e86ea8b",
+      "manifest_sha256": "e0aa9cd3898aea57041370f94176a5cbcbc73dbc42c4c65ff4283465cd3f761d",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "6f185b504cfe749ad44a8f6492ca12d086d7ac163d36758f285558790eba0826",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "terminal_failure": "unilateral debug or fixture input contaminated capture",
+    "native_status": {
+      "contract": "mmx6.native-consumption.v1",
+      "epoch": 1,
+      "failure": "unilateral debug or fixture input contaminated capture",
+      "schema": 1,
+      "scope": "native-consumption diagnostics; replay unimplemented",
+      "status": "failed"
+    },
+    "events": 5881,
+    "natives": 4132,
+    "p2_reads": 1749,
+    "artifacts": [
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v64-root-v2\\recording-rejection\\settings.json",
+        "bytes": 10343,
+        "sha256": "6f185b504cfe749ad44a8f6492ca12d086d7ac163d36758f285558790eba0826"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v64-root-v2\\recording-rejection\\content.json",
+        "bytes": 503,
+        "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v64-root-v2\\recording-rejection\\simulation-contract.json",
+        "bytes": 259,
+        "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v64-root-v2\\recording-rejection\\inputs.jsonl",
+        "bytes": 772482,
+        "sha256": "a1ed8e811a1b90ab3ad107a059ca62210ede3becd2143b5ea9ee839e9f6c25c3"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v64-root-v2\\recording-rejection\\status.json",
+        "bytes": 211,
+        "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v64-root-v2\\recording-rejection\\card1.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      },
+      {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v64-root-v2\\recording-rejection\\card2.initial.mcd",
+        "bytes": 131072,
+        "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+      }
+    ],
+    "strict_refusals": {
+      "ordinary_capture": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      },
+      "offline_replay": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      }
+    },
+    "finalized_capture_admitted": false,
+    "replay_admitted": false,
+    "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+  },
+  "cards_unchanged": true,
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  },
+  "limits": [
+    "F137 LOCAL failed on exactV64. Native one-owner menu first opens correctly, but its native world preview claims the waiting Zero-only door even though X remains outside. After menu closes original Zero+D4 andPLAY+1C stay1 with no co-op scene owner, no boss and primary native eligibility false. No subsequent crossing or movement-result claim.",
+    "All three selected composed images reviewed: distant X, Zero at real waiting door, actual Zero-owned menu, same room after closing. The native lock/admission defect is established by retained original-code guards and raw flags, not a screenshot alone.",
+    "Original offlineCP2 prerequisite only; no actor/health/door/lock/position/success writes. Fixture scenery corruption/taint is explicit, strict ordinary capture/replay refused, cards unchanged and ownedexit0.",
+    "Earlier V64v1 stopped at immediate menu closing; fresh v2 waited full closing plus12seconds and retained continued world/locked flags, distinguishing transient observation from persistent native admission. Both attempts preserved.",
+    "Fixa999373 now in isolatedV65 blocks authenticnative50368 predicate while any personal menu is active, including projected Zero preview with no tag35. New native execution remains required; no repaired result yet."
+  ]
+}

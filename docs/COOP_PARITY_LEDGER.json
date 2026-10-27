@@ -13227,17 +13227,53 @@
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "2b2b5b2c22c58ac1f500ae0f681dd4db0f367748",
+            "build_identity": {
+              "executable_sha256": "b1c38c524457f2f582c208c826fc8393ad871f19bc96420d21280edc2e86ea8b",
+              "compiled_manifest_sha256": "e0aa9cd3898aea57041370f94176a5cbcbc73dbc42c4c65ff4283465cd3f761d",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "both",
+              "view": "shared native4:3 OpenGL",
+              "entry": "offline audited original introCP2 prerequisite",
+              "audio": "muted dummy"
+            },
+            "action": "Let Zero alone wait at real Both door; walk away/back, open its native menu, reject wrong-seat resume, close and wait for native door control.",
+            "outcome": "Actual native menu preview admits original waiting door despite X outside. Original Zero+D4 andPLAY+1C stay1 for more than180advancing world updates after menu closes, with no boss/co-op sceneowner; required safe crossing not reached.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-2b2b5b2-F137-menu-door-admission-failure-reviewed.json",
+                "sha256": "7a0c7bca41d38822a33fe5c87cf1c64e7b8c4184ba36da6b048aec2af40839f1"
+              }
+            ],
+            "limits": [
+              "F137 LOCAL failed on exactV64. Native one-owner menu first opens correctly, but its native world preview claims the waiting Zero-only door even though X remains outside. After menu closes original Zero+D4 andPLAY+1C stay1 with no co-op scene owner, no boss and primary native eligibility false. No subsequent crossing or movement-result claim.",
+              "All three selected composed images reviewed: distant X, Zero at real waiting door, actual Zero-owned menu, same room after closing. The native lock/admission defect is established by retained original-code guards and raw flags, not a screenshot alone.",
+              "Original offlineCP2 prerequisite only; no actor/health/door/lock/position/success writes. Fixture scenery corruption/taint is explicit, strict ordinary capture/replay refused, cards unchanged and ownedexit0.",
+              "Earlier V64v1 stopped at immediate menu closing; fresh v2 waited full closing plus12seconds and retained continued world/locked flags, distinguishing transient observation from persistent native admission. Both attempts preserved.",
+              "Fixa999373 now in isolatedV65 blocks authenticnative50368 predicate while any personal menu is active, including projected Zero preview with no tag35. New native execution remains required; no repaired result yet."
+            ],
+            "bypasses": [
+              "Original offline introCP2 reachability only, no tested outcome writes."
+            ]
+          }
+        ],
+        "limitations": "LOCAL exactV64 2b2b5b2 actual Zero-owned personal-menu world preview prematurely claims waiting Both door while X is outside: original Zero+D4/PLAY+1C remain1 after closing, without co-op scene owner/boss; persistent12second wait retained. Fixa999373 isolatedV65 building, native requalification and NET remain incomplete."
       }
     },
     {
