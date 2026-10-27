@@ -122,7 +122,7 @@ class AmmoTests(unittest.TestCase):
         self.assertEqual(source['ammo_hud']['source_instructions']['0x80024bdc'], '0x24060050')
 
 
-def recording(candidate, *, failure=runner.TAINT_FAILURE, status_failure=None):
+def recording(candidate, *, failure=runner.TAINT_FAILURE, status_failure=None, mode='offline'):
     codec = runner.owner.codec
     directory = candidate/'saves/game/input-recordings/session-test'; directory.mkdir(parents=True)
     settings = dict(declared_scope_available=1, input=dict(ports=[dict(seat=seat, device_kind=1,
@@ -132,9 +132,10 @@ def recording(candidate, *, failure=runner.TAINT_FAILURE, status_failure=None):
     identity = dict(image_sha256='1'*64, manifest_sha256='2'*64, execution_id='synthetic-fixture',
         settings_sha256=codec.sha256(bundles['settings.json']), content_sha256=codec.sha256(bundles['content.json']),
         simulation_contract_sha256=codec.sha256(bundles['simulation-contract.json']),
-        mode='offline', profile=None, cards=[None, None], baseline=None)
+        mode=mode, profile=(None if mode == 'offline' else dict(id='synthetic.lab', revision=1,
+            selected_sha256='3'*64)), cards=[None, None], baseline=None)
     stream = io.BytesIO(); encoder = codec.Encoder(stream, identity)
-    encoder.append(dict(type='N', order=0, native=0, cycles=100, sim_tick=None, frame=0,
+    encoder.append(dict(type='N', order=0, native=0, cycles=100, sim_tick=(None if mode == 'offline' else 0), frame=0,
                         caller=0x80012220, pads=[[0, 0, 0], [0, 0, 0]]))
     encoder.finish(failure=failure)
     bundles['inputs.jsonl'] = stream.getvalue()
@@ -147,6 +148,28 @@ def recording(candidate, *, failure=runner.TAINT_FAILURE, status_failure=None):
 
 
 class TaintedAdmissionTests(unittest.TestCase):
+    def test_netplay_requires_explicit_mode_and_still_refuses_capture_and_replay(self):
+        with tempfile.TemporaryDirectory(dir=os.environ['TEMP']) as directory:
+            root = Path(directory); recording(root/'candidate', mode='netplay')
+            with self.assertRaisesRegex(ValueError, 'exact offline'):
+                runner.inspect_tainted_recording(root/'candidate', '1'*64, '2'*64, root/'wrong-mode')
+            result = runner.inspect_tainted_recording(root/'candidate', '1'*64, '2'*64,
+                root/'archive', expected_mode='netplay')
+            self.assertFalse(result['replay_admitted']); self.assertFalse(result['finalized_capture_admitted'])
+            self.assertEqual(result['strict_refusals']['ordinary_capture']['message'],
+                'capture explicitly failed: '+runner.TAINT_FAILURE)
+            self.assertEqual(result['strict_refusals']['offline_replay']['message'],
+                'network trace cannot be replayed offline')
+
+    def test_netplay_unrelated_failure_is_not_accepted_as_fixture_taint(self):
+        with tempfile.TemporaryDirectory(dir=os.environ['TEMP']) as directory:
+            root = Path(directory)
+            recording(root/'candidate', mode='netplay', failure='recording worker I/O or validation failed')
+            with self.assertRaisesRegex(ValueError, 'exact canonical failed'):
+                runner.inspect_tainted_recording(root/'candidate', '1'*64, '2'*64,
+                    root/'archive', expected_mode='netplay')
+            self.assertFalse((root/'archive').exists())
+
     def test_exact_failed_fixture_is_archived_and_both_strict_paths_refuse_it(self):
         with tempfile.TemporaryDirectory(dir=os.environ['TEMP']) as directory:
             root = Path(directory); source, bundles = recording(root/'candidate')

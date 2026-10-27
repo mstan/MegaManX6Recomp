@@ -16,13 +16,15 @@ import qualify_mmx6_coop_jump_audio as owner
 TAINT_FAILURE = 'unilateral debug or fixture input contaminated capture'
 
 
-def inspect_tainted_recording(candidate, image, manifest, output):
+def inspect_tainted_recording(candidate, image, manifest, output, *, expected_mode='offline'):
     """Archive a structurally valid *failed* trace, refusing normal admission.
 
     require_complete=False is diagnostic inspection of a failed terminal only.
     Both ordinary capture validation and offline replay must still reject it.
     Unexpected corruption, failure reasons or untainted output fail this case.
     """
+    if expected_mode not in ('offline', 'netplay'):
+        raise ValueError('Fixture inspection requires an explicit supported session mode')
     paths = list(candidate.glob('saves/**/input-recordings/session-*/inputs.jsonl'))
     if len(paths) != 1:
         raise ValueError('Inventory fixture requires exactly one retained default native recording')
@@ -33,8 +35,8 @@ def inspect_tainted_recording(candidate, image, manifest, output):
     summary = owner.codec.validate(io.BytesIO(raw), max_events=owner.artifacts.MAX_EVENTS, require_complete=False)
     identity = summary.identity
     if (identity['image_sha256'] != image or identity['manifest_sha256'] != manifest or
-            identity['mode'] != 'offline' or identity['baseline'] is not None):
-        raise ValueError('Tainted recording is not the exact offline cold-boot image')
+            identity['mode'] != expected_mode or identity['baseline'] is not None):
+        raise ValueError('Tainted recording is not the exact '+expected_mode+' cold-boot image')
     status = owner.host.json_object(path.parent/'status.json', 4096)
     expected = dict(contract=owner.codec.CONTRACT, epoch=status.get('epoch'), failure=TAINT_FAILURE,
                     schema=1, scope=owner.artifacts.STATUS_SCOPE, status='failed')
@@ -78,7 +80,10 @@ def inspect_tainted_recording(candidate, image, manifest, output):
         try:
             check()
         except owner.codec.InvalidRecording as error:
-            if str(error) != 'capture explicitly failed: '+TAINT_FAILURE:
+            expected_error = ('network trace cannot be replayed offline'
+                if name == 'offline_replay' and expected_mode == 'netplay'
+                else 'capture explicitly failed: '+TAINT_FAILURE)
+            if str(error) != expected_error:
                 raise ValueError('Recording was rejected for an unexpected reason') from error
             refusals[name] = dict(type=type(error).__name__, message=str(error))
         else:
