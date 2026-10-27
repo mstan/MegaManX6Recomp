@@ -139,11 +139,19 @@ static int checkpoint_before_doors_source(void) {
         psx_mod_read_word(0x80078DC8u)==0x20100000u &&
         psx_mod_read_word(0x800FA7B4u)==0x80050DFCu;
 }
+static uint32_t checkpoint_before_explosion_placement_word(void) {
+    /* Original29F38 calls29E7C at2A12C before allocation. For this low-nibble0
+     * placement,29EF8 changes lifetime byte3 from0 to10, except difficulty3
+     * takes29E9C's no-change admission. Before our one-shot scan no lifetime
+     * transition is authorized; after it only that exact native value is. */
+    return checkpoint_pending.phase==3 && psx_mod_read_byte(PLAY+0x68)!=3 ?
+        0x10010000u:0x00010000u;
+}
 static int checkpoint_before_explosion_source(void) {
     for(unsigned i=0;i<sizeof before_explosion_code/sizeof before_explosion_code[0];++i)
         if(checkpoint_hash(before_explosion_code[i].first,before_explosion_code[i].end)!=before_explosion_code[i].hash)return 0;
-    /* Original placement allocation changes bit0 only. */
-    return (psx_mod_read_word(0x800FA384u)&0xFFFFFFFEu)==0x00010000u &&
+    /* Bit0 is the original allocator's flag; lifetime byte3 is phase-bound. */
+    return (psx_mod_read_word(0x800FA384u)&0xFFFFFFFEu)==checkpoint_before_explosion_placement_word() &&
         psx_mod_read_word(0x800FA388u)==0x02E01240u;
 }
 static int checkpoint_before_doors_assets(uint32_t *meta,uint32_t *desc) {
@@ -295,7 +303,8 @@ static void checkpoint_explosion_source_refusal(void) {
         if(actual!=before_explosion_code[i].hash) {checkpoint_refusal_value("explosion-code-hash",i,before_explosion_code[i].first,actual,before_explosion_code[i].hash);return;}
     }
     uint32_t actual=psx_mod_read_word(0x800FA384u);
-    if((actual&0xFFFFFFFEu)!=0x00010000u) {checkpoint_refusal_value("explosion-placement-word0-mask-FFFFFFFE",0,0x800FA384u,actual,0x00010000u);return;}
+    uint32_t expected=checkpoint_before_explosion_placement_word();
+    if((actual&0xFFFFFFFEu)!=expected) {checkpoint_refusal_value("explosion-placement-word0-mask-FFFFFFFE",0,0x800FA384u,actual,expected);return;}
     actual=psx_mod_read_word(0x800FA388u);
     if(actual!=0x02E01240u) {checkpoint_refusal_value("explosion-placement-word1",1,0x800FA388u,actual,0x02E01240u);return;}
     checkpoint_refusal_value("explosion-source-recheck-clean",0,0x800FA384u,actual,actual);

@@ -32,6 +32,9 @@ static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret) {
         psx_mod_read_word(0x800971F8u+12)==(explosion?704u:256u)<<16);
     /* External native scanner contract only: allocate an original slot. Its
      * native init/grounding are deliberately NOT supplied by this model. */
+    /* The real scanner first calls29E7C: low difficulty0 placement enters
+     * lifetime10 at29EF8 unless PLAY+68==3 takes the no-change admission. */
+    if(explosion)psx_mod_write_byte(0x800FA387u,psx_mod_read_byte(PLAY+0x68)==3?0:0x10);
     uint32_t a=explosion?0x8008EF48u:0x800C1220u;
     psx_mod_write_byte(a,1);psx_mod_write_byte(a+1,explosion?0:8);psx_mod_write_byte(a+2,explosion?1:2);
     psx_mod_write_word(a+0x10,explosion?0x800FA384u:0x800FA2A4u);
@@ -353,8 +356,9 @@ static void agreed_before_doors_boundary(CPUState *cpu) {
 }
 static void agreed_before_explosion_boundary(CPUState *cpu) {
     uint32_t meta,desc;const uint32_t actor=0x8008EF48u,cam=0x800971F8u;
-    for(int online=0;online<=1;++online) {
+    for(int online=0;online<=1;++online)for(unsigned difficulty=0;difficulty<=3;difficulty+=3) {
         setup_position_prerequisite(cpu,online,1);
+        psx_mod_write_byte(PLAY+0x68,(uint8_t)difficulty);
         CHECK(checkpoint_before_explosion_source() && checkpoint_before_doors_assets(&meta,&desc));
         CHECK(checkpoint_before_explosion_ground(meta,desc));
         /* Real CP1 arrival/idle must precede the one-shot pose. */
@@ -378,7 +382,7 @@ static void agreed_before_explosion_boundary(CPUState *cpu) {
             int allowed=(at>=p+8 && at<p+16) || (at>=p+0x18 && at<p+0x20) ||
                 (at>=c+8 && at<c+16) || (at>=c+0x14 && at<c+0x2C) ||
                 at==c+0x47 || at==c+0x4C || at==c+0x54+0x4C || at==c+0xA8+0x4C ||
-                (at>=0x8EF48u && at<0x8EF48u+0x9Cu) || at==0xFA384u;
+                (at>=0x8EF48u && at<0x8EF48u+0x9Cu) || at==0xFA384u || at==0xFA387u;
             CHECK(test_ram[at]==before_ram[at] || allowed);
         }
         CHECK(psx_mod_read_word(PLAYER+12)==843u<<16 && psx_mod_read_word(cam+0x14)==4576u<<16 &&
@@ -394,6 +398,8 @@ static void agreed_before_explosion_boundary(CPUState *cpu) {
             psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_INITIALIZING &&
             psx_mod_read_byte(diagnostic+0xAD)==1 && psx_mod_read_byte(diagnostic+0xAE)==1 &&
             psx_mod_read_word(diagnostic+0xB0)==CHECKPOINT_LAB_BEFORE_EXPLOSION_NONCE);
+        CHECK(psx_mod_read_word(0x800FA384u)==(difficulty==3?0x00010001u:0x10010001u) &&
+            checkpoint_before_explosion_source());
         /* Allocated alone is insufficient. The fixture does not initialize,
          * move, damage or trigger this actor; model native init separately. */
         psx_mod_write_word(PLAY+0x90,102);
@@ -453,6 +459,29 @@ static void agreed_before_explosion_boundary(CPUState *cpu) {
             strstr(refusal_log,"phase=3 index=1 address=0x1F800008 actual=0x00000000 expected=0x80010000"));
         CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&saved,&p2,sizeof p2));
         CHECK(!checkpoint_stage_boundary(cpu) && refusal_logs==1);
+        /* Lifetime admission is allowed only after the genuine primary scan,
+         * and only exactly as produced by the original difficulty branch. */
+        setup_position_prerequisite(cpu,online,1);psx_mod_write_byte(0x800FA387u,0x10);
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
+            psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE);
+        for(unsigned wrong=0;wrong<8;++wrong) {
+            setup_position_prerequisite(cpu,online,1);psx_mod_write_byte(PLAY+0x68,0);
+            CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
+            if(wrong==0)psx_mod_write_byte(0x800FA387u,0); /* Missing native lifetime transition. */
+            if(wrong==1)psx_mod_write_byte(0x800FA387u,0x20); /* Later lifetime is not this setup. */
+            if(wrong==2)psx_mod_write_byte(0x800FA387u,0x11); /* No arbitrary difficulty nibble. */
+            if(wrong==3)psx_mod_write_byte(0x800FA384u,3); /* No extra allocation/header flag. */
+            if(wrong==4)psx_mod_write_byte(0x800FA385u,1); /* Exact native type0. */
+            if(wrong==5)psx_mod_write_byte(0x800FA386u,0); /* Exact subtype1. */
+            if(wrong==6)psx_mod_write_half(0x800FA388u,4673); /* Exact authored X. */
+            if(wrong==7)psx_mod_write_half(0x800FA38Au,737); /* Exact authored Y. */
+            CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && guest_calls==1 &&
+                psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE && refusal_logs==1);
+        }
+        setup_position_prerequisite(cpu,online,1);psx_mod_write_byte(before_explosion_code[1].first,0);
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase && !guest_calls &&
+            psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE &&
+            strstr(refusal_log,"explosion-code-hash[1]")); /* Gate bytes themselves remain pinned. */
         setup_position_prerequisite(cpu,online,1);CHECK(!checkpoint_stage_boundary(cpu) && checkpoint_pending.phase==3);
         CHECK(!refusal_logs); /* Normal placement/waiting never emits a refusal. */
         checkpoint_reset();CHECK(!checkpoint_pending.phase && !psx_mod_read_byte(diagnostic+0xAD));

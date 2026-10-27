@@ -9,6 +9,10 @@
 #define MMX6_COOP_BEFORE_EXPLOSION_DATA_H
 static const Mmx6CheckpointCode before_explosion_code[]={
     {0x80029F38u,0x8002A33Cu,0x72A44816u},
+    /* Original lifetime admission: low difficulty0 -> byte3=10 at29EF8;
+     * difficulty3 admits without that mutation. SHA256
+     * df6eff4115848b712fbc5f13bac169665422de1032a5e9544412af5d56e7da89. */
+    {0x80029E7Cu,0x80029F38u,0x45D4158Du},
     {0x8002A3E8u,0x8002A438u,0x80D6290Cu},
     {0x8005211Cu,0x80052300u,0x723008F9u},
     {0x80079210u,0x80079230u,0x8694E1B0u},
