@@ -1,0 +1,302 @@
+{
+  "schema": 1,
+  "comparison": "F199",
+  "frozen_row_sha256": "0262feb454abe0fda5abb3b86da5a27202430019113eed73456d9641c40a4308",
+  "result": "unverified",
+  "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+  "attempts": [
+    {
+      "version": 1,
+      "result": "failed_setup",
+      "parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F199-guest-admission-local-v82-root-v1\\qualification.json",
+        "bytes": 2452324,
+        "sha256": "4e09cdde5e809f84147e78055632e6f94ac742b605f1fe8816e4321184456b5b"
+      },
+      "observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F199-guest-admission-local-v82-root-v1\\ammo-hud\\intro-admission\\observations.json",
+        "bytes": 2125752,
+        "sha256": "9385becf8c89452145e3360580f941579573db828da8996f37339e2063197fe1"
+      },
+      "executed_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F199-guest-admission-local-v82-root-v1\\executed-source-pins.json",
+        "bytes": 1534,
+        "sha256": "7d8307723695d52df6813d55db1c741db59bc7d34f2b472d8087d2e99cd9c00c"
+      },
+      "exact_binding": {
+        "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-v82-final-binding-root-v1.json",
+        "binding_sha256": "0172ea22254cee069ec4f1d3c401f14ea050cd018efbcc7d7f7265d10379a12a",
+        "image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+        "manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+        "provenance_sha256": "6a3d1bd53edc47b8f248fef3b452154cfb936a4df0e63a6a9798774e58eafd2d",
+        "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v82-nearby-explosion-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+        "source_heads": {
+          "game": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+          "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+          "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+        },
+        "title": "mmx6-x-zero-delay-v31",
+        "host_revision": 14
+      },
+      "observer": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F199_guest_admission_v82_root_v1.py",
+        "sha256": "f625885de99f820d3bd24b82b74bc753a9635a6d39861696dbdebe59a5b62a72"
+      },
+      "error": "Actual full-foot native ground was lost",
+      "last_label": "after bounded accepted guest Right",
+      "last_published_bodies": [
+        {
+          "seat": 0,
+          "x_raw": 310378496,
+          "y_raw": 55246848,
+          "action": 2,
+          "HP": 32,
+          "ground": 8,
+          "air": 0,
+          "ground_box": "0x80073d50"
+        },
+        {
+          "seat": 1,
+          "x_raw": 312049664,
+          "y_raw": 55181312,
+          "action": 12,
+          "HP": 32,
+          "ground": 8,
+          "air": 0,
+          "ground_box": "0x80073d54"
+        }
+      ],
+      "last_fixture": {
+        "generation": 1,
+        "state": 3,
+        "reason": 0,
+        "stage": 0,
+        "section": 0,
+        "checkpoint": 1,
+        "nonce": 1279608369,
+        "initializer_entries": 1,
+        "record": "8007212C",
+        "tainted": 1,
+        "authority": 1,
+        "latch": 2,
+        "prior_chord": 1,
+        "raw_hex": "434b50310100000003000000010201003146454c010000002c21078001010201",
+        "pose": 2,
+        "placement_calls": 1
+      },
+      "last_scan_right": 4956,
+      "last_subtype3_allocated": false,
+      "inputs": [
+        {
+          "seat": 0,
+          "bits": 0,
+          "label": "neutral before original agreed prerequisite"
+        },
+        {
+          "seat": 1,
+          "bits": 0,
+          "label": "neutral before original agreed prerequisite"
+        },
+        {
+          "seat": 1,
+          "bits": 6,
+          "label": "accepted ordinary P2 L3+R3 arms predeclared prerequisite"
+        },
+        {
+          "seat": 1,
+          "bits": 0,
+          "label": "release prerequisite chord"
+        },
+        {
+          "seat": 1,
+          "bits": 32,
+          "label": "one-update ordinary Zero Right pulse0"
+        },
+        {
+          "seat": 1,
+          "bits": 0,
+          "label": "immediate accepted neutral before pool/assets/capture reads"
+        },
+        {
+          "seat": 1,
+          "bits": 32,
+          "label": "one-update ordinary Zero Right pulse1"
+        },
+        {
+          "seat": 1,
+          "bits": 0,
+          "label": "immediate accepted neutral before pool/assets/capture reads"
+        },
+        {
+          "seat": 0,
+          "bits": 0,
+          "label": "final owned neutral"
+        },
+        {
+          "seat": 1,
+          "bits": 0,
+          "label": "final owned neutral"
+        }
+      ],
+      "owned_cleanup": {
+        "pid": 45868,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "private_cards_unchanged": true,
+      "recording_refusals": {
+        "ordinary_capture": {
+          "type": "InvalidRecording",
+          "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+        },
+        "offline_replay": {
+          "type": "InvalidRecording",
+          "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+        }
+      },
+      "limits": "Separate body publication and later fixture/camera/placement RPCs are not atomic. No gameplay failure or admission pass is inferred."
+    },
+    {
+      "version": 2,
+      "result": "failed_setup",
+      "parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F199-guest-admission-local-v82-root-v2\\qualification.json",
+        "bytes": 2254487,
+        "sha256": "c28f89dd0294df904105cea0df75452db301777dee13dc4350652aa43e8a16ab"
+      },
+      "observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F199-guest-admission-local-v82-root-v2\\ammo-hud\\intro-admission\\observations.json",
+        "bytes": 1954388,
+        "sha256": "a6b1bbd1e605fb7b6224dcd3b050c4474f14b195d3667f3af8ce3662b2ffa104"
+      },
+      "executed_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F199-guest-admission-local-v82-root-v2\\executed-source-pins.json",
+        "bytes": 1534,
+        "sha256": "aa71bd23b228a616619ffb341364dc9e4df9bd71e2d4623d86d0589ea1ffbabc"
+      },
+      "exact_binding": {
+        "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-v82-final-binding-root-v1.json",
+        "binding_sha256": "0172ea22254cee069ec4f1d3c401f14ea050cd018efbcc7d7f7265d10379a12a",
+        "image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+        "manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+        "provenance_sha256": "6a3d1bd53edc47b8f248fef3b452154cfb936a4df0e63a6a9798774e58eafd2d",
+        "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v82-nearby-explosion-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+        "source_heads": {
+          "game": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+          "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+          "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+        },
+        "title": "mmx6-x-zero-delay-v31",
+        "host_revision": 14
+      },
+      "observer": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F199_guest_admission_v82_root_v2.py",
+        "sha256": "0e94bbb22f7b12e24193c7f93f0e6ce407ccf99282833f1c00ee5912edf271f2"
+      },
+      "error": "Primary moved or guest escaped bounded safe corridor",
+      "last_label": "original grounded CP1 fixture ready",
+      "last_published_bodies": [
+        {
+          "seat": 0,
+          "x_raw": 138412032,
+          "y_raw": 73072640,
+          "action": 2,
+          "HP": 32,
+          "ground": 8,
+          "air": 0,
+          "ground_box": "0x80073d50"
+        },
+        {
+          "seat": 1,
+          "x_raw": 139984896,
+          "y_raw": 73007104,
+          "action": 5,
+          "HP": 32,
+          "ground": 8,
+          "air": 0,
+          "ground_box": "0x80073d54"
+        }
+      ],
+      "last_fixture": {
+        "generation": 1,
+        "state": 3,
+        "reason": 0,
+        "stage": 0,
+        "section": 0,
+        "checkpoint": 1,
+        "nonce": 1279608369,
+        "initializer_entries": 1,
+        "record": "8007212C",
+        "tainted": 1,
+        "authority": 1,
+        "latch": 2,
+        "prior_chord": 1,
+        "raw_hex": "434b50310100000003000000010201003146454c010000002c21078001010201",
+        "pose": 2,
+        "placement_calls": 1
+      },
+      "last_scan_right": 4944,
+      "last_subtype3_allocated": false,
+      "inputs": [
+        {
+          "seat": 0,
+          "bits": 0,
+          "label": "neutral before original agreed prerequisite"
+        },
+        {
+          "seat": 1,
+          "bits": 0,
+          "label": "neutral before original agreed prerequisite"
+        },
+        {
+          "seat": 1,
+          "bits": 6,
+          "label": "accepted ordinary P2 L3+R3 arms predeclared prerequisite"
+        },
+        {
+          "seat": 1,
+          "bits": 0,
+          "label": "release prerequisite chord"
+        },
+        {
+          "seat": 0,
+          "bits": 0,
+          "label": "final owned neutral"
+        },
+        {
+          "seat": 1,
+          "bits": 0,
+          "label": "final owned neutral"
+        }
+      ],
+      "owned_cleanup": {
+        "pid": 66680,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "private_cards_unchanged": true,
+      "recording_refusals": {
+        "ordinary_capture": {
+          "type": "InvalidRecording",
+          "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+        },
+        "offline_replay": {
+          "type": "InvalidRecording",
+          "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+        }
+      },
+      "limits": "Separate body publication and later fixture/camera/placement RPCs are not atomic. No gameplay failure or admission pass is inferred."
+    }
+  ],
+  "source_note": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F199-next-native-predicate-v82-worker-v1.txt",
+    "bytes": 4042,
+    "sha256": "3e6ccabc33220f1b96a80ee2565b922a6db8ae3cbee928fa64dd021768ababac"
+  },
+  "findings": [
+    "First setup confirms actual subtype3 absence with native scanright4956; primary remains4736. Two short ordinaryRight pulses seven native updates apart admit original12-tick double-tap dash/action12 before the target boundary. The action guard rejected this setup; actual standing contact remained present. It is not a native ground-loss or falling-controller failure.",
+    "Changed second setup uses one continuousRight plan and neutral-latch expiry, but stops BEFORE any Right. Its separate later receipt isREADY/pose2/scanner1/camera4576 while the earlier coherent body publication still has originalCP1 X2112/2136 and Y1115/1114. This is a publication/readiness bracket gap; actual escape or failed fixture motion is not established.",
+    "Both source/image guards pass and both owned processes exit0/cardsunchanged. No actualFA394 admission, countdown, fall/contact or NET result was obtained. Required LOCAL/NET statuses stay unverified.",
+    "Park after two native attempts, preserving frozen observers/callers and raw evidence. Next concrete prerequisite is a bounded wait for coherent published body positions AFTER the separate READY receipt, then source-qualified single-hold control without double-tap. Do not repeat unchanged, assign positions/flags, broaden the ground predicate or infer an outcome."
+  ]
+}

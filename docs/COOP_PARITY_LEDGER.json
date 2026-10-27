@@ -18423,8 +18423,44 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "cameras": "unified",
+              "local_cameras": "unified",
+              "roster": "X/P1+Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original introCP1 and one-shot native primary scan"
+            },
+            "action": "Bracket original subtype3 absence, then attempt a small accepted guest movement across the native camera/scanner boundary with primary fixed.",
+            "outcome": "First attempt admits native double-tap dash before boundary; changed second attempt stops beforeRight because body publication still predates separateREADY receipt. No falling-controller/admission gameplay verdict; both owned exits0/cardsunchanged.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solid/manifest-bound-dcc1002-F199-local-setups-deferred.json",
+                "sha256": "5ae974bd94053d2dd66fa41e8e52f9178e7caf6c3847412b653344b5ecc44a28"
+              }
+            ],
+            "limits": [
+              "First setup confirms actual subtype3 absence with native scanright4956; primary remains4736. Two short ordinaryRight pulses seven native updates apart admit original12-tick double-tap dash/action12 before the target boundary. The action guard rejected this setup; actual standing contact remained present. It is not a native ground-loss or falling-controller failure.",
+              "Changed second setup uses one continuousRight plan and neutral-latch expiry, but stops BEFORE any Right. Its separate later receipt isREADY/pose2/scanner1/camera4576 while the earlier coherent body publication still has originalCP1 X2112/2136 and Y1115/1114. This is a publication/readiness bracket gap; actual escape or failed fixture motion is not established.",
+              "Both source/image guards pass and both owned processes exit0/cardsunchanged. No actualFA394 admission, countdown, fall/contact or NET result was obtained. Required LOCAL/NET statuses stay unverified.",
+              "Park after two native attempts, preserving frozen observers/callers and raw evidence. Next concrete prerequisite is a bounded wait for coherent published body positions AFTER the separate READY receipt, then source-qualified single-hold control without double-tap. Do not repeat unchanged, assign positions/flags, broaden the ground predicate or infer an outcome."
+            ],
+            "bypasses": [
+              "Agreed originalCP1 and source-qualified positional prerequisite only; no observer outcome/body/placement/HP/ground writes."
+            ]
+          }
+        ],
+        "limitations": "Two exactV82 LOCAL setups deferred: repeatedRight admitted native dash; changed setup stopped beforeRight on separateREADY-versus-published-body timing gap. No nativeFA394 admission/fall/contact or NET verdict. Both mode statuses remain unverified; both clean exits/cards preserved."
       }
     },
     {
