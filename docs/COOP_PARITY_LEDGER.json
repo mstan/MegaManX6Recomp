@@ -6536,17 +6536,51 @@
           "src/mods/mmx6_coop_plugin.c:render_actor",
           "src/mods/mmx6_coop_plugin.c:draw_coop_hud"
         ],
-        "status": "unverified",
+        "status": "failed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "failed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "failed",
+            "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+            "build_identity": {
+              "executable_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+              "compiled_manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "prerequisite": "pre-agreed nativeCP2, earned guest door/boss release",
+              "audio": "muted dummy"
+            },
+            "action": "After genuine guest-led native door, admit primary Right/Circle dash; inspect native resident X body/three original trail records and separate privateZero publication.",
+            "outcome": "FAIL: actual Xdash/action12/marker1 observed13rows, but scene passenger cleanup erased trail allocation/index/parent/priority/CLUT metadata. Visibility/active updates zeroed records; source-qualified ownership guard refuses. No active-art/slowdown result fabricated.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-camera/manifest-bound-50cc26e-F23-native-primary-trails-failed.json",
+                "sha256": "b86e8e1897370aa738a1dfbbd8bc6fef56fadb7b21752841d828deb133dbecce"
+              }
+            ],
+            "limits": [
+              "Actual LOCAL F23 native effect ownership/metadata fails after genuine guest-owned door; this is a gameplay defect, not a setup-only policy failure. NET remains unverified.",
+              "No active composed image was captured because source-qualified actor guards correctly refused the malformed records. No measured FPS/slowdown or every-pixel-art result is claimed.",
+              "Native X action12/marker1 and13 raw rows prove original dash admission. All3 fixed trails retain erased allocation/index/parents/priority/CLUT, even while visibility/active/resources update; original constructor identity is missing.",
+              "Source scene_tick phase1 clears entire resident trail/effect pools, phase3 restores only passenger body. Original fixed-pool retirement clears visibility/active while preserving constructor metadata; restoring native invariants is the fix under development.",
+              "Pre-agreed LABCP2 reachability bypass is explicit. Original guest door/boss32HP/passenger landing occur normally. No tested HP/pose/effect/outcome writes in observer. Private cards unchanged and owned exit0 retained. Full raw failures remain preserved."
+            ],
+            "bypasses": [
+              "Pre-agreed original introCP2 reachability prerequisite."
+            ]
+          }
+        ],
+        "limitations": "LOCAL50cc26e F23 failed: native Xdash admitted after actual guestdoor, but resident fixed trail constructor metadata was erased by scene_tick whole-pool zeroing; all3 trail owners/types/indices/CLUT invalid across13actualdashrows. No art/FPS claim from refused capture. Native invariant fix isolatedV68 pending; NET unverified."
       }
     },
     {

@@ -1,0 +1,679 @@
+{
+  "schema": 1,
+  "comparison": "F23",
+  "frozen_row_sha256": "9d4dc744777cc8cd31f5c1a0f68e92a19424f28687846487475bb447385920ac",
+  "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+  "result": "failed",
+  "mode": "local",
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-local-v67-root-v1\\qualification.json",
+    "bytes": 6275167,
+    "sha256": "80d28399ee3499f84d28a54fb1ae106ff9d47e4382e4c5c88057234287b644cf"
+  },
+  "raw_observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F23-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F23\\observations.json",
+    "bytes": 3874191,
+    "sha256": "8124a124b1d0aafd0c454bec81129dfde0f8146163f1a853900cf19913bf0a1d"
+  },
+  "actual_native_dash_rows": [
+    {
+      "index": 10,
+      "native_timer": 524,
+      "primary_x": 6145.046875,
+      "primary_action": 12,
+      "marker": 1,
+      "trails": [
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 6145.046875,
+          "y": 395.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 6145.046875,
+          "y": 395.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 6145.046875,
+          "y": 395.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "native_timer": 526,
+      "primary_x": 6163.984375,
+      "primary_action": 12,
+      "marker": 1,
+      "trails": [
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 6145.046875,
+          "y": 395.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 6145.046875,
+          "y": 395.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 6145.046875,
+          "y": 395.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "native_timer": 529,
+      "primary_x": 6175.671875,
+      "primary_action": 12,
+      "marker": 1,
+      "trails": [
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "native_timer": 531,
+      "primary_x": 6181.234375,
+      "primary_action": 12,
+      "marker": 1,
+      "trails": [
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "native_timer": 532,
+      "primary_x": 6196.796875,
+      "primary_action": 12,
+      "marker": 1,
+      "trails": [
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        }
+      ]
+    },
+    {
+      "index": 15,
+      "native_timer": 536,
+      "primary_x": 6210.671875,
+      "primary_action": 12,
+      "marker": 1,
+      "trails": [
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        }
+      ]
+    },
+    {
+      "index": 16,
+      "native_timer": 537,
+      "primary_x": 6214.921875,
+      "primary_action": 12,
+      "marker": 1,
+      "trails": [
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        }
+      ]
+    },
+    {
+      "index": 17,
+      "native_timer": 539,
+      "primary_x": 6231.421875,
+      "primary_action": 12,
+      "marker": 1,
+      "trails": [
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        }
+      ]
+    },
+    {
+      "index": 18,
+      "native_timer": 542,
+      "primary_x": 6235.546875,
+      "primary_action": 12,
+      "marker": 1,
+      "trails": [
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        }
+      ]
+    },
+    {
+      "index": 19,
+      "native_timer": 545,
+      "primary_x": 6247.921875,
+      "primary_action": 12,
+      "marker": 1,
+      "trails": [
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        }
+      ]
+    },
+    {
+      "index": 20,
+      "native_timer": 546,
+      "primary_x": 6256.171875,
+      "primary_action": 12,
+      "marker": 1,
+      "trails": [
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        }
+      ]
+    },
+    {
+      "index": 21,
+      "native_timer": 549,
+      "primary_x": 6268.546875,
+      "primary_action": 12,
+      "marker": 1,
+      "trails": [
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        }
+      ]
+    },
+    {
+      "index": 22,
+      "native_timer": 552,
+      "primary_x": 6280.921875,
+      "primary_action": 12,
+      "marker": 1,
+      "trails": [
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        },
+        {
+          "allocation": 0,
+          "slot": 0,
+          "visible": 1,
+          "active": 1,
+          "phase": 0,
+          "priority": 0,
+          "x": 0.0,
+          "y": 0.0,
+          "parent": "0x0",
+          "CLUT": "0x0",
+          "tail": 10
+        }
+      ]
+    }
+  ],
+  "source_guards": [
+    {
+      "address": "0x80020c40",
+      "bytes": 1192,
+      "sha256": "94aede6da50519e2de8e52f5511114af3788360ed8ea568e899657022963ee15"
+    },
+    {
+      "address": "0x800357a8",
+      "bytes": 300,
+      "sha256": "f6852bd7ee4b24c28c60575cd19d08ecd1b05686798ec8b0590fa8a893133b7b"
+    },
+    {
+      "address": "0x80073cec",
+      "bytes": 6,
+      "sha256": "31e54fa8907c91ccf79000410eae1ea1cb5b65bc2893faaccdb4b7782a286b4c"
+    }
+  ],
+  "helper_pins": {
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F14_postdoor_v67_root_v1.py": "019bb5494a6f649b6aac7aaab2e05b59d1f8db5d82b5df0cbda5e15e304bb3f6",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-agreed-checkpoint-v67\\tools\\mmx6_coop_private_effects.py": "8aa7290af8316bf827024684668410b080ea5e56fbcbf7653236ad46f6bbffba",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-agreed-checkpoint-v67\\tools\\coop_debug.py": "61eae6837c54e191597a4829fdeb57f9b54a36229ebfd02fe60aec37b3ae1f1f"
+  },
+  "responsible_source": {
+    "file": "src/mods/mmx6_coop_plugin.c",
+    "function": "scene_tick phase1 fixed-pool whole zeroing; phase3 body-only restore",
+    "original_constructor": "8003BFBC..8003C038 internal block, type11/index0/1/2/parents/priority4/CLUT780D/E/F",
+    "original_retirement": "80020EE4/80020EEC and80020C18/80020C20 clear only +3visibility/+4active"
+  },
+  "limits": [
+    "Actual LOCAL F23 native effect ownership/metadata fails after genuine guest-owned door; this is a gameplay defect, not a setup-only policy failure. NET remains unverified.",
+    "No active composed image was captured because source-qualified actor guards correctly refused the malformed records. No measured FPS/slowdown or every-pixel-art result is claimed.",
+    "Native X action12/marker1 and13 raw rows prove original dash admission. All3 fixed trails retain erased allocation/index/parents/priority/CLUT, even while visibility/active/resources update; original constructor identity is missing.",
+    "Source scene_tick phase1 clears entire resident trail/effect pools, phase3 restores only passenger body. Original fixed-pool retirement clears visibility/active while preserving constructor metadata; restoring native invariants is the fix under development.",
+    "Pre-agreed LABCP2 reachability bypass is explicit. Original guest door/boss32HP/passenger landing occur normally. No tested HP/pose/effect/outcome writes in observer. Private cards unchanged and owned exit0 retained. Full raw failures remain preserved."
+  ]
+}
