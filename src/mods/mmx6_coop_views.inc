@@ -2,6 +2,12 @@
  * image are never replaced by a peer's presentation transaction. */
 #ifdef MMX6_COOP_MODERN_STATE
 #include "psx_netplay.h"
+#if defined(__has_include)
+#if __has_include("debug_native_entry_context.h")
+#include "debug_native_entry_context.h"
+#define MMX6_COOP_VIEW_ENTRY_CONTEXT 1
+#endif
+#endif
 enum { VIEW_CAMERA=0x800971F8u, VIEW_BUFFER=0x800C4578u,
        VIEW_STRIDE=0xF0u, VIEW_DRAW_OT=0x80066744u };
 static uint8_t view_cameras[2][0xFC];
@@ -10,6 +16,28 @@ static unsigned view_valid, view_pending;
 static unsigned view_menu_history;
 static uint8_t view_menu_stage,view_menu_section,view_menu_checkpoint;
 static void independent_invalidate(void) { view_valid=view_pending=view_menu_history=0; }
+
+#ifdef MMX6_COOP_VIEW_ENTRY_CONTEXT
+enum { VIEW_CONTEXT_PROVIDER=0x36564350u }; /* Diagnostic PCV6, not semantic state. */
+static int private_view_entry_context(uint32_t function,PSXDebugNativeContextWords *out,void *opaque) {
+    (void)opaque;
+#if PSX_DEBUG_NATIVE_CONTEXT_AVAILABLE
+    if(!out || function!=0x80025FB0u || !private_draw || private_seat>1 || !view_valid)return 0;
+    /* Only host-owned words: Zero's native camera updates are captured into
+     * this array before 25FB0. No guest reads/calls, allocation or mutation.
+     * flags: bit0 private, bit1 seat, bits2/3 vertical/horizontal quake;
+     * bytes1/2/3 are native vertical timer37/amplitude46/phase3F verbatim. */
+    const uint8_t *camera=view_cameras[private_seat];
+    out->flags=1u | private_seat<<1 | (uint32_t)(camera[0x34]&1u)<<2 |
+        (uint32_t)(camera[0x34]&0x10u)>>1 | (uint32_t)camera[0x37]<<8 |
+        (uint32_t)camera[0x46]<<16 | (uint32_t)camera[0x3F]<<24;
+    out->state0=frame_count;out->state1=le32(camera+8);out->state2=le32(camera+12);
+    return 1;
+#else
+    (void)function;(void)out;return 0;
+#endif
+}
+#endif
 
 /* A native personal menu suspends the world but diagnostics keep publishing.
  * Preserve the guest camera's history, never a stale rendered image. A scene,
@@ -213,6 +241,9 @@ static void independent_activate(void) {
     independent_views=local_split || own_view;
     private_draw=private_seat=view_valid=view_pending=view_call=view_menu_history=0;
     view_frame=view_buffer=0;memset(view_cameras,0,sizeof view_cameras);
+#ifdef MMX6_COOP_VIEW_ENTRY_CONTEXT
+    if(independent_views)(void)psx_debug_native_context_register(VIEW_CONTEXT_PROVIDER,private_view_entry_context,NULL);
+#endif
     if(independent_views)(void)psx_mod_set_fixed_display_aspect(4,3);
     /* The session reset revokes this SDK permission. Request it only for
      * the explicitly selected online pair, before enabling its canvas. */

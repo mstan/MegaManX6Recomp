@@ -1,5 +1,13 @@
 /* Actual plugin host restoration against explicit draw/sandbox contracts.
  * No real renderer, GPU checkpoint, watchdog or native-game qualification. */
+#if defined(__has_include)
+#if __has_include("debug_native_entry_context.h")
+#ifndef PSX_NATIVE_ENTRY_CONTEXT_SERVICE
+#define PSX_NATIVE_ENTRY_CONTEXT_SERVICE 1
+#endif
+#include "debug_native_entry_context.h"
+#endif
+#endif
 #include "cpu_state.h"
 #include "mmx6_coop_private_view_sdk_fixture.h"
 static unsigned view_native_calls,view_gpu_words,view_callback_calls,view_refuse,view_abort;
@@ -16,6 +24,17 @@ static uint32_t weather_x,weather_y;
 #define main unused_private_effects_fixture_main
 #include "test_mmx6_coop_private_effects.c"
 #undef main
+
+#if PSX_DEBUG_NATIVE_CONTEXT_AVAILABLE
+static PSXDebugNativeContextProvider view_registered_context;
+static unsigned view_context_registrations,view_context_refuse;
+int psx_debug_native_context_register(uint32_t id,PSXDebugNativeContextProvider provider,void *opaque) {
+    CHECK(id==VIEW_CONTEXT_PROVIDER && provider==private_view_entry_context && !opaque);
+    ++view_context_registrations;
+    if(view_context_refuse)return 0;
+    view_registered_context=provider;return 1;
+}
+#endif
 
 static void disturb_host(void) {
     p2.body[0x5C]=7;p1.body[0x5C]=8;join_phase=3;previous_input=0x1234;
@@ -116,6 +135,61 @@ static void defaults_and_scope(void) {
     mmx6_view_sdk_reset();mmx6_view_sdk.online=1;independent_activate();
     CHECK(!independent_views && !local_split && !mmx6_view_sdk.pair_enabled && !mmx6_view_sdk.netplay_allowed);
 }
+#ifdef MMX6_COOP_VIEW_ENTRY_CONTEXT
+static void native_camera_context(void) {
+    CPUState cpu;prepare_view(&cpu,0,1);
+    PSXDebugNativeContextWords out,sentinel;memset(&sentinel,0xA5,sizeof sentinel);
+    out=sentinel;
+    CHECK(!private_view_entry_context(0x80025FB0u,&out,NULL)); /* canonical entry */
+    CHECK(!memcmp(&out,&sentinel,sizeof out));
+    private_draw=1;private_seat=2;
+    CHECK(!private_view_entry_context(0x80025FB0u,&out,NULL));
+    private_seat=0;view_valid=0;
+    CHECK(!private_view_entry_context(0x80025FB0u,&out,NULL));view_valid=1;
+    CHECK(!private_view_entry_context(0x8002927Cu,&out,NULL));
+    CHECK(!private_view_entry_context(0,&out,NULL));
+    CHECK(!private_view_entry_context(0x80025FB0u,NULL,NULL));
+    CHECK(!memcmp(&out,&sentinel,sizeof out));
+    for(unsigned seat=0;seat<2;++seat) {
+        private_seat=seat;frame_count=1234;
+        uint8_t *camera=view_cameras[seat];memset(camera,0,sizeof view_cameras[seat]);
+        uint32_t x=0x11C00010u+seat,y=0x02C40020u-seat;
+        put32(camera+8,x);put32(camera+12,y);camera[0x34]=seat?0x10:1;
+        camera[0x37]=(uint8_t)(8-seat);camera[0x46]=(uint8_t)(4+seat);camera[0x3F]=seat?0x84:4;
+        PrivateViewContext before;memset(&before,0,sizeof before);private_context_save(&before);
+        uint8_t cameras[sizeof view_cameras];memcpy(cameras,view_cameras,sizeof cameras);
+        static uint8_t before_ram[sizeof ram],before_extra[sizeof extra];
+        memcpy(before_ram,ram,sizeof ram);memcpy(before_extra,extra,sizeof extra);
+        CPUState prior_cpu=cpu;unsigned calls_before=view_native_calls,words_before=view_gpu_words;
+        out=sentinel;
+#if PSX_DEBUG_NATIVE_CONTEXT_AVAILABLE
+        CHECK(private_view_entry_context(0x80025FB0u,&out,NULL));
+        CHECK(out.state0==1234 && out.state1==x && out.state2==y);
+        CHECK(out.flags==(1u | seat<<1 | (seat?8u:4u) | (uint32_t)(8-seat)<<8 |
+            (uint32_t)(4+seat)<<16 | (uint32_t)(seat?0x84u:4u)<<24));
+#else
+        CHECK(!private_view_entry_context(0x80025FB0u,&out,NULL));
+        CHECK(!memcmp(&out,&sentinel,sizeof out)); /* production unavailable */
+#endif
+        context_equal(&before);
+        CHECK(!memcmp(cameras,view_cameras,sizeof cameras) && !memcmp(before_ram,ram,sizeof ram) &&
+            !memcmp(before_extra,extra,sizeof extra) && !memcmp(&prior_cpu,&cpu,sizeof cpu));
+        CHECK(private_draw==1 && private_seat==seat && frame_count==1234 && view_valid &&
+            view_native_calls==calls_before && view_gpu_words==words_before);
+    }
+    private_draw=0;
+#if PSX_DEBUG_NATIVE_CONTEXT_AVAILABLE
+    mmx6_view_sdk_reset();mmx6_view_sdk.local_cameras="split";view_context_refuse=1;
+    view_registered_context=NULL;unsigned registrations=view_context_registrations;
+    independent_activate();
+    CHECK(view_context_registrations==registrations+1 && !view_registered_context &&
+        independent_views && local_split && !failed); /* optional failure */
+    view_context_refuse=0;independent_activate();
+    CHECK(view_registered_context==private_view_entry_context && !failed);
+    out=sentinel;CHECK(!view_registered_context(0x80025FB0u,&out,NULL));
+#endif
+}
+#endif
 static void reentry(void) {
     CPUState cpu;prepare_view(&cpu,0,1);
     view_call=1;CHECK(!independent_present(&cpu,VIEW_DRAW_OT));
@@ -303,7 +377,11 @@ static void native_shared_weather_frames(int online,int split) {
     }
 }
 int main(void) {
-    defaults_and_scope();reentry();native_arrival(0,1);native_arrival(1,0);arrival_refusals();
+    defaults_and_scope();
+#ifdef MMX6_COOP_VIEW_ENTRY_CONTEXT
+    native_camera_context();
+#endif
+    reentry();native_arrival(0,1);native_arrival(1,0);arrival_refusals();
     admitted_door_views(0,1);admitted_door_views(1,0);admitted_door_views(1,1);
     native_nova_views(0,1);native_nova_views(1,0);
     native_menu_camera_history(0,1);native_menu_camera_history(1,0);
