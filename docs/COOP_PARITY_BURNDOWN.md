@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 48 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F1, F6, F10, F12, F15, F18, F19, F22, F31, F32, F33, F38, F43, F45, F48, F51, F56, F58, F59, F65, F67, F68, F70, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F163, F170, F178, F205, F208), 1 failed, 185 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 49 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F1, F6, F10, F12, F15, F18, F19, F22, F31, F32, F33, F38, F42, F43, F45, F48, F51, F56, F58, F59, F65, F67, F68, F70, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F163, F170, F178, F205, F208), 1 failed, 184 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -43,7 +43,7 @@ states; old-state migration is never required.
 ## Current qualification status, October 26
 
 
-F42 now has a reviewed LOCAL pass on V62 `a878af4`, with NETPLAY pending.
+F42 is fully closed on the same V62 `a878af4` in LOCAL and NETPLAY.
 The [initial visual failure](evidence/mmx6-camera/manifest-bound-afdaaca-F42-local-camera-reset-failure-reviewed.json)
 showed Zero's camera resetting toward the primary scene after either native
 owner menu. The isolated fix retains guest camera position history only across
@@ -52,7 +52,13 @@ load boundaries still invalidate it. All16 focused checks pass. The
 [LOCAL review](evidence/mmx6-camera/manifest-bound-a878af4-F42-local-reviewed.json)
 confirms both native owner menus, effective shared fallback, resumed own
 cameras/terrain/HUDs and correct Zero centering in all five composed images.
-The comparison remains unverified until the same V62 passes NETPLAY.
+The [NETPLAY review](evidence/mmx6-camera/manifest-bound-a878af4-F42-netplay-reviewed.json)
+confirms the same restoration on both peers in all ten composed images,
+five resolved core/mod CRC windows, settled profile4, finalized ordinary
+recordings, unchanged cards and owned exits0. The fix is integrated locally as
+`cb56956`; all three product/test files match the qualified isolated candidate.
+Full resources stay constant during the frozen menu; ordinary HP changes in
+advancing world ticks outside pause remain explicit in the NETPLAY evidence.
 A separate [resize-transition observation](evidence/mmx6-camera/manifest-bound-a878af4-F177-resize-transition-unverified.json)
 records one old full-window viewport during960x720-to640x900 resize; F177
 remains unverified. Stable-window F42 evidence supplies no resize credit.
@@ -72,7 +78,7 @@ resolved paired CRC windows, unchanged cards and owned exits0 passed.
 LEAVING retains the existing shared-view/stacked-HUD fallback; no private-view
 claim is made during that phase. Optional R25 edge setup failed to reach its
 required pose in two bounded attempts and remains unverified and deferred.
-The comparison total is now **48 passed / 1 failed / 185 unverified of234**.
+After F65 and F42, the comparison total is **49 passed / 1 failed / 184 unverified of234**.
 
 
 F1 and F32 now pass both required modes on exact game `72b898f`,
@@ -101,7 +107,7 @@ with write-NULL in `nvoglv64.dll +0xB80C13`. This locates the fault inside the
 OpenGL module; no exact driver-versus-SDK cause is established. Source repair
 and first-session totals do not qualify repeated allocation lifetime. The
 bounded investigation is parked while independent autonomous rows continue.
-The ledger is **48 passed /1 failed /185 unverified of234 (20.5%)**.
+The ledger is **49 passed /1 failed /184 unverified of234 (20.9%)**.
 
 F173 and F68 now pass LOCAL on exact V57 `52d6914`: actual independent
 native4:3 panes in an8:3 window, Zero366px away from stationary X, correct
