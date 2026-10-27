@@ -44,6 +44,36 @@ class SharedEffectEntryProfile(unittest.TestCase):
                 self.assertEqual(entries.count(0x80066744), 1,
                                  'compiled DrawOTag must reach private-view admission')
 
+    def test_native_quake_input_entry_is_declared(self):
+        root = Path(__file__).resolve().parents[1]
+        source = (root / 'src/mods/mmx6_coop_plugin.c').read_text(encoding='utf-8')
+        self.assertIn('0x8002927C,independent_camera_begin', source)
+        for config in ('game.toml', 'packaging/release/game.toml'):
+            with self.subTest(config=config):
+                profile = tomllib.loads((root / config).read_text(encoding='utf-8'))
+                entries = [int(address, 16) for address in
+                           profile['recompiler']['mod_function_entry_funcs']]
+                for address in (0x8002927C, 0x80025FB0):
+                    self.assertEqual(entries.count(address), 1,
+                                     'native camera input and world-draw hooks must both be emitted')
+
+    @unittest.skipUnless(os.environ.get('MMX6_COOP_CAMERA_GENERATED_UNIT'),
+                         'set MMX6_COOP_CAMERA_GENERATED_UNIT to regenerated full_07.c')
+    def test_actual_generated_native_quake_input_entry(self):
+        source = Path(os.environ['MMX6_COOP_CAMERA_GENERATED_UNIT']).read_text(encoding='utf-8')
+        match = re.search(r'(?ms)^void func_8002927C\(CPUState\* cpu\)\n\{(.*?)(?=^void |\Z)', source)
+        self.assertIsNotNone(match, 'actual original native camera function is required')
+        entry = match[1].split('block_8002927C:', 1)[0]
+        hook = 'if (psx_mod_function_entry(cpu, 0x8002927Cu)) return;'
+        self.assertEqual(entry.count(hook), 1,
+                         'registration alone cannot activate an omitted native hook')
+        # CPS resumes must branch straight to their blocks before reaching
+        # the entry hook; otherwise the cached input would be overwritten.
+        prefix = entry.split(hook, 1)[0]
+        self.assertIn('switch (_cont)', prefix)
+        for continuation in ('800292F8', '80029324', '80029340', '80029348'):
+            self.assertIn(f'case 0x{continuation}u: goto block_{continuation};', prefix)
+
     @unittest.skipUnless(os.environ.get('MMX6_COOP_VIEW_GENERATED_UNIT'),
                          'set MMX6_COOP_VIEW_GENERATED_UNIT to the actual full_28.c')
     def test_actual_generated_private_view_entry(self):
@@ -86,11 +116,13 @@ class SharedEffectEntryProfile(unittest.TestCase):
         root = Path(__file__).resolve().parents[1]
         source = (root / 'src/mods/mmx6_coop_plugin.c').read_text(encoding='utf-8')
         required = {int(address, 16) for address in re.findall(
-            r'psx_mod_set_function_replacement\((0x[0-9A-Fa-f]+),shared_effect_callback\)', source)}
-        profile = tomllib.loads((root / 'game.toml').read_text(encoding='utf-8'))
-        declared = {int(address, 16) for address in profile['recompiler']['mod_function_entry_funcs']}
+            r'psx_mod_set_function_replacement\((0x[0-9A-Fa-f]+),(?:shared_effect_callback|solid_allocate)\)', source)}
         self.assertTrue(required)
-        self.assertFalse(required - declared, [hex(address) for address in required - declared])
+        for config in ('game.toml', 'packaging/release/game.toml'):
+            with self.subTest(config=config):
+                profile = tomllib.loads((root / config).read_text(encoding='utf-8'))
+                declared = {int(address, 16) for address in profile['recompiler']['mod_function_entry_funcs']}
+                self.assertFalse(required - declared, [hex(address) for address in required - declared])
 
 if __name__ == '__main__':
     unittest.main()
