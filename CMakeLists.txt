@@ -73,7 +73,8 @@ set_property(SOURCE src/mods/mmx6_startup_log.cpp APPEND PROPERTY COMPILE_DEFINI
 # Bead beads-eio.3.101.
 set(MMX6_PRELOADED_MODS "${CMAKE_CURRENT_SOURCE_DIR}/mods/preloaded")
 if(MMX6_ENABLE_LOOPBACK_HOST_LAB)
-    # This extra prerequisite control exists only in the explicit lab catalog.
+    # These named checkpoint/position prerequisites exist only in the explicit
+    # lab catalog. The normal catalog never gains a teleport control.
     # Normal source/release catalogs never acquire it. The framework still
     # owns final staging and catalog validation of this generated input tree.
     set(_mmx6_coop_manifest "packages/mmx6.local-coop/0.0.1/manifest.toml")
@@ -452,6 +453,8 @@ if(BUILD_TESTING)
             target_compile_definitions(${_mmx6_checkpoint_target} PRIVATE PSX_NO_DEBUG_TOOLS)
         endif()
         if(_mmx6_checkpoint_variant STREQUAL "agreed_lab")
+            # Source-backed pre-door coverage additionally reads the external
+            # MMX6_BEFORE_DOORS_RAM fixture; no original disc data is bundled.
             target_compile_definitions(${_mmx6_checkpoint_target} PRIVATE MMX6_ENABLE_LOOPBACK_HOST_LAB=1)
         endif()
         if(MSVC)

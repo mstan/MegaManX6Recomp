@@ -3,7 +3,7 @@
 feature = "prototype"
 id = "lab_checkpoint"
 label = "Lab checkpoint prerequisite"
-description = "Lab comparison setup only. After the ordinary intro baseline, Player 2 presses L3 + R3 to enter the selected original checkpoint once. This bypasses reachability and refuses ordinary input recording qualification. Both peers must agree before launch."
+description = "Lab comparison setup only. After the ordinary intro baseline, Player 2 presses L3 + R3 to enter the selected original checkpoint once. The before-doors choice also positions both heroes on the source-qualified approach ledge. This bypasses reachability and refuses ordinary input recording qualification. Both peers must agree before launch."
 group = "Lab validation"
 type = "choice"
 default = "off"
@@ -23,3 +23,7 @@ label = "Amazon checkpoint 0 moving-support prerequisite"
 [[option.choice]]
 value = "amazon_cp2"
 label = "Amazon checkpoint 2 Investigator prerequisite"
+
+[[option.choice]]
+value = "intro_before_doors"
+label = "Intro before both doors (position prerequisite)"

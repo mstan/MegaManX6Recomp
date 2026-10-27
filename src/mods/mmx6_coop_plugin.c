@@ -137,6 +137,9 @@ static unsigned independent_views, local_split, private_draw, private_seat, view
 static void independent_invalidate(void);
 static void independent_menu_begin(void);
 static void independent_world_begin(void);
+#ifdef MMX6_COOP_MODERN_STATE
+static void independent_invalidate(void);
+#endif
 #include "mmx6_coop_state_track.h"
 #ifdef MMX6_COOP_MODERN_STATE
 static uint8_t snapshot_asset_sha[32];
