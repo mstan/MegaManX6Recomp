@@ -28,6 +28,7 @@ enum { CHECKPOINT_LAB_AMAZON_NONCE=0x4C434130u }; /* Immutable Amazon CP0 identi
 enum { CHECKPOINT_LAB_INVESTIGATOR_NONCE=0x4C434132u }; /* Immutable Amazon CP2 identity. */
 enum { CHECKPOINT_LAB_BEFORE_DOORS_NONCE=0x4C434431u }; /* Intro CP1 plus declared position bypass. */
 enum { CHECKPOINT_LAB_BEFORE_EXPLOSION_NONCE=0x4C454631u }; /* Intro CP1 nearby native explosion setup. */
+enum { CHECKPOINT_LAB_RECYCLE_NONCE=0x4C435232u }; /* Original Recycle section1 CP2, no pose bypass. */
 typedef struct { unsigned phase,index; uint32_t nonce; unsigned authority; uint32_t placed_world; } Mmx6CheckpointPending;
 static Mmx6CheckpointPending checkpoint_pending;
 static unsigned checkpoint_lab_option,checkpoint_lab_state,checkpoint_lab_previous;
@@ -35,14 +36,16 @@ static unsigned checkpoint_contact_protection_option;
 
 static unsigned checkpoint_lab_index(void) {
     return checkpoint_lab_option==1?2:checkpoint_lab_option==2?3:
-        checkpoint_lab_option==3?5:(checkpoint_lab_option==4 || checkpoint_lab_option==5)?1:115;
+        checkpoint_lab_option==3?5:(checkpoint_lab_option==4 || checkpoint_lab_option==5)?1:
+        checkpoint_lab_option==6?27:115;
 }
 static uint32_t checkpoint_lab_nonce(void) {
     return checkpoint_lab_option==1?CHECKPOINT_LAB_NONCE:
         checkpoint_lab_option==2?CHECKPOINT_LAB_AMAZON_NONCE:
         checkpoint_lab_option==3?CHECKPOINT_LAB_INVESTIGATOR_NONCE:
         checkpoint_lab_option==4?CHECKPOINT_LAB_BEFORE_DOORS_NONCE:
-        checkpoint_lab_option==5?CHECKPOINT_LAB_BEFORE_EXPLOSION_NONCE:0;
+        checkpoint_lab_option==5?CHECKPOINT_LAB_BEFORE_EXPLOSION_NONCE:
+        checkpoint_lab_option==6?CHECKPOINT_LAB_RECYCLE_NONCE:0;
 }
 
 static int checkpoint_lab_authorized(void) {
@@ -108,6 +111,7 @@ static void checkpoint_reset(void) {
         else if(!strcmp(option,"amazon_cp2"))checkpoint_lab_option=3;
         else if(!strcmp(option,"intro_before_doors"))checkpoint_lab_option=4;
         else if(!strcmp(option,"intro_before_explosion"))checkpoint_lab_option=5;
+        else if(!strcmp(option,"recycle_cp2"))checkpoint_lab_option=6;
         else if(strcmp(option,"off"))failed=1;
     }
     if(psx_mod_option_value("mmx6.local-coop","prototype","lab_contact_protection",option,sizeof option)) {

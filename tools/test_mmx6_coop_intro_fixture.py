@@ -23,7 +23,7 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             state = directory/'mods/state.toml'
             initial = '[[feature]]\nid = "prototype"\nenabled = true\n'
             state.write_text(initial, encoding='utf-8')
-            for option in ('intro_before_doors', 'intro_before_explosion'):
+            for option in ('intro_before_doors', 'intro_before_explosion', 'recycle_cp2'):
                 state.write_text(initial, encoding='utf-8')
                 receipt = pair.select_checkpoint(directory, enabled=True, option=option)
                 self.assertEqual(receipt['option'], option)
@@ -31,6 +31,14 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             state.write_text(initial, encoding='utf-8')
             with self.assertRaises(ValueError):
                 pair.select_checkpoint(directory, enabled=True, option='arbitrary_position')
+            self.assertEqual(state.read_text(encoding='utf-8'), initial)
+            # Recycle must be present in the exact agreed catalog. An otherwise
+            # current old catalog cannot admit a unilateral new destination.
+            recycle_choice = '\n[[option.choice]]\nvalue = "recycle_cp2"\nlabel = "Recycle section 1 checkpoint 2 prerequisite"\n'
+            self.assertIn(recycle_choice, catalog)
+            manifest.write_text(catalog.replace(recycle_choice, ''), encoding='utf-8')
+            with self.assertRaises(ValueError):
+                pair.select_checkpoint(directory, enabled=True, option='recycle_cp2')
             self.assertEqual(state.read_text(encoding='utf-8'), initial)
             # An old five-choice catalog cannot silently authorize the newly
             # named destination; every peer must hash the exact current set.
@@ -55,10 +63,14 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             state = directory/'mods/state.toml'; initial = '[[feature]]\nid = "prototype"\nenabled = true\n'
             for selected in ('off', 'on'):
                 state.write_text(initial, encoding='utf-8')
-                receipt = pair.select_checkpoint(directory, enabled=True, contact_protection=selected)
+                receipt = pair.select_checkpoint(directory, enabled=True, option='recycle_cp2', contact_protection=selected)
+                self.assertEqual(receipt['option'], 'recycle_cp2')
                 self.assertEqual(receipt['contact_protection'], selected)
                 parsed = tomllib.loads(state.read_text(encoding='utf-8'))
                 self.assertEqual(parsed['feature'][0]['values']['lab_contact_protection'], selected)
+                self.assertEqual(parsed['feature'][0]['values']['lab_checkpoint'], 'recycle_cp2')
+                self.assertEqual(state.read_text(encoding='utf-8').count('lab_checkpoint ='), 1)
+                self.assertEqual(state.read_text(encoding='utf-8').count('lab_contact_protection ='), 1)
             state.write_text(initial, encoding='utf-8')
             with self.assertRaises(ValueError):
                 pair.select_checkpoint(directory, enabled=True, contact_protection='arbitrary')

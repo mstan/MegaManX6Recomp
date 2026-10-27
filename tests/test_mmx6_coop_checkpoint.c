@@ -364,6 +364,76 @@ static void agreed_investigator_boundary(CPUState *cpu) {
     CHECK(psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_FORBIDDEN);
     test_lab_option="off";checkpoint_reset();
 }
+static void agreed_recycle_boundary(CPUState *cpu) {
+    const Mmx6Checkpoint *entry=&checkpoint_inventory[27];
+    CHECK(entry->stage==4 && entry->section==1 && entry->checkpoint==2 && entry->campaign==1 &&
+        entry->table==0x80073198u && entry->record==0x800724D4u && entry->hash==0x6F78ABDCu);
+    for(int online=0;online<=1;++online)for(unsigned protection=0;protection<=1;++protection) {
+        test_lab_contact_option=protection?"on":"off";setup_agreed(cpu,online);
+        test_lab_option="recycle_cp2";checkpoint_reset();
+        CHECK(checkpoint_lab_option==6 && checkpoint_lab_index()==27 &&
+            checkpoint_lab_nonce()==CHECKPOINT_LAB_RECYCLE_NONCE &&
+            checkpoint_lab_nonce()==0x4C435232u && checkpoint_source(entry));
+        /* Destination/nonce cannot be mixed with an existing agreed choice. */
+        checkpoint_lab_state=CHECKPOINT_LAB_CONSUMED;
+        CHECK(!checkpoint_request(4,1,2,CHECKPOINT_LAB_INVESTIGATOR_NONCE,CHECKPOINT_AGREED));
+        CHECK(!checkpoint_request(1,0,2,CHECKPOINT_LAB_RECYCLE_NONCE,CHECKPOINT_AGREED));
+        CHECK(!checkpoint_pending.phase && !checkpoint_test_taint && !guest_calls &&
+            psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_UNKNOWN);
+        checkpoint_reset();memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext body=p2;
+        CHECK(!checkpoint_lab_boundary(0));
+        pause_owner=0;CHECK(!checkpoint_lab_boundary(6) && checkpoint_lab_state==CHECKPOINT_LAB_ARMED);
+        CHECK(!checkpoint_pending.phase && !guest_calls && !memcmp(before_ram,test_ram,sizeof test_ram));
+        pause_owner=-1;CHECK(checkpoint_lab_boundary(0));
+        before_ram[PLAY&0x1FFFFF]=8;before_ram[(PLAY+12)&0x1FFFFF]=4;before_ram[(PLAY+13)&0x1FFFFF]=1;
+        CHECK(!memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof body) && !guest_calls);
+        CHECK(checkpoint_pending.phase==1 && checkpoint_pending.index==27 &&
+            checkpoint_pending.authority==CHECKPOINT_AGREED && checkpoint_pending.nonce==0x4C435232u &&
+            psx_mod_read_word(diagnostic+0xB8)==0x800724D4u &&
+            psx_mod_read_byte(diagnostic+0xBC)==1 && psx_mod_read_byte(diagnostic+0xBD)==1 &&
+            psx_mod_read_byte(diagnostic+0xBE)==2 && checkpoint_test_taint==PSX_INPUT_TAINT_GAME_MAILBOX);
+        mode9(cpu);memcpy(before_ram,test_ram,sizeof test_ram);CPUState saved=*cpu;
+        checkpoint_native_entry(cpu,0x8001E1BCu);before_ram[(PLAY+0x1D)&0x1FFFFF]=2;
+        CHECK(checkpoint_pending.phase==2 && psx_mod_read_word(diagnostic+0xB4)==1 &&
+            !memcmp(&saved,cpu,sizeof saved) && !memcmp(before_ram,test_ram,sizeof test_ram) &&
+            !memcmp(&body,&p2,sizeof body) && !guest_calls);
+        /* Original mode9 dispatch owns5920/326, camera and natural landing.
+         * This plain fixture never places, scans or manufactures grounded readiness. */
+        psx_mod_write_byte(PLAY,10);memcpy(before_ram,test_ram,sizeof test_ram);
+        CHECK(!checkpoint_stage_boundary(cpu) && !checkpoint_pending.phase &&
+            psx_mod_read_byte(diagnostic+0xA8)==CHECKPOINT_COMPLETE &&
+            !psx_mod_read_byte(diagnostic+0xAD) && !psx_mod_read_byte(diagnostic+0xAE) &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof body) && !guest_calls);
+        CHECK(checkpoint_contact_protection_status()==(protection?15u:0u));
+        psx_mod_write_byte(PLAY+0x1D,0); /* Model a later ordinary native retry. */
+        CHECK(!checkpoint_lab_boundary(0) && !checkpoint_lab_boundary(6) &&
+            psx_mod_read_word(diagnostic+0xA4)==1 && psx_mod_read_word(diagnostic+0xB4)==1);
+    }
+    test_lab_contact_option="off";
+    /* The exact Recycle root/table/record and native initializer are required
+     * both before the request and again at the original mode9 entry. */
+    const uint32_t corrupt[]={0x80073324u,0x800731A0u,0x800724D4u,0x8001E1BCu};
+    for(unsigned i=0;i<sizeof corrupt/sizeof corrupt[0];++i) {
+        setup_agreed(cpu,1);test_lab_option="recycle_cp2";checkpoint_reset();
+        psx_mod_write_byte(corrupt[i],psx_mod_read_byte(corrupt[i])^1);
+        memcpy(before_ram,test_ram,sizeof test_ram);PlayerContext body=p2;
+        CHECK(!checkpoint_lab_boundary(6) && !checkpoint_pending.phase && !checkpoint_test_taint &&
+            psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE && !guest_calls &&
+            !memcmp(before_ram,test_ram,sizeof test_ram) && !memcmp(&body,&p2,sizeof body));
+    }
+    setup_agreed(cpu,1);test_lab_option="recycle_cp2";checkpoint_reset();
+    CHECK(checkpoint_lab_boundary(6));mode9(cpu);
+    psx_mod_write_byte(0x800724D4u,psx_mod_read_byte(0x800724D4u)^1);
+    checkpoint_native_entry(cpu,0x8001E1BCu);
+    CHECK(!checkpoint_pending.phase && !psx_mod_read_byte(PLAY+0x1D) &&
+        psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_SOURCE && !guest_calls);
+    setup_agreed(cpu,1);test_lab_option="recycle_cp2";checkpoint_reset();++test_lab_profile.revision;
+    CHECK(!checkpoint_lab_boundary(6) && !checkpoint_pending.phase && !checkpoint_test_taint &&
+        psx_mod_read_byte(diagnostic+0xA9)==CHECKPOINT_FORBIDDEN);
+    setup_agreed(cpu,1);test_lab_option="recycle_cp2";checkpoint_reset();
+    psx_mod_write_byte(diagnostic+0x50,8);rejected_checkpoint(cpu,CHECKPOINT_FORBIDDEN);
+    test_lab_option="off";checkpoint_reset();CHECK(!checkpoint_lab_option && !checkpoint_lab_state);
+}
 static void setup_position_prerequisite(CPUState *cpu,int online,int explosion) {
     setup_agreed(cpu,online);test_lab_option=explosion?"intro_before_explosion":"intro_before_doors";checkpoint_reset();
     memcpy(test_ram,before_doors_ram,sizeof test_ram);
@@ -698,6 +768,7 @@ int main(int argc,char **argv) {
     CHECK(fread(header,1,4,file)==4 && !memcmp(header,"BCD1",4));
     CHECK(fread(before_doors_ram,1,sizeof before_doors_ram,file)==sizeof before_doors_ram && fgetc(file)==EOF);fclose(file);
     agreed_checkpoint_boundary(&cpu);agreed_amazon_boundary(&cpu);agreed_investigator_boundary(&cpu);
+    agreed_recycle_boundary(&cpu);
     agreed_before_doors_boundary(&cpu);
     agreed_before_explosion_boundary(&cpu);
     agreed_contact_protection(&cpu);

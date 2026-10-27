@@ -49,6 +49,15 @@ def settled_entry(tick=221):
 
 
 class FrozenInventoryTests(unittest.TestCase):
+    def test_recycle_lab_destination_is_existing_original_campaign_record(self):
+        _, rows, sections = checkpoint.inventory(INVENTORY)
+        target = checkpoint.select(rows, sections, 4, 1, 2)
+        self.assertEqual(rows.index(target), 27)
+        self.assertEqual(target['table'], '80073198')
+        self.assertEqual(target['record'], '800724D4')
+        self.assertEqual(target['player'], dict(x=5920, y=326))
+        self.assertEqual(target['camera'], dict(x=5760, y=224, min_x=5760, max_x=5760, min_y=224, max_y=224))
+
     def test_all115_retained_only94_campaign_tuples_permitted(self):
         _, rows, sections = checkpoint.inventory(INVENTORY)
         self.assertEqual((len(rows), len(sections)), (115, 23))
