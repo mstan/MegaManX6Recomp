@@ -1,0 +1,690 @@
+{
+  "schema": 1,
+  "comparison": "F64",
+  "frozen_row_sha256": "fd4f699093e7214eea5f9419ce14613948728fdb443ee9a648000a47b139c203",
+  "result": "passed",
+  "candidate": "4277e774fd032e88ac03344a530b57a597773584",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-v69-final-binding-root-v1.json",
+    "binding_sha256": "b28375890937da72df2055d1c2c05c806d491f16be975ab4a202da1dcaa3d2f5",
+    "image_sha256": "0fdc58cb27162e74a4eefe7cfe76ce5d533c2acc749cfb1e1ddfeb187f1ef11c",
+    "manifest_sha256": "6bd4c3490daa0c3bf3d33a87672b4f820124ba60becbf55d20445536cb3674b3",
+    "provenance_sha256": "0c69b8357652fca4c7a7bc5b88aa0232f3e9b568503358b109ad685f7d77835e",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v69-amazon-support-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "4277e774fd032e88ac03344a530b57a597773584",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v23",
+    "host_revision": 6
+  },
+  "cases": [
+    {
+      "mode": "local",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\qualification.json",
+        "bytes": 1729463,
+        "sha256": "a064a0fcd2ad93c43e630b986cf51393dadb4dcd83e613205a4ab8b3f0f82155"
+      },
+      "raw_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\support\\F64-observations.json",
+        "bytes": 54773,
+        "sha256": "b99520f84e8bb0e62baab91fc6bf5838f5e32990f4c40bd2ffe8cb7b836f1e74"
+      },
+      "raw_status": "phase_and_composed_observations_complete_review_pending",
+      "raw_checks": {
+        "actual_neutral_top_contact_in_all_phase_samples": true,
+        "native_world_once_inside_observed_sdk_brackets": true,
+        "no_contradictory_same_tick_phase_reads": true,
+        "native_animation_changes_each_process": true,
+        "actual_private_views_keep_rendering": true,
+        "exact_crosspeer_phase_observed": true,
+        "own_composed_capture_each_process": true
+      },
+      "phase_frames_per_peer": [
+        [
+          0,
+          1,
+          2
+        ]
+      ],
+      "source_guards": [
+        {
+          "peer": 0,
+          "address": "0x80017a04",
+          "bytes": 68,
+          "sha256": "e947d51c1b65d627545acd99d25668520421497fc1f9865d22ef3b78267b6a43"
+        },
+        {
+          "peer": 0,
+          "address": "0x80023380",
+          "bytes": 40,
+          "sha256": "fe2ba253b9d770b2037f36174acb0d2d9debf92cd021e817ffdfbf6db4d57daa"
+        }
+      ],
+      "composed_phase_captures": [
+        {
+          "peer": 0,
+          "label": "F204-neutral-carry-before-dwell",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\support\\peer-0-F204-neutral-carry-before-dwell.png",
+            "bytes": 2074543,
+            "sha256": "f6fba23dbbb2740dfed4db7ee86b9606bd82a72c5ad49f84b6f097de779aee5b"
+          },
+          "before": {
+            "native_timer": 398,
+            "address": 2148274720,
+            "frame47": 2,
+            "animation_word44": "0100fe02",
+            "script34": "0x800f7320",
+            "assembly3C": "0x80156a28",
+            "x": 472.5,
+            "y": 376.0,
+            "state": 1,
+            "action": 2,
+            "visible": 1,
+            "source_clock": "same single RAM read as actual support actor"
+          },
+          "after": {
+            "native_timer": 401,
+            "address": 2148274720,
+            "frame47": 0,
+            "animation_word44": "0a000100",
+            "script34": "0x800f7318",
+            "assembly3C": "0x80156a28",
+            "x": 471.0,
+            "y": 375.0,
+            "state": 1,
+            "action": 2,
+            "visible": 1,
+            "source_clock": "same single RAM read as actual support actor"
+          }
+        },
+        {
+          "peer": 0,
+          "label": "F204-neutral-carry-after-dwell",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\support\\peer-0-F204-neutral-carry-after-dwell.png",
+            "bytes": 2074543,
+            "sha256": "909e09f80340c8ae4ff99a2d82938c193feb1dfa94f48b46b33b35924df24c8e"
+          },
+          "before": {
+            "native_timer": 485,
+            "address": 2148274720,
+            "frame47": 1,
+            "animation_word44": "0c000101",
+            "script34": "0x800f731c",
+            "assembly3C": "0x80156a28",
+            "x": 430.0,
+            "y": 370.0,
+            "state": 1,
+            "action": 2,
+            "visible": 1,
+            "source_clock": "same single RAM read as actual support actor"
+          },
+          "after": {
+            "native_timer": 488,
+            "address": 2148274720,
+            "frame47": 1,
+            "animation_word44": "0c000101",
+            "script34": "0x800f731c",
+            "assembly3C": "0x80156a28",
+            "x": 430.0,
+            "y": 370.0,
+            "state": 1,
+            "action": 2,
+            "visible": 1,
+            "source_clock": "same single RAM read as actual support actor"
+          }
+        }
+      ],
+      "reviewed_images": [
+        {
+          "peer": 0,
+          "label": "actual-native-AmazonC0-arrival",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\Amazon-prerequisite\\peer-0-actual-native-AmazonC0-arrival.png",
+            "bytes": 2074543,
+            "sha256": "1cd19ce62ccef1a366a182124b20875253531a753ef620dc340911a5173950c1"
+          },
+          "root_review": "Actual original Amazon arrival shows both native healthy bodies in the selected own view/panes; prerequisite only."
+        },
+        {
+          "peer": 0,
+          "label": "initialized-native-moving-support",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\support\\peer-0-initialized-native-moving-support.png",
+            "bytes": 2074543,
+            "sha256": "3301b5d51985eafe8e1cb5359ab73d2ed5ce4d6c1b2f346057320759a3120887"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 0,
+          "label": "guest-neutral-native-carry",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\support\\peer-0-guest-neutral-native-carry.png",
+            "bytes": 2074543,
+            "sha256": "8b587f3f4b307a7529297b7e3413b7175c671f77bb2a80c9b7d390d6d4645f0a"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 0,
+          "label": "F204-neutral-carry-before-dwell",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\support\\peer-0-F204-neutral-carry-before-dwell.png",
+            "bytes": 2074543,
+            "sha256": "f6fba23dbbb2740dfed4db7ee86b9606bd82a72c5ad49f84b6f097de779aee5b"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 0,
+          "label": "F204-neutral-carry-after-dwell",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\support\\peer-0-F204-neutral-carry-after-dwell.png",
+            "bytes": 2074543,
+            "sha256": "909e09f80340c8ae4ff99a2d82938c193feb1dfa94f48b46b33b35924df24c8e"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        }
+      ],
+      "resolved_crc": null
+    },
+    {
+      "mode": "netplay",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\qualification.json",
+        "bytes": 3818020,
+        "sha256": "daf80090df6c002361f1e5d323d67ca78c85a26f6c9ecd9af4234daaa7c6cdf4"
+      },
+      "raw_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\F64-observations.json",
+        "bytes": 109063,
+        "sha256": "6d609a0be9a4b3b36ee6f83d2db929bc01e13a78fb7201a2f4c3be78896741c9"
+      },
+      "raw_status": "incomplete_private_phase_observation",
+      "raw_checks": {
+        "actual_neutral_top_contact_in_all_phase_samples": false,
+        "native_world_once_inside_observed_sdk_brackets": true,
+        "no_contradictory_same_tick_phase_reads": true,
+        "native_animation_changes_each_process": true,
+        "actual_private_views_keep_rendering": true,
+        "exact_crosspeer_phase_observed": false,
+        "own_composed_capture_each_process": true
+      },
+      "phase_frames_per_peer": [
+        [
+          0,
+          1,
+          2
+        ],
+        [
+          0,
+          1,
+          2
+        ]
+      ],
+      "source_guards": [
+        {
+          "peer": 0,
+          "address": "0x80017a04",
+          "bytes": 68,
+          "sha256": "e947d51c1b65d627545acd99d25668520421497fc1f9865d22ef3b78267b6a43"
+        },
+        {
+          "peer": 0,
+          "address": "0x80023380",
+          "bytes": 40,
+          "sha256": "fe2ba253b9d770b2037f36174acb0d2d9debf92cd021e817ffdfbf6db4d57daa"
+        },
+        {
+          "peer": 1,
+          "address": "0x80017a04",
+          "bytes": 68,
+          "sha256": "e947d51c1b65d627545acd99d25668520421497fc1f9865d22ef3b78267b6a43"
+        },
+        {
+          "peer": 1,
+          "address": "0x80023380",
+          "bytes": 40,
+          "sha256": "fe2ba253b9d770b2037f36174acb0d2d9debf92cd021e817ffdfbf6db4d57daa"
+        }
+      ],
+      "composed_phase_captures": [
+        {
+          "peer": 0,
+          "label": "F204-neutral-carry-before-dwell",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-0-F204-neutral-carry-before-dwell.png",
+            "bytes": 2074543,
+            "sha256": "f719f6f4ab06172913f8afb357e180536a43413dfe55013122cf2022780e8965"
+          },
+          "before": {
+            "native_timer": 461,
+            "address": 2148274720,
+            "frame47": 1,
+            "animation_word44": "0a000101",
+            "script34": "0x800f731c",
+            "assembly3C": "0x80156a28",
+            "x": 447.0,
+            "y": 370.0,
+            "state": 1,
+            "action": 2,
+            "visible": 1,
+            "source_clock": "same single RAM read as actual support actor"
+          },
+          "after": {
+            "native_timer": 470,
+            "address": 2148274720,
+            "frame47": 1,
+            "animation_word44": "01000101",
+            "script34": "0x800f731c",
+            "assembly3C": "0x80156a28",
+            "x": 442.5,
+            "y": 370.0,
+            "state": 1,
+            "action": 2,
+            "visible": 1,
+            "source_clock": "same single RAM read as actual support actor"
+          }
+        },
+        {
+          "peer": 1,
+          "label": "F204-neutral-carry-before-dwell",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-1-F204-neutral-carry-before-dwell.png",
+            "bytes": 2074543,
+            "sha256": "fe159889416294525f8c01ea9f05fd5ad215b9307ccbab2bff1895c7a5b15aaa"
+          },
+          "before": {
+            "native_timer": 460,
+            "address": 2148274720,
+            "frame47": 1,
+            "animation_word44": "0b000101",
+            "script34": "0x800f731c",
+            "assembly3C": "0x80156a28",
+            "x": 447.5,
+            "y": 370.0,
+            "state": 1,
+            "action": 2,
+            "visible": 1,
+            "source_clock": "same single RAM read as actual support actor"
+          },
+          "after": {
+            "native_timer": 470,
+            "address": 2148274720,
+            "frame47": 1,
+            "animation_word44": "01000101",
+            "script34": "0x800f731c",
+            "assembly3C": "0x80156a28",
+            "x": 442.5,
+            "y": 370.0,
+            "state": 1,
+            "action": 2,
+            "visible": 1,
+            "source_clock": "same single RAM read as actual support actor"
+          }
+        },
+        {
+          "peer": 0,
+          "label": "F204-neutral-carry-after-dwell",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-0-F204-neutral-carry-after-dwell.png",
+            "bytes": 2074543,
+            "sha256": "36fbc873badde773feca19d5513bd70605ca5b6fa893b938cb04e66b55cc2b22"
+          },
+          "before": {
+            "native_timer": 573,
+            "address": 2148274720,
+            "frame47": 2,
+            "animation_word44": "0500fe02",
+            "script34": "0x800f7320",
+            "assembly3C": "0x80156a28",
+            "x": 445.5,
+            "y": 370.0,
+            "state": 1,
+            "action": 2,
+            "visible": 1,
+            "source_clock": "same single RAM read as actual support actor"
+          },
+          "after": {
+            "native_timer": 584,
+            "address": 2148274720,
+            "frame47": 0,
+            "animation_word44": "04000100",
+            "script34": "0x800f7318",
+            "assembly3C": "0x80156a28",
+            "x": 452.0,
+            "y": 371.0,
+            "state": 1,
+            "action": 2,
+            "visible": 1,
+            "source_clock": "same single RAM read as actual support actor"
+          }
+        },
+        {
+          "peer": 1,
+          "label": "F204-neutral-carry-after-dwell",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-1-F204-neutral-carry-after-dwell.png",
+            "bytes": 2074543,
+            "sha256": "10abfa751ae8cffc5db75dc7efec788e16d436ef5dded611eae9ca412f9b704b"
+          },
+          "before": {
+            "native_timer": 572,
+            "address": 2148274720,
+            "frame47": 2,
+            "animation_word44": "0400fe02",
+            "script34": "0x800f7320",
+            "assembly3C": "0x80156a28",
+            "x": 446.0,
+            "y": 370.0,
+            "state": 1,
+            "action": 2,
+            "visible": 1,
+            "source_clock": "same single RAM read as actual support actor"
+          },
+          "after": {
+            "native_timer": 580,
+            "address": 2148274720,
+            "frame47": 0,
+            "animation_word44": "08000100",
+            "script34": "0x800f7318",
+            "assembly3C": "0x80156a28",
+            "x": 450.0,
+            "y": 370.0,
+            "state": 1,
+            "action": 2,
+            "visible": 1,
+            "source_clock": "same single RAM read as actual support actor"
+          }
+        }
+      ],
+      "reviewed_images": [
+        {
+          "peer": 0,
+          "label": "actual-native-AmazonC0-arrival",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\Amazon-prerequisite\\peer-0-actual-native-AmazonC0-arrival.png",
+            "bytes": 2074543,
+            "sha256": "d2d3b3352bc928d3d2af75f148841d60172f272e14f7de0e33ea6007c63d2347"
+          },
+          "root_review": "Actual original Amazon arrival shows both native healthy bodies in the selected own view/panes; prerequisite only."
+        },
+        {
+          "peer": 1,
+          "label": "actual-native-AmazonC0-arrival",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\Amazon-prerequisite\\peer-1-actual-native-AmazonC0-arrival.png",
+            "bytes": 2074543,
+            "sha256": "2843acdae3b4c51d34f817fc3192272c2022c2cc225d9a883edcb46f1790ff4e"
+          },
+          "root_review": "Actual original Amazon arrival shows both native healthy bodies in the selected own view/panes; prerequisite only."
+        },
+        {
+          "peer": 0,
+          "label": "initialized-native-moving-support",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-0-initialized-native-moving-support.png",
+            "bytes": 2074543,
+            "sha256": "91be68b58fbae2adfe4453939b6c3ca86fbd12021b429ed3190a0bb43af7467f"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 1,
+          "label": "initialized-native-moving-support",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-1-initialized-native-moving-support.png",
+            "bytes": 2074543,
+            "sha256": "c6b53f3b4060ad41c4376c82b31a27455ff602642fc454a01581d3eda098dd51"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 0,
+          "label": "guest-neutral-native-carry",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-0-guest-neutral-native-carry.png",
+            "bytes": 2074543,
+            "sha256": "05dc121494b1bbfd516bd5061e8365438042fc59ec803053fc97795b6c3ddf6c"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 1,
+          "label": "guest-neutral-native-carry",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-1-guest-neutral-native-carry.png",
+            "bytes": 2074543,
+            "sha256": "ca33a369a1dda478e04e7567528416b305e9357bdb8455c91b7afac674d5d2ea"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 0,
+          "label": "F204-neutral-carry-before-dwell",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-0-F204-neutral-carry-before-dwell.png",
+            "bytes": 2074543,
+            "sha256": "f719f6f4ab06172913f8afb357e180536a43413dfe55013122cf2022780e8965"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 1,
+          "label": "F204-neutral-carry-before-dwell",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-1-F204-neutral-carry-before-dwell.png",
+            "bytes": 2074543,
+            "sha256": "fe159889416294525f8c01ea9f05fd5ad215b9307ccbab2bff1895c7a5b15aaa"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 0,
+          "label": "F204-neutral-carry-after-dwell",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-0-F204-neutral-carry-after-dwell.png",
+            "bytes": 2074543,
+            "sha256": "36fbc873badde773feca19d5513bd70605ca5b6fa893b938cb04e66b55cc2b22"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        },
+        {
+          "peer": 1,
+          "label": "F204-neutral-carry-after-dwell",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-netplay-v69-root-v3\\intro-admission\\support\\peer-1-F204-neutral-carry-after-dwell.png",
+            "bytes": 2074543,
+            "sha256": "10abfa751ae8cffc5db75dc7efec788e16d436ef5dded611eae9ca412f9b704b"
+          },
+          "root_review": "Original initialized moving snail/support, actual Zero ride and before/after moving-stretch art reviewed in each own view/pane. Both bodies remain visible; normal overlap/native unload onto ledge explicit. Pictures alone do not prove contact or timing."
+        }
+      ],
+      "resolved_crc": [
+        {
+          "label": "initial idle",
+          "samples": 7,
+          "last_tick": 3136,
+          "resolved_through": [
+            3156,
+            3156
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": 8,
+          "last_tick": 3424,
+          "resolved_through": [
+            3429,
+            3429
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": 7,
+          "last_tick": 3712,
+          "resolved_through": [
+            3732,
+            3731
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": 8,
+          "last_tick": 4896,
+          "resolved_through": [
+            4901,
+            4901
+          ]
+        }
+      ]
+    }
+  ],
+  "same_native_tick_phase_matches": [
+    {
+      "native_timer": 470,
+      "peers": [
+        {
+          "peer": 0,
+          "actual_top": true,
+          "native_timer": 470,
+          "address": 2148274720,
+          "frame47": 1,
+          "animation_word44": "01000101",
+          "script34": "0x800f731c",
+          "assembly3C": "0x80156a28",
+          "x": 442.5,
+          "y": 370.0,
+          "state": 1,
+          "action": 2,
+          "visible": 1,
+          "source_clock": "same single RAM read as actual support actor"
+        },
+        {
+          "peer": 1,
+          "actual_top": true,
+          "native_timer": 470,
+          "address": 2148274720,
+          "frame47": 1,
+          "animation_word44": "01000101",
+          "script34": "0x800f731c",
+          "assembly3C": "0x80156a28",
+          "x": 442.5,
+          "y": 370.0,
+          "state": 1,
+          "action": 2,
+          "visible": 1,
+          "source_clock": "same single RAM read as actual support actor"
+        }
+      ],
+      "phase_equal": true
+    },
+    {
+      "native_timer": 475,
+      "peers": [
+        {
+          "peer": 0,
+          "actual_top": true,
+          "native_timer": 475,
+          "address": 2148274720,
+          "frame47": 2,
+          "animation_word44": "0900fe02",
+          "script34": "0x800f7320",
+          "assembly3C": "0x80156a28",
+          "x": 440.5,
+          "y": 370.0,
+          "state": 1,
+          "action": 2,
+          "visible": 1,
+          "source_clock": "same single RAM read as actual support actor"
+        },
+        {
+          "peer": 1,
+          "actual_top": true,
+          "native_timer": 475,
+          "address": 2148274720,
+          "frame47": 2,
+          "animation_word44": "0800fe02",
+          "script34": "0x800f7320",
+          "assembly3C": "0x80156a28",
+          "x": 440.0,
+          "y": 370.0,
+          "state": 1,
+          "action": 2,
+          "visible": 1,
+          "source_clock": "same single RAM read as actual support actor"
+        }
+      ],
+      "phase_equal": false
+    },
+    {
+      "native_timer": 497,
+      "peers": [
+        {
+          "peer": 0,
+          "actual_top": false,
+          "native_timer": 497,
+          "address": 2148274720,
+          "frame47": 1,
+          "animation_word44": "0c000101",
+          "script34": "0x800f731c",
+          "assembly3C": "0x80156a28",
+          "x": 430.0,
+          "y": 370.0,
+          "state": 1,
+          "action": 2,
+          "visible": 1,
+          "source_clock": "same single RAM read as actual support actor"
+        },
+        {
+          "peer": 1,
+          "actual_top": false,
+          "native_timer": 497,
+          "address": 2148274720,
+          "frame47": 1,
+          "animation_word44": "0c000101",
+          "script34": "0x800f731c",
+          "assembly3C": "0x80156a28",
+          "x": 430.0,
+          "y": 370.0,
+          "state": 1,
+          "action": 2,
+          "visible": 1,
+          "source_clock": "same single RAM read as actual support actor"
+        }
+      ],
+      "phase_equal": true
+    }
+  ],
+  "source_review": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F64-visible-phase-review-v69-worker-v1.txt",
+    "bytes": 10765,
+    "sha256": "d02e50916c1ad24abf400a2d236502af91aa9cb878217fa250a98dae72a86fb6"
+  },
+  "source_facts": {
+    "original_exe_sha256": "dd4bea378ac7ad5266d9b44f779097f3bbfe473eac31703566dec5495e6a1046",
+    "amazon_member3_sha256": "68e8b41b5618ccfced88057553597749513f4aeb25191004f886f9d881b633ea",
+    "script12bytes_sha256": "fbde6a2b0ad7ce167d4c4dabfb398ab01cb64c77402386a4b6f3c61c9cfecdc6",
+    "sprite_leaf_sha256": "987a4ce60d3e7e2fca084728ba7259bacde9513006e891b26beaf9ab5b4b63d3",
+    "root_review": "Original script bytes/hash and absence of linked calls in232D4..239CB independently checked; immutable private-draw source chain inspected."
+  },
+  "reviewed_images": 15,
+  "limits": [
+    "Frozen F64 only: actual original moving-solid ride and matching displayed native animation phase in LOCAL private panes and NET independent own views. Both required modes use exact4277e77, identical executable/manifest/provenance/title23/hostrev6, SDK10b9021/UI34b5277.",
+    "NET raw remains incomplete_private_phase_observation. Continual top contact and full internal-state equality fail; neither raw predicate nor status is rewritten. Genuine riding contact exists at shared clocks470 and475; at497 both heroes have naturally unloaded onto original terrain. Frozen animation contract does not require perpetual riding.",
+    "Same-clock displayed frame47 and assembly3C agree at470/475/497 (frames1/2/1). Script34 also agrees. Both processes independently exhibit frames0/1/2; frame0 has no paired same-clock observation. Display selector identity does not claim whole-image equality or exact screenshot-to-instruction/packet attribution.",
+    "At475 countdown44 is9 versus8 and X440.5 versus440.0: full-state phase_equal=false is retained. Coherent emulation-thread reads at ordinary execution edges are not canonical end-world fences. This before/after-current-update explanation is supported by source/script arithmetic, not an assertion that exact guest PCs were captured or internal bytes were equal.",
+    "Original script800F7318 bytes0c0001000c0001010c00fe02 reload12 with frames0/1/2 and signed steps1/1/-2. From470/frame1/count1, four/five actor updates produce count9/8 and four/five halfpixel steps at475. Continuous twice-per-world advancement over this interval would give count4/3. This is bounded cadence evidence, not all-future-boundary or performance coverage.",
+    "Original draw consumer80023388 reads frame+47 and8002338C reads assembly+3C. Private draw uses80025FB0 ->80022960 ->support loop80022CC0..22CFC ->leaf sprite emitter800232D4..239CB, which has no jal/jalr or branch-and-link and cannot rerun support animator80017A04. Private context restoration/digest and actual private-view growth supplement composed-art review.",
+    "Fifteen actual composed images were reviewed across LOCAL and NET for original platform art/motion and each own view/pane. This source-and-native-phase review independently admits F64; it does not inherit qualification from F204 timing. Four resolved full-core/modCRC windows, profiles, native cards, owned exits0 and strict fixture-taint capture/replay refusals pass.",
+    "Agreed original Amazon1/0/CP0 initializer is a disclosed reachability bypass. Native walking/jumping/riding/animation occur afterward. No HP/ammo/contact/animation/position/clock/success writes, ordinary campaign traversal/progression, F49hit, general content, other host/roster or universal60FPS claim. All earlier failed evidence remains unchanged."
+  ],
+  "bypasses": [
+    "Pre-agreed source-bound original Amazon1/0/CP0 reachability only."
+  ]
+}

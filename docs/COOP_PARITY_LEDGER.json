@@ -9932,14 +9932,14 @@
           "src/mods/mmx6_coop_plugin.c:shared_camera",
           "src/mods/mmx6_coop_plugin.c:camera_target"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
           "local": "passed",
-          "netplay": "unverified"
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -9977,9 +9977,47 @@
             "bypasses": [
               "Pre-agreed original mode8/9 Amazon1/0/CP0 initializer; no traversal/retry/progression credit."
             ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "4277e774fd032e88ac03344a530b57a597773584",
+            "build_identity": {
+              "executable_sha256": "0fdc58cb27162e74a4eefe7cfe76ce5d533c2acc749cfb1e1ddfeb187f1ef11c",
+              "compiled_manifest_sha256": "6bd4c3490daa0c3bf3d33a87672b4f820124ba60becbf55d20445536cb3674b3",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "cameras": "independent own4:3 windows",
+              "renderer": "ordinaryOpenGL",
+              "audio": "muted dummy",
+              "prerequisite": "agreed originalAmazonC0"
+            },
+            "action": "Ride the original moving solid in actual independent views; review displayed native animation phase and draw-only once-per-world source chain.",
+            "outcome": "Genuine top contact at470/475; matching frame47/assembly3C at470/475/497; both processes animate0/1/2 and render original support art. Timer44/X mismatch at475 and later natural unload are retained; source proves draw does not rerun animation. Full parent profile/CRC/cards/exit0/taint-refusal gates pass.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-solid/manifest-bound-4277e77-F64-local-netplay-reviewed.json",
+                "sha256": "8eaf50d2c852b2de096a20b1fcbcea4a209127aeed4fd1470642a247df95e847"
+              }
+            ],
+            "limits": [
+              "Frozen F64 only: actual original moving-solid ride and matching displayed native animation phase in LOCAL private panes and NET independent own views. Both required modes use exact4277e77, identical executable/manifest/provenance/title23/hostrev6, SDK10b9021/UI34b5277.",
+              "NET raw remains incomplete_private_phase_observation. Continual top contact and full internal-state equality fail; neither raw predicate nor status is rewritten. Genuine riding contact exists at shared clocks470 and475; at497 both heroes have naturally unloaded onto original terrain. Frozen animation contract does not require perpetual riding.",
+              "Same-clock displayed frame47 and assembly3C agree at470/475/497 (frames1/2/1). Script34 also agrees. Both processes independently exhibit frames0/1/2; frame0 has no paired same-clock observation. Display selector identity does not claim whole-image equality or exact screenshot-to-instruction/packet attribution.",
+              "At475 countdown44 is9 versus8 and X440.5 versus440.0: full-state phase_equal=false is retained. Coherent emulation-thread reads at ordinary execution edges are not canonical end-world fences. This before/after-current-update explanation is supported by source/script arithmetic, not an assertion that exact guest PCs were captured or internal bytes were equal.",
+              "Original script800F7318 bytes0c0001000c0001010c00fe02 reload12 with frames0/1/2 and signed steps1/1/-2. From470/frame1/count1, four/five actor updates produce count9/8 and four/five halfpixel steps at475. Continuous twice-per-world advancement over this interval would give count4/3. This is bounded cadence evidence, not all-future-boundary or performance coverage.",
+              "Original draw consumer80023388 reads frame+47 and8002338C reads assembly+3C. Private draw uses80025FB0 ->80022960 ->support loop80022CC0..22CFC ->leaf sprite emitter800232D4..239CB, which has no jal/jalr or branch-and-link and cannot rerun support animator80017A04. Private context restoration/digest and actual private-view growth supplement composed-art review.",
+              "Fifteen actual composed images were reviewed across LOCAL and NET for original platform art/motion and each own view/pane. This source-and-native-phase review independently admits F64; it does not inherit qualification from F204 timing. Four resolved full-core/modCRC windows, profiles, native cards, owned exits0 and strict fixture-taint capture/replay refusals pass.",
+              "Agreed original Amazon1/0/CP0 initializer is a disclosed reachability bypass. Native walking/jumping/riding/animation occur afterward. No HP/ammo/contact/animation/position/clock/success writes, ordinary campaign traversal/progression, F49hit, general content, other host/roster or universal60FPS claim. All earlier failed evidence remains unchanged."
+            ],
+            "bypasses": [
+              "Pre-agreed source-bound original Amazon1/0/CP0 reachability only."
+            ]
           }
         ],
-        "limitations": "LOCAL exact4277e77 reviewed F204cadence world78 insideSDK74..79/platform38.5px andF64private2pane/nativephase0/1/2/art,5images. AgreedAmazonprerequisite bypass andstricttrace refusal/correctnativeentry/cards/ownedexit0 explicit. NETsamecandidate/aggregate pending; noF49hit/generalcontent/route/fullF51 inheritance."
+        "limitations": "Exact4277e77 LOCAL+NET original moving-solid private-view animation qualified. Actual ride, matching displayed frame/assembly at470/475/497, per-process frames0/1/2,15 reviewed images and draw-only leaf/source-once chain. Raw stronger observer remains incomplete: countdown/X differ at475; later natural unload explicit. Profile/resolvedCRC/cards/ownedexit0/strict fixture refusals pass. AgreedAmazon reachability bypass; no whole-state/image/route/content/F49/performance inheritance."
       }
     },
     {

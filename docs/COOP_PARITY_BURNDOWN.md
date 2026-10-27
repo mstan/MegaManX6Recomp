@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 57 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F65, F67, F68, F70, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F163, F170, F178, F204, F205, F208), 5 failed, 172 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 58 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F67, F68, F70, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F163, F170, F178, F204, F205, F208), 5 failed, 171 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,15 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 26
+
+**F64 is closed: 58 passed / 5 failed / 171 unverified (24.8%).**
+The [independent moving-platform animation review](evidence/mmx6-solid/manifest-bound-4277e77-F64-local-netplay-reviewed.json)
+qualifies LOCAL and NET on the same candidate. Actual riding, matching
+displayed animation frames and the original draw-only call chain establish
+the frozen contract. The raw observer remains incomplete under its stronger
+continuous-contact and internal-state-equality checks; the countdown and
+position difference at475 and later natural unload remain explicit.
+This adds three since55: F53, F204 and F64.
 
 **F204 is closed:57 passed /5 failed /172 unverified (24.4%).**
 The [same-candidate moving-support bundle](evidence/mmx6-solid/manifest-bound-4277e77-F204-local-netplay-reviewed.json) passes native world/VBlank cadence in LOCAL and NET, with15 reviewed images.
