@@ -128,6 +128,7 @@ static unsigned both_doors;
 /* The actual door and living roster authenticated by its native overlap.
  * A generic scene with phase zero is not permission for dual traversal. */
 static uint32_t both_door_actor;
+static uint32_t both_door_origin;
 static unsigned both_door_members;
 static int unit_choices_call;
 static int intro_target_call;
@@ -144,13 +145,23 @@ static void snapshot_assets_loaded(const Mmx6AssetView *views,unsigned count);
 #endif
 
 static int scene_passenger(unsigned seat) { return scene_phase && scene_owner!=seat+1; }
+static int both_door_slot(uint32_t actor) {
+    return actor>=0x800C1220u && actor<0x800C4560u &&
+        !((actor-0x800C1220u)%0xA4u);
+}
+static int both_door_source_valid(void) {
+    return both_door_slot(both_door_actor) &&
+        (psx_mod_read_byte(both_door_actor)&1u) &&
+        psx_mod_read_byte(both_door_actor+1)==8 &&
+        psx_mod_read_word(both_door_actor+0x10)==both_door_origin;
+}
 /* Both ALIVE actors produce phase0 together only after authenticated Both
  * door admission. Other native scenes use the existing passenger phases. */
 static int both_door_traversal_active(void) {
-    return both_doors && both_door_actor && both_door_members &&
+    return both_doors && both_door_actor && both_door_members && both_door_source_valid() &&
         scene_owner && !scene_phase && pause_owner<0;
 }
-static void both_door_reset(void) { both_door_actor=both_door_members=0; }
+static void both_door_reset(void) { both_door_actor=both_door_origin=both_door_members=0; }
 
 static void put32(uint8_t *p, uint32_t v) {
     for (unsigned i=0;i<4;++i) p[i]=(uint8_t)(v>>(8*i));
@@ -778,7 +789,7 @@ static uint32_t diagnostic_host_digest(void) {
         life.select_armed,life.select_previous,life.wipe,life.rejoin_pending,
         previous_input,p2_edges,join_phase,(uint32_t)join_y,
         (uint32_t)pause_owner,(uint32_t)p2_start_previous,
-        scene_owner,scene_phase,(uint32_t)scene_y,both_door_actor,both_door_members,
+        scene_owner,scene_phase,(uint32_t)scene_y,both_door_actor,both_door_origin,both_door_members,
         (uint32_t)ready,(uint32_t)enrolled,(uint32_t)failed
     };
     for (size_t i=0;i<sizeof fields/sizeof fields[0];++i) {
@@ -1145,6 +1156,7 @@ static int door_begin(CPUState *cpu, uint32_t address) {
         if (both_doors) {
             scene_phase=0;
             both_door_actor=actor;
+            both_door_origin=psx_mod_read_word(actor+0x10);
             both_door_members=(life.status[0]==MMX6_COOP_ALIVE?1u:0u)|
                 (life.status[1]==MMX6_COOP_ALIVE?2u:0u);
             /* Native AI admitted every living original body box, but sets
@@ -1220,6 +1232,15 @@ static int scene_locked(const uint8_t *owner) {
 }
 static void scene_tick(CPUState *cpu) {
     if (!scene_owner || !enrolled) return;
+    if(both_door_actor && !both_door_source_valid()) {
+        int pending=((both_door_members&1) && life.status[0]==MMX6_COOP_ALIVE &&
+                     psx_mod_read_byte(PLAYER+0xD4)) ||
+                    ((both_door_members&2) && life.status[1]==MMX6_COOP_ALIVE && p2.body[0xD4]);
+        both_door_reset();
+        /* An original completed door may retire normally. A missing or
+         * reused actor cannot authorize more motion or invent a release. */
+        if(pending) {failed=1;return;}
+    }
     unsigned seat=scene_owner-1, passenger=seat^1;
     uint8_t owner[sizeof scene_body];
     if (seat) memcpy(owner,p2.body,sizeof owner);

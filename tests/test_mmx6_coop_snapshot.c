@@ -456,12 +456,12 @@ static void shared_clear_snapshot(void) {
 static void both_door_snapshot(void) {
     HostState prior;state_capture(&prior);unsigned option=both_doors;
     both_doors=1;scene_owner=1;scene_phase=0;pause_owner=-1;enrolled=1;
-    both_door_actor=0x800C12C4u;both_door_members=3;
+    both_door_actor=0x800C12C4u;both_door_origin=0x800FA2ACu;both_door_members=3;
     uint32_t len=snapshot_bytes();CHECK(len);
     uint8_t *wire=malloc(len);CHECK(wire && snapshot_write(wire,len));
     uint32_t digest=state_digest();both_door_reset();
     CHECK(state_digest()!=digest && snapshot_validate(wire,len));snapshot_read(wire,len);
-    CHECK(both_door_actor==0x800C12C4u && both_door_members==3 && state_digest()==digest);
+    CHECK(both_door_actor==0x800C12C4u && both_door_origin==0x800FA2ACu && both_door_members==3 && state_digest()==digest);
     HostState active;state_capture(&active);
     StateIO check={STATE_COUNT,1,NULL,NULL,0,0,0};
     active.door_actor=1;state_core(&check,&active);CHECK(!check.ok);

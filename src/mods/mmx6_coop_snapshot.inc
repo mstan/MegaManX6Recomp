@@ -84,7 +84,7 @@ typedef struct {
     uint8_t shared_owners[96];
     uint32_t lab_state,lab_previous;
     uint32_t clear_phase,clear_members,clear_started;
-    uint32_t door_actor,door_members;
+    uint32_t door_actor,door_origin,door_members;
 } HostState;
 static void state_capture(HostState *s) {
     memset(s,0,sizeof *s);s->player=p2;s->lifecycle=life;
@@ -102,7 +102,7 @@ static void state_capture(HostState *s) {
     memcpy(s->shared_owners,shared_effect_owners,sizeof shared_effect_owners);
     s->lab_state=checkpoint_lab_state;s->lab_previous=checkpoint_lab_previous;
     s->clear_phase=clear_phase;s->clear_members=clear_members;s->clear_started=clear_started;
-    s->door_actor=both_door_actor;s->door_members=both_door_members;
+    s->door_actor=both_door_actor;s->door_origin=both_door_origin;s->door_members=both_door_members;
 }
 static int state_actor(uint32_t address) {
     return !address || (address>=0x80010000u && address<=0x801FFF00u && !(address&3));
@@ -149,10 +149,11 @@ static void state_core(StateIO *io,HostState *s) {
         if(valid && (!o->owner || !state_assembly(o->assembly)))io->ok=0;
     }
     if(!s->owner && s->scene_phase)io->ok=0;
-    FIELD(door_actor,4,UINT32_MAX);FIELD(door_members,1,3);
+    FIELD(door_actor,4,UINT32_MAX);FIELD(door_origin,4,UINT32_MAX);FIELD(door_members,1,3);
     if(!s->door_actor) {
-        if(s->door_members)io->ok=0;
-    } else if(!state_actor(s->door_actor) || (s->door_actor&3) ||
+        if(s->door_members || s->door_origin)io->ok=0;
+    } else if(!both_door_slot(s->door_actor) || !s->door_origin ||
+              !state_actor(s->door_origin) || (s->door_origin&3) ||
               !both_doors || !s->door_members || !s->owner ||
               s->scene_phase || !s->enrolled)io->ok=0;
     FIELD(clear_phase,1,CLEAR_VICTORY);FIELD(clear_members,1,3);FIELD(clear_started,1,3);
@@ -191,7 +192,7 @@ static void state_commit(const HostState *s) {
     memcpy(shared_effect_owners,s->shared_owners,sizeof shared_effect_owners);
     checkpoint_lab_state=s->lab_state;checkpoint_lab_previous=s->lab_previous;
     clear_phase=s->clear_phase;clear_members=s->clear_members;clear_started=s->clear_started;
-    both_door_actor=s->door_actor;both_door_members=s->door_members;
+    both_door_actor=s->door_actor;both_door_origin=s->door_origin;both_door_members=s->door_members;
     /* These backups are meaningful only under rejected live projections. */
     memset(&p1,0,sizeof p1);memset(saved_overlay,0,sizeof saved_overlay);memset(saved_play,0,sizeof saved_play);
     memset(saved_camera,0,sizeof saved_camera);memset(saved_resources,0,sizeof saved_resources);saved_palette_dirty=0;

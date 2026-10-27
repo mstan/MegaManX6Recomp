@@ -1479,7 +1479,7 @@ static void native_shared_clear_admission_and_departure(void) {
     CHECK(!clear_phase && !clear_members && !clear_started && !enrolled);
     clear_probe=0;
 }
-enum { TEST_DOOR=0x800CD400u,TEST_DOOR_BOX=0x80074000u,TEST_X_BOX=0x80074004u,TEST_ZERO_BOX=0x80074008u };
+enum { TEST_DOOR=0x800C12C4u,TEST_DOOR_BOX=0x80074000u,TEST_X_BOX=0x80074004u,TEST_ZERO_BOX=0x80074008u };
 static void door_setup(CPUState *cpu,unsigned both,int x,int zero) {
     setup(cpu);both_doors=both;door_native_probe=1;
     life.status[0]=life.status[1]=MMX6_COOP_ALIVE;
@@ -1489,6 +1489,8 @@ static void door_setup(CPUState *cpu,unsigned both,int x,int zero) {
     psx_mod_write_word(PLAYER+0x68,TEST_X_BOX);put32(p2.body+0x68,TEST_ZERO_BOX);
     psx_mod_write_word(TEST_DOOR+8,500u<<16);psx_mod_write_word(TEST_DOOR+12,1000u<<16);
     psx_mod_write_word(TEST_DOOR+0x68,TEST_DOOR_BOX);
+    psx_mod_write_byte(TEST_DOOR,0x49);psx_mod_write_byte(TEST_DOOR+1,8);
+    psx_mod_write_word(TEST_DOOR+0x10,0x800FA2ACu);
     /* Different authored centers and heights exercise each actual box. */
     psx_mod_write_word(TEST_DOOR_BOX,0x281000FCu); /* x=-4,y=0,w=16,h=40 */
     psx_mod_write_word(TEST_X_BOX,0x10080000u);
@@ -1627,6 +1629,15 @@ static void native_both_door_ack_motion_and_release(void) {
     /* A generic phase-zero scene or another door has no authenticated authority. */
     door_setup(&cpu,1,480,480);scene_owner=1;
     CHECK(!both_door_traversal_active() && !door_update(&cpu,0x80050DFCu));
+    for(unsigned invalid=0;invalid<3;++invalid) {
+        door_setup(&cpu,1,480,480);check_door_result(&cpu,1,0);
+        if(invalid==0)psx_mod_write_byte(TEST_DOOR,0);
+        if(invalid==1)psx_mod_write_byte(TEST_DOOR+1,9);
+        if(invalid==2)psx_mod_write_word(TEST_DOOR+0x10,0x800FA2B0u);
+        CHECK(!both_door_traversal_active());scene_tick(&cpu);
+        CHECK(failed && !both_door_actor && !both_door_origin && !both_door_members &&
+              psx_mod_read_byte(PLAYER+0xD4)==1 && p2.body[0xD4]==1 && !scene_phase);
+    }
 }
 int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     controller_pair_and_restoration();scene_passengers_keep_native_fixed_effects();native_nova_guest_update();lifetime_and_gates();menu_freeze_and_select_resume();native_menu_campaign_authority();draw_order_retained_packets_and_survivor();borrowed_menu_retains_primary_pools();borrowed_menu_restores_primary_sprite_sheet();native_giga_backup_survives_private_callbacks();clear_banks();
