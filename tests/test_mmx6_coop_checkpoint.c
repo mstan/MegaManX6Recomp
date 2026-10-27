@@ -1,6 +1,6 @@
 /* Actual plugin setup boundary against isolated RAM plus pinned original code.
  * No native game routine is emulated and no gameplay/progression pass follows. */
-#include "mod_plugins.h"
+#include "cpu_state.h"
 static int checkpoint_native_model(CPUState *cpu,uint32_t target,uint32_t ret);
 #define MMX6_TEST_GUEST_DISPATCH checkpoint_native_model
 #define main diagnostic_tests
