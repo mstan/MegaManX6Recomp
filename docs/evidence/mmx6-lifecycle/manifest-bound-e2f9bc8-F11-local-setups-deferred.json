@@ -1,0 +1,656 @@
+{
+  "schema": 1,
+  "comparison": "F11",
+  "frozen_row_sha256": "6fd85bb773904225b430e97c017e071a1a81fcaef50f97c843f969478c968336",
+  "candidate": "e2f9bc8146fe0d40e08ecb1fbc151db9c360ea5a",
+  "mode": "local",
+  "result": "unverified",
+  "build_identity": {
+    "executable_sha256": "ab33f5b78af7ec9b2b02874740aada5b24a7bfca62fb8203f8c3e87437fbdd0b",
+    "compiled_manifest_sha256": "e8a3d5c68bebcfffd7d5b8caf48423b9ebeb49754a8173337f3d8e49b3567384",
+    "sdk_commit": "bb5d0a7ec003d7e33270e51c270ea89dfea5c081",
+    "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+  },
+  "attempts": [
+    {
+      "version": 1,
+      "result": "unverified_setup",
+      "error": "actual native guest rider fatal with armor retirement timed out",
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F11-native-mounted-death-local-v56-root-v1\\qualification.json",
+        "bytes": 6926584,
+        "sha256": "586913c59c00fd783f817afdfd76b47d56f520292bf20ea849cf095f0b735f75"
+      },
+      "raw": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F11-native-mounted-death-local-v56-root-v1\\ammo-hud\\F11\\F11-observations.json",
+        "bytes": 5463882,
+        "sha256": "116113d56849bec7df319cc8b6dc1014b9738e9d50c670cb4b288d9ecf1d2357"
+      },
+      "source_pins": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F11-native-mounted-death-local-v56-root-v1\\actual-direct-source-pins.json",
+        "bytes": 843,
+        "sha256": "3f8ddd9a2923d43e0a78ceda498ef3df3369bd9206c0905ec57f788001e53510"
+      },
+      "before_native_fatal": {
+        "index": 36,
+        "label": "Source-bound healthy mounted guest before native boundary death",
+        "peers": [
+          {
+            "peer": 0,
+            "observation": {
+              "schema": 1,
+              "tick": 476,
+              "sequence": 952,
+              "native_timer": 314,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 200420705,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 110100480,
+                  "y_raw": 22740992,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 18,
+                  "hp": 32,
+                  "x_raw": 122683392,
+                  "y_raw": 25165824,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 0
+            },
+            "armor": {
+              "active": 65,
+              "type": 0,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 1,
+              "origin": 2148477724,
+              "x": 1872.0,
+              "y": 384.0,
+              "held": 0,
+              "pressed": 0,
+              "ground": 8,
+              "hp": 32,
+              "camera_x": 1616,
+              "relative_camera_x": 256,
+              "flags97": 64,
+              "hex": "410000010101010000005007000080011c2b0f80004003000000500700008001000000000000000000000000000000004c3d0f80f43a0f8000000000446c158040018c785a000100ff00000000000000000000004c3a0f8000000000200000000000000000000000443a0f800000000008000000000000000000000001000000000000000000000000000000000000000000000000000040600102000000000000000000000000000800000000000000"
+            },
+            "markers": [
+              0,
+              -1
+            ],
+            "play": "0a00000000000000000005000400000000000000000000000000000000000101000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000000020200001010030300000000000010000000000000000000000000000000000000000000000000000000000000000000000000707003b0100000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000180000db010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "explosions": []
+          }
+        ]
+      },
+      "actual_right_wall": null,
+      "last_recorded": {
+        "index": 417,
+        "label": "failure-final-native-mounted-death before capture",
+        "peers": [
+          {
+            "peer": 0,
+            "observation": {
+              "schema": 1,
+              "tick": 2136,
+              "sequence": 4272,
+              "native_timer": 1974,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 2019882534,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 110100480,
+                  "y_raw": 22740992,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 18,
+                  "hp": 32,
+                  "x_raw": 122617856,
+                  "y_raw": 25165824,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 0
+            },
+            "armor": {
+              "active": 65,
+              "type": 0,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 2,
+              "origin": 2148477724,
+              "x": 1871.0,
+              "y": 384.0,
+              "held": 2,
+              "pressed": 0,
+              "ground": 10,
+              "hp": 32,
+              "camera_x": 1615,
+              "relative_camera_x": 256,
+              "flags97": 64,
+              "hex": "410000010102010000004f07000080011c2b0f800000030100004f070000800100a0feff0000000000000000000000004c3d0f80183b0f8000000000446c158040018c7804000106ff00010000000000000000004c3a0f8000000000200000000000000000000000443a0f800d0000000a000000000000000000000001000000000000000000000002000000000000000000000000000040600102000000000000000000000000000a00000000000000"
+            },
+            "markers": [
+              0,
+              -1
+            ],
+            "play": "0a0000000000000000000500040000000000000000000000000000000000010100000000000000010000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000002020000101003030000000000001000000000000000000000000000000000000000000000000000000000000000000000000070700bb07000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000001800005b080000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "explosions": []
+          }
+        ]
+      },
+      "sample_count": 418,
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true
+      },
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "private_cards_unchanged": true,
+      "recording_strict_refusals": {
+        "ordinary_capture": {
+          "type": "InvalidRecording",
+          "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+        },
+        "offline_replay": {
+          "type": "InvalidRecording",
+          "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+        }
+      },
+      "artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F11-native-mounted-death-local-v56-root-v1\\ammo-hud\\F11\\peer-0-failure-final-native-mounted-death.png",
+          "bytes": 2074543,
+          "sha256": "900f038ce5b7322fa748a1d60412471e3f6bffcaf122ebdf5d71fa2bdcd2602d"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F11-native-mounted-death-local-v56-root-v1\\ammo-hud\\F11\\peer-0-original-empty-armor-and-foot-pair.png",
+          "bytes": 2074543,
+          "sha256": "897812080393a735f9fe5208bb5f55da05d9475e57bf800de21252b89d05d62d"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F11-native-mounted-death-local-v56-root-v1\\ammo-hud\\F11\\peer-0-seat1-actual-native-mounted.png",
+          "bytes": 2074543,
+          "sha256": "3f3b2325f74251c1f02785ffbc87bf45101242f81718614efac92d4f3f261d83"
+        }
+      ]
+    },
+    {
+      "version": 2,
+      "result": "unverified_setup",
+      "error": "Lost native survivor Recycle Lab gameplay",
+      "qualification": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F11-native-mounted-death-local-v56-root-v2\\qualification.json",
+        "bytes": 2774661,
+        "sha256": "766d6b2b380e85db766798e679802bffcfcb0a4d5c768e5e43e37b30c43f1b5d"
+      },
+      "raw": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F11-native-mounted-death-local-v56-root-v2\\ammo-hud\\F11\\F11-observations.json",
+        "bytes": 1744461,
+        "sha256": "a4b701788c977444b33ad8fdd03e27d6535836d603a5691be0741670bb09257b"
+      },
+      "source_pins": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F11-native-mounted-death-local-v56-root-v2\\actual-direct-source-pins.json",
+        "bytes": 843,
+        "sha256": "6d72e18732c826df870c7cdd9ee442c99bc867a07bab8ec85e37a53434df2518"
+      },
+      "before_native_fatal": {
+        "index": 38,
+        "label": "Source-bound healthy mounted guest before native boundary death",
+        "peers": [
+          {
+            "peer": 0,
+            "observation": {
+              "schema": 1,
+              "tick": 453,
+              "sequence": 906,
+              "native_timer": 302,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 2788845521,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 110100480,
+                  "y_raw": 22740992,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 18,
+                  "hp": 32,
+                  "x_raw": 122683392,
+                  "y_raw": 25165824,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 0
+            },
+            "armor": {
+              "active": 65,
+              "type": 0,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 1,
+              "origin": 2148477724,
+              "x": 1872.0,
+              "y": 384.0,
+              "held": 0,
+              "pressed": 0,
+              "ground": 8,
+              "hp": 32,
+              "camera_x": 1616,
+              "relative_camera_x": 256,
+              "flags97": 64,
+              "hex": "410000010101010000005007000080011c2b0f80004003000000500700008001000000000000000000000000000000004c3d0f80f43a0f8000000000446c158040018c7858000100ff00000000000000000000004c3a0f8000000000200000000000000000000000443a0f800000000008000000000000000000000001000000000000000000000000000000000000000000000000000040600100000000000000000000000000000800000000000000"
+            },
+            "markers": [
+              0,
+              -1
+            ],
+            "play": "0a0000000000000000000500040000000000000000000000000000000000010100000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000002020000101003030000000000001000000000000000000000000000000000000000000000000000000000000000000000000070700320100000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000180000c7010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "explosions": []
+          }
+        ]
+      },
+      "actual_right_wall": {
+        "index": 75,
+        "label": "actual native right-wall armor contact",
+        "peers": [
+          {
+            "peer": 0,
+            "observation": {
+              "schema": 1,
+              "tick": 626,
+              "sequence": 1252,
+              "native_timer": 475,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 2061713033,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 2,
+                  "hp": 32,
+                  "x_raw": 119111680,
+                  "y_raw": 22740992,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 18,
+                  "hp": 32,
+                  "x_raw": 137461760,
+                  "y_raw": 25165824,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 0
+            },
+            "armor": {
+              "active": 65,
+              "type": 0,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 2,
+              "origin": 2148477724,
+              "x": 2097.0,
+              "y": 384.0,
+              "held": 1,
+              "pressed": 0,
+              "ground": 9,
+              "hp": 32,
+              "camera_x": 1797,
+              "relative_camera_x": 300,
+              "flags97": 64,
+              "hex": "410000010102010000003108000080011c2b0f80004003010080310800008001006001000000000000000000000000004c3d0f80203b0f8000000000446c158040018c780300f908ff00010000000000000000004c3a0f8000000000200000000000000000000000443a0f800200000009000000000000000000000001000000000000000000000001000000000000000000000000000040600101000000000000000000000000000900000000000000"
+            },
+            "markers": [
+              0,
+              -1
+            ],
+            "play": "0a0000000000000000000500040000000000000000000000000000000000010100000000000000010000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000002020000101003030000000000001000000000000000000000000000000000000000000000000000000000000000000000000070700dc010000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000018000071020000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "explosions": []
+          }
+        ]
+      },
+      "last_recorded": {
+        "index": 127,
+        "label": "failure-final-native-mounted-death before capture",
+        "peers": [
+          {
+            "peer": 0,
+            "observation": {
+              "schema": 1,
+              "tick": 856,
+              "sequence": 1712,
+              "native_timer": 705,
+              "lifecycle": [
+                0,
+                0
+              ],
+              "pause_owner": 0,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "mailbox": 0,
+              "ready": 1,
+              "enrolled": 1,
+              "failed": 0,
+              "native_mode": 10,
+              "native_phase": 0,
+              "host_digest": 3712605797,
+              "host_digest_algorithm": 1,
+              "players": [
+                {
+                  "active": 1,
+                  "character": 0,
+                  "state": 1,
+                  "action": 17,
+                  "hp": 29,
+                  "x_raw": 138948608,
+                  "y_raw": 22344704,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                },
+                {
+                  "active": 1,
+                  "character": 1,
+                  "state": 1,
+                  "action": 18,
+                  "hp": 32,
+                  "x_raw": 137428992,
+                  "y_raw": 25165824,
+                  "weapon": 0,
+                  "ammo": [
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288,
+                    288
+                  ]
+                }
+              ],
+              "framework_digest_registered": 0
+            },
+            "armor": {
+              "active": 65,
+              "type": 0,
+              "subtype": 0,
+              "visible": 1,
+              "state": 1,
+              "action": 2,
+              "origin": 2148477724,
+              "x": 2097.0,
+              "y": 384.0,
+              "held": 1,
+              "pressed": 0,
+              "ground": 9,
+              "hp": 32,
+              "camera_x": 1945,
+              "relative_camera_x": 152,
+              "flags97": 64,
+              "hex": "410000010102010000003108000080011c2b0f80004003010000310800008001006001000000000000000000000000004c3d0f80043b0f8000000000446c158040018c7803000101ff00010000000000000000004c3a0f8000000000200000000000000000000000443a0f800200000009000000000000000000000001000000000000000000000001000000000000000000000000000040600101000000000000000000000000000900000000000000"
+            },
+            "markers": [
+              0,
+              -1
+            ],
+            "play": "0a0000000000000000000500040000000000000000000000000000000000010100000000000000000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000002020000101003030000000000001000000000000000000000000000000000000000000000000000000000000000000000000070700c3020000000000000300000000000100000000000000000000000000000000000000000000000000000000000000000000000000000000000018000058030000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "explosions": []
+          }
+        ]
+      },
+      "sample_count": 128,
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true
+      },
+      "cleanup": {
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0
+      },
+      "private_cards_unchanged": true,
+      "recording_strict_refusals": {
+        "ordinary_capture": {
+          "type": "InvalidRecording",
+          "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+        },
+        "offline_replay": {
+          "type": "InvalidRecording",
+          "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+        }
+      },
+      "artifacts": [
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F11-native-mounted-death-local-v56-root-v2\\ammo-hud\\F11\\peer-0-failure-final-native-mounted-death.png",
+          "bytes": 2074543,
+          "sha256": "05ac89b277a5e778fd503921c709d1cce7a34651a423ee2a89e0caf298c41989"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F11-native-mounted-death-local-v56-root-v2\\ammo-hud\\F11\\peer-0-native-mounted-right-wall-before-camera-crush.png",
+          "bytes": 2074543,
+          "sha256": "94b29be29d68a13b83027aa0fdcfa48220b488e2d69f30dfc0ac6440148cf21f"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F11-native-mounted-death-local-v56-root-v2\\ammo-hud\\F11\\peer-0-original-empty-armor-and-foot-pair.png",
+          "bytes": 2074543,
+          "sha256": "ab1b2dca3a62c8cf34c64738d07448a00d891cb9ff3c895553e9d562601459c7"
+        },
+        {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F11-native-mounted-death-local-v56-root-v2\\ammo-hud\\F11\\peer-0-seat1-actual-native-mounted.png",
+          "bytes": 2074543,
+          "sha256": "3f3b2325f74251c1f02785ffbc87bf45101242f81718614efac92d4f3f261d83"
+        }
+      ]
+    }
+  ],
+  "source_findings": {
+    "valid_counterpart": "Native authored Recycle Ride Armor mounted death; no vehicle-opening or campaign-wide absence claim.",
+    "native_fatal_span": "800F1EC4..800F2000",
+    "native_fatal_sha256": "1e75a4411084cfb044dcd28ceef308c8dccc5a9fabb324a38456487a7cec3394",
+    "actual_gate": "Mounted rider, armorA8 RIGHTcontact bit1 and armorX-currentCameraX<32. Native code writes rider+armor fatal80, creates8 explosions and retiresarmor.",
+    "correction": "A8bit2 is LEFT; initial Left input hits real nearby ledge. V2 reaches genuine A8right1 wall, but does not reach actual fatal gate.",
+    "next_prerequisite": "Clear native on-foot threat and verify real camera-edge pinch can be reached without losing survivor state; no new automated variant now."
+  },
+  "root_composed_review": {
+    "reviewed": true,
+    "paths": [
+      "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F11-native-mounted-death-local-v56-root-v1\\ammo-hud\\F11\\peer-0-failure-final-native-mounted-death.png"
+    ],
+    "observation": "Actual Zero cockpit/rider and X on authored raised ledge; armor remains active. This is not death/beam cleanup evidence."
+  },
+  "limitations": [
+    "Both required mode statuses remain unverified. No native vehicle fatal or beam/explosion cleanup verdict.",
+    "LOCALv1 actualLeft stopped at1871/A8=0A/HP32 both; relativecamera256. No desired fatal observed.",
+    "LOCALv2 actualRight reached2097/A8=09; primary laterHP31->29/action17 hurt. Broad living-state guard rejected an unretained intermediate sample; do not infer primarydeath or game failure from its error text. Last retained row is still bothALIVE, armorHP32, relativecamera152.",
+    "Audited offline Recycle4/0CP0 reachability bypass only; no HP/contact/position/phase/outcome writes by observer. No NET attempt after incompleteLOCAL.",
+    "Both graceful owned exits0, existing private cards unchanged, fixture-tainted recording/capture/replay strictly refused. Completed F15 evidence and original HUD harness untouched."
+  ]
+}

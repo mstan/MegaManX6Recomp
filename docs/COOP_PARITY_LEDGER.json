@@ -5583,8 +5583,8 @@
       "frozen_row_sha256": "6fd85bb773904225b430e97c017e071a1a81fcaef50f97c843f969478c968336",
       "x6": {
         "workstream": "lifecycle",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Vehicle death beam cleanup analogue unidentified",
+        "mapping_state": "candidate_native_scenario",
+        "analogue": "Native Ride Armor mounted death and finite owned cleanup",
         "bounded_check": "Find a native X6 mounted entrance/death sequence first; require finite beam retirement and surviving or retried rider control.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_lifecycle.c:mmx6_coop_fatal",
@@ -5599,8 +5599,45 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "e2f9bc8146fe0d40e08ecb1fbc151db9c360ea5a",
+            "build_identity": {
+              "executable_sha256": "ab33f5b78af7ec9b2b02874740aada5b24a7bfca62fb8203f8c3e87437fbdd0b",
+              "compiled_manifest_sha256": "e8a3d5c68bebcfffd7d5b8caf48423b9ebeb49754a8173337f3d8e49b3567384",
+              "sdk_commit": "bb5d0a7ec003d7e33270e51c270ea89dfea5c081",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "renderer": "4:3 OpenGL",
+              "audio": "muted dummy",
+              "input": "ordinary published host pads",
+              "prerequisite": "audited offline Recycle4/0CP0"
+            },
+            "action": "Board native armor as guest; attempt source-qualified camera-edge crush using ordinary movement.",
+            "outcome": "Both actual mounts succeed; corrected second setup reaches native right-wall contact but loses living-state admission before the real fatal gate. No death/cleanup mechanic verdict.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-lifecycle/manifest-bound-e2f9bc8-F11-local-setups-deferred.json",
+                "sha256": "92126e40962635e4371b17677768f7af17019844a6a21c5772620cccedabd4bf"
+              }
+            ],
+            "limits": [
+              "Both required mode statuses remain unverified. No native vehicle fatal or beam/explosion cleanup verdict.",
+              "LOCALv1 actualLeft stopped at1871/A8=0A/HP32 both; relativecamera256. No desired fatal observed.",
+              "LOCALv2 actualRight reached2097/A8=09; primary laterHP31->29/action17 hurt. Broad living-state guard rejected an unretained intermediate sample; do not infer primarydeath or game failure from its error text. Last retained row is still bothALIVE, armorHP32, relativecamera152.",
+              "Audited offline Recycle4/0CP0 reachability bypass only; no HP/contact/position/phase/outcome writes by observer. No NET attempt after incompleteLOCAL.",
+              "Both graceful owned exits0, existing private cards unchanged, fixture-tainted recording/capture/replay strictly refused. Completed F15 evidence and original HUD harness untouched."
+            ],
+            "bypasses": [
+              "Audited initial offline Recycle4/0CP0 only."
+            ]
+          }
+        ],
+        "limitations": "Native Ride Armor mounted-death counterpart source-identified. Two LOCAL prerequisite attempts retained: wrongLeft hits ledge; correctedRight reaches2097/rightcontact1 but on-foot primaryhurt/state guard stops before actualcrush. No fatal/finiteFX/survivor result; NET notattempted. Both cleanownedexit0/cards/strictfixture refusals pass. Park until actualsafe camera-edge pinch prerequisite is established."
       }
     },
     {
