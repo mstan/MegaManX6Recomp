@@ -1,0 +1,1101 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F20"
+  ],
+  "result": "passed",
+  "candidate": "8bd70613269e196c2ae52ccc14019bbb634e7dd8",
+  "frozen_row_sha256": {
+    "F20": "ebf14caefbab340117d04413160759418a014578cf6a65603b306e0d27296ca0"
+  },
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\paired-arrival-input-flush-v88-final-binding-root-v1.json",
+    "binding_sha256": "7f1de8fe9b83759188d183011ea754b4ff2c56928d88785adf743a28c1d3f61a",
+    "image_sha256": "55fd57a690e24820346c33852ace7d1d5116307f99b203c2960e920898c2a7b2",
+    "manifest_sha256": "d0d9bd1cf523a21af628a6efbce1663b215beefef93ea3253ec85d9023510f69",
+    "provenance_sha256": "a25f01d21769967ed9a1dd92d7bd4bcfcbb8efe60081bd8a75e5844450dd232b",
+    "provenance_path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v88-paired-arrival-input-flush-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "8bd70613269e196c2ae52ccc14019bbb634e7dd8",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v36",
+    "host_revision": 19
+  },
+  "integrated_fixes": [
+    "c216216",
+    "ed5c1c4",
+    "aa2f0ab"
+  ],
+  "identical_native_source": [
+    {
+      "relative": "CMakeLists.txt",
+      "sha256": "2cb06ed2c3dec1ed5acb31a66a359eb876e730d039b110f2a4e6e6ab7be5f37c"
+    },
+    {
+      "relative": "docs/COOP_HOST_LAB_CONTRACT.json",
+      "sha256": "5e55ab226969d9c0a2a1ae8ae941492354efc956568eb3838eb9eb5f1dbee784"
+    },
+    {
+      "relative": "src/mods/mmx6_coop_host_lab_contract.h",
+      "sha256": "6f265e7a5384cc67fd57d03ee4df4d60b08d909deb50fcceef7ae584afd03b86"
+    },
+    {
+      "relative": "src/mods/mmx6_coop_plugin.c",
+      "sha256": "1354028f78195bad097f20b79571e021d0f3ec6cbf91bd6f6e29af9b2105d24c"
+    },
+    {
+      "relative": "src/mods/mmx6_coop_snapshot.inc",
+      "sha256": "51ab5976acaad2e8c2fe05a0932c918f9aebbb7e47e3a55b850a0a6168d401d3"
+    },
+    {
+      "relative": "tests/test_mmx6_coop_host_lab.c",
+      "sha256": "fa2065d0bcbdfaddcaf5f3001bb76fcc4af32af89f0e143ccf20f9df8a60c679"
+    },
+    {
+      "relative": "tests/test_mmx6_coop_private_effects.c",
+      "sha256": "e7b3fe9032ef7104a1ef9212d3650a773c9d67d5a72f3d91dd54d986eea7ec33"
+    },
+    {
+      "relative": "tests/test_mmx6_coop_snapshot.c",
+      "sha256": "247d8b204c3a6bbfbc596e62ba968a09c803baa45693cac62efa46f4d52a2d47"
+    },
+    {
+      "relative": "tools/test_mmx6_coop_checkpoint.py",
+      "sha256": "d046c9beed6b0254d348624fd92ed0600efe792733d4dc509c0bd182e083d1eb"
+    }
+  ],
+  "modes": {
+    "local": {
+      "result": "passed",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-local-v88-root-v2\\qualification.json",
+        "sha256": "c8da71a4fdf888d2032161e1c3f6a9f80b1c65e6bf2fb41ea148d5367667cc0f",
+        "bytes": 2220460
+      },
+      "raw_parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-local-v88-root-v2\\qualification-parent-original.json",
+        "sha256": "d07605f658c0bd5b55fc87fd1d663710632a3dce00ba85fcab0a673a66ee6a3e",
+        "bytes": 2214451
+      },
+      "raw_parent_status": "agreed_fixture_native_intro_observations_complete_review_pending",
+      "checks": {
+        "original_source": true,
+        "negotiated_one_shot": true,
+        "both_native_arrivals_every_peer": true,
+        "overlapping_native_animations": true,
+        "actual_grounded_spaced_before_input": true,
+        "separate_native_controls": true,
+        "actual_held_host_input_gated": true,
+        "native_arrival_advances_while_input_gated": true
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "incoming_samples": [
+        [
+          64,
+          64
+        ]
+      ],
+      "concurrent_samples": [
+        64
+      ],
+      "grounded_interval": [
+        97,
+        99
+      ],
+      "controls": [
+        {
+          "seat": 0,
+          "before": 100,
+          "per_peer_accepted": [
+            103
+          ]
+        },
+        {
+          "seat": 1,
+          "before": 106,
+          "per_peer_accepted": [
+            108
+          ]
+        }
+      ],
+      "blocked_observations": [
+        27
+      ],
+      "source_guards": [
+        {
+          "address": "0x80035144",
+          "length": 304,
+          "sha256": "91b9828f0f48f99c656a94c2265bca160e21e88e28b98745c81ff46c7c4a575d"
+        },
+        {
+          "address": "0x8003d850",
+          "length": 88,
+          "sha256": "75c2be1b842225635daeed3106a879e7d51c3ae197f95aa31187dd3f23b85068"
+        },
+        {
+          "address": "0x8003d718",
+          "length": 148,
+          "sha256": "d2cc0660040709245080d3e570746ce3247ec4b9064a251b0a08ce42112e0e8e"
+        },
+        {
+          "address": "0x8003ccbc",
+          "length": 68,
+          "sha256": "537f24ae8672645fb7a217bcb99b0acadaa110d3dc01f84d33f24f53d3acad99"
+        },
+        {
+          "address": "0x80020c40",
+          "length": 80,
+          "sha256": "c3c91ec500b02d2ddfa0c6aa5a9389621363426768a958b079a50d9f852fe6a1"
+        },
+        {
+          "address": "0x80073acc",
+          "length": 4,
+          "sha256": "e3afd5b2d2695c4f0fc58c6d216fd3f764e7166481df5dfb05e2d42d2d11ee88"
+        },
+        {
+          "address": "0x80073d50",
+          "length": 8,
+          "sha256": "da8d8f948e652263fcb4c8a24cb000a09db8fff49beb902c2434ed598176e252"
+        }
+      ],
+      "bypasses": [
+        "Negotiated LAB original introCP2 initializer bypasses unrelated travel. Native arrival poses, descent, terrain contact and landing are not overridden."
+      ],
+      "reviewed_images": [
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-local-v88-root-v2\\ammo-hud\\intro-admission\\peer-0-native-paired-arrival.png",
+          "sha256": "babd52d947b8173af6414939cb3fe381222b49eecdffd04dbe0bfa0eebc50b6f",
+          "bytes": 2074543,
+          "peer": 0,
+          "label": "native-paired-arrival",
+          "sample": 64,
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-local-v88-root-v2\\ammo-hud\\intro-admission\\peer-0-native-both-grounded-before-controls.png",
+          "sha256": "cb441f97a89a1cb4521a463c8c743ca4ca73e7c60cebc2dc9773def6f182a540",
+          "bytes": 2074543,
+          "peer": 0,
+          "label": "native-both-grounded-before-controls",
+          "sample": 99,
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-local-v88-root-v2\\ammo-hud\\intro-admission\\peer-0-native-grounded-after-separate-controls.png",
+          "sha256": "21f49f1e976fc0b678b622c40f0b49e3e43e543100bf29ba3158de53b598df8f",
+          "bytes": 2074543,
+          "peer": 0,
+          "label": "native-grounded-after-separate-controls",
+          "sample": 113,
+          "root_reviewed": true
+        }
+      ],
+      "owned_cleanup": [
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      ],
+      "source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-local-v88-root-v2\\F20-executing-source-pins.json",
+        "sha256": "df1b67bb7c10b710a0a9bc8a95a7626e66dd123ca15698aad23186a675995101",
+        "bytes": 2429
+      }
+    },
+    "netplay": {
+      "result": "passed",
+      "qualification": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v4\\qualification.json",
+        "sha256": "3179b9b414915a6f63da08bc8e684c59b6c63f8b04d0b3bfbff5686da3a05e1d",
+        "bytes": 3793311
+      },
+      "raw_parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v4\\qualification-parent-original.json",
+        "sha256": "27c1457aed805df39bdbb7f095b117623729f96cc601812ad38b4c9109de2f6b",
+        "bytes": 3782630
+      },
+      "raw_parent_status": "failed",
+      "checks": {
+        "original_source": true,
+        "negotiated_one_shot": true,
+        "both_native_arrivals_every_peer": true,
+        "overlapping_native_animations": true,
+        "actual_grounded_spaced_before_input": true,
+        "separate_native_controls": true,
+        "actual_held_host_input_gated": true,
+        "native_arrival_advances_while_input_gated": true
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": false,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": false
+      },
+      "incoming_samples": [
+        [
+          50,
+          50
+        ],
+        [
+          50,
+          50
+        ]
+      ],
+      "concurrent_samples": [
+        50,
+        50
+      ],
+      "grounded_interval": [
+        70,
+        71
+      ],
+      "controls": [
+        {
+          "seat": 0,
+          "before": 72,
+          "per_peer_accepted": [
+            75,
+            75
+          ]
+        },
+        {
+          "seat": 1,
+          "before": 77,
+          "per_peer_accepted": [
+            79,
+            79
+          ]
+        }
+      ],
+      "blocked_observations": [
+        16,
+        16
+      ],
+      "source_guards": [
+        {
+          "address": "0x80035144",
+          "length": 304,
+          "sha256": "91b9828f0f48f99c656a94c2265bca160e21e88e28b98745c81ff46c7c4a575d"
+        },
+        {
+          "address": "0x8003d850",
+          "length": 88,
+          "sha256": "75c2be1b842225635daeed3106a879e7d51c3ae197f95aa31187dd3f23b85068"
+        },
+        {
+          "address": "0x8003d718",
+          "length": 148,
+          "sha256": "d2cc0660040709245080d3e570746ce3247ec4b9064a251b0a08ce42112e0e8e"
+        },
+        {
+          "address": "0x8003ccbc",
+          "length": 68,
+          "sha256": "537f24ae8672645fb7a217bcb99b0acadaa110d3dc01f84d33f24f53d3acad99"
+        },
+        {
+          "address": "0x80017a04",
+          "length": 68,
+          "sha256": "e947d51c1b65d627545acd99d25668520421497fc1f9865d22ef3b78267b6a43"
+        },
+        {
+          "address": "0x80020c40",
+          "length": 80,
+          "sha256": "c3c91ec500b02d2ddfa0c6aa5a9389621363426768a958b079a50d9f852fe6a1"
+        },
+        {
+          "address": "0x80073acc",
+          "length": 4,
+          "sha256": "e3afd5b2d2695c4f0fc58c6d216fd3f764e7166481df5dfb05e2d42d2d11ee88"
+        },
+        {
+          "address": "0x80073d50",
+          "length": 8,
+          "sha256": "da8d8f948e652263fcb4c8a24cb000a09db8fff49beb902c2434ed598176e252"
+        }
+      ],
+      "bypasses": [
+        "Negotiated LAB original introCP2 initializer bypasses unrelated travel. Native arrival poses, descent, terrain contact and landing are not overridden."
+      ],
+      "reviewed_images": [
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v4\\intro-admission\\peer-0-native-paired-arrival.png",
+          "sha256": "639b3f2101a3333c69a0051ba1b4b47ec47ab7b0108dfc94f8524069bb0ae404",
+          "bytes": 2074543,
+          "peer": 0,
+          "label": "native-paired-arrival",
+          "sample": 50,
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v4\\intro-admission\\peer-1-native-paired-arrival.png",
+          "sha256": "2160bf4c0d43e59c9a245fb34ecaa79e38546866f38f105320fcb0e8159de116",
+          "bytes": 2074543,
+          "peer": 1,
+          "label": "native-paired-arrival",
+          "sample": 50,
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v4\\intro-admission\\peer-0-native-both-grounded-before-controls.png",
+          "sha256": "2394988e71aaa5dc6d8703de32ed7d7c36afd4a845d06a47f3854197eff01b03",
+          "bytes": 2074543,
+          "peer": 0,
+          "label": "native-both-grounded-before-controls",
+          "sample": 71,
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v4\\intro-admission\\peer-1-native-both-grounded-before-controls.png",
+          "sha256": "2394988e71aaa5dc6d8703de32ed7d7c36afd4a845d06a47f3854197eff01b03",
+          "bytes": 2074543,
+          "peer": 1,
+          "label": "native-both-grounded-before-controls",
+          "sample": 71,
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v4\\intro-admission\\peer-0-native-grounded-after-separate-controls.png",
+          "sha256": "1d7451c0aad26756365937af0a3ceb98cfd376002f51353650e69705b4d5077a",
+          "bytes": 2074543,
+          "peer": 0,
+          "label": "native-grounded-after-separate-controls",
+          "sample": 82,
+          "root_reviewed": true
+        },
+        {
+          "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v4\\intro-admission\\peer-1-native-grounded-after-separate-controls.png",
+          "sha256": "7ad8dd5ae162e4264704e5cb85f84b00581dff8f1b62ef2592b7558341f5ed9b",
+          "bytes": 2074543,
+          "peer": 1,
+          "label": "native-grounded-after-separate-controls",
+          "sample": 82,
+          "root_reviewed": true
+        }
+      ],
+      "owned_cleanup": [
+        {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        },
+        {
+          "shutdown": "owned_popen_terminated",
+          "exit_code": 1
+        }
+      ],
+      "source_pins": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v4\\F20-executing-source-pins.json",
+        "sha256": "abf8bdc6fac3a09404d858dccb3acb3a5b5c21be61bc06f979e28008a26b72ea",
+        "bytes": 2433
+      }
+    }
+  },
+  "retained_NET_CRC_cleanup_review": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-v88-NET-completed-component-CRC-cleanup-review-worker-v1.json",
+    "sha256": "cd261e4324dc95a7a7ccda2dae92866226ad7c34bfcf46ad9de78d25fc586032",
+    "bytes": 27023
+  },
+  "resolved_CRC": [
+    {
+      "simulation_tick": 0,
+      "core": "33cf7d09",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 32,
+      "core": "341dcf7a",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 64,
+      "core": "7037fa7a",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 96,
+      "core": "036ff512",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 128,
+      "core": "5deadad2",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 160,
+      "core": "d0f7eaa0",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 192,
+      "core": "05576444",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 224,
+      "core": "721b7a11",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 256,
+      "core": "257d8942",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 288,
+      "core": "3188fa03",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 320,
+      "core": "910b268b",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 352,
+      "core": "13b61371",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 512,
+      "core": "7185d4a1",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 544,
+      "core": "738c8dc1",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 576,
+      "core": "8242e10e",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 608,
+      "core": "049a15cf",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 640,
+      "core": "9d593bbb",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 672,
+      "core": "3f4adede",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 704,
+      "core": "d4c8da17",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 736,
+      "core": "b9b6af50",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 768,
+      "core": "695e2067",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 800,
+      "core": "016100f1",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 832,
+      "core": "a1e86f45",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 864,
+      "core": "1e984d09",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 896,
+      "core": "2d768a6b",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 928,
+      "core": "6d3d9e67",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 960,
+      "core": "a975a86f",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 992,
+      "core": "2c35aa38",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 1024,
+      "core": "4a4559d3",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 1056,
+      "core": "3caca3d4",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 1088,
+      "core": "c75c6f33",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 1120,
+      "core": "d888b840",
+      "mod": "e6048582"
+    },
+    {
+      "simulation_tick": 1152,
+      "core": "5fd2bf4a",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1184,
+      "core": "cba02d78",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1216,
+      "core": "b7fb974c",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1248,
+      "core": "b23b9d83",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1280,
+      "core": "5482eb64",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1312,
+      "core": "6e0f31d9",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1344,
+      "core": "121db5f8",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1376,
+      "core": "cc0edfce",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1408,
+      "core": "f68c0c90",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1440,
+      "core": "b3558539",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1472,
+      "core": "f27b70ea",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1504,
+      "core": "ebf91d8e",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1536,
+      "core": "90fbe8d0",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1568,
+      "core": "f9423354",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1600,
+      "core": "79ade439",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1632,
+      "core": "bf4ad25e",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1664,
+      "core": "0e731aac",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1696,
+      "core": "2c629cbc",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1728,
+      "core": "e5dc5a92",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1760,
+      "core": "54b5d2c4",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1792,
+      "core": "6b768258",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1824,
+      "core": "deb551db",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1856,
+      "core": "49523aee",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1888,
+      "core": "329a7fd2",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1920,
+      "core": "8f713210",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1952,
+      "core": "213c2114",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 1984,
+      "core": "4bbee0dd",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2016,
+      "core": "8ecdee3b",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2048,
+      "core": "f6ca8d8b",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2080,
+      "core": "bf14f9e8",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2112,
+      "core": "662c1fd4",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2144,
+      "core": "8b720ba0",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2176,
+      "core": "74921a41",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2208,
+      "core": "4622f7fc",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2240,
+      "core": "89a61386",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2272,
+      "core": "660293e0",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2304,
+      "core": "a6f5de75",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2336,
+      "core": "48089c35",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2368,
+      "core": "8b4765da",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2400,
+      "core": "bd28114f",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2432,
+      "core": "7b12fe42",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2464,
+      "core": "8ae557dc",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2496,
+      "core": "f2502790",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2528,
+      "core": "3de58858",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2560,
+      "core": "52672452",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2592,
+      "core": "eb7e8cc8",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2624,
+      "core": "7f37be60",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2656,
+      "core": "7134054a",
+      "mod": "a01ebb4d"
+    },
+    {
+      "simulation_tick": 2688,
+      "core": "912acfd5",
+      "mod": "2f2abdb8"
+    },
+    {
+      "simulation_tick": 2720,
+      "core": "294fe264",
+      "mod": "0ff1757c"
+    },
+    {
+      "simulation_tick": 2752,
+      "core": "0e5bf9be",
+      "mod": "9e42d220"
+    },
+    {
+      "simulation_tick": 2784,
+      "core": "8288a397",
+      "mod": "8316471a"
+    },
+    {
+      "simulation_tick": 2816,
+      "core": "bf093bfc",
+      "mod": "d2c64c95"
+    },
+    {
+      "simulation_tick": 2848,
+      "core": "3b733f30",
+      "mod": "3c029807"
+    },
+    {
+      "simulation_tick": 2880,
+      "core": "337f6a34",
+      "mod": "6d7da479"
+    },
+    {
+      "simulation_tick": 2912,
+      "core": "499f32ab",
+      "mod": "6cf3f647"
+    },
+    {
+      "simulation_tick": 2944,
+      "core": "16f1e208",
+      "mod": "3fbde9d1"
+    },
+    {
+      "simulation_tick": 2976,
+      "core": "94b8a251",
+      "mod": "451d37b1"
+    },
+    {
+      "simulation_tick": 3008,
+      "core": "d11697db",
+      "mod": "8c1d8d0f"
+    },
+    {
+      "simulation_tick": 3040,
+      "core": "7b3bee43",
+      "mod": "534e2d6f"
+    },
+    {
+      "simulation_tick": 3072,
+      "core": "a402d3aa",
+      "mod": "1efa2273"
+    },
+    {
+      "simulation_tick": 3104,
+      "core": "9b109b4c",
+      "mod": "68a7a28f"
+    },
+    {
+      "simulation_tick": 3136,
+      "core": "3b9835bc",
+      "mod": "0b8014f0"
+    },
+    {
+      "simulation_tick": 3168,
+      "core": "73fc72b3",
+      "mod": "7ab8235b"
+    },
+    {
+      "simulation_tick": 3200,
+      "core": "4eea03e0",
+      "mod": "abef6389"
+    },
+    {
+      "simulation_tick": 3232,
+      "core": "9dd0b1ce",
+      "mod": "5c111833"
+    },
+    {
+      "simulation_tick": 3264,
+      "core": "7ac32e29",
+      "mod": "2d714293"
+    },
+    {
+      "simulation_tick": 3296,
+      "core": "e9274a77",
+      "mod": "0b2e04a1"
+    },
+    {
+      "simulation_tick": 3328,
+      "core": "0d5d1f5e",
+      "mod": "ee105201"
+    },
+    {
+      "simulation_tick": 3360,
+      "core": "357d59df",
+      "mod": "0a109d5d"
+    },
+    {
+      "simulation_tick": 3392,
+      "core": "92293435",
+      "mod": "7b2a3a1b"
+    },
+    {
+      "simulation_tick": 3424,
+      "core": "7ee522ef",
+      "mod": "a19f4779"
+    },
+    {
+      "simulation_tick": 3456,
+      "core": "2c82778b",
+      "mod": "362450c9"
+    },
+    {
+      "simulation_tick": 3488,
+      "core": "b6f7e435",
+      "mod": "0a5923a3"
+    },
+    {
+      "simulation_tick": 3520,
+      "core": "28828721",
+      "mod": "9027daa3"
+    },
+    {
+      "simulation_tick": 3552,
+      "core": "8f119aab",
+      "mod": "03aae611"
+    },
+    {
+      "simulation_tick": 3584,
+      "core": "43ef4e7e",
+      "mod": "3090f22d"
+    },
+    {
+      "simulation_tick": 3616,
+      "core": "7568ac82",
+      "mod": "0b8014f0"
+    },
+    {
+      "simulation_tick": 3648,
+      "core": "17d0c1b3",
+      "mod": "7ab8235b"
+    },
+    {
+      "simulation_tick": 3680,
+      "core": "e1334a33",
+      "mod": "abef6389"
+    },
+    {
+      "simulation_tick": 3712,
+      "core": "95bc4d33",
+      "mod": "c549b7d0"
+    },
+    {
+      "simulation_tick": 3744,
+      "core": "c8bd1f18",
+      "mod": "00963a9a"
+    },
+    {
+      "simulation_tick": 3776,
+      "core": "d69afa5c",
+      "mod": "00963a9a"
+    },
+    {
+      "simulation_tick": 3808,
+      "core": "e7e9a348",
+      "mod": "00963a9a"
+    },
+    {
+      "simulation_tick": 3840,
+      "core": "f575b765",
+      "mod": "00963a9a"
+    },
+    {
+      "simulation_tick": 3872,
+      "core": "cb820036",
+      "mod": "00963a9a"
+    },
+    {
+      "simulation_tick": 3904,
+      "core": "671e1729",
+      "mod": "516176a4"
+    },
+    {
+      "simulation_tick": 3936,
+      "core": "8f6619d5",
+      "mod": "94bda577"
+    },
+    {
+      "simulation_tick": 3968,
+      "core": "b061a4b6",
+      "mod": "4902246f"
+    },
+    {
+      "simulation_tick": 4000,
+      "core": "d7d0ca41",
+      "mod": "57db7a51"
+    },
+    {
+      "simulation_tick": 4032,
+      "core": "7e21122d",
+      "mod": "8cfda32e"
+    },
+    {
+      "simulation_tick": 4064,
+      "core": "efb6bbc9",
+      "mod": "1b17b489"
+    }
+  ],
+  "NET_cleanup_failure": [
+    {
+      "peer": 0,
+      "owned_pid": 71688,
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0,
+      "quit_protocol_error": null,
+      "input_release_errors": null,
+      "natural_exit_timeout": null,
+      "last_runtime_report": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v4\\peer-0\\psx_last_run_report.json",
+        "sha256": "a2fd6d752982e86ccb3f8e0c5a3478d1f68a2f3f2d188df15df0160bfcb460f4",
+        "reason": "atexit",
+        "exit_origin": "tcp_quit",
+        "frame": 4074
+      }
+    },
+    {
+      "peer": 1,
+      "owned_pid": 80156,
+      "shutdown": "owned_popen_terminated",
+      "exit_code": 1,
+      "quit_protocol_error": null,
+      "input_release_errors": null,
+      "natural_exit_timeout": {
+        "type": "TimeoutExpired",
+        "message": "Command '['F:\\\\Temp\\\\Codex\\\\psxrecomp\\\\x6-parity\\\\F20-F143-paired-arrival-writer-netplay-v88-root-v4\\\\peer-1\\\\mmx6-runtime.exe', '--game', 'F:\\\\Temp\\\\Codex\\\\psxrecomp\\\\x6-parity\\\\F20-F143-paired-arrival-writer-netplay-v88-root-v4\\\\peer-1\\\\game.toml', '--bios', 'F:\\\\Temp\\\\Codex\\\\psxrecomp\\\\x6-parity\\\\F20-F143-paired-arrival-writer-netplay-v88-root-v4\\\\peer-1\\\\bios\\\\openbios.bin', '--disc', 'G:\\\\Temp\\\\Codex\\\\psxrecomp\\\\x6-parity\\\\disc\\\\Mega Man X6 (USA) (v1.1).cue', '--memcard-dir', 'F:\\\\Temp\\\\Codex\\\\psxrecomp\\\\x6-parity\\\\F20-F143-paired-arrival-writer-netplay-v88-root-v4\\\\peer-1\\\\saves', '--no-launcher', '--hidden-window', '--renderer', 'opengl', '--netplay', '--net-slot', '1', '--net-input-player', '0', '--net-bind', '127.0.0.1:33722', '--net-peer', '127.0.0.1:33721', '--net-delay', '3', '--net-session-id', '2026102802', '--debug-port', '28722']' timed out after 5 seconds"
+      },
+      "last_runtime_report": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-F143-paired-arrival-writer-netplay-v88-root-v4\\peer-1\\psx_last_run_report.json",
+        "sha256": "828d63b7124bca21cb8f5b2a5fc269c36a19a740d235e7bd79e757ec1d57f081",
+        "reason": "atexit",
+        "exit_origin": "tcp_quit",
+        "frame": 4077
+      }
+    }
+  ],
+  "compiled_gates": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v88-paired-arrival-input-flush-focused-root-v3.log",
+      "sha256": "12f3f56477afe3fc1d7931855ce5b965dc407a036f2674d50cbd396e87c93be6",
+      "bytes": 6446
+    }
+  ],
+  "observer_correction": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F20-NET-animation-progress-correction-v88-worker-v1.json",
+    "sha256": "d9a164b3a81827809673116ca3d297603a5305aaeb7d0e9ce5f307e0cbc8c596",
+    "bytes": 4466
+  },
+  "limits": [
+    "Frozen F20 native stage/section-arrival counterpart, qualified on one original introCP2 arrival with default FalconX/P1 and Zero/P2. No inverse roster, every authored spawn, portal, campaign, initial scripted HELP sequence or all-scenes claim.",
+    "The negotiated one-shot original checkpoint initializer bypasses travel only. Native beam/action0, original animation controller, terrain collision, grounded standing boxes, spacing and later controls are observed without forcing their poses, Y, ground or success flags. Held outward intent is a real acknowledged host input; it is neutralized after legitimate release, then separate owned control probes run.",
+    "Both actual beams overlap on every physical process; both accepted input publications remain neutral during JOINING while native animation advances. Both original feet resolve to416 with nonoverlapping standing boxes and at least4 native-world updates before the separate movement probes.",
+    "LOCAL raw parent completes. NET actual F20 component completes all8 checks and both own-seat movement probes, but the root wrapper then raises KeyError matched because this adapter does not expose that callback. Its raw parent stays failed and its broad callback-completed flag stays false. This receipt admits only the already completed frozen F20 mechanic.",
+    "NET retained logs contain124 equal resolved core/nonzero-mod CRC samples0..4064 strictly below actual common watermark4066, including13 beyond the last pre-callback watermark3648. The helper did not sample an SDK simulation tick at final controls; publication/native clocks differ. No specifically post-final-controls CRC window is asserted.",
+    "NET host exits gracefully0. Guest reaches SDK atexit/tcp_quit at frame4077 without fatal/watchdog, but the parent wait5s expires and terminates it with exit1. That OS cleanup failure remains unresolved and receives no clean-exit/full-parent credit. Native cards, agreed profile19 and explicit strict fixture-taint refusals remain intact.",
+    "The earlier NETv3 observer false refusal is preserved: its Y/CE/action key missed original animation34/44..47 progress while feet were stationary. The retry changes observation only, source-guards the original controller and retains all grounding/input/control gates. No raw failure is rewritten.",
+    "Nine composed images were reviewed acrossLOCAL and bothNET peers. Duplicate READY text, background corruption and HUD overlap remain visible and are not claimed fixed. F20 tests native character animations/grounding/spacing; single READY, broader artwork and presentation comparisons receive no credit.",
+    "Current-build fixtures are explicitly tainted and strictly refused as clean replay. No clean travel/replay, human controller, portability or native3330 audit claim. All22 focused compiled gates pass; tested candidate identities remain exact."
+  ],
+  "executed_review_script": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-F20-native-paired-arrival-v88-root-v1.py",
+    "sha256": "db92ab9055fa22d2f897c7f97b5ea056b9e6f4a763ea1ed7eb304b7986a6ff4f",
+    "bytes": 12819
+  }
+}

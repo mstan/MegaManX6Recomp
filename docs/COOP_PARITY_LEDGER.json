@@ -6880,23 +6880,107 @@
       "x6": {
         "workstream": "lifecycle",
         "mapping_state": "identified_subsystem",
-        "analogue": "Paired X6 native arrivals",
-        "bounded_check": "Observe new-stage, checkpoint and supported portal arrivals; validate native beam animations, safe spacing and ground collision before control.",
+        "analogue": "Original X6 paired action0 beam arrivals and native grounded control release",
+        "bounded_check": "Observe both original character arrivals concurrently at a native section checkpoint; hold actual host directions while both decoded inputs stay gated, verify both original feet/standing boxes and safe spacing through native settling, then separate own-seat movement in local and netplay.",
         "baseline_anchors": [
-          "src/mods/mmx6_coop_lifecycle.c:mmx6_coop_fatal",
-          "src/mods/mmx6_coop_plugin.c:begin_join"
+          "src/mods/mmx6_coop_plugin.c:begin_join",
+          "src/mods/mmx6_coop_plugin.c:paired_arrival",
+          "src/mods/mmx6_coop_snapshot.inc"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "8bd70613269e196c2ae52ccc14019bbb634e7dd8",
+            "build_identity": {
+              "executable_sha256": "55fd57a690e24820346c33852ace7d1d5116307f99b203c2960e920898c2a7b2",
+              "compiled_manifest_sha256": "d0d9bd1cf523a21af628a6efbce1663b215beefef93ea3253ec85d9023510f69",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "Falcon X/P1 + Zero/P2",
+              "checkpoint": "original introCP2",
+              "contact_protection": "off",
+              "cameras": "unified",
+              "doors": "either",
+              "audio": "muted dummy"
+            },
+            "action": "Agreed original checkpoint initialization; native concurrent beams with actual held input gated, original terrain landing and safe standing spacing, then separate accepted own controls.",
+            "outcome": "All8 named F20 mechanics pass. NET wrapper callback and guest OS cleanup failures are preserved separately; no full parent or clean guest exit claim.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-lifecycle/manifest-bound-8bd7061-F20-paired-arrival-reviewed.json",
+                "sha256": "bc7143ba5f05f7aee96f337084bc625b6aadf94ef9c5517f7307154fab6bd7f5"
+              }
+            ],
+            "limits": [
+              "Frozen F20 native stage/section-arrival counterpart, qualified on one original introCP2 arrival with default FalconX/P1 and Zero/P2. No inverse roster, every authored spawn, portal, campaign, initial scripted HELP sequence or all-scenes claim.",
+              "The negotiated one-shot original checkpoint initializer bypasses travel only. Native beam/action0, original animation controller, terrain collision, grounded standing boxes, spacing and later controls are observed without forcing their poses, Y, ground or success flags. Held outward intent is a real acknowledged host input; it is neutralized after legitimate release, then separate owned control probes run.",
+              "Both actual beams overlap on every physical process; both accepted input publications remain neutral during JOINING while native animation advances. Both original feet resolve to416 with nonoverlapping standing boxes and at least4 native-world updates before the separate movement probes.",
+              "LOCAL raw parent completes. NET actual F20 component completes all8 checks and both own-seat movement probes, but the root wrapper then raises KeyError matched because this adapter does not expose that callback. Its raw parent stays failed and its broad callback-completed flag stays false. This receipt admits only the already completed frozen F20 mechanic.",
+              "NET retained logs contain124 equal resolved core/nonzero-mod CRC samples0..4064 strictly below actual common watermark4066, including13 beyond the last pre-callback watermark3648. The helper did not sample an SDK simulation tick at final controls; publication/native clocks differ. No specifically post-final-controls CRC window is asserted.",
+              "NET host exits gracefully0. Guest reaches SDK atexit/tcp_quit at frame4077 without fatal/watchdog, but the parent wait5s expires and terminates it with exit1. That OS cleanup failure remains unresolved and receives no clean-exit/full-parent credit. Native cards, agreed profile19 and explicit strict fixture-taint refusals remain intact.",
+              "The earlier NETv3 observer false refusal is preserved: its Y/CE/action key missed original animation34/44..47 progress while feet were stationary. The retry changes observation only, source-guards the original controller and retains all grounding/input/control gates. No raw failure is rewritten.",
+              "Nine composed images were reviewed acrossLOCAL and bothNET peers. Duplicate READY text, background corruption and HUD overlap remain visible and are not claimed fixed. F20 tests native character animations/grounding/spacing; single READY, broader artwork and presentation comparisons receive no credit.",
+              "Current-build fixtures are explicitly tainted and strictly refused as clean replay. No clean travel/replay, human controller, portability or native3330 audit claim. All22 focused compiled gates pass; tested candidate identities remain exact."
+            ],
+            "bypasses": [
+              "Negotiated LAB original introCP2 initializer bypasses unrelated travel. Native arrival poses, descent, terrain contact and landing are not overridden."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "8bd70613269e196c2ae52ccc14019bbb634e7dd8",
+            "build_identity": {
+              "executable_sha256": "55fd57a690e24820346c33852ace7d1d5116307f99b203c2960e920898c2a7b2",
+              "compiled_manifest_sha256": "d0d9bd1cf523a21af628a6efbce1663b215beefef93ea3253ec85d9023510f69",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "Falcon X/P1 + Zero/P2",
+              "checkpoint": "original introCP2",
+              "contact_protection": "off",
+              "cameras": "unified",
+              "doors": "either",
+              "audio": "muted dummy"
+            },
+            "action": "Agreed original checkpoint initialization; native concurrent beams with actual held input gated, original terrain landing and safe standing spacing, then separate accepted own controls.",
+            "outcome": "All8 named F20 mechanics pass. NET wrapper callback and guest OS cleanup failures are preserved separately; no full parent or clean guest exit claim.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-lifecycle/manifest-bound-8bd7061-F20-paired-arrival-reviewed.json",
+                "sha256": "bc7143ba5f05f7aee96f337084bc625b6aadf94ef9c5517f7307154fab6bd7f5"
+              }
+            ],
+            "limits": [
+              "Frozen F20 native stage/section-arrival counterpart, qualified on one original introCP2 arrival with default FalconX/P1 and Zero/P2. No inverse roster, every authored spawn, portal, campaign, initial scripted HELP sequence or all-scenes claim.",
+              "The negotiated one-shot original checkpoint initializer bypasses travel only. Native beam/action0, original animation controller, terrain collision, grounded standing boxes, spacing and later controls are observed without forcing their poses, Y, ground or success flags. Held outward intent is a real acknowledged host input; it is neutralized after legitimate release, then separate owned control probes run.",
+              "Both actual beams overlap on every physical process; both accepted input publications remain neutral during JOINING while native animation advances. Both original feet resolve to416 with nonoverlapping standing boxes and at least4 native-world updates before the separate movement probes.",
+              "LOCAL raw parent completes. NET actual F20 component completes all8 checks and both own-seat movement probes, but the root wrapper then raises KeyError matched because this adapter does not expose that callback. Its raw parent stays failed and its broad callback-completed flag stays false. This receipt admits only the already completed frozen F20 mechanic.",
+              "NET retained logs contain124 equal resolved core/nonzero-mod CRC samples0..4064 strictly below actual common watermark4066, including13 beyond the last pre-callback watermark3648. The helper did not sample an SDK simulation tick at final controls; publication/native clocks differ. No specifically post-final-controls CRC window is asserted.",
+              "NET host exits gracefully0. Guest reaches SDK atexit/tcp_quit at frame4077 without fatal/watchdog, but the parent wait5s expires and terminates it with exit1. That OS cleanup failure remains unresolved and receives no clean-exit/full-parent credit. Native cards, agreed profile19 and explicit strict fixture-taint refusals remain intact.",
+              "The earlier NETv3 observer false refusal is preserved: its Y/CE/action key missed original animation34/44..47 progress while feet were stationary. The retry changes observation only, source-guards the original controller and retains all grounding/input/control gates. No raw failure is rewritten.",
+              "Nine composed images were reviewed acrossLOCAL and bothNET peers. Duplicate READY text, background corruption and HUD overlap remain visible and are not claimed fixed. F20 tests native character animations/grounding/spacing; single READY, broader artwork and presentation comparisons receive no credit.",
+              "Current-build fixtures are explicitly tainted and strictly refused as clean replay. No clean travel/replay, human controller, portability or native3330 audit claim. All22 focused compiled gates pass; tested candidate identities remain exact."
+            ],
+            "bypasses": [
+              "Negotiated LAB original introCP2 initializer bypasses unrelated travel. Native arrival poses, descent, terrain contact and landing are not overridden."
+            ]
+          }
+        ],
+        "limitations": "Frozen F20 native stage/section-arrival counterpart, qualified on one original introCP2 arrival with default FalconX/P1 and Zero/P2. No inverse roster, every authored spawn, portal, campaign, initial scripted HELP sequence or all-scenes claim. The negotiated one-shot original checkpoint initializer bypasses travel only. Native beam/action0, original animation controller, terrain collision, grounded standing boxes, spacing and later controls are observed without forcing their poses, Y, ground or success flags. Held outward intent is a real acknowledged host input; it is neutralized after legitimate release, then separate owned control probes run. Both actual beams overlap on every physical process; both accepted input publications remain neutral during JOINING while native animation advances. Both original feet resolve to416 with nonoverlapping standing boxes and at least4 native-world updates before the separate movement probes. LOCAL raw parent completes. NET actual F20 component completes all8 checks and both own-seat movement probes, but the root wrapper then raises KeyError matched because this adapter does not expose that callback. Its raw parent stays failed and its broad callback-completed flag stays false. This receipt admits only the already completed frozen F20 mechanic. NET retained logs contain124 equal resolved core/nonzero-mod CRC samples0..4064 strictly below actual common watermark4066, including13 beyond the last pre-callback watermark3648. The helper did not sample an SDK simulation tick at final controls; publication/native clocks differ. No specifically post-final-controls CRC window is asserted. NET host exits gracefully0. Guest reaches SDK atexit/tcp_quit at frame4077 without fatal/watchdog, but the parent wait5s expires and terminates it with exit1. That OS cleanup failure remains unresolved and receives no clean-exit/full-parent credit. Native cards, agreed profile19 and explicit strict fixture-taint refusals remain intact. The earlier NETv3 observer false refusal is preserved: its Y/CE/action key missed original animation34/44..47 progress while feet were stationary. The retry changes observation only, source-guards the original controller and retains all grounding/input/control gates. No raw failure is rewritten. Nine composed images were reviewed acrossLOCAL and bothNET peers. Duplicate READY text, background corruption and HUD overlap remain visible and are not claimed fixed. F20 tests native character animations/grounding/spacing; single READY, broader artwork and presentation comparisons receive no credit. Current-build fixtures are explicitly tainted and strictly refused as clean replay. No clean travel/replay, human controller, portability or native3330 audit claim. All22 focused compiled gates pass; tested candidate identities remain exact."
       }
     },
     {
@@ -15909,7 +15993,7 @@
         "bounded_check": "Verify actual worker sparse-input wall-time visibility, ordered accepted prefix, explicit queue-full and I/O failure; observe ordinary current-build local/netplay N/C growth before close and validate final order and terminal status. Keep synchronous startup settings/card export separate.",
         "baseline_anchors": [
           "src/mods/mmx6_diagnostics.cpp:Capture::write",
-          "src/mods/mmx6_input_recording.cpp:Encoder",
+          "src/mods/mmx6_input_capture.hpp:Encoder",
           "tests/test_mmx6_input_capture.cpp"
         ],
         "status": "passed",
