@@ -18,6 +18,9 @@ static int32_t arrival_target;
 static uint8_t arrival_body[0x158];
 static unsigned weather_probe,weather_world_updates,weather_draws;
 static uint32_t weather_x,weather_y;
+static unsigned quake_probe,quake_camera_calls,quake_draws[2];
+static uint8_t quake_before[0x54],quake_after[0x54];
+static const uint8_t quake_fields[]={0x36,0x37,0x3A,0x3B,0x3C,0x3D,0x3E,0x3F,0x45,0x46};
 #define MMX6_TEST_NETPLAY_ACTIVE mmx6_view_sdk.online
 #define MMX6_TEST_DISPATCH_CALL view_native
 #define MMX6_TEST_PRIVATE_VIEW_GPU view_gpu
@@ -47,6 +50,21 @@ static int view_native(CPUState *cpu,uint32_t address,uint32_t ret) {
     if(address==VIEW_DRAW_OT) { cpu->gpr[2]=0xC0DE;return 1; }
     if(address==0x80066150u)return 1;
     if(address==0x8002927Cu || address==0x8002935Cu || address==0x800293CCu) {
+        if(quake_probe && address==0x8002927Cu) {
+            CHECK(private_draw && private_seat==1);
+            /* Native camera must receive the world's input, not its already
+             * decremented result. This explicit callee contract reproduces
+             * the observed 8->7 versus incorrect 7->6 regression. */
+            CHECK((psx_mod_read_byte(VIEW_CAMERA+0x34)&0x11)==(quake_before[0x34]&0x11));
+            CHECK((psx_mod_read_byte(VIEW_CAMERA+0x34)&~0x11u)==0x80u);
+            for(unsigned i=0;i<sizeof quake_fields;++i) {
+                unsigned at=quake_fields[i];CHECK(psx_mod_read_byte(VIEW_CAMERA+at)==quake_before[at]);
+                psx_mod_write_byte(VIEW_CAMERA+at,quake_after[at]);
+            }
+            psx_mod_write_byte(VIEW_CAMERA+0x34,quake_after[0x34]);
+            psx_mod_write_word(VIEW_CAMERA+12,le32(quake_after+12));
+            ++quake_camera_calls;
+        }
         if(arrival_probe) {
             CHECK(private_draw && private_seat==1);
             CHECK(psx_mod_read_word(PLAYER+12)==(uint32_t)arrival_target);
@@ -56,6 +74,13 @@ static int view_native(CPUState *cpu,uint32_t address,uint32_t ret) {
         return 1;
     }
     CHECK(address==0x80025FB0u && private_draw);
+    if(quake_probe) {
+        CHECK(psx_mod_read_word(VIEW_CAMERA+12)==le32(quake_after+12));
+        CHECK(psx_mod_read_byte(VIEW_CAMERA+0x34)==quake_after[0x34]);
+        for(unsigned i=0;i<sizeof quake_fields;++i)
+            CHECK(psx_mod_read_byte(VIEW_CAMERA+quake_fields[i])==quake_after[quake_fields[i]]);
+        ++quake_draws[private_seat];
+    }
     if(weather_probe) {
         CHECK(psx_mod_read_word(VIEW_CAMERA+0x54+8)==weather_x);
         CHECK(psx_mod_read_word(VIEW_CAMERA+0x54+12)==weather_y);
@@ -85,6 +110,8 @@ static void prepare_view(CPUState *cpu,int online,int split) {
     view_native_calls=view_gpu_words=view_callback_calls=view_refuse=view_abort=0;
     arrival_probe=arrival_camera_calls=0;
     weather_probe=weather_world_updates=weather_draws=0;
+    quake_probe=quake_camera_calls=quake_draws[0]=quake_draws[1]=0;
+    view_quake_valid=0;
     inside=player_call=stage_call=zero_world=world_render=hud_call=ride_call=pickup_call=solid_call=0;
     private_draw=private_seat=view_call=zero_projected=0;local_split=split;independent_views=1;
     if(online && split)CHECK(psx_mod_set_render_pass_netplay(1));
@@ -336,6 +363,47 @@ static void native_menu_camera_history(int online,int split) {
     capture(VIEW_CAMERA,canonical,sizeof canonical);
     CHECK(!memcmp(canonical,view_cameras[1],sizeof canonical)); /* unexplained gap still resets */
 }
+static void native_quake_inputs(int online,int split) {
+    for(unsigned retiring=0;retiring<2;++retiring) {
+        CPUState cpu;prepare_view(&cpu,online,split);
+        frame_count=71;view_frame=70;memset(quake_before,0,sizeof quake_before);
+        quake_before[0x34]=0x91;quake_before[0x36]=9;quake_before[0x37]=retiring?1:8;
+        quake_before[0x3A]=1;quake_before[0x3B]=0;quake_before[0x3C]=2;quake_before[0x3D]=2;
+        quake_before[0x3E]=0x82;quake_before[0x3F]=0x84;quake_before[0x45]=2;quake_before[0x46]=4;
+        put32(quake_before+12,704u*65536);
+        project(VIEW_CAMERA,quake_before,sizeof quake_before);
+        CPUState original_cpu=cpu;uint32_t original_digest=state_digest();
+        independent_camera_begin(&cpu,0x8002927Cu);
+        CHECK(view_quake_valid && view_quake_frame==71 && !memcmp(&cpu,&original_cpu,sizeof cpu));
+        CHECK(!memcmp(view_quake_input,quake_before,sizeof quake_before) && state_digest()==original_digest);
+        memcpy(quake_after,quake_before,sizeof quake_after);
+        quake_after[0x36]=8;quake_after[0x37]=retiring?0:7;
+        quake_after[0x34]=retiring?0x90:0x91;
+        quake_after[0x3A]=0;quake_after[0x3B]=2;quake_after[0x3F]=4;
+        put32(quake_after+12,(retiring?704u:708u)*65536);
+        /* One canonical original camera update has already completed before
+         * original25FB0. Its result is authoritative and must not be edited. */
+        project(VIEW_CAMERA,quake_after,sizeof quake_after);
+        psx_mod_write_byte(VIEW_CAMERA+0x44,1);
+        independent_world_begin();CHECK(view_pending && view_valid && view_frame==71);
+        uint8_t canonical[0xFC];capture(VIEW_CAMERA,canonical,sizeof canonical);
+        PrivateViewContext before;memset(&before,0,sizeof before);private_context_save(&before);
+        quake_probe=1;CHECK(independent_present(&cpu,VIEW_DRAW_OT));quake_probe=0;
+        context_equal(&before);uint8_t actual[sizeof canonical];capture(VIEW_CAMERA,actual,sizeof actual);
+        CHECK(!memcmp(canonical,actual,sizeof canonical));
+        CHECK(quake_camera_calls==1 && quake_draws[1]==1 && quake_draws[0]==(unsigned)split);
+        CHECK(le32(view_cameras[1]+12)==le32(quake_after+12));
+        CHECK(view_cameras[1][0x37]==quake_after[0x37] && view_cameras[1][0x34]==quake_after[0x34]);
+        /* A nested draw entry cannot overwrite the canonical pre-update
+         * witness. Stale or missing active inputs fail rather than tick twice. */
+        uint8_t saved[sizeof view_quake_input];memcpy(saved,view_quake_input,sizeof saved);
+        private_draw=1;independent_camera_begin(&cpu,0x8002927Cu);private_draw=0;
+        CHECK(!memcmp(saved,view_quake_input,sizeof saved));
+        ++view_frame;CHECK(!independent_quake_input());
+        view_quake_valid=0;view_cameras[0][0x34]=0;
+        CHECK(independent_quake_input());
+    }
+}
 static void native_shared_weather_frames(int online,int split) {
     CPUState cpu;prepare_view(&cpu,online,split);
     psx_mod_write_byte(PLAY+12,6);psx_mod_write_byte(PLAY+13,0);
@@ -386,6 +454,7 @@ int main(void) {
     native_nova_views(0,1);native_nova_views(1,0);
     native_menu_camera_history(0,1);native_menu_camera_history(1,0);
     native_shared_weather_frames(0,1);native_shared_weather_frames(1,0);
+    native_quake_inputs(0,1);native_quake_inputs(1,0);native_quake_inputs(1,1);
     presentation_restore(0,1,0,0);presentation_restore(0,1,1,0);presentation_restore(0,1,0,1);
     presentation_restore(1,0,0,0);presentation_restore(1,0,1,0);presentation_restore(1,0,0,1);
     presentation_restore(1,1,0,0);presentation_restore(1,1,1,0);presentation_restore(1,1,0,1);

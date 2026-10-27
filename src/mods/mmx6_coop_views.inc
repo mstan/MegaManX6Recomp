@@ -15,7 +15,36 @@ static uint32_t view_frame, view_buffer, view_ot[32];
 static unsigned view_valid, view_pending;
 static unsigned view_menu_history;
 static uint8_t view_menu_stage,view_menu_section,view_menu_checkpoint;
-static void independent_invalidate(void) { view_valid=view_pending=view_menu_history=0; }
+static uint8_t view_quake_input[0x54];
+static uint32_t view_quake_frame;
+static unsigned view_quake_valid;
+static void independent_invalidate(void) { view_valid=view_pending=view_menu_history=view_quake_valid=0; }
+
+/* The canonical native camera advances the shared quake before world drawing.
+ * Give the other native camera that same input, rather than a second tick of
+ * the canonical result. This cache is draw-only, never serialized or digested. */
+static void independent_camera_begin(CPUState *cpu,uint32_t address) {
+    (void)cpu;(void)address;
+    if(private_draw)return;
+    view_quake_valid=0;
+    if(!independent_views || !enrolled || failed || inside || zero_world ||
+       psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1))return;
+    capture(VIEW_CAMERA,view_quake_input,sizeof view_quake_input);
+    view_quake_frame=frame_count;view_quake_valid=1;
+}
+static int independent_quake_input(void) {
+    /* All remaining authored camera fields and per-hero position history
+     * still come from independent_world_begin. Original 29A6C/29AFC own these
+     * two timers, step counters/steps, phases and amplitudes only. */
+    static const uint8_t offsets[]={0x36,0x37,0x3A,0x3B,0x3C,0x3D,0x3E,0x3F,0x45,0x46};
+    if(!view_quake_valid || view_quake_frame!=view_frame)
+        return !(view_cameras[0][0x34]&0x11u);
+    psx_mod_write_byte(VIEW_CAMERA+0x34,(psx_mod_read_byte(VIEW_CAMERA+0x34)&~0x11u) |
+        (view_quake_input[0x34]&0x11u));
+    for(unsigned i=0;i<sizeof offsets;++i)
+        psx_mod_write_byte(VIEW_CAMERA+offsets[i],view_quake_input[offsets[i]]);
+    return 1;
+}
 
 #ifdef MMX6_COOP_VIEW_ENTRY_CONTEXT
 enum { VIEW_CONTEXT_PROVIDER=0x36564350u }; /* Diagnostic PCV6, not semantic state. */
@@ -162,6 +191,7 @@ static int private_draw_image(CPUState *cpu,void *user,uint32_t unused) {
     (void)user;(void)unused;
     project(VIEW_CAMERA,view_cameras[private_seat],sizeof view_cameras[0]);
     if(private_seat) {
+        if(!independent_quake_input())return 0;
         uint8_t body[sizeof p2.body];capture(PLAYER,body,sizeof body);
         project(PLAYER,p2.body,sizeof p2.body);
         /* The native incoming beam starts above the room. Keep its camera
@@ -241,6 +271,7 @@ static void independent_activate(void) {
     independent_views=local_split || own_view;
     private_draw=private_seat=view_valid=view_pending=view_call=view_menu_history=0;
     view_frame=view_buffer=0;memset(view_cameras,0,sizeof view_cameras);
+    view_quake_valid=view_quake_frame=0;memset(view_quake_input,0,sizeof view_quake_input);
 #ifdef MMX6_COOP_VIEW_ENTRY_CONTEXT
     if(independent_views)(void)psx_debug_native_context_register(VIEW_CONTEXT_PROVIDER,private_view_entry_context,NULL);
 #endif
@@ -256,5 +287,6 @@ static void independent_activate(void) {
 static void independent_invalidate(void) {}
 static void independent_menu_begin(void) {}
 static void independent_world_begin(void) {}
+static void independent_camera_begin(CPUState *cpu,uint32_t address) { (void)cpu;(void)address; }
 static void independent_activate(void) { independent_views=local_split=private_draw=private_seat=0; }
 #endif

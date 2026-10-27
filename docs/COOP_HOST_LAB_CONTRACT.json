@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 12,
+  "revision": 13,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v29",
+    "title_compatibility": "mmx6-x-zero-delay-v30",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -243,5 +243,13 @@
     "observation": "Optional existing SDK native-entry context provider reads only host-owned camera arrays at actual private80025FB0 entry. It identifies the pane/frame and raw cameraX/Y plus native quake state after the original per-view camera updates. No guest diagnostic writes, simulation/digest/snapshot changes or provider service changes. Unavailable service or registration failure remains nonfatal and portable. Entry epochs can differ across sandbox restores; join by actual host frame and seat.",
     "snapshot_schema": 11,
     "qualification": "Fresh same-candidate LOCAL and NET required: actual original producer fall/contact, original explosion effects and damage behavior, original quake commands, per-pane quiet/shake/quiet rendered offsets and composed visibility. Retain exact source/image/manifest/provenance, settled profile, resolved CRC agreement, native cards, owned exits and strict fixture recording/replay refusals. Setup, registration, source tests and counters alone grant no comparison pass. Prior V79 evidence does not transfer."
+  },
+  "title_changes_v30": {
+    "scope": "Correct the extra private Zero camera quake tick observed during the original native explosion for frozen F197/F198. The correctness fix applies automatically to independent private views, including local and online split.",
+    "native_camera": "Observe the original canonical8002927C entry before its camera update and retain host-only quake inputs for that host frame. Only native quake bits/timers/step counters/steps/phases/amplitudes are projected before the private Zero camera update; all position history and other authored fields remain per existing view logic. Both views run their own original native camera update from the same original world quake input, rather than ticking the canonical result twice.",
+    "isolation": "The pre-update cache is presentation-only and excluded from snapshots/digests; private reentry cannot overwrite it. Activation/invalidation clears validity. A missing or stale active quake input refuses the private transaction, preserving atomic publication and canonical state. Existing shared world simulation, reversible guest/device/VRAM and host restoration remain.",
+    "prerequisite_refusal": "LAB-only host stderr identifies the exact first source/placement/resource/ground refusal after an existing checkpoint predicate fails. It adds no guest diagnostic fields, authority, outcome, source relaxation or serialized state. Original source checks and once-only pending cancellation remain.",
+    "snapshot_schema": 11,
+    "qualification": "Fresh exact-candidate LOCAL and NET must retain the original explosion/quake origin, both actual native private draw offsets and matching same-frame native quake timeline through quiet/shake/quiet, actual world effects/damage behavior and composed visibility. Source/image/profile/CRC/cards/owned exits and fixture-taint capture/replay refusal remain required. No row credit from tests, V80 failed setup, counters or an earlier candidate."
   }
 }

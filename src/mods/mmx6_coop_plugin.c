@@ -2690,7 +2690,7 @@ static void activate(void) {
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
-        .compatibility_id = "mmx6-x-zero-delay-v29",
+        .compatibility_id = "mmx6-x-zero-delay-v30",
         .rollback_supported = 0,
         .savestates_supported = 0,
         .skip_bios_intro = 1,
@@ -2723,6 +2723,7 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002012C,controller);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800232D4,render);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80025FB0,begin_world_draw);
+    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002927C,independent_camera_begin);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002B3D4,dialogue_palette_load);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8003BD24,native_player_init);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8001E1BC,checkpoint_native_entry);
