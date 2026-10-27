@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 82 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, R25, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F79, F89, F91, F92, F95, F97, F98, F101, F102, F107, F110, F114, F116, F118, F119, F121, F128, F132, F133, F137, F144, F157, F163, F164, F170, F173, F177, F178, F184, F191, F197, F198, F204, F205, F208), 4 failed, 148 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 83 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, R25, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F79, F83, F89, F91, F92, F95, F97, F98, F101, F102, F107, F110, F114, F116, F118, F119, F121, F128, F132, F133, F137, F144, F157, F163, F164, F170, F173, F177, F178, F184, F191, F197, F198, F204, F205, F208), 4 failed, 147 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,8 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 27
+
+**F83 is closed: 83 passed / 4 failed / 147 unverified (35.5%), one more since82.** The [same-candidate Unified second-door review](evidence/mmx6-scene/manifest-bound-4cb5f59-F83-unified-second-door-reviewed.json) crosses the original NPC hatch, completes its real dialogue, then crosses the D1000 hatch in one native session. Actual shared4:3 rendering, both living bodies and original current/target camera interval6064..6144/Y224 are retained, followed by separate owned jumps and landings in LOCAL and both NET peers. All source/profile/resolved-CRC/cards/owned-cleanup/strict taint-refusal gates pass, with9 composed images reviewed. The native analogue and setup/rendering limits are explicit. The initial window-allowlist setup failure remains preserved.
 
 **F164 is closed: 82 passed / 4 failed / 148 unverified (35.0%), one more since81.** The [same-candidate second-Both-door review](evidence/mmx6-scene/manifest-bound-4cb5f59-F164-second-Both-controls-reviewed.json) completes two original crossings in one session, then actual separate X/Zero jumps and landings in LOCAL and on both NET peers. The native analogue is an NPC hatch followed by the D1000 boss hatch; no two-boss or fortress claim is made. Prior passenger/scene state remains retired and both original doors stay closed without withdrawal/rejoin. All source/profile/CRC/cards/owned-cleanup/strict taint-refusal gates pass; nine composed images were reviewed. Earlier evidence that lacked post-second controls remains scoped as before. Unified F83 and absent/fallen/Either F61 remain separate.
 
