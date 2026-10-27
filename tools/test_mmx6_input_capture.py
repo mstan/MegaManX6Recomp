@@ -17,7 +17,7 @@ import mmx6_input_recording as trace
 
 def inspect(root: Path, *, exit_child: bool) -> None:
     folders = list((root / "input-recordings").glob("session-*"))
-    expected = {1} if exit_child else {*range(1, 7), 8}
+    expected = {1} if exit_child else {*range(1, 7), *range(8, 13)}
     by_epoch = {}
     for folder in folders:
         status = json.loads((folder / "status.json").read_bytes())
@@ -36,7 +36,7 @@ def inspect(root: Path, *, exit_child: bool) -> None:
                 raise AssertionError("zero-native prefix unexpectedly admitted")
             assert status["status"] == "failed"
             continue
-        summary = trace.validate(io.BytesIO(data), require_complete=epoch not in (3, 8))
+        summary = trace.validate(io.BytesIO(data), require_complete=epoch not in (3, 8, 11, 12))
         assert summary.identity["image_sha256"] == "1" * 64
         assert summary.identity["manifest_sha256"] == "2" * 64
         assert summary.identity["execution_id"] == "fixture-execution"
@@ -75,9 +75,28 @@ def inspect(root: Path, *, exit_child: bool) -> None:
                 pass
             else:
                 raise AssertionError("contaminated capture admitted as complete")
+        elif epoch in (9, 10):
+            observed = json.loads((root / f"F143-idle-flush-{epoch}.json").read_bytes())
+            assert observed["visible_before_close"] == observed["still_open"] == 1
+            assert 0 <= observed["elapsed_ms"] < 2000
+            assert summary.identity["mode"] == ("netplay" if epoch == 10 else "offline")
+            assert (summary.events, summary.natives, summary.p2_reads) == (2, 1, 1)
+        elif epoch in (11, 12):
+            assert summary.failure == "bounded native-consumption queue full"
+            assert 8192 <= summary.events < 100001
+            assert summary.natives == 1 and summary.p2_reads == summary.events - 1
+            assert summary.identity["mode"] == ("netplay" if epoch == 12 else "offline")
+            assert all(row["consumer"] == "stage" and row["buttons"] == 8
+                       for row in rows if row["type"] == "C")
+            try:
+                trace.validate(io.BytesIO(data), require_complete=True)
+            except trace.InvalidRecording:
+                pass
+            else:
+                raise AssertionError("full-queue prefix admitted as complete")
         else:
             assert epoch == 6 and summary.natives == 1
-        assert status["status"] == ("failed" if epoch in (3, 8) else "finalized")
+        assert status["status"] == ("failed" if epoch in (3, 8, 11, 12) else "finalized")
 
 
 def main() -> None:
@@ -100,6 +119,8 @@ def main() -> None:
         if not extra:
             assert "capture unavailable/failed" in result.stderr
             assert (root / "not-a-directory").read_bytes() == b"preserve existing output\n"
+            assert json.loads((root / "F143-flush-error.json").read_bytes()) == {
+                "actual_flush_failure_visible": True}
         inspect(root, exit_child=bool(extra))
     print(f"PASS: actual native-consumption worker/codec interop, failure and std::exit ({output})")
 

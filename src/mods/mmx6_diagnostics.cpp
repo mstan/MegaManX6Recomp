@@ -57,6 +57,7 @@ struct FileSink:Sink {
         if(!file)throw std::runtime_error("cannot create recording file");
     }
     bool write(const std::string& s)override{return std::fwrite(s.data(),1,s.size(),file)==s.size();}
+    void flush(){if(std::fflush(file)!=0)throw std::runtime_error("recording flush failed");}
     void close(){FILE *f=file;file=nullptr;if(f&&std::fclose(f)!=0)throw std::runtime_error("recording close failed");}
     ~FileSink(){if(file)std::fclose(file);}
 };
@@ -121,14 +122,23 @@ class Capture {
             for(unsigned slot=0;slot<2;++slot)if(!startup.cards[slot].empty())
                 artifact(directory/("card"+std::to_string(slot+1)+".initial.mcd"),startup.cards[slot].data(),startup.cards[slot].size());
             FileSink file(directory/"inputs.jsonl");Encoder encoder(file,startup.identity);
+            // Only this worker touches stdio. A sparse last accepted event
+            // must become visible without another input or session shutdown.
+            // Check the same steady-clock deadline while busy and while idle.
+            const auto flush_interval=std::chrono::milliseconds(100);
+            auto flush_at=std::chrono::steady_clock::now()+flush_interval;
+            bool dirty=true; // The encoder has already written its header.
             for(;;){Event event;
+                const auto now=std::chrono::steady_clock::now();
+                if(dirty&&now>=flush_at){file.flush();dirty=false;flush_at=now+flush_interval;}
                 const Take take=take_before_terminal(queue,event,[this]{
                     return closing.load(std::memory_order_acquire)||
                         (failure.load(std::memory_order_acquire)&&!in_flight.load(std::memory_order_acquire));});
-                if(take==Take::Ready){encoder.append(event);continue;}
+                if(take==Take::Ready){encoder.append(event);dirty=true;continue;}
                 if(take==Take::Terminal)break;
                 std::unique_lock<std::mutex> lock(wait_mutex);
-                wake.wait_for(lock,std::chrono::milliseconds(50));
+                if(dirty)wake.wait_until(lock,flush_at);
+                else wake.wait_for(lock,std::chrono::milliseconds(50));
             }
             std::string reason=failure_text(failure.load(std::memory_order_acquire));
             if(!encoder.native_count()&&reason.empty())reason="no native input calls observed";

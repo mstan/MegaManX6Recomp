@@ -5,9 +5,19 @@
 #undef PSX_MOD_CONSTRUCTOR
 #define PSX_MOD_CONSTRUCTOR(name) static void name(void)
 #include "../src/mods/mmx6_diagnostics.cpp"
+#include <algorithm>
 #include <cassert>
 #include <cstring>
 #include <iostream>
+#ifdef _WIN32
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+#include <windows.h>
+#include <io.h>
+#else
+#include <unistd.h>
+#endif
 
 static PSXSessionDiagnosticsStartFn start_fn;
 static PSXSessionDiagnosticsEndFn stop_fn;
@@ -86,6 +96,60 @@ static void codec_negatives(){
     for(unsigned i=0;i<count;){Event event;event.order=i;if(concurrent.push(event))++i;}
     consumer.join();
 }
+static bool idle_flush(const std::filesystem::path& root,PSXSessionDiagnosticsStart& s,
+                       CPUState& cpu,unsigned epoch){
+    // Actual worker, real stdio buffer and a sparse accepted N/C pair. Keep
+    // capture open and produce no further events while its wall clock runs.
+    s.session_epoch=epoch;start_fn(&s);++test_cycles;native_fn(&cpu,0x80012C44);
+    ++test_cycles;mmx6_diagnostics_p2(0,8,0);
+    const auto began=std::chrono::steady_clock::now();
+    const auto suffix="-"+std::to_string(epoch)+"-0";
+    std::filesystem::path directory;bool visible=false;
+    while(std::chrono::steady_clock::now()-began<std::chrono::seconds(2)){
+        for(const auto& entry:std::filesystem::directory_iterator(root/"input-recordings")){
+            const auto name=entry.path().filename().string();
+            if(name.size()>=suffix.size()&&name.compare(name.size()-suffix.size(),suffix.size(),suffix)==0)
+                directory=entry.path();
+        }
+        if(!directory.empty()){
+            std::ifstream in(directory/"inputs.jsonl",std::ios::binary);
+            const std::string bytes((std::istreambuf_iterator<char>(in)),{});
+            visible=std::count(bytes.begin(),bytes.end(),'\n')==3&&
+                bytes.find("\"type\":\"C\"")!=std::string::npos;
+            if(visible)break;
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(5));
+    }
+    const auto elapsed=std::chrono::duration_cast<std::chrono::milliseconds>(
+        std::chrono::steady_clock::now()-began).count();
+    const bool open=!directory.empty()&&!std::filesystem::exists(directory/"status.json");
+    stop_fn(epoch,0);
+    JsonObject result;result.number("epoch",epoch);result.number("netplay",s.netplay);
+    result.number("visible_before_close",visible);result.number("still_open",open);
+    result.number("elapsed_ms",elapsed);result.text("scope","sparse actual worker N/C prefix, no further producer events or stop until observation");
+    artifact(root/("F143-idle-flush-"+std::to_string(epoch)+".json"),result.bytes()+"\n");
+    return visible&&open;
+}
+static void flush_error(const std::filesystem::path& root){
+    // Invalidate only this fixture's OS file handle, keeping FILE itself alive.
+    // The real flush implementation must surface the pending write failure.
+    bool caught=false;
+    {
+        FileSink sink(root/"F143-owned-flush-error.bin");
+        assert(std::setvbuf(sink.file,nullptr,_IOFBF,4096)==0);
+        assert(sink.write("pending owned fixture bytes\n"));
+#ifdef _WIN32
+        assert(CloseHandle(reinterpret_cast<HANDLE>(_get_osfhandle(_fileno(sink.file)))));
+#else
+        assert(::close(fileno(sink.file))==0);
+#endif
+        try{sink.flush();}catch(const std::runtime_error& error){
+            caught=std::string(error.what())=="recording flush failed";
+        }
+    }
+    assert(caught);
+    artifact(root/"F143-flush-error.json","{\"actual_flush_failure_visible\":true}\n");
+}
 int main(int argc,char **argv){
     assert(argc>=2);owner=std::this_thread::get_id();codec_negatives();mmx6_register_diagnostics();
     assert(start_fn&&stop_fn&&native_fn&&registrations==2);
@@ -131,5 +195,25 @@ int main(int argc,char **argv){
     s.session_epoch=7;s.output_root=bad_root.c_str();start_fn(&s);native_fn(&cpu,0x80012C44);stop_fn(7,0);
     s.session_epoch=8;s.output_root=argv[1];start_fn(&s);native_fn(&cpu,0x80012C44);
     stop_fn(8,PSX_SESSION_DIAGNOSTICS_END_STATE_REPLACED);assert(!active.load());
+    // Flush must progress on wall time even without another accepted input.
+    // The old close-only writer fails here while retaining a valid final file.
+    for(unsigned epoch:{9u,10u}){
+        s.netplay=epoch==10;
+        if(!idle_flush(argv[1],s,cpu,epoch))return 4;
+    }
+    // Actual production worker saturation: stop accepting on full, drain its
+    // ordered accepted prefix and expose QueueFull rather than a false success.
+    for(unsigned epoch:{11u,12u}){
+        s.session_epoch=epoch;s.netplay=epoch==12;start_fn(&s);
+        ++test_cycles;native_fn(&cpu,0x80012C44);
+        const auto began=std::chrono::steady_clock::now();
+        for(unsigned i=0;i<100000;++i){++test_cycles;mmx6_diagnostics_p2(0,8,0);}
+        const auto elapsed=std::chrono::duration_cast<std::chrono::microseconds>(
+            std::chrono::steady_clock::now()-began).count();
+        stop_fn(epoch,0);JsonObject result;result.number("epoch",epoch);
+        result.number("offered_P2_reads",100000);result.number("producer_us",elapsed);
+        artifact(std::filesystem::path(argv[1])/("F143-saturation-"+std::to_string(epoch)+".json"),result.bytes()+"\n");
+    }
+    flush_error(argv[1]);
     std::cout<<"actual MMX6 capture worker/codec/ownership/failure fixture PASS\n";
 }
