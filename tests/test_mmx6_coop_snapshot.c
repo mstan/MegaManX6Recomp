@@ -412,6 +412,40 @@ static void agreed_latch_snapshot(void) {
     }
     checkpoint_lab_option=checkpoint_lab_state=checkpoint_lab_previous=0;
 }
+static void shared_clear_snapshot(void) {
+    HostState prior;state_capture(&prior);
+    scene_owner=scene_phase=0;pause_owner=-1;enrolled=1;
+    clear_phase=CLEAR_PRELUDE;clear_members=3;clear_started=0;
+    uint32_t len=snapshot_bytes();CHECK(len);
+    uint8_t *prelude=malloc(len),*victory=malloc(len),*bad=malloc(len);CHECK(prelude && victory && bad);
+    CHECK(snapshot_write(prelude,len));uint32_t before=state_digest();
+    clear_phase=CLEAR_VICTORY;clear_started=3;CHECK(state_digest()!=before);
+    CHECK(snapshot_bytes()==len && snapshot_write(victory,len));
+    /* Locate the two changed typed fields from valid current-build records;
+     * do not hardcode offsets through the retained resource/cache format. */
+    unsigned phase_at=0,differences=0;
+    for(unsigned at=0;at<len;++at)if(prelude[at]!=victory[at]) {
+        if(!differences)phase_at=at;
+        else CHECK(at==phase_at+2);
+        ++differences;
+    }
+    CHECK(differences==2 && victory[phase_at]==CLEAR_VICTORY && victory[phase_at+1]==3 && victory[phase_at+2]==3);
+    uint32_t digest=state_digest();shared_clear_reset();
+    CHECK(snapshot_validate(victory,len));snapshot_read(victory,len);
+    CHECK(clear_phase==CLEAR_VICTORY && clear_members==3 && clear_started==3 && state_digest()==digest);
+    const uint8_t invalid[][3]={{0,3,3},{1,3,0},{2,1,0},{2,3,1},{3,0,0},{3,2,2},{3,3,4},{4,3,3}};
+    for(unsigned i=0;i<sizeof invalid/sizeof invalid[0];++i) {
+        memcpy(bad,victory,len);memcpy(bad+phase_at,invalid[i],3);reject_unchanged(bad,len);
+    }
+    for(unsigned started=0;started<=3;++started) {
+        clear_members=3;clear_started=started;CHECK(snapshot_write(bad,len));
+        shared_clear_reset();CHECK(snapshot_validate(bad,len));snapshot_read(bad,len);
+        CHECK(clear_phase==CLEAR_VICTORY && clear_members==3 && clear_started==started);
+    }
+    clear_phase=CLEAR_ADMITTED;clear_members=3;clear_started=0;
+    CHECK(!snapshot_ready() && !snapshot_bytes());
+    state_commit(&prior);free(prelude);free(victory);free(bad);
+}
 static void abandoned_guest(void){
     /* Exercise the SDK's actual supported landing, including MinGW GNU's
      * large-frame case. The target function has not returned when dispatched
@@ -424,7 +458,7 @@ static void abandoned_guest(void){
 }
 int main(void){
     pixel_edges();setup();retain_native_x_pixels();retain_yammar_native_upload_pixels();digest_and_readiness();actual_projection_backups();
-    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();
+    weapon_support_projection_and_reuse();native_health_freeze_camera();roundtrip_and_malformed();agreed_latch_snapshot();shared_clear_snapshot();
     CHECK(sprite_bank(assets+0x100,22,0x7849,0x4000)==saved_yammar_tile);
     CHECK(sprite_bank(assets+0x100,0,0x7849,UINT16_MAX)==saved_yammar_page);
     /* Abandoned/overflowed call records are safe owned bytes, and explicitly

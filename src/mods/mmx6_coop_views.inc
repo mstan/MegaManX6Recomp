@@ -81,7 +81,7 @@ static void independent_world_begin(void) {
         psx_mod_read_byte(PLAY+12)==view_menu_stage &&
         psx_mod_read_byte(PLAY+13)==view_menu_section &&
         psx_mod_read_byte(PLAY+0x1D)==view_menu_checkpoint;
-    if(!enrolled || failed || inside || zero_world || scene_owner || pause_owner>=0 ||
+    if(!enrolled || failed || inside || zero_world || scene_owner || clear_phase || pause_owner>=0 ||
        psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
        psx_mod_read_byte(PLAY+0x10) || coop_world_hold() ||
        life.status[0]!=MMX6_COOP_ALIVE ||
