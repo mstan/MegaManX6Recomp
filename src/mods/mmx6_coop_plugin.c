@@ -388,6 +388,41 @@ static void leave_zero_context(int shared_world) {
 }
 static void leave_zero(void) { leave_zero_context(0); }
 
+static void dialogue_palette_load(CPUState *cpu,uint32_t address) {
+    if(address!=0x8002B3D4u || !ready || !enrolled || failed || !zero_projected ||
+       psx_mod_read_word(SCRATCH+0x28)!=active_palette ||
+       saved_resources[3]<0x80010000u || saved_resources[3]>0x801FC000u)return;
+    unsigned alternate=psx_mod_read_half(0x80090D6Au)!=0;
+    uint32_t first=alternate?0x5Eu:0x15u,slot=cpu->gpr[4],source=cpu->gpr[5];
+    uint32_t count=cpu->gpr[6],caller=cpu->gpr[31];
+    int opening=slot==first && count==2 && source==0x8006E408u &&
+        caller==(alternate?0x800219B0u:0x8002199Cu);
+    int speaker=slot==first+1 && count==1 && source>=0x8006E484u &&
+        source<0x8006E584u && !((source-0x8006E484u)&31u) &&
+        (caller==(alternate?0x8002289Cu:0x80022884u) || caller==0x800225D8u);
+    int closing=slot==first && count==2 && source==0x800E33D8u &&
+        caller==(alternate?0x800221D4u:0x800221BCu);
+    if(!opening && !speaker && !closing)return;
+    uint8_t colors[64];
+    if(opening) {
+        /* Native21968 has backed up Zero's private rows. The shared font
+         * actually displayed beforehand belongs to the resident upload.
+         * Keep that baseline in the original, already serialized backup;
+         * native221B4/221CC will restore it when the dialogue closes. */
+        capture(saved_resources[3]+first*32u,colors,sizeof colors);
+        project(0x800E33D8u,colors,sizeof colors);
+    }
+    /* Native223E0 text uses CLUT7845 and the first/name row adds one at
+     *22564, consuming the shared GPU rows80/96,481. The original loader
+     * still writes Zero's private working palette after this entry hook.
+     * Publish only its exact dialogue span to the resident working bank
+     * and retain the dirty bit through leave_zero_context, so the original
+     *17C40 upload also presents these colors. Other private rows stay owned. */
+    capture(source,colors,count*32u);
+    project(saved_resources[3]+slot*32u,colors,count*32u);
+    saved_palette_dirty|=1u;
+}
+
 #include "mmx6_coop_shared_effects.inc"
 
 /* Pickup routines only need a body and character identity. Keep all native
@@ -2506,6 +2541,7 @@ PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002012C,controller);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x800232D4,render);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x80025FB0,begin_world_draw);
+    psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8002B3D4,dialogue_palette_load);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8003BD24,native_player_init);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8001E1BC,checkpoint_native_entry);
     psx_mod_register_function_entry_plugin("mmx6.local-coop.prototype",0x8003D308,script_begin);
