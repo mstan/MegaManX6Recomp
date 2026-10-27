@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 49 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F1, F6, F10, F12, F15, F18, F19, F22, F31, F32, F33, F38, F42, F43, F45, F48, F51, F56, F58, F59, F65, F67, F68, F70, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F163, F170, F178, F205, F208), 1 failed, 184 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 49 passed (R2, R3, R4, R5, R6, R7, R8, R12, R13, R15, F1, F6, F10, F12, F15, F18, F19, F22, F31, F32, F33, F38, F42, F43, F45, F48, F51, F56, F58, F59, F65, F67, F68, F70, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F163, F170, F178, F205, F208), 3 failed, 182 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,31 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 26
+
+
+The current total is **49 passed / 3 failed / 182 unverified**. No additional
+comparison closed in the weather block. The
+[actual F113/F175 weather failure](evidence/mmx6-camera/manifest-bound-a878af4-F113-F175-local-missing-rain-failure-reviewed.json)
+showed original Turtloid rain animating in X's private pane and missing from
+Zero's pane. Generic pixel variation in other scenery was a false positive.
+The integrated `f66fd45` fix publishes original stage6/section0 layer1 mode5
+atlas origins and refresh to both views while retaining ordinary private
+camera history elsewhere. All16 focused tests pass; the two product/test files
+match frozen native V63 `9b93b45` exactly.
+The [reviewed repaired component](evidence/mmx6-camera/manifest-bound-9b93b45-both-living-weather-component-reviewed.json)
+retains all six actual images with changing rain in both panes, five native
+atlas origins, native world/VBlank timing, stationary heroes and leak-free
+private presentation. The containing run later fails the survivor setup;
+this component is not a complete comparison or mode pass.
+F113 still needs a valid primary-death survivor sequence and NETPLAY; F175
+also needs its distinct autonomous scrolling scene. Two bounded death setups
+are deferred: original rain's180update damage cadence did not reach fatal
+within112seconds, and a short ordinary support-edge approach invalidated the
+living-Zero guard. Native checkpoint1 reachability bypass, trace taint and
+ordinary/replay refusal remain explicit. The last full failure statuses stay
+until the complete named checks are requalified. F120 palette uploads and
+F194 guest-first weather admission receive no inherited credit.
+
 
 
 F42 is fully closed on the same V62 `a878af4` in LOCAL and NETPLAY.
@@ -107,7 +132,7 @@ with write-NULL in `nvoglv64.dll +0xB80C13`. This locates the fault inside the
 OpenGL module; no exact driver-versus-SDK cause is established. Source repair
 and first-session totals do not qualify repeated allocation lifetime. The
 bounded investigation is parked while independent autonomous rows continue.
-The ledger is **49 passed /1 failed /184 unverified of234 (20.9%)**.
+The ledger is **49 passed /3 failed /182 unverified of234 (20.9%)**.
 
 F173 and F68 now pass LOCAL on exact V57 `52d6914`: actual independent
 native4:3 panes in an8:3 window, Zero366px away from stationary X, correct
