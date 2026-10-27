@@ -10021,7 +10021,7 @@
           "netplay": "unverified"
         },
         "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "limitations": "Both policy and living-pair original admission/traversal are integrated and qualified on exact723affc for F79/F114/F137. F61 remains unverified: native absent/fallen exclusion and current-candidate Either cases still need required-mode qualification; source/unit cases alone do not close it."
       }
     },
     {
@@ -11327,7 +11327,7 @@
       "frozen_row_sha256": "77a5c1006f9f1736a9c2e1fb0087e67d94384966ed50cb6c2e229edc95694183",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Both-door traversal without passenger transport",
         "bounded_check": "With Both policy enabled, walk both living actors through a real door; neither is withdrawn/rejoined after their actual clearance.",
         "baseline_anchors": [
@@ -11335,14 +11335,14 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "failed",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -11416,9 +11416,79 @@
             "bypasses": [
               "Original audited offline introCP2 reachability only; no tested outcome writes."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "723affce42bc7df364bfc62e8d1b0f85657aaff8",
+            "build_identity": {
+              "executable_sha256": "1632a5540b303f6e2be7185d736b3a4ebd32a3271563316e416dab9e955aff38",
+              "compiled_manifest_sha256": "9e6189941dfcbc82c933810ede6cd7f2a63f2046635adc2bc250cd5192995fa9",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "both",
+              "roster": "X/P1 + Zero/P2",
+              "camera": "Unified",
+              "audio": "muted dummy",
+              "prerequisite": "pre-agreed original intro0/0/CP2"
+            },
+            "action": "Both living actors enter the original full-box subtype1 intro door, finish native parallel traversal, then accept separate ordinary controls.",
+            "outcome": "Both original standing boxes clear door right6080 on every physical process; no outgoing/hidden/rejoin scene phase or beam action. Native fullHP boss release and own controls complete.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-723affc-Both-door-local-netplay-reviewed.json",
+                "sha256": "87d0a3740a476e9495678e354c0f475c9bc72d270721596d733b3335aeca5e98"
+              }
+            ],
+            "limits": [
+              "Only one original subtype1 intro door with both living X/P1 and Zero/P2 in Unified mode. No F61 absent/fallen, other-door/subtype, private-view or default Either native qualification.",
+              "Original checkpoint scenery corruption and HUD overlap/clipping remain visible and are not qualified by these behavioral passes.",
+              "V75 LOCAL scalar/native result is retained but source-review rejected due null-a0 standing-box call; no credit is transferred from it.",
+              "Original setup taints recordings; canonical ordinary capture and replay correctly refuse. No R26/finalized capture/replay claim."
+            ],
+            "bypasses": [
+              "Pre-agreed original introCP2 initializer is a reachability prerequisite; no normal intro traversal or native-content audit credit."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "723affce42bc7df364bfc62e8d1b0f85657aaff8",
+            "build_identity": {
+              "executable_sha256": "1632a5540b303f6e2be7185d736b3a4ebd32a3271563316e416dab9e955aff38",
+              "compiled_manifest_sha256": "9e6189941dfcbc82c933810ede6cd7f2a63f2046635adc2bc250cd5192995fa9",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "both",
+              "roster": "X/P1 + Zero/P2",
+              "camera": "Unified",
+              "audio": "muted dummy",
+              "prerequisite": "pre-agreed original intro0/0/CP2"
+            },
+            "action": "Both living actors enter the original full-box subtype1 intro door, finish native parallel traversal, then accept separate ordinary controls.",
+            "outcome": "Both original standing boxes clear door right6080 on every physical process; no outgoing/hidden/rejoin scene phase or beam action. Native fullHP boss release and own controls complete.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-723affc-Both-door-local-netplay-reviewed.json",
+                "sha256": "87d0a3740a476e9495678e354c0f475c9bc72d270721596d733b3335aeca5e98"
+              }
+            ],
+            "limits": [
+              "Only one original subtype1 intro door with both living X/P1 and Zero/P2 in Unified mode. No F61 absent/fallen, other-door/subtype, private-view or default Either native qualification.",
+              "Original checkpoint scenery corruption and HUD overlap/clipping remain visible and are not qualified by these behavioral passes.",
+              "V75 LOCAL scalar/native result is retained but source-review rejected due null-a0 standing-box call; no credit is transferred from it.",
+              "Original setup taints recordings; canonical ordinary capture and replay correctly refuse. No R26/finalized capture/replay claim."
+            ],
+            "bypasses": [
+              "Pre-agreed original introCP2 initializer is a reachability prerequisite; no normal intro traversal or native-content audit credit."
+            ]
           }
         ],
-        "limitations": "LOCAL exactV65 a999373 genuinely fixes owner menu premature door lock, but Both traversal still leaves Zero6037.5 outside door6064 whileX reaches6145.046875/nativeboss32HP. Rootall9images reject scalarpass; fullbodyclearance was missing from observer. Fix39e1706 isolatedV66 building; NET/fullrequalification missing."
+        "limitations": "Exact723affc LOCAL/NET native subtype1 intro Both door passes full required bounded behavior; original camera/source/boxes and every physical process reviewed, 18 relevant composed captures personally reviewed. Prior failed V64-V66 and review-rejected V75 evidence retained. No absent/fallen/F61, additional door, private-view, scenery, ordinary-route or recorder/replay qualification."
       }
     },
     {
@@ -13363,7 +13433,7 @@
       "frozen_row_sha256": "1e7e8b64eb468f357cac6adc81b235b0328929debc47ed5c267eec280a2b6e5a",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Both-door auto-walk and camera commitment",
         "bounded_check": "Walk one actor left/right while a real Both door waits; verify admission, camera limits and terrain handling without trapping either participant.",
         "baseline_anchors": [
@@ -13371,17 +13441,88 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "723affce42bc7df364bfc62e8d1b0f85657aaff8",
+            "build_identity": {
+              "executable_sha256": "1632a5540b303f6e2be7185d736b3a4ebd32a3271563316e416dab9e955aff38",
+              "compiled_manifest_sha256": "9e6189941dfcbc82c933810ede6cd7f2a63f2046635adc2bc250cd5192995fa9",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "both",
+              "roster": "X/P1 + Zero/P2",
+              "camera": "Unified",
+              "audio": "muted dummy",
+              "prerequisite": "pre-agreed original intro0/0/CP2"
+            },
+            "action": "Guest walks Left out of and Right back into the original waiting Both-door admission region; both then cross under original terrain/camera rules.",
+            "outcome": "Actual >=24px Left, native eligibility clears and returns; original camera releases at6064 with authored6064..6144 limits/Y224. Both grounded original boxes cross, and both own controls work without a trap.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-723affc-Both-door-local-netplay-reviewed.json",
+                "sha256": "87d0a3740a476e9495678e354c0f475c9bc72d270721596d733b3335aeca5e98"
+              }
+            ],
+            "limits": [
+              "Only one original subtype1 intro door with both living X/P1 and Zero/P2 in Unified mode. No F61 absent/fallen, other-door/subtype, private-view or default Either native qualification.",
+              "Original checkpoint scenery corruption and HUD overlap/clipping remain visible and are not qualified by these behavioral passes.",
+              "V75 LOCAL scalar/native result is retained but source-review rejected due null-a0 standing-box call; no credit is transferred from it.",
+              "Original setup taints recordings; canonical ordinary capture and replay correctly refuse. No R26/finalized capture/replay claim."
+            ],
+            "bypasses": [
+              "Pre-agreed original introCP2 initializer is a reachability prerequisite; no normal intro traversal or native-content audit credit."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "723affce42bc7df364bfc62e8d1b0f85657aaff8",
+            "build_identity": {
+              "executable_sha256": "1632a5540b303f6e2be7185d736b3a4ebd32a3271563316e416dab9e955aff38",
+              "compiled_manifest_sha256": "9e6189941dfcbc82c933810ede6cd7f2a63f2046635adc2bc250cd5192995fa9",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "both",
+              "roster": "X/P1 + Zero/P2",
+              "camera": "Unified",
+              "audio": "muted dummy",
+              "prerequisite": "pre-agreed original intro0/0/CP2"
+            },
+            "action": "Guest walks Left out of and Right back into the original waiting Both-door admission region; both then cross under original terrain/camera rules.",
+            "outcome": "Actual >=24px Left, native eligibility clears and returns; original camera releases at6064 with authored6064..6144 limits/Y224. Both grounded original boxes cross, and both own controls work without a trap.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-723affc-Both-door-local-netplay-reviewed.json",
+                "sha256": "87d0a3740a476e9495678e354c0f475c9bc72d270721596d733b3335aeca5e98"
+              }
+            ],
+            "limits": [
+              "Only one original subtype1 intro door with both living X/P1 and Zero/P2 in Unified mode. No F61 absent/fallen, other-door/subtype, private-view or default Either native qualification.",
+              "Original checkpoint scenery corruption and HUD overlap/clipping remain visible and are not qualified by these behavioral passes.",
+              "V75 LOCAL scalar/native result is retained but source-review rejected due null-a0 standing-box call; no credit is transferred from it.",
+              "Original setup taints recordings; canonical ordinary capture and replay correctly refuse. No R26/finalized capture/replay claim."
+            ],
+            "bypasses": [
+              "Pre-agreed original introCP2 initializer is a reachability prerequisite; no normal intro traversal or native-content audit credit."
+            ]
+          }
+        ],
+        "limitations": "Exact723affc LOCAL/NET native subtype1 intro Both door passes full required bounded behavior; original camera/source/boxes and every physical process reviewed, 18 relevant composed captures personally reviewed. Prior failed V64-V66 and review-rejected V75 evidence retained. No absent/fallen/F61, additional door, private-view, scenery, ordinary-route or recorder/replay qualification."
       }
     },
     {
@@ -14440,21 +14581,21 @@
       "frozen_row_sha256": "98c0ebfd54f95c955bdfae7e19f710f0231374bf2f4dbbe7a786ecc8afc386c5",
       "x6": {
         "workstream": "menu",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Pause while a Both boss door waits",
         "bounded_check": "Open a personal menu while one actor waits at a real Both door; preserve native admissibility, owning input and subsequent crossing.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:stage_tick",
           "src/mods/mmx6_coop_plugin.c:menu_vram"
         ],
-        "status": "failed",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "failed",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
         "evidence": [
           {
@@ -14491,9 +14632,79 @@
             "bypasses": [
               "Original offline introCP2 reachability only, no tested outcome writes."
             ]
+          },
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "723affce42bc7df364bfc62e8d1b0f85657aaff8",
+            "build_identity": {
+              "executable_sha256": "1632a5540b303f6e2be7185d736b3a4ebd32a3271563316e416dab9e955aff38",
+              "compiled_manifest_sha256": "9e6189941dfcbc82c933810ede6cd7f2a63f2046635adc2bc250cd5192995fa9",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "both",
+              "roster": "X/P1 + Zero/P2",
+              "camera": "Unified",
+              "audio": "muted dummy",
+              "prerequisite": "pre-agreed original intro0/0/CP2"
+            },
+            "action": "Open Zero personal menu at the waiting Both door, offer wrong-seat Start, resume through owning Start and complete both actual crossings.",
+            "outcome": "Every physical process retains phase2/pauseowner2 and frozen native timer through wrong-seat input; owning resume leaves door unclaimed until both eligible. Full native traversal/control completes afterward.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-723affc-Both-door-local-netplay-reviewed.json",
+                "sha256": "87d0a3740a476e9495678e354c0f475c9bc72d270721596d733b3335aeca5e98"
+              }
+            ],
+            "limits": [
+              "Only one original subtype1 intro door with both living X/P1 and Zero/P2 in Unified mode. No F61 absent/fallen, other-door/subtype, private-view or default Either native qualification.",
+              "Original checkpoint scenery corruption and HUD overlap/clipping remain visible and are not qualified by these behavioral passes.",
+              "V75 LOCAL scalar/native result is retained but source-review rejected due null-a0 standing-box call; no credit is transferred from it.",
+              "Original setup taints recordings; canonical ordinary capture and replay correctly refuse. No R26/finalized capture/replay claim."
+            ],
+            "bypasses": [
+              "Pre-agreed original introCP2 initializer is a reachability prerequisite; no normal intro traversal or native-content audit credit."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "723affce42bc7df364bfc62e8d1b0f85657aaff8",
+            "build_identity": {
+              "executable_sha256": "1632a5540b303f6e2be7185d736b3a4ebd32a3271563316e416dab9e955aff38",
+              "compiled_manifest_sha256": "9e6189941dfcbc82c933810ede6cd7f2a63f2046635adc2bc250cd5192995fa9",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "both",
+              "roster": "X/P1 + Zero/P2",
+              "camera": "Unified",
+              "audio": "muted dummy",
+              "prerequisite": "pre-agreed original intro0/0/CP2"
+            },
+            "action": "Open Zero personal menu at the waiting Both door, offer wrong-seat Start, resume through owning Start and complete both actual crossings.",
+            "outcome": "Every physical process retains phase2/pauseowner2 and frozen native timer through wrong-seat input; owning resume leaves door unclaimed until both eligible. Full native traversal/control completes afterward.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-723affc-Both-door-local-netplay-reviewed.json",
+                "sha256": "87d0a3740a476e9495678e354c0f475c9bc72d270721596d733b3335aeca5e98"
+              }
+            ],
+            "limits": [
+              "Only one original subtype1 intro door with both living X/P1 and Zero/P2 in Unified mode. No F61 absent/fallen, other-door/subtype, private-view or default Either native qualification.",
+              "Original checkpoint scenery corruption and HUD overlap/clipping remain visible and are not qualified by these behavioral passes.",
+              "V75 LOCAL scalar/native result is retained but source-review rejected due null-a0 standing-box call; no credit is transferred from it.",
+              "Original setup taints recordings; canonical ordinary capture and replay correctly refuse. No R26/finalized capture/replay claim."
+            ],
+            "bypasses": [
+              "Pre-agreed original introCP2 initializer is a reachability prerequisite; no normal intro traversal or native-content audit credit."
+            ]
           }
         ],
-        "limitations": "LOCAL exactV64 2b2b5b2 actual Zero-owned personal-menu world preview prematurely claims waiting Both door while X is outside: original Zero+D4/PLAY+1C remain1 after closing, without co-op scene owner/boss; persistent12second wait retained. Fixa999373 isolatedV65 building, native requalification and NET remain incomplete."
+        "limitations": "Exact723affc LOCAL/NET native subtype1 intro Both door passes full required bounded behavior; original camera/source/boxes and every physical process reviewed, 18 relevant composed captures personally reviewed. Prior failed V64-V66 and review-rejected V75 evidence retained. No absent/fallen/F61, additional door, private-view, scenery, ordinary-route or recorder/replay qualification."
       }
     },
     {

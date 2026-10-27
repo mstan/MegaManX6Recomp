@@ -1,0 +1,789 @@
+{
+  "kind": "native_Both_door_same_candidate_review",
+  "result": "passed",
+  "candidate": "723affce42bc7df364bfc62e8d1b0f85657aaff8",
+  "comparisons": {
+    "F79": "77a5c1006f9f1736a9c2e1fb0087e67d94384966ed50cb6c2e229edc95694183",
+    "F114": "1e7e8b64eb468f357cac6adc81b235b0328929debc47ed5c267eec280a2b6e5a",
+    "F137": "98c0ebfd54f95c955bdfae7e19f710f0231374bf2f4dbbe7a786ecc8afc386c5"
+  },
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-v76-final-binding-root-v1.json",
+    "binding_sha256": "af669fefb97ecad1bfcd38f279312b75412011a43ba826c5ad4eee11d6b55bf5",
+    "image_sha256": "1632a5540b303f6e2be7185d736b3a4ebd32a3271563316e416dab9e955aff38",
+    "manifest_sha256": "9e6189941dfcbc82c933810ede6cd7f2a63f2046635adc2bc250cd5192995fa9",
+    "provenance_sha256": "3d196e4666588f7fb2b68618ff4eb80217b5db150570cec5d608fd56c973d139",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v76-both-door-release-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "723affce42bc7df364bfc62e8d1b0f85657aaff8",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v26",
+    "host_revision": 9
+  },
+  "modes": {
+    "local": {
+      "result": "passed",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\qualification.json",
+        "bytes": 14439865,
+        "sha256": "1b17bdfffee5773046b73ebf046c58e67f722f9c52bfda3ce3cd58abd8b19779"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\ammo-hud\\intro-admission\\Both-door\\observations.json",
+        "bytes": 12357065,
+        "sha256": "03adb9dd1e5bd5faba5d3c4b6f27d2ad72feee9f6674535c855514eda7940647"
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "witnesses": [
+        {
+          "peer": 0,
+          "checks": {
+            "no_native_passenger_or_beam_cycle": true,
+            "guest_only_waiting": true,
+            "waiting_left_right_not_trapped": true,
+            "wrong_seat_cannot_resume_owner_menu": true,
+            "owning_resume_retains_waiting_door": true,
+            "both_full_native_boxes_crossed": true,
+            "source_correct_camera_release": true,
+            "original_control_release": true,
+            "both_own_native_controls": true
+          },
+          "samples": 272,
+          "feet": [
+            {
+              "seat": 0,
+              "left": 6134,
+              "feet_y": 416,
+              "ground": 8,
+              "box": "00020b13",
+              "pointer": 2147958096
+            },
+            {
+              "seat": 1,
+              "left": 6095,
+              "feet_y": 416,
+              "ground": 8,
+              "box": "00030b13",
+              "pointer": 2147958100
+            }
+          ],
+          "camera_release": {
+            "x": 6064,
+            "low": 6064,
+            "high": 6144,
+            "y": 224
+          },
+          "controls": [
+            {
+              "seat": 0,
+              "own_travel": 1802240,
+              "other_delta": 0
+            },
+            {
+              "seat": 1,
+              "own_travel": 1802240,
+              "other_delta": 0
+            }
+          ],
+          "menu_rows": {
+            "opened": 43,
+            "frozen": 46,
+            "wrong_seat_retained": 47,
+            "resumed": 53,
+            "closing_settled": 55
+          },
+          "wait_walk_rows": {
+            "before": 25,
+            "left": 29,
+            "back": 38
+          }
+        }
+      ],
+      "captures": [
+        {
+          "peer": 0,
+          "label": "original-CP2-Both-policy",
+          "personally_reviewed": false,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\ammo-hud\\intro-admission\\Both-door\\original-CP2-Both-policy.png",
+          "bytes": 2074543,
+          "sha256": "9f269ae0dc25e6f08d8a9bca720afe544fbf69b395aead214b81e6e20ee8cd49"
+        },
+        {
+          "peer": 0,
+          "label": "only-Zero-at-waiting-Both-door",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\ammo-hud\\intro-admission\\Both-door\\only-Zero-at-waiting-Both-door.png",
+          "bytes": 2074543,
+          "sha256": "9ed624dd65c46eaaab8e44a7b954485e164b159e53e2fd9936ac7a5e4d510ff3"
+        },
+        {
+          "peer": 0,
+          "label": "Zero-left-right-no-trap",
+          "personally_reviewed": false,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\ammo-hud\\intro-admission\\Both-door\\Zero-left-right-no-trap.png",
+          "bytes": 2074543,
+          "sha256": "a35331aed814e45543f7c6dd6718328ae6b0cbd848d464b41d310adfcf65bc43"
+        },
+        {
+          "peer": 0,
+          "label": "Zero-own-menu-at-waiting-door",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\ammo-hud\\intro-admission\\Both-door\\Zero-own-menu-at-waiting-door.png",
+          "bytes": 2074543,
+          "sha256": "1deac6db26017468c309ae016d1ef129a5b5e76cdf4e7737be2e8f104545ba7e"
+        },
+        {
+          "peer": 0,
+          "label": "Zero-menu-resumed-still-waiting",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\ammo-hud\\intro-admission\\Both-door\\Zero-menu-resumed-still-waiting.png",
+          "bytes": 2074543,
+          "sha256": "1bb115f857e5461cd2c56323e78767646b23157cbbd960beacf64de2c7fb7013"
+        },
+        {
+          "peer": 0,
+          "label": "actual-Both-native-door-without-withdrawal",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\ammo-hud\\intro-admission\\Both-door\\actual-Both-native-door-without-withdrawal.png",
+          "bytes": 2074543,
+          "sha256": "779f12983cf908fdb5816c92d67759def63da73e87d3d62d3a97f2f551c6adf7"
+        },
+        {
+          "peer": 0,
+          "label": "Both-door-original-boss-allocated",
+          "personally_reviewed": false,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\ammo-hud\\intro-admission\\Both-door\\Both-door-original-boss-allocated.png",
+          "bytes": 2074543,
+          "sha256": "01e2e906df228995db515ddc3a4dd0177c5e247e0773ded3a5d9b205e1ca9e18"
+        },
+        {
+          "peer": 0,
+          "label": "Both-original-heroes-no-beam-native-release",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\ammo-hud\\intro-admission\\Both-door\\Both-original-heroes-no-beam-native-release.png",
+          "bytes": 2074543,
+          "sha256": "317425959b009fc8e9f25e06f689ef9e81447176a54cda855de978944f00d82a"
+        },
+        {
+          "peer": 0,
+          "label": "both-controls-after-real-Both-door",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\ammo-hud\\intro-admission\\Both-door\\both-controls-after-real-Both-door.png",
+          "bytes": 2074543,
+          "sha256": "3984017e02f01868eef6904d187aa03bd001ccafe10b86cdfe8d6fedea496ae8"
+        }
+      ],
+      "fixture_refusals": [
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\candidate\\saves\\input-recordings\\session-1793103761117580-1-0\\inputs.jsonl",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "1632a5540b303f6e2be7185d736b3a4ebd32a3271563316e416dab9e955aff38",
+            "manifest_sha256": "9e6189941dfcbc82c933810ede6cd7f2a63f2046635adc2bc250cd5192995fa9",
+            "mode": "offline",
+            "profile": null,
+            "settings_sha256": "1710480a05acee5205ee5b75b24343c968b1d37e4e3bcd448f99bf40b9ce4e62",
+            "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          "terminal_failure": "unilateral debug or fixture input contaminated capture",
+          "native_status": {
+            "contract": "mmx6.native-consumption.v1",
+            "epoch": 1,
+            "failure": "unilateral debug or fixture input contaminated capture",
+            "schema": 1,
+            "scope": "native-consumption diagnostics; replay unimplemented",
+            "status": "failed"
+          },
+          "events": 5751,
+          "natives": 4030,
+          "p2_reads": 1721,
+          "artifacts": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\recording-rejection\\settings.json",
+              "bytes": 10372,
+              "sha256": "1710480a05acee5205ee5b75b24343c968b1d37e4e3bcd448f99bf40b9ce4e62"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\recording-rejection\\content.json",
+              "bytes": 503,
+              "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\recording-rejection\\simulation-contract.json",
+              "bytes": 259,
+              "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\recording-rejection\\inputs.jsonl",
+              "bytes": 755171,
+              "sha256": "5c423c87ab0e4cdf6748c6288de75affdc3a98997050e28d76a8a727ba02b6b7"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\recording-rejection\\status.json",
+              "bytes": 211,
+              "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\recording-rejection\\card1.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-local-v76-root-v1\\recording-rejection\\card2.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false,
+          "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+        }
+      ]
+    },
+    "netplay": {
+      "result": "passed",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\qualification.json",
+        "bytes": 17206143,
+        "sha256": "f9ef5772aab447f984cac1b898737da53a5b5e30ddbe057ef65da859e1a3f21c"
+      },
+      "observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\observations.json",
+        "bytes": 13749636,
+        "sha256": "06d0fc23efe42e4e6f3223bea2746334cba6c4332544e7fa151e6d38ba4401cd"
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "witnesses": [
+        {
+          "peer": 0,
+          "checks": {
+            "no_native_passenger_or_beam_cycle": true,
+            "guest_only_waiting": true,
+            "waiting_left_right_not_trapped": true,
+            "wrong_seat_cannot_resume_owner_menu": true,
+            "owning_resume_retains_waiting_door": true,
+            "both_full_native_boxes_crossed": true,
+            "source_correct_camera_release": true,
+            "original_control_release": true,
+            "both_own_native_controls": true
+          },
+          "samples": 201,
+          "feet": [
+            {
+              "seat": 0,
+              "left": 6134,
+              "feet_y": 416,
+              "ground": 8,
+              "box": "00020b13",
+              "pointer": 2147958096
+            },
+            {
+              "seat": 1,
+              "left": 6095,
+              "feet_y": 416,
+              "ground": 8,
+              "box": "00030b13",
+              "pointer": 2147958100
+            }
+          ],
+          "camera_release": {
+            "x": 6064,
+            "low": 6064,
+            "high": 6144,
+            "y": 224
+          },
+          "controls": [
+            {
+              "seat": 0,
+              "own_travel": 2326528,
+              "other_delta": 0
+            },
+            {
+              "seat": 1,
+              "own_travel": 2457600,
+              "other_delta": 0
+            }
+          ],
+          "menu_rows": {
+            "opened": 37,
+            "frozen": 40,
+            "wrong_seat_retained": 41,
+            "resumed": 45,
+            "closing_settled": 47
+          },
+          "wait_walk_rows": {
+            "before": 19,
+            "left": 23,
+            "back": 32
+          }
+        },
+        {
+          "peer": 1,
+          "checks": {
+            "no_native_passenger_or_beam_cycle": true,
+            "guest_only_waiting": true,
+            "waiting_left_right_not_trapped": true,
+            "wrong_seat_cannot_resume_owner_menu": true,
+            "owning_resume_retains_waiting_door": true,
+            "both_full_native_boxes_crossed": true,
+            "source_correct_camera_release": true,
+            "original_control_release": true,
+            "both_own_native_controls": true
+          },
+          "samples": 201,
+          "feet": [
+            {
+              "seat": 0,
+              "left": 6134,
+              "feet_y": 416,
+              "ground": 8,
+              "box": "00020b13",
+              "pointer": 2147958096
+            },
+            {
+              "seat": 1,
+              "left": 6095,
+              "feet_y": 416,
+              "ground": 8,
+              "box": "00030b13",
+              "pointer": 2147958100
+            }
+          ],
+          "camera_release": {
+            "x": 6064,
+            "low": 6064,
+            "high": 6144,
+            "y": 224
+          },
+          "controls": [
+            {
+              "seat": 0,
+              "own_travel": 2981888,
+              "other_delta": 0
+            },
+            {
+              "seat": 1,
+              "own_travel": 3112960,
+              "other_delta": 0
+            }
+          ],
+          "menu_rows": {
+            "opened": 37,
+            "frozen": 40,
+            "wrong_seat_retained": 41,
+            "resumed": 45,
+            "closing_settled": 47
+          },
+          "wait_walk_rows": {
+            "before": 19,
+            "left": 23,
+            "back": 32
+          }
+        }
+      ],
+      "captures": [
+        {
+          "peer": 0,
+          "label": "original-CP2-Both-policy",
+          "personally_reviewed": false,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\original-CP2-Both-policy.png",
+          "bytes": 2074543,
+          "sha256": "0aeac59aa570d7eeb98cee3258a6faab0dae5a2e2fd2553afd1261985242f493"
+        },
+        {
+          "peer": 1,
+          "label": "original-CP2-Both-policy",
+          "personally_reviewed": false,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\peer1-original-CP2-Both-policy.png",
+          "bytes": 2074543,
+          "sha256": "55b318ef285c930c97d0f31a418d60f6b86b29928620b30f79103b19d7c0a1e5"
+        },
+        {
+          "peer": 0,
+          "label": "only-Zero-at-waiting-Both-door",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\only-Zero-at-waiting-Both-door.png",
+          "bytes": 2074543,
+          "sha256": "ca7a2839a1708712d793f2ff121e26eb3d7283ddf9367292b06b7a804e298a44"
+        },
+        {
+          "peer": 1,
+          "label": "only-Zero-at-waiting-Both-door",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\peer1-only-Zero-at-waiting-Both-door.png",
+          "bytes": 2074543,
+          "sha256": "2f5a0e049cb273a73a695a1e6763c7f24a25af098bec96a24d9a5142ecfaa7fd"
+        },
+        {
+          "peer": 0,
+          "label": "Zero-left-right-no-trap",
+          "personally_reviewed": false,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\Zero-left-right-no-trap.png",
+          "bytes": 2074543,
+          "sha256": "1ba1e39715bdc31bd6a44fa2907c4bc08f404cc6748b633c205b42b60a301589"
+        },
+        {
+          "peer": 1,
+          "label": "Zero-left-right-no-trap",
+          "personally_reviewed": false,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\peer1-Zero-left-right-no-trap.png",
+          "bytes": 2074543,
+          "sha256": "502ef8e63418216bd5f0049e8e09ac9aceb4a6e2233bdd5ed1cf5cb03bfb0bbc"
+        },
+        {
+          "peer": 0,
+          "label": "Zero-own-menu-at-waiting-door",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\Zero-own-menu-at-waiting-door.png",
+          "bytes": 2074543,
+          "sha256": "dfd5d3f47cbb92f8221db7109f47d1cdbcbbb02447004756a9ccdf42d2c2d5a5"
+        },
+        {
+          "peer": 1,
+          "label": "Zero-own-menu-at-waiting-door",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\peer1-Zero-own-menu-at-waiting-door.png",
+          "bytes": 2074543,
+          "sha256": "dfd5d3f47cbb92f8221db7109f47d1cdbcbbb02447004756a9ccdf42d2c2d5a5"
+        },
+        {
+          "peer": 0,
+          "label": "Zero-menu-resumed-still-waiting",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\Zero-menu-resumed-still-waiting.png",
+          "bytes": 2074543,
+          "sha256": "d13eae4f3b220f12770521b66c99f0da8096c9137f6abaa8edd60a2359ddc33c"
+        },
+        {
+          "peer": 1,
+          "label": "Zero-menu-resumed-still-waiting",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\peer1-Zero-menu-resumed-still-waiting.png",
+          "bytes": 2074543,
+          "sha256": "f9d1ff2648de6144fd311d8c89c3f7b12589efadd62c926066afe9b57ac2195e"
+        },
+        {
+          "peer": 0,
+          "label": "actual-Both-native-door-without-withdrawal",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\actual-Both-native-door-without-withdrawal.png",
+          "bytes": 2074543,
+          "sha256": "49efabf797bbe897b2cab2ddf755dc296b3d5aeea57e49c208534841849403e0"
+        },
+        {
+          "peer": 1,
+          "label": "actual-Both-native-door-without-withdrawal",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\peer1-actual-Both-native-door-without-withdrawal.png",
+          "bytes": 2074543,
+          "sha256": "92ed9f0063c1e77ab48e1c541a2f6f64f097d50467bc2e162c7ee405954718d6"
+        },
+        {
+          "peer": 0,
+          "label": "Both-door-original-boss-allocated",
+          "personally_reviewed": false,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\Both-door-original-boss-allocated.png",
+          "bytes": 2074543,
+          "sha256": "0cb339ff96c611bd22c8d5d0d6e66815f0e57e028fb8dda8e8bf379ebb39658d"
+        },
+        {
+          "peer": 1,
+          "label": "Both-door-original-boss-allocated",
+          "personally_reviewed": false,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\peer1-Both-door-original-boss-allocated.png",
+          "bytes": 2074543,
+          "sha256": "091c41e2050dabf0a19243f49731b193bb768cece9a7399850e80ae82bad2c95"
+        },
+        {
+          "peer": 0,
+          "label": "Both-original-heroes-no-beam-native-release",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\Both-original-heroes-no-beam-native-release.png",
+          "bytes": 2074543,
+          "sha256": "fc88221f6fe672103014ec3cfaaf37c083d2d843873c1fe2622e88af0b52f651"
+        },
+        {
+          "peer": 1,
+          "label": "Both-original-heroes-no-beam-native-release",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\peer1-Both-original-heroes-no-beam-native-release.png",
+          "bytes": 2074543,
+          "sha256": "e22598988954feefa98c72c1c36e985c5eda77aeff672f87ec87b31cc4585cfb"
+        },
+        {
+          "peer": 0,
+          "label": "both-controls-after-real-Both-door",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\both-controls-after-real-Both-door.png",
+          "bytes": 2074543,
+          "sha256": "f8ac2309d3f1ac2bd432bc80d340778456883ae5c6439c67e1c9ce024d5d7a8f"
+        },
+        {
+          "peer": 1,
+          "label": "both-controls-after-real-Both-door",
+          "personally_reviewed": true,
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\intro-admission\\Both-door\\peer1-both-controls-after-real-Both-door.png",
+          "bytes": 2074543,
+          "sha256": "f6ffa901133ff494a82b7efdd5e3e182776e4f6c5bb335a17f9b0283cc009dbd"
+        }
+      ],
+      "fixture_refusals": [
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\peer-0\\saves\\input-recordings\\session-1793103909409678-1-0\\inputs.jsonl",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "1632a5540b303f6e2be7185d736b3a4ebd32a3271563316e416dab9e955aff38",
+            "manifest_sha256": "9e6189941dfcbc82c933810ede6cd7f2a63f2046635adc2bc250cd5192995fa9",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 9,
+              "selected_sha256": "1a9464e80e29d8b41cec4c0aa2e20b43f78142e003003519d640af71df3665aa"
+            },
+            "settings_sha256": "81e2e5d7bbf7758bd3df6ce83ca8d1d18bd6b43876f6a7bcf4a476990caff904",
+            "simulation_contract_sha256": "1df20d78dca49bf910428ab067ac3bee264ac685ee72c5410488f5eb18e17545"
+          },
+          "terminal_failure": "unilateral debug or fixture input contaminated capture",
+          "native_status": {
+            "contract": "mmx6.native-consumption.v1",
+            "epoch": 1,
+            "failure": "unilateral debug or fixture input contaminated capture",
+            "schema": 1,
+            "scope": "native-consumption diagnostics; replay unimplemented",
+            "status": "failed"
+          },
+          "events": 6747,
+          "natives": 3147,
+          "p2_reads": 3600,
+          "artifacts": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\peer-0-recording-refusal\\settings.json",
+              "bytes": 26844,
+              "sha256": "81e2e5d7bbf7758bd3df6ce83ca8d1d18bd6b43876f6a7bcf4a476990caff904"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\peer-0-recording-refusal\\content.json",
+              "bytes": 567,
+              "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\peer-0-recording-refusal\\simulation-contract.json",
+              "bytes": 350,
+              "sha256": "1df20d78dca49bf910428ab067ac3bee264ac685ee72c5410488f5eb18e17545"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\peer-0-recording-refusal\\inputs.jsonl",
+              "bytes": 868713,
+              "sha256": "77875b543c482549999bdee23cc7c507300af451602ea5e4ea7404e1fc78b5b9"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\peer-0-recording-refusal\\status.json",
+              "bytes": 211,
+              "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\peer-0-recording-refusal\\card1.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\peer-0-recording-refusal\\card2.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false,
+          "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+        },
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\peer-1\\saves\\input-recordings\\session-1793103909409959-1-0\\inputs.jsonl",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "1632a5540b303f6e2be7185d736b3a4ebd32a3271563316e416dab9e955aff38",
+            "manifest_sha256": "9e6189941dfcbc82c933810ede6cd7f2a63f2046635adc2bc250cd5192995fa9",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 9,
+              "selected_sha256": "1a9464e80e29d8b41cec4c0aa2e20b43f78142e003003519d640af71df3665aa"
+            },
+            "settings_sha256": "2b1f9ad305f93239b7e1d1772f5f5e4779ffe145c6b2e6592fb197cd7e172858",
+            "simulation_contract_sha256": "1df20d78dca49bf910428ab067ac3bee264ac685ee72c5410488f5eb18e17545"
+          },
+          "terminal_failure": "unilateral debug or fixture input contaminated capture",
+          "native_status": {
+            "contract": "mmx6.native-consumption.v1",
+            "epoch": 1,
+            "failure": "unilateral debug or fixture input contaminated capture",
+            "schema": 1,
+            "scope": "native-consumption diagnostics; replay unimplemented",
+            "status": "failed"
+          },
+          "events": 6747,
+          "natives": 3147,
+          "p2_reads": 3600,
+          "artifacts": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\peer-1-recording-refusal\\settings.json",
+              "bytes": 26844,
+              "sha256": "2b1f9ad305f93239b7e1d1772f5f5e4779ffe145c6b2e6592fb197cd7e172858"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\peer-1-recording-refusal\\content.json",
+              "bytes": 567,
+              "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\peer-1-recording-refusal\\simulation-contract.json",
+              "bytes": 350,
+              "sha256": "1df20d78dca49bf910428ab067ac3bee264ac685ee72c5410488f5eb18e17545"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\peer-1-recording-refusal\\inputs.jsonl",
+              "bytes": 868713,
+              "sha256": "558c9d0ad833656a5f2e1ecee8ee083d537666697e8d93226ce079a040bbed79"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\peer-1-recording-refusal\\status.json",
+              "bytes": 211,
+              "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\peer-1-recording-refusal\\card1.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Both-door-netplay-v76-root-v1\\peer-1-recording-refusal\\card2.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false,
+          "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+        }
+      ]
+    }
+  },
+  "original_source": [
+    {
+      "first": "0x80050670",
+      "end": "0x80050744",
+      "sha256": "86b5759491b6b7ce7793d945a6d0416d6463224fcd40974d424ac48875e24ba5"
+    },
+    {
+      "first": "0x80072150",
+      "end": "0x80072174",
+      "sha256": "4a03f9f23578320afa3c46ef5b51c595a83ef65a601ee718c5967d015ebf6531"
+    }
+  ],
+  "source_fix": "Original outer50DFC progression once; each original controller earns FF, native FE/body delta/release copied only to authenticated living bodies. Correct PLAYER argument, live typed actor+origin validation, serialized authority.",
+  "bypasses": [
+    "Pre-agreed original introCP2 initializer is a reachability prerequisite; no normal intro traversal or native-content audit credit."
+  ],
+  "limits": [
+    "Only one original subtype1 intro door with both living X/P1 and Zero/P2 in Unified mode. No F61 absent/fallen, other-door/subtype, private-view or default Either native qualification.",
+    "Original checkpoint scenery corruption and HUD overlap/clipping remain visible and are not qualified by these behavioral passes.",
+    "V75 LOCAL scalar/native result is retained but source-review rejected due null-a0 standing-box call; no credit is transferred from it.",
+    "Original setup taints recordings; canonical ordinary capture and replay correctly refuse. No R26/finalized capture/replay claim."
+  ],
+  "focused_checks": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v76-both-door-focused-root-v1.log",
+    "bytes": 6346,
+    "sha256": "dbad0edc2766ded551413d1925ff3c20c60e90cdd9c7562d9462158cc20648d2"
+  }
+}
