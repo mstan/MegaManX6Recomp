@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 88 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R17, R22, R25, R26, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F20, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F76, F79, F83, F89, F91, F92, F95, F97, F98, F101, F102, F107, F110, F114, F116, F118, F119, F121, F128, F132, F133, F137, F143, F144, F157, F163, F164, F170, F173, F177, F178, F184, F191, F197, F198, F204, F205, F208), 4 failed, 142 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 89 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R17, R22, R25, R26, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F20, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F73, F76, F79, F83, F89, F91, F92, F95, F97, F98, F101, F102, F107, F109, F110, F114, F116, F118, F119, F121, F128, F132, F133, F137, F143, F144, F157, F163, F164, F170, F173, F177, F178, F184, F191, F197, F198, F204, F205, F208), 4 failed, 141 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,8 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 27
+
+**F109 is closed: 89 passed / 4 failed / 141 unverified (38.0%), one more since88.** The [reviewed native scripted-emission evidence](evidence/mmx6-targets/manifest-bound-e204513-F109-script-emitted-group-reviewed.json) reuses actual same-candidate V83 LOCAL/NET entry and child interaction. P2 leads while the original Yammark intro progresses2→3→4 through its source-qualified allocation/group-ready gates; three initialized parented drones are retained and actual child8→4 interaction is already verified on every peer. The exact birth instant/count6 were not sampled and are not claimed. Existing route/protection bypasses, raw broader failures, matching CRC/profile/cards/owned exits0 and artwork limits remain explicit. No new game run or generic static-placement substitute.
 
 **R26 is closed: 88 passed / 4 failed / 142 unverified (37.6%), one more since87.** The [reviewed default diagnostics/location/replay evidence](evidence/mmx6-native-replay/manifest-bound-6c42c5c-R26-default-location-replay-reviewed.json) combines the retained exact5913-event fresh private LOCAL replay with new same-image NET recordings:6651 accepted events per peer, actual starting settings/cards, full location in real application logs and strict expected offline-replay refusal. All8 NET native/profile checks and three resolvedCRC windows pass; both peers exit0 and cards stay unchanged. Original-source decoding corrects a read-only button-mask classifier without another game run or raw rewrite. The failed wrapper classification remains preserved. Location is exposed through the documented OSD/log counterpart; no new path widget, online/whole-machine replay or gameplay-outcome equality is claimed.
 

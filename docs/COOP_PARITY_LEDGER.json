@@ -13876,24 +13876,106 @@
       "frozen_row_sha256": "7479b0a7c609fed23ac4c7aa2f114ab686ba0922959780ff9b94c5a894a60e75",
       "x6": {
         "workstream": "camera",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Delayed or script-emitted enemy producer unidentified",
-        "bounded_check": "Trace an original X6 emitter separately from static placement; guest-first progression must produce the native delayed child and interaction.",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Guest-led original Yammark intro script emits an initialized three-drone group",
+        "bounded_check": "With P2 leading actual native admission, observe the original script progress through real allocation/group-ready gates, distinguish the resulting parented drone group from static placements, then retain actual child interaction in local and netplay.",
         "baseline_anchors": [
-          "src/mods/mmx6_coop_plugin.c:shared_camera",
-          "src/mods/mmx6_coop_plugin.c:camera_target"
+          "src/mods/mmx6_coop_plugin.c:enemy_hit",
+          "docs/evidence/mmx6-targets/manifest-bound-e204513-F118-protected-child-reviewed.json",
+          "original Amazon member3:800F4324..800F4508"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e204513f38dc9b30111cbc623dc68c185b48ac54",
+            "build_identity": {
+              "executable_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+              "compiled_manifest_sha256": "bfbb990528123f7fc229bc26b21f459b00d2b942bbc1bce70fc95e47948b0d6d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "Falcon X/P1 + Zero/P2",
+              "leader": "P2",
+              "checkpoint": "original AmazonCP2",
+              "contact_protection": "explicitly negotiated on",
+              "audio": "muted dummy"
+            },
+            "action": "Actual guest-led entry, source-bound native emitter/group-ready intro2->3->4, initialized49/sub1 three-child group bound to actual main, then real accepted child interaction.",
+            "outcome": "Native authored emitted group and owned child8->4 interaction established on every physical peer; exact allocation instant/count read remain unsampled and raw broad failures are retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-targets/manifest-bound-e204513-F109-script-emitted-group-reviewed.json",
+                "sha256": "96613e533cec88f9ed510db1d292edf0fb0601b31cdb79c943ad457eedeeed37"
+              }
+            ],
+            "limits": [
+              "Frozen F109 authored staged emission with P2 leading: native analogue is the boss-owned original Yammark intro producing a three-child drone group after guest-led admission. This is an actual script allocator/group-ready path, distinct from environmental/static placements. No literal hive/bee route, general placement sweep, every emitter or lifetime claim.",
+              "The same exact V83 image/title32/host15 is used for LOCAL and both NET physical peers. Actual original main intro2->3->4 is retained with scene_owner2 and P2 leading X4960/Zero5184.40625. Source-qualified phase3 waits for2*N child-group readiness; original N=3 template and later3 initialized49/sub1 children bound to the real main corroborate actual emission.",
+              "Native sourceF4324 clears the group count, F4358 loops original allocator2BBF4 and initializes49/sub1/actual parent80 before advancing2->3; F43F4 advances3->4 only after the real group-ready gate. This is interpretation of actual observed phases using live-bound original source, not a direct observed allocation-call trace.",
+              "Exact first-child birth packets and countF7E0C were not sampled. No direct count6 read, exact allocation instant, first-group generation continuity or absence of child-slot replacement in the unsampled interval is claimed. Actual emitted-group readiness and subsequent initialized group/interaction are established without requiring that instant.",
+              "The already reviewed F118 witness independently proves real ownedZero24/actual source box and child8->4 while the parent stays32HP, then attack retirement/idle recovery, on every physical peer. No child deletion-as-damage inference, unsupported attacks or main/boss defeat credit.",
+              "Original AmazonCP2 initializer bypasses earlier travel; explicitly negotiated lab_contact_protection suppresses hostile contact damage only and does not set enemy emission/AI/HP/attack outcomes. Both native heroes lead/enter/control through the actual script. No hostile-contact-damage credit.",
+              "NET raw F118 helper remains failed_partial because its later-only predicate missed already retained damage row12; raw parent later fails diagnostic publication after guest finisher. Existing exact-mode review retains matching resolved core/nonzero-mod CRCs, agreed profile, strict tainted recording refusals, unchanged native cards and owned exits0. These raw failures are not rewritten or promoted to broad passes.",
+              "The four previously reviewed images are LOCAL child-interaction and NET entry/control context. No drone-birth image, NET damage screenshot, original full-art rendering or audio pass is claimed. Existing scenery corruption/HUD occlusion/flash/overlap remains explicit.",
+              "This closure reuses completed native evidence and source guards; no new game run/build/product fix, default package change, human input test or native3330 audit."
+            ],
+            "bypasses": [
+              "Original agreed AmazonCP2 reachability initializer; negotiated hostile-contact protection only."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "e204513f38dc9b30111cbc623dc68c185b48ac54",
+            "build_identity": {
+              "executable_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+              "compiled_manifest_sha256": "bfbb990528123f7fc229bc26b21f459b00d2b942bbc1bce70fc95e47948b0d6d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "Falcon X/P1 + Zero/P2",
+              "leader": "P2",
+              "checkpoint": "original AmazonCP2",
+              "contact_protection": "explicitly negotiated on",
+              "audio": "muted dummy"
+            },
+            "action": "Actual guest-led entry, source-bound native emitter/group-ready intro2->3->4, initialized49/sub1 three-child group bound to actual main, then real accepted child interaction.",
+            "outcome": "Native authored emitted group and owned child8->4 interaction established on every physical peer; exact allocation instant/count read remain unsampled and raw broad failures are retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-targets/manifest-bound-e204513-F109-script-emitted-group-reviewed.json",
+                "sha256": "96613e533cec88f9ed510db1d292edf0fb0601b31cdb79c943ad457eedeeed37"
+              }
+            ],
+            "limits": [
+              "Frozen F109 authored staged emission with P2 leading: native analogue is the boss-owned original Yammark intro producing a three-child drone group after guest-led admission. This is an actual script allocator/group-ready path, distinct from environmental/static placements. No literal hive/bee route, general placement sweep, every emitter or lifetime claim.",
+              "The same exact V83 image/title32/host15 is used for LOCAL and both NET physical peers. Actual original main intro2->3->4 is retained with scene_owner2 and P2 leading X4960/Zero5184.40625. Source-qualified phase3 waits for2*N child-group readiness; original N=3 template and later3 initialized49/sub1 children bound to the real main corroborate actual emission.",
+              "Native sourceF4324 clears the group count, F4358 loops original allocator2BBF4 and initializes49/sub1/actual parent80 before advancing2->3; F43F4 advances3->4 only after the real group-ready gate. This is interpretation of actual observed phases using live-bound original source, not a direct observed allocation-call trace.",
+              "Exact first-child birth packets and countF7E0C were not sampled. No direct count6 read, exact allocation instant, first-group generation continuity or absence of child-slot replacement in the unsampled interval is claimed. Actual emitted-group readiness and subsequent initialized group/interaction are established without requiring that instant.",
+              "The already reviewed F118 witness independently proves real ownedZero24/actual source box and child8->4 while the parent stays32HP, then attack retirement/idle recovery, on every physical peer. No child deletion-as-damage inference, unsupported attacks or main/boss defeat credit.",
+              "Original AmazonCP2 initializer bypasses earlier travel; explicitly negotiated lab_contact_protection suppresses hostile contact damage only and does not set enemy emission/AI/HP/attack outcomes. Both native heroes lead/enter/control through the actual script. No hostile-contact-damage credit.",
+              "NET raw F118 helper remains failed_partial because its later-only predicate missed already retained damage row12; raw parent later fails diagnostic publication after guest finisher. Existing exact-mode review retains matching resolved core/nonzero-mod CRCs, agreed profile, strict tainted recording refusals, unchanged native cards and owned exits0. These raw failures are not rewritten or promoted to broad passes.",
+              "The four previously reviewed images are LOCAL child-interaction and NET entry/control context. No drone-birth image, NET damage screenshot, original full-art rendering or audio pass is claimed. Existing scenery corruption/HUD occlusion/flash/overlap remains explicit.",
+              "This closure reuses completed native evidence and source guards; no new game run/build/product fix, default package change, human input test or native3330 audit."
+            ],
+            "bypasses": [
+              "Original agreed AmazonCP2 reachability initializer; negotiated hostile-contact protection only."
+            ]
+          }
+        ],
+        "limitations": "Frozen F109 authored staged emission with P2 leading: native analogue is the boss-owned original Yammark intro producing a three-child drone group after guest-led admission. This is an actual script allocator/group-ready path, distinct from environmental/static placements. No literal hive/bee route, general placement sweep, every emitter or lifetime claim. The same exact V83 image/title32/host15 is used for LOCAL and both NET physical peers. Actual original main intro2->3->4 is retained with scene_owner2 and P2 leading X4960/Zero5184.40625. Source-qualified phase3 waits for2*N child-group readiness; original N=3 template and later3 initialized49/sub1 children bound to the real main corroborate actual emission. Native sourceF4324 clears the group count, F4358 loops original allocator2BBF4 and initializes49/sub1/actual parent80 before advancing2->3; F43F4 advances3->4 only after the real group-ready gate. This is interpretation of actual observed phases using live-bound original source, not a direct observed allocation-call trace. Exact first-child birth packets and countF7E0C were not sampled. No direct count6 read, exact allocation instant, first-group generation continuity or absence of child-slot replacement in the unsampled interval is claimed. Actual emitted-group readiness and subsequent initialized group/interaction are established without requiring that instant. The already reviewed F118 witness independently proves real ownedZero24/actual source box and child8->4 while the parent stays32HP, then attack retirement/idle recovery, on every physical peer. No child deletion-as-damage inference, unsupported attacks or main/boss defeat credit. Original AmazonCP2 initializer bypasses earlier travel; explicitly negotiated lab_contact_protection suppresses hostile contact damage only and does not set enemy emission/AI/HP/attack outcomes. Both native heroes lead/enter/control through the actual script. No hostile-contact-damage credit. NET raw F118 helper remains failed_partial because its later-only predicate missed already retained damage row12; raw parent later fails diagnostic publication after guest finisher. Existing exact-mode review retains matching resolved core/nonzero-mod CRCs, agreed profile, strict tainted recording refusals, unchanged native cards and owned exits0. These raw failures are not rewritten or promoted to broad passes. The four previously reviewed images are LOCAL child-interaction and NET entry/control context. No drone-birth image, NET damage screenshot, original full-art rendering or audio pass is claimed. Existing scenery corruption/HUD occlusion/flash/overlap remains explicit. This closure reuses completed native evidence and source guards; no new game run/build/product fix, default package change, human input test or native3330 audit."
       }
     },
     {

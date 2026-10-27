@@ -1,0 +1,3048 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F109"
+  ],
+  "result": "passed",
+  "candidate": "e204513f38dc9b30111cbc623dc68c185b48ac54",
+  "frozen_row_sha256": {
+    "F109": "7479b0a7c609fed23ac4c7aa2f114ab686ba0922959780ff9b94c5a894a60e75"
+  },
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\lab-contact-protection-v83-final-binding-root-v1.json",
+    "binding_sha256": "a60ace7a0443b9d30954720c3c350c241c2e29c6883ebded3e9a016775c98e5b",
+    "image_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+    "manifest_sha256": "bfbb990528123f7fc229bc26b21f459b00d2b942bbc1bce70fc95e47948b0d6d",
+    "provenance_sha256": "9debbad5780b8966e8ce447f0359e0b6327ac488f116e3abe296e41f029c3bdb",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v83-lab-contact-protection-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "e204513f38dc9b30111cbc623dc68c185b48ac54",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v32",
+    "host_revision": 15
+  },
+  "native_mapping": "Guest-led authored Yammark intro emits a three-child damageable drone group through its own allocator; boss-owned staged group, distinct from environmental/static placements.",
+  "retained_source_review": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F109-retained-emission-V83-review-worker-v1.json",
+    "sha256": "1b29b248f6cda577f3fe555c2bd7c5bd28dfe0435de2de4f9c13c8bc0f0df589",
+    "bytes": 14679
+  },
+  "reused_interaction_review": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-targets\\manifest-bound-e204513-F118-protected-child-reviewed.json",
+    "bytes": 90947,
+    "sha256": "c15b995cabd2a02bec5d02a7abc0885b0deea80cc0020327b9e21c7f7718c57a"
+  },
+  "source_windows": [
+    {
+      "address": "0x800f4324",
+      "bytes": 148,
+      "sha256": "f435d81afaa84f8d6cb314f2c94e3d5b4d42abe0d2a703a892fcd24694fe34df"
+    },
+    {
+      "address": "0x800f43f4",
+      "bytes": 276,
+      "sha256": "eb54d67d1d3f5d9712e4e078fe2265995286b6ee9d4da78ac0485adfae35e4dd"
+    },
+    {
+      "address": "0x800f20dc",
+      "bytes": 304,
+      "sha256": "e517204d3b2a5692ee4ff5ef5c6bf6f0c6c8a58aad89685f03a8b59a3c00370c"
+    },
+    {
+      "address": "0x800f7bd0",
+      "bytes": 12,
+      "sha256": "954fec2e261159a99e41a227cdf1354bbba482f3702778dace62b6600e014bc6"
+    },
+    {
+      "address": "0x800efac4",
+      "bytes": 168,
+      "sha256": "5db735fbafa941474d12fdcf2ee6d315e34609330a6a13114284f852c2051020"
+    },
+    {
+      "address": "0x800f1a3c",
+      "bytes": 280,
+      "sha256": "95137e8bd59b1c84464831d0802b04467acd2fc869b56f4a7f64032c94789b39"
+    },
+    {
+      "address": "0x800f1b54",
+      "bytes": 192,
+      "sha256": "b59495df7971b522a5a32f2b61f3244c82b1c01f982370cf096024d3eda1bec6"
+    }
+  ],
+  "source_reasoning": [
+    "Main tableF7C14 phase2 dispatches F42D8. After original grounded70&8, F4324 clears F7E0C, F4358 calls original2BBF4 in an N-child loop, F437C sets subtype1 and F4384 actual parent+80; only then F43B4 increments native intro phase2->3.",
+    "Observed phase3->4 is stronger than a registration/allocated-main claim: original F43F4..446C compares F7E0C with2*N fromF7DF0 and cannot advance to4 before its child-group-ready count matches. Source templateF7BD0=3,1,4,2,6,3 is copied intoF7E00 byEFAC4..EFB1C; F7DF0 points there. Actual first F118 snapshots independently retain exactly3 initialized49/sub1 children bound to that main on every physical peer.",
+    "Child routine F20F0..2100 increments group readiness after rendezvous; F21E8..21F8 increments it again after the original32-step orbit. This is source-derived interpretation of observed main phase4, not a claimed RAM read ofF7E0C or fntrace of each allocation.",
+    "Already reviewed native child8->4/ownedZero24/body48/actual overlap with main32 unchanged establishes real emitted-child interaction on LOCAL and both NET physical peers."
+  ],
+  "modes": {
+    "local": {
+      "result": "passed",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-local-v83-root-v1\\qualification.json",
+        "bytes": 15759712,
+        "sha256": "c859ca6b35788d69488fb0b6715cdcbb1a9f98a7b6a5c3c36244cc70edaefd96"
+      },
+      "raw_parent_status": "agreed_fixture_native_intro_observations_complete_review_pending",
+      "entry_checks": {
+        "agreed_checkpoint_complete": true,
+        "original_leader_selected": true,
+        "actual_native_contact": true,
+        "original_boss_fullHP_released": true,
+        "passenger_landed_both_healthy": true,
+        "independent_native_controls": true,
+        "no_repeated_initializer": true
+      },
+      "guest_led_group_witnesses": [
+        {
+          "peer": 0,
+          "source_bound_intro_phase_sequence": [
+            {
+              "row": 192,
+              "phase": 2,
+              "sdk_frame": 3782,
+              "scene_owner": 2,
+              "player_x": [
+                4960.0,
+                5184.40625
+              ],
+              "main_origin": "0x800f66c0",
+              "main_ground": 0
+            },
+            {
+              "row": 218,
+              "phase": 3,
+              "sdk_frame": 3958,
+              "scene_owner": 2,
+              "player_x": [
+                4960.0,
+                5184.40625
+              ],
+              "main_origin": "0x800f66c0",
+              "main_ground": 8
+            },
+            {
+              "row": 239,
+              "phase": 4,
+              "sdk_frame": 4094,
+              "scene_owner": 2,
+              "player_x": [
+                4960.0,
+                5184.40625
+              ],
+              "main_origin": "0x800f66c0",
+              "main_ground": 8
+            }
+          ],
+          "subsequent_actual_group": [
+            {
+              "address": "0x8008efe4",
+              "allocation": 65,
+              "type": 49,
+              "subtype": 1,
+              "state": 1,
+              "action": 5,
+              "phase": 5,
+              "hp": 8,
+              "parent": "0x8008ef48"
+            },
+            {
+              "address": "0x8008f080",
+              "allocation": 65,
+              "type": 49,
+              "subtype": 1,
+              "state": 1,
+              "action": 5,
+              "phase": 1,
+              "hp": 8,
+              "parent": "0x8008ef48"
+            },
+            {
+              "address": "0x8008f11c",
+              "allocation": 65,
+              "type": 49,
+              "subtype": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 1,
+              "hp": 8,
+              "parent": "0x8008ef48"
+            }
+          ]
+        }
+      ],
+      "actual_child_interactions": [
+        {
+          "peer": 0,
+          "before": 40,
+          "damage": 42,
+          "retired": 60,
+          "child": "0x8008f080",
+          "hp_before": 8,
+          "hp_after": 4
+        }
+      ],
+      "reused_exact_mode_interaction": {
+        "result": "passed",
+        "qualification": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-local-v83-root-v1\\qualification.json",
+          "bytes": 15759712,
+          "sha256": "c859ca6b35788d69488fb0b6715cdcbb1a9f98a7b6a5c3c36244cc70edaefd96"
+        },
+        "raw_parent_status": "agreed_fixture_native_intro_observations_complete_review_pending",
+        "raw_parent_error": null,
+        "observations": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-local-v83-root-v1\\ammo-hud\\intro-admission\\F118\\observations.json",
+          "bytes": 2675602,
+          "sha256": "a05d39db7a45fed9e4f281acccc13eb40c96a2d9709202a4d138a6a3a1c1fd02"
+        },
+        "raw_component_status": "native_component_observations_complete_review_pending",
+        "raw_component_error": null,
+        "native_witnesses": [
+          {
+            "peer": 0,
+            "before_row": 40,
+            "damage_row": 42,
+            "retired_row": 60,
+            "child_before": {
+              "slot": 2,
+              "owner": null,
+              "address": "0x8008f080",
+              "allocation": 65,
+              "active": 65,
+              "type": 49,
+              "subtype": 1,
+              "visible": 1,
+              "state": 1,
+              "action": 5,
+              "phase": 6,
+              "phase2": 0,
+              "x": 5199,
+              "y": 2074,
+              "x_raw": 340758144,
+              "y_raw": 135946080,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 10,
+              "sprite_frame": 70,
+              "animation_cursor": "0x800f7ac0",
+              "command": [
+                9,
+                0,
+                1,
+                70
+              ],
+              "attack": "0x800f7960",
+              "hurt": "0x800f7964",
+              "table": "0x80074bfc",
+              "hp": 8,
+              "iframe": 0,
+              "disposition": 0,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 0,
+              "feedback": 0,
+              "hex": "4131010101050600808e4f14605f1a08000000000000040a000000000000000000000000000000000000000000000000447b0f80c07a0f8000000000708d1580e0014c7909000146ff0000000000000060790f8064790f80fc4b07800800000002000000000000005c790f800f0002000000000000000000000000000000bc0948ef08800000000001004b141b080008000000000000000000000000",
+              "parent": "0x8008ef48",
+              "index88": 1,
+              "bound_parent": true,
+              "hurt_rect": [
+                5183,
+                2068,
+                5215,
+                2080
+              ]
+            },
+            "child_after": {
+              "slot": 2,
+              "owner": null,
+              "address": "0x8008f080",
+              "allocation": 65,
+              "active": 65,
+              "type": 49,
+              "subtype": 1,
+              "visible": 1,
+              "state": 1,
+              "action": 5,
+              "phase": 6,
+              "phase2": 0,
+              "x": 5199,
+              "y": 2074,
+              "x_raw": 340758144,
+              "y_raw": 135946080,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 10,
+              "sprite_frame": 70,
+              "animation_cursor": "0x800f7ac0",
+              "command": [
+                4,
+                0,
+                1,
+                70
+              ],
+              "attack": "0x800f7960",
+              "hurt": "0x800f7964",
+              "table": "0x80074bfc",
+              "hp": 4,
+              "iframe": 0,
+              "disposition": 0,
+              "token": 0,
+              "remembered_token": 1,
+              "recovery": 0,
+              "feedback": 0,
+              "hex": "4131010101050600808e4f14605f1a08000000000000040a000000000000000000000000000000000000000000000000447b0f80c07a0f8000000000708d1580e0014cf904000146ff0000000000000060790f8064790f80fc4b07800400000002000000000100005c790f800f0002000000000000000000000000000500c10948ef08800000000001004b141b080008000000000000000000000000",
+              "parent": "0x8008ef48",
+              "index88": 1,
+              "bound_parent": true,
+              "hurt_rect": [
+                5183,
+                2068,
+                5215,
+                2080
+              ]
+            },
+            "owned_attacks": [
+              {
+                "slot": 0,
+                "owner": 2,
+                "address": "0x800950a0",
+                "allocation": 1,
+                "active": 1,
+                "type": 24,
+                "subtype": 0,
+                "visible": 1,
+                "state": 1,
+                "action": 0,
+                "phase": 0,
+                "phase2": 0,
+                "x": 5195,
+                "y": 2074,
+                "x_raw": 340518912,
+                "y_raw": 135921664,
+                "layer": 0,
+                "facing": 64,
+                "selected_clip": 112,
+                "sprite_frame": 64,
+                "animation_cursor": "0x801ef03c",
+                "command": [
+                  1,
+                  2,
+                  1,
+                  64
+                ],
+                "attack": "0x801ee41c",
+                "hurt": "0x0",
+                "table": "0x0",
+                "hp": 0,
+                "iframe": 0,
+                "disposition": 0,
+                "token": 1,
+                "remembered_token": 0,
+                "recovery": 88,
+                "feedback": 0,
+                "hex": "011800010100000000e84b1400001a080000000000400270000000000000000000000000000000000000000000000000d0f61e803cf01e8000000000a481039f0005017801020140ff000000000000001ce41e8000000000000000000000000000000000010000000000000000000000000000000000000000000000000000004f141a0858000000000000000000000000000000000000000000000000000000",
+                "native_parent_animation": 88,
+                "source_box": [
+                  204,
+                  250,
+                  78,
+                  16
+                ],
+                "attack_rect": [
+                  5169,
+                  2068,
+                  5247,
+                  2084
+                ]
+              }
+            ],
+            "main_HP": 32,
+            "guest_pose": [
+              1,
+              48
+            ],
+            "native_attack_retired": true,
+            "guest_native_idle_recovered": true
+          }
+        ],
+        "parent_checks": {
+          "exact_image_manifest_declared_sources_originals": true,
+          "native_resource_and_window_observations_complete": true,
+          "default_recording_taint_retained_and_replay_refused": true,
+          "owned_cleanup_private_cards": true
+        },
+        "source_guards": [
+          {
+            "peer": 0,
+            "address": "0x800f40c8",
+            "bytes": 124,
+            "sha256": "3f2b57d7b5912f6c33c3eaae930107a1aba927fe084563136088ada3974c6510",
+            "expected_sha256": "3f2b57d7b5912f6c33c3eaae930107a1aba927fe084563136088ada3974c6510"
+          },
+          {
+            "peer": 0,
+            "address": "0x800f4324",
+            "bytes": 148,
+            "sha256": "f435d81afaa84f8d6cb314f2c94e3d5b4d42abe0d2a703a892fcd24694fe34df",
+            "expected_sha256": "f435d81afaa84f8d6cb314f2c94e3d5b4d42abe0d2a703a892fcd24694fe34df"
+          },
+          {
+            "peer": 0,
+            "address": "0x800f1a3c",
+            "bytes": 280,
+            "sha256": "95137e8bd59b1c84464831d0802b04467acd2fc869b56f4a7f64032c94789b39",
+            "expected_sha256": "95137e8bd59b1c84464831d0802b04467acd2fc869b56f4a7f64032c94789b39"
+          },
+          {
+            "peer": 0,
+            "address": "0x800f1b54",
+            "bytes": 192,
+            "sha256": "b59495df7971b522a5a32f2b61f3244c82b1c01f982370cf096024d3eda1bec6",
+            "expected_sha256": "b59495df7971b522a5a32f2b61f3244c82b1c01f982370cf096024d3eda1bec6"
+          },
+          {
+            "peer": 0,
+            "address": "0x800f2a20",
+            "bytes": 44,
+            "sha256": "d459f64d10a94e7e223ed97cf01bda9847a677fbed36c54ccd3e15543031b4a0",
+            "expected_sha256": "d459f64d10a94e7e223ed97cf01bda9847a677fbed36c54ccd3e15543031b4a0"
+          },
+          {
+            "peer": 0,
+            "address": "0x800f56b4",
+            "bytes": 68,
+            "sha256": "e307342d2f8272c29b4f31f1becfe9c60e46d60d0800367080e78decfa749666",
+            "expected_sha256": "e307342d2f8272c29b4f31f1becfe9c60e46d60d0800367080e78decfa749666"
+          },
+          {
+            "peer": 0,
+            "address": "0x800f7d54",
+            "bytes": 12,
+            "sha256": "c702d8e405c79a5cbe8c2ef7e19c7b3371454d194ee4e3f4004492c6fa4b6795",
+            "expected_sha256": "c702d8e405c79a5cbe8c2ef7e19c7b3371454d194ee4e3f4004492c6fa4b6795"
+          },
+          {
+            "peer": 0,
+            "address": "0x800f795c",
+            "bytes": 12,
+            "sha256": "39012cb447f048f2b2b047c94a9e04c56b5be11484338c39e6a421370a627dcc",
+            "expected_sha256": "39012cb447f048f2b2b047c94a9e04c56b5be11484338c39e6a421370a627dcc"
+          },
+          {
+            "peer": 0,
+            "address": "0x80074bfc",
+            "bytes": 160,
+            "sha256": "e5c12c1686d1135c1dc2e935451f27d29c550bc234634c653db9ac2a7676f7e8",
+            "expected_sha256": "e5c12c1686d1135c1dc2e935451f27d29c550bc234634c653db9ac2a7676f7e8"
+          },
+          {
+            "peer": 0,
+            "address": "0x80031474",
+            "bytes": 1400,
+            "sha256": "25da3e15379f3672fdd126d01a7d85aba0c5d073d8efdbae31f971b8d69abbdc",
+            "expected_sha256": "25da3e15379f3672fdd126d01a7d85aba0c5d073d8efdbae31f971b8d69abbdc"
+          }
+        ],
+        "checks": {
+          "original_independent_child_identity": true,
+          "own_guest24_and_source_box": true,
+          "actual_child_HP_decrease_all_physical_peers": true,
+          "main_HP_unchanged": true,
+          "native_attack_retired_and_idle_recovered": true,
+          "P1_neutral": true,
+          "source_profile_CRC_cards_cleanup_taint": true
+        },
+        "owned_cleanup": {
+          "shutdown": "graceful_owned_debug",
+          "exit_code": 0
+        }
+      }
+    },
+    "netplay": {
+      "result": "passed",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\qualification.json",
+        "bytes": 43591964,
+        "sha256": "907fde773f32e9f4ecc982fa0418bdbbfda9812e52e40cb7aab2a3425a9e5b9c"
+      },
+      "raw_parent_status": "failed",
+      "entry_checks": {
+        "agreed_checkpoint_complete": true,
+        "original_leader_selected": true,
+        "actual_native_contact": true,
+        "original_boss_fullHP_released": true,
+        "passenger_landed_both_healthy": true,
+        "independent_native_controls": true,
+        "no_repeated_initializer": true
+      },
+      "guest_led_group_witnesses": [
+        {
+          "peer": 0,
+          "source_bound_intro_phase_sequence": [
+            {
+              "row": 116,
+              "phase": 2,
+              "sdk_frame": 4914,
+              "scene_owner": 2,
+              "player_x": [
+                4960.0,
+                5184.40625
+              ],
+              "main_origin": "0x800f66c0",
+              "main_ground": 0
+            },
+            {
+              "row": 134,
+              "phase": 3,
+              "sdk_frame": 5097,
+              "scene_owner": 2,
+              "player_x": [
+                4960.0,
+                5184.40625
+              ],
+              "main_origin": "0x800f66c0",
+              "main_ground": 8
+            },
+            {
+              "row": 148,
+              "phase": 4,
+              "sdk_frame": 5237,
+              "scene_owner": 2,
+              "player_x": [
+                4960.0,
+                5184.40625
+              ],
+              "main_origin": "0x800f66c0",
+              "main_ground": 8
+            }
+          ],
+          "subsequent_actual_group": [
+            {
+              "address": "0x8008efe4",
+              "allocation": 65,
+              "type": 49,
+              "subtype": 1,
+              "state": 1,
+              "action": 5,
+              "phase": 6,
+              "hp": 8,
+              "parent": "0x8008ef48"
+            },
+            {
+              "address": "0x8008f080",
+              "allocation": 65,
+              "type": 49,
+              "subtype": 1,
+              "state": 1,
+              "action": 5,
+              "phase": 5,
+              "hp": 8,
+              "parent": "0x8008ef48"
+            },
+            {
+              "address": "0x8008f11c",
+              "allocation": 65,
+              "type": 49,
+              "subtype": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 1,
+              "hp": 8,
+              "parent": "0x8008ef48"
+            }
+          ]
+        },
+        {
+          "peer": 1,
+          "source_bound_intro_phase_sequence": [
+            {
+              "row": 115,
+              "phase": 2,
+              "sdk_frame": 4912,
+              "scene_owner": 2,
+              "player_x": [
+                4960.0,
+                5184.40625
+              ],
+              "main_origin": "0x800f66c0",
+              "main_ground": 0
+            },
+            {
+              "row": 133,
+              "phase": 3,
+              "sdk_frame": 5091,
+              "scene_owner": 2,
+              "player_x": [
+                4960.0,
+                5184.40625
+              ],
+              "main_origin": "0x800f66c0",
+              "main_ground": 8
+            },
+            {
+              "row": 147,
+              "phase": 4,
+              "sdk_frame": 5232,
+              "scene_owner": 2,
+              "player_x": [
+                4960.0,
+                5184.40625
+              ],
+              "main_origin": "0x800f66c0",
+              "main_ground": 8
+            }
+          ],
+          "subsequent_actual_group": [
+            {
+              "address": "0x8008efe4",
+              "allocation": 65,
+              "type": 49,
+              "subtype": 1,
+              "state": 1,
+              "action": 5,
+              "phase": 6,
+              "hp": 8,
+              "parent": "0x8008ef48"
+            },
+            {
+              "address": "0x8008f080",
+              "allocation": 65,
+              "type": 49,
+              "subtype": 1,
+              "state": 1,
+              "action": 5,
+              "phase": 5,
+              "hp": 8,
+              "parent": "0x8008ef48"
+            },
+            {
+              "address": "0x8008f11c",
+              "allocation": 65,
+              "type": 49,
+              "subtype": 1,
+              "state": 1,
+              "action": 3,
+              "phase": 1,
+              "hp": 8,
+              "parent": "0x8008ef48"
+            }
+          ]
+        }
+      ],
+      "actual_child_interactions": [
+        {
+          "peer": 0,
+          "before": 10,
+          "damage": 12,
+          "retired": 23,
+          "child": "0x8008efe4",
+          "hp_before": 8,
+          "hp_after": 4
+        },
+        {
+          "peer": 1,
+          "before": 10,
+          "damage": 12,
+          "retired": 23,
+          "child": "0x8008efe4",
+          "hp_before": 8,
+          "hp_after": 4
+        }
+      ],
+      "reused_exact_mode_interaction": {
+        "result": "passed",
+        "qualification": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\qualification.json",
+          "bytes": 43591964,
+          "sha256": "907fde773f32e9f4ecc982fa0418bdbbfda9812e52e40cb7aab2a3425a9e5b9c"
+        },
+        "raw_parent_status": "failed",
+        "raw_parent_error": "paired ground-jump audio then settle: insufficient common diagnostic publication counts",
+        "observations": {
+          "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\intro-admission\\F118\\observations.json",
+          "bytes": 12904557,
+          "sha256": "c27b4ce785869e9d04d5df8d4c4c8b6a39be338ecd03817b96160b4e0195ecd0"
+        },
+        "raw_component_status": "failed_partial",
+        "raw_component_error": "native child reaches neutral guest entry stance: native predicate not earned",
+        "native_witnesses": [
+          {
+            "peer": 0,
+            "before_row": 10,
+            "damage_row": 12,
+            "retired_row": 23,
+            "child_before": {
+              "slot": 1,
+              "owner": null,
+              "address": "0x8008efe4",
+              "allocation": 65,
+              "active": 65,
+              "type": 49,
+              "subtype": 1,
+              "visible": 1,
+              "state": 1,
+              "action": 5,
+              "phase": 7,
+              "phase2": 0,
+              "x": 5231,
+              "y": 2074,
+              "x_raw": 342861016,
+              "y_raw": 135973706,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 10,
+              "sprite_frame": 72,
+              "animation_cursor": "0x800f7ac8",
+              "command": [
+                2,
+                0,
+                0,
+                72
+              ],
+              "attack": "0x800f7960",
+              "hurt": "0x800f7964",
+              "table": "0x80074bfc",
+              "hp": 8,
+              "iframe": 0,
+              "disposition": 0,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 0,
+              "feedback": 0,
+              "hex": "4131010101050700d8a46f144acb1a08000000000000040a000000000000000000000000000000000000000000000000447b0f80c87a0f8000000000708d1580e0014c7902000048ff0000000000000060790f8064790f80fc4b07800800000002000000000000005c790f800f0002000000000000000000000000003c00480a48ef088000000000000059141b08a007000000000000000000000000",
+              "parent": "0x8008ef48",
+              "index88": 0,
+              "bound_parent": true,
+              "hurt_rect": [
+                5215,
+                2068,
+                5247,
+                2080
+              ]
+            },
+            "child_after": {
+              "slot": 1,
+              "owner": null,
+              "address": "0x8008efe4",
+              "allocation": 65,
+              "active": 65,
+              "type": 49,
+              "subtype": 1,
+              "visible": 1,
+              "state": 1,
+              "action": 5,
+              "phase": 7,
+              "phase2": 0,
+              "x": 5258,
+              "y": 2074,
+              "x_raw": 344630488,
+              "y_raw": 135973706,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 10,
+              "sprite_frame": 72,
+              "animation_cursor": "0x800f7ac8",
+              "command": [
+                3,
+                0,
+                0,
+                72
+              ],
+              "attack": "0x800f7960",
+              "hurt": "0x800f7964",
+              "table": "0x80074bfc",
+              "hp": 4,
+              "iframe": 0,
+              "disposition": 0,
+              "token": 0,
+              "remembered_token": 1,
+              "recovery": 0,
+              "feedback": 0,
+              "hex": "4131010101050700d8a48a144acb1a08000000000000040a000000000000000000000000000000000000000000000000447b0f80c87a0f8000000000708d1580e0014cf903000048ff0000000000000060790f8064790f80fc4b07800400000002000000000100005c790f800a0002000000000000000000000000003c00510a48ef088000000000000059141b08a007000000000000000000000000",
+              "parent": "0x8008ef48",
+              "index88": 0,
+              "bound_parent": true,
+              "hurt_rect": [
+                5242,
+                2068,
+                5274,
+                2080
+              ]
+            },
+            "owned_attacks": [
+              {
+                "slot": 0,
+                "owner": 2,
+                "address": "0x800950a0",
+                "allocation": 1,
+                "active": 1,
+                "type": 24,
+                "subtype": 0,
+                "visible": 1,
+                "state": 1,
+                "action": 0,
+                "phase": 0,
+                "phase2": 0,
+                "x": 5219,
+                "y": 2074,
+                "x_raw": 342091776,
+                "y_raw": 135921664,
+                "layer": 0,
+                "facing": 64,
+                "selected_clip": 112,
+                "sprite_frame": 64,
+                "animation_cursor": "0x801ef03c",
+                "command": [
+                  1,
+                  2,
+                  1,
+                  64
+                ],
+                "attack": "0x801ee41c",
+                "hurt": "0x0",
+                "table": "0x0",
+                "hp": 0,
+                "iframe": 0,
+                "disposition": 0,
+                "token": 1,
+                "remembered_token": 0,
+                "recovery": 88,
+                "feedback": 0,
+                "hex": "011800010100000000e8631400001a080000000000400270000000000000000000000000000000000000000000000000d0f61e803cf01e8000000000a481039f0005017801020140ff000000000000001ce41e8000000000000000000000000000000000010000000000000000000000000000000000000000000000000000005b141a0858000000000000000000000000000000000000000000000000000000",
+                "native_parent_animation": 88,
+                "source_box": [
+                  204,
+                  250,
+                  78,
+                  16
+                ],
+                "attack_rect": [
+                  5193,
+                  2068,
+                  5271,
+                  2084
+                ]
+              }
+            ],
+            "main_HP": 32,
+            "guest_pose": [
+              1,
+              48
+            ],
+            "native_attack_retired": true,
+            "guest_native_idle_recovered": true
+          },
+          {
+            "peer": 1,
+            "before_row": 10,
+            "damage_row": 12,
+            "retired_row": 23,
+            "child_before": {
+              "slot": 1,
+              "owner": null,
+              "address": "0x8008efe4",
+              "allocation": 65,
+              "active": 65,
+              "type": 49,
+              "subtype": 1,
+              "visible": 1,
+              "state": 1,
+              "action": 5,
+              "phase": 7,
+              "phase2": 0,
+              "x": 5234,
+              "y": 2074,
+              "x_raw": 343057624,
+              "y_raw": 135973706,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 10,
+              "sprite_frame": 72,
+              "animation_cursor": "0x800f7ac8",
+              "command": [
+                1,
+                0,
+                0,
+                72
+              ],
+              "attack": "0x800f7960",
+              "hurt": "0x800f7964",
+              "table": "0x80074bfc",
+              "hp": 8,
+              "iframe": 0,
+              "disposition": 0,
+              "token": 0,
+              "remembered_token": 0,
+              "recovery": 0,
+              "feedback": 0,
+              "hex": "4131010101050700d8a472144acb1a08000000000000040a000000000000000000000000000000000000000000000000447b0f80c87a0f8000000000708d1580e0014c7901000048ff0000000000000060790f8064790f80fc4b07800800000002000000000000005c790f80020002000000000000000000000000003c00490a48ef088000000000000059141b08a007000000000000000000000000",
+              "parent": "0x8008ef48",
+              "index88": 0,
+              "bound_parent": true,
+              "hurt_rect": [
+                5218,
+                2068,
+                5250,
+                2080
+              ]
+            },
+            "child_after": {
+              "slot": 1,
+              "owner": null,
+              "address": "0x8008efe4",
+              "allocation": 65,
+              "active": 65,
+              "type": 49,
+              "subtype": 1,
+              "visible": 1,
+              "state": 1,
+              "action": 5,
+              "phase": 7,
+              "phase2": 0,
+              "x": 5258,
+              "y": 2074,
+              "x_raw": 344630488,
+              "y_raw": 135973706,
+              "layer": 0,
+              "facing": 0,
+              "selected_clip": 10,
+              "sprite_frame": 72,
+              "animation_cursor": "0x800f7ac8",
+              "command": [
+                3,
+                0,
+                0,
+                72
+              ],
+              "attack": "0x800f7960",
+              "hurt": "0x800f7964",
+              "table": "0x80074bfc",
+              "hp": 4,
+              "iframe": 0,
+              "disposition": 0,
+              "token": 0,
+              "remembered_token": 1,
+              "recovery": 0,
+              "feedback": 0,
+              "hex": "4131010101050700d8a48a144acb1a08000000000000040a000000000000000000000000000000000000000000000000447b0f80c87a0f8000000000708d1580e0014cf903000048ff0000000000000060790f8064790f80fc4b07800400000002000000000100005c790f800a0002000000000000000000000000003c00510a48ef088000000000000059141b08a007000000000000000000000000",
+              "parent": "0x8008ef48",
+              "index88": 0,
+              "bound_parent": true,
+              "hurt_rect": [
+                5242,
+                2068,
+                5274,
+                2080
+              ]
+            },
+            "owned_attacks": [
+              {
+                "slot": 0,
+                "owner": 2,
+                "address": "0x800950a0",
+                "allocation": 1,
+                "active": 1,
+                "type": 24,
+                "subtype": 0,
+                "visible": 1,
+                "state": 1,
+                "action": 0,
+                "phase": 0,
+                "phase2": 0,
+                "x": 5219,
+                "y": 2074,
+                "x_raw": 342091776,
+                "y_raw": 135921664,
+                "layer": 0,
+                "facing": 64,
+                "selected_clip": 112,
+                "sprite_frame": 64,
+                "animation_cursor": "0x801ef03c",
+                "command": [
+                  1,
+                  2,
+                  1,
+                  64
+                ],
+                "attack": "0x801ee41c",
+                "hurt": "0x0",
+                "table": "0x0",
+                "hp": 0,
+                "iframe": 0,
+                "disposition": 0,
+                "token": 1,
+                "remembered_token": 0,
+                "recovery": 88,
+                "feedback": 0,
+                "hex": "011800010100000000e8631400001a080000000000400270000000000000000000000000000000000000000000000000d0f61e803cf01e8000000000a481039f0005017801020140ff000000000000001ce41e8000000000000000000000000000000000010000000000000000000000000000000000000000000000000000005b141a0858000000000000000000000000000000000000000000000000000000",
+                "native_parent_animation": 88,
+                "source_box": [
+                  204,
+                  250,
+                  78,
+                  16
+                ],
+                "attack_rect": [
+                  5193,
+                  2068,
+                  5271,
+                  2084
+                ]
+              }
+            ],
+            "main_HP": 32,
+            "guest_pose": [
+              1,
+              48
+            ],
+            "native_attack_retired": true,
+            "guest_native_idle_recovered": true
+          }
+        ],
+        "parent_checks": {
+          "jump_audio_original_source_bound": true,
+          "jump_audio_both_peers_completed": true,
+          "declared_build_manifest_bound_to_staged_images": true,
+          "jump_audio_declared_sources_match": true,
+          "host_profile_settled_before_guest": true,
+          "p2_right_reaches_both_peers": true,
+          "p2_right_preserves_p1_x": true,
+          "p1_jump_reaches_both_peers": true,
+          "p1_jump_preserves_p2_y": true,
+          "both_alive_healthy": true,
+          "mailbox_unused": true,
+          "default_resident_loader_committed": true,
+          "jump_audio_final_private_cards_unchanged": true,
+          "jump_audio_owned_pair_cleanup": true
+        },
+        "source_guards": [
+          {
+            "peer": 0,
+            "address": "0x800f40c8",
+            "bytes": 124,
+            "sha256": "3f2b57d7b5912f6c33c3eaae930107a1aba927fe084563136088ada3974c6510",
+            "expected_sha256": "3f2b57d7b5912f6c33c3eaae930107a1aba927fe084563136088ada3974c6510"
+          },
+          {
+            "peer": 1,
+            "address": "0x800f40c8",
+            "bytes": 124,
+            "sha256": "3f2b57d7b5912f6c33c3eaae930107a1aba927fe084563136088ada3974c6510",
+            "expected_sha256": "3f2b57d7b5912f6c33c3eaae930107a1aba927fe084563136088ada3974c6510"
+          },
+          {
+            "peer": 0,
+            "address": "0x800f4324",
+            "bytes": 148,
+            "sha256": "f435d81afaa84f8d6cb314f2c94e3d5b4d42abe0d2a703a892fcd24694fe34df",
+            "expected_sha256": "f435d81afaa84f8d6cb314f2c94e3d5b4d42abe0d2a703a892fcd24694fe34df"
+          },
+          {
+            "peer": 1,
+            "address": "0x800f4324",
+            "bytes": 148,
+            "sha256": "f435d81afaa84f8d6cb314f2c94e3d5b4d42abe0d2a703a892fcd24694fe34df",
+            "expected_sha256": "f435d81afaa84f8d6cb314f2c94e3d5b4d42abe0d2a703a892fcd24694fe34df"
+          },
+          {
+            "peer": 0,
+            "address": "0x800f1a3c",
+            "bytes": 280,
+            "sha256": "95137e8bd59b1c84464831d0802b04467acd2fc869b56f4a7f64032c94789b39",
+            "expected_sha256": "95137e8bd59b1c84464831d0802b04467acd2fc869b56f4a7f64032c94789b39"
+          },
+          {
+            "peer": 1,
+            "address": "0x800f1a3c",
+            "bytes": 280,
+            "sha256": "95137e8bd59b1c84464831d0802b04467acd2fc869b56f4a7f64032c94789b39",
+            "expected_sha256": "95137e8bd59b1c84464831d0802b04467acd2fc869b56f4a7f64032c94789b39"
+          },
+          {
+            "peer": 0,
+            "address": "0x800f1b54",
+            "bytes": 192,
+            "sha256": "b59495df7971b522a5a32f2b61f3244c82b1c01f982370cf096024d3eda1bec6",
+            "expected_sha256": "b59495df7971b522a5a32f2b61f3244c82b1c01f982370cf096024d3eda1bec6"
+          },
+          {
+            "peer": 1,
+            "address": "0x800f1b54",
+            "bytes": 192,
+            "sha256": "b59495df7971b522a5a32f2b61f3244c82b1c01f982370cf096024d3eda1bec6",
+            "expected_sha256": "b59495df7971b522a5a32f2b61f3244c82b1c01f982370cf096024d3eda1bec6"
+          },
+          {
+            "peer": 0,
+            "address": "0x800f2a20",
+            "bytes": 44,
+            "sha256": "d459f64d10a94e7e223ed97cf01bda9847a677fbed36c54ccd3e15543031b4a0",
+            "expected_sha256": "d459f64d10a94e7e223ed97cf01bda9847a677fbed36c54ccd3e15543031b4a0"
+          },
+          {
+            "peer": 1,
+            "address": "0x800f2a20",
+            "bytes": 44,
+            "sha256": "d459f64d10a94e7e223ed97cf01bda9847a677fbed36c54ccd3e15543031b4a0",
+            "expected_sha256": "d459f64d10a94e7e223ed97cf01bda9847a677fbed36c54ccd3e15543031b4a0"
+          },
+          {
+            "peer": 0,
+            "address": "0x800f56b4",
+            "bytes": 68,
+            "sha256": "e307342d2f8272c29b4f31f1becfe9c60e46d60d0800367080e78decfa749666",
+            "expected_sha256": "e307342d2f8272c29b4f31f1becfe9c60e46d60d0800367080e78decfa749666"
+          },
+          {
+            "peer": 1,
+            "address": "0x800f56b4",
+            "bytes": 68,
+            "sha256": "e307342d2f8272c29b4f31f1becfe9c60e46d60d0800367080e78decfa749666",
+            "expected_sha256": "e307342d2f8272c29b4f31f1becfe9c60e46d60d0800367080e78decfa749666"
+          },
+          {
+            "peer": 0,
+            "address": "0x800f7d54",
+            "bytes": 12,
+            "sha256": "c702d8e405c79a5cbe8c2ef7e19c7b3371454d194ee4e3f4004492c6fa4b6795",
+            "expected_sha256": "c702d8e405c79a5cbe8c2ef7e19c7b3371454d194ee4e3f4004492c6fa4b6795"
+          },
+          {
+            "peer": 1,
+            "address": "0x800f7d54",
+            "bytes": 12,
+            "sha256": "c702d8e405c79a5cbe8c2ef7e19c7b3371454d194ee4e3f4004492c6fa4b6795",
+            "expected_sha256": "c702d8e405c79a5cbe8c2ef7e19c7b3371454d194ee4e3f4004492c6fa4b6795"
+          },
+          {
+            "peer": 0,
+            "address": "0x800f795c",
+            "bytes": 12,
+            "sha256": "39012cb447f048f2b2b047c94a9e04c56b5be11484338c39e6a421370a627dcc",
+            "expected_sha256": "39012cb447f048f2b2b047c94a9e04c56b5be11484338c39e6a421370a627dcc"
+          },
+          {
+            "peer": 1,
+            "address": "0x800f795c",
+            "bytes": 12,
+            "sha256": "39012cb447f048f2b2b047c94a9e04c56b5be11484338c39e6a421370a627dcc",
+            "expected_sha256": "39012cb447f048f2b2b047c94a9e04c56b5be11484338c39e6a421370a627dcc"
+          },
+          {
+            "peer": 0,
+            "address": "0x80074bfc",
+            "bytes": 160,
+            "sha256": "e5c12c1686d1135c1dc2e935451f27d29c550bc234634c653db9ac2a7676f7e8",
+            "expected_sha256": "e5c12c1686d1135c1dc2e935451f27d29c550bc234634c653db9ac2a7676f7e8"
+          },
+          {
+            "peer": 1,
+            "address": "0x80074bfc",
+            "bytes": 160,
+            "sha256": "e5c12c1686d1135c1dc2e935451f27d29c550bc234634c653db9ac2a7676f7e8",
+            "expected_sha256": "e5c12c1686d1135c1dc2e935451f27d29c550bc234634c653db9ac2a7676f7e8"
+          },
+          {
+            "peer": 0,
+            "address": "0x80031474",
+            "bytes": 1400,
+            "sha256": "25da3e15379f3672fdd126d01a7d85aba0c5d073d8efdbae31f971b8d69abbdc",
+            "expected_sha256": "25da3e15379f3672fdd126d01a7d85aba0c5d073d8efdbae31f971b8d69abbdc"
+          },
+          {
+            "peer": 1,
+            "address": "0x80031474",
+            "bytes": 1400,
+            "sha256": "25da3e15379f3672fdd126d01a7d85aba0c5d073d8efdbae31f971b8d69abbdc",
+            "expected_sha256": "25da3e15379f3672fdd126d01a7d85aba0c5d073d8efdbae31f971b8d69abbdc"
+          }
+        ],
+        "checks": {
+          "original_independent_child_identity": true,
+          "own_guest24_and_source_box": true,
+          "actual_child_HP_decrease_all_physical_peers": true,
+          "main_HP_unchanged": true,
+          "native_attack_retired_and_idle_recovered": true,
+          "P1_neutral": true,
+          "source_profile_CRC_cards_cleanup_taint": true
+        },
+        "resolved_state_crc": [
+          {
+            "label": "initial idle",
+            "samples": [
+              {
+                "simulation_tick": 2816,
+                "core": "e6a26a06",
+                "mod": "531b9dd1"
+              },
+              {
+                "simulation_tick": 2848,
+                "core": "06cad44d",
+                "mod": "c495f3d3"
+              },
+              {
+                "simulation_tick": 2880,
+                "core": "7259b100",
+                "mod": "f64524bb"
+              },
+              {
+                "simulation_tick": 2912,
+                "core": "2d16f83c",
+                "mod": "3b397461"
+              },
+              {
+                "simulation_tick": 2944,
+                "core": "d1eabd49",
+                "mod": "e3701d8d"
+              },
+              {
+                "simulation_tick": 2976,
+                "core": "8d31fe2f",
+                "mod": "30d85e7b"
+              },
+              {
+                "simulation_tick": 3008,
+                "core": "a0196059",
+                "mod": "8710fc79"
+              },
+              {
+                "simulation_tick": 3040,
+                "core": "cfc9d63a",
+                "mod": "9237c9d9"
+              }
+            ],
+            "resolved_through": [
+              3044,
+              3044
+            ]
+          },
+          {
+            "label": "P2 right then release",
+            "samples": [
+              {
+                "simulation_tick": 3104,
+                "core": "c629a6b8",
+                "mod": "423cc3f4"
+              },
+              {
+                "simulation_tick": 3136,
+                "core": "9f379794",
+                "mod": "a5019af1"
+              },
+              {
+                "simulation_tick": 3168,
+                "core": "7b07e013",
+                "mod": "02f49597"
+              },
+              {
+                "simulation_tick": 3200,
+                "core": "091df8cf",
+                "mod": "30186cb1"
+              },
+              {
+                "simulation_tick": 3232,
+                "core": "d74517dc",
+                "mod": "81046fd1"
+              },
+              {
+                "simulation_tick": 3264,
+                "core": "bb97818d",
+                "mod": "81f6668f"
+              },
+              {
+                "simulation_tick": 3296,
+                "core": "93edd2d8",
+                "mod": "abb4c82f"
+              }
+            ],
+            "resolved_through": [
+              3320,
+              3319
+            ]
+          },
+          {
+            "label": "P1 jump then settle",
+            "samples": [
+              {
+                "simulation_tick": 3392,
+                "core": "9c7ba6e6",
+                "mod": "095538e7"
+              },
+              {
+                "simulation_tick": 3424,
+                "core": "25c582d7",
+                "mod": "5e659b3f"
+              },
+              {
+                "simulation_tick": 3456,
+                "core": "3c554560",
+                "mod": "af6fef01"
+              },
+              {
+                "simulation_tick": 3488,
+                "core": "0e89eef4",
+                "mod": "48798fd9"
+              },
+              {
+                "simulation_tick": 3520,
+                "core": "a13cfb4d",
+                "mod": "dbea01df"
+              },
+              {
+                "simulation_tick": 3552,
+                "core": "5a9c9180",
+                "mod": "06dc103b"
+              },
+              {
+                "simulation_tick": 3584,
+                "core": "e9bb17e7",
+                "mod": "423cc3f4"
+              },
+              {
+                "simulation_tick": 3616,
+                "core": "e070a409",
+                "mod": "a5019af1"
+              }
+            ],
+            "resolved_through": [
+              3622,
+              3621
+            ]
+          },
+          {
+            "label": "standard retained resolved core/mod after native exit",
+            "samples": [
+              {
+                "simulation_tick": 11712,
+                "core": "8078383f",
+                "mod": "89e69d4f"
+              },
+              {
+                "simulation_tick": 11744,
+                "core": "f40541e6",
+                "mod": "89e69d4f"
+              },
+              {
+                "simulation_tick": 11776,
+                "core": "f1b39832",
+                "mod": "89e69d4f"
+              },
+              {
+                "simulation_tick": 11808,
+                "core": "6a8787f8",
+                "mod": "89e69d4f"
+              },
+              {
+                "simulation_tick": 11840,
+                "core": "4b88e137",
+                "mod": "89e69d4f"
+              },
+              {
+                "simulation_tick": 11872,
+                "core": "1eda4e67",
+                "mod": "89e69d4f"
+              },
+              {
+                "simulation_tick": 11904,
+                "core": "6a3731ff",
+                "mod": "89e69d4f"
+              }
+            ],
+            "after": 11689,
+            "resolved_through": 11926,
+            "all_combat_through_exit_samples": [
+              {
+                "simulation_tick": 3648,
+                "core": "28079adb",
+                "mod": "4cca19de"
+              },
+              {
+                "simulation_tick": 3680,
+                "core": "8e0098c7",
+                "mod": "2499d7ed"
+              },
+              {
+                "simulation_tick": 3712,
+                "core": "13f428bb",
+                "mod": "da4d85b8"
+              },
+              {
+                "simulation_tick": 3744,
+                "core": "0c8f6f3f",
+                "mod": "da4d85b8"
+              },
+              {
+                "simulation_tick": 3776,
+                "core": "a33f6bfe",
+                "mod": "da4d85b8"
+              },
+              {
+                "simulation_tick": 3808,
+                "core": "3e36505d",
+                "mod": "da4d85b8"
+              },
+              {
+                "simulation_tick": 3840,
+                "core": "f9bb1b09",
+                "mod": "da4d85b8"
+              },
+              {
+                "simulation_tick": 3872,
+                "core": "a3380850",
+                "mod": "da4d85b8"
+              },
+              {
+                "simulation_tick": 3904,
+                "core": "df375aaa",
+                "mod": "da4d85b8"
+              },
+              {
+                "simulation_tick": 3936,
+                "core": "ad82d2ab",
+                "mod": "da4d85b8"
+              },
+              {
+                "simulation_tick": 3968,
+                "core": "eb13c553",
+                "mod": "acb99350"
+              },
+              {
+                "simulation_tick": 4000,
+                "core": "06fbd0ac",
+                "mod": "c2c99344"
+              },
+              {
+                "simulation_tick": 4032,
+                "core": "d88f566c",
+                "mod": "394820ab"
+              },
+              {
+                "simulation_tick": 4064,
+                "core": "64a51469",
+                "mod": "0b07c5b2"
+              },
+              {
+                "simulation_tick": 4096,
+                "core": "a3f0b106",
+                "mod": "2afa1dfe"
+              },
+              {
+                "simulation_tick": 4128,
+                "core": "b0b18238",
+                "mod": "768cb689"
+              },
+              {
+                "simulation_tick": 4160,
+                "core": "0562232f",
+                "mod": "779027f6"
+              },
+              {
+                "simulation_tick": 4192,
+                "core": "e8dc26ea",
+                "mod": "6c25a87b"
+              },
+              {
+                "simulation_tick": 4224,
+                "core": "dde427f4",
+                "mod": "7aaf4952"
+              },
+              {
+                "simulation_tick": 4256,
+                "core": "bc72aa03",
+                "mod": "93f198bf"
+              },
+              {
+                "simulation_tick": 4288,
+                "core": "0bc2e70c",
+                "mod": "689b8966"
+              },
+              {
+                "simulation_tick": 4320,
+                "core": "ee20af9d",
+                "mod": "75e31616"
+              },
+              {
+                "simulation_tick": 4352,
+                "core": "3e8d022c",
+                "mod": "6a185732"
+              },
+              {
+                "simulation_tick": 4384,
+                "core": "85b6ea3b",
+                "mod": "8278ea90"
+              },
+              {
+                "simulation_tick": 4416,
+                "core": "401af042",
+                "mod": "a157f128"
+              },
+              {
+                "simulation_tick": 4448,
+                "core": "c5e685f8",
+                "mod": "689921aa"
+              },
+              {
+                "simulation_tick": 4480,
+                "core": "0e3682cb",
+                "mod": "9fd72fb2"
+              },
+              {
+                "simulation_tick": 4512,
+                "core": "96118da2",
+                "mod": "3d75ad61"
+              },
+              {
+                "simulation_tick": 4544,
+                "core": "2228a0ae",
+                "mod": "b6ad4764"
+              },
+              {
+                "simulation_tick": 4576,
+                "core": "2785ac77",
+                "mod": "5cb2493a"
+              },
+              {
+                "simulation_tick": 4608,
+                "core": "c93796a8",
+                "mod": "a8bd4bda"
+              },
+              {
+                "simulation_tick": 4640,
+                "core": "a414345d",
+                "mod": "2fc367bc"
+              },
+              {
+                "simulation_tick": 4672,
+                "core": "54ca6300",
+                "mod": "2219ad5c"
+              },
+              {
+                "simulation_tick": 4704,
+                "core": "22846552",
+                "mod": "012e06bc"
+              },
+              {
+                "simulation_tick": 4736,
+                "core": "e9e527ee",
+                "mod": "306fc242"
+              },
+              {
+                "simulation_tick": 4768,
+                "core": "2d11af1f",
+                "mod": "c6b4ec14"
+              },
+              {
+                "simulation_tick": 4800,
+                "core": "e94ce62e",
+                "mod": "51526e21"
+              },
+              {
+                "simulation_tick": 4832,
+                "core": "2516b8c0",
+                "mod": "d0f8b10a"
+              },
+              {
+                "simulation_tick": 4864,
+                "core": "7ad94a7e",
+                "mod": "ece2a869"
+              },
+              {
+                "simulation_tick": 4896,
+                "core": "7af4c77b",
+                "mod": "c439f8ac"
+              },
+              {
+                "simulation_tick": 4928,
+                "core": "242fc409",
+                "mod": "51d9c78d"
+              },
+              {
+                "simulation_tick": 4960,
+                "core": "453a2383",
+                "mod": "9fd72fb2"
+              },
+              {
+                "simulation_tick": 4992,
+                "core": "059cf020",
+                "mod": "3d75ad61"
+              },
+              {
+                "simulation_tick": 5024,
+                "core": "23b3b74a",
+                "mod": "b6ad4764"
+              },
+              {
+                "simulation_tick": 5056,
+                "core": "68896dad",
+                "mod": "5cb2493a"
+              },
+              {
+                "simulation_tick": 5088,
+                "core": "38bf1f95",
+                "mod": "a8bd4bda"
+              },
+              {
+                "simulation_tick": 5120,
+                "core": "e3fc8e01",
+                "mod": "2fc367bc"
+              },
+              {
+                "simulation_tick": 5152,
+                "core": "170b9de5",
+                "mod": "2219ad5c"
+              },
+              {
+                "simulation_tick": 5184,
+                "core": "2d661ffb",
+                "mod": "012e06bc"
+              },
+              {
+                "simulation_tick": 5216,
+                "core": "ce8ab39c",
+                "mod": "306fc242"
+              },
+              {
+                "simulation_tick": 5248,
+                "core": "8e98e45c",
+                "mod": "c6b4ec14"
+              },
+              {
+                "simulation_tick": 5280,
+                "core": "8be245ea",
+                "mod": "51526e21"
+              },
+              {
+                "simulation_tick": 5312,
+                "core": "ad40026f",
+                "mod": "d0f8b10a"
+              },
+              {
+                "simulation_tick": 5344,
+                "core": "8ac9420c",
+                "mod": "ece2a869"
+              },
+              {
+                "simulation_tick": 5376,
+                "core": "a7980109",
+                "mod": "c439f8ac"
+              },
+              {
+                "simulation_tick": 5408,
+                "core": "f074635d",
+                "mod": "51d9c78d"
+              },
+              {
+                "simulation_tick": 5440,
+                "core": "38353bbf",
+                "mod": "9fd72fb2"
+              },
+              {
+                "simulation_tick": 5472,
+                "core": "366c261e",
+                "mod": "3d75ad61"
+              },
+              {
+                "simulation_tick": 5504,
+                "core": "a8c11547",
+                "mod": "b6ad4764"
+              },
+              {
+                "simulation_tick": 5536,
+                "core": "955f1190",
+                "mod": "5cb2493a"
+              },
+              {
+                "simulation_tick": 5568,
+                "core": "8bd00b7d",
+                "mod": "a8bd4bda"
+              },
+              {
+                "simulation_tick": 5600,
+                "core": "540c41c9",
+                "mod": "2fc367bc"
+              },
+              {
+                "simulation_tick": 5632,
+                "core": "45419e53",
+                "mod": "2219ad5c"
+              },
+              {
+                "simulation_tick": 5664,
+                "core": "95fc58b4",
+                "mod": "012e06bc"
+              },
+              {
+                "simulation_tick": 5696,
+                "core": "d8858e24",
+                "mod": "306fc242"
+              },
+              {
+                "simulation_tick": 5728,
+                "core": "dc17a01d",
+                "mod": "c6b4ec14"
+              },
+              {
+                "simulation_tick": 5760,
+                "core": "846234e4",
+                "mod": "51526e21"
+              },
+              {
+                "simulation_tick": 5792,
+                "core": "8b80f7b8",
+                "mod": "95c5e4ca"
+              },
+              {
+                "simulation_tick": 5824,
+                "core": "34e49a33",
+                "mod": "ece2a869"
+              },
+              {
+                "simulation_tick": 5856,
+                "core": "33c977d5",
+                "mod": "c439f8ac"
+              },
+              {
+                "simulation_tick": 5888,
+                "core": "4cfabe0f",
+                "mod": "51d9c78d"
+              },
+              {
+                "simulation_tick": 5920,
+                "core": "2d131519",
+                "mod": "9fd72fb2"
+              },
+              {
+                "simulation_tick": 5952,
+                "core": "dcfcefd3",
+                "mod": "5fb73de1"
+              },
+              {
+                "simulation_tick": 5984,
+                "core": "0d132ac6",
+                "mod": "b6ad4764"
+              },
+              {
+                "simulation_tick": 6016,
+                "core": "77d52512",
+                "mod": "5cb2493a"
+              },
+              {
+                "simulation_tick": 6048,
+                "core": "390ad976",
+                "mod": "a8bd4bda"
+              },
+              {
+                "simulation_tick": 6080,
+                "core": "9d875837",
+                "mod": "c63cb17c"
+              },
+              {
+                "simulation_tick": 6112,
+                "core": "1e157d8f",
+                "mod": "2219ad5c"
+              },
+              {
+                "simulation_tick": 6144,
+                "core": "3a66b77c",
+                "mod": "012e06bc"
+              },
+              {
+                "simulation_tick": 6176,
+                "core": "6427f4fa",
+                "mod": "306fc242"
+              },
+              {
+                "simulation_tick": 6208,
+                "core": "f2bba2a5",
+                "mod": "c6b4ec14"
+              },
+              {
+                "simulation_tick": 6240,
+                "core": "09521393",
+                "mod": "9fffb961"
+              },
+              {
+                "simulation_tick": 6272,
+                "core": "25f6f398",
+                "mod": "d0f8b10a"
+              },
+              {
+                "simulation_tick": 6304,
+                "core": "86a511bf",
+                "mod": "ece2a869"
+              },
+              {
+                "simulation_tick": 6336,
+                "core": "c9dac2e8",
+                "mod": "7c18476c"
+              },
+              {
+                "simulation_tick": 6368,
+                "core": "8551f9e9",
+                "mod": "51d9c78d"
+              },
+              {
+                "simulation_tick": 6400,
+                "core": "1fd049fd",
+                "mod": "9fd72fb2"
+              },
+              {
+                "simulation_tick": 6432,
+                "core": "7b16b295",
+                "mod": "3d75ad61"
+              },
+              {
+                "simulation_tick": 6464,
+                "core": "f6811a3d",
+                "mod": "b6ad4764"
+              },
+              {
+                "simulation_tick": 6496,
+                "core": "02bc5448",
+                "mod": "5cb2493a"
+              },
+              {
+                "simulation_tick": 6528,
+                "core": "38a0ace6",
+                "mod": "a367659a"
+              },
+              {
+                "simulation_tick": 6560,
+                "core": "aff6b41c",
+                "mod": "2fc367bc"
+              },
+              {
+                "simulation_tick": 6592,
+                "core": "93117d3c",
+                "mod": "2219ad5c"
+              },
+              {
+                "simulation_tick": 6624,
+                "core": "8829f28d",
+                "mod": "012e06bc"
+              },
+              {
+                "simulation_tick": 6656,
+                "core": "d399cd55",
+                "mod": "306fc242"
+              },
+              {
+                "simulation_tick": 6688,
+                "core": "99fc7b4a",
+                "mod": "c6b4ec14"
+              },
+              {
+                "simulation_tick": 6720,
+                "core": "c67ce70a",
+                "mod": "51526e21"
+              },
+              {
+                "simulation_tick": 6752,
+                "core": "721ec5a4",
+                "mod": "d0f8b10a"
+              },
+              {
+                "simulation_tick": 6784,
+                "core": "3a683672",
+                "mod": "ece2a869"
+              },
+              {
+                "simulation_tick": 6816,
+                "core": "399bab83",
+                "mod": "c439f8ac"
+              },
+              {
+                "simulation_tick": 6848,
+                "core": "69c6d175",
+                "mod": "51d9c78d"
+              },
+              {
+                "simulation_tick": 6880,
+                "core": "8f8add56",
+                "mod": "9fd72fb2"
+              },
+              {
+                "simulation_tick": 6912,
+                "core": "b6499f16",
+                "mod": "3d75ad61"
+              },
+              {
+                "simulation_tick": 6944,
+                "core": "37830d26",
+                "mod": "b6ad4764"
+              },
+              {
+                "simulation_tick": 6976,
+                "core": "848a0b8a",
+                "mod": "5cb2493a"
+              },
+              {
+                "simulation_tick": 7008,
+                "core": "a32034e9",
+                "mod": "a8bd4bda"
+              },
+              {
+                "simulation_tick": 7040,
+                "core": "c199370d",
+                "mod": "c63cb17c"
+              },
+              {
+                "simulation_tick": 7072,
+                "core": "59503e4a",
+                "mod": "2219ad5c"
+              },
+              {
+                "simulation_tick": 7104,
+                "core": "64fa0d61",
+                "mod": "012e06bc"
+              },
+              {
+                "simulation_tick": 7136,
+                "core": "0d3a6296",
+                "mod": "306fc242"
+              },
+              {
+                "simulation_tick": 7168,
+                "core": "b4783215",
+                "mod": "c6b4ec14"
+              },
+              {
+                "simulation_tick": 7200,
+                "core": "d24745ea",
+                "mod": "9fffb961"
+              },
+              {
+                "simulation_tick": 7232,
+                "core": "faa9483c",
+                "mod": "d0f8b10a"
+              },
+              {
+                "simulation_tick": 7264,
+                "core": "0f7cee20",
+                "mod": "ece2a869"
+              },
+              {
+                "simulation_tick": 7296,
+                "core": "f0e59bf8",
+                "mod": "c439f8ac"
+              },
+              {
+                "simulation_tick": 7328,
+                "core": "71b844fc",
+                "mod": "51d9c78d"
+              },
+              {
+                "simulation_tick": 7360,
+                "core": "b72395ef",
+                "mod": "9fd72fb2"
+              },
+              {
+                "simulation_tick": 7392,
+                "core": "8a512a52",
+                "mod": "728c80c0"
+              },
+              {
+                "simulation_tick": 7424,
+                "core": "e5ab26c8",
+                "mod": "21c023d4"
+              },
+              {
+                "simulation_tick": 7456,
+                "core": "b7369506",
+                "mod": "ed6c74af"
+              },
+              {
+                "simulation_tick": 7488,
+                "core": "b9ef5c7a",
+                "mod": "fb7b760f"
+              },
+              {
+                "simulation_tick": 7520,
+                "core": "39e7aaa9",
+                "mod": "3e7c1879"
+              },
+              {
+                "simulation_tick": 7552,
+                "core": "b7426a92",
+                "mod": "8a2f64d9"
+              },
+              {
+                "simulation_tick": 7584,
+                "core": "6f4fd8eb",
+                "mod": "59730bed"
+              },
+              {
+                "simulation_tick": 7616,
+                "core": "a1d7358b",
+                "mod": "b31e3d73"
+              },
+              {
+                "simulation_tick": 7648,
+                "core": "b31ed46d",
+                "mod": "a7d71355"
+              },
+              {
+                "simulation_tick": 7680,
+                "core": "55c2d06e",
+                "mod": "a03dd483"
+              },
+              {
+                "simulation_tick": 7712,
+                "core": "272b520a",
+                "mod": "e4b12a79"
+              },
+              {
+                "simulation_tick": 7744,
+                "core": "27a2a21b",
+                "mod": "5125e384"
+              },
+              {
+                "simulation_tick": 7776,
+                "core": "09107ae8",
+                "mod": "f27a8baa"
+              },
+              {
+                "simulation_tick": 7808,
+                "core": "c2894bb0",
+                "mod": "1ef8596a"
+              },
+              {
+                "simulation_tick": 7840,
+                "core": "93dce424",
+                "mod": "5eebdced"
+              },
+              {
+                "simulation_tick": 7872,
+                "core": "1377d6e1",
+                "mod": "50615c4f"
+              },
+              {
+                "simulation_tick": 7904,
+                "core": "d1d5565f",
+                "mod": "3b023cbd"
+              },
+              {
+                "simulation_tick": 7936,
+                "core": "4b600904",
+                "mod": "5a16685d"
+              },
+              {
+                "simulation_tick": 7968,
+                "core": "7dce0877",
+                "mod": "106d3ae5"
+              },
+              {
+                "simulation_tick": 8000,
+                "core": "57f44f7a",
+                "mod": "af267027"
+              },
+              {
+                "simulation_tick": 8032,
+                "core": "1204c77c",
+                "mod": "b378e4b3"
+              },
+              {
+                "simulation_tick": 8064,
+                "core": "d1d369ec",
+                "mod": "b489b565"
+              },
+              {
+                "simulation_tick": 8096,
+                "core": "1e3d93b0",
+                "mod": "5d3b431f"
+              },
+              {
+                "simulation_tick": 8128,
+                "core": "e644bff3",
+                "mod": "6eef95ff"
+              },
+              {
+                "simulation_tick": 8160,
+                "core": "353a1982",
+                "mod": "689d5d8d"
+              },
+              {
+                "simulation_tick": 8192,
+                "core": "87ec5bb3",
+                "mod": "89d8972d"
+              },
+              {
+                "simulation_tick": 8224,
+                "core": "09d9713e",
+                "mod": "8c2cb757"
+              },
+              {
+                "simulation_tick": 8256,
+                "core": "bb9765a9",
+                "mod": "276e34e7"
+              },
+              {
+                "simulation_tick": 8288,
+                "core": "b5f68f43",
+                "mod": "1ef8596a"
+              },
+              {
+                "simulation_tick": 8320,
+                "core": "dc5c8acf",
+                "mod": "5eebdced"
+              },
+              {
+                "simulation_tick": 8352,
+                "core": "a36f2339",
+                "mod": "50615c4f"
+              },
+              {
+                "simulation_tick": 8384,
+                "core": "869fe6c4",
+                "mod": "968f679f"
+              },
+              {
+                "simulation_tick": 8416,
+                "core": "c219758a",
+                "mod": "e77671a2"
+              },
+              {
+                "simulation_tick": 8448,
+                "core": "441eb8f4",
+                "mod": "b98c2169"
+              },
+              {
+                "simulation_tick": 8480,
+                "core": "22dcd816",
+                "mod": "2f9ee448"
+              },
+              {
+                "simulation_tick": 8512,
+                "core": "7583fd0a",
+                "mod": "8eb5dbe2"
+              },
+              {
+                "simulation_tick": 8544,
+                "core": "603df380",
+                "mod": "35a12fdc"
+              },
+              {
+                "simulation_tick": 8576,
+                "core": "8d3e94ec",
+                "mod": "783620c0"
+              },
+              {
+                "simulation_tick": 8608,
+                "core": "086b501b",
+                "mod": "a0d8feda"
+              },
+              {
+                "simulation_tick": 8640,
+                "core": "8d6b2f95",
+                "mod": "7ad2f7ea"
+              },
+              {
+                "simulation_tick": 8672,
+                "core": "21896658",
+                "mod": "3eeddac4"
+              },
+              {
+                "simulation_tick": 8704,
+                "core": "4a80dcda",
+                "mod": "9ef890d8"
+              },
+              {
+                "simulation_tick": 8736,
+                "core": "94f9d5af",
+                "mod": "c99a53f2"
+              },
+              {
+                "simulation_tick": 8768,
+                "core": "413ae672",
+                "mod": "c3397bac"
+              },
+              {
+                "simulation_tick": 8800,
+                "core": "8fa70992",
+                "mod": "dc284acc"
+              },
+              {
+                "simulation_tick": 8832,
+                "core": "5f98f5bf",
+                "mod": "b8a929aa"
+              },
+              {
+                "simulation_tick": 8864,
+                "core": "3811078b",
+                "mod": "2668bd0a"
+              },
+              {
+                "simulation_tick": 8896,
+                "core": "34048108",
+                "mod": "dc5d1bf4"
+              },
+              {
+                "simulation_tick": 8928,
+                "core": "b1f444bd",
+                "mod": "a1642234"
+              },
+              {
+                "simulation_tick": 8960,
+                "core": "cb6718c8",
+                "mod": "2f9ee448"
+              },
+              {
+                "simulation_tick": 8992,
+                "core": "3c431497",
+                "mod": "857522ca"
+              },
+              {
+                "simulation_tick": 9024,
+                "core": "e1f46f0d",
+                "mod": "32696d40"
+              },
+              {
+                "simulation_tick": 9056,
+                "core": "91f81513",
+                "mod": "17858e70"
+              },
+              {
+                "simulation_tick": 9088,
+                "core": "2b12fd6f",
+                "mod": "71be4d4a"
+              },
+              {
+                "simulation_tick": 9120,
+                "core": "0e6a253e",
+                "mod": "60b2db06"
+              },
+              {
+                "simulation_tick": 9152,
+                "core": "db052db1",
+                "mod": "d0701be9"
+              },
+              {
+                "simulation_tick": 9184,
+                "core": "61b72170",
+                "mod": "bcba9570"
+              },
+              {
+                "simulation_tick": 9216,
+                "core": "8cfd39c4",
+                "mod": "f36d0ed9"
+              },
+              {
+                "simulation_tick": 9248,
+                "core": "8d0d92d8",
+                "mod": "7971b1c6"
+              },
+              {
+                "simulation_tick": 9280,
+                "core": "fd5295d0",
+                "mod": "4caf7817"
+              },
+              {
+                "simulation_tick": 9312,
+                "core": "fb39aa37",
+                "mod": "dd610776"
+              },
+              {
+                "simulation_tick": 9344,
+                "core": "8dffa477",
+                "mod": "a0322331"
+              },
+              {
+                "simulation_tick": 9376,
+                "core": "af55d4eb",
+                "mod": "2ef39de9"
+              },
+              {
+                "simulation_tick": 9408,
+                "core": "ac97d952",
+                "mod": "4a9d5f07"
+              },
+              {
+                "simulation_tick": 9440,
+                "core": "9c4291a5",
+                "mod": "f30a4b55"
+              },
+              {
+                "simulation_tick": 9472,
+                "core": "e7c06f5a",
+                "mod": "c912745e"
+              },
+              {
+                "simulation_tick": 9504,
+                "core": "c707b62e",
+                "mod": "2540c448"
+              },
+              {
+                "simulation_tick": 9536,
+                "core": "7fa3c464",
+                "mod": "968d555d"
+              },
+              {
+                "simulation_tick": 9568,
+                "core": "c995e3c2",
+                "mod": "5e987cfa"
+              },
+              {
+                "simulation_tick": 9600,
+                "core": "fb74e03e",
+                "mod": "678492c4"
+              },
+              {
+                "simulation_tick": 9632,
+                "core": "6d9b8967",
+                "mod": "720fabd8"
+              },
+              {
+                "simulation_tick": 9664,
+                "core": "48bf62a3",
+                "mod": "e7443969"
+              },
+              {
+                "simulation_tick": 9696,
+                "core": "096ae4e0",
+                "mod": "5e5a8df3"
+              },
+              {
+                "simulation_tick": 9728,
+                "core": "6a58a7ed",
+                "mod": "ab6b2acc"
+              },
+              {
+                "simulation_tick": 9760,
+                "core": "1a6f8afc",
+                "mod": "60069109"
+              },
+              {
+                "simulation_tick": 9792,
+                "core": "74605a32",
+                "mod": "433041b2"
+              },
+              {
+                "simulation_tick": 9824,
+                "core": "5445035a",
+                "mod": "a0924ecd"
+              },
+              {
+                "simulation_tick": 9856,
+                "core": "3fc0ce3b",
+                "mod": "d8e19e19"
+              },
+              {
+                "simulation_tick": 9888,
+                "core": "7f2f3fb5",
+                "mod": "2441f721"
+              },
+              {
+                "simulation_tick": 9920,
+                "core": "5c829790",
+                "mod": "13f754e6"
+              },
+              {
+                "simulation_tick": 9952,
+                "core": "6bd75a03",
+                "mod": "96ef4223"
+              },
+              {
+                "simulation_tick": 9984,
+                "core": "64bb091e",
+                "mod": "68bb55fa"
+              },
+              {
+                "simulation_tick": 10016,
+                "core": "350a0e33",
+                "mod": "6127fc71"
+              },
+              {
+                "simulation_tick": 10048,
+                "core": "bf7bc23f",
+                "mod": "3ef4c042"
+              },
+              {
+                "simulation_tick": 10080,
+                "core": "ade3dcc8",
+                "mod": "b0e5317a"
+              },
+              {
+                "simulation_tick": 10112,
+                "core": "b4785138",
+                "mod": "e350291e"
+              },
+              {
+                "simulation_tick": 10144,
+                "core": "187ee0a3",
+                "mod": "5ca9e4e7"
+              },
+              {
+                "simulation_tick": 10176,
+                "core": "3c494d9e",
+                "mod": "e765dd35"
+              },
+              {
+                "simulation_tick": 10208,
+                "core": "6a4c11a4",
+                "mod": "916c28e5"
+              },
+              {
+                "simulation_tick": 10240,
+                "core": "5c2bdbe7",
+                "mod": "823c7888"
+              },
+              {
+                "simulation_tick": 10272,
+                "core": "3c3acb11",
+                "mod": "7fb45d95"
+              },
+              {
+                "simulation_tick": 10304,
+                "core": "4aa25a58",
+                "mod": "6ff22303"
+              },
+              {
+                "simulation_tick": 10336,
+                "core": "b96b255e",
+                "mod": "df2e6ea5"
+              },
+              {
+                "simulation_tick": 10368,
+                "core": "b649a3af",
+                "mod": "9a7442bf"
+              },
+              {
+                "simulation_tick": 10400,
+                "core": "ead8ea74",
+                "mod": "fd0230ef"
+              },
+              {
+                "simulation_tick": 10432,
+                "core": "e7434a93",
+                "mod": "39296192"
+              },
+              {
+                "simulation_tick": 10464,
+                "core": "7126d61c",
+                "mod": "aee40b4d"
+              },
+              {
+                "simulation_tick": 10496,
+                "core": "d5c5b8b9",
+                "mod": "5f1accd2"
+              },
+              {
+                "simulation_tick": 10528,
+                "core": "72814239",
+                "mod": "632a1b70"
+              },
+              {
+                "simulation_tick": 10560,
+                "core": "ee353fc7",
+                "mod": "814a8ed0"
+              },
+              {
+                "simulation_tick": 10592,
+                "core": "912fe576",
+                "mod": "4e2fc1e4"
+              },
+              {
+                "simulation_tick": 10624,
+                "core": "b2d16c0a",
+                "mod": "b035d39a"
+              },
+              {
+                "simulation_tick": 10656,
+                "core": "5aeef682",
+                "mod": "3c950248"
+              },
+              {
+                "simulation_tick": 10688,
+                "core": "8828e1ae",
+                "mod": "30360abc"
+              },
+              {
+                "simulation_tick": 10720,
+                "core": "798a90ea",
+                "mod": "dd481a82"
+              },
+              {
+                "simulation_tick": 10752,
+                "core": "9c55d0c0",
+                "mod": "b3e0e4a2"
+              },
+              {
+                "simulation_tick": 10784,
+                "core": "e3a9a11d",
+                "mod": "beedc940"
+              },
+              {
+                "simulation_tick": 10816,
+                "core": "39c95ba3",
+                "mod": "80a741f8"
+              },
+              {
+                "simulation_tick": 10848,
+                "core": "d8154be2",
+                "mod": "aa29e97e"
+              },
+              {
+                "simulation_tick": 10880,
+                "core": "6f1eeb6f",
+                "mod": "3a9e6f92"
+              },
+              {
+                "simulation_tick": 10912,
+                "core": "436db68d",
+                "mod": "8854a178"
+              },
+              {
+                "simulation_tick": 10944,
+                "core": "51fd50c9",
+                "mod": "9e3d0bb2"
+              },
+              {
+                "simulation_tick": 10976,
+                "core": "2ddf2a83",
+                "mod": "5f1accd2"
+              },
+              {
+                "simulation_tick": 11008,
+                "core": "7c766b73",
+                "mod": "632a1b70"
+              },
+              {
+                "simulation_tick": 11040,
+                "core": "8715511c",
+                "mod": "814a8ed0"
+              },
+              {
+                "simulation_tick": 11072,
+                "core": "ddb040b4",
+                "mod": "4e2fc1e4"
+              },
+              {
+                "simulation_tick": 11104,
+                "core": "241d8222",
+                "mod": "b035d39a"
+              },
+              {
+                "simulation_tick": 11136,
+                "core": "d2c89cb2",
+                "mod": "c7ae9352"
+              },
+              {
+                "simulation_tick": 11168,
+                "core": "e392c202",
+                "mod": "67c334e4"
+              },
+              {
+                "simulation_tick": 11200,
+                "core": "69740c9f",
+                "mod": "4f90a37e"
+              },
+              {
+                "simulation_tick": 11232,
+                "core": "2035769e",
+                "mod": "e91209de"
+              },
+              {
+                "simulation_tick": 11264,
+                "core": "592a30ec",
+                "mod": "ac3ccfdc"
+              },
+              {
+                "simulation_tick": 11296,
+                "core": "76b72bd8",
+                "mod": "546557fc"
+              },
+              {
+                "simulation_tick": 11328,
+                "core": "990eeb54",
+                "mod": "fd94d786"
+              },
+              {
+                "simulation_tick": 11360,
+                "core": "5b502867",
+                "mod": "fe6e6a46"
+              },
+              {
+                "simulation_tick": 11392,
+                "core": "6d0a1af6",
+                "mod": "cf8acea5"
+              },
+              {
+                "simulation_tick": 11424,
+                "core": "24b99472",
+                "mod": "d0cb6cc4"
+              },
+              {
+                "simulation_tick": 11456,
+                "core": "19bdc774",
+                "mod": "fdc62d4e"
+              },
+              {
+                "simulation_tick": 11488,
+                "core": "77f26f2b",
+                "mod": "c3774c97"
+              },
+              {
+                "simulation_tick": 11520,
+                "core": "fad2cac3",
+                "mod": "a0cdc808"
+              },
+              {
+                "simulation_tick": 11552,
+                "core": "7840d367",
+                "mod": "04a99be1"
+              },
+              {
+                "simulation_tick": 11584,
+                "core": "96b7c1e2",
+                "mod": "bc56f33f"
+              },
+              {
+                "simulation_tick": 11616,
+                "core": "9262b8e8",
+                "mod": "75884125"
+              },
+              {
+                "simulation_tick": 11648,
+                "core": "a497b0db",
+                "mod": "89e69d4f"
+              },
+              {
+                "simulation_tick": 11680,
+                "core": "6a603a69",
+                "mod": "89e69d4f"
+              },
+              {
+                "simulation_tick": 11712,
+                "core": "8078383f",
+                "mod": "89e69d4f"
+              },
+              {
+                "simulation_tick": 11744,
+                "core": "f40541e6",
+                "mod": "89e69d4f"
+              },
+              {
+                "simulation_tick": 11776,
+                "core": "f1b39832",
+                "mod": "89e69d4f"
+              },
+              {
+                "simulation_tick": 11808,
+                "core": "6a8787f8",
+                "mod": "89e69d4f"
+              },
+              {
+                "simulation_tick": 11840,
+                "core": "4b88e137",
+                "mod": "89e69d4f"
+              },
+              {
+                "simulation_tick": 11872,
+                "core": "1eda4e67",
+                "mod": "89e69d4f"
+              },
+              {
+                "simulation_tick": 11904,
+                "core": "6a3731ff",
+                "mod": "89e69d4f"
+              }
+            ],
+            "parser": {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-lab-contact-protection-v83\\tools\\coop_state_crc.py",
+              "bytes": 3972,
+              "sha256": "e3df83c7e65186be58661149b52aa0897cac0dcfa941eea24ebc1871a8e820a1"
+            },
+            "logs": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\peer-0\\logs\\stderr.log",
+                "bytes": 74128,
+                "sha256": "d304ccf4e483db0b60853f77200231bcdcde5a82ff7a8f9d777c0a0f02cb98d3"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\peer-1\\logs\\stderr.log",
+                "bytes": 74326,
+                "sha256": "611a2adcded60de58cc3dcdf948f7bd00c0f8a105eb23c82c25823f6bbef6db4"
+              }
+            ]
+          }
+        ],
+        "host_profile_startup": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 15,
+          "selected_sha256": "d62eccbb549518039f98fc09e0f28e78444294b465a4a8541b17dd7a06786c3b",
+          "peers": [
+            {
+              "capabilities": {
+                "actual_image_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+                "cpu_arch": 2,
+                "features": 127,
+                "backend": 2,
+                "fp": 2,
+                "overlays": "interpreted",
+                "offers": 1
+              },
+              "settlement": {
+                "profile": "mmx6.win64-clang22.loopback",
+                "revision": 15,
+                "selected_sha256": "d62eccbb549518039f98fc09e0f28e78444294b465a4a8541b17dd7a06786c3b",
+                "cycles": 0,
+                "sim_tick": 0,
+                "before_enter_guest": 1
+              }
+            },
+            {
+              "capabilities": {
+                "actual_image_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+                "cpu_arch": 2,
+                "features": 127,
+                "backend": 2,
+                "fp": 2,
+                "overlays": "interpreted",
+                "offers": 1
+              },
+              "settlement": {
+                "profile": "mmx6.win64-clang22.loopback",
+                "revision": 15,
+                "selected_sha256": "d62eccbb549518039f98fc09e0f28e78444294b465a4a8541b17dd7a06786c3b",
+                "cycles": 0,
+                "sim_tick": 0,
+                "before_enter_guest": 1
+              }
+            }
+          ]
+        },
+        "recording_refusals": [
+          {
+            "status": "failed_fixture_taint_retained_for_diagnostics",
+            "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\peer-0\\saves\\input-recordings\\session-1793129361438434-1-0\\inputs.jsonl",
+            "identity": {
+              "baseline": null,
+              "cards": [
+                {
+                  "bytes": 131072,
+                  "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+                },
+                {
+                  "bytes": 131072,
+                  "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+                }
+              ],
+              "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+              "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+              "image_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+              "manifest_sha256": "bfbb990528123f7fc229bc26b21f459b00d2b942bbc1bce70fc95e47948b0d6d",
+              "mode": "netplay",
+              "profile": {
+                "id": "mmx6.win64-clang22.loopback",
+                "revision": 15,
+                "selected_sha256": "d62eccbb549518039f98fc09e0f28e78444294b465a4a8541b17dd7a06786c3b"
+              },
+              "settings_sha256": "8cd8dc3085bedefbfd25cd5576d11928126fdc62111e13dfbb6113cbc984959b",
+              "simulation_contract_sha256": "c4cc8eaf6f499926c90371297b55b53f7b77509a05b5dda747cfb277a66fa0b9"
+            },
+            "terminal_failure": "unilateral debug or fixture input contaminated capture",
+            "native_status": {
+              "contract": "mmx6.native-consumption.v1",
+              "epoch": 1,
+              "failure": "unilateral debug or fixture input contaminated capture",
+              "schema": 1,
+              "scope": "native-consumption diagnostics; replay unimplemented",
+              "status": "failed"
+            },
+            "events": 6677,
+            "natives": 3087,
+            "p2_reads": 3590,
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\peer-0-recording-refusal\\settings.json",
+                "bytes": 26875,
+                "sha256": "8cd8dc3085bedefbfd25cd5576d11928126fdc62111e13dfbb6113cbc984959b"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\peer-0-recording-refusal\\content.json",
+                "bytes": 567,
+                "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\peer-0-recording-refusal\\simulation-contract.json",
+                "bytes": 351,
+                "sha256": "c4cc8eaf6f499926c90371297b55b53f7b77509a05b5dda747cfb277a66fa0b9"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\peer-0-recording-refusal\\inputs.jsonl",
+                "bytes": 858450,
+                "sha256": "6aa768778cc1813656854ac05c9e3f9222434d3d217dff0bba0dd1f7fcaa7b9c"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\peer-0-recording-refusal\\status.json",
+                "bytes": 211,
+                "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\peer-0-recording-refusal\\card1.initial.mcd",
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\peer-0-recording-refusal\\card2.initial.mcd",
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "strict_refusals": {
+              "ordinary_capture": {
+                "type": "InvalidRecording",
+                "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+              },
+              "offline_replay": {
+                "type": "InvalidRecording",
+                "message": "network trace cannot be replayed offline"
+              }
+            },
+            "finalized_capture_admitted": false,
+            "replay_admitted": false,
+            "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+          },
+          {
+            "status": "failed_fixture_taint_retained_for_diagnostics",
+            "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\peer-1\\saves\\input-recordings\\session-1793129361438429-1-0\\inputs.jsonl",
+            "identity": {
+              "baseline": null,
+              "cards": [
+                {
+                  "bytes": 131072,
+                  "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+                },
+                {
+                  "bytes": 131072,
+                  "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+                }
+              ],
+              "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+              "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+              "image_sha256": "4b45d4d1cfbde2a2f47cafd935a7d3f3397d5759be9e568682db12f0070394e1",
+              "manifest_sha256": "bfbb990528123f7fc229bc26b21f459b00d2b942bbc1bce70fc95e47948b0d6d",
+              "mode": "netplay",
+              "profile": {
+                "id": "mmx6.win64-clang22.loopback",
+                "revision": 15,
+                "selected_sha256": "d62eccbb549518039f98fc09e0f28e78444294b465a4a8541b17dd7a06786c3b"
+              },
+              "settings_sha256": "40ad43e4047bf75b1250036f16b3f58600c35138e50132c3b0e2b3b33fca1949",
+              "simulation_contract_sha256": "c4cc8eaf6f499926c90371297b55b53f7b77509a05b5dda747cfb277a66fa0b9"
+            },
+            "terminal_failure": "unilateral debug or fixture input contaminated capture",
+            "native_status": {
+              "contract": "mmx6.native-consumption.v1",
+              "epoch": 1,
+              "failure": "unilateral debug or fixture input contaminated capture",
+              "schema": 1,
+              "scope": "native-consumption diagnostics; replay unimplemented",
+              "status": "failed"
+            },
+            "events": 6677,
+            "natives": 3087,
+            "p2_reads": 3590,
+            "artifacts": [
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\peer-1-recording-refusal\\settings.json",
+                "bytes": 26875,
+                "sha256": "40ad43e4047bf75b1250036f16b3f58600c35138e50132c3b0e2b3b33fca1949"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\peer-1-recording-refusal\\content.json",
+                "bytes": 567,
+                "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\peer-1-recording-refusal\\simulation-contract.json",
+                "bytes": 351,
+                "sha256": "c4cc8eaf6f499926c90371297b55b53f7b77509a05b5dda747cfb277a66fa0b9"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\peer-1-recording-refusal\\inputs.jsonl",
+                "bytes": 858450,
+                "sha256": "9aca9379262367940eb94dac00a49213ddc75b84e8234317820f02ac61f5205a"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\peer-1-recording-refusal\\status.json",
+                "bytes": 211,
+                "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\peer-1-recording-refusal\\card1.initial.mcd",
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\peer-1-recording-refusal\\card2.initial.mcd",
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "strict_refusals": {
+              "ordinary_capture": {
+                "type": "InvalidRecording",
+                "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+              },
+              "offline_replay": {
+                "type": "InvalidRecording",
+                "message": "network trace cannot be replayed offline"
+              }
+            },
+            "finalized_capture_admitted": false,
+            "replay_admitted": false,
+            "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+          }
+        ],
+        "owned_cleanup": [
+          {
+            "seat": 0,
+            "pid": 29956,
+            "shutdown": "graceful_owned_debug",
+            "exit_code": 0
+          },
+          {
+            "seat": 1,
+            "pid": 91276,
+            "shutdown": "graceful_owned_debug",
+            "exit_code": 0
+          }
+        ]
+      }
+    }
+  },
+  "previously_reviewed_context_images": [
+    {
+      "peer": 0,
+      "row": 43,
+      "label": "actual-independent-child-damage-0",
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-local-v83-root-v1\\ammo-hud\\intro-admission\\F118\\peer-0-actual-independent-child-damage-0.png",
+      "sha256": "15205477b5dd20141638795e08d9223c0275b988264afc1ab4236bdd99ea70c1",
+      "before": {
+        "id": 6198,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 6199,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-local-v83-root-v1\\ammo-hud\\intro-admission\\F118\\peer-0-actual-independent-child-damage-0.png",
+        "staged": true,
+        "seq": 4
+      },
+      "completion": {
+        "id": 6201,
+        "ok": true,
+        "seq": 5,
+        "wrote": 1
+      },
+      "root_reviewed": true
+    },
+    {
+      "peer": 0,
+      "row": 60,
+      "label": "after-native-child-attack-retirement",
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-local-v83-root-v1\\ammo-hud\\intro-admission\\F118\\peer-0-after-native-child-attack-retirement.png",
+      "sha256": "69850b1fa446245f75393cb25c9eefad1cd98bbab9e62d9ff5e7c24298dbf983",
+      "before": {
+        "id": 6253,
+        "ok": true,
+        "seq": 5,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 6254,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-local-v83-root-v1\\ammo-hud\\intro-admission\\F118\\peer-0-after-native-child-attack-retirement.png",
+        "staged": true,
+        "seq": 5
+      },
+      "completion": {
+        "id": 6256,
+        "ok": true,
+        "seq": 6,
+        "wrote": 1
+      },
+      "root_reviewed": true
+    },
+    {
+      "peer": 0,
+      "label": "native-boss-both-controls-restored",
+      "row_index": 388,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\intro-admission\\protected-native-entry\\peer-0-native-boss-both-controls-restored.png",
+      "sha256": "69bc07ad2094c806e4d33864f2a5289d6d6934f1b65551d1aedd0b5ee60c19c2",
+      "before": {
+        "id": 5090,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 5091,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\intro-admission\\protected-native-entry\\peer-0-native-boss-both-controls-restored.png",
+        "staged": true,
+        "seq": 3
+      },
+      "completion": {
+        "id": 5093,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      },
+      "root_reviewed": true
+    },
+    {
+      "peer": 1,
+      "label": "native-boss-both-controls-restored",
+      "row_index": 388,
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\intro-admission\\protected-native-entry\\peer-1-native-boss-both-controls-restored.png",
+      "sha256": "338af1f398b88ba669d5fc4c02f077da1ba89585e357b53537cc9d2143eeb100",
+      "before": {
+        "id": 4961,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 4962,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\protected-combat-netplay-v83-root-v1\\intro-admission\\protected-native-entry\\peer-1-native-boss-both-controls-restored.png",
+        "staged": true,
+        "seq": 3
+      },
+      "completion": {
+        "id": 4963,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      },
+      "root_reviewed": true
+    }
+  ],
+  "limits": [
+    "Frozen F109 authored staged emission with P2 leading: native analogue is the boss-owned original Yammark intro producing a three-child drone group after guest-led admission. This is an actual script allocator/group-ready path, distinct from environmental/static placements. No literal hive/bee route, general placement sweep, every emitter or lifetime claim.",
+    "The same exact V83 image/title32/host15 is used for LOCAL and both NET physical peers. Actual original main intro2->3->4 is retained with scene_owner2 and P2 leading X4960/Zero5184.40625. Source-qualified phase3 waits for2*N child-group readiness; original N=3 template and later3 initialized49/sub1 children bound to the real main corroborate actual emission.",
+    "Native sourceF4324 clears the group count, F4358 loops original allocator2BBF4 and initializes49/sub1/actual parent80 before advancing2->3; F43F4 advances3->4 only after the real group-ready gate. This is interpretation of actual observed phases using live-bound original source, not a direct observed allocation-call trace.",
+    "Exact first-child birth packets and countF7E0C were not sampled. No direct count6 read, exact allocation instant, first-group generation continuity or absence of child-slot replacement in the unsampled interval is claimed. Actual emitted-group readiness and subsequent initialized group/interaction are established without requiring that instant.",
+    "The already reviewed F118 witness independently proves real ownedZero24/actual source box and child8->4 while the parent stays32HP, then attack retirement/idle recovery, on every physical peer. No child deletion-as-damage inference, unsupported attacks or main/boss defeat credit.",
+    "Original AmazonCP2 initializer bypasses earlier travel; explicitly negotiated lab_contact_protection suppresses hostile contact damage only and does not set enemy emission/AI/HP/attack outcomes. Both native heroes lead/enter/control through the actual script. No hostile-contact-damage credit.",
+    "NET raw F118 helper remains failed_partial because its later-only predicate missed already retained damage row12; raw parent later fails diagnostic publication after guest finisher. Existing exact-mode review retains matching resolved core/nonzero-mod CRCs, agreed profile, strict tainted recording refusals, unchanged native cards and owned exits0. These raw failures are not rewritten or promoted to broad passes.",
+    "The four previously reviewed images are LOCAL child-interaction and NET entry/control context. No drone-birth image, NET damage screenshot, original full-art rendering or audio pass is claimed. Existing scenery corruption/HUD occlusion/flash/overlap remains explicit.",
+    "This closure reuses completed native evidence and source guards; no new game run/build/product fix, default package change, human input test or native3330 audit."
+  ],
+  "executed_review_script": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-F109-emitted-group-v83-root-v1.py",
+    "sha256": "91505221aeedf1645928132693951dac8557cd9f0f920eb6779f4466cf4bcade",
+    "bytes": 10466
+  }
+}
