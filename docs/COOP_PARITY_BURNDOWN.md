@@ -42,6 +42,8 @@ states; old-state migration is never required.
 
 ## Current qualification status, October 27
 
+The [retained weapon-palette correction](evidence/mmx6-assets/manifest-bound-b9d0b93-F50-retained-palette-local-component-reviewed.json) is integrated locally at `68cd03f`. Native LOCAL Yammar uses the original palette row and all seven retained tiles (1,792 pixels) match the original DAT85 texture/colors; the former row is demonstrably different. All21 focused checks pass. **F50 stays unverified**: the full acquired-family, retirement and NET contract remains open. This block closes no comparisons; counts stay63/6/165, and the next block switches to shorter named checks.
+
 **F9 is closed: 63 passed / 6 failed / 165 unverified (26.9%).**
 The [native dialogue palette fix and both-mode evidence](evidence/mmx6-assets/manifest-bound-e07ff56-F9-local-netplay-reviewed.json)
 publish Zero-owned original text/name colors to the shared native upload,

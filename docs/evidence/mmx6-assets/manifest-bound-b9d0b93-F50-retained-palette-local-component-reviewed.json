@@ -1,0 +1,252 @@
+{
+  "schema": 1,
+  "comparison": "F50",
+  "frozen_row_sha256": "a6a4fe04d846dfe1171711b7f339ba3e78792d4b688509318857cd9757fde0fd",
+  "result": "unverified",
+  "source_fix_result": "native_LOCAL_Yammar_palette_component_passed",
+  "candidate": "b9d0b931b615e21865da437bbbc8fab1c781df4f",
+  "source_fix_commit": "fae624a77e959e75f7d174249121b50e31efb159",
+  "fixture_test_commit": "b9d0b931b615e21865da437bbbc8fab1c781df4f",
+  "integration_commit": "68cd03fbd70d28b134615b77d9ecfd379626fd13",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-v74-final-binding-root-v1.json",
+    "binding_sha256": "be25caceb80c16a0427dbca9a160bafa4360ffe26509f18ab019645d80eb04f3",
+    "image_sha256": "1277fadf20318d067a7aa8a9916d72975032c464e5e14125e557cc99aef0fb15",
+    "manifest_sha256": "bd0c71fa0c858f50291de08414310340dcf9e2ff5e5cff7e298bfecf47e39bb5",
+    "provenance_sha256": "975698d59ffc06ed745747042447942a0afce79d14e6fc7d433f347763b9e6c3",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v74-retained-palette-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "b9d0b931b615e21865da437bbbc8fab1c781df4f",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v25",
+    "host_revision": 8
+  },
+  "fix": "Map retained CLUT coordinates through the original256-word by32-row native palette upload. CLUT7849 atVRAM144,481 reads working byte320; former byte920 selects the wrong row. Apply in sprite and non-menu atlas paths, preserving separate menu geometry.",
+  "focused_tests": {
+    "passed": 21,
+    "failed": 0,
+    "initial_fixture_failures_preserved": true
+  },
+  "native_component": {
+    "kind": "native_LOCAL_Yammar_retained_palette_fix_review",
+    "source_head": "b9d0b931b615e21865da437bbbc8fab1c781df4f",
+    "binding": {
+      "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-v74-final-binding-root-v1.json",
+      "binding_sha256": "be25caceb80c16a0427dbca9a160bafa4360ffe26509f18ab019645d80eb04f3",
+      "image_sha256": "1277fadf20318d067a7aa8a9916d72975032c464e5e14125e557cc99aef0fb15",
+      "manifest_sha256": "bd0c71fa0c858f50291de08414310340dcf9e2ff5e5cff7e298bfecf47e39bb5",
+      "provenance_sha256": "975698d59ffc06ed745747042447942a0afce79d14e6fc7d433f347763b9e6c3",
+      "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v74-retained-palette-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+      "source_heads": {
+        "game": "b9d0b931b615e21865da437bbbc8fab1c781df4f",
+        "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+        "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+      },
+      "title": "mmx6-x-zero-delay-v25",
+      "host_revision": 8
+    },
+    "probe": {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-retained-palette-local-v74-root-v1\\ammo-hud\\F50-native-Yammar-current-provider.pst",
+      "bytes": 1836491,
+      "sha256": "01405ea4668db68a4c407454916caa4ac5fcc8ba9bfe803216c6937731311510"
+    },
+    "capture": {
+      "surface": "composed_renderer_output",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-retained-palette-local-v74-root-v1\\ammo-hud\\F50-native-Yammar-active.png",
+      "sha256": "20e349fb7c155df9f1dbd95d14896f8c51730e8d5ffe2461c5327b373a96e438",
+      "before": {
+        "id": 1563,
+        "ok": true,
+        "seq": 3,
+        "wrote": 1
+      },
+      "acknowledgement": {
+        "id": 1564,
+        "ok": true,
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-retained-palette-local-v74-root-v1\\ammo-hud\\F50-native-Yammar-active.png",
+        "staged": true,
+        "seq": 3
+      },
+      "completion": {
+        "id": 1565,
+        "ok": true,
+        "seq": 4,
+        "wrote": 1
+      }
+    },
+    "original_DAT_sha256": "03c0c927194a0c8321ae207707abd5fc662bb13aa80c26145ee363cc716c2c9a",
+    "original_source": {
+      "record": 85,
+      "type9_palette_offset": "0xA20",
+      "palette_sha256": "6b494d4fb39b441d35a95f9c32f75cb555961d43239093fcdbead97c01600d2f",
+      "type2_graphics_sha256": "22ae0ce0483087cb597b146de9e3f646756dfcf5358fc8140067af7c0f6fbe5a",
+      "table_relative": "0x373f4",
+      "decoded_sha256": "412dc223b01d00b0963c2f299c2a5fa95cbd1aab40d5acadf3bb2475165ba857"
+    },
+    "mapping": {
+      "clut": "0x7849",
+      "vram": [
+        144,
+        481
+      ],
+      "native_working_byte": "0x320",
+      "former_wrong_byte": "0x920",
+      "wrong_row_distinct": true
+    },
+    "native_retained_banks": [
+      {
+        "bank": "0x60bc",
+        "tile": "0x4000",
+        "pixels": 256,
+        "opaque": 76,
+        "pixels_sha256": "580c1f129d1be7fe0751eec6b9390b79b9274ec4c624a1506484570ee45c6ee2"
+      },
+      {
+        "bank": "0x60bd",
+        "tile": "0x4010",
+        "pixels": 256,
+        "opaque": 38,
+        "pixels_sha256": "5a8dc36e2bf5bf998e119747fb4a7d62681293a49d4c89479ef25ee81cf7dcff"
+      },
+      {
+        "bank": "0x60c5",
+        "tile": "0x5000",
+        "pixels": 256,
+        "opaque": 132,
+        "pixels_sha256": "a1359e83ec24aeef65cd852f2beae8e5747895494db7747347005f8e4e64ca8f"
+      },
+      {
+        "bank": "0x60c6",
+        "tile": "0x5010",
+        "pixels": 256,
+        "opaque": 82,
+        "pixels_sha256": "1e49a7d8ac15fae054f1a157d4a7f3b065ac71136c2ba85061883515ab05d1c3"
+      },
+      {
+        "bank": "0x60c7",
+        "tile": "0x40d0",
+        "pixels": 256,
+        "opaque": 37,
+        "pixels_sha256": "7f8348b653b872884bf5b555a5532c1ae929585054901d16a52e4b4c4c039a43"
+      },
+      {
+        "bank": "0x60c8",
+        "tile": "0x40e0",
+        "pixels": 256,
+        "opaque": 23,
+        "pixels_sha256": "d53e210ae06e2c69a772eab6737df7b398aa4a4fb996a49f6a34ffa9e3fecf1c"
+      },
+      {
+        "bank": "0x60c9",
+        "tile": "0x40f0",
+        "pixels": 256,
+        "opaque": 13,
+        "pixels_sha256": "7bfeea0443560805405899c62a59ae04f3b9378ae651da392f5724514c89a041"
+      }
+    ],
+    "total_exact_pixels": 1792,
+    "checks": {
+      "original_parent_gates": true,
+      "actual_native_acquired_masks": true,
+      "native_Yammar_option_active": true,
+      "source_and_native_working_colors_match": true,
+      "all_retained_Yammar_colors_and_pixels_match_original": true,
+      "old_wrong_row_rejected": true,
+      "owned_cleanup_cards_and_strict_recording_refusal": true
+    },
+    "F50_status": "unverified",
+    "limitations": [
+      "LOCAL fix validation only; X IceBurst and Zero Yammar exercised.",
+      "Every-acquired-family art/retirement and NET gameplay remain unverified.",
+      "No save/load/rewind, weapon acquisition or progress qualification."
+    ]
+  },
+  "composed_art_review": {
+    "reviewed": true,
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-retained-palette-local-v74-root-v1\\ammo-hud\\F50-native-Yammar-active.png",
+    "observed": "Both native X and Zero bodies remain visible with two colored Yammar orbit effects and the native IceBurst block; exact retained pixels independently match original DAT85.",
+    "limits": "Single local composed capture; overlapping actors/block, no complete family/retirement/rendering qualification."
+  },
+  "original_parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "native_resource_and_window_observations_complete": true,
+    "default_recording_taint_retained_and_replay_refused": true,
+    "owned_cleanup_private_cards": true
+  },
+  "artifacts": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-retained-palette-local-v74-root-v1\\qualification.json",
+      "bytes": 3602458,
+      "sha256": "78515ff9dcd978c4394b9c1ef648e92be22e2a3eda471a73eb782cc4937ce6d4"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-retained-palette-local-v74-root-v1\\F50-terminal.json",
+      "bytes": 3603615,
+      "sha256": "065248b49a867bb066be12593c2e35f4173a305ce2d05caa5578655f727ebac6"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-retained-palette-local-v74-root-v1\\F50-probe-observations.json",
+      "bytes": 42833,
+      "sha256": "f9d8c4b8718ce0ed97f751ec386ca081adf00c84c4a0086484e738763a0fb0b5"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-retained-palette-local-v74-root-v1\\F50-native-original-art-review.json",
+      "bytes": 4827,
+      "sha256": "5449b19795f89117e1a83df2cc765fe311760b19267953b224a28272c4d2f51c"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-retained-palette-local-v74-root-v1\\ammo-hud\\F50-native-Yammar-active.png",
+      "bytes": 1729098,
+      "sha256": "20e349fb7c155df9f1dbd95d14896f8c51730e8d5ffe2461c5327b373a96e438"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-retained-palette-local-v74-root-v1\\ammo-hud\\F50-native-Yammar-current-provider.pst",
+      "bytes": 1836491,
+      "sha256": "01405ea4668db68a4c407454916caa4ac5fcc8ba9bfe803216c6937731311510"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-v74-final-binding-root-v1.json",
+      "bytes": 274,
+      "sha256": "be25caceb80c16a0427dbca9a160bafa4360ffe26509f18ab019645d80eb04f3"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F50-v74-exact-build-guard-root-v1.py",
+      "bytes": 4285,
+      "sha256": "bed04d2690ff288185ee659d4217f01a6142acb9c14f5a8b17700117a7937d23"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F50-retained-palette-local-v74-root-v1.py",
+      "bytes": 4420,
+      "sha256": "d8e0762a4866460d1ccaf8acfc52bbfeb77fe602ed4867589725d2bdf2954483"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-F50-retained-palette-v74-root-v1.py",
+      "bytes": 8149,
+      "sha256": "a237749b24ff77b66531fb203ea691ee5440fc4dd0883bf68685203609b22374"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v74-retained-palette-focused-root-v1.log",
+      "bytes": 8110,
+      "sha256": "74ff69d901e2618b1be41fda8dd53e0fd8ee6f05838c0be6756e2fe37ecfd272"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v74-retained-palette-focused-root-v2.log",
+      "bytes": 6344,
+      "sha256": "ae8fdd94576c1ec6e343d8b1fca0dfdf1b26d99dfbe7c52d0f638f5199608a99"
+    }
+  ],
+  "comparison_counts": {
+    "passed": 63,
+    "failed": 6,
+    "unverified": 165
+  },
+  "limitations": [
+    "F50 stays unverified in both modes; every acquired special-weapon art family, natural retirement and NET gameplay are incomplete.",
+    "Existing audited offline inventoryFF prerequisite invokes original equipment initializer; acquisition/progression is bypassed. NoHP/ammo/selection/action/outcome writes.",
+    "Fixture-tainted recording and replay correctly refused; no ordinary finalized-capture/replay claim.",
+    "This receipt validates a shared correctness fix and does not pass F27, F130, scenery or other comparisons.",
+    "No push/PR/delivery/remote tracker sync."
+  ]
+}
