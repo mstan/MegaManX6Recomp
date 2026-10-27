@@ -42,6 +42,8 @@ states; old-state migration is never required.
 
 ## Current qualification status, October 26
 
+The [new V69 LOCAL moving-support bundle](evidence/mmx6-solid/manifest-bound-4277e77-F204-F64-local-reviewed.json) passes F204 cadence and F64 private-pane animation on one exact candidate. World78 lies insideSDK74..79; original platform travel38.5px and native frames0/1/2 are retained with five reviewed images. The agreed Amazon prerequisite is disclosed. NET is running separately; aggregate stays56/5/173.
+
 R25 remains unverified after [two retained LOCAL setups](evidence/mmx6-lifecycle/manifest-bound-f7b7383-R25-local-setups-deferred.json).
 The second reaches the native platform edge and actual withdrawal/return,
 but enemy hurt knocks the primary off the prepared edge before completion.

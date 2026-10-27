@@ -1,0 +1,196 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F204",
+    "F64"
+  ],
+  "mode": "local",
+  "result": "passed",
+  "candidate": "4277e774fd032e88ac03344a530b57a597773584",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-v69-final-binding-root-v1.json",
+    "binding_sha256": "b28375890937da72df2055d1c2c05c806d491f16be975ab4a202da1dcaa3d2f5",
+    "image_sha256": "0fdc58cb27162e74a4eefe7cfe76ce5d533c2acc749cfb1e1ddfeb187f1ef11c",
+    "manifest_sha256": "6bd4c3490daa0c3bf3d33a87672b4f820124ba60becbf55d20445536cb3674b3",
+    "provenance_sha256": "0c69b8357652fca4c7a7bc5b88aa0232f3e9b568503358b109ad685f7d77835e",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v69-amazon-support-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "4277e774fd032e88ac03344a530b57a597773584",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v23",
+    "host_revision": 6
+  },
+  "parent": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\qualification.json",
+    "bytes": 1729463,
+    "sha256": "a064a0fcd2ad93c43e630b986cf51393dadb4dcd83e613205a4ab8b3f0f82155"
+  },
+  "prerequisite": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\Amazon-prerequisite\\observations.json",
+    "bytes": 570947,
+    "sha256": "0e0b9ea0e519902dead79cba668f9da5cd5f10dd654df32658cb79c262c42277"
+  },
+  "measurements": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\support\\F204-observations.json",
+    "bytes": 27914,
+    "sha256": "8dab2e0b9e0c9265c78d6079d9288b36a171d06d0337cf67a6588cb29623fe2f"
+  },
+  "phases": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\support\\F64-observations.json",
+    "bytes": 54773,
+    "sha256": "b99520f84e8bb0e62baab91fc6bf5838f5e32990f4c40bd2ffe8cb7b836f1e74"
+  },
+  "actual_metrics": [
+    {
+      "peer": 0,
+      "native_world_delta": 78,
+      "vblank_delta_bracket": [
+        74,
+        79
+      ],
+      "elapsed_seconds_bracket": [
+        1.3599999999860302,
+        1.5
+      ],
+      "world_ticks_per_second_bracket": [
+        52.0,
+        57.35294117705971
+      ],
+      "vblanks_per_second_bracket": [
+        49.333333333333336,
+        58.08823529471432
+      ],
+      "world_per_vblank_bracket": [
+        0.9873417721518988,
+        1.054054054054054
+      ],
+      "native_world_delta_inside_vblank_delta_bracket": true,
+      "actor_dx": -38.5,
+      "sampled_actor_horizontal_travel": 38.5
+    }
+  ],
+  "actual_phase_checks": {
+    "actual_neutral_top_contact_in_all_phase_samples": true,
+    "native_world_once_inside_observed_sdk_brackets": true,
+    "no_contradictory_same_tick_phase_reads": true,
+    "native_animation_changes_each_process": true,
+    "actual_private_views_keep_rendering": true,
+    "exact_crosspeer_phase_observed": true,
+    "own_composed_capture_each_process": true
+  },
+  "actual_phase_frames": [
+    [
+      0,
+      1,
+      2
+    ]
+  ],
+  "native_phase_guards": [
+    {
+      "peer": 0,
+      "address": "0x80017a04",
+      "bytes": 68,
+      "sha256": "e947d51c1b65d627545acd99d25668520421497fc1f9865d22ef3b78267b6a43"
+    },
+    {
+      "peer": 0,
+      "address": "0x80023380",
+      "bytes": 40,
+      "sha256": "fe2ba253b9d770b2037f36174acb0d2d9debf92cd021e817ffdfbf6db4d57daa"
+    }
+  ],
+  "images": [
+    {
+      "label": "actual-native-AmazonC0-arrival",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\Amazon-prerequisite\\peer-0-actual-native-AmazonC0-arrival.png",
+        "bytes": 2074543,
+        "sha256": "1cd19ce62ccef1a366a182124b20875253531a753ef620dc340911a5173950c1"
+      },
+      "review": "Both living native heroes visible in two correct4:3 panes after actual original initializer; setup only, no campaign traversal credit."
+    },
+    {
+      "label": "initialized-native-moving-support",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\support\\peer-0-initialized-native-moving-support.png",
+        "bytes": 2074543,
+        "sha256": "3301b5d51985eafe8e1cb5359ab73d2ed5ce4d6c1b2f346057320759a3120887"
+      },
+      "review": "Root reviewed both native panes. Original moving snail/support visible in both views; genuine Zero ride shows distinct player follow with stationary X, native platform movement/art remains coherent before/after dwell. No image-only collision/timing or exact image-to-native-tick claim."
+    },
+    {
+      "label": "guest-neutral-native-carry",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\support\\peer-0-guest-neutral-native-carry.png",
+        "bytes": 2074543,
+        "sha256": "8b587f3f4b307a7529297b7e3413b7175c671f77bb2a80c9b7d390d6d4645f0a"
+      },
+      "review": "Root reviewed both native panes. Original moving snail/support visible in both views; genuine Zero ride shows distinct player follow with stationary X, native platform movement/art remains coherent before/after dwell. No image-only collision/timing or exact image-to-native-tick claim."
+    },
+    {
+      "label": "F204-neutral-carry-before-dwell",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\support\\peer-0-F204-neutral-carry-before-dwell.png",
+        "bytes": 2074543,
+        "sha256": "f6fba23dbbb2740dfed4db7ee86b9606bd82a72c5ad49f84b6f097de779aee5b"
+      },
+      "review": "Root reviewed both native panes. Original moving snail/support visible in both views; genuine Zero ride shows distinct player follow with stationary X, native platform movement/art remains coherent before/after dwell. No image-only collision/timing or exact image-to-native-tick claim."
+    },
+    {
+      "label": "F204-neutral-carry-after-dwell",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Amazon-support-local-v69-root-v3\\ammo-hud\\intro-admission\\support\\peer-0-F204-neutral-carry-after-dwell.png",
+        "bytes": 2074543,
+        "sha256": "909e09f80340c8ae4ff99a2d82938c193feb1dfa94f48b46b33b35924df24c8e"
+      },
+      "review": "Root reviewed both native panes. Original moving snail/support visible in both views; genuine Zero ride shows distinct player follow with stationary X, native platform movement/art remains coherent before/after dwell. No image-only collision/timing or exact image-to-native-tick claim."
+    }
+  ],
+  "reviewed_images": 5,
+  "recording_refusals": {
+    "identity": {
+      "baseline": null,
+      "cards": [
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        },
+        {
+          "bytes": 131072,
+          "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+        }
+      ],
+      "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+      "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+      "image_sha256": "0fdc58cb27162e74a4eefe7cfe76ce5d533c2acc749cfb1e1ddfeb187f1ef11c",
+      "manifest_sha256": "6bd4c3490daa0c3bf3d33a87672b4f820124ba60becbf55d20445536cb3674b3",
+      "mode": "offline",
+      "profile": null,
+      "settings_sha256": "a757bf7091a2558227fc6c8a2b1c4a27d6ec180f1d108a04078e7d9581034e93",
+      "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+    },
+    "refusals": {
+      "ordinary_capture": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      },
+      "offline_replay": {
+        "type": "InvalidRecording",
+        "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+      }
+    }
+  },
+  "limits": [
+    "Only LOCAL exact4277e77/SDK10b9021/UI34b5277. NET and aggregate remain separately required on samecandidate.",
+    "F204 is actual native moving stretch with two healthy heroes and normal private-pane presentation: world78 insideSDK74..79 over1.36..1.50s; actualplatform travel38.5px. Wallclock rate52..57.35Hz is retained; no universal60FPS/longduration/exactperformance benchmark claim.",
+    "F64 actual local splitmode2/two4:3 panes/privatecommits advance; source17A04 producer/23380 frame consumer and coherentactualactor+PLAY90 read retain frame47 values0/1/2 and composed platform artwork in both views. Actual animation/visibility plus phase/world evidence, not counters alone. Camera/player/PNG/phase brackets are separate async observations, not everytriangle or atomic screenshot attribution.",
+    "V2 actualAmazonarrival worked, then strict continual-top gate rejected legitimate native unload onto ledge with bothHP32. Wholefailedcase retained. Current observer uses existingV54v4 genuinecarriedstart plus nativeground policy without altering native mechanics; v3 happens to retain actualtop at all F64 phase observations. FrozenF204 prescribes movingstretch, not perpetualcarry. No failedwholeparent relabeling.",
+    "Pre-agreed Amazon1/0/CP0 is a disclosed reachability bypass; exactselectedrecord80072174/nonce4C434130/generation1/state3/authority1/latch2/nativeinitializeronce and actual160/184 arrivals retained. Nativewalking/jumping/supportcontact occursafterward, no actor/HP/ammo/contact/clock/successwrites. No ordinaryroute/newstage/retry/progression credit.",
+    "All five composed images reviewed; source/code/observer/image/manifest/profile fields and privatecards/ownedexit0/strictfixturetaintcapture+replay refusals retained. No F49validhit, wholeF51repeat, otherplatform/host/roster/content or oldstate compatibility claim."
+  ],
+  "bypasses": [
+    "Pre-agreed original mode8/9 Amazon1/0/CP0 initializer; no traversal/retry/progression credit."
+  ]
+}
