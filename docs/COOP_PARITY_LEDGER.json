@@ -17542,7 +17542,7 @@
       "frozen_row_sha256": "df33a7d65e35d60ab3064be36a3226ca4de5e27ebf4a93ec797ed24b5cacf82c",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "candidate_native_scenario",
+        "mapping_state": "identified_subsystem",
         "analogue": "Guest-led midboss initial camera",
         "bounded_check": "Approach an actual X6 midboss with primary distant; inspect first arena/camera state and initial native combat separately from eventual defeat/exit.",
         "baseline_anchors": [
@@ -17550,17 +17550,90 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+            "build_identity": {
+              "executable_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+              "compiled_manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "either",
+              "cameras": "unified",
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "pre-agreed original introCP2"
+            },
+            "action": "Admit the native intermediate boss only with Zero while X remains behind; inspect first allocation, original authored camera sweep and released arena, then actual initial native interaction.",
+            "outcome": "Guest alone admits at6037.5 while primary stays5904; first type48 allocation retains original camera sweep toward6064..6144/Y224. Every physical process reaches camera6064/224 and healthy released controls before real Zero27 boss32->28->24 combat. No eventual-defeat/exit inference.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-50cc26e-F184-initial-midboss-camera-reviewed.json",
+                "sha256": "3428d75a55185d20ca5a5d9900649fdbf5faa0a745e697a5a0ea9bab7494780c"
+              }
+            ],
+            "limits": [
+              "Reuses completed exact50cc26e X6 LOCAL+NET and their original bindings/gates; no new native run or credit transfer to V80. One native intro type48 intermediate encounter and guest-led Either/Unified admission only.",
+              "The first actual boss allocation occurs during the authored door sweep, not at its endpoint. Source50670..50744 sets door6064 target min6064/max6144; all physical processes retain monotonic native bound/camera movement and released6064/224 before initial native combat. P1 remains5904 when only the guest admits. No immediate6064-at-allocation requirement is invented.",
+              "Original type48 death->story16->type55 finale proves intermediate identity. F184 qualifies the initial camera/arena handoff and actual initial32->28->24 interaction; eventual defeat, cleanup, exit and F166/F187 are separate and remain unclaimed.",
+              "Root personally re-reviewed12 composed images. Corrupt prerequisite scenery, early native door-edge clipping, initial actor overlap and partial HUD occlusion remain explicit; no general scenery, all arena artwork, private-view or active-slash artwork qualification. NET detailed combat captures are on peer0; both peers retain actual initial camera/boss/body history and resolved parent gates.",
+              "Pre-agreed original CP2 bypasses unrelated approach traversal; no boss HP/state/camera success/outcome flags are assigned. Strict ordinary recording and replay refuse fixture taint. No campaign, other midbosses, other hosts/OS, current-build or optional setting claims."
+            ],
+            "bypasses": [
+              "Negotiated original introCP2 only, followed by actual guest approach/door/native initialization/camera/combat."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+            "build_identity": {
+              "executable_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+              "compiled_manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "doors": "either",
+              "cameras": "unified",
+              "roster": "X/P1 + Zero/P2",
+              "audio": "muted dummy",
+              "prerequisite": "pre-agreed original introCP2"
+            },
+            "action": "Admit the native intermediate boss only with Zero while X remains behind; inspect first allocation, original authored camera sweep and released arena, then actual initial native interaction.",
+            "outcome": "Guest alone admits at6037.5 while primary stays5904; first type48 allocation retains original camera sweep toward6064..6144/Y224. Every physical process reaches camera6064/224 and healthy released controls before real Zero27 boss32->28->24 combat. No eventual-defeat/exit inference.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-50cc26e-F184-initial-midboss-camera-reviewed.json",
+                "sha256": "3428d75a55185d20ca5a5d9900649fdbf5faa0a745e697a5a0ea9bab7494780c"
+              }
+            ],
+            "limits": [
+              "Reuses completed exact50cc26e X6 LOCAL+NET and their original bindings/gates; no new native run or credit transfer to V80. One native intro type48 intermediate encounter and guest-led Either/Unified admission only.",
+              "The first actual boss allocation occurs during the authored door sweep, not at its endpoint. Source50670..50744 sets door6064 target min6064/max6144; all physical processes retain monotonic native bound/camera movement and released6064/224 before initial native combat. P1 remains5904 when only the guest admits. No immediate6064-at-allocation requirement is invented.",
+              "Original type48 death->story16->type55 finale proves intermediate identity. F184 qualifies the initial camera/arena handoff and actual initial32->28->24 interaction; eventual defeat, cleanup, exit and F166/F187 are separate and remain unclaimed.",
+              "Root personally re-reviewed12 composed images. Corrupt prerequisite scenery, early native door-edge clipping, initial actor overlap and partial HUD occlusion remain explicit; no general scenery, all arena artwork, private-view or active-slash artwork qualification. NET detailed combat captures are on peer0; both peers retain actual initial camera/boss/body history and resolved parent gates.",
+              "Pre-agreed original CP2 bypasses unrelated approach traversal; no boss HP/state/camera success/outcome flags are assigned. Strict ordinary recording and replay refuse fixture taint. No campaign, other midbosses, other hosts/OS, current-build or optional setting claims."
+            ],
+            "bypasses": [
+              "Negotiated original introCP2 only, followed by actual guest approach/door/native initialization/camera/combat."
+            ]
+          }
+        ],
+        "limitations": "Exact50cc26e LOCAL+NET initial native intermediate-boss/camera handoff and actual initial combat reviewed. Original door sweep, not immediate final camera at allocation. Unified/Either, original CP2 bypass and presentation limits explicit; no later defeat/exit or other arena claims."
       }
     },
     {

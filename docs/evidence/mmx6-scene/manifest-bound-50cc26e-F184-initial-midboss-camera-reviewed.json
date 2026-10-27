@@ -1,0 +1,1241 @@
+{
+  "schema": 1,
+  "comparison": "F184",
+  "frozen_row_sha256": "df33a7d65e35d60ab3064be36a3226ca4de5e27ebf4a93ec797ed24b5cacf82c",
+  "result": "passed",
+  "candidate": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\intro-v67-final-binding-root-v1.json",
+    "binding_sha256": "2beab5c7cb4850cbff49e547d56bbeacb31a56e65911c36e12a369a7739b2317",
+    "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+    "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+    "provenance_sha256": "ebed9f24406a7e44224ac0f7ee605048ee6f614faed59a3b11a203fb0b14e88a",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v67-agreed-checkpoint-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+      "sdk": "10b9021c6c2b168b4b53c077231723258a289482",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v22",
+    "host_revision": 5
+  },
+  "reused_reviewed_packet": {
+    "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-combat\\manifest-bound-50cc26e-F157-local-netplay-reviewed.json",
+    "bytes": 20430,
+    "sha256": "fa6dfc97170039624a9b8f81a4af60896a58775e2f62dcd25e01827e9eb593ac"
+  },
+  "original_camera_source": {
+    "first": "0x80050670",
+    "end": "0x80050744",
+    "sha256": "86b5759491b6b7ce7793d945a6d0416d6463224fcd40974d424ac48875e24ba5",
+    "semantics": "Subtype1 sets targetmin=doorX6064 and targetmax=doorX+80=6144; actual current bounds interpolate through the original native door transition, Y224 retained."
+  },
+  "midboss_classification": {
+    "review": {
+      "path": "F:\\Projects\\psxrecomp\\_wt-mmx6-x4-parity\\docs\\evidence\\mmx6-scene\\manifest-bound-723affc-F97-native-midboss-handoff-reviewed.json",
+      "bytes": 12787,
+      "sha256": "d54546ec2d180534a35fa809a61e11a1ce5f96bbe0232a992241ae3cecf00e60"
+    },
+    "original_spans_rechecked": [
+      {
+        "first": "0x800f104c",
+        "end": "0x800f117c",
+        "sha256": "0878cc78ad13188e4a43b5f3a8aa137c0e80464ff844c1c7d05d6ad34fa3c16c",
+        "source_contract": "Actual type48 death produces native story16; it is not intro exit40."
+      },
+      {
+        "first": "0x800f9a54",
+        "end": "0x800f9b70",
+        "sha256": "d46d132059432283f536b1075dce7a94062629a21ed8bf3336174024ee73bea1",
+        "source_contract": "Following story16 produces native type55 High Max finale."
+      },
+      {
+        "first": "0x800f64c0",
+        "end": "0x800f65dc",
+        "sha256": "6d13b787b3536bb6894542875409507009c4d717d67c320e27359f52557fcfe8",
+        "source_contract": "Only later type55 F65A4 writes intro exit40."
+      }
+    ]
+  },
+  "candidate_source": {
+    "commit": "50cc26e9eac55e631a457713e7c7be26fcc50cac",
+    "path": "src/mods/mmx6_coop_plugin.c",
+    "sha256": "a7762779069e536e824c02d659ea2cc2487b7620f5dea944103048cb0fd17375"
+  },
+  "modes": {
+    "local": {
+      "result": "passed",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\qualification.json",
+        "bytes": 24299833,
+        "sha256": "db2d5cd211886990b0b20e52583c8ec941731c855d9cd7825910e71cc14cf49f"
+      },
+      "original_door_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\observations.json",
+        "bytes": 8196762,
+        "sha256": "096000e2d4b128ef5108f80378789ae354d20547659ddbeced9614ad55e66e85"
+      },
+      "initial_native_combat_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F157\\observations.json",
+        "bytes": 6194743,
+        "sha256": "5d926fc9d844a77688f0f588268e61200e85f12a13ffb7eed1aefc0cba3ef1bb"
+      },
+      "parent_checks": {
+        "exact_image_manifest_declared_sources_originals": true,
+        "native_resource_and_window_observations_complete": true,
+        "default_recording_taint_retained_and_replay_refused": true,
+        "owned_cleanup_private_cards": true
+      },
+      "witnesses": [
+        {
+          "peer": 0,
+          "guest_admission": 116,
+          "primary_distant_x": 5904,
+          "guest_x_at_admission": 6037.5,
+          "first_native_boss": 135,
+          "initial_camera_x": 5872.0,
+          "authored_target": [
+            6144,
+            6064,
+            224,
+            224
+          ],
+          "ready_index": 354,
+          "ready_camera": [
+            6064,
+            224
+          ],
+          "first_and_ready_witnesses": [
+            {
+              "label": "before_scene",
+              "index": 115,
+              "native_timer": 198,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "life": [
+                0,
+                0
+              ],
+              "positions": [
+                5904.0,
+                6031.5
+              ],
+              "camera_raw": "0100000101000000000070160000e00000000000000070160000e00070167016e000e00070167016e000e0006000ab00a000a000000000000000000000000000000000000100000408f80b09000019000500ff00",
+              "camera_xy_raw": [
+                376438784,
+                14680064
+              ],
+              "current_bounds": [
+                5744,
+                5744,
+                224,
+                224
+              ],
+              "target_bounds": [
+                5744,
+                5744,
+                224,
+                224
+              ],
+              "boss": null
+            },
+            {
+              "label": "guest_scene",
+              "index": 116,
+              "native_timer": 202,
+              "scene_owner": 2,
+              "scene_phase": 2,
+              "life": [
+                0,
+                0
+              ],
+              "positions": [
+                5904.0,
+                6037.5
+              ],
+              "camera_raw": "0100000101000000000070160000e00000000000000070160000e00070167016e000e00070167016e000e0006000ab00a000a000000000000000000000000000000000000100000208f80b09000019000500ff00",
+              "camera_xy_raw": [
+                376438784,
+                14680064
+              ],
+              "current_bounds": [
+                5744,
+                5744,
+                224,
+                224
+              ],
+              "target_bounds": [
+                5744,
+                5744,
+                224,
+                224
+              ],
+              "boss": null
+            },
+            {
+              "label": "first_boss",
+              "index": 135,
+              "native_timer": 289,
+              "scene_owner": 2,
+              "scene_phase": 3,
+              "life": [
+                0,
+                0
+              ],
+              "positions": [
+                5904.0,
+                6044.546875
+              ],
+              "camera_raw": "01000001010000000000f0160000e000000000000000e8160000e0000018f216e000e0000018b017e000e0006000ab00a000a000000000000000000000000000000000000100000208f80b09000019000500ff00",
+              "camera_xy_raw": [
+                384827392,
+                14680064
+              ],
+              "current_bounds": [
+                6144,
+                5874,
+                224,
+                224
+              ],
+              "target_bounds": [
+                6144,
+                6064,
+                224,
+                224
+              ],
+              "boss": {
+                "address": 2148069192,
+                "type": 48,
+                "subtype": 0,
+                "state": 1,
+                "action": 2,
+                "phase": 0,
+                "hp": 0,
+                "hex": "4130000001020000000090180000a000d4a30f8000000500000090180000a0000000000000000000000000000000000038b10f800000000000000000d4a71580e0014c790000000000000000000000000caf0f8010af0f805c4b078000000000060000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+              }
+            },
+            {
+              "label": "ready",
+              "index": 354,
+              "native_timer": 500,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "life": [
+                0,
+                0
+              ],
+              "positions": [
+                6145.046875,
+                6145.046875
+              ],
+              "camera_raw": "01000001010000000000b0170000e000000000000000b0170000e0000018b017e000e0000018b017e000e0006000ab00a000a000000000000000000200010082000000000100020208f80b09000019000500ff00",
+              "camera_xy_raw": [
+                397410304,
+                14680064
+              ],
+              "current_bounds": [
+                6144,
+                6064,
+                224,
+                224
+              ],
+              "target_bounds": [
+                6144,
+                6064,
+                224,
+                224
+              ],
+              "boss": {
+                "address": 2148069192,
+                "type": 48,
+                "subtype": 0,
+                "state": 1,
+                "action": 9,
+                "phase": 1,
+                "hp": 32,
+                "hex": "41300001010901020000901800008801d4a30f800000050100009018000088010000000000000000000000000000000038b10f802caf0f8000000000d4a71580e0014c790400ff04ff000000000000000caf0f8010af0f805c4b078020200000060000000000000008af0f80000002000800000000000000000000003b000000b0b70980000000000000000000000000000000000000000000000000"
+              }
+            }
+          ],
+          "native_sweep_validation": {
+            "observed_samples": 220,
+            "first": {
+              "index": 135,
+              "native_timer": 289,
+              "x": 5872.0,
+              "current_min": 5874,
+              "raw_camera_hex": "01000001010000000000f0160000e000000000000000e8160000e0000018f216e000e0000018b017e000e0006000ab00a000a000000000000000000000000000000000000100000208f80b09000019000500ff00"
+            },
+            "last": {
+              "index": 354,
+              "native_timer": 500,
+              "x": 6064.0,
+              "current_min": 6064,
+              "raw_camera_hex": "01000001010000000000b0170000e000000000000000b0170000e0000018b017e000e0000018b017e000e0006000ab00a000a000000000000000000200010082000000000100020208f80b09000019000500ff00"
+            },
+            "camera_x_range": [
+              5872.0,
+              6064.0
+            ],
+            "current_min_range": [
+              5874,
+              6064
+            ],
+            "all_observed_camera_and_current_min_nondecreasing": true,
+            "all_targets_match_authored_6144_6064_224_224": true,
+            "raw_sequences": "Original per-mode parent observations and retained_full_camera_reduction"
+          }
+        }
+      ],
+      "accepted_initial_native_interactions": [
+        {
+          "before_HP": 32,
+          "after_HP": 28,
+          "private_native_type": 27
+        },
+        {
+          "before_HP": 28,
+          "after_HP": 24,
+          "private_native_type": 27
+        }
+      ],
+      "resolved_crc": [],
+      "recording_refusals": [
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\candidate\\saves\\input-recordings\\session-1793074384978451-1-0\\inputs.jsonl",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+            "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+            "mode": "offline",
+            "profile": null,
+            "settings_sha256": "4e105a49292dabb46b0f75ebcf5c15410d49e88774db251e86c0f411744ca28b",
+            "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          "terminal_failure": "unilateral debug or fixture input contaminated capture",
+          "native_status": {
+            "contract": "mmx6.native-consumption.v1",
+            "epoch": 1,
+            "failure": "unilateral debug or fixture input contaminated capture",
+            "schema": 1,
+            "scope": "native-consumption diagnostics; replay unimplemented",
+            "status": "failed"
+          },
+          "events": 5984,
+          "natives": 4212,
+          "p2_reads": 1772,
+          "artifacts": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\recording-rejection\\settings.json",
+              "bytes": 10357,
+              "sha256": "4e105a49292dabb46b0f75ebcf5c15410d49e88774db251e86c0f411744ca28b"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\recording-rejection\\content.json",
+              "bytes": 503,
+              "sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\recording-rejection\\simulation-contract.json",
+              "bytes": 259,
+              "sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\recording-rejection\\inputs.jsonl",
+              "bytes": 786298,
+              "sha256": "b7f974f807d00168d884b9daf038ff25ada3ba7ceee8af4e41f20cfb380c2e3b"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\recording-rejection\\status.json",
+              "bytes": 211,
+              "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\recording-rejection\\card1.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\recording-rejection\\card2.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false,
+          "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+        }
+      ]
+    },
+    "netplay": {
+      "result": "passed",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\qualification.json",
+        "bytes": 37692654,
+        "sha256": "7de15d0a0c0258908df6d45d8417b7e722dc77eff7430b959cdd05035ff72fa6"
+      },
+      "original_door_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\intro-admission\\observations.json",
+        "bytes": 18659060,
+        "sha256": "cf66de62704d9e6afc71918f8ffa9d7bcf29101744b1658e4d96b6e2084a4216"
+      },
+      "initial_native_combat_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\intro-admission\\F157\\observations.json",
+        "bytes": 15502879,
+        "sha256": "3d3133d8481df84da6f86797cf90b93f3d4991632e95649c71a1b3d9f3f7d4e5"
+      },
+      "parent_checks": {
+        "jump_audio_original_source_bound": true,
+        "jump_audio_both_peers_completed": true,
+        "declared_build_manifest_bound_to_staged_images": true,
+        "jump_audio_declared_sources_match": true,
+        "host_profile_settled_before_guest": true,
+        "p2_right_reaches_both_peers": true,
+        "p2_right_preserves_p1_x": true,
+        "p1_jump_reaches_both_peers": true,
+        "p1_jump_preserves_p2_y": true,
+        "both_alive_healthy": true,
+        "mailbox_unused": true,
+        "default_resident_loader_committed": true,
+        "jump_audio_resolved_crc_after_case": true,
+        "jump_audio_final_private_cards_unchanged": true,
+        "jump_audio_owned_pair_cleanup": true
+      },
+      "witnesses": [
+        {
+          "peer": 0,
+          "guest_admission": 77,
+          "primary_distant_x": 5904,
+          "guest_x_at_admission": 6037.5,
+          "first_native_boss": 92,
+          "initial_camera_x": 5856.0,
+          "authored_target": [
+            6144,
+            6064,
+            224,
+            224
+          ],
+          "ready_index": 264,
+          "ready_camera": [
+            6064,
+            224
+          ],
+          "first_and_ready_witnesses": [
+            {
+              "label": "before_scene",
+              "index": 76,
+              "native_timer": 214,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "life": [
+                0,
+                0
+              ],
+              "positions": [
+                5904.0,
+                6035.5
+              ],
+              "camera_raw": "0100000101000000000070160000e00000000000000070160000e00070167016e000e00070167016e000e0006000ab00a000a000000000000000000000000000000000000100000208f80b09000019000500ff00",
+              "camera_xy_raw": [
+                376438784,
+                14680064
+              ],
+              "current_bounds": [
+                5744,
+                5744,
+                224,
+                224
+              ],
+              "target_bounds": [
+                5744,
+                5744,
+                224,
+                224
+              ],
+              "boss": null
+            },
+            {
+              "label": "guest_scene",
+              "index": 77,
+              "native_timer": 221,
+              "scene_owner": 2,
+              "scene_phase": 2,
+              "life": [
+                0,
+                0
+              ],
+              "positions": [
+                5904.0,
+                6037.5
+              ],
+              "camera_raw": "0100000101000000000070160000e00000000000000070160000e00070167016e000e00070167016e000e0006000ab00a000a000000000000000000000000000000000000100000208f80b09000019000500ff00",
+              "camera_xy_raw": [
+                376438784,
+                14680064
+              ],
+              "current_bounds": [
+                5744,
+                5744,
+                224,
+                224
+              ],
+              "target_bounds": [
+                5744,
+                5744,
+                224,
+                224
+              ],
+              "boss": null
+            },
+            {
+              "label": "first_boss",
+              "index": 92,
+              "native_timer": 305,
+              "scene_owner": 2,
+              "scene_phase": 3,
+              "life": [
+                0,
+                0
+              ],
+              "positions": [
+                5904.0,
+                6045.828125
+              ],
+              "camera_raw": "01000001010000000000e0160000e000000000000000d8160000e0000018e216e000e0000018b017e000e0006000ab00a000a000000000000000000000000000000000000100000208f80b09000019000500ff00",
+              "camera_xy_raw": [
+                383778816,
+                14680064
+              ],
+              "current_bounds": [
+                6144,
+                5858,
+                224,
+                224
+              ],
+              "target_bounds": [
+                6144,
+                6064,
+                224,
+                224
+              ],
+              "boss": {
+                "address": 2148069192,
+                "type": 48,
+                "subtype": 0,
+                "state": 1,
+                "action": 2,
+                "phase": 0,
+                "hp": 0,
+                "hex": "4130000001020000000090180000a000d4a30f8000000500000090180000a0000000000000000000000000000000000038b10f800000000000000000d4a71580e0014c790000000000000000000000000caf0f8010af0f805c4b078000000000060000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+              }
+            },
+            {
+              "label": "ready",
+              "index": 264,
+              "native_timer": 534,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "life": [
+                0,
+                0
+              ],
+              "positions": [
+                6145.046875,
+                6145.046875
+              ],
+              "camera_raw": "01000001010000000000b0170000e000000000000000b0170000e0000018b017e000e0000018b017e000e0006000ab00a000a000000000000000000200010082000000000100020208f80b09000019000500ff00",
+              "camera_xy_raw": [
+                397410304,
+                14680064
+              ],
+              "current_bounds": [
+                6144,
+                6064,
+                224,
+                224
+              ],
+              "target_bounds": [
+                6144,
+                6064,
+                224,
+                224
+              ],
+              "boss": {
+                "address": 2148069192,
+                "type": 48,
+                "subtype": 0,
+                "state": 1,
+                "action": 8,
+                "phase": 1,
+                "hp": 32,
+                "hex": "41300001010801000000901800003001d4a30f800000050000009018000030010000000000000000000000000000000038b10f8024af0f8000000000d4a71580e0014c790400fd03ff000000000000000caf0f8010af0f805c4b078020200000060000000000000008af0f80000008000000000000000000000000003c000000b0b70980000000000000000000000000000000000000000000000000"
+              }
+            }
+          ],
+          "native_sweep_validation": {
+            "observed_samples": 173,
+            "first": {
+              "index": 92,
+              "native_timer": 305,
+              "x": 5856.0,
+              "current_min": 5858,
+              "raw_camera_hex": "01000001010000000000e0160000e000000000000000d8160000e0000018e216e000e0000018b017e000e0006000ab00a000a000000000000000000000000000000000000100000208f80b09000019000500ff00"
+            },
+            "last": {
+              "index": 264,
+              "native_timer": 534,
+              "x": 6064.0,
+              "current_min": 6064,
+              "raw_camera_hex": "01000001010000000000b0170000e000000000000000b0170000e0000018b017e000e0000018b017e000e0006000ab00a000a000000000000000000200010082000000000100020208f80b09000019000500ff00"
+            },
+            "camera_x_range": [
+              5856.0,
+              6064.0
+            ],
+            "current_min_range": [
+              5858,
+              6064
+            ],
+            "all_observed_camera_and_current_min_nondecreasing": true,
+            "all_targets_match_authored_6144_6064_224_224": true,
+            "raw_sequences": "Original per-mode parent observations and retained_full_camera_reduction"
+          }
+        },
+        {
+          "peer": 1,
+          "guest_admission": 75,
+          "primary_distant_x": 5904,
+          "guest_x_at_admission": 6037.5,
+          "first_native_boss": 91,
+          "initial_camera_x": 5816.0,
+          "authored_target": [
+            6144,
+            6064,
+            224,
+            224
+          ],
+          "ready_index": 264,
+          "ready_camera": [
+            6064,
+            224
+          ],
+          "first_and_ready_witnesses": [
+            {
+              "label": "before_scene",
+              "index": 74,
+              "native_timer": 210,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "life": [
+                0,
+                0
+              ],
+              "positions": [
+                5904.0,
+                6027.5
+              ],
+              "camera_raw": "0100000101000000000070160000e00000000000000070160000e00070167016e000e00070167016e000e0006000ab00a000a000000000000000000000000000000000000100000408f80b09000019000500ff00",
+              "camera_xy_raw": [
+                376438784,
+                14680064
+              ],
+              "current_bounds": [
+                5744,
+                5744,
+                224,
+                224
+              ],
+              "target_bounds": [
+                5744,
+                5744,
+                224,
+                224
+              ],
+              "boss": null
+            },
+            {
+              "label": "guest_scene",
+              "index": 75,
+              "native_timer": 215,
+              "scene_owner": 2,
+              "scene_phase": 2,
+              "life": [
+                0,
+                0
+              ],
+              "positions": [
+                5904.0,
+                6037.5
+              ],
+              "camera_raw": "0100000101000000000070160000e00000000000000070160000e00070167016e000e00070167016e000e0006000ab00a000a000000000000000000000000000000000000100000208f80b09000019000500ff00",
+              "camera_xy_raw": [
+                376438784,
+                14680064
+              ],
+              "current_bounds": [
+                5744,
+                5744,
+                224,
+                224
+              ],
+              "target_bounds": [
+                5744,
+                5744,
+                224,
+                224
+              ],
+              "boss": null
+            },
+            {
+              "label": "first_boss",
+              "index": 91,
+              "native_timer": 300,
+              "scene_owner": 2,
+              "scene_phase": 3,
+              "life": [
+                0,
+                0
+              ],
+              "positions": [
+                5904.0,
+                6042.625
+              ],
+              "camera_raw": "01000001010000000000b8160000e000000000000000b0160000e0000018ba16e000e0000018b017e000e0006000ab00a000a000000000000000000000000000000000000100000208f80b09000019000500ff00",
+              "camera_xy_raw": [
+                381157376,
+                14680064
+              ],
+              "current_bounds": [
+                6144,
+                5818,
+                224,
+                224
+              ],
+              "target_bounds": [
+                6144,
+                6064,
+                224,
+                224
+              ],
+              "boss": {
+                "address": 2148069192,
+                "type": 48,
+                "subtype": 0,
+                "state": 1,
+                "action": 2,
+                "phase": 0,
+                "hp": 0,
+                "hex": "4130000001020000000090180000a000d4a30f8000000500000090180000a0000000000000000000000000000000000038b10f800000000000000000d4a71580e0014c790000000000000000000000000caf0f8010af0f805c4b078000000000060000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+              }
+            },
+            {
+              "label": "ready",
+              "index": 264,
+              "native_timer": 535,
+              "scene_owner": 0,
+              "scene_phase": 0,
+              "life": [
+                0,
+                0
+              ],
+              "positions": [
+                6145.046875,
+                6145.046875
+              ],
+              "camera_raw": "01000001010000000000b0170000e000000000000000b0170000e0000018b017e000e0000018b017e000e0006000ab00a000a000000000000000000200010082000000000100020208f80b09000019000500ff00",
+              "camera_xy_raw": [
+                397410304,
+                14680064
+              ],
+              "current_bounds": [
+                6144,
+                6064,
+                224,
+                224
+              ],
+              "target_bounds": [
+                6144,
+                6064,
+                224,
+                224
+              ],
+              "boss": {
+                "address": 2148069192,
+                "type": 48,
+                "subtype": 0,
+                "state": 1,
+                "action": 8,
+                "phase": 1,
+                "hp": 32,
+                "hex": "41300001010801000000901800003001d4a30f800000050000009018000030010000000000000000000000000000000038b10f8024af0f8000000000d4a71580e0014c790100fd03ff000000000000000caf0f8010af0f805c4b078020200000060000000000000008af0f80000008000000000000000000000000003c000000b0b70980000000000000000000000000000000000000000000000000"
+              }
+            }
+          ],
+          "native_sweep_validation": {
+            "observed_samples": 174,
+            "first": {
+              "index": 91,
+              "native_timer": 300,
+              "x": 5816.0,
+              "current_min": 5818,
+              "raw_camera_hex": "01000001010000000000b8160000e000000000000000b0160000e0000018ba16e000e0000018b017e000e0006000ab00a000a000000000000000000000000000000000000100000208f80b09000019000500ff00"
+            },
+            "last": {
+              "index": 264,
+              "native_timer": 535,
+              "x": 6064.0,
+              "current_min": 6064,
+              "raw_camera_hex": "01000001010000000000b0170000e000000000000000b0170000e0000018b017e000e0000018b017e000e0006000ab00a000a000000000000000000200010082000000000100020208f80b09000019000500ff00"
+            },
+            "camera_x_range": [
+              5816.0,
+              6064.0
+            ],
+            "current_min_range": [
+              5818,
+              6064
+            ],
+            "all_observed_camera_and_current_min_nondecreasing": true,
+            "all_targets_match_authored_6144_6064_224_224": true,
+            "raw_sequences": "Original per-mode parent observations and retained_full_camera_reduction"
+          }
+        }
+      ],
+      "accepted_initial_native_interactions": [
+        {
+          "before_HP": 32,
+          "after_HP": 28,
+          "private_native_type": 27
+        },
+        {
+          "before_HP": 28,
+          "after_HP": 24,
+          "private_native_type": 27
+        }
+      ],
+      "resolved_crc": [
+        {
+          "label": "initial idle",
+          "samples": 8,
+          "last_tick": 3136,
+          "resolved_through": [
+            3141,
+            3141
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": 7,
+          "last_tick": 3392,
+          "resolved_through": [
+            3413,
+            3412
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": 8,
+          "last_tick": 3712,
+          "resolved_through": [
+            3713,
+            3714
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": 5,
+          "last_tick": 6496,
+          "resolved_through": [
+            6517,
+            6517
+          ]
+        }
+      ],
+      "recording_refusals": [
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\peer-0\\saves\\input-recordings\\session-1793082447472266-1-0\\inputs.jsonl",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+            "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 5,
+              "selected_sha256": "3e9b32cdb81d39134b7cca680be5e290691d6dc17050b534a6dc59e54eaf3734"
+            },
+            "settings_sha256": "c578cadc553f83677af10928b7e9889ee8adf159eebd973db144befd14a652d9",
+            "simulation_contract_sha256": "5666915d2963018ac58f0b4d6f7b59e184c4c260a8d1e777ab922faf09868380"
+          },
+          "terminal_failure": "unilateral debug or fixture input contaminated capture",
+          "native_status": {
+            "contract": "mmx6.native-consumption.v1",
+            "epoch": 1,
+            "failure": "unilateral debug or fixture input contaminated capture",
+            "schema": 1,
+            "scope": "native-consumption diagnostics; replay unimplemented",
+            "status": "failed"
+          },
+          "events": 6770,
+          "natives": 3156,
+          "p2_reads": 3614,
+          "artifacts": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\peer-0-recording-refusal\\settings.json",
+              "bytes": 26829,
+              "sha256": "c578cadc553f83677af10928b7e9889ee8adf159eebd973db144befd14a652d9"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\peer-0-recording-refusal\\content.json",
+              "bytes": 567,
+              "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\peer-0-recording-refusal\\simulation-contract.json",
+              "bytes": 350,
+              "sha256": "5666915d2963018ac58f0b4d6f7b59e184c4c260a8d1e777ab922faf09868380"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\peer-0-recording-refusal\\inputs.jsonl",
+              "bytes": 871572,
+              "sha256": "eaaa6f102ad5819bc899990948ab19ab8b003d81d355ca10e988d5287ca4cb2d"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\peer-0-recording-refusal\\status.json",
+              "bytes": 211,
+              "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\peer-0-recording-refusal\\card1.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\peer-0-recording-refusal\\card2.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false,
+          "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+        },
+        {
+          "status": "failed_fixture_taint_retained_for_diagnostics",
+          "source": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\peer-1\\saves\\input-recordings\\session-1793082447472821-1-0\\inputs.jsonl",
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "a020ecfcefbd91eab64070b1a0a284f25850b0eff96e32a69c7625858ef31b80",
+            "manifest_sha256": "f58db4a0b9b21bb62c90365a35cd7a28bae227437c9fa35732cc85dae5d92b0b",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 5,
+              "selected_sha256": "3e9b32cdb81d39134b7cca680be5e290691d6dc17050b534a6dc59e54eaf3734"
+            },
+            "settings_sha256": "c7065c8b465103a9b72293810ac368fa837d2576c538e5d2a81c3bf46aac55ab",
+            "simulation_contract_sha256": "5666915d2963018ac58f0b4d6f7b59e184c4c260a8d1e777ab922faf09868380"
+          },
+          "terminal_failure": "unilateral debug or fixture input contaminated capture",
+          "native_status": {
+            "contract": "mmx6.native-consumption.v1",
+            "epoch": 1,
+            "failure": "unilateral debug or fixture input contaminated capture",
+            "schema": 1,
+            "scope": "native-consumption diagnostics; replay unimplemented",
+            "status": "failed"
+          },
+          "events": 6770,
+          "natives": 3156,
+          "p2_reads": 3614,
+          "artifacts": [
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\peer-1-recording-refusal\\settings.json",
+              "bytes": 26829,
+              "sha256": "c7065c8b465103a9b72293810ac368fa837d2576c538e5d2a81c3bf46aac55ab"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\peer-1-recording-refusal\\content.json",
+              "bytes": 567,
+              "sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\peer-1-recording-refusal\\simulation-contract.json",
+              "bytes": 350,
+              "sha256": "5666915d2963018ac58f0b4d6f7b59e184c4c260a8d1e777ab922faf09868380"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\peer-1-recording-refusal\\inputs.jsonl",
+              "bytes": 871572,
+              "sha256": "c6995b218aef7b8db53a2b1001d9c3101c4fdaaf6bee27883c1bf435ad8d1456"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\peer-1-recording-refusal\\status.json",
+              "bytes": 211,
+              "sha256": "e6d27236f3b9a84dab0d1edfde46abff7a00d191de1ad50a807f5efbca28d8cb"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\peer-1-recording-refusal\\card1.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            },
+            {
+              "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\peer-1-recording-refusal\\card2.initial.mcd",
+              "bytes": 131072,
+              "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+            }
+          ],
+          "strict_refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          },
+          "finalized_capture_admitted": false,
+          "replay_admitted": false,
+          "scope": "Failed native prefix and exact taint artifacts only; no finalized capture/replay claim"
+        }
+      ]
+    }
+  },
+  "personally_reviewed_images": [
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "safe-native-CP2",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\peer-0-safe-native-CP2.png",
+        "bytes": 2074543,
+        "sha256": "5dd29197d8122625324d106ba99ff2523ddad1b647f018fefda5551d1929ea29"
+      },
+      "personally_reviewed": true,
+      "review": "Guest reaches the actual original entrance while X stays behind and visibly withdraws through the native beam. Native arena camera later contains the intermediate boss, original projectiles and active heroes; the retired attack snapshots show the fight. Early door-edge clipping, scenery corruption, overlapping heroes and later left-HUD occlusion are retained. No general scenery or active slash artwork pass."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "original-door-scene-begin",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\peer-0-original-door-scene-begin.png",
+        "bytes": 2074543,
+        "sha256": "569c4c780b030ca8bc87b8e3da31b5c2cad386e5f933d41060078d0a17d58127"
+      },
+      "personally_reviewed": true,
+      "review": "Guest reaches the actual original entrance while X stays behind and visibly withdraws through the native beam. Native arena camera later contains the intermediate boss, original projectiles and active heroes; the retired attack snapshots show the fight. Early door-edge clipping, scenery corruption, overlapping heroes and later left-HUD occlusion are retained. No general scenery or active slash artwork pass."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "native-F157-mainboss-battle-ready",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F157\\native-F157-mainboss-battle-ready.png",
+        "bytes": 2074543,
+        "sha256": "c2712a03e97b5fa45ed135ddca4ba1da25a5cc589aa6cea8c2149a6d8a7129f8"
+      },
+      "personally_reviewed": true,
+      "review": "Guest reaches the actual original entrance while X stays behind and visibly withdraws through the native beam. Native arena camera later contains the intermediate boss, original projectiles and active heroes; the retired attack snapshots show the fight. Early door-edge clipping, scenery corruption, overlapping heroes and later left-HUD occlusion are retained. No general scenery or active slash artwork pass."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "native-fresh-airslash-1-HP-28",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F157\\native-fresh-airslash-1-HP-28.png",
+        "bytes": 2074543,
+        "sha256": "c0dde9866ce04f3f185d8067fb77c60902239b5aed299d95a243f2e89f17fba3"
+      },
+      "personally_reviewed": true,
+      "review": "Guest reaches the actual original entrance while X stays behind and visibly withdraws through the native beam. Native arena camera later contains the intermediate boss, original projectiles and active heroes; the retired attack snapshots show the fight. Early door-edge clipping, scenery corruption, overlapping heroes and later left-HUD occlusion are retained. No general scenery or active slash artwork pass."
+    },
+    {
+      "mode": "local",
+      "peer": 0,
+      "label": "native-fresh-airslash-2-HP-24",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-local-v67-root-v1\\ammo-hud\\intro-admission\\F157\\native-fresh-airslash-2-HP-24.png",
+        "bytes": 2074543,
+        "sha256": "a42a0dfc0857e0232104b453e62cf9eb8131f7ab5db3b32a722525780d5bce67"
+      },
+      "personally_reviewed": true,
+      "review": "Guest reaches the actual original entrance while X stays behind and visibly withdraws through the native beam. Native arena camera later contains the intermediate boss, original projectiles and active heroes; the retired attack snapshots show the fight. Early door-edge clipping, scenery corruption, overlapping heroes and later left-HUD occlusion are retained. No general scenery or active slash artwork pass."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "safe-native-CP2",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\intro-admission\\peer-0-safe-native-CP2.png",
+        "bytes": 2074543,
+        "sha256": "bd30085437b3f80f959287e4a17b9b7522cd114127388a7d03e21174e88de998"
+      },
+      "personally_reviewed": true,
+      "review": "Guest reaches the actual original entrance while X stays behind and visibly withdraws through the native beam. Native arena camera later contains the intermediate boss, original projectiles and active heroes; the retired attack snapshots show the fight. Early door-edge clipping, scenery corruption, overlapping heroes and later left-HUD occlusion are retained. No general scenery or active slash artwork pass."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "safe-native-CP2",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\intro-admission\\peer-1-safe-native-CP2.png",
+        "bytes": 2074543,
+        "sha256": "fd95710fefd7de5c09dc57beb7b95cf11796d18c45d8fd855c754a988c48adbf"
+      },
+      "personally_reviewed": true,
+      "review": "Guest reaches the actual original entrance while X stays behind and visibly withdraws through the native beam. Native arena camera later contains the intermediate boss, original projectiles and active heroes; the retired attack snapshots show the fight. Early door-edge clipping, scenery corruption, overlapping heroes and later left-HUD occlusion are retained. No general scenery or active slash artwork pass."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "original-door-scene-begin",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\intro-admission\\peer-0-original-door-scene-begin.png",
+        "bytes": 2074543,
+        "sha256": "fbb68cb09f13680004f44fdfc4c7e914a558fd77ef5a11e1bf21dcaa41ae507d"
+      },
+      "personally_reviewed": true,
+      "review": "Guest reaches the actual original entrance while X stays behind and visibly withdraws through the native beam. Native arena camera later contains the intermediate boss, original projectiles and active heroes; the retired attack snapshots show the fight. Early door-edge clipping, scenery corruption, overlapping heroes and later left-HUD occlusion are retained. No general scenery or active slash artwork pass."
+    },
+    {
+      "mode": "netplay",
+      "peer": 1,
+      "label": "original-door-scene-begin",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\intro-admission\\peer-1-original-door-scene-begin.png",
+        "bytes": 2074543,
+        "sha256": "2325c2ca82e4b147ad9c8ef6758b8b1fd3218897c73283f2d579109b2f35c48e"
+      },
+      "personally_reviewed": true,
+      "review": "Guest reaches the actual original entrance while X stays behind and visibly withdraws through the native beam. Native arena camera later contains the intermediate boss, original projectiles and active heroes; the retired attack snapshots show the fight. Early door-edge clipping, scenery corruption, overlapping heroes and later left-HUD occlusion are retained. No general scenery or active slash artwork pass."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "native-F157-mainboss-battle-ready",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\intro-admission\\F157\\native-F157-mainboss-battle-ready.png",
+        "bytes": 2074543,
+        "sha256": "7a43b7f3f7f31e8e64916f9c6d16e8a1b3bae85fff8d6226f36a45cfcf90ab6b"
+      },
+      "personally_reviewed": true,
+      "review": "Guest reaches the actual original entrance while X stays behind and visibly withdraws through the native beam. Native arena camera later contains the intermediate boss, original projectiles and active heroes; the retired attack snapshots show the fight. Early door-edge clipping, scenery corruption, overlapping heroes and later left-HUD occlusion are retained. No general scenery or active slash artwork pass."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "native-fresh-airslash-1-HP-28",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\intro-admission\\F157\\native-fresh-airslash-1-HP-28.png",
+        "bytes": 2074543,
+        "sha256": "bb361e0d3e75afbaabfd51a047e52438c7aa3771501269a23b102e85e5012b59"
+      },
+      "personally_reviewed": true,
+      "review": "Guest reaches the actual original entrance while X stays behind and visibly withdraws through the native beam. Native arena camera later contains the intermediate boss, original projectiles and active heroes; the retired attack snapshots show the fight. Early door-edge clipping, scenery corruption, overlapping heroes and later left-HUD occlusion are retained. No general scenery or active slash artwork pass."
+    },
+    {
+      "mode": "netplay",
+      "peer": 0,
+      "label": "native-fresh-airslash-2-HP-24",
+      "image": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F157-intro-fixture-netplay-v67-root-v3\\intro-admission\\F157\\native-fresh-airslash-2-HP-24.png",
+        "bytes": 2074543,
+        "sha256": "425cc1efb8406311e0542fe940c775fb93490b77310706b8dcd343123e3209a0"
+      },
+      "personally_reviewed": true,
+      "review": "Guest reaches the actual original entrance while X stays behind and visibly withdraws through the native beam. Native arena camera later contains the intermediate boss, original projectiles and active heroes; the retired attack snapshots show the fight. Early door-edge clipping, scenery corruption, overlapping heroes and later left-HUD occlusion are retained. No general scenery or active slash artwork pass."
+    }
+  ],
+  "contact_sheets": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F184-v67-camera-composed-review-root-v1-1.png",
+      "bytes": 981199,
+      "sha256": "1aa4f91fb3e6e12c4dd1ced145758c5c49f5de4cb647ab59c1ea93a4a83dfa5e"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F184-v67-camera-composed-review-root-v1-2.png",
+      "bytes": 986040,
+      "sha256": "be7a7bfa6d937c1046e2acf36664f10711430a0226cbc709f7d83ae2153f1bac"
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F184-v67-camera-composed-review-root-v1-3.png",
+      "bytes": 1260393,
+      "sha256": "47cd4ae8a4c5b9deaea52d6ff6479df78c9a1f7af67531c2cdb83e7e0bc63d84"
+    }
+  ],
+  "limits": [
+    "Reuses completed exact50cc26e X6 LOCAL+NET and their original bindings/gates; no new native run or credit transfer to V80. One native intro type48 intermediate encounter and guest-led Either/Unified admission only.",
+    "The first actual boss allocation occurs during the authored door sweep, not at its endpoint. Source50670..50744 sets door6064 target min6064/max6144; all physical processes retain monotonic native bound/camera movement and released6064/224 before initial native combat. P1 remains5904 when only the guest admits. No immediate6064-at-allocation requirement is invented.",
+    "Original type48 death->story16->type55 finale proves intermediate identity. F184 qualifies the initial camera/arena handoff and actual initial32->28->24 interaction; eventual defeat, cleanup, exit and F166/F187 are separate and remain unclaimed.",
+    "Root personally re-reviewed12 composed images. Corrupt prerequisite scenery, early native door-edge clipping, initial actor overlap and partial HUD occlusion remain explicit; no general scenery, all arena artwork, private-view or active-slash artwork qualification. NET detailed combat captures are on peer0; both peers retain actual initial camera/boss/body history and resolved parent gates.",
+    "Pre-agreed original CP2 bypasses unrelated approach traversal; no boss HP/state/camera success/outcome flags are assigned. Strict ordinary recording and replay refuse fixture taint. No campaign, other midbosses, other hosts/OS, current-build or optional setting claims."
+  ],
+  "bypasses": [
+    "Negotiated original introCP2 only, followed by actual guest approach/door/native initialization/camera/combat."
+  ],
+  "retained_full_camera_reduction": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F184-v67-camera-reduction-root-v1.json",
+    "bytes": 212063,
+    "sha256": "57dab46c827af505461583ae8196c36424efb81390a89bde5c440d46a2d885af"
+  }
+}
