@@ -1,3 +1,7 @@
+# v1.3.3-alpha: audited native execution
+
+Select the audited native SDK frame wait. Move the existing X6 native services onto the modern framework SDK while retaining co-op and Seamless Loading. Regenerate original-disc overlays for ABI 35. Intro gameplay, movement, jump and current-build save/load pass with DualShock input. Three production comparisons observed a median 24.6% reduction in process CPU per frame for the wait package under background load; no full-game or cross-build netplay compatibility is claimed.
+
 # v1.3.2-alpha
 
 The host can now select **Lobby → Mods → Seamless Loading** for both netplay
