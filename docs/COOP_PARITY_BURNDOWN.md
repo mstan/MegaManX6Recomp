@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 54 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, F1, F2, F5, F6, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F56, F58, F59, F65, F67, F68, F70, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F163, F170, F178, F205, F208), 5 failed, 175 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 55 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F56, F58, F59, F65, F67, F68, F70, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F163, F170, F178, F205, F208), 5 failed, 174 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -41,6 +41,19 @@ test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
 ## Current qualification status, October 26
+
+**R22 is closed:55 passed /5 failed /174 unverified (23.5%).**
+The [actual LOCAL and NET full-foot proof](evidence/mmx6-lifecycle/manifest-bound-f7b7383-R22-native-full-foot-local-netplay-reviewed.json)
+uses the same immutable`f7b7383`. Primary stays133px behind the
+guest door leader; native boss/passenger release and both independent
+walks precede the full-body collision check. Both22pixel feet resolve
+to floor416, with actual ground8/noair/vY0/fraction0, complete
+source/live support and stable contact across advancing world ticks.
+Twelve images are reviewed; normal later occlusion/corrupt scenery
+remain explicit and pictures alone do not grant collision credit.
+Paired profile/resolvedCRC/cards/ownedcleanup/strict trace refusals pass.
+This continuation closesF23 andR22 (+2 since53) and fixes actual
+post-door native effect metadata loss. F157 NET remains deferred.
 
 **F23 is fixed and closed:54 passed /5 failed /175 unverified (23.1%).**
 Scene passenger cleanup now preserves native fixed-effect constructor

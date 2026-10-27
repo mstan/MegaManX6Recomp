@@ -1,0 +1,1189 @@
+{
+  "schema": 1,
+  "comparison": "R22",
+  "frozen_row_sha256": "163bc3d4d96b06bfc62a14298f5f3b2f73483ab5aa84c2a41a4a6849d9211720",
+  "result": "passed",
+  "candidate": "f7b7383577e9c52ccc001e2559bb02ba3e5ffd51",
+  "binding": {
+    "image_sha256": "2d510ce79ea4312cc6b3697d33ff44cf66c0791adeed7093fb8f9258d3ac2c52",
+    "manifest_sha256": "7f8c5d19025ec4828feb88e4b8f84f1e5cc17dfabb9409788949378144983b96",
+    "provenance_sha256": "6b7d7c878e02002bb2b17101aa5f498b99157bb44c3a139d0701dc83c0590a1c"
+  },
+  "cases": [
+    {
+      "mode": "local",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-local-v68-root-v1\\qualification.json",
+        "bytes": 6624320,
+        "sha256": "1cc76fd145ff9344d3b9c8d2e672c7c54f9fba6d705917c647c1ac965a3c44fd"
+      },
+      "native_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-local-v68-root-v1\\ammo-hud\\intro-admission\\R22\\observations.json",
+        "bytes": 567088,
+        "sha256": "620240992534d10de6d017ee14945aed3b3a2a4d9e71764f97c4b2f2ce47d930"
+      },
+      "native_door": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-local-v68-root-v1\\ammo-hud\\intro-admission\\observations.json",
+        "bytes": 2086066,
+        "sha256": "b6565087a8be0617cac9be7218b9b3f866b875121debf8cb68636042ea278997"
+      },
+      "source_observer": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_R22_postdoor_v68_worker_v1.py",
+        "sha256": "bdc3ef462aa05db2471a77d81c37433036ec63c5847af1b6f161b01e1bd704c1"
+      },
+      "source_guards": [
+        {
+          "address": "0x80028078",
+          "bytes": 124,
+          "sha256": "65f9eb9f635a842727e63d387ff1d2f10586d0d4d24c446893ed115e708ae2d2"
+        },
+        {
+          "address": "0x80030304",
+          "bytes": 264,
+          "sha256": "1de2c8cffd1cc6e9ef9dcf991e3ace3ac64510186096e20d32b02d298ba689d8"
+        },
+        {
+          "address": "0x800304d8",
+          "bytes": 148,
+          "sha256": "aa5ca022636f3ec10dbc7acb94a285de68abb23876b7c0270c50fa36f3f2a268"
+        },
+        {
+          "address": "0x80030834",
+          "bytes": 132,
+          "sha256": "e94dba8f538e844e0c8ec0fb09c4b5e0ef0d190e2b8e9a7b982dd1e0c559e101"
+        },
+        {
+          "address": "0x8003ccbc",
+          "bytes": 68,
+          "sha256": "537f24ae8672645fb7a217bcb99b0acadaa110d3dc01f84d33f24f53d3acad99"
+        },
+        {
+          "address": "0x80073d50",
+          "bytes": 8,
+          "sha256": "da8d8f948e652263fcb4c8a24cb000a09db8fff49beb902c2434ed598176e252"
+        },
+        {
+          "address": "0x80010d50",
+          "bytes": 4,
+          "sha256": "7f3b1907522cc73f166bb48fcd8e17fd875f5d2c9f8b8c667e08965333ee9d8f"
+        }
+      ],
+      "distant_admission": [
+        {
+          "peer": 0,
+          "scene_row": 120,
+          "primary_x_raw": 386924544,
+          "guest_x_raw": 395640832,
+          "separation_pixels": 133.0,
+          "primary_last_standing_body_hex": "01000001010200000000101700008b0100000000004002050000101700008b01000000000000f8ff0000000000000000d44a1f8074411f80cc3a1080687c14800005007806000100000300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000101700008b010000000000002001000000000000000000000000",
+          "door_box": [
+            6048,
+            6080,
+            352,
+            416
+          ]
+        }
+      ],
+      "independently_accepted_native_walks": [
+        {
+          "peer": 0,
+          "seat": 0,
+          "before": 395,
+          "accepted": 397,
+          "foot": {
+            "seat": 0,
+            "body_hex": "0100000101040000008cfa1700008b010000000000000208008cfc1700008b010000feff000000000000000000000000d44a1f80f4411f80cc3a1080687c1480000500780201011f1f0300000000000000000000503f1f8000000000202020000033000000000000503d07800a0000000800000000000000000000000200020000000200000000000a08000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a00500000001000080010000000200000002000080010000200400002004000042000000000000008cfc1700008b010000000000002001000000000000000000000000",
+            "box_pointer": "0x80073d50",
+            "box_hex": "00020b13",
+            "format": {
+              "signed_offset_x": 0,
+              "signed_offset_y": 2,
+              "unsigned_radius_x": 11,
+              "unsigned_radius_y": 19
+            },
+            "box": {
+              "left": 6127,
+              "right_exclusive": 6149,
+              "top": 378,
+              "bottom_exclusive": 416
+            },
+            "native": {
+              "ground_byte70": 8,
+              "air_byte67": 0,
+              "action": 4,
+              "vertical_velocity": 0,
+              "y_fraction": 0
+            },
+            "source_support_pixels": 22,
+            "live_support_pixels": 0,
+            "source_interior_samples": 16,
+            "live_interior_samples": 0,
+            "support_code": "38",
+            "interior_code": "00"
+          }
+        },
+        {
+          "peer": 0,
+          "seat": 1,
+          "before": 401,
+          "accepted": 403,
+          "foot": {
+            "seat": 1,
+            "body_hex": "0100010101030000000cfe1700008a010000000000000207008cfe1700008a010080ffff000000000000000000000000d0f61e805ceb1e801800009fa481039f0005007802000107ff030000000000000000000004ea1e8000000000202020000000000000000000543d07800e0000000800000000000000000000000200020000000200000000000808000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a00500000001000080010000000200000002000080010000200400002004000042000000000000008cfe1700008a010000000000002001000000000000000000000000",
+            "box_pointer": "0x80073d54",
+            "box_hex": "00030b13",
+            "format": {
+              "signed_offset_x": 0,
+              "signed_offset_y": 3,
+              "unsigned_radius_x": 11,
+              "unsigned_radius_y": 19
+            },
+            "box": {
+              "left": 6131,
+              "right_exclusive": 6153,
+              "top": 378,
+              "bottom_exclusive": 416
+            },
+            "native": {
+              "ground_byte70": 8,
+              "air_byte67": 0,
+              "action": 3,
+              "vertical_velocity": 0,
+              "y_fraction": 0
+            },
+            "source_support_pixels": 22,
+            "live_support_pixels": 0,
+            "source_interior_samples": 12,
+            "live_interior_samples": 0,
+            "support_code": "38",
+            "interior_code": "00"
+          }
+        }
+      ],
+      "stable_interval": {
+        "first": 11,
+        "last": 14,
+        "native_updates": [
+          8
+        ]
+      },
+      "actual_full_feet": [
+        {
+          "peer": 0,
+          "before_native_timer": 562,
+          "after_native_timer": 570,
+          "before_feet": [
+            {
+              "seat": 0,
+              "body_hex": "0100000101020000009ce21700008b010000000000400205009ce21700008b0100000000000000000000000000000000d44a1f806c411f80cc3a1080687c1480000500780b000100000300000000000000000000503f1f80000000001e202000003c000400000000503d0780020000000800000000000000000000000000000000000000000000000008000000000000000000003200ff00000000000000000101000000ff400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a00500000001000080010000000200000002000080010000200400002004000042000000000000009ce21700008b010000000000002001000000000000000000000000",
+              "box_pointer": "0x80073d50",
+              "box_hex": "00020b13",
+              "format": {
+                "signed_offset_x": 0,
+                "signed_offset_y": 2,
+                "unsigned_radius_x": 11,
+                "unsigned_radius_y": 19
+              },
+              "box": {
+                "left": 6103,
+                "right_exclusive": 6125,
+                "top": 378,
+                "bottom_exclusive": 416
+              },
+              "native": {
+                "ground_byte70": 8,
+                "air_byte67": 0,
+                "action": 2,
+                "vertical_velocity": 0,
+                "y_fraction": 0
+              },
+              "source_support_pixels": 22,
+              "live_support_pixels": 22,
+              "source_interior_samples": 12,
+              "live_interior_samples": 12,
+              "support_code": "38",
+              "interior_code": "00"
+            },
+            {
+              "seat": 1,
+              "body_hex": "0100010101020000001ce51700008a010000000000400205001ce51700008a0100000000000000000000000000000000d0f61e8000eb1e801800009fa481039f0005007815000100ff03000000000000000000001cea1e80000000001c1f20000039000100000000543d07800500000008000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000ff400000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a00500000001000080010000000200000002000080010000200400002004000042000000000000001ce51700008a010000000000002001000000000000000000000000",
+              "box_pointer": "0x80073d54",
+              "box_hex": "00030b13",
+              "format": {
+                "signed_offset_x": 0,
+                "signed_offset_y": 3,
+                "unsigned_radius_x": 11,
+                "unsigned_radius_y": 19
+              },
+              "box": {
+                "left": 6106,
+                "right_exclusive": 6128,
+                "top": 378,
+                "bottom_exclusive": 416
+              },
+              "native": {
+                "ground_byte70": 8,
+                "air_byte67": 0,
+                "action": 2,
+                "vertical_velocity": 0,
+                "y_fraction": 0
+              },
+              "source_support_pixels": 22,
+              "live_support_pixels": 22,
+              "source_interior_samples": 12,
+              "live_interior_samples": 12,
+              "support_code": "38",
+              "interior_code": "00"
+            }
+          ],
+          "after_feet": [
+            {
+              "seat": 0,
+              "body_hex": "0100000101020000009ce21700008b010000000000400205009ce21700008b0100000000000000000000000000000000d44a1f806c411f80cc3a1080687c14800005007803000100000300000000000000000000503f1f80000000001e1e20000034000400000000503d0780020000000800000000000000000000000000000000000000000000000008000000000000000000003200ff00000000000000000101000000ff400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a00500000001000080010000000200000002000080010000200400002004000042000000000000009ce21700008b010000000000002001000000000000000000000000",
+              "box_pointer": "0x80073d50",
+              "box_hex": "00020b13",
+              "format": {
+                "signed_offset_x": 0,
+                "signed_offset_y": 2,
+                "unsigned_radius_x": 11,
+                "unsigned_radius_y": 19
+              },
+              "box": {
+                "left": 6103,
+                "right_exclusive": 6125,
+                "top": 378,
+                "bottom_exclusive": 416
+              },
+              "native": {
+                "ground_byte70": 8,
+                "air_byte67": 0,
+                "action": 2,
+                "vertical_velocity": 0,
+                "y_fraction": 0
+              },
+              "source_support_pixels": 22,
+              "live_support_pixels": 22,
+              "source_interior_samples": 12,
+              "live_interior_samples": 12,
+              "support_code": "38",
+              "interior_code": "00"
+            },
+            {
+              "seat": 1,
+              "body_hex": "0100010101020000001ce51700008a010000000000400205001ce51700008a0100000000000000000000000000000000d0f61e8000eb1e801800009fa481039f000500780d000100ff03000000000000000000001cea1e80000000001c1d20000031000100000000543d07800500000008000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000ff400000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a00500000001000080010000000200000002000080010000200400002004000042000000000000001ce51700008a010000000000002001000000000000000000000000",
+              "box_pointer": "0x80073d54",
+              "box_hex": "00030b13",
+              "format": {
+                "signed_offset_x": 0,
+                "signed_offset_y": 3,
+                "unsigned_radius_x": 11,
+                "unsigned_radius_y": 19
+              },
+              "box": {
+                "left": 6106,
+                "right_exclusive": 6128,
+                "top": 378,
+                "bottom_exclusive": 416
+              },
+              "native": {
+                "ground_byte70": 8,
+                "air_byte67": 0,
+                "action": 2,
+                "vertical_velocity": 0,
+                "y_fraction": 0
+              },
+              "source_support_pixels": 22,
+              "live_support_pixels": 22,
+              "source_interior_samples": 12,
+              "live_interior_samples": 12,
+              "support_code": "38",
+              "interior_code": "00"
+            }
+          ]
+        }
+      ],
+      "live_collision_assets": [
+        {
+          "pointers": "38740980cc141a80cc261b80",
+          "layout_at": 2148103224,
+          "meta_at": 2149192908,
+          "desc_at": 2149263052,
+          "peer": 0,
+          "metatiles_sha256": "f76d664dea0524292844eda11c5f5001817cf8d9d6cf693b96656e5ac03c1c41",
+          "descriptors_sha256": "4869e78e40f4c53c504f156ad7eebe392554d427783a547aab311acd84437fd6"
+        }
+      ],
+      "root_composed_review": [
+        {
+          "peer": 0,
+          "label": "safe-native-CP2",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-local-v68-root-v1\\ammo-hud\\intro-admission\\peer-0-safe-native-CP2.png",
+            "bytes": 2074543,
+            "sha256": "362dc7391fc48c6506a444d2df77413c27b0f700dd6b5bbfe23ae3e1119638e7"
+          },
+          "root_review": "Reviewed actual authored arrival, guest-owned beam, restored-control or subsequent native-foot scene. Normal actor overlap/projectiles/hurt and corrupt checkpoint scenery are explicit; picture alone supplies no collision verdict."
+        },
+        {
+          "peer": 0,
+          "label": "original-door-scene-begin",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-local-v68-root-v1\\ammo-hud\\intro-admission\\peer-0-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "f163122d2b93cc4621c63d7c1d64f98ef02572c62c381438d584e22cb6d504d9"
+          },
+          "root_review": "Reviewed actual authored arrival, guest-owned beam, restored-control or subsequent native-foot scene. Normal actor overlap/projectiles/hurt and corrupt checkpoint scenery are explicit; picture alone supplies no collision verdict."
+        },
+        {
+          "peer": 0,
+          "label": "native-boss-both-controls-restored",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-local-v68-root-v1\\ammo-hud\\intro-admission\\peer-0-native-boss-both-controls-restored.png",
+            "bytes": 2074543,
+            "sha256": "62232921a508f625bb7fd56c3ce1f552b41060f2f8e9409d58f9e247770a5e90"
+          },
+          "root_review": "Reviewed actual authored arrival, guest-owned beam, restored-control or subsequent native-foot scene. Normal actor overlap/projectiles/hurt and corrupt checkpoint scenery are explicit; picture alone supplies no collision verdict."
+        },
+        {
+          "peer": 0,
+          "label": "native-both-full-feet",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-local-v68-root-v1\\ammo-hud\\intro-admission\\R22\\peer-0-native-both-full-feet.png",
+            "bytes": 2074543,
+            "sha256": "aa2ac7f958e13cba5f7229f3be37dc66c08e290217dc8e7e21c9916c31fae6c1"
+          },
+          "root_review": "Reviewed actual composed native scene. LOCAL dedicated foot image is later obscured by a normal boss explosion/hurt flash; full-foot contact is proved by the earlier coherent body interval/native collision outputs plus live/source terrain, not inferred from this image."
+        }
+      ],
+      "resolved_crc": null,
+      "resource_window_rechecks": null,
+      "recording_refusals": [
+        {
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "2d510ce79ea4312cc6b3697d33ff44cf66c0791adeed7093fb8f9258d3ac2c52",
+            "manifest_sha256": "7f8c5d19025ec4828feb88e4b8f84f1e5cc17dfabb9409788949378144983b96",
+            "mode": "offline",
+            "profile": null,
+            "settings_sha256": "4e105a49292dabb46b0f75ebcf5c15410d49e88774db251e86c0f411744ca28b",
+            "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+          },
+          "refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "mode": "netplay",
+      "parent": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-netplay-v68-root-v2\\qualification.json",
+        "bytes": 6235654,
+        "sha256": "1952db726692463ce54a719cf911f278aff4c1f53338148f0a9469fa1133fb5f"
+      },
+      "native_observations": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-netplay-v68-root-v2\\intro-admission\\R22\\observations.json",
+        "bytes": 800726,
+        "sha256": "e702e1ed93edf6d85e6b855a040f6922a9d6652f3078e7828a2d920a9c30c6dc"
+      },
+      "native_door": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-netplay-v68-root-v2\\intro-admission\\observations.json",
+        "bytes": 2158955,
+        "sha256": "48fcb9e186b17dff06276b88937fd33d35c843a223fb82953c17274382f3a052"
+      },
+      "source_observer": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_R22_postdoor_v68_root_v2.py",
+        "sha256": "af96a921d397e739f05191716332c8391be408de7c5a9ea2ef27a629ca8a3e04"
+      },
+      "source_guards": [
+        {
+          "address": "0x80028078",
+          "bytes": 124,
+          "sha256": "65f9eb9f635a842727e63d387ff1d2f10586d0d4d24c446893ed115e708ae2d2"
+        },
+        {
+          "address": "0x80030304",
+          "bytes": 264,
+          "sha256": "1de2c8cffd1cc6e9ef9dcf991e3ace3ac64510186096e20d32b02d298ba689d8"
+        },
+        {
+          "address": "0x800304d8",
+          "bytes": 148,
+          "sha256": "aa5ca022636f3ec10dbc7acb94a285de68abb23876b7c0270c50fa36f3f2a268"
+        },
+        {
+          "address": "0x80030834",
+          "bytes": 132,
+          "sha256": "e94dba8f538e844e0c8ec0fb09c4b5e0ef0d190e2b8e9a7b982dd1e0c559e101"
+        },
+        {
+          "address": "0x8003ccbc",
+          "bytes": 68,
+          "sha256": "537f24ae8672645fb7a217bcb99b0acadaa110d3dc01f84d33f24f53d3acad99"
+        },
+        {
+          "address": "0x80073d50",
+          "bytes": 8,
+          "sha256": "da8d8f948e652263fcb4c8a24cb000a09db8fff49beb902c2434ed598176e252"
+        },
+        {
+          "address": "0x80010d50",
+          "bytes": 4,
+          "sha256": "7f3b1907522cc73f166bb48fcd8e17fd875f5d2c9f8b8c667e08965333ee9d8f"
+        }
+      ],
+      "distant_admission": [
+        {
+          "peer": 0,
+          "scene_row": 65,
+          "primary_x_raw": 386924544,
+          "guest_x_raw": 395673600,
+          "separation_pixels": 133.5,
+          "primary_last_standing_body_hex": "01000001010200000000101700008b0100000000004002050000101700008b01000000000000f8ff0000000000000000d44a1f8084411f80cc3a1080687c1480000500780b000100000300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000101700008b010000000000002001000000000000000000000000",
+          "door_box": [
+            6048,
+            6080,
+            352,
+            416
+          ]
+        },
+        {
+          "peer": 1,
+          "scene_row": 65,
+          "primary_x_raw": 386924544,
+          "guest_x_raw": 395673600,
+          "separation_pixels": 133.5,
+          "primary_last_standing_body_hex": "01000001010200000000101700008b0100000000004002050000101700008b01000000000000f8ff0000000000000000d44a1f8084411f80cc3a1080687c14800005007809000100000300000000000000000000503f1f8000000000202020000000000000000000503d0780000000000800000000000000000000000000000000000000000000000008000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a005000000010000800100000002000000020000800100002004000020040000420000000000000000101700008b010000000000002001000000000000000000000000",
+          "door_box": [
+            6048,
+            6080,
+            352,
+            416
+          ]
+        }
+      ],
+      "independently_accepted_native_walks": [
+        {
+          "peer": 0,
+          "seat": 0,
+          "before": 200,
+          "accepted": 203,
+          "foot": {
+            "seat": 0,
+            "body_hex": "0100000101040000008cf71700008b010000000000000208008cf91700008b010000feff000000000000000000000000d44a1f80f4411f80cc3a1080687c1480000500780101011f1f0300000000000000000000503f1f8000000000202020000007000000000000503d0780070000000800000000000000000000000200020000000200000000000308000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a00500000001000080010000000200000002000080010000200400002004000042000000000000008cf91700008b010000000000002001000000000000000000000000",
+            "box_pointer": "0x80073d50",
+            "box_hex": "00020b13",
+            "format": {
+              "signed_offset_x": 0,
+              "signed_offset_y": 2,
+              "unsigned_radius_x": 11,
+              "unsigned_radius_y": 19
+            },
+            "box": {
+              "left": 6124,
+              "right_exclusive": 6146,
+              "top": 378,
+              "bottom_exclusive": 416
+            },
+            "native": {
+              "ground_byte70": 8,
+              "air_byte67": 0,
+              "action": 4,
+              "vertical_velocity": 0,
+              "y_fraction": 0
+            },
+            "source_support_pixels": 22,
+            "live_support_pixels": 0,
+            "source_interior_samples": 16,
+            "live_interior_samples": 0,
+            "support_code": "38",
+            "interior_code": "00"
+          }
+        },
+        {
+          "peer": 1,
+          "seat": 0,
+          "before": 200,
+          "accepted": 203,
+          "foot": {
+            "seat": 0,
+            "body_hex": "0100000101040000008cf31700008b010000000000000208008cf51700008b010000feff000000000000000000000000d44a1f80f8411f80cc3a1080687c14800005007801020105050300000000000000000000503f1f8000000000202020000005000000000000503d0780030000000800000000000000000000000200020000000200000000000108000000000000000000003200ff0000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a00500000001000080010000000200000002000080010000200400002004000042000000000000008cf51700008b010000000000002001000000000000000000000000",
+            "box_pointer": "0x80073d50",
+            "box_hex": "00020b13",
+            "format": {
+              "signed_offset_x": 0,
+              "signed_offset_y": 2,
+              "unsigned_radius_x": 11,
+              "unsigned_radius_y": 19
+            },
+            "box": {
+              "left": 6120,
+              "right_exclusive": 6142,
+              "top": 378,
+              "bottom_exclusive": 416
+            },
+            "native": {
+              "ground_byte70": 8,
+              "air_byte67": 0,
+              "action": 4,
+              "vertical_velocity": 0,
+              "y_fraction": 0
+            },
+            "source_support_pixels": 22,
+            "live_support_pixels": 0,
+            "source_interior_samples": 12,
+            "live_interior_samples": 0,
+            "support_code": "38",
+            "interior_code": "00"
+          }
+        },
+        {
+          "peer": 0,
+          "seat": 1,
+          "before": 206,
+          "accepted": 208,
+          "foot": {
+            "seat": 1,
+            "body_hex": "0100010101040000008cf31700008a010000000000000208008cf51700008a010000feff000000000000000000000000d0f61e806ceb1e801800009fa481039f000500780201010cff030000000000000000000004ea1e8000000000202020000000000000000000543d0780030000000800000000000000000000000200020000000200000000000108000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a00500000001000080010000000200000002000080010000200400002004000042000000000000008cf51700008a010000000000002001000000000000000000000000",
+            "box_pointer": "0x80073d54",
+            "box_hex": "00030b13",
+            "format": {
+              "signed_offset_x": 0,
+              "signed_offset_y": 3,
+              "unsigned_radius_x": 11,
+              "unsigned_radius_y": 19
+            },
+            "box": {
+              "left": 6120,
+              "right_exclusive": 6142,
+              "top": 378,
+              "bottom_exclusive": 416
+            },
+            "native": {
+              "ground_byte70": 8,
+              "air_byte67": 0,
+              "action": 4,
+              "vertical_velocity": 0,
+              "y_fraction": 0
+            },
+            "source_support_pixels": 22,
+            "live_support_pixels": 0,
+            "source_interior_samples": 12,
+            "live_interior_samples": 0,
+            "support_code": "38",
+            "interior_code": "00"
+          }
+        },
+        {
+          "peer": 1,
+          "seat": 1,
+          "before": 206,
+          "accepted": 208,
+          "foot": {
+            "seat": 1,
+            "body_hex": "0100010101040000008ced1700008a010000000000000208008cef1700008a010000feff000000000000000000000000d0f61e8070eb1e801800009fa481039f000500780201010dff030000000000000000000004ea1e8000000000202020000000000000000000543d07800d0000000800000000000000000000000200020000000000000000000008000000000000000000000000000000000000000000000000000000000000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a00500000001000080010000000200000002000080010000200400002004000042000000000000008cef1700008a010000000000002001000000000000000000000000",
+            "box_pointer": "0x80073d54",
+            "box_hex": "00030b13",
+            "format": {
+              "signed_offset_x": 0,
+              "signed_offset_y": 3,
+              "unsigned_radius_x": 11,
+              "unsigned_radius_y": 19
+            },
+            "box": {
+              "left": 6114,
+              "right_exclusive": 6136,
+              "top": 378,
+              "bottom_exclusive": 416
+            },
+            "native": {
+              "ground_byte70": 8,
+              "air_byte67": 0,
+              "action": 4,
+              "vertical_velocity": 0,
+              "y_fraction": 0
+            },
+            "source_support_pixels": 22,
+            "live_support_pixels": 0,
+            "source_interior_samples": 12,
+            "live_interior_samples": 0,
+            "support_code": "38",
+            "interior_code": "00"
+          }
+        }
+      ],
+      "stable_interval": {
+        "first": 6,
+        "last": 9,
+        "native_updates": [
+          9,
+          8
+        ]
+      },
+      "actual_full_feet": [
+        {
+          "peer": 0,
+          "before_native_timer": 721,
+          "after_native_timer": 730,
+          "before_feet": [
+            {
+              "seat": 0,
+              "body_hex": "0100000101020000009cd71700008b010000000000400205009cd71700008b0100000000000000000000000000000000d44a1f8074411f80cc3a1080687c14800005007807000100000300000000000000000000503f1f80000000001d1d20000020000400000000503d0780070000000800000000000000000000000000000000000000000000000008000000000000000000003200ff00000000000000000101000000ff400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a00500000001000080010000000200000002000080010000200400002004000042000000000000009cd71700008b010000000000002001000000000000000000000000",
+              "box_pointer": "0x80073d50",
+              "box_hex": "00020b13",
+              "format": {
+                "signed_offset_x": 0,
+                "signed_offset_y": 2,
+                "unsigned_radius_x": 11,
+                "unsigned_radius_y": 19
+              },
+              "box": {
+                "left": 6092,
+                "right_exclusive": 6114,
+                "top": 378,
+                "bottom_exclusive": 416
+              },
+              "native": {
+                "ground_byte70": 8,
+                "air_byte67": 0,
+                "action": 2,
+                "vertical_velocity": 0,
+                "y_fraction": 0
+              },
+              "source_support_pixels": 22,
+              "live_support_pixels": 22,
+              "source_interior_samples": 16,
+              "live_interior_samples": 16,
+              "support_code": "38",
+              "interior_code": "00"
+            },
+            {
+              "seat": 1,
+              "body_hex": "010001010102000000cccb1700008a01000000000040020500cccb1700008a0100000000000000000000000000000000d0f61e8000eb1e801800009fa481039f0005007818000100ff03010000000000000000001cea1e80000000001a1a2000003c000200000000543d07800b0000000a0200000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000101000000ff400000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000cccb1700008a010000000000002001000000000000000000000000",
+              "box_pointer": "0x80073d54",
+              "box_hex": "00030b13",
+              "format": {
+                "signed_offset_x": 0,
+                "signed_offset_y": 3,
+                "unsigned_radius_x": 11,
+                "unsigned_radius_y": 19
+              },
+              "box": {
+                "left": 6080,
+                "right_exclusive": 6102,
+                "top": 378,
+                "bottom_exclusive": 416
+              },
+              "native": {
+                "ground_byte70": 10,
+                "air_byte67": 0,
+                "action": 2,
+                "vertical_velocity": 0,
+                "y_fraction": 0
+              },
+              "source_support_pixels": 22,
+              "live_support_pixels": 22,
+              "source_interior_samples": 12,
+              "live_interior_samples": 12,
+              "support_code": "38",
+              "interior_code": "00"
+            }
+          ],
+          "after_feet": [
+            {
+              "seat": 0,
+              "body_hex": "0100000101020000009cd71700008b010000000000400205009cd71700008b0100000000000000000000000000000000d44a1f8078411f80cc3a1080687c1480000500780b000177770300000000000000000000503f1f80000000001d1d20000017000400000000503d0780070000000800000000000000000000000000000000000000000000000008000000000000000000003200ff00000000000000000001000000ff400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a00500000001000080010000000200000002000080010000200400002004000042000000000000009cd71700008b010000000000002001000000000000000000000000",
+              "box_pointer": "0x80073d50",
+              "box_hex": "00020b13",
+              "format": {
+                "signed_offset_x": 0,
+                "signed_offset_y": 2,
+                "unsigned_radius_x": 11,
+                "unsigned_radius_y": 19
+              },
+              "box": {
+                "left": 6092,
+                "right_exclusive": 6114,
+                "top": 378,
+                "bottom_exclusive": 416
+              },
+              "native": {
+                "ground_byte70": 8,
+                "air_byte67": 0,
+                "action": 2,
+                "vertical_velocity": 0,
+                "y_fraction": 0
+              },
+              "source_support_pixels": 22,
+              "live_support_pixels": 22,
+              "source_interior_samples": 16,
+              "live_interior_samples": 16,
+              "support_code": "38",
+              "interior_code": "00"
+            },
+            {
+              "seat": 1,
+              "body_hex": "010001010102000000cccb1700008a01000000000040020500cccb1700008a0100000000000000000000000000000000d0f61e8000eb1e801800009fa481039f000500780f000100ff03010000000000000000001cea1e80000000001a1a20000033000200000000543d07800b0000000a0200000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000001000000ff400000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000cccb1700008a010000000000002001000000000000000000000000",
+              "box_pointer": "0x80073d54",
+              "box_hex": "00030b13",
+              "format": {
+                "signed_offset_x": 0,
+                "signed_offset_y": 3,
+                "unsigned_radius_x": 11,
+                "unsigned_radius_y": 19
+              },
+              "box": {
+                "left": 6080,
+                "right_exclusive": 6102,
+                "top": 378,
+                "bottom_exclusive": 416
+              },
+              "native": {
+                "ground_byte70": 10,
+                "air_byte67": 0,
+                "action": 2,
+                "vertical_velocity": 0,
+                "y_fraction": 0
+              },
+              "source_support_pixels": 22,
+              "live_support_pixels": 22,
+              "source_interior_samples": 12,
+              "live_interior_samples": 12,
+              "support_code": "38",
+              "interior_code": "00"
+            }
+          ]
+        },
+        {
+          "peer": 1,
+          "before_native_timer": 722,
+          "after_native_timer": 730,
+          "before_feet": [
+            {
+              "seat": 0,
+              "body_hex": "0100000101020000009cd71700008b010000000000400205009cd71700008b0100000000000000000000000000000000d44a1f8074411f80cc3a1080687c14800005007806000100000300000000000000000000503f1f80000000001d1d2000001f000400000000503d0780070000000800000000000000000000000000000000000000000000000008000000000000000000003200ff00000000000000000001000000ff400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a00500000001000080010000000200000002000080010000200400002004000042000000000000009cd71700008b010000000000002001000000000000000000000000",
+              "box_pointer": "0x80073d50",
+              "box_hex": "00020b13",
+              "format": {
+                "signed_offset_x": 0,
+                "signed_offset_y": 2,
+                "unsigned_radius_x": 11,
+                "unsigned_radius_y": 19
+              },
+              "box": {
+                "left": 6092,
+                "right_exclusive": 6114,
+                "top": 378,
+                "bottom_exclusive": 416
+              },
+              "native": {
+                "ground_byte70": 8,
+                "air_byte67": 0,
+                "action": 2,
+                "vertical_velocity": 0,
+                "y_fraction": 0
+              },
+              "source_support_pixels": 22,
+              "live_support_pixels": 22,
+              "source_interior_samples": 16,
+              "live_interior_samples": 16,
+              "support_code": "38",
+              "interior_code": "00"
+            },
+            {
+              "seat": 1,
+              "body_hex": "010001010102000000cccb1700008a01000000000040020500cccb1700008a0100000000000000000000000000000000d0f61e8000eb1e801800009fa481039f0005007817000100ff03010000000000000000001cea1e80000000001a1a2000003b000200000000543d07800b0000000a0200000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000001000000ff400000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000cccb1700008a010000000000002001000000000000000000000000",
+              "box_pointer": "0x80073d54",
+              "box_hex": "00030b13",
+              "format": {
+                "signed_offset_x": 0,
+                "signed_offset_y": 3,
+                "unsigned_radius_x": 11,
+                "unsigned_radius_y": 19
+              },
+              "box": {
+                "left": 6080,
+                "right_exclusive": 6102,
+                "top": 378,
+                "bottom_exclusive": 416
+              },
+              "native": {
+                "ground_byte70": 10,
+                "air_byte67": 0,
+                "action": 2,
+                "vertical_velocity": 0,
+                "y_fraction": 0
+              },
+              "source_support_pixels": 22,
+              "live_support_pixels": 22,
+              "source_interior_samples": 12,
+              "live_interior_samples": 12,
+              "support_code": "38",
+              "interior_code": "00"
+            }
+          ],
+          "after_feet": [
+            {
+              "seat": 0,
+              "body_hex": "0100000101020000009cd71700008b010000000000400205009cd71700008b0100000000000000000000000000000000d44a1f8078411f80cc3a1080687c1480000500780b000177770300000000000000000000503f1f80000000001d1d20000017000400000000503d0780070000000800000000000000000000000000000000000000000000000008000000000000000000003200ff00000000000000000001000000ff400000200120012001200120012001200120012001200120012001200120012001200100000000000000000000000000000000000000000500000000000000000000010000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a00500000001000080010000000200000002000080010000200400002004000042000000000000009cd71700008b010000000000002001000000000000000000000000",
+              "box_pointer": "0x80073d50",
+              "box_hex": "00020b13",
+              "format": {
+                "signed_offset_x": 0,
+                "signed_offset_y": 2,
+                "unsigned_radius_x": 11,
+                "unsigned_radius_y": 19
+              },
+              "box": {
+                "left": 6092,
+                "right_exclusive": 6114,
+                "top": 378,
+                "bottom_exclusive": 416
+              },
+              "native": {
+                "ground_byte70": 8,
+                "air_byte67": 0,
+                "action": 2,
+                "vertical_velocity": 0,
+                "y_fraction": 0
+              },
+              "source_support_pixels": 22,
+              "live_support_pixels": 22,
+              "source_interior_samples": 16,
+              "live_interior_samples": 16,
+              "support_code": "38",
+              "interior_code": "00"
+            },
+            {
+              "seat": 1,
+              "body_hex": "010001010102000000cccb1700008a01000000000040020500cccb1700008a0100000000000000000000000000000000d0f61e8000eb1e801800009fa481039f000500780f000100ff03010000000000000000001cea1e80000000001a1a20000033000200000000543d07800b0000000a0200000000000000000000000000000000000000000000000a0000000000000000000000000000000000000000000001000000ff400000200120012001200120012001200120012001200120012001200120012001200100000000000000000014400000000000000000000000000000000000000000050000000000000000008000000000020000d005000080f9ff00420000008006000020040000d0ffff0090feff00a0050000000100008001000000020000000200008001000020040000200400004200000000000000cccb1700008a010000000000002001000000000000000000000000",
+              "box_pointer": "0x80073d54",
+              "box_hex": "00030b13",
+              "format": {
+                "signed_offset_x": 0,
+                "signed_offset_y": 3,
+                "unsigned_radius_x": 11,
+                "unsigned_radius_y": 19
+              },
+              "box": {
+                "left": 6080,
+                "right_exclusive": 6102,
+                "top": 378,
+                "bottom_exclusive": 416
+              },
+              "native": {
+                "ground_byte70": 10,
+                "air_byte67": 0,
+                "action": 2,
+                "vertical_velocity": 0,
+                "y_fraction": 0
+              },
+              "source_support_pixels": 22,
+              "live_support_pixels": 22,
+              "source_interior_samples": 12,
+              "live_interior_samples": 12,
+              "support_code": "38",
+              "interior_code": "00"
+            }
+          ]
+        }
+      ],
+      "live_collision_assets": [
+        {
+          "pointers": "38740980cc141a80cc261b80",
+          "layout_at": 2148103224,
+          "meta_at": 2149192908,
+          "desc_at": 2149263052,
+          "peer": 0,
+          "metatiles_sha256": "465289e21dd39391ebd9346cbef0a632a78f51cb142e7884862eb41dc6324e34",
+          "descriptors_sha256": "4869e78e40f4c53c504f156ad7eebe392554d427783a547aab311acd84437fd6"
+        },
+        {
+          "pointers": "38740980cc141a80cc261b80",
+          "layout_at": 2148103224,
+          "meta_at": 2149192908,
+          "desc_at": 2149263052,
+          "peer": 1,
+          "metatiles_sha256": "465289e21dd39391ebd9346cbef0a632a78f51cb142e7884862eb41dc6324e34",
+          "descriptors_sha256": "4869e78e40f4c53c504f156ad7eebe392554d427783a547aab311acd84437fd6"
+        }
+      ],
+      "root_composed_review": [
+        {
+          "peer": 0,
+          "label": "safe-native-CP2",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-netplay-v68-root-v2\\intro-admission\\peer-0-safe-native-CP2.png",
+            "bytes": 2074543,
+            "sha256": "1095c2fce49029817fd8151e7256a398b2fbafc9dc6260aae1320689791cee9f"
+          },
+          "root_review": "Reviewed actual authored arrival, guest-owned beam, restored-control or subsequent native-foot scene. Normal actor overlap/projectiles/hurt and corrupt checkpoint scenery are explicit; picture alone supplies no collision verdict."
+        },
+        {
+          "peer": 1,
+          "label": "safe-native-CP2",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-netplay-v68-root-v2\\intro-admission\\peer-1-safe-native-CP2.png",
+            "bytes": 2074543,
+            "sha256": "3a7060b39e3be411a6b62c51defc31da22a775bb0fdb96c0949bc635775e468e"
+          },
+          "root_review": "Reviewed actual authored arrival, guest-owned beam, restored-control or subsequent native-foot scene. Normal actor overlap/projectiles/hurt and corrupt checkpoint scenery are explicit; picture alone supplies no collision verdict."
+        },
+        {
+          "peer": 0,
+          "label": "original-door-scene-begin",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-netplay-v68-root-v2\\intro-admission\\peer-0-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "428ac49dcac3097ca03c9de7c54c65d669b331468f802c5c7ddd12237039438f"
+          },
+          "root_review": "Reviewed actual authored arrival, guest-owned beam, restored-control or subsequent native-foot scene. Normal actor overlap/projectiles/hurt and corrupt checkpoint scenery are explicit; picture alone supplies no collision verdict."
+        },
+        {
+          "peer": 1,
+          "label": "original-door-scene-begin",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-netplay-v68-root-v2\\intro-admission\\peer-1-original-door-scene-begin.png",
+            "bytes": 2074543,
+            "sha256": "0e93fcb8906036ab73908be3867efbdfa3251dad3f4aa3eb6f9a835151d11cff"
+          },
+          "root_review": "Reviewed actual authored arrival, guest-owned beam, restored-control or subsequent native-foot scene. Normal actor overlap/projectiles/hurt and corrupt checkpoint scenery are explicit; picture alone supplies no collision verdict."
+        },
+        {
+          "peer": 0,
+          "label": "native-boss-both-controls-restored",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-netplay-v68-root-v2\\intro-admission\\peer-0-native-boss-both-controls-restored.png",
+            "bytes": 2074543,
+            "sha256": "fe42129bc4ac6f07917d2c1b65cd3121b66f0662b6b481c05db33ba5cbab23ed"
+          },
+          "root_review": "Reviewed actual authored arrival, guest-owned beam, restored-control or subsequent native-foot scene. Normal actor overlap/projectiles/hurt and corrupt checkpoint scenery are explicit; picture alone supplies no collision verdict."
+        },
+        {
+          "peer": 1,
+          "label": "native-boss-both-controls-restored",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-netplay-v68-root-v2\\intro-admission\\peer-1-native-boss-both-controls-restored.png",
+            "bytes": 2074543,
+            "sha256": "dee4d6e4c4bcdbce2b3615c21cdc5fd7861512fd2a4556d6b8f349139d8ea172"
+          },
+          "root_review": "Reviewed actual authored arrival, guest-owned beam, restored-control or subsequent native-foot scene. Normal actor overlap/projectiles/hurt and corrupt checkpoint scenery are explicit; picture alone supplies no collision verdict."
+        },
+        {
+          "peer": 0,
+          "label": "native-both-full-feet",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-netplay-v68-root-v2\\intro-admission\\R22\\peer-0-native-both-full-feet.png",
+            "bytes": 2074543,
+            "sha256": "f4d79758b84c1426b289d63fa6aa36bb1846288add7a3ed2cb2936766f81c4ad"
+          },
+          "root_review": "Reviewed actual authored arrival, guest-owned beam, restored-control or subsequent native-foot scene. Normal actor overlap/projectiles/hurt and corrupt checkpoint scenery are explicit; picture alone supplies no collision verdict."
+        },
+        {
+          "peer": 1,
+          "label": "native-both-full-feet",
+          "image": {
+            "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-netplay-v68-root-v2\\intro-admission\\R22\\peer-1-native-both-full-feet.png",
+            "bytes": 2074543,
+            "sha256": "90a20ee4e4df3a88788a82b25adc479da9564b2f8f2ea8fd8306d581750d4dc2"
+          },
+          "root_review": "Reviewed actual authored arrival, guest-owned beam, restored-control or subsequent native-foot scene. Normal actor overlap/projectiles/hurt and corrupt checkpoint scenery are explicit; picture alone supplies no collision verdict."
+        }
+      ],
+      "resolved_crc": [
+        {
+          "label": "initial idle",
+          "samples": 7,
+          "last_tick": 3104,
+          "resolved_through": [
+            3120,
+            3120
+          ]
+        },
+        {
+          "label": "P2 right then release",
+          "samples": 7,
+          "last_tick": 3360,
+          "resolved_through": [
+            3388,
+            3388
+          ]
+        },
+        {
+          "label": "P1 jump then settle",
+          "samples": 8,
+          "last_tick": 3680,
+          "resolved_through": [
+            3691,
+            3691
+          ]
+        },
+        {
+          "label": "paired ground-jump audio then settle",
+          "samples": 7,
+          "last_tick": 5952,
+          "resolved_through": [
+            5954,
+            5953
+          ]
+        }
+      ],
+      "resource_window_rechecks": [
+        {
+          "peer": 0,
+          "attempt": 0,
+          "contact_last_row": 9,
+          "pointers_expected": "38740980cc141a80cc261b80",
+          "pointers_before": "38740980cc141a80cc261b80",
+          "pointers_after": "38740980cc141a80cc261b80",
+          "context_before_hex": "0a00000000000000000005000000000000000000000000000000000000020101",
+          "context_after_hex": "0a00000000000000000005000000000000000000000000000000000000020101",
+          "dimensions_hex": "1a06",
+          "stride_hex": "9c00",
+          "metatiles_sha256": "465289e21dd39391ebd9346cbef0a632a78f51cb142e7884862eb41dc6324e34",
+          "descriptors_sha256": "4869e78e40f4c53c504f156ad7eebe392554d427783a547aab311acd84437fd6",
+          "metatiles_length": 70144,
+          "descriptors_length": 12392,
+          "metatiles_first_differences": [],
+          "descriptors_first_differences": [],
+          "metatiles_retained_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-netplay-v68-root-v2\\intro-admission\\R22\\peer-0-floor-end-0-metatiles.bin",
+          "descriptors_retained_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-netplay-v68-root-v2\\intro-admission\\R22\\peer-0-floor-end-0-descriptors.bin",
+          "unchanged_original_identity": true,
+          "outcome": "coherent_original_resources_unchanged"
+        },
+        {
+          "peer": 1,
+          "attempt": 0,
+          "contact_last_row": 9,
+          "pointers_expected": "38740980cc141a80cc261b80",
+          "pointers_before": "38740980cc141a80cc261b80",
+          "pointers_after": "38740980cc141a80cc261b80",
+          "context_before_hex": "0a00000000000000000005000000000000000000000000000000000000020101",
+          "context_after_hex": "0a00000000000000000005000000000000000000000000000000000000020101",
+          "dimensions_hex": "1a06",
+          "stride_hex": "9c00",
+          "metatiles_sha256": "465289e21dd39391ebd9346cbef0a632a78f51cb142e7884862eb41dc6324e34",
+          "descriptors_sha256": "4869e78e40f4c53c504f156ad7eebe392554d427783a547aab311acd84437fd6",
+          "metatiles_length": 70144,
+          "descriptors_length": 12392,
+          "metatiles_first_differences": [],
+          "descriptors_first_differences": [],
+          "metatiles_retained_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-netplay-v68-root-v2\\intro-admission\\R22\\peer-1-floor-end-0-metatiles.bin",
+          "descriptors_retained_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\R22-intro-fixture-netplay-v68-root-v2\\intro-admission\\R22\\peer-1-floor-end-0-descriptors.bin",
+          "unchanged_original_identity": true,
+          "outcome": "coherent_original_resources_unchanged"
+        }
+      ],
+      "recording_refusals": [
+        {
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "2d510ce79ea4312cc6b3697d33ff44cf66c0791adeed7093fb8f9258d3ac2c52",
+            "manifest_sha256": "7f8c5d19025ec4828feb88e4b8f84f1e5cc17dfabb9409788949378144983b96",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 5,
+              "selected_sha256": "808438fa6c6d20aa470882ce13a1bb539a228c9184c215db574bb8ba1e4f82aa"
+            },
+            "settings_sha256": "c578cadc553f83677af10928b7e9889ee8adf159eebd973db144befd14a652d9",
+            "simulation_contract_sha256": "cba9b6cd479da0d7e1c15a8bfecad5f4252dcd9d6523fca050bfe81e44d3c760"
+          },
+          "refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          }
+        },
+        {
+          "identity": {
+            "baseline": null,
+            "cards": [
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              },
+              {
+                "bytes": 131072,
+                "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+              }
+            ],
+            "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+            "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+            "image_sha256": "2d510ce79ea4312cc6b3697d33ff44cf66c0791adeed7093fb8f9258d3ac2c52",
+            "manifest_sha256": "7f8c5d19025ec4828feb88e4b8f84f1e5cc17dfabb9409788949378144983b96",
+            "mode": "netplay",
+            "profile": {
+              "id": "mmx6.win64-clang22.loopback",
+              "revision": 5,
+              "selected_sha256": "808438fa6c6d20aa470882ce13a1bb539a228c9184c215db574bb8ba1e4f82aa"
+            },
+            "settings_sha256": "c7065c8b465103a9b72293810ac368fa837d2576c538e5d2a81c3bf46aac55ab",
+            "simulation_contract_sha256": "cba9b6cd479da0d7e1c15a8bfecad5f4252dcd9d6523fca050bfe81e44d3c760"
+          },
+          "refusals": {
+            "ordinary_capture": {
+              "type": "InvalidRecording",
+              "message": "capture explicitly failed: unilateral debug or fixture input contaminated capture"
+            },
+            "offline_replay": {
+              "type": "InvalidRecording",
+              "message": "network trace cannot be replayed offline"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "reviewed_images": 12,
+  "limits": [
+    "Only R22, exactf7b7383/SDK10b/UI34b in LOCAL and NET. Actual guest door is led with primary133px behind and full primary box outside its authored region; original boss32HP/native release and both separately accepted native walks are retained.",
+    "Full actual standing body+68 boxes use original signed offsets/unsigned radii: X80073D50=(0,2,11,19), Zero80073D54=(0,3,11,19); center/facing source304D8 and native floor resolver30834 guarded. Both full22pixel foot spans resolve to floor416, not just a visual point.",
+    "Source AND live terrain support every actual foot pixel with solid38 and clear all intersected body-interior tiles. Current actual native ground70bit8/air67zero/vY0/Yfraction0 and idle boxes stay unchanged over >=6 forward native world updates on each process. Terrain code or picture alone is not treated as contact.",
+    "Live layout/dimensions/stride/assets and box bytes are independently read and retained. Only used source/live terrain behavior and live asset stability are qualified; door-mutated map areas need not match the whole original world.",
+    "Prior paired NETv1 stopped after the stable contact interval on a short-circuited end-resource guard following screenshot capture; exact end mismatch was not retained, so no changed bytes or gameplay defect is inferred. NETv2 retains full end assets, exact hashes/differences and original pointer/context brackets and enforces unchanged identity before later asynchronous captures. The gate is preserved; only torn read brackets may re-read.",
+    "Twelve composed images reviewed. Normal body overlap, later native projectiles/hurt/occlusion and corrupt checkpoint scenery are explicit. The LOCAL dedicated foot image follows an actual stable grounded interval but a later original explosion obscures the actors; no visible-foot pixel or general rendering claim is fabricated.",
+    "The full body pairs are coherent publications; original/live table reads, world clocks, previous control samples and composed images are separate asynchronous observations. No atomic whole-machine/instruction-timestamp or old-save contract is claimed.",
+    "Pre-agreed LABCP2 is a reachability bypass. Native door/passenger/landing/accepted controls occur afterward. R22observer makes zero input/guest writes; original parent inputs alone earn mechanics. No position/HP/floor/contact/success writes or direct native calls.",
+    "Exact profile/compiled-source/image, resolved full core/modCRC, private native cards, owned exits0 and strict fixture-tainted ordinary capture/replay refusals pass. No F53/ordinary route/content/all-door/all-roster/other-host inheritance."
+  ],
+  "bypasses": [
+    "Pre-agreed source-bound original introCP2 reachability; actual guest door/landing/native controls and foot contact occur afterward."
+  ]
+}

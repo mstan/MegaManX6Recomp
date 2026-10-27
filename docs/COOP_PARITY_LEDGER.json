@@ -4100,17 +4100,100 @@
           "src/mods/mmx6_coop_plugin.c:scene_tick",
           "src/mods/mmx6_coop_plugin.c:door_begin"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "f7b7383577e9c52ccc001e2559bb02ba3e5ffd51",
+            "build_identity": {
+              "executable_sha256": "2d510ce79ea4312cc6b3697d33ff44cf66c0791adeed7093fb8f9258d3ac2c52",
+              "compiled_manifest_sha256": "7f8c5d19025ec4828feb88e4b8f84f1e5cc17dfabb9409788949378144983b96",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "stage": 0,
+              "section": 0,
+              "view": "shared4:3 OpenGL",
+              "audio": "muted dummy",
+              "input": "original own published pads"
+            },
+            "action": "Let guest own the original door while primary133px behind; complete real original boss/passenger release, independently walk both, then observe full body boxes/native floor resolution and stable contact against live/original terrain.",
+            "outcome": "Both full22pixel foot spans land at416 with original standing boxes, native ground8/noair/vY0/zeroYfraction; complete source/live support38 and interior0, stable idle contact over >=6nativeupdates eachprocess. Actual separate native walks/profile/resolvedCRC/cards/ownedcleanup/stricttrace refusals retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-lifecycle/manifest-bound-f7b7383-R22-native-full-foot-local-netplay-reviewed.json",
+                "sha256": "2180e6ebc78f0ce330469dda341c65e9022810bcc25bad364d86f95a762b2445"
+              }
+            ],
+            "limits": [
+              "Only R22, exactf7b7383/SDK10b/UI34b in LOCAL and NET. Actual guest door is led with primary133px behind and full primary box outside its authored region; original boss32HP/native release and both separately accepted native walks are retained.",
+              "Full actual standing body+68 boxes use original signed offsets/unsigned radii: X80073D50=(0,2,11,19), Zero80073D54=(0,3,11,19); center/facing source304D8 and native floor resolver30834 guarded. Both full22pixel foot spans resolve to floor416, not just a visual point.",
+              "Source AND live terrain support every actual foot pixel with solid38 and clear all intersected body-interior tiles. Current actual native ground70bit8/air67zero/vY0/Yfraction0 and idle boxes stay unchanged over >=6 forward native world updates on each process. Terrain code or picture alone is not treated as contact.",
+              "Live layout/dimensions/stride/assets and box bytes are independently read and retained. Only used source/live terrain behavior and live asset stability are qualified; door-mutated map areas need not match the whole original world.",
+              "Prior paired NETv1 stopped after the stable contact interval on a short-circuited end-resource guard following screenshot capture; exact end mismatch was not retained, so no changed bytes or gameplay defect is inferred. NETv2 retains full end assets, exact hashes/differences and original pointer/context brackets and enforces unchanged identity before later asynchronous captures. The gate is preserved; only torn read brackets may re-read.",
+              "Twelve composed images reviewed. Normal body overlap, later native projectiles/hurt/occlusion and corrupt checkpoint scenery are explicit. The LOCAL dedicated foot image follows an actual stable grounded interval but a later original explosion obscures the actors; no visible-foot pixel or general rendering claim is fabricated.",
+              "The full body pairs are coherent publications; original/live table reads, world clocks, previous control samples and composed images are separate asynchronous observations. No atomic whole-machine/instruction-timestamp or old-save contract is claimed.",
+              "Pre-agreed LABCP2 is a reachability bypass. Native door/passenger/landing/accepted controls occur afterward. R22observer makes zero input/guest writes; original parent inputs alone earn mechanics. No position/HP/floor/contact/success writes or direct native calls.",
+              "Exact profile/compiled-source/image, resolved full core/modCRC, private native cards, owned exits0 and strict fixture-tainted ordinary capture/replay refusals pass. No F53/ordinary route/content/all-door/all-roster/other-host inheritance."
+            ],
+            "bypasses": [
+              "Pre-agreed source-bound original introCP2 reachability; actual guest door/landing/native controls and foot contact occur afterward."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "f7b7383577e9c52ccc001e2559bb02ba3e5ffd51",
+            "build_identity": {
+              "executable_sha256": "2d510ce79ea4312cc6b3697d33ff44cf66c0791adeed7093fb8f9258d3ac2c52",
+              "compiled_manifest_sha256": "7f8c5d19025ec4828feb88e4b8f84f1e5cc17dfabb9409788949378144983b96",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "stage": 0,
+              "section": 0,
+              "view": "shared4:3 OpenGL",
+              "audio": "muted dummy",
+              "input": "original own published pads"
+            },
+            "action": "Let guest own the original door while primary133px behind; complete real original boss/passenger release, independently walk both, then observe full body boxes/native floor resolution and stable contact against live/original terrain.",
+            "outcome": "Both full22pixel foot spans land at416 with original standing boxes, native ground8/noair/vY0/zeroYfraction; complete source/live support38 and interior0, stable idle contact over >=6nativeupdates eachprocess. Actual separate native walks/profile/resolvedCRC/cards/ownedcleanup/stricttrace refusals retained.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-lifecycle/manifest-bound-f7b7383-R22-native-full-foot-local-netplay-reviewed.json",
+                "sha256": "2180e6ebc78f0ce330469dda341c65e9022810bcc25bad364d86f95a762b2445"
+              }
+            ],
+            "limits": [
+              "Only R22, exactf7b7383/SDK10b/UI34b in LOCAL and NET. Actual guest door is led with primary133px behind and full primary box outside its authored region; original boss32HP/native release and both separately accepted native walks are retained.",
+              "Full actual standing body+68 boxes use original signed offsets/unsigned radii: X80073D50=(0,2,11,19), Zero80073D54=(0,3,11,19); center/facing source304D8 and native floor resolver30834 guarded. Both full22pixel foot spans resolve to floor416, not just a visual point.",
+              "Source AND live terrain support every actual foot pixel with solid38 and clear all intersected body-interior tiles. Current actual native ground70bit8/air67zero/vY0/Yfraction0 and idle boxes stay unchanged over >=6 forward native world updates on each process. Terrain code or picture alone is not treated as contact.",
+              "Live layout/dimensions/stride/assets and box bytes are independently read and retained. Only used source/live terrain behavior and live asset stability are qualified; door-mutated map areas need not match the whole original world.",
+              "Prior paired NETv1 stopped after the stable contact interval on a short-circuited end-resource guard following screenshot capture; exact end mismatch was not retained, so no changed bytes or gameplay defect is inferred. NETv2 retains full end assets, exact hashes/differences and original pointer/context brackets and enforces unchanged identity before later asynchronous captures. The gate is preserved; only torn read brackets may re-read.",
+              "Twelve composed images reviewed. Normal body overlap, later native projectiles/hurt/occlusion and corrupt checkpoint scenery are explicit. The LOCAL dedicated foot image follows an actual stable grounded interval but a later original explosion obscures the actors; no visible-foot pixel or general rendering claim is fabricated.",
+              "The full body pairs are coherent publications; original/live table reads, world clocks, previous control samples and composed images are separate asynchronous observations. No atomic whole-machine/instruction-timestamp or old-save contract is claimed.",
+              "Pre-agreed LABCP2 is a reachability bypass. Native door/passenger/landing/accepted controls occur afterward. R22observer makes zero input/guest writes; original parent inputs alone earn mechanics. No position/HP/floor/contact/success writes or direct native calls.",
+              "Exact profile/compiled-source/image, resolved full core/modCRC, private native cards, owned exits0 and strict fixture-tainted ordinary capture/replay refusals pass. No F53/ordinary route/content/all-door/all-roster/other-host inheritance."
+            ],
+            "bypasses": [
+              "Pre-agreed source-bound original introCP2 reachability; actual guest door/landing/native controls and foot contact occur afterward."
+            ]
+          }
+        ],
+        "limitations": "Exactf7b7383 LOCAL+NET R22 passes actual133px distant guestdoor, bothnativecontrols, fullstandingboxes/22pixel feet416, actualground8/noair/vY0/fraction0 and stablecontact acrossforwardworldticks with original+live support/interior. Coherentbody/RAM/clock/image reads separate; normal later occlusion/overlap/corrupt scenery explicit, no image-only contact/route/content/F53/generalrendering credit."
       }
     },
     {
