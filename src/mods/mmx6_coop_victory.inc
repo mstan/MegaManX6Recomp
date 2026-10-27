@@ -1,6 +1,8 @@
 /* Commander Yammark's real defeat script is a shared clear, not a temporary
  * door passenger trip. Original member3 800F553C calls 8003D308(20), after
  * 800EFBBC..800EFBF8 has committed the main boss's native lethal state.
+ * Original Recycle member7 main56 likewise calls script20 at800F4304 after
+ * native F21AC..21D4 commits its lethal state; authenticate that exact call.
  * Reward8004299C, never this plugin, publishes PLAY+0F bit10. */
 enum { CLEAR_ADMITTED=1, CLEAR_PRELUDE=2, CLEAR_VICTORY=3 };
 
@@ -16,15 +18,24 @@ static int shared_clear_living(unsigned seat) {
 static int shared_clear_admit(CPUState *cpu,uint32_t address) {
     if(clear_phase)return 1;
     if(!ready || !enrolled || failed || scene_call || scene_owner ||
-        address!=0x8003D308u || cpu->gpr[31]!=0x800F5544u || cpu->gpr[4]!=20 ||
+        address!=0x8003D308u || cpu->gpr[4]!=20 ||
         psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
-        psx_mod_read_byte(PLAY+12)!=1 || psx_mod_read_byte(PLAY+13) ||
         !shared_clear_living(0) || !shared_clear_living(1))return 0;
     uint32_t boss=psx_mod_read_word(PLAY+0x20);
     if(boss<0x80010000u || boss>0x801FFF00u || (boss&3u) ||
-        !psx_mod_read_byte(boss) || psx_mod_read_byte(boss+1)!=49 ||
+        !psx_mod_read_byte(boss) ||
         psx_mod_read_byte(boss+2) || psx_mod_read_byte(boss+4)!=2 ||
-        psx_mod_read_byte(boss+0x5C) || psx_mod_read_word(boss+0x10)!=0x800F66C0u)return 0;
+        psx_mod_read_byte(boss+0x5C))return 0;
+    const int yammark=cpu->gpr[31]==0x800F5544u &&
+        psx_mod_read_byte(PLAY+12)==1 && !psx_mod_read_byte(PLAY+13) &&
+        psx_mod_read_byte(boss+1)==49 && psx_mod_read_word(boss+0x10)==0x800F66C0u;
+    const int recycle=cpu->gpr[31]==0x800F430Cu &&
+        psx_mod_read_byte(PLAY+12)==4 && psx_mod_read_byte(PLAY+13)==1 &&
+        psx_mod_read_byte(boss+1)==56 && psx_mod_read_word(boss+0x10)==0x800F7E48u &&
+        psx_mod_read_word(0x800F4300u)==0x24040014u &&
+        psx_mod_read_word(0x800F4304u)==0x0C00F4C2u &&
+        psx_mod_read_word(0x800F4308u)==0xA06000CAu;
+    if(!yammark && !recycle)return 0;
     clear_phase=CLEAR_ADMITTED;clear_members=3;clear_started=0;
     life.select_frames=0;
     independent_invalidate();

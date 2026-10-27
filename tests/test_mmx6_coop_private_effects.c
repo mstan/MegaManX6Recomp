@@ -33,7 +33,7 @@ static unsigned death_packet_probe,death_origin_probe,nova_probe;
 static unsigned scene_transport_probe;
 static unsigned clear_probe,clear_worlds,clear_zero_worlds,clear_fades;
 static unsigned clear_constructors[2],clear_body_ticks[2],clear_poses[2],clear_outgoing[2],clear_pose_limit[2];
-static unsigned clear_air_ticks,clear_air_limit;
+static unsigned clear_air_ticks,clear_air_limit,clear_air_seat;
 static uint16_t pad_buttons=0xFFFF;
 static const unsigned resource_offsets[7]={0x14,0x1C,0x24,0x28,0x38,0x3C,0xA8};
 #ifdef MMX6_TEST_SESSION_RESOURCES
@@ -260,7 +260,7 @@ void psx_dispatch_call(CPUState *cpu,uint32_t address,uint32_t ret){
         if(address==0x80034DCCu) {
             ++clear_body_ticks[seat];unsigned action=psx_mod_read_byte(PLAYER+5);
             if(action==6) {
-                CHECK(seat==1 && !clear_constructors[seat]);
+                CHECK(seat==clear_air_seat && !clear_constructors[seat]);
                 if(++clear_air_ticks>=clear_air_limit)psx_mod_write_byte(PLAYER+5,2);
             } else if((action==2 || action==20) && (psx_mod_read_byte(PLAY+0x0F)&0x10u)) {
                 guest(cpu,0x8003B870u,PLAYER,0);
@@ -490,7 +490,7 @@ static void setup(CPUState *cpu){
     shared_clear_reset();clear_probe=clear_worlds=clear_zero_worlds=clear_fades=0;
     memset(clear_constructors,0,sizeof clear_constructors);memset(clear_body_ticks,0,sizeof clear_body_ticks);
     memset(clear_poses,0,sizeof clear_poses);memset(clear_outgoing,0,sizeof clear_outgoing);
-    clear_air_ticks=clear_air_limit=0;
+    clear_air_ticks=clear_air_limit=clear_air_seat=0;
     shared_fx_call=shared_fx_allocate_call=0;memset(shared_effect_owners,0,sizeof shared_effect_owners);
     shared_probe=shared_probe_seat=shared_probe_delete=shared_probe_calls=0;
     ride_probe=ride_overlap=ride_ticks=ride_seat=ride_call=0;
@@ -1421,6 +1421,15 @@ static void shared_clear_setup(CPUState *cpu) {
     psx_mod_write_byte(boss+0x5C,0);psx_mod_write_word(boss+0x10,0x800F66C0u);
     cpu->gpr[31]=0x800F5544u;cpu->gpr[4]=20;
 }
+static void shared_clear_recycle_setup(CPUState *cpu) {
+    shared_clear_setup(cpu);uint32_t boss=psx_mod_read_word(PLAY+0x20);
+    psx_mod_write_byte(PLAY+12,4);psx_mod_write_byte(PLAY+13,1);
+    psx_mod_write_byte(boss+1,56);psx_mod_write_word(boss+0x10,0x800F7E48u);
+    cpu->gpr[31]=0x800F430Cu;
+    psx_mod_write_word(0x800F4300u,0x24040014u);
+    psx_mod_write_word(0x800F4304u,0x0C00F4C2u);
+    psx_mod_write_word(0x800F4308u,0xA06000CAu);
+}
 static void native_shared_clear_admission_and_departure(void) {
     CPUState cpu;
     for(unsigned negative=0;negative<10;++negative) {
@@ -1442,8 +1451,40 @@ static void native_shared_clear_admission_and_departure(void) {
      * path; no script number alone is treated as earned stage completion. */
     shared_clear_setup(&cpu);cpu.gpr[31]=0x80050290u;
     script_begin(&cpu,0x8003D308u);CHECK(scene_owner==1 && scene_phase==1 && !clear_phase);
-    for(unsigned projected=0;projected<2;++projected) {
-        shared_clear_setup(&cpu);
+    shared_clear_recycle_setup(&cpu);cpu.gpr[31]=0x80050290u;
+    script_begin(&cpu,0x8003D308u);CHECK(scene_owner==1 && scene_phase==1 && !clear_phase);
+    for(unsigned negative=0;negative<26;++negative) {
+        shared_clear_recycle_setup(&cpu);uint32_t boss=psx_mod_read_word(PLAY+0x20);
+        if(negative==0)cpu.gpr[31]=0x800F5544u;
+        if(negative==1)cpu.gpr[4]=19;
+        if(negative==2)psx_mod_write_byte(PLAY+12,1);
+        if(negative==3)psx_mod_write_byte(PLAY+13,0);
+        if(negative==4)psx_mod_write_byte(boss+1,49);
+        if(negative==5)psx_mod_write_byte(boss+2,1);
+        if(negative==6)psx_mod_write_byte(boss+4,1);
+        if(negative==7)psx_mod_write_byte(boss+0x5C,1);
+        if(negative==8)psx_mod_write_word(boss+0x10,0x800F7E50u);
+        if(negative==9)psx_mod_write_byte(boss,0);
+        if(negative==10)life.status[1]=MMX6_COOP_ABSENT;
+        if(negative==11)life.status[0]=MMX6_COOP_FALLEN;
+        if(negative==12)psx_mod_write_byte(PLAYER+0x5C,0);
+        if(negative==13)p2.body[0x5C]=0;
+        if(negative==14)psx_mod_write_word(0x800F4300u,0x24040013u);
+        if(negative==15)psx_mod_write_word(0x800F4304u,0x0C00F4CCu);
+        if(negative==16)psx_mod_write_word(0x800F4308u,0xA06000CBu);
+        if(negative==17)scene_owner=1;
+        if(negative==18)scene_call=1;
+        if(negative==19)enrolled=0;
+        if(negative==20)ready=0;
+        if(negative==21)failed=1;
+        if(negative==22)psx_mod_write_byte(PLAY,9);
+        if(negative==23)psx_mod_write_byte(PLAY+1,1);
+        if(negative==24)psx_mod_write_word(PLAY+0x20,boss+1);
+        CHECK(!shared_clear_admit(&cpu,negative==25?0x8003D330u:0x8003D308u));
+        CHECK(!clear_phase && !clear_members && !clear_started && !call_count);
+    }
+    for(unsigned recycle=0;recycle<2;++recycle)for(unsigned projected=0;projected<2;++projected) {
+        if(recycle)shared_clear_recycle_setup(&cpu);else shared_clear_setup(&cpu);
         if(projected)enter_zero();
         script_begin(&cpu,0x8003D308u);
         CHECK(clear_phase==CLEAR_ADMITTED && clear_members==3 && !clear_started && !scene_owner);
@@ -1452,9 +1493,10 @@ static void native_shared_clear_admission_and_departure(void) {
         /* Both bodies stay visible until the original reward sets clear10. */
         CHECK(psx_mod_read_byte(PLAYER+3)==1 && p2.body[3]==1);
         clear_probe=1;clear_pose_limit[0]=projected?6:2;clear_pose_limit[1]=projected?2:6;
-        if(!projected){p2.body[5]=6;clear_air_limit=6;}
+        clear_air_seat=projected?0:1;clear_air_limit=6;
+        p2.body[5]=clear_air_seat==1?6:2;
         cpu.gpr[4]=PLAY;
-        psx_mod_write_byte(PLAYER+5,20);psx_mod_write_byte(PLAYER+0x7A,1);
+        psx_mod_write_byte(PLAYER+5,clear_air_seat==0?6:20);psx_mod_write_byte(PLAYER+0x7A,1);
         uint32_t old_input[3];for(unsigned i=0;i<3;++i){old_input[i]=0xA100u+i;psx_mod_write_half(0x800C456C+i*2,(uint16_t)old_input[i]);}
         for(unsigned frame=0;frame<24 && psx_mod_read_byte(PLAY)==10;++frame) {
             CHECK(stage_tick(&cpu,0x8001E9ECu));
