@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 10,
+  "revision": 11,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v27",
+    "title_compatibility": "mmx6-x-zero-delay-v28",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -227,5 +227,13 @@
     "fallback": "Selected8:3 canvas persists during native shared scenes and native owner menus. Private commits suspend and resume from appropriate cameras; no stale private frame substitution.",
     "identity": "Typed netplay cameras choice is part of the existing committed effective plan. Both peers must select the same value and exact candidate/profile; no weakened build checks, new simulation field or save migration.",
     "qualification": "Fresh exact-candidate LOCAL+NET pane aspect/follow, native world-once, native menu fallback/resize/resume and per-peer composed review required. Existing LOCAL passes or SDK fixtures do not qualify this build."
+  },
+  "title_changes_v28": {
+    "scope": "FrozenF101/F116: retain two native private views during authenticated Both-door acknowledgement/opening/traversal and qualify both original introdoors in one owned session.",
+    "draw_permission": "Only live typed stage-door slot with unchanged authored placement origin, native state1/phase1..3, original pendingD4 on an admitted body, authenticatedmembers3 and bothALIVE may draw through its native scene and PLAY1C world locks. Other scene phases, released/retired/reused actors, pause, unrelated worldhold, clear and invalidcontexts still refuse. Existing reversible draw sandbox and hoststate restoration retained; no world update duplication.",
+    "observation": "Successful private presentation records bounded ack/opening/traversal counters after sandbox commit. They are diagnostic counters, not successflags or nativephase setters. Actual native outcomes and composed image review remain required.",
+    "prerequisite": "Development-only negotiated lab_checkpoint=intro_before_doors uses originalCP1 then source-qualified living body poses X5692/Y395,Zero5716/Y394 and nativeapproachcamera5424/256 with authoredlimits. Invoke only original primary placement scanner with originalfullwindow envelope/flag0, preserving alreadyresident secondarycontrollers. Do not set HP/action/ground/doorack/placement/CP2/successflags. Observe native grounding and firstdoor allocation after at least two native worldupdates before ready. One-shot latch, sourcevalidation, profileauthority, digest/pending-snapshot refusal and strict recording/replay taint remain.",
+    "defaults": "Shared view/Either policy and all ordinary no-fixture starts remain unchanged. This fixture bypasses approach traversal only and is never campaign/retry/ordinary recording evidence.",
+    "qualification": "Fresh exactcandidate LOCAL+NET, both physicalpeer observations, two distinct authoredplacement origins/subtypes in one session, singlehero refusal at each, fullbody nativecrossings, no passenger lifecycle, independent committed views during native opening/traversal and composed pane review. Preserve source/profile/CRC/cards/ownedcleanup/strict fixture recording and replay refusal. No passedrow from source/test/setup alone."
   }
 }

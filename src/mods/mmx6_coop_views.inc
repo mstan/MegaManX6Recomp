@@ -74,6 +74,18 @@ static void private_context_restore(const PrivateViewContext *s) {
 #undef RESTORE_VIEW_FLAG
     state_track.count=s->track_count;state_track.error=s->track_error;
 }
+/* Both doors own the native scene lock while each admitted body earns its
+ * acknowledgement and traverses. They still have two living native views.
+ * A released body, reused actor or later dialogue cannot lend that permission
+ * to an unrelated shared scene. This changes drawing only. */
+static int independent_door_context(void) {
+    if(!both_door_traversal_active() || both_door_members!=3 ||
+       life.status[0]!=MMX6_COOP_ALIVE || life.status[1]!=MMX6_COOP_ALIVE ||
+       psx_mod_read_byte(both_door_actor+4)!=1 ||
+       (!psx_mod_read_byte(PLAYER+0xD4) && !p2.body[0xD4]))return 0;
+    unsigned phase=psx_mod_read_byte(both_door_actor+5);
+    return phase>=1 && phase<=3;
+}
 static void independent_world_begin(void) {
     if(private_draw || !independent_views)return;
     view_pending=0;
@@ -81,9 +93,10 @@ static void independent_world_begin(void) {
         psx_mod_read_byte(PLAY+12)==view_menu_stage &&
         psx_mod_read_byte(PLAY+13)==view_menu_section &&
         psx_mod_read_byte(PLAY+0x1D)==view_menu_checkpoint;
-    if(!enrolled || failed || inside || zero_world || scene_owner || clear_phase || pause_owner>=0 ||
+    int door_views=independent_door_context();
+    if(!enrolled || failed || inside || zero_world || (scene_owner && !door_views) || clear_phase || pause_owner>=0 ||
        psx_mod_read_byte(PLAY)!=10 || psx_mod_read_byte(PLAY+1) ||
-       psx_mod_read_byte(PLAY+0x10) || coop_world_hold() ||
+       (psx_mod_read_byte(PLAY+0x10) && !door_views) || (coop_world_hold() && !door_views) ||
        life.status[0]!=MMX6_COOP_ALIVE ||
        (life.status[1]!=MMX6_COOP_ALIVE && life.status[1]!=MMX6_COOP_JOINING)) {
         if(!menu_history || (pause_owner<0 && psx_mod_read_byte(PLAY+1)!=2))
@@ -169,6 +182,7 @@ static int independent_present(CPUState *cpu,uint32_t address) {
         psx_mod_read_half(view_buffer+0x16),psx_mod_read_half(view_buffer+0x18),psx_mod_read_half(view_buffer+0x1A)};
     PrivateViewContext context;private_context_save(&context);
     uint8_t previous_camera[sizeof view_cameras[1]];memcpy(previous_camera,view_cameras[1],sizeof previous_camera);
+    unsigned door_phase=independent_door_context()?psx_mod_read_byte(both_door_actor+5):0;
     uint32_t before=state_digest();int committed;
     if(local_split) {
         PSXModStereoFrame pair={sizeof pair,1,rect.x,rect.y,rect.w,rect.h};
@@ -181,6 +195,11 @@ static int independent_present(CPUState *cpu,uint32_t address) {
     if(!committed)memcpy(view_cameras[1],previous_camera,sizeof previous_camera);
     if(state_digest()!=before)psx_mod_counter_add("mmx6.coop.private-state-leak",1);
     psx_mod_counter_add(committed?"mmx6.coop.private-committed":"mmx6.coop.private-refused",1);
+    if(committed && door_phase>=1 && door_phase<=3) {
+        static const char *const phases[]={"mmx6.coop.private-door-ack",
+            "mmx6.coop.private-door-opening","mmx6.coop.private-door-traversal"};
+        psx_mod_counter_add(phases[door_phase-1],1);
+    }
     view_call=0;cpu->gpr[2]=result;return 1;
 }
 static void independent_activate(void) {

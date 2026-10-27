@@ -137,9 +137,6 @@ static unsigned independent_views, local_split, private_draw, private_seat, view
 static void independent_invalidate(void);
 static void independent_menu_begin(void);
 static void independent_world_begin(void);
-#ifdef MMX6_COOP_MODERN_STATE
-static void independent_invalidate(void);
-#endif
 #include "mmx6_coop_state_track.h"
 #ifdef MMX6_COOP_MODERN_STATE
 static uint8_t snapshot_asset_sha[32];
@@ -2693,7 +2690,7 @@ static void activate(void) {
 PSX_MOD_CONSTRUCTOR(mmx6_register_coop_plugin) {
     static const PSXModNetplayProfile netplay_profile = {
         .plugin_id = "mmx6.local-coop.prototype",
-        .compatibility_id = "mmx6-x-zero-delay-v27",
+        .compatibility_id = "mmx6-x-zero-delay-v28",
         .rollback_supported = 0,
         .savestates_supported = 0,
         .skip_bios_intro = 1,
