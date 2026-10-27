@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 13,
+  "revision": 14,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v30",
+    "title_compatibility": "mmx6-x-zero-delay-v31",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -251,5 +251,13 @@
     "prerequisite_refusal": "LAB-only host stderr identifies the exact first source/placement/resource/ground refusal after an existing checkpoint predicate fails. It adds no guest diagnostic fields, authority, outcome, source relaxation or serialized state. Original source checks and once-only pending cancellation remain.",
     "snapshot_schema": 11,
     "qualification": "Fresh exact-candidate LOCAL and NET must retain the original explosion/quake origin, both actual native private draw offsets and matching same-frame native quake timeline through quiet/shake/quiet, actual world effects/damage behavior and composed visibility. Source/image/profile/CRC/cards/owned exits and fixture-taint capture/replay refusal remain required. No row credit from tests, V80 failed setup, counters or an earlier candidate."
+  },
+  "title_changes_v31": {
+    "scope": "Correct the LAB explosion placement prerequisite refusal from exact V81 native LOCAL, which observed original placement word00010000 become10010001 during the once-only native scanner. No comparison qualification is granted by this correction.",
+    "original_source": "Original primary29F38 calls original admission29E7C at2A12C. The admission gate checks original placement difficulty against PLAY+68 and marks highnibble0 as10 at29ECC/29EF8 before successful allocation; scanner sets allocatorbit0 at2A264. Pin the exact called admission source in addition to the scanner.",
+    "guard": "Before scanner, require the original placement highnibble unchanged. After scanner, accept only the evidenced original admission mark10 and allocatorbit0 in their permitted phase; preserve strict other header bits, original coordinates, initialized native producer and all original readiness checks. Reject arbitrary extra bits and pre-set admission marks.",
+    "camera": "Retain the V30 concrete native per-view camera quake correction and its explicitly emitted original2927C entry hook unchanged. Fresh exact LOCAL and NET quiet/shake/quiet, original world event/effects and composed views are still required.",
+    "snapshot_schema": 11,
+    "qualification": "Fresh V82 source/image/profile/CRC/native-card/owned-exit/fixture-taint gates apply; no transfer of V80/V81 failed setups or old candidate passes. F197 shared-world damage behavior remains a separate observation requirement."
   }
 }
