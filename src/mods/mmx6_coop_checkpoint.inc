@@ -506,7 +506,13 @@ static int checkpoint_lab_boundary(uint16_t raw) {
         psx_mod_read_byte(PLAYER+0x67) || p2.body[0x67] || !(psx_mod_read_byte(PLAYER+0x70)&8) || !(p2.body[0x70]&8))return 0;
     checkpoint_lab_state=CHECKPOINT_LAB_CONSUMED;
     psx_mod_write_byte(diagnostic+0xBE,(uint8_t)checkpoint_lab_state);
-    if(psx_mod_read_byte(PLAY+12) || psx_mod_read_byte(PLAY+13) || psx_mod_read_byte(PLAY+0x1D)) {
+    unsigned origin_stage=psx_mod_read_byte(PLAY+12),origin_section=psx_mod_read_byte(PLAY+13);
+    unsigned origin_checkpoint=psx_mod_read_byte(PLAY+0x1D);
+    /* The named Recycle prerequisite may follow an actual native card Load
+     * and mission arrival. Only its fixed destination gains this origin;
+     * the parent still proves the approved card and acquired body masks. */
+    if((origin_stage || origin_section || origin_checkpoint) &&
+       !(checkpoint_lab_option==6 && origin_stage==4 && !origin_section && !origin_checkpoint)) {
         checkpoint_status(CHECKPOINT_REJECTED,CHECKPOINT_ORDER);return 0;
     }
     unsigned index=checkpoint_lab_index();

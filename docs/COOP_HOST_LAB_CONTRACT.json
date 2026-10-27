@@ -2,7 +2,7 @@
   "schema": 1,
   "status": "development-candidate-only; declared co-op settings with the native loader require fresh exact-image native qualification",
   "profile": "mmx6.win64-clang22.loopback",
-  "revision": 17,
+  "revision": 18,
   "default_enabled": false,
   "flags": [
     "DIRECT_LOOPBACK"
@@ -32,7 +32,7 @@
   },
   "session": {
     "plugin": "mmx6.local-coop.prototype",
-    "title_compatibility": "mmx6-x-zero-delay-v34",
+    "title_compatibility": "mmx6-x-zero-delay-v35",
     "settings_package_id": "mmx6.local-coop",
     "settings_feature_id": "prototype",
     "settings_loading_api_minimum": 1,
@@ -286,5 +286,27 @@
     "native_clear": "Original F21AC..21D4 and315CC..319EC alone commit lethal damage/state. Reuse the unchanged shared-clear body recovery/3A628/native25/outgoing1/state3 and last-body world handoff. Original reward4299C publishes clear10, original1EA28 and1E32C own fade/campaign handoff. No added native call, hook, outcome, HP, pose, position, timer or visibility write.",
     "identity": "Title34/hostrev17 bind changed clear semantics. Existing serialized fields and build-specific snapshot schema12 remain; pending-state and malformed ownership/mask rejection retained. No new mutable field or old-state migration.",
     "qualification": "Fresh same-candidate LOCAL+NET must earn native guest final hit, both own visible25 and outgoing1 once, original return and no passenger reappearance/duplicate celebrant, with real original defense/geometry/recovery, source/image/profile/resolvedCRC/cards/ownedcleanup and strict fixture-taint refusal gates. Protected reachability is disclosed and grants no contact-damage credit. C/source tests and earlier Yammark/V84 evidence do not close F134."
+  },
+  "title_changes_v35": {
+    "scope": "One additional source origin for the existing development-only agreed recycle_cp2 prerequisite after real native card Load and mission arrival. All existing choices retain intro0/0/0 origin; only option6 also admits4/0/0. No Load/acquired-ability or weakness-hit qualification follows from origin admission alone.",
+    "additional_origin": {
+      "option": "recycle_cp2",
+      "stage": 4,
+      "section": 0,
+      "checkpoint": 0
+    },
+    "destination": {
+      "index": 27,
+      "stage": 4,
+      "section": 1,
+      "checkpoint": 2,
+      "record": "800724D4",
+      "nonce": "4C435232"
+    },
+    "authority": "Unchanged accepted ordinary P2 chord, safe both-living grounded idle boundary, selected pre-frame0 profile, consumed one-shot latch, immutable destination/nonce, source recheck, pending snapshot refusal and strict fixture recording/replay taint. Other origins/options and online mailbox commands8/9/10 gain no permission.",
+    "writes": "Original existing checkpoint mode8/9 initializer only. No new body, card, inventory, HP, pose, phase, landing, success or result writes; no new mutable field, SDK service or native hook.",
+    "qualification": "Future parent must prove exact approved prelaunch owned-card copies, genuine current-candidate native Load and mission arrival, both native C9bit20 before and after CP2, then the actual native weakness action/reaction. Historical offline inventory9 plus original native Save is disclosed QA acquisition, not naturally earned progression. Fresh exact-candidate LOCAL+NET source/image/profile/resolvedCRC/card/cleanup and fixture-taint refusal gates remain required.",
+    "snapshot_schema": 12,
+    "identity": "Title35/hostrev18 bind this origin-policy change. Existing serialized layout/ranges, fixed checkpoint/protection identity and pending/invalid snapshot rejection remain unchanged; no old-state migration."
   }
 }

@@ -2,6 +2,7 @@
 import contextlib
 import io
 import copy
+import json
 import os
 from pathlib import Path
 import struct
@@ -49,6 +50,16 @@ def settled_entry(tick=221):
 
 
 class FrozenInventoryTests(unittest.TestCase):
+    def test_loaded_recycle_origin_declares_only_existing_fixed_destination(self):
+        record=json.loads((ROOT/'docs/COOP_HOST_LAB_CONTRACT.json').read_text(encoding='utf8'))
+        change=record['title_changes_v35']
+        self.assertEqual(change['additional_origin'],dict(option='recycle_cp2',stage=4,section=0,checkpoint=0))
+        self.assertEqual(change['destination'],dict(index=27,stage=4,section=1,checkpoint=2,
+            record='800724D4',nonce='4C435232'))
+        self.assertEqual(change['snapshot_schema'],12)
+        self.assertEqual(record['revision'],18)
+        self.assertEqual(record['session']['title_compatibility'],'mmx6-x-zero-delay-v35')
+
     def test_recycle_lab_destination_is_existing_original_campaign_record(self):
         _, rows, sections = checkpoint.inventory(INVENTORY)
         target = checkpoint.select(rows, sections, 4, 1, 2)
