@@ -945,7 +945,8 @@ static void deferred_icon_effect_retains_zero_source(void){
     shared_effect_owners[0]=1;CHECK(!render_survivor(&cpu,0x800232D4u));
     shared_effect_owners[0]=2;psx_mod_write_word(actor+0x3C,assembly);
     CHECK(!render_survivor(&cpu,0x800232D4u));
-    CHECK(!zero_atlas_effect_bank(0x2C,0x77FF,0,0) && !zero_atlas_effect_bank(0x2C,0x7A00,0,0));
+    /* Reject coordinates outside the native (0,480,256,32) upload. */
+    CHECK(!zero_atlas_effect_bank(0x2C,0x77FF,0,0) && !zero_atlas_effect_bank(0x2C,0x8000,0,0));
 }
 static void deferred_dash_effect_retains_zero_atlas(void) {
     CPUState cpu;setup(&cpu);const uint32_t actor=0x80091298u;
@@ -1209,6 +1210,29 @@ static void native_working_palette_class_and_load_events(void) {
 /* Source-bound native upload contract with authored LZ/palette bytes, not ROM.
  * First16 tiles are index1; next16 are index2. Original80017B04 places both
  * rows atv64..95. This fails on the pre-fix plugin's origin0 placement. */
+static void native_working_palette_rectangle(void) {
+    CPUState cpu;setup(&cpu);size_t offset;
+    CHECK(working_palette_clut_offset(0x7800,&offset) && offset==0);
+    CHECK(working_palette_clut_offset(0x780F,&offset) && offset==0x1E0);
+    CHECK(working_palette_clut_offset(0x7840,&offset) && offset==0x200);
+    CHECK(working_palette_clut_offset(0x7849,&offset) && offset==0x320);
+    CHECK(working_palette_clut_offset(0x7FCF,&offset) && offset==0x3FE0);
+    CHECK(!working_palette_clut_offset(0x77CF,&offset));
+    CHECK(!working_palette_clut_offset(0x7810,&offset));
+    CHECK(!working_palette_clut_offset(0x783F,&offset));
+    CHECK(!working_palette_clut_offset(0x8000,&offset));
+    for(unsigned y=0;y<16;++y)for(unsigned x=0;x<4;++x)test_zero_ui[y*1024+x]=0x1111;
+    psx_mod_write_half(active_palette+0x322,0x1357);
+    psx_mod_write_half(active_palette+0x922,0x2468);
+    uint16_t bank=zero_atlas_effect_bank(0,0x7849,0,0);
+    CHECK(bank && bank_first[bank-0x6000]==0x1357);
+    psx_mod_write_half(active_palette+0x322,0x579B);
+    uint16_t changed=zero_atlas_effect_bank(0,0x7849,0,0);
+    CHECK(changed && changed!=bank && bank_first[changed-0x6000]==0x579B);
+    CHECK(bank_first[bank-0x6000]==0x1357);
+    CHECK(!zero_atlas_effect_bank(0,0x7810,0,0));
+    clear_banks();
+}
 static void yammar_native_upload_coordinates(void) {
     CPUState cpu;setup(&cpu);
     static uint8_t graphics[0x200];memset(graphics,0,sizeof graphics);
@@ -1226,9 +1250,13 @@ static void yammar_native_upload_coordinates(void) {
     for(unsigned i=0;i<sizeof one_tile/sizeof *one_tile;++i){
         graphics[0x170+i*2]=(uint8_t)one_tile[i];graphics[0x171+i*2]=(uint8_t)(one_tile[i]>>8);
     }
-    for(unsigned c=0;c<16;++c)psx_mod_write_half(active_palette+0x49*32+c*2,0);
-    psx_mod_write_half(active_palette+0x49*32+2,0x1234);
-    psx_mod_write_half(active_palette+0x49*32+4,0x4321);
+    /* Native CLUT7849=(144,481), within original256-word upload rows.
+     * Poison the old full-VRAM-stride lookup so this tests the native
+     * layout rather than reproducing the retained renderer arithmetic. */
+    for(unsigned c=0;c<16;++c)psx_mod_write_half(active_palette+0x920+c*2,0x7654);
+    for(unsigned c=0;c<16;++c)psx_mod_write_half(active_palette+0x320+c*2,0);
+    psx_mod_write_half(active_palette+0x320+2,0x1234);
+    psx_mod_write_half(active_palette+0x320+4,0x4321);
     const uint32_t table=assets+0x100,alias=assets+0x40;
     uint16_t tile=sprite_bank(table,0,0x7849,0x4000);CHECK(tile);
     uint16_t pixels[256];CHECK(mmx6_pixels_decode(banks[tile-0x6000].pixels,banks[tile-0x6000].pixel_bytes,256,pixels));
@@ -1254,7 +1282,7 @@ static void yammar_native_upload_coordinates(void) {
     CHECK(mmx6_pixels_decode(banks[full-0x6000].pixels,banks[full-0x6000].pixel_bytes,65536,page));
     CHECK(!page[0] && page[64*256]==0x1234 && page[80*256]==0x4321);
     /* Palette changes append a new immutable bank; old pixels never repaint. */
-    psx_mod_write_half(active_palette+0x49*32+2,0x5678);
+    psx_mod_write_half(active_palette+0x320+2,0x5678);
     uint16_t changed=sprite_bank(table,0,0x7849,UINT16_MAX);CHECK(changed && changed!=full);
     CHECK(mmx6_pixels_decode(banks[full-0x6000].pixels,banks[full-0x6000].pixel_bytes,65536,page));
     CHECK(page[64*256]==0x1234);
@@ -1400,6 +1428,7 @@ int main(void){CHECK(PLAYER_MODE_OFFSET+PLAYER_PACKET_LIMIT*8u<=FRAME_ARENA);
     deferred_death_effect_retains_zero_source();clear_banks();
     native_shared_dialogue_palette();
     native_working_palette_class_and_load_events();
+    native_working_palette_rectangle();
     yammar_native_upload_coordinates();
     native_shared_ride_ownership();
     native_shared_clear_admission_and_departure();

@@ -1672,6 +1672,15 @@ static uint32_t zero_yammar_upload_table(void) {
         if (le32(zero_compressed+relative+i*4u)!=0x0200005Cu) return 0;
     return assets+relative;
 }
+static int working_palette_clut_offset(uint16_t clut,size_t *offset) {
+    /* Native17C40 uploads rectangle8006E360=(0,480,256,32), not a full
+     *1024-word VRAM row. CLUT7849 is144,481, hence working byte320;
+     * subtracting7800 incorrectly reads byte920, three rows too far. */
+    unsigned x=(clut&63u)*16u,y=clut>>6;
+    if(y<480u || y>=512u || x+16u>256u)return 0;
+    *offset=((size_t)(y-480u)*256u+x)*2u;
+    return 1;
+}
 static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut, uint16_t tile) {
     uint32_t offset, packed, source;
     uint8_t decoded[32768];
@@ -1682,7 +1691,7 @@ static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut, uint1
     const uint8_t *compressed;
     size_t available;
     uint8_t x_compressed[65536];
-    if (clut<0x7800) return 0;
+    if (!working_palette_clut_offset(clut,&palette_offset)) return 0;
     if (render_x_death) {
         if (table<0x80010000 || table+frame*4>=0x80200000) return 0;
         packed=psx_mod_read_word(table+frame*4);
@@ -1702,7 +1711,6 @@ static uint16_t sprite_bank(uint32_t table, unsigned frame, uint16_t clut, uint1
         available=compressed_size-(source-assets);
     }
     tiles=packed>>20;
-    palette_offset=(size_t)(clut-0x7800)*32;
     if (!tiles || tiles>256 ||
         palette_offset+32>0x4000) return 0;
     uint32_t yammar=render_x_death?0:zero_yammar_upload_table();
@@ -1807,8 +1815,9 @@ static uint16_t zero_atlas_effect_bank(uint16_t page,uint16_t clut,uint16_t tile
         if(cy<496 || cy>=512 || cx<256 || cx+16>320)return 0;
         capture(menu_memory+0x10000+((cy-496)*64+cx-256)*2,colors,sizeof colors);
     } else {
-        if(clut<0x7800 || (uint32_t)(clut-0x7800)*32u>=0x4000u)return 0;
-        capture(active_palette+(uint32_t)(clut-0x7800)*32u,colors,sizeof colors);
+        size_t offset;
+        if(!working_palette_clut_offset(clut,&offset))return 0;
+        capture(active_palette+(uint32_t)offset,colors,sizeof colors);
     }
     uint32_t source=menu_memory+MENU_BYTES+(page&31u)*4u;
     for(unsigned i=0;i<bank_count;++i)
