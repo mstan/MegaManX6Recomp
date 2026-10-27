@@ -1,0 +1,672 @@
+{
+  "schema": 1,
+  "comparison": "F173",
+  "frozen_row_sha256": "ca28e1e05decb30993e6f2d4a29de33eecb468449582db5a62b890be4fe12152",
+  "mode": "netplay",
+  "result": "passed",
+  "candidate": "524c03783228d8916d86d98b25be681f104b01de",
+  "build_identity": {
+    "executable_sha256": "eaeb3772d3ae0941b9859a70c08754757d299aaa91abe4c5da0dc07fa0e84187",
+    "compiled_manifest_sha256": "1187eede119110e37e74995cd3709258e6e607da35b18f6a2c562ec427210695",
+    "sdk_commit": "90c990dbf889cddb415174c0a6316f2700b37d40",
+    "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\qualification.json",
+    "sha256": "055040e5ceff3e454292cf2b48cce0cf1bfdb97e0381c4b40ed28501124e2a9d"
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\split-views-observations.json",
+    "sha256": "b31d6ceba20063f2f6f59bf6156e0d033e5bf65f921a4bbd0d28a77d4be92aab"
+  },
+  "observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_split_views_v77_root_v2.py",
+    "sha256": "904541163a4c67ed02fd9f6264f38c8f912f9f08d4da8473158ab459e9583cf9"
+  },
+  "explicit_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-v77-final-binding-root-v1.json",
+    "binding_sha256": "6c6d67ae090d801acccf57a128ef4ca04e327f3ec0df12b0c66ee5407cd1bee0",
+    "image_sha256": "eaeb3772d3ae0941b9859a70c08754757d299aaa91abe4c5da0dc07fa0e84187",
+    "manifest_sha256": "1187eede119110e37e74995cd3709258e6e607da35b18f6a2c562ec427210695",
+    "provenance_sha256": "fdddc3dfec2e3d13daa1eacf21ec28bb4a5096a7de5558ca67752791ac7d4658",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v77-online-split-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "524c03783228d8916d86d98b25be681f104b01de",
+      "sdk": "90c990dbf889cddb415174c0a6316f2700b37d40",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v27",
+    "host_revision": 10
+  },
+  "world_once": [
+    {
+      "peer": 0,
+      "native_world_delta": 29,
+      "vblank_delta_bracket": [
+        24,
+        31
+      ]
+    },
+    {
+      "peer": 1,
+      "native_world_delta": 29,
+      "vblank_delta_bracket": [
+        26,
+        31
+      ]
+    }
+  ],
+  "separation_px": [
+    377.5,
+    377.5
+  ],
+  "root_composed_review": [
+    {
+      "peer": 0,
+      "label": "initial-8by3-two-panes",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-0-initial-8by3-two-panes.png",
+      "sha256": "7b6fde1906ec908e71573c7f0aa22eb3afc21f44b8a928ee1532cfecc29e922b",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 1,
+      "label": "initial-8by3-two-panes",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-1-initial-8by3-two-panes.png",
+      "sha256": "7b6fde1906ec908e71573c7f0aa22eb3afc21f44b8a928ee1532cfecc29e922b",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "separated-private-owner-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-0-separated-private-owner-views.png",
+      "sha256": "17fc05f51a0181680a556b85a3fc1069c18de2ba4d8ac044e5cf8a098714cee0",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 1,
+      "label": "separated-private-owner-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-1-separated-private-owner-views.png",
+      "sha256": "17fc05f51a0181680a556b85a3fc1069c18de2ba4d8ac044e5cf8a098714cee0",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "private-resize-640x900",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-0-private-resize-640x900.png",
+      "sha256": "5af9aee514ca2e45678ec70fcb3b0748131ae24eefc74d54726dc87c486a6867",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 1,
+      "label": "private-resize-640x900",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-1-private-resize-640x900.png",
+      "sha256": "f149c7f40dc4c449750dd7beb36cbd5fc7beffb975b53c30c0e24e5c83be3be8",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "private-resize-960x720",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-0-private-resize-960x720.png",
+      "sha256": "d5b048b9d71de18260308cc4cc4bba0ff265663a2dd139da73e9e92aa456bc13",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 1,
+      "label": "private-resize-960x720",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-1-private-resize-960x720.png",
+      "sha256": "464272673e87c0819fcd0eef2b5eea02ee7954dbc0740d390509b65700d65750",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "private-resize-1280x480",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-0-private-resize-1280x480.png",
+      "sha256": "46f369d88c14fe180762e4b1a39b2dabad23bb4d796163d6e8c1b123e1a30366",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 1,
+      "label": "private-resize-1280x480",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-1-private-resize-1280x480.png",
+      "sha256": "46f369d88c14fe180762e4b1a39b2dabad23bb4d796163d6e8c1b123e1a30366",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner0-native-shared-menu",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-0-owner0-native-shared-menu.png",
+      "sha256": "740b1b395ed8e5b79d17db924b6a4042c88e444f45a8bf5bad2ba447f003f7e7",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 1,
+      "label": "owner0-native-shared-menu",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-1-owner0-native-shared-menu.png",
+      "sha256": "740b1b395ed8e5b79d17db924b6a4042c88e444f45a8bf5bad2ba447f003f7e7",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner0-shared-resize-640x900",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-0-owner0-shared-resize-640x900.png",
+      "sha256": "d6786572ba778f909a6ef26534317a368dbab4d1a48e55c4e35b8b54fd69ec5d",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 1,
+      "label": "owner0-shared-resize-640x900",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-1-owner0-shared-resize-640x900.png",
+      "sha256": "d6786572ba778f909a6ef26534317a368dbab4d1a48e55c4e35b8b54fd69ec5d",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner0-shared-resize-1280x480",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-0-owner0-shared-resize-1280x480.png",
+      "sha256": "740b1b395ed8e5b79d17db924b6a4042c88e444f45a8bf5bad2ba447f003f7e7",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 1,
+      "label": "owner0-shared-resize-1280x480",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-1-owner0-shared-resize-1280x480.png",
+      "sha256": "740b1b395ed8e5b79d17db924b6a4042c88e444f45a8bf5bad2ba447f003f7e7",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner0-restored-private-owner-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-0-owner0-restored-private-owner-views.png",
+      "sha256": "9d77ef84b88e63dc23aa47b0d517fc94d921d085e26638451e96197e06193ba5",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 1,
+      "label": "owner0-restored-private-owner-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-1-owner0-restored-private-owner-views.png",
+      "sha256": "9d77ef84b88e63dc23aa47b0d517fc94d921d085e26638451e96197e06193ba5",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner1-native-shared-menu",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-0-owner1-native-shared-menu.png",
+      "sha256": "702fa45dc1c8e666dc9156ef0b2cd7d0ea548a8c6036e89669d0422067db1b5a",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 1,
+      "label": "owner1-native-shared-menu",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-1-owner1-native-shared-menu.png",
+      "sha256": "702fa45dc1c8e666dc9156ef0b2cd7d0ea548a8c6036e89669d0422067db1b5a",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner1-shared-resize-640x900",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-0-owner1-shared-resize-640x900.png",
+      "sha256": "3e72aeafcd3bca042e2ee5610e0d099993a1a5b24d352b0e98c4c682e976463b",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 1,
+      "label": "owner1-shared-resize-640x900",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-1-owner1-shared-resize-640x900.png",
+      "sha256": "3e72aeafcd3bca042e2ee5610e0d099993a1a5b24d352b0e98c4c682e976463b",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner1-shared-resize-1280x480",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-0-owner1-shared-resize-1280x480.png",
+      "sha256": "702fa45dc1c8e666dc9156ef0b2cd7d0ea548a8c6036e89669d0422067db1b5a",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 1,
+      "label": "owner1-shared-resize-1280x480",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-1-owner1-shared-resize-1280x480.png",
+      "sha256": "702fa45dc1c8e666dc9156ef0b2cd7d0ea548a8c6036e89669d0422067db1b5a",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner1-restored-private-owner-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-0-owner1-restored-private-owner-views.png",
+      "sha256": "57fc105090ebc774ce94bc3725ca6a77f5b1ff46e4eed20a1ad8e42d327019a6",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 1,
+      "label": "owner1-restored-private-owner-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\F173-F177\\peer-1-owner1-restored-private-owner-views.png",
+      "sha256": "57fc105090ebc774ce94bc3725ca6a77f5b1ff46e4eed20a1ad8e42d327019a6",
+      "surface": "composed_renderer_output"
+    }
+  ],
+  "source_guards": [
+    {
+      "first": "0x80034830",
+      "bytes": 68,
+      "sha256": "85e16602de339369b10a376bcb4af4ec4bdffcded913421499c2e19147fda4fc",
+      "peers_matched": [
+        true,
+        true
+      ]
+    },
+    {
+      "first": "0x800346ec",
+      "bytes": 284,
+      "sha256": "2a918262c728c1759faac953c0998cc241b0c8a51a87fab6d7df748c24adf15b",
+      "peers_matched": [
+        true,
+        true
+      ]
+    },
+    {
+      "first": "0x80073970",
+      "bytes": 320,
+      "sha256": "798fc11a2bfd757820b6b751013e8753da18d678c707f6e7d1489a97ee47d299",
+      "peers_matched": [
+        true,
+        true
+      ]
+    },
+    {
+      "first": "0x80034ff8",
+      "bytes": 24,
+      "sha256": "0811a345ec78521ad504572c4af7782180fadd2bc414ba8e4da9bc39ce1371d1",
+      "peers_matched": [
+        true,
+        true
+      ]
+    },
+    {
+      "first": "0x80039c40",
+      "bytes": 92,
+      "sha256": "1f78e95d06052e22c1fb6bdf3b26bb5a36e5e92fab184de00b9cd426569c7992",
+      "peers_matched": [
+        true,
+        true
+      ]
+    },
+    {
+      "first": "0x8003af1c",
+      "bytes": 216,
+      "sha256": "edb4af58ccfefaaa5df5282090250667a6580816d570c26e96126bcd0782feeb",
+      "peers_matched": [
+        true,
+        true
+      ]
+    }
+  ],
+  "recordings": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\peer-0\\saves\\input-recordings\\session-1793106237402588-1-0\\inputs.jsonl",
+      "sha256": "b68c6b6f4984b0ecfcb61f6b1323f99207edd6cf277b897094c42328cb192cef",
+      "events": 10494,
+      "natives": 4546,
+      "p2_reads": 5948,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "eaeb3772d3ae0941b9859a70c08754757d299aaa91abe4c5da0dc07fa0e84187",
+        "manifest_sha256": "1187eede119110e37e74995cd3709258e6e607da35b18f6a2c562ec427210695",
+        "mode": "netplay",
+        "profile": {
+          "id": "mmx6.win64-clang22.loopback",
+          "revision": 10,
+          "selected_sha256": "09e7f574cdcbc6d58da7c2335e28a99c641bdd99975c50c0b6610b2d145039d2"
+        },
+        "settings_sha256": "d612be2c21d147d9d59616f99ef00707ab6b3b62dfc987bf0af8f3c01f62e0a6",
+        "simulation_contract_sha256": "7fce24767b6b64f3b7c8945f1707143a3031040c7161ccfdefd6885d30629a3d"
+      },
+      "status": {
+        "contract": "mmx6.native-consumption.v1",
+        "epoch": 1,
+        "failure": "",
+        "schema": 1,
+        "scope": "native-consumption diagnostics; replay unimplemented",
+        "status": "finalized"
+      }
+    },
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-netplay-v77-root-v1\\peer-1\\saves\\input-recordings\\session-1793106237403336-1-0\\inputs.jsonl",
+      "sha256": "80cecfb89d8a7a109e0b71996a573824909c3340deab8330d2938bab59a5ce0c",
+      "events": 10500,
+      "natives": 4548,
+      "p2_reads": 5952,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "15a5ffea53e8afbe364edae1f348595a30dedc93fa0383fc37dbcf07ad796b6c",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "eaeb3772d3ae0941b9859a70c08754757d299aaa91abe4c5da0dc07fa0e84187",
+        "manifest_sha256": "1187eede119110e37e74995cd3709258e6e607da35b18f6a2c562ec427210695",
+        "mode": "netplay",
+        "profile": {
+          "id": "mmx6.win64-clang22.loopback",
+          "revision": 10,
+          "selected_sha256": "09e7f574cdcbc6d58da7c2335e28a99c641bdd99975c50c0b6610b2d145039d2"
+        },
+        "settings_sha256": "1973aef2fe46ed1b1ddfb7691990959be3745fecab4c5e6bc7983fd98fd2153e",
+        "simulation_contract_sha256": "7fce24767b6b64f3b7c8945f1707143a3031040c7161ccfdefd6885d30629a3d"
+      },
+      "status": {
+        "contract": "mmx6.native-consumption.v1",
+        "epoch": 1,
+        "failure": "",
+        "schema": 1,
+        "scope": "native-consumption diagnostics; replay unimplemented",
+        "status": "finalized"
+      }
+    }
+  ],
+  "limits": [
+    "F173 only: same exact V77 image/declared manifest and SDK90c990/UI34b5277 for fresh LOCAL and NET native cold-boot sessions. One Windows host, loopback delay3 profile revision10; no Linux, remote-host, hardware-device or broad release claim.",
+    "Root reviewed all13 LOCAL and26 NET actual composed captures. Independent native4:3 X/Zero panes retain their own HUD/terrain/camera in8:3 output; Zero moves376px LOCAL and377.5px on both peers while X remains stationary. Five gameplay captures per physical process include1280x480,640x900 and960x720. No distant-hero wrap is visible in the separated panes.",
+    "Native world delta37 inside SDK VBlank32..40 LOCAL, and29 inside24..31/26..31 on NET physical peers. Actual private pairs grow without the mutable host-state leak counter. This is bounded original-once evidence, not a performance benchmark.",
+    "F177 is explicitly excluded from this pass. Actual LOCAL fallback resize trace contains three single4:3 viewport presents; settled8:3 menu captures and restored views cannot erase that defect. Raw transitions and earlier V62 evidence remain preserved; fresh SDK fix and qualification required.",
+    "Original source guards and ordinary published Right/fresh Jump/Start only. No actor position, health, controller success flag or checkpoint writes. Three ordinary finalized native-consumption recordings, startup artifacts, unchanged cards and owned graceful exit0 pass. No replay/audio equivalence claim."
+  ],
+  "bypasses": [],
+  "profile": {
+    "profile": "mmx6.win64-clang22.loopback",
+    "revision": 10,
+    "selected_sha256": "09e7f574cdcbc6d58da7c2335e28a99c641bdd99975c50c0b6610b2d145039d2",
+    "peers": [
+      {
+        "capabilities": {
+          "actual_image_sha256": "eaeb3772d3ae0941b9859a70c08754757d299aaa91abe4c5da0dc07fa0e84187",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 10,
+          "selected_sha256": "09e7f574cdcbc6d58da7c2335e28a99c641bdd99975c50c0b6610b2d145039d2",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      },
+      {
+        "capabilities": {
+          "actual_image_sha256": "eaeb3772d3ae0941b9859a70c08754757d299aaa91abe4c5da0dc07fa0e84187",
+          "cpu_arch": 2,
+          "features": 127,
+          "backend": 2,
+          "fp": 2,
+          "overlays": "interpreted",
+          "offers": 1
+        },
+        "settlement": {
+          "profile": "mmx6.win64-clang22.loopback",
+          "revision": 10,
+          "selected_sha256": "09e7f574cdcbc6d58da7c2335e28a99c641bdd99975c50c0b6610b2d145039d2",
+          "cycles": 0,
+          "sim_tick": 0,
+          "before_enter_guest": 1
+        }
+      }
+    ]
+  },
+  "resolved_state_crc": [
+    {
+      "label": "initial idle",
+      "samples": [
+        {
+          "simulation_tick": 2880,
+          "core": "9006dec5",
+          "mod": "645fe859"
+        },
+        {
+          "simulation_tick": 2912,
+          "core": "de18214e",
+          "mod": "ae3065b9"
+        },
+        {
+          "simulation_tick": 2944,
+          "core": "f089b371",
+          "mod": "8d1e4f6f"
+        },
+        {
+          "simulation_tick": 2976,
+          "core": "dcc65e43",
+          "mod": "ee2ef68f"
+        },
+        {
+          "simulation_tick": 3008,
+          "core": "5168187b",
+          "mod": "a75485f1"
+        },
+        {
+          "simulation_tick": 3040,
+          "core": "b347a17f",
+          "mod": "efe1e7c5"
+        }
+      ],
+      "resolved_through": [
+        3073,
+        3072
+      ]
+    },
+    {
+      "label": "P2 right then release",
+      "samples": [
+        {
+          "simulation_tick": 3136,
+          "core": "b0737946",
+          "mod": "52d74f85"
+        },
+        {
+          "simulation_tick": 3168,
+          "core": "32246eaf",
+          "mod": "7dd8d565"
+        },
+        {
+          "simulation_tick": 3200,
+          "core": "9c3cf196",
+          "mod": "42f964ef"
+        },
+        {
+          "simulation_tick": 3232,
+          "core": "45daf0a9",
+          "mod": "a23455cd"
+        },
+        {
+          "simulation_tick": 3264,
+          "core": "72f3e932",
+          "mod": "0fd45fed"
+        },
+        {
+          "simulation_tick": 3296,
+          "core": "b624825b",
+          "mod": "9740a7e7"
+        },
+        {
+          "simulation_tick": 3328,
+          "core": "57c9f7a8",
+          "mod": "c3736f07"
+        }
+      ],
+      "resolved_through": [
+        3337,
+        3339
+      ]
+    },
+    {
+      "label": "P1 jump then settle",
+      "samples": [
+        {
+          "simulation_tick": 3424,
+          "core": "346db5dd",
+          "mod": "a06b443f"
+        },
+        {
+          "simulation_tick": 3456,
+          "core": "f5d98884",
+          "mod": "9ba58457"
+        },
+        {
+          "simulation_tick": 3488,
+          "core": "dba5aeb7",
+          "mod": "b7afb95d"
+        },
+        {
+          "simulation_tick": 3520,
+          "core": "b1fae1c8",
+          "mod": "90aa98cd"
+        },
+        {
+          "simulation_tick": 3552,
+          "core": "a31d50b7",
+          "mod": "e5514077"
+        },
+        {
+          "simulation_tick": 3584,
+          "core": "3f204abc",
+          "mod": "655cd08b"
+        },
+        {
+          "simulation_tick": 3616,
+          "core": "b11a2f63",
+          "mod": "52d74f85"
+        }
+      ],
+      "resolved_through": [
+        3643,
+        3643
+      ]
+    },
+    {
+      "label": "F42 owner0 natural shared menu and private view restoration",
+      "samples": [
+        {
+          "simulation_tick": 4352,
+          "core": "6816d412",
+          "mod": "1f38d27f"
+        },
+        {
+          "simulation_tick": 4384,
+          "core": "be4f197e",
+          "mod": "bc88ee7b"
+        },
+        {
+          "simulation_tick": 4416,
+          "core": "cfd877c0",
+          "mod": "81cbee78"
+        },
+        {
+          "simulation_tick": 4448,
+          "core": "96af8df5",
+          "mod": "5d32c511"
+        },
+        {
+          "simulation_tick": 4480,
+          "core": "54c87cc6",
+          "mod": "14a04257"
+        },
+        {
+          "simulation_tick": 4512,
+          "core": "731a768c",
+          "mod": "a761ccd9"
+        },
+        {
+          "simulation_tick": 4544,
+          "core": "43ef236d",
+          "mod": "68136739"
+        },
+        {
+          "simulation_tick": 4576,
+          "core": "fabf9321",
+          "mod": "6c14fa6f"
+        }
+      ],
+      "resolved_through": [
+        4582,
+        4582
+      ]
+    },
+    {
+      "label": "F42 owner1 natural shared menu and private view restoration",
+      "samples": [
+        {
+          "simulation_tick": 4864,
+          "core": "0c293cfe",
+          "mod": "10409e88"
+        },
+        {
+          "simulation_tick": 4896,
+          "core": "7e9e0078",
+          "mod": "813fb292"
+        },
+        {
+          "simulation_tick": 4928,
+          "core": "7ab71df2",
+          "mod": "8be2c5dc"
+        },
+        {
+          "simulation_tick": 4960,
+          "core": "1b4fb6fb",
+          "mod": "2ef847bc"
+        },
+        {
+          "simulation_tick": 4992,
+          "core": "2488c861",
+          "mod": "eb2556ca"
+        },
+        {
+          "simulation_tick": 5024,
+          "core": "a39d9ee0",
+          "mod": "b6858b6a"
+        },
+        {
+          "simulation_tick": 5056,
+          "core": "56945157",
+          "mod": "8a97b5a4"
+        }
+      ],
+      "resolved_through": [
+        5084,
+        5083
+      ]
+    }
+  ],
+  "cleanup": [
+    {
+      "peer": 0,
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    },
+    {
+      "peer": 1,
+      "shutdown": "graceful_owned_debug",
+      "exit_code": 0
+    }
+  ]
+}

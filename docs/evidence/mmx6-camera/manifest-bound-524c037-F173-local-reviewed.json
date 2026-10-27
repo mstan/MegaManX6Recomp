@@ -1,0 +1,245 @@
+{
+  "schema": 1,
+  "comparison": "F173",
+  "frozen_row_sha256": "ca28e1e05decb30993e6f2d4a29de33eecb468449582db5a62b890be4fe12152",
+  "mode": "local",
+  "result": "passed",
+  "candidate": "524c03783228d8916d86d98b25be681f104b01de",
+  "build_identity": {
+    "executable_sha256": "eaeb3772d3ae0941b9859a70c08754757d299aaa91abe4c5da0dc07fa0e84187",
+    "compiled_manifest_sha256": "1187eede119110e37e74995cd3709258e6e607da35b18f6a2c562ec427210695",
+    "sdk_commit": "90c990dbf889cddb415174c0a6316f2700b37d40",
+    "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+  },
+  "qualification": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v77-root-v1\\qualification.json",
+    "sha256": "3a5e9a24d84851f30485fb8862f3c6be7b7cbe2fe958eae2644f2cf19198de7e"
+  },
+  "observations": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v77-root-v1\\hud\\split-views-observations.json",
+    "sha256": "a44aec8e2e2ffe26759edf28b6873691fcbda12640b6ae4d18e4fbf4c2d75909"
+  },
+  "observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_split_views_v77_root_v1.py",
+    "sha256": "418803f54c59f18865b2b5ebe2b35cc5938051fb5c8d10ea9bb00673f69c8d45"
+  },
+  "explicit_binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-v77-final-binding-root-v1.json",
+    "binding_sha256": "6c6d67ae090d801acccf57a128ef4ca04e327f3ec0df12b0c66ee5407cd1bee0",
+    "image_sha256": "eaeb3772d3ae0941b9859a70c08754757d299aaa91abe4c5da0dc07fa0e84187",
+    "manifest_sha256": "1187eede119110e37e74995cd3709258e6e607da35b18f6a2c562ec427210695",
+    "provenance_sha256": "fdddc3dfec2e3d13daa1eacf21ec28bb4a5096a7de5558ca67752791ac7d4658",
+    "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v77-online-split-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "524c03783228d8916d86d98b25be681f104b01de",
+      "sdk": "90c990dbf889cddb415174c0a6316f2700b37d40",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v27",
+    "host_revision": 10
+  },
+  "world_once": [
+    {
+      "peer": 0,
+      "native_world_delta": 37,
+      "vblank_delta_bracket": [
+        32,
+        40
+      ]
+    }
+  ],
+  "separation_px": [
+    376.0
+  ],
+  "root_composed_review": [
+    {
+      "peer": 0,
+      "label": "initial-8by3-two-panes",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v77-root-v1\\hud\\peer-0-initial-8by3-two-panes.png",
+      "sha256": "19adf0cfeb7df48ea1fc072903b9f09f556f3f01c70b43ea3195358b18a634e9",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "separated-private-owner-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v77-root-v1\\hud\\peer-0-separated-private-owner-views.png",
+      "sha256": "56cce82dd23a0076ea2fa65a6b6ae69fbf170fef656eda067cf0fbf8fae5123e",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "private-resize-640x900",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v77-root-v1\\hud\\peer-0-private-resize-640x900.png",
+      "sha256": "332bb7746ede44719dc95e56c9e47dfdc8a4bd7b83b2815201dde4d274d6ca7f",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "private-resize-960x720",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v77-root-v1\\hud\\peer-0-private-resize-960x720.png",
+      "sha256": "b6a8111c67864fc88dc6c31680a41342adb8d80657fc4ab829b4e66807040aea",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "private-resize-1280x480",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v77-root-v1\\hud\\peer-0-private-resize-1280x480.png",
+      "sha256": "f5879bee61e212744ce71503ca6373f170528da1d3648037805674f0ee2e8b3e",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner0-native-shared-menu",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v77-root-v1\\hud\\peer-0-owner0-native-shared-menu.png",
+      "sha256": "01a14ee81e6f0f068e742ddc0990c1f237b406c9539b88a2ff0b8f8e787dfd0e",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner0-shared-resize-640x900",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v77-root-v1\\hud\\peer-0-owner0-shared-resize-640x900.png",
+      "sha256": "551384f7c656d38bb413234545771f1863fced648106c2e90ef6e90d76e850de",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner0-shared-resize-1280x480",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v77-root-v1\\hud\\peer-0-owner0-shared-resize-1280x480.png",
+      "sha256": "fadae32943c08078f709436a75eb1fe79cda7e85569d9cbf68d5c510d206ad77",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner0-restored-private-owner-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v77-root-v1\\hud\\peer-0-owner0-restored-private-owner-views.png",
+      "sha256": "a7fe800bd8db156e4a10ccd3e75b7a97aae9ac01b07b4e7a7134b78d3ad11639",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner1-native-shared-menu",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v77-root-v1\\hud\\peer-0-owner1-native-shared-menu.png",
+      "sha256": "3d0bd5c6c88b2d969953fb4d3bf9da886bcb3e2ce155e76fca672b14b009a978",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner1-shared-resize-640x900",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v77-root-v1\\hud\\peer-0-owner1-shared-resize-640x900.png",
+      "sha256": "cef56fb8067233d86dcc9bd5f7bb2c5021e246154deef94f734de2fdd0370f82",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner1-shared-resize-1280x480",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v77-root-v1\\hud\\peer-0-owner1-shared-resize-1280x480.png",
+      "sha256": "173974256321459ba14bb34049ff0b6aea586ceac2574ccd4bfe48ff64e54e6e",
+      "surface": "composed_renderer_output"
+    },
+    {
+      "peer": 0,
+      "label": "owner1-restored-private-owner-views",
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v77-root-v1\\hud\\peer-0-owner1-restored-private-owner-views.png",
+      "sha256": "445a4954591f2bc0aa008b2912cff85c75ca5c50a716440f8a0d52ca48673222",
+      "surface": "composed_renderer_output"
+    }
+  ],
+  "source_guards": [
+    {
+      "first": "0x80034830",
+      "bytes": 68,
+      "sha256": "85e16602de339369b10a376bcb4af4ec4bdffcded913421499c2e19147fda4fc",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "0x800346ec",
+      "bytes": 284,
+      "sha256": "2a918262c728c1759faac953c0998cc241b0c8a51a87fab6d7df748c24adf15b",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "0x80073970",
+      "bytes": 320,
+      "sha256": "798fc11a2bfd757820b6b751013e8753da18d678c707f6e7d1489a97ee47d299",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "0x80034ff8",
+      "bytes": 24,
+      "sha256": "0811a345ec78521ad504572c4af7782180fadd2bc414ba8e4da9bc39ce1371d1",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "0x80039c40",
+      "bytes": 92,
+      "sha256": "1f78e95d06052e22c1fb6bdf3b26bb5a36e5e92fab184de00b9cd426569c7992",
+      "peers_matched": [
+        true
+      ]
+    },
+    {
+      "first": "0x8003af1c",
+      "bytes": 216,
+      "sha256": "edb4af58ccfefaaa5df5282090250667a6580816d570c26e96126bcd0782feeb",
+      "peers_matched": [
+        true
+      ]
+    }
+  ],
+  "recordings": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\split-views-local-v77-root-v1\\candidate\\saves\\input-recordings\\session-1793105974176260-1-0\\inputs.jsonl",
+      "sha256": "4bbeb51f8d11f2f7680eaca003f8d26eb6f11fb326481964cf7bfa4c4b53e1cd",
+      "events": 8807,
+      "natives": 5788,
+      "p2_reads": 3019,
+      "identity": {
+        "baseline": null,
+        "cards": [
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          },
+          {
+            "bytes": 131072,
+            "sha256": "7706c7d43edaf8cb7618e574f03457105153e3bdc196db803a600ad96a8f58e8"
+          }
+        ],
+        "content_sha256": "f818b999a085013b07288abe353df2ea7a863209fb7a241ccf01531b4704b92e",
+        "execution_id": "a45799857ef4be4851e3bd2957092a1955434f1c8942f65093da26ad875ad1e9",
+        "image_sha256": "eaeb3772d3ae0941b9859a70c08754757d299aaa91abe4c5da0dc07fa0e84187",
+        "manifest_sha256": "1187eede119110e37e74995cd3709258e6e607da35b18f6a2c562ec427210695",
+        "mode": "offline",
+        "profile": null,
+        "settings_sha256": "c941bd1524383d1b5129286ae7bf66a2e992a4e583d024cd87396d03fb66d1b1",
+        "simulation_contract_sha256": "ddb135ee62bd71774fb3fd714847c3ffe0b5d2a7977c5b0ae0c3c0c479c2432c"
+      },
+      "requested_jump_seats": [],
+      "consumed_cross_seen_anywhere": [
+        0,
+        1
+      ],
+      "scope": "Ordered native N/P2 C consumption; no temporal jump association or audio/output equivalence"
+    }
+  ],
+  "limits": [
+    "F173 only: same exact V77 image/declared manifest and SDK90c990/UI34b5277 for fresh LOCAL and NET native cold-boot sessions. One Windows host, loopback delay3 profile revision10; no Linux, remote-host, hardware-device or broad release claim.",
+    "Root reviewed all13 LOCAL and26 NET actual composed captures. Independent native4:3 X/Zero panes retain their own HUD/terrain/camera in8:3 output; Zero moves376px LOCAL and377.5px on both peers while X remains stationary. Five gameplay captures per physical process include1280x480,640x900 and960x720. No distant-hero wrap is visible in the separated panes.",
+    "Native world delta37 inside SDK VBlank32..40 LOCAL, and29 inside24..31/26..31 on NET physical peers. Actual private pairs grow without the mutable host-state leak counter. This is bounded original-once evidence, not a performance benchmark.",
+    "F177 is explicitly excluded from this pass. Actual LOCAL fallback resize trace contains three single4:3 viewport presents; settled8:3 menu captures and restored views cannot erase that defect. Raw transitions and earlier V62 evidence remain preserved; fresh SDK fix and qualification required.",
+    "Original source guards and ordinary published Right/fresh Jump/Start only. No actor position, health, controller success flag or checkpoint writes. Three ordinary finalized native-consumption recordings, startup artifacts, unchanged cards and owned graceful exit0 pass. No replay/audio equivalence claim."
+  ],
+  "bypasses": [],
+  "cleanup": {
+    "shutdown": "graceful_owned_debug",
+    "exit_code": 0
+  }
+}
