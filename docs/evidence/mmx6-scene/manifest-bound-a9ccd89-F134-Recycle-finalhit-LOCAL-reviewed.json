@@ -1,0 +1,361 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F134"
+  ],
+  "result": "partial",
+  "mode_status": {
+    "local": "passed",
+    "netplay": "unverified"
+  },
+  "frozen_row_sha256": {
+    "F134": "57a2b7889f63b09eac0a32f8f2cf7e1c12f0383a2e5abfd0e1513dc882c28b60"
+  },
+  "binding": {
+    "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\recycle-victory-v85-final-binding-root-v1.json",
+    "binding_sha256": "6181a80da51fea466b9dfef9f6407b56107573a2b1f05626aa2691fd478e6367",
+    "image_sha256": "18ec7321b0fbe892c2087a6ff7462b064d1bfa3e2614ca41dc6c46c7b3e738b3",
+    "manifest_sha256": "e40f79e5344e88e76ba51ef09a13af0a5dd25ab6cf4676392a34d88c04703dfe",
+    "provenance_sha256": "23139c1df497938a8697bebec22956f96abef7cc3aff418d39eccc58b3e1e812",
+    "provenance_path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v85-recycle-victory-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+    "source_heads": {
+      "game": "a9ccd89dcac2041fa97387072664bbe42523fbd4",
+      "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+      "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+    },
+    "title": "mmx6-x-zero-delay-v34",
+    "host_revision": 17
+  },
+  "qualification": {
+    "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F134-recycle-local-v85-root-v2\\qualification.json",
+    "bytes": 30576996,
+    "sha256": "cd0c18fa11b9643ba1482c506281fda7bdd0481050f993c1250ce3ad8597d548"
+  },
+  "native_observations": {
+    "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F134-recycle-local-v85-root-v2\\ammo-hud\\intro-admission\\F134\\observations.json",
+    "bytes": 13405316,
+    "sha256": "6638a66ec879d9136018c813ed09a22265fa1808d78e34da4fd851d1262c7c84"
+  },
+  "native_entry": {
+    "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F134-recycle-local-v85-root-v2\\ammo-hud\\intro-admission\\R17-entry\\observations.json",
+    "bytes": 2562735,
+    "sha256": "8e24f83af14dec5583013e703a53b218b8deb8a69481e38566c88b7a0ef0b593"
+  },
+  "checks": {
+    "actual_guest_positive_HP_to_zero": true,
+    "both_visible_native_victories": true,
+    "each_native_victory_once": true,
+    "each_native_departure_once": true,
+    "no_premature_passenger": true,
+    "no_reappearance": true,
+    "both_actual_native_retirements": true,
+    "both_living": true,
+    "native_original_report_boundary": true
+  },
+  "parent_checks": {
+    "exact_image_manifest_declared_sources_originals": true,
+    "native_resource_and_window_observations_complete": true,
+    "default_recording_taint_retained_and_replay_refused": true,
+    "owned_cleanup_private_cards": true
+  },
+  "actual_guest_lethal": {
+    "offer": 5,
+    "row": 153,
+    "before_hp": [
+      12
+    ],
+    "mains": [
+      {
+        "slot": null,
+        "owner": null,
+        "address": "0x8008ef48",
+        "allocation": 65,
+        "active": 65,
+        "type": 56,
+        "subtype": 0,
+        "visible": 1,
+        "state": 2,
+        "action": 1,
+        "phase": 5,
+        "phase2": 0,
+        "x": 6124,
+        "y": 375,
+        "x_raw": 401367168,
+        "y_raw": 24576000,
+        "layer": 0,
+        "facing": 64,
+        "selected_clip": 28,
+        "sprite_frame": 34,
+        "animation_cursor": "0x800f9468",
+        "command": [
+          2,
+          0,
+          1,
+          34
+        ],
+        "attack": "0x800f90b0",
+        "hurt": "0x800f90b4",
+        "table": "0x8007555c",
+        "hp": 0,
+        "iframe": 25,
+        "disposition": 0,
+        "token": 0,
+        "remembered_token": 1,
+        "recovery": 0,
+        "feedback": 0,
+        "hex": "41380001020105008060ec1700007701487e0f800040051c8060ec1700007701000000000000fbff00000000e84200002c950f8068940f8000000000407915804001487902000122ff00000000000000b0900f80b4900f805c5507800009000008190000000100007c900f800c0000000800000000000000000000007f001900e0b70980ec173b010000010702000000000000000000000000000000",
+        "source_hurt_box_hex": "f0e82038",
+        "hurt_rect": [
+          6108,
+          351,
+          6140,
+          407
+        ]
+      }
+    ],
+    "before_hit_counts": [
+      40
+    ],
+    "after_hit_counts": [
+      51
+    ],
+    "finisher_witness": {
+      "method": "sampled_private24_pose48_source_overlap",
+      "before_counts": [
+        40
+      ],
+      "after_counts": [
+        51
+      ],
+      "accepted_hit_deltas": [
+        11
+      ],
+      "sampled_lethal_lifetime_claim": true,
+      "literal_parent_or_HP_store_trace_claim": false,
+      "limit": "Counter identifies a successful native P2 retry, not a target; main attribution also requires actual same-main HP loss and no P1 attacks."
+    }
+  },
+  "victory_histories": [
+    {
+      "peer": 0,
+      "seat": 0,
+      "sequence": [
+        [
+          1,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          1,
+          20
+        ],
+        [
+          1,
+          1,
+          1,
+          25
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          3,
+          0
+        ]
+      ],
+      "pose_entries": 1,
+      "departure_entries": 1,
+      "early_passenger": false,
+      "actual_retired": true,
+      "reappeared_after_retirement": false,
+      "min_hp": 32,
+      "hp_scope": "Native live/victory/departing or retired state1/3; later original frontend initialization is separately retained."
+    },
+    {
+      "peer": 0,
+      "seat": 1,
+      "sequence": [
+        [
+          1,
+          1,
+          1,
+          48
+        ],
+        [
+          1,
+          1,
+          1,
+          2
+        ],
+        [
+          1,
+          1,
+          1,
+          25
+        ],
+        [
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          3,
+          0
+        ]
+      ],
+      "pose_entries": 1,
+      "departure_entries": 1,
+      "early_passenger": false,
+      "actual_retired": true,
+      "reappeared_after_retirement": false,
+      "min_hp": 28,
+      "hp_scope": "Native live/victory/departing or retired state1/3; later original frontend initialization is separately retained."
+    }
+  ],
+  "native_report_boundary": {
+    "row": 487,
+    "modes": [
+      [
+        12,
+        0,
+        0
+      ]
+    ]
+  },
+  "source_pins": {
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F134-recycle-finalhit-v85-root-v2.py": "94709836c1ab8e3b19ac24afdd720d29e8b9a3e6cf994ddb40f268908765fadc",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_R17_recycle_door_v84_root_v2.py": "1dde9aaac06d407ad6b153b700161341d35c725ab4ff11f30e53baea7e64ac0e",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F134_recycle_finalhit_v85_worker_v4.py": "bbad16f732270cddc95e458f13cb391537b8993070ac7afbf3f6b386418a3fea",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recycle-victory-v85\\tools\\qualify_mmx6_coop_intro_fixture_pair.py": "dbb2b8b29f20ed9518038f7aaa5d8a225cb06f66173eea4295d5be58ed3a7e64",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recycle-victory-v85\\tools\\mmx6_coop_intro_fixture.py": "ca7d472393f0e2e56eb731083da1720ae7ca8da031156ea0fe6d295366ec8782",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recycle-victory-v85\\tools\\qualify_mmx6_coop_pair.py": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recycle-victory-v85\\tools\\qualify_mmx6_coop_hud_inventory.py": "e74133343b72379ac820b7d10a236e06d461a625267b315dd57bf8cf63676bf8",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recycle-victory-v85\\tools\\mmx6_coop_jump_audio_pair.py": "622015f68982c7efaffd4be6416f96920481601bf9d058c1746c7379c8907cbe",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-recycle-victory-v85\\tools\\prepare_mmx6_coop_playtest.py": "022d81704f4ba296b8aa6348c96641fe4ffae5f7ead476cbaaf89b5febfc7978",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\recycle-victory-v85-exact-build-guard-root-v1.py": "56244a31361ad9df67200bdd11f509070f042b894ee4d433fd0b596de7572ccd",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\recycle-victory-v85-final-binding-root-v1.json": "6181a80da51fea466b9dfef9f6407b56107573a2b1f05626aa2691fd478e6367",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-v31-F157-native-Zero-CP2-fresh-followup-v2.py": "d638f9aed1dd403ec3e333eea8bd3a244742ef20a2983c61ddf66c3ddf959781",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Recycle-CP2-source-ground-v83-worker-v2.json": "fa17e115c00b6159c9fdb5806080e69fcd926959d05672fff047af9c93bd687b",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\vehicle-original-Recycle-source-v83-worker-v1.json": "8b679583a3f0873d01dfa3e6594a66dd3182fe050666943ebbf75d2fe9907ae5",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F118-original-Zero-member1-v82-worker-v1.bin": "75a142a529ddc70f0d60ee6be32ebcdb0cf5cc90ec88e965c3b15cf0c6d21b00",
+    "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\Recycle-original-member7-v84-worker-v1.bin": "f59c45c08b52056bf8a1ccca1a01b9bf0dbd6a9c7884234f5cd618268d918fdd"
+  },
+  "composed_images": [
+    {
+      "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F134-recycle-local-v85-root-v2\\ammo-hud\\intro-admission\\F134\\peer-0-native-Metal-Shark-before-guest-attacks.png",
+      "sha256": "cbc54654a8df347c680380ecdabbf1084aa55456a5fc68f0ed942719bf4a91fe",
+      "label": "native-Metal-Shark-before-guest-attacks",
+      "peer": 0,
+      "root_reviewed": true
+    },
+    {
+      "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F134-recycle-local-v85-root-v2\\ammo-hud\\intro-admission\\F134\\peer-0-actual-native-lethal-endpoint.png",
+      "sha256": "f69e5fe1a7dd1d834963ffa806d464711ca9891b700a4dd13b1e61501b3b8ef6",
+      "label": "actual-native-lethal-endpoint",
+      "peer": 0,
+      "root_reviewed": true
+    },
+    {
+      "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F134-recycle-local-v85-root-v2\\ammo-hud\\intro-admission\\F134\\peer-0-native-peer0-seat1-state1-action25.png",
+      "sha256": "bd2bf576a1537c73d90ee4dda2d3758d00a5b5f1c0be5ef85211ff59c47e1abd",
+      "label": "native-peer0-seat1-state1-action25",
+      "peer": 0,
+      "root_reviewed": true
+    },
+    {
+      "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F134-recycle-local-v85-root-v2\\ammo-hud\\intro-admission\\F134\\peer-0-native-peer0-seat0-state1-action25.png",
+      "sha256": "c77c1dc88fc37f616fa784ec770708459bae92a05e56222f80a1a52cafd910da",
+      "label": "native-peer0-seat0-state1-action25",
+      "peer": 0,
+      "root_reviewed": true
+    },
+    {
+      "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F134-recycle-local-v85-root-v2\\ammo-hud\\intro-admission\\F134\\peer-0-native-peer0-seat1-state1-action1.png",
+      "sha256": "9dd391bcd74f09eb77e38d8e1aa50710e08d02cd111f3fb01d5033bae34d6806",
+      "label": "native-peer0-seat1-state1-action1",
+      "peer": 0,
+      "root_reviewed": true
+    },
+    {
+      "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F134-recycle-local-v85-root-v2\\ammo-hud\\intro-admission\\F134\\peer-0-native-peer0-seat0-state1-action1.png",
+      "sha256": "741e7f7c60822e46c78eebb0d107fdea69d94c711eee77095009474b5a3edec6",
+      "label": "native-peer0-seat0-state1-action1",
+      "peer": 0,
+      "root_reviewed": true
+    },
+    {
+      "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F134-recycle-local-v85-root-v2\\ammo-hud\\intro-admission\\F134\\peer-0-actual-native-report-return.png",
+      "sha256": "ff2c233f788dda5027a908078cef1f3056a06d32235150dee80e22d26157b373",
+      "label": "actual-native-report-return",
+      "peer": 0,
+      "root_reviewed": true
+    }
+  ],
+  "limits": [
+    "Native Recycle4/1CP2 road/vehicle reachability bypass inherited; actual guest Either door/fullHP/release/controls must already be earned by pinned R17 helper.",
+    "Negotiated hostile-contact protection is a disclosed prerequisite bypass, not contact-damage qualification; it ends naturally during original intro/clear/exit.",
+    "Actual guest input/body48/private owned attack24, original emission ABI parent800970A0, live source geometry and actual HP changes establish sampled ownership. No invented literal parent field: attack+50 is geometry and+84 is parent animation.",
+    "Ordinary main/camera RAM is coherent within one read; private publication, input receipts and images are separate observations. Fresh post-world 4-byte accepted-P2-hitcounter reads bracket the earlier diagnostic count; they are not same-instant snapshots.",
+    "A missed lethal24 lifetime may use every-peer accepted-P2-native-hitcounter advance plus actual Zero48/fresh source-clean Square, empty P1 attack pools and bound-main positiveHP->0. Such a result does not claim sampled lethal overlap, literal parent or HP-store tracing.",
+    "No HP/inventory/position/pose/phase/timer/outcome writes, clean recording, mounted-boss, weakness, Save or selector claim. Incomplete story/report stays partial.",
+    "LOCAL only; aggregate F134 remains unverified until same-candidate NET completes. Frozen X5 on-foot Chaser-stage boss precedent maps actual Recycle vehicle-associated mission (RideArmor4/0, boss4/1), not a mounted boss or road handoff.",
+    "Root reviewed7LOCALcaptures. Both native25 celebrations visible; background/HUDcorruption/overlap remain. Reportcapture is transition-black; actual RAMmode12/stage15 establishes original boundary, not reporttext/Save/selector.",
+    "Native source F6F60(16/17) allocates falling energy actor type0F/sub10/11; original4289C waits fall and appliesenergy. No postkill Cross/text16/17 claim.",
+    "NETv2 reached last of10 genuine introtextresponses but70s observerlimit expired before fullHP/release. NETv3 changed only limit110s; both peers exit2 atsim2080 starvationwatchdog~4.8s duringboot beforefixture/attack, so requiredfailedfixture terminal also correctlyrefused. Both failures retained; do not infer F134productfailure or NETpass. Park after2setups."
+  ],
+  "compiled_gates": [
+    {
+      "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\ctest-v85-recycle-victory-focused-root-v1.log",
+      "bytes": 5874,
+      "sha256": "75daba6d55d96503b1634ebab0afb2c61052c76450b92a1881b1e7cf7bc36ccc"
+    }
+  ],
+  "caller": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F134-recycle-finalhit-v85-root-v2.py",
+    "bytes": 7526,
+    "sha256": "94709836c1ab8e3b19ac24afdd720d29e8b9a3e6cf994ddb40f268908765fadc"
+  },
+  "observer": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F134_recycle_finalhit_v85_worker_v4.py",
+    "bytes": 23026,
+    "sha256": "bbad16f732270cddc95e458f13cb391537b8993070ac7afbf3f6b386418a3fea"
+  },
+  "source_reward_return": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\F134-return-reward-source-v85-worker-v1.log",
+    "bytes": 4138,
+    "sha256": "9954f9ad11e054e7572324fada539c02140a40a17d1e7ba5c4df05b2f08489c0"
+  },
+  "failed_prefixes": [
+    {
+      "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F134-recycle-local-v85-root-v1\\qualification.json",
+      "bytes": 8216225,
+      "sha256": "8ae3151052b4a025c36435885fd46bce4392dc478077623f754ce10a8c7e1604"
+    },
+    {
+      "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F134-recycle-netplay-v85-root-v2\\qualification.json",
+      "bytes": 5941405,
+      "sha256": "8d4ada3f97249ddd14f99d66397222f4133a9964ba23531766a38ea230a79652"
+    },
+    {
+      "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F134-recycle-netplay-v85-root-v3\\qualification.json",
+      "bytes": 399210,
+      "sha256": "a37bc908c2f3ce40c17d21e89776a2a79bcfe9dafbc6786ae45c5f13f1958e46"
+    }
+  ],
+  "executed_review_script": {
+    "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\review-F134-Recycle-LOCAL-v85-root-v1.py",
+    "bytes": 7194,
+    "sha256": "ae055176fd2b6d3ddc9e2c9024b214f10f700315955c0040f2d541c5e8524dee"
+  }
+}

@@ -15337,9 +15337,9 @@
       "frozen_row_sha256": "57a2b7889f63b09eac0a32f8f2cf7e1c12f0383a2e5abfd0e1513dc882c28b60",
       "x6": {
         "workstream": "scene",
-        "mapping_state": "unknown_native_analogue",
-        "analogue": "Vehicle-boss victory passenger analogue unidentified",
-        "bounded_check": "Identify a genuine X6 vehicle-associated boss cleanup or retain unknown; ordinary boss victory cannot close its mounted-state obligation.",
+        "mapping_state": "identified_subsystem",
+        "analogue": "Recycle vehicle-associated mission: on-foot Metal Shark guest final hit and shared native victory/return",
+        "bounded_check": "Actual guest native finalhit; both visible25 victories/outgoing1 once, no premature passenger/reappearance, actual original report boundary; LOCAL complete, same-candidate NET required.",
         "baseline_anchors": [
           "src/mods/mmx6_coop_plugin.c:scene_begin",
           "src/mods/mmx6_coop_plugin.c:scene_tick",
@@ -15351,11 +15351,56 @@
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
+          "local": "passed",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "a9ccd89dcac2041fa97387072664bbe42523fbd4",
+            "build_identity": {
+              "executable_sha256": "18ec7321b0fbe892c2087a6ff7462b064d1bfa3e2614ca41dc6c46c7b3e738b3",
+              "compiled_manifest_sha256": "e40f79e5344e88e76ba51ef09a13af0a5dd25ab6cf4676392a34d88c04703dfe",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1 + Zero/P2",
+              "doors": "either",
+              "lab_checkpoint": "recycle_cp2",
+              "lab_contact_protection": "on",
+              "cameras": "unified",
+              "local_cameras": "unified",
+              "audio": "muted dummy"
+            },
+            "action": "Original Recycle door/intro/fullHP then actual P2type24 kill; both25/outgoing1/native retirement and reportmode12.",
+            "outcome": "LOCAL complete, all9nativechecks true; NET setup attempts incomplete, no aggregate credit.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-scene/manifest-bound-a9ccd89-F134-Recycle-finalhit-LOCAL-reviewed.json",
+                "sha256": "1203d0348e39aa1e1cf612afab4ba9f5372eabf266f3259159e6f489a4256d67"
+              }
+            ],
+            "limits": [
+              "Native Recycle4/1CP2 road/vehicle reachability bypass inherited; actual guest Either door/fullHP/release/controls must already be earned by pinned R17 helper.",
+              "Negotiated hostile-contact protection is a disclosed prerequisite bypass, not contact-damage qualification; it ends naturally during original intro/clear/exit.",
+              "Actual guest input/body48/private owned attack24, original emission ABI parent800970A0, live source geometry and actual HP changes establish sampled ownership. No invented literal parent field: attack+50 is geometry and+84 is parent animation.",
+              "Ordinary main/camera RAM is coherent within one read; private publication, input receipts and images are separate observations. Fresh post-world 4-byte accepted-P2-hitcounter reads bracket the earlier diagnostic count; they are not same-instant snapshots.",
+              "A missed lethal24 lifetime may use every-peer accepted-P2-native-hitcounter advance plus actual Zero48/fresh source-clean Square, empty P1 attack pools and bound-main positiveHP->0. Such a result does not claim sampled lethal overlap, literal parent or HP-store tracing.",
+              "No HP/inventory/position/pose/phase/timer/outcome writes, clean recording, mounted-boss, weakness, Save or selector claim. Incomplete story/report stays partial.",
+              "LOCAL only; aggregate F134 remains unverified until same-candidate NET completes. Frozen X5 on-foot Chaser-stage boss precedent maps actual Recycle vehicle-associated mission (RideArmor4/0, boss4/1), not a mounted boss or road handoff.",
+              "Root reviewed7LOCALcaptures. Both native25 celebrations visible; background/HUDcorruption/overlap remain. Reportcapture is transition-black; actual RAMmode12/stage15 establishes original boundary, not reporttext/Save/selector.",
+              "Native source F6F60(16/17) allocates falling energy actor type0F/sub10/11; original4289C waits fall and appliesenergy. No postkill Cross/text16/17 claim.",
+              "NETv2 reached last of10 genuine introtextresponses but70s observerlimit expired before fullHP/release. NETv3 changed only limit110s; both peers exit2 atsim2080 starvationwatchdog~4.8s duringboot beforefixture/attack, so requiredfailedfixture terminal also correctlyrefused. Both failures retained; do not infer F134productfailure or NETpass. Park after2setups."
+            ],
+            "bypasses": [
+              "Native Recycle4/1CP2 road/vehicle reachability bypass inherited; actual guest Either door/fullHP/release/controls must already be earned by pinned R17 helper.",
+              "Negotiated hostile-contact protection is a disclosed prerequisite bypass, not contact-damage qualification; it ends naturally during original intro/clear/exit."
+            ]
+          }
+        ],
+        "limitations": "Native Recycle4/1CP2 road/vehicle reachability bypass inherited; actual guest Either door/fullHP/release/controls must already be earned by pinned R17 helper. Negotiated hostile-contact protection is a disclosed prerequisite bypass, not contact-damage qualification; it ends naturally during original intro/clear/exit. Actual guest input/body48/private owned attack24, original emission ABI parent800970A0, live source geometry and actual HP changes establish sampled ownership. No invented literal parent field: attack+50 is geometry and+84 is parent animation. Ordinary main/camera RAM is coherent within one read; private publication, input receipts and images are separate observations. Fresh post-world 4-byte accepted-P2-hitcounter reads bracket the earlier diagnostic count; they are not same-instant snapshots. A missed lethal24 lifetime may use every-peer accepted-P2-native-hitcounter advance plus actual Zero48/fresh source-clean Square, empty P1 attack pools and bound-main positiveHP->0. Such a result does not claim sampled lethal overlap, literal parent or HP-store tracing. No HP/inventory/position/pose/phase/timer/outcome writes, clean recording, mounted-boss, weakness, Save or selector claim. Incomplete story/report stays partial. LOCAL only; aggregate F134 remains unverified until same-candidate NET completes. Frozen X5 on-foot Chaser-stage boss precedent maps actual Recycle vehicle-associated mission (RideArmor4/0, boss4/1), not a mounted boss or road handoff. Root reviewed7LOCALcaptures. Both native25 celebrations visible; background/HUDcorruption/overlap remain. Reportcapture is transition-black; actual RAMmode12/stage15 establishes original boundary, not reporttext/Save/selector. Native source F6F60(16/17) allocates falling energy actor type0F/sub10/11; original4289C waits fall and appliesenergy. No postkill Cross/text16/17 claim. NETv2 reached last of10 genuine introtextresponses but70s observerlimit expired before fullHP/release. NETv3 changed only limit110s; both peers exit2 atsim2080 starvationwatchdog~4.8s duringboot beforefixture/attack, so requiredfailedfixture terminal also correctlyrefused. Both failures retained; do not infer F134productfailure or NETpass. Park after2setups."
       }
     },
     {
