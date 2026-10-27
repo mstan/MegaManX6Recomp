@@ -1,0 +1,221 @@
+{
+  "schema": 1,
+  "comparisons": [
+    "F132"
+  ],
+  "result": "unverified_deferred",
+  "frozen_row_sha256": {
+    "F132": "1b7c5966bed638581ec021c3e74cfdd70dc39578e736ae24db67385dcb9c1a77"
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-local-v82-root-v1\\qualification.json",
+        "bytes": 5662546,
+        "sha256": "d4e0e7913b3ce39b85e51fe794e91518ca787efe2d4fd59c6027b58c00373e6b"
+      },
+      "observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-local-v82-root-v1\\ammo-hud\\intro-admission\\F132-ground-combo\\observations.json",
+        "bytes": 1517963,
+        "sha256": "afc0369385fccd4b1846a44425b8f290b0e93f6cb8206d3a473b9008dcdfecde"
+      },
+      "log": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F132-local-v82-root-v1.log",
+        "bytes": 318,
+        "sha256": "60e3ebc93776c3e6419007799413dce3ed17ada4c9cdc679253e89b59df0835e"
+      },
+      "error": "Native approach hurt/stalled; preserve and defer",
+      "checks": {
+        "exact_image_manifest_declared_sources_originals": true
+      },
+      "samples": 49,
+      "chain_started": false,
+      "Square_offered": false,
+      "boss_final_HP": 32,
+      "final_native_body": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 31,
+          "x_raw": 337147904,
+          "y_raw": 135987200,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 17,
+          "hp": 30,
+          "x_raw": 348297216,
+          "y_raw": 135921664,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "prechain_native_recovery": null,
+      "cleanup": {
+        "pid": 84900,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0,
+        "cards_unchanged": true
+      },
+      "binding": {
+        "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-v82-final-binding-root-v1.json",
+        "binding_sha256": "0172ea22254cee069ec4f1d3c401f14ea050cd018efbcc7d7f7265d10379a12a",
+        "image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+        "manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+        "provenance_sha256": "6a3d1bd53edc47b8f248fef3b452154cfb936a4df0e63a6a9798774e58eafd2d",
+        "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v82-nearby-explosion-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+        "source_heads": {
+          "game": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+          "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+          "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+        },
+        "title": "mmx6-x-zero-delay-v31",
+        "host_revision": 14
+      },
+      "executed_source_pins": {
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F89_Investigator_entry_v70_root_v2.py": "bb0d461944f22c03c60cc340427edd352870dba73fd36e965879aa090ca15605",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F132_ground_combo_v82_worker_v2.py": "662327d29fb7931186c5d978d52f40ac6d3f47097fa1f09cd8859bc577928661",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-v31-F157-native-Zero-CP2-fresh-followup-v2.py": "d638f9aed1dd403ec3e333eea8bd3a244742ef20a2983c61ddf66c3ddf959781",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\qualify_mmx6_coop_intro_fixture_pair.py": "964ba7331d99054d6978cd0b382c229a168fc57bc56ce2b46856bba2fa9dfaa4",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\qualify_mmx6_coop_pair.py": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\mmx6_coop_intro_fixture.py": "ca7d472393f0e2e56eb731083da1720ae7ca8da031156ea0fe6d295366ec8782",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\qualify_mmx6_coop_hud_inventory.py": "e74133343b72379ac820b7d10a236e06d461a625267b315dd57bf8cf63676bf8"
+      }
+    },
+    {
+      "attempt": 2,
+      "parent": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-local-v82-root-v2\\qualification.json",
+        "bytes": 14170987,
+        "sha256": "46cfba9b1f1a83ff87afb10e0adc1a2fd8fc0471484bf023502f91ad0cb931fe"
+      },
+      "observations": {
+        "path": "F:\\Temp\\Codex\\psxrecomp\\x6-parity\\F132-local-v82-root-v2\\ammo-hud\\intro-admission\\F132-ground-combo\\observations.json",
+        "bytes": 10221063,
+        "sha256": "97cb555bf4c9a51a6f370da4fc3b149eab89b949157f23cacea6c4359dc481f5"
+      },
+      "log": {
+        "path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-F132-local-v82-root-v2.log",
+        "bytes": 356,
+        "sha256": "9d13b17107ebca817efb6af3e6640a8b0f36007de8f6bd0a3146405d9e3b5b13"
+      },
+      "error": "actual lower main and neutral full ground: native window not earned",
+      "checks": {
+        "exact_image_manifest_declared_sources_originals": true
+      },
+      "samples": 343,
+      "chain_started": false,
+      "Square_offered": false,
+      "boss_final_HP": 32,
+      "final_native_body": [
+        {
+          "active": 1,
+          "character": 0,
+          "state": 1,
+          "action": 2,
+          "hp": 28,
+          "x_raw": 336265216,
+          "y_raw": 135987200,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        },
+        {
+          "active": 1,
+          "character": 1,
+          "state": 1,
+          "action": 2,
+          "hp": 24,
+          "x_raw": 353806336,
+          "y_raw": 135921664,
+          "weapon": 0,
+          "ammo": [
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288,
+            288
+          ]
+        }
+      ],
+      "prechain_native_recovery": 40,
+      "cleanup": {
+        "pid": 90572,
+        "shutdown": "graceful_owned_debug",
+        "exit_code": 0,
+        "cards_unchanged": true
+      },
+      "binding": {
+        "binding_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\nearby-explosion-v82-final-binding-root-v1.json",
+        "binding_sha256": "0172ea22254cee069ec4f1d3c401f14ea050cd018efbcc7d7f7265d10379a12a",
+        "image_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+        "manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+        "provenance_sha256": "6a3d1bd53edc47b8f248fef3b452154cfb936a4df0e63a6a9798774e58eafd2d",
+        "provenance_path": "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\build-v82-nearby-explosion-debug\\mmx6-build-provenance\\psx-runtime\\provenance.json",
+        "source_heads": {
+          "game": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+          "sdk": "f381d124d920bc371c352c5164ab109633ed4d23",
+          "ui": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+        },
+        "title": "mmx6-x-zero-delay-v31",
+        "host_revision": 14
+      },
+      "executed_source_pins": {
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F89_Investigator_entry_v70_root_v2.py": "bb0d461944f22c03c60cc340427edd352870dba73fd36e965879aa090ca15605",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\mmx6_F132_ground_combo_v82_root_v1.py": "f450a41a6393719d08fc51beb09cdda0a767c0e210a44a578c5e611fb77dc11b",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\run-v31-F157-native-Zero-CP2-fresh-followup-v2.py": "d638f9aed1dd403ec3e333eea8bd3a244742ef20a2983c61ddf66c3ddf959781",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\qualify_mmx6_coop_intro_fixture_pair.py": "964ba7331d99054d6978cd0b382c229a168fc57bc56ce2b46856bba2fa9dfaa4",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\qualify_mmx6_coop_pair.py": "432b7fbc47a5d394f54836ee1edb68028bc3f21da07ccae6ce80d06dc20a15ab",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\mmx6_coop_intro_fixture.py": "ca7d472393f0e2e56eb731083da1720ae7ca8da031156ea0fe6d295366ec8782",
+        "G:\\Temp\\Codex\\psxrecomp\\x6-parity\\worktrees\\x6-nearby-explosion-v82\\tools\\qualify_mmx6_coop_hud_inventory.py": "e74133343b72379ac820b7d10a236e06d461a625267b315dd57bf8cf63676bf8"
+      }
+    }
+  ],
+  "limits": [
+    "No F132 combo result: both native LOCAL attempts stopped BEFORE first Square/24; no24->25->26 admission, accepted damage/immunity timing or NET verdict.",
+    "First approach stopped on original hurt17. Changed second attempt allowed one native neutral/idle recovery (observedrow40), then failed the combined exact validstance/neutral/lowboss window. Boss remained original32HP. These are setup/observer control prerequisites, not demonstrated game failures.",
+    "Ordinary controls and original body/hurt/placement only; no HP/pose/phase/contact/position/outcome writes. OriginalCP2 route bypass and current helper source bounds remain explicit.",
+    "Two native attempts preserved, no third timing variant now. Future specific prerequisite is coherent published stance/facing after accepted neutral before asking for the original lowboss combo window, plus actual sampled immunity. Do not weaken continuous native48/CB0->1->2/animations88->89->90 or infer a combo from independent Square offers.",
+    "All raw images/cards/recordings/logs retained outside delivery folders. No artifact or previous candidate credit transfer."
+  ]
+}

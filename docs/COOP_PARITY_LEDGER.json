@@ -14704,8 +14704,45 @@
           "local": "unverified",
           "netplay": "unverified"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "unverified",
+            "candidate": "dcc1002ce77de89f3cc0a30f66df309a7f7c161e",
+            "action": "Attempt source-qualified native consecutive24/25/26 setup using ordinary approach/neutral, with one changed prechain hurt recovery.",
+            "outcome": "Both setups stop before first Square; original main remains32HP. No combo begun or failure/pass gameplay verdict.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-melee/manifest-bound-dcc1002-F132-local-setups-deferred.json",
+                "sha256": "51872dddbccdf4e4004cb1f7ded9577c38a722f1c2a965e0b43877b89329b246"
+              }
+            ],
+            "limits": [
+              "No F132 combo result: both native LOCAL attempts stopped BEFORE first Square/24; no24->25->26 admission, accepted damage/immunity timing or NET verdict.",
+              "First approach stopped on original hurt17. Changed second attempt allowed one native neutral/idle recovery (observedrow40), then failed the combined exact validstance/neutral/lowboss window. Boss remained original32HP. These are setup/observer control prerequisites, not demonstrated game failures.",
+              "Ordinary controls and original body/hurt/placement only; no HP/pose/phase/contact/position/outcome writes. OriginalCP2 route bypass and current helper source bounds remain explicit.",
+              "Two native attempts preserved, no third timing variant now. Future specific prerequisite is coherent published stance/facing after accepted neutral before asking for the original lowboss combo window, plus actual sampled immunity. Do not weaken continuous native48/CB0->1->2/animations88->89->90 or infer a combo from independent Square offers.",
+              "All raw images/cards/recordings/logs retained outside delivery folders. No artifact or previous candidate credit transfer."
+            ],
+            "bypasses": [
+              "Ordinary controls and original body/hurt/placement only; no HP/pose/phase/contact/position/outcome writes. OriginalCP2 route bypass and current helper source bounds remain explicit."
+            ],
+            "build_identity": {
+              "executable_sha256": "da6f7c240d8432ccbfee9f5d96a43e24f956386ec46aa4824b8409a81eb24393",
+              "compiled_manifest_sha256": "c62739fc8a62cc2caccb16ae16673de70397b828f6b9d613eeb407156f93648d",
+              "sdk_commit": "f381d124d920bc371c352c5164ab109633ed4d23",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "local_cameras": "split",
+              "audio": "muted dummy",
+              "lab_checkpoint": "amazon_cp2",
+              "scope": "two failed prechainLOCAL setups; no combo/NET verdict"
+            }
+          }
+        ],
+        "limitations": "Two exactdcc1002 LOCAL prechain setups stopped before Square: ordinaryhurt then native neutral/fullstance/lowboss window unearned. No combo/damage/immunity or NET verdict; preserved and deferred after two attempts."
       }
     },
     {
