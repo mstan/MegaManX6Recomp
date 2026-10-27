@@ -26,8 +26,8 @@ def select_checkpoint(directory, *, enabled, option=intro.OPTION):
     catalog = tomllib.loads((directory/'mods/bundled/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
     options = [o for o in catalog.get('option', []) if o.get('id') == 'lab_checkpoint']
     if (len(options) != 1 or options[0].get('default') != 'off' or options[0].get('feature') != 'prototype'
-            or {c['value'] for c in options[0].get('choice', [])} != {'off', intro.OPTION, 'amazon_cp0', 'amazon_cp2', 'intro_before_doors'}
-            or option not in (intro.OPTION, 'amazon_cp0', 'amazon_cp2', 'intro_before_doors')):
+            or {c['value'] for c in options[0].get('choice', [])} != {'off', intro.OPTION, 'amazon_cp0', 'amazon_cp2', 'intro_before_doors', 'intro_before_explosion'}
+            or option not in (intro.OPTION, 'amazon_cp0', 'amazon_cp2', 'intro_before_doors', 'intro_before_explosion')):
         raise ValueError('Staged image lacks the private typed LAB checkpoint catalog')
     path = directory/'mods/state.toml'; text = path.read_text(encoding='utf-8')
     anchor = 'id = "prototype"\nenabled = '+str(enabled).lower()+'\n'

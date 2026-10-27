@@ -9,7 +9,7 @@ import mmx6_coop_intro_fixture as intro
 
 
 class NamedPrerequisiteCatalogTests(unittest.TestCase):
-    def test_before_doors_is_explicit_lab_only_with_strict_choice_set(self):
+    def test_named_positions_are_explicit_lab_only_with_strict_choice_set(self):
         import qualify_mmx6_coop_intro_fixture_pair as pair
         source = Path(__file__).resolve().parents[1]
         normal = tomllib.loads((source/'mods/preloaded/packages/mmx6.local-coop/0.0.1/manifest.toml').read_text(encoding='utf-8'))
@@ -23,12 +23,21 @@ class NamedPrerequisiteCatalogTests(unittest.TestCase):
             state = directory/'mods/state.toml'
             initial = '[[feature]]\nid = "prototype"\nenabled = true\n'
             state.write_text(initial, encoding='utf-8')
-            receipt = pair.select_checkpoint(directory, enabled=True, option='intro_before_doors')
-            self.assertEqual(receipt['option'], 'intro_before_doors')
-            self.assertIn('lab_checkpoint = "intro_before_doors"', state.read_text(encoding='utf-8'))
+            for option in ('intro_before_doors', 'intro_before_explosion'):
+                state.write_text(initial, encoding='utf-8')
+                receipt = pair.select_checkpoint(directory, enabled=True, option=option)
+                self.assertEqual(receipt['option'], option)
+                self.assertIn('lab_checkpoint = "'+option+'"', state.read_text(encoding='utf-8'))
             state.write_text(initial, encoding='utf-8')
             with self.assertRaises(ValueError):
                 pair.select_checkpoint(directory, enabled=True, option='arbitrary_position')
+            self.assertEqual(state.read_text(encoding='utf-8'), initial)
+            # An old five-choice catalog cannot silently authorize the newly
+            # named destination; every peer must hash the exact current set.
+            old_catalog = catalog[:catalog.index('\n[[option.choice]]\nvalue = "intro_before_explosion"')]
+            manifest.write_text(old_catalog, encoding='utf-8')
+            with self.assertRaises(ValueError):
+                pair.select_checkpoint(directory, enabled=True, option='intro_before_explosion')
             self.assertEqual(state.read_text(encoding='utf-8'), initial)
             manifest.write_text(catalog+'\n[[option.choice]]\nvalue = "arbitrary_position"\nlabel = "Unknown"\n', encoding='utf-8')
             with self.assertRaises(ValueError):

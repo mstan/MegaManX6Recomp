@@ -3,6 +3,7 @@
  * may install the requested CP before the original initializer executes. */
 #include "mmx6_coop_checkpoint_data.h"
 #include "mmx6_coop_before_doors_data.h"
+#include "mmx6_coop_before_explosion_data.h"
 #if defined(__has_include)
 #if __has_include("session_input_taint.h")
 #include "session_input_taint.h"
@@ -26,19 +27,21 @@ enum { CHECKPOINT_LAB_NONCE=0x4C435032u }; /* Immutable intro CP2 request identi
 enum { CHECKPOINT_LAB_AMAZON_NONCE=0x4C434130u }; /* Immutable Amazon CP0 identity. */
 enum { CHECKPOINT_LAB_INVESTIGATOR_NONCE=0x4C434132u }; /* Immutable Amazon CP2 identity. */
 enum { CHECKPOINT_LAB_BEFORE_DOORS_NONCE=0x4C434431u }; /* Intro CP1 plus declared position bypass. */
+enum { CHECKPOINT_LAB_BEFORE_EXPLOSION_NONCE=0x4C454631u }; /* Intro CP1 nearby native explosion setup. */
 typedef struct { unsigned phase,index; uint32_t nonce; unsigned authority; uint32_t placed_world; } Mmx6CheckpointPending;
 static Mmx6CheckpointPending checkpoint_pending;
 static unsigned checkpoint_lab_option,checkpoint_lab_state,checkpoint_lab_previous;
 
 static unsigned checkpoint_lab_index(void) {
     return checkpoint_lab_option==1?2:checkpoint_lab_option==2?3:
-        checkpoint_lab_option==3?5:checkpoint_lab_option==4?1:115;
+        checkpoint_lab_option==3?5:(checkpoint_lab_option==4 || checkpoint_lab_option==5)?1:115;
 }
 static uint32_t checkpoint_lab_nonce(void) {
     return checkpoint_lab_option==1?CHECKPOINT_LAB_NONCE:
         checkpoint_lab_option==2?CHECKPOINT_LAB_AMAZON_NONCE:
         checkpoint_lab_option==3?CHECKPOINT_LAB_INVESTIGATOR_NONCE:
-        checkpoint_lab_option==4?CHECKPOINT_LAB_BEFORE_DOORS_NONCE:0;
+        checkpoint_lab_option==4?CHECKPOINT_LAB_BEFORE_DOORS_NONCE:
+        checkpoint_lab_option==5?CHECKPOINT_LAB_BEFORE_EXPLOSION_NONCE:0;
 }
 
 static int checkpoint_lab_authorized(void) {
@@ -95,6 +98,7 @@ static void checkpoint_reset(void) {
         else if(!strcmp(option,"amazon_cp0"))checkpoint_lab_option=2;
         else if(!strcmp(option,"amazon_cp2"))checkpoint_lab_option=3;
         else if(!strcmp(option,"intro_before_doors"))checkpoint_lab_option=4;
+        else if(!strcmp(option,"intro_before_explosion"))checkpoint_lab_option=5;
         else if(strcmp(option,"off"))failed=1;
     }
 #endif
@@ -114,7 +118,7 @@ static int checkpoint_safe_boundary(void) {
         p2.body[0x5C]>0 && p2.body[0x5C]<128 &&
         life.status[0]==MMX6_COOP_ALIVE && life.status[1]==MMX6_COOP_ALIVE;
 }
-/* This one named lab bypass skips only the route to the first original door.
+/* These named lab bypasses skip only the route to the original door/explosion.
  * Native CP1 initialization and arrival finish first. No action/HP/ground,
  * checkpoint2, door command, allocation flag or outcome is manufactured. */
 static int checkpoint_before_doors_idle(unsigned seat) {
@@ -134,6 +138,13 @@ static int checkpoint_before_doors_source(void) {
         psx_mod_read_word(0x800FA2A8u)==0x01801670u &&
         psx_mod_read_word(0x80078DC8u)==0x20100000u &&
         psx_mod_read_word(0x800FA7B4u)==0x80050DFCu;
+}
+static int checkpoint_before_explosion_source(void) {
+    for(unsigned i=0;i<sizeof before_explosion_code/sizeof before_explosion_code[0];++i)
+        if(checkpoint_hash(before_explosion_code[i].first,before_explosion_code[i].end)!=before_explosion_code[i].hash)return 0;
+    /* Original placement allocation changes bit0 only. */
+    return (psx_mod_read_word(0x800FA384u)&0xFFFFFFFEu)==0x00010000u &&
+        psx_mod_read_word(0x800FA388u)==0x02E01240u;
 }
 static int checkpoint_before_doors_assets(uint32_t *meta,uint32_t *desc) {
     *meta=psx_mod_read_word(0x1F800008u);*desc=psx_mod_read_word(0x1F80000Cu);
@@ -166,20 +177,34 @@ static int checkpoint_before_doors_ground(uint32_t meta,uint32_t desc) {
     }
     return 1;
 }
-static void checkpoint_before_doors_place(CPUState *cpu) {
+static int checkpoint_before_explosion_ground(uint32_t meta,uint32_t desc) {
     for(unsigned seat=0;seat<2;++seat) {
-        uint32_t x=(5692u+seat*24u)<<16,y=(395u-seat)<<16;
+        unsigned x=4736u+seat*24u;
+        for(unsigned px=x-11u;px<x+11u;++px) {
+            if(checkpoint_before_doors_tile(meta,desc,px,864)!=0x38)return 0;
+            for(unsigned py=826;py<864;++py)
+                if(checkpoint_before_doors_tile(meta,desc,px,py))return 0;
+        }
+    }
+    return 1;
+}
+static void checkpoint_position_place(CPUState *cpu) {
+    const int explosion=checkpoint_lab_option==5;
+    for(unsigned seat=0;seat<2;++seat) {
+        uint32_t x=((explosion?4736u:5692u)+seat*24u)<<16,y=((explosion?843u:395u)-seat)<<16;
         if(seat) {put32(p2.body+8,x);put32(p2.body+0x18,x);put32(p2.body+12,y);put32(p2.body+0x1C,y);}
         else {psx_mod_write_word(PLAYER+8,x);psx_mod_write_word(PLAYER+0x18,x);
               psx_mod_write_word(PLAYER+12,y);psx_mod_write_word(PLAYER+0x1C,y);}
     }
     const uint32_t cam=0x800971F8u;
-    psx_mod_write_word(cam+8,5424u<<16);psx_mod_write_word(cam+0x14,5424u<<16);
-    psx_mod_write_word(cam+12,256u<<16);psx_mod_write_word(cam+0x18,256u<<16);
+    psx_mod_write_word(cam+8,(explosion?4576u:5424u)<<16);psx_mod_write_word(cam+0x14,(explosion?4576u:5424u)<<16);
+    psx_mod_write_word(cam+12,(explosion?704u:256u)<<16);psx_mod_write_word(cam+0x18,(explosion?704u:256u)<<16);
     const unsigned offsets[]={0x1C,0x1E,0x20,0x22,0x24,0x26,0x28,0x2A};
-    const uint16_t values[]={5424,5008,256,256,5424,5008,256,256};
+    const uint16_t doors[]={5424,5008,256,256,5424,5008,256,256};
+    const uint16_t nearby[]={5120,1968,704,704,5120,1968,704,704};
+    const uint16_t *values=explosion?nearby:doors;
     for(unsigned i=0;i<8;++i)psx_mod_write_half(cam+offsets[i],values[i]);
-    psx_mod_write_byte(cam+0x47,2); /* Original 5211C/controller 4,5,10 state. */
+    psx_mod_write_byte(cam+0x47,2); /* Original 5211C authored camera controls. */
     for(unsigned layer=0;layer<3;++layer)psx_mod_write_byte(cam+layer*0x54u+0x4C,1);
 #ifdef MMX6_COOP_MODERN_STATE
     independent_invalidate();
@@ -194,8 +219,8 @@ static void checkpoint_before_doors_place(CPUState *cpu) {
     uint32_t stack=cpu->gpr[29]+0x10u;
     uint32_t saved[4]={cpu->gpr[6],cpu->gpr[7],stack,psx_mod_read_word(stack)};
     STATE_WORDS(restore_checkpoint_scan,64,saved,4);
-    cpu->gpr[6]=208;cpu->gpr[7]=544;psx_mod_write_word(stack,0);
-    guest(cpu,0x80029F38u,5376,5792);
+    cpu->gpr[6]=explosion?656:208;cpu->gpr[7]=explosion?992:544;psx_mod_write_word(stack,0);
+    guest(cpu,0x80029F38u,explosion?4528:5376,explosion?4944:5792);
     cpu->gpr[6]=saved[0];cpu->gpr[7]=saved[1];psx_mod_write_word(stack,saved[3]);
     STATE_POP(restore_checkpoint_scan);
 }
@@ -210,6 +235,24 @@ static int checkpoint_before_doors_ready(void) {
            psx_mod_read_word(a+0x10)==0x800FA2A4u &&
            psx_mod_read_half(a+10)==5744 && psx_mod_read_half(a+14)==384 &&
            psx_mod_read_word(a+0x68)==0x80078DC8u)return 1;
+    return 0;
+}
+static int checkpoint_before_explosion_ready(void) {
+    if((uint32_t)(psx_mod_read_word(PLAY+0x90)-checkpoint_pending.placed_world)<2u ||
+       !checkpoint_safe_boundary() || !checkpoint_before_doors_idle(0) || !checkpoint_before_doors_idle(1) ||
+       psx_mod_read_word(PLAYER+8)!=(4736u<<16) || psx_mod_read_word(PLAYER+12)!=(843u<<16) ||
+       le32(p2.body+8)!=(4760u<<16) || le32(p2.body+12)!=(842u<<16))return 0;
+    /* Category0 native pool, stride9C. Require original init and waiting
+     * action, not merely an allocated header or an already-earned impact. */
+    for(uint32_t a=0x8008EF48u;a<0x80090C88u;a+=0x9Cu)
+        if((psx_mod_read_byte(a)&1u) && !psx_mod_read_byte(a+1) &&
+           psx_mod_read_byte(a+2)==1 && psx_mod_read_byte(a+4)==1 &&
+           psx_mod_read_byte(a+5)==2 && psx_mod_read_byte(a+6)==1 &&
+           !psx_mod_read_byte(a+0x14) && psx_mod_read_word(a+0x10)==0x800FA384u &&
+           psx_mod_read_word(a+8)==(4672u<<16) && psx_mod_read_word(a+12)==(736u<<16) &&
+           psx_mod_read_word(a+0x30)==0x800FAA34u && psx_mod_read_word(a+0x68)==0x800FA99Cu &&
+           psx_mod_read_half(a+0x7C)>0 && psx_mod_read_half(a+0x7C)<=90 &&
+           psx_mod_read_half(a+0x80)==736 && psx_mod_read_byte(a+0x82)==1)return 1;
     return 0;
 }
 static int checkpoint_request(unsigned stage,unsigned section,unsigned cp,uint32_t nonce,unsigned authority) {
@@ -260,16 +303,20 @@ static int checkpoint_stage_boundary(CPUState *cpu) {
         else if((checkpoint_pending.phase==2 || checkpoint_pending.phase==3) && psx_mod_read_byte(PLAY)==10 &&
                 psx_mod_read_byte(PLAY+12)==entry->stage && psx_mod_read_byte(PLAY+13)==entry->section &&
                 psx_mod_read_byte(PLAY+0x1D)==entry->checkpoint) {
-            if(checkpoint_pending.authority==CHECKPOINT_AGREED && checkpoint_lab_option==4) {
+            if(checkpoint_pending.authority==CHECKPOINT_AGREED &&
+               (checkpoint_lab_option==4 || checkpoint_lab_option==5)) {
+                const int explosion=checkpoint_lab_option==5;
                 uint32_t meta,desc;
-                if(!checkpoint_source(entry) || !checkpoint_before_doors_source())checkpoint_cancel(CHECKPOINT_SOURCE);
+                if(!checkpoint_source(entry) || !(explosion?checkpoint_before_explosion_source():checkpoint_before_doors_source()))checkpoint_cancel(CHECKPOINT_SOURCE);
                 else if(checkpoint_pending.phase==2) {
                     if(checkpoint_safe_boundary() && checkpoint_before_doors_idle(0) && checkpoint_before_doors_idle(1) &&
                        !(cpu->gpr[29]&3u) && cpu->gpr[29]>=0x80010000u && cpu->gpr[29]<=0x801FFFECu &&
-                       checkpoint_before_doors_assets(&meta,&desc) && checkpoint_before_doors_ground(meta,desc))
-                        checkpoint_before_doors_place(cpu);
-                } else if(checkpoint_before_doors_ready()) {
-                    if(!checkpoint_before_doors_assets(&meta,&desc) || !checkpoint_before_doors_ground(meta,desc))checkpoint_cancel(CHECKPOINT_SOURCE);
+                       checkpoint_before_doors_assets(&meta,&desc) &&
+                       (explosion?checkpoint_before_explosion_ground(meta,desc):checkpoint_before_doors_ground(meta,desc)))
+                        checkpoint_position_place(cpu);
+                } else if(explosion?checkpoint_before_explosion_ready():checkpoint_before_doors_ready()) {
+                    if(!checkpoint_before_doors_assets(&meta,&desc) ||
+                       !(explosion?checkpoint_before_explosion_ground(meta,desc):checkpoint_before_doors_ground(meta,desc)))checkpoint_cancel(CHECKPOINT_SOURCE);
                     else {psx_mod_write_byte(diagnostic+0xAD,2);memset(&checkpoint_pending,0,sizeof checkpoint_pending);
                           checkpoint_status(CHECKPOINT_COMPLETE,CHECKPOINT_OK);}
                 }
