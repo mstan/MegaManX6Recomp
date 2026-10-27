@@ -17,7 +17,7 @@ comparisons. Native game sessions and builds remain serial.
 
 | Inventory | Current disposition |
 | --- | --- |
-| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 62 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F8, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F89, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F157, F163, F170, F178, F204, F205, F208), 6 failed, 166 unverified; no inherited X4/X5 passes |
+| [234 X4/X5 comparisons](COOP_X4_REFERENCE.md) | 63 passed (R2, R3, R4, R5, R6, R7, R8, R11, R12, R13, R15, R22, F1, F2, F5, F6, F8, F9, F10, F12, F14, F15, F18, F19, F22, F23, F31, F32, F33, F38, F42, F43, F45, F48, F51, F53, F56, F58, F59, F64, F65, F66, F67, F68, F70, F89, F92, F95, F98, F102, F107, F110, F119, F121, F133, F144, F157, F163, F170, F178, F204, F205, F208), 6 failed, 165 unverified; no inherited X4/X5 passes |
 
 The authoritative comparison ledger is `COOP_PARITY_LEDGER.json`. The separate
 `COOP_X6_CONTENT.json` and `COOP_X6_COVERAGE.json` files are historical reference
@@ -40,7 +40,15 @@ hashed evidence for each required mode. Do not set the completion flags under
 test. Native cards are preserved separately from disposable build-specific
 states; old-state migration is never required.
 
-## Current qualification status, October 26
+## Current qualification status, October 27
+
+**F9 is closed: 63 passed / 6 failed / 165 unverified (26.9%).**
+The [native dialogue palette fix and both-mode evidence](evidence/mmx6-assets/manifest-bound-e07ff56-F9-local-netplay-reviewed.json)
+publish Zero-owned original text/name colors to the shared native upload,
+preserve the displayed pre-scene backup and restore it on native close.
+All 12 dialogue pages per process match original working and CPU/GL colors.
+Both controls return; parent/profile/CRC/cards/owned-exit gates pass.
+Portrait and scenery corruption remains separate. This adds one since 62.
 
 **F66 is closed: 62 passed / 6 failed / 166 unverified (26.5%).**
 The [same-candidate native intro boss/projectile comparison](evidence/mmx6-camera/manifest-bound-3072f22-F66-local-netplay-reviewed.json)

@@ -5302,17 +5302,94 @@
           "src/mods/mmx6_coop_plugin.c:leave_zero_context",
           "src/mods/mmx6_coop_plugin.c:load_assets"
         ],
-        "status": "unverified",
+        "status": "passed",
         "required_modes": [
           "local",
           "netplay"
         ],
         "mode_status": {
-          "local": "unverified",
-          "netplay": "unverified"
+          "local": "passed",
+          "netplay": "passed"
         },
-        "evidence": [],
-        "limitations": "No X6 runtime qualification performed by this inventory import."
+        "evidence": [
+          {
+            "mode": "local",
+            "result": "passed",
+            "candidate": "e07ff56b5024397d722831b4fb1d0ce8d8e8747e",
+            "build_identity": {
+              "executable_sha256": "f1881b817a5436fe03054015542d314b0cb6d4ea04bdad01c7882bf86da9803f",
+              "compiled_manifest_sha256": "8ec828d78ec245eaa3a13d8d5a1b5de7cbc4a2a3f3b69e22dbac0dddc7c3981f",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "views": "LOCALsplit8:3",
+              "input": "ordinary published host pads",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original AmazonCP2"
+            },
+            "action": "Complete actual guest-owned Yammark dialogue, compare original text/name colors with private working and CPU/GL rows, close natively and resume both controls.",
+            "outcome": "All12 ready dialogue pages per process match original color rows; native closure restores the displayed baseline and both controls. Exact parent/source/profile/CRC/cards/owned-exit gates pass; composed images reviewed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-assets/manifest-bound-e07ff56-F9-local-netplay-reviewed.json",
+                "sha256": "a7fb1d5f95bbaedd8f7ec583ebe0134d9350e8f1e8112a34dc0e1b3767c69bf8"
+              }
+            ],
+            "limits": [
+              "Only frozen F9 closes: actual Zero-owned original Yammark dialogue, normal USA palette layout, exact V73 candidate in LOCAL and NET.",
+              "Pre-agreed AmazonCP2 bypasses prior traversal. Actual door, dialogue pages/closure and both independent controls remain native; no HP/position/scene/success writes by the observer.",
+              "Text/name native CLUT7845/7846 consumes the32 colors at GPU80,481. Original speaker rows1/7, private working palette and separate CPU/GL observations agree; original backup restores displayed pre-dialogue64 bytes.",
+              "Composed captures and RAM/GPU RPCs use separate safe points. No instruction-atomic image/byte claim.",
+              "Portrait/scenery corruption and actor/text overlap remain visible and separate. No general rendering, all scenes, alternate palette runtime, victory, selector or ordinary full-route credit.",
+              "Normal and alternate slot routing/differing-bank backup are covered by actual-plugin unit tests; alternate native dialogue runtime is unqualified.",
+              "Four LOCAL and15 NET parent gates, four resolvedCRC windows, matching profiles, private cards and three graceful owned exits pass. Strict fixture recording/replay remain refused."
+            ],
+            "bypasses": [
+              "Agreed original AmazonCP2 reachability prerequisite only."
+            ]
+          },
+          {
+            "mode": "netplay",
+            "result": "passed",
+            "candidate": "e07ff56b5024397d722831b4fb1d0ce8d8e8747e",
+            "build_identity": {
+              "executable_sha256": "f1881b817a5436fe03054015542d314b0cb6d4ea04bdad01c7882bf86da9803f",
+              "compiled_manifest_sha256": "8ec828d78ec245eaa3a13d8d5a1b5de7cbc4a2a3f3b69e22dbac0dddc7c3981f",
+              "sdk_commit": "10b9021c6c2b168b4b53c077231723258a289482",
+              "ui_commit": "34b5277810b5d199dad8e169b1984d9d3aa26316"
+            },
+            "settings": {
+              "roster": "X/P1+Zero/P2",
+              "views": "NET peer-local independent4:3",
+              "input": "ordinary published host pads",
+              "audio": "muted dummy",
+              "prerequisite": "agreed original AmazonCP2"
+            },
+            "action": "Complete actual guest-owned Yammark dialogue, compare original text/name colors with private working and CPU/GL rows, close natively and resume both controls.",
+            "outcome": "All12 ready dialogue pages per process match original color rows; native closure restores the displayed baseline and both controls. Exact parent/source/profile/CRC/cards/owned-exit gates pass; composed images reviewed.",
+            "artifacts": [
+              {
+                "path": "docs/evidence/mmx6-assets/manifest-bound-e07ff56-F9-local-netplay-reviewed.json",
+                "sha256": "a7fb1d5f95bbaedd8f7ec583ebe0134d9350e8f1e8112a34dc0e1b3767c69bf8"
+              }
+            ],
+            "limits": [
+              "Only frozen F9 closes: actual Zero-owned original Yammark dialogue, normal USA palette layout, exact V73 candidate in LOCAL and NET.",
+              "Pre-agreed AmazonCP2 bypasses prior traversal. Actual door, dialogue pages/closure and both independent controls remain native; no HP/position/scene/success writes by the observer.",
+              "Text/name native CLUT7845/7846 consumes the32 colors at GPU80,481. Original speaker rows1/7, private working palette and separate CPU/GL observations agree; original backup restores displayed pre-dialogue64 bytes.",
+              "Composed captures and RAM/GPU RPCs use separate safe points. No instruction-atomic image/byte claim.",
+              "Portrait/scenery corruption and actor/text overlap remain visible and separate. No general rendering, all scenes, alternate palette runtime, victory, selector or ordinary full-route credit.",
+              "Normal and alternate slot routing/differing-bank backup are covered by actual-plugin unit tests; alternate native dialogue runtime is unqualified.",
+              "Four LOCAL and15 NET parent gates, four resolvedCRC windows, matching profiles, private cards and three graceful owned exits pass. Strict fixture recording/replay remain refused."
+            ],
+            "bypasses": [
+              "Agreed original AmazonCP2 reachability prerequisite only."
+            ]
+          }
+        ],
+        "limitations": "Exact e07ff56 LOCAL+NET, actual12 guest-owned Yammark pages: immutable text/name colors/private working/CPU+GL row80,481 agree, native backup baseline restores and both controls resume. CP2 bypass, separate captures, corrupt portraits/scenery and unrelated rendering remain explicit. Alternate slot layout unit-tested only."
       }
     },
     {
